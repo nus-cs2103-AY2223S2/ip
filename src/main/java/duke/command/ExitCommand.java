@@ -13,7 +13,7 @@ public class ExitCommand extends Command {
     @Override
     public void execute(TaskList ts, Ui ui) {
         ui.exitMessage();
-        System.exit(1);
+        System.exit(0);
     }
 
     @Override
