@@ -99,7 +99,7 @@ public class Duke {
                 Task newTask = new Events(dateRange[0],dateRange[1].replaceFirst("from",""),dateRange[2].replaceFirst("to",""));
                 this.tasks = tasks.add(newTask);
             } else {
-                Task newTask = new Task(description);
+                Task newTask = new Task(description + sc.nextLine());
                 this.tasks = tasks.add(newTask);
             }
         }
