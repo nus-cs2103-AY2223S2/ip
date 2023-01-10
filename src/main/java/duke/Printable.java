@@ -13,6 +13,7 @@ class Printable {
     static String TODO = "todo";
     static String DEADLINE = "deadline";
     static String EVENT = "event";
+    static int DECREMENT = 1;
 
     static void greet() {
         System.out.println(INITIAL_GREETING);
@@ -22,4 +23,5 @@ class Printable {
         System.out.println(FINAL_GREETING);
         System.exit(0);
     }
+
 }
