@@ -24,4 +24,51 @@ class Printable {
         System.exit(0);
     }
 
+    static Tasks<Task> mark(Scanner sc, Tasks<Task> tasks) {
+        int taskPosition = sc.nextInt() - 1;
+        return tasks.set(taskPosition, tasks.get(taskPosition).markAsDone());
+    }
+
+    static Tasks<Task> unmark(Scanner sc, Tasks<Task> tasks) {
+        int taskPosition = sc.nextInt() - 1;
+        return tasks.set(taskPosition, tasks.get(taskPosition).markAsUndone());
+    }
+
+    static Tasks<Task> toDo(Scanner sc, Tasks<Task> tasks) {
+       String description = sc.nextLine();
+       //Carl Smotricz
+       if (description.trim().length() == 0) {
+           throw new DukeException("Todo must not be empty");
+       }
+       Task newTask = new Todos(description);
+       return tasks.add(newTask);
+    }
+
+    static Tasks<Task> deadline(Scanner sc, Tasks<Task> tasks) {
+        String description = sc.nextLine();
+        //Carl Smotricz
+        if (description.trim().length() == 0) {
+            throw new DukeException("Deadline must not be empty");
+        }
+        try {
+            String[] dateRange = description.split("/");
+            Task newTask = new Deadline(dateRange[0],dateRange[1].replaceFirst("by",""));
+            return tasks.add(newTask);
+        } catch (DukeException e) {
+            System.out.println("Todo must not be empty");
+        }
+        return tasks;
+    }
+
+    static Tasks<Task> events(Scanner sc, Tasks<Task> tasks) {
+        String description = sc.nextLine();
+        //Carl Smotricz
+        if (description.trim().length() == 0) {
+            throw new DukeException("Event must not be empty");
+        }
+        String[] dateRange = description.split("/");
+        Task newTask = new Events(dateRange[0],dateRange[1].replaceFirst("from",""),dateRange[2].replaceFirst("to",""));
+        return tasks.add(newTask);
+    }
+
 }

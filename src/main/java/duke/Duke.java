@@ -104,9 +104,40 @@ public class Duke {
             }
         }
     }
+
+
+    void errorHandling() {
+        
+        Printable.greet();
+        Scanner sc = new Scanner(System.in);
+    
+        while (true) {
+            String description = sc.next();
+            if (description.equals(Printable.SHOW_TASKS)) {
+                this.tasks.listAllTasks();
+            } else if (description.equals(Printable.TERMINATE)) {
+                Printable.exit();
+            } else if (description.equals(Printable.MARK)) {
+                Printable.mark(sc, this.tasks);
+            }  else if (description.equals(Printable.UNMARK)) {
+                Printable.unmark(sc, this.tasks);
+            } else if (description.equals(Printable.TODO)) {
+                Printable.toDo(sc, this.tasks);
+            } else if (description.equals(Printable.DEADLINE)) {
+                Printable.deadline(sc, this.tasks);
+            } else if (description.equals(Printable.EVENT)) {
+                Printable.events(sc, this.tasks);
+            } else if (description.equals("blah")) {
+                throw new DukeUnknownException("This command is not legal");
+            } else {
+                Task newTask = new Task(description);
+                this.tasks = tasks.add(newTask);
+            }
+        }
+    }
     
     public static void main(String[] args) {
         Duke duke = new Duke();
-        duke.trackingEvents();
+        duke.errorHandling();
     }
 }
