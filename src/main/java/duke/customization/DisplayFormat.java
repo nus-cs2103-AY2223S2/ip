@@ -1,6 +1,9 @@
 package duke.customization;
 
-import java.util.Arrays;
+/*
+Customize the conversation interface by changing the length of the horizontal bar
+and the space of indentation.
+ */
 
 public class DisplayFormat {
     // specify the length of the horizontal bar

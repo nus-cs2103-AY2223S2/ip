@@ -17,4 +17,9 @@ public abstract class GeneralDukeTask {
     public void markAsDone() {
         this.isDone = true;
     }
+
+    @Override
+    public String toString() {
+        return this.information;
+    }
 }

@@ -2,6 +2,7 @@ package duke.instruction;
 
 import duke.customization.DisplayFormat;
 import duke.exception.GeneralDukeException;
+import duke.task.TaskList;
 
 public class EchoInstruction extends GeneralDukeInstruction {
     private final String echoMessage;
@@ -12,7 +13,7 @@ public class EchoInstruction extends GeneralDukeInstruction {
     }
 
     @Override
-    public void run() throws GeneralDukeException {
+    public void run(TaskList list) throws GeneralDukeException {
         format.displayWithBar(this.echoMessage);
     }
 }

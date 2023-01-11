@@ -1,6 +1,7 @@
 package duke.instruction;
 
 import duke.exception.GeneralDukeException;
+import duke.task.TaskList;
 
 /**
  * An abstract instruction class encapsulating a user input instruction in Duke, which can be extended
@@ -8,5 +9,5 @@ import duke.exception.GeneralDukeException;
  */
 
 public abstract class GeneralDukeInstruction {
-    public abstract void run() throws GeneralDukeException;
+    public abstract void run(TaskList list) throws GeneralDukeException;
 }

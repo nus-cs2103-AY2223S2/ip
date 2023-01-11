@@ -1,13 +1,14 @@
 package duke;
 
 import duke.customization.*;
-import duke.exception.GeneralDukeException;
+import duke.exception.*;
 import duke.instruction.*;
-
-import java.util.Objects;
+import duke.task.TaskList;
 import java.util.Scanner;
 
 public class Duke {
+
+    private static final TaskList list = new TaskList();
     private static final DisplayFormat format = new DisplayFormat(50, 4);
 
     public static void main(String[] args) throws GeneralDukeException {
@@ -28,10 +29,13 @@ public class Duke {
             String input = sc.nextLine();
             if (input.equals("bye")) {
                 ExitInstruction exit = new ExitInstruction();
-                exit.run();
+                exit.run(list);
+            } else if (input.equals("list")) {
+                ListInstruction ls = new ListInstruction();
+                ls.run(list);
             } else {
-                EchoInstruction echo = new EchoInstruction(input);
-                echo.run();
+                AddTaskInstruction addTask = new AddTaskInstruction(input);
+                addTask.run(list);
             }
         }
     }
