@@ -7,7 +7,7 @@ package duke.task;
 
 public abstract class GeneralDukeTask {
     private String information;
-    private boolean isDone;
+    boolean isDone;
 
     public GeneralDukeTask(String info) {
         this.information = info;
@@ -18,8 +18,16 @@ public abstract class GeneralDukeTask {
         this.isDone = true;
     }
 
+    public void unmark() {
+        this.isDone = false;
+    }
+
     @Override
     public String toString() {
-        return this.information;
+        if (this.isDone) {
+            return "[X] " + this.information;
+        } else {
+            return "[ ] " + this.information;
+        }
     }
 }

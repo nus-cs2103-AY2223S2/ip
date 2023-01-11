@@ -8,7 +8,7 @@ public class ListInstruction extends GeneralDukeInstruction{
     private static final DisplayFormat format = new DisplayFormat(50, 4);
     @Override
     public void run(TaskList list) throws GeneralDukeException {
-        StringBuilder listContent = new StringBuilder();
+        StringBuilder listContent = new StringBuilder("Here are the tasks in your list:\n");
         for (int i = 0; i < list.remainingTasks();i++) {
             listContent.append(i + 1).append(". ").append(list.getTask(i)).append("\n");
         }
