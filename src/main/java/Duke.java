@@ -31,12 +31,13 @@ public class Duke {
         returnFormattedResponse(INTRODUCTION_MESSAGE);
 
         Scanner scanner = new Scanner(System.in);
+        TodoList todoList = new TodoList();
         while(true) {
             String request = scanner.nextLine();
             if (request.equals("bye")) {
                 break;
             }
-            RequestHandler handler = new RequestHandler(request);
+            RequestHandler handler = new RequestHandler(request, todoList);
             returnFormattedResponse(handler.getReply());
         }
 
