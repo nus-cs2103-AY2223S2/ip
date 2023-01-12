@@ -1,21 +1,49 @@
 import java.util.ArrayList;
 
 public class TaskList {
-    private ArrayList<Task> tasks;
+    private final ArrayList<Task> tasks;
 
     /**
      * Constructor for the task list.
      */
     public TaskList() {
-        this.tasks = new ArrayList<Task>();
+        this.tasks = new ArrayList<>();
     }
 
     /**
      * Adds a new todo task.
      * @param task  task to be added
+     * @return The new todo
      */
-    public void createTodo(String task) {
-        this.tasks.add(new Todo(task));
+    public Todo createTodo(String task) {
+        Todo newTodo = new Todo(task);
+        this.tasks.add(newTodo);
+        return newTodo;
+    }
+
+    /**
+     * Adds a new deadline task.
+     * @param task      task to be added
+     * @param deadline  deadline of the task
+     * @return The new deadline
+     */
+    public Deadline createDeadline(String task, String deadline) {
+        Deadline newDeadline = new Deadline(task, deadline);
+        this.tasks.add(newDeadline);
+        return newDeadline;
+    }
+
+    /**
+     * Adds a new event task.
+     * @param task       task to be added
+     * @param startTime  starting time of the task
+     * @param endTime    ending time of the task
+     * @return The new task
+     */
+    public Event createEvent(String task, String startTime, String endTime) {
+        Event newEvent = new Event(task, startTime, endTime);
+        this.tasks.add(newEvent);
+        return newEvent;
     }
 
     /**
@@ -49,5 +77,13 @@ public class TaskList {
      */
     public void unmarkTask(int index) {
         this.tasks.get(index).unmarkCompleted();
+    }
+
+    /**
+     * Returns the number of tasks in the list.
+     * @return  Number of tasks.
+     */
+    public int countTask() {
+        return this.tasks.size();
     }
 }
