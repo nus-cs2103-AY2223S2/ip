@@ -32,11 +32,15 @@ public class RequestHandler {
                 this.todoList.createTodo(this.request);
                 return "added: " + this.request;
             case MARK:
-//                TODO: add mark task
-                return "";
+                int index = Integer.parseInt(this.request.split(" ", 2)[1]) - 1;
+
+                this.todoList.markTodo(index);
+                return "Nice! I've marked this task as done:\n" + this.todoList.showTodo(index);
             case UNMARK:
-//                TODO: add unmark task
-                return "";
+                index = Integer.parseInt(this.request.split(" ", 2)[1]) - 1;
+
+                this.todoList.unmarkTodo(index);
+                return "OK, I've marked this task as not done yet:\n" + this.todoList.showTodo(index);
             default:
                 return "Command not recognised.";
         }
