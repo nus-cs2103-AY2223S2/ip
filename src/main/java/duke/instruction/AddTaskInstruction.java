@@ -1,22 +1,21 @@
 package duke.instruction;
 
-import duke.customization.DisplayFormat;
 import duke.exception.GeneralDukeException;
+import duke.task.GeneralDukeTask;
 import duke.task.TaskList;
-import duke.task.TodoTask;
 
-public class AddTaskInstruction extends GeneralDukeInstruction {
-    private final String taskInfo;
-    private static final DisplayFormat format = new DisplayFormat(50, 4);
+public abstract class AddTaskInstruction extends GeneralDukeInstruction {
+    private final GeneralDukeTask task;
 
-    public AddTaskInstruction(String taskInfo) {
-        this.taskInfo = taskInfo;
+    public AddTaskInstruction(GeneralDukeTask task) {
+        this.task = task;
     }
 
     @Override
     public void run(TaskList list) throws GeneralDukeException {
-        TodoTask newTask = new TodoTask(taskInfo);
-        list.addTask(newTask);
-        format.displayWithBar("added : " + this.taskInfo);
+        list.addTask(task);
+        String message = "Got it. I've added this task:\n " + task
+                + "\nNow you have " + list.remainingTasks() + " tasks in the list.";
+        format.displayWithBar(message);
     }
 }

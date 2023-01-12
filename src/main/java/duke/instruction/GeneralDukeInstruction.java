@@ -1,5 +1,6 @@
 package duke.instruction;
 
+import duke.customization.DisplayFormat;
 import duke.exception.GeneralDukeException;
 import duke.task.TaskList;
 
@@ -9,5 +10,6 @@ import duke.task.TaskList;
  */
 
 public abstract class GeneralDukeInstruction {
+    static final DisplayFormat format = new DisplayFormat(50, 4);
     public abstract void run(TaskList list) throws GeneralDukeException;
 }

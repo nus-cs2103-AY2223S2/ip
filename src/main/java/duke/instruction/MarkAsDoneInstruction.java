@@ -8,6 +8,7 @@ import duke.task.GeneralDukeTask;
 import duke.task.TaskList;
 
 public class MarkAsDoneInstruction extends GeneralDukeInstruction{
+    public static final String reg = "^mark \\d+?";
     private final int taskIndex;
     private static final DisplayFormat format = new DisplayFormat(50, 4);
 

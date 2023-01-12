@@ -6,13 +6,16 @@ package duke.task;
  */
 
 public abstract class GeneralDukeTask {
-    private String information;
-    boolean isDone;
+    private final String information;
+    private final TaskType type;
+    private boolean isDone;
 
-    public GeneralDukeTask(String info) {
+    public GeneralDukeTask(String info, TaskType type) {
         this.information = info;
+        this.type = type;
         this.isDone = false;
     }
+
 
     public void markAsDone() {
         this.isDone = true;
@@ -22,9 +25,17 @@ public abstract class GeneralDukeTask {
         this.isDone = false;
     }
 
+    public TaskType getType() {
+        return this.type;
+    }
+
+    public boolean getStatus() {
+        return this.isDone;
+    }
+
     @Override
     public String toString() {
-        if (this.isDone) {
+        if (getStatus()) {
             return "[X] " + this.information;
         } else {
             return "[ ] " + this.information;

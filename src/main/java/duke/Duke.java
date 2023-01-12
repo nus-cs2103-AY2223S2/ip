@@ -3,7 +3,9 @@ package duke;
 import duke.customization.*;
 import duke.exception.*;
 import duke.instruction.*;
+import duke.parser.Parser;
 import duke.task.TaskList;
+
 import java.util.Scanner;
 
 public class Duke {
@@ -27,31 +29,11 @@ public class Duke {
         Scanner sc = new Scanner(System.in);
         while (true) {
             String input = sc.nextLine();
-            if (input.equals("bye")) {
-                ExitInstruction exit = new ExitInstruction();
-                exit.run(list);
-            } else if (input.equals("list")) {
-                ListInstruction ls = new ListInstruction();
-                ls.run(list);
-            } else if (input.matches("mark [0-9]*")) {
-                try {
-                    String index = input.split(" ")[1];
-                    MarkAsDoneInstruction mark = new MarkAsDoneInstruction(Integer.parseInt(index) - 1);
-                    mark.run(list);
-                } catch (InvalidMarkInputException e) {
-                    format.displayWithBar(e.getMessage());
-                }
-            } else if (input.matches("unmark [0-9]*")) {
-                try {
-                    String index = input.split(" ")[1];
-                    UnmarkInstruction unmark = new UnmarkInstruction(Integer.parseInt(index) - 1);
-                    unmark.run(list);
-                } catch (InvalidUnmarkInputException e) {
-                    format.displayWithBar(e.getMessage());
-                }
-            } else {
-                AddTaskInstruction addTask = new AddTaskInstruction(input);
-                addTask.run(list);
+            try{
+                GeneralDukeInstruction instruction = Parser.parseInstruction(input);
+                instruction.run(list);
+            } catch (GeneralDukeException e) {
+                format.displayWithBar(e.getMessage());
             }
         }
     }
