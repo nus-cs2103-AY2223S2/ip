@@ -1,6 +1,10 @@
 import java.util.Scanner;
 
 public class Duke {
+    /**
+     * Prints the formatted response in the console.
+     * @param response  the string to be printed
+     */
     public static void returnFormattedResponse(String response) {
         final int INDENTS = 4;
 
@@ -32,6 +36,8 @@ public class Duke {
             if (request.equals("bye")) {
                 break;
             }
+            RequestHandler handler = new RequestHandler(request);
+            returnFormattedResponse(handler.getReply());
         }
 
         returnFormattedResponse(EXITING_MESSAGE);
