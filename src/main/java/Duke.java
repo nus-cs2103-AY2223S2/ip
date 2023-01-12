@@ -1,3 +1,5 @@
+import java.util.Scanner;
+
 public class Duke {
     public static void returnFormattedResponse(String response) {
         final int INDENTS = 4;
@@ -23,6 +25,15 @@ public class Duke {
 
         System.out.println(logo);
         returnFormattedResponse(INTRODUCTION_MESSAGE);
+
+        Scanner scanner = new Scanner(System.in);
+        while(true) {
+            String request = scanner.nextLine();
+            if (request.equals("bye")) {
+                break;
+            }
+        }
+
         returnFormattedResponse(EXITING_MESSAGE);
     }
 }
