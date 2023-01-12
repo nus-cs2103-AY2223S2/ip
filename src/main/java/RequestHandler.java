@@ -1,6 +1,6 @@
 public class RequestHandler {
     private enum RequestType {
-        INDEX, CREATE
+        INDEX, CREATE, MARK, UNMARK
     }
     private String request;
     private TodoList todoList;
@@ -31,6 +31,12 @@ public class RequestHandler {
             case CREATE:
                 this.todoList.createTodo(this.request);
                 return "added: " + this.request;
+            case MARK:
+//                TODO: add mark task
+                return "";
+            case UNMARK:
+//                TODO: add unmark task
+                return "";
             default:
                 return "Command not recognised.";
         }
@@ -40,6 +46,10 @@ public class RequestHandler {
         String firstWord = this.request.split(" ", 2)[0];
         if (firstWord.equals("list")) {
             this.requestType = RequestType.INDEX;
+        } else if (firstWord.equals("mark")) {
+            this.requestType = RequestType.MARK;
+        } else if (firstWord.equals("unmark")) {
+            this.requestType = RequestType.UNMARK;
         } else {
             this.requestType = RequestType.CREATE;
         }
