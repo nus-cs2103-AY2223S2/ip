@@ -5,6 +5,7 @@ import duke.instruction.*;
 import duke.task.DeadlineTask;
 import duke.task.EventTask;
 import duke.task.TodoTask;
+
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -15,16 +16,16 @@ import java.util.regex.Pattern;
 
 public class Parser {
     public static GeneralDukeInstruction parseInstruction(String input) throws GeneralDukeException {
-        String strippedInput = input.strip();
-        Matcher InstructionExtractor = Pattern
-                .compile("(?<instructionTag>\\S++)(?<information>.*)").matcher(strippedInput);
+        Pattern emptyStringChecker = Pattern.compile("\\S.*+");
 
-        if (!InstructionExtractor.matches()) {
-            throw new UnrecognizedInputException("☹ OOPS!!! I'm sorry, " +
-                    "but I don't know what that means :-(");
+        Matcher instructionExtractor = Pattern.
+                compile("(?<instructionTag>\\S++)(?<information>.*)").matcher(input.strip());
+
+        if (!instructionExtractor.matches()) {
+            throw new EmptyInputException("☹ OOPS!!! The instruction cannot be empty");
         }
-        String instructionTag = InstructionExtractor.group("instructionTag").strip();
-        String information = InstructionExtractor.group("information").strip();
+        String instructionTag = instructionExtractor.group("instructionTag").strip();
+        String information = instructionExtractor.group("information").strip();
 
         if (instructionTag.equalsIgnoreCase("bye")) {
             return new ExitInstruction();
@@ -47,37 +48,45 @@ public class Parser {
                         "Please input a valid task index");
             }
         } else if (instructionTag.equalsIgnoreCase("todo")) {
-            return new AddToDoTaskInstruction(new TodoTask(information));
-        } else if (instructionTag.equalsIgnoreCase("deadline")) {
-            Matcher dateChecker = Pattern.compile("(?<name>.*)/by(?<date>.*)").matcher(information);
-            if (dateChecker.matches()) {
-                String name = dateChecker.group("name").strip();
-                String date = dateChecker.group("date").strip();
-                return new AddDeadlineTaskInstruction(new DeadlineTask(name, date));
+            if (!emptyStringChecker.matcher(information).matches()) {
+                throw new InvalidTodoException("☹ OOPS!!! The description of a todo cannot be empty.");
             } else {
-                throw new InvalidDeadlineException("☹ OOPS!!! " +
-                        "The description of a deadline cannot be empty.");
+                return new AddToDoTaskInstruction(new TodoTask(information));
+            }
+        } else if (instructionTag.equalsIgnoreCase("deadline")) {
+            if (!emptyStringChecker.matcher(information).matches()) {
+                throw new InvalidDeadlineException("☹ OOPS!!! The description of a deadline cannot be empty.");
+            } else {
+                Matcher dateChecker = Pattern.compile("(?<name>.*)/by(?<date>.*)").matcher(information);
+                if (dateChecker.matches()) {
+                    String name = dateChecker.group("name").strip();
+                    String date = dateChecker.group("date").strip();
+                    return new AddDeadlineTaskInstruction(new DeadlineTask(name, date));
+                } else {
+                    throw new InvalidDeadlineException("☹ OOPS!!! Please input the deadline in the correct format.");
+                }
             }
         } else if (instructionTag.equalsIgnoreCase("event")) {
-            Matcher intervalChecker = Pattern.
-                    compile("(?<name>.*)/from(?<from>.*)/to(?<to>.*)").matcher(information);
-            if (intervalChecker.matches()) {
-                String name = intervalChecker.group("name").strip();
-                String from = intervalChecker.group("from").strip();
-                String to = intervalChecker.group("to").strip();
-                return new AddEventTaskInstruction(new EventTask(name, from, to));
-            } else {
-                throw new InvalidDeadlineException("☹ OOPS!!! " +
-                        "The description of a deadline cannot be empty.");
+            if (!emptyStringChecker.matcher(information).matches()) {
+                throw new InvalidDeadlineException("☹ OOPS!!! The description of a event cannot be empty.");
+            } else{
+                Matcher intervalChecker = Pattern.compile("(?<name>.*)/from(?<from>.*)/to(?<to>.*)").matcher(information);
+                if (intervalChecker.matches()) {
+                    String name = intervalChecker.group("name").strip();
+                    String from = intervalChecker.group("from").strip();
+                    String to = intervalChecker.group("to").strip();
+                    return new AddEventTaskInstruction(new EventTask(name, from, to));
+                } else {
+                    throw new InvalidDeadlineException("☹ OOPS!!! Please input the event in the correct format.");
+                }
             }
         } else {
-            throw new UnrecognizedInputException("☹ OOPS!!! I'm sorry, " +
-                    "but I don't know what that means :-(");
+            throw new UnrecognizedInputException("☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
         }
     }
 
 //    public static void main(String[] args) {
-//        Matcher numberChecker = Pattern.compile("\\d+?").matcher("12a3");
-//        System.out.println(numberChecker.matches());
+//        Pattern emptyStringChecker = Pattern.compile("\\S++");
+//        System.out.println(emptyStringChecker.matcher("2").matches());
 //    }
 }

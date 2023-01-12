@@ -27,10 +27,10 @@ public class MarkAsDoneInstruction extends GeneralDukeInstruction{
     @Override
     public void run(TaskList list) throws GeneralDukeException {
         if (isEmpty(list)) {
-            String errorMessage = "Warning: Your task list is currently empty";
+            String errorMessage = "☹ OOPS!!! Your task list is currently empty";
             throw new InvalidMarkInputException(errorMessage + "\nPlease add in more tasks");
         } if (!isValidIndex(list)) {
-            String errorMessage = "Warning: The input index is not within the range of [1, "
+            String errorMessage = "☹ OOPS!!! The input index is not within the range of [1, "
                     + list.remainingTasks() + "]";
             throw new InvalidMarkInputException(errorMessage + "\nPlease input a valid index");
         } else {

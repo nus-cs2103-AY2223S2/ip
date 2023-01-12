@@ -11,7 +11,7 @@ import java.util.Scanner;
 public class Duke {
 
     private static final TaskList list = new TaskList();
-    private static final DisplayFormat format = new DisplayFormat(50, 4);
+    private static final DisplayFormat format = new DisplayFormat(70, 4);
 
     public static void main(String[] args) throws GeneralDukeException {
         // display logo and greeting messages

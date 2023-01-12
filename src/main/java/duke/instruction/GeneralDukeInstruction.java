@@ -10,6 +10,6 @@ import duke.task.TaskList;
  */
 
 public abstract class GeneralDukeInstruction {
-    static final DisplayFormat format = new DisplayFormat(50, 4);
+    static final DisplayFormat format = new DisplayFormat(70, 4);
     public abstract void run(TaskList list) throws GeneralDukeException;
 }
