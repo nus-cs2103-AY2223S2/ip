@@ -1,6 +1,8 @@
+import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Duke {
+    public static ArrayList<String> todo = new ArrayList<>();
 
     public static Scanner sc = new Scanner(System.in);
 
@@ -11,15 +13,21 @@ public class Duke {
     public static void echo(String command) {
         if (command.equals("bye"))  {
             exit();
+        } else if (command.equals("list")) {
+            int counter = 1;
+            for (String element: todo) {
+                System.out.println(counter + ". " + element);
+                counter++;
+            }
         } else {
-            System.out.println(command);
+            todo.add(command);
+            System.out.println("added: " + command);
         }
     }
     public static void exit() {
         System.out.println("Bye. Hope to see you again soon!");
         sc.close();
     }
-
     public static void main(String[] args) {
         String logo = " ____        _        \n"
                 + "|  _ \\ _   _| | _____ \n"
@@ -28,7 +36,7 @@ public class Duke {
                 + "|____/ \\__,_|_|\\_\\___|\n";
         System.out.println("Hello from\n" + logo);
         greet();
-        try{
+        try {
             while (sc.hasNext()) {
                 echo(sc.nextLine());
             }
