@@ -1,16 +1,12 @@
 package duke.instruction;
 
-import duke.customization.DisplayFormat;
 import duke.exception.GeneralDukeException;
 import duke.exception.InvalidMarkInputException;
-import duke.exception.InvalidUnmarkInputException;
 import duke.task.GeneralDukeTask;
 import duke.task.TaskList;
 
 public class MarkAsDoneInstruction extends GeneralDukeInstruction{
-    public static final String reg = "^mark \\d+?";
     private final int taskIndex;
-    private static final DisplayFormat format = new DisplayFormat(50, 4);
 
     public MarkAsDoneInstruction(int taskIndex) {
         this.taskIndex = taskIndex;

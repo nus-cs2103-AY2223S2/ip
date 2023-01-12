@@ -1,11 +1,10 @@
 package duke.instruction;
 
 import duke.exception.GeneralDukeException;
-import duke.customization.*;
+import duke.customization.DisplayFormat;
 import duke.task.TaskList;
 
 public class ExitInstruction extends GeneralDukeInstruction {
-    public static String reg = "bye";
     private static final DisplayFormat format = new DisplayFormat(50, 4);
     @Override
     public void run(TaskList list) throws GeneralDukeException {

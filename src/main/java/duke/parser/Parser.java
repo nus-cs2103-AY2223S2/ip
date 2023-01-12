@@ -47,6 +47,14 @@ public class Parser {
                 throw new InvalidUnmarkInputException("The input task index is not a number,\n" +
                         "Please input a valid task index");
             }
+        } else if(instructionTag.equalsIgnoreCase("delete")) {
+            Matcher numberChecker = Pattern.compile("\\d+?").matcher(information);
+            if (numberChecker.matches()) {
+                return new DeleteInstruction(Integer.parseInt(information) - 1);
+            } else {
+                throw new InvalidUnmarkInputException("The input task index is not a number,\n" +
+                        "Please input a valid task index");
+            }
         } else if (instructionTag.equalsIgnoreCase("todo")) {
             if (!emptyStringChecker.matcher(information).matches()) {
                 throw new InvalidTodoException("☹ OOPS!!! The description of a todo cannot be empty.");
@@ -68,7 +76,7 @@ public class Parser {
             }
         } else if (instructionTag.equalsIgnoreCase("event")) {
             if (!emptyStringChecker.matcher(information).matches()) {
-                throw new InvalidDeadlineException("☹ OOPS!!! The description of a event cannot be empty.");
+                throw new InvalidEventException("☹ OOPS!!! The description of a event cannot be empty.");
             } else{
                 Matcher intervalChecker = Pattern.compile("(?<name>.*)/from(?<from>.*)/to(?<to>.*)").matcher(information);
                 if (intervalChecker.matches()) {
@@ -77,16 +85,11 @@ public class Parser {
                     String to = intervalChecker.group("to").strip();
                     return new AddEventTaskInstruction(new EventTask(name, from, to));
                 } else {
-                    throw new InvalidDeadlineException("☹ OOPS!!! Please input the event in the correct format.");
+                    throw new InvalidEventException("☹ OOPS!!! Please input the event in the correct format.");
                 }
             }
         } else {
             throw new UnrecognizedInputException("☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
         }
     }
-
-//    public static void main(String[] args) {
-//        Pattern emptyStringChecker = Pattern.compile("\\S++");
-//        System.out.println(emptyStringChecker.matcher("2").matches());
-//    }
 }

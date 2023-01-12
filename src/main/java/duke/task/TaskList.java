@@ -4,14 +4,18 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class TaskList {
-    private List<GeneralDukeTask> list;
+    private final List<GeneralDukeTask> list;
 
     public TaskList() {
         this.list = new ArrayList<>();
     }
 
     public void addTask(GeneralDukeTask task) {
-        list.add(task);
+        this.list.add(task);
+    }
+
+    public void deleteTask(int taskIndex) {
+        this.list.remove(taskIndex);
     }
 
     public int remainingTasks() {

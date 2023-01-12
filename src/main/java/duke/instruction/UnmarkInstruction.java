@@ -1,15 +1,12 @@
 package duke.instruction;
 
-import duke.customization.DisplayFormat;
 import duke.exception.GeneralDukeException;
 import duke.exception.InvalidUnmarkInputException;
 import duke.task.GeneralDukeTask;
 import duke.task.TaskList;
 
 public class UnmarkInstruction extends GeneralDukeInstruction {
-    public static final String reg = "^unmark \\d+?";
     private final int taskIndex;
-    private static final DisplayFormat format = new DisplayFormat(50, 4);
 
     public UnmarkInstruction(int taskIndex) {
         this.taskIndex = taskIndex;
