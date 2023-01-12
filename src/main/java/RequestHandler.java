@@ -1,5 +1,5 @@
 public class RequestHandler {
-    String request;
+    private String request;
     /**
      * Constructor for the request handler.
      * @param request   the request message
@@ -9,7 +9,7 @@ public class RequestHandler {
     }
 
     /**
-     * Provide a sanitised reply
+     * Provides a sanitised reply
      * @return  A sanitised response string.
      */
     public String getReply() {
