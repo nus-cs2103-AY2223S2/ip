@@ -2,7 +2,7 @@ import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Duke {
-    public static ArrayList<String> todo = new ArrayList<>();
+    public static ArrayList<Task> todo = new ArrayList<>();
 
     public static Scanner sc = new Scanner(System.in);
 
@@ -15,12 +15,20 @@ public class Duke {
             exit();
         } else if (command.equals("list")) {
             int counter = 1;
-            for (String element: todo) {
-                System.out.println(counter + ". " + element);
+            for (Task element : todo) {
+                System.out.println(counter + ". " + "[" + element.getStatusIcon() + "] " + element.description);
                 counter++;
             }
+        } else if (command.contains("unmark")) {
+            int taskNum = Integer.parseInt(command.substring(7));
+            Task task = todo.get(taskNum -1);
+            task.markAsIncomplete();
+        } else if (command.contains("mark")) {
+            int taskNum = Integer.parseInt(command.substring(5));
+            Task task = todo.get(taskNum - 1);
+            task.markAsDone();
         } else {
-            todo.add(command);
+            todo.add(new Task(command));
             System.out.println("added: " + command);
         }
     }
