@@ -13,7 +13,7 @@ public class Duke {
                 + "| |_| | |_| |   <  __/\n"
                 + "|____/ \\__,_|_|\\_\\___|\n";
 
-        echo.printLine(String.format("Hello, I'm %s, how may I help you?", BOT_NAME));
+        echo.printResponse(String.format("Hello, I'm %s, how may I help you?", BOT_NAME));
         System.out.print("> ");
 
         Scanner scanner = new Scanner(System.in);
@@ -23,13 +23,15 @@ public class Duke {
             if (command.equalsIgnoreCase("bye")) {
                 break;
             } else if (command.equalsIgnoreCase("list")) {
-                echo.printLines(toDoList.getTasksForPrint());
+                echo.printResponse(toDoList.getTasksForPrint());
+            } else if (command.contains("mark") || command.contains("unmarked")) {
+                echo.printResponse(toDoList.setTaskDone(command));
             } else if (!command.isEmpty()) {
-                echo.printLine(toDoList.addTask(command));
+                echo.printResponse(toDoList.addTask(command));
             }
 
             System.out.print("> ");
         }
-        echo.printLine("Goodbye!");
+        echo.printResponse("Goodbye!");
     }
 }

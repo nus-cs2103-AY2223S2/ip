@@ -11,16 +11,14 @@ public class Echo {
         return command;
     }
 
-    public void printLines(List<String> lines) {
-        System.out.println("------");
-        System.out.printf("%s:%n", name);
+    public void printResponse(List<String> lines) {
+        System.out.printf("| %s:%n", name);
         for (String line : lines) {
-            System.out.println("\t" + line);
+            System.out.println("| \t" + line);
         }
-        System.out.println("------");
     }
 
-    public void printLine(String line) {
-        this.printLines(List.of(line));
+    public void printResponse(String line) {
+        this.printResponse(List.of(line));
     }
 }
