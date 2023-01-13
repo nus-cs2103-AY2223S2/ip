@@ -42,11 +42,22 @@ public class Duke {
                         line();
                         break;
                     default:
-                        Task newTask = new Task(input);
+                        Task newTask;
+                        if (input.contains("todo")){
+                            newTask = new Todo(input.substring(5));
+                        } else if (input.contains("deadline")){
+                            String[] arr = input.substring(9).split("/");
+                            newTask = new Deadline(arr[1], arr[0]);
+                        } else {
+                            String[] arr = input.substring(6).split("/");
+                            newTask = new Event(arr[1], arr[2], arr[0]);
+                        }
                         list[index] = newTask;
                         index ++;
                         line();
-                        indent("added: " + input + "\n");
+                        indent("Roger! I've added this task to the list:\n");
+                        indent(newTask + "\n");
+                        indent(String.format("Now you have %d tasks left in the list", index));
                         line();
                 }
 
