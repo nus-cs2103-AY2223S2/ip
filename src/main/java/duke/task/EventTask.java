@@ -1,13 +1,21 @@
 package duke.task;
 
-public class EventTask extends GeneralDukeTask{
-    private final String from;
-    private final String to;
+import duke.exception.InvalidInputException;
 
-    public EventTask(String info, String from, String to) {
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+
+public class EventTask extends GeneralDukeTask{
+    private final LocalDate from;
+    private final LocalDate to;
+
+    public EventTask(String info, LocalDate from, LocalDate to) throws InvalidInputException {
         super(info, TaskType.EVENT);
         this.from = from;
         this.to = to;
+        if (from.isAfter(to)) {
+            throw new InvalidInputException("☹ OOPS!!! Start date can not be after than the End date");
+        }
     }
 
     @Override
@@ -23,7 +31,8 @@ public class EventTask extends GeneralDukeTask{
 
     @Override
     public String toString() {
-        return "[E]" + super.toString()
-                + " (from: " + this.from + " to: " + this.to + ")";
+        return "[E]" + super.toString() +
+                " (from: " + this.from.format(DateTimeFormatter.ofPattern("MMM d yyyy")) +
+                " to: " + this.to.format(DateTimeFormatter.ofPattern("MMM d yyyy")) + ")";
     }
 }

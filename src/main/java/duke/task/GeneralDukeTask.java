@@ -16,7 +16,6 @@ public abstract class GeneralDukeTask {
         this.isDone = false;
     }
 
-
     public void markAsDone() {
         this.isDone = true;
     }
