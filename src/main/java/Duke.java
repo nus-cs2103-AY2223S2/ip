@@ -39,7 +39,8 @@ public class Duke {
     }
 
     /**
-     * Prints the partitions, ----, and prints the string in-between
+     * Prints the partitions, ----,
+     * then prints the string in-between with a tab spacing
      * 
      * @param w - The string in between the ---- partitions
      */
