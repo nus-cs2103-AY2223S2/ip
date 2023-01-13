@@ -18,8 +18,12 @@ public class Parser {
     public static GeneralDukeInstruction parseInstruction(String input) throws GeneralDukeException {
         Pattern emptyStringChecker = Pattern.compile("\\S.*+");
 
+        //@@author Yufannnn-reused
+        //Reused from https://github.com/wweqg/ip/blob/master/src/main/java/duke/parser/Parser.java
+        //with minor modification, it is a pretty clean and concise regular expression for general instructions
         Matcher instructionExtractor = Pattern.
                 compile("(?<instructionTag>\\S++)(?<information>.*)").matcher(input.strip());
+        //@@author
 
         if (!instructionExtractor.matches()) {
             throw new EmptyInputException("☹ OOPS!!! The instruction cannot be empty");

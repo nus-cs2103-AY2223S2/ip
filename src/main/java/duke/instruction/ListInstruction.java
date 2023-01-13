@@ -5,7 +5,6 @@ import duke.exception.GeneralDukeException;
 import duke.task.TaskList;
 
 public class ListInstruction extends GeneralDukeInstruction{
-    private static final DisplayFormat format = new DisplayFormat(50, 4);
     @Override
     public void run(TaskList list) throws GeneralDukeException {
         StringBuilder listContent = new StringBuilder("Here are the tasks in your list:\n");
