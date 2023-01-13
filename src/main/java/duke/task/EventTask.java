@@ -11,6 +11,17 @@ public class EventTask extends GeneralDukeTask{
     }
 
     @Override
+    public String storageString() {
+        String status;
+        if (this.getStatus()) {
+            status = "[X] | ";
+        } else {
+            status = "[ ] | ";
+        }
+        return "[D] | " + status + this.getInformation() + " | " + this.from + " | " + this.to;
+    }
+
+    @Override
     public String toString() {
         return "[E]" + super.toString()
                 + " (from: " + this.from + " to: " + this.to + ")";

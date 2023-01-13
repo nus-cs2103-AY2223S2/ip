@@ -5,21 +5,50 @@ import duke.exception.InvalidInputException;
 import duke.task.GeneralDukeTask;
 import duke.task.TaskList;
 
+/**
+ * A MarkAsDoneInstruction class that encapsulates the actions of changing the status
+ * of a Task to be done.
+ */
+
 public class MarkAsDoneInstruction extends GeneralDukeInstruction{
     private final int taskIndex;
 
+    /**
+     * Constructor of MarkAsDoneInstruction that takes in the index of the task to marked.
+     *
+     * @param taskIndex The index of the task to be marked
+     */
     public MarkAsDoneInstruction(int taskIndex) {
         this.taskIndex = taskIndex;
     }
 
-    public boolean isValidIndex(TaskList list) {
-        return taskIndex >= 0 && taskIndex <= list.remainingTasks();
-    }
-
+    /**
+     * Check whether the given list is empty.
+     *
+     * @param list The given list to be checked
+     * @return Whether the given list is empty
+     */
     public boolean isEmpty(TaskList list) {
         return list.remainingTasks() == 0;
     }
 
+    /**
+     * Checks whether the index is valid with respect to the given list.
+     *
+     * @param list The given list to be checked
+     * @return Whether the given index is valid
+     */
+    public boolean isValidIndex(TaskList list) {
+        return taskIndex >= 0 && taskIndex <= list.remainingTasks();
+    }
+
+    /**
+     * Checks whether the index is valid with respect to the given list.
+     *
+     * @param list The user TaskList that contains all the task to be manipulated
+     * @throws GeneralDukeException Throws exception if the list is empty
+     * or the given index is our of range
+     */
     @Override
     public void run(TaskList list) throws GeneralDukeException {
         if (isEmpty(list)) {

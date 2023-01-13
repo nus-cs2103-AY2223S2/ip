@@ -6,6 +6,17 @@ public class TodoTask extends GeneralDukeTask{
     }
 
     @Override
+    public String storageString() {
+        String status;
+        if (this.getStatus()) {
+            status = "[X] | ";
+        } else {
+            status = "[ ] | ";
+        }
+        return "[T] | " + status + this.getInformation();
+    }
+
+    @Override
     public String toString() {
         return "[T]" + super.toString();
     }

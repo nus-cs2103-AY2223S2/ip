@@ -11,5 +11,12 @@ import duke.task.TaskList;
 
 public abstract class GeneralDukeInstruction {
     static final DisplayFormat format = new DisplayFormat(70, 4);
+
+    /**
+     * Execute the respective instructions.
+     *
+     * @param list The user TaskList that contains all the task to be manipulated
+     * @throws GeneralDukeException Throws Exceptions when user input invalid instruction
+     */
     public abstract void run(TaskList list) throws GeneralDukeException;
 }

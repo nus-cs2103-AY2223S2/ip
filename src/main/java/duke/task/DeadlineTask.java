@@ -8,6 +8,17 @@ public class DeadlineTask extends GeneralDukeTask{
         this.deadline = deadline;
     }
 
+    @Override
+    public String storageString() {
+        String status;
+        if (this.getStatus()) {
+            status = "[X] | ";
+        } else {
+            status = "[ ] | ";
+        }
+        return "[D] | " + status + this.getInformation() + " | " + this.deadline;
+    }
+
     public String toString() {
         return "[D]" + super.toString()
                 + " (by: " + this.deadline + ")";

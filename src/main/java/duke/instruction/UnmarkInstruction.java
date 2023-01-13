@@ -5,19 +5,41 @@ import duke.exception.InvalidInputException;
 import duke.task.GeneralDukeTask;
 import duke.task.TaskList;
 
+/**
+ * A UnmarkInstruction class that encapsulates the actions of changing the status
+ * of a Task to be not done.
+ */
+
 public class UnmarkInstruction extends GeneralDukeInstruction {
     private final int taskIndex;
 
+    /**
+     * Constructor of UnmarkInstruction that takes in the index of the task to unmarked.
+     *
+     * @param taskIndex The index of the task to be marked
+     */
     public UnmarkInstruction(int taskIndex) {
         this.taskIndex = taskIndex;
     }
 
-    public boolean isValidIndex(TaskList list) {
-        return taskIndex >= 0 && taskIndex <= list.remainingTasks();
-    }
-
+    /**
+     * Check whether the given list is empty.
+     *
+     * @param list The given list to be checked
+     * @return Whether the given list is empty
+     */
     public boolean isEmpty(TaskList list) {
         return list.remainingTasks() == 0;
+    }
+
+    /**
+     * Checks whether the index is valid with respect to the given list
+     *
+     * @param list The given list to be checked
+     * @return Whether the given
+     */
+    public boolean isValidIndex(TaskList list) {
+        return taskIndex >= 0 && taskIndex <= list.remainingTasks();
     }
 
     @Override
