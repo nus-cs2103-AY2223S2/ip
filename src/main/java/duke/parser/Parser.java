@@ -17,7 +17,7 @@ import java.util.regex.Pattern;
 */
 
 public class Parser {
-    public static GeneralDukeInstruction parseInstruction(String input) throws GeneralDukeException {
+    public static Command parseInstruction(String input) throws DukeException {
         Pattern emptyStringChecker = Pattern.compile("\\S.*+");
 
         //@@author Yufannnn-reused
@@ -34,13 +34,13 @@ public class Parser {
         String information = instructionExtractor.group("information").strip();
 
         if (instructionTag.equalsIgnoreCase("bye")) {
-            return new ExitInstruction();
+            return new ExitCommand();
         } else if (instructionTag.equalsIgnoreCase("list")) {
-            return new ListInstruction();
+            return new ListCommand();
         } else if (instructionTag.equalsIgnoreCase("mark")) {
             Matcher numberChecker = Pattern.compile("\\d+?").matcher(information);
             if (numberChecker.matches()) {
-                return new MarkAsDoneInstruction(Integer.parseInt(information) - 1);
+                return new MarkAsDoneCommand(Integer.parseInt(information) - 1);
             } else {
                 throw new InvalidInputException("The input task index is not a number,\n" +
                         "Please input a valid task index");
@@ -48,7 +48,7 @@ public class Parser {
         } else if (instructionTag.equalsIgnoreCase("unmark")) {
             Matcher numberChecker = Pattern.compile("\\d+?").matcher(information);
             if (numberChecker.matches()) {
-                return new UnmarkInstruction(Integer.parseInt(information) - 1);
+                return new UnmarkCommand(Integer.parseInt(information) - 1);
             } else {
                 throw new InvalidInputException("The input task index is not a number,\n" +
                         "Please input a valid task index");
@@ -56,7 +56,7 @@ public class Parser {
         } else if(instructionTag.equalsIgnoreCase("delete")) {
             Matcher numberChecker = Pattern.compile("\\d+?").matcher(information);
             if (numberChecker.matches()) {
-                return new DeleteInstruction(Integer.parseInt(information) - 1);
+                return new DeleteCommand(Integer.parseInt(information) - 1);
             } else {
                 throw new InvalidInputException("The input task index is not a number,\n" +
                         "Please input a valid task index");
@@ -65,7 +65,7 @@ public class Parser {
             if (!emptyStringChecker.matcher(information).matches()) {
                 throw new InvalidInputException("☹ OOPS!!! The description of a todo cannot be empty.");
             } else {
-                return new AddToDoTaskInstruction(new TodoTask(information));
+                return new AddToDoTaskCommand(new TodoTask(information));
             }
         } else if (instructionTag.equalsIgnoreCase("deadline")) {
             if (!emptyStringChecker.matcher(information).matches()) {
@@ -76,7 +76,7 @@ public class Parser {
                     String name = dateChecker.group("name").strip();
                     String date = dateChecker.group("date").strip();
                     try {
-                        return new AddDeadlineTaskInstruction(new DeadlineTask(name, LocalDate.parse(date)));
+                        return new AddDeadlineTaskCommand(new DeadlineTask(name, LocalDate.parse(date)));
                     } catch (DateTimeParseException e) {
                         throw new InvalidInputException("☹ OOPS!!! The input date format is invalid\n" +
                                 "Please input the date in the format of yyyy-mm-dd");
@@ -95,7 +95,7 @@ public class Parser {
                     String from = intervalChecker.group("from").strip();
                     String to = intervalChecker.group("to").strip();
                     try {
-                        return new AddEventTaskInstruction(
+                        return new AddEventTaskCommand(
                                 new EventTask(name, LocalDate.parse(from), LocalDate.parse(to)));
                     } catch (DateTimeParseException e) {
                         throw new InvalidInputException("☹ OOPS!!! The input date format is invalid\n" +

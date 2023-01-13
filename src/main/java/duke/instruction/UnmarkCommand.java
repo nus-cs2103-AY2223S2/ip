@@ -1,24 +1,24 @@
 package duke.instruction;
 
-import duke.exception.GeneralDukeException;
+import duke.exception.DukeException;
 import duke.exception.InvalidInputException;
-import duke.task.GeneralDukeTask;
+import duke.task.DukeTask;
 import duke.task.TaskList;
 
 /**
- * A MarkAsDoneInstruction class that encapsulates the actions of changing the status
- * of a Task to be done.
+ * A UnmarkCommand class that encapsulates the actions of changing the status
+ * of a Task to be not done.
  */
 
-public class MarkAsDoneInstruction extends GeneralDukeInstruction{
+public class UnmarkCommand extends Command {
     private final int taskIndex;
 
     /**
-     * Constructor of MarkAsDoneInstruction that takes in the index of the task to marked.
+     * Constructor of UnmarkCommand that takes in the index of the task to unmarked.
      *
      * @param taskIndex The index of the task to be marked
      */
-    public MarkAsDoneInstruction(int taskIndex) {
+    public UnmarkCommand(int taskIndex) {
         this.taskIndex = taskIndex;
     }
 
@@ -33,24 +33,17 @@ public class MarkAsDoneInstruction extends GeneralDukeInstruction{
     }
 
     /**
-     * Checks whether the index is valid with respect to the given list.
+     * Checks whether the index is valid with respect to the given list
      *
      * @param list The given list to be checked
-     * @return Whether the given index is valid
+     * @return Whether the given
      */
     public boolean isValidIndex(TaskList list) {
         return taskIndex >= 0 && taskIndex < list.remainingTasks();
     }
 
-    /**
-     * Checks whether the index is valid with respect to the given list.
-     *
-     * @param list The user TaskList that contains all the task to be manipulated
-     * @throws GeneralDukeException Throws exception if the list is empty
-     * or the given index is our of range
-     */
     @Override
-    public void run(TaskList list) throws GeneralDukeException {
+    public void run(TaskList list) throws DukeException {
         if (isEmpty(list)) {
             String errorMessage = "☹ OOPS!!! Your task list is currently empty";
             throw new InvalidInputException(errorMessage + "\nPlease add in more tasks");
@@ -59,9 +52,9 @@ public class MarkAsDoneInstruction extends GeneralDukeInstruction{
                     + list.remainingTasks() + "]";
             throw new InvalidInputException(errorMessage + "\nPlease input a valid index");
         } else {
-            GeneralDukeTask currentTask = list.getTask(this.taskIndex);
-            currentTask.markAsDone();
-            format.displayWithBar("Nice! I've marked this task as done:\n " +
+            DukeTask currentTask = list.getTask(this.taskIndex);
+            currentTask.unmark();
+            format.displayWithBar("OK, I've marked this task as not done yet:\n " +
                     currentTask);
         }
     }

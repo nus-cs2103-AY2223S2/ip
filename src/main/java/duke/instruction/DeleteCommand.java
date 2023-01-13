@@ -1,22 +1,22 @@
 package duke.instruction;
 
-import duke.exception.GeneralDukeException;
+import duke.exception.DukeException;
 import duke.exception.InvalidInputException;
 import duke.task.TaskList;
 
 /**
- * A delete instruction that remove a particular task with the given index in the TaskList. `
+ * A "delete" instruction that remove a particular task with the given index in the TaskList. `
  */
 
-public class DeleteInstruction extends GeneralDukeInstruction {
+public class DeleteCommand extends Command {
     private final int taskIndex;
 
     /**
-     * Constructor for DeleteInstruction that takes in the index of the task to be deleted.
+     * Constructor for DeleteCommand that takes in the index of the task to be deleted.
      *
      * @param taskIndex the index of the task to be deleted
      */
-    public DeleteInstruction(int taskIndex) {
+    public DeleteCommand(int taskIndex) {
         this.taskIndex = taskIndex;
     }
 
@@ -45,11 +45,11 @@ public class DeleteInstruction extends GeneralDukeInstruction {
      * the relevant information of the task and the remaining TaskList.
      *
      * @param list The user TaskList that contains all the task to be manipulated
-     * @throws GeneralDukeException Throws exception if the list is empty
+     * @throws DukeException Throws exception if the list is empty
      * or the given index is our of range
      */
     @Override
-    public void run(TaskList list) throws GeneralDukeException {
+    public void run(TaskList list) throws DukeException {
         if (isEmpty(list)) {
             String errorMessage = "☹ OOPS!!! Your task list is currently empty";
             throw new InvalidInputException(errorMessage + "\nPlease add in more tasks");

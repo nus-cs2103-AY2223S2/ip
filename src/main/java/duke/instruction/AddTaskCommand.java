@@ -1,7 +1,7 @@
 package duke.instruction;
 
-import duke.exception.GeneralDukeException;
-import duke.task.GeneralDukeTask;
+import duke.exception.DukeException;
+import duke.task.DukeTask;
 import duke.task.TaskList;
 
 /**
@@ -9,15 +9,15 @@ import duke.task.TaskList;
  * into the given TaskList.
  */
 
-public abstract class AddTaskInstruction extends GeneralDukeInstruction {
-    private final GeneralDukeTask task;
+public abstract class AddTaskCommand extends Command {
+    private final DukeTask task;
 
     /**
-     * The constructor of AddTaskInstruction that takes in the task to be added.
+     * The constructor of AddTaskCommand that takes in the task to be added.
      *
      * @param task The task to be added
      */
-    public AddTaskInstruction(GeneralDukeTask task) {
+    public AddTaskCommand(DukeTask task) {
         this.task = task;
     }
 
@@ -25,10 +25,10 @@ public abstract class AddTaskInstruction extends GeneralDukeInstruction {
      * Adds the given task to the TaskList and display relevant information with the customized format.
      *
      * @param list The user TaskList that contains all the task to be manipulated
-     * @throws GeneralDukeException Throws exceptions when instruction are not in the standard format
+     * @throws DukeException Throws exceptions when instruction are not in the standard format
      */
     @Override
-    public void run(TaskList list) throws GeneralDukeException {
+    public void run(TaskList list) throws DukeException {
         list.addTask(task);
         String message = "Got it. I've added this task:\n " + task
                 + "\nNow you have " + list.remainingTasks() + " tasks in the list.";

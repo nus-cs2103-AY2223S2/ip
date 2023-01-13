@@ -6,13 +6,13 @@ import duke.task.TodoTask;
  * An instruction class that encapsulates the action of adding a TD task into the given TaskList.
  */
 
-public class AddToDoTaskInstruction extends AddTaskInstruction {
+public class AddToDoTaskCommand extends AddTaskCommand {
     /**
      * Adds a TD task into the given TaskList.
      *
      * @param task The TD task to be added
      */
-    public AddToDoTaskInstruction(TodoTask task) {
+    public AddToDoTaskCommand(TodoTask task) {
         super(task);
     }
 }

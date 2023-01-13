@@ -5,24 +5,25 @@ package duke.customization;
  * and the space of indentation.
  */
 
-public class DisplayFormat {
+public class Ui {
     private final int HorizontalLineLength;
     private final int indentSpace;
 
     /**
-     * Constructor that takes in the length of horizontal line
-     * and the space of indentation.
-     *
-     * @param HorizontalLineLength specify the length of the horizontal bar
-     * @param indentSpace specify the space of indentation
+     * Constructor that sets HorizontalLineLength to be 70 and IndentSpace to be 4 by default.
      */
-    public DisplayFormat(int HorizontalLineLength, int indentSpace) {
+    public Ui() {
+        this.HorizontalLineLength = 70;
+        this.indentSpace = 4;
+    }
+
+    public Ui(int HorizontalLineLength, int indentSpace) {
         this.HorizontalLineLength = HorizontalLineLength;
         this.indentSpace = indentSpace;
     }
 
     /**
-     * The indent method that places a indentation as specified by the space indent
+     * The indent method that places an indentation as specified by the space indent
      * at the start of every line.
      *
      * @param input the text to be indented
@@ -31,9 +32,9 @@ public class DisplayFormat {
     public String indent(String input) {
         String space = " ";
         String delimiter = "\n" + space.repeat(this.indentSpace);
-        String[] splitedString = input.split("\n");
+        String[] splitString = input.split("\n");
 
-        return space.repeat(this.indentSpace) + String.join(delimiter, splitedString);
+        return space.repeat(this.indentSpace) + String.join(delimiter, splitString);
     }
 
     /**

@@ -5,7 +5,7 @@ import duke.exception.InvalidInputException;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
-public class EventTask extends GeneralDukeTask{
+public class EventTask extends DukeTask {
     private final LocalDate from;
     private final LocalDate to;
 

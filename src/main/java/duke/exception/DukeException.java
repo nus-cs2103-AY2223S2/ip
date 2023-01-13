@@ -5,13 +5,13 @@ package duke.exception;
  * by more specific exceptions like invalidInputException
  */
 
-public class GeneralDukeException extends Exception{
+public class DukeException extends Exception{
     /**
-     * Constructor for GeneralDukeException with the error message to be printed.
+     * Constructor for DukeException with the error message to be printed.
      *
      * @param errorMessage  The error message to be printed
      */
-    public GeneralDukeException(String errorMessage) {
+    public DukeException(String errorMessage) {
         super(errorMessage);
     }
 }

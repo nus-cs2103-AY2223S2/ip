@@ -3,19 +3,19 @@ package duke.instruction;
 import duke.task.TaskList;
 
 /*
- * A DukeInstruction which simple repeat the user's input
+ * A Command which simple repeat the user's input
  * Obsolete after level-2
  */
 
-public class EchoInstruction extends GeneralDukeInstruction {
+public class EchoCommand extends Command {
     private final String echoMessage;
 
     /**
-     * Constructor for EchoInstruction that takes in the message to be echoed.
+     * Constructor for EchoCommand that takes in the message to be echoed.
      *
      * @param echoMessage The message to be echoed.
      */
-    public EchoInstruction(String echoMessage) {
+    public EchoCommand(String echoMessage) {
         this.echoMessage = echoMessage;
     }
 

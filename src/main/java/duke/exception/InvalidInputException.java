@@ -4,9 +4,9 @@ package duke.exception;
  * A custom exception that encapsulates the message when user input invalid instruction.
  */
 
-public class InvalidInputException extends GeneralDukeException{
+public class InvalidInputException extends DukeException {
     /**
-     * Constructor for GeneralDukeException with the error message to be printed.
+     * Constructor for DukeException with the error message to be printed.
      *
      * @param errorMessage  The error message to be printed
      */

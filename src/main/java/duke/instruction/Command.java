@@ -1,7 +1,7 @@
 package duke.instruction;
 
-import duke.customization.DisplayFormat;
-import duke.exception.GeneralDukeException;
+import duke.customization.Ui;
+import duke.exception.DukeException;
 import duke.task.TaskList;
 
 /**
@@ -9,14 +9,14 @@ import duke.task.TaskList;
  * by more specific input instructions like addToDoInstruction, ExitInstructions, etc.
  */
 
-public abstract class GeneralDukeInstruction {
-    static final DisplayFormat format = new DisplayFormat(70, 4);
+public abstract class Command {
+    static final Ui format = new Ui(70, 4);
 
     /**
      * Execute the respective instructions.
      *
      * @param list The user TaskList that contains all the task to be manipulated
-     * @throws GeneralDukeException Throws Exceptions when user input invalid instruction
+     * @throws DukeException Throws Exceptions when user input invalid instruction
      */
-    public abstract void run(TaskList list) throws GeneralDukeException;
+    public abstract void run(TaskList list) throws DukeException;
 }

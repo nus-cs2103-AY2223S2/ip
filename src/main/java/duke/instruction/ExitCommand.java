@@ -3,10 +3,10 @@ package duke.instruction;
 import duke.task.TaskList;
 
 /**
- * An ExitInstruction class that encapsulates the event of terminating the Duke program.
+ * An ExitCommand class that encapsulates the event of terminating the Duke program.
  */
 
-public class ExitInstruction extends GeneralDukeInstruction {
+public class ExitCommand extends Command {
     /**
      * Displays the goodbye message and terminate the program.
      *

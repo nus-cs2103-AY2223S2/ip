@@ -3,10 +3,10 @@ package duke.instruction;
 import duke.task.TaskList;
 
 /**
- * A ListInstruction class that encapsulates the action of displaying all the tasks on the TaskList.
+ * A ListCommand class that encapsulates the action of displaying all the tasks on the TaskList.
  */
 
-public class ListInstruction extends GeneralDukeInstruction{
+public class ListCommand extends Command {
     /**
      * Displays all the tasks with their respective types and status.
      *

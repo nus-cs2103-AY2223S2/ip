@@ -11,8 +11,18 @@ import java.time.LocalDate;
 import java.util.Scanner;
 
 public class DukeStorage {
-    private static final String pathName = "data/duke.txt";
-    private static final File storageFile = new File(pathName);
+    private final String filePath;
+    private final File storageFile;
+
+    public DukeStorage() {
+        this.filePath = "data/duke.txt";
+        this.storageFile = new File(filePath);
+    }
+
+    public DukeStorage(String filePath) {
+        this.filePath = filePath;
+        this.storageFile = new File(filePath);
+    }
 
     public TaskList load() throws FileNotFoundException, InvalidInputException {
         TaskList list = new TaskList();
@@ -68,9 +78,9 @@ public class DukeStorage {
     public void save(TaskList list) throws IOException {
         StringBuilder record = new StringBuilder();
         for (int i = 0; i < list.remainingTasks(); i++) {
-            GeneralDukeTask task = list.getTask(i);
+            DukeTask task = list.getTask(i);
             record.append(task.storageString()).append(System.lineSeparator());
         }
-        writeToFile(pathName, record.toString());
+        writeToFile(filePath, record.toString());
     }
 }

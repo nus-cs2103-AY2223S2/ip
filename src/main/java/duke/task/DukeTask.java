@@ -5,12 +5,12 @@ package duke.task;
  * by more specific tasks like Events, toDos, etc.
  */
 
-public abstract class GeneralDukeTask {
+public abstract class DukeTask {
     private final String information;
     private final TaskType type;
     private boolean isDone;
 
-    public GeneralDukeTask(String info, TaskType type) {
+    public DukeTask(String info, TaskType type) {
         this.information = info;
         this.type = type;
         this.isDone = false;

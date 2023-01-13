@@ -4,13 +4,13 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class TaskList {
-    private final List<GeneralDukeTask> list;
+    private final List<DukeTask> list;
 
     public TaskList() {
         this.list = new ArrayList<>();
     }
 
-    public void addTask(GeneralDukeTask task) {
+    public void addTask(DukeTask task) {
         this.list.add(task);
     }
 
@@ -22,7 +22,7 @@ public class TaskList {
         return this.list.size();
     }
 
-    public GeneralDukeTask getTask(int i) {
+    public DukeTask getTask(int i) {
         return this.list.get(i);
     }
 }
