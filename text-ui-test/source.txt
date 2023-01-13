@@ -1,15 +1,7 @@
 C:\Users\zhu13\Desktop\ip\src\main\java\duke\Duke.java
 C:\Users\zhu13\Desktop\ip\src\main\java\duke\customization\DisplayFormat.java
-C:\Users\zhu13\Desktop\ip\src\main\java\duke\exception\EmptyInputException.java
 C:\Users\zhu13\Desktop\ip\src\main\java\duke\exception\GeneralDukeException.java
-C:\Users\zhu13\Desktop\ip\src\main\java\duke\exception\InvalidDeadlineException.java
-C:\Users\zhu13\Desktop\ip\src\main\java\duke\exception\InvalidDeleteException.java
-C:\Users\zhu13\Desktop\ip\src\main\java\duke\exception\InvalidEventException.java
 C:\Users\zhu13\Desktop\ip\src\main\java\duke\exception\InvalidInputException.java
-C:\Users\zhu13\Desktop\ip\src\main\java\duke\exception\InvalidMarkInputException.java
-C:\Users\zhu13\Desktop\ip\src\main\java\duke\exception\InvalidTodoException.java
-C:\Users\zhu13\Desktop\ip\src\main\java\duke\exception\InvalidUnmarkInputException.java
-C:\Users\zhu13\Desktop\ip\src\main\java\duke\exception\UnrecognizedInputException.java
 C:\Users\zhu13\Desktop\ip\src\main\java\duke\instruction\AddDeadlineTaskInstruction.java
 C:\Users\zhu13\Desktop\ip\src\main\java\duke\instruction\AddEventTaskInstruction.java
 C:\Users\zhu13\Desktop\ip\src\main\java\duke\instruction\AddTaskInstruction.java

@@ -1,6 +1,5 @@
 package duke.instruction;
 
-import duke.exception.GeneralDukeException;
 import duke.task.TaskList;
 
 /*
@@ -11,12 +10,22 @@ import duke.task.TaskList;
 public class EchoInstruction extends GeneralDukeInstruction {
     private final String echoMessage;
 
+    /**
+     * Constructor for EchoInstruction that takes in the message to be echoed.
+     *
+     * @param echoMessage The message to be echoed.
+     */
     public EchoInstruction(String echoMessage) {
         this.echoMessage = echoMessage;
     }
 
+    /**
+     * Displays the given message in the customized way.
+     *
+     * @param list The user TaskList that contains all the task to be manipulated
+     */
     @Override
-    public void run(TaskList list) throws GeneralDukeException {
+    public void run(TaskList list) {
         format.displayWithBar(this.echoMessage);
     }
 }

@@ -25,6 +25,10 @@ public abstract class GeneralDukeTask {
         this.isDone = false;
     }
 
+    public String getInformation() {
+        return this.information;
+    }
+
     public TaskType getType() {
         return this.type;
     }
@@ -32,6 +36,8 @@ public abstract class GeneralDukeTask {
     public boolean getStatus() {
         return this.isDone;
     }
+
+    public abstract String storageString();
 
     @Override
     public String toString() {
