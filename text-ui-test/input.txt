@@ -1,0 +1,6 @@
+hi
+This is a multi text message
+Special: !@#$%^&*()`-=~_+/\|{[;:"',<>.?]}
+This should not go bye
+this should not goodbye
+bye

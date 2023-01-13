@@ -23,7 +23,6 @@ public class Duke {
     private static void dukeLoop() {
         Scanner sc = new Scanner(System.in);
         while (true) {
-            System.out.print(" You: ");
             String input = sc.nextLine();
 
             switch (input) {
@@ -46,7 +45,7 @@ public class Duke {
      */
     private static void printWithPartition(String w) {
         System.out.println("---------------------");
-        System.out.println(w);
+        System.out.println("\t" + w);
         System.out.println("---------------------");
     }
 
