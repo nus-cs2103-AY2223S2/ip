@@ -13,6 +13,11 @@ public class Duke {
                 case "bye":
                     System.out.println("Bye, hope to see you again.");
                     break;
+                case "list":
+                    for (int i = 0; i < itemCount; i++) {
+                        System.out.printf("%d: %s%n",i + 1,list[i]);
+                    }
+                    break;
                 default:
                     list[itemCount] = userLine;
                     itemCount++;
