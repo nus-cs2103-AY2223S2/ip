@@ -1,26 +1,24 @@
 public class Task {
     private String taskDescription;
-    private int taskIndex;
-    private Status taskStatus;
+    private TaskStatus taskStatus;
 
-    public Task(String taskDescription, int taskIndex) {
+    public Task(String taskDescription) {
         this.taskDescription = taskDescription;
-        this.taskIndex = taskIndex;
-        this.taskStatus = Status.NOT_DONE;
+        this.taskStatus = TaskStatus.NOT_DONE;
     }
 
     public Task mark() {
-        this.taskStatus = Status.DONE;
+        this.taskStatus = TaskStatus.DONE;
         return this;
     }
 
     public Task unmark() {
-        this.taskStatus = Status.NOT_DONE;
+        this.taskStatus = TaskStatus.NOT_DONE;
         return this;
     }
 
     @Override
     public String toString() {
-        return this.taskIndex + "." + this.taskStatus + " " + this.taskDescription;
+        return this.taskStatus + " " + this.taskDescription;
     }
 }

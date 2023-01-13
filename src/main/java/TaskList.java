@@ -3,15 +3,27 @@ import java.util.List;
 
 public class TaskList {
     private final List<Task> taskList;
-    private int totalTasks;
 
     public TaskList() {
         this.taskList = new ArrayList<>();
-        this.totalTasks = 0;
     }
 
-    public boolean addTask(String task) {
-        return this.taskList.add(new Task(task, ++totalTasks));
+    public Task addTodo(String task) {
+        Task newTask = new Todo(task);
+        this.taskList.add(newTask);
+        return newTask;
+    }
+
+    public Task addDeadline(String task, String endTime) {
+        Task newTask = new Deadline(task, new EndTime(endTime));
+        this.taskList.add(newTask);
+        return newTask;
+    }
+
+    public Task addEvent(String task, String from, String to) {
+        Task newTask = new Event(task, new Duration(from, to));
+        this.taskList.add(newTask);
+        return newTask;
     }
 
     public Task markTaskAtIndex(int taskIndex) throws IndexOutOfBoundsException{
@@ -22,11 +34,17 @@ public class TaskList {
         return this.taskList.get(taskIndex-1).unmark();
     }
 
+    public int getTotalTasks() {
+        return taskList.size();
+    }
+
     @Override
     public String toString() {
         StringBuilder sb = new StringBuilder();
-        for(Task t: taskList) {
-            sb.append(Utilities.space()).append(t.toString()).append("\n");
+        int totalTasks = this.getTotalTasks();
+        for(int i = 0; i < totalTasks; i ++ ) {
+            Task t = taskList.get(i);
+            sb.append(Utilities.space()).append(i+1).append(".").append(t.toString()).append("\n");
         }
         if(sb.length()!=0) {
             sb.delete(sb.length()-1, sb.length());
