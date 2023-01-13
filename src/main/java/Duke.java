@@ -15,7 +15,7 @@ public class Duke {
         String goodbye = "Bye. Hope to see you again soon!\n";
         String endCommand = "bye";
         String listCommand = "list";
-        ArrayList<String> textStore = new ArrayList<>(100);
+        ArrayList<Task> textStore = new ArrayList<>(100);
         System.out.println(greeting + separator);
         Scanner sc = new Scanner(System.in);
         while (true) {
@@ -30,7 +30,7 @@ public class Duke {
                 }
                 System.out.println(separator);
             } else {
-                textStore.add(command);
+                textStore.add(new Task(command));
                 System.out.println("added: " + command + "\n" + separator);
             }
         }
