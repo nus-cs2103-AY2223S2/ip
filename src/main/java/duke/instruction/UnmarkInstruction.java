@@ -39,7 +39,7 @@ public class UnmarkInstruction extends GeneralDukeInstruction {
      * @return Whether the given
      */
     public boolean isValidIndex(TaskList list) {
-        return taskIndex >= 0 && taskIndex <= list.remainingTasks();
+        return taskIndex >= 0 && taskIndex < list.remainingTasks();
     }
 
     @Override

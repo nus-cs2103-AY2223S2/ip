@@ -1,18 +1,20 @@
 package duke.storage;
 
+import duke.exception.InvalidInputException;
 import duke.task.*;
 
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.time.LocalDate;
 import java.util.Scanner;
 
 public class DukeStorage {
     private static final String pathName = "data/duke.txt";
     private static final File storageFile = new File(pathName);
 
-    public TaskList load() throws FileNotFoundException {
+    public TaskList load() throws FileNotFoundException, InvalidInputException {
         TaskList list = new TaskList();
         if (!storageFile.exists()) {
             return list;
@@ -35,7 +37,7 @@ public class DukeStorage {
                 list.addTask(todo);
             } else if (taskTag.equals("[D]")) {
                 String date = information[3];
-                DeadlineTask deadline = new DeadlineTask(description, date);
+                DeadlineTask deadline = new DeadlineTask(description, LocalDate.parse(date));
                 if (isDone) {
                     deadline.markAsDone();
                 }
@@ -43,7 +45,7 @@ public class DukeStorage {
             } else {
                 String from = information[3];
                 String to = information[4];
-                EventTask event = new EventTask(description, from, to);
+                EventTask event = new EventTask(description, LocalDate.parse(from), LocalDate.parse(to));
                 if (isDone) {
                     event.markAsDone();
                 }

@@ -39,7 +39,7 @@ public class MarkAsDoneInstruction extends GeneralDukeInstruction{
      * @return Whether the given index is valid
      */
     public boolean isValidIndex(TaskList list) {
-        return taskIndex >= 0 && taskIndex <= list.remainingTasks();
+        return taskIndex >= 0 && taskIndex < list.remainingTasks();
     }
 
     /**

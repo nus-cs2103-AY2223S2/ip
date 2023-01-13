@@ -26,6 +26,9 @@ public class Duke {
             format.displayWithBar("Warning: something went wrong when loading the TaskList\n" +
                     e.getMessage());
             list = new TaskList();
+        } catch (InvalidInputException e) {
+            format.displayWithBar(e.getMessage());
+            list = new TaskList();
         }
 
         // display logo and greeting messages
