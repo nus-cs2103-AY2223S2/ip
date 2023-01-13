@@ -13,22 +13,43 @@ public class Duke {
         line();
 
         Scanner scanner = new Scanner(System.in);
-        String[] list = new String[100];
+        Task[] list = new Task[100];
         int index = 0;
         String input = scanner.nextLine();
         while(!input.equals("bye")){
-            switch(input) {
-                case "list":
-                    line();
-                    printList(list, index);
-                    line();
-                    break;
-                default:
-                    line();
-                    indent("added: " + input + "\n");
-                    line();
-                    list[index] = input;
-                    index++;
+            if (input.contains("unmark")){
+                int i = Integer.parseInt(input.substring(7,8));
+                unmarkTask(list, i);
+                line();
+                indent("Alright! I've unmarked this task :(\n");
+                indent("  " + list[i - 1]);
+                line();
+            }
+            else if (input.contains("mark")){
+                int i = Integer.parseInt(input.substring(5,6));
+                markTask(list, i);
+                line();
+                indent("OK! I've marked this task as complete :)\n");
+                indent("  " + list[i - 1]);
+                line();
+            }
+            else{
+                switch (input){
+                    case "list":
+                        line();
+                        indent("Here are the remaining tasks in your list:\n");
+                        printList(list, index);
+                        line();
+                        break;
+                    default:
+                        Task newTask = new Task(input);
+                        list[index] = newTask;
+                        index ++;
+                        line();
+                        indent("added: " + input + "\n");
+                        line();
+                }
+
             }
             input = scanner.nextLine();
         }
@@ -45,11 +66,19 @@ public class Duke {
         System.out.println("_________________________________________________________________");
     }
 
-    public static void printList(String[] list, int index){
+    public static void printList(Task[] list, int index){
         for (int i = 0; i < index ; i++){
             int num = i + 1;
             String output = num + ". " + list[i];
             indent(output);
         }
+    }
+
+    public static void markTask(Task[] list, int index){
+        list[index - 1].mark();
+    }
+
+    public static void unmarkTask(Task[] list, int index){
+        list[index - 1].unmark();
     }
 }
