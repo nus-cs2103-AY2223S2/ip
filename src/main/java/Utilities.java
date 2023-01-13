@@ -9,4 +9,10 @@ public class Utilities {
         String space = " ";
         return space.repeat(5);
     }
+
+    public static void printFormattedString(String str) {
+        lineBreak();
+        System.out.println(str);
+        lineBreak();
+    }
 }

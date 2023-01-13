@@ -7,56 +7,106 @@ public class Sebastian {
         this.tasks = new TaskList();
     }
 
-    private void greet() {
-        Utilities.lineBreak();
-        System.out.println(Utilities.space() + "Greetings, I'm Sebastian");
-        System.out.println(Utilities.space() + "I'm at your service");
-        Utilities.lineBreak();
+    private String greet() {
+        return Utilities.space() + "Greetings, I'm Sebastian" + "\n" +
+                Utilities.space() + "I'm at your service";
     }
 
-    private void exit() {
-        Utilities.lineBreak();
-        System.out.println(Utilities.space() + "Bye. It's my pleasure to serve you");
-        Utilities.lineBreak();
+    private String exit() {
+        return Utilities.space() + "Bye. It's my pleasure to serve you";
     }
 
-    private void echo(String instruction){
-        Utilities.lineBreak();
-        System.out.println(Utilities.space() + instruction);
-        Utilities.lineBreak();
+    private String echo(String instruction){
+        return Utilities.space() + instruction;
     }
 
-    private void addTask(String instruction) {
-        Utilities.lineBreak();
+    private String addTask(String instruction) {
         if(this.tasks.addTask(instruction)) {
-            System.out.println(Utilities.space() + "added: " + instruction);
+            return Utilities.space() + "added: " + instruction;
         } else {
-            System.out.println("Failed to add a task");
+            return Utilities.space() + "Failed to add a task";
         }
-        Utilities.lineBreak();
     }
 
-    public void showList() {
-        Utilities.lineBreak();
-        System.out.println(this.tasks);
-        Utilities.lineBreak();
+    public String showList(String instruction) {
+        String[] insArr = instruction.split(" ");
+        if(insArr.length > 1) {
+            return this.addTask(instruction);
+        } else {
+            return Utilities.space() + "Here are the tasks in your list" + "\n" + this.tasks;
+        }
+    }
+
+    public String markTask(String instruction) {
+        String[] insArr = instruction.split(" ");
+        if(insArr.length == 1) {
+            return Utilities.space() + "Plead specify a task to mark";
+        } else if(insArr.length == 2) {
+            try {
+                int taskIndex = Integer.parseInt(insArr[1]);
+                return  Utilities.space()+  "Well Done. I have marked this task as done: " + "\n" +
+                        Utilities.space() + this.tasks.markTaskAtIndex(taskIndex);
+            } catch (NumberFormatException e) {
+                return addTask(instruction);
+            } catch (IndexOutOfBoundsException e) {
+                return Utilities.space() + "Task does not exist";
+            }
+        } else {
+            return this.addTask(instruction);
+        }
+    }
+
+    public String unmarkTask(String instruction) {
+        String[] insArr = instruction.split(" ");
+        if(insArr.length == 1) {
+            return Utilities.space() + "Plead specify a task to unmark";
+        } else if(insArr.length == 2) {
+            try {
+                int taskIndex = Integer.parseInt(insArr[1]);
+                return Utilities.space() + "No problem, I have unmarked this task: " + "\n" +
+                        Utilities.space() + this.tasks.unmarkTaskAtIndex(taskIndex);
+            } catch (NumberFormatException e) {
+                return addTask(instruction);
+            } catch (IndexOutOfBoundsException e) {
+                return Utilities.space() + "Task does not exist";
+            }
+        } else {
+            return this.addTask(instruction);
+        }
     }
 
     public static void main(String[] args) {
         Sebastian sebastian = new Sebastian();
-        sebastian.greet();
+        // Start a session with greeting the user
+        Utilities.printFormattedString(sebastian.greet());
+        // Read user input
         Scanner scan = new Scanner(System.in);
         String instruction = scan.nextLine();
-        while(!instruction.equals("bye")) {
-            switch (instruction){
+        String action = instruction.split(" ")[0];
+
+        // respond to different inputs
+        String res = "";
+        while(!action.equals("bye")) {
+            switch (action){
                 case "list":
-                    sebastian.showList();
+                    res = sebastian.showList(instruction);
+                    break;
+                case "mark":
+                    res = sebastian.markTask(instruction);
+                    break;
+                case "unmark":
+                    res = sebastian.unmarkTask(instruction);
                     break;
                 default:
-                    sebastian.addTask(instruction);
+                    res = sebastian.addTask(instruction);
             }
+            Utilities.printFormattedString(res);
+
+            // read in the next input
             instruction = scan.nextLine();
+            action = instruction.split(" ")[0];
         }
-        sebastian.exit();
+
+        Utilities.printFormattedString(sebastian.exit());
     }
 }
