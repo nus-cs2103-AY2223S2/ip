@@ -9,20 +9,30 @@ public class ToDoList {
         this.tasks = new ArrayList<>();
     }
 
+    /**
+     * Adds a task into the list.
+     * @param task Task description.
+     * @return Response line.
+     */
     public String addTask(String task) {
         this.tasks.add(new ToDoTask(task));
         return String.format("added: %s", task);
     }
 
+    /**
+     * Marks a task as done or undone, based on the command.
+     * @param command mark/unmark command.
+     * @return List of response lines.
+     */
     public List<String> setTaskDone(String command) {
         String[] parts = command.split(" ");
         int index;
         try {
             index = Integer.parseInt(parts[1]);
-        } catch (NumberFormatException e) {
+        } catch (NumberFormatException | ArrayIndexOutOfBoundsException e) {
             return this.setTaskDone(-1, false);
         }
-        
+
         if (parts[0].equalsIgnoreCase("mark")) {
             return this.setTaskDone(index, true);
         } else if (parts[0].equalsIgnoreCase("unmark")) {
@@ -32,6 +42,12 @@ public class ToDoList {
         }
     }
 
+    /**
+     * Marks a task as done or undone as given.
+     * @param index 1-based index of the task.
+     * @param isDone Whether the task is marked as done.
+     * @return List of response lines.
+     */
     public List<String> setTaskDone(int index, boolean isDone) {
         if (this.tasks.isEmpty()) {
             return List.of("There are no tasks to mark, please add a task first.");
@@ -51,6 +67,10 @@ public class ToDoList {
         );
     }
 
+    /**
+     * Returns a list of response lines to display the list.
+     * @return List of response lines.
+     */
     public List<String> getTasksForPrint() {
         if (tasks.isEmpty()) {
             return List.of("No tasks, you're good for the day!");

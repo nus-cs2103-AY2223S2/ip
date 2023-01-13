@@ -7,12 +7,13 @@ public class Duke {
         Echo echo = new Echo(BOT_NAME);
         ToDoList toDoList = new ToDoList();
 
-        String logo = " ____        _        \n"
-                + "|  _ \\ _   _| | _____ \n"
-                + "| | | | | | | |/ / _ \\\n"
-                + "| |_| | |_| |   <  __/\n"
-                + "|____/ \\__,_|_|\\_\\___|\n";
+        String logo = "     _   _    ______     _____ ____  \n" +
+                "    | | / \\  |  _ \\ \\   / /_ _/ ___| \n" +
+                " _  | |/ _ \\ | |_) \\ \\ / / | |\\___ \\ \n" +
+                "| |_| / ___ \\|  _ < \\ V /  | | ___) |\n" +
+                " \\___/_/   \\_\\_| \\_\\ \\_/  |___|____/\n";
 
+        System.out.println(logo);
         echo.printResponse(String.format("Hello, I'm %s, how may I help you?", BOT_NAME));
         System.out.print("> ");
 
