@@ -6,6 +6,8 @@ import duke.task.DeadlineTask;
 import duke.task.EventTask;
 import duke.task.TodoTask;
 
+import java.time.LocalDate;
+import java.time.format.DateTimeParseException;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -73,7 +75,12 @@ public class Parser {
                 if (dateChecker.matches()) {
                     String name = dateChecker.group("name").strip();
                     String date = dateChecker.group("date").strip();
-                    return new AddDeadlineTaskInstruction(new DeadlineTask(name, date));
+                    try {
+                        return new AddDeadlineTaskInstruction(new DeadlineTask(name, LocalDate.parse(date)));
+                    } catch (DateTimeParseException e) {
+                        throw new InvalidInputException("☹ OOPS!!! The input date format is invalid\n" +
+                                "Please input the date in the format of yyyy-mm-dd");
+                    }
                 } else {
                     throw new InvalidInputException("☹ OOPS!!! Please input the deadline in the correct format.");
                 }
@@ -87,7 +94,13 @@ public class Parser {
                     String name = intervalChecker.group("name").strip();
                     String from = intervalChecker.group("from").strip();
                     String to = intervalChecker.group("to").strip();
-                    return new AddEventTaskInstruction(new EventTask(name, from, to));
+                    try {
+                        return new AddEventTaskInstruction(
+                                new EventTask(name, LocalDate.parse(from), LocalDate.parse(to)));
+                    } catch (DateTimeParseException e) {
+                        throw new InvalidInputException("☹ OOPS!!! The input date format is invalid\n" +
+                                "Please input the date in the format of yyyy-mm-dd");
+                    }
                 } else {
                     throw new InvalidInputException("☹ OOPS!!! Please input the event in the correct format.");
                 }
