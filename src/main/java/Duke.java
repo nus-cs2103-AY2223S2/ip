@@ -85,9 +85,9 @@ public class Duke {
     }
 
     private void say(String text) {
-        System.out.println("Duke : " + "_".repeat(40));
+        System.out.println("_".repeat(40));
         System.out.println(text);
-        System.out.println("‾".repeat(47));
+        System.out.println("‾".repeat(40));
     }
 
     public static void main(String[] args) {
@@ -96,7 +96,6 @@ public class Duke {
 
         Scanner sc = new Scanner(System.in);
         convo: while (true) {
-            System.out.print("You : ");
             String[] input = sc.nextLine().toLowerCase().split(" ", 2);
             String action = input[0];
             String[] options;
