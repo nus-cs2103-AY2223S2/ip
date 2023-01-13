@@ -7,8 +7,9 @@ public class Duke {
     public static List<Tasks> todoList = new ArrayList<>(100);
     public static void Greet() {
         System.out.println("Hello! I'm Duke\nWhat can I do for you? "+
-                "\n('bye' to terminate)" +
-                "\n('list to access list of tasks)");
+                "\n('bye' to terminate Duke)" +
+                "\n('list' to access list of tasks)" +
+                "\n('un/mark X' to un/mark X task on list)");
     }
     public static void Echo(String str) {
         if(str.equals("bye")){
@@ -16,13 +17,34 @@ public class Duke {
         }
         else {
             if (str.equals("list")){
-                int n = 1;
-                for(Tasks t: todoList) {
-                    System.out.println(n + ". " + t.getDesc());
-                    n++;
+                if (todoList.isEmpty()) {
+                    System.out.println("You have nothing scheduled, add something to the list.");
                 }
-            }
-            else {
+                else {
+                    int n = 1;
+                    for (Tasks t : todoList) {
+                        System.out.println(n + ". "
+                                + t.symbol() + " "
+                                + t.getDesc());
+                        n++;
+                    }
+                }
+            } else if(str.contains("mark")){
+                if (str.contains("un")) {
+                    int index = Integer.parseInt((str.substring(7)));
+                    Tasks t = todoList.get(index - 1);
+                    t.unmark();
+                    System.out.println("Oops! Stop procrastinating: \n"
+                            + t.symbol() + " " + t.getDesc());
+
+                } else {
+                    int index = Integer.parseInt(str.substring(5));
+                    Tasks t = todoList.get(index - 1);
+                    t.mark();
+                    System.out.println("Nice! I've marked this task as done: \n"
+                            + t.symbol() + " " + t.getDesc());
+                }
+            }  else {
                 todoList.add(new Tasks(str));
                 System.out.println("added: " + str);
             }
