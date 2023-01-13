@@ -1,3 +1,5 @@
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Scanner;
 
 public class Duke {
@@ -12,6 +14,7 @@ public class Duke {
         String greeting = "What can I do for you?\n";
         System.out.println(greeting);
 
+        List<String> list = new ArrayList<String>();
         Scanner sc = new Scanner(System.in);
 
         convo: while (true) {
@@ -21,10 +24,16 @@ public class Duke {
                 case "bye":
                     System.out.println("Duke: Bye. Hope to see you again soon!");
                     break convo;
+                case "list":
+                    for (int i = 0; i < list.size(); i++) {
+                        System.out.println(String.format("%d. %s", i + 1, list.get(i)));
+                    }
+                    break;
                 case "":
                     break;
                 default:
-                    System.out.println("Duke: " + input);
+                    System.out.println("Duke: added " + input);
+                    list.add(input);
                     break;
             }
         }
