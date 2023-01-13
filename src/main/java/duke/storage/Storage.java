@@ -10,16 +10,16 @@ import java.io.IOException;
 import java.time.LocalDate;
 import java.util.Scanner;
 
-public class DukeStorage {
+public class Storage {
     private final String filePath;
     private final File storageFile;
 
-    public DukeStorage() {
+    public Storage() {
         this.filePath = "data/duke.txt";
         this.storageFile = new File(filePath);
     }
 
-    public DukeStorage(String filePath) {
+    public Storage(String filePath) {
         this.filePath = filePath;
         this.storageFile = new File(filePath);
     }

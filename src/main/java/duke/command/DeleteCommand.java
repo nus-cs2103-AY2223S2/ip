@@ -1,8 +1,12 @@
-package duke.instruction;
+package duke.command;
 
+import duke.display.Ui;
 import duke.exception.DukeException;
 import duke.exception.InvalidInputException;
+import duke.storage.Storage;
 import duke.task.TaskList;
+
+import java.io.IOException;
 
 /**
  * A "delete" instruction that remove a particular task with the given index in the TaskList. `
@@ -44,25 +48,26 @@ public class DeleteCommand extends Command {
      * Remove a particular task with the given index in the TaskList and display
      * the relevant information of the task and the remaining TaskList.
      *
-     * @param list The user TaskList that contains all the task to be manipulated
+     * @param tasks The user TaskList that contains all the task to be manipulated
      * @throws DukeException Throws exception if the list is empty
      * or the given index is our of range
      */
     @Override
-    public void run(TaskList list) throws DukeException {
-        if (isEmpty(list)) {
+    public void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException, IOException {
+        if (isEmpty(tasks)) {
             String errorMessage = "☹ OOPS!!! Your task list is currently empty";
             throw new InvalidInputException(errorMessage + "\nPlease add in more tasks");
         }
-        if (!isValidIndex(list)) {
+        if (!isValidIndex(tasks)) {
             String errorMessage = "☹ OOPS!!! The input index is not within the range of [1, "
-                    + list.remainingTasks() + "]";
+                    + tasks.remainingTasks() + "]";
             throw new InvalidInputException(errorMessage + "\nPlease input a valid index");
         } else {
-            format.displayWithBar("Noted. I've removed this task:\n " +
-                    list.getTask(taskIndex) + "\nNow you have " +
-                    (list.remainingTasks() - 1) + " tasks in the list.");
-            list.deleteTask(this.taskIndex);
+            ui.displayWithBar("Noted. I've removed this task:\n " +
+                    tasks.getTask(taskIndex) + "\nNow you have " +
+                    (tasks.remainingTasks() - 1) + " tasks in the list.");
+            tasks.deleteTask(this.taskIndex);
         }
+        storage.save(tasks);
     }
 }

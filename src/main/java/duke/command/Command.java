@@ -1,8 +1,11 @@
-package duke.instruction;
+package duke.command;
 
-import duke.customization.Ui;
+import duke.display.Ui;
 import duke.exception.DukeException;
+import duke.storage.Storage;
 import duke.task.TaskList;
+
+import java.io.IOException;
 
 /**
  * An abstract instruction class encapsulating a user input instruction in Duke, which can be extended
@@ -10,13 +13,15 @@ import duke.task.TaskList;
  */
 
 public abstract class Command {
-    static final Ui format = new Ui(70, 4);
+    public boolean isExit() {
+        return false;
+    }
 
     /**
      * Execute the respective instructions.
      *
-     * @param list The user TaskList that contains all the task to be manipulated
+     * @param tasks The user TaskList that contains all the task to be manipulated
      * @throws DukeException Throws Exceptions when user input invalid instruction
      */
-    public abstract void run(TaskList list) throws DukeException;
+    public abstract void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException, IOException;
 }

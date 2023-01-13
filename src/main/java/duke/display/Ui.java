@@ -1,4 +1,6 @@
-package duke.customization;
+package duke.display;
+
+import java.util.Scanner;
 
 /**
  * Customize the conversation interface by changing the length of the horizontal bar
@@ -47,5 +49,23 @@ public class Ui {
         String space = " ";
         String bar = space.repeat(indentSpace) + underscore.repeat(this.HorizontalLineLength);
         System.out.println(bar + "\n" + indent(message) + "\n" + bar + "\n");
+    }
+
+    public void showWelcome() {
+        String logo = " ____        _        \n"
+                + "|  _ \\ _   _| | _____ \n"
+                + "| | | | | | | |/ / _ \\\n"
+                + "| |_| | |_| |   <  __/\n"
+                + "|____/ \\__,_|_|\\_\\___|";
+        String greetingMessage = "Hello! I'm Duke\n"
+                + "What can I do for you?";
+
+        System.out.println("Hello from\n" + logo);
+        this.displayWithBar(greetingMessage);
+    }
+
+    public String readCommand() {
+        Scanner sc = new Scanner(System.in);
+        return sc.nextLine();
     }
 }

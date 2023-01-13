@@ -1,32 +1,23 @@
 package duke;
 
-import duke.customization.Ui;
+import duke.display.Ui;
 import duke.exception.*;
-import duke.instruction.*;
+import duke.command.*;
 import duke.parser.Parser;
-import duke.storage.DukeStorage;
+import duke.storage.Storage;
 import duke.task.TaskList;
 
 import java.io.FileNotFoundException;
 import java.io.IOException;
-import java.util.Scanner;
 
 public class Duke {
-    private final DukeStorage storage;
+    private final Storage storage;
     private TaskList list;
     private final Ui ui;
 
-    String logo = " ____        _        \n"
-            + "|  _ \\ _   _| | _____ \n"
-            + "| | | | | | | |/ / _ \\\n"
-            + "| |_| | |_| |   <  __/\n"
-            + "|____/ \\__,_|_|\\_\\___|";
-    String greetingMessage = "Hello! I'm Duke\n"
-            + "What can I do for you?";
-
     public Duke(String filePath) {
         ui = new Ui();
-        storage = new DukeStorage(filePath);
+        storage = new Storage(filePath);
         list = new TaskList();
 
         try {
@@ -43,22 +34,19 @@ public class Duke {
     }
 
     public void run() {
-        // display logo and greeting messages
-        System.out.println("Hello from\n" + logo);
-        ui.displayWithBar(greetingMessage);
-
-        Scanner sc = new Scanner(System.in);
-        // taking input from the user until receiving an exit instruction
-        while (sc.hasNext()) {
-            String input = sc.nextLine();
+        ui.showWelcome();
+        boolean isExit = false;
+        while (!isExit) {
             try {
-                Command instruction = Parser.parseInstruction(input);
-                instruction.run(list);
-                storage.save(list);
+                String fullCommand = ui.readCommand();
+                Command c = Parser.parse(fullCommand);
+                c.execute(list, ui, storage);
+                isExit = c.isExit();
             } catch (DukeException e) {
                 ui.displayWithBar(e.getMessage());
             } catch (IOException e) {
-                throw new RuntimeException(e);
+                ui.displayWithBar("Warning: there is something wrong when saving ...\n"
+                        + e.getMessage());
             }
         }
     }

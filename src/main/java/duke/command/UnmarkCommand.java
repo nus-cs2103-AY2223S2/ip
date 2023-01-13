@@ -1,9 +1,13 @@
-package duke.instruction;
+package duke.command;
 
+import duke.display.Ui;
 import duke.exception.DukeException;
 import duke.exception.InvalidInputException;
+import duke.storage.Storage;
 import duke.task.DukeTask;
 import duke.task.TaskList;
+
+import java.io.IOException;
 
 /**
  * A UnmarkCommand class that encapsulates the actions of changing the status
@@ -43,19 +47,20 @@ public class UnmarkCommand extends Command {
     }
 
     @Override
-    public void run(TaskList list) throws DukeException {
-        if (isEmpty(list)) {
+    public void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException, IOException {
+        if (isEmpty(tasks)) {
             String errorMessage = "☹ OOPS!!! Your task list is currently empty";
             throw new InvalidInputException(errorMessage + "\nPlease add in more tasks");
-        } if (!isValidIndex(list)) {
+        } if (!isValidIndex(tasks)) {
             String errorMessage = "☹ OOPS!!! The input index is not within the range of [1, "
-                    + list.remainingTasks() + "]";
+                    + tasks.remainingTasks() + "]";
             throw new InvalidInputException(errorMessage + "\nPlease input a valid index");
         } else {
-            DukeTask currentTask = list.getTask(this.taskIndex);
+            DukeTask currentTask = tasks.getTask(this.taskIndex);
             currentTask.unmark();
-            format.displayWithBar("OK, I've marked this task as not done yet:\n " +
+            ui.displayWithBar("OK, I've marked this task as not done yet:\n " +
                     currentTask);
         }
+        storage.save(tasks);
     }
 }

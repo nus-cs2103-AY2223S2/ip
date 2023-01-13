@@ -1,7 +1,7 @@
 package duke.parser;
 
 import duke.exception.*;
-import duke.instruction.*;
+import duke.command.*;
 import duke.task.DeadlineTask;
 import duke.task.EventTask;
 import duke.task.TodoTask;
@@ -17,7 +17,7 @@ import java.util.regex.Pattern;
 */
 
 public class Parser {
-    public static Command parseInstruction(String input) throws DukeException {
+    public static Command parse(String input) throws DukeException {
         Pattern emptyStringChecker = Pattern.compile("\\S.*+");
 
         //@@author Yufannnn-reused
@@ -65,7 +65,7 @@ public class Parser {
             if (!emptyStringChecker.matcher(information).matches()) {
                 throw new InvalidInputException("☹ OOPS!!! The description of a todo cannot be empty.");
             } else {
-                return new AddToDoTaskCommand(new TodoTask(information));
+                return new AddTaskCommand(new TodoTask(information));
             }
         } else if (instructionTag.equalsIgnoreCase("deadline")) {
             if (!emptyStringChecker.matcher(information).matches()) {
@@ -76,7 +76,7 @@ public class Parser {
                     String name = dateChecker.group("name").strip();
                     String date = dateChecker.group("date").strip();
                     try {
-                        return new AddDeadlineTaskCommand(new DeadlineTask(name, LocalDate.parse(date)));
+                        return new AddTaskCommand(new DeadlineTask(name, LocalDate.parse(date)));
                     } catch (DateTimeParseException e) {
                         throw new InvalidInputException("☹ OOPS!!! The input date format is invalid\n" +
                                 "Please input the date in the format of yyyy-mm-dd");
@@ -95,7 +95,7 @@ public class Parser {
                     String from = intervalChecker.group("from").strip();
                     String to = intervalChecker.group("to").strip();
                     try {
-                        return new AddEventTaskCommand(
+                        return new AddTaskCommand(
                                 new EventTask(name, LocalDate.parse(from), LocalDate.parse(to)));
                     } catch (DateTimeParseException e) {
                         throw new InvalidInputException("☹ OOPS!!! The input date format is invalid\n" +
