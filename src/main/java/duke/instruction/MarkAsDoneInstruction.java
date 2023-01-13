@@ -1,7 +1,7 @@
 package duke.instruction;
 
 import duke.exception.GeneralDukeException;
-import duke.exception.InvalidMarkInputException;
+import duke.exception.InvalidInputException;
 import duke.task.GeneralDukeTask;
 import duke.task.TaskList;
 
@@ -24,11 +24,11 @@ public class MarkAsDoneInstruction extends GeneralDukeInstruction{
     public void run(TaskList list) throws GeneralDukeException {
         if (isEmpty(list)) {
             String errorMessage = "☹ OOPS!!! Your task list is currently empty";
-            throw new InvalidMarkInputException(errorMessage + "\nPlease add in more tasks");
+            throw new InvalidInputException(errorMessage + "\nPlease add in more tasks");
         } if (!isValidIndex(list)) {
             String errorMessage = "☹ OOPS!!! The input index is not within the range of [1, "
                     + list.remainingTasks() + "]";
-            throw new InvalidMarkInputException(errorMessage + "\nPlease input a valid index");
+            throw new InvalidInputException(errorMessage + "\nPlease input a valid index");
         } else {
             GeneralDukeTask currentTask = list.getTask(this.taskIndex);
             currentTask.markAsDone();

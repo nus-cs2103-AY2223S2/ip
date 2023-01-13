@@ -1,7 +1,7 @@
 package duke.instruction;
 
 import duke.exception.GeneralDukeException;
-import duke.exception.InvalidDeleteException;
+import duke.exception.InvalidInputException;
 import duke.task.TaskList;
 
 public class DeleteInstruction extends GeneralDukeInstruction {
@@ -23,12 +23,12 @@ public class DeleteInstruction extends GeneralDukeInstruction {
     public void run(TaskList list) throws GeneralDukeException {
         if (isEmpty(list)) {
             String errorMessage = "☹ OOPS!!! Your task list is currently empty";
-            throw new InvalidDeleteException(errorMessage + "\nPlease add in more tasks");
+            throw new InvalidInputException(errorMessage + "\nPlease add in more tasks");
         }
         if (!isValidIndex(list)) {
             String errorMessage = "☹ OOPS!!! The input index is not within the range of [1, "
                     + list.remainingTasks() + "]";
-            throw new InvalidDeleteException(errorMessage + "\nPlease input a valid index");
+            throw new InvalidInputException(errorMessage + "\nPlease input a valid index");
         } else {
             format.displayWithBar("Noted. I've removed this task:\n " +
                     list.getTask(taskIndex) + "\nNow you have " +

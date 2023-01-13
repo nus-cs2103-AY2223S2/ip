@@ -1,6 +1,5 @@
 package duke.instruction;
 
-import duke.customization.DisplayFormat;
 import duke.exception.GeneralDukeException;
 import duke.task.TaskList;
 

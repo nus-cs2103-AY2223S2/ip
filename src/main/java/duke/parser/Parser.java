@@ -26,7 +26,7 @@ public class Parser {
         //@@author
 
         if (!instructionExtractor.matches()) {
-            throw new EmptyInputException("☹ OOPS!!! The instruction cannot be empty");
+            throw new InvalidInputException("☹ OOPS!!! The instruction cannot be empty");
         }
         String instructionTag = instructionExtractor.group("instructionTag").strip();
         String information = instructionExtractor.group("information").strip();
@@ -40,7 +40,7 @@ public class Parser {
             if (numberChecker.matches()) {
                 return new MarkAsDoneInstruction(Integer.parseInt(information) - 1);
             } else {
-                throw new InvalidMarkInputException("The input task index is not a number,\n" +
+                throw new InvalidInputException("The input task index is not a number,\n" +
                         "Please input a valid task index");
             }
         } else if (instructionTag.equalsIgnoreCase("unmark")) {
@@ -48,7 +48,7 @@ public class Parser {
             if (numberChecker.matches()) {
                 return new UnmarkInstruction(Integer.parseInt(information) - 1);
             } else {
-                throw new InvalidUnmarkInputException("The input task index is not a number,\n" +
+                throw new InvalidInputException("The input task index is not a number,\n" +
                         "Please input a valid task index");
             }
         } else if(instructionTag.equalsIgnoreCase("delete")) {
@@ -56,18 +56,18 @@ public class Parser {
             if (numberChecker.matches()) {
                 return new DeleteInstruction(Integer.parseInt(information) - 1);
             } else {
-                throw new InvalidUnmarkInputException("The input task index is not a number,\n" +
+                throw new InvalidInputException("The input task index is not a number,\n" +
                         "Please input a valid task index");
             }
         } else if (instructionTag.equalsIgnoreCase("todo")) {
             if (!emptyStringChecker.matcher(information).matches()) {
-                throw new InvalidTodoException("☹ OOPS!!! The description of a todo cannot be empty.");
+                throw new InvalidInputException("☹ OOPS!!! The description of a todo cannot be empty.");
             } else {
                 return new AddToDoTaskInstruction(new TodoTask(information));
             }
         } else if (instructionTag.equalsIgnoreCase("deadline")) {
             if (!emptyStringChecker.matcher(information).matches()) {
-                throw new InvalidDeadlineException("☹ OOPS!!! The description of a deadline cannot be empty.");
+                throw new InvalidInputException("☹ OOPS!!! The description of a deadline cannot be empty.");
             } else {
                 Matcher dateChecker = Pattern.compile("(?<name>.*)/by(?<date>.*)").matcher(information);
                 if (dateChecker.matches()) {
@@ -75,12 +75,12 @@ public class Parser {
                     String date = dateChecker.group("date").strip();
                     return new AddDeadlineTaskInstruction(new DeadlineTask(name, date));
                 } else {
-                    throw new InvalidDeadlineException("☹ OOPS!!! Please input the deadline in the correct format.");
+                    throw new InvalidInputException("☹ OOPS!!! Please input the deadline in the correct format.");
                 }
             }
         } else if (instructionTag.equalsIgnoreCase("event")) {
             if (!emptyStringChecker.matcher(information).matches()) {
-                throw new InvalidEventException("☹ OOPS!!! The description of a event cannot be empty.");
+                throw new InvalidInputException("☹ OOPS!!! The description of a event cannot be empty.");
             } else{
                 Matcher intervalChecker = Pattern.compile("(?<name>.*)/from(?<from>.*)/to(?<to>.*)").matcher(information);
                 if (intervalChecker.matches()) {
@@ -89,11 +89,11 @@ public class Parser {
                     String to = intervalChecker.group("to").strip();
                     return new AddEventTaskInstruction(new EventTask(name, from, to));
                 } else {
-                    throw new InvalidEventException("☹ OOPS!!! Please input the event in the correct format.");
+                    throw new InvalidInputException("☹ OOPS!!! Please input the event in the correct format.");
                 }
             }
         } else {
-            throw new UnrecognizedInputException("☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
+            throw new InvalidInputException("☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
         }
     }
 }
