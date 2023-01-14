@@ -1,5 +1,5 @@
 /**
- * The Task class encapsulates the description of the task and its 'done' status.
+ * Task encapsulates the description of a task and its 'done' status.
  */
 public class Task {
     protected String description;
@@ -8,10 +8,6 @@ public class Task {
     public Task(String description) {
         this.description = description;
         this.isDone = false;
-    }
-
-    public String getDescription() {
-        return this.description;
     }
 
     /**
@@ -34,5 +30,10 @@ public class Task {
      */
     public void markNotDone() {
         this.isDone = false;
+    }
+
+    @Override
+    public String toString() {
+        return "[" + this.getStatusIcon() + "] " + this.description;
     }
 }

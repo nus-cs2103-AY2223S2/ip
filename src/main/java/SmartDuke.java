@@ -13,15 +13,16 @@ public class SmartDuke {
 
     /**
      * Add the given task to taskList.
-     * @param taskDesc the given task description
+     * @param task the given task
      */
-    private static void addTask(String taskDesc) {
+    private static void addTask(Task task) {
         try {
-            Task task = new Task(taskDesc);
             SmartDuke.taskList[SmartDuke.numTasks] = task;
             SmartDuke.numTasks += 1;
             System.out.println("--------------------------");
-            System.out.println("added: " + task.getDescription());
+            System.out.println("Got it. I've added this task:");
+            System.out.println(task);
+            System.out.println("Now there are " + SmartDuke.numTasks + " tasks in your list.");
             System.out.println("--------------------------");
         } catch (IndexOutOfBoundsException e) {
             System.err.println("Sorry I can only store a maximum of 100 tasks...");
@@ -33,12 +34,10 @@ public class SmartDuke {
      */
     private static void listTasks() {
         System.out.println("--------------------------");
-        System.out.println("Here are all your tasks:");
+        System.out.println("Here are the tasks in your list:");
         for (int i = 0; i < numTasks; i++) {
             Task task = SmartDuke.taskList[i];
-            String message = String.format("%d. %s [%s]", i+1,
-                    task.getDescription(), task.getStatusIcon());
-            System.out.println(message);
+            System.out.println(i+1 + ". "+ task);
         }
         System.out.println("--------------------------");
     }
@@ -52,9 +51,8 @@ public class SmartDuke {
             Task task = SmartDuke.taskList[taskNo - 1];
             task.markDone();
             System.out.println("--------------------------");
-            String message = String.format("ok i've marked this task as done:\n [%s] %s",
-                    task.getStatusIcon(), task.getDescription());
-            System.out.println(message);
+            System.out.println("ok i've marked this task as done:");
+            System.out.println(task);
             System.out.println("--------------------------");
         } catch (IndexOutOfBoundsException e) {
             System.err.println("Sorry you have provided an invalid task number...");
@@ -70,9 +68,8 @@ public class SmartDuke {
             Task task = SmartDuke.taskList[taskNo - 1];
             task.markNotDone();
             System.out.println("--------------------------");
-            String message = String.format("ok i've marked this task as not done yet:\n [%s] %s",
-                    task.getStatusIcon(), task.getDescription());
-            System.out.println(message);
+            System.out.println("ok i've marked this task as not done yet");
+            System.out.println(task);
             System.out.println("--------------------------");
         } catch (IndexOutOfBoundsException e) {
             System.err.println("Sorry you have provided an invalid task number...");
@@ -92,28 +89,46 @@ public class SmartDuke {
 
         Scanner userInput = new Scanner(System.in);
 
-        conversationLoop: while (true) {
+        while (true) {
             String command = userInput.nextLine();
-            switch (command) {
-                case "bye":
-                    /* End the session */
-                    System.out.println("--------------------------");
-                    System.out.println("ok bye");
-                    System.out.println("--------------------------");
-                    break conversationLoop;
-                case "list":
-                    SmartDuke.listTasks();
-                    break;
-                default:
-                    if (command.matches("mark [0-9]+")) { /* the 'mark task' command */
-                        int taskNo = Integer.parseInt(command.substring(5));
-                        SmartDuke.markTask(taskNo);
-                    } else if (command.matches("unmark [0-9]+")) { /* the 'unmark task' command */
-                        int taskNo = Integer.parseInt(command.substring(7));
-                        SmartDuke.unmarkTask(taskNo);
-                    } else {
-                        SmartDuke.addTask(command);
-                    }
+            if (command.equals("bye")) {
+                /* End the session */
+                System.out.println("--------------------------");
+                System.out.println("ok bye");
+                System.out.println("--------------------------");
+                break;
+            } else if (command.equals("list")) {
+                SmartDuke.listTasks();
+            } else if (command.matches("todo\\s[^\\s].*")) {
+                /* add todo task */
+                String taskDesc = command.substring(5).trim();
+                Task todoTask = new ToDo(taskDesc);
+                SmartDuke.addTask(todoTask);
+            } else if (command.matches("deadline\\s[^\\s].*\\s/by\\s[^\\s].*")) {
+                /* add deadline task */
+                String[] parsedCommand = command.substring(9).split("/by");
+                String taskDesc = parsedCommand[0].trim();
+                String by = parsedCommand[1].trim();
+                Task deadlineTask = new Deadline(taskDesc, by);
+                SmartDuke.addTask(deadlineTask);
+            } else if (command.matches("event\\s[^\\s].*\\s/from\\s[^\\s].*\\s/to\\s[^\\s].*")) {
+                /* add event task */
+                String[] parsedcommand = command.substring(6).split("/[a-z]+\\s");
+                String taskDesc = parsedcommand[0].trim();
+                String from = parsedcommand[1].trim();
+                String to = parsedcommand[2].trim();
+                Task eventTask = new Event(taskDesc, from, to);
+                SmartDuke.addTask(eventTask);
+            } else if (command.matches("mark [0-9]+")) {
+                /* mark task */
+                int taskNo = Integer.parseInt(command.substring(5));
+                SmartDuke.markTask(taskNo);
+            } else if (command.matches("unmark [0-9]+")) {
+                /* unmark task */
+                int taskNo = Integer.parseInt(command.substring(7));
+                SmartDuke.unmarkTask(taskNo);
+            } else {
+                System.err.println("huh? i dont understand you");
             }
         }
     }
