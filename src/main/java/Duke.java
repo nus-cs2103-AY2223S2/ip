@@ -1,3 +1,4 @@
+import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Duke {
@@ -22,11 +23,15 @@ public class Duke {
     }
 
     static State detectState(String command) {
+        // Suppress all upper case letters, gets only the first word
+        String cmd = command.toLowerCase().split(" ")[0];
 
+        if (cmd.compareTo("list") == 0)
+            return State.LIST;
         // TODO: Detect other specific keywords
 
         // multiple exit keywords
-        switch (command) {
+        switch (cmd) {
             case "bye":
             case "goodbye":
             case "quit":
@@ -35,7 +40,7 @@ public class Duke {
             case "exit()":
                 return State.EXIT;
             default:
-                return State.ECHO;
+                return State.ADD;
             //return State.UNKNOWN; //TODO: for future levels
         }
     }
@@ -49,6 +54,7 @@ public class Duke {
         String userCmd = "";
         Scanner sc = new Scanner(System.in);
         State currentState = State.UNKNOWN;
+        ArrayList list = new ArrayList<String>();
         // TODO: Initialise components
 
         System.out.println("System is ready!");
@@ -69,8 +75,15 @@ public class Duke {
 
             // State handling
             switch(currentState) {
-                case ECHO:
-                    Duke.display(userCmd);
+                case ADD:
+                    list.add(userCmd);
+                    Duke.display("I have added: " + userCmd);
+                    break;
+                case LIST:
+                    if (list.size() == 0)
+                        Duke.display("My list is empty.");
+                    else for (int i = 0; i < list.size(); i++)
+                        Duke.display((i+1) + ". " + list.get(i));
                     break;
                 case UNKNOWN:
                     Duke.display("Sorry, I don't understand your request :(");

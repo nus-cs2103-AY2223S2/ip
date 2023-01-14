@@ -1,6 +1,6 @@
 public enum State {
-    ECHO,
-    // LIST,
+    ADD,
+    LIST,
     // TODO,
     // DEADLINE,
     // MARK,
