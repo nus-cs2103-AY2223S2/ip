@@ -1,5 +1,6 @@
-import java.util.Scanner;
+import java.util.Arrays;
 import java.util.ArrayList;
+import java.util.Scanner;
 
 public class Duke {
     public static void main(String[] args) {
@@ -17,6 +18,12 @@ public class Duke {
         String listCommand = "list";
         String mark = "mark";
         String unmark = "unmark";
+        String by = "/by";
+        String from = "/from";
+        String to = "/to";
+        String deadlineCommand = "deadline";
+        String todoCommand = "todo";
+        String eventCommand = "event";
         ArrayList<Task> taskStore = new ArrayList<>(100);
         System.out.println(greeting + separator);
         Scanner sc = new Scanner(System.in);
@@ -41,11 +48,12 @@ public class Duke {
                 taskStore.get(taskIndex).setDone(false);
                 System.out.println("OK, I've marked this task as not done yet:");
                 System.out.println(taskStore.get(taskIndex));
-            } else {
-                /*
-                taskStore.add(new Task(command));
-                System.out.println("added: " + command);
-                */
+            } else if (splitCommand[0].equals(todoCommand)) {
+                Task task = new Todo(String.join(" ", Arrays.copyOfRange(splitCommand, 1, splitCommand.length)));
+                taskStore.add(task);
+                System.out.println("Got it. I've added this task:");
+                System.out.println(task);
+                System.out.println("Now you have " + taskStore.size() + " tasks in the list.");
             }
             System.out.println(separator);
         }
