@@ -10,10 +10,12 @@ public class DateUtil {
     
     //Solution below adapted from https://www.waitingforcode.com/java-8/managing-different-date-time-formats-datetimeformatterbuilder/read
     public final static DateTimeFormatter dateFormatter = new DateTimeFormatterBuilder()
-        .appendOptional(DateTimeFormatter.ISO_LOCAL_DATE)
         .appendOptional(DateTimeFormatter.ISO_LOCAL_DATE_TIME)
-        .appendOptional(DateTimeFormatter.ofPattern("d/MM/yyyy"))
+        .appendOptional(DateTimeFormatter.ISO_LOCAL_DATE)
         .appendOptional(DateTimeFormatter.ofPattern("d/MM/yyyy HHmm"))
+        .appendOptional(DateTimeFormatter.ofPattern("d/MM/yyyy"))
+        .appendOptional(DateTimeFormatter.ofPattern("MMM d yyyy H:m"))
+        .appendOptional(DateTimeFormatter.ofPattern("MMM d yyyy"))
         .toFormatter();
 
     //Solution below adapted from https://stackoverflow.com/a/48280447
