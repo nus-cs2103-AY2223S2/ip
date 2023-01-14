@@ -10,4 +10,10 @@ mark 1 2 3
 list
 mark 1
 list
+delete 1
+list
+delete 4
+list
+delete 1 2
+list
 exit

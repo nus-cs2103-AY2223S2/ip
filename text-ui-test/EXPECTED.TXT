@@ -34,4 +34,21 @@ how may I help?
 	1. [T][ ] buy milk
 	2. [D][ ] do bills (by: 2020-02-20)
 	3. [E][X] party (from: Fri 5pm) (to: Fri 7pm)
+	deleted: 1. [T][ ] buy milk
+	1. [D][ ] do bills (by: 2020-02-20)
+	2. [E][X] party (from: Fri 5pm) (to: Fri 7pm)
+	Invalid index.
+	Usage: <command> [<args>]
+		exit : exit the app
+		help : show this help message
+		list : list tasks
+		 add : add task
+		mark : mark/unmark task as done
+		delete : delete task
+	1. [D][ ] do bills (by: 2020-02-20)
+	2. [E][X] party (from: Fri 5pm) (to: Fri 7pm)
+	deleted:
+		1. [D][ ] do bills (by: 2020-02-20)
+		2. [E][X] party (from: Fri 5pm) (to: Fri 7pm)
+	No tasks found.
 	Goodbye.

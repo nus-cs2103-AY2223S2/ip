@@ -27,7 +27,11 @@ public class Duke {
                 new ArgCommand("mark"
                         , "mark/unmark task as done"
                         , new String[]{}
-                        , data::mark)
+                        , data::mark),
+                new ArgCommand("delete"
+                        , "delete task"
+                        , new String[]{}
+                        , data::delete),
         };
         formatter.setCommands(commands);
 

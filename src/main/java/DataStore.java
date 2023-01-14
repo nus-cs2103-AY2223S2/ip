@@ -1,4 +1,6 @@
 import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Collections;
 import java.util.List;
 import java.util.function.Consumer;
 import java.util.stream.Collectors;
@@ -45,41 +47,47 @@ public class DataStore {
     }
 
     public String[] mark(String[] strings) {
-        List<Integer> outputs = new ArrayList<>();
+        List<Integer> indexes = new ArrayList<>();
         Consumer<Integer> mark = ind -> {
             this.tasks.get(ind).mark();
-            outputs.add(ind);
+            indexes.add(ind);
         };
         this.find(strings, mark);
-        if (outputs.size() == 0) {
+        if (indexes.size() == 0) {
             throw new IllegalArgumentException("No tasks found.");
-        } else if (outputs.size() == 1) {
-            Task task = this.tasks.get(outputs.get(0));
-            return new String[]{(task.isDone ? "marked: " : "unmarked: ") + task.toString(outputs.get(0) + 1)};
+        } else if (indexes.size() == 1) {
+            Task task = this.tasks.get(indexes.get(0));
+            return new String[]{(task.isDone ? "marked: " : "unmarked: ") + task.toString(indexes.get(0) + 1)};
         } else {
-            List<String> outStrs = outputs.stream()
+            List<String> outputs = indexes.stream()
                     .map(i -> "\t" + this.tasks.get(i).toString(i+1))
                     .collect(Collectors.toList());
-            outStrs.add(0, "marked:");
-            return outStrs.toArray(new String[0]);
+            outputs.add(0, "marked:");
+            return outputs.toArray(new String[0]);
         }
     }
 
     public String[] delete(String[] strings) {
-        List<String> outputs = new ArrayList<>();
+        List<Integer> indexes = new ArrayList<>();
         Consumer<Integer> delete = ind -> {
-            int i = ind;
-            if (this.tasks.size() <= i) {
-                throw new IllegalArgumentException("Task not found: " + i);
+            if (this.tasks.size() <= ind) {
+                throw new IllegalArgumentException("Task not found: " + ind);
             }
-            outputs.add(this.tasks.remove(i).toString(i));
+            indexes.add(ind);
         };
         this.find(strings, delete);
-        if (outputs.size() == 0) {
+        if (indexes.size() == 0) {
             throw new IllegalArgumentException("No tasks found.");
-        } else if (outputs.size() == 1) {
-            return new String[]{"deleted: " + outputs.get(0)};
+        } else if (indexes.size() == 1) {
+            Task rmTask = this.tasks.remove((int) indexes.get(0));
+            return new String[]{"deleted: " + rmTask.toString(indexes.get(0) + 1)};
         } else {
+            indexes.sort(Collections.reverseOrder());
+            List<String> outputs = new ArrayList<>();
+            for (int i : indexes) {
+                outputs.add("\t" + this.tasks.remove(i).toString(i+1));
+            }
+            Collections.reverse(outputs);
             outputs.add(0, "deleted:");
             return outputs.toArray(new String[0]);
         }
