@@ -34,6 +34,10 @@ public class TaskList {
         return this.taskList.get(taskIndex-1).unmark();
     }
 
+    public Task deleteTaskAtIndex(int taskIndex) throws IndexOutOfBoundsException {
+        return this.taskList.remove(taskIndex-1);
+    }
+
     public int getTotalTasks() {
         return taskList.size();
     }

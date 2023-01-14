@@ -76,10 +76,6 @@ public class Sebastian {
         }
     }
 
-    private String showList(String instruction) {
-        return Utilities.space() + "Here are the tasks in your list" + "\n" + this.tasks;
-    }
-
     private String markTask(String instruction) throws InputFormatMismacthException, TaskNotExistException{
         String[] insArr = instruction.split(" ");
         if(insArr.length == 2) {
@@ -100,7 +96,7 @@ public class Sebastian {
         }
     }
 
-    private String unmarkTask(String instruction) throws InputFormatMismacthException, IndexOutOfBoundsException{
+    private String unmarkTask(String instruction) throws InputFormatMismacthException, TaskNotExistException{
         String[] insArr = instruction.split(" ");
         if(insArr.length == 2) {
             try {
@@ -118,6 +114,31 @@ public class Sebastian {
                            Utilities.space() + "unmark [task index]"
             );
         }
+    }
+
+    private String deleteTask(String instruction) throws InputFormatMismacthException, TaskNotExistException{
+        String[] insArr = instruction.split(" ");
+        if(insArr.length == 2) {
+            try {
+                int taskIndex = Integer.parseInt(insArr[1]);
+                return Utilities.space() + "Noted. I have deleted this task: " + "\n" +
+                        Utilities.space() + this.tasks.deleteTaskAtIndex(taskIndex) + "\n" +
+                        Utilities.space() + "Now your have " + this.tasks.getTotalTasks() + " tasks in the list";
+            } catch (NumberFormatException e) {
+                throw new InputFormatMismacthException("Please enter the index of the task you wish to unmark");
+            } catch (IndexOutOfBoundsException e) {
+                throw new TaskNotExistException();
+            }
+        } else {
+            throw new InputFormatMismacthException(
+                    "Please specify the task you wish to delete in the following format:" + "\n" +
+                            Utilities.space() + "delete [task index]"
+            );
+        }
+    }
+
+    private String showList(String instruction) {
+        return Utilities.space() + "Here are the tasks in your list" + "\n" + this.tasks;
     }
 
     private void onDuty() throws IllegalInstructionException{
@@ -144,6 +165,9 @@ public class Sebastian {
                     break;
                 case "event":
                     res = this.addEvent(instruction);
+                    break;
+                case "delete" :
+                    res  = this.deleteTask(instruction);
                     break;
                 default:
                     throw new IllegalInstructionException();
