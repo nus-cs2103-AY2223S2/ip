@@ -1,5 +1,6 @@
 package command;
 
+import dukeexeption.InvalidArgumentException;
 import storage.TaskList;
 
 public class MarkCommand extends Command {
@@ -14,8 +15,12 @@ public class MarkCommand extends Command {
     }
 
     @Override
-    public String run(TaskList taskList) {
-        taskList.markTask(this.index);
-        return "Nice! I've marked this task as done:\n" + taskList.showTask(this.index);
+    public String run(TaskList taskList) throws InvalidArgumentException {
+        try {
+            taskList.markTask(this.index);
+            return "Nice! I've marked this task as done:\n" + taskList.showTask(this.index);
+        } catch (IndexOutOfBoundsException error) {
+            throw new InvalidArgumentException("Index " + (this.index + 1) + " is out of bound.");
+        }
     }
 }
