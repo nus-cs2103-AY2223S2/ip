@@ -27,13 +27,66 @@ public class Duke {
             else if (currentTask.equals("list")) {
                 System.out.println("Here are the tasks in your list:");
                 int taskCount = 1;
-                for(Task t: taskList) {
+                for (Task t: taskList) {
                     System.out.println(taskCount + "." + t);
                     taskCount++;
                 }
             }
 
-            // Add task command
+            // Command to mark as done
+            else if (currentTask.equals("mark")) {
+                System.out.println("Which task do you want to mark as done?");
+                int taskToMark = Integer.parseInt(sc.nextLine());
+                int taskCount = 1;
+
+                for (Task t : taskList) {
+                    if (taskToMark == taskCount) {
+                        t.markAsDone();
+                        System.out.println("Nice! I've marked this task as done:");
+                        System.out.println(t);
+                        break;
+                    } else {
+                        taskCount++;
+                    }
+                }
+            }
+
+            // Command to unmark
+            else if (currentTask.equals("unmark")) {
+                System.out.println("Which task do you want to mark as not done?");
+                int taskToMark = Integer.parseInt(sc.nextLine());
+                int taskCount = 1;
+
+                for (Task t : taskList) {
+                    if (taskToMark == taskCount) {
+                        t.markAsUndone();
+                        System.out.println("OK, I've marked this task as not done yet:");
+                        System.out.println(t);
+                        break;
+                    } else {
+                        taskCount++;
+                    }
+                }
+            }
+
+            // Command to remove task
+            else if (currentTask.equals("remove")) {
+                System.out.println("Which task do you want to remove?");
+                int taskToRemove = Integer.parseInt(sc.nextLine());
+                int taskCount = 1;
+
+                for (Task t : taskList) {
+                    if (taskToRemove - 1 == taskCount) {
+                        System.out.println("Alright, removing task.");
+                        taskList.remove(taskCount);
+                        break;
+                    } else {
+                        taskCount++;
+                    }
+                }
+            }
+
+            // Command to add task
             else {
                 System.out.println("added: " + currentTask);
                 taskList.add(new Task(currentTask));
