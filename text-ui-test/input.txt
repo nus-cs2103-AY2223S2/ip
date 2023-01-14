@@ -1,0 +1,14 @@
+list
+todo
+todo Demo task 1
+mark 1
+list
+unmark 1
+list
+deadline Demo task 2 /by tomorrow
+event Demo task 3 /from today /to tomorrow
+delete 0
+delete 4
+delete 3
+list
+bye

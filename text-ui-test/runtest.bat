@@ -7,7 +7,13 @@ REM delete output from previous run
 if exist ACTUAL.TXT del ACTUAL.TXT
 
 REM compile the code into the bin folder
-javac  -cp ..\src\main\java -Xlint:none -d ..\bin ..\src\main\java\*.java
+dir /s /B ..\src\main\java\*.java > sources.txt
+
+powershell -Command "(gc sources.txt) -replace '\\', '\\' | Out-File -FilePath sources.txt"
+
+powershell -Command "(gc sources.txt) | Foreach-Object {'\"' + $_ + '\"'} | Set-Content sources.txt"
+
+javac -cp ..\src\main\java -Xlint:none -d ..\bin @sources.txt
 IF ERRORLEVEL 1 (
     echo ********** BUILD FAILURE **********
     exit /b 1
