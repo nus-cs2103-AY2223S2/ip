@@ -19,6 +19,9 @@ public class Task {
         this.done = false;
     }
 
+    public boolean isMarked() {
+        return this.done;
+    }
     @Override
     public String toString() {
         return this.type + (done ? checked : unchecked) + " "  + this.title;

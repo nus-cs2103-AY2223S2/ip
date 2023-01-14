@@ -9,32 +9,67 @@ public class Duke {
         items = new ArrayList<>();
         greet();
         // Start user input
+        start(usr_in);
+    }
+
+    private static void start(Scanner usr_in) {
         while (usr_in.hasNextLine()) {
-            String curr_in = usr_in.nextLine();
-            String[] curr = curr_in.split("/"); //split into title and time-related
-            String[] curr_title = curr[0].split(" "); //split title by word
-            if (curr_in.equals("bye")) {
-                end();
-                break;
-            } else if (curr_in.equals("list")) {
-                print();
-            } else if (curr_title[0].equals("mark")) {
-                mark(Integer.parseInt(curr_title[1]));
-            } else if (curr_title[0].equals("unmark")) {
-                unmark(Integer.parseInt(curr_title[1]));
-            } else if (curr_title[0].equals("todo")) {
-                add(new ToDo(curr[0].substring(5)));
-            } else if (curr_title[0].equals("deadline")) {
-                add(new Deadline(curr[0].substring(9).trim(),
-                        curr[1].substring(3)));
-            } else if (curr_title[0].equals("event")) {
-                add(new Event(curr[0].substring(6).trim(),
-                        curr[1].substring(5).trim(),
-                        curr[2].substring(3)));
-            } else {
-                //echo(curr_in);
-                add(curr_in);
+            try {
+               parse_cmds(usr_in);
+            } catch (DukeException e) {
+                System.out.println(line_break + "\t " + e.getMessage() + "\n" + line_break);
             }
+        }
+    }
+
+    private static void parse_cmds(Scanner usr_in) throws DukeException {
+        String curr_in = usr_in.nextLine().trim();
+        String[] curr = curr_in.split("/"); //split into title and time-related
+        String[] curr_title = curr[0].split(" "); //split title by word
+        if (curr_in.equals("bye")) {
+            end();
+        } else if (curr_in.equals("list")) {
+            print();
+        } else if (curr_title[0].equals("mark")) {
+            try {
+                mark(Integer.parseInt(curr_title[1]));
+            } catch (AlreadyMarkedException e) {
+                throw new DukeException(e.getMessage());
+            } catch (Exception e) {
+                throw new DukeException("Please give a valid index between 1 and " + items.size());
+            }
+        } else if (curr_title[0].equals("unmark")) {
+            try {
+                unmark(Integer.parseInt(curr_title[1]));
+            } catch (AlreadyUnmarkedException e) {
+                throw new DukeException(e.getMessage());
+            } catch (Exception e) {
+                throw new DukeException("Please give a valid index between 1 and " + items.size());
+            }
+        } else if (curr_title[0].equals("todo")) {
+            String todo = curr[0].substring(5).trim();
+            if (todo.isBlank()) {
+                throw new DukeException("You need something to do");
+            } else { add(new ToDo(todo)); }
+        } else if (curr_title[0].equals("deadline")) {
+            try {
+                String descr = curr[0].substring(9).trim();
+                String by = curr[1].substring(3).trim();
+                add(new Deadline(descr, by));
+            } catch (Exception e) {
+                throw new DukeException("You need to fill in a deadline with a description and by date");
+            }
+        } else if (curr_title[0].equals("event")) {
+            try {
+                String descr = curr[0].substring(6).trim();
+                String from = curr[1].substring(5).trim();
+                String to = curr[2].substring(3).trim();
+                add(new Event(descr, from, to));
+            } catch (Exception e) {
+                throw new DukeException("You need to fill in an event with a description, from and to timing");
+            }
+        } else {
+            throw new DukeException("Hmmm, I don't understand what you want to do");
         }
     }
 
@@ -51,34 +86,32 @@ public class Duke {
         System.out.println("\t What can I do for you?" + line_break);
     }
 
-    /*
-     * adds item to items list
-     * @param item a string from user input to be added to items list
-     */
-    static void add(String item) {
-        Task task = new Task(item);
-        items.add(task);
-        System.out.println(line_break + " \t added: " + item + " \n " + line_break);
-    }
-
     static void add(Task task) {
         items.add(task);
         System.out.println(line_break + "\t Adding the task:\n\t\t" + task +
                             "\n\t You now have " + items.size() + " task(s)." + line_break);
     }
 
-    static void mark(int idx) {
+    static void mark(int idx) throws AlreadyMarkedException {
         idx = idx - 1;
-        items.get(idx).mark();
-        System.out.println(line_break + "\t Great job completing your task! :)");
-        System.out.println("\t\t" + items.get(idx) + line_break);
+        if (items.get(idx).isMarked()) {
+            throw new AlreadyMarkedException("Already Marked!");
+        } else {
+            items.get(idx).mark();
+            System.out.println(line_break + "\t Great job completing your task! :)");
+            System.out.println("\t\t" + items.get(idx) + line_break);
+        }
     }
 
-    static void unmark(int idx) {
+    static void unmark(int idx) throws AlreadyUnmarkedException {
         idx = idx - 1;
-        items.get(idx).unmark();
-        System.out.println(line_break + "\t I see you want to redo this task...");
-        System.out.println("\t\t" + items.get(idx) + line_break);
+        if (!items.get(idx).isMarked()) {
+            throw new AlreadyUnmarkedException("Already Unmarked!");
+        } else {
+            items.get(idx).unmark();
+            System.out.println(line_break + "\t I see you want to redo this task...");
+            System.out.println("\t\t" + items.get(idx) + line_break);
+        }
     }
 
     /*
@@ -97,5 +130,6 @@ public class Duke {
         System.out.println(line_break +
                         "\t Bye. See you next time! :)\n" +
                         line_break);
+        System.exit(0);
     }
 }
