@@ -4,8 +4,11 @@
 public class Deadline extends Task {
     protected String by;
 
-    public Deadline(String description, String by) {
+    public Deadline(String description, String by) throws DukeException {
         super(description);
+        if (by.length() == 0) {
+            throw new DukeException("☹ OOPS!!! You need to indicate a deadline for this task...");
+        }
         this.by = by;
     }
 

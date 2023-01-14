@@ -5,7 +5,10 @@ public class Task {
     protected String description;
     protected boolean isDone;
 
-    public Task(String description) {
+    public Task(String description) throws DukeException {
+        if (description.length() == 0) {
+            throw new DukeException("☹ OOPS!!! The description of a todo cannot be empty.");
+        }
         this.description = description;
         this.isDone = false;
     }
