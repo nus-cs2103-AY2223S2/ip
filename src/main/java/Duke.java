@@ -1,7 +1,7 @@
 import java.util.Scanner;
 
 public class Duke {
-    public static void main(String[] args) {
+    public static void main(String[] args) throws DukeException {
         String logo = " ____        _        \n"
                 + "|  _ \\ _   _| | _____ \n"
                 + "| | | | | | | |/ / _ \\\n"
@@ -25,14 +25,24 @@ public class Duke {
                     System.out.println("    " + String.valueOf(i + 1) + "."  + list[i].toString());
                 }
                 System.out.println("    -------------------------------------------");
-            } else if(echoSplit[0].equals("mark")) {
-                int index = Integer.valueOf(echoSplit[1]) - 1;
-                list[index].isDone = true;
+            } else if(echoSplit.length < 2 && !echo.equals("")) {
+                throw new DukeException();
+            } if(echoSplit[0].equals("mark")) {
 
-                System.out.println("    -------------------------------------------");
-                System.out.println("Nice! I've marked this task as done:");
-                System.out.println("    " + "[" + list[index].getStatusIcon() + "] " + list[index].description);
-                System.out.println("    -------------------------------------------");
+                int index = Integer.valueOf(echoSplit[1]) - 1;
+                try {
+                    list[index].isDone = true;
+                    System.out.println("    -------------------------------------------");
+                    System.out.println("Nice! I've marked this task as done:");
+                    System.out.println("    " + "[" + list[index].getStatusIcon() + "] " + list[index].description);
+                    System.out.println("    -------------------------------------------");
+                } catch (IndexOutOfBoundsException e) {
+                    System.out.println("caught IOOBE");
+                } catch (NullPointerException n) {
+                    System.out.println("caught NPE");
+                }
+
+
 
             } else if(echoSplit[0].equals("unmark")) {
                 int index = Integer.valueOf(echoSplit[1]) - 1;
@@ -99,6 +109,9 @@ public class Duke {
                     list[counter] = new Event(task, from, to);
                     System.out.println("    -------------------------------------------\n    " + "added: " + task +"\n    -------------------------------------------");
                     counter++;
+                } else {
+
+
                 }
 
 
