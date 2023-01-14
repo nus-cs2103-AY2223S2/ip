@@ -8,4 +8,10 @@ mark 3
 mark 2
 unmark 1
 list
+mark
+todo
+blah
+unmark
+deadline study history
+event play a chess /to Tues 1pm
 bye

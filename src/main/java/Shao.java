@@ -1,3 +1,4 @@
+import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -44,6 +45,12 @@ public class Shao {
         printRowLine();
     }
 
+    public static void printError(String errorMessage) {
+        printRowLine();
+        println(errorMessage);
+        printRowLine();
+    }
+
     public static void greetUser() {
         printRowLine();
         println("\tHi There! I'm Shao");
@@ -57,16 +64,14 @@ public class Shao {
         printRowLine();
     }
 
-    public static void markItem(String itemNum, List<Task> items) {
+    public static void markItem(String itemNum, List<Task> items, boolean isMark) throws ParseException {
         int idx = Integer.parseInt(itemNum) - 1;
         Task task = items.get(idx);
-        task.markAsDone();
-        printMarkedTask(task);
-    }
-
-    public static void unmarkItem(String itemNum, List<Task> items) {
-        int idx = Integer.parseInt(itemNum) - 1;
-        Task task = items.get(idx);
+        if (isMark) {
+            task.markAsDone();
+            printMarkedTask(task);
+            return;
+        }
         task.markAsUndone();
         printUnmarkedTask(task);
     }
@@ -84,7 +89,7 @@ public class Shao {
     public static String[] getFromTo(String input) {
         String[] inputArr = input.split(" ");
         int l = inputArr.length;
-        int fromStartIdx = -1, fromEndIdx = -1, toStartIdx = -1;
+        int fromStartIdx = -1, fromEndIdx = l, toStartIdx = -1;
         String from = "";
         String to = "";
         for (int i = 0; i < l; i++) {
@@ -98,11 +103,11 @@ public class Shao {
                 }
             }
         }
-        if (fromStartIdx > -1 && fromEndIdx > -1) {
-            from = String.join(" ", Arrays.copyOfRange(inputArr, fromStartIdx, fromEndIdx));
+        if (fromStartIdx > -1) {
+            from = sliceArrAndConcate(inputArr, fromStartIdx, fromEndIdx);
         }
         if (toStartIdx > -1) {
-            to = String.join(" ", Arrays.copyOfRange(inputArr, toStartIdx, l));
+            to = sliceArrAndConcate(inputArr, toStartIdx, l);
         }
         return new String[] { from, to };
     }
@@ -117,6 +122,10 @@ public class Shao {
             sb.append(s + " ");
         }
         return sb.toString().trim();
+    }
+
+    public static String sliceArrAndConcate(String[] arr, int startIdx, int endIdx) {
+        return String.join(" ", Arrays.copyOfRange(arr, startIdx, endIdx));
     }
 
     public static void main(String[] args) {
@@ -140,19 +149,71 @@ public class Shao {
                     printList(items);
                     break;
                 default:
-                    if (inputLower.startsWith("mark")) {
-                        markItem(inputLower.split(" ")[1], items);
-                    } else if (inputLower.startsWith("unmark")) {
-                        unmarkItem(inputLower.split(" ")[1], items);
-                    } else {
-                        Task newTask = inputLower.startsWith("todo")
-                                ? new Todo(input)
-                                : inputLower.startsWith("deadline")
-                                        ? new Deadline(trimDate(input), getBy(input))
-                                        : new Event(trimDate(input), getFromTo(input));
+                    boolean isMarkOperation = inputLower.startsWith("mark")
+                            || inputLower.startsWith("unmark");
+                    String[] inputArr = input.split(" ");
+                    if (isMarkOperation) {
+                        if (inputArr.length < 2) {
+                            printError("Oops! The item number cannot be empty.");
+                        } else {
+                            try {
+                                markItem(inputArr[1], items, inputLower.startsWith("mark"));
+                            } catch (ParseException ex) {
+                                printError("Oops! An item number must be provided.");
+                            }
+                        }
+                    } else if (inputLower.startsWith("todo") || inputLower.startsWith("deadline")
+                            || inputLower.startsWith("event")) {
 
-                        items.add(newTask);
-                        printAddedTask(newTask, items.size());
+                        // Todo - 0, Deadline - 1, Event - 2
+                        int operationType = inputLower.startsWith("todo")
+                                ? 0
+                                : inputLower.startsWith("deadline")
+                                        ? 1
+                                        : 2;
+
+                        if (inputArr.length < 2) {
+                            printError(String.format("Oops! The description of a %s cannot be empty.",
+                                    operationType == 0 ? "todo" : operationType == 1 ? "deadline" : "event"));
+                        } else {
+                            Task newTask = null;
+                            String description = sliceArrAndConcate(inputArr, 1, inputArr.length);
+                            switch (operationType) {
+                                case 0:
+                                    newTask = new Todo(description);
+                                    break;
+
+                                case 1:
+                                    String by = getBy(input);
+                                    if (by.isEmpty()) {
+                                        printError(
+                                                "Oops! The description of deadline must include a completion date/time.");
+                                        continue;
+                                    }
+                                    newTask = new Deadline(trimDate(description), by);
+                                    break;
+
+                                case 2:
+                                    String[] fromTo = getFromTo(input);
+                                    if (fromTo[0].isEmpty()) {
+                                        printError("Oops! The description of event must include a from date/time.");
+                                        continue;
+                                    }
+                                    if (fromTo[1].isEmpty()) {
+                                        printError("Oops! The description of event must include a to date/time.");
+                                        continue;
+                                    }
+                                    newTask = new Event(trimDate(description), fromTo);
+                                    break;
+
+                                default:
+                                    break;
+                            }
+                            items.add(newTask);
+                            printAddedTask(newTask, items.size());
+                        }
+                    } else {
+                        printError("Oops! I'm sorry but I don't know what that means.");
                     }
                     break;
 
