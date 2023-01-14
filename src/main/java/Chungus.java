@@ -2,7 +2,14 @@ import java.io.*;
 import java.util.*;
 import java.util.regex.*;
 
-public class Duke {
+public class Chungus {
+    private Writer out;
+    private ArrayList<Task> tasks;
+
+    private static Pattern deadlinePattern = Pattern.compile("^deadline\\s+(.+)\\s+/by\\s+(.+)$");
+    private static Pattern eventPattern =
+            Pattern.compile("^event\\s+(.+)\\s+/from\\s+(.+)\\s+/to\\s+(.+)$");
+
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
         PrintWriter writer = new PrintWriter(System.out);
@@ -11,7 +18,7 @@ public class Duke {
         while (true) {
             writer.append("chungus> ").flush();
             String input = sc.nextLine();
-            boolean shouldExit = chungus.handleInput(input);
+            boolean shouldExit = chungus.handleInput(input.trim());
             if (shouldExit)
                 break;
             writer.append('\n').flush();
@@ -19,16 +26,6 @@ public class Duke {
 
         sc.close();
     }
-}
-
-
-class Chungus {
-    private Writer out;
-    private ArrayList<Task> tasks;
-
-    private static Pattern deadlinePattern = Pattern.compile("^deadline\\s+(.+)\\s+/by\\s+(.+)$");
-    private static Pattern eventPattern =
-            Pattern.compile("^event\\s+(.+)\\s+/from\\s+(.+)\\s+/to\\s+(.+)$");
 
     public Chungus(Writer _out) {
         out = _out;
@@ -168,77 +165,5 @@ class Chungus {
 
     private void flush() throws IOException {
         out.append("\u001b[0m").flush();
-    }
-}
-
-
-abstract class Task {
-    private String desc;
-    private boolean isDone;
-
-    public Task(String _desc) {
-        desc = _desc;
-        isDone = false;
-    }
-
-    public String desc() {
-        return (isDone() ? "[X] " : "[ ] ") + desc;
-    }
-
-    public boolean isDone() {
-        return isDone;
-    }
-
-    public void setDone() {
-        isDone = true;
-    }
-
-    public void setNotDone() {
-        isDone = false;
-    }
-
-    public abstract String toString();
-}
-
-
-class Todo extends Task {
-    public Todo(String desc) {
-        super(desc);
-    }
-
-    @Override
-    public String toString() {
-        return "[T]" + desc();
-    }
-}
-
-
-class Deadline extends Task {
-    String deadline;
-
-    public Deadline(String desc, String _deadline) {
-        super(desc);
-        deadline = _deadline;
-    }
-
-    @Override
-    public String toString() {
-        return "[D]" + desc() + String.format(" (by: %s)", deadline);
-    }
-}
-
-
-class Event extends Task {
-    String from, to;
-
-    public Event(String desc, String _from, String _to) {
-        super(desc);
-        from = _from;
-        to = _to;
-    }
-
-    @Override
-    public String toString() {
-        return "[E]" + desc() + String.format(" (from: %s to: %s)", from, to);
     }
 }
