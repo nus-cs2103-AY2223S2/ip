@@ -1,4 +1,6 @@
-enum DukeCommand {
+package duke.constant;
+
+public enum DukeCommand {
     BYE,
     LIST,
     MARK,
