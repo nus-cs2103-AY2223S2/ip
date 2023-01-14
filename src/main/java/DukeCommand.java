@@ -6,5 +6,6 @@ enum DukeCommand {
     TODO,
     EVENT,
     DEADLINE,
-    DELETE;
+    DELETE,
+    DATE;
 }

@@ -20,6 +20,7 @@ public class Duke {
     private final static String EXCEPTION_INVALID_TODO_CMD = "The description of a todo cannot be empty.";
     private final static String EXCEPTION_INVALID_EVENT_CMD = "Invalid event command format.";
     private final static String EXCEPTION_INVALID_DEADLINE_CMD = "Invalid deadline command format.";
+    private final static String EXCEPTION_INVALID_DATE_CMD = "Invalid date command format.";
 
     private List<Task> tList;
     private boolean isActive;
@@ -73,8 +74,39 @@ public class Duke {
 
         StringBuilder sb = new StringBuilder();
         sb.append("Here are the tasks in your list:\n");
-        for (int i = 0; i < tList.size(); i++) {
-            sb.append(String.format("\t%d. %s\n", i + 1, tList.get(i)));
+        sb.append(printList(tList));
+        return sb.toString();
+    }
+
+    private String findTaskByDate(String date) {
+        LocalDateTime key = DateUtil.toLocalDateTime(date);
+
+        List<Task> filtered = tList.stream().filter(task -> {
+                if (task instanceof Deadline) {
+                    Deadline d = (Deadline) task;
+                    if (d.getBy().equals(key)) {
+                        return true;
+                    }
+                }
+                if (task instanceof Event) {
+                    Event e = (Event) task;
+                    if (e.getFrom().equals(key)) {
+                        return true;
+                    }
+                }
+                return false;
+            }).toList();
+
+            StringBuilder sb = new StringBuilder();
+            sb.append("Here are the tasks in your list happening on ["+ DateUtil.dateToString(key) +"]:\n");
+            sb.append(printList(filtered));
+            return sb.toString();
+    }
+
+    private String printList(List<Task> list) {
+        StringBuilder sb = new StringBuilder();
+        for (int i = 0; i < list.size(); i++) {
+            sb.append(String.format("\t%d. %s\n", i + 1, list.get(i)));
         }
         return sb.toString();
     }
@@ -206,6 +238,12 @@ public class Duke {
                     } catch (IllegalDukeTaskAccessException e) {
                         return e.getMessage();
                     }
+                case DATE:
+                    if (input.length != 2) {
+                        throw new IllegalDukeCommandArgumentException(EXCEPTION_INVALID_DATE_CMD);
+                    }
+
+                    return findTaskByDate(input[1]);
                 default:
                     throw new NoSuchDukeCommandException(EXCEPTION_NOSUCH_COMMAND);
             }
