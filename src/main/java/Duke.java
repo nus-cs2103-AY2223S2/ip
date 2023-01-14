@@ -10,13 +10,23 @@ public class Duke {
         System.out.println("Hello! I'm Duke\n" +
                             "What can I do for you?\n" + logo);
         Scanner input = new Scanner(System.in);
+        String[] list = new String[100];
         String echo = input.nextLine();
+        int counter = 0;
         while(true){
             if(echo.equals("bye")) {
                 System.out.println("    -------------------------------------------\n    Bye. Hope to see you again soon!\n    -------------------------------------------");
                 break;
+            } else if(echo.equals("list")) {
+                System.out.println("    -------------------------------------------");
+                for (int i = 0; i < counter; i++) {
+                    System.out.println("    " + String.valueOf(i + 1) + ": " + list[i]);
+                }
+                System.out.println("    -------------------------------------------");
             } else {
-                System.out.println("    -------------------------------------------\n    " + echo + "\n    -------------------------------------------");
+                list[counter] = echo;
+                System.out.println("    -------------------------------------------\n    " + "added: " + echo +"\n    -------------------------------------------");
+                counter++;
             }
             echo = input.nextLine();
 
