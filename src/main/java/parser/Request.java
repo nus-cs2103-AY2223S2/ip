@@ -1,7 +1,6 @@
 package parser;
 
 import command.Command;
-import dukeexeption.DukeException;
 import dukeexeption.InvalidArgumentException;
 import dukeexeption.MissingArgumentException;
 import dukeexeption.UnknownCommandException;
@@ -35,6 +34,8 @@ public class Request {
                 return new DeadlineParser().parse(this.requestContent);
             case "event":
                 return new EventParser().parse(this.requestContent);
+            case "delete":
+                return new DeleteParser().parse(this.requestContent);
             default:
                 throw new UnknownCommandException();
         }
