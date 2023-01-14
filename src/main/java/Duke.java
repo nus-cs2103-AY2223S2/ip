@@ -18,26 +18,38 @@ public class Duke {
         while (true) {
             String command = sc.nextLine();
             System.out.println(divider);
+            boolean addTask = true;
             if (command.equals("list")) {
                 System.out.println(divider);
                 int counter = 1;
-                for (Task t: tasks) {
+                for (Task t : tasks) {
                     System.out.println(counter + ". " + t.toString());
                     counter++;
                 }
-                System.out.println(divider);
-                continue;
-            }
-            else if (command.equals("bye")) {
+                addTask = false;
+            } else if (command.matches("^mark \\d")) {
+                String[] input = command.split(" ");
+                int taskNumber = Integer.parseInt(input[1]) - 1;
+                tasks.get(taskNumber).setCompleted();
+                System.out.println("    Nice! I've marked this task as done:\n" + "   " + tasks.get(taskNumber));
+                addTask = false;
+            } else if (command.matches("^unmark \\d")) {
+                String[] input = command.split(" ");
+                int taskNumber = Integer.parseInt(input[1]) - 1;
+                tasks.get(taskNumber).setUncompleted();
+                System.out.println("    OK, I've marked this task as not done yet:\n" + "   " + tasks.get(taskNumber));
+                addTask = false;
+            } else if (command.equals("bye")) {
                 System.out.println("    Bye. Hope to see you again soon!");
                 System.out.println(divider);
-                break;
+                sc.close(); // close scanner
+                return;
             }
-            tasks.add(new Task(command));
-            System.out.println("    added: " + command);
+            if (addTask) {
+                tasks.add(new Task(command));
+                System.out.println("    added: " + command);
+            }
             System.out.println(divider);
         }
-        // close scanner
-        sc.close();
     }
 }
