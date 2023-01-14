@@ -2,7 +2,7 @@ package duke.task;
 
 import java.time.LocalDateTime;
 
-import utils.DateUtil;
+import duke.utils.DateUtil;
 
 /**
  * Event

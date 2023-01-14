@@ -5,7 +5,7 @@ import java.util.List;
 import java.util.Scanner;
 
 import duke.task.*;
-import utils.DateUtil;
+import duke.utils.DateUtil;
 import duke.constant.Message;
 import duke.database.DukeRepo;
 import duke.database.DukeRepoImpl;
