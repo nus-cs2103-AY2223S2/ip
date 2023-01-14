@@ -23,8 +23,11 @@ public class Dude {
                 " |_____/ \\__,_|\\__,_|\\___|\n";
 
         System.out.println(logo);
-        System.out.println("Yo! I'm dude");
-        System.out.println("What you want me do for you?\n");
+        System.out.println(" ____________________________________________________________");
+        System.out.println("\tYo! I'm dude");
+        System.out.println("\tWhat you want me do for you?");
+        System.out.println(" ____________________________________________________________\n");
+
     }
 
     public static void getCommands(String command) {
