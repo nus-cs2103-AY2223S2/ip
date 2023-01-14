@@ -1,13 +1,15 @@
 class DeadLine extends Task {
-    DeadLine(String taskName) {
+    String deadline;
+
+    DeadLine(String taskName, String deadline) {
         super(taskName);
         this.tag = "deadline";
+        this.deadline = deadline;
     }
 
     @Override
     public String toString() {
-        StringBuilder sb = new StringBuilder();
-        sb.append("[D]");
-        return sb.toString() + super.toString();
+        return "[D]" + super.toString() + " (by: " +
+                this.deadline + ")";
     }
 }

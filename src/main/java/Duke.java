@@ -19,7 +19,13 @@ public class Duke {
                 } else if (splited[0].equals("unmark")) {
                     int index = Integer.parseInt(splited[1]);
                     mainEngine.markUnDone(index);
-                } else {
+                } else if (splited[0].equals("todo")) {
+                    mainEngine.handleToDo(command);
+                } else if (splited[0].equals("deadline")) {
+                    mainEngine.handleDeadLine(command);
+                } else if (splited[0].equals("event")) {
+                    mainEngine.handleEvent(command);
+                } else { // otherwise = commonplace task
                     mainEngine.addTask(command);
                 }
             }

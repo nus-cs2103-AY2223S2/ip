@@ -6,8 +6,6 @@ class ToDo extends Task {
 
     @Override
     public String toString() {
-        StringBuilder sb = new StringBuilder();
-        sb.append("[T]");
-        return sb.toString() + super.toString();
+        return "[T]" + super.toString();
     }
 }

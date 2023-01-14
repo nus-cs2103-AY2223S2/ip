@@ -1,13 +1,17 @@
 class Event extends Task {
-    Event(String taskName) {
+    String start;
+    String end;
+
+    Event(String taskName, String start, String end) {
         super(taskName);
         this.tag = "event";
+        this.start = start;
+        this.end = end;
     }
 
     @Override
     public String toString() {
-        StringBuilder sb = new StringBuilder();
-        sb.append("[E]");
-        return sb.toString() + super.toString();
+        return "[E]" + super.toString() + " (from: " +
+                this.start + " to: " + this.end + ")";
     }
 }

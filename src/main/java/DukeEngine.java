@@ -16,6 +16,7 @@ public class DukeEngine {
     public static final String markUnDoneWord =
             "Well, you have not finished this task yet: ";
     public static final String listWord = "Here are all of your tasks: ";
+    public static final String addWord = "This task is added to your list: ";
 
     public List<Task> taskList = new ArrayList<Task>();
 
@@ -37,6 +38,92 @@ public class DukeEngine {
         Task theTask = new Task(command);
         taskList.add(theTask);
         System.out.println("added: " + command);
+    }
+
+    public void handleToDo(String command) {
+        // Later should catch empty todo
+        String[] splited = command.split(" ");
+        StringBuilder sb = new StringBuilder();
+        for (int i = 1; i < splited.length; i++) {
+            sb.append(splited[i]).append(" ");
+        }
+        sb.deleteCharAt(sb.length()-1);
+        String taskName = sb.toString();
+
+        Task theTask = new ToDo(taskName);
+        taskList.add(theTask);
+
+        System.out.println(addWord);
+        System.out.println(theTask.toString());
+        System.out.println("Now you have " + taskList.size() +
+                " tasks in the list.");
+    }
+
+    public void handleDeadLine(String command) {
+        // Later should catch empty deadline
+        String[] splited = command.split(" ");
+        StringBuilder sb = new StringBuilder();
+        StringBuilder time = new StringBuilder();
+        boolean isTime = false;
+        for (int i = 1; i < splited.length; i++) {
+            if (splited[i].equals("/by")) {
+                isTime = true;
+            } else if (!isTime) {
+                sb.append(splited[i]).append(" ");
+            } else {
+                time.append(splited[i]).append(" ");
+            }
+        }
+        sb.deleteCharAt(sb.length()-1);
+        time.deleteCharAt(time.length()-1);
+        String taskName = sb.toString();
+        String deadline = time.toString();
+
+        Task theTask = new DeadLine(taskName, deadline);
+        taskList.add(theTask);
+
+        System.out.println(addWord);
+        System.out.println(theTask.toString());
+        System.out.println("Now you have " + taskList.size() +
+                " tasks in the list.");
+    }
+
+    public void handleEvent(String command) {
+        // Later should catch empty event
+        String[] splited = command.split(" ");
+        StringBuilder sb = new StringBuilder();
+        StringBuilder start = new StringBuilder();
+        StringBuilder end = new StringBuilder();
+        boolean isStart = false;
+        boolean isEnd = false;
+        for (int i = 1; i < splited.length; i++) {
+            if (splited[i].equals("/from")) {
+                isStart = true;
+            } else if (splited[i].equals("/to")) {
+                isStart = false;
+                isEnd = true;
+            } else if (!isStart && !isEnd) {
+                sb.append(splited[i]).append(" ");
+            } else if (isStart) {
+                start.append(splited[i]).append(" ");
+            } else {
+                end.append(splited[i]).append(" ");
+            }
+        }
+        sb.deleteCharAt(sb.length()-1);
+        start.deleteCharAt(start.length()-1);
+        end.deleteCharAt(end.length()-1);
+        String taskName = sb.toString();
+        String startTime = start.toString();
+        String endTime = end.toString();
+
+        Task theTask = new Event(taskName, startTime, endTime);
+        taskList.add(theTask);
+
+        System.out.println(addWord);
+        System.out.println(theTask.toString());
+        System.out.println("Now you have " + taskList.size() +
+                " tasks in the list.");
     }
 
     public void listTask() {
