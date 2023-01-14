@@ -1,7 +1,7 @@
 import java.util.Scanner;
 
 public class Dude {
-    private static Task[] todoList = new Task[100];
+    private static final Task[] todoList = new Task[100];
     private static int taskCount = 0;
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
@@ -34,8 +34,8 @@ public class Dude {
     }
 
     public static void getCommands(String command) {
-        String cmd = command.split(" ")[0];
-        switch(cmd) {
+        String [] cmd = command.split(" ", 2);
+        switch(cmd[0]) {
             case "list":
                 System.out.println(" ____________________________________________________________");
                 getList();
@@ -49,31 +49,61 @@ public class Dude {
             case "bye":
                 System.out.println(" ____________________________________________________________");
                 System.out.println("\tCiaos! See you next time.");
-
                 System.out.println(" ____________________________________________________________\n");
                 break;
             case "mark":
                 System.out.println(" ____________________________________________________________");
-                markTask(Integer.valueOf(command.split(" ")[1]) - 1);
+                markTask(Integer.parseInt(cmd[1]) - 1);
                 System.out.println(" ____________________________________________________________\n");
                 break;
             case "unmark":
                 System.out.println(" ____________________________________________________________");
-                unmarkTask(Integer.valueOf(command.split(" ")[1]) - 1);
+                unmarkTask(Integer.parseInt(cmd[1]) - 1);
                 System.out.println(" ____________________________________________________________\n");
                 break;
-            default:
+            case "todo":
                 System.out.println(" ____________________________________________________________");
-                addTask(command);
-                System.out.println("\tAdd liao: " + command);
+                System.out.println("\tGot it. I've added this task:");
+                addTask("todo", cmd[1]);
                 System.out.println(" ____________________________________________________________\n");
+                break;
+            case "deadline":
+                System.out.println(" ____________________________________________________________");
+                System.out.println("\tGot it. I've added this task:");
+                addTask("deadline", cmd[1]);
+                System.out.println(" ____________________________________________________________\n");
+                break;
+            case "event":
+                System.out.println(" ____________________________________________________________");
+                System.out.println("\tGot it. I've added this task:");
+                addTask("event", cmd[1]);
+                System.out.println(" ____________________________________________________________\n");
+                break;
         }
     }
 
-    public static void addTask(String description) {
-        Task task = new Task(description);
+    public static void addTask(String type, String description) {
+        Task task = new Task("");
+        String[] format;
+        switch(type){
+            case "todo":
+                task = new Todo(description);
+                break;
+            case "deadline":
+                format = description.split(" /by ");
+                task = new Deadline(format[0], format[1]);
+                break;
+            case "event":
+                format = description.split(" /from ");
+                String[] details = format[1].split("/to ");
+                task = new Event(format[0], details[0], details[1]);
+                break;
+        }
         todoList[taskCount] = task;
         taskCount++;
+        System.out.println("\t" + task);
+        System.out.println("\tNow got " + taskCount + " tasks in your list liao.");
+
     }
 
     public static void getList() {
@@ -88,22 +118,22 @@ public class Dude {
     }
 
     public static void markTask(int task) {
-        if (taskCount >= task - 1) {
+        if (taskCount > task) {
             System.out.println("\tSwee! I've marked this task as done loh:");
             Task currentTask = todoList[task];
             currentTask.mark();
-            System.out.println("\t" + currentTask.toString());
+            System.out.println("\t" + currentTask);
         } else {
             System.out.println("\tUhh... Where got this task for me to mark?");
         }
     }
 
     public static void unmarkTask(int task) {
-        if (taskCount >= task - 1) {
+        if (taskCount > task) {
             System.out.println("\tOkay liar, I've marked this task as undone liao:");
             Task currentTask = todoList[task];
             currentTask.unmark();
-            System.out.println("\t" + currentTask.toString());
+            System.out.println("\t" + currentTask);
         } else {
             System.out.println("\tUhh... Where got this task for me to unmark?");
         }
