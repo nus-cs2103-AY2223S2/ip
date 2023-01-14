@@ -87,6 +87,14 @@ public class TaskList {
     }
 
     /**
+     * Deletes task.
+     * @param index     index of task
+     */
+    public void deleteTask(int index) {
+        this.tasks.remove(index);
+    }
+
+    /**
      * Returns the number of tasks in the list.
      * @return  Number of tasks.
      */
