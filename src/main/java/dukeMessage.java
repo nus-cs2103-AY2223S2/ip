@@ -20,9 +20,6 @@ public class DukeMessage extends Message {
 
         switch (this.status) {
             case ADD:
-                // add to TaskList
-                reply = String.format("added: %s", this.getContent());
-                break;
             case MARK:
             case LIST:
                 reply = this.getContent();

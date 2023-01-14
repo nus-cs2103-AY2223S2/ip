@@ -36,6 +36,15 @@ public class MessageProcessor {
         return String.format("%s\n%s", heading, task.toString());
     }
 
+    private String generateListMessage() {
+        String heading = "Here are the tasks in your list:\n";
+        return heading + this.taskList.toString();
+    }
+
+    private String generateAddMessage(Task task) {
+        return task.toString();
+    }
+
 
     DukeMessage process(String message) {
         MessageStatus status;
@@ -43,14 +52,16 @@ public class MessageProcessor {
             status = MessageStatus.END;
         } else if (message.equals("list")){
             status = MessageStatus.LIST;
-            message = this.taskList.toString();
+            message = generateListMessage();
         } else if (isMark(message)) {
             Task task = processMark(message);
             status = MessageStatus.MARK;
             message = generateMarkMessage(task);
         } else {
+            Task task = taskList.addTask(message);
             status = MessageStatus.ADD;
-            taskList.addTask(message);
+            message = generateAddMessage(task);
+
         }
 
         return new DukeMessage(status, message);

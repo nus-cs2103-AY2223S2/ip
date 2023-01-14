@@ -16,9 +16,29 @@ public class TaskList {
         return listString;
     }
 
-    public void addTask(String content) {
-        this.list[numTask] = new Task(content);
+    public Task addTask(String content) {
+        String[] contentSplit = content.split(" ",2);
+        String taskType = contentSplit[0];
+        content = contentSplit[1];
+        Task taskToAdd;
+
+        if (taskType.equals("todo")) {
+            taskToAdd = new Todo(content);
+        } else if (taskType.equals("deadline")) {
+            String[] dateSplit = content.split("/by");
+            content = dateSplit[0];
+            String dueDate = dateSplit[1];
+            taskToAdd = new Deadline(content,dueDate);
+        } else {
+            String[] dateSplit = content.split("/from");
+            content = dateSplit[0];
+            String fromToDate = dateSplit[1];
+            taskToAdd = new Event(content, fromToDate);
+        }
+        this.list[numTask] = taskToAdd;
         this.numTask++;
+
+        return taskToAdd;
     }
 
     public Task getTask(int taskNum) {
