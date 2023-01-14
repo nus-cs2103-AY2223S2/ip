@@ -1,0 +1,13 @@
+help
+list
+add /todo buy milk
+add /deadline do bills /by 2020-02-20
+add /event party /from Fri 5pm /to Fri 7pm
+list
+mark 2
+list
+mark 1 2 3
+list
+mark 1
+list
+exit

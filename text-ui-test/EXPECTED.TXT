@@ -1,7 +1,36 @@
-Hello from
- ____        _        
-|  _ \ _   _| | _____ 
+Hello, I'm
+ ____        _
+|  _ \ _   _| | _____
 | | | | | | | |/ / _ \
 | |_| | |_| |   <  __/
-|____/ \__,_|_|\_\___|
-
+|____/ \__,_|_|\_\___| ,
+how may I help?
+	Usage: <command> [<args>]
+		exit : exit the app
+		help : show this help message
+		list : list tasks
+		 add : add task
+		mark : mark/unmark task as done
+	No tasks found.
+	added: [T][ ] buy milk
+	added: [D][ ] do bills (by: 2020-02-20)
+	added: [E][ ] party (from: Fri 5pm) (to: Fri 7pm)
+	1. [T][ ] buy milk
+	2. [D][ ] do bills (by: 2020-02-20)
+	3. [E][ ] party (from: Fri 5pm) (to: Fri 7pm)
+	marked: 2. [D][X] do bills (by: 2020-02-20)
+	1. [T][ ] buy milk
+	2. [D][X] do bills (by: 2020-02-20)
+	3. [E][ ] party (from: Fri 5pm) (to: Fri 7pm)
+	marked:
+		1. [T][X] buy milk
+		2. [D][ ] do bills (by: 2020-02-20)
+		3. [E][X] party (from: Fri 5pm) (to: Fri 7pm)
+	1. [T][X] buy milk
+	2. [D][ ] do bills (by: 2020-02-20)
+	3. [E][X] party (from: Fri 5pm) (to: Fri 7pm)
+	unmarked: 1. [T][ ] buy milk
+	1. [T][ ] buy milk
+	2. [D][ ] do bills (by: 2020-02-20)
+	3. [E][X] party (from: Fri 5pm) (to: Fri 7pm)
+	Goodbye.
