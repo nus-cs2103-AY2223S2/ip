@@ -5,7 +5,7 @@ import java.util.Scanner;
 
 public class Shao {
     public static void printRowLine() {
-        println("_________________________________________");
+        println("________________________________________________________");
     }
 
     public static void println(String s) {
