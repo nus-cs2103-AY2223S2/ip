@@ -1,8 +1,11 @@
 package duke;
 
+import java.time.LocalDateTime;
+import java.util.List;
 import java.util.Scanner;
 
 import duke.task.*;
+import utils.DateUtil;
 import duke.constant.Message;
 import duke.database.DukeRepo;
 import duke.database.DukeRepoImpl;
@@ -60,7 +63,7 @@ public class Duke {
     }
 
     private String listTask() {
-        if (db.getAllTask().isEmpty()) {
+        if (db.count() == 0) {
             return "No task found, use:\n"
                     + "\t<todo     [title]> \n"
                     + "\t<deadline [title] \\by   [date]> \n"
@@ -70,8 +73,39 @@ public class Duke {
 
         StringBuilder sb = new StringBuilder();
         sb.append("Here are the tasks in your list:\n");
-        for (int i = 0; i < db.count(); i++) {
-            sb.append(String.format("\t%d. %s\n", i + 1, db.getAllTask().get(i)));
+        sb.append(printList(db.getAllTask()));
+        return sb.toString();
+    }
+
+    private String findTaskByDate(String date) {
+        LocalDateTime key = DateUtil.toLocalDateTime(date);
+
+        List<Task> filtered = db.getAllTask().stream().filter(task -> {
+                if (task instanceof Deadline) {
+                    Deadline d = (Deadline) task;
+                    if (d.getBy().equals(key)) {
+                        return true;
+                    }
+                }
+                if (task instanceof Event) {
+                    Event e = (Event) task;
+                    if (e.getFrom().equals(key)) {
+                        return true;
+                    }
+                }
+                return false;
+            }).toList();
+
+            StringBuilder sb = new StringBuilder();
+            sb.append("Here are the tasks in your list happening on ["+ DateUtil.dateToString(key) +"]:\n");
+            sb.append(printList(filtered));
+            return sb.toString();
+    }
+
+    private String printList(List<Task> list) {
+        StringBuilder sb = new StringBuilder();
+        for (int i = 0; i < list.size(); i++) {
+            sb.append(String.format("\t%d. %s\n", i + 1, list.get(i)));
         }
         return sb.toString();
     }
@@ -150,6 +184,8 @@ public class Duke {
                 return unMarkTask(dp.getTaskId());
             case DELETE:
                 return deleteTask(dp.getTaskId());
+            case DATE:
+                return findTaskByDate(dp.getOp1());
 
             // commands with special args
             case TODO:

@@ -8,5 +8,6 @@ public class Message {
     public final static String EXCEPTION_INVALID_TODO_CMD = "The description of a todo cannot be empty.";
     public final static String EXCEPTION_INVALID_EVENT_CMD = "Invalid event command format.";
     public final static String EXCEPTION_INVALID_DEADLINE_CMD = "Invalid deadline command format.";
-    public static final String EXCEPTION_INVALID_TASK_TYPE = "Invalid task type, please verify data file.";
+    public final static String EXCEPTION_INVALID_TASK_TYPE = "Invalid task type, please verify data file.";
+    public final static String EXCEPTION_INVALID_DATE_CMD = "Invalid date command format.";
 }

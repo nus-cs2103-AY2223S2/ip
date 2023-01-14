@@ -14,6 +14,7 @@ public class DateUtil {
         .appendOptional(DateTimeFormatter.ISO_LOCAL_DATE_TIME)
         .appendOptional(DateTimeFormatter.ofPattern("d/MM/yyyy"))
         .appendOptional(DateTimeFormatter.ofPattern("d/MM/yyyy HHmm"))
+        .appendOptional(DateTimeFormatter.ofPattern("MMM d yyyy H:m"))
         .toFormatter();
 
     //Solution below adapted from https://stackoverflow.com/a/48280447

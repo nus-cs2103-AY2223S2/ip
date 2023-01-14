@@ -13,6 +13,7 @@ import duke.task.Deadline;
 import duke.task.Event;
 import duke.task.Task;
 import duke.task.Todo;
+import utils.DateUtil;
 
 public class DukeParser {
     private DukeCommand command;
@@ -130,7 +131,10 @@ public class DukeParser {
                     if (ops.length > 2) {
                         throw new IllegalDukeCommandArgumentException(Message.EXCEPTION_NOSUCH_COMMAND);
                     }
+                    // for commands that consumes int args
                     dp.setTaskId(Integer.parseInt(ops[1]));
+                    // for commands that consumes string args
+                    dp.setOp1(ops[1]);
             }
             return dp;
         } catch (NumberFormatException e) {
@@ -202,9 +206,10 @@ public class DukeParser {
             case TODO:
                 return new Todo(dp.getTitle(), dp.getIsDone());
             case DEADLINE:
-                return new Deadline(dp.getTitle(), dp.getIsDone(), dp.getOp1());
+                return new Deadline(dp.getTitle(), dp.getIsDone(), DateUtil.toLocalDateTime(dp.getOp1()));
             case EVENT:
-                return new Event(dp.getTitle(), dp.getIsDone(), dp.getOp1(), dp.getOp2());
+                return new Event(dp.getTitle(), dp.getIsDone(), DateUtil.toLocalDateTime(dp.getOp1()),
+                        DateUtil.toLocalDateTime(dp.getOp2()));
             default:
                 throw new InvalidTaskTypeException(Message.EXCEPTION_INVALID_TASK_TYPE);
         }
