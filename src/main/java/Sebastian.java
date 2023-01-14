@@ -1,6 +1,5 @@
-import SebastianExceptions.IllegalInstructionException;
-import SebastianExceptions.InputFormatMismacthException;
-import SebastianExceptions.TaskNotExistException;
+import SebastianExceptions.*;
+import Utilities.Utilities;
 
 import java.util.Scanner;
 
@@ -30,110 +29,107 @@ public class Sebastian {
                 Utilities.space() + "Now you have " + this.tasks.getTotalTasks() + " tasks in the list";
     }
 
-    private String addTodo(String instruction) throws InputFormatMismacthException{
+    private String addTodo(String instruction) throws LackOfArgumentException, TodoMismatchException{
         String[] insArr = instruction.split(" ");
         if(insArr.length == 1) {
-            throw new InputFormatMismacthException("The description of a todo cannot be empty.");
+            throw new LackOfArgumentException();
         } else {
             String task = instruction.substring(5);
             return this.addTask(this.tasks.addTodo(task));
         }
     }
 
-    private String addDeadline(String instruction) throws InputFormatMismacthException{
+    private String addDeadline(String instruction) throws LackOfArgumentException, DeadlineFormatMismatchException{
         String[] insArr = instruction.split(" ");
         if(insArr.length == 1) {
-            throw new InputFormatMismacthException("The description of a deadline cannot be empty.");
+            throw new LackOfArgumentException();
         } else {
             String deadline = instruction.substring(9);
             String[] task = deadline.split("/by");
             if(task.length != 2) {
-                throw new InputFormatMismacthException(
-                        "Please specify a deadline in the following format:" + "\n" +
-                                Utilities.space() + "deadline [deadline] /by [end_time]"
-                );
+                throw new DeadlineFormatMismatchException();
             } else {
                 return this.addTask(this.tasks.addDeadline(task[0], task[1].trim()));
             }
         }
     }
 
-    private String addEvent(String instruction) throws InputFormatMismacthException{
+    private String addEvent(String instruction) throws EventFormatMismatchException{
         String[] insArr = instruction.split(" ");
         if(insArr.length == 1) {
-            throw new InputFormatMismacthException("The description of an event cannot be empty.");
+            throw new LackOfArgumentException();
         } else {
             String event = instruction.substring(6);
             String[] task = event.split("/from|/to");
             if(task.length!=3) {
-                throw new InputFormatMismacthException(
-                        "Please specify a deadline in the following format: " + "\n" +
-                                Utilities.space() + "event [event] /from [start_time] /to [end_time]"
-                );
+                throw new EventFormatMismatchException();
             } else {
                 return this.addTask(this.tasks.addEvent(task[0],task[1].trim(), task[2].trim()));
             }
         }
     }
 
-    private String markTask(String instruction) throws InputFormatMismacthException, TaskNotExistException{
+    private String markTask(String instruction) throws LackOfArgumentException, InstructionFormatException, TaskNotExistException{
         String[] insArr = instruction.split(" ");
-        if(insArr.length == 2) {
+        if(insArr.length == 1) {
+            throw new LackOfArgumentException();
+        }
+        else if(insArr.length == 2) {
             try {
                 int taskIndex = Integer.parseInt(insArr[1]);
                 return  Utilities.space()+  "Well Done. I have marked this task as done: " + "\n" +
-                        Utilities.space() + this.tasks.markTaskAtIndex(taskIndex);
+                         Utilities.space() + Utilities.space() + this.tasks.markTaskAtIndex(taskIndex);
             } catch (NumberFormatException e) {
-                throw new InputFormatMismacthException("Please enter the index of the task you wish to mark");
+                throw new InstructionFormatException("mark");
             } catch (IndexOutOfBoundsException e) {
                 throw new TaskNotExistException();
             }
-        } else {
-            throw new InputFormatMismacthException(
-                    "Please specify the task you wish to mark in the following format:" + "\n" +
-                            Utilities.space() + "mark [task index]"
-            );
+        }
+        else {
+            throw new InstructionFormatException("mark");
         }
     }
 
-    private String unmarkTask(String instruction) throws InputFormatMismacthException, TaskNotExistException{
+    private String unmarkTask(String instruction) throws LackOfArgumentException, InstructionFormatException, TaskNotExistException{
         String[] insArr = instruction.split(" ");
-        if(insArr.length == 2) {
+        if(insArr.length == 1) {
+            throw new LackOfArgumentException();
+        }
+        else if(insArr.length == 2) {
             try {
                 int taskIndex = Integer.parseInt(insArr[1]);
                 return Utilities.space() + "No problem, I have unmarked this task: " + "\n" +
-                        Utilities.space() + this.tasks.unmarkTaskAtIndex(taskIndex);
+                        Utilities.space() + Utilities.space() + this.tasks.unmarkTaskAtIndex(taskIndex);
             } catch (NumberFormatException e) {
-                throw new InputFormatMismacthException("Please enter the index of the task you wish to unmark");
+                throw new InstructionFormatException("unmark");
             } catch (IndexOutOfBoundsException e) {
                 throw new TaskNotExistException();
             }
-        } else {
-            throw new InputFormatMismacthException(
-                    "Please specify the task you wish to mark in the following format:" + "\n" +
-                           Utilities.space() + "unmark [task index]"
-            );
+        }
+        else {
+            throw new InstructionFormatException("unmark");
         }
     }
 
-    private String deleteTask(String instruction) throws InputFormatMismacthException, TaskNotExistException{
+    private String deleteTask(String instruction) throws LackOfArgumentException, InstructionFormatException, TaskNotExistException{
         String[] insArr = instruction.split(" ");
-        if(insArr.length == 2) {
+        if(insArr.length == 1) {
+            throw new LackOfArgumentException();
+        }
+        else if(insArr.length == 2) {
             try {
                 int taskIndex = Integer.parseInt(insArr[1]);
                 return Utilities.space() + "Noted. I have deleted this task: " + "\n" +
-                        Utilities.space() + this.tasks.deleteTaskAtIndex(taskIndex) + "\n" +
+                        Utilities.space() + Utilities.space() + this.tasks.deleteTaskAtIndex(taskIndex) + "\n" +
                         Utilities.space() + "Now your have " + this.tasks.getTotalTasks() + " tasks in the list";
             } catch (NumberFormatException e) {
-                throw new InputFormatMismacthException("Please enter the index of the task you wish to unmark");
+                throw new InstructionFormatException("delete");
             } catch (IndexOutOfBoundsException e) {
                 throw new TaskNotExistException();
             }
-        } else {
-            throw new InputFormatMismacthException(
-                    "Please specify the task you wish to delete in the following format:" + "\n" +
-                            Utilities.space() + "delete [task index]"
-            );
+        }
+        else {
+            throw new InstructionFormatException("delete");
         }
     }
 
@@ -186,7 +182,7 @@ public class Sebastian {
             try {
                 sebastian.onDuty();
                 flag = false;
-            } catch (IllegalInstructionException | TaskNotExistException | InputFormatMismacthException e) {
+            } catch (IllegalInstructionException | TaskNotExistException | InputFormatMismatchException e) {
                 Utilities.printFormattedString(Utilities.space() + e.getMessage());
             }
         }

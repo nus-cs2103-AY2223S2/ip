@@ -1,3 +1,5 @@
+package Utilities;
+
 public class Utilities {
     public static void lineBreak(){
         String line = "-";
