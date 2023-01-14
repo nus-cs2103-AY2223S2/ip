@@ -1,4 +1,6 @@
 import java.util.Scanner;
+import java.util.List;
+import java.util.ArrayList;
 
 public class Duke {
     public static void main(String[] args) {
@@ -8,12 +10,22 @@ public class Duke {
         System.out.println(greet);
 
         // Take user input
+        List<String> taskList = new ArrayList<>();
         Scanner scanner = new Scanner(System.in);
         String command = scanner.nextLine();
 
         // If input != bye, echo input
         while (!command.equals("bye")) {
-            System.out.println(command);
+            if (command.equals("list")) {
+                int taskCount = 1;
+                for(String str: taskList) {
+                    System.out.println(taskCount + ". " + str);
+                    taskCount++;
+                }
+            } else {
+                System.out.println("added: " + command);
+                taskList.add(command);
+            }
             command = scanner.nextLine();
         }
 
