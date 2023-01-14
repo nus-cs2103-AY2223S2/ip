@@ -54,6 +54,22 @@ public class Duke {
                 System.out.println("Got it. I've added this task:");
                 System.out.println(task);
                 System.out.println("Now you have " + taskStore.size() + " tasks in the list.");
+            } else if (splitCommand[0].equals(deadlineCommand)) {
+                Task task = null;
+                for (int i = 1; i < splitCommand.length; i++) {
+                    if (splitCommand[i].equals(by)) {
+                        if (i + 1 < splitCommand.length) {
+                            String name = String.join(" ", Arrays.copyOfRange(splitCommand, 1, i));
+                            String deadline = String.join(" ", Arrays.copyOfRange(splitCommand, i + 1, splitCommand.length));
+                            task = new Deadline(name, deadline);
+                        }
+                        break;
+                    }
+                }
+                taskStore.add(task);
+                System.out.println("Got it. I've added this task:");
+                System.out.println(task);
+                System.out.println("Now you have " + taskStore.size() + " tasks in the list.");
             }
             System.out.println(separator);
         }
