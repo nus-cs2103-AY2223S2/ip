@@ -11,7 +11,13 @@ public class Dude {
         while(true) {
             String command = sc.nextLine();
             if (!command.equals("")) {
-                getCommands(command);
+                try {
+                    getCommands(command);
+                } catch (DudeInvalidCommandException e) {
+                    showError("What command is that even sia?");
+                } catch (DudeMissingCommandException e) {
+                    showError("Eh you forget to put your details for the task ah?");
+                }
                 if (command.equals("bye")) {
                     break;
                 }
@@ -27,62 +33,62 @@ public class Dude {
                 " |_____/ \\__,_|\\__,_|\\___|\n";
 
         System.out.println(logo);
-        System.out.println(" ____________________________________________________________");
+        System.out.println(" _______________________________________________________________________");
         System.out.println("\tYo! I'm dude");
         System.out.println("\tWhat you want me do for you?");
-        System.out.println(" ____________________________________________________________\n");
+        System.out.println(" _______________________________________________________________________\n");
     }
 
-    public static void getCommands(String command) {
+    public static void getCommands(String command) throws DudeInvalidCommandException, DudeMissingCommandException {
         String [] cmd = command.split(" ", 2);
         switch(cmd[0]) {
             case "list":
-                System.out.println(" ____________________________________________________________");
+                System.out.println(" _______________________________________________________________________");
                 getList();
-                System.out.println(" ____________________________________________________________\n");
-                break;
-            case "blah":
-                System.out.println(" ____________________________________________________________");
-                System.out.println("\tblah");
-                System.out.println(" ____________________________________________________________\n");
+                System.out.println(" _______________________________________________________________________\n");
                 break;
             case "bye":
-                System.out.println(" ____________________________________________________________");
+                System.out.println(" _______________________________________________________________________");
                 System.out.println("\tCiaos! See you next time.");
-                System.out.println(" ____________________________________________________________\n");
+                System.out.println(" _______________________________________________________________________\n");
                 break;
             case "mark":
-                System.out.println(" ____________________________________________________________");
+                System.out.println(" _______________________________________________________________________");
                 markTask(Integer.parseInt(cmd[1]) - 1);
-                System.out.println(" ____________________________________________________________\n");
+                System.out.println(" _______________________________________________________________________\n");
                 break;
             case "unmark":
-                System.out.println(" ____________________________________________________________");
+                System.out.println(" _______________________________________________________________________");
                 unmarkTask(Integer.parseInt(cmd[1]) - 1);
-                System.out.println(" ____________________________________________________________\n");
+                System.out.println(" _______________________________________________________________________\n");
                 break;
             case "todo":
-                System.out.println(" ____________________________________________________________");
+                if (cmd.length < 2) throw new DudeMissingCommandException();
+                System.out.println(" _______________________________________________________________________");
                 System.out.println("\tGot it. I've added this task:");
                 addTask("todo", cmd[1]);
-                System.out.println(" ____________________________________________________________\n");
+                System.out.println(" _______________________________________________________________________\n");
                 break;
             case "deadline":
-                System.out.println(" ____________________________________________________________");
+                if (cmd.length < 2) throw new DudeMissingCommandException();
+                System.out.println(" _______________________________________________________________________");
                 System.out.println("\tGot it. I've added this task:");
                 addTask("deadline", cmd[1]);
-                System.out.println(" ____________________________________________________________\n");
+                System.out.println(" _______________________________________________________________________\n");
                 break;
             case "event":
-                System.out.println(" ____________________________________________________________");
+                if (cmd.length < 2) throw new DudeMissingCommandException();
+                System.out.println(" _______________________________________________________________________");
                 System.out.println("\tGot it. I've added this task:");
                 addTask("event", cmd[1]);
-                System.out.println(" ____________________________________________________________\n");
+                System.out.println(" _______________________________________________________________________\n");
                 break;
+            default:
+                throw new DudeInvalidCommandException();
         }
     }
 
-    public static void addTask(String type, String description) {
+    public static void addTask(String type, String description) throws DudeMissingCommandException {
         Task task = new Task("");
         String[] format;
         switch(type){
@@ -91,11 +97,14 @@ public class Dude {
                 break;
             case "deadline":
                 format = description.split(" /by ");
+                if (format.length < 2) throw new DudeMissingCommandException();
                 task = new Deadline(format[0], format[1]);
                 break;
             case "event":
                 format = description.split(" /from ");
+                if (format.length < 2) throw new DudeMissingCommandException();
                 String[] details = format[1].split("/to ");
+                if (details.length < 2) throw new DudeMissingCommandException();
                 task = new Event(format[0], details[0], details[1]);
                 break;
         }
@@ -137,6 +146,12 @@ public class Dude {
         } else {
             System.out.println("\tUhh... Where got this task for me to unmark?");
         }
+    }
+
+    public static void showError(String error) {
+        System.out.println(" _______________________________________________________________________");
+        System.out.println("\tERROR: " + error);
+        System.out.println(" _______________________________________________________________________\n");
     }
 
 }
