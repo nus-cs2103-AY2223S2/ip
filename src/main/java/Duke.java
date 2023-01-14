@@ -1,7 +1,12 @@
 import java.util.NoSuchElementException;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeFormatterBuilder;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
+
+import utils.DateUtil;
 
 /**
  * Duke agent that knows how to manage a todo list.
@@ -18,7 +23,7 @@ public class Duke {
 
     private List<Task> tList;
     private boolean isActive;
-
+    
     /**
      * Default constructor.
      */
@@ -110,11 +115,11 @@ public class Duke {
     }
 
     private String addEvent(String title, String from, String to) {
-        return addTask(new Event(title, from, to));
+        return addTask(new Event(title, DateUtil.toLocalDateTime(from), DateUtil.toLocalDateTime(to)));
     }
 
     private String addDeadline(String title, String by) {
-        return addTask(new Deadline(title, by));
+        return addTask(new Deadline(title, DateUtil.toLocalDateTime(by)));
     }
 
     private String deleteTask(int idx) throws IllegalDukeTaskAccessException {
@@ -188,7 +193,7 @@ public class Duke {
                 case DEADLINE:
                     options = input[1].split(" /[a-z]*[^ ] ");
 
-                    if (options.length != 3) {
+                    if (options.length != 2) {
                         throw new IllegalDukeCommandArgumentException(EXCEPTION_INVALID_DEADLINE_CMD);
                     }
 
