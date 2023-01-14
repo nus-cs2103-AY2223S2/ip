@@ -1,4 +1,5 @@
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Scanner;
 
@@ -11,9 +12,11 @@ public class Shao {
         System.out.println("\t" + s);
     }
 
-    public static void printAddedInput(String s) {
+    public static void printAddedTask(Task task, int tasksCnt) {
         printRowLine();
-        println(String.format("added: %s", s));
+        println("Noted. I've added this task:");
+        println("  " + task.toString());
+        println(String.format("You have %d %s in your list currently.", tasksCnt, tasksCnt > 1 ? "tasks" : "task"));
         printRowLine();
     }
 
@@ -36,7 +39,7 @@ public class Shao {
         println("Here are the tasks in your list: ");
         for (int i = 0; i < items.size(); i++) {
             Task curTask = items.get(i);
-            println(String.format("%d.[%s] %s", i + 1, curTask.getStatusIcon(), curTask.description));
+            println(String.format("%d.%s", i + 1, curTask));
         }
         printRowLine();
     }
@@ -68,6 +71,54 @@ public class Shao {
         printUnmarkedTask(task);
     }
 
+    public static String getBy(String input) {
+        String[] inputArr = input.split(" ");
+        int l = inputArr.length;
+        for (int i = 0; i < l; i++) {
+            if (i < l - 1 && inputArr[i].equals("/by"))
+                return String.join(" ", Arrays.copyOfRange(inputArr, i + 1, l));
+        }
+        return "";
+    }
+
+    public static String[] getFromTo(String input) {
+        String[] inputArr = input.split(" ");
+        int l = inputArr.length;
+        int fromStartIdx = -1, fromEndIdx = -1, toStartIdx = -1;
+        String from = "";
+        String to = "";
+        for (int i = 0; i < l; i++) {
+            if (i < l - 1) {
+                if (inputArr[i].equals("/from")) {
+                    fromStartIdx = i + 1;
+                }
+                if (inputArr[i].equals("/to")) {
+                    fromEndIdx = i;
+                    toStartIdx = i + 1;
+                }
+            }
+        }
+        if (fromStartIdx > -1 && fromEndIdx > -1) {
+            from = String.join(" ", Arrays.copyOfRange(inputArr, fromStartIdx, fromEndIdx));
+        }
+        if (toStartIdx > -1) {
+            to = String.join(" ", Arrays.copyOfRange(inputArr, toStartIdx, l));
+        }
+        return new String[] { from, to };
+    }
+
+    public static String trimDate(String input) {
+        String[] inputArr = input.split(" ");
+        StringBuilder sb = new StringBuilder();
+        for (String s : inputArr) {
+            if (s.contains("/")) {
+                return sb.toString().trim();
+            }
+            sb.append(s + " ");
+        }
+        return sb.toString().trim();
+    }
+
     public static void main(String[] args) {
         Scanner scan = new Scanner(System.in);
         List<Task> items = new ArrayList<>();
@@ -76,10 +127,11 @@ public class Shao {
 
         // Prompting
         while (true) {
-            String input = scan.nextLine().trim().toLowerCase();
-            if (input.isBlank())
+            String input = scan.nextLine().trim();
+            String inputLower = input.toLowerCase();
+            if (inputLower.isBlank())
                 continue;
-            switch (input) {
+            switch (inputLower) {
                 case "bye":
                     exitUser();
                     scan.close();
@@ -88,13 +140,19 @@ public class Shao {
                     printList(items);
                     break;
                 default:
-                    if (input.startsWith("mark")) {
-                        markItem(input.split(" ")[1], items);
-                    } else if (input.startsWith("unmark")) {
-                        unmarkItem(input.split(" ")[1], items);
+                    if (inputLower.startsWith("mark")) {
+                        markItem(inputLower.split(" ")[1], items);
+                    } else if (inputLower.startsWith("unmark")) {
+                        unmarkItem(inputLower.split(" ")[1], items);
                     } else {
-                        items.add(new Task(input));
-                        printAddedInput(input);
+                        Task newTask = inputLower.startsWith("todo")
+                                ? new Todo(input)
+                                : inputLower.startsWith("deadline")
+                                        ? new Deadline(trimDate(input), getBy(input))
+                                        : new Event(trimDate(input), getFromTo(input));
+
+                        items.add(newTask);
+                        printAddedTask(newTask, items.size());
                     }
                     break;
 
