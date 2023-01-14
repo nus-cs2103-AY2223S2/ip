@@ -1,4 +1,3 @@
-import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Duke {
@@ -14,30 +13,23 @@ public class Duke {
         System.out.println("    What can I do for you?");
         System.out.println(divider);
         Scanner sc = new Scanner(System.in);
-        ArrayList<Task> tasks = new ArrayList<>();
+        TaskTracker tasks = new TaskTracker();
         while (true) {
             String command = sc.nextLine();
             System.out.println(divider);
             boolean addTask = true;
             if (command.equals("list")) {
-                System.out.println(divider);
-                int counter = 1;
-                for (Task t : tasks) {
-                    System.out.println(counter + ". " + t.toString());
-                    counter++;
-                }
+                tasks.listTasks();
                 addTask = false;
-            } else if (command.matches("^mark \\d")) {
+            } else if (command.matches("^mark \\d")) { // could replace with startsWith("mark")
                 String[] input = command.split(" ");
                 int taskNumber = Integer.parseInt(input[1]) - 1;
-                tasks.get(taskNumber).setCompleted();
-                System.out.println("    Nice! I've marked this task as done:\n" + "   " + tasks.get(taskNumber));
+                tasks.markTaskCompletion(taskNumber, true);
                 addTask = false;
             } else if (command.matches("^unmark \\d")) {
                 String[] input = command.split(" ");
                 int taskNumber = Integer.parseInt(input[1]) - 1;
-                tasks.get(taskNumber).setUncompleted();
-                System.out.println("    OK, I've marked this task as not done yet:\n" + "   " + tasks.get(taskNumber));
+                tasks.markTaskCompletion(taskNumber, false);
                 addTask = false;
             } else if (command.equals("bye")) {
                 System.out.println("    Bye. Hope to see you again soon!");
@@ -46,8 +38,16 @@ public class Duke {
                 return;
             }
             if (addTask) {
-                tasks.add(new Task(command));
-                System.out.println("    added: " + command);
+                if (command.startsWith("event")) {
+                    Event e = Event.createEvent(command);
+                    tasks.addTask(e);
+                } else if (command.startsWith("deadline")) {
+                    DeadlineTask d = DeadlineTask.createDeadlineTask(command);
+                    tasks.addTask(d);
+                } else if (command.startsWith("todo")) {
+                    ToDo t = ToDo.createToDo(command);
+                    tasks.addTask(t);
+                }
             }
             System.out.println(divider);
         }
