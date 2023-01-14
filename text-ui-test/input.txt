@@ -8,4 +8,7 @@ list
 mark 1
 unmark -1
 event party
+delete 0
+delete 2
+list
 bye

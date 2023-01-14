@@ -31,46 +31,115 @@ public class Duke {
         } else if (curr_in.equals("list")) {
             print();
         } else if (curr_title[0].equals("mark")) {
-            try {
-                mark(Integer.parseInt(curr_title[1]));
-            } catch (AlreadyMarkedException e) {
-                throw new DukeException(e.getMessage());
-            } catch (Exception e) {
-                throw new DukeException("Please give a valid index between 1 and " + items.size());
-            }
+            mark(curr_title);
         } else if (curr_title[0].equals("unmark")) {
-            try {
-                unmark(Integer.parseInt(curr_title[1]));
-            } catch (AlreadyUnmarkedException e) {
-                throw new DukeException(e.getMessage());
-            } catch (Exception e) {
-                throw new DukeException("Please give a valid index between 1 and " + items.size());
-            }
+            unmark(curr_title);
         } else if (curr_title[0].equals("todo")) {
-            String todo = curr[0].substring(5).trim();
-            if (todo.isBlank()) {
-                throw new DukeException("You need something to do");
-            } else { add(new ToDo(todo)); }
+            addToDo(curr);
         } else if (curr_title[0].equals("deadline")) {
-            try {
-                String descr = curr[0].substring(9).trim();
-                String by = curr[1].substring(3).trim();
-                add(new Deadline(descr, by));
-            } catch (Exception e) {
-                throw new DukeException("You need to fill in a deadline with a description and by date");
-            }
+            addDeadline(curr);
         } else if (curr_title[0].equals("event")) {
-            try {
-                String descr = curr[0].substring(6).trim();
-                String from = curr[1].substring(5).trim();
-                String to = curr[2].substring(3).trim();
-                add(new Event(descr, from, to));
-            } catch (Exception e) {
-                throw new DukeException("You need to fill in an event with a description, from and to timing");
-            }
+            addEvent(curr);
+        } else if (curr_title[0].equals("delete")) {
+            deleteTask(curr_title);
         } else {
             throw new DukeException("Hmmm, I don't understand what you want to do");
         }
+    }
+
+    private static void addEvent(String[] curr) throws DukeException {
+        try {
+            String descr = curr[0].substring(6).trim();
+            String from = curr[1].substring(5).trim();
+            String to = curr[2].substring(3).trim();
+            add(new Event(descr, from, to));
+        } catch (Exception e) {
+            throw new DukeException("You need to fill in an event with a description, from and to timing");
+        }
+    }
+
+    private static void addDeadline(String[] curr) throws DukeException {
+        try {
+            String descr = curr[0].substring(9).trim();
+            String by = curr[1].substring(3).trim();
+            add(new Deadline(descr, by));
+        } catch (Exception e) {
+            throw new DukeException("You need to fill in a deadline with a description and by date");
+        }
+    }
+
+    private static void addToDo(String[] curr) throws DukeException {
+        String todo = curr[0].substring(5).trim();
+        if (todo.isBlank()) {
+            throw new DukeException("You need something to do");
+        } else { add(new ToDo(todo)); }
+    }
+
+    static void add(Task task) {
+        items.add(task);
+        System.out.println(line_break + "\t Adding the task:\n\t\t" + task +
+                "\n\t You now have " + items.size() + " task(s)." + line_break);
+    }
+
+    static void deleteTask(String[] curr_title) throws DukeException {
+        try {
+            int idx = Integer.parseInt(curr_title[1]) - 1;
+            if (idx >= items.size() || idx < 0) {
+                throw new DukeException();
+            } else {
+                System.out.println(line_break + "\t 1 less task! :)");
+                System.out.println("\t\t" + items.get(idx) + "\n\tNow you have " + (items.size() - 1) + " tasks left!" + line_break);
+                items.remove(idx);
+            }
+        } catch (Exception e) {
+            throw new DukeException("Please give a valid index between 1 and " + items.size());
+        }
+    }
+
+    static void mark(String[] curr_title) throws DukeException {
+        try {
+            int idx = Integer.parseInt(curr_title[1]) - 1;
+            if (items.get(idx).isMarked()) {
+                throw new AlreadyMarkedException();
+            } else {
+                items.get(idx).mark();
+                System.out.println(line_break + "\t Great job completing your task! :)");
+                System.out.println("\t\t" + items.get(idx) + line_break);
+            }
+        } catch (AlreadyMarkedException e) {
+            throw new AlreadyMarkedException("Already Marked!");
+        } catch (Exception e) {
+            throw new DukeException("Please give a valid input with index between 1 and " + items.size());
+        }
+    }
+
+    static void unmark(String[] curr_title) throws DukeException {
+        try {
+            int idx = Integer.parseInt(curr_title[1]) - 1;
+            if (!items.get(idx).isMarked()) {
+                throw new AlreadyUnmarkedException();
+            } else {
+                items.get(idx).unmark();
+                System.out.println(line_break + "\t I see you want to redo this task...");
+                System.out.println("\t\t" + items.get(idx) + line_break);
+            }
+        } catch (AlreadyUnmarkedException e) {
+            throw new AlreadyUnmarkedException("Already unmarked!");
+        } catch (Exception e) {
+            throw new DukeException("Please give a valid input with index between 1 and " + items.size());
+        }
+    }
+
+    /*
+     * prints out list of items
+     */
+    static void print() {
+        System.out.println(line_break + "\tHere are all your tasks, good luck!");
+        for (int i = 0; i < items.size(); i++) {
+            Task item = items.get(i);
+            System.out.println("\t " + (i + 1) + ". " + item);
+        }
+        System.out.println(line_break);
     }
 
     private static void greet() {
@@ -86,45 +155,6 @@ public class Duke {
         System.out.println("\t What can I do for you?" + line_break);
     }
 
-    static void add(Task task) {
-        items.add(task);
-        System.out.println(line_break + "\t Adding the task:\n\t\t" + task +
-                            "\n\t You now have " + items.size() + " task(s)." + line_break);
-    }
-
-    static void mark(int idx) throws AlreadyMarkedException {
-        idx = idx - 1;
-        if (items.get(idx).isMarked()) {
-            throw new AlreadyMarkedException("Already Marked!");
-        } else {
-            items.get(idx).mark();
-            System.out.println(line_break + "\t Great job completing your task! :)");
-            System.out.println("\t\t" + items.get(idx) + line_break);
-        }
-    }
-
-    static void unmark(int idx) throws AlreadyUnmarkedException {
-        idx = idx - 1;
-        if (!items.get(idx).isMarked()) {
-            throw new AlreadyUnmarkedException("Already Unmarked!");
-        } else {
-            items.get(idx).unmark();
-            System.out.println(line_break + "\t I see you want to redo this task...");
-            System.out.println("\t\t" + items.get(idx) + line_break);
-        }
-    }
-
-    /*
-     * prints out list of items
-     */
-    static void print() {
-        System.out.println(line_break + "\tHere are all your tasks, good luck!");
-        for (int i = 0; i < items.size(); i++) {
-            Task item = items.get(i);
-            System.out.println("\t " + (i + 1) + ". " + item);
-        }
-        System.out.println(line_break);
-    }
 
     static void end() {
         System.out.println(line_break +
