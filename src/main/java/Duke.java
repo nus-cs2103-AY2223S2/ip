@@ -10,32 +10,33 @@ public class Duke {
         System.out.println(greet);
 
         // Take user input
-        List<String> taskList = new ArrayList<>();
-        Scanner scanner = new Scanner(System.in);
+        List<Task> taskList = new ArrayList<>();
+        Scanner sc = new Scanner(System.in);
 
-        while (scanner.hasNext()) {
-            String currCommand = scanner.nextLine();
+        while (sc.hasNext()) {
+            String currentTask = sc.nextLine();
 
             // Command for bye
-            if (currCommand.equals("bye")) {
+            if (currentTask.equals("bye")) {
                 String goodbye = "Bye. Hope to see you again soon!";
                 System.out.println(goodbye);
                 break;
             }
 
             // Command for list
-            else if (currCommand.equals("list")) {
+            else if (currentTask.equals("list")) {
+                System.out.println("Here are the tasks in your list:");
                 int taskCount = 1;
-                for(String str: taskList) {
-                    System.out.println(taskCount + ". " + str);
+                for(Task t: taskList) {
+                    System.out.println(taskCount + "." + t);
                     taskCount++;
                 }
             }
 
             // Add task command
             else {
-                System.out.println("added: " + currCommand);
-                taskList.add(currCommand);
+                System.out.println("added: " + currentTask);
+                taskList.add(new Task(currentTask));
             }
         }
     }
