@@ -1,3 +1,7 @@
+import SebastianExceptions.IllegalInstructionException;
+import SebastianExceptions.InputFormatMismacthException;
+import SebastianExceptions.TaskNotExistException;
+
 import java.util.Scanner;
 
 public class Sebastian {
@@ -26,53 +30,57 @@ public class Sebastian {
                 Utilities.space() + "Now you have " + this.tasks.getTotalTasks() + " tasks in the list";
     }
 
-    private String addTodo(String instruction) {
+    private String addTodo(String instruction) throws InputFormatMismacthException{
         String[] insArr = instruction.split(" ");
         if(insArr.length == 1) {
-            return Utilities.space() + "Pleas specify a todo";
+            throw new InputFormatMismacthException("The description of a todo cannot be empty.");
         } else {
             String task = instruction.substring(5);
             return this.addTask(this.tasks.addTodo(task));
         }
     }
 
-    private String addDeadline(String instruction) {
+    private String addDeadline(String instruction) throws InputFormatMismacthException{
         String[] insArr = instruction.split(" ");
         if(insArr.length == 1) {
-            return Utilities.space() + "Pleas specify a deadline";
+            throw new InputFormatMismacthException("The description of a deadline cannot be empty.");
         } else {
             String deadline = instruction.substring(9);
             String[] task = deadline.split("/by");
             if(task.length != 2) {
-                return Utilities.space() + "Please specify a deadline in the following format: " + "\n" +
-                        Utilities.space() + "deadline [deadline] /by [end_time]";
+                throw new InputFormatMismacthException(
+                        "Please specify a deadline in the following format:" + "\n" +
+                                Utilities.space() + "deadline [deadline] /by [end_time]"
+                );
             } else {
                 return this.addTask(this.tasks.addDeadline(task[0], task[1].trim()));
             }
         }
     }
 
-    private String addEvent(String instruction) {
+    private String addEvent(String instruction) throws InputFormatMismacthException{
         String[] insArr = instruction.split(" ");
         if(insArr.length == 1) {
-            return Utilities.space() + "Pleas specify a event";
+            throw new InputFormatMismacthException("The description of an event cannot be empty.");
         } else {
             String event = instruction.substring(6);
             String[] task = event.split("/from|/to");
             if(task.length!=3) {
-                return Utilities.space() + "Please specify a deadline in the following format: " + "\n" +
-                        Utilities.space() + "event [event] /from [start_time] /to [end_time]";
+                throw new InputFormatMismacthException(
+                        "Please specify a deadline in the following format: " + "\n" +
+                                Utilities.space() + "event [event] /from [start_time] /to [end_time]"
+                );
             } else {
                 return this.addTask(this.tasks.addEvent(task[0],task[1].trim(), task[2].trim()));
             }
         }
     }
 
-    public String showList(String instruction) {
+    private String showList(String instruction) {
         return Utilities.space() + "Here are the tasks in your list" + "\n" + this.tasks;
     }
 
-    public String markTask(String instruction) {
+    private String markTask(String instruction) throws InputFormatMismacthException, TaskNotExistException{
         String[] insArr = instruction.split(" ");
         if(insArr.length == 2) {
             try {
@@ -80,16 +88,19 @@ public class Sebastian {
                 return  Utilities.space()+  "Well Done. I have marked this task as done: " + "\n" +
                         Utilities.space() + this.tasks.markTaskAtIndex(taskIndex);
             } catch (NumberFormatException e) {
-                return "Please specify an integer";
+                throw new InputFormatMismacthException("Please enter the index of the task you wish to mark");
             } catch (IndexOutOfBoundsException e) {
-                return Utilities.space() + "Task does not exist";
+                throw new TaskNotExistException();
             }
         } else {
-            return "Plead specify a task to mark";
+            throw new InputFormatMismacthException(
+                    "Please specify the task you wish to mark in the following format:" + "\n" +
+                            Utilities.space() + "mark [task index]"
+            );
         }
     }
 
-    public String unmarkTask(String instruction) {
+    private String unmarkTask(String instruction) throws InputFormatMismacthException, IndexOutOfBoundsException{
         String[] insArr = instruction.split(" ");
         if(insArr.length == 2) {
             try {
@@ -97,56 +108,64 @@ public class Sebastian {
                 return Utilities.space() + "No problem, I have unmarked this task: " + "\n" +
                         Utilities.space() + this.tasks.unmarkTaskAtIndex(taskIndex);
             } catch (NumberFormatException e) {
-                return "Please specify an integer";
+                throw new InputFormatMismacthException("Please enter the index of the task you wish to unmark");
             } catch (IndexOutOfBoundsException e) {
-                return Utilities.space() + "Task does not exist";
+                throw new TaskNotExistException();
             }
         } else {
-            return "Plead specify a task to mark";
+            throw new InputFormatMismacthException(
+                    "Please specify the task you wish to mark in the following format:" + "\n" +
+                           Utilities.space() + "unmark [task index]"
+            );
+        }
+    }
+
+    private void onDuty() throws IllegalInstructionException{
+        Scanner scan = new Scanner(System.in);
+        String instruction = scan.nextLine();
+        String action = instruction.split(" ")[0];
+        String res;
+        while (!action.equals("bye")) {
+            switch (action) {
+                case "list":
+                    res = this.showList(instruction);
+                    break;
+                case "mark":
+                    res = this.markTask(instruction);
+                    break;
+                case "unmark":
+                    res = this.unmarkTask(instruction);
+                    break;
+                case "todo":
+                    res = this.addTodo(instruction);
+                    break;
+                case "deadline":
+                    res = this.addDeadline(instruction);
+                    break;
+                case "event":
+                    res = this.addEvent(instruction);
+                    break;
+                default:
+                    throw new IllegalInstructionException();
+            }
+            Utilities.printFormattedString(res);
+            instruction = scan.nextLine();
+            action = instruction.split(" ")[0];
         }
     }
 
     public static void main(String[] args) {
         Sebastian sebastian = new Sebastian();
         Utilities.printFormattedString(sebastian.greet());
-
-        // Read user input
-        Scanner scan = new Scanner(System.in);
-        String instruction = scan.nextLine();
-        String action = instruction.split(" ")[0];
-
-        // respond to different inputs
-        String res;
-        while(!action.equals("bye")) {
-            switch (action){
-                case "list":
-                    res = sebastian.showList(instruction);
-                    break;
-                case "mark":
-                    res = sebastian.markTask(instruction);
-                    break;
-                case "unmark":
-                    res = sebastian.unmarkTask(instruction);
-                    break;
-                case "todo":
-                    res = sebastian.addTodo(instruction);
-                    break;
-                case "deadline":
-                    res = sebastian.addDeadline(instruction);
-                    break;
-                case "event":
-                    res = sebastian.addEvent(instruction);
-                    break;
-                default:
-                    res = "Plead specify your instruction";
+        boolean flag = true;
+        while(flag){
+            try {
+                sebastian.onDuty();
+                flag = false;
+            } catch (IllegalInstructionException | TaskNotExistException | InputFormatMismacthException e) {
+                Utilities.printFormattedString(Utilities.space() + e.getMessage());
             }
-            Utilities.printFormattedString(res);
-
-            // read in the next input
-            instruction = scan.nextLine();
-            action = instruction.split(" ")[0];
         }
-
         Utilities.printFormattedString(sebastian.exit());
     }
 }
