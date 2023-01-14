@@ -2,7 +2,7 @@ import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Duke {
-    static String line_break = " \n\t ^-^-^-^-^-^-^-^-^-^-^-^-^-^-^-^-^-^-^-^-^-^-^-^-^-^-^-^-^-^-^ \n";
+    static String line_break = "\n\t ^-^-^-^-^-^-^-^-^-^-^-^-^-^-^-^-^-^-^-^-^-^-^-^-^-^-^-^-^-^-^\n";
     static ArrayList<Task> items;
     public static void main(String[] args) {
         Scanner usr_in = new Scanner(System.in);
@@ -63,7 +63,7 @@ public class Duke {
 
     static void add(Task task) {
         items.add(task);
-        System.out.println(line_break + "\t Adding the task: \n\t\t" + task +
+        System.out.println(line_break + "\t Adding the task:\n\t\t" + task +
                             "\n\t You now have " + items.size() + " task(s)." + line_break);
     }
 
@@ -95,7 +95,7 @@ public class Duke {
 
     static void end() {
         System.out.println(line_break +
-                        "\t Bye. See you next time! \n" +
+                        "\t Bye. See you next time! :)\n" +
                         line_break);
     }
 }
