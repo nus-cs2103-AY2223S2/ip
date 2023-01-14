@@ -22,11 +22,16 @@ public class Duke {
         System.out.println(LINE);
     }
 
+    private static String countTasks() {
+        int n = addedTasks.size();
+        return String.format("%d task%s", n, n < 2 ? "" : "s");
+    }
+
     private static void addTask(Task task) {
         addedTasks.add(task);
-        String displayedMsg = String.format(
-                "Got it. I've added this task:\n  %s\nNow you have %d tasks in the list.", task,
-                addedTasks.size());
+        String displayedMsg =
+                String.format("Got it. I've added this task:\n  %s\nNow you have %s in the list.",
+                        task, countTasks());
         echo(displayedMsg);
     }
 
@@ -51,6 +56,15 @@ public class Duke {
         echo("OK, I've marked this task as not done yet:\n  " + t);
     }
 
+    private static void deleteTask(int index) {
+        Task t = addedTasks.remove(index - 1);
+        String displayedMsg =
+                String.format("Noted. I've removed this task:\n  %s\nNow you have %s in the list",
+                        t, countTasks());
+        echo(displayedMsg);
+
+    }
+
     private static void exit() {
         isDone = true;
         echo("Bye. Hope to see you again soon!");
@@ -58,7 +72,7 @@ public class Duke {
 
     private static enum DukeCommand {
         BYE("bye"), LIST("list"), TODO("todo"), DEADLINE("deadline"), EVENT("event"), MARK(
-                "mark"), UNMARK("unmark");
+                "mark"), UNMARK("unmark"), DELETE("delete");
 
         private final String keyword;
 
@@ -87,7 +101,11 @@ public class Duke {
         private static String munchUntil(String end) {
             int endIndex = input.indexOf(end, offset);
             if (endIndex < 0) {
-                throw new DukeException("Parse failled, no " + end + " in " + input);
+                /**
+                 * Parser should not throw an error. Instead, we will return a special value,
+                 * representing failure.
+                 */
+                return null;
             }
             String view = input.substring(offset, endIndex);
             offset = endIndex + end.length();
@@ -137,6 +155,9 @@ public class Duke {
                 case UNMARK:
                     args.add(munchUtilEnd());
                     break;
+                case DELETE:
+                    args.add(munchUtilEnd());
+                    break;
             }
             return args.toArray(String[]::new);
         }
@@ -165,6 +186,9 @@ public class Duke {
             case UNMARK:
                 markTaskAsNotDone(Integer.parseInt(args[0]));
                 break;
+            case DELETE:
+                deleteTask(Integer.parseInt(args[0]));
+                break;
         }
     }
 
@@ -179,6 +203,7 @@ public class Duke {
                     String[] cmdArgs = DukeCommandParser.parseArgs(cmd);
                     executeDukeCommand(cmd, cmdArgs);
                 } catch (DukeException de) {
+                    // More exceptions will be handled later.
                     echo(de.getMessage());
                 }
             } while (!isDone);
