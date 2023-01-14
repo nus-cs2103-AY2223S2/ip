@@ -1,6 +1,7 @@
 package duke;
 
 import java.time.LocalDateTime;
+import java.time.format.DateTimeParseException;
 import java.util.List;
 import java.util.Scanner;
 
@@ -77,19 +78,19 @@ public class Duke {
         return sb.toString();
     }
 
-    private String findTaskByDate(String date) {
+    private String findTaskByDate(String date) throws DateTimeParseException {
         LocalDateTime key = DateUtil.toLocalDateTime(date);
 
         List<Task> filtered = db.getAllTask().stream().filter(task -> {
                 if (task instanceof Deadline) {
                     Deadline d = (Deadline) task;
-                    if (d.getBy().equals(key)) {
+                    if (d.getBy().toLocalDate().equals(key.toLocalDate())) {
                         return true;
                     }
                 }
                 if (task instanceof Event) {
                     Event e = (Event) task;
-                    if (e.getFrom().equals(key)) {
+                    if (e.getFrom().toLocalDate().equals(key.toLocalDate())) {
                         return true;
                     }
                 }
@@ -185,7 +186,11 @@ public class Duke {
             case DELETE:
                 return deleteTask(dp.getTaskId());
             case DATE:
-                return findTaskByDate(dp.getOp1());
+                try {
+                    return findTaskByDate(dp.getOp1());
+                } catch (DateTimeParseException e) {
+                    throw new IllegalDukeCommandArgumentException(Message.EXCEPTION_INVALID_DATE_FORMAT);
+                }
 
             // commands with special args
             case TODO:
@@ -194,7 +199,9 @@ public class Duke {
                 try {
                     return addTask(DukeParser.toTask(dp));
                 } catch (InvalidTaskTypeException e) {
-                    e.printStackTrace();
+                    throw new NoSuchDukeCommandException(Message.EXCEPTION_NOSUCH_COMMAND);
+                }  catch (DateTimeParseException e) {
+                    throw new IllegalDukeCommandArgumentException(Message.EXCEPTION_INVALID_DATE_FORMAT);
                 }
             default:
                 return "";

@@ -14,8 +14,8 @@ import duke.task.Task;
 
 class DukeLocalDatabase {
 
-    private final static String DATA_FILE_DIR = "data";
-    private final static String DATA_FILE_PATH = "duke.txt";
+    private static final String DATA_FILE_DIR = "data";
+    private static final String DATA_FILE_PATH = "duke.txt";
     private List<Task> tasks;
 
     public DukeLocalDatabase() {

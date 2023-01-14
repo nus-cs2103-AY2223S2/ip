@@ -1,8 +1,10 @@
 package duke;
 
+import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.zip.DataFormatException;
 
 import duke.constant.DukeCommand;
 import duke.constant.Message;
@@ -13,7 +15,7 @@ import duke.task.Deadline;
 import duke.task.Event;
 import duke.task.Task;
 import duke.task.Todo;
-import utils.DateUtil;
+import duke.utils.DateUtil;
 
 public class DukeParser {
     private DukeCommand command;
@@ -95,13 +97,34 @@ public class DukeParser {
             DukeCommand dc = DukeCommand.valueOf(ops[0].toUpperCase());
             DukeParser dp = new DukeParser(dc);
 
-            // command without args
+            // handle commands without args
             if (dc.equals(DukeCommand.BYE) || dc.equals(DukeCommand.LIST)) {
                 return dp;
             }
 
-            String[] args = ops[1].split(" /[a-z]*[^ ] ");
+            // handle commands with 1 args
+            switch (dc) {
+                case MARK:
+                case UNMARK:
+                case DELETE:
+                    if (ops.length != 2) {
+                        throw new IllegalDukeCommandArgumentException(Message.EXCEPTION_INVALID_CMD_ARGS);
+                    }
+                    // for commands that consumes int args
+                    dp.setTaskId(Integer.parseInt(ops[1]));
+                case DATE:
+                    if (ops.length != 2) {
+                        throw new IllegalDukeCommandArgumentException(Message.EXCEPTION_INVALID_DATE_CMD);
+                    }
+                    // for commands that consumes string args
+                    dp.setOp1(ops[1]);
+                    return dp;
+                default:
+                    break;
+            }
 
+            // handle commands with special args
+            String[] args = ops[1].split(" /[a-z]*[^ ] ");
             switch (dc) {
                 // commands with special args
                 case TODO:
@@ -125,16 +148,8 @@ public class DukeParser {
                     dp.setOp1(args[1]);
                     dp.setOp2(args[2]);
                     break;
-
-                // commands with only 1 args
                 default:
-                    if (ops.length > 2) {
-                        throw new IllegalDukeCommandArgumentException(Message.EXCEPTION_NOSUCH_COMMAND);
-                    }
-                    // for commands that consumes int args
-                    dp.setTaskId(Integer.parseInt(ops[1]));
-                    // for commands that consumes string args
-                    dp.setOp1(ops[1]);
+                    break;
             }
             return dp;
         } catch (NumberFormatException e) {
@@ -201,7 +216,7 @@ public class DukeParser {
      * @return Task object
      * @throws InvalidTaskTypeException
      */
-    public static Task toTask(DukeParser dp) throws InvalidTaskTypeException {
+    public static Task toTask(DukeParser dp) throws InvalidTaskTypeException, DateTimeParseException {
         switch (dp.getCommand()) {
             case TODO:
                 return new Todo(dp.getTitle(), dp.getIsDone());
