@@ -1,10 +1,12 @@
 class Task {
-    String taskName;
-    boolean isDone;
+    protected String taskName;
+    protected boolean isDone;
+    protected String tag;
 
     Task(String taskName) {
         this.taskName = taskName;
         this.isDone = false;
+        this.tag = "";
     }
 
     void setDone() {
@@ -14,6 +16,8 @@ class Task {
     void setUnDone() {
         this.isDone = false;
     }
+
+    public String getTag() { return this.tag; }
 
     public String toString() {
         StringBuilder sb = new StringBuilder();
