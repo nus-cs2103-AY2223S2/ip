@@ -1,3 +1,7 @@
+import command.Command;
+import parser.Request;
+import storage.TaskList;
+
 import java.util.Scanner;
 
 public class Duke {
@@ -37,8 +41,9 @@ public class Duke {
             if (request.equals("bye")) {
                 break;
             }
-            RequestHandler handler = new RequestHandler(request, taskList);
-            returnFormattedResponse(handler.getReply());
+            Command command = new Request(request).parse();
+            String reply = command.run(taskList);
+            returnFormattedResponse(reply);
         }
 
         returnFormattedResponse(EXITING_MESSAGE);
