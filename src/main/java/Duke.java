@@ -28,6 +28,52 @@ public class Duke {
     }
   }
 
+  public static class Todo extends Task {
+
+    public Todo(String description) {
+      super(description);
+    }
+
+    @Override
+    public String toString() {
+      return new StringBuilder("[T]").append(super.toString()).toString();
+    }
+  }
+
+  public static class Deadline extends Task {
+
+    protected String by;
+
+    public Deadline(String description, String by) {
+      super(description);
+      this.by = by;
+    }
+
+    @Override
+    public String toString() {
+      return new StringBuilder("[D]").append(super.toString())
+          .append(" (by: ").append(by).append(")").toString();
+    }
+  }
+
+  public static class Event extends Task {
+
+    protected String from;
+    protected String to;
+
+    public Event(String description, String from, String to) {
+      super(description);
+      this.from = from;
+      this.to = to;
+    }
+
+    @Override
+    public String toString() {
+      return new StringBuilder("[E]").append(super.toString()).append(" (from:")
+          .append(from).append("to:").append(to).append(")").toString();
+    }
+  }
+
   public static void main(String[] args) {
     ArrayList<Task> taskList = new ArrayList<>();
     System.out.println("  ------------------------------------");
@@ -54,7 +100,7 @@ public class Duke {
       if (taskList.isEmpty())
         System.out.println("  No tasks added yet");
       else {
-        System.out.println("Here are the tasks in your list:");
+        System.out.println("  Here are the tasks in your list:");
         for (int i = 0; i < taskList.size(); i++) {
           System.out.println(new StringBuilder("  ").append(i + 1).append(".")
               .append(taskList.get(i).toString()));
@@ -66,8 +112,7 @@ public class Duke {
       handleMarkTask(taskNumber, taskList, isMark);
     } else {
       if (taskList.size() < 100) {
-        System.out.println(new StringBuilder("  added: ").append(userInput).toString());
-        taskList.add(new Task(userInput));
+        handleTaskTypes(userInput, taskList);
       } else
         System.out.println("  List is full!");
     }
@@ -86,5 +131,28 @@ public class Duke {
       }
       System.out.println(new StringBuilder("    ").append(taskList.get(taskNum - 1).toString()));
     }
+  }
+
+  private static void handleTaskTypes(String userInput, ArrayList<Task> taskList) { 
+    if (userInput.toLowerCase().contains("todo")) {
+      Todo newTodo = new Todo(userInput.substring(5));
+      addAndPrintTask(newTodo, taskList);
+    } else if (userInput.toLowerCase().contains("deadline")) {
+      String[] deadline = userInput.substring(9).split("/by");
+      Deadline newDeadline = new Deadline(deadline[0], deadline[1]);
+      addAndPrintTask(newDeadline, taskList);
+    } else if (userInput.toLowerCase().contains("event")) {
+      String[] event = userInput.substring(6).split("/from");
+      String[] eventTime = event[1].split("/to");
+      Event newEvent = new Event(event[0], eventTime[0], eventTime[1]);
+      addAndPrintTask(newEvent, taskList);
+    }
+  }
+
+  private static void addAndPrintTask(Task newTask, ArrayList<Task> taskList) {
+    taskList.add(newTask);
+    System.out.println("  Got it. I've added this task:");
+    System.out.println(new StringBuilder("  ").append(newTask.toString()));
+    System.out.println(new StringBuilder("  Now you have ").append(taskList.size()).append(" tasks in the list."));
   }
 }
