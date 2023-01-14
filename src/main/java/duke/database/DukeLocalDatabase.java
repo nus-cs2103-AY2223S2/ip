@@ -4,12 +4,14 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
-import duke.DukeParser;
+import duke.command.AddCommand;
 import duke.exception.DukeException;
+import duke.parser.Parser;
 import duke.task.Task;
 
 class DukeLocalDatabase {
@@ -28,7 +30,7 @@ class DukeLocalDatabase {
     }
 
     public Task getTask(int taskId) {
-        return tasks.get(taskId);
+        return tasks.get(taskId - 1);
     }
 
     public Task addTask(Task task) {
@@ -41,7 +43,7 @@ class DukeLocalDatabase {
     }
 
     public Task removeTask(int taskId) {
-        return tasks.remove(taskId);
+        return tasks.remove(taskId - 1);
     }
 
     /**
@@ -52,15 +54,17 @@ class DukeLocalDatabase {
             File dataFile = new File(DATA_FILE_DIR + "/" + DATA_FILE_PATH);
             Scanner sc = new Scanner(dataFile);
             while (sc.hasNextLine()) {
-                DukeParser dp = DukeParser.parseCsv(sc.nextLine());
-                tasks.add(DukeParser.toTask(dp));
+                try {
+                    AddCommand command = Parser.parseCsv(sc.nextLine());
+                    addTask(command.getTask());
+                } catch (DateTimeParseException | DukeException e) {
+                    System.err.println("Corrupted data file: " + e.getMessage());
+                }
             }
             sc.close();
         } catch (FileNotFoundException e) {
             // file no found, start with empty list.
             return;
-        } catch (DukeException e) {
-            e.printStackTrace();
         }
     }
 

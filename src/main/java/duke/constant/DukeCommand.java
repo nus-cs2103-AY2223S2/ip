@@ -5,9 +5,9 @@ public enum DukeCommand {
     LIST,
     MARK,
     UNMARK,
+    DATE,
     TODO,
     EVENT,
     DEADLINE,
-    DELETE,
-    DATE;
+    DELETE;
 }
