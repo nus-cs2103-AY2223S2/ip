@@ -1,25 +1,36 @@
 public class Task {
-    private String task;
-    private boolean completed = false;
+    protected String taskName;
+    protected boolean completed = false;
+    protected String taskType = "T";
+    protected static int numTasks = 0;
 
-    public Task(String task) {
-        this.task = task;
+    public Task(String taskName) {
+        this.taskName = taskName;
+        numTasks++;
     }
 
-    public void setCompleted() {
-        this.completed = true;
+    public void setCompletion(boolean completion) {
+        this.completed = completion;
+        if (completion) {
+            System.out.println("    Nice! I've marked this task as done:\n" + "   " + this);
+        } else {
+            System.out.println("    OK, I've marked this task as not done yet:\n" + "   " + this);
+        }
     }
 
-    public void setUncompleted() {
-        this.completed = false;
+    public String displayType() {
+        return String.format("[%s]", this.taskType);
     }
 
+    public String displayMark() {
+        if (this.completed) {
+            return "[X]";
+        }
+        return "[ ]";
+    }
 
     @Override
     public String toString() {
-        if (this.completed) {
-            return "    [X] " + this.task;
-        }
-        return "    [ ] " + this.task;
+        return String.format("  %s %s", displayMark(), this.taskName);
     }
 }
