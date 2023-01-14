@@ -118,7 +118,7 @@ public class Dude {
     }
 
     public static void markTask(int task) {
-        if (taskCount > task) {
+        if (taskCount > task && taskCount != 0) {
             System.out.println("\tSwee! I've marked this task as done loh:");
             Task currentTask = todoList[task];
             currentTask.mark();
@@ -129,7 +129,7 @@ public class Dude {
     }
 
     public static void unmarkTask(int task) {
-        if (taskCount > task) {
+        if (taskCount > task && taskCount != 0) {
             System.out.println("\tOkay liar, I've marked this task as undone liao:");
             Task currentTask = todoList[task];
             currentTask.unmark();
