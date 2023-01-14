@@ -5,7 +5,7 @@ public class Duke {
         System.out.println("---\n hi i'm Duke! what's up? \n---");
 
         while(sc.hasNext()) {
-            String command = sc.next();
+            String command = sc.nextLine();
             if (command.equals("bye")) {
                 System.out.println("---\n bye! see u soon! :-) \n---");
                 System.exit(0);
