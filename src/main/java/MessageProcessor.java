@@ -42,7 +42,10 @@ public class MessageProcessor {
     }
 
     private String generateAddMessage(Task task) {
-        return task.toString();
+        String header = "Got it. I've added this task:\n";
+        String end = String.format("Now you have %d tasks in the list.", this.taskList.getTaskCount());
+
+        return header + task.toString() + "\n" + end;
     }
 
 

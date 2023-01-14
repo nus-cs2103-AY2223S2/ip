@@ -49,4 +49,8 @@ public class TaskList {
         Task task = this.getTask(taskNum);
         task.setDoneStatus(action.equals("mark") ? true : false);
     }
+
+    public int getTaskCount() {
+        return this.numTask;
+    }
 }
