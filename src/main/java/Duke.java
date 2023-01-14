@@ -1,8 +1,35 @@
 import java.util.*;
 
 public class Duke {
+  private static class Task {
+    protected String description;
+    protected boolean isDone;
+
+    public Task(String description) {
+      this.description = description;
+      this.isDone = false;
+    }
+
+    public String getStatusIcon() {
+      return (isDone ? "X" : " "); // mark done task with X
+    }
+
+    public void markAsDone() {
+      this.isDone = true;
+    }
+
+    public void markAsUndone() {
+      this.isDone = false;
+    }
+
+    @Override
+    public String toString() {
+      return new StringBuilder("[").append(getStatusIcon()).append("] ").append(description).toString();
+    }
+  }
+
   public static void main(String[] args) {
-    ArrayList<String> taskList = new ArrayList();
+    ArrayList<Task> taskList = new ArrayList<>();
     System.out.println("  ------------------------------------");
     System.out.println("  Hello! I'm Duke\n" + "  What can I do for you?");
     System.out.println("  ------------------------------------\n");
@@ -22,21 +49,42 @@ public class Duke {
     sc.close();
   }
 
-  private static void handleListInput(String userInput, ArrayList<String> taskList) {
+  private static void handleListInput(String userInput, ArrayList<Task> taskList) {
     if (userInput.equalsIgnoreCase("list")) {
-      if (taskList.isEmpty()) {
+      if (taskList.isEmpty())
         System.out.println("  No tasks added yet");
+      else {
+        System.out.println("Here are the tasks in your list:");
+        for (int i = 0; i < taskList.size(); i++) {
+          System.out.println(new StringBuilder("  ").append(i + 1).append(".")
+              .append(taskList.get(i).toString()));
+        }
       }
-      for (String task : taskList) {
-        System.out.println(task);
-      }
+    } else if (userInput.toLowerCase().contains("mark")) {
+      boolean isMark = !userInput.toLowerCase().contains("unmark");
+      int taskNumber = Integer.parseInt(userInput.substring(isMark ? 5 : 7));
+      handleMarkTask(taskNumber, taskList, isMark);
     } else {
       if (taskList.size() < 100) {
         System.out.println(new StringBuilder("  added: ").append(userInput).toString());
-        taskList.add(new StringBuilder("  ").append(taskList.size() + 1).append(". ").append(userInput).toString());
-      } else {
+        taskList.add(new Task(userInput));
+      } else
         System.out.println("  List is full!");
+    }
+  }
+
+  private static void handleMarkTask(Integer taskNum, ArrayList<Task> taskList, boolean mark) {
+    if (taskNum > taskList.size() || taskNum < 1)
+      System.out.println("  Task does not exist!");
+    else {
+      if (mark) {
+        taskList.get(taskNum - 1).markAsDone();
+        System.out.println("  Nice! I've marked this task as done:");
+      } else {
+        taskList.get(taskNum - 1).markAsUndone();
+        System.out.println("  OK, I've marked this task as not done yet:");
       }
+      System.out.println(new StringBuilder("    ").append(taskList.get(taskNum - 1).toString()));
     }
   }
 }
