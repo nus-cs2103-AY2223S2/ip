@@ -1,4 +1,5 @@
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 public class DataStore {
@@ -22,7 +23,22 @@ public class DataStore {
     }
 
     public String[] add(String[] argument) {
-        Task newTask = new Task(argument[0]);
+        Task newTask;
+        switch (argument[0]) {
+            case "/todo":
+                newTask = new ToDo(argument[1]);
+                break;
+            case "/deadline":
+                String[] deadlineArgs = argument[1].split(" /by ",2);
+                newTask = new Deadline(deadlineArgs[0], deadlineArgs[1]);
+                break;
+            case "/event":
+                String[] eventArgs = Duke.split(argument[1], new String[]{" /from ", " /to "});
+                newTask = new Event(eventArgs[0], eventArgs[1], eventArgs[2]);
+                break;
+            default:
+                throw new IllegalArgumentException("Invalid task type: " + argument[0]);
+        }
         this.tasks.add(newTask);
         return new String[]{"added: " + newTask};
     }
@@ -33,7 +49,7 @@ public class DataStore {
             if (inds.length == 1) {
                 int ind = Integer.parseInt(inds[0]) - 1;
                 Task task = this.tasks.get(ind);
-                return new String[]{(task.mark() ? "marked: " : "unmarked: ") + task};
+                return new String[]{(task.mark() ? "marked: " : "unmarked: ") + task.toString(ind+1)};
             }
             String[] outputs = new String[inds.length + 1];
             outputs[0] = "marked:";

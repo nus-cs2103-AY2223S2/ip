@@ -22,11 +22,11 @@ public class Duke {
                         , data::stringify),
                 new ArgCommand("add"
                         , "add task"
-                        , new String[]{""}
+                        , new String[]{"\\s"}
                         , data::add),
                 new ArgCommand("mark"
                         , "mark/unmark task as done"
-                        , new String[]{""}
+                        , new String[]{}
                         , data::mark),
         };
         formatter.setCommands(commands);
@@ -36,7 +36,7 @@ public class Duke {
                 + "| | | | | | | |/ / _ \\\n"
                 + "| |_| | |_| |   <  __/\n"
                 + "|____/ \\__,_|_|\\_\\___| ,\n";
-        System.out.println("Hello from\n" + logo + "how may I help?");
+        System.out.println("Hello, I'm\n" + logo + "how may I help?");
 
         Scanner scanner = new Scanner(System.in);
 
@@ -58,22 +58,28 @@ public class Duke {
     private static String[] parse(Command[] commands, String[] inputs) {
         for (Command cmd: commands) {
             if (inputs[0].equals(cmd.getName())){
-                String[] params = new String[cmd.getParams().length];
-                if (cmd.getParams().length > 0) {
-                    int argsNeeded = 0;
-                    while (argsNeeded < cmd.getParams().length - 1 && inputs.length > 1) {
-                        inputs = inputs[1].split(cmd.getParams()[++argsNeeded]);
-                        params[argsNeeded - 1] = inputs[0];
-                    }
-                    try {
-                        params[argsNeeded] = inputs[1];
-                    } catch (IndexOutOfBoundsException e) {
-                        throw new IllegalArgumentException("Missing argument: " + cmd.getParams()[argsNeeded]);
-                    }
+                String[] args = new String[0];
+                if (inputs.length > 1) {
+                     args = Duke.split(inputs[1], cmd.getParams());
                 }
-                return cmd.execute(params);
+                return cmd.execute(args);
             }
         }
         throw new IllegalArgumentException("Command not found: " + inputs[0]);
+    }
+
+    public static String[] split(String input, String[] regexes) {
+        String[] outputs = new String[regexes.length + 1];
+        for (int i = 0; i < regexes.length; i++) {
+            String[] temp = input.split(regexes[i],2);
+            if (temp.length > 1){
+                outputs[i] = temp[0];
+                input = temp[1];
+            } else {
+                throw new IllegalArgumentException("Missing argument.");
+            }
+        }
+        outputs[regexes.length] = input;
+        return outputs;
     }
 }

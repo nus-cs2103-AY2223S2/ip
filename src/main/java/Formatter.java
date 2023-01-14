@@ -11,7 +11,7 @@ public class Formatter {
 
     private String[] generateHelp(Command[] commands) {
         Stream<String> strings = Arrays.stream(commands)
-                .map(c -> String.format("\t%s\t: %s", c.getName(), c.getHelpStr()));
+                .map(c -> String.format("\t%4s : %s", c.getName(), c.getHelpStr()));
         return Stream.concat(Stream.of("Usage: <command> [<args>]"), strings).toArray(String[]::new);
     }
 
