@@ -116,6 +116,17 @@ public class Duke {
         return addTask(new Deadline(title, by));
     }
 
+    private String deleteTask(int idx) throws IllegalDukeTaskAccessException {
+        if(idx < 1 || idx > tList.size()) {
+            throw new IllegalDukeTaskAccessException(EXCEPTION_INVALID_TODO_ID_ACCESS);
+        }
+        Task tk = tList.remove(idx - 1);
+
+        return "Noted. I've removed this task:\n"
+            + "\t" + tk + "\n"
+            + "Now you have " + tList.size() + " tasks in the list.";
+    }
+
     /**
      * Handles incomming commands and invoke the corresponding duke functions.
      * @param command a string command with variable word count
@@ -177,6 +188,14 @@ public class Duke {
                 }
 
                 return addDeadline(options[0], options[1]);
+            case "delete":
+                try {
+                    return deleteTask(Integer.parseInt(input[1]));
+                } catch (NumberFormatException e) {
+                    throw new IllegalDukeCommandArgumentException(EXCEPTION_INVALID_TODO_ID);
+                }  catch (IllegalDukeTaskAccessException e) {
+                    return e.getMessage();
+                }
             default:
                 throw new NoSuchDukeCommandException(EXCEPTION_NOSUCH_COMMAND);
         }
