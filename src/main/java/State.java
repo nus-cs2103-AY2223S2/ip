@@ -5,4 +5,5 @@ public enum State {
     // DEADLINE,
     // MARK,
     EXIT,
+    UNKNOWN,
 }
