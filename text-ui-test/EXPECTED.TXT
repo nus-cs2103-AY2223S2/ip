@@ -129,6 +129,30 @@ ________________________________________
 DukeException: You are referring to an invalid index.
 ________________________________________
 ________________________________________
+Here are all of your tasks: 
+1. [T][X] play games
+2. [D][ ] do homework (by: Monday evening 11pm)
+3. [E][X] group project (from: Sept 2nd 10am to: 12pm)
+4. [E][ ] module registration (from: Monday 10am to: Wednesday 12pm)
+5. [T][ ] sleep
+6. [D][ ] codecrunch (by: Sunday)
+________________________________________
+________________________________________
+Ok, I will remove this task for you: 
+[E][X] group project (from: Sept 2nd 10am to: 12pm)
+Now you have 5 tasks in the list.
+________________________________________
+________________________________________
+DukeException: You are referring to an invalid index.
+________________________________________
+________________________________________
+Here are all of your tasks: 
+1. [T][X] play games
+2. [D][ ] do homework (by: Monday evening 11pm)
+3. [E][ ] module registration (from: Monday 10am to: Wednesday 12pm)
+4. [T][ ] sleep
+5. [D][ ] codecrunch (by: Sunday)
+________________________________________
+________________________________________
 Goodbye. Hope you have a nice day!
 ________________________________________
-

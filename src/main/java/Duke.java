@@ -16,7 +16,7 @@ public class Duke {
                 if (splited.length == 0) {
                     System.out.println("Oops, you have key in nothing!");
                 } else if (splited[0].equals("mark")) {
-                    // 0 = markDone, 1 = markUnDone
+                    // 0 = markDone, 1 = markUnDone, 2 = delete
                     try {
                         mainEngine.validateMark(command, 0);
                     } catch (DukeException ex) {
@@ -25,6 +25,12 @@ public class Duke {
                 } else if (splited[0].equals("unmark")) {
                     try {
                         mainEngine.validateMark(command, 1);
+                    } catch (DukeException ex) {
+                        System.out.println(ex);
+                    }
+                } else if (splited[0].equals("delete")) {
+                    try {
+                        mainEngine.validateMark(command, 2);
                     } catch (DukeException ex) {
                         System.out.println(ex);
                     }

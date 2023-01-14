@@ -26,4 +26,8 @@ mark
 unmark 100
 
 mark -3
+list
+delete 3
+delete -100
+list
 bye

@@ -17,6 +17,7 @@ public class DukeEngine {
             "Well, you have not finished this task yet: ";
     public static final String listWord = "Here are all of your tasks: ";
     public static final String addWord = "This task is added to your list: ";
+    public static final String deleteWord = "Ok, I will remove this task for you: ";
 
     public List<Task> taskList = new ArrayList<Task>();
 
@@ -185,8 +186,10 @@ public class DukeEngine {
             } else {
                 if (action == 0) {
                     markDone(command);
-                } else {
+                } else if (action == 1) {
                     markUnDone(command);
+                } else {
+                    delete(command);
                 }
             }
         }
@@ -216,6 +219,18 @@ public class DukeEngine {
         sb.append(markUnDoneWord).append("\n").append(" ");
         sb.append(theTask.toString());
         System.out.println(sb.toString());
+    }
+
+    public void delete(String command) {
+        String[] splited = command.split(" ");
+        int index = Integer.parseInt(splited[1]);
+
+        Task theTask = taskList.remove(index - 1);
+
+        System.out.println(deleteWord);
+        System.out.println(theTask.toString());
+        System.out.println("Now you have " + taskList.size() +
+                " tasks in the list.");
     }
 
     public void goodbye() {
