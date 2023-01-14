@@ -1,5 +1,4 @@
-import java.util.ArrayList;
-import java.util.List;
+import java.util.Arrays;
 import java.util.Scanner;
 
 public class Duke {
@@ -14,43 +13,63 @@ public class Duke {
         System.out.println("Hello! I'm Duke\nWhat can I do for you?\n");
 
         boolean flag = true;
-        List<Task> ls = new ArrayList<>();
+        TaskList ls = new TaskList();
 
         while (flag) {
             Scanner sc = new Scanner(System.in);
             String inp = sc.nextLine();
-            switch (inp) {
+            String[] s = inp.split(" ");
+            int index;
+            Task t;
+            String[] temp;
+            String taskDes;
+            switch (s[0]) {
                 case "list":
                     System.out.println("Here are the tasks in your list:");
-                    for (int i = 0; i<ls.size();i++) {
+                    for (int i = 0; i<ls.count();i++) {
                         System.out.print(i+1+".");
-                        ls.get(i).printStatus();
+                        ls.getTask(i).printStatus();
                     }
                     break;
                 case "bye":
                     System.out.println("Bye. Hope to see you again soon!");
                     flag = false;
                     break;
+                case "mark":
+                    index = Integer.parseInt(s[1]);
+                    t = ls.getTask(index-1);
+                    t.status = true;
+                    System.out.println("Nice! I've marked this task as done:");
+                    t.printStatus();
+                    break;
+                case "unmark":
+                    index = Integer.parseInt(s[1]);
+                    t = ls.getTask(index-1);
+                    t.status = false;
+                    System.out.println("OK, I've marked this task as not done yet:");
+                    t.printStatus();
+                    break;
+                case "todo":
+                    temp = Arrays.copyOfRange(s,1,s.length);
+                    taskDes = String.join(" ",temp);
+                    ToDos td = new ToDos(false, taskDes);
+                    ls.addTask(td);
+                    break;
+                case "deadline":
+                    temp = Arrays.copyOfRange(s,1,s.length);
+                    taskDes = String.join(" ",temp);
+                    Deadlines dl = new Deadlines(false, taskDes);
+                    ls.addTask(dl);
+                    break;
+                case "event":
+                    temp = Arrays.copyOfRange(s,1,s.length);
+                    taskDes = String.join(" ",temp);
+                    Events ev = new Events(false, taskDes);
+                    ls.addTask(ev);
+                    break;
                 default:
-                    //if input match mark/unmark x == we mark/unmark the line
-                    if (inp.matches("mark \\d+")) {
-                        String[] s = inp.split(" ");
-                        int index = Integer.parseInt(s[1]);
-                        Task t = ls.get(index-1);
-                        t.status = true;
-                        System.out.println("Nice! I've marked this task as done:");
-                        t.printStatus();
-                    } else if (inp.matches("unmark \\d+")) {
-                        String[] s = inp.split(" ");
-                        int index = Integer.parseInt(s[1]);
-                        Task t = ls.get(index-1);
-                        t.status = false;
-                        System.out.println("OK, I've marked this task as not done yet:");
-                        t.printStatus();
-                    } else {
-                        ls.add(new Task(false, inp));
-                        System.out.println("added: "+inp);
-                    }
+                    ls.addTask(new Task(false, inp));
+                    System.out.println("added: "+inp);
             }
         }
     }
