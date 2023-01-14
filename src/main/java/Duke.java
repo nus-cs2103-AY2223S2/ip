@@ -28,6 +28,8 @@ public class Duke {
                 String inp = sc.nextLine();
                 String[] s = inp.split(" ");
 
+                //could use enums here to check user input before going into switch case
+
                 switch (s[0]) {
                     case "list":
                         fn.list();

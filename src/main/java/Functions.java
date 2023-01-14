@@ -26,11 +26,11 @@ public class Functions {
             throw new DukeException("I don't know which task to mark...");
         }
         int index = Integer.parseInt(s[1]) - 1;
-        if (index > ls.count()) {
+        if (index > ls.count()) { //this not working
             throw new DukeException("Task not found...");
         }
         Task t = ls.getTask(index);
-        t.status = true;
+        t.setStatus(true);
         System.out.println("Nice! I've marked this task as done:");
         t.printStatus();
     }
@@ -41,11 +41,11 @@ public class Functions {
             throw new DukeException("I don't know which task to mark...");
         }
         int index = Integer.parseInt(s[1]) - 1;
-        if (index > ls.count()) {
+        if (index > ls.count()) { //this not working
             throw new DukeException("Task not found...");
         }
         Task t = ls.getTask(index);
-        t.status = false;
+        t.setStatus(false);
         System.out.println("OK, I've marked this task as not done yet:");
         t.printStatus();
     }
