@@ -7,8 +7,14 @@ public class Duke {
         mainEngine.greet();
         String command = sc.nextLine();
         while (!command.equals("bye")) {
-            // System.out.println(command);
-            mainEngine.echo(command);
+            mainEngine.printLine();
+            if (command.equals("list")) {
+                mainEngine.listTask();
+            } else {
+                mainEngine.addTask(command);
+            }
+            // mainEngine.echo(command);
+            mainEngine.printLine();
             command = sc.nextLine();
         }
         mainEngine.goodbye();
