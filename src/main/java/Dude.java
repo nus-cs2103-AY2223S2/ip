@@ -1,13 +1,15 @@
 import java.util.Scanner;
 
 public class Dude {
+    private static String[] todoList = new String[100];
+    private static int itemCount = 0;
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
 
         getIntro();
 
         while(true) {
-            String command = sc.next();
+            String command = sc.nextLine();
             getCommands(command);
             if (command.equals("bye")) {
                 break;
@@ -27,14 +29,13 @@ public class Dude {
         System.out.println("\tYo! I'm dude");
         System.out.println("\tWhat you want me do for you?");
         System.out.println(" ____________________________________________________________\n");
-
     }
 
     public static void getCommands(String command) {
         switch(command) {
             case "list":
                 System.out.println(" ____________________________________________________________");
-                System.out.println("\tlist");
+                getList();
                 System.out.println(" ____________________________________________________________\n");
                 break;
             case "blah":
@@ -47,6 +48,22 @@ public class Dude {
                 System.out.println("\tCiaos! See you next time.");
                 System.out.println(" ____________________________________________________________\n");
                 break;
+            default:
+                System.out.println(" ____________________________________________________________");
+                addItem(command);
+                System.out.println("\tAdd liao: " + command);
+                System.out.println(" ____________________________________________________________\n");
+        }
+    }
+
+    public static void addItem(String item) {
+        todoList[itemCount] = item;
+        itemCount++;
+    }
+
+    public static void getList() {
+        for(int i = 0; i < itemCount; i++) {
+            System.out.println("\t" + (i+1) + ". " + todoList[i]);
         }
     }
 }
