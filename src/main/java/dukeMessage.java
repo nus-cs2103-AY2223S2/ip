@@ -1,4 +1,4 @@
-public class DukeMessage extends Message{
+public class DukeMessage extends Message {
 
     MessageStatus status;
 
@@ -12,6 +12,8 @@ public class DukeMessage extends Message{
         this.status = status;
     }
 
+
+
     @Override
     public String toString() {
         String reply;
@@ -21,6 +23,7 @@ public class DukeMessage extends Message{
                 // add to TaskList
                 reply = String.format("added: %s", this.getContent());
                 break;
+            case MARK:
             case LIST:
                 reply = this.getContent();
                 break;

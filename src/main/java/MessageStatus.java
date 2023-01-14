@@ -1,3 +1,3 @@
 public enum MessageStatus {
-    LIST, ADD, END, START
+    LIST, ADD, END, START, MARK
 }
