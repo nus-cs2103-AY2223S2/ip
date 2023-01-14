@@ -5,21 +5,31 @@ import java.util.Scanner;
 public class Duke {
     public static void main(String[] args) {
 
-        Formatter formatter = new Formatter();
         DataStore data = new DataStore();
+        Formatter formatter = new Formatter();
         Command[] commands = {
                 new BasicCommand("exit"
                         , "exit the app"
                         , () -> new String[]{"Goodbye."}),
+                new BasicCommand("help"
+                        , "show this help message"
+                        , () -> {
+                    formatter.print();
+                    return new String[]{};
+                }),
                 new BasicCommand("list"
                         , "list tasks"
                         , data::stringify),
                 new ArgCommand("add"
-                        , "add tasks"
+                        , "add task"
                         , new String[]{""}
                         , data::add),
+                new ArgCommand("mark"
+                        , "mark/unmark task as done"
+                        , new String[]{""}
+                        , data::mark),
         };
-
+        formatter.setCommands(commands);
 
         String logo = " ____        _        \n"
                 + "|  _ \\ _   _| | _____ \n"
@@ -39,8 +49,8 @@ public class Duke {
                     break;
                 }
             } catch (Exception e) {
-                System.out.println(e.getMessage());
-                formatter.printHelp(commands);
+                System.out.println("\t"+e.getMessage());
+                formatter.print();
             }
         }
     }
