@@ -27,7 +27,7 @@ public class Duke {
                 new ArgCommand("mark"
                         , "mark/unmark task as done"
                         , new String[]{}
-                        , data::mark),
+                        , data::mark)
         };
         formatter.setCommands(commands);
 
@@ -49,7 +49,7 @@ public class Duke {
                     break;
                 }
             } catch (Exception e) {
-                System.out.println("\t"+e.getMessage());
+                System.out.println("\t" + e.getMessage());
                 formatter.print();
             }
         }

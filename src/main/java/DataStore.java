@@ -1,6 +1,7 @@
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
+import java.util.function.Consumer;
+import java.util.stream.Collectors;
 
 public class DataStore {
     private final List<Task> tasks;
@@ -43,23 +44,59 @@ public class DataStore {
         return new String[]{"added: " + newTask};
     }
 
-    public String[] mark(String[] argument) {
+    public String[] mark(String[] strings) {
+        List<Integer> outputs = new ArrayList<>();
+        Consumer<Integer> mark = ind -> {
+            this.tasks.get(ind).mark();
+            outputs.add(ind);
+        };
+        this.find(strings, mark);
+        if (outputs.size() == 0) {
+            throw new IllegalArgumentException("No tasks found.");
+        } else if (outputs.size() == 1) {
+            Task task = this.tasks.get(outputs.get(0));
+            return new String[]{(task.isDone ? "marked: " : "unmarked: ") + task.toString(outputs.get(0) + 1)};
+        } else {
+            List<String> outStrs = outputs.stream()
+                    .map(i -> "\t" + this.tasks.get(i).toString(i+1))
+                    .collect(Collectors.toList());
+            outStrs.add(0, "marked:");
+            return outStrs.toArray(new String[0]);
+        }
+    }
+
+    public String[] delete(String[] strings) {
+        List<String> outputs = new ArrayList<>();
+        Consumer<Integer> delete = ind -> {
+            int i = ind;
+            if (this.tasks.size() <= i) {
+                throw new IllegalArgumentException("Task not found: " + i);
+            }
+            outputs.add(this.tasks.remove(i).toString(i));
+        };
+        this.find(strings, delete);
+        if (outputs.size() == 0) {
+            throw new IllegalArgumentException("No tasks found.");
+        } else if (outputs.size() == 1) {
+            return new String[]{"deleted: " + outputs.get(0)};
+        } else {
+            outputs.add(0, "deleted:");
+            return outputs.toArray(new String[0]);
+        }
+    }
+
+    private void find(String[] argument, Consumer<Integer> consumer) {
         try{
             String[] inds = argument[0].split("\\s");
             if (inds.length == 1) {
                 int ind = Integer.parseInt(inds[0]) - 1;
-                Task task = this.tasks.get(ind);
-                return new String[]{(task.mark() ? "marked: " : "unmarked: ") + task.toString(ind+1)};
+                consumer.accept(ind);
+                return;
             }
-            String[] outputs = new String[inds.length + 1];
-            outputs[0] = "marked:";
-            for (int i = 0; i < inds.length; i++) {
-                int ind = Integer.parseInt(inds[i]) - 1;
-                Task task = this.tasks.get(ind);
-                task.mark();
-                outputs[i+1] = "\t" + task.toString(i+1);
+            for (String s : inds) {
+                int ind = Integer.parseInt(s) - 1;
+                consumer.accept(ind);
             }
-            return outputs;
         } catch (Exception e) {
             throw new IllegalArgumentException("Invalid index.");
         }

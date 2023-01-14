@@ -11,6 +11,7 @@ how may I help?
 		list : list tasks
 		 add : add task
 		mark : mark/unmark task as done
+		delete : delete task
 	No tasks found.
 	added: [T][ ] buy milk
 	added: [D][ ] do bills (by: 2020-02-20)
