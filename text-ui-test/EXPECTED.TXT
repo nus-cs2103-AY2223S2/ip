@@ -69,6 +69,66 @@ Here are all of your tasks:
 6. [D][ ] codecrunch (by: Sunday)
 ________________________________________
 ________________________________________
+DukeException: OOPS!!! Description of todo not found.
+________________________________________
+________________________________________
+DukeException: OOPS!!! Description of deadline not found.
+________________________________________
+________________________________________
+DukeException: OOPS!!! Description of event not found.
+________________________________________
+________________________________________
+Sorry, but I don't know what you means.
+________________________________________
+________________________________________
+Here are all of your tasks: 
+1. [T][X] play games
+2. [D][ ] do homework (by: Monday evening 11pm)
+3. [E][X] group project (from: Sept 2nd 10am to: 12pm)
+4. [E][ ] module registration (from: Monday 10am to: Wednesday 12pm)
+5. [T][ ] sleep
+6. [D][ ] codecrunch (by: Sunday)
+________________________________________
+________________________________________
+DukeException: Deadline of the task not specified.
+________________________________________
+________________________________________
+DukeException: No valid deadline specified.
+________________________________________
+________________________________________
+DukeException: Event time not specified completely.
+________________________________________
+________________________________________
+DukeException: Event time not specified completely.
+________________________________________
+________________________________________
+DukeException: No valid event time specified.
+________________________________________
+________________________________________
+DukeException: No valid event time specified.
+________________________________________
+________________________________________
+Here are all of your tasks: 
+1. [T][X] play games
+2. [D][ ] do homework (by: Monday evening 11pm)
+3. [E][X] group project (from: Sept 2nd 10am to: 12pm)
+4. [E][ ] module registration (from: Monday 10am to: Wednesday 12pm)
+5. [T][ ] sleep
+6. [D][ ] codecrunch (by: Sunday)
+________________________________________
+________________________________________
+DukeException: You have not specified the index of the marking.
+________________________________________
+________________________________________
+DukeException: You are referring to an invalid index.
+________________________________________
+________________________________________
+Sorry, but I don't know what you means.
+________________________________________
+________________________________________
+DukeException: You are referring to an invalid index.
+________________________________________
+________________________________________
 Goodbye. Hope you have a nice day!
 ________________________________________
 

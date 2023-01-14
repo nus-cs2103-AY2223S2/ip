@@ -40,8 +40,16 @@ public class DukeEngine {
         System.out.println("added: " + command);
     }
 
+    void validateToDo(String command) throws DukeException {
+        String[] splited = command.split(" ");
+        if (splited.length < 2) {
+            throw new DukeException("OOPS!!! Description of todo not found.");
+        } else {
+            handleToDo(command);
+        }
+    }
+
     public void handleToDo(String command) {
-        // Later should catch empty todo
         String[] splited = command.split(" ");
         StringBuilder sb = new StringBuilder();
         for (int i = 1; i < splited.length; i++) {
@@ -59,8 +67,20 @@ public class DukeEngine {
                 " tasks in the list.");
     }
 
+    void validateDeadLine(String command) throws DukeException {
+        String[] splited = command.split(" ");
+        if (splited.length < 2) {
+            throw new DukeException("OOPS!!! Description of deadline not found.");
+        } else if (!Arrays.asList(splited).contains("/by")) {
+            throw new DukeException("Deadline of the task not specified.");
+        } else if (splited[splited.length - 1].equals("/by")) {
+            throw new DukeException("No valid deadline specified.");
+        } else {
+            handleDeadLine(command);
+        }
+    }
+
     public void handleDeadLine(String command) {
-        // Later should catch empty deadline
         String[] splited = command.split(" ");
         StringBuilder sb = new StringBuilder();
         StringBuilder time = new StringBuilder();
@@ -88,8 +108,23 @@ public class DukeEngine {
                 " tasks in the list.");
     }
 
+    void validateEvent(String command) throws DukeException {
+        String[] splited = command.split(" ");
+        if (splited.length < 2) {
+            throw new DukeException("OOPS!!! Description of event not found.");
+        } else if (!Arrays.asList(splited).contains("/from") ||
+                !Arrays.asList(splited).contains("/to")) {
+            throw new DukeException("Event time not specified completely.");
+        } else if (splited[splited.length - 1].equals("/to") ||
+                Arrays.asList(splited).indexOf("/from") ==
+                        Arrays.asList(splited).indexOf("/to") - 1) {
+            throw new DukeException("No valid event time specified.");
+        } else {
+            handleEvent(command);
+        }
+    }
+
     public void handleEvent(String command) {
-        // Later should catch empty event
         String[] splited = command.split(" ");
         StringBuilder sb = new StringBuilder();
         StringBuilder start = new StringBuilder();
@@ -139,8 +174,28 @@ public class DukeEngine {
         System.out.println(sb.toString());
     }
 
-    public void markDone(int index) {
-        // Here should later handle the exception of out of bounds
+    void validateMark(String command, int action) throws DukeException {
+        String[] splited = command.split(" ");
+        if (splited.length < 2) {
+            throw new DukeException("You have not specified the index of the marking.");
+        } else {
+            int index = Integer.parseInt(splited[1]);
+            if (index <= 0 || index > taskList.size()) {
+                throw new DukeException("You are referring to an invalid index.");
+            } else {
+                if (action == 0) {
+                    markDone(command);
+                } else {
+                    markUnDone(command);
+                }
+            }
+        }
+    }
+
+    public void markDone(String command) {
+        String[] splited = command.split(" ");
+        int index = Integer.parseInt(splited[1]);
+
         Task theTask = taskList.get(index - 1);
         theTask.setDone();
 
@@ -150,8 +205,10 @@ public class DukeEngine {
         System.out.println(sb.toString());
     }
 
-    public void markUnDone(int index) {
-        // Here should later handle the exception of out of bounds
+    public void markUnDone(String command) {
+        String[] splited = command.split(" ");
+        int index = Integer.parseInt(splited[1]);
+
         Task theTask = taskList.get(index - 1);
         theTask.setUnDone();
 

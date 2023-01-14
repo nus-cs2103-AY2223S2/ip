@@ -12,21 +12,45 @@ public class Duke {
                 mainEngine.listTask();
             } else {
                 String[] splited = command.split(" ");
-                // Here later should catch another issue of empty command
-                if (splited[0].equals("mark")) {
-                    int index = Integer.parseInt(splited[1]);
-                    mainEngine.markDone(index);
+                // Here in input.txt, empty line is seen as last situation
+                if (splited.length == 0) {
+                    System.out.println("Oops, you have key in nothing!");
+                } else if (splited[0].equals("mark")) {
+                    // 0 = markDone, 1 = markUnDone
+                    try {
+                        mainEngine.validateMark(command, 0);
+                    } catch (DukeException ex) {
+                        System.out.println(ex);
+                    }
                 } else if (splited[0].equals("unmark")) {
-                    int index = Integer.parseInt(splited[1]);
-                    mainEngine.markUnDone(index);
+                    try {
+                        mainEngine.validateMark(command, 1);
+                    } catch (DukeException ex) {
+                        System.out.println(ex);
+                    }
                 } else if (splited[0].equals("todo")) {
-                    mainEngine.handleToDo(command);
+                    try {
+                        mainEngine.validateToDo(command);
+                    } catch (DukeException ex) {
+                        System.out.println(ex);
+                    }
                 } else if (splited[0].equals("deadline")) {
-                    mainEngine.handleDeadLine(command);
+                    try {
+                        mainEngine.validateDeadLine(command);
+                    } catch (DukeException ex) {
+                        System.out.println(ex);
+                    }
+                    // mainEngine.handleDeadLine(command);
                 } else if (splited[0].equals("event")) {
-                    mainEngine.handleEvent(command);
-                } else { // otherwise = commonplace task
-                    mainEngine.addTask(command);
+                    try {
+                        mainEngine.validateEvent(command);
+                    } catch (DukeException ex) {
+                        System.out.println(ex);
+                    }
+                    // mainEngine.handleEvent(command);
+                } else {
+                    // mainEngine.addTask(command);
+                    System.out.println("Sorry, but I don't know what you means.");
                 }
             }
             // mainEngine.echo(command);

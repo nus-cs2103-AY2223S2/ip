@@ -10,4 +10,20 @@ todo sleep
 deadline codecrunch /by Sunday
 mark 1
 list
+todo
+deadline
+event
+blahh blah
+list
+deadline do something
+deadline do something /by
+event do something
+event do something /from A
+event something /from A /to
+event something /from /to BBB
+list
+mark
+unmark 100
+
+mark -3
 bye
