@@ -10,10 +10,10 @@ public class Duke {
         while (true) {
             writer.append("chungus> ").flush();
             String input = sc.nextLine();
-            boolean shouldExit = chungus.handleMessage(input);
-            writer.append('\n').flush();
+            boolean shouldExit = chungus.handleMessage(input.split("\\s+"));
             if (shouldExit)
                 break;
+            writer.append('\n').flush();
         }
 
         sc.close();
@@ -22,32 +22,72 @@ public class Duke {
 
 class Chungus {
     private Writer out;
-    private ArrayList<String> tasks;
+    private ArrayList<Task> tasks;
 
     public Chungus(Writer _out) throws IOException {
         out = _out;
         tasks = new ArrayList<>();
 
-        this.info("Hello, I'm Chungus.");
-        this.info("What can I do for you?");
+        info("Hello, I'm Chungus.");
+        info("What can I do for you?");
     }
 
-    public boolean handleMessage(String msg) throws IOException {
-        if (msg.equals("bye")) {
-            this.info("Bye!");
+    public boolean handleMessage(String[] args) throws IOException {
+        boolean shouldExit = handleMessageImpl(args);
+        flush();
+        return shouldExit;
+    }
+
+    private boolean handleMessageImpl(String[] args) throws IOException {
+        if (args[0].equals("bye")) {
+            info("Bye!");
             return true;
         }
-        if (msg.equals("list")) {
-            for (int i = 1; i <= this.tasks.size(); i++) {
-                this.info().append(String.valueOf(i)).append(". ").append(this.tasks.get(i - 1)).append('\n');
+        if (args[0].equals("list")) {
+            info("Here are the tasks in your list:");
+            for (int i = 0; i < tasks.size(); i++) {
+                Task task = tasks.get(i);
+                info().append("  ")
+                        .append(String.valueOf(i + 1))
+                        .append('.')
+                        .append(task.toString())
+                        .append('\n');
             }
-            this.flush();
+            return false;
+        }
+        if (args[0].equals("mark")) {
+            int idx = Integer.parseInt(args[1]) - 1;
+            if (idx >= tasks.size() || idx < 0) {
+                error().append("Task ").append(args[1]).append(" does not exist!\n");
+                return false;
+            }
+
+            Task task = tasks.get(idx);
+            task.setDone();
+
+            info("Okay, I've marked this task as completed:");
+            info().append("  ").append(task.toString()).append('\n');
+
+            return false;
+        }
+        if (args[0].equals("unmark")) {
+            int idx = Integer.parseInt(args[1]) - 1;
+            if (idx >= tasks.size() || idx < 0) {
+                error().append("Task ").append(args[1]).append(" does not exist!\n");
+                return false;
+            }
+
+            Task task = tasks.get(idx);
+            task.setNotDone();
+
+            info("Okay, I've marked this task as incomplete:");
+            info().append("  ").append(task.toString()).append('\n');
+
             return false;
         }
 
-        this.tasks.add(msg);
-        this.info().append("added: ").append(msg).append('\n');
-        this.flush();
+        tasks.add(new Task(args[0]));
+        info().append("added: ").append(args[0]).append('\n');
 
         return false;
     }
@@ -61,7 +101,46 @@ class Chungus {
         out.append("\u001b[36m").append(msg).append('\n').append("\u001b[0m").flush();
     }
 
+    private Writer error() throws IOException {
+        out.append("\u001b[31m");
+        return out;
+    }
+
+    private void error(String msg) throws IOException {
+        out.append("\u001b[31m").append(msg).append('\n').append("\u001b[0m").flush();
+    }
+
     private void flush() throws IOException {
         out.append("\u001b[0m").flush();
+    }
+}
+
+class Task {
+    private String desc;
+    private boolean isDone;
+
+    public Task(String _desc) {
+        desc = _desc;
+        isDone = false;
+    }
+
+    public String desc() {
+        return desc;
+    }
+
+    public boolean isDone() {
+        return isDone;
+    }
+
+    public void setDone() {
+        isDone = true;
+    }
+
+    public void setNotDone() {
+        isDone = false;
+    }
+
+    public String toString() {
+        return (isDone ? "[X] " : "[ ] ") + desc;
     }
 }
