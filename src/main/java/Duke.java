@@ -22,22 +22,35 @@ public class Duke {
     }
 
     static State detectState(String command) {
-        if (command.compareTo("bye") == 0)
-            return State.EXIT;
-        return State.ECHO;
-        //return State.UNKNOWN;
+
+        // TODO: Detect other specific keywords
+
+        // multiple exit keywords
+        switch (command) {
+            case "bye":
+            case "goodbye":
+            case "quit":
+            case "quit()":
+            case "exit":
+            case "exit()":
+                return State.EXIT;
+            default:
+                return State.ECHO;
+            //return State.UNKNOWN; //TODO: for future levels
+        }
     }
 
     public static void main(String[] args) {
 
         Duke.displayLogo();
         Duke.display("Developed by: " + AUTHOR);
-
         System.out.println("Initialising system . . .");
-        State currentState;
+
         String userCmd = "";
         Scanner sc = new Scanner(System.in);
+        State currentState = State.UNKNOWN;
         // TODO: Initialise components
+
         System.out.println("System is ready!");
         Duke.display("\n\n");
         Duke.displayLine();
@@ -47,7 +60,7 @@ public class Duke {
         Duke.display("What can I do for you today?");
 
         // Program Loop
-        while(true) {
+        while(currentState != State.EXIT) {
             System.out.print("\n > ");
             userCmd = sc.nextLine();
 
@@ -59,26 +72,20 @@ public class Duke {
                 case ECHO:
                     Duke.display(userCmd);
                     break;
-                case EXIT:
-                    Duke.display("Goodbye!");
-                    break;
                 case UNKNOWN:
                     Duke.display("Sorry, I don't understand your request :(");
                     Duke.display("Did you spell something wrongly?");
                     //Duke.display("Why not try rephrasing?"); // When chatbot is smarter
                     break;
+                case EXIT:
+                    Duke.display("Goodbye!");
+                    Duke.displayLine();
+                    Duke.displayLogo();
+                    break;
                 default:
                     // can throw error here
                     break;
             }
-
-            // Exit condition
-            if (currentState == State.EXIT) {
-                Duke.displayLine();
-                Duke.displayLogo();
-                break;
-            }
-
         }
     }
 }
