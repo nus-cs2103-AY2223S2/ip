@@ -12,26 +12,31 @@ public class Duke {
         // Take user input
         List<String> taskList = new ArrayList<>();
         Scanner scanner = new Scanner(System.in);
-        String command = scanner.nextLine();
 
-        // If input != bye, echo input
-        while (!command.equals("bye")) {
-            if (command.equals("list")) {
+        while (scanner.hasNext()) {
+            String currCommand = scanner.nextLine();
+
+            // Command for bye
+            if (currCommand.equals("bye")) {
+                String goodbye = "Bye. Hope to see you again soon!";
+                System.out.println(goodbye);
+                break;
+            }
+
+            // Command for list
+            else if (currCommand.equals("list")) {
                 int taskCount = 1;
                 for(String str: taskList) {
                     System.out.println(taskCount + ". " + str);
                     taskCount++;
                 }
-            } else {
-                System.out.println("added: " + command);
-                taskList.add(command);
             }
-            command = scanner.nextLine();
-        }
 
-        if (command.equals("bye")) {
-            String goodbye = "Bye. Hope to see you again soon!";
-            System.out.println(goodbye);
+            // Add task command
+            else {
+                System.out.println("added: " + currCommand);
+                taskList.add(currCommand);
+            }
         }
     }
 }
