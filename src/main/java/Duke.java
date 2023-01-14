@@ -37,18 +37,19 @@ public class Duke {
     /**
      * @return greeting in duke language
      */
-    private String greeting(){
+    private String greeting() {
         return "Hello from\n"
-            +  " ____       _          \n"
-            +  "|  _ \\ _  _| | ____ _   \n"
-            +  "| | | | | |  | |/ / _ \\ \n"
-            +  "| |_| | |_|  |   <  __/  \n"
-            +  "|____/ \\__,_|_|\\_\\___|\n"
-            +  "What can I do for you?\n";
+                + " ____       _          \n"
+                + "|  _ \\ _  _| | ____ _   \n"
+                + "| | | | | |  | |/ / _ \\ \n"
+                + "| |_| | |_|  |   <  __/  \n"
+                + "|____/ \\__,_|_|\\_\\___|\n"
+                + "What can I do for you?\n";
     }
 
     /**
      * Say fatewell and update the active status of duke.
+     * 
      * @return farewell
      */
     private String bye() {
@@ -57,12 +58,12 @@ public class Duke {
     }
 
     private String listTask() {
-        if(tList.isEmpty()) {
-            return "No task found, use:\n" 
-                + "\t<todo     [title]> \n"
-                + "\t<deadline [title] \\by   [date]> \n"
-                + "\t<event    [title] \\from [date] \\to [date]> \n"
-                + "commands to create task.";
+        if (tList.isEmpty()) {
+            return "No task found, use:\n"
+                    + "\t<todo     [title]> \n"
+                    + "\t<deadline [title] \\by   [date]> \n"
+                    + "\t<event    [title] \\from [date] \\to [date]> \n"
+                    + "commands to create task.";
         }
 
         StringBuilder sb = new StringBuilder();
@@ -74,7 +75,7 @@ public class Duke {
     }
 
     private String markTask(int idx) throws IllegalDukeTaskAccessException {
-        if(idx < 1 || idx > tList.size()) {
+        if (idx < 1 || idx > tList.size()) {
             throw new IllegalDukeTaskAccessException(EXCEPTION_INVALID_TODO_ID_ACCESS);
         }
 
@@ -82,11 +83,11 @@ public class Duke {
         tk.markAsDone();
 
         return "Nice! I've marked this task as done:\n"
-            + "\t" + tk;
+                + "\t" + tk;
     }
 
     private String unMarkTask(int idx) throws IllegalDukeTaskAccessException {
-        if(idx < 1 || idx > tList.size()) {
+        if (idx < 1 || idx > tList.size()) {
             throw new IllegalDukeTaskAccessException(EXCEPTION_INVALID_TODO_ID_ACCESS);
         }
 
@@ -94,14 +95,14 @@ public class Duke {
         tk.unmarkDone();
 
         return "OK, I've marked this task as not done yet:\n"
-            + "\t" + tk;
+                + "\t" + tk;
     }
 
     private String addTask(Task tk) {
         tList.add(tk);
         return "Got it. I've added this task:\n"
-            + "\t" + tk + "\n"
-            + "Now you have " + tList.size() + " tasks in the list.";
+                + "\t" + tk + "\n"
+                + "Now you have " + tList.size() + " tasks in the list.";
     }
 
     private String addTodo(String title) {
@@ -117,22 +118,25 @@ public class Duke {
     }
 
     private String deleteTask(int idx) throws IllegalDukeTaskAccessException {
-        if(idx < 1 || idx > tList.size()) {
+        if (idx < 1 || idx > tList.size()) {
             throw new IllegalDukeTaskAccessException(EXCEPTION_INVALID_TODO_ID_ACCESS);
         }
         Task tk = tList.remove(idx - 1);
 
         return "Noted. I've removed this task:\n"
-            + "\t" + tk + "\n"
-            + "Now you have " + tList.size() + " tasks in the list.";
+                + "\t" + tk + "\n"
+                + "Now you have " + tList.size() + " tasks in the list.";
     }
 
     /**
      * Handles incomming commands and invoke the corresponding duke functions.
+     * 
      * @param command a string command with variable word count
      * @return function outputs
-     * @throws NoSuchDukeCommandException if duke does not understand the command
-     * @throws IllegalDukeCommandArgumentException if the command does not follow the command format 
+     * @throws NoSuchDukeCommandException          if duke does not understand the
+     *                                             command
+     * @throws IllegalDukeCommandArgumentException if the command does not follow
+     *                                             the command format
      */
     private String read(String command) throws NoSuchDukeCommandException, IllegalDukeCommandArgumentException {
         if (!isActive()) {
@@ -144,65 +148,70 @@ public class Duke {
         // 1: remaining args for further decoding
         String[] input = command.toLowerCase().split(" ", 2);
         String[] options;
-        
-        switch (input[0]) {
-            case "bye":
-                return bye();
-            case "list":
-                return listTask();
-            case "mark":
-                try {
-                    return markTask(Integer.parseInt(input[1]));
-                } catch (NumberFormatException e) {
-                    throw new IllegalDukeCommandArgumentException(EXCEPTION_INVALID_TODO_ID);
-                }  catch (IllegalDukeTaskAccessException e) {
-                    return e.getMessage();
-                }
-            case "unmark":
-                try {
-                    return unMarkTask(Integer.parseInt(input[1]));
-                } catch (NumberFormatException e) {
-                    throw new IllegalDukeCommandArgumentException(EXCEPTION_INVALID_TODO_ID);
-                }  catch (IllegalDukeTaskAccessException e) {
-                    return e.getMessage();
-                }
-            case "todo":
-                if (input.length != 2) {
-                    throw new IllegalDukeCommandArgumentException(EXCEPTION_INVALID_TODO_CMD);
-                }
 
-                return addTodo(input[1]);
-            case "event":
-                options = input[1].split(" /[a-z]*[^ ] ");
+        try {
+            switch (DukeCommand.valueOf(input[0].toUpperCase())) {
+                case BYE:
+                    return bye();
+                case LIST:
+                    return listTask();
+                case MARK:
+                    try {
+                        return markTask(Integer.parseInt(input[1]));
+                    } catch (NumberFormatException e) {
+                        throw new IllegalDukeCommandArgumentException(EXCEPTION_INVALID_TODO_ID);
+                    } catch (IllegalDukeTaskAccessException e) {
+                        return e.getMessage();
+                    }
+                case UNMARK:
+                    try {
+                        return unMarkTask(Integer.parseInt(input[1]));
+                    } catch (NumberFormatException e) {
+                        throw new IllegalDukeCommandArgumentException(EXCEPTION_INVALID_TODO_ID);
+                    } catch (IllegalDukeTaskAccessException e) {
+                        return e.getMessage();
+                    }
+                case TODO:
+                    if (input.length != 2) {
+                        throw new IllegalDukeCommandArgumentException(EXCEPTION_INVALID_TODO_CMD);
+                    }
 
-                if (options.length != 3) {
-                    throw new IllegalDukeCommandArgumentException(EXCEPTION_INVALID_EVENT_CMD);
-                }
+                    return addTodo(input[1]);
+                case EVENT:
+                    options = input[1].split(" /[a-z]*[^ ] ");
 
-                return addEvent(options[0], options[1], options[2]);
-            case "deadline":
-                options = input[1].split(" /[a-z]*[^ ] ");
+                    if (options.length != 3) {
+                        throw new IllegalDukeCommandArgumentException(EXCEPTION_INVALID_EVENT_CMD);
+                    }
 
-                if (options.length != 3) {
-                    throw new IllegalDukeCommandArgumentException(EXCEPTION_INVALID_DEADLINE_CMD);
-                }
+                    return addEvent(options[0], options[1], options[2]);
+                case DEADLINE:
+                    options = input[1].split(" /[a-z]*[^ ] ");
 
-                return addDeadline(options[0], options[1]);
-            case "delete":
-                try {
-                    return deleteTask(Integer.parseInt(input[1]));
-                } catch (NumberFormatException e) {
-                    throw new IllegalDukeCommandArgumentException(EXCEPTION_INVALID_TODO_ID);
-                }  catch (IllegalDukeTaskAccessException e) {
-                    return e.getMessage();
-                }
-            default:
-                throw new NoSuchDukeCommandException(EXCEPTION_NOSUCH_COMMAND);
+                    if (options.length != 3) {
+                        throw new IllegalDukeCommandArgumentException(EXCEPTION_INVALID_DEADLINE_CMD);
+                    }
+
+                    return addDeadline(options[0], options[1]);
+                case DELETE:
+                    try {
+                        return deleteTask(Integer.parseInt(input[1]));
+                    } catch (NumberFormatException e) {
+                        throw new IllegalDukeCommandArgumentException(EXCEPTION_INVALID_TODO_ID);
+                    } catch (IllegalDukeTaskAccessException e) {
+                        return e.getMessage();
+                    }
+                default:
+                    throw new NoSuchDukeCommandException(EXCEPTION_NOSUCH_COMMAND);
+            }
+        } catch (IllegalArgumentException e) {
+            throw new NoSuchDukeCommandException(EXCEPTION_NOSUCH_COMMAND);
         }
     }
 
     /**
      * Prints any string in duke style.
+     * 
      * @param text
      */
     private void say(String text) {
