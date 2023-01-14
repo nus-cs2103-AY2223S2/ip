@@ -1,15 +1,42 @@
+import java.util.NoSuchElementException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
+/**
+ * Duke agent that knows how to manage a todo list.
+ */
 public class Duke {
 
-    private List<Task> tList;
+    /* Exception constants */
+    private final static String EXCEPTION_NOSUCH_COMMAND = "I'm sorry, but I don't know what that means :-(";
+    private final static String EXCEPTION_INVALID_TODO_ID = "Invalid task id! Task id must be a number.";
+    private final static String EXCEPTION_INVALID_TODO_ID_ACCESS = "Unable to find task.";
+    private final static String EXCEPTION_INVALID_TODO_CMD = "The description of a todo cannot be empty.";
+    private final static String EXCEPTION_INVALID_EVENT_CMD = "Invalid event command format.";
+    private final static String EXCEPTION_INVALID_DEADLINE_CMD = "Invalid deadline command format.";
 
+    private List<Task> tList;
+    private boolean isActive;
+
+    /**
+     * Default constructor.
+     */
     Duke() {
         tList = new ArrayList<Task>();
+        isActive = true;
     }
 
+    /**
+     * @return active status of duke
+     */
+    private boolean isActive() {
+        return isActive;
+    }
+
+    /**
+     * @return greeting in duke language
+     */
     private String greeting(){
         return "Hello from\n"
             +  " ____       _          \n"
@@ -20,7 +47,12 @@ public class Duke {
             +  "What can I do for you?\n";
     }
 
+    /**
+     * Say fatewell and update the active status of duke.
+     * @return farewell
+     */
     private String bye() {
+        isActive = false;
         return "Bye. Hope to see you again soon!";
     }
 
@@ -41,9 +73,9 @@ public class Duke {
         return sb.toString();
     }
 
-    private String markTask(int idx) {
+    private String markTask(int idx) throws IllegalDukeTaskAccessException {
         if(idx < 1 || idx > tList.size()) {
-            return "Invalid choice";
+            throw new IllegalDukeTaskAccessException(EXCEPTION_INVALID_TODO_ID_ACCESS);
         }
 
         Task tk = tList.get(idx - 1);
@@ -53,9 +85,9 @@ public class Duke {
             + "\t" + tk;
     }
 
-    private String unMarkTask(int idx) {
+    private String unMarkTask(int idx) throws IllegalDukeTaskAccessException {
         if(idx < 1 || idx > tList.size()) {
-            return "Invalid choice";
+            throw new IllegalDukeTaskAccessException(EXCEPTION_INVALID_TODO_ID_ACCESS);
         }
 
         Task tk = tList.get(idx - 1);
@@ -84,49 +116,94 @@ public class Duke {
         return addTask(new Deadline(title, by));
     }
 
+    /**
+     * Handles incomming commands and invoke the corresponding duke functions.
+     * @param command a string command with variable word count
+     * @return function outputs
+     * @throws NoSuchDukeCommandException if duke does not understand the command
+     * @throws IllegalDukeCommandArgumentException if the command does not follow the command format 
+     */
+    private String read(String command) throws NoSuchDukeCommandException, IllegalDukeCommandArgumentException {
+        if (!isActive()) {
+            return "This duke is nolonger active, please hire another agent.";
+        }
+
+        // Splits raw command by first space.
+        // 0: action
+        // 1: remaining args for further decoding
+        String[] input = command.toLowerCase().split(" ", 2);
+        String[] options;
+        
+        switch (input[0]) {
+            case "bye":
+                return bye();
+            case "list":
+                return listTask();
+            case "mark":
+                try {
+                    return markTask(Integer.parseInt(input[1]));
+                } catch (NumberFormatException e) {
+                    throw new IllegalDukeCommandArgumentException(EXCEPTION_INVALID_TODO_ID);
+                }  catch (IllegalDukeTaskAccessException e) {
+                    return e.getMessage();
+                }
+            case "unmark":
+                try {
+                    return unMarkTask(Integer.parseInt(input[1]));
+                } catch (NumberFormatException e) {
+                    throw new IllegalDukeCommandArgumentException(EXCEPTION_INVALID_TODO_ID);
+                }  catch (IllegalDukeTaskAccessException e) {
+                    return e.getMessage();
+                }
+            case "todo":
+                if (input.length != 2) {
+                    throw new IllegalDukeCommandArgumentException(EXCEPTION_INVALID_TODO_CMD);
+                }
+
+                return addTodo(input[1]);
+            case "event":
+                options = input[1].split(" /[a-z]*[^ ] ");
+
+                if (options.length != 3) {
+                    throw new IllegalDukeCommandArgumentException(EXCEPTION_INVALID_EVENT_CMD);
+                }
+
+                return addEvent(options[0], options[1], options[2]);
+            case "deadline":
+                options = input[1].split(" /[a-z]*[^ ] ");
+
+                if (options.length != 3) {
+                    throw new IllegalDukeCommandArgumentException(EXCEPTION_INVALID_DEADLINE_CMD);
+                }
+
+                return addDeadline(options[0], options[1]);
+            default:
+                throw new NoSuchDukeCommandException(EXCEPTION_NOSUCH_COMMAND);
+        }
+    }
+
+    /**
+     * Prints any string in duke style.
+     * @param text
+     */
     private void say(String text) {
-        System.out.println("_".repeat(40));
+        System.out.println("-".repeat(40));
         System.out.println(text);
-        System.out.println("‾".repeat(40));
+        System.out.println("-".repeat(40));
     }
 
     public static void main(String[] args) {
         Duke duke = new Duke();
-        System.out.println(duke.greeting());
+        duke.say(duke.greeting());
 
         Scanner sc = new Scanner(System.in);
-        convo: while (true) {
-            String[] input = sc.nextLine().toLowerCase().split(" ", 2);
-            String action = input[0];
-            String[] options;
-
-            switch (action) {
-                case "bye":
-                    duke.say(duke.bye());
-                    break convo;
-                case "list":
-                    duke.say(duke.listTask());
-                    break;
-                case "mark":
-                    duke.say(duke.markTask(Integer.parseInt(input[1])));
-                    break;
-                case "unmark":
-                    duke.say(duke.unMarkTask(Integer.parseInt(input[1])));
-                    break;
-                case "todo":
-                    duke.say(duke.addTodo(input[1]));
-                    break;
-                case "event":
-                    options = input[1].split(" /[a-z]*[^ ] ");
-                    duke.say(duke.addEvent(options[0], options[1], options[2]));
-                    break;
-                case "deadline":
-                    options = input[1].split(" /[a-z]*[^ ] ");
-                    duke.say(duke.addDeadline(options[0], options[1]));
-                    break;
-                default:
-                    duke.say("Invalid command.");
-                    break;
+        while (duke.isActive()) {
+            try {
+                duke.say(duke.read(sc.nextLine()));
+            } catch (NoSuchDukeCommandException | IllegalDukeCommandArgumentException e) {
+                duke.say(e.getMessage());
+            } catch (NoSuchElementException e) {
+                duke.say(duke.bye());
             }
         }
 
