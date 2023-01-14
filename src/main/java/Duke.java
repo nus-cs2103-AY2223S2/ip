@@ -42,8 +42,10 @@ public class Duke {
                 System.out.println("OK, I've marked this task as not done yet:");
                 System.out.println(taskStore.get(taskIndex));
             } else {
+                /*
                 taskStore.add(new Task(command));
                 System.out.println("added: " + command);
+                */
             }
             System.out.println(separator);
         }

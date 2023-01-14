@@ -1,15 +1,13 @@
 public class Deadline extends Task {
-    private String from;
-    private String to;
+    private String by;
 
-    public Deadline(String name, String from, String to) {
+    public Deadline(String name, String by) {
         super(name);
-        this.from = from;
-        this.to = to;
+        this.by = by;
     }
 
     @Override
     public String toString() {
-        return "[D] " + super.toString() + " (from: " + from + " to: " + to + ")";
+        return "[D] " + super.toString() + " (by: " + by + ")";
     }
  }
