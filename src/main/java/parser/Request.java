@@ -1,6 +1,10 @@
 package parser;
 
 import command.Command;
+import dukeexeption.DukeException;
+import dukeexeption.InvalidArgumentException;
+import dukeexeption.MissingArgumentException;
+import dukeexeption.UnknownCommandException;
 
 public class Request {
     private final String request;
@@ -13,9 +17,10 @@ public class Request {
 
     /**
      * Parse the request string to return an executable command.
-     * @return  A corresponding command.
+     * 
+     * @return A corresponding command.
      */
-    public Command parse() {
+    public Command parse() throws UnknownCommandException, MissingArgumentException, InvalidArgumentException {
         preprocess();
         switch (this.requestType) {
             case "list":
@@ -31,7 +36,7 @@ public class Request {
             case "event":
                 return new EventParser().parse(this.requestContent);
             default:
-                return null;
+                throw new UnknownCommandException();
         }
     }
 

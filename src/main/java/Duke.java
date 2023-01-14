@@ -1,4 +1,5 @@
 import command.Command;
+import dukeexeption.DukeException;
 import parser.Request;
 import storage.TaskList;
 
@@ -41,9 +42,13 @@ public class Duke {
             if (request.equals("bye")) {
                 break;
             }
-            Command command = new Request(request).parse();
-            String reply = command.run(taskList);
-            returnFormattedResponse(reply);
+            try {
+                Command command = new Request(request).parse();
+                String reply = command.run(taskList);
+                returnFormattedResponse(reply);
+            } catch(DukeException error) {
+                returnFormattedResponse(error.toString());
+            }
         }
 
         returnFormattedResponse(EXITING_MESSAGE);
