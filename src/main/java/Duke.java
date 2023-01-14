@@ -11,7 +11,17 @@ public class Duke {
             if (command.equals("list")) {
                 mainEngine.listTask();
             } else {
-                mainEngine.addTask(command);
+                String[] splited = command.split(" ");
+                // Here later should catch another issue of empty command
+                if (splited[0].equals("mark")) {
+                    int index = Integer.parseInt(splited[1]);
+                    mainEngine.markDone(index);
+                } else if (splited[0].equals("unmark")) {
+                    int index = Integer.parseInt(splited[1]);
+                    mainEngine.markUnDone(index);
+                } else {
+                    mainEngine.addTask(command);
+                }
             }
             // mainEngine.echo(command);
             mainEngine.printLine();
