@@ -3,7 +3,9 @@ import java.util.Scanner;
 public class Duke {
     public static void main(String[] args) {
         boolean end = false;
-        DukeMessage initMessage = new DukeMessage("Hello! I'm Duke\nWhat can I do for you?");
+        TaskList taskList = new TaskList();
+        MessageProcessor messageProcessor = new MessageProcessor(taskList);
+        DukeMessage initMessage = new DukeMessage(MessageStatus.START);
         System.out.println(initMessage);
 
         while (!end) {
@@ -12,7 +14,7 @@ public class Duke {
             if (userMessage.equals("bye")) {
                 end = true;
             }
-            DukeMessage dukeResponse = new DukeMessage(userMessage);
+            DukeMessage dukeResponse = messageProcessor.process(userMessage);
             System.out.println(dukeResponse);
         }
 
