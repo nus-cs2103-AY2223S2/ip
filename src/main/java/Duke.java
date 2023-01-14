@@ -11,16 +11,26 @@ public class Duke {
         // Start user input
         while (usr_in.hasNextLine()) {
             String curr_in = usr_in.nextLine();
-            String[] curr = curr_in.split(" ");
+            String[] curr = curr_in.split("/"); //split into title and time-related
+            String[] curr_title = curr[0].split(" "); //split title by word
             if (curr_in.equals("bye")) {
                 end();
                 break;
             } else if (curr_in.equals("list")) {
                 print();
-            } else if (curr[0].equals("mark")) {
-                mark(Integer.parseInt(curr[1]));
-            } else if (curr[0].equals("unmark")) {
-                unmark(Integer.parseInt(curr[1]));
+            } else if (curr_title[0].equals("mark")) {
+                mark(Integer.parseInt(curr_title[1]));
+            } else if (curr_title[0].equals("unmark")) {
+                unmark(Integer.parseInt(curr_title[1]));
+            } else if (curr_title[0].equals("todo")) {
+                add(new ToDo(curr[0].substring(5)));
+            } else if (curr_title[0].equals("deadline")) {
+                add(new Deadline(curr[0].substring(9).trim(),
+                        curr[1].substring(3)));
+            } else if (curr_title[0].equals("event")) {
+                add(new Event(curr[0].substring(6).trim(),
+                        curr[1].substring(5).trim(),
+                        curr[2].substring(3)));
             } else {
                 //echo(curr_in);
                 add(curr_in);
@@ -51,6 +61,12 @@ public class Duke {
         System.out.println(line_break + " \t added: " + item + " \n " + line_break);
     }
 
+    static void add(Task task) {
+        items.add(task);
+        System.out.println(line_break + "\t Adding the task: \n\t\t" + task +
+                            "\n\t You now have " + items.size() + " task(s)." + line_break);
+    }
+
     static void mark(int idx) {
         idx = idx - 1;
         items.get(idx).mark();
@@ -69,7 +85,7 @@ public class Duke {
      * prints out list of items
      */
     static void print() {
-        System.out.println(line_break + "Here are all your tasks, good luck!");
+        System.out.println(line_break + "\tHere are all your tasks, good luck!");
         for (int i = 0; i < items.size(); i++) {
             Task item = items.get(i);
             System.out.println("\t " + (i + 1) + ". " + item);
