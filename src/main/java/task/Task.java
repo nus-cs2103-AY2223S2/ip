@@ -1,7 +1,7 @@
 /**
  * Task
  */
-public class Task {
+class Task {
     private String title;
     private boolean isDone;
 

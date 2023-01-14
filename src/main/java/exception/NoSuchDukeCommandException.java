@@ -1,4 +1,4 @@
-public class NoSuchDukeCommandException extends DukeException {
+class NoSuchDukeCommandException extends DukeException {
 
     public NoSuchDukeCommandException(String errorMessage) {
         super(errorMessage);

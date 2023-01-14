@@ -1,4 +1,4 @@
-public class IllegalDukeTaskAccessException extends DukeException {
+class IllegalDukeTaskAccessException extends DukeException {
 
     public IllegalDukeTaskAccessException(String errorMessage) {
         super(errorMessage);
