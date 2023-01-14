@@ -1,5 +1,8 @@
 public enum State {
-    INTRO,
     ECHO,
+    // LIST,
+    // TODO,
+    // DEADLINE,
+    // MARK,
     EXIT,
 }

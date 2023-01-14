@@ -12,55 +12,61 @@ public class Duke {
             + "|____/ \\__,_|_|\\_\\___|\n";
 
 
+    static void display(String message) {
+        System.out.println(message);
+    }
+    static void displayLogo() {
+        Duke.display(LOGO);
+    }
+    static void displayLine() {
+        Duke.display("____________________________________________________________");
+    }
 
     public static void main(String[] args) {
 
-        System.out.println(LOGO);
-        System.out.println("Developed by: " + AUTHOR);
-        System.out.println("Version Level: Level-" + V_LEVEL);
+        Duke.displayLogo();
+        Duke.display("Developed by: " + AUTHOR);
+        Duke.display("Version Level: Level-" + V_LEVEL);
 
-        // System.out.println("Initialising duke . . .");
+        System.out.println("Initialising system . . .");
         Scanner sc = new Scanner(System.in);
         String userCmd = "";
         // TODO: Initialise components
-        State currentState = State.INTRO;
-        // System.out.println("Duke is ready!");
+        State currentState;// = State.ECHO;
+        System.out.println("System is ready!");
+        Duke.display("\n\n");
+        Duke.displayLine();
+
 
         // Program Intro
-        System.out.println("____________________________________________________________");
-        System.out.println("Hello! I'm Duke! :D");
-        System.out.println("What can I do for you?");
-        currentState = State.ECHO;
-        System.out.println("____________________________________________________________");
+        Duke.display("Hello! I'm Duke! :D");
+        Duke.display("What can I do for you today?");
 
         // Program Loop
         while(true) {
-            System.out.println();
+            currentState = State.ECHO;
+            System.out.print("\n > ");
             userCmd = sc.nextLine();
 
+            // Command detection
             if (userCmd.compareTo("bye") == 0)
                 currentState = State.EXIT;
 
-            System.out.println("____________________________________________________________");
 
             switch(currentState) {
-                /*case INTRO:
-                    System.out.println("Hello! I'm Duke! :D");
-                    System.out.println("What can I do for you?");
-
-                    break;*/
                 case ECHO:
-                    System.out.println(userCmd);
+                    Duke.display(userCmd);
                     break;
                 case EXIT:
-                    System.out.println("Bye. Hope to see you again soon!");
+                    Duke.display("Goodbye!");
+                    Duke.displayLine();
+                    Duke.displayLogo();
                     break;
                 default:
                     // can throw error here
                     break;
             }
 
-            System.out.println("____________________________________________________________");
         }
     }
 }
