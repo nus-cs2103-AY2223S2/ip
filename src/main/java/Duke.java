@@ -16,8 +16,11 @@ public class Duke {
                 "    What can I do for you?\n" +
                 "    ____________________________________________________________";
 
+        String[] data = new String[100];
+
         System.out.println("    Hello from\n" + logo);
         System.out.println(greet);
+        int id = 0;
 
         while(run) {
             Scanner sc = new Scanner(System.in);
@@ -27,10 +30,18 @@ public class Duke {
                         "    Bye. Hope to see you again soon!\n" +
                         line);
                 run = false;
+            } else if (command.equals("list")) {
+                System.out.print(line);
+                for (int i = 0; i < id; i++) {
+                    System.out.printf("    %d. %s%n", i + 1, data[i]);
+                }
+                System.out.print(line);
             } else {
                 System.out.print(line +
-                        "    " + command + "\n" +
+                        "    added: " + command + "\n" +
                         line);
+                data[id] = command;
+                id++;
             }
         }
     }
