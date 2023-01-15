@@ -55,7 +55,12 @@ public class Duke {
                 return;
             }
 
-            makeResponse(userInput);
+            try {
+                makeResponse(userInput);
+            }
+            catch (DukeUnknownInputException e) {
+                handleDukeException(e);
+            }
         }
 
     }
@@ -66,13 +71,14 @@ public class Duke {
      *
      * @param command The user input received.
      */
-    public static void makeResponse(String command) {
+    public static void makeResponse(String command) throws DukeUnknownInputException {
+
         String processedCommand = checkForCommand(command);
 
         //Handle "list" command
         if (processedCommand.equals("list")) {
             for (int i = 0; i < listPointer; i++) {
-                String index = "\t" + Integer.toString(i+1) + ". ";
+                String index = "\t" + Integer.toString(i + 1) + ". ";
                 System.out.println(index + taskList[i]);
             }
             makeSeperation();
@@ -101,18 +107,25 @@ public class Duke {
         }
 
         //Handle normal task
+        else if (processedCommand.equals("task")){
+            try {
+                Task current_task = createTask(command);
+
+                taskList[listPointer] = current_task;
+                listPointer += 1;
+
+                System.out.println("\tGot it. I've added this task:\n\t  " + current_task
+                        + "\n\t" + String.format("Now you have %d tasks in the list.", listPointer));
+                makeSeperation();
+            } catch (DukeBadInstructionFormatException e) {
+                handleDukeException(e);
+            }
+
+        }
+
+        //Program doesn't know how to handle.
         else {
-            Task current_task = createTask(command);
-
-            //TODO better error handling
-            if (current_task == null) {return;}
-
-            taskList[listPointer] = current_task;
-            listPointer += 1;
-
-            System.out.println("\tGot it. I've added this task:\n\t  " + current_task
-            + "\n\t" + String.format("Now you have %d tasks in the list.", listPointer));
-            makeSeperation();
+            throw new DukeUnknownInputException("Unknown input.");
         }
 
     }
@@ -124,10 +137,17 @@ public class Duke {
      *
      * @return The Task object based on command.
      */
-    public static Task createTask(String command) {
+    public static Task createTask(String command) throws DukeBadInstructionFormatException {
         String[] splitted = command.split(" ");
 
+        //TODO: consider splitting into separate methods for each task
         if (splitted[0].equals("todo")) {
+            //Handle no description for a ToDo input
+            if (splitted.length == 1) {
+                throw new DukeBadInstructionFormatException(
+                        "The description of a todo cannot be empty.");
+            }
+
             //Get 'ToDo' description
             String[] descriptionArray = Arrays.copyOfRange(splitted, 1, splitted.length);
             String description = String.join(" ", descriptionArray);
@@ -148,7 +168,12 @@ public class Duke {
                     byStartIndex = i;
                 }
             }
-            //TODO: handle invalid byStartIndex (-1)
+
+            //Handle no 'by' in instruction
+            if (byStartIndex == -1) {
+                throw new DukeBadInstructionFormatException("Usage of deadline: " +
+                        "deadline [description] /by[date]");
+            }
 
             //Make description and by string
             String[] descriptionArray = Arrays.copyOfRange(splitted, 1, byStartIndex);
@@ -156,6 +181,12 @@ public class Duke {
                     splitted.length);
             String description = String.join(" ", descriptionArray);
             String by = String.join(" ", byArray);
+
+            //Handle no description for a Deadline
+            if (description.equals("")) {
+                throw new DukeBadInstructionFormatException(
+                        "The description of a deadline cannot be empty.");
+            }
 
             //Make Deadline
             Deadline deadline = new Deadline(description, by);
@@ -178,7 +209,12 @@ public class Duke {
                     toStartIndex = i;
                 }
             }
-            //TODO: handle invalid from/toStartIndex (-1)
+            //Handle invalid from or to start index
+            if (fromStartIndex == -1 || toStartIndex == -1 ||
+                    fromStartIndex > toStartIndex) {
+                throw new DukeBadInstructionFormatException("Usage of Event: " +
+                        "event [description] /from[date] /to[date]");
+            }
 
             //Make description and by string
             String[] descriptionArray = Arrays.copyOfRange(splitted, 1, fromStartIndex);
@@ -189,6 +225,12 @@ public class Duke {
             String description = String.join(" ", descriptionArray);
             String from = String.join(" ", fromArray);
             String to = String.join(" ", toArray);
+
+            //Handle no description for an Event
+            if (description.equals("")) {
+                throw new DukeBadInstructionFormatException(
+                        "The description of an event cannot be empty.");
+            }
 
             //Make Event
             Event event = new Event(description, from, to);
@@ -217,8 +259,11 @@ public class Duke {
             return "mark";
         } else if (splitted[0].equals("unmark")) {
             return "unmark";
-        } else {
+        } else if (splitted[0].equals("todo") || splitted[0].equals("deadline")
+                || splitted[0].equals("event")){
             return "task";
+        } else {
+            return "others";
         }
     }
 
@@ -256,5 +301,16 @@ public class Duke {
      */
     public static void makeSeperation() {
         System.out.println("\t____________________________________________________________");
+    }
+
+    /**
+     * Handles a Duke Exception.
+     *
+     * @param e Duke exception that was caught.
+     */
+    public static void handleDukeException(DukeException e) {
+        System.out.println(e);
+        makeSeperation();
+        return;
     }
 }
