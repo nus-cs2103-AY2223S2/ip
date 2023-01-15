@@ -3,5 +3,5 @@ public enum Command {
     BYE,
     ADD,
     DELETE,
-    LIST
+    LIST,
 }

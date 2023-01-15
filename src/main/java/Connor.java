@@ -10,6 +10,11 @@ public class Connor {
         }
     }
 
+    private static String getTask(String input) {
+        return input.substring(input.indexOf(' ') + 1, input.length());
+
+    }
+
     public static void main(String[] args) {
         String name = "Connor";
         System.out.println("Hello! I'm " + name + ", the android sent by Cyberlife");
@@ -27,7 +32,9 @@ public class Connor {
                         break;
 
                     case ADD:
-                        list.addTask(input);
+                        // TODO: handle errors and invalid commands.
+                        String task = getTask(input);
+                        list.addTask(task);
                         System.out.println("I have added the task to my memory");
                         break;
 
