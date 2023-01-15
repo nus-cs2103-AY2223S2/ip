@@ -45,8 +45,35 @@ public class Duke {
                             + t.symbol() + " " + t.getDesc());
                 }
             }  else {
-                todoList.add(new Tasks(str));
-                System.out.println("added: " + str);
+                String type = str.split(" ", 2)[0];
+                switch(type) {
+                    case "todo":
+                        Tasks t = new ToDo(str);
+                        todoList.add(t);
+                        System.out.println(t.mssg() +
+                                "\nNow you have " +
+                                todoList.size() +
+                                " tasks in the list");
+                        break;
+                    case "deadline":
+                        Tasks d = new Deadline(str);
+                        todoList.add(d);
+                        System.out.println(d.mssg() +
+                                "\nNow you have " +
+                                todoList.size() +
+                                " tasks in the list");
+                        break;
+                    case "event":
+                        Tasks e = new Event(str);
+                        todoList.add(e);
+                        System.out.println(e.mssg() +
+                                "\nNow you have " +
+                                todoList.size() +
+                                " tasks in the list");
+                        break;
+                    default:
+                }
+
             }
         }
     }

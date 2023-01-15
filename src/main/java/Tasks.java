@@ -1,12 +1,14 @@
 public class Tasks {
-    final protected String desc;
+    protected final String desc;
     protected Boolean done;
-    public Tasks(String str) {
-        this.desc = str;
+
+    public Tasks(String var1) {
+        this.desc = var1;
         this.done = false;
     }
-    public String getDesc(){
-        return desc;
+
+    public String getDesc() {
+        return this.desc;
     }
 
     public void mark() {
@@ -16,11 +18,16 @@ public class Tasks {
     public void unmark() {
         this.done = false;
     }
+
     public String symbol() {
-        if(done) {
-            return "[X]";
-        } else {
-            return "[ ]";
-        }
+        return this.done ? "[X]" : "[ ]";
+    }
+
+    public String icon() {
+        return "";
+    }
+
+    public String mssg() {
+        return "Got it I've added this task: \n";
     }
 }
