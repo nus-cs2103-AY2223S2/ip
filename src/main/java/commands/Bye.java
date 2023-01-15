@@ -1,4 +1,5 @@
 package commands;
+
 import data.MyData;
 
 public class Bye extends Commands {

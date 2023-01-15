@@ -7,9 +7,10 @@ public class Task {
     public Task(String description) {
         this.description = description;
     }
+
     @Override
     public String toString() {
-        return isDone ? "[X] " + description + '\n' : "[ ] " + description + '\n';
+        return isDone ? "[X] " + description : "[ ] " + description;
     }
 
     public void markDone() {

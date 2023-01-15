@@ -1,7 +1,7 @@
 import commands.*;
 import data.MyData;
-
 import java.util.Scanner;
+import java.util.Arrays;
 
 public class Duke {
     public static void main(String[] args) {
@@ -23,9 +23,11 @@ public class Duke {
         System.out.println(greet);
 
         while(mydata.getRun()) {
-            Scanner sc = new Scanner(System.in);
+            Scanner sc = new Scanner(System.in).useDelimiter(" ");
             String command = sc.nextLine();
             String[] commandArr = command.split(" ");
+            String[] slashed = command.split("/");
+
             if (command.equals("bye")) {
                 Bye exit = new Bye();
                 exit.execute(mydata);
@@ -48,10 +50,27 @@ public class Duke {
                 } catch (IndexOutOfBoundsException e) {
                     System.out.print("    Please enter a valid value.\n");
                 }
+            } else if (commandArr[0].equals("todo")) {
+                AddToDo toAdd = new AddToDo(removeCommand(command));
+                toAdd.execute(mydata);
+            } else if (commandArr[0].equals("deadline")) {
+                AddDeadline toAdd = new AddDeadline(removeCommand(slashed[0]), removeCommand(slashed[1]));
+                toAdd.execute(mydata);
+            } else if (commandArr[0].equals("event")) {
+                AddEvent toAdd = new AddEvent(removeCommand(slashed[0]),
+                                              removeCommand(slashed[1]),
+                                              removeCommand(slashed[2]));
+                toAdd.execute(mydata);
             } else {
                 Add toAdd = new Add(command);
                 toAdd.execute(mydata);
             }
         }
+    }
+
+    public static String removeCommand(String command) {
+        String[] commandArr = command.split(" ");
+        String[] descriptionArr = Arrays.copyOfRange(commandArr, 1, commandArr.length);
+        return String.join(" ", descriptionArr);
     }
 }

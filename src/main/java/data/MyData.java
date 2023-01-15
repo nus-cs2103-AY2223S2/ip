@@ -5,7 +5,9 @@ import tasks.Task;
 
 public class MyData {
     private boolean run = true;
+
     private ArrayList<Task> data = new ArrayList<Task>();
+
     public Task getData(int index) {
         return this.data.get(index);
     }
