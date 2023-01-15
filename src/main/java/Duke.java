@@ -34,8 +34,12 @@ public class Duke {
 
         if (cmd.compareTo("list") == 0)
             return State.LIST;
-        else if (cmd.compareTo("add") == 0)
-            return State.ADD;
+        else if (cmd.compareTo("todo") == 0)
+            return State.TODO;
+        else if (cmd.compareTo("deadline") == 0)
+            return State.DEADLINE;
+        else if (cmd.compareTo("event") == 0)
+            return State.EVENT;
         else if (cmd.compareTo("mark") == 0)
             return State.MARK;
         else if (cmd.compareTo("unmark") == 0)
@@ -88,9 +92,9 @@ public class Duke {
 
             // State handling
             switch(currentState) {
-                case ADD:
+                case TODO:
                     String item = userCmd.substring(4).trim(); // exclude "add "
-                    list.add(new Task(item));
+                    list.add(new Todo(item));
                     Duke.display("I have added: " + item);
                     break;
                 case LIST:
