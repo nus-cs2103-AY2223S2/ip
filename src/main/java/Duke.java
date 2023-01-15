@@ -1,4 +1,3 @@
-import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Duke {
@@ -9,7 +8,7 @@ public class Duke {
                 + "============================================================\n";
         System.out.print(welcomeMessage);
 
-        ArrayList<String> list = new ArrayList<>();
+        TaskList taskList = new TaskList();
         String userPrompt = ">> ";
         Scanner sc = new Scanner(System.in);
 
@@ -18,22 +17,15 @@ public class Duke {
             String userInput = sc.nextLine();
 
             if (userInput.equals("list")) {
-                if (list.size() == 0) {
-                    System.out.println("The list is empty.");
-                    continue;
-                }
-
-                for (int i = 0; i < list.size(); i++) {
-                    String element = list.get(i);
-                    String indexString = Integer.toString(i + 1);
-                    System.out.println(indexString + ". " + element);
-                }
+                taskList.handleListCommand();
+            } else if (userInput.matches("^mark.*$") || userInput.matches("^unmark.*$")) {
+                taskList.handleMarkUnmarkCommand(userInput);
             } else if (userInput.equals("bye")) {
-                System.out.println("Exiting...");
+                taskList.handleByeCommand();
+                sc.close();
                 break;
             } else {
-                list.add(userInput);
-                System.out.println("Added: " + userInput);
+                taskList.createNewTask(userInput);
             }
         }
     }
