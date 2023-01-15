@@ -14,4 +14,8 @@ todo
 deadline
 event
 hi
+delete 1
+delete 2
+delete 4
+list
 bye

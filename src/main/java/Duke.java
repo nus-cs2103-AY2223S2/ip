@@ -69,6 +69,14 @@ public class Duke {
                 } catch (ArrayIndexOutOfBoundsException ex) {
                     System.out.println("---\n" + new DukeException("pls specify the description and duration for this event!") + "\n---");
                 }
+            } else if (split[0].equals("delete")) {
+                int index = Integer.parseInt(split[1]) - 1;
+                System.out.println("---\ni've removed this task:\n" + list.remove(index));
+                if (list.size() == 1) {
+                    System.out.println("you have 1 task in the list\n---");
+                } else {
+                    System.out.println("you have " + list.size() + " tasks in the list\n---");
+                }
             } else {
                 // System.out.println("---\ninvalid command\n---");
                 System.out.println("---\n" + new DukeException("invalid command") + "\n---");

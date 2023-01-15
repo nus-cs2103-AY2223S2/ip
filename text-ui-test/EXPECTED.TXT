@@ -79,5 +79,27 @@ pls specify the description and duration for this event!
 invalid command
 ---
 ---
+i've removed this task:
+[T][X] read book
+you have 7 tasks in the list
+---
+---
+i've removed this task:
+[E][ ] project meeting (from: Aug 6th 2pm to: 4pm)
+you have 6 tasks in the list
+---
+---
+i've removed this task:
+[D][ ] return book (by: Sunday)
+you have 5 tasks in the list
+---
+---
+1. [D][ ] return book (by: June 6th)
+2. [T][X] join sports club
+3. [T][ ] borrow book
+4. [E][ ] project meeting (from: Mon 2pm to: 4pm)
+5. [D][ ] do homework (by: no idea :-p)
+---
+---
 bye! see u soon! :-)
 ---
