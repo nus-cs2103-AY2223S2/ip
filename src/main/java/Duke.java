@@ -30,6 +30,10 @@ public class Duke {
     static void warn(String message) {
         System.out.println("OOPS! " + message);
     }
+    static void assertThis(boolean expectsTrue, String failureMessage) throws DukeException {
+        if (!expectsTrue)
+            throw new DukeException(failureMessage);
+    }
     static void displayLogo() {
         Duke.display(LOGO);
     }
@@ -90,9 +94,10 @@ public class Duke {
             case "exit":
             case "exit()":
                 return State.EXIT;
-            default:
-                return State.UNKNOWN;
         }
+
+        // no matches found
+        return State.UNKNOWN;
     }
 
     public static void main(String[] args) {
@@ -103,7 +108,7 @@ public class Duke {
 
         //Initialise components, variables
         int taskIdx, descIdx;
-        String userCmd, item;
+        String userCmd, taskDescription;
         Task activeTask;
         State currentState = State.UNKNOWN;
         Scanner sc = new Scanner(System.in);
@@ -125,79 +130,105 @@ public class Duke {
             // Command detection
             currentState = Duke.detectState(userCmd);
 
-            // State handling
-            switch(currentState) {
-                case TODO:
-                    item = userCmd.substring(4).trim(); // exclude "todo" keyword
-                    activeTask = new Todo(item);
-                    Duke.addNewTask(taskList, activeTask);
-                    break;
-
-                case DEADLINE:
-                    // Checks for missing input
-                    if (!userCmd.contains(" /by ")) {
-                        Duke.warn("Missing due date!");
+            try {
+                // State handling
+                switch (currentState) {
+                    case TODO:
+                        taskDescription = userCmd.substring(4).trim(); // exclude "todo" keyword
+                        activeTask = new Todo(taskDescription);
+                        Duke.addNewTask(taskList, activeTask);
                         break;
-                    }
-                    descIdx = userCmd.indexOf("deadline "); // 9 chars
-                    int dueIdx = userCmd.indexOf(" /by "); // 5 chars
-                    item = userCmd.substring(descIdx + 9, dueIdx);
-                    String duedate = userCmd.substring(dueIdx + 5);
-                    Duke.addNewTask(taskList, new Deadline(item, duedate));
-                    break;
 
-                case EVENT:
-                    // Checks for missing inputs
-                    if (!userCmd.contains(" /from ")) {
-                        Duke.warn("Missing start date/time!");
+                    case DEADLINE:
+                        // Checks for missing input
+                        Duke.assertThis(userCmd.contains(" /by "), "Missing due date.");
+
+                        descIdx = userCmd.indexOf("deadline "); // 9 chars
+                        int dueIdx = userCmd.indexOf(" /by "); // 5 chars
+                        Duke.assertThis(descIdx+9 < dueIdx, "Task description cannot be empty.");
+
+                        taskDescription = userCmd.substring(descIdx + 9, dueIdx).trim();
+                        String duedate = userCmd.substring(dueIdx + 5).trim();
+                        Duke.assertThis(!taskDescription.isEmpty(), "Task description cannot be empty.");
+                        Duke.assertThis(!duedate.isEmpty(), "Due date cannot be empty.");
+
+                        Duke.addNewTask(taskList, new Deadline(taskDescription, duedate));
                         break;
-                    }
-                    else if (!userCmd.contains(" /to ")) {
-                        Duke.warn("Missing end date/time!");
+
+                    case EVENT:
+                        // Checks for missing inputs
+                        Duke.assertThis(userCmd.contains(" /from "), "Missing start date/time.");
+                        Duke.assertThis(userCmd.contains(" /to "), "Missing end date/time.");
+
+                        descIdx = userCmd.indexOf("event "); // 6 chars
+                        int fromIdx = userCmd.indexOf(" /from "); // 7 chars
+                        int toIdx = userCmd.indexOf(" /to "); // 5 chars
+                        Duke.assertThis(descIdx+6 < fromIdx, "Task description cannot be empty.");
+                        Duke.assertThis(fromIdx+7 < toIdx, "Start date/time cannot be empty.");
+
+                        taskDescription = userCmd.substring(descIdx + 6, fromIdx).trim();
+                        String start = userCmd.substring(fromIdx + 7, toIdx).trim();
+                        String end = userCmd.substring(toIdx + 5).trim();
+                        Duke.assertThis(!taskDescription.isEmpty(), "Task description cannot be empty.");
+                        Duke.assertThis(!start.isEmpty(), "Start date/time cannot be empty.");
+                        Duke.assertThis(!end.isEmpty(), "End date/time cannot be empty.");
+
+                        Duke.addNewTask(taskList, new Event(taskDescription, start, end));
                         break;
-                    }
-                    descIdx = userCmd.indexOf("event "); // 6 chars
-                    int fromIdx = userCmd.indexOf(" /from "); // 7 chars
-                    int toIdx = userCmd.indexOf(" /to "); // 5 chars
-                    item = userCmd.substring(descIdx + 6, fromIdx);
-                    String start = userCmd.substring(fromIdx + 7, toIdx);
-                    String end = userCmd.substring(toIdx + 5);
-                    Duke.addNewTask(taskList, new Event(item, start, end));
-                    break;
 
-                case LIST:
-                    Duke.displayTaskList(taskList);
-                    break;
+                    case LIST:
+                        Duke.displayTaskList(taskList);
+                        break;
 
-                case MARK:
-                case UNMARK:
-                    taskIdx = Integer.parseInt(userCmd.split(" ")[1]) - 1;
-                    // FIXME: throws NumberFormatException for "mark  1" (typo of additional space)
-                    // FIXME: watch for index out of bound exception (no number given)
-                    activeTask = taskList.get(taskIdx);
-                    // FIXME: watch for index out of bound exception (ie. index of non-existing task)
-                    activeTask.setDone(currentState == State.MARK); // False means unmark
-                    if (currentState == State.MARK)
-                        Duke.display("Nice I've marked this task as done:");
-                    else Duke.display("OK, I've marked this task as not done yet:");
-                    Duke.display(activeTask);
-                    break;
+                    case MARK:
+                    case UNMARK:
+                        String[] inputs = userCmd.split(" ");
+                        Duke.assertThis(inputs.length > 1, "Please indicate which task(s) to apply to.");
 
-                case UNKNOWN:
-                    Duke.warn("Sorry, I don't understand your request :(");
-                    Duke.display("Did you spell something wrongly?");
-                    //Duke.display("Why not try rephrasing?"); // When chatbot is smarter
-                    break;
+                        if (currentState == State.MARK)
+                            Duke.display("Nice I've marked the task(s) as done:");
+                        else Duke.display("OK, I've marked the task(s) as not done yet:");
 
-                case EXIT:
-                    Duke.display("Goodbye!");
-                    Duke.displayLine();
-                    Duke.displayLogo();
-                    break;
+                        for (int i = 1; i < inputs.length; i++) {
+                            String input = inputs[i].trim();
+                            if (input.isEmpty()) continue; // Blank, do nothing
 
-                default:
-                    // can throw error here
-                    break;
+                            try {
+                                taskIdx = Integer.parseInt(inputs[i]) - 1;
+                                Duke.assertThis(taskIdx >= 0 && taskIdx < taskList.size(), "");
+
+                                activeTask = taskList.get(taskIdx);
+                                activeTask.setDone(currentState == State.MARK); // False means unmark
+                                Duke.display(activeTask);
+                            }
+                            catch(NumberFormatException e) {
+                                Duke.warn("'" + input + "' is not a number.");
+                            }
+                            catch(DukeException e) {
+                                Duke.warn("Task " + Integer.parseInt(inputs[i]) + " does not exist.");
+                            }
+                        }
+                        break;
+
+                    case UNKNOWN:
+                        Duke.warn("Sorry, I don't understand your request :(");
+                        Duke.display("Did you spell something wrongly?");
+                        //Duke.display("Why not try rephrasing?"); // When chatbot is smarter
+                        break;
+
+                    case EXIT:
+                        Duke.display("Goodbye!");
+                        Duke.displayLine();
+                        Duke.displayLogo();
+                        break;
+
+                    default:
+                        // can throw error here
+                        break;
+                }
+            }
+            catch (DukeException e) {
+                Duke.warn(e.getMessage());
             }
         }
     }
