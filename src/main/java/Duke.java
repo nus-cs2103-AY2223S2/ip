@@ -35,7 +35,7 @@ public class Duke {
                 System.out.println(goodbye + separator);
                 break;
             } else if (command.equals(Duke.listCommand)) {
-                System.out.println("Here are the tasks in your list: ");
+                System.out.println("Here are the tasks in your list:");
                 for (int i = 0; i < Duke.taskStore.size(); i++) {
                     System.out.println((i + 1) + ". " + Duke.taskStore.get(i));
                 }

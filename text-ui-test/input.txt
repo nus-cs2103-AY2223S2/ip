@@ -1,0 +1,10 @@
+list
+todo yeet
+list
+mark 1
+deadline free /by 6pm
+list
+unmark 1
+mark 2
+list
+bye
