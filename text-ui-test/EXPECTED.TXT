@@ -1,7 +1,71 @@
-Hello from
- ____        _        
-|  _ \ _   _| | _____ 
-| | | | | | | |/ / _ \
-| |_| | |_| |   <  __/
-|____/ \__,_|_|\_\___|
-
+---
+ hi i'm Duke! what's up? 
+---
+---
+i've added this task:
+[T][ ] read book
+you have 1 task in the list
+---
+---
+nice! i've marked this task as done:
+[T][X] read book
+---
+---
+i've added this task with deadline:
+[D][ ] return book (by: June 6th)
+you have 2 tasks in the list
+---
+---
+i've added this event:
+[E][ ] project meeting (from: Aug 6th 2pm to: 4pm)
+you have 3 tasks in the list
+---
+---
+i've added this task:
+[T][ ] join sports club
+you have 4 tasks in the list
+---
+---
+i've added this task:
+[T][ ] borrow book
+you have 5 tasks in the list
+---
+---
+nice! i've marked this task as done:
+[T][X] join sports club
+---
+---
+1. [T][X] read book
+2. [D][ ] return book (by: June 6th)
+3. [E][ ] project meeting (from: Aug 6th 2pm to: 4pm)
+4. [T][X] join sports club
+5. [T][ ] borrow book
+---
+---
+i've added this task with deadline:
+[D][ ] return book (by: Sunday)
+you have 6 tasks in the list
+---
+---
+i've added this event:
+[E][ ] project meeting (from: Mon 2pm to: 4pm)
+you have 7 tasks in the list
+---
+---
+i've added this task with deadline:
+[D][ ] do homework (by: no idea :-p)
+you have 8 tasks in the list
+---
+---
+1. [T][X] read book
+2. [D][ ] return book (by: June 6th)
+3. [E][ ] project meeting (from: Aug 6th 2pm to: 4pm)
+4. [T][X] join sports club
+5. [T][ ] borrow book
+6. [D][ ] return book (by: Sunday)
+7. [E][ ] project meeting (from: Mon 2pm to: 4pm)
+8. [D][ ] do homework (by: no idea :-p)
+---
+---
+bye! see u soon! :-)
+---
