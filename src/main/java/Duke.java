@@ -40,6 +40,10 @@ public class Duke {
             String[] input = command.split(" ");
             int taskNumber = Integer.parseInt(input[1]) - 1;
             tasks.markTaskCompletion(taskNumber, false);
+        } else if (command.startsWith("delete")) {
+            String[] input = command.split(" ");
+            int taskNumber = Integer.parseInt(input[1]) - 1;
+            tasks.deleteTask(taskNumber);
         } else if (command.equals("bye")) {
             System.out.println("    Bye. Hope to see you again soon!");
             return false;
@@ -52,7 +56,8 @@ public class Duke {
             DeadlineTask.createDeadlineTask(command, tasks);
         } else if (command.startsWith("todo")) {
             ToDo.createToDo(command, tasks);
-        } else {
+        }
+        else {
             throw new DukeInputError("invalid");
         }
         return true;

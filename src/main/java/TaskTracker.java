@@ -28,7 +28,7 @@ public class TaskTracker {
 
     public void deleteTask(int index) {
         Task task = taskList.remove(index);
-        System.out.println(String.format("    Noted. I've removed this task:\n        %s\n      %s",
+        System.out.println(String.format("     Noted. I've removed this task:\n       %s\n%s",
                 task, numTasks()));
     }
 
