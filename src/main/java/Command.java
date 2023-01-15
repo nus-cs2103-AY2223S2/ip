@@ -1,4 +1,3 @@
-import exception.CommandParseException;
 import exception.InvalidActionException;
 import exception.MissingParameterException;
 import task.DeadlineTask;
@@ -7,8 +6,7 @@ import task.ToDoTask;
 
 import java.util.LinkedList;
 import java.util.List;
-import java.util.stream.Collectors;
-import java.util.stream.Stream;
+import java.util.Scanner;
 
 public class Command {
 
@@ -34,71 +32,40 @@ public class Command {
             this.keyword = keyword;
         }
 
-        public String getKeyword() {
-            return this.keyword;
-        }
-
         // @@author hansstanley-reused
         // Reused from https://stackoverflow.com/questions/604424
         // with minor modifications.
         public static Action fromString(String str) throws InvalidActionException {
-            str = str.trim();
-            for (Action action : Action.values()) {
-                if (action.keyword.equalsIgnoreCase(str)) {
-                    return action;
+            if (str != null) {
+                str = str.trim();
+                for (Action action : Action.values()) {
+                    if (action.keyword.equalsIgnoreCase(str)) {
+                        return action;
+                    }
                 }
             }
             throw new InvalidActionException("Invalid action string");
         }
     }
 
-    /**
-     * Parses a '/'-separated string of commands into
-     * individual Commands.
-     * @param longCommand Command string.
-     * @return Array of Commands.
-     */
-    public static Command[] parseCommand(String longCommand) throws CommandParseException {
-        if (longCommand == null) {
-            throw new CommandParseException("Long command cannot be null");
-        }
-        String[] parts = longCommand.split("/");
-        List<Command> commands = new LinkedList<>();
-        for (String part : parts) {
-            if (part.isBlank()) continue;
-            commands.add(new Command(part));
-        }
-        return commands.toArray(Command[]::new);
-    }
-
     private final Action action;
     private final String body;
+    private final List<Command> subCommands;
 
-    public Command(String command) throws CommandParseException {
-        if (command == null) {
-            throw new CommandParseException("Command cannot be null", "Couldn't hear you there, please try again.");
-        }
-        command = command.trim();
-        if (command.isEmpty()) {
-            throw new CommandParseException("Command cannot be empty", "Couldn't hear you there, please try again.");
-        }
+    public Command(Scanner scanner) throws InvalidActionException {
+        this.action = Action.fromString(scanner.hasNext() ? scanner.next() : null);
+        this.body = scanner.skip("\\s*").hasNext("[^/]+") ? scanner.next("[^/]+").trim() : null;
+        this.subCommands = new LinkedList<>();
 
-        int actionEnd = command.indexOf(' ');
-        if (actionEnd == -1) {
-            this.action = Action.fromString(command);
-            this.body = null;
-        } else {
-            this.action = Action.fromString(command.substring(0, actionEnd));
-            this.body = command.substring(actionEnd).trim();
+        scanner.useDelimiter("\\s*/\\s*");
+        while (scanner.skip("\\s*").hasNext()) {
+            this.subCommands.add(new Command(new Scanner(scanner.next())));
         }
+        scanner.close();
     }
 
     public String getBody() {
         return this.body;
-    }
-
-    public boolean isEmpty() {
-        return this.action == null && (this.body == null || this.body.isEmpty());
     }
 
     public boolean hasAction(Action action) {
@@ -109,49 +76,28 @@ public class Command {
         return new ToDoTask(this.body);
     }
 
-    public DeadlineTask toDeadlineTask() throws CommandParseException, MissingParameterException {
-        String fullCommand = this.toString();
-        String description = null;
+    public DeadlineTask toDeadlineTask() throws MissingParameterException {
         String deadline = null;
-        if (fullCommand != null) {
-            Command[] subCommands = Command.parseCommand(fullCommand);
-            for (Command command : subCommands) {
-                if (command.hasAction(Action.CREATE_DEADLINE) && description == null) {
-                    description = command.body;
-                } else if (command.hasAction(Action.DEADLINE_BY) && deadline == null) {
-                    deadline = command.body;
-                }
+        for (Command command : this.subCommands) {
+            if (command.hasAction(Action.DEADLINE_BY) && deadline == null) {
+                deadline = command.body;
             }
         }
 
-        return new DeadlineTask(description, deadline);
+        return new DeadlineTask(this.body, deadline);
     }
 
-    public EventTask toEventTask() throws CommandParseException, MissingParameterException {
-        String fullCommand = this.toString();
-        String description = null;
+    public EventTask toEventTask() throws MissingParameterException {
         String fromDateTime = null;
         String toDateTime = null;
-        if (fullCommand != null) {
-            Command[] subCommands = Command.parseCommand(fullCommand);
-            for (Command command : subCommands) {
-                if (command.hasAction(Action.CREATE_EVENT) && description == null) {
-                    description = command.body;
-                } else if (command.hasAction(Action.EVENT_FROM) && fromDateTime == null) {
-                    fromDateTime = command.body;
-                } else if (command.hasAction(Action.EVENT_TO) && toDateTime == null) {
-                    toDateTime = command.body;
-                }
+        for (Command command : subCommands) {
+            if (command.hasAction(Action.EVENT_FROM) && fromDateTime == null) {
+                fromDateTime = command.body;
+            } else if (command.hasAction(Action.EVENT_TO) && toDateTime == null) {
+                toDateTime = command.body;
             }
         }
-        return new EventTask(description, fromDateTime, toDateTime);
-    }
 
-    @Override
-    public String toString() {
-        List<String> list = Stream.of(this.action == null ? null : this.action.getKeyword(), this.body)
-                .filter(s -> s != null && !s.isEmpty())
-                .collect(Collectors.toList());
-        return String.join(" ", list);
+        return new EventTask(this.body, fromDateTime, toDateTime);
     }
 }

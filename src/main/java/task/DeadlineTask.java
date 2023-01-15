@@ -3,7 +3,7 @@ package task;
 import exception.MissingParameterException;
 
 public class DeadlineTask extends Task {
-    private String deadline;
+    private final String deadline;
 
     public DeadlineTask(String description, String deadline) throws MissingParameterException {
         super(description);
@@ -13,16 +13,8 @@ public class DeadlineTask extends Task {
         this.deadline = deadline;
     }
 
-    public void setDeadline(String deadline) {
-        this.deadline = deadline;
-    }
-
     @Override
     public String toString() {
-        return String.format(
-                "[D]%s (by: %s)",
-                super.toString(),
-                this.deadline == null ? "[none]" : this.deadline
-        );
+        return String.format("[D]%s (by: %s)", super.toString(), this.deadline);
     }
 }

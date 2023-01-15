@@ -1,6 +1,6 @@
 import java.util.List;
 
-public class Echo {
+public class Printer {
     public enum Response {
         INTRO,
         GOODBYE,
@@ -10,7 +10,7 @@ public class Echo {
 
     private final String name;
 
-    public Echo(String name) {
+    public Printer(String name) {
         this.name = name;
     }
 
@@ -23,7 +23,7 @@ public class Echo {
         for (String line : lines) {
             System.out.println("| \t" + line);
         }
-        System.out.print("> ");
+        this.printUserCaret();
     }
 
     /**
@@ -62,6 +62,10 @@ public class Echo {
      * @param message Error message.
      */
     public void printErrorResponse(String message) {
-        printResponse(String.format("I have a problem! %s", message));
+        printResponse(String.format("I've a problem! %s", message));
+    }
+
+    public void printUserCaret() {
+        System.out.print("> ");
     }
 }

@@ -1,9 +1,6 @@
 import exception.CommandParseException;
 import exception.MissingParameterException;
-import task.DeadlineTask;
-import task.EventTask;
 import task.Task;
-import task.ToDoTask;
 
 import java.util.ArrayList;
 import java.util.LinkedList;
@@ -90,7 +87,7 @@ public class TaskList {
         Task task = this.tasks.get(index - 1);
         task.setDone(isDone);
         return List.of(
-                String.format("You have marked task %d as %s.", index, isDone ? "done" : "undone"),
+                String.format("Got it! I've marked task %d as %s.", index, isDone ? "done" : "undone"),
                 "\t" + task
         );
     }
