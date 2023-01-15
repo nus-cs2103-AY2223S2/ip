@@ -6,7 +6,28 @@ Hello from
 |____/ \__,_|_|\_\___|
 
 Hello! I'm Duke
-What can I do for you?
+What can I do for you? 
 ('bye' to terminate Duke)
 ('list' to access list of tasks)
 ('un/mark X' to un/mark X task on list)
+Got it I've added this task: 
+ [T][ ] todo borrow book
+Now you have 1 tasks in the list
+Got it I've added this task: 
+ [D][ ] deadline return book (by: Sunday)
+Now you have 2 tasks in the list
+Got it I've added this task: 
+ [E][ ] event project meeting (from: Mon 2pm to: 4pm)
+Now you have 3 tasks in the list
+Nice! I've marked this task as done: 
+[X] deadline return book (by: Sunday)
+Nice! I've marked this task as done: 
+[X] event project meeting (from: Mon 2pm to: 4pm)
+1. [T][ ] todo borrow book
+2. [D][X] deadline return book (by: Sunday)
+3. [E][X] event project meeting (from: Mon 2pm to: 4pm)
+Oops! Stop procrastinating: 
+[ ] deadline return book (by: Sunday)
+1. [T][ ] todo borrow book
+2. [D][ ] deadline return book (by: Sunday)
+3. [E][X] event project meeting (from: Mon 2pm to: 4pm)
