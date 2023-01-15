@@ -16,6 +16,14 @@ public class Duke {
                 "\n     What can I do for you?" +
                 "\n    ____________________________________________________________");
 
+        String s = sc.nextLine();
+        while (!s.equalsIgnoreCase("bye")) {
+            System.out.println("    ____________________________________________________________");
+            System.out.print("     ");
+            System.out.print(s);
+            System.out.println("\n    ____________________________________________________________");
+            s = sc.nextLine();
+        }
         sc.close();
 
     }
