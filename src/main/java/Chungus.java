@@ -31,12 +31,8 @@ public class Chungus {
         out = _out;
         tasks = new ArrayList<>();
 
-        try {
-            info("Hello, I'm Chungus.");
-            info("What can I do for you?\n");
-        } catch (IOException e) {
-            throw new RuntimeException("could not write to designated output", e);
-        }
+        info("Hello, I'm Chungus.");
+        info("What can I do for you?\n");
     }
 
     public boolean handleInput(String msg) {
@@ -44,12 +40,19 @@ public class Chungus {
             boolean shouldExit = handleInputImpl(msg);
             flush();
             return shouldExit;
-        } catch (IOException e) {
-            throw new RuntimeException("failed while handling input", e);
+        } catch (TaskNotExistException e) {
+            error("Could not find the requested task. You currently have exactly %d tasks.",
+                    tasks.size());
+            error("Reason: %s", e.getMessage());
+            return false;
+        } catch (ChungusException e) {
+            error("Could not handle command \"%s\".", msg);
+            error("Reason: %s", e.getMessage());
+            return false;
         }
     }
 
-    private boolean handleInputImpl(String msg) throws IOException {
+    private boolean handleInputImpl(String msg) throws ChungusException {
         String[] args = msg.split("\\s+");
         switch (args[0]) {
             case "bye": {
@@ -67,8 +70,7 @@ public class Chungus {
             case "todo": {
                 String[] pair = msg.split("\\s+", 2);
                 if (pair.length < 2) {
-                    error("Invalid task description.");
-                    return false;
+                    throw new ChungusException("Description of todo cannot be empty.");
                 }
 
                 Todo task = new Todo(pair[1]);
@@ -80,8 +82,8 @@ public class Chungus {
             case "deadline": {
                 Matcher matcher = deadlinePattern.matcher(msg);
                 if (!matcher.find()) {
-                    error("Input format seems off.");
-                    return false;
+                    throw new ChungusException(
+                            "Bad format for creating deadline task. Must be of the form deadline <task> /by <datetime>.");
                 }
 
                 String desc = matcher.group(1);
@@ -96,8 +98,8 @@ public class Chungus {
             case "event": {
                 Matcher matcher = eventPattern.matcher(msg);
                 if (!matcher.find()) {
-                    error("Input format seems off.");
-                    return false;
+                    throw new ChungusException(
+                            "Bad format for creating event. Must be of the form event <name> /from <datetime> /to <datetime>.");
                 }
 
                 String desc = matcher.group(1);
@@ -112,10 +114,8 @@ public class Chungus {
             }
             case "mark": {
                 int idx = Integer.parseInt(args[1]) - 1;
-                if (idx >= tasks.size() || idx < 0) {
-                    error("Task %s does not exist!", args[1]);
-                    return false;
-                }
+                if (idx >= tasks.size() || idx < 0)
+                    throw new TaskNotExistException(idx + 1);
 
                 Task task = tasks.get(idx);
                 task.setDone();
@@ -127,10 +127,8 @@ public class Chungus {
             }
             case "unmark": {
                 int idx = Integer.parseInt(args[1]) - 1;
-                if (idx >= tasks.size() || idx < 0) {
-                    error("Task %s does not exist!", args[1]);
-                    return false;
-                }
+                if (idx >= tasks.size() || idx < 0)
+                    throw new TaskNotExistException(idx + 1);
 
                 Task task = tasks.get(idx);
                 task.setNotDone();
@@ -141,29 +139,58 @@ public class Chungus {
                 return false;
             }
             default: {
-                error("Big big chungus.");
-                return false;
+                throw new ChungusException("Unknown command.");
             }
         }
     }
 
-    private void reportNewTask(Task task) throws IOException {
+    private void reportNewTask(Task task) {
         info("Okay, I've added this task:");
         info("  %s", task);
         info("Now you have %d %s.", tasks.size(), tasks.size() == 1 ? "task" : "tasks");
     }
 
-    private void info(String msg, Object... args) throws IOException {
-        out.append("\u001b[36m").append(String.format(msg, args)).append('\n').append("\u001b[0m")
-                .flush();
+    private void info(String msg, Object... args) {
+        try {
+            out.append("\u001b[36m").append(String.format(msg, args)).append('\n')
+                    .append("\u001b[0m").flush();
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
     }
 
-    private void error(String msg, Object... args) throws IOException {
-        out.append("\u001b[31m").append(String.format(msg, args)).append('\n').append("\u001b[0m")
-                .flush();
+    private void error(String msg, Object... args) {
+        try {
+            out.append("\u001b[31m").append(String.format(msg, args)).append('\n')
+                    .append("\u001b[0m").flush();
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
     }
 
-    private void flush() throws IOException {
-        out.append("\u001b[0m").flush();
+    private void flush() {
+        try {
+            out.append("\u001b[0m").flush();
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+    }
+}
+
+
+class ChungusException extends RuntimeException {
+    public ChungusException(String msg) {
+        super(msg);
+    }
+
+    public ChungusException(String msg, Throwable cause) {
+        super(msg, cause);
+    }
+}
+
+
+class TaskNotExistException extends ChungusException {
+    public TaskNotExistException(int idx) {
+        super(String.format("Task %d does not exist"));
     }
 }
