@@ -8,14 +8,21 @@ public class Duke {
         DukeMessage initMessage = new DukeMessage(MessageStatus.START);
         System.out.println(initMessage);
 
-        while (!end) {
-            Scanner scanner = new Scanner(System.in);
+        Scanner scanner = new Scanner(System.in);
+
+        while (!end && scanner.hasNextLine()) {
             String userMessage = scanner.nextLine();
             if (userMessage.equals("bye")) {
                 end = true;
+                scanner.close();
             }
-            DukeMessage dukeResponse = messageProcessor.process(userMessage);
-            System.out.println(dukeResponse);
+            try {
+                DukeMessage dukeResponse = messageProcessor.process(userMessage);
+                System.out.println(dukeResponse);
+            } catch (InvalidInputException e) {
+                System.out.println(e.getMessage());
+            }
+
         }
 
 

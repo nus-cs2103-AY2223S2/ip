@@ -29,6 +29,12 @@ public class MessageProcessor {
 
     }
 
+    private boolean isAdd(String message) {
+        String[] messageSplit = message.split(" ");
+        String action = messageSplit[0];
+        return (action.equals("todo") || action.equals("deadline") || action.equals("event"));
+    }
+
     private String generateMarkMessage(Task task) {
         String heading = task.getDoneStatus()
                 ? "Nice! I've marked this task as done:"
@@ -49,7 +55,7 @@ public class MessageProcessor {
     }
 
 
-    DukeMessage process(String message) {
+    DukeMessage process(String message) throws InvalidInputException {
         MessageStatus status;
         if (message.equals("bye")) {
             status = MessageStatus.END;
@@ -60,11 +66,13 @@ public class MessageProcessor {
             Task task = processMark(message);
             status = MessageStatus.MARK;
             message = generateMarkMessage(task);
-        } else {
+        } else if (isAdd(message)) {
             Task task = taskList.addTask(message);
             status = MessageStatus.ADD;
             message = generateAddMessage(task);
 
+        } else {
+            throw new InvalidInputException();
         }
 
         return new DukeMessage(status, message);
