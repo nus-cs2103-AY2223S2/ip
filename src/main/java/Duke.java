@@ -28,37 +28,50 @@ public class Duke {
                 }
                 System.out.println("---");
             } else if (split[0].equals("todo")) {
-                Todo newTodo = new Todo(split[1]);
-                list.add(newTodo);
-                System.out.println("---\ni've added this task:\n" + newTodo);
-                if (list.size() == 1) {
-                    System.out.println("you have 1 task in the list\n---");
-                } else {
-                    System.out.println("you have " + list.size() + " tasks in the list\n---");
+                try {
+                    Todo newTodo = new Todo(split[1]);
+                    list.add(newTodo);
+                    System.out.println("---\ni've added this task:\n" + newTodo);
+                    if (list.size() == 1) {
+                        System.out.println("you have 1 task in the list\n---");
+                    } else {
+                        System.out.println("you have " + list.size() + " tasks in the list\n---");
+                    }
+                } catch (ArrayIndexOutOfBoundsException ex) {
+                    System.out.println("---\n" + new DukeException("pls add a description for this task!") + "\n---");
                 }
             } else if (split[0].equals("deadline")) {
-                String[] splitby = split[1].split(" /by ");
-                Deadline newDeadline = new Deadline(splitby[0], splitby[1]);
-                list.add(newDeadline);
-                System.out.println("---\ni've added this task with deadline:\n" + newDeadline);
-                if (list.size() == 1) {
-                    System.out.println("you have 1 task in the list\n---");
-                } else {
-                    System.out.println("you have " + list.size() + " tasks in the list\n---");
+                try {
+                    String[] splitby = split[1].split(" /by ");
+                    Deadline newDeadline = new Deadline(splitby[0], splitby[1]);
+                    list.add(newDeadline);
+                    System.out.println("---\ni've added this task with deadline:\n" + newDeadline);
+                    if (list.size() == 1) {
+                        System.out.println("you have 1 task in the list\n---");
+                    } else {
+                        System.out.println("you have " + list.size() + " tasks in the list\n---");
+                    }
+                } catch (ArrayIndexOutOfBoundsException ex) {
+                    System.out.println("---\n" + new DukeException("pls specify the description and deadline for this task!") + "\n---");
                 }
             } else if (split[0].equals("event")) {
-                String[] splitdesc = split[1].split(" /from ");
-                String[] splitfromto = splitdesc[1].split(" /to ");
-                Event newEvent = new Event(splitdesc[0], splitfromto[0], splitfromto[1]);
-                list.add(newEvent);
-                System.out.println("---\ni've added this event:\n" + newEvent);
-                if (list.size() == 1) {
-                    System.out.println("you have 1 task in the list\n---");
-                } else {
-                    System.out.println("you have " + list.size() + " tasks in the list\n---");
+                try {
+                    String[] splitdesc = split[1].split(" /from ");
+                    String[] splitfromto = splitdesc[1].split(" /to ");
+                    Event newEvent = new Event(splitdesc[0], splitfromto[0], splitfromto[1]);
+                    list.add(newEvent);
+                    System.out.println("---\ni've added this event:\n" + newEvent);
+                    if (list.size() == 1) {
+                        System.out.println("you have 1 task in the list\n---");
+                    } else {
+                        System.out.println("you have " + list.size() + " tasks in the list\n---");
+                    }
+                } catch (ArrayIndexOutOfBoundsException ex) {
+                    System.out.println("---\n" + new DukeException("pls specify the description and duration for this event!") + "\n---");
                 }
             } else {
-                System.out.println("---\ninvalid command\n---");
+                // System.out.println("---\ninvalid command\n---");
+                System.out.println("---\n" + new DukeException("invalid command") + "\n---");
             }
         }
     }

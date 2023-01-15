@@ -67,5 +67,17 @@ you have 8 tasks in the list
 8. [D][ ] do homework (by: no idea :-p)
 ---
 ---
+pls add a description for this task!
+---
+---
+pls specify the description and deadline for this task!
+---
+---
+pls specify the description and duration for this event!
+---
+---
+invalid command
+---
+---
 bye! see u soon! :-)
 ---
