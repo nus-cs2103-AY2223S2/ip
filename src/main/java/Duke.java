@@ -12,6 +12,15 @@ public class Duke {
             + "|____/ \\__,_|_|\\_\\___|";
 
 
+    enum State {
+        LIST,
+        TODO, DEADLINE, EVENT,
+        MARK, UNMARK,
+        // DELETE,
+        EXIT,
+        UNKNOWN,
+    }
+
     static void display(Object obj) {
         System.out.println(obj);
     }
@@ -92,14 +101,13 @@ public class Duke {
         Duke.display("Developed by: " + AUTHOR);
         System.out.println("Initialising system . . .");
 
-        // TODO: Initialise components, variables
+        //Initialise components, variables
         int taskIdx, descIdx;
-        Task activeTask;
         String userCmd, item;
+        Task activeTask;
         State currentState = State.UNKNOWN;
         Scanner sc = new Scanner(System.in);
         ArrayList<Task> taskList = new ArrayList<Task>();
-
 
         System.out.println("System is ready!");
         Duke.display("\n\n");
@@ -124,18 +132,22 @@ public class Duke {
                     activeTask = new Todo(item);
                     Duke.addNewTask(taskList, activeTask);
                     break;
+
                 case DEADLINE:
+                    // Checks for missing input
                     if (!userCmd.contains(" /by ")) {
                         Duke.warn("Missing due date!");
                         break;
                     }
-                    descIdx = userCmd.indexOf("deadline "); // 9
-                    int dueIdx = userCmd.indexOf(" /by "); // 5
+                    descIdx = userCmd.indexOf("deadline "); // 9 chars
+                    int dueIdx = userCmd.indexOf(" /by "); // 5 chars
                     item = userCmd.substring(descIdx + 9, dueIdx);
                     String duedate = userCmd.substring(dueIdx + 5);
                     Duke.addNewTask(taskList, new Deadline(item, duedate));
                     break;
+
                 case EVENT:
+                    // Checks for missing inputs
                     if (!userCmd.contains(" /from ")) {
                         Duke.warn("Missing start date/time!");
                         break;
@@ -144,17 +156,19 @@ public class Duke {
                         Duke.warn("Missing end date/time!");
                         break;
                     }
-                    descIdx = userCmd.indexOf("event "); // 6
-                    int fromIdx = userCmd.indexOf(" /from "); // 7
-                    int toIdx = userCmd.indexOf(" /to "); // 5
+                    descIdx = userCmd.indexOf("event "); // 6 chars
+                    int fromIdx = userCmd.indexOf(" /from "); // 7 chars
+                    int toIdx = userCmd.indexOf(" /to "); // 5 chars
                     item = userCmd.substring(descIdx + 6, fromIdx);
                     String start = userCmd.substring(fromIdx + 7, toIdx);
                     String end = userCmd.substring(toIdx + 5);
                     Duke.addNewTask(taskList, new Event(item, start, end));
                     break;
+
                 case LIST:
                     Duke.displayTaskList(taskList);
                     break;
+
                 case MARK:
                 case UNMARK:
                     taskIdx = Integer.parseInt(userCmd.split(" ")[1]) - 1;
@@ -168,16 +182,19 @@ public class Duke {
                     else Duke.display("OK, I've marked this task as not done yet:");
                     Duke.display(activeTask);
                     break;
+
                 case UNKNOWN:
                     Duke.warn("Sorry, I don't understand your request :(");
                     Duke.display("Did you spell something wrongly?");
                     //Duke.display("Why not try rephrasing?"); // When chatbot is smarter
                     break;
+
                 case EXIT:
                     Duke.display("Goodbye!");
                     Duke.displayLine();
                     Duke.displayLogo();
                     break;
+
                 default:
                     // can throw error here
                     break;
