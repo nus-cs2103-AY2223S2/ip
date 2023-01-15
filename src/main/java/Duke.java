@@ -12,12 +12,12 @@ import java.util.Scanner;
 public class Duke {
 
     /**
-     * The list to store whatever text entered by the user.
+     * The list to store whatever tasks entered by the user.
      */
-    private static String[] textList = new String[100];
+    private static Task[] taskList = new Task[100];
 
     /**
-     * A pointer to keep track of textList.
+     * A pointer to keep track of taskList.
      */
     private static int listPointer = 0;
 
@@ -31,13 +31,8 @@ public class Duke {
 
         greet();
 
-        //echoes user commands entered by user, unless command is "bye"
-        while (true) {
-            boolean dontEnd = takeCommand();
-            if (!dontEnd) {
-                break;
-            }
-        }
+        //Keeps taking user input until 'bye' command entered
+        takeCommand();
 
         bidFarewell();
     }
@@ -46,19 +41,22 @@ public class Duke {
      * Waits for user input and calls makeResponse() if the input is not 'bye'. Else, exits
      * the program.
      *
-     * @return true if user input was not 'bye'. false otherwise.
      */
-    public static boolean takeCommand() {
-        Scanner inputTaker = new Scanner(System.in);
-        String userInput = inputTaker.nextLine();
-        makeSeperation();
+    public static void takeCommand() {
 
-        if (userInput.equals("bye")) {
-            return false;
+        Scanner inputTaker = new Scanner(System.in);
+
+        while (inputTaker.hasNextLine()) {
+            String userInput = inputTaker.nextLine();
+            makeSeperation();
+
+            if (userInput.equals("bye")) {
+                return;
+            }
+
+            makeResponse(userInput);
         }
 
-        makeResponse(userInput);
-        return true;
     }
 
     /**
@@ -68,17 +66,81 @@ public class Duke {
      * @param command The user input received.
      */
     public static void makeResponse(String command) {
-        if (command.equals("list")) {
+        String processedCommand = checkForCommand(command);
+
+        //Handle "list" command
+        if (processedCommand.equals("list")) {
             for (int i = 0; i < listPointer; i++) {
                 String index = "\t" + Integer.toString(i+1) + ". ";
-                System.out.println(index + textList[i]);
+                System.out.println(index + taskList[i]);
             }
-            return;
+            makeSeperation();
         }
-        textList[listPointer] = command;
-        listPointer += 1;
-        System.out.println("\tadded: " + command);
-        makeSeperation();
+
+        //Handle "mark" command
+        else if (processedCommand.equals("mark")) {
+            int index = getMarkIndex(command) - 1;
+            Task curTask = taskList[index];
+            curTask.markAsDone();
+
+            System.out.println("\tNice! I've marked this task as done:\n\t  "
+                    + curTask.toString());
+            makeSeperation();
+        }
+
+        //Handle "unmark" command
+        else if (processedCommand.equals("unmark")) {
+            int index = getMarkIndex(command) - 1;
+            Task curTask = taskList[index];
+            curTask.markAsNotDone();
+
+            System.out.println("\tOK, I've marked this task as not done yet:\n\t  "
+                    + curTask.toString());
+            makeSeperation();
+        }
+
+        //Handle normal task
+        else {
+            Task current_task = new Task(command);
+            taskList[listPointer] = current_task;
+            listPointer += 1;
+
+            System.out.println("\tadded: " + command);
+            makeSeperation();
+        }
+
+    }
+
+    /**
+     * Checks whether user input is a task or a special command.
+     *
+     * @param command User input to be checked.
+     *
+     * @return command in String representation if input was a valid command, "none" if task.
+     */
+    public static String checkForCommand(String command) {
+        String[] splitted = command.split(" ");
+        if (splitted[0].equals("list")) {
+            return "list";
+        } else if (splitted[0].equals("mark")) {
+            return "mark";
+        } else if (splitted[0].equals("unmark")) {
+            return "unmark";
+        } else {
+            return "none";
+        }
+    }
+
+    /**
+     * Returns the index of task in task list to be marked or unmarked.
+     *
+     * @param command The 'mark' or 'unmark' command with an index.
+     *
+     * @return int, the index of the 'mark' or 'unmark' command.
+     */
+    public static int getMarkIndex(String command) {
+        String[] splitted = command.split(" ");
+        return Integer.parseInt(splitted[1]);
     }
 
     /**
