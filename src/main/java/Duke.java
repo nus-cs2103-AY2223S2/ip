@@ -58,8 +58,34 @@ public class Duke {
                 System.out.println(dialogSeparator);
 
             }else {
-                tasks.add(new Task(input));
-                System.out.println(dialogSeparator + "\n" + "added: " + input + "\n" + dialogSeparator);
+                Task t;
+                switch (input.split(" ")[0]) {
+                    case "deadline":
+                        String cmd = input.substring(input.indexOf("deadline") +8);
+                        String[] temp = cmd.split("/by");
+                        t = new Deadline(temp[0],temp[1] );
+                        tasks.add(t);
+                        break;
+                    case "event":
+                        cmd = input.substring(input.indexOf("event") + 5);
+                        temp = cmd.split("/from ");
+                        String[] temp2 = temp[1].split("/to");
+                        t = new Event(temp[0],temp2[0],temp2[1]);
+                        tasks.add(t);
+                        break;
+                    default:
+                        t = new Todo(input.substring(input.indexOf("todo") + 4));
+                        tasks.add(t);
+                        break;
+                }
+                System.out.println(dialogSeparator);
+                System.out.println("Got it. I've added this task:");
+                System.out.println("\t" + t);
+                System.out.println("Now you have " + tasks.size() + " tasks in the list.");
+
+                System.out.println(dialogSeparator);
+
+
             }
         }
     }
