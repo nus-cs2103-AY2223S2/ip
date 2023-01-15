@@ -14,4 +14,7 @@ blah
 unmark
 deadline study history
 event play a chess /to Tues 1pm
+list
+delete 3
+list
 bye

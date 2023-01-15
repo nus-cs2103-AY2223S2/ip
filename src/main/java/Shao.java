@@ -24,14 +24,22 @@ public class Shao {
     public static void printMarkedTask(Task task) {
         printRowLine();
         println("Nice! I've marked this task as done:");
-        println(String.format("[%s] %s", task.getStatusIcon(), task.description));
+        println(task.toString());
         printRowLine();
     }
 
     public static void printUnmarkedTask(Task task) {
         printRowLine();
         println("OK, I've marked this task as not done yet:");
-        println(String.format("[%s] %s", task.getStatusIcon(), task.description));
+        println(task.toString());
+        printRowLine();
+    }
+
+    public static void printItemDeleted(Task task, int tasksCnt) {
+        printRowLine();
+        println("Sure, I've removed this task:");
+        println("  " + task.toString());
+        println(String.format("You have %d %s in your list currently.", tasksCnt, tasksCnt > 1 ? "tasks" : "task"));
         printRowLine();
     }
 
@@ -74,6 +82,11 @@ public class Shao {
         }
         task.markAsUndone();
         printUnmarkedTask(task);
+    }
+
+    public static void deleteItem(String itemNum, List<Task> items) throws ParseException {
+        int idx = Integer.parseInt(itemNum) - 1;
+        printItemDeleted(items.remove(idx), items.size());
     }
 
     public static String getBy(String input) {
@@ -149,15 +162,20 @@ public class Shao {
                     printList(items);
                     break;
                 default:
+                    boolean isDeleteOperation = inputLower.startsWith("delete");
                     boolean isMarkOperation = inputLower.startsWith("mark")
                             || inputLower.startsWith("unmark");
                     String[] inputArr = input.split(" ");
-                    if (isMarkOperation) {
+                    if (isDeleteOperation || isMarkOperation) {
                         if (inputArr.length < 2) {
                             printError("Oops! The item number cannot be empty.");
                         } else {
                             try {
-                                markItem(inputArr[1], items, inputLower.startsWith("mark"));
+                                if (isDeleteOperation) {
+                                    deleteItem(inputArr[1], items);
+                                } else {
+                                    markItem(inputArr[1], items, inputLower.startsWith("mark"));
+                                }
                             } catch (ParseException ex) {
                                 printError("Oops! An item number must be provided.");
                             }
