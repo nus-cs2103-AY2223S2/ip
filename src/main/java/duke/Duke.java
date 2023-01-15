@@ -2,8 +2,6 @@ package duke;
 
 import duke.utils.Ui;
 
-import java.time.format.DateTimeParseException;
-
 import duke.command.Command;
 import duke.database.DukeRepo;
 import duke.database.DukeRepoImpl;
@@ -37,7 +35,7 @@ public class Duke {
                 Command c = Parser.parse(fullCommand);
                 c.execute(db, ui);
                 isExit = c.isExit();
-            } catch (DukeException | DateTimeParseException e) {
+            } catch (DukeException e) {
                 ui.showError(e.getMessage());
             } finally {
                 ui.showLine();

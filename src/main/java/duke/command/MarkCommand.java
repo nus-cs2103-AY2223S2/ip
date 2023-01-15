@@ -30,7 +30,7 @@ public class MarkCommand extends Command {
             
             ui.println("\t" + tk);
         } catch (IndexOutOfBoundsException e) {
-            ui.println(Message.EXCEPTION_INVALID_TODO_ID_ACCESS);
+            ui.println(Message.EXCEPTION_INVALID_TASK_ID_ACCESS);
         }
     }
 
