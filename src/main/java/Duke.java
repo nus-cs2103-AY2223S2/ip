@@ -1,27 +1,22 @@
 import java.util.Scanner;
+import java.util.function.Consumer;
 
 public class Duke {
-    static String NAME = "Half";
+    static String NAME = "Uncle Roger";
     static String HORIZONTAL = "+=".repeat(20);
     static String INDENT = "> ";
+    static String ENDWORD = "bye";
 
     public static void main(String[] args) {
-        String greeting = "Hello! I'm %s.";
+        String greeting = "Hallo Hallo! My name is %s.";
         Duke.greet(greeting);
 
-        String question = "What do you want?";
+        String question = "What you want?";
         Duke.say(question, false);
 
-        String response = "";
+        Scanner scanner = new Scanner(System.in);
 
-        Scanner scan = new Scanner(System.in);
-
-        while (!response.equals("bye")) {
-            response = scan.nextLine();
-            Duke.say(response, true);
-        }
-
-        Duke.say("Bye. HAND.", true);
+        Duke.start(scanner, Duke.ENDWORD);
     }
 
     public static void greet(String greeting) {
@@ -42,5 +37,24 @@ public class Duke {
         if (addLine) {
             System.out.println(Duke.HORIZONTAL);
         }
+    }
+
+    public static void start(Scanner scanner, String endWord) {
+        /**
+         * @param scanner the scanner object already created.
+         * @param endWord the trigger word to end the loop.
+         * @returns void
+         */
+        String response = "";
+        while (true) {
+            response = scanner.nextLine();
+            if (response.equals(endWord)) {
+                break;
+            }
+            
+            Duke.say(response, true);
+        }
+
+        Duke.say("Bye Bye. HAND.", true);
     }
 }
