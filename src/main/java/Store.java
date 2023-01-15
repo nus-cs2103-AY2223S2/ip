@@ -7,14 +7,17 @@ public class Store {
         this.total = 0;
     }
 
+    public int getTotal() {
+        return this.total;
+    }
+
     /**
-     * Stores the String as a Task into the array.
+     * Stores the Task into the array.
      * 
-     * @param s String to be stored
+     * @param task Task to be stored
      */
-    public void store(String s) {
-        Task newTask = new Task(s);
-        this.database[this.total] = newTask;
+    public void store(Task task) {
+        this.database[this.total] = task;
         this.total++;
     }
 
