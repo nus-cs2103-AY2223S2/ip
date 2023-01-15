@@ -13,4 +13,7 @@ public class Task {
     public String toString() {
         return getStatusIcon() + " " + this.desc;
     }
+    public void setIsDone(boolean isDone) {
+        this.isDone = isDone;
+    }
 }

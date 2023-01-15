@@ -1,6 +1,11 @@
 import java.util.Scanner;
 
 public class Duke {
+    private static void printAllTasks(int itemCount, Task[] list) {
+        for (int i = 0; i < itemCount; i++) {
+            System.out.printf("%d: %s%n", i + 1, list[i]);
+        }
+    }
     public static void main(String[] args) {
         System.out.println("Hello, Duke here. How can I help you?");
         Scanner sc = new Scanner(System.in);
@@ -15,10 +20,22 @@ public class Duke {
                     System.out.println("Bye, hope to see you again.");
                     break;
                 case "list":
-                    for (int i = 0; i < itemCount; i++) {
-                        System.out.printf("%d: %s%n",i + 1,list[i]);
-                    }
+                    printAllTasks(itemCount, list);
                     break;
+                case "mark": {
+                    int number = Integer.parseInt(userLine.split(" ")[1]) - 1;
+                    list[number].setIsDone(true);
+                    System.out.println("done");
+                    printAllTasks(itemCount, list);
+                    break;
+                }
+                case "unmark": {
+                    int number = Integer.parseInt(userLine.split(" ")[1]) - 1;
+                    list[number].setIsDone(false);
+                    System.out.println("done");
+                    printAllTasks(itemCount, list);
+                    break;
+                }
                 default:
                     list[itemCount] = new Task(userLine);
                     itemCount++;
