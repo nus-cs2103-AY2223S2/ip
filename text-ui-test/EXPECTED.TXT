@@ -4,50 +4,84 @@
 	________________________________________________________
 	________________________________________________________
 	Noted. I've added this task:
-	  [T][ ] todo borrow book
+	  [T][ ] borrow book
 	You have 1 task in your list currently.
 	________________________________________________________
 	________________________________________________________
 	Here are the tasks in your list: 
-	1.[T][ ] todo borrow book
+	1.[T][ ] borrow book
 	________________________________________________________
 	________________________________________________________
 	Noted. I've added this task:
-	  [D][ ] deadline return book (by: Sunday)
+	  [D][ ] return book (by: Sunday)
 	You have 2 tasks in your list currently.
 	________________________________________________________
 	________________________________________________________
 	Noted. I've added this task:
-	  [E][ ] event project meeting (from: Mon 2pm to: 4pm)
+	  [E][ ] project meeting (from: Mon 2pm, to: 4pm)
 	You have 3 tasks in your list currently.
 	________________________________________________________
 	________________________________________________________
 	Nice! I've marked this task as done:
-	[X] todo borrow book
+	[T][X] borrow book
 	________________________________________________________
 	________________________________________________________
 	Here are the tasks in your list: 
-	1.[T][X] todo borrow book
-	2.[D][ ] deadline return book (by: Sunday)
-	3.[E][ ] event project meeting (from: Mon 2pm to: 4pm)
+	1.[T][X] borrow book
+	2.[D][ ] return book (by: Sunday)
+	3.[E][ ] project meeting (from: Mon 2pm, to: 4pm)
 	________________________________________________________
 	________________________________________________________
 	Nice! I've marked this task as done:
-	[X] event project meeting
+	[E][X] project meeting (from: Mon 2pm, to: 4pm)
 	________________________________________________________
 	________________________________________________________
 	Nice! I've marked this task as done:
-	[X] deadline return book
+	[D][X] return book (by: Sunday)
 	________________________________________________________
 	________________________________________________________
 	OK, I've marked this task as not done yet:
-	[ ] todo borrow book
+	[T][ ] borrow book
 	________________________________________________________
 	________________________________________________________
 	Here are the tasks in your list: 
-	1.[T][ ] todo borrow book
-	2.[D][X] deadline return book (by: Sunday)
-	3.[E][X] event project meeting (from: Mon 2pm to: 4pm)
+	1.[T][ ] borrow book
+	2.[D][X] return book (by: Sunday)
+	3.[E][X] project meeting (from: Mon 2pm, to: 4pm)
+	________________________________________________________
+	________________________________________________________
+	Oops! The item number cannot be empty.
+	________________________________________________________
+	________________________________________________________
+	Oops! The description of a todo cannot be empty.
+	________________________________________________________
+	________________________________________________________
+	Oops! I'm sorry but I don't know what that means.
+	________________________________________________________
+	________________________________________________________
+	Oops! The item number cannot be empty.
+	________________________________________________________
+	________________________________________________________
+	Oops! The description of deadline must include a completion date/time.
+	________________________________________________________
+	________________________________________________________
+	Oops! The description of event must include a from date/time.
+	________________________________________________________
+	________________________________________________________
+	Here are the tasks in your list: 
+	1.[T][ ] borrow book
+	2.[D][X] return book (by: Sunday)
+	3.[E][X] project meeting (from: Mon 2pm, to: 4pm)
+	________________________________________________________
+	________________________________________________________
+	Sure, I've removed this task:
+	  [E][X] project meeting (from: Mon 2pm, to: 4pm)
+	You have 2 tasks in your list currently.
+	________________________________________________________
+	________________________________________________________
+	Here are the tasks in your list: 
+	1.[T][ ] borrow book
+	2.[D][X] return book (by: Sunday)
 	________________________________________________________
 	________________________________________________________
 	Bye! Have a nice day!

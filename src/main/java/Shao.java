@@ -5,6 +5,10 @@ import java.util.List;
 import java.util.Scanner;
 
 public class Shao {
+    enum TaskType {
+        TODO, DEADLINE, EVENT
+    }
+
     public static void printRowLine() {
         println("________________________________________________________");
     }
@@ -183,25 +187,25 @@ public class Shao {
                     } else if (inputLower.startsWith("todo") || inputLower.startsWith("deadline")
                             || inputLower.startsWith("event")) {
 
-                        // Todo - 0, Deadline - 1, Event - 2
-                        int operationType = inputLower.startsWith("todo")
-                                ? 0
+                        TaskType operationType = inputLower.startsWith("todo")
+                                ? TaskType.TODO
                                 : inputLower.startsWith("deadline")
-                                        ? 1
-                                        : 2;
+                                        ? TaskType.DEADLINE
+                                        : TaskType.EVENT;
 
                         if (inputArr.length < 2) {
                             printError(String.format("Oops! The description of a %s cannot be empty.",
-                                    operationType == 0 ? "todo" : operationType == 1 ? "deadline" : "event"));
+                                    operationType == TaskType.TODO ? "todo"
+                                            : operationType == TaskType.DEADLINE ? "deadline" : "event"));
                         } else {
                             Task newTask = null;
                             String description = sliceArrAndConcate(inputArr, 1, inputArr.length);
                             switch (operationType) {
-                                case 0:
+                                case TODO:
                                     newTask = new Todo(description);
                                     break;
 
-                                case 1:
+                                case DEADLINE:
                                     String by = getBy(input);
                                     if (by.isEmpty()) {
                                         printError(
@@ -211,7 +215,7 @@ public class Shao {
                                     newTask = new Deadline(trimDate(description), by);
                                     break;
 
-                                case 2:
+                                case EVENT:
                                     String[] fromTo = getFromTo(input);
                                     if (fromTo[0].isEmpty()) {
                                         printError("Oops! The description of event must include a from date/time.");
