@@ -1,0 +1,33 @@
+list
+todo read book
+todo return book
+list
+mark -999
+mark 999
+mark abc
+unmark -999
+unmark 999
+unmark abc
+mark 1
+list
+unmark 1
+list
+deadline /by
+deadline abc /by
+deadline /by abc
+deadline assignment /by Sunday
+list
+event /from /to
+event /from 2pm /to
+event /from /to 4pm
+event /from 2pm /to 4pm
+event meeting /from /to
+event meeting /from 2pm /to
+event meeting /from /to 4pm
+event meeting /from 2pm /to 4pm
+list
+mark 3
+mark 3
+unmark 4
+unmark 4
+bye
