@@ -5,7 +5,7 @@ public class Duke {
     private static Scanner scanner = new Scanner(System.in);
     private static final String GREETING = "Hello, I am Duke.\n" +
             "What can I do for you?";
-    private static final String EXIT_COMMAND = "exit";
+    private static final String EXIT_COMMAND = "bye";
     private static final String BYE = "Goodbye. I hope to see you again.";
     private static final String PROMPT_SYMBOL = ">";
 
