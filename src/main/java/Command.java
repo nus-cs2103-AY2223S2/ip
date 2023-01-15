@@ -4,4 +4,6 @@ public enum Command {
     ADD,
     DELETE,
     LIST,
+    MARK,
+    UNMARK
 }

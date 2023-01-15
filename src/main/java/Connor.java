@@ -17,8 +17,8 @@ public class Connor {
 
     public static void main(String[] args) {
         String name = "Connor";
-        System.out.println("Hello! I'm " + name + ", the android sent by Cyberlife");
-        System.out.println("Please type in your command below.");
+        System.out.println("        Hello! I'm " + name + ", the android sent by Cyberlife");
+        System.out.println("        Please type in your command below.");
         Scanner sc = new Scanner(System.in);
         TaskList list = new TaskList();
 
@@ -28,28 +28,37 @@ public class Connor {
             try {
                 switch (Command.valueOf(command)) {
                     case HI:
-                        System.out.println("Hi, I hope that you are having a nice day.");
+                        Response.greetings("HI");
                         break;
 
                     case ADD:
                         // TODO: handle errors and invalid commands.
                         String task = getTask(input);
                         list.addTask(task);
-                        System.out.println("I have added the task to my memory");
                         break;
 
                     case LIST:
-                        list.printList();
+                        list.getList();
+                        break;
+
+                    case MARK:
+                        String numberMark = getTask(input);
+                        list.markDone(Integer.valueOf(numberMark));
+                        break;
+
+                    case UNMARK:
+                        String numberUnmark = getTask(input);
+                        list.markUndone(Integer.valueOf(numberUnmark));
                         break;
 
                     case BYE:
-                        System.out.println("It was a good session Hank, Bye.");
+                        Response.greetings("BYE");
                         sc.close();
                         return;
 
                 }
             } catch (IllegalArgumentException e) {
-                System.out.println("My program does not understand your command");
+                System.out.println("        My program does not understand your command");
             }
         }
 
