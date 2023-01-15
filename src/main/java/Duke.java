@@ -12,15 +12,13 @@ public class Duke {
                 "\n('un/mark X' to un/mark X task on list)");
     }
     public static void Echo(String str) {
-        if(str.equals("bye")){
+        if (str.equals("bye")) {
             Exit();
-        }
-        else {
-            if (str.equals("list")){
+        } else {
+            if (str.equals("list")) {
                 if (todoList.isEmpty()) {
                     System.out.println("You have nothing scheduled, add something to the list.");
-                }
-                else {
+                } else {
                     int n = 1;
                     for (Tasks t : todoList) {
                         System.out.println(n + ". "
@@ -29,7 +27,7 @@ public class Duke {
                         n++;
                     }
                 }
-            } else if(str.contains("mark")){
+            } else if (str.contains("mark")) {
                 if (str.contains("un")) {
                     int index = Integer.parseInt((str.substring(7)));
                     Tasks t = todoList.get(index - 1);
@@ -44,9 +42,35 @@ public class Duke {
                     System.out.println("Nice! I've marked this task as done: \n"
                             + t.symbol() + " " + t.getDesc());
                 }
-            }  else {
-                todoList.add(new Tasks(str));
-                System.out.println("added: " + str);
+            } else {
+                String type = str.split(" ", 2)[0];
+                switch (type) {
+                    case "todo":
+                        Tasks t = new ToDo(str);
+                        todoList.add(t);
+                        System.out.println(t.mssg() +
+                                "\nNow you have " +
+                                todoList.size() +
+                                " tasks in the list");
+                        break;
+                    case "deadline":
+                        Tasks d = new Deadline(str);
+                        todoList.add(d);
+                        System.out.println(d.mssg() +
+                                "\nNow you have " +
+                                todoList.size() +
+                                " tasks in the list");
+                        break;
+                    case "event":
+                        Tasks e = new Event(str);
+                        todoList.add(e);
+                        System.out.println(e.mssg() +
+                                "\nNow you have " +
+                                todoList.size() +
+                                " tasks in the list");
+                        break;
+                    default:
+                }
             }
         }
     }
