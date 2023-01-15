@@ -15,8 +15,12 @@ public class TaskList {
     
     @Override
     public String toString() {
+        if (this.lst.isEmpty()) {
+            return "You have no tasks dumbass\n";
+        }
+
         return IntStream.range(0, lst.size())
-                .mapToObj(i -> String.format("\n%d) %s", i, this.lst.get(i)))
-                .reduce("", (a, b) -> a + b);
+                .mapToObj(i -> String.format("\n\t%d) %s", i + 1, this.lst.get(i)))
+                .reduce("", (a, b) -> a + b) + '\n';
     }
 }
