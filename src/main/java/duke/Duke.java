@@ -26,7 +26,7 @@ public class Duke {
 
     private static void printMessage(String message) {
         System.out.println("    ____________________________________________________________");
-        System.out.printf("     %s\n\n", message.replace("\n", "\n     "));
+        System.out.printf("     %s\n", message.replace("\n", "\n     "));
         System.out.print("    ____________________________________________________________\n\n");
     }
 
