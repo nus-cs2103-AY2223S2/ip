@@ -8,4 +8,9 @@ public class Task {
     public String getStatusIcon() {
         return this.isDone ? "[X]" : "[]" ;
     }
+
+    @Override
+    public String toString() {
+        return getStatusIcon() + " " + this.desc;
+    }
 }
