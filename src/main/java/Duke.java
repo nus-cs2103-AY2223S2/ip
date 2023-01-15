@@ -18,6 +18,9 @@ public class Duke {
     static void display(String message) {
         System.out.println(message);
     }
+    static void warn(String message) {
+        System.out.println("OOPS! " + message);
+    }
     static void displayLogo() {
         Duke.display(LOGO);
     }
@@ -59,13 +62,13 @@ public class Duke {
         Duke.display("Developed by: " + AUTHOR);
         System.out.println("Initialising system . . .");
 
+        // TODO: Initialise components, variables
         int taskIdx;
         Task selectedTask;
         String userCmd = "";
         Scanner sc = new Scanner(System.in);
         State currentState = State.UNKNOWN;
         ArrayList<Task> list = new ArrayList<Task>();
-        // TODO: Initialise components
 
         System.out.println("System is ready!");
         Duke.display("\n\n");
@@ -99,25 +102,21 @@ public class Duke {
                             Duke.display((i + 1) + ". " + list.get(i));
                     }
                     break;
-                // TODO: merge the 2 cases below
                 case MARK:
-                    taskIdx = Integer.valueOf(userCmd.split(" ")[1]) - 1; // FIXME: throws NumberFormatException for "mark  1"
-                    //FIXME: need watch for index out of bound exception
-                    selectedTask = list.get(taskIdx);
-                    selectedTask.setDone(true);
-                    Duke.display("Nice I've marked this task as done:");
-                    Duke.display(selectedTask);
-                    break;
                 case UNMARK:
-                    taskIdx = Integer.valueOf(userCmd.split(" ")[1]) - 1; // FIXME: throws NumberFormatException for "unmark  1"
-                    //FIXME: need watch for index out of bound exception
+                    taskIdx = Integer.valueOf(userCmd.split(" ")[1]) - 1;
+                    // FIXME: throws NumberFormatException for "mark  1" (typo of additional space)
+                    // FIXME: watch for index out of bound exception (no number given)
                     selectedTask = list.get(taskIdx);
-                    selectedTask.setDone(false);
-                    Duke.display("OK, I've marked this task as not done yet:");
+                    // FIXME: watch for index out of bound exception (ie. index of non-existing task)
+                    selectedTask.setDone(currentState == State.MARK); // False means unmark
+                    if (currentState == State.MARK)
+                        Duke.display("Nice I've marked this task as done:");
+                    else Duke.display("OK, I've marked this task as not done yet:");
                     Duke.display(selectedTask);
                     break;
                 case UNKNOWN:
-                    Duke.display("Sorry, I don't understand your request :(");
+                    Duke.warn("Sorry, I don't understand your request :(");
                     Duke.display("Did you spell something wrongly?");
                     //Duke.display("Why not try rephrasing?"); // When chatbot is smarter
                     break;

@@ -1,6 +1,6 @@
 public enum State {
-    ADD,
     LIST,
+    ADD,
     // TODO,
     // DEADLINE,
     MARK,
