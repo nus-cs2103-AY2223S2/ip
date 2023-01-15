@@ -7,6 +7,13 @@ public class Duke {
                 + "| | | | | | | |/ / _ \\\n"
                 + "| |_| | |_| |   <  __/\n"
                 + "|____/ \\__,_|_|\\_\\___|\n";
-        System.out.println("Hello from\n" + logo);
+        printMessage(String.format("Hello from\n%s\nWhat can I do for you?", logo));
+
+    }
+
+    private static void printMessage(String message) {
+        System.out.println("    ____________________________________________________________");
+        System.out.printf("     %s\n\n", message.replace("\n", "\n     "));
+        System.out.print("    ____________________________________________________________\n\n");
     }
 }
