@@ -1,5 +1,6 @@
 package duke.ui;
 
+import java.io.InputStream;
 import java.io.PrintStream;
 import java.util.Scanner;
 
@@ -13,14 +14,19 @@ public class Ui {
         this.out = System.out;
     }
 
+    public Ui(InputStream in, PrintStream out) {
+        this.in = new Scanner(in);
+        this.out = out;
+    }
+
     public void showWelcome() {
         String welcome = "Hello from\n"
-                + " ____       _          \n"
-                + "|  _ \\ _  _| | ____ _   \n"
-                + "| | | | | |  | |/ / _ \\ \n"
-                + "| |_| | |_|  |   <  __/  \n"
+                + " ____       _\n"
+                + "|  _ \\ _  _| | ____ _\n"
+                + "| | | | | |  | |/ / _ \\\n"
+                + "| |_| | |_|  |   <  __/\n"
                 + "|____/ \\__,_|_|\\_\\___|\n"
-                + "What can I do for you?\n";
+                + "What can I do for you?";
         println(welcome);
     }
 
@@ -29,7 +35,7 @@ public class Ui {
     }
 
     public void showError(String message) {
-        println(message);
+        println("Error! [ " + message + " ]");
     }
 
     public String readCommand() {
