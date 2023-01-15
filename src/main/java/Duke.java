@@ -1,12 +1,12 @@
 import java.util.*;
 
 public class Duke {
-    Scanner scanner;
-    List<String> list;
+    private Scanner scanner;
+    private Task task;
 
     public Duke(Scanner scanner) {
         this.scanner = scanner;
-        this.list = new ArrayList<>();
+        this.task = new Task();
     }
 
     public void start() {
@@ -16,34 +16,28 @@ public class Duke {
             String input = scanner.nextLine();
 
             if(input.equals("bye")) {
-                this.bye();
+                this.task.bye();
                 scanner.close();
                 return;
             }
 
             else if(input.equals("list")) {
-                this.list();
+                this.task.list();
 
+            }
+            else if(input.contains("mark")) {
+                String[] splitInput = input.split(" ");
+                int inputIndex = Integer.parseInt(splitInput[1]);
+                this.task.mark(inputIndex);
+            }
+            else if(input.contains("unmark")) {
+                String[] splitInput = input.split(" "); 
+                int inputIndex = Integer.parseInt(splitInput[1]);
+                this.task.unmark(inputIndex);
             }
             else {
-                this.add(input);
+                this.task.add(input);
             }
-        }
-    }
-
-    private void add(String input) {
-        this.list.add(input);
-        System.out.println("added: " + input);
-    }
-
-    private void bye() {
-        System.out.println("Duke: " + "Bye" + ". Hope I never see you again!");
-    }
-
-    private void list() {
-        System.out.println("list: ");
-        for(int i=1; i<list.size() + 1; i++) {
-            System.out.println(i + ". " + list.get(i-1));
         }
     }
 
