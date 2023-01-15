@@ -7,8 +7,7 @@ public class Chungus {
     private ArrayList<Task> tasks;
 
     private static Pattern deadlinePattern = Pattern.compile("^deadline\\s+(.+)\\s+/by\\s+(.+)$");
-    private static Pattern eventPattern =
-            Pattern.compile("^event\\s+(.+)\\s+/from\\s+(.+)\\s+/to\\s+(.+)$");
+    private static Pattern eventPattern = Pattern.compile("^event\\s+(.+)\\s+/from\\s+(.+)\\s+/to\\s+(.+)$");
 
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
@@ -41,8 +40,8 @@ public class Chungus {
             flush();
             return shouldExit;
         } catch (TaskNotExistException e) {
-            error("Could not find the requested task. You currently have exactly %d tasks.",
-                    tasks.size());
+            error("Could not find the requested task. You currently have exactly %d %s",
+                    tasks.size(), tasks.size() == 1 ? "task" : "tasks");
             error("Reason: %s", e.getMessage());
             return false;
         } catch (ChungusException e) {
@@ -52,7 +51,7 @@ public class Chungus {
         }
     }
 
-    private boolean handleInputImpl(String msg) throws ChungusException {
+    private boolean handleInputImpl(String msg) {
         String[] args = msg.split("\\s+");
         switch (args[0]) {
             case "bye": {
@@ -113,9 +112,7 @@ public class Chungus {
                 return false;
             }
             case "mark": {
-                int idx = Integer.parseInt(args[1]) - 1;
-                if (idx >= tasks.size() || idx < 0)
-                    throw new TaskNotExistException(idx + 1);
+                int idx = getTaskNumberArg(args[1]) - 1;
 
                 Task task = tasks.get(idx);
                 task.setDone();
@@ -126,15 +123,21 @@ public class Chungus {
                 return false;
             }
             case "unmark": {
-                int idx = Integer.parseInt(args[1]) - 1;
-                if (idx >= tasks.size() || idx < 0)
-                    throw new TaskNotExistException(idx + 1);
+                int idx = getTaskNumberArg(args[1]) - 1;
 
                 Task task = tasks.get(idx);
                 task.setNotDone();
 
                 info("Okay, I've marked this task as incomplete:");
                 info("  %s", task);
+
+                return false;
+            }
+            case "delete": {
+                int idx = getTaskNumberArg(args[1]) - 1;
+
+                Task task = tasks.remove(idx);
+                reportDeletedTask(task);
 
                 return false;
             }
@@ -150,10 +153,27 @@ public class Chungus {
         info("Now you have %d %s.", tasks.size(), tasks.size() == 1 ? "task" : "tasks");
     }
 
+    private void reportDeletedTask(Task task) {
+        info("Okay, I've deleted this task:");
+        info("  %s", task);
+        info("Now you have %d %s.", tasks.size(), tasks.size() == 1 ? "task" : "tasks");
+    }
+
+    private int getTaskNumberArg(String s) {
+        String[] xs = s.split("\\s+");
+        int num = Integer.parseInt(xs[xs.length - 1]);
+        if (num > tasks.size() || num <= 0)
+            throw new TaskNotExistException(num);
+        return num;
+    }
+
     private void info(String msg, Object... args) {
         try {
-            out.append("\u001b[36m").append(String.format(msg, args)).append('\n')
-                    .append("\u001b[0m").flush();
+            out.append("\u001b[36m")
+                    .append(String.format(msg, args))
+                    .append('\n')
+                    .append("\u001b[0m")
+                    .flush();
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
@@ -161,8 +181,11 @@ public class Chungus {
 
     private void error(String msg, Object... args) {
         try {
-            out.append("\u001b[31m").append(String.format(msg, args)).append('\n')
-                    .append("\u001b[0m").flush();
+            out.append("\u001b[31m")
+                    .append(String.format(msg, args))
+                    .append('\n')
+                    .append("\u001b[0m")
+                    .flush();
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
@@ -177,7 +200,6 @@ public class Chungus {
     }
 }
 
-
 class ChungusException extends RuntimeException {
     public ChungusException(String msg) {
         super(msg);
@@ -188,9 +210,8 @@ class ChungusException extends RuntimeException {
     }
 }
 
-
 class TaskNotExistException extends ChungusException {
     public TaskNotExistException(int idx) {
-        super(String.format("Task %d does not exist"));
+        super(String.format("Task %d does not exist.", idx));
     }
 }
