@@ -77,6 +77,12 @@ public class Duke {
                 case "list":
                     memoPad.listItems();
                     break;
+                case "mark":
+                    memoPad.markItem(response, true);
+                    break;
+                case "unmark":
+                    memoPad.markItem(response, false);
+                    break;
                 default:
                     memoPad.addToList(response);
             }

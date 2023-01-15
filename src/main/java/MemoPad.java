@@ -1,12 +1,12 @@
 public class MemoPad {
-    int pointer;
-    int size;
-    String[] items;
+    private int pointer;
+    private int size;
+    private Task[] tasks;
 
     public MemoPad(int size) {
         this.pointer = 0;
         this.size = size;
-        this.items = new String[size];
+        this.tasks = new Task[size];
     }
 
     public boolean isFull() {
@@ -23,31 +23,71 @@ public class MemoPad {
         return this.pointer == 0;
     }
 
-    public void addToList(String item) {
+    public void addToList(String content) {
+        /**
+         * Adds to the list if there is space.
+         * @param item the string to add to the list.
+         */
         if (this.isFull()) {
             System.out.println("No more space in list. Item not added.");
             return;
         }
 
-        this.items[this.pointer] = item;
+        this.tasks[this.pointer] = new Task(content);
         this.pointer++;
-        System.out.println("Added: " + item);
+        System.out.println("Added: " + content);
+    }
+
+    public void printItem(int id, boolean withNumber) {
+        /**
+         * Prints the item at this id.
+         * @param id the index of the item to be printed.
+         * @param withNumber whether to add the numbering.
+         */
+        String numbering = withNumber ? (id+1) + ". " : "";
+        System.out.println(numbering + this.tasks[id]);
     }
 
     public void listItems() {
+        /**
+         * Lists the items in the list, including whether it was marked or not.
+         */
         if (this.isEmpty()) {
             System.out.println("List empty!");
             return;
         }
 
         System.out.println("Here's your list:");
-        int currNum = 1;
-        for (String item : this.items) {
-            if (item == null) {
+        for (int id = 0; id < this.size; id++) {
+            if (this.tasks[id] == null) {
                 break;
             }
-            System.out.println(currNum + ". " + item);
-            currNum += 1;
+            this.printItem(id, true);
+        }
+    }
+
+    public void markItem(String response, boolean toMark) {
+        /**
+         * Marks the specified item.
+         * @param response tries to parse this response.
+         * @param toMark whether to mark it or unmark it.
+         */
+        String[] splitted = response.split(" ", 2);
+        if (splitted.length <= 1) {
+            System.out.println("You did not include a number after the keyword. Try again.");
+            return;
+        }
+
+        String unparsedId = splitted[1];
+        try {
+            int id = Integer.parseInt(unparsedId)-1;
+            if (id < this.pointer) {
+                this.tasks[id].mark(toMark);
+            } else {
+                System.out.println("Item does not exist. Try again with maximum value " + this.pointer + ".");
+            }
+        } catch (NumberFormatException ex) {
+            System.out.println("Invalid input for marking an item. Try again.");
         }
     }
 }
