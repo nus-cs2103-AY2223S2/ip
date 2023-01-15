@@ -67,21 +67,21 @@ public class Dude {
                 if (cmd.length < 2) throw new DudeMissingCommandException();
                 System.out.println(" _______________________________________________________________________");
                 System.out.println("\tGot it. I've added this task:");
-                addTask("todo", cmd[1]);
+                addTask(Type.TODO, cmd[1]);
                 System.out.println(" _______________________________________________________________________\n");
                 break;
             case "deadline":
                 if (cmd.length < 2) throw new DudeMissingCommandException();
                 System.out.println(" _______________________________________________________________________");
                 System.out.println("\tGot it. I've added this task:");
-                addTask("deadline", cmd[1]);
+                addTask(Type.DEADLINE, cmd[1]);
                 System.out.println(" _______________________________________________________________________\n");
                 break;
             case "event":
                 if (cmd.length < 2) throw new DudeMissingCommandException();
                 System.out.println(" _______________________________________________________________________");
                 System.out.println("\tGot it. I've added this task:");
-                addTask("event", cmd[1]);
+                addTask(Type.EVENT, cmd[1]);
                 System.out.println(" _______________________________________________________________________\n");
                 break;
             case "delete":
@@ -94,19 +94,19 @@ public class Dude {
         }
     }
 
-    public static void addTask(String type, String description) throws DudeMissingCommandException {
+    public static void addTask(Type type, String description) throws DudeMissingCommandException {
         Task task = new Task("");
         String[] format;
         switch(type){
-            case "todo":
+            case TODO:
                 task = new Todo(description);
                 break;
-            case "deadline":
+            case DEADLINE:
                 format = description.split(" /by ");
                 if (format.length < 2) throw new DudeMissingCommandException();
                 task = new Deadline(format[0], format[1]);
                 break;
-            case "event":
+            case EVENT:
                 format = description.split(" /from ");
                 if (format.length < 2) throw new DudeMissingCommandException();
                 String[] details = format[1].split("/to ");
