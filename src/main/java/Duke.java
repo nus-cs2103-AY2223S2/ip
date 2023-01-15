@@ -10,6 +10,17 @@ import java.util.Scanner;
  */
 
 public class Duke {
+
+    /**
+     * The list to store whatever text entered by the user.
+     */
+    private static String[] textList = new String[100];
+
+    /**
+     * A pointer to keep track of textList.
+     */
+    private static int listPointer = 0;
+
     public static void main(String[] args) {
         String logo = " ____        _        \n"
                 + "|  _ \\ _   _| | _____ \n"
@@ -51,12 +62,22 @@ public class Duke {
     }
 
     /**
-     * Prints out the resposne to the user input, command.
+     * Handles the logic of user input, command. If command != 'list', add
+     * task to dedicated array. Else, print out everything in the array.
      *
      * @param command The user input received.
      */
     public static void makeResponse(String command) {
-        System.out.println(command);
+        if (command.equals("list")) {
+            for (int i = 0; i < listPointer; i++) {
+                String index = "\t" + Integer.toString(i+1) + ". ";
+                System.out.println(index + textList[i]);
+            }
+            return;
+        }
+        textList[listPointer] = command;
+        listPointer += 1;
+        System.out.println("\tadded: " + command);
         makeSeperation();
     }
 
@@ -64,8 +85,8 @@ public class Duke {
      * Prints out the greeting message and a line separation.
      */
     public static void greet() {
-        System.out.println("Hello! I'm Duke\n" +
-                "What can I do for you?");
+        System.out.println("\tHello! I'm Duke\n" +
+                "\tWhat can I do for you?");
         makeSeperation();
     }
 
@@ -73,7 +94,7 @@ public class Duke {
      * Prints out the goodbye message and a line separation.
      */
     public static void bidFarewell() {
-        System.out.println("Bye. Hope to see you again soon!");
+        System.out.println("\tBye. Hope to see you again soon!");
         makeSeperation();
     }
 
@@ -81,6 +102,6 @@ public class Duke {
      * Prints out a line separation.
      */
     public static void makeSeperation() {
-        System.out.println("____________________________________________________________");
+        System.out.println("\t____________________________________________________________");
     }
 }
