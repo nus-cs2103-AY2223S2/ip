@@ -90,6 +90,9 @@ public class CatBot {
                 tasks.remove(index - 1);
                 return "Deleted the task!";
 
+            case "echo":
+                return cmd[1];
+
             case "bye":
                 return "Nice to meet mew!";
 
