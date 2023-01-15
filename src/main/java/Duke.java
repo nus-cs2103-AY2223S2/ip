@@ -1,30 +1,46 @@
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Scanner;
 
 public class Duke {
-    public static void main(String[] args) {
-        String lines = "\t____________________________________________________________\n";
-        System.out.println(
-                lines +
-                        "\tHello! I'm Duke\n" +
-                        "\tWhat can I do for you?\n" +
-                        lines
-        );
+    final static String lines = "\t____________________________________________________________\n";
+    final static String greet = lines +
+            "\tHello! I'm Duke\n" +
+            "\tWhat can I do for you?\n" +
+            lines;
+    static List<String> textList;
 
-        String commands = "";
+    public static void printList() {
+        System.out.print(lines);
+        for (int i = 0; i < textList.size(); i++) {
+            System.out.println("\t" + (i + 1) + ". " + textList.get(i));
+        }
+        System.out.print(lines);
+    }
+
+    public static void addList(String text) {
+        textList.add(text);
+        System.out.println(lines + "\tadded: " + text +"\n" + lines);
+    }
+
+    public static void main(String[] args) {
+        textList = new ArrayList<>();
+        System.out.println(greet);
         Scanner sc = new Scanner(System.in);
-        commands = sc.nextLine();
+
+        String commands = sc.nextLine();
         while (!commands.equals("bye")) {
-            System.out.println(
-                    lines +
-                    "\t" + commands + "\n" +
-                    lines
-            );
+            if (commands.equals("list")) {
+                printList();
+            } else {
+                addList(commands);
+            }
             commands = sc.nextLine();
         }
         System.out.println(
                 lines +
-                "\tBye. Hope to see you again soon!\n" +
-                lines
+                        "\tBye. Hope to see you again soon!\n" +
+                        lines
         );
     }
 }
