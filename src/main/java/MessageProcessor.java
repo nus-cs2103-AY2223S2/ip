@@ -41,30 +41,35 @@ public class MessageProcessor {
         return action.equals("delete");
     }
 
-    private String generateMarkMessage(Task task) {
-        String heading = task.getDoneStatus()
-                ? "Nice! I've marked this task as done:"
-                : "OK, I've marked this task as not done yet:";
-        return String.format("%s\n%s", heading, task.toString());
+    private String generateTaskMessage(MessageStatus status, Task task) {
+        String heading = "";
+        String end = "";
+
+        switch (status) {
+            case MARK:
+                heading = task.getDoneStatus()
+                        ? "Nice! I've marked this task as done:"
+                        : "OK, I've marked this task as not done yet:";
+                break;
+            case ADD:
+                heading = "Got it. I've added this task:";
+                end = String.format("\nNow you have %d tasks in the list.", this.taskList.getTaskCount());
+                break;
+            case DELETE:
+                heading = "Noted. I've removed this task:";
+                end = String.format("\nNow you have %d tasks in the list.", this.taskList.getTaskCount());
+                break;
+            default:
+                break;
+        }
+
+        return String.format("%s\n%s%s", heading, task.toString(), end);
     }
+
 
     private String generateListMessage() {
         String heading = "Here are the tasks in your list:\n";
         return heading + this.taskList.toString();
-    }
-
-    private String generateAddMessage(Task task) {
-        String header = "Got it. I've added this task:\n";
-        String end = String.format("Now you have %d tasks in the list.", this.taskList.getTaskCount());
-
-        return header + task.toString() + "\n" + end;
-    }
-
-    private String generateDeleteMessage(Task task) {
-        String header = "Noted. I've removed this task:\n";
-        String end = String.format("Now you have %d tasks in the list.", this.taskList.getTaskCount());
-
-        return header + task.toString() + "\n" + end;
     }
 
     DukeMessage process(String message)
@@ -79,15 +84,15 @@ public class MessageProcessor {
         } else if (isMark(message)) {
             Task task = processMark(message);
             status = MessageStatus.MARK;
-            message = generateMarkMessage(task);
+            message = generateTaskMessage(status, task);
         } else if (isAdd(message)) {
             Task task = taskList.addTask(message);
             status = MessageStatus.ADD;
-            message = generateAddMessage(task);
+            message = generateTaskMessage(status, task);
         } else if (isDelete(message)) {
             Task task = taskList.deleteTask(message);
             status = MessageStatus.DELETE;
-            message = generateDeleteMessage(task);
+            message = generateTaskMessage(status, task);
         } else {
             throw new InvalidInputException();
         }
