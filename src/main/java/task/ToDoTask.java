@@ -1,8 +1,10 @@
 package task;
 
-public class ToDoTask extends Task{
-    public ToDoTask(String task) {
-        super(task);
+import exception.MissingParameterException;
+
+public class ToDoTask extends Task {
+    public ToDoTask(String description) throws MissingParameterException {
+        super(description);
     }
 
     @Override

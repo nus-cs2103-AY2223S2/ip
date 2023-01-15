@@ -1,16 +1,26 @@
+hello
 list
 todo abc
+todo
 deadline def /by 123
+deadline def
+deadline
 event ghi /from 456 /to 789
+event ghi /from 456
+event ghi /to 789
+event ghi
 list
-mark -1
+mark 0
+mark 1
 mark 1
 mark 3
 mark 4
+mark
 list
-unmark -1
+unmark 0
+unmark 1
 unmark 2
-unmark 3
 unmark 4
+unmark
 list
 bye

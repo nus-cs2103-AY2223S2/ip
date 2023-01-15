@@ -1,10 +1,12 @@
+import exception.CommandParseException;
+import exception.InvalidActionException;
+import exception.MissingParameterException;
 import task.DeadlineTask;
 import task.EventTask;
 import task.ToDoTask;
 
-import java.util.Arrays;
+import java.util.LinkedList;
 import java.util.List;
-import java.util.Objects;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
@@ -55,27 +57,46 @@ public class Command {
      * @param longCommand Command string.
      * @return Array of Commands.
      */
-    public static Command[] parseCommand(String longCommand) {
-        return Arrays.stream(longCommand.split("/"))
-                .map(String::trim)
-                .filter(c -> !c.isEmpty())
-                .map(Command::new)
-                .toArray(Command[]::new);
+    public static Command[] parseCommand(String longCommand) throws CommandParseException {
+        if (longCommand == null) {
+            throw new CommandParseException("Long command cannot be null");
+        }
+        String[] parts = longCommand.split("/");
+        List<Command> commands = new LinkedList<>();
+        for (String part : parts) {
+            if (part.isBlank()) continue;
+            commands.add(new Command(part));
+        }
+        return commands.toArray(Command[]::new);
     }
 
     private final Action action;
     private final String body;
 
-    public Command(String command) {
+    public Command(String command) throws CommandParseException {
+        if (command == null) {
+            throw new CommandParseException("Command cannot be null", "Couldn't hear you there, please try again.");
+        }
         command = command.trim();
+        if (command.isEmpty()) {
+            throw new CommandParseException("Command cannot be empty", "Couldn't hear you there, please try again.");
+        }
+
         int actionEnd = command.indexOf(' ');
         if (actionEnd == -1) {
             this.action = Action.fromString(command);
-            this.body = command;
+            this.body = null;
         } else {
             this.action = Action.fromString(command.substring(0, actionEnd));
             this.body = command.substring(actionEnd).trim();
         }
+        if (this.action == null) {
+            throw new InvalidActionException("Invalid verb provided as Action");
+        }
+    }
+
+    public String getBody() {
+        return this.body;
     }
 
     public boolean isEmpty() {
@@ -86,11 +107,11 @@ public class Command {
         return this.action == action;
     }
 
-    public ToDoTask toToDoTask() {
+    public ToDoTask toToDoTask() throws MissingParameterException {
         return new ToDoTask(this.body);
     }
 
-    public DeadlineTask toDeadlineTask() {
+    public DeadlineTask toDeadlineTask() throws CommandParseException, MissingParameterException {
         String fullCommand = this.toString();
         String description = null;
         String deadline = null;
@@ -104,10 +125,11 @@ public class Command {
                 }
             }
         }
+
         return new DeadlineTask(description, deadline);
     }
 
-    public EventTask toEventTask() {
+    public EventTask toEventTask() throws CommandParseException, MissingParameterException {
         String fullCommand = this.toString();
         String description = null;
         String fromDateTime = null;

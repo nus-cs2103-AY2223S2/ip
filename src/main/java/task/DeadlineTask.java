@@ -1,10 +1,15 @@
 package task;
 
-public class DeadlineTask extends Task{
+import exception.MissingParameterException;
+
+public class DeadlineTask extends Task {
     private String deadline;
 
-    public DeadlineTask(String task, String deadline) {
-        super(task);
+    public DeadlineTask(String description, String deadline) throws MissingParameterException {
+        super(description);
+        if (deadline == null || deadline.isBlank()) {
+            throw new MissingParameterException("Missing deadline", "A deadline ('/by ...') is needed.");
+        }
         this.deadline = deadline;
     }
 
@@ -14,6 +19,10 @@ public class DeadlineTask extends Task{
 
     @Override
     public String toString() {
-        return String.format("[D]%s (by: %s)", super.toString(), this.deadline == null ? "[none]" : this.deadline);
+        return String.format(
+                "[D]%s (by: %s)",
+                super.toString(),
+                this.deadline == null ? "[none]" : this.deadline
+        );
     }
 }

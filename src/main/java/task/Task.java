@@ -1,12 +1,18 @@
 package task;
 
+import exception.MissingParameterException;
+
 public abstract class Task {
     private boolean isDone;
-    private String task;
+    private String description;
 
-    public Task(String task) {
+    public Task(String description) throws MissingParameterException {
+        if (description == null || description.isBlank()) {
+            throw new MissingParameterException("Missing description", "A task description is needed.");
+        }
+
         this.isDone = false;
-        this.task = task;
+        this.description = description;
     }
 
     public boolean isDone() {
@@ -17,16 +23,19 @@ public abstract class Task {
         this.isDone = isDone;
     }
 
-    public String getTask() {
-        return this.task;
+    public String getDescription() {
+        return this.description;
     }
 
-    public void setTask(String task) {
-        this.task = task;
+    public void setDescription(String description) {
+        this.description = description;
     }
 
     @Override
     public String toString() {
-        return String.format("[%s] %s", this.isDone ? "X" : " ", this.task == null ? "[empty]" : this.task);
+        return String.format(
+                "[%s] %s", this.isDone ? "X" : " ",
+                this.description == null ? "[empty]" : this.description
+        );
     }
 }

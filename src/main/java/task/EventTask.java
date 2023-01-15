@@ -1,11 +1,19 @@
 package task;
 
+import exception.MissingParameterException;
+
 public class EventTask extends Task {
     private String fromDateTime;
     private String toDateTime;
 
-    public EventTask(String task, String fromDateTime, String toDateTime) {
-        super(task);
+    public EventTask(String description, String fromDateTime, String toDateTime) throws MissingParameterException {
+        super(description);
+        if (fromDateTime == null || toDateTime == null || fromDateTime.isBlank() || toDateTime.isBlank()) {
+            throw new MissingParameterException(
+                    "Missing fromDateTime or toDateTime",
+                    "Start ('/from ...') and end ('/to ...') markers are needed."
+            );
+        }
         this.fromDateTime = fromDateTime;
         this.toDateTime = toDateTime;
     }

@@ -1,3 +1,5 @@
+import exception.CommandParseException;
+import exception.MissingParameterException;
 import task.DeadlineTask;
 import task.EventTask;
 import task.Task;
@@ -14,23 +16,6 @@ public class TaskList {
         this.tasks = new ArrayList<>();
     }
 
-    /**
-     * Adds a task into the list.
-     * @param task Task description.
-     * @return Response line.
-     */
-    public List<String> addTask(String task) {
-        return this.addTask(new ToDoTask(task));
-    }
-
-    public List<String> addTask(String task, String deadline) {
-        return this.addTask(new DeadlineTask(task, deadline));
-    }
-
-    public List<String> addTask(String task, String fromDateTime, String toDateTime) {
-        return this.addTask(new EventTask(task, fromDateTime, toDateTime));
-    }
-
     public List<String> addTask(Task task) {
         this.tasks.add(task);
         return List.of(
@@ -44,21 +29,18 @@ public class TaskList {
      * @param command Mark/unmark command.
      * @return List of response lines.
      */
-    public List<String> setTaskDone(String command) {
-        String[] parts = command.split(" ");
-        int index;
+    public List<String> setTaskDone(Command command) throws CommandParseException, MissingParameterException {
+        int index = -1;
         try {
-            index = Integer.parseInt(parts[1]);
-        } catch (NumberFormatException | ArrayIndexOutOfBoundsException e) {
-            return this.setTaskDone(-1, false);
-        }
+            index = Integer.parseInt(command.getBody());
+        } catch (NumberFormatException ignored) {}
 
-        if (parts[0].equalsIgnoreCase("mark")) {
+        if (command.hasAction(Command.Action.MARK_DONE)) {
             return this.setTaskDone(index, true);
-        } else if (parts[0].equalsIgnoreCase("unmark")) {
+        } else if (command.hasAction(Command.Action.MARK_UNDONE)) {
             return this.setTaskDone(index, false);
         } else {
-            return List.of("Sorry, I can't handle that right now.");
+            throw new CommandParseException("Provided command is not a MARK/UNMARK command");
         }
     }
 
@@ -68,14 +50,15 @@ public class TaskList {
      * @param isDone Whether the task is marked as done.
      * @return List of response lines.
      */
-    public List<String> setTaskDone(int index, boolean isDone) {
+    public List<String> setTaskDone(int index, boolean isDone) throws MissingParameterException {
         if (this.tasks.isEmpty()) {
             return List.of("There are no tasks to mark, please add a task first.");
         }
+
         if (index <= 0 || index > this.tasks.size()) {
-            return List.of(
-                    "Sorry, you didn't quite get the index right.",
-                    String.format("The tasks in your list run from %d to %d.", 1, this.tasks.size())
+            throw new MissingParameterException(
+                    "Unable to parse index",
+                    String.format("Please provide an index from %d to %d.", 1, this.tasks.size())
             );
         }
 

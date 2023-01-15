@@ -1,19 +1,17 @@
 import java.util.List;
 
 public class Echo {
+    public enum Response {
+        INTRO,
+        GOODBYE,
+        CONFUSED,
+        REJECT
+    }
+
     private final String name;
 
     public Echo(String name) {
         this.name = name;
-    }
-
-    /**
-     * Returns the given command as-is.
-     * @param command The given command.
-     * @return The given command.
-     */
-    public String echo(String command) {
-        return command;
     }
 
     /**
@@ -34,5 +32,36 @@ public class Echo {
      */
     public void printResponse(String line) {
         this.printResponse(List.of(line));
+    }
+
+    /**
+     * Prints one of the predefined responses.
+     * @param response Type of response.
+     */
+    public void printStandardResponse(Response response) {
+        switch (response) {
+            case INTRO:
+                printResponse(String.format("Hello, I'm %s, how may I help you?", this.name));
+                break;
+            case GOODBYE:
+                printResponse("Goodbye, and see you again!");
+                break;
+            case CONFUSED:
+                printResponse("I don't quite understand, please try again.");
+                break;
+            case REJECT:
+                printResponse("Sorry, I can't handle that right now.");
+                break;
+            default:
+                printResponse("I'm most definitely a teapot.");
+        }
+    }
+
+    /**
+     * Prints an error response.
+     * @param message Error message.
+     */
+    public void printErrorResponse(String message) {
+        printResponse(String.format("I have a problem! %s", message));
     }
 }
