@@ -42,6 +42,8 @@ public class Jarvis {
                 try {
                     if (command.hasAction(Command.Action.MARK_DONE) || command.hasAction(Command.Action.MARK_UNDONE)) {
                         echo.printResponse(taskList.setTaskDone(command));
+                    } else if (command.hasAction(Command.Action.DELETE_TASK)) {
+                        echo.printResponse(taskList.deleteTask(command));
                     } else if (command.hasAction(Command.Action.CREATE_TODO)) {
                         echo.printResponse(taskList.addTask(command.toToDoTask()));
                     } else if (command.hasAction(Command.Action.CREATE_DEADLINE)) {

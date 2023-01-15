@@ -23,6 +23,7 @@ public class Command {
         CREATE_TODO("todo"),
         CREATE_DEADLINE("deadline"),
         CREATE_EVENT("event"),
+        DELETE_TASK("delete"),
         DEADLINE_BY("by"),
         EVENT_FROM("from"),
         EVENT_TO("to");
@@ -40,14 +41,14 @@ public class Command {
         // @@author hansstanley-reused
         // Reused from https://stackoverflow.com/questions/604424
         // with minor modifications.
-        public static Action fromString(String str) {
+        public static Action fromString(String str) throws InvalidActionException {
             str = str.trim();
             for (Action action : Action.values()) {
                 if (action.keyword.equalsIgnoreCase(str)) {
                     return action;
                 }
             }
-            return null;
+            throw new InvalidActionException("Invalid action string");
         }
     }
 
@@ -89,9 +90,6 @@ public class Command {
         } else {
             this.action = Action.fromString(command.substring(0, actionEnd));
             this.body = command.substring(actionEnd).trim();
-        }
-        if (this.action == null) {
-            throw new InvalidActionException("Invalid verb provided as Action");
         }
     }
 

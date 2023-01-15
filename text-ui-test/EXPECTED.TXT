@@ -74,5 +74,18 @@
 | 	2. [D][ ] def (by: 123)
 | 	3. [E][X] ghi (from: 456, to: 789)
 > | Jarvis:
+| 	I have a problem! Please provide an index from 1 to 3.
+> | Jarvis:
+| 	I have a problem! Please provide an index from 1 to 3.
+> | Jarvis:
+| 	Got it, I've removed task 1.
+| 		[T][ ] abc
+> | Jarvis:
+| 	Got it, I've removed task 2.
+| 		[E][X] ghi (from: 456, to: 789)
+> | Jarvis:
+| 	Here are the tasks in your list:
+| 	1. [D][ ] def (by: 123)
+> | Jarvis:
 | 	Goodbye, and see you again!
 > 

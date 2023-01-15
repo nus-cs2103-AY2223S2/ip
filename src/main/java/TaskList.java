@@ -16,12 +16,37 @@ public class TaskList {
         this.tasks = new ArrayList<>();
     }
 
+    /**
+     * Adds a task to the list.
+     * @param task Task to add.
+     * @return List of response lines.
+     */
     public List<String> addTask(Task task) {
         this.tasks.add(task);
         return List.of(
                 String.format("Got it! I've added task %d to the list.", this.tasks.size()),
                 "\t" + task
         );
+    }
+
+    public List<String> deleteTask(Command command) throws MissingParameterException {
+        int index = -1;
+        try {
+            index = Integer.parseInt(command.getBody());
+        } catch (NumberFormatException ignored) {}
+
+        return this.deleteTask(index);
+    }
+
+    public List<String> deleteTask(int index) throws MissingParameterException {
+        if (index <= 0 || index > this.tasks.size()) {
+            throw new MissingParameterException(
+                    "Invalid index",
+                    String.format("Please provide an index from %d to %d.", 1, this.tasks.size())
+            );
+        }
+        Task task = this.tasks.remove(index - 1);
+        return List.of(String.format("Got it, I've removed task %d.", index), "\t" + task);
     }
 
     /**
