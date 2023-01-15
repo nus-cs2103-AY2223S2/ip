@@ -6,10 +6,18 @@ import duke.command.EchoCommand;
 
 import java.util.Scanner;
 
+/**
+ * Main class for the chatbot
+ */
 public class Duke {
     private final static ByeCommand byeCommand = new ByeCommand();
     private final static EchoCommand echoCommand = new EchoCommand();
 
+    /**
+     * Main method for the chatbot
+     *
+     * @param args Command-line arguments
+     */
     public static void main(String[] args) {
         printGreeting();
         runInputLoop();
