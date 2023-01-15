@@ -16,11 +16,14 @@ public class Duke {
         while(true) {
             String line = sc.nextLine();
             System.out.println("\t--------------------------");
-            if(line.equals("bye")) {
+            if (line.equals("bye")) {
                 System.out.println("\tBYE!");
                 break;
+            } else if (line.equals("list")) {
+                ToDoList.list();
             } else {
                 System.out.println("\t" + line);
+                ToDoList.add(line);
             }
             System.out.println("\t--------------------------");
         }
