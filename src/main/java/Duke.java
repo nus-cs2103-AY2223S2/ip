@@ -21,7 +21,7 @@ public class Duke {
     public static void main(String[] args) {
         greeting();
         String input;
-        ArrayList<String> tasks = new ArrayList<>();
+        ArrayList<Task> tasks = new ArrayList<>();
 
         while (true) {
             input = sc.nextLine();
@@ -31,13 +31,34 @@ public class Duke {
             } else if (input.equals("list")) {
                 int i = 1;
                 System.out.println(dialogSeparator);
-                for (String item : tasks) {
-                    System.out.println(i + ". " + item);
+                System.out.println("Here are the tasks in your list:");
+                for (Task item : tasks) {
+                    System.out.println(i + "." + item);
+                    i++;
                 }
                 System.out.println(dialogSeparator);
+            } else if (input.split(" ")[0].equals("mark")) {
+                int i = Integer.parseInt(input.split(" ")[1]);
+                Task t = tasks.get(i - 1);
+                t.markAsDone();
+                System.out.println(dialogSeparator);
 
-            } else {
-                tasks.add(input);
+                System.out.println("Nice! I've marked this task as done:");
+                System.out.println(t);
+                System.out.println(dialogSeparator);
+
+            } else if (input.split(" ")[0].equals("unmark")) {
+                int i = Integer.parseInt(input.split(" ")[1]);
+                Task t = tasks.get(i - 1);
+                t.markAsUnDone();
+                System.out.println(dialogSeparator);
+
+                System.out.println("OK, I've marked this task as not done yet:");
+                System.out.println(t);
+                System.out.println(dialogSeparator);
+
+            }else {
+                tasks.add(new Task(input));
                 System.out.println(dialogSeparator + "\n" + "added: " + input + "\n" + dialogSeparator);
             }
         }
