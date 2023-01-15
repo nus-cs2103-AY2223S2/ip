@@ -3,7 +3,7 @@ import java.util.Scanner;
 
 public class Duke {
     private static final int MAX_TASKS_SIZE = 100;
-    private static ArrayList<String> tasks = new ArrayList<>(MAX_TASKS_SIZE);
+    private static ArrayList<Task> tasks = new ArrayList<>(MAX_TASKS_SIZE);
 
     private static void printText(String text) {
         System.out.printf("     %s\n", text);
@@ -25,13 +25,13 @@ public class Duke {
         printHorizontal();
     }
 
-    private static void commandAddTask(String task) {
+    private static void commandAddTask(String description) {
         printHorizontal();
         if (tasks.size() == MAX_TASKS_SIZE) {
             printText("Task list is full!");
         } else {
-            tasks.add(task);
-            printText(String.format("Added: %s", task));
+            tasks.add(new Task(description));
+            printText(String.format("Added: %s", description));
         }
         printHorizontal();
     }
@@ -39,9 +39,41 @@ public class Duke {
     private static void commandListTasks() {
         printHorizontal();
         for (int index = 0; index < tasks.size(); index++) {
-            printText(String.format("%d. %s", index + 1, tasks.get(index)));
+            printText(String.format("%d. %s", index + 1, tasks.get(index).toString()));
         }
         printHorizontal();
+    }
+
+    private static void commandMark(int taskNo) {
+        if (taskNo > 0 && taskNo <= tasks.size()) {
+            Task task = tasks.get(taskNo - 1);
+            task.setIsDone(true);
+
+            printHorizontal();
+            printText("Nice! I've marked this task as done:");
+            printText(task.toString());
+            printHorizontal();
+        } else {
+            printHorizontal();
+            printText("Invalid task number!");
+            printHorizontal();
+        }
+    }
+
+    private static void commandUnmark(int taskNo) {
+        if (taskNo > 0 && taskNo <= tasks.size()) {
+            Task task = tasks.get(taskNo - 1);
+            task.setIsDone(false);
+
+            printHorizontal();
+            printText("OK, I've marked this task as not done yet:");
+            printText(task.toString());
+            printHorizontal();
+        } else {
+            printHorizontal();
+            printText("Invalid task number!");
+            printHorizontal();
+        }
     }
 
     private static void commandExit() {
@@ -56,17 +88,25 @@ public class Duke {
         Scanner scanner = new Scanner(System.in);
         boolean isExit = false;
         while (!isExit) {
-            String command = scanner.nextLine();
-            switch (command) {
+            String input = scanner.nextLine();
+            String[] inputTokens = input.split(" ");
+
+            switch (inputTokens[0]) {
                 case "list":
                     commandListTasks();
+                    break;
+                case "mark":
+                    commandMark(Integer.parseInt(inputTokens[1]));
+                    break;
+                case "unmark":
+                    commandUnmark(Integer.parseInt(inputTokens[1]));
                     break;
                 case "bye":
                     commandExit();
                     isExit = true;
                     break;
                 default:
-                    commandAddTask(command);
+                    commandAddTask(input);
             }
         }
     }
