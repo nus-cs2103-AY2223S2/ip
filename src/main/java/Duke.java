@@ -28,6 +28,8 @@ public class Duke {
 
         if (cmd.compareTo("list") == 0)
             return State.LIST;
+        if (cmd.compareTo("add") == 0)
+            return State.ADD;
         // TODO: Detect other specific keywords
 
         // multiple exit keywords
@@ -40,8 +42,7 @@ public class Duke {
             case "exit()":
                 return State.EXIT;
             default:
-                return State.ADD;
-            //return State.UNKNOWN; //TODO: for future levels
+                return State.UNKNOWN;
         }
     }
 
@@ -76,8 +77,9 @@ public class Duke {
             // State handling
             switch(currentState) {
                 case ADD:
-                    list.add(userCmd);
-                    Duke.display("I have added: " + userCmd);
+                    String item = userCmd.substring(4).trim(); // exclude "add "
+                    list.add(item);
+                    Duke.display("I have added: " + item);
                     break;
                 case LIST:
                     if (list.size() == 0)
