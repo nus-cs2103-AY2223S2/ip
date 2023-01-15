@@ -5,6 +5,11 @@ public class Task {
     protected String description;
     protected boolean isDone;
 
+    /**
+     * Constructor for Task.
+     * @param description The task description.
+     * @throws DukeException If there is no description indicated.
+     */
     public Task(String description) throws DukeException {
         if (description.length() == 0) {
             throw new DukeException("☹ OOPS!!! The description of a todo cannot be empty.");

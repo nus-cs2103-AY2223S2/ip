@@ -4,6 +4,12 @@
 public class Deadline extends Task {
     protected String by;
 
+    /**
+     * Constructor for "Deadline" type task.
+     * @param description The task description.
+     * @param by The deadline of the task.
+     * @throws DukeException If there is no description or deadline indicated.
+     */
     public Deadline(String description, String by) throws DukeException {
         super(description);
         if (by.length() == 0) {
