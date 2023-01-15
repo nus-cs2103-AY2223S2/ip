@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import Duke.Tasks.Task;
 
 /**
- * TaskTable keeps track of all the tasks
+ * Represents the class Task Table which keeps track of all the tasks
  */
 public class TaskTable {
     private static ArrayList<Task> table;
@@ -18,7 +18,7 @@ public class TaskTable {
 
     /**
      * Constructor of TaskTable
-     * @param table
+     * @param table the task table
      */
     public TaskTable(ArrayList<Task> table) {
         this.table = table;
@@ -42,7 +42,7 @@ public class TaskTable {
 
     /**
      * The method adds new task to the table
-     * @param Task
+     * @param Task the task
      */
     public void add(Task Task) {
         this.table.add(Task);
@@ -50,7 +50,7 @@ public class TaskTable {
 
     /**
      * The method deletes certain task from the table
-     * @param num
+     * @param num the index of the task
      * @return Task
      */
     public Task delete(int num) {
@@ -59,7 +59,7 @@ public class TaskTable {
 
     /**
      * The method gets a certain task from the table
-     * @param num
+     * @param num the index of the task
      * @return Task
      */
     public Task get(int num) {
@@ -68,7 +68,7 @@ public class TaskTable {
 
     /**
      * The method marks a certain task as done
-     * @param num
+     * @param num the index of the task
      */
     public void mark(int num) {
         this.table.get(num).mark();
@@ -76,14 +76,10 @@ public class TaskTable {
 
     /**
      * The method marks a certain task as undone
-     * @param num
+     * @param num the index of the task
      */
     public void unmark(int num) {
         this.table.get(num).unmark();
     }
-
-
-
-
 
 }

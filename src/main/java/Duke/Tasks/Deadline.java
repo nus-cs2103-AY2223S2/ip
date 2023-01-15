@@ -12,8 +12,8 @@ public class Deadline extends Task{
     /**
      * Constructor of Deadline
      * @param desc the description
-     * @param time
-     * @param done
+     * @param time the time
+     * @param done whether the task is done
      */
     public Deadline(String desc, String time, boolean done) {
         super(done, desc);
@@ -42,8 +42,8 @@ public class Deadline extends Task{
 
     /**
      * Run the deadline and add to table
-     * @param table
-     * @param monitor
+     * @param table the task table
+     * @param monitor the monitor
      */
     @Override
     public void run(TaskTable table, Monitor monitor) {

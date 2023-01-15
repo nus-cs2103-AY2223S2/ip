@@ -12,8 +12,7 @@ import Duke.Tasks.Task;
  */
 
 /**
- * Main class of Duke
- * main method
+ * Represents class of Duke
  */
 public class Duke {
 
@@ -22,6 +21,10 @@ public class Duke {
 
     /**
      * Constructor of Duke
+     * @throws EmptyCommandException
+     * @throws InvalidTimeFormatException
+     * @throws InvalidCommandException
+     * @throws MissingDescriptionException
      */
     public Duke() throws EmptyCommandException, InvalidTimeFormatException, InvalidCommandException, MissingDescriptionException {
         Monitor monitor = new Monitor();
@@ -43,35 +46,15 @@ public class Duke {
             }
         }
         monitor.bye();
-
-
-    }
-
-    public void execute() {
-
-        monitor.displayLogo();
-        monitor.welcome();
-
-        table = new TaskTable();
-        boolean running = true;
-        while (running) {
-            try {
-                String command = monitor.getCommand();
-                Task newTask = Interpreter.interpret(command, table);
-                newTask.run(table, monitor);
-                running = !newTask.exited; // if newTask exits stop running
-            } catch (NullPointerException | InvalidTimeFormatException | MissingDescriptionException |
-                     EmptyCommandException | InvalidCommandException e) {
-                continue;
-            }
-        }
-        monitor.bye();
-
     }
 
     /**
      * The main method
-     * @param args
+     * @param args the args
+     * @throws EmptyCommandException
+     * @throws InvalidTimeFormatException
+     * @throws InvalidCommandException
+     * @throws MissingDescriptionException
      */
     public static void main(String[] args) throws EmptyCommandException, InvalidTimeFormatException, InvalidCommandException, MissingDescriptionException {
             new Duke();

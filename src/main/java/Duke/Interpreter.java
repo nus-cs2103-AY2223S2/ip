@@ -27,9 +27,11 @@ public class Interpreter {
 
     /**
      * The method mark marks the Task as done
-     * @param command
-     * @param table
+     * @param command the command by the user
+     * @param table the task table
      * @return Task
+     * @throws InvalidCommandException
+     * @throws OutRangeException
      */
     public static Task mark(String command, TaskTable table) throws InvalidCommandException, OutRangeException {
         int len = table.size();
@@ -54,9 +56,11 @@ public class Interpreter {
 
     /**
      * The method unmark unmarks the Task as undone
-     * @param command
-     * @param table
+     * @param command the command from the user
+     * @param table the task table
      * @return Task
+     * @throws InvalidCommandException
+     * @throws OutRangeException
      */
     public static Task unmark(String command, TaskTable table) throws InvalidCommandException, OutRangeException {
         int len = table.size();
@@ -79,12 +83,13 @@ public class Interpreter {
         }
     }
 
-
     /**
      * The method delete deletes the certain Task
-     * @param command
-     * @param table
+     * @param command the command from the user
+     * @param table the task table
      * @return Task
+     * @throws InvalidCommandException
+     * @throws OutRangeException
      */
     public static Task delete(String command, TaskTable table) throws InvalidCommandException, OutRangeException {
         int len = table.size();
@@ -108,10 +113,13 @@ public class Interpreter {
     }
 
     /**
-     * The method addTask adds new task to the Tasktable
-     * @param command
-     * @param table
+     * The method addTask adds new task to the Task table
+     * @param command the command from the user
+     * @param table the task table
      * @return Task
+     * @throws InvalidTimeFormatException
+     * @throws MissingDescriptionException
+     * @throws EmptyCommandException
      */
     public static Task addTask(String command, TaskTable table) throws InvalidTimeFormatException,
             MissingDescriptionException, EmptyCommandException {
@@ -185,9 +193,13 @@ public class Interpreter {
 
     /**
      * The method interpret interprets the command
-     * @param command
-     * @param table
+     * @param command the command from the user
+     * @param table the task table
      * @return Task
+     * @throws InvalidTimeFormatException
+     * @throws MissingDescriptionException
+     * @throws EmptyCommandException
+     * @throws InvalidCommandException
      */
     public static Task interpret(String command, TaskTable table) throws InvalidTimeFormatException,
             MissingDescriptionException, EmptyCommandException, InvalidCommandException {

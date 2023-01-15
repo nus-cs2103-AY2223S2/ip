@@ -7,6 +7,7 @@ import java.lang.String;
 
 
 /**
+ * Represents the Monitor class
  * Display the interface to the user
  */
 
@@ -57,8 +58,8 @@ public class Monitor {
 
     /**
      * The method displayAdd shows the user when a new task is added
-     * @param table
-     * @param i
+     * @param table the task table
+     * @param i the index of the task
      */
     public void displayAdd(TaskTable table, int i) {
         String message = "    ____________________________________________________________\n" +
@@ -69,6 +70,11 @@ public class Monitor {
         System.out.println(message);
     }
 
+    /**
+     * Displays information after Task is done
+     * @param table the task table
+     * @param index the index of the task
+     */
     public void displayMark(TaskTable table, int index) {
         String message = "    ____________________________________________________________\n" +
                 "Nice! I've marked this task as done:\n    " +
@@ -77,6 +83,11 @@ public class Monitor {
         System.out.println(message);
     }
 
+    /**
+     * Displays information after Task is unmarked
+     * @param table the task table
+     * @param index the index of the task
+     */
     public void displayUnmark(TaskTable table, int index) {
         String message = "    ____________________________________________________________\n" +
                 "Okay, I've marked this task as not done:\n    " +
@@ -88,7 +99,7 @@ public class Monitor {
 
     /**
      * The method showTable shows the whole table of Tasks
-     * @param table
+     * @param table the task table
      */
     public void showTable(TaskTable table) {
         String message = "    ____________________________________________________________\n" +
@@ -102,8 +113,8 @@ public class Monitor {
 
     /**
      * The method displayDelete shows the message after deletion
-     * @param table
-     * @param removedJob
+     * @param table the task table
+     * @param removedJob the removed task
      */
     public void displayDelete(TaskTable table, Task removedJob) {
         String message = "    ____________________________________________________________\n" +

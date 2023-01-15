@@ -3,29 +3,51 @@ package Duke.Tasks;
 import Duke.TaskTable;
 import Duke.Monitor;
 
-
+/**
+ * Represents the Event class
+ */
 public class Event extends Task {
     protected String startTime;
     protected String endTime;
 
+    /**
+     * The constructor of Event
+     * @param desc the description of event
+     * @param startTime the start time of event
+     * @param endTime the end time of event
+     * @param done whether the event is done
+     */
     public Event(String desc, String startTime, String endTime, boolean done) {
         super(done, desc);
         this.startTime = startTime;
         this.endTime = endTime;
     }
 
+    /**
+     * The method marks the event as done
+     * @return Event
+     */
     @Override
     public Event mark() {
         super.mark();
         return this;
     }
 
+    /**
+     * The method unmarks the event
+     * @return Event
+     */
     @Override
     public Event unmark() {
         super.unmark();
         return this;
     }
 
+    /**
+     * The method adds the event to the table
+     * @param table the task table
+     * @param monitor the monitor
+     */
     @Override
     public void run(TaskTable table, Monitor monitor) {
         table.add(this);
@@ -33,7 +55,10 @@ public class Event extends Task {
 
     }
 
-
+    /**
+     * Override the String method and convert the event to String
+     * @return String
+     */
     @Override
     public String toString() {
         return "[E]" + super.toString() + " (from: " + this.startTime + " to " + this.endTime + ")";
