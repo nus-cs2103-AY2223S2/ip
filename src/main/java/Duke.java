@@ -1,4 +1,5 @@
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Scanner;
 
 public class Duke {
@@ -16,7 +17,7 @@ public class Duke {
         LIST,
         TODO, DEADLINE, EVENT,
         MARK, UNMARK,
-        // DELETE,
+        DELETE,
         EXIT,
         UNKNOWN,
     }
@@ -56,15 +57,15 @@ public class Duke {
         if (taskList.size() == 0)
             Duke.display("Your list is empty.");
         else {
-            Duke.display("Here's your list of tasks:");
+            Duke.display("You have the following task(s):");
             for (int i = 0; i < taskList.size(); i++)
-                Duke.display((i + 1) + ". " + taskList.get(i));
+                Duke.display("\t" + (i + 1) + ". " + taskList.get(i));
         }
     }
     static void addNewTask(ArrayList<Task> taskList, Task task) {
         taskList.add(task);
         Duke.display("Got it. I've added this task:");
-        Duke.display("\t" + task.toString());
+        Duke.display("\t" + task);
         Duke.displayTaskCount(taskList);
     }
     static State detectState(String command) {
@@ -83,7 +84,8 @@ public class Duke {
             return State.MARK;
         else if (cmd.compareTo("unmark") == 0)
             return State.UNMARK;
-        // TODO: Detect other specific keywords
+        else if (cmd.compareTo("delete") == 0)
+            return State.DELETE;
 
         // multiple exit keywords
         switch (cmd) {
@@ -108,6 +110,7 @@ public class Duke {
 
         //Initialise components, variables
         int taskIdx, descIdx;
+        String[] inputs;
         String userCmd, taskDescription;
         Task activeTask;
         State currentState = State.UNKNOWN;
@@ -182,7 +185,7 @@ public class Duke {
 
                     case MARK:
                     case UNMARK:
-                        String[] inputs = userCmd.split(" ");
+                        inputs = userCmd.split(" ");
                         Duke.assertThis(inputs.length > 1, "Please indicate which task(s) to apply to.");
 
                         if (currentState == State.MARK)
@@ -198,8 +201,8 @@ public class Duke {
                                 Duke.assertThis(taskIdx >= 0 && taskIdx < taskList.size(), "");
 
                                 activeTask = taskList.get(taskIdx);
-                                activeTask.setDone(currentState == State.MARK); // False means unmark
-                                Duke.display(activeTask);
+                                activeTask.setDone(currentState == State.MARK); // Note: false means unmark
+                                Duke.display("\t" + activeTask);
                             }
                             catch(NumberFormatException e) {
                                 Duke.warn("'" + input + "' is not a number.");
@@ -208,6 +211,43 @@ public class Duke {
                                 Duke.warn("Task " + Integer.parseInt(inputs[i]) + " does not exist.");
                             }
                         }
+                        break;
+
+                    case DELETE:
+                        inputs = userCmd.split(" ");
+                        Duke.assertThis(inputs.length > 1, "Please indicate which task(s) to apply to.");
+
+                        ArrayList<Integer> markedDelete = new ArrayList<>();
+
+                        // Check and note what to delete
+                        for (int i = 1; i < inputs.length; i++) {
+                            String input = inputs[i].trim();
+                            if (input.isEmpty()) continue; // Blank, do nothing
+
+                            try {
+                                taskIdx = Integer.parseInt(inputs[i]) - 1;
+                                Duke.assertThis(taskIdx >= 0 && taskIdx < taskList.size(), "");
+
+                                activeTask = taskList.get(taskIdx);
+                                markedDelete.add(taskIdx);
+                            }
+                            catch(NumberFormatException e) {
+                                Duke.warn("'" + input + "' is not a number.");
+                            }
+                            catch(DukeException e) {
+                                Duke.warn("Task " + Integer.parseInt(inputs[i]) + " does not exist.");
+                            }
+                        }
+
+                        Duke.display("Noted. I've removed the task(s):");
+
+                        // Actual delete from tasklist (start from the back)
+                        Collections.sort(markedDelete);
+                        Collections.reverse(markedDelete);
+                        for (int i : markedDelete) // Note: need to be int and not Integer
+                            Duke.display("\t" + taskList.remove(i)); // or else remove(Object o) is used (wrong) instead of remove(int index)
+
+                        Duke.displayTaskCount(taskList);
                         break;
 
                     case UNKNOWN:
