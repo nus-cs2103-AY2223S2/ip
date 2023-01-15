@@ -23,4 +23,10 @@ public class Tasks {
             return "[ ]";
         }
     }
+    public String icon() {
+        return "";
+    }
+    public String mssg() {
+        return "Got it I've added this task: \n";
+    }
 }
