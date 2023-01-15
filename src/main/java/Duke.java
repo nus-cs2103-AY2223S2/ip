@@ -22,6 +22,7 @@ public class Duke {
                     int n = 1;
                     for (Tasks t : todoList) {
                         System.out.println(n + ". "
+                                + t.icon()
                                 + t.symbol() + " "
                                 + t.getDesc());
                         n++;

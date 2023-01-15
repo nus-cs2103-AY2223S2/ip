@@ -13,6 +13,10 @@ public class Deadline extends Tasks{
         return icon;
     }
 
+    public String getDesc(){
+        return this.desc+ "("+this.end+")";
+    }
+
     public String mssg() {
         return super.mssg() + " " + this.icon + super.symbol() + " " + this.desc
                 +"("+this.end+")";

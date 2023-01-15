@@ -15,6 +15,9 @@ public class Event extends Tasks{
         return icon;
     }
 
+    public String getDesc() {
+        return this.desc+ "("+this.timeframe+")";
+    }
     public String mssg() {
         return super.mssg() + " " + icon + super.symbol() + " " + this.desc+
                 "("+this.timeframe+")";
