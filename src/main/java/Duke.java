@@ -20,10 +20,16 @@ public class Duke {
                 System.out.println("There is nothing on your list to delete");
             } else {
                 int index = Integer.parseInt((str.substring(7)));
+                Tasks t = todoList.get(index-1);
                 todoList.remove(index - 1);
+                System.out.println(t.deleted() +
+                        "\nNow you have " +
+                        todoList.size() +
+                        " tasks in the list");
             }
         } else {
             if (str.equals("list")) {
+                System.out.println("Here are the tasks in your list:");
                 if (todoList.isEmpty()) {
                     System.out.println("You have nothing scheduled, add something to the list.");
                 } else {
@@ -58,7 +64,7 @@ public class Duke {
                         case "todo":
                             Tasks t = new ToDo(str);
                             todoList.add(t);
-                            System.out.println(t.mssg() +
+                            System.out.println(t.added() +
                                     "\nNow you have " +
                                     todoList.size() +
                                     " tasks in the list");
@@ -66,7 +72,7 @@ public class Duke {
                         case "deadline":
                             Tasks d = new Deadline(str);
                             todoList.add(d);
-                            System.out.println(d.mssg() +
+                            System.out.println(d.added() +
                                     "\nNow you have " +
                                     todoList.size() +
                                     " tasks in the list");
@@ -74,7 +80,7 @@ public class Duke {
                         case "event":
                             Tasks e = new Event(str);
                             todoList.add(e);
-                            System.out.println(e.mssg() +
+                            System.out.println(e.added() +
                                     "\nNow you have " +
                                     todoList.size() +
                                     " tasks in the list");

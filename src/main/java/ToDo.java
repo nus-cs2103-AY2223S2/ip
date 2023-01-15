@@ -11,7 +11,10 @@ public class ToDo extends Tasks{
     public String icon() {
         return icon;
     }
-    public String mssg() {
-        return super.mssg() + " " + icon + super.symbol() + " " + this.desc;
+    public String added() {
+        return super.added() + " " + icon + super.symbol() + " " + this.desc;
+    }
+    public String deleted() {
+        return super.deleted() + " " + icon + super.symbol() + " " + this.desc;
     }
 }

@@ -23,8 +23,12 @@ public class Event extends Tasks{
     public String getDesc() {
         return this.desc.split(" ", 2)[1]+ "("+this.timeframe+")";
     }
-    public String mssg() {
-        return super.mssg() + " " + icon + super.symbol() + " " + this.desc.split(" ", 2)[1]+
+    public String added() {
+        return super.added() + " " + icon + super.symbol() + " " + this.desc.split(" ", 2)[1]+
+                "("+this.timeframe+")";
+    }
+    public String deleted(){
+        return super.deleted() +  " " + icon + super.symbol() + " " + this.desc.split(" ", 2)[1]+
                 "("+this.timeframe+")";
     }
 }

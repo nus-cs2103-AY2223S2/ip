@@ -20,8 +20,12 @@ public class Deadline extends Tasks{
         return this.desc.split(" ", 2)[1] + "("+this.end+")";
     }
 
-    public String mssg() {
-        return super.mssg() + " " + this.icon + super.symbol() + " " + this.desc.split(" ", 2)[1]
+    public String added() {
+        return super.added() + " " + this.icon + super.symbol() + " " + this.desc.split(" ", 2)[1]
                 +"("+this.end+")";
+    }
+    public String deleted() {
+        return super.deleted() + " " + icon + super.symbol() + " " + this.desc.split(" ", 2)[1] +
+                "(" + this.end + ")";
     }
 }

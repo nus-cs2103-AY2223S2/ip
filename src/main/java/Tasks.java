@@ -26,7 +26,9 @@ public class Tasks {
     public String icon() {
         return "";
     }
-    public String mssg() {
+    public String added() {
         return "Got it I've added this task: \n";
     }
+
+    public String deleted() {return "Noted. I've removed this task:\n";}
 }
