@@ -1,4 +1,5 @@
 import java.util.ArrayList;
+import java.util.Arrays;
 
 public class TaskList {
 
@@ -21,11 +22,11 @@ public class TaskList {
         }
     }
 
-    public void handleMarkUnmarkCommand(String userInput) {
-        String[] strings = userInput.split(" ");
-        boolean isMark = strings[0].equals("mark");
+    public void handleMarkUnmarkCommand(String[] tokens) {
+        String action = tokens[0];
+        boolean isMark = action.equals("mark");
 
-        if (strings.length != 2) {
+        if (tokens.length != 2) {
             if (isMark) {
                 System.out.println("Usage: mark <task no.>");
             } else {
@@ -37,7 +38,7 @@ public class TaskList {
         int taskNumber;
 
         try {
-            taskNumber = Integer.parseInt(strings[1]);
+            taskNumber = Integer.parseInt(tokens[1]);
         } catch (NumberFormatException e) {
             if (isMark) {
                 System.out.println("Usage: mark <task no.>");
@@ -66,14 +67,105 @@ public class TaskList {
         }
     }
 
+    public void handleTodoCommand(String[] tokens) {
+        String[] taskNameArray = Arrays.copyOfRange(tokens, 1, tokens.length);
+
+        if (taskNameArray.length == 0) {
+            System.out.println("Usage: todo <task name>");
+            return;
+        }
+
+        String taskName = String.join(" ", taskNameArray);
+
+        TodoTask newTodoTask = new TodoTask(taskName);
+        this.addTask(newTodoTask);
+    }
+
+    public void handleDeadlineCommand(String[] tokens) {
+        int indexOfBy = -1;
+
+        for (int i = 0; i < tokens.length; i++) {
+            String token = tokens[i];
+
+            if (token.equals("/by")) {
+                indexOfBy = i;
+                break;
+            }
+        }
+
+        if (indexOfBy == -1) {
+            System.out.println("Usage: deadline <task name> /by <deadline>");
+            return;
+        }
+
+        String[] taskNameArray = Arrays.copyOfRange(tokens, 1, indexOfBy);
+        String[] byArray = Arrays.copyOfRange(tokens, indexOfBy + 1, tokens.length);
+
+        if (taskNameArray.length == 0 || byArray.length == 0) {
+            System.out.println("Usage: deadline <task name> /by <deadline>");
+            return;
+        }
+
+        String taskName = String.join(" ", taskNameArray);
+        String by = String.join(" ", byArray);
+
+        DeadlineTask newDeadlineTask = new DeadlineTask(taskName, by);
+        this.addTask(newDeadlineTask);
+    }
+
+    public void handleEventCommand(String[] tokens) {
+        int indexOfFrom = -1;
+        int indexOfTo = -1;
+
+        for (int i = 0; i < tokens.length; i++) {
+            String token = tokens[i];
+
+            if (token.equals("/from")) {
+                indexOfFrom = i;
+            } else if (token.equals("/to")) {
+                indexOfTo = i;
+            }
+        }
+
+        if (indexOfFrom == -1 || indexOfTo == -1) {
+            System.out.println("Usage: event <task name> /from <start> /to <end>");
+            return;
+        }
+
+        String[] taskNameArray = Arrays.copyOfRange(tokens, 1, indexOfFrom);
+        String[] fromArray = Arrays.copyOfRange(tokens, indexOfFrom + 1, indexOfTo);
+        String[] toArray = Arrays.copyOfRange(tokens, indexOfTo + 1, tokens.length);
+
+        if (taskNameArray.length == 0 || fromArray.length == 0 || toArray.length == 0) {
+            System.out.println("Usage: event <task name> /from <start> /to <end>");
+            return;
+        }
+
+        String taskName = String.join(" ", taskNameArray);
+        String from = String.join(" ", fromArray);
+        String to = String.join(" ", toArray);
+
+        EventTask newEventTask = new EventTask(taskName, from, to);
+        this.addTask(newEventTask);
+    }
+
+    private void addTask(Task task) {
+        this.tasks.add(task);
+        System.out.println("Added:\n" + task.toString());
+        this.printNumberOfTasks();
+    }
+
     public void handleByeCommand() {
         System.out.println("Exiting...");
     }
 
-    public void createNewTask(String newTaskName) {
-        Task newTask = new Task(newTaskName);
-        this.tasks.add(newTask);
-        System.out.println("Added: " + newTaskName);
-    }
+    public void printNumberOfTasks() {
+        int numTasks = this.tasks.size();
 
+        if (numTasks == 1) {
+            System.out.println("There is 1 task in the list");
+        } else {
+            System.out.println("There are " + numTasks + " tasks in the list");
+        }
+    }
 }

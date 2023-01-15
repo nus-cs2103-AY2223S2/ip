@@ -5,27 +5,50 @@ public class Duke {
     public static void main(String[] args) {
         String welcomeMessage = "============================================================\n"
                 + "Welcome to Duchess\n"
-                + "============================================================\n";
+                + "============================================================";
         System.out.print(welcomeMessage);
 
         TaskList taskList = new TaskList();
-        String userPrompt = ">> ";
+        String userPrompt = "\n>> ";
         Scanner sc = new Scanner(System.in);
 
         while (true) {
             System.out.print(userPrompt);
             String userInput = sc.nextLine();
 
-            if (userInput.equals("list")) {
+            String[] tokens = userInput.split(" ");
+            String action = tokens[0];
+
+            switch (action) {
+            case "list":
                 taskList.handleListCommand();
-            } else if (userInput.matches("^mark.*$") || userInput.matches("^unmark.*$")) {
-                taskList.handleMarkUnmarkCommand(userInput);
-            } else if (userInput.equals("bye")) {
+                break;
+
+            case "mark":
+            case "unmark":
+                taskList.handleMarkUnmarkCommand(tokens);
+                break;
+
+            case "todo":
+                taskList.handleTodoCommand(tokens);
+                break;
+
+            case "deadline":
+                taskList.handleDeadlineCommand(tokens);
+                break;
+
+            case "event":
+                taskList.handleEventCommand(tokens);
+                break;
+
+            case "bye":
                 taskList.handleByeCommand();
                 sc.close();
+                return;
+
+            default:
+                System.out.println("Recognised actions: list, mark, unmark, todo, deadline, event, bye");
                 break;
-            } else {
-                taskList.createNewTask(userInput);
             }
         }
     }
