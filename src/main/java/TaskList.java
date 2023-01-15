@@ -7,10 +7,9 @@ public class TaskList {
         this.tasks = new LinkedList<>();
     }
 
-    public void addTask(String taskName) {
-        Task task = new Task(taskName);
+    public void addTask(Task task) {
         tasks.add(task);
-        Response.printMessage("I have added " + taskName + " to my memory");
+        Response.printMessage("I have added " + task.getTaskName() + " to my memory");
     }
 
     public void deleteTask(String task) {

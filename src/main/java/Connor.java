@@ -33,7 +33,8 @@ public class Connor {
 
                     case ADD:
                         // TODO: handle errors and invalid commands.
-                        String task = getTask(input);
+                        String taskName = getTask(input);
+                        Task task = new Task(taskName);
                         list.addTask(task);
                         break;
 

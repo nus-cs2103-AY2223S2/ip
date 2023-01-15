@@ -8,21 +8,25 @@ public class Task {
     }
 
     public String getStatus() {
-        if (isDone) {
+        if (this.isDone) {
             return "[X]";
         }
         return "[ ]";
     }
 
     public void mark() {
-        isDone = true;
+        this.isDone = true;
     }
 
     public void unmark() {
-        isDone = false;
+        this.isDone = false;
+    }
+
+    public String getTaskName() {
+        return this.taskName;
     }
 
     public String toString() {
-        return getStatus() + " " + taskName;
+        return getStatus() + " " + this.taskName;
     }
 }
