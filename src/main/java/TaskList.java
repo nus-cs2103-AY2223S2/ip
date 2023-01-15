@@ -1,11 +1,16 @@
+import task.DeadlineTask;
+import task.EventTask;
+import task.Task;
+import task.ToDoTask;
+
 import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
 
-public class ToDoList {
-    private final List<ToDoTask> tasks;
+public class TaskList {
+    private final List<Task> tasks;
 
-    public ToDoList() {
+    public TaskList() {
         this.tasks = new ArrayList<>();
     }
 
@@ -14,14 +19,29 @@ public class ToDoList {
      * @param task Task description.
      * @return Response line.
      */
-    public String addTask(String task) {
-        this.tasks.add(new ToDoTask(task));
-        return String.format("added: %s", task);
+    public List<String> addTask(String task) {
+        return this.addTask(new ToDoTask(task));
+    }
+
+    public List<String> addTask(String task, String deadline) {
+        return this.addTask(new DeadlineTask(task, deadline));
+    }
+
+    public List<String> addTask(String task, String fromDateTime, String toDateTime) {
+        return this.addTask(new EventTask(task, fromDateTime, toDateTime));
+    }
+
+    public List<String> addTask(Task task) {
+        this.tasks.add(task);
+        return List.of(
+                String.format("Got it! I've added task %d to the list.", this.tasks.size()),
+                "\t" + task
+        );
     }
 
     /**
      * Marks a task as done or undone, based on the command.
-     * @param command mark/unmark command.
+     * @param command Mark/unmark command.
      * @return List of response lines.
      */
     public List<String> setTaskDone(String command) {
@@ -59,7 +79,7 @@ public class ToDoList {
             );
         }
 
-        ToDoTask task = this.tasks.get(index - 1);
+        Task task = this.tasks.get(index - 1);
         task.setDone(isDone);
         return List.of(
                 String.format("You have marked task %d as %s.", index, isDone ? "done" : "undone"),

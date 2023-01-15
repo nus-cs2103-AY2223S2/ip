@@ -5,7 +5,7 @@ public class Duke {
 
     public static void main(String[] args) {
         Echo echo = new Echo(BOT_NAME);
-        ToDoList toDoList = new ToDoList();
+        TaskList taskList = new TaskList();
 
         String logo = "     _   _    ______     _____ ____  \n" +
                 "    | | / \\  |  _ \\ \\   / /_ _/ ___| \n" +
@@ -15,23 +15,26 @@ public class Duke {
 
         System.out.println(logo);
         echo.printResponse(String.format("Hello, I'm %s, how may I help you?", BOT_NAME));
-        System.out.print("> ");
 
         Scanner scanner = new Scanner(System.in);
         while (scanner.hasNext()) {
-            String command = scanner.nextLine().trim();
+            Command command = new Command(scanner.nextLine());
 
-            if (command.equalsIgnoreCase("bye")) {
+            if (command.hasAction(Command.Action.BYE)) {
                 break;
-            } else if (command.equalsIgnoreCase("list")) {
-                echo.printResponse(toDoList.getTasksForPrint());
-            } else if (command.contains("mark") || command.contains("unmarked")) {
-                echo.printResponse(toDoList.setTaskDone(command));
+            } else if (command.hasAction(Command.Action.LIST)) {
+                echo.printResponse(taskList.getTasksForPrint());
+            } else if (command.hasAction(Command.Action.MARK_DONE) || command.hasAction(Command.Action.MARK_UNDONE)) {
+                echo.printResponse(taskList.setTaskDone(command.toString()));
+            } else if (command.hasAction(Command.Action.CREATE_TODO)) {
+                echo.printResponse(taskList.addTask(command.toToDoTask()));
+            } else if (command.hasAction(Command.Action.CREATE_DEADLINE)) {
+                echo.printResponse(taskList.addTask(command.toDeadlineTask()));
+            } else if (command.hasAction(Command.Action.CREATE_EVENT)) {
+                echo.printResponse(taskList.addTask(command.toEventTask()));
             } else if (!command.isEmpty()) {
-                echo.printResponse(toDoList.addTask(command));
+                echo.printResponse("I don't quite understand, please try again.");
             }
-
-            System.out.print("> ");
         }
         echo.printResponse("Goodbye!");
     }

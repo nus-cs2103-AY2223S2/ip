@@ -25,6 +25,7 @@ public class Echo {
         for (String line : lines) {
             System.out.println("| \t" + line);
         }
+        System.out.print("> ");
     }
 
     /**

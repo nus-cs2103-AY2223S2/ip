@@ -1,8 +1,10 @@
-public class ToDoTask {
+package task;
+
+public abstract class Task {
     private boolean isDone;
     private String task;
 
-    public ToDoTask(String task) {
+    public Task(String task) {
         this.isDone = false;
         this.task = task;
     }
@@ -25,6 +27,6 @@ public class ToDoTask {
 
     @Override
     public String toString() {
-        return String.format("[%s] %s", this.isDone ? "X" : " ", this.task);
+        return String.format("[%s] %s", this.isDone ? "X" : " ", this.task == null ? "[empty]" : this.task);
     }
 }
