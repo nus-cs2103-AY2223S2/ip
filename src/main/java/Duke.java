@@ -1,6 +1,7 @@
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
+import java.util.concurrent.ExecutionException;
 
 public class Duke {
     final static String lines = "\t____________________________________________________________\n";
@@ -12,6 +13,7 @@ public class Duke {
             "\tBye. Hope to see you again soon!\n" +
             lines;
     static List<Task> taskList;
+    enum Actions {LIST, MARK, UNMARK, TODO, DEADLINE, EVENT, DELETE}
 
     public static void printList() {
         System.out.print(lines);
@@ -40,34 +42,36 @@ public class Duke {
         taskList = new ArrayList<>();
         System.out.println(greet);
         Scanner sc = new Scanner(System.in);
-
+        Actions selection = null;
         String commands = sc.nextLine();
+        String[] s = new String[] {};
         while (!commands.equals("bye")) {
-            String[] s = commands.split(" ");
             try {
-                switch (s[0]) {
-                    case "list":
+                s = commands.split(" ");
+                selection = Actions.valueOf(s[0].toUpperCase());
+                switch (selection) {
+                    case LIST:
                         printList();
                         break;
-                    case "mark":
+                    case MARK:
                         Task t1 = taskList.get(Integer.parseInt(s[1]) - 1);
                         t1.markDone();
                         System.out.println("\tNice! I've marked this task as done:");
                         System.out.println("\t  " + t1);
                         break;
-                    case "unmark":
+                    case UNMARK:
                         Task t2 = taskList.get(Integer.parseInt(s[1]) - 1);
                         t2.markNotDone();
                         System.out.println("\tOK, I've marked this task as not done yet:");
                         System.out.println("\t  " + t2);
                         break;
-                    case "todo":
+                    case TODO:
                         if (s.length < 2)
                             throw new DukeException("☹ OOPS!!! The description of a todo cannot be empty.");
                         Todo todo = new Todo(commands.substring(5));
                         addTask(todo);
                         break;
-                    case "deadline":
+                    case DEADLINE:
                         if (s.length < 2)
                             throw new DukeException("☹ OOPS!!! The description of a deadline cannot be empty.");
                         String[] deadlineInfo = commands.substring(9).split(" /by ");
@@ -76,7 +80,7 @@ public class Duke {
                         Deadline deadline = new Deadline(deadlineInfo[0], deadlineInfo[1]);
                         addTask(deadline);
                         break;
-                    case "event":
+                    case EVENT:
                         if (s.length < 2)
                             throw new DukeException("☹ OOPS!!! The description of a event cannot be empty.");
                         String[] eventInfo = commands.substring(6).split(" /from ");
@@ -88,7 +92,7 @@ public class Duke {
                         Event event = new Event(eventInfo[0], eventTime[0], eventTime[1]);
                         addTask(event);
                         break;
-                    case "delete":
+                    case DELETE:
                         if (s.length < 2)
                             throw new DukeException("☹ OOPS!!! You must choose a task to delete");
                         int taskNumber = Integer.parseInt(s[1]);
@@ -102,6 +106,8 @@ public class Duke {
                 }
             } catch (DukeException e) {
                 System.out.println(lines + "\t" + e + "\n" + lines);
+            } catch (IllegalArgumentException e) {
+                System.out.println(lines + "\tPlease enter a valid action!\n" + lines);
             }
             commands = sc.nextLine();
         }
