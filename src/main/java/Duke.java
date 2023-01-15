@@ -10,8 +10,8 @@ public class Duke {
       this.isDone = false;
     }
 
-    public String getStatusIcon() {
-      return (isDone ? "X" : " "); // mark done task with X
+    public String toggleDone() {
+      return isDone ? "X" : " "; 
     }
 
     public void markAsDone() {
@@ -24,7 +24,7 @@ public class Duke {
 
     @Override
     public String toString() {
-      return new StringBuilder("[").append(getStatusIcon()).append("] ").append(description).toString();
+      return new StringBuilder("[").append(toggleDone()).append("] ").append(description).toString();
     }
   }
 
@@ -52,7 +52,7 @@ public class Duke {
     @Override
     public String toString() {
       return new StringBuilder("[D]").append(super.toString())
-          .append(" (by: ").append(by).append(")").toString();
+          .append("(by:").append(by).append(")").toString();
     }
   }
 
@@ -69,7 +69,7 @@ public class Duke {
 
     @Override
     public String toString() {
-      return new StringBuilder("[E]").append(super.toString()).append(" (from:")
+      return new StringBuilder("[E]").append(super.toString()).append("(from:")
           .append(from).append("to:").append(to).append(")").toString();
     }
   }
@@ -133,7 +133,7 @@ public class Duke {
     }
   }
 
-  private static void handleTaskTypes(String userInput, ArrayList<Task> taskList) { 
+  private static void handleTaskTypes(String userInput, ArrayList<Task> taskList) {
     if (userInput.toLowerCase().contains("todo")) {
       Todo newTodo = new Todo(userInput.substring(5));
       addAndPrintTask(newTodo, taskList);
@@ -153,6 +153,7 @@ public class Duke {
     taskList.add(newTask);
     System.out.println("  Got it. I've added this task:");
     System.out.println(new StringBuilder("  ").append(newTask.toString()));
-    System.out.println(new StringBuilder("  Now you have ").append(taskList.size()).append(" tasks in the list."));
+    System.out.println(new StringBuilder("  Now you have ").append(taskList.size())
+        .append(taskList.size() == 1 ? " task in the list." : " tasks in the list."));
   }
 }
