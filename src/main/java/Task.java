@@ -2,7 +2,7 @@ public class Task {
     private final String name;
     private String status;
 
-    Task(String name) {
+    protected Task(String name) {
         this.name = name;
         this.status = " ";
     }
@@ -17,5 +17,10 @@ public class Task {
 
     public void setStatus(String status) {
         this.status = status;
+    }
+
+    @Override
+    public String toString() {
+        return "[" + this.status + "] " + this.name;
     }
 }
