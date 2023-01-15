@@ -56,28 +56,28 @@ public class Duke {
                         break;
                     case "todo":
                         if (s.length < 2)
-                            throw new EmptyDescriptionException("☹ OOPS!!! The description of a todo cannot be empty.");
+                            throw new DukeException("☹ OOPS!!! The description of a todo cannot be empty.");
                         Todo todo = new Todo(commands.substring(5));
                         addTask(todo);
                         break;
                     case "deadline":
                         if (s.length < 2)
-                            throw new EmptyDescriptionException("☹ OOPS!!! The description of a deadline cannot be empty.");
+                            throw new DukeException("☹ OOPS!!! The description of a deadline cannot be empty.");
                         String[] deadlineInfo = commands.substring(9).split(" /by ");
                         if (deadlineInfo.length < 2)
-                            throw new EmptyDescriptionException("☹ OOPS!!! Deadline cannot be empty.");
+                            throw new DukeException("☹ OOPS!!! Deadline cannot be empty.");
                         Deadline deadline = new Deadline(deadlineInfo[0], deadlineInfo[1]);
                         addTask(deadline);
                         break;
                     case "event":
                         if (s.length < 2)
-                            throw new EmptyDescriptionException("☹ OOPS!!! The description of a event cannot be empty.");
+                            throw new DukeException("☹ OOPS!!! The description of a event cannot be empty.");
                         String[] eventInfo = commands.substring(6).split(" /from ");
                         if (eventInfo.length < 2)
-                            throw new EmptyDescriptionException("☹ OOPS!!! Event start time and end time are required.");
+                            throw new DukeException("☹ OOPS!!! Event start time and end time are required.");
                         String[] eventTime = eventInfo[1].split(" /to ");
                         if (eventTime.length < 2)
-                            throw new EmptyDescriptionException("☹ OOPS!!! Event start time and end time are required.");
+                            throw new DukeException("☹ OOPS!!! Event start time and end time are required.");
                         Event event = new Event(eventInfo[0], eventTime[0], eventTime[1]);
                         addTask(event);
                         break;
@@ -85,7 +85,7 @@ public class Duke {
                         System.out.println(lines + "\t☹ OOPS!!! I'm sorry, but I don't know what that means :-(\n" + lines);
                         break;
                 }
-            } catch (EmptyDescriptionException e) {
+            } catch (DukeException e) {
                 System.out.println(lines + "\t" + e + "\n" + lines);
             }
             commands = sc.nextLine();
