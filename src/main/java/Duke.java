@@ -12,6 +12,9 @@ public class Duke {
             + "|____/ \\__,_|_|\\_\\___|";
 
 
+    static void display(Object obj) {
+        System.out.println(obj);
+    }
     static void display(String message) {
         System.out.println(message);
     }
@@ -28,8 +31,12 @@ public class Duke {
 
         if (cmd.compareTo("list") == 0)
             return State.LIST;
-        if (cmd.compareTo("add") == 0)
+        else if (cmd.compareTo("add") == 0)
             return State.ADD;
+        else if (cmd.compareTo("mark") == 0)
+            return State.MARK;
+        else if (cmd.compareTo("unmark") == 0)
+            return State.UNMARK;
         // TODO: Detect other specific keywords
 
         // multiple exit keywords
@@ -52,6 +59,8 @@ public class Duke {
         Duke.display("Developed by: " + AUTHOR);
         System.out.println("Initialising system . . .");
 
+        int taskIdx;
+        Task selectedTask;
         String userCmd = "";
         Scanner sc = new Scanner(System.in);
         State currentState = State.UNKNOWN;
@@ -89,6 +98,23 @@ public class Duke {
                         for (int i = 0; i < list.size(); i++)
                             Duke.display((i + 1) + ". " + list.get(i));
                     }
+                    break;
+                // TODO: merge the 2 cases below
+                case MARK:
+                    taskIdx = Integer.valueOf(userCmd.split(" ")[1]) - 1; // FIXME: throws NumberFormatException for "mark  1"
+                    //FIXME: need watch for index out of bound exception
+                    selectedTask = list.get(taskIdx);
+                    selectedTask.setDone(true);
+                    Duke.display("Nice I've marked this task as done:");
+                    Duke.display(selectedTask);
+                    break;
+                case UNMARK:
+                    taskIdx = Integer.valueOf(userCmd.split(" ")[1]) - 1; // FIXME: throws NumberFormatException for "unmark  1"
+                    //FIXME: need watch for index out of bound exception
+                    selectedTask = list.get(taskIdx);
+                    selectedTask.setDone(false);
+                    Duke.display("OK, I've marked this task as not done yet:");
+                    Duke.display(selectedTask);
                     break;
                 case UNKNOWN:
                     Duke.display("Sorry, I don't understand your request :(");

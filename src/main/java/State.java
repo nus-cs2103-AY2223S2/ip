@@ -3,7 +3,8 @@ public enum State {
     LIST,
     // TODO,
     // DEADLINE,
-    // MARK,
+    MARK,
+    UNMARK,
     EXIT,
     UNKNOWN,
 }
