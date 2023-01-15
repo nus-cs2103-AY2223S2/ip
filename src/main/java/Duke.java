@@ -15,7 +15,7 @@ public class Duke {
 
     public static void printList() {
         System.out.print(lines);
-        System.out.println("Here are the tasks in your list:");
+        System.out.println("\tHere are the tasks in your list:");
         for (int i = 0; i < taskList.size(); i++) {
             System.out.println("\t" + (i + 1) + ". " + taskList.get(i).toString());
         }
@@ -24,7 +24,9 @@ public class Duke {
 
     public static void addTask(Task task) {
         taskList.add(task);
-        System.out.println(lines + "\tadded: " + task +"\n" + lines);
+        System.out.println(lines + "\tGot it. I've added this task:");
+        System.out.println("\t  " + task);
+        System.out.println("\tNow you have " + taskList.size() + " tasks in the list.\n" + lines);
     }
 
     public static void main(String[] args) {
@@ -34,23 +36,41 @@ public class Duke {
 
         String commands = sc.nextLine();
         while (!commands.equals("bye")) {
-            if (commands.equals("list")) {
-                printList();
-            } else if (commands.contains("mark")) {
-                String[] s = commands.split(" ");
-                Task t = taskList.get(Integer.parseInt(s[1]) - 1);
-                if (s[0].equals("mark")) {
-                    t.markDone();
+            String[] s = commands.split(" ");
+            switch (s[0]) {
+                case "list":
+                    printList();
+                    break;
+                case "mark":
+                    Task t1 = taskList.get(Integer.parseInt(s[1]) - 1);
+                    t1.markDone();
                     System.out.println("\tNice! I've marked this task as done:");
-                    System.out.println("\t" + t);
-                } else if (s[0].equals("unmark")) {
-                    t.markNotDone();
+                    System.out.println("\t" + t1);
+                    break;
+                case "unmark":
+                    Task t2 = taskList.get(Integer.parseInt(s[1]) - 1);
+                    t2.markNotDone();
                     System.out.println("\tOK, I've marked this task as not done yet:");
-                    System.out.println("\t" + t);
-                }
-            } else {
-                Task t = new Task(commands);
-                addTask(t);
+                    System.out.println("\t" + t2);
+                    break;
+                case "todo":
+                    Todo todo = new Todo(commands.substring(5));
+                    addTask(todo);
+                    break;
+                case "deadline":
+                    String[] deadlineInfo = commands.substring(9).split(" /by ");
+                    Deadline deadline = new Deadline(deadlineInfo[0], deadlineInfo[1]);
+                    addTask(deadline);
+                    break;
+                case "event":
+                    String[] eventInfo = commands.substring(6).split(" /from ");
+                    String[] eventTime = eventInfo[1].split(" /to ");
+                    Event event = new Event(eventInfo[0], eventTime[0], eventTime[1]);
+                    addTask(event);
+                    break;
+                default:
+                    System.out.println(lines + "\tSorry, I don't understand that.\n" + lines);
+                    break;
             }
             commands = sc.nextLine();
         }
