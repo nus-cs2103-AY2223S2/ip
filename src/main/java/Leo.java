@@ -1,13 +1,19 @@
 import java.util.Objects;
 import java.util.Scanner;
+import Storage.Storage;
 
 public class Leo {
+    private Storage s;
+
     public static void main(String[] args) {
         Leo assistant = new Leo();
         assistant.greetings();
         assistant.readCommand();
     }
 
+    public Leo() {
+        s = new Storage();
+    }
 
     public void greetings() {
         String hello = "__   __   ______   __       __        _____ \n" +
@@ -25,7 +31,11 @@ public class Leo {
         Scanner scanner = new Scanner(System.in);
         String command = scanner.nextLine();
         while (!Objects.equals(command, "bye")) {
-            System.out.println("Leo: " + command);
+            if (!Objects.equals(command, "list")) {
+                s.addTask(command);
+            } else {
+                s.showList();
+            }
             command = scanner.nextLine();
         }
         exit();
