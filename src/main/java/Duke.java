@@ -11,7 +11,7 @@ public class Duke {
                 "\n('list' to access list of tasks)" +
                 "\n('un/mark X' to un/mark X task on list)");
     }
-    public static void Echo(String str) {
+    public static void Echo(String str) throws Exception {
         if (str.equals("bye")) {
             Exit();
         } else {
@@ -45,41 +45,50 @@ public class Duke {
                 }
             } else {
                 String type = str.split(" ", 2)[0];
-                switch (type) {
-                    case "todo":
-                        Tasks t = new ToDo(str);
-                        todoList.add(t);
-                        System.out.println(t.mssg() +
-                                "\nNow you have " +
-                                todoList.size() +
-                                " tasks in the list");
-                        break;
-                    case "deadline":
-                        Tasks d = new Deadline(str);
-                        todoList.add(d);
-                        System.out.println(d.mssg() +
-                                "\nNow you have " +
-                                todoList.size() +
-                                " tasks in the list");
-                        break;
-                    case "event":
-                        Tasks e = new Event(str);
-                        todoList.add(e);
-                        System.out.println(e.mssg() +
-                                "\nNow you have " +
-                                todoList.size() +
-                                " tasks in the list");
-                        break;
-                    default:
+                if (str.split(" ",2 ).length > 1) {
+                    switch (type) {
+                        case "todo":
+                            Tasks t = new ToDo(str);
+                            todoList.add(t);
+                            System.out.println(t.mssg() +
+                                    "\nNow you have " +
+                                    todoList.size() +
+                                    " tasks in the list");
+                            break;
+                        case "deadline":
+                            Tasks d = new Deadline(str);
+                            todoList.add(d);
+                            System.out.println(d.mssg() +
+                                    "\nNow you have " +
+                                    todoList.size() +
+                                    " tasks in the list");
+                            break;
+                        case "event":
+                            Tasks e = new Event(str);
+                            todoList.add(e);
+                            System.out.println(e.mssg() +
+                                    "\nNow you have " +
+                                    todoList.size() +
+                                    " tasks in the list");
+                            break;
+                        default:
+                            throw new unrecogException("☹ OOPS!!! I'm sorry, but I don't know what that means :-(\n");
+                    }
+                } else {
+                    if (str.equals("todo") || str.equals("event")||str.equals("deadline")){
+                        throw new emptyDescException("☹ OOPS!!! The description of a "+type+" cannot be empty.\n");
+                    } else {
+                        throw new unrecogException("☹ OOPS!!! I'm sorry, but I don't know what that means :-(\n");
+                    }
                 }
-            }
+                }
         }
     }
     public static void Exit() {
         System.out.println("Bye. Hope to see you again soon!");
         System.exit(0);
     }
-    public static void main(String[] args) {
+    public static void main(String[] args) throws Exception {
         String logo = " ____        _        \n"
                 + "|  _ \\ _   _| | _____ \n"
                 + "| | | | | | | |/ / _ \\\n"

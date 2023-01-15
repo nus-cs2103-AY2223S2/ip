@@ -3,8 +3,11 @@ public class Deadline extends Tasks{
 
     String desc;
     String end;
-    public Deadline(String str) {
+    public Deadline(String str) throws unspecTimeException {
         super(str);
+        if ((super.getDesc().split("/", 2)).length == 1) {
+            throw new unspecTimeException("Please specify a deadline (by/ ... )");
+        }
         String time = super.getDesc().split("/", 2)[1];
         this.desc = super.getDesc().split("/",2)[0];
         this.end =  time.replaceFirst(" ", ": ");
