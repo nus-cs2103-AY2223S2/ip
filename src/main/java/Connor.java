@@ -12,7 +12,22 @@ public class Connor {
 
     private static String getTask(String input) {
         return input.substring(input.indexOf(' ') + 1, input.length());
+    }
 
+    private static String[] getTaskTimePair(String input) {
+        int slashIndex = input.indexOf('/');
+        String[] pair = new String[2];
+        pair[0] = input.substring(0, slashIndex - 1);
+        pair[1] = input.substring(slashIndex + 1, input.length());
+        return pair;
+    }
+
+    private static String[] getStartEndTime(String input) {
+        int slashIndex = input.indexOf('/');
+        String[] pair = new String[2];
+        pair[0] = input.substring(0, slashIndex - 1);
+        pair[1] = input.substring(slashIndex + 1, input.length());
+        return pair;
     }
 
     public static void main(String[] args) {
@@ -25,44 +40,43 @@ public class Connor {
         while (sc.hasNextLine()) {
             String input = sc.nextLine();
             String command = getCommand(input);
-            try {
-                switch (Command.valueOf(command)) {
-                    case HI:
-                        Response.greetings("HI");
-                        break;
-
-                    case ADD:
-                        // TODO: handle errors and invalid commands.
-                        String taskName = getTask(input);
-                        Task task = new Task(taskName);
-                        list.addTask(task);
-                        break;
-
-                    case LIST:
-                        list.getList();
-                        break;
-
-                    case MARK:
-                        String numberMark = getTask(input);
-                        list.markDone(Integer.valueOf(numberMark));
-                        break;
-
-                    case UNMARK:
-                        String numberUnmark = getTask(input);
-                        list.markUndone(Integer.valueOf(numberUnmark));
-                        break;
-
-                    case BYE:
-                        Response.greetings("BYE");
-                        sc.close();
-                        return;
-
-                }
-            } catch (IllegalArgumentException e) {
-                System.out.println("        My program does not understand your command");
+            if (command.equals("HI")) {
+                Response.greetings("HI");
+            } else if (command.equals("BYE")) {
+                Response.greetings("BYE");
+                sc.close();
+                break;
+            } else if (command.equals("MARK")) {
+                String numberMark = getTask(input);
+                list.markDone(Integer.valueOf(numberMark));
+            } else if (command.equals("UNMARK")) {
+                String numberUnmark = getTask(input);
+                list.markUndone(Integer.valueOf(numberUnmark));
+            } else if (command.equals("LIST")) {
+                list.getList();
+            } else if (command.equals("TODO")) {
+                TODO todo = new TODO(getTask(input));
+                list.addTask(todo);
+            } else if (command.equals("DEADLINE")) {
+                String[] pair = getTaskTimePair(getTask(input));
+                String taskName = pair[0];
+                String time = pair[1];
+                String exactTime = time.substring(time.indexOf(' ') + 1, time.length());
+                Deadline deadline = new Deadline(taskName, exactTime);
+                list.addTask(deadline);
+            } else if (command.equals("EVENT")){
+                String[] pair = getTaskTimePair(getTask(input));
+                String taskName = pair[0];
+                String[] timePair = getStartEndTime(pair[1]);
+                String startTime = timePair[0];
+                String endTime = timePair[1];
+                String exactStartTime = startTime.substring(startTime.indexOf(' ') + 1, startTime.length());
+                String exactEndTime = endTime.substring(endTime.indexOf(' ') + 1, endTime.length());
+                Event event = new Event(taskName, exactStartTime, exactEndTime);
+                list.addTask(event);
+            } else {
+                Response.printMessage("Sorry, My program is unable to process your request");
             }
         }
-
-
     }
 }

@@ -9,7 +9,10 @@ public class TaskList {
 
     public void addTask(Task task) {
         tasks.add(task);
-        Response.printMessage("I have added " + task.getTaskName() + " to my memory");
+        String message = "I have added " + task.getTaskName() + " to my memory\n";
+        message = message + "          " + task.toString() + "\n";
+        message = message + "        You have " + tasks.size() + " tasks in the list";
+        Response.printMessage(message);
     }
 
     public void deleteTask(String task) {
