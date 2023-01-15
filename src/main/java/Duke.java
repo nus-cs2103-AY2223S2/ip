@@ -15,27 +15,44 @@ public class Duke {
         Duke.say(question, false);
 
         Scanner scanner = new Scanner(System.in);
-
         Duke.start(scanner, Duke.ENDWORD);
     }
 
     public static void greet(String greeting) {
         /**
+         * Prints a greeting which includes the Duke's name.
          * @param greeting what needs to be said, with placeholder for the name.
          */
         System.out.println(String.format(greeting, Duke.NAME));
+    }
+
+    public static void horizontal() {
+        /**
+         * Prints a horizontal line.
+         * @returns void
+         */
+        System.out.println(Duke.HORIZONTAL);
+    }
+
+    public static void indent() {
+        /**
+         * Indents the next output.
+         * @returns void
+         */
+        System.out.print(Duke.INDENT);
     }
 
     public static void say(String sentence, boolean addLine) {
         /**
          * @param sentence what needs to be said.
          * @param addLine whether to add a horizontal line.
-         * @return void
+         * @returns void
          */
-        System.out.println(Duke.INDENT + sentence);
+        Duke.indent();
+        System.out.println(sentence);
 
         if (addLine) {
-            System.out.println(Duke.HORIZONTAL);
+            Duke.horizontal();
         }
     }
 
@@ -46,13 +63,25 @@ public class Duke {
          * @returns void
          */
         String response = "";
+        MemoPad memoPad = new MemoPad(100);
         while (true) {
             response = scanner.nextLine();
             if (response.equals(endWord)) {
                 break;
             }
-            
-            Duke.say(response, true);
+
+            Duke.indent();
+
+            String firstWord = (response + " ").split(" ", 2)[0];
+            switch(firstWord) {
+                case "list":
+                    memoPad.listItems();
+                    break;
+                default:
+                    memoPad.addToList(response);
+            }
+
+            Duke.horizontal();
         }
 
         Duke.say("Bye Bye. HAND.", true);
