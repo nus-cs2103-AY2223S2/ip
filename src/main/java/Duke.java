@@ -29,6 +29,13 @@ public class Duke {
         System.out.println("\tNow you have " + taskList.size() + " task(s) in the list.\n" + lines);
     }
 
+    public static void deleteTask(int taskId) {
+        System.out.println(lines + "\tNoted. I've removed this task:");
+        System.out.println("\t  " + taskList.get(taskId));
+        System.out.println("\tNow you have " + (taskList.size() - 1) + " task(s) in the list.\n" + lines);
+        taskList.remove(taskId);
+    }
+
     public static void main(String[] args) {
         taskList = new ArrayList<>();
         System.out.println(greet);
@@ -46,13 +53,13 @@ public class Duke {
                         Task t1 = taskList.get(Integer.parseInt(s[1]) - 1);
                         t1.markDone();
                         System.out.println("\tNice! I've marked this task as done:");
-                        System.out.println("\t" + t1);
+                        System.out.println("\t  " + t1);
                         break;
                     case "unmark":
                         Task t2 = taskList.get(Integer.parseInt(s[1]) - 1);
                         t2.markNotDone();
                         System.out.println("\tOK, I've marked this task as not done yet:");
-                        System.out.println("\t" + t2);
+                        System.out.println("\t  " + t2);
                         break;
                     case "todo":
                         if (s.length < 2)
@@ -80,6 +87,14 @@ public class Duke {
                             throw new DukeException("☹ OOPS!!! Event start time and end time are required.");
                         Event event = new Event(eventInfo[0], eventTime[0], eventTime[1]);
                         addTask(event);
+                        break;
+                    case "delete":
+                        if (s.length < 2)
+                            throw new DukeException("☹ OOPS!!! You must choose a task to delete");
+                        int taskNumber = Integer.parseInt(s[1]);
+                        if (taskNumber > taskList.size() || taskNumber <= 0)
+                            throw new DukeException("☹ OOPS!!! No such task found");
+                        deleteTask(taskNumber - 1);
                         break;
                     default:
                         System.out.println(lines + "\t☹ OOPS!!! I'm sorry, but I don't know what that means :-(\n" + lines);
