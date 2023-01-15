@@ -44,15 +44,18 @@ public class Duke {
 
     private void addToList(Task task) {
         this.tasks.add(task);
-        displayMessage("Got it. I've added this task: \n" +
+        displayMessage("Got it. I've added this task:\n" +
                 task.toString() +
                 "\nNow you have " +
                 tasks.size() +
                 " tasks in the list\n");
     }
 
-    private void addToDo(String[] tokens) {
+    private void addToDo(String[] tokens) throws DukeException {
         StringBuilder sb = new StringBuilder();
+        if (tokens.length < 2) {
+            throw new DukeException("The description of a todo cannot be empty");
+        }
         for (int i = 1; i < tokens.length; i++) {
             sb.append(tokens[i]).append(" ");
         }
@@ -61,11 +64,15 @@ public class Duke {
         addToList(td);
     }
 
-    private void addDeadline(String[] tokens) {
+    private void addDeadline(String[] tokens) throws DukeException {
         StringBuilder sb = new StringBuilder();
         int idxDelimiter = Arrays.asList(tokens).indexOf("/by");
         if (idxDelimiter == -1) {
-            displayMessage("please include /by [deadline]");
+            throw new DukeException("deadline tasks must be specified by /by [deadline] format");
+        } else if (idxDelimiter == tokens.length - 1) {
+            throw new DukeException("please specify a deadline after the /by tag");
+        } else if (idxDelimiter == 1) {
+            throw new DukeException("The description of a deadline cannot be empty");
         } else {
             for (int i = 1; i < idxDelimiter; i++) {
                 sb.append(tokens[i]).append(" ");
@@ -80,12 +87,20 @@ public class Duke {
         }
     }
 
-    private void addEvent(String[] tokens) {
+    private void addEvent(String[] tokens) throws DukeException {
         StringBuilder sb = new StringBuilder();
         int idxFrom = Arrays.asList(tokens).indexOf("/from");
         int idxTo = Arrays.asList(tokens).indexOf("/to");
         if (idxFrom == -1 || idxTo == -1) {
-            displayMessage("please include /from [start] /to [end]");
+            throw new DukeException("event tasks must be specified by a /from [start] /to [end] format");
+        } else if (idxFrom > idxTo) {
+            throw new DukeException("/to flag must come after /from flag");
+        } else if (idxFrom == 1) {
+            throw new DukeException("The description of a event task cannot be empty");
+        } else if (idxTo - idxFrom == 1) {
+            throw new DukeException("please specify a start datetime after /from flag");
+        } else if (tokens.length - 1 == idxTo) {
+            throw new DukeException("please specify an end datetime after /to flag");
         } else {
             for (int i = 1; i < idxFrom; i++) {
                 sb.append(tokens[i]).append(" ");
@@ -146,21 +161,31 @@ public class Duke {
                 break;
             } else if (tokens.length == 1 && input.equals("list")) {
                 duke.displayItemList();
-                continue;
-            } else if (tokens.length == 2 && tokens[0].equals("mark")) {
+            } else if (tokens[0].equals("mark")) {
                 duke.markListItem(tokens);
-                continue;
-            } else if (tokens.length == 2 && tokens[0].equals("unmark")) {
+            } else if (tokens[0].equals("unmark")) {
                 duke.unmarkListItem(tokens);
-                continue;
             } else if (tokens[0].equals("todo")) {
-                duke.addToDo(tokens);
+                try {
+                    duke.addToDo(tokens);
+                } catch (DukeException e) {
+                    displayMessage(e.getMessage());
+                }
             } else if (tokens[0].equals("deadline")) {
-                duke.addDeadline(tokens);
+                try {
+                    duke.addDeadline(tokens);
+                } catch (DukeException e) {
+                    displayMessage(e.getMessage());
+                }
             } else if (tokens[0].equals("event")) {
-                duke.addEvent(tokens);
+                try {
+                    duke.addEvent(tokens);
+                } catch (DukeException e) {
+                    displayMessage(e.getMessage());
+                }
+
             } else {
-                displayMessage("unknown command\n");
+                displayMessage("unknown command\n");//TODO
             }
 
         }

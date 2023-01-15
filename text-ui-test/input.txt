@@ -11,4 +11,18 @@ mark 3
 list
 unmark 3
 list
+todo
+deadline
+deadline return book
+deadline return book /by
+deadline /by sunday
+deadline /by
+event
+event /from /to
+event meeting /from sunday
+event meeting /from /to
+event /from
+event /to
+event meeting /from /to sunday
+bye??
 bye
