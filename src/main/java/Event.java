@@ -21,10 +21,10 @@ public class Event extends Tasks{
     }
 
     public String getDesc() {
-        return this.desc+ "("+this.timeframe+")";
+        return this.desc.split(" ", 2)[1]+ "("+this.timeframe+")";
     }
     public String mssg() {
-        return super.mssg() + " " + icon + super.symbol() + " " + this.desc+
+        return super.mssg() + " " + icon + super.symbol() + " " + this.desc.split(" ", 2)[1]+
                 "("+this.timeframe+")";
     }
 }

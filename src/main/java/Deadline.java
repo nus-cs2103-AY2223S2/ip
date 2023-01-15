@@ -17,11 +17,11 @@ public class Deadline extends Tasks{
     }
 
     public String getDesc(){
-        return this.desc+ "("+this.end+")";
+        return this.desc.split(" ", 2)[1] + "("+this.end+")";
     }
 
     public String mssg() {
-        return super.mssg() + " " + this.icon + super.symbol() + " " + this.desc
+        return super.mssg() + " " + this.icon + super.symbol() + " " + this.desc.split(" ", 2)[1]
                 +"("+this.end+")";
     }
 }

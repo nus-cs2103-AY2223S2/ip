@@ -12,9 +12,16 @@ public class Duke {
                 "\n('un/mark X' to un/mark X task on list)" +
                 "\n('todo/deadline/event' for keeping note of different tasks)");
     }
-    public static void Echo(String str) throws Exception {
+    public static void command(String str) throws Exception {
         if (str.equals("bye")) {
             Exit();
+        } else if(str.contains("delete")) {
+            if(todoList.isEmpty()) {
+                System.out.println("There is nothing on your list to delete");
+            } else {
+                int index = Integer.parseInt((str.substring(7)));
+                todoList.remove(index - 1);
+            }
         } else {
             if (str.equals("list")) {
                 if (todoList.isEmpty()) {
@@ -99,7 +106,7 @@ public class Duke {
         Greet();
         while (instr.hasNextLine()) {
             String str = instr.nextLine();
-            Echo(str);
+            command(str);
         }
 
     }
