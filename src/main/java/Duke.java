@@ -9,7 +9,8 @@ public class Duke {
         String userLine = "";
         while (!userLine.equals("bye")) {
             userLine = sc.nextLine();
-            switch (userLine) {
+            String command = userLine.split(" ")[0];
+            switch (command) {
                 case "bye":
                     System.out.println("Bye, hope to see you again.");
                     break;
