@@ -4,7 +4,7 @@ public class Duke {
     public static void main(String[] args) {
         System.out.println("Hello, Duke here. How can I help you?");
         Scanner sc = new Scanner(System.in);
-        String[] list = new String[100];
+        Task[] list = new Task[100];
         int itemCount = 0;
         String userLine = "";
         while (!userLine.equals("bye")) {
@@ -19,7 +19,7 @@ public class Duke {
                     }
                     break;
                 default:
-                    list[itemCount] = userLine;
+                    list[itemCount] = new Task(userLine);
                     itemCount++;
                     System.out.println("Added: " + userLine);
             }
