@@ -10,9 +10,9 @@ public class DeadlineTask extends Task {
         this.taskType = "D";
     }
 
-    public static DeadlineTask createDeadlineTask(String command) {
+    public static void createDeadlineTask(String command, TaskTracker t) throws DukeInputError {
         ArrayList<String> input = new ArrayList(Arrays.asList(command.split(" ")));
-        // get the deadline
+        if (input.size() <= 1) throw new DukeInputError("deadline");
         int byIndex = input.indexOf("/by");
         String taskName = "";
         String deadline = "";
@@ -29,7 +29,7 @@ public class DeadlineTask extends Task {
                 }
             }
         }
-        return new DeadlineTask(taskName, deadline);
+        t.addTask(new DeadlineTask(taskName, deadline));
     }
 
     @Override

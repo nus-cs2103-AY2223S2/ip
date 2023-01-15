@@ -12,9 +12,9 @@ public class Event extends Task{
         this.taskType = "E";
     }
 
-    public static Event createEvent(String command) {
+    public static void createEvent(String command, TaskTracker t) throws DukeInputError{
         ArrayList<String> input = new ArrayList(Arrays.asList(command.split(" ")));
-        // get the deadline
+        if (input.size() <= 1) throw new DukeInputError("event");
         int fromIndex = input.indexOf("/from");
         int toIndex = input.indexOf("/to");
         String taskName = "";
@@ -38,7 +38,7 @@ public class Event extends Task{
                 }
             }
         }
-        return new Event(taskName, start, end);
+        t.addTask(new Event(taskName, start, end));
     }
 
     @Override
