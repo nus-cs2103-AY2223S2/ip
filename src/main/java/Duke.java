@@ -25,28 +25,34 @@ public class Duke {
         String greeting = "Hello! I'm Duke\n"
                 + "What can I do for you?\n";
         String separator = "____________________________________________________________\n";
-        String goodbye = "Bye. Hope to see you again soon!\n";
+        String goodbye = "Bye. Hope to see you again soon!";
         System.out.println(greeting + separator);
         Scanner sc = new Scanner(System.in);
         while (true) {
-            String command = sc.nextLine();
-            if (command.equals(Duke.endCommand)) {
-                sc.close();
-                System.out.println(goodbye + separator);
-                break;
-            } else if (command.equals(Duke.listCommand)) {
-                System.out.println("Here are the tasks in your list:");
-                for (int i = 0; i < Duke.taskStore.size(); i++) {
-                    System.out.println((i + 1) + ". " + Duke.taskStore.get(i));
-                }
-            } else {
-                processCommand(command);
+            try {
+                String command = sc.nextLine();
+                if (command.equals(Duke.endCommand)) {
+                    sc.close();
+                    System.out.println(goodbye);
+                    break;
+                } else if (command.equals(Duke.listCommand)) {
+                    System.out.println("Here are the tasks in your list:");
+                    for (int i = 0; i < Duke.taskStore.size(); i++) {
+                        System.out.println((i + 1) + ". " + Duke.taskStore.get(i));
+                    }
+                } else {
+                    processCommand(command);
+                } 
+            } catch(DukeException e) {
+                System.out.println(e.getMessage());
+            } finally {
+                System.out.println(separator);
             }
-            System.out.println(separator);
+            
         }
     }
 
-    private static void processCommand(String line) {
+    private static void processCommand(String line) throws DukeException {
         String[] splitCommand = line.split(" ");
         String command = splitCommand[0];
         if (command.equals(Duke.mark)) {
@@ -62,7 +68,15 @@ public class Duke {
         } else {
             Task task = null;
             if (command.equals(Duke.todoCommand)) {
-                task = new Todo(line.split(Duke.todoCommand)[1].trim());
+                try {
+                    String description = line.split(Duke.todoCommand)[1].trim();
+                    if (description.isEmpty()) {
+                        throw new DukeException("The description of a todo cannot be empty.");
+                    }
+                    task = new Todo(description);
+                } catch (IndexOutOfBoundsException e) {
+                    throw new DukeException("The description of a todo cannot be empty.");
+                }
             } else if (command.equals(Duke.deadlineCommand)) {
                 String details = line.split(Duke.deadlineCommand)[1].trim();
                 String name = details.split(Duke.byIndicator)[0].trim();
@@ -74,6 +88,8 @@ public class Duke {
                 String from = details.split(Duke.fromIndicator)[1].split(Duke.toIndicator)[0].trim();
                 String to = details.split(Duke.fromIndicator)[1].split(Duke.toIndicator)[1].trim();
                 task = new Event(name, from, to);
+            } else {
+                throw new DukeException("I'm sorry, but I don't know what that means :-(");
             }
             Duke.taskStore.add(task);
             System.out.println("Got it. I've added this task:");
