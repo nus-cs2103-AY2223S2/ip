@@ -1,3 +1,4 @@
+import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Duke {
@@ -16,10 +17,19 @@ public class Duke {
 
     Scanner scanner = new Scanner(System.in);
     String input = scanner.nextLine();
+
     String exitToken = "bye";
+    String listToken = "list";
+    ArrayList<String> data = new ArrayList<>();
 
     while (!input.equals(exitToken)) {
-      printMsg(input);
+      if (input.equals(listToken)) {
+        printMsg(data);
+      } else {
+        data.add(input);
+        String msg = String.format("Added new entry: %s", input);
+        printMsg(msg);
+      }
       input = scanner.nextLine();
     }
 
@@ -35,6 +45,20 @@ public class Duke {
 
     System.out.println(spacer);
     System.out.println(msg);
+    System.out.println(spacer);
+  }
+
+  public static void printMsg(ArrayList<String> msg) {
+    String spacer = "____________________"
+        + "______________________";
+    String msgHeader = "Current data in the list are:";
+
+    System.out.println(spacer);
+    System.out.println(msgHeader);
+    for (int i = 0; i < msg.size(); i++) {
+      String output = String.format("%d. %s", i + 1, msg.get(i));
+      System.out.println(output);
+    }
     System.out.println(spacer);
   }
 }
