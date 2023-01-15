@@ -33,7 +33,7 @@ public class Duke {
             case "list":
                 int counter = 1;
                 for (Task element : tasks) {
-                    System.out.println(counter + ". " + element.toString());
+                    System.out.println("Here are the tasks in your list:\n" + counter + "." + element.toString());
                     counter++;
                 }
                 break;
@@ -50,17 +50,17 @@ public class Duke {
             case "todo":
                 Todo toDo = new Todo(arr[1]);
                 tasks.add(toDo);
-                System.out.println("Got it. I've added this task:\n" + toDo + "\nNow you have " + tasks.size() + " tasks in the list");
+                System.out.println("Got it. I've added this task:\n  " + toDo + "\nNow you have " + tasks.size() + " tasks in the list.");
                 break;
             case "deadline":
                 Deadline deadline = new Deadline(arr[1], arr[2].substring(3));
                 tasks.add(deadline);
-                System.out.println("Got it. I've added this task:\n" + deadline + "\nNow you have " + tasks.size() + " tasks in the list");
+                System.out.println("Got it. I've added this task:\n  " + deadline + "\nNow you have " + tasks.size() + " tasks in the list.");
                 break;
             case "event":
                 Event event = new Event(arr[1], arr[2].substring(5), arr[3].substring(3));
                 tasks.add(event);
-                System.out.println("Got it. I've added this task:\n" + event + "\nNow you have " + tasks.size() + " tasks in the list");
+                System.out.println("Got it. I've added this task:\n  " + event + "\nNow you have " + tasks.size() + " tasks in the list.");
                 break;
             default:
                 System.out.println("i dont understand bro");
