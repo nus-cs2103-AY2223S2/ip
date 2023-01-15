@@ -4,8 +4,6 @@ import java.util.ArrayList;
 import tasks.Task;
 
 public class MyData {
-    private boolean run = true;
-
     private ArrayList<Task> data = new ArrayList<Task>();
 
     public Task getData(int index) {
@@ -26,13 +24,5 @@ public class MyData {
 
     public int len() {
         return data.size();
-    }
-
-    public Boolean getRun() {
-        return this.run;
-    }
-
-    public void setRun() {
-        this.run = !this.run;
     }
 }

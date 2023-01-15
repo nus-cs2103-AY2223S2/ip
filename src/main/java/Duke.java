@@ -21,9 +21,9 @@ public class Duke {
 
         System.out.println("    Hello from\n" + logo);
         System.out.println(greet);
+        Scanner sc = new Scanner(System.in).useDelimiter(" ");
 
-        while(mydata.getRun()) {
-            Scanner sc = new Scanner(System.in).useDelimiter(" ");
+        while(sc.hasNextLine()) {
             String command = sc.nextLine();
             String[] commandArr = command.split(" ");
             String[] slashed = command.split("/");
@@ -31,6 +31,7 @@ public class Duke {
             if (command.equals("bye")) {
                 Bye exit = new Bye();
                 exit.execute(mydata);
+                break;
             } else if (command.equals("list")) {
                 List toList = new List();
                 toList.execute(mydata);
@@ -66,6 +67,7 @@ public class Duke {
                 toAdd.execute(mydata);
             }
         }
+        sc.close();
     }
 
     public static String removeCommand(String command) {
