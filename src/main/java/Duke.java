@@ -48,8 +48,12 @@ public class Duke {
                 Duke.display((i + 1) + ". " + taskList.get(i));
         }
     }
-
-
+    static void addNewTask(ArrayList<Task> taskList, Task task) {
+        taskList.add(task);
+        Duke.display("Got it. I've added this task:");
+        Duke.display("\t" + task.toString());
+        Duke.displayTaskCount(taskList);
+    }
     static State detectState(String command) {
         // Suppress all upper case letters, gets only the first word
         String cmd = command.toLowerCase().split(" ")[0];
@@ -89,9 +93,9 @@ public class Duke {
         System.out.println("Initialising system . . .");
 
         // TODO: Initialise components, variables
-        int taskIdx;
+        int taskIdx, descIdx;
         Task activeTask;
-        String userCmd = "";
+        String userCmd, item;
         State currentState = State.UNKNOWN;
         Scanner sc = new Scanner(System.in);
         ArrayList<Task> taskList = new ArrayList<Task>();
@@ -116,12 +120,37 @@ public class Duke {
             // State handling
             switch(currentState) {
                 case TODO:
-                    String item = userCmd.substring(4).trim(); // exclude "add "
+                    item = userCmd.substring(4).trim(); // exclude "todo" keyword
                     activeTask = new Todo(item);
-                    taskList.add(activeTask);
-                    Duke.display("Got it. I've added this task:");
-                    Duke.display("\t" + activeTask.toString());
-                    Duke.displayTaskCount(taskList);
+                    Duke.addNewTask(taskList, activeTask);
+                    break;
+                case DEADLINE:
+                    if (!userCmd.contains(" /by ")) {
+                        Duke.warn("Missing due date!");
+                        break;
+                    }
+                    descIdx = userCmd.indexOf("deadline "); // 9
+                    int dueIdx = userCmd.indexOf(" /by "); // 5
+                    item = userCmd.substring(descIdx + 9, dueIdx);
+                    String duedate = userCmd.substring(dueIdx + 5);
+                    Duke.addNewTask(taskList, new Deadline(item, duedate));
+                    break;
+                case EVENT:
+                    if (!userCmd.contains(" /from ")) {
+                        Duke.warn("Missing start date/time!");
+                        break;
+                    }
+                    else if (!userCmd.contains(" /to ")) {
+                        Duke.warn("Missing end date/time!");
+                        break;
+                    }
+                    descIdx = userCmd.indexOf("event "); // 6
+                    int fromIdx = userCmd.indexOf(" /from "); // 7
+                    int toIdx = userCmd.indexOf(" /to "); // 5
+                    item = userCmd.substring(descIdx + 6, fromIdx);
+                    String start = userCmd.substring(fromIdx + 7, toIdx);
+                    String end = userCmd.substring(toIdx + 5);
+                    Duke.addNewTask(taskList, new Event(item, start, end));
                     break;
                 case LIST:
                     Duke.displayTaskList(taskList);
