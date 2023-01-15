@@ -9,7 +9,8 @@ public class Duke {
         System.out.println("Hello! I'm Duke\nWhat can I do for you? "+
                 "\n('bye' to terminate Duke)" +
                 "\n('list' to access list of tasks)" +
-                "\n('un/mark X' to un/mark X task on list)");
+                "\n('un/mark X' to un/mark X task on list)" +
+                "\n('todo/deadline/event' for keeping note of different tasks)");
     }
     public static void Echo(String str) throws Exception {
         if (str.equals("bye")) {
