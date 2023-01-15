@@ -16,21 +16,47 @@ public class TaskList {
         return listString;
     }
 
-    public Task addTask(String content) {
+    public Task addTask(String content) throws InvalidTodoException, InvalidDeadlineException, InvalidEventException {
         String[] contentSplit = content.split(" ",2);
         String taskType = contentSplit[0];
-        content = contentSplit[1];
+
         Task taskToAdd;
 
         if (taskType.equals("todo")) {
+
+            if (contentSplit.length == 1) {
+                throw new InvalidTodoException();
+            }
+
+            content = contentSplit[1];
             taskToAdd = new Todo(content);
         } else if (taskType.equals("deadline")) {
-            String[] dateSplit = content.split("/by");
+            if (contentSplit.length == 1) {
+                throw new InvalidDeadlineException("The description of a deadline task cannot be empty\n");
+            }
+            content = contentSplit[1];
+
+            String[] dateSplit = content.split(" /by ");
+
+            if (dateSplit.length != 2) {
+                throw new InvalidDeadlineException("The description or date of a deadline task cannot be empty\n");
+            }
+
             content = dateSplit[0];
             String dueDate = dateSplit[1];
             taskToAdd = new Deadline(content,dueDate);
         } else {
-            String[] dateSplit = content.split("/from");
+            if (contentSplit.length == 1) {
+                throw new InvalidEventException("The description of an event task cannot be empty\n");
+            }
+
+            content = contentSplit[1];
+            String[] dateSplit = content.split(" /from ");
+
+            if (dateSplit.length != 2) {
+                throw new InvalidEventException("The description or date of an event task cannot be empty\n");
+            }
+
             content = dateSplit[0];
             String fromToDate = dateSplit[1];
             taskToAdd = new Event(content, fromToDate);

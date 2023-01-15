@@ -19,7 +19,7 @@ public class Duke {
             try {
                 DukeMessage dukeResponse = messageProcessor.process(userMessage);
                 System.out.println(dukeResponse);
-            } catch (InvalidInputException e) {
+            } catch (InvalidInputException | InvalidTodoException | InvalidDeadlineException | InvalidEventException e) {
                 System.out.println(e.getMessage());
             }
 

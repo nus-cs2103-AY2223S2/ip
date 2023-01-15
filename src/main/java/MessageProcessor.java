@@ -55,7 +55,9 @@ public class MessageProcessor {
     }
 
 
-    DukeMessage process(String message) throws InvalidInputException {
+    DukeMessage process(String message)
+            throws InvalidInputException, InvalidTodoException, InvalidDeadlineException, InvalidEventException {
+
         MessageStatus status;
         if (message.equals("bye")) {
             status = MessageStatus.END;
@@ -70,7 +72,6 @@ public class MessageProcessor {
             Task task = taskList.addTask(message);
             status = MessageStatus.ADD;
             message = generateAddMessage(task);
-
         } else {
             throw new InvalidInputException();
         }
