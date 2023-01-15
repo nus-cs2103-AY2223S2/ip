@@ -55,7 +55,7 @@ public class Duke {
         String userCmd = "";
         Scanner sc = new Scanner(System.in);
         State currentState = State.UNKNOWN;
-        ArrayList list = new ArrayList<String>();
+        ArrayList<Task> list = new ArrayList<Task>();
         // TODO: Initialise components
 
         System.out.println("System is ready!");
@@ -78,14 +78,17 @@ public class Duke {
             switch(currentState) {
                 case ADD:
                     String item = userCmd.substring(4).trim(); // exclude "add "
-                    list.add(item);
+                    list.add(new Task(item));
                     Duke.display("I have added: " + item);
                     break;
                 case LIST:
                     if (list.size() == 0)
-                        Duke.display("My list is empty.");
-                    else for (int i = 0; i < list.size(); i++)
-                        Duke.display((i+1) + ". " + list.get(i));
+                        Duke.display("Your list is empty.");
+                    else {
+                        Duke.display("Here's your list of tasks:");
+                        for (int i = 0; i < list.size(); i++)
+                            Duke.display((i + 1) + ". " + list.get(i));
+                    }
                     break;
                 case UNKNOWN:
                     Duke.display("Sorry, I don't understand your request :(");
