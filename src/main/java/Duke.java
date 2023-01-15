@@ -119,7 +119,15 @@ public class Duke {
       } catch (TaskException e) {
         System.out.println(new StringBuilder("  ").append(e.getMessage()).toString());
       }
-    } else {
+    } else if (userInput.toLowerCase().contains("delete")) {
+      int taskNumber = Integer.parseInt(userInput.substring(7));
+      try {
+        deleteTask(taskNumber, taskList);
+      } catch (TaskException e) {
+        System.out.println(new StringBuilder("  ").append(e.getMessage()).toString());
+      }
+    } 
+    else {
       if (taskList.size() < 100) {
         try {
           handleTaskTypes(userInput, taskList);
@@ -150,7 +158,7 @@ public class Duke {
     if (userInput.toLowerCase().contains("todo")) {
       try {
         Todo newTodo = new Todo(userInput.substring(5));
-        addAndPrintTask(newTodo, taskList);
+        addTask(newTodo, taskList);
       } catch (StringIndexOutOfBoundsException e) {
         throw new InvalidInputException("OOPS!!! The description of a todo cannot be empty.");
       }
@@ -161,7 +169,7 @@ public class Duke {
           throw new InvalidInputException(
               "OOPS!!! The deadline must be in the format: deadline <task> /by <date>, <task> and <date> cannot be empty.");
         Deadline newDeadline = new Deadline(deadline[0], deadline[1]);
-        addAndPrintTask(newDeadline, taskList);
+        addTask(newDeadline, taskList);
       } catch (StringIndexOutOfBoundsException | ArrayIndexOutOfBoundsException e) {
         throw new InvalidInputException(
             "OOPS!!! The deadline must be in the format: deadline <task> /by <date>, <task> and <date> cannot be empty.");
@@ -175,7 +183,7 @@ public class Duke {
         }
         String[] eventTime = event[1].split("/to");
         Event newEvent = new Event(event[0], eventTime[0], eventTime[1]);
-        addAndPrintTask(newEvent, taskList);
+        addTask(newEvent, taskList);
       } catch (StringIndexOutOfBoundsException | ArrayIndexOutOfBoundsException e) {
         throw new InvalidInputException(
             "OOPS!!! The event must be in the format: event <task> /from <date> /to <date>, <task> and <date> cannot be empty.");
@@ -186,10 +194,25 @@ public class Duke {
     }
   }
 
-  private static void addAndPrintTask(Task newTask, ArrayList<Task> taskList) {
+  private static void addTask(Task newTask, ArrayList<Task> taskList) {
     taskList.add(newTask);
     System.out.println("  Got it. I've added this task:");
-    System.out.println(new StringBuilder("  ").append(newTask.toString()));
+    printTask(newTask, taskList);
+  }
+
+  private static void deleteTask(Integer taskNumber, ArrayList<Task> taskList) throws TaskException {
+    if (taskNumber > taskList.size() || taskNumber < 1)
+      throw new TaskException("Task does not exist!");
+    else {
+      Task taskToRemove = taskList.get(taskNumber - 1);
+      taskList.remove(taskNumber - 1);
+      System.out.println("  Noted. I've removed this task:");
+      printTask(taskToRemove, taskList);
+    }
+  }
+
+  private static void printTask(Task task, ArrayList<Task> taskList) {
+    System.out.println(new StringBuilder("  ").append(task.toString()));
     System.out.println(new StringBuilder("  Now you have ").append(taskList.size())
         .append(taskList.size() == 1 ? " task in the list." : " tasks in the list."));
   }
