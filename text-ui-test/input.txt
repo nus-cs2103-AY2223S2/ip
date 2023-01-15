@@ -24,5 +24,9 @@ event meeting /from /to
 event /from
 event /to
 event meeting /from /to sunday
+delete
+delete 1
+delete k
+delete 22222
 bye??
 bye

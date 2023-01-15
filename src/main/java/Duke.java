@@ -137,7 +137,7 @@ public class Duke {
 
     private void unmarkListItem(String[] tokens) {
         try {
-            int listIndex = Integer.parseInt(tokens[1])-1;
+            int listIndex = Integer.parseInt(tokens[1]) - 1;
             tasks.get(listIndex).setStatus(" ");
             displayMessage("OK, I've marked this task as not done yet:\n" +
                     tasks.get(listIndex).toString() + "\n");
@@ -145,6 +145,25 @@ public class Duke {
             displayMessage("Please specify a numerical task index to unmark\n");
         } catch (IndexOutOfBoundsException e) {
             displayMessage("Please specify a valid index to unmark\n");
+        }
+    }
+
+    private void deleteItem(String[] tokens) throws DukeException {
+        if (tokens.length != 2) {
+            throw new DukeException("please specify delete command as delete [list index]");
+        } else if (tasks.size() == 0) {
+            throw new DukeException("Task list is empty");
+        }
+        try {
+            int listIndex = Integer.parseInt(tokens[1]) - 1;
+            Task removed = tasks.remove(listIndex);
+            displayMessage("Noted. I've removed this task:\n" +
+                    removed.toString() +
+                    "\nNow you have " + tasks.size() + " tasks in the list\n");
+        } catch (NumberFormatException e) {
+            displayMessage("please specify a valid number to delete entry\n");
+        } catch (IndexOutOfBoundsException e) {
+            displayMessage("please specify a valid index to delete\n");
         }
     }
 
@@ -180,6 +199,12 @@ public class Duke {
             } else if (tokens[0].equals("event")) {
                 try {
                     duke.addEvent(tokens);
+                } catch (DukeException e) {
+                    displayMessage(e.getMessage());
+                }
+            } else if (tokens[0].equals("delete")) {
+                try {
+                    duke.deleteItem(tokens);
                 } catch (DukeException e) {
                     displayMessage(e.getMessage());
                 }
