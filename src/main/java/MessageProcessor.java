@@ -35,6 +35,12 @@ public class MessageProcessor {
         return (action.equals("todo") || action.equals("deadline") || action.equals("event"));
     }
 
+    private boolean isDelete(String message) {
+        String[] messageSplit = message.split(" ");
+        String action = messageSplit[0];
+        return action.equals("delete");
+    }
+
     private String generateMarkMessage(Task task) {
         String heading = task.getDoneStatus()
                 ? "Nice! I've marked this task as done:"
@@ -54,6 +60,12 @@ public class MessageProcessor {
         return header + task.toString() + "\n" + end;
     }
 
+    private String generateDeleteMessage(Task task) {
+        String header = "Noted. I've removed this task:\n";
+        String end = String.format("Now you have %d tasks in the list.", this.taskList.getTaskCount());
+
+        return header + task.toString() + "\n" + end;
+    }
 
     DukeMessage process(String message)
             throws InvalidInputException, InvalidTodoException, InvalidDeadlineException, InvalidEventException {
@@ -72,6 +84,10 @@ public class MessageProcessor {
             Task task = taskList.addTask(message);
             status = MessageStatus.ADD;
             message = generateAddMessage(task);
+        } else if (isDelete(message)) {
+            Task task = taskList.deleteTask(message);
+            status = MessageStatus.DELETE;
+            message = generateDeleteMessage(task);
         } else {
             throw new InvalidInputException();
         }

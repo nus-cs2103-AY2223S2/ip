@@ -1,6 +1,7 @@
+import java.util.ArrayList;
+
 public class TaskList {
-    private Task[] list = new Task[100];
-    private int numTask = 0;
+    private ArrayList<Task> list = new ArrayList<>();
 
     TaskList() {
 
@@ -9,8 +10,8 @@ public class TaskList {
     @Override
     public String toString() {
         String listString = "";
-        for (int i = 0; i < numTask; i++) {
-            Task task = list[i];
+        for (int i = 0; i < list.size(); i++) {
+            Task task = list.get(i);
             listString += String.format("%d.%s\n", i+1, task.toString());
         }
         return listString;
@@ -61,14 +62,26 @@ public class TaskList {
             String fromToDate = dateSplit[1];
             taskToAdd = new Event(content, fromToDate);
         }
-        this.list[numTask] = taskToAdd;
-        this.numTask++;
+        this.list.add(taskToAdd);
 
         return taskToAdd;
     }
 
+    public Task deleteTask(String message) {
+        String[] messageSplit = message.split(" ");
+        int taskNum = Integer.parseInt(messageSplit[1]);
+
+        // task to be deleted
+        Task deletedTask = this.getTask(taskNum);
+
+        // remove task from arraylist
+        list.remove(taskNum-1);
+
+        return deletedTask;
+    }
+
     public Task getTask(int taskNum) {
-        return list[taskNum-1];
+        return list.get(taskNum-1);
     }
 
     public void markTask(String action, int taskNum) {
@@ -77,6 +90,6 @@ public class TaskList {
     }
 
     public int getTaskCount() {
-        return this.numTask;
+        return list.size();
     }
 }

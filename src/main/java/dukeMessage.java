@@ -22,6 +22,7 @@ public class DukeMessage extends Message {
             case ADD:
             case MARK:
             case LIST:
+            case DELETE:
                 reply = this.getContent();
                 break;
             case START:
