@@ -27,6 +27,28 @@ public class Duke {
     static void displayLine() {
         Duke.display("____________________________________________________________");
     }
+    static void displayTaskCount(ArrayList<Task> taskList) {
+        if (taskList == null)
+            return;
+
+        if (taskList.isEmpty())
+            Duke.display("You do not have any task!");
+        else
+            Duke.display("Now you have " + taskList.size() + " task(s) in the list.");
+    }
+    static void displayTaskList(ArrayList<Task> taskList) {
+        if (taskList == null)
+            return;
+
+        if (taskList.size() == 0)
+            Duke.display("Your list is empty.");
+        else {
+            Duke.display("Here's your list of tasks:");
+            for (int i = 0; i < taskList.size(); i++)
+                Duke.display((i + 1) + ". " + taskList.get(i));
+        }
+    }
+
 
     static State detectState(String command) {
         // Suppress all upper case letters, gets only the first word
@@ -68,11 +90,12 @@ public class Duke {
 
         // TODO: Initialise components, variables
         int taskIdx;
-        Task selectedTask;
+        Task activeTask;
         String userCmd = "";
-        Scanner sc = new Scanner(System.in);
         State currentState = State.UNKNOWN;
-        ArrayList<Task> list = new ArrayList<Task>();
+        Scanner sc = new Scanner(System.in);
+        ArrayList<Task> taskList = new ArrayList<Task>();
+
 
         System.out.println("System is ready!");
         Duke.display("\n\n");
@@ -94,30 +117,27 @@ public class Duke {
             switch(currentState) {
                 case TODO:
                     String item = userCmd.substring(4).trim(); // exclude "add "
-                    list.add(new Todo(item));
-                    Duke.display("I have added: " + item);
+                    activeTask = new Todo(item);
+                    taskList.add(activeTask);
+                    Duke.display("Got it. I've added this task:");
+                    Duke.display("\t" + activeTask.toString());
+                    Duke.displayTaskCount(taskList);
                     break;
                 case LIST:
-                    if (list.size() == 0)
-                        Duke.display("Your list is empty.");
-                    else {
-                        Duke.display("Here's your list of tasks:");
-                        for (int i = 0; i < list.size(); i++)
-                            Duke.display((i + 1) + ". " + list.get(i));
-                    }
+                    Duke.displayTaskList(taskList);
                     break;
                 case MARK:
                 case UNMARK:
-                    taskIdx = Integer.valueOf(userCmd.split(" ")[1]) - 1;
+                    taskIdx = Integer.parseInt(userCmd.split(" ")[1]) - 1;
                     // FIXME: throws NumberFormatException for "mark  1" (typo of additional space)
                     // FIXME: watch for index out of bound exception (no number given)
-                    selectedTask = list.get(taskIdx);
+                    activeTask = taskList.get(taskIdx);
                     // FIXME: watch for index out of bound exception (ie. index of non-existing task)
-                    selectedTask.setDone(currentState == State.MARK); // False means unmark
+                    activeTask.setDone(currentState == State.MARK); // False means unmark
                     if (currentState == State.MARK)
                         Duke.display("Nice I've marked this task as done:");
                     else Duke.display("OK, I've marked this task as not done yet:");
-                    Duke.display(selectedTask);
+                    Duke.display(activeTask);
                     break;
                 case UNKNOWN:
                     Duke.warn("Sorry, I don't understand your request :(");
