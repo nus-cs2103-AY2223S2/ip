@@ -6,14 +6,15 @@ public class Duke {
     static String dialogSeparator = "____________________________________________________________";
 
     public static void greeting() {
-        String logo = " ____        _        \n"
-                + "|  _ \\ _   _| | _____ \n"
-                + "| | | | | | | |/ / _ \\\n"
-                + "| |_| | |_| |   <  __/\n"
-                + "|____/ \\__,_|_|\\_\\___|\n";
+//        String logo = " ____        _        \n"
+//                + "|  _ \\ _   _| | _____ \n"
+//                + "| | | | | | | |/ / _ \\\n"
+//                + "| |_| | |_| |   <  __/\n"
+//                + "|____/ \\__,_|_|\\_\\___|\n";
 //        System.out.println("Hello from\n" + logo);
         String dialogSeparator = "____________________________________________________________";
-        String greeting = logo + "\n" + dialogSeparator + "\nHello! I'm Duke\nWhat can I do for you?\n" + dialogSeparator;
+//        String greeting = logo + "\n" + dialogSeparator + "\nHello! I'm Duke\nWhat can I do for you?\n" + dialogSeparator;
+        String greeting = dialogSeparator + "\nHello! I'm Duke\nWhat can I do for you?\n" + dialogSeparator;
         System.out.println(greeting);
 
     }
