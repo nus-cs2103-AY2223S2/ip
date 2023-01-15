@@ -11,8 +11,8 @@ import duke.exception.InvalidCommandArgsException;
 import duke.task.Deadline;
 import duke.task.Event;
 import duke.task.Task;
+import duke.ui.Ui;
 import duke.utils.DateUtil;
-import duke.utils.Ui;
 
 public class ListCommand extends Command {
 

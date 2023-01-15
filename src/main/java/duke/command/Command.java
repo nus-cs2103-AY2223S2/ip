@@ -2,7 +2,7 @@ package duke.command;
 
 import duke.database.DukeRepo;
 import duke.exception.DukeException;
-import duke.utils.Ui;
+import duke.ui.Ui;
 
 public abstract class Command {
     

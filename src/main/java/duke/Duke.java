@@ -1,12 +1,11 @@
 package duke;
 
-import duke.utils.Ui;
-
 import duke.command.Command;
 import duke.database.DukeRepo;
 import duke.database.DukeRepoImpl;
 import duke.exception.DukeException;
 import duke.parser.Parser;
+import duke.ui.Ui;
 
 /**
  * Duke agent that knows how to manage a todo list.
@@ -20,7 +19,6 @@ public class Duke {
      * Default constructor.
      */
     Duke() {
-        // isActive = true;
         db = new DukeRepoImpl();
         ui = new Ui();
     }

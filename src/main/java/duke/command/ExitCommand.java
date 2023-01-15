@@ -2,7 +2,7 @@ package duke.command;
 
 import duke.constant.Message;
 import duke.database.DukeRepo;
-import duke.utils.Ui;
+import duke.ui.Ui;
 
 public class ExitCommand extends Command {
 
