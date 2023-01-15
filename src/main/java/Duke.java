@@ -1,3 +1,4 @@
+import java.util.Arrays;
 import java.util.Scanner;
 
 /**
@@ -101,14 +102,104 @@ public class Duke {
 
         //Handle normal task
         else {
-            Task current_task = new Task(command);
+            Task current_task = createTask(command);
+
+            //TODO better error handling
+            if (current_task == null) {return;}
+
             taskList[listPointer] = current_task;
             listPointer += 1;
 
-            System.out.println("\tadded: " + command);
+            System.out.println("\tGot it. I've added this task:\n\t  " + current_task
+            + "\n\t" + String.format("Now you have %d tasks in the list.", listPointer));
             makeSeperation();
         }
 
+    }
+
+    /**
+     * Takes in a String command from the user and creates the corresponding task.
+     *
+     * @param command A string input of a task with relevant information.
+     *
+     * @return The Task object based on command.
+     */
+    public static Task createTask(String command) {
+        String[] splitted = command.split(" ");
+
+        if (splitted[0].equals("todo")) {
+            //Get 'ToDo' description
+            String[] descriptionArray = Arrays.copyOfRange(splitted, 1, splitted.length);
+            String description = String.join(" ", descriptionArray);
+
+            //Make Todo
+            ToDo curToDO = new ToDo(description);
+            return curToDO;
+        }
+
+        else if (splitted[0].equals("deadline")) {
+            //Get 'Deadline' description and 'by' index
+            int byStartIndex = -1;
+
+            for (int i = 0; i < splitted.length; i++) {
+                String curString = splitted[i];
+
+                if (curString.equals("/by")) {
+                    byStartIndex = i;
+                }
+            }
+            //TODO: handle invalid byStartIndex (-1)
+
+            //Make description and by string
+            String[] descriptionArray = Arrays.copyOfRange(splitted, 1, byStartIndex);
+            String[] byArray = Arrays.copyOfRange(splitted, byStartIndex + 1,
+                    splitted.length);
+            String description = String.join(" ", descriptionArray);
+            String by = String.join(" ", byArray);
+
+            //Make Deadline
+            Deadline deadline = new Deadline(description, by);
+            return deadline;
+        }
+
+        else if (splitted[0].equals("event")) {
+            //Get 'Deadline' description, 'from' and 'to' index
+            int fromStartIndex = -1;
+            int toStartIndex = -1;
+
+            for (int i = 0; i < splitted.length; i++) {
+                String curString = splitted[i];
+
+                if (curString.equals("/from")) {
+                    fromStartIndex = i;
+                }
+
+                else if (curString.equals("/to")) {
+                    toStartIndex = i;
+                }
+            }
+            //TODO: handle invalid from/toStartIndex (-1)
+
+            //Make description and by string
+            String[] descriptionArray = Arrays.copyOfRange(splitted, 1, fromStartIndex);
+            String[] fromArray = Arrays.copyOfRange(splitted, fromStartIndex + 1,
+                    toStartIndex);
+            String[] toArray = Arrays.copyOfRange(splitted, toStartIndex + 1,
+                    splitted.length);
+            String description = String.join(" ", descriptionArray);
+            String from = String.join(" ", fromArray);
+            String to = String.join(" ", toArray);
+
+            //Make Event
+            Event event = new Event(description, from, to);
+            return event;
+        }
+
+        else {
+            //TODO: better error handling
+            System.out.println("Error: unknown Task type");
+            return null;
+        }
     }
 
     /**
@@ -127,7 +218,7 @@ public class Duke {
         } else if (splitted[0].equals("unmark")) {
             return "unmark";
         } else {
-            return "none";
+            return "task";
         }
     }
 
