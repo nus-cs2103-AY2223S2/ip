@@ -18,7 +18,7 @@ public class Duke {
         String input = "";
 
         //Storage for the list function.
-        String[] storage = new String[100];
+        Task[] storage = new Task[100];
 
         //Counter to count the number of items in the list.
         int counter = 0;
@@ -35,21 +35,32 @@ public class Duke {
         System.out.println("____________________________________________________________");
         while(true) {
             input = sc.nextLine();
+            String[] inputArr = input.split(" ");
             System.out.println("____________________________________________________________");
-            if(input.equals("bye")) { //User input bye to quit.
+            if(input.equals("bye")) { // User input bye to quit.
                 System.out.println("Bye. Hope to see you again soon!");
                 System.out.println("____________________________________________________________");
                 break;
-            } else if(input.equals("list")) { //User input list to display list of items added.
+            } else if(inputArr[0].equals("mark")) { // User input mark to mark the task.
+                System.out.println("Nice! I've marked this task as done:");
+                storage[Integer.parseInt(inputArr[1]) - 1].mark();
+                System.out.println(storage[Integer.parseInt(inputArr[1]) - 1].toString());
+                System.out.println("____________________________________________________________");
+            } else if(inputArr[0].equals("unmark")) { // User input unmark to unmark the task.
+                System.out.println("OK, I've marked this task as not done yet:");
+                storage[Integer.parseInt(inputArr[1]) - 1].unmark();
+                System.out.println(storage[Integer.parseInt(inputArr[1]) - 1].toString());
+                System.out.println("____________________________________________________________");
+            } else if(input.equals("list")) { // User input list to display list of items added.
                 int numbering = 1;
                 for(int i = 0; i < counter; i++) {
-                    System.out.println(numbering + ". " + storage[i]);
+                    System.out.println(numbering + ". " + storage[i].toString());
                     numbering++;
                 }
                 System.out.println("____________________________________________________________");
-            } else { //User input added to the list.
+            } else { // User input added to the list.
                 System.out.println("added: " + input);
-                storage[counter] = input;
+                storage[counter] = new Task(input);
                 counter++;
                 System.out.println("____________________________________________________________");
             }
