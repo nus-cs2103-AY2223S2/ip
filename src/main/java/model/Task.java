@@ -9,15 +9,11 @@ public class Task {
     private static int count = 0;
     private TaskStatus status = TaskStatus.NEW;
 
-    private Task(String title) {
+    public Task(String title) {
         this.title = title;
-    }
 
-    public static Task create(String title) {
-        Task task = new Task(title);
-        Task.tasks[count] = task;
+        Task.tasks[count] = this;
         Task.count++;
-        return task;
     }
 
     public static boolean isIdValid(int id) {

@@ -58,7 +58,7 @@ public class Membot {
                             break;
                         }
                     } else {
-                        Task task = Task.create(input);
+                        Task task = new Task(input);
                         Printer.printIndent("[new] " + task);
                     }
 
