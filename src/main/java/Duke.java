@@ -9,20 +9,34 @@ public class Duke {
         System.out.println("Hello from\n" + logo);
         System.out.println("----------------------------------------");
 
-        ArrayList<String> list = new ArrayList<String>();
+        ArrayList<Task> list = new ArrayList<Task>();
         Scanner sc = new Scanner(System.in);
         while (true) {
             String in = sc.nextLine();
             System.out.println("----------------------------------------");
-            if (in.equals("bye")) {
+            String[] split = in.split(" ");
+            if (split[0].equals("mark")) {
+                Integer i = Integer.parseInt(split[1]);
+                Task task = list.get(i-1);
+                task.markAsDone();
+                System.out.println("Nice! I've marked this task as done:");
+                System.out.println("[" + task.getStatusIcon() + "] " + task.getDescription());
+            } else if (split[0].equals("unmark")) {
+                Integer i = Integer.parseInt(split[1]);
+                Task task = list.get(i-1);
+                task.markAsNotDone();
+                System.out.println("OK, I've marked this task as not done yet:");
+                System.out.println("[" + task.getStatusIcon() + "] " + task.getDescription());
+            } else if (in.equals("bye")) {
                 System.out.println("Bye. Hope to see you again soon!");
                 break;
             } else if (in.equals("list")) {
                 for (int i = 0; i < list.size(); i++) {
-                    System.out.println((i + 1) + ". " + list.get(i));
+                    Task curr = list.get(i);
+                    System.out.println((i + 1) + ".[" + curr.getStatusIcon() + "] " + curr.description);
                 }
             } else {
-                list.add(in);
+                list.add(new Task(in));
                 System.out.println(in);
             }
             System.out.println("----------------------------------------");
