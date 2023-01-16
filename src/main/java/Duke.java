@@ -20,9 +20,10 @@ public class Duke {
                 "\n    ____________________________________________________________");
 
         String input = sc.nextLine();
+        String[] inputArr = input.split(" ");
 
-        while (!input.equalsIgnoreCase("bye")) {
-            switch (input) {
+        while (!inputArr[0].equalsIgnoreCase("bye")) {
+            switch (inputArr[0]) {
                 case "list":
                     System.out.println("    ____________________________________________________________");
                     for (int i = 0; i < taskNum; i++) {
@@ -42,6 +43,7 @@ public class Duke {
                     break;
             }
             input = sc.nextLine();
+            inputArr = input.split(" ");
         }
 
         System.out.println("    ____________________________________________________________\n" +
