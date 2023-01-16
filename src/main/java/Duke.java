@@ -6,6 +6,7 @@ public class Duke {
             System.out.printf("%d: %s%n", i + 1, list[i]);
         }
     }
+
     public static void main(String[] args) {
         System.out.println("Hello, Duke here. How can I help you?");
         Scanner sc = new Scanner(System.in);
@@ -38,27 +39,39 @@ public class Duke {
                     break;
                 }
                 case "todo": {
-                    list[itemCount] = new ToDo(split[1]);
+                    try {
+                        list[itemCount] = new ToDo(split[1]);
+                    } catch (ArrayIndexOutOfBoundsException e) {
+                        System.out.println("Description cannot be empty for todo");
+                    }
                     itemCount++;
                     System.out.println("Added: " + split[1]);
                     break;
                 }
                 case "deadline": {
-//                    TODO: check for correct format
                     split = userLine.split(" (/by)|(deadline)");
+                    if (split.length < 3) {
+                        System.out.println("Invalid format");
+                        break;
+                    }
                     list[itemCount] = new Deadline(split[1].trim(), split[2]);
                     itemCount++;
                     System.out.println("Added: " + split[1]);
                     break;
                 }
                 case "event": {
-//                    TODO: check for correct format
                     split = userLine.split(" (/from)|(/to)|(event)");
+                    if (split.length < 4) {
+                        System.out.println("Invalid format");
+                        break;
+                    }
                     list[itemCount] = new Event(split[1].trim(), split[2], split[3]);
                     itemCount++;
                     System.out.println("Added: " + split[1].trim());
                     break;
                 }
+                default:
+                    System.out.println("Command not found");
             }
         }
     }
