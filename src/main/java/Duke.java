@@ -15,23 +15,20 @@ public class Duke {
             "     Bye. Hope to see you again soon!\n" +
             "    ____________________________________________________________\n";
 
-    public static String getReply(String str) {
-        return "    ____________________________________________________________\n" +
-                "     " + str + "\n" +
-                "    ____________________________________________________________\n";
-    }
-
     public static void main(String[] args) {
         System.out.println(Duke.intro);
         Scanner sc = new Scanner(System.in);
+        TaskManager tm = new TaskManager();
         while (true) {
-            System.out.print("");
             String str = sc.nextLine();
             if (Objects.equals(str, "bye")) {
                 System.out.println(Duke.outro);
                 break;
+            } else if (Objects.equals(str, "list")) {
+                System.out.println(tm.getAllTaskStr());
+            } else {
+                System.out.println(tm.addTask(str));
             }
-            System.out.println(Duke.getReply(str));
         }
     }
 }
