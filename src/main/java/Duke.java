@@ -20,10 +20,8 @@ public class Duke {
         boolean LoopEnd = false;
         while (!LoopEnd) {
             Scanner UserScan = new Scanner(System.in);
-            String UserInput = UserScan.nextLine();
-
             // switch case for future commands
-            switch (UserInput) {
+            switch (UserScan.next()) {
 
                 // loop breaks, ending program if input is "bye"
                 case ("bye"):
@@ -42,7 +40,6 @@ public class Duke {
 
                 // Duke allows user to mark tasks as done when input is "mark"
                 case ("mark"):
-                    System.out.println(border + "You want to mark a task as done?\nWhich one?\n" + border);
                     int MarkInput = UserScan.nextInt() - 1;
                     TaskList.get(MarkInput).MarkDone();
                     System.out.println(border + "Okay, the following task is marked as done!\n");
@@ -50,7 +47,6 @@ public class Duke {
                     break;
                 // Duke allows user to mark tasks as NOT done when input is "unmark"
                 case ("unmark"):
-                    System.out.println(border + "You want to mark a task as NOT done?\nWhich one?\n" + border);
                     int UnmarkInput = UserScan.nextInt() - 1;
                     TaskList.get(UnmarkInput).MarkNotDone();
                     System.out.println(border + "Okay, the following task is marked as NOT done!\n");
@@ -59,10 +55,9 @@ public class Duke {
 
                 // Duke adds Deadline
                 case ("deadline"):
-                    System.out.println(border + "Describe the task, please.\n" + border);
-                    String DeadlineName = UserScan.nextLine();
-                    System.out.println(border + "And when do you need it done by?\n" + border);
-                    String DeadlineDate = UserScan.nextLine();
+                    String DeadlineSentence = UserScan.nextLine();
+                    String DeadlineName = DeadlineSentence.substring(0, DeadlineSentence.indexOf(" /by"));
+                    String DeadlineDate = DeadlineSentence.substring(DeadlineSentence.indexOf(" /by")+5);
                     Task DeadlineToAdd = new Deadline(DeadlineName, DeadlineDate);
                     TaskList.add(DeadlineToAdd);
                     System.out.println(border + "Task added: " + DeadlineToAdd + "\n"
@@ -70,12 +65,10 @@ public class Duke {
                     break;
                 // Duke adds Event
                 case ("event"):
-                    System.out.println(border + "Describe the task, please.\n" + border);
-                    String EventName = UserScan.nextLine();
-                    System.out.println(border + "From?\n" + border);
-                    String FromDate = UserScan.nextLine();
-                    System.out.println(border + "To?\n" + border);
-                    String ToDate = UserScan.nextLine();
+                    String EventSentence = UserScan.nextLine();
+                    String EventName = EventSentence.substring(0, EventSentence.indexOf(" /from"));
+                    String FromDate = EventSentence.substring(EventSentence.indexOf(" /from")+7, EventSentence.indexOf(" /to"));
+                    String ToDate = EventSentence.substring(EventSentence.indexOf(" /to")+5);
                     Task EventToAdd = new Event(EventName, FromDate, ToDate);
                     TaskList.add(EventToAdd);
                     System.out.println(border + "Task added: " + EventToAdd + "\n"
@@ -83,7 +76,6 @@ public class Duke {
                     break;
                 // Duke adds To-Do
                 case ("todo"):
-                    System.out.println(border + "Describe the task, please.\n" + border);
                     String ToDoName = UserScan.nextLine();
                     Task TaskToAdd = new ToDo(ToDoName);
                     TaskList.add(new ToDo(ToDoName));
