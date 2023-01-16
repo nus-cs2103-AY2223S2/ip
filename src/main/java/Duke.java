@@ -1,9 +1,10 @@
 import java.util.Scanner;
 import java.util.List;
 import java.util.ArrayList;
+import Exceptions.*;
 
 public class Duke {
-    public static void main(String[] args) {
+    public static void main(String[] args) throws DukeException {
 
         // Duke's greeting
         String greet = "Hello! I'm Duke\nWhat can I do for you?";
@@ -124,8 +125,7 @@ public class Duke {
                 case "todo": {
 
                     if (description.length() == 0) {
-                        System.out.println("Hey! The description of a todo cannot be empty!");
-                        break;
+                        throw new DukeTodoEmpty();
                     }
 
                     description = description.substring(1);
@@ -149,8 +149,7 @@ public class Duke {
                 case "deadline": {
 
                     if (description.length() == 0) {
-                        System.out.println("Hey! The description of a deadline cannot be empty!");
-                        break;
+                        throw new DukeDeadlineEmpty();
                     }
 
                     description = description.substring(1);
@@ -174,8 +173,7 @@ public class Duke {
                 case "event": {
 
                     if (description.length() == 0) {
-                        System.out.println("Hey! The description of an event cannot be empty!");
-                        break;
+                        throw new DukeEventEmpty();
                     }
 
                     description = description.substring(1);
@@ -196,13 +194,9 @@ public class Duke {
                     break;
                 }
 
-                // Command to add task
                 default: {
-                        System.out.println("Oh noes! I don't know what that means :<");
-                        System.out.println("Please specify the type of task.");
-                        System.out.println("Hint: todo, deadline, event");
+                        throw new DukeUnknownCommand();
                     }
-                    break;
             }
         }
     }
