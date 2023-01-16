@@ -64,7 +64,7 @@ public class Duke {
         TaskList taskList = new TaskList(tasksFile);
         while(true) {
             String request = scanner.nextLine();
-            if (request.equals("bye")) {
+            if (request.equalsIgnoreCase("BYE")) {
                 taskList.writeTasksToFile();
                 break;
             }

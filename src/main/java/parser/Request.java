@@ -22,19 +22,19 @@ public class Request {
     public Command parse() throws UnknownCommandException, MissingArgumentException, InvalidArgumentException {
         preprocess();
         switch (this.requestType) {
-            case "list":
+            case "LIST":
                 return new ListParser().parse(this.requestContent);
-            case "mark":
+            case "MARK":
                 return new MarkParser().parse(this.requestContent);
-            case "unmark":
+            case "UNMARK":
                 return new UnmarkParser().parse(this.requestContent);
-            case "todo":
+            case "TODO":
                 return new TodoParser().parse(this.requestContent);
-            case "deadline":
+            case "DEADLINE":
                 return new DeadlineParser().parse(this.requestContent);
-            case "event":
+            case "EVENT":
                 return new EventParser().parse(this.requestContent);
-            case "delete":
+            case "DELETE":
                 return new DeleteParser().parse(this.requestContent);
             default:
                 throw new UnknownCommandException();
@@ -42,7 +42,7 @@ public class Request {
     }
 
     private void preprocess() {
-        this.requestType = this.request.split(" ", 2)[0];
+        this.requestType = this.request.split(" ", 2)[0].toUpperCase();
 
         this.requestContent = this.request.split(" ", 2).length == 2
                 ? this.request.split(" ", 2)[1]
