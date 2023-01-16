@@ -6,8 +6,8 @@ public class Roody {
 
     public Roody(){
         // Assumed no more than 100 tasks
-        list = new String[100];
-        index = 0;
+        this.list = new String[100];
+        this.index = 0;
     }
 
     // Initial Greeting
@@ -20,8 +20,8 @@ public class Roody {
     
     // Stores input to string
     private void addToList(String input) {
-        list[index] = input;
-        index++;
+        this.list[this.index] = input;
+        this.index++;
         speak("added: " + input);
     }
 
@@ -38,11 +38,11 @@ public class Roody {
         int count = 0;
         int listIndex = 0;
         StringBuilder stringBuilder = new StringBuilder();
-        while (count < index) {
+        while (count < this.index) {
             listIndex = count + 1;
             stringBuilder.append(listIndex);
             stringBuilder.append(". ");
-            stringBuilder.append(list[count]);
+            stringBuilder.append(this.list[count]);
             System.out.println(stringBuilder.toString());
             
             // Clears and updates values
