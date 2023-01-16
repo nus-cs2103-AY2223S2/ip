@@ -18,4 +18,8 @@ public class Task {
     public void MarkDone()  {
         this.isDone = true;
     }
+    // marks task as NOT done
+    public void MarkNotDone() {
+        this.isDone = false;
+    }
 }
