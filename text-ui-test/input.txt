@@ -1,0 +1,12 @@
+todo read book
+deadline return book /by Sunday
+event project meeting /from now /to another time
+todo join piano club
+todo complete online quiz
+list
+mark 1
+mark 3
+unmark 1
+list
+bye
+
