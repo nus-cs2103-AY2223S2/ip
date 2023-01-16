@@ -1,6 +1,7 @@
 public class TaskList {
     private Task[] taskList = new Task[100];
     private static int index = -1;
+    private final static String ADDTASKMSG = "Got it. Added this task, I have:";
 
     /**
      * Constructor for Task List.
@@ -14,8 +15,9 @@ public class TaskList {
      * @param task name of the task
      */
     public void addTask(Task task) {
-        System.out.println(String.format("added: %s", task.getDescription()));
+        System.out.println(String.format("%s\n %s", ADDTASKMSG, task.toString()));
         this.taskList[index] = task;
+        System.out.println(String.format("Now you have %d tasks in the list.", index + 1));
         index++;
     }
 
@@ -57,9 +59,9 @@ public class TaskList {
         } else {
             String out = "";
             for (int i = 0; i < index - 1; i++) {
-                out += String.format("%d. %s\n", i + 1, taskList[i].toString());
+                out += String.format("%d.%s\n", i + 1, taskList[i].toString());
             }
-            System.out.println(out + String.format("%d. %s", index, taskList[index - 1].toString()));
+            System.out.println(out + String.format("%d.%s", index, taskList[index - 1].toString()));
         }
     }
 }

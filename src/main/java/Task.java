@@ -27,10 +27,18 @@ abstract public class Task {
         System.out.println("Ok! Marked this task as not done yet, I have:");
     }
 
+    /**
+     * Getter of task description.
+     * @return String representation of the task's description
+     */
     public String getDescription() {
         return this.description;
     }
 
+    /**
+     * Abstract method for child classes to return their type.
+     * @return string type of task
+     */
     abstract public String getTaskType();
 
 }

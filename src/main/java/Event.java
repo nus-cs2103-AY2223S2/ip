@@ -9,6 +9,9 @@ public class Event extends Task {
         this.endTime = end;
     }
 
+    /**
+     * Checks the status of the task and logs to stdout.
+     */
     @Override
     public void mark() {
         super.mark();
@@ -20,6 +23,9 @@ public class Event extends Task {
                 this.endTime));
     }
 
+    /**
+     * Unchecks the status of the task and logs to stdout.
+     */
     @Override
     public void unmark() {
         super.unmark();
@@ -31,11 +37,19 @@ public class Event extends Task {
                 this.endTime));
     }
 
+    /**
+     * Method for child classes to return their type.
+     * @return string type of task
+     */
     @Override
     public String getTaskType() {
         return "E";
     }
 
+    /**
+     * String representation of the Event Task.
+     * @return string representation of the Event Task.
+     */
     @Override
     public String toString() {
         return String.format("[%s][%s] %s (from: %s to: %s)",

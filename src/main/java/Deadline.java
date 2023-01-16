@@ -7,6 +7,9 @@ public class Deadline extends Task {
         this.deadline = deadline;
     }
 
+    /**
+     * Checks the status of the task and logs to stdout.
+     */
     @Override
     public void mark() {
         super.mark();
@@ -17,6 +20,9 @@ public class Deadline extends Task {
                 this.deadline));
     }
 
+    /**
+     * Unchecks the status of the task and logs to stdout.
+     */
     @Override
     public void unmark() {
         super.unmark();
@@ -27,11 +33,19 @@ public class Deadline extends Task {
                 this.deadline));
     }
 
+    /**
+     * Method for child classes to return their type.
+     * @return string type of task
+     */
     @Override
     public String getTaskType() {
         return "D";
     }
 
+    /**
+     * String representation of the Deadline Task.
+     * @return string representation of the Deadline Task.
+     */
     @Override
     public String toString() {
         return String.format("[%s][%s] %s (by: %s)",

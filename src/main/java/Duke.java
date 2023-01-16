@@ -17,13 +17,14 @@ public class Duke {
         String response = "";
 
         TaskList taskList = new TaskList();
+        TaskInfoParser parser = new TaskInfoParser();
 
         while (true) {
             response = scanner.nextLine();
             if (response.equals("bye")) {
                 break;
             }
-            String[] commands = response.split(" ", 2);
+            String[] commands = response.split(" ");
             System.out.println(BANNER);
             switch(commands[0]) {
                 case "list" :
@@ -36,7 +37,7 @@ public class Duke {
                     taskList.unmarkTask(commands[1]);
                     break;
                 default :
-                    Task newTask = new Task(response);
+                    Task newTask = parser.obtainTask(response);
                     taskList.addTask(newTask);
                     break;
             }
