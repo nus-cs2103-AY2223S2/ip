@@ -8,28 +8,32 @@ public class Duke {
     }
     public static ArrayList<Task> taskStore = new ArrayList<>();
 
-    private static Task getTaskForMarking(ArrayList<String> parsed) {
-        int completedIndex = Integer.parseInt(parsed.get(1)) - 1; // index of the task completed
-        Task completedTask = taskStore.get(completedIndex); // actual task
+    private static Task getTaskForMarking(String[] parsed) {
+        int completedIndex = Integer.parseInt(parsed[1]) - 1; // index of the task completed
+        Task completedTask = Duke.taskStore.get(completedIndex); // actual task
         return completedTask;
     }
 
-    public static ArrayList<String> parser(String input, ParseFunctions parse_type) {
+    public static String[] parser(String input, ParseFunctions parse_type) {
         switch (parse_type) {
             case SPLIT_ALL:
-                return new ArrayList<String>(Arrays.asList(input.split(" ")));
+                return input.split(" ");
             case TODO:
-                return new ArrayList<String>(Arrays.asList(input.split(" ", 2))); // split into 2
+                return input.split(" ", 2); // split into 2
             case DEADLINE:
                 String[] otherArgs = input.split(" ", 2);
                 String[] taskAndTime = otherArgs[1].split(" /by ", 2);
-                ArrayList<String> temp = new ArrayList<>();
-                temp.add(otherArgs[0]);
-                temp.add(taskAndTime[0]);
-                temp.add(taskAndTime[1]);
-                return temp;
+                return new String[]{otherArgs[0], taskAndTime[0], taskAndTime[1]};
+            case EVENT:
+                otherArgs = input.split(" ", 2);
+                taskAndTime = otherArgs[1].split(" /from ", 2);
+                String[] toTime = taskAndTime[1].split(" /to ", 2);
+                return new String[]{otherArgs[0], taskAndTime[0], toTime[0], toTime[1]};
         }
-        return new ArrayList<>();
+        return null;
+    }
+    public static int countTasks() {
+        return Duke.taskStore.size();
     }
 
     public static void main(String[] args) {
@@ -39,9 +43,9 @@ public class Duke {
             Scanner myScanner = new Scanner(System.in);
             String command = myScanner.nextLine();
 
-            ArrayList<String> toFindFirstWord = parser(command, ParseFunctions.SPLIT_ALL);
+            String[] toFindFirstWord = parser(command, ParseFunctions.SPLIT_ALL);
 
-            String first = toFindFirstWord.get(0);
+            String first = toFindFirstWord[0];
 
             if (first.equals("bye")) {
                 System.out.println("  Bye. Hope to see you soon again!");
@@ -62,11 +66,24 @@ public class Duke {
                 System.out.println("    " + completedTask.toString());
             }
             else if (first.equals("deadline")) {
-                ArrayList<String> parsed = parser(command, ParseFunctions.DEADLINE);
-                Task newDeadline = new Deadline(parsed.get(1), parsed.get(2));
-                taskStore.add(newDeadline);
+                String[] parsed = parser(command, ParseFunctions.DEADLINE);
+                Task newDeadline = new Deadline(parsed[1], parsed[2]);
+                Duke.taskStore.add(newDeadline);
+
                 System.out.println("  new task added!");
                 System.out.println("    " + newDeadline.toString());
+                System.out.println("  Now you have " + String.valueOf(Duke.countTasks()) +
+                        " tasks in the list!");
+            }
+            else if (first.equals("event")) {
+                String[] parsed = parser(command, ParseFunctions.EVENT);
+                Task newEvent = new Event(parsed[1], parsed[2], parsed[3]);
+                Duke.taskStore.add(newEvent);
+
+                System.out.println("  new event added!");
+                System.out.println("    " + newEvent.toString());
+                System.out.println("  Now you have " + String.valueOf(Duke.countTasks()) +
+                        " tasks in the list!");
             }
             else if (first.equals("list")) {
                 for (int i = 0; i < taskStore.size(); i++) {
@@ -76,7 +93,7 @@ public class Duke {
             // add task
             else {
                 Task newTask = new Task(command);
-                taskStore.add(newTask);
+                Duke.taskStore.add(newTask);
                 System.out.println("  new task added: " + command);
             }
         }
