@@ -1,13 +1,14 @@
 import java.util.Scanner;
+import java.util.ArrayList;
 
 public class Duke {
     public static void main(String[] args) {
-//        String logo = " ____        _        \n"
-//                + "|  _ \\ _   _| | _____ \n"
-//                + "| | | | | | | |/ / _ \\\n"
-//                + "| |_| | |_| |   <  __/\n"
-//                + "|____/ \\__,_|_|\\_\\___|\n";
-//        System.out.println("Hello from\n" + logo);
+        String logo = " ____        _        \n"
+                + "|  _ \\ _   _| | _____ \n"
+                + "| | | | | | | |/ / _ \\\n"
+                + "| |_| | |_| |   <  __/\n"
+                + "|____/ \\__,_|_|\\_\\___|\n";
+        System.out.println("Welcome to: \n" + logo);
 
         Scanner sc = new Scanner(System.in);
 
@@ -16,13 +17,16 @@ public class Duke {
                 "\n     What can I do for you?" +
                 "\n    ____________________________________________________________");
 
-        String s = sc.nextLine();
-        while (!s.equalsIgnoreCase("bye")) {
+        
+
+        String input = sc.nextLine();
+
+        while (!input.equalsIgnoreCase("bye")) {
             System.out.println("    ____________________________________________________________");
             System.out.print("     ");
-            System.out.print(s);
+            System.out.print(input);
             System.out.println("\n    ____________________________________________________________");
-            s = sc.nextLine();
+            input = sc.nextLine();
         }
         System.out.println("    ____________________________________________________________\n" +
                 "     Bye. Hope to see you again soon!\n" +
