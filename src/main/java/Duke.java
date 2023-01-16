@@ -30,7 +30,7 @@ public class Duke {
                         targetTask.unmarkDone();
                         output = "Ok, I've marked this task as not done yet:";
                     }
-                    displayMsg(output + "\n" + targetTask.toString());
+                    displayMsg(output + "\n" + indentString(targetTask.toString(), 1));
                 } else {
                     dukeList.add(new Task(line));
                     displayMsg("added: " + line);
@@ -52,12 +52,22 @@ public class Duke {
     }
 
     public static void displayMsg(String msg) {
-        System.out.println(wrapMessageBorder(msg));
+        System.out.println(indentString(wrapMessageBorder(msg), 1));
     }
 
     public static String wrapMessageBorder(String msg) {
         String border = "____________________________________________________________";
         return border + "\n" + msg + "\n" + border;
+    }
+
+    public static String indentString(String msg, int indendationLevel) {
+        String indent = "  " .repeat(indendationLevel);
+        String[] lines = msg.split("\n");
+        StringBuilder result = new StringBuilder();
+        for (int i = 0; i < lines.length; i++) {
+            result.append(indent + lines[i] + (i + 1 < lines.length ? "\n" : ""));
+        }
+        return result.toString();
     }
 }
 
