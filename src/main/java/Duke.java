@@ -14,7 +14,8 @@ public class Duke {
                 + "| |_| | |_| |   <  __/\n"
                 + "|____/ \\__,_|_|\\_\\___|\n";
         System.out.println("Welcome to: \n" + logo);
-        System.out.println("    ____________________________________________________________" +
+        System.out.println(
+                "    ____________________________________________________________" +
                 "\n     Hello! I'm Duke" +
                 "\n     What can I do for you?" +
                 "\n    ____________________________________________________________");
@@ -30,6 +31,15 @@ public class Duke {
                         System.out.println("     " + i + ". " + tasks[i].toString());
                     }
                     System.out.println("    ____________________________________________________________");
+                    break;
+                case "mark":
+                    int selectedNum = Integer.parseInt(inputArr[1]);
+                    tasks[selectedNum].markDone();
+                    System.out.println(
+                            "    ____________________________________________________________" +
+                            "\n     Nice! I've marked this task as done:" +
+                            tasks[selectedNum].toString() +
+                            "\n    ____________________________________________________________");
                     break;
                 default:
                     tasks[taskNum] = new Task(input);
