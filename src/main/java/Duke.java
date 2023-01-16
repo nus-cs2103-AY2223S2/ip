@@ -3,6 +3,8 @@ import java.io.*;
 
 public class Duke {
     public static String HOR_BAR = "    ✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦";
+    public  String[] listOfTasks = new String[100];
+
     public static void initialise() {
         /* Greetings from application */
         System.out.println(HOR_BAR);
@@ -13,23 +15,14 @@ public class Duke {
     }
 
     /**
-     * This method reads in a command and does the following:
-     * 1. if user inputs "bye" command, prints exit message and exit
-     *      the function
-     * 2. else repeats the command back and loop back into function
-     */
-//    private static boolean handleCommand(String command) {
-//
-//    }
-
-    /**
      * This method takes in a command and repeats it back.
      * @param commmand
      *          Command to be repeated back to interface.
      */
-    private static void repeat(String command) {
-        System.out.println(HOR_BAR + "\n    " + command + "\n" + HOR_BAR);
+    private static void addText(String command) {
+        System.out.println(HOR_BAR + "\n    " + "added: " + command + "\n" + HOR_BAR);
     }
+
     public static void main(String[] args) throws IOException {
         /* Initialise BufferedReader */
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
@@ -42,7 +35,7 @@ public class Duke {
                    System.out.println(HOR_BAR + "\n" + "    Bye! Please come back again ><!");
                    break;
                } else {
-                   repeat(command);
+                   addText(command);
                }
            }
         } finally {
