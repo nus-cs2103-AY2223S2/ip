@@ -63,6 +63,11 @@ public class KiraBot {
                     database.store(event);
                     printTaskFormatString(event, database);
                     break;
+                case "delete":
+                    index = Integer.valueOf(input[1]);
+                    output = database.delete(index);
+                    printFormatString(output);
+                    break;
                 default:
                     printFormatString("Sorry, I don't know this command :C\n");
                     break;

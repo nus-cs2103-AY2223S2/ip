@@ -74,6 +74,17 @@ Here is all the items stored~
 =================================== 
 
 ============= KiraBot ============= 
+This task has been removed~
+[E][ ] gym(from: morning to: night)
+=================================== 
+
+============= KiraBot ============= 
+Here is all the items stored~
+1.[T][ ] CS2103T
+2.[D][x] sleep(by: 9pm)
+=================================== 
+
+============= KiraBot ============= 
 Bye! Have a nice day :)
 =================================== 
 
