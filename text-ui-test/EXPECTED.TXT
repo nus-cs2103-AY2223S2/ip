@@ -1,7 +1,61 @@
-Hello from
- ____        _        
-|  _ \ _   _| | _____ 
-| | | | | | | |/ / _ \
-| |_| | |_| |   <  __/
-|____/ \__,_|_|\_\___|
-
+------------------------------
+    Hello! I'm TunaBot
+    What can I do for you?
+------------------------------
+------------------------------
+BLUB! There are 0 task(s)!
+------------------------------
+------------------------------
+    Blub! added: 
+[T][ ] read book
+    Blub! You have 1 tasks now!
+------------------------------
+------------------------------
+    Blub! added: 
+[E][ ] bookfest (from: today to tomorrow)
+    Blub! You have 2 tasks now!
+------------------------------
+------------------------------
+    Blub! added: 
+[D][ ] return book (by thursday)
+    Blub! You have 3 tasks now!
+------------------------------
+------------------------------
+BLUB! There are 3 task(s)!
+    1. [T][ ] read book
+    2. [E][ ] bookfest (from: today to tomorrow)
+    3. [D][ ] return book (by thursday)
+------------------------------
+------------------------------
+    Blub! i have marked this as done!
+[T][X] read book
+------------------------------
+------------------------------
+BLUB! There are 3 task(s)!
+    1. [T][X] read book
+    2. [E][ ] bookfest (from: today to tomorrow)
+    3. [D][ ] return book (by thursday)
+------------------------------
+------------------------------
+    Blub! i have marked this as done!
+[E][X] bookfest (from: today to tomorrow)
+------------------------------
+------------------------------
+BLUB! There are 3 task(s)!
+    1. [T][X] read book
+    2. [E][X] bookfest (from: today to tomorrow)
+    3. [D][ ] return book (by thursday)
+------------------------------
+------------------------------
+    Blub! i have marked this as not done!
+[T][ ] read book
+------------------------------
+------------------------------
+BLUB! There are 3 task(s)!
+    1. [T][ ] read book
+    2. [E][X] bookfest (from: today to tomorrow)
+    3. [D][ ] return book (by thursday)
+------------------------------
+------------------------------
+    Bye! Blub blub!
+------------------------------
