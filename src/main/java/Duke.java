@@ -15,6 +15,7 @@ public class Duke {
         while(true) {
             System.out.print(">>> ");
             String cmd = sc.nextLine();
+            System.out.println();
             if (cmd.matches("^bye$")) {
                 System.out.println("Bye. Hope to see you again soon!");
                 break;
@@ -45,6 +46,7 @@ public class Duke {
             } else {
                 System.out.println("I don't quite understand what you mean.");
             }
+            System.out.println();
         }
         sc.close();
     }

@@ -1,0 +1,11 @@
+list
+todo mark exam papers
+deadline complete CS2103T IP /by week 2
+event taekwondo training /from monday 7pm /to 9pm
+list
+mark 1
+mark 3
+list
+unmark 3
+list
+bye

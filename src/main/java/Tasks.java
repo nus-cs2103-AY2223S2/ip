@@ -53,9 +53,13 @@ public class Tasks {
 
   @Override
   public String toString() {
-    StringBuilder sb = new StringBuilder();
+    StringBuilder sb = new StringBuilder("");
     for (int i = 0; i < tasks.size(); i++) {
-      sb.append(String.format("%d. %s\n", i+1, tasks.get(i)));
+      sb.append(String.format("%d. %s", i+1, tasks.get(i)));
+
+      if (i < tasks.size() - 1) {
+        sb.append('\n');
+      }
     }
     return sb.toString();
   }
