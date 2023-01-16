@@ -6,6 +6,7 @@ import duke.command.Command;
 import duke.command.CommandResponse;
 import duke.command.ListCommand;
 import duke.command.MarkCommand;
+import duke.command.UnmarkCommand;
 import duke.task.Task;
 
 import java.util.ArrayList;
@@ -20,6 +21,7 @@ public class Duke {
     private final static ByeCommand byeCommand = new ByeCommand();
     private final static ListCommand listCommand = new ListCommand();
     private final static MarkCommand markCommand = new MarkCommand();
+    private final static UnmarkCommand unmarkCommand = new UnmarkCommand();
 
     private static List<Task> tasks = new ArrayList<Task>();
 
@@ -74,6 +76,8 @@ public class Duke {
                 return listCommand;
             case "mark":
                 return markCommand;
+            case "unmark":
+                return unmarkCommand;
             default:
                 return addCommand;
         }
