@@ -1,5 +1,6 @@
 import java.util.Scanner;
 
+// A chatbot
 public class Duke {
 
     private static Scanner scanner = new Scanner(System.in);
@@ -55,6 +56,7 @@ public class Duke {
         printMessage("Goodbye. I hope to see you again.");
     }
 
+    // Main method
     public static void main(String[] args) {
         greet();
         acceptCommands();
