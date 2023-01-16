@@ -34,4 +34,8 @@ public class DateUtil {
     public static String dateToString(LocalDateTime date) {
         return date.format(DateTimeFormatter.ISO_LOCAL_DATE_TIME);
     }
+
+    public static String dateToPrettyString(LocalDateTime date) {
+        return date.format(DateTimeFormatter.ofPattern("MMM d yyyy H:m"));
+    }
 }

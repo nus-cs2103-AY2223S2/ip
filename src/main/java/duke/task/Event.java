@@ -37,9 +37,9 @@ public class Event extends Task {
     @Override
     public String toString() {
         return "[E]" + super.toString() + " (from: " 
-            + DateUtil.dateToString(from)
+            + DateUtil.dateToPrettyString(from)
             + " to: " 
-            + DateUtil.dateToString(to)
+            + DateUtil.dateToPrettyString(to)
             + ")";
     }
 }
