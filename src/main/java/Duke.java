@@ -28,35 +28,65 @@ public class Duke {
                     break;
 
                 case "deadline": {
+                    try {
                     String rest = input.substring(command.length());
+                    if (rest.equals("")) {
+                        throw new DukeException("____________________________________________________________\n" +
+                                " ☹ OOPS!!! The description or time/date of a deadline cannot be empty.\n" +
+                                "____________________________________________________________");
+                    }
                     String[] arr = rest.split("/");
                     Deadline item = new Deadline(arr[0], arr[1].substring(3));
                     tasks.add(item);
                     System.out.println("____________________________________________________________\n Got it. I've added this task: \n"
                             + "   " + item + "\n Now you have " + tasks.size() + " tasks in the list."
                             + "\n____________________________________________________________");
+                    }
+                    catch(DukeException e) {
+                        System.out.println(e.getMessage());
+                    }
                     break;
                 }
 
                 case "todo": {
-                    String rest = input.substring(command.length());
-                    String[] arr = rest.split("/");
-                    Todo item = new Todo(arr[0]);
-                    tasks.add(item);
-                    System.out.println("____________________________________________________________\n Got it. I've added this task: \n"
-                            + "   " + item + "\n Now you have " + tasks.size() + " tasks in the list."
-                            + "\n____________________________________________________________");
+                    try {
+                        String rest = input.substring(command.length());
+                        if (rest.equals("")) {
+                            throw new DukeException("____________________________________________________________\n" +
+                                    " ☹ OOPS!!! The description of a todo cannot be empty.\n" +
+                                    "____________________________________________________________");
+                        }
+                        String[] arr = rest.split("/");
+                        Todo item = new Todo(arr[0]);
+                        tasks.add(item);
+                        System.out.println("____________________________________________________________\n Got it. I've added this task: \n"
+                                + "   " + item + "\n Now you have " + tasks.size() + " tasks in the list."
+                                + "\n____________________________________________________________");
+                    }
+                    catch(DukeException e) {
+                        System.out.println(e.getMessage());
+                    }
                     break;
                 }
 
                 case "event": {
+                    try{
                     String rest = input.substring(command.length());
+                    if (rest.equals("")) {
+                        throw new DukeException("____________________________________________________________\n" +
+                                " ☹ OOPS!!! The description or time/date of an event cannot be empty.\n" +
+                                "____________________________________________________________");
+                    }
                     String[] arr = rest.split("/");
                     Event item = new Event(arr[0], arr[1].substring(5), arr[2].substring(3));
                     tasks.add(item);
                     System.out.println("____________________________________________________________\n Got it. I've added this task: \n"
                             + "   " + item + "\n Now you have " + tasks.size() + " tasks in the list."
                             + "\n____________________________________________________________");
+                    }
+                    catch(DukeException e) {
+                        System.out.println(e.getMessage());
+                    }
                     break;
                 }
                 case "mark": {
@@ -79,9 +109,14 @@ public class Duke {
                     break;
                 }
                 default:
-                    tasks.add(new Task(input));
-                    System.out.println("____________________________________________________________\n added: "
-                            + input + "\n____________________________________________________________");
+                    try{
+                        throw new DukeException("____________________________________________________________\n" +
+                                " ☹ OOPS!!! I'm sorry, but I don't know what that means :-(\n" +
+                                "____________________________________________________________");
+                    }
+                    catch (DukeException e) {
+                        System.out.println(e.getMessage());
+                    }
                     break;
             }
         }
