@@ -1,9 +1,5 @@
 package duke.storage;
 
-import duke.exception.InvalidInputException;
-import duke.exception.StorageFileIOException;
-import duke.task.*;
-
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileWriter;
@@ -12,6 +8,14 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.time.LocalDate;
 import java.util.Scanner;
+
+import duke.exception.InvalidInputException;
+import duke.exception.StorageFileException;
+import duke.task.DeadlineTask;
+import duke.task.DukeTask;
+import duke.task.EventTask;
+import duke.task.TaskList;
+import duke.task.TodoTask;
 
 /**
  * A Storage object that handles the saving and loading of the TaskList.
@@ -38,11 +42,11 @@ public class Storage {
         Path path = Paths.get(filePath);
         int len = path.getNameCount();
 
-        this.folder = Paths.get(rootPath, path.subpath(0, len-1).toString());
+        this.folder = Paths.get(rootPath, path.subpath(0, len - 1).toString());
         this.storageFile = new File(this.filePath);
     }
 
-    public TaskList load() throws InvalidInputException, StorageFileIOException {
+    public TaskList load() throws InvalidInputException, StorageFileException {
         TaskList list = new TaskList();
         if (!storageFile.exists()) {
             return list;
@@ -82,8 +86,8 @@ public class Storage {
             }
             return list;
         } catch (FileNotFoundException e) {
-            throw new StorageFileIOException("☹ OOPS!!! There's something wrong " +
-                    "when reading the Storage list");
+            throw new StorageFileException("☹ OOPS!!! There's something wrong "
+                    + "when reading the Storage list");
         }
     }
 

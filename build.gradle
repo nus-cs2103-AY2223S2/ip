@@ -34,3 +34,7 @@ run{
     standardInput = System.in
     standardOutput = System.out
 }
+
+checkstyle {
+    toolVersion = '10.2'
+}

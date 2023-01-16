@@ -8,19 +8,26 @@ import java.util.Scanner;
  */
 
 public class Ui {
-    private final int HorizontalLineLength;
+    private final int horizontalLineLength;
     private final int indentSpace;
 
     /**
      * Constructor that sets HorizontalLineLength to be 70 and IndentSpace to be 4 by default.
      */
     public Ui() {
-        this.HorizontalLineLength = 70;
+        this.horizontalLineLength = 70;
         this.indentSpace = 4;
     }
 
-    public Ui(int HorizontalLineLength, int indentSpace) {
-        this.HorizontalLineLength = HorizontalLineLength;
+    /**
+     * Constructor that sets HorizontalLineLength to be the given length
+     * and IndentSpace to be the given indent space.
+     *
+     * @param horizontalLineLength The length of the horizontal line to be set
+     * @param indentSpace The length of the indent space to be set
+     */
+    public Ui(int horizontalLineLength, int indentSpace) {
+        this.horizontalLineLength = horizontalLineLength;
         this.indentSpace = indentSpace;
     }
 
@@ -47,10 +54,13 @@ public class Ui {
     public void displayWithBar(String message) {
         String underscore = "_";
         String space = " ";
-        String bar = space.repeat(indentSpace) + underscore.repeat(this.HorizontalLineLength);
+        String bar = space.repeat(indentSpace) + underscore.repeat(this.horizontalLineLength);
         System.out.println(bar + "\n" + indent(message) + "\n" + bar + "\n");
     }
 
+    /**
+     * Display the logo and the welcome message.
+     */
     public void showWelcome() {
         String logo = " ____        _        \n"
                 + "|  _ \\ _   _| | _____ \n"
@@ -64,6 +74,11 @@ public class Ui {
         this.displayWithBar(greetingMessage);
     }
 
+    /**
+     * Read the user's input from the console.
+     *
+     * @return The user's input as a String.
+     */
     public String readCommand() {
         Scanner sc = new Scanner(System.in);
         return sc.nextLine();

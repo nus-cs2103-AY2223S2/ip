@@ -1,11 +1,11 @@
 package duke.command;
 
+import java.io.IOException;
+
 import duke.display.Ui;
 import duke.exception.DukeException;
 import duke.storage.Storage;
 import duke.task.TaskList;
-
-import java.io.IOException;
 
 /**
  * An abstract instruction class encapsulating a user input instruction in Duke, which can be extended

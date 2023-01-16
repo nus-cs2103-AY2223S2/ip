@@ -1,11 +1,11 @@
 package duke.command;
 
+import java.io.IOException;
+
 import duke.display.Ui;
 import duke.storage.Storage;
 import duke.task.DukeTask;
 import duke.task.TaskList;
-
-import java.io.IOException;
 
 /**
  * A more specific instruction class that encapsulates the action of adding a task
