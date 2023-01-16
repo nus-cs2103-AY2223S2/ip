@@ -2,11 +2,13 @@ import java.util.*;
 
 public class Duke {
     private Scanner scanner;
-    private Task task;
+    private TaskList list;
+    private Router router;
 
     public Duke(Scanner scanner) {
         this.scanner = scanner;
-        this.task = new Task();
+        this.list = new TaskList();
+        this.router = new Router(list);
     }
 
     public void start() {
@@ -14,31 +16,17 @@ public class Duke {
 
         while(scanner.hasNext()) {
             String input = scanner.nextLine();
-
-            if(input.equals("bye")) {
-                this.task.bye();
+            boolean isExit = router.handleAndSignalExit(input);
+            if(isExit) {
+                this.bye();
                 scanner.close();
                 return;
             }
-
-            else if(input.equals("list")) {
-                this.task.list();
-
-            }
-            else if(input.contains("mark")) {
-                String[] splitInput = input.split(" ");
-                int inputIndex = Integer.parseInt(splitInput[1]);
-                this.task.mark(inputIndex);
-            }
-            else if(input.contains("unmark")) {
-                String[] splitInput = input.split(" "); 
-                int inputIndex = Integer.parseInt(splitInput[1]);
-                this.task.unmark(inputIndex);
-            }
-            else {
-                this.task.add(input);
-            }
         }
+    }
+
+    public void bye() {
+        System.out.println("Duke: " + "Bye" + ". Hope I never see you again!");
     }
 
     public static void main(String[] args) {
