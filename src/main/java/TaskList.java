@@ -3,14 +3,24 @@ import java.util.List;
 import java.util.stream.IntStream;
 
 public class TaskList {
-    private final List<String> lst;
+    private final List<Task> lst;
 
     public TaskList() {
         this.lst = new ArrayList<>();
     }
 
     public void addTask(String task) {
-        this.lst.add(task);
+        this.lst.add(new Task(task));
+    }
+
+    public void markTask(int number) {
+        int index = number - 1;
+        this.lst.set(index, this.lst.get(index).markDone());
+    }
+
+    public void unmarkTask(int number) {
+        int index = number - 1;
+        this.lst.set(index, this.lst.get(index).markNotDone());
     }
     
     @Override
