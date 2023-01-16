@@ -14,7 +14,7 @@ public class Book {
 
     private static final Scanner input = new Scanner(System.in);
     private static String command = "";
-    private static String[] list = new String[100];
+    private static Task[] list = new Task[100];
     private static int index = 0;
     public static void main(String[] args) {
         System.out.print(LINE + "Good day! This is\n" + LOGO + "What may I help you with?\n" + LINE);
@@ -27,14 +27,26 @@ public class Book {
     }
 
     private static void parse(String text) {
-        if (text.equals("list")) {
+        String[] inputs = text.split(" ", 2);
+        if (inputs[0].equals("list")) {
             System.out.print(LINE);
             for (int i = 0; i < index; i++) {
-                System.out.println((i+ 1) + ". " + list[i]);
+                System.out.println((i + 1) + ". " + list[i]);
             }
             System.out.print(LINE);
+        } else if (inputs[0].equals("mark") || inputs[0].equals("unmark")) {
+            int taskIndex = Integer.parseInt(inputs[1]) - 1;
+            if (inputs[0].equals("mark")) {
+                list[taskIndex].mark();
+                System.out.println(LINE + "The following task has been marked as done:\n"
+                        + list[taskIndex] + "\n" + LINE);
+            } else {
+                list[taskIndex].unmark();
+                System.out.println(LINE + "The following task has been marked as not done:\n"
+                        + list[taskIndex] + "\n" + LINE);
+            }
         } else {
-            list[index++] = text;
+            list[index++] = new Task(text);
             System.out.print(LINE + "added: " + command + "\n" + LINE);
         }
     }
