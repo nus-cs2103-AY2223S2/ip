@@ -1,10 +1,8 @@
 import java.util.Scanner;
-import java.util.ArrayList;
 
 public class Duke {
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
-        //ArrayList<String> tasks = new ArrayList<String>();
         Task[] tasks = new Task[100];
         int taskNum = 0;
 
