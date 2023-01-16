@@ -1,9 +1,11 @@
-public class Task {
+public abstract class Task {
     protected String description;
     protected boolean isDone = false;
+    private String eventSymbol;
 
-    public Task(String description) {
+    public Task(String description, String eventSymbol) {
         this.description = description;
+        this.eventSymbol = eventSymbol;
     }
 
     public String getStatusIcon() {

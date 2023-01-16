@@ -5,7 +5,7 @@ public class TaskList {
     List<Task> list = new ArrayList<>();
 
     public void addTask(String text) {
-        list.add(new Task(text));
+        list.add(new ToDoTask(text));
     }
 
 
