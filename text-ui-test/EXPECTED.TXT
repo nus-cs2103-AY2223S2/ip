@@ -1,7 +1,100 @@
-Hello from
- ____        _        
-|  _ \ _   _| | _____ 
-| | | | | | | |/ / _ \
-| |_| | |_| |   <  __/
-|____/ \__,_|_|\_\___|
-
+____________________________________________________________
+Greetings! JEDI GRANDMASTER YODA here
+For you, What can I do?
+____________________________________________________________
+____________________________________________________________
+Got it. Added this task, I have:
+ [E][ ] nus career fair (from: 2pm to: 8pm)
+1 tasks in the list, you have now.
+____________________________________________________________
+____________________________________________________________
+Got it. Added this task, I have:
+ [E][ ] ma2104 lecture @ lt32 (from: Tuesday 12pm to: Tuesday 2pm)
+2 tasks in the list, you have now.
+____________________________________________________________
+____________________________________________________________
+Got it. Added this task, I have:
+ [D][ ] cs4230 assignment (by: by :-) 8pm)
+3 tasks in the list, you have now.
+____________________________________________________________
+____________________________________________________________
+Got it. Added this task, I have:
+ [T][ ] buy kpop concert tickets
+4 tasks in the list, you have now.
+____________________________________________________________
+____________________________________________________________
+Got it. Added this task, I have:
+ [T][ ] rush individual project
+5 tasks in the list, you have now.
+____________________________________________________________
+____________________________________________________________
+Got it. Added this task, I have:
+ [D][ ] buy groceries (by: by 6pm Sat 5 Aug 2023)
+6 tasks in the list, you have now.
+____________________________________________________________
+____________________________________________________________
+1.[E][ ] nus career fair (from: 2pm to: 8pm)
+2.[E][ ] ma2104 lecture @ lt32 (from: Tuesday 12pm to: Tuesday 2pm)
+3.[D][ ] cs4230 assignment (by: by :-) 8pm)
+4.[T][ ] buy kpop concert tickets
+5.[T][ ] rush individual project
+6.[D][ ] buy groceries (by: by 6pm Sat 5 Aug 2023)
+____________________________________________________________
+____________________________________________________________
+Nice! Marked this task as done, I have:
+ [E][X] ma2104 lecture @ lt32 (from: Tuesday 12pm to: Tuesday 2pm)
+____________________________________________________________
+____________________________________________________________
+Nice! Marked this task as done, I have:
+ [D][X] cs4230 assignment (by: by :-) 8pm)
+____________________________________________________________
+____________________________________________________________
+Nice! Marked this task as done, I have:
+ [T][X] rush individual project
+____________________________________________________________
+____________________________________________________________
+Ok! Marked this task as not done yet, I have:
+ [E][ ] ma2104 lecture @ lt32 (from: Tuesday 12pm to: Tuesday 2pm)
+____________________________________________________________
+____________________________________________________________
+1.[E][ ] nus career fair (from: 2pm to: 8pm)
+2.[E][ ] ma2104 lecture @ lt32 (from: Tuesday 12pm to: Tuesday 2pm)
+3.[D][X] cs4230 assignment (by: by :-) 8pm)
+4.[T][ ] buy kpop concert tickets
+5.[T][X] rush individual project
+6.[D][ ] buy groceries (by: by 6pm Sat 5 Aug 2023)
+____________________________________________________________
+____________________________________________________________
+Got it. Added this task, I have:
+ [D][ ] do cs2101 reflection (by: by thursday 19 feb 2023 8am)
+7 tasks in the list, you have now.
+____________________________________________________________
+____________________________________________________________
+1.[E][ ] nus career fair (from: 2pm to: 8pm)
+2.[E][ ] ma2104 lecture @ lt32 (from: Tuesday 12pm to: Tuesday 2pm)
+3.[D][X] cs4230 assignment (by: by :-) 8pm)
+4.[T][ ] buy kpop concert tickets
+5.[T][X] rush individual project
+6.[D][ ] buy groceries (by: by 6pm Sat 5 Aug 2023)
+7.[D][ ] do cs2101 reflection (by: by thursday 19 feb 2023 8am)
+____________________________________________________________
+____________________________________________________________
+Nice! Marked this task as done, I have:
+ [D][X] buy groceries (by: by 6pm Sat 5 Aug 2023)
+____________________________________________________________
+____________________________________________________________
+Ok! Marked this task as not done yet, I have:
+ [D][ ] cs4230 assignment (by: by :-) 8pm)
+____________________________________________________________
+____________________________________________________________
+1.[E][ ] nus career fair (from: 2pm to: 8pm)
+2.[E][ ] ma2104 lecture @ lt32 (from: Tuesday 12pm to: Tuesday 2pm)
+3.[D][ ] cs4230 assignment (by: by :-) 8pm)
+4.[T][ ] buy kpop concert tickets
+5.[T][X] rush individual project
+6.[D][X] buy groceries (by: by 6pm Sat 5 Aug 2023)
+7.[D][ ] do cs2101 reflection (by: by thursday 19 feb 2023 8am)
+____________________________________________________________
+____________________________________________________________
+Be Gone, You Must. May the Force be with You!
+____________________________________________________________

@@ -7,7 +7,7 @@ public class Duke {
                             + "| | | | | | | |/ / _ \\\n"
                             + "| |_| | |_| |   <  __/\n"
                             + "|____/ \\__,_|_|\\_\\___|\n";
-    final static String WELCOME_MSG = "Greetings!\n" + LOGO + "this is\n" + "For you, What can I do?";
+    final static String WELCOME_MSG = "Greetings! JEDI GRANDMASTER YODA here\n" + "For you, What can I do?";
     final static String BANNER = "____________________________________________________________";
     final static String BYE_MSG = "Be Gone, You Must. May the Force be with You!";
 
@@ -51,7 +51,7 @@ public class Duke {
      * Displays the welcome message when launched.
      */
     public static void displayWelcomeMessage() {
-        System.out.println(String.format("%s\n%s\n%s\n", BANNER, WELCOME_MSG, BANNER));
+        System.out.println(String.format("%s\n%s\n%s", BANNER, WELCOME_MSG, BANNER));
     }
 
     /**
