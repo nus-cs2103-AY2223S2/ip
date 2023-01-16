@@ -1,5 +1,7 @@
 package duke.command;
 
+import java.io.IOException;
+
 import duke.display.Ui;
 import duke.exception.DukeException;
 import duke.exception.InvalidInputException;
@@ -46,9 +48,14 @@ public class DeleteCommand extends Command {
      * Remove a particular task with the given index in the TaskList and display
      * the relevant information of the task and the remaining TaskList.
      * @param tasks The user TaskList that contains all the task to be manipulated
+<<<<<<< HEAD
      * @param ui The ui Object used to display information
      * @param storage The Storage Object used to save and load the TaskList
      * @throws DukeException Throws Exception when the user inputs invalid instruction
+=======
+     * @throws DukeException Throws exception if the list is empty
+     *     or the given index is our of range
+>>>>>>> branch-A-CodingStandard
      */
     @Override
     public void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException{
@@ -61,9 +68,9 @@ public class DeleteCommand extends Command {
                     + tasks.remainingTasks() + "]";
             throw new InvalidInputException(errorMessage + "\nPlease input a valid index");
         } else {
-            ui.displayWithBar("Noted. I've removed this task:\n " +
-                    tasks.getTask(taskIndex) + "\nNow you have " +
-                    (tasks.remainingTasks() - 1) + " tasks in the list.");
+            ui.displayWithBar("Noted. I've removed this task:\n "
+                    + tasks.getTask(taskIndex) + "\nNow you have "
+                    + (tasks.remainingTasks() - 1) + " tasks in the list.");
             tasks.deleteTask(this.taskIndex);
         }
         storage.save(tasks);

@@ -1,14 +1,17 @@
 package duke.task;
 
-import duke.exception.InvalidInputException;
-
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
+<<<<<<< HEAD
 /**
  * A DeadlineTask that encapsulates the information and starting and ending
  * dates of a Deadline Task.
  */
+=======
+import duke.exception.InvalidInputException;
+
+>>>>>>> branch-A-CodingStandard
 public class EventTask extends DukeTask {
     private final LocalDate from;
     private final LocalDate to;
@@ -44,8 +47,8 @@ public class EventTask extends DukeTask {
 
     @Override
     public String toString() {
-        return "[E]" + super.toString() +
-                " (from: " + this.from.format(DateTimeFormatter.ofPattern("MMM d yyyy")) +
-                " to: " + this.to.format(DateTimeFormatter.ofPattern("MMM d yyyy")) + ")";
+        return "[E]" + super.toString()
+                + " (from: " + this.from.format(DateTimeFormatter.ofPattern("MMM d yyyy"))
+                + " to: " + this.to.format(DateTimeFormatter.ofPattern("MMM d yyyy")) + ")";
     }
 }

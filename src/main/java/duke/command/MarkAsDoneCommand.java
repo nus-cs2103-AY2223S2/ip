@@ -1,5 +1,7 @@
 package duke.command;
 
+import java.io.IOException;
+
 import duke.display.Ui;
 import duke.exception.DukeException;
 import duke.exception.InvalidInputException;
@@ -51,22 +53,23 @@ public class MarkAsDoneCommand extends Command {
      * @param ui The ui Object used to display information
      * @param storage The Storage Object used to save and load the TaskList
      * @throws DukeException Throws exception if the list is empty
-     * or the given index is our of range
+     *     or the given index is our of range
      */
     @Override
     public void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
         if (isEmpty(tasks)) {
             String errorMessage = "☹ OOPS!!! Your task list is currently empty";
             throw new InvalidInputException(errorMessage + "\nPlease add in more tasks");
-        } if (!isValidIndex(tasks)) {
+        }
+        if (!isValidIndex(tasks)) {
             String errorMessage = "☹ OOPS!!! The input index is not within the range of [1, "
                     + tasks.remainingTasks() + "]";
             throw new InvalidInputException(errorMessage + "\nPlease input a valid index");
         } else {
             DukeTask currentTask = tasks.getTask(this.taskIndex);
             currentTask.markAsDone();
-            ui.displayWithBar("Nice! I've marked this task as done:\n " +
-                    currentTask);
+            ui.displayWithBar("Nice! I've marked this task as done:\n "
+                    + currentTask);
         }
         storage.save(tasks);
     }

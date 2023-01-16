@@ -1,17 +1,32 @@
 package duke;
 
+import java.io.IOException;
+
+import duke.command.Command;
 import duke.display.Ui;
-import duke.exception.*;
-import duke.command.*;
+import duke.exception.DukeException;
+import duke.exception.InvalidInputException;
+import duke.exception.StorageFileException;
 import duke.parser.Parser;
 import duke.storage.Storage;
 import duke.task.TaskList;
 
+<<<<<<< HEAD
+=======
+/**
+ * The main Duke class to run
+ */
+>>>>>>> branch-A-CodingStandard
 public class Duke {
     private final Storage storage;
     private TaskList list;
     private final Ui ui;
 
+    /**
+     * The constructor that takes in a String filePath that specifies the path for the storage file.
+     *
+     * @param filePath Specifies the path for the storage file
+     */
     public Duke(String filePath) {
         ui = new Ui();
         storage = new Storage(filePath);
@@ -23,12 +38,15 @@ public class Duke {
         } catch (InvalidInputException e) {
             ui.displayWithBar(e.getMessage());
             list = new TaskList();
-        } catch (StorageFileIOException e) {
+        } catch (StorageFileException e) {
             ui.displayWithBar(e.getMessage());
             throw new RuntimeException(e);
         }
     }
 
+    /**
+     * Executes the Duke program.
+     */
     public void run() {
         ui.showWelcome();
         boolean isExit = false;

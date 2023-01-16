@@ -5,7 +5,7 @@ package duke.exception;
  * by more specific exceptions like invalidInputException
  */
 
-public class DukeException extends Exception{
+public class DukeException extends Exception {
     /**
      * Constructor for DukeException with the error message to be printed.
      *
