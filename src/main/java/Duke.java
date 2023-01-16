@@ -1,4 +1,6 @@
 public class Duke {
+    private static final int INDENT_LEVEL = 4;
+
     public static void main(String[] args) {
         String logo = " ____        _        \n"
                 + "|  _ \\ _   _| | _____ \n"
@@ -9,9 +11,12 @@ public class Duke {
     }
 
     private static void say(String whatToSay) {
+        String indentation = " ".repeat(Duke.INDENT_LEVEL);
         String horizontalLine = "_".repeat(60);
-        System.out.println(horizontalLine);
-        System.out.println(whatToSay);
-        System.out.println(horizontalLine + '\n');
+        String indentedInput = whatToSay.replaceAll("(?<=^|\n)", indentation);
+        
+        System.out.println(indentation + horizontalLine);
+        System.out.println(indentedInput);
+        System.out.println(indentation + horizontalLine + '\n');
     }
 }
