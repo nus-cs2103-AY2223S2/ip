@@ -2,7 +2,6 @@ import java.io.InputStreamReader;
 import java.io.*;
 import java.util.*;
 
-
 public class Duke {
 
     static List<Task> storedText = new ArrayList<Task>();
@@ -32,12 +31,7 @@ public class Duke {
                 for (int i = 0; i < storedText.size(); i++) {
                     Integer currIndex = i + 1;
                     Task currTask = storedText.get(i);
-                    String toUse = "";
-                    if (currTask.done) {
-                        toUse = currIndex.toString() + ".[X] " + currTask.name;
-                    } else {
-                        toUse = currIndex.toString() + ".[ ] " + currTask.name;                        
-                    }
+                    String toUse = currIndex.toString() + "." + currTask.toString();
                     System.out.println(toUse);
                 }
                 userInput = brToUse.readLine();
@@ -60,6 +54,51 @@ public class Duke {
                 currTask.setUndone();
                 String toOutput = "Ok, I've marked this task as not done yet:\n" + "[ ] " + currTask.name;
                 System.out.println(toOutput);
+                userInput = brToUse.readLine();
+                continue;
+            }
+
+            if (userInput.startsWith("todo")) {
+                String useForInit = userInput.substring(5);
+                Task addTask = new ToDo(useForInit);
+                storedText.add(addTask);
+                String toPrint = "";
+                if (storedText.size() == 1) {
+                    toPrint = "Got it. I've added this task:\n  " + addTask.toString() + "\nNow you have " + storedText.size() + " task in the list.";
+                } else {
+                    toPrint = "Got it. I've added this task:\n  " + addTask.toString() + "\nNow you have " + storedText.size() + " tasks in the list.";                   
+                }
+                System.out.println(toPrint);
+                userInput = brToUse.readLine();
+                continue;
+            }
+
+            if (userInput.startsWith("deadline")) {
+                String useForInit = userInput.substring(9);
+                Task addTask = new Deadlines(useForInit);
+                storedText.add(addTask);
+                String toPrint = "";
+                if (storedText.size() == 1) {
+                    toPrint = "Got it. I've added this task:\n  " + addTask.toString() + "\nNow you have " + storedText.size() + " task in the list.";
+                } else {
+                    toPrint = "Got it. I've added this task:\n  " + addTask.toString() + "\nNow you have " + storedText.size() + " tasks in the list.";                   
+                }
+                System.out.println(toPrint);
+                userInput = brToUse.readLine();
+                continue;
+            }
+
+            if (userInput.startsWith("event")) {
+                String useForInit = userInput.substring(6);
+                Task addTask = new Events(useForInit);
+                storedText.add(addTask);
+                String toPrint = "";
+                if (storedText.size() == 1) {
+                    toPrint = "Got it. I've added this task:\n  " + addTask.toString() + "\nNow you have " + storedText.size() + " task in the list.";
+                } else {
+                    toPrint = "Got it. I've added this task:\n  " + addTask.toString() + "\nNow you have " + storedText.size() + " tasks in the list.";                   
+                }
+                System.out.println(toPrint);
                 userInput = brToUse.readLine();
                 continue;
             }
@@ -91,4 +130,68 @@ class Task {
         done = false;
     }
 
+}
+
+class ToDo extends Task {
+    
+    ToDo(String taskName) {
+        super(taskName);
+    }
+
+    @Override
+    public String toString() {
+        String toReturn = "";
+        if (this.done) {
+            toReturn = "[T][X] " + this.name;
+        } else {
+            toReturn = "[T][ ]" + this.name;
+        }
+        return toReturn;
+    }
+}
+
+class Deadlines extends Task {
+
+    String endsBy;
+
+    Deadlines(String taskName) {
+        super(taskName.split("/by ")[0]);
+        this.endsBy = taskName.split("/by ")[1];
+    }
+
+    @Override
+    public String toString() {
+        String toReturn = "";
+        if (this.done) {
+            toReturn = "[D][X] " + this.name + "(by: " + endsBy + ")";
+        } else {
+            toReturn = "[D][ ] " + this.name + "(by: " + endsBy + ")";            
+        }
+        return toReturn;
+    }
+}
+
+class Events extends Task {
+
+    String fromDetails;
+    String toDetails;
+
+    Events(String taskName) {
+        super(taskName.split("/from ")[0]);
+        String[] initialSplit = taskName.split("/from ");
+        String[] nextSplit = initialSplit[1].split("/to ");
+        this.fromDetails = nextSplit[0];
+        this.toDetails = nextSplit[1];
+    }
+
+    @Override
+    public String toString() {
+        String toReturn = "";
+        if (this.done) {
+            toReturn = "[E][X] " + this.name + " (from: " + this.fromDetails + "to: " + this.toDetails + ")";
+        } else {
+            toReturn = "[E][ ] " + this.name + " (from: " + this.fromDetails + "to: " + this.toDetails + ")";
+        }
+        return toReturn;
+    }
 }
