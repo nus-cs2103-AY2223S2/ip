@@ -16,11 +16,11 @@ public class Duke {
     private static final ArrayList<String> items= new ArrayList<>();
 
     private static final String greeting = "Welcome to Lavender Network! \n" +
-            "I'm Iris, your teenage chatbot. I've learnt from my seniors to store stuff. (Yay!)\n" +
+            "I'm Iris, your teenage chatbot. I've learnt from my seniors how to store stuff. (Yay!)\n" +
             "To store, type a word or phrase and press enter.\n" +
             "To see an inventory of everything you've stored, type \"list\".\n" +
-            "To close me, type \"bye\"." +
-            "Have fun making your inventory!\n";
+            "To close me, type \"bye\". \n" +
+            "Have fun making your inventory!";
 
     private static final String exitGreeting = "Bye! Hope to see you soon!";
 
