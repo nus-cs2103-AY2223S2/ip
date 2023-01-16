@@ -4,14 +4,14 @@ import java.util.Scanner;
 public class Duke {
     public static void main(String[] args) {
         String logo = "  /\\_/\\\n"
-                + " /◞   ◟\\ \n"
-                + "( ◕   ◕ )\n"
+                + " /\u25DE   \u25DF\\\n"
+                + "( \u25d5   \u25d5 )\n"
                 + " \\     /\n"
                 + "  \\   /\n"
                 + "   \\ /\n"
-                + "    ●\n";
+                + "    \u25CF\n";
         System.out.println(logo + "BorzAI\n"); // Intro
-        System.out.println("\tWhen all I do is for you, Kermie ♥\n"
+        System.out.println("\tWhen all I do is for you, Kermie \u2665\n"
                 + "\tWhat can I do for you?\n"); // Greeting
         Scanner scan = new Scanner(System.in); // Allow user input
         ArrayList<Task> taskList = new ArrayList<>(); // Create list
@@ -78,6 +78,6 @@ public class Duke {
             }
             System.out.println("\tNow you have " + taskList.size() + " tasks in the list.\n");
         }
-        System.out.println("\tWoof (╯ᆺ╰๑)"); // Outro
+        System.out.println("\tWoof (\u256F\u11BA\u2570\u0E51)"); // Outro
     }
 }
