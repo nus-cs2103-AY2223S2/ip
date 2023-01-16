@@ -18,6 +18,14 @@ public class Duke {
             return isDone ? "X" : " ";
         }
 
+        public void markAsDone() {
+            this.isDone = true;
+        }
+
+        public void unmark() {
+            this.isDone = false;
+        }
+
         @Override
         public String toString() {
             return "[" + this.getStatusIcon() + "] " + this.description;
@@ -55,31 +63,25 @@ public class Duke {
     }
 
     private static void echoCommand(String message) {
-        line();
         space();
         System.out.println(message);
-        line();
     }
 
-    private void addCommand(String message) {
-        line();
+    private void addTask(String message) {
         space();
         System.out.println("added: " + message);
         Task newTask = new Task(message);
         this.tasks[cnt] = newTask;
         this.cnt++;
-        line();
     }
 
-    private void displayLists() {
-        line();
+    private void displayTasks() {
         space();
-        System.out.println("Here are all of your tasks");
+        System.out.println("Here are all of your tasks:");
         for (int i = 0; i < this.cnt; i++) {
             space();
             System.out.println((i + 1) + "." + this.tasks[i]);
         }
-        line();
     }
     public static void main(String[] args) {
         Scanner scan = new Scanner(System.in);
@@ -91,8 +93,25 @@ public class Duke {
                 byeWords();
                 break;
             }
-            if (userCommand.equals("list")) chatBox.displayLists();
-            else chatBox.addCommand(userCommand);
+            line();
+            if (userCommand.equals("list")) chatBox.displayTasks();
+            else {
+                String[] parts = userCommand.split(" ");
+                if (parts[0].equals("mark")) {
+                    System.out.println("     Good job! I've marked this task as done:");
+                    int num = Integer.parseInt(parts[1]);
+                    chatBox.tasks[num - 1].markAsDone();
+                    space();
+                    System.out.println(chatBox.tasks[num - 1]);
+                } else if (parts[0].equals("unmark")) {
+                    System.out.println("     OK, I've marked this task as not done yet:");
+                    int num = Integer.parseInt(parts[1]);
+                    chatBox.tasks[num - 1].unmark();
+                    space();
+                    System.out.println(chatBox.tasks[num - 1]);
+                } else chatBox.addTask(userCommand);
+            }
+            line();
         }
         return ;
     }
