@@ -1,7 +1,49 @@
-Hello from
- ____        _        
-|  _ \ _   _| | _____ 
-| | | | | | | |/ / _ \
-| |_| | |_| |   <  __/
-|____/ \__,_|_|\_\___|
+___________________________
+Hello, I am Duke.
+What can I do for you?
+___________________________
+>___________________________
+Your tasks are:
 
+___________________________
+>___________________________
+added: [D][ ] eat some food (by: tomorrow)
+___________________________
+>___________________________
+Good job. You have finished this task:
+[D][X] eat some food (by: tomorrow)
+___________________________
+>___________________________
+added: [D][ ] hw (by: 11.00pm)
+___________________________
+>___________________________
+added: [T][ ] cca
+___________________________
+>___________________________
+added: [E][ ] go toilet (from: now to: 5 min after now)
+___________________________
+>___________________________
+Good job. You have finished this task:
+[E][X] go toilet (from: now to: 5 min after now)
+___________________________
+>___________________________
+Your tasks are:
+1. [D][X] eat some food (by: tomorrow)
+2. [D][ ] hw (by: 11.00pm)
+3. [T][ ] cca
+4. [E][X] go toilet (from: now to: 5 min after now)
+___________________________
+>___________________________
+Ok. I have marked this task as not done:
+[E][ ] go toilet (from: now to: 5 min after now)
+___________________________
+>___________________________
+Your tasks are:
+1. [D][X] eat some food (by: tomorrow)
+2. [D][ ] hw (by: 11.00pm)
+3. [T][ ] cca
+4. [E][ ] go toilet (from: now to: 5 min after now)
+___________________________
+>___________________________
+Goodbye. I hope to see you again.
+___________________________

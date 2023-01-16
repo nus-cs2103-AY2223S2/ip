@@ -1,0 +1,11 @@
+list
+deadline eat some food /by tomorrow
+mark 1
+deadline hw /by 11.00pm
+todo cca
+event go toilet /from now /to 5 min after now
+mark 4
+list
+unmark 4
+list
+bye
