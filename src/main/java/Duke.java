@@ -36,10 +36,12 @@ public class Duke {
                     printAllTasks(itemCount, list);
                     break;
                 }
-                default:
-                    list[itemCount] = new Task(userLine);
+                case "todo": {
+                    list[itemCount] = new ToDo(userLine);
                     itemCount++;
                     System.out.println("Added: " + userLine);
+                    break;
+                }
             }
         }
     }

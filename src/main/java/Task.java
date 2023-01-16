@@ -1,22 +1,18 @@
-public class Task {
-    private String desc;
-    private boolean isDone;
-    public Task (String desc) {
+public abstract class Task {
+    protected final String desc;
+    protected boolean isDone;
+
+    Task(String desc) {
         this.desc = desc;
         this.isDone = false;
     }
-    private String getStatusIcon() {
-        return this.isDone ? "[X]" : "[]" ;
+
+    protected String getStatusIcon() {
+        return this.isDone ? "[X]" : "[]";
     }
 
-    private String getType() {
-        return "";
-    }
+    protected abstract String getType();
 
-    @Override
-    public String toString() {
-        return String.format("%s %s %s",getType(), getStatusIcon(), this.desc);
-    }
     public void setIsDone(boolean isDone) {
         this.isDone = isDone;
     }
