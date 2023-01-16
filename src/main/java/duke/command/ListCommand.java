@@ -11,6 +11,7 @@ public class ListCommand implements Command {
     /**
      * Returns a CommandResponse object containing a message listing out the tasks in the task list and the task list
      * with no changes.
+     *
      * @param input {@inheritDoc}
      * @param tasks {@inheritDoc}
      * @return CommandResponse object containing a message listing out the tasks in the task list and the task list with
