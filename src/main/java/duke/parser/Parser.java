@@ -15,6 +15,9 @@ import duke.exception.InvalidCommandArgsException;
 import duke.exception.NoSuchCommandException;
 import duke.utils.DateUtil;
 
+/**
+ * Converts string inputs to duke commands.
+ */
 public class Parser {
 
     /**
