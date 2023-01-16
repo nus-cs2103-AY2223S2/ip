@@ -1,7 +1,73 @@
-Hello from
- ____        _        
-|  _ \ _   _| | _____ 
-| | | | | | | |/ / _ \
-| |_| | |_| |   <  __/
-|____/ \__,_|_|\_\___|
+============= KiraBot ============= 
+Hi! I am KiraBot!
+How may I help you today?
+=================================== 
 
+============= KiraBot ============= 
+Storing...
+[T][ ] CS2103T
+You currently have 1 Tasks
+=================================== 
+
+============= KiraBot ============= 
+Storing...
+[E][ ] gym(from: morning to: night)
+You currently have 2 Tasks
+=================================== 
+
+============= KiraBot ============= 
+Storing...
+[D][ ] sleep(by: 9pm)
+You currently have 3 Tasks
+=================================== 
+
+============= KiraBot ============= 
+Here is all the items stored~
+1.[T][ ] CS2103T
+2.[E][ ] gym(from: morning to: night)
+3.[D][ ] sleep(by: 9pm)
+=================================== 
+
+============= KiraBot ============= 
+I have marked this as done~
+[T][x] CS2103T
+=================================== 
+
+============= KiraBot ============= 
+Here is all the items stored~
+1.[T][x] CS2103T
+2.[E][ ] gym(from: morning to: night)
+3.[D][ ] sleep(by: 9pm)
+=================================== 
+
+============= KiraBot ============= 
+There is no such task!
+=================================== 
+
+============= KiraBot ============= 
+Here is all the items stored~
+1.[T][x] CS2103T
+2.[E][ ] gym(from: morning to: night)
+3.[D][ ] sleep(by: 9pm)
+=================================== 
+
+============= KiraBot ============= 
+I have marked this as done~
+[D][x] sleep(by: 9pm)
+=================================== 
+
+============= KiraBot ============= 
+This task has been undone~
+[T][ ] CS2103T
+=================================== 
+
+============= KiraBot ============= 
+Here is all the items stored~
+1.[T][ ] CS2103T
+2.[E][ ] gym(from: morning to: night)
+3.[D][x] sleep(by: 9pm)
+=================================== 
+
+============= KiraBot ============= 
+Bye! Have a nice day :)
+=================================== 
