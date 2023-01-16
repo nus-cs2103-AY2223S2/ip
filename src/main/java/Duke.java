@@ -43,6 +43,14 @@ public class Duke {
                     System.out.println("Added: " + split[1]);
                     break;
                 }
+                case "deadline": {
+//                    TODO: check for correct format
+                    split = userLine.split(" (/by)|(deadline)");
+                    list[itemCount] = new Deadline(split[1].trim(), split[2]);
+                    itemCount++;
+                    System.out.println("Added: " + split[1]);
+                    break;
+                }
             }
         }
     }
