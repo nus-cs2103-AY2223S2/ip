@@ -10,7 +10,7 @@ public class Duke {
         System.out.println("Hello! I'm Duke\nWhat can I do for you?");
     }
 
-    public static void splitCommand(String command) {
+    public static void splitCommand(String command) throws DukeException {
         String[] arr;
         if (command.contains("/")) {
             String[] temp = command.split(" ", 2);
@@ -25,7 +25,7 @@ public class Duke {
 
     }
 
-    public static void echo(String[] arr) {
+    public static void echo(String[] arr) throws DukeException {
         switch (arr[0]) {
             case "bye":
                 exit();
@@ -48,29 +48,50 @@ public class Duke {
                 markedTask.markAsDone();
                 break;
             case "todo":
-                Todo toDo = new Todo(arr[1]);
-                tasks.add(toDo);
-                System.out.println("Got it. I've added this task:\n  " + toDo + "\nNow you have " + tasks.size() + " tasks in the list.");
-                break;
+                try {
+                    Todo toDo = new Todo(arr[1]);
+                    tasks.add(toDo);
+                    System.out.println("Got it. I've added this task:\n  " + toDo + "\nNow you have " + tasks.size() + " tasks in the list.");
+                } catch (ArrayIndexOutOfBoundsException e) {
+                    throw new DukeException(arr[0]);
+                } finally {
+                    break;
+                }
             case "deadline":
-                Deadline deadline = new Deadline(arr[1], arr[2].substring(3));
-                tasks.add(deadline);
-                System.out.println("Got it. I've added this task:\n  " + deadline + "\nNow you have " + tasks.size() + " tasks in the list.");
-                break;
+                try {
+                    Deadline deadline = new Deadline(arr[1], arr[2].substring(3));
+                    tasks.add(deadline);
+                    System.out.println("Got it. I've added this task:\n  " + deadline + "\nNow you have " + tasks.size() + " tasks in the list.");
+                } catch (ArrayIndexOutOfBoundsException e) {
+                    throw new DukeException(arr[0]);
+                } finally {
+                    break;
+                }
+
             case "event":
-                Event event = new Event(arr[1], arr[2].substring(5), arr[3].substring(3));
-                tasks.add(event);
-                System.out.println("Got it. I've added this task:\n  " + event + "\nNow you have " + tasks.size() + " tasks in the list.");
-                break;
+                try {
+                    Event event = new Event(arr[1], arr[2].substring(5), arr[3].substring(3));
+                    tasks.add(event);
+                    System.out.println("Got it. I've added this task:\n  " + event + "\nNow you have " + tasks.size() + " tasks in the list.");
+                    break;
+                } catch (ArrayIndexOutOfBoundsException e) {
+                    throw new DukeException(arr[0]);
+                } finally {
+                    break;
+                }
             default:
-                System.out.println("i dont understand bro");
+                try {
+                    throw new DukeException();
+                } finally {
+                    break;
+                }
         }
     }
     public static void exit() {
         System.out.println("Bye. Hope to see you again soon!");
         sc.close();
     }
-    public static void main(String[] args) {
+    public static void main(String[] args) throws DukeException {
         String logo = " ____        _        \n"
                 + "|  _ \\ _   _| | _____ \n"
                 + "| | | | | | | |/ / _ \\\n"
