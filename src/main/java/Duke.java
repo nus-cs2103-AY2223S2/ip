@@ -15,66 +15,119 @@ public class Duke {
         Scanner sc=new Scanner(System.in);
         String cmd=sc.nextLine();
         while(!cmd.equals("bye")){
-            if(cmd.equals("list")){
-                System.out.println(line);
-                System.out.println("Roarrrrrrrrrrrrrrr! Task list shown below!");
-                for (int i = 1; i <= len; ++i) {
-                    System.out.println(i + "." + lst[i].toString());
+            boolean iscmd=false;
+            try{
+                if(cmd.equals("list")){
+                    if(len==0) throw new ListException();
+                    System.out.println(line);
+                    System.out.println("Roarrrrrrrrrrrrrrr! Task list shown below!");
+                    for (int i = 1; i <= len; ++i) {
+                        System.out.println(i + "." + lst[i].toString());
+                    }
+                    System.out.println(line);
+                    iscmd=true;
                 }
+                if(cmd.length()>5&&cmd.substring(0,4).equals("mark")){
+                    int i;
+                    try {
+                        i = Integer.parseInt(cmd.substring(5));
+                    }catch(NumberFormatException e){
+                        throw new MarkException();
+                    }
+                    lst[i].mark();
+                    System.out.println(line);
+                    System.out.println("Good! You finished that! I marked that as done. Roarrrrrrrrrrrrrr!");
+                    System.out.println("  "+lst[i].toString());
+                    System.out.println(line);
+                    iscmd=true;
+                }
+                if(cmd.length()>7&&cmd.substring(0,6).equals("unmark")){
+                    int i;
+                    try{
+                        i=Integer.parseInt(cmd.substring(7));
+                    }catch(NumberFormatException e){
+                        throw new UnmarkException();
+                    }
+                    lst[i].unmark();
+                    System.out.println(line);
+                    System.out.println("Roarrrrrrrrrrrrrr! You said you did not finish that? Fine! Unmarked!");
+                    System.out.println("  "+lst[i].toString());
+                    System.out.println(line);
+                    iscmd=true;
+                }
+                if(cmd.length()>5&&cmd.substring(0,4).equals("todo")) {
+                    String task=cmd.substring(5);
+                    if(task.isEmpty()) throw new TodoException();
+                    lst[++len] = new Todo(task);
+                    System.out.println(line);
+                    System.out.println("New Todo task is added. Roarrrrrrrrrrrrrrrrrrrrrrrrr!");
+                    System.out.println("  "+lst[len].toString());
+                    System.out.println("You save "+len+" tasks in the list. Roarrrrrrrrrrrrrrrrrrrr!");
+                    System.out.println(line);
+                    iscmd=true;
+                }
+                if(cmd.length()>9&&cmd.substring(0,8).equals("deadline")){
+                    String task=cmd.substring(9);
+                    int pos=task.indexOf("/by");
+                    String time=task.substring(pos+4);
+                    task=task.substring(0,pos-1);
+                    if(task.isEmpty()||time.isEmpty()||pos==-1) throw new DeadlineException();
+                    lst[++len] = new Deadline(task,time);
+                    System.out.println(line);
+                    System.out.println("New Deadline task is added. Roarrrrrrrrrrrrrrrrrrrrrrrrr!");
+                    System.out.println("  "+lst[len].toString());
+                    System.out.println("You save "+len+" tasks in the list. Roarrrrrrrrrrrrrrrrrrrr!");
+                    System.out.println(line);
+                    iscmd=true;
+                }
+                if(cmd.length()>6&&cmd.substring(0,5).equals("event")){
+                    String task=cmd.substring(6);
+                    int pos1=task.indexOf("/from");
+                    String time1=task.substring(pos1+6);
+                    int pos2=time1.indexOf("/to");
+                    String time2=time1.substring(pos2+4);
+                    time1=time1.substring(0,pos2-1);
+                    task=task.substring(0,pos1-1);
+                    if(task.isEmpty()||time1.isEmpty()||time2.isEmpty()||pos1==-1||pos2==-1) throw new EventException();
+                    lst[++len] = new Event(task,time1,time2);
+                    System.out.println(line);
+                    System.out.println("New Event task is added. Roarrrrrrrrrrrrrrrrrrrrrrrrr!");
+                    System.out.println("  "+lst[len].toString());
+                    System.out.println("You save "+len+" tasks in the list. Roarrrrrrrrrrrrrrrrrrrr!");
+                    System.out.println(line);
+                    iscmd=true;
+                }
+                if(!iscmd) throw new DukeException();
+            }catch(ListException e){
+                System.out.println(line);
+                System.out.println("Roarrrrrrrrrrrrrrrrr! You did not add anything in the list!");
+                System.out.println(line);
+            }catch(MarkException e){
+                System.out.println(line);
+                System.out.println("Roarrrrrrrrrrrrrrrrr! Do you want to mark any task or not?");
+                System.out.println(line);
+            }catch(UnmarkException e){
+                System.out.println(line);
+                System.out.println("Roarrrrrrrrrrrrrrrrr! Do you want to unmark any task or not?");
+                System.out.println(line);
+            }catch(TodoException e){
+                System.out.println(line);
+                System.out.println("Roarrrrrrrrrrrrrrrrr! I cannot add that Todo task because of you!");
+                System.out.println(line);
+            }catch(DeadlineException e){
+                System.out.println(line);
+                System.out.println("Roarrrrrrrrrrrrrrrrr! I cannot add that Deadline task because of you!");
+                System.out.println(line);
+            }catch(EventException e){
+                System.out.println(line);
+                System.out.println("Roarrrrrrrrrrrrrrrrr! I cannot add that Event task because of you!");
+                System.out.println(line);
+            }catch(DukeException e){
+                System.out.println(line);
+                System.out.println("Roarrrrrrrrrrrrrrrrr! What on earth are you talking about?");
                 System.out.println(line);
             }
-            if(cmd.length()>5&&cmd.substring(0,4).equals("mark")){
-                int i=Integer.parseInt(cmd.substring(5));
-                lst[i].mark();
-                System.out.println(line);
-                System.out.println("Good! You finished that! I marked that as done. Roarrrrrrrrrrrrrr!");
-                System.out.println("  "+lst[i].toString());
-                System.out.println(line);
-            }
-            if(cmd.length()>7&&cmd.substring(0,6).equals("unmark")){
-                int i = Integer.parseInt(cmd.substring(7));
-                lst[i].unmark();
-                System.out.println(line);
-                System.out.println("Roarrrrrrrrrrrrrr! You said you did not finish that? Fine! Unmarked!");
-                System.out.println("  "+lst[i].toString());
-                System.out.println(line);
-            }
-            if(cmd.length()>5&&cmd.substring(0,4).equals("todo")) {
-                String task=cmd.substring(5);
-                lst[++len] = new Todo(task);
-                System.out.println(line);
-                System.out.println("New Todo task is added. Roarrrrrrrrrrrrrrrrrrrrrrrrr!");
-                System.out.println("  "+lst[len].toString());
-                System.out.println("You save "+len+" tasks in the list. Roarrrrrrrrrrrrrrrrrrrr!");
-                System.out.println(line);
-            }
-            if(cmd.length()>9&&cmd.substring(0,8).equals("deadline")){
-                String task=cmd.substring(9);
-                int pos=task.indexOf("/by");
-                String time=task.substring(pos+4);
-                task=task.substring(0,pos-1);
-                lst[++len] = new Deadline(task,time);
-                System.out.println(line);
-                System.out.println("New Deadline task is added. Roarrrrrrrrrrrrrrrrrrrrrrrrr!");
-                System.out.println("  "+lst[len].toString());
-                System.out.println("You save "+len+" tasks in the list. Roarrrrrrrrrrrrrrrrrrrr!");
-                System.out.println(line);
-            }
-            if(cmd.length()>6&&cmd.substring(0,5).equals("event")){
-                String task=cmd.substring(6);
-                int pos1=task.indexOf("/from");
-                String time1=task.substring(pos1+6);
-                int pos2=time1.indexOf("/to");
-                String time2=time1.substring(pos2+4);
-                time1=time1.substring(0,pos2-1);
-                task=task.substring(0,pos1-1);
-                lst[++len] = new Event(task,time1,time2);
-                System.out.println(line);
-                System.out.println("New Event task is added. Roarrrrrrrrrrrrrrrrrrrrrrrrr!");
-                System.out.println("  "+lst[len].toString());
-                System.out.println("You save "+len+" tasks in the list. Roarrrrrrrrrrrrrrrrrrrr!");
-                System.out.println(line);
-            }
+
 
             System.out.println();
             cmd=sc.nextLine();
