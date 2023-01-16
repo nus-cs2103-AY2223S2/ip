@@ -1,8 +1,10 @@
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Scanner;
 
 public class Duke {
     private static ArrayList<Task> dukeList = new ArrayList<>();
+    private static String[] taskCreationCommands = {"todo", "deadline", "event"};
 
     public static void main(String[] args) {
         String logo = " ____        _        \n"
@@ -31,23 +33,31 @@ public class Duke {
                         output = "Ok, I've marked this task as not done yet:";
                     }
                     displayMsg(output + "\n" + indentString(targetTask.toString(), 1));
-                } else {
+                } else if (Arrays.asList(taskCreationCommands).contains(line.split(" ")[0])) {  // a task creation command being called
                     Task newTask;
-                    if (line.startsWith("event")) {
-                        newTask = Event.create(line);
-                    } else if (line.startsWith("deadline")) {
-                        newTask = Deadline.create(line);
-                    } else {
-                        newTask = ToDo.create(line);
+                    try {
+                        if (line.startsWith("event")) {
+                            newTask = Event.create(line);
+                        } else if (line.startsWith("deadline")) {
+                            newTask = Deadline.create(line);
+                        } else {
+                            newTask = ToDo.create(line);
+                        } 
+                        dukeList.add(newTask);
+                        StringBuilder output = new StringBuilder();
+                        output.append("Got it. I've added this task:\n" + indentString(newTask.toString(), 1) + "\n" + "Now you have " + dukeList.size());
+                        output.append(" task" + (dukeList.size() == 1 ? "" : "s") + " in the list.");
+                        displayMsg(output.toString());
+                    } 
+                    catch (TaskInitError e) {
+                        displayMsg("OOPS!!! " + e.getMessage());
                     }
-                    dukeList.add(newTask);
-                    StringBuilder output = new StringBuilder();
-                    output.append("Got it. I've added this task:\n" + indentString(newTask.toString(), 1) + "\n" + "Now you have " + dukeList.size());
-                    output.append(" task" + (dukeList.size() == 1 ? "" : "s") + " in the list.");
-                    displayMsg(output.toString());
+                   
+                } else {
+                    displayMsg("OOPS!!! I'm sorry, but I don't know what that means :-(");
                 }
                 System.out.println("");   
-            }
+            } 
             line = sc.nextLine();
         }
         sc.close();
@@ -111,8 +121,12 @@ abstract class Task {
 class ToDo extends Task {
 
     // Factory method
-    public static ToDo create(String command) {
-        return command.indexOf("todo") == -1 ? new ToDo(command) : new ToDo(command.substring(5));
+    public static ToDo create(String command) throws TaskNameNotSpecified {
+        try {
+            return command.indexOf("todo") == -1 ? new ToDo(command) : new ToDo(command.substring(5));
+        } catch (StringIndexOutOfBoundsException e) {
+            throw new TaskNameNotSpecified("The description of a todo cannot be empty.");
+        }
     }
     
     public ToDo(String taskName) {
@@ -129,9 +143,17 @@ class Deadline extends Task {
     String dueDate;
 
     // Factory method
-    public static Deadline create(String command) {
-        String[] commandObjects = command.substring(9).split(" /by ");
-        return new Deadline(commandObjects[0], commandObjects[1]);
+    public static Deadline create(String command) throws TaskNameNotSpecified, DeadlineByNotSpecified {
+        if (command.indexOf("/by ") == -1) {
+            throw new DeadlineByNotSpecified("Deadline task requires keyword '/by'");
+        } 
+        try {
+            String[] commandObjects = command.substring(9).split(" /by ");
+            return new Deadline(commandObjects[0], commandObjects[1]);
+        } catch (StringIndexOutOfBoundsException e) {
+            throw new TaskNameNotSpecified("The description of a deadline cannot be empty.");
+        }
+    
     }
     
     public Deadline(String taskName, String dueDate) {
@@ -149,14 +171,31 @@ class Event extends Task {
     String fromDate;
     String toDate;
 
-    public static Event create(String command) {
+    public static Event create(String command) throws TaskNameNotSpecified, EventFromToNotSpecified {
         command = command.substring(6);
-        int indexOfFrom = command.indexOf(" /from ");
-        int indexOfTo = command.indexOf(" /to ");
+        
+        int indexOfFrom = command.indexOf("/from");
+        int indexOfTo = command.indexOf("/to");
+        if (indexOfFrom == -1 || indexOfTo == -1) {
+            throw new EventFromToNotSpecified("Event task requires keywords '/from' and '/to'");
+        }
+
         String taskName = command.substring(0, indexOfFrom);
-        String fromDate = command.substring(indexOfFrom + 7, indexOfTo);
-        String toDate = command.substring(indexOfTo + 5, command.length());
-        return new Event(taskName, fromDate, toDate);
+        if (taskName.equals("")) {
+            throw new TaskNameNotSpecified("The description of an event cannot be empty.");
+        }
+
+        String fromDate = command.substring(indexOfFrom + 6, indexOfTo);
+        if (fromDate.equals("")) {
+            throw new EventFromToNotSpecified("from/to fields cannot be empty.");
+        }
+
+        try {
+            String toDate = command.substring(indexOfTo + 4, command.length());
+            return new Event(taskName, fromDate, toDate);
+        } catch (StringIndexOutOfBoundsException e) {
+            throw new EventFromToNotSpecified("from/to fields cannot be empty.");
+        }
     }
 
     public Event(String taskName, String fromDate, String toDate) {
@@ -168,5 +207,29 @@ class Event extends Task {
     @Override
     public String stringFields() {
         return " (from: " + this.fromDate + " to: " + toDate + ")";
+    }
+}
+
+class TaskInitError extends Exception {
+    public TaskInitError(String errorMessage) {
+        super(errorMessage);
+    }
+}
+
+class EventFromToNotSpecified extends TaskInitError {
+    public EventFromToNotSpecified(String errorMessage) {
+        super(errorMessage);
+    }
+}
+
+class DeadlineByNotSpecified extends TaskInitError {
+    public DeadlineByNotSpecified(String errorMessage) {
+        super(errorMessage);
+    }
+}
+
+class TaskNameNotSpecified extends TaskInitError {
+    public TaskNameNotSpecified(String errorMessage) {
+        super(errorMessage);
     }
 }
