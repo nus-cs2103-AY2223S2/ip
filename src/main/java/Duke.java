@@ -14,7 +14,8 @@ public class Duke {
         String userLine = "";
         while (!userLine.equals("bye")) {
             userLine = sc.nextLine();
-            String command = userLine.split(" ")[0];
+            String[] split = userLine.split(" ");
+            String command = split[0];
             switch (command) {
                 case "bye":
                     System.out.println("Bye, hope to see you again.");
@@ -23,23 +24,23 @@ public class Duke {
                     printAllTasks(itemCount, list);
                     break;
                 case "mark": {
-                    int number = Integer.parseInt(userLine.split(" ")[1]) - 1;
+                    int number = Integer.parseInt(split[1]) - 1;
                     list[number].setIsDone(true);
                     System.out.println("done");
                     printAllTasks(itemCount, list);
                     break;
                 }
                 case "unmark": {
-                    int number = Integer.parseInt(userLine.split(" ")[1]) - 1;
+                    int number = Integer.parseInt(split[1]) - 1;
                     list[number].setIsDone(false);
                     System.out.println("done");
                     printAllTasks(itemCount, list);
                     break;
                 }
                 case "todo": {
-                    list[itemCount] = new ToDo(userLine);
+                    list[itemCount] = new ToDo(split[1]);
                     itemCount++;
-                    System.out.println("Added: " + userLine);
+                    System.out.println("Added: " + split[1]);
                     break;
                 }
             }
