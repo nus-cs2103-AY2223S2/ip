@@ -76,42 +76,60 @@ public class Duke {
         this.greet();
 
         while(sc.hasNext()) {
-            String[] input = sc.nextLine().split(" ", 2);
+            try {
+                String[] input = sc.nextLine().split(" ", 2);
 
-            switch(input[0]) {
-                case "bye":
-                    this.exit();
-                    break;
+                switch (input[0]) {
+                    case "bye":
+                        this.exit();
+                        break;
 
-                case "list":
-                    this.list();
-                    break;
+                    case "list":
+                        this.list();
+                        break;
 
-                case "mark":
-                    this.mark(input[1]);
-                    break;
+                    case "mark":
+                        if (input.length < 2) {
+                            throw new NumberMissingException();
+                        }
+                        this.mark(input[1]);
+                        break;
 
-                case "unmark":
-                    this.unmark(input[1]);
-                    break;
+                    case "unmark":
+                        if (input.length < 2) {
+                            throw new NumberMissingException();
+                        }
+                        this.unmark(input[1]);
+                        break;
 
-                case "todo":
-                    this.todo(input[1]);
-                    break;
+                    case "todo":
+                        if (input.length < 2) {
+                            throw new EmptyDescriptionException();
+                        }
+                        this.todo(input[1]);
+                        break;
 
-                case "deadline":
-                    this.deadline(input[1]);
-                    break;
+                    case "deadline":
+                        if (input.length < 2) {
+                            throw new EmptyDescriptionException();
+                        }
+                        this.deadline(input[1]);
+                        break;
 
-                case "event":
-                    this.event(input[1]);
-                    break;
+                    case "event":
+                        if (input.length < 2) {
+                            throw new EmptyDescriptionException();
+                        }
+                        this.event(input[1]);
+                        break;
 
-
-                default:
-                    System.out.println("Input not recognised.");
-                    System.out.println(Duke.LINE);
-                    break;
+                    default:
+                        throw new InvalidCommandException();
+                }
+            }
+            catch (Exception e) {
+                System.out.println(Duke.LINE + e.getMessage());
+                System.out.println(Duke.LINE);
             }
         }
     }
