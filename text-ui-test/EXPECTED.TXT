@@ -22,6 +22,7 @@ You currently have 3 Tasks
 =================================== 
 
 ============= KiraBot ============= 
+There seems to be an error...
 Sorry, I don't know this command :C
 =================================== 
 
