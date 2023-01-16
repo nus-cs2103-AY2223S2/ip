@@ -33,7 +33,7 @@ public class DeadlineCommand extends AddCommand {
     @Override
     protected Task createTask(String input) throws DukeException {
         input = input.replaceFirst("deadline ", "");
-        String[] args = input.split(" /by ", 2);
+        String[] args = input.split(input.startsWith ("/by ") ? "/by " : " /by ", 2);
 
         if (args.length != 2) {
             throw new DukeException("The input of a deadline must include a ' /by '.");
