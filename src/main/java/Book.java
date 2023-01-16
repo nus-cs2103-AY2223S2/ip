@@ -21,13 +21,20 @@ public class Book {
                 + LINE);
         command = input.nextLine();
         while (!command.equals("bye")) {
-            parse(command);
-            command = input.nextLine();
+            try {
+                parse(command);
+            } catch (InvalidInputException exception){
+                System.out.print(LINE + exception.getMessage() + "\n" + LINE);
+            } catch (IncompleteInputException exception){
+                System.out.print(LINE + exception.getMessage() + "\n" + LINE);
+            } finally {
+                command = input.nextLine();
+            }
         }
         System.out.print(LINE + "Bye. Pick up Book again soon!\n" + LINE);
     }
 
-    private static void parse(String text) {
+    private static void parse(String text) throws InvalidInputException, IncompleteInputException {
         String[] inputs = text.split(" ", 2);
         if (inputs[0].equals("list")) {
             System.out.print(LINE + "Here are the tasks stored in Book:\n");
@@ -36,6 +43,10 @@ public class Book {
             }
             System.out.print(LINE);
         } else if (inputs[0].equals("mark") || inputs[0].equals("unmark")) {
+            if (inputs.length < 2) {
+                throw new IncompleteInputException("Without the index, Book cannot find the task" +
+                        "you are looking for. (｡•́︿•̀｡)");
+            }
             int taskIndex = Integer.parseInt(inputs[1]) - 1;
             if (inputs[0].equals("mark")) {
                 list[taskIndex].mark();
@@ -47,25 +58,43 @@ public class Book {
                         + list[taskIndex] + "\n" + LINE);
             }
         } else if (inputs[0].equals("todo")) {
+            if (inputs.length < 2) {
+                throw new IncompleteInputException("The description of the todo is missing. (•ิ_•ิ)?");
+            }
             int addedToDoIndex = index++;
             list[addedToDoIndex] = new ToDo(inputs[1]);
             System.out.print(LINE + "Understood, adding:\n    " + list[addedToDoIndex]
                     + "\nThere are " + index + " tasks in Book\n" + LINE);
         } else if (inputs[0].equals("deadline")) {
+            if (inputs.length < 2) {
+                throw new IncompleteInputException("The deadline is missing some information. ┐('～`;)┌");
+            }
             int addedDeadlineIndex = index++;
-            String[] deadlineDescription = inputs[1].split("/by ", 2);
-            list[addedDeadlineIndex] = new Deadline(deadlineDescription[0],
-                    deadlineDescription[1]);
+            String[] deadlineDetails = inputs[1].split("/by ", 2);
+            if (deadlineDetails.length < 2) {
+                throw new IncompleteInputException("The deadline is missing. (ᓀ ᓀ)");
+            }
+            list[addedDeadlineIndex] = new Deadline(deadlineDetails[0],
+                    deadlineDetails[1]);
             System.out.print(LINE + "Understood, adding the deadline:\n    "
                     + list[addedDeadlineIndex] + "\nThere are " + index + " tasks in Book.\n"
                     + LINE);
         } else if (inputs[0].equals("event")) {
+            if (inputs.length < 2) {
+                throw new IncompleteInputException("The event is missing some information. (ーー;)");
+            }
             int addedEventIndex = index++;
-            String[] eventDescription = inputs[1].split("/from |/to ",3);
-            list[addedEventIndex] = new Event(eventDescription[0], eventDescription[1],
-                    eventDescription[2]);
+            String[] eventDetails = inputs[1].split("/from |/to ", 3);
+            if (eventDetails.length < 2) {
+                throw new IncompleteInputException("The information regarding event duration is " +
+                        "missing. (￣～￣;)");
+            }
+            list[addedEventIndex] = new Event(eventDetails[0], eventDetails[1],
+                    eventDetails[2]);
             System.out.print(LINE + "Understood, adding the event:\n    " + list[addedEventIndex]
                     + "\nThere are " + index + " tasks in Book.\n" + LINE);
+        } else {
+            throw new InvalidInputException("Sorry, this command is not in Book's dictionary. (｡╯︵╰｡)");
         }
     }
 }
