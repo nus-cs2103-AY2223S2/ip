@@ -21,7 +21,7 @@ public class TaskInfoParser {
             case "event" :
                 int fromIndex = input.indexOf("/from");
                 int toIndex = input.indexOf("/to");
-                String eventDescription = input.substring(6, fromIndex - 2);
+                String eventDescription = input.substring(6, fromIndex - 1);
                 String startTime = input.substring(fromIndex + 6, toIndex - 1);
                 String endTime = input.substring(toIndex + 4);
                 return new Event(eventDescription, startTime, endTime);

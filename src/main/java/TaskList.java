@@ -17,7 +17,7 @@ public class TaskList {
     public void addTask(Task task) {
         System.out.println(String.format("%s\n %s", ADDTASKMSG, task.toString()));
         this.taskList[index] = task;
-        System.out.println(String.format("Now you have %d tasks in the list.", index + 1));
+        System.out.println(String.format("%d tasks in the list, you have now.", index + 1));
         index++;
     }
 
