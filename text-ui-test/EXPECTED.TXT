@@ -9,20 +9,56 @@ What can I do for you?
 ---------------------
 
 ---------------------
-        Duke: hi
+	Duke: Hi
 ---------------------
 ---------------------
-        Duke: This is a multi text message
+	Duke: Hi but very long and very wow
 ---------------------
 ---------------------
-        Duke: Special: !@#$%^&*()`-=~_+/\|{[;:"',<>.?]}
+	added: read book
 ---------------------
 ---------------------
-        Duke: This should not go bye
+	added: return book
 ---------------------
 ---------------------
-        Duke: this should not goodbye
+	added: buy bread
 ---------------------
 ---------------------
-        Duke: Goodbye!
+	Here are the tasks in your list:
+	1.[ ] read book
+	2.[ ] return book
+	3.[ ] buy bread
+---------------------
+---------------------
+	Nice! I've marked this task as done:
+	  [X] read book
+---------------------
+---------------------
+	Here are the tasks in your list:
+	1.[X] read book
+	2.[ ] return book
+	3.[ ] buy bread
+---------------------
+---------------------
+	Nice! I've marked this task as done:
+	  [X] return book
+---------------------
+---------------------
+	Here are the tasks in your list:
+	1.[X] read book
+	2.[X] return book
+	3.[ ] buy bread
+---------------------
+---------------------
+	OK, I've marked this task as not done yet:
+	  [ ] return book
+---------------------
+---------------------
+	Here are the tasks in your list:
+	1.[X] read book
+	2.[ ] return book
+	3.[ ] buy bread
+---------------------
+---------------------
+	Goodbye!
 ---------------------

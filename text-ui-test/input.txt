@@ -1,6 +1,13 @@
-hi
-This is a multi text message
-Special: !@#$%^&*()`-=~_+/\|{[;:"',<>.?]}
-This should not go bye
-this should not goodbye
+echo Hi
+echo Hi but very long and very wow
+read book
+return book
+buy bread
+list
+mark 1
+list
+mark 2
+list
+unmark 2
+list
 bye
