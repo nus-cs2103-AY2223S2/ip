@@ -3,3 +3,6 @@ Test case:
 todo borrow book
 deadline return book /by Sunday
 event project meeting /from Mon 2pm /to 4pm
+
+Command:
+C:/Users/Julio/IdeaProjects/ip/text-ui-test/runtest.bat
