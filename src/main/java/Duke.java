@@ -32,24 +32,12 @@ public class Duke {
     public static boolean handleGeneralCommand(String command) throws DukeInputError{
         if (command.startsWith("list")) {
             tasks.listTasks();
-        } else if (command.matches("^mark \\d")) { // could replace with startsWith("mark")
-            String[] input = command.split(" ");
-            int taskNumber = Integer.parseInt(input[1]) - 1;
-            tasks.markTaskCompletion(taskNumber, true);
-        } else if (command.matches("^unmark \\d")) {
-            String[] input = command.split(" ");
-            int taskNumber = Integer.parseInt(input[1]) - 1;
-            tasks.markTaskCompletion(taskNumber, false);
-        } else if (command.startsWith("delete")) {
-            String[] input = command.split(" ");
-            int taskNumber = Integer.parseInt(input[1]) - 1;
-            tasks.deleteTask(taskNumber);
+        } else if ((command.startsWith("mark")) || (command.startsWith("unmark")) ||
+                command.startsWith("delete")) {
+            tasks.manageTask(command);
         } else if (command.equals("bye")) {
             System.out.println("    Bye. Hope to see you again soon!");
             return false;
-        } else if (command.startsWith("delete")) {
-            String[] input = command.split(" ");
-            int taskNumber = Integer.parseInt(input[1]) - 1;
         } else if (command.startsWith("event")){
             Event.createEvent(command, tasks);
         } else if (command.startsWith("deadline")) {
