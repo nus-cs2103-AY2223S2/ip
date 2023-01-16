@@ -15,6 +15,7 @@ public interface Command {
      * @param input User's input.
      * @param tasks User's tasks.
      * @return CommandResponse object containing the response message and updated task list.
+     * @throws DukeException Indicates an error in the input
      */
     CommandResponse run(String input, List<Task> tasks) throws DukeException;
 }
