@@ -14,7 +14,7 @@ public class DateUtil {
 
     // Solution below adapted from
     // https://www.waitingforcode.com/java-8/managing-different-date-time-formats-datetimeformatterbuilder/read
-    public static final DateTimeFormatter dateFormatter = new DateTimeFormatterBuilder()
+    public static final DateTimeFormatter DATE_FORMATTER = new DateTimeFormatterBuilder()
             .appendOptional(DateTimeFormatter.ISO_LOCAL_DATE_TIME)
             .appendOptional(DateTimeFormatter.ISO_LOCAL_DATE)
             .appendOptional(DateTimeFormatter.ofPattern("d/MM/yyyy HHmm"))
@@ -34,7 +34,7 @@ public class DateUtil {
      */
     public static LocalDateTime toLocalDateTime(String input) throws DateTimeParseException {
         LocalDateTime dateTime;
-        TemporalAccessor temporalAccessor = dateFormatter.parseBest(input, LocalDateTime::from, LocalDate::from);
+        TemporalAccessor temporalAccessor = DATE_FORMATTER.parseBest(input, LocalDateTime::from, LocalDate::from);
         if (temporalAccessor instanceof LocalDateTime) {
             dateTime = (LocalDateTime) temporalAccessor;
         } else {

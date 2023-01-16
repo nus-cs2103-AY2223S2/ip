@@ -98,5 +98,4 @@ public class AddCommand extends Command {
     public boolean isExit() {
         return false;
     }
-
 }
