@@ -39,11 +39,11 @@ public class Book {
             int taskIndex = Integer.parseInt(inputs[1]) - 1;
             if (inputs[0].equals("mark")) {
                 list[taskIndex].mark();
-                System.out.println(LINE + "The following task has been marked as done:\n    "
+                System.out.print(LINE + "The following task has been marked as done:\n    "
                         + list[taskIndex] + "\n" + LINE);
             } else {
                 list[taskIndex].unmark();
-                System.out.println(LINE + "The following task has been marked as not done:\n    "
+                System.out.print(LINE + "The following task has been marked as not done:\n    "
                         + list[taskIndex] + "\n" + LINE);
             }
         } else if (inputs[0].equals("todo")) {
@@ -62,7 +62,6 @@ public class Book {
         } else if (inputs[0].equals("event")) {
             int addedEventIndex = index++;
             String[] eventDescription = inputs[1].split("/from |/to ",3);
-            System.out.println(eventDescription.length);
             list[addedEventIndex] = new Event(eventDescription[0], eventDescription[1],
                     eventDescription[2]);
             System.out.print(LINE + "Understood, adding the event:\n    " + list[addedEventIndex]

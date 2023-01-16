@@ -1,0 +1,11 @@
+todo pick up book
+deadline return book /by Jan 20th
+event book release /from Jan 18th 12pm /to 2pm
+list
+mark 1
+mark 2
+mark 3
+list
+unmark 2
+list
+bye
