@@ -20,6 +20,12 @@ public class Duke {
             Command command = new Command(input);
         
             switch (command.baseCommand) {
+                case "mark":
+                    Duke.mark(command, tasks);
+                    break;
+                case "unmark":
+                    Duke.unmark(command, tasks);
+                    break;
                 case "list":
                     Duke.list(command, tasks);
                     break;
@@ -59,5 +65,25 @@ public class Duke {
         String commandString = command.toString();
         tasks.add(new Task(commandString));
         Duke.say("added: " + commandString);
+    }
+
+    private static void mark(Command command, TaskList tasks) {
+        int taskIndex = Integer.parseInt(command.parameters[0]) - 1;
+        Task task = tasks.get(taskIndex);
+        task.markAsDone();
+        Duke.say(
+            "Nice! I've marked this task as done:\n"
+                + "  " + task.toString()
+        );
+    }
+
+    private static void unmark(Command command, TaskList tasks) {
+        int taskIndex = Integer.parseInt(command.parameters[0]) - 1;
+        Task task = tasks.get(taskIndex);
+        task.markAsNotDone();
+        Duke.say(
+            "OK, I've marked this task as not done yet:\n"
+                + "  " + task.toString()
+        );
     }
 }
