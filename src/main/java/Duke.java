@@ -2,6 +2,8 @@ import java.util.Scanner;
 
 public class Duke {
     public static void main(String[] args) {
+        String[] list = new String[100];
+        int listNum = 0;
         String dog = "⠀⠀⠀⠀⠀⠀⠀⢀⣀⣀⠀⣀⣀⣀⣀⢀⣀⣀⣀⣀⣀⣀⣀⣀⠀⠀⠀⠀⠀⠀⠀⠀\n" +
                 "⠀⠀⠀⠀⠀⣀⣰⣿⣿⡻⠟⠋⠉⠉⣻⠟⠉⠉⠉⠛⢯⡛⢿⣿⣷⣤⣀⠀⠀⠀⠀⠀\n" +
                 "⠀⣠⣴⠾⠛⢋⣿⠟⠋⠀⠀⠀⠀⢀⡟⠀⠀⠀⠀⠀⠀⠈⠂⣹⣿⡈⠙⠻⢶⣄⡀⠀\n" +
@@ -24,8 +26,12 @@ public class Duke {
             String str = sc.nextLine();
             if (str.equals("bye")) {
                 System.out.println("See yer again RUFF!");
+                break;
+            } else if (str.equals("list")) {
+                for (int i = 0; i < listNum; i++) System.out.println(list[i]);
             } else {
-                System.out.println(str);
+                list[listNum++] = listNum + ". " + str;
+                System.out.println("added: " + str);
             }
         }
 
