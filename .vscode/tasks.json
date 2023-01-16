@@ -1,0 +1,33 @@
+{
+    // See https://go.microsoft.com/fwlink/?LinkId=733558
+    // for the documentation about the tasks.json format
+    "version": "2.0.0",
+    "tasks": [
+        {
+            "label": "testJava",
+            "type": "shell",
+            "command": "java",
+            "args": [
+                "'${file}'",
+                // "<",
+                // "'${fileDirname}/${input:testName}'"
+            ]
+        },
+        // {
+        //     "label": "echo",
+        //     "type": "shell",
+        //     "command": "echo ${fileDirname}"
+        // }
+    ],
+    // "inputs": [
+    //     {
+    //         "id": "testName",
+    //         "type": "command",
+    //         "command": "shellCommand.execute",
+    //         "args": {
+    //             "command": "ls -1 *.in",
+    //             "cwd": "${fileDirName}",
+    //         },
+    //     }
+    // ]
+}
