@@ -43,7 +43,7 @@ public class EventCommand extends AddCommand {
             throw new DukeException("The input of an event must include a start date/time.");
         }
 
-        String description = args[0];
+        String description = args[0].trim();
         args[1] = args[1].trim();
 
         String[] startAndEnd = args[1].split(" /to ", 2);
@@ -51,8 +51,8 @@ public class EventCommand extends AddCommand {
             throw new DukeException("The input of an event must include an end date/time.");
         }
 
-        String start = startAndEnd[0];
-        String end = startAndEnd[1];
+        String start = startAndEnd[0].trim();
+        String end = startAndEnd[1].trim();
 
         return new Event(false, description, start, end);
     }

@@ -44,6 +44,6 @@ public class DeadlineCommand extends AddCommand {
             throw new DukeException("The input of a deadline must include a cutoff date/time.");
         }
 
-        return new Deadline(false, args[0], args[1]);
+        return new Deadline(false, args[0].trim(), args[1].trim());
     }
 }
