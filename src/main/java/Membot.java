@@ -75,6 +75,10 @@ public class Membot {
                     } else if (input.startsWith(DEADLINE_KEY)
                             && InputValidator.isTaskInputValid(input)) {
                         int deadlineStartIndex = input.indexOf("/by ");
+                        if (deadlineStartIndex == -1) {
+                            Printer.printlnIndent("Invalid syntax: \"deadline [title] /by [deadline]\"");
+                            break;
+                        }
                         String title = input.substring(9, deadlineStartIndex - 1);
                         String deadline = input.substring(deadlineStartIndex + 4);
 
@@ -84,6 +88,10 @@ public class Membot {
                             && InputValidator.isTaskInputValid(input)) {
                         int startIndex = input.indexOf("/from ");
                         int endIndex = input.indexOf("/to ");
+                        if (startIndex == -1 || endIndex == -1) {
+                            Printer.printlnIndent("Invalid syntax: \"event [title] /from [start date/time] /to [end date/time]\"");
+                            break;
+                        }
                         String title = input.substring(6, startIndex - 1);
                         String start = input.substring(startIndex + 6, endIndex - 1);
                         String end = input.substring(endIndex + 4);
