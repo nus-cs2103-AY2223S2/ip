@@ -1,7 +1,9 @@
-public class Todo extends Task {
+package tasks;
+
+public class Todo extends ITask {
 
     public Todo(String description) {
-        super(description);
+        super(description, TaskTypes.ToDos);
     }
 
     @Override
