@@ -1,11 +1,16 @@
 import java.util.Scanner;
+import java.util.ArrayList;
 public class Duke {
 
     /**
-     * Echos user input. If user input is "bye", then exit.
+     * Adds user input to a list.
+     * If user input is "list", display all items back, numbered.
+     * If user input is "bye", then exit.
      */
     public static void greet() {
         Scanner userInput = new Scanner(System.in);
+
+        ArrayList<String> list = new ArrayList<>();
 
         while (true) {
             String input = userInput.nextLine();
@@ -14,8 +19,13 @@ public class Duke {
 
             if (input.equals("bye")) {
                 System.out.println("Bye. Hope to see you soon!");
+            } else if (input.equals("list")) {
+                for (int i = 0; i < list.size(); i++) {
+                    System.out.println(i + 1 + ". " + list.get(i));
+                }
             } else {
-                System.out.println(input);
+                System.out.println("added: " + input);
+                list.add(input);
             }
 
             System.out.println("____________________________________________________________");
@@ -27,6 +37,7 @@ public class Duke {
 
         userInput.close();
     }
+
     public static void main(String[] args) {
         String logo = " ____        _        \n"
                 + "|  _ \\ _   _| | _____ \n"
