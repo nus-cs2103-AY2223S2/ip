@@ -16,7 +16,7 @@ public class Task {
 
     public String toString() {
         if (isDone) {
-            return "[x] " + name;
+            return "[X] " + name;
         } else {
             return "[ ] " + name;
         }
