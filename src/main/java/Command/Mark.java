@@ -9,7 +9,7 @@ public class Mark {
         s.mark(num);
     }
 
-    public int extractTaskNum(String s) {
+    private int extractTaskNum(String s) {
         String num = s.replaceAll("[^0-9]", "");
         return Integer.parseInt(num);
     }
