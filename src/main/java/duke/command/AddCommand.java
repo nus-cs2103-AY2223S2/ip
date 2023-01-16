@@ -8,7 +8,7 @@ import java.util.List;
 /**
  * Represents an add command.
  */
-public class AddCommand implements Command {
+public abstract class AddCommand implements Command {
     /**
      * Returns a CommandResponse object containing an acknowledgement message and an updated task list with the new task
      * added.
@@ -21,8 +21,20 @@ public class AddCommand implements Command {
     @Override
     public CommandResponse run(String input, List<Task> tasks) {
         List<Task> updatedTasks = new ArrayList<Task>(tasks);
-        updatedTasks.add(new Task(false, input));
+        Task task = createTask(input);
+        updatedTasks.add(task);
 
-        return new CommandResponse(String.format("added: %s", input), updatedTasks);
+        String message = String.format("Got it. I've added this task:\n  %s\nNow you have %d tasks in the list.",
+                task.toString(), updatedTasks.size());
+
+        return new CommandResponse(message, updatedTasks);
     }
+
+    /**
+     * Returns a Task object created using the provided input.
+     *
+     * @param input User's input.
+     * @return Task object created using the provided input.
+     */
+    protected abstract Task createTask(String input);
 }

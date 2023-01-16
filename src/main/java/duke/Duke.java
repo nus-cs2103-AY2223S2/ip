@@ -1,11 +1,11 @@
 package duke;
 
-import duke.command.AddCommand;
 import duke.command.ByeCommand;
 import duke.command.Command;
 import duke.command.CommandResponse;
 import duke.command.ListCommand;
 import duke.command.MarkCommand;
+import duke.command.ToDoCommand;
 import duke.command.UnmarkCommand;
 import duke.task.Task;
 
@@ -17,10 +17,10 @@ import java.util.Scanner;
  * Main class for the chatbot
  */
 public class Duke {
-    private final static AddCommand addCommand = new AddCommand();
     private final static ByeCommand byeCommand = new ByeCommand();
     private final static ListCommand listCommand = new ListCommand();
     private final static MarkCommand markCommand = new MarkCommand();
+    private final static ToDoCommand toDoCommand = new ToDoCommand();
     private final static UnmarkCommand unmarkCommand = new UnmarkCommand();
 
     private static List<Task> tasks = new ArrayList<Task>();
@@ -76,10 +76,12 @@ public class Duke {
                 return listCommand;
             case "mark":
                 return markCommand;
+            case "todo":
+                return toDoCommand;
             case "unmark":
                 return unmarkCommand;
             default:
-                return addCommand;
+                return null; // TODO: handle unknown commands
         }
     }
 }

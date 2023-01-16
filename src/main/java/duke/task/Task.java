@@ -3,7 +3,7 @@ package duke.task;
 /**
  * Represents a task.
  */
-public class Task {
+public abstract class Task {
     private final boolean isDone;
     private final String description;
 
@@ -27,15 +27,24 @@ public class Task {
     }
 
     public Task setDone(boolean isDone) {
-        return new Task(isDone, description);
+        return createTask(isDone, description);
     }
 
     public Task setDescription(String description) {
-        return new Task(isDone, description);
+        return createTask(isDone, description);
     }
 
     @Override
     public String toString() {
         return String.format("[%s] %s", isDone ? "X" : " ", description);
     }
+
+    /**
+     * Returns a Task object created using the provided arguments.
+     *
+     * @param isDone Is the task done.
+     * @param description Description of the task.
+     * @return Task object created using the provided arguments.
+     */
+    protected abstract Task createTask(boolean isDone, String description);
 }
