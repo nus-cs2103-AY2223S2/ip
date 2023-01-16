@@ -8,7 +8,6 @@ public class Duke {
     private static final ArrayList<Task> tasks = new ArrayList<>();
     public static void main(String[] args) {
         System.out.println(greeting);
-        int counter = 0;
         while(active) {
             Scanner sc = new Scanner(System.in);
             String input = sc.nextLine();
@@ -27,6 +26,39 @@ public class Duke {
                     }
                     System.out.println("____________________________________________________________");
                     break;
+
+                case "deadline": {
+                    String rest = input.substring(command.length());
+                    String[] arr = rest.split("/");
+                    Deadline item = new Deadline(arr[0], arr[1].substring(3));
+                    tasks.add(item);
+                    System.out.println("____________________________________________________________\n Got it. I've added this task: \n"
+                            + "   " + item + "\n Now you have " + tasks.size() + " tasks in the list."
+                            + "\n____________________________________________________________");
+                    break;
+                }
+
+                case "todo": {
+                    String rest = input.substring(command.length());
+                    String[] arr = rest.split("/");
+                    Todo item = new Todo(arr[0]);
+                    tasks.add(item);
+                    System.out.println("____________________________________________________________\n Got it. I've added this task: \n"
+                            + "   " + item + "\n Now you have " + tasks.size() + " tasks in the list."
+                            + "\n____________________________________________________________");
+                    break;
+                }
+
+                case "event": {
+                    String rest = input.substring(command.length());
+                    String[] arr = rest.split("/");
+                    Event item = new Event(arr[0], arr[1].substring(5), arr[2].substring(3));
+                    tasks.add(item);
+                    System.out.println("____________________________________________________________\n Got it. I've added this task: \n"
+                            + "   " + item + "\n Now you have " + tasks.size() + " tasks in the list."
+                            + "\n____________________________________________________________");
+                    break;
+                }
                 case "mark": {
                     int num = Integer.parseInt(input.split(" ")[1]);
                     tasks.get(num - 1).markDone();
@@ -36,6 +68,7 @@ public class Duke {
                             "____________________________________________________________");
                     break;
                 }
+
                 case "unmark": {
                     int num = Integer.parseInt(input.split(" ")[1]);
                     tasks.get(num - 1).markUndone();
@@ -46,7 +79,6 @@ public class Duke {
                     break;
                 }
                 default:
-                    counter++;
                     tasks.add(new Task(input));
                     System.out.println("____________________________________________________________\n added: "
                             + input + "\n____________________________________________________________");
