@@ -12,4 +12,8 @@ Added: abc
 1: [T][] test
 2: [D][] abc (by: tomorrow)
 3: [E][] abc (From 1 to 2)
+Removing item 1: [T][] test
+Removal successful. New list:
+1: [D][] abc (by: tomorrow)
+2: [E][] abc (From 1 to 2)
 Bye, hope to see you again.

@@ -4,7 +4,7 @@ import java.util.Scanner;
 public class Duke {
     private static void printAllTasks(ArrayList<Task> list) {
         for (int i = 0; i < list.size(); i++) {
-            System.out.printf("%d: %s%n", i + 1, list.get(i));
+            System.out.printf("%d: %s\n", i + 1, list.get(i));
         }
     }
 
@@ -65,6 +65,23 @@ public class Duke {
                     }
                     list.add(new Event(split[1].trim(), split[2], split[3]));
                     System.out.println("Added: " + split[1].trim());
+                    break;
+                }
+                case "delete": {
+                    if (split.length != 2) {
+                        System.out.println("Invalid format");
+                    }
+                    try {
+                        int itemIndex = Integer.parseInt(split[1]) - 1;
+                        System.out.printf("Removing item %d: %s\n", itemIndex + 1, list.get(itemIndex));
+                        list.remove(itemIndex);
+                        System.out.println("Removal successful. New list:");
+                        printAllTasks(list);
+                    } catch (ArrayIndexOutOfBoundsException e) {
+                        System.out.printf("Error: Item %d does not exist", Integer.parseInt(split[1]));
+                    } catch (NumberFormatException e) {
+                        System.out.printf("Error: %s is not a number", split[1]);
+                    }
                     break;
                 }
                 default:
