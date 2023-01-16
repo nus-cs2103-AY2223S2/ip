@@ -1,5 +1,6 @@
 import java.util.Objects;
 import java.util.ArrayList;
+import java.util.Iterator;
 
 
 public class Duke {
@@ -50,5 +51,39 @@ public class Duke {
 
     public void addTask(Task t) {
         this.tasks.add(t);
+    }
+
+    public void markTaskDone(String s) {
+        for (Iterator<Task> iterator = this.tasks.iterator(); iterator.hasNext(); ) {
+            Task t = iterator.next();
+            if (t.getValue().equals(s)) {
+                t.markDone();
+            }
+        }
+    }
+
+    public String markTaskDone(int idx) {
+        Task t = this.tasks.get(idx);
+        t.markDone();
+        return String.format("Nice! I've marked this task as done:\n  %s", t);
+    }
+
+    public void unmarkTaskDone(String s) {
+        for (Iterator<Task> iterator = this.tasks.iterator(); iterator.hasNext(); ) {
+            Task t = iterator.next();
+            if (t.getValue().equals(s)) {
+                t.unmarkDone();
+            }
+        }
+    }
+
+    public String unmarkTaskDone(int idx) {
+        Task t = this.tasks.get(idx);
+        t.unmarkDone();
+        return String.format("OK, I've marked this task as not done yet:\n  %s", t);
+    }
+
+    public void removeTask(String s) {
+        this.tasks.removeIf(task -> task.getValue() == s);
     }
 }
