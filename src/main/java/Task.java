@@ -1,8 +1,8 @@
 public class Task {
-  String description;
-  boolean isDone = false;
-  int id;
-  static int runningId = 1;
+  protected String description;
+  protected boolean isDone = false;
+  protected int id;
+  protected static int runningId = 1;
 
   public Task(String description) {
     this.id = runningId;
