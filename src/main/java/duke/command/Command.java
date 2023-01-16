@@ -1,5 +1,7 @@
 package duke.command;
 
+import duke.task.Task;
+
 import java.util.List;
 
 /**
@@ -13,5 +15,5 @@ public interface Command {
      * @param tasks User's tasks.
      * @return CommandResponse object containing the response message and updated task list.
      */
-    CommandResponse run(String input, List<String> tasks);
+    CommandResponse run(String input, List<Task> tasks);
 }

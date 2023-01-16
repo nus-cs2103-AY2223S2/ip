@@ -1,5 +1,7 @@
 package duke.command;
 
+import duke.task.Task;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -17,9 +19,9 @@ public class AddCommand implements Command {
      * added.
      */
     @Override
-    public CommandResponse run(String input, List<String> tasks) {
-        List<String> updatedTasks = new ArrayList<String>(tasks);
-        updatedTasks.add(input);
+    public CommandResponse run(String input, List<Task> tasks) {
+        List<Task> updatedTasks = new ArrayList<Task>(tasks);
+        updatedTasks.add(new Task(false, input));
 
         return new CommandResponse(String.format("added: %s", input), updatedTasks);
     }

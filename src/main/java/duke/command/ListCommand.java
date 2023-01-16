@@ -1,5 +1,7 @@
 package duke.command;
 
+import duke.task.Task;
+
 import java.util.List;
 
 /**
@@ -15,10 +17,10 @@ public class ListCommand implements Command {
      * no changes.
      */
     @Override
-    public CommandResponse run(String input, List<String> tasks) {
+    public CommandResponse run(String input, List<Task> tasks) {
         StringBuilder stringBuilder = new StringBuilder();
         for (int i = 0; i < tasks.size(); ++i) {
-            stringBuilder.append(String.format("%d. %s\n", i + 1, tasks.get(i)));
+            stringBuilder.append(String.format("%d. %s\n", i + 1, tasks.get(i).getDescription()));
         }
 
         return new CommandResponse(stringBuilder.toString().trim(), tasks);

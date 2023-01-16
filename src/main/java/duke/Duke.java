@@ -5,6 +5,7 @@ import duke.command.ByeCommand;
 import duke.command.Command;
 import duke.command.CommandResponse;
 import duke.command.ListCommand;
+import duke.task.Task;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -18,7 +19,7 @@ public class Duke {
     private final static ByeCommand byeCommand = new ByeCommand();
     private final static ListCommand listCommand = new ListCommand();
 
-    private static List<String> tasks = new ArrayList<String>();
+    private static List<Task> tasks = new ArrayList<Task>();
 
     /**
      * Main method for the chatbot

@@ -1,5 +1,7 @@
 package duke.command;
 
+import duke.task.Task;
+
 import java.util.List;
 
 /**
@@ -14,7 +16,7 @@ public class EchoCommand implements Command {
      * @return CommandResponse object containing the user's input and the task list with no changes.
      */
     @Override
-    public CommandResponse run(String input, List<String> tasks) {
+    public CommandResponse run(String input, List<Task> tasks) {
         return new CommandResponse(input, tasks);
     }
 }

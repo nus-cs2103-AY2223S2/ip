@@ -1,5 +1,7 @@
 package duke.command;
 
+import duke.task.Task;
+
 import java.util.List;
 
 /**
@@ -7,7 +9,7 @@ import java.util.List;
  */
 public class CommandResponse {
     private final String message;
-    private final List<String> tasks;
+    private final List<Task> tasks;
 
     /**
      * Create a CommandResponse object.
@@ -15,7 +17,7 @@ public class CommandResponse {
      * @param message Message of the response.
      * @param tasks Updated task list.
      */
-    CommandResponse(String message, List<String> tasks) {
+    CommandResponse(String message, List<Task> tasks) {
         this.message = message;
         this.tasks = tasks;
     }
@@ -24,7 +26,7 @@ public class CommandResponse {
         return message;
     }
 
-    public List<String> getTasks() {
+    public List<Task> getTasks() {
         return tasks;
     }
 }
