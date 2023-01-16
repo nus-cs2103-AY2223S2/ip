@@ -1,6 +1,13 @@
 import java.util.Scanner;
 
 public class Duke {
+
+    private static void printWithDecorations(String input) {
+        System.out.println("OwO OwO OwO OwO OwO OwO");
+        System.out.println('~' + input + '~');
+        System.out.println("OwO OwO OwO OwO OwO OwO");
+    }
+
     public static void main(String[] args) {
         String logo = " ____        _        \n"
                 + "|  _ \\ _   _| | _____ \n"
@@ -12,11 +19,13 @@ public class Duke {
         Scanner sc = new Scanner(System.in);
         String input = sc.nextLine();
         while (!input.equals("bye")) {
-            System.out.println(input);
+            Duke.printWithDecorations(input);
             input = sc.nextLine();
         }
 
-        System.out.println("Bye. Hope to see you again soon!");
         sc.close();
+
+        String bye = "Bye. Hope to see you again soon!";
+        Duke.printWithDecorations(bye);
     }
 }
