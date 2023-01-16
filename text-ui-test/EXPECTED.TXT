@@ -1,7 +1,35 @@
-Hello from
- ____        _        
-|  _ \ _   _| | _____ 
-| | | | | | | |/ / _ \
-| |_| | |_| |   <  __/
-|____/ \__,_|_|\_\___|
-
+Hallo Hallo! My name is Uncle Roger.
+> What you want?
+> Added task:
+[T][ ] todo eat
+Now have 1 items.
++=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=
+> Added task:
+[D][ ] deadline do homework (by: no idea :-p)
+Now have 2 items.
++=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=
+> Added task:
+[E][ ] event project meeting (from: Mon 2pm to: 4pm)
+Now have 3 items.
++=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=
+> Added task:
+[D][ ] deadline return book (by: Sunday)
+Now have 4 items.
++=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=
+> Here's your list:
+1. [T][ ] todo eat
+2. [D][ ] deadline do homework (by: no idea :-p)
+3. [E][ ] event project meeting (from: Mon 2pm to: 4pm)
+4. [D][ ] deadline return book (by: Sunday)
++=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=
+> OK marked for you already:
+[D][X] deadline do homework (by: no idea :-p)
++=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=
+> Here's your list:
+1. [T][ ] todo eat
+2. [D][X] deadline do homework (by: no idea :-p)
+3. [E][ ] event project meeting (from: Mon 2pm to: 4pm)
+4. [D][ ] deadline return book (by: Sunday)
++=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=
+> Bye Bye. HAND.
++=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=
