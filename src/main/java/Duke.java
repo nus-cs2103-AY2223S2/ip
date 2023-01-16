@@ -1,6 +1,12 @@
 import java.util.Scanner;
 
 public class Duke {
+    private static final String EXIT_PROGRAM = "bye";
+    private static final String LIST_TASKS = "list";
+
+    private static final TaskList tasks = new TaskList();
+    private static final Scanner sc = new Scanner(System.in);
+
     public static void main(String[] args) {
         greetings();
         acceptCommands();
@@ -13,19 +19,24 @@ public class Duke {
                 + "| | | | | | | |/ / _ \\\n"
                 + "| |_| | |_| |   <  __/\n"
                 + "|____/ \\__,_|_|\\_\\___|\n";
-        System.out.println("Hello from\n" + logo + ", your personal assistant.\n What can I do for you today?");
+        System.out.println("Hello from\n" + logo + ", your personal assistant.\n"
+                + "What can I do for you today?");
     }
 
     private static void acceptCommands() {
-        Scanner sc = new Scanner(System.in);
         String command = "";
         while (true) {
             command = sc.nextLine();
-            if (command.equals("bye")) {
+
+            if (command.equals(EXIT_PROGRAM)) {
                 break;
+            } else if (command.equals(LIST_TASKS)) {
+                System.out.println(tasks.toString());
+            } else {
+                tasks.addTask(command);
             }
-            System.out.println(command);
         }
+
         sc.close();
     }
 
