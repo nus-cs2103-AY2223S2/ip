@@ -1,5 +1,4 @@
 public class TaskInfoParser {
-    private String input;
 
     /**
      * This is a parser to extract information from the task to decide which object it is referring
@@ -11,39 +10,17 @@ public class TaskInfoParser {
         String[] commands = input.split(" ");
         switch(commands[0]) {
             case "todo" :
-                String toDoDescription = buildDescription(commands, 1, commands.length - 1);
-                return new ToDo(toDoDescription);
+                return ToDo.create(commands);
             case "deadline" :
-                int byIndex = input.indexOf('/');
-                String deadline = input.substring(byIndex + 1);
-                String deadlineDescription = input.substring(9, byIndex - 1);
-                return new Deadline(deadlineDescription, deadline);
+                return Deadline.create(input);
             case "event" :
-                int fromIndex = input.indexOf("/from");
-                int toIndex = input.indexOf("/to");
-                String eventDescription = input.substring(6, fromIndex - 1);
-                String startTime = input.substring(fromIndex + 6, toIndex - 1);
-                String endTime = input.substring(toIndex + 4);
-                return new Event(eventDescription, startTime, endTime);
+                return Event.create(input);
             default:
                 break;
         }
-        return null;
+        throw new UnknownCommandException(String.format("Fall to the Dark Side You must Not," +
+                " for not know what %s means!!", commands[0]), null);
     }
 
-    /**
-     * Concatenates the strings from [start, end] indices of commands array to form
-     * required description of the task.
-     * @param commands array of commands split by regex patterns like " "
-     * @param start start index of commands array (inclusive)
-     * @param end end index of commands array (inclusive)
-     * @return a string description of a task
-     */
-    public static String buildDescription(String[] commands, int start, int end) {
-        String description = "";
-        for (int i = start; i < end; i++) {
-            description += commands[i] + " ";
-        }
-        return description + commands[end];
-    }
+
 }
