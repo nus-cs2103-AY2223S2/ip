@@ -3,15 +3,12 @@ package duke.task;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
-<<<<<<< HEAD
+import duke.exception.InvalidInputException;
+
 /**
  * A DeadlineTask that encapsulates the information and starting and ending
  * dates of a Deadline Task.
  */
-=======
-import duke.exception.InvalidInputException;
-
->>>>>>> branch-A-CodingStandard
 public class EventTask extends DukeTask {
     private final LocalDate from;
     private final LocalDate to;

@@ -1,6 +1,5 @@
 package duke.command;
 
-import java.io.IOException;
 
 import duke.display.Ui;
 import duke.exception.DukeException;
@@ -31,10 +30,5 @@ public abstract class Command {
      * @throws DukeException Throws Exception when the user inputs invalid instruction or
      * when encountering issues reading or writing to the storage file.
      */
-<<<<<<< HEAD
     public abstract void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException;
 }
-=======
-    public abstract void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException, IOException;
-}
->>>>>>> branch-A-CodingStandard

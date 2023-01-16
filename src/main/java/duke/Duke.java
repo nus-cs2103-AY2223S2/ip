@@ -1,7 +1,5 @@
 package duke;
 
-import java.io.IOException;
-
 import duke.command.Command;
 import duke.display.Ui;
 import duke.exception.DukeException;
@@ -11,12 +9,10 @@ import duke.parser.Parser;
 import duke.storage.Storage;
 import duke.task.TaskList;
 
-<<<<<<< HEAD
-=======
+
 /**
  * The main Duke class to run
  */
->>>>>>> branch-A-CodingStandard
 public class Duke {
     private final Storage storage;
     private TaskList list;

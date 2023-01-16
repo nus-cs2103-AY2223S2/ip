@@ -46,7 +46,6 @@ public class Storage {
         this.storageFile = new File(this.filePath);
     }
 
-<<<<<<< HEAD
     /**
      * Load the TaskList from the given data file. If the file does not exist return
      * a new empty TaskList.
@@ -54,13 +53,10 @@ public class Storage {
      * @return Return the TaskList parsed from the given file
      * @throws InvalidInputException Throws InvalidInputException when the Storage file
      * has unrecognized record
-     * @throws StorageFileIOException Throws StoreFileIoException when encountering
+     * @throws StorageFileException Throws StoreFileIoException when encountering
      * IOException when reading the file
      */
-    public TaskList load() throws InvalidInputException, StorageFileIOException {
-=======
     public TaskList load() throws InvalidInputException, StorageFileException {
->>>>>>> branch-A-CodingStandard
         TaskList list = new TaskList();
         if (!storageFile.exists()) {
             return list;
@@ -120,10 +116,10 @@ public class Storage {
      * Saves the current TaskList to the given file by overwriting it.
      *
      * @param list The given file to be saved.
-     * @throws StorageFileIOException Throws StoreFileIoException when encountering
+     * @throws StorageFileException Throws StoreFileIoException when encountering
      * IOException when writing to the file
      */
-    public void save(TaskList list) throws StorageFileIOException {
+    public void save(TaskList list) throws StorageFileException {
         if (!this.folder.toFile().exists()) {
             folder.toFile().mkdirs();
         }
@@ -137,7 +133,7 @@ public class Storage {
             }
             writeToFile(filePath, record.toString());
         } catch (IOException e) {
-            throw new StorageFileIOException("\"☹ OOPS!!! There's something wrong when writing to the Storage file\"");
+            throw new StorageFileException("\"☹ OOPS!!! There's something wrong when writing to the Storage file\"");
         }
     }
 }

@@ -1,12 +1,9 @@
 package duke.task;
 
-import java.util.regex.Pattern;
-
 /**
  * An abstract Task class encapsulating a task in Duke, which can be extended
  * by more specific tasks like Events, toDos, etc.
  */
-
 public abstract class DukeTask {
     private final String information;
     private final TaskType type;

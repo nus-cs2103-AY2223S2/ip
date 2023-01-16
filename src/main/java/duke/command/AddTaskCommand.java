@@ -1,9 +1,7 @@
 package duke.command;
 
-import java.io.IOException;
-
 import duke.display.Ui;
-import duke.exception.StorageFileIOException;
+import duke.exception.StorageFileException;
 import duke.storage.Storage;
 import duke.task.DukeTask;
 import duke.task.TaskList;
@@ -31,7 +29,7 @@ public class AddTaskCommand extends Command {
      * @param tasks The user TaskList that contains all the task to be manipulated
      */
     @Override
-    public void execute(TaskList tasks, Ui ui, Storage storage) throws StorageFileIOException {
+    public void execute(TaskList tasks, Ui ui, Storage storage) throws StorageFileException {
         tasks.addTask(task);
         storage.save(tasks);
         String message = "Got it. I've added this task:\n " + task

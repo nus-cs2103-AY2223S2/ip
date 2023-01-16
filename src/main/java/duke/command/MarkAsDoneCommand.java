@@ -1,7 +1,5 @@
 package duke.command;
 
-import java.io.IOException;
-
 import duke.display.Ui;
 import duke.exception.DukeException;
 import duke.exception.InvalidInputException;

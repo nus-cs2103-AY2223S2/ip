@@ -9,6 +9,7 @@ import duke.command.AddTaskCommand;
 import duke.command.Command;
 import duke.command.DeleteCommand;
 import duke.command.ExitCommand;
+import duke.command.FindCommand;
 import duke.command.ListCommand;
 import duke.command.MarkAsDoneCommand;
 import duke.command.UnmarkCommand;
@@ -19,8 +20,7 @@ import duke.task.EventTask;
 import duke.task.TodoTask;
 
 /*
-* A parser that parse the input String into a Duke Instruction
-* with respective information encapsulated
+* A parser that parse the input String into a Duke Instruction with respective information encapsulated.
 */
 public class Parser {
     /**
