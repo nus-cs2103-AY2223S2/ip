@@ -1,0 +1,9 @@
+todo Karina
+deadline Winter /by Tomorrow
+event Giselle /from Now /to Forever
+deadline NingNing /by Whenever happy
+mark 1
+mark 4
+unmark 1
+list
+bye
