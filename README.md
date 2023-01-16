@@ -1,6 +1,10 @@
 # Book project
 
-Welcome to Book, a Personal Assistant Chatbot that helps to keep track of various things!
-
-## Credits
-Kaomoji taken from http://kaomoji.ru/en/
+Welcome to
+ ____
+|  _ \  ___   ___  _
+| |_| |/ _ \ / _ \| |  _
+|  _ <| | | | | | | |/ /
+| |_| | |_| | |_| |   <
+|____/ \___/ \___/|_|\_\
+a Personal Assistant Chatbot that helps to keep track of various things!
