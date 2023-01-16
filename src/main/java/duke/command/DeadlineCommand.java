@@ -32,11 +32,16 @@ public class DeadlineCommand extends AddCommand {
      */
     @Override
     protected Task createTask(String input) throws DukeException {
-        input = input.replaceFirst("deadline ", "");
-        String[] args = input.split(input.startsWith ("/by ") ? "/by " : " /by ", 2);
+        input = input.replaceFirst("deadline ", "").trim();
+
+        if (input.startsWith("/by ")) {
+            throw new DukeException("The description of a deadline cannot be empty.");
+        }
+
+        String[] args = input.split(" /by ", 2);
 
         if (args.length != 2) {
-            throw new DukeException("The input of a deadline must include a ' /by '.");
+            throw new DukeException("The input of a deadline must include a cutoff date/time.");
         }
 
         return new Deadline(false, args[0], args[1]);
