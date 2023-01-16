@@ -9,8 +9,8 @@ public class TaskList {
         this.lst = new ArrayList<>();
     }
 
-    public void addTask(String task) {
-        this.lst.add(new Task(task));
+    public void addTask(Task task) {
+        this.lst.add(task);
     }
 
     public void markTask(int number) {
