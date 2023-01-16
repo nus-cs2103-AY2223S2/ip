@@ -21,6 +21,7 @@ public class Duke {
         String input = sc.nextLine();
         String[] inputArr = input.split(" ");
         int selectedNum;
+        int numTasks = 0;
 
         while (!inputArr[0].equalsIgnoreCase("bye")) {
             switch (inputArr[0]) {
@@ -30,6 +31,19 @@ public class Duke {
                         System.out.println("     " + (i + 1) + ". " + tasks.get(i).toString());
                     }
                     System.out.println("    ____________________________________________________________");
+                    break;
+                case "todo":
+                    String todoDesc = input.split(" ",2)[1];
+                    tasks.add(new ToDo(todoDesc));
+                    numTasks++;
+                    System.out.println(
+                            "    ____________________________________________________________"
+                                    + "\n     Got it. I've added this task:\n "
+                                    + tasks.get(numTasks - 1).toString()
+                                    + "\n     Now you have "
+                                    + numTasks
+                                    +" tasks in the list."
+                                    + "\n    ____________________________________________________________");
                     break;
                 case "mark":
                     selectedNum = Integer.parseInt(inputArr[1]) - 1;
@@ -51,6 +65,7 @@ public class Duke {
                     break;
                 default:
                     tasks.add(new Task(input));
+                    numTasks++;
                     String output = "    ____________________________________________________________"
                             + "\n      added: "
                             + input
