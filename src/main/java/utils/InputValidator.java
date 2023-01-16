@@ -15,4 +15,10 @@ public class InputValidator {
             return false;
         }
     }
+
+    public static boolean isTaskInputValid(String input) {
+        String[] split = input.split(" ");
+
+        return split.length >= 2;
+    }
 }

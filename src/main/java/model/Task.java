@@ -9,7 +9,7 @@ public class Task {
     private static int count = 0;
     private TaskStatus status = TaskStatus.NEW;
 
-    public Task(String title) {
+    protected Task(String title) {
         this.title = title;
 
         Task.tasks[count] = this;

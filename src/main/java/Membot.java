@@ -1,7 +1,9 @@
+import model.Deadline;
+import model.Event;
 import model.Task;
+import model.ToDo;
 import utils.InputValidator;
 import utils.Printer;
-
 import java.util.Scanner;
 
 public class Membot {
@@ -15,6 +17,9 @@ public class Membot {
     private static final String LIST_KEY = "list";
     private static final String CHECK_KEY = "done";
     private static final String UNCHECK_KEY = "undone";
+    private static final String TODO_KEY = "todo";
+    private static final String DEADLINE_KEY = "deadline";
+    private static final String EVENT_KEY = "event";
 
     public static void main(String[] args) {
         Printer.println("Welcome to\n" + LOGO);
@@ -57,9 +62,32 @@ public class Membot {
                             Printer.printlnIndent("Invalid Task ID!");
                             break;
                         }
+                    } else if (input.startsWith(TODO_KEY)
+                            && InputValidator.isTaskInputValid(input)) {
+                        String title = input.substring(5);
+                        ToDo task = new ToDo(title);
+                        Printer.printIndent(task.toString());
+                    } else if (input.startsWith(DEADLINE_KEY)
+                            && InputValidator.isTaskInputValid(input)) {
+                        int deadlineStartIndex = input.indexOf("/by ");
+                        String title = input.substring(9, deadlineStartIndex - 1);
+                        String deadline = input.substring(deadlineStartIndex + 4);
+
+                        Deadline task = new Deadline(title, deadline);
+                        Printer.printIndent(task.toString());
+                    } else if (input.startsWith(EVENT_KEY)
+                            && InputValidator.isTaskInputValid(input)) {
+                        int startIndex = input.indexOf("/from ");
+                        int endIndex = input.indexOf("/to ");
+                        String title = input.substring(6, startIndex - 1);
+                        String start = input.substring(startIndex + 6, endIndex - 1);
+                        String end = input.substring(endIndex + 4);
+
+                        Event task = new Event(title, start, end);
+                        Printer.printIndent(task.toString());
                     } else {
-                        Task task = new Task(input);
-                        Printer.printIndent("[new] " + task);
+                        ToDo task = new ToDo(input);
+                        Printer.printIndent(task.toString());
                     }
 
                     Printer.printIndent("");
