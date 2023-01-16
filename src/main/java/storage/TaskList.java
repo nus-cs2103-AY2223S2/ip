@@ -6,10 +6,8 @@ import task.Todo;
 import task.Deadline;
 import task.Event;
 
-import java.io.BufferedReader;
-import java.io.File;
-import java.io.FileReader;
-import java.io.IOException;
+import java.io.*;
+import java.nio.Buffer;
 import java.util.ArrayList;
 
 public class TaskList {
@@ -170,10 +168,33 @@ public class TaskList {
                             "create a new file or follow the format.");
                 }
             }
+
             reader.close();
             fr.close();
         } catch (IOException error) {
             error.printStackTrace();
+        }
+    }
+
+    /**
+     * Write tasks to the file stored.
+     */
+    public void writeTasksToFile() {
+        if (this.tasksFile != null) {
+            try {
+                FileWriter fw = new FileWriter(this.tasksFile, false);
+                BufferedWriter writer = new BufferedWriter(fw);
+
+                for (Task task: tasks) {
+                    writer.write(task.toDataString());
+                    writer.newLine();
+                }
+
+                writer.close();
+                fw.close();
+            } catch (IOException error) {
+                error.printStackTrace();
+            }
         }
     }
 }

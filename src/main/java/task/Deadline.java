@@ -18,4 +18,9 @@ public class Deadline extends Task{
             return "[D][ ] " + content;
         }
     }
+
+    @Override
+    public String toDataString() {
+        return "D | " + (this.isCompleted ? "1" : "0") + " | " + this.task + " | " + this.deadline;
+    }
 }

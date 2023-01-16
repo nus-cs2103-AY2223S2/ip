@@ -20,4 +20,10 @@ public class Event extends Task{
             return "[E][ ] " + content;
         }
     }
+
+    @Override
+    public String toDataString() {
+        return "E | " + (this.isCompleted ? "1" : "0") + " | " + this.task + " | "
+                + this.startTime + "-" + this.endTime;
+    }
 }

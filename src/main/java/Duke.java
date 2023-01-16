@@ -13,7 +13,7 @@ public class Duke {
      * Prints the formatted response in the console.
      * @param response  the string to be printed
      */
-    private static void returnFormattedResponse(String response) {
+    private static void printFormattedResponse(String response) {
         final int INDENTS = 4;
 
         String lineAddedResponse = "____________________________________________________________\n"
@@ -58,24 +58,25 @@ public class Duke {
         File tasksFile = linkLocalDriveOnStartup("./data/tasks.txt");
 
         System.out.println(logo);
-        returnFormattedResponse(INTRODUCTION_MESSAGE);
+        printFormattedResponse(INTRODUCTION_MESSAGE);
 
         Scanner scanner = new Scanner(System.in);
         TaskList taskList = new TaskList(tasksFile);
         while(true) {
             String request = scanner.nextLine();
             if (request.equals("bye")) {
+                taskList.writeTasksToFile();
                 break;
             }
             try {
                 Command command = new Request(request).parse();
                 String reply = command.run(taskList);
-                returnFormattedResponse(reply);
+                printFormattedResponse(reply);
             } catch(DukeException error) {
-                returnFormattedResponse(error.toString());
+                printFormattedResponse(error.toString());
             }
         }
 
-        returnFormattedResponse(EXITING_MESSAGE);
+        printFormattedResponse(EXITING_MESSAGE);
     }
 }

@@ -14,4 +14,9 @@ public class Todo extends Task {
             return "[T][ ] " + this.task;
         }
     }
+
+    @Override
+    public String toDataString() {
+        return "T | " + (this.isCompleted ? "1" : "0") + " | " + this.task;
+    }
 }
