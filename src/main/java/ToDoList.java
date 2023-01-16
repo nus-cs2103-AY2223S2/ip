@@ -6,9 +6,7 @@ public class ToDoList {
     public ToDoList() {}
 
     public String add(TaskType type, String s) {
-
         try {
-
             String output = "\t Got it. I've added this task:\n";
             switch (type) {
                 case ToDos:
@@ -72,11 +70,38 @@ public class ToDoList {
     }
 
     public String mark(int num) {
-        return list.get(num).mark();
+        try {
+            if (num < -1 || num >= list.size()) {
+                throw new DukeException("\t ☹ OOPS!!! Task number out of range.");
+            }
+            return list.get(num).mark();
+        } catch (DukeException dukeException) {
+            return dukeException.getMessage();
+        }
     }
 
     public String unMark(int num) {
-        return list.get(num).unMark();
+        try {
+            if (num < -1 || num >= list.size()) {
+                throw new DukeException("\t ☹ OOPS!!! Task number out of range.");
+            }
+            return list.get(num).unMark();
+        } catch (DukeException dukeException) {
+            return dukeException.getMessage();
+        }
+    }
+
+    public String delete(int num) {
+        try {
+            String output = "\t Noted. I've removed this task:\n";
+            if (num < -1 || num >= list.size()) {
+                throw new DukeException("\t ☹ OOPS!!! Task number out of range.");
+            }
+            Task removed = list.remove(num);
+            return String.format("%s\t   %s\n\t Now you have %d tasks in the list.", output, removed, list.size());
+        } catch (DukeException dukeException) {
+            return dukeException.getMessage();
+        }
     }
 
     public String list() {

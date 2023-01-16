@@ -1,12 +1,6 @@
 import java.util.Scanner;
 
 public class Duke {
-    public static void printText(String s) {
-        System.out.println("\t____________________________________________________________");
-        System.out.println(s);
-        System.out.println("\t____________________________________________________________\n");
-    }
-
     public static void main(String[] args) {
         printText("\t Hello! I'm Duke \n\t What can I do for you?");
 
@@ -21,15 +15,19 @@ public class Duke {
                         printText(list.list());
                         break;
                     case "mark": {
-                        int num = Integer.parseInt(scanner.next());
+                        int num = Integer.parseInt(scanner.nextLine().strip());
                         printText(list.mark(num - 1));
                     }
-                    break;
+                        break;
                     case "unmark": {
-                        int num = Integer.parseInt(scanner.next());
+                        int num = Integer.parseInt(scanner.nextLine().strip());
                         printText(list.unMark(num - 1));
                     }
-                    break;
+                    case "delete": {
+                        int num = Integer.parseInt(scanner.nextLine().strip());
+                        printText(list.delete(num - 1));
+                    }
+                        break;
                     case "todo":
                         printText(list.add(TaskType.ToDos, scanner.nextLine().strip()));
                         break;
@@ -44,12 +42,20 @@ public class Duke {
                 }
             } catch (DukeException dukeException){
                 printText(dukeException.getMessage());
+            } catch (NumberFormatException exception) {
+                printText("\t ☹ OOPS!!! Task number is invalid.");
             }
 
             input = scanner.next();
         }
 
         printText("\t Bye. Hope to see you again soon!");
+    }
+
+    public static void printText(String s) {
+        System.out.println("\t____________________________________________________________");
+        System.out.println(s);
+        System.out.println("\t____________________________________________________________\n");
     }
 }
 
