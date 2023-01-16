@@ -13,9 +13,9 @@ public class Duke {
 
     private static String formatMessage(String message) {
         String FORMAT_LINE = "___________________________";
-        return FORMAT_LINE + "\n" +
-                message + "\n" +
-                FORMAT_LINE;
+        return FORMAT_LINE + "\n"
+                + message + "\n"
+                + FORMAT_LINE;
     }
 
     private static void printMessage(String message) {
@@ -31,8 +31,8 @@ public class Duke {
     }
 
     private static void greet() {
-        printMessage("Hello, I am Duke.\n" +
-                "What can I do for you?");
+        printMessage("Hello, I am Duke.\n"
+                + "What can I do for you?");
     }
 
     private static void sayGoodbye() {
@@ -84,15 +84,21 @@ public class Duke {
     }
 
     private static void displayTasks() {
-        printMessage(taskList.toString());
+        printMessage("Your tasks are:\n" + taskList.toString());
     }
 
     private static void markTaskAsDone(int number) {
         taskList.markTaskAsDone(number);
+        printMessage("Good job. You have finished this task:\n"
+                        + taskList.getTaskString(number)
+                );
     }
 
     private static void markTaskAsNotDone(int number) {
         taskList.markTaskAsNotDone(number);
+        printMessage("Ok. I have marked this task as not done:\n"
+                + taskList.getTaskString(number)
+        );
     }
 
     // Main method

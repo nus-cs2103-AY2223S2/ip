@@ -10,13 +10,19 @@ public class TaskList {
 
 
     public void markTaskAsDone(int number) {
-        int index = number - 1;
-        list.get(index).setDone(true);
+        list.get(getIndexFromNumber(number)).setDone(true);
     }
 
     public void markTaskAsNotDone(int number) {
-        int index = number - 1;
-        list.get(index).setDone(false);
+        list.get(getIndexFromNumber(number)).setDone(false);
+    }
+
+    public String getTaskString(int number) {
+        return list.get(getIndexFromNumber(number)).toString();
+    }
+
+    private int getIndexFromNumber(int number) {
+        return number - 1;
     }
 
     @Override
