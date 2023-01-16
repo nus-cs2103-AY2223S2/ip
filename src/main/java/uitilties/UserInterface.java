@@ -29,7 +29,7 @@ public class UserInterface {
         Scanner sc = new Scanner(System.in);
         String cmd = sc.next().trim();
         String content = sc.nextLine().trim();
-
+        //TODO remark parse here
         switch (cmd) {
             case "bye":
                 return new Exit(tasks);
@@ -41,7 +41,8 @@ public class UserInterface {
 
             case "unmark":
                 return new Unmark(tasks, content);
-
+            case "delete":
+                return new Delete(tasks, content);
             case "todo":
             case "deadline":
             case "event":

@@ -19,6 +19,7 @@ public class Duke {
                 done = cmd.run();
             } catch (DukeException e) {
                 System.out.println(e.getMessage());
+                UserInterface.Speak("Type any command to continue...");
             }
 
     }
