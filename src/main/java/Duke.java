@@ -2,11 +2,30 @@ import java.util.Scanner;
 
 public class Duke {
 
-    private String[] lists;
+    private Task[] tasks;
     private int cnt;
 
+    private class Task {
+        protected String description;
+        protected boolean isDone;
+
+        public Task(String description) {
+            this.description = description;
+            this.isDone = false;
+        }
+
+        public String getStatusIcon() {
+            return isDone ? "X" : " ";
+        }
+
+        @Override
+        public String toString() {
+            return "[" + this.getStatusIcon() + "] " + this.description;
+        }
+    }
+
     public Duke() {
-        this.lists = new String[100];
+        this.tasks = new Task[100];
         this.cnt = 0;
     }
 
@@ -46,16 +65,19 @@ public class Duke {
         line();
         space();
         System.out.println("added: " + message);
-        this.lists[cnt] = message;
+        Task newTask = new Task(message);
+        this.tasks[cnt] = newTask;
         this.cnt++;
         line();
     }
 
     private void displayLists() {
         line();
+        space();
+        System.out.println("Here are all of your tasks");
         for (int i = 0; i < this.cnt; i++) {
             space();
-            System.out.println((i + 1) + ". " + this.lists[i]);
+            System.out.println((i + 1) + "." + this.tasks[i]);
         }
         line();
     }
