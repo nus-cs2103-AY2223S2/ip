@@ -65,8 +65,13 @@ public class ListCommand extends Command {
                         .collect(Collectors.toList());
             }
 
-            if(filtered.size() > 0) {
-                ui.println(Message.LIST_TASKS);
+            if (filtered.size() > 0) {
+                if (!filterDate.isEmpty() || !filterString.isEmpty()) {
+                    ui.println(Message.FIND_TASKS);
+                } else {
+                    ui.println(Message.LIST_TASKS);
+                }
+
                 for (int i = 0; i < filtered.size(); i++) {
                     ui.println(String.format("\t%d. %s", i + 1, filtered.get(i)));
                 }
