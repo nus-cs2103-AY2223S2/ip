@@ -6,5 +6,8 @@ mark 3
 list
 unmark 2
 list
+todo
+deadline return book
+pee
 delete 2
 list
