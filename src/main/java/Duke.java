@@ -1,3 +1,4 @@
+import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Duke {
@@ -30,10 +31,23 @@ public class Duke {
     private static void respond(String chat) {
         if (chat.equals("list")) {
             String response = "";
-            for (String task : ls.getList()) {
-                response += task;
+            ArrayList<DukeTask> list = ls.getList();
+            for (int i = 0; i < list.size(); i++) {
+                DukeTask task = list.get(i);
+                response += Integer.toString(i + 1) + ". ";
+                response += task.toString();
                 response += "\n";
             }
+            print(response);
+        } else if (chat.length() > 4 && chat.substring(0, 4).equals("mark")) {
+            DukeTask task = ls.mark(chat.substring(5));
+            String response = "Nice! I've marked this task as done:\n";
+            response += task.toString();
+            print(response);
+        } else if (chat.length() > 6 && chat.substring(0, 6).equals("unmark")) {
+            DukeTask task = ls.unmark(chat.substring(7));
+            String response = "OK, I've marked this task as not done yet:\n";
+            response += task.toString();
             print(response);
         } else {
             ls.addTask(chat);
