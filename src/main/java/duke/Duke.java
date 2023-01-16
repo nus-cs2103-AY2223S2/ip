@@ -5,6 +5,7 @@ import duke.command.ByeCommand;
 import duke.command.Command;
 import duke.command.CommandResponse;
 import duke.command.ListCommand;
+import duke.command.MarkCommand;
 import duke.task.Task;
 
 import java.util.ArrayList;
@@ -18,6 +19,7 @@ public class Duke {
     private final static AddCommand addCommand = new AddCommand();
     private final static ByeCommand byeCommand = new ByeCommand();
     private final static ListCommand listCommand = new ListCommand();
+    private final static MarkCommand markCommand = new MarkCommand();
 
     private static List<Task> tasks = new ArrayList<Task>();
 
@@ -63,11 +65,15 @@ public class Duke {
     }
 
     private static Command getCommand(String input) {
-        switch (input) {
+        String op = input.split(" ")[0];
+
+        switch (op) {
             case "bye":
                 return byeCommand;
             case "list":
                 return listCommand;
+            case "mark":
+                return markCommand;
             default:
                 return addCommand;
         }
