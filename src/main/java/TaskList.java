@@ -148,6 +148,33 @@ public class TaskList {
         this.printNumberOfTasks();
     }
 
+    public void handleDeleteCommand(String[] tokens) throws DukeInvalidDeleteCommandException {
+        if (tokens.length != 2) {
+            throw new DukeInvalidDeleteCommandException();
+        }
+
+        int taskNumber;
+
+        try {
+            taskNumber = Integer.parseInt(tokens[1]);
+        } catch (NumberFormatException e) {
+            throw new DukeInvalidDeleteCommandException();
+        }
+
+        if (taskNumber < 1 || taskNumber > this.tasks.size()) {
+            throw new DukeInvalidDeleteCommandException();
+        }
+
+        this.deleteTask(taskNumber);
+    }
+
+    private void deleteTask(int taskNumber) {
+        // need to convert back to 0-indexed
+        Task deletedTask = this.tasks.remove(taskNumber - 1);
+        System.out.println("Deleted:\n" + deletedTask.toString());
+        this.printNumberOfTasks();
+    }
+
     public void handleByeCommand() {
         System.out.println("Exiting...");
     }

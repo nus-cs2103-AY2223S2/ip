@@ -42,6 +42,10 @@ public class Duke {
                     taskList.handleEventCommand(tokens);
                     break;
 
+                case "delete":
+                    taskList.handleDeleteCommand(tokens);
+                    break;
+
                 case "bye":
                     taskList.handleByeCommand();
                     sc.close();

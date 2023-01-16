@@ -30,4 +30,9 @@ mark 3
 mark 3
 unmark 4
 unmark 4
+delete -999
+delete 999
+delete abc
+delete 1
+list
 bye

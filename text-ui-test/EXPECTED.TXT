@@ -81,4 +81,18 @@ There are 4 tasks in the list
 
 >> [E][ ] meeting (from: 2pm to: 4pm)
 
+>> Usage: delete <task no.>
+
+>> Usage: delete <task no.>
+
+>> Usage: delete <task no.>
+
+>> Deleted:
+[T][ ] read book
+There are 3 tasks in the list
+
+>> 1. [T][ ] return book
+2. [D][x] assignment (by: Sunday)
+3. [E][ ] meeting (from: 2pm to: 4pm)
+
 >> Exiting...
