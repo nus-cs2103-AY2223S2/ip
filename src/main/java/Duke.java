@@ -1,13 +1,10 @@
+import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Duke {
-    private static final String LOGO = " ____        _        \n"
-            + "|  _ \\ _   _| | _____ \n"
-            + "| | | | | | | |/ / _ \\\n"
-            + "| |_| | |_| |   <  __/\n"
-            + "|____/ \\__,_|_|\\_\\___|\n";
-
     private static final String LINE = "___________________________________________________\n";
+    private ArrayList<String> list = new ArrayList<>();
+    private int counter = 0;
 
     public void greet() {
         System.out.println(Duke.LINE
@@ -27,11 +24,20 @@ public class Duke {
 
         while(sc.hasNext()) {
             String input = sc.nextLine();
+
             if (input.equals("bye")) {
                 this.exit();
                 break;
+            } else if (input.equals("list")) {
+                System.out.println(Duke.LINE);
+                for (int i = 0; i < counter; i++) {
+                    System.out.println(i+1 + ". " + list.get(i));
+                }
+                System.out.println(Duke.LINE);
             } else {
-                System.out.println(Duke.LINE + input);
+                list.add(input);
+                counter++;
+                System.out.println(Duke.LINE + "added: " + input);
                 System.out.println(Duke.LINE);
             }
         }
