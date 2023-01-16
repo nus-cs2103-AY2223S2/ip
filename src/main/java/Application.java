@@ -9,7 +9,7 @@ public class Application {
 
         // Saturday Active
         while (!userInput.equals("bye")) {
-            saturday.entry(userInput);
+            saturday.input(userInput);
             userInput = scanner.nextLine();
         }
 
