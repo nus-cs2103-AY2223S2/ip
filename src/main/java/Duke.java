@@ -21,11 +21,7 @@ public class Duke {
         
             switch (command.baseCommand) {
                 case "list":
-                    if (tasks.isEmpty()) {
-                        Duke.say("Nothing in the list.");
-                        break;
-                    }
-                    Duke.say(tasks.toString());
+                    Duke.list(command, tasks);
                     break;
                 case "quit":
                 case "exit":
@@ -33,8 +29,7 @@ public class Duke {
                     Duke.say("Bye. Hope to see you again soon!");
                     break whileLoop;
                 default:
-                    tasks.add(new Task(input));
-                    Duke.say("added: " + input);
+                    Duke.addTask(command, tasks);
                     break;
             }
         }
@@ -50,5 +45,19 @@ public class Duke {
         System.out.println(indentation + horizontalLine);
         System.out.println(indentedInput);
         System.out.println(indentation + horizontalLine + '\n');
+    }
+
+    private static void list(Command command, TaskList tasks) {
+        if (tasks.isEmpty()) {
+            Duke.say("Nothing in the list.");
+            return;
+        }
+        Duke.say(tasks.toString());
+    }
+
+    private static void addTask(Command command, TaskList tasks) {
+        String commandString = command.toString();
+        tasks.add(new Task(commandString));
+        Duke.say("added: " + commandString);
     }
 }
