@@ -1,6 +1,6 @@
 package duke.command;
 
-import duke.task.EventTask;
+import duke.task.Event;
 import duke.task.Task;
 
 /**
@@ -18,6 +18,6 @@ public class EventCommand extends AddCommand {
         String start = startAndEnd[0];
         String end = startAndEnd[1];
 
-        return new EventTask(false, description, start, end);
+        return new Event(false, description, start, end);
     }
 }

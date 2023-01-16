@@ -3,14 +3,14 @@ package duke.task;
 /**
  * Represents a To-Do task.
  */
-public class ToDoTask extends Task {
+public class ToDo extends Task {
     /**
      * Creates a ToDoTask object.
      *
      * @param isDone Is the task done.
      * @param description Description of the task.
      */
-    public ToDoTask(boolean isDone, String description) {
+    public ToDo(boolean isDone, String description) {
         super(isDone, description);
     }
 
@@ -21,6 +21,6 @@ public class ToDoTask extends Task {
 
     @Override
     protected Task createTask(boolean isDone, String description) {
-        return new ToDoTask(isDone, description);
+        return new ToDo(isDone, description);
     }
 }

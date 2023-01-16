@@ -3,7 +3,7 @@ package duke.task;
 /**
  * Represents a deadline task.
  */
-public class DeadlineTask extends Task {
+public class Deadline extends Task {
     /**
      * Creates a DeadlineTask object.
      *
@@ -11,11 +11,11 @@ public class DeadlineTask extends Task {
      * @param description Description of the task.
      * @param deadline Deadline of the task.
      */
-    public DeadlineTask(boolean isDone, String description, String deadline) {
+    public Deadline(boolean isDone, String description, String deadline) {
         super(isDone, String.format("%s (by: %s)", description, deadline));
     }
 
-    private DeadlineTask(boolean isDone, String description) {
+    private Deadline(boolean isDone, String description) {
         super(isDone, description);
     }
 
@@ -26,6 +26,6 @@ public class DeadlineTask extends Task {
 
     @Override
     protected Task createTask(boolean isDone, String description) {
-        return new DeadlineTask(isDone, description);
+        return new Deadline(isDone, description);
     }
 }

@@ -1,6 +1,6 @@
 package duke.command;
 
-import duke.task.DeadlineTask;
+import duke.task.Deadline;
 import duke.task.Task;
 
 /**
@@ -12,6 +12,6 @@ public class DeadlineCommand extends AddCommand {
         input = input.replace("deadline ", "");
         String[] args = input.split(" /by ");
 
-        return new DeadlineTask(false, args[0], args[1]);
+        return new Deadline(false, args[0], args[1]);
     }
 }

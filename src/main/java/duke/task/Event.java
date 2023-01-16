@@ -3,7 +3,7 @@ package duke.task;
 /**
  * Represents an event task.
  */
-public class EventTask extends Task {
+public class Event extends Task {
     /**
      * Creates an EventTask object.
      *
@@ -12,11 +12,11 @@ public class EventTask extends Task {
      * @param start When the event starts.
      * @param end When the event ends.
      */
-    public EventTask(boolean isDone, String description, String start, String end) {
+    public Event(boolean isDone, String description, String start, String end) {
         super(isDone, String.format("%s (from: %s to: %s)", description, start, end));
     }
 
-    private EventTask(boolean isDone, String description) {
+    private Event(boolean isDone, String description) {
         super(isDone, description);
     }
 
@@ -27,6 +27,6 @@ public class EventTask extends Task {
 
     @Override
     protected Task createTask(boolean isDone, String description) {
-        return new EventTask(isDone, description);
+        return new Event(isDone, description);
     }
 }
