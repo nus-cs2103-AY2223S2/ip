@@ -1,6 +1,7 @@
 package commands;
 
 import data.MyData;
+import ui.Ui;
 
 public class Mark extends Commands {
     private final int id;
@@ -11,9 +12,9 @@ public class Mark extends Commands {
 
     public void execute(MyData data) {
         data.markDone(this.id);
-        System.out.print(getLine() +
+        System.out.print(Ui.line() +
                 "    Nice! I've marked this task as done:\n" +
                 "    " + data.getData(this.id) + "\n" +
-                getLine());
+                Ui.line());
     }
 }

@@ -2,6 +2,7 @@ package commands;
 
 import data.MyData;
 import tasks.ToDo;
+import ui.Ui;
 
 public class AddToDo extends Commands {
     protected ToDo todo;
@@ -12,10 +13,10 @@ public class AddToDo extends Commands {
 
     public void execute(MyData data) {
         data.setData(todo);
-        System.out.print(getLine() +
+        System.out.print(Ui.line() +
                 "     Got it. I've added this task:\n" +
                 "       " + todo + "\n" +
                 "     Now you have " + data.len() + " tasks in the list.\n" +
-                getLine());
+                Ui.line());
     }
 }

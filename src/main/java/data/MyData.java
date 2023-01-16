@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import tasks.Task;
 
 public class MyData {
-    private ArrayList<Task> data = new ArrayList<Task>();
+    private final ArrayList<Task> data = new ArrayList<Task>();
 
     public Task getData(int index) {
         return this.data.get(index);

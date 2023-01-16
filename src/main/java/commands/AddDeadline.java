@@ -2,6 +2,7 @@ package commands;
 
 import data.MyData;
 import tasks.Deadline;
+import ui.Ui;
 
 public class AddDeadline extends Commands {
     protected Deadline deadline;
@@ -12,10 +13,10 @@ public class AddDeadline extends Commands {
 
     public void execute(MyData data) {
         data.setData(deadline);
-        System.out.print(getLine() +
+        System.out.print(Ui.line() +
                 "     Got it. I've added this task:\n" +
                 "       " + deadline + "\n" +
                 "     Now you have " + data.len() + " tasks in the list.\n" +
-                getLine());
+                Ui.line());
     }
 }
