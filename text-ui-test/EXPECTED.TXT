@@ -31,11 +31,11 @@ Here are the tasks in your list:
 ____________________________________________________________
 ____________________________________________________________
 Nice! I've marked this task as done:
-[X] [T][X]  walk dog
+[T][X]  walk dog
 ____________________________________________________________
 ____________________________________________________________
 Nice! I've marked this task as done:
-[X] [D][X]  get shirt ironed  (by: 12 am)
+[D][X]  get shirt ironed  (by: 12 am)
 ____________________________________________________________
 ____________________________________________________________
 Here are the tasks in your list:
@@ -46,7 +46,7 @@ Here are the tasks in your list:
 ____________________________________________________________
 ____________________________________________________________
 OK, I've marked this task as not done yet:
-[ ] [T][ ]  walk dog
+[T][ ]  walk dog
 ____________________________________________________________
 ____________________________________________________________
 Here are the tasks in your list:
@@ -79,6 +79,18 @@ Here are the tasks in your list:
 3.[E][ ]  attend lecture  (from:  2pm  to:  4pm)
 4.[T][ ]  walk dog
 5.[T][ ]  bake cake
+____________________________________________________________
+____________________________________________________________
+Noted. I've removed this task:
+[T][ ]  bake cake
+Now you have 4 tasks in the list.
+____________________________________________________________
+____________________________________________________________
+Here are the tasks in your list:
+1.[T][ ]  read book
+2.[D][X]  get shirt ironed  (by: 12 am)
+3.[E][ ]  attend lecture  (from:  2pm  to:  4pm)
+4.[T][ ]  walk dog
 ____________________________________________________________
 ____________________________________________________________
 Bye. Hope to see you again soon!

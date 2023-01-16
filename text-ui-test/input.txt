@@ -14,4 +14,6 @@ deadline do hw
 event do hw /from now
 todo bake cake
 list
+delete 5
+list
 bye

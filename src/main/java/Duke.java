@@ -1,8 +1,8 @@
+import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Duke {
-    static Task[] tasks = new Task[100];
-    static int numOfTasks = 0;
+    static ArrayList<Task> tasks = new ArrayList<Task>();
     public static void main(String[] args) {
         /*String logo = " ____        _        \n"
                 + "|  _ \\ _   _| | _____ \n"
@@ -26,15 +26,17 @@ public class Duke {
                 } else if (command.equalsIgnoreCase("list")) {
                     showList();
                 } else if (command.equalsIgnoreCase("mark")) {
-                    markTask(Integer.parseInt(parsedInput[1]) - 1);
+                    markTask(processMarkUnmarkDel(newInput));
                 } else if (command.equalsIgnoreCase("unmark")) {
-                    unmarkTask(Integer.parseInt(parsedInput[1]) - 1);
+                    unmarkTask(processMarkUnmarkDel(newInput));
                 } else if (command.equalsIgnoreCase("todo")) {
                     addTodo(newInput.split("todo", 2)[1]);
                 } else if (command.equalsIgnoreCase("deadline")) {
                     processDeadline(newInput);
                 } else if (command.equalsIgnoreCase("event")) {
                     processEvent(newInput);
+                } else if (command.equalsIgnoreCase("delete")) {
+                    delete(processMarkUnmarkDel(newInput));
                 } else {
                     throw new DukeException("I'm sorry, but I don't know what that means :-(");
                 }
@@ -55,10 +57,28 @@ public class Duke {
         if(description.equals("")){
             throw new DukeException("The description of a todo cannot be empty.");
         }
-        tasks[numOfTasks] = new Todo(description);
+        Todo newTodo = new Todo(description);
+        tasks.add(newTodo);
         System.out.println(makeOutput(String.format("Got it. I've added this task:\n %s\n Now you have %d tasks in the list."
-                ,tasks[numOfTasks], ++numOfTasks)));
+                ,newTodo, tasks.size())));
     }
+
+    public static int processMarkUnmarkDel(String input) throws DukeException{
+        String[] parsedInput = input.split(" ");
+        if(parsedInput.length != 2) {
+            throw new DukeException("index of task to delete is missing");
+        }
+        try{
+            int index = Integer.parseInt(parsedInput[1]);
+            if(index > tasks.size()) {
+                throw new DukeException("invalid task index");
+            }
+            return index - 1;
+        } catch(NumberFormatException n) {
+            throw new DukeException(n.getMessage());
+        }
+    }
+
     public static void processDeadline(String input) throws DukeException{
         String raw = input.split("deadline", 2)[1];
         if(raw.equals("")){
@@ -87,47 +107,51 @@ public class Duke {
         addEvent(parsed1[0], parsed2[0], parsed2[1]);
     }
 
-    public static void addDeadline(String description, String by) throws DukeException{
-        tasks[numOfTasks] = new Deadline(description, by);
+    public static void addDeadline(String description, String by){
+        Deadline newDd = new Deadline(description, by);
+        tasks.add(newDd);
         System.out.println(makeOutput(String.format("Got it. I've added this task:\n %s\n Now you have %d tasks in the list."
-                ,tasks[numOfTasks], ++numOfTasks)));
+                ,newDd, tasks.size())));
     }
 
-    public static void addEvent(String description, String from, String to) throws DukeException{
-        tasks[numOfTasks] = new Event(description, from , to);
+    public static void addEvent(String description, String from, String to) {
+        Event newEvent = new Event(description, from, to);
+        tasks.add(newEvent);
         System.out.println(makeOutput(String.format("Got it. I've added this task:\n %s\n Now you have %d tasks in the list."
-                ,tasks[numOfTasks], ++numOfTasks)));
+                ,newEvent, tasks.size())));
     }
 
     public static void showList(){
-        if(tasks.length == 0){
+        int len = tasks.size();
+        if(len == 0){
+            System.out.println(makeOutput(""));
             return;
         }
         String result = "Here are the tasks in your list:\n";
-        for(int i = 0; i < numOfTasks - 1; i ++){
-            result += Integer.toString(i + 1) + "." + tasks[i] + "\n";
+        for(int i = 0; i < len - 1; i ++){
+            result += (i + 1) + "." + tasks.get(i) + "\n";
         }
-        result += Integer.toString(numOfTasks) + "." + tasks[numOfTasks - 1];
+        result += len + "." + tasks.get(len - 1);
         System.out.println(makeOutput(result));
     }
 
     public static void markTask(int taskNo){
-        tasks[taskNo].mark();
+        tasks.get(taskNo).mark();
         String result = "Nice! I've marked this task as done:\n";
-        result += tasks[taskNo].getStatusIcon() + " " + tasks[taskNo];
+        result += tasks.get(taskNo);
         System.out.println(makeOutput(result));
     }
 
     public static void unmarkTask(int taskNo){
-        tasks[taskNo].unmark();
+        tasks.get(taskNo).unmark();
         String result = "OK, I've marked this task as not done yet:\n";
-        result += tasks[taskNo].getStatusIcon() + " " + tasks[taskNo];
+        result += tasks.get(taskNo);
         System.out.println(makeOutput(result));
     }
 
-    public static void addTask(String description){
-        tasks[numOfTasks] = new Task(description);
-        System.out.println(makeOutput(String.format("Got it. I've added this task:\n %s\n Now you have %d tasks in the list."
-                ,tasks[numOfTasks], numOfTasks++)));
+    public static void delete(int taskNo){
+        Task deleted = tasks.remove(taskNo);
+        System.out.println(makeOutput(String.format("Noted. I've removed this task:\n%s\n" +
+                "Now you have %d tasks in the list.", deleted, tasks.size())));
     }
 }
