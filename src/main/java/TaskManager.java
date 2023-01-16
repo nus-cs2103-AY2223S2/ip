@@ -10,6 +10,11 @@ public class TaskManager {
     public int getSize(){
         return tasks.size();
     }
+
+    public void remove(int index){
+        tasks.remove(index);
+    }
+
     public void printAllOut(){
         for(int i = 0; i < tasks.size(); i++){
             int index = i + 1;

@@ -60,7 +60,6 @@ public class Duke {
                 System.out.println("Got it. I've added this task:");
                 System.out.println(ls.get(ls.size() - 1));
                 System.out.println("Now you have " + tm.getSize() + " tasks in the list.");
-
             }
             else if(command.startsWith("event")){
                 String[] s = command.split("/from");
@@ -71,6 +70,14 @@ public class Duke {
                 ls.add(new Event(substr,from,to));
                 System.out.println("Got it. I've added this task:");
                 System.out.println(ls.get(ls.size() - 1));
+                System.out.println("Now you have " + tm.getSize() + " tasks in the list.");
+            }
+            else if(command.startsWith("delete")){
+                String[] s = command.split(" ");
+                int index = Integer.parseInt(s[1].trim());
+                System.out.println("Noted. I've removed this task:");
+                System.out.println(ls.get(index - 1));
+                tm.remove(index - 1);
                 System.out.println("Now you have " + tm.getSize() + " tasks in the list.");
             }
             else{
