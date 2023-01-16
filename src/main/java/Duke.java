@@ -72,6 +72,15 @@ public class Duke {
         System.out.println(Duke.LINE);
     }
 
+    public void delete(String input) {
+        int position = Integer.parseInt(input) - 1;
+        Task toRemove = taskList.remove(position);
+        counter--;
+        System.out.println(Duke.LINE + "Noted. I've removed this task:\n" + toRemove.toString());
+        System.out.println("Now you have " + counter + " tasks in the list.");
+        System.out.println(Duke.LINE);
+    }
+
     public void start(Scanner sc) {
         this.greet();
 
@@ -121,6 +130,13 @@ public class Duke {
                             throw new EmptyDescriptionException();
                         }
                         this.event(input[1]);
+                        break;
+
+                    case "delete":
+                        if (input.length < 2) {
+                            throw new NumberMissingException();
+                        }
+                        this.delete(input[1]);
                         break;
 
                     default:
