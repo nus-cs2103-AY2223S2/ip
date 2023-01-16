@@ -4,7 +4,6 @@ package duke.command;
  * Represents an echo command.
  */
 public class EchoCommand implements Command {
-
     /**
      * Returns the user's input.
      *
