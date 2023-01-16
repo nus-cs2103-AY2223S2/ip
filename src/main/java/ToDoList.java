@@ -46,13 +46,14 @@ public class ToDoList {
     }
 
     public static void markDone (int index) {
-        if (index - 1 > count) {
-            System.out.println();
-        }
         todolist[index - 1].markDone(index);
     }
 
     public static void unmark(int index) {
         todolist[index - 1].unmark(index);
+    }
+
+    public static int getCount() {
+        return count;
     }
 }
