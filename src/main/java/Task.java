@@ -1,4 +1,4 @@
-public class Task {
+abstract public class Task {
     protected String description;
     protected boolean isDone;
 
@@ -17,7 +17,6 @@ public class Task {
     public void mark() {
         this.isDone = true;
         System.out.println("Nice! Marked this task as done, I have:");
-        System.out.println(String.format(" [%s] %s", this.getStatusIcon(), this.description));
     }
 
     /**
@@ -26,20 +25,12 @@ public class Task {
     public void unmark() {
         this.isDone = false;
         System.out.println("Ok! Marked this task as not done yet, I have:");
-        System.out.println(String.format(" [%s] %s", this.getStatusIcon(), this.description));
     }
 
     public String getDescription() {
         return this.description;
     }
 
-    /**
-     * Returns the string representation of a task.
-     * @return string representation of a task
-     */
-    @Override
-    public String toString() {
-        return String.format("[%s] %s", this.getStatusIcon(), this.description);
-    }
+    abstract public String getTaskType();
 
 }
