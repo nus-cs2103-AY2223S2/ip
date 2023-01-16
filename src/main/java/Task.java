@@ -11,26 +11,31 @@ public class Task {
     }
 
     public String printTask() {
-        return task;
+        return done ? "[x] " + task: "[ ] " + task;
     }
 
-    public String printDone() {
-        return done ? "[x]" : "[ ]";
-    }
-
-    public void markDone() {
+    public void markDone(int index) {
         this.done = true;
-        System.out.println("\tNice! I've marked this task as done:");
-        System.out.println("\t  [x]: " + printTask());
+        System.out.println("\tCongratulations, Mr Stark. You have completed task " + index);
+        System.out.println("\tPepper Potts will be pleased with your progress today.");
+        System.out.println("\t" + printTask());
     }
 
-    public void unmark() {
-        System.out.println("\tOK, I've marked this task as not done yet:");
-        System.out.println("\t  [ ]: " + printTask());
+    public void unmark(int index) {
         this.done = false;
+        System.out.println("\tTask " + index + " has been unmarked.");
+        System.out.println("\t" + printTask());
     }
 
     public int getId() {
         return this.id;
+    }
+
+    public boolean isDone() {
+        return this.done;
+    }
+
+    public String getTask() {
+        return this.task;
     }
 }
