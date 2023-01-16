@@ -29,8 +29,14 @@ public class Duke {
                     printText(list.unMark(num - 1));
                     }
                     break;
-                default:
-                    printText(list.add(input));
+                case "todo":
+                    printText(list.add(TaskType.ToDos, scanner.nextLine().strip()));
+                    break;
+                case "deadline":
+                    printText(list.add(TaskType.Deadlines, scanner.nextLine().strip()));
+                    break;
+                case "event":
+                    printText(list.add(TaskType.Events, scanner.nextLine().strip()));
                     break;
             }
 
