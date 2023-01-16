@@ -2,8 +2,8 @@ import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Duke {
-    private static final String LINE = "___________________________________________________\n";
-    private ArrayList<Task> list = new ArrayList<>();
+    private static final String LINE = "__________________________________________________________\n";
+    private ArrayList<Task> taskList = new ArrayList<>(100);
     private int counter = 0;
 
     public void greet() {
@@ -19,11 +19,64 @@ public class Duke {
                 + Duke.LINE);
     }
 
+    public void list() {
+        System.out.println(Duke.LINE + "Here are the tasks in your list:");
+        for (int i = 0; i < counter; i++) {
+            System.out.println(i + 1 + "." + taskList.get(i).toString());
+        }
+        System.out.println(Duke.LINE);
+    }
+
+    public void mark(String input) {
+        int position = Integer.parseInt(input) - 1;
+        Task toChange = taskList.get(position);
+        toChange.mark();
+        System.out.println(Duke.LINE + "Nice! I've marked this task as done:\n"
+                + toChange.toString() + "\n" + Duke.LINE);
+    }
+
+    public void unmark(String input) {
+        int position = Integer.parseInt(input) - 1;
+        Task toChange = taskList.get(position);
+        toChange.unmark();
+        System.out.println(Duke.LINE + "Okay, I've marked this task as not done yet:\n"
+                + toChange.toString() + "\n" + Duke.LINE);
+    }
+
+    public void todo(String input) {
+        Task toAdd = new Todos(input);
+        taskList.add(toAdd);
+        counter++;
+        System.out.println(Duke.LINE + "Got it. I've added this task:\n" + toAdd.toString());
+        System.out.println("Now you have " + counter + " tasks in the list.");
+        System.out.println(Duke.LINE);
+    }
+
+    public void deadline(String input) {
+        String[] splited = input.split(" /by ");
+        Task toAdd = new Deadlines(splited[0], splited[1]);
+        taskList.add(toAdd);
+        counter++;
+        System.out.println(Duke.LINE + "Got it. I've added this task:\n" + toAdd.toString());
+        System.out.println("Now you have " + counter + " tasks in the list.");
+        System.out.println(Duke.LINE);
+    }
+
+    public void event(String input) {
+        String[] splited = input.split(" /from | /to " );
+        Task toAdd = new Events(splited[0], splited[1], splited[2]);
+        taskList.add(toAdd);
+        counter++;
+        System.out.println(Duke.LINE + "Got it. I've added this task:\n" + toAdd.toString());
+        System.out.println("Now you have " + counter + " tasks in the list.");
+        System.out.println(Duke.LINE);
+    }
+
     public void start(Scanner sc) {
         this.greet();
 
         while(sc.hasNext()) {
-            String[] input = sc.nextLine().split(" ");
+            String[] input = sc.nextLine().split(" ", 2);
 
             switch(input[0]) {
                 case "bye":
@@ -31,34 +84,32 @@ public class Duke {
                     break;
 
                 case "list":
-                    System.out.println(Duke.LINE + "Here are the tasks in your list:");
-                    for (int i = 0; i < counter; i++) {
-                        System.out.println(i+1 + "." + list.get(i).toString());
-                    }
-                    System.out.println(Duke.LINE);
+                    this.list();
                     break;
 
                 case "mark":
-                    int position = Integer.parseInt(input[1]) - 1;
-                    Task toChange = list.get(position);
-                    toChange.mark();
-                    System.out.println(Duke.LINE + "Nice! I've marked this task as done:\n"
-                            + toChange.toString() + "\n" + Duke.LINE);
+                    this.mark(input[1]);
                     break;
 
                 case "unmark":
-                    int positionu = Integer.parseInt(input[1]) - 1;
-                    Task toChangeu = list.get(positionu);
-                    toChangeu.unmark();
-                    System.out.println(Duke.LINE + "Okay, I've marked this task as not done yet:\n"
-                            + toChangeu.toString() + "\n" + Duke.LINE);
+                    this.unmark(input[1]);
+                    break;
+
+                case "todo":
+                    this.todo(input[1]);
+                    break;
+
+                case "deadline":
+                    this.deadline(input[1]);
+                    break;
+
+                case "event":
+                    this.event(input[1]);
                     break;
 
 
                 default:
-                    list.add(new Task(input[0]));
-                    counter++;
-                    System.out.println(Duke.LINE + "added: " + input[0]);
+                    System.out.println("Input not recognised.");
                     System.out.println(Duke.LINE);
                     break;
             }
