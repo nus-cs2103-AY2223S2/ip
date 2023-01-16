@@ -1,3 +1,4 @@
+import java.util.ArrayList;
 import java.util.Scanner;
 public class Duke {
     private final static String UNDERLINE = "_________________________________";
@@ -20,14 +21,24 @@ public class Duke {
         System.out.println((UNDERLINE));
     }
 
+
     public static void main(String[] args) {
         Scanner text = new Scanner(System.in);
+        ArrayList<String> list = new ArrayList<>();
         System.out.println(logo);
         Duke.greet();
         String instct = text.nextLine();
         while (!instct.equals("bye")){
             System.out.println((UNDERLINE));
-            System.out.println("\t" + instct);
+                if (instct.equals("list") ) {
+                    for (int i = 0; i < list.size(); i++) {
+                        System.out.println("\t" + (i + 1) + "." + "\t" + list.get(i));
+                    }
+                } else {
+                    System.out.println("\t" + "added: " + instct);
+                    list.add(instct);
+                }
+
             System.out.println((UNDERLINE));
             instct = text.nextLine();
         }
