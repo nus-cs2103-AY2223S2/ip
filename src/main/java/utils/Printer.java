@@ -19,5 +19,10 @@ public class Printer {
         for (int i = 1; i <= args.length; ++i) {
             System.out.printf("\t%d. %s\n", i, args[i - 1]);
         }
+        System.out.println(SEPARATOR);
+    }
+
+    public static void printIndent(String out) {
+        System.out.printf("\t%s\n", out);
     }
 }

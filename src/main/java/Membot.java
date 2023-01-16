@@ -25,6 +25,7 @@ public class Membot {
                     Printer.printlnIndent("Have a good day! Good bye!");
                     break loop;
                 case LIST_KEY:
+                    Printer.printIndent("Here are all your tasks:");
                     Printer.listPrint(Task.listAll());
                     break;
                 default:
