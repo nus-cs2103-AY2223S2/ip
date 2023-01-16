@@ -1,12 +1,10 @@
 package duke.parser;
 
-import duke.Duke;
 import duke.command.AddTaskCommand;
 import duke.command.Command;
 import duke.exception.DukeException;
 import duke.task.DeadlineTask;
 import org.junit.jupiter.api.Test;
-import org.junit.jupiter.api.TestTemplate;
 
 import java.time.LocalDate;
 

@@ -18,7 +18,7 @@ import java.util.regex.Pattern;
 
 public class Parser {
     /**
-     * A parse method that takes in an String representation of a Command, using
+     * A parse method that takes in a String representation of a Command, using
      * regular expression to parse it can construct to a Command object.
      *
      * @param input The given String of Command to be parsed by the parser
@@ -112,6 +112,12 @@ public class Parser {
                 } else {
                     throw new InvalidInputException("☹ OOPS!!! Please input the event in the correct format.");
                 }
+            }
+        } else if (instructionTag.equalsIgnoreCase("find")) {
+            if (!emptyStringChecker.matcher(information).matches()) {
+                throw new InvalidInputException("☹ OOPS!!! The description of a todo cannot be empty.");
+            } else {
+                return new FindCommand(information);
             }
         } else {
             throw new InvalidInputException("☹ OOPS!!! I'm sorry, but I don't know what that means :-(");

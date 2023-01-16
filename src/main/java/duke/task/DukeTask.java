@@ -1,5 +1,7 @@
 package duke.task;
 
+import java.util.regex.Pattern;
+
 /**
  * An abstract Task class encapsulating a task in Duke, which can be extended
  * by more specific tasks like Events, toDos, etc.
@@ -37,6 +39,16 @@ public abstract class DukeTask {
     }
 
     public abstract String storageString();
+
+    /**
+     * Takes in a description and check whether the current task information that matches the given description.
+     *
+     * @param description The given description to be checked
+     * @return Whether the description and the information matches
+     */
+     public boolean matches(String description) {
+         return this.information.toUpperCase().contains(description.toUpperCase());
+     }
 
     @Override
     public String toString() {
