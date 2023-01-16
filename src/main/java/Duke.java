@@ -4,7 +4,7 @@ import java.util.ArrayList;
 public class Duke {
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
-        ArrayList<Task> takks = new ArrayList<Task>();
+        ArrayList<Task> tasks = new ArrayList<>();
 
         String logo = " ____        _        \n"
                 + "|  _ \\ _   _| | _____ \n"
@@ -26,31 +26,31 @@ public class Duke {
             switch (inputArr[0]) {
                 case "list":
                     System.out.println("    ____________________________________________________________");
-                    for (int i = 0; i < takks.size(); i++) {
-                        System.out.println("     " + (i + 1) + ". " + takks.get(i).toString());
+                    for (int i = 0; i < tasks.size(); i++) {
+                        System.out.println("     " + (i + 1) + ". " + tasks.get(i).toString());
                     }
                     System.out.println("    ____________________________________________________________");
                     break;
                 case "mark":
                     selectedNum = Integer.parseInt(inputArr[1]) - 1;
-                    takks.get(selectedNum).markDone();
+                    tasks.get(selectedNum).markDone();
                     System.out.println(
                             "    ____________________________________________________________"
                             + "\n     Nice! I've marked this task as done:"
-                            + takks.get(selectedNum).toString()
+                            + tasks.get(selectedNum).toString()
                             + "\n    ____________________________________________________________");
                     break;
                 case "unmark":
                     selectedNum = Integer.parseInt(inputArr[1]) - 1;
-                    takks.get(selectedNum).markUndone();
+                    tasks.get(selectedNum).markUndone();
                     System.out.println(
                             "    ____________________________________________________________"
                             + "\n     OK, I've marked this task as not done yet:"
-                            + takks.get(selectedNum).toString()
+                            + tasks.get(selectedNum).toString()
                             + "\n    ____________________________________________________________");
                     break;
                 default:
-                    takks.add(new Task(input));
+                    tasks.add(new Task(input));
                     String output = "    ____________________________________________________________"
                             + "\n      added: "
                             + input
