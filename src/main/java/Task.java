@@ -5,8 +5,8 @@ public class Task {
         this.description = description;
         this.isDone = false;
     }
-    public String getDescription() {
-        return this.description;
+    public String toString() {
+        return (isDone ? "[X] " : "[] ") + this.description;
     }
     public boolean isDone() {
         return this.isDone;

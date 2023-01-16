@@ -15,15 +15,11 @@ public class Duke {
         while (!(input = userInput.nextLine()).equals("bye")) {
             if (input.equals("list")) {
                 System.out.println("____________________");
-                System.out.println("  Here are the tasks in your list:\n");
+                System.out.println("  Here are the tasks in your list:");
                 for (int i = 0; i < lst.size(); i++) {
                     Task currTask = lst.get(i);
                     int taskIndex = i+1;
-                    if (currTask.isDone()) {
-                        System.out.println("   " + taskIndex + ".[X] " + currTask.getDescription());
-                    } else {
-                        System.out.println("   " + taskIndex + ".[ ] " + currTask.getDescription());
-                    }
+                        System.out.println("   " + taskIndex + ". " + currTask);
                 }
                 System.out.println("____________________");
 
@@ -33,7 +29,7 @@ public class Duke {
                     Task toMark = lst.get(indexToMark);
                     toMark.markAsDone();
                     customMessage("   Nice! I've marked this task as done:\n" +
-                            "      [X] " + toMark.getDescription());
+                            "      " + toMark);
                 } else {
                     customMessage("Invalid, there is no such task");
                 }
@@ -43,14 +39,12 @@ public class Duke {
                     Task toUnmark = lst.get(indexToUnmark);
                     toUnmark.markAsUndone();
                     customMessage("   OK, I've marked this task as not done yet:\n" +
-                            "      [ ] " + toUnmark.getDescription());
+                            "      " + toUnmark);
                 } else {
                     customMessage("Invalid, there is no such task");
                 }
             } else {
-                Task newTask = new Task(input);
-                lst.add(newTask);
-                customMessage("   added: " + input);
+                typeOfTask(input, lst);
             }
         }
         customMessage("   Bye. Hope to see you again soon!");
@@ -59,5 +53,35 @@ public class Duke {
         System.out.println("____________________");
         System.out.println(message);
         System.out.println("____________________");
+    }
+
+    private static void taskAddedMessage(Task task, int sizeOfList) {
+        System.out.println("   ____________________");
+        System.out.println("    Got it. I've added this task:");
+        System.out.println("      " + task);
+        System.out.println("    Now you have " + sizeOfList + " task" + (sizeOfList > 1 ? "s" : "") +" in the list.");
+        System.out.println("   ____________________");
+    }
+    private static void typeOfTask(String input, List<Task> lst) {
+        if (input.length() > 4 && input.substring(0,4).equals("todo")) {
+            Task newTask = new ToDo(input.substring(5, input.length()));
+            lst.add(newTask);
+            taskAddedMessage(newTask, lst.size());
+        } else if (input.length() > 5 && input.substring(0,5).equals("event")) {
+            String[] str = input.substring(6).split("/");
+            Task newTask = new Event(str[0].substring(0,str[0].length() - 1), str[1].substring(5, str[1].length() - 1), str[2].substring(3));
+            lst.add(newTask);
+            taskAddedMessage(newTask, lst.size());
+        } else if (input.length() > 8 && input.substring(0,8).equals("deadline")) {
+            String[] str = input.substring(9).split("/");
+            Task newTask = new Deadline(str[0].substring(0,str[0].length() - 1), str[1].substring(3));
+            lst.add(newTask);
+            taskAddedMessage(newTask, lst.size());
+        } else  {
+            // normal task
+            Task newTask = new Task(input);
+            lst.add(newTask);
+            taskAddedMessage(newTask, lst.size());
+        }
     }
 }
