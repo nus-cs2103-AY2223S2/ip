@@ -1,9 +1,9 @@
 import java.util.Scanner;
 import java.util.ArrayList;
 public class chatLuminus {
-    private ArrayList<String> list;
+    private ArrayList<Task> list;
     chatLuminus() {
-        list = new ArrayList<>(100);
+        list = new ArrayList<Task>(100);
     }
 
     public static void main(String[] args) {
@@ -25,14 +25,25 @@ public class chatLuminus {
                 return;
             }
             if (input.equals("list")) {
+                System.out.println("Here are the tasks in your list:");
                 for (int i = 1; i <= this.list.size(); i++) {
-                    System.out.println(i + ". " + list.get(i - 1));
+                    System.out.println(i + ". " + list.get(i - 1).getStatusIcon()
+                            + list.get(i - 1).description);
                 }
+                continue;
             }
-            else {
-                list.add(input);
-                System.out.println("added: " + input);
+            if (input.substring(0,4).equals("mark")) {
+                int index = Integer.parseInt(input.substring(5));
+                this.list.get(index - 1).markAsDone();
+                continue;
             }
+            if (input.substring(0,6).equals("unmark")) {
+                int index = Integer.parseInt(input.substring(7));
+                this.list.get(index - 1).markAsNotDone();
+                continue;
+            }
+            list.add(new Task(input));
+            System.out.println("added: " + input);
         }
     }
 }
