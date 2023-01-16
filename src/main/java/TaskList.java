@@ -31,7 +31,7 @@ public class TaskList {
             idx = Integer.parseInt(index) - 1;
             taskList[idx].mark();
         } catch (Exception e) {
-            System.out.println("Error index");
+            throw new InvalidIndexException(String.format("Used to index Task List, %s cannot be", index), null);
         }
     }
 
@@ -45,7 +45,7 @@ public class TaskList {
             idx = Integer.parseInt(index) - 1;
             taskList[idx].unmark();
         } catch (Exception e) {
-            System.out.println("Error index");
+            throw new InvalidIndexException(String.format("Used to index Task List, %s cannot be", index), null);
         }
     }
 

@@ -26,22 +26,39 @@ public class Duke {
             }
             String[] commands = response.split(" ");
             System.out.println(BANNER);
-            switch(commands[0]) {
-                case "list" :
-                    taskList.listItems();
-                    break;
-                case "mark" :
-                    taskList.markTask(commands[1]);
-                    break;
-                case "unmark" :
-                    taskList.unmarkTask(commands[1]);
-                    break;
-                default :
-                    Task newTask = parser.obtainTask(response);
-                    taskList.addTask(newTask);
-                    break;
+            try {
+                switch (commands[0]) {
+                    case "list":
+                        taskList.listItems();
+                        break;
+                    case "mark":
+                        if (commands.length < 2) {
+                            throw new IncompleteCommandException(String.format("Hrrmmm. Not enough arguments, " +
+                                    "%s has. Hmm", "mark"), null);
+                        }
+                        taskList.markTask(commands[1]);
+                        break;
+                    case "unmark":
+                        if (commands.length < 2) {
+                            throw new IncompleteCommandException(String.format("Hrrmmm. Not enough arguments, " +
+                                    "%s has. Hmm", "unmark"), null);
+                        }
+                        taskList.unmarkTask(commands[1]);
+                        break;
+                    default:
+                        Task newTask = parser.obtainTask(response);
+                        taskList.addTask(newTask);
+                        break;
+                }
+            } catch (InvalidIndexException e) {
+                System.out.println(e.getMessage());
+            } catch (IncompleteCommandException e) {
+                System.out.println(e.getMessage());
+            } catch (UnknownCommandException e) {
+                System.out.println(e.getMessage());
+            } finally {
+                System.out.println(BANNER);
             }
-            System.out.println(BANNER);
         }
         Duke.respond(BYE_MSG, true);
     }
