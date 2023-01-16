@@ -1,5 +1,3 @@
-import java.util.Arrays;
-import java.util.List;
 import java.util.Scanner;
 public class Duke {
     public static void main(String[] args) {
@@ -13,29 +11,59 @@ public class Duke {
         Scanner myObj = new Scanner(System.in);
         String reply = myObj.nextLine();
         int count = 0;
-        while (!reply.contains("bye")) {
-            System.out.println(reply);
-            Task action = new Task(reply);
-            if (!reply.contains("list") && !reply.contains("mark")) {
-                System.out.println("added: " + reply);
-                array[count] = action;
-                count += 1;
 
-            } else if (reply.contains("unmark")) {
+        while (!reply.contains("bye")) {
+            if (reply.contains("deadline")) {
+                reply = reply.replaceAll("deadline", "");
+                String[] replies = reply.split("/",2);
+                replies[1] = replies[1].replaceAll("by","");
+                replies[1] = replies[1].replaceAll("/","");
+                Deadline deadline = new Deadline(replies[0],replies[1]);
+                array[count] = deadline;
+                count += 1;
+                System.out.println("Got it. I've added this task: ");
+                System.out.println(deadline);
+                System.out.println("Now you have " + Task.actions + " tasks in the list");
+
+
+            }else if (reply.contains("todo")) {
+                reply = reply.replaceAll("todo", "");
+                ToDo todo = new ToDo(reply);
+                array[count] = todo;
+                count += 1;
+                System.out.println("Got it. I've added this task: ");
+                System.out.println(todo);
+                System.out.println("Now you have " + Task.actions + " tasks in the list");
+
+            } else if (reply.contains("event")) {
+                reply = reply.replaceAll("event", "");
+                String[] replies = reply.split("/",3);
+                replies[1] = replies[1].replaceAll("by","");
+                replies[1] = replies[1].replaceAll("/","");
+                replies[1] = replies[1].replaceAll("from","");
+                replies[2] = replies[2].replaceAll("to","");
+                Event event = new Event(replies[0],replies[1],replies[2]);
+                array[count] = event;
+                count += 1;
+                System.out.println("Got it. I've added this task: ");
+                System.out.println(event);
+                System.out.println("Now you have " + Task.actions + " tasks in the list");
+            }
+            else if (reply.contains("unmark")) {
                 int value = Integer.parseInt(reply.replaceAll("[^0-9]", "")) - 1;
                 array[value].unmark();
-                System.out.println(" OK, I've marked this task as not done yet:\n ["+array[value].getStatusIcon()+"]" + array[value].description);
             } else if (reply.contains("mark")) {
-            int value = Integer.parseInt(reply.replaceAll("[^0-9]", "")) - 1;
-            array[value].mark();
-            System.out.println("Nice! I've marked this task as done:\n ["+array[value].getStatusIcon()+"]" + array[value].description);
+                int value = Integer.parseInt(reply.replaceAll("[^0-9]", "")) - 1;
+                array[value].mark();
+
             }
             else if (reply.contains("list")) {
                 System.out.println("Here are the tasks in your list:\n");
                 int listcount = 1;
                 for (Task element: array) {
                     if (element != null) {
-                        System.out.println("" + listcount + "." + "[" + element.getStatusIcon() + "]" + element.description);
+                        System.out.println("" + listcount + "." + element);
+                        listcount += 1;
                     }
                 }
             }
