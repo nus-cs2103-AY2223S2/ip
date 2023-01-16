@@ -5,6 +5,10 @@ public class Todo extends Task {
     }
 
     public static Todo create(String content) {
+        /**
+         * @param content what to place in this task.
+         * @returns the output Todo object.
+         */
         return new Todo(content);
     }
 

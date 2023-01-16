@@ -73,27 +73,31 @@ public class Duke {
             Duke.indent();
 
             String firstWord = (response + " ").split(" ", 2)[0];
-            switch(firstWord) {
-                case "list":
-                    memoPad.listItems();
-                    break;
-                case "mark":
-                    memoPad.markItem(response, true);
-                    break;
-                case "unmark":
-                    memoPad.markItem(response, false);
-                    break;
-                case "todo":
-                    memoPad.addToList('T', response);
-                    break;
-                case "deadline":
-                    memoPad.addToList('D', response);
-                    break;
-                case "event":
-                    memoPad.addToList('E', response);
-                    break;
-                default:
-                    System.out.println("Sorry, I'm not sure what you're talking about.");
+            try {
+                switch (firstWord) {
+                    case "list":
+                        memoPad.listItems();
+                        break;
+                    case "mark":
+                        memoPad.markItem(response, true);
+                        break;
+                    case "unmark":
+                        memoPad.markItem(response, false);
+                        break;
+                    case "todo":
+                        memoPad.addToList('T', response);
+                        break;
+                    case "deadline":
+                        memoPad.addToList('D', response);
+                        break;
+                    case "event":
+                        memoPad.addToList('E', response);
+                        break;
+                    default:
+                        System.out.println("Sorry, I'm not sure what you're talking about.");
+                }
+            } catch (DukeException err) {
+                System.out.println(err.getMessage());
             }
 
             Duke.horizontal();

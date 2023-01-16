@@ -9,13 +9,17 @@ public abstract class Task {
     }
 
     public static Task create(char taskType, String content) {
+        String[] taskTypeAndContent = content.split(" ", 2);
+        if (taskTypeAndContent.length <= 1) {
+            throw new InputFormatException("Task Creation", "No further information was provided.", null);
+        }
         switch (taskType) {
             case 'T':
-                return Todo.create(content);
+                return Todo.create(taskTypeAndContent[1]);
             case 'D':
-                return Deadline.create(content);
+                return Deadline.create(taskTypeAndContent[1]);
             case 'E':
-                return Event.create(content);
+                return Event.create(taskTypeAndContent[1]);
             default:
                 return null;
         }

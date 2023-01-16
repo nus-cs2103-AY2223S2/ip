@@ -7,12 +7,23 @@ public class Deadline extends Task {
     }
 
     public static Deadline create(String content) {
-        String[] splitted = content.split("/by");
-        if (splitted.length <= 1) {
-            System.out.println("Invalid input for deadline creation.");
-            return null;
+        /**
+         * @param content what to place in this task.
+         * @returns the output Deadline object.
+         */
+        String[] contentAndBy = content.split("/by");
+        if (contentAndBy.length <= 1) {
+            throw new InputFormatException("Deadline Creation", "'by' is missing.", null);
         }
-        return new Deadline(splitted[0].strip(), splitted[1].strip());
+        String parsedContent = contentAndBy[0].strip();
+        String by = contentAndBy[1].strip();
+        if (parsedContent.equals("")) {
+            throw new InputFormatException("Deadline Creation", "Empty 'content'.", null);
+        }
+        if (by.equals("")) {
+            throw new InputFormatException("Deadline Creation", "Empty 'by'.", null);
+        }
+        return new Deadline(parsedContent, by);
     }
 
     @Override

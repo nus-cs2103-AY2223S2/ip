@@ -82,8 +82,7 @@ public class MemoPad {
          */
         String[] splitted = response.split(" ", 2);
         if (splitted.length <= 1) {
-            System.out.println("You did not include a number after the keyword. Try again.");
-            return;
+            throw new InputFormatException("Item Marking", "You did not include a number after the keyword. Try again.", null);
         }
 
         String unparsedId = splitted[1];
@@ -92,10 +91,10 @@ public class MemoPad {
             if (id < this.pointer) {
                 this.tasks[id].mark(toMark);
             } else {
-                System.out.println("Item does not exist. Try again with maximum value " + this.pointer + ".");
+                throw new NotFoundException("List", String.format("The maximum possible index is %d.", this.pointer), null);
             }
         } catch (NumberFormatException ex) {
-            System.out.println("Invalid input for marking an item. Try again.");
+            throw new InputFormatException("Item Marking", "You did not include a number after the keyword. Try again.", null);
         }
     }
 }
