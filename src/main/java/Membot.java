@@ -33,8 +33,13 @@ public class Membot {
                     Printer.printlnIndent("Have a good day! Good bye!");
                     break loop;
                 case LIST_KEY:
-                    Printer.printIndent("Here are all your tasks:");
-                    Printer.listPrint(Task.listAll());
+                    String[] tasks = Task.listAll();
+                    if (tasks.length == 0) {
+                        Printer.printlnIndent("Excellent! You do not have any tasks at hand!");
+                    } else {
+                        Printer.printIndent("Here are all your tasks:");
+                        Printer.listPrint(Task.listAll());
+                    }
                     break;
                 case CHECK_KEY:
                     Printer.printIndent("Which task would you like to mark as completed?");
