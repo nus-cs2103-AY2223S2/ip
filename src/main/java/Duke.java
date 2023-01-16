@@ -59,7 +59,7 @@ public class Duke {
                 }
             } else {
                 String type = str.split(" ", 2)[0];
-                if (str.split(" ",2 ).length > 1) {
+                try {
                     switch (type) {
                         case "todo":
                             Tasks t = new ToDo(str);
@@ -86,14 +86,15 @@ public class Duke {
                                     " tasks in the list");
                             break;
                         default:
-                            throw new unrecogException("☹ OOPS!!! I'm sorry, but I don't know what that means :-(\n");
+                            Tasks wrong = new Event(str);
+
                     }
-                } else {
-                    if (str.equals("todo") || str.equals("event")||str.equals("deadline")){
-                        throw new emptyDescException("☹ OOPS!!! The description of a "+type+" cannot be empty.\n");
-                    } else {
-                        throw new unrecogException("☹ OOPS!!! I'm sorry, but I don't know what that means :-(\n");
-                    }
+                } catch (unrecogException e){
+                    System.out.println("☹ OOPS!!! I'm sorry, but I don't know what that means :-(\n");
+                } catch(emptyDescException e) {
+                    System.out.println("☹ OOPS!!! The description of a "+type+" cannot be empty.\n");
+                }catch(unspecTimeException e) {
+                    System.out.println(" Please specify a timeframe (from/ ... to/ ...)\n");
                 }
                 }
         }

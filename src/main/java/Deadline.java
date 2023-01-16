@@ -3,8 +3,15 @@ public class Deadline extends Tasks{
 
     String desc;
     String end;
-    public Deadline(String str) throws unspecTimeException {
+    public Deadline(String str) throws Exception {
         super(str);
+        if(!str.contains("deadline")) {
+            throw new unrecogException("");
+        }
+        if (str.equals("deadline")) {
+            throw new emptyDescException("");
+        }
+
         if ((super.getDesc().split("/", 2)).length == 1) {
             throw new unspecTimeException("Please specify a deadline (by/ ... )");
         }

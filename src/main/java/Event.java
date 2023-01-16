@@ -2,8 +2,15 @@ public class Event extends Tasks{
     String icon = "[E]";
     String desc;
     String timeframe;
-    public Event(String str) throws unspecTimeException{
+    public Event(String str) throws Exception{
         super(str);
+
+        if(!str.contains("event")) {
+            throw new unrecogException("");
+        }
+        if (str.equals("event")) {
+            throw new emptyDescException("");
+        }
 
         if ((super.getDesc().split("/", 2)).length == 1) {
             throw new unspecTimeException("Please specify a timeframe (from/ ... to/ ...)");

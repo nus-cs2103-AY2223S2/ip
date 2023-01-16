@@ -1,7 +1,7 @@
 public class Tasks {
     final protected String desc;
     protected Boolean done;
-    public Tasks(String str) {
+    public Tasks(String str) throws Exception {
         this.desc = str;
         this.done = false;
     }
