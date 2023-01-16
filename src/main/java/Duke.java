@@ -66,6 +66,17 @@ public class Duke {
         System.out.println(indentation + t);
     }
 
+    public static void deleteTask(int index) {
+        if (index > Task.getTotalNumOfTask()) {
+            throw new InvalidIndexException("Index too large");
+        }
+        Task t = arrOfTask.get(index - 1);
+        System.out.println(indentation + "Noted. I've removed this task:");
+        System.out.println(indentation + t);
+        Task.decreaseNumOfTask();
+        totalItems();
+    }
+
     public static void totalItems() {
         System.out.println(indentation + "Now you have " + Task.getTotalNumOfTask() + " tasks in the list.");
     }
@@ -87,6 +98,8 @@ public class Duke {
                     taskDone(Integer.parseInt(command.substring(5)));
                 } else if (command.startsWith("unmark")) {
                     taskNotDone(Integer.parseInt(command.substring(7)));
+                } else if (command.startsWith("delete")) {
+                    deleteTask(Integer.parseInt(command.substring(7)));
                 } else if (command.startsWith("todo") || command.startsWith("deadline") || command.startsWith("event")) {
                     addTask(command);
                 } else {

@@ -2,7 +2,7 @@ public abstract class Task {
     private String nameOfTask;
     private int indexOfTask;
     private boolean done;
-    private static int totalNumOfTask = 0;
+    public static int totalNumOfTask = 0;
 
     public Task(String name) {
         this.nameOfTask = name;
@@ -28,6 +28,9 @@ public abstract class Task {
 
     public static int getTotalNumOfTask() {
         return totalNumOfTask;
+    }
+    public static void decreaseNumOfTask() {
+        totalNumOfTask--;
     }
 
     @Override
