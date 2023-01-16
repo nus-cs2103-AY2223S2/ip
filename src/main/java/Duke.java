@@ -61,6 +61,7 @@ public class Duke {
 
     private static void addTaskToList(String text) {
         taskList.addTask(text);
+        printMessage("added: " + text);
     }
 
     private static void displayTasks() {
