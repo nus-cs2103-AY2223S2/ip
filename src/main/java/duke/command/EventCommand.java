@@ -32,18 +32,23 @@ public class EventCommand extends AddCommand {
      */
     @Override
     protected Task createTask(String input) throws DukeException {
-        input = input.replaceFirst("event ", "");
+        input = input.replaceFirst("event ", "").trim();
 
-        String[] args = input.split(input.startsWith("/from ") ? "/from " : " /from ", 2);
-        if (args.length != 2) {
-            throw new DukeException("The input of an event must include a ' /from '.");
+        if (input.startsWith("/from ")) {
+            throw new DukeException("The description of an event cannot be empty.");
+        }
+
+        String[] args = input.split(" /from ", 2);
+        if (args.length != 2 || args[1].trim().startsWith("/to ")) {
+            throw new DukeException("The input of an event must include a start date/time.");
         }
 
         String description = args[0];
+        args[1] = args[1].trim();
 
-        String[] startAndEnd = args[1].split(args[1].startsWith("/to ") ? "/to " : " /to ", 2);
+        String[] startAndEnd = args[1].split(" /to ", 2);
         if (startAndEnd.length != 2) {
-            throw new DukeException("The input of an event must include a ' /to '.");
+            throw new DukeException("The input of an event must include an end date/time.");
         }
 
         String start = startAndEnd[0];
