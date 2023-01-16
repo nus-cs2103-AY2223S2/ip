@@ -3,8 +3,11 @@ import java.util.Scanner;
 // A chatbot
 public class Duke {
 
-    private static Scanner scanner = new Scanner(System.in);
     private static final String EXIT_COMMAND = "bye";
+    private static final String DISPLAY_LIST_COMMAND = "list";
+
+    private static Scanner scanner = new Scanner(System.in);
+    private static TaskList taskList = new TaskList();
 
     private static String formatMessage(String message) {
         String FORMAT_LINE = "___________________________";
@@ -49,7 +52,19 @@ public class Duke {
 
     // Executes a command, except exit command
     private static void executeOneCommand(String input) {
-        printMessage(input);
+        if (input.equals(DISPLAY_LIST_COMMAND)) {
+            displayTasks();
+        } else {
+            addTaskToList(input);
+        }
+    }
+
+    private static void addTaskToList(String text) {
+        taskList.addTask(text);
+    }
+
+    private static void displayTasks() {
+        printMessage(taskList.toString());
     }
 
     private static void sayGoodbye() {
