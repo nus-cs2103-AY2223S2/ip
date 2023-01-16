@@ -21,6 +21,6 @@ public class Task {
   @Override
   public String toString() {
     char marker = this.isDone ? 'X' : ' ';
-    return String.format("[%c] %s\n", marker, this.description);
+    return String.format("[%c] %s", marker, this.description);
   }
 }
