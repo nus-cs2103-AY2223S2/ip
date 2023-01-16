@@ -8,4 +8,10 @@ mark 2
 list
 unmark 4
 list
+blah
+todo
+deadline do hw
+event do hw /from now
+todo bake cake
+list
 bye
