@@ -4,7 +4,17 @@ import java.util.Scanner;
 
 public class Peppa {
     public static final String divider = "=============================================";
-    public static final String[] commands = { "list", "mark", "unmark", "delete", "todo", "deadline", "event" };
+    public enum Command {
+        BYE,
+        LIST,
+        MARK,
+        UNMARK,
+        DELETE,
+        TODO,
+        DEADLINE,
+        EVENT
+    }
+
     public static ArrayList<Task> tasks = new ArrayList<>();
 
     public static void displayList() {
@@ -70,80 +80,93 @@ public class Peppa {
         System.out.println(divider);
     }
 
-    public static void insertTask(String command, String input) throws PeppaException {
+    public static String extractDescription(Command cmd, String input) throws PeppaException {
         int descStartIndex = input.indexOf(" ") + 1;
         if (descStartIndex == 0) {
-            throw new PeppaException("Boink! The description of a " + command + " cannot be empty.");
+            throw new PeppaException("Boink! The description of a " + cmd.name().toLowerCase() + " cannot be empty.");
+        }
+        int descEndIndex = input.indexOf("/") - 1;
+        if (descEndIndex < 0) {
+            return input.substring(descStartIndex);
         } else {
-            if (command.equals("todo")) {
-                String desc = input.substring(descStartIndex);
-                addTask(new Todo(desc));
-            } else {
-                int descEndIndex = input.indexOf("/") - 1;
-                String desc = input.substring(descStartIndex, descEndIndex);
-                if (command.equals("event")) {
-                    int fromStartIndex = input.indexOf("/") + 6;
-                    int fromEndIndex = input.indexOf("/to") - 1;
-                    int toStartIndex = input.indexOf("/to") + 4;
-                    String from = input.substring(fromStartIndex, fromEndIndex);
-                    String to = input.substring(toStartIndex);
-                    addTask(new Event(desc, from, to));
-                } else {
-                    int dueStartIndex = input.indexOf("/") + 4;
-                    String due = input.substring(dueStartIndex);
-                    addTask(new Deadline(desc, due));
-                }
-            }
+            return input.substring(descStartIndex, descEndIndex);
         }
     }
 
-    public static void parseCommand(String input) throws PeppaException {
-        String command = input.split(" ")[0];
-        if (Arrays.asList(commands).contains(command)) {
-             if (command.equals("list")) {
+    public static void insertTask(Command cmd, String input) throws PeppaException {
+        String desc = extractDescription(cmd, input);
+        switch (cmd) {
+            case TODO:
+                addTask(new Todo(desc));
+                break;
+            case EVENT:
+                int fromStartIndex = input.indexOf("/") + 6;
+                int fromEndIndex = input.indexOf("/to") - 1;
+                int toStartIndex = input.indexOf("/to") + 4;
+                String from = input.substring(fromStartIndex, fromEndIndex);
+                String to = input.substring(toStartIndex);
+                addTask(new Event(desc, from, to));
+                break;
+            case DEADLINE:
+                int dueStartIndex = input.indexOf("/") + 4;
+                String due = input.substring(dueStartIndex);
+                addTask(new Deadline(desc, due));
+        }
+    }
+
+    public static void parseCommand(Command cmd, String input) throws PeppaException {
+        switch (cmd) {
+            case LIST:
                 displayList();
-            } else if (command.startsWith("mark")) {
+                break;
+            case MARK:
                 markDone(getTask(input));
-            } else if (command.startsWith("unmark")) {
+                break;
+            case UNMARK:
                 unmarkDone(getTask(input));
-            } else if (command.startsWith("delete")) {
+                break;
+            case DELETE:
                  deleteTask(input);
-            } else {
+                 break;
+            default:
                 try {
-                    insertTask(command, input);
+                    insertTask(cmd, input);
                 } catch (IndexOutOfBoundsException e) {
                     System.out.println("Boink! Please ensure that your input is formatted correctly and try again.");
                 }
-            }
-        } else {
-            throw new InvalidTaskException("Boink! Peppa couldn't understand that. " +
-                    "Please use one of the commands below:");
+        }
+    }
+
+    public static void printCommands() {
+        for (Command cmd : Command.values()) {
+            System.out.println("> " + cmd.name().toLowerCase());
         }
     }
 
     public static void main(String[] args) {
         printIntroduction();
         Scanner sc = new Scanner(System.in);
-        while (true) {
-            String input = sc.nextLine();
-            if (input.equals("bye")) {
-                System.out.println("Oink oink! See you again :)");
-                sc.close();
-                break;
-            } else {
-                try {
-                    parseCommand(input);
-                } catch (NumberFormatException e) {
-                    System.out.println("Boink! Please enter a valid integer.");
-                } catch (IndexOutOfBoundsException e) {
-                    System.out.println("Boink! Task does not exist; please try again.");
-                } catch (PeppaException e) {
-                    System.out.println(e.getMessage());
-                } finally {
-                    System.out.println(divider);
-                }
+        String input = sc.nextLine();
+        while (!input.equals("bye")) {
+            try {
+                Command cmd = Command.valueOf(input.split(" ")[0].toUpperCase());
+                parseCommand(cmd, input);
+            } catch (NumberFormatException e) {
+                System.out.println("Boink! Please enter a valid integer.");
+            } catch (IndexOutOfBoundsException e) {
+                System.out.println("Boink! Task does not exist; please try again.");
+            } catch (PeppaException e) { // thrown when no description of task is entered
+                System.out.println(e.getMessage());
+            } catch (IllegalArgumentException e) {
+                System.out.println("Boink! Peppa couldn't understand that. " +
+                        "Please use one of the commands below:");
+                printCommands();
+            } finally {
+                System.out.println(divider);
+                input = sc.nextLine();
             }
         }
+        System.out.println("Oink oink! See you again :)");
+        sc.close();
     }
 }
-
