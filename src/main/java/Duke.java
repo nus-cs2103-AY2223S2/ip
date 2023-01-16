@@ -1,3 +1,4 @@
+import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Duke {
@@ -7,16 +8,20 @@ public class Duke {
         exit();
     }
 
+    public static void printRes(String res) {
+        System.out.println("================================================================");
+        System.out.println(res);
+        System.out.println("================================================================\n");
+    }
     public static void greet() {
         final String logo = "██████   █████  ██████   █████  \n"
                     + "██   ██ ██   ██ ██   ██ ██   ██ \n"
                     + "██   ██ ██   ██ ██████  ███████ \n"
                     + "██   ██ ██   ██ ██   ██ ██   ██ \n"
-                    + "██████   █████  ██   ██ ██   ██ \n";
+                    + "██████   █████  ██   ██ ██   ██ \n\n";
         final String intro = "Hola! Soy \n";
-        final String icebreaker = "What can I do for you? \n";
-        System.out.println(intro + logo);
-
+        final String icebreaker = "What can I do for you?";
+        System.out.println(intro + logo + icebreaker);
         System.out.println("____________________________________________________________");
         System.out.println();
     }
@@ -26,10 +31,7 @@ public class Duke {
         String input = sc.nextLine();
 
         while(!input.equalsIgnoreCase("bye")) {
-            System.out.println("================================================================");
-            System.out.println(input);
-            System.out.println("================================================================");
-            System.out.println();
+            printRes(input);
             input = sc.nextLine();
         }
         sc.close();
@@ -37,9 +39,6 @@ public class Duke {
 
     public static void exit() {
         String outro = "bella ciao";
-
-        System.out.println("================================================================");
-        System.out.println(outro);
-        System.out.println("================================================================");
+        printRes(outro);
     }
 }
