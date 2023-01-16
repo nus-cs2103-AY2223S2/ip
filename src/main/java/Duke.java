@@ -5,7 +5,6 @@ public class Duke {
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
         ArrayList<String> tasks = new ArrayList<String>();
-        //String[] tasks = new String[100];
 
         String logo = " ____        _        \n"
                 + "|  _ \\ _   _| | _____ \n"
