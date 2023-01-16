@@ -1,11 +1,10 @@
 package duke.command;
 
 import duke.display.Ui;
+import duke.exception.StorageFileIOException;
 import duke.storage.Storage;
 import duke.task.DukeTask;
 import duke.task.TaskList;
-
-import java.io.IOException;
 
 /**
  * A more specific instruction class that encapsulates the action of adding a task
@@ -30,7 +29,7 @@ public class AddTaskCommand extends Command {
      * @param tasks The user TaskList that contains all the task to be manipulated
      */
     @Override
-    public void execute(TaskList tasks, Ui ui, Storage storage) throws IOException {
+    public void execute(TaskList tasks, Ui ui, Storage storage) throws StorageFileIOException {
         tasks.addTask(task);
         storage.save(tasks);
         String message = "Got it. I've added this task:\n " + task

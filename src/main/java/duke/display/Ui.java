@@ -19,6 +19,13 @@ public class Ui {
         this.indentSpace = 4;
     }
 
+    /**
+     * Constructor that sets HorizontalLineLength to be the given length and
+     * IndentSpace to be the given length by default.
+     *
+     * @param HorizontalLineLength The length of the horizontal line
+     * @param indentSpace The length of the indentation space
+     */
     public Ui(int HorizontalLineLength, int indentSpace) {
         this.HorizontalLineLength = HorizontalLineLength;
         this.indentSpace = indentSpace;
@@ -51,6 +58,9 @@ public class Ui {
         System.out.println(bar + "\n" + indent(message) + "\n" + bar + "\n");
     }
 
+    /**
+     *  Display the Program Logo and welcome message.
+     */
     public void showWelcome() {
         String logo = " ____        _        \n"
                 + "|  _ \\ _   _| | _____ \n"
@@ -64,6 +74,11 @@ public class Ui {
         this.displayWithBar(greetingMessage);
     }
 
+    /**
+     * Read the user's input.
+     *
+     * @return the user input as a String.
+     */
     public String readCommand() {
         Scanner sc = new Scanner(System.in);
         return sc.nextLine();

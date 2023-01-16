@@ -1,5 +1,8 @@
 package duke.task;
 
+/**
+ * A TodoTask class that encapsulates the information a Todo Task.
+ */
 public class TodoTask extends DukeTask {
     public TodoTask(String info) {
         super(info, TaskType.TODO);

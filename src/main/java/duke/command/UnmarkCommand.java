@@ -7,8 +7,6 @@ import duke.storage.Storage;
 import duke.task.DukeTask;
 import duke.task.TaskList;
 
-import java.io.IOException;
-
 /**
  * A UnmarkCommand class that encapsulates the actions of changing the status
  * of a Task to be not done.
@@ -37,7 +35,7 @@ public class UnmarkCommand extends Command {
     }
 
     /**
-     * Checks whether the index is valid with respect to the given list
+     * Checks whether the index is valid with respect to the given list.
      *
      * @param list The given list to be checked
      * @return Whether the given
@@ -46,8 +44,17 @@ public class UnmarkCommand extends Command {
         return taskIndex >= 0 && taskIndex < list.remainingTasks();
     }
 
+    /**
+     * Marks the list with the given index as not done.
+     *
+     * @param tasks The user TaskList that contains all the task to be manipulated
+     * @param ui The ui Object used to display information
+     * @param storage The Storage Object used to save and load the TaskList
+     * @throws DukeException Throws exception if the list is empty
+     * or the given index is our of range
+     */
     @Override
-    public void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException, IOException {
+    public void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException{
         if (isEmpty(tasks)) {
             String errorMessage = "☹ OOPS!!! Your task list is currently empty";
             throw new InvalidInputException(errorMessage + "\nPlease add in more tasks");

@@ -7,8 +7,6 @@ import duke.parser.Parser;
 import duke.storage.Storage;
 import duke.task.TaskList;
 
-import java.io.IOException;
-
 public class Duke {
     private final Storage storage;
     private TaskList list;
@@ -42,9 +40,6 @@ public class Duke {
                 isExit = c.isExit();
             } catch (DukeException e) {
                 ui.displayWithBar(e.getMessage());
-            } catch (IOException e) {
-                ui.displayWithBar("Warning: there is something wrong when saving ...\n"
-                        + e.getMessage());
             }
         }
     }
