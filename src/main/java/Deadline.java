@@ -1,7 +1,10 @@
 public class Deadline extends Task{
 
-    public Deadline(String description) {
+    private String deadline;
+
+    public Deadline(String description, String deadline) {
         super(description);
+        this.deadline = deadline;
     }
 
     @Override
@@ -9,8 +12,12 @@ public class Deadline extends Task{
         return "D";
     }
 
+    private String getDeadline() {
+        return " (by: " + this.deadline + ")";
+    }
+
     @Override
     public String toString() {
-        return "[" + getTaskTypeIcon() + "]" + getCurrentDescription();
+        return "[" + getTaskTypeIcon() + "]" + getCurrentDescription() + this.getDeadline();
     }
 }

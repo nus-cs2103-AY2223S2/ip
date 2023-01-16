@@ -42,15 +42,36 @@ public class Duke {
 
     private void addTask(String message) {
         space();
-        System.out.println("added: " + message);
         String[] parts = message.split(" ");
-        String description = message.substring(parts[0].length() + 1);
+
         Task newTask;
-        if (parts[0].equals("todo")) newTask = new Todo(description);
-        else if (parts[0].equals("deadline")) newTask = new Deadline(description);
-        else newTask = new Event(description);
+        if (parts[0].equals("todo")) {
+            String description = message.substring(5);
+            System.out.println("Got it. I've added this Todo task:");
+            newTask = new Todo(description);
+        }
+        else if (parts[0].equals("deadline")) {
+            int idx = message.indexOf("/by");
+            String description = message.substring(9, idx - 1);
+            System.out.println("Got it. I've added this Deadline task:");
+            String deadline = message.substring(idx + 4);
+            newTask = new Deadline(description,deadline);
+        }
+        else {
+            int idxFrom = message.indexOf("/from");
+            int idxTo = message.indexOf("/to");
+            String description = message.substring(6, idxFrom - 1);
+            String from = message.substring(idxFrom + 6, idxTo - 1);
+            String to = message.substring(idxTo + 4);
+            System.out.println("Got it. I've added this Event task:");
+            newTask = new Event(description, from, to);
+        }
+        space();
+        System.out.println(newTask);
         this.tasks[cnt] = newTask;
         this.cnt++;
+        space();
+        System.out.println("Now you have " + cnt + " tasks in the list.");
     }
 
     private void displayTasks() {

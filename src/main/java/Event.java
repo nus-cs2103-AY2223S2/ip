@@ -1,7 +1,12 @@
 public class Event extends Task {
 
-    public Event(String description) {
+    private String from;
+    private String to;
+
+    public Event(String description, String from, String to) {
         super(description);
+        this.from = from;
+        this.to = to;
     }
 
     @Override
@@ -9,8 +14,12 @@ public class Event extends Task {
         return "E";
     }
 
+    private String getEventInterval() {
+        return " (from: " + from + " to: " + to + ")";
+    }
+
     @Override
     public String toString() {
-        return "[" + getTaskTypeIcon() + "]" + getCurrentDescription();
+        return "[" + getTaskTypeIcon() + "]" + getCurrentDescription() + this.getEventInterval();
     }
 }
