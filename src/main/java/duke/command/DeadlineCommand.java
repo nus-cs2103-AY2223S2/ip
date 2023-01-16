@@ -36,7 +36,7 @@ public class DeadlineCommand extends AddCommand {
         String[] args = input.split(" /by ", 2);
 
         if (args.length != 2) {
-            throw new DukeException("The input of a deadline must include a ' /by '");
+            throw new DukeException("The input of a deadline must include a ' /by '.");
         }
 
         return new Deadline(false, args[0], args[1]);

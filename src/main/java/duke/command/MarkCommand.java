@@ -35,7 +35,7 @@ public class MarkCommand implements Command {
         }
 
         if (index >= tasks.size() || index < 0) {
-            throw new DukeException("The index of an mark must be between 1 and the number of task");
+            throw new DukeException("The index of an mark must be between 1 and the number of task.");
         }
 
         Task task = tasks.get(index);

@@ -36,14 +36,14 @@ public class EventCommand extends AddCommand {
 
         String[] args = input.split(" /from ", 2);
         if (args.length != 2) {
-            throw new DukeException("The input of an event must include a ' /from '");
+            throw new DukeException("The input of an event must include a ' /from '.");
         }
 
         String description = args[0];
 
         String[] startAndEnd = args[1].split(" /to ", 2);
         if (startAndEnd.length != 2) {
-            throw new DukeException("The input of an event must include a ' /to '");
+            throw new DukeException("The input of an event must include a ' /to '.");
         }
 
         String start = startAndEnd[0];
