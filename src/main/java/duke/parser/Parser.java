@@ -108,7 +108,7 @@ public class Parser {
                     if (ops.length != 2) {
                         throw new InvalidCommandArgsException(Message.EXCEPTION_INVALID_DATE_CMD);
                     }      
-                    return new ListCommand(ops[1]);
+                    return new ListCommand(DateUtil.toLocalDateTime(ops[1]));
                 default:
                     break;
             }
