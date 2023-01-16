@@ -1,7 +1,7 @@
 public class Task {
-    public String desc;
-    public boolean isMarked;
-    public static int count = 0;
+    protected String desc;
+    protected boolean isMarked;
+    protected static int count = 0;
 
     Task(String desc) {
         this.desc = desc;
@@ -24,7 +24,7 @@ public class Task {
             System.out.println("Oops! This task has not been marked as done before.");
         } else {
             isMarked = false;
-            System.out.println("Ok, I've marked this task as not done yet:");
+            System.out.println("Alright, I've marked this task as not done yet:");
             System.out.println(this);
         }
     }
@@ -41,7 +41,5 @@ public class Task {
             return "[ ] " + desc;
         }
     }
-
-
 
 }
