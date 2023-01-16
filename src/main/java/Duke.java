@@ -12,6 +12,8 @@ public class Duke {
             String[] parts = userinput.split(" ");
             String command = parts[0];
 
+            System.out.println("-.-.-.-.-.-.-.-.-.-.-.-");
+
             switch (command) {
                 case "bye":
                     System.out.println("Roger. Agent Bond signing off ~");
@@ -34,10 +36,34 @@ public class Duke {
                     records[b].complete();
                     break;
 
-                default:
-                    records[index] = new Task(userinput);
+                case "todo":
+                    records[index] = new Todo(parts[1]);
                     index++;
-                    System.out.println("Registered: " + userinput);
+                    System.out.println("Added to-do mission: ");
+                    System.out.println(records[index-1].toString());
+                    System.out.println("You have " + index + " missions in the list");
+                    break;
+
+                case "deadline":
+                    parts = userinput.split("/");
+                    records[index] = new Deadline(parts[0], parts[1]);
+                    index++;
+                    System.out.println("Added deadline mission: ");
+                    System.out.println(records[index-1].toString());
+                    System.out.println("You have " + index + " missions in the list");
+                    break;
+
+                case "event":
+                    parts = userinput.split("/");
+                    records[index] = new Event(parts[0], parts[1], parts[2]);
+                    index++;
+                    System.out.println("Added event mission: ");
+                    System.out.println(records[index-1].toString());
+                    System.out.println("You have " + index + " missions in the list");
+                    break;
+
+                default:
+                    System.out.println("Command not recognised");
             }
         }
     }
