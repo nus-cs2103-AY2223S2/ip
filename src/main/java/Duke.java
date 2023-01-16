@@ -3,6 +3,10 @@ import java.util.List;
 import java.util.ArrayList;
 import Exceptions.*;
 
+enum Commands{
+    BYE, LIST, MARK, UNMARK, DELETE, TODO, DEADLINE, EVENT
+}
+
 public class Duke {
     public static void main(String[] args) throws DukeException {
 
@@ -21,23 +25,24 @@ public class Duke {
 
         bot:
         while (sc.hasNext()) {
-            String command = sc.next();
-            String description = sc.nextLine();
+            String[] input = sc.nextLine().split(" ", 2);
+            String command = input[0];
+            Commands currCommand = Commands.valueOf(command.toUpperCase());
 
-            switch (command) {
+            switch (currCommand) {
                 // Command for bye
-                case "bye":
+                case BYE:
                     String goodbye = "Bye. Hope to see you again soon!";
                     System.out.println(goodbye);
                     break bot;
 
                 // Command for list
-                case "list": {
+                case LIST: {
                     if (taskList.size() > 0) {
                         System.out.println("Here are the tasks in your list:");
-                        int taskCount = 0;
+                        int taskCount = 1;
                         for (Task t : taskList) {
-                            System.out.println(taskCount+1 + "." + t);
+                            System.out.println(taskCount + "." + t);
                             taskCount++;
                         }
                     } else {
@@ -47,8 +52,8 @@ public class Duke {
                 }
 
                 // Command to mark as done
-                case "mark": {
-                    description = description.substring(1);
+                case MARK: {
+                    String description = input[1];
                     int taskToMark = Integer.parseInt(description) - 1;
                     int taskCount = 0;
 
@@ -70,8 +75,8 @@ public class Duke {
                 }
 
                 // Command to unmark
-                case "unmark": {
-                    description = description.substring(1);
+                case UNMARK: {
+                    String description = input[1];
                     int taskToMark = Integer.parseInt(description) - 1;
                     int taskCount = 0;
 
@@ -93,8 +98,8 @@ public class Duke {
                 }
 
                 // Command to remove task
-                case "delete": {
-                    description = description.substring(1);
+                case DELETE: {
+                    String description = input[1];
                     int taskToRemove = Integer.parseInt(description) - 1;
                     int taskCount = 0;
 
@@ -122,13 +127,11 @@ public class Duke {
                     break;
                 }
 
-                case "todo": {
-
+                case TODO: {
+                    String description = input[1];
                     if (description.length() == 0) {
                         throw new DukeTodoEmpty();
                     }
-
-                    description = description.substring(1);
 
                     System.out.println("Got it. I've added this task:");
                     Todo todo = new Todo(description);
@@ -146,13 +149,12 @@ public class Duke {
                     break;
                 }
 
-                case "deadline": {
-
+                case DEADLINE: {
+                    String description = input[1];
                     if (description.length() == 0) {
                         throw new DukeDeadlineEmpty();
                     }
 
-                    description = description.substring(1);
                     String[] s = description.split("/");
                     System.out.println("Got it. I've added this task:");
                     Deadline deadline = new Deadline(s[0], s[1].substring(2));
@@ -170,13 +172,12 @@ public class Duke {
                     break;
                 }
 
-                case "event": {
-
+                case EVENT: {
+                    String description = input[1];
                     if (description.length() == 0) {
                         throw new DukeEventEmpty();
                     }
 
-                    description = description.substring(1);
                     String[] s = description.split("/");
                     System.out.println("Got it. I've added this task:");
                     Event event = new Event(s[0], s[1].substring(4), s[2].substring(2));

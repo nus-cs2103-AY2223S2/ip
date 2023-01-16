@@ -3,11 +3,35 @@ What can I do for you?
 Got it. I've added this task:
     [T][ ] read book
 Now you have 1 task in the list.
-Got it. I've added this task:
-    [D][ ] return book (by: June 6th)
-Now you have 2 tasks in the list.
+Here are the tasks in your list:
+1.[T][ ] read book
 Nice! I've marked this task as done:
     [T][X] read book
+Here are the tasks in your list:
+1.[T][X] read book
+OK, I've marked this task as not done yet:
+    [T][ ] read book
+Here are the tasks in your list:
+1.[T][ ] read book
+Noted. I've removed this task:
+    [T][ ] read book
+You have no tasks in the list.
+You have no tasks. Hooray!
 Got it. I've added this task:
-    [E][ ] project meeting (from: Aug 6th 2pm to: 4pm)
-Now you have 3 tasks in the list.
+    [D][ ] read book (by: today)
+Now you have 1 task in the list.
+Here are the tasks in your list:
+1.[D][ ] read book (by: today)
+Got it. I've added this task:
+    [E][ ] be stonk (from: today to: forever)
+Now you have 2 tasks in the list.
+Here are the tasks in your list:
+1.[D][ ] read book (by: today)
+2.[E][ ] be stonk (from: today to: forever)
+Nice! I've marked this task as done:
+    [E][X] be stonk (from: today to: forever)
+Nice! I've marked this task as done:
+    [D][X] read book (by: today)
+Here are the tasks in your list:
+1.[D][X] read book (by: today)
+2.[E][X] be stonk (from: today to: forever)
