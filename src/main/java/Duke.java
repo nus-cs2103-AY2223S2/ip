@@ -9,34 +9,10 @@ public class Duke {
         return new ArrayList<String>(Arrays.asList(input.split(" ")));
     }
 
-    private static ArrayList<String> splitFirst(String input) {
-        return new ArrayList<String>(Arrays.asList(input.split("\\s")));
-    }
-
     private static Task getTaskForMarking(ArrayList<String> parsed) {
         int completedIndex = Integer.parseInt(parsed.get(1)) - 1; // index of the task completed
         Task completedTask = taskStore.get(completedIndex); // actual task
         return completedTask;
-    }
-
-    private static class Task {
-        private final String taskName;
-        private boolean completed;
-
-        public Task(String taskName, boolean completed) {
-            this.taskName = taskName;
-            this.completed = false;
-        }
-
-        public void changeCompletion() {
-            this.completed = !this.completed;
-        }
-
-        @Override
-        public String toString() {
-            String icon = this.completed ? "[X] " : "[ ] ";
-            return icon + this.taskName;
-        }
     }
 
     public static void main(String[] args) {
@@ -75,7 +51,7 @@ public class Duke {
             }
             // add task
             else {
-                Duke.Task newTask = new Duke.Task(command, false);
+                Task newTask = new Task(command, false);
                 taskStore.add(newTask);
                 System.out.println("  added: " + command);
             }
