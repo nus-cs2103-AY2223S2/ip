@@ -1,11 +1,17 @@
+import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Duke {
+    private static ArrayList<String> dukeList = new ArrayList<>(100);
+
     public static void main(String[] args) {
         greet();
         dukeLoop();
     }
 
+    /**
+     * Prints Duke's greetings
+     */
     private static void greet() {
         String logo = " ____        _        \n"
                 + "|  _ \\ _   _| | _____ \n"
@@ -26,16 +32,18 @@ public class Duke {
             String input = sc.nextLine();
 
             switch (input) {
+                case "list":
+                    printDukeList();
+                    break;
                 case "bye":
                     sc.close();
                     exit();
                     return;
                 default:
-                    echo(input);
+                    addToList(input);
                     break;
             }
         }
-
     }
 
     /**
@@ -46,16 +54,37 @@ public class Duke {
      */
     private static void printWithPartition(String w) {
         System.out.println("---------------------");
-        System.out.println("\t" + w);
+        System.out.print(w);
         System.out.println("---------------------");
     }
 
     private static void echo(String w) {
-        printWithPartition("Duke: " + w);
+        printWithPartition("\tDuke: " + w + "\n");
+    }
+
+    /**
+     * Adds an item to Duke's list and notifies the user in print
+     * 
+     * @param w - The item to add to the list
+     */
+    private static void addToList(String w) {
+        if (dukeList.add(w)) {
+            printWithPartition("\tadded: " + w + "\n");
+        } else {
+            printWithPartition("\tfailed to add: " + w + "\n");
+        }
+    }
+
+    private static void printDukeList() {
+        String ls = "";
+        for (int i = 0; i < dukeList.size(); i++) {
+            ls = ls + "\t" + Integer.toString(i + 1) + ". " + dukeList.get(i) + "\n";
+        }
+        printWithPartition(ls);
     }
 
     private static void exit() {
-        printWithPartition("Duke: " + "Goodbye!");
+        printWithPartition("\tGoodbye!\n");
     }
 
 }
