@@ -3,7 +3,7 @@ import java.io.*;
 
 public class Duke {
     public static String HOR_BAR = "    ✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦";
-    public  String[] listOfTasks = new String[100];
+    public static ArrayList<String> listOfTasks = new ArrayList<String>();
 
     public static void initialise() {
         /* Greetings from application */
@@ -20,7 +20,17 @@ public class Duke {
      *          Command to be repeated back to interface.
      */
     private static void addText(String command) {
+        listOfTasks.add(command);
         System.out.println(HOR_BAR + "\n    " + "added: " + command + "\n" + HOR_BAR);
+    }
+
+    private static void listTasks() {
+        int counter = 1;
+        System.out.println(HOR_BAR);
+        for (String task : listOfTasks) {
+            System.out.println("    " + counter++ + ". " + task);
+        }
+        System.out.println(HOR_BAR);
     }
 
     public static void main(String[] args) throws IOException {
@@ -34,6 +44,8 @@ public class Duke {
                if (command.equals("bye")) {
                    System.out.println(HOR_BAR + "\n" + "    Bye! Please come back again ><!");
                    break;
+               } else if  (command.equals("list")) {
+                   listTasks();
                } else {
                    addText(command);
                }
