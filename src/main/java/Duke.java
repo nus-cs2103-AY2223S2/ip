@@ -1,7 +1,7 @@
 import java.util.Scanner;
 
 public class Duke {
-    
+
     final static String LOGO = " ____        _        \n"
                             + "|  _ \\ _   _| | _____ \n"
                             + "| | | | | | | |/ / _ \\\n"
@@ -18,21 +18,33 @@ public class Duke {
 
         TaskList taskList = new TaskList();
 
-        while (!response.equals("bye")) {
+        while (true) {
             response = scanner.nextLine();
-            switch (response) {
-                case "list":
-                    Duke.respond(taskList);
+            if (response.equals("bye")) {
+                break;
+            }
+            String[] commands = response.split(" ", 2);
+            System.out.println(BANNER);
+            switch(commands[0]) {
+                case "list" :
+                    taskList.listItems();
                     break;
-                case "bye":
+                case "mark" :
+                    taskList.markTask(commands[1]);
                     break;
-                default:
-                    Duke.respond(taskList, response);
+                case "unmark" :
+                    taskList.unmarkTask(commands[1]);
+                    break;
+                default :
+                    Task newTask = new Task(response);
+                    taskList.addTask(newTask);
                     break;
             }
+            System.out.println(BANNER);
         }
         Duke.respond(BYE_MSG, true);
     }
+
 
     /**
      * Displays the welcome message when launched.
@@ -55,21 +67,4 @@ public class Duke {
         System.out.println(answer);
     }
 
-    /**
-     * Prints the string representation of the task list added in chronological order.
-     * @param taskList the list of names of tasks
-     */
-    public static void respond(TaskList taskList) {
-        System.out.println(String.format("%s\n%s\n%s\n", BANNER, taskList, BANNER));
-    }
-
-    /**
-     * Adds the task into task list and prints the added task message.
-     * @param taskList list of tasks
-     * @param taskName name of newly-added task
-     */
-    public static void respond(TaskList taskList, String taskName) {
-        taskList.addTask(taskName);
-        System.out.println(String.format("%s\nadded: %s\n%s\n", BANNER, taskName, BANNER));
-    }
 }

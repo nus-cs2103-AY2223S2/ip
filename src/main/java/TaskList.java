@@ -1,5 +1,5 @@
 public class TaskList {
-    private String[] taskList = new String[100];
+    private Task[] taskList = new Task[100];
     private static int index = -1;
 
     /**
@@ -13,26 +13,53 @@ public class TaskList {
      * Adds task to the task list String array.
      * @param task name of the task
      */
-    public void addTask(String task) {
+    public void addTask(Task task) {
+        System.out.println(String.format("added: %s", task.getDescription()));
         this.taskList[index] = task;
         index++;
     }
 
     /**
-     * Returns names of tasks in the list in the top-down list format with numbered indexes
-     * starting from 1 added in chronological order whereas returns empty list string if task list is empty.
-     * @return string representation of the task list containing name of tasks.
+     * Marks a task by its index in the array of Tasks.
+     * @param index index of interest to mark the task as done
      */
-    @Override
-    public String toString() {
+    public void markTask(String index) {
+        int idx;
+        try {
+            idx = Integer.parseInt(index) - 1;
+            taskList[idx].mark();
+        } catch (Exception e) {
+            System.out.println("Error index");
+        }
+    }
+
+    /**
+     * Unmarks a task by its index in the array of Tasks.
+     * @param index index of interest to unmark the task as undone.
+     */
+    public void unmarkTask(String index) {
+        int idx;
+        try {
+            idx = Integer.parseInt(index) - 1;
+            taskList[idx].unmark();
+        } catch (Exception e) {
+            System.out.println("Error index");
+        }
+    }
+
+    /**
+     * Prints the names of tasks in the list in the top-down list format with numbered indexes
+     * starting from 1 added in chronological order whereas returns empty list string if task list is empty.
+     */
+    public void listItems() {
         if (index == 0) {
-            return "Empty, this list is !";
+            System.out.println("Empty, this list is !");
         } else {
             String out = "";
             for (int i = 0; i < index - 1; i++) {
-                out += String.format("%d. %s\n", i + 1, taskList[i]);
+                out += String.format("%d. %s\n", i + 1, taskList[i].toString());
             }
-            return out + String.format("%d. %s", index, taskList[index - 1]);
+            System.out.println(out + String.format("%d. %s", index, taskList[index - 1].toString()));
         }
     }
 }
