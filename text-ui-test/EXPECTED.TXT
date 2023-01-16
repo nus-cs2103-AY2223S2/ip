@@ -22,6 +22,10 @@ You currently have 3 Tasks
 =================================== 
 
 ============= KiraBot ============= 
+Sorry, I don't know this command :C
+=================================== 
+
+============= KiraBot ============= 
 Here is all the items stored~
 1.[T][ ] CS2103T
 2.[E][ ] gym(from: morning to: night)
@@ -41,6 +45,7 @@ Here is all the items stored~
 =================================== 
 
 ============= KiraBot ============= 
+There seems to be an error...
 There is no such task!
 =================================== 
 
@@ -71,3 +76,4 @@ Here is all the items stored~
 ============= KiraBot ============= 
 Bye! Have a nice day :)
 =================================== 
+

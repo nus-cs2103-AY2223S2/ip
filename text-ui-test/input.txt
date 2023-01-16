@@ -1,6 +1,7 @@
 todo CS2103T
 event gym /from morning /to night
 deadline sleep /by 9pm
+random test
 list
 mark 1
 list

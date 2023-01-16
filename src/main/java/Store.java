@@ -13,25 +13,28 @@ public class Store {
 
     /**
      * Stores the Task into the array.
+     * Throws KiraException if database is full.
      * 
      * @param task Task to be stored
      */
-    public void store(Task task) {
+    public void store(Task task) throws KiraException {
+        if (this.total > 100) {
+            throw new KiraException("The task list is full!\n");
+        }
         this.database[this.total] = task;
         this.total++;
     }
 
     /**
      * Marks the task as completed.
-     * If the index given is beyond the total tasks in the array,
-     * a warning is returned.
+     * Throw KiraException if index is invalid
      * 
      * @param index The task to be marked as done.
      * @return Message to be printed by the bot.
      */
-    public String mark(int index) {
-        if (index > this.total) {
-            return "There is no such task!\n";
+    public String mark(int index) throws KiraException {
+        if (index > this.total || index <= 0) {
+            throw new KiraException("There is no such task!\n");
         }
         Task currentTask = this.database[index - 1];
         currentTask.mark();
@@ -44,15 +47,14 @@ public class Store {
     
     /**
      * Marks the task as incomplete.
-     * If the index given is beyond the total tasks in the array,
-     * a warning is returned.
+     * Throw KiraException if index is invalid
      * 
      * @param index The task to be marked as incomplete.
      * @return Message to be printed by the bot.
      */
-    public String unmark(int index) {
-        if (index > this.total) {
-            return "There is no such task!";
+    public String unmark(int index) throws KiraException {
+        if (index > this.total || index <= 0) {
+            throw new KiraException("There is no such task!\n");
         }
         Task currentTask = this.database[index - 1];
         currentTask.unmark();
