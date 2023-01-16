@@ -17,42 +17,46 @@ public class Duke {
             String userInput = sc.nextLine();
 
             String[] tokens = userInput.split(" ");
-            String action = tokens[0];
+            Action action;
+
+            try {
+                action = Action.valueOf(tokens[0]);
+            } catch (IllegalArgumentException e) {
+                System.out.println(new DukeUnknownActionException().getMessage());
+                continue;
+            }
 
             try {
                 switch (action) {
-                case "list":
+                case list:
                     taskList.handleListCommand();
                     break;
 
-                case "mark":
-                case "unmark":
+                case mark:
+                case unmark:
                     taskList.handleMarkUnmarkCommand(tokens);
                     break;
 
-                case "todo":
+                case todo:
                     taskList.handleTodoCommand(tokens);
                     break;
 
-                case "deadline":
+                case deadline:
                     taskList.handleDeadlineCommand(tokens);
                     break;
 
-                case "event":
+                case event:
                     taskList.handleEventCommand(tokens);
                     break;
 
-                case "delete":
+                case delete:
                     taskList.handleDeleteCommand(tokens);
                     break;
 
-                case "bye":
+                case bye:
                     taskList.handleByeCommand();
                     sc.close();
                     return;
-
-                default:
-                    throw new DukeUnknownActionException();
                 }
             } catch (DukeException error) {
                 System.out.println(error.getMessage());
