@@ -56,107 +56,105 @@ public class Duke {
     private static void processCommand(String line) throws DukeException {
         String[] splitCommand = line.split(" ");
         String command = splitCommand[0];
-        if (command.equals(Duke.MARK_COMMAND)) {
-            if (splitCommand.length == 1) {
-                throw new DukeException("A task number needs to be provided.");
-            } else if (splitCommand.length > 2) {
-                throw new DukeException("I don't recognise that task number.");
-            }
-            int taskIndex;
-            try {
-                taskIndex = Integer.parseInt(splitCommand[1]) - 1;
-            } catch (NumberFormatException e) {
-                throw new DukeException("I don't recognise that task number.");
-            }
-            if (taskIndex >= taskStore.size() || taskIndex < 0) {
-                throw new DukeException("That task number doesn't exist!");
-            }
+        if (command.equals(Duke.MARK_COMMAND) || command.equals(Duke.UNMARK_COMMAND)
+            || command.equals(Duke.DELETE_COMMAND)) {
+            processTask(command, splitCommand);
+        } else if (command.equals(Duke.TODO_COMMAND) || command.equals(Duke.DEADLINE_COMMAND)
+            || command.equals(Duke.EVENT_COMMAND)) {
+            addTask(command, line);
+        } else {
+            throw new DukeException("I'm sorry, but I don't know what that means :-(");
+        }
+    }
+
+    private static void processTask(String command, String[] splitCommand) throws DukeException {
+        if (splitCommand.length == 1) {
+            throw new DukeException("A task number needs to be provided.");
+        } else if (splitCommand.length > 2) {
+            throw new DukeException("I don't recognise that task number.");
+        }
+        int taskIndex;
+        try {
+            taskIndex = Integer.parseInt(splitCommand[1]) - 1;
+        } catch (NumberFormatException e) {
+            throw new DukeException("I don't recognise that task number.");
+        }
+        if (taskIndex >= taskStore.size()) {
+            throw new DukeException("There aren't that many tasks in the list!");
+        } else if (taskIndex < 0) {
+            throw new DukeException("I don't recognise that task number.");
+        }
+        switch (command) {
+        case Duke.MARK_COMMAND:
             Duke.taskStore.get(taskIndex).setDone(true);
             System.out.println("Nice! I've marked this task as done:");
             System.out.println(Duke.taskStore.get(taskIndex));
-        } else if (command.equals(Duke.UNMARK_COMMAND)) {
-            if (splitCommand.length == 1) {
-                throw new DukeException("A task number needs to be provided.");
-            } else if (splitCommand.length > 2) {
-                throw new DukeException("I don't recognise that task number.");
-            }
-            int taskIndex;
-            try {
-                taskIndex = Integer.parseInt(splitCommand[1]) - 1;
-            } catch (NumberFormatException e) {
-                throw new DukeException("I don't recognise that task number.");
-            }
-            if (taskIndex >= taskStore.size() || taskIndex < 0) {
-                throw new DukeException("That task number doesn't exist!");
-            }
+            break;
+        case Duke.UNMARK_COMMAND:
             Duke.taskStore.get(taskIndex).setDone(false);
-            System.out.println("OK, I've marked this task as not done yet:");
+            System.out.println("Nice! I've marked this task as done:");
             System.out.println(Duke.taskStore.get(taskIndex));
-        } else if (command.equals(Duke.DELETE_COMMAND)) {
-            if (splitCommand.length == 1) {
-                throw new DukeException("A task number needs to be provided.");
-            } else if (splitCommand.length > 2) {
-                throw new DukeException("I don't recognise that task number.");
-            }
-            int taskIndex;
-            try {
-                taskIndex = Integer.parseInt(splitCommand[1]) - 1;
-            } catch (NumberFormatException e) {
-                throw new DukeException("I don't recognise that task number.");
-            }
-            if (taskIndex >= taskStore.size() || taskIndex < 0) {
-                throw new DukeException("That task number doesn't exist!");
-            }
+            break;
+        case Duke.DELETE_COMMAND:
             Task task = Duke.taskStore.get(taskIndex);
             Duke.taskStore.remove(taskIndex);
             System.out.println("Noted. I've removed this task:");
             System.out.println(task);
             System.out.println("Now you have " + Duke.taskStore.size() + " tasks in the list.");
-        } else {
-            Task task = null;
-            if (command.equals(Duke.TODO_COMMAND)) {
-                try {
-                    String description = line.split(Duke.TODO_COMMAND)[1].trim();
-                    if (description.isEmpty()) {
-                        throw new DukeException("The description of a todo cannot be empty.");
-                    }
-                    task = new Todo(description);
-                } catch (IndexOutOfBoundsException e) {
+            break;
+        default:
+            break;
+        }
+    }
+
+    private static void addTask(String command, String line) throws DukeException {
+        Task task = null;
+        switch (command) {
+        case Duke.TODO_COMMAND:
+            try {
+                String description = line.split(Duke.TODO_COMMAND)[1].trim();
+                if (description.isEmpty()) {
                     throw new DukeException("The description of a todo cannot be empty.");
                 }
-            } else if (command.equals(Duke.DEADLINE_COMMAND)) {
-                try {
-                    String details = line.split(Duke.DEADLINE_COMMAND)[1].trim();
-                    String name = details.split(Duke.byIndicator)[0].trim();
-                    String deadline = details.split(Duke.byIndicator)[1].trim();
-                    if (name.isEmpty() || deadline.isEmpty()) {
-                        throw new DukeException("The description and /by of a deadline cannot be empty.");
-                    }
-                    task = new Deadline(name, deadline);
-                } catch (IndexOutOfBoundsException e) {
+                task = new Todo(description);
+            } catch (IndexOutOfBoundsException e) {
+                throw new DukeException("The description of a todo cannot be empty.");                
+            }
+            break;
+        case Duke.DEADLINE_COMMAND:
+            try {
+                String details = line.split(Duke.DEADLINE_COMMAND)[1].trim();
+                String name = details.split(Duke.byIndicator)[0].trim();
+                String deadline = details.split(Duke.byIndicator)[1].trim();
+                if (name.isEmpty() || deadline.isEmpty()) {
                     throw new DukeException("The description and /by of a deadline cannot be empty.");
                 }
-            } else if (command.equals(Duke.EVENT_COMMAND)) {
-                try {
-                    String details = line.split(Duke.EVENT_COMMAND)[1].trim();
-                    String name = details.split(Duke.fromIndicator)[0].trim();
-                    String from = details.split(Duke.fromIndicator)[1].split(Duke.toIndicator)[0].trim();
-                    String to = details.split(Duke.fromIndicator)[1].split(Duke.toIndicator)[1].trim();
-                    if (name.isEmpty() || from.isEmpty() || to.isEmpty()) {
-                        throw new DukeException("The description, /from and /to of a deadline cannot be empty.");
-                    }
-                    task = new Event(name, from, to);
-                } catch (IndexOutOfBoundsException e) {
+                task = new Deadline(name, deadline);
+            } catch (IndexOutOfBoundsException e) {
+                throw new DukeException("The description and /by of a deadline cannot be empty.");
+            }
+            break;
+        case Duke.EVENT_COMMAND:
+            try {
+                String details = line.split(Duke.EVENT_COMMAND)[1].trim();
+                String name = details.split(Duke.fromIndicator)[0].trim();
+                String from = details.split(Duke.fromIndicator)[1].split(Duke.toIndicator)[0].trim();
+                String to = details.split(Duke.fromIndicator)[1].split(Duke.toIndicator)[1].trim();
+                if (name.isEmpty() || from.isEmpty() || to.isEmpty()) {
                     throw new DukeException("The description, /from and /to of a deadline cannot be empty.");
                 }
-            } else {
-                throw new DukeException("I'm sorry, but I don't know what that means :-(");
+                task = new Event(name, from, to);
+            } catch (IndexOutOfBoundsException e) {
+                throw new DukeException("The description, /from and /to of a deadline cannot be empty.");
             }
-            Duke.taskStore.add(task);
-            System.out.println("Got it. I've added this task:");
-            System.out.println(task);
-            System.out.println("Now you have " + Duke.taskStore.size() + " tasks in the list.");
+            break;
+        default:
+            break;
         }
+        Duke.taskStore.add(task);
+        System.out.println("Got it. I've added this task:");
+        System.out.println(task);
+        System.out.println("Now you have " + Duke.taskStore.size() + " tasks in the list.");
     }
 
 }
