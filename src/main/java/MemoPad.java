@@ -23,7 +23,7 @@ public class MemoPad {
         return this.pointer == 0;
     }
 
-    public void addToList(String content) {
+    public void addToList(char taskType, String content) {
         /**
          * Adds to the list if there is space.
          * @param item the string to add to the list.
@@ -33,9 +33,17 @@ public class MemoPad {
             return;
         }
 
-        this.tasks[this.pointer] = new Task(content);
+        Task task = Task.create(taskType, content);
+        if (task == null) {
+            System.out.println("Task creation unsuccessful.");
+            return;
+        }
+        this.tasks[this.pointer] = task;
         this.pointer++;
-        System.out.println("Added: " + content);
+        System.out.println("Added task:");
+        System.out.println(task);
+
+        System.out.println(String.format("Now have %d items.", this.pointer));
     }
 
     public void printItem(int id, boolean withNumber) {

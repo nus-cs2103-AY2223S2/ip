@@ -83,8 +83,17 @@ public class Duke {
                 case "unmark":
                     memoPad.markItem(response, false);
                     break;
+                case "todo":
+                    memoPad.addToList('T', response);
+                    break;
+                case "deadline":
+                    memoPad.addToList('D', response);
+                    break;
+                case "event":
+                    memoPad.addToList('E', response);
+                    break;
                 default:
-                    memoPad.addToList(response);
+                    System.out.println("Sorry, I'm not sure what you're talking about.");
             }
 
             Duke.horizontal();
