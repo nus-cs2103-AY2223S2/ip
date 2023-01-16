@@ -14,6 +14,7 @@ public class Duke {
     private static String deadlineCommand = "deadline";
     private static String todoCommand = "todo";
     private static String eventCommand = "event";
+    private static String deleteCommand = "delete";
 
     public static void main(String[] args) {
         String logo = " ____        _        \n"
@@ -30,7 +31,7 @@ public class Duke {
         Scanner sc = new Scanner(System.in);
         while (true) {
             try {
-                String command = sc.nextLine();
+                String command = sc.nextLine().trim();
                 if (command.equals(Duke.endCommand)) {
                     sc.close();
                     System.out.println(goodbye);
@@ -59,12 +60,19 @@ public class Duke {
             int taskIndex = Integer.parseInt(splitCommand[1]) - 1;
             Duke.taskStore.get(taskIndex).setDone(true);
             System.out.println("Nice! I've marked this task as done:");
-            System.out.println(taskStore.get(taskIndex));
+            System.out.println(Duke.taskStore.get(taskIndex));
         } else if (command.equals(Duke.unmark)) {
             int taskIndex = Integer.parseInt(splitCommand[1]) - 1;
             Duke.taskStore.get(taskIndex).setDone(false);
             System.out.println("OK, I've marked this task as not done yet:");
-            System.out.println(taskStore.get(taskIndex));
+            System.out.println(Duke.taskStore.get(taskIndex));
+        } else if (command.equals(Duke.deleteCommand)) {
+            int taskIndex = Integer.parseInt(splitCommand[1]) - 1;
+            Task task = Duke.taskStore.get(taskIndex);
+            Duke.taskStore.remove(taskIndex);
+            System.out.println("Noted. I've removed this task:");
+            System.out.println(task);
+            System.out.println("Now you have " + Duke.taskStore.size() + " tasks in the list.");
         } else {
             Task task = null;
             if (command.equals(Duke.todoCommand)) {
@@ -94,7 +102,7 @@ public class Duke {
             Duke.taskStore.add(task);
             System.out.println("Got it. I've added this task:");
             System.out.println(task);
-            System.out.println("Now you have " + taskStore.size() + " tasks in the list.");
+            System.out.println("Now you have " + Duke.taskStore.size() + " tasks in the list.");
         }
     }
 
