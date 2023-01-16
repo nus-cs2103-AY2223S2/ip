@@ -35,8 +35,7 @@ public class Duke {
                 case ("list"):
                     String ToPrint = "";
                     for (int i = 0; i < TaskList.size(); i++) {
-                        ToPrint += ((i + 1 + ". ") + "[" + TaskList.get(i).getStatus() + "] "
-                                + TaskList.get(i).getName() + "\n");
+                        ToPrint += ((i + 1 + ". ") + TaskList.get(i).toString() + "\n");
                     }
                     System.out.println(border + "Here are your tasks:\n" + ToPrint + border);
                     break;
@@ -48,8 +47,7 @@ public class Duke {
                     int MarkInput = MarkScan.nextInt() - 1;
                     TaskList.get(MarkInput).MarkDone();
                     System.out.println(border + "Okay, the following task is marked as done!\n");
-                    System.out.println((MarkInput+1 + ". ") + "[X] "
-                            + TaskList.get(MarkInput).getName() + "\n" + border);
+                    System.out.println((MarkInput+1 + ". ") + TaskList.get(MarkInput).toString() + "\n" + border);
                     break;
                 // Duke allows user to mark tasks as NOT done when input is "unmark"
                 case ("unmark"):
@@ -58,8 +56,7 @@ public class Duke {
                     int UnmarkInput = UnmarkScan.nextInt() - 1;
                     TaskList.get(UnmarkInput).MarkNotDone();
                     System.out.println(border + "Okay, the following task is marked as NOT done!\n");
-                    System.out.println((UnmarkInput+1 + ". ") + "[ ] "
-                            + TaskList.get(UnmarkInput).getName() + "\n" + border);
+                    System.out.println((UnmarkInput+1 + ". ") + TaskList.get(UnmarkInput).toString() + "\n" + border);
                     break;
                 // Duke adds task by default
                 default:

@@ -22,4 +22,9 @@ public class Task {
     public void MarkNotDone() {
         this.isDone = false;
     }
+    // properly formats Task as String
+    @Override
+    public String toString() {
+        return "[" + getStatus() + "] " + getName();
+    }
 }
