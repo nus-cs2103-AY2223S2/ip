@@ -58,11 +58,12 @@ public class Jarvis {
                 // mark task as done
 
                 try {
-
-                    ToDoList.markDone(Integer.parseInt(line.substring(line.length() - 1)));
+                    int taskNum = Integer.parseInt(line.substring(line.length() - 1));
+                    validate(taskNum);
+                    ToDoList.markDone(taskNum);
                 } catch (NumberFormatException e) {
                     System.out.println("Which task have you completed, sir?");
-                } catch (NullPointerException e) {
+                } catch (NoTaskFoundException e) {
                     System.out.println("Sir, that task does not exist.");
                 }
 
@@ -70,10 +71,12 @@ public class Jarvis {
                 // unmark tasks
 
                 try {
-                    ToDoList.unmark(Integer.parseInt(line.substring(line.length() - 1)));
+                    int taskNum = Integer.parseInt(line.substring(line.length() - 1));
+                    validate(taskNum);
+                    ToDoList.unmark(taskNum);
                 } catch (NumberFormatException e) {
                     System.out.println("Which task would you like to unmark sir?");
-                } catch (NullPointerException e) {
+                } catch (NoTaskFoundException e) {
                     System.out.println("Sir, that task does not exist.");
                 }
 
@@ -130,6 +133,12 @@ public class Jarvis {
             ToDoList.add(task);
         } catch (StringIndexOutOfBoundsException e) {
             throw new JarvisException("");
+        }
+    }
+
+    public static void validate(int num) throws NoTaskFoundException {
+        if (num > ToDoList.getCount()) {
+            throw new NoTaskFoundException("");
         }
     }
 }
