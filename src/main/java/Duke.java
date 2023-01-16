@@ -42,23 +42,22 @@ public class Duke {
                         line();
                         break;
                     default:
-                        Task newTask;
-                        if (input.contains("todo")){
-                            newTask = new Todo(input.substring(5));
-                        } else if (input.contains("deadline")){
-                            String[] arr = input.substring(9).split("/");
-                            newTask = new Deadline(arr[1], arr[0]);
-                        } else {
-                            String[] arr = input.substring(6).split("/");
-                            newTask = new Event(arr[1], arr[2], arr[0]);
+                        try {
+                            Task newTask = parseInput(input);
+                            list[index] = newTask;
+                            index++;
+                            line();
+                            indent("Roger! I've added this task to the list:\n");
+                            indent(newTask + "\n");
+                            indent(String.format("Now you have %d tasks left in the list", index));
+                            line();
+                        } catch (EmptyArgException e) {
+                            indent("Sorry! You provided an empty description. Pls provide a correct input :)");
+                            line();
+                        } catch (UnknownInputException u) {
+                            indent("Sorry! I did not quite understand what you meant :( Pls try again!");
+                            line();
                         }
-                        list[index] = newTask;
-                        index ++;
-                        line();
-                        indent("Roger! I've added this task to the list:\n");
-                        indent(newTask + "\n");
-                        indent(String.format("Now you have %d tasks left in the list", index));
-                        line();
                 }
 
             }
@@ -74,7 +73,7 @@ public class Duke {
     }
 
     public static void line(){
-        System.out.println("_________________________________________________________________");
+        System.out.println("____________________________________________________________________________________");
     }
 
     public static void printList(Task[] list, int index){
@@ -91,5 +90,32 @@ public class Duke {
 
     public static void unmarkTask(Task[] list, int index){
         list[index - 1].unmark();
+    }
+
+    public static Task parseInput(String input) throws DukeException{
+        Task newTask;
+        if (input.contains("todo")){
+            if (input.equals("todo")){
+                throw new EmptyArgException("Did not provide argument");
+            }
+            newTask = new Todo(input.substring(5));
+            return newTask;
+        } else if (input.contains("deadline")){
+            if (input.equals("deadline")){
+                throw new EmptyArgException("Did not provide argument");
+            }
+            String[] arr = input.substring(9).split("/");
+            newTask = new Deadline(arr[1], arr[0]);
+            return newTask;
+        } else if (input.contains("event")){
+            if (input.equals("event")){
+                throw new EmptyArgException("Did not provide argument");
+            }
+            String[] arr = input.substring(6).split("/");
+            newTask = new Event(arr[1], arr[2], arr[0]);
+            return newTask;
+        } else {
+            throw new UnknownInputException("Unknown Input!");
+        }
     }
 }
