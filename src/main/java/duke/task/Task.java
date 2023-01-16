@@ -18,19 +18,7 @@ public abstract class Task {
         this.description = description;
     }
 
-    public boolean isDone() {
-        return isDone;
-    }
-
-    public String getDescription() {
-        return description;
-    }
-
     public Task setDone(boolean isDone) {
-        return createTask(isDone, description);
-    }
-
-    public Task setDescription(String description) {
         return createTask(isDone, description);
     }
 
