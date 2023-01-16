@@ -33,6 +33,10 @@ public class Duke {
                 "What can I do for you?");
     }
 
+    private static void sayGoodbye() {
+        printMessage("Goodbye. I hope to see you again.");
+    }
+
     private static boolean isExitCommand(String input) {
         return input.equals(EXIT_COMMAND);
     }
@@ -68,8 +72,12 @@ public class Duke {
         printMessage(taskList.toString());
     }
 
-    private static void sayGoodbye() {
-        printMessage("Goodbye. I hope to see you again.");
+    private static void markTaskAsDone(int number) {
+        taskList.markTaskAsDone(number);
+    }
+
+    private static void markTaskAsNotDone(int number) {
+        taskList.markTaskAsNotDone(number);
     }
 
     // Main method

@@ -8,6 +8,17 @@ public class TaskList {
         list.add(new Task(text));
     }
 
+
+    public void markTaskAsDone(int number) {
+        int index = number - 1;
+        list.get(index).setDone(true);
+    }
+
+    public void markTaskAsNotDone(int number) {
+        int index = number - 1;
+        list.get(index).setDone(false);
+    }
+
     @Override
     public String toString() {
         String res = "";
