@@ -17,13 +17,4 @@ public class Task {
     public void setStatus(boolean state) {
         this.status = state;
     }
-
-    @Override
-    public String toString() {
-        if (this.status) {
-            return String.format("[X] %s\n", this.taskName);
-        } else {
-            return String.format("[ ] %s\n",this.taskName);
-        }
-    }
 }
