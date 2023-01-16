@@ -34,14 +34,14 @@ public class EventCommand extends AddCommand {
     protected Task createTask(String input) throws DukeException {
         input = input.replaceFirst("event ", "");
 
-        String[] args = input.split(" /from ", 2);
+        String[] args = input.split(input.startsWith("/from ") ? "/from " : " /from ", 2);
         if (args.length != 2) {
             throw new DukeException("The input of an event must include a ' /from '.");
         }
 
         String description = args[0];
 
-        String[] startAndEnd = args[1].split(" /to ", 2);
+        String[] startAndEnd = args[1].split(args[1].startsWith("/to ") ? "/to " : " /to ", 2);
         if (startAndEnd.length != 2) {
             throw new DukeException("The input of an event must include a ' /to '.");
         }
