@@ -17,8 +17,9 @@ public class Duke {
         whileLoop:
         while (true) {
             String input = scanner.nextLine();
+            Command command = new Command(input);
         
-            switch (input) {
+            switch (command.baseCommand) {
                 case "list":
                     if (tasks.isEmpty()) {
                         Duke.say("Nothing in the list.");
