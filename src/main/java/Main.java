@@ -38,6 +38,11 @@ public class Main {
                 String eventContent = getCommandContent(inMsg, "event");
                 Event event = new Event(eventContent);
                 duke.print_structured_string(duke.addTask(event));
+            } else if (checkCommand(inMsg, "delete")) {
+                String indexToDelete = getCommandContent(inMsg, "delete");
+                duke.print_structured_string(duke.deleteTask(Integer.parseInt(indexToDelete)));
+            } else {
+                duke.print_structured_string("☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
             }
         }
 

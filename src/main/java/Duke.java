@@ -83,4 +83,10 @@ public class Duke {
     public void removeTask(String s) {
         this.tasks.removeIf(task -> task.getName() == s);
     }
+
+    public String deleteTask(int idx) {
+        Task t = tasks.get(idx);
+        tasks.remove(idx);
+        return String.format("Noted. I've removed this task:\n  %s\nNow you have %d tasks in the list.", t, tasks.size());
+    }
 }
