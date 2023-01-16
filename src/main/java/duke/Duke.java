@@ -1,9 +1,9 @@
 package duke;
 
+import duke.command.AddCommand;
 import duke.command.ByeCommand;
 import duke.command.Command;
 import duke.command.CommandResponse;
-import duke.command.EchoCommand;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -13,8 +13,8 @@ import java.util.Scanner;
  * Main class for the chatbot
  */
 public class Duke {
+    private final static AddCommand addCommand = new AddCommand();
     private final static ByeCommand byeCommand = new ByeCommand();
-    private final static EchoCommand echoCommand = new EchoCommand();
 
     private static List<String> tasks = new ArrayList<String>();
 
@@ -63,7 +63,7 @@ public class Duke {
         if (input.equals("bye")) {
             return byeCommand;
         } else {
-            return echoCommand;
+            return addCommand;
         }
     }
 }
