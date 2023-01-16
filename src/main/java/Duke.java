@@ -121,32 +121,19 @@ public class Duke {
                     break;
                 }
 
-                // Command to add task
-                default:
+                case "todo": {
+
+                    if (description.length() == 0) {
+                        System.out.println("Hey! The description of a todo cannot be empty!");
+                        break;
+                    }
+
                     description = description.substring(1);
 
-                    // Adds task type
-                    if (command.equals("todo")) {
-                        System.out.println("Got it. I've added this task:");
-                        Todo todo = new Todo(description);
-                        taskList.add(todo);
-                        System.out.println("    " + todo);
-                    } else if (command.equals("deadline")) {
-                        String[] s = description.split("/");
-                        System.out.println("Got it. I've added this task:");
-                        Deadline deadline = new Deadline(s[0], s[1].substring(2));
-                        taskList.add(deadline);
-                        System.out.println("    " + deadline);
-                    } else if (command.equals("event")) {
-                        String[] s = description.split("/");
-                        System.out.println("Got it. I've added this task:");
-                        Event event = new Event(s[0], s[1].substring(4), s[2].substring(2));
-                        taskList.add(event);
-                        System.out.println("    " + event);
-                    } else {
-                        System.out.println("Please specify the type of task!");
-                        System.out.println("Hint: todo, deadline, event");
-                    }
+                    System.out.println("Got it. I've added this task:");
+                    Todo todo = new Todo(description);
+                    taskList.add(todo);
+                    System.out.println("    " + todo);
 
                     // Grammar police
                     if (taskList.size() == 1) {
@@ -156,7 +143,65 @@ public class Duke {
                     } else {
                         System.out.println("Now you have " + taskList.size() + " tasks in the list.");
                     }
+                    break;
+                }
 
+                case "deadline": {
+
+                    if (description.length() == 0) {
+                        System.out.println("Hey! The description of a deadline cannot be empty!");
+                        break;
+                    }
+
+                    description = description.substring(1);
+                    String[] s = description.split("/");
+                    System.out.println("Got it. I've added this task:");
+                    Deadline deadline = new Deadline(s[0], s[1].substring(2));
+                    taskList.add(deadline);
+                    System.out.println("    " + deadline);
+
+                    // Grammar police
+                    if (taskList.size() == 1) {
+                        System.out.println("Now you have 1 task in the list.");
+                    } else if (taskList.size() == 0) {
+                        System.out.println("You have no tasks in the list.");
+                    } else {
+                        System.out.println("Now you have " + taskList.size() + " tasks in the list.");
+                    }
+                    break;
+                }
+
+                case "event": {
+
+                    if (description.length() == 0) {
+                        System.out.println("Hey! The description of an event cannot be empty!");
+                        break;
+                    }
+
+                    description = description.substring(1);
+                    String[] s = description.split("/");
+                    System.out.println("Got it. I've added this task:");
+                    Event event = new Event(s[0], s[1].substring(4), s[2].substring(2));
+                    taskList.add(event);
+                    System.out.println("    " + event);
+
+                    // Grammar police
+                    if (taskList.size() == 1) {
+                        System.out.println("Now you have 1 task in the list.");
+                    } else if (taskList.size() == 0) {
+                        System.out.println("You have no tasks in the list.");
+                    } else {
+                        System.out.println("Now you have " + taskList.size() + " tasks in the list.");
+                    }
+                    break;
+                }
+
+                // Command to add task
+                default: {
+                        System.out.println("Oh noes! I don't know what that means :<");
+                        System.out.println("Please specify the type of task.");
+                        System.out.println("Hint: todo, deadline, event");
+                    }
                     break;
             }
         }
