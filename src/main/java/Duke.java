@@ -46,9 +46,27 @@ public class Duke {
                                     + "\n    ____________________________________________________________");
                     break;
                 case "deadline":
-                    String deadlineTask = input.split(" ",2)[1];
-                    String[] deadlineDesc = deadlineTask.split(" /by ");
+                    String deadlineInput = input.split(" ",2)[1];
+                    String[] deadlineDesc = deadlineInput.split(" /by ");
                     tasks.add(new Deadline(deadlineDesc[0], deadlineDesc[1]));
+                    numTasks++;
+                    System.out.println(
+                            "    ____________________________________________________________"
+                                    + "\n     Got it. I've added this task:\n "
+                                    + tasks.get(numTasks - 1).toString()
+                                    + "\n     Now you have "
+                                    + numTasks
+                                    +" tasks in the list."
+                                    + "\n    ____________________________________________________________");
+                    break;
+                case "event":
+                    String eventInput = input.split(" ",2)[1];
+                    String[] eventDescArr = eventInput.split(" /from ");
+                    String eventDesc = eventDescArr[0];
+                    String[] eventTimeArr = eventDescArr[1].split(" /to ");
+                    String eventFrom = eventTimeArr[0];
+                    String eventTo = eventTimeArr[1];
+                    tasks.add(new Event(eventDesc, eventFrom, eventTo));
                     numTasks++;
                     System.out.println(
                             "    ____________________________________________________________"
