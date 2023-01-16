@@ -93,7 +93,7 @@ public class Duke {
                 }
 
                 // Command to remove task
-                case "remove": {
+                case "delete": {
                     description = description.substring(1);
                     int taskToRemove = Integer.parseInt(description) - 1;
                     int taskCount = 0;
@@ -104,8 +104,8 @@ public class Duke {
 
                     for (Task t : taskList) {
                         if (taskToRemove == taskCount) {
-                            System.out.println("Alright, removing this task:");
-                            System.out.println(t);
+                            System.out.println("Noted. I've removed this task:");
+                            System.out.println("    " + t);
                             taskList.remove(taskCount);
                             if (taskList.size() == 1) {
                                 System.out.println("Now you have 1 task in the list.");
