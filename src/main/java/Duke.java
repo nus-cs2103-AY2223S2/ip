@@ -125,7 +125,7 @@ class ToDo extends Task {
         try {
             return command.indexOf("todo") == -1 ? new ToDo(command) : new ToDo(command.substring(5));
         } catch (StringIndexOutOfBoundsException e) {
-            throw new TaskNameNotSpecified("The description of a todo cannot be empty.");
+            throw new TaskNameNotSpecified("ToDo description cannot be empty.");
         }
     }
     
@@ -144,16 +144,26 @@ class Deadline extends Task {
 
     // Factory method
     public static Deadline create(String command) throws TaskNameNotSpecified, DeadlineByNotSpecified {
-        if (command.indexOf("/by ") == -1) {
+        int indexOfBy = command.indexOf("/by");
+        if (indexOfBy == -1) {
             throw new DeadlineByNotSpecified("Deadline task requires keyword '/by'");
         } 
-        try {
-            String[] commandObjects = command.substring(9).split(" /by ");
-            return new Deadline(commandObjects[0], commandObjects[1]);
-        } catch (StringIndexOutOfBoundsException e) {
-            throw new TaskNameNotSpecified("The description of a deadline cannot be empty.");
+
+        String taskName = command.substring(9, indexOfBy);
+        if (taskName.equals("")) {
+            throw new TaskNameNotSpecified("Deadline description canont be empty.");
         }
-    
+
+        try {
+            String dueDate = command.substring(indexOfBy + 4);
+            if (dueDate.equals("")) {
+                throw new DeadlineByNotSpecified("Due date field cannot be empty");
+            }
+            return new Deadline(taskName, dueDate);
+        } catch (StringIndexOutOfBoundsException e) {
+            throw new DeadlineByNotSpecified("Due date field cannot be empty.");
+        }
+
     }
     
     public Deadline(String taskName, String dueDate) {
