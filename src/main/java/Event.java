@@ -9,6 +9,10 @@ public class Event extends Task {
     }
 
     public static Event create(String content) {
+        /**
+         * @param content what to place in this task.
+         * @returns the output Event object.
+         */
         String[] contentAndFrom = content.split("/from");
         if (contentAndFrom.length <= 1) {
             throw new InputFormatException("Event Creation", "'from' is missing.", null);

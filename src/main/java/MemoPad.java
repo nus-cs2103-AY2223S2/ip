@@ -1,49 +1,63 @@
+import java.util.ArrayList;
+
 public class MemoPad {
-    private int pointer;
-    private int size;
-    private Task[] tasks;
+    private ArrayList<Task> tasks;
 
-    public MemoPad(int size) {
-        this.pointer = 0;
-        this.size = size;
-        this.tasks = new Task[size];
-    }
-
-    public boolean isFull() {
-        /**
-         * @returns whether the pad is full or not.
-         */
-        return this.pointer == this.size-1;
+    public MemoPad() {
+        this.tasks = new ArrayList<Task>();
     }
 
     public boolean isEmpty() {
         /**
          * @returns whether the pad is empty or not.
          */
-        return this.pointer == 0;
+        return this.tasks.isEmpty();
     }
 
-    public void addToList(char taskType, String content) {
+    public void printSize() {
+        System.out.println(String.format("Now have %d items.", this.tasks.size()));
+    }
+
+    public void addItem(char taskType, String content) {
         /**
          * Adds to the list if there is space.
          * @param item the string to add to the list.
          */
-        if (this.isFull()) {
-            System.out.println("No more space in list. Item not added.");
-            return;
-        }
-
         Task task = Task.create(taskType, content);
         if (task == null) {
             System.out.println("Task creation unsuccessful.");
             return;
         }
-        this.tasks[this.pointer] = task;
-        this.pointer++;
+        this.tasks.add(task);
         System.out.println("Added task:");
         System.out.println(task);
+        this.printSize();
+    }
 
-        System.out.println(String.format("Now have %d items.", this.pointer));
+    public void deleteItem(String response) {
+        /**
+         * Marks the specified item.
+         * @param unparsedId tries to parse this response.
+         */
+        String[] splitted = response.split(" ", 2);
+        if (splitted.length <= 1) {
+            throw new InputFormatException("Item Marking", "You did not include a number after the keyword. Try again.", null);
+        }
+
+        String unparsedId = splitted[1];
+        try {
+            int id = Integer.parseInt(unparsedId.strip())-1;
+            if (id < this.tasks.size()) {
+                System.out.println("Deleted task:");
+                System.out.println(this.tasks.get(id));
+                this.tasks.remove(id);
+                this.printSize();
+            } else {
+                throw new NotFoundException("List", String.format("The maximum possible index is %d.", this.tasks.size()), null);
+            }
+        } catch (NumberFormatException ex) {
+            throw new InputFormatException("Item Deletion", "You did not include a number after the keyword. Try again.", null);
+        }
     }
 
     public void printItem(int id, boolean withNumber) {
@@ -53,7 +67,7 @@ public class MemoPad {
          * @param withNumber whether to add the numbering.
          */
         String numbering = withNumber ? (id+1) + ". " : "";
-        System.out.println(numbering + this.tasks[id]);
+        System.out.println(numbering + this.tasks.get(id));
     }
 
     public void listItems() {
@@ -66,10 +80,7 @@ public class MemoPad {
         }
 
         System.out.println("Here's your list:");
-        for (int id = 0; id < this.size; id++) {
-            if (this.tasks[id] == null) {
-                break;
-            }
+        for (int id = 0; id < this.tasks.size(); id++) {
             this.printItem(id, true);
         }
     }
@@ -88,10 +99,10 @@ public class MemoPad {
         String unparsedId = splitted[1];
         try {
             int id = Integer.parseInt(unparsedId)-1;
-            if (id < this.pointer) {
-                this.tasks[id].mark(toMark);
+            if (id < this.tasks.size()) {
+                this.tasks.get(id).mark(toMark);
             } else {
-                throw new NotFoundException("List", String.format("The maximum possible index is %d.", this.pointer), null);
+                throw new NotFoundException("List", String.format("The maximum possible index is %d.", this.tasks.size()), null);
             }
         } catch (NumberFormatException ex) {
             throw new InputFormatException("Item Marking", "You did not include a number after the keyword. Try again.", null);

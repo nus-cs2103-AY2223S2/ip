@@ -63,7 +63,7 @@ public class Duke {
          * @returns void
          */
         String response = "";
-        MemoPad memoPad = new MemoPad(100);
+        MemoPad memoPad = new MemoPad();
         while (true) {
             response = scanner.nextLine();
             if (response.equals(endWord)) {
@@ -78,6 +78,9 @@ public class Duke {
                     case "list":
                         memoPad.listItems();
                         break;
+                    case "delete":
+                        memoPad.deleteItem(response);
+                        break;
                     case "mark":
                         memoPad.markItem(response, true);
                         break;
@@ -85,13 +88,13 @@ public class Duke {
                         memoPad.markItem(response, false);
                         break;
                     case "todo":
-                        memoPad.addToList('T', response);
+                        memoPad.addItem('T', response);
                         break;
                     case "deadline":
-                        memoPad.addToList('D', response);
+                        memoPad.addItem('D', response);
                         break;
                     case "event":
-                        memoPad.addToList('E', response);
+                        memoPad.addItem('E', response);
                         break;
                     default:
                         System.out.println("Sorry, I'm not sure what you're talking about.");

@@ -9,6 +9,11 @@ public abstract class Task {
     }
 
     public static Task create(char taskType, String content) {
+        /**
+         * @param taskType whether it is a Todo, Deadline or Event.
+         * @param content what to put in the task.
+         * @returns the output Task object.
+         */
         String[] taskTypeAndContent = content.split(" ", 2);
         if (taskTypeAndContent.length <= 1) {
             throw new InputFormatException("Task Creation", "No further information was provided.", null);
