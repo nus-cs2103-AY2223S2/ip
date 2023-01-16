@@ -1,5 +1,14 @@
+import java.util.Arrays;
+
 public class Roody {
-    public Roody(){}
+    private String[] list;
+    private int index;
+
+    public Roody(){
+        // Assumed no more than 100 tasks
+        list = new String[100];
+        index = 0;
+    }
 
     // Initial Greeting
     private void greet() {
@@ -9,12 +18,38 @@ public class Roody {
         line();
     }
     
+    // Stores input to string
+    private void addToList(String input) {
+        list[index] = input;
+        index++;
+        speak("added: " + input);
+    }
+
     // Repeats the input 
     private void speak(String input) {
         line();
         System.out.println(input);
         line();
         
+    }
+
+    private void printList() {
+        line();
+        int count = 0;
+        int listIndex = 0;
+        StringBuilder stringBuilder = new StringBuilder();
+        while (count < index) {
+            listIndex = count + 1;
+            stringBuilder.append(listIndex);
+            stringBuilder.append(". ");
+            stringBuilder.append(list[count]);
+            System.out.println(stringBuilder.toString());
+            
+            // Clears and updates values
+            stringBuilder.setLength(0);
+            count++;
+        }
+        line();
     }
 
     // Provides basic line 
@@ -36,8 +71,10 @@ public class Roody {
             if (input.toLowerCase().equals("bye")) {
                 break;
             // else, repeat
+            } else if (input.toLowerCase().equals("list")) {
+                roody.printList();
             } else {
-                roody.speak(input);
+                roody.addToList(input);
             }
         }
         roody.speak("Bye. Hope to see you again soon!");
