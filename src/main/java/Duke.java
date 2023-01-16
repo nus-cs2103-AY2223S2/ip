@@ -20,6 +20,7 @@ public class Duke {
                 System.out.println("Bye. Hope to see you again soon!");
             } else {
                 taskList[taskCount] = command;
+                System.out.println(String.format("added: %s", command));
                 taskCount++;
             }
         }
