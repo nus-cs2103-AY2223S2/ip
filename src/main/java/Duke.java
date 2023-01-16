@@ -10,11 +10,17 @@ public class Duke {
     public static void main(String[] args) {
         printText("\t Hello! I'm Duke \n\t What can I do for you?");
 
+        ToDoList list = new ToDoList();
         Scanner scanner = new Scanner(System.in);
         String input = scanner.nextLine();
 
         while (!input.equals("bye")) {
-            printText(String.format("\t %s", input));
+            if (input.equals("list")) {
+                printText(list.list());
+            } else {
+                printText(list.add(input));
+            }
+
             input = scanner.nextLine();
         }
 
