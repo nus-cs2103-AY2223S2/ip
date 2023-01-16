@@ -45,6 +45,20 @@ public class Duke {
                                     +" tasks in the list."
                                     + "\n    ____________________________________________________________");
                     break;
+                case "deadline":
+                    String deadlineTask = input.split(" ",2)[1];
+                    String[] deadlineDesc = deadlineTask.split(" /by ");
+                    tasks.add(new Deadline(deadlineDesc[0], deadlineDesc[1]));
+                    numTasks++;
+                    System.out.println(
+                            "    ____________________________________________________________"
+                                    + "\n     Got it. I've added this task:\n "
+                                    + tasks.get(numTasks - 1).toString()
+                                    + "\n     Now you have "
+                                    + numTasks
+                                    +" tasks in the list."
+                                    + "\n    ____________________________________________________________");
+                    break;
                 case "mark":
                     selectedNum = Integer.parseInt(inputArr[1]) - 1;
                     tasks.get(selectedNum).markDone();
