@@ -9,6 +9,15 @@ public class TaskList {
         this.lst = new ArrayList<>();
     }
 
+    public int size() {
+        return lst.size();
+    }
+
+    public String get(int number) {
+        int index = number - 1;
+        return String.format("\n\t%d) %s\n", number, this.lst.get(index));
+    }
+
     public void addTask(Task task) {
         this.lst.add(task);
     }

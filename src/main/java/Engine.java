@@ -1,5 +1,4 @@
 import java.util.Scanner;
-import java.util.stream.IntStream;
 
 public class Engine {
     private final Scanner scanner;
@@ -7,7 +6,6 @@ public class Engine {
 
     private enum Command {
         EXIT,
-        ECHO,
         LIST,
         ADD,
         MARK,
@@ -28,15 +26,37 @@ public class Engine {
                 return args;
             case EXIT:
                 return "Bye...Why do you even need me?\n";
-            case ECHO:
-                return args + '\n';
             case LIST:
                 return this.taskList.toString();
             case ADD:
                 this.taskList.addTask(new Task(args));
                 return "added-> "  + args + '\n';
             case MARK:
-                
+                try {
+                    int num = Integer.parseInt(Util.parseNextString(args).first());
+                    if (num > this.taskList.size()) {
+                        return "There is no such task you dumbass\n";
+                    }
+                    this.taskList.markTask(num);
+                    return "Wow!!! Great Job!!! You want a pat on the back or something???" + 
+                        this.taskList.get(num);
+                } catch (NumberFormatException ex) {
+                    return "That's not even a number dumbass\n";
+                }
+            case UNMARK:
+                try {
+                    int num = Integer.parseInt(Util.parseNextString(args).first());
+                    if (num > this.taskList.size()) {
+                        return "There is no such task you dumbass\n";
+                    }
+                    this.taskList.unmarkTask(num);
+                    return "How do you even uncomplete something?" + 
+                        this.taskList.get(num);
+                } catch (NumberFormatException ex) {
+                    return "That's not even a number dumbass\n";
+                }
+
+
             default:
                 return "Case not accounted for, review code\n";
                 // for debugging
@@ -44,16 +64,13 @@ public class Engine {
     }
 
     private Pair<Command, String> parseCommand(String line) {
-        int startIndex = IntStream.range(0, line.length())
-                .filter(i -> line.charAt(i) != ' ')
-                .findFirst()
-                .orElse(-1);
-        
-        if (startIndex == -1)
-            return new Pair<>(Command.ERROR, "no input detected\n");
+        Pair<String, String> pr = Util.parseNextString(line);
+        String command = pr.first();
+        String rest = pr.second();
 
-        String[] lst = line.split(" ", 2);
-        String command = lst[0];
+        if (command.isEmpty()) {
+            return new Pair<>(Command.ERROR, "no input detected\n");
+        }
         if (command.equals("bye")) {
             return new Pair<>(Command.EXIT, "");
         }
@@ -61,12 +78,12 @@ public class Engine {
             return new Pair<>(Command.LIST, "");
         }
         if (command.equals("mark")) {
-            return new Pair<>(Command.MARK, lst[1]);
+            return new Pair<>(Command.MARK, rest);
         }
         if (command.equals("unmark")) {
-            return new Pair<>(Command.UNMARK, lst[1]);
+            return new Pair<>(Command.UNMARK, rest);
         }
-        return new Pair<>(Command.ADD, ""); 
+        return new Pair<>(Command.ADD, line);
     }
 
     public boolean run() {
@@ -77,5 +94,5 @@ public class Engine {
             return false;
         }
         return true;
-    } 
+    }
 }
