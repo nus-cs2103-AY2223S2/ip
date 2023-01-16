@@ -3,9 +3,8 @@ import java.util.Scanner;
 
 public class Duke {
 
-    private static final String indentation = "    ";
-    private static final String horizontalLines = "____________________________________________________________";
-    private static final String newLine = indentation + horizontalLines;
+    private static final String indentation = "     ";
+    private static final String newLine = "    ____________________________________________________________";
     private static ArrayList<Task> arrOfTask = new ArrayList<>();
 
     public static void echo(String command) {
@@ -26,7 +25,7 @@ public class Duke {
     public static void addTask(String command) {
         Task t;
         if (command.startsWith("todo")) {
-            t = new Todo(command);
+            t = new Todo(command.substring(5));
         } else if (command.startsWith("deadline")) {
             String[] str = command.substring(9).split("/");
             t = new Deadline(str[0], str[1].substring(3));
