@@ -20,7 +20,53 @@ class Task {
     }
     public String toString(){
         return String.format("[%s] %s",this.done ? "X" : " ", this.name);
-  }
+    }
+    public static String getType(String query) {
+        if(query.length() >= 4 && query.substring(0,4).equals("todo")) return "todo";
+        if(query.length() >= 8 && query.substring(0,8).equals("deadline")) return "deadline";
+        if(query.length() >= 5 && query.substring(0,5).equals("event")) return "event";
+        return "wrong";
+    }
+    public static String[] getInputs(String query) {
+        String type = Task.getType(query);
+        if (type.equals("todo")) return new String[] {query.substring(5)};
+        if (type.equals("deadline")) return query.substring(9).split(" /by ");
+        if (type.equals("event")) return query.substring(6).split(" /from | /to ");
+        String[] emptyArray = {};
+        return emptyArray;
+    }
+}
+
+class Todo extends Task {
+    public Todo(String n) {
+        super(n);
+    }
+    public String toString(){
+        return String.format("[T][%s] %s",this.done ? "X" : " ", this.name);
+    }
+}
+class Deadline extends Task {
+    String by;
+    public Deadline(String n, String b) {
+        super(n);
+        by = b;
+    }
+    public String toString(){
+        return String.format("[D][%s] %s (by: %s)",this.done ? "X" : " ", this.name, this.by);
+    }
+}
+class Event extends Task {
+    String by;
+    String from;
+    String to;
+    public Event(String n, String f, String t) {
+        super(n);
+        from = f;
+        to = t;
+    }
+    public String toString(){
+        return String.format("[E][%s] %s (from: %s to %s)",this.done ? "X" : " ", this.name, this.from, this.to);
+    }
 }
 
 
@@ -70,8 +116,27 @@ public class Duke {
             }
             
             else {
-                System.out.printf("added: %s%n", input);
-                tasks.add(new Task(input));
+                            
+                String type = Task.getType(input);
+                String[] params = Task.getInputs(input);
+                for (String el: params) {
+                    System.out.println(el);
+                }
+                if (type.equals("todo")) {
+                    tasks.add(new Todo(params[0]));
+                    System.out.printf("added: %s%n", params[0]);
+                } 
+                else if (type.equals("deadline")) {
+                    tasks.add(new Deadline(params[0],params[1]));
+                    System.out.printf("added: %s%n", params[0]);
+                }
+                else if (type.equals("event")) {
+                    tasks.add(new Event(params[0],params[1], params[2]));
+                    System.out.printf("added: %s%n", params[0]);
+                }
+                else {
+                    System.out.println("wrong out put");
+                }
             }
             System.out.println("_____");        
             input = scan.nextLine();
