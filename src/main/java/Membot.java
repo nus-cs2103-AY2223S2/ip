@@ -2,7 +2,7 @@ import utils.Printer;
 
 import java.util.Scanner;
 
-public class Duke {
+public class Membot {
     private static final String LOGO =
               "                             _             _   \n"
             + " _ __ ___    ___  _ __ ___  | |__    ___  | |_ \n"
