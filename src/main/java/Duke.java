@@ -1,7 +1,7 @@
 import java.util.Scanner;
 public class Duke {
     private static int index;
-    private static String[] list = new String[100];
+    private static Task[] list = new Task[100];
 
     public static void main(String[] args) {
         String logo = " ____        _        \n"
@@ -16,18 +16,34 @@ public class Duke {
             Scanner reader = new Scanner(System.in);  // Reading from System.in
             System.out.println("Enter a Command!: ");
             String s = reader.nextLine();
-            if(s.equals("bye")) {
+            String[] spStg = s.split(" ");
+
+            if(spStg[0].equals("bye")) {
                 System.out.println("Bye. Hope to see you again soon!");
                 break;
             }
-            if(s.equals("list")) {
-                for (int i = 0; i < index; i++) {
-                    System.out.println(i+1 + "." + list[i]);
-                }
 
+            else if(spStg[0].equals("list")) {
+                System.out.println("Here are the tasks in your list:");
+                for (int i = 0; i < index; i++) {
+                    System.out.println(i+1 + ". " + list[i].toString());
+                }
             }
+
+            else if(spStg[0].equals("mark")) {
+                int i =  Integer.parseInt(spStg[1]) - 1;
+                list[i].mark();
+                System.out.println("Nice! I've marked this task as done:\n" + list[i]);
+            }
+
+            else if(spStg[0].equals("unmark")) {
+                int i =  Integer.parseInt(spStg[1]) - 1;
+                list[i].unmark();
+                System.out.println("OK, I've marked this task as not done yet:\n" + list[i]);
+            }
+
             else {
-                list[index] = s;
+                list[index] = new Task(s);
                 index++;
                 System.out.println("added: " + s);
             }
