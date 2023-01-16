@@ -12,15 +12,20 @@ import java.util.Scanner;
 
 public class Duke {
 
-    /**
-     * The list to store whatever tasks entered by the user.
-     */
-    private static Task[] taskList = new Task[100];
+    enum Command {
+        LIST,
+        MARK,
+        UNMARK,
+        TASK,
+        DELETE,
+        UNKNOWN
+    }
 
     /**
-     * A pointer to keep track of taskList.
+     * The DukeMemory class handles the arraylist keeping track of tasks.
      */
-    private static int listPointer = 0;
+    private static DukeMemory taskMemory = new DukeMemory();
+
 
     public static void main(String[] args) {
         String logo = " ____        _        \n"
@@ -73,54 +78,60 @@ public class Duke {
      */
     public static void makeResponse(String command) throws DukeUnknownInputException {
 
-        String processedCommand = checkForCommand(command);
+        Command processedCommand = checkForCommand(command);
 
         //Handle "list" command
-        if (processedCommand.equals("list")) {
-            for (int i = 0; i < listPointer; i++) {
-                String index = "\t" + Integer.toString(i + 1) + ". ";
-                System.out.println(index + taskList[i]);
-            }
+        if (processedCommand.equals(Command.LIST)) {
+            taskMemory.list();
             makeSeperation();
         }
 
         //Handle "mark" command
-        else if (processedCommand.equals("mark")) {
+        else if (processedCommand.equals(Command.MARK)) {
             int index = getMarkIndex(command) - 1;
-            Task curTask = taskList[index];
-            curTask.markAsDone();
+            taskMemory.markTask(index);
 
             System.out.println("\tNice! I've marked this task as done:\n\t  "
-                    + curTask.toString());
+                    + taskMemory.taskToString(index));
             makeSeperation();
         }
 
         //Handle "unmark" command
-        else if (processedCommand.equals("unmark")) {
+        else if (processedCommand.equals(Command.UNMARK)) {
             int index = getMarkIndex(command) - 1;
-            Task curTask = taskList[index];
-            curTask.markAsNotDone();
+            taskMemory.unmarkTask(index);
 
             System.out.println("\tOK, I've marked this task as not done yet:\n\t  "
-                    + curTask.toString());
+                    + taskMemory.taskToString(index));
             makeSeperation();
         }
 
         //Handle normal task
-        else if (processedCommand.equals("task")){
+        else if (processedCommand.equals(Command.TASK)){
             try {
                 Task current_task = createTask(command);
 
-                taskList[listPointer] = current_task;
-                listPointer += 1;
+                taskMemory.append(current_task);
 
                 System.out.println("\tGot it. I've added this task:\n\t  " + current_task
-                        + "\n\t" + String.format("Now you have %d tasks in the list.", listPointer));
+                        + "\n\t" + String.format("Now you have %d tasks in the list."
+                        , taskMemory.getLength()));
                 makeSeperation();
             } catch (DukeBadInstructionFormatException e) {
                 handleDukeException(e);
             }
 
+        }
+
+        //Handle "delete" command
+        else if (processedCommand.equals(Command.DELETE)) {
+            int index = getMarkIndex(command) - 1;
+            Task removed = taskMemory.delete(index);
+
+            System.out.println("\tNoted. I've removed this task:\n\t  " +
+                    removed.toString() + String.format("\n\tNow you have %d tasks in the list."
+                    , taskMemory.getLength()));
+            makeSeperation();
         }
 
         //Program doesn't know how to handle.
@@ -251,19 +262,21 @@ public class Duke {
      *
      * @return command in String representation if input was a valid command, "none" if task.
      */
-    public static String checkForCommand(String command) {
+    public static Command checkForCommand(String command) {
         String[] splitted = command.split(" ");
         if (splitted[0].equals("list")) {
-            return "list";
+            return Command.LIST;
         } else if (splitted[0].equals("mark")) {
-            return "mark";
+            return Command.MARK;
         } else if (splitted[0].equals("unmark")) {
-            return "unmark";
+            return Command.UNMARK;
         } else if (splitted[0].equals("todo") || splitted[0].equals("deadline")
                 || splitted[0].equals("event")){
-            return "task";
+            return Command.TASK;
+        } else if (splitted[0].equals("delete")) {
+            return Command.DELETE;
         } else {
-            return "others";
+            return Command.UNKNOWN;
         }
     }
 

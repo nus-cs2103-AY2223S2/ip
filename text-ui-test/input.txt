@@ -13,4 +13,6 @@ blah
 event a /to b /from c
 deadline /by noon
 event /from a /to b
+delete 3
+list
 bye
