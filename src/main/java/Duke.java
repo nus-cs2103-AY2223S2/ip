@@ -42,7 +42,7 @@ public class Duke {
     for (int i = 0; i < taskList.size(); i++) {
       output += " " + (i + 1) + ". " + taskList.get(i) + "\n";
     }
-    return separator(output);
+    return separator(" Here are your tasks nya!\n" + output);
   }
 
   public static String markTask(int id) {
