@@ -51,6 +51,14 @@ public class Duke {
                     System.out.println("Added: " + split[1]);
                     break;
                 }
+                case "event": {
+//                    TODO: check for correct format
+                    split = userLine.split(" (/from)|(/to)|(event)");
+                    list[itemCount] = new Event(split[1].trim(), split[2], split[3]);
+                    itemCount++;
+                    System.out.println("Added: " + split[1].trim());
+                    break;
+                }
             }
         }
     }
