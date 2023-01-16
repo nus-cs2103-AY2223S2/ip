@@ -12,6 +12,7 @@ import duke.command.ExitCommand;
 import duke.command.FindCommand;
 import duke.command.ListCommand;
 import duke.command.MarkAsDoneCommand;
+import duke.command.SearchCommand;
 import duke.command.UnmarkCommand;
 import duke.exception.DukeException;
 import duke.exception.InvalidInputException;
@@ -19,7 +20,7 @@ import duke.task.DeadlineTask;
 import duke.task.EventTask;
 import duke.task.TodoTask;
 
-/*
+/**
 * A parser that parse the input String into a Duke Instruction with respective information encapsulated.
 */
 public class Parser {
@@ -125,6 +126,17 @@ public class Parser {
                 throw new InvalidInputException("☹ OOPS!!! The description of a todo cannot be empty.");
             } else {
                 return new FindCommand(information);
+            }
+        } else if (instructionTag.equalsIgnoreCase("search")) {
+            if (!emptyStringChecker.matcher(information).matches()) {
+                throw new InvalidInputException("☹ OOPS!!! The description of a todo cannot be empty.");
+            } else {
+                try {
+                    return new SearchCommand(LocalDate.parse(information));
+                } catch (DateTimeParseException e) {
+                    throw new InvalidInputException("☹ OOPS!!! The input date format is invalid\n"
+                            + "Please input the date in the format of yyyy-mm-dd");
+                }
             }
         } else {
             throw new InvalidInputException("☹ OOPS!!! I'm sorry, but I don't know what that means :-(");

@@ -1,5 +1,7 @@
 package duke.task;
 
+import java.time.LocalDate;
+
 /**
  * A TodoTask class that encapsulates the information a Todo Task.
  */
@@ -17,6 +19,11 @@ public class TodoTask extends DukeTask {
             status = "[ ] | ";
         }
         return "[T] | " + status + this.getInformation();
+    }
+
+    @Override
+    public boolean matchesDate(LocalDate date) {
+        return false;
     }
 
     @Override

@@ -33,6 +33,11 @@ public class DeadlineTask extends DukeTask {
     }
 
     @Override
+    public boolean matchesDate(LocalDate date) {
+        return date.isEqual(this.deadline);
+    }
+
+    @Override
     public String toString() {
         return "[D]" + super.toString() + " (by: "
                 + this.deadline.format(DateTimeFormatter.ofPattern("MMM d yyyy")) + ")";

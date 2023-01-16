@@ -43,6 +43,12 @@ public class EventTask extends DukeTask {
     }
 
     @Override
+    public boolean matchesDate(LocalDate date) {
+        return date.isEqual(this.from) || date.isEqual(this.to)
+                || (date.isAfter(this.from) && date.isBefore(this.to));
+    }
+
+    @Override
     public String toString() {
         return "[E]" + super.toString()
                 + " (from: " + this.from.format(DateTimeFormatter.ofPattern("MMM d yyyy"))

@@ -1,5 +1,7 @@
 package duke.task;
 
+import java.time.LocalDate;
+
 /**
  * An abstract Task class encapsulating a task in Duke, which can be extended
  * by more specific tasks like Events, toDos, etc.
@@ -68,6 +70,14 @@ public abstract class DukeTask {
      * @return the String representation for the storage file.
      */
     public abstract String storageString();
+
+    /**
+     * Takes in a date and check whether the current task happens on that date.
+     *
+     * @param date The given date to be checked
+     * @return Whether the current task happens on that date
+     */
+    public abstract boolean matchesDate(LocalDate date);
 
     /**
      * Takes in a description and check whether the current task information that matches the given description.
