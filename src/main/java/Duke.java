@@ -1,3 +1,5 @@
+import java.util.Scanner;
+
 public class Duke {
     private static final int INDENT_LEVEL = 4;
 
@@ -8,6 +10,26 @@ public class Duke {
                 + "| |_| | |_| |   <  __/\n"
                 + "|____/ \\__,_|_|\\_\\___|\n";
         Duke.say("Hello from\n" + logo);
+
+        Scanner scanner = new Scanner(System.in);
+
+        whileLoop:
+        while (true) {
+            String input = scanner.nextLine();
+        
+            switch (input) {
+                case "quit":
+                case "exit":
+                case "bye":
+                    Duke.say("Bye. Hope to see you again soon!");
+                    break whileLoop;
+                default:
+                    Duke.say(input);
+                    break;
+            }
+        }
+        
+        scanner.close();
     }
 
     private static void say(String whatToSay) {
