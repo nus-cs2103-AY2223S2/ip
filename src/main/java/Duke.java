@@ -12,16 +12,29 @@ public class Duke {
 
         ToDoList list = new ToDoList();
         Scanner scanner = new Scanner(System.in);
-        String input = scanner.nextLine();
+        String input = scanner.next();
 
         while (!input.equals("bye")) {
-            if (input.equals("list")) {
-                printText(list.list());
-            } else {
-                printText(list.add(input));
+            switch (input) {
+                case "list":
+                    printText(list.list());
+                    break;
+                case "mark": {
+                    int num = Integer.parseInt(scanner.next());
+                    printText(list.mark(num - 1));
+                    }
+                    break;
+                case "unmark": {
+                    int num = Integer.parseInt(scanner.next());
+                    printText(list.unMark(num - 1));
+                    }
+                    break;
+                default:
+                    printText(list.add(input));
+                    break;
             }
 
-            input = scanner.nextLine();
+            input = scanner.next();
         }
 
         printText("\t Bye. Hope to see you again soon!");
