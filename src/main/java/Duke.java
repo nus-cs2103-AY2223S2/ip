@@ -1,42 +1,54 @@
 import java.util.Objects;
-import java.util.Scanner;
+import java.util.ArrayList;
+
 
 public class Duke {
-    public static void main(String[] args) {
-        String out = greeting();
-        print_structured_string(out);
+    protected final ArrayList<Task> tasks = new ArrayList<>();
+    protected final String name;
 
-        // read input
-        Scanner scanner = new Scanner(System.in);
-
-        String inMsg = null;
-        do {
-            inMsg = scanner.nextLine();
-            String output = echo(inMsg);
-            print_structured_string(output);
-        } while (!isEnd(inMsg));
-
-        print_structured_string(endMsg());
+    public Duke() {
+        this.name = "Duke";
     }
 
-    public static void print_structured_string(String s) {
+    public void print_structured_string(String s) {
         String longLine = "____________________________________________________________";
         System.out.println(longLine + "\n" + s + "\n" + longLine);
     }
 
-    public static String greeting() {
-        return "Hello! I'm Duke \nWhat can I do for you?";
+    public String addMsg(Task task) {
+        return "added: " + task;
     }
 
-    public static String echo(String s) {
+    public String listTasksMsg() {
+        String s = "";
+        int count = 1;
+        for (Task t: this.tasks) {
+            s += count + ". " + t;
+            if (count < tasks.size()) {
+                s += "\n";
+            }
+            count += 1;
+        }
         return s;
     }
 
-    public static String endMsg() {
+    public String greeting() {
+        return String.format("Hello! I'm %s \nWhat can I do for you?", this.name);
+    }
+
+    public String echo(String s) {
+        return s;
+    }
+
+    public String endMsg() {
         return "Bye. Hope to see you again soon!";
     }
 
-    public static boolean isEnd(String s) {
+    public boolean isEnd(String s) {
         return Objects.equals(s.toLowerCase(), "bye");
+    }
+
+    public void addTask(Task t) {
+        this.tasks.add(t);
     }
 }
