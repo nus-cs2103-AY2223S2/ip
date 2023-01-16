@@ -18,26 +18,37 @@ public class Tasks {
     return null;
   }
 
-  public void addTask(String name) {
-    tasks.add(new Task(name));
+  public void addTask(Task task) {
+    tasks.add(task);
+    System.out.println("Got it. I've added this task:");
+    System.out.printf("=> %s\n", task);
+    System.out.printf("Now you have %d tasks in the list\n", length());
   }
 
-  public boolean markTask(int index) {
+  public int length() {
+    return tasks.size();
+  }
+  
+  public void markTask(int index) {
     Task t = getTask(index);
     if (t == null) {
-      return false;
+      System.out.println("Sorry, the task does not exist.");
+      return;
     }
     t.mark();
-    return true;
+    System.out.println("Nice! I've marked this task as done:");
+    System.out.printf("=> %s\n", t);
   }
 
-  public boolean unmarkTask(int index) {
+  public void unmarkTask(int index) {
     Task t = getTask(index);
     if (t == null) {
-      return false;
+      System.out.println("Sorry, the task does not exist.");
+      return;
     }
     t.unmark();
-    return true;
+    System.out.println("OK, I've marked this task as not done yet:");
+    System.out.printf("=> %s\n", t);
   }
 
   @Override

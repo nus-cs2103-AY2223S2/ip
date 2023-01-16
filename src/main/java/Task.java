@@ -24,11 +24,11 @@ public class Task {
   }
 
   public String getStatusIcon() {
-    return this.isCompleted() ? "X" : " ";
+    return isCompleted() ? "X" : " ";
   }
 
   @Override
   public String toString() {
-    return String.format("[%s] %s", this.getStatusIcon(), this.getName());
+    return String.format("[%s] %s", getStatusIcon(), getName());
   }
 }
