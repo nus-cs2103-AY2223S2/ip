@@ -18,12 +18,25 @@ public class Duke {
         while (true) {
             if (input.equals("bye")){
                 break;
-            }
-            if (input.equals("list")){
+            } else if (input.equals("list")){
+                System.out.println("Here are the tasks in your list:");
                 for(int i = 0; i < Tasks.size(); i++) {
                     int num = i + 1;
                     System.out.print("    " + num + ". " + Tasks.get(i) + "\n");
                 }
+            } else if (input.length() >= 4 && input.substring(0, 4).equals("mark")) {
+
+                int index = Integer.parseInt(input.substring(5));
+                Task task = Tasks.get(index - 1);
+                task.mark();
+                System.out.println("Nice! I've marked this task as done:");
+                System.out.println("  " + task);
+            } else if (input.length() >= 6 && input.substring(0, 6).equals("unmark")) {
+                int index = Integer.parseInt(input.substring(7));
+                Task task = Tasks.get(index - 1);
+                task.unmark();
+                System.out.println("OK, I've marked this task as not done yet:");
+                System.out.println("  " + task);
             } else {
                 Task task = new Task(input);
                 Tasks.add(task);
