@@ -16,12 +16,8 @@ public class Duke {
         System.out.println(longLine + "\n" + s + "\n" + longLine);
     }
 
-    public String addMsg(Task task) {
-        return "added: " + task;
-    }
-
     public String listTasksMsg() {
-        String s = "";
+        String s = "Here are the tasks in your list:\n";
         int count = 1;
         for (Task t: this.tasks) {
             s += count + ". " + t;
@@ -49,14 +45,15 @@ public class Duke {
         return Objects.equals(s.toLowerCase(), "bye");
     }
 
-    public void addTask(Task t) {
+    public String addTask(Task t) {
         this.tasks.add(t);
+        return String.format("Got it. I've added this task:\n  %s\nNow you have %d tasks in the list.", t, tasks.size());
     }
 
     public void markTaskDone(String s) {
         for (Iterator<Task> iterator = this.tasks.iterator(); iterator.hasNext(); ) {
             Task t = iterator.next();
-            if (t.getValue().equals(s)) {
+            if (t.getName().equals(s)) {
                 t.markDone();
             }
         }
@@ -71,7 +68,7 @@ public class Duke {
     public void unmarkTaskDone(String s) {
         for (Iterator<Task> iterator = this.tasks.iterator(); iterator.hasNext(); ) {
             Task t = iterator.next();
-            if (t.getValue().equals(s)) {
+            if (t.getName().equals(s)) {
                 t.unmarkDone();
             }
         }
@@ -84,6 +81,6 @@ public class Duke {
     }
 
     public void removeTask(String s) {
-        this.tasks.removeIf(task -> task.getValue() == s);
+        this.tasks.removeIf(task -> task.getName() == s);
     }
 }
