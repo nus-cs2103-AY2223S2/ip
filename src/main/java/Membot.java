@@ -16,12 +16,12 @@ public class Membot {
         Printer.println("How may I assist you today?");
         Scanner scanner = new Scanner(System.in);
 
-        while (scanner.hasNext()) {
+        loop: while (scanner.hasNext()) {
             String input = scanner.nextLine();
             switch (input) {
                 case TERMINATE_KEY:
                     Printer.printlnIndent("Have a good day! Good bye!");
-                    break;
+                    break loop;
                 default:
                     Printer.printlnIndent(input);
                     break;
