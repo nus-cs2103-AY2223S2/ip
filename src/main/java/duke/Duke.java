@@ -78,7 +78,7 @@ public class Duke {
         }
     }
 
-    private static Command getCommand(String input) {
+    private static Command getCommand(String input) throws DukeException {
         String op = input.split(" ")[0];
 
         switch (op) {
@@ -97,7 +97,7 @@ public class Duke {
             case "unmark":
                 return unmarkCommand;
             default:
-                return null; // TODO: handle unknown commands
+                throw new DukeException("I'm sorry, but I don't know what that means :-(");
         }
     }
 }
