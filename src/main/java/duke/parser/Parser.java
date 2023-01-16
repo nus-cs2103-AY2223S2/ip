@@ -37,24 +37,27 @@ public class Parser {
         String taskType = ops[0];
         boolean isDone = ops[1].equalsIgnoreCase("1") ? true : false;
         String title = ops[2];
-        
-        
+
         switch (taskType) {
             case "T":
                 if (ops.length != 3) {
                     throw new InvalidCommandArgsException(Message.EXCEPTION_INVALID_TODO_CMD);
                 }
+
                 return new AddCommand(DukeCommand.TODO, title, isDone);
             case "D":
                 if (ops.length != 4) {
                     throw new InvalidCommandArgsException(Message.EXCEPTION_INVALID_DATE_CMD);
                 }
+
                 return new AddCommand(DukeCommand.DEADLINE, title, isDone, DateUtil.toLocalDateTime(ops[3]));
             case "E":
                 if (ops.length != 5) {
                     throw new InvalidCommandArgsException(Message.EXCEPTION_INVALID_EVENT_CMD);
                 }
-                return new AddCommand(DukeCommand.EVENT, title, isDone, DateUtil.toLocalDateTime(ops[3]), DateUtil.toLocalDateTime(ops[4]));
+
+                return new AddCommand(DukeCommand.EVENT, title, isDone, DateUtil.toLocalDateTime(ops[3]),
+                        DateUtil.toLocalDateTime(ops[4]));
             default:
                 throw new NoSuchCommandException(Message.EXCEPTION_NOSUCH_COMMAND);
         }
@@ -63,8 +66,9 @@ public class Parser {
 
     /**
      * Parses the raw command and trigger the respective duke actions.
+     * 
      * @param fullCommand
-     * @return 
+     * @return
      * @throws DukeException
      */
     public static Command parse(String fullCommand) throws DukeException {
@@ -78,7 +82,7 @@ public class Parser {
         }
 
         // handle simple commands
-        switch(command) {
+        switch (command) {
             case LIST:
                 return new ListCommand();
             case BYE:
@@ -92,22 +96,26 @@ public class Parser {
                 case MARK:
                     if (ops.length != 2) {
                         throw new InvalidCommandArgsException(Message.EXCEPTION_INVALID_MARK_CMD);
-                    }                   
+                    }
+
                     return new MarkCommand(Integer.parseInt(ops[1]), true);
                 case UNMARK:
                     if (ops.length != 2) {
                         throw new InvalidCommandArgsException(Message.EXCEPTION_INVALID_UNMARK_CMD);
-                    }      
+                    }
+
                     return new MarkCommand(Integer.parseInt(ops[1]), false);
                 case DELETE:
                     if (ops.length != 2) {
                         throw new InvalidCommandArgsException(Message.EXCEPTION_INVALID_DELETE_CMD);
-                    }      
+                    }
+
                     return new DeleteCommand(Integer.parseInt(ops[1]));
                 case DATE:
                     if (ops.length != 2) {
                         throw new InvalidCommandArgsException(Message.EXCEPTION_INVALID_DATE_CMD);
-                    }      
+                    }
+
                     return new ListCommand(DateUtil.toLocalDateTime(ops[1]));
                 default:
                     break;
@@ -119,26 +127,31 @@ public class Parser {
                     if (ops.length != 2) {
                         throw new InvalidCommandArgsException(Message.EXCEPTION_INVALID_TODO_CMD);
                     }
+
                     return new AddCommand(DukeCommand.TODO, ops[1], false);
                 case DEADLINE:
                     if (ops.length != 2) {
                         throw new InvalidCommandArgsException(Message.EXCEPTION_INVALID_DATE_CMD);
                     }
+
                     args = ops[1].split(" /[a-z]*[^ ] ");
                     if (args.length != 2) {
                         throw new InvalidCommandArgsException(Message.EXCEPTION_INVALID_DEADLINE_CMD);
                     }
+
                     return new AddCommand(DukeCommand.DEADLINE, args[0], false, DateUtil.toLocalDateTime(args[1]));
                 case EVENT:
                     if (ops.length != 2) {
                         throw new InvalidCommandArgsException(Message.EXCEPTION_INVALID_EVENT_CMD);
                     }
+
                     args = ops[1].split(" /[a-z]*[^ ] ");
                     if (args.length != 3) {
                         throw new InvalidCommandArgsException(Message.EXCEPTION_INVALID_EVENT_CMD);
                     }
-                    return new AddCommand(DukeCommand.EVENT, args[0], false, DateUtil.toLocalDateTime(args[1]), DateUtil.toLocalDateTime(args[2]));
-            
+
+                    return new AddCommand(DukeCommand.EVENT, args[0], false, DateUtil.toLocalDateTime(args[1]),
+                            DateUtil.toLocalDateTime(args[2]));
                 default:
                     throw new NoSuchCommandException(Message.EXCEPTION_NOSUCH_COMMAND);
             }
@@ -147,7 +160,7 @@ public class Parser {
         } catch (NumberFormatException e) {
             throw new InvalidCommandArgsException(Message.EXCEPTION_INVALID_TASK_ID_FORMAT);
         }
- 
+
     }
 
 }

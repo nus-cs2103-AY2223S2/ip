@@ -12,7 +12,7 @@ import duke.task.Task;
 import duke.task.Todo;
 import duke.ui.Ui;
 
-public class AddCommand extends Command{
+public class AddCommand extends Command {
 
     private DukeCommand tType;
     private String title;
@@ -59,6 +59,5 @@ public class AddCommand extends Command{
     @Override
     public boolean isExit() {
         return false;
-    }
-    
+    }    
 }

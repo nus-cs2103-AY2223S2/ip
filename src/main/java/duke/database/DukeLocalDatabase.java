@@ -74,12 +74,14 @@ class DukeLocalDatabase {
     public void close() {
         try {
             File dataDir = new File(DATA_FILE_DIR);
-            if (!dataDir.exists())
+            if (!dataDir.exists()){
                 dataDir.mkdirs();
+            }
 
             File dataFile = new File(DATA_FILE_DIR + "/" + DATA_FILE_PATH);
-            if (!dataFile.exists())
+            if (!dataFile.exists()){
                 dataFile.createNewFile();
+            }
 
             FileWriter fw = new FileWriter(DATA_FILE_DIR + "/" + DATA_FILE_PATH);
             for (Task task : tasks) {
