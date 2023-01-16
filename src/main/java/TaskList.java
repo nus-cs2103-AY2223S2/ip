@@ -4,24 +4,9 @@ import java.util.List;
 public class TaskList {
     List<Task> list = new ArrayList<>();
 
-    public Task addTodo(String text) {
-        Task task = new ToDoTask(text);
+    public void add(Task task) {
         list.add(task);
-        return task;
     }
-
-    public Task addDeadline(String[] textAndDate) {
-        Task task = new DeadlineTask(textAndDate[0], textAndDate[1]);
-        list.add(task);
-        return task;
-    }
-
-    public Task addEvent(String[] textAndDate) {
-        Task task = new EventTask(textAndDate[0], textAndDate[1], textAndDate[2]);
-        list.add(task);
-        return task;
-    }
-
 
     public void markTaskAsDone(int number) {
         list.get(getIndexFromNumber(number)).setDone(true);

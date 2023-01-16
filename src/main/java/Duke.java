@@ -95,17 +95,20 @@ public class Duke {
     }
 
     private static void addTodoToList(String description) {
-        Task task = taskList.addTodo(description);
+        Task task = new ToDoTask(description);
+        taskList.add(task);
         printMessage("added: " + task);
     }
 
     private static void addDeadlineToList(String[] textAndDate) {
-        Task task = taskList.addDeadline(textAndDate);
+        Task task = new DeadlineTask(textAndDate[0], textAndDate[1]);
+        taskList.add(task);
         printMessage("added: " + task);
     }
 
     private static void addEventToList(String[] textAndDate) {
-        Task task = taskList.addEvent(textAndDate);
+        Task task = new EventTask(textAndDate[0], textAndDate[1], textAndDate[2]);
+        taskList.add(task);
         printMessage("added: " + task);
     }
 
