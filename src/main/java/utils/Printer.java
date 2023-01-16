@@ -10,4 +10,14 @@ public class Printer {
     public static void printlnIndent(String out) {
         System.out.printf("\t%s\n%s\n", out, SEPARATOR);
     }
+
+    public static void printlnAdded(String out) {
+        printlnIndent(String.format("[new] %s", out));
+    }
+
+    public static void listPrint(String... args) {
+        for (int i = 1; i <= args.length; ++i) {
+            System.out.printf("\t%d. %s\n", i, args[i - 1]);
+        }
+    }
 }

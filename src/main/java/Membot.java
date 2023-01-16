@@ -1,3 +1,4 @@
+import model.Task;
 import utils.Printer;
 
 import java.util.Scanner;
@@ -10,6 +11,7 @@ public class Membot {
             + "| | | | | ||  __/| | | | | || |_) || (_) || |_ \n"
             + "|_| |_| |_| \\___||_| |_| |_||_.__/  \\___/  \\__|\n";
     private static final String TERMINATE_KEY = "bye";
+    private static final String LIST_KEY = "list";
 
     public static void main(String[] args) {
         Printer.println("Welcome to\n" + LOGO);
@@ -22,8 +24,12 @@ public class Membot {
                 case TERMINATE_KEY:
                     Printer.printlnIndent("Have a good day! Good bye!");
                     break loop;
+                case LIST_KEY:
+                    Printer.listPrint(Task.listAll());
+                    break;
                 default:
-                    Printer.printlnIndent(input);
+                    Task task = Task.create(input);
+                    Printer.printlnAdded(task.toString());
                     break;
             }
         }
