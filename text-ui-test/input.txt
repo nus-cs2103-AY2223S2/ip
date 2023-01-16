@@ -1,0 +1,11 @@
+todo read book
+deadline get shirt ironed /by 12 am
+event attend lecture /from 2pm /to 4pm
+todo walk dog
+list
+mark 4
+mark 2
+list
+unmark 4
+list
+bye
