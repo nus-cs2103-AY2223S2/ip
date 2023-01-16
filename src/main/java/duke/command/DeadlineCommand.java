@@ -32,7 +32,7 @@ public class DeadlineCommand extends AddCommand {
      */
     @Override
     protected Task createTask(String input) throws DukeException {
-        input = input.replace("deadline ", "");
+        input = input.replaceFirst("deadline ", "");
         String[] args = input.split(" /by ", 2);
 
         if (args.length != 2) {
