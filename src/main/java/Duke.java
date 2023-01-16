@@ -29,12 +29,12 @@ public class Duke {
                 case "list":
                     System.out.println("    ____________________________________________________________");
                     for (int i = 0; i < taskNum; i++) {
-                        System.out.println("     " + i + ". " + tasks[i].toString());
+                        System.out.println("     " + (i + 1) + ". " + tasks[i].toString());
                     }
                     System.out.println("    ____________________________________________________________");
                     break;
                 case "mark":
-                    selectedNum = Integer.parseInt(inputArr[1]);
+                    selectedNum = Integer.parseInt(inputArr[1]) - 1;
                     tasks[selectedNum].markDone();
                     System.out.println(
                             "    ____________________________________________________________" +
@@ -43,7 +43,7 @@ public class Duke {
                             "\n    ____________________________________________________________");
                     break;
                 case "unmark":
-                    selectedNum = Integer.parseInt(inputArr[1]);
+                    selectedNum = Integer.parseInt(inputArr[1]) - 1;
                     tasks[selectedNum].markUndone();
                     System.out.println(
                             "    ____________________________________________________________" +
