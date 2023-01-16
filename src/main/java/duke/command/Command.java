@@ -1,5 +1,7 @@
 package duke.command;
 
+import java.util.List;
+
 /**
  * Represents a command given by the user.
  */
@@ -8,7 +10,8 @@ public interface Command {
      * Run the command and return the resulting response message.
      *
      * @param input User's input.
-     * @return Response message.
+     * @param tasks User's tasks.
+     * @return CommandResponse object containing the response message and updated task list.
      */
-    String run(String input);
+    CommandResponse run(String input, List<String> tasks);
 }

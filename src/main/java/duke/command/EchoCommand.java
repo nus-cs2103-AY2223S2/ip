@@ -1,17 +1,20 @@
 package duke.command;
 
+import java.util.List;
+
 /**
  * Represents an echo command.
  */
 public class EchoCommand implements Command {
     /**
-     * Returns the user's input.
+     * Returns a CommandResponse object containing the user's input and the task list with no changes.
      *
      * @param input {@inheritDoc}
-     * @return User's input.
+     * @param tasks {@inheritDoc}
+     * @return CommandResponse object containing the user's input and the task list with no changes.
      */
     @Override
-    public String run(String input) {
-        return input;
+    public CommandResponse run(String input, List<String> tasks) {
+        return new CommandResponse(input, tasks);
     }
 }
