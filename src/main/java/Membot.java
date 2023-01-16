@@ -34,5 +34,7 @@ public class Membot {
                     break;
             }
         }
+
+        scanner.close();
     }
 }
