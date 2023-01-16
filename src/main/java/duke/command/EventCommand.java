@@ -32,7 +32,7 @@ public class EventCommand extends AddCommand {
      */
     @Override
     protected Task createTask(String input) throws DukeException {
-        input = input.replace("event ", "");
+        input = input.replaceFirst("event ", "");
 
         String[] args = input.split(" /from ", 2);
         if (args.length != 2) {
