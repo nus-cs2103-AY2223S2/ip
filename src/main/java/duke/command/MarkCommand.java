@@ -17,7 +17,7 @@ public class MarkCommand implements Command {
      * @param tasks {@inheritDoc}
      * @return CommandResponse object containing an acknowledgement message and an updated task list with the specified
      * task's done status set to true.
-     * @throws DukeException Indicates missing index or non-integer index or out of bound index in input
+     * @throws DukeException Indicates missing index or non-integer index or out of bound index in input.
      */
     @Override
     public CommandResponse run(String input, List<Task> tasks) throws DukeException {
