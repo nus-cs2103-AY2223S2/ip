@@ -1,6 +1,36 @@
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Scanner;
 
 public class Duke {
+
+    public static List li = new ArrayList<String>();
+
+    public static void addTask(String task) {
+        li.add(task);
+        System.out.println("new task added: " + task);
+        System.out.println("What else can I do for you?");
+    }
+
+    public static void listCommand() {
+        if (li.size() == 0) {
+            System.out.println("You have not added any tasks.");
+        } else {
+            for (int i = 0; i < li.size(); i++) {
+                System.out.println(i+1 + ". " + li.get(i));
+            }
+        }
+        System.out.println("What else can I do for you?");
+    }
+
+    public static void blahCommand() {
+        System.out.println("blah");
+        System.out.println("What else can I do for you?");
+    }
+
+    public static void byeCommand() {
+        System.out.println("Bye. Hope to see you again soon!");
+    }
 
     public static void main(String[] args) {
         String logo = " ____        _        \n"
@@ -16,21 +46,17 @@ public class Duke {
 
         while (!command.equals("bye")) {
             if (command.equals("list")) {
-                System.out.println(command);
-                System.out.println("What else can I do for you?");
+                listCommand();
                 command = sc.nextLine();
             } else if (command.equals("blah")) {
-                System.out.println(command);
-                System.out.println("What else can I do for you?");
+                blahCommand();
                 command = sc.nextLine();
             } else {
-                System.out.println("I can't seem to perform this task. Please enter a valid command!");
+                addTask(command);
                 command = sc.nextLine();
             }
         }
-        System.out.println("Bye. Hope to see you again soon!");
-
-
+        byeCommand();
 
     }
 }
