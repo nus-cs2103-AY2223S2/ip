@@ -1,4 +1,4 @@
-public class Task {
+public abstract class Task {
     private String nameOfTask;
     private int indexOfTask;
     private boolean done;

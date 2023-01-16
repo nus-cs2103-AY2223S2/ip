@@ -22,18 +22,16 @@ public class Duke {
         System.out.println(newLine);
     }
 
-    public static void addTask(String command) {
+    public static void addTask(String command) throws IndexOutOfBoundsException {
         Task t;
         if (command.startsWith("todo")) {
             t = new Todo(command.substring(5));
         } else if (command.startsWith("deadline")) {
             String[] str = command.substring(9).split("/");
             t = new Deadline(str[0], str[1].substring(3));
-        } else if (command.startsWith("event")) {
+        } else {
             String[] str = command.substring(6).split("/");
             t = new Event(str[0], str[1].substring(5), str[2].substring(3));
-        } else {
-            t = new Task(command);
         }
         arrOfTask.add(t);
         System.out.println(indentation + "Got it. I've added this task:");
@@ -49,6 +47,9 @@ public class Duke {
     }
 
     public static void taskDone(int index) {
+        if (index > Task.getTotalNumOfTask()) {
+            throw new InvalidIndexException("Index too large");
+        }
         Task t = arrOfTask.get(index - 1);
         t.taskDone();
         System.out.println(indentation + "Nice! I've marked this task as done:");
@@ -56,6 +57,9 @@ public class Duke {
     }
 
     public static void taskNotDone(int index) {
+        if (index > Task.getTotalNumOfTask()) {
+            throw new InvalidIndexException("Index too large");
+        }
         Task t = arrOfTask.get(index - 1);
         t.taskNotDone();
         System.out.println(indentation + "OK, I've marked this task as not done yet:");
@@ -71,22 +75,30 @@ public class Duke {
         Scanner sc = new Scanner(System.in);
         greet();
         while (true) {
-            String command = sc.nextLine();
-            System.out.println(newLine);
-            if (command.equals("bye")) {
-                exit();
-                break;
-            } else if (command.equals("list")) {
-                list();
-            } else if (command.startsWith("mark")) {
-                taskDone(Integer.parseInt(command.substring(5)));
-            } else if (command.startsWith("unmark")) {
-                taskNotDone(Integer.parseInt(command.substring(7)));
-            } else {
-                addTask(command);
+            try {
+                String command = sc.nextLine();
+                System.out.println(newLine);
+                if (command.equals("bye")) {
+                    exit();
+                    break;
+                } else if (command.equals("list")) {
+                    list();
+                } else if (command.startsWith("mark")) {
+                    taskDone(Integer.parseInt(command.substring(5)));
+                } else if (command.startsWith("unmark")) {
+                    taskNotDone(Integer.parseInt(command.substring(7)));
+                } else if (command.startsWith("todo") || command.startsWith("deadline") || command.startsWith("event")) {
+                    addTask(command);
+                } else {
+                    throw new InvalidCommandException("Incorrect command");
+                }
+            } catch (InvalidCommandException | InvalidIndexException e1) {
+                System.out.println(indentation + e1);
+            } catch (IndexOutOfBoundsException e2) {
+                System.out.println(indentation + "☹ OOPS!!! The description of a task cannot be empty.");
+            } finally {
+                System.out.println(newLine);
             }
-            System.out.println(newLine);
         }
-        System.out.println(newLine);
     }
 }
