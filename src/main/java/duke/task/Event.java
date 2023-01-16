@@ -55,10 +55,10 @@ public class Event extends Task {
      */
     @Override
     public String toString() {
-        return "[E]" + super.toString() + " (from: "
-                + DateUtil.dateToString(from)
-                + " to: "
-                + DateUtil.dateToString(to)
-                + ")";
+        return "[E]" + super.toString() + " (from: " 
+            + DateUtil.dateToPrettyString(from)
+            + " to: " 
+            + DateUtil.dateToPrettyString(to)
+            + ")";
     }
 }

@@ -15,21 +15,27 @@ import duke.ui.Ui;
 public class ListCommand extends Command {
 
     private Optional<LocalDateTime> filterDate;
+    private Optional<String> filterString;
 
     /**
      * Default constructor
      */
     public ListCommand() {
         this.filterDate = Optional.empty();
+        this.filterString = Optional.empty();
     }
 
-    /**
-     * Default constructor with filter option
-     * 
-     * @param filterDate
-     */
     public ListCommand(LocalDateTime filterDate) {
-        this.filterDate = Optional.of(filterDate);
+        this(Optional.of(filterDate), Optional.empty());
+    }
+
+    public ListCommand(String filterString) {
+        this(Optional.empty(), Optional.of(filterString));
+    }
+
+    public ListCommand(Optional<LocalDateTime> filterDate, Optional<String> filterString) {
+        this.filterDate = filterDate;
+        this.filterString = filterString;
     }
 
     /**
@@ -40,33 +46,43 @@ public class ListCommand extends Command {
     @Override
     public void execute(DukeRepo db, Ui ui) {
 
-        // filter the list if any
         List<Task> filtered;
-        if (filterDate.isEmpty()) {
+        if (filterDate.isEmpty() && filterString.isEmpty()) {
             filtered = db.getAllTask();
         } else {
-            LocalDateTime key = filterDate.get();
+
             filtered = db.getAllTask().stream().filter(task -> {
-                if (task instanceof Deadline) {
-                    Deadline d = (Deadline) task;
-                    if (d.getBy().toLocalDate().equals(key.toLocalDate())) {
-                        return true;
+                return filterDate.map(x -> {
+                    if (task instanceof Deadline) {
+                        Deadline d = (Deadline) task;
+                        if (d.getBy().toLocalDate().equals(x.toLocalDate())) {
+                            return true;
+                        }
                     }
-                }
-                if (task instanceof Event) {
-                    Event e = (Event) task;
-                    if (e.getFrom().toLocalDate().equals(key.toLocalDate())) {
-                        return true;
+                    if (task instanceof Event) {
+                        Event e = (Event) task;
+                        if (e.getFrom().toLocalDate().equals(x.toLocalDate())) {
+                            return true;
+                        }
                     }
-                }
-                return false;
-            }).collect(Collectors.toList());
+                    return false;
+                }).orElse(true);
+            }).filter(task -> filterString.map(x -> task.toString().contains(x)).orElse(true))
+                    .collect(Collectors.toList());
         }
 
-        // prints the list
-        ui.println(Message.LIST_TASKS);
-        for (int i = 0; i < filtered.size(); i++) {
-            ui.println(String.format("\t%d. %s", i + 1, filtered.get(i)));
+        if (filtered.size() > 0) {
+            if (!filterDate.isEmpty() || !filterString.isEmpty()) {
+                ui.println(Message.FIND_TASKS);
+            } else {
+                ui.println(Message.LIST_TASKS);
+            }
+
+            for (int i = 0; i < filtered.size(); i++) {
+                ui.println(String.format("\t%d. %s", i + 1, filtered.get(i)));
+            }
+        } else {
+            ui.println(Message.LIST_EMPTY);
         }
 
     }

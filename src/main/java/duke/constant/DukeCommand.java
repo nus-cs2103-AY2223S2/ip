@@ -12,5 +12,6 @@ public enum DukeCommand {
     TODO,
     EVENT,
     DEADLINE,
-    DELETE;
+    DELETE, 
+    FIND;
 }
