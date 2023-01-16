@@ -1,5 +1,6 @@
 public class Task {
   String description;
+  boolean isDone = false;
   int id;
   static int runningId = 1;
 
@@ -9,8 +10,17 @@ public class Task {
     this.description = description;
   }
 
+  public void setDone() {
+    this.isDone = true;
+  }
+
+  public void setUndone() {
+    this.isDone = false;
+  }
+
   @Override
   public String toString() {
-    return String.format("%d. %s\n", this.id, this.description);
+    char marker = this.isDone ? 'X' : ' ';
+    return String.format("[%c] %s\n", marker, this.description);
   }
 }
