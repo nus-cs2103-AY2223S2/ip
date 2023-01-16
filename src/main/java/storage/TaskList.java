@@ -5,6 +5,7 @@ import task.Todo;
 import task.Deadline;
 import task.Event;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 
 public class TaskList {
@@ -34,7 +35,7 @@ public class TaskList {
      * @param deadline  deadline of the task
      * @return The new deadline
      */
-    public Deadline createDeadline(String task, String deadline) {
+    public Deadline createDeadline(String task, LocalDate deadline) {
         Deadline newDeadline = new Deadline(task, deadline);
         this.tasks.add(newDeadline);
         return newDeadline;
@@ -47,7 +48,7 @@ public class TaskList {
      * @param endTime    ending time of the task
      * @return The new task
      */
-    public Event createEvent(String task, String startTime, String endTime) {
+    public Event createEvent(String task, LocalDate startTime, LocalDate endTime) {
         Event newEvent = new Event(task, startTime, endTime);
         this.tasks.add(newEvent);
         return newEvent;

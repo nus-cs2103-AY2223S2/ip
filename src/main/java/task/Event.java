@@ -1,23 +1,20 @@
 package task;
 
-public class Event extends Task{
-    private String startTime;
-    private String endTime;
+import java.time.LocalDate;
 
-    public Event(String task, String startTime, String endTime) {
-        this.task = task;
+public class Event extends Task {
+    private LocalDate startTime;
+    private LocalDate endTime;
+
+    public Event(String task, LocalDate startTime, LocalDate endTime) {
+        super(task, false);
         this.startTime = startTime;
         this.endTime = endTime;
-        this.isCompleted = false;
     }
 
     @Override
     public String toString() {
-        String content = this.task + " (from: " + this.startTime + " to: " + this.endTime + ")";
-        if (isCompleted) {
-            return "[E][X] " + content;
-        } else {
-            return "[E][ ] " + content;
-        }
+       return String.format("[E]%s %s (from: %s to: %s )", super.formattedStatus(), super.task,
+               super.formattedDate(this.startTime), super.formattedDate(this.endTime));
     }
 }
