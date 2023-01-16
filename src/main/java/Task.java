@@ -5,13 +5,17 @@ public class Task {
         this.desc = desc;
         this.isDone = false;
     }
-    public String getStatusIcon() {
+    private String getStatusIcon() {
         return this.isDone ? "[X]" : "[]" ;
+    }
+
+    private String getType() {
+        return "";
     }
 
     @Override
     public String toString() {
-        return getStatusIcon() + " " + this.desc;
+        return String.format("%s %s %s",getType(), getStatusIcon(), this.desc);
     }
     public void setIsDone(boolean isDone) {
         this.isDone = isDone;
