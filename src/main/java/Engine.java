@@ -2,15 +2,19 @@ import java.util.Scanner;
 
 public class Engine {
     private final Scanner scanner;
+    private final TaskList taskList;
 
     private enum Command {
         ERROR,
         EXIT,
-        ECHO
+        ECHO,
+        LIST,
+        ADD
     }
 
     Engine() {
         this.scanner = new Scanner(System.in);
+        this.taskList = new TaskList();
     }
 
     private String getOutput(Command command, String text) {
@@ -19,6 +23,11 @@ public class Engine {
                 return "Bye...Why do you even need me?\n";
             case ECHO:
                 return text + '\n';
+            case LIST:
+                return this.taskList.toString();
+            case ADD:
+                this.taskList.addTask(text);
+                return "added-> "  + text + '\n';
             default:
                 return "Case not accounted for, review code\n";
                 // for debugging
@@ -29,7 +38,10 @@ public class Engine {
         if (command.equals("bye")) {
             return Command.EXIT;
         }
-        return Command.ECHO;
+        if (command.equals("list")) {
+            return Command.LIST;
+        }
+        return Command.ADD; 
     }
 
     public boolean run() {
