@@ -1,75 +1,131 @@
 import java.util.Scanner;
 import java.util.ArrayList;
 public class Duke {
-    public static void main(String[] args) {
-        ArrayList<Task> listOfTasks = new ArrayList<>(100);
-        boolean isExit = false;
-        int taskNumber = 0;
-        Task taskAtHand;
-        final String logo = " ____        _        \n"
-                + "|  _ \\ _   _| | _____ \n"
-                + "| | | | | | | |/ / _ \\\n"
-                + "| |_| | |_| |   <  __/\n"
-                + "|____/ \\__,_|_|\\_\\___|\n";
-        final String separator = "\t____________________________________________________________";
+    final static String logo = " ____        _        \n"
+            + "|  _ \\ _   _| | _____ \n"
+            + "| | | | | | | |/ / _ \\\n"
+            + "| |_| | |_| |   <  __/\n"
+            + "|____/ \\__,_|_|\\_\\___|\n";
+    final static String separator = "\t____________________________________________________________";
+    public static boolean isExit = false;
+    public static ArrayList<Task> listOfTasks = new ArrayList<>(100);
+
+    public static String [] stringSplitArray;
+    public static String [] timeSplitArray;
+    public static void bye(){
         System.out.println(separator
-                + "\n\t Hello! I'm Duke\n"
-                + "\t What can I do for you?\n"
+                + "\n\t Bye. Hope to see you again soon!\n"
+                + separator);
+        isExit = true;
+    }
+
+    public static String printTaskCount(){
+        return "\tNow you have "
+                + listOfTasks.size()
+                + " tasks in the list.";
+    }
+    public static void toList(){
+        int i = 1;
+        System.out.println(separator
+                + "\n\tHere are the tasks in your list:");
+        for(Task task : listOfTasks) {
+            System.out.println("\t"
+                    + i
+                    + ". "
+                    + task.toString());
+            i++;
+        }
+        System.out.println(separator);
+    }
+    public static void start(){
+        Task taskAtHand;
+        int taskNumber;
+        System.out.println(logo
+                + "\n"
+                + separator
+                + "\n\tHello! I'm Duke\n"
+                + "\tWhat can I do for you?\n"
                 + separator);
         Scanner sc = new Scanner(System.in);
         while (!isExit) {
-            String command = sc.nextLine();
-            if(command.startsWith("mark")){
-                String [] stringArray = command.split(" ");
-                command = "mark";
-                taskNumber = Integer.parseInt(stringArray[1]);
-
-            }
-            if(command.startsWith("unmark")){
-                String [] stringArray = command.split(" ");
-                command = "unmark";
-                taskNumber = Integer.parseInt(stringArray[1]);
-            }
+            String command = sc.next();;
             switch(command) {
                 case "bye":
-                    System.out.println(separator
-                            + "\n\t Bye. Hope to see you again soon!\n"
-                            + separator);
-                    isExit = true;
+                    Duke.bye();
                     break;
                 case "list":
-                    int i = 1;
-                    System.out.println(separator);
-                    System.out.println("\tHere are the tasks in your list:");
-                    for(Task task : listOfTasks) {
-                        System.out.println("\t"
-                                + i
-                                + ". "
-                                + task.printStatus());
-                        i++;
-                    }
-                    System.out.println(separator);
+                    Duke.toList();
                     break;
 
                 case "mark":
+                    taskNumber = sc.nextInt();
                     taskAtHand = listOfTasks.get(taskNumber - 1);
                     taskAtHand.markDone();
-                    System.out.println(separator);
-                    System.out.println("\tNice! I've marked this task as done:\n\t"
-                            + taskAtHand.printStatus());
-                    System.out.println(separator);
+                    System.out.println(separator
+                            + "\n\tNice! I've marked this task as done:\n\t"
+                            + taskAtHand.toString()
+                            + "\n"
+                            + separator);
                     break;
 
                 case "unmark":
+                    taskNumber = sc.nextInt();
                     taskAtHand = listOfTasks.get(taskNumber - 1);
                     taskAtHand.markUnDone();
-                    System.out.println(separator);
-                    System.out.println("\tOK, I've marked this task as not done yet:\n\t"
-                            + taskAtHand.printStatus());
-                    System.out.println(separator);
+                    System.out.println(separator
+                            +"\n\tOK, I've marked this task as not done yet:\n\t"
+                            + taskAtHand.toString()
+                            + "\n"
+                            + separator);
+                    break;
+
+                case "deadline":
+                    command = sc.nextLine();
+                    stringSplitArray = command.split("/by");
+                    taskAtHand = new Deadline(stringSplitArray[0], stringSplitArray[1]);
+                    listOfTasks.add(taskAtHand);
+                    System.out.println(separator
+                            + "\n\tGot it. I've added this task:\n"
+                            + "\t"
+                            + taskAtHand.toString()
+                            + "\n"
+                            + Duke.printTaskCount()
+                            + "\n"
+                            + separator);
+                    break;
+
+                case "event":
+                    command = sc.nextLine();
+                    stringSplitArray = command.split("/from");
+                    timeSplitArray = stringSplitArray[1].split("/to");
+                    taskAtHand = new Event(stringSplitArray[0], timeSplitArray[0], timeSplitArray[1]);
+                    listOfTasks.add(taskAtHand);
+                    System.out.println(separator
+                            + "\n\tGot it. I've added this task:\n"
+                            + "\t"
+                            + taskAtHand.toString()
+                            + "\n"
+                            + Duke.printTaskCount()
+                            + "\n"
+                            + separator);
+                    break;
+
+                case "todo":
+                    command = sc.nextLine();
+                    taskAtHand = new ToDo(command);
+                    listOfTasks.add(taskAtHand);
+                    System.out.println(separator
+                            + "\n\tGot it. I've added this task:\n"
+                            + "\t"
+                            + taskAtHand.toString()
+                            + "\n"
+                            + Duke.printTaskCount()
+                            + "\n"
+                            + separator);
                     break;
 
                 default:
+                    command = command + sc.nextLine();
                     Task task = new Task(command);
                     System.out.println(separator
                             + "\n\t"
@@ -81,5 +137,8 @@ public class Duke {
             }
 
         }
+    }
+    public static void main(String[] args) {
+        Duke.start();
     }
 }

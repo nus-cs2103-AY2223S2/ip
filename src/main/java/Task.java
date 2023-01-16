@@ -19,7 +19,7 @@ public class Task {
     }
 
 
-    public String printStatus() {
+    public String toString() {
         return "[" + this.getStatusIcon() + "] " + this.description;
     }
 }
