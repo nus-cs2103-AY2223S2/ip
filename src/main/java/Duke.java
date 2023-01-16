@@ -7,6 +7,9 @@ public class Duke {
     private static final String DISPLAY_LIST_COMMAND = "list";
     private static final String MARK_TASK_AS_DONE_COMMAND = "mark";
     private static final String MARK_TASK_AS_UNDONE_COMMAND = "unmark";
+    private static final String TODO_COMMAND = "todo";
+    private static final String DEADLINE_COMMAND = "deadline";
+    private static final String EVENT_COMMAND = "event";
 
     private static Scanner scanner = new Scanner(System.in);
     private static TaskList taskList = new TaskList();
@@ -58,9 +61,11 @@ public class Duke {
 
     // Executes a command, except exit command
     private static void executeOneCommand(String input) {
-        String[] parts = input.split(" ");
+        // Split into two parts at the first space
+        String[] parts = input.split(" ", 2);
         String command = parts[0];
         int taskNum;
+        String[] textAndDate;
         switch (command) {
             case DISPLAY_LIST_COMMAND:
                 displayTasks();
@@ -73,14 +78,35 @@ public class Duke {
                 taskNum = Integer.parseInt(parts[1]);
                 markTaskAsNotDone(taskNum);
                 break;
+            case TODO_COMMAND:
+                addTodoToList(parts[1]);
+                break;
+            case DEADLINE_COMMAND:
+                textAndDate = parts[1].split(" /by ");
+                addDeadlineToList(textAndDate);
+                break;
+            case EVENT_COMMAND:
+                textAndDate = parts[1].split(" /from | /to ");
+                addEventToList(textAndDate);
+                break;
             default:
-                addTaskToList(input);
+                printMessage("Invalid command.");
         }
     }
 
-    private static void addTaskToList(String text) {
-        taskList.addTask(text);
-        printMessage("added: " + text);
+    private static void addTodoToList(String description) {
+        Task task = taskList.addTodo(description);
+        printMessage("added: " + task);
+    }
+
+    private static void addDeadlineToList(String[] textAndDate) {
+        Task task = taskList.addDeadline(textAndDate);
+        printMessage("added: " + task);
+    }
+
+    private static void addEventToList(String[] textAndDate) {
+        Task task = taskList.addEvent(textAndDate);
+        printMessage("added: " + task);
     }
 
     private static void displayTasks() {
