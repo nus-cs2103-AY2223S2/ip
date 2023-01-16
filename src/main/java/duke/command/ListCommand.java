@@ -20,7 +20,7 @@ public class ListCommand implements Command {
     public CommandResponse run(String input, List<Task> tasks) {
         StringBuilder stringBuilder = new StringBuilder();
         for (int i = 0; i < tasks.size(); ++i) {
-            stringBuilder.append(String.format("%d. %s\n", i + 1, tasks.get(i).getDescription()));
+            stringBuilder.append(String.format("%d.%s\n", i + 1, tasks.get(i).toString()));
         }
 
         return new CommandResponse(stringBuilder.toString().trim(), tasks);

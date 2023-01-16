@@ -33,4 +33,9 @@ public class Task {
     public Task setDescription(String description) {
         return new Task(isDone, description);
     }
+
+    @Override
+    public String toString() {
+        return String.format("[%s] %s", isDone ? "X" : " ", description);
+    }
 }
