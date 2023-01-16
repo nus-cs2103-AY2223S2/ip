@@ -5,33 +5,6 @@ public class Duke {
     private Task[] tasks;
     private int cnt;
 
-    private class Task {
-        protected String description;
-        protected boolean isDone;
-
-        public Task(String description) {
-            this.description = description;
-            this.isDone = false;
-        }
-
-        public String getStatusIcon() {
-            return isDone ? "X" : " ";
-        }
-
-        public void markAsDone() {
-            this.isDone = true;
-        }
-
-        public void unmark() {
-            this.isDone = false;
-        }
-
-        @Override
-        public String toString() {
-            return "[" + this.getStatusIcon() + "] " + this.description;
-        }
-    }
-
     public Duke() {
         this.tasks = new Task[100];
         this.cnt = 0;
@@ -70,7 +43,12 @@ public class Duke {
     private void addTask(String message) {
         space();
         System.out.println("added: " + message);
-        Task newTask = new Task(message);
+        String[] parts = message.split(" ");
+        String description = message.substring(parts[0].length() + 1);
+        Task newTask;
+        if (parts[0].equals("todo")) newTask = new Todo(description);
+        else if (parts[0].equals("deadline")) newTask = new Deadline(description);
+        else newTask = new Event(description);
         this.tasks[cnt] = newTask;
         this.cnt++;
     }
