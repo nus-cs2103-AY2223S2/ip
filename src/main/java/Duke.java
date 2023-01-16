@@ -18,6 +18,7 @@ public class Duke {
             }
             line = sc.nextLine();
         }
+        sc.close();
         displayMsg("Bye. Hope to see you again soon!");
     }
 
