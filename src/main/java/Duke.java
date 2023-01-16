@@ -22,6 +22,7 @@ public class Duke {
 
         String input = sc.nextLine();
         String[] inputArr = input.split(" ");
+        int selectedNum;
 
         while (!inputArr[0].equalsIgnoreCase("bye")) {
             switch (inputArr[0]) {
@@ -33,13 +34,22 @@ public class Duke {
                     System.out.println("    ____________________________________________________________");
                     break;
                 case "mark":
-                    int selectedNum = Integer.parseInt(inputArr[1]);
+                    selectedNum = Integer.parseInt(inputArr[1]);
                     tasks[selectedNum].markDone();
                     System.out.println(
                             "    ____________________________________________________________" +
                             "\n     Nice! I've marked this task as done:" +
                             tasks[selectedNum].toString() +
                             "\n    ____________________________________________________________");
+                    break;
+                case "unmark":
+                    selectedNum = Integer.parseInt(inputArr[1]);
+                    tasks[selectedNum].markUndone();
+                    System.out.println(
+                            "    ____________________________________________________________" +
+                                    "\n     OK, I've marked this task as not done yet:" +
+                                    tasks[selectedNum].toString() +
+                                    "\n    ____________________________________________________________");
                     break;
                 default:
                     tasks[taskNum] = new Task(input);
