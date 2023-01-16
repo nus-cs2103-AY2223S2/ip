@@ -25,5 +25,6 @@ public class Message {
     public static final String ADD_TASK = "Got it. I've added this task:";
     public static final String DELETE_TASK = "Noted. I've removed this task:";
     public static final String COUNT_TASK = "Now you have %d tasks in the list.";
+    public static final Object LIST_EMPTY = "No task found in the list.";
     
 }
