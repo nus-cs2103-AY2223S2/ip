@@ -25,6 +25,6 @@ public class Task {
     // properly formats Task as String
     @Override
     public String toString() {
-        return "[" + getStatus() + "] " + getName();
+        return getName();
     }
 }
