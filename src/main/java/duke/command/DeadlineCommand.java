@@ -16,7 +16,7 @@ public class DeadlineCommand extends AddCommand {
      * @param input {@inheritDoc}
      * @param tasks {@inheritDoc}
      * @return {@inheritDoc}
-     * @throws DukeException Indicates missing ' /by ' in input.
+     * @throws DukeException Indicates missing cutoff date/time or description in input.
      */
     @Override
     public CommandResponse run(String input, List<Task> tasks) throws DukeException {
@@ -28,7 +28,7 @@ public class DeadlineCommand extends AddCommand {
      *
      * @param input {@inheritDoc}
      * @return {@inheritDoc}
-     * @throws DukeException Indicates missing ' /by ' in input.
+     * @throws DukeException Indicates missing cutoff date/time or description in input.
      */
     @Override
     protected Task createTask(String input) throws DukeException {
