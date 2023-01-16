@@ -10,11 +10,11 @@ public class Task {
     }
 
     public String getTask() {
-        return "[" + status() + "] " + this.task;
+        return this.task;
     }
 
     public String status() {
-        return (done ? "X" : " ");
+        return (done ? "[X] " : "[ ] ");
     }
 
     public void mark() {
