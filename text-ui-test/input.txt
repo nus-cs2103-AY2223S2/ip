@@ -10,3 +10,4 @@ todo borrow book
 unmark 4
 deadline return book /by Sunday
 event project meeting /from Mon 2pm /to 4pm
+bye

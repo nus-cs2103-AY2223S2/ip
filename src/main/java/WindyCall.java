@@ -1,11 +1,11 @@
 import java.util.Scanner;
 
-public class Duke {
+public class WindyCall {
 
-    private Task[] tasks;
+    private final Task[] tasks;
     private int cnt;
 
-    public Duke() {
+    public WindyCall() {
         this.tasks = new Task[100];
         this.cnt = 0;
     }
@@ -85,7 +85,7 @@ public class Duke {
     public static void main(String[] args) {
         Scanner scan = new Scanner(System.in);
         greeting();
-        Duke chatBox = new Duke();
+        WindyCall chatBox = new WindyCall();
         while(true) {
             String userCommand = scan.nextLine();
             if (userCommand.equals("bye")) {
@@ -112,6 +112,5 @@ public class Duke {
             }
             line();
         }
-        return ;
     }
 }
