@@ -18,9 +18,18 @@ public class Duke {
         switch (parse_type) {
             case SPLIT_ALL:
                 return new ArrayList<String>(Arrays.asList(input.split(" ")));
-
+            case TODO:
+                return new ArrayList<String>(Arrays.asList(input.split(" ", 2))); // split into 2
+            case DEADLINE:
+                String[] otherArgs = input.split(" ", 2);
+                String[] taskAndTime = otherArgs[1].split(" /by ", 2);
+                ArrayList<String> temp = new ArrayList<>();
+                temp.add(otherArgs[0]);
+                temp.add(taskAndTime[0]);
+                temp.add(taskAndTime[1]);
+                return temp;
         }
-        return null;
+        return new ArrayList<>();
     }
 
     public static void main(String[] args) {
@@ -52,6 +61,13 @@ public class Duke {
                 System.out.println("  OK, continue working on: ");
                 System.out.println("    " + completedTask.toString());
             }
+            else if (first.equals("deadline")) {
+                ArrayList<String> parsed = parser(command, ParseFunctions.DEADLINE);
+                Task newDeadline = new Deadline(parsed.get(1), parsed.get(2));
+                taskStore.add(newDeadline);
+                System.out.println("  new task added!");
+                System.out.println("    " + newDeadline.toString());
+            }
             else if (first.equals("list")) {
                 for (int i = 0; i < taskStore.size(); i++) {
                     System.out.println("  " + String.valueOf(i + 1) + ". " + taskStore.get(i));
@@ -61,7 +77,7 @@ public class Duke {
             else {
                 Task newTask = new Task(command);
                 taskStore.add(newTask);
-                System.out.println("  added: " + command);
+                System.out.println("  new task added: " + command);
             }
         }
     }
