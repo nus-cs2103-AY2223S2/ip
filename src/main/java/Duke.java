@@ -5,6 +5,8 @@ public class Duke {
 
     private static final String EXIT_COMMAND = "bye";
     private static final String DISPLAY_LIST_COMMAND = "list";
+    private static final String MARK_TASK_AS_DONE_COMMAND = "mark";
+    private static final String MARK_TASK_AS_UNDONE_COMMAND = "unmark";
 
     private static Scanner scanner = new Scanner(System.in);
     private static TaskList taskList = new TaskList();
@@ -56,10 +58,23 @@ public class Duke {
 
     // Executes a command, except exit command
     private static void executeOneCommand(String input) {
-        if (input.equals(DISPLAY_LIST_COMMAND)) {
-            displayTasks();
-        } else {
-            addTaskToList(input);
+        String[] parts = input.split(" ");
+        String command = parts[0];
+        int taskNum;
+        switch (command) {
+            case DISPLAY_LIST_COMMAND:
+                displayTasks();
+                break;
+            case MARK_TASK_AS_DONE_COMMAND:
+                taskNum = Integer.parseInt(parts[1]);
+                markTaskAsDone(taskNum);
+                break;
+            case MARK_TASK_AS_UNDONE_COMMAND:
+                taskNum = Integer.parseInt(parts[1]);
+                markTaskAsNotDone(taskNum);
+                break;
+            default:
+                addTaskToList(input);
         }
     }
 
