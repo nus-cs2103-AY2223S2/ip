@@ -1,4 +1,6 @@
 import java.util.Scanner;
+import java.util.ArrayList;
+
 public class Duke {
     public static void main(String[] args) {
         String logo = " ____        _        \n"
@@ -13,7 +15,7 @@ public class Duke {
         line();
 
         Scanner scanner = new Scanner(System.in);
-        Task[] list = new Task[100];
+        ArrayList<Task> list = new ArrayList<>();
         int index = 0;
         String input = scanner.nextLine();
         while(!input.equals("bye")){
@@ -22,7 +24,7 @@ public class Duke {
                 unmarkTask(list, i);
                 line();
                 indent("Alright! I've unmarked this task :(\n");
-                indent("  " + list[i - 1]);
+                indent("  " + list.get(i - 1));
                 line();
             }
             else if (input.contains("mark")){
@@ -30,8 +32,18 @@ public class Duke {
                 markTask(list, i);
                 line();
                 indent("OK! I've marked this task as complete :)\n");
-                indent("  " + list[i - 1]);
+                indent("  " + list.get(i - 1));
                 line();
+            }
+            else if (input.contains("delete")){
+                int i = Integer.parseInt(input.substring(7,8));
+                line();
+                indent("OK! I've deleted this task :)\n");
+                indent("  " + list.get(i - 1));
+                indent(String.format("Now you have %d tasks in the list", index - 1));
+                line();
+                delete(list, i);
+                index--;
             }
             else{
                 switch (input){
@@ -44,7 +56,7 @@ public class Duke {
                     default:
                         try {
                             Task newTask = parseInput(input);
-                            list[index] = newTask;
+                            list.add(newTask);
                             index++;
                             line();
                             indent("Roger! I've added this task to the list:\n");
@@ -76,20 +88,24 @@ public class Duke {
         System.out.println("____________________________________________________________________________________");
     }
 
-    public static void printList(Task[] list, int index){
+    public static void printList(ArrayList<Task> list, int index){
         for (int i = 0; i < index ; i++){
             int num = i + 1;
-            String output = num + ". " + list[i];
+            String output = num + ". " + list.get(i);
             indent(output);
         }
     }
 
-    public static void markTask(Task[] list, int index){
-        list[index - 1].mark();
+    public static void markTask(ArrayList<Task> list, int index){
+        list.get(index - 1).mark();
     }
 
-    public static void unmarkTask(Task[] list, int index){
-        list[index - 1].unmark();
+    public static void unmarkTask(ArrayList<Task> list, int index){
+        list.get(index - 1).unmark();
+    }
+
+    public static void delete(ArrayList<Task> list, int index){
+        list.remove(index - 1);
     }
 
     public static Task parseInput(String input) throws DukeException{
