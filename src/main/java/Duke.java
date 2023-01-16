@@ -1,3 +1,5 @@
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Scanner;
 
 public class Duke {
@@ -12,19 +14,37 @@ public class Duke {
         Duke.say("Hello from\n" + logo);
 
         Scanner scanner = new Scanner(System.in);
+        List<String> tasks = new ArrayList<>();
 
         whileLoop:
         while (true) {
             String input = scanner.nextLine();
         
             switch (input) {
+                case "list":
+                    if (tasks.isEmpty()) {
+                        Duke.say("Nothing in the list.");
+                        break;
+                    }
+
+                    int listIndex = 1;
+                    StringBuilder output = new StringBuilder();
+                    for (String task : tasks) {
+                        output.append(listIndex + ". " + task + "\n");
+                        listIndex++;
+                    }
+                    // Removes trailing newline.
+                    output.setLength(output.length() - 1);
+                    Duke.say(output.toString());
+                    break;
                 case "quit":
                 case "exit":
                 case "bye":
                     Duke.say("Bye. Hope to see you again soon!");
                     break whileLoop;
                 default:
-                    Duke.say(input);
+                    tasks.add(input);
+                    Duke.say("added: " + input);
                     break;
             }
         }
