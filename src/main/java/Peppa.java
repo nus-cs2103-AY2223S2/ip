@@ -4,7 +4,7 @@ import java.util.Scanner;
 
 public class Peppa {
     public static final String divider = "=============================================";
-    public static final String[] commands = { "list", "mark", "unmark", "todo", "deadline", "event" };
+    public static final String[] commands = { "list", "mark", "unmark", "delete", "todo", "deadline", "event" };
     public static ArrayList<Task> tasks = new ArrayList<>();
 
     public static void displayList() {
@@ -23,6 +23,15 @@ public class Peppa {
     public static void addTask(Task task) {
         tasks.add(task);
         System.out.println("Oink! I've added the following task:");
+        System.out.println("> "+ task.toString());
+        printSummary();
+    }
+
+    public static void deleteTask(String input) {
+        int id = Integer.parseInt(input.split(" ")[1]);
+        Task task = tasks.get(id - 1);
+        tasks.remove(task);
+        System.out.println("Oink! I've removed the following task:");
         System.out.println("> "+ task.toString());
         printSummary();
     }
@@ -97,6 +106,8 @@ public class Peppa {
                 markDone(getTask(input));
             } else if (command.startsWith("unmark")) {
                 unmarkDone(getTask(input));
+            } else if (command.startsWith("delete")) {
+                 deleteTask(input);
             } else {
                 try {
                     insertTask(command, input);
