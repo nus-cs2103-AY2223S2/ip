@@ -9,6 +9,7 @@ import duke.command.ListCommand;
 import duke.command.MarkCommand;
 import duke.command.ToDoCommand;
 import duke.command.UnmarkCommand;
+import duke.exception.DukeException;
 import duke.task.Task;
 
 import java.util.ArrayList;
@@ -59,7 +60,14 @@ public class Duke {
 
         while (true) {
             String input = scanner.nextLine();
-            CommandResponse res = getCommand(input).run(input, tasks);
+
+            CommandResponse res;
+            try {
+                res = getCommand(input).run(input, tasks);
+            } catch (DukeException e) {
+                printMessage(e.getMessage());
+                continue;
+            }
 
             tasks = res.getTasks();
             printMessage(res.getMessage());

@@ -1,5 +1,6 @@
 package duke.command;
 
+import duke.exception.DukeException;
 import duke.task.Task;
 
 import java.util.List;
@@ -15,5 +16,5 @@ public interface Command {
      * @param tasks User's tasks.
      * @return CommandResponse object containing the response message and updated task list.
      */
-    CommandResponse run(String input, List<Task> tasks);
+    CommandResponse run(String input, List<Task> tasks) throws DukeException;
 }
