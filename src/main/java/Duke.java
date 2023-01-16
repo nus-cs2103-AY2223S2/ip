@@ -1,17 +1,17 @@
+import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Duke {
-    private static void printAllTasks(int itemCount, Task[] list) {
-        for (int i = 0; i < itemCount; i++) {
-            System.out.printf("%d: %s%n", i + 1, list[i]);
+    private static void printAllTasks(ArrayList<Task> list) {
+        for (int i = 0; i < list.size(); i++) {
+            System.out.printf("%d: %s%n", i + 1, list.get(i));
         }
     }
 
     public static void main(String[] args) {
         System.out.println("Hello, Duke here. How can I help you?");
         Scanner sc = new Scanner(System.in);
-        Task[] list = new Task[100];
-        int itemCount = 0;
+        ArrayList<Task> list = new ArrayList<>();
         String userLine = "";
         while (!userLine.equals("bye")) {
             userLine = sc.nextLine();
@@ -22,29 +22,28 @@ public class Duke {
                     System.out.println("Bye, hope to see you again.");
                     break;
                 case "list":
-                    printAllTasks(itemCount, list);
+                    printAllTasks(list);
                     break;
                 case "mark": {
                     int number = Integer.parseInt(split[1]) - 1;
-                    list[number].setIsDone(true);
+                    list.get(number).setIsDone(true);
                     System.out.println("done");
-                    printAllTasks(itemCount, list);
+                    printAllTasks(list);
                     break;
                 }
                 case "unmark": {
                     int number = Integer.parseInt(split[1]) - 1;
-                    list[number].setIsDone(false);
+                    list.get(number).setIsDone(false);
                     System.out.println("done");
-                    printAllTasks(itemCount, list);
+                    printAllTasks(list);
                     break;
                 }
                 case "todo": {
                     try {
-                        list[itemCount] = new ToDo(split[1]);
+                        list.add(new ToDo(split[1]));
                     } catch (ArrayIndexOutOfBoundsException e) {
                         System.out.println("Description cannot be empty for todo");
                     }
-                    itemCount++;
                     System.out.println("Added: " + split[1]);
                     break;
                 }
@@ -54,8 +53,7 @@ public class Duke {
                         System.out.println("Invalid format");
                         break;
                     }
-                    list[itemCount] = new Deadline(split[1].trim(), split[2]);
-                    itemCount++;
+                    list.add(new Deadline(split[1].trim(), split[2]));
                     System.out.println("Added: " + split[1]);
                     break;
                 }
@@ -65,8 +63,7 @@ public class Duke {
                         System.out.println("Invalid format");
                         break;
                     }
-                    list[itemCount] = new Event(split[1].trim(), split[2], split[3]);
-                    itemCount++;
+                    list.add(new Event(split[1].trim(), split[2], split[3]));
                     System.out.println("Added: " + split[1].trim());
                     break;
                 }
