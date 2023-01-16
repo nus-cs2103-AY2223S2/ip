@@ -7,6 +7,6 @@ public class Task {
 
     @Override
     public String toString() {
-        return this.text;
+        return text;
     }
 }
