@@ -4,7 +4,6 @@ package duke.command;
  * Represents a bye command.
  */
 public class ByeCommand implements Command {
-
     /**
      * Returns a farewell message.
      *
