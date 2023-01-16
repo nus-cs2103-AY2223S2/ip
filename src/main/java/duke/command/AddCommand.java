@@ -12,7 +12,7 @@ import duke.task.Task;
 import duke.task.Todo;
 import duke.ui.Ui;
 
-public class AddCommand extends Command{
+public class AddCommand extends Command {
 
     private DukeCommand tType;
     private String title;
@@ -20,14 +20,38 @@ public class AddCommand extends Command{
     private LocalDateTime date1;
     private LocalDateTime date2;
 
+    /**
+     * Constructor for adding a todo.
+     * 
+     * @param tType  {@link DukeCommand} enum
+     * @param title  {@link String} object
+     * @param isDone boolean
+     */
     public AddCommand(DukeCommand tType, String title, boolean isDone) {
         this(tType, title, isDone, null, null);
     }
 
+    /**
+     * Constructor for adding a deadline.
+     * 
+     * @param tType  {@link DukeCommand} enum
+     * @param title  {@link String} object
+     * @param isDone boolean
+     * @param date1  {@link LocalDateTime} object
+     */
     public AddCommand(DukeCommand tType, String title, boolean isDone, LocalDateTime date1) {
         this(tType, title, isDone, date1, null);
     }
 
+    /**
+     * Constructor for adding a eveny.
+     * 
+     * @param tType  {@link DukeCommand} enum
+     * @param title  {@link String} object
+     * @param isDone boolean
+     * @param date1  {@link LocalDateTime} object
+     * @param date2  {@link LocalDateTime} object
+     */
     public AddCommand(DukeCommand tType, String title, boolean isDone, LocalDateTime date1, LocalDateTime date2) {
         this.tType = tType;
         this.title = title;
@@ -36,6 +60,11 @@ public class AddCommand extends Command{
         this.date2 = date2;
     }
 
+    /**
+     * Add task to database and print the output.
+     * 
+     * @see Command#execute(DukeRepo, Ui)
+     */
     @Override
     public void execute(DukeRepo db, Ui ui) throws InvalidTaskTypeException {
         ui.println(Message.ADD_TASK);
@@ -43,6 +72,12 @@ public class AddCommand extends Command{
         ui.println(String.format(Message.COUNT_TASK, db.count()));
     }
 
+    /**
+     * Produces the corresponding task object for add command variants.
+     * 
+     * @return {@link Task} object
+     * @throws InvalidTaskTypeException
+     */
     public Task getTask() throws InvalidTaskTypeException {
         switch (tType) {
             case TODO:
@@ -56,9 +91,12 @@ public class AddCommand extends Command{
         }
     }
 
+    /**
+     * @see Command#isExit()
+     */
     @Override
     public boolean isExit() {
         return false;
     }
-    
+
 }

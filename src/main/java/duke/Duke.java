@@ -23,6 +23,9 @@ public class Duke {
         ui = new Ui();
     }
 
+    /**
+     * Starts an interative console session with duke agent.
+     */
     public void run() {
         ui.showWelcome();
         boolean isExit = false;

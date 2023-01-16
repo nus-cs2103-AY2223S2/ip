@@ -1,7 +1,10 @@
 package duke.constant;
 
+/**
+ * Message strings of duke
+ */
 public class Message {
-    /* Exception constants */
+    /* Exception messages */
     public static final String EXCEPTION_INVALID_CMD_ARGS = "Invalid command arguments.";
     public static final String EXCEPTION_INVALID_TODO_CMD = "The description of a todo cannot be empty.";
     public static final String EXCEPTION_INVALID_EVENT_CMD = "Invalid event command.";
@@ -18,6 +21,7 @@ public class Message {
     public static final String EXCEPTION_INVALID_TASK_TYPE = "Invalid task type, please verify data file.";
     public static final String EXCEPTION_INVALID_DATE_FORMAT = "Invalid date argument format.";
 
+    /* Normal messages */
     public static final String LIST_TASKS = "Here are the tasks in your list:";
     public static final String BYE = "Bye. Hope to see you again soon!";
     public static final String MARK_TASK = "Nice! I've marked this task as done:";

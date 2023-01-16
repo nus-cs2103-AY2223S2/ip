@@ -16,16 +16,30 @@ import duke.utils.DateUtil;
 
 public class ListCommand extends Command {
 
+    // Todo: change to localdatetime type
     private String filterDate;
 
+    /**
+     * Default constructor
+     */
     public ListCommand() {
         this.filterDate = "";
     }
 
+    /**
+     * Default constructor with filter option
+     * 
+     * @param filterDate
+     */
     public ListCommand(String filterDate) {
         this.filterDate = filterDate;
     }
 
+    /**
+     * List all task from database and print the list.
+     * 
+     * @see Command#execute(DukeRepo, Ui)
+     */
     @Override
     public void execute(DukeRepo db, Ui ui) throws InvalidCommandArgsException {
         try {
@@ -50,7 +64,7 @@ public class ListCommand extends Command {
                     return false;
                 }).collect(Collectors.toList());
             }
-    
+
             ui.println(Message.LIST_TASKS);
             for (int i = 0; i < filtered.size(); i++) {
                 ui.println(String.format("\t%d. %s", i + 1, filtered.get(i)));
@@ -61,9 +75,12 @@ public class ListCommand extends Command {
 
     }
 
+    /**
+     * @see Command#isExit()
+     */
     @Override
     public boolean isExit() {
         return false;
     }
-    
+
 }

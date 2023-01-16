@@ -14,40 +14,75 @@ import duke.exception.DukeException;
 import duke.parser.Parser;
 import duke.task.Task;
 
+/**
+ * A DAO layer for file storage
+ */
 class DukeLocalDatabase {
 
     private static final String DATA_FILE_DIR = "data";
     private static final String DATA_FILE_PATH = "duke.txt";
     private List<Task> tasks;
 
+    /**
+     * Default constructor
+     */
     public DukeLocalDatabase() {
         tasks = new ArrayList<Task>();
         open();
     }
 
+    /**
+     * Retrives all entries from list
+     * 
+     * @return {@link Task} List
+     */
     public List<Task> getAllTask() {
         return tasks;
     }
 
+    /**
+     * Retrives an entry from list by id
+     * 
+     * @param taskId int
+     * @return {@link Task} object
+     */
     public Task getTask(int taskId) {
         return tasks.get(taskId - 1);
     }
 
+    /**
+     * Add an entry to list
+     * 
+     * @param task {@link Task} object
+     * @return {@link Task} object
+     */
     public Task addTask(Task task) {
         tasks.add(task);
         return task;
     }
 
+    /**
+     * Update an entry from list by id
+     * 
+     * @param taskId int
+     * @return {@link Task} object
+     */
     public Task updateTask(int taskid, Task task) {
         return tasks.set(taskid, task);
     }
 
+    /**
+     * Remove an entry from list by id
+     * 
+     * @param taskId
+     * @return {@link Task} object
+     */
     public Task removeTask(int taskId) {
         return tasks.remove(taskId - 1);
     }
 
     /**
-     * Load tasks from local file.
+     * Load tasks from local csv file.
      */
     void open() {
         try {
@@ -69,7 +104,7 @@ class DukeLocalDatabase {
     }
 
     /**
-     * Save the on memory task list to local file.
+     * Save the on memory task list to local csv file.
      */
     public void close() {
         try {
@@ -91,6 +126,11 @@ class DukeLocalDatabase {
         }
     }
 
+    /**
+     * The number of entries in list.
+     * 
+     * @return int
+     */
     public int count() {
         return tasks.size();
     }

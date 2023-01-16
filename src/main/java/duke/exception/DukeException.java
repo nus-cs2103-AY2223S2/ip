@@ -5,6 +5,10 @@ package duke.exception;
  */
 public class DukeException extends Exception {
 
+    /**
+     * Default constructor.
+     * @param errorMessage
+     */
     public DukeException(String errorMessage) {  
         super(errorMessage);
     }  
