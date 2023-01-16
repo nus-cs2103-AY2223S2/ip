@@ -39,7 +39,7 @@ public class Duke {
                 int byStart = cmd.indexOf("/from");
                 int toStart = cmd.indexOf("/to");
                 String taskName = cmd.substring(6, byStart - 1);
-                String by = cmd.substring(byStart + 6, toStart-1);
+                String by = cmd.substring(byStart + 6, toStart - 1);
                 String to = cmd.substring(toStart + 4);
                 tasks.addTask(new Event(taskName, by, to));
             } else {
