@@ -20,9 +20,9 @@ import java.util.Scanner;
  */
 
 public class Storage {
-    public final String filePath;
-    public final Path folder;
-    public final File storageFile;
+    private final String filePath;
+    private final Path folder;
+    private final File storageFile;
 
 
     /**
@@ -42,11 +42,22 @@ public class Storage {
         this.storageFile = new File(this.filePath);
     }
 
+    /**
+     * Load the TaskList from the given data file. If the file does not exist return
+     * a new empty TaskList.
+     *
+     * @return Return the TaskList parsed from the given file
+     * @throws InvalidInputException Throws InvalidInputException when the Storage file
+     * has unrecognized record
+     * @throws StorageFileIOException Throws StoreFileIoException when encountering
+     * IOException when reading the file
+     */
     public TaskList load() throws InvalidInputException, StorageFileIOException {
         TaskList list = new TaskList();
         if (!storageFile.exists()) {
             return list;
         }
+
         try {
             Scanner sc = new Scanner(storageFile);
             while (sc.hasNextLine()) {
@@ -90,23 +101,35 @@ public class Storage {
     //@@author Yufannnn-reused
     //https://nus-cs2103-ay2223s2.github.io/website/schedule/week3/topics.html#W3-4c
     //with minor modification, nice and concise function to overwrite text to a given file.
-    public void writeToFile(String filePath, String textToAdd) throws IOException {
+    private void writeToFile(String filePath, String textToAdd) throws IOException {
         FileWriter fw = new FileWriter(filePath);
         fw.write(textToAdd);
         fw.close();
     }
     //@@author
 
-    public void save(TaskList list) throws IOException {
+    /**
+     * Saves the current TaskList to the given file by overwriting it.
+     *
+     * @param list The given file to be saved.
+     * @throws StorageFileIOException Throws StoreFileIoException when encountering
+     * IOException when writing to the file
+     */
+    public void save(TaskList list) throws StorageFileIOException {
         if (!this.folder.toFile().exists()) {
             folder.toFile().mkdirs();
         }
 
         StringBuilder record = new StringBuilder();
-        for (int i = 0; i < list.remainingTasks(); i++) {
-            DukeTask task = list.getTask(i);
-            record.append(task.storageString()).append(System.lineSeparator());
+
+        try {
+            for (int i = 0; i < list.remainingTasks(); i++) {
+                DukeTask task = list.getTask(i);
+                record.append(task.storageString()).append(System.lineSeparator());
+            }
+            writeToFile(filePath, record.toString());
+        } catch (IOException e) {
+            throw new StorageFileIOException("\"☹ OOPS!!! There's something wrong when writing to the Storage file\"");
         }
-        writeToFile(filePath, record.toString());
     }
 }

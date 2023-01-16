@@ -5,10 +5,23 @@ import duke.exception.InvalidInputException;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
+/**
+ * A DeadlineTask that encapsulates the information and starting and ending
+ * dates of a Deadline Task.
+ */
 public class EventTask extends DukeTask {
     private final LocalDate from;
     private final LocalDate to;
 
+    /**
+     * Constructor for EventTask that takes in the information of the task
+     * and its starting date and ending date.
+     *
+     * @param info The information of the task
+     * @param from The starting date of the task
+     * @param to The ending date of the task
+     * @throws InvalidInputException Throws exception when the staring date is after the end date
+     */
     public EventTask(String info, LocalDate from, LocalDate to) throws InvalidInputException {
         super(info, TaskType.EVENT);
         this.from = from;

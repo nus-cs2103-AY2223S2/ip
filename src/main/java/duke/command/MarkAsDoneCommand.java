@@ -7,8 +7,6 @@ import duke.storage.Storage;
 import duke.task.DukeTask;
 import duke.task.TaskList;
 
-import java.io.IOException;
-
 /**
  * A MarkAsDoneCommand class that encapsulates the actions of changing the status
  * of a Task to be done.
@@ -47,14 +45,16 @@ public class MarkAsDoneCommand extends Command {
     }
 
     /**
-     * Checks whether the index is valid with respect to the given list.
+     * Marks the list with the given index as done.
      *
      * @param tasks The user TaskList that contains all the task to be manipulated
+     * @param ui The ui Object used to display information
+     * @param storage The Storage Object used to save and load the TaskList
      * @throws DukeException Throws exception if the list is empty
      * or the given index is our of range
      */
     @Override
-    public void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException, IOException {
+    public void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
         if (isEmpty(tasks)) {
             String errorMessage = "☹ OOPS!!! Your task list is currently empty";
             throw new InvalidInputException(errorMessage + "\nPlease add in more tasks");

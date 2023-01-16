@@ -5,8 +5,6 @@ import duke.exception.DukeException;
 import duke.storage.Storage;
 import duke.task.TaskList;
 
-import java.io.IOException;
-
 /**
  * An abstract instruction class encapsulating a user input instruction in Duke, which can be extended
  * by more specific input instructions like addToDoInstruction, ExitInstructions, etc.
@@ -26,7 +24,10 @@ public abstract class Command {
      * Execute the respective instructions.
      *
      * @param tasks The user TaskList that contains all the task to be manipulated
-     * @throws DukeException Throws Exceptions when user input invalid instruction
+     * @param ui The ui Object used to display information
+     * @param storage The Storage Object used to save and load the TaskList
+     * @throws DukeException Throws Exception when the user inputs invalid instruction or
+     * when encountering issues reading or writing to the storage file.
      */
-    public abstract void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException, IOException;
+    public abstract void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException;
 }

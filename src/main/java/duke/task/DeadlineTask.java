@@ -4,9 +4,18 @@ import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.Objects;
 
+/**
+ * A DeadlineTask that encapsulates the information and deadline date of a Deadline Task.
+ */
 public class DeadlineTask extends DukeTask {
     private final LocalDate deadline;
 
+    /**
+     * Constructor for DeadlineTask that takes in the information of the task and its Deadline.
+     *
+     * @param info The information of the task
+     * @param deadline The deadline of the task
+     */
     public DeadlineTask(String info, LocalDate deadline) {
         super(info, TaskType.DEADLINE);
         this.deadline = deadline;

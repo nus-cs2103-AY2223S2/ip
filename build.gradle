@@ -12,10 +12,6 @@ repositories {
     mavenCentral()
 }
 
-application {
-    mainClassName = "duke.Duke"
-}
-
 test {
     useJUnitPlatform()
 }
