@@ -6,28 +6,28 @@ public class Duke {
 
   public static String seperator(String out) {
     String line = "____________________________________________________________\n";
-    return line + " " + out + "\n" + line;
+    return line + out + line;
   }
 
   public static String greeting() {
-    return seperator("Nyahello! I'm Nyako!\n What can I do for you nya?");
+    return seperator(" Nyahello! I'm Nyako!\n What can I do for you nya?\n");
   }
 
-  public static void addTask(String description) {
+  public static String addTask(String description) {
     taskList.add(new Task(description));
+    return seperator(" added: " + description + "\n");
   }
 
-  public static void listTasks() {
-    String line = "____________________________________________________________\n";
-    System.out.println(line);
+  public static String listTasks() {
+    String output = "";
     for (Task t : taskList) {
-      System.out.println(t);
+      output += " " + t;
     }
-    System.out.println(line);
+    return seperator(output);
   }
 
   public static String bye() {
-    return seperator("Bye bye nya!");
+    return seperator(" Bye bye nya!\n");
   }
 
   public static void main(String[] args) {
@@ -35,10 +35,12 @@ public class Duke {
     System.out.println(greeting());
     String command = sc.nextLine();
     while (!command.equals("bye")) {
-      if (command.equals("add")) {
-        addTask(description);
+      if (command.equals("list")) {
+        System.out.println(listTasks());
+      } else {
+        System.out.println(addTask(command));
       }
-      command = sc.next();
+      command = sc.nextLine();
     }
     System.out.println(bye());
     sc.close();

@@ -11,6 +11,6 @@ public class Task {
 
   @Override
   public String toString() {
-    return String.format(" %d. %s\n", this.id, this.description);
+    return String.format("%d. %s\n", this.id, this.description);
   }
 }
