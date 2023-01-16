@@ -1,22 +1,17 @@
 package duke;
 
 import org.junit.jupiter.api.Test;
-import static org.junit.jupiter.api.Assertions.*;
+
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class DukeTest {
-
     @Test
-    public void testTest() {
-        assertTrue(true);
+    public void dummyTest(){
+        assertEquals(2, 2);
     }
 
     @Test
-    public void testTest2() {
-        assertEquals(0, 0);
-    }
-
-    @Test
-    public void testTest3() {
-        assertNotEquals(1, 2);
+    public void anotherDummyTest(){
+        assertEquals(4, 4);
     }
 }

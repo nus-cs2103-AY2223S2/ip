@@ -20,6 +20,11 @@ public class ExitCommand extends Command {
         System.exit(0);
     }
 
+    /**
+     * Indicates that this Command is the exit Command.
+     *
+     * @return always return true
+     */
     @Override
     public boolean isExit() {
         return true;

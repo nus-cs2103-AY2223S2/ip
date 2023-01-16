@@ -7,7 +7,6 @@ import duke.parser.Parser;
 import duke.storage.Storage;
 import duke.task.TaskList;
 
-import java.io.FileNotFoundException;
 import java.io.IOException;
 
 public class Duke {
@@ -23,13 +22,12 @@ public class Duke {
         try {
             list = storage.load();
             System.out.println(list);
-        } catch (FileNotFoundException e) {
-            ui.displayWithBar("Warning: something went wrong when loading the TaskList\n" +
-                    e.getMessage());
-            list = new TaskList();
         } catch (InvalidInputException e) {
             ui.displayWithBar(e.getMessage());
             list = new TaskList();
+        } catch (StorageFileIOException e) {
+            ui.displayWithBar(e.getMessage());
+            throw new RuntimeException(e);
         }
     }
 

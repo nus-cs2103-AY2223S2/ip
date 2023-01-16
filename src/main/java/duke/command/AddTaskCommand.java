@@ -37,4 +37,22 @@ public class AddTaskCommand extends Command {
                 + "\nNow you have " + tasks.remainingTasks() + " tasks in the list.";
         ui.displayWithBar(message);
     }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (obj == this) {
+            return true;
+        }
+        if (!(obj instanceof AddTaskCommand)) {
+            return false;
+        }
+        AddTaskCommand ddlObj = (AddTaskCommand) obj;
+
+        return this.task.equals(ddlObj.task);
+    }
+
+    @Override
+    public String toString() {
+        return "Add Task: " + this.task;
+    }
 }

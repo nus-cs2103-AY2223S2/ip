@@ -17,6 +17,14 @@ import java.util.regex.Pattern;
 */
 
 public class Parser {
+    /**
+     * A parse method that takes in an String representation of a Command, using
+     * regular expression to parse it can construct to a Command object.
+     *
+     * @param input The given String of Command to be parsed by the parser
+     * @return The actual Command objected represented by the given input String
+     * @throws DukeException Throws exception when invalid input is given
+     */
     public static Command parse(String input) throws DukeException {
         Pattern emptyStringChecker = Pattern.compile("\\S.*+");
 
@@ -42,7 +50,7 @@ public class Parser {
             if (numberChecker.matches()) {
                 return new MarkAsDoneCommand(Integer.parseInt(information) - 1);
             } else {
-                throw new InvalidInputException("The input task index is not a number,\n" +
+                throw new InvalidInputException("☹ OOPS!!! The input task index is not a number,\n" +
                         "Please input a valid task index");
             }
         } else if (instructionTag.equalsIgnoreCase("unmark")) {
@@ -50,7 +58,7 @@ public class Parser {
             if (numberChecker.matches()) {
                 return new UnmarkCommand(Integer.parseInt(information) - 1);
             } else {
-                throw new InvalidInputException("The input task index is not a number,\n" +
+                throw new InvalidInputException("☹ OOPS!!! The input task index is not a number,\n" +
                         "Please input a valid task index");
             }
         } else if(instructionTag.equalsIgnoreCase("delete")) {
@@ -58,7 +66,7 @@ public class Parser {
             if (numberChecker.matches()) {
                 return new DeleteCommand(Integer.parseInt(information) - 1);
             } else {
-                throw new InvalidInputException("The input task index is not a number,\n" +
+                throw new InvalidInputException("☹ OOPS!!! The input task index is not a number,\n" +
                         "Please input a valid task index");
             }
         } else if (instructionTag.equalsIgnoreCase("todo")) {

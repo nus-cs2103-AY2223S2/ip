@@ -13,6 +13,11 @@ import java.io.IOException;
  */
 
 public abstract class Command {
+    /**
+     * Indicates whether the Command is the Exit Command.
+     *
+     * @return whether the command is the exit command.
+     */
     public boolean isExit() {
         return false;
     }
