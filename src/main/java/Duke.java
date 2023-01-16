@@ -3,14 +3,10 @@ import java.util.Scanner;
 public class Duke {
 
     private static Scanner scanner = new Scanner(System.in);
-    private static final String GREETING = "Hello, I am Duke.\n" +
-            "What can I do for you?";
     private static final String EXIT_COMMAND = "bye";
-    private static final String BYE = "Goodbye. I hope to see you again.";
-    private static final String PROMPT_SYMBOL = ">";
-    private static final String FORMAT_LINE = "___________________________";
 
     private static String formatMessage(String message) {
+        String FORMAT_LINE = "___________________________";
         return FORMAT_LINE + "\n" +
                 message + "\n" +
                 FORMAT_LINE;
@@ -25,11 +21,12 @@ public class Duke {
     }
 
     private static void printPromptForInput() {
-        System.out.print(PROMPT_SYMBOL);
+        System.out.print(">");
     }
 
     private static void greet() {
-        printMessage(GREETING);
+        printMessage("Hello, I am Duke.\n" +
+                "What can I do for you?");
     }
 
     private static boolean isExitCommand(String input) {
@@ -55,7 +52,7 @@ public class Duke {
     }
 
     private static void sayGoodbye() {
-        printMessage(BYE);
+        printMessage("Goodbye. I hope to see you again.");
     }
 
     public static void main(String[] args) {
