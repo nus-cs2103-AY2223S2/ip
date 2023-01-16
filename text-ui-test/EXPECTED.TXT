@@ -7,6 +7,9 @@ Hello I am
 
 What Can I do for you?
 >>> 
+OOPS!!! I'm sorry, but I don't know what that means :-(
+
+>>> 
 Here are the tasks in your list:
 
 
@@ -40,6 +43,9 @@ Nice! I've marked this task as done:
 => [E][X] taekwondo training (from: monday 7pm to: 9pm)
 
 >>> 
+OOPS!!! The index given is out of range.
+
+>>> 
 Here are the tasks in your list:
 1. [T][X] mark exam papers
 2. [D][ ] complete CS2103T IP (by: week 2)
@@ -48,6 +54,9 @@ Here are the tasks in your list:
 >>> 
 OK, I've marked this task as not done yet:
 => [E][ ] taekwondo training (from: monday 7pm to: 9pm)
+
+>>> 
+OOPS!!! I'm sorry, but I don't know what that means :-(
 
 >>> 
 Here are the tasks in your list:

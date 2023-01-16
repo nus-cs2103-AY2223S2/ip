@@ -11,11 +11,11 @@ public class Tasks {
     return index >= 0 && index < tasks.size();
   }
 
-  public Task getTask(int index) {
-    if (taskExists(index)) {
-      return tasks.get(index);
+  public Task getTask(int index) throws DukeException {
+    if (!taskExists(index)) {
+      throw new DukeException("OOPS!!! The index given is out of range.");
     }
-    return null;
+    return tasks.get(index);
   }
 
   public void addTask(Task task) {
@@ -29,23 +29,15 @@ public class Tasks {
     return tasks.size();
   }
   
-  public void markTask(int index) {
+  public void markTask(int index) throws DukeException {
     Task t = getTask(index);
-    if (t == null) {
-      System.out.println("Sorry, the task does not exist.");
-      return;
-    }
     t.mark();
     System.out.println("Nice! I've marked this task as done:");
     System.out.printf("=> %s\n", t);
   }
 
-  public void unmarkTask(int index) {
+  public void unmarkTask(int index) throws DukeException {
     Task t = getTask(index);
-    if (t == null) {
-      System.out.println("Sorry, the task does not exist.");
-      return;
-    }
     t.unmark();
     System.out.println("OK, I've marked this task as not done yet:");
     System.out.printf("=> %s\n", t);
