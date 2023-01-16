@@ -24,87 +24,108 @@ public class Duke {
         int numTasks = 0;
 
         while (!inputArr[0].equalsIgnoreCase("bye")) {
-            switch (inputArr[0]) {
-                case "list":
-                    System.out.println("    ____________________________________________________________");
-                    for (int i = 0; i < tasks.size(); i++) {
-                        System.out.println("     " + (i + 1) + ". " + tasks.get(i).toString());
-                    }
-                    System.out.println("    ____________________________________________________________");
-                    break;
-                case "todo":
-                    String todoDesc = input.split(" ",2)[1];
-                    tasks.add(new ToDo(todoDesc));
-                    numTasks++;
-                    System.out.println(
-                            "    ____________________________________________________________"
-                                    + "\n     Got it. I've added this task:\n "
-                                    + tasks.get(numTasks - 1).toString()
-                                    + "\n     Now you have "
-                                    + numTasks
-                                    +" tasks in the list."
-                                    + "\n    ____________________________________________________________");
-                    break;
-                case "deadline":
-                    String deadlineInput = input.split(" ",2)[1];
-                    String[] deadlineDesc = deadlineInput.split(" /by ");
-                    tasks.add(new Deadline(deadlineDesc[0], deadlineDesc[1]));
-                    numTasks++;
-                    System.out.println(
-                            "    ____________________________________________________________"
-                                    + "\n     Got it. I've added this task:\n "
-                                    + tasks.get(numTasks - 1).toString()
-                                    + "\n     Now you have "
-                                    + numTasks
-                                    +" tasks in the list."
-                                    + "\n    ____________________________________________________________");
-                    break;
-                case "event":
-                    String eventInput = input.split(" ",2)[1];
-                    String[] eventDescArr = eventInput.split(" /from ");
-                    String eventDesc = eventDescArr[0];
-                    String[] eventTimeArr = eventDescArr[1].split(" /to ");
-                    String eventFrom = eventTimeArr[0];
-                    String eventTo = eventTimeArr[1];
-                    tasks.add(new Event(eventDesc, eventFrom, eventTo));
-                    numTasks++;
-                    System.out.println(
-                            "    ____________________________________________________________"
-                                    + "\n     Got it. I've added this task:\n "
-                                    + tasks.get(numTasks - 1).toString()
-                                    + "\n     Now you have "
-                                    + numTasks
-                                    +" tasks in the list."
-                                    + "\n    ____________________________________________________________");
-                    break;
-                case "mark":
-                    selectedNum = Integer.parseInt(inputArr[1]) - 1;
-                    tasks.get(selectedNum).markDone();
-                    System.out.println(
-                            "    ____________________________________________________________"
-                            + "\n     Nice! I've marked this task as done:"
-                            + tasks.get(selectedNum).toString()
-                            + "\n    ____________________________________________________________");
-                    break;
-                case "unmark":
-                    selectedNum = Integer.parseInt(inputArr[1]) - 1;
-                    tasks.get(selectedNum).markUndone();
-                    System.out.println(
-                            "    ____________________________________________________________"
-                            + "\n     OK, I've marked this task as not done yet:"
-                            + tasks.get(selectedNum).toString()
-                            + "\n    ____________________________________________________________");
-                    break;
-                default:
-                    tasks.add(new Task(input));
-                    numTasks++;
-                    String output = "    ____________________________________________________________"
-                            + "\n      added: "
-                            + input
-                            + "\n    ____________________________________________________________";
-                    System.out.println(output);
-                    break;
+            try {
+                switch (inputArr[0]) {
+                    case "list":
+                        System.out.println("    ____________________________________________________________");
+                        for (int i = 0; i < tasks.size(); i++) {
+                            System.out.println("     " + (i + 1) + ". " + tasks.get(i).toString());
+                        }
+                        System.out.println("    ____________________________________________________________");
+                        break;
+                    case "todo":
+                        String todoDesc;
+                        try {
+                            todoDesc = input.split(" ", 2)[1];
+                        } catch (Exception e) {
+                            throw new DukeException("Description of todo cannot be empty!!");
+                        }
+                        tasks.add(new ToDo(todoDesc));
+                        numTasks++;
+                        System.out.println(
+                                "    ____________________________________________________________"
+                                        + "\n     Got it. I've added this task:\n "
+                                        + tasks.get(numTasks - 1).toString()
+                                        + "\n     Now you have "
+                                        + numTasks
+                                        +" tasks in the list."
+                                        + "\n    ____________________________________________________________");
+                        break;
+                    case "deadline":
+                        String deadlineInput;
+                        try {
+                            deadlineInput = input.split(" ", 2)[1];
+                        } catch (Exception e) {
+                            throw new DukeException("Description of deadline cannot be empty!!");
+                        }
+                        String[] deadlineDesc = deadlineInput.split(" /by ");
+                        tasks.add(new Deadline(deadlineDesc[0], deadlineDesc[1]));
+                        numTasks++;
+                        System.out.println(
+                                "    ____________________________________________________________"
+                                        + "\n     Got it. I've added this task:\n "
+                                        + tasks.get(numTasks - 1).toString()
+                                        + "\n     Now you have "
+                                        + numTasks
+                                        +" tasks in the list."
+                                        + "\n    ____________________________________________________________");
+                        break;
+                    case "event":
+                        String eventInput;
+                        try {
+                            eventInput = input.split(" ", 2)[1];
+                        } catch (Exception e) {
+                            throw new DukeException("Description of event cannot be empty!!");
+                        }
+                        String[] eventDescArr = eventInput.split(" /from ");
+                        String eventDesc = eventDescArr[0];
+                        String[] eventTimeArr = eventDescArr[1].split(" /to ");
+                        String eventFrom = eventTimeArr[0];
+                        String eventTo = eventTimeArr[1];
+                        tasks.add(new Event(eventDesc, eventFrom, eventTo));
+                        numTasks++;
+                        System.out.println(
+                                "    ____________________________________________________________"
+                                        + "\n     Got it. I've added this task:\n "
+                                        + tasks.get(numTasks - 1).toString()
+                                        + "\n     Now you have "
+                                        + numTasks
+                                        +" tasks in the list."
+                                        + "\n    ____________________________________________________________");
+                        break;
+                    case "mark":
+                        selectedNum = Integer.parseInt(inputArr[1]) - 1;
+                        tasks.get(selectedNum).markDone();
+                        System.out.println(
+                                "    ____________________________________________________________"
+                                        + "\n     Nice! I've marked this task as done:"
+                                        + tasks.get(selectedNum).toString()
+                                        + "\n    ____________________________________________________________");
+                        break;
+                    case "unmark":
+                        selectedNum = Integer.parseInt(inputArr[1]) - 1;
+                        tasks.get(selectedNum).markUndone();
+                        System.out.println(
+                                "    ____________________________________________________________"
+                                        + "\n     OK, I've marked this task as not done yet:"
+                                        + tasks.get(selectedNum).toString()
+                                        + "\n    ____________________________________________________________");
+                        break;
+                    default:
+                        throw new DukeException("I don't get it!");
+//                    tasks.add(new Task(input));
+//                    numTasks++;
+//                    String output = "    ____________________________________________________________"
+//                            + "\n      added: "
+//                            + input
+//                            + "\n    ____________________________________________________________";
+//                    System.out.println(output);
+//                    break;
+                }
+            } catch (DukeException d) {
+                System.out.println(d.getMessage());
             }
+
             input = sc.nextLine();
             inputArr = input.split(" ");
         }
