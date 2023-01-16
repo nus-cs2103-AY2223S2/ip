@@ -62,6 +62,12 @@ public class Duke {
             }
             execEvent(inputSplit[1], tasks);
             break;
+          case "delete":
+            if (inputSplit.length < 2) {
+              throw new DukeException("Delete command missing list numbering.");
+            }
+            execDeleteTask(inputSplit[1], tasks);
+            break;
           default:
             throw new DukeException("Sorry but I don't understand what this means.");
         }
@@ -113,12 +119,12 @@ public class Duke {
     boolean isNumber = p.matcher(indexStr).matches();
 
     if (!isNumber) {
-      throw new DukeException("Index not an integer");
+      throw new DukeException("Index provided is not an integer.");
     }
 
     int index = Integer.parseInt(indexStr) - 1;
     if (index < 0 || index >= tasks.size()) {
-      throw new DukeException("Index out of bounds of tasks list");
+      throw new DukeException("Index out of bounds of tasks list.");
     }
 
     return index;
@@ -197,5 +203,22 @@ public class Duke {
     Task event = new Event(splitData1[0], splitData2[0], splitData2[1]);
     tasks.add(event);
     printTask(event, tasks.size());
+  }
+
+  public static void execDeleteTask(String indexStr, ArrayList<Task> tasks)
+      throws DukeException {
+    int index = isValidIndex(indexStr, tasks);
+
+    Task task = tasks.get(index);
+    tasks.remove(index);
+
+    String msgHeader = "I've deleted this task from the list:";
+    String msgFooter = String.format("Now you have a total of %s tasks in the list", tasks.size());
+
+    System.out.println(spacer);
+    System.out.println(msgHeader);
+    System.out.println(task);
+    System.out.println(msgFooter);
+    System.out.println(spacer);
   }
 }
