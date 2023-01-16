@@ -2,6 +2,8 @@ import java.util.Scanner;
 
 public class Duke {
 
+    private static DukeList ls = new DukeList();
+
     public static void main(String[] args) {
         String logo = " ____        _        \n"
                 + "|  _ \\ _   _| | _____ \n"
@@ -26,8 +28,22 @@ public class Duke {
     }
 
     private static void respond(String chat) {
+        if (chat.equals("list")) {
+            String response = "";
+            for (String task : ls.getList()) {
+                response += task;
+                response += "\n";
+            }
+            print(response);
+        } else {
+            ls.addTask(chat);
+            print("added: " + chat);
+        }
+    }
+
+    private static void print(String response) {
         System.out.println("----------------------------------");
-        System.out.println(chat);
+        System.out.println(response);
         System.out.println("----------------------------------");
     }
 }
