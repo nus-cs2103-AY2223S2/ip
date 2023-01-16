@@ -26,10 +26,13 @@ public class Duke {
     String numberFormatException = "You entered an invalid"
         + " number.\n"
         + "Please try again!";
+    String inputFormatException = "You entered an invalid"
+        + " command template.\n"
+        + "Please try again!";
 
     while (cont) {
       String input = scanner.nextLine();
-      String[] inputSplit = input.split(" ");
+      String[] inputSplit = input.split(" ", 2);
       int index;
       switch (inputSplit[0]) {
         case "bye":
@@ -62,6 +65,36 @@ public class Duke {
             }
           } catch (NumberFormatException e) {
             printMsg(numberFormatException);
+          }
+          break;
+        case "todo":
+          Task todo = new Todo(inputSplit[1]);
+          tasks.add(todo);
+          printTask(todo, tasks.size());
+          break;
+        case "deadline":
+          String[] deadlineData = inputSplit[1].split(" /by ", 2);
+          if (deadlineData.length > 1) {
+            Task deadline = new Deadline(deadlineData[0], deadlineData[1]);
+            tasks.add(deadline);
+            printTask(deadline, tasks.size());
+          } else {
+            printMsg(inputFormatException);
+          }
+          break;
+        case "event":
+          String[] eventData1 = inputSplit[1].split(" /from ", 2);
+          if (eventData1.length > 1) {
+            String[] eventData2 = eventData1[1].split(" /to ", 2);
+            if (eventData2.length > 1) {
+              Task event = new Event(eventData1[0], eventData2[0], eventData2[1]);
+              tasks.add(event);
+              printTask(event, tasks.size());
+            } else {
+              printMsg(inputFormatException);
+            }
+          } else {
+            printMsg(inputFormatException);
           }
           break;
         default:
@@ -120,6 +153,19 @@ public class Duke {
     System.out.println(spacer);
     System.out.println(msgHeader);
     System.out.println(task);
+    System.out.println(spacer);
+  }
+
+  public static void printTask(Task task, int size) {
+    String spacer = "____________________"
+        + "______________________";
+    String msgHeader = "I've added this task into the list:";
+    String msgFooter = String.format("Now you have a total of %s tasks in the list", size);
+
+    System.out.println(spacer);
+    System.out.println(msgHeader);
+    System.out.println(task);
+    System.out.println(msgFooter);
     System.out.println(spacer);
   }
 }
