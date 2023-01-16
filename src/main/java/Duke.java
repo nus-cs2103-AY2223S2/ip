@@ -59,7 +59,7 @@ public class Duke {
                         if (taskToMark == taskCount) {
                             t.markAsDone();
                             System.out.println("Nice! I've marked this task as done:");
-                            System.out.println(t);
+                            System.out.println("    " + t);
                             break;
                         } else {
                             taskCount++;
@@ -82,7 +82,7 @@ public class Duke {
                         if (taskToMark == taskCount) {
                             t.markAsUndone();
                             System.out.println("OK, I've marked this task as not done yet:");
-                            System.out.println(t);
+                            System.out.println("    " + t);
                             break;
                         } else {
                             taskCount++;
