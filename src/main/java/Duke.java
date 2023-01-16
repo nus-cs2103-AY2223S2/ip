@@ -9,87 +9,155 @@ public class Duke {
         String greet = "Hello! I'm Duke\nWhat can I do for you?";
         System.out.println(greet);
 
-        // Take user input
         List<Task> taskList = new ArrayList<>();
+
+        /*
+        Initialize the scanner to take in a user input.
+        The first word is taken as the command. The subsequent words are
+        for the command description.
+         */
         Scanner sc = new Scanner(System.in);
 
+        bot:
         while (sc.hasNext()) {
-            String currentTask = sc.nextLine();
+            String command = sc.next();
+            String description = sc.nextLine();
 
-            // Command for bye
-            if (currentTask.equals("bye")) {
-                String goodbye = "Bye. Hope to see you again soon!";
-                System.out.println(goodbye);
-                break;
-            }
+            switch (command) {
+                // Command for bye
+                case "bye":
+                    String goodbye = "Bye. Hope to see you again soon!";
+                    System.out.println(goodbye);
+                    break bot;
 
-            // Command for list
-            else if (currentTask.equals("list")) {
-                System.out.println("Here are the tasks in your list:");
-                int taskCount = 1;
-                for (Task t: taskList) {
-                    System.out.println(taskCount + "." + t);
-                    taskCount++;
-                }
-            }
-
-            // Command to mark as done
-            else if (currentTask.equals("mark")) {
-                System.out.println("Which task do you want to mark as done?");
-                int taskToMark = Integer.parseInt(sc.nextLine());
-                int taskCount = 1;
-
-                for (Task t : taskList) {
-                    if (taskToMark == taskCount) {
-                        t.markAsDone();
-                        System.out.println("Nice! I've marked this task as done:");
-                        System.out.println(t);
-                        break;
+                // Command for list
+                case "list": {
+                    if (taskList.size() > 0) {
+                        System.out.println("Here are the tasks in your list:");
+                        int taskCount = 0;
+                        for (Task t : taskList) {
+                            System.out.println(taskCount+1 + "." + t);
+                            taskCount++;
+                        }
                     } else {
-                        taskCount++;
+                        System.out.println("You have no tasks. Hooray!");
                     }
+                    break;
                 }
-            }
 
-            // Command to unmark
-            else if (currentTask.equals("unmark")) {
-                System.out.println("Which task do you want to mark as not done?");
-                int taskToMark = Integer.parseInt(sc.nextLine());
-                int taskCount = 1;
+                // Command to mark as done
+                case "mark": {
+                    description = description.substring(1);
+                    int taskToMark = Integer.parseInt(description) - 1;
+                    int taskCount = 0;
 
-                for (Task t : taskList) {
-                    if (taskToMark == taskCount) {
-                        t.markAsUndone();
-                        System.out.println("OK, I've marked this task as not done yet:");
-                        System.out.println(t);
-                        break;
+                    if (taskToMark > taskList.size()) {
+                        System.out.println("Sorry! The value you chose is out of bounds!");
+                    }
+
+                    for (Task t : taskList) {
+                        if (taskToMark == taskCount) {
+                            t.markAsDone();
+                            System.out.println("Nice! I've marked this task as done:");
+                            System.out.println(t);
+                            break;
+                        } else {
+                            taskCount++;
+                        }
+                    }
+                    break;
+                }
+
+                // Command to unmark
+                case "unmark": {
+                    description = description.substring(1);
+                    int taskToMark = Integer.parseInt(description) - 1;
+                    int taskCount = 0;
+
+                    if (taskToMark > taskList.size()) {
+                        System.out.println("Sorry! The value you chose is out of bounds!");
+                    }
+
+                    for (Task t : taskList) {
+                        if (taskToMark == taskCount) {
+                            t.markAsUndone();
+                            System.out.println("OK, I've marked this task as not done yet:");
+                            System.out.println(t);
+                            break;
+                        } else {
+                            taskCount++;
+                        }
+                    }
+                    break;
+                }
+
+                // Command to remove task
+                case "remove": {
+                    description = description.substring(1);
+                    int taskToRemove = Integer.parseInt(description) - 1;
+                    int taskCount = 0;
+
+                    if (taskToRemove > taskList.size()) {
+                        System.out.println("Sorry! The value you chose is out of bounds!");
+                    }
+
+                    for (Task t : taskList) {
+                        if (taskToRemove == taskCount) {
+                            System.out.println("Alright, removing this task:");
+                            System.out.println(t);
+                            taskList.remove(taskCount);
+                            if (taskList.size() == 1) {
+                                System.out.println("Now you have 1 task in the list.");
+                            } else if (taskList.size() == 0) {
+                                System.out.println("You have no tasks in the list.");
+                            } else {
+                                System.out.println("Now you have " + taskList.size() + " tasks in the list.");
+                            }
+                            break;
+                        } else {
+                            taskCount++;
+                        }
+                    }
+                    break;
+                }
+
+                // Command to add task
+                default:
+                    description = description.substring(1);
+
+                    // Adds task type
+                    if (command.equals("todo")) {
+                        System.out.println("Got it. I've added this task:");
+                        Todo todo = new Todo(description);
+                        taskList.add(todo);
+                        System.out.println("    " + todo);
+                    } else if (command.equals("deadline")) {
+                        String[] s = description.split("/");
+                        System.out.println("Got it. I've added this task:");
+                        Deadline deadline = new Deadline(s[0], s[1].substring(2));
+                        taskList.add(deadline);
+                        System.out.println("    " + deadline);
+                    } else if (command.equals("event")) {
+                        String[] s = description.split("/");
+                        System.out.println("Got it. I've added this task:");
+                        Event event = new Event(s[0], s[1].substring(4), s[2].substring(2));
+                        taskList.add(event);
+                        System.out.println("    " + event);
                     } else {
-                        taskCount++;
+                        System.out.println("Please specify the type of task!");
+                        System.out.println("Hint: todo, deadline, event");
                     }
-                }
-            }
 
-            // Command to remove task
-            else if (currentTask.equals("remove")) {
-                System.out.println("Which task do you want to remove?");
-                int taskToRemove = Integer.parseInt(sc.nextLine());
-                int taskCount = 1;
-
-                for (Task t : taskList) {
-                    if (taskToRemove - 1 == taskCount) {
-                        System.out.println("Alright, removing task.");
-                        taskList.remove(taskCount);
-                        break;
+                    // Grammar police
+                    if (taskList.size() == 1) {
+                        System.out.println("Now you have 1 task in the list.");
+                    } else if (taskList.size() == 0) {
+                        System.out.println("You have no tasks in the list.");
                     } else {
-                        taskCount++;
+                        System.out.println("Now you have " + taskList.size() + " tasks in the list.");
                     }
-                }
-            }
 
-            // Command to add task
-            else {
-                System.out.println("added: " + currentTask);
-                taskList.add(new Task(currentTask));
+                    break;
             }
         }
     }
