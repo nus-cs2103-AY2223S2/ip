@@ -9,10 +9,9 @@ public class TaskList {
         this.tasks = new ArrayList<>();
     }
 
-    public void handleListCommand() {
+    public void handleListCommand() throws DukeEmptyListException {
         if (this.tasks.size() == 0) {
-            System.out.println("The list is empty.");
-            return;
+            throw new DukeEmptyListException();
         }
 
         for (int i = 0; i < tasks.size(); i++) {
@@ -22,17 +21,18 @@ public class TaskList {
         }
     }
 
-    public void handleMarkUnmarkCommand(String[] tokens) {
+    public void handleMarkUnmarkCommand(String[] tokens)
+            throws DukeInvalidMarkCommandException, DukeInvalidUnmarkCommandException {
+
         String action = tokens[0];
         boolean isMark = action.equals("mark");
 
         if (tokens.length != 2) {
             if (isMark) {
-                System.out.println("Usage: mark <task no.>");
+                throw new DukeInvalidMarkCommandException();
             } else {
-                System.out.println("Usage: unmark <task no.>");
+                throw new DukeInvalidUnmarkCommandException();
             }
-            return;
         }
 
         int taskNumber;
@@ -41,20 +41,18 @@ public class TaskList {
             taskNumber = Integer.parseInt(tokens[1]);
         } catch (NumberFormatException e) {
             if (isMark) {
-                System.out.println("Usage: mark <task no.>");
+                throw new DukeInvalidMarkCommandException();
             } else {
-                System.out.println("Usage: unmark <task no.>");
+                throw new DukeInvalidUnmarkCommandException();
             }
-            return;
         }
 
         if (taskNumber < 1 || taskNumber > this.tasks.size()) {
             if (isMark) {
-                System.out.println("Usage: mark <task no.>");
+                throw new DukeInvalidMarkCommandException();
             } else {
-                System.out.println("Usage: unmark <task no.>");
+                throw new DukeInvalidUnmarkCommandException();
             }
-            return;
         }
 
         // need to convert back to 0-indexed
@@ -67,12 +65,11 @@ public class TaskList {
         }
     }
 
-    public void handleTodoCommand(String[] tokens) {
+    public void handleTodoCommand(String[] tokens) throws DukeInvalidTodoCommandException {
         String[] taskNameArray = Arrays.copyOfRange(tokens, 1, tokens.length);
 
         if (taskNameArray.length == 0) {
-            System.out.println("Usage: todo <task name>");
-            return;
+            throw new DukeInvalidTodoCommandException();
         }
 
         String taskName = String.join(" ", taskNameArray);
@@ -81,7 +78,7 @@ public class TaskList {
         this.addTask(newTodoTask);
     }
 
-    public void handleDeadlineCommand(String[] tokens) {
+    public void handleDeadlineCommand(String[] tokens) throws DukeInvalidDeadlineCommandException {
         int indexOfBy = -1;
 
         for (int i = 0; i < tokens.length; i++) {
@@ -94,16 +91,14 @@ public class TaskList {
         }
 
         if (indexOfBy == -1) {
-            System.out.println("Usage: deadline <task name> /by <deadline>");
-            return;
+            throw new DukeInvalidDeadlineCommandException();
         }
 
         String[] taskNameArray = Arrays.copyOfRange(tokens, 1, indexOfBy);
         String[] byArray = Arrays.copyOfRange(tokens, indexOfBy + 1, tokens.length);
 
         if (taskNameArray.length == 0 || byArray.length == 0) {
-            System.out.println("Usage: deadline <task name> /by <deadline>");
-            return;
+            throw new DukeInvalidDeadlineCommandException();
         }
 
         String taskName = String.join(" ", taskNameArray);
@@ -113,7 +108,7 @@ public class TaskList {
         this.addTask(newDeadlineTask);
     }
 
-    public void handleEventCommand(String[] tokens) {
+    public void handleEventCommand(String[] tokens) throws DukeInvalidEventCommandException {
         int indexOfFrom = -1;
         int indexOfTo = -1;
 
@@ -128,8 +123,7 @@ public class TaskList {
         }
 
         if (indexOfFrom == -1 || indexOfTo == -1) {
-            System.out.println("Usage: event <task name> /from <start> /to <end>");
-            return;
+            throw new DukeInvalidEventCommandException();
         }
 
         String[] taskNameArray = Arrays.copyOfRange(tokens, 1, indexOfFrom);
@@ -137,8 +131,7 @@ public class TaskList {
         String[] toArray = Arrays.copyOfRange(tokens, indexOfTo + 1, tokens.length);
 
         if (taskNameArray.length == 0 || fromArray.length == 0 || toArray.length == 0) {
-            System.out.println("Usage: event <task name> /from <start> /to <end>");
-            return;
+            throw new DukeInvalidEventCommandException();
         }
 
         String taskName = String.join(" ", taskNameArray);

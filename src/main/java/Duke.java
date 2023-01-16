@@ -19,36 +19,39 @@ public class Duke {
             String[] tokens = userInput.split(" ");
             String action = tokens[0];
 
-            switch (action) {
-            case "list":
-                taskList.handleListCommand();
-                break;
+            try {
+                switch (action) {
+                case "list":
+                    taskList.handleListCommand();
+                    break;
 
-            case "mark":
-            case "unmark":
-                taskList.handleMarkUnmarkCommand(tokens);
-                break;
+                case "mark":
+                case "unmark":
+                    taskList.handleMarkUnmarkCommand(tokens);
+                    break;
 
-            case "todo":
-                taskList.handleTodoCommand(tokens);
-                break;
+                case "todo":
+                    taskList.handleTodoCommand(tokens);
+                    break;
 
-            case "deadline":
-                taskList.handleDeadlineCommand(tokens);
-                break;
+                case "deadline":
+                    taskList.handleDeadlineCommand(tokens);
+                    break;
 
-            case "event":
-                taskList.handleEventCommand(tokens);
-                break;
+                case "event":
+                    taskList.handleEventCommand(tokens);
+                    break;
 
-            case "bye":
-                taskList.handleByeCommand();
-                sc.close();
-                return;
+                case "bye":
+                    taskList.handleByeCommand();
+                    sc.close();
+                    return;
 
-            default:
-                System.out.println("Recognised actions: list, mark, unmark, todo, deadline, event, bye");
-                break;
+                default:
+                    throw new DukeUnknownActionException();
+                }
+            } catch (DukeException error) {
+                System.out.println(error.getMessage());
             }
         }
     }
