@@ -25,8 +25,8 @@ public class Task {
      */
     @Override
     public String toString(){
-        if(status)
-            return "[x] " + name;
+        if(status == true)
+            return "[X] " + name;
         else
             return "[ ] " + name;
     }
