@@ -1,5 +1,6 @@
 public class Utils {
     public static void divider() {
-        System.out.println("__________________________________________");
+        System.out.println("\t __________________________________________");
     }
+
 }
