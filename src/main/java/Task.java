@@ -12,7 +12,7 @@ public class Task {
     }
     // gets status of task, mark done with 'X'
     public String getStatus() {
-        return (isDone ? "X" : "");
+        return (isDone ? "X" : " ");
     }
     // marks task as done
     public void MarkDone()  {
