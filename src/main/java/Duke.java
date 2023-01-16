@@ -5,6 +5,9 @@ public class Duke {
     private static final String LINE = "__________________________________________________________\n";
     private ArrayList<Task> taskList = new ArrayList<>(100);
     private int counter = 0;
+    private enum Command {
+        BYE, LIST, MARK, UNMARK, TODO, DEADLINE, EVENT, DELETE
+    }
 
     public void greet() {
         System.out.println(Duke.LINE
@@ -87,66 +90,70 @@ public class Duke {
         while(sc.hasNext()) {
             try {
                 String[] input = sc.nextLine().split(" ", 2);
+                Command c = Command.valueOf(input[0].toUpperCase());
 
-                switch (input[0]) {
-                    case "bye":
+                switch (c) {
+                    case BYE:
                         this.exit();
                         break;
 
-                    case "list":
+                    case LIST:
                         this.list();
                         break;
 
-                    case "mark":
+                    case MARK:
                         if (input.length < 2) {
                             throw new NumberMissingException();
                         }
                         this.mark(input[1]);
                         break;
 
-                    case "unmark":
+                    case UNMARK:
                         if (input.length < 2) {
                             throw new NumberMissingException();
                         }
                         this.unmark(input[1]);
                         break;
 
-                    case "todo":
+                    case TODO:
                         if (input.length < 2) {
                             throw new EmptyDescriptionException();
                         }
                         this.todo(input[1]);
                         break;
 
-                    case "deadline":
+                    case DEADLINE:
                         if (input.length < 2) {
                             throw new EmptyDescriptionException();
                         }
                         this.deadline(input[1]);
                         break;
 
-                    case "event":
+                    case EVENT:
                         if (input.length < 2) {
                             throw new EmptyDescriptionException();
                         }
                         this.event(input[1]);
                         break;
 
-                    case "delete":
+                    case DELETE:
                         if (input.length < 2) {
                             throw new NumberMissingException();
                         }
                         this.delete(input[1]);
                         break;
 
-                    default:
-                        throw new InvalidCommandException();
                 }
+            }
+            catch (IllegalArgumentException e) {
+                System.out.println(Duke.LINE + "Command not recognised. Please input a valid command");
+                System.out.println(Duke.LINE);
             }
             catch (Exception e) {
                 System.out.println(Duke.LINE + e.getMessage());
                 System.out.println(Duke.LINE);
             }
+
         }
     }
 
