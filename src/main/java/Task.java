@@ -1,9 +1,9 @@
 public class Task {
-    private final String taskName;
+    private final String description;
     private boolean completed;
 
-    public Task(String taskName, boolean completed) {
-        this.taskName = taskName;
+    public Task(String description) {
+        this.description = description;
         this.completed = false;
     }
 
@@ -14,6 +14,6 @@ public class Task {
     @Override
     public String toString() {
         String icon = this.completed ? "[X] " : "[ ] ";
-        return icon + this.taskName;
+        return icon + this.description;
     }
 }

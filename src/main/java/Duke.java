@@ -51,7 +51,7 @@ public class Duke {
             }
             // add task
             else {
-                Task newTask = new Task(command, false);
+                Task newTask = new Task(command);
                 taskStore.add(newTask);
                 System.out.println("  added: " + command);
             }
