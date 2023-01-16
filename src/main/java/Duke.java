@@ -32,8 +32,9 @@ public class Duke {
                 break;
             case "list":
                 int counter = 1;
+                System.out.println("Here are the tasks in your list:");
                 for (Task element : tasks) {
-                    System.out.println("Here are the tasks in your list:\n" + counter + "." + element.toString());
+                    System.out.println(counter + "." + element.toString());
                     counter++;
                 }
                 break;
@@ -46,6 +47,12 @@ public class Duke {
                 int numTask = Integer.parseInt(arr[1]);
                 Task markedTask = tasks.get(numTask - 1);
                 markedTask.markAsDone();
+                break;
+            case "delete":
+                int getTaskNum = Integer.parseInt(arr[1]);
+                Task taskDesc = tasks.get(getTaskNum - 1);
+                tasks.remove(getTaskNum - 1);
+                System.out.println(" Noted. I've removed this task:\n  " + taskDesc + "\nNow you have " + tasks.size() + " tasks in the list." );
                 break;
             case "todo":
                 try {
