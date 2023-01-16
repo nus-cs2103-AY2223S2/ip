@@ -25,6 +25,14 @@ public class Tasks {
     System.out.printf("Now you have %d tasks in the list\n", length());
   }
 
+  public void deleteTask(int index) throws DukeException {
+    Task t = getTask(index);
+    tasks.remove(index);
+    System.out.println("Noted. I've removed this task");
+    System.out.printf("=> %s\n", t);
+    System.out.printf("Now you have %d tasks in the list\n", length());
+  }
+
   public int length() {
     return tasks.size();
   }

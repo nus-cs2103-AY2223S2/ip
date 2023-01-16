@@ -65,4 +65,23 @@ Here are the tasks in your list:
 3. [E][ ] taekwondo training (from: monday 7pm to: 9pm)
 
 >>> 
+OOPS!!! The index given is out of range.
+
+>>> 
+Here are the tasks in your list:
+1. [T][X] mark exam papers
+2. [D][ ] complete CS2103T IP (by: week 2)
+3. [E][ ] taekwondo training (from: monday 7pm to: 9pm)
+
+>>> 
+Noted. I've removed this task
+=> [D][ ] complete CS2103T IP (by: week 2)
+Now you have 2 tasks in the list
+
+>>> 
+Here are the tasks in your list:
+1. [T][X] mark exam papers
+2. [E][ ] taekwondo training (from: monday 7pm to: 9pm)
+
+>>> 
 Bye. Hope to see you again soon!

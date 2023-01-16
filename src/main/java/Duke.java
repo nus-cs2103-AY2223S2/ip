@@ -71,6 +71,9 @@ public class Duke {
             String by = cmd.substring(byStart + 6, toStart - 1);
             String to = cmd.substring(toStart + 4);
             tasks.addTask(new Event(taskName, by, to));
+        } else if (cmd.matches("^delete [0-9]*$")) {
+            int index = Integer.parseInt(cmd.substring(7)) - 1;
+            tasks.deleteTask(index);
         } else {
             throw new DukeException("OOPS!!! I'm sorry, but I don't know what that means :-(");    
         }

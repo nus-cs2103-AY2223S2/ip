@@ -11,4 +11,8 @@ list
 unmark 3
 unmark -1
 list
+delete 5
+list
+delete 2
+list
 bye
