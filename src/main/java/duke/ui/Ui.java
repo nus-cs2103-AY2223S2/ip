@@ -5,12 +5,11 @@ import duke.task.*;
 public class Ui {
 
     public Ui() {
-        greet();
     }
 
     private String line_break = "\n\t ^-^-^-^-^-^-^-^-^-^-^-^-^-^-^-^-^-^-^-^-^-^-^-^-^-^-^-^-^-^-^\n";
 
-    private void greet() {
+    public void greet() {
         String logo = "             _____             _____   _    _              _   _ \n" +
                 "     /\\     |_   _|           / ____| | |  | |     /\\     | \\ | |\n" +
                 "    /  \\      | |    ______  | |      | |__| |    /  \\    |  \\| |\n" +

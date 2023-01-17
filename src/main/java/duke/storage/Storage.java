@@ -22,7 +22,7 @@ public class Storage {
                 parse_data(line, taskList);
             }
         } catch (IOException e) {
-            File file = new File("data/duke.txt");
+            File file = new File(filePath);
             file.getParentFile().mkdirs();
             FileWriter fw = new FileWriter(file);
             fw.close();

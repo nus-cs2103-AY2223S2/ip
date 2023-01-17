@@ -1,3 +1,5 @@
+package duke;
+
 import duke.parser.Parser;
 import duke.storage.Storage;
 import duke.task.TaskList;
@@ -15,6 +17,7 @@ public class Duke {
     private Ui ui;
     public Duke(String filePath) {
         ui = new Ui();
+        ui.greet();
         storage = new Storage(filePath);
         try {
             taskList = new TaskList();
