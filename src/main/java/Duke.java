@@ -1,15 +1,12 @@
 import java.util.Scanner;
 import java.util.ArrayList;
+
 public class Duke {
 
     /**
      * Adds user input to a list.
-     * If user input is "list", display all items back, numbered.
-     * If user input is "mark", followed by a number,
-     * mark the item specified by the number as done.
-     * If user input is "unmark", followed by a number,
-     * mark the item specified by the number as undone.
-     * If user input is "bye", then exit.
+     * Supports several tasks, such as Todo,
+     * deadline and event.
      */
     public static void greet() {
         Scanner userInput = new Scanner(System.in);
@@ -23,27 +20,53 @@ public class Duke {
             System.out.println("____________________________________________________________");
 
             if (input.equals("bye")) {
+                // User input: bye
                 System.out.println("Bye. Hope to see you soon!");
+            } else if (input.matches("todo(.*)")) {
+                // User input: todo x
+                input = input.replace("todo ", "");
+                System.out.println("Got it. I've added this task:");
+                list.add(new Todo(input));
+                System.out.println("    " + list.get(list.size() - 1).toString());
+                System.out.println("Now you have " + list.size() + " tasks in the list.");
+            } else if (input.matches("deadline(.*)")) {
+                // User input: deadline x
+                input = input.replace("deadline ", "");
+                String[] inputs = input.split(" /by ", 2);
+                System.out.println("Got it. I've added this task:");
+                list.add(new Deadline(inputs[0], inputs[1]));
+                System.out.println("    " + list.get(list.size() - 1).toString());
+                System.out.println("Now you have " + list.size() + " tasks in the list.");
+            } else if (input.matches("event(.*)")) {
+                // User input: event x
+                input = input.replace("event ", "");
+                String[] inputs = input.split(" /", 3);
+                inputs[1] = inputs[1].replace("from " , "");
+                inputs[2] = inputs[2].replace("to ", "");
+                System.out.println("Got it. I've added this task:");
+                list.add(new Event(inputs[0], inputs[1], inputs[2]));
+                System.out.println("    " + list.get(list.size() - 1).toString());
+                System.out.println("Now you have " + list.size() + " tasks in the list.");
             } else if (input.equals("list")) {
+                // User input: list
                 System.out.println("Here are the tasks in your list:");
                 for (int i = 0; i < list.size(); i++) {
-                    System.out.println(i + 1 + ". "
-                            + "[" + list.get(i).getStatusIcon() + "] " + list.get(i).description);
+                    System.out.println(i + 1 + ". " + list.get(i).toString());
                 }
             } else if (input.matches("mark(.*)")) {
+                // User input: mark x
                 // Extracts the numbered item from the user input string
                 int index = Integer.parseInt(input.replaceAll("[^0-9]", "")) - 1;
                 list.get(index).markAsDone();
                 System.out.println("Nice! I've marked this task as done:");
-                System.out.println("    [" + list.get(index).getStatusIcon() + "] "
-                        + list.get(index).description);
+                System.out.println("    " + list.get(index).toString());
             } else if (input.matches("unmark(.*)")) {
+                // User input: unmark x
                 // Extracts the numbered item from the user input string
                 int index = Integer.parseInt(input.replaceAll("[^0-9]", "")) - 1;
                 list.get(index).markAsUndone();
                 System.out.println("OK, I've marked this task as not done yet:");
-                System.out.println("    [" + list.get(index).getStatusIcon() + "] "
-                        + list.get(index).description);
+                System.out.println("    " + list.get(index).toString());
             } else {
                 System.out.println("added: " + input);
                 list.add(new Task(input));

@@ -7,7 +7,7 @@ public class Task {
     /**
      * Constructor for the Task class.
      *
-     * @param description
+     * @param description Description of the task.
      */
     public Task(String description) {
         this.description = description;
@@ -23,6 +23,17 @@ public class Task {
     public String getStatusIcon() {
         // Marks the finished task with "X".
         return (isDone ? "X" : " ");
+    }
+
+    /**
+     * Overrides the toString method of the Object class.
+     *
+     * @return String representation of the task.
+     */
+    @Override
+    public String toString() {
+
+        return "[" + getStatusIcon() + "] " + description;
     }
 
     /**
