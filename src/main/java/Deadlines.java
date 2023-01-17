@@ -1,9 +1,19 @@
 public class Deadlines extends Task {
     public String end;
 
-    public Deadlines(String[] content) {
+    public Deadlines(String[] content) throws DukeException {
         super(content[0]);
-        this.end = content[1].substring(3);
+        if (content[0].isEmpty()) {
+            throw new DukeException("OOPS!!! The description of deadline cannot be empty!");
+        }
+        String[] ends = content[1].split(" ", 2);
+        if (!ends[0].equals("by")) {
+            throw new DukeException("OOPS!!! Use 'by' to indicate end date");
+        }
+        if (ends.length == 1) {
+            throw new DukeException("OOPS!!! Deadline requires some end description.");
+        }
+        end = ends[1];
     }
 
     @Override
