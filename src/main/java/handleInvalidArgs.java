@@ -5,7 +5,6 @@ public class handleInvalidArgs {
     public handleInvalidArgs(String[] replies){
         this.replies = replies;
     }
-
     public handleInvalidArgs(String reply) {
         this.reply = reply;
     }
