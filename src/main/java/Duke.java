@@ -88,7 +88,7 @@ public class Duke {
         printHorizontal();
     }
 
-    private static void commandMark(String input) {
+    private static void commandMark(String input) throws DukeException {
         Matcher markCommandMatcher = markUnmarkCommandPattern.matcher(input);
         if (markCommandMatcher.find()) {
             int taskNo = Integer.parseInt(markCommandMatcher.group(2));
@@ -106,10 +106,12 @@ public class Duke {
                 printText("Invalid task number!");
                 printHorizontal();
             }
+        } else {
+            throw new DukeException("Please enter a proper integer.");
         }
     }
 
-    private static void commandUnmark(String input) {
+    private static void commandUnmark(String input) throws DukeException {
         Matcher markCommandMatcher = markUnmarkCommandPattern.matcher(input);
         if (markCommandMatcher.find()) {
             int taskNo = Integer.parseInt(markCommandMatcher.group(2));
@@ -127,6 +129,8 @@ public class Duke {
                 printText("Invalid task number!");
                 printHorizontal();
             }
+        } else {
+            throw new DukeException("Please enter a proper integer.");
         }
     }
 

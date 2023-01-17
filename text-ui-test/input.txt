@@ -32,4 +32,5 @@ list
 unmark 1
 unmark 1
 list
+mark abc
 bye
