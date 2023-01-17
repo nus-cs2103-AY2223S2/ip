@@ -29,16 +29,27 @@ public class Duke {
 
         try (Scanner scanner = new Scanner(System.in)) {
             while (!isExit) {
-                System.out.println(formatMessage(execute(scanner.nextLine(), manager)));
+                String message;
+                try {
+                    message = execute(scanner.nextLine(), manager);
+                } catch (IllegalArgumentException illArgEx) {
+                    message = String.format(
+                        "Hanya?? I was unable to process that...\n" +
+                        "Please try again after fixing this:\n" +
+                        "  %s",
+                        illArgEx.getMessage()
+                    );
+                }
+                System.out.println(formatMessage(message));
             }
         }
     }
 
 
-    private String execute(String rawInput, MainManager manager) {
+    private String execute(String rawInput, MainManager manager) throws IllegalArgumentException {
         String msg = rawInput;
-        String inputString = rawInput;
-        Command command = Command.TODO;
+        String inputString = "";
+        Command command;
 
         try (Scanner scanner = new Scanner(rawInput)) {
             if (scanner.hasNext()) {
@@ -47,21 +58,19 @@ public class Duke {
                 if (scanner.hasNext()) {
                     inputString = scanner.nextLine().strip();
                 }
+            } else {
+                return "Hanya?? Did you say something?";
             }
-        } catch (IllegalArgumentException noElmEx) {
-            command = Command.TODO;
+        } catch (IllegalArgumentException illArgEx) {
+            throw new IllegalArgumentException("Unknown command");
         }
 
         if (command.equals(Command.BYE)) {
             this.isExit = true;
         }
 
-        try {
-            CommandInput input = CommandInput.parse(inputString, manager);
-            msg = command.execute(input);
-        } catch (IllegalArgumentException illArgEx) {
-            return illArgEx.toString();
-        }
+        CommandInput input = CommandInput.parse(inputString, manager);
+        msg = command.execute(input);
 
         return msg;
     }
