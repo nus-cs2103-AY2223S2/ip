@@ -26,6 +26,42 @@ public class Duke {
                     System.out.println(". " + store[i].toString());
                 }
             }
+            else if (userInput.contains("todo")) {
+                store[counter] = new ToDo(userInput.substring(5, userInput.length()));
+
+
+                System.out.println("Got it. I've added this task:");
+                System.out.println(store[counter].toString());
+                int display = counter + 1; // array index + 1
+                System.out.println("Now you have " + display + " tasks in the list.");
+                counter = counter + 1;
+            }
+            else if (userInput.contains("deadline")) {
+                String trimmed = userInput.substring(9, userInput.length());
+                String description = trimmed.substring(0, trimmed.indexOf("/") - 1);
+                String deadline = trimmed.substring((trimmed.indexOf("by")) + 3, trimmed.length());
+                store[counter] = new Deadline(description, deadline);
+
+
+                System.out.println("Got it. I've added this task:");
+                System.out.println(store[counter].toString());
+                int display = counter + 1; // array index + 1
+                System.out.println("Now you have " + display + " tasks in the list.");
+                counter = counter + 1;
+            }
+            else if (userInput.contains("event")) {
+                String trimmed = userInput.substring(6, userInput.length());
+                String description = trimmed.substring(0, trimmed.indexOf("/from") - 1);
+                String from = trimmed.substring(trimmed.indexOf("/from") + 6, trimmed.indexOf("/to") - 1);
+                String to = trimmed.substring(trimmed.indexOf("/to") + 4, trimmed.length());
+                store[counter] = new Event(description, from, to);
+
+                System.out.println("Got it. I've added this task:");
+                System.out.println(store[counter].toString());
+                int display = counter + 1; // array index + 1
+                System.out.println("Now you have " + display + " tasks in the list.");
+                counter = counter + 1;
+            }
             else if (userInput.contains("mark")) {
                 // obtaining index to mark, -1 because array starts from index 0
                 int index = Integer.valueOf(userInput.substring(userInput.length() - 1)) - 1;
