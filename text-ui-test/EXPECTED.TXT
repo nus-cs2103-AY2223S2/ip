@@ -1,4 +1,9 @@
 Hello! I'm Duke. What can i do for you?
+These are the available commands:
+ 	 todo [description]
+ 	 event [description] \from [date] \to [date]
+ 	 deadline [description] \by [date]
+ ----------------------------------------
 Got it. I've added this task:
 	[T][ ] return book
 Now you have 1 tasks in the list.
@@ -15,4 +20,6 @@ OK, I've marked this task as not done yet:
 1. [T][ ] return book
 2. [D][ ] mark scripts (by: mon 2pm)
 3. [E][ ] project meeting (from: mon 2pm to: 5pm)
-
+The description is compulsory.
+The description and date is compulsory.
+Goodbye!

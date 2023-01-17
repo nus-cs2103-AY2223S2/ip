@@ -24,6 +24,7 @@ public class TaskMap<T> {
     public String toString() {
         StringBuffer sb = new StringBuffer();
         taskMap.forEach((k, v) -> sb.append(k).append(". ").append(v).append("\n"));
+        sb.deleteCharAt(sb.length() - 1);
         return sb.toString();
     }
 }
