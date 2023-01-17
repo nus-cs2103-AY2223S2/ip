@@ -38,9 +38,20 @@ public class Duke {
         }
         System.out.println(separator);
     }
+
+    public enum Commands {
+        bye,
+        list,
+        mark,
+        unmark,
+        deadline,
+        event,
+        todo,
+        delete
+    }
     public static void start() {
         Task taskAtHand;
-        String taskNumber;
+        String taskNumber, command;
         System.out.println(logo
                 + "\n"
                 + separator
@@ -50,13 +61,13 @@ public class Duke {
         Scanner sc = new Scanner(System.in);
         while (!isExit) {
             try {
-                String command = sc.next();
-                switch (command) {
-                    case "bye":
+                Commands commands = Commands.valueOf(sc.next().toLowerCase());
+                switch (commands) {
+                    case bye:
                         Duke.bye();
                         break;
 
-                    case "list":
+                    case list:
                         if (listOfTasks.size() == 0) {
                             throw new DukeException("The list is currently empty!");
                         } else {
@@ -64,7 +75,7 @@ public class Duke {
                         }
                         break;
 
-                    case "mark":
+                    case mark:
                         taskNumber = sc.nextLine();
                         if (taskNumber.isBlank()) {
                             throw new DukeException("Please enter the task number to mark! :D ");
@@ -80,7 +91,7 @@ public class Duke {
                         }
                         break;
 
-                    case "unmark":
+                    case unmark:
                         taskNumber = sc.nextLine();
                         if (taskNumber.isBlank()) {
                             throw new DukeException("Please enter the task number to unmark! :D ");
@@ -96,7 +107,7 @@ public class Duke {
                         }
                         break;
 
-                    case "deadline":
+                    case deadline:
                         command = sc.nextLine();
                         if (command.isBlank()) {
                             throw new DukeException("☹ OOPS!!! The description of a deadline cannot be empty.");
@@ -118,7 +129,7 @@ public class Duke {
                         }
                         break;
 
-                    case "event":
+                    case event:
                         command = sc.nextLine();
                         if (command.isEmpty()) {
                             throw new DukeException("☹ OOPS!!! The description of an event cannot be empty.");
@@ -142,7 +153,7 @@ public class Duke {
                         }
                         break;
 
-                    case "todo":
+                    case todo:
                         command = sc.nextLine();
                         if (command.isBlank()) {
                             throw new DukeException("☹ OOPS!!! The description of a todo cannot be empty.");
@@ -160,7 +171,7 @@ public class Duke {
                         }
                         break;
 
-                    case "delete":
+                    case delete:
                         taskNumber = sc.nextLine();
                         if (taskNumber.isBlank()) {
                             throw new DukeException("Please enter the task number to delete! :D ");
@@ -186,13 +197,7 @@ public class Duke {
                         + e.getMessage()
                         + "\n"
                         + separator);
-            } catch (NumberFormatException e) {
-                System.out.println(separator
-                        + "\n\t"
-                        + "Please enter a valid task number!"
-                        + "\n"
-                        + separator);
-            } catch (IndexOutOfBoundsException e){
+            } catch (NumberFormatException | IndexOutOfBoundsException e) {
                 System.out.println(separator
                         + "\n\t"
                         + "Please enter a valid task number!"
@@ -201,7 +206,7 @@ public class Duke {
             }
         }
     }
-    
+
     public static void main(String[] args) {
         Duke.start();
     }
