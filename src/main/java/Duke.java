@@ -33,7 +33,14 @@ public class Duke {
 
     private static void parse_cmds(Scanner usr_in) throws Exception {
         String curr_in = usr_in.nextLine().trim();
-        String[] curr = curr_in.split("/"); //split into title and time-related
+        String[] curr = new String[0];
+        if (curr_in.contains("/by")) {
+            curr = curr_in.split("/by"); //split into title and time-related
+        } else if (curr_in.contains("/from")) {
+            curr = curr_in.split("/from");
+        } else {
+            curr = new String[]{curr_in};
+        }
         String[] curr_title = curr[0].split(" "); //split title by word
         if (curr_in.equals("bye")) {
             end();
@@ -87,28 +94,29 @@ public class Duke {
     private static void addEvent(String[] curr) throws DukeException {
         try {
             String descr = curr[0].substring(6).trim();
-            String from = curr[1].substring(5).trim();
-            String to = curr[2].substring(3).trim();
+            String[] newCurr = curr[1].split("/to");
+            String from = newCurr[0].trim();
+            String to = newCurr[1].trim();
             add(new Event(descr, from, to));
         } catch (Exception e) {
-            throw new DukeException("You need to fill in an event with a description, from and to timing");
+            throw new DukeException("You need to fill in an event with format `event {title} /from dd/MM/yyyy HHmm /to dd/MM/yyyy HHmm`");
         }
     }
 
     private static void addDeadline(String[] curr) throws DukeException {
         try {
             String descr = curr[0].substring(9).trim();
-            String by = curr[1].substring(3).trim();
+            String by = curr[1].trim();
             add(new Deadline(descr, by));
         } catch (Exception e) {
-            throw new DukeException("You need to fill in a deadline with a description and by date");
+            throw new DukeException("You need to fill in a deadline with format `deadline {title} /by dd/MM/yyyy HHmm`");
         }
     }
 
     private static void addToDo(String[] curr) throws DukeException {
         String todo = curr[0].substring(5).trim();
         if (todo.isBlank()) {
-            throw new DukeException("You need something to do");
+            throw new DukeException("You need to add a todo with format `todo {title}`");
         } else { add(new ToDo(todo)); }
     }
 
