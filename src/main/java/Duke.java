@@ -22,13 +22,14 @@ public class Duke {
             if (userInput.equals("list")) {
                 System.out.println("Here are the tasks in your list:");
                 for (int i = 0; i < counter; i ++) {
-                    System.out.println(i+1 + ". [" + store[i].getStatusIcon() + "] " + store[i].description);
+                    System.out.print(i + 1);
+                    System.out.println(". " + store[i].toString());
                 }
             }
             else if (userInput.contains("mark")) {
                 // obtaining index to mark, -1 because array starts from index 0
                 int index = Integer.valueOf(userInput.substring(userInput.length() - 1)) - 1;
-
+                // handle errors out of range
                 if (index < 0 || index >= counter) {
                     int display = index + 1;
                     System.out.println("Task " + display + " does not exist.");
@@ -43,10 +44,8 @@ public class Duke {
                     store[index].markAsDone();
                     System.out.println("Nice! I've marked this task as done:");
                 }
-                System.out.println("[" + store[index].getStatusIcon() + "] " + store[index].description);
+                System.out.println(store[index].toString());
             }
-
-            // handle errors out of range
             else {
                 store[counter] = new Task(userInput);
                 counter = counter + 1;
