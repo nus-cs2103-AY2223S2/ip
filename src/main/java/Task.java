@@ -1,9 +1,9 @@
 public class Task {
-    private String input;
+    private String description;
     private boolean done;
 
-    public Task(String input) {
-        this.input = input;
+    public Task(String description) {
+        this.description = description;
         this.done = false;
     }
 
@@ -12,7 +12,7 @@ public class Task {
             this.done = true;
         }
     }
-    
+
     public void unmark(){
         if (this.done) {
             this.done = false;
@@ -21,9 +21,9 @@ public class Task {
     @Override
     public String toString() {
         if (this.done) {
-            return String.format("[X] " + this.input);
+            return String.format("[X] " + this.description);
         } else {
-            return String.format("[ ] " + this.input);
+            return String.format("[ ] " + this.description);
         }
     }
 }
