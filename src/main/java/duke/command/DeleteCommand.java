@@ -22,29 +22,43 @@ public class DeleteCommand implements Command {
      */
     @Override
     public CommandResponse run(String input, List<Task> tasks) throws DukeException {
-        String arg = input.replaceFirst("delete ", "");
+        int index = extractValidIndex(input, tasks);
+        List<Task> updatedTasks = getUpdatedTasks(tasks, index);
+        String message = getMessage(updatedTasks, tasks.get(index));
 
-        if (arg.isEmpty()) {
-            throw new DukeException("The index of a delete cannot be empty.");
+        return new CommandResponse(message, updatedTasks);
+    }
+
+    private int extractValidIndex(String input, List<Task> tasks) throws DukeException {
+        String argStr = input.replaceFirst("delete", "").trim();
+
+        if (argStr.isEmpty()) {
+            throw new DukeException("The task to be deleted must be specified.");
         }
 
         int index;
         try {
-            index = Integer.parseInt(arg) - 1;
+            index = Integer.parseInt(argStr) - 1;
         } catch (NumberFormatException e) {
-            throw new DukeException("The index of a delete must be an integer.");
+            throw new DukeException("The index of the task to be deleted must be an integer.");
         }
 
         if (index >= tasks.size() || index < 0) {
-            throw new DukeException("The index of a delete must be between 1 and the number of task.");
+            throw new DukeException("The index of the task to be deleted must correspond to an existing task.");
         }
 
+        return index;
+    }
+
+    private List<Task> getUpdatedTasks(List<Task> tasks, int index) {
         List<Task> updatedTasks = new ArrayList<Task>(tasks);
-        Task task = updatedTasks.remove(index);
+        updatedTasks.remove(index);
 
-        String message = String.format("Noted. I've removed this task:\n  %s\nNow you have %d tasks in the list.",
-                task.toString(), updatedTasks.size());
+        return updatedTasks;
+    }
 
-        return new CommandResponse(message, updatedTasks);
+    private String getMessage(List<Task> tasks, Task task) {
+        return String.format("Noted. I've removed this task:\n  %s\nNow you have %d tasks in the list.",
+                task.toString(), tasks.size());
     }
 }
