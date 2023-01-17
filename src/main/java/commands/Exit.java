@@ -1,13 +1,12 @@
 package commands;
 
-import tasks.ITask;
+import uitilties.Parser;
 import uitilties.UserInterface;
 
-import java.util.ArrayList;
 
 public class Exit extends ICommand{
-    public Exit(ArrayList<ITask> tasks) {
-        super(tasks);
+    public Exit(Parser parser) {
+        super(parser);
     }
 
     @Override

@@ -1,7 +1,7 @@
 package exceptions;
 
-public class IncompleteCommandException extends InvalidCommandException {
-    public IncompleteCommandException(String cmd, String content) {
-        super("☹ OOPS!!! The " + content + " of a " + cmd + " cannot be empty");
+public class IncompleteCommandException extends DukeException {
+    public IncompleteCommandException(String content) {
+        super("☹ OOPS!!! The " + content + " cannot be empty from your command");
     }
 }

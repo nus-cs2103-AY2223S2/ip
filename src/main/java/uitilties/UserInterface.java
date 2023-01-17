@@ -32,21 +32,21 @@ public class UserInterface {
         //TODO remark parse here
         switch (cmd) {
             case "bye":
-                return new Exit(tasks);
+                return new Exit(new Parser(tasks));
             case "list":
-                return new ListTasks(tasks);
+                return new ListTasks(new Parser(tasks));
 
             case "mark":
-                return new Mark(tasks, content);
+                return new Mark(new Parser(content, tasks));
 
             case "unmark":
-                return new Unmark(tasks, content);
+                return new Unmark(new Parser(content, tasks));
             case "delete":
-                return new Delete(tasks, content);
+                return new Delete(new Parser(content, tasks));
             case "todo":
             case "deadline":
             case "event":
-                return new Add(tasks, content, ITask.convertTaskTypeCmdToEnum(cmd));
+                return new Add(new Parser(tasks, content, ITask.convertTaskTypeCmdToEnum(cmd)));
             default:
                 throw new InvalidCommandException(cmd);
         }

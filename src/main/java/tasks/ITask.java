@@ -1,7 +1,6 @@
 package tasks;
 
 public abstract class ITask {
-    final TaskTypes _type;
     public enum TaskTypes {
         ToDos,
         Deadlines,
@@ -18,15 +17,15 @@ public abstract class ITask {
 //        }
 //        return " ";
 //    }
-    public static String convertTaskTypeEnumToStr(ITask.TaskTypes type) {
-        switch (type) {
-            case ToDos: return "todo";
-            case Deadlines: return "deadline";
-            case Events: return "event";
-            case Unknown: return "unknown";
-        }
-        return "unknown";
-    }
+//    public static String convertTaskTypeEnumToStr(ITask.TaskTypes type) {
+//        switch (type) {
+//            case ToDos: return "todo";
+//            case Deadlines: return "deadline";
+//            case Events: return "event";
+//            case Unknown: return "unknown";
+//        }
+//        return "unknown";
+//    }
 
     public static ITask.TaskTypes convertTaskTypeCmdToEnum(String cmd) {
         switch (cmd) {
@@ -52,10 +51,9 @@ public abstract class ITask {
     private boolean isDone;
 
 
-    public ITask(String description, ITask.TaskTypes type) {
+    public ITask(String description) {
         this.description = description;
         this.isDone = false;
-        _type = type;
     }
 
 

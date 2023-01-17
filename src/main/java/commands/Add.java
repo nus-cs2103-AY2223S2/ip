@@ -5,41 +5,39 @@ import tasks.Deadline;
 import tasks.Event;
 import tasks.ITask;
 import tasks.Todo;
+import uitilties.Parser;
 import uitilties.UserInterface;
 
-import java.util.ArrayList;
-
 public class Add extends ICommand {
-    private final String _input;
-    private final ITask.TaskTypes _type;
 
-    public Add(ArrayList<ITask> tasks, String input, ITask.TaskTypes type) {
-        super(tasks);
-        _input = input;
-        _type = type;
+    public Add(Parser parser) {
+        super(parser);
     }
 
 
     @Override
     public boolean run() throws DukeException {
         ITask task;
-        switch (_type) {
-            case ToDos:
-                task = new Todo(_input);
-                getTasks().add(task);
-                break;
+        switch (getParser().getType()) {
             case Events:
-                task = new Event(_input);
-                getTasks().add(task);
+                getParser().forEvent();
+                task = new Event(getParser().getDescription(), getParser().getFrom(),getParser().getTo());
+                getParser().getTasks().add(task);
                 break;
             case Deadlines:
-                task = new Deadline(_input);
-                getTasks().add(task);
+                getParser().forDeadline();
+                task = new Deadline(getParser().getDescription(), getParser().getBy());
+                getParser().getTasks().add(task);
                 break;
-            default:
-                throw new IllegalStateException("Unexpected value: " + _type);
+            default: //ToDos:
+                getParser().forTodo();
+                task = new Todo(getParser().getDescription());
+                getParser().getTasks().add(task);
+                break;
+
         }
-        UserInterface.Speak(task + "\nAdded");
+        UserInterface.Speak(task + "\nAdded"+ "\nNow you have "
+                + getParser().getTasks().size() + " tasks in the list.");
         return false;
 
     }
