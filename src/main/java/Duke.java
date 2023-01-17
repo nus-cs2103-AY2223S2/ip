@@ -3,12 +3,12 @@ import java.util.*;
 public class Duke {
     private Scanner scanner;
     private TaskList list;
-    private Router router;
+    private Parser parser;
 
     public Duke(Scanner scanner) {
         this.scanner = scanner;
         this.list = new TaskList();
-        this.router = new Router(list);
+        this.parser = new Parser();
     }
 
     public void start() {
@@ -16,17 +16,17 @@ public class Duke {
 
         while(scanner.hasNext()) {
             String input = scanner.nextLine();
-            boolean isExit = router.handleAndSignalExit(input);
-            if(isExit) {
-                this.bye();
-                scanner.close();
-                return;
+            try {
+                Command command = this.parser.parse(input);
+                command.execute(list);
+                if(command.isExit()) {
+                    scanner.close();
+                    return;
+                }
+            } catch (DukeException e) {
+                System.out.println(e);
             }
         }
-    }
-
-    public void bye() {
-        System.out.println("Duke: " + "Bye" + ". Hope I never see you again!");
     }
 
     public static void main(String[] args) {
