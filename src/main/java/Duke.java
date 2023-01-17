@@ -1,5 +1,6 @@
-import java.util.Scanner;
 import java.lang.String;
+import java.util.ArrayList;
+import java.util.Scanner;
 
 /**
  * The Duke class implements a personal assistant chatbot
@@ -11,44 +12,61 @@ import java.lang.String;
 public class Duke {
 
     private static final String INDENT = "    ";
-    private static final String HORIZONTAL_LINE = "______________________________\n";
+    private static final String HORIZONTAL_LINE = "______________________________";
     private static final String LOGO
-            = INDENT + " ____        _        \n"
-            + INDENT + "|  _ \\ _   _| | _____ \n"
-            + INDENT + "| | | | | | | |/ / _ \\\n"
-            + INDENT + "| |_| | |_| |   <  __/\n"
-            + INDENT + "|____/ \\__,_|_|\\_\\___|\n";
+            = " ____        _        \n"
+            + "|  _ \\ _   _| | _____ \n"
+            + "| | | | | | | |/ / _ \\\n"
+            + "| |_| | |_| |   <  __/\n"
+            + "|____/ \\__,_|_|\\_\\___|\n";
+
+    private static ArrayList<String> tasks = new ArrayList<>(100);
+
+    private void fixedResponse(String text) {
+        System.out.println(INDENT + HORIZONTAL_LINE);
+        String[] lines = text.split("\n");
+        for (String s : lines) {
+            System.out.println(INDENT + s);
+        }
+        System.out.println(INDENT + HORIZONTAL_LINE + "\n");
+    }
 
     private void greet() {
-        System.out.println(INDENT + HORIZONTAL_LINE
-                + INDENT + "Hello I'm\n"
-                + LOGO
-                + INDENT + "What can I do for you?\n"
-                + INDENT + HORIZONTAL_LINE);
+        fixedResponse("Hello I'm\n" + LOGO + "What can I do for you?");
     }
 
     private void exit() {
-        System.out.println(INDENT + HORIZONTAL_LINE
-                + INDENT + "Bye. Hope to see you again soon!\n"
-                + INDENT + HORIZONTAL_LINE);
+        fixedResponse("Bye. Hope to see you again soon!");
     }
 
-    private void echo(String cmd) {
-        System.out.println(INDENT + HORIZONTAL_LINE
-                + INDENT + cmd + "\n"
-                + INDENT + HORIZONTAL_LINE);
+    private void add(String s) {
+        fixedResponse("added: " + s);
+    }
+
+    private void list() {
+        System.out.println(INDENT + HORIZONTAL_LINE);
+        for (int i = 0; i < tasks.size(); i++) {
+            System.out.println(INDENT + (i + 1) + ". " + tasks.get(i));
+        }
+        System.out.println(INDENT + HORIZONTAL_LINE + "\n");
     }
 
     public static void main(String[] args) {
         Duke duke = new Duke();
         duke.greet();
-        Scanner input = new Scanner(System.in);
-        String cmd = input.nextLine();
-        while (!cmd.equals("bye")) {
-            duke.echo(cmd);
-            cmd = input.nextLine();
+
+        Scanner scanner = new Scanner(System.in);
+        String input = scanner.nextLine();
+        while (!input.equals("bye")) {
+            if (input.equals("list")) {
+                duke.list();
+            } else {
+                tasks.add(input);
+                duke.add(input);
+            }
+            input = scanner.nextLine();
         }
         duke.exit();
-        input.close();
+        scanner.close();
     }
 }
