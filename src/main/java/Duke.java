@@ -69,9 +69,7 @@ public class Duke {
             if (response.equals(endWord)) {
                 break;
             }
-
             Duke.indent();
-
             String firstWord = (response + " ").split(" ", 2)[0];
             try {
                 switch (firstWord) {
@@ -102,10 +100,8 @@ public class Duke {
             } catch (DukeException err) {
                 System.out.println(err.getMessage());
             }
-
             Duke.horizontal();
         }
-
         Duke.say("Bye Bye. HAND.", true);
     }
 }
