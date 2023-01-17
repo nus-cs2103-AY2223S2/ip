@@ -1,5 +1,6 @@
 package Command;
 
+import LeoException.*;
 import Storage.Storage;
 
 import java.util.Objects;
@@ -12,7 +13,7 @@ public class Command {
     public void readCommand() {
         Scanner scanner = new Scanner(System.in);
         String command = scanner.nextLine();
-        while (!Objects.equals(command, "bye")) {
+        while (!command.contains("bye")) {
             if (Objects.equals(command, "list")) {
                 new List(s);
             } else if (command.contains("mark")) {
@@ -22,7 +23,11 @@ public class Command {
                     new Mark(s, command);
                 }
             } else {
-                new Add(s, command);
+                try {
+                    new Add(s, command);
+                } catch (LeoException e) {
+                    System.out.println(e.getMessage());
+                }
             }
             command = scanner.nextLine();
         }

@@ -1,5 +1,7 @@
 package Storage;
 
+import LeoException.LeoException;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -24,15 +26,23 @@ public class Storage {
     }
 
     public void mark(int num) {
-        data.get(num - 1).mark();
-        System.out.println("Good work! You have completed task " + num + ":");
-        System.out.println(data.get(num-1).toString());
+        try {
+            data.get(num - 1).mark();
+            System.out.println("Leo: Good work! You have completed task " + num + ":");
+            System.out.println("     " + data.get(num - 1).toString());
+        } catch (LeoException e) {
+            System.out.println(e.getMessage());
+        }
     }
 
     public void unmark(int num) {
-        data.get(num - 1).unmark();
-        System.out.println("No worries! I have unmarked task " + num + ":");
-        System.out.println(data.get(num-1).toString());
+        try {
+            data.get(num - 1).unmark();
+            System.out.println("Leo: No worries! I have unmarked task " + num + ":");
+            System.out.println("     " + data.get(num - 1).toString());
+        } catch (LeoException e) {
+            System.out.println(e.getMessage());
+        }
     }
 
 }

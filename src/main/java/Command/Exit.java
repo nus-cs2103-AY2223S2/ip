@@ -7,7 +7,7 @@ public class Exit {
     }
 
     private void exit() {
-        System.out.println("Good bye, have a nice day ahead!");
+        System.out.println("Leo: Good bye, have a nice day ahead!");
         System.exit(0);
     }
 }

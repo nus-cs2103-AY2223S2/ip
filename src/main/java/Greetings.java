@@ -12,7 +12,7 @@ public class Greetings {
                 "| |  | |  | |____  | |____  | |____  | |__| |\n" +
                 "|_|  |_|  |______| |______| |______| \\_____/\n";
         System.out.println(helloLogo);
-        String greetingMessage = "Good day, I am Leo!\nHow can I assist you today?";
+        String greetingMessage = "Leo: Good day, I am Leo!\n     How can I assist you today?";
         System.out.println(greetingMessage);
     }
 }
