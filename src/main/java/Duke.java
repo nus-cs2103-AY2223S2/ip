@@ -18,7 +18,7 @@ public class Duke {
 
         Task addedItem = null;
         if (text.startsWith("todo")) {
-            String contents = text.replace("todo", "");
+            String contents = text.replaceFirst("todo", "");
             if (contents.length() == 0) {
                 throw new DukeException("The description of a todo cannot be empty");
             }
@@ -26,14 +26,14 @@ public class Duke {
             addedItem = new Todo(contents);
 
         } else if (text.startsWith("deadline")) {
-            String contents = text.replace("deadline", "");
+            String contents = text.replaceFirst("deadline", "");
             String[] arr = contents.split("/by");
             if (arr.length != 2) {
                 throw new DukeException("I don't know what that means. Format it as 'deadline [do something] /by [date]");
             }
             addedItem = new Deadline(arr[0], arr[1]);
-        } else if (text.startsWith("event")){
-            String contents = text.replace("event", "");
+        } else {
+            String contents = text.replaceFirst("event", "");
             String[] arr1 = contents.split("/from");
             if (arr1.length != 2) {
                 throw new DukeException("I don't know what that means. Format it as 'event [do something] /from [start date] /to [end date]'");
@@ -44,8 +44,6 @@ public class Duke {
 
             }
             addedItem = new Event(arr1[0], arr2[0], arr2[1]);
-        } else {
-            throw new DukeException("I'm sorry, I don't know what that means :(");
         }
         listOfThings.add(addedItem);
         String plural = "";
@@ -68,6 +66,12 @@ public class Duke {
         printWithLines(totalString);
     }
 
+    // removing the item
+    public static void removeItem(int index) {
+        String str = " Noted. I'm removing this task:\n     " + listOfThings.get(index).toString();
+        printWithLines(str);
+        listOfThings.remove(index);
+    }
 
     // main driver function
     public static void main(String[] args) {
@@ -78,13 +82,13 @@ public class Duke {
                 String line = input.nextLine();
                 String lowerLine = line.toLowerCase();
                 if (lowerLine.startsWith("bye")) {
-                    if (lowerLine.replace("bye", "").equals("")) {
+                    if (lowerLine.replaceFirst("bye", "").equals("")) {
                         break;
                     } else {
                         throw new DukeException("Did you mean to say bye? Type 'bye' to quit the program.");
                     }
                 } else if (lowerLine.startsWith("list")) {
-                    if (lowerLine.replace("list", "").equals("")) {
+                    if (lowerLine.replaceFirst("list", "").equals("")) {
                         printList();
                     } else {
                         throw new DukeException("No argument in list allowed.");
@@ -108,14 +112,30 @@ public class Duke {
                     } else {
                         thisTask.markUndone();
                     }
-                } else {
+                } else if (lowerLine.startsWith("delete")) {
+                    String[] arr = lowerLine.split(" ");
+                    if (arr.length != 2) {
+                        throw new DukeException("Only one argument for delete allowed");
+                    }
+                    String idxStr = arr[1];
+                    if (!idxStr.chars().allMatch(Character::isDigit)) {
+                        throw new DukeException("Argument must be a digit");
+                    }
+                    int idx = Integer.parseInt(idxStr) - 1;
+                    if (idx >= listOfThings.size() || idx < 0) {
+                        throw new DukeException("This index doesn't exist.");
+                    }
+                    removeItem(idx);
+                } else if (lowerLine.startsWith("todo") || lowerLine.startsWith("deadline") || lowerLine.startsWith("event")) {
                     addItem(line);
+                } else {
+                throw new DukeException("I'm sorry. I don't know what that means.");
                 }
             } catch (DukeException e) {
                 printWithLines(" " + e.toString());
             }
         }
-        printWithLines("Bye! Hope to see you again soon!");
+        printWithLines(" Bye! Hope to see you again soon!");
     }
 }
 
