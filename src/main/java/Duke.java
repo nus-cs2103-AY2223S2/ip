@@ -11,8 +11,6 @@ import java.util.Scanner;
 
 public class Duke {
 
-    private static final String INDENT = "    ";
-    private static final String HORIZONTAL_LINE = "______________________________";
     private static final String LOGO
             = " ____        _        \n"
             + "|  _ \\ _   _| | _____ \n"
@@ -20,53 +18,47 @@ public class Duke {
             + "| |_| | |_| |   <  __/\n"
             + "|____/ \\__,_|_|\\_\\___|\n";
 
-    private static ArrayList<String> tasks = new ArrayList<>(100);
-
-    private void fixedResponse(String text) {
-        System.out.println(INDENT + HORIZONTAL_LINE);
-        String[] lines = text.split("\n");
-        for (String s : lines) {
-            System.out.println(INDENT + s);
-        }
-        System.out.println(INDENT + HORIZONTAL_LINE + "\n");
-    }
-
-    private void greet() {
-        fixedResponse("Hello I'm\n" + LOGO + "What can I do for you?");
-    }
-
-    private void exit() {
-        fixedResponse("Bye. Hope to see you again soon!");
-    }
-
-    private void add(String s) {
-        fixedResponse("added: " + s);
-    }
-
-    private void list() {
-        System.out.println(INDENT + HORIZONTAL_LINE);
-        for (int i = 0; i < tasks.size(); i++) {
-            System.out.println(INDENT + (i + 1) + ". " + tasks.get(i));
-        }
-        System.out.println(INDENT + HORIZONTAL_LINE + "\n");
-    }
-
     public static void main(String[] args) {
-        Duke duke = new Duke();
-        duke.greet();
+        // Initialize components
+        Feedback fb = new Feedback();
+        Scanner scn = new Scanner(System.in);
+        ArrayList<Task> tasks = new ArrayList<>(100);
 
-        Scanner scanner = new Scanner(System.in);
-        String input = scanner.nextLine();
-        while (!input.equals("bye")) {
-            if (input.equals("list")) {
-                duke.list();
-            } else {
-                tasks.add(input);
-                duke.add(input);
+        fb.greet(LOGO);
+        String input = scn.nextLine();
+        String cmd = input.split(" ")[0];
+
+        while (!cmd.equals("bye")) {
+            int index;
+            Task task;
+
+            switch (cmd) {
+                case "list":
+                    fb.listTask(tasks);
+                    break;
+
+                case "mark":
+                    index = Integer.parseInt(input.split(" ")[1]) - 1;
+                    task = tasks.get(index);
+                    task.markDone();
+                    fb.markTask(task);
+                    break;
+
+                case "unmark":
+                    index = Integer.parseInt(input.split(" ")[1]) - 1;
+                    task = tasks.get(index);
+                    task.unmarkedDone();
+                    fb.unmarkedTask(task);
+                    break;
+
+                default:
+                    tasks.add(new Task(input));
+                    fb.addTask(input);
             }
-            input = scanner.nextLine();
+            input = scn.nextLine();
+            cmd = input.split(" ")[0];
         }
-        duke.exit();
-        scanner.close();
+        fb.exit();
+        scn.close();
     }
 }
