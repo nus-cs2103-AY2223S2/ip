@@ -5,7 +5,7 @@ public class Event extends Task {
     String from;
     String to;
 
-    public Event(HashMap<String, String> parsed) {
+    public Event(HashMap<String, String> parsed) throws Exception {
         super(parsed.get("event"));
         from = parsed.get("/from");
         to = parsed.get("/to");

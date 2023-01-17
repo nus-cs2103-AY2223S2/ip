@@ -4,7 +4,10 @@ public class Task {
     private Boolean isDone;
     protected Character abbreviation;
 
-    public Task(String task) {
+    public Task(String task) throws Exception {
+        if (task == "") {
+            throw new Exception("OOPS!!! The description of a task cannot be empty.");
+        }
         this.task = task;
         this.isDone = false;
     }

@@ -1,6 +1,7 @@
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
+import java.util.concurrent.ExecutionException;
 import java.util.function.Function;
 
 public class DukeList {
@@ -11,7 +12,7 @@ public class DukeList {
         return list;
     }
 
-    public ToDo addToDo(String chat) {
+    public ToDo addToDo(String chat) throws Exception {
         Function<String, HashMap<String, String>> parser = todoParser();
         HashMap<String, String> parsed = parser.apply(chat);
         ToDo newToDo = new ToDo(parsed);
@@ -19,16 +20,15 @@ public class DukeList {
         return newToDo;
     }
 
-    public Deadline addDeadline(String chat) {
+    public Deadline addDeadline(String chat) throws Exception {
         Function<String, HashMap<String, String>> parser = deadlineParser();
         HashMap<String, String> parsed = parser.apply(chat);
-        System.out.println(parsed);
         Deadline newDeadline = new Deadline(parsed);
         list.add(newDeadline);
         return newDeadline;
     }
 
-    public Event addEvent(String chat) {
+    public Event addEvent(String chat) throws Exception {
         Function<String, HashMap<String, String>> parser = eventParser();
         HashMap<String, String> parsed = parser.apply(chat);
         Event newEvent = new Event(parsed);
@@ -86,6 +86,11 @@ public class DukeList {
         Integer taskNumber = Integer.valueOf(taskNumberString) - 1;
         Task task = list.get(taskNumber);
         task.unmark();
+        return task;
+    }
+    public Task delete(String taskNumberString) {
+        int taskNumber = Integer.valueOf(taskNumberString) - 1;
+        Task task = list.remove(taskNumber);
         return task;
     }
 }

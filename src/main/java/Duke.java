@@ -62,30 +62,51 @@ public class Duke {
                 break;
             }
             case("todo"): {
-                Task task = ls.addToDo(chat);
-                String response = "Got it. I've added this task:\n";
-                response += task.toString() + "\n";
-                response += "Now you have " + ls.getSize() + " tasks in the list.";
-                print(response);
+                try {
+                    Task task = ls.addToDo(chat);
+                    String response = "Got it. I've added this task:\n";
+                    response += task.toString() + "\n";
+                    response += "Now you have " + ls.getSize() + " tasks in the list.";
+                    print(response);
+                } catch (Exception e) {
+                    print(e.toString());
+                }
                 break;
             }
             case("deadline"): {
-                Task task = ls.addDeadline(chat);
-                String response = "Got it. I've added this task:\n";
-                response += task.toString() + "\n";
-                response += "Now you have " + ls.getSize() + " tasks in the list.";
-                print(response);
+                try {
+                    Task task = ls.addDeadline(chat);
+                    String response = "Got it. I've added this task:\n";
+                    response += task.toString() + "\n";
+                    response += "Now you have " + ls.getSize() + " tasks in the list.";
+                    print(response);
+                } catch (Exception e) {
+                    print(e.toString());
+                }
                 break;
             }
             case("event"): {
-                Task task = ls.addEvent(chat);
-                String response = "Got it. I've added this task:\n";
+                try {
+                    Task task = ls.addEvent(chat);
+                    String response = "Got it. I've added this task:\n";
+                    response += task.toString() + "\n";
+                    response += "Now you have " + ls.getSize() + " tasks in the list.";
+                    print(response);
+                } catch (Exception e) {
+                    print(e.toString());
+                }
+                break;
+            }
+            case("delete"): {
+                Task task = ls.delete(chat.substring(7));
+                String response = "Noted. I've removed this task:\n";
                 response += task.toString() + "\n";
                 response += "Now you have " + ls.getSize() + " tasks in the list.";
                 print(response);
                 break;
             }
             default:
+                print("OOPS!!! I'm sorry, but I don't know what that means :-(");
 
         }
     }
