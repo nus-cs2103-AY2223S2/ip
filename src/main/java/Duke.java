@@ -21,7 +21,7 @@ public class Duke {
             if(currInput.equals("list")) {
                 System.out.println("Here are the tasks in your list:");
                 for(int i = 0; i < curr; i++) {
-                    System.out.println((i + 1) + ". " + inputs[i]);
+                    System.out.println((i + 1) + "." + inputs[i]);
                 }
             } else if(isMarkTask) {
                 Task taskToMark = inputs[Integer.parseInt(splitStr[1]) - 1];
