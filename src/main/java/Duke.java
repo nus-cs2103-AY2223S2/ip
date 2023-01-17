@@ -1,3 +1,7 @@
+import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -8,6 +12,11 @@ public class Duke {
         Scanner usr_in = new Scanner(System.in);
         items = new ArrayList<>();
         greet();
+        try {
+            loadData();
+        } catch (IOException e) {
+            System.out.println("Something went wrong...");
+        }
         // Start user input
         start(usr_in);
     }
@@ -15,14 +24,14 @@ public class Duke {
     private static void start(Scanner usr_in) {
         while (usr_in.hasNextLine()) {
             try {
-               parse_cmds(usr_in);
-            } catch (DukeException e) {
+                parse_cmds(usr_in);
+            } catch (Exception e) {
                 System.out.println(line_break + "\t " + e.getMessage() + "\n" + line_break);
             }
         }
     }
 
-    private static void parse_cmds(Scanner usr_in) throws DukeException {
+    private static void parse_cmds(Scanner usr_in) throws Exception {
         String curr_in = usr_in.nextLine().trim();
         String[] curr = curr_in.split("/"); //split into title and time-related
         String[] curr_title = curr[0].split(" "); //split title by word
@@ -44,6 +53,34 @@ public class Duke {
             deleteTask(curr_title);
         } else {
             throw new DukeException("Hmmm, I don't understand what you want to do");
+        }
+        writeToData("data/duke.txt", itemsToData());
+    }
+
+    public static void loadData() throws IOException {
+        try {
+            Scanner in = new Scanner(Paths.get("data", "duke.txt"));
+            while(in.hasNextLine()) {
+                String line = in.nextLine();
+                parse_data(line);
+            }
+        } catch (IOException e) {
+            File file = new File("data/duke.txt");
+            file.getParentFile().mkdirs();
+            FileWriter fw = new FileWriter(file);
+            fw.close();
+        }
+    }
+
+    public static void parse_data(String line) {
+        String[] parts = line.split("\\|");
+        if (parts[0].trim().equals("[T]")) {
+            items.add(new ToDo(parts[2].trim(), parts[1].trim().equals("1")));
+        } else if (parts[0].trim().equals("[D]")) {
+            items.add(new Deadline(parts[2].trim(), parts[3].trim(), parts[1].trim().equals("1")));
+        } else if (parts[0].trim().equals("[E]")) {
+            String[] fromAndTo = parts[3].trim().split("-");
+            items.add(new Event(parts[2].trim(), fromAndTo[0], fromAndTo[1], parts[1].trim().equals("1")));
         }
     }
 
@@ -128,6 +165,21 @@ public class Duke {
         } catch (Exception e) {
             throw new DukeException("Please give a valid input with index between 1 and " + items.size());
         }
+    }
+
+    public static void writeToData(String path, String newData) throws IOException {
+        FileWriter fw = new FileWriter(path);
+        fw.write(newData);
+        fw.close();
+    }
+
+    public static String itemsToData() {
+        String data = "";
+        for (int i = 0; i < items.size(); i++) {
+            data += items.get(i).toData();
+            data += "\n";
+        }
+        return data;
     }
 
     /*

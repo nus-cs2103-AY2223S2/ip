@@ -22,6 +22,10 @@ public class Task {
     public boolean isMarked() {
         return this.done;
     }
+
+    public String toData() {
+        return this.type + " | " + (this.done ? "1" : "0") + " | " + this.title;
+    }
     @Override
     public String toString() {
         return this.type + (done ? checked : unchecked) + " "  + this.title;
