@@ -1,3 +1,4 @@
+import java.util.NoSuchElementException;
 import java.util.Scanner;
 
 import command.Command;
@@ -37,35 +38,32 @@ public class Duke {
 
     private String execute(String rawInput, MainManager manager) {
         String msg = rawInput;
+        String inputString = rawInput;
+        Command command = Command.ADD_TASK;
+
         try (Scanner scanner = new Scanner(rawInput)) {
             if (scanner.hasNext()) {
-                Command command;
-                try {
-                    command = Command.valueOf(scanner.next().toUpperCase());
-                } catch (IllegalArgumentException illArgEx) {
-                    command = Command.ADD_TASK;
-                }
+                command = Command.valueOf(scanner.next().toUpperCase());
 
-                if (command.equals(Command.BYE)) {
-                    isExit = true;
-                }
-
-                CommandInput input = CommandInput.parse("", manager);
                 if (scanner.hasNext()) {
-                    try {
-                        input = CommandInput.parse(msg, manager);
-                    } catch (IllegalArgumentException illArgEx) {
-                        return msg;
-                    }
-                }
-
-                try {
-                    msg = command.execute(input);
-                } catch (IllegalArgumentException illArgEx) {
-                    return msg;
+                    inputString = scanner.nextLine();
                 }
             }
+        } catch (IllegalArgumentException noElmEx) {
+            command = Command.ADD_TASK;
         }
+
+        if (command.equals(Command.BYE)) {
+            this.isExit = true;
+        }
+
+        try {
+            CommandInput input = CommandInput.parse(inputString, manager);
+            msg = command.execute(input);
+        } catch (IllegalArgumentException illArgEx) {
+            return illArgEx.toString();
+        }
+
         return msg;
     }
 
