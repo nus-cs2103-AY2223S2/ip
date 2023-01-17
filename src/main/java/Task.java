@@ -32,4 +32,6 @@ public abstract class Task {
     public static void removeTaskCount() {
         count--;
     }
+
+    public abstract String toRaw();
 }

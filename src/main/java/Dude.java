@@ -1,11 +1,14 @@
+import java.io.File;
+import java.io.FileNotFoundException;
 import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Dude {
-    private static final ArrayList<Task> todoList = new ArrayList<>();
+    private static ArrayList<Task> taskList = new ArrayList<>();
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
 
+        loadStorage();
         getIntro();
 
         while(true) {
@@ -26,8 +29,8 @@ public class Dude {
     }
 
     public static void getIntro() {
-        String logo = "  _____          __     \n" +
-                " |  __ \\ __ __   | |  ___  \n" +
+        String logo = "  _____           __     \n" +
+                " |  __ \\ __ __    | | ___  \n" +
                 " | |  | | | | |/ _` |/ _ \\\n" +
                 " | |__| | |_| | (_| |  __/\n" +
                 " |_____/ \\__,_|\\__,_|\\___|\n";
@@ -37,6 +40,21 @@ public class Dude {
         System.out.println("\tYo! I'm dude");
         System.out.println("\tWhat you want me do for you?");
         System.out.println(" _______________________________________________________________________\n");
+    }
+
+    public static void loadStorage() {
+        try {
+            taskList = Storage.loadData();
+            for (Task i : taskList) {
+                System.out.println(i);
+            }
+        } catch(FileNotFoundException e) {
+            System.out.println(e.getMessage());
+        }
+    }
+
+    public static void saveStorage(ArrayList<Task> taskList) {
+        Storage.saveData(taskList);
     }
 
     public static void getCommands(String command) throws DudeInvalidCommandException, DudeMissingCommandException {
@@ -64,17 +82,14 @@ public class Dude {
                 break;
             case "todo":
                 if (cmd.length < 2) throw new DudeMissingCommandException();
-                System.out.println("\tGot it. I've added this task:");
                 addTask(Type.TODO, cmd[1]);
                 break;
             case "deadline":
                 if (cmd.length < 2) throw new DudeMissingCommandException();
-                System.out.println("\tGot it. I've added this task:");
                 addTask(Type.DEADLINE, cmd[1]);
                 break;
             case "event":
                 if (cmd.length < 2) throw new DudeMissingCommandException();
-                System.out.println("\tGot it. I've added this task:");
                 addTask(Type.EVENT, cmd[1]);
                 break;
             case "delete":
@@ -107,21 +122,21 @@ public class Dude {
                 task = new Event(format[0], details[0], details[1]);
                 break;
         }
-        todoList.add(task);
+        taskList.add(task);
         Task.addTaskCount();
+        saveStorage(taskList);
         System.out.println(" _______________________________________________________________________");
+        System.out.println("\tGot it. I've added this task already:");
         System.out.println("\t" + task);
         System.out.println("\tNow got " + Task.count + " tasks in your list liao.");
         System.out.println(" _______________________________________________________________________\n");
-
-
     }
 
     public static void getList() {
         if (Task.count != 0) {
             System.out.println("\tHere are the tasks in your list: ");
             for (int i = 0; i < Task.count; i++) {
-                System.out.println("\t" + (i + 1) + "." + todoList.get(i).toString());
+                System.out.println("\t" + (i + 1) + "." + taskList.get(i).toString());
             }
         } else {
             System.out.println("\tEh... You currently got no task leh.");
@@ -130,9 +145,10 @@ public class Dude {
 
     public static void markTask(int task) {
         if (Task.count > task && Task.count != 0) {
-            System.out.println("\tSwee! I've marked this task as done loh:");
-            Task currentTask = todoList.get(task);
+            Task currentTask = taskList.get(task);
             currentTask.mark();
+            saveStorage(taskList);
+            System.out.println("\tSwee! I've marked this task as done loh:");
             System.out.println("\t" + currentTask);
         } else {
             System.out.println("\tUhh... Where got this task for me to mark?");
@@ -141,9 +157,10 @@ public class Dude {
 
     public static void unmarkTask(int task) {
         if (Task.count > task && Task.count != 0) {
-            System.out.println("\tOkay liar, I've marked this task as undone liao:");
-            Task currentTask = todoList.get(task);
+            Task currentTask = taskList.get(task);
             currentTask.unmark();
+            saveStorage(taskList);
+            System.out.println("\tOkay liar, I've marked this task as undone liao:");
             System.out.println("\t" + currentTask);
         } else {
             System.out.println("\tUhh... Where got this task for me to unmark?");
@@ -158,11 +175,12 @@ public class Dude {
 
     public static void deleteTask(int task) {
         if (Task.count > task && Task.count != 0) {
-            System.out.println("\tOkay can. I've removed this task already:");
-            Task currentTask = todoList.get(task);
-            todoList.remove(task);
-            System.out.println("\t" + currentTask);
+            Task currentTask = taskList.get(task);
+            taskList.remove(task);
             Task.removeTaskCount();
+            saveStorage(taskList);
+            System.out.println("\tOkay can. I've removed this task already:");
+            System.out.println("\t" + currentTask);
             System.out.println("\tNow only left with " + Task.count + " tasks in your list liao.");
         } else {
             System.out.println("\tUhh... Where got this task for me to delete?");
