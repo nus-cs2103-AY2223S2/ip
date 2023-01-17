@@ -3,22 +3,21 @@
 		What can I do for you?
 	________________________________________________________
 	________________________________________________________
+	There are no tasks in your list. Please add one.
+	________________________________________________________
+	________________________________________________________
 	Noted. I've added this task:
 	  [T][ ] borrow book
 	You have 1 task in your list currently.
 	________________________________________________________
 	________________________________________________________
-	Here are the tasks in your list: 
-	1.[T][ ] borrow book
-	________________________________________________________
-	________________________________________________________
 	Noted. I've added this task:
-	  [D][ ] return book (by: Sunday)
+	  [D][ ] return book (by: Mar 1 2019 08:15 am)
 	You have 2 tasks in your list currently.
 	________________________________________________________
 	________________________________________________________
 	Noted. I've added this task:
-	  [E][ ] project meeting (from: Mon 2pm, to: 4pm)
+	  [E][ ] project meeting (from: Dec 2 2019 06:00 pm, to: Dec 2 2019 10:00 pm)
 	You have 3 tasks in your list currently.
 	________________________________________________________
 	________________________________________________________
@@ -28,16 +27,21 @@
 	________________________________________________________
 	Here are the tasks in your list: 
 	1.[T][X] borrow book
-	2.[D][ ] return book (by: Sunday)
-	3.[E][ ] project meeting (from: Mon 2pm, to: 4pm)
+	2.[D][ ] return book (by: Mar 1 2019 08:15 am)
+	3.[E][ ] project meeting (from: Dec 2 2019 06:00 pm, to: Dec 2 2019 10:00 pm)
 	________________________________________________________
 	________________________________________________________
 	Nice! I've marked this task as done:
-	[E][X] project meeting (from: Mon 2pm, to: 4pm)
+	[E][X] project meeting (from: Dec 2 2019 06:00 pm, to: Dec 2 2019 10:00 pm)
+	________________________________________________________
+	________________________________________________________
+	Noted. I've added this task:
+	  [E][ ] play table tennis (from: Dec 2 2019 04:00 pm, to: Dec 2 2019 06:00 pm)
+	You have 4 tasks in your list currently.
 	________________________________________________________
 	________________________________________________________
 	Nice! I've marked this task as done:
-	[D][X] return book (by: Sunday)
+	[D][X] return book (by: Mar 1 2019 08:15 am)
 	________________________________________________________
 	________________________________________________________
 	OK, I've marked this task as not done yet:
@@ -46,14 +50,20 @@
 	________________________________________________________
 	Here are the tasks in your list: 
 	1.[T][ ] borrow book
-	2.[D][X] return book (by: Sunday)
-	3.[E][X] project meeting (from: Mon 2pm, to: 4pm)
+	2.[D][X] return book (by: Mar 1 2019 08:15 am)
+	3.[E][X] project meeting (from: Dec 2 2019 06:00 pm, to: Dec 2 2019 10:00 pm)
+	4.[E][ ] play table tennis (from: Dec 2 2019 04:00 pm, to: Dec 2 2019 06:00 pm)
 	________________________________________________________
 	________________________________________________________
 	Oops! The item number cannot be empty.
 	________________________________________________________
 	________________________________________________________
 	Oops! The description of a todo cannot be empty.
+	________________________________________________________
+	________________________________________________________
+	These are the deadline/events that occur on Dec 2 2019 06:00 pm
+	3.[E][X] project meeting (from: Dec 2 2019 06:00 pm, to: Dec 2 2019 10:00 pm)
+	4.[E][ ] play table tennis (from: Dec 2 2019 04:00 pm, to: Dec 2 2019 06:00 pm)
 	________________________________________________________
 	________________________________________________________
 	Oops! I'm sorry but I don't know what that means.
@@ -65,23 +75,25 @@
 	Oops! The description of deadline must include a completion date/time.
 	________________________________________________________
 	________________________________________________________
+	Oops! Time format needs to be specified in proper form.
+	________________________________________________________
+	________________________________________________________
 	Oops! The description of event must include a from date/time.
 	________________________________________________________
 	________________________________________________________
 	Here are the tasks in your list: 
 	1.[T][ ] borrow book
-	2.[D][X] return book (by: Sunday)
-	3.[E][X] project meeting (from: Mon 2pm, to: 4pm)
+	2.[D][X] return book (by: Mar 1 2019 08:15 am)
+	3.[E][X] project meeting (from: Dec 2 2019 06:00 pm, to: Dec 2 2019 10:00 pm)
+	4.[E][ ] play table tennis (from: Dec 2 2019 04:00 pm, to: Dec 2 2019 06:00 pm)
 	________________________________________________________
 	________________________________________________________
 	Sure, I've removed this task:
-	  [E][X] project meeting (from: Mon 2pm, to: 4pm)
-	You have 2 tasks in your list currently.
+	  [E][X] project meeting (from: Dec 2 2019 06:00 pm, to: Dec 2 2019 10:00 pm)
+	You have 3 tasks in your list currently.
 	________________________________________________________
 	________________________________________________________
-	Here are the tasks in your list: 
-	1.[T][ ] borrow book
-	2.[D][X] return book (by: Sunday)
+	No deadline/events occur on May 6 2022 12:00 am
 	________________________________________________________
 	________________________________________________________
 	Bye! Have a nice day!

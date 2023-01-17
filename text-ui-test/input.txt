@@ -1,20 +1,22 @@
-todo borrow book
 list
-deadline return book /by Sunday
-event project meeting /from Mon 2pm /to 4pm
+todo borrow book
+deadline return book /by 2019-03-01 0815
+event project meeting /from 2/12/2019 1800 /to 2019-12-02 2200 
 mark 1 
 list
 mark 3
+event play table tennis /from 2019-12-02 1600 /to 2019-12-02 1800
 mark 2
 unmark 1
 list
 mark
 todo
+datetime 2019-12-02 1800 
 blah
 unmark
 deadline study history
 event play a chess /to Tues 1pm
 list
 delete 3
-list
+datetime 2022-05-06
 bye
