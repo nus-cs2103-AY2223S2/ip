@@ -28,7 +28,7 @@ public class Task {
 
     @Override
     public String toString() {
-        return "[" + this.taskNum + "] " + this.description;
+        return this.taskNum + ".[" + this.isDone + "] " + this.description;
     }
 
     //...
