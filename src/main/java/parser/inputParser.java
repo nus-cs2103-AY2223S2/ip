@@ -2,16 +2,15 @@ package parser;
 
 import exception.InvalidArgumentException;
 import exception.MissingArgumentException;
-import response.ListResponse;
-import response.Response;
-import response.CreateResponse;
-import response.MarkResponse;
-import response.UnMarkResponse;
+import response.*;
 
 /**
  * Represents the parser for the user input
  */
 public class InputParser {
+
+    private enum Types {LIST, MARK, UNMARK, TODO, DEADLINE, EVENT}
+
     /**
      * Represents the user input
      */
@@ -32,17 +31,23 @@ public class InputParser {
      * Parses the user input
      * @return Response returned, depending on the user input parsed
      */
-    public Response parse() throws MissingArgumentException {
+    public Response parse() throws MissingArgumentException, InvalidArgumentException {
         categorisation();
         switch (this.inputType) {
-            case "list":
+            case "LIST":
                 return new ListResponse();
-            case "mark":
+            case "MARK":
                 return new MarkResponse(this.inputContent);
-            case "unmark":
+            case "UNMARK":
                 return new UnMarkResponse(this.inputContent);
-            default:
+            case "TODO":
                 return new CreateResponse(this.inputContent);
+            case "DEADLINE":
+                return new DeadlineResponse(this.inputContent);
+            case "EVENT":
+                return new EventResponse(this.inputContent);
+            default:
+                throw new MissingArgumentException("idk whats going on bro");
         }
     }
 
@@ -89,21 +94,42 @@ public class InputParser {
         String[] arrStr = normalisedInput.split(" ", 2);
 
         if (arrStr.length == 2) { // user input is more than one word
-            if (arrStr[0].equals("mark") || arrStr[0].equals("unmark")) { // user wants to mark/unmark something
-                try {
+            try {
+                String currType = arrStr[0].toUpperCase();
+                Types.valueOf(currType);
+
+                if (currType.equals("MARK") || currType.equals("UNMARK")) {
                     Integer.parseInt(arrStr[1]);
-                } catch (NumberFormatException nfe) {
-                    throw new InvalidArgumentException("Enter a number after mark/unmark!");
                 }
 
-                this.inputType = arrStr[0].toLowerCase();
+                this.inputType = currType;
                 this.inputContent = arrStr[1];
-            } else { // treat it as a regular create new task response
-                this.inputType = normalisedInput;
-                this.inputContent = normalisedInput;
+            } catch (NumberFormatException e) {
+                throw new InvalidArgumentException("Enter a number after mark/unmark!");
+            } catch (IllegalArgumentException e) {
+                throw new InvalidArgumentException("Remember to specify the type of request in your input!");
             }
+
+//            if (arrStr[0].equals("mark")
+//                    || arrStr[0].equals("unmark")) { // user wants to mark/unmark something
+//                try {
+//                    Integer.parseInt(arrStr[1]);
+//                } catch (NumberFormatException nfe) {
+//                    throw new InvalidArgumentException("Enter a number after mark/unmark!");
+//                }
+//
+//                this.inputType = arrStr[0].toLowerCase();
+//                this.inputContent = arrStr[1];
+//            } else if (arrStr[0].equals("todo")
+//                    || arrStr[0].equals("deadline")
+//                    || arrStr[0].equals("event")) {
+//                this.inputType = arrStr[0];
+//                this.inputContent = arrStr[1];
+//            } else {
+//                throw new InvalidArgumentException("Remember to specify the type of request in your input!")
+//            }
         } else if (arrStr.length == 1) { // user input is only one word (either list or create)
-            this.inputType = arrStr[0].toLowerCase();
+            this.inputType = arrStr[0].toUpperCase();
             this.inputContent = arrStr[0];
         } else if (arrStr.length == 0) { // for the edge cases where user input " " or ""
             throw new MissingArgumentException("Please enter something for me to parse!");
