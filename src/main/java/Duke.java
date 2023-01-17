@@ -9,16 +9,20 @@ public class Duke {
                 + "|____/ \\__,_|_|\\_\\___|\n";
         System.out.println("Hello from\n" + logo + "What can I do for you?");
 
+        DukeList dukeList = new DukeList();
         Scanner sc = new Scanner(System.in);
         while (sc.hasNext()) {
-            String input = sc.nextLine();
+            String command = sc.nextLine();
             // More cases to be added.
-            switch (input) {
+            switch (command) {
                 case "bye":
                     System.out.println("Bye. Hope to see you again soon!");
                     return;
+                case "list":
+                    dukeList.list();
+                    break;
                 default:
-                    System.out.println(input);
+                    dukeList.addTask(command);
                     break;
             }
         }
