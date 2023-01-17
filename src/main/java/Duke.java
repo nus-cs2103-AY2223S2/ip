@@ -70,7 +70,7 @@ public class Duke {
                     }
                 } else if((userInput.split(" ")[0]).equals("unmark")){
                     int indexOfFirstSpace = userInput.indexOf(" ");
-                    if (indexOfFirstSpace == -1){
+                    if (indexOfFirstSpace == -1 || userInput.substring(indexOfFirstSpace+1).isBlank()){
                         errMsg = "______________________________________\n"
                                 + " ☹ OOPS!!! Please supply a task number you wish to mark as incomplete.\n"
                                 + "______________________________________\n";
@@ -95,8 +95,38 @@ public class Duke {
                                 + "______________________________________\n";
                         throw new DukeException(errMsg);
                     }
-                }
-                else if(userInput.split(" ")[0].equals("todo")){
+                } else if (userInput.split(" ")[0].equals("delete")){
+                    int indexOfFirstSpace = userInput.indexOf(" ");
+                    if (indexOfFirstSpace == -1|| userInput.substring(indexOfFirstSpace+1).isBlank()){
+                        errMsg = "______________________________________\n"
+                                + " ☹ OOPS!!! Please supply a task number you wish to delete.\n"
+                                + "______________________________________\n";
+                        throw new DukeException(errMsg);
+                    }
+
+                    try{
+                        int numToDelete = Integer.parseInt(userInput.split(" ")[1]);
+                        if (numToDelete == 0 || (numToDelete > Task.getNumTasks())){
+                            errMsg = "______________________________________\n"
+                                    + " ☹ OOPS!!! Invalid delete selection.\n"
+                                    + "______________________________________\n";
+                            throw new DukeException(errMsg);
+                        }
+                        Task.deleteTask();
+                        resultString = "______________________________________\n"
+                                + "Noted, I've removed this task: \n"
+                                + userTasks.get(numToDelete- 1) + "\n"
+                                + "Now you have " + Task.getNumTasks() + " tasks in the list.\n"
+                                + "______________________________________\n";
+                        userTasks.remove(numToDelete-1);
+                    } catch (NumberFormatException nfe){
+                        errMsg = "______________________________________\n"
+                                + " ☹ OOPS!!! Please supply a valid task number you wish to delete.\n"
+                                + "______________________________________\n";
+                        throw new DukeException(errMsg);
+                    }
+
+                }else if(userInput.split(" ")[0].equals("todo")){
                     int indexOfFirstSpace = userInput.indexOf(" ");
                     String taskDescription = userInput.substring(indexOfFirstSpace+1);
                     if(indexOfFirstSpace == -1 || taskDescription.isBlank()){
