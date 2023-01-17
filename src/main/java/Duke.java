@@ -11,33 +11,22 @@ public class Duke {
 
         System.out.println("Hello from\n" + LOGO);
 
-        reply("This is Chattington the Chatter, I'll chat with you.\n" +
+        ChatBot chatBot = new ChatBot();
+
+        chatBot.reply("This is Chattington the Chatter, I'll chat with you.\n" +
                 "What can I do for you?\n");
 
         while(true) {
             Scanner sc = new Scanner(System.in);
             String input = sc.nextLine();
             if (input.equals("bye")) {
-                reply("Alright, goodbye to you too!");
+                chatBot.close();
                 break;
             } else {
-                reply(input);
+                chatBot.processInput(input);
             }
         }
     }
 
-    private static void reply(String s) {
-        if (s.charAt(s.length() - 1) != '\n') {
-            s += '\n';
-        }
-        String LINE_SEPARATOR = "----------------------------------------\n";
-        String output = LINE_SEPARATOR + s + LINE_SEPARATOR;
-        for (String line : output.split("\n")) {
-            System.out.println(indent(line));
-        }
-    }
 
-    private static String indent(String s) {
-        return "\t" + s;
-    }
 }
