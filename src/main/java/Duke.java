@@ -1,10 +1,22 @@
 public class Duke {
+    UIText ui = new UIText();
     public static void main(String[] args) {
-        String logo = " ____        _        \n"
-                + "|  _ \\ _   _| | _____ \n"
-                + "| | | | | | | |/ / _ \\\n"
-                + "| |_| | |_| |   <  __/\n"
-                + "|____/ \\__,_|_|\\_\\___|\n";
-        System.out.println("Hello from\n" + logo);
+        new Duke().run();
+
+    }
+
+    public void run() {
+        boolean isClosed = false;
+
+        System.out.println(ui.greet());
+        while (!isClosed) {
+            String input = ui.getInput();
+            if (input.equals("bye")) {
+                System.out.println(ui.exit());
+                isClosed = true;
+            } else {
+                System.out.println(input);
+            }
+        }
     }
 }
