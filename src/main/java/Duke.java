@@ -13,7 +13,7 @@ public class Duke {
         task[numOfTask - 1] = t;
 
         System.out.println("\t____________________________________________________________");
-        System.out.println("\tGot it. I've added this task: \n\t  " + t + "\n\tNow you have " + numOfTask + " tasks in the list.");
+        System.out.println("\tGot it. I've added this task:\n\t  " + t + "\n\tNow you have " + numOfTask + " tasks in the list.");
         System.out.println("\t____________________________________________________________");
     }
 
@@ -38,7 +38,7 @@ public class Duke {
         task[i].setDone(true);
 
         System.out.println("\t____________________________________________________________");
-        System.out.println("\tNice! I've marked this task as done: ");
+        System.out.println("\tNice! I've marked this task as done:");
         System.out.println("\t  " + task[i]);
         System.out.println("\t____________________________________________________________");
     }
