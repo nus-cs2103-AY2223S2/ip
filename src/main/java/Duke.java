@@ -3,6 +3,12 @@ import java.util.ArrayList;
 
 public class Duke {
 
+    // Enums for the different commands
+    private enum Command {
+        TODO, DEADLINE, EVENT, LIST,
+        MARK, UNMARK, DELETE, BYE, UNKNOWN
+    }
+
     /**
      * Adds user input to a list.
      * Supports several tasks, such as todo,
@@ -18,14 +24,35 @@ public class Duke {
         while (true) {
             // Stores the user input.
             String input = userInput.nextLine();
+            Command inputType;
+
+            if (input.equals("bye")) {
+                inputType = Command.BYE;
+            } else if (input.matches("todo(.*)")) {
+                inputType = Command.TODO;
+            } else if (input.matches("deadline(.*)")) {
+                inputType = Command.DEADLINE;
+            } else if (input.matches("event(.*)")) {
+                inputType = Command.EVENT;
+            } else if (input.equals("list")) {
+                inputType = Command.LIST;
+            } else if (input.matches("mark(.*)")) {
+                inputType = Command.MARK;
+            } else if (input.matches("unmark(.*)")) {
+                inputType = Command.UNMARK;
+            } else if (input.matches("delete(.*)")) {
+                inputType = Command.DELETE;
+            } else {
+                inputType = Command.UNKNOWN;
+            }
 
             System.out.println("____________________________________________________________");
 
             try {
-                if (input.equals("bye")) {
+                if (inputType == Command.BYE) {
                     // User input: bye
                     System.out.println("Bye. Hope to see you soon!");
-                } else if (input.matches("todo(.*)")) {
+                } else if (inputType == Command.TODO) {
                     // User input: todo x
                     input = input.replace("todo ", "");
                     if (input.equals("todo")) {
@@ -37,7 +64,7 @@ public class Duke {
                         System.out.println("    " + list.get(list.size() - 1).toString());
                         System.out.println("Now you have " + list.size() + " tasks in the list.");
                     }
-                } else if (input.matches("deadline(.*)")) {
+                } else if (inputType == Command.DEADLINE) {
                     // User input: deadline x
                     input = input.replace("deadline ", "");
                     if (input.equals("deadline")) {
@@ -50,7 +77,7 @@ public class Duke {
                         System.out.println("    " + list.get(list.size() - 1).toString());
                         System.out.println("Now you have " + list.size() + " tasks in the list.");
                     }
-                } else if (input.matches("event(.*)")) {
+                } else if (inputType == Command.EVENT) {
                     // User input: event x
                     input = input.replace("event ", "");
                     if (input.equals("event")) {
@@ -65,13 +92,13 @@ public class Duke {
                         System.out.println("    " + list.get(list.size() - 1).toString());
                         System.out.println("Now you have " + list.size() + " tasks in the list.");
                     }
-                } else if (input.equals("list")) {
+                } else if (inputType == Command.LIST) {
                     // User input: list
                     System.out.println("Here are the tasks in your list:");
                     for (int i = 0; i < list.size(); i++) {
                         System.out.println(i + 1 + ". " + list.get(i).toString());
                     }
-                } else if (input.matches("mark(.*)")) {
+                } else if (inputType == Command.MARK) {
                     // User input: mark x
                     // Extracts the numbered item from the user input string
                     int index = Integer.parseInt(input.replaceAll("[^0-9]", "")) - 1;
@@ -83,7 +110,7 @@ public class Duke {
                         System.out.println("Nice! I've marked this task as done:");
                         System.out.println("    " + list.get(index).toString());
                     }
-                } else if (input.matches("unmark(.*)")) {
+                } else if (inputType == Command.UNMARK) {
                     // User input: unmark x
                     // Extracts the numbered item from the user input string
                     int index = Integer.parseInt(input.replaceAll("[^0-9]", "")) - 1;
@@ -95,7 +122,7 @@ public class Duke {
                         System.out.println("OK, I've marked this task as not done yet:");
                         System.out.println("    " + list.get(index).toString());
                     }
-                } else if (input.matches("delete(.*)")) {
+                } else if (inputType == Command.DELETE) {
                     // User input: delete x
                     int index = Integer.parseInt(input.replaceAll("[^0-9]", "")) - 1;
                     if ((index < 0) | (index > (list.size() - 1)) ) {
@@ -107,7 +134,7 @@ public class Duke {
                         list.remove(index);
                         System.out.println("Now you have " + list.size() + " tasks in the list.");
                     }
-                } else {
+                } else if (inputType == Command.UNKNOWN){
                     // Unknown command.
                     throw new DukeException("unknown");
                 }
