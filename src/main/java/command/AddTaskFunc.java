@@ -16,6 +16,9 @@ public class AddTaskFunc implements Function<CommandInput, String> {
     @Override
     public String apply(CommandInput input) throws IllegalArgumentException {
         Task task = taskCreator.apply(input);
+        if (task.getName().isBlank()) {
+            throw new IllegalArgumentException("Task name cannot be blank");
+        }
         input.getMainManager().getTaskManager().add(task);
         return String.format(
             "Got it. I've added this task:\n" +
