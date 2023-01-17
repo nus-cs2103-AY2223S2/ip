@@ -9,9 +9,9 @@ public class Duke {
 
     // printing the texts with lines on top and at the bottom
     public static void printWithLines(String text) {
-        System.out.println("    ____________________________");
+        System.out.println("    ____________________________________________________________");
         System.out.println("    " + text);
-        System.out.println("    ____________________________");
+        System.out.println("    ____________________________________________________________");
 
     }
 
@@ -38,8 +38,8 @@ public class Duke {
         if (listOfThings.size() > 1) {
             plural = "s";
         }
-        String str = "  " + addedItem.toString() + "\n    Now you have " + listOfThings.size() + " task" + plural + " in the list.";
-        str = "Got it. I've added this task:\n    " + str;
+        String str = "  " + addedItem.toString() + "\n     Now you have " + listOfThings.size() + " task" + plural + " in the list.";
+        str = " Got it. I've added this task:\n     " + str;
         printWithLines(str);
     }
 
@@ -47,9 +47,9 @@ public class Duke {
     public static void printList() {
 
         String totalString = "";
-        totalString += "Here are the tasks in your list: \n    ";
+        totalString += " Here are the tasks in your list:";
         for (int i = 0; i < listOfThings.size(); i++) {
-            totalString += (i+1) + ". " + listOfThings.get(i).toString() + "\n" + "    ";
+            totalString += "\n     " + (i+1) + "." + listOfThings.get(i).toString();
         }
         printWithLines(totalString);
     }
@@ -57,9 +57,9 @@ public class Duke {
 
     // main driver function
     public static void main(String[] args) {
-        printWithLines("Hello! I'm Duke!\n    What can I do for you today?");
+        printWithLines(" Hello! I'm Duke!\n     What can I do for you today?");
+        Scanner input = new Scanner(System.in);
         while (true) {
-            Scanner input = new Scanner(System.in);
             String line = input.nextLine();
             String lowerLine = line.toLowerCase();
             if (lowerLine.equals("bye")) {

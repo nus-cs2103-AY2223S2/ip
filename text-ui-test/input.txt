@@ -1,0 +1,19 @@
+todo borrow book
+list
+event read book /from sunday /to monday
+deadline submit book report /by monday 2359
+mark 1
+mark 2
+mark 3
+list
+todo return book
+mark 4
+list
+unmark 4
+list
+unmark 2
+deadline get chinese new year clothes /by tomorrow
+event chinese new year! /from tomorrow /to next sunday
+list
+bye
+
