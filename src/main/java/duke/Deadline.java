@@ -1,5 +1,11 @@
 package duke;
 
+/*
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.time.temporal.ChronoUnit;
+*/
+
 class Deadline extends Task {
 
     protected String by;
@@ -13,7 +19,14 @@ class Deadline extends Task {
         super(description, isDone);
         this.by = by;
     }
-
+    
+    /*
+    String localDateParser() {
+        LocalDate date = LocalDate.parse(by);
+        return date.format(DateTimeFormatter.ofPattern("MMM dd yyyy"));
+    }
+    */
+    
     @Override
     Deadline markAsDone() {
         return new Deadline(this.getDescription(), by, true);
@@ -26,6 +39,6 @@ class Deadline extends Task {
     
     @Override
     public String toString() {
-        return "[D]" + super.toString() + " (by: " + by + ")";
+        return "[D]" + super.toString() + " (by: " + /*localDateParser()*/ by + ")";
     }
 }
