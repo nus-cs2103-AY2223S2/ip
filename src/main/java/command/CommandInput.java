@@ -43,10 +43,13 @@ public class CommandInput {
             throws IllegalArgumentException {
         try (Scanner scanner = new Scanner(token)) {
             String key = scanner.next().strip();
-            String value = scanner.nextLine().strip();
+            String value = "";
+            if (scanner.hasNext()) {
+                value = scanner.nextLine().strip();
+            }
             inputMap.put(key, value);
         } catch (NoSuchElementException noElmEx) {
-            throw new IllegalArgumentException();
+            throw new IllegalArgumentException("Parameter name cannot be empty");
         }
     }
 
