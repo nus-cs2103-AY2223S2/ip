@@ -3,7 +3,7 @@ import java.util.*;
 public class Duke {
 
     static String line = "      -----------------------------------------------------------------";
-    static ArrayList<String> list = new ArrayList<String>(100);
+    static ArrayList<Tasks> list = new ArrayList<Tasks>(100);
     public static void main(String[] args) {
         greet();
         System.out.println(line);
@@ -12,6 +12,15 @@ public class Duke {
 
         while(true) {
             String input = sc.nextLine();
+            String[] input_List = input.split(" ");
+            String firstWord = "";
+            String secondWord = "";
+
+            if (input_List.length == 2 ) {
+                firstWord = input_List[0];
+                secondWord = input_List[1];
+            }
+
 
             if (input.equalsIgnoreCase("bye")) {
                 System.out.println("        byebye! Have an exquisite day, cutiepatootie");
@@ -22,10 +31,27 @@ public class Duke {
                     System.out.println("        " + (i + 1) + ". " + list.get(i));
                 }
                 System.out.println(line);
-            } else {
+            } else if (firstWord.equalsIgnoreCase("mark")) {
+                String int_Str = secondWord;
+                int index = Integer.parseInt(int_Str);
+                if(list.size() != 0 && index > 0 && index <= list.size() ) {
+                    list.get(index - 1 ).mark();
+                } else{
+                    System.out.println("Invalid Index!");
+                }
+            } else if (firstWord.equalsIgnoreCase("unmark")) {
+                String int_Str = secondWord;
+                int index = Integer.parseInt(int_Str);
+                if(list.size() != 0 && index > 0 && index <= list.size()) {
+                    list.get(index).unmark();
+                } else{
+                    System.out.println("Invalid Index!");
+                }
+            }
+                else {
                 //echoes input
                 System.out.println("\n" + line);
-                echo(input);
+                addToList(input);
                 System.out.println(line);
             }
         }
@@ -33,17 +59,23 @@ public class Duke {
         System.out.println(line);
     }
 
-    public static void echo(String name) {
-        System.out.println();
-        System.out.println("        added: " + name);
-        list.add(name);
-
+    public static void addToList(String name) {
+        if (name == "" || name == null) {
+            System.out.println("Empty input!");
+        } else {
+            System.out.println();
+            System.out.println("        added: " + name);
+            list.add(new Tasks(name));
+        }
     }
 
-    public static void addlist(String name) {
-        System.out.println();
-        System.out.println(name);
-
+    public static void echo(String name) {
+        if (name == "" || name.isEmpty()) {
+            System.out.println("Empty input!");
+        } else {
+            System.out.println();
+            System.out.println(name);
+        }
     }
 
     static void greet() {
