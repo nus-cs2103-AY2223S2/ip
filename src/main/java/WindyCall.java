@@ -1,13 +1,18 @@
 import java.util.Scanner;
+import java.util.List;
+import java.util.ArrayList;
 
 public class WindyCall {
 
-    private final Task[] tasks;
-    private int cnt;
+//    private final Task[] tasks;
+//    private int cnt;
+      private List<Task> tasks;
+
 
     public WindyCall() {
-        this.tasks = new Task[100];
-        this.cnt = 0;
+//        this.tasks = new Task[100];
+//        this.cnt = 0;
+        this.tasks = new ArrayList<>();
     }
 
     private static void space() {
@@ -100,18 +105,19 @@ public class WindyCall {
         }
         space();
         System.out.println(newTask);
-        this.tasks[cnt] = newTask;
-        this.cnt++;
+//        this.tasks[cnt] = newTask;
+//        this.cnt++;
+        this.tasks.add(newTask);
         space();
-        System.out.println("Now you have " + cnt + " tasks in the list.");
+        System.out.println("Now you have " + this.tasks.size() + " tasks in the list.");
     }
 
     private void displayTasks() {
         space();
         System.out.println("Here are all of your tasks:");
-        for (int i = 0; i < this.cnt; i++) {
+        for (int i = 0; i < this.tasks.size(); i++) {
             space();
-            System.out.println((i + 1) + "." + this.tasks[i]);
+            System.out.println((i + 1) + "." + this.tasks.get(i));
         }
     }
     public static void main(String[] args) {
@@ -141,11 +147,11 @@ public class WindyCall {
                         space();
                         System.out.println("☹ OOPS!!! You should input a number");
                     }
-                    if (num >= 1 && num <= chatBox.cnt) {
+                    if (num >= 1 && num <= chatBox.tasks.size()) {
                         System.out.println("     Good job! I've marked this task as done:");
-                        chatBox.tasks[num - 1].markAsDone();
+                        chatBox.tasks.get(num - 1).markAsDone();
                         space();
-                        System.out.println(chatBox.tasks[num - 1]);
+                        System.out.println(chatBox.tasks.get(num - 1));
                     } else if (num != -1) {
                         System.out.println("     Sorry, your index is out of range");
                     }
@@ -162,11 +168,11 @@ public class WindyCall {
                         space();
                         System.out.println("☹ OOPS!!! You should input a number");
                     }
-                    if (num >= 1 && num <= chatBox.cnt) {
+                    if (num >= 1 && num <= chatBox.tasks.size()) {
                         System.out.println("     OK, I've marked this task as not done yet:");
-                        chatBox.tasks[num - 1].unmark();
+                        chatBox.tasks.get(num - 1).unmark();
                         space();
-                        System.out.println(chatBox.tasks[num - 1]);
+                        System.out.println(chatBox.tasks.get(num - 1));
                     } else if (num != -1){
                         System.out.println("     Sorry, your index is out of range");
                     }
