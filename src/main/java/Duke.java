@@ -1,4 +1,6 @@
 import java.util.Scanner;
+import java.util.function.Consumer;
+import java.util.function.UnaryOperator;
 
 /**
  * The main class to run the Duke App.
@@ -31,8 +33,60 @@ public class Duke {
     private static void cleanup(Scanner sc) {
         sc.close();
     }
+
     private static void operate() {
         DukeStore store = DukeStore.create();
+
+        Consumer<String> mark = v -> {
+            String[] tokens = v.split(" ");
+            if (tokens.length != 2) {
+                DukeFormatter.error(new Exception(
+                        "Usage: mark {task_number}"
+                ));
+                return;
+            }
+
+            int idx;
+            try {
+                idx = Integer.parseInt(tokens[1]);
+            } catch (Exception e) {
+                DukeFormatter.error(new Exception(
+                        "Invalid task number entered. Ensure it is a number."
+                ));
+                return;
+            }
+
+            try {
+                store.mark(idx - 1);
+            } catch (DukeStoreInvalidAccessException e) {
+                DukeFormatter.error(e);
+            }
+        };
+
+        Consumer<String> unMark = v -> {
+            String[] tokens = v.split(" ");
+            if (tokens.length != 2) {
+                DukeFormatter.error(new Exception(
+                        "Usage: unmark {task_number}"
+                ));
+            }
+            int idx;
+
+            try {
+                idx = Integer.parseInt(tokens[1]);
+            } catch (Exception e) {
+                DukeFormatter.error(new Exception(
+                        "Invalid task number entered. Ensure it is a number."
+                ));
+                return;
+            }
+
+            try {
+                store.unMark(idx - 1);
+            } catch (DukeStoreInvalidAccessException e) {
+                DukeFormatter.error(e);
+            }
+        };
 
         Scanner sc = new Scanner(System.in);
         while (true) {
@@ -49,12 +103,21 @@ public class Duke {
                     DukeFormatter.section(store.toString());
                     continue;
 
+
                 default:
+                   if (command.startsWith("mark")) {
+                       mark.accept(command);
+                       continue;
+                   } else if (command.startsWith("unmark")) {
+                       unMark.accept(command);
+                       continue;
+                   }
+
                     try {
                         store.add(command);
                         DukeFormatter.section("added: " + command);
                     } catch (DukeStoreFullException e) {
-                        DukeFormatter.section("\u001B[31m" + e.getMessage() + "\u001B[0m");
+                        DukeFormatter.error(e);
                     }
             }
         }

@@ -35,4 +35,10 @@ abstract public class DukeFormatter {
         line();
         System.out.print("\n");
     }
+
+    public static void error(Exception error) {
+        line();
+        System.out.println(MASCOT + "\u001B[31m" + error.getMessage() + "\u001B[0m");
+        line();
+    }
 }
