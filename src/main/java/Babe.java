@@ -1,6 +1,4 @@
-import java.util.Locale;
-import java.util.Objects;
-import java.util.Scanner;
+import java.util.*;
 
 /**
  * <h1> Hi Babe! </h1>
@@ -26,7 +24,7 @@ public class Babe {
     /**
      * A string input from user.
      */
-    private String userInput = "";
+    private ArrayList<String> userInput = new ArrayList<>();
 
     /**
      * List of strings Babe received from the user.
@@ -68,7 +66,20 @@ public class Babe {
      */
     private void listen() {
         Scanner scanner = new Scanner(System.in);
-        userInput = scanner.nextLine().stripTrailing();
+        userInput = new ArrayList<>(Arrays.asList(scanner.nextLine().split(" ")));
+    }
+
+    /**
+     * Rebuilds a string from ArrayList from the starting index.
+     * A helper function to recover the original user input from userInput starting from the startingIndex.
+     */
+    private String rebuildUserInput(int startingIndex) {
+        String result = "";
+        for (int i = startingIndex; i < userInput.size(); i++) {
+            result += userInput.get(i);
+            result += " ";
+        }
+        return result.stripTrailing();
     }
 
     /**
@@ -76,9 +87,10 @@ public class Babe {
      * Adds userInput to memory and prints a message to indicate that the item has been stored.
      */
     private void addItem() {
-        this.memory[memoryCount++] = userInput;
+        String userInputString = rebuildUserInput(0);
+        this.memory[memoryCount++] = userInputString;
         Babe.drawLine();
-        System.out.printf("added %s \n", userInput);
+        System.out.printf("added %s \n", userInputString);
         Babe.drawLine();
     }
 
@@ -110,38 +122,20 @@ public class Babe {
         Babe.drawLine();
         System.exit(0);
     }
-
-    /**
-     * Checks if the user decides to change status for any item.
-     * Checks whether mark or unmark action is requested by user. Mark/Unmark will result in return of True/False.
-     * Null is returned if no such action is detected.
-     *
-     * @return True if "mark", False for "unmark", null otherwise.
-     */
-    private Boolean checkChangeStatus() {
-        Boolean toMark = null;
-        if (userInput.substring(0, 4).equalsIgnoreCase("mark")) {
-            toMark = true;
-        } else if (userInput.length() >= 6
-                && userInput.substring(0, 6).equalsIgnoreCase("unmark")) {
-            toMark = false;
-        }
-        return toMark;
-    }
-
+    
     /**
      * Marks/Unmarks the item of given index in Babe's list as Done/Undone.
      * If user keys in "mark", this function will extract the index to be marked and sets the index to True in
      * doneStatus. Sets the index to False if "unmark"is keyed in.
      */
     private void changeStatus(boolean toMark) {
-            userInput = toMark ? userInput.substring(5) : userInput.substring(7);
-            int index = Integer.parseInt(userInput);
-            this.doneStatus[index - 1] = toMark;
-            Babe.drawLine();
-            System.out.println(toMark ? "Okay, babygorl. I've marked this as Done:" : "We have un-Done this for you:");
-            System.out.printf((toMark ? this.MARKED : this.UNMARKED) + " %s\n", this.memory[index - 1]);
-            Babe.drawLine();
+        String userInputString = rebuildUserInput(1);
+        int index = Integer.parseInt(userInputString);
+        this.doneStatus[index - 1] = toMark;
+        Babe.drawLine();
+        System.out.println(toMark ? "Okay, babygorl. I've marked this as Done:" : "We have un-Done this for you:");
+        System.out.printf((toMark ? this.MARKED : this.UNMARKED) + " %s\n", this.memory[index - 1]);
+        Babe.drawLine();
     }
 
     public static void main(String[] args) {
@@ -150,29 +144,25 @@ public class Babe {
         chatBot.welcome();
 
         while (true) {
+
             chatBot.listen();
-            switch (chatBot.userInput.toLowerCase()) {
-            case "bye":
+            String instruction = chatBot.userInput.get(0);
+            int inputLength = chatBot.userInput.size();
+
+
+            if (instruction.equals("bye") && inputLength == 1) {
                 chatBot.sayBye();
-                break;
-            case "list":
+            } else if (instruction.equals("list") && inputLength == 1) {
                 chatBot.printList();
-                break;
-            default:
-                if (chatBot.userInput.length() >= 4) {
-                    Boolean toMark = chatBot.checkChangeStatus();
-                    if (!Objects.isNull(toMark)) {
-                        chatBot.changeStatus(toMark);
-                    } else {
-                        chatBot.addItem();
-                    }
-                } else {
-                    chatBot.addItem();
-
-
-                }
+            } else if (instruction.equals("mark")) {
+                chatBot.changeStatus(true);
+            } else if (instruction.equals("unmark")) {
+                chatBot.changeStatus(false);
+            } else {
+                chatBot.addItem();
             }
         }
-
     }
+
+
 }
