@@ -1,0 +1,34 @@
+todo read book
+todo clean room and sweep floor
+deadline submit pop quiz /by tomorrow at 2pm
+deadline learn java /by today
+deadline invalid deadline
+deadline invalid deadline /by
+event software engineering tutorial /from 2pm /to 1pm
+event ai lecture /from tomorrow 3pm /to tomorrow 4pm
+event invalid event /from today
+event invalid event /from /to
+event invalid event /to tomorrow
+event invalid event /from
+event invalid event
+event invalid event /to
+list
+mark 1
+list
+mark 6
+list
+unmark 1
+list
+unmark 6
+list
+mark 3
+list
+unmark 3
+list
+mark 1
+mark 1
+list
+unmark 1
+unmark 1
+list
+bye
