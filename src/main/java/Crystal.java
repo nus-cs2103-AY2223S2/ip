@@ -20,6 +20,7 @@ class Crystal {
                         System.out.println(i + 1 + ". " + list.get(i));
                     }
                     System.out.println(" ____________________________________________________________");
+
                 } else if (input.contains("unmark")) {
                     String getnum = input.replaceAll("[^0-9]", "");
                     int num = Integer.parseInt(getnum);
@@ -29,6 +30,7 @@ class Crystal {
                     t.isDone = false;
                     System.out.println(t.toString());
                     System.out.println(" ____________________________________________________________");
+
                 } else if (input.contains("mark")) {
                     String getnum = input.replaceAll("[^0-9]", "");
                     int num = Integer.parseInt(getnum);
@@ -38,6 +40,7 @@ class Crystal {
                     t.isDone = true;
                     System.out.println(t.toString());
                     System.out.println(" ____________________________________________________________");
+
                 } else if (input.contains("todo")) {
                     String s = input.replace("todo", "");
                     if (s.length() == 0) {
@@ -51,6 +54,7 @@ class Crystal {
                     list.add(t);
                     System.out.println("Current number of tasks : " + list.size());
                     System.out.println(" ____________________________________________________________");
+
                 } else if (input.contains("deadline")) {
                     System.out.println(" ____________________________________________________________");
                     String s = input.replace("deadline", "");
@@ -81,7 +85,7 @@ class Crystal {
                     System.out.println("Alright, I've added this task: ");
                     System.out.println(e.toString());
                     list.add(e);
-                    System.out.println("Current number of tasks : " + list.size());
+                    System.out.println("Current number of tasks: " + list.size());
                     System.out.println(" ____________________________________________________________");
 
                 } else if (input.equals("bye")) {
@@ -89,7 +93,18 @@ class Crystal {
                     System.out.println(" Thank You. Please come by again~!");
                     System.out.println(" ____________________________________________________________");
 
-                } else {
+                } else if (input.contains("delete")) {
+                    String getnum = input.replaceAll("[^0-9]", "");
+                    int num = Integer.parseInt(getnum);
+                    System.out.println(" ____________________________________________________________");
+                    System.out.println("Alright, I've removed this task: ");
+                    Task item = list.get(num-1);
+                    list.remove(num-1);
+                    System.out.println(item.toString());
+                    System.out.println("Current number of tasks: " + list.size());
+                    System.out.println(" ____________________________________________________________");
+                }
+                else {
                     throw new CrystalException("☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
 
                 }
