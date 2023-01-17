@@ -1,7 +1,7 @@
 import java.util.Scanner;
 
-import commands.Command;
-import commands.CommandInput;
+import command.Command;
+import command.CommandInput;
 
 public class Duke {
     private static String SEPARATOR = "____________________________________________________________";
