@@ -49,10 +49,7 @@ public class Duke {
                         taskList.addTask(newTask);
                         break;
                 }
-            } catch (InvalidIndexException
-                    | NoSuchTaskException
-                    | IncompleteCommandException
-                    | UnknownCommandException e) {
+            } catch (DukeException e) {
                 System.out.println(e.getMessage());
             } finally {
                 System.out.println(BANNER);
