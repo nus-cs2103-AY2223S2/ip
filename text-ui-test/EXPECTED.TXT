@@ -5,3 +5,332 @@ Hello from
 | |_| | |_| |   <  __/
 |____/ \__,_|_|\_\___|
 
+	____________________________________________________________
+	  Kon aqua~~
+	____________________________________________________________
+
+	____________________________________________________________
+	  Got it. I've added this task:
+	    [T][ ] read book
+	  Now you have 1 tasks in the list.
+	____________________________________________________________
+
+	____________________________________________________________
+	  Got it. I've added this task:
+	    [D][ ] return book (by: 3 Mar)
+	  Now you have 2 tasks in the list.
+	____________________________________________________________
+
+	____________________________________________________________
+	  Got it. I've added this task:
+	    [E][ ] life (from: start of time to: when you stop suffering)
+	  Now you have 3 tasks in the list.
+	____________________________________________________________
+
+	____________________________________________________________
+	  Here are the tasks in your list:
+	  1. [T][ ] read book
+	  2. [D][ ] return book (by: 3 Mar)
+	  3. [E][ ] life (from: start of time to: when you stop suffering)
+	____________________________________________________________
+
+	____________________________________________________________
+	  Got it. I've added this task:
+	    [T][ ] wake up tmr
+	  Now you have 4 tasks in the list.
+	____________________________________________________________
+
+	____________________________________________________________
+	  Here are the tasks in your list:
+	  1. [T][ ] read book
+	  2. [D][ ] return book (by: 3 Mar)
+	  3. [E][ ] life (from: start of time to: when you stop suffering)
+	  4. [T][ ] wake up tmr
+	____________________________________________________________
+
+	____________________________________________________________
+	  Nice! I've marked this task as done:
+	   [T][X] read book
+	____________________________________________________________
+
+	____________________________________________________________
+	  Here are the tasks in your list:
+	  1. [T][X] read book
+	  2. [D][ ] return book (by: 3 Mar)
+	  3. [E][ ] life (from: start of time to: when you stop suffering)
+	  4. [T][ ] wake up tmr
+	____________________________________________________________
+
+	____________________________________________________________
+	  Nice! I've marked this task as done:
+	   [E][X] life (from: start of time to: when you stop suffering)
+	____________________________________________________________
+
+	____________________________________________________________
+	  Here are the tasks in your list:
+	  1. [T][X] read book
+	  2. [D][ ] return book (by: 3 Mar)
+	  3. [E][X] life (from: start of time to: when you stop suffering)
+	  4. [T][ ] wake up tmr
+	____________________________________________________________
+
+	____________________________________________________________
+	  Nice! I've marked this task as done:
+	   [T][X] wake up tmr
+	____________________________________________________________
+
+	____________________________________________________________
+	  OK, I've marked this task as not done yet:
+	   [T][ ] wake up tmr
+	____________________________________________________________
+
+	____________________________________________________________
+	  Here are the tasks in your list:
+	  1. [T][X] read book
+	  2. [D][ ] return book (by: 3 Mar)
+	  3. [E][X] life (from: start of time to: when you stop suffering)
+	  4. [T][ ] wake up tmr
+	____________________________________________________________
+
+	____________________________________________________________
+	  Hanya?? Did you say something?
+	____________________________________________________________
+
+	____________________________________________________________
+	  Hanya?? I was unable to process that...
+	  Please try again after fixing this:
+	    Unknown command
+	____________________________________________________________
+
+	____________________________________________________________
+	  Hanya?? I was unable to process that...
+	  Please try again after fixing this:
+	    Missing task name
+	____________________________________________________________
+
+	____________________________________________________________
+	  Hanya?? I was unable to process that...
+	  Please try again after fixing this:
+	    Parameter name cannot be empty
+	____________________________________________________________
+
+	____________________________________________________________
+	  Hanya?? I was unable to process that...
+	  Please try again after fixing this:
+	    Task name cannot be blank
+	____________________________________________________________
+
+	____________________________________________________________
+	  Hanya?? I was unable to process that...
+	  Please try again after fixing this:
+	    Parameter name cannot be empty
+	____________________________________________________________
+
+	____________________________________________________________
+	  Hanya?? I was unable to process that...
+	  Please try again after fixing this:
+	    Parameter name cannot be empty
+	____________________________________________________________
+
+	____________________________________________________________
+	  Got it. I've added this task:
+	    [T][ ] NO_HANYA_TASK_01
+	  Now you have 5 tasks in the list.
+	____________________________________________________________
+
+	____________________________________________________________
+	  Got it. I've added this task:
+	    [T][ ] NO_HANYA_TASK_02
+	  Now you have 6 tasks in the list.
+	____________________________________________________________
+
+	____________________________________________________________
+	  Got it. I've added this task:
+	    [T][ ] NO_HANYA_TASK_03
+	  Now you have 7 tasks in the list.
+	____________________________________________________________
+
+	____________________________________________________________
+	  Got it. I've added this task:
+	    [T][ ] NO_HANYA_TASK_04
+	  Now you have 8 tasks in the list.
+	____________________________________________________________
+
+	____________________________________________________________
+	  Hanya?? I was unable to process that...
+	  Please try again after fixing this:
+	    Missing task name
+	____________________________________________________________
+
+	____________________________________________________________
+	  Hanya?? I was unable to process that...
+	  Please try again after fixing this:
+	    Missing by parameter
+	____________________________________________________________
+
+	____________________________________________________________
+	  Got it. I've added this task:
+	    [D][ ] NO_HANYA_TASK_05 (by: )
+	  Now you have 9 tasks in the list.
+	____________________________________________________________
+
+	____________________________________________________________
+	  Got it. I've added this task:
+	    [D][ ] NO_HANYA_TASK_06 (by: )
+	  Now you have 10 tasks in the list.
+	____________________________________________________________
+
+	____________________________________________________________
+	  Got it. I've added this task:
+	    [E][ ] NO_HANYA_TASK_07 (from:  to: )
+	  Now you have 11 tasks in the list.
+	____________________________________________________________
+
+	____________________________________________________________
+	  Noted. I've removed this task:
+	    [T][X] read book
+	  Now you have 10 tasks in the list
+	____________________________________________________________
+
+	____________________________________________________________
+	  Here are the tasks in your list:
+	  1. [D][ ] return book (by: 3 Mar)
+	  2. [E][X] life (from: start of time to: when you stop suffering)
+	  3. [T][ ] wake up tmr
+	  4. [T][ ] NO_HANYA_TASK_01
+	  5. [T][ ] NO_HANYA_TASK_02
+	  6. [T][ ] NO_HANYA_TASK_03
+	  7. [T][ ] NO_HANYA_TASK_04
+	  8. [D][ ] NO_HANYA_TASK_05 (by: )
+	  9. [D][ ] NO_HANYA_TASK_06 (by: )
+	  10. [E][ ] NO_HANYA_TASK_07 (from:  to: )
+	____________________________________________________________
+
+	____________________________________________________________
+	  Noted. I've removed this task:
+	    [E][ ] NO_HANYA_TASK_07 (from:  to: )
+	  Now you have 9 tasks in the list
+	____________________________________________________________
+
+	____________________________________________________________
+	  Noted. I've removed this task:
+	    [T][ ] NO_HANYA_TASK_01
+	  Now you have 8 tasks in the list
+	____________________________________________________________
+
+	____________________________________________________________
+	  Noted. I've removed this task:
+	    [T][ ] NO_HANYA_TASK_02
+	  Now you have 7 tasks in the list
+	____________________________________________________________
+
+	____________________________________________________________
+	  Noted. I've removed this task:
+	    [T][ ] NO_HANYA_TASK_04
+	  Now you have 6 tasks in the list
+	____________________________________________________________
+
+	____________________________________________________________
+	  Noted. I've removed this task:
+	    [D][ ] return book (by: 3 Mar)
+	  Now you have 5 tasks in the list
+	____________________________________________________________
+
+	____________________________________________________________
+	  Noted. I've removed this task:
+	    [E][X] life (from: start of time to: when you stop suffering)
+	  Now you have 4 tasks in the list
+	____________________________________________________________
+
+	____________________________________________________________
+	  Noted. I've removed this task:
+	    [T][ ] wake up tmr
+	  Now you have 3 tasks in the list
+	____________________________________________________________
+
+	____________________________________________________________
+	  Here are the tasks in your list:
+	  1. [T][ ] NO_HANYA_TASK_03
+	  2. [D][ ] NO_HANYA_TASK_05 (by: )
+	  3. [D][ ] NO_HANYA_TASK_06 (by: )
+	____________________________________________________________
+
+	____________________________________________________________
+	  Hanya?? I was unable to process that...
+	  Please try again after fixing this:
+	    Task number out of bounds
+	____________________________________________________________
+
+	____________________________________________________________
+	  Hanya?? I was unable to process that...
+	  Please try again after fixing this:
+	    Task number must be an integer
+	____________________________________________________________
+
+	____________________________________________________________
+	  Hanya?? I was unable to process that...
+	  Please try again after fixing this:
+	    Task number must be an integer
+	____________________________________________________________
+
+	____________________________________________________________
+	  Here are the tasks in your list:
+	  1. [T][ ] NO_HANYA_TASK_03
+	  2. [D][ ] NO_HANYA_TASK_05 (by: )
+	  3. [D][ ] NO_HANYA_TASK_06 (by: )
+	____________________________________________________________
+
+	____________________________________________________________
+	  Noted. I've removed this task:
+	    [T][ ] NO_HANYA_TASK_03
+	  Now you have 2 tasks in the list
+	____________________________________________________________
+
+	____________________________________________________________
+	  Noted. I've removed this task:
+	    [D][ ] NO_HANYA_TASK_05 (by: )
+	  Now you have 1 tasks in the list
+	____________________________________________________________
+
+	____________________________________________________________
+	  Noted. I've removed this task:
+	    [D][ ] NO_HANYA_TASK_06 (by: )
+	  Now you have 0 tasks in the list
+	____________________________________________________________
+
+	____________________________________________________________
+	  Here are the tasks in your list:
+	____________________________________________________________
+
+	____________________________________________________________
+	  Hanya?? I was unable to process that...
+	  Please try again after fixing this:
+	    Task number out of bounds
+	____________________________________________________________
+
+	____________________________________________________________
+	  Hanya?? I was unable to process that...
+	  Please try again after fixing this:
+	    Task number out of bounds
+	____________________________________________________________
+
+	____________________________________________________________
+	  Hanya?? I was unable to process that...
+	  Please try again after fixing this:
+	    Task number must be an integer
+	____________________________________________________________
+
+	____________________________________________________________
+	  Hanya?? I was unable to process that...
+	  Please try again after fixing this:
+	    Task number must be an integer
+	____________________________________________________________
+
+	____________________________________________________________
+	  Here are the tasks in your list:
+	____________________________________________________________
+
+	____________________________________________________________
+	  Otsu aqua~~
+	____________________________________________________________
+
