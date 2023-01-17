@@ -25,12 +25,22 @@ public class Duke {
 
                 // loop breaks, ending program if input is "bye"
                 case ("bye"):
+                    // ERROR: bye format is anything other than [ bye ]
+                    if (UserScan.nextLine().length()>0) {
+                        throw new DukeException("\n" + border + "[ERROR]\nUh, bye command format is used wrongly.\nCorrect format is as follows:\n" +
+                                "[ bye ]\n" + border);
+                    }
                     System.out.println(border + "Goodbye, then!\n" + border);
                     LoopEnd = true;
                     break;
 
                 // Duke lists out all Task names in TaskList when input is "list"
                 case ("list"):
+                    // ERROR: list format is anything other than [ list ]
+                    if (UserScan.nextLine().length()>0) {
+                        throw new DukeException("\n" + border + "[ERROR]\nUh, list command format is used wrongly.\nCorrect format is as follows:\n" +
+                                "[ list ]\n" + border);
+                    }
                     String ToPrint = "";
                     for (int i = 0; i < TaskList.size(); i++) {
                         ToPrint += ((i + 1 + ". ") + TaskList.get(i).toString() + "\n");
@@ -42,7 +52,6 @@ public class Duke {
                 case ("mark"):
                     try {
                         int MarkInput = UserScan.nextInt() - 1;
-
                         // ERROR: mark format is anything other than [ mark <insert integer> ]
                         if (UserScan.nextLine().length()>0) {
                             throw new DukeException("\n" + border + "[ERROR]\nUh, mark command format is used wrongly.\nCorrect format is as follows:\n" +
