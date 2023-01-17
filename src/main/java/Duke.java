@@ -1,7 +1,7 @@
 import java.util.*;
 
 public class Duke {
-    public static void main(String[] args) {
+    public static void main(String[] args) throws DukeException {
         String logo = " ____        _        \n"
                 + "|  _ \\ _   _| | _____ \n"
                 + "| | | | | | | |/ / _ \\\n"
@@ -40,18 +40,55 @@ public class Duke {
 
                 // Duke allows user to mark tasks as done when input is "mark"
                 case ("mark"):
-                    int MarkInput = UserScan.nextInt() - 1;
-                    TaskList.get(MarkInput).MarkDone();
-                    System.out.println(border + "Okay, the following task is marked as done!\n");
-                    System.out.println((MarkInput+1 + ". ") + TaskList.get(MarkInput).toString() + "\n" + border);
-                    break;
+                    try {
+                        int MarkInput = UserScan.nextInt() - 1;
+
+                        // ERROR: mark format is anything other than [ mark <insert integer> ]
+                        if (UserScan.nextLine().length()>0) {
+                            throw new DukeException("\n" + border + "[ERROR]\nUh, mark command format is used wrongly.\nCorrect format is as follows:\n" +
+                                    "[ mark <insert INTEGER> ]\n" + border);
+                        }
+
+                        TaskList.get(MarkInput).MarkDone();
+                        System.out.println(border + "Okay, the following task is marked as done!\n");
+                        System.out.println((MarkInput+1 + ". ") + TaskList.get(MarkInput).toString() + "\n" + border);
+                        break;
+                    }
+                    // ERROR: mark is NOT paired with an integer (e.g. unmark two, unmark 2.3)
+                    catch (InputMismatchException err) {
+                        throw new DukeException("\n" + border + "[ERROR]\nUh, mark can only be used with an INTEGER. (e.g. 1, 2...)\n" + border);
+                    }
+                    // ERROR: mark target does not exist (e.g. task number is out of bounds)
+                    catch (IndexOutOfBoundsException err) {
+                        throw new DukeException("\n" + border + "[ERROR]\nUh, you can only mark task numbers that exist.\nYou have "
+                                + TaskList.size() + " task(s) in your list.\n" + border);
+                    }
+
                 // Duke allows user to mark tasks as NOT done when input is "unmark"
                 case ("unmark"):
-                    int UnmarkInput = UserScan.nextInt() - 1;
-                    TaskList.get(UnmarkInput).MarkNotDone();
-                    System.out.println(border + "Okay, the following task is marked as NOT done!\n");
-                    System.out.println((UnmarkInput+1 + ". ") + TaskList.get(UnmarkInput).toString() + "\n" + border);
-                    break;
+                    try {
+                        int UnmarkInput = UserScan.nextInt() - 1;
+
+                        // ERROR: unmark format is anything other than [ unmark <insert integer> ]
+                        if (UserScan.nextLine().length()>0) {
+                            throw new DukeException("\n" + border + "[ERROR]\nUh, unmark command format is used wrongly.\nCorrect format is as follows:\n" +
+                                    "[ unmark <insert INTEGER> ]\n" + border);
+                        }
+
+                        TaskList.get(UnmarkInput).MarkNotDone();
+                        System.out.println(border + "Okay, the following task is marked as NOT done!\n");
+                        System.out.println((UnmarkInput+1 + ". ") + TaskList.get(UnmarkInput).toString() + "\n" + border);
+                        break;
+                    }
+                    // ERROR: unmark is NOT paired with an integer (e.g. unmark two, unmark 2.3)
+                    catch (InputMismatchException err) {
+                        throw new DukeException("\n" + border + "[ERROR]\nUh, unmark can only be used with an INTEGER. (e.g. 1, 2...)\n" + border);
+                    }
+                    // ERROR: unmark target does not exist (e.g. task number is out of bounds)
+                    catch (IndexOutOfBoundsException err) {
+                        throw new DukeException("\n" + border + "[ERROR]\nUh, you can only unmark task numbers that exist.\nYou have "
+                                + TaskList.size() + " task(s) in your list.\n" + border);
+                    }
 
                 // Duke adds Deadline
                 case ("deadline"):
