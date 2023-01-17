@@ -22,26 +22,28 @@ public class Duke {
     }
 
     // adding item to the list of things, as well as printing the task that is added
-    public static void addItem(String text) throws DukeException {
+    public static void addItem(String text, String lowerText) throws DukeException {
 
         Task addedItem = null;
-        if (text.startsWith("todo")) {
-            String contents = text.replaceFirst("todo", "");
+        if (lowerText.startsWith("todo")) {
+            String contents = text.substring(4);
             if (contents.length() == 0) {
                 throw new DukeException("The description of a todo cannot be empty");
             }
 
             addedItem = new Todo(contents);
 
-        } else if (text.startsWith("deadline")) {
-            String contents = text.replaceFirst("deadline", "");
+        } else if (lowerText.startsWith("deadline")) {
+            String contents = text.substring(8);
+//                    text.replaceFirst("deadline", "");
             String[] arr = contents.split("/by");
             if (arr.length != 2) {
                 throw new DukeException("I don't know what that means. Format it as 'deadline [do something] /by [date]");
             }
             addedItem = new Deadline(arr[0], arr[1]);
         } else {
-            String contents = text.replaceFirst("event", "");
+            String contents = text.substring(5);
+//                    text.replaceFirst("event", "");
             String[] arr1 = contents.split("/from");
             if (arr1.length != 2) {
                 throw new DukeException("I don't know what that means. Format it as 'event [do something] /from [start date] /to [end date]'");
@@ -132,7 +134,7 @@ public class Duke {
                     }
                     removeItem(idx);
                 } else if (lowerLine.startsWith("todo") || lowerLine.startsWith("deadline") || lowerLine.startsWith("event")) {
-                    addItem(line);
+                    addItem(line, lowerLine);
                 } else {
                 throw new DukeException("I'm sorry. I don't know what that means.");
                 }
