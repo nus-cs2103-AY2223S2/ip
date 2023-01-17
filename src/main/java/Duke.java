@@ -34,49 +34,71 @@ public class Duke {
                 }
                 continue;
             }
-            if (parts[0].equals("mark")) {
-                int i = Integer.parseInt(parts[1]);
-                Task t = taskList.get(i - 1);
-                t.markAsDone();
-                System.out.println("\tNice! I've marked this task as done:");
-                System.out.println("\t  " + t + "\n");
+            try {
+                if (parts[0].equals("mark")) {
+                    int i = Integer.parseInt(parts[1]);
+                    Task t = taskList.get(i - 1);
+                    t.markAsDone();
+                    System.out.println("\tNice! I've marked this task as done:");
+                    System.out.println("\t  " + t + "\n");
+                    continue;
+                }
+                if (parts[0].equals("unmark")) {
+                    int i = Integer.parseInt(parts[1]);
+                    Task t = taskList.get(i - 1);
+                    t.unmarkAsDone();
+                    System.out.println("\tOK, I've marked this task as not done yet:");
+                    System.out.println("\t  " + t + "\n");
+                    continue;
+                }
+            } catch (NumberFormatException e) {
+                System.out.println("\t\u2639 OOPS!!! Mark/unmark command has to be followed by an integer.");
                 continue;
-            }
-            if (parts[0].equals("unmark")) {
-                int i = Integer.parseInt(parts[1]);
-                Task t = taskList.get(i - 1);
-                t.unmarkAsDone();
-                System.out.println("\tOK, I've marked this task as not done yet:");
-                System.out.println("\t  " + t + "\n");
+            } catch (IndexOutOfBoundsException e) {
+                System.out.println("\t\u2639 OOPS!!! Index entered does not exists in list.");
                 continue;
             }
             Task t;
-            if (parts[0].equals("todo")) {
-                t = new ToDo(parts[1]);
-                taskList.add(t);
+            try {
+                if (parts[0].equals("todo")) {
+                    if (parts.length == 1 || parts[1].trim().isEmpty()) {
+                        throw new DukeException("The description of a todo cannot be empty.");
+                    }
+                    t = new ToDo(parts[1]);
+                    taskList.add(t);
+                } else if (parts[0].equals("deadline")) {
+                    if (parts.length == 1 || parts[1].trim().isEmpty()) {
+                        throw new DukeException("The description of a deadline cannot be empty.");
+                    }
+                    String[] d_parts = parts[1].split(" /by ", 2);
+                    if (d_parts.length < 2 || d_parts[0].trim().isEmpty() || d_parts[1].trim().isEmpty()) {
+                        throw new DukeException("The description of a deadline has to have 2 non-blank strings separated with a /by keyword.");
+                    }
+                    t = new Deadline(d_parts[0], d_parts[1]);
+                    taskList.add(t);
+                } else if (parts[0].equals("event")) {
+                    if (parts.length == 1 || parts[1].trim().isEmpty()) {
+                        throw new DukeException("The description of a event cannot be empty.");
+                    }
+                    String[] e_parts = parts[1].split(" /from | /to ", 3);
+                    if (e_parts.length < 3 || e_parts[0].trim().isEmpty() || e_parts[1].trim().isEmpty() || e_parts[2].trim().isEmpty()) {
+                        throw new DukeException("The description of an event has to have 3 non-blank strings separated with /from and /to keywords.");
+                    }
+                    t = new Event(e_parts[0], e_parts[1], e_parts[2]);
+                    taskList.add(t);
+                } else {
+                    throw new DukeException("I'm sorry, but I don't know what that means :-(");
+                }
+                System.out.println("\tGot it. I've added this task:");
+                System.out.println("\t  " + t);
+                if (taskList.size() == 1) {
+                    System.out.println("\tNow you have " + taskList.size() + " task in the list.\n");
+                    continue;
+                }
+                System.out.println("\tNow you have " + taskList.size() + " tasks in the list.\n");
+            } catch (DukeException e) {
+                System.out.println("\t" + e);
             }
-            else if (parts[0].equals("deadline")) {
-                String[] d_parts = parts[1].split(" /by ");
-                t = new Deadline(d_parts[0], d_parts[1]);
-                taskList.add(t);
-            }
-            else if (parts[0].equals("event")) {
-                String[] e1_parts = parts[1].split(" /from ");
-                String[] e2_parts = e1_parts[1].split(" /to ");
-                t = new Event(e1_parts[0], e2_parts[0], e2_parts[1]);
-                taskList.add(t);
-            }
-            else {
-                t = new ToDo(input);
-                taskList.add(t);
-            }
-            System.out.println("\tGot it. I've added this task:");
-            System.out.println("\t  " + t);
-            if (taskList.size() == 1) {
-                System.out.println("\tNow you have " + taskList.size() + " task in the list.\n");
-                continue;
-            }
-            System.out.println("\tNow you have " + taskList.size() + " tasks in the list.\n");
         }
         System.out.println("\tWoof (\u256F\u11BA\u2570\u0E51)"); // Outro
     }
