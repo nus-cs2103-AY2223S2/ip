@@ -1,10 +1,9 @@
 import java.util.Scanner;
-
+import java.util.ArrayList;
 public class Duke {
     public static void main(String[] args) throws DukeException {
         // store: storing text entered by user
-        Task[] store;
-        store = new Task[100];
+        ArrayList<Task> store = new ArrayList<Task>();
 
         // greetings
         System.out.println("Hello I'm Duke\n" + "What can I do for you?");
@@ -20,12 +19,12 @@ public class Duke {
                 System.out.println("Here are the tasks in your list:");
                 for (int i = 0; i < Task.noOfTasks; i ++) {
                     System.out.print(i + 1);
-                    System.out.println(". " + store[i].toString());
+                    System.out.println(". " + store.get(i).toString());
                 }
             }
             else if (userInput.contains("todo")) {
                 try {
-                    store[Task.noOfTasks] = new ToDo(userInput.substring(5, userInput.length()));
+                    store.add(Task.noOfTasks, new ToDo(userInput.substring(5, userInput.length())));
                 } catch(Exception e) {
                     throw new DukeException("The description of a todo cannot be empty.");
                 }
@@ -45,7 +44,7 @@ public class Duke {
                 } catch(Exception e) {
                     throw new DukeException("The date of a deadline cannot be empty.");
                 }
-                store[Task.noOfTasks] = new Deadline(description, deadline);
+                store.add(Task.noOfTasks, new Deadline(description, deadline));
             }
             else if (userInput.contains("event")) {
                 String trimmed = "";
@@ -68,7 +67,7 @@ public class Duke {
                 } catch (Exception e) {
                     throw new DukeException("The end time of a event cannot be empty.");
                 }
-                store[Task.noOfTasks] = new Event(description, from, to);
+                store.add(Task.noOfTasks, new Event(description, from, to));
             }
             else if (userInput.contains("mark")) {
                 // obtaining index to mark, -1 because array starts from index 0
@@ -79,13 +78,13 @@ public class Duke {
                     throw new DukeException("Task " + display + " does not exist.");
                 }
                 else if (userInput.contains("unmark")) {
-                    store[index].markAsUndone();
+                    store.get(index).markAsUndone();
                     System.out.println("OK, I've marked this task as not done yet:");
                 } else {
-                    store[index].markAsDone();
+                    store.get(index).markAsDone();
                     System.out.println("Nice! I've marked this task as done:");
                 }
-                System.out.println(store[index].toString());
+                System.out.println(store.get(index).toString());
             }
             else {
                 throw new DukeException("I'm sorry, but I don't know what that means :-(");
