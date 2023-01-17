@@ -1,7 +1,7 @@
 import java.util.Scanner;
 
 public class Main {
-    public static void main(String[] args) {
+    public static void main(String[] args) throws UnknownCommandException {
         Duke duke = new Duke();
 
         // greeting
@@ -18,31 +18,37 @@ public class Main {
                 break;
             }
 
-            if (inMsg.equals("list")) {
-                duke.print_structured_string(duke.listTasksMsg());
-            } else if (checkCommand(inMsg,"mark")) {
-                int idx = Integer.parseInt(inMsg.substring(5)) - 1;
-                duke.print_structured_string(duke.markTaskDone(idx));
-            } else if (checkCommand(inMsg,"unmark")) {
-                int idx = Integer.parseInt(inMsg.substring(7)) - 1;
-                duke.print_structured_string(duke.unmarkTaskDone(idx));
-            } else if (checkCommand(inMsg, "todo")){
-                String todoName = getCommandContent(inMsg, "todo");
-                ToDo todo = new ToDo(todoName);
-                duke.print_structured_string(duke.addTask(todo));
-            } else if (checkCommand(inMsg, "deadline")) {
-                String deadlineContent = getCommandContent(inMsg, "deadline");
-                Deadline ddl = new Deadline(deadlineContent);
-                duke.print_structured_string(duke.addTask(ddl));
-            } else if (checkCommand(inMsg, "event")) {
-                String eventContent = getCommandContent(inMsg, "event");
-                Event event = new Event(eventContent);
-                duke.print_structured_string(duke.addTask(event));
-            } else if (checkCommand(inMsg, "delete")) {
-                String indexToDelete = getCommandContent(inMsg, "delete");
-                duke.print_structured_string(duke.deleteTask(Integer.parseInt(indexToDelete)));
-            } else {
-                duke.print_structured_string("☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
+            try {
+                if (inMsg.equals("list")) {
+                    duke.print_structured_string(duke.listTasksMsg());
+                } else if (checkCommand(inMsg,"mark")) {
+                    int idx = Integer.parseInt(inMsg.substring(5)) - 1;
+                    duke.print_structured_string(duke.markTaskDone(idx));
+                } else if (checkCommand(inMsg,"unmark")) {
+                    int idx = Integer.parseInt(inMsg.substring(7)) - 1;
+                    duke.print_structured_string(duke.unmarkTaskDone(idx));
+                } else if (checkCommand(inMsg, "todo")){
+                    String todoName = getCommandContent(inMsg, "todo");
+                    ToDo todo = new ToDo(todoName);
+                    duke.print_structured_string(duke.addTask(todo));
+                } else if (checkCommand(inMsg, "deadline")) {
+                    String deadlineContent = getCommandContent(inMsg, "deadline");
+                    Deadline ddl = new Deadline(deadlineContent);
+                    duke.print_structured_string(duke.addTask(ddl));
+                } else if (checkCommand(inMsg, "event")) {
+                    String eventContent = getCommandContent(inMsg, "event");
+                    Event event = new Event(eventContent);
+                    duke.print_structured_string(duke.addTask(event));
+                } else if (checkCommand(inMsg, "delete")) {
+                    String indexToDelete = getCommandContent(inMsg, "delete");
+                    duke.print_structured_string(duke.deleteTask(Integer.parseInt(indexToDelete)));
+                } else {
+                    throw new UnknownCommandException();
+                }
+            } catch (EmptyContentException e) {
+                duke.print_structured_string(e.toString());
+            } catch (UnknownCommandException e) {
+                duke.print_structured_string(e.toString());
             }
         }
 
@@ -54,7 +60,10 @@ public class Main {
         return s.startsWith(command);
     }
 
-    public static String getCommandContent(String s, String command) {
+    public static String getCommandContent(String s, String command) throws EmptyContentException {
+        if (s.length() + 1 >= command.length()) {
+            throw new EmptyContentException();
+        }
         return s.substring(s.indexOf(command) + command.length() + " ".length());
     }
 }
