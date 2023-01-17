@@ -8,7 +8,7 @@ public class OutRangeException extends Exception {
      * The constructor for OutRangeException
      */
     public OutRangeException() {
-        super(String.format("☹ OOPS!!! The number you entered is out of range!"));
+        super(String.format("OOPS!!! The number you entered is out of range!"));
     }
 
 }

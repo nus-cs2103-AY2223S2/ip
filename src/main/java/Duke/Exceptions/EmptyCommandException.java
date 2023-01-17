@@ -8,6 +8,6 @@ public class EmptyCommandException extends Exception {
      * The constructor for EmptyCommandException
      */
     public EmptyCommandException() {
-        super(String.format("☹ OOPS!!! Stop making fun of me! Put something here as command now!"));
+        super(String.format("OOPS!!! Stop making fun of me! Put something here as command now!"));
     }
 }
