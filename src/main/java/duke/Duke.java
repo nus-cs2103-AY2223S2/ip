@@ -4,6 +4,7 @@ import duke.command.ByeCommand;
 import duke.command.Command;
 import duke.command.CommandResponse;
 import duke.command.DeadlineCommand;
+import duke.command.DeleteCommand;
 import duke.command.EventCommand;
 import duke.command.ListCommand;
 import duke.command.MarkCommand;
@@ -22,6 +23,7 @@ import java.util.Scanner;
 public class Duke {
     private final static ByeCommand byeCommand = new ByeCommand();
     private final static DeadlineCommand deadlineCommand = new DeadlineCommand();
+    private final static DeleteCommand deleteCommand = new DeleteCommand();
     private final static EventCommand eventCommand = new EventCommand();
     private final static ListCommand listCommand = new ListCommand();
     private final static MarkCommand markCommand = new MarkCommand();
@@ -86,6 +88,8 @@ public class Duke {
                 return byeCommand;
             case "deadline":
                 return deadlineCommand;
+            case "delete":
+                return deleteCommand;
             case "event":
                 return eventCommand;
             case "list":
