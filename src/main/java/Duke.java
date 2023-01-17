@@ -60,7 +60,7 @@ public class Duke {
                     String DeadlineDate = DeadlineSentence.substring(DeadlineSentence.indexOf(" /by")+5);
                     Task DeadlineToAdd = new Deadline(DeadlineName, DeadlineDate);
                     TaskList.add(DeadlineToAdd);
-                    System.out.println(border + "Task added: " + DeadlineToAdd + "\n"
+                    System.out.println(border + "Task added:\n " + DeadlineToAdd + "\n"
                             + "There are now " + TaskList.size() + " task(s) in your list.\n" + border);
                     break;
                 // Duke adds Event
@@ -71,7 +71,7 @@ public class Duke {
                     String ToDate = EventSentence.substring(EventSentence.indexOf(" /to")+5);
                     Task EventToAdd = new Event(EventName, FromDate, ToDate);
                     TaskList.add(EventToAdd);
-                    System.out.println(border + "Task added: " + EventToAdd + "\n"
+                    System.out.println(border + "Task added:\n " + EventToAdd + "\n"
                             + "There are now " + TaskList.size() + " task(s) in your list.\n"+ border);
                     break;
                 // Duke adds To-Do
@@ -79,7 +79,7 @@ public class Duke {
                     String ToDoName = UserScan.nextLine();
                     Task TaskToAdd = new ToDo(ToDoName);
                     TaskList.add(new ToDo(ToDoName));
-                    System.out.println(border + "Task added: " + TaskToAdd + "\n"
+                    System.out.println(border + "Task added:\n " + TaskToAdd + "\n"
                             + "There are now " + TaskList.size() + " task(s) in your list.\n"+ border);
                     break;
 
