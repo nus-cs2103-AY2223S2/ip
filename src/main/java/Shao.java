@@ -1,3 +1,8 @@
+import java.io.BufferedWriter;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -5,6 +10,9 @@ import java.util.List;
 import java.util.Scanner;
 
 public class Shao {
+    public static String sep = File.separator;
+    public static String dataFilePath = "data" + sep + "shao.txt";
+
     enum TaskType {
         TODO, DEADLINE, EVENT
     }
@@ -98,7 +106,7 @@ public class Shao {
         int l = inputArr.length;
         for (int i = 0; i < l; i++) {
             if (i < l - 1 && inputArr[i].equals("/by"))
-                return String.join(" ", Arrays.copyOfRange(inputArr, i + 1, l));
+                return sliceArrAndConcate(inputArr, i + 1, l);
         }
         return "";
     }
@@ -145,11 +153,42 @@ public class Shao {
         return String.join(" ", Arrays.copyOfRange(arr, startIdx, endIdx));
     }
 
-    public static void main(String[] args) {
-        Scanner scan = new Scanner(System.in);
-        List<Task> items = new ArrayList<>();
+    public static void fetchData(String input, List<Task> items) {
+        String inputLower = input.toLowerCase();
+        if (inputLower.isBlank())
+            return;
+        String[] inputArr = inputLower.split("\\|");
+        TaskType operationType = inputLower.startsWith("t")
+                ? TaskType.TODO
+                : inputLower.startsWith("d")
+                        ? TaskType.DEADLINE
+                        : TaskType.EVENT;
 
-        greetUser();
+        Task newTask = null;
+
+        switch (operationType) {
+            case TODO:
+                newTask = new Todo(inputArr[2]);
+                break;
+
+            case DEADLINE:
+                newTask = new Deadline(inputArr[2], inputArr[3]);
+                break;
+
+            case EVENT:
+                newTask = new Event(inputArr[2], new String[] { inputArr[3], inputArr[4] });
+                break;
+
+            default:
+                break;
+        }
+        if (inputArr[1].equals("1"))
+            newTask.markAsDone();
+        items.add(newTask);
+    }
+
+    public static void readInput(List<Task> items) {
+        Scanner scan = new Scanner(System.in);
 
         // Prompting
         while (true) {
@@ -232,6 +271,7 @@ public class Shao {
                                     break;
                             }
                             items.add(newTask);
+                            saveNewData(newTask);
                             printAddedTask(newTask, items.size());
                         }
                     } else {
@@ -242,4 +282,32 @@ public class Shao {
             }
         }
     }
+
+    public static <T extends Task> void saveNewData(T task) {
+        try (BufferedWriter bw = new BufferedWriter(new FileWriter(dataFilePath, true))) {
+            bw.write(task.getSavedFormat());
+            bw.newLine();
+        } catch (IOException e) {
+            printError("Something went wrong while saving the new task.");
+        }
+    }
+
+    public static void main(String[] args) {
+        List<Task> items = new ArrayList<>();
+        greetUser();
+
+        try {
+            File myObj = new File(dataFilePath);
+            Scanner myReader = new Scanner(myObj);
+            while (myReader.hasNextLine()) {
+                fetchData(myReader.nextLine().trim(), items);
+            }
+            myReader.close();
+        } catch (FileNotFoundException e) {
+        } finally {
+            readInput(items);
+        }
+
+    }
+
 }

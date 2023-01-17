@@ -13,4 +13,9 @@ public class Event extends Task {
 		return "[E]" + super.toString() +
 				String.format(" (from: %s, to: %s)", from, to);
 	}
+
+	@Override
+	public String getSavedFormat() {
+		return String.format("E|%d|%s|%s|%s", isDone ? 1 : 0, description, from, to);
+	};
 }
