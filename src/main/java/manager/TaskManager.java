@@ -19,6 +19,11 @@ public class TaskManager {
     }
 
 
+    public Task delete(int taskNum) throws IndexOutOfBoundsException {
+        return taskList.remove(taskNum);
+    }
+
+
     public int size() {
         return taskList.size();
     }
