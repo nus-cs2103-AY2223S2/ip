@@ -125,6 +125,21 @@ public class Duke {
                     System.out.println("please mark corresponding task number");
                 }
             }
+
+            else if (input.length() >= 7 && input.substring(0, 7).equals("delete ")) {
+                try{
+                    int index = Integer.parseInt(input.substring(7));
+                    if (index > tasks.size() || index <= 0) System.out.println("wrong index");
+                    else {
+                        System.out.printf("Noted, task removed: %n%s%n",tasks.get(index-1).toString());
+                        tasks.remove(index-1);
+                    }
+                }
+                catch (NumberFormatException ex){
+                    System.out.println("please mark corresponding task number");
+                }
+                
+            }
             
             else {
                 String[] parsed = Task.parseCreate(input);             
