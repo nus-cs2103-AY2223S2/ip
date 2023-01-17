@@ -13,6 +13,14 @@ public class Duke {
         System.out.println("    ____________________________________________________________");
     }
 
+    public static String listUpdate() {
+        String plural = "";
+        if (listOfThings.size() > 1) {
+            plural = "s";
+        }
+        return "\n       Now you have " + listOfThings.size() + " task" + plural + " in the list.";
+    }
+
     // adding item to the list of things, as well as printing the task that is added
     public static void addItem(String text) throws DukeException {
 
@@ -46,13 +54,9 @@ public class Duke {
             addedItem = new Event(arr1[0], arr2[0], arr2[1]);
         }
         listOfThings.add(addedItem);
-        String plural = "";
-        if (listOfThings.size() > 1) {
-            plural = "s";
-        }
-        String str = "  " + addedItem.toString() + "\n     Now you have " + listOfThings.size() + " task" + plural + " in the list.";
+        String str = "  " + addedItem.toString();
         str = " Got it. I've added this task:\n     " + str;
-        printWithLines(str);
+        printWithLines(str + listUpdate());
     }
 
     // printing though the list
@@ -68,9 +72,10 @@ public class Duke {
 
     // removing the item
     public static void removeItem(int index) {
-        String str = " Noted. I'm removing this task:\n     " + listOfThings.get(index).toString();
-        printWithLines(str);
+        String str = " Noted. I'm removing this task:\n       " + listOfThings.get(index).toString();
         listOfThings.remove(index);
+        printWithLines(str + listUpdate());
+
     }
 
     // main driver function
