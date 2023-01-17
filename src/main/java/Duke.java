@@ -17,40 +17,10 @@ public class Duke {
             try {
                 switch (arr[0]) {
                     case "list":
-                        int number = 1;
-                        for (Task stored : store) {
-                            if (stored instanceof Todo) {
-                                String storedString = stored.getStr();
-                                boolean checked = stored.isChecked();
-                                if (checked) {
-                                    System.out.println(number + ". [T][X] " + storedString);
-                                } else {
-                                    System.out.println(number + ". [T][ ] " + storedString);
-                                }
-                            } else if (stored instanceof Deadline) {
-                                String storedString = stored.getStr();
-                                boolean checked = stored.isChecked();
-                                String storedDateTime = ((Deadline) stored).getDateTime();
-                                if (checked) {
-                                    System.out.println(number + ". [D][X] " + storedString + " (by: " + storedDateTime + ")");
-                                } else {
-                                    System.out.println(number + ". [D][ ] " + storedString + " (by: " + storedDateTime + ")");
-                                }
-                            } else if (stored instanceof Event) {
-                                String storedString = stored.getStr();
-                                boolean checked = stored.isChecked();
-                                String storedStart = ((Event) stored).getStart();
-                                String storedEnd = ((Event) stored).getEnd();
-                                if (checked) {
-                                    System.out.println(number + ". [E][X] " + storedString + " (from: " + storedStart +
-                                            " to: " + storedEnd + ")");
-                                } else {
-                                    System.out.println(number + ". [E][ ] " + storedString + " (from: " + storedStart +
-                                            " to: " + storedEnd + ")");
-                                }
-                            }
-                            number++;
+                        if (arr.length > 1) {
+                            throw new DukeException("Invalid format");
                         }
+                        listTask(store);
                         break;
                     case "mark":
                         if (arr.length < 2) {
@@ -115,6 +85,8 @@ public class Duke {
                 }
             } catch (DukeException e) {
                 System.out.println(e.getMessage());
+            } catch (NumberFormatException e) {
+                System.out.println("Please provide numbers");
             } catch (Exception e) {
                 System.out.println("Unknown error");
             }
@@ -125,16 +97,56 @@ public class Duke {
         System.out.println("Bye. Hope to see you again soon!");
     }
 
-    public static void marking(boolean b, ArrayList<? extends Task> store, String[] arr) {
-        int index = Integer.parseInt(arr[1]);
-        Task task = store.get(index - 1);
+    public static void listTask(ArrayList<Task> store) {
+        int number = 1;
+        for (Task stored : store) {
+            if (stored instanceof Todo) {
+                String storedString = stored.getStr();
+                boolean checked = stored.isChecked();
+                if (checked) {
+                    System.out.println(number + ". [T][X] " + storedString);
+                } else {
+                    System.out.println(number + ". [T][ ] " + storedString);
+                }
+            } else if (stored instanceof Deadline) {
+                String storedString = stored.getStr();
+                boolean checked = stored.isChecked();
+                String storedDateTime = ((Deadline) stored).getDateTime();
+                if (checked) {
+                    System.out.println(number + ". [D][X] " + storedString + " (by: " + storedDateTime + ")");
+                } else {
+                    System.out.println(number + ". [D][ ] " + storedString + " (by: " + storedDateTime + ")");
+                }
+            } else if (stored instanceof Event) {
+                String storedString = stored.getStr();
+                boolean checked = stored.isChecked();
+                String storedStart = ((Event) stored).getStart();
+                String storedEnd = ((Event) stored).getEnd();
+                if (checked) {
+                    System.out.println(number + ". [E][X] " + storedString + " (from: " + storedStart +
+                            " to: " + storedEnd + ")");
+                } else {
+                    System.out.println(number + ". [E][ ] " + storedString + " (from: " + storedStart +
+                            " to: " + storedEnd + ")");
+                }
+            }
+            number++;
+        }
+    }
+    public static void marking(boolean b, ArrayList<? extends Task> store, String[] arr) throws DukeException {
+        int index = Integer.parseInt(arr[1]) - 1;
+        int size = store.size();
+        if (index >= size | index < 0) {
+            throw new DukeException("Index out of bounds");
+        }
+        Task task = store.get(index);
         task.setChecked(b);
         if (b) {
             System.out.println("Nice! I've marked this task as done: \n" + "[x] " + task.getStr());
         } else {
             System.out.println("OK, I've marked this task as not done yet: \n" + "[ ] " + task.getStr());
         }
-
     }
+
 
 }
