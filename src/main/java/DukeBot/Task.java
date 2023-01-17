@@ -1,18 +1,19 @@
 package DukeBot;
 
-public class Task {
+import java.lang.reflect.Type;
+
+public abstract class Task {
 
     public boolean completed;
-    public String task;
+    public String details;
+    public Types type;
 
     public Task(String task) {
         this.completed = false;
-        this.task = task;
+        this.details = task;
     }
 
-    public String status() {
-        return this.completed ? "[X]" : "[ ]";
-    }
+    public abstract String status();
 
     public void complete() {
         this.completed = true;
