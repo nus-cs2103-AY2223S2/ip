@@ -37,9 +37,9 @@ public class Duke {
         }
         System.out.println(separator);
     }
-    public static void start(){
+    public static void start() {
         Task taskAtHand;
-        int taskNumber;
+        String taskNumber;
         System.out.println(logo
                 + "\n"
                 + separator
@@ -48,94 +48,137 @@ public class Duke {
                 + separator);
         Scanner sc = new Scanner(System.in);
         while (!isExit) {
-            String command = sc.next();;
-            switch(command) {
-                case "bye":
-                    Duke.bye();
-                    break;
-                case "list":
-                    Duke.toList();
-                    break;
+            try {
+                String command = sc.next();
+                switch (command) {
+                    case "bye":
+                        Duke.bye();
+                        break;
+                    case "list":
+                        if (listOfTasks.size() == 0) {
+                            throw new DukeException("The list is currently empty!");
+                        } else {
+                            Duke.toList();
+                        }
+                        break;
 
-                case "mark":
-                    taskNumber = sc.nextInt();
-                    taskAtHand = listOfTasks.get(taskNumber - 1);
-                    taskAtHand.markDone();
-                    System.out.println(separator
-                            + "\n\tNice! I've marked this task as done:\n\t"
-                            + taskAtHand.toString()
-                            + "\n"
-                            + separator);
-                    break;
+                    case "mark":
+                        taskNumber = sc.nextLine();
+                        if (taskNumber.isBlank()) {
+                            throw new DukeException("Please enter the task number to mark! :D ");
+                        } else {
+                            int number = Integer.parseInt(taskNumber.trim());
+                            taskAtHand = listOfTasks.get(number - 1);
+                            taskAtHand.markDone();
+                            System.out.println(separator
+                                    + "\n\tNice! I've marked this task as done:\n\t"
+                                    + taskAtHand
+                                    + "\n"
+                                    + separator);
+                        }
+                        break;
 
-                case "unmark":
-                    taskNumber = sc.nextInt();
-                    taskAtHand = listOfTasks.get(taskNumber - 1);
-                    taskAtHand.markUnDone();
-                    System.out.println(separator
-                            +"\n\tOK, I've marked this task as not done yet:\n\t"
-                            + taskAtHand.toString()
-                            + "\n"
-                            + separator);
-                    break;
+                    case "unmark":
+                        taskNumber = sc.nextLine();
+                        if (taskNumber.isBlank()) {
+                            throw new DukeException("Please enter the task number to unmark! :D ");
+                        } else {
+                            taskAtHand = listOfTasks.get(Integer.parseInt(taskNumber.trim()) - 1);
+                            taskAtHand.markUnDone();
+                            System.out.println(separator
+                                    + "\n\tOK, I've marked this task as not done yet:\n\t"
+                                    + taskAtHand
+                                    + "\n"
+                                    + separator);
+                        }
+                        break;
 
-                case "deadline":
-                    command = sc.nextLine();
-                    stringSplitArray = command.split("/by");
-                    taskAtHand = new Deadline(stringSplitArray[0], stringSplitArray[1]);
-                    listOfTasks.add(taskAtHand);
-                    System.out.println(separator
-                            + "\n\tGot it. I've added this task:\n"
-                            + "\t"
-                            + taskAtHand.toString()
-                            + "\n"
-                            + Duke.printTaskCount()
-                            + "\n"
-                            + separator);
-                    break;
+                    case "deadline":
+                        command = sc.nextLine();
+                        if (command.isBlank()) {
+                            throw new DukeException("☹ OOPS!!! The description of a deadline cannot be empty.");
+                        } else {
+                            stringSplitArray = command.split("/by");
+                            if (stringSplitArray.length == 1) {
+                                throw new DukeException("Please enter a valid deadline");
+                            }
+                            taskAtHand = new Deadline(stringSplitArray[0], stringSplitArray[1]);
+                            listOfTasks.add(taskAtHand);
+                            System.out.println(separator
+                                    + "\n\tGot it. I've added this task:\n"
+                                    + "\t"
+                                    + taskAtHand
+                                    + "\n"
+                                    + Duke.printTaskCount()
+                                    + "\n"
+                                    + separator);
+                        }
+                        break;
 
-                case "event":
-                    command = sc.nextLine();
-                    stringSplitArray = command.split("/from");
-                    timeSplitArray = stringSplitArray[1].split("/to");
-                    taskAtHand = new Event(stringSplitArray[0], timeSplitArray[0], timeSplitArray[1]);
-                    listOfTasks.add(taskAtHand);
-                    System.out.println(separator
-                            + "\n\tGot it. I've added this task:\n"
-                            + "\t"
-                            + taskAtHand.toString()
-                            + "\n"
-                            + Duke.printTaskCount()
-                            + "\n"
-                            + separator);
-                    break;
+                    case "event":
+                        command = sc.nextLine();
+                        if (command.isEmpty()) {
+                            throw new DukeException("☹ OOPS!!! The description of an event cannot be empty.");
+                        } else {
+                            stringSplitArray = command.split("/from");
+                            timeSplitArray = stringSplitArray[1].split("/to");
+                            if (timeSplitArray.length == 1) {
+                                throw new DukeException("Please enter a valid date range!");
+                            } else {
+                                taskAtHand = new Event(stringSplitArray[0], timeSplitArray[0], timeSplitArray[1]);
+                                listOfTasks.add(taskAtHand);
+                                System.out.println(separator
+                                        + "\n\tGot it. I've added this task:\n"
+                                        + "\t"
+                                        + taskAtHand
+                                        + "\n"
+                                        + Duke.printTaskCount()
+                                        + "\n"
+                                        + separator);
+                            }
+                        }
+                        break;
 
-                case "todo":
-                    command = sc.nextLine();
-                    taskAtHand = new ToDo(command);
-                    listOfTasks.add(taskAtHand);
-                    System.out.println(separator
-                            + "\n\tGot it. I've added this task:\n"
-                            + "\t"
-                            + taskAtHand.toString()
-                            + "\n"
-                            + Duke.printTaskCount()
-                            + "\n"
-                            + separator);
-                    break;
+                    case "todo":
+                        command = sc.nextLine();
+                        if (command.isBlank()) {
+                            throw new DukeException("☹ OOPS!!! The description of a todo cannot be empty.");
+                        } else {
+                            taskAtHand = new ToDo(command);
+                            listOfTasks.add(taskAtHand);
+                            System.out.println(separator
+                                    + "\n\tGot it. I've added this task:\n"
+                                    + "\t"
+                                    + taskAtHand
+                                    + "\n"
+                                    + Duke.printTaskCount()
+                                    + "\n"
+                                    + separator);
+                        }
+                        break;
 
-                default:
-                    command = command + sc.nextLine();
-                    Task task = new Task(command);
-                    System.out.println(separator
-                            + "\n\t"
-                            + "added: "
-                            + command
-                            + "\n"
-                            + separator);
-                    listOfTasks.add(task);
+                    default:
+                        throw new DukeException("☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
+                }
+            } catch (DukeException e) {
+                System.out.println(separator
+                        + "\n\t"
+                        + e.getMessage()
+                        + "\n"
+                        + separator);
+            } catch (NumberFormatException e) {
+                System.out.println(separator
+                        + "\n\t"
+                        + "Please enter a valid task number!"
+                        + "\n"
+                        + separator);
+            } catch (IndexOutOfBoundsException e){
+                System.out.println(separator
+                        + "\n\t"
+                        + "Please enter a valid task number!"
+                        + "\n"
+                        + separator);
             }
-
         }
     }
     public static void main(String[] args) {
