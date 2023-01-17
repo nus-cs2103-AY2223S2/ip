@@ -1,15 +1,20 @@
 import java.util.Scanner;
 
 public class Duke {
+    /**
+     * Prints formatted response to the console.
+     *
+     * @param s string that will be printed
+     */
     public static void print(String s) {
-        String p = "\t____________________________________________________________\n"
-                + s
-                +"\t____________________________________________________________\n";
+        String p = String.format("\t____________________________________________________________\n" +
+                "\t %s\n" +
+                "\t____________________________________________________________\n", s);
         System.out.println(p);
     }
 
     public static void main(String[] args) {
-        String intro = "\t Hello! I'm Duke\n\t What can I do for you?\n";
+        String intro = "Hello! I'm Duke\n\t What can I do for you?";
         Duke.print(intro);
 
         String input;
@@ -18,16 +23,15 @@ public class Duke {
             String in = myObj.nextLine();  // Read user input
             input = in; // save the input
 
-            if (input.toLowerCase().equals("bye")) {
-                String extStr = "\t Bye. Hope to see you again soon!\n";
+            if (input.equalsIgnoreCase("bye")) {
+                String extStr = "Bye. Hope to see you again soon!";
                 Duke.print(extStr);
                 System.exit(0);
             } else if (input.equals("")) {
-                String empStr = "\t Please enter an input for me to echo!\n";
+                String empStr = "Please enter an input for me to echo!";
                 Duke.print(empStr);
             } else {
-                String out = String.format("\t %s\n", input);
-                Duke.print(out);
+                Duke.print(input);
             }
         }
 
