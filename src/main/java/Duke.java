@@ -14,10 +14,11 @@ public class Duke {
   }
 
   public static String addTask(String input) {
-    Task t = makeTask(input);
-    taskList.add(t);
-    return String.format("Added task nya!\n  %s\n" +
-        " Nyow you have %d tasks in the list nya!\n", t, taskList.size());
+    validateTaskInput(input);
+    Task currTask = makeTask(input);
+    taskList.add(currTask);
+    return String.format("Added task nya!\n  %s\n"
+        + " Nyow you have %d tasks in the list nya!\n", currTask, taskList.size());
   }
 
   public static Task makeTask(String input) {
@@ -34,6 +35,13 @@ public class Duke {
       String start = rest.split("/from")[1].split("/to")[0].strip();
       String end = rest.split("/to")[1].strip();
       return new Event(description, start, end);
+    }
+  }
+
+  public static void validateTaskInput(String input) throws TaskException {
+    String s = input.strip();
+    if (s.equals("todo") || s.equals("deadline") || s.equals("event")) {
+      throw new TaskException("Task " + s + " cannot be empty nya!\n");
     }
   }
 
@@ -61,32 +69,33 @@ public class Duke {
     return "Bye bye nya!\n";
   }
 
-  public static String invalidCommand() {
-    return "Invalid command nya! Do it again and I will scratch you!\n";
-  }
-
   public static void main(String[] args) {
     Scanner sc = new Scanner(System.in);
     print(greeting());
     String command = sc.nextLine();
     while (!command.equals("bye")) {
-      switch (command.split(" ")[0]) {
-        case "list":
-          print(listTasks());
-          break;
-        case "mark":
-          print(markTask(Integer.parseInt(command.split(" ")[1])));
-          break;
-        case "unmark":
-          print(unmarkTask(Integer.parseInt(command.split(" ")[1])));
-          break;
-        case "todo":
-        case "deadline":
-        case "event":
-          print(addTask(command));
-          break;
-        default:
-          print(invalidCommand());
+      try {
+        switch (command.split(" ")[0]) {
+          case "list":
+            print(listTasks());
+            break;
+          case "mark":
+            print(markTask(Integer.parseInt(command.split(" ")[1])));
+            break;
+          case "unmark":
+            print(unmarkTask(Integer.parseInt(command.split(" ")[1])));
+            break;
+          case "todo":
+          case "deadline":
+          case "event":
+            print(addTask(command));
+            break;
+          default:
+            throw new ParserException("Invalid command nya!\n"
+                + " Do it again and I will scratch you!\n");
+        }
+      } catch (DukeException e) {
+        print(e.getMessage());
       }
       command = sc.nextLine();
     }
