@@ -8,12 +8,12 @@ public class Duke {
         System.out.println("\tHello! I'm Duke\n" + "\tWhat can I do for you?");
         System.out.println("\t____________________________________________________________");
     }
-    public static void add(String s) {
+    public static void add(Task t) {
         int numOfTask = Task.getNumOfTask();
-        task[numOfTask] = new Task(s);
+        task[numOfTask - 1] = t;
 
         System.out.println("\t____________________________________________________________");
-        System.out.println("\tadded: " + s);
+        System.out.println("\tGot it. I've added this task: \n\t  " + t + "\n\tNow you have " + numOfTask + " tasks in the list.");
         System.out.println("\t____________________________________________________________");
     }
 
@@ -23,12 +23,11 @@ public class Duke {
         int numOfTask = Task.getNumOfTask();
         for(int i = 0; i < numOfTask; i++) {
             int tmp = i + 1;
-            Task currentTask = task[i];
-            String msg = tmp + ".[" + currentTask.getStatusIcon() + "] " + currentTask.getDescription();
-            System.out.println("\t" + msg);
+            System.out.println("\t" + task[i]);
         }
         System.out.println("\t____________________________________________________________");
     }
+
     public static void exit() {
         System.out.println("\t____________________________________________________________");
         System.out.println("\tBye. Hope to see you again soon!");
@@ -40,8 +39,7 @@ public class Duke {
 
         System.out.println("\t____________________________________________________________");
         System.out.println("\tNice! I've marked this task as done: ");
-        String msg = "  [" + task[i].getStatusIcon() + "] " + task[i].getDescription();
-        System.out.println("\t" + msg);
+        System.out.println("\t  " + task[i]);
         System.out.println("\t____________________________________________________________");
     }
 
@@ -50,8 +48,7 @@ public class Duke {
 
         System.out.println("\t____________________________________________________________");
         System.out.println("\tOK, I've marked this task as not done yet:");
-        String msg = "  [" + task[i].getStatusIcon() + "] " + task[i].getDescription();
-        System.out.println("\t" + msg);
+        System.out.println("\t  " + task[i]);
         System.out.println("\t____________________________________________________________");
     }
 
@@ -61,10 +58,10 @@ public class Duke {
         String input = scanner.nextLine();
 
         while (!input.equals("bye")) {
+            String[] split = input.split(" ", 2);
             if (input.equals("list")) {
                 list();
             } else if (input.contains("mark")) {
-                String[] split = input.split(" ", 2);
                 int index = Integer.parseInt(split[1]) - 1;
                 if (input.contains("unmark")) {
                     unmark(index);
@@ -72,7 +69,24 @@ public class Duke {
                     mark(index);
                 }
             } else {
-                add(input);
+                Task t = null;
+                switch (split[0]) {
+                    case "todo":
+                        //System.out.println("todo");
+                        t = new ToDos(split[1]);
+                        break;
+                    case "deadline":
+                        //System.out.println("deadline");
+                        String[] s1 = split[1].split("/by ", 2);
+                        t = new Deadlines(s1[0], s1[1]);
+                        break;
+                    case "event":
+                        String[] s2 = split[1].split("/from ", 2);
+                        String[] s3 = s2[1].split("/to ", 2);
+                        t = new Events(s2[0], s3[0], s3[1]);
+                        break;
+                }
+                add(t);
             }
             input = scanner.nextLine();
         }
