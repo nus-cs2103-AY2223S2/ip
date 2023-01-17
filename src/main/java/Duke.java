@@ -39,7 +39,21 @@ public class Duke {
                     tasks.get(taskNum).unmark();
                     System.out.println(formatMessage("OK, I've marked this task as not done yet:\n" +
                             indent + tasks.get(taskNum).toString()));
-                } else {
+                } else if (command[0].equals("delete")){
+                    if (command.length < 2) {
+                        throw new DukeException("Task number required");
+                    }
+                    int taskNum = Integer.parseInt(command[1]) - 1;
+                    if (taskNum < 0 || taskNum >= tasks.size()) {
+                        throw new DukeException("Task number invalid");
+                    }
+                    String removedTask = tasks.get(taskNum).toString();
+                    tasks.remove(taskNum);
+                    System.out.println(formatMessage("Noted. I've removed this task:\n" +
+                            indent + indent + removedTask + "\n" +
+                            indent + "Now you have " + tasks.size() + " task(s) in the list."));
+                }
+                else {
                     if (command.length < 2) {
                         throw new DukeException("Invalid input");
                     }
