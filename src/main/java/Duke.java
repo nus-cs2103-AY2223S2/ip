@@ -6,7 +6,7 @@ public class Duke {
         String[] store;
         store = new String[100];
 
-        // keeping count the next avaliable index of store
+        // keeping count the next available index of store
         int counter = 0;
 
         // greetings
