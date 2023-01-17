@@ -10,6 +10,7 @@ public class JeoBot {
     public static void echo() {
         String divider = "________________________________________________________________";
         boolean hasInput = true;
+        Storage st = new Storage();
         while (hasInput) {
             Scanner in = new Scanner(System.in);
             String s = in.nextLine();
@@ -17,8 +18,10 @@ public class JeoBot {
             if (s.equals("bye")) {
                 hasInput = false;
                 System.out.println("Thank you for using my service. Hope to see you again soon!");
+            } else if (s.equals("list")) {
+                st.showTasks();
             } else {
-                System.out.println(s);
+                st.addTask(s);
             }
             System.out.println(divider);
         }
