@@ -69,24 +69,13 @@ public class Duke {
         try {
             switch (command) {
                 case DISPLAY_LIST_COMMAND:
-                    displayTasks();
-                    break;
+                    executeCommandWithNoArgument(command);
                 case MARK_TASK_AS_DONE_COMMAND:
-                    markTaskAsDone(parts[1]);
-                    break;
                 case MARK_TASK_AS_UNDONE_COMMAND:
-                    markTaskAsNotDone(parts[1]);
-                    break;
                 case TODO_COMMAND:
-                    addTodoToList(parts[1]);
-                    break;
                 case DEADLINE_COMMAND:
-                    textAndDate = parts[1].split(" /by ");
-                    addDeadlineToList(textAndDate);
-                    break;
                 case EVENT_COMMAND:
-                    textAndDate = parts[1].split(" /from | /to ");
-                    addEventToList(textAndDate);
+                    executeCommandWithArgument(command, parts);
                     break;
                 default:
                     throw new InvalidCommandDukeException();
@@ -97,20 +86,53 @@ public class Duke {
 
     }
 
+    public static void executeCommandWithArgument(String command, String[] parts) throws DukeException {
+        if (parts.length < 2) {
+            throw new EmptyArgumentDukeException();
+        }
+        switch (command) {
+            case MARK_TASK_AS_DONE_COMMAND:
+                markTaskAsDone(parts[1]);
+                break;
+            case MARK_TASK_AS_UNDONE_COMMAND:
+                markTaskAsNotDone(parts[1]);
+                break;
+            case TODO_COMMAND:
+                addTodoToList(parts[1]);
+                break;
+            case DEADLINE_COMMAND:
+                addDeadlineToList(parts[1]);
+                break;
+            case EVENT_COMMAND:
+                addEventToList(parts[1]);
+                break;
+        }
+    }
+
+    public static void executeCommandWithNoArgument(String command) {
+        switch (command) {
+            case DISPLAY_LIST_COMMAND:
+                displayTasks();
+                break;
+        }
+    }
+
     private static void addTodoToList(String description) {
         Task task = new ToDoTask(description);
         taskList.add(task);
         printMessage("added: " + task);
     }
 
-    private static void addDeadlineToList(String[] textAndDate) {
-        Task task = new DeadlineTask(textAndDate[0], textAndDate[1]);
+    private static void addDeadlineToList(String arguments) {
+        String[] splitArgs = arguments.split(" /by ");
+        Task task = new DeadlineTask(splitArgs[0], splitArgs[1]);
         taskList.add(task);
         printMessage("added: " + task);
     }
 
-    private static void addEventToList(String[] textAndDate) {
-        Task task = new EventTask(textAndDate[0], textAndDate[1], textAndDate[2]);
+    private static void addEventToList(String arguments) {
+        String[] splitArgs = arguments.split(" /from | /to ");
+        Task task = new EventTask(splitArgs[0], splitArgs[1], splitArgs[2]);
         taskList.add(task);
         printMessage("added: " + task);
     }
