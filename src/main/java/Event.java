@@ -2,10 +2,10 @@ public class Event extends Task {
     private String start;
     private String end;
 
-    public Event(String instructions, String start, String end) {
-        super(instructions);
-        this.start = start.substring(5);
-        this.end = end.substring(3);
+    public Event(String instruction, String start, String end) {
+        super(instruction.substring(5));
+        this.start = start;
+        this.end = end;
     }
 
     @Override

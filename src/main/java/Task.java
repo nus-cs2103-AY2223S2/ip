@@ -8,11 +8,18 @@ public class Task {
     }
 
     public void complete() {
+        if (this.status) {
+            System.out.println("Mission is already completed.");
+            return;
+        }
         this.status = true;
         System.out.println("Mission Completed!\n" + this);
     }
 
     public void incomplete() {
+        if (!this.status) {
+            System.out.println("This mission has not been completed.");
+        }
         this.status = false;
         System.out.println("Mission Re-initialised\n" + this);
     }
