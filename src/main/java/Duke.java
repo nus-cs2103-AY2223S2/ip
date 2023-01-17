@@ -105,14 +105,27 @@ public class Duke {
 
                 // Duke adds Deadline
                 case ("deadline"):
-                    String DeadlineSentence = UserScan.nextLine();
-                    String DeadlineName = DeadlineSentence.substring(0, DeadlineSentence.indexOf(" /by"));
-                    String DeadlineDate = DeadlineSentence.substring(DeadlineSentence.indexOf(" /by")+5);
-                    Task DeadlineToAdd = new Deadline(DeadlineName, DeadlineDate);
-                    TaskList.add(DeadlineToAdd);
-                    System.out.println(border + "Task added:\n " + DeadlineToAdd + "\n"
-                            + "There are now " + TaskList.size() + " task(s) in your list.\n" + border);
-                    break;
+                    try {
+                        String DeadlineSentence = UserScan.nextLine();
+                        String DeadlineName = DeadlineSentence.substring(0, DeadlineSentence.indexOf(" /by"));
+                        if (DeadlineName.length()==0) {
+                            throw new DukeException("\n" + border + "[ERROR]\nUh, deadline description cannot be blank.\nTry again.\n" + border);
+                        }
+                        String DeadlineDate = DeadlineSentence.substring(DeadlineSentence.indexOf(" /by")+5);
+                        if (DeadlineDate.length()==0) {
+                            throw new DukeException("\n" + border + "[ERROR]\nUh, deadline date cannot be blank.\nTry again.\n" + border);
+                        }
+                        Task DeadlineToAdd = new Deadline(DeadlineName, DeadlineDate);
+                        TaskList.add(DeadlineToAdd);
+                        System.out.println(border + "Task added:\n " + DeadlineToAdd + "\n"
+                                + "There are now " + TaskList.size() + " task(s) in your list.\n" + border);
+                        break;
+                    }
+                    catch (StringIndexOutOfBoundsException err) {
+                        throw new DukeException("\n" + border + "[ERROR]\nUh, deadline command format is used wrongly.\nCorrect format is as follows:\n" +
+                                "[ deadline /by <insert deadline> ]\n" + border);
+                    }
+
                 // Duke adds Event
                 case ("event"):
                     String EventSentence = UserScan.nextLine();
