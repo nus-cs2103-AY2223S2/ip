@@ -1,9 +1,9 @@
 package duke.command;
 
-import duke.ui.Ui;
 import duke.exception.DukeException;
 import duke.storage.Storage;
 import duke.task.TaskList;
+import duke.ui.Ui;
 
 /**
  * An abstract instruction class encapsulating a user input instruction in Duke, which can be extended

@@ -1,10 +1,10 @@
 package duke.command;
 
-import duke.ui.Ui;
 import duke.exception.DukeException;
 import duke.exception.InvalidInputException;
 import duke.storage.Storage;
 import duke.task.TaskList;
+import duke.ui.Ui;
 
 /**
  * A "delete" instruction that remove a particular task with the given index in the TaskList. `
@@ -29,7 +29,7 @@ public class DeleteCommand extends Command {
      * @return Whether the given list is empty
      */
     public boolean isEmpty(TaskList list) {
-        return list.remainingTasks() == 0;
+        return list.getNoOfTasks() == 0;
     }
 
     /**
@@ -39,7 +39,7 @@ public class DeleteCommand extends Command {
      * @return Whether the given index is valid.
      */
     public boolean isValidIndex(TaskList list) {
-        return taskIndex >= 0 && taskIndex < list.remainingTasks();
+        return taskIndex >= 0 && taskIndex < list.getNoOfTasks();
     }
 
     /**
@@ -59,12 +59,12 @@ public class DeleteCommand extends Command {
         }
         if (!isValidIndex(tasks)) {
             String errorMessage = "OOPS!!! The input index is not within the range of [1, "
-                    + tasks.remainingTasks() + "]";
+                    + tasks.getNoOfTasks() + "]";
             throw new InvalidInputException(errorMessage + "\nPlease input a valid index");
         } else {
             String message = "Noted. I've removed this task:\n "
                     + tasks.getTask(taskIndex) + "\nNow you have "
-                    + (tasks.remainingTasks() - 1) + " tasks in the list.";
+                    + (tasks.getNoOfTasks() - 1) + " tasks in the list.";
             ui.appendResponse(message);
             tasks.deleteTask(this.taskIndex);
         }

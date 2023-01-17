@@ -1,13 +1,13 @@
 package duke;
 
 import duke.command.Command;
-import duke.ui.Ui;
 import duke.exception.DukeException;
 import duke.exception.InvalidInputException;
 import duke.exception.StorageFileException;
 import duke.parser.Parser;
 import duke.storage.Storage;
 import duke.task.TaskList;
+import duke.ui.Ui;
 
 /**
  * The main Duke class to run

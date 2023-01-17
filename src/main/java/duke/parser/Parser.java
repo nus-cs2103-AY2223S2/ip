@@ -125,7 +125,8 @@ public class Parser {
             if (!emptyStringChecker.matcher(information).matches()) {
                 throw new InvalidInputException("OOPS!!! The description of a todo cannot be empty.");
             } else {
-                return new FindCommand(information);
+                String[] descriptions = information.split(" ");
+                return new FindCommand(descriptions);
             }
         } else if (instructionTag.equalsIgnoreCase("search")) {
             if (!emptyStringChecker.matcher(information).matches()) {

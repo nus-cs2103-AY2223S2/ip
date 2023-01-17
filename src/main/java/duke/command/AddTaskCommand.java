@@ -1,10 +1,10 @@
 package duke.command;
 
-import duke.ui.Ui;
 import duke.exception.StorageFileException;
 import duke.storage.Storage;
 import duke.task.DukeTask;
 import duke.task.TaskList;
+import duke.ui.Ui;
 
 /**
  * A more specific instruction class that encapsulates the action of adding a task
@@ -33,7 +33,7 @@ public class AddTaskCommand extends Command {
         tasks.addTask(task);
         storage.save(tasks);
         String message = "Got it. I've added this task:\n " + task
-                + "\nNow you have " + tasks.remainingTasks() + " tasks in the list.";
+                + "\nNow you have " + tasks.getNoOfTasks() + " tasks in the list.";
         ui.appendResponse(message);
     }
 

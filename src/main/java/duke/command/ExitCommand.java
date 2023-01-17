@@ -1,8 +1,8 @@
 package duke.command;
 
-import duke.ui.Ui;
 import duke.storage.Storage;
 import duke.task.TaskList;
+import duke.ui.Ui;
 
 /**
  * An ExitCommand class that encapsulates the event of terminating the Duke program.

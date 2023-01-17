@@ -1,8 +1,8 @@
 package duke.command;
 
-import duke.ui.Ui;
 import duke.storage.Storage;
 import duke.task.TaskList;
+import duke.ui.Ui;
 
 /**
  * A ListCommand class that encapsulates the action of displaying all the tasks on the TaskList.
@@ -19,7 +19,7 @@ public class ListCommand extends Command {
     @Override
     public void execute(TaskList tasks, Ui ui, Storage storage) {
         StringBuilder listContent = new StringBuilder("Here are the tasks in your list:\n");
-        for (int i = 0; i < tasks.remainingTasks(); i++) {
+        for (int i = 0; i < tasks.getNoOfTasks(); i++) {
             listContent.append(i + 1).append(".").append(tasks.getTask(i)).append("\n");
         }
 

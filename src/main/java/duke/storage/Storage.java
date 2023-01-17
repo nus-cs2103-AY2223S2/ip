@@ -127,7 +127,7 @@ public class Storage {
         StringBuilder record = new StringBuilder();
 
         try {
-            for (int i = 0; i < list.remainingTasks(); i++) {
+            for (int i = 0; i < list.getNoOfTasks(); i++) {
                 DukeTask task = list.getTask(i);
                 record.append(task.storageString()).append(System.lineSeparator());
             }

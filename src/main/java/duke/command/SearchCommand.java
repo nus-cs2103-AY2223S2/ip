@@ -2,10 +2,10 @@ package duke.command;
 
 import java.time.LocalDate;
 
-import duke.ui.Ui;
 import duke.storage.Storage;
 import duke.task.DukeTask;
 import duke.task.TaskList;
+import duke.ui.Ui;
 
 /**
  * A FindCommand class that take in a description and find all tasks that match the given
@@ -31,7 +31,7 @@ public class SearchCommand extends Command {
     @Override
     public void execute(TaskList tasks, Ui ui, Storage storage) {
         TaskList matchedTaskList = new TaskList();
-        for (int i = 0; i < tasks.remainingTasks(); i++) {
+        for (int i = 0; i < tasks.getNoOfTasks(); i++) {
             DukeTask currentTask = tasks.getTask(i);
             if (tasks.getTask(i).matchesDate(this.date)) {
                 matchedTaskList.addTask(currentTask);

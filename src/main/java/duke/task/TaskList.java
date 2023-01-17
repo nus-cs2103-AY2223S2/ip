@@ -39,7 +39,7 @@ public class TaskList {
      *
      * @return The number of the task on the list
      */
-    public int remainingTasks() {
+    public int getNoOfTasks() {
         return this.list.size();
     }
 
@@ -56,7 +56,7 @@ public class TaskList {
     @Override
     public String toString() {
         StringBuilder listContent = new StringBuilder();
-        for (int i = 0; i < this.remainingTasks(); i++) {
+        for (int i = 0; i < this.getNoOfTasks(); i++) {
             listContent.append(i + 1).append(".").append(this.getTask(i)).append("\n");
         }
         return String.valueOf(listContent);
