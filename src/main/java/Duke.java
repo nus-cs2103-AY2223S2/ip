@@ -15,36 +15,36 @@ public class Duke {
         greet();
         Scanner sc = new Scanner(System.in);
         while (true) {
-            String input = sc.nextLine();
-            String[] command = input.split(" ", 8);
-            switch (command[0]) {
+            String command = sc.next();
+            switch (command) {
                 case "list":
                     printDukeList();
                     break;
                 case "echo":
-                    echo(input.substring(5));
+                    echo(sc.nextLine().strip());
                     break;
                 case "mark":
-                    markTask(input.substring(5));
+                    markTask(sc.nextLine().strip());
                     break;
                 case "unmark":
-                    unmarkTask(input.substring(7));
+                    unmarkTask(sc.nextLine().strip());
                     break;
                 case "todo":
-                    addTodo(input.substring(5));
+                    addTodo(sc.nextLine().strip());
                     break;
                 case "deadline":
-                    addDeadline(input.substring(9));
+                    addDeadline(sc.nextLine().strip());
                     break;
                 case "event":
-                    addEvent(input.substring(6));
+                    addEvent(sc.nextLine().strip());
                     break;
                 case "bye":
                     sc.close();
                     exit();
                     return;
                 default:
-                    addToList(input);
+                    sc.nextLine(); // throw away the next lines
+                    unknownCommand();
                     break;
             }
         }
@@ -173,25 +173,15 @@ public class Duke {
     }
 
     /**
-     * Adds an item to Duke's list and notifies the user in print
-     * 
-     * @param w - The item to add to the list
-     */
-    private static void addToList(String w) {
-        if (end < 100) {
-            dukeList[end] = new Task(w);
-            end += 1;
-            printWithPartition("\tadded: " + w + "\n");
-        } else {
-            printWithPartition("\tfailed to add: " + w + "\n");
-        }
-    }
-
-    /**
      * Duke says goodbye and is shutdowned
      */
     private static void exit() {
         printWithPartition("\tGoodbye!\n");
+    }
+
+    private static void unknownCommand() {
+        printWithPartition("\tDuke: Sorry! I only understand " +
+                "{echo, list, mark, unmark, todo, deadline, event} commands.\n");
     }
 
     // ---------------------------------------------------------------------------------------
