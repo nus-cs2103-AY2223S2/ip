@@ -1,7 +1,7 @@
 public class TaskList {
 
     /** An array to store the items in the queue. */
-    private Object[] items;
+    private Task[] items;
 
     /** Index of the first element in the queue. */
     private int first;
@@ -22,7 +22,7 @@ public class TaskList {
      */
     public TaskList(int size) {
         this.maxSize = size;
-        this.items = new Object[size];
+        this.items = new Task[size];
         this.first = -1;
         this.last = -1;
         this.len = 0;
@@ -34,7 +34,7 @@ public class TaskList {
      * @param e The item to put in the queue.
      * @return false if the queue is full; true if e is added successfully.
      */
-    public boolean enq(Object e) {
+    public boolean enq(Task e) {
         if (this.isFull()) {
             return false;
         }
@@ -46,6 +46,7 @@ public class TaskList {
         }
         this.items[last] = e;
         this.len += 1;
+        System.out.println("added: " + e.getDescription());
         return true;
     }
 
@@ -99,7 +100,7 @@ public class TaskList {
      */
     @Override
     public String toString() {
-        String str = "";
+        String str = "This is what you need to get done:\n";
         int i = this.first;
         int count = 0;
         while (count < this.len) {
@@ -109,6 +110,10 @@ public class TaskList {
             count++;
         }
         return str;
+    }
+
+    public Task indexof(int index) {
+        return items[index];
     }
 }
 

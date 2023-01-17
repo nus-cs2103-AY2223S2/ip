@@ -17,15 +17,28 @@ public class Duke {
 
         Scanner scanner = new Scanner(System.in);
         String input = scanner.nextLine();
+        String[] arrOfStr = input.split(" ", 2);
 
         while(!input.equals("bye")) {
             if(input.equals("list")) {
                 System.out.println(tasks);
                 input = scanner.nextLine();
-            } else {
-                System.out.println(input);
-                tasks.enq(input);
+                arrOfStr = input.split(" ", 2);
+            } else if(arrOfStr[0].equals("mark")) {
+                Integer index = Integer.valueOf(arrOfStr[1]) - 1;
+                tasks.indexof(index).mark();
                 input = scanner.nextLine();
+                arrOfStr = input.split(" ", 2);
+            } else if(arrOfStr[0].equals("unmark")) {
+                Integer index = Integer.valueOf(arrOfStr[1]) - 1;
+                tasks.indexof(index).unmark();
+                input = scanner.nextLine();
+                arrOfStr = input.split(" ", 2);
+            } else {
+                Task newtask = new Task(input);
+                tasks.enq(newtask);
+                input = scanner.nextLine();
+                arrOfStr = input.split(" ", 2);
             }
 
 
