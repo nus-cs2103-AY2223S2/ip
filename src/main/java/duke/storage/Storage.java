@@ -6,16 +6,12 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.nio.file.Path;
 import java.nio.file.Paths;
-import java.time.LocalDate;
 import java.util.Scanner;
 
 import duke.exception.InvalidInputException;
 import duke.exception.StorageFileException;
-import duke.task.DeadlineTask;
 import duke.task.DukeTask;
-import duke.task.EventTask;
 import duke.task.TaskList;
-import duke.task.TodoTask;
 
 /**
  * A Storage object that handles the saving and loading of the TaskList.
@@ -27,7 +23,11 @@ public class Storage {
     private final String filePath;
     private final Path folder;
     private final File storageFile;
-
+    private final String todoTag = "[T]";
+    private final String deadlineTag = "[D]";
+    private final String eventTag = "[E]";
+    private final String storageError = "OOPS!!! There's something wrong "
+            + "when reading the Storage list";
 
     /**
      * Constructor of that takes a path of the file and specify the file for
@@ -72,33 +72,20 @@ public class Storage {
                 boolean isDone = information[1].equals("[X]");
                 String description = information[2];
 
-                if (taskTag.equals("[T]")) {
-                    TodoTask todo = new TodoTask(description);
-                    if (isDone) {
-                        todo.markAsDone();
-                    }
-                    list.addTask(todo);
-                } else if (taskTag.equals("[D]")) {
+                if (taskTag.equals(todoTag)) {
+                    Decoder.todoDecoder(list, description, isDone);
+                } else if (taskTag.equals(deadlineTag)) {
                     String date = information[3];
-                    DeadlineTask deadline = new DeadlineTask(description, LocalDate.parse(date));
-                    if (isDone) {
-                        deadline.markAsDone();
-                    }
-                    list.addTask(deadline);
+                    Decoder.deadlineDecoder(list, description, isDone, date);
                 } else {
                     String from = information[3];
                     String to = information[4];
-                    EventTask event = new EventTask(description, LocalDate.parse(from), LocalDate.parse(to));
-                    if (isDone) {
-                        event.markAsDone();
-                    }
-                    list.addTask(event);
+                    Decoder.eventDecoder(list, description, isDone, from, to);
                 }
             }
             return list;
         } catch (FileNotFoundException e) {
-            throw new StorageFileException("☹ OOPS!!! There's something wrong "
-                    + "when reading the Storage list");
+            throw new StorageFileException(storageError);
         }
     }
 
@@ -125,7 +112,6 @@ public class Storage {
         }
 
         StringBuilder record = new StringBuilder();
-
         try {
             for (int i = 0; i < list.getNoOfTasks(); i++) {
                 DukeTask task = list.getTask(i);
@@ -133,7 +119,7 @@ public class Storage {
             }
             writeToFile(filePath, record.toString());
         } catch (IOException e) {
-            throw new StorageFileException("\"☹ OOPS!!! There's something wrong when writing to the Storage file\"");
+            throw new StorageFileException(storageError);
         }
     }
 }

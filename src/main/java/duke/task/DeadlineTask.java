@@ -24,6 +24,7 @@ public class DeadlineTask extends DukeTask {
     @Override
     public String storageString() {
         String status;
+
         if (this.getStatus()) {
             status = "[X] | ";
         } else {
@@ -49,7 +50,6 @@ public class DeadlineTask extends DukeTask {
             return true;
         }
         if (!(obj instanceof DeadlineTask)) {
-            System.out.println("not same instance");
             return false;
         }
         DeadlineTask ddlObj = (DeadlineTask) obj;

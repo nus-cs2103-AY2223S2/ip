@@ -6,6 +6,11 @@ package duke.ui;
  */
 
 public class Ui {
+    private final int DefaultLength = 70;
+    private final int DefaultSpace = 4;
+    private final String underscore = "_";
+    private final String space = " ";
+    private final String lineSeparator = "\n";
     private final int horizontalLineLength;
     private final int indentSpace;
     private StringBuilder response = new StringBuilder();
@@ -14,8 +19,8 @@ public class Ui {
      * Constructor that sets HorizontalLineLength to be 70 and IndentSpace to be 4 by default.
      */
     public Ui() {
-        this.horizontalLineLength = 70;
-        this.indentSpace = 4;
+        this.horizontalLineLength = DefaultLength;
+        this.indentSpace = DefaultSpace;
     }
 
     /**
@@ -38,9 +43,8 @@ public class Ui {
      * @return the indented text
      */
     public String indent(String input) {
-        String space = " ";
-        String delimiter = "\n" + space.repeat(this.indentSpace);
-        String[] splitString = input.split("\n");
+        String delimiter = lineSeparator + space.repeat(this.indentSpace);
+        String[] splitString = input.split(lineSeparator);
 
         return space.repeat(this.indentSpace) + String.join(delimiter, splitString);
     }
@@ -51,10 +55,8 @@ public class Ui {
      * @param message the message to be display
      */
     public void displayWithBar(String message) {
-        String underscore = "_";
-        String space = " ";
         String bar = space.repeat(indentSpace) + underscore.repeat(this.horizontalLineLength);
-        System.out.println(bar + "\n" + indent(message) + "\n" + bar + "\n");
+        System.out.println(bar + lineSeparator + indent(message) + lineSeparator + bar + lineSeparator);
     }
 
     public void reset() {
