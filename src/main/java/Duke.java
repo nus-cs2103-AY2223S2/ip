@@ -49,7 +49,7 @@ public class Duke {
         }
     }
 
-    private Command getCommand(String input) {
+    private static Command getCommand(String input) {
         if (input.equals("list")) {
             return Command.LIST;
         } else if (input.matches("^mark\\s\\d+$")) {
@@ -63,7 +63,7 @@ public class Duke {
         } else if (input.matches("^todo\\s.+$")) {
             return Command.TODO;
         } else {
-            return Command.UNKNOWN;
+            return Command.ADD;
         }
     }
 
@@ -75,23 +75,41 @@ public class Duke {
         String input = sc.nextLine();
         
         while (!input.equals("bye")) {
-            if (input.equals("list")) {
-                Duke.displayTasks(tasks, numTasks);
-            } else if (input.matches("^mark\\s\\d+$")) {
-                // We can take this exact substring because its guaranteed that input is of form "mark %d"
-                int index = Integer.valueOf(input.substring(5)) - 1; // account for 1 indexing
-                if (isValidMark(tasks, index)) // Note that this check also prints out error messages if any
-                    Duke.printWithDecorations(tasks[index].markDone());
-            } else if (input.matches("^unmark\\s\\d+$")) {
-                int index = Integer.valueOf(input.substring(7)) - 1; // account for 1 indexing
-                if (isValidMark(tasks, index)) // Note that this check also prints out error messages if any
-                    Duke.printWithDecorations(tasks[index].unmarkDone());
-            } else if (numTasks < 100) {
-                Duke.printWithDecorations("added: " + input);
-                tasks[numTasks] = new Task(input);
-                numTasks++;
-            } else {
-                Duke.printWithDecorations("Not enough slots!");
+
+            switch (Duke.getCommand(input)) {
+
+                case LIST:
+                    Duke.displayTasks(tasks, numTasks);
+                    break;
+                
+                case DEADLINE:
+                    //TODO do something here
+                case EVENT:
+                    //TODO do something here
+                case MARK:
+                    // We can take this exact substring because its guaranteed that input is of form "mark %d"
+                    int markIndex = Integer.valueOf(input.substring(5)) - 1; // account for 1 indexing
+                    if (isValidMark(tasks, markIndex)) // Note that this check also prints out error messages if any
+                        Duke.printWithDecorations(tasks[markIndex].markDone());
+                    break;
+
+                case UNMARK:
+                    int unmarkIndex = Integer.valueOf(input.substring(7)) - 1; // account for 1 indexing
+                    if (isValidMark(tasks, unmarkIndex)) // Note that this check also prints out error messages if any
+                        Duke.printWithDecorations(tasks[unmarkIndex].unmarkDone());
+                    break;
+
+                case TODO:
+                    //TODO do something here
+                case ADD:
+                    if (numTasks < 100) {
+                        Duke.printWithDecorations("added: " + input);
+                        tasks[numTasks] = new Task(input);
+                        numTasks++;
+                    } else {
+                        Duke.printWithDecorations("Not enough slots!");
+                    }
+                    break;
             }
             input = sc.nextLine();
         }
