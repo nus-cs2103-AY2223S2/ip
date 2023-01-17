@@ -40,5 +40,4 @@ abstract public class Task {
      * @return string type of task
      */
     abstract public String getTaskType();
-
 }

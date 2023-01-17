@@ -22,6 +22,40 @@ public class TaskList {
     }
 
     /**
+     * Outputs the size of non-null Task Objects in Task List.
+     * @return number of tasks in the task list
+     */
+    public int getSize() {
+        return this.index;
+    }
+
+    /**
+     * Deletes a task in task list by their index counting from 1
+     * @param indexString
+     */
+    public void deleteTask(String indexString) {
+        int idx;
+        try {
+            idx = Integer.parseInt(indexString);
+            if (idx > this.getSize()) {
+                throw new IndexOutOfBoundsException();
+            }
+            System.out.println(String.format("Noted. Removed this task I have:\n %s",
+                    this.taskList[idx - 1]));
+            for (int i = idx - 1; i < this.getSize(); i++) {
+                this.taskList[i] = this.taskList[i + 1];
+            }
+            this.taskList[getSize() - 1] = null;
+            index--;
+            System.out.println(String.format("%d tasks in the list, you now have", getSize()));
+        } catch (IndexOutOfBoundsException e) {
+            throw new NoSuchTaskException("In this index, no such task I found", null);
+        } catch (Exception e) {
+            throw new InvalidIndexException(String.format("Used to index Task List, %s cannot be", indexString), null);
+        }
+    }
+
+    /**
      * Marks a task by its index in the array of Tasks.
      * @param index index of interest to mark the task as done
      */
