@@ -65,6 +65,12 @@ public class Duke {
     return String.format("Set your task to undone nya!\n  %s\n", currTask);
   }
 
+  public static String deleteTask(int id) {
+    return String.format("Removed task nya!\n  %s\n" +
+        " Nyow you have %d tasks in the list nya!\n",
+        taskList.remove(id - 1), taskList.size());
+  }
+
   public static String bye() {
     return "Bye bye nya!\n";
   }
@@ -84,6 +90,9 @@ public class Duke {
             break;
           case "unmark":
             print(unmarkTask(Integer.parseInt(command.split(" ")[1])));
+            break;
+          case "delete":
+            print(deleteTask(Integer.parseInt(command.split(" ")[1])));
             break;
           case "todo":
           case "deadline":
