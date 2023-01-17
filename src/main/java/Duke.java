@@ -3,8 +3,8 @@ import java.util.Scanner;
 public class Duke {
     public static void main(String[] args) {
         // store: storing text entered by user
-        String[] store;
-        store = new String[100];
+        Task[] store;
+        store = new Task[100];
 
         // keeping count the next available index of store
         int counter = 0;
@@ -18,20 +18,34 @@ public class Duke {
 
         // exit loop when user input is bye
         while (!userInput.equals("bye")) {
+
             if (userInput.equals("list")) {
+                System.out.println("Here are the tasks in your list:");
                 for (int i = 0; i < counter; i ++) {
-                    System.out.println(i+1 + ". " + store[i]);
+                    System.out.println(i+1 + ". [" + store[i].getStatusIcon() + "] " + store[i].description);
                 }
-                myObj = new Scanner(System.in);
-                userInput = myObj.nextLine();
             }
+            else if (userInput.contains("mark")) {
+                // obtaining index to mark, -1 because array starts from index 0
+                int index = Integer.valueOf(userInput.substring(userInput.length() - 1)) - 1;
+                if (userInput.contains("unmark")) {
+                    store[index].markAsUndone();
+                    System.out.println("Nice! I've marked this task as not done yet:");
+                } else {
+                    store[index].markAsDone();
+                    System.out.println("Nice! I've marked this task as done:");
+                }
+                System.out.println("[" + store[index].getStatusIcon() + "] " + store[index].description);
+            }
+
+            // handle errors out of range
             else {
-                store[counter] = userInput;
+                store[counter] = new Task(userInput);
                 counter = counter + 1;
                 System.out.println("added: " + userInput);
-                myObj = new Scanner(System.in);
-                userInput = myObj.nextLine();
             }
+            myObj = new Scanner(System.in);
+            userInput = myObj.nextLine();
         }
 
         // prints exist statement
