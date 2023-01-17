@@ -1,13 +1,14 @@
+import java.util.ArrayList;
+
 public class TaskList {
-    private Task[] taskList = new Task[100];
-    private static int index = -1;
+    private ArrayList<Task> taskList;
     private final static String ADDTASKMSG = "Got it. Added this task, I have:";
 
     /**
      * Constructor for Task List.
      */
     public TaskList() {
-        index++;
+        this.taskList = new ArrayList<>(100);
     }
 
     /**
@@ -16,9 +17,8 @@ public class TaskList {
      */
     public void addTask(Task task) {
         System.out.println(String.format("%s\n %s", ADDTASKMSG, task.toString()));
-        this.taskList[index] = task;
-        System.out.println(String.format("%d tasks in the list, you have now.", index + 1));
-        index++;
+        this.taskList.add(task);
+        System.out.println(String.format("%d tasks in the list, you have now.", getSize()));
     }
 
     /**
@@ -26,7 +26,7 @@ public class TaskList {
      * @return number of tasks in the task list
      */
     public int getSize() {
-        return this.index;
+        return this.taskList.size();
     }
 
     /**
@@ -41,12 +41,8 @@ public class TaskList {
                 throw new IndexOutOfBoundsException();
             }
             System.out.println(String.format("Noted. Removed this task I have:\n %s",
-                    this.taskList[idx - 1]));
-            for (int i = idx - 1; i < this.getSize(); i++) {
-                this.taskList[i] = this.taskList[i + 1];
-            }
-            this.taskList[getSize() - 1] = null;
-            index--;
+                    this.taskList.get(idx - 1)));
+            this.taskList.remove(idx - 1);
             System.out.println(String.format("%d tasks in the list, you now have", getSize()));
         } catch (IndexOutOfBoundsException e) {
             throw new NoSuchTaskException("In this index, no such task I found", null);
@@ -63,7 +59,7 @@ public class TaskList {
         int idx;
         try {
             idx = Integer.parseInt(index) - 1;
-            taskList[idx].mark();
+            this.taskList.get(idx).mark();
         } catch (Exception e) {
             throw new InvalidIndexException(String.format("Used to index Task List, %s cannot be", index), null);
         }
@@ -77,7 +73,7 @@ public class TaskList {
         int idx;
         try {
             idx = Integer.parseInt(index) - 1;
-            taskList[idx].unmark();
+            this.taskList.get(idx).unmark();
         } catch (Exception e) {
             throw new InvalidIndexException(String.format("Used to index Task List, %s cannot be", index), null);
         }
@@ -88,14 +84,14 @@ public class TaskList {
      * starting from 1 added in chronological order whereas returns empty list string if task list is empty.
      */
     public void listItems() {
-        if (index == 0) {
+        if (this.getSize() == 0) {
             System.out.println("Empty, this list is !");
         } else {
             String out = "";
-            for (int i = 0; i < index - 1; i++) {
-                out += String.format("%d.%s\n", i + 1, taskList[i].toString());
+            for (int i = 0; i < this.getSize() - 1; i++) {
+                out += String.format("%d.%s\n", i + 1, taskList.get(i).toString());
             }
-            System.out.println(out + String.format("%d.%s", index, taskList[index - 1].toString()));
+            System.out.println(out + String.format("%d.%s", this.getSize(), taskList.get(this.getSize() - 1).toString()));
         }
     }
 }
