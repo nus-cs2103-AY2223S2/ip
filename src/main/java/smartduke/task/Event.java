@@ -1,3 +1,7 @@
+package smartduke.task;
+
+import smartduke.DukeException;
+
 /**
  * Event is a Task that starts at a specific date/time and ends at a specific date/time.
  */
@@ -18,6 +22,11 @@ public class Event extends Task {
         }
         this.from = from;
         this.to = to;
+    }
+
+    @Override
+    public String getSavedFormat() {
+        return "E | " + (this.isDone ? "1" : "0") + " | " + this.description + " | " + this.from + " | " + this.to;
     }
 
     @Override

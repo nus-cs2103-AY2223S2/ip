@@ -1,7 +1,11 @@
+package smartduke.task;
+
+import smartduke.DukeException;
+
 /**
  * Task encapsulates the description of a task and its 'done' status.
  */
-public class Task {
+public abstract class Task {
     protected String description;
     protected boolean isDone;
 
@@ -23,7 +27,7 @@ public class Task {
      * @return the 'done' status icon
      */
     public String getStatusIcon() {
-        return (isDone ? "X" : " "); // mark done task with X
+        return (isDone ? "X" : " "); // mark done smartduke.task with X
     }
 
     /**
@@ -39,6 +43,8 @@ public class Task {
     public void markNotDone() {
         this.isDone = false;
     }
+
+    public abstract String getSavedFormat();
 
     @Override
     public String toString() {

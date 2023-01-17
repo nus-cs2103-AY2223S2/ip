@@ -1,45 +1,45 @@
 --------------------------
-Yo i'm SmartDuke.
+Yo i'm smartduke.SmartDuke.
      how can i help you?
 --------------------------
 --------------------------
-Got it. I've added this task:
-[T][ ] todo task
+Got it. I've added this smartduke.task:
+[T][ ] todo smartduke.task
 Now there are 1 tasks in your list.
 --------------------------
 --------------------------
-Got it. I've added this task:
-[D][ ] deadline task (by: 25/04/2022)
+Got it. I've added this smartduke.task:
+[D][ ] deadline smartduke.task (by: 25/04/2022)
 Now there are 2 tasks in your list.
 --------------------------
 --------------------------
-Got it. I've added this task:
-[E][ ] event task (from: 12 Mar 22 to: 5 Dec 22)
+Got it. I've added this smartduke.task:
+[E][ ] event smartduke.task (from: 12 Mar 22 to: 5 Dec 22)
 Now there are 3 tasks in your list.
 --------------------------
 --------------------------
 Here are the tasks in your list:
-1. [T][ ] todo task
-2. [D][ ] deadline task (by: 25/04/2022)
-3. [E][ ] event task (from: 12 Mar 22 to: 5 Dec 22)
+1. [T][ ] todo smartduke.task
+2. [D][ ] deadline smartduke.task (by: 25/04/2022)
+3. [E][ ] event smartduke.task (from: 12 Mar 22 to: 5 Dec 22)
 --------------------------
 --------------------------
-ok i've marked this task as done:
-[D][X] deadline task (by: 25/04/2022)
+ok i've marked this smartduke.task as done:
+[D][X] deadline smartduke.task (by: 25/04/2022)
 --------------------------
 --------------------------
-ok i've marked this task as done:
-[T][X] todo task
+ok i've marked this smartduke.task as done:
+[T][X] todo smartduke.task
 --------------------------
 --------------------------
-ok i've marked this task as not done yet
-[D][ ] deadline task (by: 25/04/2022)
+ok i've marked this smartduke.task as not done yet
+[D][ ] deadline smartduke.task (by: 25/04/2022)
 --------------------------
 --------------------------
 Here are the tasks in your list:
-1. [T][X] todo task
-2. [D][ ] deadline task (by: 25/04/2022)
-3. [E][ ] event task (from: 12 Mar 22 to: 5 Dec 22)
+1. [T][X] todo smartduke.task
+2. [D][ ] deadline smartduke.task (by: 25/04/2022)
+3. [E][ ] event smartduke.task (from: 12 Mar 22 to: 5 Dec 22)
 --------------------------
 --------------------------
 ok bye
