@@ -9,41 +9,43 @@ public class Duke {
     protected static String outlinesString = "____________________________________________________________";
     protected static String introductionString = "Hello! I'm Duke\nWhat can I do for you?";
     protected static String farewellString = "Bye. Hope to see you again soon!";
-    protected static String invalidString = "Invalid input. Please try again!";
     protected static String readListString = "Here are the tasks in your list:";
 
     public static void main(String[] args) throws IOException {
         System.out.println(outlinesString + "\n" + introductionString + "\n" + outlinesString);
+        boolean continueConvo = true;
 
-        String input = br.readLine();
-        while (!checkEndConvo(input)) {
-            handleMessage(input);
-            input = br.readLine();
+        while (continueConvo) {
+            String input = br.readLine();
+            System.out.println(outlinesString);
+            try {
+                continueConvo = handleMessage(input);
+            } catch (DukeException e) {
+                System.err.println(e.getMessage());
+            } 
+            System.out.println(outlinesString + "\n");
         }
-
         br.close();
     }
 
-    private static boolean checkEndConvo(String message) {
-        if (message.equals("bye")) {
-            System.out.println(outlinesString + "\n" + farewellString + "\n" + outlinesString);
-            return true;
-        }
+    private static boolean endConvo() {
+        System.out.println(farewellString);
         return false;
     }
 
-    private static void handleMessage(String message) {
-        System.out.println(outlinesString);
+    private static boolean handleMessage(String message) {
         if (message.equals("list")) { read(); }
+        else if (message.equals("bye")) { return endConvo(); }
         else if (message.startsWith("mark")) { markTask(message); }
         else if (message.startsWith("unmark", 0)) { unmarkTask(message); }
         else if (message.startsWith("todo")) { updateToDo(message); }
         else if (message.startsWith("deadline")) { updateDeadline(message); }
         else if (message.startsWith("event")) { updateEvent(message); }
-        else { System.out.println(invalidString);; }
-        System.out.println(outlinesString + "\n");
+        else { throw new InvalidInputException(null); }
+        return true;
     }
     private static void read() {
+        if (db.isEmpty()) { throw new NoTaskException(null); }
         System.out.println(readListString);
         for (int i = 1; i <= db.size(); i++) {
             System.out.println(i + "." + db.get(i-1));
@@ -66,20 +68,25 @@ public class Duke {
     }
 
     private static void updateToDo(String message) {
-        ToDo toDo = new ToDo(message.split("todo ")[1]);
-        System.out.println(Task.addTaskString + "\n" + toDo);
-        update(toDo);
+        try {
+            ToDo toDo = new ToDo(message.split("todo ")[1]);
+            System.out.println(Task.addTaskString + "\n" + toDo);
+            update(toDo);
+        } catch (ArrayIndexOutOfBoundsException e) { throw new NoDescriptionException(message, e); }
     }
 
     private static void updateDeadline(String message) {
+        try {
         String[] temp = message.split("deadline ");
         temp = temp[1].split(" /by ");
         Deadline deadline = new Deadline(temp[0], temp[1]);
         System.out.println(Task.addTaskString + "\n" + deadline);
         update(deadline);
+        } catch (ArrayIndexOutOfBoundsException e) { throw new NoDescriptionException(message, e); }
     }
 
     private static void updateEvent(String message) {
+        try {
         String[] temp = message.split("event ");
         temp = temp[1].split(" /from ");
         String description = temp[0];
@@ -87,5 +94,6 @@ public class Duke {
         Event event = new Event(description, temp[0], temp[1]); 
         System.out.println(Task.addTaskString + "\n" + event);
         update(event);
+        } catch (ArrayIndexOutOfBoundsException e) { throw new NoDescriptionException(message, e); }
     }
 }
