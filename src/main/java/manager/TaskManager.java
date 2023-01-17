@@ -13,8 +13,9 @@ public class TaskManager {
         taskList.add(task);
     }
 
-    public void mark(int taskNum, boolean isDone) throws IndexOutOfBoundsException {
+    public Task mark(int taskNum, boolean isDone) throws IndexOutOfBoundsException {
         taskList.set(taskNum, taskList.get(taskNum).mark(isDone));
+        return taskList.get(taskNum);
     }
 
 
