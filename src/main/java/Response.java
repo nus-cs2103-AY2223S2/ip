@@ -7,7 +7,7 @@ public class Response {
     public static void printMessage(String response) {
         System.out.println("        ________________________________________________________\n"
                 + formMessage(response)
-                + "        _______________________________________________________\n");
+                + "        ________________________________________________________\n");
     }
 
     public static void greetings(String responseType) {

@@ -21,12 +21,12 @@ public class TaskList {
 
     public void markDone(int number) {
         tasks.get(number - 1).mark();
-        Response.printMessage("Understood, I have marked the task as done: \n"
+        Response.printMessage("Understood, I have marked the task as done:\n"
                 + "        " + tasks.get(number - 1).toString());
     }
     public void markUndone(int number) {
         tasks.get(number - 1).unmark();
-        Response.printMessage("Understood, I have marked the task as undone: \n"
+        Response.printMessage("Understood, I have marked the task as undone:\n"
                 + "        " + tasks.get(number - 1).toString());
     }
 
