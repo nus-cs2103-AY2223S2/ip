@@ -18,9 +18,20 @@ public class Duke {
 
         // exit loop when user input is bye
         while (!userInput.equals("bye")) {
-            System.out.println(userInput);
-            myObj = new Scanner(System.in);
-            userInput = myObj.nextLine();
+            if (userInput.equals("list")) {
+                for (int i = 0; i < counter; i ++) {
+                    System.out.println(i+1 + ". " + store[i]);
+                }
+                myObj = new Scanner(System.in);
+                userInput = myObj.nextLine();
+            }
+            else {
+                store[counter] = userInput;
+                counter = counter + 1;
+                System.out.println("added: " + userInput);
+                myObj = new Scanner(System.in);
+                userInput = myObj.nextLine();
+            }
         }
 
         // prints exist statement
