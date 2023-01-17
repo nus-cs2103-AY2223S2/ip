@@ -39,6 +39,22 @@ public class Duke {
                     continue;
                 }
 
+                if (userInput.startsWith("delete")) {
+                    String[] commandSplit = userInput.split(" ");
+                    if (commandSplit.length <= 1) {
+                        throw new DukeExceptions("");
+                    }
+                    int indexToUse = Integer.parseInt(commandSplit[1]) - 1;
+                    if (indexToUse >= storedText.size() || indexToUse < 0) {
+                        throw new DukeExceptions("Wrong size for mark/unmark");
+                    }
+                    Task gettingTask = storedText.remove(indexToUse);
+                    String toOutput = "Noted. I've removed this task:\n  " + gettingTask.toString() + "\nNow you have " + storedText.size() + " tasks in the list";
+                    System.out.println(toOutput);
+                    userInput = brToUse.readLine();
+                    continue;
+                }
+
                 if (userInput.startsWith("mark")) {
                     String[] commandSplit = userInput.split(" ");
                     if (commandSplit.length <= 1) {
