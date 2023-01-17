@@ -6,14 +6,53 @@
 BLUB! There are 0 task(s)!
 ------------------------------
 ------------------------------
+BLUB! Task needs a name!
+------------------------------
+------------------------------
+BLUB! There are 0 task(s)!
+------------------------------
+------------------------------
     Blub! added: 
 [T][ ] read book
     Blub! You have 1 tasks now!
 ------------------------------
 ------------------------------
+BLUB! There are 1 task(s)!
+    1. [T][ ] read book
+------------------------------
+------------------------------
+BLUB! Event needs a name, a start time and end time!
+------------------------------
+------------------------------
+BLUB! Event is missing info! Please check input. BLUB!
+------------------------------
+------------------------------
+BLUB! Event is missing info! Please check input. BLUB!
+------------------------------
+------------------------------
+BLUB! There are 1 task(s)!
+    1. [T][ ] read book
+------------------------------
+------------------------------
     Blub! added: 
 [E][ ] bookfest (from: today to tomorrow)
     Blub! You have 2 tasks now!
+------------------------------
+------------------------------
+BLUB! There are 2 task(s)!
+    1. [T][ ] read book
+    2. [E][ ] bookfest (from: today to tomorrow)
+------------------------------
+------------------------------
+BLUB! Deadline needs a name and due date!
+------------------------------
+------------------------------
+BLUB! Deadline is missing info! PLease check input. BLUB!
+------------------------------
+------------------------------
+BLUB! There are 2 task(s)!
+    1. [T][ ] read book
+    2. [E][ ] bookfest (from: today to tomorrow)
 ------------------------------
 ------------------------------
     Blub! added: 
@@ -48,13 +87,36 @@ BLUB! There are 3 task(s)!
 ------------------------------
 ------------------------------
     Blub! i have marked this as not done!
+[E][ ] bookfest (from: today to tomorrow)
+------------------------------
+------------------------------
+BLUB! There are 3 task(s)!
+    1. [T][X] read book
+    2. [E][ ] bookfest (from: today to tomorrow)
+    3. [D][ ] return book (by thursday)
+------------------------------
+------------------------------
+    Blub! i have marked this as done!
+[D][X] return book (by thursday)
+------------------------------
+------------------------------
+BLUB! Task chosen isn't on the list!
+------------------------------
+------------------------------
+    Blub! i have marked this as not done!
 [T][ ] read book
 ------------------------------
 ------------------------------
 BLUB! There are 3 task(s)!
     1. [T][ ] read book
-    2. [E][X] bookfest (from: today to tomorrow)
-    3. [D][ ] return book (by thursday)
+    2. [E][ ] bookfest (from: today to tomorrow)
+    3. [D][X] return book (by thursday)
+------------------------------
+------------------------------
+BLUB OH! INVALID COMMAND!
+------------------------------
+------------------------------
+BLUB OH! INVALID COMMAND!
 ------------------------------
 ------------------------------
     Bye! Blub blub!

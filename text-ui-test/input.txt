@@ -1,12 +1,29 @@
 list
+todo
+list
 todo read book
+list
+event
+event bookfest
+event bookfest /from today
+list
 event bookfest /from today /to tomorrow
+list
+deadline
+deadline return book
+list
 deadline return book /by thursday
 list
 mark 1
 list
 mark 2
 list
+unmark 2
+list
+mark 3
+unmark 4
 unmark 1
 list
+banana
+baaaanan
 bye
