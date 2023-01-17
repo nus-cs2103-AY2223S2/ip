@@ -10,4 +10,10 @@ public abstract class Task {
     public void changeCompletion() {
         this.completed = !this.completed;
     }
+
+    @Override
+    public String toString() {
+        String icon = this.completed ? "[X] " : "[ ] ";
+        return icon + this.description;
+    }
 }
