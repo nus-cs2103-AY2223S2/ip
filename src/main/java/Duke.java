@@ -80,6 +80,7 @@ public class Duke {
                 handleInvalidArgs checked = new handleInvalidArgs(reply);
                 checked.checkForRandomWords(checked.reply);
             }
+
             myObj = new Scanner(System.in);
             reply = myObj.nextLine();
         }

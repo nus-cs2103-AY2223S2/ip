@@ -12,7 +12,7 @@ public class handleInvalidArgs {
 
     public void checkForEvent(String[] replies) throws DukeException{
         if (replies.length != 3) {
-            throw new DukeException("☹ OOPS!!! The description of a todo cannot be empty.");
+            throw new DukeException(" OOPS!!! The description of a todo cannot be empty.");
         }
     }
 
