@@ -6,8 +6,13 @@ import java.util.Arrays;
 
 class Printable {
 
-    static String INITIAL_GREETING = "Hello";
-    static String FINAL_GREETING = "Bye";
+    static String INITIAL_GREETING = "Welcome to Manchester United. I am Alex Ferguson. How may I help you";
+    static String ILLEGAL_COMMAND = "Alex Ferguson does not recognise this command. Perhaps you could try valid command init?";
+    static String FINAL_GREETING = "SUIII, Bye";
+    static String MARK_COMMAND = "SUI, I have marked this task from the training room: ";
+    static String UNMARK_COMMAND = "SUI, I have unmarked this task from the training room: ";
+    static String DELETE_COMMAND = "Tasks successfully deleted. SUI.";
+
     static String SHOW_TASKS = "list";
     static String TERMINATE = "exit";
     static String MARK = "mark";
@@ -15,7 +20,6 @@ class Printable {
     static String TODO = "todo";
     static String DEADLINE = "deadline";
     static String EVENT = "event";
-    static String ILLEGAL_COMMAND = "command not recognised";
     static String DELETE = "delete";
     static int DECREMENT = 1;
     
@@ -32,16 +36,19 @@ class Printable {
 
     static Tasks<Task> mark(Scanner sc, Tasks<Task> tasks) {
         int taskPosition = sc.nextInt() - DECREMENT;
+        System.out.println(MARK_COMMAND + tasks.get(taskPosition));
         return tasks.set(taskPosition, tasks.get(taskPosition).markAsDone());
     }
 
     static Tasks<Task> unmark(Scanner sc, Tasks<Task> tasks) {
         int taskPosition = sc.nextInt() - DECREMENT;
+        System.out.println(UNMARK_COMMAND + tasks.get(taskPosition));
         return tasks.set(taskPosition, tasks.get(taskPosition).markAsUndone());
     }
 
     static Tasks<Task> delete(Scanner sc, Tasks<Task> tasks) {
         int taskPosition = sc.nextInt() - DECREMENT;
+        System.out.println(DELETE_COMMAND + tasks.get(taskPosition));
         return tasks.removeTask(taskPosition);
     }
 

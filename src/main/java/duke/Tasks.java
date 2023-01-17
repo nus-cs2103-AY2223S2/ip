@@ -36,7 +36,7 @@ class Tasks<Task> {
     Tasks<Task> add(Task newTask) {
         Tasks<Task> newTasks = new Tasks<Task>(this.tasks);
         newTasks.tasks.add(newTask);
-        System.out.println("added : " + newTask); 
+        System.out.println("SUI I have added this task. Remember, rest is as important as working hard!: " + newTask); 
         return newTasks;
     }
 
