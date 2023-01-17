@@ -6,7 +6,8 @@ public enum Command {
     GREET(input -> "Kon aqua~~"),
     ADD_TASK(new AddTaskFunc()),
     LIST(new ListTaskFunc()),
-    MARK(new MarkTaskFunc()),
+    MARK(new MarkTaskFunc(true)),
+    UNMARK(new MarkTaskFunc(false)),
     BYE(input -> "Otsu aqua~~");
 
 
