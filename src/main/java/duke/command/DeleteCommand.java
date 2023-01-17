@@ -44,7 +44,7 @@ public class DeleteCommand implements Command {
         }
 
         if (index >= tasks.size() || index < 0) {
-            throw new DukeException("The index of the task to be deleted must correspond to an existing task.");
+            throw new DukeException("The task to be deleted must exist.");
         }
 
         return index;
