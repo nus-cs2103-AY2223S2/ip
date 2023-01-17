@@ -1,19 +1,16 @@
-public class Task {
-    private final String description;
-    private final boolean done;
+abstract class Task {
+    protected final String description;
+    protected final boolean done;
+    protected final String taskType;
 
     /*
         default constructor for Task
         this should not be used by the client
      */
-    private Task(String description, boolean isDone) {
+    protected Task(String description, boolean isDone, String taskType) {
         this.description = description;
         this.done = isDone;
-    }
-
-    // init Task object by client
-    public Task(String description) {
-        this(description, false);
+        this.taskType = taskType;
     }
 
     // checking if the Task object is done
@@ -26,21 +23,15 @@ public class Task {
         return taskStatus;
     }
 
-    // returns new Task that is marked as done
-    public Task markTask() {
-        System.out.println("Nice! I've marked this task as done:");
-        Task markedTask = new Task(this.description, true);
-        System.out.println(String.format("%s %s", markedTask.getStatusCheckbox(), this.description));
-        return markedTask;
+    public String getTaskTypeBox() {
+        return String.format("[%s]", this.taskType);
     }
 
+    // returns new Task that is marked as done
+    abstract public Task markTask();
+
     // returns new Task that is marked as undone
-    public Task unmarkTask() {
-        System.out.println("Ok, I've marked this task as not done yet:");
-        Task unmarkedTask = new Task(this.description, false);
-        System.out.println(String.format("%s %s", unmarkedTask.getStatusCheckbox(), this.description));
-        return unmarkedTask;
-    }
+    abstract public Task unmarkTask();
 
     @Override
     public String toString() {
