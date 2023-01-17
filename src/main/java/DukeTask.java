@@ -1,4 +1,4 @@
-public class DukeTask {
+public abstract class DukeTask {
     private boolean isDone = false;
     private final String value;
 

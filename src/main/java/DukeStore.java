@@ -26,12 +26,17 @@ public class DukeStore {
         return new DukeStore();
     }
 
-    public void add(String input) throws DukeStoreFullException {
+    public void add(DukeTask input) throws DukeStoreFullException {
         if (this.idx > recordSize - 1) {
             throw new DukeStoreFullException();
         }
-        this.records[this.idx] = new DukeTask(input);
+        this.records[this.idx] = input;
         this.idx += 1;
+
+        String message = "Got it. I've added this task:\n"
+                + "  " + this.records[this.idx - 1].toString()
+                + String.format("\nNow you have %s tasks in the list", this.idx);
+        DukeFormatter.section(message);
     }
 
     public void mark(int i) throws DukeStoreInvalidAccessException {
