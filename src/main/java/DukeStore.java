@@ -9,8 +9,7 @@ import java.util.Arrays;
 public class DukeStore {
     private static final int recordSize = 100;
     private static int ID = 0;
-    private final String[] records = new String[recordSize];
-    private final boolean[] done = new boolean[recordSize];
+    private final DukeTask[] records = new DukeTask[recordSize];
 
     //The unique ID of this store
     private int id;
@@ -21,7 +20,6 @@ public class DukeStore {
     private DukeStore() {
         this.id = DukeStore.ID + 1;
         DukeStore.ID += 1;
-        System.out.println(Arrays.toString(done));
     }
 
     public static DukeStore create() {
@@ -32,7 +30,7 @@ public class DukeStore {
         if (this.idx > recordSize - 1) {
             throw new DukeStoreFullException();
         }
-        this.records[this.idx] = input;
+        this.records[this.idx] = new DukeTask(input);
         this.idx += 1;
     }
 
@@ -40,7 +38,7 @@ public class DukeStore {
         if (i < 0 || i >= this.idx) { //Unassigned, invalid index
             throw new DukeStoreInvalidAccessException();
         }
-        this.done[i] = true;
+        this.records[i].setDone();
         String message = "Nice! I've marked this task as done:\n" + "  " + this.records[i];
         DukeFormatter.section(message);
     }
@@ -50,7 +48,7 @@ public class DukeStore {
             throw new DukeStoreInvalidAccessException();
         }
         //Index is zero-indexed => Need to subtract one
-        this.done[i] = false;
+        this.records[i].markUndone();
         String message = "OK, I've marked this task as not done yet:\n" + "  " + this.records[i];
         DukeFormatter.section(message);
     }
@@ -62,8 +60,7 @@ public class DukeStore {
             return "No records are added yet. Add some by typing them!";
         }
         for (int i = 0; i < this.idx; i++) {
-            String task = String.format("[%s] %s", (this.done[i]? "X" : " "), this.records[i]);
-            out.append(String.format("%s. %s\n", i + 1, task));
+            out.append(String.format("%s. %s\n", i + 1, this.records[i]));
         }
         return out.toString();
     }
