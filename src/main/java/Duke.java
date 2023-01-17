@@ -66,32 +66,37 @@ public class Duke {
         String command = parts[0];
         int taskNum;
         String[] textAndDate;
-        switch (command) {
-            case DISPLAY_LIST_COMMAND:
-                displayTasks();
-                break;
-            case MARK_TASK_AS_DONE_COMMAND:
-                taskNum = Integer.parseInt(parts[1]);
-                markTaskAsDone(taskNum);
-                break;
-            case MARK_TASK_AS_UNDONE_COMMAND:
-                taskNum = Integer.parseInt(parts[1]);
-                markTaskAsNotDone(taskNum);
-                break;
-            case TODO_COMMAND:
-                addTodoToList(parts[1]);
-                break;
-            case DEADLINE_COMMAND:
-                textAndDate = parts[1].split(" /by ");
-                addDeadlineToList(textAndDate);
-                break;
-            case EVENT_COMMAND:
-                textAndDate = parts[1].split(" /from | /to ");
-                addEventToList(textAndDate);
-                break;
-            default:
-                printMessage("Invalid command.");
+        try {
+            switch (command) {
+                case DISPLAY_LIST_COMMAND:
+                    displayTasks();
+                    break;
+                case MARK_TASK_AS_DONE_COMMAND:
+                    taskNum = Integer.parseInt(parts[1]);
+                    markTaskAsDone(taskNum);
+                    break;
+                case MARK_TASK_AS_UNDONE_COMMAND:
+                    taskNum = Integer.parseInt(parts[1]);
+                    markTaskAsNotDone(taskNum);
+                    break;
+                case TODO_COMMAND:
+                    addTodoToList(parts[1]);
+                    break;
+                case DEADLINE_COMMAND:
+                    textAndDate = parts[1].split(" /by ");
+                    addDeadlineToList(textAndDate);
+                    break;
+                case EVENT_COMMAND:
+                    textAndDate = parts[1].split(" /from | /to ");
+                    addEventToList(textAndDate);
+                    break;
+                default:
+                    throw new InvalidCommandDukeException();
+            }
+        } catch (DukeException e) {
+            printMessage(e.toString());
         }
+
     }
 
     private static void addTodoToList(String description) {
