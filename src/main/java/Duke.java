@@ -1,7 +1,7 @@
 import java.util.Scanner;
 
 public class Duke {
-    public static void main(String[] args) {
+    public static void main(String[] args) throws DukeException {
         // store: storing text entered by user
         Task[] store;
         store = new Task[100];
@@ -61,8 +61,7 @@ public class Duke {
                 System.out.println(store[index].toString());
             }
             else {
-                store[Task.noOfTasks] = new Task(userInput);
-                System.out.println("added: " + userInput);
+                throw new DukeException("OOPS!!! I'm sorry, but I don't know what that means :-(");
             }
             myObj = new Scanner(System.in);
             userInput = myObj.nextLine();
