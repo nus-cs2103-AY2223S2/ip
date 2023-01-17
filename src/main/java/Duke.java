@@ -27,8 +27,20 @@ public class Duke {
             } else if (input.equalsIgnoreCase("list")) {
                 list();
                 input = sc.nextLine();
+            } else if (input.toLowerCase().contains("deadline") &&
+            input.toLowerCase().contains("/by")) {
+                deadline(input);
+                input = sc.nextLine();
+            } else if (input.toLowerCase().contains("todo")) {
+                todo(input);
+                input = sc.nextLine();
+            } else if (input.toLowerCase().contains("event") &&
+            input.toLowerCase().contains("/from") &&
+            input.toLowerCase().contains("/to")) {
+                events(input);
+                input = sc.nextLine();
             } else {
-                Pattern pattern = Pattern.compile("\\D{4,7}.\\d+");
+                Pattern pattern = Pattern.compile("\\D+.\\d+");
                 Matcher matcher = pattern.matcher(input);
                 if (matcher.find()){
                     String[] strings = input.split(" ");
@@ -51,15 +63,16 @@ public class Duke {
                         );
                     }
                     input = sc.nextLine();
+                } else {
+                    System.out.println(
+                            "_____________________________________\n"
+                                    + "added: " + input + "\n"
+                                    + "_____________________________________\n"
+                    );
+                    storage[pointer] = new Task(input);
+                    pointer++;
+                    input = sc.nextLine();
                 }
-                System.out.println(
-                        "_____________________________________\n"
-                        + "added: " + input + "\n"
-                        + "_____________________________________\n"
-                );
-                storage[pointer] = new Task(input);
-                pointer++;
-                input = sc.nextLine();
             }
 
         }
@@ -83,6 +96,69 @@ public class Duke {
             );
         }
         System.out.println("_____________________________________\n");
+    }
+
+    private static void deadline(String rawInput){
+        String desc = rawInput.substring(
+                rawInput.indexOf("deadline") + "deadline ".length(),
+                rawInput.indexOf("/by")
+        );
+
+        String by = rawInput.substring(
+                rawInput.indexOf("/by") + "/by ".length()
+        );
+
+        storage[pointer] = new Deadline(desc, by);
+        System.out.println("_____________________________________\n"
+                + "Got it. I've added this task:\n"
+                + " " + storage[pointer].toString() +"\n"
+                + taskCount() + "\n"
+        );
+        pointer++;
+    }
+
+    private static void events(String rawInput){
+        String desc = rawInput.substring(
+                rawInput.indexOf("events") + "events ".length(),
+                rawInput.indexOf("/from")
+        );
+
+        String from = rawInput.substring(
+                rawInput.indexOf("/from") + "/from ".length(),
+                rawInput.indexOf("/to")
+        );
+
+        String to = rawInput.substring(
+                rawInput.indexOf("/to") + "/to ".length()
+        );
+
+        storage[pointer] = new Events(desc, from, to);
+        System.out.println("_____________________________________\n"
+                + "Got it. I've added this task:\n"
+                + " " + storage[pointer].toString() +"\n"
+                + taskCount() + "\n"
+        );
+        pointer++;
+    }
+
+    private static void todo(String rawInput){
+        String desc = rawInput.substring(
+                rawInput.indexOf("todo") + "todo ".length()
+        );
+
+        storage[pointer] = new ToDo(desc);
+        System.out.println("_____________________________________\n"
+                + "Got it. I've added this task:\n"
+                + " " + storage[pointer].toString() +"\n"
+                + taskCount() + "\n"
+        );
+        pointer++;
+    }
+
+    private static String taskCount(){
+        int newCount = pointer + 1;
+        String task = newCount == 1 ? " task" : " tasks";
+        return "Now you have " + newCount + task + " in the list.";
     }
 }
 
