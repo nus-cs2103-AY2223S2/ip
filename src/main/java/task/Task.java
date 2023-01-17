@@ -11,6 +11,10 @@ public class Task {
         this(name, false);
     }
 
+    public Task(Task task) {
+        this(task.name, task.isDone);
+    }
+
     public Task(String name, boolean isDone) {
         this.name = name;
         this.isDone = isDone;
