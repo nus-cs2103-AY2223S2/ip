@@ -4,12 +4,12 @@ import java.util.Scanner;
 public class Duke {
 
     public static String LOGO = "______     ______     __     __    \n" +
-                                "/\\  __ \\   /\\  == \\   /\\ \\   /\\ \\   \n" +
-                                "\\ \\  __ \\  \\ \\  __<   \\ \\ \\  \\ \\ \\  \n" +
-                                " \\ \\_\\ \\_\\  \\ \\_\\ \\_\\  \\ \\_\\  \\ \\_\\ \n" +
-                                "  \\/_/\\/_/   \\/_/ /_/   \\/_/   \\/_/ \n";
+            "/\\  __ \\   /\\  == \\   /\\ \\   /\\ \\   \n" +
+            "\\ \\  __ \\  \\ \\  __<   \\ \\ \\  \\ \\ \\  \n" +
+            " \\ \\_\\ \\_\\  \\ \\_\\ \\_\\  \\ \\_\\  \\ \\_\\ \n" +
+            "  \\/_/\\/_/   \\/_/ /_/   \\/_/   \\/_/ \n";
 
-    private final ArrayList<String> inputStore = new ArrayList<>();
+    private final ArrayList<Task> tasks = new ArrayList<>();
 
     /**
      * Accepts a string that represents the user command, returns a boolean to
@@ -18,16 +18,41 @@ public class Duke {
      * @return true if program should exit
      */
     public boolean handleCommand(String cmd) {
-        if (cmd.equals("bye")) {
-            System.out.println("Till next time...");
-            return true;
-        } else if (cmd.equals("list")) {
-            for (int i = 0; i < inputStore.size(); i++) {
-                System.out.printf("%d. %s\n", i + 1, inputStore.get(i));
-            }
-        } else {
-            inputStore.add(cmd);
-            System.out.printf("added: %s\n", cmd);
+        String firstCmd = cmd.split(" ")[0];
+
+        switch(firstCmd) {
+            case "bye":
+                System.out.println("Till next time...");
+                return true;
+
+            case "list":
+                System.out.println("Arii has retrieved your current tasks...");
+                for (int i = 0; i < tasks.size(); i++) {
+                    System.out.printf("%d. %s\n", i + 1, tasks.get(i));
+                }
+                break;
+
+            case "mark":
+                int markTaskIndex = Integer.parseInt(cmd.split(" ")[1]) - 1;
+                tasks.get(markTaskIndex).setIsDone(true);
+
+                System.out.println("This task is now done, what's next?");
+                System.out.println(tasks.get(markTaskIndex));
+                break;
+
+            case "unmark":
+                int unmarkTaskIndex = Integer.parseInt(cmd.split(" ")[1]) - 1;
+                tasks.get(unmarkTaskIndex).setIsDone(false);
+
+                System.out.println("This task is now not done, how disappointing...");
+                System.out.println(tasks.get(unmarkTaskIndex));
+                break;
+
+            default:
+                Task newTask = new Task(cmd);
+                tasks.add(newTask);
+                System.out.println("Hey new task added!");
+                System.out.println(newTask);
         }
         return false;
     }
