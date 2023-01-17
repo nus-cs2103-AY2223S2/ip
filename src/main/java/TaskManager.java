@@ -12,6 +12,7 @@ public class TaskManager {
 
     public String wrap(String s) {
         //wrap string with the correct indentation and lines when returning add task string
+        //assumes s contains the nextline character
         StringBuilder sb = new StringBuilder();
         sb.append(TaskManager.starting).append(TaskManager.spacing).append("Got it. I've added this task:\n  ");
         sb.append(TaskManager.spacing).append(s).append(TaskManager.spacing);
@@ -41,14 +42,6 @@ public class TaskManager {
         this.counter++;
         return this.wrap(td.toString());
     }
-
-//    public String addTask(String task) {
-//        //adds task and return add string for adding task
-//        Task t = new Task(task);
-//        this.tasks[this.counter] = t;
-//        this.counter++;
-//        return TaskManager.starting + TaskManager.spacing + "added: " + task + "\n" + TaskManager.ending;
-//    }
 
     public String mark(int index) {
         //marks the task and return the string
