@@ -1,9 +1,11 @@
 public class Task {
     private String taskName;
     private boolean isDone;
-    public Task(String taskName) {
+    private int taskNumber;
+    public Task(String taskName, int taskNumber) {
         this.taskName = taskName;
         this.isDone = false;
+        this.taskNumber = taskNumber;
     }
 
     public boolean isDone() {
@@ -20,6 +22,6 @@ public class Task {
 
     @Override
     public String toString() {
-        return this.taskName;
+        return String.format("%s %s", this.isDone ? "[X]" : "[ ]", this.taskName);
     }
 }
