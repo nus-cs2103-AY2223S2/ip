@@ -96,7 +96,7 @@ class TaskBook {
      * @param t The Task to print its status and name.
      */
     public void printTaskWithStatus(Task t) {
-        System.out.print(t.doneStatus() + " ");
+        System.out.print(t.getStatusIcon() + " ");
         t.printTaskName();
         System.out.print("\n");
     }
@@ -159,8 +159,8 @@ class TaskBook {
 }
 
 class Task {
-    private boolean isDone;
-    private String taskName;
+    protected boolean isDone;
+    protected String taskName;
 
     /** This constructor creates a Task instance.
      *
@@ -193,7 +193,7 @@ class Task {
      * @return [ ]: Marked as not done
      *      or [X]: Marked as done.
      */
-    public String doneStatus() {
+    public String getStatusIcon() {
         if (isDone) {
             return "[X]";
         } else {
