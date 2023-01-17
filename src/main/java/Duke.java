@@ -80,6 +80,12 @@ public class Duke {
                                 startEndTime[0] + " (from: " + dateTime[0] + " to: " + dateTime[1] +
                                 ")\n Now you have " + store.size() + " tasks in the list");
                         break;
+                    case "delete":
+                        if (arr.length < 2) {
+                            throw new DukeException("Invalid format, please give numbers");
+                        }
+                        deleteTask(store, arr[1]);
+                        break;
                     default:
                         throw new DukeException("Unknown format");
                 }
@@ -101,39 +107,16 @@ public class Duke {
         int number = 1;
         for (Task stored : store) {
             if (stored instanceof Todo) {
-                String storedString = stored.getStr();
-                boolean checked = stored.isChecked();
-                if (checked) {
-                    System.out.println(number + ". [T][X] " + storedString);
-                } else {
-                    System.out.println(number + ". [T][ ] " + storedString);
-                }
+                System.out.println(number + ". " + toDoString(stored));
             } else if (stored instanceof Deadline) {
-                String storedString = stored.getStr();
-                boolean checked = stored.isChecked();
-                String storedDateTime = ((Deadline) stored).getDateTime();
-                if (checked) {
-                    System.out.println(number + ". [D][X] " + storedString + " (by: " + storedDateTime + ")");
-                } else {
-                    System.out.println(number + ". [D][ ] " + storedString + " (by: " + storedDateTime + ")");
-                }
+                System.out.println(number + ". " + deadLineString(stored));
             } else if (stored instanceof Event) {
-                String storedString = stored.getStr();
-                boolean checked = stored.isChecked();
-                String storedStart = ((Event) stored).getStart();
-                String storedEnd = ((Event) stored).getEnd();
-                if (checked) {
-                    System.out.println(number + ". [E][X] " + storedString + " (from: " + storedStart +
-                            " to: " + storedEnd + ")");
-                } else {
-                    System.out.println(number + ". [E][ ] " + storedString + " (from: " + storedStart +
-                            " to: " + storedEnd + ")");
-                }
+                System.out.println(number + ". " + eventString(stored));
             }
             number++;
         }
     }
-    public static void marking(boolean b, ArrayList<? extends Task> store, String[] arr) throws DukeException {
+    public static void marking(boolean b, ArrayList<Task> store, String[] arr) throws DukeException {
         int index = Integer.parseInt(arr[1]) - 1;
         int size = store.size();
         if (index >= size | index < 0) {
@@ -148,5 +131,63 @@ public class Duke {
         }
     }
 
+    public static void deleteTask(ArrayList<Task> store, String num) throws DukeException {
+        int index = Integer.parseInt(num) - 1;
+        int size = store.size();
+        int dsize = size - 1;
+        if (index >= size | index < 0) {
+            throw new DukeException("Index out of bounds");
+        }
+        Task task = store.get(index);
+        if (task instanceof Todo) {
+            System.out.println("Noted. I've removed this task:\n  " +
+                    toDoString(task) +
+                    "\nNow you have " + dsize + " tasks in the list.");
+        } else if (task instanceof Deadline) {
+            System.out.println("Noted. I've removed this task:\n  " +
+                    deadLineString(task) +
+                    "Now you have " + dsize + " tasks in the list.");
+        } else if (task instanceof Event) {
+            System.out.println("Noted. I've removed this task:\n  " +
+                    eventString(task) +
+                    "Now you have " + dsize  + " tasks in the list.");
+        }
+        store.remove(index);
+    }
+
+    public static String toDoString(Task task) {
+        boolean checked = task.isChecked();
+        String str = task.getStr();
+        if (checked) {
+            return "[T][X] " + str;
+        } else{
+            return "[T][ ] " + str;
+        }
+    }
+
+    public static String deadLineString(Task task) {
+        String str = task.getStr();
+        boolean checked = task.isChecked();
+        String dateTime = ((Deadline) task).getDateTime();
+        if (checked) {
+            return "[D][X] " + str + " (by: " + dateTime + ")";
+        } else {
+            return "[D][ ] " + str + " (by: " + dateTime + ")";
+        }
+    }
+
+    public static String eventString(Task task) {
+        String str = task.getStr();
+        boolean checked = task.isChecked();
+        String startTime = ((Event) task).getStart();
+        String endTime = ((Event) task).getEnd();
+        if (checked) {
+            return "[E][X] " + str + " (from: " + startTime +
+            " to: " + endTime + ")";
+        } else {
+            return "[E][ ] " + str + " (from: " + startTime +
+                    " to: " + endTime + ")";
+        }
+    }
 
 }
