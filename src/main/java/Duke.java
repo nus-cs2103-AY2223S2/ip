@@ -1,4 +1,5 @@
-import java.io.*;
+
+// import java.io.*;
 import java.util.*;
 import java.util.regex.*;
 
@@ -14,6 +15,7 @@ public class Duke {
     private static final String UNKNOWN_ERR_STRING = "Hey, an unknown error happended, oh no";
     private static final String EMPTY_ERR_STRING = "Hey, ☹ The description of a todo cannot be empty.";
     private static final String UNKNOWN_CMD_ERR_STRING = "Hey, ☹ I'm sorry, but I don't know what that means :-(";
+    private static final String MISSING_ARGS_STRING = "Hey, ☹ I'm sorry, but you are missing some arguments";
 
     public static void main(String[] args) {
         String logo = " ____        _        \n"
@@ -29,31 +31,32 @@ public class Duke {
         ArrayList<Task> tasksList = new ArrayList<Task>(100);
 
         while (sc.hasNext()) {
-            String input = sc.nextLine();
-            boolean end = false;
-            switch (input) {
-                case "list":
-                    if (tasksList.size() == 0) {
-                        printer(EMPTY_LIST_STRING);
-                    } else {
-                        String toPrint = "";
-                        for (int i = 0; i < tasksList.size(); i++) {
-                            toPrint += ((i + 1) + "." + tasksList.get(i)) + "\n      ";
+            try {
+                String input = sc.nextLine();
+                boolean end = false;
+                switch (input) {
+                    case "list":
+                        if (tasksList.size() == 0) {
+                            printer(EMPTY_LIST_STRING);
+                        } else {
+                            String toPrint = "";
+                            for (int i = 0; i < tasksList.size(); i++) {
+                                toPrint += ((i + 1) + "." + tasksList.get(i)) + "\n      ";
+                            }
+                            printer(toPrint.substring(0, toPrint.length() - 7));
                         }
-                        printer(toPrint.substring(0, toPrint.length() - 7));
-                    }
-                    break;
-                case "bye":
-                    end = true;
-                    printer(END_STRING);
-                    break;
-                case "exit":
-                    end = true;
-                    printer(END_STRING);
-                    break;
-                default:
-                    if (input.startsWith("mark")) {
-                        try {
+                        break;
+                    case "bye":
+                        end = true;
+                        printer(END_STRING);
+                        break;
+                    case "exit":
+                        end = true;
+                        printer(END_STRING);
+                        break;
+                    default:
+                        // Have to do it at the starts with because what if "todo mark this as done"
+                        if (input.startsWith("mark") || input.startsWith("unmark")) {
                             int taskNo = getNumbers(input) - 1;
                             if (input.startsWith("unmark")) {
                                 tasksList.get(taskNo).unmarkAsDone();
@@ -62,63 +65,66 @@ public class Duke {
                                 tasksList.get(taskNo).markAsDone();
                                 printer(MARK_DONE_STRING + tasksList.get(taskNo));
                             }
-                        } catch (Exception e) {
-                            System.out.println(e);
-                            if (e instanceof InputMismatchException) {
-                                printer(NO_INT_ERR_STRING);
-                            } else if (e instanceof IndexOutOfBoundsException) {
-                                printer(OUT_RANGE_ERR_STRING);
-                            } else {
-                                printer(UNKNOWN_ERR_STRING);
+                            break;
+                        } else if (input.startsWith("todo ") || input.startsWith("todo")) {
+                            String title = input.substring("todo".length());
+                            if (input.startsWith("todo ")) {
+                                input.substring("todo ".length());
                             }
+                            if (title.length() == 0) {
+                                throw new DukeException(EMPTY_ERR_STRING);
+                            }
+                            Task newTask = new Todo(title);
+                            tasksList.add(newTask);
+                            printer("added: " + newTask);
+                        } else if (input.startsWith("deadline ") || input.startsWith("deadline")) {
+                            if (input.indexOf("/by") == -1) {
+                                throw new DukeException(MISSING_ARGS_STRING);
+                            }
+                            String title = input.substring("deadline".length(), input.indexOf("/by"));
+                            if (input.startsWith("deadline ")) {
+                                input.substring("deadline ".length(), input.indexOf("/by"));
+                            }
+                            if (title.length() == 0) {
+                                throw new DukeException(EMPTY_ERR_STRING);
+                            }
+                            Task newTask = new Deadline(title,
+                                    input.substring(input.indexOf("/by")).replace("/by ", ""));
+                            tasksList.add(newTask);
+                            printer("added: " + newTask);
+                        } else if (input.startsWith("event ") || input.startsWith("event")) {
+                            if (input.indexOf("/from") == -1 || input.indexOf("/to") == -1) {
+                                throw new DukeException(MISSING_ARGS_STRING);
+                            }
+                            String title = input.substring("event".length(), input.indexOf("/from"));
+                            if (input.startsWith("event ")) {
+                                input.substring("event ".length(), input.indexOf("/from"));
+                            }
+                            if (title.length() == 0) {
+                                throw new DukeException(EMPTY_ERR_STRING);
+                            }
+                            Task newTask = new Event(title,
+                                    input.substring(input.indexOf("/from"), input.indexOf("/to")).replace("/from ", ""),
+                                    input.substring(input.indexOf("/to")).replace("/to ", ""));
+                            tasksList.add(newTask);
+                            printer("added: " + newTask);
+                        } else {
+                            throw new DukeException(UNKNOWN_CMD_ERR_STRING);
                         }
                         break;
-                    } else if (input.startsWith("todo ") || input.startsWith("todo")) {
-                        String title = input.substring("todo".length());
-                        if (input.startsWith("todo ")) {
-                            input.substring("todo ".length());
-                        }
-                        if (title.length() == 0) {
-                            printer(EMPTY_ERR_STRING);
-                            break;
-                        }
-                        Task newTask = new Todo(title);
-                        tasksList.add(newTask);
-                        printer("added: " + newTask);
-                    } else if (input.startsWith("deadline ") || input.startsWith("deadline")) {
-                        String title = input.substring("deadline".length(), input.indexOf("/by"));
-                        if (input.startsWith("deadline ")) {
-                            input.substring("deadline ".length(), input.indexOf("/by"));
-                        }
-                        if (title.length() == 0) {
-                            printer(EMPTY_ERR_STRING);
-                            break;
-                        }
-                        Task newTask = new Deadline(title,
-                                input.substring(input.indexOf("/by")).replace("/by ", ""));
-                        tasksList.add(newTask);
-                        printer("added: " + newTask);
-                    } else if (input.startsWith("event ") || input.startsWith("event")) {
-                        String title = input.substring("event".length(), input.indexOf("/from"));
-                        if (input.startsWith("event ")) {
-                            input.substring("event ".length(), input.indexOf("/from"));
-                        }
-                        if (title.length() == 0) {
-                            printer(EMPTY_ERR_STRING);
-                            break;
-                        }
-                        Task newTask = new Event(title,
-                                input.substring(input.indexOf("/from"), input.indexOf("/to")).replace("/from ", ""),
-                                input.substring(input.indexOf("/to")).replace("/to ", ""));
-                        tasksList.add(newTask);
-                        printer("added: " + newTask);
-                    } else {
-                        printer(UNKNOWN_CMD_ERR_STRING);
-                    }
+                }
+                if (end) {
                     break;
-            }
-            if (end) {
-                break;
+                }
+            } catch (Exception e) {
+                // System.out.println(e);
+                if (e instanceof IndexOutOfBoundsException) {
+                    printer(OUT_RANGE_ERR_STRING);
+                } else if (e instanceof DukeException) {
+                    printer(e.getMessage());
+                } else {
+                    printer(UNKNOWN_ERR_STRING);
+                }
             }
         }
         sc.close();
@@ -131,7 +137,7 @@ public class Duke {
         System.out.println();
     }
 
-    private static int getNumbers(String input) {
+    private static int getNumbers(String input) throws DukeException {
         Pattern pattern = Pattern.compile("\\d+");
         Matcher matcher = pattern.matcher(input);
         if (matcher.find()) {
@@ -139,7 +145,7 @@ public class Duke {
             int number = Integer.parseInt(numberString);
             return number;
         } else {
-            throw new InputMismatchException("Invalid input. Please enter a number.");
+            throw new DukeException(NO_INT_ERR_STRING);
         }
     }
 }
@@ -211,5 +217,23 @@ class Event extends Task {
     @Override
     public String toString() {
         return "[E]" + super.toString() + " (from: " + from + " to: " + to + ")";
+    }
+}
+
+class DukeException extends Exception {
+    public DukeException() {
+        super();
+    }
+
+    public DukeException(String message) {
+        super(message);
+    }
+
+    public DukeException(String message, Throwable cause) {
+        super(message, cause);
+    }
+
+    public DukeException(Throwable cause) {
+        super(cause);
     }
 }
