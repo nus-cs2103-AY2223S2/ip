@@ -1,6 +1,7 @@
 import java.util.Scanner;
 import java.util.ArrayList;
-
+//if user put in wrong format for deadline events, error will occur
+//need to handle them using wrong array index exception
 class Task {
     boolean done;
     String name;

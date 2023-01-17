@@ -1,0 +1,6 @@
+todo hi
+deadline weee /by 5pm
+event eevee /from Friday /to Sunday
+mark 0
+unmark 0
+bye
