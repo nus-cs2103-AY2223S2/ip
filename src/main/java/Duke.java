@@ -15,20 +15,37 @@ public class Duke {
         System.out.println(greeting + "\n");
 
         String[] commands = {"bye", "list"};
-        ArrayList<String> taskStorage = new ArrayList<>();
+        ArrayList<Task> taskStorage = new ArrayList<>();
 
         Scanner sc = new Scanner(System.in);
 
         String input = sc.nextLine();
 
         while (!input.equals("bye")) {
+
             if (input.equals("list")) {
                 printTasks(taskStorage);
+
+            } else if (input.contains("unmark")) {
+                String[] inputArr = input.split(" ");
+                int toUnmark = Integer.parseInt(inputArr[1]);
+                Task unmarkTask = taskStorage.get(toUnmark-1);
+                unmarkTask.markUndone();
+                System.out.println("OK, I've marked this task as undone:\n" + unmarkTask);
+
+            } else if (input.contains("mark")) {
+                String[] inputArr = input.split(" ");
+                int toMark = Integer.parseInt(inputArr[1]);
+                Task markTask = taskStorage.get(toMark-1);
+                markTask.markDone();
+                System.out.println("Nice! I've marked this task as done:\n" + markTask);
+
             } else {
-                taskStorage.add(input);
+                taskStorage.add(new Task(input));
                 String output = String.format("Task added: %s", input);
                 System.out.println(output);
             }
+
             input = sc.nextLine();
         }
 
@@ -39,16 +56,15 @@ public class Duke {
     public static void printGoodbye() {
         String goodbye = "Bye. Hope to see you again soon!";
         System.out.println(goodbye);
-        return;
     }
 
-    public static void printTasks(ArrayList<String> taskStorage) {
+    public static void printTasks(ArrayList<Task> taskStorage) {
         int count = 1;
-        for (String task : taskStorage) {
-            String output = String.format("%d. %s", count++, task);
+        System.out.println("Here are the tasks in your list:");
+        for (Task task : taskStorage) {
+            String output = String.format("%d.%s", count++, task.toString());
             System.out.println(output);
         }
-        return;
     }
 
     public static boolean isCommand(String input, String[] commands) {
