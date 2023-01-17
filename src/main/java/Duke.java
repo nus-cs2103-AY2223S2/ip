@@ -12,7 +12,7 @@ public class Duke {
         */
 
         String greeting = "What's up! XyDuke here!\nHow can I be of assistance?";
-        System.out.println(greeting + "\n");
+        System.out.println(greeting);
 
         String[] commands = {"bye", "list"};
         ArrayList<Task> taskStorage = new ArrayList<>();
