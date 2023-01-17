@@ -6,6 +6,8 @@
  * This class is the main class for the duke ip.
  */
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Scanner;
 
 public class Duke {
@@ -21,7 +23,7 @@ public class Duke {
         String description = "";
 
         //Storage for the list function.
-        Task[] storage = new Task[100];
+        List<Task> storage = new ArrayList<>();
 
         //Counter to count the number of items in the list.
         int counter = 0;
@@ -48,16 +50,16 @@ public class Duke {
                     break;
                 } else if (inputArr[0].equals("mark")) { // User input mark to mark the task.
                     System.out.println("Nice! I've marked this task as done:");
-                    storage[Integer.parseInt(inputArr[1]) - 1].mark();
-                    System.out.println(storage[Integer.parseInt(inputArr[1]) - 1].toString());
+                    storage.get(Integer.parseInt(inputArr[1]) - 1).mark();
+                    System.out.println(storage.get(Integer.parseInt(inputArr[1]) - 1).toString());
                 } else if (inputArr[0].equals("unmark")) { // User input unmark to unmark the task.
                     System.out.println("OK, I've marked this task as not done yet:");
-                    storage[Integer.parseInt(inputArr[1]) - 1].unmark();
-                    System.out.println(storage[Integer.parseInt(inputArr[1]) - 1].toString());
+                    storage.get(Integer.parseInt(inputArr[1]) - 1).unmark();
+                    System.out.println(storage.get(Integer.parseInt(inputArr[1]) - 1).toString());
                 } else if (input.equals("list")) { // User input list to display list of items added.
                     int numbering = 1;
                     for (int i = 0; i < counter; i++) {
-                        System.out.println(numbering + ". " + storage[i].toString());
+                        System.out.println(numbering + ". " + storage.get(i).toString());
                         numbering++;
                     }
                 } else if (inputArr[0].equals("todo")) { // User input todos to add todos task into list.
@@ -65,9 +67,9 @@ public class Duke {
                         description = description + inputArr[i];
                         if (i != inputArr.length - 1) description += " ";
                     }
-                    storage[counter] = new Todo(checkDescription(description, "todo"));
+                    storage.add(new Todo(checkDescription(description, "todo")));
                     System.out.println("Got it. I've added this task:");
-                    System.out.println(storage[counter].toString());
+                    System.out.println(storage.get(counter).toString());
                     counter++;
                     System.out.println("Now you have " + counter + " task(s) in the list.");
                 } else if (inputArr[0].equals("deadline")) { // User input deadline to add deadline task into list.
@@ -84,10 +86,10 @@ public class Duke {
                         }
                         description = description + inputArr[i] + " ";
                     }
-                    storage[counter] = new Deadline(checkDescription(description, "deadline"),
-                                        checkTime(deadline, "deadline", "by"));
+                    storage.add(new Deadline(checkDescription(description, "deadline"),
+                                        checkTime(deadline, "deadline", "by")));
                     System.out.println("Got it. I've added this task:");
-                    System.out.println(storage[counter].toString());
+                    System.out.println(storage.get(counter).toString());
                     counter++;
                     System.out.println("Now you have " + counter + " task(s) in the list.");
                 } else if (inputArr[0].equals("event")) { // User input event to add event task into list.
@@ -113,17 +115,23 @@ public class Duke {
                         }
                         description = description + inputArr[i] + " ";
                     }
-                    storage[counter] = new Event(checkDescription(description, "event"),
+                    storage.add( new Event(checkDescription(description, "event"),
                                         checkTime(from, "event", "from"),
-                                        checkTime(to, "event", "to"));
+                                        checkTime(to, "event", "to")));
                     System.out.println("Got it. I've added this task:");
-                    System.out.println(storage[counter].toString());
+                    System.out.println(storage.get(counter).toString());
                     counter++;
+                    System.out.println("Now you have " + counter + " task(s) in the list.");
+                } else if(inputArr[0].equals("delete")) { // User to delete a specific item on the list.
+                    Task deleted = storage.remove(Integer.parseInt(inputArr[1]) - 1);
+                    counter--;
+                    System.out.println("Noted. I've removed this task:");
+                    System.out.println(deleted.toString());
                     System.out.println("Now you have " + counter + " task(s) in the list.");
                 } else {
                     wrongCommand();
                 }
-        } catch (DukeException e) {
+        } catch (DukeException e) { // Catches the DukeException.
                     System.out.println(e.getMessage());
                 }
             System.out.println("____________________________________________________________");
@@ -170,6 +178,4 @@ public class Duke {
                 + "☹ OOPS!!! I'm sorry, but I don't know what that means :-(";
         throw new DukeException(message);
     }
-
-
 }
