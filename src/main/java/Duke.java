@@ -43,13 +43,31 @@ public class Duke {
         Scanner sc = new Scanner(System.in);
         String input = sc.nextLine();
         while (!input.equals("bye")) {
-
+            // TODO: cut down repeated code 
             if (input.equals("list")) {
                 Duke.displayTasks(tasks, numTasks);
-            } else if (input.matches("\\bmark\\s\\d+")) { // regex: \bmark\s\d+, need \b to not detect unmark
-                // do stuff
+            } else if (input.matches("^mark\\s\\d+$")) { // regex: \bmark\s\d+, need \b to not detect unmark
+
+                int index = Integer.valueOf(input.substring(5)) + 1; // use 1 indexing
+
+                if (index < 1 || index >= 100) {
+                    Duke.printWithDecorations("Index out of bounds!");
+                } else if (tasks[index-1] == null) { 
+                    Duke.printWithDecorations("Task not initialised!");
+                } else {
+                    tasks[index-1].markDone();
+                }
             } else if (input.matches("\\bunmark\\s\\d+")) {
-                // do stuff
+
+                int index = Integer.valueOf(input.substring(7)) + 1; // use 1 indexing
+
+                if (index < 0 || index >= 100) {
+                    Duke.printWithDecorations("Index out of bounds!");
+                } else if (tasks[index] == null) { 
+                    Duke.printWithDecorations("Task not initialised!");
+                } else {
+                    tasks[index].unmarkDone();
+                }
             } else if (numTasks < 100) {
                 Duke.printWithDecorations("added: " + input);
                 tasks[numTasks] = new Task(input);
