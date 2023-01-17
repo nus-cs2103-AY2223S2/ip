@@ -24,6 +24,20 @@ unmark 0
 unmark -1
 unmark 5
 unmark 9999999
-list
 asdaslhdlh
+list
+todo
+deadline
+deadline /by
+deadline name
+deadline name name
+deadline name /by
+event name
+event name name
+event x /from
+event x /to
+event x /from /to
+event x /from now /to
+event x /from /to later
+event x /to later /from now
 bye

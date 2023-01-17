@@ -101,6 +101,9 @@ ___________________________
 Sorry! Invalid argument!
 ___________________________
 >___________________________
+Sorry! Invalid command!
+___________________________
+>___________________________
 Your tasks are:
 1. [D][X] eat some food (by: tomorrow)
 2. [D][ ] hw (by: 11.00pm)
@@ -108,7 +111,46 @@ Your tasks are:
 4. [E][ ] go toilet (from: now to: 5 min after now)
 ___________________________
 >___________________________
-Sorry! Invalid command!
+Sorry! One or more arguments are empty!
+___________________________
+>___________________________
+Sorry! One or more arguments are empty!
+___________________________
+>___________________________
+Sorry! One or more arguments are empty!
+___________________________
+>___________________________
+Sorry! One or more arguments are empty!
+___________________________
+>___________________________
+Sorry! One or more arguments are empty!
+___________________________
+>___________________________
+Sorry! One or more arguments are empty!
+___________________________
+>___________________________
+Sorry! One or more arguments are empty!
+___________________________
+>___________________________
+Sorry! One or more arguments are empty!
+___________________________
+>___________________________
+Sorry! One or more arguments are empty!
+___________________________
+>___________________________
+Sorry! One or more arguments are empty!
+___________________________
+>___________________________
+Sorry! One or more arguments are empty!
+___________________________
+>___________________________
+Sorry! One or more arguments are empty!
+___________________________
+>___________________________
+Sorry! One or more arguments are empty!
+___________________________
+>___________________________
+Sorry! One or more arguments are empty!
 ___________________________
 >___________________________
 Goodbye. I hope to see you again.

@@ -70,6 +70,7 @@ public class Duke {
             switch (command) {
                 case DISPLAY_LIST_COMMAND:
                     executeCommandWithNoArgument(command);
+                    break;
                 case MARK_TASK_AS_DONE_COMMAND:
                 case MARK_TASK_AS_UNDONE_COMMAND:
                 case TODO_COMMAND:
@@ -123,18 +124,31 @@ public class Duke {
         printMessage("added: " + task);
     }
 
-    private static void addDeadlineToList(String arguments) {
-        String[] splitArgs = arguments.split(" /by ");
-        Task task = new DeadlineTask(splitArgs[0], splitArgs[1]);
-        taskList.add(task);
-        printMessage("added: " + task);
+    private static void addDeadlineToList(String arguments) throws DukeException {
+        try {
+            String[] splitArgs = arguments.split(" /by ");
+            Task task = new DeadlineTask(splitArgs[0], splitArgs[1]);
+            taskList.add(task);
+            printMessage("added: " + task);
+        } catch (ArrayIndexOutOfBoundsException e) {
+            throw new EmptyArgumentDukeException();
+        }
     }
 
-    private static void addEventToList(String arguments) {
-        String[] splitArgs = arguments.split(" /from | /to ");
-        Task task = new EventTask(splitArgs[0], splitArgs[1], splitArgs[2]);
-        taskList.add(task);
-        printMessage("added: " + task);
+    private static void addEventToList(String arguments) throws DukeException {
+        try {
+            String[] splitArgs = arguments.split(" /from ");
+            String[] times = splitArgs[1].split(" /to ");
+            Task task = new EventTask(splitArgs[0], times[0], times[1]);
+            taskList.add(task);
+            printMessage("added: " + task);
+        } catch (ArrayIndexOutOfBoundsException e) {
+            throw new EmptyArgumentDukeException();
+        }
+    }
+
+    private static boolean isStringSplit(String[] split, String original) {
+        return split[0].length() != original.length();
     }
 
     private static void displayTasks() {
