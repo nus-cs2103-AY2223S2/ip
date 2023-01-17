@@ -5,7 +5,7 @@ import java.util.function.Function;
 import task.Task;
 
 
-public class AddTaskFunc implements Function<CommandInput, String>{
+public class AddTaskFunc implements Function<CommandInput, String> {
     @Override
     public String apply(CommandInput input) throws IllegalArgumentException {
         Task task = input.getMainInput()
