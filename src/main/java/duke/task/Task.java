@@ -1,3 +1,5 @@
+package duke.task;
+
 import java.io.Serializable;
 import java.time.format.DateTimeFormatter;
 
@@ -11,9 +13,9 @@ public class Task implements Serializable {
         this.isDone = false;
     }
 
-    public boolean mark(){
+    public void mark(){
         this.isDone = !this.isDone;
-        return this.isDone;
+        // return this.isDone;
     }
 
     @Override

@@ -1,3 +1,7 @@
+package duke;
+
+import duke.command.Command;
+
 public class Parser {
     Command[] commands;
 

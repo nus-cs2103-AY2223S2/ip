@@ -1,30 +1,34 @@
+package duke;
+
+import duke.command.*;
+
 import java.util.ArrayList;
 import java.util.Scanner;
-import java.util.function.Function;
-import java.util.function.Supplier;
-
 
 public class Duke {
-    public static void main(String[] args) {
 
-        UI ui = new UI();
+    private final UI ui;
+    private final Parser parser;
+
+    private Duke(String filename) {
+        this.ui = new UI();
         TaskList taskList;
         try {
-            taskList = new TaskList("data.txt");
+            taskList = new TaskList(filename);
         } catch (Exception e) {
             ui.loadError(e);
             taskList = new TaskList(new ArrayList<>());
         }
-        Command[] commands = {
+        Command[] commands = new Command[]{
                 new BasicCommand("exit"
                         , "exit the app"
                         , () -> new String[]{"Goodbye."}),
                 new BasicCommand("help"
                         , "show this help message"
                         , () -> {
-                            ui.print();
-                            return new String[]{};
-                        }),
+                    ui.print();
+                    return new String[]{};
+                }),
                 new BasicCommand("list"
                         , "list tasks"
                         , taskList::stringify),
@@ -42,9 +46,11 @@ public class Duke {
                         , taskList::delete),
         };
         ui.setCommands(commands);
-        Parser parser = new Parser(commands);
-        ui.printIntro();
+        this.parser = new Parser(commands);
+    }
 
+    private void run() {
+        this.ui.printIntro();
         Scanner scanner = new Scanner(System.in);
         String[] outputs, arguments;
         String[] lineParts;
@@ -53,7 +59,7 @@ public class Duke {
         while(scanner.hasNextLine()) {
             try {
                 lineParts = scanner.nextLine().split("\\s",2);
-                cmd = parser.parseCommand(lineParts[0]);
+                cmd = this.parser.parseCommand(lineParts[0]);
                 if (cmd.hasParams()){
                     if (lineParts.length < 2 || lineParts[1].isEmpty()) {
                         throw new IllegalArgumentException("Missing argument.");
@@ -63,14 +69,18 @@ public class Duke {
                 } else {
                     outputs = cmd.execute(new String[]{});
                 }
-                ui.print(outputs);
+                this.ui.print(outputs);
                 if (cmd.getName().equals("exit")){
                     break;
                 }
             } catch (Exception e) {
-                ui.error(e);
-                ui.print();
+                this.ui.error(e);
+                this.ui.print();
             }
         }
+    }
+
+    public static void main(String[] args) {
+        new Duke("data.txt").run();
     }
 }

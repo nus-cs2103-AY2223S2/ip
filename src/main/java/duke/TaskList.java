@@ -1,12 +1,9 @@
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.io.ObjectInputStream;
-import java.io.ObjectOutputStream;
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
+package duke;
+
+import duke.task.*;
+
+import java.io.*;
+import java.util.*;
 import java.util.function.Consumer;
 import java.util.stream.Collectors;
 

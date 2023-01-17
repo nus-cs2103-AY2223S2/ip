@@ -1,4 +1,4 @@
-import java.io.Serializable;
+package duke.task;
 
 public class ToDo extends Task {
 

@@ -1,5 +1,4 @@
-import java.util.HashMap;
-import java.util.function.Supplier;
+package duke.command;
 
 public abstract class Command {
     private final String name;
@@ -30,5 +29,5 @@ public abstract class Command {
         return params.length > 0 || hasBaseParam;
     }
 
-    abstract String[] execute(String[] params);
+    public abstract String[] execute(String[] params);
 }

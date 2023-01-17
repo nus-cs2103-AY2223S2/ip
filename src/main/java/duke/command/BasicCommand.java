@@ -1,4 +1,5 @@
-import java.util.HashMap;
+package duke.command;
+
 import java.util.function.Supplier;
 
 public class BasicCommand extends Command {
@@ -10,7 +11,7 @@ public class BasicCommand extends Command {
     }
 
     @Override
-    String[] execute(String[] params) {
+    public String[] execute(String[] params) {
         return supplier.get();
     }
 }

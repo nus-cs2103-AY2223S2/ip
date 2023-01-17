@@ -1,3 +1,5 @@
+package duke.command;
+
 import java.util.function.Function;
 
 
@@ -10,7 +12,7 @@ public class ArgCommand extends Command {
     }
 
     @Override
-    String[] execute(String[] args) {
+    public String[] execute(String[] args) {
         return function.apply(args);
     }
 }
