@@ -34,6 +34,18 @@ public class Duke {
         Duke.printWithDecorations(sb.toString());
     }
 
+    private static boolean isValidMark(Task[] tasks, int index) {
+        if (index < 0 || index >= tasks.length) {
+            Duke.printWithDecorations("Index out of bounds!");
+            return false;
+        } else if (tasks[index] == null) {
+            Duke.printWithDecorations("Task not initialised!");
+            return false;
+        } else {
+            return true;
+        }
+    }
+
     public static void main(String[] args) {
         Duke.welcome();
 
@@ -43,31 +55,26 @@ public class Duke {
         Scanner sc = new Scanner(System.in);
         String input = sc.nextLine();
         while (!input.equals("bye")) {
-            // TODO: cut down repeated code 
+
             if (input.equals("list")) {
                 Duke.displayTasks(tasks, numTasks);
-            } else if (input.matches("^mark\\s\\d+$")) { // regex: \bmark\s\d+, need \b to not detect unmark
+            } else if (input.matches("^mark\\s\\d+$")) {
 
-                int index = Integer.valueOf(input.substring(5)) + 1; // use 1 indexing
+                // We can take this exact substring because its guaranteed that input is of form "mark %d"
+                int index = Integer.valueOf(input.substring(5)) - 1; // account for 1 indexing
 
-                if (index < 1 || index >= 100) {
-                    Duke.printWithDecorations("Index out of bounds!");
-                } else if (tasks[index-1] == null) { 
-                    Duke.printWithDecorations("Task not initialised!");
-                } else {
-                    tasks[index-1].markDone();
+                if (isValidMark(tasks, index)) { // Note that this check also prints out error messages if any
+                    Duke.printWithDecorations(tasks[index].markDone());
                 }
-            } else if (input.matches("\\bunmark\\s\\d+")) {
 
-                int index = Integer.valueOf(input.substring(7)) + 1; // use 1 indexing
+            } else if (input.matches("^unmark\\s\\d+$")) {
 
-                if (index < 0 || index >= 100) {
-                    Duke.printWithDecorations("Index out of bounds!");
-                } else if (tasks[index] == null) { 
-                    Duke.printWithDecorations("Task not initialised!");
-                } else {
-                    tasks[index].unmarkDone();
+                int index = Integer.valueOf(input.substring(7)) - 1; // account for 1 indexing
+                
+                if (isValidMark(tasks, index)) { // Note that this check also prints out error messages if any
+                    Duke.printWithDecorations(tasks[index].unmarkDone());
                 }
+
             } else if (numTasks < 100) {
                 Duke.printWithDecorations("added: " + input);
                 tasks[numTasks] = new Task(input);

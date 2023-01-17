@@ -10,12 +10,20 @@ public class Task {
         return this.taskName;
     }
 
-    public void markDone() {
-        this.markedDone = true;
+    public String getTaskNameWithStatusIcon() {
+        return String.format("%s %s", this.getStatusIcon(), this.getTaskName());
     }
 
-    public void unmarkDone() {
+    public String markDone() {
+        this.markedDone = true;
+        String msg = String.format("Nice! I've marked this task as done:\n  %s", this.getTaskNameWithStatusIcon());
+        return msg;
+    }
+
+    public String unmarkDone() {
         this.markedDone = false;
+        String msg = String.format("Ok, I've marked this task as not done yet:\n  %s", this.getTaskNameWithStatusIcon());
+        return msg;
     }
 
     public String getStatusIcon() {
