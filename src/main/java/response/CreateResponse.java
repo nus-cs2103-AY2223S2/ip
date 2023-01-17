@@ -11,7 +11,7 @@ public class CreateResponse extends Response {
     }
 
     @Override
-    public String getMessage(ToDoList toDoList) {
+    public String exec(ToDoList toDoList) {
         toDoList.createToDo(this.todo);
         return String.format("Alright! This task has been added into the list: %s", this.todo);
     }

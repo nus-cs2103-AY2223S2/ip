@@ -37,7 +37,7 @@ public class Duke {
             InputParser input = new InputParser(req);
             try {
                 Response res = input.parse();
-                String out = res.getMessage(toDoList);
+                String out = res.exec(toDoList);
                 Duke.print(out);
             } catch (MissingArgumentException err) {
                 Duke.print(err.toString());
