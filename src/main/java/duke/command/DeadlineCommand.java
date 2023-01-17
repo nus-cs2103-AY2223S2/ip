@@ -32,18 +32,34 @@ public class DeadlineCommand extends AddCommand {
      */
     @Override
     protected Task createTask(String input) throws DukeException {
-        input = input.replaceFirst("deadline ", "").trim();
+        String[] args = extractValidArgs(input);
+        return createDeadline(args);
+    }
 
-        if (input.startsWith("/by ")) {
+    private String[] extractValidArgs(String input) throws DukeException {
+        String argStr = input.replaceFirst("deadline", "");
+
+        String[] descriptionAndCutoff = argStr.split(" /by ", 2);
+
+        if (descriptionAndCutoff.length != 2) {
+            throw new DukeException("The cutoff of a deadline must be specified.");
+        }
+
+        descriptionAndCutoff[0] = descriptionAndCutoff[0].trim();
+        descriptionAndCutoff[1] = descriptionAndCutoff[1].trim();
+
+        if (descriptionAndCutoff[0].isEmpty()) {
             throw new DukeException("The description of a deadline cannot be empty.");
         }
 
-        String[] args = input.split(" /by ", 2);
-
-        if (args.length != 2) {
-            throw new DukeException("The input of a deadline must include a cutoff date/time.");
+        if (descriptionAndCutoff[1].isEmpty()) {
+            throw new DukeException("The cutoff of a deadline must be specified.");
         }
 
-        return new Deadline(false, args[0].trim(), args[1].trim());
+        return descriptionAndCutoff;
+    }
+
+    private Deadline createDeadline(String[] args) {
+        return new Deadline(false, args[0], args[1]);
     }
 }
