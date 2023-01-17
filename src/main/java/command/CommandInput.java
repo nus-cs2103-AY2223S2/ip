@@ -28,11 +28,11 @@ public class CommandInput {
             scanner.useDelimiter("/");
 
             // main input
-            input.inputMap.put(MAIN_INPUT_KEY, scanner.next());
+            input.inputMap.put(MAIN_INPUT_KEY, scanner.next().strip());
 
             // rest of the input
             while (scanner.hasNext()) {
-                addInput(scanner.next(), input.inputMap);
+                addInput(scanner.next().strip(), input.inputMap);
             }
         }
         return input;
@@ -42,8 +42,8 @@ public class CommandInput {
     private static void addInput(String token, HashMap<String, String> inputMap)
             throws IllegalArgumentException {
         try (Scanner scanner = new Scanner(token)) {
-            String key = scanner.next();
-            String value = scanner.nextLine();
+            String key = scanner.next().strip();
+            String value = scanner.nextLine().strip();
             inputMap.put(key, value);
         } catch (NoSuchElementException noElmEx) {
             throw new IllegalArgumentException();
