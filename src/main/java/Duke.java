@@ -106,12 +106,12 @@ public class Duke {
                         String DeadlineSentence = UserScan.nextLine();
                         String DeadlineName = DeadlineSentence.substring(0, DeadlineSentence.indexOf(" /by"));
                         // ERROR: deadline description is blank.
-                        if (DeadlineName.length()==0) {
+                        if (DeadlineName.strip().length()==0) {
                             throw new DukeException("\n" + border + "[ERROR]\nUh, deadline description cannot be blank.\nTry again.\n" + border);
                         }
                         String DeadlineDate = DeadlineSentence.substring(DeadlineSentence.indexOf(" /by")+5);
                         // ERROR: deadline date is blank.
-                        if (DeadlineDate.length()==0) {
+                        if (DeadlineDate.strip().length()==0) {
                             throw new DukeException("\n" + border + "[ERROR]\nUh, deadline date cannot be blank.\nTry again.\n" + border);
                         }
                         Task DeadlineToAdd = new Deadline(DeadlineName, DeadlineDate);
@@ -132,17 +132,17 @@ public class Duke {
                         String EventSentence = UserScan.nextLine();
                         String EventName = EventSentence.substring(0, EventSentence.indexOf(" /from"));
                         // ERROR: event description is blank.
-                        if (EventName.length()==0) {
+                        if (EventName.strip().length()==0) {
                             throw new DukeException("\n" + border + "[ERROR]\nUh, event description cannot be blank.\nTry again.\n" + border);
                         }
                         String FromDate = EventSentence.substring(EventSentence.indexOf(" /from")+7, EventSentence.indexOf(" /to"));
                         // ERROR: event's from field is blank.
-                        if (FromDate.length()==0) {
+                        if (FromDate.strip().length()==0) {
                             throw new DukeException("\n" + border + "[ERROR]\nUh, event's from field cannot be blank.\nTry again.\n" + border);
                         }
                         String ToDate = EventSentence.substring(EventSentence.indexOf(" /to")+5);
                         // ERROR: event's to field is blank.
-                        if (ToDate.length()==0) {
+                        if (ToDate.strip().length()==0) {
                             throw new DukeException("\n" + border + "[ERROR]\nUh, event's to field cannot be blank.\nTry again.\n" + border);
                         }
                         Task EventToAdd = new Event(EventName, FromDate, ToDate);
@@ -160,6 +160,10 @@ public class Duke {
                 // Duke adds To-Do
                 case ("todo"):
                     String ToDoName = UserScan.nextLine();
+                    // ERROR: To-Do description is blank.
+                    if (ToDoName.strip().length()==0) {
+                        throw new DukeException("\n" + border + "[ERROR]\nUh, To-Do description cannot be blank.\nTry again.\n" + border);
+                    }
                     Task TaskToAdd = new ToDo(ToDoName);
                     TaskList.add(new ToDo(ToDoName));
                     System.out.println(border + "Task added:\n " + TaskToAdd + "\n"
