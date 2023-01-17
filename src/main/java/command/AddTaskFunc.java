@@ -17,6 +17,12 @@ public class AddTaskFunc implements Function<CommandInput, String> {
     public String apply(CommandInput input) throws IllegalArgumentException {
         Task task = taskCreator.apply(input);
         input.getMainManager().getTaskManager().add(task);
-        return String.format("Added: %s", task.toString());
+        return String.format(
+            "Got it. I've added this task:\n" +
+            "  %s\n" +
+            "Now you have %d tasks in the list.",
+            task.toString(),
+            input.getMainManager().getTaskManager().size()
+        );
     }
 }
