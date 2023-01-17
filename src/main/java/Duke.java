@@ -108,6 +108,24 @@ public class Duke {
         return "";
     }
 
+    private static String isDelete(String s, TaskManager tm) throws DukeException {
+        //checks if input is delete and throw exception for wrong format if matches
+        if (s.length() >= 6 && Objects.equals(s.substring(0, 6), "delete")) {
+            if (s.length() < 7) {
+                throw new DukeException("Please provide a index to delete.");
+            }else if (!Objects.equals(s.charAt(6), ' ')) {
+                throw new DukeException("Please provide a spacing after the delete keyword.");
+            }else if (s.length() < 8) {
+                throw new DukeException("Please provide the index to delete.");
+            }else if (!s.substring(7, s.length()).matches("[0-9]+")) {
+                throw new DukeException("Please provide only positive integers for index to delete.");
+            } else {
+                return tm.deleteTask(Integer.parseInt(s.substring(7, s.length())));
+            }
+        }
+        return "";
+    }
+
     public static void main(String[] args) {
         System.out.println(Duke.intro);
         Scanner sc = new Scanner(System.in);
@@ -146,6 +164,11 @@ public class Duke {
                 String isEvent = Duke.isEvent(str, tm);
                 if (!Objects.equals(isEvent, "")) {
                     System.out.println(isEvent);
+                    continue;
+                }
+                String isDelete = Duke.isDelete(str, tm);
+                if (!Objects.equals(isDelete, "")){
+                    System.out.println(isDelete);
                     continue;
                 }
                 throw new DukeException("I'm sorry, but I don't know what that means :-(");
