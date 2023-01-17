@@ -31,8 +31,9 @@ public class Duke {
 
         boolean doLoop = true;
 
+        Scanner input = new Scanner(System.in);
+
         while (doLoop) {
-            Scanner input = new Scanner(System.in);
             String line = input.nextLine();
 
             String arr[] = line.split(" ", 2);
