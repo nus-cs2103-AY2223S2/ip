@@ -49,6 +49,15 @@ public class chatLuminus {
         System.out.println("Now you have " + list.size() + " tasks in the list.");
     }
 
+    private void delete(String input) {
+        int index = Integer.parseInt(input.substring(7));
+        Task temp = list.get(index - 1);
+        list.remove(index - 1);
+        System.out.println("Noted. I've removed this task:");
+        System.out.println(temp);
+        System.out.println("Now you have " + list.size() + " tasks in the list.");
+    }
+
     private void echo() {
         Scanner sc = new Scanner(System.in);
         while(true) {
@@ -79,7 +88,7 @@ public class chatLuminus {
                 try {
                     int index = Integer.parseInt(input.substring(7));
                     this.list.get(index - 1).markAsNotDone();
-                } catch(IndexOutOfBoundsException IOBE) {
+                } catch (IndexOutOfBoundsException IOBE) {
                     System.out.println("There is no such task for unmarking ☹");
                 } finally {
                     continue;
@@ -108,6 +117,15 @@ public class chatLuminus {
                     deadline(input);
                 } catch (StringIndexOutOfBoundsException IOBE) {
                     System.out.println("OOPS!!! The description of a todo cannot be empty.");
+                } finally {
+                    continue;
+                }
+            }
+            if (input.length() > 7 && input.substring(0,6).equals("delete")) {
+                try {
+                    delete(input);
+                } catch (IndexOutOfBoundsException IOBE) {
+                    System.out.println("There is no such task for deletion ☹");
                 } finally {
                     continue;
                 }
