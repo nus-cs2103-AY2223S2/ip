@@ -12,6 +12,17 @@ import java.util.Scanner;
 
 public class Duke {
 
+    public enum Commands {
+        bye,
+        mark,
+        unmark,
+        list,
+        todo,
+        deadline,
+        event,
+        delete
+    }
+
     public static void main(String[] args) throws DukeException {
         //Scanner to scan user input.
         Scanner sc = new Scanner(System.in);
@@ -44,96 +55,103 @@ public class Duke {
             String[] inputArr = input.split(" ");
             System.out.println("____________________________________________________________");
             try {
-                if (input.equals("bye")) { // User input bye to quit.
-                    System.out.println("Bye. Hope to see you again soon!");
-                    System.out.println("____________________________________________________________");
-                    break;
-                } else if (inputArr[0].equals("mark")) { // User input mark to mark the task.
-                    System.out.println("Nice! I've marked this task as done:");
-                    storage.get(Integer.parseInt(inputArr[1]) - 1).mark();
-                    System.out.println(storage.get(Integer.parseInt(inputArr[1]) - 1).toString());
-                } else if (inputArr[0].equals("unmark")) { // User input unmark to unmark the task.
-                    System.out.println("OK, I've marked this task as not done yet:");
-                    storage.get(Integer.parseInt(inputArr[1]) - 1).unmark();
-                    System.out.println(storage.get(Integer.parseInt(inputArr[1]) - 1).toString());
-                } else if (input.equals("list")) { // User input list to display list of items added.
-                    int numbering = 1;
-                    for (int i = 0; i < counter; i++) {
-                        System.out.println(numbering + ". " + storage.get(i).toString());
-                        numbering++;
-                    }
-                } else if (inputArr[0].equals("todo")) { // User input todos to add todos task into list.
-                    for (int i = 1; i < inputArr.length; i++) {
-                        description = description + inputArr[i];
-                        if (i != inputArr.length - 1) description += " ";
-                    }
-                    storage.add(new Todo(checkDescription(description, "todo")));
-                    System.out.println("Got it. I've added this task:");
-                    System.out.println(storage.get(counter).toString());
-                    counter++;
-                    System.out.println("Now you have " + counter + " task(s) in the list.");
-                } else if (inputArr[0].equals("deadline")) { // User input deadline to add deadline task into list.
-                    String deadline = "";
-                    for (int i = 1; i < inputArr.length; i++) {
-                        if (inputArr[i].charAt(0) == '/') {
-                            i++;
-                            while (i < inputArr.length) {
-                                deadline += inputArr[i];
-                                if (i != inputArr.length - 1) deadline += " ";
-                                i++;
-                            }
-                            break;
+                Commands userCommand = checkCommand(inputArr[0]);
+                switch(userCommand) {
+                    case bye:
+                        System.out.println("Bye. Hope to see you again soon!");
+                        System.out.println("____________________________________________________________");
+                        break;
+                    case mark:
+                        System.out.println("Nice! I've marked this task as done:");
+                        storage.get(Integer.parseInt(inputArr[1]) - 1).mark();
+                        System.out.println(storage.get(Integer.parseInt(inputArr[1]) - 1).toString());
+                        break;
+                    case unmark:
+                        System.out.println("OK, I've marked this task as not done yet:");
+                        storage.get(Integer.parseInt(inputArr[1]) - 1).unmark();
+                        System.out.println(storage.get(Integer.parseInt(inputArr[1]) - 1).toString());
+                        break;
+                    case list:
+                        int numbering = 1;
+                        for (int i = 0; i < counter; i++) {
+                            System.out.println(numbering + ". " + storage.get(i).toString());
+                            numbering++;
                         }
-                        description = description + inputArr[i] + " ";
-                    }
-                    storage.add(new Deadline(checkDescription(description, "deadline"),
-                                        checkTime(deadline, "deadline", "by")));
-                    System.out.println("Got it. I've added this task:");
-                    System.out.println(storage.get(counter).toString());
-                    counter++;
-                    System.out.println("Now you have " + counter + " task(s) in the list.");
-                } else if (inputArr[0].equals("event")) { // User input event to add event task into list.
-                    String from = "";
-                    String to = "";
-                    for (int i = 1; i < inputArr.length; i++) {
-                        if (inputArr[i].charAt(0) == '/') {
-                            i++;
-                            while (i < inputArr.length) {
-                                if (inputArr[i].charAt(0) == '/') {
+                        break;
+                    case todo:
+                        for (int i = 1; i < inputArr.length; i++) {
+                            description = description + inputArr[i];
+                            if (i != inputArr.length - 1) description += " ";
+                        }
+                        storage.add(new Todo(checkDescription(description, "todo")));
+                        System.out.println("Got it. I've added this task:");
+                        System.out.println(storage.get(counter).toString());
+                        counter++;
+                        System.out.println("Now you have " + counter + " task(s) in the list.");
+                        break;
+                    case deadline:
+                        String deadline = "";
+                        for (int i = 1; i < inputArr.length; i++) {
+                            if (inputArr[i].charAt(0) == '/') {
+                                i++;
+                                while (i < inputArr.length) {
+                                    deadline += inputArr[i];
+                                    if (i != inputArr.length - 1) deadline += " ";
                                     i++;
-                                    while (i < inputArr.length) {
-                                        to += inputArr[i];
-                                        if (i != inputArr.length - 1) to += " ";
-                                        i++;
-                                    }
-                                    break;
                                 }
-                                from += inputArr[i] + " ";
-                                i++;
+                                break;
                             }
-                            break;
+                            description = description + inputArr[i] + " ";
                         }
-                        description = description + inputArr[i] + " ";
-                    }
-                    storage.add( new Event(checkDescription(description, "event"),
-                                        checkTime(from, "event", "from"),
-                                        checkTime(to, "event", "to")));
-                    System.out.println("Got it. I've added this task:");
-                    System.out.println(storage.get(counter).toString());
-                    counter++;
-                    System.out.println("Now you have " + counter + " task(s) in the list.");
-                } else if(inputArr[0].equals("delete")) { // User to delete a specific item on the list.
-                    Task deleted = storage.remove(Integer.parseInt(inputArr[1]) - 1);
-                    counter--;
-                    System.out.println("Noted. I've removed this task:");
-                    System.out.println(deleted.toString());
-                    System.out.println("Now you have " + counter + " task(s) in the list.");
-                } else {
-                    wrongCommand();
+                        storage.add(new Deadline(checkDescription(description, "deadline"),
+                                checkTime(deadline, "deadline", "by")));
+                        System.out.println("Got it. I've added this task:");
+                        System.out.println(storage.get(counter).toString());
+                        counter++;
+                        System.out.println("Now you have " + counter + " task(s) in the list.");
+                        break;
+                    case event:
+                        String from = "";
+                        String to = "";
+                        for (int i = 1; i < inputArr.length; i++) {
+                            if (inputArr[i].charAt(0) == '/') {
+                                i++;
+                                while (i < inputArr.length) {
+                                    if (inputArr[i].charAt(0) == '/') {
+                                        i++;
+                                        while (i < inputArr.length) {
+                                            to += inputArr[i];
+                                            if (i != inputArr.length - 1) to += " ";
+                                            i++;
+                                        }
+                                        break;
+                                    }
+                                    from += inputArr[i] + " ";
+                                    i++;
+                                }
+                                break;
+                            }
+                            description = description + inputArr[i] + " ";
+                        }
+                        storage.add(new Event(checkDescription(description, "event"),
+                                checkTime(from, "event", "from"),
+                                checkTime(to, "event", "to")));
+                        System.out.println("Got it. I've added this task:");
+                        System.out.println(storage.get(counter).toString());
+                        counter++;
+                        System.out.println("Now you have " + counter + " task(s) in the list.");
+                        break;
+                    case delete:
+                        Task deleted = storage.remove(Integer.parseInt(inputArr[1]) - 1);
+                        counter--;
+                        System.out.println("Noted. I've removed this task:");
+                        System.out.println(deleted.toString());
+                        System.out.println("Now you have " + counter + " task(s) in the list.");
+                        break;
                 }
-        } catch (DukeException e) { // Catches the DukeException.
+            } catch (DukeException e) { // Catches the DukeException.
                     System.out.println(e.getMessage());
-                }
+            }
             System.out.println("____________________________________________________________");
         }
     }
@@ -171,11 +189,20 @@ public class Duke {
 
     /**
      * Checks for an invalid command.
-     * @throws DukeException If there is a wrong command.
+     * @param command The command input by the user.
+     * @return The command for enum Commands.
+     * @throws DukeException If there is an invalid Command.
      */
-    public static void wrongCommand() throws DukeException {
-        String message = "____________________________________________________________\n"
-                + "☹ OOPS!!! I'm sorry, but I don't know what that means :-(";
-        throw new DukeException(message);
+    public static Commands checkCommand(String command) throws DukeException {
+        boolean flag = true;
+        for(Commands c : Commands.values()) {
+            if(command.equals(c.name())) flag = false;
+        }
+        if(flag) {
+            String message = "____________________________________________________________\n"
+                    + "☹ OOPS!!! I'm sorry, but I don't know what that means :-(";
+            throw new DukeException(message);
+        }
+        return Commands.valueOf(command);
     }
 }
