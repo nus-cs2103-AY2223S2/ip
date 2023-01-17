@@ -10,6 +10,7 @@ public enum Command {
     LIST(new ListTaskFunc()),
     MARK(new MarkTaskFunc(true)),
     UNMARK(new MarkTaskFunc(false)),
+    DELETE(new DeleteTaskFunc()),
     BYE(input -> "Otsu aqua~~");
 
 
