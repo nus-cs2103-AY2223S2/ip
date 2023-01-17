@@ -1,4 +1,5 @@
 import java.io.*;
+import java.util.*;
 public class Duke {
     private static final String logo = " |          ______    ______   \n"
                                      + " | ____    |      |  |      |  \n"
@@ -6,7 +7,11 @@ public class Duke {
                                      + " | ____ |  |______|  |______|  \n";
     private static final String straightLine = "_________________________________________________________________";
 
+
     public static void main(String[] args) {
+        //Stores user input
+        ArrayList<String> commandStorage = new ArrayList<String>();
+
         printIntroductoryMessage();
 
         //Prepare input and output sources
@@ -31,12 +36,13 @@ public class Duke {
             if (input.equals("bye")) {
                 break;
             }
-            //User did not type in "bye". Echo what the user typed.
+            //User typed in "list"
+            else if (input.equals("list")) {
+                printUserCommands(commandStorage);
+            }
+            //User did not type in "bye" or "list". Store the text.
             else {
-                pw.println(straightLine);
-                pw.println(input);
-                pw.println(straightLine);
-                pw.flush();
+                addUserCommand(input, commandStorage);
             }
         }
 
@@ -47,7 +53,7 @@ public class Duke {
 
 
     /**
-     * Prints the introductory message
+     * Prints the introductory message.
      */
     public static void printIntroductoryMessage() {
         System.out.println(logo);
@@ -59,7 +65,7 @@ public class Duke {
     }
 
     /**
-     * Prints the exit message
+     * Prints the exit message.
      */
     public static void printExitMessage() {
         System.out.println(straightLine);
@@ -67,6 +73,36 @@ public class Duke {
         System.out.println("Have a great day! :)");
         System.out.println(straightLine);
     }
+
+    /**
+     * Prints out all the user commands that have been entered by the user thus far.
+     * @param commandStorage The ArrayList that stores the user commands to be printed out.
+     */
+    public static void printUserCommands(ArrayList<String> commandStorage) {
+        System.out.println(straightLine);
+        int numberOfCommands = commandStorage.size();
+        //Process each command in the storage
+        for (int i = 0; i < numberOfCommands; i = i + 1) {
+            String numbering = Integer.toString(i + 1) + ". ";
+            String output = numbering + commandStorage.get(i);
+            System.out.println(output);
+        }
+        System.out.println(straightLine);
+    }
+
+    /**
+     * Adds user command into storage and informs the user.
+     * @param command The command to be added to storage.
+     * @param commandStorage The ArrayList that stores the command.
+     */
+    public static void addUserCommand(String command, ArrayList<String> commandStorage) {
+        commandStorage.add(command);
+        System.out.println(straightLine);
+        System.out.println("added: " + command);
+        System.out.println(straightLine);
+    }
+
+
 
 
 
