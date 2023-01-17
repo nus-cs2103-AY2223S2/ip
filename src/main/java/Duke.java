@@ -8,8 +8,8 @@ public class Duke {
     private static final ArrayList<Task> tasks = new ArrayList<>();
     public static void main(String[] args) {
         System.out.println(greeting);
+        Scanner sc = new Scanner(System.in);
         while(active) {
-            Scanner sc = new Scanner(System.in);
             String input = sc.nextLine();
             String command = input.split(" ")[0];
             switch (command) {
@@ -96,6 +96,16 @@ public class Duke {
                             "OK, I've marked this task as not done yet:\n" +
                             "   " + tasks.get(num - 1).toString() + "\n" +
                             "____________________________________________________________");
+                    break;
+                }
+                case "delete": {
+                    int num = Integer.parseInt(input.split(" ")[1]);
+                    System.out.println("____________________________________________________________\n" +
+                            "Noted. I've removed this task:\n" +
+                            "   " + tasks.get(num - 1).toString() + "\n" +
+                            "Now you have " + (tasks.size()-1) + " tasks in the list.\n" +
+                            "____________________________________________________________");
+                    tasks.remove(num - 1);
                     break;
                 }
                 default:
