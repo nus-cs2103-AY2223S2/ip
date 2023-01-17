@@ -22,6 +22,8 @@ public class Command {
                 } else {
                     new Mark(s, command);
                 }
+            } else if (command.contains("delete")) {
+                new Delete(s, command);
             } else {
                 try {
                     new Add(s, command);
