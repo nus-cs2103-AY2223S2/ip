@@ -37,7 +37,7 @@ how may I help?
 	deleted: 1. [T][ ] buy milk
 	1. [D][ ] do bills (by: 2020-02-20)
 	2. [E][X] party (from: Fri 5pm) (to: Fri 7pm)
-	Invalid index.
+	[ERROR] Task not found: 3
 	Usage: <command> [<args>]
 		exit : exit the app
 		help : show this help message

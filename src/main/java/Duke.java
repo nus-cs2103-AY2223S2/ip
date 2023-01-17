@@ -1,12 +1,22 @@
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Scanner;
+import java.util.function.Consumer;
+import java.util.function.Function;
+import java.util.function.Supplier;
 
 
 public class Duke {
     public static void main(String[] args) {
 
-        DataStore data = new DataStore();
         Formatter formatter = new Formatter();
+        DataStore data;
+        try {
+            data = new DataStore();
+        } catch (Exception e) {
+            System.out.println("\t[ERROR] While loading, the following error occurred: \n\t" + e.getMessage());
+            data = new DataStore(new ArrayList<>());
+        }
         Command[] commands = {
                 new BasicCommand("exit"
                         , "exit the app"
@@ -53,7 +63,7 @@ public class Duke {
                     break;
                 }
             } catch (Exception e) {
-                System.out.println("\t" + e.getMessage());
+                System.out.println("\t[ERROR] " + e.getMessage());
                 formatter.print();
             }
         }
@@ -85,5 +95,34 @@ public class Duke {
         }
         outputs[regexes.length] = input;
         return outputs;
+    }
+
+    @FunctionalInterface
+    public interface ThrowingSupplier<T, E extends Exception> {
+        T get() throws E;
+    }
+
+    @FunctionalInterface
+    public interface ThrowingFunction<T, R, E extends Exception> {
+        R apply(T t) throws E;
+    }
+    static <T> Supplier<T> throwingSupplierWrapper(ThrowingSupplier<T, Exception> throwingSupplier) {
+        return () -> {
+            try {
+                return throwingSupplier.get();
+            } catch (Exception ex) {
+                throw new RuntimeException(ex);
+            }
+        };
+    }
+
+    static <T,R> Function<T,R> throwingFunctionWrapper(ThrowingFunction<T, R, Exception> throwingFunction) {
+        return i -> {
+            try {
+                return throwingFunction.apply(i);
+            } catch (Exception ex) {
+                throw new RuntimeException(ex);
+            }
+        };
     }
 }
