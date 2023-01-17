@@ -3,6 +3,8 @@ import java.util.ArrayList;
 
 // Assume Duke is only a task manager.
 public class Duke {
+    static final String BORDER = "----------------------------------------";
+
     // Members
     private static ArrayList<Task> tasks = new ArrayList<>();
 
@@ -15,6 +17,7 @@ public class Duke {
         for (Task t : tasks) {
             System.out.println(t.fullMessage());
         }
+        System.out.println(BORDER);
     }
 
     // Zero indexed
@@ -22,7 +25,7 @@ public class Duke {
         Task curr = tasks.get(index);
         curr.markAsDone();
         System.out.println("Nice! I've marked this task as done:\n" +
-                curr.fullMessage());
+                curr.fullMessage() + "\n" + BORDER);
     }
 
     // Zero indexed
@@ -30,7 +33,7 @@ public class Duke {
         Task curr = tasks.get(index);
         curr.markAsUndone();
         System.out.println("OK, I've marked this task as not done yet:\n" +
-                curr.fullMessage());
+                curr.fullMessage() + "\n" + BORDER);
     }
 
     public static void main(String[] args) {
@@ -39,7 +42,7 @@ public class Duke {
                 + "| | | | | | | |/ / _ \\\n"
                 + "| |_| | |_| |   <  __/\n"
                 + "|____/ \\__,_|_|\\_\\___|\n";
-        System.out.println("Hello from\n" + logo + "What can I do for you?");
+        System.out.println("Hello from\n" + logo + "What can I do for you?\n" + BORDER);
         Scanner sc = new Scanner(System.in);
         while (sc.hasNext()) {
             String command = sc.next();
@@ -64,24 +67,24 @@ public class Duke {
                     Task t = new ToDos(message);
                     tasks.add(t);
                     System.out.println("Got it. I've added this task:\n" + t.fullMessage());
-                    System.out.println("Now you have " + tasks.size() + " tasks in this list");
+                    System.out.println("Now you have " + tasks.size() + " tasks in this list\n" + BORDER);
                     break;
                 case "deadline":
                     String[] messages = sc.nextLine().trim().split("/");
                     t = new Deadlines(messages);
                     tasks.add(t);
                     System.out.println("Got it. I've added this task:\n" + t.fullMessage());
-                    System.out.println("Now you have " + tasks.size() + " tasks in this list");
+                    System.out.println("Now you have " + tasks.size() + " tasks in this list\n" + BORDER);
                     break;
                 case "event":
                     messages = sc.nextLine().trim().split("/");
                     t = new Events(messages);
                     tasks.add(t);
                     System.out.println("Got it. I've added this task:\n" + t.fullMessage());
-                    System.out.println("Now you have " + tasks.size() + " tasks in this list");
+                    System.out.println("Now you have " + tasks.size() + " tasks in this list\n" + BORDER);
                     break;
                 default:
-                    System.out.println("lol what");
+                    System.out.println("lol what\n" + BORDER);
             }
         }
 
