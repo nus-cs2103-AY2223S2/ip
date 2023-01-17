@@ -6,7 +6,7 @@ public class Duke {
     private boolean isRunning;
 
     /** Array of tasks */
-    private String[] tasks;
+    private Task[] tasks;
 
     /** Number of tasks stored */
     private int numTasks;
@@ -22,13 +22,13 @@ public class Duke {
         this.exit();
     }
 
-    public void addTask(String task) {
+    private void addTask(Task task) {
         this.tasks[this.numTasks] = task;
         this.numTasks += 1;
         System.out.println("added " + task);
     }
 
-    public void showTasks() {
+    private void showTasks() {
         for (int i = 0; i < this.numTasks; i++) {
            System.out.println(i + ". " + this.tasks[i]);
         }
@@ -37,7 +37,7 @@ public class Duke {
     private void init() {
         this.scanner = new Scanner(System.in);
         this.isRunning = true;
-        this.tasks = new String[100];
+        this.tasks = new Task[100];
         this.numTasks = 0;
         System.out.println("Hello!");
     }
@@ -52,7 +52,7 @@ public class Duke {
         } else if (command.equals("list")){
             this.showTasks();
         } else {
-            this.addTask(command);
+            this.addTask(new Task(command));
         }
     }
 
