@@ -4,20 +4,20 @@ import java.util.Scanner;
 public class Duke {
   static ArrayList<Task> taskList = new ArrayList<>();
 
-  public static String separator(String out) {
+  public static void print(String toPrint) {
     String line = "____________________________________________________________\n";
-    return line + out + line;
+    System.out.println(line + " " + toPrint + line);
   }
 
   public static String greeting() {
-    return separator(" Nyahello! I'm Nyako!\n What can I do for you nya?\n");
+    return "Nyahello! I'm Nyako!\n What can I do for you nya?\n";
   }
 
   public static String addTask(String input) {
     Task t = makeTask(input);
     taskList.add(t);
-    return separator(String.format(" Added task nya!\n  %s\n" +
-        " Nyow you have %d tasks in the list nya!\n", t, taskList.size()));
+    return String.format("Added task nya!\n  %s\n" +
+        " Nyow you have %d tasks in the list nya!\n", t, taskList.size());
   }
 
   public static Task makeTask(String input) {
@@ -42,42 +42,55 @@ public class Duke {
     for (int i = 0; i < taskList.size(); i++) {
       output += " " + (i + 1) + ". " + taskList.get(i) + "\n";
     }
-    return separator(" Here are your tasks nya!\n" + output);
+    return "Here are your tasks nya!\n" + output;
   }
 
   public static String markTask(int id) {
     Task currTask = taskList.get(id - 1);
     currTask.setDone();
-    return separator(String.format(" Good job for doing your task nya!\n  %s\n", currTask));
+    return String.format("Good job for doing your task nya!\n  %s\n", currTask);
   }
 
   public static String unmarkTask(int id) {
     Task currTask = taskList.get(id - 1);
     currTask.setUndone();
-    return separator(String.format(" Set your task to undone nya!\n  %s\n", currTask));
+    return String.format("Set your task to undone nya!\n  %s\n", currTask);
   }
 
   public static String bye() {
-    return separator(" Bye bye nya!\n");
+    return "Bye bye nya!\n";
+  }
+
+  public static String invalidCommand() {
+    return "Invalid command nya! Do it again and I will scratch you!\n";
   }
 
   public static void main(String[] args) {
     Scanner sc = new Scanner(System.in);
-    System.out.println(greeting());
+    print(greeting());
     String command = sc.nextLine();
     while (!command.equals("bye")) {
-      if (command.equals("list")) {
-        System.out.println(listTasks());
-      } else if (command.split(" ")[0].equals("mark")) {
-        System.out.println(markTask(Integer.parseInt(command.split(" ")[1])));
-      } else if (command.split(" ")[0].equals("unmark")) {
-        System.out.println(unmarkTask(Integer.parseInt(command.split(" ")[1])));
-      } else {
-        System.out.println(addTask(command));
+      switch (command.split(" ")[0]) {
+        case "list":
+          print(listTasks());
+          break;
+        case "mark":
+          print(markTask(Integer.parseInt(command.split(" ")[1])));
+          break;
+        case "unmark":
+          print(unmarkTask(Integer.parseInt(command.split(" ")[1])));
+          break;
+        case "todo":
+        case "deadline":
+        case "event":
+          print(addTask(command));
+          break;
+        default:
+          print(invalidCommand());
       }
       command = sc.nextLine();
     }
-    System.out.println(bye());
+    print(bye());
     sc.close();
   }
 }
