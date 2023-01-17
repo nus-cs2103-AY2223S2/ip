@@ -10,7 +10,7 @@ public class Duke {
         printWelcomeMessage();
 
         while (true) {
-            String[] command = sc.nextLine().split(" ");
+            String[] command = sc.nextLine().split(" ", 2);
             if (command[0].equals("bye")) {
                 System.out.println(formatMessage("Bye. Hope to see you again soon!"));
                 break;
@@ -27,8 +27,28 @@ public class Duke {
                 System.out.println(formatMessage("OK, I've marked this task as not done yet:\n" +
                         indent + tasks.get(taskNum).toString()));
             } else {
-                tasks.add(new Task(command[0]));
-                System.out.println(formatMessage("added: " + command[0]));
+                switch (command[0]) {
+                    case "todo":
+                        tasks.add(new Todo(command[1]));
+                        break;
+                    case "deadline": {
+                        String[] arguments = command[1].split(" /by ");
+                        tasks.add(new Deadline(arguments[0], arguments[1]));
+                        break;
+                    }
+                    case "event": {
+                        String[] arguments = command[1].split(" /from ");
+                        String[] timings = arguments[1].split(" /to ");
+                        tasks.add(new Event(arguments[0], timings[0], timings[1]));
+                        break;
+                    }
+                    default:
+                        System.out.println(formatMessage("I do not understand"));
+                }
+
+                System.out.println(formatMessage("Got it. I've added this task:\n" +
+                        indent + indent + tasks.get(tasks.size() - 1).toString() + "\n" +
+                        indent + "Now you have " + tasks.size() + " task(s) in the list."));
             }
         }
     }
