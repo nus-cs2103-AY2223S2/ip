@@ -1,8 +1,12 @@
 import java.util.ArrayList;
 import java.util.Scanner;
 
+/*
+May want to catch NumberFormatException for Integer.parseInt
+ */
+
 public class Duke {
-    public static ArrayList<String> list = new ArrayList<String>();
+    public static ArrayList<Task> list = new ArrayList<Task>();
     public static Scanner sc = new Scanner(System.in);
     public static boolean exitApp = false;
 
@@ -31,23 +35,55 @@ public class Duke {
 
     public static void update() {
         String input = sc.nextLine();
+        if (input.isEmpty()) {
+            return;
+        }
 
-        if (input.equalsIgnoreCase("bye")) {
+        String[] words  = input.split(" ");
+        String firstWord = words[0];
+
+        if (firstWord.equalsIgnoreCase("bye")) {
             exitApp = true;
             return;
         }
 
-        if (input.equalsIgnoreCase("list")) {
+        if (firstWord.equalsIgnoreCase("list")) {
             String output = "";
             for (int i = 0; i != list.size();++i) {
-               String item = list.get(i);
-               output += (i + 1) + ". " + item + "\n";
+               Task t = list.get(i);
+               output += (i + 1) + ". " + t.toString() + "\n";
             }
             displayMessage(output);
             return;
         }
 
-        list.add(input);
+        if (firstWord.equalsIgnoreCase("mark")) {
+            int target = Integer.parseInt(words[1]) - 1;
+            if (target < 0 || target >= list.size()) {
+                displayMessage("This task does not exist!");
+                return;
+            }
+            Task t = list.get(target);
+            t.mark();
+            String output = "I've marked this task as done!\n" + t.toString();
+            displayMessage(output);
+            return;
+        }
+
+        if (firstWord.equalsIgnoreCase("unmark")) {
+            int target = Integer.parseInt(words[1]) - 1;
+            if (target < 0 || target >= list.size()) {
+                displayMessage("This task does not exist!");
+                return;
+            }
+            Task t = list.get(target);
+            t.unmark();
+            String output = "I've marked this task as not done!\n" + t.toString();
+            displayMessage(output);
+            return;
+        }
+
+        list.add(new Task(input));
         displayMessage("Added " + input);
     }
 
