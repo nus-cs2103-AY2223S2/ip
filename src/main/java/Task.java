@@ -1,22 +1,24 @@
 public class Task {
     protected String description;
     protected boolean isDone;
+    private static int count = 0;
 
     public Task(String description) {
         this.description = description;
         this.isDone = false;
+        count++;
     }
 
     public String getStatusIcon() {
         return (isDone ? "X" : " ");
     }
 
-    public void markDone() {
-        this.isDone = true;
+    public void setIsDone(boolean isDone) {
+        this.isDone = isDone;
     }
 
-    public void unmarkDone() {
-        this.isDone = false;
+    public static int getCount() {
+        return count;
     }
 
     @Override

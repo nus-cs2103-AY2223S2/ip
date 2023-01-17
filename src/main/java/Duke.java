@@ -10,31 +10,63 @@ public class Duke {
 
         Scanner scanner = new Scanner(System.in);
         String currInput = scanner.nextLine();
-        String[] splitStr = currInput.split(" ");
+
+        String[] splitStr = currInput.split(" ", 2);
+        String type = splitStr[0];
 
         while(!currInput.equals("bye")) {
+            boolean isMarkTask = type.equals("mark") || type.equals("unmark");
+            boolean isSuppTask = type.equals("todo") || type.equals("deadline") || type.equals("event");
+
             if(currInput.equals("list")) {
                 System.out.println("Here are the tasks in your list:");
                 for(int i = 0; i < curr; i++) {
                     System.out.println((i + 1) + ". " + inputs[i]);
                 }
-            } else if(splitStr[0].equals("mark")) {
+            } else if(isMarkTask) {
                 Task taskToMark = inputs[Integer.parseInt(splitStr[1]) - 1];
-                taskToMark.markDone();
-                System.out.println("Nice! I've marked this task as done:");
+                mark(type, taskToMark);
                 System.out.println(taskToMark + "\n");
-            } else if(splitStr[0].equals("unmark")) {
-                Task taskToUnmark = inputs[Integer.parseInt(splitStr[1]) - 1];
-                taskToUnmark.unmarkDone();
-                System.out.println("OK, I've marked this task as not done yet:");
-                System.out.println(taskToUnmark + "\n");
+            } else if(isSuppTask) {
+                addSuppTask(type, inputs, curr, splitStr[1]);
+                System.out.println("Got it. I've added this task:");
+                System.out.println(inputs[curr++]);
+                System.out.println("Now you have " + Task.getCount() + " tasks in the list.\n");
             } else {
                 System.out.println("added: " + currInput + "\n");
                 inputs[curr++] = new Task(currInput);
             }
             currInput = scanner.nextLine();
-            splitStr = currInput.split(" ");
+            splitStr = currInput.split(" ", 2);
+            type = splitStr[0];
         }
         System.out.println("Bye. Hope to see you again soon!");
+    }
+
+    public static void mark(String type, Task taskToMark) {
+        if(type.equals("mark")) {
+            taskToMark.setIsDone(true);
+            System.out.println("Nice! I've marked this task as done:");
+        } else {
+            taskToMark.setIsDone(false);
+            System.out.println("OK, I've marked this task as not done yet:");
+        }
+    }
+
+    public static void addSuppTask(String type, Task[] inputs, int curr, String task) {
+        if(type.equals("todo")) {
+            inputs[curr] = new Todo(task);
+        } else if(type.equals("deadline")) {
+            String[] arr = task.split("/", 2);
+            String desc = arr[0].trim();
+            String by = arr[1].substring(3);
+            inputs[curr] = new Deadline(desc, by);
+        } else {
+            String[] arr = task.split("/", 3);
+            String desc = arr[0].trim();
+            String from = arr[1].substring(5).trim();
+            String to = arr[2].substring(3);
+            inputs[curr] = new Event(desc, from, to);
+        }
     }
 }
