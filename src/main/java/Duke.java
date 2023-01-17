@@ -8,6 +8,7 @@ public class Duke {
 
     public void run() {
         boolean isClosed = false;
+        TaskHandler handler = new TaskHandler(list);
 
         System.out.println(ui.greet());
         while (!isClosed) {
@@ -16,13 +17,21 @@ public class Duke {
                 System.out.println(ui.exit());
                 isClosed = true;
             } else if (input.equals("list")) {
-                list.display();
+                System.out.println(handler.display());
             } else if (input.startsWith("mark")) {
-                list.markAsDone(input);
+                System.out.println(handler.markAsDone(input));
             } else if (input.startsWith("unmark")) {
-                list.markAsUndone(input);
+                System.out.println(handler.markAsUndone(input));
+            } else if (input.startsWith("event")) {
+                System.out.println(handler.eventHandler(input));
+            } else if (input.startsWith("todo")) {
+                System.out.println(handler.todoHandler(input));
+            } else if (input.startsWith("deadline")) {
+                System.out.println(handler.deadlineHandler(input));
             } else {
-                list.add(input);
+//                System.out.println(handler.add(input));
+                System.out.println("Not a valid command.");
+
             }
         }
     }
