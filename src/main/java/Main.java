@@ -1,7 +1,7 @@
 import java.util.Scanner;
 
 public class Main {
-    public static void main(String[] args) throws UnknownCommandException {
+    public static void main(String[] args) {
         Duke duke = new Duke();
 
         // greeting
@@ -43,12 +43,12 @@ public class Main {
                     String indexToDelete = getCommandContent(inMsg, "delete");
                     duke.print_structured_string(duke.deleteTask(Integer.parseInt(indexToDelete)));
                 } else {
-                    throw new UnknownCommandException();
+                    throw new DukeException("  OOPS!!! I'm sorry, but I don't know what that means :-(");
                 }
-            } catch (EmptyContentException e) {
+            } catch (DukeException e) {
                 duke.print_structured_string(e.toString());
-            } catch (UnknownCommandException e) {
-                duke.print_structured_string(e.toString());
+            } catch (NumberFormatException e) {
+                duke.print_structured_string("Please enter a number.");
             }
         }
 
@@ -60,9 +60,9 @@ public class Main {
         return s.startsWith(command);
     }
 
-    public static String getCommandContent(String s, String command) throws EmptyContentException {
-        if (s.length() + 1 >= command.length()) {
-            throw new EmptyContentException();
+    public static String getCommandContent(String s, String command) throws DukeException {
+        if ((!command.equals("list")) && s.length() <= command.length() + 1) {
+            throw new DukeException("The command argument is not complete.");
         }
         return s.substring(s.indexOf(command) + command.length() + " ".length());
     }

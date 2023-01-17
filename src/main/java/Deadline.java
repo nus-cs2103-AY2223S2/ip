@@ -8,11 +8,15 @@ public class Deadline extends Task {
         this.type = "D";
     }
 
-    public Deadline(String description) {
+    public Deadline(String description) throws DukeException {
         super();
         int indexOfBy = description.indexOf("/by");
-        this.time = description.substring(indexOfBy + "/by ".length());
-        this.name = description.substring(0, indexOfBy - " ".length());
+        try {
+            this.time = description.substring(indexOfBy + "/by ".length());
+            this.name = description.substring(0, indexOfBy - " ".length());
+        } catch (StringIndexOutOfBoundsException e) {
+            throw new DukeException("The command argument is not complete.");
+        }
         this.type = "D";
     }
 
