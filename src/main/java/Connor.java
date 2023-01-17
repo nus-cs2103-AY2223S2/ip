@@ -10,11 +10,11 @@ public class Connor {
         }
     }
 
-    private static String getTask(String input) {
+    private static String getDirective(String input) {
         return input.substring(input.indexOf(' ') + 1, input.length());
     }
 
-    private static String[] getTaskTimePair(String input) {
+    private static String[] getDirectiveTimePair(String input) {
         int slashIndex = input.indexOf('/');
         String[] pair = new String[2];
         pair[0] = input.substring(0, slashIndex - 1);
@@ -47,25 +47,25 @@ public class Connor {
                 sc.close();
                 break;
             } else if (command.equals("MARK")) {
-                String numberMark = getTask(input);
+                String numberMark = getDirective(input);
                 list.markDone(Integer.valueOf(numberMark));
             } else if (command.equals("UNMARK")) {
-                String numberUnmark = getTask(input);
+                String numberUnmark = getDirective(input);
                 list.markUndone(Integer.valueOf(numberUnmark));
             } else if (command.equals("LIST")) {
                 list.getList();
             } else if (command.equals("TODO")) {
-                TODO todo = new TODO(getTask(input));
+                TODO todo = new TODO(getDirective(input));
                 list.addTask(todo);
             } else if (command.equals("DEADLINE")) {
-                String[] pair = getTaskTimePair(getTask(input));
+                String[] pair = getDirectiveTimePair(getDirective(input));
                 String taskName = pair[0];
                 String time = pair[1];
                 String exactTime = time.substring(time.indexOf(' ') + 1, time.length());
                 Deadline deadline = new Deadline(taskName, exactTime);
                 list.addTask(deadline);
             } else if (command.equals("EVENT")){
-                String[] pair = getTaskTimePair(getTask(input));
+                String[] pair = getDirectiveTimePair(getDirective(input));
                 String taskName = pair[0];
                 String[] timePair = getStartEndTime(pair[1]);
                 String startTime = timePair[0];
