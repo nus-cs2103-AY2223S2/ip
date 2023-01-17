@@ -53,20 +53,6 @@ public class Duke {
         System.out.println(indentation + horizontalLine + '\n');
     }
 
-    private static void list(Command command, TaskList tasks) {
-        if (tasks.isEmpty()) {
-            Duke.say("Nothing in the list.");
-            return;
-        }
-        Duke.say(tasks.toString());
-    }
-
-    private static void addTask(Command command, TaskList tasks) {
-        String commandString = command.toString();
-        tasks.add(new Task(commandString));
-        Duke.say("added: " + commandString);
-    }
-
     private static void mark(Command command, TaskList tasks) {
         int taskIndex = Integer.parseInt(command.parameters[0]) - 1;
         Task task = tasks.get(taskIndex);
@@ -85,5 +71,19 @@ public class Duke {
             "OK, I've marked this task as not done yet:\n"
                 + "  " + task.toString()
         );
+    }
+
+    private static void list(Command command, TaskList tasks) {
+        if (tasks.isEmpty()) {
+            Duke.say("Nothing in the list.");
+            return;
+        }
+        Duke.say(tasks.toString());
+    }
+
+    private static void addTask(Command command, TaskList tasks) {
+        String commandString = command.toString();
+        tasks.add(new Task(commandString));
+        Duke.say("added: " + commandString);
     }
 }
