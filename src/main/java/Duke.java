@@ -2,8 +2,7 @@ import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Duke {
-    static Task[] lst=new Task[110];
-    static int len=0;
+    static ArrayList<Task> lst=new ArrayList<>();
     public static void main(String[] args) {
         String line="____________________________________________________________";
         System.out.println(line);
@@ -18,82 +17,108 @@ public class Duke {
             boolean iscmd=false;
             try{
                 if(cmd.equals("list")){
-                    if(len==0) throw new ListException();
+                    if(lst.size()==0) throw new ListException();
                     System.out.println(line);
                     System.out.println("Roarrrrrrrrrrrrrrr! Task list shown below!");
-                    for (int i = 1; i <= len; ++i) {
-                        System.out.println(i + "." + lst[i].toString());
+                    for (int i = 1; i <= lst.size(); ++i) {
+                        System.out.println(i + "." + lst.get(i-1).toString());
                     }
                     System.out.println(line);
                     iscmd=true;
                 }
-                if(cmd.length()>5&&cmd.substring(0,4).equals("mark")){
+                if(cmd.startsWith("mark")){
+                    if(cmd.length()<=5) throw new MarkException();
                     int i;
                     try {
                         i = Integer.parseInt(cmd.substring(5));
                     }catch(NumberFormatException e){
                         throw new MarkException();
                     }
-                    lst[i].mark();
+                    if(i>lst.size()) throw new MarkException();
+                    lst.get(i-1).mark();
                     System.out.println(line);
                     System.out.println("Good! You finished that! I marked that as done. Roarrrrrrrrrrrrrr!");
-                    System.out.println("  "+lst[i].toString());
+                    System.out.println("  "+lst.get(i-1).toString());
                     System.out.println(line);
                     iscmd=true;
                 }
-                if(cmd.length()>7&&cmd.substring(0,6).equals("unmark")){
+                if(cmd.startsWith("unmark")){
+                    if(cmd.length()<=7) throw new UnmarkException();
                     int i;
                     try{
                         i=Integer.parseInt(cmd.substring(7));
                     }catch(NumberFormatException e){
                         throw new UnmarkException();
                     }
-                    lst[i].unmark();
+                    if(i>lst.size()) throw new UnmarkException();
+                    lst.get(i-1).unmark();
                     System.out.println(line);
                     System.out.println("Roarrrrrrrrrrrrrr! You said you did not finish that? Fine! Unmarked!");
-                    System.out.println("  "+lst[i].toString());
+                    System.out.println("  "+lst.get(i-1).toString());
                     System.out.println(line);
                     iscmd=true;
                 }
-                if(cmd.length()>5&&cmd.substring(0,4).equals("todo")) {
+                if(cmd.startsWith("todo")){
+                    if(cmd.length()<=5) throw new TodoException();
                     String task=cmd.substring(5);
-                    if(task.isEmpty()) throw new TodoException();
-                    lst[++len] = new Todo(task);
+                    lst.add(new Todo(task));
                     System.out.println(line);
                     System.out.println("New Todo task is added. Roarrrrrrrrrrrrrrrrrrrrrrrrr!");
-                    System.out.println("  "+lst[len].toString());
-                    System.out.println("You save "+len+" tasks in the list. Roarrrrrrrrrrrrrrrrrrrr!");
+                    System.out.println("  "+lst.get(lst.size()-1).toString());
+                    System.out.println("You save "+lst.size()+" tasks in the list. Roarrrrrrrrrrrrrrrrrrrr!");
                     System.out.println(line);
                     iscmd=true;
                 }
-                if(cmd.length()>9&&cmd.substring(0,8).equals("deadline")){
+                if(cmd.startsWith("deadline")){
+                    if(cmd.length()<=9) throw new DeadlineException();
                     String task=cmd.substring(9);
                     int pos=task.indexOf("/by");
+                    if(pos==-1) throw new DeadlineException();
                     String time=task.substring(pos+4);
                     task=task.substring(0,pos-1);
-                    if(task.isEmpty()||time.isEmpty()||pos==-1) throw new DeadlineException();
-                    lst[++len] = new Deadline(task,time);
+                    if(task.isEmpty()||time.isEmpty()) throw new DeadlineException();
+                    lst.add(new Deadline(task,time));
                     System.out.println(line);
                     System.out.println("New Deadline task is added. Roarrrrrrrrrrrrrrrrrrrrrrrrr!");
-                    System.out.println("  "+lst[len].toString());
-                    System.out.println("You save "+len+" tasks in the list. Roarrrrrrrrrrrrrrrrrrrr!");
+                    System.out.println("  "+lst.get(lst.size()-1).toString());
+                    System.out.println("You save "+lst.size()+" tasks in the list. Roarrrrrrrrrrrrrrrrrrrr!");
                     System.out.println(line);
                     iscmd=true;
                 }
-                if(cmd.length()>6&&cmd.substring(0,5).equals("event")){
+                if(cmd.startsWith("event")){
+                    if(cmd.length()<=6) throw new EventException();
                     String task=cmd.substring(6);
                     int pos1=task.indexOf("/from");
+                    if(pos1==-1) throw new EventException();
                     String time1=task.substring(pos1+6);
                     int pos2=time1.indexOf("/to");
+                    if(pos2==-1) throw new EventException();
                     String time2=time1.substring(pos2+4);
                     time1=time1.substring(0,pos2-1);
                     task=task.substring(0,pos1-1);
-                    if(task.isEmpty()||time1.isEmpty()||time2.isEmpty()||pos1==-1||pos2==-1) throw new EventException();
-                    lst[++len] = new Event(task,time1,time2);
+                    if(task.isEmpty()||time1.isEmpty()||time2.isEmpty()) throw new EventException();
+                    lst.add(new Event(task,time1,time2));
                     System.out.println(line);
                     System.out.println("New Event task is added. Roarrrrrrrrrrrrrrrrrrrrrrrrr!");
-                    System.out.println("  "+lst[len].toString());
-                    System.out.println("You save "+len+" tasks in the list. Roarrrrrrrrrrrrrrrrrrrr!");
+                    System.out.println("  "+lst.get(lst.size()-1).toString());
+                    System.out.println("You save "+lst.size()+" tasks in the list. Roarrrrrrrrrrrrrrrrrrrr!");
+                    System.out.println(line);
+                    iscmd=true;
+                }
+                if(cmd.startsWith("delete")){
+                    if(cmd.length()<=7) throw new DeleteException();
+                    int i;
+                    try {
+                        i = Integer.parseInt(cmd.substring(7));
+                    }catch(NumberFormatException e){
+                        throw new DeleteException();
+                    }
+                    if(i>lst.size()) throw new DeleteException();
+                    System.out.println(line);
+                    System.out.println("Fine! This task is deleted. Roarrrrrrrrrrrrrr!");
+                    System.out.println("  "+lst.get(i-1).toString());
+                    lst.remove(i-1);
+                    System.out.println("You save "+lst.size()+" tasks in the list. Roarrrrrrrrrrrrrrrrrrrr!");
                     System.out.println(line);
                     iscmd=true;
                 }
@@ -121,6 +146,10 @@ public class Duke {
             }catch(EventException e){
                 System.out.println(line);
                 System.out.println("Roarrrrrrrrrrrrrrrrr! I cannot add that Event task because of you!");
+                System.out.println(line);
+            }catch(DeleteException e){
+                System.out.println(line);
+                System.out.println("Roarrrrrrrrrrrrrrrrr! How can you delete a task like that?");
                 System.out.println(line);
             }catch(DukeException e){
                 System.out.println(line);
