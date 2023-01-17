@@ -86,31 +86,4 @@ public abstract class SetDoneCommand implements Command {
     private String getMessage(Task task) {
         return String.format("%s\n  %s", getSuccessMessagePrefix(), task.toString());
     }
-//    @Override
-//    public CommandResponse run(String input, List<Task> tasks) throws DukeException {
-//        String arg = input.replaceFirst("mark ", "");
-//
-//        if (arg.isEmpty()) {
-//            throw new DukeException("The index of an mark cannot be empty.");
-//        }
-//
-//        int index;
-//        try {
-//            index = Integer.parseInt(arg) - 1;
-//        } catch (NumberFormatException e) {
-//            throw new DukeException("The index of an mark must be an integer.");
-//        }
-//
-//        if (index >= tasks.size() || index < 0) {
-//            throw new DukeException("The index of an mark must be between 1 and the number of task.");
-//        }
-//
-//        Task task = tasks.get(index);
-//        task = task.setDone(true);
-//        tasks.set(index, task);
-//
-//        String message = String.format("Nice! I've marked this task as done:\n  %s", task.toString());
-//
-//        return new CommandResponse(message, tasks);
-//    }
 }
