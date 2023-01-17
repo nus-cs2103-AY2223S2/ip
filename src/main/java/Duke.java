@@ -7,6 +7,8 @@ public class Duke {
      * Adds user input to a list.
      * Supports several tasks, such as todo,
      * deadline and event.
+     * Operations: todo, deadline, event, list,
+     * mark, unmark, delete.
      */
     public static void greet() {
         Scanner userInput = new Scanner(System.in);
@@ -92,6 +94,18 @@ public class Duke {
                         list.get(index).markAsUndone();
                         System.out.println("OK, I've marked this task as not done yet:");
                         System.out.println("    " + list.get(index).toString());
+                    }
+                } else if (input.matches("delete(.*)")) {
+                    // User input: delete x
+                    int index = Integer.parseInt(input.replaceAll("[^0-9]", "")) - 1;
+                    if ((index < 0) | (index > (list.size() - 1)) ) {
+                        // Checks if provided index is in range.
+                        throw new DukeException("index");
+                    } else {
+                        System.out.println("Noted. I've removed this task:");
+                        System.out.println("    " + list.get(index).toString());
+                        list.remove(index);
+                        System.out.println("Now you have " + list.size() + " tasks in the list.");
                     }
                 } else {
                     // Unknown command.
