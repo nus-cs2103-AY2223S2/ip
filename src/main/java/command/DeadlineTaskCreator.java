@@ -1,16 +1,15 @@
 package command;
 
-import java.util.function.Function;
-
+import exception.DukeIllegalArgumentException;
 import task.Deadline;
 
-public class DeadlineTaskCreator implements Function<CommandInput, Deadline> {
+public class DeadlineTaskCreator implements TaskCreator {
     @Override
-    public Deadline apply(CommandInput input) {
+    public Deadline apply(CommandInput input) throws DukeIllegalArgumentException {
         String name = input.getMainInput()
-            .orElseThrow(() -> new IllegalArgumentException("Missing task name"));
+            .orElseThrow(() -> new DukeIllegalArgumentException("Missing task name"));
         String by = input.get("by")
-            .orElseThrow(() -> new IllegalArgumentException("Missing by parameter"));
+            .orElseThrow(() -> new DukeIllegalArgumentException("Missing by parameter"));
 
         return new Deadline(name, by);
     }

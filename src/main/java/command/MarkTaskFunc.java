@@ -1,11 +1,10 @@
 package command;
 
-import java.util.function.Function;
-
+import exception.DukeIllegalArgumentException;
 import task.Task;
 
 
-public class MarkTaskFunc implements Function<CommandInput, String> {
+public class MarkTaskFunc implements CommandFunction {
     private final boolean marker;
 
     public MarkTaskFunc(boolean marker) {
@@ -13,17 +12,17 @@ public class MarkTaskFunc implements Function<CommandInput, String> {
     }
 
     @Override
-    public String apply(CommandInput input) throws IllegalArgumentException {
+    public String apply(CommandInput input) throws DukeIllegalArgumentException {
         try {
             int taskNum = input.getMainInput()
                 .map(numString -> Integer.parseInt(numString) - 1)
-                .orElseThrow(() -> new IllegalArgumentException("Missing task number"));
+                .orElseThrow(() -> new DukeIllegalArgumentException("Missing task number"));
             Task task = input.getMainManager().getTaskManager().mark(taskNum, marker);
             return formMessage(task);
         } catch (NumberFormatException numEx) {
-            throw new IllegalArgumentException("Task number must be an integer", numEx);
+            throw new DukeIllegalArgumentException("Task number must be an integer", numEx);
         } catch (IndexOutOfBoundsException oobEx) {
-            throw new IllegalArgumentException("Task number out of bounds", oobEx);
+            throw new DukeIllegalArgumentException("Task number out of bounds", oobEx);
         }
     }
 

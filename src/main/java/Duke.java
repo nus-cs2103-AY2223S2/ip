@@ -2,6 +2,7 @@ import java.util.Scanner;
 
 import command.Command;
 import command.CommandInput;
+import exception.DukeIllegalArgumentException;
 import manager.MainManager;
 
 public class Duke {
@@ -25,19 +26,26 @@ public class Duke {
 
         MainManager manager = new MainManager();
 
-        System.out.println(formatMessage(Command.GREET.execute(CommandInput.parse("", manager))));
+        try {
+            System.out.println(formatMessage(Command.GREET.execute(CommandInput.parse("", manager))));
+        } catch (DukeIllegalArgumentException dukeIllArgEx) {
+            System.out.println(formatMessage(String.format(
+                "Failed to greet...\n%s",
+                dukeIllArgEx.toString()
+            )));
+        }
 
         try (Scanner scanner = new Scanner(System.in)) {
             while (!isExit) {
                 String message;
                 try {
                     message = execute(scanner.nextLine(), manager);
-                } catch (IllegalArgumentException illArgEx) {
+                } catch (DukeIllegalArgumentException dukeIllArgEx) {
                     message = String.format(
                         "Hanya?? I was unable to process that...\n" +
                         "Please try again after fixing this:\n" +
                         "  %s",
-                        illArgEx.getMessage()
+                        dukeIllArgEx.getMessage()
                     );
                 }
                 System.out.println(formatMessage(message));
@@ -46,7 +54,7 @@ public class Duke {
     }
 
 
-    private String execute(String rawInput, MainManager manager) throws IllegalArgumentException {
+    private String execute(String rawInput, MainManager manager) throws DukeIllegalArgumentException {
         String msg = rawInput;
         String inputString = "";
         Command command;
@@ -62,7 +70,7 @@ public class Duke {
                 return "Hanya?? Did you say something?";
             }
         } catch (IllegalArgumentException illArgEx) {
-            throw new IllegalArgumentException("Unknown command");
+            throw new DukeIllegalArgumentException("Unknown command");
         }
 
         if (command.equals(Command.BYE)) {

@@ -1,16 +1,15 @@
 package command;
 
-import java.util.function.Function;
-
+import exception.DukeIllegalArgumentException;
 import task.Task;
 
-public class DeleteTaskFunc implements Function<CommandInput, String> {
+public class DeleteTaskFunc implements CommandFunction {
     @Override
-    public String apply(CommandInput input) {
+    public String apply(CommandInput input) throws DukeIllegalArgumentException {
         try {
             int taskNum = input.getMainInput()
                 .map(numString -> Integer.parseInt(numString) - 1)
-                .orElseThrow(() -> new IllegalArgumentException("Missing task number"));
+                .orElseThrow(() -> new DukeIllegalArgumentException("Missing task number"));
             Task task = input.getMainManager().getTaskManager().delete(taskNum);
             return String.format(
                 "Noted. I've removed this task:\n" +
@@ -20,9 +19,9 @@ public class DeleteTaskFunc implements Function<CommandInput, String> {
                 input.getMainManager().getTaskManager().size()
             );
         } catch (NumberFormatException numEx) {
-            throw new IllegalArgumentException("Task number must be an integer", numEx);
+            throw new DukeIllegalArgumentException("Task number must be an integer", numEx);
         } catch (IndexOutOfBoundsException oobEx) {
-            throw new IllegalArgumentException("Task number out of bounds", oobEx);
+            throw new DukeIllegalArgumentException("Task number out of bounds", oobEx);
         }
     }
 }

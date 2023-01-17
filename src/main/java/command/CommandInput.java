@@ -5,6 +5,7 @@ import java.util.NoSuchElementException;
 import java.util.Optional;
 import java.util.Scanner;
 
+import exception.DukeIllegalArgumentException;
 import manager.MainManager;
 
 public class CommandInput {
@@ -19,7 +20,7 @@ public class CommandInput {
     }
 
 
-    public static CommandInput parse(String args, MainManager mainManager) throws IllegalArgumentException {
+    public static CommandInput parse(String args, MainManager mainManager) throws DukeIllegalArgumentException {
         CommandInput input = new CommandInput(mainManager);
         args = args.strip() + " ";
         if (args.isBlank()) {
@@ -39,7 +40,7 @@ public class CommandInput {
 
 
     private static void addInput(String token, HashMap<String, String> inputMap)
-            throws IllegalArgumentException {
+            throws DukeIllegalArgumentException {
         try (Scanner scanner = new Scanner(token)) {
             String key = scanner.next();
             String value = "";
@@ -48,7 +49,7 @@ public class CommandInput {
             }
             inputMap.put(key, value);
         } catch (NoSuchElementException noElmEx) {
-            throw new IllegalArgumentException("Parameter name cannot be empty");
+            throw new DukeIllegalArgumentException("Parameter name cannot be empty");
         }
     }
 

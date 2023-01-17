@@ -1,23 +1,22 @@
 package command;
 
-import java.util.function.Function;
-
+import exception.DukeIllegalArgumentException;
 import task.Task;
 
 
-public class AddTaskFunc implements Function<CommandInput, String> {
-    private final Function<CommandInput, ? extends Task> taskCreator;
+public class AddTaskFunc implements CommandFunction {
+    private final TaskCreator taskCreator;
 
-    public AddTaskFunc(Function<CommandInput, ? extends Task> taskCreator) {
+    public AddTaskFunc(TaskCreator taskCreator) {
         this.taskCreator = taskCreator;
     }
 
 
     @Override
-    public String apply(CommandInput input) throws IllegalArgumentException {
+    public String apply(CommandInput input) throws DukeIllegalArgumentException {
         Task task = taskCreator.apply(input);
         if (task.getName().isBlank()) {
-            throw new IllegalArgumentException("Task name cannot be blank");
+            throw new DukeIllegalArgumentException("Task name cannot be blank");
         }
         input.getMainManager().getTaskManager().add(task);
         return String.format(

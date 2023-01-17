@@ -1,15 +1,14 @@
 package command;
 
-import java.util.function.Function;
-
+import exception.DukeIllegalArgumentException;
 import task.ToDo;
 
 
-public class ToDoTaskCreator implements Function<CommandInput, ToDo> {
+public class ToDoTaskCreator implements TaskCreator {
     @Override
-    public ToDo apply(CommandInput input) {
+    public ToDo apply(CommandInput input) throws DukeIllegalArgumentException {
         return input.getMainInput()
             .map(name -> new ToDo(name))
-            .orElseThrow(() -> new IllegalArgumentException("Missing task name"));
+            .orElseThrow(() -> new DukeIllegalArgumentException("Missing task name"));
     }
 }

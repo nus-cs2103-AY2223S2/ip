@@ -1,6 +1,6 @@
 package command;
 
-import java.util.function.Function;
+import exception.DukeIllegalArgumentException;
 
 public enum Command {
     GREET(input -> "Kon aqua~~"),
@@ -14,14 +14,14 @@ public enum Command {
     BYE(input -> "Otsu aqua~~");
 
 
-    private final Function<CommandInput, String> commandFunc;
+    private final CommandFunction commandFunc;
 
-    Command(Function<CommandInput, String> commandFunc) {
+    Command(CommandFunction commandFunc) {
         this.commandFunc = commandFunc;
     }
 
 
-    public String execute(CommandInput input) throws IllegalArgumentException {
+    public String execute(CommandInput input) throws DukeIllegalArgumentException {
         return commandFunc.apply(input);
     }
 }

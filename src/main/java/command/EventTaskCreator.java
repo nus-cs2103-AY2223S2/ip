@@ -1,19 +1,18 @@
 package command;
 
-import java.util.function.Function;
-
+import exception.DukeIllegalArgumentException;
 import task.Event;
 
 
-public class EventTaskCreator implements Function<CommandInput, Event> {
+public class EventTaskCreator implements TaskCreator {
     @Override
-    public Event apply(CommandInput input) {
+    public Event apply(CommandInput input) throws DukeIllegalArgumentException {
         String name = input.getMainInput()
-            .orElseThrow(() -> new IllegalArgumentException("Missing task name"));
+            .orElseThrow(() -> new DukeIllegalArgumentException("Missing task name"));
         String from = input.get("from")
-            .orElseThrow(() -> new IllegalArgumentException("Missing from parameter"));
+            .orElseThrow(() -> new DukeIllegalArgumentException("Missing from parameter"));
         String to = input.get("to")
-            .orElseThrow(() -> new IllegalArgumentException("Missing to parameter"));
+            .orElseThrow(() -> new DukeIllegalArgumentException("Missing to parameter"));
 
         return new Event(name, from, to);
     }

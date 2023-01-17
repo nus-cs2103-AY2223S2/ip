@@ -1,10 +1,10 @@
 package command;
 
-import java.util.function.Function;
+import exception.DukeIllegalArgumentException;
 
-public class ListTaskFunc implements Function<CommandInput, String> {
+public class ListTaskFunc implements CommandFunction {
     @Override
-    public String apply(CommandInput input) throws IllegalArgumentException {
+    public String apply(CommandInput input) throws DukeIllegalArgumentException {
         return String.format("Here are the tasks in your list:\n%s",
             input.getMainManager().getTaskManager().toString()
         );
