@@ -1,4 +1,5 @@
 import java.util.Scanner;
+import java.util.ArrayList;
 
 class Duke {
     public static void main(String[] args) {
@@ -8,7 +9,7 @@ class Duke {
             Scanner myObj = new Scanner(System.in);
             String input = myObj.nextLine();
             String[] s = input.split(" ");
-            Task[] list = new Task[100];
+            ArrayList<Task> list = new ArrayList<>();
             int currentIndex = 0;
             while (!input.equals("bye")) {
                 try {
@@ -16,19 +17,19 @@ class Duke {
                     System.out.println("Here are the tasks in your list");
                     for (int i = 0; i < currentIndex; i++) {
                         System.out.print(i + 1 + ".");
-                        System.out.println(list[i].toString());
+                        System.out.println(list.get(i).toString());
                     }
                     input = myObj.nextLine();
                     s = input.split(" ");
                 } else if (s[0].equals("unmark")) {
-                    Task taskName = list[Integer.parseInt(s[1]) - 1];
+                    Task taskName = list.get(Integer.parseInt(s[1]) - 1);
                     taskName.unMark();
                     System.out.println("OK, I've marked this task as not done yet");
                     System.out.println(taskName.toString());
                     input = myObj.nextLine();
                     s = input.split(" ");
                 } else if (s[0].equals("mark")) {
-                    Task taskName = list[Integer.parseInt(s[1]) - 1];
+                    Task taskName = list.get(Integer.parseInt(s[1]) - 1);
                     taskName.markAsDone();
                     System.out.println("Nice! I've marked this task as done:");
                     System.out.println(taskName.toString());
@@ -46,7 +47,7 @@ class Duke {
                     ToDos taskName = new ToDos(taskDescription);
                     System.out.println("Got it. I've added this task:");
                     System.out.println(taskName.toString());
-                    list[currentIndex] = taskName;
+                    list.add(taskName);
                     currentIndex++;
                     System.out.println("Now you have " + currentIndex + " tasks in the list.");
                     input = myObj.nextLine();
@@ -76,7 +77,7 @@ class Duke {
                     Deadlines taskName = new Deadlines(taskDescription, time);
                     System.out.println("Got it. I've added this task:");
                     System.out.println(taskName.toString());
-                    list[currentIndex] = taskName;
+                    list.add(taskName);
                     currentIndex++;
                     System.out.println("Now you have " + currentIndex + " tasks in the list.");
                     input = myObj.nextLine();
@@ -113,12 +114,22 @@ class Duke {
                     Events taskName = new Events(taskDescription, startTime, endTime);
                     System.out.println("Got it. I've added this task:");
                     System.out.println(taskName.toString());
-                    list[currentIndex] = taskName;
+                    list.add(taskName);
                     currentIndex++;
                     System.out.println("Now you have " + currentIndex + " tasks in the list.");
                     input = myObj.nextLine();
                     s = input.split(" ");
-                } else {
+                } else if (s[0].equals("delete")) {
+                    Task currentTask = list.get(Integer.parseInt(s[1]) - 1);
+                    System.out.println("Noted. I've removed this task:");
+                    System.out.println(currentTask.toString());
+                    currentIndex --;
+                    System.out.println("Now you have " + currentIndex + " tasks in the list");
+                    list.remove(Integer.parseInt(s[1]) - 1);
+                    input = myObj.nextLine();
+                    s = input.split(" ");
+                }
+                else {
                     throw new DukeException("☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
                 }
 
