@@ -4,20 +4,22 @@ What can I do for you my husbando?
 |(   )|
   |-|
 _____
-hi
 added: hi
 _____
-weee
-5pm
 added: weee
 _____
-eevee
-Friday
-Sunday
 added: eevee
 _____
-wrong index
+Nice! I've marked this task as done:
+[T][X] hi
 _____
-wrong index
+OK, I've marked this task as not done yet:
+[T][ ] hi
+_____
+Noted, task removed: 
+[T][ ] hi
+_____
+1. [D][ ] weee (by: 5pm)
+2. [E][ ] eevee (from: Friday to Sunday)
 _____
 Bye! Hope to see you again <3!

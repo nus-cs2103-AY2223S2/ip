@@ -1,6 +1,8 @@
 todo hi
 deadline weee /by 5pm
 event eevee /from Friday /to Sunday
-mark 0
-unmark 0
+mark 1
+unmark 1
+delete 1
+list
 bye
