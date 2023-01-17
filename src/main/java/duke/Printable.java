@@ -16,9 +16,9 @@ class Printable {
     static String DEADLINE = "deadline";
     static String EVENT = "event";
     static String ILLEGAL_COMMAND = "command not recognised";
+    static String DELETE = "delete";
     static int DECREMENT = 1;
     
-
     static List<String> INVALID_COMMANDS = Arrays.asList("blah","todo","deadline","event");
 
     static void greet() {
@@ -31,13 +31,18 @@ class Printable {
     }
 
     static Tasks<Task> mark(Scanner sc, Tasks<Task> tasks) {
-        int taskPosition = sc.nextInt() - 1;
+        int taskPosition = sc.nextInt() - DECREMENT;
         return tasks.set(taskPosition, tasks.get(taskPosition).markAsDone());
     }
 
     static Tasks<Task> unmark(Scanner sc, Tasks<Task> tasks) {
-        int taskPosition = sc.nextInt() - 1;
+        int taskPosition = sc.nextInt() - DECREMENT;
         return tasks.set(taskPosition, tasks.get(taskPosition).markAsUndone());
+    }
+
+    static Tasks<Task> delete(Scanner sc, Tasks<Task> tasks) {
+        int taskPosition = sc.nextInt() - DECREMENT;
+        return tasks.removeTask(taskPosition);
     }
 
     static Tasks<Task> toDo(Scanner sc, Tasks<Task> tasks) {

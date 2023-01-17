@@ -150,8 +150,38 @@ public class Duke {
         }
     }
     
+    //Level 6
+    void deleteHandling() {
+        
+        Printable.greet();
+        Scanner sc = new Scanner(System.in);
+    
+        while (true) {
+            String description = sc.next();
+            if (description.equals(Printable.SHOW_TASKS)) {
+                this.tasks.listAllTasks();
+            } else if (description.equals(Printable.TERMINATE)) {
+                Printable.exit();
+            } else if (description.equals(Printable.MARK)) {
+                tasks = Printable.mark(sc, this.tasks);
+            }  else if (description.equals(Printable.UNMARK)) {
+                tasks = Printable.unmark(sc, this.tasks);
+            } else if (description.equals(Printable.TODO)) {
+                tasks = Printable.toDo(sc, this.tasks);
+            } else if (description.equals(Printable.DEADLINE)) {
+                tasks = Printable.deadline(sc, this.tasks);
+            } else if (description.equals(Printable.EVENT)) {
+                tasks = Printable.events(sc, this.tasks);
+            } else if (description.equals(Printable.DELETE)) {
+                tasks = Printable.delete(sc, this.tasks);
+            }  else {
+                dukeExceptionWarning(description);
+            }
+        }
+    }
+    
     public static void main(String[] args) {
         Duke duke = new Duke();
-        duke.errorHandling();
+        duke.deleteHandling();
     }
 }

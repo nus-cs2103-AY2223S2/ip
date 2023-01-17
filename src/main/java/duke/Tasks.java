@@ -46,9 +46,9 @@ class Tasks<Task> {
         return newTasks;
     }
 
-    Tasks<Task> remove(int index) {
+    Tasks<Task> removeTask(int index) {
         Tasks<Task> newTasks = new Tasks<Task>(this.tasks);
-        newTasks.remove(index);
+        newTasks.tasks.remove(index);
         return newTasks;
     }
 
