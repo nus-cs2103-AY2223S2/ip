@@ -72,12 +72,10 @@ public class Duke {
                     displayTasks();
                     break;
                 case MARK_TASK_AS_DONE_COMMAND:
-                    taskNum = Integer.parseInt(parts[1]);
-                    markTaskAsDone(taskNum);
+                    markTaskAsDone(parts[1]);
                     break;
                 case MARK_TASK_AS_UNDONE_COMMAND:
-                    taskNum = Integer.parseInt(parts[1]);
-                    markTaskAsNotDone(taskNum);
+                    markTaskAsNotDone(parts[1]);
                     break;
                 case TODO_COMMAND:
                     addTodoToList(parts[1]);
@@ -121,18 +119,34 @@ public class Duke {
         printMessage("Your tasks are:\n" + taskList.toString());
     }
 
-    private static void markTaskAsDone(int number) {
-        taskList.markTaskAsDone(number);
-        printMessage("Good job. You have finished this task:\n"
-                        + taskList.getTaskString(number)
-                );
+    private static void markTaskAsDone(String arguments) throws InvalidArgumentDukeException {
+        try {
+            int number = Integer.parseInt(arguments);
+            if (!taskList.isValidNumber(number)) {
+                throw new InvalidArgumentDukeException();
+            }
+            taskList.markTaskAsDone(number);
+            printMessage("Good job. You have finished this task:\n"
+                    + taskList.getTaskString(number)
+            );
+        } catch (NumberFormatException e) {
+            throw new InvalidArgumentDukeException();
+        }
     }
 
-    private static void markTaskAsNotDone(int number) {
-        taskList.markTaskAsNotDone(number);
-        printMessage("Ok. I have marked this task as not done:\n"
-                + taskList.getTaskString(number)
-        );
+    private static void markTaskAsNotDone(String arguments) throws InvalidArgumentDukeException {
+        try {
+            int number = Integer.parseInt(arguments);
+            if (!taskList.isValidNumber(number)) {
+                throw new InvalidArgumentDukeException();
+            }
+            taskList.markTaskAsNotDone(number);
+            printMessage("Ok. I have marked this task as not done:\n"
+                    + taskList.getTaskString(number)
+            );
+        } catch (NumberFormatException e) {
+            throw new InvalidArgumentDukeException();
+        }
     }
 
     // Main method

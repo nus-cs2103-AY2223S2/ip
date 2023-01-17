@@ -7,7 +7,26 @@ Your tasks are:
 
 ___________________________
 >___________________________
+Sorry! Invalid command!
+___________________________
+>___________________________
 added: [D][ ] eat some food (by: tomorrow)
+___________________________
+>___________________________
+Good job. You have finished this task:
+[D][X] eat some food (by: tomorrow)
+___________________________
+>___________________________
+Your tasks are:
+1. [D][X] eat some food (by: tomorrow)
+___________________________
+>___________________________
+Ok. I have marked this task as not done:
+[D][ ] eat some food (by: tomorrow)
+___________________________
+>___________________________
+Your tasks are:
+1. [D][ ] eat some food (by: tomorrow)
 ___________________________
 >___________________________
 Good job. You have finished this task:
@@ -20,11 +39,43 @@ ___________________________
 added: [T][ ] cca
 ___________________________
 >___________________________
+Good job. You have finished this task:
+[T][X] cca
+___________________________
+>___________________________
+Your tasks are:
+1. [D][X] eat some food (by: tomorrow)
+2. [D][ ] hw (by: 11.00pm)
+3. [T][X] cca
+___________________________
+>___________________________
+Ok. I have marked this task as not done:
+[T][ ] cca
+___________________________
+>___________________________
+Your tasks are:
+1. [D][X] eat some food (by: tomorrow)
+2. [D][ ] hw (by: 11.00pm)
+3. [T][ ] cca
+___________________________
+>___________________________
 added: [E][ ] go toilet (from: now to: 5 min after now)
 ___________________________
 >___________________________
 Good job. You have finished this task:
 [E][X] go toilet (from: now to: 5 min after now)
+___________________________
+>___________________________
+Sorry! Invalid argument!
+___________________________
+>___________________________
+Sorry! Invalid argument!
+___________________________
+>___________________________
+Sorry! Invalid argument!
+___________________________
+>___________________________
+Sorry! Invalid argument!
 ___________________________
 >___________________________
 Your tasks are:
@@ -38,11 +89,26 @@ Ok. I have marked this task as not done:
 [E][ ] go toilet (from: now to: 5 min after now)
 ___________________________
 >___________________________
+Sorry! Invalid argument!
+___________________________
+>___________________________
+Sorry! Invalid argument!
+___________________________
+>___________________________
+Sorry! Invalid argument!
+___________________________
+>___________________________
+Sorry! Invalid argument!
+___________________________
+>___________________________
 Your tasks are:
 1. [D][X] eat some food (by: tomorrow)
 2. [D][ ] hw (by: 11.00pm)
 3. [T][ ] cca
 4. [E][ ] go toilet (from: now to: 5 min after now)
+___________________________
+>___________________________
+Sorry! Invalid command!
 ___________________________
 >___________________________
 Goodbye. I hope to see you again.
