@@ -17,9 +17,15 @@
      Now you have 2 tasks in the list.
      --------------------------------------------------
      --------------------------------------------------
+     You should input a number to delete a task
+     --------------------------------------------------
+     --------------------------------------------------
      Got it. I've added this Event task:
      [E][ ] project meeting (from: Aug 6th 2pm to: 4pm)
      Now you have 3 tasks in the list.
+     --------------------------------------------------
+     --------------------------------------------------
+     Sorry, your index is out of range
      --------------------------------------------------
      --------------------------------------------------
      Sorry, your index is out of range
@@ -47,26 +53,38 @@
      Now you have 4 tasks in the list.
      --------------------------------------------------
      --------------------------------------------------
+     Noted. I've removed this task:
+     [T][X] read book
+     Now you have 3 tasks in the list.
+     --------------------------------------------------
+     --------------------------------------------------
+     Here are all of your tasks:
+     1.[D][X] return book (by: June 6th)
+     2.[E][X] project meeting (from: Aug 6th 2pm to: 4pm)
+     3.[T][ ] join sports club
+     --------------------------------------------------
+     --------------------------------------------------
+     ? OOPS!!! You should input a number
+     --------------------------------------------------
+     --------------------------------------------------
      ? OOPS!!! You should input a number
      --------------------------------------------------
      --------------------------------------------------
      Here are all of your tasks:
-     1.[T][X] read book
-     2.[D][X] return book (by: June 6th)
-     3.[E][X] project meeting (from: Aug 6th 2pm to: 4pm)
-     4.[T][ ] join sports club
+     1.[D][X] return book (by: June 6th)
+     2.[E][X] project meeting (from: Aug 6th 2pm to: 4pm)
+     3.[T][ ] join sports club
      --------------------------------------------------
      --------------------------------------------------
      ? OOPS!!! You haven't specify the deadline for the Task
      --------------------------------------------------
      --------------------------------------------------
-     Good job! I've marked this task as done:
-     [T][X] join sports club
+     Sorry, your index is out of range
      --------------------------------------------------
      --------------------------------------------------
      Got it. I've added this Todo task:
      [T][ ] borrow book
-     Now you have 5 tasks in the list.
+     Now you have 4 tasks in the list.
      --------------------------------------------------
      --------------------------------------------------
      You should input a number to mark/unmark a task
@@ -76,21 +94,20 @@
      --------------------------------------------------
      --------------------------------------------------
      OK, I've marked this task as not done yet:
-     [T][ ] join sports club
+     [T][ ] borrow book
      --------------------------------------------------
      --------------------------------------------------
      Got it. I've added this Deadline task:
      [D][ ] return book (by: Sunday)
-     Now you have 6 tasks in the list.
+     Now you have 5 tasks in the list.
      --------------------------------------------------
      --------------------------------------------------
      Here are all of your tasks:
-     1.[T][X] read book
-     2.[D][X] return book (by: June 6th)
-     3.[E][X] project meeting (from: Aug 6th 2pm to: 4pm)
-     4.[T][ ] join sports club
-     5.[T][ ] borrow book
-     6.[D][ ] return book (by: Sunday)
+     1.[D][X] return book (by: June 6th)
+     2.[E][X] project meeting (from: Aug 6th 2pm to: 4pm)
+     3.[T][ ] join sports club
+     4.[T][ ] borrow book
+     5.[D][ ] return book (by: Sunday)
      --------------------------------------------------
      --------------------------------------------------
      ? OOPS!!! The description of an event cannot be empty!
@@ -98,7 +115,29 @@
      --------------------------------------------------
      Got it. I've added this Event task:
      [E][ ] project meeting (from: Mon 2pm to: 4pm)
-     Now you have 7 tasks in the list.
+     Now you have 6 tasks in the list.
+     --------------------------------------------------
+     --------------------------------------------------
+     Here are all of your tasks:
+     1.[D][X] return book (by: June 6th)
+     2.[E][X] project meeting (from: Aug 6th 2pm to: 4pm)
+     3.[T][ ] join sports club
+     4.[T][ ] borrow book
+     5.[D][ ] return book (by: Sunday)
+     6.[E][ ] project meeting (from: Mon 2pm to: 4pm)
+     --------------------------------------------------
+     --------------------------------------------------
+     Noted. I've removed this task:
+     [D][ ] return book (by: Sunday)
+     Now you have 5 tasks in the list.
+     --------------------------------------------------
+     --------------------------------------------------
+     Here are all of your tasks:
+     1.[D][X] return book (by: June 6th)
+     2.[E][X] project meeting (from: Aug 6th 2pm to: 4pm)
+     3.[T][ ] join sports club
+     4.[T][ ] borrow book
+     5.[E][ ] project meeting (from: Mon 2pm to: 4pm)
      --------------------------------------------------
      --------------------------------------------------
      Bye. Always willing to provide my help for you!!!

@@ -176,6 +176,29 @@ public class WindyCall {
                     } else if (num != -1){
                         System.out.println("     Sorry, your index is out of range");
                     }
+                } else if (parts[0].equals("delete")) {
+                    if (parts.length == 1) {
+                        System.out.println("     You should input a number to delete a task");
+                        line();
+                        continue;
+                    }
+                    int num = -1;
+                    try {
+                        num = Integer.parseInt(parts[1]);
+                    } catch (NumberFormatException e) {
+                        space();
+                        System.out.println("☹ OOPS!!! You should input a number");
+                    }
+                    if (num >= 1 && num <= chatBox.tasks.size()) {
+                        System.out.println("     Noted. I've removed this task:");
+                        space();
+                        System.out.println(chatBox.tasks.get(num - 1));
+                        chatBox.tasks.remove(num - 1);
+                        space();
+                        System.out.println("Now you have " + chatBox.tasks.size() + " tasks in the list.");
+                    } else if (num != -1) {
+                        System.out.println("     Sorry, your index is out of range");
+                    }
                 } else {
                     try {
                         chatBox.addTask(userCommand);
