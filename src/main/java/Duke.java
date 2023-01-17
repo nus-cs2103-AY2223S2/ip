@@ -42,6 +42,14 @@ public class Duke {
 
             } else {
 
+                try {
+                    validate(input);
+                } catch (DukeException de) {
+                    System.out.println(de);
+                    input = sc.nextLine();
+                    continue;
+                }
+
                 String[] inputArr = input.split(" ", 2);
                 String taskType = inputArr[0];
 
@@ -69,9 +77,7 @@ public class Duke {
                     System.out.println(eventTask.toString());
                     System.out.println("Now you have " + taskStorage.size() + " tasks in the list.");
 
-                } else {
                 }
-
             }
 
             input = sc.nextLine();
@@ -79,6 +85,14 @@ public class Duke {
 
         printGoodbye();
         sc.close();
+    }
+
+    public static void validate(String input) throws DukeException {
+        if (input.equals("todo") || input.equals("deadline") || input.equals("event")) {
+            throw new DukeException("OOPS!!! The description of a " + input + " task cannot be empty!");
+        } else if (!input.contains("todo") && !input.contains("deadline") && !input.contains("event")) {
+            throw new DukeException("OOPS!!! I'm sorry, but I don't know what that means! :(");
+        }
     }
 
     public static void printGoodbye() {
