@@ -1,14 +1,21 @@
+import java.time.LocalDateTime;
+
 public class Deadlines extends Task {
-    private String end;
+    private LocalDateTime end;
 
     public Deadlines (String name, String end) {
         super(name);
-        this.end = end;
+        this.end = LocalDateTime.parse(end);
+    }
+
+    @Override
+    public boolean isWithinDate(LocalDateTime date) {
+        return date.isBefore(end);
     }
 
     @Override
     public String toString() {
         return "[D]" + super.toString()
-                + " (by: " + this.end + ")";
+                + " (by: " + dateFormat(this.end) + ")";
     }
 }
