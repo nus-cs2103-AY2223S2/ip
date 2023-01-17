@@ -1,5 +1,6 @@
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Optional;
 import java.util.Scanner;
 
 public class Duke {
@@ -19,41 +20,45 @@ public class Duke {
         System.out.println("Hello I'm Duke! \nWhat can I do for you?");
         while (!line.equals("bye")) {
             if (!line.equals("init")) {
-                if (line.equals("list")) {
-                    displayMsg(outputList());
-                } else if (line.startsWith("mark ") || line.startsWith("unmark ")) {
-                    int listIndex = Integer.parseInt(line.split(" ")[1]) - 1;
-                    Task targetTask = dukeList.get(listIndex);
-                    String output; 
-                    if (line.startsWith("mark")){
-                        targetTask.markDone();
-                        output = "Nice! I've marked this task as done:";
-                    } else {
-                        targetTask.unmarkDone();
-                        output = "Ok, I've marked this task as not done yet:";
-                    }
-                    displayMsg(output + "\n" + indentString(targetTask.toString(), 1));
-                } else if (line.startsWith("delete ")) {
-                    Task removedTask = removeTask(line);
-                    displayMsg("Noted. I've removed this task:\n" + indentString(removedTask.toString(), 1) + "\n" + countTasks());
-                } else if (Arrays.asList(taskCreationCommands).contains(line.split(" ")[0])) {  // a task creation command being called
-                    Task newTask;
-                    try {
-                        if (line.startsWith("event")) {
-                            newTask = Event.create(line);
-                        } else if (line.startsWith("deadline")) {
-                            newTask = Deadline.create(line);
+                Optional<Command> cmd = Command.getCommand(line);
+                if (cmd.isPresent()) { 
+                    Command command = cmd.get();
+                    if (command == Command.LIST) {
+                        displayMsg(outputList());
+                    } else if (command == Command.MARK || command == Command.UNMARK) {
+                        int listIndex = Integer.parseInt(line.split(" ")[1]) - 1;
+                        Task targetTask = dukeList.get(listIndex);
+                        String output; 
+                        if (command == Command.MARK){
+                            targetTask.markDone();
+                            output = "Nice! I've marked this task as done:";
                         } else {
-                            newTask = ToDo.create(line);
-                        } 
-                        dukeList.add(newTask);
-                        StringBuilder output = new StringBuilder();
-                        output.append("Got it. I've added this task:\n" + indentString(newTask.toString(), 1) + "\n" + countTasks());
-                        displayMsg(output.toString());
-                    } catch (TaskInitError e) {
-                        displayMsg("OOPS!!! " + e.getMessage());
-                    }
-                   
+                            targetTask.unmarkDone();
+                            output = "Ok, I've marked this task as not done yet:";
+                        }
+                        displayMsg(output + "\n" + indentString(targetTask.toString(), 1));
+                    } else if (command == Command.DELETE) {
+                        Task removedTask = removeTask(line);
+                        displayMsg("Noted. I've removed this task:\n" + indentString(removedTask.toString(), 1) + "\n" + countTasks());
+                    } else {  // a task creation command being called
+                        Task newTask;
+                        try {
+                            if (line.startsWith("event")) {
+                                newTask = Event.create(line);
+                            } else if (line.startsWith("deadline")) {
+                                newTask = Deadline.create(line);
+                            } else {
+                                newTask = ToDo.create(line);
+                            } 
+                            dukeList.add(newTask);
+                            StringBuilder output = new StringBuilder();
+                            output.append("Got it. I've added this task:\n" + indentString(newTask.toString(), 1) + "\n" + countTasks());
+                            displayMsg(output.toString());
+                        } catch (TaskInitError e) {
+                            displayMsg("OOPS!!! " + e.getMessage());
+                        }
+                    
+                    } 
                 } else {
                     displayMsg("OOPS!!! I'm sorry, but I don't know what that means :-(");
                 }
@@ -100,6 +105,28 @@ public class Duke {
     public static String countTasks() {
         return "Now you have " + dukeList.size() + " task" + (dukeList.size() == 1 ? "" : "s") + " in the list.";
     }
+}
+
+enum Command {
+    TODO("todo"),
+    DEADLINE("deadline"),
+    EVENT("event"),
+    DELETE("delete"),
+    MARK("mark"),
+    UNMARK("unmark"),
+    LIST("list");
+
+    private String commandString;
+
+    Command(String commandLine) {
+        this.commandString = commandLine;
+    }
+
+    public static Optional<Command> getCommand(String commandLine) {
+        String commandInput = commandLine.split(" ")[0];
+        return Arrays.stream(Command.values()).filter(cmd -> cmd.commandString.equals(commandInput)).findFirst();
+    }
+
 }
 
 abstract class Task {
