@@ -14,27 +14,25 @@ public class Duke {
     }
 
     public static void main(String[] args) {
-        String intro = "Hello! I'm Duke\n\t What can I do for you?";
+        final String intro = "Hello! I'm Duke\n\t What can I do for you?";
+        final String extStr = "Bye. Hope to see you again soon!";
+        final String empStr = "Please enter an input for me to echo!";
+
         Duke.print(intro);
 
-        String input;
+        Scanner scanner = new Scanner(System.in);  // Create a Scanner object
+
         while (true) {
-            Scanner myObj = new Scanner(System.in);  // Create a Scanner object
-            String in = myObj.nextLine();  // Read user input
-            input = in; // save the input
+            String input = scanner.nextLine();  // Read user input
 
             if (input.equalsIgnoreCase("bye")) {
-                String extStr = "Bye. Hope to see you again soon!";
-                Duke.print(extStr);
-                System.exit(0);
+                break;
             } else if (input.equals("")) {
-                String empStr = "Please enter an input for me to echo!";
                 Duke.print(empStr);
             } else {
                 Duke.print(input);
             }
         }
-
-
+        Duke.print(extStr);
     }
 }
