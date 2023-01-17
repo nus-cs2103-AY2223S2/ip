@@ -32,12 +32,17 @@ public class ToDoCommand extends AddCommand {
      */
     @Override
     protected Task createTask(String input) throws DukeException {
-        String description = input.replaceFirst("todo ", "").trim();
+        String description = extractValidDescription(input);
+        return new ToDo(false, description);
+    }
+
+    private String extractValidDescription(String input) throws DukeException {
+        String description = input.replaceFirst("todo", "").trim();
 
         if (description.isEmpty()) {
             throw new DukeException("The description of a todo cannot be empty.");
         }
 
-        return new ToDo(false, description);
+        return description;
     }
 }
