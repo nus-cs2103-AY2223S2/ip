@@ -1,3 +1,4 @@
+import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Duke {
@@ -8,8 +9,11 @@ public class Duke {
                                 " \\ \\_\\ \\_\\  \\ \\_\\ \\_\\  \\ \\_\\  \\ \\_\\ \n" +
                                 "  \\/_/\\/_/   \\/_/ /_/   \\/_/   \\/_/ \n";
 
+    private final ArrayList<String> inputStore = new ArrayList<>();
+
     /**
-     *
+     * Accepts a string that represents the user command, returns a boolean to
+     * determine if the program should terminate immediately
      * @param cmd user command
      * @return true if program should exit
      */
@@ -17,10 +21,15 @@ public class Duke {
         if (cmd.equals("bye")) {
             System.out.println("Till next time...");
             return true;
+        } else if (cmd.equals("list")) {
+            for (int i = 0; i < inputStore.size(); i++) {
+                System.out.printf("%d. %s\n", i, inputStore.get(i));
+            }
         } else {
-            System.out.println(cmd);
-            return false;
+            inputStore.add(cmd);
+            System.out.printf("added: %s\n", cmd);
         }
+        return false;
     }
 
     public static void main(String[] args) {
