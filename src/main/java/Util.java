@@ -47,6 +47,9 @@ public class Util {
         while (end > 0 && WS.contains(str.charAt(end - 1))) {
             --end;
         }
+        if (start > end) {
+            return "";
+        }
 
         return str.substring(start, end);
     }
