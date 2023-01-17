@@ -11,44 +11,74 @@ public class Duke {
 
         while (true) {
             String[] command = sc.nextLine().split(" ", 2);
-            if (command[0].equals("bye")) {
-                System.out.println(formatMessage("Bye. Hope to see you again soon!"));
-                break;
-            } else if (command[0].equals("list")) {
-                System.out.println(formatMessage(listTasks()));
-            } else if (command[0].equals("mark")) {
-                int taskNum = Integer.parseInt(command[1]) - 1;
-                tasks.get(taskNum).mark();
-                System.out.println(formatMessage("Nice! I've marked this task as done:\n" +
-                        indent + tasks.get(taskNum).toString()));
-            } else if (command[0].equals("unmark")) {
-                int taskNum = Integer.parseInt(command[1]) - 1;
-                tasks.get(taskNum).unmark();
-                System.out.println(formatMessage("OK, I've marked this task as not done yet:\n" +
-                        indent + tasks.get(taskNum).toString()));
-            } else {
-                switch (command[0]) {
-                    case "todo":
-                        tasks.add(new Todo(command[1]));
-                        break;
-                    case "deadline": {
-                        String[] arguments = command[1].split(" /by ");
-                        tasks.add(new Deadline(arguments[0], arguments[1]));
-                        break;
+            try {
+                if (command[0].equals("bye")) {
+                    System.out.println(formatMessage("Bye. Hope to see you again soon!"));
+                    break;
+                } else if (command[0].equals("list")) {
+                    System.out.println(formatMessage(listTasks()));
+                } else if (command[0].equals("mark")) {
+                    if (command.length < 2) {
+                        throw new DukeException("Task number required");
                     }
-                    case "event": {
-                        String[] arguments = command[1].split(" /from ");
-                        String[] timings = arguments[1].split(" /to ");
-                        tasks.add(new Event(arguments[0], timings[0], timings[1]));
-                        break;
+                    int taskNum = Integer.parseInt(command[1]) - 1;
+                    if (taskNum < 0 || taskNum >= tasks.size()) {
+                        throw new DukeException("Task number invalid");
                     }
-                    default:
-                        System.out.println(formatMessage("I do not understand"));
-                }
+                    tasks.get(taskNum).mark();
+                    System.out.println(formatMessage("Nice! I've marked this task as done:\n" +
+                            indent + tasks.get(taskNum).toString()));
+                } else if (command[0].equals("unmark")) {
+                    if (command.length < 2) {
+                        throw new DukeException("Task number required");
+                    }
+                    int taskNum = Integer.parseInt(command[1]) - 1;
+                    if (taskNum < 0 || taskNum >= tasks.size()) {
+                        throw new DukeException("Task number invalid");
+                    }
+                    tasks.get(taskNum).unmark();
+                    System.out.println(formatMessage("OK, I've marked this task as not done yet:\n" +
+                            indent + tasks.get(taskNum).toString()));
+                } else {
+                    if (command.length < 2) {
+                        throw new DukeException("Invalid input");
+                    }
+                    switch (command[0]) {
+                        case "todo":
+                            tasks.add(new Todo(command[1]));
+                            break;
+                        case "deadline": {
+                            String[] arguments = command[1].split(" /by ");
+                            if (arguments.length < 2) {
+                                throw new DukeException("Deadline needs a \"by date\"");
+                            }
+                            tasks.add(new Deadline(arguments[0], arguments[1]));
+                            break;
+                        }
+                        case "event": {
+                            String[] arguments = command[1].split(" /from ");
+                            if (arguments.length < 2) {
+                                throw new DukeException("invalid format");
+                            }
+                            String[] timings = arguments[1].split(" /to ");
+                            if (timings.length < 2) {
+                                throw new DukeException("invalid format");
+                            }
+                            tasks.add(new Event(arguments[0], timings[0], timings[1]));
+                            break;
+                        }
+                        default:
+                            throw new DukeException("I do not understand");
+                    }
 
-                System.out.println(formatMessage("Got it. I've added this task:\n" +
-                        indent + indent + tasks.get(tasks.size() - 1).toString() + "\n" +
-                        indent + "Now you have " + tasks.size() + " task(s) in the list."));
+                    System.out.println(formatMessage("Got it. I've added this task:\n" +
+                            indent + indent + tasks.get(tasks.size() - 1).toString() + "\n" +
+                            indent + "Now you have " + tasks.size() + " task(s) in the list."));
+                }
+            } catch (DukeException e) {
+                System.out.println(formatMessage(e.getMessage()));
+            } catch (NumberFormatException e) {
+                System.out.println("Valid task required");
             }
         }
     }
