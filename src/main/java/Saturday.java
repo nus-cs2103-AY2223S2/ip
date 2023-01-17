@@ -1,7 +1,7 @@
 import java.util.ArrayList;
 
 public class Saturday {
-    private ArrayList<String> list = new ArrayList<>(); // TODO: Create custom todo List Class
+    private TaskList<Task> taskList = new TaskList<>();
 
     public Saturday() {
         Utils.divider();
@@ -17,6 +17,7 @@ public class Saturday {
         System.out.println("");
     }
 
+    // Input method to process userInputs
     public void input(String text) {
         if (text.equals("list")) {
             displayList();
@@ -26,17 +27,13 @@ public class Saturday {
     }
 
     public void add(String text) {
-        list.add(text);
+        Task task = new Task(text);
+        taskList.addTask(task);
         output("added: " + text);
     }
 
     public void displayList() {
-        Utils.divider();
-        for (int i = 0; i < list.size(); i++) {
-            System.out.println("\t" + (i+1) + ". " + list.get(i));
-        }
-        Utils.divider();
-        System.out.println("");
+        output(taskList.toString());
     }
 
     public void exit() {
