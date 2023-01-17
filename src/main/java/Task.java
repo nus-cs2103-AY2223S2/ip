@@ -1,9 +1,10 @@
-public class DukeTask {
+public class Task {
 
     private String task;
     private Boolean isDone;
+    protected Character abbreviation;
 
-    public DukeTask(String task) {
+    public Task(String task) {
         this.task = task;
         this.isDone = false;
     }
@@ -22,6 +23,6 @@ public class DukeTask {
         if (isDone) {
             status = "X";
         }
-        return "[" + status + "] " + task;
+        return  "[" + abbreviation + "]" + "[" + status + "] " + task;
     }
 }

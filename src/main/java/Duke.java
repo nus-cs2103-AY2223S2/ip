@@ -28,30 +28,65 @@ public class Duke {
         System.out.println("----------------------------------");
     }
 
+    private static void checkChat(String chat) {
+
+    }
+
     private static void respond(String chat) {
-        if (chat.equals("list")) {
-            String response = "";
-            ArrayList<DukeTask> list = ls.getList();
-            for (int i = 0; i < list.size(); i++) {
-                DukeTask task = list.get(i);
-                response += Integer.toString(i + 1) + ". ";
-                response += task.toString();
-                response += "\n";
+        String keyword = chat.split(" ")[0];
+        switch(keyword) {
+            case("list"): {
+                ArrayList<Task> list = ls.getList();
+                String response = "";
+                for (int i = 0; i < list.size(); i++) {
+                    Task task = list.get(i);
+                    response += Integer.toString(i + 1) + ". ";
+                    response += task.toString();
+                    response += "\n";
+                }
+                print(response);
+                break;
             }
-            print(response);
-        } else if (chat.length() > 4 && chat.substring(0, 4).equals("mark")) {
-            DukeTask task = ls.mark(chat.substring(5));
-            String response = "Nice! I've marked this task as done:\n";
-            response += task.toString();
-            print(response);
-        } else if (chat.length() > 6 && chat.substring(0, 6).equals("unmark")) {
-            DukeTask task = ls.unmark(chat.substring(7));
-            String response = "OK, I've marked this task as not done yet:\n";
-            response += task.toString();
-            print(response);
-        } else {
-            ls.addTask(chat);
-            print("added: " + chat);
+            case("mark"): {
+                Task task = ls.mark(chat.substring(5));
+                String response = "Nice! I've marked this task as done:\n";
+                response += task.toString();
+                print(response);
+                break;
+            }
+            case("unmark"): {
+                Task task = ls.unmark(chat.substring(7));
+                String response = "OK, I've marked this task as not done yet:\n";
+                response += task.toString();
+                print(response);
+                break;
+            }
+            case("todo"): {
+                Task task = ls.addToDo(chat);
+                String response = "Got it. I've added this task:\n";
+                response += task.toString() + "\n";
+                response += "Now you have " + ls.getSize() + " tasks in the list.";
+                print(response);
+                break;
+            }
+            case("deadline"): {
+                Task task = ls.addDeadline(chat);
+                String response = "Got it. I've added this task:\n";
+                response += task.toString() + "\n";
+                response += "Now you have " + ls.getSize() + " tasks in the list.";
+                print(response);
+                break;
+            }
+            case("event"): {
+                Task task = ls.addEvent(chat);
+                String response = "Got it. I've added this task:\n";
+                response += task.toString() + "\n";
+                response += "Now you have " + ls.getSize() + " tasks in the list.";
+                print(response);
+                break;
+            }
+            default:
+
         }
     }
 
