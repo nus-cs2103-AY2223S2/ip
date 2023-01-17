@@ -35,8 +35,10 @@ public class TwoFive {
             if (input.equals("list")) {
                 //List all tasks added by the user
                 System.out.println("Here are the tasks in your list:");
+                int taskIndex = 1;
                 for (Task task: tasks) {
-                    System.out.println(task);
+                    System.out.println(taskIndex + ". " + task);
+                    taskIndex++;
                 }
             } else if (input.contains("unmark")) {
                 //Marks selected task as undone

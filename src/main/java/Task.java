@@ -4,8 +4,8 @@ public class Task {
     private boolean isDone;
     private static int numberOfTasks = 0;
 
-    public Task(String taskName) {
-        this.taskDescription = taskName;
+    public Task(String taskDescription) {
+        this.taskDescription = taskDescription;
         this.taskId = numberOfTasks + 1;
         this.isDone = false;
         numberOfTasks++;
@@ -38,6 +38,6 @@ public class Task {
 
     @Override
     public String toString() {
-        return this.taskId + ". " + this.getTaskStatus() + " " + this.taskDescription;
+        return this.getTaskStatus() + " " + this.taskDescription;
     }
 }
