@@ -55,19 +55,20 @@ public class Duke {
                 // Duke allows user to mark tasks as done when input is "mark"
                 case ("mark"):
                     try {
-                        int MarkInput = UserScan.nextInt() - 1;
+                        String MarkString = UserScan.nextLine().strip();
                         // ERROR: mark format is anything other than [ mark <insert integer> ]
-                        if (UserScan.nextLine().length()>0) {
+                        if (MarkString.length()==0) {
                             throw new DukeException("\n" + border + "[ERROR]\nUh, mark command format is used wrongly.\nCorrect format is as follows:\n" +
                                     "[ mark <insert INTEGER> ]\n" + border);
                         }
+                        int MarkInput = Integer.parseInt(MarkString) - 1;
                         TaskList.get(MarkInput).MarkDone();
                         System.out.println(border + "Okay, the following task is marked as done!\n");
                         System.out.println((MarkInput+1 + ". ") + TaskList.get(MarkInput).toString() + "\n" + border);
                         break;
                     }
                     // ERROR: mark is NOT paired with an integer (e.g. unmark two, unmark 2.3)
-                    catch (InputMismatchException err) {
+                    catch (NumberFormatException | InputMismatchException err) {
                         throw new DukeException("\n" + border + "[ERROR]\nUh, mark can only be used with an INTEGER. (e.g. 1, 2...)\n" + border);
                     }
                     // ERROR: mark target does not exist (e.g. task number is out of bounds)
@@ -79,24 +80,51 @@ public class Duke {
                 // Duke allows user to mark tasks as NOT done when input is "unmark"
                 case ("unmark"):
                     try {
-                        int UnmarkInput = UserScan.nextInt() - 1;
+                        String UnmarkString = UserScan.nextLine().strip();
                         // ERROR: unmark format is anything other than [ unmark <insert integer> ]
-                        if (UserScan.nextLine().length()>0) {
+                        if (UnmarkString.length()==0) {
                             throw new DukeException("\n" + border + "[ERROR]\nUh, unmark command format is used wrongly.\nCorrect format is as follows:\n" +
                                     "[ unmark <insert INTEGER> ]\n" + border);
                         }
+                        int UnmarkInput = Integer.parseInt(UnmarkString) - 1;
                         TaskList.get(UnmarkInput).MarkNotDone();
                         System.out.println(border + "Okay, the following task is marked as NOT done!\n");
                         System.out.println((UnmarkInput+1 + ". ") + TaskList.get(UnmarkInput).toString() + "\n" + border);
                         break;
                     }
                     // ERROR: unmark is NOT paired with an integer (e.g. unmark two, unmark 2.3)
-                    catch (InputMismatchException err) {
+                    catch (NumberFormatException | InputMismatchException err) {
                         throw new DukeException("\n" + border + "[ERROR]\nUh, unmark can only be used with an INTEGER. (e.g. 1, 2...)\n" + border);
                     }
                     // ERROR: unmark target does not exist (e.g. task number is out of bounds)
                     catch (IndexOutOfBoundsException err) {
                         throw new DukeException("\n" + border + "[ERROR]\nUh, you can only unmark task numbers that exist.\nYou have "
+                                + TaskList.size() + " task(s) in your list.\n" + border);
+                    }
+
+                // Duke deletes task when input is "delete"
+                case ("delete"):
+                    try {
+                        String DeleteString = UserScan.nextLine().strip();
+                        // ERROR: delete format is anything other than [ delete <insert integer> ]
+                        if (DeleteString.length()==0) {
+                            throw new DukeException("\n" + border + "[ERROR]\nUh, delete command format is used wrongly.\nCorrect format is as follows:\n" +
+                                    "[ delete <insert INTEGER> ]\n" + border);
+                        }
+                        int DeleteInput = Integer.parseInt(DeleteString) - 1;
+                        Task DeletedTask = TaskList.get(DeleteInput);
+                        TaskList.remove(DeleteInput);
+                        System.out.println(border + "Okay, i've deleted the following task!\n");
+                        System.out.println((DeleteInput+1 + ". ") + DeletedTask.toString() + "\n" + border);
+                        break;
+                    }
+                    // ERROR: delete is NOT paired with an integer (e.g. delete two, delete 2.3)
+                    catch (NumberFormatException | InputMismatchException err) {
+                        throw new DukeException("\n" + border + "[ERROR]\nUh, delete can only be used with an INTEGER. (e.g. 1, 2...)\n" + border);
+                    }
+                    // ERROR: delete target does not exist (e.g. task number is out of bounds)
+                    catch (IndexOutOfBoundsException err) {
+                        throw new DukeException("\n" + border + "[ERROR]\nUh, you can only delete task numbers that exist.\nYou have "
                                 + TaskList.size() + " task(s) in your list.\n" + border);
                     }
 
