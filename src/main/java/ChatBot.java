@@ -1,20 +1,33 @@
+import java.util.Arrays;
 import java.util.List;
 import java.util.ArrayList;
 
 
 
 public class ChatBot {
-    private List<String> list;
+    private List<Task> list;
 
     ChatBot() {
-        this.list = new ArrayList<String>();
+        this.list = new ArrayList<Task>();
     }
 
     public void processInput(String input) {
+        List<String> tokens = Arrays.asList(input.split(" "));
+        String command = tokens.get(0);
+        List<String> args = new ArrayList<String>();
+        if (tokens.size() > 1) {
+            args = tokens.subList(1, tokens.size());
+        }
         String output = "";
-        switch (input) {
+        switch (command) {
             case "list":
                 output = this.listItems();
+                break;
+            case "mark":
+                output = this.markAsDone(args.get(0));
+                break;
+            case "unmark":
+                output = this.unmarkDone(args.get(0));
                 break;
             default:
                 output = this.addItem(input);
@@ -37,8 +50,30 @@ public class ChatBot {
     }
 
     private String addItem(String s) {
-        this.list.add(s);
+        this.list.add(new Task(s));
         return ("added: " + s);
+    }
+
+    private String markAsDone(String index) {
+        int i = Integer.valueOf(index);
+        Task task = this.list.get(i-1);
+        try {
+            task.markAsDone();
+        } catch (Exception e) {
+            return "You've already marked " + task.description + " as done!\n" +task.toString();
+        }
+        return ("Coolio. Marked " + task.description + " as done!\n" + task.toString());
+    }
+
+    private String unmarkDone(String index) {
+        int i = Integer.valueOf(index);
+        Task task = this.list.get(i-1);
+        try {
+            task.unmarkDone();
+        } catch (Exception e) {
+            return "The task " + task.description + " is already unmarked.\n" + task.toString();
+        }
+        return ("Okay. Unmarked " + task.description + " for you.\n" + task.toString());
     }
 
     public void reply(String s) {
