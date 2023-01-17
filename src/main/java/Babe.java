@@ -11,8 +11,20 @@ import java.util.Scanner;
  */
 public class Babe {
 
-    /** A string Babe received from the user. */
-    private String memory = "";
+    /**
+     * A string input from user.
+     */
+    private String userInput = "";
+
+    /**
+     * List of strings Babe received from the user.
+     */
+    private String[] memory = new String[100];
+
+    /**
+     * Number of strings currently stored in this Babe.
+     */
+    private int memoryCount = 0;
 
     /**
      * Draws a horizontal line.
@@ -31,26 +43,40 @@ public class Babe {
         System.out.println("HELLO! Greetings from Babe.");
         System.out.println("How may I help you?");
         Babe.drawLine();
-        return;
     }
 
     /**
      * Receives user's input.
-     * Receives input from the user and stores it in memory.
+     * Receives input from the user and stores it in input field.
      */
     private void listen() {
         Scanner scanner = new Scanner(System.in);
-        String userInput = scanner.nextLine().stripTrailing();
-        memory = userInput;
+        userInput = scanner.nextLine().stripTrailing();
     }
 
     /**
-     * Prints string previously received from user.
-     * Prints the string stored in memory.
+     * Stores user's latest input into memory array of this Babe.
+     * Adds userInput to memory and prints a message to indicate that the item has been stored.
      */
-    private void print() {
+    private void addItem() {
+        this.memory[memoryCount++] = userInput;
         Babe.drawLine();
-        System.out.println(memory);
+        System.out.printf("added %s \n", userInput);
+        Babe.drawLine();
+    }
+
+    /**
+     * Prints list of strings stored in this Babe.
+     * Prints a numbered list of strings stored in memory.
+     */
+    private void printList() {
+        Babe.drawLine();
+        if (memoryCount == 0) {
+            System.out.println("Nothing added yet. Add something hon.");
+        }
+        for (int i = 0; i < this.memoryCount; i++) {
+            System.out.printf("%d. %s\n", i + 1, this.memory[i]);
+        }
         Babe.drawLine();
     }
 
@@ -72,10 +98,15 @@ public class Babe {
 
         while (true) {
             chatBot.listen();
-            if (chatBot.memory.toLowerCase().equals("bye")) {
+            switch (chatBot.userInput.toLowerCase()) {
+            case "bye":
                 chatBot.sayBye();
-            } else {
-                chatBot.print();
+                break;
+            case "list":
+                chatBot.printList();
+                break;
+            default:
+                chatBot.addItem();
             }
         }
 
