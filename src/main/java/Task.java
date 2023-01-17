@@ -1,4 +1,6 @@
 public class Task {
+
+    public static int numTask = 0;
     public String description;
     public boolean done;
 
@@ -26,3 +28,4 @@ public class Task {
         return status + " " + this.description;
     }
 }
+

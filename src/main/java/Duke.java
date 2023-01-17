@@ -41,9 +41,37 @@ public class Duke {
                 System.out.println("Nice! I've marked this task as done:\n" + markTask);
 
             } else {
-                taskStorage.add(new Task(input));
-                String output = String.format("Task added: %s", input);
-                System.out.println(output);
+
+                String[] inputArr = input.split(" ", 2);
+                String taskType = inputArr[0];
+
+                if (taskType.equals("todo")) {
+                    ToDo todoTask = new ToDo(inputArr[1]);
+                    taskStorage.add(todoTask);
+                    System.out.println("Got it. I've added this ToDo task:");
+                    System.out.println(todoTask.toString());
+                    System.out.println("Now you have " + taskStorage.size() + " tasks in the list.");
+
+                } else if (taskType.equals("deadline")) {
+                    String[] newInputArr = inputArr[1].split(" /by ", 2);
+                    Deadline deadlineTask = new Deadline(newInputArr[0], newInputArr[1]);
+                    taskStorage.add(deadlineTask);
+                    System.out.println("Got it. I've added this Deadline task:");
+                    System.out.println(deadlineTask.toString());
+                    System.out.println("Now you have " + taskStorage.size() + " tasks in the list.");
+
+                } else if (taskType.equals("event")) {
+                    String[] newInputArr = inputArr[1].split(" /from ", 2);
+                    String[] newerInputArr = newInputArr[1].split(" /to ", 2);
+                    Event eventTask = new Event(newInputArr[0], newerInputArr[0], newerInputArr[1]);
+                    taskStorage.add(eventTask);
+                    System.out.println("Got it. I've added this Event task:");
+                    System.out.println(eventTask.toString());
+                    System.out.println("Now you have " + taskStorage.size() + " tasks in the list.");
+
+                } else {
+                }
+
             }
 
             input = sc.nextLine();
