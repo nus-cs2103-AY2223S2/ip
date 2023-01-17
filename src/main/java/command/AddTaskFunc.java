@@ -6,9 +6,9 @@ import task.Task;
 
 
 public class AddTaskFunc implements Function<CommandInput, String> {
-    private final Function<CommandInput, Task> taskCreator;
+    private final Function<CommandInput, ? extends Task> taskCreator;
 
-    public AddTaskFunc(Function<CommandInput, Task> taskCreator) {
+    public AddTaskFunc(Function<CommandInput, ? extends Task> taskCreator) {
         this.taskCreator = taskCreator;
     }
 
