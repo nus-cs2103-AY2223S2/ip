@@ -16,6 +16,10 @@
      Now you have 2 tasks in the list.
     ____________________________________________________________
     ____________________________________________________________
+     ☹ OOPS!!! You are missing the description.
+     It's 'todo <description>'.
+    ____________________________________________________________
+    ____________________________________________________________
      Got it. I've added this task:
        [D][ ] submit pop quiz (by: tomorrow at 2pm)
      Now you have 3 tasks in the list.
@@ -26,6 +30,14 @@
      Now you have 4 tasks in the list.
     ____________________________________________________________
     ____________________________________________________________
+     ☹ OOPS!!! You are missing either the description or deadline.
+     It's 'deadline <description> /by <deadline>'.
+    ____________________________________________________________
+    ____________________________________________________________
+     ☹ OOPS!!! You are missing either the description or deadline.
+     It's 'deadline <description> /by <deadline>'.
+    ____________________________________________________________
+    ____________________________________________________________
      Got it. I've added this task:
        [E][ ] software engineering tutorial (from: 2pm to: 1pm)
      Now you have 5 tasks in the list.
@@ -34,6 +46,30 @@
      Got it. I've added this task:
        [E][ ] ai lecture (from: tomorrow 3pm to: tomorrow 4pm)
      Now you have 6 tasks in the list.
+    ____________________________________________________________
+    ____________________________________________________________
+     ☹ OOPS!!! You are missing either the description, from or to.
+     It's 'event <description> /from <from> /to <to>'.
+    ____________________________________________________________
+    ____________________________________________________________
+     ☹ OOPS!!! You are missing either the description, from or to.
+     It's 'event <description> /from <from> /to <to>'.
+    ____________________________________________________________
+    ____________________________________________________________
+     ☹ OOPS!!! You are missing either the description, from or to.
+     It's 'event <description> /from <from> /to <to>'.
+    ____________________________________________________________
+    ____________________________________________________________
+     ☹ OOPS!!! You are missing either the description, from or to.
+     It's 'event <description> /from <from> /to <to>'.
+    ____________________________________________________________
+    ____________________________________________________________
+     ☹ OOPS!!! You are missing either the description, from or to.
+     It's 'event <description> /from <from> /to <to>'.
+    ____________________________________________________________
+    ____________________________________________________________
+     ☹ OOPS!!! You are missing either the description, from or to.
+     It's 'event <description> /from <from> /to <to>'.
     ____________________________________________________________
     ____________________________________________________________
      Here are the tasks in your list:

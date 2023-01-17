@@ -31,25 +31,29 @@ public class Duke {
         printHorizontal();
     }
 
-    private static void commandTodo(String input) {
+    private static void commandTodo(String input) throws DukeException {
         Matcher todoCommandMatcher = todoCommandPattern.matcher(input);
         if (todoCommandMatcher.find()) {
             String description = todoCommandMatcher.group(1);
             addTask(new ToDo(description));
+        } else {
+            throw new DukeException("You are missing the description.\n     It's 'todo <description>'.");
         }
     }
 
-    private static void commandDeadline(String input) {
+    private static void commandDeadline(String input) throws DukeException {
         Matcher deadlineCommandMatcher = deadlineCommandPattern.matcher(input);
         if (deadlineCommandMatcher.find()) {
             String description = deadlineCommandMatcher.group(1);
             String by = deadlineCommandMatcher.group(2);
 
             addTask(new Deadline(description, by));
+        } else {
+            throw new DukeException("You are missing either the description or deadline.\n     It's 'deadline <description> /by <deadline>'.");
         }
     }
 
-    private static void commandEvent(String input) {
+    private static void commandEvent(String input) throws DukeException {
         Matcher eventCommandMatcher = eventCommandPattern.matcher(input);
         if (eventCommandMatcher.find()) {
             String description = eventCommandMatcher.group(1);
@@ -57,6 +61,8 @@ public class Duke {
             String to = eventCommandMatcher.group(3);
 
             addTask(new Event(description, from, to));
+        } else {
+            throw new DukeException("You are missing either the description, from or to.\n     It's 'event <description> /from <from> /to <to>'.");
         }
     }
 
@@ -140,21 +146,30 @@ public class Duke {
 
             String command = input.split(" ")[0];
 
-            if (command.equals("todo")) {
-                commandTodo(input);
-            } else if (command.equals("deadline")) {
-                commandDeadline(input);
-            } else if (command.equals("event")) {
-                commandEvent(input);
-            } else if (command.equals("list")) {
-                commandListTasks();
-            } else if (command.equals("mark")) {
-                commandMark(input);
-            } else if (command.equals("unmark")) {
-                commandUnmark(input);
-            } else if (command.equals("bye")) {
-                commandExit();
-                isExit = true;
+            // Try executing command from input
+            try {
+                if (command.equals("todo")) {
+                    commandTodo(input);
+                } else if (command.equals("deadline")) {
+                    commandDeadline(input);
+                } else if (command.equals("event")) {
+                    commandEvent(input);
+                } else if (command.equals("list")) {
+                    commandListTasks();
+                } else if (command.equals("mark")) {
+                    commandMark(input);
+                } else if (command.equals("unmark")) {
+                    commandUnmark(input);
+                } else if (command.equals("bye")) {
+                    commandExit();
+                    isExit = true;
+                } else {
+                    throw new DukeException("I'm sorry, but I don't know what that means :-(");
+                }
+            } catch (DukeException exception) {
+                printHorizontal();
+                printText(exception.getMessage());
+                printHorizontal();
             }
         }
     }
