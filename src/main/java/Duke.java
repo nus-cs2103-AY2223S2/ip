@@ -1,6 +1,6 @@
 import java.util.Scanner;
 
-import exception.MissingArgumentException;
+import exception.DukeException;
 import parser.InputParser;
 
 import response.Response;
@@ -21,7 +21,7 @@ public class Duke {
 
     public static void main(String[] args) {
         final String intro = "Hello! I'm Duke\n\t What can I do for you?";
-        final String extStr = "Bye. Hope to see you again soon!";
+        final String extStr = "Bye! Hope to see you again soon!";
 
         Duke.print(intro);
 
@@ -47,7 +47,7 @@ public class Duke {
 
                 // Print the output message
                 Duke.print(out);
-            } catch (MissingArgumentException err) {
+            } catch (DukeException err) {
                 Duke.print(err.toString());
             }
         }
