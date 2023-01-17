@@ -7,10 +7,10 @@ public class Duke {
         System.out.println(greeting);
 
         Scanner scanner = new Scanner(System.in);
-        String userInput = scanner.next();
+        String userInput = scanner.nextLine();
         while (!userInput.equals("bye")) {
             System.out.println("\n" + userInput + "\n");
-            userInput = scanner.next();
+            userInput = scanner.nextLine();
         }
         System.out.println("\nBye. Hope to see you again soon!\n");
     }
