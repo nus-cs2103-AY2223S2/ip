@@ -27,47 +27,72 @@ public class Duke {
                     Task curr = taskList.get(i);
                     int index = i + 1;
                     if (i == taskList.size() - 1) { // Last item
-                        System.out.println("\t" + index + "." + curr + "\n");
+                        System.out.println("\t" + index + "." + curr);
                         break;
                     }
                     System.out.println("\t" + index + "." + curr);
                 }
                 continue;
             }
-            try {
+            try { // Marking/Unmarking/Delete
                 if (parts[0].equals("mark")) {
-                    int i = Integer.parseInt(parts[1]);
+                    if (parts.length != 2 || parts[1].trim().isEmpty()) {
+                        throw new DukeException("Command has to be followed by an integer.");
+                    }
+                    int i = Integer.parseInt(parts[1].trim());
                     Task t = taskList.get(i - 1);
                     t.markAsDone();
                     System.out.println("\tNice! I've marked this task as done:");
-                    System.out.println("\t  " + t + "\n");
+                    System.out.println("\t  " + t);
                     continue;
                 }
                 if (parts[0].equals("unmark")) {
-                    int i = Integer.parseInt(parts[1]);
+                    if (parts.length != 2 || parts[1].trim().isEmpty()) {
+                        throw new DukeException("Command has to be followed by an integer.");
+                    }
+                    int i = Integer.parseInt(parts[1].trim());
                     Task t = taskList.get(i - 1);
                     t.unmarkAsDone();
                     System.out.println("\tOK, I've marked this task as not done yet:");
-                    System.out.println("\t  " + t + "\n");
+                    System.out.println("\t  " + t);
                     continue;
                 }
-            } catch (NumberFormatException e) {
-                System.out.println("\t\u2639 OOPS!!! Mark/unmark command has to be followed by an integer.");
+                if (parts[0].equals("delete")) {
+                    if (parts.length != 2 || parts[1].trim().isEmpty()) {
+                        throw new DukeException("Command has to be followed by an integer.");
+                    }
+                    int i = Integer.parseInt(parts[1].trim());
+                    Task t = taskList.get(i - 1);
+                    taskList.remove(i - 1);
+                    System.out.println("\tNoted. I've removed this task:");
+                    System.out.println("\t  " + t);
+                    if (taskList.size() == 1) {
+                        System.out.println("\tNow you have " + taskList.size() + " task in the list.");
+                        continue;
+                    }
+                    System.out.println("\tNow you have " + taskList.size() + " tasks in the list.");
+                    continue;
+                }
+            } catch (DukeException e) { // Invalid arguments
+                System.out.println("\t" + e);
                 continue;
-            } catch (IndexOutOfBoundsException e) {
+            } catch (NumberFormatException e) { // 2nd argument not int
+                System.out.println("\t\u2639 OOPS!!! Command has to be followed by an integer.");
+                continue;
+            } catch (IndexOutOfBoundsException e) { // Index not in array
                 System.out.println("\t\u2639 OOPS!!! Index entered does not exists in list.");
                 continue;
             }
             Task t;
-            try {
-                if (parts[0].equals("todo")) {
-                    if (parts.length == 1 || parts[1].trim().isEmpty()) {
+            try { // Adding items to list
+                if (parts[0].equals("todo")) { // ToDo
+                    if (parts.length != 2 || parts[1].trim().isEmpty()) {
                         throw new DukeException("The description of a todo cannot be empty.");
                     }
                     t = new ToDo(parts[1]);
                     taskList.add(t);
-                } else if (parts[0].equals("deadline")) {
-                    if (parts.length == 1 || parts[1].trim().isEmpty()) {
+                } else if (parts[0].equals("deadline")) { // Deadline
+                    if (parts.length != 2 || parts[1].trim().isEmpty()) {
                         throw new DukeException("The description of a deadline cannot be empty.");
                     }
                     String[] d_parts = parts[1].split(" /by ", 2);
@@ -76,8 +101,8 @@ public class Duke {
                     }
                     t = new Deadline(d_parts[0], d_parts[1]);
                     taskList.add(t);
-                } else if (parts[0].equals("event")) {
-                    if (parts.length == 1 || parts[1].trim().isEmpty()) {
+                } else if (parts[0].equals("event")) { // Event
+                    if (parts.length != 2 || parts[1].trim().isEmpty()) {
                         throw new DukeException("The description of a event cannot be empty.");
                     }
                     String[] e_parts = parts[1].split(" /from | /to ", 3);
@@ -92,10 +117,10 @@ public class Duke {
                 System.out.println("\tGot it. I've added this task:");
                 System.out.println("\t  " + t);
                 if (taskList.size() == 1) {
-                    System.out.println("\tNow you have " + taskList.size() + " task in the list.\n");
+                    System.out.println("\tNow you have " + taskList.size() + " task in the list.");
                     continue;
                 }
-                System.out.println("\tNow you have " + taskList.size() + " tasks in the list.\n");
+                System.out.println("\tNow you have " + taskList.size() + " tasks in the list.");
             } catch (DukeException e) {
                 System.out.println("\t" + e);
             }
