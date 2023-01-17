@@ -9,7 +9,6 @@ public class Chattime {
             "******************CHATTIME";
     private static final String goodBye = "Bye bye >^<! Visit me again when you need me ~";
     private static final String WAITING_TASK = "Task(s) waiting to be completed:";
-    private static final String ADD_TASK = "Got it! I've added this task:\n       %s\n     %s";
     private static final String UNRECOGNISED_COMMENT = "Sorry... but I don't understand what you said >,<";
     private static final String LIST_EXP = "OOPS!!! list does not take any description.";
     private static final String NO_DESCRIPTION = "OOPS!!! The description of %s cannot be empty.";
@@ -89,12 +88,15 @@ public class Chattime {
                         break;
                     case "mark":
                     case "unmark":
+                    case "delete":
                         if (splitCmd.length < 2) {
                             throw new ChattimeException(String.format(NO_INDEX, command));
                         } else if (command.equals("mark")) {
                             mark(splitCmd[1]);
-                        } else {
+                        } else if (command.equals("unmark")) {
                             unmark(splitCmd[1]);
+                        } else {
+                            delete(splitCmd[1]);
                         }
                         break;
                     default:
@@ -127,10 +129,7 @@ public class Chattime {
 
     public static void addTask(Task newTask) {
         storeList.add(newTask);
-        String taskData = newTask.toString();
-        String message = String.format(ADD_TASK, taskData, Task.totalTask());
-
-        replyUser(message);
+        newTask.printAddTask();
     }
 
     public static int checkInt(String content, String command) throws ChattimeException {
@@ -147,7 +146,7 @@ public class Chattime {
     }
 
     public static void mark(String context) {
-        int index = 0;
+        int index;
         try {
             index = checkInt(context, "mark");
             storeList.get(index - 1).markAsDone();
@@ -157,10 +156,21 @@ public class Chattime {
     }
 
     public static void unmark(String context) {
-        int index = 0;
+        int index;
         try {
             index = checkInt(context, "unmark");
             storeList.get(index - 1).unmarkDone();
+        } catch (ChattimeException e) {
+            replyUser(e.getMessage());
+        }
+    }
+
+    public static void delete(String context) {
+        int index;
+        try {
+            index = checkInt(context, "delete");
+            storeList.get(index - 1).removeTask();
+            storeList.remove(index - 1);
         } catch (ChattimeException e) {
             replyUser(e.getMessage());
         }
