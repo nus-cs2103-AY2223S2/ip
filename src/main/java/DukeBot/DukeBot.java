@@ -1,6 +1,15 @@
 package DukeBot;
+import DukeBot.Exception.BlankFieldExceptions.BlankFieldDeadlineException;
+import DukeBot.Exception.BlankFieldExceptions.BlankFieldEventException;
+import DukeBot.Exception.BlankFieldExceptions.BlankFieldException;
+import DukeBot.Exception.BlankFieldExceptions.BlankFieldTodoException;
+import DukeBot.Exception.IncludeExceptions.IncludeByException;
+import DukeBot.Exception.IncludeExceptions.IncludeException;
+import DukeBot.Exception.IncludeExceptions.IncludeToAndFromException;
+import DukeBot.Exception.TaskNumberNotFoundException;
+import DukeBot.Exception.UnknownCommandError;
+
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Objects;
 import java.util.Scanner;
 
@@ -28,11 +37,15 @@ public class DukeBot {
                 this.frame);
         while (this.isActive) {
             String line = this.scanner.nextLine();
-            System.out.println(this.text(line));
+            try {
+                System.out.println(this.text(line));
+            } catch (BlankFieldException | UnknownCommandError | TaskNumberNotFoundException | IncludeException e) {
+                System.out.println(e.getLocalizedMessage());
+            }
         }
     }
 
-    public String text(String line) {
+    public String text(String line) throws BlankFieldException, UnknownCommandError, TaskNumberNotFoundException, IncludeException {
 
 
         if (Objects.equals(line, "list")) {
@@ -44,53 +57,63 @@ public class DukeBot {
 
         String[] words = line.split(" ", 2);
 
-        if (words.length < 2) {
-            return this.frame +
-                    "     Error! I dont understand what that command is :(" + "\n" +
-                    this.frame;
-        }
+
 
         String command = words[0];
-        String parameters = words[1];
         switch (command) {
             case "mark":
                 try {
-                    return this.mark(parameters);
+                    if (words.length == 1 || words[1].trim().isEmpty()) {
+                        throw new TaskNumberNotFoundException();
+                    }
+                    int taskNumber = Integer.parseInt(words[1]);
+                    if (taskNumber > this.lengthOfList || taskNumber <= 0) {
+                        throw new TaskNumberNotFoundException();
+                    }
+                    return this.mark(taskNumber);
                 } catch (NumberFormatException e) {
-                    return this.frame +
-                            "     ERROR: If you want me to mark a task, then use the correct format!! " + "\n" +
-                            "     Do \"mark N\" where N is a number" + "\n" +
-                            this.frame;
+                    throw new TaskNumberNotFoundException();
                 }
             case "unmark":
                 try {
-                    return this.unmark(parameters);
+                    if (words.length == 1 || words[1].trim().isEmpty()) {
+                        throw new TaskNumberNotFoundException();
+                    }
+                    int taskNumber = Integer.parseInt(words[1]);
+                    if (taskNumber > this.lengthOfList || taskNumber <= 0) {
+                        throw new TaskNumberNotFoundException();
+                    }
+                    return this.unmark(taskNumber);
                 } catch (NumberFormatException e) {
-                    return this.frame +
-                            "ERROR: If you want me to mark a task, then use the correct format!! " + "\n" +
-                            "Do \"unmark N\" where N is a number" + "\n" +
-                            this.frame;
+                    throw new TaskNumberNotFoundException();
                 }
+
             case "todo":
-                return this.addToDo(parameters);
+                if (words.length == 1 || words[1].trim().isEmpty()) {
+                    throw new BlankFieldTodoException();
+                }
+                return this.addToDo(words[1]);
             case "deadline":
-                return this.addDeadline(parameters);
+                if (words.length == 1 || words[1].trim().isEmpty()) {
+                    throw new BlankFieldDeadlineException();
+                }
+                return this.addDeadline(words[1]);
             case "event":
-                return this.addEvent(parameters);
+                if (words.length == 1 || words[1].trim().isEmpty()) {
+                    throw new BlankFieldEventException();
+                }
+                return this.addEvent(words[1]);
             case "delete":
         }
 
-        return "Unknown command";
+        throw new UnknownCommandError("\n" + this.frame + "\n" +
+                "     ☹ OOPS!!! I'm sorry, but I don't know what that means :-(" + "\n" +
+                this.frame);
 
     }
 
-    private String unmark(String taskNumberString) {
-        int taskNumber = Integer.parseInt(taskNumberString);
-        if (taskNumber > this.list.size() || taskNumber <= 0) {
-            return this.frame +
-                    "I don't think there's a task with that number!" + "\n" +
-                    this.frame;
-        }
+    private String unmark(int taskNumber) {
+
         Task task = list.get(taskNumber - 1);
         task.incomplete();
         return this.frame +
@@ -99,13 +122,7 @@ public class DukeBot {
                 this.frame;
     }
 
-    private String mark(String taskNumberString) {
-        int taskNumber = Integer.parseInt(taskNumberString);
-        if (taskNumber > this.list.size() || taskNumber <= 0) {
-            return this.frame +
-                    "I don't think there's a task with that number!" + "\n" +
-                    this.frame;
-        }
+    private String mark(int taskNumber) {
 
         Task task = list.get(taskNumber - 1);
         task.complete();
@@ -138,7 +155,7 @@ public class DukeBot {
                 this.frame;
     }
 
-    public String addDeadline(String parameters) {
+    public String addDeadline(String parameters) throws IncludeByException, BlankFieldDeadlineException {
 
 
         // Extract deadline date and task item.
@@ -157,9 +174,10 @@ public class DukeBot {
         }
 
         if (!by) {
-            return this.frame +
-                    "     Error! Did you include the \"/by\" in your command?"  + "\n" +
-                    this.frame;
+            throw new IncludeByException();
+        }
+        if (task.toString().trim().isEmpty() || deadline.toString().trim().isEmpty()) {
+            throw new BlankFieldDeadlineException();
         }
 
         Deadline newDeadline = new Deadline(task.toString(), deadline.toString());
@@ -172,7 +190,7 @@ public class DukeBot {
                 this.frame;
     }
 
-    public String addEvent(String parameters) {
+    public String addEvent(String parameters) throws IncludeToAndFromException, BlankFieldEventException {
 
         // Extract event's start date and end date
         String[] lines = parameters.split(" ");
@@ -203,9 +221,13 @@ public class DukeBot {
         }
 
         if (state != 2) {
-            return this.frame +
-                    "     Error: Did you remember to use \"/from\" and \"/to\"?" + "\n" +
-                    this.frame;
+            throw new IncludeToAndFromException();
+        }
+
+        if (task.toString().trim().isEmpty() ||
+                startDate.toString().trim().isEmpty() ||
+                endDate.toString().trim().isEmpty()) {
+            throw new BlankFieldEventException();
         }
 
         Event newEvent = new Event(task.toString(), startDate.toString(), endDate.toString());
@@ -226,9 +248,5 @@ public class DukeBot {
                 "     Bye. Hope to see you again soon!\n" +
                 this.frame;
     }
-
-
-
-
 
 }
