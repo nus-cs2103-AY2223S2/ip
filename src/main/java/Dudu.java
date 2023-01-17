@@ -4,12 +4,12 @@ import java.util.Scanner;
 public class Dudu {
     private static final String DIVIDER = "___________________________________________\n";
     private static final String LOGO =
-              " ____  _   _ ____  _   _ \n"
+              " ____  _   _ ____  _   _\n"
             + "|  _ \\| | | |  _ \\| | | |\n"
             + "| | | | | | | | | | | | |\n"
             + "| |_| | |_| | |_| | |_| |\n"
             + "|____/ \\___/|____/ \\___/\n";
-    private static final String GREETING = DIVIDER + "Hello from\n" + LOGO + "What can I do for you?\n" + DIVIDER;
+    private static final String GREETING = DIVIDER + LOGO + "Hello! I'm Dudu\n" + "What can I do for you?\n" + DIVIDER;
     private static void addTask(String type, ArrayList<Task> list, String input) {
         Task task;
         if (type.equals("deadline")) {
@@ -24,7 +24,7 @@ public class Dudu {
         }
         list.add(task);
         System.out.println("Got it. I've added this task:");
-        System.out.println(" " + task);
+        System.out.println("  " + task);
         System.out.println(getTotalTask(list));
     }
     private static String getTotalTask(ArrayList<Task> tasks) {
@@ -39,15 +39,15 @@ public class Dudu {
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
         ArrayList<Task> list = new ArrayList<>();
-        System.out.println(GREETING);
+        System.out.print(GREETING);
         while (scanner.hasNext()) {
             String input = scanner.nextLine();
             String[] inputArr = input.split(" ");
-            System.out.print(DIVIDER);
             if (input.equals("bye")) {
                 System.out.println("Bye. Hope to see you again soon!");
                 break;
             } else if (inputArr[0].equals("list")) {
+                System.out.println("Here are the tasks in your list:");
                 for (int i = 0; i < list.size(); i++) {
                     Task currTask = list.get(i);
                     System.out.println(i+1 + "." + currTask);
@@ -95,6 +95,7 @@ public class Dudu {
             }
             System.out.print(DIVIDER);
         }
+        System.out.print(DIVIDER);
     }
 
 }
