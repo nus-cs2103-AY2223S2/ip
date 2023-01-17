@@ -46,7 +46,7 @@ public class Duke {
                 System.exit(0);
             case "list":
                 if (todos.isEmpty()) {
-                    print("None yet.");
+                    print("No items yet.");
                 } else {
                     int i = 1;
                     for (Task t : todos) {
