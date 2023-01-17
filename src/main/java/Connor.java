@@ -23,6 +23,7 @@ public class Connor {
         System.out.println("        Please type in your command below.");
         Scanner sc = new Scanner(System.in);
         TaskList list = new TaskList();
+
         while (sc.hasNextLine()) {
             String input = sc.nextLine();
             String command = getCommand(input);

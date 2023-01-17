@@ -1,13 +1,8 @@
 public class Response {
-
-    public static String formMessage(String response) {
-        return "        " + response + "\n";
-    }
+    private static String LINE = "        ________________________________________________________\n";
 
     public static void printMessage(String response) {
-        System.out.println("        ________________________________________________________\n"
-                + formMessage(response)
-                + "        ________________________________________________________\n");
+        System.out.println(LINE + "        " + response + "\n" + LINE);
     }
 
     public static void greetings(String responseType) {
