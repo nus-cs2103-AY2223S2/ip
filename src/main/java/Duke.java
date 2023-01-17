@@ -1,7 +1,7 @@
 import java.util.*;
 
 public class Duke {
-    public static void main(String[] args) throws DukeException {
+    public static void main(String[] args) {
         String logo = " ____        _        \n"
                 + "|  _ \\ _   _| | _____ \n"
                 + "| | | | | | | |/ / _ \\\n"
@@ -27,8 +27,9 @@ public class Duke {
                 case ("bye"):
                     // ERROR: bye format is anything other than [ bye ]
                     if (UserScan.nextLine().length()>0) {
-                        throw new DukeException("\n" + border + "[ERROR]\nUh, bye command format is used wrongly.\nCorrect format is as follows:\n" +
+                        System.out.println("\n" + border + "[ERROR]\nUh, bye command format is used wrongly.\nCorrect format is as follows:\n" +
                                 "[ bye ]\n" + border);
+                        break;
                     }
                     System.out.println(border + "Goodbye, then!\n" + border);
                     LoopEnd = true;
@@ -38,8 +39,9 @@ public class Duke {
                 case ("list"):
                     // ERROR: list format is anything other than [ list ]
                     if (UserScan.nextLine().length()>0) {
-                        throw new DukeException("\n" + border + "[ERROR]\nUh, list command format is used wrongly.\nCorrect format is as follows:\n" +
+                        System.out.println("\n" + border + "[ERROR]\nUh, list command format is used wrongly.\nCorrect format is as follows:\n" +
                                 "[ list ]\n" + border);
+                        break;
                     }
                     if (TaskList.size()==0) {
                         System.out.println(border + "You don't have anything to do right now!\n" + border);
@@ -58,8 +60,9 @@ public class Duke {
                         String MarkString = UserScan.nextLine().strip();
                         // ERROR: mark format is anything other than [ mark <insert integer> ]
                         if (MarkString.length()==0) {
-                            throw new DukeException("\n" + border + "[ERROR]\nUh, mark command format is used wrongly.\nCorrect format is as follows:\n" +
+                            System.out.println("\n" + border + "[ERROR]\nUh, mark command format is used wrongly.\nCorrect format is as follows:\n" +
                                     "[ mark <insert INTEGER> ]\n" + border);
+                            break;
                         }
                         int MarkInput = Integer.parseInt(MarkString) - 1;
                         TaskList.get(MarkInput).MarkDone();
@@ -69,12 +72,14 @@ public class Duke {
                     }
                     // ERROR: mark is NOT paired with an integer (e.g. unmark two, unmark 2.3)
                     catch (NumberFormatException | InputMismatchException err) {
-                        throw new DukeException("\n" + border + "[ERROR]\nUh, mark can only be used with an INTEGER. (e.g. 1, 2...)\n" + border);
+                        System.out.println("\n" + border + "[ERROR]\nUh, mark can only be used with an INTEGER. (e.g. 1, 2...)\n" + border);
+                        break;
                     }
                     // ERROR: mark target does not exist (e.g. task number is out of bounds)
                     catch (IndexOutOfBoundsException err) {
-                        throw new DukeException("\n" + border + "[ERROR]\nUh, you can only mark task numbers that exist.\nYou have "
+                        System.out.println("\n" + border + "[ERROR]\nUh, you can only mark task numbers that exist.\nYou have "
                                 + TaskList.size() + " task(s) in your list.\n" + border);
+                        break;
                     }
 
                 // Duke allows user to mark tasks as NOT done when input is "unmark"
@@ -83,8 +88,9 @@ public class Duke {
                         String UnmarkString = UserScan.nextLine().strip();
                         // ERROR: unmark format is anything other than [ unmark <insert integer> ]
                         if (UnmarkString.length()==0) {
-                            throw new DukeException("\n" + border + "[ERROR]\nUh, unmark command format is used wrongly.\nCorrect format is as follows:\n" +
+                            System.out.println("\n" + border + "[ERROR]\nUh, unmark command format is used wrongly.\nCorrect format is as follows:\n" +
                                     "[ unmark <insert INTEGER> ]\n" + border);
+                            break;
                         }
                         int UnmarkInput = Integer.parseInt(UnmarkString) - 1;
                         TaskList.get(UnmarkInput).MarkNotDone();
@@ -94,12 +100,14 @@ public class Duke {
                     }
                     // ERROR: unmark is NOT paired with an integer (e.g. unmark two, unmark 2.3)
                     catch (NumberFormatException | InputMismatchException err) {
-                        throw new DukeException("\n" + border + "[ERROR]\nUh, unmark can only be used with an INTEGER. (e.g. 1, 2...)\n" + border);
+                        System.out.println("\n" + border + "[ERROR]\nUh, unmark can only be used with an INTEGER. (e.g. 1, 2...)\n" + border);
+                        break;
                     }
                     // ERROR: unmark target does not exist (e.g. task number is out of bounds)
                     catch (IndexOutOfBoundsException err) {
-                        throw new DukeException("\n" + border + "[ERROR]\nUh, you can only unmark task numbers that exist.\nYou have "
+                        System.out.println("\n" + border + "[ERROR]\nUh, you can only unmark task numbers that exist.\nYou have "
                                 + TaskList.size() + " task(s) in your list.\n" + border);
+                        break;
                     }
 
                 // Duke deletes task when input is "delete"
@@ -108,8 +116,9 @@ public class Duke {
                         String DeleteString = UserScan.nextLine().strip();
                         // ERROR: delete format is anything other than [ delete <insert integer> ]
                         if (DeleteString.length()==0) {
-                            throw new DukeException("\n" + border + "[ERROR]\nUh, delete command format is used wrongly.\nCorrect format is as follows:\n" +
+                            System.out.println("\n" + border + "[ERROR]\nUh, delete command format is used wrongly.\nCorrect format is as follows:\n" +
                                     "[ delete <insert INTEGER> ]\n" + border);
+                            break;
                         }
                         int DeleteInput = Integer.parseInt(DeleteString) - 1;
                         Task DeletedTask = TaskList.get(DeleteInput);
@@ -120,12 +129,14 @@ public class Duke {
                     }
                     // ERROR: delete is NOT paired with an integer (e.g. delete two, delete 2.3)
                     catch (NumberFormatException | InputMismatchException err) {
-                        throw new DukeException("\n" + border + "[ERROR]\nUh, delete can only be used with an INTEGER. (e.g. 1, 2...)\n" + border);
+                        System.out.println("\n" + border + "[ERROR]\nUh, delete can only be used with an INTEGER. (e.g. 1, 2...)\n" + border);
+                        break;
                     }
                     // ERROR: delete target does not exist (e.g. task number is out of bounds)
                     catch (IndexOutOfBoundsException err) {
-                        throw new DukeException("\n" + border + "[ERROR]\nUh, you can only delete task numbers that exist.\nYou have "
+                        System.out.println("\n" + border + "[ERROR]\nUh, you can only delete task numbers that exist.\nYou have "
                                 + TaskList.size() + " task(s) in your list.\n" + border);
+                        break;
                     }
 
                 // Duke adds Deadline
@@ -135,12 +146,14 @@ public class Duke {
                         String DeadlineName = DeadlineSentence.substring(0, DeadlineSentence.indexOf(" /by"));
                         // ERROR: deadline description is blank.
                         if (DeadlineName.strip().length()==0) {
-                            throw new DukeException("\n" + border + "[ERROR]\nUh, deadline description cannot be blank.\nTry again.\n" + border);
+                            System.out.println("\n" + border + "[ERROR]\nUh, deadline description cannot be blank.\nTry again.\n" + border);
+                            break;
                         }
                         String DeadlineDate = DeadlineSentence.substring(DeadlineSentence.indexOf(" /by")+5);
                         // ERROR: deadline date is blank.
                         if (DeadlineDate.strip().length()==0) {
-                            throw new DukeException("\n" + border + "[ERROR]\nUh, deadline date cannot be blank.\nTry again.\n" + border);
+                            System.out.println("\n" + border + "[ERROR]\nUh, deadline date cannot be blank.\nTry again.\n" + border);
+                            break;
                         }
                         Task DeadlineToAdd = new Deadline(DeadlineName, DeadlineDate);
                         TaskList.add(DeadlineToAdd);
@@ -150,8 +163,9 @@ public class Duke {
                     }
                     // ERROR: deadline format is anything other than [ deadline /by <insert deadline> ]
                     catch (StringIndexOutOfBoundsException err) {
-                        throw new DukeException("\n" + border + "[ERROR]\nUh, deadline command format is used wrongly.\nCorrect format is as follows:\n" +
+                        System.out.println("\n" + border + "[ERROR]\nUh, deadline command format is used wrongly.\nCorrect format is as follows:\n" +
                                 "[ deadline /by <insert deadline> ]\n" + border);
+                        break;
                     }
 
                 // Duke adds Event
@@ -161,17 +175,20 @@ public class Duke {
                         String EventName = EventSentence.substring(0, EventSentence.indexOf(" /from"));
                         // ERROR: event description is blank.
                         if (EventName.strip().length()==0) {
-                            throw new DukeException("\n" + border + "[ERROR]\nUh, event description cannot be blank.\nTry again.\n" + border);
+                            System.out.println("\n" + border + "[ERROR]\nUh, event description cannot be blank.\nTry again.\n" + border);
+                            break;
                         }
                         String FromDate = EventSentence.substring(EventSentence.indexOf(" /from")+7, EventSentence.indexOf(" /to"));
                         // ERROR: event's from field is blank.
                         if (FromDate.strip().length()==0) {
-                            throw new DukeException("\n" + border + "[ERROR]\nUh, event's from field cannot be blank.\nTry again.\n" + border);
+                            System.out.println("\n" + border + "[ERROR]\nUh, event's from field cannot be blank.\nTry again.\n" + border);
+                            break;
                         }
                         String ToDate = EventSentence.substring(EventSentence.indexOf(" /to")+5);
                         // ERROR: event's to field is blank.
                         if (ToDate.strip().length()==0) {
-                            throw new DukeException("\n" + border + "[ERROR]\nUh, event's to field cannot be blank.\nTry again.\n" + border);
+                            System.out.println("\n" + border + "[ERROR]\nUh, event's to field cannot be blank.\nTry again.\n" + border);
+                            break;
                         }
                         Task EventToAdd = new Event(EventName, FromDate, ToDate);
                         TaskList.add(EventToAdd);
@@ -181,8 +198,9 @@ public class Duke {
                     }
                     // ERROR: event format is anything other than [ event /from <insert from field> /to <insert to field> ]
                     catch (StringIndexOutOfBoundsException err) {
-                        throw new DukeException("\n" + border + "[ERROR]\nUh, event command format is used wrongly.\nCorrect format is as follows:\n" +
+                        System.out.println("\n" + border + "[ERROR]\nUh, event command format is used wrongly.\nCorrect format is as follows:\n" +
                                 "[ event /from <insert from field> /to <insert to field> ]\n" + border);
+                        break;
                     }
 
                 // Duke adds To-Do
@@ -190,7 +208,8 @@ public class Duke {
                     String ToDoName = UserScan.nextLine();
                     // ERROR: To-Do description is blank.
                     if (ToDoName.strip().length()==0) {
-                        throw new DukeException("\n" + border + "[ERROR]\nUh, To-Do description cannot be blank.\nTry again.\n" + border);
+                        System.out.println("\n" + border + "[ERROR]\nUh, To-Do description cannot be blank.\nTry again.\n" + border);
+                        break;
                     }
                     Task TaskToAdd = new ToDo(ToDoName);
                     TaskList.add(new ToDo(ToDoName));
