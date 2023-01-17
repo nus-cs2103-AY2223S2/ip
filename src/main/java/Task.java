@@ -15,4 +15,7 @@ public class Task {
     public void setDone(boolean done) {
         isDone = done;
     }
+    public String printTask() {
+        return String.format("[%s] %s", (isDone ? "X" : " "), description);
+    }
 }
