@@ -31,9 +31,6 @@ public class Duke {
                 for(int i = 0; i < Task.getNumTasks(); i++){
                     listOfInputs.append(i + 1)
                             .append(".")
-                            .append("[")
-                            .append(userTasks[i].getStatusIcon())
-                            .append("] ")
                             .append(userTasks[i]).append("\n");
                 }
                 resultString = "______________________________________\n"
@@ -45,7 +42,7 @@ public class Duke {
                 userTasks[numToMark-1].setIsDone(true);
                 resultString = "______________________________________\n"
                         + "Nice! I've marked this task as done:\n"
-                        + " [X] " + userTasks[numToMark-1] + "\n"
+                        + userTasks[numToMark-1] + "\n"
                         + "______________________________________\n";
 
             } else if((userInput.split(" ")[0]).equals("unmark")){
@@ -53,16 +50,49 @@ public class Duke {
                 userTasks[numToUnmark-1].setIsDone(false);
                 resultString = "______________________________________\n"
                         + "OK, I've marked this task as not done yet:\n"
-                        + " [ ] " + userTasks[numToUnmark-1] + "\n"
+                        + userTasks[numToUnmark-1] + "\n"
                         + "______________________________________\n";
             }
-            else {
-                Task newTask = new Task(userInput);
-                userTasks[Task.getNumTasks()] = newTask;
+            else if(userInput.split(" ")[0].equals("todo")){
+                int indexOfFirstSpace = userInput.indexOf(" ");
+                String taskDescription = userInput.substring(indexOfFirstSpace+1);
+                Todo newTodo = new Todo(taskDescription);
+                userTasks[Task.getNumTasks()] = newTodo;
                 Task.addTask();
                 resultString = "______________________________________\n"
-                        + "added: "
-                        + userInput + "\n"
+                        + "Got it. I've added this task:\n"
+                        + newTodo + "\n"
+                        + "Now you have " + Task.getNumTasks() + " tasks in the list.\n"
+                        + "______________________________________\n";
+            }
+            else if(userInput.split(" ")[0].equals("deadline")){
+                int indexOfBy = userInput.indexOf("/by");
+                int indexOfFirstSpace = userInput.indexOf(" ");
+                String deadline = userInput.substring(indexOfBy+4);
+                String taskDescription = userInput.substring(indexOfFirstSpace+1,indexOfBy-1);
+                Deadline newDeadline = new Deadline(taskDescription , deadline);
+                userTasks[Task.getNumTasks()] = newDeadline;
+                Task.addTask();
+                resultString = "______________________________________\n"
+                        + "Got it. I've added this task:\n"
+                        +  newDeadline + "\n"
+                        + "Now you have " + Task.getNumTasks() + " tasks in the list.\n"
+                        + "______________________________________\n";
+            }
+            else if(userInput.split(" ")[0].equals("event")){
+                int indexOfFrom = userInput.indexOf("/from");
+                int indexOfTo = userInput.indexOf("/to");
+                int indexOfFirstSpace = userInput.indexOf(" ");
+                String eventStart = userInput.substring(indexOfFrom+6, indexOfTo-1);
+                String eventEnd = userInput.substring(indexOfTo+4);
+                String taskDescription = userInput.substring(indexOfFirstSpace+1,indexOfFrom-1);
+                Event newEvent = new Event(taskDescription, eventStart, eventEnd);
+                userTasks[Task.getNumTasks()] = newEvent;
+                Task.addTask();
+                resultString = "______________________________________\n"
+                        + "Got it. I've added this task:\n"
+                        + newEvent + "\n"
+                        + "Now you have " + Task.getNumTasks() + " tasks in the list.\n"
                         + "______________________________________\n";
             }
             System.out.print(resultString);
