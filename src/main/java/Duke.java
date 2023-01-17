@@ -1,6 +1,8 @@
 import java.util.Scanner;
 
 public class Duke {
+    private static TaskList tasks = new TaskList(100);
+
     public static void main(String[] args) {
         String logo = "░██████╗░██╗░██████╗░░█████╗░░█████╗░██╗░░██╗░█████╗░██████╗░\n"
                 +     "██╔════╝░██║██╔════╝░██╔══██╗██╔══██╗██║░░██║██╔══██╗██╔══██╗\n"
@@ -17,8 +19,15 @@ public class Duke {
         String input = scanner.nextLine();
 
         while(!input.equals("bye")) {
-            System.out.println(input);
-            input = scanner.nextLine();
+            if(input.equals("list")) {
+                System.out.println(tasks);
+                input = scanner.nextLine();
+            } else {
+                System.out.println(input);
+                tasks.enq(input);
+                input = scanner.nextLine();
+            }
+
 
         }
 
