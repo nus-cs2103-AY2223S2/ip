@@ -61,7 +61,6 @@ public class Duke {
                             throw new DukeException("\n" + border + "[ERROR]\nUh, mark command format is used wrongly.\nCorrect format is as follows:\n" +
                                     "[ mark <insert INTEGER> ]\n" + border);
                         }
-
                         TaskList.get(MarkInput).MarkDone();
                         System.out.println(border + "Okay, the following task is marked as done!\n");
                         System.out.println((MarkInput+1 + ". ") + TaskList.get(MarkInput).toString() + "\n" + border);
@@ -81,13 +80,11 @@ public class Duke {
                 case ("unmark"):
                     try {
                         int UnmarkInput = UserScan.nextInt() - 1;
-
                         // ERROR: unmark format is anything other than [ unmark <insert integer> ]
                         if (UserScan.nextLine().length()>0) {
                             throw new DukeException("\n" + border + "[ERROR]\nUh, unmark command format is used wrongly.\nCorrect format is as follows:\n" +
                                     "[ unmark <insert INTEGER> ]\n" + border);
                         }
-
                         TaskList.get(UnmarkInput).MarkNotDone();
                         System.out.println(border + "Okay, the following task is marked as NOT done!\n");
                         System.out.println((UnmarkInput+1 + ". ") + TaskList.get(UnmarkInput).toString() + "\n" + border);
@@ -108,10 +105,12 @@ public class Duke {
                     try {
                         String DeadlineSentence = UserScan.nextLine();
                         String DeadlineName = DeadlineSentence.substring(0, DeadlineSentence.indexOf(" /by"));
+                        // ERROR: deadline description is blank.
                         if (DeadlineName.length()==0) {
                             throw new DukeException("\n" + border + "[ERROR]\nUh, deadline description cannot be blank.\nTry again.\n" + border);
                         }
                         String DeadlineDate = DeadlineSentence.substring(DeadlineSentence.indexOf(" /by")+5);
+                        // ERROR: deadline date is blank.
                         if (DeadlineDate.length()==0) {
                             throw new DukeException("\n" + border + "[ERROR]\nUh, deadline date cannot be blank.\nTry again.\n" + border);
                         }
@@ -121,6 +120,7 @@ public class Duke {
                                 + "There are now " + TaskList.size() + " task(s) in your list.\n" + border);
                         break;
                     }
+                    // ERROR: deadline format is anything other than [ deadline /by <insert deadline> ]
                     catch (StringIndexOutOfBoundsException err) {
                         throw new DukeException("\n" + border + "[ERROR]\nUh, deadline command format is used wrongly.\nCorrect format is as follows:\n" +
                                 "[ deadline /by <insert deadline> ]\n" + border);
@@ -128,15 +128,35 @@ public class Duke {
 
                 // Duke adds Event
                 case ("event"):
-                    String EventSentence = UserScan.nextLine();
-                    String EventName = EventSentence.substring(0, EventSentence.indexOf(" /from"));
-                    String FromDate = EventSentence.substring(EventSentence.indexOf(" /from")+7, EventSentence.indexOf(" /to"));
-                    String ToDate = EventSentence.substring(EventSentence.indexOf(" /to")+5);
-                    Task EventToAdd = new Event(EventName, FromDate, ToDate);
-                    TaskList.add(EventToAdd);
-                    System.out.println(border + "Task added:\n " + EventToAdd + "\n"
-                            + "There are now " + TaskList.size() + " task(s) in your list.\n"+ border);
-                    break;
+                    try {
+                        String EventSentence = UserScan.nextLine();
+                        String EventName = EventSentence.substring(0, EventSentence.indexOf(" /from"));
+                        // ERROR: event description is blank.
+                        if (EventName.length()==0) {
+                            throw new DukeException("\n" + border + "[ERROR]\nUh, event description cannot be blank.\nTry again.\n" + border);
+                        }
+                        String FromDate = EventSentence.substring(EventSentence.indexOf(" /from")+7, EventSentence.indexOf(" /to"));
+                        // ERROR: event's from field is blank.
+                        if (FromDate.length()==0) {
+                            throw new DukeException("\n" + border + "[ERROR]\nUh, event's from field cannot be blank.\nTry again.\n" + border);
+                        }
+                        String ToDate = EventSentence.substring(EventSentence.indexOf(" /to")+5);
+                        // ERROR: event's to field is blank.
+                        if (ToDate.length()==0) {
+                            throw new DukeException("\n" + border + "[ERROR]\nUh, event's to field cannot be blank.\nTry again.\n" + border);
+                        }
+                        Task EventToAdd = new Event(EventName, FromDate, ToDate);
+                        TaskList.add(EventToAdd);
+                        System.out.println(border + "Task added:\n " + EventToAdd + "\n"
+                                + "There are now " + TaskList.size() + " task(s) in your list.\n"+ border);
+                        break;
+                    }
+                    // ERROR: event format is anything other than [ event /from <insert from field> /to <insert to field> ]
+                    catch (StringIndexOutOfBoundsException err) {
+                        throw new DukeException("\n" + border + "[ERROR]\nUh, event command format is used wrongly.\nCorrect format is as follows:\n" +
+                                "[ event /from <insert from field> /to <insert to field> ]\n" + border);
+                    }
+
                 // Duke adds To-Do
                 case ("todo"):
                     String ToDoName = UserScan.nextLine();
