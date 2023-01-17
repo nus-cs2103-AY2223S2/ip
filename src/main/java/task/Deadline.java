@@ -2,9 +2,15 @@ package task;
 
 public class Deadline extends Task {
 
-    public Deadline(String taskName) {
+    private String deadline;
+
+    public Deadline(String taskName, String deadline) {
         super(taskName);
-        //TODO Auto-generated constructor stub
+        this.deadline = deadline;
     }
-    
+
+    @Override
+    public String toString() {
+        return String.format("%s%s (by: %s)", "[D]", super.toString(), deadline);
+    }
 }

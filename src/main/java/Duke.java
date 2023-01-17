@@ -28,9 +28,7 @@ public class Duke {
     private static void displayTasks(Task[] tasks, int numTasks) {
         StringBuilder sb = new StringBuilder();
         for (int i = 0; i < numTasks; i++) {
-            String icon = tasks[i].getStatusIcon();
-            String name = tasks[i].getTaskName();
-            sb.append(String.format("%d.%s %s\n",i+1,icon,name));
+            sb.append(String.format("%d.%s\n", i+1, tasks[i].toString()));
         }
         Duke.printWithDecorations(sb.toString());
     }

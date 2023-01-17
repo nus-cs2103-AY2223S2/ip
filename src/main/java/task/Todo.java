@@ -4,7 +4,11 @@ public class Todo extends Task {
 
     public Todo(String taskName) {
         super(taskName);
-        //TODO Auto-generated constructor stub
+    }
+
+    @Override
+    public String toString() {
+        return "[T]" + super.toString();
     }
     
 }
