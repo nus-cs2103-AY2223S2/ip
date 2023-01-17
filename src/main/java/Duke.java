@@ -1,3 +1,4 @@
+import java.util.*;
 public class Duke {
     public static void main(String[] args) {
         /*
@@ -10,7 +11,22 @@ public class Duke {
         System.out.println("Hello from\n" + logo);
         */
 
-        String greeting = "What's up! Duke here!\nHow can I be of assistance?";
+        String greeting = "What's up! XyDuke here!\nHow can I be of assistance?";
         System.out.println(greeting + "\n");
+
+        Scanner sc = new Scanner(System.in);
+
+        String input = sc.nextLine();
+
+        while (!input.equals("bye")) {
+            System.out.println(input);
+            input = sc.nextLine();
+        }
+
+        String goodbye = "Bye. Hope to see you again soon!";
+
+        System.out.println(goodbye + "\n");
+
+        sc.close();
     }
 }
