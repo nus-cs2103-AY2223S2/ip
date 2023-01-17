@@ -1,6 +1,6 @@
-public class Mark implements Command{
+public class MarkCommand implements Command{
     private int indexToMark;
-    public Mark(int indexToMark) {
+    public MarkCommand(int indexToMark) {
         this.indexToMark = indexToMark;
     }
 

@@ -25,4 +25,10 @@ public class TaskList {
             System.out.println(i + "." + this.list.get(i-1));
         }
     }
+
+    public void delete(int inputIndex) {
+        System.out.println("Noted. I've removed this task:" + "\n" + list.get(inputIndex-1));
+        this.list.remove(inputIndex-1);
+        System.out.println("Now you have " + list.size() + " tasks in the list");
+    }
 }

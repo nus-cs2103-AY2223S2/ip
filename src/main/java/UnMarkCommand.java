@@ -1,6 +1,6 @@
-public class UnMark implements Command{
+public class UnMarkCommand implements Command{
     private int indexToMark;
-    public UnMark(int indexToMark) {
+    public UnMarkCommand(int indexToMark) {
         this.indexToMark = indexToMark;
     }
 
