@@ -10,6 +10,9 @@ public class Engine {
         ADD,
         MARK,
         UNMARK,
+        TODO,
+        DEADLINE,
+        EVENT,
 
         // errors
         ERROR
@@ -25,35 +28,62 @@ public class Engine {
             case ERROR:
                 return args;
             case EXIT:
-                return "Bye...Why do you even need me?\n";
+                return "Bye\n";
             case LIST:
-                return "Ugh" + this.taskList.toString();
-            case ADD:
-                this.taskList.addTask(new Todo(args));
-                return "added-> "  + args + '\n';
+                if (this.taskList.isEmpty()) {
+                    return "You have no tasks.\n";
+                }
+                return "You have these tasks:" + this.taskList.toString();
+            case TODO:
+                String task = Util.cleanup(args);
+                this.taskList.addTask(new Todo(Util.cleanup(args)));
+                return "added-> "  + this.taskList.getLast();
+            case DEADLINE:
+                String flag = "/by";
+                int start = args.indexOf(flag);
+                if (start == -1) {
+                    return "Incorrect input.\n";
+                }
+                String desc = Util.cleanup(args.substring(0, start));
+                String dl = Util.cleanup(args.substring(start + flag.length(), args.length()));
+                this.taskList.addTask(new Deadline(desc, dl));
+                return "added-> " + this.taskList.getLast();
+            case EVENT:
+                String flag1 = "/from";
+                String flag2 = "/to";
+                int s1 = args.indexOf(flag1);
+                int s2 = args.indexOf(flag2);
+                if (s1 == -1 || s2 == -1) {
+                    return "Incorrect input.\n";
+                }
+                String event = Util.cleanup(args.substring(0, s1));
+                String from = Util.cleanup(args.substring(s1 + flag1.length(), s2));
+                String to = Util.cleanup(args.substring(s2 + flag2.length(), args.length()));
+                this.taskList.addTask(new Event(event, from, to));
+                return "added-> " + this.taskList.getLast();
             case MARK:
                 try {
                     int num = Integer.parseInt(Util.parseNextString(args).first());
                     if (num > this.taskList.size()) {
-                        return "There is no such task you dumbass\n";
+                        return "Task has not been added.\n";
                     }
                     this.taskList.markTask(num);
-                    return "Wow!!! Great Job!!! You want a pat on the back or something???" + 
+                    return "Task marked completed:" + 
                         this.taskList.get(num);
                 } catch (NumberFormatException ex) {
-                    return "That's not even a number dumbass\n";
+                    return "Incorrect input.\n";
                 }
             case UNMARK:
                 try {
                     int num = Integer.parseInt(Util.parseNextString(args).first());
                     if (num > this.taskList.size()) {
-                        return "There is no such task you dumbass\n";
+                        return "Task has not been added.\n";
                     }
                     this.taskList.unmarkTask(num);
-                    return "How do you even uncomplete something?" + 
+                    return "Task marked incomplete:" + 
                         this.taskList.get(num);
                 } catch (NumberFormatException ex) {
-                    return "That's not even a number dumbass\n";
+                    return "Incorrect input.\n";
                 }
 
 
@@ -65,11 +95,11 @@ public class Engine {
 
     private Pair<Command, String> parseCommand(String line) {
         Pair<String, String> pr = Util.parseNextString(line);
-        String command = pr.first();
+        String command = pr.first().toLowerCase();
         String rest = pr.second();
 
         if (command.isEmpty()) {
-            return new Pair<>(Command.ERROR, "no input detected\n");
+            return new Pair<>(Command.ERROR, "No input detected.\n");
         }
         if (command.equals("bye")) {
             return new Pair<>(Command.EXIT, "");
@@ -83,12 +113,21 @@ public class Engine {
         if (command.equals("unmark")) {
             return new Pair<>(Command.UNMARK, rest);
         }
-        return new Pair<>(Command.ADD, line);
+        if (command.equals("todo")) {
+            return new Pair<>(Command.TODO, rest);
+        }
+        if (command.equals("event")) {
+            return new Pair<>(Command.EVENT, rest);
+        }
+        if (command.equals("deadline")) {
+            return new Pair<>(Command.DEADLINE, rest);
+        }
+        return new Pair<>(Command.ERROR, "Unknown command.\n");
     }
 
     public boolean run() {
-        String command = this.scanner.nextLine();
-        Pair<Command, String> pr = this.parseCommand(command.toLowerCase());
+        String line = this.scanner.nextLine();
+        Pair<Command, String> pr = this.parseCommand(line);
         System.out.println("\nD: " + this.getOutput(pr.first(), pr.second()));
         if (pr.first().equals(Command.EXIT)) {
             return false;

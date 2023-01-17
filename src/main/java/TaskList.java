@@ -13,9 +13,17 @@ public class TaskList {
         return lst.size();
     }
 
+    public boolean isEmpty() {
+        return this.size() == 0;
+    }
+
     public String get(int number) {
         int index = number - 1;
         return String.format("\n\t%d) %s\n", number, this.lst.get(index));
+    }
+
+    public String getLast() {
+        return this.get(this.size());
     }
 
     public void addTask(Task task) {

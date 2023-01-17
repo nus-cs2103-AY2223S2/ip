@@ -37,4 +37,17 @@ public class Util {
         }
         return new Pair<>(str.substring(start, end), str.substring(end, str.length()));
     }
+
+    public static String cleanup(String str) {
+        int start = 0;
+        int end = str.length();
+        while (start < str.length() && WS.contains(str.charAt(start))) {
+            ++start;
+        }
+        while (end > 0 && WS.contains(str.charAt(end - 1))) {
+            --end;
+        }
+
+        return str.substring(start, end);
+    }
 }
