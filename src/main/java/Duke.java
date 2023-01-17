@@ -28,19 +28,29 @@ public class Duke {
     public static void add() {
         Scanner input = new Scanner(System.in);
         String cmd;
-        String[] list = new String[100];
+        Task[] list = new Task[100];
         Integer count = 0;
+        Integer num;
         while (true) {
             cmd = input.nextLine();
             if (cmd.equals("bye")) {
                 System.out.println("Buhbyeee, hope to see you again soon <3");
                 return;
             } else if (cmd.equals("list")) {
-                for (int i = 1; i <= count; i++ ) {
-                    System.out.println(i + ". " + list[i-1]);
+                System.out.println("Here are the tasks in your list:");
+                for (int i = 1; i <= count; i++) {
+                    System.out.println(i + "." + list[i - 1].toString());
                 }
+            } else if (cmd.startsWith("mark")) {
+                num = Integer.valueOf(cmd.substring(5));
+                list[num - 1].setDone();
+                System.out.println("Nice! I've marked this task as done:\n  " + list[num - 1].toString());
+            } else if (cmd.startsWith("unmark")) {
+                num = Integer.valueOf(cmd.substring(7));
+                list[num - 1].setUndone();
+                System.out.println("OK, I've marked this task as not done yet:\n  " + list[num - 1].toString());
             } else {
-                list[count] = cmd;
+                list[count] = new Task(cmd);
                 count ++;
                 System.out.println("added: " + cmd);
             }
