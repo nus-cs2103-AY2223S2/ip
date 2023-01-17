@@ -45,6 +45,11 @@ public class ToDoList {
         return res.toString().trim();
     }
 
+    /**
+     * Function to mark a task in the to do list
+     * @param i The index of the task to mark
+     * @return Returns the marked task for printing
+     */
     public Task mark(Integer i) {
         try {
             Task curr = this.toDoList.get(i - 1);
@@ -55,6 +60,11 @@ public class ToDoList {
         }
     }
 
+    /**
+     * Function to unmark a task in the to do list
+     * @param i The index of the task to unmark
+     * @return Returns the unmarked task for printing
+     */
     public Task unmark(Integer i) {
         try {
             Task curr = this.toDoList.get(i - 1);

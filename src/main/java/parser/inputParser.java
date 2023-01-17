@@ -46,6 +46,11 @@ public class InputParser {
         }
     }
 
+    /**
+     * Normalises all the whitespaces in a string
+     * @param s Input string to normalise
+     * @return The normalised string
+     */
     public String normaliseAllWhitespaces(String s) {
         int l = s.length();
         StringBuilder sb = new StringBuilder(l);
@@ -76,6 +81,9 @@ public class InputParser {
         return modified ? sb.toString() : s;
     }
 
+    /**
+     * Some preprocessing to categorise what type of request the user is inputting
+     */
     public void categorisation() {
         String normalisedInput = normaliseAllWhitespaces(input);
         String[] arrStr = normalisedInput.split(" ", 2);
