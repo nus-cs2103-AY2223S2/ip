@@ -19,6 +19,11 @@ public class TaskManager {
     }
 
 
+    public int size() {
+        return taskList.size();
+    }
+
+
     @Override
     public String toString() {
         StringBuilder builder = new StringBuilder();
