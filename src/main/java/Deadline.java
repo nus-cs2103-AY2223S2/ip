@@ -9,15 +9,6 @@ public class Deadline extends Task {
     }
 
     @Override
-    public boolean isValid() {
-        if (taskName.length() == 0) {
-            return false;
-        }
-        return true;
-    }
-
-
-    @Override
     public String toString() {
         return "[D]" + super.toString() + " (by: " + deadline + ")";
     }

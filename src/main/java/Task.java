@@ -1,4 +1,4 @@
-public class Task {
+abstract class Task {
     private String taskName;
     private boolean isDone;
 
@@ -20,10 +20,6 @@ public class Task {
 
     public void unmark() {
         this.isDone = false;
-    }
-
-    public boolean isValid() {
-        return false;
     }
 
     public String getTaskName() {

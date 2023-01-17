@@ -8,14 +8,6 @@ public class TODO extends Task {
     }
 
     @Override
-    public boolean isValid() {
-        if (this.task.length() > 0) {
-            return true;
-        }
-        return false;
-    }
-
-    @Override
     public String toString() {
         return "[T]" + super.toString();
     }
