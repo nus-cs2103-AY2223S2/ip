@@ -4,6 +4,8 @@ import java.util.function.Function;
 
 public enum Command {
     GREET(input -> "Kon aqua~~"),
+    ADD(new AddTaskFunc()),
+    LIST(new ListTaskFunc()),
     BYE(input -> "Otsu aqua~~");
 
 
