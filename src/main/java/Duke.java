@@ -1,5 +1,10 @@
 import java.util.Scanner;
-import parser.inputParser;
+
+import exception.MissingArgumentException;
+import parser.InputParser;
+
+import response.Response;
+import storage.ToDoList;
 
 public class Duke {
     /**
@@ -21,17 +26,22 @@ public class Duke {
         Duke.print(intro);
 
         Scanner scanner = new Scanner(System.in);  // Create a Scanner object
+        ToDoList toDoList = new ToDoList();
 
         while (true) {
             String req = scanner.nextLine();  // Read user req
-            inputParser input = new inputParser(req);
-            String out = input.parse();
-
-            if (out.equalsIgnoreCase("bye")) {
+            if (req.equalsIgnoreCase("bye")) {
                 break;
             }
 
-            Duke.print(out);
+            InputParser input = new InputParser(req);
+            try {
+                Response res = input.parse();
+                String out = res.getMessage(toDoList);
+                Duke.print(out);
+            } catch (MissingArgumentException err) {
+                Duke.print(err.toString());
+            }
         }
         Duke.print(extStr);
     }

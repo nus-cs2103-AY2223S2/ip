@@ -1,18 +1,29 @@
 package parser;
 
-public class inputParser {
-    private String input;
+import exception.MissingArgumentException;
+import response.ListResponse;
+import response.Response;
+import response.CreateResponse;
 
-    public inputParser(String input) {
+public class InputParser {
+    private String input;
+    private String inputType;
+
+    public InputParser(String input) {
         this.input = input;
     }
 
-    public String parse() {
+    public Response parse() {
         switch (this.input.toLowerCase()) {
             case "":
-                return "Please enter an input for me to echo!";
+                throw new MissingArgumentException("Please enter an input for me to parse!");
+            case "bye":
+                break;
+            case "list":
+                return new ListResponse();
             default:
-                return this.input;
+                return new CreateResponse(this.input);
         }
+        return null;
     }
 }
