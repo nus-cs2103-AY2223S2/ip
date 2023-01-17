@@ -13,14 +13,19 @@ public class Duke {
         System.out.println("Hello from\n" + logo);
         Scanner sc = new Scanner(System.in);
 
+        printer("Hello! I'm Duke\n      What can I do for grades?");
+
         while (sc.hasNext()) {
             String input = sc.nextLine();
-            System.out.println("    " + line);
-            System.out.println("      " + input);
-            System.out.println("    " + line);
-            System.out.println();
+            printer(input);
         }
-
         sc.close();
+    }
+
+    private static void printer(String toPrint) {
+        System.out.println("    " + line);
+        System.out.println("      " + toPrint);
+        System.out.println("    " + line);
+        System.out.println();
     }
 }
