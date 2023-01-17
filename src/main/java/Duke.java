@@ -24,20 +24,50 @@ public class Duke {
                 }
             }
             else if (userInput.contains("todo")) {
-                store[Task.noOfTasks] = new ToDo(userInput.substring(5, userInput.length()));
-
+                try {
+                    store[Task.noOfTasks] = new ToDo(userInput.substring(5, userInput.length()));
+                } catch(Exception e) {
+                    throw new DukeException("The description of a todo cannot be empty.");
+                }
             }
             else if (userInput.contains("deadline")) {
-                String trimmed = userInput.substring(9, userInput.length());
-                String description = trimmed.substring(0, trimmed.indexOf("/") - 1);
-                String deadline = trimmed.substring((trimmed.indexOf("by")) + 3, trimmed.length());
+                String trimmed = "";
+                String description = "";
+                String deadline = "";
+                try {
+                    trimmed = userInput.substring(9, userInput.length());
+                    description = trimmed.substring(0, trimmed.indexOf("/") - 1);
+                } catch(Exception e) {
+                    throw new DukeException("The description of a deadline cannot be empty.");
+                }
+                try {
+                    deadline = trimmed.substring((trimmed.indexOf("by")) + 3, trimmed.length());
+                } catch(Exception e) {
+                    throw new DukeException("The date of a deadline cannot be empty.");
+                }
                 store[Task.noOfTasks] = new Deadline(description, deadline);
             }
             else if (userInput.contains("event")) {
-                String trimmed = userInput.substring(6, userInput.length());
-                String description = trimmed.substring(0, trimmed.indexOf("/from") - 1);
-                String from = trimmed.substring(trimmed.indexOf("/from") + 6, trimmed.indexOf("/to") - 1);
-                String to = trimmed.substring(trimmed.indexOf("/to") + 4, trimmed.length());
+                String trimmed = "";
+                String description = "";
+                String from = "";
+                String to = "";
+                try {
+                    trimmed = userInput.substring(6, userInput.length());
+                    description = trimmed.substring(0, trimmed.indexOf("/from") - 1);
+                } catch (Exception e) {
+                    throw new DukeException("The description of a event cannot be empty.");
+                }
+                try {
+                    from = trimmed.substring(trimmed.indexOf("/from") + 6, trimmed.indexOf("/to") - 1);
+                } catch (Exception e) {
+                    throw new DukeException("The start time of a event cannot be empty.");
+                }
+                try {
+                    to = trimmed.substring(trimmed.indexOf("/to") + 4, trimmed.length());
+                } catch (Exception e) {
+                    throw new DukeException("The end time of a event cannot be empty.");
+                }
                 store[Task.noOfTasks] = new Event(description, from, to);
             }
             else if (userInput.contains("mark")) {
@@ -46,10 +76,7 @@ public class Duke {
                 // handle errors out of range
                 if (index < 0 || index >= Task.noOfTasks) {
                     int display = index + 1;
-                    System.out.println("Task " + display + " does not exist.");
-                    myObj = new Scanner(System.in);
-                    userInput = myObj.nextLine();
-                    continue;
+                    throw new DukeException("Task " + display + " does not exist.");
                 }
                 else if (userInput.contains("unmark")) {
                     store[index].markAsUndone();
@@ -61,13 +88,13 @@ public class Duke {
                 System.out.println(store[index].toString());
             }
             else {
-                throw new DukeException("OOPS!!! I'm sorry, but I don't know what that means :-(");
+                throw new DukeException("I'm sorry, but I don't know what that means :-(");
             }
             myObj = new Scanner(System.in);
             userInput = myObj.nextLine();
         }
 
-        // prints exist statement
+        // prints exit statement
         System.out.println("Bye. Hope to see you again soon!");
     }
 }
