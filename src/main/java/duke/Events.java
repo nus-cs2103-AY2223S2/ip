@@ -1,9 +1,9 @@
 package duke;
-/*
+
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.time.temporal.ChronoUnit;
-*/
+
 
 class Events extends Task {
 
@@ -22,12 +22,12 @@ class Events extends Task {
         this.to = to;
     }
     
-    /*
+    
     String localDateParser(String date) {
         LocalDate localDate = LocalDate.parse(date);
         return localDate.format(DateTimeFormatter.ofPattern("MMM dd yyyy"));
     }
-    */
+    
 
     @Override
     Events markAsDone() {
@@ -41,6 +41,6 @@ class Events extends Task {
 
     @Override
     public String toString() {
-        return "[E]" + super.toString() + "(from: " + /*localDateParser(from)*/ from + ")" + "(to: " + /*localDateParser(to)*/ to + ")";
+        return "[E]" + super.toString() + "(from: " + localDateParser(from) + ")" + "(to: " + localDateParser(to) + ")";
     }
 }
