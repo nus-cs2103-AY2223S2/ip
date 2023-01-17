@@ -1,14 +1,10 @@
-public class Task {
-    private final String desc;
-    private final boolean done;
+public abstract class Task {
+    protected final String desc;
+    protected final boolean done;
     
-    private Task(String desc, boolean done) {
+    protected Task(String desc, boolean done) {
         this.desc = desc;
         this.done = done;
-    }
-
-    public Task(String desc) {
-        this(desc, false);
     }
 
     @Override
@@ -21,11 +17,7 @@ public class Task {
         return String.format("[%c] %s", mark, this.desc);
     }
 
-    public Task markDone() {
-        return new Task(this.desc, true);
-    }
+    public abstract Task markDone();
 
-    public Task markNotDone() {
-        return new Task(this.desc, false);
-    }
+    public abstract Task markNotDone();
 }

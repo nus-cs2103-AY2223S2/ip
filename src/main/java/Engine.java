@@ -27,9 +27,9 @@ public class Engine {
             case EXIT:
                 return "Bye...Why do you even need me?\n";
             case LIST:
-                return this.taskList.toString();
+                return "Ugh" + this.taskList.toString();
             case ADD:
-                this.taskList.addTask(new Task(args));
+                this.taskList.addTask(new Todo(args));
                 return "added-> "  + args + '\n';
             case MARK:
                 try {
