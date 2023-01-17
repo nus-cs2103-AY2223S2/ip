@@ -1,8 +1,5 @@
-import java.lang.reflect.Array;
-import java.util.Arrays;
-
 /**
- * Main Formatter class to format the UI for the Duke chatbot in the terminal.
+ * Main Formatter class to format the UI for the Duke chat-bot in the terminal.
  *
  * @author SeeuSim
  * AY2223-S2 CS2103T
@@ -10,7 +7,8 @@ import java.util.Arrays;
 abstract public class DukeFormatter {
     private static String MASCOT = "\uD83D\uDE3A: ";
     private static String INDENT = "    ";
-    private static String LINE = "____________________________________________________________";
+    private static String LINE =
+            "____________________________________________________________";
 
     private static void line() {
         System.out.println(INDENT + LINE);
@@ -36,6 +34,12 @@ abstract public class DukeFormatter {
         System.out.print("\n");
     }
 
+    /**
+     * Given an exception that occurred, formats the UI to indicate the error
+     * to the user.
+     *
+     * @param error The error that occurred.
+     */
     public static void error(Exception error) {
         line();
         System.out.println(MASCOT + "\u001B[31m" + error.getMessage() + "\u001B[0m");

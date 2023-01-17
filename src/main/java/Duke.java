@@ -1,7 +1,4 @@
-import java.util.Arrays;
 import java.util.Scanner;
-import java.util.function.Consumer;
-import java.util.function.UnaryOperator;
 
 /**
  * The main class to run the Duke App.
@@ -10,6 +7,12 @@ import java.util.function.UnaryOperator;
  * AY2223-S2 CS2103T
  */
 public class Duke {
+    /**
+     * The main function that runs the Duke app.
+     *
+     * @param args Not used as of now. Used mainly to add command line
+     *             arguments to the initial app run command.
+     */
     public static void main(String[] args) {
         String logo = " ____        _        \n"
                 + "|  _ \\ _   _| | _____ \n"
@@ -21,6 +24,9 @@ public class Duke {
         operate();
     }
 
+    /**
+     * The configurable greeting message for the Duke app.
+     */
     private static void greet() {
         String name = "SOCCat";
         String greeting = String.format("Hello, I'm %s", name);
@@ -31,10 +37,25 @@ public class Duke {
         );
     }
 
+    /**
+     * The cleanup function for the Duke app environment.
+     * Closes the provided scanner object.
+     *
+     * @param sc The command line scanner to close.
+     */
     private static void cleanup(Scanner sc) {
         sc.close();
     }
 
+    /**
+     * The main function for parsing commands given to the Duke app via the
+     * command line.
+     *
+     * @param cmd The command to be parsed.
+     * @param ds The store instance to store any tasks provided via the
+     *           command.
+     * @param sc The scanner object to scan the command line for inputs.
+     */
     private static void parseCommand(String cmd, DukeStore ds, Scanner sc) {
         String[] tokens = cmd.split(" ", 2);
         if (tokens.length == 1) {
@@ -45,6 +66,13 @@ public class Duke {
         twoArgCommand(tokens[0], tokens[1], ds);
     }
 
+    /**
+     * The main function for parsing commands with one word.
+     *
+     * @param cmd The command given.
+     * @param ds The store instance to store tasks.
+     * @param sc The scanner object to scan the command line for inputs.
+     */
     private static void operateSimpleCommand(String cmd, DukeStore ds, Scanner sc) {
         switch (cmd) {
             case "bye":
@@ -65,6 +93,13 @@ public class Duke {
         }
     }
 
+    /**
+     * The main function for parsing commands of the following format: `"{command} {param}"`
+     *
+     * @param cmd The command given.
+     * @param param The parameter provided to the command.
+     * @param ds The store instance to store tasks.
+     */
     private static void twoArgCommand(String cmd, String param, DukeStore ds) {
         switch (cmd) {
             case "mark":
@@ -104,6 +139,12 @@ public class Duke {
         }
     }
 
+    /**
+     * Given a valid index in the store, marks a task as done.
+     *
+     * @param idx The index of the task in the store.
+     * @param ds The store instance to store tasks.
+     */
     private static void mark(int idx, DukeStore ds) {
         try {
             ds.mark(idx - 1);
@@ -112,6 +153,12 @@ public class Duke {
         }
     }
 
+    /**
+     * Given a valid index in the store, marks a task as undone.
+     *
+     * @param idx The index of the task in the store.
+     * @param ds The store instance to store tasks.
+     */
     private static void unMark(int idx, DukeStore ds) {
         try {
             ds.unMark(idx - 1);
@@ -120,6 +167,12 @@ public class Duke {
         }
     }
 
+    /**
+     * Given a {@code todo} task, adds it to the store.
+     *
+     * @param task The {@code todo} task to be added.
+     * @param ds The store instance to store tasks.
+     */
     private static void todo(String task, DukeStore ds) {
         TaskTodo todo = new TaskTodo(task);
         try {
@@ -129,10 +182,15 @@ public class Duke {
         }
     }
 
+    /**
+     * Given a deadline task command, adds the deadline task to the store.
+     *
+     * @param command The deadline command.
+     * @param ds The store instance to store tasks.
+     */
     private static void deadline(String command, DukeStore ds) {
         String[] tokens = command.split(" /by ", 2);
         if (tokens.length != 2) {
-            System.out.println(Arrays.toString(tokens));
             DukeFormatter.error(new Exception(
                     "Usage: deadline {task} /by {deadline}"
             ));
@@ -147,6 +205,12 @@ public class Duke {
         }
     }
 
+    /**
+     * Given an event task command, adds the event task to the store.
+     *
+     * @param command The event task command.
+     * @param ds The store instance to store tasks.
+     */
     private static void event(String command, DukeStore ds) {
         String[] tokens = command.split(" /from ", 2);
         if (tokens.length != 2) {
