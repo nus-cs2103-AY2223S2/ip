@@ -6,6 +6,7 @@ public enum Command {
     GREET(input -> "Kon aqua~~"),
     TODO(new AddTaskFunc(new ToDoTaskCreator())),
     DEADLINE(new AddTaskFunc(new DeadlineTaskCreator())),
+    EVENT(new AddTaskFunc(new EventTaskCreator())),
     LIST(new ListTaskFunc()),
     MARK(new MarkTaskFunc(true)),
     UNMARK(new MarkTaskFunc(false)),
