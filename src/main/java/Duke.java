@@ -10,12 +10,15 @@ public class Duke {
     private static final String EMPTY_LIST_STRING = "Hey, the list is empty!";
     private static final String MARK_DONE_STRING = "Nice! I've marked this task as done\n       ";
     private static final String UNMARK_DONE_STRING = "OK, I've marked this task as not done yet\n       ";
+    private static final String DELETE_DONE_STRING = "Noted. I've removed this task:\n       ";
+    private static final String TASK_COUNT_1_STRING = "Now you have ";
+    private static final String TASK_COUNT_2_STRING = " tasks in the list.";
     private static final String NO_INT_ERR_STRING = "Hey, you did not enter any numbers";
     private static final String OUT_RANGE_ERR_STRING = "Hey, the number you've entered is not vaild";
     private static final String UNKNOWN_ERR_STRING = "Hey, an unknown error happended, oh no";
     private static final String EMPTY_ERR_STRING = "Hey, ☹ The description of a todo cannot be empty.";
     private static final String UNKNOWN_CMD_ERR_STRING = "Hey, ☹ I'm sorry, but I don't know what that means :-(";
-    private static final String MISSING_ARGS_STRING = "Hey, ☹ I'm sorry, but you are missing some arguments";
+    private static final String MISSING_ARGS_ERR_STRING = "Hey, ☹ I'm sorry, but you are missing some arguments";
 
     public static void main(String[] args) {
         String logo = " ____        _        \n"
@@ -79,7 +82,7 @@ public class Duke {
                             printer("added: " + newTask);
                         } else if (input.startsWith("deadline ") || input.startsWith("deadline")) {
                             if (input.indexOf("/by") == -1) {
-                                throw new DukeException(MISSING_ARGS_STRING);
+                                throw new DukeException(MISSING_ARGS_ERR_STRING);
                             }
                             String title = input.substring("deadline".length(), input.indexOf("/by"));
                             if (input.startsWith("deadline ")) {
@@ -94,7 +97,7 @@ public class Duke {
                             printer("added: " + newTask);
                         } else if (input.startsWith("event ") || input.startsWith("event")) {
                             if (input.indexOf("/from") == -1 || input.indexOf("/to") == -1) {
-                                throw new DukeException(MISSING_ARGS_STRING);
+                                throw new DukeException(MISSING_ARGS_ERR_STRING);
                             }
                             String title = input.substring("event".length(), input.indexOf("/from"));
                             if (input.startsWith("event ")) {
@@ -108,6 +111,17 @@ public class Duke {
                                     input.substring(input.indexOf("/to")).replace("/to ", ""));
                             tasksList.add(newTask);
                             printer("added: " + newTask);
+                        } else if (input.startsWith("delete ") || input.startsWith("delete") || input.startsWith("del ")
+                                || input.startsWith("del")) {
+                            int taskNo = getNumbers(input) - 1;
+                            String returnString = DELETE_DONE_STRING;
+                            returnString += tasksList.get(taskNo);
+                            tasksList.remove(taskNo);
+                            returnString += "\n      ";
+                            returnString += TASK_COUNT_1_STRING;
+                            returnString += tasksList.size();
+                            returnString += TASK_COUNT_2_STRING;
+                            printer(returnString);
                         } else {
                             throw new DukeException(UNKNOWN_CMD_ERR_STRING);
                         }
