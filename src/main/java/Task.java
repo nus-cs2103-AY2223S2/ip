@@ -1,4 +1,4 @@
-public class Task {
+public abstract class Task {
     private boolean done;
     private String description;
     public Task(String description) {  
@@ -16,5 +16,8 @@ public class Task {
     }
     public String getDescription(){
         return this.description;
+    }
+    public char getType() {
+        return 'a';
     }
 }
