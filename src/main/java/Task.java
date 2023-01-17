@@ -27,4 +27,8 @@ public class Task {
     public String toString() {
         return marking() + this.name;
     }
+
+    public String toWrite() {
+        return (isCompleted ? 1 : 0) + " | " + this.name;
+    }
 }

@@ -14,4 +14,10 @@ public class Events extends Task {
                 + " (from: "  + this.start
                 + " to: " + this.end + ")";
     }
+
+    @Override
+    public String toWrite() {
+        return "E | " + super.toWrite() + " | " + this.start
+                + " | " + this.end + "\n";
+    }
 }

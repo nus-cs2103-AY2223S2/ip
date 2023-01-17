@@ -11,4 +11,9 @@ public class Deadlines extends Task {
         return "[D]" + super.toString()
                 + " (by: " + this.end + ")";
     }
+
+    @Override
+    public String toWrite() {
+        return "D | " + super.toWrite() + " | " + this.end + "\n";
+    }
 }
