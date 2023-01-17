@@ -24,10 +24,12 @@ public class Duke {
         Duke.printWithDecorations(bye);
     }
 
-    private static void displayTasks(String[] tasks, int numTasks) {
+    private static void displayTasks(Task[] tasks, int numTasks) {
         StringBuilder sb = new StringBuilder();
         for (int i = 0; i < numTasks; i++) {
-            sb.append(String.format("%d. %s\n", i+1, tasks[i]));
+            String icon = tasks[i].getStatusIcon();
+            String name = tasks[i].getTaskName();
+            sb.append(String.format("%d.%s %s\n",i+1,icon,name));
         }
         Duke.printWithDecorations(sb.toString());
     }
@@ -35,7 +37,7 @@ public class Duke {
     public static void main(String[] args) {
         Duke.welcome();
 
-        String[] tasks = new String[100];
+        Task[] tasks = new Task[100];
         int numTasks = 0;
 
         Scanner sc = new Scanner(System.in);
@@ -44,9 +46,13 @@ public class Duke {
 
             if (input.equals("list")) {
                 Duke.displayTasks(tasks, numTasks);
+            } else if (input.matches("\\bmark\\s\\d+")) { // regex: \bmark\s\d+, need \b to not detect unmark
+                // do stuff
+            } else if (input.matches("\\bunmark\\s\\d+")) {
+                // do stuff
             } else if (numTasks < 100) {
                 Duke.printWithDecorations("added: " + input);
-                tasks[numTasks] = input;
+                tasks[numTasks] = new Task(input);
                 numTasks++;
             } else {
                 Duke.printWithDecorations("Not enough slots!");
