@@ -27,7 +27,7 @@ public class TaskList {
         StringBuilder taskList = new StringBuilder();
 
         for (int i = 1; i <= this.tasks.size(); i++) {
-            taskList.append(i + ": " + this.tasks.get(i - 1).getTask() + "\n");
+            taskList.append(i + ": " + this.tasks.get(i - 1) + "\n");
         }
 
         return taskList.toString();

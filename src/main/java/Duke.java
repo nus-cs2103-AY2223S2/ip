@@ -50,6 +50,9 @@ public class Duke {
         sc.close();
     }
 
+    /**
+     * Function to handle the user's request
+     */
     public static void handleRequest() {
         Scanner sc = new Scanner(System.in);
         String input = sc.nextLine();

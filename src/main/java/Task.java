@@ -1,6 +1,7 @@
 public class Task {
 
     private String task;
+    private boolean completed;
 
     /**
      * Constructor to create new task
@@ -8,13 +9,26 @@ public class Task {
      */
     public Task(String task) {
         this.task = task;
+        this.completed = false;
     }
 
     /**
-     * Getter method to retrieve task
-     * @return
+     * Mark the task as complete
      */
-    public String getTask() {
-        return this.task;
+    public void markComplete() {
+        this.completed = true;
+    }
+
+    /**
+     * Unmark the task to be incomplete
+     */
+    public void unmarkComplete() {
+        this.completed = false;
+    }
+
+    @Override
+    public String toString() {
+        String statusIcon = completed ? "X" : " ";
+        return "[" + statusIcon + "] " + this.task;
     }
 }
