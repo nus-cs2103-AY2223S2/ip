@@ -1,12 +1,15 @@
-import java.util.Arrays;
+import java.util.ArrayList;
+import java.util.List;
 
 public class Roody {
     private Task[] list;
     private int index;
+    private List<String> printBuffer;
 
     public Roody(){
         // Assumed no more than 100 tasks
         this.list = new Task[100];
+        this.printBuffer = new ArrayList<String>();
         this.index = 0;
     }
 
@@ -15,12 +18,25 @@ public class Roody {
         System.out.println("____________________________________________________________");
     }
 
+    // Repeats the input 
+    private void speak(List<String> inputs) {
+        line();
+        inputs.forEach(x -> System.out.println(x));
+        line();
+        inputs.clear();
+    }
+
     // Initial Greeting
-    private void greet() {
-        line();
-        System.out.println("Hello, I'm Roody!");
-        System.out.println("What can I do for you?");
-        line();
+    public void greet() {
+        this.printBuffer.add("Hello, I'm Roody!");
+        this.printBuffer.add("What can I do for you?");
+        speak(this.printBuffer);
+    }
+
+    // final greeting
+    public void bye() {
+        this.printBuffer.add("Bye. Hope to see you again soon!");
+        speak(this.printBuffer);
     }
     
     // Stores input to string
@@ -28,19 +44,12 @@ public class Roody {
         Task task = new Task(input);
         this.list[this.index] = task;
         this.index++;
-        speak("added: " + input);
-    }
-
-    // Repeats the input 
-    private void speak(String input) {
-        line();
-        System.out.println(input);
-        line();
+        printBuffer.add("added: " + input); 
+        speak(this.printBuffer);
     }
 
     // Prints entire list in this.list
     private void printList() {
-        line();
         int count = 0;
         int listIndex = 0;
         StringBuilder stringBuilder = new StringBuilder();
@@ -57,42 +66,34 @@ public class Roody {
                 stringBuilder.append(" ] ");
             }
             stringBuilder.append(this.list[count].getDescription());
-            System.out.println(stringBuilder.toString());
+            printBuffer.add(stringBuilder.toString());
             
             // Clears and updates values
             stringBuilder.setLength(0);
             count++;
         }
-        line();
+        speak(this.printBuffer);
     }
 
-    private void mark(String index) {
+    // toggles completion status of tasks
+    private void complete(String index, boolean complete) {
         int taskIndex = Integer.parseInt(index) - 1; 
-        line();
         if (taskIndex < this.list.length && this.list[taskIndex] == null) {
-            System.out.println("Sorry, this task dosen't exist");
+            printBuffer.add("Sorry, this task dosen't exist");
+            speak(this.printBuffer);
         } else {
             Task task = this.list[taskIndex];
-            task.setDone();
-            System.out.println("Nice! I've marked this task as done:");
-            System.out.println("[X] " + task.getDescription());
+            if (complete) {
+                task.setDone();
+                printBuffer.add("Nice! I've marked this task as done:");
+                printBuffer.add("[X] " + task.getDescription());
+            } else {
+                task.setUnDone();
+                printBuffer.add("OK, I've marked this task as not done yet:");
+                printBuffer.add("[ ] " + task.getDescription());
+            }
+            speak(this.printBuffer);
         }
-        line();
-    }
-
-    // Current issue: after marking/unmarking, i'm able to add "list" to list
-    private void unmark(String index) {
-        int taskIndex = Integer.parseInt(index) - 1; 
-        line();
-        if (taskIndex < this.list.length && this.list[taskIndex] == null) {
-            System.out.println("Sorry, this task dosen't exist");
-        } else {
-            Task task = this.list[taskIndex];
-            task.setUnDone();
-            System.out.println("OK, I've marked this task as not done yet:");
-            System.out.println("[ ] " + task.getDescription());
-        }
-        line();
     }
 
     public static void main(String[] args) {
@@ -115,13 +116,13 @@ public class Roody {
                 roody.printList();
             // Checks for second input
             } else if (inputs.length > 1 && inputs[0].equals("mark")) {
-                roody.mark(inputs[1]);
+                roody.complete(inputs[1], true);
             } else if (inputs.length > 1 && inputs[0].equals("unmark")) {
-                roody.unmark(inputs[1]);
+                roody.complete(inputs[1], false);
             } else {
                 roody.addToList(input);
             }
         }
-        roody.speak("Bye. Hope to see you again soon!");
+        roody.bye();
     }
 }
