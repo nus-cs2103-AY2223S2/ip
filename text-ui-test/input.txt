@@ -24,4 +24,5 @@ event
 todo
 deadline   /by 2pm
 event   /from 2pm /to 8pm
+delete 50
 bye
