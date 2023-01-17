@@ -21,8 +21,10 @@ list
 unmark 2
 list
 mark 3
-unmark 4
+unmark task
 unmark 1
+list
+delete 2
 list
 banana
 baaaanan
