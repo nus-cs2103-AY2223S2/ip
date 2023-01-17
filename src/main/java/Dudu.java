@@ -15,21 +15,32 @@ public class Dudu {
         System.out.println(GREETING);
         while (scanner.hasNext()) {
             String input = scanner.nextLine();
-            Task task = new Task(input);
+            String[] inputArr = input.split(" ");
             System.out.println(DIVIDER);
-            if (input.equals("bye")) {
-
+            if (inputArr[0].equals("bye")) {
                 System.out.println("Bye. Hope to see you again soon!");
                 break;
-            } else if (input.equals("list")) {
+            } else if (inputArr[0].equals("list")) {
                 for (int i = 0; i < list.size(); i++) {
-                    System.out.println(i+1 + ". " + list.get(i).getName());
+                    Task currTask = list.get(i);
+                    System.out.println(i+1 + ".[" + currTask.getStatusIcon() + "] " + currTask.getName());
                 }
+            } else if (inputArr[0].equals("mark")) {
+                int index = Integer.parseInt(inputArr[1]) -1;
+                Task currTask = list.get(index);
+                currTask.markAsDone();
+                System.out.println("Nice! I've marked this task as done:");
+                System.out.println("[" + currTask.getStatusIcon() + "] " + currTask.getName());
+            } else if (inputArr[0].equals("unmark")) {
+                int index = Integer.parseInt(inputArr[1]) -1;
+                Task currTask = list.get(index);
+                currTask.markAsUndone();
+                System.out.println("OK, I've marked this task as not done yet:");
+                System.out.println("[" + currTask.getStatusIcon() + "] " + currTask.getName());
             } else {
-//                System.out.println(DIVIDER);
+                Task task = new Task(input);
                 list.add(task);
                 System.out.println("added: " + task.getName());
-//                System.out.println(DIVIDER);
             }
             System.out.println(DIVIDER);
         }
