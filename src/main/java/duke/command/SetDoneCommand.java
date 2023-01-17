@@ -65,7 +65,7 @@ public abstract class SetDoneCommand implements Command {
         }
 
         if (index >= tasks.size() || index < 0) {
-            String message = String.format("The index of the task to %s must correspond to an existing task.",
+            String message = String.format("The task to %s must exist.",
                     getCommand());
             throw new DukeException(message);
         }
