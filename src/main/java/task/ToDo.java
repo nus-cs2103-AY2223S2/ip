@@ -7,6 +7,16 @@ public class ToDo extends Task {
         super(name);
     }
 
+    protected ToDo(Task task) {
+        super(task);
+    }
+
+
+    @Override
+    public ToDo mark(boolean isDone) {
+        return new ToDo(super.mark(isDone));
+    }
+
 
     @Override
     public String toString() {
