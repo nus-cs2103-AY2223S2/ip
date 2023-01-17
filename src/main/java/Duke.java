@@ -4,7 +4,8 @@ import java.util.Scanner;
 public class Duke {
     public static void main(String[] args) {
         greet();
-        echo();
+        // echo();
+        handleRequest();
         exit();
     }
 
@@ -30,7 +31,7 @@ public class Duke {
         final String intro = "Hola! Soy \n";
         final String icebreaker = "What can I do for you?";
         System.out.println(intro + logo + icebreaker);
-        System.out.println("____________________________________________________________");
+        System.out.println("________________________________________________________________");
         System.out.println();
     }
 
@@ -45,6 +46,26 @@ public class Duke {
             printRes(input);
             input = sc.nextLine();
         }
+
+        sc.close();
+    }
+
+    public static void handleRequest() {
+        Scanner sc = new Scanner(System.in);
+        String input = sc.nextLine();
+        TaskList tasks = new TaskList();
+
+        while(!input.equalsIgnoreCase("bye")) {
+            if (input.equalsIgnoreCase("list")) {
+                printRes(tasks.getTaskList());
+            } else {
+                tasks.addTask(input);
+                String res = "added: " + input;
+                printRes(res);
+            }
+            input = sc.nextLine();
+        }
+
         sc.close();
     }
 
