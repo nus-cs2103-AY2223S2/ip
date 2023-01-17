@@ -45,7 +45,7 @@ public class Duke {
                     break;
                 }
                 case ("list"): {
-                    System.out.println(this.formatString("Here are the tasks in your list: \n" + this.formatList(userTasks)));
+                    System.out.println(this.formatString("Here are the tasks in your list:\n" + this.formatList(userTasks)));
                     break;
                 }
                 case ("mark"): {
@@ -53,7 +53,7 @@ public class Duke {
                     int index = Integer.parseInt(i) - 1;
                     Task t = userTasks.get(index);
                     t.markAsDone();
-                    System.out.println(this.formatString("Nice! I've marked this task as done: \n" + t));
+                    System.out.println(this.formatString("Nice! I've marked this task as done:\n" + t));
                     break;
                 }
                 case ("unmark"): {
@@ -61,12 +61,41 @@ public class Duke {
                     int index = Integer.parseInt(i) - 1;
                     Task t = userTasks.get(index);
                     t.unmarkAsDone();
-                    System.out.println(this.formatString("OK, I've marked this task as not done yet: \n" + t));
+                    System.out.println(this.formatString("OK, I've marked this task as not done yet:\n" + t));
+                    break;
+                }
+                case ("todo"): {
+                    String info = arr[1];
+                    Task t = new ToDo(info);
+                    userTasks.add(t);
+                    String numTasks = "Now you have " + userTasks.size() + " tasks in the list.";
+                    System.out.println(this.formatString("Got it. I've added this task:\n" + t + "\n" + numTasks));
+                    break;
+                }
+                case ("deadline"): {
+                    String info = arr[1];
+                    String temp[] = info.split("/", 2);
+                    String description = temp[0].trim();
+                    String by = temp[1].split(" ", 2)[1].trim();
+                    Task t = new Deadline(description, by);
+                    userTasks.add(t);
+                    String numTasks = "Now you have " + userTasks.size() + " tasks in the list.";
+                    System.out.println(this.formatString("Got it. I've added this task:\n" + t + "\n" + numTasks));
+                    break;
+                }
+                case ("event"): {
+                    String info = arr[1];
+                    String temp[] = info.split("/", 3);
+                    String description = temp[0].trim();
+                    String from = temp[1].split(" ", 2)[1].trim();
+                    String to = temp[2].split(" ", 2)[1].trim();
+                    Task t = new Event(description, from, to);
+                    userTasks.add(t);
+                    String numTasks = "Now you have " + userTasks.size() + " tasks in the list.";
+                    System.out.println(this.formatString("Got it. I've added this task:\n" + t + "\n" + numTasks));
                     break;
                 }
                 default: {
-                    Task t = new Task(line);
-                    userTasks.add(t);
                     System.out.println(this.formatString(line));
                     break;
                 }
