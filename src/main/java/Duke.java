@@ -10,31 +10,33 @@ public class Duke {
     private static final String MARK_DONE_STRING = "Nice! I've marked this task as done\n       ";
     private static final String UNMARK_DONE_STRING = "OK, I've marked this task as not done yet\n       ";
     private static final String NO_INT_ERR_STRING = "Hey, you did not enter any numbers";
+    private static final String OUT_RANGE_ERR_STRING = "Hey, the number you've entered is not vaild";
+    private static final String UNKNOWN_ERR_STRING = "Hey, an unknown error happended, oh no";
 
     public static void main(String[] args) {
         String logo = " ____        _        \n"
-                + "|  _ \\ _   _| | _____ \n"
-                + "| | | | | | | |/ / _ \\\n"
+                + "|  _ / _   _| | _____ \n"
+                + "| | | | | | | |/ / _ /\n"
                 + "| |_| | |_| |   <  __/\n"
-                + "|____/ \\__,_|_|\\_\\___|\n";
+                + "|____/ /__,_|_|/_/___|\n";
         System.out.println("Hello from\n" + logo);
         Scanner sc = new Scanner(System.in);
 
         printer(WELCOME_STRING);
 
-        ArrayList<Tasks> todoList = new ArrayList<Tasks>(100);
+        ArrayList<Task> tasksList = new ArrayList<Task>(100);
 
         while (sc.hasNext()) {
             String input = sc.nextLine();
             boolean end = false;
             switch (input) {
                 case "list":
-                    if (todoList.size() == 0) {
+                    if (tasksList.size() == 0) {
                         printer(EMPTY_LIST_STRING);
                     } else {
                         String toPrint = "";
-                        for (int i = 0; i < todoList.size(); i++) {
-                            toPrint += ((i + 1) + ". " + todoList.get(i)) + "\n      ";
+                        for (int i = 0; i < tasksList.size(); i++) {
+                            toPrint += ((i + 1) + "." + tasksList.get(i)) + "\n      ";
                         }
                         printer(toPrint.substring(0, toPrint.length() - 7));
                     }
@@ -48,23 +50,42 @@ public class Duke {
                     printer(END_STRING);
                     break;
                 default:
-                    if (input.contains("mark")) {
+                    if (input.startsWith("mark")) {
                         try {
                             int taskNo = getNumbers(input) - 1;
-                            if (input.contains("unmark")) {
-                                todoList.get(taskNo).unmarkAsDone();
-                                printer(UNMARK_DONE_STRING + todoList.get(taskNo));
+                            if (input.startsWith("unmark")) {
+                                tasksList.get(taskNo).unmarkAsDone();
+                                printer(UNMARK_DONE_STRING + tasksList.get(taskNo));
                             } else {
-                                todoList.get(taskNo).markAsDone();
-                                printer(MARK_DONE_STRING + todoList.get(taskNo));
+                                tasksList.get(taskNo).markAsDone();
+                                printer(MARK_DONE_STRING + tasksList.get(taskNo));
                             }
                         } catch (Exception e) {
-                            printer(NO_INT_ERR_STRING);
+                            System.out.println(e);
+                            if (e instanceof InputMismatchException) {
+                                printer(NO_INT_ERR_STRING);
+                            } else if (e instanceof IndexOutOfBoundsException) {
+                                printer(OUT_RANGE_ERR_STRING);
+                            } else {
+                                printer(UNKNOWN_ERR_STRING);
+                            }
                         }
                         break;
-                    } else {
-                        todoList.add(new Tasks(input));
-                        printer("added: " + input);
+                    } else if (input.startsWith("todo ")) {
+                        Task newTask = new Todo(input.substring("todo ".length()));
+                        tasksList.add(newTask);
+                        printer("added: " + newTask);
+                    } else if (input.startsWith("deadline ")) {
+                        Task newTask = new Deadline(input.substring("deadline ".length(), input.indexOf("/by")),
+                                input.substring(input.indexOf("/by")).replace("/by ", ""));
+                        tasksList.add(newTask);
+                        printer("added: " + newTask);
+                    } else if (input.startsWith("event ")) {
+                        Task newTask = new Event(input.substring("event ".length(), input.indexOf("/from")),
+                                input.substring(input.indexOf("/from"), input.indexOf("/to")).replace("/from ", ""),
+                                input.substring(input.indexOf("/to")).replace("/to ", ""));
+                        tasksList.add(newTask);
+                        printer("added: " + newTask);
                     }
                     break;
             }
@@ -95,11 +116,11 @@ public class Duke {
     }
 }
 
-class Tasks {
+abstract class Task {
     private String title;
     private boolean done = false;
 
-    Tasks(String title) {
+    Task(String title) {
         this.title = title;
     }
 
@@ -122,4 +143,45 @@ class Tasks {
         return returnString + title;
     }
 
+}
+
+class Todo extends Task {
+    Todo(String title) {
+        super(title);
+    }
+
+    @Override
+    public String toString() {
+        return "[T]" + super.toString();
+    }
+}
+
+class Deadline extends Task {
+    protected String by;
+
+    Deadline(String title, String by) {
+        super(title);
+        this.by = by;
+    }
+
+    @Override
+    public String toString() {
+        return "[D]" + super.toString() + " (by: " + by + ")";
+    }
+}
+
+class Event extends Task {
+    protected String from;
+    protected String to;
+
+    Event(String title, String from, String to) {
+        super(title);
+        this.from = from;
+        this.to = to;
+    }
+
+    @Override
+    public String toString() {
+        return "[E]" + super.toString() + " (from: " + from + " to: " + to + ")";
+    }
 }
