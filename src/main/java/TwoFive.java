@@ -32,19 +32,40 @@ public class TwoFive {
             //Echos input from user
             System.out.println(divider);
 
-            switch(input) {
+            if (input.equals("list")) {
                 //List all tasks added by the user
-                case "list":
-                    for (Task task: tasks) {
-                        System.out.println(task);
-                    }
-                    break;
+                System.out.println("Here are the tasks in your list:");
+                for (Task task: tasks) {
+                    System.out.println(task);
+                }
+            } else if (input.contains("unmark")) {
+                //Marks selected task as undone
+                Integer taskNum = Integer.parseInt(input.split(" ")[1]) - 1;
+                Task currentTask = tasks.get(taskNum);
+                boolean unmarkSuccess = currentTask.markAsUndone();
+                if (unmarkSuccess) {
+                    System.out.println("OK, I've marked this task as not done yet:");
+                } else {
+                    System.out.println("Oops, this task has not been done yet:");
+                }
+                System.out.println(currentTask);
+            } else if (input.contains("mark")) {
+                //Marks selected task as done
+                Integer taskNum = Integer.parseInt(input.split(" ")[1]) - 1;
+                Task currentTask = tasks.get(taskNum);
+                boolean markSuccess = currentTask.markAsDone();
+                if (markSuccess) {
+                    System.out.println("Nice! Congrats for completing this task:");
+                } else {
+                    System.out.println("Oops, this task is already done:");
+                }
+                System.out.println(currentTask);
+            } else {
                 //Adds a new task for any other input
-                default:
-                    Task newTask = new Task(input);
-                    //Adds new task to list of tasks
-                    tasks.add(newTask);
-                    System.out.println("added: " + input);
+                Task newTask = new Task(input);
+                //Adds new task to list of tasks
+                tasks.add(newTask);
+                System.out.println("added: " + input);
             }
 
             System.out.println(divider);
