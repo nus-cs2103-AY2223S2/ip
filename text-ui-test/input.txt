@@ -33,4 +33,10 @@ unmark 1
 unmark 1
 list
 mark abc
+delete 6
+list
+delete 1
+list
+delete abc
+delete 10
 bye

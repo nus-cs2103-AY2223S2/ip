@@ -11,6 +11,8 @@ public class Duke {
     private static Pattern eventCommandPattern = Pattern.compile("^event (.*) \\/from (.*) \\/to (.*)$");
     private static Pattern markUnmarkCommandPattern = Pattern.compile("^(mark|unmark) ([0-9]+)$");
 
+    private static Pattern deleteCommandPattern = Pattern.compile("^delete ([0-9]+)$");
+
     private static void printText(String text) {
         System.out.printf("     %s\n", text);
     }
@@ -134,6 +136,29 @@ public class Duke {
         }
     }
 
+    private static void commandDelete(String input) throws DukeException {
+        Matcher markCommandMatcher = deleteCommandPattern.matcher(input);
+        if (markCommandMatcher.find()) {
+            int taskNo = Integer.parseInt(markCommandMatcher.group(1));
+
+            if (taskNo > 0 && taskNo <= tasks.size()) {
+                Task removedTask = tasks.remove(taskNo - 1);
+
+                printHorizontal();
+                printText("Noted. I've removed this task:");
+                printText(removedTask.toString());
+                printText(String.format("Now you have %d tasks in the list.", tasks.size()));
+                printHorizontal();
+            } else {
+                printHorizontal();
+                printText("Invalid task number!");
+                printHorizontal();
+            }
+        } else {
+            throw new DukeException("Please enter a proper integer.");
+        }
+    }
+
     private static void commandExit() {
         printHorizontal();
         printText("Bye. Hope to see you again soon!");
@@ -164,6 +189,8 @@ public class Duke {
                     commandMark(input);
                 } else if (command.equals("unmark")) {
                     commandUnmark(input);
+                } else if (command.equals("delete")) {
+                    commandDelete(input);
                 } else if (command.equals("bye")) {
                     commandExit();
                     isExit = true;

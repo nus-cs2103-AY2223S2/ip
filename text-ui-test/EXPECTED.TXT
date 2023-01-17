@@ -196,5 +196,36 @@
      ☹ OOPS!!! Please enter a proper integer.
     ____________________________________________________________
     ____________________________________________________________
+     Noted. I've removed this task:
+     [E][ ] ai lecture (from: tomorrow 3pm to: tomorrow 4pm)
+     Now you have 5 tasks in the list.
+    ____________________________________________________________
+    ____________________________________________________________
+     Here are the tasks in your list:
+     1. [T][ ] read book
+     2. [T][ ] clean room and sweep floor
+     3. [D][ ] submit pop quiz (by: tomorrow at 2pm)
+     4. [D][ ] learn java (by: today)
+     5. [E][ ] software engineering tutorial (from: 2pm to: 1pm)
+    ____________________________________________________________
+    ____________________________________________________________
+     Noted. I've removed this task:
+     [T][ ] read book
+     Now you have 4 tasks in the list.
+    ____________________________________________________________
+    ____________________________________________________________
+     Here are the tasks in your list:
+     1. [T][ ] clean room and sweep floor
+     2. [D][ ] submit pop quiz (by: tomorrow at 2pm)
+     3. [D][ ] learn java (by: today)
+     4. [E][ ] software engineering tutorial (from: 2pm to: 1pm)
+    ____________________________________________________________
+    ____________________________________________________________
+     ☹ OOPS!!! Please enter a proper integer.
+    ____________________________________________________________
+    ____________________________________________________________
+     Invalid task number!
+    ____________________________________________________________
+    ____________________________________________________________
      Bye. Hope to see you again soon!
     ____________________________________________________________
