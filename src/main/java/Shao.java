@@ -23,9 +23,11 @@ public class Shao {
         TODO, DEADLINE, EVENT
     }
 
+    public static String dataDirectory = "data";
+
     public static String sep = File.separator;
 
-    public static String dataFilePath = "data" + sep + "shao.txt";
+    public static String dataFilePath = dataDirectory + sep + "shao.txt";
 
     public static void printRowLine() {
         println("________________________________________________________");
@@ -340,11 +342,12 @@ public class Shao {
                 break;
 
             case DEADLINE:
-                newTask = new Deadline(inputArr[2], inputArr[3]);
+                newTask = new Deadline(inputArr[2], parseDateTimeStr(inputArr[3]));
                 break;
 
             case EVENT:
-                newTask = new Event(inputArr[2], new String[] { inputArr[3], inputArr[4] });
+                newTask = new Event(inputArr[2],
+                        new LocalDateTime[] { parseDateTimeStr(inputArr[3]), parseDateTimeStr(inputArr[4]) });
                 break;
 
             default:
@@ -469,16 +472,24 @@ public class Shao {
 
     public static void main(String[] args) {
         List<Task> items = new ArrayList<>();
+        File myDir = new File(dataDirectory);
+        File myFile = new File(dataFilePath);
+
         greetUser();
 
         try {
-            File myObj = new File(dataFilePath);
-            Scanner myReader = new Scanner(myObj);
+            Scanner myReader = new Scanner(myFile);
             while (myReader.hasNextLine()) {
                 fetchData(myReader.nextLine().trim(), items);
             }
             myReader.close();
         } catch (FileNotFoundException e) {
+            try {
+                myDir.mkdirs();
+                myFile.createNewFile();
+            } catch (IOException ex) {
+                printError("Something went wrong while creating a new file.");
+            }
         } finally {
             readInput(items);
         }

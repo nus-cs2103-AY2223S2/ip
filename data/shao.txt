@@ -1,5 +1,4 @@
 T|0|read book
-D|1|return book|June 6th
-E|0|project meeting|Aug 6th 2-4pm|Sep 7th 3-5pm
-T|1|join sports club
-E|1|homework|Mon 2pm|4pm
+D|1|return book|2019-03-01 0815
+E|0|project meeting|2/12/2019 1800|2019-12-02 2200
+E|1|homework|2022-05-09 1530|2022-05-09 2230
