@@ -26,9 +26,9 @@ public class Task {
     public String toString() {
         String box;
         if (isDone) {
-            box = "[X]";
+            box = "[X] ";
         } else {
-            box = "[ ]";
+            box = "[ ] ";
         }
         return"[T]" + box + this.getName();
     }

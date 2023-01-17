@@ -14,9 +14,9 @@ public class Deadline extends Task{
     public String toString() {
         String box;
         if (this.getDone()) {
-            box = "[X]";
+            box = "[X] ";
         } else {
-            box = "[ ]";
+            box = "[ ] ";
         }
         return"[D]" + box + this.getName() + "(by " + this.getDeadline() +")";
     }

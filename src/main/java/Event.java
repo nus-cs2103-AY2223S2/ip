@@ -20,9 +20,9 @@ public class Event extends Task{
     public String toString() {
         String box;
         if (this.getDone()) {
-            box = "[X]";
+            box = "[X] ";
         } else {
-            box = "[ ]";
+            box = "[ ] ";
         }
         return"[E]" + box + this.getName() + "(from: " + this.getStart() + "to " + this.getEnd() + ")";
     }
