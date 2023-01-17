@@ -12,25 +12,28 @@ public class Task {
     }
 
     /**
-     * Toggles the status of the task.
+     * Sets status of task to be done
      */
-    public void toggleStatus() {
-        isDone = ! isDone;
+    public void setDoneStatus() {
+        isDone = true;
+    }
+
+    /**
+     * Sets status of task to be undone
+     */
+    public void setUndoneStatus() {
+        isDone = false;
     }
 
     /**
      * Gets the status of the task with the task name.
      * @return a String in the form of either "[X] taskName" or "[ ] taskName"
-     *         depending on the status of the task.
+     *         depending on the status of the task. X means done.
      */
-    public String getStatusOfTask() {
+    public String getStatusOfTaskInString() {
         String statusBrackets = (isDone)
                                 ? "[X]" //Done
                                 : "[ ]"; //Not done
         return statusBrackets + " " + taskName;
     }
-
-
-
-
 }

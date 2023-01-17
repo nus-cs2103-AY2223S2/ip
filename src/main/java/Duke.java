@@ -5,12 +5,12 @@ public class Duke {
                                      + " | ____    |      |  |      |  \n"
                                      + " |      |  |      |  |      |  \n"
                                      + " | ____ |  |______|  |______|  \n";
-    private static final String straightLine = "_________________________________________________________________";
+    private static final String straightLine = "_______________________________________________________________________________________________";
 
 
     public static void main(String[] args) {
         //Stores user input
-        ArrayList<String> commandStorage = new ArrayList<String>();
+        ArrayList<Task> taskStorage = new ArrayList<Task>();
 
         printIntroductoryMessage();
 
@@ -32,17 +32,31 @@ public class Duke {
                 break;
             }
 
+            //Determine if user types in a single word or multiple words
+            String[] inputArray = input.split(" ");
+
+
             //User typed in "bye".
             if (input.equals("bye")) {
                 break;
             }
             //User typed in "list"
             else if (input.equals("list")) {
-                printUserCommands(commandStorage);
+                printUserTasks(taskStorage);
             }
-            //User did not type in "bye" or "list". Store the text.
+            //User typed in "mark":
+            else if (inputArray[0].equals("mark")) {
+                int indexOfTask = Integer.parseInt(inputArray[1]) - 1;
+                markAsDone(taskStorage.get(indexOfTask));
+            }
+            //User typed in "unmark":
+            else if (inputArray[0].equals("unmark")) {
+                int indexOfTask = Integer.parseInt(inputArray[1]) - 1;
+                markAsUndone(taskStorage.get(indexOfTask));
+            }
+            //User did not type in "bye" or "list". Store the text as a task.
             else {
-                addUserCommand(input, commandStorage);
+                addTask(input, taskStorage);
             }
         }
 
@@ -59,7 +73,7 @@ public class Duke {
         System.out.println(logo);
         System.out.println(straightLine);
         System.out.println("Boo! Nice to meet you.");
-        System.out.println("I am here to scare all your problems away.");
+        System.out.println("I am here to scare all your problems away by keeping track of your tasks.");
         System.out.println("What can I help you with today?");
         System.out.println(straightLine);
     }
@@ -75,35 +89,57 @@ public class Duke {
     }
 
     /**
-     * Prints out all the user commands that have been entered by the user thus far.
-     * @param commandStorage The ArrayList that stores the user commands to be printed out.
+     * Prints out all the user tasks that have been entered by the user thus far.
+     * @param taskStorage The ArrayList that stores the user tasks to be printed out.
      */
-    public static void printUserCommands(ArrayList<String> commandStorage) {
+    public static void printUserTasks(ArrayList<Task> taskStorage) {
         System.out.println(straightLine);
-        int numberOfCommands = commandStorage.size();
-        //Process each command in the storage
-        for (int i = 0; i < numberOfCommands; i = i + 1) {
+        int numberOfTasks= taskStorage.size();
+        //Process each task in the storage
+        for (int i = 0; i < numberOfTasks; i = i + 1) {
             String numbering = Integer.toString(i + 1) + ". ";
-            String output = numbering + commandStorage.get(i);
+            String output = numbering + taskStorage.get(i).getStatusOfTaskInString();
             System.out.println(output);
         }
         System.out.println(straightLine);
     }
 
     /**
-     * Adds user command into storage and informs the user.
-     * @param command The command to be added to storage.
-     * @param commandStorage The ArrayList that stores the command.
+     * Adds user task into storage and informs the user.
+     * @param taskName The task to be added to storage.
+     * @param taskStorage The ArrayList that stores the tasks.
      */
-    public static void addUserCommand(String command, ArrayList<String> commandStorage) {
-        commandStorage.add(command);
+    public static void addTask(String taskName, ArrayList<Task> taskStorage) {
+        Task newTask = new Task(taskName);
+        taskStorage.add(newTask);
         System.out.println(straightLine);
-        System.out.println("added: " + command);
+        System.out.println("Added task: " + taskName);
         System.out.println(straightLine);
     }
 
+    /**
+     * Marks a task as done and informs the user.
+     * @param currentTask The task to be marked as done.
+     */
+   public static void markAsDone(Task currentTask) {
+       currentTask.setDoneStatus();
+       System.out.println(straightLine);
+       System.out.println("Poof! One less worry. The following task is now marked as done:");
+       System.out.println(currentTask.getStatusOfTaskInString());
+       System.out.println(straightLine);
+   }
 
-
-
-
+    /**
+     * Marks a task as undone and informs the user.
+     * @param currentTask The task to be marked as undone.
+     */
+    public static void markAsUndone(Task currentTask) {
+        currentTask.setUndoneStatus();
+        System.out.println(straightLine);
+        System.out.println("Alright! The following task is now marked as undone. I will help you keep an eye on it.");
+        System.out.println(currentTask.getStatusOfTaskInString());
+        System.out.println(straightLine);
+    }
 }
+
+
