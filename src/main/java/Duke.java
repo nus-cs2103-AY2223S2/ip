@@ -71,7 +71,7 @@ public class Duke {
         StringBuilder builder = new StringBuilder();
         try (Scanner scanner = new Scanner(msg)) {
             while (scanner.hasNextLine()) {
-                builder.append(String.format("\t%s\n", scanner.nextLine()));
+                builder.append(String.format("\t  %s\n", scanner.nextLine()));
             }
         }
         return String.format("\t%s\n%s\t%s\n",
