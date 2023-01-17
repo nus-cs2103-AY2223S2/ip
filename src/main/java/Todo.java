@@ -9,6 +9,9 @@ public class Todo extends Task {
          * @param content what to place in this task.
          * @returns the output Todo object.
          */
+        if (content.equals("")) {
+            throw new InputFormatException("Todo Creation", "Haiya content empty.", null);
+        }
         return new Todo(content);
     }
 

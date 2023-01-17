@@ -41,7 +41,7 @@ public class MemoPad {
          */
         String[] splitted = response.split(" ", 2);
         if (splitted.length <= 1) {
-            throw new InputFormatException("Item Marking", "You did not include a number after the keyword. Try again.", null);
+            throw new InputFormatException("Item Marking", "Haiya where your number? FAILURE.", null);
         }
 
         String unparsedId = splitted[1];
@@ -53,10 +53,10 @@ public class MemoPad {
                 this.tasks.remove(id);
                 this.printSize();
             } else {
-                throw new NotFoundException("List", String.format("The maximum possible index is %d.", this.tasks.size()), null);
+                throw new NotFoundException("List", String.format("Haiya we only got %d things lah.", this.tasks.size()), null);
             }
         } catch (NumberFormatException ex) {
-            throw new InputFormatException("Item Deletion", "You did not include a number after the keyword. Try again.", null);
+            throw new InputFormatException("Item Deletion", "Haiya this not number. FAILURE.", null);
         }
     }
 
@@ -93,7 +93,7 @@ public class MemoPad {
          */
         String[] splitted = response.split(" ", 2);
         if (splitted.length <= 1) {
-            throw new InputFormatException("Item Marking", "You did not include a number after the keyword. Try again.", null);
+            throw new InputFormatException("Item Marking", "Haiya where your number? FAILURE.", null);
         }
 
         String unparsedId = splitted[1];
@@ -105,7 +105,7 @@ public class MemoPad {
                 throw new NotFoundException("List", String.format("The maximum possible index is %d.", this.tasks.size()), null);
             }
         } catch (NumberFormatException ex) {
-            throw new InputFormatException("Item Marking", "You did not include a number after the keyword. Try again.", null);
+            throw new InputFormatException("Item Marking", "Haiya this not number. FAILURE.", null);
         }
     }
 }

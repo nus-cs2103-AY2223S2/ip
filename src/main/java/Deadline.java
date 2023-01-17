@@ -13,15 +13,15 @@ public class Deadline extends Task {
          */
         String[] contentAndBy = content.split("/by");
         if (contentAndBy.length <= 1) {
-            throw new InputFormatException("Deadline Creation", "'by' is missing.", null);
+            throw new InputFormatException("Deadline Creation", "Haiya where your /by?", null);
         }
         String parsedContent = contentAndBy[0].strip();
         String by = contentAndBy[1].strip();
         if (parsedContent.equals("")) {
-            throw new InputFormatException("Deadline Creation", "Empty 'content'.", null);
+            throw new InputFormatException("Deadline Creation", "Haiya content empty.", null);
         }
         if (by.equals("")) {
-            throw new InputFormatException("Deadline Creation", "Empty 'by'.", null);
+            throw new InputFormatException("Deadline Creation", "Haiya by empty.", null);
         }
         return new Deadline(parsedContent, by);
     }

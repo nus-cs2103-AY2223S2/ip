@@ -1,5 +1,4 @@
 import java.util.Scanner;
-import java.util.function.Consumer;
 
 public class Duke {
     static String NAME = "Uncle Roger";
@@ -8,7 +7,7 @@ public class Duke {
     static String ENDWORD = "bye";
 
     public static void main(String[] args) {
-        String greeting = "Hallo Hallo! My name is %s.";
+        String greeting = "Hallo Hallo niece and nephew! My name is %s.";
         Duke.greet(greeting);
 
         String question = "What you want?";
@@ -95,13 +94,13 @@ public class Duke {
                         memoPad.addItem('E', response);
                         break;
                     default:
-                        System.out.println("Sorry, I'm not sure what you're talking about.");
+                        System.out.println("HUH? What you say?.");
                 }
             } catch (DukeException err) {
                 System.out.println(err.getMessage());
             }
             Duke.horizontal();
         }
-        Duke.say("Bye Bye. HAND.", true);
+        Duke.say("Bye Bye. Leave good review please! PLEAASEEE!", true);
     }
 }
