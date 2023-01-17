@@ -32,28 +32,46 @@ public class EventCommand extends AddCommand {
      */
     @Override
     protected Task createTask(String input) throws DukeException {
-        input = input.replaceFirst("event ", "").trim();
+        String[] args = extractValidArgs(input);
+        return createEvent(args);
+    }
 
-        if (input.startsWith("/from ")) {
+    private String[] extractValidArgs(String input) throws DukeException {
+        String argStr = input.replaceFirst("event", "");
+
+        String[] descriptionAndStartEnd = argStr.split(" /from ", 2);
+
+        if (descriptionAndStartEnd.length != 2) {
+            throw new DukeException("The start date/time of an event must be specified.");
+        }
+
+        descriptionAndStartEnd[0] = descriptionAndStartEnd[0].trim();
+        descriptionAndStartEnd[1] = descriptionAndStartEnd[1].trim();
+
+        if (descriptionAndStartEnd[0].isEmpty()) {
             throw new DukeException("The description of an event cannot be empty.");
         }
 
-        String[] args = input.split(" /from ", 2);
-        if (args.length != 2 || args[1].trim().startsWith("/to ")) {
-            throw new DukeException("The input of an event must include a start date/time.");
-        }
-
-        String description = args[0].trim();
-        args[1] = args[1].trim();
-
-        String[] startAndEnd = args[1].split(" /to ", 2);
+        String[] startAndEnd = descriptionAndStartEnd[1].split(" /to ", 2);
         if (startAndEnd.length != 2) {
-            throw new DukeException("The input of an event must include an end date/time.");
+            throw new DukeException("The end date/time of an event must be specified.");
         }
 
-        String start = startAndEnd[0].trim();
-        String end = startAndEnd[1].trim();
+        startAndEnd[0] = startAndEnd[0].trim();
+        startAndEnd[1] = startAndEnd[1].trim();
 
-        return new Event(false, description, start, end);
+        if (startAndEnd[0].isEmpty()) {
+            throw new DukeException("The start date/time of an event must be specified.");
+        }
+
+        if (startAndEnd[1].isEmpty()) {
+            throw new DukeException("The end date/time of an event must be specified.");
+        }
+
+        return new String[] {descriptionAndStartEnd[0], startAndEnd[0], startAndEnd[1]};
+    }
+
+    private Event createEvent(String[] args) {
+        return new Event(false, args[0], args[1], args[2]);
     }
 }
