@@ -1,7 +1,8 @@
-public class Task {
+public abstract class Task {
     private String taskName;
     private boolean isDone;
     private int taskNumber;
+
     public Task(String taskName, int taskNumber) {
         this.taskName = taskName;
         this.isDone = false;

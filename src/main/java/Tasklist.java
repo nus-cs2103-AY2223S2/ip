@@ -13,12 +13,31 @@ public class Tasklist {
         return taskCount;
     }
 
+    private String addTaskMessage(Task task) {
+        return "Got it. I've added this task:\n     " + task + "\nNow you have " + this.taskCount + " tasks in the list";
+    }
+
+    //==== OVERLOADED METHOD addTask =====
     public String addTask(String str) {
         taskCount++;
-        Task newTask = new Task(str, taskCount);
+        Task newTask = new ToDo(str, taskCount);
         this.taskHashMap.put(taskCount, newTask);
-        return ("added: " + str);
+        return addTaskMessage(newTask);
     }
+    public String addTask(String task, String deadline) {
+        taskCount++;
+        Task newTask = new Deadline(task, deadline, taskCount);
+        this.taskHashMap.put(taskCount, newTask);
+        return addTaskMessage(newTask);
+    }
+
+    public String addTask(String task, String from, String to) {
+        taskCount++;
+        Task newTask = new Event(task, from, to, taskCount);
+        this.taskHashMap.put(taskCount, newTask);
+        return addTaskMessage(newTask);
+    }
+    //======================================
 
     public String markTask(int taskNumber) {
         Task task = this.taskHashMap.get(taskNumber);
