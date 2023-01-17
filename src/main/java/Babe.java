@@ -11,6 +11,9 @@ import java.util.Scanner;
  */
 public class Babe {
 
+    /** A string Babe received from the user. */
+    private String memory = "";
+
     /**
      * Draws a horizontal line.
      * Draws a line for cosmetic purposes.
@@ -32,22 +35,23 @@ public class Babe {
     }
 
     /**
-     * Repeats users' input after them until termination.
-     * Receives input from the user and prints the input. Terminates the chat once the user
-     * keys in "bye" (case-insensitive).
+     * Receives user's input.
+     * Receives input from the user and stores it in memory.
      */
-    private void listenAndRepeat() {
+    private void listen() {
         Scanner scanner = new Scanner(System.in);
         String userInput = scanner.nextLine().stripTrailing();
+        memory = userInput;
+    }
 
-        if (userInput.toLowerCase().equals("bye")) {
-            sayBye();
-
-        } else {
-            Babe.drawLine();
-            System.out.println(userInput);
-            Babe.drawLine();
-        }
+    /**
+     * Prints string previously received from user.
+     * Prints the string stored in memory.
+     */
+    private void print() {
+        Babe.drawLine();
+        System.out.println(memory);
+        Babe.drawLine();
     }
 
     /**
@@ -67,7 +71,12 @@ public class Babe {
         chatBot.welcome();
 
         while (true) {
-            chatBot.listenAndRepeat();
+            chatBot.listen();
+            if (chatBot.memory.toLowerCase().equals("bye")) {
+                chatBot.sayBye();
+            } else {
+                chatBot.print();
+            }
         }
 
     }
