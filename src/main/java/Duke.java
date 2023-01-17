@@ -41,6 +41,10 @@ public class Duke {
                         throw new DukeException("\n" + border + "[ERROR]\nUh, list command format is used wrongly.\nCorrect format is as follows:\n" +
                                 "[ list ]\n" + border);
                     }
+                    if (TaskList.size()==0) {
+                        System.out.println(border + "You don't have anything to do right now!\n" + border);
+                        break;
+                    }
                     String ToPrint = "";
                     for (int i = 0; i < TaskList.size(); i++) {
                         ToPrint += ((i + 1 + ". ") + TaskList.get(i).toString() + "\n");
