@@ -15,8 +15,12 @@ public class TaskList {
         Response.printMessage(message);
     }
 
-    public void deleteTask(String task) {
-        // no implementation yet
+    public void deleteTask(String number) {
+        Task task = tasks.remove(Integer.parseInt(number) - 1);
+        String message = "I have removed " + task.getTaskName() + " from my memory\n";
+        message = message + "          " + task.toString() + "\n";
+        message = message + "        You have " + tasks.size() + " tasks in the list";
+        Response.printMessage(message);
     }
 
     public void markDone(int number) {

@@ -16,7 +16,7 @@ public class Connor {
 
     private static String[] getNameDeadlinePair(String input) throws InvalidTaskException{
         int byIndex = input.indexOf("/by");
-        if (byIndex == -1) {
+        if (byIndex < 1) {
             throw new InvalidTaskException();
         }
         String[] pair = new String[2];
@@ -28,7 +28,7 @@ public class Connor {
     private static String[] getNameStartEndTuple(String input) throws InvalidTaskException {
         int fromIndex = input.indexOf("/from");
         int byIndex = input.indexOf("/to");
-        if (fromIndex == -1 || byIndex == -1) {
+        if (fromIndex < 1 || byIndex < 1) {
             throw new InvalidTaskException();
         }
         String[] tuple = new String[3];
@@ -74,6 +74,8 @@ public class Connor {
                     String[] tuple = getNameStartEndTuple(getTask(input));
                     Event event = new Event(tuple[0], tuple[1], tuple[2]);
                     list.addTask(event);
+                } else if (command.equals("DELETE")) {
+                    list.deleteTask(getTask(input));
                 } else {
                     throw new InvalidCommandException();
                 }
