@@ -104,6 +104,18 @@ public class DukeBot {
                 }
                 return this.addEvent(words[1]);
             case "delete":
+                try {
+                    if (words.length == 1 || words[1].trim().isEmpty()) {
+                        throw new TaskNumberNotFoundException();
+                    }
+                    int taskNumber = Integer.parseInt(words[1]);
+                    if (taskNumber > this.lengthOfList || taskNumber <= 0) {
+                        throw new TaskNumberNotFoundException();
+                    }
+                    return this.delete(taskNumber);
+                } catch (NumberFormatException e) {
+                    throw new TaskNumberNotFoundException();
+                }
         }
 
         throw new UnknownCommandError("\n" + this.frame + "\n" +
@@ -112,9 +124,20 @@ public class DukeBot {
 
     }
 
+    private String delete(int taskNumber) {
+        String task = this.list.get(taskNumber - 1).status();
+        this.list.remove(taskNumber - 1);
+        this.lengthOfList -= 1;
+        return this.frame +
+                " Noted. I've removed this task:\n" +
+                "       " + task +
+                "     Now you have " + this.lengthOfList +" tasks in the list." + "\n"
+                + this.frame;
+    }
+
     private String unmark(int taskNumber) {
 
-        Task task = list.get(taskNumber - 1);
+        Task task = this.list.get(taskNumber - 1);
         task.incomplete();
         return this.frame +
                 "     OK, I've marked this task as not done yet:\n" +
@@ -124,7 +147,7 @@ public class DukeBot {
 
     private String mark(int taskNumber) {
 
-        Task task = list.get(taskNumber - 1);
+        Task task = this.list.get(taskNumber - 1);
         task.complete();
         return this.frame +
                 "     Nice! I've marked this task as done:\n" +
