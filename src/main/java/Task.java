@@ -2,9 +2,12 @@ public class Task {
     protected String description;
     protected boolean isDone;
 
+    static int noOfTasks = 0;
+
     public Task(String description) {
         this.description = description;
         this.isDone = false;
+        Task.noOfTasks += 1;
     }
 
     public String getStatusIcon() {

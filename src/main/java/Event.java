@@ -7,6 +7,10 @@ public class Event extends Task {
         super(description);
         this.from = from;
         this.to = to;
+
+        System.out.println("Got it. I've added this task:");
+        System.out.println(this);
+        System.out.println("Now you have " + Task.noOfTasks + " tasks in the list.");
     }
 
     @Override
