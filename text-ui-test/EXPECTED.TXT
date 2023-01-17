@@ -26,13 +26,32 @@
      [E][X] project meeting (from: Aug 6th 2pm to: 4pm)
      --------------------------------------------------
      --------------------------------------------------
+     Here are all of your tasks:
+     1.[T][X] read book
+     2.[D][ ] return book (by: June 6th)
+     3.[E][X] project meeting (from: Aug 6th 2pm to: 4pm)
+     --------------------------------------------------
+     --------------------------------------------------
      Good job! I've marked this task as done:
      [D][X] return book (by: June 6th)
+     --------------------------------------------------
+     --------------------------------------------------
+     ? OOPS!!! The description of a todo cannot be empty!
      --------------------------------------------------
      --------------------------------------------------
      Got it. I've added this Todo task:
      [T][ ] join sports club
      Now you have 4 tasks in the list.
+     --------------------------------------------------
+     --------------------------------------------------
+     Here are all of your tasks:
+     1.[T][X] read book
+     2.[D][X] return book (by: June 6th)
+     3.[E][X] project meeting (from: Aug 6th 2pm to: 4pm)
+     4.[T][ ] join sports club
+     --------------------------------------------------
+     --------------------------------------------------
+     ? OOPS!!! You haven't specify the deadline for the Task
      --------------------------------------------------
      --------------------------------------------------
      Good job! I've marked this task as done:
@@ -44,6 +63,9 @@
      Now you have 5 tasks in the list.
      --------------------------------------------------
      --------------------------------------------------
+     ? OOPS!!! The description of an event cannot be empty!
+     --------------------------------------------------
+     --------------------------------------------------
      OK, I've marked this task as not done yet:
      [T][ ] join sports club
      --------------------------------------------------
@@ -51,6 +73,18 @@
      Got it. I've added this Deadline task:
      [D][ ] return book (by: Sunday)
      Now you have 6 tasks in the list.
+     --------------------------------------------------
+     --------------------------------------------------
+     Here are all of your tasks:
+     1.[T][X] read book
+     2.[D][X] return book (by: June 6th)
+     3.[E][X] project meeting (from: Aug 6th 2pm to: 4pm)
+     4.[T][ ] join sports club
+     5.[T][ ] borrow book
+     6.[D][ ] return book (by: Sunday)
+     --------------------------------------------------
+     --------------------------------------------------
+     ? OOPS!!! The description of an event cannot be empty!
      --------------------------------------------------
      --------------------------------------------------
      Got it. I've added this Event task:

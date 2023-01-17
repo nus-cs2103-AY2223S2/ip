@@ -40,31 +40,63 @@ public class WindyCall {
         System.out.println(message);
     }
 
-    private void addTask(String message) {
+    private void addTask(String message) throws WindyCallException{
         space();
         String[] parts = message.split(" ");
 
         Task newTask;
         if (parts[0].equals("todo")) {
+            if (message.length() == 4 || message.substring(4).trim().isEmpty()) {
+                throw new WindyCallException("☹ OOPS!!! The description of a todo cannot be empty!");
+            }
             String description = message.substring(5);
             System.out.println("Got it. I've added this Todo task:");
             newTask = new Todo(description);
         }
         else if (parts[0].equals("deadline")) {
             int idx = message.indexOf("/by");
+            if (message.length() == 8 || message.substring(8).trim().isEmpty()
+                    || (idx != -1 && message.substring(8, idx).trim().isEmpty())) {
+                throw new WindyCallException("☹ OOPS!!! The description of a deadline cannot be empty!");
+            }
+            if (idx == -1) {
+                throw new WindyCallException("☹ OOPS!!! You haven't specify the deadline for the Task");
+            }
+            if (message.length() == idx + 3 || message.substring(idx + 3).trim().isEmpty()) {
+                throw new WindyCallException("☹ OOPS!!! You haven't specify the deadline for the Task");
+            }
             String description = message.substring(9, idx - 1);
             System.out.println("Got it. I've added this Deadline task:");
             String deadline = message.substring(idx + 4);
             newTask = new Deadline(description,deadline);
         }
-        else {
+        else if (parts[0].equals("event")) {
             int idxFrom = message.indexOf("/from");
             int idxTo = message.indexOf("/to");
+            if (message.length() == 5 || message.substring(5).trim().isEmpty()
+                    || (idxFrom != -1 && message.substring(5, idxFrom).trim().isEmpty())) {
+                throw new WindyCallException("☹ OOPS!!! The description of an event cannot be empty!");
+            }
+            if (idxFrom == -1) {
+                throw new WindyCallException("☹ OOPS!!! You haven't specify start time of the event!");
+            }
+            if (message.length() == idxFrom + 5 || message.substring(idxFrom + 5).trim().isEmpty()
+                    || (idxTo != -1 && message.substring(idxFrom, idxTo).trim().isEmpty())) {
+                throw new WindyCallException("☹ OOPS!!! You haven't specify start time of the event!");
+            }
+            if (idxTo == -1) {
+                throw new WindyCallException("☹ OOPS!!! You haven't specify end time of the event!");
+            }
+            if (message.length() == idxTo + 3 || message.substring(idxTo + 3).trim().isEmpty()) {
+                throw new WindyCallException("☹ OOPS!!! You haven't specify end time of the event!");
+            }
             String description = message.substring(6, idxFrom - 1);
             String from = message.substring(idxFrom + 6, idxTo - 1);
             String to = message.substring(idxTo + 4);
             System.out.println("Got it. I've added this Event task:");
             newTask = new Event(description, from, to);
+        } else {
+            throw new WindyCallException("☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
         }
         space();
         System.out.println(newTask);
@@ -108,7 +140,14 @@ public class WindyCall {
                     chatBox.tasks[num - 1].unmark();
                     space();
                     System.out.println(chatBox.tasks[num - 1]);
-                } else chatBox.addTask(userCommand);
+                } else {
+                    try {
+                        chatBox.addTask(userCommand);
+                    }
+                    catch (WindyCallException e) {
+                        System.out.println(e.getMessage());
+                    }
+                }
             }
             line();
         }
