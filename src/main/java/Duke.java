@@ -22,26 +22,26 @@ public class Duke {
         UNKNOWN,
     }
 
-    static void display(Object obj) {
+    private static void display(Object obj) {
         System.out.println(obj);
     }
-    static void display(String message) {
+    private static void display(String message) {
         System.out.println(message);
     }
-    static void warn(String message) {
+    private static void warn(String message) {
         System.out.println("OOPS! " + message);
     }
-    static void assertThis(boolean expectsTrue, String failureMessage) throws DukeException {
+    private static void assertThis(boolean expectsTrue, String failureMessage) throws DukeException {
         if (!expectsTrue)
             throw new DukeException(failureMessage);
     }
-    static void displayLogo() {
+    private static void displayLogo() {
         Duke.display(LOGO);
     }
-    static void displayLine() {
+    private static void displayLine() {
         Duke.display("____________________________________________________________");
     }
-    static void displayTaskCount(ArrayList<Task> taskList) {
+    private static void displayTaskCount(ArrayList<Task> taskList) {
         if (taskList == null)
             return;
 
@@ -50,7 +50,7 @@ public class Duke {
         else
             Duke.display("Now you have " + taskList.size() + " task(s) in the list.");
     }
-    static void displayTaskList(ArrayList<Task> taskList) {
+    private static void displayTaskList(ArrayList<Task> taskList) {
         if (taskList == null)
             return;
 
@@ -62,13 +62,13 @@ public class Duke {
                 Duke.display("\t" + (i + 1) + ". " + taskList.get(i));
         }
     }
-    static void addNewTask(ArrayList<Task> taskList, Task task) {
+    private static void addNewTask(ArrayList<Task> taskList, Task task) {
         taskList.add(task);
         Duke.display("Got it. I've added this task:");
         Duke.display("\t" + task);
         Duke.displayTaskCount(taskList);
     }
-    static State detectState(String command) {
+    private static State detectState(String command) {
         // Suppress all upper case letters, gets only the first word
         String cmd = command.toLowerCase().split(" ")[0];
 
@@ -263,12 +263,18 @@ public class Duke {
                         break;
 
                     default:
-                        // can throw error here
-                        break;
+                        // Unknown input is already handled above.
+                        // Something is seriously wrong if this code is called.
+                        // Throw RuntimeException and print the stack for debugging.
+                        throw new RuntimeException("FATAL ERROR: default case is called.");
                 }
             }
             catch (DukeException e) {
                 Duke.warn(e.getMessage());
+            }
+            catch (RuntimeException e) {
+                Duke.warn(e.getMessage());
+                e.printStackTrace();
             }
         }
     }
