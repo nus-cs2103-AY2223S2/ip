@@ -84,6 +84,15 @@
         2.[D][ ] do CS2103T (by: 2pm)
         3.[E][ ] Dinner (from: 6pm to: 8pm)
         ________________________________________________________
+        INVALID TASK DESCRIPTION
+        INVALID TASK DESCRIPTION
+        INVALID TASK DESCRIPTION
+        INVALID TASK DESCRIPTION
+        INVALID TASK DESCRIPTION
+        INVALID TASK DESCRIPTION
+        INVALID TASK DESCRIPTION
+        INVALID TASK DESCRIPTION
+        INVALID TASK DESCRIPTION
         ________________________________________________________
         It was a good session Hank, Bye.
         ________________________________________________________

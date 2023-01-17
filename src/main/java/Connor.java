@@ -10,17 +10,27 @@ public class Connor {
         }
     }
 
-    private static String getTask(String input) {
-        return input.substring(input.indexOf(' ') + 1, input.length());
+    private static String getTask(String input) throws InvalidTaskException {
+        if (input.indexOf(' ') < 0) {
+            throw new InvalidTaskException();
+        }
+        return input.substring(input.indexOf(' ') + 1);
     }
 
-    private static String[] getNameDeadlinePair(String input) throws InvalidTaskException{
+    private static void validateName(String input) throws InvalidTaskException {
+        if (input.trim().length() < 1) {
+            throw new InvalidTaskException();
+        }
+    }
+
+    private static String[] getNameDeadlinePair(String input) throws InvalidTaskException {
         int byIndex = input.indexOf("/by");
         if (byIndex < 1) {
             throw new InvalidTaskException();
         }
         String[] pair = new String[2];
         pair[0] = input.substring(0, byIndex - 1);
+        validateName(pair[0]);
         pair[1] = input.substring(byIndex + 4);
         return pair;
     }
@@ -33,6 +43,7 @@ public class Connor {
         }
         String[] tuple = new String[3];
         tuple[0] = input.substring(0, fromIndex - 1);
+        validateName(tuple[0]);
         tuple[1] = input.substring(fromIndex + 6, byIndex - 1);
         tuple[2] = input.substring(byIndex + 4);
         return tuple;
@@ -44,7 +55,6 @@ public class Connor {
         System.out.println("        Please type in your command below.");
         Scanner sc = new Scanner(System.in);
         TaskList list = new TaskList();
-
         while (sc.hasNextLine()) {
             String input = sc.nextLine();
             String command = getCommand(input);
@@ -56,14 +66,13 @@ public class Connor {
                     sc.close();
                     break;
                 } else if (command.equals("MARK")) {
-                    String numberMark = getTask(input);
-                    list.markDone(Integer.valueOf(numberMark));
+                    list.markDone(Integer.parseInt(getTask(input)));
                 } else if (command.equals("UNMARK")) {
-                    String numberUnmark = getTask(input);
-                    list.markUndone(Integer.valueOf(numberUnmark));
+                    list.markUndone(Integer.parseInt(getTask(input)));
                 } else if (command.equals("LIST")) {
                     list.getList();
                 } else if (command.equals("TODO")) {
+                    validateName(getTask(input));
                     TODO todo = new TODO(getTask(input));
                     list.addTask(todo);
                 } else if (command.equals("DEADLINE")) {
