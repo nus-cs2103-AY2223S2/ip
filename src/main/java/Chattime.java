@@ -4,12 +4,13 @@ import java.util.regex.Pattern;
 
 public class Chattime {
 
-    private static final String greet = "Hey! I'm your friend, Chattime!\n" + "     How can I help you *^*";
+    private static final String greet = "Hey! I'm your friend, Chattime!  (•◡•) /\n"
+            + "     How can I help you *^*";
     private static final String line = "---------------------------------------------------------------------" +
             "******************CHATTIME";
     private static final String goodBye = "Bye bye >^<! Visit me again when you need me ~";
     private static final String WAITING_TASK = "Task(s) waiting to be completed:";
-    private static final String UNRECOGNISED_COMMENT = "Sorry... but I don't understand what you said >,<";
+    private static final String UNRECOGNISED_COMMAND = "Sorry... but I don't understand what you said >,<";
     private static final String LIST_EXP = "OOPS!!! list does not take any description.";
     private static final String NO_DESCRIPTION = "OOPS!!! The description of %s cannot be empty.";
     private static final String NO_INDEX = "OOPS!!! The index to %1$s cannot be empty.";
@@ -18,10 +19,9 @@ public class Chattime {
     private static final String MISSED_PARAM = "OOPS!!! %s should be in form of %s.";
     private static final ArrayList<Task> storeList = new ArrayList<>();
 
-
     public static void main(String[] args) {
         String logo = "      ___\n"
-                    + "     /*  \\       *@ ^ @*\n"
+                    + "     /*  \\    \\(˘◡˘)/\n"
                     + "    /::\\  \\     ___\n"
                     + "   /:/::\\  \\   /*  \\\n"
                     + "  /:/  \\:\\  \\  \\:\\  \\\n"
@@ -67,6 +67,7 @@ public class Chattime {
                             throw new ChattimeException(LIST_EXP);
                         }
                         break;
+
                     case "todo":
                     case "deadline":
                     case "event":
@@ -86,6 +87,7 @@ public class Chattime {
                             }
                         }
                         break;
+
                     case "mark":
                     case "unmark":
                     case "delete":
@@ -99,12 +101,14 @@ public class Chattime {
                             delete(splitCmd[1]);
                         }
                         break;
+
                     default:
-                        throw new ChattimeException(UNRECOGNISED_COMMENT);
+                        throw new ChattimeException(UNRECOGNISED_COMMAND);
                 }
             } catch(ChattimeException e) {
                 replyUser(e.getMessage());
             }
+
             userInput = sc.nextLine();
             splitCmd = userInput.split(" ", 2);
             command = splitCmd[0];
@@ -113,7 +117,6 @@ public class Chattime {
 
         exit();
     }
-
 
     public static void displayList() {
         int i = 1;

@@ -20,4 +20,25 @@ outlier
 unmark 1
 event 1119 /from ^&^ /to (((*`v`*
 list
+todo
+blah
+list test
+deadline
+event
+event/
+mark
+unmark mark 18
+unmark -1
+unmark 12344r
+unmark 12345
+mark cat
+deadline /by
+deadline task /by
+event task /from t1 /to
+event task /from /to t2
+event task t1 /from /to t2
+event task t1 /to t2
+even task /to t2
+event /from t1 /to t2
+event task /from /to
 bye
