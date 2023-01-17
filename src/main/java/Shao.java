@@ -1,8 +1,11 @@
-import java.text.ParseException;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Scanner;
+import java.util.stream.Stream;
 
 public class Shao {
     enum TaskType {
@@ -76,7 +79,7 @@ public class Shao {
         printRowLine();
     }
 
-    public static void markItem(String itemNum, List<Task> items, boolean isMark) throws ParseException {
+    public static void markItem(String itemNum, List<Task> items, boolean isMark) throws NumberFormatException {
         int idx = Integer.parseInt(itemNum) - 1;
         Task task = items.get(idx);
         if (isMark) {
@@ -88,27 +91,55 @@ public class Shao {
         printUnmarkedTask(task);
     }
 
-    public static void deleteItem(String itemNum, List<Task> items) throws ParseException {
+    public static void deleteItem(String itemNum, List<Task> items) throws NumberFormatException {
         int idx = Integer.parseInt(itemNum) - 1;
         printItemDeleted(items.remove(idx), items.size());
     }
 
-    public static String getBy(String input) {
-        String[] inputArr = input.split(" ");
+    public static LocalDateTime getBy(String[] inputArr) {
         int l = inputArr.length;
         for (int i = 0; i < l; i++) {
-            if (i < l - 1 && inputArr[i].equals("/by"))
-                return String.join(" ", Arrays.copyOfRange(inputArr, i + 1, l));
+            if (i < l - 1 && inputArr[i].equals("/by")) {
+                return parseDateTimeStr(sliceArrAndConcate(inputArr, i + 1, l));
+            }
         }
-        return "";
+        return null;
     }
 
-    public static String[] getFromTo(String input) {
-        String[] inputArr = input.split(" ");
+    public static LocalDateTime parseDateTimeStr(String dateTimeStr) {
+        if (dateTimeStr.isBlank()) {
+            return null;
+        }
+        String[] dateTimeArr = dateTimeStr.split(" ");
+        LocalTime time = LocalTime.MIN;
+        Integer[] dateArr;
+        if (dateTimeArr.length > 1) {
+            try {
+                int hr = Integer.parseInt(dateTimeArr[1].substring(0, 2));
+                int min = Integer.parseInt(dateTimeArr[1].substring(2, 4));
+                time = LocalTime.of(hr, min);
+            } catch (NumberFormatException ex) {
+                printError("Oops! Time format needs to be specified in proper form.");
+                return null;
+            }
+        }
+
+        if (dateTimeStr.contains("/")) { // Input Format: dd/MM/YYYY
+            dateArr = Stream.of(dateTimeArr[0].split("/")).map(Integer::valueOf).toArray(Integer[]::new);
+            return LocalDateTime.of(LocalDate.of(dateArr[2], dateArr[1], dateArr[0]), time);
+        }
+
+        // Input Format: YYYY-MM-dd
+        dateArr = Stream.of(dateTimeArr[0].split("-")).map(Integer::valueOf).toArray(Integer[]::new);
+        return LocalDateTime.of(LocalDate.of(dateArr[0], dateArr[1], dateArr[2]), time);
+
+    }
+
+    public static LocalDateTime[] getFromTo(String[] inputArr) {
         int l = inputArr.length;
         int fromStartIdx = -1, fromEndIdx = l, toStartIdx = -1;
-        String from = "";
-        String to = "";
+        LocalDateTime from = LocalDateTime.MIN;
+        LocalDateTime to = LocalDateTime.MIN;
         for (int i = 0; i < l; i++) {
             if (i < l - 1) {
                 if (inputArr[i].equals("/from")) {
@@ -121,12 +152,12 @@ public class Shao {
             }
         }
         if (fromStartIdx > -1) {
-            from = sliceArrAndConcate(inputArr, fromStartIdx, fromEndIdx);
+            from = parseDateTimeStr(sliceArrAndConcate(inputArr, fromStartIdx, fromEndIdx));
         }
         if (toStartIdx > -1) {
-            to = sliceArrAndConcate(inputArr, toStartIdx, l);
+            to = parseDateTimeStr(sliceArrAndConcate(inputArr, toStartIdx, l));
         }
-        return new String[] { from, to };
+        return new LocalDateTime[] { from, to };
     }
 
     public static String trimDate(String input) {
@@ -180,7 +211,7 @@ public class Shao {
                                 } else {
                                     markItem(inputArr[1], items, inputLower.startsWith("mark"));
                                 }
-                            } catch (ParseException ex) {
+                            } catch (NumberFormatException ex) {
                                 printError("Oops! An item number must be provided.");
                             }
                         }
@@ -206,8 +237,8 @@ public class Shao {
                                     break;
 
                                 case DEADLINE:
-                                    String by = getBy(input);
-                                    if (by.isEmpty()) {
+                                    LocalDateTime by = getBy(inputArr);
+                                    if (by == null) {
                                         printError(
                                                 "Oops! The description of deadline must include a completion date/time.");
                                         continue;
@@ -216,12 +247,12 @@ public class Shao {
                                     break;
 
                                 case EVENT:
-                                    String[] fromTo = getFromTo(input);
-                                    if (fromTo[0].isEmpty()) {
+                                    LocalDateTime[] fromTo = getFromTo(inputArr);
+                                    if (fromTo[0] == LocalDateTime.MIN) {
                                         printError("Oops! The description of event must include a from date/time.");
                                         continue;
                                     }
-                                    if (fromTo[1].isEmpty()) {
+                                    if (fromTo[1] == LocalDateTime.MIN) {
                                         printError("Oops! The description of event must include a to date/time.");
                                         continue;
                                     }
