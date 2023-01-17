@@ -54,7 +54,7 @@ public class Duke {
     }
 
     private static void mark(Command command, TaskList tasks) {
-        int taskIndex = Integer.parseInt(command.parameters[0]) - 1;
+        int taskIndex = Integer.parseInt(command.body) - 1;
         Task task = tasks.get(taskIndex);
         task.markAsDone();
         Duke.say(
@@ -64,7 +64,7 @@ public class Duke {
     }
 
     private static void unmark(Command command, TaskList tasks) {
-        int taskIndex = Integer.parseInt(command.parameters[0]) - 1;
+        int taskIndex = Integer.parseInt(command.body) - 1;
         Task task = tasks.get(taskIndex);
         task.markAsNotDone();
         Duke.say(
