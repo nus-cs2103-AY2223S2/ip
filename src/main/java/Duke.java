@@ -28,11 +28,6 @@ public class Duke {
         br.close();
     }
 
-    private static boolean endConvo() {
-        System.out.println(farewellString);
-        return false;
-    }
-
     private static boolean handleMessage(String message) {
         if (message.equals("list")) { read(); }
         else if (message.equals("bye")) { return endConvo(); }
@@ -41,6 +36,7 @@ public class Duke {
         else if (message.startsWith("todo")) { updateToDo(message); }
         else if (message.startsWith("deadline")) { updateDeadline(message); }
         else if (message.startsWith("event")) { updateEvent(message); }
+        else if (message.startsWith("delete")) { delete(message); }
         else { throw new InvalidInputException(null); }
         return true;
     }
@@ -54,7 +50,20 @@ public class Duke {
 
     private static void update(Task task) {
         db.add(task);
-        System.out.println("Now you have " + db.size() + " tasks in the list");
+        System.out.println(Task.addTaskString + "\n" + task + "\n" + "Now you have " + db.size() + " tasks in the list");
+    }
+
+    private static void delete(String message) {
+        int num = Integer.parseInt(message.split("delete ")[1]);
+        if (num >= db.size()) { throw new DeleteOutOfIndexException(null); }
+        Task task = db.remove(num - 1);
+        System.out.println(Task.deleteTaskString + "\n" + task + "\n" +  "Now you have " + db.size() + " tasks in the list");
+    }
+
+    
+    private static boolean endConvo() {
+        System.out.println(farewellString);
+        return false;
     }
 
     private static void markTask(String message) {
@@ -68,32 +77,26 @@ public class Duke {
     }
 
     private static void updateToDo(String message) {
-        try {
-            ToDo toDo = new ToDo(message.split("todo ")[1]);
-            System.out.println(Task.addTaskString + "\n" + toDo);
-            update(toDo);
-        } catch (ArrayIndexOutOfBoundsException e) { throw new NoDescriptionException(message, e); }
+        if (message.equals("todo")) { throw new NoDescriptionException(message, null); }
+        ToDo toDo = new ToDo(message.split("todo ")[1]);
+        update(toDo);
     }
 
     private static void updateDeadline(String message) {
-        try {
+        if (message.equals("deadline")) { throw new NoDescriptionException(message, null); }
         String[] temp = message.split("deadline ");
         temp = temp[1].split(" /by ");
         Deadline deadline = new Deadline(temp[0], temp[1]);
-        System.out.println(Task.addTaskString + "\n" + deadline);
         update(deadline);
-        } catch (ArrayIndexOutOfBoundsException e) { throw new NoDescriptionException(message, e); }
     }
 
     private static void updateEvent(String message) {
-        try {
+        if (message.equals("event")) { throw new NoDescriptionException(message, null); }
         String[] temp = message.split("event ");
         temp = temp[1].split(" /from ");
         String description = temp[0];
         temp = temp[1].split(" /to ");
         Event event = new Event(description, temp[0], temp[1]); 
-        System.out.println(Task.addTaskString + "\n" + event);
         update(event);
-        } catch (ArrayIndexOutOfBoundsException e) { throw new NoDescriptionException(message, e); }
     }
 }

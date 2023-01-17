@@ -4,6 +4,7 @@ public class Task {
     protected static String doneTaskString = "Nice! I've marked this task as done:";
     protected static String undoneTaskString = "Nice! I've marked this task as not done yet:";
     protected static String addTaskString = "Got it. I've added this task:";
+    protected static String deleteTaskString = "Noted. I've removed this task:";
 
     public Task(String description) {
         this.description = description;
