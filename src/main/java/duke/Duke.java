@@ -74,7 +74,7 @@ public class Duke {
             tasks = res.getTasks();
             printMessage(res.getMessage());
 
-            if (input.equals("bye")) {
+            if (input.split(" ")[0].equals("bye")) {
                 break;
             }
         }
