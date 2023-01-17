@@ -5,6 +5,7 @@ These are the available commands:
 	 deadline [description] \by [date]
 ----------------------------------------
 There are no outstanding tasks!
+This task don't exists! Please select one from the list.
 Got it. I've added this task:
 	[T][ ] return book
 Now you have 1 tasks in the list.

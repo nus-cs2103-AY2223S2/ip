@@ -16,32 +16,6 @@ public class Duke {
     private static final TaskMap<Task> taskMap = new TaskMap<>();
     private static final Scanner in = new Scanner(System.in);
 
-    private void processTask(Matcher matcher, TaskType type) throws DukeException {
-        if (matcher.find()) {
-            String description = matcher.group(2);
-            Task task;
-            switch (type) {
-                case TODO:
-                    task = new Todo(description);
-                    break;
-                case EVENT:
-                    String from = matcher.group(3);
-                    String to = matcher.group(4);
-                    task = new Event(description, from, to);
-                    break;
-                case DEADLINE:
-                    String by = matcher.group(3);
-                    task = new Deadline(description, by);
-                    break;
-                default:
-                    task = null;
-            }
-            if (task != null) taskMap.addTask(task);
-        } else {
-            throw type.getErr();
-        }
-    }
-
     public void begin()  {
         System.out.println("Hello! I'm Duke. What can i do for you?");
         System.out.println("These are the available commands:" +
@@ -84,11 +58,11 @@ public class Duke {
 
                 try {
                     if (cmd.startsWith(TaskType.TODO.getType())) {
-                        processTask(mTodo, TaskType.TODO);
+                        Task.processTask(taskMap, mTodo, TaskType.TODO);
                     } else if (cmd.startsWith(TaskType.EVENT.getType())) {
-                        processTask(mEvent, TaskType.EVENT);
+                        Task.processTask(taskMap, mEvent, TaskType.EVENT);
                     } else if (cmd.startsWith(TaskType.DEADLINE.getType())) {
-                        processTask(mDeadline, TaskType.DEADLINE);
+                        Task.processTask(taskMap, mDeadline, TaskType.DEADLINE);
                     } else {
                         System.out.println("☹ OOPS!!! It seems like you entered an unrecognized command.");
                     }
