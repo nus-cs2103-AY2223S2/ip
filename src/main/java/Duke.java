@@ -2,7 +2,12 @@ import java.util.Scanner;
 import java.util.ArrayList;
 
 class Duke {
+    enum Action {
+        bye, list, unmark, mark, todo, deadline, event, delete;
+
+    }
     public static void main(String[] args) {
+
         System.out.println("Hello! I'm Duke");
         System.out.println("What can I do for you?");
 
@@ -11,9 +16,9 @@ class Duke {
             String[] s = input.split(" ");
             ArrayList<Task> list = new ArrayList<>();
             int currentIndex = 0;
-            while (!input.equals("bye")) {
+            while (!input.equals(Action.bye.name())) {
                 try {
-                if (input.equals("list")) {
+                if (input.equals(Action.list.name())) {
                     System.out.println("Here are the tasks in your list");
                     for (int i = 0; i < currentIndex; i++) {
                         System.out.print(i + 1 + ".");
@@ -21,21 +26,21 @@ class Duke {
                     }
                     input = myObj.nextLine();
                     s = input.split(" ");
-                } else if (s[0].equals("unmark")) {
+                } else if (s[0].equals(Action.unmark.name())) {
                     Task taskName = list.get(Integer.parseInt(s[1]) - 1);
                     taskName.unMark();
                     System.out.println("OK, I've marked this task as not done yet");
                     System.out.println(taskName.toString());
                     input = myObj.nextLine();
                     s = input.split(" ");
-                } else if (s[0].equals("mark")) {
+                } else if (s[0].equals(Action.mark.name())) {
                     Task taskName = list.get(Integer.parseInt(s[1]) - 1);
                     taskName.markAsDone();
                     System.out.println("Nice! I've marked this task as done:");
                     System.out.println(taskName.toString());
                     input = myObj.nextLine();
                     s = input.split(" ");
-                } else if (s[0].equals("todo")) {
+                } else if (s[0].equals(Action.todo.name())) {
                     String taskDescription = "";
                     if (s.length < 2) {
                         throw new DukeException("☹ OOPS!!! The description of a todo cannot be empty.");
@@ -52,7 +57,7 @@ class Duke {
                     System.out.println("Now you have " + currentIndex + " tasks in the list.");
                     input = myObj.nextLine();
                     s = input.split(" ");
-                } else if (s[0].equals("deadline")) {
+                } else if (s[0].equals(Action.deadline.name())) {
                     String taskDescription = "";
                     boolean isTime = false;
                     String time = "";
@@ -82,7 +87,7 @@ class Duke {
                     System.out.println("Now you have " + currentIndex + " tasks in the list.");
                     input = myObj.nextLine();
                     s = input.split(" ");
-                } else if (s[0].equals("event")) {
+                } else if (s[0].equals(Action.event.name())) {
                     String taskDescription = "";
                     boolean isStartTime = false;
                     boolean isEndTime = false;
@@ -119,7 +124,7 @@ class Duke {
                     System.out.println("Now you have " + currentIndex + " tasks in the list.");
                     input = myObj.nextLine();
                     s = input.split(" ");
-                } else if (s[0].equals("delete")) {
+                } else if (s[0].equals(Action.delete.name())) {
                     Task currentTask = list.get(Integer.parseInt(s[1]) - 1);
                     System.out.println("Noted. I've removed this task:");
                     System.out.println(currentTask.toString());
