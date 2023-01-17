@@ -3,7 +3,6 @@ import java.util.Scanner;
 
 public class Dude {
     private static final ArrayList<Task> todoList = new ArrayList<>();
-    private static int taskCount = 0;
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
 
@@ -65,24 +64,18 @@ public class Dude {
                 break;
             case "todo":
                 if (cmd.length < 2) throw new DudeMissingCommandException();
-                System.out.println(" _______________________________________________________________________");
                 System.out.println("\tGot it. I've added this task:");
                 addTask(Type.TODO, cmd[1]);
-                System.out.println(" _______________________________________________________________________\n");
                 break;
             case "deadline":
                 if (cmd.length < 2) throw new DudeMissingCommandException();
-                System.out.println(" _______________________________________________________________________");
                 System.out.println("\tGot it. I've added this task:");
                 addTask(Type.DEADLINE, cmd[1]);
-                System.out.println(" _______________________________________________________________________\n");
                 break;
             case "event":
                 if (cmd.length < 2) throw new DudeMissingCommandException();
-                System.out.println(" _______________________________________________________________________");
                 System.out.println("\tGot it. I've added this task:");
                 addTask(Type.EVENT, cmd[1]);
-                System.out.println(" _______________________________________________________________________\n");
                 break;
             case "delete":
                 System.out.println(" _______________________________________________________________________");
@@ -95,7 +88,7 @@ public class Dude {
     }
 
     public static void addTask(Type type, String description) throws DudeMissingCommandException {
-        Task task = new Task("");
+        Task task = null;
         String[] format;
         switch(type){
             case TODO:
@@ -115,16 +108,19 @@ public class Dude {
                 break;
         }
         todoList.add(task);
-        taskCount++;
+        Task.addTaskCount();
+        System.out.println(" _______________________________________________________________________");
         System.out.println("\t" + task);
-        System.out.println("\tNow got " + taskCount + " tasks in your list liao.");
+        System.out.println("\tNow got " + Task.count + " tasks in your list liao.");
+        System.out.println(" _______________________________________________________________________\n");
+
 
     }
 
     public static void getList() {
-        if (taskCount != 0) {
+        if (Task.count != 0) {
             System.out.println("\tHere are the tasks in your list: ");
-            for (int i = 0; i < taskCount; i++) {
+            for (int i = 0; i < Task.count; i++) {
                 System.out.println("\t" + (i + 1) + "." + todoList.get(i).toString());
             }
         } else {
@@ -133,7 +129,7 @@ public class Dude {
     }
 
     public static void markTask(int task) {
-        if (taskCount > task && taskCount != 0) {
+        if (Task.count > task && Task.count != 0) {
             System.out.println("\tSwee! I've marked this task as done loh:");
             Task currentTask = todoList.get(task);
             currentTask.mark();
@@ -144,7 +140,7 @@ public class Dude {
     }
 
     public static void unmarkTask(int task) {
-        if (taskCount > task && taskCount != 0) {
+        if (Task.count > task && Task.count != 0) {
             System.out.println("\tOkay liar, I've marked this task as undone liao:");
             Task currentTask = todoList.get(task);
             currentTask.unmark();
@@ -161,13 +157,13 @@ public class Dude {
     }
 
     public static void deleteTask(int task) {
-        if (taskCount > task && taskCount != 0) {
+        if (Task.count > task && Task.count != 0) {
             System.out.println("\tOkay can. I've removed this task already:");
             Task currentTask = todoList.get(task);
             todoList.remove(task);
             System.out.println("\t" + currentTask);
-            taskCount--;
-            System.out.println("\tNow only left with " + taskCount + " tasks in your list liao.");
+            Task.removeTaskCount();
+            System.out.println("\tNow only left with " + Task.count + " tasks in your list liao.");
         } else {
             System.out.println("\tUhh... Where got this task for me to delete?");
         }
