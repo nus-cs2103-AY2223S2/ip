@@ -1,6 +1,7 @@
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -51,11 +52,53 @@ public class Shao {
     }
 
     public static void printList(List<Task> items) {
+        int numItems = items.size();
+        String header = numItems == 0 ? "There are no tasks in your list. Please add one."
+                : "Here are the tasks in your list: ";
+
         printRowLine();
-        println("Here are the tasks in your list: ");
+        println(header);
         for (int i = 0; i < items.size(); i++) {
             Task curTask = items.get(i);
             println(String.format("%d.%s", i + 1, curTask));
+        }
+        printRowLine();
+    }
+
+    public static void printDeadlineEventOnDatetime(List<Task> items, String dateTimeStr) {
+        boolean hasItem = false;
+        LocalDateTime dateTime = parseDateTimeStr(dateTimeStr);
+        String dtStrOutput = dateTime.format(DateTimeFormatter.ofPattern("MMM d yyyy hh:mm a"));
+
+        printRowLine();
+        for (int i = 0; i < items.size(); i++) {
+            Task curTask = items.get(i);
+            if (curTask instanceof Deadline) {
+                Deadline deadline = (Deadline) curTask;
+                if (deadline.by.equals(dateTime)) {
+                    if (!hasItem) {
+                        println(String.format(
+                                "These are the deadline/events that occur on %s", dtStrOutput));
+                    }
+                    hasItem = true;
+                    println(String.format("%d.%s", i + 1, deadline));
+                }
+            }
+            if (curTask instanceof Event) {
+                Event event = (Event) curTask;
+                if (event.from.equals(dateTime) || event.to.equals(dateTime)) {
+                    if (!hasItem) {
+                        println(String.format(
+                                "These are the deadline/events that occur on %s", dtStrOutput));
+                    }
+                    hasItem = true;
+                    println(String.format("%d.%s", i + 1, event));
+                }
+            }
+        }
+        if (!hasItem) {
+            println(String.format(
+                    "No deadline/events occur on %s", dtStrOutput));
         }
         printRowLine();
     }
@@ -197,11 +240,18 @@ public class Shao {
                     printList(items);
                     break;
                 default:
+                    boolean isDateTimeOperation = inputLower.startsWith("datetime");
                     boolean isDeleteOperation = inputLower.startsWith("delete");
                     boolean isMarkOperation = inputLower.startsWith("mark")
                             || inputLower.startsWith("unmark");
                     String[] inputArr = input.split(" ");
-                    if (isDeleteOperation || isMarkOperation) {
+                    if (isDateTimeOperation) {
+                        if (inputArr.length < 2) {
+                            printError("Oops! Datetime cannot be empty.");
+                        } else {
+                            printDeadlineEventOnDatetime(items, sliceArrAndConcate(inputArr, 1, inputArr.length));
+                        }
+                    } else if (isDeleteOperation || isMarkOperation) {
                         if (inputArr.length < 2) {
                             printError("Oops! The item number cannot be empty.");
                         } else {
