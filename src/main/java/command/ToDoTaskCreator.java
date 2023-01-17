@@ -2,11 +2,10 @@ package command;
 
 import java.util.function.Function;
 
-import task.Task;
 import task.ToDo;
 
 
-public class ToDoTaskCreator implements Function<CommandInput, Task> {
+public class ToDoTaskCreator implements Function<CommandInput, ToDo> {
     @Override
     public ToDo apply(CommandInput input) {
         return input.getMainInput()
