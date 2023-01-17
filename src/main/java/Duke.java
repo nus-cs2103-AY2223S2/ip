@@ -30,6 +30,15 @@ public class Duke {
                 case "unmark":
                     unmarkTask(input.substring(7));
                     break;
+                case "todo":
+                    addTodo(input.substring(5));
+                    break;
+                case "deadline":
+                    addDeadline(input.substring(9));
+                    break;
+                case "event":
+                    addEvent(input.substring(6));
+                    break;
                 case "bye":
                     sc.close();
                     exit();
@@ -113,6 +122,54 @@ public class Duke {
         dukeList[index].unmarkDone();
         printWithPartition("\tOK, I've marked this task as not done yet:" +
                 "\n\t  " + dukeList[index].toString() + "\n");
+    }
+
+    private static void addTodo(String w) {
+        if (end < 100) {
+            ToDo temp = new ToDo(w);
+            dukeList[end] = temp;
+            end += 1;
+            printWithPartition("\tGot it. I've added this task:\n" +
+                    "\t  " + temp.toString() + "\n\tNow you have " +
+                    Integer.toString(end) + " tasks in the list.\n");
+
+        } else {
+            printWithPartition("\tfailed to add: " + w + "\n");
+        }
+    }
+
+    private static void addDeadline(String input) {
+        String[] sorted = input.split(" /by ");
+        String name = sorted[0];
+        String date = sorted[1];
+        if (end < 100) {
+            Deadline temp = new Deadline(name, date);
+            dukeList[end] = temp;
+            end += 1;
+            printWithPartition("\tGot it. I've added this task:\n" +
+                    "\t  " + temp.toString() + "\n\tNow you have " +
+                    Integer.toString(end) + " tasks in the list.\n");
+
+        } else {
+            printWithPartition("\tfailed to add: " + name + "\n");
+        }
+    }
+
+    private static void addEvent(String input) {
+        String[] sorted = input.split(" /from ");
+        String name = sorted[0];
+        String[] dates = sorted[1].split(" /to ");
+        if (end < 100) {
+            Event temp = new Event(name, dates[0], dates[1]);
+            dukeList[end] = temp;
+            end += 1;
+            printWithPartition("\tGot it. I've added this task:\n" +
+                    "\t  " + temp.toString() + "\n\tNow you have " +
+                    Integer.toString(end) + " tasks in the list.\n");
+
+        } else {
+            printWithPartition("\tfailed to add: " + name + "\n");
+        }
     }
 
     /**
