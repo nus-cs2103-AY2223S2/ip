@@ -1,4 +1,4 @@
-public class Task {
+public abstract class Task {
     private boolean completed;
     private String description;
 
@@ -7,16 +7,22 @@ public class Task {
         this.completed = false;
     }
 
-    String getStatusIcon() {
+    public String getStatusIcon() {
         return this.completed ? "X" : " ";
     }
 
-    String getDescription() {
+    public String getDescription() {
         return this.description;
     }
 
-    void setCompleted(boolean completed) {
+    public void setCompleted(boolean completed) {
         this.completed = completed;
     }
+
+    @Override
+    public String toString() {
+        return "[" + getStatusIcon() + "] " + description;
+    }
+
 
 }

@@ -2,19 +2,92 @@ import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Duke {
+    private static Scanner sc = new Scanner(System.in);
+    private static String currentInput;
+    private static ArrayList<Task> taskList = new ArrayList<>();
 
     public static void reply(String s) {
+        if (s.equals("")) {
+            return;
+        }
         String linebreak = "_________________________________________________________";
         System.out.println(linebreak);
         System.out.println(s);
         System.out.println(linebreak);
     }
 
-    public static void main(String[] args) {
-        Scanner sc = new Scanner(System.in);
-        String currentInput = "";
-        ArrayList<Task> taskList = new ArrayList<>();
+    public static String mark(boolean toMark) {
+        int index = Integer.parseInt(toMark ? currentInput.substring(5) : currentInput.substring(7)) - 1;
+        if (index >= taskList.size() || index < 0) {
+            return "index out of bounds";
+        } else {
+            Task curTask = taskList.get(index);
+            curTask.setCompleted(toMark);
+            String output;
+            if (toMark) {
+                output = "Nice! I've marked this task as done:\n";
+            } else {
+                output = "OK, I've marked this task as not done yet:\n";
+            }
+            return output + curTask.toString();
+        }
+    }
 
+    public static String list() {
+        if (taskList.size() == 0) {
+            return "List empty, add tasks!";
+        } else {
+            StringBuilder response = new StringBuilder();
+            for (int i = 0; i < taskList.size(); i++) {
+                Task curTask = taskList.get(i);
+                response.append((i+ 1)).append(".").append(curTask.toString());
+                if (i < taskList.size() - 1) {
+                    response.append("\n");
+                }
+            }
+            return response.toString();
+        }
+    }
+
+    public static String addTask() {
+        StringBuilder response = new StringBuilder();
+        response.append("Got it. I've added this task:\n");
+        if (currentInput.matches("^todo .*")) {
+            taskList.add(new Todo(currentInput.substring(5)));
+        } else if (currentInput.matches("^deadline .*")) {
+            int byPos = currentInput.indexOf(" /by ");
+            if (byPos == -1) {
+                reply("Deadline not specified with /by");
+                return "";
+            }
+            taskList.add(new Deadline(currentInput.substring(9, byPos), currentInput.substring(byPos + 5)));
+        } else {
+            int fromPos = currentInput.indexOf(" /from ");
+            int toPos = currentInput.indexOf(" /to ");
+            if (fromPos == -1 || toPos == -1 || toPos > currentInput.length() + 4) {
+                reply("Please include both /from and /to");
+                return "";
+            }
+            if (fromPos > toPos) {
+                reply("Please add the from date first followed by to date");
+                return "";
+            }
+            if (fromPos == 5) {
+                reply("Please include a description of the task");
+                return "";
+            }
+            String description = currentInput.substring(6, fromPos);
+            String from = currentInput.substring(fromPos + 7, toPos);
+            String to = currentInput.substring(toPos+ 5);
+            taskList.add(new Event(description, from, to));
+        }
+        int count = taskList.size();
+        response.append(taskList.get(count - 1).toString()).append("\n");
+        response.append("Now you have ").append(count).append(" tasks in the list.");
+        return response.toString();
+    }
+
+    public static void main(String[] args) {
         //Introduction
         reply("Hello! I'm Duke\n What can I do for you?");
 
@@ -22,38 +95,15 @@ public class Duke {
         while (!currentInput.equalsIgnoreCase("bye")) {
             StringBuilder response = new StringBuilder();
             if (currentInput.equalsIgnoreCase("list")) {
-                if (taskList.size() == 0) {
-                    response.append("List empty, add tasks!");
-                } else {
-                    for (int i = 0; i < taskList.size(); i++) {
-                        Task curTask = taskList.get(i);
-                        response.append((i+ 1)).append(". [").append(curTask.getStatusIcon()).append("] ").append(curTask.getDescription());
-                        if (i < taskList.size() - 1) {
-                            response.append("\n");
-                        }
-                    }
-                }
+                reply(list());
             } else if (currentInput.matches("mark \\d+") || currentInput.matches("unmark \\d+")) {
-                boolean mark = currentInput.matches("mark \\d+");
-                int index = Integer.parseInt(mark ? currentInput.substring(5) : currentInput.substring(7)) - 1;
-                if (index >= taskList.size() || index < 0) {
-                    response.append("index out of bounds");
-                } else {
-                    Task curTask = taskList.get(index);
-                    curTask.setCompleted(mark);
-                    if (mark) {
-                        response.append("Nice! I've marked this task as done:\n");
-                    } else {
-                        response.append("OK, I've marked this task as not done yet:\n");
-                    }
-                    response.append("  [").append(curTask.getStatusIcon()).append("] ").append(curTask.getDescription());
-                }
+                boolean toMark = currentInput.matches("mark \\d+");
+                reply(mark(toMark));
+            } else if (currentInput.matches("^(todo|deadline|event) .*")) {
+                reply(addTask());
             } else {
-                taskList.add(new Task(currentInput));
-
-                response.append("Added: ").append(currentInput);
+                reply("Unknown command, please try again");
             }
-            reply(response.toString());
             currentInput = sc.nextLine();
         }
         //Signing off
