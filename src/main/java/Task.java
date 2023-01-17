@@ -9,6 +9,9 @@ public class Task {
     public static void addTask(){
         numTasks++;
     }
+    public static void deleteTask(){
+        numTasks--;
+    }
     public static int getNumTasks(){
         return numTasks;
     }
