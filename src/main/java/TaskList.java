@@ -1,24 +1,37 @@
 import java.util.ArrayList;
 
-public class TaskList<T> extends ArrayList<T> {
+public class TaskList extends ArrayList<Task> {
 
     public TaskList() {
         super();
     }
 
-    public void addTask(T task) {
+    public void addTask(Task task) {
         super.add(task);
     }
 
-    public void removeTask(T task) {
+    public void removeTask(Task task) {
         super.remove(task);
+    }
+
+    public void mark(int i) {
+        super.get(i-1).mark();
+    }
+
+    public void unMark(int i) {
+        super.get(i-1).unMark();
+    }
+
+    @Override
+    public Task get(int i) {
+        return super.get(i-1);
     }
 
     @Override
     public String toString() {
         StringBuilder sb = new StringBuilder();
         int i = 1;
-        for (T task : this) {
+        for (Task task : this) {
             sb.append(i+".").append(task).append("\n\t");
             i++;
         }

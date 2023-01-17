@@ -7,13 +7,11 @@ public class Task {
         this.description = description;
     }
 
-    public void setDone() {
+    public void mark() {
         this.done = true;
     }
 
-    public void setNotDone() {
-        this.done = false;
-    }
+    public void unMark() { this.done = false; }
 
     @Override
     public String toString() {
