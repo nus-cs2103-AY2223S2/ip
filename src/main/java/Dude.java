@@ -117,7 +117,7 @@ public class Dude {
             case EVENT:
                 format = description.split(" /from ");
                 if (format.length < 2) throw new DudeMissingCommandException();
-                String[] details = format[1].split("/to ");
+                String[] details = format[1].split(" /to ");
                 if (details.length < 2) throw new DudeMissingCommandException();
                 task = new Event(format[0], details[0], details[1]);
                 break;
