@@ -6,6 +6,16 @@ public class Duke {
     private static final String indentation = "     ";
     private static final String newLine = "    ____________________________________________________________";
     private static ArrayList<Task> arrOfTask = new ArrayList<>();
+    public enum Action {
+        TODO,
+        DEADLINE,
+        EVENT,
+        MARK,
+        UNMARK,
+        LIST,
+        DELETE,
+        BYE
+    }
 
     public static void echo(String command) {
         System.out.println(indentation + command);
@@ -22,17 +32,7 @@ public class Duke {
         System.out.println(newLine);
     }
 
-    public static void addTask(String command) throws IndexOutOfBoundsException {
-        Task t;
-        if (command.startsWith("todo")) {
-            t = new Todo(command.substring(5));
-        } else if (command.startsWith("deadline")) {
-            String[] str = command.substring(9).split("/");
-            t = new Deadline(str[0], str[1].substring(3));
-        } else {
-            String[] str = command.substring(6).split("/");
-            t = new Event(str[0], str[1].substring(5), str[2].substring(3));
-        }
+    public static void addTask(Task t) {
         arrOfTask.add(t);
         System.out.println(indentation + "Got it. I've added this task:");
         System.out.println(indentation + t);
@@ -81,6 +81,27 @@ public class Duke {
         System.out.println(indentation + "Now you have " + Task.getTotalNumOfTask() + " tasks in the list.");
     }
 
+    public static Action getAction(String command) {
+        if (command.equals("bye")) {
+            return Action.BYE;
+        } else if (command.equals("list")) {
+            return Action.LIST;
+        } else if (command.startsWith("mark")) {
+            return Action.MARK;
+        } else if (command.startsWith("unmark")) {
+            return Action.UNMARK;
+        } else if (command.startsWith("delete")) {
+            return Action.DELETE;
+        } else if (command.startsWith("todo")) {
+            return Action.TODO;
+        } else if (command.startsWith("deadline")) {
+            return Action.DEADLINE;
+        } else if (command.startsWith("event")) {
+            return Action.EVENT;
+        } else {
+            throw new InvalidCommandException("Incorrect command");
+        }
+    }
 
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
@@ -89,25 +110,40 @@ public class Duke {
             try {
                 String command = sc.nextLine();
                 System.out.println(newLine);
-                if (command.equals("bye")) {
+                Action action = getAction(command);
+                if (action == Action.BYE) {
                     exit();
                     break;
-                } else if (command.equals("list")) {
-                    list();
-                } else if (command.startsWith("mark")) {
-                    taskDone(Integer.parseInt(command.substring(5)));
-                } else if (command.startsWith("unmark")) {
-                    taskNotDone(Integer.parseInt(command.substring(7)));
-                } else if (command.startsWith("delete")) {
-                    deleteTask(Integer.parseInt(command.substring(7)));
-                } else if (command.startsWith("todo") || command.startsWith("deadline") || command.startsWith("event")) {
-                    addTask(command);
-                } else {
-                    throw new InvalidCommandException("Incorrect command");
                 }
-            } catch (InvalidCommandException | InvalidIndexException e1) {
+                switch (action) {
+                    case LIST:
+                        list();
+                        break;
+                    case MARK:
+                        taskDone(Integer.parseInt(command.substring(5)));
+                        break;
+                    case UNMARK:
+                        taskNotDone(Integer.parseInt(command.substring(7)));
+                        break;
+                    case DELETE:
+                        deleteTask(Integer.parseInt(command.substring(7)));
+                        break;
+                    case TODO:
+                        addTask(new Todo(command.substring(5)));
+                        break;
+                    case DEADLINE:
+                        String[] str1 = command.substring(9).split("/");
+                        addTask(new Deadline(str1[0], str1[1].substring(3)));
+                        break;
+                    case EVENT:
+                        String[] str2 = command.substring(6).split("/");
+                        addTask(new Event(str2[0], str2[1].substring(5), str2[2].substring(3)));
+                }
+            } catch (InvalidCommandException e1) {
                 System.out.println(indentation + e1);
-            } catch (IndexOutOfBoundsException e2) {
+            } catch  (InvalidIndexException e2) {
+                System.out.println(indentation + e2);
+            } catch (IndexOutOfBoundsException e3) {
                 System.out.println(indentation + "☹ OOPS!!! The description of a task cannot be empty.");
             } finally {
                 System.out.println(newLine);
