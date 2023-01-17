@@ -8,7 +8,6 @@ class Task {
     public Task(String n) {
         name = n;
     }
-    
     public void mark() {
         System.out.println("Nice! I've marked this task as done:");
         this.done = true;
@@ -22,22 +21,35 @@ class Task {
     public String toString(){
         return String.format("[%s] %s",this.done ? "X" : " ", this.name);
     }
-    public static String getType(String query) {
-        if(query.length() >= 4 && query.substring(0,4).equals("todo")) return "todo";
-        if(query.length() >= 8 && query.substring(0,8).equals("deadline")) return "deadline";
-        if(query.length() >= 5 && query.substring(0,5).equals("event")) return "event";
-        return "wrong";
-    }
-    public static String[] getInputs(String query) {
-        String type = Task.getType(query);
-        if (type.equals("todo")) return new String[] {query.substring(5)};
-        if (type.equals("deadline")) return query.substring(9).split(" /by ");
-        if (type.equals("event")) return query.substring(6).split(" /from | /to ");
-        String[] emptyArray = {};
-        return emptyArray;
+    public static String[] parseCreate(String queryString) {
+        String[] tokens = queryString.split(" ", 2);
+        if (tokens.length != 2) return new String[] {"Error", "creating task requires a command and name minimally"};
+        String type = tokens[0];
+        if (type.equals("todo")) return tokens;
+        //parse params
+        String[] params = tokens[1].split(" /");
+        if (type.equals("deadline") && 
+            params.length == 2 && 
+            params[1].substring(0,2).equals("by")) {
+            
+            String[] tmp = params[1].split(" ", 2);
+            if (tmp.length != 2) return new String[] {"Error", "by cannot be empty"};
+            return new String[] {type, params[0], tmp[1]};
+        }
+        if (type.equals("event") && 
+            params.length == 3 && 
+            params[1].substring(0,4).equals("from") && 
+            params[2].substring(0,2).equals("to")) {
+    
+            String[] tmp1 = params[1].split(" ", 2);
+            if (tmp1.length != 2) return new String[] {"Error", "from cannot be empty"};
+            String[] tmp2 = params[2].split(" ", 2);
+            if (tmp2.length != 2) return new String[] {"Error", "to cannot be empty"};
+            return new String[] {type, params[0], tmp1[1], tmp2[1]};
+        }
+        return new String[] {"Error", "ensure proper format please"};
     }
 }
-
 class Todo extends Task {
     public Todo(String n) {
         super(n);
@@ -69,8 +81,6 @@ class Event extends Task {
         return String.format("[E][%s] %s (from: %s to %s)",this.done ? "X" : " ", this.name, this.from, this.to);
     }
 }
-
-
 public class Duke {
     public static void main(String[] args) {
         System.out.println("Hello! I am your anime waifu!"); 
@@ -117,26 +127,20 @@ public class Duke {
             }
             
             else {
-                            
-                String type = Task.getType(input);
-                String[] params = Task.getInputs(input);
-                for (String el: params) {
-                    System.out.println(el);
-                }
+                String[] parsed = Task.parseCreate(input);             
+                String type = parsed[0];
+                if (type == "Error") System.out.println(parsed[1]);
                 if (type.equals("todo")) {
-                    tasks.add(new Todo(params[0]));
-                    System.out.printf("added: %s%n", params[0]);
+                    tasks.add(new Todo(parsed[1]));
+                    System.out.printf("added: %s%n", parsed[1]);
                 } 
                 else if (type.equals("deadline")) {
-                    tasks.add(new Deadline(params[0],params[1]));
-                    System.out.printf("added: %s%n", params[0]);
+                    tasks.add(new Deadline(parsed[1],parsed[2]));
+                    System.out.printf("added: %s%n", parsed[1]);
                 }
                 else if (type.equals("event")) {
-                    tasks.add(new Event(params[0],params[1], params[2]));
-                    System.out.printf("added: %s%n", params[0]);
-                }
-                else {
-                    System.out.println("wrong out put");
+                    tasks.add(new Event(parsed[1],parsed[2], parsed[3]));
+                    System.out.printf("added: %s%n", parsed[1]);
                 }
             }
             System.out.println("_____");        
