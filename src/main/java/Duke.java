@@ -6,6 +6,8 @@
  */
 
 import java.util.Scanner;
+import java.util.LinkedList;
+import java.util.Iterator;
 public class Duke {
 
     /**
@@ -15,17 +17,25 @@ public class Duke {
     public static void main(String[] args) {
         greet();
         Scanner sc = new Scanner(System.in);
-        Boolean QUIT = false;
+        LinkedList<String> list = new LinkedList<>();
+        boolean QUIT = false;
         while (!QUIT) {
             String userIn = sc.nextLine();
             switch (userIn) {
+                case "list" :
+                    Iterator<String> list_entries = list.iterator();
+                    int number = 1;
+                    while (list_entries.hasNext()) {
+                        System.out.printf("%d. %s%n", number++, list_entries.next());
+                    }
+                    break;
                 case "bye" :
-//                case "exit" :
                     QUIT = true;
                     System.out.println("Bye. Hope to see you again soon!\n");
                     break;
                 default:
-                    System.out.println(userIn);
+                    list.add(userIn);
+                    System.out.println("added: " + userIn);
                     break;
             }
         }
@@ -41,12 +51,9 @@ public class Duke {
                 + "\\ \\ /\\ / / _` |  _|  _| |/ _ \\/ __|\n"
                 + " \\ V  V / (_| | | | | | |  __/\\__ \\n"
                 + "  \\_/\\_/ \\__,_|_| |_| |_|\\___||___/";
-        System.out.println("Hello from\n" + logo);
-        System.out.println("");
+        System.out.println("Hello from\n" + logo + "\n");
         System.out.println("Hello! I'm " + "Waffles");
         System.out.println("What can I do for you?");
-
     }
-
 }
 
