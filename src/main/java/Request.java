@@ -4,13 +4,20 @@ public class Request {
     final private TaskList tasks;
     private String response;
 
-
+    /**
+     * Constructor for Request class
+     * @param request request by the user
+     * @param tasks task array to store the tasks added by the user
+     */
     public Request(String request, TaskList tasks) {
         this.request = request;
         this.tasks = tasks;
         processRequest();
     }
 
+    /**
+     * Function to process the user's request to get the response
+     */
     public void processRequest() {
         String[] req = this.request.split(" ");
         String command = req[0];

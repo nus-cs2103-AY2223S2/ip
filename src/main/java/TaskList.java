@@ -19,6 +19,11 @@ public class TaskList {
         this.tasks.add(new Task(task));
     }
 
+    /**
+     * Get the specific task at given index, idx
+     * @param idx Given index of the task in the list
+     * @return Task at index, idx
+     */
     public Task getTask(Integer idx) {
         return tasks.get(idx);
     }
