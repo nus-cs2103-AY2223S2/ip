@@ -11,21 +11,21 @@
 
     ____________________________________________________________
      Got it. I've added this task:
-       [D][ ] deadline return book (by: Sunday)
+       [D][ ] return book (by: Sunday)
      Now you have 2 tasks in the list.
     ____________________________________________________________
 
     ____________________________________________________________
      Got it. I've added this task:
-       [E][ ] event project meeting (from: Mon 2pm to: 4pm)
+       [E][ ] project meeting (from: Mon 2pm to: 4pm)
      Now you have 3 tasks in the list.
     ____________________________________________________________
 
     ____________________________________________________________
      Here are the tasks in your list:
      1.[T][ ] borrow book
-     2.[D][ ] deadline return book (by: Sunday)
-     3.[E][ ] event project meeting (from: Mon 2pm to: 4pm)
+     2.[D][ ] return book (by: Sunday)
+     3.[E][ ] project meeting (from: Mon 2pm to: 4pm)
     ____________________________________________________________
 
     ____________________________________________________________
@@ -36,8 +36,8 @@
     ____________________________________________________________
      Here are the tasks in your list:
      1.[T][X] borrow book
-     2.[D][ ] deadline return book (by: Sunday)
-     3.[E][ ] event project meeting (from: Mon 2pm to: 4pm)
+     2.[D][ ] return book (by: Sunday)
+     3.[E][ ] project meeting (from: Mon 2pm to: 4pm)
     ____________________________________________________________
 
     ____________________________________________________________
@@ -48,8 +48,8 @@
     ____________________________________________________________
      Here are the tasks in your list:
      1.[T][ ] borrow book
-     2.[D][ ] deadline return book (by: Sunday)
-     3.[E][ ] event project meeting (from: Mon 2pm to: 4pm)
+     2.[D][ ] return book (by: Sunday)
+     3.[E][ ] project meeting (from: Mon 2pm to: 4pm)
     ____________________________________________________________
 
     ____________________________________________________________

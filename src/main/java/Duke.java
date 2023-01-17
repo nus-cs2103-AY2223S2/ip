@@ -38,6 +38,7 @@ public class Duke {
 
     private static String isDeadline(String s, TaskManager tm) {
         if (s.length() >= 10 && Objects.equals(s.substring(0, 9), "deadline ")) {
+            s = s.substring(9, s.length());
             String[] parts = s.split("/");
             String dl = parts[1].substring(3, parts[1].length()).strip();
             String name = parts[0].strip();
@@ -48,6 +49,7 @@ public class Duke {
 
     private static String isEvent(String s, TaskManager tm) {
         if (s.length() >= 7 && Objects.equals(s.substring(0, 6), "event ")) {
+            s = s.substring(6, s.length());
             String[] parts = s.split("/");
             String name = parts[0].strip();
             String from = parts[1].substring(5, parts[1].length()).strip();
