@@ -4,6 +4,7 @@ public class Task {
     protected String words;
     static int actions = 0;
 
+
     public Task(String description) {
         this.description = description;
         this.isDone = false;
@@ -33,5 +34,8 @@ public class Task {
         this.isDone = false;
         System.out.println("OK, I've marked this task as not done yet:\n"+ this);
     }
+
+
+
 }
 
