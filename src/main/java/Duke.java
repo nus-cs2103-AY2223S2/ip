@@ -1,43 +1,62 @@
+import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Duke {
-    private static final String linebreak = "_________________________________________________________";
 
     public static void reply(String s) {
+        String linebreak = "_________________________________________________________";
         System.out.println(linebreak);
         System.out.println(s);
         System.out.println(linebreak);
     }
 
     public static void main(String[] args) {
-        String greeting = "Hello! I'm Duke\n What can I do for you?";
-        String bye = "Bye. Hope to see you again!";
         Scanner sc = new Scanner(System.in);
         String currentInput = "";
-        String[] storedPhrases = new String[100];
-        int phraseCount = 0;
+        ArrayList<Task> taskList = new ArrayList<>();
 
         //Introduction
-        reply(greeting);
+        reply("Hello! I'm Duke\n What can I do for you?");
 
         currentInput = sc.nextLine();
         while (!currentInput.equalsIgnoreCase("bye")) {
+            StringBuilder response = new StringBuilder();
             if (currentInput.equalsIgnoreCase("list")) {
-                System.out.println(linebreak);
-                if (phraseCount == 0) {
-                    System.out.println("List empty, add tasks!");
+                if (taskList.size() == 0) {
+                    response.append("List empty, add tasks!");
+                } else {
+                    for (int i = 0; i < taskList.size(); i++) {
+                        Task curTask = taskList.get(i);
+                        response.append((i+ 1)).append(". [").append(curTask.getStatusIcon()).append("] ").append(curTask.getDescription());
+                        if (i < taskList.size() - 1) {
+                            response.append("\n");
+                        }
+                    }
                 }
-                for (int i = 0; i < phraseCount; i++) {
-                    System.out.println((i+ 1) + ". " + storedPhrases[i]);
+            } else if (currentInput.matches("mark \\d+") || currentInput.matches("unmark \\d+")) {
+                boolean mark = currentInput.matches("mark \\d+");
+                int index = Integer.parseInt(mark ? currentInput.substring(5) : currentInput.substring(7)) - 1;
+                if (index >= taskList.size() || index < 0) {
+                    response.append("index out of bounds");
+                } else {
+                    Task curTask = taskList.get(index);
+                    curTask.setCompleted(mark);
+                    if (mark) {
+                        response.append("Nice! I've marked this task as done:\n");
+                    } else {
+                        response.append("OK, I've marked this task as not done yet:\n");
+                    }
+                    response.append("  [").append(curTask.getStatusIcon()).append("] ").append(curTask.getDescription());
                 }
-                System.out.println(linebreak);
             } else {
-                storedPhrases[phraseCount] = currentInput;
-                phraseCount++;
-                reply("added: " + currentInput);
+                taskList.add(new Task(currentInput));
+
+                response.append("Added: ").append(currentInput);
             }
+            reply(response.toString());
             currentInput = sc.nextLine();
         }
-        reply(bye);
+        //Signing off
+        reply("Bye. Hope to see you again!");
     }
 }
