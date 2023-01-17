@@ -59,13 +59,8 @@ public class Duke {
         TaskList tasks = new TaskList();
 
         while(!input.equalsIgnoreCase("bye")) {
-            if (input.equalsIgnoreCase("list")) {
-                printRes(tasks.getTaskList());
-            } else {
-                tasks.addTask(input);
-                String res = "added: " + input;
-                printRes(res);
-            }
+            Request request = new Request(input, tasks);
+            printRes(request.toString());
             input = sc.nextLine();
         }
 

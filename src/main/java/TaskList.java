@@ -19,6 +19,10 @@ public class TaskList {
         this.tasks.add(new Task(task));
     }
 
+    public Task getTask(Integer idx) {
+        return tasks.get(idx);
+    }
+
     /**
      * Getter method to get the task list
      * @return task list
