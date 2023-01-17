@@ -43,7 +43,7 @@ public class Duke {
                 try {
                     command = Command.valueOf(scanner.next().toUpperCase());
                 } catch (IllegalArgumentException illArgEx) {
-                    return msg;
+                    command = Command.ADD_TASK;
                 }
 
                 if (command.equals(Command.BYE)) {
