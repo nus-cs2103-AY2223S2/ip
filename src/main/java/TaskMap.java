@@ -20,11 +20,26 @@ public class TaskMap<T> {
         return Optional.of(taskMap.get(key));
     }
 
+    public void deleteTask(Integer key) {
+        if (taskMap.containsKey(key)) {
+            T task = taskMap.remove(key);
+            System.out.println("Noted. I've removed the task:");
+            System.out.println("\t" + task);
+            System.out.println("Now you have " + taskMap.size() + " tasks in the list.");
+        } else {
+            System.out.println("This task don't exists! Please select one from the list.");
+        }
+    }
+
     @Override
     public String toString() {
-        StringBuffer sb = new StringBuffer();
-        taskMap.forEach((k, v) -> sb.append(k).append(". ").append(v).append("\n"));
-        sb.deleteCharAt(sb.length() - 1);
-        return sb.toString();
+        if (taskMap.size() > 0) {
+            StringBuffer sb = new StringBuffer();
+            taskMap.forEach((k, v) -> sb.append(k).append(". ").append(v).append("\n"));
+            sb.deleteCharAt(sb.length() - 1);
+            return sb.toString();
+        } else {
+            return "There are no outstanding tasks!";
+        }
     }
 }
