@@ -1,13 +1,18 @@
+import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Scanner;
+import java.util.stream.Stream;
 
 public class Shao {
     public static String sep = File.separator;
@@ -86,14 +91,65 @@ public class Shao {
 
     public static void markItem(String itemNum, List<Task> items, boolean isMark) throws ParseException {
         int idx = Integer.parseInt(itemNum) - 1;
-        Task task = items.get(idx);
-        if (isMark) {
-            task.markAsDone();
-            printMarkedTask(task);
-            return;
+        try {
+            Task task = items.get(idx);
+            if (isMark) {
+                task.markAsDone();
+                printMarkedTask(task);
+                markSavedTask(idx, true);
+                return;
+            }
+            task.markAsUndone();
+            printUnmarkedTask(task);
+            markSavedTask(idx, false);
+        } catch (IndexOutOfBoundsException ex) {
+            printError(String.format("Oops! Please select item from 1 to %d inclusive.", items.size()));
         }
-        task.markAsUndone();
-        printUnmarkedTask(task);
+
+    }
+
+    static void modifyFile(String filePath, int lineNum, String newLine) {
+        File fileToBeModified = new File(filePath);
+        String content = "";
+        BufferedReader reader = null;
+        FileWriter writer = null;
+        int curLineNum = 1;
+
+        try {
+            reader = new BufferedReader(new FileReader(fileToBeModified));
+            String line = reader.readLine();
+
+            while (line != null) {
+                if (curLineNum == lineNum) {
+                    content += newLine + System.lineSeparator();
+                } else {
+                    content += line + System.lineSeparator();
+                }
+                line = reader.readLine();
+                curLineNum += 1;
+            }
+            writer = new FileWriter(fileToBeModified);
+            writer.write(content);
+        } catch (IOException e) {
+            printError("Something went wrong while modifying the file.");
+        } finally {
+            try {
+                reader.close();
+                writer.close();
+            } catch (IOException e) {
+                printError("Something went wrong while modifying the file.");
+            }
+        }
+    }
+
+    public static void markSavedTask(int idx, boolean isMark) {
+        try (Stream<String> lines = Files.lines(Paths.get(dataFilePath))) {
+            String line = lines.skip(idx).findFirst().get();
+            modifyFile(dataFilePath, idx + 1,
+                    line.replaceFirst("[01]", isMark ? "1" : "0"));
+        } catch (IOException ex) {
+            printError("Something went wrong while marking the task status.");
+        }
     }
 
     public static void deleteItem(String itemNum, List<Task> items) throws ParseException {
