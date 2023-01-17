@@ -113,7 +113,7 @@ public class CatBot {
         for (String line: lines) {
             box_width = Math.max(box_width, Wcwidth.strWidth(line)); // strWidth for language support
         }
-        box_width = (int) (Math.ceil(box_width / 10.0) * 10) + 5;
+        box_width = (int) (Math.ceil(box_width / 10.0) * 10) + 2;
         StringBuilder output = new StringBuilder();
         if (error) {
             output.append(ConsoleColors.RED);

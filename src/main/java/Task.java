@@ -9,11 +9,22 @@ public abstract class Task {
         DEADLINE
     }
 
+    /**
+     * Constructor for a Task
+     * Since Task is an abstract class this should NOT be called directory.
+     * @param taskStr is the description of the task
+     */
     public Task(String taskStr) {
         this.taskStr = taskStr;
         done = false;
     }
 
+    /**
+     * Factory builder for different types of tasks.
+     * @param command is the input typed in by the user
+     * @return the relevant Task subclass
+     * @throws CatBotException if the input is malformed
+     */
     public static Task fromCommand(String command) throws CatBotException {
         String[] cmd = command.split(" ", 2);
         if (cmd.length == 1) {
@@ -43,10 +54,18 @@ public abstract class Task {
         }
     }
 
+    /**
+     * Setter for done
+     * @param done is whether the task is marked as done
+     */
     public void setDone(boolean done) {
         this.done = done;
     }
 
+    /**
+     * Internal method for getting the icon for a marked task
+     * @return a string that should be placed in the slot indicating whether this task is marked
+     */
     public String getStatusIcon() {
         return done ? ConsoleColors.GREEN + "✓" + ConsoleColors.RESET : " ";
     }
