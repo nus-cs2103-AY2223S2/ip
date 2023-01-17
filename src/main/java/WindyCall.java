@@ -129,17 +129,47 @@ public class WindyCall {
             else {
                 String[] parts = userCommand.split(" ");
                 if (parts[0].equals("mark")) {
-                    System.out.println("     Good job! I've marked this task as done:");
-                    int num = Integer.parseInt(parts[1]);
-                    chatBox.tasks[num - 1].markAsDone();
-                    space();
-                    System.out.println(chatBox.tasks[num - 1]);
+                    if (parts.length == 1) {
+                        System.out.println("     You should input a number to mark/unmark a task");
+                        line();
+                        continue;
+                    }
+                    int num = -1;
+                    try {
+                        num = Integer.parseInt(parts[1]);
+                    } catch (NumberFormatException e) {
+                        space();
+                        System.out.println("☹ OOPS!!! You should input a number");
+                    }
+                    if (num >= 1 && num <= chatBox.cnt) {
+                        System.out.println("     Good job! I've marked this task as done:");
+                        chatBox.tasks[num - 1].markAsDone();
+                        space();
+                        System.out.println(chatBox.tasks[num - 1]);
+                    } else if (num != -1) {
+                        System.out.println("     Sorry, your index is out of range");
+                    }
                 } else if (parts[0].equals("unmark")) {
-                    System.out.println("     OK, I've marked this task as not done yet:");
-                    int num = Integer.parseInt(parts[1]);
-                    chatBox.tasks[num - 1].unmark();
-                    space();
-                    System.out.println(chatBox.tasks[num - 1]);
+                    if (parts.length == 1) {
+                        System.out.println("     You should input a number to mark/unmark a task");
+                        line();
+                        continue;
+                    }
+                    int num = -1;
+                    try {
+                        num = Integer.parseInt(parts[1]);
+                    } catch (NumberFormatException e) {
+                        space();
+                        System.out.println("☹ OOPS!!! You should input a number");
+                    }
+                    if (num >= 1 && num <= chatBox.cnt) {
+                        System.out.println("     OK, I've marked this task as not done yet:");
+                        chatBox.tasks[num - 1].unmark();
+                        space();
+                        System.out.println(chatBox.tasks[num - 1]);
+                    } else if (num != -1){
+                        System.out.println("     Sorry, your index is out of range");
+                    }
                 } else {
                     try {
                         chatBox.addTask(userCommand);

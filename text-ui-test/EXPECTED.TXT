@@ -22,6 +22,9 @@
      Now you have 3 tasks in the list.
      --------------------------------------------------
      --------------------------------------------------
+     Sorry, your index is out of range
+     --------------------------------------------------
+     --------------------------------------------------
      Good job! I've marked this task as done:
      [E][X] project meeting (from: Aug 6th 2pm to: 4pm)
      --------------------------------------------------
@@ -44,6 +47,9 @@
      Now you have 4 tasks in the list.
      --------------------------------------------------
      --------------------------------------------------
+     ? OOPS!!! You should input a number
+     --------------------------------------------------
+     --------------------------------------------------
      Here are all of your tasks:
      1.[T][X] read book
      2.[D][X] return book (by: June 6th)
@@ -61,6 +67,9 @@
      Got it. I've added this Todo task:
      [T][ ] borrow book
      Now you have 5 tasks in the list.
+     --------------------------------------------------
+     --------------------------------------------------
+     You should input a number to mark/unmark a task
      --------------------------------------------------
      --------------------------------------------------
      ? OOPS!!! The description of an event cannot be empty!
