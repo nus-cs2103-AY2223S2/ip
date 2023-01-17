@@ -42,7 +42,7 @@ public class EventCommand extends AddCommand {
         String[] descriptionAndStartEnd = argStr.split(" /from ", 2);
 
         if (descriptionAndStartEnd.length != 2) {
-            throw new DukeException("The start date/time of an event must be specified.");
+            throw getDateRangeException();
         }
 
         descriptionAndStartEnd[0] = descriptionAndStartEnd[0].trim();
@@ -54,18 +54,14 @@ public class EventCommand extends AddCommand {
 
         String[] startAndEnd = descriptionAndStartEnd[1].split(" /to ", 2);
         if (startAndEnd.length != 2) {
-            throw new DukeException("The end date/time of an event must be specified.");
+            throw getDateRangeException();
         }
 
         startAndEnd[0] = startAndEnd[0].trim();
         startAndEnd[1] = startAndEnd[1].trim();
 
-        if (startAndEnd[0].isEmpty()) {
-            throw new DukeException("The start date/time of an event must be specified.");
-        }
-
-        if (startAndEnd[1].isEmpty()) {
-            throw new DukeException("The end date/time of an event must be specified.");
+        if (startAndEnd[0].isEmpty() || startAndEnd[1].isEmpty()) {
+            throw getDateRangeException();
         }
 
         return new String[] {descriptionAndStartEnd[0], startAndEnd[0], startAndEnd[1]};
@@ -73,5 +69,9 @@ public class EventCommand extends AddCommand {
 
     private Event createEvent(String[] args) {
         return new Event(false, args[0], args[1], args[2]);
+    }
+
+    private DukeException getDateRangeException() {
+        return new DukeException("The date range of an event must be specified.");
     }
 }
