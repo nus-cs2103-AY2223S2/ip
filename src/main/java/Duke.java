@@ -38,7 +38,7 @@ public class Duke {
     private String execute(String rawInput, MainManager manager) {
         String msg = rawInput;
         String inputString = rawInput;
-        Command command = Command.ADD_TASK;
+        Command command = Command.TODO;
 
         try (Scanner scanner = new Scanner(rawInput)) {
             if (scanner.hasNext()) {
@@ -49,7 +49,7 @@ public class Duke {
                 }
             }
         } catch (IllegalArgumentException noElmEx) {
-            command = Command.ADD_TASK;
+            command = Command.TODO;
         }
 
         if (command.equals(Command.BYE)) {
