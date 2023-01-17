@@ -11,6 +11,16 @@ public class Duke {
     protected static String farewellString = "Bye. Hope to see you again soon!";
     protected static String readListString = "Here are the tasks in your list:";
 
+    protected static enum Command { 
+        list, bye, mark, unmark, todo, deadline, event, delete;
+        public static Command findCommand(String name) {
+            for (Command command : Command.values()) {
+                if (command.name().equalsIgnoreCase(name)) { return command; }
+            } 
+            return null;
+        }
+    }
+
     public static void main(String[] args) throws IOException {
         System.out.println(outlinesString + "\n" + introductionString + "\n" + outlinesString);
         boolean continueConvo = true;
@@ -29,15 +39,25 @@ public class Duke {
     }
 
     private static boolean handleMessage(String message) {
-        if (message.equals("list")) { read(); }
-        else if (message.equals("bye")) { return endConvo(); }
-        else if (message.startsWith("mark")) { markTask(message); }
-        else if (message.startsWith("unmark", 0)) { unmarkTask(message); }
-        else if (message.startsWith("todo")) { updateToDo(message); }
-        else if (message.startsWith("deadline")) { updateDeadline(message); }
-        else if (message.startsWith("event")) { updateEvent(message); }
-        else if (message.startsWith("delete")) { delete(message); }
-        else { throw new InvalidInputException(null); }
+        Command command = Command.findCommand(message.split(" ")[0]);
+        if (command == null) { throw new InvalidInputException(null); }
+        switch (command) {
+            case list: read();
+                break;
+            case bye: return endConvo();
+            case mark: markTask(message);
+                break;
+            case unmark: unmarkTask(message);
+                break;
+            case todo: updateToDo(message);
+                break;
+            case deadline: updateDeadline(message);
+                break;
+            case event: updateEvent(message);
+                break;
+            case delete: delete(message);
+                break;
+        }
         return true;
     }
     private static void read() {
@@ -55,12 +75,11 @@ public class Duke {
 
     private static void delete(String message) {
         int num = Integer.parseInt(message.split("delete ")[1]);
-        if (num >= db.size()) { throw new DeleteOutOfIndexException(null); }
+        if (num >= db.size()) { throw new SelectOutOfIndexException(null); }
         Task task = db.remove(num - 1);
         System.out.println(Task.deleteTaskString + "\n" + task + "\n" +  "Now you have " + db.size() + " tasks in the list");
     }
 
-    
     private static boolean endConvo() {
         System.out.println(farewellString);
         return false;
@@ -68,11 +87,13 @@ public class Duke {
 
     private static void markTask(String message) {
         int ind = Integer.parseInt(message.split(" ")[1]) - 1;
+        if (ind >= db.size()) { throw new SelectOutOfIndexException(null); }
         db.get(ind).setDone();
     }
 
     private static void unmarkTask(String message) {
         int ind = Integer.parseInt(message.split(" ")[1]) - 1;
+        if (ind >= db.size()) { throw new SelectOutOfIndexException(null); }
         db.get(ind).setUndone();
     }
 
@@ -84,6 +105,7 @@ public class Duke {
 
     private static void updateDeadline(String message) {
         if (message.equals("deadline")) { throw new NoDescriptionException(message, null); }
+        if (!message.contains("/by")) { throw new NoDateException(message, null); }
         String[] temp = message.split("deadline ");
         temp = temp[1].split(" /by ");
         Deadline deadline = new Deadline(temp[0], temp[1]);
@@ -92,6 +114,7 @@ public class Duke {
 
     private static void updateEvent(String message) {
         if (message.equals("event")) { throw new NoDescriptionException(message, null); }
+        if (!message.contains("/to") && !message.contains("/from")) { throw new NoDateException(message, null); }
         String[] temp = message.split("event ");
         temp = temp[1].split(" /from ");
         String description = temp[0];
