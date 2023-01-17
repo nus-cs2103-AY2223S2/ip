@@ -43,6 +43,13 @@ public abstract class SetDoneCommand implements Command {
      */
     protected abstract boolean shouldBeDone();
 
+    /**
+     * Returns the prefix to prepend to the response message when the command succeeds.
+     *
+     * @return The prefix to prepend to the response message when the command succeeds.
+     */
+    protected abstract String getSuccessMessagePrefix();
+
     private int extractValidIndex(String input, List<Task> tasks) throws DukeException {
         String argStr = input.replaceFirst(getCommand(), "").trim();
 
@@ -77,7 +84,7 @@ public abstract class SetDoneCommand implements Command {
     }
 
     private String getMessage(Task task) {
-        return String.format("Nice! I've marked this task as done:\n  %s", task.toString());
+        return String.format("%s\n  %s", getSuccessMessagePrefix(), task.toString());
     }
 //    @Override
 //    public CommandResponse run(String input, List<Task> tasks) throws DukeException {

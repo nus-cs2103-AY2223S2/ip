@@ -33,4 +33,9 @@ public class MarkCommand extends SetDoneCommand {
     protected boolean shouldBeDone() {
         return true;
     }
+
+    @Override
+    protected String getSuccessMessagePrefix() {
+        return "Nice! I've marked this task as done:";
+    }
 }
