@@ -12,6 +12,8 @@ public class Duke {
     private static final String NO_INT_ERR_STRING = "Hey, you did not enter any numbers";
     private static final String OUT_RANGE_ERR_STRING = "Hey, the number you've entered is not vaild";
     private static final String UNKNOWN_ERR_STRING = "Hey, an unknown error happended, oh no";
+    private static final String EMPTY_ERR_STRING = "Hey, ☹ The description of a todo cannot be empty.";
+    private static final String UNKNOWN_CMD_ERR_STRING = "Hey, ☹ I'm sorry, but I don't know what that means :-(";
 
     public static void main(String[] args) {
         String logo = " ____        _        \n"
@@ -71,21 +73,47 @@ public class Duke {
                             }
                         }
                         break;
-                    } else if (input.startsWith("todo ")) {
-                        Task newTask = new Todo(input.substring("todo ".length()));
+                    } else if (input.startsWith("todo ") || input.startsWith("todo")) {
+                        String title = input.substring("todo".length());
+                        if (input.startsWith("todo ")) {
+                            input.substring("todo ".length());
+                        }
+                        if (title.length() == 0) {
+                            printer(EMPTY_ERR_STRING);
+                            break;
+                        }
+                        Task newTask = new Todo(title);
                         tasksList.add(newTask);
                         printer("added: " + newTask);
-                    } else if (input.startsWith("deadline ")) {
-                        Task newTask = new Deadline(input.substring("deadline ".length(), input.indexOf("/by")),
+                    } else if (input.startsWith("deadline ") || input.startsWith("deadline")) {
+                        String title = input.substring("deadline".length(), input.indexOf("/by"));
+                        if (input.startsWith("deadline ")) {
+                            input.substring("deadline ".length(), input.indexOf("/by"));
+                        }
+                        if (title.length() == 0) {
+                            printer(EMPTY_ERR_STRING);
+                            break;
+                        }
+                        Task newTask = new Deadline(title,
                                 input.substring(input.indexOf("/by")).replace("/by ", ""));
                         tasksList.add(newTask);
                         printer("added: " + newTask);
-                    } else if (input.startsWith("event ")) {
-                        Task newTask = new Event(input.substring("event ".length(), input.indexOf("/from")),
+                    } else if (input.startsWith("event ") || input.startsWith("event")) {
+                        String title = input.substring("event".length(), input.indexOf("/from"));
+                        if (input.startsWith("event ")) {
+                            input.substring("event ".length(), input.indexOf("/from"));
+                        }
+                        if (title.length() == 0) {
+                            printer(EMPTY_ERR_STRING);
+                            break;
+                        }
+                        Task newTask = new Event(title,
                                 input.substring(input.indexOf("/from"), input.indexOf("/to")).replace("/from ", ""),
                                 input.substring(input.indexOf("/to")).replace("/to ", ""));
                         tasksList.add(newTask);
                         printer("added: " + newTask);
+                    } else {
+                        printer(UNKNOWN_CMD_ERR_STRING);
                     }
                     break;
             }
