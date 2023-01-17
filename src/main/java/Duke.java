@@ -6,7 +6,7 @@ May want to catch NumberFormatException for Integer.parseInt
  */
 
 public class Duke {
-    public static ArrayList<Task> list = new ArrayList<Task>();
+    public static ArrayList<Task> taskList = new ArrayList<Task>();
     public static Scanner sc = new Scanner(System.in);
     public static boolean exitApp = false;
 
@@ -39,54 +39,140 @@ public class Duke {
             return;
         }
 
-        String[] words  = input.split(" ");
-        String firstWord = words[0];
+        Scanner stringStream = new Scanner(input);
+        String command = stringStream.next();
 
-        if (firstWord.equalsIgnoreCase("bye")) {
+
+        if (command.equalsIgnoreCase("bye")) {
             exitApp = true;
             return;
-        }
-
-        if (firstWord.equalsIgnoreCase("list")) {
-            String output = "";
-            for (int i = 0; i != list.size();++i) {
-               Task t = list.get(i);
-               output += (i + 1) + ". " + t.toString() + "\n";
-            }
-            displayMessage(output);
+        }else if (command.equalsIgnoreCase("list")) {
+            handleList();
+            return;
+        } else if (command.equalsIgnoreCase("mark")) {
+            handleMark(stringStream);
+            return;
+        } else if (command.equalsIgnoreCase("unmark")) {
+            handleUnmark(stringStream);
+            return;
+        } else if (command.equalsIgnoreCase("deadline")) {
+            handleDeadline(stringStream);
+            return;
+        } else if (command.equalsIgnoreCase("event")) {
+            handleEvent(stringStream);
+            return;
+        } else if (command.equalsIgnoreCase("todo")) {
+            handleToDo(stringStream);
             return;
         }
 
-        if (firstWord.equalsIgnoreCase("mark")) {
-            int target = Integer.parseInt(words[1]) - 1;
-            if (target < 0 || target >= list.size()) {
-                displayMessage("This task does not exist!");
-                return;
-            }
-            Task t = list.get(target);
-            t.mark();
-            String output = "I've marked this task as done!\n" + t.toString();
-            displayMessage(output);
-            return;
-        }
-
-        if (firstWord.equalsIgnoreCase("unmark")) {
-            int target = Integer.parseInt(words[1]) - 1;
-            if (target < 0 || target >= list.size()) {
-                displayMessage("This task does not exist!");
-                return;
-            }
-            Task t = list.get(target);
-            t.unmark();
-            String output = "I've marked this task as not done!\n" + t.toString();
-            displayMessage(output);
-            return;
-        }
-
-        list.add(new Task(input));
+        taskList.add(new Task(input));
         displayMessage("Added " + input);
     }
 
+    public static void handleList() {
+        String output = "";
+        for (int i = 0; i != taskList.size();++i) {
+            Task t = taskList.get(i);
+            output += (i + 1) + ". " + t.toString() + "\n";
+        }
+        displayMessage(output);
+    }
+
+    public static void handleMark(Scanner stringStream) {
+        int target = Integer.parseInt(stringStream.next()) - 1;
+        if (target < 0 || target >= taskList.size()) {
+            displayMessage("This task does not exist!");
+            return;
+        }
+        Task t = taskList.get(target);
+        t.mark();
+        String output = "I've marked this task as done!\n" + t.toString();
+        displayMessage(output);
+        return;
+    }
+
+    public static void handleUnmark(Scanner stringStream) {
+        int target = Integer.parseInt(stringStream.next()) - 1;
+        if (target < 0 || target >= taskList.size()) {
+            displayMessage("This task does not exist!");
+            return;
+        }
+        Task t = taskList.get(target);
+        t.unmark();
+        String output = "I've marked this task as not done!\n" + t.toString();
+        displayMessage(output);
+    }
+
+    public static void handleDeadline(Scanner stringStream) {
+        String taskDesc = "";
+        String by = "";
+        boolean foundBy = false;
+        while (stringStream.hasNext()) {
+            String temp = stringStream.next();
+            if (temp.equalsIgnoreCase("/by")) {
+                foundBy = true;
+                continue;
+            }
+
+            if (foundBy) {
+                by += temp + " ";
+            } else {
+                taskDesc += temp + " ";
+            }
+        }
+        Deadline newTask = new Deadline(taskDesc.trim(), by.trim());
+        taskList.add(newTask);
+        String output = "I've added this task:\n" + newTask.toString() + "\n" + "You now have " + taskList.size() + " tasks in the list";
+        displayMessage(output);
+    }
+
+    public static void handleEvent(Scanner stringStream) {
+        String taskDesc = "";
+        String from = "";
+        String to = "";
+
+        boolean foundFrom = false;
+        boolean foundTo = false;
+
+        while (stringStream.hasNext()) {
+            String temp = stringStream.next();
+
+            if (temp.equalsIgnoreCase("/from")) {
+                foundFrom = true;
+                continue;
+            } else if (temp.equalsIgnoreCase("/to")) {
+                foundTo = true;
+                continue;
+            }
+
+            if (foundTo) {
+                to += temp + " ";
+            } else if (foundFrom) {
+                from += temp + " ";
+            } else {
+                taskDesc += temp + " ";
+            }
+        }
+        Event newTask = new Event(taskDesc.trim(), from.trim(), to.trim());
+        taskList.add(newTask);
+        String output = "I've added this task:\n" + newTask.toString() + "\n" + "You now have " + taskList.size() + " tasks in the list";
+        displayMessage(output);
+    }
+
+    public static void handleToDo(Scanner stringStream) {
+        String taskDesc = "";
+
+        while (stringStream.hasNext()) {
+            String temp = stringStream.nextLine();
+            taskDesc += temp;
+        }
+
+        ToDo newTask = new ToDo(taskDesc.trim());
+        taskList.add(newTask);
+        String output = "I've added this task:\n" + newTask.toString() + "\n" + "You now have " + taskList.size() + " tasks in the list";
+        displayMessage(output);
+    }
     public static void displayMessage(String msg) {
 
         String wrapTop = "__________________________\n";
