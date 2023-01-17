@@ -67,6 +67,22 @@ public class TunaBot {
                     throw new InputException("BLUB! Task chosen isn't on the list!");
                 }
                 break;
+            case "delete":
+                if (command.length < 2) {
+                    throw new InputException("BLUB! No task chosen!");
+                }
+                try {
+                    int index = Integer.parseInt(command[1]);
+                    System.out.println("    Blub! i have deleted this task!");
+                    System.out.println(tasks.get(index - 1));
+                    tasks.remove(index - 1);
+                    System.out.println("    Blub! You have " + tasks.size() + " tasks now!");
+                } catch (IllegalArgumentException e) {
+                    throw new InputException("BLUB! Index chosen isn't a number!");
+                } catch (IndexOutOfBoundsException e) {
+                    throw new InputException("BLUB! Task chosen isn't on the list!");
+                }
+                break;
             case "todo":
                 if (command.length < 2) {
                     throw new InputException("BLUB! Task needs a name!");
