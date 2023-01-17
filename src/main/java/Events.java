@@ -2,8 +2,11 @@ public class Events extends Task {
     protected String fromDetails;
     protected String toDetails;
 
-    Events(String taskName) {
+    Events(String taskName) throws DukeExceptions{
         super(taskName.split("/from ")[0]);
+        if (taskName.length() <= 0 || taskName.isBlank()) {
+            throw new DukeExceptions("event");
+        }
         String[] initialSplit = taskName.split("/from ");
         String[] nextSplit = initialSplit[1].split("/to ");
         this.fromDetails = nextSplit[0];

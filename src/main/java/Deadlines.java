@@ -1,8 +1,11 @@
 public class Deadlines extends Task {
     String endsBy;
 
-    Deadlines(String taskName) {
+    Deadlines(String taskName) throws DukeExceptions{
         super(taskName.split("/by ")[0]);
+        if (taskName.length() <= 0 || taskName.isBlank()) {
+            throw new DukeExceptions("deadline");
+        }
         this.endsBy = taskName.split("/by ")[1];
     }
 

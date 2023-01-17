@@ -1,7 +1,11 @@
 public class ToDo extends Task {
     
-    ToDo(String taskName) {
+    ToDo(String taskName) throws DukeExceptions{
         super(taskName);
+        if (taskName.length() <= 0 || taskName.isBlank()) {
+            throw new DukeExceptions("todo");
+            // throw new StringIndexOutOfBoundsException("TestingException");
+        }
     }
 
     @Override
