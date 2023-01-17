@@ -22,19 +22,18 @@ public class Duke {
   }
 
   public static Task makeTask(String input) {
-    String taskType = input.split(" ")[0];
     String rest = input.substring(input.indexOf(" ") + 1);
-
-    if (taskType.equals("todo")) {
-      return new ToDo(rest);
-    } else if (taskType.equals("deadline")) {
-      String[] words = rest.split("/by");
-      return new Deadline(words[0].strip(), words[1].strip());
-    } else {
-      String description = rest.split("/from")[0].strip();
-      String start = rest.split("/from")[1].split("/to")[0].strip();
-      String end = rest.split("/to")[1].strip();
-      return new Event(description, start, end);
+    switch (input.split(" ")[0]) {
+      case "todo":
+        return new ToDo(rest);
+      case "deadline":
+        String[] words = rest.split("/by");
+        return new Deadline(words[0].strip(), words[1].strip());
+      default:
+        String description = rest.split("/from")[0].strip();
+        String start = rest.split("/from")[1].split("/to")[0].strip();
+        String end = rest.split("/to")[1].strip();
+        return new Event(description, start, end);
     }
   }
 
