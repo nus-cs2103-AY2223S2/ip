@@ -39,7 +39,7 @@ public class Duke {
                 case "todo":
                     records[index] = new Todo(parts[1]);
                     index++;
-                    System.out.println("Added to-do mission: ");
+                    System.out.println("Added to-do mission:");
                     System.out.println(records[index-1].toString());
                     System.out.println("You have " + index + " missions in the list");
                     break;
@@ -48,7 +48,7 @@ public class Duke {
                     parts = userinput.split("/");
                     records[index] = new Deadline(parts[0], parts[1]);
                     index++;
-                    System.out.println("Added deadline mission: ");
+                    System.out.println("Added deadline mission:");
                     System.out.println(records[index-1].toString());
                     System.out.println("You have " + index + " missions in the list");
                     break;
@@ -57,7 +57,7 @@ public class Duke {
                     parts = userinput.split("/");
                     records[index] = new Event(parts[0], parts[1], parts[2]);
                     index++;
-                    System.out.println("Added event mission: ");
+                    System.out.println("Added event mission:");
                     System.out.println(records[index-1].toString());
                     System.out.println("You have " + index + " missions in the list");
                     break;
