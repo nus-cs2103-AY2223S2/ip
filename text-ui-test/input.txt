@@ -1,0 +1,23 @@
+task number 1
+todo cs2106 tutorial 1
+deadline cs1234 project 1
+deadline cs1234 project 1 /by next monday 01/01 2359
+todo
+deadline
+event
+event piano concert /from tmr 7pm
+event piano concert /to tmr 7pm
+event piano concert /from tmr 5pm /to tmr 7pm
+done todo
+done 8
+done 4
+done 5
+done 2
+done 1
+done 9
+done -1
+done 8
+undone 4
+undone 2
+undone 7
+bye
