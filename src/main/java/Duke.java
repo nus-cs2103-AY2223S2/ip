@@ -42,7 +42,7 @@ public class Duke {
                 int indexToUse = Integer.parseInt(userInput.split(" ")[1]) - 1;
                 Task currTask = storedText.get(indexToUse);
                 currTask.setDone();
-                String toOutput = "Nice! I've marked this task as done:\n" + "[X] " + currTask.name;
+                String toOutput = "Nice! I've marked this task as done:\n" + "[X] " + currTask.getName();
                 System.out.println(toOutput);
                 userInput = brToUse.readLine();
                 continue;
@@ -52,7 +52,7 @@ public class Duke {
                 int indexToUse = Integer.parseInt(userInput.split(" ")[1]) - 1;
                 Task currTask = storedText.get(indexToUse);
                 currTask.setUndone();
-                String toOutput = "Ok, I've marked this task as not done yet:\n" + "[ ] " + currTask.name;
+                String toOutput = "Ok, I've marked this task as not done yet:\n" + "[ ] " + currTask.getName();
                 System.out.println(toOutput);
                 userInput = brToUse.readLine();
                 continue;
@@ -103,95 +103,97 @@ public class Duke {
                 continue;
             }
 
-            Task toAdd = new Task(userInput);
-            storedText.add(toAdd);
-            String toOutput = "added: " + toAdd.name;
-            System.out.println(toOutput);
-            userInput = brToUse.readLine();
+            //Clarify if still need to have level-2 functionality.
+            // Task toAdd = new Task(userInput);
+            // storedText.add(toAdd);
+            // String toOutput = "added: " + toAdd.name;
+            // System.out.println(toOutput);
+            // userInput = brToUse.readLine();
+
         }
     }
 
 }
 
-class Task {
-    String name;
-    boolean done;
+// class Task {
+//     String name;
+//     boolean done;
 
-    Task(String taskName) {
-        this.name = taskName;
-        done = false;
-    }
+//     Task(String taskName) {
+//         this.name = taskName;
+//         done = false;
+//     }
 
-    public void setDone() {
-        done = true;
-    }
+//     public void setDone() {
+//         done = true;
+//     }
 
-    public void setUndone() {
-        done = false;
-    }
+//     public void setUndone() {
+//         done = false;
+//     }
 
-}
+// }
 
-class ToDo extends Task {
+// class ToDo extends Task {
     
-    ToDo(String taskName) {
-        super(taskName);
-    }
+//     ToDo(String taskName) {
+//         super(taskName);
+//     }
 
-    @Override
-    public String toString() {
-        String toReturn = "";
-        if (this.done) {
-            toReturn = "[T][X] " + this.name;
-        } else {
-            toReturn = "[T][ ]" + this.name;
-        }
-        return toReturn;
-    }
-}
+//     @Override
+//     public String toString() {
+//         String toReturn = "";
+//         if (this.done) {
+//             toReturn = "[T][X] " + this.name;
+//         } else {
+//             toReturn = "[T][ ]" + this.name;
+//         }
+//         return toReturn;
+//     }
+// }
 
-class Deadlines extends Task {
+// class Deadlines extends Task {
 
-    String endsBy;
+//     String endsBy;
 
-    Deadlines(String taskName) {
-        super(taskName.split("/by ")[0]);
-        this.endsBy = taskName.split("/by ")[1];
-    }
+//     Deadlines(String taskName) {
+//         super(taskName.split("/by ")[0]);
+//         this.endsBy = taskName.split("/by ")[1];
+//     }
 
-    @Override
-    public String toString() {
-        String toReturn = "";
-        if (this.done) {
-            toReturn = "[D][X] " + this.name + "(by: " + endsBy + ")";
-        } else {
-            toReturn = "[D][ ] " + this.name + "(by: " + endsBy + ")";            
-        }
-        return toReturn;
-    }
-}
+//     @Override
+//     public String toString() {
+//         String toReturn = "";
+//         if (this.done) {
+//             toReturn = "[D][X] " + this.name + "(by: " + endsBy + ")";
+//         } else {
+//             toReturn = "[D][ ] " + this.name + "(by: " + endsBy + ")";            
+//         }
+//         return toReturn;
+//     }
+// }
 
-class Events extends Task {
+// class Events extends Task {
 
-    String fromDetails;
-    String toDetails;
+//     String fromDetails;
+//     String toDetails;
 
-    Events(String taskName) {
-        super(taskName.split("/from ")[0]);
-        String[] initialSplit = taskName.split("/from ");
-        String[] nextSplit = initialSplit[1].split("/to ");
-        this.fromDetails = nextSplit[0];
-        this.toDetails = nextSplit[1];
-    }
+//     Events(String taskName) {
+//         super(taskName.split("/from ")[0]);
+//         String[] initialSplit = taskName.split("/from ");
+//         String[] nextSplit = initialSplit[1].split("/to ");
+//         this.fromDetails = nextSplit[0];
+//         this.toDetails = nextSplit[1];
+//     }
 
-    @Override
-    public String toString() {
-        String toReturn = "";
-        if (this.done) {
-            toReturn = "[E][X] " + this.name + " (from: " + this.fromDetails + "to: " + this.toDetails + ")";
-        } else {
-            toReturn = "[E][ ] " + this.name + " (from: " + this.fromDetails + "to: " + this.toDetails + ")";
-        }
-        return toReturn;
-    }
-}
+//     @Override
+//     public String toString() {
+//         String toReturn = "";
+//         if (this.done) {
+//             toReturn = "[E][X] " + this.name + " (from: " + this.fromDetails + "to: " + this.toDetails + ")";
+//         } else {
+//             toReturn = "[E][ ] " + this.name + " (from: " + this.fromDetails + "to: " + this.toDetails + ")";
+//         }
+//         return toReturn;
+//     }
+// }
