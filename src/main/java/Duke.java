@@ -1,4 +1,5 @@
 import java.util.Scanner;
+import parser.inputParser;
 
 public class Duke {
     /**
@@ -16,22 +17,21 @@ public class Duke {
     public static void main(String[] args) {
         final String intro = "Hello! I'm Duke\n\t What can I do for you?";
         final String extStr = "Bye. Hope to see you again soon!";
-        final String empStr = "Please enter an input for me to echo!";
 
         Duke.print(intro);
 
         Scanner scanner = new Scanner(System.in);  // Create a Scanner object
 
         while (true) {
-            String input = scanner.nextLine();  // Read user input
+            String req = scanner.nextLine();  // Read user req
+            inputParser input = new inputParser(req);
+            String out = input.parse();
 
-            if (input.equalsIgnoreCase("bye")) {
+            if (out.equalsIgnoreCase("bye")) {
                 break;
-            } else if (input.equals("")) {
-                Duke.print(empStr);
-            } else {
-                Duke.print(input);
             }
+
+            Duke.print(out);
         }
         Duke.print(extStr);
     }
