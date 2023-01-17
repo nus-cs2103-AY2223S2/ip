@@ -30,14 +30,22 @@ public class Duke {
 
         while (true) {
             String req = scanner.nextLine();  // Read user req
+
+            // Check if user wants to exit
             if (req.equalsIgnoreCase("bye")) {
                 break;
             }
 
+            // Parse the user input
             InputParser input = new InputParser(req);
             try {
+                // Parsing the input returns a Response
                 Response res = input.parse();
+
+                // Execute the Response to do what needs to be done and get an output message
                 String out = res.exec(toDoList);
+
+                // Print the output message
                 Duke.print(out);
             } catch (MissingArgumentException err) {
                 Duke.print(err.toString());
