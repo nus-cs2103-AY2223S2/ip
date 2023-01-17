@@ -86,32 +86,22 @@ class TaskBook {
         System.out.println(Duke.TAB + Duke.HOR_BAR);
         for (Task t : listOfTasks) {
             System.out.print(Duke.TAB + counter++ + ". ");
-            printTaskWithStatus(t);
+            System.out.print(t.toString());
         }
         System.out.println(Duke.TAB + Duke.HOR_BAR);
     }
 
-    /** This function prints out a line of the task with its status.
-     *
-     * @param t The Task to print its status and name.
-     */
-    public void printTaskWithStatus(Task t) {
-        System.out.print(t.getStatusIcon() + " ");
-        t.printTaskName();
-        System.out.print("\n");
-    }
-
     /** This function adds a new task into listOfTasks, and updates the number of tasks in the TaskBook.
      *
-      * @param taskName The name of the task to add to listOfTasks.
+      * @param description The name of the task to add to listOfTasks.
      */
-    public void addTask(String taskName) {
+    public void addTask(String description) {
         numOfTasks++;
-        Task t = new Task(taskName);
+        Task t = new Task(description);
         listOfTasks.add(t);
 
         System.out.println(Duke.TAB + Duke.HOR_BAR);
-        System.out.println(Duke.TAB + "added: " + taskName);
+        System.out.println(Duke.TAB + "added: " + description);
         System.out.println(Duke.TAB + Duke.HOR_BAR);
     }
 
@@ -160,32 +150,27 @@ class TaskBook {
 
 class Task {
     protected boolean isDone;
-    protected String taskName;
+    protected String description;
 
     /** This constructor creates a Task instance.
      *
-     * @param taskName The name of the task to be created.
+     * @param description The name of the task to be created.
      */
-    public Task(String taskName) {
-        this.taskName = taskName;
+    public Task(String description) {
+        this.description = description;
         this.isDone = false;
     }
 
     /** This function marks the task as done */
     public void markAsDone() {
         this.isDone = true;
-        System.out.println(Duke.TAB + " [X] " + taskName);
+        System.out.println(Duke.TAB + " [X] " + description);
     }
 
     /** This function marks the task as not done */
     public void markAsNotDone() {
         this.isDone = false;
-        System.out.println(Duke.TAB + " [ ] " + taskName);
-    }
-
-    /** This function prints out the task name. */
-    public void printTaskName() {
-        System.out.print(taskName);
+        System.out.println(Duke.TAB + " [ ] " + description);
     }
 
     /** This function returns a string denoting if task is done or not.
@@ -199,6 +184,12 @@ class Task {
         } else {
             return "[ ]";
         }
+    }
+
+    @Override
+    public String toString() {
+        String output = getStatusIcon() + " " + description + "\n";
+        return output;
     }
 }
 
