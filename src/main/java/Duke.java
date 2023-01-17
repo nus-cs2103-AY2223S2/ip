@@ -21,7 +21,7 @@ public class Duke {
             if (!line.equals("init")) {
                 if (line.equals("list")) {
                     displayMsg(outputList());
-                } else if (line.startsWith("mark ") || line.startsWith("unmark ")){
+                } else if (line.startsWith("mark ") || line.startsWith("unmark ")) {
                     int listIndex = Integer.parseInt(line.split(" ")[1]) - 1;
                     Task targetTask = dukeList.get(listIndex);
                     String output; 
@@ -33,6 +33,9 @@ public class Duke {
                         output = "Ok, I've marked this task as not done yet:";
                     }
                     displayMsg(output + "\n" + indentString(targetTask.toString(), 1));
+                } else if (line.startsWith("delete ")) {
+                    Task removedTask = removeTask(line);
+                    displayMsg("Noted. I've removed this task:\n" + indentString(removedTask.toString(), 1) + "\n" + countTasks());
                 } else if (Arrays.asList(taskCreationCommands).contains(line.split(" ")[0])) {  // a task creation command being called
                     Task newTask;
                     try {
@@ -45,11 +48,9 @@ public class Duke {
                         } 
                         dukeList.add(newTask);
                         StringBuilder output = new StringBuilder();
-                        output.append("Got it. I've added this task:\n" + indentString(newTask.toString(), 1) + "\n" + "Now you have " + dukeList.size());
-                        output.append(" task" + (dukeList.size() == 1 ? "" : "s") + " in the list.");
+                        output.append("Got it. I've added this task:\n" + indentString(newTask.toString(), 1) + "\n" + countTasks());
                         displayMsg(output.toString());
-                    } 
-                    catch (TaskInitError e) {
+                    } catch (TaskInitError e) {
                         displayMsg("OOPS!!! " + e.getMessage());
                     }
                    
@@ -63,7 +64,6 @@ public class Duke {
         sc.close();
         displayMsg("Bye. Hope to see you again soon!");
     }
-
 
     public static String outputList() {
         StringBuilder result = new StringBuilder("Here are the tasks in your list:");
@@ -90,6 +90,15 @@ public class Duke {
             result.append(indent + lines[i] + (i + 1 < lines.length ? "\n" : ""));
         }
         return result.toString();
+    }
+
+    public static Task removeTask(String command) {
+        int index = Integer.parseInt(command.split(" ")[1]) - 1;
+        return dukeList.remove(index);
+    }
+
+    public static String countTasks() {
+        return "Now you have " + dukeList.size() + " task" + (dukeList.size() == 1 ? "" : "s") + " in the list.";
     }
 }
 
