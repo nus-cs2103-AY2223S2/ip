@@ -2,7 +2,7 @@ import java.util.Scanner;
 
 public class Duke {
     public static void main(String[] args) {
-        printText("\t Hello! I'm Duke \n\t What can I do for you?");
+        printText("\t Hello! I'm Duke\n\t What can I do for you?");
 
         ToDoList list = new ToDoList();
         Scanner scanner = new Scanner(System.in);
@@ -38,12 +38,12 @@ public class Duke {
                         printText(list.add(TaskType.Events, scanner.nextLine()));
                         break;
                     default:
-                        throw new DukeException("\t ☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
+                        throw new DukeException("\t OOPS!!! I'm sorry, but I don't know what that means :-(");
                 }
             } catch (DukeException dukeException){
                 printText(dukeException.getMessage());
             } catch (NumberFormatException exception) {
-                printText("\t ☹ OOPS!!! Task number is invalid.");
+                printText("\t OOPS!!! Task number is invalid.");
             }
 
             input = scanner.next();

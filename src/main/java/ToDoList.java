@@ -11,7 +11,7 @@ public class ToDoList {
             switch (type) {
                 case ToDos:
                     if (s.isBlank()) {
-                        throw new DukeException("\t ☹ OOPS!!! The description of a todo cannot be empty.");
+                        throw new DukeException("\t OOPS!!! The description of a todo cannot be empty.");
                     }
 
                     ToDos todo = new ToDos(s);
@@ -20,47 +20,55 @@ public class ToDoList {
                     output += "\t   " + todo;
                     break;
 
-                case Deadlines:
+                case Deadlines: {
+                    if (s.isBlank()) {
+                        throw new DukeException("\t OOPS!!! Please provide a description and a date/time");
+                    }
                     int index = s.indexOf(" /by ");
-                    String time = s.substring(index + 5).strip();
-
-                    if (index == 0) {
-                        throw new DukeException("\t ☹ OOPS!!! The description of a deadline cannot be empty.");
+                    if (index == -1 || s.substring(index + 5)
+                            .isBlank()) {
+                        throw new DukeException("\t OOPS!!! The date/time of a deadline cannot be empty.");
                     }
-                    if (index == -1 || time.isEmpty()) {
-                        throw new DukeException("\t ☹ OOPS!!! The date/time of a deadline cannot be empty.");
+                    String desc = s.substring(0, index).strip();
+                    if (index == 0 || desc.isEmpty()) {
+                        throw new DukeException("\t OOPS!!! The description of a deadline cannot be empty.");
                     }
 
-                    Deadlines deadline = new Deadlines(s.substring(0, index)
-                                .strip(),
-                            time);
+
+                    Deadlines deadline = new Deadlines(desc,
+                            s.substring(index + 5).strip());
                     list.add(deadline);
                     output += "\t   " + deadline;
                     break;
+                }
 
-                case Events:
+                case Events: {
+                    if (s.isBlank()) {
+                        throw new DukeException("\t OOPS!!! Please provide a description and a duration");
+                    }
                     int from = s.indexOf(" /from ");
                     int to = s.indexOf(" /to ");
-                    String toTime = s.substring(to + 5).strip();
-
-                    if (from == 0 || to == 0) {
-                        throw new DukeException("\t ☹ OOPS!!! The description of an event cannot be empty.");
-                    }
                     if (from == -1 ||
                             to == -1 ||
                             to < from + 7 ||
                             s.substring(from + 7, to).isBlank() ||
-                            toTime.isEmpty()) {
-                        throw new DukeException("\t ☹ OOPS!!! The start/end date of an event cannot be empty.");
+                            s.substring(to + 5).isBlank()) {
+                        throw new DukeException("\t OOPS!!! The start/end date of an event cannot be empty.");
+                    }
+                    String desc = s.substring(0, from).strip();
+
+                    if (from == 0 || to == 0 || desc.isEmpty()) {
+                        throw new DukeException("\t OOPS!!! The description of an event cannot be empty.");
                     }
 
                     Events event = new Events(s.substring(0, from)
-                                .strip(),
-                            s.substring(from + 7, to),
-                            toTime);
+                            .strip(),
+                            s.substring(from + 7, to).strip(),
+                            s.substring(to + 5).strip());
                     list.add(event);
                     output += "\t   " + event;
                     break;
+                }
             }
             return String.format("%s\n\t Now you have %d tasks in the list.", output, list.size());
         } catch (DukeException dukeException) {
@@ -72,7 +80,7 @@ public class ToDoList {
     public String mark(int num) {
         try {
             if (num < -1 || num >= list.size()) {
-                throw new DukeException("\t ☹ OOPS!!! Task number out of range.");
+                throw new DukeException("\t OOPS!!! Task number out of range.");
             }
             return list.get(num).mark();
         } catch (DukeException dukeException) {
@@ -83,7 +91,7 @@ public class ToDoList {
     public String unMark(int num) {
         try {
             if (num < -1 || num >= list.size()) {
-                throw new DukeException("\t ☹ OOPS!!! Task number out of range.");
+                throw new DukeException("\t OOPS!!! Task number out of range.");
             }
             return list.get(num).unMark();
         } catch (DukeException dukeException) {
@@ -95,7 +103,7 @@ public class ToDoList {
         try {
             String output = "\t Noted. I've removed this task:\n";
             if (num < -1 || num >= list.size()) {
-                throw new DukeException("\t ☹ OOPS!!! Task number out of range.");
+                throw new DukeException("\t OOPS!!! Task number out of range.");
             }
             Task removed = list.remove(num);
             return String.format("%s\t   %s\n\t Now you have %d tasks in the list.", output, removed, list.size());
