@@ -13,12 +13,12 @@ abstract public class Task {
 
     public void markTask() {
         isDone = true;
-        System.out.println("Nice! I've marked this task as done: \n [X] "  + description);
+        System.out.println("Nice! I've marked this task as done:\n [X] "  + description);
     }
 
     public void unmarkTask() {
         isDone = false;
-        System.out.println("OK, I've marked this task as not done yet: \n [ ] " + description);
+        System.out.println("OK, I've marked this task as not done yet:\n [ ] " + description);
     }
 
     @Override
