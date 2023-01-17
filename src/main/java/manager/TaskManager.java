@@ -13,6 +13,10 @@ public class TaskManager {
         taskList.add(task);
     }
 
+    public void mark(int taskNum, boolean isDone) throws IndexOutOfBoundsException {
+        taskList.set(taskNum, taskList.get(taskNum).mark(isDone));
+    }
+
 
     @Override
     public String toString() {
