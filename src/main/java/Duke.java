@@ -1,4 +1,5 @@
 import java.util.Scanner;
+import task.Task;
 
 public class Duke {
     private static void printWithDecorations(String input) {
@@ -48,33 +49,23 @@ public class Duke {
 
     public static void main(String[] args) {
         Duke.welcome();
-
         Task[] tasks = new Task[100];
         int numTasks = 0;
-
         Scanner sc = new Scanner(System.in);
         String input = sc.nextLine();
+        
         while (!input.equals("bye")) {
-
             if (input.equals("list")) {
                 Duke.displayTasks(tasks, numTasks);
             } else if (input.matches("^mark\\s\\d+$")) {
-
                 // We can take this exact substring because its guaranteed that input is of form "mark %d"
                 int index = Integer.valueOf(input.substring(5)) - 1; // account for 1 indexing
-
-                if (isValidMark(tasks, index)) { // Note that this check also prints out error messages if any
+                if (isValidMark(tasks, index)) // Note that this check also prints out error messages if any
                     Duke.printWithDecorations(tasks[index].markDone());
-                }
-
             } else if (input.matches("^unmark\\s\\d+$")) {
-
                 int index = Integer.valueOf(input.substring(7)) - 1; // account for 1 indexing
-                
-                if (isValidMark(tasks, index)) { // Note that this check also prints out error messages if any
+                if (isValidMark(tasks, index)) // Note that this check also prints out error messages if any
                     Duke.printWithDecorations(tasks[index].unmarkDone());
-                }
-
             } else if (numTasks < 100) {
                 Duke.printWithDecorations("added: " + input);
                 tasks[numTasks] = new Task(input);
@@ -82,10 +73,8 @@ public class Duke {
             } else {
                 Duke.printWithDecorations("Not enough slots!");
             }
-
             input = sc.nextLine();
         }
-
         sc.close();
         Duke.bye();
     }
