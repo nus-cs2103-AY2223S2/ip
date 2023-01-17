@@ -1,7 +1,5 @@
 package duke.parser;
 
-<<<<<<< HEAD
-=======
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.fail;
@@ -10,19 +8,10 @@ import java.time.LocalDate;
 
 import org.junit.jupiter.api.Test;
 
->>>>>>> branch-A-CodingStandard
 import duke.command.AddTaskCommand;
 import duke.command.Command;
 import duke.exception.DukeException;
 import duke.task.DeadlineTask;
-<<<<<<< HEAD
-import org.junit.jupiter.api.Test;
-
-import java.time.LocalDate;
-
-import static org.junit.jupiter.api.Assertions.*;
-=======
->>>>>>> branch-A-CodingStandard
 
 class ParserTest {
     @Test

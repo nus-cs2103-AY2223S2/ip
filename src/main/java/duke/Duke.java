@@ -1,14 +1,13 @@
 package duke;
 
 import duke.command.Command;
-import duke.display.Ui;
+import duke.ui.Ui;
 import duke.exception.DukeException;
 import duke.exception.InvalidInputException;
 import duke.exception.StorageFileException;
 import duke.parser.Parser;
 import duke.storage.Storage;
 import duke.task.TaskList;
-
 
 /**
  * The main Duke class to run
@@ -30,7 +29,6 @@ public class Duke {
 
         try {
             list = storage.load();
-            System.out.println(list);
         } catch (InvalidInputException e) {
             ui.displayWithBar(e.getMessage());
             list = new TaskList();
@@ -41,24 +39,20 @@ public class Duke {
     }
 
     /**
-     * Executes the Duke program.
+     * Gets the response from Duke
+     *
+     * @param input User input
+     * @return Response from Duke
      */
-    public void run() {
-        ui.showWelcome();
-        boolean isExit = false;
-        while (!isExit) {
-            try {
-                String fullCommand = ui.readCommand();
-                Command c = Parser.parse(fullCommand);
-                c.execute(list, ui, storage);
-                isExit = c.isExit();
-            } catch (DukeException e) {
-                ui.displayWithBar(e.getMessage());
-            }
+    public String getResponse(String input) {
+        try {
+            ui.reset();
+            Command c = Parser.parse(input);
+            c.execute(list, ui, storage);
+            return ui.getResponse();
+        } catch (DukeException e) {
+            ui.appendResponse(e.getMessage());
+            return ui.getResponse();
         }
-    }
-
-    public static void main(String[] args) {
-        new Duke("data/tasks.txt").run();
     }
 }

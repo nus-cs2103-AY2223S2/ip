@@ -1,7 +1,7 @@
-# Duke
+# Mr. Bear
 > “Your mind is for having ideas, not holding them.”  – David Allen ([source](https://dansilvestre.com/productivity-quotes))
 
-Duke is a **convenient and flexible** software that helps you to manage and track all your tasks. It's,
+Mr. Bear is a **convenient and flexible** software that helps you to manage and track all your tasks. It's,
 + text-based
 + easy to learn
 + ~~FAST~~ *SUPER FAST* to use
@@ -19,12 +19,3 @@ Features:
 - [x] Manage task
 - [ ] Reminders (coming soon)
 - [ ] User Interface (coming soon)
-
-If you Java programmer, you can use it to practice Java too. Here's the `main` method:
-````java
-public class Duke {
-    public static void main(String[] args) {
-        new Duke("data/tasks.txt").run();
-    }
-}
-````

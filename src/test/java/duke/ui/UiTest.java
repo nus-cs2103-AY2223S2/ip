@@ -1,4 +1,4 @@
-package duke.display;
+package duke.ui;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 

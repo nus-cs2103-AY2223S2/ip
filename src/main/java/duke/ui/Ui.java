@@ -1,6 +1,4 @@
-package duke.display;
-
-import java.util.Scanner;
+package duke.ui;
 
 /**
  * Customize the conversation interface by changing the length of the horizontal bar
@@ -10,6 +8,7 @@ import java.util.Scanner;
 public class Ui {
     private final int horizontalLineLength;
     private final int indentSpace;
+    private StringBuilder response = new StringBuilder();
 
     /**
      * Constructor that sets HorizontalLineLength to be 70 and IndentSpace to be 4 by default.
@@ -58,29 +57,15 @@ public class Ui {
         System.out.println(bar + "\n" + indent(message) + "\n" + bar + "\n");
     }
 
-    /**
-     *  Display the Program Logo and welcome message.
-     */
-    public void showWelcome() {
-        String logo = " ____        _        \n"
-                + "|  _ \\ _   _| | _____ \n"
-                + "| | | | | | | |/ / _ \\\n"
-                + "| |_| | |_| |   <  __/\n"
-                + "|____/ \\__,_|_|\\_\\___|";
-        String greetingMessage = "Hello! I'm Duke\n"
-                + "What can I do for you?";
-
-        System.out.println("Hello from\n" + logo);
-        this.displayWithBar(greetingMessage);
+    public void reset() {
+        this.response = new StringBuilder();
     }
 
-    /**
-     * Read the user's input from the console.
-     *
-     * @return The user's input as a String.
-     */
-    public String readCommand() {
-        Scanner sc = new Scanner(System.in);
-        return sc.nextLine();
+    public String getResponse() {
+        return String.valueOf(this.response);
+    }
+
+    public void appendResponse(String message) {
+        this.response.append(message);
     }
 }

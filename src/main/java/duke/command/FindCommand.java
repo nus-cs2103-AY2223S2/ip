@@ -1,6 +1,6 @@
 package duke.command;
 
-import duke.display.Ui;
+import duke.ui.Ui;
 import duke.storage.Storage;
 import duke.task.DukeTask;
 import duke.task.TaskList;
@@ -35,6 +35,7 @@ public class FindCommand extends Command {
                 matchedTaskList.addTask(currentTask);
             }
         }
-        ui.displayWithBar("Here are the matching tasks in your list:\n" + matchedTaskList);
+        String message = "Here are the matching tasks in your list:\n" + matchedTaskList;
+        ui.appendResponse(message);
     }
 }

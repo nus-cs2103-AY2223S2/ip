@@ -1,6 +1,6 @@
 package duke.command;
 
-import duke.display.Ui;
+import duke.ui.Ui;
 import duke.exception.StorageFileException;
 import duke.storage.Storage;
 import duke.task.DukeTask;
@@ -34,7 +34,7 @@ public class AddTaskCommand extends Command {
         storage.save(tasks);
         String message = "Got it. I've added this task:\n " + task
                 + "\nNow you have " + tasks.remainingTasks() + " tasks in the list.";
-        ui.displayWithBar(message);
+        ui.appendResponse(message);
     }
 
     @Override

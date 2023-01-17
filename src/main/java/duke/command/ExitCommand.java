@@ -1,6 +1,6 @@
 package duke.command;
 
-import duke.display.Ui;
+import duke.ui.Ui;
 import duke.storage.Storage;
 import duke.task.TaskList;
 
@@ -18,8 +18,8 @@ public class ExitCommand extends Command {
      */
     @Override
     public void execute(TaskList tasks, Ui ui, Storage storage) {
-        ui.displayWithBar("Bye. Hope to see you again soon!");
-        System.exit(0);
+        String message = "Bye. Hope to see you again soon!";
+        ui.appendResponse(message);
     }
 
     /**

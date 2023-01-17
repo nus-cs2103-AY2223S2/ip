@@ -43,7 +43,7 @@ public class Parser {
         //@@author
 
         if (!instructionExtractor.matches()) {
-            throw new InvalidInputException("☹ OOPS!!! The instruction cannot be empty");
+            throw new InvalidInputException("OOPS!!! The instruction cannot be empty");
         }
         String instructionTag = instructionExtractor.group("instructionTag").strip();
         String information = instructionExtractor.group("information").strip();
@@ -57,7 +57,7 @@ public class Parser {
             if (numberChecker.matches()) {
                 return new MarkAsDoneCommand(Integer.parseInt(information) - 1);
             } else {
-                throw new InvalidInputException("☹ OOPS!!! The input task index is not a number,\n"
+                throw new InvalidInputException("OOPS!!! The input task index is not a number,\n"
                         + "Please input a valid task index");
             }
         } else if (instructionTag.equalsIgnoreCase("unmark")) {
@@ -65,7 +65,7 @@ public class Parser {
             if (numberChecker.matches()) {
                 return new UnmarkCommand(Integer.parseInt(information) - 1);
             } else {
-                throw new InvalidInputException("☹ OOPS!!! The input task index is not a number,\n"
+                throw new InvalidInputException("OOPS!!! The input task index is not a number,\n"
                         + "Please input a valid task index");
             }
         } else if (instructionTag.equalsIgnoreCase("delete")) {
@@ -73,18 +73,18 @@ public class Parser {
             if (numberChecker.matches()) {
                 return new DeleteCommand(Integer.parseInt(information) - 1);
             } else {
-                throw new InvalidInputException("☹ OOPS!!! The input task index is not a number,\n"
+                throw new InvalidInputException("OOPS!!! The input task index is not a number,\n"
                         + "Please input a valid task index");
             }
         } else if (instructionTag.equalsIgnoreCase("todo")) {
             if (!emptyStringChecker.matcher(information).matches()) {
-                throw new InvalidInputException("☹ OOPS!!! The description of a todo cannot be empty.");
+                throw new InvalidInputException("OOPS!!! The description of a todo cannot be empty.");
             } else {
                 return new AddTaskCommand(new TodoTask(information));
             }
         } else if (instructionTag.equalsIgnoreCase("deadline")) {
             if (!emptyStringChecker.matcher(information).matches()) {
-                throw new InvalidInputException("☹ OOPS!!! The description of a deadline cannot be empty.");
+                throw new InvalidInputException("OOPS!!! The description of a deadline cannot be empty.");
             } else {
                 Matcher dateChecker = Pattern.compile("(?<name>.*)/by(?<date>.*)").matcher(information);
                 if (dateChecker.matches()) {
@@ -93,16 +93,16 @@ public class Parser {
                     try {
                         return new AddTaskCommand(new DeadlineTask(name, LocalDate.parse(date)));
                     } catch (DateTimeParseException e) {
-                        throw new InvalidInputException("☹ OOPS!!! The input date format is invalid\n"
+                        throw new InvalidInputException("OOPS!!! The input date format is invalid\n"
                                 + "Please input the date in the format of yyyy-mm-dd");
                     }
                 } else {
-                    throw new InvalidInputException("☹ OOPS!!! Please input the deadline in the correct format.");
+                    throw new InvalidInputException("OOPS!!! Please input the deadline in the correct format.");
                 }
             }
         } else if (instructionTag.equalsIgnoreCase("event")) {
             if (!emptyStringChecker.matcher(information).matches()) {
-                throw new InvalidInputException("☹ OOPS!!! The description of a event cannot be empty.");
+                throw new InvalidInputException("OOPS!!! The description of a event cannot be empty.");
             } else {
                 Matcher intervalChecker = Pattern.compile("(?<name>.*)/from(?<from>.*)/to(?<to>.*)")
                         .matcher(information);
@@ -114,32 +114,32 @@ public class Parser {
                         return new AddTaskCommand(
                                 new EventTask(name, LocalDate.parse(from), LocalDate.parse(to)));
                     } catch (DateTimeParseException e) {
-                        throw new InvalidInputException("☹ OOPS!!! The input date format is invalid\n"
+                        throw new InvalidInputException("OOPS!!! The input date format is invalid\n"
                                 + "Please input the date in the format of yyyy-mm-dd");
                     }
                 } else {
-                    throw new InvalidInputException("☹ OOPS!!! Please input the event in the correct format.");
+                    throw new InvalidInputException("OOPS!!! Please input the event in the correct format.");
                 }
             }
         } else if (instructionTag.equalsIgnoreCase("find")) {
             if (!emptyStringChecker.matcher(information).matches()) {
-                throw new InvalidInputException("☹ OOPS!!! The description of a todo cannot be empty.");
+                throw new InvalidInputException("OOPS!!! The description of a todo cannot be empty.");
             } else {
                 return new FindCommand(information);
             }
         } else if (instructionTag.equalsIgnoreCase("search")) {
             if (!emptyStringChecker.matcher(information).matches()) {
-                throw new InvalidInputException("☹ OOPS!!! The description of a todo cannot be empty.");
+                throw new InvalidInputException("OOPS!!! The description of a todo cannot be empty.");
             } else {
                 try {
                     return new SearchCommand(LocalDate.parse(information));
                 } catch (DateTimeParseException e) {
-                    throw new InvalidInputException("☹ OOPS!!! The input date format is invalid\n"
+                    throw new InvalidInputException("OOPS!!! The input date format is invalid\n"
                             + "Please input the date in the format of yyyy-mm-dd");
                 }
             }
         } else {
-            throw new InvalidInputException("☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
+            throw new InvalidInputException("OOPS!!! I'm sorry, but I don't know what that means :-(");
         }
     }
 }

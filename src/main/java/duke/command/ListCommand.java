@@ -1,6 +1,6 @@
 package duke.command;
 
-import duke.display.Ui;
+import duke.ui.Ui;
 import duke.storage.Storage;
 import duke.task.TaskList;
 
@@ -22,6 +22,8 @@ public class ListCommand extends Command {
         for (int i = 0; i < tasks.remainingTasks(); i++) {
             listContent.append(i + 1).append(".").append(tasks.getTask(i)).append("\n");
         }
-        ui.displayWithBar(String.valueOf(listContent));
+
+        String message = String.valueOf(listContent);
+        ui.appendResponse(message);
     }
 }
