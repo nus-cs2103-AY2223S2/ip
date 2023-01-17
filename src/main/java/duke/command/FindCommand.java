@@ -5,8 +5,6 @@ import duke.task.DukeTask;
 import duke.task.TaskList;
 import duke.ui.Ui;
 
-import java.util.ArrayList;
-
 /**
  * A FindCommand class that take in a description and find all tasks that match the given
  * description.
@@ -38,8 +36,7 @@ public class FindCommand extends Command {
                     matchedTaskList.addTask(currentTask);
                 }
             }
-
-            String message = String.format("Here are the tasks matching \"%s\" :\n", description)  + matchedTaskList;
+            String message = String.format("Here are the tasks matching \"%s\" :\n", description) + matchedTaskList;
             ui.appendResponse(message + "\n");
         }
     }
