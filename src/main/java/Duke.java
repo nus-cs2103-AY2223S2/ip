@@ -74,10 +74,10 @@ public class Duke {
         StringBuilder builder = new StringBuilder();
         try (Scanner scanner = new Scanner(msg)) {
             while (scanner.hasNextLine()) {
-                builder.append("\t" + scanner.nextLine());
+                builder.append(String.format("\t%s\n", scanner.nextLine()));
             }
         }
-        return String.format("\t%s\n%s\n\t%s\n",
+        return String.format("\t%s\n%s\t%s\n",
             SEPARATOR, builder.toString(), SEPARATOR
         );
     }
