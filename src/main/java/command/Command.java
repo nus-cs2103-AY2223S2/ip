@@ -5,6 +5,7 @@ import java.util.function.Function;
 public enum Command {
     GREET(input -> "Kon aqua~~"),
     TODO(new AddTaskFunc(new ToDoTaskCreator())),
+    DEADLINE(new AddTaskFunc(new DeadlineTaskCreator())),
     LIST(new ListTaskFunc()),
     MARK(new MarkTaskFunc(true)),
     UNMARK(new MarkTaskFunc(false)),
