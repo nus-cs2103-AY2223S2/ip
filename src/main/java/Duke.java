@@ -29,9 +29,9 @@ public class Duke {
                         boolean checked = stored.isChecked();
                         String storedDateTime = ((Deadline) stored).getDateTime();
                         if (checked) {
-                            System.out.println(number + ". [D][X] " + storedString + "(by: " + storedDateTime + ")");
+                            System.out.println(number + ". [D][X] " + storedString + " (by: " + storedDateTime + ")");
                         } else {
-                            System.out.println(number + ". [D][ ] " + storedString+ "(by: " + storedDateTime + ")");
+                            System.out.println(number + ". [D][ ] " + storedString+ " (by: " + storedDateTime + ")");
                         }
                     } else if (stored instanceof Event) {
                         String storedString = stored.getStr();
@@ -39,10 +39,10 @@ public class Duke {
                         String storedStart = ((Event) stored).getStart();
                         String storedEnd = ((Event) stored).getEnd();
                         if (checked) {
-                            System.out.println(number + ". [D][X] " + storedString + "(from: " + storedStart +
+                            System.out.println(number + ". [E][X] " + storedString + " (from: " + storedStart +
                                     " to: " + storedEnd + ")");
                         } else {
-                            System.out.println(number + ". [D][ ] " + storedString + "(from: " + storedStart +
+                            System.out.println(number + ". [E][ ] " + storedString + " (from: " + storedStart +
                                     " to: " + storedEnd + ")");
                         }
                     }
@@ -65,7 +65,7 @@ public class Duke {
                 Todo todo = new Todo(toPrint, false);
                 store.add(todo);
 
-                System.out.println("Got it. I've added this task: \n  [T][ ] " +
+                System.out.println("Got it. I've added this task:\n  [T][ ] " +
                         toPrint + "\n Now you have " + store.size() + " tasks in the list");
             } else if(str.startsWith("deadline ")) {
                 String toPrint = str.replace("deadline ", "");
@@ -74,8 +74,8 @@ public class Duke {
                 deadline.setDateTime(toPrintSplit[1]);
                 store.add(deadline);
 
-                System.out.println("Got it. I've added this task: \n  [D][ ] " +
-                        toPrintSplit[0] + "(by: " + toPrintSplit[1] + ") \n Now you have " +
+                System.out.println("Got it. I've added this task:\n  [D][ ] " +
+                        toPrintSplit[0] + " (by: " + toPrintSplit[1] + ")\n Now you have " +
                         store.size() + " tasks in the list");
             } else if(str.startsWith("event ")) {
                 String toPrint = str.replace("event ", "");
@@ -85,9 +85,9 @@ public class Duke {
                 event.setStartEnd(dateTime[0], dateTime[1]);
                 store.add(event);
 
-                System.out.println("Got it. I've added this task: \n  [E][ ] " +
-                        toPrintSplit[0] + "(from: " + dateTime[0] + " to: " + dateTime[1] +
-                        ") \n Now you have " + store.size() + " tasks in the list");
+                System.out.println("Got it. I've added this task:\n  [E][ ] " +
+                        toPrintSplit[0] + " (from: " + dateTime[0] + " to: " + dateTime[1] +
+                        ")\n Now you have " + store.size() + " tasks in the list");
             } else {
                 Task task = new Task(str, false);
                 store.add(task);
