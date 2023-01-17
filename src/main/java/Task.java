@@ -22,6 +22,10 @@ public class Task {
         this.isDone = false;
     }
 
+    public void remove() {
+        Task.noOfTasks -= 1;
+    }
+
     @Override
     public String toString() {
         return "[" + this.getStatusIcon() + "] " + this.description;
