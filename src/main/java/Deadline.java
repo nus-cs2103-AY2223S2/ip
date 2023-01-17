@@ -21,6 +21,11 @@ public class Deadline extends Task{
         this.deadline = deadline;
         this.type = "[D]";
         this.done = done;
+        try {
+            this.dateline = LocalDateTime.parse(deadline, DateTimeFormatter.ofPattern("dd/MM/yyyy HHmm"));
+        } catch (DateTimeParseException e) {
+            throw e;
+        }
     }
 
     @Override

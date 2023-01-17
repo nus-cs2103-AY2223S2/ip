@@ -20,14 +20,14 @@
 
 	 ^-^-^-^-^-^-^-^-^-^-^-^-^-^-^-^-^-^-^-^-^-^-^-^-^-^-^-^-^-^-^
 	 Adding the task:
-		[E][ ] read book (from: today to: Monday)
+		[E][ ] read book (from: 1720 Jan 17 2023 to: 1720 Jan 18 2023)
 	 You now have 2 task(s).
 	 ^-^-^-^-^-^-^-^-^-^-^-^-^-^-^-^-^-^-^-^-^-^-^-^-^-^-^-^-^-^-^
 
 
 	 ^-^-^-^-^-^-^-^-^-^-^-^-^-^-^-^-^-^-^-^-^-^-^-^-^-^-^-^-^-^-^
 	 Adding the task:
-		[D][ ] return book (by: Wed)
+		[D][ ] return book (by: 1830 Jan 20 2023)
 	 You now have 3 task(s).
 	 ^-^-^-^-^-^-^-^-^-^-^-^-^-^-^-^-^-^-^-^-^-^-^-^-^-^-^-^-^-^-^
 
@@ -40,21 +40,21 @@
 
 	 ^-^-^-^-^-^-^-^-^-^-^-^-^-^-^-^-^-^-^-^-^-^-^-^-^-^-^-^-^-^-^
 	 Great job completing your task! :)
-		[E][X] read book (from: today to: Monday)
+		[E][X] read book (from: 1720 Jan 17 2023 to: 1720 Jan 18 2023)
 	 ^-^-^-^-^-^-^-^-^-^-^-^-^-^-^-^-^-^-^-^-^-^-^-^-^-^-^-^-^-^-^
 
 
 	 ^-^-^-^-^-^-^-^-^-^-^-^-^-^-^-^-^-^-^-^-^-^-^-^-^-^-^-^-^-^-^
 	 I see you want to redo this task...
-		[E][ ] read book (from: today to: Monday)
+		[E][ ] read book (from: 1720 Jan 17 2023 to: 1720 Jan 18 2023)
 	 ^-^-^-^-^-^-^-^-^-^-^-^-^-^-^-^-^-^-^-^-^-^-^-^-^-^-^-^-^-^-^
 
 
 	 ^-^-^-^-^-^-^-^-^-^-^-^-^-^-^-^-^-^-^-^-^-^-^-^-^-^-^-^-^-^-^
 	Here are all your tasks, good luck!
 	 1. [T][X] borrow book
-	 2. [E][ ] read book (from: today to: Monday)
-	 3. [D][ ] return book (by: Wed)
+	 2. [E][ ] read book (from: 1720 Jan 17 2023 to: 1720 Jan 18 2023)
+	 3. [D][ ] return book (by: 1830 Jan 20 2023)
 
 	 ^-^-^-^-^-^-^-^-^-^-^-^-^-^-^-^-^-^-^-^-^-^-^-^-^-^-^-^-^-^-^
 
@@ -72,7 +72,7 @@
 
 
 	 ^-^-^-^-^-^-^-^-^-^-^-^-^-^-^-^-^-^-^-^-^-^-^-^-^-^-^-^-^-^-^
-	 You need to fill in an event with a description, from and to timing
+	 You need to fill in an event with format `event {title} /from dd/MM/yyyy HHmm /to dd/MM/yyyy HHmm`
 
 	 ^-^-^-^-^-^-^-^-^-^-^-^-^-^-^-^-^-^-^-^-^-^-^-^-^-^-^-^-^-^-^
 
@@ -85,7 +85,7 @@
 
 	 ^-^-^-^-^-^-^-^-^-^-^-^-^-^-^-^-^-^-^-^-^-^-^-^-^-^-^-^-^-^-^
 	 1 less task! :)
-		[E][ ] read book (from: today to: Monday)
+		[E][ ] read book (from: 1720 Jan 17 2023 to: 1720 Jan 18 2023)
 	Now you have 2 tasks left!
 	 ^-^-^-^-^-^-^-^-^-^-^-^-^-^-^-^-^-^-^-^-^-^-^-^-^-^-^-^-^-^-^
 
@@ -93,7 +93,7 @@
 	 ^-^-^-^-^-^-^-^-^-^-^-^-^-^-^-^-^-^-^-^-^-^-^-^-^-^-^-^-^-^-^
 	Here are all your tasks, good luck!
 	 1. [T][X] borrow book
-	 2. [D][ ] return book (by: Wed)
+	 2. [D][ ] return book (by: 1830 Jan 20 2023)
 
 	 ^-^-^-^-^-^-^-^-^-^-^-^-^-^-^-^-^-^-^-^-^-^-^-^-^-^-^-^-^-^-^
 
