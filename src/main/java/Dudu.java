@@ -1,5 +1,6 @@
+import java.util.ArrayList;
 import java.util.Scanner;
-public class Dodo {
+public class Dudu {
     private static final String DIVIDER = "________________________________\n";
     private static final String LOGO =
               " ____  _   _ ____  _   _ \n"
@@ -10,17 +11,26 @@ public class Dodo {
     private static final String GREETING = DIVIDER + "Hello from\n" + LOGO + "What can I do for you?\n" + DIVIDER;
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
+        ArrayList<Task> list = new ArrayList<>();
         System.out.println(GREETING);
         while (scanner.hasNext()) {
-            String input = scanner.next();
-            if (input.equals("bye")) {
-                System.out.println(DIVIDER);
-                System.out.println("Bye. Hope to see you again soon!");
-                System.out.println(DIVIDER);
-                break;
-            }
+            String input = scanner.nextLine();
+            Task task = new Task(input);
             System.out.println(DIVIDER);
-            System.out.println(input);
+            if (input.equals("bye")) {
+
+                System.out.println("Bye. Hope to see you again soon!");
+                break;
+            } else if (input.equals("list")) {
+                for (int i = 0; i < list.size(); i++) {
+                    System.out.println(i+1 + ". " + list.get(i).getName());
+                }
+            } else {
+//                System.out.println(DIVIDER);
+                list.add(task);
+                System.out.println("added: " + task.getName());
+//                System.out.println(DIVIDER);
+            }
             System.out.println(DIVIDER);
         }
     }
