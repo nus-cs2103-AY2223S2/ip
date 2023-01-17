@@ -74,7 +74,7 @@ public class Duke {
             tasks = res.getTasks();
             printMessage(res.getMessage());
 
-            if (input.split(" ")[0].equals("bye")) {
+            if (shouldExit(input)) {
                 break;
             }
         }
@@ -103,5 +103,9 @@ public class Duke {
             default:
                 throw new DukeException("I'm sorry, but I don't know what that means :-(");
         }
+    }
+
+    private static boolean shouldExit(String input) {
+        return input.split(" ")[0].equals("bye");
     }
 }
