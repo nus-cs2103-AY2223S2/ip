@@ -1,5 +1,9 @@
 import java.util.Scanner;
+
 import task.Task;
+import task.Deadline;
+import task.Event;
+import task.Todo;
 
 public class Duke {
     private static void printWithDecorations(String input) {
@@ -42,6 +46,24 @@ public class Duke {
             return false;
         } else {
             return true;
+        }
+    }
+
+    private Command getCommand(String input) {
+        if (input.equals("list")) {
+            return Command.LIST;
+        } else if (input.matches("^mark\\s\\d+$")) {
+            return Command.MARK;
+        } else if (input.matches("^unmark\\s\\d+$")) {
+            return Command.UNMARK;
+        } else if (input.matches("^deadline\\s.+/by\\s.+$")) {
+            return Command.DEADLINE;
+        } else if (input.matches("^event\\s.+/from\\s.+/to\\s.+$")) {
+            return Command.EVENT;
+        } else if (input.matches("^todo\\s.+$")) {
+            return Command.TODO;
+        } else {
+            return Command.UNKNOWN;
         }
     }
 
