@@ -1,4 +1,4 @@
-public class Task {
+abstract public class Task {
     protected String description;
     protected boolean isDone;
 
@@ -11,16 +11,17 @@ public class Task {
         return (isDone ? "X" : " "); // mark done task with X
     }
 
-    public String markTask() {
+    public void markTask() {
         isDone = true;
-        return "Nice! I've marked this task as done: \n [X] "  + description;
+        System.out.println("Nice! I've marked this task as done: \n [X] "  + description);
     }
 
-    public String unmarkTask() {
+    public void unmarkTask() {
         isDone = false;
-        return "OK, I've marked this task as not done yet: \n [ ] " + description;
+        System.out.println("OK, I've marked this task as not done yet: \n [ ] " + description);
     }
 
+    @Override
     public String toString() {
         return "[" + getStatusIcon() + "] " + description;
     }
