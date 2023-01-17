@@ -23,7 +23,7 @@ public class Duke {
             return true;
         } else if (cmd.equals("list")) {
             for (int i = 0; i < inputStore.size(); i++) {
-                System.out.printf("%d. %s\n", i, inputStore.get(i));
+                System.out.printf("%d. %s\n", i + 1, inputStore.get(i));
             }
         } else {
             inputStore.add(cmd);
