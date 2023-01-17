@@ -21,18 +21,17 @@ public class CommandInput {
 
     public static CommandInput parse(String args, MainManager mainManager) throws IllegalArgumentException {
         CommandInput input = new CommandInput(mainManager);
-        if (args.isEmpty()) {
+        args = args.strip() + " ";
+        if (args.isBlank()) {
             return input;
         }
+        if (!args.startsWith("/" + MAIN_INPUT_KEY)) {
+            args = String.format("/%s %s", MAIN_INPUT_KEY, args);
+        }
         try (Scanner scanner = new Scanner(args)) {
-            scanner.useDelimiter("/");
-
-            // main input
-            input.inputMap.put(MAIN_INPUT_KEY, scanner.next().strip());
-
-            // rest of the input
+            scanner.useDelimiter("[\\s]*/");
             while (scanner.hasNext()) {
-                addInput(scanner.next().strip(), input.inputMap);
+                addInput(scanner.next(), input.inputMap);
             }
         }
         return input;
@@ -42,7 +41,7 @@ public class CommandInput {
     private static void addInput(String token, HashMap<String, String> inputMap)
             throws IllegalArgumentException {
         try (Scanner scanner = new Scanner(token)) {
-            String key = scanner.next().strip();
+            String key = scanner.next();
             String value = "";
             if (scanner.hasNext()) {
                 value = scanner.nextLine().strip();
