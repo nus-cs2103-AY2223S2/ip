@@ -9,7 +9,8 @@ public class Duke {
     Duke() {
         this.tasks = new Tasks<Task>();
     }
-
+    
+    //Level 1
     void greetEcho() {
 
         Printable.greet();
@@ -25,6 +26,7 @@ public class Duke {
         }
     }
 
+    //Level 2
     void addAndList() {
 
         Printable.greet();
@@ -43,6 +45,7 @@ public class Duke {
         }
     }
 
+    //Level 3
     void markAsDone() {
 
         Printable.greet();
@@ -66,7 +69,8 @@ public class Duke {
             }
         }
     }
-
+    
+    //Level 4
     void trackingEvents() {
 
         Printable.greet();
@@ -105,7 +109,7 @@ public class Duke {
         }
     }
 
-
+    //Level 5
     void errorHandling() {
         
         Printable.greet();
@@ -118,21 +122,31 @@ public class Duke {
             } else if (description.equals(Printable.TERMINATE)) {
                 Printable.exit();
             } else if (description.equals(Printable.MARK)) {
-                Printable.mark(sc, this.tasks);
+                tasks = Printable.mark(sc, this.tasks);
             }  else if (description.equals(Printable.UNMARK)) {
-                Printable.unmark(sc, this.tasks);
+                tasks = Printable.unmark(sc, this.tasks);
             } else if (description.equals(Printable.TODO)) {
-                Printable.toDo(sc, this.tasks);
+                tasks = Printable.toDo(sc, this.tasks);
             } else if (description.equals(Printable.DEADLINE)) {
-                Printable.deadline(sc, this.tasks);
+                tasks = Printable.deadline(sc, this.tasks);
             } else if (description.equals(Printable.EVENT)) {
-                Printable.events(sc, this.tasks);
-            } else if (description.equals("blah")) {
-                throw new DukeUnknownException("This command is not legal");
+                tasks = Printable.events(sc, this.tasks);
+            } else {
+                dukeExceptionWarning(description);
+            }
+        }
+    }
+
+    void dukeExceptionWarning(String description) {
+        try {
+            if (Printable.INVALID_COMMANDS.contains(description)) {
+                throw new DukeUnknownException("Illegal command");
             } else {
                 Task newTask = new Task(description);
                 this.tasks = tasks.add(newTask);
             }
+        } catch (DukeUnknownException e) {
+            System.out.println(Printable.ILLEGAL_COMMAND);
         }
     }
     

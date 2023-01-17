@@ -1,6 +1,8 @@
 package duke;
 
 import java.util.Scanner;
+import java.util.List;
+import java.util.Arrays;
 
 class Printable {
 
@@ -13,7 +15,11 @@ class Printable {
     static String TODO = "todo";
     static String DEADLINE = "deadline";
     static String EVENT = "event";
+    static String ILLEGAL_COMMAND = "command not recognised";
     static int DECREMENT = 1;
+    
+
+    static List<String> INVALID_COMMANDS = Arrays.asList("blah","todo","deadline","event");
 
     static void greet() {
         System.out.println(INITIAL_GREETING);
