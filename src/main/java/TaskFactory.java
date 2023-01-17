@@ -34,7 +34,7 @@ public class TaskFactory {
     public static Task parseCommand(String command, String information) throws InvalidTaskException {
         if (command.equals("TODO")) {
             validateName(information);
-            return new TODO(information);
+            return new Todo(information);
         } else if (command.equals("DEADLINE")) {
             String[] pair = getNameDeadlinePair(information);
             return new Deadline(pair[0], pair[1]);

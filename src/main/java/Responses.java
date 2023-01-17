@@ -1,4 +1,4 @@
-public class Response {
+public class Responses {
     private static String LINE = "        ________________________________________________________\n";
 
     public static void printMessage(String response) {

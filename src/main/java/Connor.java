@@ -29,9 +29,9 @@ public class Connor {
             String command = getCommand(input);
             try {
                 if (command.equals("HI")) {
-                    Response.greetings("HI");
+                    Responses.greetings("HI");
                 } else if (command.equals("BYE")) {
-                    Response.greetings("BYE");
+                    Responses.greetings("BYE");
                     sc.close();
                     break;
                 } else if (command.equals("MARK")) {

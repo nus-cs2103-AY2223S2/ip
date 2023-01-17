@@ -1,7 +1,7 @@
-public class TODO extends Task {
+public class Todo extends Task {
     private String task;
 
-    public TODO(String task) {
+    public Todo(String task) {
         super(task);
         this.task = task;
 
