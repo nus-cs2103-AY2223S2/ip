@@ -19,9 +19,18 @@ public class Task {
         isDone = false;
     }
 
+    public String getTypeIcon() {
+        return " ";
+    }
+
     @Override
     public String toString() {
         return content;
+    }
+
+    // Status and message
+    public String fullMessage() {
+        return String.format("[%s][%s] %s", getTypeIcon(), getStatusIcon(), this);
     }
 
 

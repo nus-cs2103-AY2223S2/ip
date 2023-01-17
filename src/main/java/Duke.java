@@ -2,15 +2,11 @@ import java.util.Scanner;
 
 // Assume Duke is only a task manager.
 public class Duke {
+    // Members
     private static Task[] tasks = new Task[101];
     private static int size = 0;
 
-    public static void addTask(String s) {
-        size++;
-        tasks[size] = new Task(s);
-        System.out.println("added: " + s);
-    }
-
+    // Methods
     public static void list() {
         if (size == 0) {
             System.out.println("No tasks left :)");
@@ -18,7 +14,7 @@ public class Duke {
         }
         for (int i = 1; i <= size; i++) {
             Task curr = tasks[i];
-            System.out.println(i + ". [" + curr.getStatusIcon() + "] " + curr);
+            System.out.println(i + ". " + curr.fullMessage());
         }
     }
 
@@ -26,14 +22,14 @@ public class Duke {
         Task curr = tasks[index];
         curr.markAsDone();
         System.out.println("Nice! I've marked this task as done:\n" +
-                "[" + curr.getStatusIcon() + "] " + curr);
+                curr.fullMessage());
     }
 
     public static void markUndone(int index) {
         Task curr = tasks[index];
         curr.markAsUndone();
         System.out.println("OK, I've marked this task as not done yet:\n" +
-                "[" + curr.getStatusIcon() + "] " + curr);
+                curr.fullMessage());
     }
 
     public static void main(String[] args) {
@@ -62,10 +58,29 @@ public class Duke {
                     index = sc.nextInt();
                     markUndone(index);
                     break;
-                default:
-                    command += sc.nextLine();
-                    addTask(command);
+                case "todo":
+                    String message = sc.nextLine().trim();
+                    size++;
+                    tasks[size] = new ToDos(message);
+                    System.out.println("Got it. I've added this task:\n" + tasks[size].fullMessage());
+                    System.out.println("Now you have " + size + " tasks in this list");
                     break;
+                case "deadline":
+                    String[] messages = sc.nextLine().trim().split("/");
+                    size++;
+                    tasks[size] = new Deadlines(messages);
+                    System.out.println("Got it. I've added this task:\n" + tasks[size].fullMessage());
+                    System.out.println("Now you have " + size + " tasks in this list");
+                    break;
+                case "event":
+                    messages = sc.nextLine().trim().split("/");
+                    size++;
+                    tasks[size] = new Events(messages);
+                    System.out.println("Got it. I've added this task:\n" + tasks[size].fullMessage());
+                    System.out.println("Now you have " + size + " tasks in this list");
+                    break;
+                default:
+                    System.out.println("lol what");
             }
         }
 
