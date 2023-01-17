@@ -46,7 +46,7 @@ public class Duke {
                 command = Command.valueOf(scanner.next().toUpperCase());
 
                 if (scanner.hasNext()) {
-                    inputString = scanner.nextLine();
+                    inputString = scanner.nextLine().strip();
                 }
             }
         } catch (IllegalArgumentException noElmEx) {
