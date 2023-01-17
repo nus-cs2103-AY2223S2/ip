@@ -4,7 +4,6 @@ public class Task {
     protected String words;
     static int actions = 0;
 
-
     public Task(String description) {
         this.description = description;
         this.isDone = false;
