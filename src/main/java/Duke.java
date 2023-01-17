@@ -17,6 +17,10 @@ public class Duke {
                 isClosed = true;
             } else if (input.equals("list")) {
                 list.display();
+            } else if (input.startsWith("mark")) {
+                list.markAsDone(input);
+            } else if (input.startsWith("unmark")) {
+                list.markAsUndone(input);
             } else {
                 list.add(input);
             }
