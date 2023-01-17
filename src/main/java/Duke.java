@@ -24,6 +24,7 @@ public class Duke {
                 + listOfTasks.size()
                 + " tasks in the list.";
     }
+
     public static void toList(){
         int i = 1;
         System.out.println(separator
@@ -54,6 +55,7 @@ public class Duke {
                     case "bye":
                         Duke.bye();
                         break;
+
                     case "list":
                         if (listOfTasks.size() == 0) {
                             throw new DukeException("The list is currently empty!");
@@ -83,7 +85,8 @@ public class Duke {
                         if (taskNumber.isBlank()) {
                             throw new DukeException("Please enter the task number to unmark! :D ");
                         } else {
-                            taskAtHand = listOfTasks.get(Integer.parseInt(taskNumber.trim()) - 1);
+                            int number = Integer.parseInt(taskNumber.trim());
+                            taskAtHand = listOfTasks.get(number - 1);
                             taskAtHand.markUnDone();
                             System.out.println(separator
                                     + "\n\tOK, I've marked this task as not done yet:\n\t"
@@ -157,6 +160,23 @@ public class Duke {
                         }
                         break;
 
+                    case "delete":
+                        taskNumber = sc.nextLine();
+                        if (taskNumber.isBlank()) {
+                            throw new DukeException("Please enter the task number to delete! :D ");
+                        } else {
+                            int number = Integer.parseInt(taskNumber.trim());
+                            taskAtHand = listOfTasks.remove(number - 1);
+                            System.out.println(separator
+                                    + "\n\tNoted. I've removed this task:\n\t"
+                                    + taskAtHand
+                                    + "\n"
+                                    + Duke.printTaskCount()
+                                    + "\n"
+                                    + separator);
+                        }
+                        break;
+
                     default:
                         throw new DukeException("☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
                 }
@@ -181,6 +201,7 @@ public class Duke {
             }
         }
     }
+    
     public static void main(String[] args) {
         Duke.start();
     }
