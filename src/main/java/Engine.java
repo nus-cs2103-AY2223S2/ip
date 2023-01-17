@@ -24,72 +24,92 @@ public class Engine {
     }
 
     private String getOutput(Command command, String args) {
-        switch(command) {
-            case ERROR:
+        switch (command) {
+            case ERROR: {
                 return args;
-            case EXIT:
+            }
+            case EXIT: {
                 return "Bye\n";
-            case LIST:
+            }
+            case LIST: {
                 if (this.taskList.isEmpty()) {
                     return "You have no tasks.\n";
                 }
                 return "You have these tasks:" + this.taskList.toString();
-            case TODO:
+            }
+            case TODO: {
                 String task = Util.cleanup(args);
+                if (task.isEmpty()) {
+                    return "Task input required.\n";
+                }
                 this.taskList.addTask(new Todo(Util.cleanup(args)));
-                return "added-> "  + this.taskList.getLast();
-            case DEADLINE:
+                return "added-> " + this.taskList.getLast();
+            }
+            case DEADLINE: {
                 String flag = "/by";
                 int start = args.indexOf(flag);
                 if (start == -1) {
-                    return "Incorrect input.\n";
+                    return "/by flag required for deadlines.\n";
                 }
                 String desc = Util.cleanup(args.substring(0, start));
                 String dl = Util.cleanup(args.substring(start + flag.length(), args.length()));
+                
+                if (desc.isEmpty() || dl.isEmpty()) {
+                    return "Some inputs are blank.\n";
+                }
+
                 this.taskList.addTask(new Deadline(desc, dl));
                 return "added-> " + this.taskList.getLast();
-            case EVENT:
+            }
+            case EVENT: {
                 String flag1 = "/from";
                 String flag2 = "/to";
                 int s1 = args.indexOf(flag1);
                 int s2 = args.indexOf(flag2);
                 if (s1 == -1 || s2 == -1) {
-                    return "Incorrect input.\n";
+                    return "/from and /to flag required for events.\n";
                 }
                 String event = Util.cleanup(args.substring(0, s1));
                 String from = Util.cleanup(args.substring(s1 + flag1.length(), s2));
                 String to = Util.cleanup(args.substring(s2 + flag2.length(), args.length()));
+
+                if (event.isEmpty() || from.isEmpty() || to.isEmpty()) {
+                    return "Some inputs are blank.\n";
+                }
+
                 this.taskList.addTask(new Event(event, from, to));
                 return "added-> " + this.taskList.getLast();
-            case MARK:
+            }
+            case MARK: {
                 try {
                     int num = Integer.parseInt(Util.parseNextString(args).first());
                     if (num > this.taskList.size()) {
                         return "Task has not been added.\n";
                     }
                     this.taskList.markTask(num);
-                    return "Task marked completed:" + 
-                        this.taskList.get(num);
+                    return "Task marked completed:" +
+                            this.taskList.get(num);
                 } catch (NumberFormatException ex) {
                     return "Incorrect input.\n";
                 }
-            case UNMARK:
+            }
+            case UNMARK: {
                 try {
                     int num = Integer.parseInt(Util.parseNextString(args).first());
                     if (num > this.taskList.size()) {
                         return "Task has not been added.\n";
                     }
                     this.taskList.unmarkTask(num);
-                    return "Task marked incomplete:" + 
-                        this.taskList.get(num);
+                    return "Task marked incomplete:" +
+                            this.taskList.get(num);
                 } catch (NumberFormatException ex) {
                     return "Incorrect input.\n";
                 }
-
+            }
 
             default:
                 return "Case not accounted for, review code\n";
-                // for debugging
+            // for debugging
         }
     }
 
