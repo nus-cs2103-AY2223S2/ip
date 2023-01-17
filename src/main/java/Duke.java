@@ -28,9 +28,17 @@ public class Duke {
             else if (userInput.contains("mark")) {
                 // obtaining index to mark, -1 because array starts from index 0
                 int index = Integer.valueOf(userInput.substring(userInput.length() - 1)) - 1;
-                if (userInput.contains("unmark")) {
+
+                if (index < 0 || index >= counter) {
+                    int display = index + 1;
+                    System.out.println("Task " + display + " does not exist.");
+                    myObj = new Scanner(System.in);
+                    userInput = myObj.nextLine();
+                    continue;
+                }
+                else if (userInput.contains("unmark")) {
                     store[index].markAsUndone();
-                    System.out.println("Nice! I've marked this task as not done yet:");
+                    System.out.println("OK, I've marked this task as not done yet:");
                 } else {
                     store[index].markAsDone();
                     System.out.println("Nice! I've marked this task as done:");
