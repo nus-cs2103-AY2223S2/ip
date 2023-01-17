@@ -23,6 +23,12 @@ public class Duke {
                 case "todo":
                     Duke.addTodo(command, tasks);
                     break;
+                case "deadline":
+                    Duke.addDeadline(command, tasks);
+                    break;
+                case "event":
+                    Duke.addEvent(command, tasks);
+                    break;
                 case "mark":
                     Duke.mark(command, tasks);
                     break;
@@ -59,6 +65,32 @@ public class Duke {
     private static void addTodo(Command command, TaskList tasks) {
         String description = command.body;
         Task task = new TaskTodo(description);
+        tasks.add(task);
+        Duke.say(
+            "Got it. I've added this task:\n"
+                + "  " + task.toString() + "\n"
+                + tasks.getStatus()
+        );
+    }
+
+    private static void addDeadline(Command command, TaskList tasks) {
+        String description = command.body;
+        Task task = new TaskDeadline(description, command.namedParameters.get("by"));
+        tasks.add(task);
+        Duke.say(
+            "Got it. I've added this task:\n"
+                + "  " + task.toString() + "\n"
+                + tasks.getStatus()
+        );
+    }
+
+    private static void addEvent(Command command, TaskList tasks) {
+        String description = command.body;
+        Task task = new TaskEvent(
+            description, 
+            command.namedParameters.get("from"), 
+            command.namedParameters.get("to")
+        );
         tasks.add(task);
         Duke.say(
             "Got it. I've added this task:\n"
