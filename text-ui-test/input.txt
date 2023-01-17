@@ -9,4 +9,18 @@ list
 deadline return book /by Sunday
 event project meeting /from Mon 2pm /to 4pm
 deadline do homework /by no idea :-p
+todo mark papers
+deadline give back unmarked papers /by Monday
+todo delete duplicate files from PC
+event attend wedding /from Monday 8am /to 4pm
+todo
+deadline
+event
+blah blah black sheep
+have you any wool
+yes sir yes sir
+mcdonalds
+kfc
+delete 3
+delete 5
 bye

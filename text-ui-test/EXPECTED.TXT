@@ -34,4 +34,30 @@ Now you have 7 tasks in the list.
 Got it. I've added this Deadline task:
 [D][ ] do homework (by: no idea :-p)
 Now you have 8 tasks in the list.
+Got it. I've added this ToDo task:
+[T][ ] mark papers
+Now you have 9 tasks in the list.
+Got it. I've added this Deadline task:
+[D][ ] give back unmarked papers (by: Monday)
+Now you have 10 tasks in the list.
+Got it. I've added this ToDo task:
+[T][ ] delete duplicate files from PC
+Now you have 11 tasks in the list.
+Got it. I've added this Event task:
+[E][ ] attend wedding (from: Monday 8am, to: 4pm)
+Now you have 12 tasks in the list.
+OOPS!!! The description of a todo task cannot be empty!
+OOPS!!! The description of a deadline task cannot be empty!
+OOPS!!! The description of a event task cannot be empty!
+OOPS!!! I'm sorry, but I don't know what that means! :(
+OOPS!!! I'm sorry, but I don't know what that means! :(
+OOPS!!! I'm sorry, but I don't know what that means! :(
+OOPS!!! I'm sorry, but I don't know what that means! :(
+OOPS!!! I'm sorry, but I don't know what that means! :(
+Noted. I've removed this task:
+[E][ ] project meeting (from: Aug 6th 2pm, to: 4pm)
+Now you have 11 tasks in the list.
+Noted. I've removed this task:
+[D][ ] return book (by: Sunday)
+Now you have 10 tasks in the list.
 Bye. Hope to see you again soon!
