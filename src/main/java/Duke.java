@@ -11,6 +11,12 @@ public class Duke {
 
     private final ArrayList<Task> tasks = new ArrayList<>();
 
+    private void createTask(Task task) {
+        tasks.add(task);
+        System.out.println("Hey new task added!");
+        System.out.println(task);
+    }
+
     /**
      * Accepts a string that represents the user command, returns a boolean to
      * determine if the program should terminate immediately
@@ -24,6 +30,26 @@ public class Duke {
             case "bye":
                 System.out.println("Till next time...");
                 return true;
+
+            case "todo":
+                String description = cmd.substring(5);
+                createTask(new TodoTask(description));
+                break;
+
+            case "deadline":
+                String deadlineArgs = cmd.substring(9);
+                String deadlineDesc = deadlineArgs.split(" /by ")[0];
+                String deadlineBy = deadlineArgs.split(" /by ")[1];
+                createTask(new DeadlineTask(deadlineDesc, deadlineBy));
+                break;
+
+            case "event":
+                String eventArgs = cmd.substring(6);
+                String eventDesc = eventArgs.split(" /from ")[0];
+                String eventFrom = eventArgs.split(" /from ")[1].split(" /to ")[0];
+                String eventBy = eventArgs.split(" /from ")[1].split(" /to ")[1];
+                createTask(new EventTask(eventDesc, eventFrom, eventBy));
+                break;
 
             case "list":
                 System.out.println("Arii has retrieved your current tasks...");
@@ -49,10 +75,7 @@ public class Duke {
                 break;
 
             default:
-                Task newTask = new Task(cmd);
-                tasks.add(newTask);
-                System.out.println("Hey new task added!");
-                System.out.println(newTask);
+                System.out.println("Arii does not recognise this command...");
         }
         return false;
     }
