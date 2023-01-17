@@ -4,6 +4,8 @@ public class Deadline extends Task {
 
     public Deadline(String description, String by) {
         super(description);
+        by = by.replaceAll("by","");
+        by = by.replaceAll("/","");
         this.by = by;
         Task.actions += 1;
     }
