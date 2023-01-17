@@ -28,14 +28,14 @@ public class Duke {
     }
 
     public static String[] tokenise(Scanner sc) {
-        String[] tokens = (sc.nextLine()).split(" ");
+        String[] tokens = sc.nextLine().split(" ");
         return tokens;
     }
 
     public static boolean handle(String[] tokens) {
         String cmd = tokens[0];
         if (cmd == null) { }
-        else if (cmd.toLowerCase().equals("bye")) {   duke.quit(); return true; }
+        else if (cmd.equals("bye")) {   duke.quit(); return true; }
         else {  duke.exec(tokens); }
         
         return false;
