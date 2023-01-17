@@ -32,7 +32,7 @@ public class DataStore {
                 newTask = new ToDo(argument[1]);
                 break;
             case "/deadline":
-                String[] deadlineArgs = argument[1].split(" /by ",2);
+                String[] deadlineArgs = Duke.split(argument[1], new String[]{" /by "});
                 newTask = new Deadline(deadlineArgs[0], deadlineArgs[1]);
                 break;
             case "/event":
