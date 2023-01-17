@@ -1,21 +1,34 @@
-public class ToDoList {
-    private static Task[] todolist = new Task[100];
-    private static int count = 0;
+import java.util.ArrayList;
+import java.util.List;
 
-    public static void list() {
+public class ToDoList {
+    //private static Task[] todolist = new Task[100];
+    private List<Task> todolist;
+    private int count = 0;
+
+    public ToDoList(int size) {
+        todolist = new ArrayList<>(size);
+    }
+
+    public void list() {
         System.out.println("\tTasks for Tony Stark:");
         System.out.println("\t--------------------------");
         for (int i = 0; i < count; i++) {
+            /*
             System.out.println("\t" + (i + 1) + "." +
                     todolist[i].printTask());
+             */
+            System.out.println("\t" + (i + 1) + "." +
+                    todolist.get(i).printTask());
         }
         System.out.println("\t--------------------------");
     }
 
     // to do
-    public static void add(String task) {
+    public void add(String task) {
         Task t = new Todo(count, task);
-        todolist[count] = t;
+        //todolist[count] = t;
+        todolist.add(count, t);
         count++;
         System.out.println("\t--------------------------");
         System.out.println("\tI have added task: " + t.getTask());
@@ -23,9 +36,10 @@ public class ToDoList {
     }
 
     // deadline
-    public static void add(String task, String time) {
+    public void add(String task, String time) {
         Task t = new Deadline(count, task, time);
-        todolist[count] = t;
+        //todolist[count] = t;
+        todolist.add(count, t);
         count++;
         System.out.println("\t--------------------------");
         System.out.println("\tI have added task: " + t.getTask());
@@ -34,9 +48,10 @@ public class ToDoList {
     }
 
     // event
-    public static void add(String task, String startTime, String endTime) {
+    public void add(String task, String startTime, String endTime) {
         Task t = new Event(count, task, startTime, endTime);
-        todolist[count] = t;
+        //todolist[count] = t;
+        todolist.add(count, t);
         count++;
         System.out.println("\t--------------------------");
         System.out.println("\tI have added task: " + t.getTask());
@@ -45,15 +60,26 @@ public class ToDoList {
         System.out.println("\t--------------------------");
     }
 
-    public static void markDone (int index) {
-        todolist[index - 1].markDone(index);
+    // delete
+    public void delete(int index) {
+        System.out.println("\t--------------------------");
+        System.out.println("\tDeleted: " + todolist.get(index - 1).printTask());
+        System.out.println("\t--------------------------");
+        todolist.remove(index - 1);
+        count--;
     }
 
-    public static void unmark(int index) {
-        todolist[index - 1].unmark(index);
+    public void markDone (int index) {
+        //todolist[index - 1].markDone(index);
+        todolist.get(index - 1).markDone(index);
     }
 
-    public static int getCount() {
+    public void unmark(int index) {
+        //todolist[index - 1].unmark(index);
+        todolist.get(index - 1).unmark(index);
+    }
+
+    public int getCount() {
         return count;
     }
 }

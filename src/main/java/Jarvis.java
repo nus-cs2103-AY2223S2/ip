@@ -39,6 +39,8 @@ public class Jarvis {
         System.out.println(computer);
         System.out.println("Please enter a command Mr Stark.");
 
+        ToDoList toDo = new ToDoList(100);
+
         Scanner sc = new Scanner(System.in);
         while(true) {
             String line = sc.nextLine();
@@ -52,15 +54,15 @@ public class Jarvis {
             } else if (line.equals("list")) {
                 // show items
 
-                ToDoList.list();
+                toDo.list();
 
             } else if (line.matches("mark(.*)")) {
                 // mark task as done
 
                 try {
                     int taskNum = Integer.parseInt(line.substring(line.length() - 1));
-                    validate(taskNum);
-                    ToDoList.markDone(taskNum);
+                    validate(toDo, taskNum);
+                    toDo.markDone(taskNum);
                 } catch (NumberFormatException e) {
                     System.out.println("Which task have you completed, sir?");
                 } catch (NoTaskFoundException e) {
@@ -72,8 +74,8 @@ public class Jarvis {
 
                 try {
                     int taskNum = Integer.parseInt(line.substring(line.length() - 1));
-                    validate(taskNum);
-                    ToDoList.unmark(taskNum);
+                    validate(toDo, taskNum);
+                    toDo.unmark(taskNum);
                 } catch (NumberFormatException e) {
                     System.out.println("Which task would you like to unmark sir?");
                 } catch (NoTaskFoundException e) {
@@ -84,9 +86,9 @@ public class Jarvis {
                 // add task to list
 
                 try {
-                    addToDo(line);
+                    addToDo(toDo, line);
                 } catch (JarvisException e) {
-                    System.out.println("Please enter the task to do: -todo <task>");
+                    System.out.println("\tPlease enter in format 'todo <task>'");
                 }
 
             } else if (line.matches("deadline(.*)")) {
@@ -99,7 +101,7 @@ public class Jarvis {
                     int firstSlash = line.indexOf("/");
                     String task = line.substring(9, firstSlash);
                     String time = line.substring(firstSlash + 1);
-                    ToDoList.add(task, time);
+                    toDo.add(task, time);
                 }
 
             } else if (line.matches("event(.*)")) {
@@ -118,26 +120,39 @@ public class Jarvis {
                 String endTime = line.substring(secondSlash + 1);
                 String task = line.substring(6, firstSlash);
 
-                ToDoList.add(task, startTime, endTime);
+                toDo.add(task, startTime, endTime);
+
+            } else if (line.matches("delete(.*)")) {
+                // mark task as done
+
+                try {
+                    int taskNum = Integer.parseInt(line.substring(line.length() - 1));
+                    validate(toDo, taskNum);
+                    toDo.delete(taskNum);
+                } catch (NumberFormatException e) {
+                    System.out.println("Which task would you like to delete, sir?");
+                } catch (NoTaskFoundException e) {
+                    System.out.println("Sir, you may not delete nonexistent tasks.");
+                }
 
             } else {
                 System.out.println("I do not know that command, sir.");
-                System.out.println("Perhaps you can add that functionality in for J.A.R.V.I.S(v2.0).");
+                System.out.println("Perhaps you can add that functionality for J.A.R.V.I.S(v2.0).");
             }
         }
     }
 
-    public static void addToDo(String line) throws JarvisException {
+    public static void addToDo(ToDoList toDo, String line) throws JarvisException {
         try {
             String task = line.substring(5);
-            ToDoList.add(task);
+            toDo.add(task);
         } catch (StringIndexOutOfBoundsException e) {
             throw new JarvisException("");
         }
     }
 
-    public static void validate(int num) throws NoTaskFoundException {
-        if (num > ToDoList.getCount()) {
+    public static void validate(ToDoList toDo, int num) throws NoTaskFoundException {
+        if (num > toDo.getCount()) {
             throw new NoTaskFoundException("");
         }
     }
