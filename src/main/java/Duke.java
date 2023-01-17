@@ -4,7 +4,7 @@ import java.util.Scanner;
 
 public class Duke {
     public enum ParseFunctions {
-        SPLIT_ALL, MARK, TODO, DEADLINE, EVENT
+        SPLIT_ALL, TODO, DEADLINE, EVENT
     }
     public static ArrayList<Task> taskStore = new ArrayList<>();
 
@@ -39,6 +39,7 @@ public class Duke {
     public static void main(String[] args) {
         System.out.println("  insert ingenious greeting here");
 
+        label:
         while (true) {
             Scanner myScanner = new Scanner(System.in);
             String command = myScanner.nextLine();
@@ -47,54 +48,67 @@ public class Duke {
 
             String first = toFindFirstWord[0];
 
-            if (first.equals("bye")) {
-                System.out.println("  Bye. Hope to see you soon again!");
-                break;
-            }
-            else if (first.equals("mark")) {
-                Task completedTask = getTaskForMarking(toFindFirstWord);
-                completedTask.changeCompletion();
+            switch (first) {
+                case "bye":
+                    System.out.println("  Bye. Hope to see you soon again!");
+                    break label;
+                case "mark": {
+                    Task completedTask = getTaskForMarking(toFindFirstWord);
+                    completedTask.changeCompletion();
 
-                System.out.println("  You are done with: ");
-                System.out.println("    " + completedTask.toString());
-            }
-            else if (first.equals("unmark")) {
-                Task completedTask = getTaskForMarking(toFindFirstWord);
-                completedTask.changeCompletion();
-
-                System.out.println("  OK, continue working on: ");
-                System.out.println("    " + completedTask.toString());
-            }
-            else if (first.equals("deadline")) {
-                String[] parsed = parser(command, ParseFunctions.DEADLINE);
-                Task newDeadline = new Deadline(parsed[1], parsed[2]);
-                Duke.taskStore.add(newDeadline);
-
-                System.out.println("  new task added!");
-                System.out.println("    " + newDeadline.toString());
-                System.out.println("  Now you have " + String.valueOf(Duke.countTasks()) +
-                        " tasks in the list!");
-            }
-            else if (first.equals("event")) {
-                String[] parsed = parser(command, ParseFunctions.EVENT);
-                Task newEvent = new Event(parsed[1], parsed[2], parsed[3]);
-                Duke.taskStore.add(newEvent);
-
-                System.out.println("  new event added!");
-                System.out.println("    " + newEvent.toString());
-                System.out.println("  Now you have " + String.valueOf(Duke.countTasks()) +
-                        " tasks in the list!");
-            }
-            else if (first.equals("list")) {
-                for (int i = 0; i < taskStore.size(); i++) {
-                    System.out.println("  " + String.valueOf(i + 1) + ". " + taskStore.get(i));
+                    System.out.println("  You are done with: ");
+                    System.out.println("    " + completedTask.toString());
+                    break;
                 }
-            }
-            // add task
-            else {
-                Task newTask = new Task(command);
-                Duke.taskStore.add(newTask);
-                System.out.println("  new task added: " + command);
+                case "unmark": {
+                    Task completedTask = getTaskForMarking(toFindFirstWord);
+                    completedTask.changeCompletion();
+
+                    System.out.println("  OK, continue working on: ");
+                    System.out.println("    " + completedTask.toString());
+                    break;
+                }
+                case "deadline": {
+                    String[] parsed = parser(command, ParseFunctions.DEADLINE);
+                    Task newDeadline = new Deadline(parsed[1], parsed[2]);
+                    Duke.taskStore.add(newDeadline);
+
+                    System.out.println("  new task added!");
+                    System.out.println("    " + newDeadline.toString());
+                    System.out.println("  Now you have " + String.valueOf(Duke.countTasks()) +
+                            " tasks in the list!");
+                    break;
+                }
+                case "event": {
+                    String[] parsed = parser(command, ParseFunctions.EVENT);
+                    Task newEvent = new Event(parsed[1], parsed[2], parsed[3]);
+                    Duke.taskStore.add(newEvent);
+
+                    System.out.println("  new event added!");
+                    System.out.println("    " + newEvent.toString());
+                    System.out.println("  Now you have " + String.valueOf(Duke.countTasks()) +
+                            " tasks in the list!");
+                    break;
+                }
+                case "todo": {
+                    String[] parsed = parser(command, ParseFunctions.TODO);
+                    ToDo newToDo = new ToDo(parsed[1]);
+                    Duke.taskStore.add(newToDo);
+
+                    System.out.println("  new todo added!");
+                    System.out.println("    " + newToDo.toString());
+                    System.out.println("  Now you have " + String.valueOf(Duke.countTasks()) +
+                            " tasks in the list!");
+                    break;
+                }
+                case "list":
+                    for (int i = 0; i < taskStore.size(); i++) {
+                        System.out.println("  " + String.valueOf(i + 1) + ". " + taskStore.get(i));
+                    }
+                    break;
+                default:
+                    System.out.println("error");
+                    break;
             }
         }
     }
