@@ -37,8 +37,11 @@ class Duke {
                 String taskDescription = "";
                 for (int j = 1; j < s.length; j++) {
                     taskDescription += s[j];
+<<<<<<< HEAD
                     taskDescription += " ";
 
+=======
+>>>>>>> 4693ab64d0745c8fd864c0b7aa542938a869ea0c
                 }
                 ToDos taskName = new ToDos(taskDescription);
                System.out.println("Got it. I've added this task:");
