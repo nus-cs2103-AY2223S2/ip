@@ -20,6 +20,9 @@ public class Duke {
             Command command = new Command(input);
         
             switch (command.baseCommand) {
+                case "todo":
+                    Duke.addTodo(command, tasks);
+                    break;
                 case "mark":
                     Duke.mark(command, tasks);
                     break;
@@ -51,6 +54,17 @@ public class Duke {
         System.out.println(indentation + horizontalLine);
         System.out.println(indentedInput);
         System.out.println(indentation + horizontalLine + '\n');
+    }
+
+    private static void addTodo(Command command, TaskList tasks) {
+        String description = command.body;
+        Task task = new TaskTodo(description);
+        tasks.add(task);
+        Duke.say(
+            "Got it. I've added this task:\n"
+                + "  " + task.toString() + "\n"
+                + tasks.getStatus()
+        );
     }
 
     private static void mark(Command command, TaskList tasks) {
