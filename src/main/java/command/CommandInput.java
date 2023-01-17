@@ -5,14 +5,22 @@ import java.util.NoSuchElementException;
 import java.util.Optional;
 import java.util.Scanner;
 
+import manager.MainManager;
+
 public class CommandInput {
     public static final String MAIN_INPUT_KEY = "MAIN_INPUT";
 
     private final HashMap<String, String> inputMap = new HashMap<>();
+    private final MainManager mainManager;
 
 
-    public static CommandInput parse(String args) throws IllegalArgumentException {
-        CommandInput input = new CommandInput();
+    private CommandInput(MainManager mainManager) {
+        this.mainManager = mainManager;
+    }
+
+
+    public static CommandInput parse(String args, MainManager mainManager) throws IllegalArgumentException {
+        CommandInput input = new CommandInput(mainManager);
         if (args.isEmpty()) {
             return input;
         }
@@ -50,5 +58,10 @@ public class CommandInput {
 
     public Optional<String> get(String key) {
         return Optional.ofNullable(inputMap.get(key));
+    }
+
+
+    public MainManager getMainManager() {
+        return mainManager;
     }
 }

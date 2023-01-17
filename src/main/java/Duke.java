@@ -2,6 +2,7 @@ import java.util.Scanner;
 
 import command.Command;
 import command.CommandInput;
+import manager.MainManager;
 
 public class Duke {
     private static String SEPARATOR = "____________________________________________________________";
@@ -22,17 +23,19 @@ public class Duke {
                 + "|____/ \\__,_|_|\\_\\___|\n";
         System.out.println("Hello from\n" + logo);
 
-        System.out.println(formatMessage(Command.GREET.execute(CommandInput.parse(""))));
+        MainManager manager = new MainManager();
+
+        System.out.println(formatMessage(Command.GREET.execute(CommandInput.parse("", manager))));
 
         try (Scanner scanner = new Scanner(System.in)) {
             while (!isExit) {
-                System.out.println(formatMessage(execute(scanner.nextLine())));
+                System.out.println(formatMessage(execute(scanner.nextLine(), manager)));
             }
         }
     }
 
 
-    private String execute(String rawInput) {
+    private String execute(String rawInput, MainManager manager) {
         String msg = rawInput;
         try (Scanner scanner = new Scanner(rawInput)) {
             if (scanner.hasNext()) {
@@ -47,10 +50,10 @@ public class Duke {
                     isExit = true;
                 }
 
-                CommandInput input = CommandInput.parse("");
+                CommandInput input = CommandInput.parse("", manager);
                 if (scanner.hasNext()) {
                     try {
-                        input = CommandInput.parse(msg);
+                        input = CommandInput.parse(msg, manager);
                     } catch (IllegalArgumentException illArgEx) {
                         return msg;
                     }
