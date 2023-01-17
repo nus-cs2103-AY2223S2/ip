@@ -5,7 +5,7 @@
 
 # Java & Project files
 *.class
-tasks.txt
+data.txt
 
 # Gradle build files
 /.gradle/

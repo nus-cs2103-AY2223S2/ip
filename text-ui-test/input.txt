@@ -2,7 +2,7 @@ help
 list
 add /todo buy milk
 add /deadline do bills /by 2020-02-20
-add /event party /from Fri 5pm /to Fri 7pm
+add /event party /from 2021-12-21 /to 2022-11-22
 list
 mark 2
 list

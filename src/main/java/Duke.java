@@ -1,7 +1,5 @@
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.Scanner;
-import java.util.function.Consumer;
 import java.util.function.Function;
 import java.util.function.Supplier;
 
@@ -9,13 +7,13 @@ import java.util.function.Supplier;
 public class Duke {
     public static void main(String[] args) {
 
-        Formatter formatter = new Formatter();
-        DataStore data;
+        UI ui = new UI();
+        TaskList taskList;
         try {
-            data = new DataStore();
+            taskList = new TaskList("data.txt");
         } catch (Exception e) {
-            System.out.println("\t[ERROR] While loading, the following error occurred: \n\t" + e.getMessage());
-            data = new DataStore(new ArrayList<>());
+            ui.loadError(e);
+            taskList = new TaskList(new ArrayList<>());
         }
         Command[] commands = {
                 new BasicCommand("exit"
@@ -24,105 +22,55 @@ public class Duke {
                 new BasicCommand("help"
                         , "show this help message"
                         , () -> {
-                    formatter.print();
-                    return new String[]{};
-                }),
+                            ui.print();
+                            return new String[]{};
+                        }),
                 new BasicCommand("list"
                         , "list tasks"
-                        , data::stringify),
+                        , taskList::stringify),
                 new ArgCommand("add"
                         , "add task"
                         , new String[]{"\\s"}
-                        , data::add),
+                        , taskList::add),
                 new ArgCommand("mark"
                         , "mark/unmark task as done"
                         , new String[]{}
-                        , data::mark),
+                        , taskList::mark),
                 new ArgCommand("delete"
                         , "delete task"
                         , new String[]{}
-                        , data::delete),
+                        , taskList::delete),
         };
-        formatter.setCommands(commands);
-
-        String logo = " ____        _        \n"
-                + "|  _ \\ _   _| | _____ \n"
-                + "| | | | | | | |/ / _ \\\n"
-                + "| |_| | |_| |   <  __/\n"
-                + "|____/ \\__,_|_|\\_\\___| ,\n";
-        System.out.println("Hello, I'm\n" + logo + "how may I help?");
+        ui.setCommands(commands);
+        Parser parser = new Parser(commands);
+        ui.printIntro();
 
         Scanner scanner = new Scanner(System.in);
+        String[] outputs, arguments;
+        String[] lineParts;
+        Command cmd;
 
         while(scanner.hasNextLine()) {
-            String[] inputs = scanner.nextLine().split("\\s",2);
             try {
-                String[] outputs = Duke.parse(commands, inputs);
-                formatter.print(outputs);
-                if (inputs[0].equals("exit")){
+                lineParts = scanner.nextLine().split("\\s",2);
+                cmd = parser.parseCommand(lineParts[0]);
+                if (cmd.hasParams()){
+                    if (lineParts.length < 2 || lineParts[1].isEmpty()) {
+                        throw new IllegalArgumentException("Missing argument.");
+                    }
+                    arguments = Parser.parseArgs(lineParts[1], cmd);
+                    outputs = cmd.execute(arguments);
+                } else {
+                    outputs = cmd.execute(new String[]{});
+                }
+                ui.print(outputs);
+                if (cmd.getName().equals("exit")){
                     break;
                 }
             } catch (Exception e) {
-                System.out.println("\t[ERROR] " + e.getMessage());
-                formatter.print();
+                ui.error(e);
+                ui.print();
             }
         }
-    }
-
-    private static String[] parse(Command[] commands, String[] inputs) {
-        for (Command cmd: commands) {
-            if (inputs[0].equals(cmd.getName())){
-                String[] args = new String[0];
-                if (inputs.length > 1) {
-                     args = Duke.split(inputs[1], cmd.getParams());
-                }
-                return cmd.execute(args);
-            }
-        }
-        throw new IllegalArgumentException("Command not found: " + inputs[0]);
-    }
-
-    public static String[] split(String input, String[] regexes) {
-        String[] outputs = new String[regexes.length + 1];
-        for (int i = 0; i < regexes.length; i++) {
-            String[] temp = input.split(regexes[i],2);
-            if (temp.length > 1){
-                outputs[i] = temp[0];
-                input = temp[1];
-            } else {
-                throw new IllegalArgumentException("Missing argument.");
-            }
-        }
-        outputs[regexes.length] = input;
-        return outputs;
-    }
-
-    @FunctionalInterface
-    public interface ThrowingSupplier<T, E extends Exception> {
-        T get() throws E;
-    }
-
-    @FunctionalInterface
-    public interface ThrowingFunction<T, R, E extends Exception> {
-        R apply(T t) throws E;
-    }
-    static <T> Supplier<T> throwingSupplierWrapper(ThrowingSupplier<T, Exception> throwingSupplier) {
-        return () -> {
-            try {
-                return throwingSupplier.get();
-            } catch (Exception ex) {
-                throw new RuntimeException(ex);
-            }
-        };
-    }
-
-    static <T,R> Function<T,R> throwingFunctionWrapper(ThrowingFunction<T, R, Exception> throwingFunction) {
-        return i -> {
-            try {
-                return throwingFunction.apply(i);
-            } catch (Exception ex) {
-                throw new RuntimeException(ex);
-            }
-        };
     }
 }

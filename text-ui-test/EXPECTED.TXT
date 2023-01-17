@@ -14,30 +14,30 @@ how may I help?
 		delete : delete task
 	No tasks found.
 	added: [T][ ] buy milk
-	added: [D][ ] do bills (by: 2020-02-20)
-	added: [E][ ] party (from: Fri 5pm) (to: Fri 7pm)
+	added: [D][ ] do bills (by: Thu, 20 Feb 2020)
+	added: [E][ ] party (from: Tue, 21 Dec 2021) (to: Tue, 22 Nov 2022)
 	1. [T][ ] buy milk
-	2. [D][ ] do bills (by: 2020-02-20)
-	3. [E][ ] party (from: Fri 5pm) (to: Fri 7pm)
-	marked: 2. [D][X] do bills (by: 2020-02-20)
+	2. [D][ ] do bills (by: Thu, 20 Feb 2020)
+	3. [E][ ] party (from: Tue, 21 Dec 2021) (to: Tue, 22 Nov 2022)
+	marked: 2. [D][X] do bills (by: Thu, 20 Feb 2020)
 	1. [T][ ] buy milk
-	2. [D][X] do bills (by: 2020-02-20)
-	3. [E][ ] party (from: Fri 5pm) (to: Fri 7pm)
+	2. [D][X] do bills (by: Thu, 20 Feb 2020)
+	3. [E][ ] party (from: Tue, 21 Dec 2021) (to: Tue, 22 Nov 2022)
 	marked:
 		1. [T][X] buy milk
-		2. [D][ ] do bills (by: 2020-02-20)
-		3. [E][X] party (from: Fri 5pm) (to: Fri 7pm)
+		2. [D][ ] do bills (by: Thu, 20 Feb 2020)
+		3. [E][X] party (from: Tue, 21 Dec 2021) (to: Tue, 22 Nov 2022)
 	1. [T][X] buy milk
-	2. [D][ ] do bills (by: 2020-02-20)
-	3. [E][X] party (from: Fri 5pm) (to: Fri 7pm)
+	2. [D][ ] do bills (by: Thu, 20 Feb 2020)
+	3. [E][X] party (from: Tue, 21 Dec 2021) (to: Tue, 22 Nov 2022)
 	unmarked: 1. [T][ ] buy milk
 	1. [T][ ] buy milk
-	2. [D][ ] do bills (by: 2020-02-20)
-	3. [E][X] party (from: Fri 5pm) (to: Fri 7pm)
+	2. [D][ ] do bills (by: Thu, 20 Feb 2020)
+	3. [E][X] party (from: Tue, 21 Dec 2021) (to: Tue, 22 Nov 2022)
 	deleted: 1. [T][ ] buy milk
-	1. [D][ ] do bills (by: 2020-02-20)
-	2. [E][X] party (from: Fri 5pm) (to: Fri 7pm)
-	[ERROR] Task not found: 3
+	1. [D][ ] do bills (by: Thu, 20 Feb 2020)
+	2. [E][X] party (from: Tue, 21 Dec 2021) (to: Tue, 22 Nov 2022)
+	[ERROR] java.lang.IllegalArgumentException: Task not found: 3
 	Usage: <command> [<args>]
 		exit : exit the app
 		help : show this help message
@@ -45,10 +45,10 @@ how may I help?
 		 add : add task
 		mark : mark/unmark task as done
 		delete : delete task
-	1. [D][ ] do bills (by: 2020-02-20)
-	2. [E][X] party (from: Fri 5pm) (to: Fri 7pm)
+	1. [D][ ] do bills (by: Thu, 20 Feb 2020)
+	2. [E][X] party (from: Tue, 21 Dec 2021) (to: Tue, 22 Nov 2022)
 	deleted:
-		1. [D][ ] do bills (by: 2020-02-20)
-		2. [E][X] party (from: Fri 5pm) (to: Fri 7pm)
+		1. [D][ ] do bills (by: Thu, 20 Feb 2020)
+		2. [E][X] party (from: Tue, 21 Dec 2021) (to: Tue, 22 Nov 2022)
 	No tasks found.
 	Goodbye.

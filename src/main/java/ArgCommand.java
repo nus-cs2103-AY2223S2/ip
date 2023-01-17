@@ -5,7 +5,7 @@ public class ArgCommand extends Command {
     private final Function<String[], String[]> function;
 
     public ArgCommand(String name, String helpStr, String[] params, Function<String[], String[]> function) {
-        super(name, helpStr, params);
+        super(name, helpStr, true, params);
         this.function = function;
     }
 

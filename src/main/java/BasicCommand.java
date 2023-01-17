@@ -5,7 +5,7 @@ public class BasicCommand extends Command {
     private final Supplier<String[]> supplier;
 
     public BasicCommand(String name, String helpStr, Supplier<String[]> supplier) {
-        super(name, helpStr, new String[]{});
+        super(name, helpStr, false, new String[]{});
         this.supplier = supplier;
     }
 
