@@ -1,0 +1,19 @@
+{
+  "java.completion.importOrder": [
+    "#",
+    "java",
+    "javax",
+    "javafx",
+    "org",
+    "com",
+    ""
+  ],
+  "java.settings.url": ".vscode/vscode-java.prefs",
+  "java.format.settings.url": ".vscode/eclipse-java-google-style.xml",
+  "java.project.sourcePaths": ["src/main/java", "src/test/java", ""],
+  "java.configuration.updateBuildConfiguration": "interactive",
+  "[java]": {
+    "editor.detectIndentation": false,
+    "editor.rulers": [100]
+  }
+}

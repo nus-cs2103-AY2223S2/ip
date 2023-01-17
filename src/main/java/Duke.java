@@ -2,6 +2,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Scanner;
+import java.util.function.Supplier;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
@@ -101,10 +102,6 @@ public class Duke {
         private static String munchUntil(String end) {
             int endIndex = input.indexOf(end, offset);
             if (endIndex < 0) {
-                /**
-                 * Parser should not throw an error. Instead, we will return a special value,
-                 * representing failure.
-                 */
                 return null;
             }
             String view = input.substring(offset, endIndex);
@@ -130,34 +127,42 @@ public class Duke {
             throw new DukeException("☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
         }
 
+        private static String parseDescription(Supplier<String> parser) {
+            String description = parser.get();
+            if (description.isEmpty()) {
+                throw new DukeException("Description cannot be empty");
+            }
+            return description;
+        }
+
         private static String[] parseArgs(DukeCommand cmd) {
             List<String> args = new ArrayList<>();
             switch (cmd) {
-                case LIST:
-                    break;
-                case BYE:
-                    break;
-                case TODO:
-                    args.add(munchUtilEnd());
-                    break;
-                case DEADLINE:
-                    args.add(munchUntil("/by"));
-                    args.add(munchUtilEnd());
-                    break;
-                case EVENT:
-                    args.add(munchUntil("/from"));
-                    args.add(munchUntil("/to"));
-                    args.add(munchUtilEnd());
-                    break;
-                case MARK:
-                    args.add(munchUtilEnd());
-                    break;
-                case UNMARK:
-                    args.add(munchUtilEnd());
-                    break;
-                case DELETE:
-                    args.add(munchUtilEnd());
-                    break;
+            case LIST:
+                break;
+            case BYE:
+                break;
+            case TODO:
+                args.add(parseDescription(DukeCommandParser::munchUtilEnd));
+                break;
+            case DEADLINE:
+                args.add(parseDescription(() -> munchUntil("/by")));
+                args.add(munchUtilEnd());
+                break;
+            case EVENT:
+                args.add(parseDescription(() -> munchUntil("/from")));
+                args.add(munchUntil("/to"));
+                args.add(munchUtilEnd());
+                break;
+            case MARK:
+                args.add(munchUtilEnd());
+                break;
+            case UNMARK:
+                args.add(munchUtilEnd());
+                break;
+            case DELETE:
+                args.add(munchUtilEnd());
+                break;
             }
             return args.toArray(String[]::new);
         }
@@ -165,31 +170,32 @@ public class Duke {
 
     private static void executeDukeCommand(DukeCommand cmd, String... args) {
         switch (cmd) {
-            case BYE:
-                exit();
-                break;
-            case LIST:
-                listTasks();
-                break;
-            case TODO:
-                addTask(new Todo(args[0]));
-                break;
-            case DEADLINE:
-                addTask(new Deadline(args[0], args[1]));
-                break;
-            case EVENT:
-                addTask(new Event(args[0], args[1], args[2]));
-                break;
-            case MARK:
-                markTaskAsDone(Integer.parseInt(args[0]));
-                break;
-            case UNMARK:
-                markTaskAsNotDone(Integer.parseInt(args[0]));
-                break;
-            case DELETE:
-                deleteTask(Integer.parseInt(args[0]));
-                break;
+        case BYE:
+            exit();
+            break;
+        case LIST:
+            listTasks();
+            break;
+        case TODO:
+            addTask(new Todo(args[0]));
+            break;
+        case DEADLINE:
+            addTask(new Deadline(args[0], args[1]));
+            break;
+        case EVENT:
+            addTask(new Event(args[0], args[1], args[2]));
+            break;
+        case MARK:
+            markTaskAsDone(Integer.parseInt(args[0]));
+            break;
+        case UNMARK:
+            markTaskAsNotDone(Integer.parseInt(args[0]));
+            break;
+        case DELETE:
+            deleteTask(Integer.parseInt(args[0]));
+            break;
         }
+
     }
 
     public static void main(String[] args) {
@@ -203,8 +209,9 @@ public class Duke {
                     String[] cmdArgs = DukeCommandParser.parseArgs(cmd);
                     executeDukeCommand(cmd, cmdArgs);
                 } catch (DukeException de) {
-                    // More exceptions will be handled later.
                     echo(de.getMessage());
+                } catch (Exception ex) {
+                    echo("Oh no! Something is wrong with your command");
                 }
             } while (!isDone);
         }
