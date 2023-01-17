@@ -1,7 +1,7 @@
 package response;
 
-import response.Response;
 import storage.ToDoList;
+import storage.Task;
 
 /**
  * Represents a response to create a new task in the to do list
@@ -27,7 +27,7 @@ public class CreateResponse extends Response {
      */
     @Override
     public String exec(ToDoList toDoList) {
-        toDoList.createToDo(this.todo);
+        toDoList.createToDo(new Task(this.todo));
         return String.format("Alright! This task has been added into the list: %s", this.todo);
     }
 }

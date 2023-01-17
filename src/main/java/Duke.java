@@ -37,6 +37,7 @@ public class Duke {
             }
 
             // Parse the user input
+
             InputParser input = new InputParser(req);
             try {
                 // Parsing the input returns a Response

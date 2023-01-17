@@ -1,7 +1,5 @@
 package exception;
 
-import exception.DukeException;
-
 /**
  * Exception to handle the case where the user input is ""
  */
