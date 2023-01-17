@@ -15,12 +15,14 @@ import java.util.Scanner;
 import java.util.stream.Stream;
 
 public class Shao {
-    public static String sep = File.separator;
-    public static String dataFilePath = "data" + sep + "shao.txt";
 
     enum TaskType {
         TODO, DEADLINE, EVENT
     }
+
+    public static String sep = File.separator;
+
+    public static String dataFilePath = "data" + sep + "shao.txt";
 
     public static void printRowLine() {
         println("________________________________________________________");
@@ -108,7 +110,17 @@ public class Shao {
 
     }
 
-    static void modifyFile(String filePath, int lineNum, String newLine) {
+    public static void markSavedTask(int idx, boolean isMark) {
+        try (Stream<String> lines = Files.lines(Paths.get(dataFilePath))) {
+            String line = lines.skip(idx).findFirst().get();
+            modifyLineFile(dataFilePath, idx + 1,
+                    line.replaceFirst("[01]", isMark ? "1" : "0"));
+        } catch (IOException ex) {
+            printError("Something went wrong while marking the task status.");
+        }
+    }
+
+    public static void modifyLineFile(String filePath, int lineNum, String newLine) {
         File fileToBeModified = new File(filePath);
         String content = "";
         BufferedReader reader = null;
@@ -142,19 +154,46 @@ public class Shao {
         }
     }
 
-    public static void markSavedTask(int idx, boolean isMark) {
-        try (Stream<String> lines = Files.lines(Paths.get(dataFilePath))) {
-            String line = lines.skip(idx).findFirst().get();
-            modifyFile(dataFilePath, idx + 1,
-                    line.replaceFirst("[01]", isMark ? "1" : "0"));
-        } catch (IOException ex) {
-            printError("Something went wrong while marking the task status.");
+    public static void deleteItem(String itemNum, List<Task> items) throws ParseException {
+        try {
+            int idx = Integer.parseInt(itemNum) - 1;
+            deleteLineFile(dataFilePath, idx + 1);
+            printItemDeleted(items.remove(idx), items.size());
+        } catch (IndexOutOfBoundsException ex) {
+            printError(String.format("Oops! Please select item from 1 to %d inclusive.", items.size()));
         }
     }
 
-    public static void deleteItem(String itemNum, List<Task> items) throws ParseException {
-        int idx = Integer.parseInt(itemNum) - 1;
-        printItemDeleted(items.remove(idx), items.size());
+    public static void deleteLineFile(String filePath, int lineNum) {
+        File fileToBeModified = new File(filePath);
+        String content = "";
+        BufferedReader reader = null;
+        FileWriter writer = null;
+        int curLineNum = 1;
+
+        try {
+            reader = new BufferedReader(new FileReader(fileToBeModified));
+            String line = reader.readLine();
+
+            while (line != null) {
+                if (curLineNum != lineNum) {
+                    content += line + System.lineSeparator();
+                }
+                line = reader.readLine();
+                curLineNum += 1;
+            }
+            writer = new FileWriter(fileToBeModified);
+            writer.write(content);
+        } catch (IOException e) {
+            printError("Something went wrong while deleting a line from the file.");
+        } finally {
+            try {
+                reader.close();
+                writer.close();
+            } catch (IOException e) {
+                printError("Something went wrong while deleting a line from the file.");
+            }
+        }
     }
 
     public static String getBy(String input) {
