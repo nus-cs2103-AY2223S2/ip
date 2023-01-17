@@ -12,4 +12,6 @@ deadline
 event
 blah
 list
+delete 2
+list
 bye

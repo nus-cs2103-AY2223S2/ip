@@ -21,17 +21,25 @@ public class Duke {
                         }
                     }
                     System.out.println("____________________");
-                } else if (input.length() > 4 && input.substring(0, 4).equals("mark")) {
-                    int indexToMark = Integer.parseInt(input.substring(5)) - 1; // mark 2
+                } else if (input.length() >= 6 && input.substring(0, 6).equals("delete")) {
+                    int indexToDelete = Integer.parseInt(input.substring(7)) - 1;
+                    if (indexToDelete < lst.size()) {
+                        taskRemovedMessage(lst.get(indexToDelete),lst.size() - 1);
+                        lst.remove(indexToDelete);
+                    } else {
+                        throw new DukeException("Invalid, there is no such task");
+                    }
+                }else if (input.length() >= 4 && input.substring(0, 4).equals("mark")) {
+                    int indexToMark = Integer.parseInt(input.substring(5)) - 1;
                     if (indexToMark < lst.size()) {
                         Task toMark = lst.get(indexToMark);
                         toMark.markAsDone();
                         customMessage("Nice! I've marked this task as done:\n" + toMark);
                     } else {
-                        customMessage("Invalid, there is no such task");
+                        throw new DukeException("Invalid, there is no such task");
                     }
-                } else if (input.length() > 6 && input.substring(0, 6).equals("unmark")) {
-                    int indexToUnmark = Integer.parseInt(input.substring(7)) - 1; // unmark 2
+                } else if (input.length() >= 6 && input.substring(0, 6).equals("unmark")) {
+                    int indexToUnmark = Integer.parseInt(input.substring(7)) - 1;
                     if (indexToUnmark < lst.size()) {
                         Task toUnmark = lst.get(indexToUnmark);
                         toUnmark.markAsUndone();
@@ -57,6 +65,13 @@ public class Duke {
     private static void taskAddedMessage(Task task, int sizeOfList) {
         System.out.println("____________________");
         System.out.println("Got it. I've added this task:");
+        System.out.println(task);
+        System.out.println("Now you have " + sizeOfList + " task" + (sizeOfList > 1 ? "s" : "") +" in the list.");
+        System.out.println("____________________");
+    }
+    private static void taskRemovedMessage(Task task, int sizeOfList) {
+        System.out.println("____________________");
+        System.out.println("Noted. I've removed this task:");
         System.out.println(task);
         System.out.println("Now you have " + sizeOfList + " task" + (sizeOfList > 1 ? "s" : "") +" in the list.");
         System.out.println("____________________");
