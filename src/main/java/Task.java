@@ -7,7 +7,7 @@ public class Task {
         this.isDone = false;
     }
 
-    public String getStatus() {
+    private String getMark() {
         if (this.isDone) {
             return "[X]";
         }
@@ -22,11 +22,15 @@ public class Task {
         this.isDone = false;
     }
 
+    public boolean isValid() {
+        return false;
+    }
+
     public String getTaskName() {
         return this.taskName;
     }
 
     public String toString() {
-        return getStatus() + " " + this.taskName;
+        return getMark() + " " + this.taskName;
     }
 }

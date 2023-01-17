@@ -10,24 +10,32 @@ public class Connor {
         }
     }
 
-    private static String getDirective(String input) {
+    private static String getTask(String input) {
         return input.substring(input.indexOf(' ') + 1, input.length());
     }
 
-    private static String[] getDirectiveTimePair(String input) {
-        int slashIndex = input.indexOf('/');
+    private static String[] getNameDeadlinePair(String input) throws InvalidTaskException{
+        int byIndex = input.indexOf("/by");
+        if (byIndex == -1) {
+            throw new InvalidTaskException();
+        }
         String[] pair = new String[2];
-        pair[0] = input.substring(0, slashIndex - 1);
-        pair[1] = input.substring(slashIndex + 1, input.length());
+        pair[0] = input.substring(0, byIndex - 1);
+        pair[1] = input.substring(byIndex + 4);
         return pair;
     }
 
-    private static String[] getStartEndTime(String input) {
-        int slashIndex = input.indexOf('/');
-        String[] pair = new String[2];
-        pair[0] = input.substring(0, slashIndex - 1);
-        pair[1] = input.substring(slashIndex + 1, input.length());
-        return pair;
+    private static String[] getNameStartEndTuple(String input) throws InvalidTaskException {
+        int fromIndex = input.indexOf("/from");
+        int byIndex = input.indexOf("/to");
+        if (fromIndex == -1 || byIndex == -1) {
+            throw new InvalidTaskException();
+        }
+        String[] tuple = new String[3];
+        tuple[0] = input.substring(0, fromIndex - 1);
+        tuple[1] = input.substring(fromIndex + 6, byIndex - 1);
+        tuple[2] = input.substring(byIndex + 4);
+        return tuple;
     }
 
     public static void main(String[] args) {
@@ -40,42 +48,37 @@ public class Connor {
         while (sc.hasNextLine()) {
             String input = sc.nextLine();
             String command = getCommand(input);
-            if (command.equals("HI")) {
-                Response.greetings("HI");
-            } else if (command.equals("BYE")) {
-                Response.greetings("BYE");
-                sc.close();
-                break;
-            } else if (command.equals("MARK")) {
-                String numberMark = getDirective(input);
-                list.markDone(Integer.valueOf(numberMark));
-            } else if (command.equals("UNMARK")) {
-                String numberUnmark = getDirective(input);
-                list.markUndone(Integer.valueOf(numberUnmark));
-            } else if (command.equals("LIST")) {
-                list.getList();
-            } else if (command.equals("TODO")) {
-                TODO todo = new TODO(getDirective(input));
-                list.addTask(todo);
-            } else if (command.equals("DEADLINE")) {
-                String[] pair = getDirectiveTimePair(getDirective(input));
-                String taskName = pair[0];
-                String time = pair[1];
-                String exactTime = time.substring(time.indexOf(' ') + 1, time.length());
-                Deadline deadline = new Deadline(taskName, exactTime);
-                list.addTask(deadline);
-            } else if (command.equals("EVENT")){
-                String[] pair = getDirectiveTimePair(getDirective(input));
-                String taskName = pair[0];
-                String[] timePair = getStartEndTime(pair[1]);
-                String startTime = timePair[0];
-                String endTime = timePair[1];
-                String exactStartTime = startTime.substring(startTime.indexOf(' ') + 1, startTime.length());
-                String exactEndTime = endTime.substring(endTime.indexOf(' ') + 1, endTime.length());
-                Event event = new Event(taskName, exactStartTime, exactEndTime);
-                list.addTask(event);
-            } else {
-                Response.printMessage("Sorry, My program is unable to process your request");
+            try {
+                if (command.equals("HI")) {
+                    Response.greetings("HI");
+                } else if (command.equals("BYE")) {
+                    Response.greetings("BYE");
+                    sc.close();
+                    break;
+                } else if (command.equals("MARK")) {
+                    String numberMark = getTask(input);
+                    list.markDone(Integer.valueOf(numberMark));
+                } else if (command.equals("UNMARK")) {
+                    String numberUnmark = getTask(input);
+                    list.markUndone(Integer.valueOf(numberUnmark));
+                } else if (command.equals("LIST")) {
+                    list.getList();
+                } else if (command.equals("TODO")) {
+                    TODO todo = new TODO(getTask(input));
+                    list.addTask(todo);
+                } else if (command.equals("DEADLINE")) {
+                    String[] pair = getNameDeadlinePair(getTask(input));
+                    Deadline deadline = new Deadline(pair[0], pair[1]);
+                    list.addTask(deadline);
+                } else if (command.equals("EVENT")) {
+                    String[] tuple = getNameStartEndTuple(getTask(input));
+                    Event event = new Event(tuple[0], tuple[1], tuple[2]);
+                    list.addTask(event);
+                } else {
+                    throw new InvalidCommandException();
+                }
+            } catch (InvalidCommandException | InvalidTaskException e) {
+                System.out.println(e.getMessage());
             }
         }
     }
