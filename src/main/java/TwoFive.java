@@ -19,5 +19,21 @@ public class TwoFive {
         System.out.println("I'm your personal assistant chatbot");
         System.out.println("What can I do for you?");
         System.out.println(divider);
+
+        //Reads input from user
+        Scanner inputScanner = new Scanner(System.in);
+        String input = inputScanner.nextLine();
+
+        //Exits when user types bye
+        while (!input.equals("bye")) {
+            //Echos input from user
+            System.out.println(divider);
+            System.out.println(input);
+            System.out.println(divider);
+            input = inputScanner.nextLine();
+        }
+        System.out.println(divider);
+        System.out.println(" Bye. Hope to see you again soon!");
+        System.out.println(divider);
     }
 }
