@@ -67,6 +67,7 @@ public class Duke {
                     }
                     markAsDone(taskStorage.get(indexOfTask));
                 } catch (DukeException dukeException) {
+                    System.out.println(straightLine);
                     System.out.println(dukeException.getMessage());
                     System.out.println(straightLine);
                     continue;
@@ -88,6 +89,7 @@ public class Duke {
                     }
                     markAsUndone(taskStorage.get(indexOfTask));
                 } catch (DukeException dukeException) {
+                    System.out.println(straightLine);
                     System.out.println(dukeException.getMessage());
                     System.out.println(straightLine);
                     continue;
@@ -97,13 +99,14 @@ public class Duke {
             else if (inputArray[0].equals("todo")) {
                 try {
                     if (inputArray.length == 1) {
-                        throw new DukeException("You must enter a task name after the todo command.");
+                        throw new DukeException("The todo command cannot be left blank.");
                     }
                     int indexOfType = input.indexOf("todo");
                     String taskName = input.substring(indexOfType + 5);
                     ToDo newToDoTask = new ToDo(taskName);
                     addTask(newToDoTask, taskStorage);
                 } catch (DukeException dukeException) {
+                    System.out.println(straightLine);
                     System.out.println(dukeException.getMessage());
                     System.out.println(straightLine);
                     continue;
@@ -114,6 +117,9 @@ public class Duke {
             else if (inputArray[0].equals("deadline")) {
                 try {
                     int indexOfType = input.indexOf("deadline");
+                    if (indexOfType + 8 > input.length() - 1) {
+                        throw new DukeException("The deadline command cannot be left blank.");
+                    }
                     int indexOfBy = input.indexOf("/by");
                     if (indexOfBy == -1) {
                         throw new DukeException("The deadline cannot be left blank.");
@@ -137,7 +143,7 @@ public class Duke {
                         deadlineOfTask = input.substring(indexOfBy + 3);
                     }
                     if (taskName.isBlank()) {
-                        throw new DukeException("There seems to be a missing task name.");
+                        throw new DukeException("The task name cannot be left blank.");
                     }
                     if (deadlineOfTask.isBlank()) {
                         throw new DukeException("The deadline cannot be left blank.");
@@ -145,6 +151,7 @@ public class Duke {
                     Deadline newDeadlineTask = new Deadline(taskName, deadlineOfTask);
                     addTask(newDeadlineTask, taskStorage);
                 } catch (DukeException dukeException) {
+                    System.out.println(straightLine);
                     System.out.println(dukeException.getMessage());
                     System.out.println(straightLine);
                     continue;
@@ -152,14 +159,59 @@ public class Duke {
             }
             //User typed in "event"
             else if (inputArray[0].equals("event")) {
-                int indexOfType = input.indexOf("event");
-                int indexOfFrom = input.indexOf("/from");
-                int indexOfTo = input.indexOf("/to");
-                String taskName = input.substring(indexOfType + 6, indexOfFrom - 1);
-                String startDate = input.substring(indexOfFrom + 6, indexOfTo - 1);
-                String endDate = input.substring(indexOfTo + 4);
-                Event newEventTask = new Event(taskName, startDate, endDate);
-                addTask(newEventTask, taskStorage);
+                try {
+                    int indexOfType = input.indexOf("event");
+                    if (indexOfType + 5 > input.length() - 1) {
+                        throw new DukeException("The event command cannot be left blank.");
+                    }
+
+                    int indexOfFrom = input.indexOf("/from");
+                    if (indexOfFrom == -1) {
+                        throw new DukeException("There seems to be a missing from date.");
+                    }
+
+                    int indexOfTo = input.indexOf("/to");
+                    if (indexOfTo == -1) {
+                        throw new DukeException("There seems to be a missing to date.");
+                    }
+
+                    //Check taskName
+                    if ((indexOfType + 6 > indexOfFrom - 1)) {
+                        throw new DukeException("There seems to be a missing task name.");
+                    }
+
+                    String taskName = input.substring(indexOfType + 6, indexOfFrom - 1);
+                    if (taskName.isBlank()) {
+                        throw new DukeException("The task name cannot be left blank.");
+                    }
+
+                    //Check startDate
+                    if (indexOfFrom + 6 > indexOfTo - 1) {
+                        throw new DukeException("There seems to be a missing start date.");
+                    }
+
+                    String startDate = input.substring(indexOfFrom + 6, indexOfTo - 1);
+                    if (startDate.isBlank()) {
+                        throw new DukeException("The start date cannot be left blank.");
+                    }
+
+                    //Check endDate
+                    if (indexOfTo + 4 > input.length() - 1) {
+                        throw new DukeException("There seems to be a missing end date.");
+                    }
+
+                    String endDate = input.substring(indexOfTo + 4);
+                    if (endDate.isBlank()) {
+                        throw new DukeException("The end date cannot be left blank.");
+                    }
+                    Event newEventTask = new Event(taskName, startDate, endDate);
+                    addTask(newEventTask, taskStorage);
+                } catch (DukeException dukeException) {
+                    System.out.println(straightLine);
+                    System.out.println(dukeException.getMessage());
+                    System.out.println(straightLine);
+                    continue;
+                }
             }
             //User did not type in a valid command
             else {
@@ -181,7 +233,20 @@ public class Duke {
         System.out.println(straightLine);
         System.out.println("Boo! Nice to meet you.");
         System.out.println("I am here to scare all your problems away by keeping track of your tasks.");
-        System.out.println("What can I help you with today?");
+        System.out.println("What can I help you with today?\n");
+        System.out.println("Supported Commands:");
+        String commandList =
+                "1. list -> Provides a list of existing tasks.\n" +
+                "2. mark X -> Marks task number X as done.\n" +
+                "3. unmark X -> Marks task number X as undone.\n" +
+                "4. todo taskName -> Creates a todo task with name taskName.\n" +
+                "5. deadline taskName /by date -> Creates a deadline task with name taskName and deadline date.\n" +
+                "6. event taskName /from startDate /to endDate -> Creates an event task with name taskName,\n" +
+                "   start date startDate, and end date endDate.";
+        System.out.println(commandList);
+
+
+
         System.out.println(straightLine);
     }
 

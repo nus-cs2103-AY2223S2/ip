@@ -11,6 +11,12 @@ mark 1
 list
 unmark 1
 list
+todo
+deadline
+event
+list -1
+mark -1
+unmark 9
 hello
 Bye
 bye

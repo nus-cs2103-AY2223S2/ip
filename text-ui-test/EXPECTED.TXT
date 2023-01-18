@@ -7,6 +7,15 @@ ________________________________________________________________________________
 Boo! Nice to meet you.
 I am here to scare all your problems away by keeping track of your tasks.
 What can I help you with today?
+
+Supported Commands:
+1. list -> Provides a list of existing tasks.
+2. mark X -> Marks task number X as done.
+3. unmark X -> Marks task number X as undone.
+4. todo taskName -> Creates a todo task with name taskName.
+5. deadline taskName /by date -> Creates a deadline task with name taskName and deadline date.
+6. event taskName /from startDate /to endDate -> Creates an event task with name taskName,
+   start date startDate, and end date endDate.
 _______________________________________________________________________________________________
 _______________________________________________________________________________________________
 Added task to list:
@@ -88,6 +97,24 @@ Here are the tasks in your list:
 6. [E][ ] project meeting (from: Mon 2pm to: 4pm)
 7. [D][ ] do homework (by: no idea :-p)
 8. [E][ ] conference (from: no idea :-p to: no idea :-p)
+_______________________________________________________________________________________________
+_______________________________________________________________________________________________
+The todo command cannot be left blank.
+_______________________________________________________________________________________________
+_______________________________________________________________________________________________
+The deadline command cannot be left blank.
+_______________________________________________________________________________________________
+_______________________________________________________________________________________________
+The event command cannot be left blank.
+_______________________________________________________________________________________________
+_______________________________________________________________________________________________
+Sorry. I do not understand this command. Please try again.
+_______________________________________________________________________________________________
+_______________________________________________________________________________________________
+Please enter a valid task number. You currently have 8 tasks.
+_______________________________________________________________________________________________
+_______________________________________________________________________________________________
+Please enter a valid task number. You currently have 8 tasks.
 _______________________________________________________________________________________________
 _______________________________________________________________________________________________
 Sorry. I do not understand this command. Please try again.
