@@ -8,6 +8,14 @@ public class Task {
         this.taskDone = false;
     }
 
+    public void markDone() {
+        this.taskDone = true;
+    }
+
+    public void markUnDone() {
+        this.taskDone = false;
+    }
+
     @Override
     public String toString() {
         if (taskDone == false) {
