@@ -56,7 +56,7 @@ public class Ui {
      */
     public void deleteMessage(Task item, int size) {
         System.out.println(LINE_BREAK + "\t 1 less task! :)");
-        System.out.println("\t\t" + item+ "\n\tNow you have " + (size - 1) + " tasks left!" + LINE_BREAK);
+        System.out.println("\t\t" + item + "\n\tNow you have " + (size - 1) + " tasks left!" + LINE_BREAK);
     }
 
     /**
@@ -88,6 +88,25 @@ public class Ui {
         System.out.println(LINE_BREAK + "\tHere are all your tasks, good luck!");
         System.out.print(taskList.toString());
         System.out.println(LINE_BREAK);
+    }
+
+    /**
+     * Method to show user a failed search.
+     */
+    public void failedSearch() {
+        System.out.println(line_break + "\tThere are no matching tasks in your list :(\n"
+                + line_break);
+    }
+
+    /**
+     * Method to print results of a word search.
+     * 
+     * @param temp taskList to be printed.
+     */
+    public void printSearch(TaskList temp) {
+        System.out.println(line_break + "\tHere are the matching tasks!");
+        System.out.print(temp.toString());
+        System.out.println(line_break);
     }
 
     /**

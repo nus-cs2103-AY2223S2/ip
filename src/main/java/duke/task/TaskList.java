@@ -19,7 +19,7 @@ public class TaskList {
      * Method to add a Task directly to TaskList.
      *
      * @param task Task to be added to TaskList.
-     * @param ui ui to give user the message.
+     * @param ui   ui to give user the message.
      */
     public void add(Task task, Ui ui) {
         items.add(task);
@@ -30,7 +30,7 @@ public class TaskList {
      * Method to add an Event to the TaskList via the input String array.
      *
      * @param curr a String array from user input to be parsed.
-     * @param ui ui to give user the message.
+     * @param ui   ui to give user the message.
      * @throws DukeException If user input is erroneous.
      */
     public void addEvent(String[] curr, Ui ui) throws DukeException {
@@ -41,7 +41,8 @@ public class TaskList {
             String to = newCurr[1].trim();
             add(new Event(descr, from, to), ui);
         } catch (Exception e) {
-            throw new DukeException("You need to fill in an event with format `event {title} /from dd/MM/yyyy HHmm /to dd/MM/yyyy HHmm`");
+            throw new DukeException(
+                    "You need to fill in an event with format `event {title} /from dd/MM/yyyy HHmm /to dd/MM/yyyy HHmm`");
         }
     }
 
@@ -49,7 +50,7 @@ public class TaskList {
      * Method to add a Deadline to the TaskList via the input String array.
      *
      * @param curr a String array from user input to be parsed.
-     * @param ui ui to give user the message.
+     * @param ui   ui to give user the message.
      * @throws DukeException If user input is erroneous.
      */
     public void addDeadline(String[] curr, Ui ui) throws DukeException {
@@ -58,7 +59,8 @@ public class TaskList {
             String by = curr[1].trim();
             add(new Deadline(descr, by), ui);
         } catch (Exception e) {
-            throw new DukeException("You need to fill in a deadline with format `deadline {title} /by dd/MM/yyyy HHmm`");
+            throw new DukeException(
+                    "You need to fill in a deadline with format `deadline {title} /by dd/MM/yyyy HHmm`");
         }
     }
 
@@ -66,21 +68,23 @@ public class TaskList {
      * Method to add a ToDo to the TaskList via the input String array.
      *
      * @param curr a String array from user input to be parsed.
-     * @param ui ui to give user the message.
+     * @param ui   ui to give user the message.
      * @throws DukeException If user input is erroneous.
      */
     public void addToDo(String[] curr, Ui ui) throws DukeException {
         String todo = curr[0].substring(5).trim();
         if (todo.isBlank()) {
             throw new DukeException("You need to add a todo with format `todo {title}`");
-        } else { add(new ToDo(todo), ui); }
+        } else {
+            add(new ToDo(todo), ui);
+        }
     }
 
     /**
      * Method to delete a Task from the TaskList via input String array.
      *
      * @param curr_title a String array from user input to be parsed.
-     * @param ui ui to give user the message.
+     * @param ui         ui to give user the message.
      * @throws DukeException If user input is erroneous.
      */
     public void deleteTask(String[] curr_title, Ui ui) throws DukeException {
@@ -101,7 +105,7 @@ public class TaskList {
      * Method to mark Task in TaskList via input String array.
      *
      * @param curr_title a String array from user input to be parsed
-     * @param ui ui to give user the message.
+     * @param ui         ui to give user the message.
      * @throws DukeException If user input is erroneous.
      */
     public void mark(String[] curr_title, Ui ui) throws DukeException {
@@ -124,7 +128,7 @@ public class TaskList {
      * Method to unmark Task in TaskList via input String array.
      *
      * @param curr_title a String array from user input to be parsed.
-     * @param ui ui to give user the message.
+     * @param ui         ui to give user the message.
      * @throws DukeException If user input is erroneous.
      */
     public void unmark(String[] curr_title, Ui ui) throws DukeException {
@@ -144,6 +148,42 @@ public class TaskList {
     }
 
     /**
+     * Method to find a keyword within tasks via String array from user input.
+     *
+     * @param curr_title String array with user input.
+     * @param ui         ui to show user messages.
+     * @throws DukeException if there is error in the command.
+     */
+    public void findTask(String[] curr_title, Ui ui) throws DukeException {
+        try {
+            String searchFor = curr_title[1].trim();
+            TaskList temp = new TaskList();
+            for (int i = 0; i < items.size(); i++) {
+                if (items.get(i).contains(searchFor)) {
+                    temp.initAdd(items.get(i));
+                }
+            }
+            if (temp.isEmpty()) {
+                ui.failedSearch();
+            } else {
+                ui.printSearch(temp);
+            }
+
+        } catch (Exception e) {
+            throw new DukeException("You need to do a search with the format `find {substring}`");
+        }
+    }
+
+    /**
+     * Method to check if TaskList is empty.
+     *
+     * @return boolean representing whether the list is empty.
+     */
+    public boolean isEmpty() {
+        return this.items.isEmpty();
+    }
+
+    /**
      * Method to add tasks without giving the UI messages.
      * Primarily for when loading from hard drive data.
      *
@@ -154,7 +194,8 @@ public class TaskList {
     }
 
     /**
-     * Method to get the String representation of entire list for writing to hard drive.
+     * Method to get the String representation of entire list for writing to hard
+     * drive.
      *
      * @return alternative String representation of list.
      */

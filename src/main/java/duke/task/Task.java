@@ -42,6 +42,16 @@ public class Task {
     }
 
     /**
+     * Method for checking if a substring exists in the title.
+     *
+     * @param subString to search for.
+     * @return boolean representing result of the search.
+     */
+    public boolean contains(String subString) {
+        return this.title.contains(subString);
+    }
+
+    /**
      * Alternative toString method purely for writing to hard drive.
      * Can also be used for testing.
      *
@@ -58,7 +68,7 @@ public class Task {
      */
     @Override
     public String toString() {
-        return this.type + (done ? CHECKED : UNCHECKED) + " "  + this.title;
+        return this.type + (done ? CHECKED : UNCHECKED) + " " + this.title;
     }
 
 }
