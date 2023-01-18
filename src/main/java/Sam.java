@@ -21,19 +21,25 @@ public class Sam {
       System.out.println(Assets.USER);
       System.out.print("> ");
       String[] input = scanner.nextLine().strip().split(" ", 2);
-      processInput(input);
+      try {
+        processInput(input);
+      } catch (SamException e) {
+        talk(e.getMessage());
+      }
       taskArgs.clear();
     }
   }
 
-  private static void processInput(String[] input) {
+  private static void processInput(String[] input)
+    throws SamUnknownCommandException, SamMissingTaskException, SamInvalidTaskException,
+      SamMissingTaskTitleException, SamMissingTaskValueException, SamMissingTaskArgException
+  {
     Command command = null;
     for (Command c : Command.values())
       if (c.matches(input[0])) command = c;
 
     if (command == null) {
-      talk("Sorry, I don't know what that means");
-      return;
+      throw new SamUnknownCommandException();
     }
     
     switch (command) {
@@ -51,10 +57,12 @@ public class Sam {
         }
         break;
       case MARK: {
+        if (input.length <= 1) {
+          throw new SamMissingTaskException();
+        }
         int id = Integer.parseInt(input[1]);
         if (id <= 0 || id > tasks.count()) {
-          talk("Oops, that task does not exist!");
-          break;
+          throw new SamInvalidTaskException();
         }
         tasks.markTask(id, true);
         talk("Great! I'll check the task:\n    "
@@ -62,10 +70,12 @@ public class Sam {
         break;
       }
       case UNMARK: {
+        if (input.length <= 1) {
+          throw new SamMissingTaskException();
+        }
         int id = Integer.parseInt(input[1]);
         if (id <= 0 || id > tasks.count()) {
-          talk("Oops, that task does not exist!");
-          break;
+          throw new SamInvalidTaskException();
         }
         tasks.markTask(id, false);
         talk("Okay, I'll uncheck the task:\n    "
@@ -73,9 +83,8 @@ public class Sam {
         break;
       }
       case TODO: {
-        if (input[1] == null) {
-          talk("Oops, you forgot a title for your task!");
-          break;
+        if (input.length <= 1) {
+          throw new SamMissingTaskTitleException();
         }
         Task task = new ToDo(input[1]);
         tasks.addTask(task);
@@ -83,19 +92,13 @@ public class Sam {
         break;
       }
       case EVENT: {
-        if (input[1].strip().charAt(0) == '/') {
-          talk("Oops, you forgot a title for your task!");
-          break;
+        if (input.length <= 1 || input[1].strip().charAt(0) == '/') {
+          throw new SamMissingTaskTitleException();
         }
         String[] title = input[1].strip().split(" /", 2);
-        if (title.length > 1 && !parseTaskArgs(title[1])) {
-          talk("Oops, an argument is missing a value!");
-          break;
-        };
+        if (title.length > 1) parseTaskArgs(title[1]);
         if (!taskArgs.containsKey("from") || !taskArgs.containsKey("to")) {
-          talk("Oops, you're missing an argument!",
-            "An event requires: 'from', 'to'");
-          break;
+          throw new SamMissingTaskArgException();
         }
         Task task = new Event(title[0], taskArgs.get("from"), taskArgs.get("to"));
         tasks.addTask(task);
@@ -103,19 +106,13 @@ public class Sam {
         break;
       }
       case DEADLINE: {
-        if (input[1].strip().charAt(0) == '/') {
-          talk("Oops, you forgot a title for your task!");
-          break;
+        if (input.length <= 1 || input[1].strip().charAt(0) == '/') {
+          throw new SamMissingTaskTitleException();
         }
         String[] title = input[1].strip().split(" /", 2);
-        if (title.length > 1 && !parseTaskArgs(title[1])) {
-          talk("Oops, an argument is missing a value!");
-          break;
-        };
+        if (title.length > 1) parseTaskArgs(title[1]);
         if (!taskArgs.containsKey("by")) {
-          talk("Oops, you're missing an argument!",
-            "A deadline requires: 'by'");
-          break;
+          throw new SamMissingTaskArgException();
         }
         Task task = new Deadline(title[0], taskArgs.get("by"));
         tasks.addTask(task);
@@ -125,13 +122,12 @@ public class Sam {
     }
   }
 
-  private static boolean parseTaskArgs(String input) {
+  private static void parseTaskArgs(String input) throws SamMissingTaskValueException {
     for (String arg : input.strip().split(" /")) {
       String[] keyValue = arg.split(" ", 2);
-      if (keyValue.length <= 1) return false;
+      if (keyValue.length <= 1) throw new SamMissingTaskValueException();
       taskArgs.put(keyValue[0], keyValue[1]);
     }
-    return true;
   }
 
   private static void newTask(Task task) {
