@@ -11,13 +11,13 @@ public class Duke {
     public static void main(String[] args) {
         System.out.println(intro());
         
-        String s = askForInput();
-        EventType curEvent = decodeInput(s);
+        String userInput = askForInput();
+        EventType curEvent = decodeInput(userInput);
         loop: while (true) {
             switch (curEvent) {
             case ADD:
-                storedInputs.add(new ToDo(s));
-                System.out.println("\nadded: " + s + "\n");
+                storedInputs.add(new Task(userInput));
+                System.out.println("\nadded: " + userInput + "\n");
                 break;
             case BYE:
                 break loop;
@@ -25,15 +25,24 @@ public class Duke {
                 System.out.println("\nHere are the tasks in your list:\n" + printList());
                 break;
             case MARK:
-                markEvent(s);
+                markEvent(userInput);
                 break;
             case UNMARK:
-                unmarkEvent(s);
+                unmarkEvent(userInput);
+                break;
+            case TODO:
+                todoEvent(userInput);
+                break;
+            case DEADLINE:
+                deadlineEvent(userInput);
+                break;
+            case EVENT:
+                eventEvent(userInput);
                 break;
             }
             
-            s = askForInput();
-            curEvent = decodeInput(s);
+            userInput = askForInput();
+            curEvent = decodeInput(userInput);
         }
 
         System.out.println("Good Riddance!");
@@ -71,12 +80,21 @@ public class Duke {
         if (arr[0].equals("unmark")) {
             return EventType.UNMARK;
         }
+        if (arr[0].equals("todo")) {
+            return EventType.TODO;
+        }
+        if (arr[0].equals("deadline")) {
+            return EventType.DEADLINE;
+        }
+        if (arr[0].equals("event")) {
+            return EventType.EVENT;
+        }
 
         return EventType.ADD;
     }
 
-    private static void markEvent(String s) {
-        String[] arr = s.split(" ");
+    private static void markEvent(String userInput) {
+        String[] arr = userInput.split(" ");
         int num = Integer.parseInt(arr[1]);
 
         Task t = storedInputs.get(num-1);
@@ -84,13 +102,31 @@ public class Duke {
         System.out.println("\nNice! I've marked this task as done:\n  " + t + "\n");
     }
 
-    private static void unmarkEvent(String s) {
-        String[] arr = s.split(" ");
+    private static void unmarkEvent(String userInput) {
+        String[] arr = userInput.split(" ");
         int num = Integer.parseInt(arr[1]);
 
         Task t = storedInputs.get(num-1);
         t.markUnDone();
         System.out.println("\nOK, I've marked this task as not done yet:\n  " + t + "\n");
+    }
+
+    private static void todoEvent(String userInput) {
+        Task temp = new ToDo(userInput);
+        storedInputs.add(temp);
+        System.out.println(temp);
+    }
+
+    private static void deadlineEvent(String userInput) {
+        Task temp = new Deadline(userInput, userInput);
+        storedInputs.add(temp);
+        System.out.println(temp);
+    }
+
+    private static void eventEvent(String userInput) {
+        Task temp = new Event(userInput, userInput, userInput);
+        storedInputs.add(temp);
+        System.out.println(temp);
     }
 
     private static String printList() {

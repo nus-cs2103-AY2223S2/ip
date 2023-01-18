@@ -1,10 +1,12 @@
 public class Event extends Task {
 
-    private String time;
+    private String startTime;
+    private String endTime;
 
-    public Event(String s, String time) {
+    public Event(String s, String startTime, String endTime) {
         super(s);
-        this.time = time;
+        this.startTime = startTime;
+        this.endTime = endTime;
     }
 
     @Override

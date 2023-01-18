@@ -1,10 +1,10 @@
 public class Deadline extends Task {
 
-    private String time;
+    private String endTime;
 
-    public Deadline(String s, String time) {
+    public Deadline(String s, String endTime) {
         super(s);
-        this.time = time;
+        this.endTime = endTime;
     }
 
     @Override
