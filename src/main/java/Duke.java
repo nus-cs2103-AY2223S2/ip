@@ -40,7 +40,8 @@ public class Duke {
                 }
                 return true;
             default:
-                prettyPrint(command);
+                toDoList.add(command);
+                prettyPrint("added: " + command);
                 return true;
         }
     }
