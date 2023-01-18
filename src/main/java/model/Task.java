@@ -1,23 +1,22 @@
 package model;
 
 import java.util.ArrayList;
+import java.util.LinkedList;
 
 public class Task {
 
     private String title;
-    private static final Task[] tasks = new Task[100];
-    private static int count = 0;
+    private static final LinkedList<Task> tasks = new LinkedList<>();
     private TaskStatus status = TaskStatus.NEW;
 
     protected Task(String title) {
         this.title = title;
 
-        Task.tasks[count] = this;
-        Task.count++;
+        Task.tasks.add(this);
     }
 
     public static boolean isIdValid(int id) {
-        return id >= 1 && id <= Task.count;
+        return id >= 1 && id <= Task.tasks.size();
     }
 
     public static void setStatusCompleted(int id) throws IndexOutOfBoundsException {
@@ -25,7 +24,7 @@ public class Task {
             throw new IndexOutOfBoundsException();
         }
 
-        Task.tasks[id - 1].setStatus(TaskStatus.COMPLETED);
+        Task.tasks.get(id - 1).setStatus(TaskStatus.COMPLETED);
     }
 
     public static void setStatusNew(int id) throws IndexOutOfBoundsException {
@@ -33,7 +32,15 @@ public class Task {
             throw new IndexOutOfBoundsException();
         }
 
-        Task.tasks[id - 1].setStatus(TaskStatus.NEW);
+        Task.tasks.get(id - 1).setStatus(TaskStatus.NEW);
+    }
+
+    public static Task delete(int id) throws IndexOutOfBoundsException {
+        if (!Task.isIdValid(id)) {
+            throw new IndexOutOfBoundsException();
+        }
+
+        return Task.tasks.remove(id - 1);
     }
 
     private void setStatus(TaskStatus status) {
@@ -42,10 +49,10 @@ public class Task {
 
     public static String[] listAll() {
         ArrayList<String> tasks = new ArrayList<>();
-        for (int i = 0; i < Task.count; ++i) {
-            tasks.add(String.format("%s", Task.tasks[i].toString()));
+        for (int i = 0; i < Task.tasks.size(); ++i) {
+            tasks.add(String.format("%s", Task.tasks.get(i).toString()));
         }
-        return tasks.toArray(new String[Task.count]);
+        return tasks.toArray(new String[Task.tasks.size()]);
     }
 
     public static String listOne(int id) throws IndexOutOfBoundsException {
@@ -53,7 +60,7 @@ public class Task {
             throw new IndexOutOfBoundsException();
         }
 
-        return Task.tasks[id - 1].toString();
+        return Task.tasks.get(id - 1).toString();
     }
 
     private String printStatus() {

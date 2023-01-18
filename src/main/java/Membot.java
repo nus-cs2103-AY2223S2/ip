@@ -34,13 +34,7 @@ public class Membot {
                     Printer.printlnIndent("Have a good day! Good bye!");
                     break loop;
                 case LIST:
-                    String[] tasks = Task.listAll();
-                    if (tasks.length == 0) {
-                        Printer.printlnIndent("Excellent! You do not have any tasks at hand!");
-                    } else {
-                        Printer.printIndent("Here are all your tasks:");
-                        Printer.listPrint(Task.listAll());
-                    }
+                    printTasks();
                     break;
                 case DONE:
                     if (InputValidator.isCheckInputValid(input)) {
@@ -51,8 +45,7 @@ public class Membot {
                             Printer.printIndent(Task.listOne(taskId));
 
                             Printer.printIndent("");
-                            Printer.printIndent("Here are your updated tasks:");
-                            Printer.listPrint(Task.listAll());
+                            printTasks();
                         } catch (IndexOutOfBoundsException e) {
                             Printer.printlnError("Invalid Task ID!");
                         }
@@ -70,13 +63,30 @@ public class Membot {
                             Printer.printIndent(Task.listOne(taskId));
 
                             Printer.printIndent("");
-                            Printer.printIndent("Here are your updated tasks:");
-                            Printer.listPrint(Task.listAll());
+                            printTasks();
                         } catch (IndexOutOfBoundsException e) {
                             Printer.printlnError("Invalid Task ID!");
                         }
                     } else {
                         Printer.printlnError("Invalid Syntax - \"undone [Task ID]\" (e.g. \"undone 3\")");
+                    }
+
+                    break;
+                case DELETE:
+                    if (InputValidator.isCheckInputValid(input)) {
+                        int taskId = Integer.parseInt(input.split(" ")[1]);
+                        try {
+                            Task deletedTask = Task.delete(taskId);
+                            Printer.printIndent("Deleted! The task has been deleted:");
+                            Printer.printIndent(deletedTask.toString());
+
+                            Printer.printIndent("");
+                            printTasks();
+                        } catch (IndexOutOfBoundsException e) {
+                            Printer.printlnError("Invalid Task ID!");
+                        }
+                    } else {
+                        Printer.printlnError("Invalid Syntax - \"delete [Task ID]\" (e.g. \"delete 1\")");
                     }
 
                     break;
@@ -87,8 +97,7 @@ public class Membot {
                         Printer.printIndent(task.toString());
 
                         Printer.printIndent("");
-                        Printer.printIndent("Here are your updated tasks:");
-                        Printer.listPrint(Task.listAll());
+                        printTasks();
                     } catch (IndexOutOfBoundsException | InvalidCommandException e) {
                         Printer.printlnError("Invalid Syntax - \"todo [title]\" (e.g. \"todo math homework\")");
                     }
@@ -101,8 +110,7 @@ public class Membot {
                         Printer.printIndent(task.toString());
 
                         Printer.printIndent("");
-                        Printer.printIndent("Here are your updated tasks:");
-                        Printer.listPrint(Task.listAll());
+                        printTasks();
                     } catch (IndexOutOfBoundsException | NoDeadlineFoundException | InvalidCommandException e) {
                         Printer.printlnError("Invalid Syntax - \"deadline [title] /by [deadline]\"" +
                                 "(e.g. \"deadline physics project /by tomorrow 3pm\")");
@@ -116,8 +124,7 @@ public class Membot {
                         Printer.printIndent(task.toString());
 
                         Printer.printIndent("");
-                        Printer.printIndent("Here are your updated tasks:");
-                        Printer.listPrint(Task.listAll());
+                        printTasks();
                     } catch (IndexOutOfBoundsException | InvalidCommandException | NoStartDateTimeFoundException |
                              NoEndDateTimeFoundException e) {
                         Printer.printlnError("Invalid Syntax - \"event [title] /from [start] /to [end]\"" +
@@ -129,5 +136,15 @@ public class Membot {
         }
 
         scanner.close();
+    }
+
+    private static void printTasks() {
+        String[] tasks = Task.listAll();
+        if (tasks.length == 0) {
+            Printer.printlnIndent("Excellent! You do not have any tasks at hand!");
+        } else {
+            Printer.printIndent("Here are your updated tasks:");
+            Printer.listPrint(Task.listAll());
+        }
     }
 }

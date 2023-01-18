@@ -10,6 +10,7 @@ public class InputValidator {
     private static final String LIST_KEY = "list";
     private static final String CHECK_KEY = "done";
     private static final String UNCHECK_KEY = "undone";
+    private static final String DELETE_KEY = "delete";
     private static final String TODO_KEY = "todo";
     private static final String DEADLINE_KEY = "deadline";
     private static final String EVENT_KEY = "event";
@@ -138,6 +139,8 @@ public class InputValidator {
                 return Command.DONE;
             case UNCHECK_KEY:
                 return Command.UNDONE;
+            case DELETE_KEY:
+                return Command.DELETE;
             case TODO_KEY:
                 return Command.TODO;
             case DEADLINE_KEY:
