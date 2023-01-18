@@ -12,11 +12,11 @@ public class Event extends Task {
 
     @Override
     public String toString() {
-        return "[E]" + super.toString() + " (from: " + this.from.format(DateTimeFormatter.ofPattern("MMM dd yyyy HH:mm")) + "to: " + this.to.format(DateTimeFormatter.ofPattern("MMM dd yyyy HH:mm")) + ")";
+        return "[E]" + super.toString() + " (from: " + this.from.format(DateTimeFormatter.ofPattern("MMM dd yyyy HH:mm")) + " to: " + this.to.format(DateTimeFormatter.ofPattern("MMM dd yyyy HH:mm")) + ")";
     }
 
     @Override
     public String toRaw() {
-        return "E | " + (this.isDone ? 1 : 0) + " | " + description + " | " + this.from + " | " + this.to + "\n";
+        return "E | " + (this.isDone ? 1 : 0) + " | " + description + " | " + this.from.format(DateTimeFormatter.ofPattern("yyyy-MM-dd HHmm")) + " | " + this.to.format(DateTimeFormatter.ofPattern("yyyy-MM-dd HHmm")) + "\n";
     }
 }

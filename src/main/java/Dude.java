@@ -71,11 +71,13 @@ public class Dude {
                 System.out.println(" _______________________________________________________________________\n");
                 break;
             case "mark":
+                if (cmd.length < 2) throw new DudeMissingCommandException();
                 System.out.println(" _______________________________________________________________________");
                 markTask(Integer.parseInt(cmd[1]) - 1);
                 System.out.println(" _______________________________________________________________________\n");
                 break;
             case "unmark":
+                if (cmd.length < 2) throw new DudeMissingCommandException();
                 System.out.println(" _______________________________________________________________________");
                 unmarkTask(Integer.parseInt(cmd[1]) - 1);
                 System.out.println(" _______________________________________________________________________\n");

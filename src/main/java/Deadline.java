@@ -17,6 +17,6 @@ public class Deadline extends Task {
 
     @Override
     public String toRaw() {
-        return "D | " + (this.isDone ? 1 : 0) + " | " + description + " | " + this.by + "\n";
+        return "D | " + (this.isDone ? 1 : 0) + " | " + description + " | " + this.by.format(DateTimeFormatter.ofPattern("yyyy-MM-dd HHmm")) + "\n";
     }
 }
