@@ -28,11 +28,44 @@ public class Duke {
                 System.out.println(storer.get(num - 1));
 
             } else {
+                Task taskNew;
+                if (commands[0].equals("todo")) {
+                    String description = echo.substring(5);
+                    taskNew = new Todos(description);
+
+
+                } else if (commands[0].equals("deadline")) {
+                    String[] queries = echo.split(" /");
+                    String description = queries[0].substring(9);
+                    String deadline = queries[1];
+                    taskNew = new Deadlines(description, deadline);
+
+
+                } else if (commands[0].equals("event")) {
+                    String[] queries = echo.split(" /");
+                    String description = queries[0].substring(6);
+                    String from = queries[1];
+                    String to = queries[2];
+
+                    taskNew = new Events(description, from, to);
+
+
+                } else {
+                    taskNew = new Task(echo);
+
+                }
+
                 System.out.println(logo);
-                storer.add(new Task(echo));
-                System.out.println("added: " + echo);
+                System.out.println("Got it. I've added this task:");
+                storer.add(taskNew);
+                System.out.println(taskNew);
+                System.out.println(String.format("Now you have %s tasks in the list.", storer.size()));
                 System.out.println(logo);
+
             }
+
+
+
 
 
         }
