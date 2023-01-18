@@ -26,6 +26,7 @@ public class Duke {
         while(true) {
             String input = sc.nextLine();
             String[] inputArr;
+            String desc = "variable not initialised";
             inputArr = input.split(" ");
             if (inputArr[0].equals("bye")) {
                 System.out.println("See yer again RUFF!");
@@ -55,7 +56,6 @@ public class Duke {
                 System.out.println("Now you have " + numOfTasks + " in the list!");
             } else if (inputArr[0].equals("deadline")){
                 StringBuilder sb = new StringBuilder();
-                String desc = "local variable not initialised";
                 for (int i = 1; i < inputArr.length; i++) {
                     if (inputArr[i].equals("/by")) {
                         desc = sb.toString();
@@ -72,6 +72,30 @@ public class Duke {
                 taskList[numOfTasks++] = deadline;
                 System.out.println("Gotcha, I've added:");
                 System.out.println("  " + deadline);
+                System.out.println("Now you have " + numOfTasks + " in the list!");
+            } else if (inputArr[0].equals("event")) {
+                StringBuilder sb = new StringBuilder();
+                String from = "local variable not initialised";
+                for (int i = 1; i < inputArr.length; i++) {
+                    if (inputArr[i].equals("/from")) {
+                        desc = sb.toString();
+                        sb.setLength(0);
+                        continue;
+                    } else if (inputArr[i].equals("/to")) {
+                        from = sb.toString();
+                        sb.setLength(0);
+                        continue;
+                    }
+                    sb.append(inputArr[i]);
+                    // No need for whitespace at the end
+                    if (i != inputArr.length - 1) {
+                        sb.append(" ");
+                    }
+                }
+                Event event = new Event(desc, from, sb.toString());
+                taskList[numOfTasks++] = event;
+                System.out.println("Gotcha, I've added:");
+                System.out.println("  " + event);
                 System.out.println("Now you have " + numOfTasks + " in the list!");
             }
         }
