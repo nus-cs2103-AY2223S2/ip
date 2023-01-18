@@ -1,10 +1,17 @@
+import java.util.Scanner;
 public class Duke {
+    public static String formatOutput(String out) {
+        final String divider = "____________________________________________________________";
+        return String.format("\t%s\n\t%s\n\t%s", divider, out, divider);
+    }
     public static void main(String[] args) {
-        String logo = " ____        _        \n"
-                + "|  _ \\ _   _| | _____ \n"
-                + "| | | | | | | |/ / _ \\\n"
-                + "| |_| | |_| |   <  __/\n"
-                + "|____/ \\__,_|_|\\_\\___|\n";
-        System.out.println("Hello from\n" + logo);
+        Scanner inputScanner = new Scanner(System.in);
+        System.out.println(formatOutput("Hello! I'm Duke\n\tWhat can I do for you?"));
+        String inputStr = inputScanner.nextLine().trim();
+        while (!inputStr.equals("bye")) {
+            System.out.println(formatOutput(inputStr));
+            inputStr = inputScanner.nextLine().trim();
+        }
+        System.out.println(formatOutput("Bye. Hope to see you again soon!"));
     }
 }
