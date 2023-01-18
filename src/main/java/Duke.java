@@ -18,14 +18,14 @@ public class Duke {
         prettyPrint("Hello! I'm Clippy, your lightweight personal assistant.");
         prettyPrint("What can I do for you today?");
 
-        while (parseCommand(sc.nextLine()));
+        while (parseCommand(sc.nextLine().trim()));
 
         return;
     }
 
     /**
      * Takes in a command and attempts to perform it, if valid.
-     * Accepted commands: [add], todo, mark, unmark, list, bye
+     * Accepted commands: [add], todo, deadline, mark, unmark, list, bye
      * [add] is invoked whenever any string that does not match other commands is entered.
      * @param   command a string containing the command entered by the user
      * @return          true if programme should continue accepting further commands, else false
@@ -49,8 +49,19 @@ public class Duke {
                 prettyPrint(tasks.get(Integer.parseInt(args[1]) - 1).toString());
                 return true;
             case "todo":
+            case "deadline":
                 prettyPrint("Got it! I've added this task:");
-                tasks.add(new ToDo(String.join(" ", Arrays.copyOfRange(args, 1, args.length))));
+                if (args[0].equals("todo")) {
+                    tasks.add(new ToDo(String.join(" ", Arrays.copyOfRange(args, 1, args.length))));
+                } else if (args[0].equals("deadline")) {
+                    // todo: check if '/by' exists
+                    int byIndex = command.indexOf("/by ");
+
+                    // startIndex of command.substring() is 9 as "deadline " is 9 chars long
+                    tasks.add(new Deadline(
+                            command.substring(9, byIndex).trim(),
+                            command.substring(byIndex + 4, command.length()).trim()));
+                }
                 prettyPrint(tasks.get(tasks.size() - 1).toString());
                 prettyPrint(String.format("Now you have %d task%s in the list.",
                         tasks.size(), tasks.size() > 1 ? "s" : ""));
