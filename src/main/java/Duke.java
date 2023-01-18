@@ -33,7 +33,27 @@ public class Duke {
             } else if (command.equals(LIST_TASKS)) {
                 System.out.println(tasks.toString());
             } else {
-                tasks.addTask(command);
+                String[] mark = command.split(" ");
+                String instruction = mark[0];
+
+                if ((instruction.equals("mark") || instruction.equals("unmark")) && mark.length == 2) {
+                    int index = Integer.parseInt(mark[1]);
+
+                    if (index > tasks.size() || index <= 0) {
+                        System.out.println("There is no task at index " + index + "!");
+                    } else {
+                        Task task = tasks.get(index - 1);
+                        if (instruction.equals("mark")) {
+                            task.markAsDone();
+                            System.out.println("Good job! I have marked this task as done! \n" + task);
+                        } else {
+                            task.markAsUndone();
+                            System.out.println("Oof! I have marked this task as undone for you! \n" + task);
+                        }
+                    }
+                } else {
+                    tasks.addTask(command);
+                }
             }
         }
 

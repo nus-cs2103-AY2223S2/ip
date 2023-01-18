@@ -12,6 +12,14 @@ public class TaskList {
         System.out.println("Added task: " + name);
     }
 
+    public int size() {
+        return taskList.size();
+    }
+
+    public Task get(int index) {
+        return taskList.get(index);
+    }
+
     @Override
     public String toString() {
         StringBuilder result = new StringBuilder();
