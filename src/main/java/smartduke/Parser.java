@@ -6,6 +6,9 @@ import smartduke.task.Event;
 import smartduke.task.Task;
 import smartduke.task.ToDo;
 
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
 import java.util.regex.Pattern;
 
 public class Parser {
@@ -39,6 +42,39 @@ public class Parser {
         private CommandPattern(String regex) {
             this.pattern = Pattern.compile(regex);
         }
+    }
+
+    /**
+     * Convert user-input datetime string to LocalDateTime object.
+     * @param dateTimeString The user-input datetime string.
+     * @return The input datetime represented as a LocalDateTime object.
+     * @throws DukeException If the input string is not of the supported format: yyyy-M-d HHmm.
+     */
+    public static LocalDateTime parseDateTime(String dateTimeString) throws DukeException {
+        try {
+            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-M-d HHmm");
+            return LocalDateTime.parse(dateTimeString, formatter);
+        } catch (DateTimeParseException e) {
+            throw new DukeException("You have provided an invalid date format. Make sure it is in yyyy-M-d HHmm format!");
+        }
+    }
+
+    /**
+     * Pretty-formats the input datetime for display.
+     * @param dateTime The input datetime.
+     * @return A datetime string in the format: d MMM yyyy h:mma.
+     */
+    public static String prettifyDateTime(LocalDateTime dateTime) {
+        return dateTime.format(DateTimeFormatter.ofPattern("d MMM yyyy h:mma"));
+    }
+
+    /**
+     * Undo the pretty-formatted datetime string into the user-input datetime string format.
+     * @param dateTime The pretty-formatted datetime string
+     * @return A datetime string in the format: yyyy-M-d HHmm.
+     */
+    public static String dePrettifyDateTime(LocalDateTime dateTime) {
+        return dateTime.format(DateTimeFormatter.ofPattern("yyyy-M-d HHmm"));
     }
 
     /**
@@ -86,7 +122,7 @@ public class Parser {
         } else if (CommandPattern.END_CHAT.match(userCommand)) {
             /* End the session */
             return new ExitCommand();
-        } else throw new DukeException("huh? i dont understand you...");
+        } else throw new DukeException("Huh? I don't understand you...");
 
     }
 }
