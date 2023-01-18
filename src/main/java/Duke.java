@@ -31,7 +31,7 @@ public class Duke {
                 System.out.println("________________________________");
             }
         }
-        
+
         reader.close();
 
     }
@@ -58,6 +58,9 @@ public class Duke {
                 break;
 
             case "mark":
+                if (checkDescription(splitInput)) {
+                    throw new DukeException("OOPS!!! The value cannot be empty.");
+                }
 
                 String taskNumMark = splitInput[1];
 
@@ -68,6 +71,9 @@ public class Duke {
 
                 break;
             case "unmark":
+                if (checkDescription(splitInput)) {
+                    throw new DukeException("OOPS!!! The value cannot be empty.");
+                }
 
                 String taskNumUnmark = splitInput[1];
 
@@ -116,16 +122,25 @@ public class Duke {
                 System.out.println("Now you have " + toDoList.size() + " tasks on the list.");
                 break;
 
+            case "delete":
+                if (checkDescription(splitInput)) {
+                    throw new DukeException("OOPS!!! The description of a event cannot be empty.");
+                }
+                String taskDelete = splitInput[1];
+                Task taskToDelete = toDoList.get(Integer.parseInt(taskDelete) - 1);
+                toDoList.remove(Integer.parseInt(taskDelete) - 1);
+                System.out.println("Noted. I've removed this task:");
+                System.out.println("  " + taskToDelete.toString());
+                System.out.println("Now you have " + toDoList.size() + " tasks on the list.");
+                break;
+
             default:
                 throw new DukeException("OOPS!!! I'm sorry, but I don't know what that means :-(");
-            
 
         }
 
         System.out.println("________________________________");
 
     }
-
-
 
 }

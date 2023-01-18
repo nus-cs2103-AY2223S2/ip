@@ -65,5 +65,10 @@ ________________________________
 ________________________________
 OOPS!!! I'm sorry, but I don't know what that means :-(
 ________________________________
+________________________________
+Noted. I've removed this task:
+  [T][ ] borrow book
+Now you have 2 tasks on the list.
+________________________________
 Bye. Hope to see you again soon!
 ________________________________
