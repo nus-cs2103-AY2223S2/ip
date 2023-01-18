@@ -120,12 +120,11 @@ public class Duke {
                 task = todos.get(tid - 1);
                 task.markAsNotDone();
                 print("OK, I've marked this task as not done yet:");
-                print(task.toString());
+                print("\t" + task);
                 break;
             case "deadline":
                 try {
                     input = input.split(trigger)[1];
-                    print(input.split("/by")[0]);
                     content = input.split("/by")[0].strip();
                     ddl = input.split("/by")[1].strip();
                 } catch (IndexOutOfBoundsException e) {
