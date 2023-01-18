@@ -18,11 +18,16 @@ public class Duke {
             userInput = scan.nextLine();
         }
 
-        System.out.println("Bye. Hope to see you again!");
+        endMessage();
+
     }
 
     public static void introMessage() {
         System.out.println("Hello! I'm Duke");
         System.out.println("What can I do for you?");
+    }
+
+    public static void endMessage() {
+        System.out.println("Bye. Hope to see you again!");
     }
 }
