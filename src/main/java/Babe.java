@@ -2,6 +2,8 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Scanner;
 
+import exception.NoDescriptionException;
+import exception.NonsenseInputException;
 import task.Deadline;
 import task.Event;
 import task.Task;
@@ -44,7 +46,7 @@ public class Babe {
      * Draws a line for cosmetic purposes.
      */
     private static void drawLine() {
-        System.out.println("--------------------------------------------------");
+        System.out.println("----------------------------------------------------------------");
     }
 
     /**
@@ -204,36 +206,54 @@ public class Babe {
         Scanner scanner = new Scanner(System.in);
 
         while (true) {
-            chatBot.listen(scanner);
-            // Instruction here refers to the first word of the input
-            String instruction = chatBot.userInput.get(0);
-            int inputLength = chatBot.userInput.size();
+            try {
+                chatBot.listen(scanner);
+
+                String instruction = chatBot.userInput.get(0);
+                int inputLength = chatBot.userInput.size();
 
 
-            if (instruction.equalsIgnoreCase("bye") && inputLength == 1) {
-                scanner.close();
-                chatBot.sayBye();
-            } else if (instruction.equalsIgnoreCase("list") && inputLength == 1) {
-                chatBot.printList();
-            } else if (instruction.equalsIgnoreCase("mark")) {
-                chatBot.changeStatus(true);
-            } else if (instruction.equalsIgnoreCase("unmark")) {
-                chatBot.changeStatus(false);
-            } else if (instruction.equalsIgnoreCase("todo")) {
-                chatBot.addToDo(chatBot.rebuildUserInput(1, inputLength));
-            } else if (instruction.equalsIgnoreCase("deadline")) {
-                int deadline = chatBot.determineDate("/by");
-                chatBot.addDeadline(chatBot.rebuildUserInput(1, deadline - 1),
-                        chatBot.rebuildUserInput(deadline, inputLength));
-            } else if (instruction.equalsIgnoreCase("event")) {
-                int startDate = chatBot.determineDate("/from");
-                int endDate = chatBot.determineDate("/to");
-                chatBot.addEvent(chatBot.rebuildUserInput(1, startDate - 1),
-                        chatBot.rebuildUserInput(startDate, endDate - 1),
-                        chatBot.rebuildUserInput(endDate, inputLength));
-            } else {
-                // any text without instructions will be added as ToDo
-                chatBot.addToDo(chatBot.rebuildUserInput(0, inputLength));
+                if (instruction.equalsIgnoreCase("bye") && inputLength == 1) {
+                    scanner.close();
+                    chatBot.sayBye();
+                } else if (instruction.equalsIgnoreCase("list") && inputLength == 1) {
+                    chatBot.printList();
+                } else if (instruction.equalsIgnoreCase("mark")) {
+                    chatBot.changeStatus(true);
+                } else if (instruction.equalsIgnoreCase("unmark")) {
+                    chatBot.changeStatus(false);
+                } else if (instruction.equalsIgnoreCase("todo")) {
+                    if (inputLength == 1) {
+                        throw new NoDescriptionException();
+                    }
+                    chatBot.addToDo(chatBot.rebuildUserInput(1, inputLength));
+                } else if (instruction.equalsIgnoreCase("deadline")) {
+                    if (inputLength == 1) {
+                        throw new NoDescriptionException();
+                    }
+                    int deadline = chatBot.determineDate("/by");
+                    chatBot.addDeadline(chatBot.rebuildUserInput(1, deadline - 1),
+                            chatBot.rebuildUserInput(deadline, inputLength));
+                } else if (instruction.equalsIgnoreCase("event")) {
+                    if (inputLength == 1) {
+                        throw new NoDescriptionException();
+                    }
+                    int startDate = chatBot.determineDate("/from");
+                    int endDate = chatBot.determineDate("/to");
+                    chatBot.addEvent(chatBot.rebuildUserInput(1, startDate - 1),
+                            chatBot.rebuildUserInput(startDate, endDate - 1),
+                            chatBot.rebuildUserInput(endDate, inputLength));
+                } else {
+                    throw new NonsenseInputException();
+                }
+            } catch (NonsenseInputException e1) {
+                Babe.drawLine();
+                System.out.println("I do not know how to read this. SORRRYY </3");
+                Babe.drawLine();
+            } catch (NoDescriptionException e2) {
+                Babe.drawLine();
+                System.out.println("I need to know what is the description of your task, bestie!");
+                Babe.drawLine();
             }
         }
 
