@@ -3,7 +3,7 @@ import java.util.Scanner;
 public class Duke {
     public static void main(String[] args) {
         Scanner scan = new Scanner(System.in);
-        ArrayList<String> list = new ArrayList<String>();
+        ArrayList<Task> taskList = new ArrayList<Task>();
 
         String logo = " ____        _        \n"
                 + "|  _ \\ _   _| | _____ \n"
@@ -15,15 +15,29 @@ public class Duke {
         System.out.println("____________________________________________________________");
         String userInput = null;
         while(!(userInput = scan.nextLine()).equals("bye")) {
+            String[] splitCheck = userInput.split(" ");
             if (userInput.equals("list")) {
-                String message = "";
-                for (int i = 0; i < list.size(); i++) {
-                    message += i != 0 ? "\n" : "";
-                    message += (i+1) + ". " + list.get(i);
+                String message = "Here are the tasks in your list:";
+                for (int i = 0; i < taskList.size(); i++) {
+//                    message += i != 0 ? "\n" : "";
+                    Task oneTask = taskList.get(i);
+                    message += "\n" + (i+1) + ". " + oneTask.getTaskItem();
                 }
                 dukeSpeak(message);
+            } else if (splitCheck[0].equals("mark")){
+                int taskNum = Integer.parseInt(splitCheck[1]);
+                Task oneTask = taskList.get(taskNum-1);
+                oneTask.markTask();
+                String message = "Nice! I've marked this task as done:\n " + oneTask.getTaskItem();
+                dukeSpeak(message);
+            } else if (splitCheck[0].equals("unmark")) {
+                int taskNum = Integer.parseInt(splitCheck[1]);
+                Task oneTask = taskList.get(taskNum-1);
+                oneTask.unmarkTask();
+                String message = "OK! I've marked this task as not done yet:\n " + oneTask.getTaskItem();
+                dukeSpeak(message);
             } else {
-                list.add(userInput);
+                taskList.add(new Task(userInput));
                 dukeSpeak("added: " + userInput);
             }
         }
