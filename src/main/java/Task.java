@@ -1,6 +1,6 @@
 public class Task {
-    private final String description;
-    private boolean isDone;
+    protected final String description;
+    protected boolean isDone;
 
     public Task(String description) {
         this.description = description;
@@ -17,7 +17,7 @@ public class Task {
 
     @Override
     public String toString() {
-        return String.format("[%s] %s",
+        return String.format("[T][%s] %s",
                 this.isDone ? "X" : " ", this.description);
     }
 }

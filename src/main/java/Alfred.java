@@ -50,8 +50,32 @@ public class Alfred {
     }
 
     private static void addItem(String commandLine) {
-        itemsList.add(new Task(commandLine));
-        String command = String.format("    added: %s", commandLine);
+        String[] commandArr = commandLine.split(" ", 2);
+        String typeTask = commandArr[0];
+        String[] lineArr;
+        Task task;
+        switch (typeTask) {
+            case "todo":
+                task = new ToDo(commandArr[1]);
+                itemsList.add(task);
+                break;
+            case "deadline":
+                lineArr = commandLine.split("/by ");
+                task = new Deadline(lineArr[0], lineArr[1]);
+                itemsList.add(task);
+                break;
+            case "event":
+                lineArr = commandLine.split("/from | /to ");
+                task = new Event(lineArr[0], lineArr[1], lineArr[2]);
+                itemsList.add(task);
+                break;
+            default:
+                task = new Task(commandLine);
+                itemsList.add(task);
+        }
+
+        String command = String.format("Noted, task added: \n      %s\n" +
+                        "    Number of tasks in the list: %d\n", task, itemsList.size());
         Alfred.echoCommand(command);
     }
 
