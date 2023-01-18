@@ -6,6 +6,7 @@
 # Java & Project files
 *.class
 data.txt
+/config/
 
 # Gradle build files
 /.gradle/
