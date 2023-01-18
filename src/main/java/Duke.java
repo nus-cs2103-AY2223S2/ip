@@ -48,15 +48,32 @@ public class Duke {
                     }
                 } else if (terms[0].equals("deadline")) {
                     String[] splitBySlash = userInput.split("/");
-                    String description = splitBySlash[0].substring(9);
-                    String by = splitBySlash[1].substring(3);
-                    newTask = new Deadline(description, by);
+                    try {
+                        if (splitBySlash.length != 2) {
+                            throw new DukeException("Wrong format for deadline Task");
+                        }
+                        String description = splitBySlash[0].substring(9);
+                        String by = splitBySlash[1].substring(3);
+                        newTask = new Deadline(description, by);
+                        addTask(lstOfItems, newTask);
+                    } catch (DukeException err) {
+                        System.out.println(err);
+                    }
+
                 } else if (terms[0].equals("event")) {
                     String[] splitBySlash = userInput.split("/");
-                    String description = splitBySlash[0].substring(6);
-                    String from = splitBySlash[1].substring(5);
-                    String to = splitBySlash[2].substring(3);
-                    newTask = new Event(description, from, to);
+                    try {
+                        if (splitBySlash.length != 3) {
+                            throw new DukeException("Wrong format for event Task");
+                        }
+                        String description = splitBySlash[0].substring(6);
+                        String from = splitBySlash[1].substring(5);
+                        String to = splitBySlash[2].substring(3);
+                        newTask = new Event(description, from, to);
+                        addTask(lstOfItems, newTask);
+                    } catch (DukeException err) {
+                        System.out.println(err);
+                    }
                 } else {
                     try {
                         throw new DukeException("I don't know what that means.");
