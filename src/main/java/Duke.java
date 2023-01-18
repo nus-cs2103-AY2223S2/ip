@@ -25,7 +25,7 @@ public class Duke {
 
     /**
      * Takes in a command and attempts to perform it, if valid.
-     * Accepted commands: [add], todo, deadline, event, mark, unmark, list, bye
+     * Accepted commands: [add], delete, todo, deadline, event, mark, unmark, list, bye
      * [add] is invoked whenever any string that does not match other commands is entered.
      * @param   command a string containing the command entered by the user
      * @return          true if programme should continue accepting further commands, else false
@@ -85,12 +85,19 @@ public class Duke {
                     prettyPrint("Got it! I've added this task:");
                     prettyPrint(tasks.get(tasks.size() - 1).toString());
                     prettyPrint(String.format("Now you have %d task%s in the list.",
-                            tasks.size(), tasks.size() > 1 ? "s" : ""));
+                            tasks.size(), tasks.size() == 1 ? "" : "s"));
                     return true;
                 case "list":
                     for (int i = 1; i <= tasks.size(); i++) {
                         prettyPrint(String.format("%d. %s", i, tasks.get(i - 1)));
                     }
+                    return true;
+                case "delete":
+                    // todo: check for valid list index
+                    prettyPrint("Got it! I've removed this task:");
+                    prettyPrint(tasks.remove(Integer.parseInt(args[1]) - 1).toString());
+                    prettyPrint(String.format("Now you have %d task%s in the list.",
+                            tasks.size(), tasks.size() == 1 ? "" : "s"));
                     return true;
                 default:
                     throw new ClippyUnknownCommandException();
