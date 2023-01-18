@@ -1,3 +1,5 @@
+import java.nio.file.Path;
+
 public class TaskFactory {
 
     private static void validateName(String input) throws InvalidTaskException {
@@ -42,5 +44,16 @@ public class TaskFactory {
             String[] tuple = getNameStartEndTuple(information);
             return new Event(tuple[0], tuple[1], tuple[2]);
         }
+    }
+
+    public static Task parseLine(String[] directives) {
+        if (directives[0].equals("T")) {
+            return new Todo(directives[2], Boolean.parseBoolean(directives[1]));
+        } else if (directives[0].equals("D")) {
+            return new Deadline(directives[2], Boolean.parseBoolean(directives[1]), directives[3]);
+        } else if (directives[0].equals("E")) {
+            return new Event(directives[2], Boolean.parseBoolean(directives[1]), directives[3], directives[4]);
+        }
+        return null;
     }
 }

@@ -1,8 +1,8 @@
 public class Responses {
-    private static String LINE = "        ________________________________________________________\n";
+    public static String LINE = "        ________________________________________________________\n";
 
     public static void printMessage(String response) {
-        System.out.println(LINE + "        " + response + "\n" + LINE);
+        System.out.println(LINE + "        " + response);
     }
 
     public static void greetings(String responseType) {
