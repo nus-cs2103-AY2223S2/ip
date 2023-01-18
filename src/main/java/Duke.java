@@ -30,7 +30,7 @@ public class Duke {
     }
 
     public static String getUserInput() {
-            String userInput = in.nextLine();
-            return userInput.toLowerCase();
+        String userInput = in.nextLine();
+        return userInput;
     }
 }
