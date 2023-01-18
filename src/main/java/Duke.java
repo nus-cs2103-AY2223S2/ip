@@ -5,21 +5,12 @@
  * @version 0.01
  */
 
-import java.util.Scanner;
-import java.util.LinkedList;
-import java.util.Iterator;
 public class Duke {
-    enum KEYWORDS {
-        USER_ERR,
-        USER_EMPTY,
-        BYE,
-        LIST,
-        MARK,
-        UNMARK,
-        TODO,
-        DEADLINE,
-        EVENT,
-        DELETE
+    private static DukeIO dio;
+    private static TaskMaster tm;
+
+    public enum SWITCHTYPERELATED {
+        TODO, EVENT, DEADLINE
     }
 
     /**
@@ -28,137 +19,65 @@ public class Duke {
      */
     public static void main(String[] args) {
 
-        greet();
-        Scanner sc = new Scanner(System.in);
-        String userIn;
-        String[] userInSplit;
-        Object userInTemp;
-
-        LinkedList<Task> list = new LinkedList<>();
-        Task toAdd;
-
         boolean QUIT = false;
-        while (!QUIT) {
-            userIn = sc.nextLine();
-            userInSplit = userIn.split(" ", 2); // look into .split 's 2nd arg.
-            System.out.println("____________________________________________________________");
-            switch (userInSplit[0]) {
-                case "list" :
-                    // Perhaps look into not creating Iterators
-                    Iterator<Task> list_entries = list.iterator();
-                    int number = 1;
-                    while (list_entries.hasNext()) {
-                        System.out.println(String.format("%d.%s", number++, list_entries.next()));
+        String userInput;
+
+        initialize();
+        greet();
+
+        while(!QUIT) {
+            userInput = dio.readln();
+            if (!userInput.isEmpty()) {
+                dio.lb();
+                String[] userInputSplit = userInput.split(" ",2);
+                try {
+                    switch (userInput.split(" ",2)[0]) {
+                        case "list":
+                            tm.list();
+                            break;
+                        case "bye":
+                            QUIT = true;
+                            break;
+                        case "mark":
+                            tm.markComplete(dio.extractIndexParams(userInput), true);
+                            break;
+                        case "unmark":
+                            tm.markComplete(dio.extractIndexParams(userInput), false);
+                            break;
+                        case "todo":
+                            args = dio.extractTaskParams(userInput, SWITCHTYPERELATED.TODO);
+                            tm.addToDo(args[0]);
+                            break;
+                        case "event":
+                            args = dio.extractTaskParams(userInput, SWITCHTYPERELATED.EVENT);
+                            tm.addEvent(args[0], args[1], args[2]);
+                            break;
+                        case "deadline":
+                            args = dio.extractTaskParams(userInput, SWITCHTYPERELATED.DEADLINE);
+                            tm.addDeadLine(args[0], args[1]);
+                            break;
+                        case "delete":
+                            tm.delete(dio.extractIndexParams(userInput));
+                            break;
+                        case "?":
+                            throw new DukeException.Unimplemented();
+                        default:
+                          throw new DukeException.Invalid.Command();
                     }
-                    break;
-
-                case "todo":
-                    if (userInSplit.length > 1) {
-                        System.out.println("Got it. I've added this task:");
-                        toAdd = new ToDo(userInSplit[1]);
-                        list.add(toAdd);
-                        System.out.println(toAdd);
-                        System.out.println(String.format("Now you have %d tasks in the list.", list.size()));
-                    } else {
-                        System.out.println(String.format("☹ OOPS!!! The description of %s cannot be empty.","todo"));
-                    }
-
-                    break;
-
-                case "deadline":
-                    if (userInSplit.length > 1) {
-                        userInSplit = userInSplit[1].split("/by", 2);
-
-                        if (userInSplit.length > 1 && userInSplit[1].length() > 0) {
-                            System.out.println("Got it. I've added this task:");
-                            toAdd = new Deadline(userInSplit[0], userInSplit[1]);
-                            list.add(toAdd);
-                            System.out.println(toAdd);
-                            System.out.println(String.format("Now you have %d tasks in the list.", list.size()));
-                        } else {
-                            System.out.println(String.format("☹ Error!!!! Usage: %s <task> /by <date>","deadline"));
-                        }
-
-                    } else {
-                        System.out.println(String.format("☹ OOPS!!! The description of %s cannot be empty.","deadline"));
-                    }
-                    break;
-
-                case "event":
-                    if (userInSplit.length > 1) {
-                        System.out.println("Got it. I've added this task:");
-                        userInSplit = userInSplit[1].split("/from", 2);;
-
-                        if (userInSplit.length > 1 && userInSplit[1].length() > 0) {
-                            userIn = userInSplit[0];
-                            userInSplit = userInSplit[1].split("/to", 2);
-                            if (userInSplit.length > 1 && userInSplit[1].length() > 0) {
-                                toAdd = new Event(userIn, userInSplit[0], userInSplit[1]);
-                                list.add(toAdd);
-                                System.out.println(toAdd);
-                                System.out.println(String.format("Now you have %d tasks in the list.", list.size()));
-                            } else {
-                                System.out.println(String.format("☹ Error!!!! Usage: %s <task> /from <date> /to <date>", "event"));
-                            }
-                        } else {
-                            System.out.println(String.format("☹ Error!!!! Usage: %s <task> /from <date> /to <date>","event"));
-                        }
-
-                    } else {
-                        System.out.println(String.format("☹ OOPS!!! The description of %s cannot be empty.","event"));
-                    }
-                    break;
-
-                case "mark" :
-                    if (userInSplit.length > 1) {
-                        userInTemp = Integer.parseInt(userInSplit[1]) - 1;
-                        // User input expect index counting from 1
-                        list.get((Integer) userInTemp).setStatus(true);
-                        System.out.println("Nice! I've marked this task as done:");
-                        System.out.println(list.get((Integer) userInTemp));
-                    } else {
-                        System.out.println(String.format("☹ OOPS!!! The entry to %s cannot be empty.","mark"));
-                    }
-                    break;
-
-                case "unmark":
-                    if (userInSplit.length > 1) {
-                        userInTemp = Integer.parseInt(userInSplit[1]) - 1;
-                        list.get((Integer) userInTemp).setStatus(false);
-                        System.out.println("OK, I've marked this task as not done yet:");
-                        System.out.println(list.get((Integer) userInTemp));
-                    } else {
-                        System.out.println(String.format("☹ OOPS!!! The entry to %s cannot be empty.","mark"));
-                    }
-                    break;
-
-                case "delete":
-                    if (userInSplit.length > 1) {
-                        userInTemp = Integer.parseInt(userInSplit[1]) - 1;
-
-                        System.out.println("Noted. I've removed this task:");
-                        System.out.println(list.remove(((Integer) userInTemp).intValue()));
-                        System.out.println(String.format("Now you have %d tasks in the list.", list.size()));
-                    } else {
-                        System.out.println(String.format("☹ OOPS!!! The entry to %s cannot be empty.","mark"));
-                    }
-                    break;
-
-                case "bye" :
-                    QUIT = true;
-                    System.out.println("Bye. Hope to see you again soon!");
-                    break;
-
-                default:
-                    if (!(userIn.isEmpty())) {
-                        System.out.println(String.format("☹ OOPS!!! I'm sorry, but I don't know what `%s` means :-(", userIn));
-                    }
-                    break;
+                } catch (DukeException de) {
+                    dio.println(de.getMessage());
+                }
+                dio.lb();
+                dio.flush();
             }
-            System.out.println("____________________________________________________________");
         }
+        goodbye();
     }
 
+    public static void initialize() {
+        dio = new DukeIO();
+        tm = new TaskMaster(dio);
+    }
     /**
      * Prints standard welcome message.
      */
@@ -169,9 +88,20 @@ public class Duke {
                 + "\\ \\ /\\ / / _` |  _|  _| |/ _ \\/ __|\n"
                 + " \\ V  V / (_| | | | | | |  __/\\__ \\\n"
                 + "  \\_/\\_/ \\__,_|_| |_| |_|\\___||___/\n";
-        System.out.println("Hello from\n" + logo + "\n");
-        System.out.println("Hello! I'm " + "Waffles");
-        System.out.println("What can I do for you?");
+        dio.println("Hello from\n" + logo + "\n");
+        dio.println("Hello! I'm " + "Waffles");
+        dio.println("What can I do for you?");
+        dio.flush();
     }
+
+    /**
+     * Prints standard goodby message and closes DIO.
+     */
+    public static void goodbye() {
+        dio.println("Bye. Hope to see you again soon!");
+        dio.flush();
+        dio.close();
+    }
+
 }
 

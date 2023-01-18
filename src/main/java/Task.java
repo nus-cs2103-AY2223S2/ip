@@ -1,44 +1,44 @@
 /**
- * DUKE
- * CS2103 project
- * @author EDWIN LIM
- * @version 0.01
+ * Task is the superclass of the activities that can be stored within Duke.
  */
+public abstract class Task {
 
-/**
- * The task class represents a task.
- */
-public class Task {
-    private boolean status;
-    private String task_name;
+    private String taskName;
+    private STATUS status;
+
+    public enum STATUS {
+        COMPLETE, INCOMPLETE
+    }
 
     /**
-     * Creates a Task with the provided Task name.
-     * By default, a Tasks is not completed.
-     * @param task_name
+     * Creates a Task with the provided Task Name.
+     * By default, created Tasks are marked as incomplete.
+     * @param task_name The name of the uncompleted Task.
      */
     public Task(String task_name){
-        this.task_name = task_name;
-        this.status = false;
+        this.taskName = task_name;
+        this.status = STATUS.INCOMPLETE;
     }
 
     /**
-     * Switches the state of the Task
+     * Setter for Task state.
      */
-    public void setStatus(boolean TF){
-        this.status = TF;
+    public void setComplete(STATUS status){
+        this.status = status;
     }
+
 
     /**
-     * Returns the status of this Task.
-     * @return True if Task is marked as complete, otherwise False.
+     * Returns the state of the task alongside with the task name.
+     *
+     * Example output:
+     * > `[X] read book` would mean that the task `read book` is complete.
+     * > `[ ] read book` would mean that the task `read book` is incomplete.
+     *
+     * @return A string representation of this task and it's state.
      */
-    public boolean status() {
-        return status;
-    }
-
     @Override
     public String toString(){
-        return String.format("[%s] %s", this.status ? "X" : " ", this.task_name);
+        return String.format("[%s] %s", this.status == STATUS.COMPLETE ? "X" : " ", this.taskName);
     }
 }
