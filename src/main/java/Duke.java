@@ -1,6 +1,12 @@
 import java.util.*;
 import java.io.*;
 
+enum TaskType {
+    TODO,
+    DEADLINE,
+    EVENT
+}
+
 /**
  * This exception - DukeException handles exceptions specific to Duke
  */
@@ -44,12 +50,12 @@ public class Duke {
      * @return The task name.
      * @throws DukeException when the input command has not been added to be handled by the chatbot.
      */
-    public static String cutDescription(String taskType, String input) throws DukeException {
+    public static String cutDescription(TaskType taskType, String input) throws DukeException {
         String description;
         try {
-            if (taskType.equals("todo")) {
+            if (taskType == TaskType.TODO) {
                 description = input.substring(5);
-            } else if (taskType.equals("deadline")) {
+            } else if (taskType == TaskType.DEADLINE) {
                 description = input.substring(9);
             } else
                 description = input.substring(6);
@@ -89,7 +95,7 @@ public class Duke {
      * @param taskType The type of command includes 'todo', 'deadline', and 'event'.
      * @return A message string to indicate missing informations in tasks.
      */
-    public static String missingInfosMessage(String taskType) {
+    public static String missingInfosMessage(TaskType taskType) {
         String message =
                 Duke.TAB + Duke.HOR_BAR + "\n" +
                         Duke.TAB + "There seems to be missing information(s) in your " + taskType + " statement.\n" +
@@ -194,16 +200,22 @@ public class Duke {
                             }
                             break;
                         default: // types of tasks
-                            String description = " ";
+                            String description;
+                            TaskType taskType;
 
-                            if (! (command.equals("todo")
-                                    || command.equals("deadline")
-                                    || command.equals("event"))) {
+                            if (command.equals("todo")) {
+                                taskType = TaskType.TODO;
+                            } else if (command.equals("deadline")) {
+                                taskType = TaskType.DEADLINE;
+                            } else if (command.equals("event")) {
+                                taskType = TaskType.EVENT;
+                            } else {
                                 throw new DukeException(unreadableMessage());
                             }
 
-                            description = cutDescription(command, input);
-                            tb.addTask(command, description);
+                            // changes
+                            description = cutDescription(taskType, input);
+                            tb.addTask(taskType, description);
                             break;
                     }
                 } catch (DukeException e) {
@@ -247,16 +259,16 @@ class TaskBook {
      * @param description The input given by the user to describe the taskType.
      * @throws DukeException when there are missing information, thus unable to create a new task.
      */
-    public void addTask(String taskType, String description) throws DukeException {
+    public void addTask(TaskType taskType, String description) throws DukeException {
         Task t = new Task(description);
 
         try {
-            if (taskType.equals("todo")) {
+            if (taskType == TaskType.TODO) {
                 if (description.isBlank()) throw new DukeException("task name");
 
                 t = new Todo(description);
 
-            } else if (taskType.equals("deadline")) {
+            } else if (taskType == TaskType.DEADLINE) {
                 String desc = description.split("/by")[0];
                 if (desc.isBlank()) throw new DukeException("task name");
                 String by = description.split("/by")[1];
@@ -264,7 +276,7 @@ class TaskBook {
 
                 t = new Deadline(description.split("/")[0], by);
 
-            } else if (taskType.equals("event")) {// event
+            } else if (taskType == TaskType.EVENT) {// event
                 String desc = description.split("/from")[0];
                 if (desc.isBlank()) throw new DukeException("task name");
                 String from = description.split("/from")[1].split("/to")[0];
