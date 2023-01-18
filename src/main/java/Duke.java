@@ -5,27 +5,45 @@ public class Duke {
         return String.format("\t%s\n\t%s\n\t%s", divider, out, divider);
     }
     public static void main(String[] args) {
-        String[] store = new String[100];
-        int storeCnt = 0;
+        Task[] tasks = new Task[100];
+        int taskCnt = 0;
         Scanner inputScanner = new Scanner(System.in);
         System.out.println(formatOutput("Hello! I'm Duke\n\tWhat can I do for you?"));
         String inputStr = inputScanner.nextLine().trim();
         while (!inputStr.equals("bye")) {
             if (inputStr.equals("list")) {
-                StringBuilder listOutput = new StringBuilder();
-                for (int i = 0; i < storeCnt; i++) {
-                    if (i > 0) {
-                        listOutput.append('\t');
-                    }
-                    listOutput.append(String.format("%d. %s", i + 1, store[i]));
-                    if (i < storeCnt - 1) {
+                StringBuilder listOutput = new StringBuilder("Here are the tasks in your list:\n");
+                for (int i = 0; i < taskCnt; i++) {
+                    listOutput.append(String.format(
+                            "\t[%s] %d. %s",
+                            tasks[i].getStatusIcon(),
+                            i + 1,
+                            tasks[i].getDescription()
+                    ));
+                    if (i < taskCnt - 1) {
                         listOutput.append("\n");
                     }
                 }
                 System.out.println(formatOutput(listOutput.toString()));
+            } else if (inputStr.startsWith("mark ")) {
+                int idx = Integer.parseInt(inputStr.substring(5)) - 1;
+                tasks[idx].markAsDone();
+                System.out.println(formatOutput(String.format(
+                        "Nice! I've marked this task as done:\n\t\t[%s] %s",
+                        tasks[idx].getStatusIcon(),
+                        tasks[idx].getDescription()
+                )));
+            } else if (inputStr.startsWith("unmark ")) {
+                int idx = Integer.parseInt(inputStr.substring(7)) - 1;
+                tasks[idx].unmarkAsDone();
+                System.out.println(formatOutput(String.format(
+                        "OK, I've marked this task as not done yet:\n\t\t[%s] %s",
+                        tasks[idx].getStatusIcon(),
+                        tasks[idx].getDescription()
+                )));
             } else {
-                store[storeCnt] = inputStr;
-                storeCnt++;
+                tasks[taskCnt] = new Task(inputStr);
+                taskCnt++;
                 System.out.println(formatOutput("added: " + inputStr));
             }
             inputStr = inputScanner.nextLine().trim();
