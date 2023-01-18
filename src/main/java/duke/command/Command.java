@@ -6,6 +6,9 @@
  */
 package duke.command;
 
+/**
+ * Represents a command that Duke recognizes.
+ */
 public abstract class Command {
 
     private final String name;

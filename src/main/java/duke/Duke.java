@@ -5,6 +5,9 @@ import duke.command.*;
 import java.util.ArrayList;
 import java.util.Scanner;
 
+/**
+ * The main class of the Duke program.
+ */
 public class Duke {
 
     private final UI ui;
@@ -80,6 +83,10 @@ public class Duke {
         }
     }
 
+    /**
+     * The start of execution of the Duke program.
+     * @param args  The command line arguments.
+     */
     public static void main(String[] args) {
         new Duke("data.txt").run();
     }
