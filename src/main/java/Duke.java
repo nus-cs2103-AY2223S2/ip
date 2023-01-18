@@ -53,8 +53,24 @@ public class Duke {
             }
             //User typed in "mark":
             else if (inputArray[0].equals("mark")) {
-                int indexOfTask = Integer.parseInt(inputArray[1]) - 1;
-                markAsDone(taskStorage.get(indexOfTask));
+                try {
+                    if (inputArray.length != 2) {
+                        throw new DukeException("The mark command must be followed by a single number.");
+                    }
+                    if (! isInteger(inputArray[1])) {
+                        throw new DukeException("The mark command must be followed by a single integer.");
+                    }
+                    int indexOfTask = Integer.parseInt(inputArray[1]) - 1;
+                    if (! (indexOfTask <= taskStorage.size() - 1 && indexOfTask >= 0)) {
+                        throw new DukeException("Please enter a valid task number. You currently have " +
+                                                    Integer.toString(taskStorage.size()) + " tasks.");
+                    }
+                    markAsDone(taskStorage.get(indexOfTask));
+                } catch (DukeException dukeException) {
+                    System.out.println(dukeException.getMessage());
+                    System.out.println(straightLine);
+                    continue;
+                }
             }
             //User typed in "unmark":
             else if (inputArray[0].equals("unmark")) {
@@ -194,6 +210,20 @@ public class Duke {
         System.out.println(straightLine);
         System.out.println("Sorry. I do not understand this command. Please try again.");
         System.out.println(straightLine);
+    }
+
+    /**
+     * Checks if a string can be converted into an Integer.
+     * @param stringToCheck String to check whether the conversion is possible.
+     * @return true if it can be converted, else return false.
+     */
+    public static boolean isInteger(String stringToCheck) {
+        try {
+            int intVersion = Integer.parseInt(stringToCheck);
+        } catch (NumberFormatException numberFormatException) {
+            return false;
+        }
+        return true;
     }
 }
 
