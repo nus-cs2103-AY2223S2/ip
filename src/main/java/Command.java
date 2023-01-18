@@ -5,7 +5,8 @@ enum Command {
   UNMARK("unmark"),
   TODO("todo"),
   EVENT("event"),
-  DEADLINE("deadline");
+  DEADLINE("deadline"),
+  DELETE("delete");
 
   private final String command;
 

@@ -119,6 +119,19 @@ public class Sam {
         newTask(task);
         break;
       }
+      case DELETE: {
+        if (input.length <= 1) {
+          throw new SamMissingTaskException();
+        }
+        int id = Integer.parseInt(input[1]);
+        if (id <= 0 || id > tasks.count()) {
+          throw new SamInvalidTaskException();
+        }
+        Task task = tasks.removeTask(id);
+        talk("Ok, I'll remove the task from your list:",
+          task.toString());
+        break;
+      }
     }
   }
 

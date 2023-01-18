@@ -11,6 +11,10 @@ public class TaskList {
     return tasks.add(task);
   }
 
+  public Task removeTask(int id) {
+    return tasks.remove(id);
+  }
+
   public void markTask(int id, boolean done) {
     tasks.get(id - 1).mark(done);
   }
