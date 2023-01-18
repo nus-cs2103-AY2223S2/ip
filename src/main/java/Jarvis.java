@@ -1,23 +1,24 @@
 import exception.CommandParseException;
 import exception.JarvisException;
 import exception.InvalidActionException;
+import exception.TaskIOException;
 
 import java.util.Scanner;
 
 public class Jarvis {
     public static final String BOT_NAME = Jarvis.class.getSimpleName();
+    public static final String LOGO = "     _   _    ______     _____ ____  \n" +
+            "    | | / \\  |  _ \\ \\   / /_ _/ ___| \n" +
+            " _  | |/ _ \\ | |_) \\ \\ / / | |\\___ \\ \n" +
+            "| |_| / ___ \\|  _ < \\ V /  | | ___) |\n" +
+            " \\___/_/   \\_\\_| \\_\\ \\_/  |___|____/\n";
 
     public static void main(String[] args) {
         Printer printer = new Printer(BOT_NAME);
-        TaskList taskList = new TaskList();
+        TaskListSaver taskListSaver = new TaskListSaver();
+        TaskList taskList = new TaskList(taskListSaver.readTasks());
 
-        String logo = "     _   _    ______     _____ ____  \n" +
-                "    | | / \\  |  _ \\ \\   / /_ _/ ___| \n" +
-                " _  | |/ _ \\ | |_) \\ \\ / / | |\\___ \\ \n" +
-                "| |_| / ___ \\|  _ < \\ V /  | | ___) |\n" +
-                " \\___/_/   \\_\\_| \\_\\ \\_/  |___|____/\n";
-
-        System.out.println(logo);
+        System.out.println(LOGO);
         printer.printStandardResponse(Printer.Response.INTRO);
 
         Scanner scanner = new Scanner(System.in);
@@ -59,7 +60,13 @@ public class Jarvis {
             }
         }
 
-        printer.printStandardResponse(Printer.Response.GOODBYE);
         scanner.close();
+
+        try {
+            taskListSaver.saveTasks(taskList.getTasks());
+        } catch (TaskIOException e) {
+            printer.printErrorResponse(e.getFriendlyMessage());
+        }
+        printer.printStandardResponse(Printer.Response.GOODBYE);
     }
 }
