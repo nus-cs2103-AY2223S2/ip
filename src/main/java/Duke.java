@@ -3,6 +3,16 @@ import java.util.Arrays;
 import java.util.Scanner;
 
 public class Duke {
+    public enum CmdType{
+        bye,
+        list,
+        mark,
+        unmark,
+        delete,
+        todo,
+        deadline,
+        event,
+    }
     public static void main(String[] args) {
         ArrayList<Task> userTasks = new ArrayList<Task>();
         String logo = " ____        _        \n"
@@ -25,12 +35,12 @@ public class Duke {
             String resultString = "";
             String errMsg = "";
             try{
-                if (userInput.equals("bye")){
+                if (userInput.replaceAll("\\s","").equals(CmdType.bye.name())){
                     resultString = "______________________________________\n"
                             + "Bye. Hope to see you again soon!\n"
                             + "______________________________________\n";
                     continueRunning = false;
-                } else if(userInput.equals("list")){
+                } else if(userInput.replaceAll("\\s", "").equals(CmdType.list.name())){
                     StringBuilder listOfInputs = new StringBuilder();
                     for(int i = 0; i < Task.getNumTasks(); i++){
                         listOfInputs.append(i + 1)
@@ -41,7 +51,7 @@ public class Duke {
                             + "Here are the tasks in your list:\n"
                             + listOfInputs
                             + "______________________________________\n";
-                } else if((userInput.split(" ")[0]).equals("mark")){
+                } else if((userInput.split(" ")[0]).equals(CmdType.mark.name())){
                     int indexOfFirstSpace = userInput.indexOf(" ");
                     if (indexOfFirstSpace == -1 || userInput.substring(indexOfFirstSpace+1).isBlank()){
                         errMsg = "______________________________________\n"
@@ -68,7 +78,7 @@ public class Duke {
                                 + "______________________________________\n";
                         throw new DukeException(errMsg);
                     }
-                } else if((userInput.split(" ")[0]).equals("unmark")){
+                } else if((userInput.split(" ")[0]).equals(CmdType.unmark.name())){
                     int indexOfFirstSpace = userInput.indexOf(" ");
                     if (indexOfFirstSpace == -1 || userInput.substring(indexOfFirstSpace+1).isBlank()){
                         errMsg = "______________________________________\n"
@@ -95,7 +105,7 @@ public class Duke {
                                 + "______________________________________\n";
                         throw new DukeException(errMsg);
                     }
-                } else if (userInput.split(" ")[0].equals("delete")){
+                } else if (userInput.split(" ")[0].equals(CmdType.delete.name())){
                     int indexOfFirstSpace = userInput.indexOf(" ");
                     if (indexOfFirstSpace == -1|| userInput.substring(indexOfFirstSpace+1).isBlank()){
                         errMsg = "______________________________________\n"
@@ -126,7 +136,7 @@ public class Duke {
                         throw new DukeException(errMsg);
                     }
 
-                }else if(userInput.split(" ")[0].equals("todo")){
+                }else if(userInput.split(" ")[0].equals(CmdType.todo.name())){
                     int indexOfFirstSpace = userInput.indexOf(" ");
                     String taskDescription = userInput.substring(indexOfFirstSpace+1);
                     if(indexOfFirstSpace == -1 || taskDescription.isBlank()){
@@ -144,7 +154,7 @@ public class Duke {
                             + "Now you have " + Task.getNumTasks() + " tasks in the list.\n"
                             + "______________________________________\n";
                 }
-                else if(userInput.split(" ")[0].equals("deadline")){
+                else if(userInput.split(" ")[0].equals(CmdType.deadline.name())){
                     int indexOfBy = userInput.indexOf("/by");
                     int indexOfFirstSpace = userInput.indexOf(" ");
                     if(indexOfFirstSpace == -1 || indexOfBy == -1){
@@ -182,7 +192,7 @@ public class Duke {
                             + "Now you have " + Task.getNumTasks() + " tasks in the list.\n"
                             + "______________________________________\n";
                 }
-                else if(userInput.split(" ")[0].equals("event")){
+                else if(userInput.split(" ")[0].equals(CmdType.event.name())){
                     int indexOfFrom = userInput.indexOf("/from");
                     int indexOfTo = userInput.indexOf("/to");
                     int indexOfFirstSpace = userInput.indexOf(" ");
