@@ -1,3 +1,6 @@
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+
 abstract class Task {
     private String taskName;
     private boolean isDone;
@@ -33,6 +36,15 @@ abstract class Task {
 
     public String getTaskName() {
         return this.taskName;
+    }
+
+    public String formatDateTime(LocalDateTime input) {
+        String month = input.getMonth().toString().substring(0, 3);
+        int day = input.getDayOfMonth();
+        int year = input.getYear();
+        String hour = String.format("%02d", input.getHour());
+        String minute = String.format("%02d", input.getMinute());
+        return month + " " + day + " " + year + " " + hour + minute;
     }
 
     public String toString() {
