@@ -17,9 +17,11 @@ public class Duke {
         System.out.print(NEW_LINE);
     }
 
-    private static void echo(String textToPrint) {
+    private static void echo(String... texts) {
         System.out.println(BAR);
-        System.out.println(INDENTATION + textToPrint);
+        for (String text : texts) {
+            System.out.println(INDENTATION + text);
+        }
         System.out.println(BAR);
         System.out.print(NEW_LINE);
     }
@@ -30,15 +32,29 @@ public class Duke {
         Tasks tasks = new Tasks();
         while (true) {
             String input = scanner.nextLine();
-            if (input.equals("bye")) {
+
+            String[] inputWords = input.split(" ");
+
+            String command = inputWords[0];
+
+            if (command.equals("bye")) {
                 echo("Bye. Hope to see you again soon!");
                 scanner.close();
                 break;
-            } else if (input.equals("list")) {
+            } else if (command.equals("list")) {
                 System.out.println(BAR);
                 tasks.printAll();
                 System.out.println(BAR);
-            } else {
+            } else if (command.equals("mark")) {
+                int taskIndex = Integer.parseInt(inputWords[1]);
+                echo("Nice! I've marked this task as done:", "  " + tasks.markTask(taskIndex));
+            } else if (command.equals("unmark")) {
+                int taskIndex = Integer.parseInt(inputWords[1]);
+                echo("OK, I've marked this task as not done yet:",
+                        "  " + tasks.unmarkTask(taskIndex));
+            }
+
+            else {
                 tasks.addTasks(input);
                 echo("added: " + input);
             }
