@@ -1,6 +1,6 @@
 public class Event extends Task {
-    public String from;
-    public String to;
+    private String from;
+    private String to;
 
     public Event(String content, String from, String to) {
         super(content);
@@ -13,26 +13,19 @@ public class Event extends Task {
          * @param content what to place in this task.
          * @returns the output Event object.
          */
-        String[] contentAndFrom = content.split("/from");
-        if (contentAndFrom.length <= 1) {
-            throw new InputFormatException("Event Creation", "Haiya where your /from?", null);
-        }
-        String[] fromAndTo = contentAndFrom[1].split("/to");
-        if (fromAndTo.length <= 1) {
-            throw new InputFormatException("Event Creation", "Haiya where your /to?", null);
-        }
+        String source = "Event Creation";
+
+        String[] contentAndFrom = Parser.handleMissingField(content, "/from", "from", source);
+        String[] fromAndTo = Parser.handleMissingField(content, "/to", "to", source);
+
         String parsedContent = contentAndFrom[0].strip();
         String from = fromAndTo[0].strip();
         String to = fromAndTo[1].strip();
-        if (parsedContent.equals("")) {
-            throw new InputFormatException("Event Creation", "Haiya content empty.", null);
-        }
-        if (from.equals("")) {
-            throw new InputFormatException("Event Creation", "Haiya from empty.", null);
-        }
-        if (to.equals("")) {
-            throw new InputFormatException("Event Creation", "Haiya to empty.", null);
-        }
+
+        Parser.handleEmptyField(parsedContent, "content", source);
+        Parser.handleEmptyField(from, "from", source);
+        Parser.handleEmptyField(to, "to", source);
+
         return new Event(parsedContent, from, to);
     }
 

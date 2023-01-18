@@ -8,32 +8,33 @@ public abstract class Task {
         this.content = content;
     }
 
-    public static Task create(char taskType, String content) {
+    public static Task create(String taskType, String content) {
         /**
          * @param taskType whether it is a Todo, Deadline or Event.
          * @param content what to put in the task.
          * @returns the output Task object.
          */
-        String[] taskTypeAndContent = content.split(" ", 2);
-        if (taskTypeAndContent.length <= 1) {
-            throw new InputFormatException("Task Creation", "No further information was provided.", null);
-        }
+        String[] taskTypeAndContent = Parser.handleMissingField(content, " ","content", "Task Creation");
         switch (taskType) {
-            case 'T':
-                return Todo.create(taskTypeAndContent[1]);
-            case 'D':
-                return Deadline.create(taskTypeAndContent[1]);
-            case 'E':
-                return Event.create(taskTypeAndContent[1]);
-            default:
-                return null;
+        case "todo":
+            return Todo.create(taskTypeAndContent[1]);
+        case "deadline":
+            return Deadline.create(taskTypeAndContent[1]);
+        case "event":
+            return Event.create(taskTypeAndContent[1]);
+        default:
+            return null;
         }
     }
 
-    public void mark(boolean toMark) {
-        this.marked = toMark;
-        System.out.println(String.format("OK %smarked for you already:", toMark ? "" : "un"));
-        System.out.println(this);
+
+
+    public void mark(boolean isToMark) {
+        /**
+         * @param toMark whether to mark or unmark the task.
+         */
+        this.marked = isToMark;
+        System.out.println(String.format("OK %smark for you already: ", isToMark ? "" : "un") + this);
     }
 
     public boolean isMarked() {

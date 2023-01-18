@@ -1,31 +1,20 @@
 import java.util.Scanner;
 
 public class Duke {
-    static String NAME = "Uncle Roger";
     static String HORIZONTAL = "+=".repeat(20);
     static String INDENT = "> ";
     static String ENDWORD = "bye";
 
     public static void main(String[] args) {
-        String greeting = "Hallo Hallo niece and nephew! My name is %s.";
-        Duke.greet(greeting);
-
-        String question = "What you want?";
-        Duke.say(question, false);
+        Duke.indent();
+        System.out.println("Hallo Hallo niece and nephew! My name is Uncle Roger.");
+        System.out.println("What you want?");
 
         Scanner scanner = new Scanner(System.in);
         Duke.start(scanner, Duke.ENDWORD);
     }
 
-    public static void greet(String greeting) {
-        /**
-         * Prints a greeting which includes the Duke's name.
-         * @param greeting what needs to be said, with placeholder for the name.
-         */
-        System.out.println(String.format(greeting, Duke.NAME));
-    }
-
-    public static void horizontal() {
+    public static void putHorizontal() {
         /**
          * Prints a horizontal line.
          * @returns void
@@ -41,20 +30,6 @@ public class Duke {
         System.out.print(Duke.INDENT);
     }
 
-    public static void say(String sentence, boolean addLine) {
-        /**
-         * @param sentence what needs to be said.
-         * @param addLine whether to add a horizontal line.
-         * @returns void
-         */
-        Duke.indent();
-        System.out.println(sentence);
-
-        if (addLine) {
-            Duke.horizontal();
-        }
-    }
-
     public static void start(Scanner scanner, String endWord) {
         /**
          * @param scanner the scanner object already created.
@@ -62,45 +37,17 @@ public class Duke {
          * @returns void
          */
         String response = "";
-        MemoPad memoPad = new MemoPad();
+        TaskList taskList = new TaskList();
         while (true) {
             response = scanner.nextLine();
             if (response.equals(endWord)) {
                 break;
             }
             Duke.indent();
-            String firstWord = (response + " ").split(" ", 2)[0];
-            try {
-                switch (firstWord) {
-                    case "list":
-                        memoPad.listItems();
-                        break;
-                    case "delete":
-                        memoPad.deleteItem(response);
-                        break;
-                    case "mark":
-                        memoPad.markItem(response, true);
-                        break;
-                    case "unmark":
-                        memoPad.markItem(response, false);
-                        break;
-                    case "todo":
-                        memoPad.addItem('T', response);
-                        break;
-                    case "deadline":
-                        memoPad.addItem('D', response);
-                        break;
-                    case "event":
-                        memoPad.addItem('E', response);
-                        break;
-                    default:
-                        System.out.println("HUH? What you say?.");
-                }
-            } catch (DukeException err) {
-                System.out.println(err.getMessage());
-            }
-            Duke.horizontal();
+            Parser.parseResponse(response, taskList);
+            Duke.putHorizontal();
         }
-        Duke.say("Bye Bye. Leave good review please! PLEAASEEE!", true);
+        System.out.println("Bye Bye. Leave good review please! PLEAASEEE!");
+        Duke.putHorizontal();
     }
 }

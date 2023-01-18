@@ -11,18 +11,15 @@ public class Deadline extends Task {
          * @param content what to place in this task.
          * @returns the output Deadline object.
          */
-        String[] contentAndBy = content.split("/by");
-        if (contentAndBy.length <= 1) {
-            throw new InputFormatException("Deadline Creation", "Haiya where your /by?", null);
-        }
+        String source = "Deadline Creation";
+        String[] contentAndBy = Parser.handleMissingField(content, "/by", "by", source);
+
         String parsedContent = contentAndBy[0].strip();
         String by = contentAndBy[1].strip();
-        if (parsedContent.equals("")) {
-            throw new InputFormatException("Deadline Creation", "Haiya content empty.", null);
-        }
-        if (by.equals("")) {
-            throw new InputFormatException("Deadline Creation", "Haiya by empty.", null);
-        }
+
+        Parser.handleEmptyField(parsedContent, "content", source);
+        Parser.handleEmptyField(by, "by", source);
+
         return new Deadline(parsedContent, by);
     }
 
