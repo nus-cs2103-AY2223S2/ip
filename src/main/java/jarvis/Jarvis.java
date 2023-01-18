@@ -33,7 +33,7 @@ public class Jarvis {
 
             Command command;
             try {
-                command = new Command(new Scanner(line));
+                command = Parser.parse(line);
             } catch (InvalidActionException e) {
                 this.ui.printStandard(Ui.Response.CONFUSED);
                 continue;

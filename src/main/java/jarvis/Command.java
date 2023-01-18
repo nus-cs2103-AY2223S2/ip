@@ -59,16 +59,10 @@ public class Command {
     private final String body;
     private final List<Command> subCommands;
 
-    public Command(Scanner scanner) throws InvalidActionException {
-        this.action = Action.fromString(scanner.hasNext() ? scanner.next() : null);
-        this.body = Objects.toString(scanner.skip("\\s*").findInLine("[^/]*"), "").trim();
-        this.subCommands = new LinkedList<>();
-
-        scanner.skip("[^/]*").useDelimiter("\\s*/\\s*");
-        while (scanner.skip("\\s*").hasNext()) {
-            this.subCommands.add(new Command(new Scanner(scanner.next())));
-        }
-        scanner.close();
+    public Command(Action action, String body, List<Command> subCommands) {
+        this.action = action;
+        this.body = body;
+        this.subCommands = subCommands;
     }
 
     public String getBody() {
