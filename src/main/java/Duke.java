@@ -124,10 +124,6 @@ public class Duke {
     }
 
     private static void list(Command command, TaskList tasks) {
-        if (tasks.isEmpty()) {
-            Duke.say("Nothing in the list.");
-            return;
-        }
         Duke.say(tasks.toString());
     }
 

@@ -15,7 +15,7 @@ public class TaskList extends ArrayList<Task> {
     @Override
     public String toString() {
         if (this.isEmpty()) {
-            return "";
+            return "Nothing in the list.";
         }
         
         int listIndex = 1;
