@@ -23,6 +23,14 @@ public class Task {
         this.isDone = !this.isDone;
     }
 
+    /** Returns whether the task is completed
+     *
+     * @return true if the task is completed, false otherwise
+     */
+    public boolean getIsDone() {
+        return this.isDone;
+    }
+
     @Override
     public String toString() {
         return (this.isDone ? "[X] " : "[ ] ") + this.description;
