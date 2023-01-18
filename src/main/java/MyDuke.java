@@ -1,9 +1,10 @@
 import java.util.List;
 import java.util.Arrays;
 import java.util.ArrayList;
+import java.util.HashMap;
 
 public class MyDuke {
-    private ArrayList<Task> allTasks = new ArrayList<Task>();
+    private static ArrayList<Task> allTasks = new ArrayList<Task>();
     private static int taskCount = 0;
     private static String reply = "|     ";
 
@@ -15,7 +16,7 @@ public class MyDuke {
                     + "|____/ \\__,_|_|\\_\\___|\n";
         System.out.println("Hello from\n" + logo
                             + "\nWhat's on your mind today?\n");
-    }    
+    }
 
     public void quit() {
         // To add: Deleting all tasks...
@@ -42,10 +43,10 @@ public class MyDuke {
                 showCount();
                 break;
             case "mark":
-                toggle(tokens[1]);
+                toggle(tokens);
                 break;
             case "unmark":
-                toggle(tokens[1]);
+                toggle(tokens);
                 break;
             default:
                 System.out.println("invalid command");
@@ -81,18 +82,22 @@ public class MyDuke {
         System.out.println();
     }
 
-    private void toggle(String token) {
-        int taskIndex = Integer.parseInt(token);
+    private void toggle(String[] tokens) {
+        int taskIndex = Integer.parseInt(tokens[1]);
         // What if token is not an integer?
         Task task = allTasks.get(taskIndex-1);
-        if (!task.isDone()) {
+        if (!task.isDone() && tokens[0].equals("mark")) {
             task.toggleDoneOrNot();
             System.out.println("Successfully completed:\n"
                                 + " " + task.toString());
-        } else {
+        } else if (task.isDone() && tokens[0].equals("unmark")) {
             task.toggleDoneOrNot();
             System.out.println("Unmark Task:\n"
                                 + " " + task.toString());
+        } else if (!task.isDone() && tokens[0].equals("unmark")) {
+            System.out.println("Task not marked yet: " + task.toString());
+        } else if (task.isDone() && tokens[0].equals("mark")) {
+            System.out.println("Task already done: " + task.toString());
         }
     }
 

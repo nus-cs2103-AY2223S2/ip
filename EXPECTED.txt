@@ -1,0 +1,147 @@
+Hello from
+ ____        _        
+|  _ \ _   _| | _____ 
+| | | | | | | |/ / _ \
+| |_| | |_| |   <  __/
+|____/ \__,_|_|\_\___|
+
+What's on your mind today?
+
+MyDuke >  |     invalid command
+MyDuke >  |     Successfully added:
+[T][ ]  word
+
+There is: 1 task in the list.
+
+MyDuke >  |     Successfully added:
+[T][ ]  two words
+
+There are: 2 tasks in the list.
+
+MyDuke >  |     Successfully added:
+[T][ ]  Now three words!
+
+There are: 3 tasks in the list.
+
+MyDuke >  |     Successfully added:
+[T][ ]  123
+
+There are: 4 tasks in the list.
+
+MyDuke >  |     Successfully added:
+[T][ ]  .,/;:'[]\(){}
+
+There are: 5 tasks in the list.
+
+MyDuke >  |     Successfully added:
+[T][ ]  ~!@#$%^&*()-+
+
+There are: 6 tasks in the list.
+
+MyDuke >  |     All Tasks:
+   1: [T][ ]  word
+   2: [T][ ]  two words
+   3: [T][ ]  Now three words!
+   4: [T][ ]  123
+   5: [T][ ]  .,/;:'[]\(){}
+   6: [T][ ]  ~!@#$%^&*()-+
+
+MyDuke >  |     Successfully added:
+[D][ ] word (by: day)
+
+There are: 7 tasks in the list.
+
+MyDuke >  |     Successfully added:
+[D][ ] two words (by: day month)
+
+There are: 8 tasks in the list.
+
+MyDuke >  |     Successfully added:
+[D][ ] three words! ! (by: day month 2359)
+
+There are: 9 tasks in the list.
+
+MyDuke >  |     Successfully added:
+[D][ ] 123456 (by: day month 2359)
+
+There are: 10 tasks in the list.
+
+MyDuke >  |     All Tasks:
+   1: [T][ ]  word
+   2: [T][ ]  two words
+   3: [T][ ]  Now three words!
+   4: [T][ ]  123
+   5: [T][ ]  .,/;:'[]\(){}
+   6: [T][ ]  ~!@#$%^&*()-+
+   7: [D][ ] word (by: day)
+   8: [D][ ] two words (by: day month)
+   9: [D][ ] three words! ! (by: day month 2359)
+   10: [D][ ] 123456 (by: day month 2359)
+
+MyDuke >  |     Successfully added:
+[E][ ] name (from: text to: text)
+
+There are: 11 tasks in the list.
+
+MyDuke >  |     Successfully added:
+[E][ ] whole day (from: 0000 to: 2359)
+
+There are: 12 tasks in the list.
+
+MyDuke >  |     Successfully added:
+[E][ ] 111222333 (from: 0000 to: 2359)
+
+There are: 13 tasks in the list.
+
+MyDuke >  |     All Tasks:
+   1: [T][ ]  word
+   2: [T][ ]  two words
+   3: [T][ ]  Now three words!
+   4: [T][ ]  123
+   5: [T][ ]  .,/;:'[]\(){}
+   6: [T][ ]  ~!@#$%^&*()-+
+   7: [D][ ] word (by: day)
+   8: [D][ ] two words (by: day month)
+   9: [D][ ] three words! ! (by: day month 2359)
+   10: [D][ ] 123456 (by: day month 2359)
+   11: [E][ ] name (from: text to: text)
+   12: [E][ ] whole day (from: 0000 to: 2359)
+   13: [E][ ] 111222333 (from: 0000 to: 2359)
+
+MyDuke >  |     Task not marked yet: [T][ ]  word
+MyDuke >  |     Successfully completed:
+ [T][X]  word
+MyDuke >  |     Task already done: [T][X]  word
+MyDuke >  |     Unmark Task:
+ [T][ ]  word
+MyDuke >  |     Successfully completed:
+ [T][X]  two words
+MyDuke >  |     Successfully completed:
+ [T][X]  Now three words!
+MyDuke >  |     Successfully completed:
+ [D][X] word (by: day)
+MyDuke >  |     Unmark Task:
+ [T][ ]  Now three words!
+MyDuke >  |     Successfully completed:
+ [E][X] whole day (from: 0000 to: 2359)
+MyDuke >  |     Unmark Task:
+ [E][ ] whole day (from: 0000 to: 2359)
+MyDuke >  |     Successfully completed:
+ [E][X] 111222333 (from: 0000 to: 2359)
+MyDuke >  |     All Tasks:
+   1: [T][ ]  word
+   2: [T][X]  two words
+   3: [T][ ]  Now three words!
+   4: [T][ ]  123
+   5: [T][ ]  .,/;:'[]\(){}
+   6: [T][ ]  ~!@#$%^&*()-+
+   7: [D][X] word (by: day)
+   8: [D][ ] two words (by: day month)
+   9: [D][ ] three words! ! (by: day month 2359)
+   10: [D][ ] 123456 (by: day month 2359)
+   11: [E][ ] name (from: text to: text)
+   12: [E][ ] whole day (from: 0000 to: 2359)
+   13: [E][X] 111222333 (from: 0000 to: 2359)
+
+MyDuke >  |     Quitting MyDuke...
+See you soon!

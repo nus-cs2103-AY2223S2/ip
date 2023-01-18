@@ -1,0 +1,30 @@
+hello
+todo word
+todo two words
+todo Now three words!
+todo 123
+todo .,/;:'[]\(){}
+todo ~!@#$%^&*()-+
+list
+deadline word /by day
+deadline two words /by day month
+deadline three words! ! /by day month 2359
+deadline 123456 /by day month 2359
+list
+event name /from text /to text
+event whole day /from 0000 /to 2359
+event 111222333 /from 0000 /to 2359
+list
+unmark 1
+mark 1
+mark 1
+unmark 1
+mark 2
+mark 3
+mark 7
+unmark 3
+mark 12
+unmark 12
+mark 13
+list
+bye
