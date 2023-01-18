@@ -32,6 +32,15 @@ public class Duke {
                 lstOfItems.get(itemNo).makeCompleted();
                 System.out.println("Ok, I've marked this Task as completed:");
                 System.out.println(lstOfItems.get(itemNo));
+            } else if (checker.checkDeleteRequest(userInput)) {
+                String[] terms = userInput.split(" ");
+                int itemNo = Integer.parseInt(terms[1]) - 1;
+                System.out.println("Noted. I'll remove this task:");
+                System.out.println(lstOfItems.get(itemNo));
+                lstOfItems.remove(itemNo);
+                String remaining = (lstOfItems.size() == 1) ? " task" : " tasks";
+                System.out.print("Now you have ");
+                System.out.println(String.valueOf(lstOfItems.size()) + remaining + " left!");
             } else {
                 String[] terms = userInput.split(" ");
                 Task newTask;

@@ -23,4 +23,13 @@ public class Checker {
             return false;
         }
     }
+
+    public boolean checkDeleteRequest(String userInput) {
+        String[] terms = userInput.split(" ");
+        if (terms[0].equals("delete") && terms.length == 2) {
+            return true;
+        } else {
+            return false;
+        }
+    }
 }
