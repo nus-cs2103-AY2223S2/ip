@@ -7,10 +7,10 @@ public abstract class Assets {
       + "\t ██████╔╝██║  ██║██║ ╚═╝ ██║\n"
       + "\t ╚═════╝ ╚═╝  ╚═╝╚═╝     ╚═╝";
   public static final String USER =
-      " ███████\n"
-    + "████▀██▀█\n"
-    + "████▄██▄█\n"
-    + " ▀▀▀▀▀▀▀";
+      "  ███████\n"
+    + " ████▀██▀█\n"
+    + " ████▄██▄█\n"
+    + "  ▀▀▀▀▀▀▀";
   public static final String SAM =
       "\t\t\t\t        ▄\n"
     + "\t\t\t\t ▒▒██▒▒▓▓▀\n"
