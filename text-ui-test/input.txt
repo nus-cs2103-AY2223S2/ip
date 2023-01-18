@@ -3,9 +3,18 @@ blah blah
 todo
 deadline
 event
+delete
+mark
+unmark
 todo
 deadline
 event
+delete
+mark
+unmark
+delete abc
+mark def
+unmark ghi
 deadline return book
 deadline return book /by
 event project meeting
@@ -24,8 +33,18 @@ mark 1
 mark 4
 list
 mark 3
+mark 3
+unmark 3
 unmark 3
 list
 deadline return book /by Sunday
 event project meeting /from Mon 2pm /to 4pm
+delete 0
+delete 8
+mark 0
+mark 8
+unmark 0
+unmark 8
+delete 7
+delete 7
 bye

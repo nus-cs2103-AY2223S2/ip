@@ -13,7 +13,7 @@ public class TwoFive {
     }
 
     //Ensure valid task number is provided
-    public static int validateTaskNum(String input, int numTasks) throws EmptyTasknumException, InvalidTaskException {
+    public static int validateTaskNum(String input, int numTasks) throws EmptyTasknumException, InvalidTaskException, NumberFormatException {
         String[] taskNumSplit = input.split(" ");
         if (taskNumSplit.length <= 1 || taskNumSplit[1].trim().equals("")) {
             throw new EmptyTasknumException();
@@ -169,6 +169,8 @@ public class TwoFive {
                 }
             } catch (TwoFiveException e) {
                 System.out.println(e.getMessage());
+            } catch (NumberFormatException e) {
+                System.out.println(":( OOPS!!! The task number provided must be a number.");
             }
 
             System.out.println(divider);
