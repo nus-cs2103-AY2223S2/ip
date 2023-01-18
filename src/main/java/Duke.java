@@ -15,6 +15,7 @@ public class Duke {
         Scanner in = new Scanner(System.in);
         Task[] tasks = new Task[MAX_TASK];
 
+        // use while loop to deal with user input through scanner
         untilBye:
         while (true) {
             String msgDescription = in.nextLine();
