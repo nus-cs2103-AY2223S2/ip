@@ -39,10 +39,13 @@ public class TaskFactory {
         return tuple;
     }
 
-    public static String formatTime(String time) {
+    public static String formatDateTime(String input) {
+        String[] dateTimePair = input.split(" ");
+        String date = dateTimePair[0];
+        String time = dateTimePair[1];
         String hrStr = time.substring(0, 2);
         String minStr = time.substring(2, 4);
-        return "T" + hrStr + ":" + minStr + ":00";
+        return date + "T" + hrStr + ":" + minStr + ":00";
     }
 
     public static LocalDateTime parseDateTime(String input) {
@@ -50,8 +53,8 @@ public class TaskFactory {
         String date = dateTimePair[0];
         String time = dateTimePair[1];
         try {
-            time = formatTime(time);
-            return LocalDateTime.parse(date + time);
+            String formattedDateTime = formatDateTime(input);
+            return LocalDateTime.parse(formattedDateTime);
         } catch (DateTimeException e) {
             Responses.printMessage(e.getMessage());
         }
@@ -64,10 +67,10 @@ public class TaskFactory {
             return new Todo(information);
         } else if (command.equals("DEADLINE")) {
             String[] pair = getNameDeadlinePair(information);
-            return new Deadline(pair[0], parseDateTime(pair[1]));
+            return new Deadline(pair[0], parseDateTime(pair[1]), formatDateTime(pair[1]));
         } else {
             String[] tuple = getNameStartEndTuple(information);
-            return new Event(tuple[0], parseDateTime(tuple[1]), parseDateTime(tuple[2]));
+            return new Event(tuple[0], parseDateTime(tuple[1]), parseDateTime(tuple[2]), formatDateTime(tuple[1]), formatDateTime(tuple[2]));
         }
     }
 
