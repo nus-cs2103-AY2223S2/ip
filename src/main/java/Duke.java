@@ -7,13 +7,6 @@ public class Duke {
     private static final ArrayList<Task> TASKS = new ArrayList<>();
 
     /**
-     * Available commands.
-     */
-    public enum Command {
-        LIST, MARK, UNMARK, BYE
-    }
-
-    /**
      * @param txt text to indent.
      * @return indented string.
      */
@@ -30,6 +23,7 @@ public class Duke {
 
     /**
      * Prints output in a nice format. (adds borders and indentation).
+     *
      * @param inp input string.
      */
     private static void prettifyOut(String inp) {
@@ -39,21 +33,33 @@ public class Duke {
     }
 
     /**
+     * Prints out that task was added.
+     * @param task task that was added.
+     */
+    private static void printTaskAdded(Task task) {
+        prettifyOut("Got it. I've added this task:\n  " + task + "\nNow you have " + TASKS.size() + " tasks in the list.");
+    }
+
+    /**
+     * Executes the command.
+     *
      * @param inp input string.
      * @return False if final command.
      */
     private static boolean executeInput(String inp) {
         Duke.Command cmd;
+        String description;
         try {
             cmd = Duke.Command.valueOf(inp.split(" ")[0].toUpperCase());
-        } catch(IllegalArgumentException e) {
-            TASKS.add(new Task(inp));
-            borderLine();
-            System.out.println(autoIndent("added: " + inp));
+            if (cmd != Command.LIST && cmd != Command.BYE) description = inp.split(" ", 2)[1];
+            else description = "";
+
+        } catch (IllegalArgumentException e) {
             borderLine();
             return true;
         }
-        switch(cmd) {
+
+        switch (cmd) {
             case LIST:
                 if (TASKS.isEmpty()) prettifyOut("Your list is empty!");
                 else {
@@ -85,6 +91,24 @@ public class Duke {
                     prettifyOut("OK, I've marked this task as not done yet:\n" + TASKS.get(taskToUnmark));
                 }
                 break;
+            case TODO:
+                Task td = new ToDo(description);
+                TASKS.add(td);
+                printTaskAdded(td);
+                break;
+            case DEADLINE:
+                String[] deadline = description.split(" /by ");
+                Task dl = new Deadline(deadline[0], deadline[1]);
+                TASKS.add(dl);
+                printTaskAdded(dl);
+                break;
+            case EVENT:
+                String[] event = description.split(" /from ");
+                String[] timing = event[1].split(" /to ");
+                Task ev = new Event(event[0], timing[0], timing[1]);
+                TASKS.add(ev);
+                printTaskAdded(ev);
+                break;
             case BYE:
                 prettifyOut(GOODBYE);
                 return false;
@@ -94,6 +118,7 @@ public class Duke {
 
     /**
      * The main function.
+     *
      * @param args command line arguments.
      */
     public static void main(String[] args) {
@@ -110,5 +135,12 @@ public class Duke {
 
             cont = executeInput(userInput);
         }
+    }
+
+    /**
+     * Available commands.
+     */
+    public enum Command {
+        LIST, MARK, UNMARK, TODO, DEADLINE, EVENT, BYE
     }
 }
