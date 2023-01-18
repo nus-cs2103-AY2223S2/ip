@@ -21,15 +21,7 @@ public class Feedback {
     }
 
     public void greet(String logo) {
-        display("Hello I'm\n" + logo + "What can I do for you?");
-    }
-
-    public void exit() {
-        display("Bye. Hope to see you again soon!");
-    }
-
-    public void invalid() {
-        display("☹ OOPS!!! I'm sorry, but I don't know what that means :-(\n");
+        display("Hello I'm\n" + logo + "What can I do for you?\n\n" + commands());
     }
 
     public void addedTask(int index, Task task) {
@@ -54,5 +46,33 @@ public class Feedback {
             sb.append(s);
         }
         display(sb.toString());
+    }
+
+    public void help() {
+        display(commands());
+    }
+
+    public void exit() {
+        display("Bye. Hope to see you again soon!");
+    }
+
+    public void invalid() {
+        display("☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
+    }
+
+    public void warning(String warning) {
+        display("☹ OOPS!!! " + warning);
+    }
+
+    private String commands() {
+        return "MY COMMANDS ARE:\n\n"
+                + "ADD TODO TASK:     todo [description]\n"
+                + "ADD DEADLINE TASK: deadline [description] /by [date time]\n"
+                + "ADD EVENT TASK:    event [description] /from [date time] /to [date time]\n"
+                + "MARK A TASK:       mark [index]\n"
+                + "UNMARK A TASK:     unmark [index]\n"
+                + "LIST ALL TASKS:    list\n"
+                + "DISPLAY COMMANDS:  help\n"
+                + "EXIT PROGRAM:      bye";
     }
 }
