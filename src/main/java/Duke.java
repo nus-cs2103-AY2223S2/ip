@@ -1,5 +1,7 @@
 
+import java.sql.Array;
 import java.util.Scanner;
+import java.util.ArrayList;
 public class Duke {
     /*public static void main(String[] args) {
         String logo = " ____        _        \n"
@@ -20,13 +22,24 @@ public class Duke {
         String userMessage = userInput.nextLine();
 
         //To-do-list
+        ArrayList<String> toDoList = new ArrayList<String>();
 
         while (true) {
             if (userMessage.equals("bye")) {
-                System.out.print("  " + "Cya~ Till next time!");
+                System.out.print("  ");
+                System.out.print("Cya~ Till next time!");
                 break;
+            } else if (userMessage.equals("list")) {
+                for(int i = 0; i < toDoList.size(); i++) {
+                    System.out.print("  ");
+                    System.out.println(i + 1 + ". " + toDoList.get(i));
+                }
+                Scanner newInput = new Scanner(System.in);
+                userMessage = newInput.nextLine();
             } else {
-                System.out.println("  " + userMessage);
+                System.out.print("  ");
+                System.out.println("added: " + userMessage);
+                toDoList.add(userMessage);
                 Scanner newInput = new Scanner(System.in);
                 userMessage = newInput.nextLine();
             }
