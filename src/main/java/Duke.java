@@ -26,7 +26,7 @@ public class Duke {
                 String[] part = input.split(" ");
                 int index = 0;
 
-                if (part[0].equals("mark") || part[0].equals("unmark")) {
+                if (part[0].equals("mark") || part[0].equals("unmark") || part[0].equals("delete")) {
                     index = Integer.parseInt(part[1]) - 1;
                 }
 
@@ -75,6 +75,13 @@ public class Duke {
                         String[] event_part = input.substring(6, input.length()).split("/from ");
                         String[] range = event_part[1].split("/to ");
                         list.add(new Event(event_part[0], range[0], range[1]));
+                        break;
+
+                    case "delete":
+                        Task temp = list.get(index);
+                        list.remove(index);
+                        System.out.println("The Duke has removed this task: " + temp);
+                        System.out.println("Now you have " + list.size() + " in the list.");
                         break;
 
                     default:
