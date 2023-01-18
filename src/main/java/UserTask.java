@@ -13,16 +13,16 @@ public class UserTask {
         status = false;
     }
 
-    @Override
-    public String toString() {
-        return Resource.statusFmt(status) + ' ' + desc;
-    }
-
-    public static String getTaskTypeLabel(String taskType){
+    public static String getTaskTypeLabel(String taskType) {
         return Util.parenthesize(Character.toUpperCase(taskType.charAt(0)));
     }
 
-    public static String formatKeyword(String keyword){
-        return '/'+keyword+' ';
+    public static String formatKeyword(String keyword) {
+        return '/' + keyword + ' ';
+    }
+
+    @Override
+    public String toString() {
+        return Resource.statusFmt(status) + ' ' + desc;
     }
 }
