@@ -10,14 +10,12 @@ public class Duke {
         System.out.println(duke.welcome_msg());
         Scanner scanner = new Scanner(System.in);
         while(!duke.exit) {
-            String inp = scanner.nextLine();
+            String inp = scanner.next();
             int idx = -1;
-            if ((inp.length() >= 4 && inp.substring(0, 4).equals("mark")) || (inp.length() >= 6 && inp.substring(0, 6).equals("unmark"))) {
-                idx = Integer.parseInt(String.valueOf(inp.charAt(inp.length() - 1)));
-                System.out.println(idx);
-                inp = inp.substring(0, 4).equals("mark") ? inp.substring(0, 4) : inp.substring(0, 6);
-            }
-            duke.check_msg(inp, idx);
+            String desc = "";
+            if (inp.equals("mark") || inp.equals("unmark")) idx = scanner.nextInt();
+            else desc = scanner.nextLine();
+            duke.check_msg(inp, idx, desc);
             System.out.println(duke.msg);
         }
     }
@@ -25,7 +23,7 @@ public class Duke {
         return this.add_lines("Hello! I'm Duke\nWhat can I do for you?\n");
     }
 
-    void check_msg(String inp, int idx) {
+    void check_msg(String inp, int idx, String desc) {
         if (inp.equals("bye")) {
             this.exit = true;
             this.msg = this.add_lines("Bye. Hope to see you again soon!\n");
@@ -47,11 +45,15 @@ public class Duke {
             }
             this.msg += cur + "\n";
             this.msg = this.add_lines(this.msg);
-        } else {
-            Task cur = new Task(inp);
+        } else if (inp.equals("todo")){
+            Todo cur = new Todo(desc);
             tasks[num_tasks] = cur;
             num_tasks = num_tasks + 1;
-            this.msg = this.add_lines("added: " + inp + "\n");
+            this.msg = "Got it. I've added this task:\n" + cur + "\n";
+            this.msg += "Now you have " + this.num_tasks + " tasks in the list.\n";
+            this.msg = this.add_lines(this.msg);
+        } else {
+            this.msg = "Invalid input.\n";
         }
     }
 
