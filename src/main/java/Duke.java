@@ -2,7 +2,7 @@ import java.util.Scanner;
 
 public class Duke {
     private enum Commands {
-        BYE, LIST, MARK, UNMARK, TODO, DEADLINE, EVENT
+        BYE, LIST, MARK, UNMARK, TODO, DEADLINE, EVENT, DELETE
     }
 
     private static Enum getCommand(String userInput) throws DukeException {
@@ -17,10 +17,10 @@ public class Duke {
         }
     }
 
-    private static int parseMarkCommands(String userInput) throws DukeException {
+    private static int parseMarkOrDeleteCommands(String userInput) throws DukeException {
         String[] splitStr = userInput.split(" ", 2);
         if (splitStr.length < 2) {
-            throw new DukeException("Mark / Unmark commands require an integer argument referring to task number");
+            throw new DukeException("Mark / Unmark / Delete commands require an integer argument referring to task number");
         } else {
             try {
                 int taskNumber = Integer.parseInt(splitStr[1]);
@@ -69,7 +69,6 @@ public class Duke {
                 } else {
                     return new String[] {splitFrom[0], splitTo[0], splitTo[1]};  // [0] is description of task; [1] is from; [2] is to
                 }
-
             }
         }
     }
@@ -95,9 +94,11 @@ public class Duke {
                 } else if (command.equals(Commands.LIST)) {
                     p.print(taskList.listTasks());
                 } else if (command.equals(Commands.MARK)) {
-                    p.print(taskList.markTask(parseMarkCommands(text)));
+                    p.print(taskList.markTask(parseMarkOrDeleteCommands(text)));
                 } else if (command.equals(Commands.UNMARK)) {
-                    p.print(taskList.unmarkTask(parseMarkCommands(text)));
+                    p.print(taskList.unmarkTask(parseMarkOrDeleteCommands(text)));
+                } else if (command.equals(Commands.DELETE)) {
+                    p.print(taskList.deleteTask(parseMarkOrDeleteCommands(text)));
                 } else {
                     if (command.equals(Commands.TODO)) {
                         p.print(taskList.addTask(parseTodoCommand(text)));
