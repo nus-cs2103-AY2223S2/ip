@@ -41,37 +41,41 @@ public class Duke {
     private static void printMenu() {
         boolean exitStatus = false;
         while(true) {
-            String input = sc.nextLine();
-            String[] splitInput = input.split(" ");
-            String action = splitInput[0];
-            switch(action) {
-                case "todo":
-                    todo(input.split(" ", 2)[1]);
+            try {
+                String input = sc.nextLine();
+                String[] splitInput = input.split(" ");
+                String action = splitInput[0];
+                switch (action) {
+                    case "todo":
+                        todo(input.split(" ", 2)[1]);
+                        break;
+                    case "deadline":
+                        deadline(input.split(" ", 2)[1]);
+                        break;
+                    case "event":
+                        event(input.split(" ", 2)[1]);
+                        break;
+                    case "list":
+                        list();
+                        break;
+                    case "mark":
+                        mark(splitInput[1]);
+                        break;
+                    case "unmark":
+                        unmark(splitInput[1]);
+                        break;
+                    case "bye":
+                        exit();
+                        exitStatus = true;
+                        break;
+                    default:
+                        printDefault();
+                }
+                if (exitStatus) {
                     break;
-                case "deadline":
-                    deadline(input.split(" ", 2)[1]);
-                    break;
-                case "event":
-                    event(input.split(" ", 2)[1]);
-                    break;
-                case "list":
-                    list();
-                    break;
-                case "mark":
-                    mark(splitInput[1]);
-                    break;
-                case "unmark":
-                    unmark(splitInput[1]);
-                    break;
-                case "bye":
-                    exit();
-                    exitStatus = true;
-                    break;
-                default:
-                    printDefault();
-            }
-            if (exitStatus) {
-                break;
+                }
+            } catch (NoSuchElementException e) {
+                System.out.println(e);
             }
         }
     }
