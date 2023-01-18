@@ -15,7 +15,13 @@ public class Duke {
             String desc = "";
             if (inp.equals("mark") || inp.equals("unmark")) idx = scanner.nextInt();
             else desc = scanner.nextLine();
-            duke.check_msg(inp, idx, desc);
+            String by = "";
+            if (inp.equals("deadline")) {
+                String[] temp = desc.split(" /by ");
+                desc = temp[0];
+                by = temp[1];
+            }
+            duke.check_msg(inp, idx, desc, by);
             System.out.println(duke.msg);
         }
     }
@@ -23,7 +29,7 @@ public class Duke {
         return this.add_lines("Hello! I'm Duke\nWhat can I do for you?\n");
     }
 
-    void check_msg(String inp, int idx, String desc) {
+    void check_msg(String inp, int idx, String desc, String by) {
         if (inp.equals("bye")) {
             this.exit = true;
             this.msg = this.add_lines("Bye. Hope to see you again soon!\n");
@@ -52,8 +58,16 @@ public class Duke {
             this.msg = "Got it. I've added this task:\n" + cur + "\n";
             this.msg += "Now you have " + this.num_tasks + " tasks in the list.\n";
             this.msg = this.add_lines(this.msg);
+        } else if (inp.equals("deadline")) {
+            Deadline cur = new Deadline(desc, by);
+            tasks[num_tasks] = cur;
+            num_tasks = num_tasks + 1;
+            this.msg = "Got it. I've added this task:\n" + cur + "\n";
+            this.msg += "Now you have " + this.num_tasks + " tasks in the list.\n";
+            this.msg = this.add_lines(this.msg);
         } else {
             this.msg = "Invalid input.\n";
+            this.msg = this.add_lines(this.msg);
         }
     }
 
