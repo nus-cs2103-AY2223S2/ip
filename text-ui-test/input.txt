@@ -14,4 +14,6 @@ unmark 1
 list
 mark 6
 mark test
+delete 4
+list
 bye

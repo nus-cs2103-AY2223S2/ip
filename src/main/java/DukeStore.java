@@ -1,3 +1,7 @@
+import DukeExceptions.DukeException;
+import DukeExceptions.DukeStoreFullException;
+import DukeExceptions.DukeStoreInvalidAccessException;
+
 import java.util.ArrayList;
 import java.util.Objects;
 
@@ -49,7 +53,10 @@ public class DukeStore {
 
         String message = "Got it. I've added this task:\n"
                 + "  " + this.records.get(this.records.size() - 1).toString()
-                + String.format("\nNow you have %s tasks in the list", this.records.size());
+                + String.format("\nNow you have %s task%s in the list.",
+                            this.records.size(),
+                            this.records.size() == 1 ? "" : "s"
+                    );
         DukeFormatter.section(message);
     }
 
@@ -82,6 +89,24 @@ public class DukeStore {
         }
         this.records.get(i).markUndone();
         String message = "OK, I've marked this task as not done yet:\n" + "  " + this.records.get(i);
+        DukeFormatter.section(message);
+    }
+
+    /**
+     * Given the index of a task in the Store, attempts to delete it.
+     *
+     * @param i The index of the task in the Store
+     * @throws DukeStoreInvalidAccessException The exception indicating that an
+     * invalid index was provided.
+     */
+    public void delete(int i) throws DukeStoreInvalidAccessException {
+        if (i < 0 || i >= this.records.size()) {
+            throw new DukeStoreInvalidAccessException();
+        }
+        DukeTask task = this.records.remove(i);
+        String message = "Noted. I've removed this task:\n" + "  " + task
+                + String.format("\nNow you have %s task%s in the list.", this.records.size(),
+                this.records.size() == 1? "": "s");
         DukeFormatter.section(message);
     }
 

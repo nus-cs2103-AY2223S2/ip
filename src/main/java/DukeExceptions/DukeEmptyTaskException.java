@@ -1,3 +1,5 @@
+package DukeExceptions;
+
 public class DukeEmptyTaskException extends DukeException {
     public static enum TaskType {
         Todo,

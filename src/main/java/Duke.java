@@ -1,3 +1,5 @@
+import DukeExceptions.*;
+
 import java.util.Scanner;
 
 /**
@@ -109,11 +111,12 @@ public class Duke {
                 String message = "It was okay serving you. Might/might not see you again." + "\n"
                         + "Exiting...";
                 DukeFormatter.section(message);
-                System.exit(1);
+                System.exit(0);
 
             case "list":
                 DukeFormatter.section(ds.toString());
                 return;
+
             case "todo":
                 DukeFormatter.error(new DukeEmptyTaskException(DukeEmptyTaskException.TaskType.Todo));
                 return;
@@ -124,7 +127,11 @@ public class Duke {
                 DukeFormatter.error(new DukeEmptyTaskException(DukeEmptyTaskException.TaskType.Event));
                 return;
             default:
-                DukeFormatter.error(new DukeInvalidCommandException());
+                if (cmd.matches("(mark|unmark|delete)")) {
+                    DukeFormatter.error(new DukeTaskIndexMissingException(cmd));
+                } else {
+                    DukeFormatter.error(new DukeInvalidCommandException());
+                }
         }
     }
 
@@ -137,26 +144,6 @@ public class Duke {
      */
     private static void twoArgCommand(String cmd, String param, DukeStore ds) {
         switch (cmd) {
-            case "mark":
-                try {
-                    int i = Integer.parseInt(param);
-                    mark(i, ds);
-                } catch (Exception e) {
-                    DukeFormatter.error(new Exception(
-                            "Invalid task number entered. Ensure it is a number."
-                    ));
-                }
-                return;
-            case "unmark":
-                try {
-                    int i = Integer.parseInt(param);
-                    unMark(i, ds);
-                } catch (Exception e) {
-                    DukeFormatter.error(new Exception(
-                            "Invalid task number entered. Ensure it is a number."
-                    ));
-                }
-                return;
             case "todo":
                 todo(param, ds);
                 return;
@@ -166,10 +153,42 @@ public class Duke {
             case "event":
                 event(param, ds);
                 return;
-
             default:
+                if (cmd.matches("(mark|unmark|delete)")) {
+                    manipulateTask(cmd, param, ds);
+                    return;
+                }
                 DukeFormatter.error(new DukeInvalidCommandException());
         }
+    }
+
+    /**
+     * The main access point for manipulating tasks in the store.
+     *
+     * @param cmd The manipulation command.
+     * @param param The access index.
+     * @param ds The store instance.
+     */
+    private static void manipulateTask(String cmd, String param, DukeStore ds) {
+        try {
+            int idx = Integer.parseInt(param);
+            switch (cmd) {
+                case "mark":
+                    mark(idx, ds);
+                    return;
+                case "unmark":
+                    unMark(idx, ds);
+                    return;
+                case "delete":
+                    delete(idx, ds);
+            }
+        } catch (NumberFormatException e) {
+            DukeFormatter.error(new DukeException(
+                    String.format("An invalid index was provided for the %s command."
+                            + " Ensure it is a number!", cmd)
+            ));
+        }
+
     }
 
     /**
@@ -195,6 +214,20 @@ public class Duke {
     private static void unMark(int idx, DukeStore ds) {
         try {
             ds.unMark(idx - 1);
+        } catch (DukeStoreInvalidAccessException e) {
+            DukeFormatter.error(e);
+        }
+    }
+
+    /**
+     * Given a valid index in the store, deletes a task stored at that index.
+     *
+     * @param idx The index of the task in the store.
+     * @param ds The store instance to store tasks.
+     */
+    private static void delete(int idx, DukeStore ds) {
+        try {
+            ds.delete(idx - 1);
         } catch (DukeStoreInvalidAccessException e) {
             DukeFormatter.error(e);
         }

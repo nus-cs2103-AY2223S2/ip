@@ -21,6 +21,6 @@ public class TaskDeadline extends DukeTask{
     @Override
     public String toString() {
         return "[D]" + super.toString()
-                + String.format(" (by: %s}", this.deadline);
+                + String.format(" (by: %s)", this.deadline);
     }
 }

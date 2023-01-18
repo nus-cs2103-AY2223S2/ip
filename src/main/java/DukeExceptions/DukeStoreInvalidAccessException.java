@@ -1,3 +1,5 @@
+package DukeExceptions;
+
 /**
  * The exception class that indicates that an invalid index request was made to
  * a DukeStore instance.

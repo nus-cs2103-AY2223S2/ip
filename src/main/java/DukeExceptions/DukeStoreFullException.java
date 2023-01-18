@@ -1,3 +1,5 @@
+package DukeExceptions;
+
 /**
  * The exception class that indicates the Duke Store instance is full.
  *
