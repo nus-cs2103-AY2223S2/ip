@@ -81,7 +81,13 @@ public class Red{
                 EventTask NewEventTask = new EventTask(eventstr[0], eventstr[1], eventstr[2]);
                 tasks.enq(NewEventTask);
                 reader();
-            } else {
+            }else if(arrOfStr[0].equals("delete")) {
+                if(arrOfStr.length <= 1) {
+                    throw new RuntimeException("Specification of the DeleteTask is missing\n");
+                }
+                tasks.delete(Integer.parseInt(arrOfStr[1]));
+                reader();
+            }  else {
                 throw new RedDoesNotUnderstandException();
             }
 
