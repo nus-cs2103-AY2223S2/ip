@@ -19,6 +19,10 @@ abstract public class Command implements Executable {
         this.isTerminating = isTerminating;
     }
 
+    public CommandType getCommandType() {
+        return commandType;
+    }
+
     @Override
     public abstract void execute() throws DukeException;
     public boolean isTerminating() { return isTerminating; }

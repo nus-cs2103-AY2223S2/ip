@@ -14,8 +14,20 @@ abstract public class Task {
         this.isDone = false;
     }
 
+    public abstract SerializableTask serialize();
+
     public String getStatusIcon() {
         return (isDone ? "X" : " "); // mark done task with X
+    }
+
+    public void markTask() {
+        isDone = true;
+        System.out.println("Nice! I've marked this task as done:\n [X] "  + description);
+    }
+
+    public void unmarkTask() {
+        isDone = false;
+        System.out.println("OK, I've marked this task as not done yet:\n [ ] " + description);
     }
 
     public static void processTask(Matcher matcher, TaskType type) throws DukeException {
@@ -42,16 +54,6 @@ abstract public class Task {
         } else {
             throw type.getErr();
         }
-    }
-
-    public void markTask() {
-        isDone = true;
-        System.out.println("Nice! I've marked this task as done:\n [X] "  + description);
-    }
-
-    public void unmarkTask() {
-        isDone = false;
-        System.out.println("OK, I've marked this task as not done yet:\n [ ] " + description);
     }
 
     @Override

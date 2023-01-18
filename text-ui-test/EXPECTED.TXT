@@ -1,3 +1,4 @@
+Successfully connected to database.
 Hello! I'm Duke. What can i do for you?
 These are the available commands:
 	 todo [description]

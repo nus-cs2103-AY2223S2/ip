@@ -5,11 +5,17 @@ import java.util.*;
 public class TaskList {
     private static final List<Task> taskList = new ArrayList<>();
 
-    public static void addTask(Task task) {
+    public static void addTask(Task task, boolean print) {
         taskList.add(task);
-        System.out.println("Got it. I've added this task:");
-        System.out.println("\t" + task);
-        System.out.println("Now you have " + taskList.size() + " tasks in the list.");
+        if (print) {
+            System.out.println("Got it. I've added this task:");
+            System.out.println("\t" + task);
+            System.out.println("Now you have " + taskList.size() + " tasks in the list.");
+        }
+    }
+
+    public static void addTask(Task task) {
+        addTask(task, true);
     }
 
     public static Optional<Task> getTask(Integer key) {
@@ -35,6 +41,10 @@ public class TaskList {
         } else {
             System.out.println("This task don't exists! Please select one from the list.");
         }
+    }
+
+    public List<Task> getTaskList() {
+        return taskList;
     }
 
     public static String listTasks() {

@@ -1,11 +1,13 @@
 import controllers.*;
+import database.Database;
 import entities.TaskList;
 import enums.CommandType;
 import exceptions.DukeException;
 import java.util.Scanner;
 
 public class Duke {
-    private final TaskList taskList = new TaskList();
+    private static final TaskList taskList = new TaskList();
+    private static final Database database = new Database("duke.txt");
     private static final Scanner in = new Scanner(System.in);
 
     private static Command parseInput(String cmd, String arguments) {
@@ -28,6 +30,13 @@ public class Duke {
     }
 
     public static void main(String[] args) {
+        try {
+            database.connect();
+            System.out.println("Successfully connected to database.");
+        } catch (DukeException e) {
+            System.out.println(e.getMessage());
+            return; // fatal error, cannot continue.
+        }
         System.out.println("Hello! I'm Duke. What can i do for you?");
         System.out.println(
                 "These are the available commands:" +
@@ -42,6 +51,7 @@ public class Duke {
             try {
                 cmd.execute();
                 if (cmd.isTerminating()) {
+                    database.write(taskList);
                     break;
                 }
             } catch (DukeException e) {
