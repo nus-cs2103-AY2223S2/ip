@@ -2,7 +2,10 @@ public abstract class Task {
     private String title;
     private boolean done = false;
 
-    Task(String title) {
+    Task(String title) throws DukeException {
+        if (title.trim().length() == 0) {
+            throw new DukeException(Views.EMPTY_ERR_STRING.eng());
+        }
         this.title = title.trim();
     }
 

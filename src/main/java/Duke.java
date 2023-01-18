@@ -55,9 +55,6 @@ public class Duke {
                             }
                         } else if (input.startsWith(Commands.TODO.cmd())) {
                             String title = input.substring(Commands.TODO.cmd().length());
-                            if (title.length() == 0) {
-                                throw new DukeException(Views.EMPTY_ERR_STRING.eng());
-                            }
                             Task newTask = new Todo(title);
                             tasksList.add(newTask);
                             printer("added: " + newTask);
@@ -67,9 +64,6 @@ public class Duke {
                             }
                             String title = input.substring(Commands.DEADLINE.cmd().length(),
                                     input.indexOf(Commands.BY.cmd()));
-                            if (title.length() == 0) {
-                                throw new DukeException(Views.EMPTY_ERR_STRING.eng());
-                            }
                             Task newTask = new Deadline(title,
                                     input.substring(input.indexOf(Commands.BY.cmd())));
                             tasksList.add(newTask);
@@ -80,9 +74,6 @@ public class Duke {
                             }
                             String title = input.substring(Commands.EVENT.cmd().length(),
                                     input.indexOf(Commands.FROM.cmd()));
-                            if (title.length() == 0) {
-                                throw new DukeException(Views.EMPTY_ERR_STRING.eng());
-                            }
                             Task newTask = new Event(title,
                                     input.substring(input.indexOf(Commands.FROM.cmd()),
                                             input.indexOf(Commands.TO.cmd())),
