@@ -14,17 +14,21 @@ public class Sam {
       System.out.println(Assets.USER);
       System.out.print("> ");
       String input = scanner.nextLine();
+      
+      Command command = Command.ADD;
+      for (Command c : Command.values())
+        if (c.matches(input)) command = c;
 
-			switch (input) {
-				case "bye":
+			switch (command) {
+				case BYE:
 					live = false;
 					talk("Goodbye!");
 					break;
-				case "list":
+				case LIST:
           String list = tasks.generateList();
 					talk("Here is your list:\n\n" + list);
 					break;
-				default:
+				case ADD:
           Task task = new Task(input);
 					tasks.addTask(task);
 					talk("I've added \"" + input + "\" to your list");
