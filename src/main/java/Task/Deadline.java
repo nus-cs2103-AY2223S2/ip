@@ -16,6 +16,6 @@ public class Deadline extends Task {
     @Override
     public String toString() {
         String statusIcon = this.completed ? "X" : " ";
-        return "[D][" + statusIcon + "] " + this.task + " (by: " + this.deadline + ")";
+        return "[D][" + statusIcon + "]" + this.task + "(by:" + this.deadline + ")";
     }
 }

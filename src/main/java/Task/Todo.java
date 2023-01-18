@@ -14,6 +14,6 @@ public class Todo extends Task {
     @Override
     public String toString() {
         String statusIcon = this.completed ? "X" : " ";
-        return "[T][" + statusIcon + "] " + this.task;
+        return "[T][" + statusIcon + "]" + this.task;
     }
 }
