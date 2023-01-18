@@ -1,4 +1,5 @@
 import java.util.Scanner;
+
 public class Jane {
     public static void main(String[] args) {
         String logo = " ____        _        \n"
