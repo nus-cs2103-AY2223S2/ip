@@ -14,8 +14,7 @@ public class Duke {
     public enum TaskTypes {
         TODO,
         DEADLINE,
-        EVENT,
-        OTHER
+        EVENT
     }
 
     public static void main(String[] args) {
@@ -57,17 +56,21 @@ public class Duke {
                         "OK, I've marked this task as not done yet:" +
                         "\n" + task + "\n" + HORIZONTAL_LINE);
             } else {
-                TaskTypes type = getTaskType(action);
-                Task task = getTask(type, strArray);
-                commandList.add(task);
-                String numberOfTask = Integer.toString(commandList.size());
-                System.out.println(HORIZONTAL_LINE + "\n" + "Got it. I've added this task:" +
-                        "\n" + task + "\n" + "Now you have " + numberOfTask +
-                        " tasks in the list." + "\n" + HORIZONTAL_LINE);
+                try {
+                    TaskTypes type = getTaskType(action);
+                    Task task = getTask(type, strArray);
+                    commandList.add(task);
+                    String numberOfTask = Integer.toString(commandList.size());
+                    System.out.println(HORIZONTAL_LINE + "\n" + "Got it. I've added this task:" +
+                            "\n" + task + "\n" + "Now you have " + numberOfTask +
+                            " tasks in the list." + "\n" + HORIZONTAL_LINE);
+                } catch (InvalidTaskTypeException | EmptyCommandException | InvalidTimeException e) {
+                    System.out.println(HORIZONTAL_LINE + "\n" + e.getMessage() + "\n" + HORIZONTAL_LINE);
+                }
             }
         }
     }
-    public TaskTypes getTaskType(String action){
+    public TaskTypes getTaskType(String action) throws InvalidTaskTypeException {
         if (action.equalsIgnoreCase("todo")) {
             return TaskTypes.TODO;
         } else if (action.equalsIgnoreCase("deadline")) {
@@ -75,31 +78,44 @@ public class Duke {
         } else if (action.equalsIgnoreCase("event")) {
             return TaskTypes.EVENT;
         } else {
-            return TaskTypes.OTHER;
+            throw new InvalidTaskTypeException();
         }
     }
 
-    public Task getTask(TaskTypes type, String[] strArray) {
+    public Task getTask(TaskTypes type, String[] strArray) throws InvalidTaskTypeException,
+            EmptyCommandException, InvalidTimeException {
         String command;
+
+        if (strArray.length < 2 || strArray[1].trim().equals("")) {
+            throw new EmptyCommandException(strArray[0]);
+        }
 
         if (type.equals(TaskTypes.TODO)) {
             command = strArray[1];
             return new ToDo(command);
         } else if (type.equals(TaskTypes.DEADLINE)) {
             String[] temp = strArray[1].split("/by", 2);
+            if (temp.length < 2 || temp[1].trim().equals("")) {
+                throw new InvalidTimeException();
+            }
             command = temp[0];
             String deadline = temp[1];
             return new Deadline(command, deadline);
         } else if (type.equals(TaskTypes.EVENT)) {
             String[] temp = strArray[1].split("/from", 2);
+            if (temp.length < 2 || temp[1].trim().equals("")) {
+                throw new InvalidTimeException();
+            }
             String[] temp2 = temp[1].split("/to", 2);
+            if (temp2.length < 2 || temp[1].trim().equals("")) {
+                throw new InvalidTimeException();
+            }
             command = temp[0];
             String start = temp2[0];
             String end = temp2[1];
             return new Event(command, start, end);
         } else {
-            command = strArray[0] + " " + strArray[1];
-            return new Task(command);
+            throw new InvalidTaskTypeException();
         }
     }
 }

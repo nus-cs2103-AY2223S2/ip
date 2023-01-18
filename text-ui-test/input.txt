@@ -1,6 +1,10 @@
+todo
 todo ride bicycle
+deadline
 deadline complete duke /by Thursday
+event
 event attend 2103T lecture /from friday 2pm /to 4pm
+help
 list
 mark 1
 mark 2
