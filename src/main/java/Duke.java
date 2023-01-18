@@ -24,12 +24,34 @@ public class Duke {
                     System.out.println(task);
                 } catch (NumberFormatException | IndexOutOfBoundsException e) {
                     // incorrect syntax
-                    System.out.println("added " + word);
-                    listOfWords.add(new Task(word));
+                    Task task = new ToDo(word);
+                    addingTask(task, listOfWords);
+                }
+            } else if (word.startsWith("deadline ")) {
+                String[] words = word.split("/", 2);
+                if (words.length == 2 && words[1].startsWith("by ")){
+                    Task task = new Deadline(words[0].substring(9), words[1].substring(3));
+                    addingTask(task, listOfWords);
+                } else {
+                    Task task = new ToDo(word);
+                    addingTask(task, listOfWords);
+                }
+
+            } else if (word.startsWith("todo ")) {
+                Task task = new ToDo(word.substring(5));
+                addingTask(task, listOfWords);
+            } else if (word.startsWith("event ")) {
+                String[] words = word.split("/", 3);
+                if (words.length == 3 && words[1].startsWith("from ") && words[2].startsWith("to ")) {
+                    Task task = new Event(words[0].substring(6), words[1].substring(5), words[2].substring(3));
+                    addingTask(task, listOfWords);
+                } else {
+                    Task task = new ToDo(word);
+                    addingTask(task, listOfWords);
                 }
             } else {
-                System.out.println("added " + word);
-                listOfWords.add(new Task(word));
+                Task task = new ToDo(word);
+                addingTask(task, listOfWords);
             }
             System.out.println("-".repeat(20));
             word = scanner.nextLine();
@@ -37,6 +59,12 @@ public class Duke {
         System.out.println("Bye. Hope to see you again soon!");
     }
 
+    public static void addingTask(Task task, List<Task> list) {
+        System.out.println("Got it. I've added this task:");
+        System.out.println(task);
+        list.add(task);
+        System.out.println("Now you have " + list.size() + " tasks in the list.");
+    }
     public static void introDuke() {
         String logo = " ____        _        \n"
                 + "|  _ \\ _   _| | _____ \n"
