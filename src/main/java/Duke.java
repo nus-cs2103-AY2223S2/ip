@@ -1,4 +1,6 @@
+import java.util.ArrayList;
 import java.util.Scanner;
+
 public class Duke {
     /** Scanner used by each duke */
     private Scanner scanner;
@@ -6,10 +8,7 @@ public class Duke {
     private boolean isRunning;
 
     /** Array of tasks */
-    private Task[] tasks;
-
-    /** Number of tasks stored */
-    private int numTasks;
+    private ArrayList<Task> tasks;
 
     /**
      * Runs the duke.
@@ -23,14 +22,15 @@ public class Duke {
     }
 
     private void addTask(Task task) {
-        this.tasks[this.numTasks] = task;
-        this.numTasks += 1;
+        this.tasks.add(task);
         System.out.println("added " + task);
     }
 
     private void showTasks() {
-        for (int i = 0; i < this.numTasks; i++) {
-           System.out.println(i + ". " + this.tasks[i]);
+        int index = 1;
+        for (Task task : this.tasks) {
+           System.out.println(index + ". " + task);
+           index += 1;
         }
     }
 
@@ -41,8 +41,7 @@ public class Duke {
     private void init() {
         this.scanner = new Scanner(System.in);
         this.isRunning = true;
-        this.tasks = new Task[100];
-        this.numTasks = 0;
+        this.tasks = new ArrayList<Task>();
         System.out.println("Hello!");
     }
 
@@ -73,9 +72,9 @@ public class Duke {
                 this.showTasks();
                 break;
             case "mark":
-                this.toggleTask(this.tasks[Integer.parseInt(
+                this.toggleTask(this.tasks.get(Integer.parseInt(
                         command.getArg("mark")
-                )]);
+                )));
                 break;
             }
         } catch (IllegalArgumentException e) {

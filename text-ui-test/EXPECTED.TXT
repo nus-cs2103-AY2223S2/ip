@@ -1,27 +1,27 @@
 Hello!
 added [T][ ] task1
-0. [T][ ] task1
+1. [T][ ] task1
 added [T][ ] task2
-0. [T][ ] task1
-1. [T][ ] task2
+1. [T][ ] task1
+2. [T][ ] task2
 Task [T][X] task1 marked as done
-0. [T][X] task1
-1. [T][ ] task2
+1. [T][X] task1
+2. [T][ ] task2
 added [D][ ] task3 (by: tomorrow)
-0. [T][X] task1
-1. [T][ ] task2
-2. [D][ ] task3 (by: tomorrow)
+1. [T][X] task1
+2. [T][ ] task2
+3. [D][ ] task3 (by: tomorrow)
 Task [T][X] task2 marked as done
-0. [T][X] task1
-1. [T][X] task2
-2. [D][ ] task3 (by: tomorrow)
+1. [T][X] task1
+2. [T][X] task2
+3. [D][ ] task3 (by: tomorrow)
 Task [T][ ] task1 marked as not done
-0. [T][ ] task1
-1. [T][X] task2
-2. [D][ ] task3 (by: tomorrow)
+1. [T][ ] task1
+2. [T][X] task2
+3. [D][ ] task3 (by: tomorrow)
 added [E][ ] task4 (from: wednesday to: thursday)
-0. [T][ ] task1
-1. [T][X] task2
-2. [D][ ] task3 (by: tomorrow)
-3. [E][ ] task4 (from: wednesday to: thursday)
+1. [T][ ] task1
+2. [T][X] task2
+3. [D][ ] task3 (by: tomorrow)
+4. [E][ ] task4 (from: wednesday to: thursday)
 GoodBye!
