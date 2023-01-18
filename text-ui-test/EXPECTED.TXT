@@ -1,7 +1,53 @@
-Hello from
- ____        _        
+ ____        _
 |  _ \ _   _| | _____ 
 | | | | | | | |/ / _ \
 | |_| | |_| |   <  __/
 |____/ \__,_|_|\_\___|
+Hello! I'm Duke. How may I be of assistance?
+---------------------------
+Invalid input.
+---------------------------
+---------------------------
+No tasks added yet.
+---------------------------
+---------------------------
+Understood. I have added the task:
+[T][ ] shopping
+There are now 1 task(s) in the list.
+---------------------------
+---------------------------
+Understood. I have added the task:
+[D][ ] homework (by: Monday)
+There are now 2 task(s) in the list.
+---------------------------
+---------------------------
+Understood. I have added the task:
+[E][ ] camping (from: Tuesday to: Wednesday)
+There are now 3 task(s) in the list.
+---------------------------
+---------------------------
+Well done. I've marked this tasked as done:
+[T][X] shopping
+---------------------------
+---------------------------
+Well done. I've marked this tasked as done:
+[D][X] homework (by: Monday)
+---------------------------
+---------------------------
+1. [T][X] shopping
+2. [D][X] homework (by: Monday)
+3. [E][ ] camping (from: Tuesday to: Wednesday)
+---------------------------
+---------------------------
+Noted. I've marked this tasked as undone:
+[D][ ] homework (by: Monday)
+---------------------------
+---------------------------
+1. [T][X] shopping
+2. [D][ ] homework (by: Monday)
+3. [E][ ] camping (from: Tuesday to: Wednesday)
+---------------------------
+---------------------------
+Thank you for your patronage. Goodbye!
+---------------------------
 
