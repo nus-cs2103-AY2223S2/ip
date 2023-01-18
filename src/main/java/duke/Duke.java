@@ -42,7 +42,6 @@ public class Duke {
                     info = command.substring(command.indexOf(" ") + 1);
                     listname[count] = new Todo(info);
                     count++;
-
                 } else if (words[0].equals("deadline")) {
                     info = command.substring(command.indexOf(" ") + 1, command.indexOf(" /by "));
                     String deadline = command.substring(command.indexOf("/by") + 4);
