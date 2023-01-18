@@ -9,21 +9,39 @@ public class TaskList {
         this.tasks = new LinkedList<>();
     }
 
-    public Task addTask(String input) {
-        if (input.matches("deadline .+ /by .+")) {
+    public Task addTask(String input) throws CommandNotFoundException, EmptyCommandException {
+        if (input != null && (input.equals("todo") || input.equals("deadline") || input.equals("event"))) {
+            throw new EmptyCommandException("Empty argument", input);
+        } else if (input.matches("deadline .* /by .*")) {
             // Handle deadline
             String[] arr = input.split(" /by ");
-            String content = arr[0].substring(8, arr[0].length());
+            String content = arr[0].substring(9, arr[0].length());
+
+            if (content.length() == 0 || arr[1].length() == 0) {
+                throw new EmptyCommandException("Empty argument", "deadline");
+            }
+
             this.tasks.add(new Deadline(content, arr[1]));
-        } else if (input.matches("event .+ /from .+ /to .+")) {
+        } else if (input.matches("event .* /from .* /to .*")) {
             // Handle event
             String[] arr = input.split(" /from ");
-            String content = arr[0].substring(5, arr[0].length());
+            String content = arr[0].substring(6, arr[0].length());
             String[] startEnd = arr[1].split(" /to ");
+
+            if (content.length() == 0 || startEnd[0].length() == 0 || startEnd[1].length() == 0) {
+                throw new EmptyCommandException("Empty argument", "event");
+            }
+
             this.tasks.add(new Event(content, startEnd[0], startEnd[1]));
         } else if (input.matches("todo .*")) {
             // Handle todo
+            if (input.length() == 5) {
+                throw new EmptyCommandException("Empty argument", "todo");
+            }
+
             this.tasks.add(new ToDo(input.substring(5, input.length())));
+        } else {
+            throw new CommandNotFoundException("Duke command is invalid.", input);
         }
 
         return tasks.get(tasks.size() - 1);
@@ -59,7 +77,9 @@ public class TaskList {
         Integer curr = 1;
 
         for (Task t: tasks) {
-            result += curr.toString() + ". " + t + '\n';
+            result += curr.toString() + ". " + t;
+            if (curr != tasks.size()) result += '\n';
+
             curr++;
         }
 

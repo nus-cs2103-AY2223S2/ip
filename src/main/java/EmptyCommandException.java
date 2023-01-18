@@ -1,10 +1,9 @@
-public class InvalidCommandArgException extends DukeException {
+public class EmptyCommandException extends DukeException {
     String arg;
     String command;
 
-    InvalidCommandArgException(String errorMessage, String command, String arg) {
+    EmptyCommandException(String errorMessage, String command) {
         super(errorMessage);
         this.command = command;
-        this.arg = arg;
     }
 }

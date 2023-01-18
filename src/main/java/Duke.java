@@ -12,7 +12,7 @@ public class Duke {
         TaskList tl = new TaskList();
 
         // Always ready to receive input
-        while (true) {
+        while (sc.hasNextLine()) {
             String input = sc.nextLine();
             switch (input) {
                 case "bye":
@@ -48,8 +48,14 @@ public class Duke {
                         System.out.println("OK, I've marked this task as not done yet:\n" + tl.getTask(idx));
                     } else  {
                         // Add task
-                        Task t = tl.addTask(input);
-                        System.out.println("Got it. I've added this task:\n" + t + "\nNow you have " + tl.numberOfTasks() + (tl.numberOfTasks() > 1 ? " tasks" : " task") + " in the list");
+                        try {
+                            Task t = tl.addTask(input);
+                            System.out.println("Got it. I've added this task:\n" + t + "\nNow you have " + tl.numberOfTasks() + (tl.numberOfTasks() > 1 ? " tasks" : " task") + " in the list");
+                        } catch (CommandNotFoundException e) {
+                            System.out.println("☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
+                        } catch (EmptyCommandException e) {
+                            System.out.println("☹ OOPS!!! The description of a " + e.command + " cannot be empty.");
+                        }
                     }
             }
         }
