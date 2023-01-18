@@ -17,10 +17,10 @@ public class JeoBot {
             s = s.trim();
             String command = s.replaceAll("\\s", "").toLowerCase();
             // Check if first word of command is "mark" or "unmark", and if an integer follows after
-            if (command.contains("unmark") && command.substring(0, 6).equals("unmark")
+            if (command.contains("unmark") && command.startsWith("unmark")
                     && command.substring(6).matches("-?\\d+")) {
                 command = "unmark";
-            } else if (command.contains("mark") && command.substring(0, 4).equals("mark")
+            } else if (command.contains("mark") && command.startsWith("mark")
                     && command.substring(4).matches("-?\\d+")) {
                 command = "mark";
             }
@@ -66,8 +66,8 @@ public class JeoBot {
                 default:
                     Task task = new Task(s);
                     st.addTask(task);
+                    System.out.println(divider);
             }
-            System.out.println(divider);
         }
     }
 
