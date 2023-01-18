@@ -1,28 +1,24 @@
-import java.util.InputMismatchException;
-import java.util.NoSuchElementException;
-import java.util.Scanner;
+import java.util.*;
 
 public class Duke {
-    public static void main(String[] args) throws DukeException {
+    private static final ArrayList<Task> taskArrayList = new ArrayList<>();
+
+    public static void main(String[] args) {
 
         //Always greets user when Duke is run
         String greeting = "Hello! I'm Duke! \n What can I do for you? \n";
         System.out.println(greeting);
 
-        //placeholder array for task list
-        Task[] taskArray = new Task[100];
 
         //Use scanner to read input
         Scanner scanner = new Scanner(System.in);
-
-        int arrayIndex = 0; //keep track of tail end of array
 
         String keyWord = scanner.next();
 
         //6 cases: list, mark, unmark, todo, deadline, event
         //while loop checks for user exit input("bye")
         while (!keyWord.equals("bye")) {
-            int taskIndex = 0;
+            int taskIndex;
             Task currentTask;
             StringBuilder taskDescription;
             String tempScanner;
@@ -31,11 +27,11 @@ public class Duke {
                 System.out.println("\nHere are your tasks:\n");
                 int taskCount = 1;
                 //iterate through taskArray to print out list
-                for (Task t : taskArray) {
+                for (Task t : taskArrayList) {
                     if (t == null) {
                         break;
                     } else {
-                        System.out.println(String.valueOf(taskCount) + ". " + t.toString() + "\n");
+                        System.out.println(taskCount + ". " + t + "\n");
                         taskCount++;
                     }
                 }
@@ -47,11 +43,11 @@ public class Duke {
             case "mark":
                 try {
                     taskIndex = scanner.nextInt() - 1;
-                    currentTask = taskArray[taskIndex];
+                    currentTask = taskArrayList.get(taskIndex);
                     currentTask.markAsDone();
                     System.out.println("\n____________________________________________________________");
                     System.out.println("\nNice! I've marked this task as done:\n");
-                    System.out.println(currentTask.toString());
+                    System.out.println(currentTask);
                     System.out.println("\n____________________________________________________________\n");
                     keyWord = scanner.next();
                     break;
@@ -61,11 +57,11 @@ public class Duke {
             case "unmark":
                 try {
                     taskIndex = scanner.nextInt() - 1;
-                    currentTask = taskArray[taskIndex];
+                    currentTask = taskArrayList.get(taskIndex);
                     currentTask.markAsUndone();
                     System.out.println("\n____________________________________________________________");
                     System.out.println("\nOK, I've marked this task as not done yet:\n");
-                    System.out.println(currentTask.toString());
+                    System.out.println(currentTask);
                     System.out.println("\n____________________________________________________________\n");
                     keyWord = scanner.next();
                     break;
@@ -80,9 +76,8 @@ public class Duke {
                     } else {
                         taskDescription = new StringBuilder(tempScanner);
                         currentTask = new ToDo(taskDescription.toString());
-                        taskArray[arrayIndex] = currentTask;
-                        arrayIndex++;
-                        addTaskReply(currentTask, arrayIndex);
+                        taskArrayList.add(currentTask);
+                        addTaskReply(currentTask);
                         keyWord = scanner.next();
                         break;
                     }
@@ -94,26 +89,35 @@ public class Duke {
             case "deadline": // Deadline tasks have one date/time
                 tempScanner = scanner.nextLine();
                 try {
-                    if (tempScanner.isEmpty() || tempScanner.equals(" ")) {
+                    if (tempScanner.isEmpty()) {
                         throw new DukeException("The description of a deadline cannot be empty.");
-                    }
-                    taskDescription = new StringBuilder(tempScanner);
-                    tempScanner = scanner.next();
+                    } else {
+                        taskDescription = new StringBuilder();
+                        StringBuilder by = new StringBuilder();
+                        String[] arrOfStr = tempScanner.split(" ");
+                        boolean isDateTime = false;
+                        for (String s : arrOfStr) {
+                            if (s.isEmpty()) {
+                                continue;
+                            }
+                            if (s.equals("/by")) {
+                                isDateTime = true;
+                                continue;
+                            }
+                            if (isDateTime) {
+                                by.append(" ").append(s);
+                            } else {
+                                taskDescription.append(" ").append(s);
+                            }
+                        }
 
-                    //Using while loop, append scanner input until /by to taskDescription
-                    while (!tempScanner.equals("/by")) {
-                        taskDescription.append(" ").append(tempScanner);
-                        tempScanner = scanner.next();
+                        //Everything after /by is the deadline
+                        currentTask = new Deadline(taskDescription.toString(),by.toString());
+                        taskArrayList.add(currentTask);
+                        addTaskReply(currentTask);
+                        keyWord = scanner.next();
+                        break;
                     }
-
-                    //Everything after /by is the deadline
-                    String by = scanner.nextLine();
-                    currentTask = new Deadline(taskDescription.toString(),by);
-                    taskArray[arrayIndex] = currentTask;
-                    arrayIndex++;
-                    addTaskReply(currentTask, arrayIndex);
-                    keyWord = scanner.next();
-                    break;
                 } catch (DukeException e) {
                     System.out.println(e.toString());
                     keyWord = scanner.next();
@@ -142,9 +146,8 @@ public class Duke {
                 //Everything after /to is the end timing of event
                 String to = scanner.nextLine();
                 currentTask = new Event(taskDescription.toString(), from.toString(), to);
-                taskArray[arrayIndex] = currentTask;
-                arrayIndex++;
-                addTaskReply(currentTask, arrayIndex);
+                taskArrayList.add(currentTask);
+                addTaskReply(currentTask);
                 keyWord = scanner.next();
                 break;
             default:
@@ -159,10 +162,10 @@ public class Duke {
     }
 
     //helper method that prints the reply to each added task
-    public static void addTaskReply(Task currentTask, int arrayIndex) {
+    public static void addTaskReply(Task currentTask) {
         System.out.println("\n____________________________________________________________");
         System.out.println("\nGot it. I've added this task: " + currentTask.toString());
-        System.out.println("\nNow you have " + String.valueOf(arrayIndex) + " tasks in the list.");
+        System.out.println("\nNow you have " + taskArrayList.size() + " tasks in the list.");
         System.out.println("\n____________________________________________________________\n");
     }
 
