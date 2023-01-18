@@ -41,47 +41,95 @@ public class Duke {
                     break;
 
                 case "todo":
-                    System.out.println("Got it. I've added this task:");
-                    toAdd = new ToDo(userInSplit[1]);
-                    list.add(toAdd);
-                    System.out.println(toAdd);
-                    System.out.println(String.format("Now you have %d tasks in the list.", list.size()));
+                    if (userInSplit.length > 1) {
+                        System.out.println("Got it. I've added this task:");
+                        toAdd = new ToDo(userInSplit[1]);
+                        list.add(toAdd);
+                        System.out.println(toAdd);
+                        System.out.println(String.format("Now you have %d tasks in the list.", list.size()));
+                    } else {
+                        System.out.println(String.format("☹ OOPS!!! The description of %s cannot be empty.","todo"));
+                    }
+
                     break;
 
                 case "deadline":
-                    System.out.println("Got it. I've added this task:");
-                    userInSplit = userInSplit[1].split("/by", 2);
-                    toAdd = new Deadline(userInSplit[0], userInSplit[1]);
-                    list.add(toAdd);
-                    System.out.println(toAdd);
-                    System.out.println(String.format("Now you have %d tasks in the list.", list.size()));
+                    if (userInSplit.length > 1) {
+                        userInSplit = userInSplit[1].split("/by", 2);
+
+                        if (userInSplit.length > 1 && userInSplit[1].length() > 0) {
+                            System.out.println("Got it. I've added this task:");
+                            toAdd = new Deadline(userInSplit[0], userInSplit[1]);
+                            list.add(toAdd);
+                            System.out.println(toAdd);
+                            System.out.println(String.format("Now you have %d tasks in the list.", list.size()));
+                        } else {
+                            System.out.println(String.format("☹ Error!!!! Usage: %s <task> /by <date>","deadline"));
+                        }
+
+                    } else {
+                        System.out.println(String.format("☹ OOPS!!! The description of %s cannot be empty.","deadline"));
+                    }
                     break;
 
                 case "event":
-                    System.out.println("Got it. I've added this task:");
-                    userInSplit = userInSplit[1].split("/from", 2);;
-                    userIn = userInSplit[0];
-                    userInSplit = userInSplit[1].split("/to", 2);
-                    toAdd = new Event(userIn, userInSplit[0], userInSplit[1]);
-                    list.add(toAdd);
-                    System.out.println(toAdd);
-                    System.out.println(String.format("Now you have %d tasks in the list.", list.size()));
+                    if (userInSplit.length > 1) {
+                        System.out.println("Got it. I've added this task:");
+                        userInSplit = userInSplit[1].split("/from", 2);;
+
+                        if (userInSplit.length > 1 && userInSplit[1].length() > 0) {
+                            userIn = userInSplit[0];
+                            userInSplit = userInSplit[1].split("/to", 2);
+                            if (userInSplit.length > 1 && userInSplit[1].length() > 0) {
+                                toAdd = new Event(userIn, userInSplit[0], userInSplit[1]);
+                                list.add(toAdd);
+                                System.out.println(toAdd);
+                                System.out.println(String.format("Now you have %d tasks in the list.", list.size()));
+                            } else {
+                                System.out.println(String.format("☹ Error!!!! Usage: %s <task> /from <date> /to <date>", "event"));
+                            }
+                        } else {
+                            System.out.println(String.format("☹ Error!!!! Usage: %s <task> /from <date> /to <date>","event"));
+                        }
+
+                    } else {
+                        System.out.println(String.format("☹ OOPS!!! The description of %s cannot be empty.","event"));
+                    }
                     break;
 
                 case "mark" :
-                    userInTemp = Integer.parseInt(userInSplit[1]) - 1;
-                    // User input expect index counting from 1
-                    list.get((Integer) userInTemp).setStatus(true);
-                    System.out.println("Nice! I've marked this task as done:");
-                    System.out.println(list.get((Integer) userInTemp));
+                    if (userInSplit.length > 1) {
+                        userInTemp = Integer.parseInt(userInSplit[1]) - 1;
+                        // User input expect index counting from 1
+                        list.get((Integer) userInTemp).setStatus(true);
+                        System.out.println("Nice! I've marked this task as done:");
+                        System.out.println(list.get((Integer) userInTemp));
+                    } else {
+                        System.out.println(String.format("☹ OOPS!!! The entry to %s cannot be empty.","mark"));
+                    }
                     break;
 
                 case "unmark":
-                    userInTemp = Integer.parseInt(userInSplit[1]) - 1;
-                    list.get((Integer) userInTemp).setStatus(false);
-                    System.out.println("OK, I've marked this task as not done yet:");
-                    System.out.println(list.get((Integer) userInTemp));
+                    if (userInSplit.length > 1) {
+                        userInTemp = Integer.parseInt(userInSplit[1]) - 1;
+                        list.get((Integer) userInTemp).setStatus(false);
+                        System.out.println("OK, I've marked this task as not done yet:");
+                        System.out.println(list.get((Integer) userInTemp));
+                    } else {
+                        System.out.println(String.format("☹ OOPS!!! The entry to %s cannot be empty.","mark"));
+                    }
                     break;
+
+//                case "delete":
+//                    if (userInSplit.length > 1) {
+//                        userInTemp = Integer.parseInt(userInSplit[1]) - 1;
+//                        list.get((Integer) userInTemp).setStatus(false);
+//                        System.out.println("OK, I've marked this task as not done yet:");
+//                        System.out.println(list.get((Integer) userInTemp));
+//                    } else {
+//                        System.out.println(String.format("☹ OOPS!!! The entry to %s cannot be empty.","mark"));
+//                    }
+//                    break;
 
                 case "bye" :
                     QUIT = true;
@@ -89,8 +137,9 @@ public class Duke {
                     break;
 
                 default:
-//                    list.add(new Task(userIn));
-//                    System.out.println(String.format("added: " + userIn));
+                    if (!(userIn.isEmpty())) {
+                        System.out.println(String.format("☹ OOPS!!! I'm sorry, but I don't know what `%s` means :-(", userIn));
+                    }
                     break;
             }
             System.out.println("____________________________________________________________");
