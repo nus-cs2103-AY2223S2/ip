@@ -4,6 +4,7 @@ public class Duke {
     public static void main(String[] args) {
         //init
         Scanner sc = new Scanner(System.in);
+        todoList ls = new todoList();
 
         //welcome message
         String logo = " ____        _        \n"
@@ -13,7 +14,7 @@ public class Duke {
                 + "|____/ \\__,_|_|\\_\\___|\n";
         System.out.println("Hello from\n" + logo);
         Duke.welcomeMsg();
-        Duke.input(sc);
+        Duke.input(sc, ls);
     }
 
     private static void welcomeMsg() {
@@ -26,7 +27,7 @@ public class Duke {
         System.out.println(divider + "Goodbye, feel free to call the Duke again whenever you need.\n" + divider);
     }
 
-    private static void input(Scanner sc) {
+    private static void input(Scanner sc, todoList ls) {
         String divider = "@~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~@\n";
         while (true) {
             String input = sc.nextLine();
@@ -34,7 +35,12 @@ public class Duke {
                 Duke.endMsg();
                 break;
             }
-            System.out.println(divider + input + "\n" + divider);
+            if (input.equals("list")) {
+                System.out.println(ls);
+                continue;
+            }
+            ls.add(input);
+            System.out.println(divider + "added: " + input + "\n" + divider);
         }
     }
 }
