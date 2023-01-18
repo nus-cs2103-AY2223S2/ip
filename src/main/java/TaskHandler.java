@@ -1,33 +1,20 @@
 import exceptions.EmptyContentException;
+import exceptions.InvalidTaskAccessException;
+
+import java.util.List;
 
 public class TaskHandler {
-    private List taskList;
-    private Task[] content;
-    public TaskHandler(List taskList) {
-        this.taskList = taskList;
+    private List<Task> content;
+    public TaskHandler(TaskList taskList) {
         this.content = taskList.getContent();
     }
-    private int counter = 0;
     private static final String HEADER = "Got it. I've added this task:";
-    private String FOOTER = String.format("Now you have %d tasks in the list.", counter);
-
-    public String add(String input) {
-        if (input.isEmpty()) {
-            return "Please enter a command.";
-        } else {
-            Task item = new Task(input);
-            content[counter] = item;
-            counter++;
-            return HEADER + "\n" + item + "\n" + FOOTER;
-
-        }
-    }
 
     public String display() {
         String allElements = "";
-        for (int i = 0; i < 101; i++) {
-            if (content[i] != null) {
-                allElements = allElements + (i + 1) + ". " + content[i].toString() + "\n";
+        for (int i = 0; i < content.size(); i++) {
+            if (! content.isEmpty()) {
+                allElements = allElements + (i + 1) + ". " + content.get(i).toString() + "\n";
             } else {
                 break;
             }
@@ -43,9 +30,9 @@ public class TaskHandler {
         String num = input.split(" ")[1];
         int index = Integer.parseInt(num) - 1;
         int listIndex = index + 1;
-        if (content[index] != null) {
-            content[index].setDone();
-            return "Nice! I've marked this task as done: " + "\n" + listIndex + ". " + content[index].toString();
+        if (! content.isEmpty()) {
+            content.get(index).setDone();
+            return "Nice! I've marked this task as done: " + "\n" + listIndex + ". " + content.get(index).toString();
         } else {
             return "No such task.";
         }
@@ -55,12 +42,12 @@ public class TaskHandler {
         String num = input.split(" ")[1];
         int index = Integer.parseInt(num) - 1;
         int listIndex = index + 1;
-        if (content[index] == null) {
+        if (content.isEmpty()) {
             return "No such task.";
-        } else if (content[index] != null && content[index].isDone) {
-            content[index].setUndone();
-            return "Nice! I've marked this task as undone: " + "\n" + listIndex + 1 + ". " + content[index].toString();
-        } else if(!content[index].isDone) {
+        } else if (! content.isEmpty() && content.get(index).isDone) {
+            content.get(index).setUndone();
+            return "Nice! I've marked this task as undone: " + "\n" + (listIndex) + ". " + content.get(index).toString();
+        } else if(!content.get(index).isDone) {
             return "This task is already marked undone. ";
         } else {
             return "No such task.";
@@ -81,9 +68,8 @@ public class TaskHandler {
             throw new EmptyContentException("event");
         }
         Event newEvent = new Event(item, startTime, endTime);
-        content[counter] = newEvent;
-        counter++;
-        return HEADER + "\n" + newEvent + "\n" + String.format("Now you have %d tasks in the list.", counter) + "\n";
+        content.add(newEvent);
+        return HEADER + "\n" + newEvent + "\n" + String.format("Now you have %d tasks in the list.", content.size()) + "\n";
     }
 
     public String todoHandler(String input) throws EmptyContentException {
@@ -98,9 +84,8 @@ public class TaskHandler {
         }
 
         Todo newTodo = new Todo(item);
-        content[counter] = newTodo;
-        counter++;
-        return HEADER + "\n" + newTodo + "\n" + String.format("Now you have %d tasks in the list.", counter)+ "\n";
+        content.add(newTodo);
+        return HEADER + "\n" + newTodo + "\n" + String.format("Now you have %d tasks in the list.", content.size()) + "\n";
 
     }
     public String deadlineHandler(String input) throws EmptyContentException {
@@ -117,9 +102,27 @@ public class TaskHandler {
         }
 
         Deadline newDeadline = new Deadline(item, deadline);
-        content[counter] = newDeadline;
-        counter++;
-        return HEADER + "\n" + newDeadline + "\n" + String.format("Now you have %d tasks in the list.", counter)+ "\n";
+        content.add(newDeadline);
+        return HEADER + "\n" + newDeadline + "\n" + String.format("Now you have %d tasks in the list.", content.size()) + "\n";
+
+    }
+
+    public String deleteHandler(String input) throws EmptyContentException, InvalidTaskAccessException {
+        if (input.length() < 7) {
+            throw new EmptyContentException("delete");
+        }
+        String[] splitCommand = input.split(" ", 2);
+        int index = Integer.parseInt(splitCommand[1]) - 1;
+        if (index >= content.size() || index < 1) {
+            throw new InvalidTaskAccessException();
+        } else {
+            String taskContent = content.get(index).toString();
+            content.remove(index);
+            return "Noted. I've removed this task:" + "\n" + taskContent + "\n" +
+                    String.format("Now you have %d tasks in the list.", content.size()) + "\n";
+        }
+
+
 
     }
 

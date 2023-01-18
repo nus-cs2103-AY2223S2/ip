@@ -3,7 +3,7 @@ import exceptions.UnknownInputException;
 
 public class Duke {
     UIText ui = new UIText();
-    List list = new List();
+    TaskList taskList = new TaskList();
     public static void main(String[] args) {
         new Duke().run();
 
@@ -11,7 +11,7 @@ public class Duke {
 
     public void run() {
         boolean isClosed = false;
-        TaskHandler handler = new TaskHandler(list);
+        TaskHandler handler = new TaskHandler(taskList);
 
         System.out.println(ui.greet());
         while (!isClosed) {
@@ -33,6 +33,8 @@ public class Duke {
                     System.out.println(handler.todoHandler(input));
                 } else if (input.startsWith("deadline")) {
                     System.out.println(handler.deadlineHandler(input));
+                } else if (input.startsWith("delete")) {
+                    System.out.println(handler.deleteHandler(input));
                 } else {
                     throw new UnknownInputException();
                 }
