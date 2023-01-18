@@ -8,7 +8,7 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.Scanner;
 
-public class TaskListSaver {
+public class Storage {
     public static final String DATA_PATH = "data";
     public static final String TASKS_PATH = DATA_PATH + "/tasks.txt";
 

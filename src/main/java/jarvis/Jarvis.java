@@ -7,26 +7,32 @@ import jarvis.exception.TaskIOException;
 import java.util.Scanner;
 
 public class Jarvis {
-    public static final String BOT_NAME = Jarvis.class.getSimpleName();
-    public static final String LOGO = "     _   _    ______     _____ ____  \n" +
+    private static final String BOT_NAME = Jarvis.class.getSimpleName();
+    private static final String LOGO = "     _   _    ______     _____ ____  \n" +
             "    | | / \\  |  _ \\ \\   / /_ _/ ___| \n" +
             " _  | |/ _ \\ | |_) \\ \\ / / | |\\___ \\ \n" +
             "| |_| / ___ \\|  _ < \\ V /  | | ___) |\n" +
             " \\___/_/   \\_\\_| \\_\\ \\_/  |___|____/\n";
 
-    public static void main(String[] args) {
-        Printer printer = new Printer(BOT_NAME);
-        TaskListSaver taskListSaver = new TaskListSaver();
-        TaskList taskList = new TaskList(taskListSaver.readTasks());
+    private final Storage storage;
+    private final Printer printer;
+    private final TaskList taskList;
 
+    public Jarvis() {
+        this.storage = new Storage();
+        this.printer = new Printer(BOT_NAME);
+        this.taskList = new TaskList(storage.readTasks());
+    }
+
+    public void run() {
         System.out.println(LOGO);
-        printer.printStandardResponse(Printer.Response.INTRO);
+        this.printer.printStandardResponse(Printer.Response.INTRO);
 
         Scanner scanner = new Scanner(System.in);
         while (scanner.hasNextLine()) {
             String line = scanner.nextLine();
             if (line.isBlank()) {
-                printer.printUserCaret();
+                this.printer.printUserCaret();
                 continue;
             }
 
@@ -34,42 +40,45 @@ public class Jarvis {
             try {
                 command = new Command(new Scanner(line));
             } catch (InvalidActionException e) {
-                printer.printStandardResponse(Printer.Response.CONFUSED);
+                this.printer.printStandardResponse(Printer.Response.CONFUSED);
                 continue;
             }
 
             if (command.hasAction(Command.Action.BYE)) {
                 break;
             } else if (command.hasAction(Command.Action.LIST)) {
-                printer.printResponse(taskList.getTasksForPrint());
+                this.printer.printResponse(this.taskList.getTasksForPrint());
             } else {
                 try {
                     if (command.hasAction(Command.Action.LIST_FILTER)) {
-                        printer.printResponse(taskList.getTasksForPrint(command.toFilter()));
+                        this.printer.printResponse(this.taskList.getTasksForPrint(command.toFilter()));
                     } else if (command.hasAction(Command.Action.MARK_DONE, Command.Action.MARK_UNDONE)) {
-                        printer.printResponse(taskList.setTaskDone(command));
+                        this.printer.printResponse(this.taskList.setTaskDone(command));
                     } else if (command.hasAction(Command.Action.DELETE_TASK)) {
-                        printer.printResponse(taskList.deleteTask(command));
+                        this.printer.printResponse(this.taskList.deleteTask(command));
                     } else if (command.hasAction(Command.Action.CREATE_TODO)) {
-                        printer.printResponse(taskList.addTask(command.toToDoTask()));
+                        this.printer.printResponse(this.taskList.addTask(command.toToDoTask()));
                     } else if (command.hasAction(Command.Action.CREATE_DEADLINE)) {
-                        printer.printResponse(taskList.addTask(command.toDeadlineTask()));
+                        this.printer.printResponse(this.taskList.addTask(command.toDeadlineTask()));
                     } else if (command.hasAction(Command.Action.CREATE_EVENT)) {
-                        printer.printResponse(taskList.addTask(command.toEventTask()));
+                        this.printer.printResponse(this.taskList.addTask(command.toEventTask()));
                     }
                 } catch (CommandParseException e) {
-                    printer.printErrorResponse(e.getFriendlyMessage());
+                    this.printer.printErrorResponse(e.getFriendlyMessage());
                 }
             }
         }
-
         scanner.close();
 
         try {
-            taskListSaver.saveTasks(taskList.getTasks());
+            this.storage.saveTasks(this.taskList.getTasks());
         } catch (TaskIOException e) {
-            printer.printErrorResponse(e.getFriendlyMessage());
+            this.printer.printErrorResponse(e.getFriendlyMessage());
         }
-        printer.printStandardResponse(Printer.Response.GOODBYE);
+        this.printer.printStandardResponse(Printer.Response.GOODBYE);
+    }
+
+    public static void main(String[] args) {
+        new Jarvis().run();
     }
 }

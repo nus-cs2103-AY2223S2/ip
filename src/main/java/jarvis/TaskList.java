@@ -80,7 +80,7 @@ public class TaskList {
 
     /**
      * Marks a task as done or undone as given.
-     * @param index 1-based index of the jarvis.task.
+     * @param index 1-based index of the task.
      * @param isDone Whether the task is marked as done.
      * @return List of response lines.
      */
