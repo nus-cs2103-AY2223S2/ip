@@ -1,2 +1,18 @@
+list
 todo do quiz
+list
+deadline print hello world /by tonight
+event career fair /from 11am /to 3pm
+mark 1
+mark 2
+list
+unmark 2
+event meet friends /from sat 10am /to 4pm
+list
+mark 4
+mark 4
+list
+mark 3
+mark 2
+list
 bye
