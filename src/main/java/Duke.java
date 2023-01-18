@@ -11,13 +11,12 @@ public class Duke {
                 + "|____/ \\__,_|_|\\_\\___|\n";
         System.out.println("Hello from\n" + logo);
         System.out.println("Hello! I'm Duke\nWhat can I do for you?");
+        Scanner reader = new Scanner(System.in);  // inside vs outside?
 
-        while(true){
-            Scanner reader = new Scanner(System.in);  // Reading from System.in
-            System.out.println("Enter a Command!: ");
+        while(true) {
+
             String s = reader.nextLine();
             String[] spStg = s.split(" ", 2);
-
             if(spStg[0].equals("bye")) {
                 System.out.println("Bye. Hope to see you again soon!");
                 break;
