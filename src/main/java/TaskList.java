@@ -76,6 +76,10 @@ public class TaskList {
         StringBuilder taskList = new StringBuilder();
 
         for (int i = 1; i <= this.tasks.size(); i++) {
+            if (i == this.tasks.size()) {
+                taskList.append(i + ": " + this.tasks.get(i - 1));
+                break;
+            }
             taskList.append(i + ": " + this.tasks.get(i - 1) + "\n");
         }
 
