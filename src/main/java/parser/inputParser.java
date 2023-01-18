@@ -9,7 +9,7 @@ import response.*;
  */
 public class InputParser {
 
-    private enum Types {LIST, MARK, UNMARK, TODO, DEADLINE, EVENT}
+    private enum Types {LIST, MARK, UNMARK, TODO, DEADLINE, EVENT, DELETE}
 
     /**
      * Represents the user input
@@ -46,6 +46,8 @@ public class InputParser {
                 return new DeadlineResponse(this.inputContent);
             case "EVENT":
                 return new EventResponse(this.inputContent);
+            case "DELETE":
+                return new DeleteResponse(this.inputContent);
             default:
                 throw new MissingArgumentException(
                         "I'm sorry, but I don't know what that means :-(" +

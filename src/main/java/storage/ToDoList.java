@@ -82,4 +82,19 @@ public class ToDoList {
     public int count() {
         return toDoList.size();
     }
+
+    /**
+     * Function to delete a task in the to do list
+     * @param i The index of the task to delete
+     * @return Returns the deleted task for printing
+     */
+    public Task delete(Integer i) {
+        try {
+            Task curr = this.toDoList.get(i - 1);
+            this.toDoList.remove(curr);
+            return curr;
+        } catch (IndexOutOfBoundsException err) {
+            throw new InvalidArgumentException("Make sure you enter an index of a task that exists in the list!");
+        }
+    }
 }

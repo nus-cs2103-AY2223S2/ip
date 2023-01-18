@@ -17,7 +17,7 @@ public class UnMarkResponse extends Response {
         try {
             this.idxToMark = Integer.parseInt(inputContent);
         } catch (NumberFormatException e) {
-            throw new InvalidArgumentException("Enter a number after mark/unmark!");
+            throw new InvalidArgumentException("Enter a number after unmark!");
         }
     }
 
