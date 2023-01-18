@@ -1,3 +1,5 @@
+import java.util.Objects;
+
 public class Deadline extends Task {
 
     protected String deadline;

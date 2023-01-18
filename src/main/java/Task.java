@@ -2,7 +2,7 @@ public abstract class Task {
     protected String description;
     protected boolean isDone;
     protected String symbol;
-    public Task(String description) {
+    public Task(String description)  {
         this.description = description;
         this.isDone = false;
     }
@@ -29,4 +29,5 @@ public abstract class Task {
     public String toString() {
         return "[" + this.symbol + "][" + this.getStatusIcon() +"] " + this.description;
     }
+
 }

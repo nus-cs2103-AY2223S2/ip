@@ -1,8 +1,4 @@
-import java.util.Arrays;
-import java.util.List;
-import java.util.ArrayList;
-import java.util.Map;
-import java.util.HashMap;
+import java.util.*;
 
 public class ChatBot {
     private enum Tasks { TODO, DEADLINE, EVENT }
@@ -64,24 +60,46 @@ public class ChatBot {
     private String addTask(Tasks t, Map<String,String> args) throws Exception {
         Task item;
         String desc;
-        switch (t) {
-            case TODO:
-                desc = args.get("todo");
-                item = new ToDo(desc);
-                break;
-            case DEADLINE:
-                desc = args.get("deadline");
-                String by = args.get("by");
-                item = new Deadline(desc, by);
-                break;
-            case EVENT:
-                desc = args.get("event");
-                String from = args.get("from");
-                String to = args.get("to");
-                item = new Event(desc, from, to);
-                break;
-            default:
-                throw new Exception("Invalid task type");
+        try {
+            switch (t) {
+                case TODO:
+                    desc = args.get("todo");
+                    if (Objects.isNull(desc)|| desc.equals("") ) {
+                        throw new InvalidInputException("eh ur description is blank");
+                    }
+                    item = new ToDo(desc);
+                    break;
+                case DEADLINE:
+                    desc = args.get("deadline");
+                    if (Objects.isNull(desc) || desc.equals("")) {
+                        throw new InvalidInputException("eh ur description is blank");
+                    }
+                    String by = args.get("by");
+                    if ( Objects.isNull(by) || by.equals("")) {
+                        throw new InvalidInputException("eh need to specify ur deadline by when - deadline <desc> /by <when>");
+                    }
+
+                    item = new Deadline(desc, by);
+                    break;
+                case EVENT:
+                    desc = args.get("event");
+                    if ( Objects.isNull(desc) || desc.equals("")) {
+                        throw new InvalidInputException("eh ur description is blank");
+                    }
+
+                    String from = args.get("from");
+                    String to = args.get("to");
+                    if (Objects.isNull(from) ||  Objects.isNull(to) || from.equals("") || to.equals("")) {
+                        throw new InvalidInputException("eh need to specify ur event from when to when - event <desc> /from <when> /to <when>");
+                    }
+
+                    item = new Event(desc, from, to);
+                    break;
+                default:
+                    throw new Exception("Invalid task type");
+            }
+        } catch (InvalidInputException e) {
+            return e.getMessage();
         }
         this.list.add(item);
         return ("Item added!\n" + indent(item.toString()) +"\nYou now have " + this.list.size() +" tasks.");
