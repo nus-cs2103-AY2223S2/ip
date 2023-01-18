@@ -22,3 +22,4 @@ delete
 delete 1
 delete 0
 list
+bye
