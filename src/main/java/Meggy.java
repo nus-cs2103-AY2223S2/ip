@@ -1,6 +1,7 @@
 import java.io.InputStream;
 import java.io.OutputStream;
 import java.io.PrintStream;
+import java.util.ArrayList;
 import java.util.Map;
 import java.util.Scanner;
 import java.util.function.Function;
@@ -13,15 +14,24 @@ public class Meggy implements Runnable {
      * What to do when reaching different commands. Keys: non-null strings. Values: Non-null function that accepts
      * unparsed string arguments and return string answers.
      */
-    public final static Map<String, Function<String, String>> cmdJob = Map.of(
-            Resource.exitCmd, s -> Resource.farewell
-    );
+    public final Map<String, Function<String, String>> cmdJob;
     /**
-     * What to do when the command is unknown.
+     * What to do when the command is unknown. Currently: add to list
      */
-    public final static Function<String, String> unknownCmdBehavior = Function.identity();
+    public final Function<String, String> unknownCmdBehavior;
     private final Scanner in;
     private final PrintStream out;
+    /**
+     * List of string items. Allow dupes.
+     * */
+    private final ArrayList<String> items;
+    private final String listItems(){
+        final StringBuilder ans=new StringBuilder();
+        int i=0;
+        for(String item:items)
+            ans.append(Resource.idxFmt(i++)).append(item).append('\n');
+        return ans.toString();
+    }
 
     /**
      * @param in  Non-null input stream
@@ -34,12 +44,22 @@ public class Meggy implements Runnable {
             throw new NullPointerException("OutputStream is null");
         this.in = new Scanner(in);
         this.out = out instanceof PrintStream ? (PrintStream) out : new PrintStream(out);
+        items=new ArrayList<>();
+        cmdJob=Map.of(
+                Resource.cmdExit, s -> Resource.farewell,
+                Resource.cmdList, s -> listItems()
+        );
+        unknownCmdBehavior= s -> {
+            items.add(s);
+            return Resource.notifAdd+s;
+        };
     }
 
     public static void main(String[] args) {
         new Meggy(System.in, System.out).run();
     }
 
+    /**Interact with user using designated io streams*/
     @Override
     public void run() {
         // Front page
@@ -61,7 +81,7 @@ public class Meggy implements Runnable {
             out.print(Resource.msgHd);
             out.println(job.apply(args));
             out.print(Resource.msgTl);
-            if (Resource.exitCmd.equals(cmd))
+            if (Resource.cmdExit.equals(cmd))
                 return;
         }
         out.println("REACHED END OF INPUT WITHOUT 'BYE' COMMAND");
