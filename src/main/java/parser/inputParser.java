@@ -104,17 +104,10 @@ public class InputParser {
         if (arrStr.length == 2) { // user input is more than one word
             try {
                 String currType = arrStr[0].toUpperCase();
-                Types.valueOf(currType);
-
-                if (currType.equals("MARK") || currType.equals("UNMARK")) {
-                    Integer.parseInt(arrStr[1]);
-                }
-
+                Types.valueOf(currType); // checking if currType exists in Types
                 this.inputType = currType;
                 this.inputContent = arrStr[1];
-            } catch (NumberFormatException e) {
-                throw new InvalidArgumentException("Enter a number after mark/unmark!");
-            } catch (IllegalArgumentException e) {
+            } catch  (IllegalArgumentException e) {
                 throw new InvalidArgumentException("Remember to specify the type of request in your input!");
             }
         } else if (arrStr.length == 1) { // user input is only one word

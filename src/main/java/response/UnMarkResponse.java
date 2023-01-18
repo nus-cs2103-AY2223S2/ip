@@ -1,5 +1,6 @@
 package response;
 
+import exception.InvalidArgumentException;
 import storage.ToDoList;
 import storage.Task;
 
@@ -13,7 +14,11 @@ public class UnMarkResponse extends Response {
     private Integer idxToMark;
 
     public UnMarkResponse(String inputContent) {
-        this.idxToMark = Integer.parseInt(inputContent);
+        try {
+            this.idxToMark = Integer.parseInt(inputContent);
+        } catch (NumberFormatException e) {
+            throw new InvalidArgumentException("Enter a number after mark/unmark!");
+        }
     }
 
     /**
