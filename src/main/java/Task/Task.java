@@ -1,7 +1,9 @@
+package Task;
+
 public class Task {
 
-    private String task;
-    private boolean completed;
+    protected String task;
+    protected boolean completed;
 
     /**
      * Constructor to create new task
