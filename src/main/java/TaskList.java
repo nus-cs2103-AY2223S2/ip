@@ -13,6 +13,10 @@ public class TaskList {
         this.tasks = new ArrayList<>();
     }
 
+    public TaskList(List<Task> tasks) {
+        this.tasks = new ArrayList<>(tasks);
+    }
+
     /**
      * Adds a task to the list.
      * @param task Task to add.
@@ -44,6 +48,10 @@ public class TaskList {
         }
         Task task = this.tasks.remove(index - 1);
         return List.of(String.format("Got it, I've removed task %d.", index), "\t" + task);
+    }
+
+    public List<Task> getTasks() {
+        return this.tasks;
     }
 
     /**
