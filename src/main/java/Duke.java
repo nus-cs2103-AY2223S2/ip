@@ -17,15 +17,18 @@ public class Duke {
 
         String keyWord = scanner.next();
 
-        //4 cases: list, mark, unmark, add task(default)
+        //6 cases: list, mark, unmark, todo, deadline, event
         //while loop checks for user exit input("bye")
         while (!keyWord.equals("bye")) {
             int taskIndex;
             Task currentTask;
+            StringBuilder taskDescription;
+            String tempScanner;
             switch (keyWord) {
             case "list":
+                System.out.println("\nHere are your tasks:\n");
                 int taskCount = 1;
-                //iterate through taskarray to print out list
+                //iterate through taskArray to print out list
                 for (Task t : taskArray) {
                     if (t == null) {
                         break;
@@ -52,18 +55,73 @@ public class Duke {
                 System.out.println(currentTask.toString() + "\n");
                 keyWord = scanner.next();
                 break;
-            default:
-                //no keyword so append rest of the line to keyword and add as new task
-                String userTask = keyWord + scanner.nextLine();
-                currentTask = new Task(userTask);
+            case "todo": // ToDo tasks have no date/time attached
+                taskDescription = new StringBuilder(scanner.nextLine());
+                currentTask = new ToDo(taskDescription.toString());
                 taskArray[arrayIndex] = currentTask;
                 arrayIndex++;
-                System.out.println("\nadded: " + currentTask.toString() + "\n");
+                addTaskReply(currentTask, arrayIndex);
                 keyWord = scanner.next();
+                break;
+            case "deadline": // Deadline tasks have one date/time
+                taskDescription = new StringBuilder();
+                tempScanner = scanner.next();
+
+                //Using while loop, append scanner input until /by to taskDescription
+                while (!tempScanner.equals("/by")) {
+                    taskDescription.append(" ").append(tempScanner);
+                    tempScanner = scanner.next();
+                }
+
+                //Everything after /by is the deadline
+                String by = scanner.nextLine();
+                currentTask = new Deadline(taskDescription.toString(),by);
+                taskArray[arrayIndex] = currentTask;
+                arrayIndex++;
+                addTaskReply(currentTask, arrayIndex);
+                keyWord = scanner.next();
+                break;
+            case "event": // Event tasks have two date/times: from and to
+                taskDescription = new StringBuilder();
+                tempScanner = scanner.next();
+                StringBuilder from = new StringBuilder();
+
+                //Using while loop, append scanner input until /from to taskDescription
+                while (!tempScanner.equals("/from")) {
+                    taskDescription.append(" ").append(tempScanner);
+                    tempScanner = scanner.next();
+                }
+
+                //Ignore /from
+                tempScanner = scanner.next();
+
+                //Using while loop, append scanner input until '/to' to from
+                while (!tempScanner.equals("/to")) {
+                    from.append(" ").append(tempScanner);
+                    tempScanner = scanner.next();
+                }
+
+                //Everything after /to is the end timing of event
+                String to = scanner.nextLine();
+                currentTask = new Event(taskDescription.toString(), from.toString(), to);
+                taskArray[arrayIndex] = currentTask;
+                arrayIndex++;
+                addTaskReply(currentTask, arrayIndex);
+                keyWord = scanner.next();
+                break;
+            default:
+                //if user input does not match any case at all
+                System.out.println("Input not recognized.");
             }
         }
 
-        //Exit
+        //Exit after user inputs "bye"
         System.out.println("\nBye. Hope to see you again soon!\n");
+    }
+
+    //helper method that prints the reply to each added task
+    public static void addTaskReply(Task currentTask, int arrayIndex) {
+        System.out.println("\nGot it. I've added this task: " + currentTask.toString() + "\n");
+        System.out.println("\nNow you have " + String.valueOf(arrayIndex) + " tasks in the list.\n");
     }
 }
