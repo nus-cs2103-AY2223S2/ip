@@ -11,14 +11,27 @@ public class Duke {
 
             do {
                 input = sc.nextLine();
+                String[] inputArr = input.split(" ");
 
-                switch(input){
+                switch(inputArr[0]){
                     case("bye"):
                         break;
                     case("list"):
+                        System.out.println("Your current tracked tasks: ");
                         for(int i = 0; i < tasks.size(); i++){
-                            System.out.println((i + 1) + ". " + tasks.get(i).desc);
+                            Task curr = tasks.get(i);
+                            System.out.println((i + 1) + ".[" + curr.getDoness() + "] " + curr.desc);
                         }
+                        break;
+                    case("mark"):
+                        int index = Integer.parseInt(inputArr[1]) - 1;
+                        tasks.get(index).markDone();
+                        System.out.println("Marked as donezo:\n\t [X] " + tasks.get(index).desc);
+                        break;
+                    case("unmark"):
+                        index = Integer.parseInt(inputArr[1]) - 1;
+                        tasks.get(index).markUndone();
+                        System.out.println("Not donezo anymore:\n\t [X] " + tasks.get(index).desc);
                         break;
                     default:
                         tasks.add(new Task(input, false));

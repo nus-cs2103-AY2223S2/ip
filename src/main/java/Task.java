@@ -10,4 +10,12 @@ public class Task {
     void markDone(){
         this.done = true;
     }
+
+    void markUndone(){
+        this.done = false;
+    }
+
+    String getDoness(){
+        return done ? "X" : " ";
+    }
 }
