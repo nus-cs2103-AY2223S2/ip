@@ -1,11 +1,42 @@
+import services.CommandHelper;
+import services.Parser;
+import services.Prompt;
+
+import java.util.Scanner;
+
 public class Tach {
-    public static void main(String[] args) {
-        String logo = "___________             .__     \n"
-                + "\\__    ___/____    ____ |  |__  \n"
-                + "  |    |  \\__  \\ _/ ___\\|  |  \\ \n"
-                + "  |    |   / __ \\\\  \\___|   Y  \\\n"
-                + "  |____|  (____  /\\___  >___|  /\n"
-                + "               \\/     \\/     \\/ \n";
+    private static final String logo = "___________             .__     \n"
+            + "\\__    ___/____    ____ |  |__  \n"
+            + "  |    |  \\__  \\ _/ ___\\|  |  \\ \n"
+            + "  |    |   / __ \\\\  \\___|   Y  \\\n"
+            + "  |____|  (____  /\\___  >___|  /\n"
+            + "               \\/     \\/     \\/ \n";
+    private static final Scanner scanner = new Scanner(System.in);
+    private static final Parser parser = new Parser();
+    private static Boolean shouldContinue = true;
+
+    public static void hello() {
         System.out.println("Yoooo from\n" + logo);
+    }
+
+    private static void initParser() {
+        parser.setDefaultCommand(CommandHelper.fromName("Commands.Echo"));
+        parser.setExitCommand(CommandHelper.fromName("Commands.Bye"));
+        parser.setToExit(() -> shouldContinue = false);
+    }
+
+    private static void takeInput() {
+        Prompt.beforeInput();
+        parser.handle(scanner.nextLine());
+        Prompt.afterInput();
+    }
+
+    public static void main(String[] args) {
+        initParser();
+        hello();
+
+        while (shouldContinue) {
+            takeInput();
+        }
     }
 }
