@@ -1,7 +1,46 @@
-Hello from
- ____        _        
-|  _ \ _   _| | _____ 
-| | | | | | | |/ / _ \
-| |_| | |_| |   <  __/
-|____/ \__,_|_|\_\___|
-
+Hello. This is Duke
+No task stored.
+The following task has been added:
+  [T][ ] todo 1
+Total tasks: 1
+The following tasks are stored:
+1.[T][ ] todo 1
+The following task is marked as done:
+  [T][X] todo 1
+The following task has been added:
+  [E][ ] event 1 (from: Sun 10pm to: Mon 3am)
+Total tasks: 2
+The following tasks are stored:
+1.[T][X] todo 1
+2.[E][ ] event 1 (from: Sun 10pm to: Mon 3am)
+The following task has been added:
+  [D][ ] deadline 1 (by: November)
+Total tasks: 3
+The following task has been added:
+  [T][ ] todo 2
+Total tasks: 4
+The following task is marked as done:
+  [D][X] deadline 1 (by: November)
+The following task is marked as not done:
+  [T][ ] todo 1
+The following tasks are stored:
+1.[T][ ] todo 1
+2.[E][ ] event 1 (from: Sun 10pm to: Mon 3am)
+3.[D][X] deadline 1 (by: November)
+4.[T][ ] todo 2
+The following task has been added:
+  [D][ ] deadline 2 (by: Tmr)
+Total tasks: 5
+The following task has been added:
+  [E][ ] event 2 (from: Now to: Next time)
+Total tasks: 6
+The following task is marked as done:
+  [T][X] todo 2
+The following tasks are stored:
+1.[T][ ] todo 1
+2.[E][ ] event 1 (from: Sun 10pm to: Mon 3am)
+3.[D][X] deadline 1 (by: November)
+4.[T][X] todo 2
+5.[D][ ] deadline 2 (by: Tmr)
+6.[E][ ] event 2 (from: Now to: Next time)
+Chat with Duke has ended

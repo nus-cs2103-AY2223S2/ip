@@ -1,0 +1,16 @@
+list
+todo todo 1
+list
+mark 1
+event event 1 /from Sun 10pm /to Mon 3am
+list
+deadline deadline 1 /by November
+todo todo 2
+mark 3
+unmark 1
+list
+deadline deadline 2 /by Tmr
+event event 2 /from Now /to Next time
+mark 4
+list
+bye
