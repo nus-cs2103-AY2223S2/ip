@@ -27,32 +27,51 @@ public class Duke {
         while (true) {
             Scanner userInput = new Scanner(System.in);
             userMessage = userInput.nextLine();
-            String [] parts = userMessage.split(" ");
+            String [] parts = userMessage.split(" ", 2);
 
             if (parts[0].equals("bye")) {
-                System.out.print("  ");
-                System.out.print("Cya~ Till next time!");
+                System.out.print("  Cya~ Till next time!");
                 break;
             } else if (parts[0].equals("list")) {
-                System.out.println("Here are the tasks in your list:");
+                System.out.println("    Here are the tasks in your list:");
                 for (int i = 0; i < toDoList.size(); i++) {
-                    System.out.print("  ");
-                    System.out.println(i + 1 + ". " + toDoList.get(i).getStatus());
+                    int numbering = i + 1;
+                    System.out.println("    " + numbering + "." + toDoList.get(i).toString());
                 }
             } else if (parts[0].equals("mark")) {
                 int selection = Integer.parseInt(parts[1]) - 1;
                 toDoList.get(selection).mark();
-                System.out.println("OK, I've marked this task as done:");
-                System.out.println(toDoList.get(selection).getStatus());
+                System.out.println("    OK, I've marked this task as done:");
+                System.out.println("     " + toDoList.get(selection).toString());
             } else if (parts[0].equals("unmark")) {
                 int selection = Integer.parseInt(parts[1]) - 1;
                 toDoList.get(selection).unmark();
-                System.out.println("OK, I've marked this task as not done yet:");
-                System.out.println(toDoList.get(selection).getStatus());
-            } else {
-                toDoList.add(new Task(userMessage));
-                System.out.print("  ");
-                System.out.println("added: " + userMessage);
+                System.out.println("    OK, I've marked this task as not done yet:");
+                System.out.println("     " + toDoList.get(selection).toString());
+            } else if (parts[0].equals("todo")){
+                Todo newToDo = new Todo(parts[1]);
+                toDoList.add(newToDo);
+                System.out.println("    Got it. I've added this task:");
+                System.out.println("     " + newToDo.toString());
+                System.out.println("    Now you have " + toDoList.size() + " tasks in the list");
+            } else if (parts[0].equals("deadline")) {
+                String [] deadlineParts = parts[1].split("/");
+                String [] deadline = deadlineParts[1].split(" ", 2);
+                Deadline newDeadline = new Deadline(deadlineParts[0], deadline[1]);
+                toDoList.add(newDeadline);
+                System.out.println("    Got it. I've added this task:");
+                System.out.println("     " + newDeadline.toString());
+                System.out.println("    Now you have " + toDoList.size() + " tasks in the list");
+
+            } else if (parts[0].equals("event")) {
+                String [] eventParts = parts[1].split("/");
+                String [] from = eventParts[1].split(" ", 2);
+                String [] to = eventParts[2].split(" ", 2);
+                Event newEvent = new Event(eventParts[0], from[1], to[1]);
+                toDoList.add(newEvent);
+                System.out.println("    Got it. I've added this task:");
+                System.out.println("     " + newEvent.toString());
+                System.out.println("    Now you have " + toDoList.size() + " tasks in the list");
             }
 
         }
