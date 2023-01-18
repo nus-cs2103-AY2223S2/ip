@@ -101,7 +101,7 @@ public class Duke {
             case "mark":
                 try {
                     tid = Integer.parseInt(input.split(" ")[1]);
-                } catch (IndexOutOfBoundsException e) {
+                } catch (NumberFormatException | IndexOutOfBoundsException e) {
                     print(e.toString());
                     System.exit(1);
                 }
@@ -113,7 +113,7 @@ public class Duke {
             case "unmark":
                 try {
                     tid = Integer.parseInt(input.split(" ")[1]);
-                } catch (IndexOutOfBoundsException e) {
+                } catch (NumberFormatException | IndexOutOfBoundsException e) {
                     print(e.toString());
                     System.exit(1);
                 }
@@ -132,10 +132,10 @@ public class Duke {
                     print(e.toString());
                     System.exit(1);
                 }
-                Deadline deadline = new Deadline(content, ddl);
-                todos.add(deadline);
+                task = new Deadline(content, ddl);
+                todos.add(task);
                 print("Got it. I've added this task:");
-                print("\t" + deadline);
+                print("\t" + task);
                 print("Now you have " + todos.size() + " tasks in the list.");
                 break;
             case "event":
@@ -148,10 +148,10 @@ public class Duke {
                     print(e.toString());
                     System.exit(1);
                 }
-                Event event = new Event(content, from, to);
-                todos.add(event);
+                task = new Event(content, from, to);
+                todos.add(task);
                 print("Got it. I've added this task:");
-                print("\t" + event);
+                print("\t" + task);
                 print("Now you have " + todos.size() + " tasks in the list.");
                 break;
             case "todo":
@@ -161,11 +161,25 @@ public class Duke {
                     print(e.toString());
                     System.exit(1);
                 }
-                Todo todo = new Todo(input);
-                todos.add(todo);
+                task = new Todo(input);
+                todos.add(task);
                 print("Got it. I've added this task:");
-                print("\t" + todo);
+                print("\t" + task);
                 print("Now you have " + todos.size() + " tasks in the list.");
+                break;
+            case "delete":
+                try {
+                    tid = Integer.parseInt(input.split(trigger)[1].strip());
+                    task = todos.get(tid - 1);
+                    todos.remove(task);
+                    print("Noted. I've removed this task:");
+                    print("\t" + task);
+                    print("Now you have " + todos.size() + " tasks in the list.");
+                } catch (NumberFormatException | IndexOutOfBoundsException e) {
+                    print(e.toString());
+                    System.exit(1);
+                }
+                break;
             default:
                 print(trigger + " not found.");
         }
