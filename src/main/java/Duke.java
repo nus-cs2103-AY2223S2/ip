@@ -1,4 +1,3 @@
-import java.util.Objects;
 import java.util.Scanner;
 
 /**
@@ -8,34 +7,105 @@ import java.util.Scanner;
  */
 public class Duke {
     /**
+     * The name of the chatbot
+     */
+    public String name = "Duke";
+
+    /**
+     * Storage of user's inputed texts
+     */
+    private final String[] textStorage = new String[100];
+
+    /**
+     * Number of text stored by the chatbot
+     */
+    private int textStorageSize = 0;
+
+    /**
      * This is the main method which starts off the chatbot.
      *
      * @param args Unused.
      */
     public static void main(String[] args) {
-        System.out.println("Hello. This is Duke.");
+        Duke duke = new Duke();
+        System.out.println("Hello. This is " + duke.name);
         Scanner scanner = new Scanner(System.in);
-        String endMessage = "Chat with Duke has ended";
+        final String endWord = "bye";
+        boolean end = false;
 
-        while (true) {
+        while (!end) {
             String input = scanner.nextLine();
-
-            if (Objects.equals(input, "bye")) {
-                reply(endMessage);
-                break;
-            }
-
-            reply(input);
+            end = duke.processInput(input);
         }
     }
 
     /**
-     * This method is used to output the reply from the chatbot
+     * This method processes the user's input and outputs
+     * the relevant reply by the chatbot
+     *
+     * @param text the user's input.
+     * @return a boolean based on if the conversation has ended.
+     */
+    public boolean processInput(String text) {
+        switch (text) {
+            case "bye":
+                endChat();
+                return true;
+            case "list":
+                displayTextStorage();
+                break;
+            default:
+                storeText(text);
+        }
+
+        return false;
+    }
+
+    /**
+     * This method is used to output a message from the chatbot
      * to the user.
      *
      * @param message the string the chatbot will reply.
      */
-    public static void reply(String message) {
+    private void reply(String message) {
         System.out.println(message);
+    }
+
+    /**
+     * This method is used to send a message to signal the end
+     * of the conversation.
+     */
+    private void endChat() {
+        String endMessage = "Chat with Duke has ended";
+        reply(endMessage);
+    }
+
+    /**
+     * This method stores the string into the chatbot's
+     * text storage
+     *
+     * @param text the string to be stored.
+     */
+    private void storeText(String text) {
+        this.textStorage[this.textStorageSize] = text;
+        this.textStorageSize++;
+        reply("added: " + text);
+    }
+
+    /**
+     * This method outputs the entire list of text stored
+     * by the chatbot in order
+     */
+    private void displayTextStorage() {
+        int size = this.textStorageSize;
+
+        if (size == 0) {
+            reply("No text stored.");
+            return;
+        }
+
+        for (int i = 0; i < size; i++) {
+            reply((i + 1) + ". " + this.textStorage[i]);
+        }
     }
 }
