@@ -13,6 +13,7 @@ public class Duke {
         System.out.println(ui.greet());
         while (!isClosed) {
             String input = ui.getInput();
+            System.out.println(ui.separate());
             if (input.equals("bye")) {
                 System.out.println(ui.exit());
                 isClosed = true;
@@ -29,10 +30,10 @@ public class Duke {
             } else if (input.startsWith("deadline")) {
                 System.out.println(handler.deadlineHandler(input));
             } else {
-//                System.out.println(handler.add(input));
                 System.out.println("Not a valid command.");
 
             }
+            System.out.println(ui.separate());
         }
     }
 }

@@ -25,7 +25,7 @@ public class TaskHandler {
         String allElements = "";
         for (int i = 0; i < 101; i++) {
             if (content[i] != null) {
-                allElements = allElements + (i + 1) + ". " + content[i].toString();
+                allElements = allElements + (i + 1) + ". " + content[i].toString() + "\n";
             } else {
                 break;
             }
@@ -33,7 +33,7 @@ public class TaskHandler {
         if (allElements == "") {
             return "No items in list!";
         } else {
-            return "Here are the tasks in your list: " + "\n" + allElements;
+            return "Here are the tasks in your list:" + "\n" + allElements;
         }
     }
 
@@ -81,7 +81,7 @@ public class TaskHandler {
         Event newEvent = new Event(item, startTime, endTime);
         content[counter] = newEvent;
         counter++;
-        return HEADER + "\n" + newEvent + "\n" + String.format("Now you have %d tasks in the list.", counter);
+        return HEADER + "\n" + newEvent + "\n" + String.format("Now you have %d tasks in the list.", counter) + "\n";
     }
 
     public String todoHandler(String input) {
@@ -98,7 +98,7 @@ public class TaskHandler {
         Todo newTodo = new Todo(item);
         content[counter] = newTodo;
         counter++;
-        return HEADER + "\n" + newTodo + "\n" + String.format("Now you have %d tasks in the list.", counter);
+        return HEADER + "\n" + newTodo + "\n" + String.format("Now you have %d tasks in the list.", counter)+ "\n";
 
     }
     public String deadlineHandler(String input) {
@@ -117,7 +117,7 @@ public class TaskHandler {
         Deadline newDeadline = new Deadline(item, deadline);
         content[counter] = newDeadline;
         counter++;
-        return HEADER + "\n" + newDeadline + "\n" + String.format("Now you have %d tasks in the list.", counter);
+        return HEADER + "\n" + newDeadline + "\n" + String.format("Now you have %d tasks in the list.", counter)+ "\n";
 
     }
 
