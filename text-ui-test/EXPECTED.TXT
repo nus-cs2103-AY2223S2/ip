@@ -5,3 +5,39 @@ Hello from
 | |_| | |_| |   <  __/
 |____/ \__,_|_|\_\___|
 
+_____________________________________
+Hello! I'm Duke
+What can I do for you?
+_____________________________________
+
+_____________________________________
+Got it. I've added this task:
+ [D][ ] read book (by: Sunday)
+Now you have 1 task in the list.
+
+_____________________________________
+Got it. I've added this task:
+ [E][ ] birthday (from: 30th jan to: 30th jan)
+Now you have 2 tasks in the list.
+
+_____________________________________
+
+1. [D][ ] read book (by: Sunday)
+
+2. [E][ ] birthday (from: 30th jan to: 30th jan)
+
+_____________________________________
+
+_____________________________________
+Nice! I've marked this task as done
+ [D][X] read book (by: Sunday)
+_____________________________________
+
+_____________________________________
+Ok, I've marked this task as not done yet
+ [E][ ] birthday (from: 30th jan to: 30th jan)
+_____________________________________
+
+_____________________________________
+Bye. Hope to see you again soon!
+_____________________________________

@@ -40,9 +40,7 @@ public class Duke {
                 events(input);
                 input = sc.nextLine();
             } else {
-                Pattern pattern = Pattern.compile("\\D+.\\d+");
-                Matcher matcher = pattern.matcher(input);
-                if (matcher.find()){
+                if (Pattern.compile("\\D+.\\d+").matcher(input).find()){
                     String[] strings = input.split(" ");
                     int index = Integer.parseInt(strings[1]);
                     if (strings[0].equals("mark") && index < pointer){
@@ -62,7 +60,6 @@ public class Duke {
                                         + "_____________________________________\n"
                         );
                     }
-                    input = sc.nextLine();
                 } else {
                     System.out.println(
                             "_____________________________________\n"
@@ -71,8 +68,8 @@ public class Duke {
                     );
                     storage[pointer] = new Task(input);
                     pointer++;
-                    input = sc.nextLine();
                 }
+                input = sc.nextLine();
             }
 
         }
