@@ -1,23 +1,46 @@
-task number 1
-todo cs2106 tutorial 1
-deadline cs1234 project 1
-deadline cs1234 project 1 /by next monday 01/01 2359
+list
 todo
 deadline
 event
-event piano concert /from tmr 7pm
-event piano concert /to tmr 7pm
-event piano concert /from tmr 5pm /to tmr 7pm
-done todo
-done 8
-done 4
-done 5
-done 2
+somerandomcommand
+todo CS2103 Tutorial 1
+list
+todo CS2103 Tutorial 2 /by tomorrow
+deadline CS2103 Tutorial 2 /by tomorrow
+list
+deadline /by tomorrow CS2103 Tutorial 3
+deadline CS2103 Tutorial 3 /by
+deadline CS2103 Tutorial 3 /from today 2pm /to today 4pm
+event CS2103 Tutorial 3 /from today 2pm /to today 3pm
+event CS2103 Tutorial 4 /to next monday 3pm /from next monday 2pm
+list
+event CS2103 Tutorial 5 /to 2pm
+event CS2103 Tutorial 5 /from 4pm
+event CS2103 Tutorial 5 /from /to 4pm
+event CS2103 Tutorial 5 /from /to
+event /from 2pm CS2103 Tutorial 5 /to 4pm
 done 1
-done 9
-done -1
-done 8
-undone 4
+done 3
+todo Another task on hand
+todo Yet another one
+done 4
+done 10
+done 0
+done 1
 undone 2
-undone 7
+undone 1
+undone 10
+undone 0
+delete 2
+delete 10
+delete 0
+deadline Finish up CS2103 Project /by tomorrow 5pm
+list
+delete 1
+delete 1
+delete 1
+delete 1
+delete 1
+delete 1
+list
 bye

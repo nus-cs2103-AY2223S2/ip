@@ -8,200 +8,240 @@ Welcome to
 ====================
 How may I assist you today?
 ====================
-	[T][ ] task number 1
+	Excellent! You do not have any tasks at hand!
+====================
+	*Error* Invalid Syntax - "todo [title]" (e.g. "todo math homework")
+====================
+	*Error* Invalid Syntax - "deadline [title] /by [deadline]"(e.g. "deadline physics project /by tomorrow 3pm")
+====================
+	*Error* Invalid Syntax - "event [title] /from [start] /to [end]"(e.g. "event piano concert /from tomorrow 3pm /to tomorrow 6pm")
+====================
+	*Error* Sorry I do not understand what to do!
+====================
+	[T][ ] CS2103 Tutorial 1
 	
 	Here are your updated tasks:
-	1. [T][ ] task number 1
+	1. [T][ ] CS2103 Tutorial 1
 ====================
-	[T][ ] cs2106 tutorial 1
+	Here are your updated tasks:
+	1. [T][ ] CS2103 Tutorial 1
+====================
+	*Error* Invalid Syntax - "todo [title]" (e.g. "todo math homework")
+====================
+	[D][ ] CS2103 Tutorial 2 (by: tomorrow)
 	
 	Here are your updated tasks:
-	1. [T][ ] task number 1
-	2. [T][ ] cs2106 tutorial 1
+	1. [T][ ] CS2103 Tutorial 1
+	2. [D][ ] CS2103 Tutorial 2 (by: tomorrow)
 ====================
-	Invalid syntax: "deadline [title] /by [deadline]"
+	Here are your updated tasks:
+	1. [T][ ] CS2103 Tutorial 1
+	2. [D][ ] CS2103 Tutorial 2 (by: tomorrow)
 ====================
-	[D][ ] cs1234 project 1 (by: next monday 01/01 2359)
+	*Error* Invalid Syntax - "deadline [title] /by [deadline]"(e.g. "deadline physics project /by tomorrow 3pm")
+====================
+	*Error* Invalid Syntax - "deadline [title] /by [deadline]"(e.g. "deadline physics project /by tomorrow 3pm")
+====================
+	*Error* Invalid Syntax - "deadline [title] /by [deadline]"(e.g. "deadline physics project /by tomorrow 3pm")
+====================
+	[E][ ] CS2103 Tutorial 3 (from: today 2pm to: today 3pm)
 	
 	Here are your updated tasks:
-	1. [T][ ] task number 1
-	2. [T][ ] cs2106 tutorial 1
-	3. [D][ ] cs1234 project 1 (by: next monday 01/01 2359)
+	1. [T][ ] CS2103 Tutorial 1
+	2. [D][ ] CS2103 Tutorial 2 (by: tomorrow)
+	3. [E][ ] CS2103 Tutorial 3 (from: today 2pm to: today 3pm)
 ====================
-	[T][ ] todo
+	[E][ ] CS2103 Tutorial 4 (from: next monday 2pm to: next monday 3pm)
 	
 	Here are your updated tasks:
-	1. [T][ ] task number 1
-	2. [T][ ] cs2106 tutorial 1
-	3. [D][ ] cs1234 project 1 (by: next monday 01/01 2359)
-	4. [T][ ] todo
+	1. [T][ ] CS2103 Tutorial 1
+	2. [D][ ] CS2103 Tutorial 2 (by: tomorrow)
+	3. [E][ ] CS2103 Tutorial 3 (from: today 2pm to: today 3pm)
+	4. [E][ ] CS2103 Tutorial 4 (from: next monday 2pm to: next monday 3pm)
 ====================
-	[T][ ] deadline
-	
 	Here are your updated tasks:
-	1. [T][ ] task number 1
-	2. [T][ ] cs2106 tutorial 1
-	3. [D][ ] cs1234 project 1 (by: next monday 01/01 2359)
-	4. [T][ ] todo
-	5. [T][ ] deadline
+	1. [T][ ] CS2103 Tutorial 1
+	2. [D][ ] CS2103 Tutorial 2 (by: tomorrow)
+	3. [E][ ] CS2103 Tutorial 3 (from: today 2pm to: today 3pm)
+	4. [E][ ] CS2103 Tutorial 4 (from: next monday 2pm to: next monday 3pm)
 ====================
-	[T][ ] event
-	
-	Here are your updated tasks:
-	1. [T][ ] task number 1
-	2. [T][ ] cs2106 tutorial 1
-	3. [D][ ] cs1234 project 1 (by: next monday 01/01 2359)
-	4. [T][ ] todo
-	5. [T][ ] deadline
-	6. [T][ ] event
+	*Error* Invalid Syntax - "event [title] /from [start] /to [end]"(e.g. "event piano concert /from tomorrow 3pm /to tomorrow 6pm")
 ====================
-	Invalid syntax: "event [title] /from [start date/time] /to [end date/time]"
+	*Error* Invalid Syntax - "event [title] /from [start] /to [end]"(e.g. "event piano concert /from tomorrow 3pm /to tomorrow 6pm")
 ====================
-	Invalid syntax: "event [title] /from [start date/time] /to [end date/time]"
+	*Error* Invalid Syntax - "event [title] /from [start] /to [end]"(e.g. "event piano concert /from tomorrow 3pm /to tomorrow 6pm")
 ====================
-	[E][ ] piano concert (from: tmr 5pm to: tmr 7pm)
-	
-	Here are your updated tasks:
-	1. [T][ ] task number 1
-	2. [T][ ] cs2106 tutorial 1
-	3. [D][ ] cs1234 project 1 (by: next monday 01/01 2359)
-	4. [T][ ] todo
-	5. [T][ ] deadline
-	6. [T][ ] event
-	7. [E][ ] piano concert (from: tmr 5pm to: tmr 7pm)
+	*Error* Invalid Syntax - "event [title] /from [start] /to [end]"(e.g. "event piano concert /from tomorrow 3pm /to tomorrow 6pm")
 ====================
-	[T][ ] done todo
-	
-	Here are your updated tasks:
-	1. [T][ ] task number 1
-	2. [T][ ] cs2106 tutorial 1
-	3. [D][ ] cs1234 project 1 (by: next monday 01/01 2359)
-	4. [T][ ] todo
-	5. [T][ ] deadline
-	6. [T][ ] event
-	7. [E][ ] piano concert (from: tmr 5pm to: tmr 7pm)
-	8. [T][ ] done todo
+	*Error* Invalid Syntax - "event [title] /from [start] /to [end]"(e.g. "event piano concert /from tomorrow 3pm /to tomorrow 6pm")
 ====================
 	Well done! The task is marked as completed:
-	[T][X] done todo
+	[T][X] CS2103 Tutorial 1
 	
 	Here are your updated tasks:
-	1. [T][ ] task number 1
-	2. [T][ ] cs2106 tutorial 1
-	3. [D][ ] cs1234 project 1 (by: next monday 01/01 2359)
-	4. [T][ ] todo
-	5. [T][ ] deadline
-	6. [T][ ] event
-	7. [E][ ] piano concert (from: tmr 5pm to: tmr 7pm)
-	8. [T][X] done todo
+	1. [T][X] CS2103 Tutorial 1
+	2. [D][ ] CS2103 Tutorial 2 (by: tomorrow)
+	3. [E][ ] CS2103 Tutorial 3 (from: today 2pm to: today 3pm)
+	4. [E][ ] CS2103 Tutorial 4 (from: next monday 2pm to: next monday 3pm)
 ====================
 	Well done! The task is marked as completed:
-	[T][X] todo
+	[E][X] CS2103 Tutorial 3 (from: today 2pm to: today 3pm)
 	
 	Here are your updated tasks:
-	1. [T][ ] task number 1
-	2. [T][ ] cs2106 tutorial 1
-	3. [D][ ] cs1234 project 1 (by: next monday 01/01 2359)
-	4. [T][X] todo
-	5. [T][ ] deadline
-	6. [T][ ] event
-	7. [E][ ] piano concert (from: tmr 5pm to: tmr 7pm)
-	8. [T][X] done todo
+	1. [T][X] CS2103 Tutorial 1
+	2. [D][ ] CS2103 Tutorial 2 (by: tomorrow)
+	3. [E][X] CS2103 Tutorial 3 (from: today 2pm to: today 3pm)
+	4. [E][ ] CS2103 Tutorial 4 (from: next monday 2pm to: next monday 3pm)
+====================
+	[T][ ] Another task on hand
+	
+	Here are your updated tasks:
+	1. [T][X] CS2103 Tutorial 1
+	2. [D][ ] CS2103 Tutorial 2 (by: tomorrow)
+	3. [E][X] CS2103 Tutorial 3 (from: today 2pm to: today 3pm)
+	4. [E][ ] CS2103 Tutorial 4 (from: next monday 2pm to: next monday 3pm)
+	5. [T][ ] Another task on hand
+====================
+	[T][ ] Yet another one
+	
+	Here are your updated tasks:
+	1. [T][X] CS2103 Tutorial 1
+	2. [D][ ] CS2103 Tutorial 2 (by: tomorrow)
+	3. [E][X] CS2103 Tutorial 3 (from: today 2pm to: today 3pm)
+	4. [E][ ] CS2103 Tutorial 4 (from: next monday 2pm to: next monday 3pm)
+	5. [T][ ] Another task on hand
+	6. [T][ ] Yet another one
 ====================
 	Well done! The task is marked as completed:
-	[T][X] deadline
+	[E][X] CS2103 Tutorial 4 (from: next monday 2pm to: next monday 3pm)
 	
 	Here are your updated tasks:
-	1. [T][ ] task number 1
-	2. [T][ ] cs2106 tutorial 1
-	3. [D][ ] cs1234 project 1 (by: next monday 01/01 2359)
-	4. [T][X] todo
-	5. [T][X] deadline
-	6. [T][ ] event
-	7. [E][ ] piano concert (from: tmr 5pm to: tmr 7pm)
-	8. [T][X] done todo
+	1. [T][X] CS2103 Tutorial 1
+	2. [D][ ] CS2103 Tutorial 2 (by: tomorrow)
+	3. [E][X] CS2103 Tutorial 3 (from: today 2pm to: today 3pm)
+	4. [E][X] CS2103 Tutorial 4 (from: next monday 2pm to: next monday 3pm)
+	5. [T][ ] Another task on hand
+	6. [T][ ] Yet another one
+====================
+	*Error* Invalid Task ID!
+====================
+	*Error* Invalid Task ID!
 ====================
 	Well done! The task is marked as completed:
-	[T][X] cs2106 tutorial 1
+	[T][X] CS2103 Tutorial 1
 	
 	Here are your updated tasks:
-	1. [T][ ] task number 1
-	2. [T][X] cs2106 tutorial 1
-	3. [D][ ] cs1234 project 1 (by: next monday 01/01 2359)
-	4. [T][X] todo
-	5. [T][X] deadline
-	6. [T][ ] event
-	7. [E][ ] piano concert (from: tmr 5pm to: tmr 7pm)
-	8. [T][X] done todo
-====================
-	Well done! The task is marked as completed:
-	[T][X] task number 1
-	
-	Here are your updated tasks:
-	1. [T][X] task number 1
-	2. [T][X] cs2106 tutorial 1
-	3. [D][ ] cs1234 project 1 (by: next monday 01/01 2359)
-	4. [T][X] todo
-	5. [T][X] deadline
-	6. [T][ ] event
-	7. [E][ ] piano concert (from: tmr 5pm to: tmr 7pm)
-	8. [T][X] done todo
-====================
-	Invalid Task ID!
-====================
-	Invalid Task ID!
-====================
-	Well done! The task is marked as completed:
-	[T][X] done todo
-	
-	Here are your updated tasks:
-	1. [T][X] task number 1
-	2. [T][X] cs2106 tutorial 1
-	3. [D][ ] cs1234 project 1 (by: next monday 01/01 2359)
-	4. [T][X] todo
-	5. [T][X] deadline
-	6. [T][ ] event
-	7. [E][ ] piano concert (from: tmr 5pm to: tmr 7pm)
-	8. [T][X] done todo
+	1. [T][X] CS2103 Tutorial 1
+	2. [D][ ] CS2103 Tutorial 2 (by: tomorrow)
+	3. [E][X] CS2103 Tutorial 3 (from: today 2pm to: today 3pm)
+	4. [E][X] CS2103 Tutorial 4 (from: next monday 2pm to: next monday 3pm)
+	5. [T][ ] Another task on hand
+	6. [T][ ] Yet another one
 ====================
 	The task is now marked as not done yet:
-	[T][ ] todo
+	[D][ ] CS2103 Tutorial 2 (by: tomorrow)
 	
 	Here are your updated tasks:
-	1. [T][X] task number 1
-	2. [T][X] cs2106 tutorial 1
-	3. [D][ ] cs1234 project 1 (by: next monday 01/01 2359)
-	4. [T][ ] todo
-	5. [T][X] deadline
-	6. [T][ ] event
-	7. [E][ ] piano concert (from: tmr 5pm to: tmr 7pm)
-	8. [T][X] done todo
+	1. [T][X] CS2103 Tutorial 1
+	2. [D][ ] CS2103 Tutorial 2 (by: tomorrow)
+	3. [E][X] CS2103 Tutorial 3 (from: today 2pm to: today 3pm)
+	4. [E][X] CS2103 Tutorial 4 (from: next monday 2pm to: next monday 3pm)
+	5. [T][ ] Another task on hand
+	6. [T][ ] Yet another one
 ====================
 	The task is now marked as not done yet:
-	[T][ ] cs2106 tutorial 1
+	[T][ ] CS2103 Tutorial 1
 	
 	Here are your updated tasks:
-	1. [T][X] task number 1
-	2. [T][ ] cs2106 tutorial 1
-	3. [D][ ] cs1234 project 1 (by: next monday 01/01 2359)
-	4. [T][ ] todo
-	5. [T][X] deadline
-	6. [T][ ] event
-	7. [E][ ] piano concert (from: tmr 5pm to: tmr 7pm)
-	8. [T][X] done todo
+	1. [T][ ] CS2103 Tutorial 1
+	2. [D][ ] CS2103 Tutorial 2 (by: tomorrow)
+	3. [E][X] CS2103 Tutorial 3 (from: today 2pm to: today 3pm)
+	4. [E][X] CS2103 Tutorial 4 (from: next monday 2pm to: next monday 3pm)
+	5. [T][ ] Another task on hand
+	6. [T][ ] Yet another one
 ====================
-	The task is now marked as not done yet:
-	[E][ ] piano concert (from: tmr 5pm to: tmr 7pm)
+	*Error* Invalid Task ID!
+====================
+	*Error* Invalid Task ID!
+====================
+	Deleted! The task has been deleted:
+	[D][ ] CS2103 Tutorial 2 (by: tomorrow)
 	
 	Here are your updated tasks:
-	1. [T][X] task number 1
-	2. [T][ ] cs2106 tutorial 1
-	3. [D][ ] cs1234 project 1 (by: next monday 01/01 2359)
-	4. [T][ ] todo
-	5. [T][X] deadline
-	6. [T][ ] event
-	7. [E][ ] piano concert (from: tmr 5pm to: tmr 7pm)
-	8. [T][X] done todo
+	1. [T][ ] CS2103 Tutorial 1
+	2. [E][X] CS2103 Tutorial 3 (from: today 2pm to: today 3pm)
+	3. [E][X] CS2103 Tutorial 4 (from: next monday 2pm to: next monday 3pm)
+	4. [T][ ] Another task on hand
+	5. [T][ ] Yet another one
+====================
+	*Error* Invalid Task ID!
+====================
+	*Error* Invalid Task ID!
+====================
+	[D][ ] Finish up CS2103 Project (by: tomorrow 5pm)
+	
+	Here are your updated tasks:
+	1. [T][ ] CS2103 Tutorial 1
+	2. [E][X] CS2103 Tutorial 3 (from: today 2pm to: today 3pm)
+	3. [E][X] CS2103 Tutorial 4 (from: next monday 2pm to: next monday 3pm)
+	4. [T][ ] Another task on hand
+	5. [T][ ] Yet another one
+	6. [D][ ] Finish up CS2103 Project (by: tomorrow 5pm)
+====================
+	Here are your updated tasks:
+	1. [T][ ] CS2103 Tutorial 1
+	2. [E][X] CS2103 Tutorial 3 (from: today 2pm to: today 3pm)
+	3. [E][X] CS2103 Tutorial 4 (from: next monday 2pm to: next monday 3pm)
+	4. [T][ ] Another task on hand
+	5. [T][ ] Yet another one
+	6. [D][ ] Finish up CS2103 Project (by: tomorrow 5pm)
+====================
+	Deleted! The task has been deleted:
+	[T][ ] CS2103 Tutorial 1
+	
+	Here are your updated tasks:
+	1. [E][X] CS2103 Tutorial 3 (from: today 2pm to: today 3pm)
+	2. [E][X] CS2103 Tutorial 4 (from: next monday 2pm to: next monday 3pm)
+	3. [T][ ] Another task on hand
+	4. [T][ ] Yet another one
+	5. [D][ ] Finish up CS2103 Project (by: tomorrow 5pm)
+====================
+	Deleted! The task has been deleted:
+	[E][X] CS2103 Tutorial 3 (from: today 2pm to: today 3pm)
+	
+	Here are your updated tasks:
+	1. [E][X] CS2103 Tutorial 4 (from: next monday 2pm to: next monday 3pm)
+	2. [T][ ] Another task on hand
+	3. [T][ ] Yet another one
+	4. [D][ ] Finish up CS2103 Project (by: tomorrow 5pm)
+====================
+	Deleted! The task has been deleted:
+	[E][X] CS2103 Tutorial 4 (from: next monday 2pm to: next monday 3pm)
+	
+	Here are your updated tasks:
+	1. [T][ ] Another task on hand
+	2. [T][ ] Yet another one
+	3. [D][ ] Finish up CS2103 Project (by: tomorrow 5pm)
+====================
+	Deleted! The task has been deleted:
+	[T][ ] Another task on hand
+	
+	Here are your updated tasks:
+	1. [T][ ] Yet another one
+	2. [D][ ] Finish up CS2103 Project (by: tomorrow 5pm)
+====================
+	Deleted! The task has been deleted:
+	[T][ ] Yet another one
+	
+	Here are your updated tasks:
+	1. [D][ ] Finish up CS2103 Project (by: tomorrow 5pm)
+====================
+	Deleted! The task has been deleted:
+	[D][ ] Finish up CS2103 Project (by: tomorrow 5pm)
+	
+	Excellent! You do not have any tasks at hand!
+====================
+	Excellent! You do not have any tasks at hand!
 ====================
 	Have a good day! Good bye!
 ====================
