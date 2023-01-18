@@ -21,8 +21,8 @@ public class Duke {
         this.greet();
 
         String i = sc.nextLine();
-        while (!this.stringMatch(i,"bye")) {
-            if (this.stringMatch(i, "list")) {
+        while (!i.equalsIgnoreCase("bye")) {
+            if (i.equalsIgnoreCase("list")) {
                 this.printList();
             } else if(i.toLowerCase().startsWith("mark")) {
                 int num = Integer.parseInt(i.split(" ")[1]);
@@ -36,7 +36,15 @@ public class Duke {
                 getUnmarkDoneMessage(t);
             }
             else {
-                this.addTask(i);
+                if(i.toLowerCase().startsWith("todo")) {
+                    this.addToDo(i);
+                }
+                if(i.toLowerCase().startsWith("deadline")) {
+                    this.addDeadline(i);
+                }
+                if(i.toLowerCase().startsWith("event")) {
+                    this.addEvent(i);
+                }
             }
             i = sc.nextLine();
         }
@@ -67,29 +75,43 @@ public class Duke {
         System.out.println("Here are the tasks in your list:");
         for(int i = 1; i <= this.tasks.size(); i++) {
             Task t = this.tasks.get(i-1);
-            System.out.println(i + ". " + t.getStatusBox() +
-                    t.getDescription());
+            System.out.println(i + ". " + t.toString());
         }
         this.printLine();
     }
-    public void addTask(String i) {
+    public void addToDo(String i) {
         //this.printLine();
-        Task t = new Task(i);
-        System.out.println("Added: " + t.getDescription());
+        ToDo t = new ToDo(i.replace("todo ", ""));
         this.storeTask(t);
-        this.printLine();
+        this.addTaskMessage(t);
+    }
+    public void addDeadline(String i) {
+        String[] contents = i.split(" /by ");
+        Deadline d = new Deadline(contents[0].replace("deadline ", ""), contents[1]);
+        this.storeTask(d);
+        this.addTaskMessage(d);
+    }
+    public void addEvent(String i) {
+        String[] contents = i.split(" /from ");
+        String[] fromTo = contents[1].split(" /to ");
+        Event e = new Event(contents[0].replace("event ", ""), fromTo[0], fromTo[1]);
+        this.storeTask(e);
+        this.addTaskMessage(e);
     }
     public boolean stringMatch(String input, String given) {
         return input.equalsIgnoreCase(given);
     }
     public void getMarkDoneMessage(Task t) {
-        System.out.println("Nice! I've marked this task as done:\n" + "  " +
-                t.getStatusBox() + t.getDescription());
+        System.out.println("Nice! I've marked this task as done:\n" + "  " + t.toString());
+        this.printLine();
+    }
+    public void addTaskMessage(Task t) {
+        System.out.println("Got it. I've added this task:\n  " + t.toString());
+        System.out.println("Now you have " + this.tasks.size() + " tasks in the list.");
         this.printLine();
     }
     public void getUnmarkDoneMessage(Task t) {
-        System.out.println("Okay, I've marked this task as not done yet:\n" + "  " +
-                t.getStatusBox() + t.getDescription());
+        System.out.println("Okay, I've marked this task as not done yet:\n" + "  " + t.toString());
         this.printLine();
     }
 }
