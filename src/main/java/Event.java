@@ -1,10 +1,16 @@
 public class Event extends Task {
     protected String startTime;
     protected String endTime;
-    public Event(String description, String startTime, String endTime) {
-        super(description);
-        this.startTime = startTime;
-        this.endTime = endTime;
+    public Event(String description, String startTime, String endTime) throws DukeException {
+        super(description.trim());
+        this.startTime = startTime.trim();
+        this.endTime = endTime.trim();
+        if (this.description.equals("")) {
+            throw new DukeException("The description of a deadline cannot be empty.");
+        }
+        if (this.startTime.equals("") || this.endTime.equals("")) {
+            throw new DukeException("The start and/or end time of a deadline cannot be empty.");
+        }
     }
     @Override
     public String toString() {
