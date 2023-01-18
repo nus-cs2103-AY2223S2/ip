@@ -46,39 +46,49 @@ public class Duke {
      * @return a boolean based on if the conversation has ended.
      */
     public boolean processInput(String text) {
-        if (text.startsWith("mark")) {
-            this.markTask(Integer.parseInt(text.substring(5)));
-            return false;
-        } else if (text.startsWith("unmark")){
-            this.unmarkTask(Integer.parseInt(text.substring(7)));
-            return false;
-        } else if (text.startsWith("todo")){
-            Task task = new Todo(text.substring(5));
-            this.storeTask(task);
-            return false;
-        } else if (text.startsWith("deadline")){
-            String[] textArr = text.split("/", 2);
-            Task task = new Deadline(textArr[0].substring(9),
-                    textArr[1].substring(3));
-            this.storeTask(task);
-            return false;
-        } else if (text.startsWith("event")){
-            String[] textArr = text.split("/", 3);
-            Task task = new Event(textArr[0].substring(6),
-                    textArr[1].substring(5), textArr[2].substring(3));
-            this.storeTask(task);
-            return false;
-        }
+        try {
+            if (text.startsWith("mark ")) {
+                this.checkTextLength(text, 5);
+                this.markTask(Integer.parseInt(text.substring(5)));
+                return false;
+            } else if (text.startsWith("unmark ")) {
+                this.checkTextLength(text, 7);
+                this.unmarkTask(Integer.parseInt(text.substring(7)));
+                return false;
+            } else if (text.startsWith("todo ")) {
+                this.checkTextLength(text, 5);
+                Task task = new Todo(text.substring(5));
+                this.storeTask(task);
+                return false;
+            } else if (text.startsWith("deadline ")) {
+                String[] textArr = text.split("/", 2);
+                this.checkTextLength(textArr[0], 9);
+                Task task = new Deadline(textArr[0].substring(9),
+                        textArr[1].substring(3));
+                this.storeTask(task);
+                return false;
+            } else if (text.startsWith("event ")) {
+                String[] textArr = text.split("/", 3);
+                this.checkTextLength(textArr[0], 6);
+                Task task = new Event(textArr[0].substring(6),
+                        textArr[1].substring(5), textArr[2].substring(3));
+                this.storeTask(task);
+                return false;
+            }
 
-        switch (text) {
-            case "bye":
-                this.endChat();
-                return true;
-            case "list":
-                this.displayTaskStorage();
-                break;
-            default:
-                this.reply("Invalid input!");
+            switch (text) {
+                case "bye":
+                    this.endChat();
+                    return true;
+                case "list":
+                    this.displayTaskStorage();
+                    break;
+                default:
+                    throw new DukeException("Input is not recognized.");
+            }
+
+        } catch (DukeException de) {
+            reply(de.getMessage());
         }
 
         return false;
@@ -161,5 +171,19 @@ public class Duke {
         task.unmark();
         this.reply("The following task is marked as not done:");
         this.reply("  " + task.toString());
+    }
+
+    /**
+     * This method checks if the length of the text meets
+     * the required length.
+     *
+     * @param text the text which length is to be verified.
+     * @param length minimum required length of text.
+     * @throws DukeException if text length is insufficient.
+     */
+    private void checkTextLength(String text, int length) throws DukeException{
+        if (text.trim().length() < length) {
+            throw new DukeException("Description is invalid.");
+        }
     }
 }
