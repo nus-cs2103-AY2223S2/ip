@@ -13,11 +13,11 @@ public class Sam {
       System.out.println();
       System.out.println(Assets.USER);
       System.out.print("> ");
-      String input = scanner.nextLine();
+      String[] input = scanner.nextLine().split(" ", 2);
       
       Command command = Command.DEFAULT;
       for (Command c : Command.values())
-        if (c.matches(input)) command = c;
+        if (c.matches(input[0])) command = c;
 
 			switch (command) {
 				case BYE:
@@ -29,33 +29,33 @@ public class Sam {
 					talk("Here is your list:\n\n" + list);
 					break;
         case MARK: {
-          int id = getIntArg(input, 1);
+          int id = Integer.parseInt(input[1]);
           tasks.markTask(id, true);
           talk("Great! I'll check the task:\n    "
              + tasks.printTask(id));
           break;
         }
         case UNMARK: {
-          int id = getIntArg(input, 1);
+          int id = Integer.parseInt(input[1]);
           tasks.markTask(id, false);
           talk("Okay, I'll uncheck the task:\n    "
              + tasks.printTask(id));
           break;
         }
         case TODO: {
-          Task task = new ToDo(input);
+          Task task = new ToDo(input[1]);
           tasks.addTask(task);
           talk("I've added \"" + input + "\" to your list");
           break;
         }
         case EVENT: {
-          Task task = new Event(input);
+          Task task = new Event(input[1]);
           tasks.addTask(task);
           talk("I've added \"" + input + "\" to your list");
           break;
         }
         case DEADLINE: {
-          Task task = new Deadline(input);
+          Task task = new Deadline(input[1]);
           tasks.addTask(task);
           talk("I've added \"" + input + "\" to your list");
           break;
@@ -72,9 +72,5 @@ public class Sam {
     System.out.println("┌───────────────────────────────────────────┐");
     System.out.println("  " + message);
     System.out.println("└───────────────────────────────────────────┘");
-  }
-
-  private static int getIntArg(String input, int i) {
-    return Integer.parseInt(input.split(" ")[i]);
   }
 }

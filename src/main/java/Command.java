@@ -14,8 +14,7 @@ enum Command {
     this.command = command;
   }
 
-  public boolean matches(String input) {
-    String[] arr = input.split(" ", 2);
-    return arr[0].equals(command);
+  public boolean matches(String command) {
+    return command.equals(this.command);
   }
 }
