@@ -9,6 +9,7 @@ public class Duke {
             + "|____/ \\__,_|_|\\_\\___|";
     private Scanner sc = new Scanner(System.in);
     private ArrayList<String> inputs = new ArrayList<>(100);
+    private ArrayList<Boolean> isDone = new ArrayList<>(100);
     public static void main(String[] args) {
         Duke duke = new Duke();
         duke.activate();
@@ -19,14 +20,14 @@ public class Duke {
         this.printLine();
         this.greet();
 
-        String i = this.getInput();
-        while(!this.saysBye(i)) {
-            if(this.saysList(i)) {
+        String i = sc.nextLine();
+        while (!this.stringMatch(i,"bye")) {
+            if (this.stringMatch(i, "list")) {
                 this.printList();
             } else {
                 this.addTask(i);
             }
-            i = this.getInput();
+            i = sc.nextLine();
         }
         this.terminate();
     }
@@ -37,12 +38,6 @@ public class Duke {
         this.printLine();
         System.out.println(s);
         this.printLine();
-    }
-    public String getInput() {
-        return sc.nextLine();
-    }
-    public boolean saysBye(String s) {
-        return s.equalsIgnoreCase("bye");
     }
     public void terminate() {
         //this.printLine();
@@ -56,11 +51,9 @@ public class Duke {
     public void storeInput(String i) {
         this.inputs.add(i);
     }
-    public boolean saysList(String s) {
-        return s.equalsIgnoreCase("list");
-    }
     public void printList() {
         //this.printLine();
+        System.out.println("Here are the tasks in your list:");
         for(int i = 1; i <= this.inputs.size(); i++) {
             System.out.println(i + ". " + this.inputs.get(i-1));
         }
@@ -71,5 +64,8 @@ public class Duke {
         System.out.println("Added: " + i);
         this.storeInput(i);
         this.printLine();
+    }
+    public boolean stringMatch(String input, String given) {
+        return input.equalsIgnoreCase(given);
     }
 }
