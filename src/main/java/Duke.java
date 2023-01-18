@@ -9,7 +9,7 @@ public class Duke {
 
     // Methods
     // List out all tasks and their rank.
-    public static void list() {
+    private static void list() {
         if (tasks.size() == 0) {
             System.out.println("No tasks left :)");
             return;
@@ -23,7 +23,7 @@ public class Duke {
     }
 
     // Mark task at index to be done
-    public static void markDone(int index) throws DukeException {
+    private static void markDone(int index) throws DukeException {
         if (index < 0 || index >= tasks.size()) {
             throw new DukeException("OOPS!!! Invalid index");
         }
@@ -35,7 +35,7 @@ public class Duke {
     }
 
     // Mark task at index to be undone
-    public static void markUndone(int index) throws DukeException {
+    private static void markUndone(int index) throws DukeException {
         if (index < 0 || index >= tasks.size()) {
             throw new DukeException("OOPS!!! Invalid index.");
         }
@@ -46,12 +46,32 @@ public class Duke {
                 curr.fullMessage() + "\n" + BORDER);
     }
 
-    // Returns the string representation of the task's full message
-    public static String delete(int index) throws DukeException {
+    // Delete task at index.
+    private static void delete(int index) throws DukeException {
         if (index < 0 || index >= tasks.size()) {
             throw new DukeException("OOPS!!! Invalid index.");
         }
-        return tasks.remove(index).fullMessage();
+        String message = tasks.remove(index).fullMessage();
+        System.out.println("Noted. I've removed this task:\n" + message + "\n" +
+                "Now you have " + tasks.size() + " tasks in the list.\n" + BORDER);
+    }
+
+    // Create and add task given message and code. 0 - toDos, 1 - Deadlines, 2 - Event
+    private static void addTask(String message, int code) throws DukeException {
+        Task t;
+        if (code == 0) {
+            t = new ToDos(message);
+        } else if (code == 1) {
+            t = new Deadlines(message.split("/"));
+        } else if (code == 2) {
+            t = new Events(message.split("/"));
+        } else {
+            // Unreachable as of now.
+            return;
+        }
+        tasks.add(t);
+        System.out.println("Got it. I've added this task:\n" + t.fullMessage());
+        System.out.println("Now you have " + tasks.size() + " tasks in this list\n" + BORDER);
     }
 
     public static void main(String[] args) {
@@ -66,7 +86,6 @@ public class Duke {
             String command = sc.next();
             // Useful variables
             int rank;
-            String[] messages;
             String message;
 
             try {
@@ -95,24 +114,15 @@ public class Duke {
                         break;
                     case "todo":
                         message = sc.nextLine().trim();
-                        Task t = new ToDos(message);
-                        tasks.add(t);
-                        System.out.println("Got it. I've added this task:\n" + t.fullMessage());
-                        System.out.println("Now you have " + tasks.size() + " tasks in this list\n" + BORDER);
+                        addTask(message, 0);
                         break;
                     case "deadline":
-                        messages = sc.nextLine().trim().split("/");
-                        t = new Deadlines(messages);
-                        tasks.add(t);
-                        System.out.println("Got it. I've added this task:\n" + t.fullMessage());
-                        System.out.println("Now you have " + tasks.size() + " tasks in this list\n" + BORDER);
+                        message = sc.nextLine().trim();
+                        addTask(message, 1);
                         break;
                     case "event":
-                        messages = sc.nextLine().trim().split("/");
-                        t = new Events(messages);
-                        tasks.add(t);
-                        System.out.println("Got it. I've added this task:\n" + t.fullMessage());
-                        System.out.println("Now you have " + tasks.size() + " tasks in this list\n" + BORDER);
+                        message = sc.nextLine().trim();
+                        addTask(message, 2);
                         break;
                     case "delete":
                         try {
@@ -120,12 +130,10 @@ public class Duke {
                         } catch (NumberFormatException e) {
                             throw new DukeException("OOPS! delete must have an integer rank");
                         }
-                        message = delete(rank - 1);
-                        System.out.println("Noted. I've removed this task:\n" + message + "\n" +
-                                "Now you have " + tasks.size() + " tasks in the list.\n" + BORDER);
+                        delete(rank - 1);
                         break;
                     default:
-                        System.out.println("lol what\n" + BORDER);
+                        System.out.println("OOPS!!! I'm sorry, but I don't know what that means :-(\n" + BORDER);
                         sc.nextLine();
                 }
             } catch (DukeException e) {
