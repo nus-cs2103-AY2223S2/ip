@@ -11,14 +11,14 @@ public class Duke {
     private ArrayList<Task> tasks = new ArrayList<>(100);
 
     public static void main(String[] args) {
+        System.out.println("Hello from\n" + logo + "\n");
         Duke duke = new Duke();
         duke.activate();
     }
     public void activate() {
-        this.printLine();
-        System.out.println(logo);
-        this.printLine();
-        this.greet();
+        //this.printLine();
+        //System.out.println("Hello from\n" + logo + "\n");
+        //this.greet();
 
         String i = sc.nextLine();
         while (!i.equalsIgnoreCase("bye")) {
