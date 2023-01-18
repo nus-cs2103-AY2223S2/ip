@@ -7,7 +7,7 @@ import types.Task;
 
 import java.util.regex.Pattern;
 
-public class HAddTask implements ICommand {
+public final class HAddTask implements ICommand {
     private final Pattern p = Pattern.compile(".*");
     private final TaskStorage ts;
 

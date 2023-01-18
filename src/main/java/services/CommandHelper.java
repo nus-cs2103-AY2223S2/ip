@@ -4,7 +4,7 @@ import types.ICommand;
 
 import java.lang.reflect.InvocationTargetException;
 
-public class CommandHelper {
+public final class CommandHelper {
     @SuppressWarnings("unchecked")
     public static Class<ICommand> getClass(String s) {
         try {

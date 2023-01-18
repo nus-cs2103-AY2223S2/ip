@@ -5,7 +5,7 @@ import types.ICommand;
 import java.util.ArrayList;
 import java.util.Objects;
 
-public class Parser {
+public final class Parser {
     private final ArrayList<ICommand> handlerRegistry = new ArrayList<>();
     private ICommand defaultHandler;
     private ICommand exitHandler;

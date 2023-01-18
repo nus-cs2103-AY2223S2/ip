@@ -1,6 +1,6 @@
 package services;
 
-public class Prompt {
+public final class Prompt {
     public static void beforeInput() {
         System.out.print("\uE0B4 ");
     }

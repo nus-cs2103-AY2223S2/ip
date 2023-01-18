@@ -6,7 +6,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
-public class TaskStorage {
+public final class TaskStorage {
     private final ArrayList<Task> tasks = new ArrayList<>(50);
 
     public void addTask(Task t) {
@@ -14,11 +14,11 @@ public class TaskStorage {
     }
 
     public void markByNo(int n) {
-        this.tasks.get(n-1).setDone();
+        this.tasks.get(n - 1).setDone();
     }
 
     public void unmarkByNo(int n) {
-        this.tasks.get(n-1).setUndone();
+        this.tasks.get(n - 1).setUndone();
     }
 
     public List<Task> getTasks() {
@@ -26,6 +26,6 @@ public class TaskStorage {
     }
 
     public Task getTaskByNo(int n) {
-        return this.tasks.get(n-1);
+        return this.tasks.get(n - 1);
     }
 }
