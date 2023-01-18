@@ -108,7 +108,7 @@ public class Duke {
                 task = todos.get(tid - 1);
                 task.markAsDone();
                 print("Nice! I've marked this task as done:");
-                print(task.toString());
+                print("\t" + task);
                 break;
             case "unmark":
                 try {
