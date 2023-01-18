@@ -25,6 +25,16 @@ public class Task {
         return this.done;
     }
 
+    /**
+     * Method for checking if a substring exists in the title.
+     *
+     * @param subString to search for.
+     * @return boolean representing result of the search.
+     */
+    public boolean contains(String subString) {
+        return this.title.contains(subString);
+    }
+
     public String toData() {
         return this.type + " | " + (this.done ? "1" : "0") + " | " + this.title;
     }

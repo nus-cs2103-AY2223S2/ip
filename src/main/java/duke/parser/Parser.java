@@ -40,8 +40,10 @@ public class Parser {
             taskList.addEvent(curr, ui);
         } else if (curr_title[0].equals("delete")) {
             taskList.deleteTask(curr_title, ui);
+        } else if (curr_title[0].equals("find")) {
+            taskList.findTask(curr_title, ui);
         } else {
-            throw new DukeException("Hmmm, I don't understand what you want to do");
+                throw new DukeException("Hmmm, I don't understand what you want to do");
         }
     }
 }

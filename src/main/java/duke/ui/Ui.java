@@ -54,6 +54,20 @@ public class Ui {
         System.out.println(line_break);
     }
 
+    /**
+     * Method to show user a failed search.
+     */
+    public void failedSearch() {
+        System.out.println(line_break + "\tThere are no matching tasks in your list :(\n"
+                    + line_break);
+    }
+
+    public void printSearch(TaskList temp) {
+        System.out.println(line_break + "\tHere are the matching tasks!");
+        System.out.print(temp.toString());
+        System.out.println(line_break);
+    }
+
     public void showLoadingError() {
         System.out.println(line_break + "\tLoading error :(");
         System.out.println(line_break);

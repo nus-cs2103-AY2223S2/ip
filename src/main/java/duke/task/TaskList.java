@@ -6,7 +6,7 @@ import duke.ui.*;
 import java.util.ArrayList;
 
 public class TaskList {
-    static ArrayList<Task> items;
+    private ArrayList<Task> items;
 
     public TaskList() {
         items = new ArrayList<>();
@@ -90,6 +90,42 @@ public class TaskList {
         } catch (Exception e) {
             throw new DukeException("Please give a valid input with index between 1 and " + items.size());
         }
+    }
+
+    /**
+     * Method to find a keyword within tasks via String array from user input.
+     *
+     * @param curr_title String array with user input.
+     * @param ui ui to show user messages.
+     * @throws DukeException if there is error in the command.
+     */
+    public void findTask(String[] curr_title, Ui ui) throws DukeException {
+        try {
+            String searchFor = curr_title[1].trim();
+            TaskList temp = new TaskList();
+            for (int i = 0; i < items.size(); i++) {
+                if (items.get(i).contains(searchFor)) {
+                    temp.initAdd(items.get(i));
+                }
+            }
+            if (temp.isEmpty()) {
+                ui.failedSearch();
+            } else {
+               ui.printSearch(temp);
+            }
+
+        } catch (Exception e) {
+            throw new DukeException("You need to do a search with the format `find {substring}`");
+        }
+    }
+
+    /**
+     * Method to check if TaskList is empty.
+     *
+     * @return boolean representing whether the list is empty.
+     */
+    public boolean isEmpty() {
+        return this.items.isEmpty();
     }
 
     public void initAdd(Task task) {
