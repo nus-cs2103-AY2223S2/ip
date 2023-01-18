@@ -14,8 +14,13 @@ public class Deadline extends Task {
         this.by = by;
     }
 
+    public Deadline(String description, String by) {
+        super(description);
+        this.by = LocalDate.parse(by);
+    }
+
     public SerializableTask serialize() {
-        String flags = by;
+        String flags = by.toString();
         return new SerializableTask(TaskType.DEADLINE, isDone, description, flags);
     }
 

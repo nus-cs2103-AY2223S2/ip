@@ -18,12 +18,12 @@ public class Event extends Task {
 
     public Event(String description, String ...flags) {
         super(description);
-        this.from = flags[0];
-        this.to = flags[1];
+        this.from = LocalDate.parse(flags[0]);
+        this.to = LocalDate.parse(flags[1]);
     }
 
     public SerializableTask serialize() {
-        String flags = from + "-" + to;
+        String flags = from + " to " + to;
         return new SerializableTask(TaskType.EVENT, isDone, description, flags);
     }
 

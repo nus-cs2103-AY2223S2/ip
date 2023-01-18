@@ -35,7 +35,7 @@ public class SerializableTask implements Marshal, Unmarshal {
         switch (taskType) {
             case TODO: return new Todo(description);
             case DEADLINE: return new Deadline(description, flags);
-            case EVENT: return new Event(description, flags.split("-"));
+            case EVENT: return new Event(description, flags.split(" to "));
             default: return null;
         }
     }
