@@ -5,22 +5,37 @@ import types.ICommand;
 import java.util.ArrayList;
 
 public class Parser {
-    private final ArrayList<Class<ICommand>> commandRegistry = new ArrayList<>();
-    private Class<ICommand> defaultCommand;
-    private Class<ICommand> exitCommand;
+    private final ArrayList<ICommand> handlerRegistry = new ArrayList<>();
+    private ICommand defaultHandler;
+    private ICommand exitHandler;
     private Runnable toExit;
 
     @SuppressWarnings("unused")
+    public void registerCommand(ICommand c) {
+        this.handlerRegistry.add(c);
+    }
+
+    @SuppressWarnings("unused")
     public void registerCommand(Class<ICommand> c) {
-        this.commandRegistry.add(c);
+        this.handlerRegistry.add(CommandHelper.getObject(c));
     }
 
-    public void setDefaultCommand(Class<ICommand> defaultCommand) {
-        this.defaultCommand = defaultCommand;
+    @SuppressWarnings("unused")
+    public void setDefaultHandler(Class<ICommand> c) {
+        this.defaultHandler = CommandHelper.getObject(c);
     }
 
-    public void setExitCommand(Class<ICommand> exitCommand) {
-        this.exitCommand = exitCommand;
+    public void setDefaultHandler(ICommand c) {
+        this.defaultHandler = c;
+    }
+
+    public void setExitHandler(Class<ICommand> c) {
+        this.exitHandler = CommandHelper.getObject(c);
+    }
+
+    @SuppressWarnings("unused")
+    public void setExitHandler(ICommand c) {
+        this.exitHandler = c;
     }
 
     public void setToExit(Runnable toExit) {
@@ -28,19 +43,19 @@ public class Parser {
     }
 
     public void handle(String expr) {
-        if (CommandHelper.canTake(this.exitCommand, expr)) {
-            CommandHelper.take(this.exitCommand, expr);
+        if (this.exitHandler.canTake(expr)) {
+            this.exitHandler.take(expr);
             toExit.run();
             return;
         }
 
-        for (Class<ICommand> c : commandRegistry) {
-            if (CommandHelper.canTake(c, expr)) {
-                CommandHelper.take(c, expr);
+        for (ICommand c : handlerRegistry) {
+            if (c.canTake(expr)) {
+                c.take(expr);
                 return;
             }
         }
 
-        CommandHelper.take(this.defaultCommand, expr);
+        this.defaultHandler.take(expr);
     }
 }

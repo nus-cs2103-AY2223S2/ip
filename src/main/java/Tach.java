@@ -1,6 +1,9 @@
+import handlers.HAddTask;
+import handlers.HShowTaskList;
 import services.CommandHelper;
 import services.Parser;
 import services.Prompt;
+import services.TaskStorage;
 
 import java.util.Scanner;
 
@@ -13,6 +16,7 @@ public class Tach {
             + "               \\/     \\/     \\/ \n";
     private static final Scanner scanner = new Scanner(System.in);
     private static final Parser parser = new Parser();
+    private static final TaskStorage ts = new TaskStorage();
     private static Boolean shouldContinue = true;
 
     public static void hello() {
@@ -20,8 +24,9 @@ public class Tach {
     }
 
     private static void initParser() {
-        parser.setDefaultCommand(CommandHelper.fromName("Commands.Echo"));
-        parser.setExitCommand(CommandHelper.fromName("Commands.Bye"));
+        parser.setDefaultHandler(new HAddTask(ts));
+        parser.registerCommand(new HShowTaskList(ts));
+        parser.setExitHandler(CommandHelper.getClass("handlers.HBye"));
         parser.setToExit(() -> shouldContinue = false);
     }
 
