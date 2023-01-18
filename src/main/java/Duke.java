@@ -38,6 +38,56 @@ public class Duke {
         indentedPrintln("  " + task);
     }
 
+    private static boolean isValidTask(String command) {
+        if (command.length() >= 6 && command.substring(0, 4).equals("todo")) {
+            return true;
+        } else if (command.length() >= 10 && command.substring(0, 8).equals("deadline")) {
+            return true;
+        } else if (command.length() >= 7 && command.substring(0, 5).equals("event")) {
+            return true;
+        }
+        return false;
+    }
+
+    private static void addTask(String command) {
+        int len = command.length();
+        String description;
+        Task newTask;
+        if (command.substring(0, 4).equals("todo")) {
+            description = command.substring(5);
+            newTask = new Todo(description);
+        } else if (command.substring(0, 8).equals("deadline")) {
+            int indexOfBy = -1;
+            for (int i = 0; i < len; i++) {
+                if (command.charAt(i) == '/') {
+                    indexOfBy = i;
+                }
+            }
+            description = command.substring(9, indexOfBy - 1);
+            String by = command.substring(indexOfBy + 4);
+            newTask = new Deadline(description, by);
+        } else {
+            int indexOfStart = -1, indexOfEnd = -1;
+            for (int i = 0; i < len; i++) {
+                if (command.charAt(i) == '/') {
+                    if (indexOfStart == -1) {
+                        indexOfStart = i;
+                    } else {
+                        indexOfEnd = i;
+                    }
+                }
+            }
+            description = command.substring(6, indexOfStart - 1);
+            String start = command.substring(indexOfStart + 6, indexOfEnd - 1);
+            String end = command.substring(indexOfEnd + 4);
+            newTask = new Event(description, start, end);
+        }
+        tasks.add(newTask);
+        indentedPrintln("Got it. I've added this task:");
+        indentedPrintln("  " + newTask);
+        indentedPrintln("Now you have " + tasks.size() + " tasks in the list.");
+    }
+
     public static void main(String[] args) {
         String logo = " ____        _        \n"
                 + "|  _ \\ _   _| | _____ \n"
@@ -51,13 +101,14 @@ public class Duke {
         while (!str.equals(bye)) {
             if (str.equals(list)) {
                 list();
-            } else if (str.substring(0, 4).equals(mark)) {
+            } else if (str.length() >= 4 && str.substring(0, 4).equals(mark)) {
                 mark(Character.getNumericValue(str.charAt(5)));
-            } else if (str.substring(0, 6).equals(unmark)) {
+            } else if (str.length() >= 6 && str.substring(0, 6).equals(unmark)) {
                 unmark(Character.getNumericValue(str.charAt(7)));
+            } else if (isValidTask(str)) {
+                addTask(str);
             } else {
-                tasks.add(new Task(str));
-                indentedPrintln("added: " + str);
+                // Exception
             }
             System.out.println();
             str = sc.nextLine();
