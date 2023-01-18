@@ -1,0 +1,11 @@
+task 1
+todo homework
+deadline math/by tomorrow 6pm
+event project meeting/from Mon 2pm/to 4pm
+list
+mark 2
+list
+unmark 2
+list
+list
+bye
