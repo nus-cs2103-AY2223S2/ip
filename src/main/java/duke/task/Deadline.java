@@ -4,14 +4,14 @@ import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 
-public class Deadline extends Task{
-    String deadline;
-    LocalDateTime dateline;
+public class Deadline extends Task {
+    private String deadline;
+    private LocalDateTime dateline;
 
     /**
      * Constructor method for Deadline.
      *
-     * @param title title of the Deadline.
+     * @param title    title of the Deadline.
      * @param deadline deadline of the Deadline.
      */
     public Deadline(String title, String deadline) {
@@ -29,9 +29,9 @@ public class Deadline extends Task{
      * Overloaded constructor method for Deadline.
      * Primarily for when loading on startup.
      *
-     * @param title title of the Deadline.
+     * @param title    title of the Deadline.
      * @param deadline deadline of the Deadline.
-     * @param done status of the Deadline.
+     * @param done     status of the Deadline.
      */
     public Deadline(String title, String deadline, boolean done) {
         super(title);
