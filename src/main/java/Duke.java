@@ -12,9 +12,10 @@ public class Duke {
 
         ArrayList<Task> Tasks = new ArrayList<Task>();
         Scanner sc = new Scanner(System.in);
-        String input = sc.nextLine();
+
 
         while (true) {
+            String input = sc.nextLine();
             try {
                 if (input.equals("bye")) {
                     break;
@@ -75,13 +76,7 @@ public class Duke {
                         if (input.length() <= 5) {
                             throw new DukeException("OOPS!!! You are missing the number of the task to be marked.");
                         }
-                        if (!Character.isDigit(input.charAt((5)))){
-                            throw new DukeException("OOPS!!! You are missing the number of the task to be marked.");
-                        }
                         int index = Integer.parseInt(input.substring(5));
-                        if (index > Tasks.size()) {
-                            throw new DukeException("OOPS!!! There are insufficient tasks.");
-                        }
                         Task task = Tasks.get(index - 1);
                         task.mark();
                         System.out.println("    Nice! I've marked this task as done:");
@@ -101,13 +96,15 @@ public class Duke {
                 } else {
                     throw new DukeException("OOPS!!! I'm sorry, but I don't know what that means :-(");
                 }
-                input = sc.nextLine();
             } catch (DukeException de){
                 System.out.println(de.getMessage());
-                input = sc.nextLine();
+            } catch (NumberFormatException nfe) {
+                System.out.println("OOPS!!! Mark or unmark has to be followed by an int.");
+            } catch (IndexOutOfBoundsException i) {
+                System.out.println("OOPS!!! There are insufficient tasks.");
             }
         }
         System.out.println("    " + "Bye. Hope to see you again soon!");
     }
-    
+
 }
