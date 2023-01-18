@@ -22,5 +22,4 @@ abstract public class Command implements Executable {
     @Override
     public abstract void execute() throws DukeException;
     public boolean isTerminating() { return isTerminating; }
-    public String getCommandType() { return commandType.getType(); }
 }
