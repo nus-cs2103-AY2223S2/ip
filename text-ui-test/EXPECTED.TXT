@@ -52,4 +52,8 @@ How shall I assist you today?
 2. [D][ ] do homework (by: tmr)
 3. [E][ ] wedding (from: now to: next year)
 
+:> [Error Encountered] No such task!
+
+:> Task deleted. Are you skipping on work again?
+
 :> Till next time...
