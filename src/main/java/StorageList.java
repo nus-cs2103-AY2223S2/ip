@@ -1,23 +1,29 @@
+import java.util.ArrayList;
+
 public class StorageList {
-    private String[] list;
-    private int index;
+    private ArrayList<Task> list;
 
     public StorageList() {
-        this.list = new String[100];
-        this.index = 0;
-
+        this.list = new ArrayList<>();
     }
 
-    public void addSentence(String sentence) {
-        list[index] = sentence;
-        index++;
+    public void addTask(String sentence) {
+        Task t = new Task(sentence);
+        list.add(t);
+    }
+
+    public void markTask(int taskno) {
+        list.get(taskno).markAsDone();
+    }
+
+    public void unmarkTask(int taskno) {
+        list.get(taskno).markAsUndone();
     }
 
     public void printList() {
-        int x = 0;
-        while (list[x] != null) {
-            System.out.println((x + 1) + ":" + list[x]);
-            x++;
+        System.out.println("Here are the tasks in your list: ");
+        for (int x = 0; x < list.size(); x++) {
+            System.out.println((x + 1) + "." + " [" + list.get(x).getStatusIcon() + "]" + " " + list.get(x));
         }
     }
 }
