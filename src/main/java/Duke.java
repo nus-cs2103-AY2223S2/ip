@@ -9,10 +9,10 @@ public class Duke {
         System.out.println(logo + "Hello! I'm GPT-1!");
         System.out.println("What can I do for you?" + logo);
 
-        ArrayList<String> storer = new ArrayList<>();
+        ArrayList<Task> storer = new ArrayList<>();
         while (!echo.equals("bye")) {
             echo = sc.nextLine();
-
+            String[] commands = echo.split(" ");
             if (echo.equals("list")) {
                 System.out.println(logo);
                 for (int i = 1; i <= storer.size(); i++) {
@@ -21,9 +21,15 @@ public class Duke {
                 }
                 System.out.println(logo);
 
+            } else if (commands[0].equals("mark")) {
+                int num = Integer.valueOf(commands[1]);
+                storer.get(num - 1).mark();
+                System.out.println("Nice! I've marked this task as done:");
+                System.out.println(storer.get(num - 1));
+
             } else {
                 System.out.println(logo);
-                storer.add(echo);
+                storer.add(new Task(echo));
                 System.out.println("added: " + echo);
                 System.out.println(logo);
             }
@@ -33,3 +39,4 @@ public class Duke {
         System.out.println(logo + "Bye. Hope to see you again soon!" + logo);
     }
 }
+
