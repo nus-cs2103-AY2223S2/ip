@@ -52,6 +52,30 @@ public class Duke {
                 System.out.println("Ahhh I see ...  I shall unmark that task then. *beep* Done. Task:");
                 System.out.println(out);
 
+            } else if (receive.length() > 4 && "todo ".equalsIgnoreCase(receive.substring(0,5))) {
+                String desc = receive.substring(5);
+                ToDo newTodo = new ToDo(desc);
+                System.out.println("Excellent sir, I've added the task: ");
+                System.out.println(newTodo.toString());
+                System.out.println(Task.getTaskCount());
+
+            } else if (receive.length() > 8 && "deadline ".equalsIgnoreCase(receive.substring(0,9))) {
+                String desc = receive.substring(9);
+                String[] stringarr = desc.split(" /by ");
+                Deadline newDeadline = new Deadline(stringarr[0], stringarr[1]);
+                System.out.println("Excellent sir, I've added the task: ");
+                System.out.println(newDeadline.toString());
+                System.out.println(Task.getTaskCount());
+
+            } else if (receive.length() > 5 && "event ".equalsIgnoreCase(receive.substring(0,6))) {
+                String desc = receive.substring(6);
+                String[] stringarr = desc.split(" /from ");
+                String[] strarr = stringarr[1].split(" /to ");
+                Event newEvent = new Event(stringarr[0], strarr[0], strarr[1]);
+                System.out.println("Excellent sir, I've added the task: ");
+                System.out.println(newEvent.toString());
+                System.out.println(Task.getTaskCount());
+
             } else {
                 Task newTask = new Task(receive);
 

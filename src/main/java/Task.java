@@ -50,8 +50,8 @@ public class Task {
 
     //Get inline print of task description with specified index
     public String getTaskInline(Integer index) {
-        String statusIcon = this.getStatusIcon();
-        return index.toString() + ". " + "[" + statusIcon + "] " + this.description;
+
+        return index.toString() + ". " + this.getTaskInline();
     }
 
     public String getTaskInline() {
@@ -59,8 +59,13 @@ public class Task {
         return "[" + statusIcon + "] " + this.description;
     }
 
-    public String getDescription() {
+    public String toString() {
         return this.description;
+    }
+
+    //Gets the size of the task list, in a String.
+    public static String getTaskCount() {
+        return "Now you have " + Task.listSize.toString() + " tasks in the list.";
     }
 
     public static void printList() {
