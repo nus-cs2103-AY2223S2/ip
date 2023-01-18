@@ -19,12 +19,9 @@ public class Task {
         Duke.printWithLines(str);
     }
 
-    public String getStatusIcon() {
-        return isDone ? "[X]" : "[ ]";
-    }
-
-    public String getDescription() {
-        return this.description;
+    @Override
+    public String toString() {
+        return (this.isDone ? "[X]" : "[ ]") + this.description;
     }
 
 }

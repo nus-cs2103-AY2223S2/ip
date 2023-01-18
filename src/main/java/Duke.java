@@ -35,7 +35,6 @@ public class Duke {
 
         } else if (lowerText.startsWith("deadline")) {
             String contents = text.substring(8);
-//                    text.replaceFirst("deadline", "");
             String[] arr = contents.split("/by");
             if (arr.length != 2) {
                 throw new DukeException("I don't know what that means. Format it as 'deadline [do something] /by [date]");
@@ -43,7 +42,6 @@ public class Duke {
             addedItem = new Deadline(arr[0], arr[1]);
         } else {
             String contents = text.substring(5);
-//                    text.replaceFirst("event", "");
             String[] arr1 = contents.split("/from");
             if (arr1.length != 2) {
                 throw new DukeException("I don't know what that means. Format it as 'event [do something] /from [start date] /to [end date]'");
