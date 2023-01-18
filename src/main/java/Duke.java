@@ -11,14 +11,19 @@ public class Duke {
                 + "|____/ \\__,_|_|\\_\\___|\n";
         System.out.println("Hello from\n" + logo);
         System.out.println("I am Duke the Chatbot!\nHow may i help you today?");
+        StorageList s = new StorageList();
 
         while (true) {
             String line = scanner.nextLine();
             if (line.toLowerCase().equals("bye")) {
                 System.out.println("See you soon!");
                 break;
-            } else {
-                System.out.println(line);
+            } else if (line.toLowerCase().equals("list")) {
+                s.printList();
+            }
+            else {
+                s.addSentence(line);
+                System.out.println("Added" + ": " + line);
             }
         }
 
