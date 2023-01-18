@@ -37,7 +37,7 @@ public class Duke {
                switch (command) {
                    case "bye":
                        System.out.println(TAB + HOR_BAR);
-                       System.out.println(TAB + "Bye! Please come back again ><!");
+                       System.out.println(TAB + "Bye! Please come back again ૮꒰˶• ༝ •˶꒱ა");
                        System.out.println(TAB + HOR_BAR);
                        endFlag = true;
                        break;
@@ -60,8 +60,22 @@ public class Duke {
                            tb.printOutOfRangeDialogue();
                        }
                        break;
-                   default:
-                       tb.addTask(input);
+                   default: // types of tasks
+                       int taskType;
+                       String description;
+
+                       if (command.equals("todo")) {
+                           description = input.substring(5);
+                           taskType = 0; // todo
+                       } else if (command.equals("deadline")) {
+                           description = input.substring(9);
+                           taskType = 1; // deadline
+                       } else {
+                           description = input.substring(6);
+                           taskType = 2; // event
+                       }
+
+                       tb.addTask(taskType, description);
                        break;
                }
            }
@@ -84,24 +98,38 @@ class TaskBook {
     public void listTasks() {
         int counter = 1;
         System.out.println(Duke.TAB + Duke.HOR_BAR);
+        System.out.println(Duke.TAB + "Here's what I have for you:");
         for (Task t : listOfTasks) {
-            System.out.print(Duke.TAB + counter++ + ". ");
-            System.out.print(t.toString());
+            System.out.print(Duke.TAB + Duke.TAB + counter++ + ". ");
+            System.out.print(t.toString() + "\n");
         }
         System.out.println(Duke.TAB + Duke.HOR_BAR);
     }
 
     /** This function adds a new task into listOfTasks, and updates the number of tasks in the TaskBook.
      *
-      * @param description The name of the task to add to listOfTasks.
+     * @param taskType
+     * @param description
      */
-    public void addTask(String description) {
+    public void addTask(int taskType, String description) {
         numOfTasks++;
-        Task t = new Task(description);
+        Task t;
+        if (taskType == 0)  //todo
+            t = new Todo(description);
+        else if (taskType == 1) // deadline
+            t = new Deadline(description.split("/")[0],
+                    description.split("/by")[1]);
+        else // event
+            t = new Event(description.split("/")[0],
+                    description.split("/from")[1].split("/to")[0],
+                    description.split("/to")[1]);
+
         listOfTasks.add(t);
 
         System.out.println(Duke.TAB + Duke.HOR_BAR);
-        System.out.println(Duke.TAB + "added: " + description);
+        System.out.println(Duke.TAB + "Done and ready to go! I've added this task for ya:");
+        System.out.println(Duke.TAB + Duke.TAB + t.toString());
+        printNumberOfTasks();
         System.out.println(Duke.TAB + Duke.HOR_BAR);
     }
 
@@ -112,7 +140,7 @@ class TaskBook {
     public void markDone(int index) {
         Task t = listOfTasks.get(index - 1);
         System.out.println(Duke.TAB + Duke.HOR_BAR);
-        System.out.println(Duke.TAB + "Alright~ I'll set the task as done!");
+        System.out.println(Duke.TAB + "Alright~ I'll set the task as done! ૮₍ ˶ᵔ ᵕ ᵔ˶ ₎ა");
         t.markAsDone();
         System.out.println(Duke.TAB + Duke.HOR_BAR);
     }
@@ -124,7 +152,7 @@ class TaskBook {
     public void markNotDone(int index) {
         Task t = listOfTasks.get(index - 1);
         System.out.println(Duke.TAB + Duke.HOR_BAR );
-        System.out.println(Duke.TAB + "Okay! I'll set the task as not done.");
+        System.out.println(Duke.TAB + "Okay! I'll set the task as not done. ૮₍ ˃ ⤙ ˂ ₎ა");
         t.markAsNotDone();
         System.out.println(Duke.TAB + Duke.HOR_BAR);
     }
@@ -136,6 +164,10 @@ class TaskBook {
      */
     public boolean indexWithinRange(int index) {
         return index > 0 && index <= numOfTasks;
+    }
+
+    public void printNumberOfTasks() {
+        System.out.println(Duke.TAB + "You now have " + numOfTasks + " tasks in the list ૮꒰ˊᗜˋ* ꒱ა");
     }
 
     /** This function prints a out of range dialogue.
@@ -164,13 +196,13 @@ class Task {
     /** This function marks the task as done */
     public void markAsDone() {
         this.isDone = true;
-        System.out.println(Duke.TAB + " [X] " + description);
+        System.out.println(Duke.TAB + Duke.TAB + this.toString());
     }
 
     /** This function marks the task as not done */
     public void markAsNotDone() {
         this.isDone = false;
-        System.out.println(Duke.TAB + " [ ] " + description);
+        System.out.println(Duke.TAB + Duke.TAB + this.toString());
     }
 
     /** This function returns a string denoting if task is done or not.
@@ -188,8 +220,49 @@ class Task {
 
     @Override
     public String toString() {
-        String output = getStatusIcon() + " " + description + "\n";
+        String output = getStatusIcon() + " " + description;
         return output;
+    }
+}
+
+class Todo extends Task {
+    public Todo(String description) {
+        super(description);
+    }
+
+    @Override
+    public String toString() {
+        return "[T]" + super.toString();
+    }
+}
+
+class Deadline extends Task {
+    protected String by;
+
+    public Deadline(String description, String by) {
+        super(description);
+        this.by = by;
+    }
+
+    @Override
+    public String toString() {
+        return "[D]" + super.toString() + " (by:" + by + ")";
+    }
+}
+
+class Event extends Task {
+    protected String from;
+    protected String to;
+
+    public Event(String description, String from, String to) {
+        super(description);
+        this.from = from;
+        this.to = to;
+    }
+
+    @Override
+    public String toString() {
+        return "[E]" + super.toString() + " (from:" + from + " to:" + to +")";
     }
 }
 
