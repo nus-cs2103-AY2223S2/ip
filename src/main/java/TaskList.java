@@ -46,8 +46,8 @@ public class TaskList {
         }
         this.items[last] = e;
         this.len += 1;
-        System.out.println("added: " + e.getDescription());
-        System.out.println("There are now " + this.len + " tasks to get done");
+        System.out.println("New Task Added: " + e.getDescription());
+        System.out.println("There are now " + this.len + " task(s) awaiting completion\n");
         return true;
     }
 
@@ -101,7 +101,7 @@ public class TaskList {
      */
     @Override
     public String toString() {
-        String str = "This is what you need to get done:\n";
+        String str = "This is your current task list:\n";
         int i = this.first;
         int count = 0;
         while (count < this.len) {

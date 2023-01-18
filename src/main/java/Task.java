@@ -17,12 +17,12 @@ public class Task {
 
     public void mark() {
         this.isDone = true;
-        System.out.println("Nice! I've marked this task as done:\n" + this);
+        System.out.println("This task has been marked as completed:\n" + this + "\n");
     }
 
     public void unmark() {
         this.isDone = false;
-        System.out.println("OK, I've marked this task as not done yet:\n" + this);
+        System.out.println("This task has been marked as uncompleted:\n" + this + "\n");
     }
 
     @Override

@@ -1,6 +1,6 @@
 import java.util.Scanner;
 
-public class Duke {
+public class Red{
     private static TaskList tasks = new TaskList(100);
     private static Scanner scanner;
     private static String input;
@@ -15,16 +15,19 @@ public class Duke {
 
 
     public static void main(String[] args) {
-        String logo = "░██████╗░██╗░██████╗░░█████╗░░█████╗░██╗░░██╗░█████╗░██████╗░\n"
-                +     "██╔════╝░██║██╔════╝░██╔══██╗██╔══██╗██║░░██║██╔══██╗██╔══██╗\n"
-                +     "██║░░██╗░██║██║░░██╗░███████║██║░░╚═╝███████║███████║██║░░██║\n"
-                +     "██║░░╚██╗██║██║░░╚██╗██╔══██║██║░░██╗██╔══██║██╔══██║██║░░██║\n"
-                +     "╚██████╔╝██║╚██████╔╝██║░░██║╚█████╔╝██║░░██║██║░░██║██████╔╝\n"
-                +     "░╚═════╝░╚═╝░╚═════╝░╚═╝░░╚═╝░╚════╝░╚═╝░░╚═╝╚═╝░░╚═╝╚═════╝░\n";
+        String logo = "██████╗░███████╗██████╗░\n"
+                 +    "██╔══██╗██╔════╝██╔══██╗\n"
+                 +    "██████╔╝█████╗░░██║░░██║\n"
+                 +    "██╔══██╗██╔══╝░░██║░░██║\n"
+                 +    "██║░░██║███████╗██████╔╝\n"
+                 +    "╚═╝░░╚═╝╚══════╝╚═════╝░\n";
 
 
 
-        System.out.println("Greetings from\n" + logo);
+
+
+
+        System.out.println(logo + "is ready to assist you\n");
 
         scanner = new Scanner(System.in);
         input = scanner.nextLine();
@@ -66,7 +69,7 @@ public class Duke {
 
         }
 
-        System.out.println("Goodbye. Hope to see you again soon!");
+        System.out.println("Goodbye.");
 
     }
 
