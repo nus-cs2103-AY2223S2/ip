@@ -3,20 +3,21 @@
  *
  * @author wz2k
  */
-public class Task {
+public abstract class Task {
     /**
-     * The task description
+     * The task description.
      */
     private String description;
 
     /**
-     * Marking to show if task is done
+     * Marking to show if task is done.
      */
     private boolean marked;
 
     /**
-     * Constructor for class Task
-     * @param desc description of the task
+     * Constructor for class Task.
+     *
+     * @param desc description of the task.
      */
     public Task(String desc) {
         this.description = desc;
@@ -37,19 +38,19 @@ public class Task {
      *
      * @return task details.
      */
-    public String getTaskDetails() {
+    public String toString() {
         return "[" + this.isMarkedSymbol() + "] " + this.description;
     }
 
     /**
-     * This method marks the task as done
+     * This method marks the task as done.
      */
     public void mark() {
         this.marked = true;
     }
 
     /**
-     * This method marks the task as not done
+     * This method marks the task as not done.
      */
     public void unmark() {
         this.marked = false;

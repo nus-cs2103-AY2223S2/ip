@@ -7,17 +7,17 @@ import java.util.Scanner;
  */
 public class Duke {
     /**
-     * The name of the chatbot
+     * The name of the chatbot.
      */
     public String name = "Duke";
 
     /**
-     * Storage of user's tasks
+     * Storage of user's tasks.
      */
     private final Task[] taskStorage = new Task[100];
 
     /**
-     * Number of tasks stored by the chatbot
+     * Number of tasks stored by the chatbot.
      */
     private int taskStorageSize = 0;
 
@@ -40,7 +40,7 @@ public class Duke {
 
     /**
      * This method processes the user's input and outputs
-     * the relevant reply by the chatbot
+     * the relevant reply by the chatbot.
      *
      * @param text the user's input.
      * @return a boolean based on if the conversation has ended.
@@ -52,6 +52,22 @@ public class Duke {
         } else if (text.startsWith("unmark")){
             this.unmarkTask(Integer.parseInt(text.substring(7)));
             return false;
+        } else if (text.startsWith("todo")){
+            Task task = new Todo(text.substring(5));
+            this.storeTask(task);
+            return false;
+        } else if (text.startsWith("deadline")){
+            String[] textArr = text.split("/", 2);
+            Task task = new Deadline(textArr[0].substring(9),
+                    textArr[1].substring(3));
+            this.storeTask(task);
+            return false;
+        } else if (text.startsWith("event")){
+            String[] textArr = text.split("/", 3);
+            Task task = new Event(textArr[0].substring(6),
+                    textArr[1].substring(5), textArr[2].substring(3));
+            this.storeTask(task);
+            return false;
         }
 
         switch (text) {
@@ -62,7 +78,7 @@ public class Duke {
                 this.displayTaskStorage();
                 break;
             default:
-                this.storeTask(text);
+                this.reply("Invalid input!");
         }
 
         return false;
@@ -89,20 +105,21 @@ public class Duke {
 
     /**
      * This method stores the task into the chatbot's
-     * task storage
+     * task storage.
      *
-     * @param text the description of the task.
+     * @param task the task to be added.
      */
-    private void storeTask(String text) {
-        Task task = new Task(text);
+    private void storeTask(Task task) {
         this.taskStorage[this.taskStorageSize] = task;
         this.taskStorageSize++;
-        this.reply("added: " + text);
+        this.reply("The following task has been added");
+        this.reply("  " + task.toString());
+        this.reply("Total tasks: " + this.taskStorageSize);
     }
 
     /**
      * This method outputs the entire list of tasks stored
-     * by the chatbot in order
+     * by the chatbot in order.
      */
     private void displayTaskStorage() {
         int size = this.taskStorageSize;
@@ -114,13 +131,13 @@ public class Duke {
 
         for (int i = 0; i < size; i++) {
             Task task = this.taskStorage[i];
-            this.reply((i + 1) + "." + task.getTaskDetails());
+            this.reply((i + 1) + "." + task.toString());
         }
     }
 
     /**
      * This method marks the task at the specified task
-     * number as done
+     * number as done.
      *
      * @param taskNumber the task order in the storage.
      */
@@ -128,12 +145,12 @@ public class Duke {
         Task task = this.taskStorage[taskNumber - 1];
         task.mark();
         this.reply("The following task is marked as done:");
-        this.reply("  " + task.getTaskDetails());
+        this.reply("  " + task.toString());
     }
 
     /**
      * This method marks the task at the specified task
-     * number as not done
+     * number as not done.
      *
      * @param taskNumber the task order in the storage.
      */
@@ -141,6 +158,6 @@ public class Duke {
         Task task = this.taskStorage[taskNumber - 1];
         task.unmark();
         this.reply("The following task is marked as not done:");
-        this.reply("  " + task.getTaskDetails());
+        this.reply("  " + task.toString());
     }
 }
