@@ -1,5 +1,5 @@
 public class Deadline extends Task {
-    private String typeOfTask = "D";
+    private final String typeOfTask = "D";
     private String deadlineOfTask;
 
     /**
@@ -20,7 +20,7 @@ public class Deadline extends Task {
     @Override
     public String getStatusOfTaskInString() {
         return (this.isDone)
-                ? "[" + typeOfTask + "][" + "[X] " + this.taskName + (" (") + this.deadlineOfTask + ")"
-                : "[" + typeOfTask + "][" + "[] " + this.taskName + (" (") + this.deadlineOfTask + ")";
+                ? "[" + typeOfTask + "][" + "[X] " + this.taskName + (" (by: ") + this.deadlineOfTask + ")"
+                : "[" + typeOfTask + "][" + "[] " + this.taskName + (" (by: ") + this.deadlineOfTask + ")";
     }
 }

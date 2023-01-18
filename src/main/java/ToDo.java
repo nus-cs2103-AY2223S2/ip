@@ -1,5 +1,5 @@
 public class ToDo extends Task {
-    private String typeOfTask = "T";
+    private final String typeOfTask = "T";
 
     /**
      * Constructs a new ToDo task.
