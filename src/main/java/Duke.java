@@ -28,13 +28,14 @@ public class Duke {
             if (part[0].equals("mark") || part[0].equals("unmark")) {
                 index = Integer.parseInt(part[1]) - 1;
             }
-            
+
             switch (part[0]) {
                 case "bye":
-                    System.out.println("Bye. Hope to see you again soon!");
+                    System.out.println("Oh no! Don't give up pls.. you still haven't found a gf yet :(");
                     break;
 
                 case "list":
+                    System.out.println("Take a look at ye DREAM goals for 2023");
                     for (int i = 0; i < list.size(); i++) {
                         System.out.println(i + 1 + "." + list.get(i));
                     }
@@ -48,8 +49,24 @@ public class Duke {
                     list.get(index).toBeUnmarked();
                     break;
 
+                case "todo":
+                    list.add(new Todo(input.substring(5, input.length())));
+                    System.out.println("Now you have " + list.size() + " tasks in the list.");
+                    break;
+
+                case "deadline":
+                    String[] deadline_part = input.substring(9, input.length()).split("/by ");
+                    list.add(new Deadline(deadline_part[0], deadline_part[1]));
+                    break;
+
+                case "event":
+                    String[] event_part = input.substring(6, input.length()).split("/from ");
+                    String[] range  = event_part[1].split("/to ");
+                    list.add(new Event(event_part[0], range[0], range[1]));
+                    break;
+
                 default:
-                    list.add(new Task (part[0]));
+                    //list.add(new Task (part[0]));
             }
         }
     }
@@ -75,6 +92,46 @@ class Task {
     @Override
     public String toString() {
         return (checkMark ? "[X] " : "[] ") + name;
+    }
+}
+
+class Todo extends Task{
+    public Todo(String name) {
+        super(name);
+    }
+
+    @Override
+    public String toString() {
+        return "[T]" + super.toString();
+    }
+}
+
+class Deadline extends Task{
+    private final String date;
+    public Deadline(String name, String date ) {
+        super(name);
+        this.date = date;
+    }
+
+    @Override
+    public String toString() {
+        return "[D]" + super.toString() + "(by: " + date + ")";
+    }
+}
+
+class Event extends Task{
+
+    private final String startingTime;
+    private final String endTime;
+    public Event(String name, String startingTime, String endTime) {
+        super(name);
+        this.startingTime = startingTime;
+        this.endTime = endTime;
+    }
+
+    @Override
+    public String toString() {
+        return "[E]" + super.toString() + "(from: " + startingTime + "to: " + endTime + ")";
     }
 }
 
