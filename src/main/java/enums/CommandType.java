@@ -9,7 +9,8 @@ public enum CommandType {
     EVENT("event"),
     MARK("mark"),
     UNMARK("unmark"),
-    INVALID("invalid");
+    INVALID("invalid"),
+    DATE("date");
     private final String type;
 
     CommandType(String type) {

@@ -1,9 +1,20 @@
 package entities;
 
 import java.util.*;
+import java.util.function.Predicate;
+import java.util.stream.Collectors;
 
 public class TaskList {
     private static final List<Task> taskList = new ArrayList<>();
+
+    public static void filter(Predicate<? super Task> predicate) {
+        List<Task> filteredList = taskList.stream().filter(predicate).collect(Collectors.toList());
+        if (filteredList.size() == 0) {
+            System.out.println("There are no active tasks on this date!");
+            return;
+        }
+        filteredList.forEach(System.out::println);
+    }
 
     public static void addTask(Task task, boolean print) {
         taskList.add(task);
@@ -52,7 +63,7 @@ public class TaskList {
             StringBuilder sb = new StringBuilder();
             ListIterator<Task> it = taskList.listIterator();
             while (it.hasNext()) {
-                sb.append(it.nextIndex() + 1  + ". " + it.next() + "\n");
+                sb.append(it.nextIndex() + 1).append(". ").append(it.next()).append("\n");
             }
             sb.deleteCharAt(sb.length() - 1);
             return sb.toString();

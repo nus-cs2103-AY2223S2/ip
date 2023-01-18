@@ -2,14 +2,21 @@ package entities;
 
 import enums.TaskType;
 
-public class Todo extends Task {
+import java.time.LocalDate;
 
+public class Todo extends Task {
     public Todo(String description) {
         super(description);
     }
 
+    @Override
     public SerializableTask serialize() {
         return new SerializableTask(TaskType.TODO, isDone, description);
+    }
+
+    @Override
+    public boolean activeOn(LocalDate date) {
+        return false;
     }
 
     @Override

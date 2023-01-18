@@ -28,9 +28,14 @@ This task don't exists! Please select one from the list.
 Noted. I've removed the task:
 	[E][ ] project meeting (from: Jan 12 2023 to: Feb 22 2023)
 Now you have 0 tasks in the list.
-There are no outstanding tasks!
+Got it. I've added this task:
+	[E][ ] project meeting (from: Jan 12 2023 to: Feb 22 2023)
+Now you have 1 tasks in the list.
+1. [E][ ] project meeting (from: Jan 12 2023 to: Feb 22 2023)
 Your format is incorrect.
 Please try again with the following format: todo [description].
 Your format is incorrect.
 Please try again with the following format: event [description] /from [yyyy-mm-dd] /to [yyyy-mm-dd].
+[E][ ] project meeting (from: Jan 12 2023 to: Feb 22 2023)
+There are no active tasks on this date!
 Goodbye!

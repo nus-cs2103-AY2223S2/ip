@@ -28,6 +28,7 @@ abstract public class Task {
     }
 
     public abstract SerializableTask serialize();
+    public abstract boolean activeOn(LocalDate date);
 
     public String getStatusIcon() {
         return (isDone ? "X" : " "); // mark done task with X

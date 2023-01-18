@@ -25,7 +25,13 @@ public class Deadline extends Task {
     }
 
     @Override
+    public boolean activeOn(LocalDate date) {
+        return by.equals(date);
+    }
+
+    @Override
     public String toString() {
-        return "[D]" + super.toString() + " (by: " + by.getDayOfWeek().toString().toLowerCase() + ", " + by.format(formatter) + ")";
+        return "[D]" + super.toString() + " (by: " +
+                by.getDayOfWeek().toString().toLowerCase() + ", " + by.format(formatter) + ")";
     }
 }
