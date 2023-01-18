@@ -11,6 +11,17 @@ public class Deadline extends Task {
         this.deadline = deadline;
     }
 
+    public Deadline(String taskName, Boolean isDone, String deadline) {
+        super(taskName, isDone);
+        this.taskName = taskName;
+        this.deadline = deadline;
+    }
+
+    @Override
+    public String dataFormat() {
+        return "D|" + super.dataFormat() + "|" + this.deadline;
+    }
+
 
     @Override
     public String toString() {

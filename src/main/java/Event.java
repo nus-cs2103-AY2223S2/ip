@@ -11,6 +11,17 @@ public class Event extends Task {
         this.endTime = endTime;
     }
 
+    public Event(String taskName, Boolean isDone, String startTime, String endTime) {
+        super(taskName, isDone);
+        this.startTime = startTime;
+        this.endTime = endTime;
+    }
+
+    @Override
+    public String dataFormat() {
+        return "T|" + super.dataFormat() + "|" + this.startTime + "|" + this.endTime;
+    }
+
     @Override
     public String toString() {
         return "[E]" + super.toString()

@@ -1,10 +1,19 @@
 public class Todo extends Task {
-    private String task;
+    private String taskName;
 
     public Todo(String task) {
         super(task);
-        this.task = task;
+        this.taskName = taskName;
+    }
 
+    public Todo(String taskName, Boolean isDone) {
+        super(taskName, isDone);
+        this.taskName = taskName;
+    }
+
+    @Override
+    public String dataFormat() {
+        return "T|" + super.dataFormat();
     }
 
     @Override

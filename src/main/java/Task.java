@@ -10,11 +10,20 @@ abstract class Task {
         this.isDone = false;
     }
 
+    public Task(String taskName, Boolean isDone) {
+        this.taskName = taskName;
+        this.isDone = isDone;
+    }
+
     private String getMark() {
         if (this.isDone) {
             return "[X]";
         }
         return "[ ]";
+    }
+
+    public String dataFormat() {
+        return this.isDone + "|" + this.taskName;
     }
 
     public void mark() {
