@@ -5,10 +5,6 @@ public class Deadline extends Task {
     public Deadline(String description, String by) {
         super(description);
         this.by = by;
-
-        System.out.println("Got it. I've added this task:");
-        System.out.println(this);
-        System.out.println("Now you have " + Task.noOfTasks + " tasks in the list.");
     }
 
     @Override
