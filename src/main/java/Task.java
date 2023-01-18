@@ -23,12 +23,9 @@ public class Task {
         this.isDone = !this.isDone;
     }
 
-    public String getStatusIcon() {
-        return this.isDone ? "[X]" : "[ ]";
-    }
     @Override
     public String toString() {
-        return this.description;
+        return (this.isDone ? "[X] " : "[ ] ") + this.description;
     }
 
 }
