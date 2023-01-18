@@ -13,6 +13,10 @@ public class Duke {
 
     private final ArrayList<Task> tasks = new ArrayList<>();
 
+    /**
+     * Adds task to the current task list.
+     * @param task Task to be created.
+     */
     private void createTask(Task task) {
         tasks.add(task);
         System.out.println("Hey new task added!");
@@ -20,36 +24,52 @@ public class Duke {
     }
 
     /**
+     * Validate the presence of args after a command.
+     * Does not precisely check validity of args for the command.
+     * @param cmd User command.
+     * @throws DukeException Exception thrown if no args were given.
+     */
+    private void validateNotEmptyArgs(String cmd) throws DukeException {
+        if (cmd.split(" ").length <= 1) {
+            throw new DukeException("You did not specify any details...");
+        }
+    }
+
+    /**
+     * Validate that index is within current set of tasks.
+     * @param index Index of the task, 1-indexed.
+     * @throws DukeException Exception thrown if index is invalid.
+     */
+    private void validateTaskIndex(Integer index) throws DukeException {
+        if (index < 0 || index >= tasks.size()) {
+            throw new DukeException("No such task!");
+        }
+    }
+    /**
      * Accepts a string that represents the user command, returns a boolean to
      * determine if the program should terminate immediately
-     * @param cmd user command
-     * @return true if program should exit
+     * @param cmd User command.
+     * @return True if program should exit.
      */
     public boolean handleCommand(String cmd) throws DukeException {
         String firstCmd = cmd.split(" ")[0];
+        int taskIndex;
 
         try {
-
             switch(DukeCommand.valueOf(firstCmd)) {
                 case bye:
                     System.out.println("Till next time...");
                     return true;
 
                 case todo:
-                    // Validation of input
-                    if (cmd.split(" ").length <= 1) {
-                        throw new DukeException("You did not specify any details...");
-                    }
+                    validateNotEmptyArgs(cmd);
                     String description = cmd.substring(5);
 
                     createTask(new TodoTask(description));
                     break;
 
                 case deadline:
-                    // Validation of input
-                    if (cmd.split(" ").length <= 1) {
-                        throw new DukeException("You did not specify any details...");
-                    }
+                    validateNotEmptyArgs(cmd);
                     String deadlineArgs = cmd.substring(9);
 
                     // Validation of input
@@ -63,10 +83,7 @@ public class Duke {
                     break;
 
                 case event:
-                    // Validation of input
-                    if (cmd.split(" ").length <= 1) {
-                        throw new DukeException("You did not specify any details...");
-                    }
+                    validateNotEmptyArgs(cmd);
                     String eventArgs = cmd.substring(6);
 
                     // Validation of input
@@ -88,51 +105,33 @@ public class Duke {
                     break;
 
                 case mark:
-                    // Validation of input
-                    if (cmd.split(" ").length < 2) {
-                        throw new DukeException("Insufficient details given...");
-                    }
+                    validateNotEmptyArgs(cmd);
+                    taskIndex = Integer.parseInt(cmd.split(" ")[1]) - 1;
+                    validateTaskIndex(taskIndex);
 
-                    int markTaskIndex = Integer.parseInt(cmd.split(" ")[1]) - 1;
-                    if (markTaskIndex < 0 || markTaskIndex >= tasks.size()) {
-                        throw new DukeException("No such task!");
-                    }
-
-                    tasks.get(markTaskIndex).setIsDone(true);
+                    tasks.get(taskIndex).setIsDone(true);
 
                     System.out.println("This task is now done, what's next?");
-                    System.out.println(tasks.get(markTaskIndex));
+                    System.out.println(tasks.get(taskIndex));
                     break;
 
                 case unmark:
-                    // Validation of input
-                    if (cmd.split(" ").length < 2) {
-                        throw new DukeException("Insufficient details given...");
-                    }
+                    validateNotEmptyArgs(cmd);
+                    taskIndex = Integer.parseInt(cmd.split(" ")[1]) - 1;
+                    validateTaskIndex(taskIndex);
 
-                    int unmarkTaskIndex = Integer.parseInt(cmd.split(" ")[1]) - 1;
-                    if (unmarkTaskIndex < 0 || unmarkTaskIndex >= tasks.size()) {
-                        throw new DukeException("No such task!");
-                    }
-
-                    tasks.get(unmarkTaskIndex).setIsDone(false);
+                    tasks.get(taskIndex).setIsDone(false);
 
                     System.out.println("This task is now not done, how disappointing...");
-                    System.out.println(tasks.get(unmarkTaskIndex));
+                    System.out.println(tasks.get(taskIndex));
                     break;
 
                 case delete:
-                    // Validation of input
-                    if (cmd.split(" ").length < 2) {
-                        throw new DukeException("Insufficient details given...");
-                    }
+                    validateNotEmptyArgs(cmd);
+                    taskIndex = Integer.parseInt(cmd.split(" ")[1]) - 1;
+                    validateTaskIndex(taskIndex);
 
-                    int deleteTaskIndex = Integer.parseInt(cmd.split(" ")[1]) - 1;
-                    if (deleteTaskIndex < 0 || deleteTaskIndex >= tasks.size()) {
-                        throw new DukeException("No such task!");
-                    }
-
-                    tasks.remove(deleteTaskIndex);
+                    tasks.remove(taskIndex);
 
                     System.out.println("Task deleted. Are you skipping on work again?");
                     break;
@@ -140,6 +139,8 @@ public class Duke {
                 default:
                     throw new DukeException("Arii does not recognise this command...");
             }
+        } catch (NumberFormatException e) {
+            throw new DukeException("That's not a number! Go count your numbers before trying again.");
         } catch (IllegalArgumentException e) {
             throw new DukeException("Arii does not recognise this command...");
         }
