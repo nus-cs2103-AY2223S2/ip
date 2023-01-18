@@ -1,7 +1,7 @@
 import java.util.Scanner;
 
 public class Duke {
-    public static void main(String[] args) {
+    public static void main(String[] args) throws Exception {
         String LOGO = "       _             _    _    _                _                \n" +
                 "  ___ | |__    __ _ | |_ | |_ (_) _ __    __ _ | |_  ___   _ __  \n" +
                 " / __|| '_ \\  / _` || __|| __|| || '_ \\  / _` || __|/ _ \\ | '_ \\ \n" +
@@ -23,7 +23,11 @@ public class Duke {
                 chatBot.close();
                 break;
             } else {
-                chatBot.processInput(input);
+                try {
+                    chatBot.processInput(input);
+                } catch (Exception e) {
+                    throw e;
+                }
             }
         }
     }
