@@ -52,6 +52,10 @@ public class Request {
                     com = new AddEventCommand(request);
                     response = com.execute(this.tasks);
                     break;
+                case "delete":
+                    com = new RemoveCommand(request);
+                    response = com.execute(this.tasks);
+                    break;
                 default:
                     throw new UnknownCommandException();
             }

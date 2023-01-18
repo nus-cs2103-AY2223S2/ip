@@ -71,6 +71,14 @@ public class TaskList {
     }
 
     /**
+     * Delete task at specific index, idx
+     * @param idx index of the task in the array to be deleted
+     */
+    public void deleteTask(Integer idx) {
+        this.tasks.remove(idx.intValue());
+    }
+
+    /**
      * Getter method to get the task list
      * @return task list
      */
