@@ -86,24 +86,24 @@ public class Duke {
         String op = input.split(" ")[0];
 
         switch (op) {
-            case "bye":
-                return byeCommand;
-            case "deadline":
-                return deadlineCommand;
-            case "delete":
-                return deleteCommand;
-            case "event":
-                return eventCommand;
-            case "list":
-                return listCommand;
-            case "mark":
-                return markCommand;
-            case "todo":
-                return toDoCommand;
-            case "unmark":
-                return unmarkCommand;
-            default:
-                throw new DukeException("I'm sorry, but I don't know what that means :-(");
+        case "bye":
+            return byeCommand;
+        case "deadline":
+            return deadlineCommand;
+        case "delete":
+            return deleteCommand;
+        case "event":
+            return eventCommand;
+        case "list":
+            return listCommand;
+        case "mark":
+            return markCommand;
+        case "todo":
+            return toDoCommand;
+        case "unmark":
+            return unmarkCommand;
+        default:
+            throw new DukeException("I'm sorry, but I don't know what that means :-(");
         }
     }
 
