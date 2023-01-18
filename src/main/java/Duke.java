@@ -1,35 +1,39 @@
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Scanner;
 
 public class Duke {
     static Scanner in = new Scanner(System.in);
-    static ArrayList<Task> stringStorage = new ArrayList<Task>();
+    static ArrayList<Task> taskStorage = new ArrayList<Task>();
 
     public static void main(String[] args) {
         greetings();
 
         while (true) {
             String input = getUserInput();
-            String[] inputSplit = input.split(" ");
-            String command = inputSplit[0];
-            if (command.equals("bye"))
+
+            if (input.equals("bye"))
                 break;
 
-            if (command.contains("list")) {
+            if (input.contains("list")) {
                 listItem();
                 continue;
             }
 
-            if (command.contains("unmark")) {
+            if (input.contains("unmark")) {
+                String[] inputSplit = input.split(" ");
+
                 unmarkItem(inputSplit[1]);
                 continue;
             }
 
-            if (command.contains("mark")) {
+            if (input.contains("mark")) {
+                String[] inputSplit = input.split(" ");
                 markItem(inputSplit[1]);
                 continue;
             }
 
+            // Else store item
             storeItem(input);
         }
 
@@ -37,11 +41,11 @@ public class Duke {
     }
 
     public static void greetings() {
-        System.out.println("Hello! I'm Duke\nWhat can I do for you?");
+        System.out.println("Hello! I'm Duke\nWhat can I do for you?\n");
     }
 
     public static void bye() {
-        System.out.println("Bye. Hope to see you again soon!");
+        System.out.println("Bye. Hope to see you again soon!\n");
     }
 
     public static void echo(String input) {
@@ -54,27 +58,46 @@ public class Duke {
         return userInput;
     }
 
-    public static void storeItem(String item) {
-        stringStorage.add(new Task(item));
+    public static void storeItem(String input) {
+        String[] inputSplit = input.split(" ");
+        String command = inputSplit[0];
+        Task task;
 
-        System.out.println(String.format("added: %s\n", item));
+        switch (command) {
+            case "todo":
+                task = createTodo(inputSplit);
+                break;
+            case "deadline":
+                task = createDeadline(inputSplit);
+                break;
+            case "event":
+                task = createEvent(inputSplit);
+                break;
+            default:
+                return;
+        }
+
+        taskStorage.add(task);
+        System.out.println("Got it. I've added this task:");
+        System.out.println(task);
+        System.out.println("Now you have " + Duke.taskStorage.size() + " tasks in the list.\n");
     }
 
     public static void listItem() {
-        int size = stringStorage.size();
+        int size = taskStorage.size();
         
         System.out.println("Here are the tasks in your list:");
         for (int i = 0; i < size; i++)
-            System.out.println((i + 1) + ". " + stringStorage.get(i));
+            System.out.println((i + 1) + ". " + taskStorage.get(i));
         
         System.out.println();
     }
 
     public static void markItem(String item) {
         int index = Integer.parseInt(item) - 1;
-        if (index >= stringStorage.size())
+        if (index >= taskStorage.size())
             return;
-        Task task = stringStorage.get(index);
+        Task task = taskStorage.get(index);
         task.markAsDone();
 
         System.out.println(String.format("Nice! I've marked this task as done:\n%s\n", task));
@@ -82,11 +105,42 @@ public class Duke {
 
     public static void unmarkItem(String item) {
         int index = Integer.parseInt(item) - 1;
-        if (index >= stringStorage.size())
+        if (index >= taskStorage.size())
             return;
-        Task task = stringStorage.get(index);
+        Task task = taskStorage.get(index);
         task.markAsNotDone();
 
         System.out.println(String.format("OK, I've marked this task as not done yet:\n%s\n", task));
+    }
+
+    public static Task createTodo (String[] inputSplit) {
+        String taskInfo = getTaskInfo(inputSplit).strip();
+
+        return new Todo(taskInfo);
+    }
+
+    public static Task createDeadline (String[] inputSplit) {
+        String[] taskInfo = getTaskInfo(inputSplit).split("/by");
+        String description = taskInfo[0].strip();
+        String by = taskInfo[1].strip();
+
+        return new Deadline(description, by);
+    }
+
+    public static Task createEvent (String[] inputSplit) {
+        String[] taskInfo = getTaskInfo(inputSplit).split("/from");
+        String description = taskInfo[0].strip();
+        String[] timing = taskInfo[1].split("/to");
+        String from = timing[0].strip();
+        String to = timing[1].strip();
+
+        return new Event(description, from, to);
+    }
+
+    private static String getTaskInfo(String[] inputSplit) {
+        String[] removedCommand = Arrays.copyOfRange(inputSplit, 1, inputSplit.length);
+        String taskInfo = String.join(" ", removedCommand);
+
+        return taskInfo;
     }
 }
