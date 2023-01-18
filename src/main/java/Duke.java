@@ -1,9 +1,10 @@
+import java.util.ArrayList;
 import java.util.Scanner;
 import java.util.regex.*;
 
 public class Duke {
-    private static Task[] storage = new Task[100];
-    private static int pointer = 0;
+    private static final int cap = 100;
+    private static ArrayList<Task> storage = new ArrayList<>(cap);
     public static void main(String[] args) throws Exception {
         String logo = " ____        _        \n"
                 + "|  _ \\ _   _| | _____ \n"
@@ -62,24 +63,38 @@ public class Duke {
                 } else {
                     if (Pattern.compile("\\D+.\\d+").matcher(input).find()) {
                         int index = Integer.parseInt(inputs[1]);
-                        if (inputs[0].equals("mark") && index < pointer) {
-                            storage[index - 1].markAsDone();
-                            System.out.println(
-                                    "_____________________________________\n"
-                                            + "Nice! I've marked this task as done\n"
-                                            + " " + storage[index - 1].toString() + "\n"
-                                            + "_____________________________________\n"
-                            );
-                        } else if (inputs[0].equals("unmark") && index < pointer) {
-                            storage[index - 1].unMark();
-                            System.out.println(
-                                    "_____________________________________\n"
-                                            + "Ok, I've marked this task as not done yet\n"
-                                            + " " + storage[index].toString() + "\n"
-                                            + "_____________________________________\n"
-                            );
+                        if (inputs[0].equals("mark")) {
+                            try {
+                                storage.get(index - 1).markAsDone();
+                                System.out.println(
+                                        "_____________________________________\n"
+                                                + "Nice! I've marked this task as done\n"
+                                                + " " + storage.get(index - 1).toString() + "\n"
+                                                + "_____________________________________\n"
+                                );
+                            } catch (IndexOutOfBoundsException err){
+                                throw new DukeException("Invalid index given!");
+                            }
+                        } else if (inputs[0].equals("unmark")) {
+                            try {
+                                storage.get(index - 1).unMark();
+                                System.out.println(
+                                        "_____________________________________\n"
+                                                + "Ok, I've marked this task as not done yet\n"
+                                                + " " + storage.get(index - 1).toString() + "\n"
+                                                + "_____________________________________\n"
+                                );
+                            } catch (IndexOutOfBoundsException err) {
+                                throw new DukeException("Invalid index given!");
+                            }
+                        } else if (inputs[0].equals("delete")) {
+                            try {
+                                delete(index - 1);
+                            } catch (IndexOutOfBoundsException err){
+                                throw new DukeException("Invalid index given!");
+                            }
                         } else {
-                            throw new DukeException("Incorrect index or incorrect command given");
+                            throw new DukeException("☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
                         }
                     } else {
                         throw new DukeException("☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
@@ -108,10 +123,9 @@ public class Duke {
 
     private static void list(){
         System.out.println("_____________________________________\n");
-        for (int i = 0; i < pointer; i++){
-            int index = i + 1;
+        for (Task task: storage){
             System.out.println(
-                    index + ". " + storage[i].toString() + "\n"
+                    storage.indexOf(task) + ". " + task.toString() + "\n"
             );
         }
         System.out.println("_____________________________________\n");
@@ -127,14 +141,14 @@ public class Duke {
                 rawInput.indexOf("/by") + "/by ".length()
         );
 
-        storage[pointer] = new Deadline(desc, by);
+        Task taskAdd = new Deadline(desc, by);
+        storage.add(taskAdd);
         System.out.println("_____________________________________\n"
                 + "Got it. I've added this task:\n"
-                + " " + storage[pointer].toString() +"\n"
+                + " " + taskAdd.toString() +"\n"
                 + taskCount() + "\n"
                 + "_____________________________________\n"
         );
-        pointer++;
     }
 
     private static void events(String rawInput){
@@ -152,14 +166,14 @@ public class Duke {
                 rawInput.indexOf("/to") + "/to ".length()
         );
 
-        storage[pointer] = new Events(desc, from, to);
+        Task taskAdd = new Events(desc, from, to);
+        storage.add(taskAdd);
         System.out.println("_____________________________________\n"
                 + "Got it. I've added this task:\n"
-                + " " + storage[pointer].toString() +"\n"
+                + " " + taskAdd.toString() +"\n"
                 + taskCount() + "\n"
                 + "_____________________________________\n"
         );
-        pointer++;
     }
 
     private static void todo(String rawInput){
@@ -167,20 +181,31 @@ public class Duke {
                 rawInput.indexOf("todo") + "todo ".length()
         );
 
-        storage[pointer] = new ToDo(desc);
+        Task taskAdd = new ToDo(desc);
+        storage.add(taskAdd);
         System.out.println("_____________________________________\n"
                 + "Got it. I've added this task:\n"
-                + " " + storage[pointer].toString() +"\n"
+                + " " + taskAdd.toString() +"\n"
                 + taskCount() + "\n"
                 + "_____________________________________\n"
         );
-        pointer++;
     }
 
     private static String taskCount(){
-        int newCount = pointer + 1;
+        int newCount = storage.size();
         String task = newCount == 1 ? " task" : " tasks";
         return "Now you have " + newCount + task + " in the list.";
+    }
+
+    private static void delete(int index){
+        Task taskRemoved = storage.remove(index);
+        System.out.println(
+                "_____________________________________\n"
+                +  "Noted. I've removed this task:\n"
+                +  " " + taskRemoved.toString() + "\n"
+                + taskCount() + "\n"
+                + "_____________________________________\n"
+        );
     }
 }
 
