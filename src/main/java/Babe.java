@@ -62,10 +62,9 @@ public class Babe {
      * Receives user's input.
      * Receives input from the user and stores it in input field.
      */
-    private void listen() {
-        Scanner scanner = new Scanner(System.in);
-        userInput = new ArrayList<>(Arrays.asList(scanner.nextLine().split(" ")));
-        userInputLen = userInput.size();
+    private void listen(Scanner scanner) {
+            userInput = new ArrayList<>(Arrays.asList(scanner.nextLine().split(" ")));
+            userInputLen = userInput.size();
     }
 
     /**
@@ -202,15 +201,17 @@ public class Babe {
 
         Babe chatBot = new Babe();
         chatBot.welcome();
+        Scanner scanner = new Scanner(System.in);
 
         while (true) {
-
-            chatBot.listen();
+            chatBot.listen(scanner);
+            // Instruction here refers to the first word of the input
             String instruction = chatBot.userInput.get(0);
             int inputLength = chatBot.userInput.size();
 
 
             if (instruction.equalsIgnoreCase("bye") && inputLength == 1) {
+                scanner.close();
                 chatBot.sayBye();
             } else if (instruction.equalsIgnoreCase("list") && inputLength == 1) {
                 chatBot.printList();
@@ -235,6 +236,7 @@ public class Babe {
                 chatBot.addToDo(chatBot.rebuildUserInput(0, inputLength));
             }
         }
+
     }
 
 
