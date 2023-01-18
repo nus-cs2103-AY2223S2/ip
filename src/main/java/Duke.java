@@ -24,6 +24,10 @@ public class Duke {
 		// Command Words
 		String endString = "bye";
 		String listTasks = "list";
+		String toMark = "mark";
+		int markLen = toMark.length();
+		String toUnmark = "unmark";
+		int unmarkLen = toUnmark.length();
 		
         System.out.println(stall + indent + "Hey! D:< I'm not\n" + dukeLogo);
 		System.out.println(indent + "I'm\n" + cbotLogo);
@@ -37,9 +41,29 @@ public class Duke {
 			System.out.println();
 			
 			if (userInput.equals(listTasks)) {
-				System.out.println(indent + "Here's what you have:");
-				td.printTasks();
-				System.out.println();
+				if (td.getCount() == 0) {
+					System.out.println(indent + "Freedom! You have no tasks :D");
+				} else {
+					System.out.println(indent + "Here's what you have:");
+					td.printTasks();
+					System.out.println();
+				}
+			} else if (userInput.length() > markLen + 1
+					&& userInput.substring(0, markLen).equals(toMark)) {
+				try {
+					int num = Integer.valueOf(userInput.substring(markLen + 1));
+					System.out.println(indent + td.mark(num));
+				} catch (NumberFormatException ex) {
+					System.out.println("Hm, that's not a valid index!");
+				}
+			} else if (userInput.length() > unmarkLen + 1
+					&& userInput.substring(0, unmarkLen).equals(toUnmark)) {
+				try {
+					int num = Integer.valueOf(userInput.substring(unmarkLen + 1));
+					System.out.println(indent + td.unmark(num));
+				} catch (NumberFormatException ex) {
+					System.out.println("Hm, that's not a valid index!");
+				}
 			} else {
 				System.out.println(indent + td.addTask(userInput));
 			}
