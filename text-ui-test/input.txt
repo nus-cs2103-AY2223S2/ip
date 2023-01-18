@@ -15,4 +15,17 @@ list
 todo task5
 delete 1
 list
+
+
+invalidCmd
+todo
+todo
+todo /invalidArg
+deadline
+deadline task6
+deadline task7 /by
+deadline task8 /by 6th May
+event task9 /by 2pm
+event task10 /from 7th July 5am /to
+event task11 /from 7th July 5am /to 7th July 10am
 bye
