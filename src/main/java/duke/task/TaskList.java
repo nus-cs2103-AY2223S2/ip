@@ -6,7 +6,7 @@ import duke.ui.*;
 import java.util.ArrayList;
 
 public class TaskList {
-    static ArrayList<Task> items;
+    private ArrayList<Task> items;
 
     public TaskList() {
         items = new ArrayList<>();

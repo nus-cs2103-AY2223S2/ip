@@ -9,9 +9,8 @@ import java.io.IOException;
 import java.util.Scanner;
 
 public class Duke {
-    static String line_break = "\n\t ^-^-^-^-^-^-^-^-^-^-^-^-^-^-^-^-^-^-^-^-^-^-^-^-^-^-^-^-^-^-^\n";
+    private final String LINE_BREAK = "\n\t ^-^-^-^-^-^-^-^-^-^-^-^-^-^-^-^-^-^-^-^-^-^-^-^-^-^-^-^-^-^-^\n";
     private TaskList taskList;
-
     private Storage storage;
 
     private Ui ui;
@@ -41,7 +40,7 @@ public class Duke {
                 parser.parse_cmds(taskList, ui);
                 storage.writeToData(taskList.itemsToData());
             } catch (Exception e) {
-                System.out.println(line_break + "\t " + e.getMessage() + "\n" + line_break);
+                System.out.println(LINE_BREAK + "\t " + e.getMessage() + "\n" + LINE_BREAK);
             }
         }
     }

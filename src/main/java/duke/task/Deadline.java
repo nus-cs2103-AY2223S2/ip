@@ -5,8 +5,9 @@ import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 
 public class Deadline extends Task{
-    String deadline;
-    LocalDateTime dateline;
+    private String deadline;
+    private LocalDateTime dateline;
+
     public Deadline(String title, String deadline) throws DateTimeParseException {
         super(title);
         this.deadline = deadline;

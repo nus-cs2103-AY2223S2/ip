@@ -2,10 +2,10 @@ package duke.task;
 
 public class Task {
     boolean done;
-    String checked = "[X]";
-    String unchecked = "[ ]";
-    String title;
-    String type;
+    private final String CHECKED = "[X]";
+    private final String UNCHECKED = "[ ]";
+    protected String title;
+    protected String type;
 
     public Task(String title) {
         this.title = title;
@@ -30,7 +30,7 @@ public class Task {
     }
     @Override
     public String toString() {
-        return this.type + (done ? checked : unchecked) + " "  + this.title;
+        return this.type + (done ? CHECKED : UNCHECKED) + " "  + this.title;
     }
 
 }
