@@ -7,7 +7,7 @@ public class James {
         while (true) {
             String input = scanner.nextLine();
             if (input.equals("bye")) {
-                System.out.println("Bye. Hope to see you soon!");
+                System.out.println("Bye. Hope to see you again soon!");
                 break;
             }
             System.out.println(input);
