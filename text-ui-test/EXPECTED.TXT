@@ -43,6 +43,33 @@ OOPS!!! I'm sorry, but I don't know what that means :-(
 Invalid format for ToDo.
 Usage: todo <task>
 
+--------------------------------------
+Got it. I've added this task:
+[T][ ] join sports club
+Now you have 4 tasks in the list.
+--------------------------------------
+
+--------------------------------------
+Here are the tasks in your list:
+1. [T][ ] borrow book
+2. [D][X] return book (by: Sunday)
+3. [E][ ] project meeting (from: Mon 2pm to: 4pm)
+4. [T][ ] join sports club
+--------------------------------------
+
+--------------------------------------
+Noted. I've removed this task:
+[D][X] return book (by: Sunday)
+Now you have 3 tasks in the list.
+--------------------------------------
+
+--------------------------------------
+Here are the tasks in your list:
+1. [T][ ] borrow book
+2. [E][ ] project meeting (from: Mon 2pm to: 4pm)
+3. [T][ ] join sports club
+--------------------------------------
+
 Invalid format for Deadline.
 Usage: deadline <task> /by <date/time>
 
@@ -51,14 +78,14 @@ Usage: <task> /from <date/time> /to <date/time>
 
 --------------------------------------
 OK, I've marked this task as not done yet:
-[D][ ] return book (by: Sunday)
+[E][ ] project meeting (from: Mon 2pm to: 4pm)
 --------------------------------------
 
 --------------------------------------
 Here are the tasks in your list:
 1. [T][ ] borrow book
-2. [D][ ] return book (by: Sunday)
-3. [E][ ] project meeting (from: Mon 2pm to: 4pm)
+2. [E][ ] project meeting (from: Mon 2pm to: 4pm)
+3. [T][ ] join sports club
 --------------------------------------
 
 --------------------------------------

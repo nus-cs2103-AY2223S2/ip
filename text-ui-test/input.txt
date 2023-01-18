@@ -6,6 +6,10 @@ mark 2
 list
 invalid input
 todo
+todo join sports club
+list
+delete 2
+list
 deadline wrong
 event wrong /from wrong
 unmark 2

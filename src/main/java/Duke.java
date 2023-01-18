@@ -113,6 +113,14 @@ public class Duke {
                         System.out.println(this.formatString("OK, I've marked this task as not done yet:\n" + t));
                         break;
                     }
+                    case ("delete"): {
+                        String i = arr[1];
+                        int index = Integer.parseInt(i) - 1;
+                        Task t = userTasks.remove(index);
+                        String numTasks = "Now you have " + userTasks.size() + " tasks in the list.";
+                        System.out.println(this.formatString("Noted. I've removed this task:\n" + t + "\n" + numTasks));
+                        break;
+                    }
                     case ("todo"): {
                         //Only keyword todo present, no description
                         if (arr.length == 1) {
