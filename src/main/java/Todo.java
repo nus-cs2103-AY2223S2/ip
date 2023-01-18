@@ -7,4 +7,8 @@ public class Todo extends Task {
     public char getType() {
         return type;
     }
+    @Override
+    public String toString(){
+        return super.toString() + "";
+    }
 }

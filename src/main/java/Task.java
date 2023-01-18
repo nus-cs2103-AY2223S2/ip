@@ -14,10 +14,11 @@ public abstract class Task {
     public void setUnDone() {
         this.done = false;
     }
-    public String getDescription(){
-        return this.description;
-    }
     public char getType() {
         return 'a';
+    }
+    @Override
+    public String toString(){
+        return this.description;
     }
 }
