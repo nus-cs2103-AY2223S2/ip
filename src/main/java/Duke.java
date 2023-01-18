@@ -34,14 +34,19 @@ public class Duke {
         System.out.println(TAB + HOR_BAR);
     }
 
-    public static String cutDescription(int taskType, String input) throws DukeException {
+    public static String cutDescription(String taskType, String input) throws DukeException {
+        String description;
         try {
-            if (taskType == 1) return input.substring(5);
-            else if (taskType == 2) return input.substring(9);
-            else return input.substring(6);
+            if (taskType.equals("todo")) {
+                description = input.substring(5);
+            } else if (taskType.equals("deadline")) {
+                description = input.substring(9);
+            } else
+                description = input.substring(6);
         } catch (StringIndexOutOfBoundsException e) {
-            throw new DukeException(unreadableMessage());
+            throw new DukeException(missingInfosMessage(taskType));
         }
+        return description;
     }
 
     /**
@@ -57,20 +62,49 @@ public class Duke {
     }
 
     /**
-     * This function prints a out of range message.
+     * This function prints a general message for unreadable instructions.
      */
     public static String unreadableMessage() {
         String message = Duke.TAB + Duke.HOR_BAR + "\n" +
                 Duke.TAB + "Aww... ''૮₍  ˶•⤙•˶ ₎ა  I haven't learnt enough to do this.\n" +
-                Duke.TAB + "Try these commands instead:\n" +
+                Duke.TAB + "key in 'help' for the help menu~\n" +
+                Duke.TAB + Duke.HOR_BAR;
+        return message;
+    }
 
+    /**
+     * This function prints a message for missing information in creating tasks.
+     */
+    public static String missingInfosMessage(String taskType) {
+        String message =
+                Duke.TAB + Duke.HOR_BAR + "\n" +
+                        Duke.TAB + "There seems to be missing information(s) in your " + taskType + " statement.\n" +
+                        Duke.TAB + "If you need info, you can ask me to 'help' !\n"+
+                        Duke.TAB + Duke.HOR_BAR;
+        return message;
+    }
+
+    /**
+     * This function prints a message for specific blank inputs in command.
+     */
+    public static String blankInfoMessage(String missingInfo) {
+        String message =
+                Duke.TAB + Duke.HOR_BAR + "\n" +
+                        Duke.TAB + "Your " + missingInfo + " cannot be left empty!\n" +
+                        Duke.TAB + "If you need info, you can ask me to 'help' !\n"+
+                        Duke.TAB + Duke.HOR_BAR;
+        return message;
+    }
+
+    public static String helpMenu() {
+        String message = Duke.TAB + Duke.HOR_BAR + "\n" +
                 Duke.TAB + "ADDING TASKS\n" +
                 Duke.TAB + Duke.TAB + "todo yourTaskName " +
-                                    "- Adds a todo task into your task list.\n"+
+                "- Adds a todo task into your task list.\n"+
                 Duke.TAB + Duke.TAB + "deadline yourTaskName /by yourDeadline " +
-                                    "- Adds a deadline task into your task list with the given deadline.\n"+
+                "- Adds a deadline task into your task list with the given deadline.\n"+
                 Duke.TAB + Duke.TAB + "event yourTaskName /from eventStartTime /to eventEndTime " +
-                                    "- Adds an event into your task list with given start and end time.\n"+
+                "- Adds an event into your task list with given start and end time.\n"+
 
                 Duke.TAB + "MARKING TASKS\n" +
                 Duke.TAB + Duke.TAB + "mark taskNumber " +
@@ -79,8 +113,8 @@ public class Duke {
                 "- Marks the task given my task number from the list as not done.\n"+
 
                 Duke.TAB + "LISTING TASKS\n" +
-                Duke.TAB + Duke.TAB + "list - lists out all your tasks\n"+
-                Duke.TAB + Duke.HOR_BAR + "\n";
+                Duke.TAB + Duke.TAB + "list - lists out all your tasks\n" +
+                Duke.TAB + Duke.HOR_BAR;
         return message;
     }
 
@@ -105,6 +139,9 @@ public class Duke {
 
                     /* Handle commands */
                     switch (command) {
+                        case "help":
+                            System.out.println(helpMenu());
+                            break;
                         case "bye":
                             byeDialogue();
                             endFlag = true;
@@ -129,21 +166,16 @@ public class Duke {
                             }
                             break;
                         default: // types of tasks
-                            int taskType = 0;
                             String description = " ";
 
-                            if (command.equals("todo")) {
-                                taskType = 1; // todo
-                            } else if (command.equals("deadline")) {
-                                taskType = 2; // deadline
-                            } else if (command.equals("event")) {
-                                taskType = 3; // event
-                            } else {
+                            if (! (command.equals("todo")
+                                    || command.equals("deadline")
+                                    || command.equals("event"))) {
                                 throw new DukeException(unreadableMessage());
                             }
 
-                            description = cutDescription(taskType, input);
-                            tb.addTask(taskType, description);
+                            description = cutDescription(command, input);
+                            tb.addTask(command, description);
                             break;
                     }
                 } catch (DukeException e) {
@@ -182,24 +214,37 @@ class TaskBook {
      * @param taskType
      * @param description
      */
-    public void addTask(int taskType, String description) throws DukeException {
-        numOfTasks++;
-        Task t;
+    public void addTask(String taskType, String description) throws DukeException {
+        Task t = new Task(description);
 
         try {
-            if (taskType == 1)  //todo
+            if (taskType.equals("todo")) {
+                if (description.isBlank()) throw new DukeException("task name");
+
                 t = new Todo(description);
-            else if (taskType == 2) // deadline
-                t = new Deadline(description.split("/")[0],
-                        description.split("/by")[1]);
-            else if (taskType == 3)// event
-                t = new Event(description.split("/")[0],
-                        description.split("/from")[1].split("/to")[0],
-                        description.split("/to")[1]);
-            else
-                t = new Task(description);
+
+            } else if (taskType.equals("deadline")) {
+                String desc = description.split("/by")[0];
+                if (desc.isBlank()) throw new DukeException("task name");
+                String by = description.split("/by")[1];
+                if (by.isBlank()) throw new DukeException("'by' clause");
+
+                t = new Deadline(description.split("/")[0], by);
+
+            } else if (taskType.equals("event")) {// event
+                String desc = description.split("/from")[0];
+                if (desc.isBlank()) throw new DukeException("task name");
+                String from = description.split("/from")[1].split("/to")[0];
+                if (from.isBlank()) throw new DukeException("'from' clause");
+                String to = description.split("/to")[1];
+                if (to.isBlank()) throw new DukeException("'to' clause");
+
+                t = new Event(description.split("/")[0], from, to);
+            }
+        } catch (DukeException e) {
+            throw new DukeException(Duke.blankInfoMessage(e.getMessage()));
         } catch (ArrayIndexOutOfBoundsException e) {
-            throw new DukeException(Duke.unreadableMessage());
+            throw new DukeException(Duke.missingInfosMessage(taskType));
         }
 
         listOfTasks.add(t);
@@ -207,6 +252,7 @@ class TaskBook {
         System.out.println(Duke.TAB + Duke.HOR_BAR);
         System.out.println(Duke.TAB + "Done and ready to go! I've added this task for ya:");
         System.out.println(Duke.TAB + Duke.TAB + t.toString());
+        numOfTasks++;
         printNumberOfTasks();
         System.out.println(Duke.TAB + Duke.HOR_BAR);
     }
