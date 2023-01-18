@@ -37,19 +37,25 @@ public class Duke {
                         Integer index = Integer.valueOf(receive.substring(4).strip());
 
                         String out = Task.mark(index, "mark");
-                        System.out.println("Great work sir! I've marked this task as done. Task:");
+                        if (!out.equals("No such item exists in list")) {
+                            System.out.println("Great work sir! I've marked this task as done. Task:");
+                        }
                         System.out.println(out);
+
                     } catch (Exception e) {
                         String markErr = "Sir! Index for toggling mark cannot be empty";
                         throw new DukeException(markErr);
                     }
 
-//
+
                 } else if (receive.length() > 5 && "unmark".equalsIgnoreCase(receive.substring(0,6))) {
                     try {
                         Integer index = Integer.valueOf(receive.substring(6).strip());
                         String out = Task.mark(index, "unmark");
-                        System.out.println("Ahhh I see ...  I shall unmark that task then. *beep* Done. Task:");
+                        if (!out.equals("No such item exists in list")) {
+                            System.out.println("Ahhh I see ...  I shall unmark that task then. *beep* Done. Task:");
+                        }
+
                         System.out.println(out);
                     } catch (Exception e) {
                         String markErr = "Sir! Index for toggling mark cannot be empty";
@@ -74,11 +80,17 @@ public class Duke {
                     if (desc.isBlank()) {
                         throw new DukeException(errDeadline);
                     }
-                    String[] stringarr = desc.split(" /by ");
-                    Deadline newDeadline = new Deadline(stringarr[0], stringarr[1]);
-                    System.out.println("Excellent sir, I've added the task: ");
-                    System.out.println(newDeadline.toString());
-                    System.out.println(Task.getTaskCount());
+                    try {
+                        String[] stringarr = desc.split(" /by ");
+                        Deadline newDeadline = new Deadline(stringarr[0], stringarr[1]);
+                        System.out.println("Excellent sir, I've added the task: ");
+                        System.out.println(newDeadline.toString());
+                        System.out.println(Task.getTaskCount());
+                    } catch (Exception e) {
+                        String eventErr = "Sir, there seems to be an error in your deadline details input.";
+                        throw new DukeException(eventErr);
+                    }
+
 
                 } else if (receive.length() > 4 && "event".equalsIgnoreCase(receive.substring(0,5))) {
                     String desc = receive.substring(5).strip();
@@ -86,12 +98,29 @@ public class Duke {
                     if (desc.isBlank()) {
                         throw new DukeException(errEvent);
                     }
-                    String[] stringarr = desc.split(" /from ");
-                    String[] strarr = stringarr[1].split(" /to ");
-                    Event newEvent = new Event(stringarr[0], strarr[0], strarr[1]);
-                    System.out.println("Excellent sir, I've added the task: ");
-                    System.out.println(newEvent.toString());
-                    System.out.println(Task.getTaskCount());
+                    try {
+                        String[] stringarr = desc.split(" /from ");
+                        String[] strarr = stringarr[1].split(" /to ");
+                        Event newEvent = new Event(stringarr[0], strarr[0], strarr[1]);
+                        System.out.println("Excellent sir, I've added the task: ");
+                        System.out.println(newEvent.toString());
+                        System.out.println(Task.getTaskCount());
+                    } catch (Exception e) {
+                        String eventErr = "Sir, there seems to be an error in your event details input.";
+                        throw new DukeException(eventErr);
+                    }
+
+                } else if (receive.length() > 5 && "delete".equalsIgnoreCase(receive.substring(0,6))) {
+                    try {
+                        Integer index = Integer.valueOf(receive.substring(6).strip());
+                        String out = Task.delete(index);
+                        System.out.println("Ahhh I see ...  I shall delete that task then. *beep* Done. Task deleted:");
+                        System.out.println(out);
+                        System.out.println(Task.getTaskCount());
+                    } catch (Exception e) {
+                        String markErr = "Sir! Index for deletion cannot be empty";
+                        throw new DukeException(markErr);
+                    }
                 } else {
                     String takFaham = "My apologies sir, my program forbids me from translating anything other than command words.";
                     throw new DukeException(takFaham);

@@ -25,7 +25,7 @@ public class Task {
     }
 
     public static String mark(Integer index, String markOption) {
-        if (index > taskList.size()) {
+        if (index > taskList.size() || index < 0) {
             return "No such item exists in list";
         }
         Task task = taskList.get(index - 1);
@@ -35,6 +35,16 @@ public class Task {
             task.markUndone();
         }
         return task.getTaskInline();
+    }
+
+    public static String delete(Integer index) {
+        if (index > taskList.size() || index < 0 ) {
+            return "No such item exists in list";
+        }
+        Task task = taskList.get(index - 1);
+        Task.taskList.remove(index - 1);
+        String deletedTaskDesc = task.getTaskInline();
+        return deletedTaskDesc;
     }
 
     //Mark as done
@@ -63,11 +73,17 @@ public class Task {
         return this.description;
     }
 
-    //Gets the size of the task list, in a String.
+    /**Gets the size of the task list, in a String.
+     *
+     * @return String that details size of task list
+     */
     public static String getTaskCount() {
         return "Now you have " + Task.listSize.toString() + " tasks in the list.";
     }
 
+    /**
+     * Prints all the Tasks in the list
+     */
     public static void printList() {
         if (taskList.size() == 0) {
             System.out.println("Master, there seems to be nothing in your list! Goodness me! Has my circuitry failed me again?!");
