@@ -11,6 +11,9 @@ public class Duke {
                 + "|____/ \\__,_|_|\\_\\___|\n";
         System.out.println("Hello from\n" + logo);
 
+
+        String[] arr = new String[100];
+        int curr = 0;
         BufferedReader bf = new BufferedReader(new InputStreamReader(System.in));
 
         String str;
@@ -19,7 +22,18 @@ public class Duke {
                 System.out.println("Bye. Hope to see you again soon!");
                 break;
             }
-            System.out.println(str);
+
+            if (str.toLowerCase().equals("list")) {
+                int cnt = 1;
+                while (cnt <= curr) {
+                    System.out.println(cnt + ". " + arr[cnt - 1]);
+                    cnt++;
+                }
+            } else {
+                arr[curr] = str;
+                System.out.println("added: " + str);
+                curr++;
+            }
         }
 
         bf.close();
