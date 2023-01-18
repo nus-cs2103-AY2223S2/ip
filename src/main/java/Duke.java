@@ -1,3 +1,4 @@
+import java.util.ArrayList;
 import java.util.Scanner;
 
 /**
@@ -14,12 +15,7 @@ public class Duke {
     /**
      * Storage of user's tasks.
      */
-    private final Task[] taskStorage = new Task[100];
-
-    /**
-     * Number of tasks stored by the chatbot.
-     */
-    private int taskStorageSize = 0;
+    private final ArrayList<Task> taskStorage = new ArrayList<>();
 
     /**
      * This is the main method which starts off the chatbot.
@@ -74,6 +70,10 @@ public class Duke {
                         textArr[1].substring(5), textArr[2].substring(3));
                 this.storeTask(task);
                 return false;
+            } else if (text.startsWith("delete ")) {
+                this.checkTextLength(text, 7);
+                this.deleteTask(Integer.parseInt(text.substring(7)));
+                return false;
             }
 
             switch (text) {
@@ -120,11 +120,10 @@ public class Duke {
      * @param task the task to be added.
      */
     private void storeTask(Task task) {
-        this.taskStorage[this.taskStorageSize] = task;
-        this.taskStorageSize++;
+        this.taskStorage.add(task);
         this.reply("The following task has been added:");
         this.reply("  " + task.toString());
-        this.reply("Total tasks: " + this.taskStorageSize);
+        this.reply("Total tasks: " + this.taskStorage.size());
     }
 
     /**
@@ -132,7 +131,7 @@ public class Duke {
      * by the chatbot in order.
      */
     private void displayTaskStorage() {
-        int size = this.taskStorageSize;
+        int size = this.taskStorage.size();
 
         if (size == 0) {
             this.reply("No task stored.");
@@ -142,7 +141,7 @@ public class Duke {
         this.reply("The following tasks are stored:");
 
         for (int i = 0; i < size; i++) {
-            Task task = this.taskStorage[i];
+            Task task = this.taskStorage.get(i);
             this.reply((i + 1) + "." + task.toString());
         }
     }
@@ -154,7 +153,7 @@ public class Duke {
      * @param taskNumber the task order in the storage.
      */
     private void markTask(int taskNumber) {
-        Task task = this.taskStorage[taskNumber - 1];
+        Task task = this.taskStorage.get(taskNumber - 1);
         task.mark();
         this.reply("The following task is marked as done:");
         this.reply("  " + task.toString());
@@ -167,7 +166,7 @@ public class Duke {
      * @param taskNumber the task order in the storage.
      */
     private void unmarkTask(int taskNumber) {
-        Task task = this.taskStorage[taskNumber - 1];
+        Task task = this.taskStorage.get(taskNumber - 1);
         task.unmark();
         this.reply("The following task is marked as not done:");
         this.reply("  " + task.toString());
@@ -181,9 +180,28 @@ public class Duke {
      * @param length minimum required length of text.
      * @throws DukeException if text length is insufficient.
      */
-    private void checkTextLength(String text, int length) throws DukeException{
+    private void checkTextLength(String text, int length) throws DukeException {
         if (text.trim().length() < length) {
             throw new DukeException("Description is invalid.");
         }
+    }
+
+    /**
+     * This method deletes a specified task based on its order.
+     *
+     * @param taskNumber specifies the task to be deleted.
+     * @throws DukeException if task does not exist.
+     */
+    private void deleteTask(int taskNumber) throws DukeException {
+        int size = this.taskStorage.size();
+        if (size == 0 || taskNumber > size) {
+            throw  new DukeException("Task number does not exist.");
+        }
+
+        Task task = this.taskStorage.get(taskNumber - 1);
+        this.taskStorage.remove(taskNumber - 1);
+        this.reply("The following task has been deleted:");
+        this.reply("  " + task.toString());
+        this.reply("Total tasks: " + this.taskStorage.size());
     }
 }
