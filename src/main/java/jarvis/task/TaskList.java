@@ -1,4 +1,4 @@
-package jarvis;
+package jarvis.task;
 
 import jarvis.exception.InvalidParameterException;
 import jarvis.exception.MissingParameterException;

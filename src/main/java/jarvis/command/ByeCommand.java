@@ -1,7 +1,7 @@
 package jarvis.command;
 
 import jarvis.Storage;
-import jarvis.TaskList;
+import jarvis.task.TaskList;
 import jarvis.Ui;
 import jarvis.exception.TaskIOException;
 
