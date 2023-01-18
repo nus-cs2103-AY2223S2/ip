@@ -25,7 +25,8 @@ public class Sam {
 					talk("Here is your list:\n\n" + list);
 					break;
 				default:
-					tasks.addTask(input);
+          Task task = new Task(input);
+					tasks.addTask(task);
 					talk("I've added \"" + input + "\" to your list");
 			}
     }
