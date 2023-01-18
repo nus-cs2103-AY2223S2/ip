@@ -15,8 +15,19 @@ public class Duke {
 
         Scanner sc = new Scanner(System.in);
         String s = sc.nextLine();
+        String[] ls = new String[100];
+        int lsCount = 0;
         while (!s.equals("bye")) {
-            System.out.println(s);
+            if (s.equals("list")) {
+                for (int i = 0; i < lsCount; i++) {
+                    System.out.println( (i+1) + ". " + ls[i]);
+                }
+            }
+            else {
+                ls[lsCount] = s;
+                lsCount += 1;
+                System.out.println("added: " + s);
+            }
             s = sc.nextLine();
         }
 
