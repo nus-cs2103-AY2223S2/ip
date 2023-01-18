@@ -1,8 +1,8 @@
 list
 delete 2
 TODO return book
-DEADLINE mark scripts /by Mon 2pm
-EVENT project meeting /from Mon 2pm /to 5pm
+DEADLINE mark scripts /by 2022-01-11
+EVENT project meeting /from 2023-01-12 /to 2023-02-22
 mark 1
 unmark 1
 delete 1

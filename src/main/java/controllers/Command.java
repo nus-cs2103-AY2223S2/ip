@@ -11,6 +11,7 @@ abstract public class Command implements Executable {
     private boolean isTerminating = false;
     protected static final Pattern NUMBERS = Pattern.compile("[-+]?\\d+");
 
+
     public Command(CommandType cmdType) {
         this.commandType = cmdType;
     }

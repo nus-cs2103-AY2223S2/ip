@@ -9,29 +9,27 @@ This task don't exists! Please select one from the list.
 Got it. I've added this task:
 	[T][ ] return book
 Now you have 1 tasks in the list.
+Date is not valid! Please try again.
 Got it. I've added this task:
-	[D][ ] mark scripts (by: mon 2pm)
+	[E][ ] project meeting (from: Jan 12 2023 to: Feb 22 2023)
 Now you have 2 tasks in the list.
-Got it. I've added this task:
-	[E][ ] project meeting (from: mon 2pm to: 5pm)
-Now you have 3 tasks in the list.
 Nice! I've marked this task as done:
  [X] return book
 OK, I've marked this task as not done yet:
  [ ] return book
 Noted. I've removed the task:
 	[T][ ] return book
-Now you have 2 tasks in the list.
+Now you have 1 tasks in the list.
 This task don't exists! Please select one from the list.
 This task don't exists! Please select one from the list.
 This task don't exists! Please select one from the list.
 ☹ OOPS!!! I'm sorry, but I don't know what that means :-(
 Noted. I've removed the task:
-	[D][ ] mark scripts (by: mon 2pm)
-Now you have 1 tasks in the list.
-1. [E][ ] project meeting (from: mon 2pm to: 5pm)
+	[E][ ] project meeting (from: Jan 12 2023 to: Feb 22 2023)
+Now you have 0 tasks in the list.
+There are no outstanding tasks!
 Your format is incorrect.
 Please try again with the following format: todo [description].
 Your format is incorrect.
-Please try again with the following format: event [description] \from [date] \to [date].
+Please try again with the following format: event [description] /from [yyyy-mm-dd] /to [yyyy-mm-dd].
 Goodbye!
