@@ -2,19 +2,30 @@ import java.util.HashMap;
 import java.util.Scanner;
 
 public class Sam {
-  private static Scanner scanner = new Scanner(System.in);
-  private static TaskList tasks = new TaskList();
+  private static Scanner scanner;
+  private static TaskList tasks;
+  private static HashMap<String, String> taskArgs;
   private static boolean live;
-  private static HashMap<String, String> taskArgs = new HashMap<>();
 
 	public static void main(String[] args) {
-    System.out.println(Assets.LOGO);
-    live = true;
+    initSam();
     startSam();
+    closeSam();
+  }
+
+  private static void initSam() {
+    scanner = new Scanner(System.in);
+    tasks = new TaskList();
+    taskArgs = new HashMap<>();
+    live = true;
+  }
+
+  private static void closeSam() {
     scanner.close();
   }
 
   private static void startSam() {
+    System.out.println(Assets.LOGO);
     talk("Hello, I am Sam!");
     while (live) {
       System.out.println();
