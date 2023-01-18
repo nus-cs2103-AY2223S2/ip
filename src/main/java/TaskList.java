@@ -8,11 +8,6 @@ public class TaskList {
         list.add(task);
     }
 
-    public boolean isValidNumber(int number) {
-        int index = getIndexFromNumber(number);
-        return index < list.size() && index >= 0;
-    }
-
     public void markTaskAsDone(int number) {
         list.get(getIndexFromNumber(number)).setDone(true);
     }

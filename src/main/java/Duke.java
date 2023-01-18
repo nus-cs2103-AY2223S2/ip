@@ -158,14 +158,11 @@ public class Duke {
     private static void markTaskAsDone(String arguments) throws InvalidArgumentDukeException {
         try {
             int number = Integer.parseInt(arguments);
-            if (!taskList.isValidNumber(number)) {
-                throw new InvalidArgumentDukeException();
-            }
             taskList.markTaskAsDone(number);
             printMessage("Good job. You have finished this task:\n"
                     + taskList.getTaskString(number)
             );
-        } catch (NumberFormatException e) {
+        } catch (NumberFormatException | IndexOutOfBoundsException e) {
             throw new InvalidArgumentDukeException();
         }
     }
@@ -173,14 +170,11 @@ public class Duke {
     private static void markTaskAsNotDone(String arguments) throws InvalidArgumentDukeException {
         try {
             int number = Integer.parseInt(arguments);
-            if (!taskList.isValidNumber(number)) {
-                throw new InvalidArgumentDukeException();
-            }
             taskList.markTaskAsNotDone(number);
             printMessage("Ok. I have marked this task as not done:\n"
                     + taskList.getTaskString(number)
             );
-        } catch (NumberFormatException e) {
+        } catch (NumberFormatException | IndexOutOfBoundsException e) {
             throw new InvalidArgumentDukeException();
         }
     }
@@ -188,14 +182,11 @@ public class Duke {
     private static void deleteTask(String arguments) throws InvalidArgumentDukeException {
         try {
             int number = Integer.parseInt(arguments);
-            if (!taskList.isValidNumber(number)) {
-                throw new InvalidArgumentDukeException();
-            }
             taskList.remove(number);
             printMessage("Ok. I have deleted this task:\n"
                     + taskList.getTaskString(number)
             );
-        } catch (NumberFormatException e) {
+        } catch (NumberFormatException | IndexOutOfBoundsException e) {
             throw new InvalidArgumentDukeException();
         }
     }
