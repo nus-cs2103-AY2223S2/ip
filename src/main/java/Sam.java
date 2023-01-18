@@ -27,10 +27,15 @@ public class Sam {
   }
 
   private static void processInput(String[] input) {
-    Command command = Command.DEFAULT;
+    Command command = null;
     for (Command c : Command.values())
       if (c.matches(input[0])) command = c;
 
+    if (command == null) {
+      talk("Sorry, I don't know what that means");
+      return;
+    }
+    
     switch (command) {
       case BYE:
         live = false;
@@ -117,8 +122,6 @@ public class Sam {
         newTask(task);
         break;
       }
-      default:
-        talk("Sorry, I don't know what that means");
     }
   }
 
