@@ -1,5 +1,6 @@
 package task;
 
+import exception.CommandParseException;
 import exception.MissingParameterException;
 
 import java.util.Scanner;
@@ -54,7 +55,7 @@ public abstract class Task {
                 default:
                     return null;
             }
-        } catch (MissingParameterException e) {
+        } catch (CommandParseException e) {
             return null;
         }
     }
@@ -70,7 +71,7 @@ public abstract class Task {
     public String getDescription() {
         return this.description;
     }
-    
+
     public boolean satisfies(TaskFilter filter) {
         return filter == null || filter.isEmpty();
     }

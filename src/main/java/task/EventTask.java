@@ -66,8 +66,8 @@ public class EventTask extends Task {
                 "E",
                 String.valueOf(this.isDone()),
                 this.getDescription(),
-                this.fromDateTime,
-                this.toDateTime
+                String.valueOf(this.fromDate),
+                String.valueOf(this.toDate)
         };
         return String.join(" / ", data);
     }

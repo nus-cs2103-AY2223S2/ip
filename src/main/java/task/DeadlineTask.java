@@ -10,11 +10,11 @@ import java.time.format.DateTimeParseException;
 public class DeadlineTask extends Task {
     private final LocalDate deadline;
 
-    public DeadlineTask(String description, String deadline) throws MissingParameterException {
+    public DeadlineTask(String description, String deadline) throws CommandParseException {
         this(description, deadline, false);
     }
 
-    public DeadlineTask(String description, String deadline, boolean isDone) {
+    public DeadlineTask(String description, String deadline, boolean isDone) throws CommandParseException {
         super(description, isDone);
         if (deadline == null || deadline.isBlank()) {
             throw new MissingParameterException("Missing deadline", "A deadline ('/by ...') is needed.");
@@ -36,7 +36,7 @@ public class DeadlineTask extends Task {
 
     @Override
     public String serialize() {
-        String[] data = {"D", String.valueOf(this.isDone()), this.getDescription(), this.deadline};
+        String[] data = {"D", String.valueOf(this.isDone()), this.getDescription(), String.valueOf(this.deadline)};
         return String.join(" / ", data);
     }
 
