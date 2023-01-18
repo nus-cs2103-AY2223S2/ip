@@ -9,7 +9,7 @@ public class Duke {
         System.out.println("What can I do for you?\n");
         Scanner inputScanner = new Scanner(System.in);
         while (mainBehaviour.isActive){
-            String userInput = inputScanner.next();
+            String userInput = inputScanner.nextLine();
             mainBehaviour.receiveInput(userInput);
         }
         System.out.println("Bye. Hope to see you again soon!\n");
