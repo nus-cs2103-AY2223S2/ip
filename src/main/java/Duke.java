@@ -31,7 +31,7 @@ public class Duke {
             try {
                 continueConvo = handleMessage(input);
             } catch (DukeException e) {
-                System.err.println(e.getMessage());
+                System.out.println(e.getMessage());
             } 
             System.out.println(outlinesString + "\n");
         }
