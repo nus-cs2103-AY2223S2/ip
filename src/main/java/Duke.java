@@ -33,8 +33,26 @@ public class Duke {
                 System.out.println("Ok, I've marked this Task as completed:");
                 System.out.println(lstOfItems.get(itemNo));
             } else {
-                System.out.println("added: " + userInput);
-                lstOfItems.add(new Task(userInput));
+                String[] terms = userInput.split(" ");
+                Task newTask;
+
+                if (terms[0].equals("todo")) {
+                    newTask = new Todo(userInput.substring(5));
+                } else if (terms[0].equals("deadline")) {
+                    String[] splitBySlash = userInput.split("/");
+                    String description = splitBySlash[0].substring(9);
+                    String by = splitBySlash[1].substring(3);
+                    newTask = new Deadline(description, by);
+                } else {
+                    String[] splitBySlash = userInput.split("/");
+                    String description = splitBySlash[0].substring(6);
+                    String from = splitBySlash[1].substring(5);
+                    String to = splitBySlash[2].substring(3);
+                    newTask = new Event(description, from, to);
+                }
+                System.out.println("Got it. I have added: ");
+                System.out.println(newTask);
+                lstOfItems.add(newTask);
                 System.out.print("Now you have " + String.valueOf(lstOfItems.size()));
                 if (lstOfItems.size() == 1) {
                     System.out.print(" task");
