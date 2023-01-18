@@ -1,3 +1,9 @@
+package duke;
+import duke.Tasks.Deadline;
+import duke.Tasks.Event;
+import duke.Tasks.Task;
+import duke.Tasks.Todo;
+
 import java.util.Scanner;
 
 public class Duke {
@@ -16,10 +22,11 @@ public class Duke {
         listname = new Task[100];
         String command;
         String[] words;
+        String info;
 
 
         do {
-            command = str.nextLine();
+            command = str.nextLine().trim();
             words = command.split(" ");
 
             //if command is equal to bye, exit()
@@ -31,13 +38,36 @@ public class Duke {
                     done(words[1]);
                 } else if (words[0].equals("unmark")) {
                     undone(words[1]);
-                }else {
-                    listname[count] = new Task(command);
+                } else if (words[0].equals("todo")) {
+                    info = command.substring(command.indexOf(" ") + 1);
+                    listname[count] = new Todo(info);
                     count++;
-                    System.out.println(Indentation + Horizontal);
-                    System.out.println(Indentation + "Added: " + command);
-                    System.out.println(Indentation + Horizontal);
+
+                } else if (words[0].equals("deadline")) {
+                    info = command.substring(command.indexOf(" ") + 1, command.indexOf(" /by "));
+                    String deadline = command.substring(command.indexOf("/by") + 4);
+                    listname[count] = new Deadline(info, deadline);
+                    count++;
+
+                } else if (words[0].equals("event")) {
+                    info = command.substring(command.indexOf(" ") + 1, command.indexOf(" /from "));
+                    String fromtime = command.substring(command.indexOf(" /from ") + 6, command.indexOf(" /to "));
+                    String totime = command.substring(command.indexOf(" /to ")  + 4);
+//                    System.out.println(info);
+//                    System.out.println(fromtime);
+//                    System.out.println(totime);
+                    listname[count] = new Event(info, fromtime, totime);
+                    count++;
+
                 }
+//                else {
+//                    listname[count] = new Task(command);
+//                    count++;
+//                    state = " ";
+//                    System.out.println(Indentation + Horizontal);
+//                    System.out.println(Indentation + "Added: " + command);
+//                    System.out.println(Indentation + Horizontal);
+//                }
             }
 
         } while (!command.equals("bye"));
@@ -73,8 +103,7 @@ public class Duke {
         System.out.println(Indentation + "Here are the tasks in your list:");
 
         for (int i = 0; i < count; i++) {
-            System.out.println(Indentation + (i + 1) + "." + Indentation +
-                    "[" + listname[i].getStatusIcon() + "] " + listname[i].description);
+            System.out.println(Indentation + (i + 1) + "." + listname[i].toString());
         }
 
         System.out.println(Indentation + Horizontal);
@@ -84,12 +113,11 @@ public class Duke {
         int number = Integer.parseInt(num) - 1;
         listname[number].isDone = true;
 
-        //System.out.println(number);
         System.out.println(Indentation + Horizontal);
         System.out.println("Nice! I've marked this task as done:");
 
         System.out.println(Indentation +
-                    "[" + listname[number].getStatusIcon() + "] " + listname[number].description);
+                    "[" + listname[number].getStatusIcon() + "] " + listname[number].getDescription());
 
         System.out.println(Indentation + Horizontal);
     }
@@ -98,12 +126,11 @@ public class Duke {
         int number = Integer.parseInt(num) - 1;
         listname[number].isDone = false;
 
-        //System.out.println(number);
         System.out.println(Indentation + Horizontal);
         System.out.println("OK, I've marked this task as not done yet:");
 
         System.out.println(Indentation +
-                "[" + listname[number].getStatusIcon() + "] " + listname[number].description);
+                "[" + listname[number].getStatusIcon() + "] " + listname[number].getDescription());
 
         System.out.println(Indentation + Horizontal);
     }
