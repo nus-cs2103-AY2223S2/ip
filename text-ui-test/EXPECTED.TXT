@@ -9,78 +9,36 @@
     ____________________________________________________________
 
     ____________________________________________________________
-    added: read book
-    ____________________________________________________________
-
-    ____________________________________________________________
-    added: return book
-    ____________________________________________________________
-
-    ____________________________________________________________
-    added: buy bread
-    ____________________________________________________________
-
-    ____________________________________________________________
-    Nice! I've marked this task as done:
-      [X] read book
-    ____________________________________________________________
-
-    ____________________________________________________________
-    Here are the tasks in your list:
-    1. [X] read book
-    2. [ ] return book
-    3. [ ] buy bread
-    ____________________________________________________________
-
-    ____________________________________________________________
-    Nice! I've marked this task as done:
-      [X] return book
-    ____________________________________________________________
-
-    ____________________________________________________________
-    OK, I've marked this task as not done yet:
-      [ ] return book
-    ____________________________________________________________
-
-    ____________________________________________________________
-    Here are the tasks in your list:
-    1. [X] read book
-    2. [ ] return book
-    3. [ ] buy bread
+    Nothing in the list.
     ____________________________________________________________
 
     ____________________________________________________________
     Got it. I've added this task:
       [T][ ] borrow book
-    Now you have 4 task in the list.
+    Now you have 1 task in the list.
     ____________________________________________________________
 
     ____________________________________________________________
     Got it. I've added this task:
       [D][ ] return book (by: Sunday)
-    Now you have 5 task in the list.
+    Now you have 2 task in the list.
     ____________________________________________________________
 
     ____________________________________________________________
     Got it. I've added this task:
       [D][ ] do homework (by: no idea :-p)
-    Now you have 6 task in the list.
+    Now you have 3 task in the list.
     ____________________________________________________________
 
     ____________________________________________________________
     Got it. I've added this task:
       [E][ ] project meeting (from: Mon 2pm to: 4pm)
-    Now you have 7 task in the list.
+    Now you have 4 task in the list.
     ____________________________________________________________
 
     ____________________________________________________________
     Nice! I've marked this task as done:
       [T][X] borrow book
-    ____________________________________________________________
-
-    ____________________________________________________________
-    Nice! I've marked this task as done:
-      [D][X] return book (by: Sunday)
     ____________________________________________________________
 
     ____________________________________________________________
@@ -95,13 +53,10 @@
 
     ____________________________________________________________
     Here are the tasks in your list:
-    1. [X] read book
-    2. [ ] return book
-    3. [ ] buy bread
-    4. [T][X] borrow book
-    5. [D][X] return book (by: Sunday)
-    6. [D][X] do homework (by: no idea :-p)
-    7. [E][X] project meeting (from: Mon 2pm to: 4pm)
+    1. [T][X] borrow book
+    2. [D][ ] return book (by: Sunday)
+    3. [D][X] do homework (by: no idea :-p)
+    4. [E][X] project meeting (from: Mon 2pm to: 4pm)
     ____________________________________________________________
 
     ____________________________________________________________
@@ -111,7 +66,7 @@
 
     ____________________________________________________________
     OK, I've marked this task as not done yet:
-      [D][ ] return book (by: Sunday)
+      [D][ ] do homework (by: no idea :-p)
     ____________________________________________________________
 
     ____________________________________________________________
@@ -121,13 +76,10 @@
 
     ____________________________________________________________
     Here are the tasks in your list:
-    1. [X] read book
-    2. [ ] return book
-    3. [ ] buy bread
-    4. [T][ ] borrow book
-    5. [D][ ] return book (by: Sunday)
-    6. [D][X] do homework (by: no idea :-p)
-    7. [E][ ] project meeting (from: Mon 2pm to: 4pm)
+    1. [T][ ] borrow book
+    2. [D][ ] return book (by: Sunday)
+    3. [D][ ] do homework (by: no idea :-p)
+    4. [E][ ] project meeting (from: Mon 2pm to: 4pm)
     ____________________________________________________________
 
     ____________________________________________________________
