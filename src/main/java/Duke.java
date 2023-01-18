@@ -2,9 +2,11 @@ import java.util.Scanner;
 
 public class Duke {
 
+    private static final String LINE = "------------------------------------------------------------";
+
     private static void processCommand(String cmd) {
         System.out.println("\nDuke:\n" + cmd);
-        System.out.println("\n------------------------------------------------------------\n");
+        System.out.println("\n" + LINE + "\n");
     }
 
     private static void start() {
@@ -12,12 +14,12 @@ public class Duke {
         Scanner sc = new Scanner(System.in);
 
         while (true) {
-            System.out.print("You: ");
+            System.out.print("You:\n");
             String cmd = sc.nextLine().toLowerCase();
 
             if (cmd.equals("bye")) {
                 System.out.println("\nDuke:\nBye. Have a nice day!\n");
-                System.out.println("------------------------------------------------------------");
+                System.out.println(LINE);
                 break;
 
             } else {
@@ -39,7 +41,7 @@ public class Duke {
         System.out.println("\nHello from\n" + logo);
 
         System.out.println("How can I help you?\n");
-        System.out.println("------------------------------------------------------------\n");
+        System.out.println(LINE + "\n");
 
         start();
 
