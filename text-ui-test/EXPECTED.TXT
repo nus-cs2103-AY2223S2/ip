@@ -16,6 +16,7 @@ Supported Commands:
 5. deadline taskName /by date -> Creates a deadline task with name taskName and deadline date.
 6. event taskName /from startDate /to endDate -> Creates an event task with name taskName,
    start date startDate, and end date endDate.
+7. delete X -> Deletes task number X from the list.
 _______________________________________________________________________________________________
 _______________________________________________________________________________________________
 Added task to list:
@@ -115,6 +116,24 @@ Please enter a valid task number. You currently have 8 tasks.
 _______________________________________________________________________________________________
 _______________________________________________________________________________________________
 Please enter a valid task number. You currently have 8 tasks.
+_______________________________________________________________________________________________
+_______________________________________________________________________________________________
+Ta-da! The following task has been deleted.
+[E][ ] project meeting (from: Aug 6th 2pm to: 4pm)
+Current number of tasks is: 7.
+_______________________________________________________________________________________________
+_______________________________________________________________________________________________
+Here are the tasks in your list:
+1. [T][ ] read book
+2. [D][ ] return book (by: June 6th)
+3. [T][ ] join sports club
+4. [T][ ] borrow book
+5. [E][ ] project meeting (from: Mon 2pm to: 4pm)
+6. [D][ ] do homework (by: no idea :-p)
+7. [E][ ] conference (from: no idea :-p to: no idea :-p)
+_______________________________________________________________________________________________
+_______________________________________________________________________________________________
+Please enter a valid task number. You currently have 7 tasks.
 _______________________________________________________________________________________________
 _______________________________________________________________________________________________
 Sorry. I do not understand this command. Please try again.

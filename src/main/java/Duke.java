@@ -95,6 +95,28 @@ public class Duke {
                     continue;
                 }
             }
+            //User typed in "delete"
+            else if (inputArray[0].equals("delete")) {
+                try {
+                    if (inputArray.length != 2) {
+                        throw new DukeException("The delete command must be followed by a single number.");
+                    }
+                    if (! isInteger(inputArray[1])) {
+                        throw new DukeException("The delete command must be followed by a single integer.");
+                    }
+                    int indexOfTask = Integer.parseInt(inputArray[1]) - 1;
+                    if (! (indexOfTask <= taskStorage.size() - 1 && indexOfTask >= 0)) {
+                        throw new DukeException("Please enter a valid task number. You currently have " +
+                                Integer.toString(taskStorage.size()) + " tasks.");
+                    }
+                    deleteTask(indexOfTask, taskStorage);
+                } catch (DukeException dukeException) {
+                    System.out.println(straightLine);
+                    System.out.println(dukeException.getMessage());
+                    System.out.println(straightLine);
+                    continue;
+                }
+            }
             //User typed in "to-do"
             else if (inputArray[0].equals("todo")) {
                 try {
@@ -242,7 +264,8 @@ public class Duke {
                 "4. todo taskName -> Creates a todo task with name taskName.\n" +
                 "5. deadline taskName /by date -> Creates a deadline task with name taskName and deadline date.\n" +
                 "6. event taskName /from startDate /to endDate -> Creates an event task with name taskName,\n" +
-                "   start date startDate, and end date endDate.";
+                "   start date startDate, and end date endDate.\n" +
+                "7. delete X -> Deletes task number X from the list.";
         System.out.println(commandList);
 
 
@@ -333,6 +356,22 @@ public class Duke {
         System.out.println("Sorry. I do not understand this command. Please try again.");
         System.out.println(straightLine);
     }
+
+    /**
+     * Deletes a task from the given list of task, and informs the user.
+     * @param indexOfTask Index of the task in the list that is to be deleted.
+     * @param taskStorage List containing all the tasks.
+     */
+    public static void deleteTask(int indexOfTask, ArrayList<Task> taskStorage) {
+        Task taskToBeDeleted = taskStorage.get(indexOfTask);
+        taskStorage.remove(indexOfTask);
+        System.out.println(straightLine);
+        System.out.println("Ta-da! The following task has been deleted.");
+        System.out.println(taskToBeDeleted.getStatusOfTaskInString());
+        System.out.println("Current number of tasks is: " + Integer.toString(taskStorage.size()) + ".");
+        System.out.println(straightLine);
+    }
+
 
     /**
      * Checks if a string can be converted into an Integer.

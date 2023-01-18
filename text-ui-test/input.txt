@@ -17,6 +17,9 @@ event
 list -1
 mark -1
 unmark 9
+delete 3
+list
+delete 8
 hello
 Bye
 bye
