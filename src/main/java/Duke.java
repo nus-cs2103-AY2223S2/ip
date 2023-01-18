@@ -1,6 +1,8 @@
+import java.util.Scanner;
 public class Duke {
     public static void main(String[] args) {
-        String logo = "   _____  _  _                      \n" +
+        final Scanner sc = new Scanner(System.in);
+        final String logo = "   _____  _  _                      \n" +
                 "  / ____|| |(_)                     \n" +
                 " | |     | | _  _ __   _ __   _   _ \n" +
                 " | |     | || || '_ \\ | '_ \\ | | | |\n" +
@@ -9,6 +11,12 @@ public class Duke {
                 "               | |    | |      __/ |\n" +
                 "               |_|    |_|     |___/ ";
         System.out.println("Hello from\n" + logo);
+        prettyPrint("Hello! I'm Clippy, your lightweight personal assistant.");
+        prettyPrint("What can I do for you today?");
+
+        while (parseCommand(sc.nextLine()));
+
+        return;
     }
 
     /**
