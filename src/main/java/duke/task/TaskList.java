@@ -8,15 +8,31 @@ import java.util.ArrayList;
 public class TaskList {
     static ArrayList<Task> items;
 
+    /**
+     * Constructor for TaskList to initialize the internal arraylist of Tasks.
+     */
     public TaskList() {
         items = new ArrayList<>();
     }
 
+    /**
+     * Method to add a Task directly to TaskList.
+     *
+     * @param task Task to be added to TaskList.
+     * @param ui ui to give user the message.
+     */
     public void add(Task task, Ui ui) {
         items.add(task);
         ui.addTask(task, items.size());
     }
 
+    /**
+     * Method to add an Event to the TaskList via the input String array.
+     *
+     * @param curr a String array from user input to be parsed.
+     * @param ui ui to give user the message.
+     * @throws DukeException If user input is erroneous.
+     */
     public void addEvent(String[] curr, Ui ui) throws DukeException {
         try {
             String descr = curr[0].substring(6).trim();
@@ -29,6 +45,13 @@ public class TaskList {
         }
     }
 
+    /**
+     * Method to add a Deadline to the TaskList via the input String array.
+     *
+     * @param curr a String array from user input to be parsed.
+     * @param ui ui to give user the message.
+     * @throws DukeException If user input is erroneous.
+     */
     public void addDeadline(String[] curr, Ui ui) throws DukeException {
         try {
             String descr = curr[0].substring(9).trim();
@@ -39,6 +62,13 @@ public class TaskList {
         }
     }
 
+    /**
+     * Method to add a ToDo to the TaskList via the input String array.
+     *
+     * @param curr a String array from user input to be parsed.
+     * @param ui ui to give user the message.
+     * @throws DukeException If user input is erroneous.
+     */
     public void addToDo(String[] curr, Ui ui) throws DukeException {
         String todo = curr[0].substring(5).trim();
         if (todo.isBlank()) {
@@ -46,6 +76,13 @@ public class TaskList {
         } else { add(new ToDo(todo), ui); }
     }
 
+    /**
+     * Method to delete a Task from the TaskList via input String array.
+     *
+     * @param curr_title a String array from user input to be parsed.
+     * @param ui ui to give user the message.
+     * @throws DukeException If user input is erroneous.
+     */
     public void deleteTask(String[] curr_title, Ui ui) throws DukeException {
         try {
             int idx = Integer.parseInt(curr_title[1]) - 1;
@@ -60,6 +97,13 @@ public class TaskList {
         }
     }
 
+    /**
+     * Method to mark Task in TaskList via input String array.
+     *
+     * @param curr_title a String array from user input to be parsed
+     * @param ui ui to give user the message.
+     * @throws DukeException If user input is erroneous.
+     */
     public void mark(String[] curr_title, Ui ui) throws DukeException {
         try {
             int idx = Integer.parseInt(curr_title[1]) - 1;
@@ -76,6 +120,13 @@ public class TaskList {
         }
     }
 
+    /**
+     * Method to unmark Task in TaskList via input String array.
+     *
+     * @param curr_title a String array from user input to be parsed.
+     * @param ui ui to give user the message.
+     * @throws DukeException If user input is erroneous.
+     */
     public void unmark(String[] curr_title, Ui ui) throws DukeException {
         try {
             int idx = Integer.parseInt(curr_title[1]) - 1;
@@ -92,10 +143,21 @@ public class TaskList {
         }
     }
 
+    /**
+     * Method to add tasks without giving the UI messages.
+     * Primarily for when loading from hard drive data.
+     *
+     * @param task Task to be added.
+     */
     public void initAdd(Task task) {
         items.add(task);
     }
 
+    /**
+     * Method to get the String representation of entire list for writing to hard drive.
+     *
+     * @return alternative String representation of list.
+     */
     public String itemsToData() {
         String data = "";
         for (int i = 0; i < items.size(); i++) {
@@ -105,11 +167,21 @@ public class TaskList {
         return data;
     }
 
+    /**
+     * Method to end the program.
+     *
+     * @param ui ui to give user the message.
+     */
     public void end(Ui ui) {
         ui.end();
         System.exit(0);
     }
 
+    /**
+     * Overloaded String method to get representation of entire list for user.
+     *
+     * @return String representation of list for user.
+     */
     @Override
     public String toString() {
         String res = "";

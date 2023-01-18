@@ -9,10 +9,22 @@ import java.util.Scanner;
 public class Parser {
     private Scanner usr_in;
 
+    /**
+     * Constructor method for Parser.
+     *
+     * @param usr_in Scanner object that takes in user input.
+     */
     public Parser(Scanner usr_in) {
         this.usr_in = usr_in;
     }
 
+    /**
+     * Main method for parsing commands.
+     *
+     * @param taskList TaskList containing list of all tasks in the program.
+     * @param ui ui to show user messages.
+     * @throws DukeException if there is an error (usually user input error).
+     */
     public void parse_cmds(TaskList taskList, Ui ui) throws DukeException {
         String curr_in = usr_in.nextLine().trim();
         String[] curr = new String[0];

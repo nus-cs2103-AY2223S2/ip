@@ -10,10 +10,21 @@ import duke.task.*;
 public class Storage {
     private String filePath;
 
+    /**
+     * Constructor method for Storage.
+     *
+     * @param filePath String representation of the filePath for storage.
+     */
     public Storage(String filePath) {
         this.filePath = filePath;
     }
 
+    /**
+     * Method to load data from hard drive.
+     *
+     * @param taskList TaskList to contain list of tasks loaded from hard drive.
+     * @throws IOException If there is an error retrieving the file.
+     */
     public void loadData(TaskList taskList) throws IOException {
         try {
             Scanner in = new Scanner(Paths.get("data", "duke.txt"));
@@ -29,12 +40,24 @@ public class Storage {
         }
     }
 
+    /**
+     * Method for writing String to file on hard drive.
+     *
+     * @param newData data to be written.
+     * @throws IOException If there is an error retrieving the file.
+     */
     public void writeToData(String newData) throws IOException {
         FileWriter fw = new FileWriter(filePath);
         fw.write(newData);
         fw.close();
     }
 
+    /**
+     * Method for parsing the data from the file on hard drive.
+     *
+     * @param line line to be parsed.
+     * @param taskList TaskList to contain list of tasks loaded.
+     */
     public void parse_data(String line, TaskList taskList) {
         String[] parts = line.split("\\|");
         if (parts[0].trim().equals("[T]")) {
