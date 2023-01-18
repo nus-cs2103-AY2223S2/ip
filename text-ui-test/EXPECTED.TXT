@@ -29,5 +29,28 @@ Here are the tasks in your list:
 3.[E][ ] project meeting (from: Mon 2pm to: 4pm)
 4.[D][ ] do homework (by: no idea :-p)
 ___________________________________________
+OOPS!!! I'm sorry, but I don't know what that means :-(
+___________________________________________
+OOPS!!! The description of a todo cannot be empty.
+___________________________________________
+OOPS!!! The description of a deadline cannot be empty.
+___________________________________________
+OOPS!!! The description of a event cannot be empty.
+___________________________________________
+Nice! I've marked this task as done:
+  [T][X] borrow book
+___________________________________________
+Nice! I've marked this task as done:
+  [D][X] return book (by: Sunday)
+___________________________________________
+Noted. I've removed this task:
+  [E][ ] project meeting (from: Mon 2pm to: 4pm)
+Now you have 3 tasks in the list.
+___________________________________________
+ERROR!!! The task number is not in the range.
+___________________________________________
+OK, I've marked this task as not done yet:
+  [T][ ] borrow book
+___________________________________________
 Bye. Hope to see you again soon!
 ___________________________________________

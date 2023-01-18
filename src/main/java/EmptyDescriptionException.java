@@ -6,6 +6,6 @@ public class EmptyDescriptionException extends DuduException{
     }
     @Override
     public String toString() {
-        return "OPPS!!! The description of a " + type + " cannot be empty.";
+        return "OOPS!!! The description of a " + type + " cannot be empty.";
     }
 }

@@ -2,6 +2,22 @@ import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.Scanner;
 public class Dudu {
+    public enum Command {
+        TODO("todo"),
+        DEADLINE("deadline"),
+        EVENT("event"),
+        LIST("list"),
+        DELETE("delete"),
+        MARK("mark"),
+        UNMARK("unmark"),
+        BYE("bye");
+
+        public final String action;
+        private Command(String action) {
+            this.action = action;
+        }
+    }
+    private static ArrayList<Task> list;
     private static final String DIVIDER = "___________________________________________\n";
     private static final String LOGO =
               " ____  _   _ ____  _   _\n"
@@ -12,19 +28,22 @@ public class Dudu {
     private static final String GREETING = DIVIDER + LOGO + "Hello! I'm Dudu\n" + "What can I do for you?\n" + DIVIDER;
     private static void addTask(String type, ArrayList<Task> list, String input) throws EmptyDescriptionException {
         Task task;
-        if (type.equals("deadline")) {
-            if (input.length() == 8) {
+        if (type.equals(Command.DEADLINE.action)) {
+            if (input.trim().length() == 8) {
                 throw new EmptyDescriptionException(type, "Missing task description");
+            }
+            if (!input.contains("/by")) {
+                input = input.concat(" /by null");
             }
             String[] inputStr = input.substring(9).split(" /by ");
             task = new Deadline(inputStr[0], inputStr[1]);
-        } else if (type.equals("todo")) {
-            if (input.length() == 4) {
+        } else if (type.equals(Command.TODO.action)) {
+            if (input.trim().length() == 4) {
                 throw new EmptyDescriptionException(type, "Missing task description");
             }
             task = new Todo(input.substring(5));
         } else {
-            if (input.length() == 5) {
+            if (input.trim().length() == 5) {
                 throw new EmptyDescriptionException(type, "Missing task description");
             }
             String[] inputStr = input.substring(6).split(" /from ");
@@ -51,27 +70,30 @@ public class Dudu {
         }
         return tasks.get(index);
     }
+    public static void printList() {
+        if (list.size() == 0) {
+            System.out.println("There is no task in your list");
+        } else {
+            System.out.println("Here are the tasks in your list:");
+            for (int i = 0; i < list.size(); i++) {
+                Task currTask = list.get(i);
+                System.out.println(i + 1 + "." + currTask);
+            }
+        }
+    }
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
-        ArrayList<Task> list = new ArrayList<>();
+        list = new ArrayList<>();
         System.out.print(GREETING);
         while (scanner.hasNext()) {
             String input = scanner.nextLine();
             String[] inputArr = input.split(" ");
-            if (input.equals("bye")) {
+            if (input.equals(Command.BYE.action)) {
                 System.out.println("Bye. Hope to see you again soon!");
                 break;
-            } else if (inputArr[0].equals("list")) {
-                if (list.size() == 0) {
-                    System.out.println("There is no task in your list");
-                } else {
-                    System.out.println("Here are the tasks in your list:");
-                    for (int i = 0; i < list.size(); i++) {
-                        Task currTask = list.get(i);
-                        System.out.println(i + 1 + "." + currTask);
-                    }
-                }
-            } else if (inputArr[0].equals("delete")) {
+            } else if (inputArr[0].equals(Command.LIST.action)) {
+                printList();
+            } else if (inputArr[0].equals(Command.DELETE.action)) {
                 int index = Integer.parseInt(inputArr[1]) -1;
                 try {
                     Task currTask = getTask(list, index);
@@ -82,41 +104,41 @@ public class Dudu {
                 } catch (TaskNumRangeException ex) {
                     System.out.println(ex);
                 }
-            } else if (inputArr[0].equals("mark")) {
+            } else if (inputArr[0].equals(Command.MARK.action)) {
                 int index = Integer.parseInt(inputArr[1]) -1;
                 try {
                     Task currTask = getTask(list, index);
                     currTask.markAsDone();
                     System.out.println("Nice! I've marked this task as done:");
-                    System.out.println(currTask);
+                    System.out.println("  " + currTask);
                 } catch (TaskNumRangeException ex) {
                     System.out.println(ex);
                 }
-            } else if (inputArr[0].equals("unmark")) {
+            } else if (inputArr[0].equals(Command.UNMARK.action)) {
                 int index = Integer.parseInt(inputArr[1]) -1;
                 try {
                     Task currTask = getTask(list, index);
                     currTask.markAsUndone();
                     System.out.println("OK, I've marked this task as not done yet:");
-                    System.out.println(currTask);
+                    System.out.println("  " + currTask);
                 } catch (TaskNumRangeException ex) {
                     System.out.println(ex);
                 }
-            } else if (inputArr[0].equals("deadline")) {
+            } else if (inputArr[0].equals(Command.DEADLINE.action)) {
                 try {
-                    addTask("deadline", list, input);
+                    addTask(Command.DEADLINE.action, list, input);
                 } catch (EmptyDescriptionException ex) {
                     System.out.println(ex);
                 }
-            } else if (inputArr[0].equals("todo")) {
+            } else if (inputArr[0].equals(Command.TODO.action)) {
                 try {
-                    addTask("todo", list, input);
+                    addTask(Command.TODO.action, list, input);
                 } catch (EmptyDescriptionException ex) {
                     System.out.println(ex);
                 }
-            } else if (inputArr[0].equals("event")) {
+            } else if (inputArr[0].equals(Command.EVENT.action)) {
                 try {
-                    addTask("event", list, input);
+                    addTask(Command.EVENT.action, list, input);
                 } catch (EmptyDescriptionException ex) {
                     System.out.println(ex);
                 }
