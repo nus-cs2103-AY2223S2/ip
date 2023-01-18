@@ -6,5 +6,12 @@ public class Duke {
                 + "| |_| | |_| |   <  __/\n"
                 + "|____/ \\__,_|_|\\_\\___|\n";
         System.out.println("Hello from\n" + logo);
+        String output = "";
+        Scanner in = new Scanner(System.in);
+        while (!output.equals("bye")) {
+           output = in.nextLine();
+            System.out.println(output);
+        }
+        System.out.println("Bye! Hope to see you again soon!");
     }
 }
