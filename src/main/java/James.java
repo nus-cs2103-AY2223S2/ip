@@ -13,7 +13,7 @@ public class James {
                 break;
             }
             if (input.equals("list")) {
-                System.out.println("List of inputs:");
+                System.out.println("List of inputs from user:");
                 for (int i = 0; i < inputs.size(); i++) {
                     System.out.println((i + 1) + ". " + inputs.get(i));
                 }
