@@ -1,7 +1,7 @@
 import handlers.HAddTask;
+import handlers.HBye;
 import handlers.HMarkTask;
 import handlers.HShowTaskList;
-import services.CommandHelper;
 import services.Parser;
 import services.Prompt;
 import services.TaskStorage;
@@ -28,7 +28,7 @@ public class Tach {
         parser.setDefaultHandler(new HAddTask(ts));
         parser.registerCommand(new HShowTaskList(ts));
         parser.registerCommand(new HMarkTask(ts));
-        parser.setExitHandler(CommandHelper.getClass("handlers.HBye"));
+        parser.setExitHandler(new HBye());
         parser.setToExit(() -> shouldContinue = false);
     }
 

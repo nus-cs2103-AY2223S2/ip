@@ -1,0 +1,6 @@
+todo some toooodooooo
+deadline a deadline /by some date
+event some stuff /from XXX /to YYY
+list
+list
+bye
