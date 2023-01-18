@@ -48,7 +48,7 @@ public class InputParser {
                 return new EventResponse(this.inputContent);
             default:
                 throw new MissingArgumentException(
-                        "So sorry! I'm not too sure what your request is!" +
+                        "I'm sorry, but I don't know what that means :-(" +
                                 "\n\t  To create a new todo, use 'todo ...'," +
                                 "\n\t  To create a new event, use 'event ... /from ... /to ...'," +
                                 "\n\t  To create a new deadline, use 'deadline ... /by ...'," +

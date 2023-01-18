@@ -29,7 +29,7 @@ public class CreateResponse extends Response {
     @Override
     public String exec(ToDoList toDoList) {
         if (this.todo.equals("")) {
-            throw new MissingArgumentException("The description of a to do cannot be empty.");
+            throw new MissingArgumentException("The description of a todo cannot be empty.");
         }
         Todo newTodo = new Todo(this.todo);
         toDoList.createToDo(newTodo);
