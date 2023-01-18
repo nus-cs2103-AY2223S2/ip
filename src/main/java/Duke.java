@@ -38,6 +38,18 @@ public class Duke {
 
     public static String getUserInput() {
         String userInput = in.nextLine();
-        return userInput;
+        return userInput
+    }
+
+    public static void storeItem(String item) {
+        stringStorage.add(item);
+        System.out.println("added: " + item);
+    }
+
+    public static void listItem() {
+        int size = stringStorage.size();
+
+        for (int i = 0; i < size; i++)
+            System.out.println((i + 1) + ". " + stringStorage.get(i));
     }
 }
