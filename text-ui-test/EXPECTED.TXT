@@ -7,16 +7,20 @@ ______     ______     __     __
 
 How shall I assist you today?
 
-:> Arii does not recognise this command...
+:> [Error Encountered] Arii does not recognise this command...
 
 :> Hey new task added!
 [T][ ] eat chocolate
+
+:> [Error Encountered] Insufficient details given...
 
 :> Hey new task added!
 [D][ ] do homework (by: tmr)
 
 :> Hey new task added!
 [E][ ] wedding (from: now to: next year)
+
+:> [Error Encountered] Insufficient details given...
 
 :> Arii has retrieved your current tasks...
 1. [T][ ] eat chocolate

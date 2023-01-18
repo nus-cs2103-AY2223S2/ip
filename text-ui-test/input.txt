@@ -1,7 +1,9 @@
 sleep
 todo eat chocolate
+deadline do homework
 deadline do homework /by tmr
 event wedding /from now /to next year
+event conference /from banana /to
 list
 mark 2
 mark 1
