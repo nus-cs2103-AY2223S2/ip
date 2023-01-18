@@ -18,8 +18,7 @@ public class Duke {
         indentedPrintln("Here are the tasks in your list:");
         int numOfTasks = tasks.size();
         for (int i = 1; i <= numOfTasks; i++) {
-            indentedPrintln(i + ".[" + tasks.get(i - 1).getStatusIcon() + "] "
-                    + tasks.get(i - 1));
+            indentedPrintln(i + "." + tasks.get(i - 1));
         }
     }
 
@@ -28,8 +27,7 @@ public class Duke {
         task.markAsDone();
         String message = "Nice! I've marked this task as done:";
         indentedPrintln(message);
-        indentedPrintln("  [" + task.getStatusIcon() + "] "
-                + task);
+        indentedPrintln("  " + task);
     }
 
     private static void unmark(int taskNumber) {
@@ -37,8 +35,7 @@ public class Duke {
         task.markAsNotDone();
         String message = "OK, I've marked this task as not done yet:";
         indentedPrintln(message);
-        indentedPrintln("  [" + task.getStatusIcon() + "] "
-                + task);
+        indentedPrintln("  " + task);
     }
 
     public static void main(String[] args) {
