@@ -24,7 +24,7 @@ class SamMissingTaskTitleException extends SamException {
 
 class SamMissingTaskArgException extends SamException {
   public SamMissingTaskArgException() {
-    super("Oops, an argument is missing a value!");
+    super("Oops, you're missing an argument!");
   }
 }
 
