@@ -1,4 +1,4 @@
-package database;
+package storage;
 
 import entities.SerializableTask;
 import entities.Task;
@@ -14,11 +14,11 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.Scanner;
 
-public class Database {
+public class Storage {
     private static final String GENERIC_ERROR = "An error occurred when creating the database: ";
     private final File file;
 
-    public Database(String filename) {
+    public Storage(String filename) {
         String FILE_DIRECTORY = "data";
         this.file = new File(String.format("%s/%s", FILE_DIRECTORY, filename));
     }
@@ -37,13 +37,13 @@ public class Database {
             if (!file.exists() && !file.createNewFile()) {
                 throw new DukeException(GENERIC_ERROR + file.getName());
             }
-            load();
+            System.out.println("Successfully connected to storage.");
         } catch (IOException | SecurityException err) {
             throw new DukeException(GENERIC_ERROR + err.getMessage());
         }
     }
 
-    private void load() throws DukeException {
+    public boolean load() {
         try {
             Scanner reader = new Scanner(file);
             while (reader.hasNextLine()) {
@@ -66,8 +66,10 @@ public class Database {
                 }
                 if (task != null) TaskList.addTask(task.unmarshal(), false);
             }
+            return true;
         } catch (FileNotFoundException e) {
-            throw new DukeException(GENERIC_ERROR + e.getMessage());
+            System.out.println(GENERIC_ERROR + e.getMessage());
+            return false;
         }
     }
 

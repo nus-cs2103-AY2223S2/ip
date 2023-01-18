@@ -2,10 +2,20 @@ package entities;
 
 import java.util.*;
 import java.util.function.Predicate;
+import java.util.function.Supplier;
 import java.util.stream.Collectors;
 
 public class TaskList {
     private static final List<Task> taskList = new ArrayList<>();
+
+    public TaskList(Supplier<? extends Boolean> preloader) {
+        Boolean success = preloader.get();
+        if (success) {
+            System.out.println("Successfully loaded data.");
+        }
+    }
+
+    public TaskList() {}
 
     public static void filter(Predicate<? super Task> predicate) {
         List<Task> filteredList = taskList.stream().filter(predicate).collect(Collectors.toList());

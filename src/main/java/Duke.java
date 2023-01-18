@@ -1,64 +1,49 @@
 import controllers.*;
-import database.Database;
 import entities.TaskList;
-import enums.CommandType;
 import exceptions.DukeException;
+import storage.Storage;
+import utils.Parser;
+import views.UI;
+
 import java.util.Scanner;
 
 public class Duke {
-    private static final TaskList taskList = new TaskList();
-    private static final Database database = new Database("duke.txt");
-    private static final Scanner in = new Scanner(System.in);
+    private static TaskList taskList;
+    private static Storage storage;
+    private static Scanner in;
+    private static UI ui;
 
-    private static Command parseInput(String cmd, String arguments) {
-        switch(cmd) {
-            case "bye":      return new GoodbyeCommand();
-            case "list":     return new ListCommand();
-            case "mark":     return new MarkCommand(arguments);
-            case "date":     return new DateCommand(arguments);
-            case "unmark":   return new UnmarkCommand(arguments);
-            case "delete":   return new DeleteCommand(arguments);
-            case "todo":     return new TodoCommand(arguments);
-            case "deadline": return new DeadlineCommand(arguments);
-            case "event":    return new EventCommand(arguments);
-            default:
-                return new Command(CommandType.INVALID) {
-                    @Override
-                    public void execute() throws DukeException {
-                        throw new DukeException("☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
-                    }
-            };
+    public Duke(String filename) {
+        storage = new Storage(filename);
+        in = new Scanner(System.in);
+        ui = new UI();
+        try {
+            storage.connect();
+            taskList = new TaskList(() -> storage.load());
+        } catch (DukeException e) {
+            System.out.println("There was an error loading the data. Storage will be reset.");
+            taskList = new TaskList();
         }
     }
 
-    public static void main(String[] args) {
-        try {
-            database.connect();
-            System.out.println("Successfully connected to database.");
-        } catch (DukeException e) {
-            System.out.println(e.getMessage());
-            return; // fatal error, cannot continue.
-        }
-        System.out.println("Hello! I'm Duke. What can i do for you?");
-        System.out.println(
-                "These are the available commands:" +
-                        "\n\t todo [description]" +
-                        "\n\t event [description] \\from [date] \\to [date]" +
-                        "\n\t deadline [description] \\by [date]" +
-                        "\n----------------------------------------");
-        while (in.hasNext()) {
-            String input = in.nextLine().toLowerCase();
-            String cmdType = input.split(" ")[0];
-            Command cmd = parseInput(cmdType, input);
+    public void run() {
+        ui.printWelcomeMessage();
+        boolean isExit = false;
+        while (in.hasNext() && !isExit) {
+            Command cmd = Parser.parse(in.nextLine());
             try {
                 cmd.execute();
                 if (cmd.isTerminating()) {
-                    database.write(taskList);
-                    break;
+                    storage.write(taskList);
+                    isExit = true;
                 }
             } catch (DukeException e) {
                 System.out.println(e.getMessage());
             }
         }
+    }
+
+    public static void main(String[] args) {
+        new Duke("duke.txt").run();
     }
 }

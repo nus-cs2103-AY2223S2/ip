@@ -1,10 +1,11 @@
-Successfully connected to database.
+Successfully connected to storage.
+Successfully loaded data.
 Hello! I'm Duke. What can i do for you?
 These are the available commands:
-	 todo [description]
-	 event [description] \from [date] \to [date]
-	 deadline [description] \by [date]
-----------------------------------------
+	 todo     [description]
+	 event    [description] /from [YYYY-MM-DD] /to [YYYY-MM-DD]
+	 deadline [description] /by   [YYYY-MM-DD]
+------------------------------------------------
 There are no outstanding tasks!
 This task don't exists! Please select one from the list.
 Got it. I've added this task:
