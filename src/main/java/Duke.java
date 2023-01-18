@@ -16,7 +16,7 @@ public class Duke {
             Scanner reader = new Scanner(System.in);  // Reading from System.in
             System.out.println("Enter a Command!: ");
             String s = reader.nextLine();
-            String[] spStg = s.split(" ");
+            String[] spStg = s.split(" ", 2);
 
             if(spStg[0].equals("bye")) {
                 System.out.println("Bye. Hope to see you again soon!");
@@ -43,9 +43,23 @@ public class Duke {
             }
 
             else {
-                list[index] = new Task(s);
+                String firstWord = spStg[0];
+                String rest = spStg[1];
+                if (firstWord.equals("todo")) {
+                    list[index] = new Todo(rest);
+                }
+                else if (firstWord.equals("deadline")) {
+                    String[] sppStg = rest.split("/by");
+                    list[index] = new Deadline(sppStg[0], sppStg[1]);
+                }
+                else if (firstWord.equals("event")) {
+                    String[] sppStg = rest.split("/from|/to");
+                    list[index] = new Event(sppStg[0], sppStg[1], sppStg[2]);
+                }
+                System.out.println("Got it. I've added this task:");
+                System.out.println(list[index]);
                 index++;
-                System.out.println("added: " + s);
+                System.out.println("Now you have " + index + " tasks in the list.");
             }
         }
     }
