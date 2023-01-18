@@ -42,6 +42,7 @@ public class Duke {
      * - "list": Displays the list of text entered by user
      * - "mark": Marks a task as done
      * - "unmark": Unmarks a task as undone
+     * - "delete": Deletes indicated task
      * - "bye": Exits program
      * - Enters any other String of invalid syntax: Rejected
      *
@@ -87,6 +88,12 @@ public class Duke {
                     throw new DukeException("The task index cannot be empty.");
                 }
                 unmark(splitInput[1]);
+                break;
+            case "delete":
+                if (splitInput.length < 2) {
+                    throw new DukeException("The task index cannot be empty.");
+                }
+                delete(splitInput[1]);
                 break;
             case "bye":
                 exit();
@@ -191,6 +198,22 @@ public class Duke {
         Task task = taskList.get(idx - 1);
         task.unmarkTask();
         System.out.println(horizontalLine);
+    }
+
+    /**
+     * This method unmarks task as undone.
+     *
+     * @param   strIdx  Index of task
+     * @return  void
+     */
+    private static void delete(String strIdx) {
+        System.out.println(horizontalLine
+                + "Noted. I've removed this task:");
+        int idx = Integer.parseInt(strIdx);
+        taskList.get(idx - 1).getTask();
+        taskList.remove(idx - 1);
+        System.out.println("Now you have " + taskList.size() + " tasks in the list.\n"
+                + horizontalLine);
     }
 
     /**
