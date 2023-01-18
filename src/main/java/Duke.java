@@ -117,6 +117,22 @@ public class Duke {
                 System.out.println(tasks.get(unmarkTaskIndex));
                 break;
 
+            case "delete":
+                // Validation of input
+                if (cmd.split(" ").length < 2) {
+                    throw new DukeException("Insufficient details given...");
+                }
+
+                int deleteTaskIndex = Integer.parseInt(cmd.split(" ")[1]) - 1;
+                if (deleteTaskIndex < 0 || deleteTaskIndex >= tasks.size()) {
+                    throw new DukeException("No such task!");
+                }
+
+                tasks.remove(deleteTaskIndex);
+
+                System.out.println("Task deleted. Are you skipping on work again?");
+                break;
+
             default:
                 throw new DukeException("Arii does not recognise this command...");
         }
