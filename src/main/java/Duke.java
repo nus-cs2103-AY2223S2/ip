@@ -112,12 +112,43 @@ public class Duke {
             }
             //User typed in "deadline"
             else if (inputArray[0].equals("deadline")) {
-                int indexOfType = input.indexOf("deadline");
-                int indexOfBy = input.indexOf("/by");
-                String taskName = input.substring(indexOfType + 9, indexOfBy - 1);
-                String deadlineOfTask = input.substring(indexOfBy + 4);
-                Deadline newDeadlineTask = new Deadline(taskName, deadlineOfTask);
-                addTask(newDeadlineTask, taskStorage);
+                try {
+                    int indexOfType = input.indexOf("deadline");
+                    int indexOfBy = input.indexOf("/by");
+                    if (indexOfBy == -1) {
+                        throw new DukeException("The deadline cannot be left blank.");
+                    }
+                    //deadline/by
+                    if (indexOfType + 8 == indexOfBy) {
+                        throw new DukeException("There seems to be a missing task name.");
+                    }
+                    if (indexOfBy + 4 > input.length() - 1) {
+                        throw new DukeException("The deadline cannot be left blank.");
+                    }
+                    if (indexOfType + 9 > indexOfBy - 1) {
+                        throw new DukeException("There seems to be a missing task name.");
+                    }
+                    String taskName = input.substring(indexOfType + 9, indexOfBy - 1);
+                    String deadlineOfTask;
+                    if (input.charAt(indexOfBy + 3) == ' ') {
+                        deadlineOfTask = input.substring(indexOfBy + 4);
+                    }
+                    else {
+                        deadlineOfTask = input.substring(indexOfBy + 3);
+                    }
+                    if (taskName.isBlank()) {
+                        throw new DukeException("There seems to be a missing task name.");
+                    }
+                    if (deadlineOfTask.isBlank()) {
+                        throw new DukeException("The deadline cannot be left blank.");
+                    }
+                    Deadline newDeadlineTask = new Deadline(taskName, deadlineOfTask);
+                    addTask(newDeadlineTask, taskStorage);
+                } catch (DukeException dukeException) {
+                    System.out.println(dukeException.getMessage());
+                    System.out.println(straightLine);
+                    continue;
+                }
             }
             //User typed in "event"
             else if (inputArray[0].equals("event")) {
