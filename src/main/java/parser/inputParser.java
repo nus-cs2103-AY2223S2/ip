@@ -47,7 +47,15 @@ public class InputParser {
             case "EVENT":
                 return new EventResponse(this.inputContent);
             default:
-                throw new MissingArgumentException("idk whats going on bro");
+                throw new MissingArgumentException(
+                        "So sorry! I'm not too sure what your request is!" +
+                                "\n\t  To create a new todo, use 'todo ...'," +
+                                "\n\t  To create a new event, use 'event ...'," +
+                                "\n\t  To create a new deadline, use 'deadline ...'," +
+                                "\n\t  To list all tasks, use 'list'," +
+                                "\n\t  To mark a task, use 'mark ' with a number," +
+                                "\n\t  To unmark a task, use 'unmark ' with a number," +
+                                "\n\t  Finally to exit the program, use 'bye'!");
         }
     }
 
