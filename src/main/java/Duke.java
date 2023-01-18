@@ -7,18 +7,18 @@ public class Duke {
             + "| |_| | |_| |   <  __/\n"
             + "|____/ \\__,_|_|\\_\\___|\n";
 
-    private static final String GREETING = "Hello there!";
+    private static final String GREETING = "Hello there! I am 4RTHUR";
 
     public static void main(String[] args) {
         System.out.println(GREETING + "\n" + LOGO);
 
         // Response Loop
         Scanner scanner = new Scanner(System.in);
+        Bot bot =  new Bot();
 
         boolean running =  true;
         while (running) {
             String input = scanner.next();
-            Bot bot =  new Bot();
             BotResult result = bot.process(input);
 
             System.out.println(result.response);
