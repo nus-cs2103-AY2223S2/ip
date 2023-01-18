@@ -70,6 +70,10 @@ public abstract class Task {
     public String getDescription() {
         return this.description;
     }
+    
+    public boolean satisfies(TaskFilter filter) {
+        return filter == null || filter.isEmpty();
+    }
 
     @Override
     public String toString() {

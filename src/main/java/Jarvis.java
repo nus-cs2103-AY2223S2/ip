@@ -43,7 +43,9 @@ public class Jarvis {
                 printer.printResponse(taskList.getTasksForPrint());
             } else {
                 try {
-                    if (command.hasAction(Command.Action.MARK_DONE) || command.hasAction(Command.Action.MARK_UNDONE)) {
+                    if (command.hasAction(Command.Action.LIST_FILTER)) {
+                        printer.printResponse(taskList.getTasksForPrint(command.toFilter()));
+                    } else if (command.hasAction(Command.Action.MARK_DONE, Command.Action.MARK_UNDONE)) {
                         printer.printResponse(taskList.setTaskDone(command));
                     } else if (command.hasAction(Command.Action.DELETE_TASK)) {
                         printer.printResponse(taskList.deleteTask(command));
@@ -54,7 +56,7 @@ public class Jarvis {
                     } else if (command.hasAction(Command.Action.CREATE_EVENT)) {
                         printer.printResponse(taskList.addTask(command.toEventTask()));
                     }
-                } catch (JarvisException e) {
+                } catch (CommandParseException e) {
                     printer.printErrorResponse(e.getFriendlyMessage());
                 }
             }
