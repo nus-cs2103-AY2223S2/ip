@@ -56,11 +56,16 @@ public class Duke {
                         "OK, I've marked this task as not done yet:" +
                         "\n" + task + "\n" + HORIZONTAL_LINE);
             } else if (action.equalsIgnoreCase("delete")) {
-                Task task = commandList.remove(Integer.parseInt(strArray[1]) - 1);
-                System.out.println(HORIZONTAL_LINE + "\n" +
-                        "Noted. I've removed this task:" + "\n" +
-                        task + "\n" + "Now you have " + commandList.size() +
-                        " tasks in the list." + "\n" + HORIZONTAL_LINE);
+                int index = Integer.parseInt(strArray[1]);
+                if (index > commandList.size() || index <= 0) {
+                    System.out.println("Please input a correct value");
+                } else {
+                    Task task = commandList.remove(index - 1);
+                    System.out.println(HORIZONTAL_LINE + "\n" +
+                            "Noted. I've removed this task:" + "\n" +
+                            task + "\n" + "Now you have " + commandList.size() +
+                            " tasks in the list." + "\n" + HORIZONTAL_LINE);
+                }
             } else {
                 try {
                     TaskTypes type = getTaskType(action);
