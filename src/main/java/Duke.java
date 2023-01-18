@@ -13,7 +13,7 @@ public class Duke {
         System.out.println("I am Duke the Chatbot!\nHow may i help you today?\n");
         StorageList s = new StorageList();
 
-        while (true) {
+        while (scanner.hasNextLine()) {
             String line = scanner.nextLine();
             String[] checker = line.split(" ");
             if (line.toLowerCase().equals("bye")) {
@@ -43,7 +43,7 @@ public class Duke {
                     String[] checker5 = checker2[2].split("to ");
                     s.addEvent(checker3[1], checker4[1], checker5[1]);
                 }
-                System.out.println("Now you have " + s.lengthOflist() + "tasks in your list.");
+                System.out.println("Now you have " + s.lengthOflist() + " tasks in your list.");
 
             }
 
