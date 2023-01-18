@@ -50,9 +50,22 @@ public class Duke {
                 list[num - 1].setUndone();
                 System.out.println("OK, I've marked this task as not done yet:\n  " + list[num - 1].toString());
             } else {
-                list[count] = new Task(cmd);
+                System.out.println("Got it. I've added this task:");
+                if (cmd.startsWith("todo")) {
+                    list[count] = new ToDo(cmd.substring(5));
+                } else if (cmd.startsWith("deadline")) {
+                    int ind = cmd.indexOf("/by");
+                    list[count] = new Deadline(cmd.substring(9, ind - 1), cmd.substring(ind + 4));
+                } else if (cmd.startsWith("event")) {
+                    int start = cmd.indexOf("/from");
+                    int end = cmd.indexOf("/to");
+                    list[count] = new Event(cmd.substring(6, start - 1), cmd.substring(start + 6, end - 1), cmd.substring(end + 4));
+                } else {
+                    list[count] = new Task(cmd);
+                }
+                System.out.println("  " + list[count].toString());
                 count ++;
-                System.out.println("added: " + cmd);
+                System.out.println("Now you have " + count + " tasks in the list.");
             }
         }
     }
