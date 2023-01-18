@@ -17,15 +17,15 @@ public class Duke {
 
         Scanner reader = new Scanner(System.in);
         ArrayList<Task> toDoList = new ArrayList<Task>();
-        String input = reader.nextLine();
-        String[] splitInput = input.split(" ");
 
         while (true) {
+            String input = reader.nextLine();
+            String[] splitInput = input.split(" ");
             String command = splitInput[0];
 
             System.out.println("________________________________");
 
-            if (command == "bye") {
+            if (command.equals("bye")) {
                 System.out.println("Bye. Hope to see you again soon!");
                 System.out.println("________________________________");
                 break;
@@ -33,33 +33,65 @@ public class Duke {
             switch (command) {
 
                 case "list":
+                    System.out.println("Here are the tasks in your list:");
                     for (int i = 0; i < toDoList.size(); i++) {
                         System.out.print(i + 1);
+                        System.out.print(".");
                         System.out.println(toDoList.get(i).toString());
                     }
                     break;
+
                 case "mark":
                     String taskNumMark = splitInput[1];
 
-                    Task taskToMark = toDoList.get(Integer.parseInt(taskNumMark));
+                    Task taskToMark = toDoList.get(Integer.parseInt(taskNumMark) - 1);
 
                     System.out.println("Nice! I've marked this task as done:");
-                    System.out.println(taskToMark.mark());
+                    System.out.println(" " + taskToMark.mark());
 
                     break;
                 case "unmark":
                     String taskNumUnmark = splitInput[1];
 
-                    Task taskToUnmark = toDoList.get(Integer.parseInt(taskNumUnmark));
+                    Task taskToUnmark = toDoList.get(Integer.parseInt(taskNumUnmark) - 1);
 
                     System.out.println("OK, I've marked this task as not done yet:");
-                    System.out.println(taskToUnmark);
+                    System.out.println(" " + taskToUnmark.unMark());
 
                     break;
+
+                case "event":
+                    String eventDescription = input.substring(("event").length());
+                    Task newEvent = new Event(eventDescription);
+                    toDoList.add(newEvent);
+                    System.out.println(" Got it. I've added this task:");
+                    System.out.println("  " + newEvent.toString());
+                    System.out.println("Now you have " + toDoList.size() + " tasks on the list.");
+                    break;
+
+                case "deadline":
+                    String deadlineDescription = input.substring(("event").length());
+                    Task newDeadline = new Deadline(deadlineDescription);
+                    toDoList.add(newDeadline);
+                    System.out.println(" Got it. I've added this task:");
+                    System.out.println("  " + newDeadline.toString());
+                    System.out.println("Now you have " + toDoList.size() + " tasks on the list.");
+                    break;
+
+                case "todo":
+                    String todoDescription = input.substring(("event").length());
+                    Task newTodo = new Todo(todoDescription);
+                    toDoList.add(newTodo);
+                    System.out.println(" Got it. I've added this task:");
+                    System.out.println("  " + newTodo.toString());
+                    System.out.println("Now you have " + toDoList.size() + " tasks on the list.");
+                    break;
+
                 default:
                     Task newTask = new Task(input);
                     toDoList.add(newTask);
                     System.out.println("added: " + input);
+
                     break;
 
             }

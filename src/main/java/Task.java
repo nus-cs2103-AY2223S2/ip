@@ -9,25 +9,23 @@ public class Task {
         this.done = false;
     }
 
-
-    public String mark(){
+    public String mark() {
         this.done = true;
         return this.toString();
     }
 
-    public String unMark(){
+    public String unMark() {
         this.done = false;
         return this.toString();
     }
-
 
     @Override
     public String toString() {
         String doneString;
         if (done) {
-            doneString = "[x]";
+            doneString = "[X]";
         } else {
-            doneString = "[]";
+            doneString = "[ ]";
         }
 
         return doneString + description;
