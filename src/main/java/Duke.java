@@ -1,26 +1,25 @@
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.util.ArrayList;
 import java.util.HashMap;
 
 public class Duke {
     private static int counter;
-    private static HashMap<Integer, Task> taskList;
+    private static ArrayList<Task> taskList;
 
     public static void main(String[] args)  {
         boolean terminate = false;
-        counter = 0;
-        taskList = new HashMap<>();
+        taskList = new ArrayList<>();
 
-        String logo = " ____        _        \n"
-                    + "|  _ \\ _   _| | _____ \n"
-                    + "| | | | | | | |/ / _ \\\n"
-                    + "| |_| | |_| |   <  __/\n"
-                    + "|____/ \\__,_|_|\\_\\___|\n";
-        System.out.println("Welcome to\n" + logo);
-
-        System.out.println("Hello! I'm Duke");
-        System.out.println("What can I do for you?");
+        String logo = "____    ____  __    __   __    __  \n"
+                    + "\\   \\  /   / |  |  |  | |  |  |  |\n"
+                    + " \\   \\/   /  |  |  |  | |  |  |  | \n"
+                    + "  \\_    _/   |  |  |  | |  |  |  | \n"
+                    + "    |  |     |  `--'  | |  `--'  | \n"
+                    + "    |__|      \\______/   \\______/  \n";
+        System.out.println("           Hello! I am\n" + logo);
+        System.out.println("    What can I do for you?");
 
         while (!terminate) {
 
@@ -34,7 +33,7 @@ public class Duke {
                     // Once detect "bye", print and terminate
                     if (command.equals("bye")) {
                         terminate = true;
-                        System.out.println("Bye. Hope to see you again soon!");
+                        System.out.println("    Bye. Hope to see you again soon!");
 
                     } else if (command.equals("list")) {
                         printList();
@@ -54,15 +53,18 @@ public class Duke {
                     } else if (inputs[0].equals("event")) {
                         addEvent(command);
 
+                    } else if (inputs[0].equals("delete")) {
+                        deleteTask(command);
+
                     } else {
                         throw new DukeException("☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
                     }
                 }
 
             } catch (IOException e) {
-                System.out.println(e.getMessage());
+                System.out.println("    " + e.getMessage());
             } catch (DukeException e) {
-                System.out.println(e.getMessage());
+                System.out.println("    " + e.getMessage());
             }
         }
     }
@@ -72,50 +74,52 @@ public class Duke {
      * out the status of each individual tasks
      */
     public static void printList() {
-        System.out.println("Here are the tasks in your list: ");
+        System.out.println("    Here are the tasks in your list: ");
 
-        for (Integer key: taskList.keySet()) {
-            Task toDo = taskList.get(key);
+        for (int i = 0; i < taskList.size(); i++) {
+            Task toDo = taskList.get(i);
 
-            System.out.println(key + "." + toDo);
+            System.out.println("    " + (i+1) + "." + toDo);
 
         }
     }
 
     /*
-     * mark takes in an Integer key
+     * Mark takes in a String command
+     * and handles the command
      * and marks the corresponding task as completed
      */
     public static void mark(String command) throws DukeException {
         String[] inputs = command.split(" ");
         if (inputs.length == 2) {
-            Integer key = Integer.parseInt(inputs[1]);
-            if (key > taskList.size()) throw new DukeException("☹ OOPS!!! Invalid task number :(");
+            int ind = Integer.parseInt(inputs[1]) - 1;
+            if (ind >= taskList.size() || ind < 0) throw new DukeException("☹ OOPS!!! Invalid task number :(");
 
-            taskList.get(key).markCompleted();
+            taskList.get(ind).markCompleted();
 
-            System.out.println("Nice! I've marked this task as done:");
-            System.out.println("  " + taskList.get(key));
+            System.out.println("    Nice! I've marked this task as done:");
+            System.out.println("      " + taskList.get(ind));
 
         } else {
-            throw new DukeException("Correct command: mark <valid task index>");
+            throw new DukeException("    Correct command: mark <valid task index>");
         }
     }
 
     /*
-     * mark takes in an Integer key
-     * and marks the corresponding task as not completed
+     * Unmark takes in a String command
+     * and handles the command
+     * before unmarking the corresponding task as not completed
      */
     public static void unmark(String command) throws DukeException {
         String[] inputs = command.split(" ");
         if (inputs.length == 2) {
-            Integer key = Integer.parseInt(inputs[1]);
-            if (key > taskList.size()) throw new DukeException("☹ OOPS!!! Invalid task number :(");
+            int ind = Integer.parseInt(inputs[1]) - 1;
+            if (ind >= taskList.size() || ind < 0) throw new DukeException("☹ OOPS!!! Invalid task number :(");
 
-            taskList.get(key).markUncompleted();
+            taskList.get(ind).markUncompleted();
 
-            System.out.println("OK, I've marked this task as not done yet:");
-            System.out.println("  " + taskList.get(key));
+            System.out.println("    OK, I've marked this task as not done yet:");
+            System.out.println("      " + taskList.get(ind));
 
         } else {
             throw new DukeException("Correct command: unmark <valid task index>");
@@ -128,11 +132,11 @@ public class Duke {
      */
     public static void addToDo(String command) throws DukeException{
         ToDo toDo = new ToDo(getTaskName("todo", command));
-        taskList.put(++counter, toDo);
+        taskList.add(toDo);
 
-        System.out.println("Got it. I've added this task:");
-        System.out.println("  " + toDo);
-        System.out.println("Now you have " + taskList.size() + " tasks in the list.");
+        System.out.println("    Got it. I've added this task:");
+        System.out.println("      " + toDo);
+        System.out.println("    Now you have " + taskList.size() + " tasks in the list.");
     }
 
     /*
@@ -144,11 +148,11 @@ public class Duke {
         String endDate = getEndDate("deadline", command);
 
         Deadline deadline = new Deadline(taskName, endDate);
-        taskList.put(++counter, deadline);
+        taskList.add(deadline);
 
-        System.out.println("Got it. I've added this task:");
-        System.out.println("  " + deadline);
-        System.out.println("Now you have " + taskList.size() + " tasks in the list.");
+        System.out.println("    Got it. I've added this task:");
+        System.out.println("      " + deadline);
+        System.out.println("    Now you have " + taskList.size() + " tasks in the list.");
     }
 
     /*
@@ -161,11 +165,11 @@ public class Duke {
         String endDate = getEndDate("event", command);
 
         Event event = new Event(taskName, startDate, endDate);
-        taskList.put(++counter, event);
+        taskList.add(event);
 
-        System.out.println("Got it. I've added this task:");
-        System.out.println("  " + event);
-        System.out.println("Now you have " + taskList.size() + " tasks in the list.");
+        System.out.println("    Got it. I've added this task:");
+        System.out.println("      " + event);
+        System.out.println("    Now you have " + taskList.size() + " tasks in the list.");
     }
 
     /*
@@ -217,4 +221,23 @@ public class Duke {
         return command.substring(startIndex);
     }
 
+    /*
+     * delete task by removing the Task at the corresponding index
+     * throws exception for wrong syntax and invalid task number
+     */
+    public static void deleteTask(String command) throws DukeException {
+        String[] inputs = command.split(" ");
+        if (inputs.length == 2) {
+            int ind = Integer.parseInt(inputs[1]) - 1;
+            if (ind >= taskList.size() || ind < 0) throw new DukeException("☹ OOPS!!! Invalid task number :(");
+
+            System.out.println("    Noted. I've removed this task:");
+            System.out.println("      " + taskList.get(ind));
+
+            taskList.remove(ind);
+
+        } else {
+            throw new DukeException("    Correct command: delete <valid task index>");
+        }
+    }
 }
