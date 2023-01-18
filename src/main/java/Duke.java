@@ -3,8 +3,7 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 
 public class Duke {
-    private static String[] arr = new String[100];
-    private static int curr = 0;
+    
     public static void main(String[] args) throws IOException {
         String logo = " ____        _        \n"
                     + "|  _ \\ _   _| | _____ \n"
@@ -29,16 +28,19 @@ public class Duke {
 
     private static void handleInput(String userInput) {
         System.out.println("\n----------------------------------\n");
+        
+        String[] commands = userInput.split(" ");
+
         if (userInput.equalsIgnoreCase("list")) {
-            System.out.println("Here are the items in your list: \n");
-            for (int i = 0; i < curr; i++) {
-                System.out.println(i+1 + ") " + arr[i]);
-            }
+            Task.listTasks();
+        } else if (commands[0].equalsIgnoreCase("mark")) {
+            Task.markTasks(Integer.parseInt(commands[1])-1);
+        } else if (commands[0].equalsIgnoreCase("unmark")) {
+            Task.unmarkTasks(Integer.parseInt(commands[1])-1);
         } else {
-            arr[curr] = userInput;
-            curr++;
-            System.out.println("added: " + userInput);
+            Task.addTask(userInput);
         }
+
         System.out.println("\n----------------------------------\n");
     }
 
