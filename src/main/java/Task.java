@@ -21,6 +21,10 @@ public class Task {
         return count;
     }
 
+    public static void setCount(int count) {
+        Task.count = count;
+    }
+
     @Override
     public String toString() {
         return "[" + this.getStatusIcon() + "] " + this.description;

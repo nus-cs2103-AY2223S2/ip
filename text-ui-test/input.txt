@@ -10,3 +10,5 @@ mark 4
 list
 todo
 blah
+delete 3
+list
