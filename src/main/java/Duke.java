@@ -1,3 +1,4 @@
+import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Duke {
@@ -13,9 +14,18 @@ public class Duke {
         Checker checker = new Checker();
         Scanner scan = new Scanner(System.in);
         String userInput = scan.nextLine();
+        ArrayList<String> lstOfItems = new ArrayList<>();
 
         while (!checker.checkEnd(userInput)) {
-            System.out.println(userInput);
+            if (checker.checkListRequest(userInput)) {
+                for (int i = 0; i < lstOfItems.size(); i++) {
+                    System.out.print(String.valueOf(i+1) + ". ");
+                    System.out.println(lstOfItems.get(i));
+                }
+            } else {
+                System.out.println("added: " + userInput);
+                lstOfItems.add(userInput);
+            }
             userInput = scan.nextLine();
         }
 
