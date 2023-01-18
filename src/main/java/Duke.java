@@ -18,7 +18,7 @@ public class Duke {
 
         boolean running =  true;
         while (running) {
-            String input = scanner.next();
+            String input = scanner.nextLine();
             BotResult result = bot.process(input);
 
             System.out.println(result.response);
