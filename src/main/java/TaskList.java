@@ -7,26 +7,24 @@ public class TaskList {
         this.tasks = new ArrayList<>();
     }
 
+    public int size() {
+        return this.tasks.size();
+    }
+
     public void addTask(Task task) {
         this.tasks.add(task);
     }
 
     public String toggleMark(int idx) {
-        if (0 <= idx && idx < tasks.size()) {
-            Task task = tasks.get(idx);
-            task.markTask();
-            return task.getStatusIcon();
-        }
-        return ""; // invalid case, returns empty string for now
+        Task task = tasks.get(idx);
+        task.markTask();
+        return task.getStatusIcon();
     }
 
     public String toggleUnmark(int idx) {
-        if (0 <= idx && idx < tasks.size()) {
-            Task task = tasks.get(idx);
-            task.unmarkTask();
-            return task.getStatusIcon();
-        }
-        return ""; // invalid case, returns empty string for now
+        Task task = tasks.get(idx);
+        task.unmarkTask();
+        return task.getStatusIcon();
     }
 
     public String listTasks() {

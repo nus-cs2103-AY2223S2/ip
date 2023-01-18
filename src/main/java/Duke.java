@@ -19,11 +19,26 @@ public class Duke {
                 System.out.println(goodbyeMsg);
                 return;
             } else if (echo.equals("list")) {
+                System.out.println("Here are the tasks in your list:");
                 System.out.println(tasks.listTasks()); // list all the stored tasks
+            } else if (echo.matches("mark \\d+")) {
+                String[] sp = echo.split(" ");
+                if (sp.length == 2 && Integer.valueOf(sp[1]) <= tasks.size()) { // otherwise, invalid mark and ignore for now
+                    System.out.println("Nice! I've marked this task as done:");
+                    String marked = tasks.toggleMark(Integer.valueOf(sp[1])-1);
+                    System.out.println(marked);
+                }
+            } else if (echo.matches("unmark \\d+")) {
+                String[] sp = echo.split(" ");
+                if (sp.length == 2 && Integer.valueOf(sp[1]) <= tasks.size()) { // otherwise, invalid unmark and ignore for now
+                    System.out.println("OK, I've marked this task as not done yet:");
+                    String unmarked= tasks.toggleUnmark(Integer.valueOf(sp[1])-1);
+                    System.out.println(unmarked);
+                }
             } else {
                 Task task = new Task(echo); // convert into a task
                 tasks.addTask(task);
-                System.out.println(respond(task.getDescription()));
+                System.out.println(respond(task.getDescription())); // can consider parking this under TaskList
             }
         }
     }
