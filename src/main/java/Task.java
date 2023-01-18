@@ -11,7 +11,17 @@ public class Task {
         this.completed = true;
     }
 
-    public boolean isCompleted() {
-        return this.completed;
+    @Override
+    public String toString() {
+        String completedString = "";
+        if (this.completed) {
+            completedString += "[X] ";
+        } else {
+            completedString += "[ ] ";
+        }
+
+        completedString += this.name;
+
+        return completedString;
     }
 }
