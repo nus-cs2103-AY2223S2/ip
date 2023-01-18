@@ -13,6 +13,7 @@ public class Engine {
         TODO,
         DEADLINE,
         EVENT,
+        DELETE,
 
         // errors
         ERROR
@@ -84,7 +85,7 @@ public class Engine {
                 try {
                     int num = Integer.parseInt(Util.parseNextString(args).first());
                     if (num > this.taskList.size()) {
-                        return "Task has not been added.\n";
+                        return "Task not in list.\n";
                     }
                     this.taskList.markTask(num);
                     return "Task marked completed:" +
@@ -97,7 +98,7 @@ public class Engine {
                 try {
                     int num = Integer.parseInt(Util.parseNextString(args).first());
                     if (num > this.taskList.size()) {
-                        return "Task has not been added.\n";
+                        return "Task not in list.\n";
                     }
                     this.taskList.unmarkTask(num);
                     return "Task marked incomplete:" +
@@ -105,6 +106,22 @@ public class Engine {
                 } catch (NumberFormatException ex) {
                     return "Incorrect input.\n";
                 }
+            }
+            case DELETE: {
+                try {
+                    int num = Integer.parseInt(Util.parseNextString(args).first());
+                    if (num > this.taskList.size()) {
+                        return "Task not in list.\n";
+                    }
+                    String out = "Task has been deleted:" + 
+                        this.taskList.get(num) +
+                        "\nTasks remaining: ";
+                    this.taskList.deleteTask(num);
+                    return out + this.taskList.toString();
+                } catch (NumberFormatException ex) {
+                    return "Incorrect input.\n";
+                }
+
             }
 
             default:
@@ -141,6 +158,9 @@ public class Engine {
         }
         if (command.equals("deadline")) {
             return new Pair<>(Command.DEADLINE, rest);
+        }
+        if (command.equals("delete")) {
+            return new Pair<>(Command.DELETE, rest);
         }
         return new Pair<>(Command.ERROR, "Unknown command.\n");
     }

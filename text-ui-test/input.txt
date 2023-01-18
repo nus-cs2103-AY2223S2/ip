@@ -29,4 +29,12 @@ deadline eat me /by
 event /from tt /to
 event party /from /to
 deadline /by time
+delete 1
+delete 2
+delete 3
+list
+delete 1
+delete 2
+list
+delete 1
 bye
