@@ -20,6 +20,10 @@ public class Task {
         return (isDone ? "X" : " "); // mark done task with X
     }
 
+    /**
+     * Setter method to indicate if the task has been completed.
+     * @param isDone Boolean to that indicates if the task has been completed.
+     */
     public void setIsDone(boolean isDone) {
         this.isDone = isDone;
     }

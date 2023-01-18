@@ -37,7 +37,7 @@ public class Duke {
 
     /**
      * Validate that index is within current set of tasks.
-     * @param index Index of the task, 1-indexed.
+     * @param index Index of the task, 0-indexed.
      * @throws DukeException Exception thrown if index is invalid.
      */
     private void validateTaskIndex(Integer index) throws DukeException {
@@ -165,5 +165,7 @@ public class Duke {
                 System.out.println(e);
             }
         }
+
+        scanner.close();
     }
 }
