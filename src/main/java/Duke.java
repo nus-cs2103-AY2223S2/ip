@@ -27,11 +27,14 @@ public class Duke {
 
     /**
      * This method prints a menu that consists of these features:
+     * - "todo": Adds todo task
+     * - "deadline": Adds deadline task
+     * - "event": Adds event task
      * - "list": Displays the list of text entered by user
      * - "mark": Marks a task as done
      * - "unmark": Unmarks a task as undone
      * - "bye": Exits program
-     * - Enters any other String as first word: Treat as a task and stored in an array
+     * - Enters any other String of invalid syntax: Rejected
      *
      * @return  void
      */
@@ -42,6 +45,15 @@ public class Duke {
             String[] splitInput = input.split(" ");
             String action = splitInput[0];
             switch(action) {
+                case "todo":
+                    todo(input.split(" ", 2)[1]);
+                    break;
+                case "deadline":
+                    deadline(input.split(" ", 2)[1]);
+                    break;
+                case "event":
+                    event(input.split(" ", 2)[1]);
+                    break;
                 case "list":
                     list();
                     break;
@@ -56,12 +68,62 @@ public class Duke {
                     exitStatus = true;
                     break;
                 default:
-                    add(input);
+                    printDefault();
             }
             if (exitStatus) {
                 break;
             }
         }
+    }
+
+    /**
+     * This method handles the adding of todo tasks.
+     *
+     * @param   taskDesc    Description of task.
+     * @return  void
+     */
+    private static void todo(String taskDesc) {
+        Todo todo = new Todo(taskDesc);
+        add(todo);
+    }
+
+    /**
+     * This method handles the adding of deadline tasks.
+     *
+     * @param   taskDesc    Description of task.
+     * @return  void
+     */
+    private static void deadline(String taskDesc) {
+        Deadline deadline = new Deadline(taskDesc);
+        add(deadline);
+    }
+
+    /**
+     * This method handles the adding of event tasks.
+     *
+     * @param   taskDesc    Description of task.
+     * @return  void
+     */
+    private static void event(String taskDesc) {
+        Event event = new Event(taskDesc);
+        add(event);
+    }
+
+    /**
+     * This method handles the adding of any tasks.
+     *
+     * @param   task    Task to be added
+     * @return  void
+     */
+    private static void add(Task task) {
+        taskList.add(task);
+        System.out.println(horizontalLine
+                + "Got it. I've added this task:");
+        task.getTask();
+        System.out.println("Now you have "
+                + taskList.size()
+                + " tasks in the list.\n"
+                + horizontalLine);
     }
 
     /**
@@ -74,11 +136,10 @@ public class Duke {
                 + "Here are the tasks in your list:");
         for (int i = 1; i <= taskList.size(); i++) {
             System.out.print(i + ".");
-            taskList.get(i - 1).printTask();
+            taskList.get(i - 1).getTask();
         }
         System.out.println(horizontalLine);
     }
-
 
     /**
      * This method marks task as done.
@@ -91,8 +152,7 @@ public class Duke {
                 + "Nice! I've marked this task as done:");
         int idx = Integer.parseInt(strIdx);
         Task task = taskList.get(idx - 1);
-        task.isDone = true;
-        task.printTask();
+        task.markTask();
         System.out.println(horizontalLine);
     }
 
@@ -107,24 +167,8 @@ public class Duke {
                 + "OK, I've marked this task as not done yet:");
         int idx = Integer.parseInt(strIdx);
         Task task = taskList.get(idx - 1);
-        task.isDone = false;
-        task.printTask();
+        task.unmarkTask();
         System.out.println(horizontalLine);
-    }
-
-    /**
-     * This method takes in the task in String and stores it into the ArrayList
-     * before printing on the console.
-     *
-     * @param   input   task entered by the user in String
-     * @return  void
-     */
-    private static void add(String input) {
-        Task task = new Task(input);
-        taskList.add(task);
-        System.out.println(horizontalLine
-                + "added: " + input + "\n"
-                + horizontalLine);
     }
 
     /**
@@ -137,5 +181,16 @@ public class Duke {
                 + "Hope I have been useful to you.\n"
                 + "See you again soon. Bye!~\n"
                 + horizontalLine);
+    }
+
+    /**
+     * This method prints out the message if user input is of invalid format.
+     *
+     * @return  void
+     */
+    private static void printDefault() {
+        System.out.println("Sorry please re-enter your inputs using these syntaxes:\n"
+                + "todo <taskDesc>\ndeadline <taskDesc> /by <day>\nevent <taskDesc> /from <> /to <>\n"
+                + "list\nmark <task #>\nunmark <task #> / bye\n");
     }
 }
