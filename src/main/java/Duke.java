@@ -1,7 +1,9 @@
+import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Duke {
     static Scanner in = new Scanner(System.in);
+    static ArrayList<String> stringStorage = new ArrayList<String>();
 
     public static void main(String[] args) {
         greetings();
@@ -11,7 +13,12 @@ public class Duke {
             if (input.equals("bye"))
                 break;
 
-            echo(input);
+            if (input.contains("list")) {
+                listItem();
+                continue;
+            }
+
+            storeItem(input);
         }
 
         bye();
@@ -30,7 +37,19 @@ public class Duke {
     }
 
     public static String getUserInput() {
-            String userInput = in.nextLine();
-            return userInput.toLowerCase();
+        String userInput = in.nextLine();
+        return userInput.toLowerCase();
+    }
+
+    public static void storeItem(String item) {
+        stringStorage.add(item);
+        System.out.println("added: " + item);
+    }
+
+    public static void listItem() {
+        int size = stringStorage.size();
+
+        for (int i = 0; i < size; i++)
+            System.out.println((i + 1) + ". " + stringStorage.get(i));
     }
 }
