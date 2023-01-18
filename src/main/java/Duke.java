@@ -62,6 +62,9 @@ public class Duke {
         } else if (command.equalsIgnoreCase("todo")) {
             handleToDo(stringStream);
             return;
+        } else if (command.equalsIgnoreCase("delete")) {
+            handleDelete(stringStream);
+            return;
         } else {
             displayMessage("☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
         }
@@ -114,6 +117,26 @@ public class Duke {
             }
         } else {
             displayMessage("☹ OOPS!!! We weren't told which task to unmark.");
+        }
+    }
+
+    public static void handleDelete(Scanner stringStream) {
+        if (stringStream.hasNext()) {
+            try {
+                int target = Integer.parseInt(stringStream.next()) - 1;
+                if (target < 0 || target >= taskList.size()) {
+                    displayMessage("This task does not exist!");
+                    return;
+                }
+                Task t = taskList.get(target);
+                taskList.remove(target);
+                String output = "I've deleted this task!\n" + t.toString();
+                displayMessage(output);
+            } catch (NumberFormatException nfe) {
+                displayMessage("☹ OOPS!!! Please provide the number of the task to delete.");
+            }
+        } else {
+            displayMessage("☹ OOPS!!! We weren't told which task to delete.");
         }
     }
 
