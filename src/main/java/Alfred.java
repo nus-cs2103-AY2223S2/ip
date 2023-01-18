@@ -1,6 +1,9 @@
 import java.util.Scanner;
+import java.util.ArrayList;
 
 public class Alfred {
+
+    private static ArrayList<String> itemsList;
     public static void main(String[] args) {
         System.out.println("*_*_*_*_*_*_*_*_*_*_*_*_*_*_*_*_*_*_*_*");
         System.out.println("| Your favourite personal assistant:  |");
@@ -9,17 +12,20 @@ public class Alfred {
         Alfred.printIntro();
 
         Scanner sc = new Scanner(System.in);
-        String command = sc.next();
+        String command = sc.nextLine();
+        itemsList = new ArrayList<>();
         while (true) {
-            Alfred.echoCommand(command);
-            command = sc.next();
             if (command.equals("bye")) {
                 Alfred.saysBye();
                 System.exit(1);
+            } else if (command.equals("list")) {
+                Alfred.listItems();
+            } else {
+                itemsList.add(command);
+                Alfred.echoCommand("added: " + command);
             }
+            command = sc.nextLine();
         }
-
-
     }
 
     private static void echoCommand(String command) {
@@ -33,6 +39,16 @@ public class Alfred {
     private static void saysBye() {
         String command = "Bye. Hope to see you again soon!";
         Alfred.echoCommand(command);
+    }
+
+    private static void listItems() {
+        int itemIndex = 1;
+        Alfred.printLines();
+        for (String item : itemsList) {
+            System.out.printf("    %d. %s\n", itemIndex, item);
+            itemIndex++;
+        }
+        Alfred.printLines();
     }
 
     private static void printLogo() {
