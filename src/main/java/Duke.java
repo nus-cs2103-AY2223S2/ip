@@ -24,16 +24,29 @@ public class Duke {
 
     /**
      * Takes in a command and attempts to perform it, if valid.
-     * Accepted commands: [add], list, bye
+     * Accepted commands: [add], mark, unmark, list, bye
      * [add] is invoked whenever any string that does not match other commands is entered.
      * @param   command a string containing the command entered by the user
      * @return          true if programme should continue accepting further commands, else false
      */
     private static boolean parseCommand(String command) {
-        switch (command) {
+        String[] args = command.split(" ");
+        switch (args[0]) {
             case "bye":
                 prettyPrint("Hope I helped. Goodbye!");
                 return false;
+            case "mark":
+                // todo: check if second argument is a valid number
+                prettyPrint("Great job! I've marked this task as done: ");
+                toDoList.get(Integer.parseInt(args[1]) - 1).complete();
+                prettyPrint(toDoList.get(Integer.parseInt(args[1]) - 1).toString());
+                return true;
+            case "unmark":
+                // todo: check if second argument is a valid number
+                prettyPrint("Aww... I've marked this task as not done yet: ");
+                toDoList.get(Integer.parseInt(args[1]) - 1).uncomplete();
+                prettyPrint(toDoList.get(Integer.parseInt(args[1]) - 1).toString());
+                return true;
             case "list":
                 for (int i = 1; i <= toDoList.size(); i++) {
                     prettyPrint(String.format("%d. %s", i, toDoList.get(i - 1)));
