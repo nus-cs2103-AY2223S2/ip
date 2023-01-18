@@ -19,11 +19,19 @@ public class Duke {
     private static boolean parseCommand(String command) {
         switch (command) {
             case "bye":
-                System.out.println("Hope I helped. See you!");
+                prettyPrint("Hope I helped. Goodbye!");
                 return false;
             default:
-                System.out.println(command);
+                prettyPrint(command);
                 return true;
         }
+    }
+
+    /**
+     * Prints out the specified string with a prepended ">>> ".
+     * @param output the output to be printed
+     */
+    private static void prettyPrint(String output) {
+        System.out.println(">>> " + output);
     }
 }
