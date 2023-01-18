@@ -18,16 +18,19 @@ public class Duke {
 
         greet();
         Scanner sc = new Scanner(System.in);
+        String userIn;
+        String[] userInSplit;
+        Object userInTemp;
 
         LinkedList<Task> list = new LinkedList<>();
-        String userIn;
-        int entry;
+        Task toAdd;
 
         boolean QUIT = false;
         while (!QUIT) {
             userIn = sc.nextLine();
+            userInSplit = userIn.split(" ", 2); // look into .split 's 2nd arg.
             System.out.println("____________________________________________________________");
-            switch (userIn.split(" ")[0]) {
+            switch (userInSplit[0]) {
                 case "list" :
                     // Perhaps look into not creating Iterators
                     Iterator<Task> list_entries = list.iterator();
@@ -37,19 +40,47 @@ public class Duke {
                     }
                     break;
 
+                case "todo":
+                    System.out.println("Got it. I've added this task:");
+                    toAdd = new ToDo(userInSplit[1]);
+                    list.add(toAdd);
+                    System.out.println(toAdd);
+                    System.out.println(String.format("Now you have %d tasks in the list.", list.size()));
+                    break;
+
+                case "deadline":
+                    System.out.println("Got it. I've added this task:");
+                    userInSplit = userInSplit[1].split("/by", 2);
+                    toAdd = new Deadline(userInSplit[0], userInSplit[1]);
+                    list.add(toAdd);
+                    System.out.println(toAdd);
+                    System.out.println(String.format("Now you have %d tasks in the list.", list.size()));
+                    break;
+
+                case "event":
+                    System.out.println("Got it. I've added this task:");
+                    userInSplit = userInSplit[1].split("/from", 2);;
+                    userIn = userInSplit[0];
+                    userInSplit = userInSplit[1].split("/to", 2);
+                    toAdd = new Event(userIn, userInSplit[0], userInSplit[1]);
+                    list.add(toAdd);
+                    System.out.println(toAdd);
+                    System.out.println(String.format("Now you have %d tasks in the list.", list.size()));
+                    break;
+
                 case "mark" :
-                    entry = Integer.parseInt(userIn.split(" ")[1]) - 1;
+                    userInTemp = Integer.parseInt(userInSplit[1]) - 1;
                     // User input expect index counting from 1
-                    list.get(entry).setStatus(true);
+                    list.get((Integer) userInTemp).setStatus(true);
                     System.out.println("Nice! I've marked this task as done:");
-                    System.out.println(list.get(entry));
+                    System.out.println(list.get((Integer) userInTemp));
                     break;
 
                 case "unmark":
-                    entry = Integer.parseInt(userIn.split(" ")[1]) - 1;
-                    list.get(entry).setStatus(false);
+                    userInTemp = Integer.parseInt(userInSplit[1]) - 1;
+                    list.get((Integer) userInTemp).setStatus(false);
                     System.out.println("OK, I've marked this task as not done yet:");
-                    System.out.println(list.get(entry));
+                    System.out.println(list.get((Integer) userInTemp));
                     break;
 
                 case "bye" :
@@ -58,8 +89,8 @@ public class Duke {
                     break;
 
                 default:
-                    list.add(new Task(userIn));
-                    System.out.println(String.format("added: " + userIn));
+//                    list.add(new Task(userIn));
+//                    System.out.println(String.format("added: " + userIn));
                     break;
             }
             System.out.println("____________________________________________________________");
