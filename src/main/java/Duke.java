@@ -66,13 +66,16 @@ public class Duke {
 
                        if (command.equals("todo")) {
                            description = input.substring(5);
-                           taskType = 0; // todo
+                           taskType = 1; // todo
                        } else if (command.equals("deadline")) {
                            description = input.substring(9);
-                           taskType = 1; // deadline
-                       } else {
+                           taskType = 2; // deadline
+                       } else if (command.equals("event")) {
                            description = input.substring(6);
-                           taskType = 2; // event
+                           taskType = 3; // event
+                       } else {
+                           description = input;
+                           taskType = 0;
                        }
 
                        tb.addTask(taskType, description);
@@ -114,15 +117,17 @@ class TaskBook {
     public void addTask(int taskType, String description) {
         numOfTasks++;
         Task t;
-        if (taskType == 0)  //todo
+        if (taskType == 1)  //todo
             t = new Todo(description);
-        else if (taskType == 1) // deadline
+        else if (taskType == 2) // deadline
             t = new Deadline(description.split("/")[0],
                     description.split("/by")[1]);
-        else // event
+        else if (taskType == 3)// event
             t = new Event(description.split("/")[0],
                     description.split("/from")[1].split("/to")[0],
                     description.split("/to")[1]);
+        else
+            t = new Task(description);
 
         listOfTasks.add(t);
 
