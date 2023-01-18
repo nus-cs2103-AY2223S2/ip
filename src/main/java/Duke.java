@@ -185,6 +185,21 @@ public class Duke {
         }
     }
 
+    private static void deleteTask(String arguments) throws InvalidArgumentDukeException {
+        try {
+            int number = Integer.parseInt(arguments);
+            if (!taskList.isValidNumber(number)) {
+                throw new InvalidArgumentDukeException();
+            }
+            taskList.remove(number);
+            printMessage("Ok. I have deleted this task:\n"
+                    + taskList.getTaskString(number)
+            );
+        } catch (NumberFormatException e) {
+            throw new InvalidArgumentDukeException();
+        }
+    }
+
     // Main method
     public static void main(String[] args) {
         greet();

@@ -21,6 +21,10 @@ public class TaskList {
         list.get(getIndexFromNumber(number)).setDone(false);
     }
 
+    public void remove(int number) {
+        list.remove(getIndexFromNumber(number));
+    }
+
     public String getTaskString(int number) {
         return list.get(getIndexFromNumber(number)).toString();
     }
