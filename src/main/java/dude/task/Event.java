@@ -1,7 +1,5 @@
 package dude.task;
 
-import dude.task.Task;
-
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 

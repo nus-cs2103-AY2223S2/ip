@@ -6,7 +6,7 @@ import dude.storage.Storage;
 import dude.ui.Ui;
 
 public class UnmarkCommand extends Command {
-    private int taskIndex;
+    private final int taskIndex;
 
     public UnmarkCommand(int taskIndex) {
         this.taskIndex = taskIndex;

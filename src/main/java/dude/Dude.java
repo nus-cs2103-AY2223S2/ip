@@ -3,18 +3,15 @@ package dude;
 import dude.command.Command;
 import dude.parser.Parser;
 import dude.storage.Storage;
-import dude.task.Task;
 import dude.task.TaskList;
 import dude.ui.Ui;
 
 import java.io.FileNotFoundException;
-import java.util.ArrayList;
 
 public class Dude {
-    private Storage storage;
+    private final Storage storage;
     private TaskList tasks;
-    private Ui ui;
-    private static ArrayList<Task> taskList = new ArrayList<>();
+    private final Ui ui;
 
     public Dude(String filePath) {
         ui = new Ui();

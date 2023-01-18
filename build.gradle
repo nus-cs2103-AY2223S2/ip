@@ -28,11 +28,11 @@ test {
 }
 
 application {
-    mainClassName = "seedu.duke.Duke"
+    mainClassName = "dude.Dude"
 }
 
 shadowJar {
-    archiveBaseName = "duke"
+    archiveBaseName = "dude"
     archiveClassifier = null
 }
 

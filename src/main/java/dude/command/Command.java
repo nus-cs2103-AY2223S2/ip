@@ -9,7 +9,7 @@ public abstract class Command {
 
     public boolean isExit() {
         return isExit;
-    };
+    }
 
     public void setExit(boolean isExit) {
         this.isExit = isExit;

@@ -1,15 +1,13 @@
 package dude.task;
 
-import dude.task.Task;
-
 import java.util.ArrayList;
 import java.util.List;
 
 public class TaskList {
-    private List<Task> taskList;
+    private final List<Task> taskList;
 
     public TaskList() {
-        taskList = new ArrayList<Task>();
+        taskList = new ArrayList<>();
     }
 
     public TaskList(List<Task> taskList) {
@@ -25,32 +23,31 @@ public class TaskList {
         Task.addTaskCount();
     }
 
-    public Task deleteTask(int taskIndex) {
-        Task task = taskList.remove(taskIndex - 1);
+    public void deleteTask(int taskIndex) {
+        taskList.remove(taskIndex - 1);
         Task.removeTaskCount();
-        return task;
     }
 
     public String toRaw() {
-        String input = "";
+        StringBuilder input = new StringBuilder();
         for (Task task : taskList) {
-            input += task.toRaw();
+            input.append(task.toRaw());
         }
-        return input;
+        return input.toString();
     }
 
     @Override
     public String toString() {
-        String result = "";
+        StringBuilder result;
         if (Task.count != 0) {
-            result = "\tHere are the tasks in your list: \n";
+            result = new StringBuilder("\tHere are the tasks in your list: \n");
             for (int i = 0; i < Task.count; i++) {
-                result += "\t" + (i + 1) + "." + taskList.get(i).toString() + "\n";
+                result.append("\t").append(i + 1).append(".").append(taskList.get(i).toString()).append("\n");
             }
         } else {
-            result = "\tEh... You currently got no task leh.\n";
+            result = new StringBuilder("\tEh... You currently got no task leh.\n");
         }
-        return result;
+        return result.toString();
     }
 
 }
