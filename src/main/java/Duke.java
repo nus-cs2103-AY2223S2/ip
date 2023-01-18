@@ -16,7 +16,7 @@ public class Duke {
     public void run() {
         this.init();
         while (this.isRunning) {
-            this.execute(scanner.nextLine());
+            this.execute(this.scanner.nextLine());
         }
         this.exit();
     }
@@ -47,45 +47,42 @@ public class Duke {
     private void init() {
         this.scanner = new Scanner(System.in);
         this.isRunning = true;
-        this.tasks = new ArrayList<Task>();
+        this.tasks = new ArrayList<>();
         System.out.println("Hello!");
     }
 
     private void execute(String input) {
         try {
             Command command = new Command(input);
-            switch (command.getType()) {
-            case "bye":
+            switch (command.getName()) {
+            case BYE:
                 this.isRunning = false;
                 break;
-            case "todo":
-                this.addTask(new Todo(command.getArg("todo")));
+            case TODO:
+                this.addTask(new Todo(
+                        command.getArgumentValue(Command.Argument.TODO)));
                 break;
-            case "deadline":
+            case DEADLINE:
                 this.addTask(new Deadline(
-                        command.getArg("deadline"),
-                        command.getArg("by")
-                ));
+                        command.getArgumentValue(Command.Argument.DEADLINE),
+                        command.getArgumentValue(Command.Argument.BY)));
                 break;
-            case "event":
+            case EVENT:
                 this.addTask(new Event(
-                        command.getArg("event"),
-                        command.getArg("from"),
-                        command.getArg("to")
-                ));
+                        command.getArgumentValue(Command.Argument.EVENT),
+                        command.getArgumentValue(Command.Argument.FROM),
+                        command.getArgumentValue(Command.Argument.TO)));
                 break;
-            case "list":
+            case LIST:
                 this.showTasks();
                 break;
-            case "mark":
+            case MARK:
                 this.toggleTask(this.tasks.get(Integer.parseInt(
-                        command.getArg("mark")
-                )));
+                        command.getArgumentValue(Command.Argument.MARK))));
                 break;
-            case "delete":
+            case DELETE:
                 this.deleteTask(this.tasks.get(Integer.parseInt(
-                        command.getArg("delete")
-                )));
+                        command.getArgumentValue(Command.Argument.DELETE))));
                 break;
             }
         } catch (IllegalArgumentException e) {

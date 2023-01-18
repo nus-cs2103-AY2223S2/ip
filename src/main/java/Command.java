@@ -1,94 +1,149 @@
 import java.util.ArrayList;
 import java.util.Arrays;
-
+import java.util.LinkedHashMap;
 public class Command {
 
-    /** Arguments of the command */
-    private ArrayList<ArrayList<String>> arguments;
+    enum Argument {
+        BYE,
+        TODO,
+        DEADLINE,
+        BY,
+        EVENT,
+        FROM,
+        TO,
+        LIST,
+        MARK,
+        DELETE,
+        NONE
+    }
 
+    /** Arguments of the command */
+    private final LinkedHashMap<Argument, String> arguments;
+
+    /**
+     * Constructs a new command.
+     *
+     * @param input input string of the command.
+     */
     public Command(String input) {
-        String[] terms = input.strip().split(" /");
-        this.arguments = new ArrayList<ArrayList<String>>();
-        for (String term : terms) {
+        this.arguments = new LinkedHashMap<>();
+        for (String term : input.strip().split(" /")) {
             int firstSpace = term.indexOf(" ");
-            String key = (firstSpace == -1
+            Argument argument = parseArgument((firstSpace == -1
                     ? term
-                    : term.substring(0, firstSpace));
+                    : term.substring(0, firstSpace)));
             String value = (firstSpace == -1
                     ? ""
                     : term.substring(firstSpace + 1));
-            this.arguments.add(new ArrayList<String>(
-                    Arrays.asList(key, value)));
+            this.arguments.put(argument, value);
         }
-        this.checkArgs();
+        this.checkArguments();
     }
 
     /**
      * Returns the type of command.
      * @return the type of command.
      */
-    public String getType() {
-        return this.arguments.get(0).get(0);
+    public Argument getName() {
+        return this.arguments.entrySet().iterator().next().getKey();
     }
 
-    public String getArg(String key) {
-        for (int i = 0; i < this.arguments.size(); i++) {
-            if (this.arguments.get(i).get(0).equals(key)) {
-                return this.arguments.get(i).get(1);
-            }
-        }
-        throw new IllegalArgumentException("Command " + this.arguments.get(0).get(0)
-                + " does not contain keyword argument " + key);
+    /**
+     * Returns the value of an argument.
+     *
+     * @param arg the argument to retrieve value of.
+     * @return the value of the argument.
+     */
+    public String getArgumentValue(Argument arg) {
+        return this.arguments.get(arg);
     }
 
-    private void checkArgs() {
-        if (this.arguments.size() == 0) {
-            return;
-        }
-        switch (this.arguments.get(0).get(0)) {
+    private Argument parseArgument(String arg) {
+        switch (arg) {
         case "bye":
-            // Fallthrough
-        case "list":
-            // Fallthrough
-        case "mark":
-            // Fallthrough
-        case "delete":
-            // Fallthrough
+            return Argument.BYE;
         case "todo":
-            checkHasOnly(new String[] {});
-            break;
+            return Argument.TODO;
         case "deadline":
-            checkHasOnly(new String[] {"by"});
-            break;
+            return Argument.DEADLINE;
+        case "by":
+            return Argument.BY;
         case "event":
-            checkHasOnly(new String[] {"from", "to"});
-            break;
+            return Argument.EVENT;
+        case "from":
+            return Argument.FROM;
+        case "to":
+            return Argument.TO;
+        case "list":
+            return Argument.LIST;
+        case "mark":
+            return Argument.MARK;
+        case "delete":
+            return Argument.DELETE;
+        case "":
+            return Argument.NONE;
         default:
-            throw new IllegalArgumentException("Command " + this.arguments.get(0).get(0)
-                    + " not recognised");
+            throw new IllegalArgumentException("Command "
+                    + arg + " not recognised");
         }
     }
 
-    private void checkHasOnly(String[] args) {
-        if (this.arguments.size() > 1 + args.length) {
-            throw new IllegalArgumentException("Command " + this.arguments.get(0).get(0)
-                    + " takes in " + args.length + " argument(s) but "
+    private void checkArguments() {
+        Argument name = this.getName();
+        ArrayList<Argument> requiredArgs = new ArrayList<>();
+        ArrayList<Argument> requiredValues = new ArrayList<>();
+        switch (this.getName()) {
+        case BYE:
+            // Fallthrough
+        case LIST:
+            break;
+        case MARK:
+            requiredValues.add(Argument.MARK);
+            break;
+        case DELETE:
+            requiredValues.add(Argument.DELETE);
+            break;
+        case TODO:
+            requiredValues.add(Argument.TODO);
+            break;
+        case DEADLINE:
+            requiredArgs.add(Argument.BY);
+            requiredValues.add(Argument.DEADLINE);
+            requiredValues.add(Argument.BY);
+            break;
+        case EVENT:
+            requiredArgs.add(Argument.FROM);
+            requiredArgs.add(Argument.TO);
+            requiredValues.add(Argument.EVENT);
+            requiredValues.add(Argument.FROM);
+            requiredValues.add(Argument.TO);
+            break;
+        }
+        checkHasOnlyArgs(requiredArgs);
+        checkHasValues(requiredValues);
+    }
+
+    private void checkHasOnlyArgs(ArrayList<Argument> args) {
+        if (this.arguments.size() != args.size() + 1) {
+            throw new IllegalArgumentException("Command " + this.getName()
+                    + " takes in " + (args.size() + 1) + " argument(s) but "
                     + this.arguments.size() + " were given");
         }
-        for (String arg : args) {
-            if (!contains(arg)) {
-                throw new IllegalArgumentException("Command " + this.arguments.get(0).get(0)
+        for (Argument arg : args) {
+            if (!this.arguments.containsKey(arg)) {
+                throw new IllegalArgumentException("Command " + this.getName()
                         + " requires argument " + arg + " but was not given");
             }
         }
     }
 
-    private boolean contains(String arg) {
-        for (int i = 1; i < this.arguments.size(); i++) {
-            if (this.arguments.get(i).get(0).equals(arg)) {
-                return true;
+    private void checkHasValues(ArrayList<Argument> args) {
+        for (Argument arg : args) {
+            if (!this.arguments.containsKey(arg)
+                    || this.arguments.get(arg).equals("")) {
+                throw new IllegalArgumentException("Command " + this.getName()
+                        + " requires argument " + arg + " but was not given");
             }
         }
-        return false;
     }
 }
