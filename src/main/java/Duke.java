@@ -165,6 +165,14 @@ public class Duke {
                                 throw new DukeException(outOfRangeMessage());
                             }
                             break;
+                        case "delete":
+                            index = Integer.parseInt(splitInput[1]);
+                            if (tb.indexWithinRange(index)) {
+                                tb.deleteTask(index);
+                            } else {
+                                throw new DukeException(outOfRangeMessage());
+                            }
+                            break;
                         default: // types of tasks
                             String description = " ";
 
@@ -209,10 +217,12 @@ class TaskBook {
         System.out.println(Duke.TAB + Duke.HOR_BAR);
     }
 
-    /** This function adds a new task into listOfTasks, and updates the number of tasks in the TaskBook.
+    /**
+     * This function adds a new task into listOfTasks, and updates the number of tasks in the TaskBook.
      *
-     * @param taskType
-     * @param description
+     * @param taskType The type of command includes 'todo', 'deadline', and 'event'.
+     * @param description The input given by the user to describe the taskType.
+     * @throws DukeException when there are missing information, thus unable to create a new task.
      */
     public void addTask(String taskType, String description) throws DukeException {
         Task t = new Task(description);
@@ -257,6 +267,17 @@ class TaskBook {
         System.out.println(Duke.TAB + Duke.HOR_BAR);
     }
 
+    public void deleteTask(int index){
+        System.out.println(Duke.TAB + Duke.HOR_BAR);
+        System.out.println(Duke.TAB + "Here you go! I've deleted this task for ya:");
+        System.out.println(Duke.TAB + Duke.TAB + listOfTasks.get(index - 1).toString());
+        listOfTasks.remove(index - 1);
+        numOfTasks--;
+        printNumberOfTasks();
+        System.out.println(Duke.TAB + Duke.HOR_BAR);
+    }
+
+
     /** This function marks the given task at index as done.
      *
      * @param index The index of the task in listOfTasks, starting from index 1.
@@ -295,6 +316,9 @@ class TaskBook {
     }
 }
 
+/**
+ * This is a general task class which describes a task by its name.
+ */
 class Task {
     protected boolean isDone;
     protected String description;
