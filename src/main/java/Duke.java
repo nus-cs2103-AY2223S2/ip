@@ -23,7 +23,7 @@ public class Duke {
         int numOfTask = Task.getNumOfTask();
         for(int i = 0; i < numOfTask; i++) {
             int tmp = i + 1;
-            System.out.println("\t" + task[i]);
+            System.out.println("\t" + tmp + "." + task[i]);
         }
         System.out.println("\t____________________________________________________________");
     }

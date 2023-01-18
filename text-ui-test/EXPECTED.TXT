@@ -36,10 +36,10 @@
 	____________________________________________________________
 	____________________________________________________________
 	Here are the tasks in your list:
-	[T][X] do weekly assignment
-	[D][ ] do CS2103T IP (by: 19th Jan)
-	[E][ ] CS2103T lecture (from: 19th 12pm to: 2pm)
-	[T][ ] do post-lecture quiz
+	1.[T][X] do weekly assignment
+	2.[D][ ] do CS2103T IP (by: 19th Jan)
+	3.[E][ ] CS2103T lecture (from: 19th 12pm to: 2pm)
+	4.[T][ ] do post-lecture quiz
 	____________________________________________________________
 	____________________________________________________________
 	Bye. Hope to see you again soon!
