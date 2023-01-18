@@ -116,6 +116,16 @@ public class Duke {
                 TASKS.add(ev);
                 printTaskAdded(ev);
                 break;
+            case DELETE:
+                int taskToDelete = Integer.parseInt(inp.split(" ")[1]) - 1;
+                if (taskToDelete >= TASKS.size()) {
+                    prettifyOut("Task does not exist!");
+                } else {
+                    prettifyOut("Noted. I've removed this task:\n  " + TASKS.get(taskToDelete) +
+                            "\nNow you have " + (TASKS.size() - 1) + " tasks in the list.");
+                    TASKS.remove(taskToDelete);
+                }
+                break;
             case BYE:
                 prettifyOut(GOODBYE);
                 return false;
