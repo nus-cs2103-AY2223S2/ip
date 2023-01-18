@@ -7,17 +7,29 @@ public class Duke {
         introDuke();
         Scanner scanner = new Scanner(System.in);
         String word = scanner.nextLine();
-        List<String> listOfWords = new ArrayList<>();
+        List<Task> listOfWords = new ArrayList<>();
         while (!word.equals("bye")) {
             System.out.println("-".repeat(20));
             if (word.equals("list")) {
                 int count = 1;
-                for (String words: listOfWords) {
-                    System.out.println(count++ + ". " + words);
+                for (Task words: listOfWords) {
+                    System.out.println(count++ + words.toString());
+                }
+            } else if (word.startsWith("mark ")) {
+                try {
+                    int index = Integer.parseInt(word.substring(5));
+                    Task task = listOfWords.get(--index);
+                    task.markDone();
+                    System.out.println("Nice! I've marked this task as done:");
+                    System.out.println(task);
+                } catch (NumberFormatException | IndexOutOfBoundsException e) {
+                    // incorrect syntax
+                    System.out.println("added " + word);
+                    listOfWords.add(new Task(word));
                 }
             } else {
                 System.out.println("added " + word);
-                listOfWords.add(word);
+                listOfWords.add(new Task(word));
             }
             System.out.println("-".repeat(20));
             word = scanner.nextLine();
