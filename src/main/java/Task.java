@@ -1,7 +1,7 @@
-public class Task {
+public abstract class Task {
     protected String description;
     protected boolean isDone;
-
+    protected String symbol;
     public Task(String description) {
         this.description = description;
         this.isDone = false;
@@ -27,6 +27,6 @@ public class Task {
 
     @Override
     public String toString() {
-        return "[" + this.getStatusIcon() +"] " + this.description;
+        return "[" + this.symbol + "][" + this.getStatusIcon() +"] " + this.description;
     }
 }

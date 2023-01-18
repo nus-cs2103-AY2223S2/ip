@@ -1,36 +1,48 @@
 import java.util.Arrays;
 import java.util.List;
 import java.util.ArrayList;
-
-
+import java.util.Map;
+import java.util.HashMap;
 
 public class ChatBot {
+    private enum Tasks { TODO, DEADLINE, EVENT }
+    private static final Map<String, Tasks> inputToTask = new HashMap<String,Tasks>();
     private List<Task> list;
+    static{
+        inputToTask.put("todo", Tasks.TODO);
+        inputToTask.put("deadline", Tasks.DEADLINE);
+        inputToTask.put("event", Tasks.EVENT);
+    }
 
     ChatBot() {
         this.list = new ArrayList<Task>();
     }
 
-    public void processInput(String input) {
-        List<String> tokens = Arrays.asList(input.split(" "));
-        String command = tokens.get(0);
-        List<String> args = new ArrayList<String>();
-        if (tokens.size() > 1) {
-            args = tokens.subList(1, tokens.size());
-        }
+    public void processInput(String input) throws Exception {
+        Map<String,String> argValues = InputProcessor.splitArgs(input);
+        String command = argValues.get("Command");
         String output = "";
         switch (command) {
             case "list":
                 output = this.listItems();
                 break;
             case "mark":
-                output = this.markAsDone(args.get(0));
+                output = this.markAsDone(argValues.get("mark"));
                 break;
             case "unmark":
-                output = this.unmarkDone(args.get(0));
+                output = this.unmarkDone(argValues.get("unmark"));
                 break;
             default:
-                output = this.addItem(input);
+                System.out.println(argValues);
+                if (this.inputToTask.containsKey(command)) {
+                    try {
+                        output = addTask(inputToTask.get(command),argValues);
+                    } catch (Exception e) {
+                        throw e;
+                    }
+                } else {
+                    output = "Hmm, I don't recognise this command. Try todo <task> to add task to the list.";
+                }
         }
         this.reply(output);
     }
@@ -39,7 +51,7 @@ public class ChatBot {
         if (this.list.isEmpty()) {
             return ("You don't have anything listed right now.");
         } else {
-            StringBuilder output = new StringBuilder();
+            StringBuilder output = new StringBuilder("Eh this is what you've written down so far:\n");
             for (int i = 0; i < this.list.size(); i++) {
                 output.append(i+1);
                 output.append(": " + list.get(i));
@@ -49,13 +61,39 @@ public class ChatBot {
         }
     }
 
-    private String addItem(String s) {
-        this.list.add(new Task(s));
-        return ("added: " + s);
+    private String addTask(Tasks t, Map<String,String> args) throws Exception {
+        Task item;
+        String desc;
+        switch (t) {
+            case TODO:
+                desc = args.get("todo");
+                item = new ToDo(desc);
+                break;
+            case DEADLINE:
+                desc = args.get("deadline");
+                String by = args.get("by");
+                item = new Deadline(desc, by);
+                break;
+            case EVENT:
+                desc = args.get("event");
+                String from = args.get("from");
+                String to = args.get("to");
+                item = new Event(desc, from, to);
+                break;
+            default:
+                throw new Exception("Invalid task type");
+        }
+        this.list.add(item);
+        return ("Item added!\n" + indent(item.toString()) +"\nYou now have " + this.list.size() +" tasks.");
     }
 
     private String markAsDone(String index) {
-        int i = Integer.valueOf(index);
+        int i;
+        try {
+            i = Integer.valueOf(index);
+        } catch (NumberFormatException e) {
+            return "Please specify the task by its index number.";
+        }
         Task task = this.list.get(i-1);
         try {
             task.markAsDone();
@@ -66,7 +104,12 @@ public class ChatBot {
     }
 
     private String unmarkDone(String index) {
-        int i = Integer.valueOf(index);
+        int i;
+        try {
+            i = Integer.valueOf(index);
+        } catch (NumberFormatException e) {
+            return "Please specify the task by its index number.";
+        }
         Task task = this.list.get(i-1);
         try {
             task.unmarkDone();
@@ -90,6 +133,7 @@ public class ChatBot {
     private static String indent(String s) {
         return "\t" + s;
     }
+
 
     public void close() {
         this.reply("Alright, goodbye to you too!");
