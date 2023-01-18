@@ -1,0 +1,15 @@
+todo task1
+list
+todo task2
+list
+mark 0
+list
+deadline task3 /by tomorrow
+list
+mark 1
+list
+mark 0
+list
+event task4 /from wednesday /to thursday
+list
+bye
