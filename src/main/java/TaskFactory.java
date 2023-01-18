@@ -1,3 +1,6 @@
+import java.time.DateTimeException;
+import java.time.LocalDateTime;
+
 public class TaskFactory {
 
     private static void validateName(String input) throws InvalidTaskException {
@@ -31,16 +34,36 @@ public class TaskFactory {
         tuple[2] = input.substring(byIndex + 4);
         return tuple;
     }
+
+    public static String formatTime(String time) {
+        String hrStr = time.substring(0, 2);
+        String minStr = time.substring(2, 4);
+        return "T" + hrStr + ":" + minStr + ":00";
+    }
+
+    public static LocalDateTime parseDateTime(String input) {
+        String[] dateTimePair = input.split(" ");
+        String date = dateTimePair[0];
+        String time = dateTimePair[1];
+        try {
+            time = formatTime(time);
+            return LocalDateTime.parse(date + time);
+        } catch (DateTimeException e) {
+            Responses.printMessage(e.getMessage());
+        }
+        return null;
+    }
+
     public static Task parseCommand(String command, String information) throws InvalidTaskException {
         if (command.equals("TODO")) {
             validateName(information);
             return new Todo(information);
         } else if (command.equals("DEADLINE")) {
             String[] pair = getNameDeadlinePair(information);
-            return new Deadline(pair[0], pair[1]);
+            return new Deadline(pair[0], parseDateTime(pair[1]));
         } else {
             String[] tuple = getNameStartEndTuple(information);
-            return new Event(tuple[0], tuple[1], tuple[2]);
+            return new Event(tuple[0], parseDateTime(tuple[1]), parseDateTime(tuple[2]));
         }
     }
 }
