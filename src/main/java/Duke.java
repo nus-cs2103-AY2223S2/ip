@@ -43,16 +43,20 @@ public class Duke {
                 taskIndex = Integer.parseInt(scanner.next()) - 1;
                 currentTask = taskArray[taskIndex];
                 currentTask.markAsDone();
+                System.out.println("\n____________________________________________________________");
                 System.out.println("\nNice! I've marked this task as done:\n");
-                System.out.println(currentTask.toString() + "\n");
+                System.out.println(currentTask.toString());
+                System.out.println("\n____________________________________________________________\n");
                 keyWord = scanner.next();
                 break;
             case "unmark":
                 taskIndex = Integer.parseInt(scanner.next()) - 1;
                 currentTask = taskArray[taskIndex];
                 currentTask.markAsUndone();
+                System.out.println("\n____________________________________________________________");
                 System.out.println("\nOK, I've marked this task as not done yet:\n");
-                System.out.println(currentTask.toString() + "\n");
+                System.out.println(currentTask.toString());
+                System.out.println("\n____________________________________________________________\n");
                 keyWord = scanner.next();
                 break;
             case "todo": // ToDo tasks have no date/time attached
@@ -121,7 +125,9 @@ public class Duke {
 
     //helper method that prints the reply to each added task
     public static void addTaskReply(Task currentTask, int arrayIndex) {
-        System.out.println("\nGot it. I've added this task: " + currentTask.toString() + "\n");
-        System.out.println("\nNow you have " + String.valueOf(arrayIndex) + " tasks in the list.\n");
+        System.out.println("\n____________________________________________________________");
+        System.out.println("\nGot it. I've added this task: " + currentTask.toString());
+        System.out.println("\nNow you have " + String.valueOf(arrayIndex) + " tasks in the list.");
+        System.out.println("\n____________________________________________________________\n");
     }
 }
