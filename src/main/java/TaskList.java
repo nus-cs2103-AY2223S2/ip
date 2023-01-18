@@ -33,17 +33,17 @@ public class TaskList {
     String markTask(int taskNum) {
         Task task = taskList.get(taskNum - 1);
         task.completeTask();
-        return String.format("\tNice! I've marked this task as done:\n\t\t%s\n", task);
+        return String.format("\tNice! I've marked this task as done:\n\t   %s\n", task);
     }
 
     String unmarkTask(int taskNum) {
         Task task = taskList.get(taskNum - 1);
         task.undoTask();
-        return String.format("\tOK, I've unmarked this task as not done yet:\n\t\t%s\n", task);
+        return String.format("\tOK, I've unmarked this task as not done yet:\n\t   %s\n", task);
     }
 
     String addTaskText(Task task) {
-        return String.format("\tGot it. I've added this task:\n\t\t%s\n\tNow you have %s task%s in the list.\n",
+        return String.format("\tGot it. I've added this task:\n\t   %s\n\tNow you have %s task%s in the list.\n",
                 task.toString(), getNumOfTasks(), getNumOfTasks() == 1 ? "" : "s");
     }
     int getNumOfTasks() {
