@@ -59,60 +59,54 @@ public class Duke {
                         break;
                     default:
                         // Have to do it at the starts with because what if "todo mark this as done"
-                        if (input.startsWith("mark") || input.startsWith("unmark")) {
+                        if (input.startsWith(Commands.MARK.cmd())
+                                || input.startsWith(Commands.UNMARK.cmd())) {
                             int taskNo = getNumbers(input) - 1;
-                            if (input.startsWith("unmark")) {
+                            if (input.startsWith(Commands.UNMARK.cmd())) {
                                 tasksList.get(taskNo).unmarkAsDone();
                                 printer(UNMARK_DONE_STRING + tasksList.get(taskNo));
                             } else {
                                 tasksList.get(taskNo).markAsDone();
                                 printer(MARK_DONE_STRING + tasksList.get(taskNo));
                             }
-                            break;
-                        } else if (input.startsWith("todo ") || input.startsWith("todo")) {
-                            String title = input.substring("todo".length());
-                            if (input.startsWith("todo ")) {
-                                input.substring("todo ".length());
-                            }
+                        } else if (input.startsWith(Commands.TODO.cmd())) {
+                            String title = input.substring(Commands.TODO.cmd().length());
                             if (title.length() == 0) {
                                 throw new DukeException(EMPTY_ERR_STRING);
                             }
                             Task newTask = new Todo(title);
                             tasksList.add(newTask);
                             printer("added: " + newTask);
-                        } else if (input.startsWith("deadline ") || input.startsWith("deadline")) {
-                            if (input.indexOf("/by") == -1) {
+                        } else if (input.startsWith(Commands.DEADLINE.cmd())) {
+                            if (input.indexOf(Commands.BY.cmd()) == -1) {
                                 throw new DukeException(MISSING_ARGS_ERR_STRING);
                             }
-                            String title = input.substring("deadline".length(), input.indexOf("/by"));
-                            if (input.startsWith("deadline ")) {
-                                input.substring("deadline ".length(), input.indexOf("/by"));
-                            }
+                            String title = input.substring(Commands.DEADLINE.cmd().length(),
+                                    input.indexOf(Commands.BY.cmd()));
                             if (title.length() == 0) {
                                 throw new DukeException(EMPTY_ERR_STRING);
                             }
                             Task newTask = new Deadline(title,
-                                    input.substring(input.indexOf("/by")).replace("/by ", ""));
+                                    input.substring(input.indexOf(Commands.BY.cmd())));
                             tasksList.add(newTask);
                             printer("added: " + newTask);
-                        } else if (input.startsWith("event ") || input.startsWith("event")) {
-                            if (input.indexOf("/from") == -1 || input.indexOf("/to") == -1) {
+                        } else if (input.startsWith(Commands.EVENT.cmd())) {
+                            if (input.indexOf(Commands.FROM.cmd()) == -1 || input.indexOf(Commands.TO.cmd()) == -1) {
                                 throw new DukeException(MISSING_ARGS_ERR_STRING);
                             }
-                            String title = input.substring("event".length(), input.indexOf("/from"));
-                            if (input.startsWith("event ")) {
-                                input.substring("event ".length(), input.indexOf("/from"));
-                            }
+                            String title = input.substring(Commands.EVENT.cmd().length(),
+                                    input.indexOf(Commands.FROM.cmd()));
                             if (title.length() == 0) {
                                 throw new DukeException(EMPTY_ERR_STRING);
                             }
                             Task newTask = new Event(title,
-                                    input.substring(input.indexOf("/from"), input.indexOf("/to")).replace("/from ", ""),
-                                    input.substring(input.indexOf("/to")).replace("/to ", ""));
+                                    input.substring(input.indexOf(Commands.FROM.cmd()),
+                                            input.indexOf(Commands.TO.cmd())),
+                                    input.substring(input.indexOf(Commands.TO.cmd())));
                             tasksList.add(newTask);
                             printer("added: " + newTask);
-                        } else if (input.startsWith("delete ") || input.startsWith("delete") || input.startsWith("del ")
-                                || input.startsWith("del")) {
+                        } else if (input.startsWith(Commands.DELETE.cmd())
+                                || input.startsWith(Commands.DEL.cmd())) {
                             int taskNo = getNumbers(input) - 1;
                             String returnString = DELETE_DONE_STRING;
                             returnString += tasksList.get(taskNo);

@@ -4,8 +4,8 @@ public class Event extends Task {
 
     Event(String title, String from, String to) {
         super(title);
-        this.from = from.trim();
-        this.to = to.trim();
+        this.from = from.replace("/from", "").trim();
+        this.to = to.replace("/to", "").trim();
     }
 
     @Override

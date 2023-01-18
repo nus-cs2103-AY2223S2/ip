@@ -3,7 +3,7 @@ public class Deadline extends Task {
 
     Deadline(String title, String by) {
         super(title);
-        this.by = by.trim();
+        this.by = by.replace("/by", "").trim();
     }
 
     @Override
