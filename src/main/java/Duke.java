@@ -1,26 +1,38 @@
 import java.util.Scanner;
+import java.util.ArrayList;
 public class Duke {
-    static protected Task[] tasks = new Task[100];
-    static protected int taskCnt = 0;
+    static protected ArrayList<Task> tasks = new ArrayList<>();
     public static void addTask(Task newTask) {
-        tasks[taskCnt] = newTask;
-        taskCnt++;
+        tasks.add(newTask);
         prettyPrint(String.format(
                 "Got it. I've added this task:\n\t\t%s\n\tNow you have %d task%s in the list.",
                 newTask,
-                taskCnt,
-                taskCnt > 1 ? "s" : ""
+                tasks.size(),
+                tasks.size() > 1 ? "s" : ""
+        ));
+    }
+    public static void removeTask(int idx) throws BadCommandException {
+        if (idx >= tasks.size()) {
+            throw new BadCommandException("Index given is out of bounds!");
+        }
+        Task taskToDelete = tasks.get(idx);
+        tasks.remove(idx);
+        prettyPrint(String.format(
+                "Got it. I've removed this task:\n\t\t%s\n\tNow you have %d task%s in the list.",
+                taskToDelete,
+                tasks.size(),
+                tasks.size() > 1 ? "s" : ""
         ));
     }
     public static void listTasks() {
         StringBuilder listOutput = new StringBuilder("Here are the tasks in your list:\n");
-        for (int i = 0; i < taskCnt; i++) {
+        for (int i = 0; i < tasks.size(); i++) {
             listOutput.append(String.format(
                     "\t%d. %s",
                     i + 1,
-                    tasks[i]
+                    tasks.get(i)
             ));
-            if (i < taskCnt - 1) {
+            if (i < tasks.size() - 1) {
                 listOutput.append("\n");
             }
         }
@@ -41,24 +53,27 @@ public class Duke {
             String params = inputSplit[1];
             if (command.equals("mark")) {
                 int idx = Integer.parseInt(params) - 1;
-                if (idx >= taskCnt || idx < 0) {
+                if (idx >= tasks.size() || idx < 0) {
                     throw new BadCommandException("Index given is out of bounds!");
                 }
-                tasks[idx].markAsDone();
+                tasks.get(idx).markAsDone();
                 prettyPrint(String.format(
                         "Nice! I've marked this task as done:\n\t\t%s",
-                        tasks[idx]
+                        tasks.get(idx)
                 ));
             } else if (command.equals("unmark")) {
                 int idx = Integer.parseInt(params) - 1;
-                if (idx >= taskCnt || idx < 0) {
+                if (idx >= tasks.size() || idx < 0) {
                     throw new BadCommandException("Index given is out of bounds!");
                 }
-                tasks[idx].unmarkAsDone();
+                tasks.get(idx).unmarkAsDone();
                 prettyPrint(String.format(
                         "OK, I've marked this task as not done yet:\n\t\t%s",
-                        tasks[idx]
+                        tasks.get(idx)
                 ));
+            } else if (command.equals("delete")) {
+                int idx = Integer.parseInt(params) - 1;
+                removeTask(idx);
             } else if (command.equals("todo")) {
                 addTask(new Todo(params.trim()));
             } else if (command.equals("deadline")) {
