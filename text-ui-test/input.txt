@@ -11,4 +11,6 @@ unmark 1
 unmark 3
 unmark 4
 list
+blah
+unknown-command
 quit
