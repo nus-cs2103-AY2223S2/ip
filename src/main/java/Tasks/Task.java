@@ -1,3 +1,6 @@
+package Tasks;
+import Exceptions.*;
+
 public class Task {
     private static Task[] arr = new Task[100];
     private static int curr = 0;
@@ -5,7 +8,10 @@ public class Task {
     protected String name;
     protected Boolean isChecked = false;
 
-    protected Task(String name) {
+    protected Task(String name, String type) throws NoTaskDescriptionException {
+        if (name.isBlank()) {
+            throw new NoTaskDescriptionException(type);
+        } 
         this.name = name;
     }
     
@@ -15,12 +21,12 @@ public class Task {
         } else {
             System.out.println("Here are the items in your list: \n");
             for (int i = 0; i < curr; i++) {
-                System.out.println("    " + i+1 + ") " + arr[i]);
+                System.out.println("    " + (i+1) + ") " + arr[i]);
             }
         }
     }
 
-    public static void addTask(String command, String userInput) {
+    public static void addTask(String command, String userInput) throws UnknownTaskException, NoTaskDescriptionException {
         String[] dates = userInput.split("/");
         switch(command.toUpperCase()) {
             case "TODO": 
@@ -31,7 +37,9 @@ public class Task {
                 break;
             case "EVENT":
                 arr[curr] = new Event(dates[0], dates[1], dates[2]);
-                break;           
+                break;
+            default:
+                throw new UnknownTaskException(command);
         }
         System.out.println("The following task has been added to your list: \n" + arr[curr] 
                             + "\nCurrently, your list has " + ++curr + " tasks.");

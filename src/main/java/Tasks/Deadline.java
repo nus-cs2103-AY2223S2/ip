@@ -1,8 +1,12 @@
+package Tasks;
+
+import Exceptions.NoTaskDescriptionException;
+
 public class Deadline extends Task {
     private String endDate;
 
-    protected Deadline(String name, String endDate) {
-        super(name);
+    protected Deadline(String name, String endDate) throws NoTaskDescriptionException{
+        super(name, "Deadline");
         this.endDate = endDate;
     }
 

@@ -1,9 +1,13 @@
+package Tasks;
+
+import Exceptions.NoTaskDescriptionException;
+
 public class Event extends Task{
     String startTime;
     String endTime;
 
-    protected Event(String name, String startTime, String endTime) {
-        super(name);
+    protected Event(String name, String startTime, String endTime) throws NoTaskDescriptionException{
+        super(name, "Event");
         this.startTime = startTime;
         this.endTime = endTime;
     }

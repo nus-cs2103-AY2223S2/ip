@@ -1,10 +1,10 @@
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStreamReader;
+import java.io.*;
+
+import Tasks.*;
 
 public class Duke {
     
-    public static void main(String[] args) throws IOException {
+    public static void main(String[] args) throws Exception {
         String logo = " ____        _        \n"
                     + "|  _ \\ _   _| | _____ \n"
                     + "| | | | | | | |/ / _ \\\n"
@@ -15,7 +15,7 @@ public class Duke {
         awaitInput();
     }
 
-    private static void awaitInput() throws IOException {
+    private static void awaitInput() throws Exception {
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
 
         String userInput = br.readLine();
@@ -42,11 +42,15 @@ public class Duke {
                 Task.unmarkTasks(Integer.parseInt(commands[1])-1);
                 break;
             default:
-                String taskName = commands[1];
-                for (int i = 2; i < commands.length; i++) {
-                    taskName += " " + commands[i];
+                String taskName = "";
+                for (int i = 1; i < commands.length; i++) {
+                    taskName += commands[i] + " ";
                 }
-                Task.addTask(commands[0], taskName);
+                try {
+                    Task.addTask(commands[0], taskName);
+                } catch(Exception e) {
+                    System.out.println(e.getMessage());
+                }
         }
         System.out.println("\n----------------------------------\n");
     }
