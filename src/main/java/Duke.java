@@ -23,11 +23,12 @@ public class Duke {
         System.out.println("What can I do for you?");
 
         while (!terminate) {
+
             try {
                 BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
-                String command = br.readLine();
+                String command = br.readLine().trim();
 
-                if (!command.trim().isEmpty()) {
+                if (!command.isEmpty()) {
                     String[] inputs = command.split(" ");
 
                     // Once detect "bye", print and terminate
@@ -35,27 +36,14 @@ public class Duke {
                         terminate = true;
                         System.out.println("Bye. Hope to see you again soon!");
 
-                    // If command is "list", prints the taskList
                     } else if (command.equals("list")) {
                         printList();
 
-                    // if the first token is "mark" and second token is within limit
-                    } else if (inputs[0].equals("mark") && inputs.length == 2) {
-                        Integer task_no = Integer.parseInt(inputs[1]);
-                        if (task_no <= inputs.length) {
-                            mark(task_no);
-                        } else {
-                            System.out.println("Invalid task number!");
-                        }
+                    } else if (inputs[0].equals("mark")) {
+                        mark(command);
 
-                    // if the first token is "unmark" and second token is within limit
-                    } else if (inputs[0].equals("unmark") && inputs.length == 2) {
-                        Integer task_no = Integer.parseInt(inputs[1]);
-                        if (task_no <= inputs.length) {
-                            unmark(task_no);
-                        } else {
-                            System.out.println("Invalid task number!");
-                        }
+                    } else if (inputs[0].equals("unmark")) {
+                        unmark(command);
 
                     } else if (inputs[0].equals("todo")) {
                         addToDo(command);
@@ -66,13 +54,14 @@ public class Duke {
                     } else if (inputs[0].equals("event")) {
                         addEvent(command);
 
-                    // Else handles the commands
                     } else {
-                        addToDo(command);
+                        throw new DukeException("☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
                     }
                 }
 
             } catch (IOException e) {
+                System.out.println(e.getMessage());
+            } catch (DukeException e) {
                 System.out.println(e.getMessage());
             }
         }
@@ -91,33 +80,53 @@ public class Duke {
             System.out.println(key + "." + toDo);
 
         }
-
     }
 
     /*
      * mark takes in an Integer key
      * and marks the corresponding task as completed
      */
-    public static void mark(Integer key) {
-        taskList.get(key).markCompleted();
+    public static void mark(String command) throws DukeException {
+        String[] inputs = command.split(" ");
+        if (inputs.length == 2) {
+            Integer key = Integer.parseInt(inputs[1]);
+            if (key > taskList.size()) throw new DukeException("☹ OOPS!!! Invalid task number :(");
 
-        System.out.println("Nice! I've marked this task as done:");
-        System.out.println("  " + taskList.get(key));
+            taskList.get(key).markCompleted();
 
+            System.out.println("Nice! I've marked this task as done:");
+            System.out.println("  " + taskList.get(key));
+
+        } else {
+            throw new DukeException("Correct command: mark <valid task index>");
+        }
     }
 
     /*
      * mark takes in an Integer key
      * and marks the corresponding task as not completed
      */
-    public static void unmark(Integer key) {
-        taskList.get(key).markUncompleted();
+    public static void unmark(String command) throws DukeException {
+        String[] inputs = command.split(" ");
+        if (inputs.length == 2) {
+            Integer key = Integer.parseInt(inputs[1]);
+            if (key > taskList.size()) throw new DukeException("☹ OOPS!!! Invalid task number :(");
 
-        System.out.println("OK, I've marked this task as not done yet:");
-        System.out.println("  " + taskList.get(key));
+            taskList.get(key).markUncompleted();
+
+            System.out.println("OK, I've marked this task as not done yet:");
+            System.out.println("  " + taskList.get(key));
+
+        } else {
+            throw new DukeException("Correct command: unmark <valid task index>");
+        }
     }
 
-    public static void addToDo(String command) {
+    /*
+     * adds todo base on the string command
+     * todo only requires taskName
+     */
+    public static void addToDo(String command) throws DukeException{
         ToDo toDo = new ToDo(getTaskName("todo", command));
         taskList.put(++counter, toDo);
 
@@ -126,7 +135,11 @@ public class Duke {
         System.out.println("Now you have " + taskList.size() + " tasks in the list.");
     }
 
-    public static void addDeadLine(String command) {
+    /*
+     * adds deadline base on the string command
+     * deadline requires taskName and EndDate
+     */
+    public static void addDeadLine(String command) throws DukeException{
         String taskName = getTaskName("deadline", command);
         String endDate = getEndDate("deadline", command);
 
@@ -138,7 +151,11 @@ public class Duke {
         System.out.println("Now you have " + taskList.size() + " tasks in the list.");
     }
 
-    public static void addEvent(String command) {
+    /*
+     * adds event base on the string command
+     * event requires taskName, StartDate and EndDate
+     */
+    public static void addEvent(String command) throws DukeException {
         String taskName = getTaskName("event", command);
         String startDate = getStartDate(command);
         String endDate = getEndDate("event", command);
@@ -151,45 +168,53 @@ public class Duke {
         System.out.println("Now you have " + taskList.size() + " tasks in the list.");
     }
 
-    public static String getTaskName(String type, String command) {
+    /*
+     * getTaskName checks the command line for the correct taskName syntax
+     * throws exceptions for missing name or wrong keyword
+     */
+    public static String getTaskName(String type, String command) throws DukeException {
         if (type.equals("todo")) {
             int firstSpace = command.indexOf(" ");
-            return command.substring(firstSpace + 1);
-        } else if (type.equals("deadline")) {
-            String startWord = "deadline ";
-            String endWord = " /by";
-            int startIndex = command.indexOf(startWord) + startWord.length();
-            int endIndex = command.indexOf(endWord);
-            return command.substring(startIndex, endIndex);
+            if (firstSpace == -1) {
+                throw new DukeException("☹ OOPS!!! Missing Task Name.");
+            } else {
+                return command.substring(firstSpace + 1);
+            }
         } else {
-            String startWord = "event ";
-            String endWord = " /from";
+            String startWord = type.equals("deadline") ? "deadline " : "event ";
+            String endWord = type.equals("deadline") ? " /by" : " /from";
+
             int startIndex = command.indexOf(startWord) + startWord.length();
+            if (startIndex < startWord.length()) throw new DukeException("☹ OOPS!!! Missing Task Name.");
             int endIndex = command.indexOf(endWord);
+            if (endIndex == -1) throw new DukeException("☹ OOPS!!! Missing" + endWord + " keyword.");
             return command.substring(startIndex, endIndex);
         }
     }
 
-    public static String getStartDate(String command) {
-        String startWord = "/from ";
+    /*
+     * getStartDate checks the command line for the correct startDate syntax
+     * throws exceptions for missing date or keyword
+     */
+    public static String getStartDate(String command) throws DukeException {
+        String startWord = "/from";
         String endWord = " /to";
-        int startIndex = command.indexOf(startWord) + startWord.length();
+        int startIndex = command.indexOf(startWord) + startWord.length() + 1;
+        if (startIndex > command.length()) throw new DukeException("☹ OOPS!!! Missing Start Date.");
         int endIndex = command.indexOf(endWord);
+        if (endIndex == -1) throw new DukeException("☹ OOPS!!! Missing" + endWord + " keyword.");
         return command.substring(startIndex, endIndex);
     }
 
-    public static String getEndDate(String type, String command) {
-        if (type.equals("deadline")) {
-            String keyword = "/by";
-            int startIndex = command.indexOf(keyword) + keyword.length() + 1;
-            return command.substring(startIndex);
-        // Event
-        } else {
-            String keyword = "/to";
-            int startIndex = command.indexOf(keyword) + keyword.length() + 1;
-            return command.substring(startIndex);
-        }
+    /*
+     * getEndDate checks the command line for the correct endDate syntax
+     * throws exceptions for missing date or keyword
+     */
+    public static String getEndDate(String type, String command) throws DukeException {
+        String keyword = type.equals("deadline") ? "/by" : "/to";
+        int startIndex = command.indexOf(keyword) + keyword.length() + 1;
+        if (startIndex > command.length()) throw new DukeException("☹ OOPS!!! Missing End Date.");
+        return command.substring(startIndex);
     }
-
 
 }
