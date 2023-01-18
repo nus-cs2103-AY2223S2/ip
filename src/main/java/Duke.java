@@ -111,6 +111,22 @@ public class Duke {
                                         + tasks.get(selectedNum).toString()
                                         + "\n    ____________________________________________________________");
                         break;
+                    case "delete":
+                        int numToDelete;
+                        try {
+                            numToDelete = Integer.parseInt(input.split(" ", 2)[1]);
+                        } catch (Exception e) {
+                            throw new DukeException("Please enter a valid number to delete!");
+                        }
+                        Task selectedTask = tasks.get(numToDelete - 1);
+                        tasks.remove(numToDelete - 1);
+                        numTasks--;
+                        System.out.println(
+                                "    ____________________________________________________________"
+                                        + "\n     OK, I've Deleted this task:"
+                                        + selectedTask.toString()
+                                        + "\n    ____________________________________________________________");
+                        break;
                     default:
                         throw new DukeException("I don't get it!");
                 }
