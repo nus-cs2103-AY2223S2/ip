@@ -1,14 +1,35 @@
 public class Task {
-//    private boolean done;
-//    private String type;
+    private boolean done;
+    // private String type;
 
     private String description;
-    public Task(String description){
+
+    public Task(String description) {
         this.description = description;
+        this.done = false;
     }
 
+
+    public String mark(){
+        this.done = true;
+        return this.toString();
+    }
+
+    public String unMark(){
+        this.done = false;
+        return this.toString();
+    }
+
+
     @Override
-    public String toString(){
-        return description;
+    public String toString() {
+        String doneString;
+        if (done) {
+            doneString = "[x]";
+        } else {
+            doneString = "[]";
+        }
+
+        return doneString + description;
     }
 }
