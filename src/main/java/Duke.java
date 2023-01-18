@@ -1,4 +1,3 @@
-import java.lang.String;
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -17,6 +16,7 @@ public class Duke {
             + "| | | | | | | |/ / _ \\\n"
             + "| |_| | |_| |   <  __/\n"
             + "|____/ \\__,_|_|\\_\\___|\n";
+    static Feedback fb = new Feedback();
 
     private enum Command {
         TODO, DEADLINE, EVENT,
@@ -25,7 +25,7 @@ public class Duke {
         BYE,
         INVALID
     }
-
+    
     public static Command getCommand(String input) {
         String cmd = input.split(" ", 2)[0].toLowerCase();
         switch (cmd) {
@@ -48,12 +48,12 @@ public class Duke {
         }
     }
 
-    public static void addTask(ArrayList<Task> myTaskList, Task task, Feedback fb) {
+    public static void addTask(ArrayList<Task> myTaskList, Task task) {
         myTaskList.add(task);
         fb.addedTask(myTaskList.size(), task);
     }
 
-    public static void markTask(Task task, Boolean isMark, Feedback fb) {
+    public static void markTask(Task task, Boolean isMark) {
         if (isMark) {
             task.markDone();
             fb.markedTask(task);
@@ -65,7 +65,6 @@ public class Duke {
 
     public static void main(String[] args) {
         // Initialize components
-        Feedback fb = new Feedback();
         Scanner scn = new Scanner(System.in);
         ArrayList<Task> myTaskList = new ArrayList<>(100);
 
@@ -80,7 +79,7 @@ public class Duke {
             switch (cmd) {
                 case TODO:
                     msg = input.split(" ", 2)[1];
-                    addTask(myTaskList, new Todo(msg), fb);
+                    addTask(myTaskList, new Todo(msg));
                     break;
 
                 case DEADLINE:
@@ -90,7 +89,7 @@ public class Duke {
 
                     descr = msg.substring(0, byIndex);
                     String dateTime = msg.substring(byIndex + by.length());
-                    addTask(myTaskList, new Deadline(descr, dateTime), fb);
+                    addTask(myTaskList, new Deadline(descr, dateTime));
                     break;
 
                 case EVENT:
@@ -103,17 +102,17 @@ public class Duke {
                     descr = msg.substring(0, startDTIndex);
                     String startDT = msg.substring(startDTIndex + from.length(), endDTIndex);
                     String endDT = msg.substring(endDTIndex + to.length());
-                    addTask(myTaskList, new Event(descr, startDT, endDT), fb);
+                    addTask(myTaskList, new Event(descr, startDT, endDT));
                     break;
 
                 case MARK:
                     index = Integer.parseInt(input.split(" ")[1]) - 1;
-                    markTask(myTaskList.get(index), true, fb);
+                    markTask(myTaskList.get(index), true);
                     break;
 
                 case UNMARK:
                     index = Integer.parseInt(input.split(" ")[1]) - 1;
-                    markTask(myTaskList.get(index), false, fb);
+                    markTask(myTaskList.get(index), false);
                     break;
 
                 case LIST:
@@ -121,7 +120,7 @@ public class Duke {
                     break;
 
                 default:
-                    System.out.println("Invalid Command. Please try again.\n");
+                    fb.invalid();
             }
             input = scn.nextLine();
             cmd = getCommand(input);

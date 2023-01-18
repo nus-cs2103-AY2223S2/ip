@@ -28,6 +28,10 @@ public class Feedback {
         display("Bye. Hope to see you again soon!");
     }
 
+    public void invalid() {
+        display("☹ OOPS!!! I'm sorry, but I don't know what that means :-(\n");
+    }
+
     public void addedTask(int index, Task task) {
         display("Got it. I've added this task:\n"
                 + task.toString() + "\n"
