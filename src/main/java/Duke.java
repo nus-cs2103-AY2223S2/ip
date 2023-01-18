@@ -15,6 +15,14 @@ public class Duke {
         taskList[index] = unmarkedTask;
     }
 
+    public static void addTask(Task[] taskList, Task newTask, int taskCount) {
+        taskList[taskCount] = newTask;
+        taskCount++;
+        System.out.println("Got it, I've added this task:");
+        System.out.println(newTask);
+        System.out.println(String.format("Now you have %d tasks in the list.", taskCount));
+    }
+
     public static void main(String[] args) {
         System.out.println("Hello! I'm Duke");
         System.out.println("What can I do for you?");
@@ -51,22 +59,16 @@ public class Duke {
                 String description = String.join(" ",
                         Arrays.copyOfRange(splitInput, 1, splitInput.length));
                 Task newTask = new Todo(description);
-                taskList[taskCount] = newTask;
+                addTask(taskList, newTask, taskCount);
                 taskCount++;
-                System.out.println("Got it, I've added this task:");
-                System.out.println(newTask);
-                System.out.println(String.format("Now you have %d tasks in the list.", taskCount));
             } else if (command.equals("deadline")) {
                 int byIndex = Arrays.asList(splitInput).indexOf("/by");
                 String description = String.join(" ", Arrays.copyOfRange(splitInput, 1, byIndex));
                 String deadline = String.join(" ", Arrays.copyOfRange(splitInput,
                         byIndex + 1, splitInput.length));
                 Task newTask = new Deadline(description, deadline);
-                taskList[taskCount] = newTask;
+                addTask(taskList, newTask, taskCount);
                 taskCount++;
-                System.out.println("Got it, I've added this task:");
-                System.out.println(newTask);
-                System.out.println(String.format("Now you have %d tasks in the list.", taskCount));
             } else if (command.equals("event")) {
                 int fromIndex = Arrays.asList(splitInput).indexOf("/from");
                 int toIndex = Arrays.asList(splitInput).indexOf("/to");
@@ -75,11 +77,8 @@ public class Duke {
                 String to = String.join(" ", Arrays.copyOfRange(splitInput,
                         toIndex + 1, splitInput.length));
                 Task newTask = new Event(description, from, to);
-                taskList[taskCount] = newTask;
+                addTask(taskList, newTask, taskCount);
                 taskCount++;
-                System.out.println("Got it, I've added this task:");
-                System.out.println(newTask);
-                System.out.println(String.format("Now you have %d tasks in the list.", taskCount));
             }
         }
     }
