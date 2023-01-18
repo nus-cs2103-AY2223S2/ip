@@ -21,7 +21,7 @@ public class Command {
                 continue;
             }
             String[] temp2 = str.split(" +", 2);
-            namedParameters.put(temp2[0], temp2.length > 1 ? temp2[1] : null);
+            namedParameters.put(temp2[0], temp2.length > 1 ? temp2[1] : "");
         }
         this.body = body;
     }
