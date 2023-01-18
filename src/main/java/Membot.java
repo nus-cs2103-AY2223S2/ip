@@ -2,8 +2,8 @@ import model.Deadline;
 import model.Event;
 import model.Task;
 import model.ToDo;
-import utils.InputValidator;
-import utils.Printer;
+import utils.*;
+
 import java.util.Scanner;
 
 public class Membot {
@@ -13,13 +13,6 @@ public class Membot {
             + "| '_ ` _ \\  / _ \\| '_ ` _ \\ | '_ \\  / _ \\ | __|\n"
             + "| | | | | ||  __/| | | | | || |_) || (_) || |_ \n"
             + "|_| |_| |_| \\___||_| |_| |_||_.__/  \\___/  \\__|\n";
-    private static final String TERMINATE_KEY = "bye";
-    private static final String LIST_KEY = "list";
-    private static final String CHECK_KEY = "done";
-    private static final String UNCHECK_KEY = "undone";
-    private static final String TODO_KEY = "todo";
-    private static final String DEADLINE_KEY = "deadline";
-    private static final String EVENT_KEY = "event";
 
     public static void main(String[] args) {
         Printer.println("Welcome to\n" + LOGO);
@@ -27,12 +20,20 @@ public class Membot {
         Scanner scanner = new Scanner(System.in);
 
         loop: while (scanner.hasNext()) {
-            String input = scanner.nextLine();
-            switch (input.trim()) {
-                case TERMINATE_KEY:
+            String input = scanner.nextLine().trim();
+            Command command = Command.UNDEFINED;
+
+            try {
+                command = InputValidator.extractCommandFromInput(input);
+            } catch (EmptyInputException | InvalidCommandException e) {
+                Printer.printlnError("Sorry I do not understand what to do!");
+            }
+
+            switch (command) {
+                case BYE:
                     Printer.printlnIndent("Have a good day! Good bye!");
                     break loop;
-                case LIST_KEY:
+                case LIST:
                     String[] tasks = Task.listAll();
                     if (tasks.length == 0) {
                         Printer.printlnIndent("Excellent! You do not have any tasks at hand!");
@@ -41,71 +42,88 @@ public class Membot {
                         Printer.listPrint(Task.listAll());
                     }
                     break;
-                case CHECK_KEY:
-                    Printer.printIndent("Which task would you like to mark as completed?");
-                    Printer.listPrint(Task.listAll());
-                    break;
-                default:
-                    if (input.startsWith(CHECK_KEY) && InputValidator.isCheckInputValid(input)) {
+                case DONE:
+                    if (InputValidator.isCheckInputValid(input)) {
                         int taskId = Integer.parseInt(input.split(" ")[1]);
                         try {
                             Task.setStatusCompleted(taskId);
                             Printer.printIndent("Well done! The task is marked as completed:");
                             Printer.printIndent(Task.listOne(taskId));
+
+                            Printer.printIndent("");
+                            Printer.printIndent("Here are your updated tasks:");
+                            Printer.listPrint(Task.listAll());
                         } catch (IndexOutOfBoundsException e) {
-                            Printer.printlnIndent("Invalid Task ID!");
-                            break;
+                            Printer.printlnError("Invalid Task ID!");
                         }
-                    } else if (input.startsWith(UNCHECK_KEY)
-                            && InputValidator.isCheckInputValid(input)) {
+                    } else {
+                        Printer.printlnError("Invalid Syntax - \"done [Task ID]\" (e.g. \"done 4\")");
+                    }
+
+                    break;
+                case UNDONE:
+                    if (InputValidator.isCheckInputValid(input)) {
                         int taskId = Integer.parseInt(input.split(" ")[1]);
                         try {
                             Task.setStatusNew(taskId);
                             Printer.printIndent("The task is now marked as not done yet:");
                             Printer.printIndent(Task.listOne(taskId));
+
+                            Printer.printIndent("");
+                            Printer.printIndent("Here are your updated tasks:");
+                            Printer.listPrint(Task.listAll());
                         } catch (IndexOutOfBoundsException e) {
-                            Printer.printlnIndent("Invalid Task ID!");
-                            break;
+                            Printer.printlnError("Invalid Task ID!");
                         }
-                    } else if (input.startsWith(TODO_KEY)
-                            && InputValidator.isTaskInputValid(input)) {
-                        String title = input.substring(5);
-                        ToDo task = new ToDo(title);
-                        Printer.printIndent(task.toString());
-                    } else if (input.startsWith(DEADLINE_KEY)
-                            && InputValidator.isTaskInputValid(input)) {
-                        int deadlineStartIndex = input.indexOf("/by ");
-                        if (deadlineStartIndex == -1) {
-                            Printer.printlnIndent("Invalid syntax: \"deadline [title] /by [deadline]\"");
-                            break;
-                        }
-                        String title = input.substring(9, deadlineStartIndex - 1);
-                        String deadline = input.substring(deadlineStartIndex + 4);
-
-                        Deadline task = new Deadline(title, deadline);
-                        Printer.printIndent(task.toString());
-                    } else if (input.startsWith(EVENT_KEY)
-                            && InputValidator.isTaskInputValid(input)) {
-                        int startIndex = input.indexOf("/from ");
-                        int endIndex = input.indexOf("/to ");
-                        if (startIndex == -1 || endIndex == -1) {
-                            Printer.printlnIndent("Invalid syntax: \"event [title] /from [start date/time] /to [end date/time]\"");
-                            break;
-                        }
-                        String title = input.substring(6, startIndex - 1);
-                        String start = input.substring(startIndex + 6, endIndex - 1);
-                        String end = input.substring(endIndex + 4);
-
-                        Event task = new Event(title, start, end);
-                        Printer.printIndent(task.toString());
                     } else {
-                        ToDo task = new ToDo(input);
-                        Printer.printIndent(task.toString());
+                        Printer.printlnError("Invalid Syntax - \"undone [Task ID]\" (e.g. \"undone 3\")");
                     }
 
-                    Printer.printIndent("");
-                    Printer.printIndent("Here are your updated tasks:");
-                    Printer.listPrint(Task.listAll());
+                    break;
+                case TODO:
+                    try {
+                        String[] normalised = InputValidator.normaliseTodoInput(input);
+                        ToDo task = new ToDo(normalised[1]);
+                        Printer.printIndent(task.toString());
+
+                        Printer.printIndent("");
+                        Printer.printIndent("Here are your updated tasks:");
+                        Printer.listPrint(Task.listAll());
+                    } catch (IndexOutOfBoundsException | InvalidCommandException e) {
+                        Printer.printlnError("Invalid Syntax - \"todo [title]\" (e.g. \"todo math homework\")");
+                    }
+
+                    break;
+                case DEADLINE:
+                    try {
+                        String[] normalised = InputValidator.normaliseDeadlineInput(input);
+                        Deadline task = new Deadline(normalised[1], normalised[2]);
+                        Printer.printIndent(task.toString());
+
+                        Printer.printIndent("");
+                        Printer.printIndent("Here are your updated tasks:");
+                        Printer.listPrint(Task.listAll());
+                    } catch (IndexOutOfBoundsException | NoDeadlineFoundException | InvalidCommandException e) {
+                        Printer.printlnError("Invalid Syntax - \"deadline [title] /by [deadline]\"" +
+                                "(e.g. \"deadline physics project /by tomorrow 3pm\")");
+                    }
+
+                    break;
+                case EVENT:
+                    try {
+                        String[] normalised = InputValidator.normaliseEventInput(input);
+                        Event task = new Event(normalised[1], normalised[2], normalised[3]);
+                        Printer.printIndent(task.toString());
+
+                        Printer.printIndent("");
+                        Printer.printIndent("Here are your updated tasks:");
+                        Printer.listPrint(Task.listAll());
+                    } catch (IndexOutOfBoundsException | InvalidCommandException | NoStartDateTimeFoundException |
+                             NoEndDateTimeFoundException e) {
+                        Printer.printlnError("Invalid Syntax - \"event [title] /from [start] /to [end]\"" +
+                                "(e.g. \"event piano concert /from tomorrow 3pm /to tomorrow 6pm\")");
+                    }
+
                     break;
             }
         }
