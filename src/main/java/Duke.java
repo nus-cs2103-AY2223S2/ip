@@ -1,7 +1,9 @@
+import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Duke {
     static Scanner in = new Scanner(System.in);
+    static ArrayList<String> stringStorage = new ArrayList<String>();
 
     public static void main(String[] args) {
         greetings();
@@ -11,7 +13,12 @@ public class Duke {
             if (input.equals("bye"))
                 break;
 
-            echo(input);
+            if (input.contains("list")) {
+                listItem();
+                continue;
+            }
+
+            storeItem(input);
         }
 
         bye();
