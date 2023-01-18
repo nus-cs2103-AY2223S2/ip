@@ -12,6 +12,10 @@ public class Storage {
     public static final String DATA_PATH = "data";
     public static final String TASKS_PATH = DATA_PATH + "/tasks.txt";
 
+    /**
+     * Reads tasks from local storage.
+     * @return List of tasks (can be empty).
+     */
     public List<Task> readTasks() {
         List<Task> tasks = new LinkedList<>();
 
@@ -30,6 +34,11 @@ public class Storage {
         return tasks;
     }
 
+    /**
+     * Saves the given list of tasks to local storage.
+     * @param tasks List of tasks to save.
+     * @throws TaskIOException If the tasks cannot be saved.
+     */
     public void saveTasks(List<Task> tasks) throws TaskIOException {
         try {
             FileWriter writer = new FileWriter(this.getFile());
