@@ -2,8 +2,8 @@ abstract class Task {
   protected String title;
   protected boolean isDone;
 
-  public Task(String task) {
-    this.title = task;
+  public Task(String title) {
+    this.title = title;
     this.isDone = false;
   }
 

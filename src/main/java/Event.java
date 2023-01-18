@@ -1,6 +1,6 @@
 public class Event extends Task {
-  public Event(String task) {
-    super(task);
+  public Event(String title) {
+    super(title);
   }
 
   @Override
