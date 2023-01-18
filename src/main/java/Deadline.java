@@ -10,7 +10,7 @@ public class Deadline extends Task {
     private String by;
 
     /**
-     * Constructor for class Deadline.
+     * Constructor for Deadline class.
      *
      * @param desc description of the deadline task.
      */

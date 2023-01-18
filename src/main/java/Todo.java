@@ -5,7 +5,7 @@
  */
 public class Todo extends Task {
     /**
-     * Constructor for class Todo.
+     * Constructor for Todo class.
      *
      * @param desc description of the todo task.
      */

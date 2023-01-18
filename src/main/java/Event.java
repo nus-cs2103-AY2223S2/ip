@@ -15,7 +15,7 @@ public class Event extends Task {
     private String from;
 
     /**
-     * Constructor for class Event.
+     * Constructor for Event class.
      *
      * @param desc description of the event task.
      */

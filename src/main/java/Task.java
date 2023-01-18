@@ -15,7 +15,7 @@ public abstract class Task {
     private boolean marked;
 
     /**
-     * Constructor for class Task.
+     * Constructor for Task class.
      *
      * @param desc description of the task.
      */
