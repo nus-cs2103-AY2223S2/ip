@@ -6,7 +6,7 @@ public class Duke {
     public enum ParseFunctions {
         SPLIT_ALL, TODO, DEADLINE, EVENT
     }
-    public static ArrayList<Task> taskStore = new ArrayList<>();
+    private static ArrayList<Task> taskStore = new ArrayList<>();
 
     private static Task getTaskForMarking(String[] parsed) {
         int completedIndex = Integer.parseInt(parsed[1]) - 1; // index of the task completed
@@ -14,7 +14,7 @@ public class Duke {
         return completedTask;
     }
 
-    public static String[] parser(String input, ParseFunctions parse_type) throws EmptyDescriptionException {
+    private static String[] parser(String input, ParseFunctions parse_type) throws EmptyDescriptionException {
         switch (parse_type) {
             case SPLIT_ALL:
                 return input.split(" ");
@@ -36,8 +36,22 @@ public class Duke {
         }
         return null;
     }
-    public static int countTasks() {
+    private static int countTasks() {
         return Duke.taskStore.size();
+    }
+    private static void printNewTask(Task t) {
+        if (t instanceof Event) {
+            System.out.println("  new event added!");
+        }
+        else if (t instanceof Deadline) {
+            System.out.println("  new deadline added!");
+        }
+        else if (t instanceof ToDo) {
+            System.out.println("  new todo added!");
+        }
+        System.out.println("    " + t.toString());
+        System.out.println("  Now you have " + String.valueOf(Duke.countTasks()) +
+                " tasks in the list!");
     }
 
     public static void main(String[] args) throws EmptyDescriptionException {
@@ -77,10 +91,7 @@ public class Duke {
                     Task newDeadline = new Deadline(parsed[1], parsed[2]);
                     Duke.taskStore.add(newDeadline);
 
-                    System.out.println("  new task added!");
-                    System.out.println("    " + newDeadline.toString());
-                    System.out.println("  Now you have " + String.valueOf(Duke.countTasks()) +
-                            " tasks in the list!");
+                    printNewTask(newDeadline);
                     break;
                 }
                 case "event": {
@@ -88,10 +99,7 @@ public class Duke {
                     Task newEvent = new Event(parsed[1], parsed[2], parsed[3]);
                     Duke.taskStore.add(newEvent);
 
-                    System.out.println("  new event added!");
-                    System.out.println("    " + newEvent.toString());
-                    System.out.println("  Now you have " + String.valueOf(Duke.countTasks()) +
-                            " tasks in the list!");
+                    printNewTask(newEvent);
                     break;
                 }
                 case "todo": {
@@ -100,10 +108,7 @@ public class Duke {
                         ToDo newToDo = new ToDo(parsed[1]);
                         Duke.taskStore.add(newToDo);
 
-                        System.out.println("  new todo added!");
-                        System.out.println("    " + newToDo.toString());
-                        System.out.println("  Now you have " + String.valueOf(Duke.countTasks()) +
-                                " tasks in the list!");
+                        printNewTask(newToDo);
                         break;
                     }
                     catch (EmptyDescriptionException e) {
