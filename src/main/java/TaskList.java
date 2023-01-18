@@ -15,7 +15,7 @@ public class TaskList {
         StringBuilder display = new StringBuilder();
         for (int i = 0; i < this.tasks.size(); i++) {
             Task curr = this.tasks.get(i);
-            display.append(i + ". " + curr.getDescription());
+            display.append((i+1) + ". " + curr.getDescription());
             if (i < this.tasks.size()-1) {
                 display.append("\n");
             }
