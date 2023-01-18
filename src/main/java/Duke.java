@@ -14,12 +14,16 @@ public class Duke {
         return completedTask;
     }
 
-    public static String[] parser(String input, ParseFunctions parse_type) {
+    public static String[] parser(String input, ParseFunctions parse_type) throws EmptyDescriptionException {
         switch (parse_type) {
             case SPLIT_ALL:
                 return input.split(" ");
             case TODO:
-                return input.split(" ", 2); // split into 2
+                String[] parsed = input.split(" ", 2);
+                if (parsed.length < 2) {
+                    throw new EmptyDescriptionException("Add an argument");
+                }
+                return parsed; // split into 2
             case DEADLINE:
                 String[] otherArgs = input.split(" ", 2);
                 String[] taskAndTime = otherArgs[1].split(" /by ", 2);
@@ -36,7 +40,7 @@ public class Duke {
         return Duke.taskStore.size();
     }
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws EmptyDescriptionException {
         System.out.println("  insert ingenious greeting here");
 
         label:
@@ -44,7 +48,7 @@ public class Duke {
             Scanner myScanner = new Scanner(System.in);
             String command = myScanner.nextLine();
 
-            String[] toFindFirstWord = parser(command, ParseFunctions.SPLIT_ALL);
+            String[] toFindFirstWord = parser(command, ParseFunctions.SPLIT_ALL); // take a comment
 
             String first = toFindFirstWord[0];
 
@@ -91,15 +95,20 @@ public class Duke {
                     break;
                 }
                 case "todo": {
-                    String[] parsed = parser(command, ParseFunctions.TODO);
-                    ToDo newToDo = new ToDo(parsed[1]);
-                    Duke.taskStore.add(newToDo);
+                    try {
+                        String[] parsed = parser(command, ParseFunctions.TODO);
+                        ToDo newToDo = new ToDo(parsed[1]);
+                        Duke.taskStore.add(newToDo);
 
-                    System.out.println("  new todo added!");
-                    System.out.println("    " + newToDo.toString());
-                    System.out.println("  Now you have " + String.valueOf(Duke.countTasks()) +
-                            " tasks in the list!");
-                    break;
+                        System.out.println("  new todo added!");
+                        System.out.println("    " + newToDo.toString());
+                        System.out.println("  Now you have " + String.valueOf(Duke.countTasks()) +
+                                " tasks in the list!");
+                        break;
+                    }
+                    catch (EmptyDescriptionException e) {
+                        System.out.println("  Add an argument");
+                    }
                 }
                 case "list":
                     for (int i = 0; i < taskStore.size(); i++) {
@@ -107,7 +116,7 @@ public class Duke {
                     }
                     break;
                 default:
-                    System.out.println("  error");
+                    System.out.println("  this is not a task, contact admin");
                     break;
             }
         }
