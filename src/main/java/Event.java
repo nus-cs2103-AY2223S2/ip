@@ -1,13 +1,18 @@
 public class Event extends Task {
-  public Event(String title) {
+  protected String from;
+  protected String to;
+
+  public Event(String title, String from, String to) {
     super(title);
+    this.from = from;
+    this.to = to;
   }
 
   @Override
   public String toString() {
     return String.format(
-      "[E][%c] %s",
-      getStatusIcon(), title
+      "[E][%c] %s (from: %s to: %s)",
+      getStatusIcon(), title, from, to
     );
   }
 }

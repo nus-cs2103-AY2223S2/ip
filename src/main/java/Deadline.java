@@ -1,13 +1,16 @@
 public class Deadline extends Task {
-  public Deadline(String title) {
+  protected String by;
+
+  public Deadline(String title, String by) {
     super(title);
+    this.by = by;
   }
 
   @Override
   public String toString() {
     return String.format(
-      "[D][%c] %s",
-      getStatusIcon(), title
+      "[D][%c] %s (by: %s)",
+      getStatusIcon(), title, by
     );
   }
 }

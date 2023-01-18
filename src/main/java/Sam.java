@@ -1,11 +1,13 @@
+import java.util.HashMap;
 import java.util.Scanner;
 
 public class Sam {
-	public static void main(String[] args) {
-    Scanner scanner = new Scanner(System.in);
-		TaskList tasks = new TaskList();
-    boolean live = true;
+  private static Scanner scanner = new Scanner(System.in);
+  private static TaskList tasks = new TaskList();
+  private static boolean live = true;
+  private static HashMap<String, String> taskArgs = new HashMap<>();
 
+	public static void main(String[] args) {
     System.out.println(Assets.LOGO);
     talk("Hello, I am Sam!");
 
@@ -45,26 +47,45 @@ public class Sam {
         case TODO: {
           Task task = new ToDo(input[1]);
           tasks.addTask(task);
-          talk("I've added \"" + input + "\" to your list");
+          newTask(task);
           break;
         }
         case EVENT: {
-          Task task = new Event(input[1]);
+          String[] title = input[1].split(" /", 2);
+          parseTaskArgs(title[1]);
+          Task task = new Event(title[0], taskArgs.get("from"), taskArgs.get("to"));
           tasks.addTask(task);
-          talk("I've added \"" + input + "\" to your list");
+          newTask(task);
           break;
         }
         case DEADLINE: {
-          Task task = new Deadline(input[1]);
+          String[] title = input[1].split(" /", 2);
+          parseTaskArgs(title[1]);
+          Task task = new Deadline(title[0], taskArgs.get("by"));
           tasks.addTask(task);
-          talk("I've added \"" + input + "\" to your list");
+          newTask(task);
           break;
         }
         default:
           talk("Sorry, I don't know what that means");
 			}
+      taskArgs.clear();
     }
     scanner.close();
+  }
+
+  private static void parseTaskArgs(String input) {
+    for (String arg : input.split(" /")) {
+      String[] keyValue = arg.split(" ", 2);
+      System.out.println(input.split(" /"));
+      taskArgs.put(keyValue[0], keyValue[1]);
+    }
+  }
+
+  private static void newTask(Task task) {
+    talk("Gotcha, I've added the task to your list:\n    "
+       + task
+       + "\n  Now you have " + tasks.count() + " tasks in the list");
   }
 
   private static void talk(String message) {

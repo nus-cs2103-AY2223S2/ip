@@ -15,6 +15,10 @@ public class TaskList {
     tasks.get(id - 1).mark(done);
   }
 
+  public int count() {
+    return tasks.size();
+  }
+
   public String printTask(int id) {
     return tasks.get(id - 1).toString();
   }
