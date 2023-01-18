@@ -4,6 +4,24 @@ import java.util.List;
 
 public class Duke {
 
+    public enum Keyword {
+        BYE("bye"),
+        LIST("list"),
+        MARK("mark"),
+        UNMARK("unmark"),
+        DELETE("delete"),
+        TODO("todo"),
+        DEADLINE("deadline"),
+        EVENT("event");
+        private String word;
+        Keyword(String word) {
+            this.word = word;
+        }
+        @Override
+        public String toString() {
+            return this.word;
+        }
+    }
     public static final String dashes = "--------------------------------------";
 
     public String formatString(String input) {
@@ -81,85 +99,66 @@ public class Duke {
 
         Scanner input = new Scanner(System.in);
 
-        while (doLoop) {
+        while (true) {
             String line = input.nextLine();
-
             String arr[] = line.split(" ", 2);
-            String keyword = arr[0];
+            String keyword = arr[0].toLowerCase();
             try {
-                switch (keyword.toLowerCase()) {
-                    case ("bye"): {
-                        doLoop = false;
-                        System.out.println(this.formatString("Bye. Hope to see you again soon!"));
-                        break;
+                if (keyword.equals(Keyword.BYE.toString())) {
+                    System.out.println(this.formatString("Bye. Hope to see you again soon!"));
+                    break;
+                } else if (keyword.equals(Keyword.LIST.toString())) {
+                    System.out.println(this.formatString("Here are the tasks in your list:\n" + this.formatList(userTasks)));
+                } else if (keyword.equals(Keyword.MARK.toString())) {
+                    String i = arr[1];
+                    int index = Integer.parseInt(i) - 1;
+                    Task t = userTasks.get(index);
+                    t.markAsDone();
+                    System.out.println(this.formatString("Nice! I've marked this task as done:\n" + t));
+                } else if (keyword.equals(Keyword.UNMARK.toString())) {
+                    String i = arr[1];
+                    int index = Integer.parseInt(i) - 1;
+                    Task t = userTasks.get(index);
+                    t.unmarkAsDone();
+                    System.out.println(this.formatString("OK, I've marked this task as not done yet:\n" + t));
+                } else if (keyword.equals(Keyword.DELETE.toString())) {
+                    String i = arr[1];
+                    int index = Integer.parseInt(i) - 1;
+                    Task t = userTasks.remove(index);
+                    String numTasks = "Now you have " + userTasks.size() + " tasks in the list.";
+                    System.out.println(this.formatString("Noted. I've removed this task:\n" + t + "\n" + numTasks));
+                } else if (keyword.equals(Keyword.TODO.toString())) {
+                    //Only keyword todo present, no description
+                    if (arr.length == 1) {
+                        throw new DukeException("Invalid format for ToDo.\nUsage: todo <task>\n");
                     }
-                    case ("list"): {
-                        System.out.println(this.formatString("Here are the tasks in your list:\n" + this.formatList(userTasks)));
-                        break;
+                    String info = arr[1];
+                    Task t = new ToDo(info);
+                    userTasks.add(t);
+                    String numTasks = "Now you have " + userTasks.size() + " tasks in the list.";
+                    System.out.println(this.formatString("Got it. I've added this task:\n" + t + "\n" + numTasks));
+                } else if (keyword.equals(Keyword.DEADLINE.toString())) {
+                    if (arr.length == 1) {
+                        throw new DukeException("Invalid format for Deadline.\nUsage: deadline <task> /by <date/time>\n");
                     }
-                    case ("mark"): {
-                        String i = arr[1];
-                        int index = Integer.parseInt(i) - 1;
-                        Task t = userTasks.get(index);
-                        t.markAsDone();
-                        System.out.println(this.formatString("Nice! I've marked this task as done:\n" + t));
-                        break;
+                    String info = arr[1];
+                    String[] params = deadlineSplitter(info);
+                    Task t = new Deadline(params[0], params[1]);
+                    userTasks.add(t);
+                    String numTasks = "Now you have " + userTasks.size() + " tasks in the list.";
+                    System.out.println(this.formatString("Got it. I've added this task:\n" + t + "\n" + numTasks));
+                } else if (keyword.equals(Keyword.EVENT.toString())) {
+                    if (arr.length == 1) {
+                        throw new DukeException("Invalid format for Event.\nUsage: <task> /from <date/time> /to <date/time>\n");
                     }
-                    case ("unmark"): {
-                        String i = arr[1];
-                        int index = Integer.parseInt(i) - 1;
-                        Task t = userTasks.get(index);
-                        t.unmarkAsDone();
-                        System.out.println(this.formatString("OK, I've marked this task as not done yet:\n" + t));
-                        break;
-                    }
-                    case ("delete"): {
-                        String i = arr[1];
-                        int index = Integer.parseInt(i) - 1;
-                        Task t = userTasks.remove(index);
-                        String numTasks = "Now you have " + userTasks.size() + " tasks in the list.";
-                        System.out.println(this.formatString("Noted. I've removed this task:\n" + t + "\n" + numTasks));
-                        break;
-                    }
-                    case ("todo"): {
-                        //Only keyword todo present, no description
-                        if (arr.length == 1) {
-                            throw new DukeException("Invalid format for ToDo.\nUsage: todo <task>\n");
-                        }
-                        String info = arr[1];
-                        Task t = new ToDo(info);
-                        userTasks.add(t);
-                        String numTasks = "Now you have " + userTasks.size() + " tasks in the list.";
-                        System.out.println(this.formatString("Got it. I've added this task:\n" + t + "\n" + numTasks));
-                        break;
-                    }
-                    case ("deadline"): {
-                        if (arr.length == 1) {
-                            throw new DukeException("Invalid format for Deadline.\nUsage: deadline <task> /by <date/time>\n");
-                        }
-                        String info = arr[1];
-                        String[] params = deadlineSplitter(info);
-                        Task t = new Deadline(params[0], params[1]);
-                        userTasks.add(t);
-                        String numTasks = "Now you have " + userTasks.size() + " tasks in the list.";
-                        System.out.println(this.formatString("Got it. I've added this task:\n" + t + "\n" + numTasks));
-                        break;
-                    }
-                    case ("event"): {
-                        if (arr.length == 1) {
-                            throw new DukeException("Invalid format for Event.\nUsage: <task> /from <date/time> /to <date/time>\n");
-                        }
-                        String info = arr[1];
-                        String[] params = eventSplitter(info);
-                        Task t = new Event(params[0], params[1], params[2]);
-                        userTasks.add(t);
-                        String numTasks = "Now you have " + userTasks.size() + " tasks in the list.";
-                        System.out.println(this.formatString("Got it. I've added this task:\n" + t + "\n" + numTasks));
-                        break;
-                    }
-                    default: {
-                        throw new DukeException("OOPS!!! I'm sorry, but I don't know what that means :-(\n");
-                    }
+                    String info = arr[1];
+                    String[] params = eventSplitter(info);
+                    Task t = new Event(params[0], params[1], params[2]);
+                    userTasks.add(t);
+                    String numTasks = "Now you have " + userTasks.size() + " tasks in the list.";
+                    System.out.println(this.formatString("Got it. I've added this task:\n" + t + "\n" + numTasks));
+                } else {
+                    throw new DukeException("OOPS!!! I'm sorry, but I don't know what that means :-(\n");
                 }
             } catch (DukeException e){
                 System.out.println(e.getMessage());
