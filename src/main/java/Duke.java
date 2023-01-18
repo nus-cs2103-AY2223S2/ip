@@ -23,7 +23,7 @@ public class Duke {
      * @param cmd user command
      * @return true if program should exit
      */
-    public boolean handleCommand(String cmd) {
+    public boolean handleCommand(String cmd) throws DukeException {
         String firstCmd = cmd.split(" ")[0];
 
         switch(firstCmd) {
@@ -38,6 +38,12 @@ public class Duke {
 
             case "deadline":
                 String deadlineArgs = cmd.substring(9);
+
+                // Validation of input
+                if (deadlineArgs.split(" /by ").length < 2) {
+                    throw new DukeException("Insufficient details given...");
+                }
+
                 String deadlineDesc = deadlineArgs.split(" /by ")[0];
                 String deadlineBy = deadlineArgs.split(" /by ")[1];
                 createTask(new DeadlineTask(deadlineDesc, deadlineBy));
@@ -45,6 +51,12 @@ public class Duke {
 
             case "event":
                 String eventArgs = cmd.substring(6);
+
+                // Validation of input
+                if (eventArgs.split(" /from ").length < 2 || eventArgs.split(" /to ").length < 2) {
+                    throw new DukeException("Insufficient details given...");
+                }
+
                 String eventDesc = eventArgs.split(" /from ")[0];
                 String eventFrom = eventArgs.split(" /from ")[1].split(" /to ")[0];
                 String eventBy = eventArgs.split(" /from ")[1].split(" /to ")[1];
@@ -59,7 +71,16 @@ public class Duke {
                 break;
 
             case "mark":
+                // Validation of input
+                if (cmd.split(" ").length < 2) {
+                    throw new DukeException("Insufficient details given...");
+                }
+
                 int markTaskIndex = Integer.parseInt(cmd.split(" ")[1]) - 1;
+                if (markTaskIndex < 0 || markTaskIndex >= tasks.size()) {
+                    throw new DukeException("No such task!");
+                }
+
                 tasks.get(markTaskIndex).setIsDone(true);
 
                 System.out.println("This task is now done, what's next?");
@@ -67,7 +88,16 @@ public class Duke {
                 break;
 
             case "unmark":
+                // Validation of input
+                if (cmd.split(" ").length < 2) {
+                    throw new DukeException("Insufficient details given...");
+                }
+
                 int unmarkTaskIndex = Integer.parseInt(cmd.split(" ")[1]) - 1;
+                if (unmarkTaskIndex < 0 || unmarkTaskIndex >= tasks.size()) {
+                    throw new DukeException("No such task!");
+                }
+
                 tasks.get(unmarkTaskIndex).setIsDone(false);
 
                 System.out.println("This task is now not done, how disappointing...");
@@ -75,7 +105,7 @@ public class Duke {
                 break;
 
             default:
-                System.out.println("Arii does not recognise this command...");
+                throw new DukeException("Arii does not recognise this command...");
         }
         return false;
     }
@@ -91,7 +121,12 @@ public class Duke {
         while (!toExit) {
             System.out.print("\n:> ");
             String cmd = scanner.nextLine();
-            toExit = duke.handleCommand(cmd);
+
+            try {
+                toExit = duke.handleCommand(cmd);
+            } catch (DukeException e) {
+                System.out.println(e);
+            }
         }
     }
 }
