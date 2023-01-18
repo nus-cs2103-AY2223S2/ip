@@ -39,11 +39,16 @@ public class TaskList {
         int index = number - 1;
         this.lst.set(index, this.lst.get(index).markNotDone());
     }
+
+    public void deleteTask(int number) {
+        int index = number - 1;
+        this.lst.remove(index);
+    }
     
     @Override
     public String toString() {
         if (this.lst.isEmpty()) {
-            return "You have no tasks dumbass\n";
+            return "You have no tasks\n";
         }
 
         return IntStream.range(0, lst.size())
