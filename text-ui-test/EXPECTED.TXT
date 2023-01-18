@@ -1,7 +1,22 @@
-Hello from
- ____        _        
-|  _ \ _   _| | _____ 
-| | | | | | | |/ / _ \
-| |_| | |_| |   <  __/
-|____/ \__,_|_|\_\___|
-
+>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+Hello! I'm Muse
+What can I do for you?
+<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
+>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+gotcha.
+you added: [T][ ] bake cake
+You have 1 tasks in this list!
+<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
+>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+gotcha.
+you added: [D][ ] do homework (by: Monday 5pm)
+You have 2 tasks in this list!
+<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
+>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+gotcha.
+you added: [E][ ] fireworks day (by: Friday 4pm to: Wednesday 3pm)
+You have 3 tasks in this list!
+<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
+>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+Bye. Come back again!
+<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
