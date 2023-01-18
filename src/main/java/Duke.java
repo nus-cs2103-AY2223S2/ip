@@ -16,6 +16,10 @@ public class Duke {
 
         whileLoop:
         while (true) {
+            if (!scanner.hasNextLine()) {
+                continue;
+            }
+            
             String input = scanner.nextLine();
             Command command = new Command(input);
         
