@@ -6,7 +6,11 @@ public class Duke {
 
     public static void main(String[] args) {
         System.out.println(intro());
-        askForInput();
+        String s = askForInput();
+        while(!s.equals("bye")) {
+            s = askForInput();
+        }
+        System.out.println("Good Riddance!");
     }
 
     private static String logo() {
