@@ -2,7 +2,7 @@ import controllers.*;
 import entities.TaskList;
 import exceptions.DukeException;
 import storage.Storage;
-import utils.Parser;
+import parser.Parser;
 import views.UI;
 
 import java.util.Scanner;
