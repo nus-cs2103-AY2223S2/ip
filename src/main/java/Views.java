@@ -11,7 +11,7 @@ public enum Views {
     NO_INT_ERR_STRING("Hey, you did not enter any numbers"),
     OUT_RANGE_ERR_STRING("Hey, the number you've entered is not vaild"),
     UNKNOWN_ERR_STRING("Hey, an unknown error happended, oh no"),
-    EMPTY_ERR_STRING("Hey, ☹ The description of a todo cannot be empty."),
+    EMPTY_ERR_STRING("Hey, ☹ The description of a task cannot be empty."),
     UNKNOWN_CMD_ERR_STRING("Hey, ☹ I'm sorry, but I don't know what that means :-("),
     MISSING_ARGS_ERR_STRING("Hey, ☹ I'm sorry, but you are missing some arguments");
 

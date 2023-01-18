@@ -17,4 +17,11 @@ event hack and roll /from 14 jan /to 15 jan
 eventhack and roll2 /from4 jan /to5 jan
 mark1
 list
+todo
+deadline
+event
+deadline /by
+event /from /to
+deadline test
+event test
 bye
