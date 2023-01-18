@@ -1,3 +1,19 @@
+blah
+blah blah
+todo
+deadline
+event
+todo
+deadline
+event
+deadline return book
+deadline return book /by
+event project meeting
+event project meeting /from
+event project meeting /to
+event project meeting /from /to
+event project meeting /from Aug 6th 2pm /to
+event project meeting /from /to 4pm
 todo read book
 deadline return book /by June 6th
 event project meeting /from Aug 6th 2pm /to 4pm

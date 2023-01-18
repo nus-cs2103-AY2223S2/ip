@@ -7,6 +7,6 @@ public class EmptyDescriptionException extends TwoFiveException {
 
     @Override
     public String getMessage() {
-        return "☹ OOPS!!! The description of a " + taskType + " cannot be empty.";
+        return ":( OOPS!!! The description of a " + taskType + " cannot be empty.";
     }
 }
