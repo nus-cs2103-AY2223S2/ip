@@ -40,4 +40,10 @@ event x /from /to
 event x /from now /to
 event x /from /to later
 event x /to later /from now
+list
+delete -1
+delete 0
+delete 5
+delete 2
+list
 bye

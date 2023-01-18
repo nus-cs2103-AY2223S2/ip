@@ -153,5 +153,31 @@ ___________________________
 Sorry! One or more arguments are empty!
 ___________________________
 >___________________________
+Your tasks are:
+1. [D][X] eat some food (by: tomorrow)
+2. [D][ ] hw (by: 11.00pm)
+3. [T][ ] cca
+4. [E][ ] go toilet (from: now to: 5 min after now)
+___________________________
+>___________________________
+Sorry! Invalid argument!
+___________________________
+>___________________________
+Sorry! Invalid argument!
+___________________________
+>___________________________
+Sorry! Invalid argument!
+___________________________
+>___________________________
+Ok. I have deleted this task:
+[D][ ] hw (by: 11.00pm)
+___________________________
+>___________________________
+Your tasks are:
+1. [D][X] eat some food (by: tomorrow)
+2. [T][ ] cca
+3. [E][ ] go toilet (from: now to: 5 min after now)
+___________________________
+>___________________________
 Goodbye. I hope to see you again.
 ___________________________

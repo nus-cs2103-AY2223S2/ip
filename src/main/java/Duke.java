@@ -10,6 +10,7 @@ public class Duke {
     private static final String TODO_COMMAND = "todo";
     private static final String DEADLINE_COMMAND = "deadline";
     private static final String EVENT_COMMAND = "event";
+    private static final String DELETE_COMMAND = "delete";
 
     private static Scanner scanner = new Scanner(System.in);
     private static TaskList taskList = new TaskList();
@@ -76,6 +77,7 @@ public class Duke {
                 case TODO_COMMAND:
                 case DEADLINE_COMMAND:
                 case EVENT_COMMAND:
+                case DELETE_COMMAND:
                     executeCommandWithArgument(command, parts);
                     break;
                 default:
@@ -106,6 +108,9 @@ public class Duke {
                 break;
             case EVENT_COMMAND:
                 addEventToList(parts[1]);
+                break;
+            case DELETE_COMMAND:
+                deleteTask(parts[1]);
                 break;
         }
     }
@@ -182,9 +187,10 @@ public class Duke {
     private static void deleteTask(String arguments) throws InvalidArgumentDukeException {
         try {
             int number = Integer.parseInt(arguments);
+            String taskString = taskList.getTaskString(number);
             taskList.remove(number);
             printMessage("Ok. I have deleted this task:\n"
-                    + taskList.getTaskString(number)
+                    + taskString
             );
         } catch (NumberFormatException | IndexOutOfBoundsException e) {
             throw new InvalidArgumentDukeException();
