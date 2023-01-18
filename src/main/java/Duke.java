@@ -29,7 +29,7 @@ public class Duke {
                     } else {
                         t.mark();
                         System.out.println("Okie! I've marked this task as done:");
-                        System.out.println(String.format("[%s] %s", t.getStatusIcon(), t.getDesc()));
+                        System.out.println(t);
                     }
                 }
             } else if (input.startsWith("unmark")) {
@@ -43,18 +43,32 @@ public class Duke {
                     } else {
                         t.unmark();
                         System.out.println("Okie! I've marked this task as not done yet:");
-                        System.out.println(String.format("[%s] %s", t.getStatusIcon(), t.getDesc()));
+                        System.out.println(t);
                     }
                 }
             } else if (input.equals("list")) {
                 System.out.println("Here are all the things on your list!");
                 for (int i = 0; i < tasks.size(); i++) {
                     Task t = tasks.get(i);
-                    System.out.println(String.format("%s.[%s] %s", i + 1, t.getStatusIcon(), t.getDesc()));
+                    System.out.println(String.format("%s.%s", i + 1, t));
                 }
-            } else {
-                tasks.add(new Task(input));
-                System.out.println("Alright! Added: " + input);
+            } else { // task
+                Task t;
+                if (input.startsWith("todo")) {
+                    t = new ToDo(input.substring(5));
+                } else if (input.startsWith("deadline")) {
+                    t = new Deadline(input.substring(9));
+                } else {
+                    t = new Event(input.substring(6));
+                }
+                tasks.add(t);
+                System.out.println("Alright! I've added this task: ");
+                System.out.println(t);
+                if (tasks.size() == 1) { // grammar
+                    System.out.println("Now you have 1 task on your list.");
+                } else {
+                    System.out.println(String.format("Now you have %s tasks on your list.", tasks.size()));
+                }
             }
             input = sc.nextLine();
         }
