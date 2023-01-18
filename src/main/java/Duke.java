@@ -9,6 +9,18 @@ import java.util.Scanner;
 import java.util.LinkedList;
 import java.util.Iterator;
 public class Duke {
+    enum KEYWORDS {
+        USER_ERR,
+        USER_EMPTY,
+        BYE,
+        LIST,
+        MARK,
+        UNMARK,
+        TODO,
+        DEADLINE,
+        EVENT,
+        DELETE
+    }
 
     /**
      * Main method for the program
@@ -120,16 +132,17 @@ public class Duke {
                     }
                     break;
 
-//                case "delete":
-//                    if (userInSplit.length > 1) {
-//                        userInTemp = Integer.parseInt(userInSplit[1]) - 1;
-//                        list.get((Integer) userInTemp).setStatus(false);
-//                        System.out.println("OK, I've marked this task as not done yet:");
-//                        System.out.println(list.get((Integer) userInTemp));
-//                    } else {
-//                        System.out.println(String.format("☹ OOPS!!! The entry to %s cannot be empty.","mark"));
-//                    }
-//                    break;
+                case "delete":
+                    if (userInSplit.length > 1) {
+                        userInTemp = Integer.parseInt(userInSplit[1]) - 1;
+
+                        System.out.println("Noted. I've removed this task:");
+                        System.out.println(list.remove(((Integer) userInTemp).intValue()));
+                        System.out.println(String.format("Now you have %d tasks in the list.", list.size()));
+                    } else {
+                        System.out.println(String.format("☹ OOPS!!! The entry to %s cannot be empty.","mark"));
+                    }
+                    break;
 
                 case "bye" :
                     QUIT = true;
