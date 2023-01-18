@@ -273,14 +273,19 @@ public class Shao {
             }
         }
 
-        if (dateTimeStr.contains("/")) { // Input Format: dd/MM/YYYY
-            dateArr = Stream.of(dateTimeArr[0].split("/")).map(Integer::valueOf).toArray(Integer[]::new);
-            return LocalDateTime.of(LocalDate.of(dateArr[2], dateArr[1], dateArr[0]), time);
-        }
+        try {
+            if (dateTimeStr.contains("/")) { // Input Format: dd/MM/YYYY
+                dateArr = Stream.of(dateTimeArr[0].split("/")).map(Integer::valueOf).toArray(Integer[]::new);
+                return LocalDateTime.of(LocalDate.of(dateArr[2], dateArr[1], dateArr[0]), time);
+            }
 
-        // Input Format: YYYY-MM-dd
-        dateArr = Stream.of(dateTimeArr[0].split("-")).map(Integer::valueOf).toArray(Integer[]::new);
-        return LocalDateTime.of(LocalDate.of(dateArr[0], dateArr[1], dateArr[2]), time);
+            // Input Format: YYYY-MM-dd
+            dateArr = Stream.of(dateTimeArr[0].split("-")).map(Integer::valueOf).toArray(Integer[]::new);
+            return LocalDateTime.of(LocalDate.of(dateArr[0], dateArr[1], dateArr[2]), time);
+        } catch (ArrayIndexOutOfBoundsException ex) {
+            printError("Oops! Time format needs to be specified in proper form.");
+            return null;
+        }
 
     }
 

@@ -28,6 +28,10 @@ abstract public class Task {
 		return dt.format(DateTimeFormatter.ofPattern("MMM d yyyy hh:mm a"));
 	}
 
+	public String formatSavedDateTime(LocalDateTime dt) {
+		return dt.format(DateTimeFormatter.ofPattern("yyyy-MM-dd HHmm"));
+	}
+
 	@Override
 	public String toString() {
 		return String.format("[%s] %s", getStatusIcon(), description);

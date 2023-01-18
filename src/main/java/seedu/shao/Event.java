@@ -20,6 +20,7 @@ public class Event extends Task {
 
 	@Override
 	public String getSavedFormat() {
-		return String.format("E|%d|%s|%s|%s", isDone ? 1 : 0, description, from, to);
+		return String.format("E|%d|%s|%s|%s", isDone ? 1 : 0, description,
+				formatSavedDateTime(from), formatSavedDateTime(to));
 	};
 }
