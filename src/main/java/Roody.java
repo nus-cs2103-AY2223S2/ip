@@ -3,15 +3,13 @@ import java.util.List;
 import java.util.Scanner;
 
 public class Roody {
-    private Task[] list;
-    private int index;
+    private ArrayList<Task> list;
     private List<String> printBuffer;
 
     public Roody(){
         // Assumed no more than 100 tasks
-        this.list = new Task[100];
+        this.list = new ArrayList<Task>();
         this.printBuffer = new ArrayList<String>();
-        this.index = 0;
     }
 
     // Provides basic line 
@@ -70,11 +68,10 @@ public class Roody {
             new RoodyException("Error, wrong input detected");
             return;
         }
-        list[index] = task;
-        index++;
+        list.add(task);
         printBuffer.add("Got it. I've added this task:");
         printBuffer.add("  [" + task.getType() +"][ ] " + task.toString()); 
-        printBuffer.add("Now you have " + index + " tasks in the list.");
+        printBuffer.add("Now you have " + list.size() + " tasks in the list.");
         speak(printBuffer);
     }
 
@@ -83,24 +80,24 @@ public class Roody {
         int count = 0;
         int listIndex = 0;
         StringBuilder stringBuilder = new StringBuilder();
-        if (index > 0) {
+        if (!list.isEmpty()) {
             printBuffer.add("Here are the tasks in your list:");
-            while (count < this.index) {
+            while (count < list.size()) {
 
                 listIndex = count + 1;
                 stringBuilder.append(listIndex);
                 stringBuilder.append(".[");
                 // get type
-                stringBuilder.append(list[count].getType());
+                stringBuilder.append(list.get(count).getType());
                 stringBuilder.append("][");
                 // if is done, set as 'X'
-                if (this.list[count].isDone()) {
+                if (list.get(count).isDone()) {
                     stringBuilder.append("X] ");
                 // not done, set as ' '
                 } else {
                     stringBuilder.append(" ] ");
                 }
-                stringBuilder.append(list[count].toString());
+                stringBuilder.append(list.get(count).toString());
                 printBuffer.add(stringBuilder.toString());
                 
                 // Clears and updates values
@@ -116,10 +113,10 @@ public class Roody {
     // toggles completion status of tasks
     private void complete(String index, boolean complete){
         int taskIndex = Integer.parseInt(index) - 1; 
-        if (taskIndex < list.length && list[taskIndex] == null) {
+        if (taskIndex > list.size() - 1 || list.get(taskIndex) == null) {
             new RoodyException("Sorry, that task doesn't exist");
         } else {
-            Task task = list[taskIndex];
+            Task task = list.get(taskIndex);
             if (complete) {
                 task.setDone();
                 printBuffer.add("Nice! I've marked this task as done:");
@@ -130,6 +127,20 @@ public class Roody {
                 printBuffer.add("["+ task.getType()+"][ ] " + task.toString());
             }
             speak(printBuffer);
+        }
+    }
+
+    private void delete(String index) {
+        int taskIndex = Integer.parseInt(index) - 1;
+        if (taskIndex > list.size() - 1 || list.get(taskIndex) == null) {
+            new RoodyException("Sorry, that task doesn't exist");
+        } else {
+            Task task = list.get(taskIndex);
+            printBuffer.add("Noted. I've removed this task:");
+            printBuffer.add("  [" + task.getType() + "][ ] " + task.toString());
+            printBuffer.add("Now you have " + (list.size()-1) + " tasks in the list.");
+            speak(printBuffer);
+            list.remove(Integer.parseInt(index) - 1);
         }
     }
 
@@ -152,13 +163,25 @@ public class Roody {
             // else, repeat
             } else if (inputs[0].equals("list")) {
                 roody.printList();
+            } else if (inputs[0].equals("delete")) {
+                if (inputs.length == 2) {                    
+                    roody.delete(inputs[1]);
+                } else {
+                    new RoodyException("Please enter a index number to be deleted");
+                }
             // Checks for second input
-            } else if (inputs.length > 1 && inputs[0].equals("mark")) {
-                roody.complete(inputs[1], true);
-            } else if (inputs.length > 1 && inputs[0].equals("unmark")) {
-                roody.complete(inputs[1], false);
-            } else if (inputs.length > 1 && (inputs[0].equals("todo") || inputs[0].equals("deadline") || inputs[0].equals("event"))) {
-                roody.addToList(input);
+            } else if (inputs[0].equals("mark") || inputs[0].equals("unmark")) {
+                if (inputs.length == 2) {                    
+                    roody.complete(inputs[1], inputs[0].equals("mark"));
+                } else {
+                    new RoodyException("Please enter a index number to be marked/unmarked");
+                }
+            } else if (inputs[0].equals("todo") || inputs[0].equals("deadline") || inputs[0].equals("event")) {
+                if (inputs.length > 1) {
+                    roody.addToList(input);
+                } else {
+                    new RoodyException("Tasks require a description");
+                }
             } else {
                 new RoodyException("I don't quite understand that.");
             }

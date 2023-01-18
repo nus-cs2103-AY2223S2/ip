@@ -32,7 +32,7 @@ OK, I've marked this task as not done yet:
 [D][ ] Japan Admin (Mum) (by: Thursday)
 ____________________________________________________________
 => ____________________________________________________________
-Sorry, this task dosen't exist
+Oh no :( Sorry, that task doesn't exist
 ____________________________________________________________
 => ____________________________________________________________
 Got it. I've added this task:
@@ -45,6 +45,20 @@ Here are the tasks in your list:
 2.[E][X] Japan Trip (from: January 25th to: February 2nd)
 3.[D][ ] Japan Admin (Mum) (by: Thursday)
 4.[T][ ] Lunch
+____________________________________________________________
+=> ____________________________________________________________
+Noted. I've removed this task:
+  [E][ ] Japan Trip (from: January 25th to: February 2nd)
+Now you have 3 tasks in the list.
+____________________________________________________________
+=> ____________________________________________________________
+Oh no :( Sorry, that task doesn't exist
+____________________________________________________________
+=> ____________________________________________________________
+Here are the tasks in your list:
+1.[T][ ] JS2230 readings 
+2.[D][ ] Japan Admin (Mum) (by: Thursday)
+3.[T][ ] Lunch
 ____________________________________________________________
 => ____________________________________________________________
 Bye. Hope to see you again soon!
