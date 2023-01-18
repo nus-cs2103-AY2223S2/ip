@@ -1,4 +1,5 @@
 import java.util.Scanner;
+import java.util.ArrayList;
 
 public class Duke {
     public static void main(String[] args) {
@@ -8,6 +9,7 @@ public class Duke {
         System.out.println("What can I do for you today?");
 
         Scanner sc = new Scanner(System.in);
+        ArrayList<String> tasks = new ArrayList<String>();
 
         String input = sc.nextLine();
 
@@ -15,7 +17,15 @@ public class Duke {
             System.out.println("(\\ (\\ \n" +
                     "(„• ֊ •„) ♡\n" +
                     "━O━O━━━━━━━━━━━━━━━━━━━━━━━━━");
-            System.out.println(input);
+
+            if (input.equals("list")) {
+                for (int i = 0; i < tasks.size(); i++) {
+                    System.out.println(String.format("%s. %s", i + 1, tasks.get(i)));
+                }
+            } else {
+                tasks.add(input);
+                System.out.println("added: " + input);
+            }
             input = sc.nextLine();
         }
 
