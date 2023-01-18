@@ -22,10 +22,10 @@ public class Duke {
     }
 
     // adding item to the list of things, as well as printing the task that is added
-    public static void addItem(String text, String lowerText) throws DukeException {
+    public static void addItem(String text, AddCommands add) throws DukeException {
 
         Task addedItem = null;
-        if (lowerText.startsWith("todo")) {
+        if (add.equals(AddCommands.TODO)) {
             String contents = text.substring(4);
             if (contents.length() == 0) {
                 throw new DukeException("The description of a todo cannot be empty");
@@ -33,7 +33,7 @@ public class Duke {
 
             addedItem = new Todo(contents);
 
-        } else if (lowerText.startsWith("deadline")) {
+        } else if (add.equals(AddCommands.DEADLINE)) {
             String contents = text.substring(8);
             String[] arr = contents.split("/by");
             if (arr.length != 2) {
@@ -85,56 +85,75 @@ public class Duke {
         while (true) {
             try {
                 String line = input.nextLine();
-                String lowerLine = line.toLowerCase();
-                if (lowerLine.startsWith("bye")) {
-                    if (lowerLine.replaceFirst("bye", "").equals("")) {
-                        break;
-                    } else {
-                        throw new DukeException("Did you mean to say bye? Type 'bye' to quit the program.");
-                    }
-                } else if (lowerLine.startsWith("list")) {
-                    if (lowerLine.replaceFirst("list", "").equals("")) {
-                        printList();
-                    } else {
-                        throw new DukeException("No argument in list allowed.");
-                    }
-                } else if (lowerLine.startsWith("mark") || lowerLine.startsWith("unmark")) {
-                    String[] arr = lowerLine.split(" ");
-                    if (arr.length != 2) {
-                        throw new DukeException("Wrong format. Format it as 'mark [index]' or 'unmark [index]'");
-                    }
-                    if (!arr[1].chars().allMatch(Character::isDigit)) {
-                        throw new DukeException("Index should be a number");
-                    }
-                    int idx = Integer.parseInt(arr[1]) - 1;
-                    String command = arr[0];
-                    if (idx >= listOfThings.size() || idx < 0) {
-                        throw new DukeException("This index doesn't exist.");
-                    }
-                    Task thisTask = listOfThings.get(idx);
-                    if (command.equals("mark")) {
+                String upperLine = line.toUpperCase();
+                String command = upperLine.split(" ")[0];
+                if (StartingCommands.contains(command)) {
+                    StartingCommands sc = StartingCommands.valueOf(command);
+                    if (sc.equals(StartingCommands.BYE)) {
+                        if (upperLine.replaceFirst("BYE", "").equals("")) {
+                            break;
+                        } else {
+                            throw new DukeException("Did you mean to say bye? Type 'bye' to quit the program.");
+                        }
+                    } else if (sc.equals(StartingCommands.LIST)) {
+                        if (upperLine.replaceFirst("LIST", "").equals("")) {
+                            printList();
+                        } else {
+                            throw new DukeException("No argument in list allowed.");
+                        }
+                    } else if (sc.equals(StartingCommands.MARK)) {
+
+
+                        String[] arr = upperLine.split(" ");
+                        if (arr.length != 2) {
+                            throw new DukeException("Wrong format. Format it as 'mark [index]'");
+                        }
+                        if (!arr[1].chars().allMatch(Character::isDigit)) {
+                            throw new DukeException("Index should be a number");
+                        }
+                        int idx = Integer.parseInt(arr[1]) - 1;
+                        if (idx >= listOfThings.size() || idx < 0) {
+                            throw new DukeException("This index doesn't exist.");
+                        }
+                        Task thisTask = listOfThings.get(idx);
                         thisTask.markDone();
-                    } else {
+                    } else if (sc.equals(StartingCommands.UNMARK)) {
+                        String[] arr = upperLine.split(" ");
+                        if (arr.length != 2) {
+                            throw new DukeException("Wrong format. Format it as 'mark [index]'");
+                        }
+                        if (!arr[1].chars().allMatch(Character::isDigit)) {
+                            throw new DukeException("Index should be a number");
+                        }
+                        int idx = Integer.parseInt(arr[1]) - 1;
+                        if (idx >= listOfThings.size() || idx < 0) {
+                            throw new DukeException("This index doesn't exist.");
+                        }
+                        Task thisTask = listOfThings.get(idx);
                         thisTask.markUndone();
+
+                    } else if (sc.equals(StartingCommands.DELETE)) {
+                        String[] arr = upperLine.split(" ");
+                        if (arr.length != 2) {
+                            throw new DukeException("Only one argument for delete allowed");
+                        }
+                        String idxStr = arr[1];
+                        if (!idxStr.chars().allMatch(Character::isDigit)) {
+                            throw new DukeException("Argument must be a digit");
+                        }
+                        int idx = Integer.parseInt(idxStr) - 1;
+                        if (idx >= listOfThings.size() || idx < 0) {
+                            throw new DukeException("This index doesn't exist.");
+                        }
+                        removeItem(idx);
                     }
-                } else if (lowerLine.startsWith("delete")) {
-                    String[] arr = lowerLine.split(" ");
-                    if (arr.length != 2) {
-                        throw new DukeException("Only one argument for delete allowed");
+                }
+                else {
+                    if (AddCommands.contains(command)) {
+                        addItem(line, AddCommands.valueOf(command));
+                    } else {
+                        throw new DukeException("I'm sorry. I don't know what that means.");
                     }
-                    String idxStr = arr[1];
-                    if (!idxStr.chars().allMatch(Character::isDigit)) {
-                        throw new DukeException("Argument must be a digit");
-                    }
-                    int idx = Integer.parseInt(idxStr) - 1;
-                    if (idx >= listOfThings.size() || idx < 0) {
-                        throw new DukeException("This index doesn't exist.");
-                    }
-                    removeItem(idx);
-                } else if (lowerLine.startsWith("todo") || lowerLine.startsWith("deadline") || lowerLine.startsWith("event")) {
-                    addItem(line, lowerLine);
-                } else {
-                throw new DukeException("I'm sorry. I don't know what that means.");
                 }
             } catch (DukeException e) {
                 printWithLines(" " + e.toString());

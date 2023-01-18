@@ -16,5 +16,6 @@ deadline get chinese new year clothes /by tomorrow
 event chinese new year! /from tomorrow /to next sunday
 delete 3
 list
+deadline get productive /by friday
 bye
 
