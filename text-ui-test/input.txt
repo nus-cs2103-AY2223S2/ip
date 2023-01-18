@@ -1,5 +1,6 @@
 todo a todo
 event an event /from mon /to tue
+event an event /to fri /from thu
 deadline a deadline /by today
 list
 mark 1
@@ -7,4 +8,12 @@ mark 3
 unmark 1
 not a command
 list
+todo
+event /notitle
+deadline a deadline /by
+event an event /to missing from
+delete 2
+mark 5
+unmark 5
+delete 5
 bye
