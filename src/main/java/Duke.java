@@ -150,6 +150,20 @@ public class Duke {
                 addTaskReply(currentTask);
                 keyWord = scanner.next();
                 break;
+            case "delete":
+                try {
+                    taskIndex = scanner.nextInt() - 1;
+                    currentTask = taskArrayList.remove(taskIndex);
+                    System.out.println("\n____________________________________________________________");
+                    System.out.println("\nNoted. I've removed this task:\n");
+                    System.out.println(currentTask.toString());
+                    System.out.println("\nNow you have " + taskArrayList.size() + " tasks in the list.");
+                    System.out.println("\n____________________________________________________________\n");
+                    keyWord = scanner.next();
+                    break;
+                } catch (NoSuchElementException e) {
+                    System.out.println("Oops! Mark must be followed by an integer.");
+                }
             default:
                 //if user input does not match any case at all
                 System.out.println("OOPS!!! I'm sorry, but I don't know what that means.");
@@ -168,5 +182,4 @@ public class Duke {
         System.out.println("\nNow you have " + taskArrayList.size() + " tasks in the list.");
         System.out.println("\n____________________________________________________________\n");
     }
-
 }
