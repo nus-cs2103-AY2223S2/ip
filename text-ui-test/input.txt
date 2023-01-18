@@ -1,0 +1,6 @@
+todo eat
+mark 1
+deadline return book /by Sunday
+event meeting /from Monday /to Sunday
+list
+bye

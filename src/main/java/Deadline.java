@@ -1,5 +1,5 @@
 public class Deadline  extends  Task{
-    private String doneBy;
+    protected String doneBy;
 
     public Deadline(String description, String doneBy){
         super(description);
@@ -7,6 +7,6 @@ public class Deadline  extends  Task{
     }
     @Override
     public String toString(){
-        return String.format("[D]%s (by: %s", super.toString(), this.doneBy);
+        return String.format("[D]%s (by: %s)", super.toString(), this.doneBy);
     }
 }

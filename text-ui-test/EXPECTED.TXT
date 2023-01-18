@@ -1,7 +1,33 @@
-Hello from
- ____        _        
-|  _ \ _   _| | _____ 
+ ____        _
+|  _ \ _   _| | _____
 | | | | | | | |/ / _ \
 | |_| | |_| |   <  __/
 |____/ \__,_|_|\_\___|
+
+Welcome! I'm Duke.
+What can I do for you?
+_________________________________
+_________________________________
+	Got it. I have added this task:
+[T][ ]	eat
+	Now you have 1 tasks in the list.
+_________________________________
+_________________________________
+	Got it. I have added this task:
+ [D][ ]	return (by: Sunday)
+	You have 2 tasks in the list.
+
+_________________________________
+_________________________________
+	Got it. I have added this task:
+ [E][ ]	meeting (from:Monday  to:Sunday)
+	Now you have 3 tasks in the list.
+_________________________________
+_________________________________
+	Here are the tasks in your list:
+	1.[T][ ]	eat
+	2.[D][ ]	return (by: Sunday)
+	3.[E][ ]	meeting (from:Monday  to:Sunday)
+_________________________________
+Bye. Hope to see you again soon!
 
