@@ -18,6 +18,6 @@ public class Deadline extends Item {
     @Override
     public String toString() {
         return (this.isDone ? this.MARKED : this.UNMARKED) + " " + this.content
-                + " (by: " + this.deadline + " )";
+                + " (by: " + this.deadline + ")";
     }
 }

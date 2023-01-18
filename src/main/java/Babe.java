@@ -1,4 +1,11 @@
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Scanner;
+
+import item.Deadline;
+import item.Event;
+import item.Item;
+import item.ToDo;
 
 /**
  * <h1> Hi Babe! </h1>
@@ -11,15 +18,6 @@ import java.util.*;
  */
 public class Babe {
 
-    /**
-     * String icon for marked.
-     */
-    private String MARKED = "[X]";
-
-    /**
-     * String icon for unmarked.
-     */
-    private String UNMARKED = "[ ]";
 
     /**
      * A string input from user.
@@ -27,19 +25,19 @@ public class Babe {
     private ArrayList<String> userInput = new ArrayList<>();
 
     /**
-     * List of strings Babe received from the user.
+     * Length of user input.
      */
-    private String[] memory = new String[100];
+    private int userInputLen = 0;
 
     /**
-     * Number of strings currently stored in this Babe.
+     * List of Items Babe received from the user.
+     */
+    private Item[] memory = new Item[100];
+
+    /**
+     * Number of Items currently stored in this Babe.
      */
     private int memoryCount = 0;
-
-    /**
-     * Boolean array that keeps track of marked item on the list.
-     */
-    private boolean[] doneStatus = new boolean[100];
 
     /**
      * Draws a horizontal line.
@@ -67,15 +65,17 @@ public class Babe {
     private void listen() {
         Scanner scanner = new Scanner(System.in);
         userInput = new ArrayList<>(Arrays.asList(scanner.nextLine().split(" ")));
+        userInputLen = userInput.size();
     }
 
     /**
-     * Rebuilds a string from ArrayList from the starting index.
-     * A helper function to recover the original user input from userInput starting from the startingIndex.
+     * Rebuilds a string from ArrayList from the starting index to the ending index (not inclusive).
+     * A helper function to recover the original user input from userInput starting from the startingIndex
+     * to the ending index (not inclusive).
      */
-    private String rebuildUserInput(int startingIndex) {
+    private String rebuildUserInput(int startingIndex, int endingIndex) {
         String result = "";
-        for (int i = startingIndex; i < userInput.size(); i++) {
+        for (int i = startingIndex; i < endingIndex; i++) {
             result += userInput.get(i);
             result += " ";
         }
@@ -83,31 +83,86 @@ public class Babe {
     }
 
     /**
-     * Stores user's latest input into memory array of this Babe.
-     * Adds userInput to memory and prints a message to indicate that the item has been stored.
+     * Returns the index of the dates in a Deadline or Event instruction
+     * Traverses through userInput array to find the index by locating "/by", "/from" or "/to".
+     *
+     * @return An integer that is the index of the date of deadline, start date of event or end date of event .
      */
-    private void addItem() {
-        String userInputString = rebuildUserInput(0);
-        this.memory[memoryCount++] = userInputString;
+    private int determineDate(String type) {
+
+       int date = -1;
+
+        for (int i = 1; i < userInputLen; i++) {
+            String currentString = userInput.get(i);
+            if (currentString.equals(type)) {
+                date = i + 1;
+                break;
+            }
+        }
+
+        return date;
+    }
+
+    /**
+     * Adds a ToDo to memory.
+     * Calls the ToDo constructor and inserts created ToDo into this Babe's memory.
+     * @param content The content of the ToDo item.
+     */
+    private void addToDo(String content) {
+        ToDo item = new ToDo(content);
+        this.memory[memoryCount++] = item;
         Babe.drawLine();
-        System.out.printf("added %s \n", userInputString);
+        System.out.println("Got it, babe. Added this for you:");
+        System.out.println(item.toString());
+        System.out.printf("Now you have %d task in the list.\n", memoryCount);
         Babe.drawLine();
     }
 
     /**
-     * Prints list of strings stored in this Babe.
-     * Prints a numbered list of strings stored in memory. Item will be checked accordingly to its corresponding
-     * status stored in doneStatus.
+     * Adds a Deadline to memory.
+     * Calls the Deadline constructor and inserts created Deadline into this Babe's memory.
+     * @param content The content of the Deadline item.
+     * @param date The date of the deadline. May include time too.
+     */
+    private void addDeadline(String content, String date) {
+        Deadline item = new Deadline(content, date);
+        this.memory[memoryCount++] = item;
+        Babe.drawLine();
+        System.out.println("Got it, babe. Added this for you:");
+        System.out.println(item.toString());
+        System.out.printf("Now you have %d task in the list.\n", memoryCount);
+        Babe.drawLine();
+    }
+
+    /**
+     * Adds an Event to memory.
+     * Calls the Event constructor and inserts created Event into this Babe's memory.
+     * @param content The content of the Event item.
+     * @param startDate The start date of the Event. May include time too.
+     * @param endDate The end date of the Event. May include time too.
+     */
+    private void addEvent(String content, String startDate, String endDate) {
+        Event item = new Event(content, startDate, endDate);
+        this.memory[memoryCount++] = item;
+        Babe.drawLine();
+        System.out.println("Got it, babe. Added this for you:");
+        System.out.println(item.toString());
+        System.out.printf("Now you have %d task in the list.\n", memoryCount);
+        Babe.drawLine();
+    }
+
+    /**
+     * Prints list of Items stored in this Babe.
+     * Prints a numbered list of Items stored in memory.
      */
     private void printList() {
         Babe.drawLine();
         if (memoryCount == 0) {
-            System.out.println("Nothing added yet. Add something hon.");
+            System.out.println("Nothing added yet. Add something babygorl.");
         }
         for (int i = 0; i < this.memoryCount; i++) {
-            System.out.printf("%d." + (this.doneStatus[i] ? MARKED : UNMARKED) + " %s\n",
-                    i + 1,
-                    this.memory[i]);
+            System.out.printf("%d. ", i + 1);
+            System.out.println(memory[i].toString());
         }
         Babe.drawLine();
     }
@@ -122,19 +177,24 @@ public class Babe {
         Babe.drawLine();
         System.exit(0);
     }
-    
+
     /**
      * Marks/Unmarks the item of given index in Babe's list as Done/Undone.
      * If user keys in "mark", this function will extract the index to be marked and sets the index to True in
      * doneStatus. Sets the index to False if "unmark"is keyed in.
      */
     private void changeStatus(boolean toMark) {
-        String userInputString = rebuildUserInput(1);
+        String userInputString = rebuildUserInput(1, userInputLen);
         int index = Integer.parseInt(userInputString);
-        this.doneStatus[index - 1] = toMark;
+        Item itemAtIndex = memory[index - 1];
+        if (toMark) {
+            itemAtIndex.mark();
+        } else {
+            itemAtIndex.unmark();
+        }
         Babe.drawLine();
         System.out.println(toMark ? "Okay, babygorl. I've marked this as Done:" : "We have un-Done this for you:");
-        System.out.printf((toMark ? this.MARKED : this.UNMARKED) + " %s\n", this.memory[index - 1]);
+        System.out.println(itemAtIndex.toString());
         Babe.drawLine();
     }
 
@@ -150,16 +210,29 @@ public class Babe {
             int inputLength = chatBot.userInput.size();
 
 
-            if (instruction.equals("bye") && inputLength == 1) {
+            if (instruction.equalsIgnoreCase("bye") && inputLength == 1) {
                 chatBot.sayBye();
-            } else if (instruction.equals("list") && inputLength == 1) {
+            } else if (instruction.equalsIgnoreCase("list") && inputLength == 1) {
                 chatBot.printList();
-            } else if (instruction.equals("mark")) {
+            } else if (instruction.equalsIgnoreCase("mark")) {
                 chatBot.changeStatus(true);
-            } else if (instruction.equals("unmark")) {
+            } else if (instruction.equalsIgnoreCase("unmark")) {
                 chatBot.changeStatus(false);
+            } else if (instruction.equalsIgnoreCase("todo")) {
+                chatBot.addToDo(chatBot.rebuildUserInput(1, inputLength));
+            } else if (instruction.equalsIgnoreCase("deadline")) {
+                int deadline = chatBot.determineDate("/by");
+                chatBot.addDeadline(chatBot.rebuildUserInput(1, deadline - 1),
+                        chatBot.rebuildUserInput(deadline, inputLength));
+            } else if (instruction.equalsIgnoreCase("event")) {
+                int startDate = chatBot.determineDate("/from");
+                int endDate = chatBot.determineDate("/to");
+                chatBot.addEvent(chatBot.rebuildUserInput(1, startDate - 1),
+                        chatBot.rebuildUserInput(startDate, endDate - 1),
+                        chatBot.rebuildUserInput(endDate, inputLength));
             } else {
-                chatBot.addItem();
+                // any text without instructions will be added as ToDo
+                chatBot.addToDo(chatBot.rebuildUserInput(0, inputLength));
             }
         }
     }

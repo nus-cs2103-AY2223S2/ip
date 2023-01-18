@@ -10,7 +10,7 @@ public class ToDo extends Item {
      * Constructor for ToDos
      * @param content A String representing the content of this item.
      */
-    public ToDo( String content ) {
+    public ToDo(String content) {
         super(content);
     }
 

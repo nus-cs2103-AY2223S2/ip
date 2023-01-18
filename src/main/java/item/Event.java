@@ -23,6 +23,6 @@ public class Event extends Item {
     @Override
     public String toString() {
         return (this.isDone ? this.MARKED : this.UNMARKED) + " " + this.content
-                + " (from: " + this.fromDate + " to: " + this.toDate + " )";
+                + " (from: " + this.fromDate + ", to: " + this.toDate + ")";
     }
 }
