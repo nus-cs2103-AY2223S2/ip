@@ -78,6 +78,7 @@ public class Dude {
                 addTask(Type.EVENT, cmd[1]);
                 break;
             case "delete":
+                if (cmd.length < 2) throw new DudeMissingCommandException();
                 System.out.println(" _______________________________________________________________________");
                 deleteTask(Integer.parseInt(cmd[1]) - 1);
                 System.out.println(" _______________________________________________________________________\n");
