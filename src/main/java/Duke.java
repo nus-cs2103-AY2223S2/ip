@@ -1,3 +1,4 @@
+import tasks.Tasks;
 import java.util.Scanner;
 
 public class Duke {
@@ -26,14 +27,20 @@ public class Duke {
     public static void main(String[] args) {
         greet();
         Scanner scanner = new Scanner(System.in);
+        Tasks tasks = new Tasks();
         while (true) {
             String input = scanner.nextLine();
             if (input.equals("bye")) {
                 echo("Bye. Hope to see you again soon!");
                 scanner.close();
                 break;
+            } else if (input.equals("list")) {
+                System.out.println(BAR);
+                tasks.printAll();
+                System.out.println(BAR);
             } else {
-                echo(input);
+                tasks.addTasks(input);
+                echo("added: " + input);
             }
         }
     }
