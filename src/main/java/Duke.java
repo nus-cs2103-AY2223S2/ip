@@ -93,9 +93,7 @@ public class Duke {
                     }
                     return true;
                 default:
-                    tasks.add(new Task(command));
-                    prettyPrint("added: " + command);
-                    return true;
+                    throw new ClippyUnknownCommandException();
             }
         } catch (ClippyException e) {
             // print error, but continue accepting inputs
