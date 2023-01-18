@@ -1,4 +1,5 @@
 import java.util.Scanner;
+import java.util.ArrayList;
 
 public class Miki {
     private static void printDiv() {
@@ -10,6 +11,7 @@ public class Miki {
     }
 
     public static void main(String[] args) {
+        ArrayList<String> cmd_list = new ArrayList<>();
         Scanner sc = new Scanner(System.in);
         printDiv();
         String username = System.getProperty("user.name");
@@ -17,14 +19,22 @@ public class Miki {
         print("\uD83C\uDF80✨");
         print("Hello " + username + " !! Konmiki! ＼(￣▽￣)/");
         printDiv();
-        boolean exitCmd = false;
-        while (!exitCmd) {
+        boolean exit_cmd = false;
+        while (!exit_cmd) {
+            System.out.print(">");
             String cmd = sc.nextLine();
             if (cmd.equals("bye")) {
-                exitCmd = true;
-            } else {
+                exit_cmd = true;
+            } else if (cmd.equals("list")) {
                 printDiv();
-                print(cmd);
+                for (int i = 0; i < cmd_list.size(); i++) {
+                    print(Integer.toString(i + 1) + ". " + cmd_list.get(i));
+                }
+                printDiv();
+            } else {
+                cmd_list.add(cmd);
+                printDiv();
+                print("Added! [" + cmd + "]");
                 printDiv();
             }
         }
