@@ -30,6 +30,8 @@ public class Duke {
                 String[] terms = userInput.split(" ");
                 int itemNo = Integer.parseInt(terms[1]) - 1;
                 lstOfItems.get(itemNo).makeCompleted();
+                System.out.println("Ok, I've marked this Task as completed:");
+                System.out.println(lstOfItems.get(itemNo));
             } else {
                 System.out.println("added: " + userInput);
                 lstOfItems.add(new Task(userInput));
