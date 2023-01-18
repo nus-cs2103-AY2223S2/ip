@@ -1,7 +1,7 @@
-public class Task {
-    private String taskName;
+public abstract class Task {
+    protected String taskName;
     //Status of the task
-    private boolean isDone = false;
+    protected boolean isDone = false;
 
     /**
      * Constructs a user task.
@@ -27,13 +27,7 @@ public class Task {
 
     /**
      * Gets the status of the task with the task name.
-     * @return a String in the form of either "[X] taskName" or "[ ] taskName"
-     *         depending on the status of the task. X means done.
+     * @return a String indicating the type and status of the task.
      */
-    public String getStatusOfTaskInString() {
-        String statusBrackets = (isDone)
-                                ? "[X]" //Done
-                                : "[ ]"; //Not done
-        return statusBrackets + " " + taskName;
-    }
+    public abstract String getStatusOfTaskInString();
 }
