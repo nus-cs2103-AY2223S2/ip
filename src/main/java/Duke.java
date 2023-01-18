@@ -4,7 +4,7 @@ import java.util.regex.*;
 public class Duke {
     private static Task[] storage = new Task[100];
     private static int pointer = 0;
-    public static void main(String[] args) {
+    public static void main(String[] args) throws Exception {
         String logo = " ____        _        \n"
                 + "|  _ \\ _   _| | _____ \n"
                 + "| | | | | | | |/ / _ \\\n"
@@ -19,57 +19,79 @@ public class Duke {
         System.out.println(intro);
 
         Scanner sc = new Scanner(System.in);
-        String input = sc.nextLine();
+        String input;
 
         while(true){
-            if (input.equalsIgnoreCase("bye")) {
-                bye();
-            } else if (input.equalsIgnoreCase("list")) {
-                list();
+            try {
                 input = sc.nextLine();
-            } else if (input.toLowerCase().contains("deadline") &&
-            input.toLowerCase().contains("/by")) {
-                deadline(input);
-                input = sc.nextLine();
-            } else if (input.toLowerCase().contains("todo")) {
-                todo(input);
-                input = sc.nextLine();
-            } else if (input.toLowerCase().contains("event") &&
-            input.toLowerCase().contains("/from") &&
-            input.toLowerCase().contains("/to")) {
-                events(input);
-                input = sc.nextLine();
-            } else {
-                if (Pattern.compile("\\D+.\\d+").matcher(input).find()){
-                    String[] strings = input.split(" ");
-                    int index = Integer.parseInt(strings[1]);
-                    if (strings[0].equals("mark") && index < pointer){
-                        storage[index - 1].markAsDone();
-                        System.out.println(
-                                "_____________________________________\n"
-                                        + "Nice! I've marked this task as done\n"
-                                        + " " + storage[index - 1].toString() +"\n"
-                                        + "_____________________________________\n"
-                        );
-                    } else if (strings[0].equals("unmark") && index < pointer){
-                        storage[index - 1].unMark();
-                        System.out.println(
-                                "_____________________________________\n"
-                                        + "Ok, I've marked this task as not done yet\n"
-                                        + " " + storage[index].toString() +"\n"
-                                        + "_____________________________________\n"
-                        );
+                String lcInput = input.toLowerCase();
+                String[] inputs = input.split(" ");
+                if (lcInput.contains("bye")) {
+                    if (inputs.length != 1) {
+                        throw new DukeException("Command does not take in extra arguments!");
+                    } else {
+                        bye();
                     }
+                } else if (lcInput.contains("list")) {
+                    if (inputs.length != 1) {
+                        throw new DukeException("Command does not take in extra arguments!");
+                    } else {
+                        list();
+                    }
+                } else if (lcInput.contains("deadline")) {
+                    if (inputs.length <= 1) {
+                        throw new DukeException("What is the deadline task????");
+                    } else if (!input.toLowerCase().contains("/by")) {
+                        throw new DukeException("Put in the deadline of your task Please!");
+                    } else {
+                        deadline(input);
+                    }
+                } else if (lcInput.contains("todo")) {
+                    if (inputs.length <= 1) {
+                        throw new DukeException("What is the todo task????");
+                    } else {
+                        todo(input);
+                    }
+                } else if (lcInput.contains("event")) {
+                    if (!input.contains("/from") && !input.contains("/to")){
+                        throw new DukeException("Period not specified!");
+                    } else if (inputs.length <= 1){
+                        throw new DukeException("What is the event task????");
+                    }
+                    events(input);
                 } else {
-                    System.out.println(
-                            "_____________________________________\n"
-                                    + "added: " + input + "\n"
-                                    + "_____________________________________\n"
-                    );
-                    storage[pointer] = new Task(input);
-                    pointer++;
+                    if (Pattern.compile("\\D+.\\d+").matcher(input).find()) {
+                        int index = Integer.parseInt(inputs[1]);
+                        if (inputs[0].equals("mark") && index < pointer) {
+                            storage[index - 1].markAsDone();
+                            System.out.println(
+                                    "_____________________________________\n"
+                                            + "Nice! I've marked this task as done\n"
+                                            + " " + storage[index - 1].toString() + "\n"
+                                            + "_____________________________________\n"
+                            );
+                        } else if (inputs[0].equals("unmark") && index < pointer) {
+                            storage[index - 1].unMark();
+                            System.out.println(
+                                    "_____________________________________\n"
+                                            + "Ok, I've marked this task as not done yet\n"
+                                            + " " + storage[index].toString() + "\n"
+                                            + "_____________________________________\n"
+                            );
+                        } else {
+                            throw new DukeException("Incorrect index or incorrect command given");
+                        }
+                    } else {
+                        throw new DukeException("☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
+                    }
                 }
-                input = sc.nextLine();
+            } catch (DukeException e){
+                System.out.println(
+                        "_____________________________________\n"
+                        + e.errorMessage + "\n"
+                        + "_____________________________________\n"
+                );
+                continue;
             }
 
         }
@@ -110,6 +132,7 @@ public class Duke {
                 + "Got it. I've added this task:\n"
                 + " " + storage[pointer].toString() +"\n"
                 + taskCount() + "\n"
+                + "_____________________________________\n"
         );
         pointer++;
     }
@@ -134,6 +157,7 @@ public class Duke {
                 + "Got it. I've added this task:\n"
                 + " " + storage[pointer].toString() +"\n"
                 + taskCount() + "\n"
+                + "_____________________________________\n"
         );
         pointer++;
     }
@@ -148,6 +172,7 @@ public class Duke {
                 + "Got it. I've added this task:\n"
                 + " " + storage[pointer].toString() +"\n"
                 + taskCount() + "\n"
+                + "_____________________________________\n"
         );
         pointer++;
     }
