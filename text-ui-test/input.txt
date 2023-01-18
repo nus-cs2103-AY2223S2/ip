@@ -1,0 +1,20 @@
+todo buy yarn
+todo buy keychain
+todo buy label
+deadline make plushie /by Saturday
+event popup store /from Sunday 1pm /to Monday 4pm
+list
+mark 1
+mark 2
+unmark 1
+list
+mark 8
+mark 0
+unmark 10
+unmark -3
+list
+do something
+list
+mark 6
+list
+bye
