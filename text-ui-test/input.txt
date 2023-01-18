@@ -5,4 +5,7 @@ mark 2
 list
 event cs2103 project meeting /from Mon 3pm /to 4pm
 wrong input check
+deadline
+unmark 33333
+unmark abc
 bye
