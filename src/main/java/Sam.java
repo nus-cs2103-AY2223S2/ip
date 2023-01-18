@@ -36,8 +36,9 @@ public class Sam {
         processInput(input);
       } catch (SamException e) {
         talk(e.getMessage());
+      } finally {
+        taskArgs.clear();
       }
-      taskArgs.clear();
     }
   }
 
