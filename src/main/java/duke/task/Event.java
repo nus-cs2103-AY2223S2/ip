@@ -29,10 +29,11 @@ public class Event extends Task {
         this.to = LocalDate.parse(to);
     }
 
-    @Override
-    public String toString() {
-        return String.format("[E]%s (from: %s) (to: %s)", super.toString(),
-                from.format(format),
-                to.format(format));
-    }
+  @Override
+  public String toString() {
+    return String.format("[E]%s (from: %s) (to: %s)",
+      super.toString(),
+      from.format(format),
+      to.format(format));
+  }
 }

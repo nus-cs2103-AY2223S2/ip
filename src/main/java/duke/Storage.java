@@ -1,8 +1,11 @@
 package duke;
 
 import duke.task.Task;
-
-import java.io.*;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -13,7 +16,7 @@ import java.util.List;
  * @see TaskList
  */
 public class Storage {
-    private String fileName = "data.txt";
+  private String fileName = "data.txt";
 
     /**
      * Saves the given tasks to the last accessed location.
@@ -62,7 +65,8 @@ public class Storage {
      * @throws IOException if the file cannot be found or created.
      * @throws ClassNotFoundException if the file cannot be deserialized.
      */
-    public List<Task> load(String fileName) throws IOException, ClassNotFoundException, ClassCastException {
+    public List<Task> load(String fileName)
+            throws IOException, ClassNotFoundException, ClassCastException {
         this.fileName = fileName;
         return this.load();
     }

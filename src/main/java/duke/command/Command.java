@@ -6,15 +6,16 @@
  */
 package duke.command;
 
+import duke.Ui;
+
 /**
  * Represents a command that Duke recognizes.
  */
 public abstract class Command {
-
-    private final String name;
-    private final String helpStr;
-    private final boolean hasBaseParam;
-    private final String[] params;
+  private final String name;
+  private final String helpStr;
+  private final boolean hasBaseParam;
+  private final String[] params;
 
     /**
      * Creates a new Command.
@@ -32,7 +33,7 @@ public abstract class Command {
     }
 
     /**
-     * Returns the help string of the command. Used by the {@link duke.UI} class to generate the help message.
+     * Returns the help string of the command. Used by the {@link Ui} class to generate the help message.
      *
      * @return The help string of the command.
      */

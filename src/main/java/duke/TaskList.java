@@ -1,9 +1,14 @@
 package duke;
 
-import duke.task.*;
-
-import java.io.*;
-import java.util.*;
+import duke.task.Deadline;
+import duke.task.Event;
+import duke.task.Task;
+import duke.task.ToDo;
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
 import java.util.function.Consumer;
 import java.util.stream.Collectors;
 
@@ -15,8 +20,8 @@ import java.util.stream.Collectors;
  * @see Storage
  */
 public class TaskList {
-    private final List<Task> tasks;
-    private final Storage storage = new Storage();
+  private final List<Task> tasks;
+  private final Storage storage = new Storage();
 
     /**
      * Constructs a new TaskList with the given tasks.
@@ -64,7 +69,7 @@ public class TaskList {
     /**
      * Returns a string representation of the tasks in the list.
      * @return a string representation of the tasks in the list.
-     * @see UI#print(String)
+     * @see Ui#print(String)
      */
     public String[] stringify() {
         if (this.tasks.size() == 0) return new String[]{"No tasks found."};
@@ -159,17 +164,17 @@ public class TaskList {
         }
     }
 
-    private void find(String[] argument, Consumer<Integer> consumer) {
-        try{
-            String[] inds = argument[0].split("\\s");
-            for (String s : inds) {
-                int ind = Integer.parseInt(s) - 1;
-                consumer.accept(ind);
-            }
-        } catch (NumberFormatException | IndexOutOfBoundsException e) {
-            throw new IllegalArgumentException("Invalid index.");
-        }
+  private void find(String[] argument, Consumer<Integer> consumer) {
+    try {
+      String[] inds = argument[0].split("\\s");
+      for (String s : inds) {
+        int ind = Integer.parseInt(s) - 1;
+        consumer.accept(ind);
+      }
+    } catch (NumberFormatException | IndexOutOfBoundsException e) {
+      throw new IllegalArgumentException("Invalid index.");
     }
+  }
 
     private void save() {
         storage.save(this.tasks);

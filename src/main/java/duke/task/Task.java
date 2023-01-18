@@ -49,9 +49,9 @@ public class Task implements Serializable {
         // return this.isDone;
     }
 
-    @Override
-    public String toString() {
-        return "[" + (this.isDone ? "X" : " ") + "] " + desc;
-    }
+  @Override
+  public String toString() {
+    return "[" + (this.isDone ? "X" : " ") + "] " + desc;
+  }
 
 }

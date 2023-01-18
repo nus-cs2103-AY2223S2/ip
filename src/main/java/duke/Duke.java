@@ -1,7 +1,8 @@
 package duke;
 
-import duke.command.*;
-
+import duke.command.ArgCommand;
+import duke.command.BasicCommand;
+import duke.command.Command;
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -10,78 +11,63 @@ import java.util.Scanner;
  */
 public class Duke {
 
-    private final UI ui;
-    private final Parser parser;
+  private final Ui ui;
+  private final Parser parser;
 
-    private Duke(String filename) {
-        this.ui = new UI();
-        TaskList taskList;
-        try {
-            taskList = new TaskList(filename);
-        } catch (Exception e) {
-            ui.loadError(e);
-            taskList = new TaskList(new ArrayList<>());
-        }
-        Command[] commands = new Command[]{
-                new BasicCommand("exit"
-                        , "exit the app"
-                        , () -> new String[]{"Goodbye."}),
-                new BasicCommand("help"
-                        , "show this help message"
-                        , () -> {
-                    ui.print();
-                    return new String[]{};
-                }),
-                new BasicCommand("list"
-                        , "list tasks"
-                        , taskList::stringify),
-                new ArgCommand("add"
-                        , "add task"
-                        , new String[]{"\\s"}
-                        , taskList::add),
-                new ArgCommand("mark"
-                        , "mark/unmark task as done"
-                        , new String[]{}
-                        , taskList::mark),
-                new ArgCommand("delete"
-                        , "delete task"
-                        , new String[]{}
-                        , taskList::delete),
-        };
-        ui.setCommands(commands);
-        this.parser = new Parser(commands);
+  private Duke(String filename) {
+    this.ui = new Ui();
+    TaskList taskList;
+    try {
+      taskList = new TaskList(filename);
+    } catch (Exception e) {
+      ui.loadError(e);
+      taskList = new TaskList(new ArrayList<>());
     }
+    Command[] commands = new Command[]{
+        new BasicCommand("exit", "exit the app", () -> new String[]{"Goodbye."}),
+        new BasicCommand("help", "show this help message", () -> {
+          ui.print();
+          return new String[]{};
+        }),
+        new BasicCommand("list", "list tasks", taskList::stringify),
+        new ArgCommand("add", "add task", new String[]{"\\s"}, taskList::add),
+        new ArgCommand("mark", "mark/unmark task as done", new String[]{}, taskList::mark),
+        new ArgCommand("delete", "delete task", new String[]{}, taskList::delete), };
+    ui.setCommands(commands);
+    this.parser = new Parser(commands);
+  }
 
-    private void run() {
-        this.ui.printIntro();
-        Scanner scanner = new Scanner(System.in);
-        String[] outputs, arguments;
-        String[] lineParts;
-        Command cmd;
+  private void run() {
+    this.ui.printIntro();
+    Scanner scanner = new Scanner(System.in);
+    String[] outputs;
+    String[] arguments;
+    String[] lineParts;
+    Command cmd;
 
-        while(scanner.hasNextLine()) {
-            try {
-                lineParts = scanner.nextLine().split("\\s",2);
-                cmd = this.parser.parseCommand(lineParts[0]);
-                if (cmd.hasParams()){
-                    if (lineParts.length < 2 || lineParts[1].isEmpty()) {
-                        throw new IllegalArgumentException("Missing argument.");
-                    }
-                    arguments = Parser.parseArgs(lineParts[1], cmd);
-                    outputs = cmd.execute(arguments);
-                } else {
-                    outputs = cmd.execute(new String[]{});
-                }
-                this.ui.print(outputs);
-                if (cmd.getName().equals("exit")){
-                    break;
-                }
-            } catch (Exception e) {
-                this.ui.error(e);
-                this.ui.print();
-            }
+    while (scanner.hasNextLine()) {
+      try {
+        lineParts = scanner.nextLine().split("\\s", 2);
+        cmd = this.parser.parseCommand(lineParts[0]);
+        if (cmd.hasParams()) {
+          if (lineParts.length < 2 || lineParts[1].isEmpty()) {
+            throw new IllegalArgumentException("Missing argument.");
+          }
+          arguments = Parser.parseArgs(lineParts[1], cmd);
+          outputs = cmd.execute(arguments);
+        } else {
+          outputs = cmd.execute(new String[]{});
         }
+        this.ui.print(outputs);
+        if (cmd.getName().equals("exit")) {
+          break;
+        }
+      } catch (Exception e) {
+        this.ui.error(e);
+        this.ui.print();
+      }
     }
+  }
 
     /**
      * The start of execution of the Duke program.

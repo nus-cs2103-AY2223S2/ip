@@ -9,7 +9,7 @@ import duke.command.Command;
  * @see duke.command.Command
  */
 public class Parser {
-    Command[] commands;
+  Command[] commands;
 
     /**
      * Creates a new Parser.
@@ -54,7 +54,7 @@ public class Parser {
         String[] outputs = new String[regexes.length + 1];
         for (int i = 0; i < regexes.length; i++) {
             String[] temp = argPart.split(regexes[i],2);
-            if (temp.length > 1){
+            if (temp.length > 1) {
                 outputs[i] = temp[0];
                 argPart = temp[1];
             } else {
