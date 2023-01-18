@@ -13,4 +13,14 @@ unmark 4
 list
 blah
 unknown-command
+mark
+mark NON-NUMERIC
+mark -1
+mark 0
+mark 999
+unmark
+unmark NON-NUMERIC
+unmark -1
+unmark 0
+unmark 999
 quit
