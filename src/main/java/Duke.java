@@ -16,12 +16,21 @@ public class Duke {
             if (inp.equals("mark") || inp.equals("unmark")) idx = scanner.nextInt();
             else desc = scanner.nextLine();
             String by = "";
+            String from = "";
             if (inp.equals("deadline")) {
                 String[] temp = desc.split(" /by ");
                 desc = temp[0];
                 by = temp[1];
             }
-            duke.check_msg(inp, idx, desc, by);
+            if (inp.equals("event")) {
+                String[] temp = desc.split(" /from |\\ /to ");
+                desc = temp[0];
+                from = temp[1];
+                by = temp[2];
+//                System.out.println(temp[0]);
+//                System.out.println(temp[1]);
+            }
+            duke.check_msg(inp, idx, desc, by, from);
             System.out.println(duke.msg);
         }
     }
@@ -29,7 +38,7 @@ public class Duke {
         return this.add_lines("Hello! I'm Duke\nWhat can I do for you?\n");
     }
 
-    void check_msg(String inp, int idx, String desc, String by) {
+    void check_msg(String inp, int idx, String desc, String by, String from) {
         if (inp.equals("bye")) {
             this.exit = true;
             this.msg = this.add_lines("Bye. Hope to see you again soon!\n");
@@ -60,6 +69,13 @@ public class Duke {
             this.msg = this.add_lines(this.msg);
         } else if (inp.equals("deadline")) {
             Deadline cur = new Deadline(desc, by);
+            tasks[num_tasks] = cur;
+            num_tasks = num_tasks + 1;
+            this.msg = "Got it. I've added this task:\n" + cur + "\n";
+            this.msg += "Now you have " + this.num_tasks + " tasks in the list.\n";
+            this.msg = this.add_lines(this.msg);
+        } else if (inp.equals("event")){
+            Event cur = new Event(desc, by, from);
             tasks[num_tasks] = cur;
             num_tasks = num_tasks + 1;
             this.msg = "Got it. I've added this task:\n" + cur + "\n";
