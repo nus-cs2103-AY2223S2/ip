@@ -25,6 +25,10 @@ public final class TaskStorage {
         return Collections.unmodifiableList(this.tasks);
     }
 
+    public int getTaskCount() {
+        return tasks.size();
+    }
+
     public Task getTaskByNo(int n) {
         return this.tasks.get(n - 1);
     }

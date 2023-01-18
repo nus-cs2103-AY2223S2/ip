@@ -19,7 +19,7 @@ public final class HShowTaskList implements ICommand {
     public void take(String s) {
         int no = 1;
         for (Task i : ts.getTasks()) {
-            System.out.printf("%d. [%s] %s\n", no++, i.getDone() ? "X" : " ", i.getName());
+            System.out.printf("%d. %s\n", no++, i);
         }
     }
 

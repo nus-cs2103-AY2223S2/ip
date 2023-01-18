@@ -1,16 +1,22 @@
 package types;
 
-public class Task {
-    private final String name;
-    private boolean done;
+public abstract class Task {
+    protected String name;
+    protected String typeMark;
+    protected boolean done;
 
-    private Task(String s) {
-        this.name = s;
-        this.done = false;
+    protected Task(String n, String tm) {
+        name = n;
+        typeMark = tm;
+        done = false;
     }
 
-    public static Task ofName(String s) {
-        return new Task(s);
+    public String getDoneMark() {
+        return done ? "[X]" : "[ ]";
+    }
+
+    public String getTypeMark() {
+        return String.format("[%s]", typeMark);
     }
 
     public String getName() {
@@ -18,19 +24,15 @@ public class Task {
     }
 
     public void setDone() {
-        this.done = true;
+        done = true;
     }
 
     public void setUndone() {
-        this.done = false;
-    }
-
-    public boolean getDone() {
-        return this.done;
+        done = false;
     }
 
     @Override
     public String toString() {
-        return this.name;
+        return String.format("%s%s %s", getTypeMark(), getDoneMark(), name);
     }
 }
