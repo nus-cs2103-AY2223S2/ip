@@ -113,14 +113,6 @@ public class Duke {
                         break;
                     default:
                         throw new DukeException("I don't get it!");
-//                    tasks.add(new Task(input));
-//                    numTasks++;
-//                    String output = "    ____________________________________________________________"
-//                            + "\n      added: "
-//                            + input
-//                            + "\n    ____________________________________________________________";
-//                    System.out.println(output);
-//                    break;
                 }
             } catch (DukeException d) {
                 System.out.println(d.getMessage());
