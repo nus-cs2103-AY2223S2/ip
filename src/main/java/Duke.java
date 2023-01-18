@@ -1,6 +1,7 @@
 import java.util.*;
 
 public class Duke {
+    private final static String[] COMMANDS = new String[]{"list", "bye", "todo", "mark", "unmark", "event", "deadline"};
 
     public static void markTask(Task[] taskList, int index) {
         Task unmarkedTask = taskList[index];
@@ -23,6 +24,54 @@ public class Duke {
         System.out.println(String.format("Now you have %d tasks in the list.", taskCount));
     }
 
+    public static void checkCommand(String command) throws UnknownCommandException {
+        for (String cmd : COMMANDS) {
+            if (cmd.equals(command)) {
+                return;
+            }
+        }
+        throw new UnknownCommandException();
+    }
+
+    public static void checkDescription(String description) throws EmptyDescException {
+        if (description.equals("")) {
+            throw new EmptyDescException();
+        }
+    }
+
+    public static int checkDeadline(String[] splitInput) throws NoDeadlineException {
+        int byIndex = Arrays.asList(splitInput).indexOf("/by");
+        if (byIndex == -1) {
+            throw new NoDeadlineException();
+        } else {
+            return byIndex;
+        }
+    }
+
+    public static int checkStarting(String[] splitInput) throws NoStartingException {
+        int byIndex = Arrays.asList(splitInput).indexOf("/from");
+        if (byIndex == -1) {
+            throw new NoStartingException();
+        } else {
+            return byIndex;
+        }
+    }
+
+    public static int checkEnding(String[] splitInput) throws NoEndingException {
+        int byIndex = Arrays.asList(splitInput).indexOf("/to");
+        if (byIndex == -1) {
+            throw new NoEndingException();
+        } else {
+            return byIndex;
+        }
+    }
+
+    public static void checkTimestamp(String timestamp) throws InvalidTimeException {
+        if (timestamp.equals("")) {
+            throw new InvalidTimeException();
+        }
+    }
+
     public static void main(String[] args) {
         System.out.println("Hello! I'm Duke");
         System.out.println("What can I do for you?");
@@ -31,54 +80,98 @@ public class Duke {
         Task[] taskList = new Task[100];
         int taskCount = 0;
         while (!input.equals("bye")) {
-            input = sc.nextLine();
             // split command into each word
+            input = sc.nextLine();
             String[] splitInput = input.split(" ");
             String command = splitInput[0];
-            if (command.equals("list")) {
-                System.out.println("Here are the tasks in your list:");
-                for (int i = 0; i < taskCount; i++) {
-                    Task task = taskList[i];
-                    System.out.println(String.format("%d.%s", i + 1, task));
+            try {
+                checkCommand(command);
+                String taskNumber;
+                int index;
+                String description;
+                Task newTask;
+                switch (command) {
+                    case "list":
+                        System.out.println("Here are the tasks in your list:");
+                        for (int i = 0; i < taskCount; i++) {
+                            Task task = taskList[i];
+                            System.out.println(String.format("%d.%s", i + 1, task));
+                        }
+                        break;
+                    case "bye":
+                        System.out.println("Bye. Hope to see you again soon!");
+                        break;
+                    case "mark":
+                        // taskNumber in 1-indexing
+                        taskNumber = splitInput[1];
+                        // index in 0-indexing
+                        index = Integer.parseInt(taskNumber) - 1;
+                        markTask(taskList, index);
+                        break;
+                    case "unmark":
+                        taskNumber = splitInput[1];
+                        index = Integer.parseInt(taskNumber) - 1;
+                        unmarkTask(taskList, index);
+                        break;
+                    case "todo":
+                        try {
+                            description = String.join(" ",
+                                    Arrays.copyOfRange(splitInput, 1, splitInput.length));
+                            checkDescription(description);
+                            newTask = new Todo(description);
+                            addTask(taskList, newTask, taskCount);
+                            taskCount++;
+                        } catch (EmptyDescException err) {
+                            System.out.println(err);
+                        }
+                        break;
+                    case "deadline":
+                        try {
+                            int byIndex = checkDeadline(splitInput);
+                            description = String.join(" ", Arrays.copyOfRange(splitInput, 1, byIndex));
+                            checkDescription(description);
+                            String deadline = String.join(" ", Arrays.copyOfRange(splitInput,
+                                    byIndex + 1, splitInput.length));
+                            checkTimestamp(deadline);
+                            newTask = new Deadline(description, deadline);
+                            addTask(taskList, newTask, taskCount);
+                            taskCount++;
+                        } catch (NoDeadlineException err) {
+                            System.out.println(err);
+                        } catch (EmptyDescException err) {
+                            System.out.println(err);
+                        } catch (InvalidTimeException err) {
+                            System.out.println(err);
+                        }
+                        break;
+                    case "event":
+                        try {
+                            int fromIndex = checkStarting(splitInput);
+                            int toIndex = checkEnding(splitInput);
+                            description = String.join(" ", Arrays.copyOfRange(splitInput, 1, fromIndex));
+                            checkDescription(description);
+                            String from = String.join(" ",
+                                    Arrays.copyOfRange(splitInput, fromIndex + 1, toIndex));
+                            checkTimestamp(from);
+                            String to = String.join(" ",
+                                    Arrays.copyOfRange(splitInput, toIndex + 1, splitInput.length));
+                            checkTimestamp(to);
+                            newTask = new Event(description, from, to);
+                            addTask(taskList, newTask, taskCount);
+                            taskCount++;
+                        } catch (NoStartingException err) {
+                            System.out.println(err);
+                        } catch (NoEndingException err) {
+                            System.out.println(err);
+                        } catch (EmptyDescException err) {
+                            System.out.println(err);
+                        } catch (InvalidTimeException err) {
+                            System.out.println(err);
+                        }
+                        break;
                 }
-            } else if (command.equals("blah")) {
-                System.out.println(command);
-            } else if (command.equals("bye")){
-                System.out.println("Bye. Hope to see you again soon!");
-            } else if (command.equals("mark")) {
-                // taskNumber in 1-indexing
-                String taskNumber = splitInput[1];
-                // index in 0-indexing
-                int index = Integer.parseInt(taskNumber) - 1;
-                markTask(taskList, index);
-            } else if (command.equals("unmark")) {
-                String taskNumber = splitInput[1];
-                int index = Integer.parseInt(taskNumber) - 1;
-                unmarkTask(taskList, index);
-            } else if (command.equals("todo")) {
-                String description = String.join(" ",
-                        Arrays.copyOfRange(splitInput, 1, splitInput.length));
-                Task newTask = new Todo(description);
-                addTask(taskList, newTask, taskCount);
-                taskCount++;
-            } else if (command.equals("deadline")) {
-                int byIndex = Arrays.asList(splitInput).indexOf("/by");
-                String description = String.join(" ", Arrays.copyOfRange(splitInput, 1, byIndex));
-                String deadline = String.join(" ", Arrays.copyOfRange(splitInput,
-                        byIndex + 1, splitInput.length));
-                Task newTask = new Deadline(description, deadline);
-                addTask(taskList, newTask, taskCount);
-                taskCount++;
-            } else if (command.equals("event")) {
-                int fromIndex = Arrays.asList(splitInput).indexOf("/from");
-                int toIndex = Arrays.asList(splitInput).indexOf("/to");
-                String description = String.join(" ", Arrays.copyOfRange(splitInput, 1, fromIndex));
-                String from = String.join(" ", Arrays.copyOfRange(splitInput, fromIndex + 1, toIndex));
-                String to = String.join(" ", Arrays.copyOfRange(splitInput,
-                        toIndex + 1, splitInput.length));
-                Task newTask = new Event(description, from, to);
-                addTask(taskList, newTask, taskCount);
-                taskCount++;
+            } catch(UnknownCommandException err){
+                System.out.println(err);
             }
         }
     }
