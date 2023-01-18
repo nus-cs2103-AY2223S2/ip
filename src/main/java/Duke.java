@@ -1,6 +1,10 @@
 import java.util.*;
 
 public class Duke {
+    public enum Instructions {
+        BYE, LIST, MARK, UNMARK, TODO, DEADLINE, EVENT, DELETE
+    }
+
     public static void main(String[] args) {
         String logo = " ____        _        \n"
                 + "|  _ \\ _   _| | _____ \n"
@@ -13,7 +17,7 @@ public class Duke {
         userInputs();
 
     }
-
+    
     private static void userInputs() {
         Scanner sc = new Scanner(System.in);
         ArrayList<Task> list = new ArrayList<Task>(100);
@@ -25,32 +29,40 @@ public class Duke {
                 String input = sc.nextLine();
                 String[] part = input.split(" ");
                 int index = 0;
+                String first_word = part[0].toUpperCase();
 
                 if (part[0].equals("mark") || part[0].equals("unmark") || part[0].equals("delete")) {
                     index = Integer.parseInt(part[1]) - 1;
                 }
 
-                switch (part[0]) {
-                    case "bye":
+                if (!Arrays.stream(Instructions.values()).anyMatch(x -> (x.toString()).equals(first_word))) {
+                    throw new TaskException("Sorry! Duke has no idea what it is as it is not an instruction");
+                }
+
+
+                Instructions instruction = Instructions.valueOf(first_word);
+
+                switch (instruction) {
+                    case BYE:
                         System.out.println("Oh no! Don't give up pls.. you still haven't found a gf yet :(");
                         break;
 
-                    case "list":
+                    case LIST:
                         System.out.println("Take a look at ye DREAM goals for 2023");
                         for (int i = 0; i < list.size(); i++) {
                             System.out.println(i + 1 + "." + list.get(i));
                         }
                         break;
 
-                    case "mark":
+                    case MARK:
                         list.get(index).toBeMarked();
                         break;
 
-                    case "unmark":
+                    case UNMARK:
                         list.get(index).toBeUnmarked();
                         break;
 
-                    case "todo":
+                    case TODO:
                         if (input.length() < 5) {
                             throw new TaskException("Please enter an to-do item");
                         }
@@ -58,7 +70,7 @@ public class Duke {
                         System.out.println("Now you have " + list.size() + " tasks in the list.");
                         break;
 
-                    case "deadline":
+                    case DEADLINE:
                         if (!input.contains("/by")) {
                             throw new TaskException("Enter an valid item followed by a deadline");
                         }
@@ -66,7 +78,7 @@ public class Duke {
                         list.add(new Deadline(deadline_part[0], deadline_part[1]));
                         break;
 
-                    case "event":
+                    case EVENT:
                         boolean from = input.contains("/from");
                         boolean to = input.contains("/to");
                         if ((!from || !to) || (from && to)) {
@@ -77,7 +89,7 @@ public class Duke {
                         list.add(new Event(event_part[0], range[0], range[1]));
                         break;
 
-                    case "delete":
+                    case DELETE:
                         Task temp = list.get(index);
                         list.remove(index);
                         System.out.println("The Duke has removed this task: " + temp);
@@ -85,8 +97,9 @@ public class Duke {
                         break;
 
                     default:
-                        throw new TaskException("Sorry! Duke has no idea what it meant by " + input);
+                        throw new TaskException("Sorry! Duke has no idea what it is as it is not an instruction");
                 }
+
             }
         } catch (TaskException e) {
             System.out.println(e.getMessage());
