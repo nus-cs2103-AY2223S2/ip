@@ -71,7 +71,6 @@ public class Duke {
                 continue;
             }
             ls.add(new Task(input));
-            System.out.println(divider + "added: " + input + "\n" + divider);
         }
     }
 }
