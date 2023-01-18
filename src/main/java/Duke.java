@@ -1,4 +1,4 @@
-import java.util.Scanner;
+import java.util.*;
 
 public class Duke {
     public static void main(String[] args) {
@@ -9,15 +9,22 @@ public class Duke {
 
         // Create Scanner object
         Scanner sc = new Scanner(System.in);
+        TaskList tl = new TaskList();
 
         // Always ready to receive input
         while (true) {
             String input = sc.nextLine();
-            if (input != null && input.equals("bye")) {
-                System.out.println("Bye. Hope to see you again soon!");
-                return;
+            switch (input) {
+                case "bye":
+                    System.out.println("Bye. Hope to see you again soon!");
+                    return;
+                case "list":
+                    System.out.println(tl.toString());
+                    break;
+                default:
+                    tl.addTask(input);
+                    System.out.println("added: " + input);
             }
-            System.out.println(input);
         }
     }
 }
