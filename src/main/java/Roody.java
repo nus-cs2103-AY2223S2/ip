@@ -85,33 +85,32 @@ public class Roody {
         StringBuilder stringBuilder = new StringBuilder();
         if (index > 0) {
             printBuffer.add("Here are the tasks in your list:");
+            while (count < this.index) {
+
+                listIndex = count + 1;
+                stringBuilder.append(listIndex);
+                stringBuilder.append(".[");
+                // get type
+                stringBuilder.append(list[count].getType());
+                stringBuilder.append("][");
+                // if is done, set as 'X'
+                if (this.list[count].isDone()) {
+                    stringBuilder.append("X] ");
+                // not done, set as ' '
+                } else {
+                    stringBuilder.append(" ] ");
+                }
+                stringBuilder.append(list[count].toString());
+                printBuffer.add(stringBuilder.toString());
+                
+                // Clears and updates values
+                stringBuilder.setLength(0);
+                count++;
+            }
+            speak(printBuffer);
         } else {
             new RoodyException("There doesn't seem to be any tasks in your list.");
         }
-        while (count < this.index) {
-
-            listIndex = count + 1;
-            stringBuilder.append(listIndex);
-            stringBuilder.append(".[");
-            // get type
-            stringBuilder.append(list[count].getType());
-            stringBuilder.append("][");
-            // if is done, set as 'X'
-            if (this.list[count].isDone()) {
-                stringBuilder.append("X] ");
-            // not done, set as ' '
-            } else {
-                stringBuilder.append(" ] ");
-            }
-            stringBuilder.append(list[count].toString());
-            printBuffer.add(stringBuilder.toString());
-            
-            // Clears and updates values
-            stringBuilder.setLength(0);
-            count++;
-        }
-
-        speak(printBuffer);
     }
 
     // toggles completion status of tasks
