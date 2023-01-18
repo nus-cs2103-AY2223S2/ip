@@ -176,11 +176,12 @@ public class Duke {
      * @param   strIdx  Index of task
      * @return  void
      */
-    private static void mark(String strIdx) {
+    private static void mark(String strIdx) throws DukeException {
+        int idx = Integer.parseInt(strIdx);
+        checkIdx(idx);
+        Task task = taskList.get(idx - 1);
         System.out.println(horizontalLine
                 + "Nice! I've marked this task as done:");
-        int idx = Integer.parseInt(strIdx);
-        Task task = taskList.get(idx - 1);
         task.markTask();
         System.out.println(horizontalLine);
     }
@@ -191,11 +192,12 @@ public class Duke {
      * @param   strIdx  Index of task
      * @return  void
      */
-    private static void unmark(String strIdx) {
+    private static void unmark(String strIdx) throws DukeException {
+        int idx = Integer.parseInt(strIdx);
+        checkIdx(idx);
+        Task task = taskList.get(idx - 1);
         System.out.println(horizontalLine
                 + "OK, I've marked this task as not done yet:");
-        int idx = Integer.parseInt(strIdx);
-        Task task = taskList.get(idx - 1);
         task.unmarkTask();
         System.out.println(horizontalLine);
     }
@@ -206,14 +208,27 @@ public class Duke {
      * @param   strIdx  Index of task
      * @return  void
      */
-    private static void delete(String strIdx) {
+    private static void delete(String strIdx) throws DukeException {
+        int idx = Integer.parseInt(strIdx);
+        checkIdx(idx);
+        taskList.get(idx - 1).getTask();
         System.out.println(horizontalLine
                 + "Noted. I've removed this task:");
-        int idx = Integer.parseInt(strIdx);
-        taskList.get(idx - 1).getTask();
         taskList.remove(idx - 1);
         System.out.println("Now you have " + taskList.size() + " tasks in the list.\n"
                 + horizontalLine);
+    }
+
+    /**
+     * This method checks the task index given by the user.
+     *
+     * @param   idx     Index of task
+     * @return  void
+     */
+    private static void checkIdx(int idx) throws DukeException {
+        if (idx - 1 > taskList.size() || idx - 1 < 0) {
+            throw new DukeException("Task index given is invalid :( Try again.");
+        }
     }
 
     /**
