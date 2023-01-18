@@ -1,9 +1,13 @@
+import exception.CommandParseException;
 import exception.InvalidActionException;
+import exception.InvalidParameterException;
 import exception.MissingParameterException;
 import task.DeadlineTask;
 import task.EventTask;
+import task.TaskFilter;
 import task.ToDoTask;
 
+import java.time.LocalDate;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Objects;
@@ -17,6 +21,7 @@ public class Command {
     public enum Action {
         BYE("bye"),
         LIST("list"),
+        LIST_FILTER("listfilter"),
         MARK_DONE("mark"),
         MARK_UNDONE("unmark"),
         CREATE_TODO("todo"),
@@ -73,11 +78,18 @@ public class Command {
         return this.action == action;
     }
 
+    public boolean hasAction(Action ...actions) {
+        for (Action action : actions) {
+            if (this.action == action) return true;
+        }
+        return false;
+    }
+
     public ToDoTask toToDoTask() throws MissingParameterException {
         return new ToDoTask(this.body);
     }
 
-    public DeadlineTask toDeadlineTask() throws MissingParameterException {
+    public DeadlineTask toDeadlineTask() throws CommandParseException {
         String deadline = null;
         for (Command command : this.subCommands) {
             if (command.hasAction(Action.DEADLINE_BY) && deadline == null) {
@@ -88,7 +100,7 @@ public class Command {
         return new DeadlineTask(this.body, deadline);
     }
 
-    public EventTask toEventTask() throws MissingParameterException {
+    public EventTask toEventTask() throws CommandParseException {
         String fromDateTime = null;
         String toDateTime = null;
         for (Command command : subCommands) {
@@ -100,5 +112,18 @@ public class Command {
         }
 
         return new EventTask(this.body, fromDateTime, toDateTime);
+    }
+
+    public TaskFilter toFilter() throws InvalidParameterException {
+        String afterDate = null;
+        String beforeDate = null;
+        for (Command command : subCommands) {
+            if (command.hasAction(Action.DEADLINE_BY, Action.EVENT_TO) && beforeDate == null) {
+                beforeDate = command.body;
+            } else if (command.hasAction(Action.EVENT_FROM) && afterDate == null) {
+                afterDate = command.body;
+            }
+        }
+        return new TaskFilter(afterDate, beforeDate);
     }
 }

@@ -1,10 +1,12 @@
 import exception.CommandParseException;
 import exception.MissingParameterException;
 import task.Task;
+import task.TaskFilter;
 
 import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class TaskList {
     private final List<Task> tasks;
@@ -97,6 +99,18 @@ public class TaskList {
      * @return List of response lines.
      */
     public List<String> getTasksForPrint() {
+        return this.getTasksForPrint(this.tasks);
+    }
+
+    public List<String> getTasksForPrint(TaskFilter filter) {
+        List<Task> filteredTasks = this.tasks
+                .stream()
+                .filter(task -> task.satisfies(filter))
+                .collect(Collectors.toList());
+        return getTasksForPrint(filteredTasks);
+    }
+
+    private List<String> getTasksForPrint(List<Task> tasks) {
         if (tasks.isEmpty()) {
             return List.of("No tasks, you're good for the day!");
         }

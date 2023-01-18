@@ -19,6 +19,10 @@ public abstract class Task {
         this.isDone = isDone;
     }
 
+    public boolean satisfies(TaskFilter filter) {
+        return filter == null || filter.isEmpty();
+    }
+
     @Override
     public String toString() {
         return String.format("[%s] %s", this.isDone ? "X" : " ", this.description);

@@ -1,6 +1,6 @@
 package exception;
 
-public class MissingParameterException extends JarvisException {
+public class MissingParameterException extends CommandParseException {
     public MissingParameterException(String message) {
         super(message);
     }
