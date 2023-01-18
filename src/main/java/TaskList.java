@@ -1,10 +1,10 @@
 import java.util.HashMap;
 
-public class Tasklist {
+public class TaskList {
     private HashMap<Integer, Task> taskHashMap;
     private int taskCount;
 
-    public Tasklist() {
+    public TaskList() {
         this.taskCount = 0;
         this.taskHashMap = new HashMap<>();
     }
@@ -39,17 +39,25 @@ public class Tasklist {
     }
     //======================================
 
-    public String markTask(int taskNumber) {
-        Task task = this.taskHashMap.get(taskNumber);
-        task.markDone();
-        return "Nice! I've marked this task as done: \n" + task;
+    public String markTask(int taskNumber) throws DukeException {
+        try {
+            Task task = this.taskHashMap.get(taskNumber);
+            task.markDone();
+            return "Nice! I've marked this task as done: \n" + task;
+        } catch (NullPointerException e) {
+            throw new DukeException("No task with given task number of " + taskNumber);
+        }
     }
 
-    public String unmarkTask(int taskNumber) {
-        Task task = this.taskHashMap.get(taskNumber);
-        task.unmarkDone();
-        return "OK, I've marked this task as not done yet: \n" + task;
+    public String unmarkTask(int taskNumber) throws DukeException {
+        try {
+            Task task = this.taskHashMap.get(taskNumber);
+            task.unmarkDone();
+            return "OK, I've marked this task as not done yet: \n" + task;
+        } catch (NullPointerException e) {
+            throw new DukeException("No task with given task number of " + taskNumber);
     }
+}
 
     public String listTasks() {
         String result = "";

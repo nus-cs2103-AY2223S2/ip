@@ -1,41 +1,118 @@
-import java.util.Arrays;
 import java.util.Scanner;
 
 public class Duke {
+    private enum Commands {
+        BYE, LIST, MARK, UNMARK, TODO, DEADLINE, EVENT
+    }
+
+    private static Enum getCommand(String userInput) throws DukeException {
+        String strCommand = userInput.split(" ", 2)[0];
+        try {
+            Enum command = Commands.valueOf(strCommand.toUpperCase());
+            return command;
+        } catch (IllegalArgumentException e) {
+            throw new DukeException("Invalid command");
+        } catch (NullPointerException e) {
+            throw new DukeException("No command given");
+        }
+    }
+
+    private static int parseMarkCommands(String userInput) throws DukeException {
+        String[] splitStr = userInput.split(" ", 2);
+        if (splitStr.length < 2) {
+            throw new DukeException("Mark / Unmark commands require an integer argument referring to task number");
+        } else {
+            try {
+                int taskNumber = Integer.parseInt(splitStr[1]);
+                return taskNumber;
+            } catch (NumberFormatException e) {
+                throw new DukeException("Format of argument cannot be parsed as an integer");
+            }
+        }
+    }
+
+    private static String parseTodoCommand(String userInput) throws DukeException {
+        String[] splitStr = userInput.split(" ", 2);
+        if (splitStr.length < 2) {
+            throw new DukeException("Todo command requires a task description");
+        } else {
+            return splitStr[1];
+        }
+    }
+
+    private static String[] parseDeadlineCommand(String userInput) throws DukeException {
+        String[] splitStr = userInput.split(" ", 2);
+        if (splitStr.length < 2) {
+            throw new DukeException("Deadline command requires task description and /by argument");
+        } else {
+            String[] output = splitStr[1].split(" /by ", 2);
+            if (output.length < 2) {
+                throw new DukeException("Deadline command requires task description and /by argument");
+            } else {
+                return output;
+            }
+        }
+    }
+
+    private static String[] parseEventCommand(String userInput) throws DukeException {
+        String[] splitStr = userInput.split(" ", 2);
+        if (splitStr.length < 2) {
+            throw new DukeException("Event command requires task description, /from argument and /to argument");
+        } else {
+            String[] splitFrom = splitStr[1].split(" /from ", 2);
+            if (splitFrom.length < 2) {
+                throw new DukeException("Event command requires task description, /from argument and /to argument");
+            } else {
+                String[] splitTo = splitFrom[1].split(" /to ", 2);
+                if (splitTo.length < 2) {
+                    throw new DukeException("Event command requires task description, /from argument and /to argument");
+                } else {
+                    return new String[] {splitFrom[0], splitTo[0], splitTo[1]};  // [0] is description of task; [1] is from; [2] is to
+                }
+
+            }
+        }
+    }
+
+
     public static void main(String[] args) {
         Printer p = new Printer();
         String text;
-        String terminate = "bye";
+        Enum command;
         Scanner s = new Scanner(System.in);
-        Tasklist taskList = new Tasklist();
+        TaskList taskList = new TaskList();
         boolean flag = true;
 
         p.printWelcome();
 
         while (flag) {
             text = s.nextLine();
-            if (text.equals(terminate)) {
-                p.printExit();
-                flag = false;
-            } else if (text.equals("list")) {
-                p.print(taskList.listTasks());
-            } else if (text.split(" ", 2)[0].equals("mark")) {
-                p.print(taskList.markTask(Integer.parseInt(text.split(" ", 2)[1])));
-            } else if (text.split(" ", 2)[0].equals("unmark")) {
-                p.print(taskList.unmarkTask(Integer.parseInt(text.split(" ", 2)[1])));
-            } else {
-                if (text.split(" ", 2)[0].equals("todo")) {
-                    String input = text.split(" ", 2)[1];
-                    p.print(taskList.addTask(input));
-                } else if (text.split(" ", 2)[0].equals("deadline")) {
-                    String[] input = text.split(" ", 2)[1].split(" /by ", 2); // input[0] is description of task input[1] is by
-                    p.print(taskList.addTask(input[0], input[1]));
-                } else if (text.split(" ", 2)[0].equals("event")) {
-                    String[] input = text.split(" ", 2)[1].split("/", 3); // input[0] is description of task input[1] is from, [2] is to
-                    p.print(taskList.addTask(input[0], input[1].substring(5), input[2].substring(3)));
+            try {
+                command = Duke.getCommand(text); // will catch any invalid command alrdy
+                if (command.equals(Commands.BYE)) {
+                    p.printExit();
+                    flag = false;
+                } else if (command.equals(Commands.LIST)) {
+                    p.print(taskList.listTasks());
+                } else if (command.equals(Commands.MARK)) {
+                    p.print(taskList.markTask(parseMarkCommands(text)));
+                } else if (command.equals(Commands.UNMARK)) {
+                    p.print(taskList.unmarkTask(parseMarkCommands(text)));
                 } else {
-                    p.print("Invalid command");
+                    if (command.equals(Commands.TODO)) {
+                        p.print(taskList.addTask(parseTodoCommand(text)));
+                    } else if (command.equals(Commands.DEADLINE)) {
+                        String[] parsed = parseDeadlineCommand(text); // parsed[0] is description of task; parsed[1] is by
+                        p.print(taskList.addTask(parsed[0], parsed[1]));
+                    } else if (command.equals(Commands.EVENT)) {
+                        String[] parsed = parseEventCommand(text); // parsed[0] is description of task; parsed[1] is from; parsed[2] is to
+                        p.print(taskList.addTask(parsed[0], parsed[1], parsed[2]));
+                    } else {
+                        p.print("MISSED AN EXCEPTION: Somehow ended up at the end of the if-else blocks"); //should be unnecessary
+                    }
                 }
+            } catch (DukeException e) {
+                p.print(e.getMessage());
             }
         }
     }
