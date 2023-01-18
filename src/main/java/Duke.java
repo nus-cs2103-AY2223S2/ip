@@ -112,7 +112,7 @@ public class Duke {
     private void storeTask(Task task) {
         this.taskStorage[this.taskStorageSize] = task;
         this.taskStorageSize++;
-        this.reply("The following task has been added");
+        this.reply("The following task has been added:");
         this.reply("  " + task.toString());
         this.reply("Total tasks: " + this.taskStorageSize);
     }
@@ -128,6 +128,8 @@ public class Duke {
             this.reply("No task stored.");
             return;
         }
+
+        this.reply("The following tasks are stored:");
 
         for (int i = 0; i < size; i++) {
             Task task = this.taskStorage[i];
