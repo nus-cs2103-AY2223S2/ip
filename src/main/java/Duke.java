@@ -1,3 +1,6 @@
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
 import java.util.*;
 
 public class Duke {
@@ -10,8 +13,8 @@ public class Duke {
       this.isDone = false;
     }
 
-    public String toggleDone() {
-      return isDone ? "X" : " ";
+    public Character getMarker() {
+      return isDone ? 'X' : ' ';
     }
 
     public void markAsDone() {
@@ -24,7 +27,7 @@ public class Duke {
 
     @Override
     public String toString() {
-      return new StringBuilder("[").append(toggleDone()).append("] ").append(description).toString();
+      return String.format("[%c] %s", getMarker(), this.description);
     }
   }
 
@@ -36,41 +39,50 @@ public class Duke {
 
     @Override
     public String toString() {
-      return new StringBuilder("[T]").append(super.toString()).toString();
+      return String.format("[T]%s", super.toString());
     }
   }
 
   private static class Deadline extends Task {
 
-    protected String by;
+    protected LocalDateTime by;
 
-    public Deadline(String description, String by) {
+    public Deadline(String description, LocalDateTime by) {
       super(description);
       this.by = by;
     }
 
+    public String parseDateTime(LocalDateTime dateTime) {
+      DateTimeFormatter formatter = DateTimeFormatter.ofPattern("MMM dd yyyy hh:mma");
+      return dateTime.format(formatter);
+    }
+
     @Override
     public String toString() {
-      return new StringBuilder("[D]").append(super.toString())
-          .append("(by:").append(by).append(")").toString();
+      return String.format("[D]%s (by: %s)", super.toString(), parseDateTime(this.by));
     }
   }
 
   private static class Event extends Task {
 
-    protected String from;
-    protected String to;
+    protected LocalDateTime from;
+    protected LocalDateTime to;
 
-    public Event(String description, String from, String to) {
+    public Event(String description, LocalDateTime from, LocalDateTime to) {
       super(description);
       this.from = from;
       this.to = to;
     }
 
+    public String parseDateTime(LocalDateTime dateTime) {
+      DateTimeFormatter formatter = DateTimeFormatter.ofPattern("MMM dd yyyy hh:mma");
+      return dateTime.format(formatter);
+    }
+
     @Override
     public String toString() {
-      return new StringBuilder("[E]").append(super.toString()).append("(from:")
-          .append(from).append("to:").append(to).append(")").toString();
+      return String.format("[E]%s (from: %s to: %s)", super.toString(), parseDateTime(this.from),
+          parseDateTime(this.to));
     }
   }
 
@@ -86,9 +98,8 @@ public class Duke {
       System.out.println("  ------------------------------------");
       try {
         handleListInput(userInput, taskList);
-      }
-      catch (ListException e) {
-        System.out.println(new StringBuilder("  ").append(e.getMessage()).toString());
+      } catch (ListException e) {
+        System.out.println(String.format("  %s", e.getMessage()));
       }
       System.out.println("  ------------------------------------\n");
       userInput = sc.nextLine().trim();
@@ -107,8 +118,7 @@ public class Duke {
       else {
         System.out.println("  Here are the tasks in your list:");
         for (int i = 0; i < taskList.size(); i++) {
-          System.out.println(new StringBuilder("  ").append(i + 1).append(".")
-              .append(taskList.get(i).toString()));
+          System.out.println(String.format("  %d.%s", i + 1, taskList.get(i).toString()));
         }
       }
     } else if (userInput.toLowerCase().contains("mark")) {
@@ -117,22 +127,21 @@ public class Duke {
       try {
         handleMarkTask(taskNumber, taskList, isMark);
       } catch (TaskException e) {
-        System.out.println(new StringBuilder("  ").append(e.getMessage()).toString());
+        System.out.println(String.format("  %s", e.getMessage()));
       }
     } else if (userInput.toLowerCase().contains("delete")) {
       int taskNumber = Integer.parseInt(userInput.substring(7));
       try {
         deleteTask(taskNumber, taskList);
       } catch (TaskException e) {
-        System.out.println(new StringBuilder("  ").append(e.getMessage()).toString());
+        System.out.println(String.format("  %s", e.getMessage()));
       }
-    } 
-    else {
+    } else {
       if (taskList.size() < 100) {
         try {
           handleTaskTypes(userInput, taskList);
         } catch (InvalidInputException e) {
-          System.out.println(new StringBuilder("  ").append(e.getMessage()).toString());
+          System.out.println(String.format("  %s", e.getMessage()));
         }
       } else
         throw new ListException("List is full!");
@@ -150,7 +159,7 @@ public class Duke {
         taskList.get(taskNum - 1).markAsUndone();
         System.out.println("  OK, I've marked this task as not done yet:");
       }
-      System.out.println(new StringBuilder("    ").append(taskList.get(taskNum - 1).toString()));
+      System.out.println(String.format("    %s", taskList.get(taskNum - 1)));
     }
   }
 
@@ -164,32 +173,40 @@ public class Duke {
       }
     } else if (userInput.toLowerCase().contains("deadline")) {
       try {
-        String[] deadline = userInput.substring(9).split("/by");
+        String[] deadline = userInput.substring(9).split(" /by ");
         if ("".equals(deadline[0].trim()))
           throw new InvalidInputException(
               "OOPS!!! The deadline must be in the format: deadline <task> /by <date>, <task> and <date> cannot be empty.");
-        Deadline newDeadline = new Deadline(deadline[0], deadline[1]);
+        Deadline newDeadline = new Deadline(deadline[0], storeDateTime(deadline[1]));
         addTask(newDeadline, taskList);
       } catch (StringIndexOutOfBoundsException | ArrayIndexOutOfBoundsException e) {
         throw new InvalidInputException(
             "OOPS!!! The deadline must be in the format: deadline <task> /by <date>, <task> and <date> cannot be empty.");
+      } catch (DateTimeParseException e) {
+        throw new InvalidInputException("OOPS!!! Dates must be in the format: dd/mm/yyyy HHmm (e.g. 12/12/2023 1800)");
       }
     } else if (userInput.toLowerCase().contains("event")) {
       try {
-        String[] event = userInput.substring(6).split("/from");
+        String[] event = userInput.substring(6).split(" /from ");
         if ("".equals(event[0].trim())) {
           throw new InvalidInputException(
               "OOPS!!! The event must be in the format: event <task> /from <date> /to <date>, <task> and <date> cannot be empty.");
         }
-        String[] eventTime = event[1].split("/to");
-        Event newEvent = new Event(event[0], eventTime[0], eventTime[1]);
+        String[] eventTime = event[1].split(" /to ");
+        LocalDateTime fromDateTime = storeDateTime(eventTime[0]);
+        LocalDateTime toDateTime = storeDateTime(eventTime[1]);
+        if (fromDateTime.isAfter(toDateTime)) {
+          throw new InvalidInputException("OOPS!!! The start date must be before the end date.");
+        }
+        Event newEvent = new Event(event[0], fromDateTime, toDateTime);
         addTask(newEvent, taskList);
       } catch (StringIndexOutOfBoundsException | ArrayIndexOutOfBoundsException e) {
         throw new InvalidInputException(
             "OOPS!!! The event must be in the format: event <task> /from <date> /to <date>, <task> and <date> cannot be empty.");
+      } catch (DateTimeParseException e) {
+        throw new InvalidInputException("OOPS!!! Dates must be in the format: dd/mm/yyyy HHmm (e.g. 12/12/2023 1800)");
       }
-    }
-    else {
+    } else {
       throw new InvalidInputException("OOPS!!! I'm sorry, but I don't know what that means :-(");
     }
   }
@@ -215,5 +232,10 @@ public class Duke {
     System.out.println(new StringBuilder("  ").append(task.toString()));
     System.out.println(new StringBuilder("  Now you have ").append(taskList.size())
         .append(taskList.size() == 1 ? " task in the list." : " tasks in the list."));
+  }
+
+  private static LocalDateTime storeDateTime(String dateTimeString) throws DateTimeParseException {
+    DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy HHmm");
+    return LocalDateTime.parse(dateTimeString, formatter);
   }
 }
