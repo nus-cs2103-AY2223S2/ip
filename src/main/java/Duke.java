@@ -12,8 +12,18 @@ public class Duke {
             do {
                 input = sc.nextLine();
 
-                System.out.println(input);
-
+                switch(input){
+                    case("bye"):
+                        break;
+                    case("list"):
+                        for(int i = 0; i < tasks.size(); i++){
+                            System.out.println((i + 1) + ". " + tasks.get(i).desc);
+                        }
+                        break;
+                    default:
+                        tasks.add(new Task(input, false));
+                        System.out.println("added: " + input);
+                }
             } while (!input.equals("bye"));
 
         } catch (Exception e) {
