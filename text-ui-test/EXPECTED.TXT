@@ -5,3 +5,99 @@ Hello from
 | |_| | |_| |   <  __/
 |____/ \__,_|_|\_\___|
 
+________________________________
+Hello! I'm Duke
+What can I do for you?
+________________________________
+________________________________
+added: read book
+________________________________
+________________________________
+added: return book
+________________________________
+________________________________
+Here are the tasks in your list:
+1.[ ] read book
+2.[ ] return book
+________________________________
+________________________________
+Nice! I've marked this task as done:
+ [X] return book
+________________________________
+________________________________
+Here are the tasks in your list:
+1.[ ] read book
+2.[X] return book
+________________________________
+________________________________
+OK, I've marked this task as not done yet:
+ [ ] return book
+________________________________
+________________________________
+Here are the tasks in your list:
+1.[ ] read book
+2.[ ] return book
+________________________________
+________________________________
+ Got it. I've added this task:
+  [T][ ] borrow book
+Now you have 3 tasks on the list.
+________________________________
+________________________________
+Here are the tasks in your list:
+1.[ ] read book
+2.[ ] return book
+3.[T][ ] borrow book
+________________________________
+________________________________
+ Got it. I've added this task:
+  [D][ ] return book /by Sunday
+Now you have 4 tasks on the list.
+________________________________
+________________________________
+Here are the tasks in your list:
+1.[ ] read book
+2.[ ] return book
+3.[T][ ] borrow book
+4.[D][ ] return book /by Sunday
+________________________________
+________________________________
+ Got it. I've added this task:
+  [E][ ] project meeting /from Mon 2pm /to 4pm
+Now you have 5 tasks on the list.
+________________________________
+________________________________
+Here are the tasks in your list:
+1.[ ] read book
+2.[ ] return book
+3.[T][ ] borrow book
+4.[D][ ] return book /by Sunday
+5.[E][ ] project meeting /from Mon 2pm /to 4pm
+________________________________
+________________________________
+Nice! I've marked this task as done:
+ [D][X] return book /by Sunday
+________________________________
+________________________________
+Here are the tasks in your list:
+1.[ ] read book
+2.[ ] return book
+3.[T][ ] borrow book
+4.[D][X] return book /by Sunday
+5.[E][ ] project meeting /from Mon 2pm /to 4pm
+________________________________
+________________________________
+OK, I've marked this task as not done yet:
+ [D][ ] return book /by Sunday
+________________________________
+________________________________
+Here are the tasks in your list:
+1.[ ] read book
+2.[ ] return book
+3.[T][ ] borrow book
+4.[D][ ] return book /by Sunday
+5.[E][ ] project meeting /from Mon 2pm /to 4pm
+________________________________
+________________________________
+Bye. Hope to see you again soon!
+________________________________

@@ -35,9 +35,8 @@ public class Duke {
                 case "list":
                     System.out.println("Here are the tasks in your list:");
                     for (int i = 0; i < toDoList.size(); i++) {
-                        System.out.print(i + 1);
-                        System.out.print(".");
-                        System.out.println(toDoList.get(i).toString());
+
+                        System.out.println(i + 1 + "." + toDoList.get(i).toString());
                     }
                     break;
 
@@ -61,7 +60,7 @@ public class Duke {
                     break;
 
                 case "event":
-                    String eventDescription = input.substring(("event").length());
+                    String eventDescription = input.substring(("event").length() + 1);
                     Task newEvent = new Event(eventDescription);
                     toDoList.add(newEvent);
                     System.out.println(" Got it. I've added this task:");
@@ -70,7 +69,7 @@ public class Duke {
                     break;
 
                 case "deadline":
-                    String deadlineDescription = input.substring(("event").length());
+                    String deadlineDescription = input.substring(("deadline").length() + 1);
                     Task newDeadline = new Deadline(deadlineDescription);
                     toDoList.add(newDeadline);
                     System.out.println(" Got it. I've added this task:");
@@ -79,7 +78,7 @@ public class Duke {
                     break;
 
                 case "todo":
-                    String todoDescription = input.substring(("event").length());
+                    String todoDescription = input.substring(("todo").length() + 1);
                     Task newTodo = new Todo(todoDescription);
                     toDoList.add(newTodo);
                     System.out.println(" Got it. I've added this task:");

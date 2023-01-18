@@ -28,6 +28,6 @@ public class Task {
             doneString = "[ ]";
         }
 
-        return doneString + description;
+        return doneString + " " +description;
     }
 }
