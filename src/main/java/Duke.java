@@ -15,40 +15,28 @@ public class Duke {
 
         System.out.println("Whats good its duke\nwhat do you want from me");
 
-        //to store all the tasks
+        //to store all the strings
 
-        Task[] storedTask = new Task[100];
+        String[] storedMessages = new String[100];
 
         //while not bye
         //might want to do switch case?
-        int taskCounter = 0;
-        int taskPointer;
+        int listCounter = 0;
         while(true) {
-            String input = sc.nextLine();
-            String[] command = input.split(" ");
-            if (command[0].equals("bye")) {
+            String command = sc.nextLine();
+            if (command.equals("bye")) {
                 break;
-            } else if (command[0].equals("list")) {
-                for (int i = 0; i < storedTask.length; i++) {
-                    if (storedTask[i] == null) {
+            } else if (command.equals("list")) {
+                for (int i = 0; i < storedMessages.length; i++) {
+                    if (storedMessages[i] == null) {
                         break;
                     }
-                    System.out.printf("%d." + storedTask[i].toString() + "\n", i+1);
+                    System.out.printf("%d." + storedMessages[i] + "\n", i+1);
                 }
-            } else if (command[0].equals("mark")) {
-                taskPointer = Integer.parseInt(command[1]) - 1;
-                storedTask[taskPointer].markAsDone();
-                System.out.println("Congrats bro you've done something with your life\n");
-                System.out.println(storedTask[taskPointer].toString());
-            } else if (command[0].equals("unmark")) {
-                taskPointer = Integer.parseInt(command[1]) - 1;
-                storedTask[taskPointer].undoTask();
-                System.out.println("Stop being useless why u ask me to unmark\n");
-                System.out.println(storedTask[taskPointer].toString());
             } else {
-                storedTask[taskCounter] = new Task(input);
-                taskCounter++;
-                System.out.println(input);
+                storedMessages[listCounter] = command;
+                listCounter++;
+                System.out.println(command);
             }
         }
 
