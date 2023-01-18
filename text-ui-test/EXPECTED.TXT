@@ -22,8 +22,16 @@ OK, I've marked this task as not done yet:
 Noted. I've removed the task:
 	[T][ ] return book
 Now you have 2 tasks in the list.
-2. [D][ ] mark scripts (by: mon 2pm)
-3. [E][ ] project meeting (from: mon 2pm to: 5pm)
-The description is compulsory.
-The description and date is compulsory.
+This task don't exists! Please select one from the list.
+This task don't exists! Please select one from the list.
+This task don't exists! Please select one from the list.
+☹ OOPS!!! I'm sorry, but I don't know what that means :-(
+Noted. I've removed the task:
+	[D][ ] mark scripts (by: mon 2pm)
+Now you have 1 tasks in the list.
+1. [E][ ] project meeting (from: mon 2pm to: 5pm)
+Your format is incorrect.
+Please try again with the following format: todo [description].
+Your format is incorrect.
+Please try again with the following format: event [description] \from [date] \to [date].
 Goodbye!
