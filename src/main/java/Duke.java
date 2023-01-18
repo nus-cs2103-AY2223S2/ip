@@ -11,8 +11,12 @@ public class Duke {
 
         String input = sc.nextLine();
         while (!input.equals("bye")) {
-            tasks.add(input);
-            System.out.println(formatStr(listThings(tasks)));
+            if (input.equals("list")) {
+                System.out.println(formatStr(listThings(tasks)));
+            } else {
+                tasks.add(input);
+                System.out.println(formatStr(addReport(input)));
+            }
             input = sc.nextLine();
         }
         String goodbyeMessage = formatStr("Bye. Come back again!");
@@ -27,13 +31,18 @@ public class Duke {
     }
 
     public static String addReport(String str) {
-        return "added: " + str;
+        String returnStr = "added: " + str;
+        return returnStr;
     }
 
     public static String listThings(List<String> arrList) {
         String returnstr = "";
         for (int i = 0; i < arrList.size(); i++) {
-            returnstr += "added: " + arrList.get(i) + "\n";
+            if (i == arrList.size() - 1) {
+                returnstr += Integer.toString(i+1) + ". " + arrList.get(i);
+            } else {
+                returnstr += Integer.toString(i+1) + ". " + arrList.get(i) + "\n";
+            }
         } return returnstr;
     }
 }
