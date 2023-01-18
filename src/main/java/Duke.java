@@ -27,6 +27,10 @@ public class Duke {
         System.out.print("MyDuke >  ");
     }
 
+    public static void showReply() {
+        System.out.print("|     ");
+    }
+
     public static String[] tokenise(Scanner sc) {
         String[] tokens = sc.nextLine().split(" ");
         return tokens;
@@ -35,8 +39,8 @@ public class Duke {
     public static boolean handle(String[] tokens) {
         String cmd = tokens[0];
         if (cmd == null) { }
-        else if (cmd.equals("bye")) {   duke.quit(); return true; }
-        else {  duke.exec(tokens); }
+        else if (cmd.equals("bye")) {   showReply(); duke.quit(); return true; }
+        else {  showReply(); duke.exec(tokens); }
         
         return false;
     }

@@ -17,4 +17,17 @@ public class Task {
 
     public boolean isDone() {   return this.done;   }
 
+    public void toggleDoneOrNot() {
+        if (this.isDone()) {
+            setDone(false);
+        } else {
+            setDone(true);
+        }
+    }
+
+    @Override
+    public String toString() {
+        String icon = done ? "[X]" : "[ ]";
+        return icon + " " + this.getDescription();
+    }
 }

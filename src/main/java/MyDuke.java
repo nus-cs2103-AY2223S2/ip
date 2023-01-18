@@ -1,7 +1,6 @@
 public class MyDuke {
     private Task[] allTasks = new Task[100];
     private static int taskCount = 0;
-    public static String feedback = "|    ";
 
     public void init() {
         String logo = " ____        _        \n"
@@ -15,8 +14,8 @@ public class MyDuke {
 
     public void quit() {
         // To add: Deleting all tasks...
-        System.out.println(feedback + "Quitting MyDuke...\n" 
-                            + feedback + "See you soon!");
+        System.out.println( "Quitting MyDuke...\n" 
+                            + "See you soon!");
     }
 
     public void exec(String[] tokens) {
@@ -33,22 +32,45 @@ public class MyDuke {
                 break;
             case "event":
                 System.out.println("event not implemented yet");
+                break;
+            case "mark":
+                toggle(tokens[1]);
+                break;
+            case "unmark":
+                toggle(tokens[1]);
+                break;
             default:
                 String taskDesc = String.join(" ", tokens);
                 Task newTask = new Task(taskDesc);
                 allTasks[taskCount] = newTask; taskCount++;
-                System.out.println(feedback + "Successfully added:  "
-                                    + newTask.getDescription());
+                System.out.println("Successfully added:  "
+                                    + newTask.toString());
         }
     }
 
-    public void showAll() {
+    private void showAll() {
         System.out.println("All Tasks:");
         for (Integer i = 0; i < taskCount; i++) {
             String showString = Integer.toString(i+1)+ ": "
-                                + allTasks[i].getDescription();
-            System.out.println(feedback + showString);     
+                                + allTasks[i].toString();
+            System.out.println(showString);     
         }
         System.out.println();
+    }
+
+    private void toggle(String token) {
+        int taskIndex = Integer.parseInt(token);
+        // What if token is not an integer?
+        Task task = allTasks[taskIndex-1];
+        if (!task.isDone()) {
+            task.toggleDoneOrNot();
+            System.out.println("Successfully completed:\n"
+                                + task.toString());
+        } else {
+            task.toggleDoneOrNot();
+            System.out.println("Unmark Task:\n"
+                                + task.toString());
+        }
+
     }
 }
