@@ -23,14 +23,11 @@ public class TaskList {
     return tasks.get(id - 1).toString();
   }
 
-  public String generateList() {
-    StringBuilder sb = new StringBuilder();
-    int i = 1;
-    for (Task task : tasks) {
-      String line = String.format("  %d: %s\n", i, task);
-      sb.append(line);
-      i++;
+  public String[] generateList() {
+    String[] list = new String[count()];
+    for (int i = 0; i < count(); i++) {
+      list[i] = String.format("%d: %s", i + 1, tasks.get(i));
     }
-    return sb.toString();
+    return list;
   }
 }

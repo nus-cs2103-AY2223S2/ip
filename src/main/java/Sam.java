@@ -27,11 +27,12 @@ public class Sam {
 					talk("Goodbye!");
 					break;
 				case LIST:
-          String list = tasks.generateList();
-          if (tasks.count() == 0) {
-            talk("Your list is empty!");
-          } else {
-            talk("Here is your list:\n\n" + list);
+        if (tasks.count() == 0) {
+          talk("Your list is empty!");
+        } else {
+            // "Here is your list:"
+            String[] list = tasks.generateList();
+            talk(list);
           }
 					break;
         case MARK: {
@@ -77,8 +78,8 @@ public class Sam {
             break;
           };
           if (!taskArgs.containsKey("from") || !taskArgs.containsKey("to")) {
-            talk("Oops, you're missing an argument!\n"
-               + "  An event requires: 'from', 'to'");
+            talk("Oops, you're missing an argument!",
+              "An event requires: 'from', 'to'");
             break;
           }
           Task task = new Event(title[0], taskArgs.get("from"), taskArgs.get("to"));
@@ -97,8 +98,8 @@ public class Sam {
             break;
           };
           if (!taskArgs.containsKey("by")) {
-            talk("Oops, you're missing an argument!\n"
-               + "  A deadline requires: 'by'");
+            talk("Oops, you're missing an argument!",
+              "A deadline requires: 'by'");
             break;
           }
           Task task = new Deadline(title[0], taskArgs.get("by"));
@@ -124,15 +125,17 @@ public class Sam {
   }
 
   private static void newTask(Task task) {
-    talk("Gotcha, I've added the task to your list:\n    "
-       + task
-       + "\n  Now you have " + tasks.count() + " tasks in the list");
+    talk("Gotcha, I've added the task to your list:",
+      task.toString(),
+      String.format("Now you have %d tasks in the list", tasks.count()));
   }
 
-  private static void talk(String message) {
+  private static void talk(String ...messages) {
     System.out.println(Assets.SAM);
     System.out.println("┌───────────────────────────────────────────┐");
-    System.out.println("  " + message);
+    for (String message : messages) {
+      System.out.println("  " + message);
+    }
     System.out.println("└───────────────────────────────────────────┘");
   }
 }
