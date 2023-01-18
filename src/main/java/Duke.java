@@ -78,7 +78,6 @@ public class Duke {
         // Useful variables
         int rank;
         String message;
-
         try {
             switch (command) {
                 case "bye":
@@ -140,7 +139,6 @@ public class Duke {
                 + "|____/ \\__,_|_|\\_\\___|\n";
         System.out.println("Hello from\n" + logo + "What can I do for you?\n" + BORDER);
 
-        // Possibility of implementing Duke into other application. (not static)
         Duke duke1 = new Duke();
         Scanner sc = new Scanner(System.in);
         while (sc.hasNext()) {
