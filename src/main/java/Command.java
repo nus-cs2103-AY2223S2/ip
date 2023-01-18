@@ -54,10 +54,10 @@ public class Command {
 
     public Command(Scanner scanner) throws InvalidActionException {
         this.action = Action.fromString(scanner.hasNext() ? scanner.next() : null);
-        this.body = scanner.skip("\\s*").hasNext("[^/]+") ? scanner.next("[^/]+").trim() : null;
+        this.body = scanner.skip("\\s*").findInLine("[^/]*").trim();
         this.subCommands = new LinkedList<>();
 
-        scanner.useDelimiter("\\s*/\\s*");
+        scanner.skip("[^/]*").useDelimiter("\\s*/\\s*");
         while (scanner.skip("\\s*").hasNext()) {
             this.subCommands.add(new Command(new Scanner(scanner.next())));
         }
