@@ -117,28 +117,9 @@ public class InputParser {
             } catch (IllegalArgumentException e) {
                 throw new InvalidArgumentException("Remember to specify the type of request in your input!");
             }
-
-//            if (arrStr[0].equals("mark")
-//                    || arrStr[0].equals("unmark")) { // user wants to mark/unmark something
-//                try {
-//                    Integer.parseInt(arrStr[1]);
-//                } catch (NumberFormatException nfe) {
-//                    throw new InvalidArgumentException("Enter a number after mark/unmark!");
-//                }
-//
-//                this.inputType = arrStr[0].toLowerCase();
-//                this.inputContent = arrStr[1];
-//            } else if (arrStr[0].equals("todo")
-//                    || arrStr[0].equals("deadline")
-//                    || arrStr[0].equals("event")) {
-//                this.inputType = arrStr[0];
-//                this.inputContent = arrStr[1];
-//            } else {
-//                throw new InvalidArgumentException("Remember to specify the type of request in your input!")
-//            }
-        } else if (arrStr.length == 1) { // user input is only one word (either list or create)
+        } else if (arrStr.length == 1) { // user input is only one word
             this.inputType = arrStr[0].toUpperCase();
-            this.inputContent = arrStr[0];
+            this.inputContent = "";
         } else if (arrStr.length == 0) { // for the edge cases where user input " " or ""
             throw new MissingArgumentException("Please enter something for me to parse!");
         }

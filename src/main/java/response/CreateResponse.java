@@ -1,5 +1,6 @@
 package response;
 
+import exception.MissingArgumentException;
 import storage.ToDoList;
 import storage.Todo;
 
@@ -27,6 +28,9 @@ public class CreateResponse extends Response {
      */
     @Override
     public String exec(ToDoList toDoList) {
+        if (this.todo.equals("")) {
+            throw new MissingArgumentException("The description of a to do cannot be empty.");
+        }
         Todo newTodo = new Todo(this.todo);
         toDoList.createToDo(newTodo);
         return String.format(
