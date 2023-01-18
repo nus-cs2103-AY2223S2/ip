@@ -35,31 +35,36 @@ public class Duke {
             } else {
                 String[] terms = userInput.split(" ");
                 Task newTask;
-
                 if (terms[0].equals("todo")) {
-                    newTask = new Todo(userInput.substring(5));
+                    try {
+                        if (terms.length == 1) {
+                            String error = "The description of a todo cannot be empty";
+                            throw new DukeException(error);
+                        }
+                        newTask = new Todo(userInput.substring(5));
+                        addTask(lstOfItems, newTask);
+                    } catch (DukeException err) {
+                        System.out.println(err);
+                    }
                 } else if (terms[0].equals("deadline")) {
                     String[] splitBySlash = userInput.split("/");
                     String description = splitBySlash[0].substring(9);
                     String by = splitBySlash[1].substring(3);
                     newTask = new Deadline(description, by);
-                } else {
+                } else if (terms[0].equals("event")) {
                     String[] splitBySlash = userInput.split("/");
                     String description = splitBySlash[0].substring(6);
                     String from = splitBySlash[1].substring(5);
                     String to = splitBySlash[2].substring(3);
                     newTask = new Event(description, from, to);
-                }
-                System.out.println("Got it. I have added: ");
-                System.out.println(newTask);
-                lstOfItems.add(newTask);
-                System.out.print("Now you have " + String.valueOf(lstOfItems.size()));
-                if (lstOfItems.size() == 1) {
-                    System.out.print(" task");
                 } else {
-                    System.out.print(" tasks");
+                    try {
+                        throw new DukeException("I don't know what that means.");
+                    } catch (DukeException err) {
+                        System.out.println(err);
+                    }
                 }
-                System.out.println(" in the list");
+
             }
             userInput = scan.nextLine();
         }
@@ -75,5 +80,18 @@ public class Duke {
 
     public static void endMessage() {
         System.out.println("Bye. Hope to see you again!");
+    }
+
+    public static void addTask(ArrayList<Task> lstOfItems, Task newTask) {
+        System.out.println("Got it. I have added: ");
+        System.out.println(newTask);
+        lstOfItems.add(newTask);
+        System.out.print("Now you have " + String.valueOf(lstOfItems.size()));
+        if (lstOfItems.size() == 1) {
+            System.out.print(" task");
+        } else {
+            System.out.print(" tasks");
+        }
+        System.out.println(" in the list");
     }
 }
