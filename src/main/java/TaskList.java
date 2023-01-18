@@ -2,29 +2,6 @@ import java.util.LinkedList;
 import java.util.List;
 
 public class TaskList {
-    private class Task {
-        private String content;
-        private boolean done;
-
-        Task(String content) {
-            this.content = content;
-            this.done = false;
-        }
-
-        public void mark() {
-            this.done = true;
-        }
-
-        public void unmark() {
-            this.done = false;
-        }
-
-        @Override
-        public String toString() {
-            String checkBox = this.done ? "[X] " : "[ ] ";
-            return checkBox +  this.content;
-        }
-    }
 
     private List<Task> tasks;
 
@@ -32,8 +9,32 @@ public class TaskList {
         this.tasks = new LinkedList<>();
     }
 
-    public void addTask(String task) {
-        this.tasks.add(new Task(task));
+    public Task addTask(String input) {
+        if (input.matches("deadline .+ /by .+")) {
+            // Handle deadline
+            String[] arr = input.split(" /by ");
+            String content = arr[0].substring(8, arr[0].length());
+            this.tasks.add(new Deadline(content, arr[1]));
+        } else if (input.matches("event .+ /from .+ /to .+")) {
+            // Handle event
+            String[] arr = input.split(" /from ");
+            String content = arr[0].substring(5, arr[0].length());
+            String[] startEnd = arr[1].split(" /to ");
+            this.tasks.add(new Event(content, startEnd[0], startEnd[1]));
+        } else {
+            // Handle todo
+            this.tasks.add(new ToDo(input));
+        }
+
+        return tasks.get(tasks.size() - 1);
+    }
+
+    public void addDeadline(String task, String deadline) {
+        this.tasks.add(new Deadline(task, deadline));
+    }
+
+    public void addEvent(String task, String start, String end) {
+        this.tasks.add(new Event(task, start, end));
     }
 
     public void markTask(int i) {
