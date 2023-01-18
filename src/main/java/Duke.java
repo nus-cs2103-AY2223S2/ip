@@ -3,15 +3,6 @@ import java.util.Scanner;
 // A chatbot
 public class Duke {
 
-    private static final String EXIT_COMMAND = "bye";
-    private static final String DISPLAY_LIST_COMMAND = "list";
-    private static final String MARK_TASK_AS_DONE_COMMAND = "mark";
-    private static final String MARK_TASK_AS_UNDONE_COMMAND = "unmark";
-    private static final String TODO_COMMAND = "todo";
-    private static final String DEADLINE_COMMAND = "deadline";
-    private static final String EVENT_COMMAND = "event";
-    private static final String DELETE_COMMAND = "delete";
-
     private static Scanner scanner = new Scanner(System.in);
     private static TaskList taskList = new TaskList();
 
@@ -44,7 +35,7 @@ public class Duke {
     }
 
     private static boolean isExitCommand(String input) {
-        return input.equals(EXIT_COMMAND);
+        return input.equals(CommandType.EXIT.getCommand());
     }
 
     // Loop for user input
@@ -65,23 +56,13 @@ public class Duke {
         // Split into two parts at the first space
         String[] parts = input.split(" ", 2);
         String command = parts[0];
-        int taskNum;
-        String[] textAndDate;
+        CommandType commandType;
         try {
-            switch (command) {
-                case DISPLAY_LIST_COMMAND:
-                    executeCommandWithNoArgument(command);
-                    break;
-                case MARK_TASK_AS_DONE_COMMAND:
-                case MARK_TASK_AS_UNDONE_COMMAND:
-                case TODO_COMMAND:
-                case DEADLINE_COMMAND:
-                case EVENT_COMMAND:
-                case DELETE_COMMAND:
-                    executeCommandWithArgument(command, parts);
-                    break;
-                default:
-                    throw new InvalidCommandDukeException();
+            commandType = CommandType.getCommandType(command);
+            if (commandType.hasArguments()) {
+                executeCommandWithArgument(commandType, parts);
+            } else {
+                executeCommandWithNoArgument(commandType);
             }
         } catch (DukeException e) {
             printMessage(e.toString());
@@ -89,35 +70,35 @@ public class Duke {
 
     }
 
-    public static void executeCommandWithArgument(String command, String[] parts) throws DukeException {
+    public static void executeCommandWithArgument(CommandType command, String[] parts) throws DukeException {
         if (parts.length < 2) {
             throw new EmptyArgumentDukeException();
         }
         switch (command) {
-            case MARK_TASK_AS_DONE_COMMAND:
+            case MARK_TASK_AS_DONE:
                 markTaskAsDone(parts[1]);
                 break;
-            case MARK_TASK_AS_UNDONE_COMMAND:
+            case MARK_TASK_AS_UNDONE:
                 markTaskAsNotDone(parts[1]);
                 break;
-            case TODO_COMMAND:
+            case TODO:
                 addTodoToList(parts[1]);
                 break;
-            case DEADLINE_COMMAND:
+            case DEADLINE:
                 addDeadlineToList(parts[1]);
                 break;
-            case EVENT_COMMAND:
+            case EVENT:
                 addEventToList(parts[1]);
                 break;
-            case DELETE_COMMAND:
+            case DELETE:
                 deleteTask(parts[1]);
                 break;
         }
     }
 
-    public static void executeCommandWithNoArgument(String command) {
+    public static void executeCommandWithNoArgument(CommandType command) {
         switch (command) {
-            case DISPLAY_LIST_COMMAND:
+            case DISPLAY_LIST:
                 displayTasks();
                 break;
         }
