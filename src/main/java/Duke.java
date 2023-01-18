@@ -25,7 +25,7 @@ public class Duke {
 
     /**
      * Takes in a command and attempts to perform it, if valid.
-     * Accepted commands: [add], todo, deadline, mark, unmark, list, bye
+     * Accepted commands: [add], todo, deadline, event, mark, unmark, list, bye
      * [add] is invoked whenever any string that does not match other commands is entered.
      * @param   command a string containing the command entered by the user
      * @return          true if programme should continue accepting further commands, else false
@@ -50,6 +50,7 @@ public class Duke {
                 return true;
             case "todo":
             case "deadline":
+            case "event":
                 prettyPrint("Got it! I've added this task:");
                 if (args[0].equals("todo")) {
                     tasks.add(new ToDo(String.join(" ", Arrays.copyOfRange(args, 1, args.length))));
@@ -61,6 +62,16 @@ public class Duke {
                     tasks.add(new Deadline(
                             command.substring(9, byIndex).trim(),
                             command.substring(byIndex + 4, command.length()).trim()));
+                } else if (args[0].equals("event")) {
+                    // todo: check if BOTH '/from' and '/to' exists
+                    int fromIndex = command.indexOf("/from ");
+                    int toIndex = command.indexOf("/to ");
+
+                    // startIndex of command.substring() is 6 as "event " is 6 chars long
+                    tasks.add(new Event(
+                            command.substring(6, fromIndex).trim(),
+                            command.substring(fromIndex + 6, toIndex).trim(),
+                            command.substring(toIndex + 4, command.length()).trim()));
                 }
                 prettyPrint(tasks.get(tasks.size() - 1).toString());
                 prettyPrint(String.format("Now you have %d task%s in the list.",
