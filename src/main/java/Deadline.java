@@ -1,5 +1,11 @@
+/**
+ * This class represents a deadline Task that can be kept track of,
+ * having a deadline associated with the task.
+ *
+ * @version CS2103T AY22/23 Sem 2 Individual Project
+ * @author A0233828Y Eugene Tang
+ */
 public class Deadline extends Task {
-    private final String typeOfTask = "D";
     private String deadlineOfTask;
 
     /**
@@ -19,8 +25,9 @@ public class Deadline extends Task {
      */
     @Override
     public String getStatusOfTaskInString() {
+        String typeOfTask = "D";
         return (this.isDone)
-                ? "[" + typeOfTask + "][" + "[X] " + this.taskName + (" (by: ") + this.deadlineOfTask + ")"
-                : "[" + typeOfTask + "][" + "[] " + this.taskName + (" (by: ") + this.deadlineOfTask + ")";
+                ? "[" + typeOfTask + "][X] " + this.taskName + (" (by: ") + this.deadlineOfTask + ")"
+                : "[" + typeOfTask + "][ ] " + this.taskName + (" (by: ") + this.deadlineOfTask + ")";
     }
 }

@@ -1,5 +1,11 @@
+/**
+ * This class represents an Event Task that can be kept track of,
+ * starting and ending at a specific date/time.
+ *
+ * @version CS2103T AY22/23 Sem 2 Individual Project
+ * @author A0233828Y Eugene Tang
+ */
 public class Event extends Task {
-    private final String typeOfTask = "E";
     private String startDate;
     private String endDate;
 
@@ -21,10 +27,11 @@ public class Event extends Task {
      */
     @Override
     public String getStatusOfTaskInString() {
+        String typeOfTask = "E";
         return (this.isDone)
-                ? "[" + typeOfTask + "][" + "[X] " + this.taskName + (" (from: ") + this.startDate +
-                    " to: " + this.endDate + ")"
-                : "[" + typeOfTask + "][" + "[] " + this.taskName + (" (from: ") + this.startDate +
-                    " to: " + this.endDate + ")";
+                ? "[" + typeOfTask + "][X] " + this.taskName + (" (from: ") + this.startDate +
+                " to: " + this.endDate + ")"
+                : "[" + typeOfTask + "][ ] " + this.taskName + (" (from: ") + this.startDate +
+                " to: " + this.endDate + ")";
     }
 }

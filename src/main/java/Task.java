@@ -1,3 +1,9 @@
+/**
+ * This class represents a Task that can be kept track of.
+ *
+ * @version CS2103T AY22/23 Sem 2 Individual Project
+ * @author A0233828Y Eugene Tang
+ */
 public abstract class Task {
     protected String taskName;
     //Status of the task

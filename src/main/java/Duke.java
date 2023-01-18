@@ -1,5 +1,12 @@
 import java.io.*;
 import java.util.*;
+
+/**
+ * This class represents a chatbot that one can interact with to keep track of tasks.
+ *
+ * @version CS2103T AY22/23 Sem 2 Individual Project
+ * @author A0233828Y Eugene Tang
+ */
 public class Duke {
     private static final String logo = " |          ______    ______   \n"
                                      + " | ____    |      |  |      |  \n"
@@ -54,9 +61,36 @@ public class Duke {
                 int indexOfTask = Integer.parseInt(inputArray[1]) - 1;
                 markAsUndone(taskStorage.get(indexOfTask));
             }
-            //User did not type in "bye" or "list". Store the text as a task.
+            //User typed in "to-do"
+            else if (inputArray[0].equals("todo")) {
+                int indexOfType = input.indexOf("todo");
+                String taskName = input.substring(indexOfType + 5);
+                ToDo newToDoTask = new ToDo(taskName);
+                addTask(newToDoTask, taskStorage);
+            }
+            //User typed in "deadline"
+            else if (inputArray[0].equals("deadline")) {
+                int indexOfType = input.indexOf("deadline");
+                int indexOfBy = input.indexOf("/by");
+                String taskName = input.substring(indexOfType + 9, indexOfBy - 1);
+                String deadlineOfTask = input.substring(indexOfBy + 4);
+                Deadline newDeadlineTask = new Deadline(taskName, deadlineOfTask);
+                addTask(newDeadlineTask, taskStorage);
+            }
+            //User typed in "event"
+            else if (inputArray[0].equals("event")) {
+                int indexOfType = input.indexOf("event");
+                int indexOfFrom = input.indexOf("/from");
+                int indexOfTo = input.indexOf("/to");
+                String taskName = input.substring(indexOfType + 6, indexOfFrom - 1);
+                String startDate = input.substring(indexOfFrom + 6, indexOfTo - 1);
+                String endDate = input.substring(indexOfTo + 4);
+                Event newEventTask = new Event(taskName, startDate, endDate);
+                addTask(newEventTask, taskStorage);
+            }
+            //User did not type in a valid command
             else {
-                addTask(input, taskStorage);
+                printInvalidMessage();
             }
         }
 
@@ -94,6 +128,12 @@ public class Duke {
      */
     public static void printUserTasks(ArrayList<Task> taskStorage) {
         System.out.println(straightLine);
+        if (taskStorage.size() == 0) {
+            System.out.println("There are currently no tasks in your list.");
+            System.out.println(straightLine);
+            return;
+        }
+        System.out.println("Here are the tasks in your list: ");
         int numberOfTasks= taskStorage.size();
         //Process each task in the storage
         for (int i = 0; i < numberOfTasks; i = i + 1) {
@@ -106,14 +146,20 @@ public class Duke {
 
     /**
      * Adds user task into storage and informs the user.
-     * @param taskName The task to be added to storage.
+     * @param taskToAdd The task to be added to storage.
      * @param taskStorage The ArrayList that stores the tasks.
      */
-    public static void addTask(String taskName, ArrayList<Task> taskStorage) {
-        Task newTask = new Task(taskName);
-        taskStorage.add(newTask);
+    public static void addTask(Task taskToAdd, ArrayList<Task> taskStorage) {
+        taskStorage.add(taskToAdd);
         System.out.println(straightLine);
-        System.out.println("Added task: " + taskName);
+        System.out.println("Added task to list: ");
+        System.out.println(taskToAdd.getStatusOfTaskInString());
+        if (taskStorage.size() == 1) {
+            System.out.println("Currently, there is 1 task in your list.");
+        }
+        else {
+            System.out.println("Currently, there are " + Integer.toString(taskStorage.size()) + " tasks in your list.");
+        }
         System.out.println(straightLine);
     }
 
@@ -138,6 +184,15 @@ public class Duke {
         System.out.println(straightLine);
         System.out.println("Alright! The following task is now marked as undone. I will help you keep an eye on it.");
         System.out.println(currentTask.getStatusOfTaskInString());
+        System.out.println(straightLine);
+    }
+
+    /**
+     * Prints a message indicating to the user that the command is invalid.
+     */
+    public static void printInvalidMessage() {
+        System.out.println(straightLine);
+        System.out.println("Sorry. I do not understand this command. Try again.");
         System.out.println(straightLine);
     }
 }
