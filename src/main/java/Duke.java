@@ -14,7 +14,7 @@ public class Duke {
         Checker checker = new Checker();
         Scanner scan = new Scanner(System.in);
         String userInput = scan.nextLine();
-        ArrayList<String> lstOfItems = new ArrayList<>();
+        ArrayList<Task> lstOfItems = new ArrayList<>();
 
         while (!checker.checkEnd(userInput)) {
             if (checker.checkListRequest(userInput)) {
@@ -22,13 +22,13 @@ public class Duke {
                     System.out.println("Nothing here yet. Add your 1st item!");
                 } else {
                     for (int i = 0; i < lstOfItems.size(); i++) {
-                        System.out.print(String.valueOf(i + 1) + ". ");
+                        System.out.print(String.valueOf(i + 1) + ".");
                         System.out.println(lstOfItems.get(i));
                     }
                 }
             } else {
                 System.out.println("added: " + userInput);
-                lstOfItems.add(userInput);
+                lstOfItems.add(new Task(userInput));
             }
             userInput = scan.nextLine();
         }
