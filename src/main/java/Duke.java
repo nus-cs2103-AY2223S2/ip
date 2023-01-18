@@ -2,7 +2,12 @@ import java.util.Scanner;
 import java.util.ArrayList;
 
 public class Duke {
-    private static ArrayList<Task> list = new ArrayList<Task>();
+    enum TaskType {
+        TODO,
+        EVENT,
+        DEADLINE
+    }
+    private static final ArrayList<Task> list = new ArrayList<Task>();
 
     private static void displayList() {
         System.out.println("Here are the tasks in your list:");
@@ -11,9 +16,27 @@ public class Duke {
         }
     }
 
-    private static void addTask(String description) {
-        System.out.println("MEL added: " + description);
-        list.add(new Task(description));
+    private static void addTask(String description, TaskType taskType) {
+        System.out.println("Got it. I've added this task:");
+        switch (taskType) {
+            case TODO:
+                Todo todoTask = new Todo(description);
+                list.add(todoTask);
+                System.out.println(todoTask);
+                break;
+            case EVENT:
+                String modifiedDescription = description.split(" /from ")[1];
+                Event eventTask = new Event(description.split(" /from ")[0], modifiedDescription.split(" /to ")[0], modifiedDescription.split(" /to ")[1]);
+                list.add(eventTask);
+                System.out.println(eventTask);
+                break;
+            case DEADLINE:
+                Deadline deadlineTask = new Deadline(description.split(" /by ")[0], description.split(" /by ")[1]);
+                list.add(deadlineTask);
+                System.out.println(deadlineTask);
+                break;
+        }
+        System.out.println("Now you have " + list.size() + " tasks in the list.");
     }
 
     private static void mark(int itemNo) {
@@ -68,8 +91,17 @@ public class Duke {
                 case "unmark":
                     unmark(Integer.parseInt(userInput.split(" ")[1]) - 1);
                     break;
+                case "todo":
+                    addTask(userInput.split("todo ")[1], TaskType.TODO);
+                    break;
+                case "event":
+                    addTask(userInput.split("event ")[1], TaskType.EVENT);
+                    break;
+                case "deadline":
+                    addTask(userInput.split("deadline ")[1], TaskType.DEADLINE);
+                    break;
                 default:
-                    addTask(userInput);
+                    System.out.println("OOPS!!! I'm sorry, but I don't know what that means :-(");
                     break;
             }
         }
