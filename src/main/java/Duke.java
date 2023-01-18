@@ -8,6 +8,7 @@ public class Duke {
         System.out.println(intro());
         String s = askForInput();
         while(!s.equals("bye")) {
+            System.out.println("\n" + s + "\n");
             s = askForInput();
         }
         System.out.println("Good Riddance!");
