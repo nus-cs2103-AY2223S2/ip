@@ -78,6 +78,8 @@ public class Duke {
                 break;
             }
         }
+
+        scanner.close();
     }
 
     private static Command getCommand(String input) throws DukeException {
