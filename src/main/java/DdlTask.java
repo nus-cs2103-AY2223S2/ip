@@ -1,7 +1,8 @@
 public class DdlTask extends UserTask {
-    public final static String label = Util.parenthesize(Character.toUpperCase(Resource.cmdDdl.charAt(0)));
-    public final static String keyword = '/' + Resource.kwDdl + ' ';
-    public final static int kwLen = keyword.length();
+    public final static String label = getTaskTypeLabel(Resource.cmdDdl);
+    /**'Time' keyword formatted to be looked up in user input during parsing.*/
+    public final static String kwFmt = formatKeyword(Resource.kwDdl);
+    public final static int kwLen = kwFmt.length();
     public final String time;
 
     /**
@@ -16,9 +17,17 @@ public class DdlTask extends UserTask {
      * Factory method. Parses time and description.
      */
     public static DdlTask of(String args) {
-        final int kwIdx = args.indexOf(keyword);
+        final int kwIdx = args.indexOf(kwFmt);
         // If no key word in args, time is set to "N/A".
-        return kwIdx < 0 ? new DdlTask(args, "N/A") : new DdlTask(args.substring(0, kwIdx), args.substring(kwIdx + kwLen));
+        final String desc,time;
+        if(kwIdx < 0){
+            desc=args;
+            time=Util.noFound;
+        }else{
+            desc=args.substring(0, kwIdx).trim();
+            time=args.substring(kwIdx + kwLen).trim();
+        }
+        return new DdlTask(desc,time);
     }
 
     @Override

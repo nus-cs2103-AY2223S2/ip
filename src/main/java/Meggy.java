@@ -44,7 +44,8 @@ public class Meggy implements Runnable {
                 Resource.cmdMk, s -> markTaskStatus(s, true),
                 Resource.cmdUnmk, s -> markTaskStatus(s, false),
                 Resource.cmdTodo, s -> addTask(s, Util.todoNew),
-                Resource.cmdDdl, s -> addTask(s, Util.ddlNew)
+                Resource.cmdDdl, s -> addTask(s, Util.ddlNew),
+                Resource.cmdEvent, s -> addTask(s, Util.eventNew)
         );
         unknownCmdBehavior = null;
     }

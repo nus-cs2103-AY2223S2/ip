@@ -12,7 +12,7 @@ public final class Resource {
     public final static String cmdEvent = "event";
     public final static String kwDdl = "by";
     public final static String kwStt = "from";
-    public final static String kwEnd = "end";
+    public final static String kwEnd = "to";
     public final static String notifAdd = " Got it. I've added this task:\n";
     public final static String notifList = " Here are the tasks in your list:\n";
     public final static String notifMk = " Booyah! Marked this task as done:\n";

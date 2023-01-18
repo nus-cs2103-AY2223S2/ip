@@ -6,15 +6,23 @@ public class UserTask {
     public boolean status;
 
     /**
-     * @param args User's input line with command and whitespace after it removed
+     * @param desc Parsed string description of task.
      */
-    public UserTask(String args) {
-        desc = args;
+    public UserTask(String desc) {
+        this.desc = desc;
         status = false;
     }
 
     @Override
     public String toString() {
         return Resource.statusFmt(status) + ' ' + desc;
+    }
+
+    public static String getTaskTypeLabel(String taskType){
+        return Util.parenthesize(Character.toUpperCase(taskType.charAt(0)));
+    }
+
+    public static String formatKeyword(String keyword){
+        return '/'+keyword+' ';
     }
 }

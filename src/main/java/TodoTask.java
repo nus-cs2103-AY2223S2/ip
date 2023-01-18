@@ -2,10 +2,13 @@
  * Users task that has no time whatsoever
  */
 public class TodoTask extends UserTask {
-    public final static String label = Util.parenthesize(Character.toUpperCase(Resource.cmdTodo.charAt(0)));
+    public final static String label = getTaskTypeLabel(Resource.cmdTodo);
 
-    public TodoTask(String args) {
-        super(args);
+    /**
+     * @param desc Parsed string description of task.
+     */
+    public TodoTask(String desc) {
+        super(desc);
     }
 
     @Override
