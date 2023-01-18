@@ -5,9 +5,13 @@ public class ToDoList {
         this.toDoCount = 0;
     }
 
-    public void add(String task) {
+    public void add(Task task) {
+        String divider = "@~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~@\n";
         ++this.toDoCount;
-        arr[toDoCount] = new Task(task);
+        arr[toDoCount] = task;
+        System.out.println(divider + "The Duke has added the following task: \n"
+                + " - " + task + "\n"
+                + "You now have " + this.toDoCount + " task!\n"+ divider);
     }
 
     public void unmarkTask(int ind) {
@@ -17,7 +21,8 @@ public class ToDoList {
             return;
         }
         arr[ind].markNotDone();
-        System.out.println(divider + "The Duke has unmarked the following task: \n" + arr[ind] + "\n" + divider);
+        System.out.println(divider + "The Duke has unmarked the following task: \n"
+                + " - " + arr[ind] + "\n" + divider);
     }
 
     public void  markTask(int ind) {
@@ -27,7 +32,8 @@ public class ToDoList {
             return;
         }
         arr[ind].markDone();
-        System.out.println(divider + "The Duke has marked the following task: \n" + arr[ind] + "\n" + divider);
+        System.out.println(divider + "The Duke has marked the following task: \n"
+                + " - " + arr[ind] + "\n" + divider);
     }
 
     @Override
