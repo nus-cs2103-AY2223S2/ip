@@ -47,16 +47,12 @@ public class Shao {
         printRowLine();
     }
 
-    public static void printMarkedTask(Task task) {
+    public static void printMarkedTask(Task task, boolean isMark) {
+        String body = isMark
+                ? "Nice! I've marked this task as done:"
+                : "OK, I've marked this task as not done yet:";
         printRowLine();
-        println("Nice! I've marked this task as done:");
-        println(task.toString());
-        printRowLine();
-    }
-
-    public static void printUnmarkedTask(Task task) {
-        printRowLine();
-        println("OK, I've marked this task as not done yet:");
+        println(body);
         println(task.toString());
         printRowLine();
     }
@@ -65,7 +61,9 @@ public class Shao {
         printRowLine();
         println("Sure, I've removed this task:");
         println("  " + task.toString());
-        println(String.format("You have %d %s in your list currently.", tasksCnt, tasksCnt > 1 ? "tasks" : "task"));
+        println(String.format(
+                "You have %d %s in your list currently.",
+                tasksCnt, tasksCnt > 1 ? "tasks" : "task"));
         printRowLine();
     }
 
@@ -146,17 +144,16 @@ public class Shao {
             Task task = items.get(idx);
             if (isMark) {
                 task.markAsDone();
-                printMarkedTask(task);
+                printMarkedTask(task, true);
                 markSavedTask(idx, true);
                 return;
             }
             task.markAsUndone();
-            printUnmarkedTask(task);
+            printMarkedTask(task, false);
             markSavedTask(idx, false);
         } catch (IndexOutOfBoundsException ex) {
             printError(String.format("Oops! Please select item from 1 to %d inclusive.", items.size()));
         }
-
     }
 
     public static void markSavedTask(int idx, boolean isMark) {

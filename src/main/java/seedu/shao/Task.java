@@ -25,7 +25,7 @@ abstract public class Task {
 	}
 
 	public String dateTimeString(LocalDateTime dt) {
-		return dt.format(DateTimeFormatter.ofPattern("MMM d yyyy hh:mm a"));
+		return dt.format(DateTimeFormatter.ofPattern("MMM d yyyy h:mm a"));
 	}
 
 	public String formatSavedDateTime(LocalDateTime dt) {
