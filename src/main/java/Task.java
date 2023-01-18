@@ -18,4 +18,9 @@ public class Task {
     public String getStatus() {
         return isDone ? "X" : " ";
     }
+
+    @Override
+    public String toString() {
+        return "[" + getStatus() + "] " + this.taskName;
+    }
 }
