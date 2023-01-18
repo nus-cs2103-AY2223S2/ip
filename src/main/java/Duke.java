@@ -1,15 +1,14 @@
 import java.util.Scanner;
 import java.util.ArrayList;
 
-// Assume Duke is only a task manager.
 public class Duke {
     // Attribute
     static final String BORDER = "----------------------------------------";
-    private static ArrayList<Task> tasks = new ArrayList<>();
+    private ArrayList<Task> tasks = new ArrayList<>();
 
     // Methods
     // List out all tasks and their rank.
-    private static void list() {
+    private void list() {
         if (tasks.size() == 0) {
             System.out.println("No tasks left :)");
             return;
@@ -23,7 +22,7 @@ public class Duke {
     }
 
     // Mark task at index to be done
-    private static void markDone(int index) throws DukeException {
+    private void markDone(int index) throws DukeException {
         if (index < 0 || index >= tasks.size()) {
             throw new DukeException("OOPS!!! Invalid index");
         }
@@ -35,7 +34,7 @@ public class Duke {
     }
 
     // Mark task at index to be undone
-    private static void markUndone(int index) throws DukeException {
+    private void markUndone(int index) throws DukeException {
         if (index < 0 || index >= tasks.size()) {
             throw new DukeException("OOPS!!! Invalid index.");
         }
@@ -47,7 +46,7 @@ public class Duke {
     }
 
     // Delete task at index.
-    private static void delete(int index) throws DukeException {
+    private void delete(int index) throws DukeException {
         if (index < 0 || index >= tasks.size()) {
             throw new DukeException("OOPS!!! Invalid index.");
         }
@@ -57,7 +56,7 @@ public class Duke {
     }
 
     // Create and add task given message and code. 0 - toDos, 1 - Deadlines, 2 - Event
-    private static void addTask(String message, int code) throws DukeException {
+    private void addTask(String message, int code) throws DukeException {
         Task t;
         if (code == 0) {
             t = new ToDos(message);
@@ -74,6 +73,65 @@ public class Duke {
         System.out.println("Now you have " + tasks.size() + " tasks in this list\n" + BORDER);
     }
 
+    public void read(Scanner sc) {
+        String command = sc.next();
+        // Useful variables
+        int rank;
+        String message;
+
+        try {
+            switch (command) {
+                case "bye":
+                    System.out.println("Bye. Hope to see you again soon!");
+                    return;
+                case "list":
+                    list();
+                    break;
+                case "mark":
+                    try {
+                        rank = Integer.parseInt(sc.nextLine().trim());
+                    } catch (NumberFormatException e) {
+                        throw new DukeException("OOPS! mark must have an integer rank");
+                    }
+                    markDone(rank - 1);
+                    break;
+                case "unmark":
+                    try {
+                        rank = Integer.parseInt(sc.nextLine().trim());
+                    } catch (NumberFormatException e) {
+                        throw new DukeException("OOPS! unmark must have an integer rank");
+                    }
+                    markUndone(rank - 1);
+                    break;
+                case "todo":
+                    message = sc.nextLine().trim();
+                    addTask(message, 0);
+                    break;
+                case "deadline":
+                    message = sc.nextLine().trim();
+                    addTask(message, 1);
+                    break;
+                case "event":
+                    message = sc.nextLine().trim();
+                    addTask(message, 2);
+                    break;
+                case "delete":
+                    try {
+                        rank = Integer.parseInt(sc.nextLine().trim());
+                    } catch (NumberFormatException e) {
+                        throw new DukeException("OOPS! delete must have an integer rank");
+                    }
+                    delete(rank - 1);
+                    break;
+                default:
+                    System.out.println("OOPS!!! I'm sorry, but I don't know what that means :-(\n" + BORDER);
+                    sc.nextLine();
+            }
+        } catch (DukeException e) {
+            System.out.println(e.getMessage() + "\n" + BORDER);
+        }
+    }
+
     public static void main(String[] args) {
         String logo = " ____        _        \n"
                 + "|  _ \\ _   _| | _____ \n"
@@ -81,66 +139,12 @@ public class Duke {
                 + "| |_| | |_| |   <  __/\n"
                 + "|____/ \\__,_|_|\\_\\___|\n";
         System.out.println("Hello from\n" + logo + "What can I do for you?\n" + BORDER);
+
+        // Possibility of implementing Duke into other application. (not static)
+        Duke duke1 = new Duke();
         Scanner sc = new Scanner(System.in);
         while (sc.hasNext()) {
-            String command = sc.next();
-            // Useful variables
-            int rank;
-            String message;
-
-            try {
-                switch (command) {
-                    case "bye":
-                        System.out.println("Bye. Hope to see you again soon!");
-                        return;
-                    case "list":
-                        list();
-                        break;
-                    case "mark":
-                        try {
-                            rank = Integer.parseInt(sc.nextLine().trim());
-                        } catch (NumberFormatException e) {
-                            throw new DukeException("OOPS! mark must have an integer rank");
-                        }
-                        markDone(rank - 1);
-                        break;
-                    case "unmark":
-                        try {
-                            rank = Integer.parseInt(sc.nextLine().trim());
-                        } catch (NumberFormatException e) {
-                            throw new DukeException("OOPS! unmark must have an integer rank");
-                        }
-                        markUndone(rank - 1);
-                        break;
-                    case "todo":
-                        message = sc.nextLine().trim();
-                        addTask(message, 0);
-                        break;
-                    case "deadline":
-                        message = sc.nextLine().trim();
-                        addTask(message, 1);
-                        break;
-                    case "event":
-                        message = sc.nextLine().trim();
-                        addTask(message, 2);
-                        break;
-                    case "delete":
-                        try {
-                            rank = Integer.parseInt(sc.nextLine().trim());
-                        } catch (NumberFormatException e) {
-                            throw new DukeException("OOPS! delete must have an integer rank");
-                        }
-                        delete(rank - 1);
-                        break;
-                    default:
-                        System.out.println("OOPS!!! I'm sorry, but I don't know what that means :-(\n" + BORDER);
-                        sc.nextLine();
-                }
-            } catch (DukeException e) {
-                System.out.println(e.getMessage() + "\n" + BORDER);
-            }
-
+            duke1.read(sc);
         }
-
     }
 }
