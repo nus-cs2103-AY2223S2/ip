@@ -21,4 +21,8 @@ unmark something
 unmark 3
 unmark 75
 list
+delete
+delete something
+delete 1
+list
 bye
