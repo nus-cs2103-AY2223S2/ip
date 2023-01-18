@@ -71,6 +71,13 @@ public class Duke {
                         Event.processEvent(e, lst);
                         in = input.nextLine();
                         break;
+                    case "delete":
+                        if (single) {
+                            throw new DukeException(commands[0]);
+                        }
+                        lst.deleteTask(Integer.parseInt(commands[1]) - 1);
+                        in = input.nextLine();
+                        break;
                     default:
                         throw new DukeException("none");
                         //in = input.nextLine();

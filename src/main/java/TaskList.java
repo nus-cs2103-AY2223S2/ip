@@ -2,7 +2,6 @@ import java.util.*;
 
 public class TaskList {
     protected LinkedList<Task> lst;
-    protected static String line = "____________________________________________________________";
 
     public TaskList() {
         this.lst = new LinkedList<>();
@@ -11,10 +10,10 @@ public class TaskList {
     public void mark(int taskNum) {
         Task t = this.getTask(taskNum);
         t.markAsDone();
-        printLine();
+        Duke.printLine();
         System.out.println("Okay! I've marked this task as done:");
-        System.out.println(String.format(" %s", t));
-        printLine();
+        System.out.println(t);
+        Duke.printLine();
     }
 
     public void unmark(int taskNum) throws DukeException{
@@ -23,10 +22,23 @@ public class TaskList {
         }
         Task t = this.getTask(taskNum);
         t.markAsUndone();
-        printLine();
+        Duke.printLine();
         System.out.println("Okay! I've marked this task as not done yet:");
-        System.out.println(String.format(" %s", t));
-        printLine();
+        System.out.println(t);
+        Duke.printLine();
+    }
+
+    public void deleteTask(int taskNum) throws DukeException{
+        if (taskNum < 0 || taskNum > lst.size() - 1) {
+            throw new DukeException("bounds");
+        }
+        Task t = this.lst.remove(taskNum);
+        Duke.printLine();
+        System.out.println("Okay! I've removed this task from the list:");
+        System.out.println(t);
+        printSize();
+        Duke.printLine();
+
     }
 
     public void printList() {
@@ -52,10 +64,6 @@ public class TaskList {
     public void printSize() {
         System.out.println(String.format(
                 "Now you have %d tasks in the list!", this.getSize()));
-    }
-
-    public static void printLine(){
-        System.out.println(line);
     }
 
 }
