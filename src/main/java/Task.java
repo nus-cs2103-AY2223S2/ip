@@ -11,7 +11,13 @@ public class Task {
         return (isDone ? "X" : " "); // mark done task with X
     }
 
-    public String getDescription() {
-        return this.description;
+    /**
+     * This method prints the task status and description.
+     *
+     * @return  void
+     */
+    public void printTask() {
+        System.out.println("[" + this.getStatusIcon() + "] "
+                + this.description);
     }
 }

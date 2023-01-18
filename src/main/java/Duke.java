@@ -1,16 +1,16 @@
 import java.util.*;
 
 public class Duke {
-    public static Scanner sc = new Scanner(System.in);
-    public static String horizontalLine = "________________________________\n";
-    public static ArrayList<Task> taskList = new ArrayList<Task>();
+    private static Scanner sc = new Scanner(System.in);
+    private static String horizontalLine = "________________________________\n";
+    private static ArrayList<Task> taskList = new ArrayList<Task>();
 
     public static void main(String[] args) {
         greeting();
         printMenu();
     }
 
-    public static void greeting() {
+    private static void greeting() {
         String logo = "  _____     _       _  __  U _____ u      ____     _   _    _  __  U _____ u \n"
                 + " |\" ___|U  /\"\\  u  |\"|/ /  \\| ___\"|/     |  _\"\\ U |\"|u| |  |\"|/ /  \\| ___\"|/ \n"
                 + "U| |_  u \\/ _ \\/   | ' /    |  _|\"      /| | | | \\| |\\| |  | ' /    |  _|\"   \n"
@@ -26,20 +26,30 @@ public class Duke {
     }
 
     /**
-     * This method prints a menu that consists of:
+     * This method prints a menu that consists of these features:
      * - "list": Displays the list of text entered by user
+     * - "mark": Marks a task as done
+     * - "unmark": Unmarks a task as undone
      * - "bye": Exits program
-     * - Enters any text: Text is stored in an array
+     * - Enters any other String as first word: Treat as a task and stored in an array
      *
      * @return  void
      */
-    public static void printMenu() {
+    private static void printMenu() {
         boolean exitStatus = false;
         while(true) {
             String input = sc.nextLine();
-            switch(input) {
+            String[] splitInput = input.split(" ");
+            String action = splitInput[0];
+            switch(action) {
                 case "list":
                     list();
+                    break;
+                case "mark":
+                    mark(splitInput[1]);
+                    break;
+                case "unmark":
+                    unmark(splitInput[1]);
                     break;
                 case "bye":
                     exit();
@@ -55,15 +65,50 @@ public class Duke {
     }
 
     /**
-     * This displays the list of text entered by user.
+     * This displays the list of tasks.
      *
      * @return  void
      */
-    public static void list() {
-        System.out.println(horizontalLine);
+    private static void list() {
+        System.out.println(horizontalLine
+                + "Here are the tasks in your list:");
         for (int i = 1; i <= taskList.size(); i++) {
-            System.out.println(i + ". " + taskList.get(i - 1).getDescription());
+            System.out.print(i + ".");
+            taskList.get(i - 1).printTask();
         }
+        System.out.println(horizontalLine);
+    }
+
+
+    /**
+     * This method marks task as done.
+     *
+     * @param   strIdx  Index of task
+     * @return  void
+     */
+    private static void mark(String strIdx) {
+        System.out.println(horizontalLine
+                + "Nice! I've marked this task as done:");
+        int idx = Integer.parseInt(strIdx);
+        Task task = taskList.get(idx - 1);
+        task.isDone = true;
+        task.printTask();
+        System.out.println(horizontalLine);
+    }
+
+    /**
+     * This method unmarks task as undone.
+     *
+     * @param   strIdx  Index of task
+     * @return  void
+     */
+    private static void unmark(String strIdx) {
+        System.out.println(horizontalLine
+                + "OK, I've marked this task as not done yet:");
+        int idx = Integer.parseInt(strIdx);
+        Task task = taskList.get(idx - 1);
+        task.isDone = false;
+        task.printTask();
         System.out.println(horizontalLine);
     }
 
@@ -74,11 +119,11 @@ public class Duke {
      * @param   input   task entered by the user in String
      * @return  void
      */
-    public static void add(String input) {
+    private static void add(String input) {
         Task task = new Task(input);
         taskList.add(task);
         System.out.println(horizontalLine
-                + "added: " + task.getDescription() + "\n"
+                + "added: " + input + "\n"
                 + horizontalLine);
     }
 
@@ -87,7 +132,7 @@ public class Duke {
      *
      * @return  void
      */
-    public static void exit() {
+    private static void exit() {
         System.out.println(horizontalLine
                 + "Hope I have been useful to you.\n"
                 + "See you again soon. Bye!~\n"
