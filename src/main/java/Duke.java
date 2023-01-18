@@ -21,19 +21,22 @@ public class Duke {
 
                 switch (command) {
                     case "list":
-                        listItem();
+                        listTasks();
                         break;
                     case "unmark":
-                        unmarkItem(input);
+                        unmarkTask(input);
                         break;
                     case "mark":
-                        markItem(input);
+                        markTask(input);
                         break;
                     case "todo":
                     case "deadline":
                     case "event":
                         Task task = processTaskInput(input);
-                        storeItem(task);
+                        storeTask(task);
+                        break;
+                    case "delete":
+                        deleteTask(input);
                         break;
                     default:
                         throw new DukeException("☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
@@ -63,7 +66,7 @@ public class Duke {
         return userInput;
     }
 
-    public static void listItem() {
+    public static void listTasks() {
         int size = taskStorage.size();
         
         System.out.println("Here are the tasks in your list:");
@@ -73,7 +76,7 @@ public class Duke {
         System.out.println();
     }
 
-    public static void markItem(String item) throws MarkIndexDoesNotExistException {
+    public static void markTask(String item) throws MarkIndexDoesNotExistException {
         if (item.split(" ").length == 1)
             throw new  MarkIndexDoesNotExistException("☹ OOPS!!! missing mark index");
         item = item.split(" ")[1];
@@ -86,7 +89,7 @@ public class Duke {
         System.out.println(String.format("Nice! I've marked this task as done:\n%s\n", task));
     }
 
-    public static void unmarkItem(String item) throws UnmarkIndexDoesNotExistException {
+    public static void unmarkTask(String item) throws UnmarkIndexDoesNotExistException {
         if (item.split(" ").length == 1)
             throw new  UnmarkIndexDoesNotExistException("☹ OOPS!!! missing unmark index");
         item = item.split(" ")[1];
@@ -120,7 +123,7 @@ public class Duke {
         return task;
     }
 
-    public static void storeItem(Task task) {
+    public static void storeTask(Task task) {
         taskStorage.add(task);
     
         System.out.println("Got it. I've added this task:");
@@ -175,6 +178,22 @@ public class Duke {
         String to = timing[1].strip();
 
         return new Event(description, from, to);
+    }
+
+    public static void deleteTask(String item) throws DukeException{
+        if (item.split(" ").length == 1)
+            throw new DukeException("☹ OOPS!!! you are missing the item to delete");
+
+        item = item.split(" ")[1];
+        int index = Integer.parseInt(item) - 1;
+
+        if (index >= taskStorage.size())
+            throw new DukeException("☹ OOPS!!! delete index does not exist");
+
+        Task task = taskStorage.remove(index);
+        System.out.println("Noted. I've removed this task:");
+        System.out.println(task);
+        System.out.println("Now you have " + taskStorage.size() + " tasks in the list.\n");
     }
 
     private static String getTaskInfo(String[] inputSplit) {
