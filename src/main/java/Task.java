@@ -4,7 +4,7 @@
  * @author Chia Jeremy
  */
 
-public class Task {
+public abstract class Task {
 
     protected String description;
     protected boolean isDone;
@@ -18,7 +18,7 @@ public class Task {
         this.isDone = true;
     }
 
-    public void unmarkedDone() {
+    public void unmarkDone() {
         this.isDone = false;
     }
 

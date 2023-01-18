@@ -28,11 +28,13 @@ public class Feedback {
         display("Bye. Hope to see you again soon!");
     }
 
-    public void addTask(String msg) {
-        display("added: " + msg);
+    public void addedTask(int index, Task task) {
+        display("Got it. I've added this task:\n"
+                + task.toString() + "\n"
+                + "Now you have " + index + " tasks in the list.");
     }
 
-    public void markTask(Task task) {
+    public void markedTask(Task task) {
         display("Nice! I've marked this task as done:\n" + task.toString());
     }
 
@@ -42,6 +44,7 @@ public class Feedback {
 
     public void listTask(ArrayList<Task> tasks) {
         StringBuilder sb = new StringBuilder();
+        sb.append("Here are the tasks in your list:\n");
         for (int i = 0; i < tasks.size(); i++) {
             String s = (i + 1) + ". " + tasks.get(i) + "\n";
             sb.append(s);
