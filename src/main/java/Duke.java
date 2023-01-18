@@ -48,6 +48,12 @@ public class Duke {
         System.out.println("OK, I've marked this task as not done yet:\n" + list.get(itemNo).toString());
     }
 
+    private static void delete(int itemNo) {
+        System.out.println("Noted. I've removed this task:\n" + list.get(itemNo).toString());
+        list.remove(itemNo);
+        System.out.println("Now you have " + list.size() + " tasks in the list.");
+    }
+
 
     public static void main(String[] args) {
         String logo
@@ -99,6 +105,9 @@ public class Duke {
                         break;
                     case "deadline":
                         addTask(userInput.split("deadline ")[1], TaskType.DEADLINE);
+                        break;
+                    case "delete":
+                        delete(Integer.parseInt(userInput.split(" ")[1]) - 1);
                         break;
                     default:
                         throw new DukeException("I'm sorry, but I don't know what that means");

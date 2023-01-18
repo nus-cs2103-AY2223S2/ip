@@ -24,11 +24,10 @@ Now you have 1 tasks in the list.
 Now you have 2 tasks in the list.
 > Nice! I've marked this task as done:
 [T][X] read book
-> Nice! I've marked this task as done:
-[D][X] return book (by: Sunday)
+> MEL: Invalid format of input, please try again!
 > Here are the tasks in your list:
 1.[T][X] read book
-2.[D][X] return book (by: Sunday)
+2.[D][ ] return book (by: Sunday)
 > Got it. I've added this task:
 [E][ ] cs2103 project meeting (from: Mon 3pm to: 4pm)
 Now you have 3 tasks in the list.
@@ -36,4 +35,14 @@ Now you have 3 tasks in the list.
 > MEL: Invalid format of input, please try again!
 > MEL: Invalid format of input, please try again!
 > MEL: Invalid integer, please try again!
+> Here are the tasks in your list:
+1.[T][X] read book
+2.[D][ ] return book (by: Sunday)
+3.[E][ ] cs2103 project meeting (from: Mon 3pm to: 4pm)
+> Noted. I've removed this task:
+[T][X] read book
+Now you have 2 tasks in the list.
+> Here are the tasks in your list:
+1.[D][ ] return book (by: Sunday)
+2.[E][ ] cs2103 project meeting (from: Mon 3pm to: 4pm)
 > MEL: Bye. Hope to see you again soon!
