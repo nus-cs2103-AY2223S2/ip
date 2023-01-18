@@ -1,3 +1,7 @@
+package dude.storage;
+
+import dude.*;
+
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileWriter;
@@ -7,8 +11,15 @@ import java.util.Scanner;
 
 public class Storage {
 
-    private static void checkFile() {
-        File f = new File("data/dude.txt");
+    private String filePath;
+
+    public Storage(String filePath) {
+        this.filePath = filePath;
+        checkFile(filePath);
+    }
+
+    private void checkFile(String filePath) {
+        File f = new File(filePath);
         if (!f.exists()) {
             try {
                 File d = new File("data");
@@ -22,23 +33,20 @@ public class Storage {
         }
     }
 
-    public static void saveData(ArrayList<Task> taskList) {
-        checkFile();
+    public void saveData(TaskList tasks) {
         try {
-            FileWriter fw = new FileWriter("data/dude.txt");
-            for (Task task : taskList) {
-                String raw = task.toRaw();
-                fw.write(raw);
-            }
+            FileWriter fw = new FileWriter(filePath);
+            String rawData = tasks.toRaw();
+            fw.write(rawData);
             fw.close();
         } catch (IOException e) {
             System.out.println(e.getMessage());
         }
     }
 
-    public static ArrayList<Task> loadData() throws FileNotFoundException {
+    public ArrayList<Task> loadData() throws FileNotFoundException {
         ArrayList<Task> taskList = new ArrayList<>();
-        File f = new File("data/dude.txt");
+        File f = new File(filePath);
         if (f.exists()) {
             Scanner sc = new Scanner(f);
             while (sc.hasNext()) {

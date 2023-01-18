@@ -1,7 +1,9 @@
+package dude;
+
 public abstract class Task {
     protected String description;
     protected boolean isDone;
-    protected static int count;
+    public static int count;
 
     public Task(String description) {
         this.description = description;
