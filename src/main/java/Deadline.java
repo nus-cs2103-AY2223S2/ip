@@ -8,7 +8,7 @@ public class Deadline extends Task {
 
     @Override
     public String toString() {
-        String deadlineString = " (by:" + this.deadline + ")";
+        String deadlineString = " (by: " + this.deadline + ")";
         return "[D]" + super.toString() + deadlineString;
     }
 }

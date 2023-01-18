@@ -1,14 +1,10 @@
-public class Task {
+public abstract class Task {
     private String taskDescription;
-    private int taskId;
     private boolean isDone;
-    private static int numberOfTasks = 0;
 
     public Task(String taskDescription) {
         this.taskDescription = taskDescription;
-        this.taskId = numberOfTasks + 1;
         this.isDone = false;
-        numberOfTasks++;
     }
 
     public String getTaskStatus() {

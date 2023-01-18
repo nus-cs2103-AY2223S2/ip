@@ -10,7 +10,7 @@ public class Event extends Task {
 
     @Override
     public String toString() {
-        String eventString = "(from: " + startTime + " to: " + endTime + ")";
+        String eventString = " (from: " + startTime + " to: " + endTime + ")";
         return "[E]" + super.toString() + eventString;
     }
 }

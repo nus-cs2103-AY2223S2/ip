@@ -2,6 +2,10 @@ import java.util.ArrayList;
 import java.util.Scanner;
 
 public class TwoFive {
+    public static String taskAdded(Task task, int numTasks) {
+        return "Got it. I've added this task:\n " + task + "\nNow you have " + numTasks + " tasks in the list";
+    }
+
     public static void main(String[] args) {
         ArrayList<Task> tasks = new ArrayList<>();
 
@@ -62,12 +66,30 @@ public class TwoFive {
                     System.out.println("Oops, this task is already done:");
                 }
                 System.out.println(currentTask);
-            } else {
-                //Adds a new task for any other input
-                Task newTask = new Task(input);
+            } else if (input.contains("todo")){
+                //Adds a new ToDo task
+                String taskDescription = input.split("todo")[1].trim();
+                ToDo newToDo = new ToDo(taskDescription);
                 //Adds new task to list of tasks
-                tasks.add(newTask);
-                System.out.println("added: " + input);
+                tasks.add(newToDo);
+                System.out.println(taskAdded(newToDo, tasks.size()));
+            } else if (input.contains("deadline")){
+                //Adds a new Deadline task
+                String taskDescription = input.split("deadline")[1].split("/by")[0].trim();
+                String deadline = input.split("/by")[1].trim();
+                Deadline newDeadline = new Deadline(taskDescription, deadline);
+                //Adds new task to list of tasks
+                tasks.add(newDeadline);
+                System.out.println(taskAdded(newDeadline, tasks.size()));
+            } else if (input.contains("event")){
+                //Adds a new Event task
+                String taskDescription = input.split("event")[1].split("/from")[0].trim();
+                String startTime = input.split("/from")[1].split("/to")[0].trim();
+                String endTime = input.split("/to")[1].trim();
+                Event newEvent = new Event(taskDescription, startTime, endTime);
+                //Adds new task to list of tasks
+                tasks.add(newEvent);
+                System.out.println(taskAdded(newEvent, tasks.size()));
             }
 
             System.out.println(divider);
