@@ -1,10 +1,10 @@
-package item;
+package task;
 
 /**
  * ToDo class for Babe's list.
  * Extends abstract class Item.
  */
-public class ToDo extends Item {
+public class ToDo extends Task {
 
     /**
      * Constructor for ToDos
@@ -19,7 +19,7 @@ public class ToDo extends Item {
      * Prints a ToDo item in its specified format.
      */
     public String toString() {
-        return (this.isDone ? this.MARKED : this.UNMARKED) + " " + this.content;
+        return (this.isDone ? this.MARKED : this.UNMARKED) + " " + this.description;
     }
 
 }

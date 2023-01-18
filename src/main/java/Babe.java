@@ -2,10 +2,10 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Scanner;
 
-import item.Deadline;
-import item.Event;
-import item.Item;
-import item.ToDo;
+import task.Deadline;
+import task.Event;
+import task.Task;
+import task.ToDo;
 
 /**
  * <h1> Hi Babe! </h1>
@@ -30,12 +30,12 @@ public class Babe {
     private int userInputLen = 0;
 
     /**
-     * List of Items Babe received from the user.
+     * List of Tasks Babe received from the user.
      */
-    private Item[] memory = new Item[100];
+    private Task[] memory = new Task[100];
 
     /**
-     * Number of Items currently stored in this Babe.
+     * Number of Tasks currently stored in this Babe.
      */
     private int memoryCount = 0;
 
@@ -105,7 +105,7 @@ public class Babe {
     /**
      * Adds a ToDo to memory.
      * Calls the ToDo constructor and inserts created ToDo into this Babe's memory.
-     * @param content The content of the ToDo item.
+     * @param content The description of the ToDo item.
      */
     private void addToDo(String content) {
         ToDo item = new ToDo(content);
@@ -151,7 +151,7 @@ public class Babe {
     }
 
     /**
-     * Prints list of Items stored in this Babe.
+     * Prints list of Tasks stored in this Babe.
      * Prints a numbered list of Items stored in memory.
      */
     private void printList() {
@@ -185,7 +185,7 @@ public class Babe {
     private void changeStatus(boolean toMark) {
         String userInputString = rebuildUserInput(1, userInputLen);
         int index = Integer.parseInt(userInputString);
-        Item itemAtIndex = memory[index - 1];
+        Task itemAtIndex = memory[index - 1];
         if (toMark) {
             itemAtIndex.mark();
         } else {

@@ -1,14 +1,15 @@
-package item;
+package task;
 
-public class Deadline extends Item {
+public class Deadline extends Task {
 
     /** A date/time for this Deadline */
     private String deadline = "";
 
     /**
      * Constructor for Deadline item.
-     * @param content
-     * @param deadline
+     *
+     * @param content Description of this Deadline.
+     * @param deadline Date for the deadline of this item.
      */
     public Deadline(String content, String deadline) {
         super(content);
@@ -17,7 +18,7 @@ public class Deadline extends Item {
 
     @Override
     public String toString() {
-        return (this.isDone ? this.MARKED : this.UNMARKED) + " " + this.content
+        return (this.isDone ? this.MARKED : this.UNMARKED) + " " + this.description
                 + " (by: " + this.deadline + ")";
     }
 }

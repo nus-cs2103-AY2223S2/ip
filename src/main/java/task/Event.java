@@ -1,6 +1,6 @@
-package item;
+package task;
 
-public class Event extends Item {
+public class Event extends Task {
 
     /** The start date/time for this Event. */
     private String fromDate = "";
@@ -10,7 +10,8 @@ public class Event extends Item {
 
     /**
      * Constructor for Event object.
-     * @param content Content of this Event.
+     *
+     * @param content Description of this Event.
      * @param fromDate The start date/time for this Event.
      * @param toDate The end date/time for this Event.
      */
@@ -22,7 +23,7 @@ public class Event extends Item {
 
     @Override
     public String toString() {
-        return (this.isDone ? this.MARKED : this.UNMARKED) + " " + this.content
+        return (this.isDone ? this.MARKED : this.UNMARKED) + " " + this.description
                 + " (from: " + this.fromDate + ", to: " + this.toDate + ")";
     }
 }

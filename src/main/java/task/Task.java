@@ -1,9 +1,9 @@
-package item;
+package task;
 
 /**
  * Interface for list items in Babe,
  */
-public abstract class Item {
+public abstract class Task {
     /**
      * String icon for marked.
      */
@@ -15,28 +15,28 @@ public abstract class Item {
     static String UNMARKED = "[ ]";
 
     /**
-     * Done status for this list item.
+     * Done status for this Task.
      */
     boolean isDone = false;
 
     /**
      * Contents of this item.
      */
-    String content = "";
+    String description = "";
 
     /**
-     * Constructor for Items
+     * Constructor for Tasks
      *
-     * @param content A String that is the content of this item.
+     * @param content A String that is the description of this item.
      */
-    public Item( String content ) {
-        this.content = content;
+    public Task(String content) {
+        this.description = content;
     }
 
     @Override
     /**
      * Prints the item with its corresponding format.
-     * Each subclass of Item will have a designated String format.
+     * Each subclass of Task has a designated String format.
      */
     public abstract String toString();
 
