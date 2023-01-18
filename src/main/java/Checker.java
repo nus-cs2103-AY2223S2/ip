@@ -14,4 +14,13 @@ public class Checker {
             return false;
         }
     }
+
+    public boolean checkMarkRequest(String userInput) {
+        String[] terms = userInput.split(" ");
+        if (terms[0].equals("mark") && terms.length == 2) {
+            return true;
+        } else {
+            return false;
+        }
+    }
 }

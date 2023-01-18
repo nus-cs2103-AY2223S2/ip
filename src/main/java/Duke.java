@@ -26,6 +26,10 @@ public class Duke {
                         System.out.println(lstOfItems.get(i));
                     }
                 }
+            } else if (checker.checkMarkRequest(userInput)) {
+                String[] terms = userInput.split(" ");
+                int itemNo = Integer.parseInt(terms[1]) - 1;
+                lstOfItems.get(itemNo).makeCompleted();
             } else {
                 System.out.println("added: " + userInput);
                 lstOfItems.add(new Task(userInput));
