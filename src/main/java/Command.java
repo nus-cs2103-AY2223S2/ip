@@ -6,6 +6,7 @@ import task.ToDoTask;
 
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Objects;
 import java.util.Scanner;
 
 public class Command {
@@ -54,7 +55,7 @@ public class Command {
 
     public Command(Scanner scanner) throws InvalidActionException {
         this.action = Action.fromString(scanner.hasNext() ? scanner.next() : null);
-        this.body = scanner.skip("\\s*").findInLine("[^/]*").trim();
+        this.body = Objects.toString(scanner.skip("\\s*").findInLine("[^/]*"), "").trim();
         this.subCommands = new LinkedList<>();
 
         scanner.skip("[^/]*").useDelimiter("\\s*/\\s*");
