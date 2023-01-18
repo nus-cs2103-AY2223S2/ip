@@ -32,11 +32,20 @@ public class Duke {
                 return true;
 
             case "todo":
+                // Validation of input
+                if (cmd.split(" ").length <= 1) {
+                    throw new DukeException("You did not specify any details...");
+                }
                 String description = cmd.substring(5);
+
                 createTask(new TodoTask(description));
                 break;
 
             case "deadline":
+                // Validation of input
+                if (cmd.split(" ").length <= 1) {
+                    throw new DukeException("You did not specify any details...");
+                }
                 String deadlineArgs = cmd.substring(9);
 
                 // Validation of input
@@ -50,6 +59,10 @@ public class Duke {
                 break;
 
             case "event":
+                // Validation of input
+                if (cmd.split(" ").length <= 1) {
+                    throw new DukeException("You did not specify any details...");
+                }
                 String eventArgs = cmd.substring(6);
 
                 // Validation of input
