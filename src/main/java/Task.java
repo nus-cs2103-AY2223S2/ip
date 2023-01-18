@@ -18,9 +18,9 @@ public class Task {
         this.isDone = status;
     }
 
-    public int getTaskNum() {
-        return this.taskNum;
-    }
+//    public int getTaskNum() {
+//        return this.taskNum;
+//    }
 
 //    public int getNumberOfTasks() {
 //        return this.counter;
@@ -28,7 +28,7 @@ public class Task {
 
     @Override
     public String toString() {
-        return this.taskNum + ".[" + this.isDone + "] " + this.description;
+        return this.taskNum + ".[" + this.getStatusIcon() + "] " + this.description;
     }
 
     //...
