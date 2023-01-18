@@ -14,16 +14,43 @@ public class StorageList {
 
     public void markTask(int taskno) {
         list.get(taskno).markAsDone();
+        System.out.println(list.get(taskno));
     }
 
     public void unmarkTask(int taskno) {
         list.get(taskno).markAsUndone();
+        System.out.println(list.get(taskno));
     }
 
     public void printList() {
         System.out.println("Here are the tasks in your list: ");
         for (int x = 0; x < list.size(); x++) {
-            System.out.println((x + 1) + "." + " [" + list.get(x).getStatusIcon() + "]" + " " + list.get(x));
+            System.out.println((x + 1) + "." + list.get(x));
         }
+    }
+
+    public void addTodo(String sentence) {
+        Todo t = new Todo(sentence);
+        list.add(t);
+        System.out.println("Got it, I've added this task:\n");
+        System.out.println(t);
+    }
+
+    public void addDeadline(String sentence, String by) {
+        Deadline t = new Deadline(sentence, by);
+        list.add(t);
+        System.out.println("Got it, I've added this task:\n");
+        System.out.println(t);
+    }
+
+    public void addEvent(String sentence, String from, String to) {
+        Event t = new Event(sentence, from, to);
+        list.add(t);
+        System.out.println("Got it, I've added this task:\n");
+        System.out.println(t);
+    }
+
+    public int lengthOflist() {
+        return list.size();
     }
 }
