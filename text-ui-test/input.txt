@@ -6,6 +6,9 @@ list
 mark 1
 mark 2
 mark 3
+blah
 unmark 3
+delete 1
+delete 2
 list
 bye
