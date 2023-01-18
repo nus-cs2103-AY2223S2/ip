@@ -1,3 +1,6 @@
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+
 public class Task {
     private final String name;
     private boolean isCompleted;
@@ -21,6 +24,14 @@ public class Task {
 
     public void unmark() {
         this.isCompleted = false;
+    }
+
+    public String dateFormat(LocalDateTime date) {
+        return date.format(DateTimeFormatter.ofPattern("MMM d yyyy HHmm"));
+    }
+
+    public boolean isWithinDate(LocalDateTime date) {
+        return false;
     }
 
     @Override

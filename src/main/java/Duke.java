@@ -1,3 +1,6 @@
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
 import java.util.Scanner;
 import java.io.*;
@@ -8,7 +11,7 @@ public class Duke {
     private final ArrayList<Task> taskList = new ArrayList<>(100);
     private final String path;
     private enum Command {
-        BYE, LIST, MARK, UNMARK, TODO, DEADLINE, EVENT, DELETE
+        BYE, LIST, MARK, UNMARK, TODO, DEADLINE, EVENT, DELETE, THROUGH
     }
 
     public Duke(String path) {
@@ -145,6 +148,20 @@ public class Duke {
         System.out.println(Duke.LINE);
     }
 
+    public void through(String input) {
+        LocalDateTime date = LocalDateTime.parse(input);
+        int i = 1;
+        System.out.println(Duke.LINE + "Here are the tasks occurring through "
+                + date.format(DateTimeFormatter.ofPattern("MMM d yyyy HHmm")) + ":");
+        for (Task t : this.taskList) {
+            if (t.isWithinDate(date)) {
+                System.out.println(i + "." + t);
+                i++;
+            }
+        }
+        System.out.println(Duke.LINE);
+    }
+
     public void start(Scanner sc) {
         this.greet();
 
@@ -206,10 +223,20 @@ public class Duke {
                         this.delete(input[1]);
                         break;
 
+                    case THROUGH:
+                        if (input.length < 2) {
+                            throw new EmptyDescriptionException();
+                        }
+                        this.through(input[1]);
+                        break;
+
                 }
             }
             catch (IllegalArgumentException e) {
                 System.out.println(Duke.LINE + "Command not recognised. Please input a valid command");
+                System.out.println(Duke.LINE);
+            } catch (DateTimeParseException e) {
+                System.out.println(Duke.LINE + "Key in date and time in this format. yyyy-mm-ddThh:mm");
                 System.out.println(Duke.LINE);
             }
             catch (Exception e) {

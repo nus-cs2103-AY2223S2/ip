@@ -1,18 +1,25 @@
+import java.time.LocalDateTime;
+
 public class Events extends Task {
-    private String start;
-    private String end;
+    private LocalDateTime start;
+    private LocalDateTime end;
 
     public Events (String name, String start, String end) {
         super(name);
-        this.start = start;
-        this.end = end;
+        this.start = LocalDateTime.parse(start);
+        this.end = LocalDateTime.parse(end);
+    }
+
+    @Override
+    public boolean isWithinDate(LocalDateTime date) {
+        return date.isBefore(end) && date.isAfter(start);
     }
 
     @Override
     public String toString() {
         return "[E]" + super.toString()
-                + " (from: "  + this.start
-                + " to: " + this.end + ")";
+                + " (from: "  + dateFormat(this.start)
+                + " to: " + dateFormat(this.end) + ")";
     }
 
     @Override
