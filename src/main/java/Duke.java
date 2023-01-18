@@ -38,17 +38,34 @@ public class Duke {
             } else if (command[0].equals("mark")) {
                 taskPointer = Integer.parseInt(command[1]) - 1;
                 storedTask[taskPointer].markAsDone();
-                System.out.println("Congrats bro you've done something with your life\n");
-                System.out.println(storedTask[taskPointer].toString());
             } else if (command[0].equals("unmark")) {
                 taskPointer = Integer.parseInt(command[1]) - 1;
                 storedTask[taskPointer].undoTask();
-                System.out.println("Stop being useless why u ask me to unmark\n");
-                System.out.println(storedTask[taskPointer].toString());
-            } else {
-                storedTask[taskCounter] = new Task(input);
+            } else if (command[0].equals("todo")) {
+                storedTask[taskCounter] = new Todo(input);
                 taskCounter++;
-                System.out.println(input);
+                System.out.println("Gotchu fam");
+                System.out.println("I've added " + storedTask[taskCounter-1].toString() +
+                        " to all the shit u need todo");
+                System.out.printf("shag bro now u got %d tasks\n", taskCounter);
+            } else if (command[0].equals("deadline")) {
+                String[] newInput = input.split("/");
+                storedTask[taskCounter] = new Deadline(newInput[0], newInput[1]);
+                taskCounter++;
+                System.out.println("Gotchu fam");
+                System.out.println("I've added " + storedTask[taskCounter-1].toString() +
+                        " to all the shit u need todo");
+                System.out.printf("shag bro now u got %d tasks\n", taskCounter);
+            } else if (command[0].equals("event")) {
+                String[] newInput = input.split("/");
+                storedTask[taskCounter] = new Event(newInput[0], newInput[1], newInput[2]);
+                taskCounter++;
+                System.out.println("Gotchu fam");
+                System.out.println("I've added " + storedTask[taskCounter-1].toString() +
+                        " to all the shit u need todo");
+                System.out.printf("shag bro now u got %d tasks\n", taskCounter);
+            } else {
+                System.out.println("Invalid command wake up brother");
             }
         }
 
