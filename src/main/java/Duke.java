@@ -1,4 +1,7 @@
+import tasks.Deadline;
+import tasks.Event;
 import tasks.Tasks;
+import tasks.ToDo;
 import java.util.Scanner;
 
 public class Duke {
@@ -52,11 +55,19 @@ public class Duke {
                 int taskIndex = Integer.parseInt(inputWords[1]);
                 echo("OK, I've marked this task as not done yet:",
                         "  " + tasks.unmarkTask(taskIndex));
-            }
-
-            else {
-                tasks.addTasks(input);
+            } else if (command.equals("todo")) {
+                String description = inputWords[1];
+                tasks.addTask(new ToDo(description));
                 echo("added: " + input);
+            } else if (command.equals("deadline")) {
+                String description = inputWords[1];
+                String by = inputWords[2];
+                tasks.addTask(new Deadline(description, by));
+            } else if (command.equals("event")) {
+                String description = inputWords[1];
+                String from = inputWords[2];
+                String to = inputWords[3];
+                tasks.addTask(new Event(description, from, to));
             }
         }
     }
