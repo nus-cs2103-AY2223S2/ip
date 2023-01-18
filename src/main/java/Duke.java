@@ -14,7 +14,6 @@ public class Duke {
         Scanner reader = new Scanner(System.in);  // inside vs outside?
 
         while(true) {
-
             String s = reader.nextLine();
             String[] spStg = s.split(" ", 2);
             if(spStg[0].equals("bye")) {
@@ -43,17 +42,32 @@ public class Duke {
 
             else {
                 String firstWord = spStg[0];
-                String rest = spStg[1];
                 if (firstWord.equals("todo")) {
-                    list[index] = new Todo(rest);
+                    if (spStg.length == 1) {
+                        System.out.println("☹ OOPS!!! The description of a todo cannot be empty.");
+                        continue;
+                    }
+                    list[index] = new Todo(spStg[1]);
                 }
                 else if (firstWord.equals("deadline")) {
-                    String[] sppStg = rest.split("/by");
+                    if (spStg.length == 1) {
+                        System.out.println("☹ OOPS!!! The description of a deadline cannot be empty.");
+                        continue;
+                    }
+                    String[] sppStg = spStg[1].split("/by");
                     list[index] = new Deadline(sppStg[0], sppStg[1]);
                 }
                 else if (firstWord.equals("event")) {
-                    String[] sppStg = rest.split("/from|/to");
+                    if (spStg.length == 1) {
+                        System.out.println("☹ OOPS!!! The description of an event cannot be empty.");
+                        continue;
+                    }
+                    String[] sppStg = spStg[1].split("/from|/to");
                     list[index] = new Event(sppStg[0], sppStg[1], sppStg[2]);
+                }
+                else {
+                    System.out.println("☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
+                    continue;
                 }
                 System.out.println("Got it. I've added this task:");
                 System.out.println(list[index]);
