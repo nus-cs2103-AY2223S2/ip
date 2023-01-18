@@ -19,9 +19,9 @@ public class Command {
         return count;
     }
 
-    public void markCommand(TaskList taskList, Task t) {
+    public void markCommand(TaskList taskList, Task t) throws DukeException {
         if (t.isMarked()) {
-            System.out.println("This task has already been marked as done.");
+            throw new DukeException("This task has already been marked as done.");
         } else {
             t.mark();
             System.out.println("Great job on completing this task! I've marked it as done:");
@@ -32,9 +32,9 @@ public class Command {
         }
     }
 
-    public void unmarkCommand(TaskList taskList, Task t) {
+    public void unmarkCommand(TaskList taskList, Task t) throws DukeException {
         if (!t.isMarked()) {
-            System.out.println("Oops! This task has not been marked as done before.");
+            throw new DukeException("Oops! This task has not been marked as done before.");
         } else {
             t.unMark();
             System.out.println("Alright, I've marked this task as not done yet:");
@@ -49,10 +49,6 @@ public class Command {
             System.out.println("Here are the tasks in your list:");
             System.out.println(taskList);
         }
-    }
-
-    public void blahCommand() {
-        System.out.println("blah");
     }
 
     public void byeCommand() {

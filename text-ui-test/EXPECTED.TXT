@@ -6,7 +6,7 @@ Hello from
 |____/ \__,_|_|\_\___|
 
 What can I do for you?
-I can't quite understand you :-/
+DukeException: Oops! You need to specify the task number for me to mark/unmark it.
 What else can I do for you?
 Got it, I've added this task:
     [T][ ] borrow book
@@ -57,15 +57,15 @@ Great job on completing this task! I've marked it as done:
 [T][X] borrow book
 Yay! You have completed all your tasks :-)
 What else can I do for you?
-Huh... the task does not exist.
+DukeException: Huh... the task does not exist.
 What else can I do for you?
-Huh... the task does not exist.
+DukeException: Huh... the task does not exist.
 What else can I do for you?
-I can't quite understand you :-/
+DukeException: Hmm... I can't quite understand you :-/
 What else can I do for you?
-blah
+DukeException: Hmm... I can't quite understand you :-/
 What else can I do for you?
-Please specify the deadline.
+DukeException: Please specify the deadline.
 What else can I do for you?
-Please specify both the start and end times/dates.
+DukeException: Please specify both the start and end times/dates.
 What else can I do for you?

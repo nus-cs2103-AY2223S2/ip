@@ -11,7 +11,7 @@ public class Duke {
         }
     }
 
-    public static void checkMark(TaskList taskList, Command command) {
+    public static void checkMark(TaskList taskList, Command command) throws DukeException {
         String str = command.str;
         String arr[] = str.split("\\s+");
         if (arr.length == 2 && isNumber(arr[1]) && (arr[0].equals("mark") || arr[0].equals("unmark"))) {
@@ -25,19 +25,26 @@ public class Duke {
                     command.unmarkCommand(taskList, taskList.getTask(taskNum - 1));
                 }
             } else {
-                System.out.println("Huh... the task does not exist.");
+                throw new DukeException("Huh... the task does not exist.");
             }
         } else {
-            System.out.println("I can't quite understand you :-/");
+            throw new DukeException("Hmm... I can't quite understand you :-/");
         }
     }
 
-    public static void checkCommand(TaskList taskList, Command command) {
+    public static void checkCommand(TaskList taskList, Command command) throws DukeException {
         String str = command.str;
         String arr[] = str.split("\\s+");
-        if (arr.length == 1 && !str.equals("mark") && !str.equals("unmark")
-                && !str.equals("mark ") && !str.equals("unmark ")) {
-            System.out.println("I can't quite understand you :-/");
+        if (arr.length == 1) {
+            if (arr[0].equals("todo") || arr[0].equals("event") || arr[0].equals("deadline")) {
+                String e = String.format("Oops! The description of a %s cannot be empty.", arr[0]);
+                throw new DukeException(e);
+            } else if (str.equals("mark") || str.equals("unmark")
+                    || str.equals("mark ") || str.equals("unmark ")) {
+                throw new DukeException("Oops! You need to specify the task number for me to mark/unmark it.");
+            } else {
+                throw new DukeException("Hmm... I can't quite understand you :-/");
+            }
         } else if (arr[0].equals("mark") || arr[0].equals("unmark")) {
             checkMark(taskList, command);
         } else {
@@ -46,7 +53,7 @@ public class Duke {
                 command.todoCommand(taskList, desc);
             } else if (arr[0].equals("deadline")) {
                 if (command.countSlash() != 1) {
-                    System.out.println("Please specify the deadline.");
+                    throw new DukeException("Please specify the deadline.");
                 } else {
                     String segments[] = str.split("/");
                     String deadline = segments[segments.length - 1];
@@ -57,7 +64,7 @@ public class Duke {
                 }
             } else if (arr[0].equals("event")) {
                 if (command.countSlash() != 2) {
-                    System.out.println("Please specify both the start and end times/dates.");
+                    throw new DukeException("Please specify both the start and end times/dates.");
                 } else {
                     String segments[] = str.split("/", 3);
                     String start = segments[segments.length - 2].split(" ", 2)[1];
@@ -67,7 +74,7 @@ public class Duke {
                     command.eventCommand(taskList, start, end, desc);
                 }
             } else {
-                System.out.println("I can't quite understand you :-/");
+                throw new DukeException("Hmm... I can't quite understand you :-/");
             }
         }
     }
@@ -88,10 +95,12 @@ public class Duke {
         while (!command.str.equals("bye")) {
             if (command.str.equals("list")) {
                 command.listCommand(taskList);
-            } else if (command.str.equals("blah")) {
-                command.blahCommand();
             } else {
-                checkCommand(taskList, command);
+                try {
+                    checkCommand(taskList, command);
+                } catch (DukeException e) {
+                    System.out.println(e);
+                }
             }
             command.nextCommand();
             command = new Command(sc.nextLine());
