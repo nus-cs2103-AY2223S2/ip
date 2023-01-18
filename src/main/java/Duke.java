@@ -12,14 +12,14 @@ public class Duke {
     public String name = "Duke";
 
     /**
-     * Storage of user's inputed texts
+     * Storage of user's tasks
      */
-    private final String[] textStorage = new String[100];
+    private final Task[] taskStorage = new Task[100];
 
     /**
-     * Number of text stored by the chatbot
+     * Number of tasks stored by the chatbot
      */
-    private int textStorageSize = 0;
+    private int taskStorageSize = 0;
 
     /**
      * This is the main method which starts off the chatbot.
@@ -30,7 +30,6 @@ public class Duke {
         Duke duke = new Duke();
         System.out.println("Hello. This is " + duke.name);
         Scanner scanner = new Scanner(System.in);
-        final String endWord = "bye";
         boolean end = false;
 
         while (!end) {
@@ -47,15 +46,23 @@ public class Duke {
      * @return a boolean based on if the conversation has ended.
      */
     public boolean processInput(String text) {
+        if (text.startsWith("mark")) {
+            this.markTask(Integer.parseInt(text.substring(5)));
+            return false;
+        } else if (text.startsWith("unmark")){
+            this.unmarkTask(Integer.parseInt(text.substring(7)));
+            return false;
+        }
+
         switch (text) {
             case "bye":
-                endChat();
+                this.endChat();
                 return true;
             case "list":
-                displayTextStorage();
+                this.displayTaskStorage();
                 break;
             default:
-                storeText(text);
+                this.storeTask(text);
         }
 
         return false;
@@ -77,35 +84,63 @@ public class Duke {
      */
     private void endChat() {
         String endMessage = "Chat with Duke has ended";
-        reply(endMessage);
+        this.reply(endMessage);
     }
 
     /**
-     * This method stores the string into the chatbot's
-     * text storage
+     * This method stores the task into the chatbot's
+     * task storage
      *
-     * @param text the string to be stored.
+     * @param text the description of the task.
      */
-    private void storeText(String text) {
-        this.textStorage[this.textStorageSize] = text;
-        this.textStorageSize++;
-        reply("added: " + text);
+    private void storeTask(String text) {
+        Task task = new Task(text);
+        this.taskStorage[this.taskStorageSize] = task;
+        this.taskStorageSize++;
+        this.reply("added: " + text);
     }
 
     /**
-     * This method outputs the entire list of text stored
+     * This method outputs the entire list of tasks stored
      * by the chatbot in order
      */
-    private void displayTextStorage() {
-        int size = this.textStorageSize;
+    private void displayTaskStorage() {
+        int size = this.taskStorageSize;
 
         if (size == 0) {
-            reply("No text stored.");
+            this.reply("No task stored.");
             return;
         }
 
         for (int i = 0; i < size; i++) {
-            reply((i + 1) + ". " + this.textStorage[i]);
+            Task task = this.taskStorage[i];
+            this.reply((i + 1) + "." + task.getTaskDetails());
         }
+    }
+
+    /**
+     * This method marks the task at the specified task
+     * number as done
+     *
+     * @param taskNumber the task order in the storage.
+     */
+    private void markTask(int taskNumber) {
+        Task task = this.taskStorage[taskNumber - 1];
+        task.mark();
+        this.reply("The following task is marked as done:");
+        this.reply("  " + task.getTaskDetails());
+    }
+
+    /**
+     * This method marks the task at the specified task
+     * number as not done
+     *
+     * @param taskNumber the task order in the storage.
+     */
+    private void unmarkTask(int taskNumber) {
+        Task task = this.taskStorage[taskNumber - 1];
+        task.unmark();
+        this.reply("The following task is marked as not done:");
+        this.reply("  " + task.getTaskDetails());
     }
 }
