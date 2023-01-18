@@ -1,7 +1,8 @@
-import exception.CommandParseException;
-import exception.JarvisException;
-import exception.InvalidActionException;
-import exception.TaskIOException;
+package jarvis;
+
+import jarvis.exception.CommandParseException;
+import jarvis.exception.InvalidActionException;
+import jarvis.exception.TaskIOException;
 
 import java.util.Scanner;
 

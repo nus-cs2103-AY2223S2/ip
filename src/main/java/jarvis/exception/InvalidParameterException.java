@@ -1,4 +1,4 @@
-package exception;
+package jarvis.exception;
 
 public class InvalidParameterException extends CommandParseException {
     public InvalidParameterException(String message) {

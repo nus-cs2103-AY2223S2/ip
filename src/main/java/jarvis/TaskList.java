@@ -1,7 +1,9 @@
-import exception.CommandParseException;
-import exception.MissingParameterException;
-import task.Task;
-import task.TaskFilter;
+package jarvis;
+
+import jarvis.exception.CommandParseException;
+import jarvis.exception.MissingParameterException;
+import jarvis.task.Task;
+import jarvis.task.TaskFilter;
 
 import java.util.ArrayList;
 import java.util.LinkedList;
@@ -78,7 +80,7 @@ public class TaskList {
 
     /**
      * Marks a task as done or undone as given.
-     * @param index 1-based index of the task.
+     * @param index 1-based index of the jarvis.task.
      * @param isDone Whether the task is marked as done.
      * @return List of response lines.
      */

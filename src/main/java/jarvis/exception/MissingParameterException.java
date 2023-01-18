@@ -1,4 +1,4 @@
-package exception;
+package jarvis.exception;
 
 public class MissingParameterException extends CommandParseException {
     public MissingParameterException(String message) {

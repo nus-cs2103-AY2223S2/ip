@@ -1,4 +1,4 @@
-package exception;
+package jarvis.exception;
 
 public class CommandParseException extends JarvisException {
     public CommandParseException(String message) {

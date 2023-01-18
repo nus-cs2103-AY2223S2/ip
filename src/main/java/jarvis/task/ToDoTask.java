@@ -1,6 +1,6 @@
-package task;
+package jarvis.task;
 
-import exception.MissingParameterException;
+import jarvis.exception.MissingParameterException;
 
 public class ToDoTask extends Task {
     public ToDoTask(String description) throws MissingParameterException {

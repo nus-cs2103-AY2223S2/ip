@@ -1,7 +1,7 @@
-package task;
+package jarvis.task;
 
-import exception.CommandParseException;
-import exception.MissingParameterException;
+import jarvis.exception.CommandParseException;
+import jarvis.exception.MissingParameterException;
 
 import java.util.Scanner;
 

@@ -1,4 +1,4 @@
-package exception;
+package jarvis.exception;
 
 public class JarvisException extends Exception {
     private final String friendlyMessage;
