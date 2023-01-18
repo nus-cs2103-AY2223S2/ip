@@ -95,6 +95,19 @@ public class Duke {
                     list[index-1].markAsUndone();
                     System.out.println("Ok, I've marked this task as not done yet:\n" + list[index-1].toString());
                 }
+            
+            } else if (command.length() >= 6 && command.substring(0,6).equals("delete")) {
+                if (command.length() < 7) {
+                    System.out.println("☹ OOPS!!! The index of task cannot be empty.");
+                } else {
+                    int index = Character.getNumericValue(command.charAt(7));
+                    System.out.println("Noted. I've removed this task:\n"+list[index-1]);
+                    for(int i = index; i < counter; i++) {
+                        list[i-1] = list[i];
+                    }
+                    counter--;
+                    System.out.println("Now you have " + counter + " tasks in the list");
+                }
             } else {
                 System.out.println("☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
             }
