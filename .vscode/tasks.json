@@ -4,20 +4,12 @@
     "version": "2.0.0",
     "tasks": [
         {
-            "label": "testJava",
+            "label": "runTest",
             "type": "shell",
-            "command": "java",
-            "args": [
-                "'${file}'",
-                // "<",
-                // "'${fileDirname}/${input:testName}'"
-            ]
-        },
-        // {
-        //     "label": "echo",
-        //     "type": "shell",
-        //     "command": "echo ${fileDirname}"
-        // }
+            "command": "cd ${workspaceFolder}/text-ui-test && ./runtest.sh",
+            "args": [],
+            "problemMatcher": []
+        }
     ],
     // "inputs": [
     //     {

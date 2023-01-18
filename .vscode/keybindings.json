@@ -5,6 +5,6 @@
     {
         "key": "ctrl+shift+t",
         "command": "workbench.action.tasks.runTask",
-        "args": "testJava"
+        "args": "runTest"
     }
 ]

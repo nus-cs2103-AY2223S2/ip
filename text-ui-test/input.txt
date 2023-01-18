@@ -1,0 +1,18 @@
+todo one
+todo two
+list
+mark 1
+mark2
+list
+unmark1
+unmark2
+list
+deadline ip project /by 19 jan
+list
+delete 1
+delete1
+list
+event hack and roll /from 14 jan /to 15 jan
+mark1
+list
+bye
