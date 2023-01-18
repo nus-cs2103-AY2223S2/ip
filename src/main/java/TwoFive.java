@@ -54,7 +54,7 @@ public class TwoFive {
                 } else {
                     System.out.println("Oops, this task has not been done yet:");
                 }
-                System.out.println(currentTask);
+                System.out.println(" " + currentTask);
             } else if (input.contains("mark")) {
                 //Marks selected task as done
                 Integer taskNum = Integer.parseInt(input.split(" ")[1]) - 1;
@@ -65,7 +65,7 @@ public class TwoFive {
                 } else {
                     System.out.println("Oops, this task is already done:");
                 }
-                System.out.println(currentTask);
+                System.out.println(" " + currentTask);
             } else if (input.contains("todo")){
                 //Adds a new ToDo task
                 String taskDescription = input.split("todo")[1].trim();
