@@ -18,9 +18,13 @@ public class Duke {
 
         while (!checker.checkEnd(userInput)) {
             if (checker.checkListRequest(userInput)) {
-                for (int i = 0; i < lstOfItems.size(); i++) {
-                    System.out.print(String.valueOf(i+1) + ". ");
-                    System.out.println(lstOfItems.get(i));
+                if (lstOfItems.size() == 0 ) {
+                    System.out.println("Nothing here yet. Add your 1st item!");
+                } else {
+                    for (int i = 0; i < lstOfItems.size(); i++) {
+                        System.out.print(String.valueOf(i + 1) + ". ");
+                        System.out.println(lstOfItems.get(i));
+                    }
                 }
             } else {
                 System.out.println("added: " + userInput);
