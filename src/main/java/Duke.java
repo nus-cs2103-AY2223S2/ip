@@ -8,10 +8,10 @@ import java.util.*;
  * @author A0233828Y Eugene Tang
  */
 public class Duke {
-    private static final String logo = " |          ______    ______   \n"
-                                     + " | ____    |      |  |      |  \n"
-                                     + " |      |  |      |  |      |  \n"
-                                     + " | ____ |  |______|  |______|  \n";
+    private static final String logo = " |          ______    ______\n"
+                                     + " | ____    |      |  |      |\n"
+                                     + " |      |  |      |  |      |\n"
+                                     + " | ____ |  |______|  |______|\n";
     private static final String straightLine = "_______________________________________________________________________________________________";
 
 
@@ -133,7 +133,7 @@ public class Duke {
             System.out.println(straightLine);
             return;
         }
-        System.out.println("Here are the tasks in your list: ");
+        System.out.println("Here are the tasks in your list:");
         int numberOfTasks= taskStorage.size();
         //Process each task in the storage
         for (int i = 0; i < numberOfTasks; i = i + 1) {
@@ -152,7 +152,7 @@ public class Duke {
     public static void addTask(Task taskToAdd, ArrayList<Task> taskStorage) {
         taskStorage.add(taskToAdd);
         System.out.println(straightLine);
-        System.out.println("Added task to list: ");
+        System.out.println("Added task to list:");
         System.out.println(taskToAdd.getStatusOfTaskInString());
         if (taskStorage.size() == 1) {
             System.out.println("Currently, there is 1 task in your list.");
@@ -192,7 +192,7 @@ public class Duke {
      */
     public static void printInvalidMessage() {
         System.out.println(straightLine);
-        System.out.println("Sorry. I do not understand this command. Try again.");
+        System.out.println("Sorry. I do not understand this command. Please try again.");
         System.out.println(straightLine);
     }
 }
