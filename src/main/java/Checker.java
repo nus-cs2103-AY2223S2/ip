@@ -6,4 +6,12 @@ public class Checker {
             return false;
         }
     }
+
+    public boolean checkListRequest(String userInput) {
+        if (userInput.equals("list")) {
+            return true;
+        } else {
+            return false;
+        }
+    }
 }
