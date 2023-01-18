@@ -44,6 +44,10 @@ public class Duke {
                         , "delete task"
                         , new String[]{}
                         , taskList::delete),
+                new ArgCommand("find"
+                    , "find tasks containing text fragment"
+                    , new String[]{}
+                    , taskList::find),
         };
         ui.setCommands(commands);
         this.parser = new Parser(commands);

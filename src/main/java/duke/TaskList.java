@@ -48,19 +48,16 @@ public class TaskList {
     public String[] add(String[] argument) {
         Task newTask;
         switch (argument[0]) {
-            case "/todo":
-                newTask = new ToDo(argument[1]);
-                break;
-            case "/deadline":
+            case "/todo" -> newTask = new ToDo(argument[1]);
+            case "/deadline" -> {
                 String[] deadlineArgs = Parser.parseArgs(argument[1], new String[]{" /by "});
                 newTask = new Deadline(deadlineArgs[0], deadlineArgs[1]);
-                break;
-            case "/event":
+            }
+            case "/event" -> {
                 String[] eventArgs = Parser.parseArgs(argument[1], new String[]{" /from ", " /to "});
                 newTask = new Event(eventArgs[0], eventArgs[1], eventArgs[2]);
-                break;
-            default:
-                throw new IllegalArgumentException("Invalid task type: " + argument[0]);
+            }
+            default -> throw new IllegalArgumentException("Invalid task type: " + argument[0]);
         }
         this.tasks.add(newTask);
         this.save();
@@ -73,7 +70,7 @@ public class TaskList {
             this.tasks.get(ind).mark();
             indexes.add(ind);
         };
-        this.find(strings, mark);
+        this.consume(strings, mark);
         this.save();
         if (indexes.size() == 0) {
             throw new IllegalArgumentException("No tasks found.");
@@ -97,7 +94,7 @@ public class TaskList {
             }
             indexes.add(ind);
         };
-        this.find(strings, delete);
+        this.consume(strings, delete);
         if (indexes.size() == 0) {
             throw new IllegalArgumentException("No tasks found.");
         } else if (indexes.size() == 1) {
@@ -117,7 +114,7 @@ public class TaskList {
         }
     }
 
-    private void find(String[] argument, Consumer<Integer> consumer) {
+    private void consume(String[] argument, Consumer<Integer> consumer) {
         try{
             String[] inds = argument[0].split("\\s");
             for (String s : inds) {
@@ -126,6 +123,21 @@ public class TaskList {
             }
         } catch (NumberFormatException | IndexOutOfBoundsException e) {
             throw new IllegalArgumentException("Invalid index.");
+        }
+    }
+
+    public String[] find(String[] argument) {
+        String keyword = argument[0].toLowerCase();
+        List<Task> matches = this.tasks.stream()
+            .parallel()
+            .filter(t -> t.desc.toLowerCase().contains(keyword))
+            .toList();
+        if (matches.size() < 1){
+            return new String[]{"No matches found."};
+        } else {
+            List<String> outputs = matches.stream().map(Task::toString).collect(Collectors.toList());
+            outputs.add(0, matches.size() + " matches found:");
+            return outputs.toArray(String[]::new);
         }
     }
 

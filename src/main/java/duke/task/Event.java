@@ -15,7 +15,7 @@ public class Event extends Task {
     @Override
     public String toString() {
         return String.format("[E]%s (from: %s) (to: %s)", super.toString(),
-                from.format(format),
-                to.format(format));
+                from.format(DATE_FORMAT),
+                to.format(DATE_FORMAT));
     }
 }
