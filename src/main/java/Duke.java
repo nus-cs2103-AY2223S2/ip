@@ -1,24 +1,28 @@
 import java.util.Scanner;
+
 public class Duke {
+    static String[] inputList = new String[100];
+    static int index = 0;
+
+    public static void add(String input) {
+        inputList[index] = input;
+        index++;
+    }
 
     public static void list() {
-        System.out.println("\t----------------------------");
-        System.out.println("\tlist");
-        System.out.println("\t----------------------------\n");
-    }
+        System.out.println("\t--------------------------");
+        for (int i = 0; i < index; i++) {
 
-    public static void blah() {
-        System.out.println("\t----------------------------");
-        System.out.println("\tblah");
-        System.out.println("\t----------------------------\n");
-    }
+            System.out.println("\t" + (i+1) + ". " + inputList[i]);
 
+        }
+        System.out.println("\t--------------------------");
+    }
     public static void bye() {
-        System.out.println("\t----------------------------");
+        System.out.println("\t--------------------------");
         System.out.println("\tBye. Hope to see you again soon!");
-        System.out.println("\t----------------------------\n");
+        System.out.println("\t--------------------------");
     }
-
     public static void main(String[] args) {
         String logo = " ____        _        \n"
                 + "|  _ \\ _   _| | _____ \n"
@@ -29,21 +33,22 @@ public class Duke {
         System.out.println("What can I do for you?\n");
 
         String input;
-        Scanner scanner = new Scanner(System.in);
-        input = scanner.nextLine();
+        Scanner scan = new Scanner(System.in);
+        input = scan.nextLine();
         while (true) {
-            if (!input.equals("bye")) {
-                System.out.println("\t----------------------------");
-                System.out.println("\t" + input);
-                System.out.println("\t----------------------------");
-                input = scanner.nextLine();
-            } else {
+            if (input.equals("bye")) {
                 Duke.bye();
                 break;
+            } else if (input.equals("list")) {
+                Duke.list();
+                input = scan.nextLine();
+            } else {
+                Duke.add(input);
+                System.out.println("\t--------------------------");
+                System.out.println("\tadded: " + input);
+                System.out.println("\t--------------------------");
+                input = scan.nextLine();
             }
-
         }
-
-
     }
 }
