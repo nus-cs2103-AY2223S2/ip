@@ -1,15 +1,14 @@
 package dude;
 
 import dude.command.Command;
-import dude.exception.DudeInvalidCommandException;
-import dude.exception.DudeMissingCommandException;
 import dude.parser.Parser;
 import dude.storage.Storage;
+import dude.task.Task;
+import dude.task.TaskList;
 import dude.ui.Ui;
 
 import java.io.FileNotFoundException;
 import java.util.ArrayList;
-import java.util.Scanner;
 
 public class Dude {
     private Storage storage;

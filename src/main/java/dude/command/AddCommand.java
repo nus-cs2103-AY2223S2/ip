@@ -1,7 +1,7 @@
 package dude.command;
 
-import dude.Task;
-import dude.TaskList;
+import dude.task.Task;
+import dude.task.TaskList;
 import dude.storage.Storage;
 import dude.ui.Ui;
 

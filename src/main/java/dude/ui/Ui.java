@@ -1,7 +1,7 @@
 package dude.ui;
 
-import dude.Task;
-import dude.TaskList;
+import dude.task.Task;
+import dude.task.TaskList;
 
 import java.util.Scanner;
 

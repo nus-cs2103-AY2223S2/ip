@@ -1,6 +1,6 @@
 package dude.storage;
 
-import dude.*;
+import dude.task.*;
 
 import java.io.File;
 import java.io.FileNotFoundException;

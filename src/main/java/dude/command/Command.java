@@ -1,6 +1,6 @@
 package dude.command;
 
-import dude.TaskList;
+import dude.task.TaskList;
 import dude.storage.Storage;
 import dude.ui.Ui;
 

@@ -1,4 +1,6 @@
-package dude;
+package dude.task;
+
+import dude.task.Task;
 
 public class Todo extends Task {
     public Todo(String description) {

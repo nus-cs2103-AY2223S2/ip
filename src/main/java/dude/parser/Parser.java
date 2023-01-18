@@ -1,14 +1,9 @@
 package dude.parser;
 
-import dude.Deadline;
-import dude.Event;
-import dude.Task;
-import dude.Todo;
+import dude.task.Deadline;
+import dude.task.Event;
+import dude.task.Todo;
 import dude.command.*;
-import dude.exception.DudeInvalidCommandException;
-import dude.exception.DudeMissingCommandException;
-
-import java.util.List;
 
 public class Parser {
     public enum CommandType {
