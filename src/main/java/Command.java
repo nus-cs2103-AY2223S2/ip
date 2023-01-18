@@ -8,19 +8,19 @@ public class Command {
 
     public Command(String commandString) {
         this.fullCommand = commandString;
-        String[] temp = commandString.split(" ", 2);
+        String[] temp = commandString.split(" +", 2);
         this.baseCommand = temp[0];
-        String rawBody = temp.length > 1 ? temp[1] : "";
+        String rawBody = temp.length > 1 ? temp[1].trim() : "";
         String body = "";
 
         boolean isFirstElement = true;
-        for (String str : rawBody.split(" /")) {
+        for (String str : rawBody.split("\\s+/")) {
             if (isFirstElement) {
                 isFirstElement = false;
                 body = str;
                 continue;
             }
-            String[] temp2 = str.split(" ", 2);
+            String[] temp2 = str.split(" +", 2);
             namedParameters.put(temp2[0], temp2.length > 1 ? temp2[1] : null);
         }
         this.body = body;
