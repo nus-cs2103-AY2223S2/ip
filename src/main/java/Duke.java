@@ -12,8 +12,12 @@ public class Duke {
         System.out.println(intro());
         String s = askForInput();
         while(!s.equals("bye")) {
-            storedInputs.add(s);
-            System.out.println("\nadded: " + s + "\n");
+            if (s.equals("list")) {
+                System.out.println("\n" + printList() + "\n"); 
+            } else {
+                storedInputs.add(s);
+                System.out.println("\nadded: " + s + "\n");
+            }
             s = askForInput();
         }
         System.out.println("Good Riddance!");
@@ -34,5 +38,13 @@ public class Duke {
     private static String askForInput() {
         System.out.print("> ");
         return getInput.nextLine();
+    }
+
+    private static String printList() {
+        String s = "";
+        for (int i = 1; i <= storedInputs.size(); i++) {
+            s += i + ". " + storedInputs.get(i-1) + "\n";
+        }
+        return s;
     }
 }
