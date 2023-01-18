@@ -1,10 +1,10 @@
 import java.util.*;
 public class Duke {
     public static void main(String[] args) {
-        List<String> list = new ArrayList<>(100);
+        List<Task> list = new ArrayList<>(100);
         greet();
         //echo();
-        processList(list);
+        processInputs(list);
     }
     private static void greet(){
         String logo = " ____        _        \n"
@@ -36,26 +36,52 @@ public class Duke {
     }
 
     //adds items into the list and prints it when "list" is the input
-    private static void processList(List<String> list){
+    //our list takes in Tasks that are marked with a boolean.
+    //processes the list with inputs from the user with list and Tasks operations.
+    private static void processInputs(List<Task> list){
         Scanner sc = new Scanner(System.in);
         String input = sc.nextLine();
         while( input.equals("bye") == false){
             if(input.equals("list")){
                 System.out.println("---------------------------------------");
                 for(int i = 0; i<list.size(); i++) {
-                    String element = list.get(i);
-                    System.out.println(String.format("%d. %s",i+1,element));
+                    Task element = list.get(i);
+                    System.out.println(String.format("%d.[%s] %s",i+1,element.getStatusIcon(), element.getDescription()));
                 }
                 System.out.println("---------------------------------------");
-                input = sc.nextLine();
-            } else {
-                list.add(input);
+            } else if(input.equals("mark")) {
+                int item = sc.nextInt();
+                Task curr = list.get(item-1);
+                curr.setDone();
+                System.out.println("---------------------------------------");
+                System.out.println(String.format("Nice, this task has been marked as done:\n [%s] %s",curr.getStatusIcon(), curr.getDescription()));
+                System.out.println("---------------------------------------");
+            } else if(input.equals("unmark")) {
+                int item = sc.nextInt();
+                Task curr = list.get(item-1);
+                curr.setUndone();
+                System.out.println("---------------------------------------");
+                System.out.println(String.format("ok, this task has been marked as not done yet:\n [%s] %s",curr.getStatusIcon(), curr.getDescription()));
+                System.out.println("---------------------------------------");
+            }
+            else {
+                Task t = new Task(input);
+                list.add(t);
                 System.out.println("---------------------------------------");
                 System.out.println(String.format("added: %s", input));
                 System.out.println("---------------------------------------");
-                input = sc.nextLine();
+
             }
+            input = sc.next();
         }
         exit();
     }
-}
+
+
+
+    }
+
+
+
+
+
