@@ -52,6 +52,8 @@ public class Command {
             // Fallthrough
         case "mark":
             // Fallthrough
+        case "delete":
+            // Fallthrough
         case "todo":
             checkHasOnly(new String[] {});
             break;

@@ -7,7 +7,7 @@ public class Duke {
     /** Whether the duke is still running or has been commanded to end */
     private boolean isRunning;
 
-    /** Array of tasks */
+    /** ArrayList of tasks */
     private ArrayList<Task> tasks;
 
     /**
@@ -23,7 +23,7 @@ public class Duke {
 
     private void addTask(Task task) {
         this.tasks.add(task);
-        System.out.println("added " + task);
+        System.out.println("Added Task " + task);
     }
 
     private void showTasks() {
@@ -36,8 +36,14 @@ public class Duke {
 
     private void toggleTask(Task task) {
         task.toggleDone();
-        System.out.println("Task " + task + " marked as " + (task.getIsDone() ? "" : "not ") + "done");
+        System.out.println("Marked Task " + task + " as " + (task.getIsDone() ? "" : "not ") + "done");
     }
+
+    private void deleteTask(Task task) {
+        this.tasks.remove(task);
+        System.out.println("Deleted Task " + task);
+    }
+
     private void init() {
         this.scanner = new Scanner(System.in);
         this.isRunning = true;
@@ -76,6 +82,11 @@ public class Duke {
                         command.getArg("mark")
                 )));
                 break;
+            case "delete":
+                this.deleteTask(this.tasks.get(Integer.parseInt(
+                        command.getArg("delete")
+                )));
+                break;
             }
         } catch (IllegalArgumentException e) {
             System.out.println(e.getMessage());
@@ -84,7 +95,7 @@ public class Duke {
 
     private void exit() {
         this.scanner.close();
-        System.out.println("GoodBye!");
+        System.out.println("Good bye!");
     }
 
     public static void main(String[] args) {

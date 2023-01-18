@@ -1,27 +1,33 @@
 Hello!
-added [T][ ] task1
+Added Task [T][ ] task1
 1. [T][ ] task1
-added [T][ ] task2
+Added Task [T][ ] task2
 1. [T][ ] task1
 2. [T][ ] task2
-Task [T][X] task1 marked as done
+Marked Task [T][X] task1 as done
 1. [T][X] task1
 2. [T][ ] task2
-added [D][ ] task3 (by: tomorrow)
+Added Task [D][ ] task3 (by: tomorrow)
 1. [T][X] task1
 2. [T][ ] task2
 3. [D][ ] task3 (by: tomorrow)
-Task [T][X] task2 marked as done
+Marked Task [T][X] task2 as done
 1. [T][X] task1
 2. [T][X] task2
 3. [D][ ] task3 (by: tomorrow)
-Task [T][ ] task1 marked as not done
+Marked Task [T][ ] task1 as not done
 1. [T][ ] task1
 2. [T][X] task2
 3. [D][ ] task3 (by: tomorrow)
-added [E][ ] task4 (from: wednesday to: thursday)
+Added Task [E][ ] task4 (from: wednesday to: thursday)
 1. [T][ ] task1
 2. [T][X] task2
 3. [D][ ] task3 (by: tomorrow)
 4. [E][ ] task4 (from: wednesday to: thursday)
-GoodBye!
+Added Task [T][ ] task5
+Deleted Task [T][X] task2
+1. [T][ ] task1
+2. [D][ ] task3 (by: tomorrow)
+3. [E][ ] task4 (from: wednesday to: thursday)
+4. [T][ ] task5
+Good bye!
