@@ -5,10 +5,9 @@ list
 mark 1
 mark 2
 list
-mark 3
+delete 3
 unmark 2
 list
-unmark 3
 unmark 1
 list
 bye

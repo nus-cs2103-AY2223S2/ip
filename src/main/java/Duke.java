@@ -29,10 +29,10 @@ public class Duke {
 
                     int index_by = input.indexOf("/");
                     if (index_by - 1 < 9) {
-                        throw new DukeException("OOPS!!! The description of a deadline cannot be empty.");
+                        throw new DukeException("    OOPS!!! The description of a deadline cannot be empty.");
                     }
                     if (index_by + 4 > input.length()) {
-                        throw new DukeException("OOPS!!! You are missing the deadline of a deadline.");
+                        throw new DukeException("    OOPS!!! You are missing the deadline of a deadline.");
                     }
                     Deadline d = new Deadline(input.substring(9, index_by - 1),
                             input.substring(index_by + 4, input.length()));
@@ -41,17 +41,36 @@ public class Duke {
                     System.out.println("      " + d);
                     System.out.println("    Now you have " + Tasks.size() + " tasks in the list.");
 
+                } else if (input.length() >= 6 && input.substring(0, 6).equals("unmark")) {
+                    if (input.length() <= 7) {
+                        throw new DukeException("    OOPS!!! You are missing the number of the task to be unmarked.");
+                    }
+                    int index = Integer.parseInt(input.substring(7));
+                    Task task = Tasks.get(index - 1);
+                    task.unmark();
+                    System.out.println("    OK, I've marked this task as not done yet:");
+                    System.out.println("      " + task);
+                } else if (input.length() >= 6 && input.substring(0, 6).equals("delete")){
+                    if (input.length() <= 7) {
+                        throw new DukeException("    OOPS!!! Delete must be followed by an int.");
+                    }
+                    int index = Integer.parseInt(input.substring(7));
+                    Task task = Tasks.get(index - 1);
+                    Tasks.remove(index - 1);
+                    System.out.println("    Noted. I've removed this task:");
+                    System.out.println("      " + task);
+                    System.out.println("    Now you have " + Tasks.size() + " tasks in the list.");
                 } else if (input.length() >= 5 && input.substring(0, 5).equals("event")) {
                     int index_from = input.indexOf("/");
                     int index_to = input.lastIndexOf("/");
                     if (index_from - 1 < 6) {
-                        throw new DukeException("OOPS!!! The description of a event cannot be empty.");
+                        throw new DukeException("    OOPS!!! The description of a event cannot be empty.");
                     }
                     if (index_from + 6 > index_to - 1) {
-                        throw new DukeException("OOPS!!! You are missing the beginning of the event date.");
+                        throw new DukeException("    OOPS!!! You are missing the beginning of the event date.");
                     }
                     if (index_to + 4 > input.length()) {
-                        throw new DukeException("OOPS!!! You are missing the ending of the event date.");
+                        throw new DukeException("    OOPS!!! You are missing the ending of the event date.");
                     }
                     Event e = new Event(input.substring(6, index_from - 1),
                             input.substring(index_from + 6, index_to - 1),
@@ -61,20 +80,10 @@ public class Duke {
                     System.out.println("      " + e);
                     System.out.println("    Now you have " + Tasks.size() + " tasks in the list.");
 
-                } else if (input.length() >= 6 && input.substring(0, 6).equals("unmark")) {
-                    if (input.length() <= 7) {
-                        throw new DukeException("OOPS!!! You are missing the number of the task to be unmarked.");
-                    }
-                    int index = Integer.parseInt(input.substring(7));
-                    Task task = Tasks.get(index - 1);
-                    task.unmark();
-                    System.out.println("    OK, I've marked this task as not done yet:");
-                    System.out.println("      " + task);
-
                 } else if (input.length() >= 4) {
                     if (input.substring(0, 4).equals("mark")) {
                         if (input.length() <= 5) {
-                            throw new DukeException("OOPS!!! You are missing the number of the task to be marked.");
+                            throw new DukeException("    OOPS!!! You are missing the number of the task to be marked.");
                         }
                         int index = Integer.parseInt(input.substring(5));
                         Task task = Tasks.get(index - 1);
@@ -83,7 +92,7 @@ public class Duke {
                         System.out.println("      " + task);
                     } else if (input.substring(0, 4).equals("todo")) {
                         if (5 > input.length()) {
-                            throw new DukeException("OOPS!!! The description of a todo cannot be empty.");
+                            throw new DukeException("    OOPS!!! The description of a todo cannot be empty.");
                         }
                         Todo td = new Todo(input.substring(5, input.length()));
                         System.out.println("    Got it. I've added this task:");
@@ -91,17 +100,17 @@ public class Duke {
                         Tasks.add(td);
                         System.out.println("    Now you have " + Tasks.size() + " tasks in the list.");
                     } else {
-                        throw new DukeException("OOPS!!! I'm sorry, but I don't know what that means :-(");
+                        throw new DukeException("    OOPS!!! I'm sorry, but I don't know what that means :-(");
                     }
                 } else {
-                    throw new DukeException("OOPS!!! I'm sorry, but I don't know what that means :-(");
+                    throw new DukeException("    OOPS!!! I'm sorry, but I don't know what that means :-(");
                 }
             } catch (DukeException de){
                 System.out.println(de.getMessage());
             } catch (NumberFormatException nfe) {
-                System.out.println("OOPS!!! Mark or unmark has to be followed by an int.");
+                System.out.println("    OOPS!!! Mark or unmark has to be followed by an int.");
             } catch (IndexOutOfBoundsException i) {
-                System.out.println("OOPS!!! There are insufficient tasks.");
+                System.out.println("    OOPS!!! There are insufficient tasks.");
             }
         }
         System.out.println("    " + "Bye. Hope to see you again soon!");
