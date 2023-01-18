@@ -44,7 +44,9 @@ public class Duke {
                 // task is from index 1
                 for (int i = 1; i < inputArr.length; i++) {
                     sb.append(inputArr[i]);
-                    sb.append(" ");
+                    if (i != inputArr.length - 1) {
+                        sb.append(" ");
+                    }
                 }
                 Todo todo = new Todo(sb.toString());
                 taskList[numOfTasks++] = todo;
@@ -53,14 +55,24 @@ public class Duke {
                 System.out.println("Now you have " + numOfTasks + " in the list!");
             } else if (inputArr[0].equals("deadline")){
                 StringBuilder sb = new StringBuilder();
+                String desc = "local variable not initialised";
                 for (int i = 1; i < inputArr.length; i++) {
-                    if (inputArr[i].equals("/by")) break;
+                    if (inputArr[i].equals("/by")) {
+                        desc = sb.toString();
+                        sb.setLength(0);
+                        continue;
+                    }
                     sb.append(inputArr[i]);
-                    sb.append(" ");
+                    // No need for whitespace at the end
+                    if (i != inputArr.length - 1) {
+                        sb.append(" ");
+                    }
                 }
-                Deadline deadline = new Deadline(input, "test");
+                Deadline deadline = new Deadline(desc, sb.toString());
                 taskList[numOfTasks++] = deadline;
-                System.out.println("added: " + input);
+                System.out.println("Gotcha, I've added:");
+                System.out.println("  " + deadline);
+                System.out.println("Now you have " + numOfTasks + " in the list!");
             }
         }
 
