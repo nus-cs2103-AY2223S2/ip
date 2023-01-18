@@ -15,6 +15,10 @@ public class TaskList {
     tasks.get(id - 1).mark(done);
   }
 
+  public String printTask(int id) {
+    return tasks.get(id - 1).toString();
+  }
+
   public String generateList() {
     StringBuilder sb = new StringBuilder();
     int i = 1;

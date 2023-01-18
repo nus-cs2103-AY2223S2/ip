@@ -1,6 +1,8 @@
 enum Command {
   BYE("bye", 0),
   LIST("list", 0),
+  MARK("mark", 1),
+  UNMARK("unmark", 1),
   ADD("", 0);
 
   private final String command;

@@ -28,7 +28,22 @@ public class Sam {
           String list = tasks.generateList();
 					talk("Here is your list:\n\n" + list);
 					break;
-				case ADD:
+        case MARK: {
+          int id = getIntArg(input, 1);
+          tasks.markTask(id, true);
+          talk("Great! I'll check the task:\n    "
+             + tasks.printTask(id));
+          break;
+        }
+        case UNMARK: {
+          int id = getIntArg(input, 1);
+          tasks.markTask(id, false);
+          talk("Okay, I'll uncheck the task:\n    "
+             + tasks.printTask(id));
+          break;
+        }
+        case ADD:
+        default:
           Task task = new Task(input);
 					tasks.addTask(task);
 					talk("I've added \"" + input + "\" to your list");
@@ -42,5 +57,9 @@ public class Sam {
     System.out.println("┌───────────────────────────────────────────┐");
     System.out.println("  " + message);
     System.out.println("└───────────────────────────────────────────┘");
+  }
+
+  private static int getIntArg(String input, int i) {
+    return Integer.parseInt(input.split(" ")[i]);
   }
 }
