@@ -1,6 +1,6 @@
 package task;
 
-public class Task {
+public abstract class Task {
     protected String desc;
     protected boolean isMarked;
     protected static int count = 0;
@@ -9,7 +9,6 @@ public class Task {
         this.desc = desc;
         this.isMarked = false;
         Task.count ++;
-
     }
 
     public void mark() {
