@@ -37,6 +37,11 @@ public class Duke {
                     Task t = this.tasks.get(num - 1);
                     t.unmarkDone();
                     getUnmarkDoneMessage(t);
+                } else if(i.toLowerCase().startsWith("delete")) {
+                    int num = Integer.parseInt(i.split(" ")[1]);
+                    Task t = this.tasks.get(num - 1);
+                    this.deleteTask(num);
+                    this.deleteTaskMessage(t);
                 } else if (i.toLowerCase().startsWith("todo")) {
                     if (i.split(" ").length == 1) {
                         throw new EmptyInputException();
@@ -117,5 +122,13 @@ public class Duke {
     public void getUnmarkDoneMessage(Task t) {
         System.out.println("Okay, I've marked this task as not done yet:\n" + "  " + t.toString());
         this.printLine();
+    }
+    public void deleteTaskMessage(Task t) {
+        System.out.println("Noted. I've removed this task:\n" + "  " + t.toString() +
+                "\nNow you have " + this.tasks.size() + " tasks in the list.");
+        this.printLine();
+    }
+    public void deleteTask(int num) {
+        this.tasks.remove(num - 1);
     }
 }
