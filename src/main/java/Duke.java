@@ -1,8 +1,10 @@
+import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Duke {
     public static void main(String[] args) {
         Scanner inputScanner = new Scanner(System.in);
+        ArrayList<String> lists = new ArrayList<>();
         boolean loop = true;
 
         String tabSpace = "    ";
@@ -22,12 +24,19 @@ public class Duke {
 
         System.out.println(bracket);
         switch(input) {
+            case "list":
+                for(int i = 0; i < lists.size(); i++) {
+                    System.out.println(tabSpace + " " + i+1 + " " + lists.get(i));
+                }
+                
+                break;
             case "bye":
                 System.out.println(tabSpace + "Bye! See you soon!");
                 loop = false;
                 break;
             default:
-                System.out.println(tabSpace + input);
+                lists.add(input);
+                System.out.println(tabSpace + " added " + input);
         }
         System.out.println(bracket);
 
