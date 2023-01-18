@@ -1,3 +1,5 @@
+import exceptions.EmptyContentException;
+
 public class TaskHandler {
     private List taskList;
     private Task[] content;
@@ -65,9 +67,9 @@ public class TaskHandler {
         }
     }
 
-    public String eventHandler(String input) {
+    public String eventHandler(String input) throws EmptyContentException {
         if (input.length() < 7) {
-            return "Please enter event body.";
+            throw new EmptyContentException("event");
         }
         String[] splitCommand = input.split(" ", 2);
         String[] segments = splitCommand[1].split("/");
@@ -76,7 +78,7 @@ public class TaskHandler {
         String endTime = segments[2];
 
         if (item.isEmpty()) {
-            return "Please enter event body.";
+            throw new EmptyContentException("event");
         }
         Event newEvent = new Event(item, startTime, endTime);
         content[counter] = newEvent;
@@ -84,15 +86,15 @@ public class TaskHandler {
         return HEADER + "\n" + newEvent + "\n" + String.format("Now you have %d tasks in the list.", counter) + "\n";
     }
 
-    public String todoHandler(String input) {
+    public String todoHandler(String input) throws EmptyContentException {
         if (input.length() < 5) {
-            return "Please enter event body.";
+            throw new EmptyContentException("todo");
         }
         String[] splitCommand = input.split(" ", 2);
         String item = splitCommand[1];
 
         if (item.isEmpty()) {
-            return "Please enter event body.";
+            throw new EmptyContentException("todo");
         }
 
         Todo newTodo = new Todo(item);
@@ -101,9 +103,9 @@ public class TaskHandler {
         return HEADER + "\n" + newTodo + "\n" + String.format("Now you have %d tasks in the list.", counter)+ "\n";
 
     }
-    public String deadlineHandler(String input) {
+    public String deadlineHandler(String input) throws EmptyContentException {
         if (input.length() < 9) {
-            return "Please enter event body.";
+            throw new EmptyContentException("deadline");
         }
         String[] splitCommand = input.split(" ", 2);
         String[] segments = splitCommand[1].split("/");
@@ -111,7 +113,7 @@ public class TaskHandler {
         String deadline = segments[1];
 
         if (item.isEmpty()) {
-            return "Please enter event body.";
+            throw new EmptyContentException("deadline");
         }
 
         Deadline newDeadline = new Deadline(item, deadline);
