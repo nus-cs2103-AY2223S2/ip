@@ -3,7 +3,7 @@ import java.util.Scanner;
 public class Sam {
 	public static void main(String[] args) {
     Scanner scanner = new Scanner(System.in);
-		MyList list = new MyList();
+		TaskList tasks = new TaskList();
     boolean live = true;
 
     System.out.println(Assets.LOGO);
@@ -21,11 +21,11 @@ public class Sam {
 					talk("Goodbye!");
 					break;
 				case "list":
-          String listString = list.generateList();
-					talk("Here is your list:\n\n" + listString);
+          String list = tasks.generateList();
+					talk("Here is your list:\n\n" + list);
 					break;
 				default:
-					list.addItem(input);
+					tasks.addTask(input);
 					talk("I've added \"" + input + "\" to your list");
 			}
     }
