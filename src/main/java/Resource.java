@@ -1,12 +1,19 @@
 /**
- * Class that stores all resource values statically.
+ * Class that stores all customizable resource values statically.
  */
 public final class Resource {
+    public final static String taskIndent="    ";
     public final static String cmdExit = "bye";
     public final static String cmdList = "list";
     public final static String cmdMk = "mark";
     public final static String cmdUnmk = "unmark";
-    public final static String notifAdd = " added: ";
+    public final static String cmdTodo = "todo";
+    public final static String cmdDdl = "deadline";
+    public final static String cmdEvent = "event";
+    public final static String kwDdl = "by";
+    public final static String kwStt = "from";
+    public final static String kwEnd = "end";
+    public final static String notifAdd = " Got it. I've added this task:\n";
     public final static String notifList = " Here are the tasks in your list:\n";
     public final static String notifMk = " Booyah! Marked this task as done:\n";
     public final static String notifUnmk = " OK. Marked this task as not done:\n";
@@ -25,11 +32,18 @@ public final class Resource {
     /**
      * Format to print array index number.
      */
-    public final static String idxFmt(int i) {
+    public static String idxFmt(int i) {
         return " " + (i + 1) + '.';
     }
+    public final static char doneMk ='X';
+    public final static char eventMk=Character.toUpperCase(cmdEvent.charAt(0));
+    public final static char ddlMk=Character.toUpperCase(cmdDdl.charAt(0));
 
-    public final static String statusFmt(boolean status) {
-        return "[" + (status ? 'X' : ' ') + ']';
+    public static String statusFmt(boolean status) {
+        return Util.parenthesize(status ? doneMk : ' ');
+    }
+
+    public static String nTaskFmt(int nTask){
+        return " Now you have "+nTask+" tasks in the list.\n";
     }
 }

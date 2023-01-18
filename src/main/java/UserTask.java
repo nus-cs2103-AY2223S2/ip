@@ -1,14 +1,17 @@
+/**
+ * Entries to be recorded by the bot
+ * */
 public class UserTask {
-    private final String description;
+    public final String desc;
     public boolean status;
 
-    public UserTask(String line) {
-        this.description = line;
+    public UserTask(String args) {
+        desc = args;
         status = false;
     }
 
     @Override
     public String toString() {
-        return Resource.statusFmt(status) + ' ' + description;
+        return Resource.statusFmt(status) + ' ' + desc;
     }
 }

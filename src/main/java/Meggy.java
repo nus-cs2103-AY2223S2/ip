@@ -22,9 +22,9 @@ public class Meggy implements Runnable {
     private final Scanner in;
     private final PrintStream out;
     /**
-     * List of string items. Allow dupes.
+     * List of tasks. Allow dupes.
      */
-    private final ArrayList<UserTask> items;
+    private final ArrayList<UserTask> tasks;
 
     /**
      * @param in  Non-null input stream
@@ -37,39 +37,43 @@ public class Meggy implements Runnable {
             throw new NullPointerException("OutputStream is null");
         this.in = new Scanner(in);
         this.out = out instanceof PrintStream ? (PrintStream) out : new PrintStream(out);
-        items = new ArrayList<>();
+        tasks = new ArrayList<>();
         cmdJob = Map.of(
                 Resource.cmdExit, s -> Resource.farewell,
                 Resource.cmdList, s -> listItems(),
                 Resource.cmdMk, s -> markTaskStatus(s, true),
-                Resource.cmdUnmk, s -> markTaskStatus(s, false)
+                Resource.cmdUnmk, s -> markTaskStatus(s, false),
+                Resource.cmdTodo, s -> addTask(s,Util.todoNew)
         );
-        unknownCmdBehavior = s -> {
-            items.add(new UserTask(s));
-            return Resource.notifAdd + s;
-        };
+        unknownCmdBehavior = null;
     }
 
     public static void main(String[] args) {
         new Meggy(System.in, System.out).run();
     }
 
-    private final String listItems() {
+    private String listItems() {
         final StringBuilder ans = new StringBuilder(Resource.notifList);
         int i = 0;
-        for (UserTask item : items)
-            ans.append(Resource.idxFmt(i++)).append(item).append('\n');
+        for (UserTask task : tasks)
+            ans.append(Resource.idxFmt(i++)).append(task).append('\n');
         return ans.toString();
     }
 
     /**
      * @param arg Index (start with 1) of task to be updated.
      */
-    private final String markTaskStatus(String arg, boolean newStatus) {
+    private String markTaskStatus(String arg, boolean newStatus) {
         final int idx = Integer.parseInt(arg) - 1;
-        final UserTask item = items.get(idx);
-        item.status = newStatus;
-        return (newStatus ? Resource.notifMk : Resource.notifUnmk) + "   " + item;
+        final UserTask task = tasks.get(idx);
+        task.status = newStatus;
+        return (newStatus ? Resource.notifMk : Resource.notifUnmk) + Resource.taskIndent + task;
+    }
+
+    private String addTask(String args,Function<String,UserTask> newTask){
+        final UserTask task=newTask.apply(args);
+        tasks.add(task);
+        return Resource.notifAdd + Resource.taskIndent+task+'\n'+Resource.nTaskFmt(tasks.size());
     }
 
     /**
