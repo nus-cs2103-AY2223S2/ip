@@ -1,20 +1,20 @@
-todo Eat
-todo Sleep
+todo eat
+todo sleep
 mark 1
 mark 2
-deadline Eat /8pm
+deadline eat /8pm
 list
-deadline Sleep /8pm
+deadline sleep /8pm
 unmark 1
 list
 mark 1
 list
-deadline Drink /8pm
-event Eat /10am /9pm
+deadline drink /8pm
+event eat /10am /9pm
 unmark 2
-event Sleep /10am /9pm
+event sleep /10am /9pm
 mark 6
-event Drink /10am /9pm
+event drink /10am /9pm
 unmark 6
 list
 bye

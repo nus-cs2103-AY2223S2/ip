@@ -4,7 +4,7 @@
 ██╔══██╗██╔══╝░░██║░░██║
 ██║░░██║███████╗██████╔╝
 ╚═╝░░╚═╝╚══════╝╚═════╝░
-is ready to assist you
+ is ready to assist you
 
 New Task Added: eat
 There are now 1 task(s) awaiting completion
