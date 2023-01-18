@@ -32,6 +32,8 @@ public class Duke {
                     mark(split);
                 } else if (split[0].equals("unmark")) {
                     unmark(split);
+                } else if (split[0].equals("delete")) {
+                    delete(split);
                 } else if (Arrays.asList("todo", "deadline", "event").contains(split[0])) {
                     System.out.println("Got it. I've added this task:");
                     switch(split[0]) {
@@ -73,7 +75,7 @@ public class Duke {
             System.out.println("Nice! I've marked this task as done:");
             System.out.println("[" + task.getStatusIcon() + "] " + task.getDescription());
         } catch (NumberFormatException e) {
-            throw new DukeException("Please provide the task number you want to mark.");
+            throw new DukeException("Please provide the number of the task you want to mark.");
         }
     }
 
@@ -91,7 +93,7 @@ public class Duke {
             System.out.println("OK, I've marked this task as not done yet:");
             System.out.println("[" + task.getStatusIcon() + "] " + task.getDescription());
         } catch (NumberFormatException e) {
-            throw new DukeException("Please provide the task number you want to unmark.");
+            throw new DukeException("Please provide the number of the task you want to unmark.");
         }
 
     }
@@ -127,5 +129,24 @@ public class Duke {
             throw new DukeException("Please provide an end time for this event.");
         }
         list.add(new Event(tokens[0], tokens2[0], tokens2[1] ));
+    }
+
+    public static void delete(String[] split) throws DukeException {
+        if (split.length == 1) {
+            throw new DukeException("Please specify the task you want to delete.");
+        }
+        try {
+            Integer i = Integer.parseInt(split[1]);
+            if (i > list.size() || i < 1) {
+                throw new DukeException("Please provide a valid task number.");
+            }
+            Task task = list.get(i-1);
+            list.remove(i-1);
+            System.out.println("Noted. I've removed this task:");
+            System.out.println(task);
+            System.out.println("Now you have " + list.size() + " tasks in the list.");
+        } catch (NumberFormatException e) {
+            throw new DukeException("Please provide the number of the task you want to delete.");
+        }
     }
 }
