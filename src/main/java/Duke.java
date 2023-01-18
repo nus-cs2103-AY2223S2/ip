@@ -6,12 +6,23 @@ public class Duke {
 
         Scanner Obj = new Scanner(System.in);
         String input = "";
+        String task[] = new String[100];
+        int counter = 0;
         while (input.equals("bye") == false) {
             input = Obj.nextLine();
             if (input.equals("bye") == true) {
                 break;
             }
-            System.out.println(input);
+            if (input.equals("list") == false) {
+                System.out.println("added: " + input);
+                task[counter] = input;
+                counter++;
+            }
+            if (input.equals("list") == true) {
+                for (int i = 0; i < counter; i++) {
+                    System.out.println(i + 1 + ". " + task[i]);
+                }
+            }
         }
         System.out.println("Bye. Hope to see you again soon!");
     }
