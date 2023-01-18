@@ -1,6 +1,7 @@
 public class Task {
     private boolean isCompleted = false; //by default the task should not be completed
     private String task;
+
     public Task(String task) {
         this.task = task;
     }
