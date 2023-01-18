@@ -5,6 +5,10 @@ public class Task {
     protected String name;
     protected Boolean isChecked = false;
 
+    protected Task(String name) {
+        this.name = name;
+    }
+    
     public static void listTasks() {
         if (curr == 0) {
             System.out.println("There are currently no items in your list. ");

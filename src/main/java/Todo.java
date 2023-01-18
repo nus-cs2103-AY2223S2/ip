@@ -1,7 +1,7 @@
 public class Todo extends Task {
 
     protected Todo(String name) {
-        super.name = name;
+        super(name);
     }
 
     @Override
