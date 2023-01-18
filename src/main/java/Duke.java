@@ -22,56 +22,33 @@ public class Duke {
                     System.out.println(". " + store.get(i).toString());
                 }
             }
-            else if (userInput.contains("todo")) {
+
+            else if (userInput.split(" ", 2)[0].equals("todo")) {
                 try {
-                    store.add(Task.noOfTasks, new ToDo(userInput.substring(5, userInput.length())));
+                    store.add(Task.noOfTasks, new ToDo(userInput.split(" ", 2)[0]));
                 } catch(Exception e) {
                     throw new DukeException("The description of a todo cannot be empty.");
                 }
             }
-            else if (userInput.contains("deadline")) {
-                String trimmed = "";
-                String description = "";
-                String deadline = "";
+            else if (userInput.split(" ", 2)[0].equals("deadline")) {
                 try {
-                    trimmed = userInput.substring(9, userInput.length());
-                    description = trimmed.substring(0, trimmed.indexOf("/") - 1);
+                    String[] input = userInput.split(" ", 2)[1].split(" /by ", 2);
+                    store.add(Task.noOfTasks, new Deadline(input[0], input[1]));
                 } catch(Exception e) {
-                    throw new DukeException("The description of a deadline cannot be empty.");
+                    throw new DukeException("The description and date of a deadline cannot be empty.");
                 }
-                try {
-                    deadline = trimmed.substring((trimmed.indexOf("by")) + 3, trimmed.length());
-                } catch(Exception e) {
-                    throw new DukeException("The date of a deadline cannot be empty.");
-                }
-                store.add(Task.noOfTasks, new Deadline(description, deadline));
             }
-            else if (userInput.contains("event")) {
-                String trimmed = "";
-                String description = "";
-                String from = "";
-                String to = "";
+            else if (userInput.split(" ", 2)[0].equals("event")) {
                 try {
-                    trimmed = userInput.substring(6, userInput.length());
-                    description = trimmed.substring(0, trimmed.indexOf("/from") - 1);
+                    String[] input = userInput.split(" ", 2)[1].split(" /", 3);
+                    store.add(Task.noOfTasks, new Event(input[0], input[1], input[2]));
                 } catch (Exception e) {
-                    throw new DukeException("The description of a event cannot be empty.");
+                    throw new DukeException("The description, start time, and end time of a event cannot be empty.");
                 }
-                try {
-                    from = trimmed.substring(trimmed.indexOf("/from") + 6, trimmed.indexOf("/to") - 1);
-                } catch (Exception e) {
-                    throw new DukeException("The start time of a event cannot be empty.");
-                }
-                try {
-                    to = trimmed.substring(trimmed.indexOf("/to") + 4, trimmed.length());
-                } catch (Exception e) {
-                    throw new DukeException("The end time of a event cannot be empty.");
-                }
-                store.add(Task.noOfTasks, new Event(description, from, to));
             }
             else if (userInput.contains("mark")) {
                 // obtaining index to mark, -1 because array starts from index 0
-                int index = Integer.valueOf(userInput.substring(userInput.indexOf("mark") + 5, userInput.length())) - 1;
+                int index = Integer.valueOf(userInput.substring(userInput.indexOf("mark") + 5)) - 1;
                 // handle errors out of range
                 if (index < 0 || index >= Task.noOfTasks) {
                     int display = index + 1;
@@ -87,7 +64,7 @@ public class Duke {
                 System.out.println(store.get(index).toString());
             }
             else if (userInput.contains("delete")) {
-                int index = Integer.valueOf(userInput.substring(userInput.indexOf("delete") + 7, userInput.length())) - 1;
+                int index = Integer.valueOf(userInput.substring(userInput.indexOf("delete") + 7)) - 1;
                 // handle errors out of range
                 if (index < 0 || index >= Task.noOfTasks) {
                     int display = index + 1;
