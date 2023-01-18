@@ -10,13 +10,23 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.stream.Collectors;
 
+/**
+ * Container class for tasks and their corresponding operations.
+ */
 public class TaskList {
     private final List<Task> tasks;
 
+    /**
+     * Constructor for an empty task list.
+     */
     public TaskList() {
         this.tasks = new ArrayList<>();
     }
 
+    /**
+     * Constructor for a task list populated with the given tasks.
+     * @param tasks Tasks to populate the list with.
+     */
     public TaskList(List<Task> tasks) {
         this.tasks = new ArrayList<>(tasks);
     }
@@ -34,6 +44,12 @@ public class TaskList {
         );
     }
 
+    /**
+     * Deletes a task from the list, based on the given command.
+     * @param command User input command.
+     * @return List of response lines.
+     * @throws MissingParameterException If the index to delete is invalid.
+     */
     public List<String> deleteTask(Command command) throws MissingParameterException {
         int index = -1;
         try {
@@ -43,6 +59,12 @@ public class TaskList {
         return this.deleteTask(index);
     }
 
+    /**
+     * Deletes a task from the list at the given index.
+     * @param index Index of the task to delete.
+     * @return List of response lines.
+     * @throws MissingParameterException If the index to delete is invalid.
+     */
     public List<String> deleteTask(int index) throws MissingParameterException {
         if (index <= 0 || index > this.tasks.size()) {
             throw new MissingParameterException(
@@ -105,13 +127,18 @@ public class TaskList {
     }
 
     /**
-     * Returns a list of response lines to display the list.
+     * Returns a list of response lines to display the task list.
      * @return List of response lines.
      */
     public List<String> getTasksForPrint() {
         return this.getTasksForPrint(this.tasks);
     }
 
+    /**
+     * Returns a list of response lines to display the task list, after applying the given filter.
+     * @param filter List filter.
+     * @return List of response lines.
+     */
     public List<String> getTasksForPrint(TaskFilter filter) {
         List<Task> filteredTasks = this.tasks
                 .stream()
@@ -120,6 +147,11 @@ public class TaskList {
         return getTasksForPrint(filteredTasks);
     }
 
+    /**
+     * Returns a list of response lines to display the given tasks.
+     * @param tasks List of tasks.
+     * @return List of response lines.
+     */
     private List<String> getTasksForPrint(List<Task> tasks) {
         if (tasks.isEmpty()) {
             return List.of("No tasks, you're good for the day!");
