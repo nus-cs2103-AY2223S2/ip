@@ -39,13 +39,6 @@ public class Roody {
         speak(this.printBuffer);
     }
 
-    // Middle statement
-    public void ask(){
-        this.printBuffer.add("I didn't quite get that.");
-        this.printBuffer.add("Please try that again");
-        speak(this.printBuffer);
-    }
-
     // final greeting
     public void bye() {
         speak("Bye. Hope to see you again soon!");
@@ -60,9 +53,7 @@ public class Roody {
         } else if (type == 'd') {
             // more than one / detected,
             if (inputs.length > 2) {
-                printBuffer.add("More than one additional option detected (/by).");
-                printBuffer.add("Do not use additonal \"/\" for deadline.");
-                speak(printBuffer);
+                new RoodyException("I don't understand that. Don't use additonal \"/\" for deadlines.");
                 return;
             } else {
                 task = new Deadline(inputs[0].substring("deadline ".length()), inputs[1].substring("by ".length()));
@@ -70,15 +61,13 @@ public class Roody {
         } else if (type == 'e') {
             // more or less than two / detected,
             if (inputs.length != 3) {
-                printBuffer.add("More/less than two additional options detected (/from /to).");
-                printBuffer.add("Do not use additonal \"/\" for events. ");
-                speak(printBuffer);
+                new RoodyException("I don't understand that. Don't use additonal \"/\" for events.");
                 return;
             } else {
                 task = new Event(inputs[0].substring("event ".length()), inputs[1].substring("from ".length()), inputs[2].substring("to ".length()));
             }
         } else {
-            speak("Error, wrong input detected");
+            new RoodyException("Error, wrong input detected");
             return;
         }
         list[index] = task;
@@ -97,7 +86,7 @@ public class Roody {
         if (index > 0) {
             printBuffer.add("Here are the tasks in your list:");
         } else {
-            printBuffer.add("There doesn't seem to be any tasks in your list.");
+            new RoodyException("There doesn't seem to be any tasks in your list.");
         }
         while (count < this.index) {
 
@@ -122,17 +111,16 @@ public class Roody {
             count++;
         }
 
-        speak(this.printBuffer);
+        speak(printBuffer);
     }
 
     // toggles completion status of tasks
-    private void complete(String index, boolean complete) {
+    private void complete(String index, boolean complete){
         int taskIndex = Integer.parseInt(index) - 1; 
-        if (taskIndex < this.list.length && this.list[taskIndex] == null) {
-            printBuffer.add("Sorry, this task dosen't exist");
-            speak(this.printBuffer);
+        if (taskIndex < list.length && list[taskIndex] == null) {
+            new RoodyException("Sorry, that task doesn't exist");
         } else {
-            Task task = this.list[taskIndex];
+            Task task = list[taskIndex];
             if (complete) {
                 task.setDone();
                 printBuffer.add("Nice! I've marked this task as done:");
@@ -142,11 +130,11 @@ public class Roody {
                 printBuffer.add("OK, I've marked this task as not done yet:");
                 printBuffer.add("["+ task.getType()+"][ ] " + task.toString());
             }
-            speak(this.printBuffer);
+            speak(printBuffer);
         }
     }
 
-    public static void main(String[] args) {
+    public static void main(String[] args){
         Roody roody = new Roody();
         // Sends initial greeting
         roody.greet();
@@ -173,7 +161,7 @@ public class Roody {
             } else if (inputs.length > 1 && (inputs[0].equals("todo") || inputs[0].equals("deadline") || inputs[0].equals("event"))) {
                 roody.addToList(input);
             } else {
-                roody.ask();
+                new RoodyException("I don't quite understand that.");
             }
         }
         scanner.close();
