@@ -19,7 +19,7 @@ public class TaskList extends ArrayList<Task> {
         }
         
         int listIndex = 1;
-        StringBuilder output = new StringBuilder();
+        StringBuilder output = new StringBuilder("Here are the tasks in your list:\n");
         for (Task task : this) {
             output.append(listIndex + ". " + task.toString() + "\n");
             listIndex++;
