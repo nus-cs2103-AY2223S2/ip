@@ -1,12 +1,15 @@
-package SebastianExceptions;
+package sebastianExceptions;
 
-import Utilities.Utilities;
+import formatters.Formatter;
 
+/**
+ * Exception when an event is declared using the wrong format
+ */
 public class EventFormatMismatchException extends InputFormatMismatchException{
     public EventFormatMismatchException() {
         super(
                 "Please specify a deadline in the following format: " + "\n" +
-                        Utilities.space() + "event [event] /from [start_time] /to [end_time]"
+                        Formatter.space() + "event [event] /from [start_time] /to [end_time]"
         );
     }
 }

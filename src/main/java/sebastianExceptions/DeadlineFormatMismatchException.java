@@ -1,12 +1,15 @@
-package SebastianExceptions;
+package sebastianExceptions;
 
-import Utilities.Utilities;
+import formatters.Formatter;
 
+/**
+ * Exception when a deadline is declared using the wrong format
+ */
 public class DeadlineFormatMismatchException extends InputFormatMismatchException{
     public DeadlineFormatMismatchException() {
         super(
                 "Please specify a deadline in the following format:" + "\n" +
-                Utilities.space() + "deadline [deadline] /by [end_time]"
+                Formatter.space() + "deadline [deadline] /by [end_time]"
         );
     }
 }

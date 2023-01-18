@@ -1,5 +1,5 @@
-import SebastianExceptions.*;
-import Utilities.Utilities;
+import sebastianExceptions.*;
+import formatters.Formatter;
 
 import java.util.Scanner;
 
@@ -10,26 +10,51 @@ public class Sebastian {
         this.tasks = new TaskList();
     }
 
+    /**
+     * Start a session by greeting the user
+     * @return a greet
+     */
     private String greet() {
-        return Utilities.space() + "Greetings, I'm Sebastian" + "\n" +
-                Utilities.space() + "I'm at your service";
+        return Formatter.space() + "Greetings, I'm Sebastian" + "\n" +
+                Formatter.space() + "I'm at your service";
     }
 
+    /**
+     * End a session
+     * @return final greet
+     */
     private String exit() {
-        return Utilities.space() + "Bye. It's my pleasure to serve you";
+        return Formatter.space() + "Bye. It's my pleasure to serve you";
     }
 
+    /**
+     * Echo whatever the user has typed in
+     * @param instruction the user input
+     * @return the same user input
+     */
     private String echo(String instruction){
-        return Utilities.space() + instruction;
+        return Formatter.space() + instruction;
     }
 
+    /**
+     * Response after a task is added to the task list
+     * @param task the task being added
+     * @return notice that the task has been added
+     */
     private String addTask(Task task){
-        return Utilities.space() + "Got it. I've added this task: " + "\n" +
-                Utilities.space() + Utilities.space() + task + "\n" +
-                Utilities.space() + "Now you have " + this.tasks.getTotalTasks() + " tasks in the list";
+        return Formatter.space() + "Noted. I've added this task: " + "\n" +
+                Formatter.space() + Formatter.space() + task + "\n" +
+                Formatter.space() + "Now you have " + this.tasks.getTotalTasks() + " tasks in the list";
     }
 
-    private String addTodo(String instruction) throws LackOfArgumentException, TodoMismatchException{
+
+    /**
+     * Add a to-do to the task list
+     * @param instruction user input
+     * @return notice that the to-do has been added
+     * @throws LackOfArgumentException when the user did not specify a to-do to add
+     */
+    private String addTodo(String instruction) throws LackOfArgumentException {
         String[] insArr = instruction.split(" ");
         if(insArr.length == 1) {
             throw new LackOfArgumentException();
@@ -39,6 +64,13 @@ public class Sebastian {
         }
     }
 
+    /**
+     * Add a deadline to the task list
+     * @param instruction user input
+     * @return notice that the deadline has been added
+     * @throws LackOfArgumentException when the user did not specify a deadline to add
+     * @throws DeadlineFormatMismatchException when the format for adding a deadline is not followed
+     */
     private String addDeadline(String instruction) throws LackOfArgumentException, DeadlineFormatMismatchException{
         String[] insArr = instruction.split(" ");
         if(insArr.length == 1) {
@@ -54,7 +86,14 @@ public class Sebastian {
         }
     }
 
-    private String addEvent(String instruction) throws EventFormatMismatchException{
+    /**
+     * Add an event to the task list
+     * @param instruction user input
+     * @return notice that the event has been added
+     * @throws LackOfArgumentException when the user did not specify an event to add
+     * @throws EventFormatMismatchException when the format for adding an event is not followed
+     */
+    private String addEvent(String instruction) throws LackOfArgumentException, EventFormatMismatchException{
         String[] insArr = instruction.split(" ");
         if(insArr.length == 1) {
             throw new LackOfArgumentException();
@@ -69,7 +108,15 @@ public class Sebastian {
         }
     }
 
-    private String markTask(String instruction) throws LackOfArgumentException, InstructionFormatException, TaskNotExistException{
+    /**
+     * Mark a task as done
+     * @param instruction user input
+     * @return notice that the task has been marked
+     * @throws LackOfArgumentException when the user did not specify a task to mark as done
+     * @throws InstructionFormatMismatchException when the user did not follow the format to mark a task
+     * @throws TaskNotExistException when the task specify by the user does not exist
+     */
+    private String markTask(String instruction) throws LackOfArgumentException, InstructionFormatMismatchException, TaskNotExistException{
         String[] insArr = instruction.split(" ");
         if(insArr.length == 1) {
             throw new LackOfArgumentException();
@@ -77,20 +124,28 @@ public class Sebastian {
         else if(insArr.length == 2) {
             try {
                 int taskIndex = Integer.parseInt(insArr[1]);
-                return  Utilities.space()+  "Well Done. I have marked this task as done: " + "\n" +
-                         Utilities.space() + Utilities.space() + this.tasks.markTaskAtIndex(taskIndex);
+                return  Formatter.space()+  "Well Done. I have marked this task as done: " + "\n" +
+                         Formatter.space() + Formatter.space() + this.tasks.markTaskAtIndex(taskIndex);
             } catch (NumberFormatException e) {
-                throw new InstructionFormatException("mark");
+                throw new InstructionFormatMismatchException("mark");
             } catch (IndexOutOfBoundsException e) {
                 throw new TaskNotExistException();
             }
         }
         else {
-            throw new InstructionFormatException("mark");
+            throw new InstructionFormatMismatchException("mark");
         }
     }
 
-    private String unmarkTask(String instruction) throws LackOfArgumentException, InstructionFormatException, TaskNotExistException{
+    /**
+     * Mark a task as not done
+     * @param instruction user input
+     * @return notice that the task has been marked as not done
+     * @throws LackOfArgumentException when the user did not specify a task to mark as not done
+     * @throws InstructionFormatMismatchException when the user did not follow the format to unmark a task
+     * @throws TaskNotExistException when the task specify by the user does not exist
+     */
+    private String unmarkTask(String instruction) throws LackOfArgumentException, InstructionFormatMismatchException, TaskNotExistException{
         String[] insArr = instruction.split(" ");
         if(insArr.length == 1) {
             throw new LackOfArgumentException();
@@ -98,20 +153,28 @@ public class Sebastian {
         else if(insArr.length == 2) {
             try {
                 int taskIndex = Integer.parseInt(insArr[1]);
-                return Utilities.space() + "No problem, I have unmarked this task: " + "\n" +
-                        Utilities.space() + Utilities.space() + this.tasks.unmarkTaskAtIndex(taskIndex);
+                return Formatter.space() + "No problem, I have unmarked this task: " + "\n" +
+                        Formatter.space() + Formatter.space() + this.tasks.unmarkTaskAtIndex(taskIndex);
             } catch (NumberFormatException e) {
-                throw new InstructionFormatException("unmark");
+                throw new InstructionFormatMismatchException("unmark");
             } catch (IndexOutOfBoundsException e) {
                 throw new TaskNotExistException();
             }
         }
         else {
-            throw new InstructionFormatException("unmark");
+            throw new InstructionFormatMismatchException("unmark");
         }
     }
 
-    private String deleteTask(String instruction) throws LackOfArgumentException, InstructionFormatException, TaskNotExistException{
+    /**
+     * Delete a task from the task list
+     * @param instruction user input
+     * @return notice that the task has been removed
+     * @throws LackOfArgumentException when the user did not specify a task to delete
+     * @throws InstructionFormatMismatchException when the user did not follow the format to delete a task
+     * @throws TaskNotExistException when the task specify by the user does not exist
+     */
+    private String deleteTask(String instruction) throws LackOfArgumentException, InstructionFormatMismatchException, TaskNotExistException{
         String[] insArr = instruction.split(" ");
         if(insArr.length == 1) {
             throw new LackOfArgumentException();
@@ -119,25 +182,34 @@ public class Sebastian {
         else if(insArr.length == 2) {
             try {
                 int taskIndex = Integer.parseInt(insArr[1]);
-                return Utilities.space() + "Noted. I have deleted this task: " + "\n" +
-                        Utilities.space() + Utilities.space() + this.tasks.deleteTaskAtIndex(taskIndex) + "\n" +
-                        Utilities.space() + "Now your have " + this.tasks.getTotalTasks() + " tasks in the list";
+                return Formatter.space() + "Noted. I have deleted this task: " + "\n" +
+                        Formatter.space() + Formatter.space() + this.tasks.deleteTaskAtIndex(taskIndex) + "\n" +
+                        Formatter.space() + "Now your have " + this.tasks.getTotalTasks() + " tasks in the list";
             } catch (NumberFormatException e) {
-                throw new InstructionFormatException("delete");
+                throw new InstructionFormatMismatchException("delete");
             } catch (IndexOutOfBoundsException e) {
                 throw new TaskNotExistException();
             }
         }
         else {
-            throw new InstructionFormatException("delete");
+            throw new InstructionFormatMismatchException("delete");
         }
     }
 
+    /**
+     * Show the current task list
+     * @param instruction user input
+     * @return the current task list
+     */
     private String showList(String instruction) {
-        return Utilities.space() + "Here are the tasks in your list" + "\n" + this.tasks;
+        return Formatter.space() + "Here are the tasks in your list" + "\n" + this.tasks;
     }
 
-    private void onDuty() throws IllegalInstructionException{
+    /**
+     * Start a prompt-response cycle
+     * @throws IllegalInputException when user input does not constitute a valid instruction
+     */
+    private void onDuty() throws IllegalInputException{
         Scanner scan = new Scanner(System.in);
         String instruction = scan.nextLine();
         String action = instruction.split(" ")[0];
@@ -166,9 +238,9 @@ public class Sebastian {
                     res  = this.deleteTask(instruction);
                     break;
                 default:
-                    throw new IllegalInstructionException();
+                    throw new IllegalInputException();
             }
-            Utilities.printFormattedString(res);
+            Formatter.printFormattedString(res);
             instruction = scan.nextLine();
             action = instruction.split(" ")[0];
         }
@@ -176,16 +248,16 @@ public class Sebastian {
 
     public static void main(String[] args) {
         Sebastian sebastian = new Sebastian();
-        Utilities.printFormattedString(sebastian.greet());
+        Formatter.printFormattedString(sebastian.greet());
         boolean flag = true;
         while(flag){
             try {
                 sebastian.onDuty();
                 flag = false;
-            } catch (IllegalInstructionException | TaskNotExistException | InputFormatMismatchException e) {
-                Utilities.printFormattedString(Utilities.space() + e.getMessage());
+            } catch (IllegalInputException | TaskNotExistException | InputFormatMismatchException e) {
+                Formatter.printFormattedString(Formatter.space() + e.getMessage());
             }
         }
-        Utilities.printFormattedString(sebastian.exit());
+        Formatter.printFormattedString(sebastian.exit());
     }
 }
