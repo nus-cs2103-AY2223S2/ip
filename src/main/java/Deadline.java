@@ -3,7 +3,7 @@ public class Deadline extends Task {
     protected String by;
 
     public Deadline(String description, String by) {
-        super(description);
+        super(description, "deadline");
         this.by = by;
     }
 

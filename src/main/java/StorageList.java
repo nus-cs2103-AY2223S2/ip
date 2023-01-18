@@ -7,11 +7,6 @@ public class StorageList {
         this.list = new ArrayList<>();
     }
 
-    public void addTask(String sentence) {
-        Task t = new Task(sentence);
-        list.add(t);
-    }
-
     public void markTask(int taskno) {
         list.get(taskno).markAsDone();
         System.out.println(list.get(taskno));
@@ -29,14 +24,14 @@ public class StorageList {
         }
     }
 
-    public void addTodo(String sentence) {
+    public void addTodo(String sentence) throws DukeException {
         Todo t = new Todo(sentence);
         list.add(t);
         System.out.println("Got it, I've added this task:\n");
         System.out.println(t);
     }
 
-    public void addDeadline(String sentence, String by) {
+    public void addDeadline(String sentence, String by) throws DukeException {
         Deadline t = new Deadline(sentence, by);
         list.add(t);
         System.out.println("Got it, I've added this task:\n");

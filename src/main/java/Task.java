@@ -3,10 +3,12 @@
 public class Task {
     protected String description;
     protected boolean isDone;
+    protected String typeofTask;
 
-    public Task(String description) {
+    public Task(String description, String typeofTask) {
         this.description = description;
         this.isDone = false;
+        this.typeofTask = "";
     }
 
     public String getStatusIcon() {
