@@ -21,9 +21,9 @@ public class TaskList {
             String content = arr[0].substring(5, arr[0].length());
             String[] startEnd = arr[1].split(" /to ");
             this.tasks.add(new Event(content, startEnd[0], startEnd[1]));
-        } else {
+        } else if (input.matches("todo .*")) {
             // Handle todo
-            this.tasks.add(new ToDo(input));
+            this.tasks.add(new ToDo(input.substring(5, input.length())));
         }
 
         return tasks.get(tasks.size() - 1);
