@@ -2,20 +2,14 @@ import java.util.*;
 import java.util.regex.*;
 public class Duke {
     public static void main(String[] args) {
-        /*
-        String logo = " ____        _        \n"
-                + "|  _ \\ _   _| | _____ \n"
-                + "| | | | | | | |/ / _ \\\n"
-                + "| |_| | |_| |   <  __/\n"
-                + "|____/ \\__,_|_|\\_\\___|\n";
-
-        System.out.println("Hello from\n" + logo);
-        */
 
         String greeting = "What's up! XyDuke here!\nHow can I be of assistance?";
         System.out.println(greeting);
 
-        String[] commands = {"bye", "list"};
+        String[] singleCommands = {"bye", "list"};
+        String[] valueCommands = {"unmark ", "mark ", "delete "};
+        String[] taskCommands = {"deadline ", "todo ", "event "};
+
         ArrayList<Task> taskStorage = new ArrayList<>();
 
         Scanner sc = new Scanner(System.in);
@@ -26,15 +20,13 @@ public class Duke {
 
             if (input.equals("list")) {
                 printTasks(taskStorage);
+                input = sc.nextLine();
+                continue;
+            }
 
-            } else {
-
-                String toFind = "unmark ";
-                Pattern word = Pattern.compile(toFind);
-                Matcher match = word.matcher(input);
-                boolean gotMatch = match.find();
-
-                if (gotMatch && match.start() == 0) {
+            String command = returnCommand(input, valueCommands);
+            switch (command) {
+                case "unmark ": {
                     String[] inputArr = input.split(" ");
                     int toUnmark = Integer.parseInt(inputArr[1]);
                     Task unmarkTask = taskStorage.get(toUnmark - 1);
@@ -42,15 +34,9 @@ public class Duke {
                     System.out.println("OK, I've marked this task as undone:\n" + unmarkTask);
                     input = sc.nextLine();
                     continue;
-
                 }
 
-                toFind = "mark ";
-                word = Pattern.compile(toFind);
-                match = word.matcher(input);
-                gotMatch = match.find();
-
-                if (gotMatch && match.start() == 0) {
+                case "mark ": {
                     String[] inputArr = input.split(" ");
                     int toMark = Integer.parseInt(inputArr[1]);
                     Task markTask = taskStorage.get(toMark - 1);
@@ -58,15 +44,9 @@ public class Duke {
                     System.out.println("Nice! I've marked this task as done:\n" + markTask);
                     input = sc.nextLine();
                     continue;
-
                 }
 
-                toFind = "delete ";
-                word = Pattern.compile(toFind);
-                match = word.matcher(input);
-                gotMatch = match.find();
-
-                if (gotMatch && match.start() == 0) {
+                case "delete ": {
                     String[] inputArr = input.split(" ");
                     int toDelete = Integer.parseInt(inputArr[1]);
                     Task deleteTask = taskStorage.remove(toDelete - 1);
@@ -76,49 +56,49 @@ public class Duke {
                     input = sc.nextLine();
                     continue;
                 }
+            }
 
 
-                try {
-                    validate(input);
-                } catch (DukeException de) {
-                    System.out.println(de.getMessage());
-                    input = sc.nextLine();
-                    continue;
+            try {
+                validateTaskCommand(input, taskCommands);
+            } catch (DukeException de) {
+                System.out.println(de.getMessage());
+                input = sc.nextLine();
+                continue;
+            }
+
+            String[] inputArr = input.split(" ", 2);
+            String taskType = inputArr[0];
+
+            switch (taskType) {
+                case "todo":
+                    ToDo todoTask = new ToDo(inputArr[1]);
+                    taskStorage.add(todoTask);
+                    System.out.println("Got it. I've added this ToDo task:");
+                    System.out.println(todoTask);
+                    System.out.println("Now you have " + taskStorage.size() + " tasks in the list.");
+
+                    break;
+                case "deadline": {
+                    String[] newInputArr = inputArr[1].split(" /by ", 2);
+                    Deadline deadlineTask = new Deadline(newInputArr[0], newInputArr[1]);
+                    taskStorage.add(deadlineTask);
+                    System.out.println("Got it. I've added this Deadline task:");
+                    System.out.println(deadlineTask);
+                    System.out.println("Now you have " + taskStorage.size() + " tasks in the list.");
+
+                    break;
                 }
+                case "event": {
+                    String[] newInputArr = inputArr[1].split(" /from ", 2);
+                    String[] newerInputArr = newInputArr[1].split(" /to ", 2);
+                    Event eventTask = new Event(newInputArr[0], newerInputArr[0], newerInputArr[1]);
+                    taskStorage.add(eventTask);
+                    System.out.println("Got it. I've added this Event task:");
+                    System.out.println(eventTask);
+                    System.out.println("Now you have " + taskStorage.size() + " tasks in the list.");
 
-                String[] inputArr = input.split(" ", 2);
-                String taskType = inputArr[0];
-
-                switch (taskType) {
-                    case "todo":
-                        ToDo todoTask = new ToDo(inputArr[1]);
-                        taskStorage.add(todoTask);
-                        System.out.println("Got it. I've added this ToDo task:");
-                        System.out.println(todoTask);
-                        System.out.println("Now you have " + taskStorage.size() + " tasks in the list.");
-
-                        break;
-                    case "deadline": {
-                        String[] newInputArr = inputArr[1].split(" /by ", 2);
-                        Deadline deadlineTask = new Deadline(newInputArr[0], newInputArr[1]);
-                        taskStorage.add(deadlineTask);
-                        System.out.println("Got it. I've added this Deadline task:");
-                        System.out.println(deadlineTask);
-                        System.out.println("Now you have " + taskStorage.size() + " tasks in the list.");
-
-                        break;
-                    }
-                    case "event": {
-                        String[] newInputArr = inputArr[1].split(" /from ", 2);
-                        String[] newerInputArr = newInputArr[1].split(" /to ", 2);
-                        Event eventTask = new Event(newInputArr[0], newerInputArr[0], newerInputArr[1]);
-                        taskStorage.add(eventTask);
-                        System.out.println("Got it. I've added this Event task:");
-                        System.out.println(eventTask);
-                        System.out.println("Now you have " + taskStorage.size() + " tasks in the list.");
-
-                        break;
-                    }
+                    break;
                 }
             }
 
@@ -129,11 +109,37 @@ public class Duke {
         sc.close();
     }
 
-    public static void validate(String input) throws DukeException {
+    public static String returnCommand(String input, String[] commands) {
+        for (String s : commands) {
+            Pattern word = Pattern.compile(s);
+            Matcher match = word.matcher(input);
+            boolean gotMatch = match.find();
+
+            if (gotMatch && match.start() == 0) {
+                return s;
+            }
+        }
+
+        return input;
+    }
+
+    public static void validateTaskCommand(String input, String[] commands) throws DukeException {
         input = input.trim();
-        if (input.equals("todo") || input.equals("deadline") || input.equals("event")) {
-            throw new DukeException("OOPS!!! The description of a " + input + " task cannot be empty!");
-        } else if (!input.contains("todo") && !input.contains("deadline") && !input.contains("event")) {
+        for (String s : commands) {
+            if (s.equals(input + " ")) {
+                throw new DukeException("OOPS!!! The description of a " + input + " task cannot be empty!");
+            }
+        }
+
+        boolean correct = false;
+        for (String s : commands) {
+            Pattern word = Pattern.compile(s);
+            Matcher match = word.matcher(input);
+            boolean gotMatch = match.find() && (match.start() == 0);
+            correct = correct || gotMatch;
+        }
+
+        if (!correct) {
             throw new DukeException("OOPS!!! I'm sorry, but I don't know what that means! :(");
         }
     }
@@ -152,12 +158,4 @@ public class Duke {
         }
     }
 
-    public static boolean isCommand(String input, String[] commands) {
-        for (String s : commands) {
-            if (s.equals(input)) {
-                return true;
-            }
-        }
-        return false;
-    }
 }
