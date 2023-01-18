@@ -18,7 +18,13 @@ public class Duke {
         prettyPrint("Hello! I'm Clippy, your lightweight personal assistant.");
         prettyPrint("What can I do for you today?");
 
-        while (parseCommand(sc.nextLine().trim()));
+        try {
+            while (parseCommand(sc.nextLine().trim()));
+        } catch (ClippyException e) {
+            System.out.println(e.toString());
+        } catch (Exception e) {
+            System.out.println("System exception " + e.toString());
+        }
 
         return;
     }
@@ -30,7 +36,7 @@ public class Duke {
      * @param   command a string containing the command entered by the user
      * @return          true if programme should continue accepting further commands, else false
      */
-    private static boolean parseCommand(String command) {
+    private static boolean parseCommand(String command) throws ClippyException {
         String[] args = command.split(" ");
         switch (args[0]) {
             case "bye":
