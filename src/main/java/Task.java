@@ -1,7 +1,7 @@
 public class Task {
 
-    private String taskName;
-    private Boolean taskDone;
+    protected String taskName;
+    protected  Boolean taskDone;
 
     protected Task(String taskName) {
         this.taskName = taskName;
