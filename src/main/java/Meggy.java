@@ -43,7 +43,8 @@ public class Meggy implements Runnable {
                 Resource.cmdList, s -> listItems(),
                 Resource.cmdMk, s -> markTaskStatus(s, true),
                 Resource.cmdUnmk, s -> markTaskStatus(s, false),
-                Resource.cmdTodo, s -> addTask(s,Util.todoNew)
+                Resource.cmdTodo, s -> addTask(s, Util.todoNew),
+                Resource.cmdDdl, s -> addTask(s, Util.ddlNew)
         );
         unknownCmdBehavior = null;
     }
@@ -70,10 +71,10 @@ public class Meggy implements Runnable {
         return (newStatus ? Resource.notifMk : Resource.notifUnmk) + Resource.taskIndent + task;
     }
 
-    private String addTask(String args,Function<String,UserTask> newTask){
-        final UserTask task=newTask.apply(args);
+    private String addTask(String args, Function<String, UserTask> newTask) {
+        final UserTask task = newTask.apply(args);
         tasks.add(task);
-        return Resource.notifAdd + Resource.taskIndent+task+'\n'+Resource.nTaskFmt(tasks.size());
+        return Resource.notifAdd + Resource.taskIndent + task + '\n' + Resource.nTaskFmt(tasks.size());
     }
 
     /**

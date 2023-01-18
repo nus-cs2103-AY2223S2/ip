@@ -2,7 +2,7 @@
  * Class that stores all customizable resource values statically.
  */
 public final class Resource {
-    public final static String taskIndent="    ";
+    public final static String taskIndent = "    ";
     public final static String cmdExit = "bye";
     public final static String cmdList = "list";
     public final static String cmdMk = "mark";
@@ -22,6 +22,8 @@ public final class Resource {
     public final static String msgTl = msgHd + "\n>";
     public final static String greetings = "Wommy! Get REKT by the upcoming star of Inkopolis, Meggy!\n";
     public final static String farewell = "OK gotta go play more Turf Wars. Have a nice day!";
+    public final static char doneMk = 'X';
+    public final static char eventMk = Character.toUpperCase(cmdEvent.charAt(0));
 
     /**
      * @deprecated Class that stores all resource values statically. Should not be initialized.
@@ -35,15 +37,12 @@ public final class Resource {
     public static String idxFmt(int i) {
         return " " + (i + 1) + '.';
     }
-    public final static char doneMk ='X';
-    public final static char eventMk=Character.toUpperCase(cmdEvent.charAt(0));
-    public final static char ddlMk=Character.toUpperCase(cmdDdl.charAt(0));
 
     public static String statusFmt(boolean status) {
         return Util.parenthesize(status ? doneMk : ' ');
     }
 
-    public static String nTaskFmt(int nTask){
-        return " Now you have "+nTask+" tasks in the list.\n";
+    public static String nTaskFmt(int nTask) {
+        return " Now you have " + nTask + " task(s) in the list.\n";
     }
 }
