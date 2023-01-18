@@ -32,6 +32,48 @@ public class Duke {
         }
     }
 
+    public static class Todo extends Task {
+        public Todo(String description) {
+            super(description);
+        }
+        @Override
+        public String toString() {
+            return "[T]" + super.toString();
+        }
+    }
+
+    public static class Deadline extends Task {
+
+        protected String by;
+
+        public Deadline(String description, String by) {
+            super(description);
+            this.by = by;
+        }
+
+        @Override
+        public String toString() {
+            return "[D]" + super.toString() + " (by: " + by + ")";
+        }
+    }
+
+    public static class Event extends Task {
+
+        protected String from;
+        protected String to;
+
+        public Event(String description, String from, String to) {
+            super(description);
+            this.from = from;
+            this.to = to;
+        }
+
+        @Override
+        public String toString() {
+            return "[E]" + super.toString() + " (from: " + from + " to " + to + ")";
+        }
+    }
+
     public static void print(String s) {
         System.out.println(s);
     }
@@ -40,6 +82,7 @@ public class Duke {
         String trigger = input.split(" ")[0];
         int tid = 1;
         Task task;
+        String content = "", ddl = "", from = "", to = "";
         switch (trigger) {
             case "bye":
                 print("Bye. Hope to see you again soon!");
@@ -79,10 +122,52 @@ public class Duke {
                 print("OK, I've marked this task as not done yet:");
                 print(task.toString());
                 break;
+            case "deadline":
+                try {
+                    input = input.split(trigger)[1];
+                    print(input.split("/by")[0]);
+                    content = input.split("/by")[0].strip();
+                    ddl = input.split("/by")[1].strip();
+                } catch (IndexOutOfBoundsException e) {
+                    print(e.toString());
+                    System.exit(1);
+                }
+                Deadline deadline = new Deadline(content, ddl);
+                todos.add(deadline);
+                print("Got it. I've added this task:");
+                print("\t" + deadline);
+                print("Now you have " + todos.size() + " tasks in the list.");
+                break;
+            case "event":
+                try {
+                    input = input.split(trigger)[1];
+                    content = input.split("/from")[0].strip();
+                    from = input.split("/from")[1].split("/to")[0].strip();
+                    to = input.split("/from")[1].split("/to")[1].strip();
+                } catch (IndexOutOfBoundsException e) {
+                    print(e.toString());
+                    System.exit(1);
+                }
+                Event event = new Event(content, from, to);
+                todos.add(event);
+                print("Got it. I've added this task:");
+                print("\t" + event);
+                print("Now you have " + todos.size() + " tasks in the list.");
+                break;
+            case "todo":
+                try {
+                    input = input.split(trigger)[1];
+                } catch (IndexOutOfBoundsException e) {
+                    print(e.toString());
+                    System.exit(1);
+                }
+                Todo todo = new Todo(input);
+                todos.add(todo);
+                print("Got it. I've added this task:");
+                print("\t" + todo);
+                print("Now you have " + todos.size() + " tasks in the list.");
             default:
-                task = new Task(input);
-                todos.add(task);
-                print("added:" + input);
+                print(trigger + " not found.");
         }
     }
 
