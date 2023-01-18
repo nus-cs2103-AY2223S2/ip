@@ -201,7 +201,7 @@ public class Duke {
     }
 
     /**
-     * This method unmarks task as undone.
+     * This method deletes task given its index.
      *
      * @param   strIdx  Index of task
      * @return  void
