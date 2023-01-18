@@ -1,6 +1,6 @@
 import java.util.Scanner;
 
-public class Duke {
+public class Cbot {
     public static void main(String[] args) {
 		ToDo td = new ToDo();
 		
