@@ -7,25 +7,42 @@ public class TaskList {
      * @param input
      * @return
      */
-    public String addTasks(String input) {
+    public String addTasks(String input,String formatSpace) {
         tasks[taskCount] = new Task(input);
         taskCount++;
-        return "added: " + input;
+        return formatSpace + tasks[taskCount - 1].getRepresentation();
+    }
+
+    /**
+     *
+     * @param input
+     * @param formatSpace
+     * @return return formatted task representation.
+     */
+    public String toggleTask(String input, String formatSpace) {
+        String[] parseInput = input.trim().split(" ",2);
+        int index =  Integer.parseInt(parseInput[1]) - 1;
+         if (parseInput[0].toLowerCase().contains("unmark")) {
+            tasks[index].unmark();
+            return formatSpace + tasks[index].getRepresentation();
+        } else if (parseInput[0].toLowerCase().contains("mark")) {
+            tasks[index].mark();
+            return formatSpace + tasks[index].getRepresentation();
+        }else {
+            // Uknown Command
+            return "Command not Found.";
+        }
     }
 
     /**
      * Retreives Tasks from the list and formats according to UI specifications.
      * @param formatSpace
-     * @return
+     * @return formatted tasks from taskList
      */
     public String formatTasks(String formatSpace) {
         String  res = "";
         for (int i = 0; i < taskCount; i++){
-            if (i == 0) {
-                res +=  i + ". " + tasks[i].getMessage() + "\n";
-            } else {
-                res +=  formatSpace + i + ". " + tasks[i].getMessage() + "\n";
-            }
+                res +=  formatSpace + i + ". " + tasks[i].getRepresentation() + "\n";
         }
         return res;
     }

@@ -1,3 +1,4 @@
+import java.util.Locale;
 import java.util.Scanner;
 
 public class AvaUI {
@@ -5,13 +6,17 @@ public class AvaUI {
     private final String AVA_EYES_OPEN = "(｡◕‿◕｡)";
     private final String AVA_EYES_CLOSE = "( ^_^)";
     private final String BOUNDARY = "﹋";
-    private final String FORMAT_SPACE = "       ";
+    private final String FORMAT_SPACE = "         ";
     //Boundary Constants
     private int BNUM = 50;
     //Introduction Constant
     private final String INTRO_MESSAGE = "Heya! I am Ava.";
     private final String GREET = "Nice to meet you!!";
     private final String ASK_MESSAGE = "How can I brighten you're day ?";
+    private final String LIST_MESSAGE = "You've got a busy day ahead: ";
+    private final String ADD_TASK_MESSAGE = "Added this task for you: ";
+    private final String MARK_TASK_MESSAGE = "Yayy! One more task done:";
+    private final String UNMARK_TASK_MESSAGE = "Ahh! More work to be done on this task:";
     private final String EXIT_MESSAGE = "Have a nice day !!";
 
     //App Variables
@@ -33,14 +38,22 @@ public class AvaUI {
         while (!done) {
             Scanner myObj = new Scanner(System.in);
             this.ask();
-            String input = myObj.nextLine();
+            String input = myObj.nextLine().toLowerCase();
             if (input.contains("bye")){
                 done = true;
                 this.displayExit();
             } else if(input.contains("list")) {
-                this.displayOutput(this.tasks.formatTasks(FORMAT_SPACE));
-            } else {
-                this.displayOutput(this.tasks.addTasks(input));
+                String output = this.LIST_MESSAGE + "\n" + this.tasks.formatTasks(FORMAT_SPACE);
+                this.displayOutput(output);
+            } else if (input.contains("unmark")){
+                String output = this.UNMARK_TASK_MESSAGE + "\n" + this.tasks.toggleTask(input, FORMAT_SPACE);
+                this.displayOutput(output);
+            } else if (input.contains("mark")) {
+                String output = this.MARK_TASK_MESSAGE + "\n" + this.tasks.toggleTask(input, FORMAT_SPACE);
+                this.displayOutput(output);
+            }  else {
+                String output = this.ADD_TASK_MESSAGE + "\n" + this.tasks.addTasks(input, FORMAT_SPACE);
+                this.displayOutput(output);
             }
         }
     }
