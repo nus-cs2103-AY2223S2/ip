@@ -11,13 +11,17 @@ public class Task {
         return (status ? "[X]" : "[ ]");
     }
 
+    public String getMsg() {
+        return msg;
+    }
+
     public void mark() {
-        System.out.println("Nice! I've marked this task as done:\n");
         status = true;
+        System.out.println("Nice! I've marked this task as done:\n" + getStatusIcon() + msg);
     }
 
     public void unmark() {
-        System.out.println("OK, I've marked this task as not done yet:\n");
+        System.out.println("OK, I've marked this task as not done yet:\n" + getStatusIcon() + msg);
         status = false;
     }
 
