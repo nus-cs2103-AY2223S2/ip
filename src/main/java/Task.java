@@ -13,15 +13,15 @@ public class Task {
 
     public String outputMarked() {
         isDone = true;
-        return "Well done. I've marked this tasked as done:\n" + display();
+        return "Well done. I've marked this tasked as done:\n";
     }
 
     public String outputUnmarked() {
         isDone = false;
-        return "Noted. I've marked this tasked as undone:\n" + display();
+        return "Noted. I've marked this tasked as undone:\n";
     }
 
-    public String display() {
+    public String toString() {
         return "[" + getStatusIcon() + "] " + description;
     }
 }
