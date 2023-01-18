@@ -16,7 +16,7 @@ public class Duke {
         loop: while (true) {
             switch (curEvent) {
             case ADD:
-                storedInputs.add(new ToDos(s));
+                storedInputs.add(new ToDo(s));
                 System.out.println("\nadded: " + s + "\n");
                 break;
             case BYE:
