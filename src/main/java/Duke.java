@@ -10,10 +10,11 @@ public class Duke {
         System.out.println("Hello from\n" + logo);
         introMessage();
 
+        Checker checker = new Checker();
         Scanner scan = new Scanner(System.in);
         String userInput = scan.nextLine();
 
-        while (!userInput.equals("bye")) {
+        while (!checker.checkEnd(userInput)) {
             System.out.println(userInput);
             userInput = scan.nextLine();
         }
