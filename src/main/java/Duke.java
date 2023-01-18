@@ -78,7 +78,19 @@ public class Duke {
         System.out.println(s);
     }
 
-    public static void process_input(String input) {
+    public static class DukeCommandNotFoundException extends Exception {
+        public DukeCommandNotFoundException (String s) {
+            super(s);
+        }
+    }
+
+    public static class DukeEmptyTaskException extends Exception {
+        public DukeEmptyTaskException (String s) {
+            super(s);
+        }
+    }
+
+    public static void process_input(String input) throws DukeCommandNotFoundException, DukeEmptyTaskException {
         String trigger = input.split(" ")[0];
         int tid = 1;
         Task task;
@@ -138,8 +150,12 @@ public class Duke {
                 print("Now you have " + todos.size() + " tasks in the list.");
                 break;
             case "event":
+                if (input.split(trigger).length == 1) {
+                    throw new DukeEmptyTaskException("☹ OOPS!!! The description of a " + trigger + " cannot be empty.");
+                } else {
+                    input = input.split(trigger)[1].strip();
+                }
                 try {
-                    input = input.split(trigger)[1];
                     content = input.split("/from")[0].strip();
                     from = input.split("/from")[1].split("/to")[0].strip();
                     to = input.split("/from")[1].split("/to")[1].strip();
@@ -154,11 +170,10 @@ public class Duke {
                 print("Now you have " + todos.size() + " tasks in the list.");
                 break;
             case "todo":
-                try {
-                    input = input.split(trigger)[1];
-                } catch (IndexOutOfBoundsException e) {
-                    print(e.toString());
-                    System.exit(1);
+                if (input.split(trigger).length == 0) {
+                    throw new DukeEmptyTaskException("☹ OOPS!!! The description of a " + trigger + " cannot be empty.");
+                } else {
+                    input = input.split(trigger)[1].strip();
                 }
                 task = new Todo(input);
                 todos.add(task);
@@ -167,6 +182,9 @@ public class Duke {
                 print("Now you have " + todos.size() + " tasks in the list.");
                 break;
             case "delete":
+                if (input.split(trigger).length == 1) {
+                    throw new DukeEmptyTaskException("☹ OOPS!!! The description of a " + trigger + " cannot be empty.");
+                }
                 try {
                     tid = Integer.parseInt(input.split(trigger)[1].strip());
                     task = todos.get(tid - 1);
@@ -180,7 +198,7 @@ public class Duke {
                 }
                 break;
             default:
-                print(trigger + " not found.");
+                throw new DukeCommandNotFoundException("☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
         }
     }
 
@@ -191,7 +209,11 @@ public class Duke {
         Scanner sc = new Scanner(System.in);
         while (sc.hasNextLine()) {
             String input = sc.nextLine();
-            process_input(input);
+            try {
+                process_input(input);
+            } catch (Exception e) {
+                print(e.toString());
+            }
         }
     }
 }
