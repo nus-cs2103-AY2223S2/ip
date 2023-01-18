@@ -2,7 +2,8 @@ public class DukeEmptyTaskException extends DukeException {
     public static enum TaskType {
         Todo,
         Deadline,
-        Event
+        Event,
+        Unknown
     }
 
     public DukeEmptyTaskException(TaskType type) {
