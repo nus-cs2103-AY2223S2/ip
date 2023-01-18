@@ -1,4 +1,6 @@
+import java.util.Optional;
 import java.util.Scanner;
+import java.util.function.Predicate;
 
 public class Duke {
     private static final int INDENT_LEVEL = 4;
@@ -106,9 +108,25 @@ public class Duke {
         );
     }
 
-    private static void mark(Command command, TaskList tasks) {
-        int taskIndex = Integer.parseInt(command.body) - 1;
-        Task task = tasks.get(taskIndex);
+    private static void mark(Command command, TaskList tasks) throws DukeInvalidArgumentException {
+        if (command.hasEmptyBody()) {
+            throw new DukeInvalidArgumentException("No task index given.");
+        }
+        
+        Predicate<String> isNumeric = str -> str.matches("^-?\\d+$");
+        int taskIndex = Optional.of(command.body)
+            .filter(isNumeric)
+            .map(body -> Integer.parseInt(body) - 1)
+            .filter(i -> i >= 0)
+            .orElseThrow(() -> new DukeInvalidArgumentException(
+                "Invalid task index. Index needs to be a positive integer."
+            ));
+        Task task = Optional.of(taskIndex)
+            .filter(index -> index < tasks.size())
+            .map(index -> tasks.get(index))
+            .orElseThrow(() -> new DukeInvalidArgumentException(
+                "Task index is beyond the range of the task list."
+            ));
         task.markAsDone();
         Duke.say(
             "Nice! I've marked this task as done:\n"
@@ -116,9 +134,25 @@ public class Duke {
         );
     }
 
-    private static void unmark(Command command, TaskList tasks) {
-        int taskIndex = Integer.parseInt(command.body) - 1;
-        Task task = tasks.get(taskIndex);
+    private static void unmark(Command command, TaskList tasks) throws DukeInvalidArgumentException {
+        if (command.hasEmptyBody()) {
+            throw new DukeInvalidArgumentException("No task index given.");
+        }
+        
+        Predicate<String> isNumeric = str -> str.matches("^-?\\d+$");
+        int taskIndex = Optional.of(command.body)
+            .filter(isNumeric)
+            .map(body -> Integer.parseInt(body) - 1)
+            .filter(i -> i >= 0)
+            .orElseThrow(() -> new DukeInvalidArgumentException(
+                "Invalid task index. Index needs to be a positive integer."
+            ));
+        Task task = Optional.of(taskIndex)
+            .filter(index -> index < tasks.size())
+            .map(index -> tasks.get(index))
+            .orElseThrow(() -> new DukeInvalidArgumentException(
+                "Task index is beyond the range of the task list."
+            ));
         task.markAsNotDone();
         Duke.say(
             "OK, I've marked this task as not done yet:\n"

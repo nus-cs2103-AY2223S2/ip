@@ -26,6 +26,10 @@ public class Command {
         this.body = body;
     }
 
+    public boolean hasEmptyBody() {
+        return this.body.isEmpty();
+    }
+
     @Override
     public String toString() {
         return fullCommand;
