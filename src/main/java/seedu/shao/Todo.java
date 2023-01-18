@@ -1,3 +1,5 @@
+package seedu.shao;
+
 public class Todo extends Task {
 
 	public Todo(String description) {

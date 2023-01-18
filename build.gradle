@@ -28,7 +28,7 @@ test {
 }
 
 application {
-    mainClassName = "Shao"
+    mainClassName = "seedu.shao.Shao"
 }
 
 shadowJar {
@@ -36,6 +36,6 @@ shadowJar {
     archiveClassifier = null
 }
 
-run{
+run {
     standardInput = System.in
 }
