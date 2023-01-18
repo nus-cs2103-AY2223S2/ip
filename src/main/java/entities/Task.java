@@ -1,3 +1,8 @@
+package entities;
+
+import enums.TaskType;
+import exceptions.DukeException;
+
 import java.util.regex.Matcher;
 
 abstract public class Task {
@@ -13,7 +18,7 @@ abstract public class Task {
         return (isDone ? "X" : " "); // mark done task with X
     }
 
-    public static void processTask(TaskMap<Task> taskMap, Matcher matcher, TaskType type) throws DukeException {
+    public static void processTask(Matcher matcher, TaskType type) throws DukeException {
         if (matcher.find()) {
             String description = matcher.group(2);
             Task task;
@@ -33,7 +38,7 @@ abstract public class Task {
                 default:
                     task = null;
             }
-            if (task != null) taskMap.addTask(task);
+            if (task != null) TaskList.addTask(task);
         } else {
             throw type.getErr();
         }

@@ -1,0 +1,58 @@
+package entities;
+
+import java.util.*;
+
+public class TaskList {
+    private static final List<Task> taskList = new ArrayList<>();
+
+    public static void addTask(Task task) {
+        taskList.add(task);
+        System.out.println("Got it. I've added this task:");
+        System.out.println("\t" + task);
+        System.out.println("Now you have " + taskList.size() + " tasks in the list.");
+    }
+
+    public static Optional<Task> getTask(Integer key) {
+        if (!isValidKey(key)) {
+            System.out.println("This task don't exists! Please select one from the list.");
+            return Optional.empty();
+        }
+        // accounts for 0-based indexing
+        return Optional.of(taskList.get(key - 1));
+    }
+
+    private static boolean isValidKey(Integer key) {
+        return (key <= taskList.size() && key > 0);
+    }
+
+    public static void deleteTask(Integer key) {
+        if (isValidKey(key)) {
+            Task task = taskList.get(key - 1);
+            taskList.remove(key - 1);
+            System.out.println("Noted. I've removed the task:");
+            System.out.println("\t" + task);
+            System.out.println("Now you have " + taskList.size() + " tasks in the list.");
+        } else {
+            System.out.println("This task don't exists! Please select one from the list.");
+        }
+    }
+
+    public static String listTasks() {
+        if (taskList.size() > 0) {
+            StringBuilder sb = new StringBuilder();
+            ListIterator<Task> it = taskList.listIterator();
+            while (it.hasNext()) {
+                sb.append(it.nextIndex() + 1  + ". " + it.next() + "\n");
+            }
+            sb.deleteCharAt(sb.length() - 1);
+            return sb.toString();
+        } else {
+            return "There are no outstanding tasks!";
+        }
+    }
+
+    @Override
+    public String toString() {
+        return listTasks();
+    }
+}
