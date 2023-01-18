@@ -1,0 +1,11 @@
+sleep
+todo eat chocolate
+deadline do homework /by tmr
+event wedding /from now /to next year
+list
+mark 2
+mark 1
+list
+unmark 2
+list
+bye
