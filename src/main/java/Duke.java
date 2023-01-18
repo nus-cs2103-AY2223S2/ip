@@ -9,22 +9,52 @@ public class Duke {
         System.out.println("What can I do for you today?");
 
         Scanner sc = new Scanner(System.in);
-        ArrayList<String> tasks = new ArrayList<String>();
+        ArrayList<Task> tasks = new ArrayList<Task>();
 
         String input = sc.nextLine();
 
         while (!input.equals("bye")) {
             System.out.println("(\\ (\\ \n" +
                     "(„• ֊ •„) ♡\n" +
-                    "━O━O━━━━━━━━━━━━━━━━━━━━━━━━━");
+                    "━O━O━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━");
 
-            if (input.equals("list")) {
+            if (input.startsWith("mark")) {
+                int num = Integer.parseInt(input.split(" ")[1]);
+                if (num > tasks.size()) {
+                    System.out.println("Huh? You don't have that many things in your list! :(");
+                } else {
+                    Task t = tasks.get(num - 1);
+                    if (t.isDone()) {
+                        System.out.println("Huh? You've already done this task!");
+                    } else {
+                        t.mark();
+                        System.out.println("Okie! I've marked this task as done:");
+                        System.out.println(String.format("[%s] %s", t.getStatusIcon(), t.getDesc()));
+                    }
+                }
+            } else if (input.startsWith("unmark")) {
+                int num = Integer.parseInt(input.split(" ")[1]);
+                if (num > tasks.size()) {
+                    System.out.println("Huh? You don't have that many things in your list! :(");
+                } else {
+                    Task t = tasks.get(num - 1);
+                    if (!t.isDone()) {
+                        System.out.println("Huh? You haven't even done this task!");
+                    } else {
+                        t.unmark();
+                        System.out.println("Okie! I've marked this task as not done yet:");
+                        System.out.println(String.format("[%s] %s", t.getStatusIcon(), t.getDesc()));
+                    }
+                }
+            } else if (input.equals("list")) {
+                System.out.println("Here are all the things on your list!");
                 for (int i = 0; i < tasks.size(); i++) {
-                    System.out.println(String.format("%s. %s", i + 1, tasks.get(i)));
+                    Task t = tasks.get(i);
+                    System.out.println(String.format("%s.[%s] %s", i + 1, t.getStatusIcon(), t.getDesc()));
                 }
             } else {
-                tasks.add(input);
-                System.out.println("added: " + input);
+                tasks.add(new Task(input));
+                System.out.println("Alright! Added: " + input);
             }
             input = sc.nextLine();
         }
