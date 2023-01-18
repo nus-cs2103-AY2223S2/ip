@@ -1,3 +1,3 @@
 public enum State {
-    GREET, ECHO, EXIT
+    GREET, ADD, LIST, EXIT
 }
