@@ -1,0 +1,6 @@
+todo something
+event some event /today 3pm /friday 5pm
+deadline homework /tomorrow 23 59
+mark 2
+unmark 3
+bye
