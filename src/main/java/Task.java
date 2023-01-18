@@ -28,10 +28,10 @@ abstract class Task {
     }
 
     // returns new Task that is marked as done
-    abstract public Task markTask();
+    abstract public Task markTask() throws MarkingException;
 
     // returns new Task that is marked as undone
-    abstract public Task unmarkTask();
+    abstract public Task unmarkTask() throws UnmarkingException;
 
     @Override
     public String toString() {

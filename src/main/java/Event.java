@@ -12,14 +12,20 @@ public class Event extends Task{
         this(description, false, "E", from, to);
     }
 
-    public Task markTask() {
+    public Task markTask() throws MarkingException {
+        if (super.done) {
+            throw new MarkingException();
+        }
         System.out.println("Nice! I've marked this task as done:");
         Task markedTask = new Event(super.description, true, super.taskType, this.from, this.to);
         System.out.println(markedTask);
         return markedTask;
     }
 
-    public Task unmarkTask() {
+    public Task unmarkTask() throws UnmarkingException {
+        if (!super.done) {
+            throw new UnmarkingException();
+        }
         System.out.println("Ok, I've marked this task as not done yet:");
         Task unmarkedTask = new Event(super.description, false, super.taskType, this.from, this.to);
         System.out.println(unmarkedTask);
