@@ -55,6 +55,12 @@ public class Duke {
                 System.out.println(HORIZONTAL_LINE + "\n" +
                         "OK, I've marked this task as not done yet:" +
                         "\n" + task + "\n" + HORIZONTAL_LINE);
+            } else if (action.equalsIgnoreCase("delete")) {
+                Task task = commandList.remove(Integer.parseInt(strArray[1]) - 1);
+                System.out.println(HORIZONTAL_LINE + "\n" +
+                        "Noted. I've removed this task:" + "\n" +
+                        task + "\n" + "Now you have " + commandList.size() +
+                        " tasks in the list." + "\n" + HORIZONTAL_LINE);
             } else {
                 try {
                     TaskTypes type = getTaskType(action);
@@ -107,7 +113,7 @@ public class Duke {
                 throw new InvalidTimeException();
             }
             String[] temp2 = temp[1].split("/to", 2);
-            if (temp2.length < 2 || temp[1].trim().equals("")) {
+            if (temp2.length < 2 || temp2[1].trim().equals("")) {
                 throw new InvalidTimeException();
             }
             command = temp[0];
