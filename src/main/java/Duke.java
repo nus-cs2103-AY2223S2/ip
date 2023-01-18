@@ -31,16 +31,23 @@ public class Duke {
         
         String[] commands = userInput.split(" ");
 
-        if (userInput.equalsIgnoreCase("list")) {
-            Task.listTasks();
-        } else if (commands[0].equalsIgnoreCase("mark")) {
-            Task.markTasks(Integer.parseInt(commands[1])-1);
-        } else if (commands[0].equalsIgnoreCase("unmark")) {
-            Task.unmarkTasks(Integer.parseInt(commands[1])-1);
-        } else {
-            Task.addTask(userInput);
+        switch(commands[0].toUpperCase()) {
+            case "LIST":
+                Task.listTasks();
+                break;
+            case "MARK":
+                Task.markTasks(Integer.parseInt(commands[1])-1);
+                break;
+            case "UNMARK":
+                Task.unmarkTasks(Integer.parseInt(commands[1])-1);
+                break;
+            default:
+                String taskName = commands[1];
+                for (int i = 2; i < commands.length; i++) {
+                    taskName += " " + commands[i];
+                }
+                Task.addTask(commands[0], taskName);
         }
-
         System.out.println("\n----------------------------------\n");
     }
 

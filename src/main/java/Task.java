@@ -2,40 +2,52 @@ public class Task {
     private static Task[] arr = new Task[100];
     private static int curr = 0;
 
-    private String name;
-    private Boolean isChecked;
-
-    private Task(String name) {
-        this.name = name;
-        this.isChecked = false;
-    }
+    protected String name;
+    protected Boolean isChecked = false;
 
     public static void listTasks() {
-        System.out.println("Here are the items in your list: \n");
-        for (int i = 0; i < curr; i++) {
-            System.out.println(i+1 + ") " + arr[i]);
+        if (curr == 0) {
+            System.out.println("There are currently no items in your list. ");
+        } else {
+            System.out.println("Here are the items in your list: \n");
+            for (int i = 0; i < curr; i++) {
+                System.out.println("    " + i+1 + ") " + arr[i]);
+            }
         }
     }
 
-    public static void addTask(String userInput) {
-        arr[curr] = new Task(userInput);
-        curr++;
-        System.out.println("added: " + userInput);
+    public static void addTask(String command, String userInput) {
+        String[] dates = userInput.split("/");
+        switch(command.toUpperCase()) {
+            case "TODO": 
+                arr[curr] = new Todo(userInput);
+                break;
+            case "DEADLINE":
+                arr[curr] = new Deadline(dates[0], dates[1]);
+                break;
+            case "EVENT":
+                arr[curr] = new Event(dates[0], dates[1], dates[2]);
+                break;           
+        }
+        System.out.println("The following task has been added to your list: \n" + arr[curr] 
+                            + "\nCurrently, your list has " + ++curr + " tasks.");
     }
 
     public static void markTasks(int task) {
         arr[task].isChecked = true;
-        System.out.println("This task is marked as done: \n" + arr[task]);
+        System.out.println("This task is marked as done: \n    " + arr[task]);
     }
 
     public static void unmarkTasks(int task) {
         arr[task].isChecked = false;
-        System.out.println("Okay. This task is marked as not done yet: \n" + arr[task]);
+        System.out.println("Okay. This task is marked as not done yet: \n    " + arr[task]);
     }
 
-    @Override
-    public String toString() {
-        String mark = this.isChecked ? "[X]" : "[ ]";
-        return mark + " " + this.name;
+    protected String markToString() {
+        return this.isChecked ? "[X]" : "[ ]";
+    }
+
+    protected String TasktoString() {
+        return markToString() + " " + this.name;
     }
 }
