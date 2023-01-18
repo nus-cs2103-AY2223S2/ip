@@ -47,6 +47,12 @@ public class TaskList {
         return tasks.get(tasks.size() - 1);
     }
 
+    public Task deleteTask(int i) {
+        Task res = this.getTask(i);
+        tasks.remove(i);
+        return res;
+    }
+
     public void addDeadline(String task, String deadline) {
         this.tasks.add(new Deadline(task, deadline));
     }
