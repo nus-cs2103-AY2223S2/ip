@@ -3,6 +3,9 @@ abstract class Task {
     private boolean isDone;
 
     public Task(String description) {
+        if (description.isEmpty()) {
+            throw new IllegalArgumentException("Task cannot be empty!");
+        }
         this.description = description;
         this.isDone = false;
     }
