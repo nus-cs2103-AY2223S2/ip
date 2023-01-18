@@ -13,7 +13,7 @@ public class Duke {
         String s = askForInput();
         while(!s.equals("bye")) {
             if (s.equals("list")) {
-                System.out.println("\n" + printList()); 
+                System.out.println("\nHere are the tasks in your list:\n" + printList()); 
             } else {
                 storedInputs.add(new Task(s));
                 System.out.println("\nadded: " + s + "\n");
