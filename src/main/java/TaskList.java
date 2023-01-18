@@ -47,6 +47,7 @@ public class TaskList {
         this.items[last] = e;
         this.len += 1;
         System.out.println("added: " + e.getDescription());
+        System.out.println("There are now " + this.len + " tasks to get done");
         return true;
     }
 
