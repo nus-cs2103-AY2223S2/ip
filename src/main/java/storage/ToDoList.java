@@ -74,4 +74,12 @@ public class ToDoList {
             throw new InvalidArgumentException("Make sure you enter an index of a task that exists in the list!");
         }
     }
+
+    /**
+     * Determine the number of tasks in the to do list
+     * @return Count of the tasks
+     */
+    public int count() {
+        return toDoList.size();
+    }
 }

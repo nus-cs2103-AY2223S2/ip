@@ -38,6 +38,11 @@ public class DeadlineResponse extends Response {
 
         Deadline newD = new Deadline(des, by);
         toDoList.createToDo(newD);
-        return String.format("Alright! This task has been added into the list:\n %s", newD);
+        return String.format(
+                "Alright! This task has been added into the list:" +
+                        "\n\t   %s" +
+                        "\n\t Now you have %d task(s) in the list.",
+                newD,
+                toDoList.count());
     }
 }

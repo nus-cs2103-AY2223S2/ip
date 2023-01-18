@@ -46,6 +46,11 @@ public class EventResponse extends Response {
 
         Event newEvent = new Event(des, from, to);
         toDoList.createToDo(newEvent);
-        return String.format("Alright! This task has been added into the list:\n %s", newEvent);
+        return String.format(
+                "Alright! This task has been added into the list:" +
+                        "\n\t   %s" +
+                        "\n\t Now you have %d task(s) in the list.",
+                newEvent,
+                toDoList.count());
     }
 }

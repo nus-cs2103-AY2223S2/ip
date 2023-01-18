@@ -29,6 +29,11 @@ public class CreateResponse extends Response {
     public String exec(ToDoList toDoList) {
         Todo newTodo = new Todo(this.todo);
         toDoList.createToDo(newTodo);
-        return String.format("Alright! This task has been added into the list:\n %s", newTodo);
+        return String.format(
+                "Alright! This task has been added into the list:" +
+                        "\n\t   %s" +
+                        "\n\t Now you have %d task(s) in the list.",
+                newTodo,
+                toDoList.count());
     }
 }
