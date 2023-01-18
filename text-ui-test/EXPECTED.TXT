@@ -4,6 +4,24 @@ What can I do for you?
 __________________________________________________________
 
 __________________________________________________________
+Noted. I've removed this task:
+[D][X] NingNing (by: Jun 5 2023 1230)
+Now you have 2 tasks in the list.
+__________________________________________________________
+
+__________________________________________________________
+Noted. I've removed this task:
+[E][ ] Giselle (from: Jun 15 2023 0100 to: Dec 1 2023 1734)
+Now you have 1 tasks in the list.
+__________________________________________________________
+
+__________________________________________________________
+Noted. I've removed this task:
+[T][ ] Karina
+Now you have 0 tasks in the list.
+__________________________________________________________
+
+__________________________________________________________
 Got it. I've added this task:
 [T][ ] Karina
 Now you have 1 tasks in the list.
@@ -11,19 +29,19 @@ __________________________________________________________
 
 __________________________________________________________
 Got it. I've added this task:
-[D][ ] Winter (by: Tomorrow)
+[D][ ] Winter (by: Dec 18 2023 0000)
 Now you have 2 tasks in the list.
 __________________________________________________________
 
 __________________________________________________________
 Got it. I've added this task:
-[E][ ] Giselle (from: Now to: Forever)
+[E][ ] Giselle (from: Jun 15 2023 0100 to: Dec 1 2023 1734)
 Now you have 3 tasks in the list.
 __________________________________________________________
 
 __________________________________________________________
 Got it. I've added this task:
-[D][ ] NingNing (by: Whenever happy)
+[D][ ] NingNing (by: Jun 5 2023 1230)
 Now you have 4 tasks in the list.
 __________________________________________________________
 
@@ -34,41 +52,43 @@ __________________________________________________________
 
 __________________________________________________________
 Nice! I've marked this task as done:
-[D][X] NingNing (by: Whenever happy)
+[D][X] NingNing (by: Jun 5 2023 1230)
 __________________________________________________________
 
 __________________________________________________________
-Okay, I've marked this task as not done yet:
+Okay. I've unmarked the following task:
 [T][ ] Karina
 __________________________________________________________
 
 __________________________________________________________
 Here are the tasks in your list:
 1.[T][ ] Karina
-2.[D][ ] Winter (by: Tomorrow)
-3.[E][ ] Giselle (from: Now to: Forever)
-4.[D][X] NingNing (by: Whenever happy)
+2.[D][ ] Winter (by: Dec 18 2023 0000)
+3.[E][ ] Giselle (from: Jun 15 2023 0100 to: Dec 1 2023 1734)
+4.[D][X] NingNing (by: Jun 5 2023 1230)
+__________________________________________________________
+
+__________________________________________________________
+Here are the tasks occurring through Sep 30 2023 1420:
+1.[D][ ] Winter (by: Dec 18 2023 0000)
+2.[E][ ] Giselle (from: Jun 15 2023 0100 to: Dec 1 2023 1734)
 __________________________________________________________
 
 __________________________________________________________
 Noted. I've removed this task:
-[E][ ] Giselle (from: Now to: Forever)
+[D][ ] Winter (by: Dec 18 2023 0000)
 Now you have 3 tasks in the list.
-__________________________________________________________
-
-__________________________________________________________
-Invalid input. Task Number is required.
 __________________________________________________________
 
 __________________________________________________________
 Here are the tasks in your list:
 1.[T][ ] Karina
-2.[D][ ] Winter (by: Tomorrow)
-3.[D][X] NingNing (by: Whenever happy)
+2.[E][ ] Giselle (from: Jun 15 2023 0100 to: Dec 1 2023 1734)
+3.[D][X] NingNing (by: Jun 5 2023 1230)
 __________________________________________________________
 
 __________________________________________________________
-Command not recognised. Please input a valid command
+Unrecognised command. Try again.
 __________________________________________________________
 
 __________________________________________________________
