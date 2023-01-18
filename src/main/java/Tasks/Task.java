@@ -1,8 +1,10 @@
 package Tasks;
+import java.util.ArrayList;
+
 import Exceptions.*;
 
 public class Task {
-    private static Task[] arr = new Task[100];
+    private static ArrayList<Task> arr = new ArrayList<>();
     private static int curr = 0;
 
     protected String name;
@@ -21,7 +23,7 @@ public class Task {
         } else {
             System.out.println("Here are the items in your list: \n");
             for (int i = 0; i < curr; i++) {
-                System.out.println("    " + (i+1) + ") " + arr[i]);
+                System.out.println("    " + (i+1) + ") " + arr.get(i));
             }
         }
     }
@@ -30,29 +32,35 @@ public class Task {
         String[] dates = userInput.split("/");
         switch(command.toUpperCase()) {
             case "TODO": 
-                arr[curr] = new Todo(userInput);
+                arr.add(new Todo(userInput));
                 break;
             case "DEADLINE":
-                arr[curr] = new Deadline(dates[0], dates[1]);
+                arr.add(new Deadline(dates[0], dates[1]));
                 break;
             case "EVENT":
-                arr[curr] = new Event(dates[0], dates[1], dates[2]);
+                arr.add(new Event(dates[0], dates[1], dates[2]));
                 break;
             default:
                 throw new UnknownTaskException(command);
         }
-        System.out.println("The following task has been added to your list: \n" + arr[curr] 
-                            + "\nCurrently, your list has " + ++curr + " tasks.");
+        System.out.println("The following task has been added to your list: \n" + arr.get(curr) 
+                            + "\nCurrently, your list has " + ++curr + (curr== 1 ? " task" : " tasks."));
+    }
+
+    public static void deleteTask(int task) {
+        System.out.println("The following task has been removed: \n" + arr.get(task) 
+                            + "\nCurrently, you have " + --curr + (curr==1 ? " task" : " tasks") + " left in your list.");
+        arr.remove(task);
     }
 
     public static void markTasks(int task) {
-        arr[task].isChecked = true;
-        System.out.println("This task is marked as done: \n    " + arr[task]);
+        arr.get(task).isChecked = true;
+        System.out.println("This task is marked as done: \n    " + arr.get(task));
     }
 
     public static void unmarkTasks(int task) {
-        arr[task].isChecked = false;
-        System.out.println("Okay. This task is marked as not done yet: \n    " + arr[task]);
+        arr.get(task).isChecked = false;
+        System.out.println("Okay. This task is marked as not done yet: \n    " + arr.get(task));
     }
 
     protected String markToString() {

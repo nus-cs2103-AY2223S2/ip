@@ -15,7 +15,7 @@ public class Event extends Task{
     @Override
     public String toString() {
         return "[E] " + this.TasktoString()
-            + "(from: " + this.startTime 
-            + ") (to: " + this.endTime + ")";
+            + "( from: " + this.startTime 
+            + ") ( to: " + this.endTime + ")";
     }
 }

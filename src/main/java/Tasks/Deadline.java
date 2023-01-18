@@ -12,6 +12,6 @@ public class Deadline extends Task {
 
     @Override
     public String toString() {
-        return "[D] " + this.TasktoString() + "(by: " + this.endDate + ")";
+        return "[D] " + this.TasktoString() + "( by: " + this.endDate + ")";
     }
 }

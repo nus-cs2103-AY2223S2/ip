@@ -41,6 +41,9 @@ public class Duke {
             case "UNMARK":
                 Task.unmarkTasks(Integer.parseInt(commands[1])-1);
                 break;
+            case "DELETE":
+                Task.deleteTask(Integer.parseInt(commands[1])-1);
+                break;
             default:
                 String taskName = "";
                 for (int i = 1; i < commands.length; i++) {
