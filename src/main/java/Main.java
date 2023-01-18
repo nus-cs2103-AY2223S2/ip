@@ -10,8 +10,10 @@ public class Main {
             if (s.compareTo("bye") == 0) {
                 lulu.exit();
                 break;
+            } else if (s.compareTo("list") == 0) {
+                lulu.list();
             } else {
-                lulu.echo(s);
+                lulu.add(s);
             }
         }
     }
