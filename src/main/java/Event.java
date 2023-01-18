@@ -17,7 +17,7 @@ public class Event extends Task {
     }
 
     private String duration() {
-        return "(from: " + this.from + " to: "
+        return " (from: " + this.from + " to: "
                 + this.to + ")";
     }
 

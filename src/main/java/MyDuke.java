@@ -1,3 +1,5 @@
+import java.util.List;
+import java.util.Arrays;
 import java.util.ArrayList;
 
 public class MyDuke {
@@ -32,10 +34,12 @@ public class MyDuke {
                 showCount();
                 break;
             case "deadline":
-                System.out.println("deadline not implemented yet");
+                addDeadline(tokens);
+                showCount();
                 break;
             case "event":
-                System.out.println("event not implemented yet");
+                addEvent(tokens);
+                showCount();
                 break;
             case "mark":
                 toggle(tokens[1]);
@@ -44,11 +48,7 @@ public class MyDuke {
                 toggle(tokens[1]);
                 break;
             default:
-                String taskDesc = String.join(" ", tokens);
-                Task newTask = new Task(taskDesc);
-                allTasks.add(newTask); taskCount++;
-                System.out.println("Successfully added:  "
-                                    + newTask.toString());
+                System.out.println("invalid command");
         }
     }
 
@@ -114,5 +114,34 @@ public class MyDuke {
         System.out.println("Successfully added:\n" + todo.toString());
     }
 
-    
+    private void addDeadline(String[] tokens) {
+        List<String> t = Arrays.asList(tokens);
+        int byIndex = t.indexOf("/by");
+
+        if (byIndex == -1) {
+            // raise invalid command
+        }
+
+        String desc = String.join(" ",t.subList(1, byIndex));
+        String byString = String.join(" ", t.subList(byIndex+1, t.size()));
+        Deadline d = new Deadline(desc, byString);
+        addTask(d);
+        System.out.println("Successfully added:\n" + d.toString());           
+    }
+
+    private void addEvent(String[] tokens) {
+        List<String> t = Arrays.asList(tokens);
+        int fromIndex = t.indexOf("/from"); int toIndex = t.indexOf("/to");
+
+        if (fromIndex == -1 || toIndex == -1) {
+            // raise invalid command
+        }
+
+        String desc = String.join(" ",t.subList(1, fromIndex));
+        String from = String.join(" ", t.subList(fromIndex+1, toIndex));
+        String to = String.join(" ", t.subList(toIndex+1, t.size()));
+        Event e = new Event(desc, from, to);
+        addTask(e);
+        System.out.println("Successfully added:\n" + e.toString());
+    }
 }
