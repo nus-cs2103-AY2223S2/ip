@@ -38,21 +38,51 @@ public class Duke {
         System.out.println("    ____________________________________________________________");
         Scanner sc = new Scanner(System.in);
         String nextLine = sc.nextLine();
-        ArrayList<String> strings = new ArrayList<>();
+        ArrayList<Task> tasks = new ArrayList<>();
 
         while (!nextLine.equals("bye")) {
-            if (!nextLine.equals("list")) {
-                strings.add(nextLine);
+            if (nextLine.startsWith("mark")) {
+                String theSplitPart = nextLine.split(" ")[1];
+                int whichNumberedTask = Integer.parseInt(theSplitPart);
+                if (whichNumberedTask > tasks.size()) {
+                    System.out.println("    ____________________________________________________________");
+                    System.out.println("        There is not enough tasks to mark this :O");
+                    System.out.println("    ____________________________________________________________");
+                    nextLine = sc.nextLine();
+                } else {
+                    Task currentTaskToMark = tasks.get(whichNumberedTask - 1);
+                    currentTaskToMark.markAsDone();
+                    nextLine = sc.nextLine();
+                }
+            } else if (nextLine.startsWith("unmark")) {
+                String theSplitPart = nextLine.split(" ")[1];
+                int whichNumberedTask = Integer.parseInt(theSplitPart);
+                if (whichNumberedTask > tasks.size()) {
+                    System.out.println("    ____________________________________________________________");
+                    System.out.println("        There is not enough tasks to mark this :O");
+                    System.out.println("    ____________________________________________________________");
+                    nextLine = sc.nextLine();
+                } else {
+                    Task currentTaskToMark = tasks.get(whichNumberedTask - 1);
+                    currentTaskToMark.markAsUndone();
+                    nextLine = sc.nextLine();
+                }
+
+            } else if (nextLine.equals("list")){
+
                 System.out.println("    ____________________________________________________________");
-                System.out.println("        Added: " + nextLine);
+                for (int i = 0; i < tasks.size(); i++) {
+                    Task taskinTasks = tasks.get(i);
+                    System.out.println(String.format("      %s. %s", i + 1, taskinTasks));
+
+                }
                 System.out.println("    ____________________________________________________________");
                 nextLine = sc.nextLine();
             } else {
+                Task nextTask = new Task(nextLine);
+                tasks.add(nextTask);
                 System.out.println("    ____________________________________________________________");
-                for (int i = 0; i < strings.size(); i++) {
-                    String thingInStrings = strings.get(i);
-                    System.out.println(String.format("      %s. %s", i + 1, thingInStrings));
-                }
+                System.out.println("        Added: " + nextLine);
                 System.out.println("    ____________________________________________________________");
                 nextLine = sc.nextLine();
             }
