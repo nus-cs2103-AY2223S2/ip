@@ -179,8 +179,8 @@ class TaskBook {
      */
     public void printOutOfRangeDialogue() {
         System.out.println(Duke.TAB + Duke.HOR_BAR);
-        System.out.println(Duke.TAB + "Oh no! I cannot find a task with task number :< \n" +
-                Duke.TAB + "You can check your task number by asking me to 'list'");
+        System.out.println(Duke.TAB + "Oh no! I cannot find a task with that task number.");
+        System.out.println(Duke.TAB + "You can check them again by asking me to 'list'");
         System.out.println(Duke.TAB + Duke.HOR_BAR);
     }
 }
