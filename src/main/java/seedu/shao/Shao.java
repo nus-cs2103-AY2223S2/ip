@@ -365,6 +365,8 @@ public class Shao {
 
         // Prompting
         while (true) {
+            if (!scan.hasNextLine())
+                continue;
             String input = scan.nextLine().trim();
             String inputLower = input.toLowerCase();
             if (inputLower.isBlank())
