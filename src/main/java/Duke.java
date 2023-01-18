@@ -35,6 +35,13 @@ public class Duke {
             } else {
                 System.out.println("added: " + userInput);
                 lstOfItems.add(new Task(userInput));
+                System.out.print("Now you have " + String.valueOf(lstOfItems.size()));
+                if (lstOfItems.size() == 1) {
+                    System.out.print(" task");
+                } else {
+                    System.out.print(" tasks");
+                }
+                System.out.println(" in the list");
             }
             userInput = scan.nextLine();
         }
