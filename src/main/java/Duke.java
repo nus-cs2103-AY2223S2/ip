@@ -74,8 +74,24 @@ public class Duke {
             }
             //User typed in "unmark":
             else if (inputArray[0].equals("unmark")) {
-                int indexOfTask = Integer.parseInt(inputArray[1]) - 1;
-                markAsUndone(taskStorage.get(indexOfTask));
+                try {
+                    if (inputArray.length != 2) {
+                        throw new DukeException("The unmark command must be followed by a single number.");
+                    }
+                    if (! isInteger(inputArray[1])) {
+                        throw new DukeException("The unmark command must be followed by a single integer.");
+                    }
+                    int indexOfTask = Integer.parseInt(inputArray[1]) - 1;
+                    if (! (indexOfTask <= taskStorage.size() - 1 && indexOfTask >= 0)) {
+                        throw new DukeException("Please enter a valid task number. You currently have " +
+                                Integer.toString(taskStorage.size()) + " tasks.");
+                    }
+                    markAsUndone(taskStorage.get(indexOfTask));
+                } catch (DukeException dukeException) {
+                    System.out.println(dukeException.getMessage());
+                    System.out.println(straightLine);
+                    continue;
+                }
             }
             //User typed in "to-do"
             else if (inputArray[0].equals("todo")) {
