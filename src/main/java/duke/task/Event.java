@@ -16,17 +16,8 @@ public class Event extends Task {
         super(isDone, String.format("%s (from: %s to: %s)", description, start, end));
     }
 
-    private Event(boolean isDone, String description) {
-        super(isDone, description);
-    }
-
     @Override
     public String toString() {
         return String.format("[E]%s", super.toString());
-    }
-
-    @Override
-    protected Task createTask(boolean isDone, String description) {
-        return new Event(isDone, description);
     }
 }

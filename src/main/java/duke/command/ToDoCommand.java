@@ -2,16 +2,15 @@ package duke.command;
 
 import duke.exception.DukeException;
 import duke.task.Task;
+import duke.task.TaskList;
 import duke.task.ToDo;
-
-import java.util.List;
 
 /**
  * Represents an add To-Do task command.
  */
 public class ToDoCommand extends AddCommand {
     /**
-     * {@inheritDoc}
+     * Add the new to-do specified in the input to tasks and returns an acknowledgement message.
      *
      * @param input {@inheritDoc}
      * @param tasks {@inheritDoc}
@@ -19,7 +18,7 @@ public class ToDoCommand extends AddCommand {
      * @throws DukeException Indicates empty description in input.
      */
     @Override
-    public CommandResponse run(String input, List<Task> tasks) throws DukeException {
+    public String run(String input, TaskList tasks) throws DukeException {
         return super.run(input, tasks);
     }
 

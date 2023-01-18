@@ -2,7 +2,6 @@ package duke;
 
 import duke.command.ByeCommand;
 import duke.command.Command;
-import duke.command.CommandResponse;
 import duke.command.DeadlineCommand;
 import duke.command.DeleteCommand;
 import duke.command.EventCommand;
@@ -11,10 +10,8 @@ import duke.command.MarkCommand;
 import duke.command.ToDoCommand;
 import duke.command.UnmarkCommand;
 import duke.exception.DukeException;
-import duke.task.Task;
+import duke.task.TaskList;
 
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Scanner;
 
 /**
@@ -30,7 +27,7 @@ public class Duke {
     private final static ToDoCommand toDoCommand = new ToDoCommand();
     private final static UnmarkCommand unmarkCommand = new UnmarkCommand();
 
-    private static List<Task> tasks = new ArrayList<Task>();
+    private final static TaskList tasks = new TaskList();
 
     /**
      * Main method for the chatbot
@@ -63,16 +60,15 @@ public class Duke {
         while (true) {
             String input = scanner.nextLine();
 
-            CommandResponse res;
+            String message;
             try {
-                res = getCommand(input).run(input, tasks);
+                message = getCommand(input).run(input, tasks);
             } catch (DukeException e) {
                 printMessage(e.getMessage());
                 continue;
             }
 
-            tasks = res.getTasks();
-            printMessage(res.getMessage());
+            printMessage(message);
 
             if (shouldExit(input)) {
                 break;

@@ -4,7 +4,7 @@ package duke.task;
  * Represents a task.
  */
 public abstract class Task {
-    private final boolean isDone;
+    private boolean isDone;
     private final String description;
 
     /**
@@ -18,21 +18,12 @@ public abstract class Task {
         this.description = description;
     }
 
-    public Task setDone(boolean isDone) {
-        return createTask(isDone, description);
+    public void setDone(boolean isDone) {
+        this.isDone = isDone;
     }
 
     @Override
     public String toString() {
         return String.format("[%s] %s", isDone ? "X" : " ", description);
     }
-
-    /**
-     * Returns a Task object created using the provided arguments.
-     *
-     * @param isDone Is the task done.
-     * @param description Description of the task.
-     * @return Task object created using the provided arguments.
-     */
-    protected abstract Task createTask(boolean isDone, String description);
 }

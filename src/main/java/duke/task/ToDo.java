@@ -18,9 +18,4 @@ public class ToDo extends Task {
     public String toString() {
         return String.format("[T]%s", super.toString());
     }
-
-    @Override
-    protected Task createTask(boolean isDone, String description) {
-        return new ToDo(isDone, description);
-    }
 }

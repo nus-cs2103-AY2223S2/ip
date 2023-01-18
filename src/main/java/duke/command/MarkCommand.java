@@ -1,26 +1,22 @@
 package duke.command;
 
 import duke.exception.DukeException;
-import duke.task.Task;
-
-import java.util.List;
+import duke.task.TaskList;
 
 /**
  * Represents a mark command for marking a task as done.
  */
 public class MarkCommand extends SetDoneCommand {
     /**
-     * Returns a CommandResponse object containing an acknowledgement message and an updated task list with the
-     * specified task's done status set to true.
+     * Set the done status of the task specified in the input to true and return an acknowledgement message.
      *
      * @param input {@inheritDoc}
      * @param tasks {@inheritDoc}
-     * @return CommandResponse object containing an acknowledgement message and an updated task list with the specified
-     * task's done status set to true.
+     * @return {@inheritDoc}
      * @throws DukeException {@inheritDoc}
      */
     @Override
-    public CommandResponse run(String input, List<Task> tasks) throws DukeException {
+    public String run(String input, TaskList tasks) throws DukeException {
         return super.run(input, tasks);
     }
 

@@ -1,22 +1,20 @@
 package duke.command;
 
-import duke.task.Task;
-
-import java.util.List;
+import duke.task.TaskList;
 
 /**
  * Represents a bye command.
  */
 public class ByeCommand implements Command {
     /**
-     * Returns a CommandResponse object containing the farewell message and the task list with no changes.
+     * Returns a farewell message.
      *
      * @param input {@inheritDoc}
      * @param tasks {@inheritDoc}
-     * @return CommandResponse object containing the farewell message and the task list with no changes.
+     * @return A farewell message.
      */
     @Override
-    public CommandResponse run(String input, List<Task> tasks) {
-        return new CommandResponse("Bye. Hope to see you again soon!", tasks);
+    public String run(String input, TaskList tasks) {
+        return "Bye. Hope to see you again soon!";
     }
 }

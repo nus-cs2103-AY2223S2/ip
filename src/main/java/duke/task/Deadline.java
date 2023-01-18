@@ -15,17 +15,8 @@ public class Deadline extends Task {
         super(isDone, String.format("%s (by: %s)", description, deadline));
     }
 
-    private Deadline(boolean isDone, String description) {
-        super(isDone, description);
-    }
-
     @Override
     public String toString() {
         return String.format("[D]%s", super.toString());
-    }
-
-    @Override
-    protected Task createTask(boolean isDone, String description) {
-        return new Deadline(isDone, description);
     }
 }

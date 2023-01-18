@@ -1,21 +1,19 @@
 package duke.command;
 
 import duke.exception.DukeException;
-import duke.task.Task;
-
-import java.util.List;
+import duke.task.TaskList;
 
 /**
  * Represents a command given by the user.
  */
 public interface Command {
     /**
-     * Run the command and return the resulting response message.
+     * Run the command and return the response message.
      *
      * @param input User's input.
      * @param tasks User's tasks.
-     * @return CommandResponse object containing the response message and updated task list.
+     * @return The response message.
      * @throws DukeException Indicates an error in the input.
      */
-    CommandResponse run(String input, List<Task> tasks) throws DukeException;
+    String run(String input, TaskList tasks) throws DukeException;
 }

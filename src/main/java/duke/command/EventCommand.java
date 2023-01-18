@@ -3,15 +3,14 @@ package duke.command;
 import duke.exception.DukeException;
 import duke.task.Event;
 import duke.task.Task;
-
-import java.util.List;
+import duke.task.TaskList;
 
 /**
  * Represents an add event task command.
  */
 public class EventCommand extends AddCommand {
     /**
-     * {@inheritDoc}
+     * Add the new event specified in the input to tasks and returns an acknowledgement message.
      *
      * @param input {@inheritDoc}
      * @param tasks {@inheritDoc}
@@ -19,7 +18,7 @@ public class EventCommand extends AddCommand {
      * @throws DukeException Indicates missing start or end date/time or description in input.
      */
     @Override
-    public CommandResponse run(String input, List<Task> tasks) throws DukeException {
+    public String run(String input, TaskList tasks) throws DukeException {
         return super.run(input, tasks);
     }
 

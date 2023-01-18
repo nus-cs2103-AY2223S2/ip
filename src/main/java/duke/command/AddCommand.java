@@ -2,34 +2,27 @@ package duke.command;
 
 import duke.exception.DukeException;
 import duke.task.Task;
-
-import java.util.ArrayList;
-import java.util.List;
+import duke.task.TaskList;
 
 /**
  * Represents an add command.
  */
 public abstract class AddCommand implements Command {
     /**
-     * Returns a CommandResponse object containing an acknowledgement message and an updated task list with the new task
-     * added.
+     * Add the new task specified in the input to tasks and returns an acknowledgement message.
      *
      * @param input {@inheritDoc}
      * @param tasks {@inheritDoc}
-     * @return CommandResponse object containing an acknowledgement message and an updated task list with the new task
-     * added.
+     * @return An acknowledgement message.
      * @throws DukeException {@inheritDoc}
      */
     @Override
-    public CommandResponse run(String input, List<Task> tasks) throws DukeException {
-        List<Task> updatedTasks = new ArrayList<Task>(tasks);
+    public String run(String input, TaskList tasks) throws DukeException {
         Task task = createTask(input);
-        updatedTasks.add(task);
+        tasks.add(task);
 
-        String message = String.format("Got it. I've added this task:\n  %s\nNow you have %d tasks in the list.",
-                task.toString(), updatedTasks.size());
-
-        return new CommandResponse(message, updatedTasks);
+        return String.format("Got it. I've added this task:\n  %s\nNow you have %d tasks in the list.", task.toString(),
+                tasks.size());
     }
 
     /**
