@@ -10,34 +10,39 @@ public class Duke {
         greetings();
 
         while (true) {
-            String input = getUserInput();
+            try {    
+                String input = getUserInput();
+                String command = input.split(" ")[0].toLowerCase();
+                
+                if (command.equals("bye")) {
+                    bye();
+                    break;
+                }
 
-            if (input.equals("bye"))
-                break;
-
-            if (input.contains("list")) {
-                listItem();
-                continue;
+                switch (command) {
+                    case "list":
+                        listItem();
+                        break;
+                    case "unmark":
+                        unmarkItem(input);
+                        break;
+                    case "mark":
+                        markItem(input);
+                        break;
+                    case "todo":
+                    case "deadline":
+                    case "event":
+                        Task task = processTaskInput(input);
+                        storeItem(task);
+                        break;
+                    default:
+                        throw new DukeException("☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
+                }
+            } catch (DukeException error) {
+                System.out.println(error);
             }
-
-            if (input.contains("unmark")) {
-                String[] inputSplit = input.split(" ");
-
-                unmarkItem(inputSplit[1]);
-                continue;
-            }
-
-            if (input.contains("mark")) {
-                String[] inputSplit = input.split(" ");
-                markItem(inputSplit[1]);
-                continue;
-            }
-
-            // Else store item
-            storeItem(input);
         }
 
-        bye();
     }
 
     public static void greetings() {
@@ -58,31 +63,6 @@ public class Duke {
         return userInput;
     }
 
-    public static void storeItem(String input) {
-        String[] inputSplit = input.split(" ");
-        String command = inputSplit[0];
-        Task task;
-
-        switch (command) {
-            case "todo":
-                task = createTodo(inputSplit);
-                break;
-            case "deadline":
-                task = createDeadline(inputSplit);
-                break;
-            case "event":
-                task = createEvent(inputSplit);
-                break;
-            default:
-                return;
-        }
-
-        taskStorage.add(task);
-        System.out.println("Got it. I've added this task:");
-        System.out.println(task);
-        System.out.println("Now you have " + Duke.taskStorage.size() + " tasks in the list.\n");
-    }
-
     public static void listItem() {
         int size = taskStorage.size();
         
@@ -93,44 +73,104 @@ public class Duke {
         System.out.println();
     }
 
-    public static void markItem(String item) {
+    public static void markItem(String item) throws MarkIndexDoesNotExistException {
+        if (item.split(" ").length == 1)
+            throw new  MarkIndexDoesNotExistException("☹ OOPS!!! missing mark index");
+        item = item.split(" ")[1];
         int index = Integer.parseInt(item) - 1;
         if (index >= taskStorage.size())
-            return;
+            throw new MarkIndexDoesNotExistException("☹ OOPS!!! mark index does not exist");
         Task task = taskStorage.get(index);
         task.markAsDone();
 
         System.out.println(String.format("Nice! I've marked this task as done:\n%s\n", task));
     }
 
-    public static void unmarkItem(String item) {
+    public static void unmarkItem(String item) throws UnmarkIndexDoesNotExistException {
+        if (item.split(" ").length == 1)
+            throw new  UnmarkIndexDoesNotExistException("☹ OOPS!!! missing unmark index");
+        item = item.split(" ")[1];
         int index = Integer.parseInt(item) - 1;
         if (index >= taskStorage.size())
-            return;
+            throw new UnmarkIndexDoesNotExistException("☹ OOPS!!! unmark index does not exist");
         Task task = taskStorage.get(index);
         task.markAsNotDone();
 
         System.out.println(String.format("OK, I've marked this task as not done yet:\n%s\n", task));
     }
 
-    public static Task createTodo (String[] inputSplit) {
-        String taskInfo = getTaskInfo(inputSplit).strip();
+    public static Task processTaskInput(String input) throws DukeException {
+        String[] inputSplit = input.split(" ");
+        String command = inputSplit[0];
+        Task task = null;
+        String taskInfo = getTaskInfo(inputSplit);
 
-        return new Todo(taskInfo);
+        switch (command) {
+            case "todo":
+                task = createTodo(taskInfo);
+                break;
+            case "deadline":
+                task = createDeadline(taskInfo);
+                break;
+            case "event":
+                task = createEvent(taskInfo);
+                break;
+        }
+
+        return task;
     }
 
-    public static Task createDeadline (String[] inputSplit) {
-        String[] taskInfo = getTaskInfo(inputSplit).split("/by");
-        String description = taskInfo[0].strip();
-        String by = taskInfo[1].strip();
+    public static void storeItem(Task task) {
+        taskStorage.add(task);
+    
+        System.out.println("Got it. I've added this task:");
+        System.out.println(task);
+        System.out.println("Now you have " + Duke.taskStorage.size() + " tasks in the list.\n");
+    }
+
+    public static Task createTodo (String taskInfo) throws EmptyTaskArgumentException {
+        if (taskInfo.isEmpty())
+            throw new EmptyTaskArgumentException("☹ OOPS!!! The description of a todo cannot be empty.");
+
+            String description = taskInfo.strip();
+
+        return new Todo(description);
+    }
+
+    public static Task createDeadline (String taskInfo) throws EmptyTaskArgumentException {
+        String[] taskInfoArray = taskInfo.split("/by");
+
+        if (taskInfo.isEmpty())
+            throw new EmptyTaskArgumentException("☹ OOPS!!! The description of a deadline cannot be empty.");
+        if (!taskInfo.contains("/by"))
+            throw new EmptyTaskArgumentException("☹ OOPS!!! deadline requires a /by.");
+        if (taskInfoArray.length != 2)
+            throw new EmptyTaskArgumentException("☹ OOPS!!! The /by of a deadline cannot be empty.");
+
+        String description = taskInfoArray[0].strip();
+        String by = taskInfoArray[1].strip();
 
         return new Deadline(description, by);
     }
 
-    public static Task createEvent (String[] inputSplit) {
-        String[] taskInfo = getTaskInfo(inputSplit).split("/from");
-        String description = taskInfo[0].strip();
-        String[] timing = taskInfo[1].split("/to");
+    public static Task createEvent (String taskInfo) throws EmptyTaskArgumentException {
+        String[] taskInfoArray = taskInfo.split("/from");
+        String[] timing = taskInfoArray[1].split("/to");
+
+        if (taskInfo.isEmpty())
+            throw new EmptyTaskArgumentException("☹ OOPS!!! The description of a event cannot be empty.");
+        if (!taskInfo.contains("/from"))
+            throw new EmptyTaskArgumentException("☹ OOPS!!! event requires a /from.");
+        if (!taskInfo.contains("/to"))
+            throw new EmptyTaskArgumentException("☹ OOPS!!! event requires a /to.");
+        if (taskInfo.indexOf("/to") < taskInfo.indexOf("/from"))
+            throw new EmptyTaskArgumentException("☹ OOPS!!! wrong format. It should be event <DESCRIPTION> /from <FROM> /to <TO>");
+        if (taskInfoArray.length != 2)
+            throw new EmptyTaskArgumentException("☹ OOPS!!! The /from of a deadline cannot be empty.");
+        if (timing.length != 2)
+            throw new EmptyTaskArgumentException("☹ OOPS!!! The /to of a deadline cannot be empty.");
+
+        String description = taskInfoArray[0].strip();
         String from = timing[0].strip();
         String to = timing[1].strip();
 
