@@ -18,4 +18,7 @@ dbsibugwuif
 blah
 deadline read essay
 event concert
-delete 
+delete
+delete 1
+delete 0
+list
