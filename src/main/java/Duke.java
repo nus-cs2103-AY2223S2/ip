@@ -111,6 +111,12 @@ public class Duke {
         System.out.println("\nOK, I've marked this task as not done yet:\n  " + t + "\n");
     }
 
+    /**
+    * Remove the first word of every chunk and whitespaces 
+    * at the two ends of the Stirng
+    *
+    * @param s An array of Strings
+    */
     private static String[] removeFirstWord(String[] s) {
         for (int i = 0; i < s.length; i++) {
             s[i] = s[i].substring(s[i].indexOf(" ")).trim();
