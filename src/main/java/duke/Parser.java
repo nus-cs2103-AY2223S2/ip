@@ -11,56 +11,56 @@ public class Parser {
         Word w = Word.valueOf(details[0].toUpperCase());
 
         switch (w) {
-            case BYE:
-                return new ByeCommand();
+        case BYE:
+            return new ByeCommand();
 
-            case LIST:
-                return new ListCommand();
+        case LIST:
+            return new ListCommand();
 
-            case MARK:
-                if (details.length < 2) {
-                    throw new DukeException("Please input a number.");
-                }
-                return new MarkCommand(details[1]);
+        case MARK:
+            if (details.length < 2) {
+                throw new DukeException("Please input a number.");
+            }
+            return new MarkCommand(details[1]);
 
-            case UNMARK:
-                if (details.length < 2) {
-                    throw new DukeException("Please input a number.");
-                }
-                return new UnmarkCommand(details[1]);
+        case UNMARK:
+            if (details.length < 2) {
+                throw new DukeException("Please input a number.");
+            }
+            return new UnmarkCommand(details[1]);
 
-            case TODO:
-                if (details.length < 2) {
-                    throw new DukeException("Please input the necessary details.");
-                }
-                return new TodoCommand(details[1]);
+        case TODO:
+            if (details.length < 2) {
+                throw new DukeException("Please input the necessary details.");
+            }
+            return new TodoCommand(details[1]);
 
-            case DEADLINE:
-                if (details.length < 2) {
-                    throw new DukeException("Please input the necessary details.");
-                }
-                return new DeadlineCommand(details[1]);
+        case DEADLINE:
+            if (details.length < 2) {
+                throw new DukeException("Please input the necessary details.");
+            }
+            return new DeadlineCommand(details[1]);
 
-            case EVENT:
-                if (details.length < 2) {
-                    throw new DukeException("Please input the necessary details.");
-                }
-                return new EventCommand(details[1]);
+        case EVENT:
+            if (details.length < 2) {
+                throw new DukeException("Please input the necessary details.");
+            }
+            return new EventCommand(details[1]);
 
-            case DELETE:
-                if (details.length < 2) {
-                    throw new DukeException("Please input a number.");
-                }
-                return new DeleteCommand(details[1]);
+        case DELETE:
+            if (details.length < 2) {
+                throw new DukeException("Please input a number.");
+            }
+            return new DeleteCommand(details[1]);
 
-            case THROUGH:
-                if (details.length < 2) {
-                    throw new DukeException("Please input a date.");
-                }
-                return new ThroughCommand(details[1]);
+        case THROUGH:
+            if (details.length < 2) {
+                throw new DukeException("Please input a date.");
+            }
+            return new ThroughCommand(details[1]);
 
-            default:
-                throw new DukeException("Unrecognised command. Try again.");
+        default:
+            throw new DukeException("Unrecognised command. Try again.");
         }
     }
 }

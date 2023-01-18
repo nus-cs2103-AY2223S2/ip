@@ -50,7 +50,7 @@ public class TaskList {
     }
 
     public Task event(String input) {
-        String[] split = input.split(" /from | /to " );
+        String[] split = input.split(" /from | /to ");
         Task toAdd = new Events(split[0], split[1], split[2]);
         this.taskList.add(toAdd);
         return toAdd;
@@ -64,32 +64,32 @@ public class TaskList {
 
     public void loader(String[] line) {
         switch(line[0]) {
-            case "T": {
-                Todos toAdd = new Todos(line[2]);
-                if (line[1].equals("1")) {
-                    toAdd.mark();
-                }
-                this.taskList.add(toAdd);
+        case "T": {
+            Todos toAdd = new Todos(line[2]);
+            if (line[1].equals("1")) {
+                toAdd.mark();
             }
-            break;
+            this.taskList.add(toAdd);
+        }
+        break;
 
-            case "D": {
-                Deadlines toAdd = new Deadlines(line[2], line[3]);
-                if (line[1].equals("1")) {
-                    toAdd.mark();
-                }
-                this.taskList.add(toAdd);
+        case "D": {
+            Deadlines toAdd = new Deadlines(line[2], line[3]);
+            if (line[1].equals("1")) {
+                toAdd.mark();
             }
-            break;
+            this.taskList.add(toAdd);
+        }
+        break;
 
-            case "E": {
-                Events toAdd = new Events(line[2], line[3], line[4]);
-                if (line[1].equals("1")) {
-                    toAdd.mark();
-                }
-                this.taskList.add(toAdd);
+        case "E": {
+            Events toAdd = new Events(line[2], line[3], line[4]);
+            if (line[1].equals("1")) {
+                toAdd.mark();
             }
-            break;
+            this.taskList.add(toAdd);
+        }
+        break;
         }
     }
 
