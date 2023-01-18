@@ -86,11 +86,6 @@ public class Duke {
                 System.out.println(line);
                 System.out.println("Got it. I've added this task:");
                 System.out.println("   [E][ ] " +froms[0]+ " (from:" +froms[1]+ "to:" +tos[1]);
-            }else {
-                //tasklist.add(new task('T', tasklist.size()+1, parts[0], " "));
-                System.out.println(line);
-                System.out.println("added: " + comm);
-                System.out.println(line);
             }
         }
             System.out.println(line);
