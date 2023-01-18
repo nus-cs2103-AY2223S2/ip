@@ -23,33 +23,36 @@ public class Duke {
             String input = scanner.nextLine();
             Command command = new Command(input);
         
-            switch (command.baseCommand) {
-                case "todo":
-                    Duke.addTodo(command, tasks);
-                    break;
-                case "deadline":
-                    Duke.addDeadline(command, tasks);
-                    break;
-                case "event":
-                    Duke.addEvent(command, tasks);
-                    break;
-                case "mark":
-                    Duke.mark(command, tasks);
-                    break;
-                case "unmark":
-                    Duke.unmark(command, tasks);
-                    break;
-                case "list":
-                    Duke.list(command, tasks);
-                    break;
-                case "quit":
-                case "exit":
-                case "bye":
-                    Duke.say("Bye. Hope to see you again soon!");
-                    break whileLoop;
-                default:
-                    Duke.addTask(command, tasks);
-                    break;
+            try {
+                switch (command.baseCommand) {
+                    case "todo":
+                        Duke.addTodo(command, tasks);
+                        break;
+                    case "deadline":
+                        Duke.addDeadline(command, tasks);
+                        break;
+                    case "event":
+                        Duke.addEvent(command, tasks);
+                        break;
+                    case "mark":
+                        Duke.mark(command, tasks);
+                        break;
+                    case "unmark":
+                        Duke.unmark(command, tasks);
+                        break;
+                    case "list":
+                        Duke.list(command, tasks);
+                        break;
+                    case "quit":
+                    case "exit":
+                    case "bye":
+                        Duke.say("Bye. Hope to see you again soon!");
+                        break whileLoop;
+                    default:
+                        throw new DukeInvalidCommandException();
+                }
+            } catch (DukeException e) {
+                Duke.say(e.getDukeMessage());
             }
         }
         
@@ -125,11 +128,5 @@ public class Duke {
 
     private static void list(Command command, TaskList tasks) {
         Duke.say(tasks.toString());
-    }
-
-    private static void addTask(Command command, TaskList tasks) {
-        String commandString = command.toString();
-        tasks.add(new Task(commandString));
-        Duke.say("added: " + commandString);
     }
 }
