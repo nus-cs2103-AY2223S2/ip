@@ -1,7 +1,8 @@
+import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Duke {
-    private static final Task[] task = new Task[100];
+    private static final ArrayList<Task> task = new ArrayList<>();
 
     public static void greet() {
         System.out.println("\t____________________________________________________________");
@@ -9,21 +10,19 @@ public class Duke {
         System.out.println("\t____________________________________________________________");
     }
     public static void add(Task t) {
-        int numOfTask = Task.getNumOfTask();
-        task[numOfTask - 1] = t;
+        task.add(t);
 
         System.out.println("\t____________________________________________________________");
-        System.out.println("\tGot it. I've added this task:\n\t  " + t + "\n\tNow you have " + numOfTask + " tasks in the list.");
+        System.out.println("\tGot it. I've added this task:\n\t  " + t + "\n\tNow you have " + task.size() + " tasks in the list.");
         System.out.println("\t____________________________________________________________");
     }
 
     public static void list() {
         System.out.println("\t____________________________________________________________");
         System.out.println("\tHere are the tasks in your list:");
-        int numOfTask = Task.getNumOfTask();
-        for(int i = 0; i < numOfTask; i++) {
+        for(int i = 0; i < task.size(); i++) {
             int tmp = i + 1;
-            System.out.println("\t" + tmp + "." + task[i]);
+            System.out.println("\t" + tmp + "." + task.get(i));
         }
         System.out.println("\t____________________________________________________________");
     }
@@ -37,14 +36,14 @@ public class Duke {
     public static void mark(String s) throws DukeInvalidArgumentException {
         try {
             int i = Integer.parseInt(s) - 1;
-            if (i >= Task.getNumOfTask()) {
+            if (i >= task.size()) {
                 throw new DukeInvalidArgumentException("mark");
             }
-            task[i].setDone(true);
+            task.get(i).setDone(true);
 
             System.out.println("\t____________________________________________________________");
             System.out.println("\tNice! I've marked this task as done:");
-            System.out.println("\t  " + task[i]);
+            System.out.println("\t  " + task.get(i));
             System.out.println("\t____________________________________________________________");
         } catch ( NumberFormatException e) {
             System.out.println("enter");
@@ -55,17 +54,34 @@ public class Duke {
     public static void unmark(String s) throws DukeInvalidArgumentException {
         try {
             int i = Integer.parseInt(s) - 1;
-            if (i >= Task.getNumOfTask()) {
+            if (i >= task.size()) {
                 throw new DukeInvalidArgumentException("mark");
             }
-            task[i].setDone(false);
+            task.get(i).setDone(false);
 
             System.out.println("\t____________________________________________________________");
             System.out.println("\tOK, I've marked this task as not done yet:");
-            System.out.println("\t  " + task[i]);
+            System.out.println("\t  " + task.get(i));
             System.out.println("\t____________________________________________________________");
         } catch (NumberFormatException e) {
             throw new DukeInvalidArgumentException("mark");
+        }
+    }
+
+    public static void delete(String s) throws DukeInvalidArgumentException {
+        try {
+            int i = Integer.parseInt(s) - 1;
+            if (i >= task.size()) {
+                throw new DukeInvalidArgumentException("mark");
+            }
+            task.remove(i);
+
+            System.out.println("\t____________________________________________________________");
+            System.out.println("\tNoted. I've removed this task:\n\t  " + task.get(i) + "\n\tNow you have " + task.size() + " tasks in the list.");
+            System.out.println("\t____________________________________________________________");
+        } catch ( NumberFormatException e) {
+            System.out.println("enter");
+            throw new DukeInvalidArgumentException("delete");
         }
     }
 
@@ -84,13 +100,16 @@ public class Duke {
                         break;
                     case "mark":
                     case "unmark":
+                    case "delete":
                         if (split.length == 1 || split[1].isEmpty()) {
                             throw new DukeEmptyArgumentException(cmd);
                         }
                         if (cmd.equals("mark")) {
                             mark(split[1]);
-                        } else {
+                        } else if (cmd.equals("unmark")){
                             unmark(split[1]);
+                        } else {
+                            delete(split[1]);
                         }
                         break;
                     case "todo":
@@ -102,11 +121,9 @@ public class Duke {
                         Task t = null;
                         switch (cmd) {
                             case "todo":
-                                //System.out.println("todo");
                                 t = new ToDos(split[1]);
                                 break;
                             case "deadline":
-                                //System.out.println("deadline");
                                 String[] s1 = split[1].split("/by ", 2);
                                 t = new Deadlines(s1[0], s1[1]);
                                 break;
