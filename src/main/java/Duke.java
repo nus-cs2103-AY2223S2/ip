@@ -6,6 +6,11 @@ public class Duke {
     public static ArrayList<Task> taskList = new ArrayList<Task>();
 
     public static void main(String[] args) {
+        greeting();
+        printMenu();
+    }
+
+    public static void greeting() {
         String logo = "  _____     _       _  __  U _____ u      ____     _   _    _  __  U _____ u \n"
                 + " |\" ___|U  /\"\\  u  |\"|/ /  \\| ___\"|/     |  _\"\\ U |\"|u| |  |\"|/ /  \\| ___\"|/ \n"
                 + "U| |_  u \\/ _ \\/   | ' /    |  _|\"      /| | | | \\| |\\| |  | ' /    |  _|\"   \n"
@@ -18,7 +23,6 @@ public class Duke {
                 + logo
                 + "What can I do for you?\n"
                 + horizontalLine);
-        printMenu();
     }
 
     /**
@@ -38,11 +42,11 @@ public class Duke {
                     list();
                     break;
                 case "bye":
-                    bye();
+                    exit();
                     exitStatus = true;
                     break;
                 default:
-                    addTask(input);
+                    add(input);
             }
             if (exitStatus) {
                 break;
@@ -70,7 +74,7 @@ public class Duke {
      * @param   input   task entered by the user in String
      * @return  void
      */
-    public static void addTask(String input) {
+    public static void add(String input) {
         Task task = new Task(input);
         taskList.add(task);
         System.out.println(horizontalLine
@@ -83,7 +87,7 @@ public class Duke {
      *
      * @return  void
      */
-    public static void bye() {
+    public static void exit() {
         System.out.println(horizontalLine
                 + "Hope I have been useful to you.\n"
                 + "See you again soon. Bye!~\n"
