@@ -8,6 +8,27 @@ public class TaskList {
         this.lst = new LinkedList<>();
     }
 
+    public void mark(int taskNum) {
+        Task t = this.getTask(taskNum);
+        t.markAsDone();
+        printLine();
+        System.out.println("Okay! I've marked this task as done:");
+        System.out.println(String.format(" %s", t));
+        printLine();
+    }
+
+    public void unmark(int taskNum) throws DukeException{
+        if (taskNum < 0 || taskNum > lst.size() - 1) {
+            throw new DukeException("bounds");
+        }
+        Task t = this.getTask(taskNum);
+        t.markAsUndone();
+        printLine();
+        System.out.println("Okay! I've marked this task as not done yet:");
+        System.out.println(String.format(" %s", t));
+        printLine();
+    }
+
     public void printList() {
         System.out.println("Here are the tasks in your list:");
         for(int i = 0; i < lst.size(); i++) {

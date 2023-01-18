@@ -19,44 +19,68 @@ public class Duke {
         printLine();
         String in = input.nextLine();
         while(cont) {
-            String[] commands = in.trim().split(" ");
-            switch (commands[0]) {
-                case "bye":
-                    end();
-                    cont = false;
-                    break;
-                case "list":
-                    printLine();
-                    lst.printList();
-                    printLine();
-                    in = input.nextLine();
-                    break;
-                case "mark":
-                    mark(Integer.parseInt(commands[1]) - 1);
-                    in = input.nextLine();
-                    break;
-                case "unmark":
-                    unmark(Integer.parseInt(commands[1]) - 1);
-                    in = input.nextLine();
-                    break;
-                case "todo":
-                    String t = in.trim().split(" ", 2)[1];
-                    processTodo(t);
-                    in = input.nextLine();
-                    break;
-                case "deadline":
-                    String d = in.trim().split(" ", 2)[1];
-                    processDeadline(d);
-                    in = input.nextLine();
-                    break;
-                case "event":
-                    String e = in.trim().split(" ", 2)[1];;
-                    processEvent(e);
-                    in = input.nextLine();
-                    break;
-                default:
-                    add(in);
-                    in = input.nextLine();
+            String[] commands = in.trim().split(" ", 2);
+            boolean single = commands.length < 2;
+            try {
+                switch (commands[0]) {
+                    case "bye":
+                        end();
+                        cont = false;
+                        break;
+                    case "list":
+                        printLine();
+                        lst.printList();
+                        printLine();
+                        in = input.nextLine();
+                        break;
+                    case "mark":
+                        if (single) {
+                            throw new DukeException(commands[0]);
+                        }
+                        lst.mark(Integer.parseInt(commands[1]) - 1);
+                        in = input.nextLine();
+                        break;
+                    case "unmark":
+                        if (single) {
+                            throw new DukeException(commands[0]);
+                        }
+                        lst.unmark(Integer.parseInt(commands[1]) - 1);
+                        in = input.nextLine();
+                        break;
+                    case "todo":
+                        if (single) {
+                            throw new DukeException(commands[0]);
+                        }
+                        String t = in.trim().split(" ", 2)[1];
+                        Todo.processTodo(t, lst);
+                        in = input.nextLine();
+                        break;
+                    case "deadline":
+                        if (single) {
+                            throw new DukeException(commands[0]);
+                        }
+                        String d = in.trim().split(" ", 2)[1];
+                        Deadline.processDeadline(d, lst);
+                        in = input.nextLine();
+                        break;
+                    case "event":
+                        if (single) {
+                            throw new DukeException(commands[0]);
+                        }
+                        String e = in.trim().split(" ", 2)[1];
+                        Event.processEvent(e, lst);
+                        in = input.nextLine();
+                        break;
+                    default:
+                        throw new DukeException("none");
+                        //in = input.nextLine();
+                }
+            } catch (DukeException e) {
+                System.out.println(e);
+                in = input.nextLine();
+            } catch (IndexOutOfBoundsException e) {
+                System.out.println("OOPS!! This index is out of bounds!");
+                in = input.nextLine();
             }
         }
         System.exit(0);
@@ -81,78 +105,7 @@ public class Duke {
             printLine();
             lst.addTask(t);
             System.out.println("Got it! I've added: ");
-            System.out.println(" " + t.toString());
-            lst.printSize();
-            printLine();
-        }
-    }
-
-    public static void mark(int taskNum) {
-        Task t = lst.getTask(taskNum);
-        t.markAsDone();
-        printLine();
-        System.out.println("Okay! I've marked this task as done:");
-        System.out.println(String.format(" %s", t));
-        printLine();
-    }
-
-    public static void unmark(int taskNum) {
-        Task t = lst.getTask(taskNum);
-        t.markAsUndone();
-        printLine();
-        System.out.println("Okay! I've marked this task as not done yet:");
-        System.out.println(String.format(" %s", t));
-        printLine();
-    }
-
-    public static void processTodo(String command) {
-        String taskName = command.trim();
-        if (taskName.isEmpty()) {
-            printLine();
-            printLine();
-        } else {
-            Todo todo = new Todo(taskName);
-            lst.addTask(todo);
-            printLine();
-            System.out.println("Got it! I've added: ");
-            System.out.println(" " + todo.toString());
-            lst.printSize();
-            printLine();
-        }
-    }
-
-    public static void processDeadline(String command) {
-        String info = command.trim();
-        if (info.isEmpty()) {
-            printLine();
-            printLine();
-        } else {
-            String[] details = info.split("/");
-            String deadline = details[1].split(" ", 2)[1];
-            Deadline d = new Deadline(details[0], deadline);
-            lst.addTask(d);
-            printLine();
-            System.out.println("Got it! I've added: ");
-            System.out.println(" " + d.toString());
-            lst.printSize();
-            printLine();
-        }
-    }
-
-    public static void processEvent(String command) {
-        String info = command.trim();
-        if (info.isEmpty()) {
-            printLine();
-            printLine();
-        } else {
-            String[] details = info.split("/");
-            String start = details[1].split(" ", 2)[1];
-            String end = details[2].split(" ", 2)[1];
-            Event e = new Event(details[0], start, end);
-            lst.addTask(e);
-            printLine();
-            System.out.println("Got it! I've added: ");
-            System.out.println(" " + e.toString());
+            System.out.println(" " + t);
             lst.printSize();
             printLine();
         }

@@ -27,9 +27,9 @@ public class Task {
     public String toString() {
         String s;
         if (this.completed) {
-            s = "[ ][X] " + this.taskName;
+            s = "[X] " + this.taskName;
         } else {
-            s = "[ ][ ] " + this.taskName;
+            s = "[ ] " + this.taskName;
         }
         return s;
     }
