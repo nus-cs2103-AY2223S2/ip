@@ -43,19 +43,19 @@ public class Duke {
                 for (int i = 1; i <= commandList.size(); i++) {
                     System.out.println(i + "." + commandList.get(i - 1));
                 }
-                System.out.println(HORIZONTAL_LINE + "\n");
+                System.out.println(HORIZONTAL_LINE);
             } else if (action.equalsIgnoreCase("mark")) {
                 Task task = commandList.get(Integer.parseInt(strArray[1]) - 1);
                 task.mark();
                 System.out.println(HORIZONTAL_LINE + "\n" +
                         "Nice! I've marked this task as done:" +
-                        "\n" + task);
+                        "\n" + task + "\n" + HORIZONTAL_LINE);
             } else if (action.equalsIgnoreCase("unmark")) {
                 Task task = commandList.get(Integer.parseInt(strArray[1]) - 1);
                 task.unmark();
                 System.out.println(HORIZONTAL_LINE + "\n" +
                         "OK, I've marked this task as not done yet:" +
-                        "\n" + task);
+                        "\n" + task + "\n" + HORIZONTAL_LINE);
             } else {
                 TaskTypes type = getTaskType(action);
                 Task task = getTask(type, strArray);
@@ -80,27 +80,26 @@ public class Duke {
     }
 
     public Task getTask(TaskTypes type, String[] strArray) {
-        Task task;
         String command;
 
         if (type.equals(TaskTypes.TODO)) {
             command = strArray[1];
-            return task = new ToDo(command);
+            return new ToDo(command);
         } else if (type.equals(TaskTypes.DEADLINE)) {
             String[] temp = strArray[1].split("/by", 2);
             command = temp[0];
             String deadline = temp[1];
-            return task = new Deadline(command, deadline);
+            return new Deadline(command, deadline);
         } else if (type.equals(TaskTypes.EVENT)) {
             String[] temp = strArray[1].split("/from", 2);
             String[] temp2 = temp[1].split("/to", 2);
             command = temp[0];
             String start = temp2[0];
             String end = temp2[1];
-            return task = new Event(command, start, end);
+            return new Event(command, start, end);
         } else {
             command = strArray[0] + " " + strArray[1];
-            return task = new Task(command);
+            return new Task(command);
         }
     }
 }
