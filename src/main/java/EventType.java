@@ -1,3 +1,3 @@
 public enum EventType {
-    BYE, LIST, MARK, UNMARK
+    ADD, BYE, LIST, MARK, UNMARK
 }

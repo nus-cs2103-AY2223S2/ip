@@ -10,16 +10,26 @@ public class Duke {
 
     public static void main(String[] args) {
         System.out.println(intro());
+        
         String s = askForInput();
-        while(!s.equals("bye")) {
-            if (s.equals("list")) {
-                System.out.println("\nHere are the tasks in your list:\n" + printList()); 
-            } else {
+        EventType curEvent = decodeInput(s);
+        loop: while (true) {
+            switch (curEvent) {
+            case ADD:
                 storedInputs.add(new Task(s));
                 System.out.println("\nadded: " + s + "\n");
+                break;
+            case BYE:
+                break loop;
+            case LIST:
+                System.out.println("\nHere are the tasks in your list:\n" + printList());
+                break;
             }
+            
             s = askForInput();
+            curEvent = decodeInput(s);
         }
+
         System.out.println("Good Riddance!");
     }
 
@@ -38,6 +48,25 @@ public class Duke {
     private static String askForInput() {
         System.out.print("> ");
         return getInput.nextLine();
+    }
+
+    private static EventType decodeInput(String input) {
+        String[] arr = input.split(" ");
+        
+        if (arr[0].equals("bye")) {
+            return EventType.BYE;
+        }
+        if (arr[0].equals("list")) {
+            return EventType.LIST;
+        }
+        if (arr[0].equals("mark")) {
+            return EventType.MARK;
+        }
+        if (arr[0].equals("unmark")) {
+            return EventType.UNMARK;
+        }
+
+        return EventType.ADD;
     }
 
     private static String printList() {
