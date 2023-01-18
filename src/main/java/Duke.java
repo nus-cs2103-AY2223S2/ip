@@ -7,7 +7,7 @@ public class Duke {
                 + "| |_| | |_| |   <  __/\n"
                 + "|____/ \\__,_|_|\\_\\___|\n";
     protected static String line = "____________________________________________________________";
-    protected static LinkedList<String> lst = new LinkedList<>();
+    protected static LinkedList<Task> lst = new LinkedList<>();
     protected static boolean cont = true;
 
     public static void main(String[] args) {
@@ -17,13 +17,22 @@ public class Duke {
         printLine();
         String in = input.nextLine();
         while(cont) {
-            switch (in) {
+            String[] commands = in.trim().split(" ");
+            switch (commands[0]) {
                 case "bye":
                     end();
                     cont = false;
                     break;
                 case "list":
                     printList();
+                    in = input.nextLine();
+                    break;
+                case "mark":
+                    mark(Integer.parseInt(commands[1]) - 1);
+                    in = input.nextLine();
+                    break;
+                case "unmark":
+                    unmark(Integer.parseInt(commands[1]) - 1);
                     in = input.nextLine();
                     break;
                 default:
@@ -48,17 +57,37 @@ public class Duke {
             printLine();
             printLine();
         } else {
+            Task t = new Task(s.trim());
             printLine();
-            lst.add(s);
-            System.out.println("added: " + s);
+            lst.add(t);
+            System.out.println("added: " + t.getTaskName());
             printLine();
         }
     }
 
+    public static void mark(int taskNum) {
+        Task t = lst.get(taskNum);
+        t.markAsDone();
+        printLine();
+        System.out.println("Okay! I've marked this task as done:");
+        System.out.println(String.format(" %s", t));
+        printLine();
+    }
+
+    public static void unmark(int taskNum) {
+        Task t = lst.get(taskNum);
+        t.markAsUndone();
+        printLine();
+        System.out.println("Okay! I've marked this task as not done yet:");
+        System.out.println(String.format(" %s", t));
+        printLine();
+    }
+
     public static void printList() {
         printLine();
+        System.out.println("Here are the tasks in your list:");
         for(int i = 0; i < lst.size(); i++) {
-            String elem = lst.get(i);
+            String elem = lst.get(i).toString();
             System.out.println(String.format("%d. %s", i + 1, elem));
         }
         printLine();
