@@ -11,10 +11,6 @@ public class Printer {
         System.out.printf("\t%s\n%s\n", out, SEPARATOR);
     }
 
-    public static void printlnAdded(String out) {
-        printlnIndent(String.format("[new] %s", out));
-    }
-
     public static void listPrint(String... args) {
         for (int i = 1; i <= args.length; ++i) {
             System.out.printf("\t%d. %s\n", i, args[i - 1]);
@@ -24,5 +20,9 @@ public class Printer {
 
     public static void printIndent(String out) {
         System.out.printf("\t%s\n", out);
+    }
+
+    public static void printlnError(String out) {
+        System.out.printf("\t*Error* %s\n%s\n", out, SEPARATOR);
     }
 }
