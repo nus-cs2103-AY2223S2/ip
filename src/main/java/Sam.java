@@ -13,12 +13,18 @@ public class Sam {
       System.out.println(Assets.USER);
       System.out.print("> ");
       String input = scanner.nextLine();
-      if (input.equals("bye")) {
-        live = false;
-        talk("Bye!");
-      } else {
-        talk(input);
-      }
+
+			switch (input) {
+				case "bye":
+					live = false;
+					talk("Bye!");
+					break;
+				case "list":
+					talk("Here is your list:");
+					break;
+				default:
+					talk("I've added \"" + input + "\" to your list");
+			}
     }
     scanner.close();
   }
