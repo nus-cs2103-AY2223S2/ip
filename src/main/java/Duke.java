@@ -6,11 +6,13 @@ public class Duke {
                 + "What can I do for you?");
         System.out.println(greeting);
         Scanner sc = new Scanner(System.in);
+        List<String> tasks = new ArrayList<String>();
 
 
         String input = sc.nextLine();
         while (!input.equals("bye")) {
-            System.out.println(formatStr(input));
+            tasks.add(input);
+            System.out.println(formatStr(listThings(tasks)));
             input = sc.nextLine();
         }
         String goodbyeMessage = formatStr("Bye. Come back again!");
@@ -22,6 +24,17 @@ public class Duke {
                             + str + "\n"
                             + "############################";
         return returnstr;
+    }
+
+    public static String addReport(String str) {
+        return "added: " + str;
+    }
+
+    public static String listThings(List<String> arrList) {
+        String returnstr = "";
+        for (int i = 0; i < arrList.size(); i++) {
+            returnstr += "added: " + arrList.get(i) + "\n";
+        } return returnstr;
     }
 }
 
