@@ -1,0 +1,10 @@
+todo a todo
+event an event /from mon /to tue
+deadline a deadline /by today
+list
+mark 1
+mark 3
+unmark 1
+not a command
+list
+bye
