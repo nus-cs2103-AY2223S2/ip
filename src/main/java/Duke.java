@@ -43,47 +43,105 @@ public class Duke {
         String input = sc.nextLine();
         while( input.equals("bye") == false){
             String[] split = input.split(" ");
-            if(split[0].equals("list")){
-                System.out.println("---------------------------------------");
-                for(int i = 0; i<list.size(); i++) {
-                    Task element = list.get(i);
-                    System.out.println(String.format("%d.%s",i+1,element.toString()));
+            switch (split[0]) {
+                case("list"):
+                    System.out.println("---------------------------------------");
+                    for (int i = 0; i < list.size(); i++) {
+                        Task element = list.get(i);
+                        System.out.println(String.format("%d.%s", i + 1, element.toString()));
+                    }
+                    System.out.println("---------------------------------------");
+                    break;
+                case("mark"):
+                    int item = Integer.parseInt(split[1]);
+                    Task curr = list.get(item - 1);
+                    curr.setDone();
+                    System.out.println("---------------------------------------");
+                    System.out.println(String.format("Nice, this task has been marked as done:\n %s", curr.toString()));
+                    System.out.println("---------------------------------------");
+                    break;
+                case("unmark"):
+                    item = Integer.parseInt(split[1]);
+                    curr = list.get(item - 1);
+                    curr.setUndone();
+                    System.out.println("---------------------------------------");
+                    System.out.println(String.format("ok, this task has been marked as not done yet:\n %s", curr.toString()));
+                    System.out.println("---------------------------------------");
+                    break;
+                case("todo"):
+                    String task = "";
+                    for(int i = 1; i<split.length; i++) {
+                        task += split[i] + " ";
+                    }
+                    Todo stuff = new Todo(task);
+                    list.add(stuff);
+                    System.out.println("---------------------------------------");
+                    System.out.println(String.format("alright, I've added the following task:\n %s", stuff.toString()));
+                    System.out.println(String.format("Now you have %d tasks in the list.", list.size()));
+                    System.out.println("---------------------------------------");
+                    break;
+                case("deadline"):
+                    task = "";
+                    String date = "";
+                    boolean passed = false;
+                    for(int i = 1; i<split.length; i++) {
+                        if(!split[i].equals("/by") && passed == false) {
+                            task += split[i] + " ";
+                        } else {
+                            if(i < split.length - 1) {
+                                date += split[i + 1] + " ";
+                            }
+                            passed = true;
+                        }
+                    }
+                    Deadline deadline = new Deadline(task,date);
+                    list.add(deadline);
+                    System.out.println("---------------------------------------");
+                    System.out.println(String.format("Received, I've added the following deadlines:\n %s", deadline.toString()));
+                    System.out.println(String.format("Now you have %d tasks in the list.", list.size()));
+                    System.out.println("---------------------------------------");
+                    break;
+                case("event"):
+                    task = "";
+                    String from = "";
+                    String to = "";
+                    passed = false;
+                    boolean passed2 = false;
+                    for(int i = 1; i<split.length; i++) {
+                        if(!split[i].equals("/from") && passed == false && passed2 == false) {
+                            task += split[i] + " ";
+                        } else if(passed2 == false && !split[i+1].equals("/to")) {
+                            from += split[i+1] + " ";
+                            passed = true;
+                        } else if(i < split.length-2){
+                            to += split[i+2] + " ";
+                            passed2 = true;
+                        }
+                    }
+                    Event event = new Event(task,from,to);
+                    list.add(event);
+                    System.out.println("---------------------------------------");
+                    System.out.println(String.format("Sure!, I've added the following events:\n %s", event.toString()));
+                    System.out.println(String.format("Now you have %d tasks in the list.", list.size()));
+                    System.out.println("---------------------------------------");
+                    break;
+                default:
+                    Task t = new Task(input);
+                    list.add(t);
+                    System.out.println("---------------------------------------");
+                    System.out.println(String.format("added: %s", input));
+                    System.out.println("---------------------------------------");
                 }
-                System.out.println("---------------------------------------");
-
-            } else if(split[0].equals("mark")) {
-                int item = Integer.parseInt(split[1]);
-                Task curr = list.get(item-1);
-                curr.setDone();
-                System.out.println("---------------------------------------");
-                System.out.println(String.format("Nice, this task has been marked as done:\n %s",curr.toString()));
-                System.out.println("---------------------------------------");
-
-            } else if(split[0].equals("unmark")) {
-                int item = Integer.parseInt(split[1]);
-                Task curr = list.get(item-1);
-                curr.setUndone();
-                System.out.println("---------------------------------------");
-                System.out.println(String.format("ok, this task has been marked as not done yet:\n %s",curr.toString()));
-                System.out.println("---------------------------------------");
-
-            }
-            else {
-                Task t = new Task(input);
-                list.add(t);
-                System.out.println("---------------------------------------");
-                System.out.println(String.format("added: %s", input));
-                System.out.println("---------------------------------------");
-
-            }
             input = sc.nextLine();
+            }
+        exit();
 
         }
-        exit();
+
     }
 
 
-}
+
 
 
 
