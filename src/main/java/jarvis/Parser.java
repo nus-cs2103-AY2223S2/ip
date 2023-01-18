@@ -1,5 +1,6 @@
 package jarvis;
 
+import jarvis.command.*;
 import jarvis.exception.InvalidActionException;
 
 import java.util.LinkedList;
@@ -39,6 +40,28 @@ public class Parser {
         }
         scanner.close();
 
-        return new Command(action, body, subCommands);
+        switch (action) {
+            case BYE:
+                return new ByeCommand();
+            case LIST:
+                return new ListCommand(action, body, subCommands);
+            case MARK_DONE:
+            case MARK_UNDONE:
+                return new MarkCommand(action, body);
+            case DELETE_TASK:
+                return new DeleteCommand(action, body);
+            case CREATE_TODO:
+                return new ToDoCommand(action, body);
+            case CREATE_DEADLINE:
+                return new DeadlineCommand(action, body, subCommands);
+            case CREATE_EVENT:
+                return new EventCommand(action, body, subCommands);
+            case DEADLINE_BY:
+            case EVENT_FROM:
+            case EVENT_TO:
+                return new SubCommand(action, body, subCommands);
+            default:
+                return new UnknownCommand();
+        }
     }
 }

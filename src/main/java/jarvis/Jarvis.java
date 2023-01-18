@@ -1,8 +1,7 @@
 package jarvis;
 
-import jarvis.exception.CommandParseException;
+import jarvis.command.Command;
 import jarvis.exception.InvalidActionException;
-import jarvis.exception.TaskIOException;
 
 import java.util.Scanner;
 
@@ -23,8 +22,9 @@ public class Jarvis {
         this.ui.printLogo();
         this.ui.printStandard(Ui.Response.INTRO);
 
+        boolean isExit = false;
         Scanner scanner = new Scanner(System.in);
-        while (scanner.hasNextLine()) {
+        while (!isExit && scanner.hasNextLine()) {
             String line = scanner.nextLine();
             if (line.isBlank()) {
                 this.ui.printUserPrompt();
@@ -38,39 +38,10 @@ public class Jarvis {
                 this.ui.printStandard(Ui.Response.CONFUSED);
                 continue;
             }
-
-            if (command.hasAction(Command.Action.BYE)) {
-                break;
-            } else if (command.hasAction(Command.Action.LIST)) {
-                this.ui.print(this.taskList.getTasksForPrint());
-            } else {
-                try {
-                    if (command.hasAction(Command.Action.LIST_FILTER)) {
-                        this.ui.print(this.taskList.getTasksForPrint(command.toFilter()));
-                    } else if (command.hasAction(Command.Action.MARK_DONE, Command.Action.MARK_UNDONE)) {
-                        this.ui.print(this.taskList.setTaskDone(command));
-                    } else if (command.hasAction(Command.Action.DELETE_TASK)) {
-                        this.ui.print(this.taskList.deleteTask(command));
-                    } else if (command.hasAction(Command.Action.CREATE_TODO)) {
-                        this.ui.print(this.taskList.addTask(command.toToDoTask()));
-                    } else if (command.hasAction(Command.Action.CREATE_DEADLINE)) {
-                        this.ui.print(this.taskList.addTask(command.toDeadlineTask()));
-                    } else if (command.hasAction(Command.Action.CREATE_EVENT)) {
-                        this.ui.print(this.taskList.addTask(command.toEventTask()));
-                    }
-                } catch (CommandParseException e) {
-                    this.ui.printError(e.getFriendlyMessage());
-                }
-            }
+            command.execute(this.ui, this.taskList, this.storage);
+            isExit = command.isExit();
         }
         scanner.close();
-
-        try {
-            this.storage.saveTasks(this.taskList.getTasks());
-        } catch (TaskIOException e) {
-            this.ui.printError(e.getFriendlyMessage());
-        }
-        this.ui.printStandard(Ui.Response.GOODBYE);
     }
 
     public static void main(String[] args) {

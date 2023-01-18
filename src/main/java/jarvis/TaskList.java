@@ -1,6 +1,6 @@
 package jarvis;
 
-import jarvis.exception.CommandParseException;
+import jarvis.exception.InvalidParameterException;
 import jarvis.exception.MissingParameterException;
 import jarvis.task.Task;
 import jarvis.task.TaskFilter;
@@ -45,21 +45,6 @@ public class TaskList {
     }
 
     /**
-     * Deletes a task from the list, based on the given command.
-     * @param command User input command.
-     * @return List of response lines.
-     * @throws MissingParameterException If the index to delete is invalid.
-     */
-    public List<String> deleteTask(Command command) throws MissingParameterException {
-        int index = -1;
-        try {
-            index = Integer.parseInt(command.getBody());
-        } catch (NumberFormatException ignored) {}
-
-        return this.deleteTask(index);
-    }
-
-    /**
      * Deletes a task from the list at the given index.
      * @param index Index of the task to delete.
      * @return List of response lines.
@@ -81,39 +66,19 @@ public class TaskList {
     }
 
     /**
-     * Marks a task as done or undone, based on the command.
-     * @param command Mark/unmark command.
-     * @return List of response lines.
-     */
-    public List<String> setTaskDone(Command command) throws CommandParseException, MissingParameterException {
-        int index = -1;
-        try {
-            index = Integer.parseInt(command.getBody());
-        } catch (NumberFormatException ignored) {}
-
-        if (command.hasAction(Command.Action.MARK_DONE)) {
-            return this.setTaskDone(index, true);
-        } else if (command.hasAction(Command.Action.MARK_UNDONE)) {
-            return this.setTaskDone(index, false);
-        } else {
-            throw new CommandParseException("Provided command is not a MARK/UNMARK command");
-        }
-    }
-
-    /**
      * Marks a task as done or undone as given.
      * @param index 1-based index of the task.
      * @param isDone Whether the task is marked as done.
      * @return List of response lines.
      */
-    public List<String> setTaskDone(int index, boolean isDone) throws MissingParameterException {
+    public List<String> setTaskDone(int index, boolean isDone) throws InvalidParameterException {
         if (this.tasks.isEmpty()) {
             return List.of("There are no tasks to mark, please add a task first.");
         }
 
         if (index <= 0 || index > this.tasks.size()) {
-            throw new MissingParameterException(
-                    "Unable to parse index",
+            throw new InvalidParameterException(
+                    "Invalid index",
                     String.format("Please provide an index from %d to %d.", 1, this.tasks.size())
             );
         }

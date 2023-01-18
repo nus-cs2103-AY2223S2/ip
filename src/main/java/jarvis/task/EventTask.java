@@ -13,10 +13,10 @@ public class EventTask extends Task {
 
     public EventTask(
             String description,
-            String fromDateTime,
-            String toDateTime
+            String fromDate,
+            String fromTime
     ) throws CommandParseException {
-        this(description, fromDateTime, toDateTime, false);
+        this(description, fromDate, fromTime, false);
     }
 
     public EventTask(String description, String fromDate, String toDate, boolean isDone) throws CommandParseException {
