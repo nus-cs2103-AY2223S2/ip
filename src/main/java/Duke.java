@@ -17,24 +17,9 @@ public class Duke {
     public void run() {
         this.init();
         while (this.isRunning) {
-            this.execute(this.readCommand());
+            this.execute(scanner.nextLine());
         }
         this.exit();
-    }
-
-    private String[] parseCommand(String command) {
-        int firstSpace = command.indexOf(" ");
-        if (firstSpace != -1) {
-            // insert a " /" so that command can be split by " /"
-            command = command.substring(0, firstSpace)
-                    + " /" + command.substring(firstSpace);
-        }
-        String[] result = command.split(" /");
-        for (int i = 1; i < result.length; i++) {
-            firstSpace = result[i].indexOf(" ");
-            result[i] = result[i].substring(firstSpace + 1);
-        }
-        return result;
     }
 
     private void addTask(Task task) {
@@ -61,24 +46,40 @@ public class Duke {
         System.out.println("Hello!");
     }
 
-   private String readCommand() {
-        return scanner.nextLine();
-    }
-
-    private void execute(String command) {
-        String[] args = parseCommand(command);
-        if (args[0].equals("bye")) {
-            this.isRunning = false;
-        } else if (args[0].equals("todo")) {
-            this.addTask(new Todo(args[1]));
-        } else if (args[0].equals("deadline")) {
-            this.addTask(new Deadline(args[1], args[2]));
-        } else if (args[0].equals("event")) {
-            this.addTask(new Event(args[1], args[2], args[3]));
-        } else if (args[0].equals("list")) {
-            this.showTasks();
-        } else if (args[0].equals("mark")) {
-            this.toggleTask(this.tasks[Integer.parseInt(args[1])]);
+    private void execute(String input) {
+        try {
+            Command command = new Command(input);
+            switch (command.getType()) {
+            case "bye":
+                this.isRunning = false;
+                break;
+            case "todo":
+                this.addTask(new Todo(command.getArg("todo")));
+                break;
+            case "deadline":
+                this.addTask(new Deadline(
+                        command.getArg("deadline"),
+                        command.getArg("by")
+                ));
+                break;
+            case "event":
+                this.addTask(new Event(
+                        command.getArg("event"),
+                        command.getArg("from"),
+                        command.getArg("to")
+                ));
+                break;
+            case "list":
+                this.showTasks();
+                break;
+            case "mark":
+                this.toggleTask(this.tasks[Integer.parseInt(
+                        command.getArg("mark")
+                )]);
+                break;
+            }
+        } catch (IllegalArgumentException e) {
+            System.out.println(e.getMessage());
         }
     }
 
