@@ -11,10 +11,6 @@ public class Task {
             return (isDone ? "X" : " "); // mark done task with X
         }
 
-        public String getTaskItem() {
-            return "[" + this.getStatusIcon() +"] " + this.getDescription();
-        }
-
         public String getDescription() {
             return this.description;
         }
@@ -24,5 +20,10 @@ public class Task {
         }
         public void unmarkTask(){
             this.isDone = false;
+        }
+
+        @Override
+        public String toString() {
+            return "[" + this.getStatusIcon() +"] " + this.getDescription();
         }
 }

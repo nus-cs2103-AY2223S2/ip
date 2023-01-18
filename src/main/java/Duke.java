@@ -15,31 +15,48 @@ public class Duke {
         System.out.println("____________________________________________________________");
         String userInput = null;
         while(!(userInput = scan.nextLine()).equals("bye")) {
-            String[] splitCheck = userInput.split(" ");
+            String[] splitCheck = userInput.split(" ", 2);
+            String message = "";
             if (userInput.equals("list")) {
-                String message = "Here are the tasks in your list:";
+                message = "Here are the tasks in your list:";
                 for (int i = 0; i < taskList.size(); i++) {
-//                    message += i != 0 ? "\n" : "";
                     Task oneTask = taskList.get(i);
-                    message += "\n" + (i+1) + ". " + oneTask.getTaskItem();
+                    message += "\n" + (i+1) + ". " + oneTask.toString();
                 }
-                dukeSpeak(message);
+
             } else if (splitCheck[0].equals("mark")){
                 int taskNum = Integer.parseInt(splitCheck[1]);
                 Task oneTask = taskList.get(taskNum-1);
                 oneTask.markTask();
-                String message = "Nice! I've marked this task as done:\n " + oneTask.getTaskItem();
-                dukeSpeak(message);
+                message = "Nice! I've marked this task as done:\n " + oneTask.toString();
+
             } else if (splitCheck[0].equals("unmark")) {
                 int taskNum = Integer.parseInt(splitCheck[1]);
                 Task oneTask = taskList.get(taskNum-1);
                 oneTask.unmarkTask();
-                String message = "OK! I've marked this task as not done yet:\n " + oneTask.getTaskItem();
-                dukeSpeak(message);
-            } else {
-                taskList.add(new Task(userInput));
-                dukeSpeak("added: " + userInput);
+                message = "OK! I've marked this task as not done yet:\n " + oneTask.toString();
+
+            } else if (splitCheck[0].equals("todo")){
+                Todo tempTodo = new Todo(splitCheck[1]);
+                taskList.add(tempTodo);
+                message = "Got it. I've added this task:\n " + tempTodo.toString();
+                message += "\nNow you have " + taskList.size() + " tasks in the list.";
+
+            } else if (splitCheck[0].equals("deadline")) {
+                String[] dlString = splitCheck[1].split(" /by ");
+                Deadline tempDeadline = new Deadline(dlString[0], dlString[1]);
+                taskList.add(tempDeadline);
+                message = "Got it. I've added this task:\n " + tempDeadline.toString();
+                message += "\nNow you have " + taskList.size() + " tasks in the list.";
+            } else if (splitCheck[0].equals("event")) {
+                String[] eventString = splitCheck[1].split(" /from ");
+                String[] timeSplit = eventString[1].split(" /to ");
+                Event tempEvent = new Event(eventString[0], timeSplit[0], timeSplit[1]);
+                taskList.add(tempEvent);
+                message = "Got it. I've added this task:\n " + tempEvent.toString();
+                message += "\nNow you have " + taskList.size() + " tasks in the list.";
             }
+            dukeSpeak(message);
         }
 
         dukeSpeak("Bye. Hope to see you again soon!");
