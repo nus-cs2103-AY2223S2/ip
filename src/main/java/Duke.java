@@ -1,6 +1,6 @@
 public class Duke {
     public static void main(String[] args) {
-        System.out.println("Hello from\n" + logo());
+        System.out.println(intro());
     }
 
     private static String logo() {
@@ -9,5 +9,9 @@ public class Duke {
             + "| | | | | | | |/ / _ \\\n"
             + "| |_| | |_| |   <  __/\n"
             + "|____/ \\__,_|_|\\_\\___|\n";
+    }
+
+    private static String intro() {
+        return "Hello! I'm\n" + logo() + "\nWhat can I do for you?";
     }
 }
