@@ -36,6 +36,8 @@ public class ChatBot {
                     case "bye":
                         System.out.println("ByeBye! Come play with me again!");
                         break loop;
+                    case "":
+                        continue;
                     default:
                         System.out.println("I haven't learnt this command yet!\n" +
                                 "Type menu to see the commands I know.");
@@ -67,8 +69,32 @@ public class ChatBot {
                             break;
                     }
                 } else { //snd is a string input
-                    Task t = new Task(snd);
-                    taskManager.addTaskToList(t);
+                    switch(fst) {
+                        case "todo":
+                            ToDos todo = new ToDos(snd);
+                            taskManager.addTaskToList(todo);
+                            break;
+                        case "event":
+                            System.out.println("Please enter a start time: ");
+                            String start = input.nextLine();
+                            System.out.println("Please enter a end time: ");
+                            String end = input.nextLine();
+
+                            Events event = new Events(snd, start, end);
+                            taskManager.addTaskToList(event);
+                            break;
+                        case "deadline":
+                            System.out.println("Please enter a deadline to complete by: ");
+                            String by = input.nextLine();
+                            Deadlines deadline = new Deadlines(snd, by);
+                            taskManager.addTaskToList(deadline);
+                            break;
+                        default:
+                            System.out.println("I haven't learnt this command yet!");
+//                            Task t = new Task(snd);
+//                            taskManager.addTaskToList(t);
+                            break;
+                    }
                 }
                 //add exception over here if they don't specify keyword
                 //add exception if they have trailing spaces i.e. "hello "

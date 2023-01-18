@@ -43,6 +43,7 @@ public class TaskManager {
     public void addTaskToList(Task task) {
         taskArr.add(task);
         System.out.println("I have added: " + task + "!");
+        System.out.println("There are currently " + taskArr.size() + " task(s) in the list!");
     }
 
     //display items in list method
