@@ -30,7 +30,8 @@ public class Duke {
 
     private void showTasks() {
         for (int i = 0; i < this.numTasks; i++) {
-           System.out.println(i + ". " + this.tasks[i]);
+           System.out.println(i + ". " + this.tasks[i].getStatusIcon()
+                   + " " + this.tasks[i]);
         }
     }
 
@@ -43,14 +44,16 @@ public class Duke {
     }
 
    private String readCommand() {
-        return scanner.next();
+        return scanner.nextLine();
     }
 
     private void execute(String command) {
         if (command.equals("bye")) {
             this.isRunning = false;
-        } else if (command.equals("list")){
+        } else if (command.equals("list")) {
             this.showTasks();
+        } else if (command.startsWith("mark")) {
+            this.tasks[Integer.parseInt(command.substring(5))].toggleDone();
         } else {
             this.addTask(new Task(command));
         }
