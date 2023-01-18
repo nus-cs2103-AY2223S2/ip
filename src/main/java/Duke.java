@@ -8,8 +8,8 @@ public class Duke {
             + "| |_| | |_| |   <  __/\n"
             + "|____/ \\__,_|_|\\_\\___|";
     private Scanner sc = new Scanner(System.in);
-    private ArrayList<String> inputs = new ArrayList<>(100);
-    private ArrayList<Boolean> isDone = new ArrayList<>(100);
+    private ArrayList<Task> tasks = new ArrayList<>(100);
+
     public static void main(String[] args) {
         Duke duke = new Duke();
         duke.activate();
@@ -24,7 +24,18 @@ public class Duke {
         while (!this.stringMatch(i,"bye")) {
             if (this.stringMatch(i, "list")) {
                 this.printList();
-            } else {
+            } else if(i.toLowerCase().startsWith("mark")) {
+                int num = Integer.parseInt(i.split(" ")[1]);
+                Task t = this.tasks.get(num-1);
+                t.markDone();
+                getMarkDoneMessage(t);
+            } else if(i.toLowerCase().startsWith("unmark")) {
+                int num = Integer.parseInt(i.split(" ")[1]);
+                Task t = this.tasks.get(num-1);
+                t.unmarkDone();
+                getUnmarkDoneMessage(t);
+            }
+            else {
                 this.addTask(i);
             }
             i = sc.nextLine();
@@ -48,24 +59,37 @@ public class Duke {
     public void printLine() {
         System.out.println("_______________________________________________________");
     }
-    public void storeInput(String i) {
-        this.inputs.add(i);
+    public void storeTask(Task t) {
+        this.tasks.add(t);
     }
     public void printList() {
         //this.printLine();
         System.out.println("Here are the tasks in your list:");
-        for(int i = 1; i <= this.inputs.size(); i++) {
-            System.out.println(i + ". " + this.inputs.get(i-1));
+        for(int i = 1; i <= this.tasks.size(); i++) {
+            Task t = this.tasks.get(i-1);
+            System.out.println(i + ". " + t.getStatusBox() +
+                    t.getDescription());
         }
         this.printLine();
     }
     public void addTask(String i) {
         //this.printLine();
-        System.out.println("Added: " + i);
-        this.storeInput(i);
+        Task t = new Task(i);
+        System.out.println("Added: " + t.getDescription());
+        this.storeTask(t);
         this.printLine();
     }
     public boolean stringMatch(String input, String given) {
         return input.equalsIgnoreCase(given);
+    }
+    public void getMarkDoneMessage(Task t) {
+        System.out.println("Nice! I've marked this task as done:\n" + "  " +
+                t.getStatusBox() + t.getDescription());
+        this.printLine();
+    }
+    public void getUnmarkDoneMessage(Task t) {
+        System.out.println("Okay, I've marked this task as not done yet:\n" + "  " +
+                t.getStatusBox() + t.getDescription());
+        this.printLine();
     }
 }
