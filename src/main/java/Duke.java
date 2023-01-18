@@ -2,7 +2,7 @@ import java.util.*;
 import java.io.*;
 
 /**
- * DukeException handles exceptions specific to Duke
+ * This exception - DukeException handles exceptions specific to Duke
  */
 class DukeException extends Exception {
     public DukeException(String errorMessage) {
@@ -10,6 +10,9 @@ class DukeException extends Exception {
     }
 }
 
+/**
+ * This class handles the main chatbot line interface
+ */
 public class Duke {
     public static String TAB = "    ";
     public static String HOR_BAR = "✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦";
@@ -30,10 +33,17 @@ public class Duke {
      */
     public static void byeDialogue() {
         System.out.println(TAB + HOR_BAR);
-        System.out.println(TAB + "Bye! Please come back again ૮꒰˶• ༝ •˶꒱ა");
+        System.out.println(TAB + "Bye! I hope Berry was helpful to you ૮꒰˶• ༝ •˶꒱ა");
         System.out.println(TAB + HOR_BAR);
     }
 
+    /**
+     * This function cuts out the task name and returns it.
+     * @param taskType The type of command includes 'todo', 'deadline', and 'event'.
+     * @param input The input given by the user.
+     * @return The task name.
+     * @throws DukeException when the input command has not been added to be handled by the chatbot.
+     */
     public static String cutDescription(String taskType, String input) throws DukeException {
         String description;
         try {
@@ -51,6 +61,7 @@ public class Duke {
 
     /**
      * This function prints a out of range message.
+     * @return A message string to indicate out of range task numbers.
      */
     public static String outOfRangeMessage() {
         String message =
@@ -63,17 +74,20 @@ public class Duke {
 
     /**
      * This function prints a general message for unreadable instructions.
+     * @return A message string to indicate commands which cannot be handled.
      */
     public static String unreadableMessage() {
         String message = Duke.TAB + Duke.HOR_BAR + "\n" +
-                Duke.TAB + "Aww... ''૮₍  ˶•⤙•˶ ₎ა  I haven't learnt enough to do this.\n" +
+                Duke.TAB + "Aww... ''૮₍  ˶•⤙•˶ ₎ა  I can't help you with this.\n" +
                 Duke.TAB + "key in 'help' for the help menu~\n" +
                 Duke.TAB + Duke.HOR_BAR;
         return message;
     }
 
     /**
-     * This function prints a message for missing information in creating tasks.
+     * This function prints a message for missing information in creating known tasks.
+     * @param taskType The type of command includes 'todo', 'deadline', and 'event'.
+     * @return A message string to indicate missing informations in tasks.
      */
     public static String missingInfosMessage(String taskType) {
         String message =
@@ -86,6 +100,8 @@ public class Duke {
 
     /**
      * This function prints a message for specific blank inputs in command.
+     * @param missingInfo A string to indicate the blank clause.
+     * @return A message string to indicate blank information in tasks.
      */
     public static String blankInfoMessage(String missingInfo) {
         String message =
@@ -96,6 +112,10 @@ public class Duke {
         return message;
     }
 
+    /**
+     * This function prints out a help menu for known instructions for the chatbot to execute.
+     * @return A help menu.
+     */
     public static String helpMenu() {
         String message = Duke.TAB + Duke.HOR_BAR + "\n" +
                 Duke.TAB + "ADDING TASKS\n" +
@@ -197,15 +217,18 @@ public class Duke {
     }
 }
 
-/** This class manages the Task(s) in a TaskBook recording the number of tasks
+/**
+ * This class manages the Task(s) in a TaskBook recording the number of tasks
  * and task names.
  */
 class TaskBook {
     private static int numOfTasks;
     public static ArrayList<Task> listOfTasks = new ArrayList<Task>();
 
-    /** This function lists out all the tasks in listOfTasks by order of
-     * its addition into listOfTasks */
+    /**
+     * This function lists out all the tasks in listOfTasks by order of
+     * its addition into listOfTask.
+     */
     public void listTasks() {
         int counter = 1;
         System.out.println(Duke.TAB + Duke.HOR_BAR);
@@ -267,6 +290,10 @@ class TaskBook {
         System.out.println(Duke.TAB + Duke.HOR_BAR);
     }
 
+    /**
+     * This function deletes an existing task in listOfTasks, and updates the number of tasks in the TaskBook.
+     * @param index The index of the task in listOfTasks, starting from index 1.
+     */
     public void deleteTask(int index){
         System.out.println(Duke.TAB + Duke.HOR_BAR);
         System.out.println(Duke.TAB + "Here you go! I've deleted this task for ya:");
@@ -278,8 +305,8 @@ class TaskBook {
     }
 
 
-    /** This function marks the given task at index as done.
-     *
+    /**
+     * This function marks the given task at index as done.
      * @param index The index of the task in listOfTasks, starting from index 1.
      */
     public void markDone(int index) {
@@ -290,8 +317,8 @@ class TaskBook {
         System.out.println(Duke.TAB + Duke.HOR_BAR);
     }
 
-    /** This function marks the given task at index as not done.
-     *
+    /**
+     * This function marks the given task at index as not done.
      * @param index The index of the task in listOfTasks, starting from index 1.
      */
     public void markNotDone(int index) {
@@ -302,8 +329,8 @@ class TaskBook {
         System.out.println(Duke.TAB + Duke.HOR_BAR);
     }
 
-    /** This function checks against the number of tasks in the task book and checks if it is out of range.
-     *
+    /**
+     * This function checks against the number of tasks in the task book and checks if it is out of range.
      * @param index The index of the task in listOfTasks, starting from index 1.
      * @return true if index is in range
      */
@@ -311,6 +338,9 @@ class TaskBook {
         return index > 0 && index <= numOfTasks;
     }
 
+    /**
+     * This function prints out the number of tasks in the task book currently.
+     */
     public void printNumberOfTasks() {
         System.out.println(Duke.TAB + "You now have " + numOfTasks + " tasks in the list ૮꒰ˊᗜˋ* ꒱ა");
     }
