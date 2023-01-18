@@ -57,8 +57,7 @@ public class Duke {
     public static void storeItem(String item) {
         stringStorage.add(new Task(item));
 
-        System.out.print("added: ");
-        echo(item);
+        System.out.println(String.format("added: %s\n", item));
     }
 
     public static void listItem() {
@@ -67,21 +66,27 @@ public class Duke {
         System.out.println("Here are the tasks in your list:");
         for (int i = 0; i < size; i++)
             System.out.println((i + 1) + ". " + stringStorage.get(i));
+        
+        System.out.println();
     }
 
     public static void markItem(String item) {
         int index = Integer.parseInt(item) - 1;
+        if (index >= stringStorage.size())
+            return;
         Task task = stringStorage.get(index);
         task.markAsDone();
 
-        System.out.println("Nice! I've marked this task as done:\n" + task);
+        System.out.println(String.format("Nice! I've marked this task as done:\n%s\n", task));
     }
 
     public static void unmarkItem(String item) {
         int index = Integer.parseInt(item) - 1;
+        if (index >= stringStorage.size())
+            return;
         Task task = stringStorage.get(index);
         task.markAsNotDone();
 
-        System.out.println("OK, I've marked this task as not done yet:\n" + task);
+        System.out.println(String.format("OK, I've marked this task as not done yet:\n%s\n", task));
     }
 }
