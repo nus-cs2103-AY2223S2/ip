@@ -34,29 +34,36 @@ public class Duke {
 
     /**
      * Prints out that task was added.
+     *
      * @param task task that was added.
      */
     private static void printTaskAdded(Task task) {
-        prettifyOut("Got it. I've added this task:\n  " + task + "\nNow you have " + TASKS.size() + " tasks in the list.");
+        prettifyOut("Got it. I've added this task:\n  " + task + "\nNow you have " + TASKS.size() +
+                " tasks in the list.");
     }
 
     /**
-     * Executes the command.
-     *
+     * Executes the input command.
      * @param inp input string.
-     * @return False if final command.
+     * @return False if input is a bye command.
+     *
+     * @throws DukeException if input is invalid.
      */
-    private static boolean executeInput(String inp) {
+    private static boolean executeInput(String inp) throws DukeException {
         Duke.Command cmd;
-        String description;
+        String description = "";
         try {
             cmd = Duke.Command.valueOf(inp.split(" ")[0].toUpperCase());
-            if (cmd != Command.LIST && cmd != Command.BYE) description = inp.split(" ", 2)[1];
-            else description = "";
-
+            if (cmd != Command.LIST && cmd != Command.BYE) {
+                String[] checkEmpty = inp.split(" ", 2);
+                if (checkEmpty.length < 2 || checkEmpty[1].isBlank()) {
+                    throw new DukeException("☹ OOPS!!! The description of a " + cmd.toString().toLowerCase() +
+                            " cannot be empty.");
+                }
+                description = checkEmpty[1];
+            }
         } catch (IllegalArgumentException e) {
-            borderLine();
-            return true;
+            throw new DukeException("☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
         }
 
         switch (cmd) {
@@ -113,6 +120,7 @@ public class Duke {
                 prettifyOut(GOODBYE);
                 return false;
         }
+
         return true;
     }
 
@@ -132,8 +140,11 @@ public class Duke {
                 borderLine();
                 continue;
             }
-
-            cont = executeInput(userInput);
+            try {
+                cont = executeInput(userInput);
+            } catch (DukeException e) {
+                prettifyOut(e.getMessage());
+            }
         }
     }
 
@@ -141,6 +152,6 @@ public class Duke {
      * Available commands.
      */
     public enum Command {
-        LIST, MARK, UNMARK, TODO, DEADLINE, EVENT, BYE
+        LIST, MARK, UNMARK, TODO, DEADLINE, EVENT, DELETE, BYE
     }
 }
