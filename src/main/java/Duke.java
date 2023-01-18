@@ -169,7 +169,7 @@ abstract class Task {
     private boolean done = false;
 
     Task(String title) {
-        this.title = title;
+        this.title = title.trim();
     }
 
     void markAsDone() {
@@ -209,7 +209,7 @@ class Deadline extends Task {
 
     Deadline(String title, String by) {
         super(title);
-        this.by = by;
+        this.by = by.trim();
     }
 
     @Override
@@ -224,8 +224,8 @@ class Event extends Task {
 
     Event(String title, String from, String to) {
         super(title);
-        this.from = from;
-        this.to = to;
+        this.from = from.trim();
+        this.to = to.trim();
     }
 
     @Override
