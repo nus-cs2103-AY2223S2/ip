@@ -1,0 +1,17 @@
+todo
+deadline
+event
+todo 1
+todo test
+todo test script
+deadline 1
+deadline 1 /by now
+event greet
+event greet and meet /from now /to later
+mark 1
+list
+unmark 1
+list
+mark 6
+mark test
+bye

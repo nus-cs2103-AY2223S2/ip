@@ -7,6 +7,35 @@ import java.util.Scanner;
  * AY2223-S2 CS2103T
  */
 public class Duke {
+//    private static String mascot =
+//            "⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⣰⣷⣦⡀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀\n" +
+//            "⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢹⣧⠙⢿⣦⡀⠀⠀⠀⠀⠀⠀⠀⣠⣶⣦⠀⠀⠀⠀⠀⠀\n" +
+//            "⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢸⣿⠀⠀⠙⢿⣦⡀⠀⠀⠀⢀⣾⡿⠉⣿⡄⠀⠀⠀⠀⠀\n" +
+//            "⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢸⣿⠀⠀⠀⠀⠙⣿⣄⣠⣴⡿⠋⠀⠀⣿⡇⠀⠀⠀⠀⠀\n" +
+//            "⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢸⣿⠀⠀⠀⠀⠀⠈⠿⠟⠉⠀⠀⠀⢀⣿⠇⠀⠀⠀⠀⠀\n" +
+//            "⠀⠀⠀⣿⡿⠿⠿⠿⠷⣶⣾⡿⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢸⣿⣤⣤⣴⣶⣶⡀\n" +
+//            "⠀⠀⠀⠹⣿⡀⠀⠀⠀⠀⠀⠀⢀⡤⠖⠚⠉⠉⠉⠉⠛⠲⣄⠀⠈⠉⠉⠉⠁⣼⡟⠀\n" +
+//            "⠀⠀⠀⠀⠹⣷⡀⠀⠀⠀⢀⡔⠉⠀⠀⠀⠀⠀⠀⠀⠀⠀⠈⠳⡄⠀⠀⢀⣼⡟⠀⠀\n" +
+//            "⠀⠀⠀⠀⠀⢹⣷⠀⠀⢀⡎⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢹⡀⢠⣾⡏⠀⠀⠀\n" +
+//            "⠀⢀⣠⣴⡾⠟⠋⠀⠀⣸⠀⠀⠀⣴⣒⣒⣛⣛⣛⣋⣉⣉⣉⣙⣛⣷⠀⠙⠿⣶⣤⡀\n" +
+//            "⣾⣿⡋⠁⠀⠀⠀⠀⠀⡏⠀⠀⡄⠉⠉⠁⠀⠈⢹⢨⠃⠀⠀⠀⠀⠙⡄⠀⠀⣨⣿⠟\n" +
+//            "⠈⠛⠿⣷⣦⣀⠀⠀⠀⡇⠀⠸⡟⠛⠿⠛⠛⠛⢻⢿⠋⠹⠟⠉⠉⠙⡇⣠⣾⠟⠁⠀\n" +
+//            "⠀⠀⠀⢀⣽⣿⠇⠀⠀⡇⠀⠀⠳⣄⣀⠀⣀⣠⠞⠈⢷⣄⣀⣀⣠⣾⠁⢿⣧⡀⠀⠀\n" +
+//            "⠀⢠⣴⡿⠋⠁⠀⠀⢀⡧⠄⠀⠦⣀⣈⣉⠁⠀⠠⡀⠘⡆⠠⠤⠴⢿⣄⠀⠙⣿⣦⠀\n" +
+//            "⠀⠹⢿⣦⣤⣀⠀⢰⠃⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠳⣤⠇⠀⠀⠀⣼⢘⣷⡿⠟⠋⠀\n" +
+//            "⠀⠀⠀⠈⠉⣿⡇⠈⠣⣄⡀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢀⡿⠻⣿⡀⠀⠀⠀\n" +
+//            "⠀⠀⠀⠀⢸⣿⣤⣤⣤⣤⢧⠀⢀⡆⣠⠴⠒⠋⢹⠋⠉⢹⠗⠒⠄⣷⣾⡿⠇⠀⠀⠀\n" +
+//            "⠀⠀⠀⠀⠀⠉⠉⠉⣿⣇⣈⣆⠀⠳⠤⠀⠀⠀⠈⣇⡖⡍⠀⠠⣾⣿⡿⠇⠀⠀⠀⠀\n" +
+//            "⠀⠀⠀⠀⠀⠀⠀⠀⠛⠛⠛⢻⣷⣄⠀⠀⠀⠀⠁⠉⠀⠀⣠⣾⠟⠀⠀⠀⠀⠀⠀⠀\n" +
+//            "⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⣀⣉⣿⣷⠲⠤⠤⠤⣤⣶⣿⣟⠁⠀⠀⠀⠀⠀⠀⠀⠀\n" +
+//            "⠀⠀⠀⠀⠀⠀⢀⣴⣶⡿⠿⠛⠛⢋⢹⡦⣄⣀⡤⢿⢉⠛⠛⠿⣷⣦⠀⠀⠀⠀⠀⠀\n" +
+//            "⠀⠀⠀⠀⠀⠀⣿⠏⠀⠀⠀⠀⢀⠇⠈⡇⠀⠀⠀⠘⡎⣆⠀⠀⠀⢻⣧⠀⠀⠀⠀⠀\n" +
+//            "⠀⠀⠀⠀⠀⠈⠿⣶⣶⣶⣶⣶⣾⣶⣾⣷⣶⣶⣶⣶⣷⣾⣷⣶⣶⣾⡿";
+    private static String mascot =
+            "RICKRICKRICKRICKRICKKKKK\n"
+        +   "RICK    RICK    RICKKKKK\n"
+        +   "RICKRICKRICKRICKRICKKKKK\n"
+        +   "Get Schwifty :)";
     /**
      * The main function that runs the Duke app.
      *
@@ -19,7 +48,7 @@ public class Duke {
                 + "| | | | | | | |/ / _ \\\n"
                 + "| |_| | |_| |   <  __/\n"
                 + "|____/ \\__,_|_|\\_\\___|\n";
-        System.out.println("Hello from\n" + logo);
+        System.out.println("Hello from\n" + mascot);
         greet();
         operate();
     }
@@ -28,9 +57,9 @@ public class Duke {
      * The configurable greeting message for the Duke app.
      */
     private static void greet() {
-        String name = "SOCCat";
-        String greeting = String.format("Hello, I'm %s", name);
-        String cta = "How meow I help you today?";
+        String name = "R-r-r-rickkk";
+        String greeting = String.format("Hello, I'm %s!", name);
+        String cta = "What's up?";
         DukeFormatter.section(
                 greeting + "\n"
                 + cta +"\n"
@@ -77,7 +106,7 @@ public class Duke {
         switch (cmd) {
             case "bye":
                 cleanup(sc);
-                String message = "It was nice serving you. Hope to see you again!" + "\n"
+                String message = "It was okay serving you. Might/might not see you again." + "\n"
                         + "Exiting...";
                 DukeFormatter.section(message);
                 System.exit(1);
@@ -85,11 +114,19 @@ public class Duke {
             case "list":
                 DukeFormatter.section(ds.toString());
                 return;
-
+            case "todo":
+                DukeFormatter.error(new DukeEmptyTaskException(DukeEmptyTaskException.TaskType.Todo));
+                return;
+            case "deadline":
+                DukeFormatter.error(new DukeEmptyTaskException(DukeEmptyTaskException.TaskType.Deadline));
+                return;
+            case "event":
+                DukeFormatter.error(new DukeEmptyTaskException(DukeEmptyTaskException.TaskType.Event));
+                return;
             default:
-                DukeFormatter.error(new Exception(
+                DukeFormatter.guide(
                         "Please try a valid command."
-                ));
+                );
         }
     }
 
@@ -133,9 +170,9 @@ public class Duke {
                 return;
 
             default:
-                DukeFormatter.error(new Exception(
+                DukeFormatter.guide(
                         "Please try a valid command."
-                ));
+                );
         }
     }
 
@@ -191,9 +228,9 @@ public class Duke {
     private static void deadline(String command, DukeStore ds) {
         String[] tokens = command.split(" /by ", 2);
         if (tokens.length != 2) {
-            DukeFormatter.error(new Exception(
+            DukeFormatter.guide(
                     "Usage: deadline {task} /by {deadline}"
-            ));
+            );
             return;
         }
 
@@ -214,16 +251,16 @@ public class Duke {
     private static void event(String command, DukeStore ds) {
         String[] tokens = command.split(" /from ", 2);
         if (tokens.length != 2) {
-            DukeFormatter.error(new Exception(
+            DukeFormatter.guide(
                     "Usage: event {task} /from {start} /to {end}"
-            ));
+            );
             return;
         }
         String[] dates = tokens[1].split(" /to ", 2);
         if (dates.length != 2) {
-            DukeFormatter.error(new Exception(
+            DukeFormatter.guide(
                     "Usage: event {task} /from {start} /to {end}"
-            ));
+            );
             return;
         }
 

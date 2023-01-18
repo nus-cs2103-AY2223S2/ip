@@ -76,7 +76,6 @@ public class DukeStore {
         if (i < 0 || i >= this.idx) { //Unassigned, invalid index
             throw new DukeStoreInvalidAccessException();
         }
-        //Index is zero-indexed => Need to subtract one
         this.records[i].markUndone();
         String message = "OK, I've marked this task as not done yet:\n" + "  " + this.records[i];
         DukeFormatter.section(message);

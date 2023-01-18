@@ -1,3 +1,5 @@
+import java.util.Arrays;
+
 /**
  * Main Formatter class to format the UI for the Duke chat-bot in the terminal.
  *
@@ -5,8 +7,8 @@
  * AY2223-S2 CS2103T
  */
 abstract public class DukeFormatter {
-    private static String MASCOT = "\uD83D\uDE3A: ";
-    private static String INDENT = "    ";
+    private static String MASCOT = "Rick: ";
+    private static String INDENT = "      ";
     private static String LINE =
             "____________________________________________________________";
 
@@ -24,10 +26,9 @@ abstract public class DukeFormatter {
         //Start
         line();
         String[] lines = inputs.split("\n");
-        boolean firstLine = true;
-        for (String line: lines) {
-            System.out.println((firstLine? MASCOT : INDENT) + line);
-            firstLine = false;
+        System.out.println(MASCOT + lines[0]);
+        for (String line: Arrays.copyOfRange(lines, 1, lines.length)) {
+            System.out.println(INDENT + line);
         }
         //End
         line();
@@ -42,7 +43,18 @@ abstract public class DukeFormatter {
      */
     public static void error(Exception error) {
         line();
-        System.out.println(MASCOT + "\u001B[31m" + error.getMessage() + "\u001B[0m");
+        System.out.println(MASCOT + error.getMessage());
         line();
+        System.out.print("\n");
+    }
+
+    /**
+     * Produces a user guide for incorrect command usages.
+     */
+    public static void guide(String message) {
+        line();
+        System.out.println(MASCOT + message);
+        line();
+        System.out.print("\n");
     }
 }
