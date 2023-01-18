@@ -3,6 +3,8 @@ import java.util.Scanner;
 
 /*
 May want to catch NumberFormatException for Integer.parseInt
+Prevent empty task desc
+Prevent empty task specific data
  */
 
 public class Duke {
@@ -121,6 +123,19 @@ public class Duke {
                 taskDesc += temp + " ";
             }
         }
+
+        if (taskDesc.isEmpty()) {
+            String output = "☹ OOPS!!! The description of a deadline cannot be empty.";
+            displayMessage(output);
+            return;
+        }
+
+        if (!foundBy || by.isEmpty()) {
+            String output = "☹ OOPS!!! Deadline tasks require a /by.";
+            displayMessage(output);
+            return;
+        }
+
         Deadline newTask = new Deadline(taskDesc.trim(), by.trim());
         taskList.add(newTask);
         String output = "I've added this task:\n" + newTask.toString() + "\n" + "You now have " + taskList.size() + " tasks in the list";
@@ -154,6 +169,19 @@ public class Duke {
                 taskDesc += temp + " ";
             }
         }
+
+        if (taskDesc.isEmpty()) {
+            String output = "☹ OOPS!!! The description of an event cannot be empty.";
+            displayMessage(output);
+            return;
+        }
+
+        if (!foundFrom || !foundTo || from.isEmpty() || to.isEmpty()) {
+            String output = "☹ OOPS!!! Event tasks require a /from and /to.";
+            displayMessage(output);
+            return;
+        }
+
         Event newTask = new Event(taskDesc.trim(), from.trim(), to.trim());
         taskList.add(newTask);
         String output = "I've added this task:\n" + newTask.toString() + "\n" + "You now have " + taskList.size() + " tasks in the list";
@@ -166,6 +194,12 @@ public class Duke {
         while (stringStream.hasNext()) {
             String temp = stringStream.nextLine();
             taskDesc += temp;
+        }
+
+        if (taskDesc.isEmpty()) {
+            String output = "☹ OOPS!!! The description of a ToDo cannot be empty.";
+            displayMessage(output);
+            return;
         }
 
         ToDo newTask = new ToDo(taskDesc.trim());

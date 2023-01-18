@@ -1,0 +1,6 @@
+deadline Return book /by Mon 2pm
+event EOY J-Culture Festival /from Sat 12pm /to Sat 4pm
+todo Implement PaperText API routes
+mark 1
+list
+bye
