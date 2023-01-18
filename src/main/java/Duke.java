@@ -12,6 +12,7 @@ public class Duke {
         System.out.println("Hello from\n" + logo);
         System.out.println("I am Duke the Chatbot!\nHow may i help you today?\n");
         StorageList s = new StorageList();
+
         try {
             while (scanner.hasNextLine()) {
                 String line = scanner.nextLine();
@@ -41,10 +42,13 @@ public class Duke {
                         String[] checker4 = checker2[1].split("from ");
                         String[] checker5 = checker2[2].split("to ");
                         s.addEvent(checker3[1], checker4[1], checker5[1]);
+                    } else if (checker[0].toLowerCase().equals("delete")) {
+                        int tasknumber = Integer.valueOf(checker[1]) - 1;
+                        s.deleteTask(tasknumber);
                     } else {
                         throw new DukeException("☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
                     }
-                    System.out.println("Now you have " + s.lengthOflist() + " tasks in your list.");
+                    System.out.println("Now you have " + s.lengthOflist() + " tasks in your list.\n");
 
                 }
             }
