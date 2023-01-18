@@ -1,3 +1,4 @@
+import java.util.ArrayList;
 import java.util.Scanner;
 
 /**
@@ -6,8 +7,7 @@ import java.util.Scanner;
  * Currently, Duke accepts the commands: {@code echo, list, mark, unmark, todo, deadline, event, bye}
  */
 public class Duke {
-    private static Task[] tasks = new Task[100];
-    private static int end = 0;
+    private static ArrayList<Task> tasks = new ArrayList<>();
 
     /**
      * Initialises and runs the Duke chatbot.
@@ -69,12 +69,15 @@ public class Duke {
                 case "event":
                     addEvent(sc.nextLine().strip());
                     break;
+                case "delete":
+                    deleteTask(sc.nextLine().strip());
+                    break;
                 case "bye":
                     sc.close();
                     exit();
                     return;
                 default:
-                    sc.nextLine(); // throw away whole lines
+                    sc.nextLine(); // throws away the remaining line
                     throw new DukeException(
                             "I only understand {echo, list, mark, unmark, todo, deadline, event} commands.");
                 }
@@ -109,8 +112,9 @@ public class Duke {
      */
     private static void printDukeList() {
         String ls = "\tHere are the tasks in your list:\n";
-        for (int i = 0; i < end; i++) {
-            ls = ls + "\t" + Integer.toString(i + 1) + "." + tasks[i].toString() + "\n";
+        for (int i = 0; i < tasks.size(); i++) {
+            Task temp = tasks.get(i);
+            ls = ls + "\t" + Integer.toString(i + 1) + "." + temp.toString() + "\n";
         }
         printWithPartition(ls);
     }
@@ -127,42 +131,42 @@ public class Duke {
     /**
      * Marks the task as done and notifies the user.
      *
-     * @param w The string representation of the index of the task.
+     * @param num The string representation of the index of the task.
      * @throws DukeException When the task number input does not exist.
      */
-    private static void markTask(String w) throws DukeException {
+    private static void markTask(String num) throws DukeException {
         try {
-            int index = Integer.parseInt(w) - 1;
-            tasks[index].setAsDone();
-            printWithPartition(
-                    "\tNice! I've marked this task as done:\n\t  " + tasks[index].toString() + "\n");
+            int index = Integer.parseInt(num) - 1;
+            Task task = tasks.get(index);
+            task.setAsDone();
+            printWithPartition("\tNice! I've marked this task as done:\n\t  " + task.toString() + "\n");
         } catch (Exception e) {
-            if (end == 0) {
+            if (tasks.size() == 0) {
                 throw new DukeException("There are no tasks to be marked as done.");
             } else {
-                throw new DukeException("Please enter a number from 1 to " + Integer.toString(end));
+                throw new DukeException("Please enter a number from 1 to " + Integer.toString(tasks.size()));
             }
         }
-
     }
 
     /**
      * Unmarks the task, making it not done and notifies the user.
      *
-     * @param w The string representation of the index of the task.
+     * @param num The string representation of the index of the task.
      * @throws DukeException When the task number input does not exist.
      */
-    private static void unmarkTask(String w) throws DukeException {
+    private static void unmarkTask(String num) throws DukeException {
         try {
-            int index = Integer.parseInt(w) - 1;
-            tasks[index].setAsNotDone();
-            printWithPartition("\tOK, I've marked this task as not done yet:" + "\n\t  "
-                    + tasks[index].toString() + "\n");
+            int index = Integer.parseInt(num) - 1;
+            Task task = tasks.get(index);
+            task.setAsNotDone();
+            printWithPartition(
+                    "\tOK, I've marked this task as not done yet:" + "\n\t  " + task.toString() + "\n");
         } catch (Exception e) {
-            if (end == 0) {
+            if (tasks.size() == 0) {
                 throw new DukeException("There are no tasks to be unmarked.");
             } else {
-                throw new DukeException("Please enter a number from 1 to " + Integer.toString(end));
+                throw new DukeException("Please enter a number from 1 to " + Integer.toString(tasks.size()));
             }
         }
     }
@@ -176,14 +180,12 @@ public class Duke {
     private static void addTodo(String w) throws DukeException {
         if (w == "") {
             throw new DukeException("The description of a todo cannot be empty.");
-        } else if (end >= 100) {
-            throw new DukeException("I'm sorry, the task list is full.");
         }
-        ToDo temp = new ToDo(w);
-        tasks[end] = temp;
-        end += 1;
-        printWithPartition("\tGot it. I've added this task:\n" + "\t  " + temp.toString()
-                + "\n\tNow you have " + Integer.toString(end) + " tasks in the list.\n");
+
+        ToDo task = new ToDo(w);
+        tasks.add(task);
+        printWithPartition("\tGot it. I've added this task:\n" + "\t  " + task.toString()
+                + "\n\tNow you have " + Integer.toString(tasks.size()) + " tasks in the list.\n");
 
     }
 
@@ -198,18 +200,13 @@ public class Duke {
             String[] sorted = input.split(" /by ");
             String name = sorted[0].strip();
             String date = sorted[1].strip();
-            Deadline temp = new Deadline(name, date);
-            tasks[end] = temp;
-            end += 1;
-            printWithPartition("\tGot it. I've added this task:\n" + "\t  " + temp.toString()
-                    + "\n\tNow you have " + Integer.toString(end) + " tasks in the list.\n");
+            Deadline task = new Deadline(name, date);
+            tasks.add(task);
+            printWithPartition("\tGot it. I've added this task:\n" + "\t  " + task.toString()
+                    + "\n\tNow you have " + Integer.toString(tasks.size()) + " tasks in the list.\n");
         } catch (ArrayIndexOutOfBoundsException e) {
-            if (end >= 100) {
-                throw new DukeException("I'm sorry, the task list is full.");
-            } else {
-                throw new DukeException(
-                        "The deadline command should be used like this:\n" + "\tdeadline {name} /by {date}");
-            }
+            throw new DukeException(
+                    "The deadline command should be used like this:\n" + "\tdeadline {name} /by {date}");
         }
     }
 
@@ -224,17 +221,34 @@ public class Duke {
             String[] sorted = input.split(" /from ");
             String name = sorted[0].strip();
             String[] dates = sorted[1].strip().split(" /to ");
-            Event temp = new Event(name, dates[0], dates[1]);
-            tasks[end] = temp;
-            end += 1;
-            printWithPartition("\tGot it. I've added this task:\n" + "\t  " + temp.toString()
-                    + "\n\tNow you have " + Integer.toString(end) + " tasks in the list.\n");
+            Event task = new Event(name, dates[0], dates[1]);
+            tasks.add(task);
+            printWithPartition("\tGot it. I've added this task:\n" + "\t  " + task.toString()
+                    + "\n\tNow you have " + Integer.toString(tasks.size()) + " tasks in the list.\n");
         } catch (ArrayIndexOutOfBoundsException e) {
-            if (end >= 100) {
-                throw new DukeException("I'm sorry, the task list is full.");
+            throw new DukeException("The event command should be used like this:\n"
+                    + "\tevent {name} /from {start} /to {end}");
+        }
+    }
+
+    /**
+     * Deletes a task from the task list.
+     *
+     * @param num The string representation of the task number.
+     * @throws DukeException If the task number does not exist.
+     */
+    private static void deleteTask(String num) throws DukeException {
+        try {
+            int index = Integer.parseInt(num) - 1;
+            Task task = tasks.get(index);
+            tasks.remove(index);
+            printWithPartition("\tNoted. I've removed this task:\n\t  " + task.toString() + "\n"
+                    + "\tNow you have " + Integer.toString(tasks.size()) + " tasks in the list.\n");
+        } catch (Exception e) {
+            if (tasks.size() == 0) {
+                throw new DukeException("There are no tasks to be deleted.");
             } else {
-                throw new DukeException("The event command should be used like this:\n"
-                        + "\tevent {name} /from {start} /to {end}");
+                throw new DukeException("Please enter a number from 1 to " + Integer.toString(tasks.size()));
             }
         }
     }

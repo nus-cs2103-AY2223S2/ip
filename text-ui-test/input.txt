@@ -6,12 +6,31 @@ event project meeting /from Aug 6th 2pm /to 4pm
 todo join sports club
 todo borrow book
 list
+mark abacasda ad wadadaw aw a D
+mark 
+delete 
+unmark 
+unmark awdawda w aa wa a adawda 
 mark 1
 mark 4
 list with some weird continue text
 deadline return book /by Sunday
 event project meeting /from Mon 2pm /to 4pm
+todo a
 list
+delete 1
+list
+delete 1
+list
+delete 3
+list
+delete 10
+delete 1
+delete 1
+delete 1
+delete 1
+delete 1
+delete 5
 wrong command prints message
 deadline missingdate /by 
 deadline missingBy tmr
