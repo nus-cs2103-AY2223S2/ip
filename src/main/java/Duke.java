@@ -43,7 +43,8 @@ public class Duke {
 
     public static void storeItem(String item) {
         stringStorage.add(item);
-        System.out.println("added: " + item);
+        System.out.print("added: ");
+        echo(item);
     }
 
     public static void listItem() {
