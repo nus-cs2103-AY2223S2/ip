@@ -1,12 +1,26 @@
 public class Task {
-    String name;
+    protected String description;
+    protected boolean isDone;
 
-    public Task(String name) {
-        this.name = name;
+    public Task(String description) {
+        this.description = description;
+        this.isDone = false; //assumed not done when initiated
+    }
+
+    public String getStatusIcon() {
+        return (isDone ? "X" : " "); // mark done task with X
+    }
+
+    public void markAsDone() {
+        this.isDone = true;
+    }
+
+    public void markAsUndone() {
+        this.isDone = false;
     }
 
     @Override
     public String toString() {
-        return this.name;
+        return String.format("[%s] %s", this.getStatusIcon(), this.description);
     }
 }

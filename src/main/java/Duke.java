@@ -15,12 +15,17 @@ public class Duke {
 
         int arrayIndex = 0; //keep track of tail end of array
 
-        while (scanner.hasNext()) {
-            String userInput = scanner.nextLine();
-            if (userInput.equals("bye")) {
-                break;
-            } else if (userInput.equals("list")) {
+        String keyWord = scanner.next();
+
+        //4 cases: list, mark, unmark, add task(default)
+        //while loop checks for user exit input("bye")
+        while (!keyWord.equals("bye")) {
+            int taskIndex;
+            Task currentTask;
+            switch (keyWord) {
+            case "list":
                 int taskCount = 1;
+                //iterate through taskarray to print out list
                 for (Task t : taskArray) {
                     if (t == null) {
                         break;
@@ -29,11 +34,32 @@ public class Duke {
                         taskCount++;
                     }
                 }
-            } else {
-                Task currentTask = new Task(userInput);
+                keyWord = scanner.next();
+                break;
+            case "mark":
+                taskIndex = Integer.parseInt(scanner.next()) - 1;
+                currentTask = taskArray[taskIndex];
+                currentTask.markAsDone();
+                System.out.println("\nNice! I've marked this task as done:\n");
+                System.out.println(currentTask.toString() + "\n");
+                keyWord = scanner.next();
+                break;
+            case "unmark":
+                taskIndex = Integer.parseInt(scanner.next()) - 1;
+                currentTask = taskArray[taskIndex];
+                currentTask.markAsUndone();
+                System.out.println("\nOK, I've marked this task as not done yet:\n");
+                System.out.println(currentTask.toString() + "\n");
+                keyWord = scanner.next();
+                break;
+            default:
+                //no keyword so append rest of the line to keyword and add as new task
+                String userTask = keyWord + scanner.nextLine();
+                currentTask = new Task(userTask);
                 taskArray[arrayIndex] = currentTask;
                 arrayIndex++;
                 System.out.println("\nadded: " + currentTask.toString() + "\n");
+                keyWord = scanner.next();
             }
         }
 
