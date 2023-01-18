@@ -84,8 +84,64 @@ What can I do for you?
 	7.[E][ ] project meeting (from: Mon 2pm to: 4pm)
 ---------------------
 ---------------------
-	Duke: Sorry! I only understand {echo, list, mark, unmark, todo, deadline, event} commands.
+	Duke: OOPS!!! I only understand {echo, list, mark, unmark, todo, deadline, event} commands.
 ---------------------
 ---------------------
-        Goodbye!
+	Duke: OOPS!!! The deadline command should be used like this:
+	deadline {name} /by {date}
+---------------------
+---------------------
+	Duke: OOPS!!! The deadline command should be used like this:
+	deadline {name} /by {date}
+---------------------
+---------------------
+	Duke: OOPS!!! The deadline command should be used like this:
+	deadline {name} /by {date}
+---------------------
+---------------------
+	Duke: OOPS!!! The deadline command should be used like this:
+	deadline {name} /by {date}
+---------------------
+---------------------
+	Duke: OOPS!!! The deadline command should be used like this:
+	deadline {name} /by {date}
+---------------------
+---------------------
+	Duke: OOPS!!! The event command should be used like this:
+	event {name} /from {start} /to {end}
+---------------------
+---------------------
+	Duke: OOPS!!! The event command should be used like this:
+	event {name} /from {start} /to {end}
+---------------------
+---------------------
+	Duke: OOPS!!! The event command should be used like this:
+	event {name} /from {start} /to {end}
+---------------------
+---------------------
+	Duke: OOPS!!! The event command should be used like this:
+	event {name} /from {start} /to {end}
+---------------------
+---------------------
+	Duke: OOPS!!! The event command should be used like this:
+	event {name} /from {start} /to {end}
+---------------------
+---------------------
+	Duke: OOPS!!! The event command should be used like this:
+	event {name} /from {start} /to {end}
+---------------------
+---------------------
+	Duke: OOPS!!! The event command should be used like this:
+	event {name} /from {start} /to {end}
+---------------------
+---------------------
+	Duke: OOPS!!! The event command should be used like this:
+	event {name} /from {start} /to {end}
+---------------------
+---------------------
+	Duke: OOPS!!! The event command should be used like this:
+	event {name} /from {start} /to {end}
+---------------------
+---------------------
+	Goodbye!
 ---------------------

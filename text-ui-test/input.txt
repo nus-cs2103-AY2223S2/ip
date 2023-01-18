@@ -8,9 +8,23 @@ todo borrow book
 list
 mark 1
 mark 4
-list
+list with some weird continue text
 deadline return book /by Sunday
 event project meeting /from Mon 2pm /to 4pm
 list
 wrong command prints message
+deadline missingdate /by 
+deadline missingBy tmr
+deadline      /by missingname
+deadline /by   
+deadline
+event
+event /from /to 
+event missingFromTo /from /to
+event missingTo /from /to tmr
+event    /from now /to tmr
+event    /from   /to tmr
+event missingFromTo
+event missingFrom /to tmr
+event missingTo /from now
 bye
