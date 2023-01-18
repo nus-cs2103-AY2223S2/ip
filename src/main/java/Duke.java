@@ -95,10 +95,20 @@ public class Duke {
             }
             //User typed in "to-do"
             else if (inputArray[0].equals("todo")) {
-                int indexOfType = input.indexOf("todo");
-                String taskName = input.substring(indexOfType + 5);
-                ToDo newToDoTask = new ToDo(taskName);
-                addTask(newToDoTask, taskStorage);
+                try {
+                    if (inputArray.length == 1) {
+                        throw new DukeException("You must enter a task name after the todo command.");
+                    }
+                    int indexOfType = input.indexOf("todo");
+                    String taskName = input.substring(indexOfType + 5);
+                    ToDo newToDoTask = new ToDo(taskName);
+                    addTask(newToDoTask, taskStorage);
+                } catch (DukeException dukeException) {
+                    System.out.println(dukeException.getMessage());
+                    System.out.println(straightLine);
+                    continue;
+                }
+
             }
             //User typed in "deadline"
             else if (inputArray[0].equals("deadline")) {
