@@ -2,7 +2,7 @@ import java.util.Scanner;
 import java.util.List;
 import java.util.ArrayList;
 public class Duke {
-    private static final List<String> toDoList = new ArrayList<>();
+    private static final List<Task> toDoList = new ArrayList<>();
     public static void main(String[] args) {
         final Scanner sc = new Scanner(System.in);
         final String logo = "   _____  _  _                      \n" +
@@ -40,7 +40,7 @@ public class Duke {
                 }
                 return true;
             default:
-                toDoList.add(command);
+                toDoList.add(new Task(command));
                 prettyPrint("added: " + command);
                 return true;
         }
