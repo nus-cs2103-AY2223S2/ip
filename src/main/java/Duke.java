@@ -1,5 +1,7 @@
 import java.util.Scanner;
 
+import input.Parser;
+
 import task.Task;
 import task.Deadline;
 import task.Event;
@@ -30,7 +32,17 @@ public class Duke {
     }
 
     private static void displayTasks(Task[] tasks, int numTasks) {
-        StringBuilder sb = new StringBuilder();
+        String s;
+
+        if (numTasks <= 0) {
+            s = "No task found! Please add a task.";
+        } else if (numTasks == 1) {
+            s = "Here is the task in your list:\n";
+        } else {
+            s = "Here are the tasks in your list:\n";
+        }
+
+        StringBuilder sb = new StringBuilder(s);
         for (int i = 0; i < numTasks; i++) {
             sb.append(String.format("%d.%s\n", i+1, tasks[i].toString()));
         }
@@ -47,6 +59,12 @@ public class Duke {
         } else {
             return true;
         }
+    }
+
+    private static void printAddedConfirmation(Task task, int numTasks) {
+        String grammar = numTasks <= 1 ? "task" : "tasks";
+        String s = String.format("Got it. I've added this task:\n   %s\nNow you have %d %s in the list.", task.toString(), numTasks, grammar);
+        Duke.printWithDecorations(s);
     }
 
     private static Command getCommand(String input) {
@@ -75,32 +93,30 @@ public class Duke {
         String input = sc.nextLine();
         
         while (!input.equals("bye")) {
-
             switch (Duke.getCommand(input)) {
-
                 case LIST:
                     Duke.displayTasks(tasks, numTasks);
                     break;
-                
                 case DEADLINE:
-                    //TODO do something here
+                    String[] dt = Parser.parseDeadline(input);
+                    Deadline dl = new Deadline(dt[0], dt[1]);
+                    tasks[numTasks] = dl;
+                    numTasks++;
+                    Duke.printAddedConfirmation(dl, numTasks);
+                    break;
                 case EVENT:
-                    //TODO do something here
-                case MARK:
-                    // We can take this exact substring because its guaranteed that input is of form "mark %d"
-                    int markIndex = Integer.valueOf(input.substring(5)) - 1; // account for 1 indexing
-                    if (isValidMark(tasks, markIndex)) // Note that this check also prints out error messages if any
-                        Duke.printWithDecorations(tasks[markIndex].markDone());
+                    String[] et = Parser.parseEvent(input);
+                    Event e = new Event(et[0], et[1], et[2]);
+                    tasks[numTasks] = e;
+                    numTasks++;
+                    Duke.printAddedConfirmation(e, numTasks);
                     break;
-
-                case UNMARK:
-                    int unmarkIndex = Integer.valueOf(input.substring(7)) - 1; // account for 1 indexing
-                    if (isValidMark(tasks, unmarkIndex)) // Note that this check also prints out error messages if any
-                        Duke.printWithDecorations(tasks[unmarkIndex].unmarkDone());
-                    break;
-
                 case TODO:
-                    //TODO do something here
+                    Todo td = new Todo(Parser.parseTodo(input));
+                    tasks[numTasks] = td;
+                    numTasks++;
+                    Duke.printAddedConfirmation(td, numTasks);
+                    break;
                 case ADD:
                     if (numTasks < 100) {
                         Duke.printWithDecorations("added: " + input);
@@ -109,6 +125,17 @@ public class Duke {
                     } else {
                         Duke.printWithDecorations("Not enough slots!");
                     }
+                    break;
+                case MARK:
+                    // We can take this exact substring because its guaranteed that input is of form "mark %d"
+                    int markIndex = Integer.valueOf(input.substring(5)) - 1; // account for 1 indexing
+                    if (isValidMark(tasks, markIndex)) // Note that this check also prints out error messages if any
+                        Duke.printWithDecorations(tasks[markIndex].markDone());
+                    break;
+                case UNMARK:
+                    int unmarkIndex = Integer.valueOf(input.substring(7)) - 1; // account for 1 indexing
+                    if (isValidMark(tasks, unmarkIndex)) // Note that this check also prints out error messages if any
+                        Duke.printWithDecorations(tasks[unmarkIndex].unmarkDone());
                     break;
             }
             input = sc.nextLine();
