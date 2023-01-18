@@ -20,4 +20,8 @@ public class Task {
     public void unMark(){
         isDone = false;
     }
+
+    public String toString(){
+        return this.getStatusIcon() + " " + this.getDes();
+    }
 }
