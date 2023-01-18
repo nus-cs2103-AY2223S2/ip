@@ -1,5 +1,8 @@
 import java.util.Scanner;
+import java.util.List;
+import java.util.ArrayList;
 public class Duke {
+    private static final List<String> toDoList = new ArrayList<>();
     public static void main(String[] args) {
         final Scanner sc = new Scanner(System.in);
         final String logo = "   _____  _  _                      \n" +
@@ -21,6 +24,8 @@ public class Duke {
 
     /**
      * Takes in a command and attempts to perform it, if valid.
+     * Accepted commands: [add], list, bye
+     * [add] is invoked whenever any string that does not match other commands is entered.
      * @param   command a string containing the command entered by the user
      * @return          true if programme should continue accepting further commands, else false
      */
@@ -29,6 +34,11 @@ public class Duke {
             case "bye":
                 prettyPrint("Hope I helped. Goodbye!");
                 return false;
+            case "list":
+                for (int i = 1; i <= toDoList.size(); i++) {
+                    prettyPrint(String.format("%d. %s", i, toDoList.get(i - 1)));
+                }
+                return true;
             default:
                 prettyPrint(command);
                 return true;
