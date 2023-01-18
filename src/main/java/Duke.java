@@ -57,12 +57,16 @@ public class Duke {
             case "todo":
             case "deadline":
             case "event":
-                prettyPrint("Got it! I've added this task:");
                 if (args[0].equals("todo")) {
+                    if (args.length < 2) {
+                        throw new ClippyTodoEmptyDescriptionException();
+                    }
                     tasks.add(new ToDo(String.join(" ", Arrays.copyOfRange(args, 1, args.length))));
                 } else if (args[0].equals("deadline")) {
-                    // todo: check if '/by' exists
                     int byIndex = command.indexOf("/by ");
+                    if (byIndex == -1 || command.length() < byIndex + 4) {
+                        throw new ClippyMissingDeadlineException();
+                    }
 
                     // startIndex of command.substring() is 9 as "deadline " is 9 chars long
                     tasks.add(new Deadline(
@@ -72,6 +76,10 @@ public class Duke {
                     // todo: check if BOTH '/from' and '/to' exists
                     int fromIndex = command.indexOf("/from ");
                     int toIndex = command.indexOf("/to ");
+                    if (fromIndex == -1 || toIndex == -1 || toIndex - fromIndex < 5 ||
+                            command.length() - toIndex < 4) {
+                        throw new ClippyInvalidEventException();
+                    }
 
                     // startIndex of command.substring() is 6 as "event " is 6 chars long
                     tasks.add(new Event(
@@ -79,6 +87,7 @@ public class Duke {
                             command.substring(fromIndex + 6, toIndex).trim(),
                             command.substring(toIndex + 4, command.length()).trim()));
                 }
+                prettyPrint("Got it! I've added this task:");
                 prettyPrint(tasks.get(tasks.size() - 1).toString());
                 prettyPrint(String.format("Now you have %d task%s in the list.",
                         tasks.size(), tasks.size() > 1 ? "s" : ""));
