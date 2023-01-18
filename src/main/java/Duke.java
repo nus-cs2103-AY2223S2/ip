@@ -34,19 +34,32 @@ public class Duke {
 "⣾⣿⣿⣿⣿⣿⣿⣿⡿⠀⠀⢠⣶⣿⠿⠿⠿⠿⢷⠀⠀⠀⠀⠾⠿⠿⠛⠉⠉⠙⠛⠿⣷⠀⠀⠀⣠⣶⡿⠿⠟⠿⣿⣷⡀⠀⠀⠙⢷⣄⠀⠀⡄⠀⠀⠀⠀⢻⡄\n" +
 "⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠉⠁⠀⠀⠀⠀⠈⠁⠀⠁⠀⠀⠀⠀⠀⠁";
         System.out.println("    ____________________________________________________________");
-        System.out.println("    Hola from Tohtoro!\n" + hello + logo);
+        System.out.println("        Hola from Tohtoro!\n" + hello + logo);
         System.out.println("    ____________________________________________________________");
         Scanner sc = new Scanner(System.in);
         String nextLine = sc.nextLine();
+        ArrayList<String> strings = new ArrayList<>();
+
         while (!nextLine.equals("bye")) {
-            System.out.println("    ____________________________________________________________");
-            System.out.println("    " + nextLine);
-            System.out.println("    ____________________________________________________________");
-            nextLine = sc.nextLine();
+            if (!nextLine.equals("list")) {
+                strings.add(nextLine);
+                System.out.println("    ____________________________________________________________");
+                System.out.println("        Added: " + nextLine);
+                System.out.println("    ____________________________________________________________");
+                nextLine = sc.nextLine();
+            } else {
+                System.out.println("    ____________________________________________________________");
+                for (int i = 0; i < strings.size(); i++) {
+                    String thingInStrings = strings.get(i);
+                    System.out.println(String.format("      %s. %s", i + 1, thingInStrings));
+                }
+                System.out.println("    ____________________________________________________________");
+                nextLine = sc.nextLine();
+            }
         }
 
         System.out.println("    ____________________________________________________________");
-        System.out.println("    Bye. Hope to see you soon!");
+        System.out.println("        Bye. Hope to see you soon!");
         System.out.println("    ____________________________________________________________");
 
     }
