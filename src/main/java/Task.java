@@ -22,5 +22,9 @@ public class Task {
     public void unmarkAsDone() {
         isDone = false;
     }
+    @Override
+    public String toString() {
+        return String.format("[%s] %s", getStatusIcon(), getDescription());
+    }
 
 }
