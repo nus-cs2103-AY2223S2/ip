@@ -13,7 +13,19 @@ public class TaskStorage {
         this.tasks.add(t);
     }
 
+    public void markByNo(int n) {
+        this.tasks.get(n-1).setDone();
+    }
+
+    public void unmarkByNo(int n) {
+        this.tasks.get(n-1).setUndone();
+    }
+
     public List<Task> getTasks() {
         return Collections.unmodifiableList(this.tasks);
+    }
+
+    public Task getTaskByNo(int n) {
+        return this.tasks.get(n-1);
     }
 }

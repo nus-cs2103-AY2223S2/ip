@@ -3,6 +3,7 @@ package services;
 import types.ICommand;
 
 import java.util.ArrayList;
+import java.util.Objects;
 
 public class Parser {
     private final ArrayList<ICommand> handlerRegistry = new ArrayList<>();
@@ -43,6 +44,7 @@ public class Parser {
     }
 
     public void handle(String expr) {
+        if (Objects.equals(expr, "")) return;
         if (this.exitHandler.canTake(expr)) {
             this.exitHandler.take(expr);
             toExit.run();
