@@ -7,7 +7,7 @@ public class Duke {
         int counter = 0;
         Scanner sc = new Scanner(System.in);
         System.out.println("Hi, I'm Nero and I am an automated chat bot" + "\n" + "What would you like to do?");
-        while (true) {
+        while (sc.hasNextLine()) {
             String originalString = sc.nextLine();
             String[] input = originalString.split(" ");
             if (input[0].equals("bye")) {
