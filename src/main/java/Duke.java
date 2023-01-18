@@ -8,38 +8,83 @@ public class Duke {
                 + "| |_| | |_| |   <  __/\n"
                 + "|____/ \\__,_|_|\\_\\___|\n";
         System.out.println("Hello from\n" + logo);
+
         System.out.println("Hello I'm Duke\n"
                 + "What can I do for you?");
+
         Task[] taskArray = new Task[100];
         int arrayIndex = 0;
         while(true) {
             Scanner sc = new Scanner(System.in);
             String input = sc.nextLine();
-            if(input.equals("bye")) {
-                System.out.println("Bye. Hope to see you again soon!");
-                return;
-            } else if(input.equals("list")) {
-                for (int i = 0; i < arrayIndex; i++) {
-                    int listNumber = i + 1;
-                    System.out.println(listNumber + ". " + taskArray[i].toString());
-                }
-            } else if(input.startsWith("mark")) {
-                int taskNumber = input.charAt(5) - 48;
-                Task currTask = taskArray[taskNumber - 1];
-                currTask.markTask();
-                System.out.println("Nice! I,ve marked this task as done:\n   "
-                                    + currTask);
-            } else if(input.startsWith("unmark")) {
-                int taskNumber = input.charAt(7) - 48;
-                Task currTask = taskArray[taskNumber - 1];
-                currTask.unmarkTask();
-                System.out.println("OK, I've marked thus task as not done yet:\n   "
-                                    + currTask);
-            } else {
-                Task currTask = new Task(input);
-                taskArray[arrayIndex] = currTask;
-                System.out.println("added: " + currTask.getName());
-                arrayIndex++;
+            String instruction =  input.split(" ")[0];
+            switch(instruction) {
+                case "bye":
+                    System.out.println("Bye. Hope to see you again soon!");
+                    return;
+                case "list":
+                    for (int i = 0; i < arrayIndex; i++) {
+                        int listNumber = i + 1;
+                        System.out.println(listNumber + ". " + taskArray[i].toString());
+                    }
+                    break;
+                case "mark":
+                    int toMark = input.charAt(5) - 48;
+                    Task toMarkTask = taskArray[toMark - 1];
+                    toMarkTask.markTask();
+
+                    System.out.println("Nice! I,ve marked this task as done:\n   "
+                                        + toMarkTask);
+                    break;
+                case "unMark":
+                    int toUnMark = input.charAt(7) - 48;
+                    Task toUnMarkTask = taskArray[toUnMark - 1];
+                    toUnMarkTask.unmarkTask();
+
+                    System.out.println("OK, I've marked this task as not done yet:\n   "
+                            + toUnMarkTask);
+                    break;
+                case "todo":
+                    ToDo toDoTask = new ToDo(input.substring(5));
+                    taskArray[arrayIndex] = toDoTask;
+                    arrayIndex++;
+
+                    System.out.println("Got it. I've added this task:\n   "
+                            + toDoTask
+                            + "\nNow you have " + arrayIndex + " tasks in your list");
+                    break;
+                case "deadline":
+                    String[] dSegments = input.split("/");
+                    String deadlineName = dSegments[0].substring(9);
+                    String deadline = dSegments[1].substring(3);
+
+                    Deadline deadlineTask = new Deadline(deadlineName, deadline);
+                    taskArray[arrayIndex] = deadlineTask;
+                    arrayIndex++;
+
+                    System.out.println("Got it. I've added this task:\n   "
+                            + deadlineTask
+                            + "\nNow you have " + arrayIndex + " tasks in your list");
+                    break;
+                case "event":
+                    String[] eSegments = input.split("/");
+                    String eventName = eSegments[0].substring(6);
+                    String startTime = eSegments[1].substring(5);
+                    String endTime = eSegments[2].substring(3);
+
+                    Event eventTask = new Event(eventName, startTime, endTime);
+                    taskArray[arrayIndex] = eventTask;
+                    arrayIndex++;
+
+                    System.out.println("Got it. I've added this task:\n   "
+                            + eventTask
+                            + "\nNow you have " + arrayIndex + " tasks in your list");
+                    break;
+                default:
+                    Task currTask = new Task(input);
+                    taskArray[arrayIndex] = currTask;
+                    System.out.println("added: " + currTask.getName());
+                    arrayIndex++;
             }
         }
     }
