@@ -10,6 +10,7 @@ public class Duke {
 
         while(true) {
             String message = scanner.nextLine();
+
             if(message.equals("bye")) {
                 System.out.println("Bye. Hope to see you again soon!");
                 break;
@@ -35,6 +36,32 @@ public class Duke {
                     System.out.println("OK, I've marked this task as not done yet:");
                     System.out.println(currTask.toString());
                 }
+            } else if(message.startsWith("todo")) {
+                String info = message.split(" ", 2)[1];
+                Todo todo = new Todo(info);
+                list[counter] = todo;
+                counter++;
+                System.out.println("Got it. I've added this task:");
+                System.out.println(todo);
+                System.out.println("Now you have " + counter + " task in the list");
+            } else if(message.startsWith("deadline")) {
+                String info = message.split(" ", 2)[1];
+                String[] info_parts = info.split("/", 2);
+                Deadline deadline = new Deadline(info_parts[0], info_parts[1]);
+                list[counter] = deadline;
+                counter++;
+                System.out.println("Got it. I've added this task:");
+                System.out.println(deadline);
+                System.out.println("Now you have " + counter + " task in the list");
+            } else if(message.startsWith("event")) {
+                String info = message.split(" ", 2)[1];
+                String[] info_parts = info.split("/", 3);
+                Event event = new Event(info_parts[0],info_parts[1],info_parts[2]);
+                list[counter] = event;
+                counter++;
+                System.out.println("Got it. I've added this task:");
+                System.out.println(event);
+                System.out.println("Now you have " + counter + " task in the list");
             } else {
                 list[counter] = new Task(message);
                 counter++;

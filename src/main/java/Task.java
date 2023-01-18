@@ -23,10 +23,11 @@ public class Task {
         this.isDone = status;
     }
 
-    /** return the status of isDone as a string of either X or an empty space
+    /** return the string representation of Task
      *
-     * @return "X" if isDone is true and " " otherwise
+     * @return string representation of Task
      */
+    @Override
     public String toString() {
         String icon = this.isDone == true ? "[X]" : "[ ]";
         return icon + " " + description;
