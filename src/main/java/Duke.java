@@ -10,7 +10,7 @@ public class Duke {
     private static final String GREETING = "Hello there! I am 4RTHUR";
 
     public static void main(String[] args) {
-        System.out.println(GREETING + "\n" + LOGO);
+        System.out.println(LOGO + "\n" + GREETING);
 
         // Response Loop
         Scanner scanner = new Scanner(System.in);
