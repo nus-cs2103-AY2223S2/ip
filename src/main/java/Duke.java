@@ -7,7 +7,16 @@ public class Duke {
 
     public static void main(String[] args) {
         greeting();
-        printMenu();
+        while(true) {
+            try {
+                String input = sc.nextLine();
+                if (printMenu(input)) {
+                    break;
+                }
+            } catch (DukeException | NoSuchElementException e) {
+                System.out.println(e.getMessage());
+            }
+        }
     }
 
     private static void greeting() {
@@ -36,48 +45,57 @@ public class Duke {
      * - "bye": Exits program
      * - Enters any other String of invalid syntax: Rejected
      *
-     * @return  void
+     * @param   input   User input for the program menu
+     * @return  Status whether the program should exit or not
      */
-    private static void printMenu() {
+    private static boolean printMenu(String input) throws DukeException, NoSuchElementException {
         boolean exitStatus = false;
-        while(true) {
-            try {
-                String input = sc.nextLine();
-                String[] splitInput = input.split(" ");
-                String action = splitInput[0];
-                switch (action) {
-                    case "todo":
-                        todo(input.split(" ", 2)[1]);
-                        break;
-                    case "deadline":
-                        deadline(input.split(" ", 2)[1]);
-                        break;
-                    case "event":
-                        event(input.split(" ", 2)[1]);
-                        break;
-                    case "list":
-                        list();
-                        break;
-                    case "mark":
-                        mark(splitInput[1]);
-                        break;
-                    case "unmark":
-                        unmark(splitInput[1]);
-                        break;
-                    case "bye":
-                        exit();
-                        exitStatus = true;
-                        break;
-                    default:
-                        printDefault();
+
+        String[] splitInput = input.split(" ");
+        String action = splitInput[0];
+
+        switch (action) {
+            case "todo":
+                if (splitInput.length < 2) {
+                    throw new DukeException("The description of a todo cannot be empty.");
                 }
-                if (exitStatus) {
-                    break;
+                todo(input.split(" ", 2)[1]);
+                break;
+            case "deadline":
+                if (splitInput.length < 2) {
+                    throw new DukeException("The description of a deadline cannot be empty.");
                 }
-            } catch (NoSuchElementException e) {
-                System.out.println(e);
-            }
+                deadline(input.split(" ", 2)[1]);
+                break;
+            case "event":
+                if (splitInput.length < 2) {
+                    throw new DukeException("The description of a event cannot be empty.");
+                }
+                event(input.split(" ", 2)[1]);
+                break;
+            case "list":
+                list();
+                break;
+            case "mark":
+                if (splitInput.length < 2) {
+                    throw new DukeException("The task index cannot be empty.");
+                }
+                mark(splitInput[1]);
+                break;
+            case "unmark":
+                if (splitInput.length < 2) {
+                    throw new DukeException("The task index cannot be empty.");
+                }
+                unmark(splitInput[1]);
+                break;
+            case "bye":
+                exit();
+                exitStatus = true;
+                break;
+            default:
+                throw new DukeException("☹ I'm sorry, but Fake Duke doesn't know what that means :-(");
         }
+        return exitStatus;
     }
 
     /**
@@ -185,16 +203,5 @@ public class Duke {
                 + "Hope I have been useful to you.\n"
                 + "See you again soon. Bye!~\n"
                 + horizontalLine);
-    }
-
-    /**
-     * This method prints out the message if user input is of invalid format.
-     *
-     * @return  void
-     */
-    private static void printDefault() {
-        System.out.println("Sorry please re-enter your inputs using these syntaxes:\n"
-                + "todo <taskDesc>\ndeadline <taskDesc> /by <day>\nevent <taskDesc> /from <> /to <>\n"
-                + "list\nmark <task #>\nunmark <task #> / bye\n");
     }
 }
