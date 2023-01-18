@@ -18,7 +18,7 @@ public class DukeList {
      * @return newToDo
      * @throws Exception (Task description cannot be empty)
      */
-    public ToDo addToDo(String chat) throws Exception {
+    public ToDo addToDo(String chat) throws DukeException {
         Function<String, HashMap<String, String>> parser = todoParser();
         HashMap<String, String> parsed = parser.apply(chat);
         ToDo newToDo = new ToDo(parsed);
@@ -32,7 +32,7 @@ public class DukeList {
      * @return newDeadline
      * @throws Exception (Task description cannot be empty)
      */
-    public Deadline addDeadline(String chat) throws Exception {
+    public Deadline addDeadline(String chat) throws DukeException {
         Function<String, HashMap<String, String>> parser = deadlineParser();
         HashMap<String, String> parsed = parser.apply(chat);
         Deadline newDeadline = new Deadline(parsed);
@@ -46,7 +46,7 @@ public class DukeList {
      * @return newEvent
      * @throws Exception (Task description cannot be empty)
      */
-    public Event addEvent(String chat) throws Exception {
+    public Event addEvent(String chat) throws DukeException {
         Function<String, HashMap<String, String>> parser = eventParser();
         HashMap<String, String> parsed = parser.apply(chat);
         Event newEvent = new Event(parsed);

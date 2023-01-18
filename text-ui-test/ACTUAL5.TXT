@@ -11,7 +11,7 @@ Got it. I've added this task:
 Now you have 1 tasks in the list.
 ----------------------------------
 ----------------------------------
-java.lang.Exception: OOPS!!! The description of a task cannot be empty.
+DukeException: OOPS!!! The description of a task cannot be empty.
 ----------------------------------
 ----------------------------------
 Got it. I've added this task:

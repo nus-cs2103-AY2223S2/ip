@@ -9,9 +9,9 @@ public class Task {
      * @param task
      * @throws Exception (Description of task cannot be empty)
      */
-    public Task(String task) throws Exception {
+    public Task(String task) throws DukeException {
         if (task == "") {
-            throw new Exception("OOPS!!! The description of a task cannot be empty.");
+            throw new DukeException("OOPS!!! The description of a task cannot be empty.");
         }
         this.task = task;
         this.isDone = false;

@@ -67,7 +67,7 @@ public class Duke {
                     response += task.toString() + "\n";
                     response += "Now you have " + ls.getSize() + " tasks in the list.";
                     print(response);
-                } catch (Exception e) {
+                } catch (DukeException e) {
                     print(e.toString());
                 }
                 break;
@@ -79,7 +79,7 @@ public class Duke {
                     response += task.toString() + "\n";
                     response += "Now you have " + ls.getSize() + " tasks in the list.";
                     print(response);
-                } catch (Exception e) {
+                } catch (DukeException e) {
                     print(e.toString());
                 }
                 break;
@@ -91,7 +91,7 @@ public class Duke {
                     response += task.toString() + "\n";
                     response += "Now you have " + ls.getSize() + " tasks in the list.";
                     print(response);
-                } catch (Exception e) {
+                } catch (DukeException e) {
                     print(e.toString());
                 }
                 break;

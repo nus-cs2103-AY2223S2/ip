@@ -4,7 +4,7 @@ public class Deadline extends Task{
 
     private String by;
 
-    public Deadline(HashMap<String, String> parsed) throws Exception {
+    public Deadline(HashMap<String, String> parsed) throws DukeException {
         super(parsed.get("deadline"));
         by = parsed.get("/by");
         abbreviation = 'D';
