@@ -39,30 +39,34 @@ public class Duke {
     //our list takes in Tasks that are marked with a boolean.
     //processes the list with inputs from the user with list and Tasks operations.
     private static void processInputs(List<Task> list){
-        Scanner sc = new Scanner(System.in);
+        Scanner sc = new Scanner(System.in).useDelimiter(" ");
         String input = sc.nextLine();
         while( input.equals("bye") == false){
-            if(input.equals("list")){
+            String[] split = input.split(" ");
+            if(split[0].equals("list")){
                 System.out.println("---------------------------------------");
                 for(int i = 0; i<list.size(); i++) {
                     Task element = list.get(i);
-                    System.out.println(String.format("%d.[%s] %s",i+1,element.getStatusIcon(), element.getDescription()));
+                    System.out.println(String.format("%d.%s",i+1,element.toString()));
                 }
                 System.out.println("---------------------------------------");
-            } else if(input.equals("mark")) {
-                int item = sc.nextInt();
+
+            } else if(split[0].equals("mark")) {
+                int item = Integer.parseInt(split[1]);
                 Task curr = list.get(item-1);
                 curr.setDone();
                 System.out.println("---------------------------------------");
-                System.out.println(String.format("Nice, this task has been marked as done:\n [%s] %s",curr.getStatusIcon(), curr.getDescription()));
+                System.out.println(String.format("Nice, this task has been marked as done:\n %s",curr.toString()));
                 System.out.println("---------------------------------------");
-            } else if(input.equals("unmark")) {
-                int item = sc.nextInt();
+
+            } else if(split[0].equals("unmark")) {
+                int item = Integer.parseInt(split[1]);
                 Task curr = list.get(item-1);
                 curr.setUndone();
                 System.out.println("---------------------------------------");
-                System.out.println(String.format("ok, this task has been marked as not done yet:\n [%s] %s",curr.getStatusIcon(), curr.getDescription()));
+                System.out.println(String.format("ok, this task has been marked as not done yet:\n %s",curr.toString()));
                 System.out.println("---------------------------------------");
+
             }
             else {
                 Task t = new Task(input);
@@ -72,14 +76,14 @@ public class Duke {
                 System.out.println("---------------------------------------");
 
             }
-            input = sc.next();
+            input = sc.nextLine();
+
         }
         exit();
     }
 
 
-
-    }
+}
 
 
 
