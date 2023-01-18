@@ -1,0 +1,13 @@
+Eat
+event Sleep /from 1am /to 10pm
+deadline Drink /by 12am
+list
+mark 1
+mark 2
+mark 3
+list
+unmark 1
+unmark 2
+unmark 3
+list
+bye
