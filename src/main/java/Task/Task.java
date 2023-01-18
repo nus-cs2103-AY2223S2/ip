@@ -1,5 +1,4 @@
 package Task;
-// package something
 
 public class Task {
     protected String description;
@@ -17,17 +16,17 @@ public class Task {
     public void mark_done() {
         this.isDone = true;
         System.out.println("    OK I've marked this task as done: ");
-        System.out.println("    " + this.getStatusIcon() + " " + this.description);
+        System.out.println("    " + this.toString());
     }
 
     public void mark_undone() {
         this.isDone = false;
         System.out.println("    OK I've marked this task as not done yet:");
-        System.out.println("    " + this.getStatusIcon() + " " + this.description);
+        System.out.println("    " + this.toString());
     }
 
     @Override
     public String toString() {
-        return this.description;
+        return this.getStatusIcon() + " " + this.description;
     }
 }
