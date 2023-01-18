@@ -69,13 +69,18 @@ public class Task {
     }
 
     public static void printList() {
-        System.out.println("Master, here are the items in your list:");
-        for (int i = 0; i < taskList.size(); i++) {
-            Integer val = i+1;
-            String listInline = taskList.get(i).getTaskInline(val);
+        if (taskList.size() == 0) {
+            System.out.println("Master, there seems to be nothing in your list! Goodness me! Has my circuitry failed me again?!");
+        } else {
+            System.out.println("Master, here are the items in your list:");
+            for (int i = 0; i < taskList.size(); i++) {
+                Integer val = i+1;
+                String listInline = taskList.get(i).getTaskInline(val);
 
-            System.out.println(listInline);
+                System.out.println(listInline);
+            }
         }
+
     }
 
 }

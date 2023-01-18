@@ -1,7 +1,37 @@
-Hello from
- ____        _        
-|  _ \ _   _| | _____ 
-| | | | | | | |/ / _ \
-| |_| | |_| |   <  __/
-|____/ \__,_|_|\_\___|
-
+Hello. I don’t believe we have been introduced. A pleasure to meet you. I am C4PO-Storage Human-Computer Relations.
+I collect words which you say.
+C4PO-Storage: Master, please type your response below.
+-----------------------------------------------
+-----------------------------------------------
+Excellent sir, I've added the task: 
+[T] todo_1
+Now you have 1 tasks in the list.
+-----------------------------------------------
+Excellent sir, I've added the task: 
+[D] dead_1 (by: tonight)
+Now you have 2 tasks in the list.
+-----------------------------------------------
+Excellent sir, I've added the task: 
+[E] es2002 (from: thurs 3pm to thurs 6pm)
+Now you have 3 tasks in the list.
+-----------------------------------------------
+Great job! I've marked this task as done. Task:
+[D][X] dead_1
+-----------------------------------------------
+Great job! I've marked this task as done. Task:
+[T][X] todo_1
+-----------------------------------------------
+Master, here are the items in your list:
+1. [T][X] todo_1
+2. [D][X] dead_1 (by: tonight)
+3. [E][ ] es2002 (from: thurs 3pm to: thurs 6pm)
+-----------------------------------------------
+Ahhh I see ...  I shall unmark that task then. *beep* Done. Task:
+[T][ ] todo_1
+-----------------------------------------------
+Master, here are the items in your list:
+1. [T][ ] todo_1
+2. [D][X] dead_1 (by: tonight)
+3. [E][ ] es2002 (from: thurs 3pm to: thurs 6pm)
+-----------------------------------------------
+C4PO-Storage: Bye! I'll miss all of you.

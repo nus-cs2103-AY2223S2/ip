@@ -1,0 +1,10 @@
+todo todo_1
+deadline dead_1 /by tonight
+event es2002 /from thurs 3pm /to thurs 6pm
+mark 2
+mark 1
+list
+unmark 1
+list
+bye
+
