@@ -1,3 +1,6 @@
+import java.util.ArrayList;
+import java.util.Objects;
+
 /**
  * The main store class to store user input into the Duke system.
  *
@@ -7,13 +10,10 @@
 public class DukeStore {
     private static final int recordSize = 100;
     private static int ID = 0;
-    private final DukeTask[] records = new DukeTask[recordSize];
+    private final ArrayList<DukeTask> records = new ArrayList<>(recordSize);
 
     //The unique ID of this store
     private int id;
-
-    // The index of the next available slot to add records.
-    private int idx = 0;
 
     private DukeStore() {
         this.id = DukeStore.ID + 1;
@@ -37,15 +37,19 @@ public class DukeStore {
      * can no longer accept any more tasks.
      */
     public void add(DukeTask input) throws DukeStoreFullException {
-        if (this.idx > recordSize - 1) {
+        if (this.records.size() > recordSize - 1) {
             throw new DukeStoreFullException();
         }
-        this.records[this.idx] = input;
-        this.idx += 1;
+        try {
+            this.records.add(Objects.requireNonNull(input));
+        } catch (NullPointerException e) {
+            DukeFormatter.error(new DukeException("An internal system error occurred"));
+            return;
+        }
 
         String message = "Got it. I've added this task:\n"
-                + "  " + this.records[this.idx - 1].toString()
-                + String.format("\nNow you have %s tasks in the list", this.idx);
+                + "  " + this.records.get(this.records.size() - 1).toString()
+                + String.format("\nNow you have %s tasks in the list", this.records.size());
         DukeFormatter.section(message);
     }
 
@@ -57,11 +61,11 @@ public class DukeStore {
      * invalid index was provided.
      */
     public void mark(int i) throws DukeStoreInvalidAccessException {
-        if (i < 0 || i >= this.idx) { //Unassigned, invalid index
+        if (i < 0 || i >= this.records.size()) { //Unassigned, invalid index
             throw new DukeStoreInvalidAccessException();
         }
-        this.records[i].setDone();
-        String message = "Nice! I've marked this task as done:\n" + "  " + this.records[i];
+        this.records.get(i).setDone();
+        String message = "Nice! I've marked this task as done:\n" + "  " + this.records.get(i);
         DukeFormatter.section(message);
     }
 
@@ -73,22 +77,22 @@ public class DukeStore {
      * invalid index was provided.
      */
     public void unMark(int i) throws DukeStoreInvalidAccessException {
-        if (i < 0 || i >= this.idx) { //Unassigned, invalid index
+        if (i < 0 || i >= this.records.size()) { //Unassigned, invalid index
             throw new DukeStoreInvalidAccessException();
         }
-        this.records[i].markUndone();
-        String message = "OK, I've marked this task as not done yet:\n" + "  " + this.records[i];
+        this.records.get(i).markUndone();
+        String message = "OK, I've marked this task as not done yet:\n" + "  " + this.records.get(i);
         DukeFormatter.section(message);
     }
 
     @Override
     public String toString() {
         StringBuilder out = new StringBuilder();
-        if (this.idx == 0) {
+        if (this.records.size() == 0) {
             return "No records are added yet. Add some by typing them!";
         }
-        for (int i = 0; i < this.idx; i++) {
-            out.append(String.format("%s. %s\n", i + 1, this.records[i]));
+        for (int i = 0; i < this.records.size(); i++) {
+            out.append(String.format("%s. %s\n", i + 1, this.records.get(i)));
         }
         return out.toString();
     }
