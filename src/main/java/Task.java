@@ -1,9 +1,14 @@
 public class Task {
 
-    private String task;
-    private Boolean isDone;
+    protected String task;
+    protected Boolean isDone;
     protected Character abbreviation;
 
+    /**
+     * Constructor for the Task Object
+     * @param task
+     * @throws Exception (Description of task cannot be empty)
+     */
     public Task(String task) throws Exception {
         if (task == "") {
             throw new Exception("OOPS!!! The description of a task cannot be empty.");
@@ -20,12 +25,17 @@ public class Task {
         isDone = false;
     }
 
+    /**
+     * Creates a string representation of this task
+     * @return String representation of this task
+     */
     @Override
     public String toString() {
         String status = " ";
         if (isDone) {
             status = "X";
         }
-        return  "[" + abbreviation + "]" + "[" + status + "] " + task;
+        String response =  "[" + abbreviation + "]" + "[" + status + "] " + task;
+        return response.trim();
     }
 }

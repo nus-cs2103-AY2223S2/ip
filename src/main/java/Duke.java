@@ -18,7 +18,6 @@ public class Duke {
         while (isChatting) {
             String chat = in.nextLine();
             if (chat.equals("bye")) {
-                isChatting = false;
                 break;
             }
             respond(chat);
@@ -28,10 +27,10 @@ public class Duke {
         System.out.println("----------------------------------");
     }
 
-    private static void checkChat(String chat) {
-
-    }
-
+    /**
+     * Responds to the user by printing a response, based on the chat sent by user
+     * @param chat
+     */
     private static void respond(String chat) {
         String keyword = chat.split(" ")[0];
         switch(keyword) {
@@ -111,9 +110,13 @@ public class Duke {
         }
     }
 
+    /**
+     * Prints out a response, wrapped with 2 hyphenated lines above and below
+     * @param response
+     */
     private static void print(String response) {
         System.out.println("----------------------------------");
-        System.out.println(response);
+        System.out.println(response.trim());
         System.out.println("----------------------------------");
     }
 }

@@ -1,0 +1,9 @@
+todo borrow book
+deadline return book /by monday 2pm
+event party /from thurs 9am /to 10pm
+list
+mark 1
+mark 2
+mark 3
+list
+bye

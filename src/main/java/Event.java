@@ -2,8 +2,8 @@ import java.util.HashMap;
 
 public class Event extends Task {
 
-    String from;
-    String to;
+    private String from;
+    private String to;
 
     public Event(HashMap<String, String> parsed) throws Exception {
         super(parsed.get("event"));

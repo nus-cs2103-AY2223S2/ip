@@ -2,7 +2,7 @@ import java.util.HashMap;
 
 public class Deadline extends Task{
 
-    String by;
+    private String by;
 
     public Deadline(HashMap<String, String> parsed) throws Exception {
         super(parsed.get("deadline"));
