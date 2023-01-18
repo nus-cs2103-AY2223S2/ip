@@ -1,11 +1,13 @@
 public class Task {
-    private String name;
+    protected String description;
+    protected boolean isDone;
 
-    public Task (String name) {
-        this.name = name;
+    public Task (String description) {
+        this.description = description;
+        this.isDone = false;
     }
 
-    public String getName() {
-        return this.name;
+    public String getStatusIcon() {
+        return (isDone ? "X" : " ");
     }
 }

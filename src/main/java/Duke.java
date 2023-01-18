@@ -15,15 +15,23 @@ public class Duke {
         //no more than 100 tasks
         listname = new Task[100];
         String command;
+        String[] words;
+
 
         do {
             command = str.nextLine();
+            words = command.split(" ");
+
             //if command is equal to bye, exit()
             //if command is not equal to bye, distinguish list or normal command
             if (!command.equals("bye")) {
                 if (command.equals("list")) {
                     list();
-                } else {
+                } else if (words[0].equals("mark")) {
+                    done(words[1]);
+                } else if (words[0].equals("unmark")) {
+                    undone(words[1]);
+                }else {
                     listname[count] = new Task(command);
                     count++;
                     System.out.println(Indentation + Horizontal);
@@ -62,10 +70,40 @@ public class Duke {
 
     public static void list() {
         System.out.println(Indentation + Horizontal);
+        System.out.println(Indentation + "Here are the tasks in your list:");
 
         for (int i = 0; i < count; i++) {
-            System.out.println(Indentation + (i + 1) + "." + listname[i].getName());
+            System.out.println(Indentation + (i + 1) + "." + Indentation +
+                    "[" + listname[i].getStatusIcon() + "] " + listname[i].description);
         }
+
+        System.out.println(Indentation + Horizontal);
+    }
+
+    public static void done (String num) {
+        int number = Integer.parseInt(num) - 1;
+        listname[number].isDone = true;
+
+        //System.out.println(number);
+        System.out.println(Indentation + Horizontal);
+        System.out.println("Nice! I've marked this task as done:");
+
+        System.out.println(Indentation +
+                    "[" + listname[number].getStatusIcon() + "] " + listname[number].description);
+
+        System.out.println(Indentation + Horizontal);
+    }
+
+    public static void undone(String num) {
+        int number = Integer.parseInt(num) - 1;
+        listname[number].isDone = false;
+
+        //System.out.println(number);
+        System.out.println(Indentation + Horizontal);
+        System.out.println("OK, I've marked this task as not done yet:");
+
+        System.out.println(Indentation +
+                "[" + listname[number].getStatusIcon() + "] " + listname[number].description);
 
         System.out.println(Indentation + Horizontal);
     }
