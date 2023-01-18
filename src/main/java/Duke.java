@@ -10,12 +10,13 @@ public class Duke {
         System.out.println("Hello from\n" + logo);
 
         System.out.println("Hello I'm Duke\n"
-                + "What can I do for you?");
+                + "What can I do for you?\n");
 
         Task[] taskArray = new Task[100];
         int arrayIndex = 0;
-        while(true) {
-            Scanner sc = new Scanner(System.in);
+        Scanner sc = new Scanner(System.in);
+
+        while(sc.hasNextLine()) {
             String input = sc.nextLine();
             String instruction =  input.split(" ")[0];
             switch(instruction) {
@@ -27,6 +28,7 @@ public class Duke {
                         int listNumber = i + 1;
                         System.out.println(listNumber + ". " + taskArray[i].toString());
                     }
+                    System.out.println("");
                     break;
                 case "mark":
                     int toMark = input.charAt(5) - 48;
@@ -34,7 +36,7 @@ public class Duke {
                     toMarkTask.markTask();
 
                     System.out.println("Nice! I,ve marked this task as done:\n   "
-                                        + toMarkTask);
+                                        + toMarkTask + "\n");
                     break;
                 case "unMark":
                     int toUnMark = input.charAt(7) - 48;
@@ -42,7 +44,7 @@ public class Duke {
                     toUnMarkTask.unmarkTask();
 
                     System.out.println("OK, I've marked this task as not done yet:\n   "
-                            + toUnMarkTask);
+                            + toUnMarkTask + "\n");
                     break;
                 case "todo":
                     ToDo toDoTask = new ToDo(input.substring(5));
@@ -51,7 +53,7 @@ public class Duke {
 
                     System.out.println("Got it. I've added this task:\n   "
                             + toDoTask
-                            + "\nNow you have " + arrayIndex + " tasks in your list");
+                            + "\nNow you have " + arrayIndex + " tasks in your list\n");
                     break;
                 case "deadline":
                     String[] dSegments = input.split("/");
@@ -64,7 +66,7 @@ public class Duke {
 
                     System.out.println("Got it. I've added this task:\n   "
                             + deadlineTask
-                            + "\nNow you have " + arrayIndex + " tasks in your list");
+                            + "\nNow you have " + arrayIndex + " tasks in your list\n");
                     break;
                 case "event":
                     String[] eSegments = input.split("/");
@@ -78,7 +80,7 @@ public class Duke {
 
                     System.out.println("Got it. I've added this task:\n   "
                             + eventTask
-                            + "\nNow you have " + arrayIndex + " tasks in your list");
+                            + "\nNow you have " + arrayIndex + " tasks in your list\n");
                     break;
                 default:
                     Task currTask = new Task(input);
