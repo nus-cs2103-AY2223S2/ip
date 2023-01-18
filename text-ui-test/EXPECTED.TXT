@@ -1,103 +1,95 @@
-        Hello! I'm Connor, the android sent by Cyberlife
+        ________________________________________________________
+        Hello! I'm Connor, the android sent by Cyberlife.
         Please type in your command below.
+        ________________________________________________________
+        Existing data detected, loading data.
         ________________________________________________________
         Hi, I hope that you are having a nice day.
         ________________________________________________________
 
-        ________________________________________________________
-        ________________________________________________________
+        I have 0 tasks in my memory
         ________________________________________________________
         I have added buy food to my memory
           [T][ ] buy food
         You have 1 tasks in the list
         ________________________________________________________
-
-        ________________________________________________________
         I have added do CS2103T to my memory
           [D][ ] do CS2103T (by: 2pm)
         You have 2 tasks in the list
-        ________________________________________________________
-
         ________________________________________________________
         I have added Dinner to my memory
           [E][ ] Dinner (from: 6pm to: 8pm)
         You have 3 tasks in the list
         ________________________________________________________
-
-        ________________________________________________________
         Understood, I have marked the task as done:
         [T][X] buy food
         ________________________________________________________
 
-        ________________________________________________________
         1.[T][X] buy food
         2.[D][ ] do CS2103T (by: 2pm)
         3.[E][ ] Dinner (from: 6pm to: 8pm)
-        ________________________________________________________
+        I have 3 tasks in my memory
         ________________________________________________________
         Understood, I have marked the task as done:
         [D][X] do CS2103T (by: 2pm)
         ________________________________________________________
 
-        ________________________________________________________
         1.[T][X] buy food
         2.[D][X] do CS2103T (by: 2pm)
         3.[E][ ] Dinner (from: 6pm to: 8pm)
-        ________________________________________________________
+        I have 3 tasks in my memory
         ________________________________________________________
         Understood, I have marked the task as undone:
         [D][ ] do CS2103T (by: 2pm)
         ________________________________________________________
 
-        ________________________________________________________
         1.[T][X] buy food
         2.[D][ ] do CS2103T (by: 2pm)
         3.[E][ ] Dinner (from: 6pm to: 8pm)
-        ________________________________________________________
+        I have 3 tasks in my memory
         ________________________________________________________
         Understood, I have marked the task as done:
         [E][X] Dinner (from: 6pm to: 8pm)
         ________________________________________________________
 
-        ________________________________________________________
         1.[T][X] buy food
         2.[D][ ] do CS2103T (by: 2pm)
         3.[E][X] Dinner (from: 6pm to: 8pm)
-        ________________________________________________________
+        I have 3 tasks in my memory
         ________________________________________________________
         Understood, I have marked the task as undone:
         [T][ ] buy food
         ________________________________________________________
 
-        ________________________________________________________
         1.[T][ ] buy food
         2.[D][ ] do CS2103T (by: 2pm)
         3.[E][X] Dinner (from: 6pm to: 8pm)
-        ________________________________________________________
+        I have 3 tasks in my memory
         ________________________________________________________
         Understood, I have marked the task as undone:
         [E][ ] Dinner (from: 6pm to: 8pm)
         ________________________________________________________
 
-        ________________________________________________________
         1.[T][ ] buy food
         2.[D][ ] do CS2103T (by: 2pm)
         3.[E][ ] Dinner (from: 6pm to: 8pm)
+        I have 3 tasks in my memory
+        INVALID TASK DESCRIPTION
+        INVALID TASK DESCRIPTION
+        INVALID TASK DESCRIPTION
+        INVALID TASK DESCRIPTION
+        INVALID TASK DESCRIPTION
+        INVALID TASK DESCRIPTION
+        INVALID TASK DESCRIPTION
+        INVALID TASK DESCRIPTION
+        INVALID TASK DESCRIPTION
+        INVALID TASK DESCRIPTION
+        INVALID TASK DESCRIPTION
+        INVALID TASK DESCRIPTION
+        INVALID TASK DESCRIPTION
+        INVALID TASK DESCRIPTION
+        INVALID TASK DESCRIPTION
         ________________________________________________________
-        INVALID TASK DESCRIPTION
-        INVALID TASK DESCRIPTION
-        INVALID TASK DESCRIPTION
-        INVALID TASK DESCRIPTION
-        INVALID TASK DESCRIPTION
-        INVALID TASK DESCRIPTION
-        INVALID TASK DESCRIPTION
-        INVALID TASK DESCRIPTION
-        INVALID TASK DESCRIPTION
-        ________________________________________________________
-        The number that you have entered is not valid
-        ________________________________________________________
-
+        All tasks on the list have been cleared
         ________________________________________________________
         It was a good session Hank, Bye.
-        ________________________________________________________
-
