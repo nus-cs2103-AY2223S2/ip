@@ -10,41 +10,48 @@ public class Duke {
     private Scanner sc = new Scanner(System.in);
     private ArrayList<Task> tasks = new ArrayList<>(100);
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws DukeException{
         System.out.println("Hello from\n" + logo + "\n");
         Duke duke = new Duke();
         duke.activate();
     }
-    public void activate() {
+    public void activate() throws DukeException {
         //this.printLine();
-        //System.out.println("Hello from\n" + logo + "\n");
-        //this.greet();
-
+        System.out.println("Hello from\n" + logo + "\n");
+        this.printLine();
+        this.greet();
+        this.printLine();
         String i = sc.nextLine();
+
         while (!i.equalsIgnoreCase("bye")) {
-            if (i.equalsIgnoreCase("list")) {
-                this.printList();
-            } else if(i.toLowerCase().startsWith("mark")) {
-                int num = Integer.parseInt(i.split(" ")[1]);
-                Task t = this.tasks.get(num-1);
-                t.markDone();
-                getMarkDoneMessage(t);
-            } else if(i.toLowerCase().startsWith("unmark")) {
-                int num = Integer.parseInt(i.split(" ")[1]);
-                Task t = this.tasks.get(num-1);
-                t.unmarkDone();
-                getUnmarkDoneMessage(t);
-            }
-            else {
-                if(i.toLowerCase().startsWith("todo")) {
+            try {
+                if (i.equalsIgnoreCase("list")) {
+                    this.printList();
+                } else if (i.toLowerCase().startsWith("mark")) {
+                    int num = Integer.parseInt(i.split(" ")[1]);
+                    Task t = this.tasks.get(num - 1);
+                    t.markDone();
+                    getMarkDoneMessage(t);
+                } else if (i.toLowerCase().startsWith("unmark")) {
+                    int num = Integer.parseInt(i.split(" ")[1]);
+                    Task t = this.tasks.get(num - 1);
+                    t.unmarkDone();
+                    getUnmarkDoneMessage(t);
+                } else if (i.toLowerCase().startsWith("todo")) {
+                    if (i.split(" ").length == 1) {
+                        throw new EmptyInputException();
+                    }
                     this.addToDo(i);
-                }
-                if(i.toLowerCase().startsWith("deadline")) {
+                } else if (i.toLowerCase().startsWith("deadline")) {
                     this.addDeadline(i);
-                }
-                if(i.toLowerCase().startsWith("event")) {
+                } else if (i.toLowerCase().startsWith("event")) {
                     this.addEvent(i);
+                } else {
+                    throw new InvalidInputException();
                 }
+            } catch (EmptyInputException | InvalidInputException e) {
+                System.out.println(e.getMessage());
+                this.printLine();
             }
             i = sc.nextLine();
         }
@@ -65,7 +72,7 @@ public class Duke {
         sc.close();
     }
     public void printLine() {
-        System.out.println("_______________________________________________________");
+        System.out.println("__________________________________________________________");
     }
     public void storeTask(Task t) {
         this.tasks.add(t);
@@ -97,9 +104,6 @@ public class Duke {
         Event e = new Event(contents[0].replace("event ", ""), fromTo[0], fromTo[1]);
         this.storeTask(e);
         this.addTaskMessage(e);
-    }
-    public boolean stringMatch(String input, String given) {
-        return input.equalsIgnoreCase(given);
     }
     public void getMarkDoneMessage(Task t) {
         System.out.println("Nice! I've marked this task as done:\n" + "  " + t.toString());
