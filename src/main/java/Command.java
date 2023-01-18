@@ -1,20 +1,21 @@
 enum Command {
-  BYE("bye", 0),
-  LIST("list", 0),
-  MARK("mark", 1),
-  UNMARK("unmark", 1),
-  ADD("", 0);
+  BYE("bye"),
+  LIST("list"),
+  MARK("mark"),
+  UNMARK("unmark"),
+  TODO("todo"),
+  EVENT("event"),
+  DEADLINE("deadline"),
+  DEFAULT("");
 
   private final String command;
-  private final int args;
 
-  private Command(String command, int args) {
+  private Command(String command) {
     this.command = command;
-    this.args = args;
   }
 
   public boolean matches(String input) {
-    String[] arr = input.split(" ");
-    return arr[0].equals(command) && arr.length == args + 1;
+    String[] arr = input.split(" ", 2);
+    return arr[0].equals(command);
   }
 }

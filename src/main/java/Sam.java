@@ -15,7 +15,7 @@ public class Sam {
       System.out.print("> ");
       String input = scanner.nextLine();
       
-      Command command = Command.ADD;
+      Command command = Command.DEFAULT;
       for (Command c : Command.values())
         if (c.matches(input)) command = c;
 
@@ -42,11 +42,26 @@ public class Sam {
              + tasks.printTask(id));
           break;
         }
-        case ADD:
+        case TODO: {
+          Task task = new ToDo(input);
+          tasks.addTask(task);
+          talk("I've added \"" + input + "\" to your list");
+          break;
+        }
+        case EVENT: {
+          Task task = new Event(input);
+          tasks.addTask(task);
+          talk("I've added \"" + input + "\" to your list");
+          break;
+        }
+        case DEADLINE: {
+          Task task = new Deadline(input);
+          tasks.addTask(task);
+          talk("I've added \"" + input + "\" to your list");
+          break;
+        }
         default:
-          Task task = new Task(input);
-					tasks.addTask(task);
-					talk("I've added \"" + input + "\" to your list");
+          talk("Sorry, I don't know what that means");
 			}
     }
     scanner.close();
