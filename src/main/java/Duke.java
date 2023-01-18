@@ -122,21 +122,27 @@ public class Duke {
         String[] s = removeFirstWord(userInput.split("/"));
         Task temp = new ToDo(s[0]);
         storedInputs.add(temp);
-        System.out.println(temp);
+        printConfirmation();
+        System.out.println("  " + temp);
+        printTotalTasks();
     }
 
     private static void deadlineEvent(String userInput) {
         String[] s = removeFirstWord(userInput.split("/"));
         Task temp = new Deadline(s[0], s[1]);
         storedInputs.add(temp);
-        System.out.println(temp);
+        printConfirmation();
+        System.out.println("  " + temp);
+        printTotalTasks();
     }
 
     private static void eventEvent(String userInput) {
         String[] s = removeFirstWord(userInput.split("/"));
         Task temp = new Event(s[0], s[1], s[2]);
         storedInputs.add(temp);
-        System.out.println(temp);
+        printConfirmation();
+        System.out.println("  " + temp);
+        printTotalTasks();
     }
 
     private static String printList() {
@@ -146,4 +152,13 @@ public class Duke {
         }
         return s;
     }
+
+    private static void printConfirmation() {
+        System.out.println("\nYAY! Task Added:");
+    }
+
+    private static void printTotalTasks() {
+        System.out.println("Now you have " + Task.count  + " tasks in the list.\n");
+    }
+
 }

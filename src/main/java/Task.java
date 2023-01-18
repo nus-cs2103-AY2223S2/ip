@@ -1,11 +1,14 @@
 public class Task {
 
+    public static Integer count = 0;
+
     protected String taskName;
     protected  Boolean taskDone;
 
     protected Task(String taskName) {
         this.taskName = taskName;
         this.taskDone = false;
+        Task.count++;
     }
 
     public void markDone() {
