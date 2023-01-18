@@ -1,9 +1,14 @@
-public abstract class UserTask implements Runnable {
-    private final String line;
+public class UserTask {
+    private final String description;
+    public boolean status;
 
     public UserTask(String line) {
-        this.line = line;
+        this.description = line;
+        status = false;
     }
 
-    public abstract void run();
+    @Override
+    public String toString() {
+        return Resource.statusFmt(status) + ' ' + description;
+    }
 }

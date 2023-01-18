@@ -23,15 +23,8 @@ public class Meggy implements Runnable {
     private final PrintStream out;
     /**
      * List of string items. Allow dupes.
-     * */
-    private final ArrayList<String> items;
-    private final String listItems(){
-        final StringBuilder ans=new StringBuilder();
-        int i=0;
-        for(String item:items)
-            ans.append(Resource.idxFmt(i++)).append(item).append('\n');
-        return ans.toString();
-    }
+     */
+    private final ArrayList<UserTask> items;
 
     /**
      * @param in  Non-null input stream
@@ -44,14 +37,16 @@ public class Meggy implements Runnable {
             throw new NullPointerException("OutputStream is null");
         this.in = new Scanner(in);
         this.out = out instanceof PrintStream ? (PrintStream) out : new PrintStream(out);
-        items=new ArrayList<>();
-        cmdJob=Map.of(
+        items = new ArrayList<>();
+        cmdJob = Map.of(
                 Resource.cmdExit, s -> Resource.farewell,
-                Resource.cmdList, s -> listItems()
+                Resource.cmdList, s -> listItems(),
+                Resource.cmdMk, s -> markTaskStatus(s, true),
+                Resource.cmdUnmk, s -> markTaskStatus(s, false)
         );
-        unknownCmdBehavior= s -> {
-            items.add(s);
-            return Resource.notifAdd+s;
+        unknownCmdBehavior = s -> {
+            items.add(new UserTask(s));
+            return Resource.notifAdd + s;
         };
     }
 
@@ -59,7 +54,27 @@ public class Meggy implements Runnable {
         new Meggy(System.in, System.out).run();
     }
 
-    /**Interact with user using designated io streams*/
+    private final String listItems() {
+        final StringBuilder ans = new StringBuilder(Resource.notifList);
+        int i = 0;
+        for (UserTask item : items)
+            ans.append(Resource.idxFmt(i++)).append(item).append('\n');
+        return ans.toString();
+    }
+
+    /**
+     * @param arg Index (start with 1) of task to be updated.
+     */
+    private final String markTaskStatus(String arg, boolean newStatus) {
+        final int idx = Integer.parseInt(arg) - 1;
+        final UserTask item = items.get(idx);
+        item.status = newStatus;
+        return (newStatus ? Resource.notifMk : Resource.notifUnmk) + "   " + item;
+    }
+
+    /**
+     * Interact with user using designated io streams
+     */
     @Override
     public void run() {
         // Front page
