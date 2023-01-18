@@ -15,7 +15,7 @@ public class UnmarkCommand extends Command {
     }
 
     @Override
-    public String execute(TaskList tasks) {
+    public String execute(TaskList tasks) throws IndexOutOfBoundException {
         String[] req = this.request.split(" ");
         Integer idx = Integer.parseInt(req[1]) - 1;
         if (idx >= tasks.numOfTask()) {
