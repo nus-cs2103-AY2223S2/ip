@@ -164,17 +164,33 @@ public class TaskList {
         }
     }
 
-  private void find(String[] argument, Consumer<Integer> consumer) {
-    try {
-      String[] inds = argument[0].split("\\s");
-      for (String s : inds) {
-        int ind = Integer.parseInt(s) - 1;
-        consumer.accept(ind);
-      }
-    } catch (NumberFormatException | IndexOutOfBoundsException e) {
-      throw new IllegalArgumentException("Invalid index.");
+    private void consume(String[] argument, Consumer<Integer> consumer) {
+        try{
+            String[] inds = argument[0].split("\\s");
+            for (String s : inds) {
+                int ind = Integer.parseInt(s) - 1;
+                consumer.accept(ind);
+            }
+        } catch (NumberFormatException | IndexOutOfBoundsException e) {
+            throw new IllegalArgumentException("Invalid index.");
+        }
     }
-  }
+
+
+    public String[] find(String[] argument) {
+        String keyword = argument[0].toLowerCase();
+        List<Task> matches = this.tasks.stream()
+            .parallel()
+            .filter(t -> t.desc.toLowerCase().contains(keyword))
+            .toList();
+        if (matches.size() < 1){
+            return new String[]{"No matches found."};
+        } else {
+            List<String> outputs = matches.stream().map(Task::toString).collect(Collectors.toList());
+            outputs.add(0, matches.size() + " matches found:");
+            return outputs.toArray(String[]::new);
+        }
+    }
 
     private void save() {
         storage.save(this.tasks);

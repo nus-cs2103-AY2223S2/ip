@@ -21,7 +21,7 @@ public class Task implements Serializable {
      * The status of the task.
      */
     private boolean isDone;
-    static final DateTimeFormatter format = DateTimeFormatter.ofPattern("eee, d MMM uuuu");
+    static final DateTimeFormatter DATE_FORMAT = DateTimeFormatter.ofPattern("eee, d MMM uuuu");
 
     /**
      * Constructs a new task with the given description.
