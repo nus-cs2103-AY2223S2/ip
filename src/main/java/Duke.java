@@ -14,6 +14,8 @@ public class Duke {
     }
 
     private static void chat() {
+        int count = 0;
+        String[] data = new String[100];
         Scanner sc = new Scanner(System.in);
         while (sc.hasNext()) {
             String echo = sc.nextLine();
@@ -21,7 +23,15 @@ public class Duke {
                 System.out.println("Bye. Hope to see you again soon!");
                 break;
             }
-            System.out.println(echo);
+            if (echo.equals("list")) {
+                for (int i = 0; i < count; i++) {
+                    System.out.println((i+1) + ". " + data[i]);
+                }
+                continue;
+            }
+            System.out.println("added: " + echo);
+            data[count] = echo;
+            count++;
         }
         sc.close();
     }
