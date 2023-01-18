@@ -30,7 +30,7 @@ public class Duke {
     private static void handleInput(String userInput) {
         System.out.println("\n----------------------------------\n");
         if (userInput.equalsIgnoreCase("list")) {
-            System.out.println("Current items in your list are: \n");
+            System.out.println("Here are the items in your list: \n");
             for (int i = 0; i < curr; i++) {
                 System.out.println(i+1 + ") " + arr[i]);
             }
