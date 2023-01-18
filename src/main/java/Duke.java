@@ -49,7 +49,7 @@ public class Duke {
 
     public static class Todo extends Task {
         public Todo(String content) {
-            super(content);
+            super(content.substring(5));
         }
 
         public String toString() {
@@ -63,8 +63,11 @@ public class Duke {
         }
     }
     public static class Deadline extends Task {
+        private String deadlineDue;
         public Deadline(String content) {
-            super(content);
+            super(content.substring(9).split("/")[0]);
+            String[] strArr = content.split("/");
+            this.deadlineDue = "(" + "by:" + strArr[1].substring(2) + ")";
         }
 
         public String toString() {
@@ -74,12 +77,15 @@ public class Duke {
             } else {
                 sign = "X";
             }
-            return ". [D][" + sign + "] " + super.content;
+            return ". [D][" + sign + "] " + super.content + deadlineDue;
         }
     }
     public static class Event extends Task {
+        private String eventSpan;
         public Event(String content) {
-            super(content);
+            super(content.substring(6).split("/")[0]);
+            String[] strArr = content.split("/");
+            this.eventSpan = "(" + "by:" + strArr[1].substring(4) + "to:" + strArr[2].substring(2) + ")";
         }
 
         public String toString() {
@@ -89,7 +95,7 @@ public class Duke {
             } else {
                 sign = "X";
             }
-            return ". [E][" + sign + "] " + super.content;
+            return ". [E][" + sign + "] " + super.content + this.eventSpan;
         }
     }
 
