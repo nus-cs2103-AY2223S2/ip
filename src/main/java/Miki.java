@@ -11,7 +11,7 @@ public class Miki {
     }
 
     public static void main(String[] args) {
-        ArrayList<String> cmd_list = new ArrayList<>();
+        ArrayList<Task> tasks = new ArrayList<>();
         Scanner sc = new Scanner(System.in);
         printDiv();
         String username = System.getProperty("user.name");
@@ -22,24 +22,53 @@ public class Miki {
         boolean exit_cmd = false;
         while (!exit_cmd) {
             System.out.print(">");
-            String cmd = sc.nextLine();
-            if (cmd.equals("bye")) {
-                exit_cmd = true;
-            } else if (cmd.equals("list")) {
-                printDiv();
-                for (int i = 0; i < cmd_list.size(); i++) {
-                    print(Integer.toString(i + 1) + ". " + cmd_list.get(i));
+            String cmd_line = sc.nextLine();
+            String cmd = cmd_line.split(" ")[0];
+            String[] cmd_args = {};
+            if (cmd_line.contains(" ")) {
+                cmd_args = cmd_line.substring(cmd.length() + 1).split(" ");
+            }
+            switch (cmd) {
+                case "bye":
+                    exit_cmd = true;
+                    break;
+                case "list":
+                    printDiv();
+                    print("caught in 4k:");
+                    for (int i = 0; i < tasks.size(); i++) {
+                        print(Integer.toString(i + 1) + ". " + tasks.get(i));
+                    }
+                    printDiv();
+                    break;
+                case "mark": {
+                    int idx = Integer.parseInt(cmd_args[0]) - 1;
+                    tasks.get(idx).mark();
+                    printDiv();
+                    print("Yay!! Task marked as done:");
+                    print("  " + tasks.get(idx));
+                    printDiv();
+                    break;
                 }
-                printDiv();
-            } else {
-                cmd_list.add(cmd);
-                printDiv();
-                print("Added! [" + cmd + "]");
-                printDiv();
+                case "unmark": {
+                    int idx = Integer.parseInt(cmd_args[0]) - 1;
+                    tasks.get(idx).unmark();
+                    printDiv();
+                    print("okay...! task unmarked as undone:");
+                    print("  " + tasks.get(idx));
+                    printDiv();
+                    break;
+                }
+                default:
+                    Task newTask = new Task(cmd_line);
+                    tasks.add(newTask);
+                    printDiv();
+                    print("Added this! :");
+                    print("  " + newTask.toString());
+                    printDiv();
             }
         }
         printDiv();
-        print("Otsumiki! I'll see you later!");
+        print("Otsumiki!~ I'll see you later!");
         printDiv();
     }
 }
