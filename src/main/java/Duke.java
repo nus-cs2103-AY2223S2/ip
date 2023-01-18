@@ -8,6 +8,7 @@ public class Duke {
     private static ArrayList<Task> tasks = new ArrayList<>();
 
     // Methods
+    // List out all tasks and their rank.
     public static void list() {
         if (tasks.size() == 0) {
             System.out.println("No tasks left :)");
@@ -21,7 +22,7 @@ public class Duke {
         System.out.println(BORDER);
     }
 
-    // Zero indexed
+    // Mark task at index to be done
     public static void markDone(int index) throws DukeException {
         if (index < 0 || index >= tasks.size()) {
             throw new DukeException("OOPS!!! Invalid index");
@@ -33,16 +34,24 @@ public class Duke {
                 curr.fullMessage() + "\n" + BORDER);
     }
 
-    // Zero indexed
+    // Mark task at index to be undone
     public static void markUndone(int index) throws DukeException {
         if (index < 0 || index >= tasks.size()) {
-            throw new DukeException("OOPS!!! Invalid index");
+            throw new DukeException("OOPS!!! Invalid index.");
         }
 
         Task curr = tasks.get(index);
         curr.markAsUndone();
         System.out.println("OK, I've marked this task as not done yet:\n" +
                 curr.fullMessage() + "\n" + BORDER);
+    }
+
+    // Returns the string representation of the task's full message
+    public static String delete(int index) throws DukeException {
+        if (index < 0 || index >= tasks.size()) {
+            throw new DukeException("OOPS!!! Invalid index.");
+        }
+        return tasks.remove(index).fullMessage();
     }
 
     public static void main(String[] args) {
@@ -56,8 +65,9 @@ public class Duke {
         while (sc.hasNext()) {
             String command = sc.next();
             // Useful variables
-            int index;
+            int rank;
             String[] messages;
+            String message;
 
             try {
                 switch (command) {
@@ -69,22 +79,22 @@ public class Duke {
                         break;
                     case "mark":
                         try {
-                            index = Integer.parseInt(sc.nextLine().trim());
+                            rank = Integer.parseInt(sc.nextLine().trim());
                         } catch (NumberFormatException e) {
-                            throw new DukeException("OOPS! mark must have an integer index");
+                            throw new DukeException("OOPS! mark must have an integer rank");
                         }
-                        markDone(index - 1);
+                        markDone(rank - 1);
                         break;
                     case "unmark":
                         try {
-                            index = Integer.parseInt(sc.nextLine());
+                            rank = Integer.parseInt(sc.nextLine().trim());
                         } catch (NumberFormatException e) {
-                            throw new DukeException("OOPS! mark must have an integer index");
+                            throw new DukeException("OOPS! unmark must have an integer rank");
                         }
-                        markUndone(index - 1);
+                        markUndone(rank - 1);
                         break;
                     case "todo":
-                        String message = sc.nextLine().trim();
+                        message = sc.nextLine().trim();
                         Task t = new ToDos(message);
                         tasks.add(t);
                         System.out.println("Got it. I've added this task:\n" + t.fullMessage());
@@ -103,6 +113,16 @@ public class Duke {
                         tasks.add(t);
                         System.out.println("Got it. I've added this task:\n" + t.fullMessage());
                         System.out.println("Now you have " + tasks.size() + " tasks in this list\n" + BORDER);
+                        break;
+                    case "delete":
+                        try {
+                            rank = Integer.parseInt(sc.nextLine().trim());
+                        } catch (NumberFormatException e) {
+                            throw new DukeException("OOPS! delete must have an integer rank");
+                        }
+                        message = delete(rank - 1);
+                        System.out.println("Noted. I've removed this task:\n" + message + "\n" +
+                                "Now you have " + tasks.size() + " tasks in the list.\n" + BORDER);
                         break;
                     default:
                         System.out.println("lol what\n" + BORDER);

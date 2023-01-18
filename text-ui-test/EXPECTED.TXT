@@ -10,8 +10,6 @@ Got it. I've added this task:
 [T][ ] borrow book
 Now you have 1 tasks in this list
 ----------------------------------------
-1.[T][ ] borrow book
-----------------------------------------
 Got it. I've added this task:
 [D][ ] return book (by: Sunday)
 Now you have 2 tasks in this list
@@ -20,15 +18,38 @@ Got it. I've added this task:
 [E][ ] project meeting (from: Mon 2pm to: 4pm)
 Now you have 3 tasks in this list
 ----------------------------------------
+OOPS!!! The description of event cannot be empty!
+----------------------------------------
+OOPS!!! Use 'from' to start date.
+----------------------------------------
+OOPS!!! Deadline requires some end description.
+----------------------------------------
+OOPS!!! The description of a todo cannot be empty.
+----------------------------------------
 Nice! I've marked this task as done:
 [T][X] borrow book
 ----------------------------------------
 Nice! I've marked this task as done:
 [D][X] return book (by: Sunday)
 ----------------------------------------
-OOPS! mark must have an integer index
+OK, I've marked this task as not done yet:
+[T][ ] borrow book
 ----------------------------------------
-1.[T][X] borrow book
+1.[T][ ] borrow book
 2.[D][X] return book (by: Sunday)
 3.[E][ ] project meeting (from: Mon 2pm to: 4pm)
+----------------------------------------
+Got it. I've added this task:
+[T][ ] run
+Now you have 4 tasks in this list
+----------------------------------------
+Noted. I've removed this task:
+[E][ ] project meeting (from: Mon 2pm to: 4pm)
+Now you have 3 tasks in the list.
+----------------------------------------
+OOPS!!! Invalid index.
+----------------------------------------
+1.[T][ ] borrow book
+2.[D][X] return book (by: Sunday)
+3.[T][ ] run
 ----------------------------------------
