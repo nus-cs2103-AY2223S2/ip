@@ -6,7 +6,7 @@ Hello from
 |____/ \__,_|_|\_\___|
 
 What can I do for you?
-DukeException: Oops! You need to specify the task number for me to mark/unmark it.
+DukeException: Oops! You need to specify the task number for me to mark it.
 What else can I do for you?
 Got it, I've added this task:
     [T][ ] borrow book
@@ -68,4 +68,6 @@ What else can I do for you?
 DukeException: Please specify the deadline.
 What else can I do for you?
 DukeException: Please specify both the start and end times/dates.
+What else can I do for you?
+DukeException: Oops! You need to specify the task number for me to delete  it.
 What else can I do for you?

@@ -1,16 +1,19 @@
 package task;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class TaskList {
-    protected Task[] tasks;
+    protected List<Task> tasks;
 
 
     public TaskList() {
-        this.tasks = new Task[100];
+        this.tasks = new ArrayList<Task>(100);
     }
 
     public boolean isAllCompleted() {
-        for (int i = 0; i < Task.getCount(); i++) {
-            if (tasks[i].isMarked()) {
+        for (int i = 0; i < tasks.size(); i++) {
+            if (this.tasks.get(i).isMarked()) {
                 continue;
             } else {
                 return false;
@@ -20,11 +23,11 @@ public class TaskList {
     }
 
     public int getNumTasks() {
-        return Task.getCount();
+        return tasks.size();
     }
 
     public Task getTask(int i) {
-        return tasks[i];
+        return tasks.get(i);
     }
 
     public boolean doesTaskExist(int taskNum) {
@@ -32,23 +35,29 @@ public class TaskList {
     }
 
     public void addTodo(String desc) {
-        int i = Task.getCount();
-        tasks[i] = new Todo(desc);
-        System.out.println("    " + tasks[i]);
+        Todo t = new Todo(desc);
+        tasks.add(t);
+        System.out.println("    " + t);
         printNumTasks();
     }
 
     public void addDeadline(String date, String desc) {
-        int i = Task.getCount();
-        tasks[i] = new Deadline(date, desc);
-        System.out.println("    " + tasks[i]);
+        Deadline d = new Deadline(date, desc);
+        tasks.add(d);
+        System.out.println("    " + d);
         printNumTasks();
     }
 
     public void addEvent(String start, String end, String desc) {
-        int i = Task.getCount();
-        tasks[i] = new Event(start, end, desc);
-        System.out.println("    " + tasks[i]);
+        Event e = new Event(start, end, desc);
+        tasks.add(e);
+        System.out.println("    " + e);
+        printNumTasks();
+    }
+
+    public void deleteTask(int taskNum) {
+        System.out.println("    " + tasks.get(taskNum-1));
+        tasks.remove(taskNum-1);
         printNumTasks();
     }
 
@@ -66,9 +75,9 @@ public class TaskList {
         String str = "";
         for (int i = 0; i < getNumTasks(); i++) {
             if (i == getNumTasks()-1) {
-                str += (i+1) + ". " + tasks[i];
+                str += (i+1) + ". " + this.getTask(i);
             } else {
-                str += (i+1) + ". " + tasks[i] + '\n';
+                str += (i+1) + ". " + this.getTask(i) + '\n';
             }
         }
         return str;

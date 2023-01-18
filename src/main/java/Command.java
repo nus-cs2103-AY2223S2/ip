@@ -73,4 +73,9 @@ public class Command {
         System.out.println("What else can I do for you?");
     }
 
+    public void deleteCommand(TaskList taskList, int taskNum) {
+        System.out.println("Noted. I've removed this task:");
+        taskList.deleteTask(taskNum);
+    }
+
 }

@@ -3,12 +3,10 @@ package task;
 public abstract class Task {
     protected String desc;
     protected boolean isMarked;
-    protected static int count = 0;
 
     public Task(String desc) {
         this.desc = desc;
         this.isMarked = false;
-        Task.count ++;
     }
 
     public void mark() {
@@ -17,10 +15,6 @@ public abstract class Task {
 
     public void unMark() {
         isMarked = false;
-    }
-
-    public static int getCount() {
-        return Task.count;
     }
 
     public boolean isMarked() {

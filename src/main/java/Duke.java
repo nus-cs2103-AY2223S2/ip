@@ -32,6 +32,24 @@ public class Duke {
         }
     }
 
+    public static void checkDelete(TaskList taskList, Command command) throws DukeException {
+        String str = command.str;
+        String arr[] = str.split("\\s+");
+        if (arr.length == 2 && arr[0].equals("delete")) {
+            if (isNumber(arr[1])) {
+                if (taskList.doesTaskExist(Integer.parseInt(arr[1]))) {
+                    command.deleteCommand(taskList, Integer.parseInt(arr[1]));
+                } else {
+                    throw new DukeException("Huh... the task does not exist.");
+                }
+            } else {
+                throw new DukeException("Oops! You need to specify the task number for me to delete it.");
+            }
+        } else {
+            throw new DukeException("Hmm... I can't quite understand you :-/");
+        }
+    }
+
     public static void checkCommand(TaskList taskList, Command command) throws DukeException {
         String str = command.str;
         String arr[] = str.split("\\s+");
@@ -40,8 +58,9 @@ public class Duke {
                 String e = String.format("Oops! The description of a %s cannot be empty.", arr[0]);
                 throw new DukeException(e);
             } else if (str.equals("mark") || str.equals("unmark")
-                    || str.equals("mark ") || str.equals("unmark ")) {
-                throw new DukeException("Oops! You need to specify the task number for me to mark/unmark it.");
+                    || str.equals("mark ") || str.equals("unmark ") || str.equals("delete") || str.equals("delete ")) {
+                String e = String.format("Oops! You need to specify the task number for me to %s it.", str);
+                throw new DukeException(e);
             } else {
                 throw new DukeException("Hmm... I can't quite understand you :-/");
             }
@@ -73,6 +92,8 @@ public class Duke {
                     String desc = subSegments[1];
                     command.eventCommand(taskList, start, end, desc);
                 }
+            } else if (arr[0].equals("delete")) {
+                checkDelete(taskList, command);
             } else {
                 throw new DukeException("Hmm... I can't quite understand you :-/");
             }
