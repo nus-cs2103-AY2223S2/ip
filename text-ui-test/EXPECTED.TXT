@@ -5,3 +5,37 @@ Hello from
 | |_| | |_| |   <  __/
 |____/ \__,_|_|\_\___|
 
+Hello! I'm Duke
+What can I do for you?
+Nothing here yet. Add your 1st item!
+Got it. I have added:
+[T][ ] play piano
+Now you have 1 task in the list
+1.[T][ ] play piano
+Got it. I have added:
+[E][ ] finish tutorial  (from: 24 Aug 2022 4pm to: 23 Oct 2022 3pm)
+Now you have 2 tasks in the list
+1.[T][ ] play piano
+2.[E][ ] finish tutorial  (from: 24 Aug 2022 4pm to: 23 Oct 2022 3pm)
+Got it. I have added:
+[D][ ] go for a run  (by: tomorrow if possible)
+Now you have 3 tasks in the list
+1.[T][ ] play piano
+2.[E][ ] finish tutorial  (from: 24 Aug 2022 4pm to: 23 Oct 2022 3pm)
+3.[D][ ] go for a run  (by: tomorrow if possible)
+Ok, I've marked this Task as completed:
+[T][X] play piano
+1.[T][X] play piano
+2.[E][ ] finish tutorial  (from: 24 Aug 2022 4pm to: 23 Oct 2022 3pm)
+3.[D][ ] go for a run  (by: tomorrow if possible)
+Ok, I've marked this Task as completed:
+[T][X] play piano
+1.[T][X] play piano
+2.[E][ ] finish tutorial  (from: 24 Aug 2022 4pm to: 23 Oct 2022 3pm)
+3.[D][ ] go for a run  (by: tomorrow if possible)
+Ok, I've marked this Task as completed:
+[E][X] finish tutorial  (from: 24 Aug 2022 4pm to: 23 Oct 2022 3pm)
+1.[T][X] play piano
+2.[E][X] finish tutorial  (from: 24 Aug 2022 4pm to: 23 Oct 2022 3pm)
+3.[D][ ] go for a run  (by: tomorrow if possible)
+Bye. Hope to see you again!
