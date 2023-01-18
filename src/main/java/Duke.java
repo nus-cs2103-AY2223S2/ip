@@ -3,7 +3,7 @@ public class Duke {
     String lines = "____________________________________________________________\n";
     boolean exit = false;
     String msg;
-    String[] tasks = new String[100];
+    Task[] tasks = new Task[100];
     int num_tasks = 0;
     public static void main(String[] args) {
         Duke duke = new Duke();
@@ -11,8 +11,13 @@ public class Duke {
         Scanner scanner = new Scanner(System.in);
         while(!duke.exit) {
             String inp = scanner.nextLine();
-            duke.msg = duke.add_lines("added: " + inp + "\n");
-            duke.check_msg(inp);
+            int idx = -1;
+            if ((inp.length() >= 4 && inp.substring(0, 4).equals("mark")) || (inp.length() >= 6 && inp.substring(0, 6).equals("unmark"))) {
+                idx = Integer.parseInt(String.valueOf(inp.charAt(inp.length() - 1)));
+                System.out.println(idx);
+                inp = inp.substring(0, 4).equals("mark") ? inp.substring(0, 4) : inp.substring(0, 6);
+            }
+            duke.check_msg(inp, idx);
             System.out.println(duke.msg);
         }
     }
@@ -20,19 +25,33 @@ public class Duke {
         return this.add_lines("Hello! I'm Duke\nWhat can I do for you?\n");
     }
 
-    void check_msg(String inp) {
+    void check_msg(String inp, int idx) {
         if (inp.equals("bye")) {
             this.exit = true;
             this.msg = this.add_lines("Bye. Hope to see you again soon!\n");
         } else if (inp.equals("list")) {
-            this.msg = "";
+            this.msg = "Here are the tasks in your list:\n";
             for(int i = 0; i < num_tasks; i++) {
-                this.msg += Integer.toString(i + 1) + ". " + this.tasks[i] + "\n";
+                Task cur = this.tasks[i];
+                this.msg += Integer.toString(i + 1) + ". " + cur + "\n";
             }
             this.msg = this.add_lines(this.msg);
+        } else if (inp.equals("mark") || inp.equals("unmark")){
+            Task cur = this.tasks[idx - 1];
+            if (inp.equals("mark")) {
+                this.msg = "Nice! I've marked this task as done:\n";
+                cur.mark();
+            } else {
+                this.msg = "OK, I've marked this task as not done yet:\n";
+                cur.unmark();
+            }
+            this.msg += cur + "\n";
+            this.msg = this.add_lines(this.msg);
         } else {
-            tasks[num_tasks] = inp;
+            Task cur = new Task(inp);
+            tasks[num_tasks] = cur;
             num_tasks = num_tasks + 1;
+            this.msg = this.add_lines("added: " + inp + "\n");
         }
     }
 
