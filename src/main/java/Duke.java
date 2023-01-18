@@ -124,9 +124,7 @@ public class Duke {
                 DukeFormatter.error(new DukeEmptyTaskException(DukeEmptyTaskException.TaskType.Event));
                 return;
             default:
-                DukeFormatter.guide(
-                        "Please try a valid command."
-                );
+                DukeFormatter.error(new DukeInvalidCommandException());
         }
     }
 
@@ -170,9 +168,7 @@ public class Duke {
                 return;
 
             default:
-                DukeFormatter.guide(
-                        "Please try a valid command."
-                );
+                DukeFormatter.error(new DukeInvalidCommandException());
         }
     }
 
