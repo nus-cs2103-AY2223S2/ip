@@ -11,11 +11,6 @@
   ____________________________________________________________
   ____________________________________________________________
   Got it. I've added this task:
-   [T][ ] borrow book
-  Now you have 1 tasks in the list.
-  ____________________________________________________________
-  ____________________________________________________________
-  Got it. I've added this task:
    [D][ ] return book (by: Sunday)
   Now you have 2 tasks in the list.
   ____________________________________________________________
@@ -28,13 +23,6 @@
  Got it. I've added this task:
   [D][ ] do homework (by: no idea :-p)
  Now you have 4 tasks in the list.
- ____________________________________________________________
- ____________________________________________________________
- Here are the tasks in your list:
- 1.[T][ ] borrow book
- 2.[D][ ] return book (by: Sunday)
- 3.[E][ ] project meeting (from:  Mon 2pm to:  4pm)
- 4.[D][ ] do homework (by: no idea :-p)
  ____________________________________________________________
  ____________________________________________________________
 Nice! I've marked this task as done:
