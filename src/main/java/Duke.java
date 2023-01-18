@@ -4,22 +4,6 @@ import java.util.*;
 import java.util.regex.*;
 
 public class Duke {
-    private static final String LINE_STRING = "____________________________________________________________";
-    private static final String WELCOME_STRING = "Hello! I'm Duke\n      What can I do for grades?";
-    private static final String END_STRING = "Bye. Hope to see you again soon!";
-    private static final String EMPTY_LIST_STRING = "Hey, the list is empty!";
-    private static final String MARK_DONE_STRING = "Nice! I've marked this task as done\n       ";
-    private static final String UNMARK_DONE_STRING = "OK, I've marked this task as not done yet\n       ";
-    private static final String DELETE_DONE_STRING = "Noted. I've removed this task:\n       ";
-    private static final String TASK_COUNT_1_STRING = "Now you have ";
-    private static final String TASK_COUNT_2_STRING = " tasks in the list.";
-    private static final String NO_INT_ERR_STRING = "Hey, you did not enter any numbers";
-    private static final String OUT_RANGE_ERR_STRING = "Hey, the number you've entered is not vaild";
-    private static final String UNKNOWN_ERR_STRING = "Hey, an unknown error happended, oh no";
-    private static final String EMPTY_ERR_STRING = "Hey, ☹ The description of a todo cannot be empty.";
-    private static final String UNKNOWN_CMD_ERR_STRING = "Hey, ☹ I'm sorry, but I don't know what that means :-(";
-    private static final String MISSING_ARGS_ERR_STRING = "Hey, ☹ I'm sorry, but you are missing some arguments";
-
     public static void main(String[] args) {
         String logo = " ____        _        \n"
                 + "|  _ / _   _| | _____ \n"
@@ -29,7 +13,7 @@ public class Duke {
         System.out.println("Hello from\n" + logo);
         Scanner sc = new Scanner(System.in);
 
-        printer(WELCOME_STRING);
+        printer(Views.WELCOME_STRING.eng());
 
         ArrayList<Task> tasksList = new ArrayList<Task>(100);
 
@@ -40,7 +24,7 @@ public class Duke {
                 switch (input) {
                     case "list":
                         if (tasksList.size() == 0) {
-                            printer(EMPTY_LIST_STRING);
+                            printer(Views.EMPTY_LIST_STRING.eng());
                         } else {
                             String toPrint = "";
                             for (int i = 0; i < tasksList.size(); i++) {
@@ -51,11 +35,11 @@ public class Duke {
                         break;
                     case "bye":
                         end = true;
-                        printer(END_STRING);
+                        printer(Views.END_STRING.eng());
                         break;
                     case "exit":
                         end = true;
-                        printer(END_STRING);
+                        printer(Views.END_STRING.eng());
                         break;
                     default:
                         // Have to do it at the starts with because what if "todo mark this as done"
@@ -64,27 +48,27 @@ public class Duke {
                             int taskNo = getNumbers(input) - 1;
                             if (input.startsWith(Commands.UNMARK.cmd())) {
                                 tasksList.get(taskNo).unmarkAsDone();
-                                printer(UNMARK_DONE_STRING + tasksList.get(taskNo));
+                                printer(Views.UNMARK_DONE_STRING.eng() + tasksList.get(taskNo));
                             } else {
                                 tasksList.get(taskNo).markAsDone();
-                                printer(MARK_DONE_STRING + tasksList.get(taskNo));
+                                printer(Views.MARK_DONE_STRING.eng() + tasksList.get(taskNo));
                             }
                         } else if (input.startsWith(Commands.TODO.cmd())) {
                             String title = input.substring(Commands.TODO.cmd().length());
                             if (title.length() == 0) {
-                                throw new DukeException(EMPTY_ERR_STRING);
+                                throw new DukeException(Views.EMPTY_ERR_STRING.eng());
                             }
                             Task newTask = new Todo(title);
                             tasksList.add(newTask);
                             printer("added: " + newTask);
                         } else if (input.startsWith(Commands.DEADLINE.cmd())) {
                             if (input.indexOf(Commands.BY.cmd()) == -1) {
-                                throw new DukeException(MISSING_ARGS_ERR_STRING);
+                                throw new DukeException(Views.MISSING_ARGS_ERR_STRING.eng());
                             }
                             String title = input.substring(Commands.DEADLINE.cmd().length(),
                                     input.indexOf(Commands.BY.cmd()));
                             if (title.length() == 0) {
-                                throw new DukeException(EMPTY_ERR_STRING);
+                                throw new DukeException(Views.EMPTY_ERR_STRING.eng());
                             }
                             Task newTask = new Deadline(title,
                                     input.substring(input.indexOf(Commands.BY.cmd())));
@@ -92,12 +76,12 @@ public class Duke {
                             printer("added: " + newTask);
                         } else if (input.startsWith(Commands.EVENT.cmd())) {
                             if (input.indexOf(Commands.FROM.cmd()) == -1 || input.indexOf(Commands.TO.cmd()) == -1) {
-                                throw new DukeException(MISSING_ARGS_ERR_STRING);
+                                throw new DukeException(Views.MISSING_ARGS_ERR_STRING.eng());
                             }
                             String title = input.substring(Commands.EVENT.cmd().length(),
                                     input.indexOf(Commands.FROM.cmd()));
                             if (title.length() == 0) {
-                                throw new DukeException(EMPTY_ERR_STRING);
+                                throw new DukeException(Views.EMPTY_ERR_STRING.eng());
                             }
                             Task newTask = new Event(title,
                                     input.substring(input.indexOf(Commands.FROM.cmd()),
@@ -108,16 +92,16 @@ public class Duke {
                         } else if (input.startsWith(Commands.DELETE.cmd())
                                 || input.startsWith(Commands.DEL.cmd())) {
                             int taskNo = getNumbers(input) - 1;
-                            String returnString = DELETE_DONE_STRING;
+                            String returnString = Views.DELETE_DONE_STRING.eng();
                             returnString += tasksList.get(taskNo);
                             tasksList.remove(taskNo);
                             returnString += "\n      ";
-                            returnString += TASK_COUNT_1_STRING;
+                            returnString += Views.TASK_COUNT_1_STRING.eng();
                             returnString += tasksList.size();
-                            returnString += TASK_COUNT_2_STRING;
+                            returnString += Views.TASK_COUNT_2_STRING.eng();
                             printer(returnString);
                         } else {
-                            throw new DukeException(UNKNOWN_CMD_ERR_STRING);
+                            throw new DukeException(Views.UNKNOWN_CMD_ERR_STRING.eng());
                         }
                         break;
                 }
@@ -127,11 +111,11 @@ public class Duke {
             } catch (Exception e) {
                 // System.out.println(e);
                 if (e instanceof IndexOutOfBoundsException) {
-                    printer(OUT_RANGE_ERR_STRING);
+                    printer(Views.OUT_RANGE_ERR_STRING.eng());
                 } else if (e instanceof DukeException) {
                     printer(e.getMessage());
                 } else {
-                    printer(UNKNOWN_ERR_STRING);
+                    printer(Views.UNKNOWN_ERR_STRING.eng());
                 }
             }
         }
@@ -139,9 +123,9 @@ public class Duke {
     }
 
     private static void printer(String toPrint) {
-        System.out.println("    " + LINE_STRING);
+        System.out.println("    " + Views.LINE_STRING.eng());
         System.out.println("      " + toPrint);
-        System.out.println("    " + LINE_STRING);
+        System.out.println("    " + Views.LINE_STRING.eng());
         System.out.println();
     }
 
@@ -153,7 +137,7 @@ public class Duke {
             int number = Integer.parseInt(numberString);
             return number;
         } else {
-            throw new DukeException(NO_INT_ERR_STRING);
+            throw new DukeException(Views.NO_INT_ERR_STRING.eng());
         }
     }
 }
