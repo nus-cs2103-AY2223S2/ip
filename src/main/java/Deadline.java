@@ -10,9 +10,9 @@ public class Deadline extends Task {
     @Override
     public String toString() {
         if (taskDone == false) {
-            return "[D][ ] " + this.taskName;
+            return "[D][ ] " + this.taskName + " (by: " + this.endTime + ")";
         }
-        return "[D][X] " + this.taskName;
+        return "[D][X] " + this.taskName + " (by: " + this.endTime + ")";
     }
 
 }

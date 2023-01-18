@@ -12,9 +12,11 @@ public class Event extends Task {
     @Override
     public String toString() {
         if (taskDone == false) {
-            return "[E][ ] " + this.taskName;
+            return "[E][ ] " + this.taskName
+                + " (from: " + this.startTime + " to: " + this.endTime + ")";
         }
-        return "[E][X] " + this.taskName;
+        return "[E][X] " + this.taskName 
+            + " (from: " + this.startTime + " to: " + this.endTime;
     }
 
 }

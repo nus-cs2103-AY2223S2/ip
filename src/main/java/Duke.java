@@ -111,20 +111,30 @@ public class Duke {
         System.out.println("\nOK, I've marked this task as not done yet:\n  " + t + "\n");
     }
 
+    private static String[] removeFirstWord(String[] s) {
+        for (int i = 0; i < s.length; i++) {
+            s[i] = s[i].substring(s[i].indexOf(" ")).trim();
+        }
+        return s;
+    }
+
     private static void todoEvent(String userInput) {
-        Task temp = new ToDo(userInput);
+        String[] s = removeFirstWord(userInput.split("/"));
+        Task temp = new ToDo(s[0]);
         storedInputs.add(temp);
         System.out.println(temp);
     }
 
     private static void deadlineEvent(String userInput) {
-        Task temp = new Deadline(userInput, userInput);
+        String[] s = removeFirstWord(userInput.split("/"));
+        Task temp = new Deadline(s[0], s[1]);
         storedInputs.add(temp);
         System.out.println(temp);
     }
 
     private static void eventEvent(String userInput) {
-        Task temp = new Event(userInput, userInput, userInput);
+        String[] s = removeFirstWord(userInput.split("/"));
+        Task temp = new Event(s[0], s[1], s[2]);
         storedInputs.add(temp);
         System.out.println(temp);
     }
