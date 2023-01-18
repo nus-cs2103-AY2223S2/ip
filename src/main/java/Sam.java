@@ -65,8 +65,8 @@ public class Sam {
           throw new SamInvalidTaskException();
         }
         tasks.markTask(id, true);
-        talk("Great! I'll check the task:\n    "
-            + tasks.printTask(id));
+        talk("Great! I'll check the task:",
+          tasks.printTask(id));
         break;
       }
       case UNMARK: {
@@ -78,8 +78,8 @@ public class Sam {
           throw new SamInvalidTaskException();
         }
         tasks.markTask(id, false);
-        talk("Okay, I'll uncheck the task:\n    "
-            + tasks.printTask(id));
+        talk("Okay, I'll uncheck the task:",
+          tasks.printTask(id));
         break;
       }
       case TODO: {
@@ -131,7 +131,7 @@ public class Sam {
   }
 
   private static void newTask(Task task) {
-    talk("Gotcha, I've added the task to your list:",
+    talk("Gotcha, I'll add the task to your list:",
       task.toString(),
       String.format("Now you have %d tasks in the list", tasks.count()));
   }
