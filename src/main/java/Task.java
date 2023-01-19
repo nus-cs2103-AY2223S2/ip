@@ -1,23 +1,10 @@
 public class Task {
     protected String desc;
     protected boolean isDone;
-    protected String taskType;
-
     public Task(String desc) {
         this.desc = desc;
-        this.taskType = null;
         this.isDone = false;
     }
-    public Task(String desc, String taskType) {
-        this.desc = desc;
-        this.taskType = taskType;
-        this.isDone = false;
-    }
-
-    public String getTaskType() {
-        return taskType;
-    }
-
     public String getDesc() {
         return desc;
     }
@@ -38,6 +25,6 @@ public class Task {
     }
 
     public String toString() {
-        return String.format("[%s][%s] %s", taskType, getStatusIcon(), desc);
+        return String.format("[%s] %s", getStatusIcon(), desc);
     }
 }

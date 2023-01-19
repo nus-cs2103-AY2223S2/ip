@@ -1,7 +1,10 @@
 public class ToDo extends Task {
-
     public ToDo(String desc) {
-        super(desc, "T");
+        super(desc);
+    }
+
+    public String toString() {
+        return "[T]" + super.toString();
     }
 
 }
