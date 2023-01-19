@@ -8,11 +8,17 @@ public class Deadline extends Task {
 
     public static Deadline to(String str) {
         String target = " /by ";
-        String description, deadline;
-        int index = str.indexOf(target);
-        description = str.substring(0, index);
-        deadline = str.substring(index + 5);
-        return new Deadline(description, deadline);
+        if (str.contains(target)) {
+            String description, deadline;
+            int index = str.indexOf(target);
+            description = str.substring(0, index);
+            deadline = str.substring(index + 5);
+            if (!(description.equals("") && deadline.equals(""))) {
+                return new Deadline(description, deadline);
+            }
+            throw new RuntimeException("Unable to create Deadline! Description or deadline was not filled in!\n");
+        }
+        throw new RuntimeException("Unable to create Deadline! Check your format!\n");
     }
 
     @Override

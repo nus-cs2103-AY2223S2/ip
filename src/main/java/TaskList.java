@@ -19,6 +19,9 @@ public class TaskList {
 
     public String markTask(String markIndex) {
         int index = Integer.parseInt(markIndex) - 1;
+        if (index < 0 || index > 99 || tasks[index] == null) {
+            throw new RuntimeException("Task does not exist!\n");
+        }
         this.tasks[index].mark();
         String str = "Great job! This task has been marked as done:\n";
         str += printTask(index);
@@ -27,6 +30,9 @@ public class TaskList {
 
     public String unmarkTask(String unmarkIndex) {
         int index = Integer.parseInt(unmarkIndex) - 1;
+        if (index < 0 || index > 99 || tasks[index] == null) {
+            throw new RuntimeException("Task does not exist!\n");
+        }
         this.tasks[index].unmark();
         String str = "Noted! This task has been marked as undone:\n";
         str += printTask(index);
