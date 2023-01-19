@@ -34,7 +34,7 @@ public class Babe {
     /**
      * List of Tasks Babe received from the user.
      */
-    private Task[] memory = new Task[100];
+    private ArrayList<Task> memory = new ArrayList<>();
 
     /**
      * Number of Tasks currently stored in this Babe.
@@ -111,7 +111,7 @@ public class Babe {
      */
     private void addToDo(String content) {
         ToDo item = new ToDo(content);
-        this.memory[memoryCount++] = item;
+        this.memory.add(memoryCount++, item);
         Babe.drawLine();
         System.out.println("Got it, babe. Added this for you:");
         System.out.println(item.toString());
@@ -127,7 +127,7 @@ public class Babe {
      */
     private void addDeadline(String content, String date) {
         Deadline item = new Deadline(content, date);
-        this.memory[memoryCount++] = item;
+        this.memory.add(memoryCount++, item);
         Babe.drawLine();
         System.out.println("Got it, babe. Added this for you:");
         System.out.println(item.toString());
@@ -144,7 +144,7 @@ public class Babe {
      */
     private void addEvent(String content, String startDate, String endDate) {
         Event item = new Event(content, startDate, endDate);
-        this.memory[memoryCount++] = item;
+        this.memory.add(memoryCount++, item);
         Babe.drawLine();
         System.out.println("Got it, babe. Added this for you:");
         System.out.println(item.toString());
@@ -163,7 +163,7 @@ public class Babe {
         }
         for (int i = 0; i < this.memoryCount; i++) {
             System.out.printf("%d. ", i + 1);
-            System.out.println(memory[i].toString());
+            System.out.println(memory.get(i).toString());
         }
         Babe.drawLine();
     }
@@ -187,7 +187,7 @@ public class Babe {
     private void changeStatus(boolean toMark) {
         String userInputString = rebuildUserInput(1, userInputLen);
         int index = Integer.parseInt(userInputString);
-        Task itemAtIndex = memory[index - 1];
+        Task itemAtIndex = memory.get(index - 1);
         if (toMark) {
             itemAtIndex.mark();
         } else {
