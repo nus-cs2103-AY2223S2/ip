@@ -27,7 +27,8 @@ public class Duke {
         // parse user input
         Scanner scanner = new Scanner(System.in);
         String rawInput;
-        String[] arguments;
+        String[] rawSplit;
+        String[] arguments = {};
         String command;
         ArrayList<Task> list = new ArrayList<>();
 
@@ -35,19 +36,22 @@ public class Duke {
         while (true) {
             // scan for user input
             rawInput = scanner.nextLine();
-            arguments = rawInput.split(" ");
-            command = arguments[0];
+            rawSplit = rawInput.split(" ", 2);
+            command = rawSplit[0];
+            if (rawSplit.length > 1) {
+                arguments = rawSplit[1].split("\\/[a-zA-Z]+");
+            }
 
-            // parse cases
+            // parse commands with no arguments
             if (command.equals("bye")) {
                 // case: "bye"
-                // exit program
                 Duke.prettyPrint("Bye. Hope to see you again soon!");
                 break;
             } else if (command.equals("list")) {
                 // case: "list"
-                // construct string to be printed
-                StringBuilder sb = new StringBuilder();
+                StringBuilder sb = new StringBuilder(
+                    "Here are the tasks in your list:\n"
+                );
                 for (int i = 0; i < list.size(); i++) {
                     Task currentTask = list.get(i);
                     String s = String.format(
@@ -59,9 +63,11 @@ public class Duke {
                 }
                 // pprint string
                 Duke.prettyPrint(sb.toString());
-            } else if (command.equals("mark")) {
+            }
+            // parse commands with arguments
+            else if (command.equals("mark")) {
                 // case: "mark'
-                int index = Integer.parseInt(arguments[1]) - 1;
+                int index = Integer.parseInt(arguments[0]) - 1;
                 Task currentTask = list.get(index);
                 currentTask.markAsDone();
                 String s = String.format(
@@ -71,7 +77,7 @@ public class Duke {
                 Duke.prettyPrint(s);
             } else if (command.equals("unmark")) {
                 // case: "unmark'
-                int index = Integer.parseInt(arguments[1]) - 1;
+                int index = Integer.parseInt(arguments[0]) - 1;
                 Task currentTask = list.get(index);
                 currentTask.unmarkAsDone();
                 String s = String.format(
@@ -79,12 +85,20 @@ public class Duke {
                     currentTask.toString()
                 );
                 Duke.prettyPrint(s);
-            } else {
-                // case: everything else
-                // add item to list
-                Task currentTask = new Task(rawInput);
+            } else if (command.equals("todo")) {
+                // case: "todo"
+                Task currentTask = new ToDo(arguments[0]);
                 list.add(currentTask);
-                Duke.prettyPrint("added:" + rawInput);
+                String s = String.format(
+                    "Got it. I've added this task:\n%s\nNow you have %d tasks in the list.",
+                    currentTask.toString(),
+                    list.size()
+                );
+                Duke.prettyPrint(s);
+            } else {
+                Duke.prettyPrint(
+                    "Sorry, I didn't understand your command. Maybe try again?"
+                );
             }
         }
     }
