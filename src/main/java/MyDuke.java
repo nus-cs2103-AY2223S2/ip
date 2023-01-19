@@ -1,12 +1,10 @@
 import java.util.List;
 import java.util.Arrays;
 import java.util.ArrayList;
-import java.util.HashMap;
 
 public class MyDuke {
     private static ArrayList<Task> allTasks = new ArrayList<Task>();
     private static int taskCount = 0;
-    private static String reply = "|     ";
 
     public void init() {
         String logo = " ____        _        \n"
