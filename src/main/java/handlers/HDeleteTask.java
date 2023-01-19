@@ -14,6 +14,7 @@ public class HDeleteTask implements ICommand {
     public HDeleteTask(TaskStorage ts) {
         this.ts = ts;
     }
+
     @Override
     public void take(String s) {
         Matcher m = p.matcher(s);
@@ -26,7 +27,8 @@ public class HDeleteTask implements ICommand {
         } else {
             Task removed = ts.getTaskByNo(no);
             ts.deleteByNo(no);
-            System.out.printf("Noted. I've removed this task:\n%s\nNow you have %d task(s) in the list.\n", removed, ts.getTaskCount());
+            System.out.printf("Noted. I've removed this task:\n%s\nNow you have %d task(s) in the list.\n", removed,
+                    ts.getTaskCount());
         }
     }
 

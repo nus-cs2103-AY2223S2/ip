@@ -19,8 +19,8 @@ public final class CommandHelper {
     public static ICommand getObject(Class<ICommand> c) {
         try {
             return c.getConstructor().newInstance();
-        } catch (InvocationTargetException | IllegalAccessException | NoSuchMethodException |
-                 InstantiationException ignored) {
+        } catch (InvocationTargetException | IllegalAccessException | NoSuchMethodException
+                 | InstantiationException ignored) {
             return null;
         }
     }
@@ -35,6 +35,7 @@ public final class CommandHelper {
 
         return false;
     }
+
     public static boolean checkAndRun(ICommand c, String expr) {
         if (c.canTake(expr)) {
             c.take(expr);

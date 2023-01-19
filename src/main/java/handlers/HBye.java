@@ -4,7 +4,6 @@ import types.ICommand;
 
 import java.util.regex.Pattern;
 
-@SuppressWarnings("unused")
 public final class HBye implements ICommand {
     public static final Pattern p = Pattern.compile("bye");
     private static final String outputText = "Bye. Hope to see you again soon!";

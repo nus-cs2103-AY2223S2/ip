@@ -12,7 +12,7 @@ public abstract class Task {
     }
 
     public String getDoneMark() {
-        switch(status) {
+        switch (status) {
             case COMPLETED:
                 return "X";
             case INCOMPLETE:

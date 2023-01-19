@@ -6,6 +6,7 @@ import java.util.regex.Pattern;
 
 public class ETodoEmptyDescription implements ICommand {
     private final Pattern p = Pattern.compile("todo");
+
     @Override
     public void take(String s) {
         System.out.println("☹ OOPS!!! The description of a todo cannot be empty.");

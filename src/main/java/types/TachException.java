@@ -1,5 +1,5 @@
 package types;
 
-public class TachException extends Exception{
+public class TachException extends Exception {
 
 }

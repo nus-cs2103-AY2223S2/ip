@@ -1,6 +1,5 @@
 package handlers;
 
-
 import services.TaskStorage;
 import types.*;
 
@@ -42,7 +41,8 @@ public final class HAddTask implements ICommand {
             ts.addTask(t = Deadline.create(m.group(2), m.group(3)));
         }
 
-        System.out.printf("Got it. I've added this task:\n%s\nNow you have %d task(s) in the list.\n", t, ts.getTaskCount());
+        System.out.printf("Got it. I've added this task:\n%s\nNow you have %d task(s) in the list.\n", t,
+                ts.getTaskCount());
     }
 
     @Override

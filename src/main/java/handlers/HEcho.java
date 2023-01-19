@@ -2,7 +2,6 @@ package handlers;
 
 import types.ICommand;
 
-@SuppressWarnings("unused")
 public final class HEcho implements ICommand {
 
     @Override

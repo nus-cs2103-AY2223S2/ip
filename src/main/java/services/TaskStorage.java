@@ -22,7 +22,7 @@ public final class TaskStorage {
     }
 
     public void deleteByNo(int n) {
-        this.tasks.remove(n-1);
+        this.tasks.remove(n - 1);
     }
 
     public List<Task> getTasks() {
