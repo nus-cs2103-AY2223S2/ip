@@ -6,7 +6,6 @@ public class Duke {
         Tasks[] list = new Tasks[100];
         int counter = 0;
         System.out.println("Hello! I'm Duke\nWhat can I do for you?");
-        //DukeExceptions dukeExceptions = new DukeExceptions();
         while(true) {
             String command = input.nextLine();
             String stringArr[] = command.split(" ");
