@@ -15,9 +15,20 @@ public class Item {
         return this.done;
     }
 
+    public void markAsDone() {
+        this.done = true;
+    }
+
+    public void unmark() {
+        this.done = false;
+    }
+
     @Override
     public String toString() {
-        return this.name;
+        if (this.isDone()) {
+            return "[X] " + this.getName();
+        }
+        return "[ ] " + this.name;
     }
 
 

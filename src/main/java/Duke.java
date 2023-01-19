@@ -40,7 +40,18 @@ public class Duke {
         ItemList itemList = new ItemList();
         Scanner scanner = new Scanner(System.in);
         while (true) {
-            String input = scanner.nextLine();
+            String input = scanner.next();
+            if (input.equals("mark")) {
+                int itemNumber = scanner.nextInt() - 1;
+                itemList.mark(itemNumber);
+                continue;
+            }
+            if (input.equals("unmark")) {
+                int itemNumber = scanner.nextInt() - 1;
+                itemList.unmark(itemNumber);
+                continue;
+            }
+            input = input + scanner.nextLine();
             if (input.equals("bye")) {
                 System.out.println("DukeyList: " + BYE_MESSAGE);
                 break;
@@ -51,8 +62,9 @@ public class Duke {
                 continue;
             }
 
+
             itemList.addItem(new Item(input));
-            System.out.println("DukeyList just added: " + input);
+
 
         }
 
