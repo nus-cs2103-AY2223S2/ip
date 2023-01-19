@@ -17,7 +17,7 @@ public class Duke {
             if (input.equals("list")) {
                 int counter = 1;
                 for (Task task : list) {
-                    System.out.println(counter + ". " + "[" + task.getStatusIcon() + "] " + task.description);
+                    System.out.println(counter + ". " + task.toString());
                     counter++;
                 }
                 input = myObj.nextLine();
@@ -35,7 +35,7 @@ public class Duke {
                 } else {
                     Task t = list.get(indexInt);
                     t.markDone();
-                    System.out.println("Nice! I've marked this task as done:\n" + "[X] " + t.description);
+                    System.out.println("Nice! I've marked this task as done:\n" + t.toString());
                 }
                 input = myObj.nextLine();
 
@@ -51,7 +51,24 @@ public class Duke {
                 } else {
                     Task t = list.get(indexInt);
                     t.markUndone();
-                    System.out.println("OK, I've marked this task as not done yet:\n" + "[ ] " + t.description);
+                    System.out.println("OK, I've marked this task as not done yet:\n" + t.toString());
+                }
+                input = myObj.nextLine();
+
+                //delete
+            } else if (input.length() > 6 && input.substring(0, 6).equals("delete")) {
+                String indexString = input.substring(7);
+                int indexInt = Integer.parseInt(indexString) - 1;
+
+                //in case the Task index to mark exceeds current number of Tasks or neg number
+                if (indexInt + 1 > list.size() || indexInt < 0) {
+                    System.out.println("Task does not exist");
+                } else {
+                    String task = list.get(indexInt).toString();
+                    list.remove(indexInt);
+                    System.out.println("Noted. I've removed this task: \n"
+                            + task
+                            + "\nNow you have " + list.size() + " tasks in the list.");
                 }
                 input = myObj.nextLine();
 
@@ -89,11 +106,13 @@ public class Duke {
                             + t.toString()
                             + "\nNow you have " + list.size() + " tasks in the list.");
                 } else {
-                    Task t = new Task(input);
-                    list.add(t);
-                    System.out.println("Got it. I've added this task: \n"
-                            + t.toString()
-                            + "\nNow you have " + list.size() + " tasks in the list.");
+
+                    System.out.println("☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
+//                    Task t = new Task(input);
+//                    list.add(t);
+//                    System.out.println("Got it. I've added this task: \n"
+//                            + t.toString()
+//                            + "\nNow you have " + list.size() + " tasks in the list.");
                 }
 
                 input = myObj.nextLine();
