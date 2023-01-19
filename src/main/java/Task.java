@@ -1,7 +1,7 @@
 public class Task {
 
-    private String description;
-    private boolean done;
+    protected String description;
+    protected boolean done;
 
     public Task(String description) {
         this.description = description;
@@ -12,7 +12,12 @@ public class Task {
         return (done ? "X" : " "); // mark done task with X
     }
 
-    public String getDescription() {
+    public String getIcon() {
+        return "T";
+    }
+
+    @Override
+    public String toString() {
         return description;
     }
 
