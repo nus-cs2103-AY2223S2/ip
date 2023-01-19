@@ -5,3 +5,40 @@ Hello from
 | |_| | |_| |   <  __/
 |____/ \__,_|_|\_\___|
 
+Hi there!
+What can I do for you on this fine day :)?
+--------------------------------------------------
+--------------------------------------------------
+Added to list: [T][ ] borrow
+Now you've got 1 task(s) in your bag, CHOP CHOP GET THEM DONE.
+--------------------------------------------------
+--------------------------------------------------
+Added to list: [D][ ] return book  (by: Sunday)
+Now you've got 2 task(s) in your bag, CHOP CHOP GET THEM DONE.
+--------------------------------------------------
+--------------------------------------------------
+Added to list: [E][ ] project meeting  (from: Mon 2pm  to: 4PM)
+Now you've got 3 task(s) in your bag, CHOP CHOP GET THEM DONE.
+--------------------------------------------------
+--------------------------------------------------
+1. [T][ ] borrow
+2. [D][ ] return book  (by: Sunday)
+3. [E][ ] project meeting  (from: Mon 2pm  to: 4PM)
+--------------------------------------------------
+--------------------------------------------------
+WOW you got something done! A miracle!! I've marked this task as done now, ur wlcm :)
+[T][X] borrow
+--------------------------------------------------
+--------------------------------------------------
+WOW you got something done! A miracle!! I've marked this task as done now, ur wlcm :)
+[D][X] return book  (by: Sunday)
+--------------------------------------------------
+--------------------------------------------------
+Ugh fine, this task is now marked undone. >:/
+[T][ ] borrow
+--------------------------------------------------
+--------------------------------------------------
+1. [T][ ] borrow
+2. [D][X] return book  (by: Sunday)
+3. [E][ ] project meeting  (from: Mon 2pm  to: 4PM)
+--------------------------------------------------

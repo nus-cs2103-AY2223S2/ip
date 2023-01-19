@@ -48,7 +48,7 @@ public class Duke {
             divider();
             task = myScan.nextLine();
         }
-
+        myScan.close();
         exit();
     }
 
