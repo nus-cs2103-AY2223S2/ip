@@ -1,2 +1,6 @@
-package PACKAGE_NAME;public class ToDo {
+public class ToDo extends Task{
+
+    public ToDo(String task, String type) {
+        super(task, type);
+    }
 }

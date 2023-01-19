@@ -7,23 +7,24 @@ public class Joe {
         taskList = new TaskList();
     }
 
-    public static void sayBye() {
+    static void sayBye() {
         System.out.println("\tBye. Hope to see you again soon!");
         printNewLine();
         System.exit(0);
     }
-
-    public static void getResponse(Scanner sc){
+    static void getResponse(Scanner sc){
         String[] input = sc.nextLine().split(" ");
         int inputLength = input.length;
         printNewLine();
-        if (inputLength !=0 ) {
+        if (inputLength == 1 ) {
+            if (input[0].equals("list")) {
+                taskList.returnList();
+            } else if (input[0] == "bye") {
+                sayBye();
+            } else {
+            }
+        } else if (inputLength > 1) {
             switch (input[0]) {
-                case ("bye"):
-                    sayBye();
-                case ("list"):
-                    taskList.returnList();
-                    break;
                 case ("mark"):
                     taskList.mark(input[1]);
                     break;

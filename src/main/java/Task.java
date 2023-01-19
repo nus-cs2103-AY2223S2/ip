@@ -1,12 +1,18 @@
 public class Task {
-    private String name;
-    private boolean done;
-    private String type;
+    public String name;
+    public boolean done;
+    public String taskType;
 
     public Task(String task) {
         name = task;
         done = false;
-        type = "None";
+        taskType = "";
+    }
+
+    public Task(String task, String type) {
+        name = task;
+        done = false;
+        taskType = type;
     }
 
     void mark() {
@@ -17,7 +23,6 @@ public class Task {
         done = false;
     }
 
-    @Override
     public String toString() {
         String doneStatus;
         if (done) {
@@ -25,6 +30,10 @@ public class Task {
         } else {
             doneStatus = " ";
         }
-        return String.format("[%s] %s", doneStatus, name);
+        if (taskType == "") {
+            return String.format("[%s] %s", doneStatus, name);
+        } else {
+            return String.format("[%s][%s] %s", taskType, doneStatus, name);
+        }
     }
 }
