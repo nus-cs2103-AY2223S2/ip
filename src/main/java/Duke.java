@@ -3,7 +3,7 @@ import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Duke {
-    private final static String UNDERLINE = "_________________________________";
+    private final static String UNDERLINE = "________________________________________________________________";
     private static ArrayList<Task> list = new ArrayList<>();
 
     private final static String logo = " ____        _        \n"
@@ -40,6 +40,20 @@ public class Duke {
         System.out.printf("\tYou have %d tasks in the list.\n\n", list.size());
     }
 
+    public static void delete(String number) {
+
+            Task removed = list.get(Integer.parseInt(number.split(" ")[1]) - 1);
+            int nummbering = Integer.parseInt(number.split(" ")[1]) - 1;
+            list.remove(nummbering);
+            System.out.println(UNDERLINE);
+            System.out.println( "\tNoted. I've removed this task:");
+            System.out.println(String.format("\t%s removed", removed.toString()));
+            System.out.println("\tNow you have " + list.size()  + " tasks in the list.");
+
+
+        }
+
+
 
     public static void main(String[] args) {
         Scanner text = new Scanner(System.in);
@@ -51,36 +65,41 @@ public class Duke {
 
 
             while (true) {
+                String instct = text.nextLine();
+                String cmd = instct.split(" ")[0];
                 try {
                     try {
-                        String instct = text.nextLine();
-
-
                         if (instct.split(" ")[0].equals("list")) {
+                            System.out.println(UNDERLINE);
                             System.out.println("\t" + "Here are the tasks in your list:");
                             for (int i = 0; i < list.size(); i++) {
                                 System.out.println("\t" + (i + 1) + "." + list.get(i).toString());
                             }
                         } else if (instct.split(" ")[0].equals("mark")) {
                             int numbering = Integer.parseInt(instct.split(" ")[1]) - 1;
+                            System.out.println(UNDERLINE);
                             System.out.println("\t" + "Nice! I've marked this task as done:");
                             list.get(numbering).markDone();
                             System.out.println("\t" + list.get(numbering).toString());
                         } else if (instct.split(" ")[0].equals("unmark")) {
                             int numbering = Integer.parseInt(instct.split(" ")[1]) - 1;
+                            System.out.println(UNDERLINE);
                             System.out.println("\t" + "OK, I've marked this task as not done yet:");
                             list.get(numbering).markNotDone();
                             System.out.println("\t" + list.get(numbering).toString());
                         } else if (instct.split(" ")[0].equals("todo")) {
+                            System.out.println(UNDERLINE);
                             String description = instct.split(" ")[1];
                             addTodo(description);
 
                         } else if (instct.split(" ")[0].equals("deadline")) {
+                            System.out.println(UNDERLINE);
                             String description = instct.split(" ")[1];
                             String doneBy = instct.split(" /by ")[1];
                             addDeadline(description, doneBy);
 
                         } else if (instct.split(" ")[0].equals("event")) {
+                            System.out.println(UNDERLINE);
                             String description = instct.split(" ")[1];
                             String[] temp = instct.split("/from | /to ");
                             String from = temp[1];
@@ -88,10 +107,15 @@ public class Duke {
 
                             addEvents(description, from, to);
 
-                        } else if (instct.split(" ")[0].equals("bye")) {
+                        } else if (instct.split(" ")[0].equals("delete")) {
+
+                            delete(instct);
+
+                        }
+                        else if (instct.split(" ")[0].equals("bye")) {
                             System.out.println("Bye. Hope to see you again soon!\n");
                             break;
-                        } else {
+                        }  else {
                             throw new unknownCommandException();
 
                         }
@@ -99,7 +123,7 @@ public class Duke {
                         System.out.println((UNDERLINE));
                     }
                     catch(IndexOutOfBoundsException e){
-                        throw new emptyDescriptionException();
+                        throw new emptyDescriptionException(cmd);
                     }
                 }
                 catch (DukeException ex) {

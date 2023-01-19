@@ -28,6 +28,6 @@ public class Task {
 
     @Override
     public String toString(){
-        return this.getSymbol() +"\t"  + this.getDescription();
+        return this.getSymbol() +" "  + this.getDescription();
     }
 }
