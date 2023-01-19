@@ -1,12 +1,14 @@
-import java.sql.Array;
 import java.util.Scanner;
 import java.util.ArrayList;
 
+
 public class Duke {
 
-    public static void printList(ArrayList<String> stored) {
+    public static void printList(ArrayList<Task> stored) {
+        System.out.println("Here are the tasks in your list: ");
         for (int i = 0; i < stored.size(); i++) {
-            System.out.println((i+1) + ". " + stored.get(i));
+            Task task = stored.get(i);
+            System.out.println((i+1) + ". [" + task.getStatusIcon() + "] " + task.getDescription());
         }
     }
     public static void main(String[] args) {
@@ -20,11 +22,10 @@ public class Duke {
         System.out.println(separator);
         System.out.println("Hello! I'm Duke");
         System.out.println("What can I do for you?");
-        System.out.println("What can I do for you?");
         System.out.println(separator);
 
         Scanner scanner = new Scanner(System.in);
-        ArrayList<String> myList = new ArrayList<>();
+        ArrayList<Task> myTasks = new ArrayList<>();
         String input;
         while(true) {
             input = scanner.nextLine();
@@ -33,13 +34,31 @@ public class Duke {
                 System.out.println(separator);
                 break;
             } else if (input.equals("list")) {
-                printList(myList);
+                printList(myTasks);
                 System.out.println(separator);
+
+            } else if (input.startsWith("mark")) {
+                int taskNumber = Integer.parseInt(input.substring(5));
+                taskNumber--;
+                Task task = myTasks.get(taskNumber);
+                task.taskDone();
+                System.out.println("Nice! I've marked this task as done:");
+                System.out.println(" [" + task.getStatusIcon() + "] " + task.getDescription());
+
+            } else if (input.startsWith("unmark")) {
+                int taskNumber = Integer.parseInt(input.substring(7));
+                taskNumber--;
+                Task task = myTasks.get(taskNumber);
+                task.taskNotDone();
+                System.out.println("OK, I've marked this task as not done yet:");
+                System.out.println(" [" + task.getStatusIcon() + "] " + task.getDescription());
             } else {
-                myList.add(input);
-                System.out.println("added: " + input);
+                Task task = new Task(input);
+                myTasks.add(task);
+                System.out.println("added: " + task.getDescription());
                 System.out.println(separator);
             }
         }
     }
 }
+
