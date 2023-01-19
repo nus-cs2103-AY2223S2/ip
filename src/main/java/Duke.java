@@ -1,10 +1,33 @@
+import java.util.Scanner;
+
 public class Duke {
+    public static String[] phrases = {
+        "Hi I'm Duke.\nHow may I help?",
+        "Goodbye. Shutting down."
+    };
+
+    public static void chatbox(String text) {
+        System.out.println("____________________________________________________________");
+        System.out.println(text);
+        System.out.println("____________________________________________________________");
+    }
+
     public static void main(String[] args) {
-        String logo = " ____        _        \n"
-                + "|  _ \\ _   _| | _____ \n"
-                + "| | | | | | | |/ / _ \\\n"
-                + "| |_| | |_| |   <  __/\n"
-                + "|____/ \\__,_|_|\\_\\___|\n";
-        System.out.println("Hello from\n" + logo);
+        Scanner sc = new Scanner(System.in);
+        String input;
+
+        chatbox(phrases[0]);
+
+        boolean loop = true;
+        while (loop) {
+            input = sc.nextLine();
+            if (input.equals("bye")){
+                chatbox(phrases[1]);
+                break;
+            } else {
+                chatbox(input);
+            }
+
+        }
     }
 }
