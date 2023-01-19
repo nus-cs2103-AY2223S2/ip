@@ -113,6 +113,17 @@ public class Duke {
                     System.out.println("Bye. Hope to see you again soon!");
                     System.out.println("____________________________________________________________");
                     System.exit(0);
+                    break;
+                case "delete":
+                    int index = Integer.parseInt(String.valueOf(command.charAt(len-1)));
+                    Task removed = list.remove(index-1);
+                    counter--;
+                    System.out.println("____________________________________________________________");
+                    System.out.println("Noted. I've removed this task:");
+                    System.out.println(removed);
+                    System.out.println("Now you have " + counter + " tasks in the list.");
+                    System.out.println("____________________________________________________________");
+                    break;
                 default:
                     try {
                         throw new InvalidInputException("☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
