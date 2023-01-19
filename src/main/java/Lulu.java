@@ -24,15 +24,18 @@ public class Lulu {
     }
 
     public void add(String s) {
-        this.LIST[LIST_COUNTER] = new Task(s);
+        this.LIST[LIST_COUNTER] = Task.of(s);
         LIST_COUNTER++;
         System.out.println(LINE);
-        System.out.println("added: " + s);
+        System.out.println("Got it. I've added this task:");
+        System.out.println("  " + LIST[LIST_COUNTER-1]);
+        System.out.println("Now you have " + (LIST_COUNTER) + " tasks in the list.");
         System.out.println(LINE);
     }
 
     public void list() {
         System.out.println(LINE);
+        System.out.println("Here are the tasks in your list: ");
         for (int i = 0; i < LIST_COUNTER; i++) {
             System.out.print(i+1);
             System.out.println(". " + LIST[i]);
