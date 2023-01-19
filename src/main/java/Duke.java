@@ -28,6 +28,8 @@ public class Duke {
                     this.addDeadline(userInput);
                 } else if (userInput[0].equals("event")) {
                     this.addEvent(userInput);
+                } else if (userInput[0].equals("delete")) {
+                    this.deleteTask(userInput);
                 } else {
                     throw new DukeInvalidCommandException();
                 }
@@ -144,6 +146,24 @@ public class Duke {
     private void displayTasks() {
         int listSize = list.size();
         System.out.println(String.format("\tNow you have %d tasks in the list.", listSize));
+    }
+
+    private void deleteTask(String[] userInput) throws DukeTaskArgumentException, DukeMissingArgumentException, DukeInvalidArgumentsException{
+        try{
+            int taskIndex = Integer.parseInt(userInput[1]);
+            if(taskIndex > this.list.size()) {
+                throw new DukeTaskArgumentException();
+            }
+            System.out.println("\tNoted. I've removed this task:");
+            System.out.println("\t\t" + this.list.get(taskIndex - 1).toString());
+            this.list.remove(taskIndex - 1);
+            displayTasks();
+        } catch(IndexOutOfBoundsException e) {
+            String task = "delete";
+            throw new DukeMissingArgumentException(task);
+        } catch (NumberFormatException e) {
+            throw new DukeInvalidArgumentsException();
+        }
     }
 
     private void printLine() {
