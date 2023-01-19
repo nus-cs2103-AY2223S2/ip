@@ -36,6 +36,8 @@ public class Request {
                 return new EventParser().parse(this.requestContent);
             case "DELETE":
                 return new DeleteParser().parse(this.requestContent);
+            case "ON":
+                return new OnParser().parse(this.requestContent);
             default:
                 throw new UnknownCommandException();
         }

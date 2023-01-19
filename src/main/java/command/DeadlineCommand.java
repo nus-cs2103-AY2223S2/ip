@@ -3,16 +3,18 @@ package command;
 import storage.TaskList;
 import task.Deadline;
 
+import java.time.LocalDate;
+
 public class DeadlineCommand extends Command {
     private String task;
-    private String deadline;
+    private LocalDate deadline;
 
     /**
      * Constructor for a create deadline command.
      * @param task      task to be added
      * @param deadline  deadline for task
      */
-    public DeadlineCommand(String task, String deadline) {
+    public DeadlineCommand(String task, LocalDate deadline) {
         this.task = task;
         this.deadline = deadline;
     }

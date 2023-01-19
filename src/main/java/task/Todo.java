@@ -2,17 +2,12 @@ package task;
 
 public class Todo extends Task {
     public Todo(String task) {
-        this.task = task;
-        this.isCompleted = false;
+        super(task, false);
     }
 
     @Override
     public String toString() {
-        if (isCompleted) {
-            return "[T][X] " + this.task;
-        } else {
-            return "[T][ ] " + this.task;
-        }
+        return String.format("[T]%s %s", super.formattedStatus(), super.task);
     }
 
     @Override

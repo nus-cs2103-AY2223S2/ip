@@ -11,7 +11,8 @@ import java.util.Scanner;
 public class Duke {
     /**
      * Prints the formatted response in the console.
-     * @param response  the string to be printed
+     *
+     * @param response the string to be printed
      */
     private static void printFormattedResponse(String response) {
         final int INDENTS = 4;
@@ -22,14 +23,15 @@ public class Duke {
         String indentedResponse = " ".repeat(INDENTS)
                 + lineAddedResponse.replace("\n", "\n" + " ".repeat(INDENTS));
 
-        System.out.println(indentedResponse);;
+        System.out.println(indentedResponse);
+        ;
     }
 
     private static File linkLocalDriveOnStartup(String filepath) {
         if (filepath.trim().equals("")) {
             throw new InvalidArgumentException("Filepath cannot be empty.");
         }
-        File dataFile =  new File(filepath);
+        File dataFile = new File(filepath);
         dataFile.getParentFile().mkdirs();
 
         if (!dataFile.exists()) {
@@ -62,7 +64,7 @@ public class Duke {
 
         Scanner scanner = new Scanner(System.in);
         TaskList taskList = new TaskList(tasksFile);
-        while(true) {
+        while (true) {
             String request = scanner.nextLine();
             if (request.equalsIgnoreCase("BYE")) {
                 taskList.writeTasksToFile();
@@ -72,7 +74,7 @@ public class Duke {
                 Command command = new Request(request).parse();
                 String reply = command.run(taskList);
                 printFormattedResponse(reply);
-            } catch(DukeException error) {
+            } catch (DukeException error) {
                 printFormattedResponse(error.toString());
             }
         }
