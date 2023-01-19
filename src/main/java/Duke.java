@@ -27,25 +27,40 @@ public class Duke {
                     System.out.println((i+1) + "." + taskList.get(i));
                 }
                 System.out.println(INDENT_LINE);
-            } else if (task.substring(0, 4).equals("mark")) {
+            } else if (task.startsWith("mark")) {
                 int index = Integer.parseInt(task.substring(5)) - 1;
                 taskList.get(index).markAsDone();
                 System.out.println(INDENT_LINE);
                 System.out.println("Nice! I've marked this task as done:");
                 System.out.println((index+1) + "." + taskList.get(index));
                 System.out.println(INDENT_LINE);
-            } else if (task.substring(0, 6).equals("unmark")) {
+            } else if (task.startsWith("unmark")) {
                 int index = Integer.parseInt(task.substring(7)) - 1;
                 taskList.get(index).markAsUndone();
                 System.out.println(INDENT_LINE);
-                System.out.println("Nice! I've marked this task as not done yet:");
+                System.out.println("OK, I've marked this task as not done yet:");
                 System.out.println((index+1) + "." + taskList.get(index));
                 System.out.println(INDENT_LINE);
-            }
-            else {
-                taskList.add(new Task(task));
+            } else {
+                if (task.startsWith("todo")) {
+                    taskList.add(new Todo(task.substring(5)));
+                } else if (task.startsWith("deadline")) {
+                    String[] arr = task.split("/");
+                    String description = arr[0].substring(9);
+                    String by = arr[1].substring(3);
+                    taskList.add(new Deadline(description, by));
+                } else if (task.startsWith("event")) {
+                    String[] arr = task.split("/");
+                    String description = arr[0].substring(6);
+                    String from = arr[1].substring(5);
+                    String to = arr[2].substring(3);
+                    taskList.add(new Event(description, from, to));
+                }
+                int len = taskList.size();
                 System.out.println(INDENT_LINE);
-                System.out.println("added: " + task);
+                System.out.println("Got it. I've added this task:");
+                System.out.println(taskList.get(len - 1));
+                System.out.println("Now you have " + len + " tasks in the list.");
                 System.out.println(INDENT_LINE);
             }
         }
