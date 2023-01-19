@@ -30,7 +30,7 @@ public class Duke {
             } else {
                 output = "OK, I've marked this task as not done yet:\n";
             }
-            return output + curTask.toString();
+            return output + "  " + curTask.toString();
         }
     }
 
@@ -86,8 +86,22 @@ public class Duke {
             taskList.add(new Event(description, from, to));
         }
         int count = taskList.size();
-        response.append(taskList.get(count - 1).toString()).append("\n");
+        response.append("  ").append(taskList.get(count - 1).toString()).append("\n");
         response.append("Now you have ").append(count).append(" tasks in the list.");
+        return response.toString();
+    }
+
+    public static String deleteTask(String command) {
+        StringBuilder response = new StringBuilder();
+        int index = Integer.parseInt(command.substring(7)) - 1;
+        if (index < 0 || index >= taskList.size()) {
+            return "Error: Please input a valid task index!";
+        } else {
+            response.append("Noted. I've removed this task:\n");
+            response.append("  ").append(taskList.get(index).toString()).append("\n");
+            taskList.remove(index);
+            response.append("Now you have ").append(taskList.size()).append(" tasks in the list.");
+        }
         return response.toString();
     }
 
@@ -107,6 +121,8 @@ public class Duke {
                 reply(mark(toMark));
             } else if (currentInput.matches("^(todo|deadline|event) .*")) {
                 reply(addTask());
+            } else if (currentInput.matches("^delete \\d+")) {
+                reply(deleteTask(currentInput));
             } else {
                 reply("Unknown command, please try again");
             }
