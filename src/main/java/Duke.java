@@ -2,10 +2,10 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Scanner;
 public class Duke {
-    private static String DIV_OPEN = "____________________________________________________________\n";
-    private static String DIV_CLOSE = "____________________________________________________________\n";
+    private static final String DIV_OPEN = "____________________________________________________________\n";
+    private static final String DIV_CLOSE = "____________________________________________________________\n";
 
-    public static ArrayList<Task> list = new ArrayList<Task>();
+    public static ArrayList<Task> list = new ArrayList<>();
     public static int listNum = 1;
     public static boolean running = true;
 
@@ -67,14 +67,7 @@ public class Duke {
                 break;
 
             default:
-                /*
-                msg = sc.nextLine(); // read finish the task
-                Task task = new Task(msg);
-                list[listNum] = task;
-                System.out.println("added: " + msg);
-                listNum++;
-
-                 */
+                throw new DukeException("Invalid/Unknown command.");
         }
 
         System.out.println(DIV_CLOSE); // DIV_CLOSE for output
@@ -84,7 +77,7 @@ public class Duke {
     public static void printList() {
         System.out.println("Here are the tasks in your list:");
         for (int i = 1; i < listNum; i++) {
-            System.out.println(i + ". " + list[i]);
+            System.out.println(i + ". " + list.get(i));
         }
     }
 
@@ -94,8 +87,8 @@ public class Duke {
             if (num >= listNum || num <= 0) {
                 throw new DukeException("Task number is out of bounds!");
             }
-            list[num].markDone();
-            System.out.println("Nice! I've marked this task as done:\n  " + list[num]);
+            list.get(num).markDone();
+            System.out.println("Nice! I've marked this task as done:\n  " + list.get(num));
         } catch (NumberFormatException ex) {
             throw new DukeException("Invalid number");
         }
@@ -107,8 +100,8 @@ public class Duke {
             if (num >= listNum || num <= 0) {
                 throw new DukeException("Task number is out of bounds!");
             }
-            list[num].markUndone();
-            System.out.println("Ok, I've marked this task as not done yet:\n  " + list[num]);
+            list.get(num).markUndone();
+            System.out.println("Ok, I've marked this task as not done yet:\n  " + list.get(num));
         } catch (NumberFormatException ex) {
             throw new DukeException("Invalid number");
         }
@@ -121,8 +114,8 @@ public class Duke {
             taskName.append(" ").append(args[i]);
         }
         Todo todo = new Todo(taskName.toString());
-        list[listNum] = todo;
-        System.out.println("Got it. I've added this task:\n  " + list[listNum]);
+        list.add(todo);
+        System.out.println("Got it. I've added this task:\n  " + list.get(listNum));
         System.out.println("Now you have " + listNum + " tasks in the list.");
         listNum++;
     }
@@ -138,8 +131,8 @@ public class Duke {
             byWhen.append(" ").append(args[i]);
         }
         Deadline deadline = new Deadline(taskName.toString(), byWhen.toString());
-        list[listNum] = deadline;
-        System.out.println("Got it. I've added this task:\n  " + list[listNum]);
+        list.add(deadline);
+        System.out.println("Got it. I've added this task:\n  " + list.get(listNum));
         System.out.println("Now you have " + listNum + " tasks in the list.");
         listNum++;
     }
@@ -159,8 +152,8 @@ public class Duke {
             toWhen.append(" ").append(args[i]);
         }
         Event event = new Event(taskName.toString(), fromWhen.toString(), toWhen.toString());
-        list[listNum] = event;
-        System.out.println("Got it. I've added this task:\n  " + list[listNum]);
+        list.add(event);
+        System.out.println("Got it. I've added this task:\n  " + list.get(listNum));
         System.out.println("Now you have " + listNum + " tasks in the list.");
         listNum++;
     }
@@ -176,7 +169,7 @@ public class Duke {
         String greetings = "Hello! I'm Duke\n"
                 + "What can I do for you?\n";
 
-        list.add(new Task("DUMMY"));
+        list.add(new Task("DUMMY TASK"));
 
         System.out.println(DIV_OPEN + logo + greetings + DIV_CLOSE); // Initialization complete
 
@@ -198,9 +191,6 @@ public class Duke {
                 System.out.println(DIV_CLOSE);
             }
         }
-
-
-
 
         // End of program
         sc.close();
