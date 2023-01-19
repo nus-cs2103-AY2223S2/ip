@@ -34,12 +34,23 @@ public class Duke {
         return s.startsWith("event ");
     }
 
+    public void todoInputChecker(String input) throws DukeException {
+        String[] inputArray = input.split(" ", 2);
+        if (inputArray.length != 2) {
+            throw new DukeException("OOPS!!! The description of a todo cannot be empty.");
+        } else {
+            if (inputArray[1].trim().length() == 0) {
+                throw new DukeException("OOPS!!! The description of a todo cannot be empty.");
+            }
+        }
+    }
+
     public boolean addDeadlineCheck(String s) {
         return s.startsWith("deadline ");
     }
 
     public boolean addTodoCheck(String s) {
-        return s.startsWith("todo ");
+        return s.startsWith("todo");
     }
 
     public void printMessage(String s) {
@@ -112,26 +123,31 @@ public class Duke {
         boolean enteredBye = false;
         while (!enteredBye) {
             String input = sc.nextLine();
-            if (input.equals("bye")) {
-                enteredBye = true;
-            } else if (input.equals("list")) {
-                printList();
-            } else if (input.startsWith("mark ")) {
-                markTaskAsDone(Integer.parseInt(input.split(" ")[1]));
-            } else if (input.startsWith("unmark ")) {
-                markTaskAsNotDone(Integer.parseInt(input.split(" ")[1]));
-            } else if (addEventCheck(input)) { // check if input type is event
-                String[] eventConstructor = input.replace("event ", "").split("/");
-                String timeFromModified = eventConstructor[1].replace("from ", "");
-                String timeToModified = eventConstructor[2].replace("to ", "");
-                inputEvent(eventConstructor[0], timeFromModified, timeToModified);
-            } else if (addDeadlineCheck(input)) { // check if input type is deadline
-                String[] deadlineConstructor = input.replace("deadline ", "").split(" /by ");
-                inputDeadline(deadlineConstructor[0], deadlineConstructor[1]);
-            } else if (addTodoCheck(input)) { // check if input type is todo
-                inputTodo(input.replace("todo ", ""));
-            } else {
-                inputToTaskList(input);
+            try {
+                if (input.equals("bye")) {
+                    enteredBye = true;
+                } else if (input.equals("list")) {
+                    printList();
+                } else if (input.startsWith("mark ")) {
+                    markTaskAsDone(Integer.parseInt(input.split(" ")[1]));
+                } else if (input.startsWith("unmark ")) {
+                    markTaskAsNotDone(Integer.parseInt(input.split(" ")[1]));
+                } else if (addEventCheck(input)) { // check if input type is event
+                    String[] eventConstructor = input.replace("event ", "").split("/");
+                    String timeFromModified = eventConstructor[1].replace("from ", "");
+                    String timeToModified = eventConstructor[2].replace("to ", "");
+                    inputEvent(eventConstructor[0], timeFromModified, timeToModified);
+                } else if (addDeadlineCheck(input)) { // check if input type is deadline
+                    String[] deadlineConstructor = input.replace("deadline ", "").split(" /by ");
+                    inputDeadline(deadlineConstructor[0], deadlineConstructor[1]);
+                } else if (addTodoCheck(input)) { // check if input type is todo
+                    todoInputChecker(input);
+                    inputTodo(input.replace("todo ", ""));
+                } else {
+                    throw new DukeException("OOPS!!! I'm sorry, but I don't know what that means :-(");
+                }
+            } catch (DukeException e) {
+                printMessage(e.getMessage());
             }
         }
         goodbyeMessage();
