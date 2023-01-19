@@ -30,6 +30,8 @@ public class Alfred {
                     Alfred.markItem(lineArr[1]); // must be int catch error
                 } else if (command.equals("unmark") && lineArr.length == 2) {
                     Alfred.unmarkItem(lineArr[1]);
+                } else if (command.equals("delete") && lineArr.length == 2) {
+                    Alfred.deleteItem(lineArr[1]);
                 } else {
                     Alfred.addItem(commandLine);
                 }
@@ -114,24 +116,44 @@ public class Alfred {
             int index = Integer.parseInt(indexArg) - 1;
             Task task = itemsList.get(index);
             task.unmarkTask();
-            String command = "I have unmark this task.Remember to complete" +
+            String command = "I have un-mark this task.Remember to complete" +
                     "your task on time! \n";
             command += String.format("    %s", task);
             Alfred.echoCommand(command);
         } catch (NumberFormatException e) {
-            throw new AlfredException("To unmark item, you need to pass a valid integer!");
+            throw new AlfredException("To un-mark item, you need to pass a valid integer!");
+        } catch (IndexOutOfBoundsException e) {
+            throw new AlfredException(String.format("There are only %d pending tasks", itemsList.size()));
+        }
+    }
+    private static void deleteItem(String indexArg) throws AlfredException {
+        try {
+            int index = Integer.parseInt(indexArg) - 1;
+            Task task = itemsList.remove(index);
+            String command = "Noted. I've removed this task. Remember to clear your " +
+                    "remaining tasks!\n";
+            command += String.format("    %s", task);
+            Alfred.echoCommand(command);
+        } catch (NumberFormatException e) {
+            throw new AlfredException("To delete, item you need to pass a valid integer!");
         } catch (IndexOutOfBoundsException e) {
             throw new AlfredException(String.format("There are only %d pending tasks", itemsList.size()));
         }
     }
 
+
     private static void listItems() {
         int itemIndex = 1;
         StringBuilder command = new StringBuilder("Here are your pending tasks: \n");
+        if (itemsList.isEmpty()) {
+            Alfred.echoCommand("Woohoo! You have no pending tasks");
+            return;
+        }
         for (Task item : itemsList) {
             command.append(String.format("    %d. %s\n", itemIndex, item));
             itemIndex++;
         }
+        command.append(String.format("You have %d remaining tasks in the list", itemsList.size()));
         Alfred.echoCommand(command.toString());
     }
 
