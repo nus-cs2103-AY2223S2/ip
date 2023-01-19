@@ -3,8 +3,8 @@ import java.util.Scanner;
 import java.util.ArrayList;
 
 public class Miki {
-    private static class CmdTypeException extends Exception {
-        protected CmdTypeException(String message) {
+    private static class MikiArgsException extends Exception {
+        protected MikiArgsException(String message) {
             super(message);
         }
     }
@@ -20,6 +20,23 @@ public class Miki {
     private static void printAdded(Task t, int taskCount) {
         print("Added this thing! That makes " + taskCount + (taskCount == 1 ? " task" : " tasks") + ":");
         print("  " + t.toString());
+    }
+
+    private static int parseIndex(String[] args, int taskCount) throws MikiArgsException {
+        int idx;
+        if (args.length == 0) throw new MikiArgsException("you didn't specify which one?!");
+        try {
+            idx = Integer.parseInt(args[0]) - 1;
+        } catch (NumberFormatException ex) {
+            throw new MikiArgsException("\"" + args[0] + "\" isn't a real integer! There's no task #" + args[0] + "!");
+        }
+        if (idx < 0 || idx >= taskCount) {
+            String message = "There's no task #" + args[0] + "! ";
+            if (taskCount == 1) message += "There is currently 1 task...";
+            else message += "There are currently " + taskCount + " tasks...";
+            throw new MikiArgsException(message);
+        }
+        return idx;
     }
 
     public static void main(String[] args) {
@@ -66,26 +83,14 @@ public class Miki {
                         }
                         break;
                     case "mark": {
-                        int idx = Integer.parseInt(cmd_args[0]) - 1;
-                        if (idx < 0 || idx >= tasks.size()) {
-                            String message = "There's no task #" + cmd_args[0] + "! ";
-                            if (tasks.size() == 1) message += "There is currently 1 task...";
-                            else message += "There are currently " + tasks.size() + " tasks...";
-                            throw new ArrayIndexOutOfBoundsException(message);
-                        }
+                        int idx = parseIndex(cmd_args, tasks.size());
                         tasks.get(idx).mark();
                         print("Yay!! Task marked as done:");
                         print("  " + tasks.get(idx));
                         break;
                     }
                     case "unmark": {
-                        int idx = Integer.parseInt(cmd_args[0]) - 1;
-                        if (idx < 0 || idx >= tasks.size()) {
-                            String message = "There's no task #" + cmd_args[0] + "! ";
-                            if (tasks.size() == 1) message += "There is currently 1 task...";
-                            else message += "There are currently " + tasks.size() + " tasks...";
-                            throw new ArrayIndexOutOfBoundsException(message);
-                        }
+                        int idx = parseIndex(cmd_args, tasks.size());
                         tasks.get(idx).unmark();
                         print("okay...! task unmarked as undone:");
                         print("  " + tasks.get(idx));
@@ -109,10 +114,17 @@ public class Miki {
                         printAdded(newEvent, tasks.size());
                         break;
                     }
+                    case "delete": {
+                        int idx = parseIndex(cmd_args, tasks.size());
+                        Task delTask = tasks.remove(idx);
+                        print("hm hmm... task #" + (idx + 1) + " deleted! " + tasks.size() + (tasks.size() == 1 ? " task" : " tasks") + " left.");
+                        print("- " + delTask);
+                        break;
+                    }
                     default:
-                        throw new CmdTypeException("\"" + cmd + "\" isn't a real word!");
+                        throw new MikiArgsException("\"" + cmd + "\" isn't a real word!");
                 }
-            } catch (TaskParseException | CmdTypeException | ArrayIndexOutOfBoundsException ex) {
+            } catch (TaskParseException | MikiArgsException ex) {
                 print("?!?!? " + ex.getMessage());
             }
             printDiv();
