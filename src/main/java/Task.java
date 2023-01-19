@@ -1,6 +1,6 @@
-public class Task {
-    private boolean isDone = false;
-    private String taskDescription;
+public abstract class Task {
+    protected boolean isDone = false;
+    protected String taskDescription;
 
     public Task(String taskDescription) {
         this.taskDescription = taskDescription;

@@ -4,12 +4,11 @@ import java.util.Scanner;
 public class TreeBot {
     private static final String EXIT_TOKEN = "bye";
     private ArrayList<Task> tasks = new ArrayList<>();
+    private TaskFactory taskFactory = new TaskFactory();
     public void start() {
         greet();
         listen();
     }
-
-
     private void listen() {
         Scanner sc = new Scanner(System.in);
         while (true) {
@@ -26,12 +25,17 @@ public class TreeBot {
 
     }
     private void execute(String commandString) {
-        String[] splitStr = commandString.split("\\s+");
+        String[] splitStr = commandString.split("\\s+", 2);
         String command = splitStr[0];
 
         switch (command) {
             case "list":
                 listTasks();
+                break;
+            case "todo":
+            case "deadline":
+            case "event":
+                addTask(this.taskFactory.make(commandString));
                 break;
             case "mark":
                 markTask(Integer.parseInt(splitStr[1]));
@@ -40,7 +44,7 @@ public class TreeBot {
                 unmarkTask(Integer.parseInt(splitStr[1]));
                 break;
             default:
-                addTask(new Task(commandString));
+                return;
         }
     }
     private void addTask(Task task) {
