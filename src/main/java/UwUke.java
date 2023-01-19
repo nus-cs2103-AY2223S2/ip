@@ -1,5 +1,4 @@
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.Scanner;
 
 import input.Advisor;
@@ -14,7 +13,7 @@ import task.Deadline;
 import task.Event;
 import task.Todo;
 
-public class Duke {
+public class UwUke {
 
     private final static int CAPACITY = 100;
 
@@ -51,14 +50,15 @@ public class Duke {
     }
 
     public static void main(String[] args) {
-        Printer.printWelcome();
+        // Printer.printWelcome();
+        Printer.uwu();
         ArrayList<Task> tasks = new ArrayList<Task>(CAPACITY); 
         Scanner sc = new Scanner(System.in);
         String input = sc.nextLine();
         
         while (!input.equals("bye")) {
             try {
-                switch (Duke.getCommand(input)) {
+                switch (UwUke.getCommand(input)) {
                     case LIST:
                         Printer.printTasks(tasks);
                         break;
