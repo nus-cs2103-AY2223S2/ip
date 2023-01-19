@@ -43,9 +43,9 @@ public class Duke {
             } else if (instruction[0].equals("unmark")) { //unmarking
                 try {
                     if(instruction.length <= 1 )  {
-                        throw new ArgumentException("What are we marking again?");
+                        throw new ArgumentException("What are we unmarking again?");
                     } else if (! instruction[1].matches("[0-9]+")){
-                        throw new ArgumentException("What are we marking again?");
+                        throw new ArgumentException("What are we unmarking again?");
                     }
                     int index = Integer.parseInt(instruction[1]);
                     if ((index -1) < 0 || (index-1) >= toDo.numberOfTask()){
@@ -56,6 +56,8 @@ public class Duke {
                 } catch (ArgumentException ex) {
                     System.out.println(ex.getMessage());
                 }
+
+
 
 
             } else { // adding into list
@@ -128,6 +130,7 @@ public class Duke {
                             throw new ArgumentException("Cool event! Too bad I don't know what time it ends");
                         }
 
+                        System.out.println("Got it. I've added this task:");
                         toDo.addItemEvent("E", itemANDtime[0], itemANDtime[1], itemANDtime[2]);
                     }
 
