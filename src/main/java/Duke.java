@@ -16,7 +16,18 @@ public class Duke {
             if (input.equals("bye")) {
                 ui.showExitMessage();
                 return;
-            } else if (input.startsWith("todo")) {
+            } else if (input.startsWith("mark")) {
+                int id = Integer.parseInt(input.substring(5));
+                Task t = list.stream().filter(task -> task.id() == id).findFirst().get();
+                t.markCompleted();
+                ui.showMessage("Nice! I've marked this task as done: \n " + t.toString());
+            } else if (input.startsWith("unmark")) {
+                int id = Integer.parseInt(input.substring(7));
+                Task t = list.stream().filter(task -> task.id() == id).findFirst().get();
+                t.markPending();
+                ui.showMessage("Nice! I've marked this task as pending: \n " + t.toString());
+            }
+             else if (input.startsWith("todo")) {
                 String desc = input.substring(5);
                 Task t = new Todo(list.nextId(), desc);
                 list.add(t);

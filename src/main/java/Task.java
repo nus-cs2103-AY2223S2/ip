@@ -15,6 +15,10 @@ public abstract class Task {
         status = TaskStatus.Completed;
     }
 
+    public void markPending() {
+        status = TaskStatus.Pending;
+    }
+
     public int id() {
         return this.id;
     }

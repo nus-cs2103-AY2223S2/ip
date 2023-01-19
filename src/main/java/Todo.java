@@ -12,6 +12,7 @@ public class Todo extends Task {
 
     @Override
     public String toString() {
-        return String.format("[T] %s", description());
+        String isDone = isCompleted() ? "X" : " ";
+        return String.format("[T][%s] %s", isDone, description());
     }
 }
