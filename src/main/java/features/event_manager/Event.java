@@ -1,8 +1,6 @@
 package features.event_manager;
-
 import utils.Pair;
 import utils.TokenUtilities;
-
 import java.util.Map;
 import java.util.Set;
 

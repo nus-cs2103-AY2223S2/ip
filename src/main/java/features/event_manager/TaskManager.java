@@ -1,13 +1,7 @@
 package features.event_manager;
-
-
 import event_loop.*;
-
 import java.util.ArrayList;
-import java.util.Map;
-import java.util.Set;
 import java.util.function.Function;
-import java.util.function.Supplier;
 
 /**
  * A class for managing tasks.
