@@ -19,6 +19,9 @@ public class Jarvis {
         this.taskList = new TaskList(storage.readTasks());
     }
 
+    /**
+     * Runs Jarvis.
+     */
     public void run() {
         this.ui.printLogo();
         this.ui.printStandard(Ui.Response.INTRO);

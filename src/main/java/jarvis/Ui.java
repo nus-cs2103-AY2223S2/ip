@@ -18,6 +18,10 @@ public class Ui {
 
     private final String name;
 
+    /**
+     * Constructor for the Ui class.
+     * @param name Name of the bot.
+     */
     public Ui(String name) {
         this.name = name;
     }
@@ -73,10 +77,16 @@ public class Ui {
         print(String.format("I've a problem! %s", message));
     }
 
+    /**
+     * Prints an arrow to prompt for user input.
+     */
     public void printUserPrompt() {
         System.out.print("> ");
     }
 
+    /**
+     * Prints the bot logo.
+     */
     public void printLogo() {
         System.out.println(LOGO);
     }

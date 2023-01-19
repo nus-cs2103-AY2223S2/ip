@@ -47,34 +47,63 @@ public abstract class Command {
         }
     }
 
+    /**
+     * Executes the command.
+     * @param ui Ui object.
+     * @param taskList TaskList object.
+     * @param storage Storage object.
+     */
     public abstract void execute(Ui ui, TaskList taskList, Storage storage);
 
     private final Action action;
     private final String body;
     private final List<Command> subCommands;
 
+    /**
+     * Constructor for a command.
+     * @param action Determines the nature of the command.
+     * @param body Supplementary information for the command.
+     * @param subCommands Secondary commands as additional parameters.
+     */
     public Command(Action action, String body, List<Command> subCommands) {
         this.action = action;
         this.body = body;
         this.subCommands = subCommands;
     }
 
+    /**
+     * @return Whether the command should exit the bot.
+     */
     public boolean isExit() {
         return false;
     }
 
+    /**
+     * @return The body of the command, if any.
+     */
     public String getBody() {
         return this.body;
     }
 
+    /**
+     * @return The secondary commands, if any.
+     */
     public List<Command> getSubCommands() {
         return this.subCommands;
     }
 
+    /**
+     * @param action Action to check against.
+     * @return Whether this command is of the given action's nature.
+     */
     public boolean hasAction(Action action) {
         return this.action == action;
     }
 
+    /**
+     * @param actions Actions to check against.
+     * @return Whether this command is of any of the given actions' natures.
+     */
     public boolean hasAction(Action ...actions) {
         for (Action action : actions) {
             if (this.action == action) return true;
