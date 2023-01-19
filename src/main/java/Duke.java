@@ -21,9 +21,15 @@ public class Duke {
             String rawInput = scanner.nextLine();
             String[] input = rawInput.trim().split(" ", 2);
             String command = input[0].toLowerCase();
+            String arguments;
+            try {
+                arguments = input[1];
+            } catch (ArrayIndexOutOfBoundsException e) {
+                arguments = "";
+            }
             switch (command) {
                 case "echo": {
-                    Command echo = new Echo(input[1]);
+                    Command echo = new Echo(arguments);
                     System.out.println(line);
                     System.out.println(echo.execute());
                     System.out.println(line);
@@ -37,7 +43,7 @@ public class Duke {
                     break;
                 }
                 case "mark": {
-                    int index = Integer.parseInt(input[1]) - 1;
+                    int index = Integer.parseInt(arguments) - 1;
                     Command mark = new Mark(tasks.get(index));
                     System.out.println(line);
                     System.out.println(mark.execute());
@@ -47,25 +53,32 @@ public class Duke {
                 // honestly creation of task objects here should be handled by the task objects
                 // change later
                 case "todo": {
-                    Command addTask = new AddTask(new Todo(input[1]), tasks);
+                    Command addTask = new AddTask(new Todo(arguments), tasks);
                     System.out.println(line);
                     System.out.println(addTask.execute());
                     System.out.println(line);
                     break;
                 }
                 case "deadline": {
-                    String[] arguments = input[1].split(" ", 2);
-                    Command addTask = new AddTask(new Deadline(arguments), tasks);
+                    String[] argumentsSplit = input[1].split(" ", 2);
+                    Command addTask = new AddTask(new Deadline(argumentsSplit), tasks);
                     System.out.println(line);
                     System.out.println(addTask.execute());
                     System.out.println(line);
                     break;
                 }
                 case "event": {
-                    String[] arguments = input[1].split(" ", 3);
-                    Command addTask = new AddTask(new Event(arguments), tasks);
+                    String[] argumentsSplit = input[1].split(" ", 3);
+                    Command addTask = new AddTask(new Event(argumentsSplit), tasks);
                     System.out.println(line);
                     System.out.println(addTask.execute());
+                    System.out.println(line);
+                    break;
+                }
+                case "delete": {
+                    Command deleteTask = new DeleteTask(Integer.parseInt(arguments), tasks);
+                    System.out.println(line);
+                    System.out.println(deleteTask.execute());
                     System.out.println(line);
                     break;
                 }

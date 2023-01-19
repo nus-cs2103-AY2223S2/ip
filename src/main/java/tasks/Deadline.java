@@ -3,9 +3,10 @@ package tasks;
 public class Deadline extends Task{
     protected String deadline;
 
-    public Deadline(String[] args){
-        super(args[0]);
-        this.deadline = args[1];
+    public Deadline(String[] rawargs){
+//        String[] args = rawargs.split(" ", 2);
+        super(rawargs[0]);
+        this.deadline = rawargs[1];
     }
 
     @Override
