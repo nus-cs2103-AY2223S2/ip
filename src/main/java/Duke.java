@@ -7,6 +7,7 @@ public class Duke {
 
     private static void PixlPrint(String text) {
         System.out.println(Values.PURPLE + "PixlBot: " + Values.RESET + text);
+//        System.out.println("Pixlbot: " + text);
         System.out.println(Values.HLINE);
     }
 
