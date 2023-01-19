@@ -15,10 +15,10 @@ public class Duke {
             System.out.print("You: ");
             input = scanner.nextLine();
             if (input.equals("bye")) {
-                System.out.println("Bye bye UwU!            - UwU_TaskMaster ＵｗＵ");
+                System.out.println("UwU_TaskMaster ＵｗＵ: Bye bye... UwU");
                 break;
             }
-            System.out.println("\n" + input + "            - UwU_TaskMaster ＵｗＵ");
+            System.out.println("\nUwU_TaskMaster ＵｗＵ: " + input);
             System.out.println("__________________________________________");
         }
         scanner.close();
