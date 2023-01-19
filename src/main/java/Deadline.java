@@ -10,9 +10,9 @@ public class Deadline extends Task{
         this(description, false, "D", deadline);
     }
 
-    public Task markTask() throws MarkingException {
+    public Task markTask() throws DukeException {
         if (super.done) {
-            throw new MarkingException();
+            throw new DukeException("This task is already marked!");
         }
         System.out.println("Nice! I've marked this task as done:");
         Task markedTask = new Deadline(super.description, true, super.taskType, this.deadline);
@@ -20,9 +20,9 @@ public class Deadline extends Task{
         return markedTask;
     }
 
-    public Task unmarkTask() throws UnmarkingException {
+    public Task unmarkTask() throws DukeException {
         if (!super.done) {
-            throw new UnmarkingException();
+            throw new DukeException("This task is already unmarked!");
         }
         System.out.println("Ok, I've marked this task as not done yet:");
         Task unmarkedTask = new Deadline(super.description, false, super.taskType, this.deadline);

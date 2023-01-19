@@ -8,9 +8,9 @@ public class Todo extends Task {
         this(description, false, "T");
     }
 
-    public Task markTask() throws MarkingException {
+    public Task markTask() throws DukeException {
         if (super.done) {
-            throw new MarkingException();
+            throw new DukeException("This task is already marked!");
         }
         System.out.println("Nice! I've marked this task as done:");
         Task markedTask = new Todo(super.description, true, super.taskType);
@@ -18,9 +18,9 @@ public class Todo extends Task {
         return markedTask;
     }
 
-    public Task unmarkTask() throws UnmarkingException {
+    public Task unmarkTask() throws DukeException {
         if (!super.done) {
-            throw new UnmarkingException();
+            throw new DukeException("This task is already unmarked!");
         }
         System.out.println("Ok, I've marked this task as not done yet:");
         Task unmarkedTask = new Todo(this.description, false, super.taskType);
