@@ -11,7 +11,7 @@ public class Duke {
 
         greet();
 
-        UserList tasks = new UserList();
+        Tasks tasks = new Tasks();
         Scanner myScan = new Scanner(System.in);
         String task = myScan.nextLine();
 
@@ -20,9 +20,25 @@ public class Duke {
                 divider();
                 tasks.printList();
                 divider();
-            } else {
+            }
+
+            else if (task.split(" ")[0].equalsIgnoreCase("mark")) {
+                int taskNum = Integer.parseInt(task.split(" ")[1]) - 1;
                 divider();
-                tasks.addToList(task);
+                tasks.markTaskDone(taskNum);
+                divider();
+            }
+
+            else if (task.split(" ")[0].equalsIgnoreCase("unmark")) {
+                int taskNum = Integer.parseInt(task.split(" ")[1]) - 1;
+                divider();
+                tasks.markTaskUndone(taskNum);
+                divider();
+            }
+
+            else {
+                divider();
+                tasks.addToList(new Task(task));
                 divider();
             }
             task = myScan.nextLine();
