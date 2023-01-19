@@ -26,8 +26,10 @@ public class Leo {
         sc.close();
     }
 
-    private void addTask(String taskName) {
-        taskList.add(new Task(taskName));
+    private void addTask(String taskName, char type) {
+        taskList.add(Task.createTask(taskName, type));
+        System.out.printf("added: %s\n", taskName);
+        System.out.printf("You have %d tasks in your list, vamos, get moving!\n", taskList.size());
     }
 
     private void processRequest(String cmd) {
@@ -42,7 +44,7 @@ public class Leo {
             if (taskList.isEmpty()) {
                 System.out.println("You have no tasks to do!");
             } else {
-                System.out.println("Here are your tasks, vamos!");
+                System.out.println("Here are your tasks you legend: ");
                 for (int i = 0; i < taskList.size(); i++) {
                     System.out.printf("%d) %s\n", i + 1, taskList.get(i));
                 }
@@ -63,8 +65,21 @@ public class Leo {
                 System.out.printf("  %s\n", taskList.get(cmdIdx));
             }
         } else {
-            addTask(cmd);
-            System.out.printf("added: %s\n", cmd);
+            char cmdlet = cmd.toLowerCase().charAt(0);
+            switch (cmdlet) {
+                case 't':
+                    addTask(cmd, 't');
+                    break;
+                case 'd':
+                    addTask(cmd, 'd');
+                    break;
+                case 'e':
+                    addTask(cmd, 'e');
+                    break;
+                default:
+                    System.out.println("I'm sorry, I don't know what you want. ¿Que miras bobo?");
+                    break;
+            }
         }
         for (int i = 0; i < 25; i++) {
             System.out.print("*");
@@ -76,9 +91,17 @@ public class Leo {
 class Task {
     private String taskName;
     private boolean isDone = false;
+    private char type;
 
-    public Task(String taskName) {
+    private Task(String taskName, char type) {
         this.taskName = taskName;
+        this.type = type;
+    }
+
+    public static Task createTask(String taskName, char type) {
+        return type == 'D' ? new Deadline(taskName.substring(8), 'D', taskName.split("/")[1])
+                : type == 'E' ? new Event(taskName.substring(6), 'E', taskName.split("/")[1], taskName.split("/")[2])
+                        : new Todo(taskName.substring(5), 'T');
     }
 
     public void setDone() {
@@ -93,7 +116,49 @@ class Task {
         return isDone ? 'X' : ' ';
     }
 
-    public String toString() {
-        return String.format("[%c] %s", getDone(), taskName);
+    public char getType() {
+        return type;
     }
+
+    @Override
+    public String toString() {
+        return String.format("[%c][%c] %s", getType(), getDone(), taskName);
+    }
+
+    private static class Todo extends Task {
+        public Todo(String taskName, char type) {
+            super(taskName, type);
+        }
+    }
+
+    private static class Deadline extends Task {
+        String by;
+
+        public Deadline(String taskName, char type, String by) {
+            super(taskName, type);
+            this.by = by.substring(3);
+        }
+
+        @Override
+        public String toString() {
+            return String.format("%s (by: %s)", super.toString(), this.by);
+        }
+    }
+
+    private static class Event extends Task {
+        String from;
+        String to;
+
+        public Event(String taskName, char type, String from, String to) {
+            super(taskName, type);
+            this.from = from.substring(5);
+            this.to = to.substring(3);
+        }
+
+        @Override
+        public String toString() {
+            return String.format("%s (from: %s, to:)", super.toString(), this.from, this.to);
+        }
+    }
+
 }
