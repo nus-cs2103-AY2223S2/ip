@@ -9,7 +9,8 @@ import java.util.regex.Pattern;
 
 public class Parser {
     private static final Pattern VALID_COMMAND =
-            Pattern.compile("^(?<cmd>list|bye|mark|date|unmark|delete|todo|deadline|event)(?<arguments>.*)?");
+            Pattern.compile("^(?<cmd>list|bye|mark|date|unmark|delete|todo|deadline|event)(?<arguments>.*)?",
+                    Pattern.CASE_INSENSITIVE);
     private static final Command invalidCommand =  new Command(CommandType.INVALID) {
         @Override
         public void execute() throws DukeException {
