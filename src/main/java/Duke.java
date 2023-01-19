@@ -17,42 +17,40 @@ public class Duke {
         String userInput = null;
         while(!(userInput = scan.nextLine()).equals("bye")) {
             String[] splitCheck = userInput.split(" ", 2);
-            String message = "";
+
             try {
-                if (userInput.equals("list")) {
-                    listTask();
+                switch(Command.valueOf(splitCheck[0].toUpperCase())) {
+                    case LIST:
+                        listTask();
+                        break;
+                    case MARK:
+                        mark(splitCheck);
+                        break;
+                    case UNMARK:
+                        unmark(splitCheck);
+                        break;
+                    case DELETE:
+                        delete(splitCheck);
+                        break;
+                    case TODO:
+                        todo(splitCheck);
+                        break;
+                    case DEADLINE:
+                        deadline(splitCheck);
+                        break;
+                    case EVENT:
+                        event(splitCheck);
+                        break;
+                    default:
+                        throw new DukeException(" ☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
+                } //end of switch-case
 
-
-                } else if (splitCheck[0].equals("mark")) {
-                    mark(splitCheck);
-
-
-                } else if (splitCheck[0].equals("unmark")) {
-                    unmark(splitCheck);
-
-
-                } else if (splitCheck[0].equals("delete")) {
-                    delete(splitCheck);
-
-                } else if (splitCheck[0].equals("todo")) {
-                    todo(splitCheck);
-
-
-                } else if (splitCheck[0].equals("deadline")) {
-                    deadline(splitCheck);
-
-                } else if (splitCheck[0].equals("event")) {
-                    event(splitCheck);
-
-                } else {
-                    throw new DukeException(" ☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
-
-                }
-//                dukeSpeak(message);
             } catch (DukeException de) {
                 dukeSpeak(de.getMessage());
+            } catch (IllegalArgumentException illegalArg) {
+                dukeSpeak(" ☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
             }
-        }
+        } // end of while-loop
 
         dukeSpeak("Bye. Hope to see you again soon!");
 
