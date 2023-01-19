@@ -1,7 +1,6 @@
 package output;
 
 import java.util.ArrayList;
-import java.util.Collection;
 
 import task.Task;
 
@@ -60,6 +59,14 @@ public class Printer {
     public static void printError(String errorMessage) {
         System.err.println(errorMessage);
         System.err.println("Please try again.");
+    }
+
+    public static void printDeleteConfirmation(Task task, int numTasksAfterDelete) {
+        String grammar = numTasksAfterDelete == 1 ? "task" : "tasks";
+        String s = String.format("Noted. I've removed this task:\n  %s\nNow you have %d %s in the list.", 
+                                 task.toString(), 
+                                 numTasksAfterDelete, 
+                                 grammar);        
     }
     
 }

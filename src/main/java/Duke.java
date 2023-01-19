@@ -18,7 +18,7 @@ public class Duke {
 
     private final static int CAPACITY = 100;
 
-    private static boolean isValidMark(ArrayList<Task> tasks, int index) {
+    private static boolean isValidIndex(ArrayList<Task> tasks, int index) {
         if (index < 0 || index >= tasks.size()) {
             Printer.printWithDecorations("Index out of bounds!");
             return false;
@@ -43,6 +43,8 @@ public class Duke {
             return Command.EVENT;
         } else if (input.matches("^todo\\s.+$")) {
             return Command.TODO;
+        } else if (input.matches("^delete\\s\\d+$")) {
+            return Command.DELETE;
         } else {
             return Command.UNKNOWN;
         }
@@ -50,7 +52,7 @@ public class Duke {
 
     public static void main(String[] args) {
         Printer.printWelcome();
-        ArrayList<Task> tasks = new ArrayList<Task>(100); 
+        ArrayList<Task> tasks = new ArrayList<Task>(CAPACITY); 
         Scanner sc = new Scanner(System.in);
         String input = sc.nextLine();
         
@@ -94,14 +96,24 @@ public class Duke {
                         break;
                     case MARK:
                         int markIndex = Parser.parseMark(input);
-                        if (isValidMark(tasks, markIndex)) // Note that this check also prints out error messages if any
+                        if (isValidIndex(tasks, markIndex)) // Note that this check also prints out error messages if any
                             Printer.printWithDecorations(tasks.get(markIndex).markDone());
                         break;
                     case UNMARK:
                         int unmarkIndex = Parser.parseUnmark(input);
-                        if (isValidMark(tasks, unmarkIndex)) // Note that this check also prints out error messages if any
+                        if (isValidIndex(tasks, unmarkIndex)) // Note that this check also prints out error messages if any
                             Printer.printWithDecorations(tasks.get(unmarkIndex).unmarkDone());
                         break;
+                    case DELETE:
+                        int deleteIndex = Parser.parseDelete(input);
+                        if (isValidIndex(tasks, deleteIndex)) {
+                            Task removedTask = tasks.get(deleteIndex);
+                            tasks.remove(deleteIndex);
+                            Printer.printDeleteConfirmation(removedTask, tasks.size());
+                        }
+
+                        break;
+
                     default:
                         Printer.printWithDecorations(Advisor.advise(input));
                 }
@@ -116,7 +128,6 @@ public class Duke {
             } catch (Exception e) {
                 input = "";
             }
-
         }
         sc.close();
         Printer.printBye();

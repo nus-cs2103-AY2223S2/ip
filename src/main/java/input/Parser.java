@@ -68,4 +68,15 @@ public class Parser {
             throw new DukeException("Unexpected error occured");
         }
     }
+
+    public static int parseDelete(String input) throws DukeException {
+        try {
+            int deleteIndex = Integer.valueOf(input.substring(7)) - 1;
+            return deleteIndex;
+        } catch (IndexOutOfBoundsException e) {
+            throw new DukeException("Unexpected input format, could not parse unmark properly.");
+        } catch (Exception e) {
+            throw new DukeException("Unexpected error occured");
+        }
+    }
 }
