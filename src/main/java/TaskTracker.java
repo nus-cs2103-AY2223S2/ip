@@ -33,6 +33,12 @@ public class TaskTracker {
         return t;
     }
 
+    public Task DeleteTask(int index) throws TaskNotFoundException {
+        Task toDelete = GetTask(index);
+        tasks.remove(index);
+        return toDelete;
+    }
+
     public Task MarkTask(int index) throws TaskNotFoundException {
         return MarkUnmarkTask(index, true);
     }

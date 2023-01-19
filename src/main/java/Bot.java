@@ -6,6 +6,7 @@ public class Bot {
     private static final String LIST_QUERY_TYPE = "list";
     private static final String MARK_QUERY_TYPE = "mark";
     private static final String UNMARK_QUERY_TYPE = "unmark";
+    private static final String DELETE_QUERY_TYPE = "delete";
     private static final String TODO_QUERY_TYPE = "todo";
     private static final String DEADLINE_QUERY_TYPE = "deadline";
     private static final String EVENT_QUERY_TYPE = "event";
@@ -50,6 +51,8 @@ public class Bot {
                 return new MarkQueryHandler(tt);
             case UNMARK_QUERY_TYPE:
                 return new UnmarkQueryHandler(tt);
+            case DELETE_QUERY_TYPE:
+                return new DeleteQueryHandler(tt);
             case BYE_QUERY_TYPE:
                 return new SimpleResponseQueryHandler(GOODBYE_RES);
             default:
