@@ -3,12 +3,18 @@ todo test
 todo     test
 mark
 mark 7
+mark 4  6
+mark abc
 mark 1
 unmark
 unmark 2
+unmark 5    4
+unmark ab
 unmark 1
 delete
 delete 6
+delete 6    4
+delete hf
 delete 1
 list
 deadline
