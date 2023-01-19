@@ -1,8 +1,12 @@
 import java.util.ArrayList;
 import java.util.Scanner;
 import task.Task;
+import task.ToDo;
+import task.Deadline;
+import task.Event;
 
 public class Duke {
+    private static ArrayList<Task> tasks = new ArrayList<>();
     /**
      * Prints a line 4 spaces away from the left edge of the screen to visually
      * separate Duke's replies from user input.
@@ -22,6 +26,15 @@ public class Duke {
     }
 
     /**
+     *
+     */
+    private static void confirmAddition(Task t) {
+        System.out.printf("    %s%n", "Got it. I've added this task:");
+        System.out.printf("    %s%n", t.toString());
+        System.out.printf("    %s%d%s%n", "Now you have ", tasks.size(), " tasks in the list.");
+    }
+
+    /**
      * Replies to user inputs according to requirements.
      * If user inputs "bye", return to exit Duke.
      * If user inputs "list", print current tasks.
@@ -30,7 +43,6 @@ public class Duke {
      */
     public static void echo() {
         Scanner sc = new Scanner(System.in);
-        ArrayList<Task> tasks = new ArrayList<>();
         String input = sc.nextLine();
         while (!input.equals("bye")) {
             printLine();
@@ -38,13 +50,12 @@ public class Duke {
             if (input.equals("list")) {
                 System.out.printf("    %s%n", "Here are the tasks in your list:");
                 for (int i = 0; i < tasks.size(); i++) {
-                    System.out.printf("    %d.[%s] %s%n",
+                    System.out.printf("    %d.%s%n",
                             i + 1,
-                            tasks.get(i).getStatusIcon(),
-                            tasks.get(i).getDescription());
+                            tasks.get(i).toString());
                 }
             } else {
-                String command = input.split(" ")[0];
+                String command = (input.split(" ")[0]).toLowerCase();
                 if (command.equals("mark") || command.equals(("unmark"))) {
                     int taskNumber;
                     try {
@@ -52,22 +63,48 @@ public class Duke {
                         if (command.equals("mark")) {
                             tasks.get(taskNumber - 1).markAsDone();
                             System.out.printf("    %s%n", "Nice! I've marked this task as done:");
-                            System.out.printf("       [%s] %s%n",
-                                    tasks.get(taskNumber - 1).getStatusIcon(),
-                                    tasks.get(taskNumber - 1).getDescription());
+                            System.out.printf("       %s%n",
+                                    tasks.get(taskNumber - 1).toString());
                         } else {
                             tasks.get(taskNumber - 1).markAsNotDone();
                             System.out.printf("    %s%n", "OK, I've marked this task as not done yet:");
-                            System.out.printf("       [%s] %s%n",
-                                    tasks.get(taskNumber - 1).getStatusIcon(),
-                                    tasks.get(taskNumber - 1).getDescription());
+                            System.out.printf("       %s%n",
+                                    tasks.get(taskNumber - 1).toString());
                         }
                     } catch (NumberFormatException|IndexOutOfBoundsException e) {
                         System.out.printf("    %s%n", "Please input valid task number.");
                     }
                 } else {
-                    tasks.add(new Task(input));
-                    System.out.printf("    added: %s%n", input);
+                    String description, by, from, to;
+                    Task t;
+                    switch (command) {
+                        case "todo":
+                            description = input.substring(5);
+                            t = new ToDo(description);
+                            tasks.add(t);
+                            confirmAddition(t);
+                            break;
+                        case "deadline":
+                            int byIndex = input.indexOf("/by");
+                            description = input.substring(9, byIndex - 1);
+                            by = input.substring(byIndex + 4);
+                            t = new Deadline(description, by);
+                            tasks.add(t);
+                            confirmAddition(t);
+                            break;
+                        case "event":
+                            int fromIndex = input.indexOf("/from");
+                            int toIndex = input.indexOf("/to");
+                            description = input.substring(6, fromIndex - 1);
+                            from = input.substring(fromIndex + 6, toIndex - 1);
+                            to = input.substring(toIndex + 4);
+                            t = new Event(description, from, to);
+                            tasks.add(t);
+                            confirmAddition(t);
+                            break;
+                        default:
+                            System.out.printf("    %s%n", "Please input valid task type.");
+                    }
                 }
             }
 
