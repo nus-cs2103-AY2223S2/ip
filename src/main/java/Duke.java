@@ -1,3 +1,4 @@
+import java.security.spec.ECField;
 import java.util.Scanner;
 import java.util.ArrayList;
 public class Duke {
@@ -5,42 +6,37 @@ public class Duke {
     private ArrayList<Task> list = new ArrayList<>();
 
 
-    private void inputResponse(){
+    private void inputResponse() {
 
-        while(true) {
-            String userInput;
-            userInput = this.sc.nextLine();
-            if(userInput.equals("bye")) {
-                System.out.println("\tBye. Hope to see you again soon!");
-                break;
-            } else if(userInput.equals("list")) {
-                this.displayList();
-            } else if(userInput.substring(0, 5).equals("mark ")) {
-                int taskIndex = Integer.parseInt(userInput.substring(5));
-                if(list.get(taskIndex - 1).getStatus()) {
-                    System.out.println("\tTask already marked!");
-                    continue;
+        while (true) {
+            String input;
+            input = this.sc.nextLine();
+            String[] userInput = input.split(" ", 2);
+            try {
+                if (userInput[0].equals("bye")) {
+                    System.out.println("\tBye. Hope to see you again soon!");
+                    break;
+                } else if (userInput[0].equals("list")) {
+                    this.displayList();
+                } else if (userInput[0].equals("mark")) {
+                    this.markComplete(userInput);
+                } else if (userInput[0].equals("unmark")) {
+                    this.markInComplete(userInput);
+                } else if (userInput[0].equals("todo")) {
+                    this.addTodo(userInput);
+                } else if (userInput[0].equals("deadline")) {
+                    this.addDeadline(userInput);
+                } else if (userInput[0].equals("event")) {
+                    this.addEvent(userInput);
+                } else {
+                    throw new DukeInvalidCommandException();
                 }
-                this.markComplete(taskIndex);
-            } else if(userInput.substring(0, 7).equals("unmark ")) {
-                int taskIndex = Integer.parseInt(userInput.substring(7));
-                if(list.get(taskIndex - 1).getStatus() == false) {
-                    System.out.println("\tTask already unmarked!");
-                    continue;                }
-                this.markInComplete(taskIndex);
-            } else if(userInput.substring(0, 5).equals("todo ")) {
-                String textInput = userInput.substring(5);
-                this.addTodo(textInput);
-            } else if(userInput.substring(0, 9).equals("deadline ")) {
-                String textInput = userInput.substring(9);
-                this.addDeadline(textInput);
-            } else if(userInput.substring(0, 6).equals("event ")) {
-                String textInput = userInput.substring(6);
-                this.addEvent(textInput);
+            } catch (DukeException e) {
+                System.out.printf("\t%s\n", e);
             }
-
-
+            this.printLine();
         }
+
     }
 
     private void displayList() {
@@ -50,64 +46,116 @@ public class Duke {
         }
     }
 
-    private void markComplete(int taskIndex) {
-        Task taskToBeMarked = this.list.get(taskIndex - 1);
-        taskToBeMarked.changeStatus();
-        System.out.println("\tNice! I've marked this task as done:");
-        System.out.println("\t\t" +  taskToBeMarked.toString());
+    private void markComplete(String[] userInput) throws DukeInvalidArgumentsException, DukeMissingArgumentException, DukeTaskArgumentException{
+        try {
+            int taskIndex = Integer.parseInt(userInput[1]);
+            if(taskIndex > this.list.size()) {
+                throw new DukeTaskArgumentException();
+            }
+            if (list.get(taskIndex - 1).getStatus()) {
+                throw new DukeTaskArgumentException();
+            }
+
+            Task taskToBeMarked = this.list.get(taskIndex - 1);
+            taskToBeMarked.changeStatus();
+            System.out.println("\tNice! I've marked this task as done:");
+            System.out.println("\t\t" + taskToBeMarked.toString());
+        } catch (NumberFormatException e){
+            throw new DukeInvalidArgumentsException();
+        } catch (IndexOutOfBoundsException e) {
+            String task = "mark";
+            throw new DukeMissingArgumentException(task);
+        }
     }
 
-    private void markInComplete(int taskIndex) {
-        Task taskToBeUnmarked = this.list.get(taskIndex - 1);
-        taskToBeUnmarked.changeStatus();
-        System.out.println("\tOK, I've marked this task as not done yet:");
-        System.out.println("\t\t" +  taskToBeUnmarked.toString());
+    private void markInComplete(String[] userInput) throws DukeMissingArgumentException, DukeInvalidArgumentsException, DukeTaskArgumentException{
+        try {
+            int taskIndex = Integer.parseInt(userInput[1]);
+            if(taskIndex > this.list.size()) {
+                throw new DukeTaskArgumentException();
+            }
+            if (list.get(taskIndex - 1).getStatus() == false) {
+                throw new DukeTaskArgumentException();
+            }
+
+            Task taskToBeUnmarked = this.list.get(taskIndex - 1);
+            taskToBeUnmarked.changeStatus();
+            System.out.println("\tOK, I've marked this task as not done yet:");
+            System.out.println("\t\t" + taskToBeUnmarked.toString());
+        }  catch(IndexOutOfBoundsException e) {
+            String task = "unmark";
+            throw new DukeMissingArgumentException(task);
+        } catch (NumberFormatException e) {
+            throw new DukeInvalidArgumentsException();
+        }
     }
 
-    private void addTodo(String userInput) {
-        Todo todo = new Todo(userInput);
-        this.list.add(todo);
-        System.out.println("\tGot it. I've added this task:");
-        System.out.println("\t" + todo.toString());
-        displayTasks();
+    private void addTodo(String[] userInput) throws DukeMissingArgumentException{
+        try {
+            Todo todo = new Todo(userInput[1]);
+            this.list.add(todo);
+            System.out.println("\tGot it. I've added this task:");
+            System.out.println("\t" + todo.toString());
+            displayTasks();
+        } catch (IndexOutOfBoundsException e) {
+            String task = "todo";
+            throw new DukeMissingArgumentException(task);
+        }
+
     }
-    private void addDeadline(String userInput) {
-        int indexDeadline = userInput.indexOf("/by");
-        String deadlineText = userInput.substring(0, indexDeadline - 1);
-        String deadlineDate = userInput.substring(indexDeadline + 4);
-        userInput = String.format("%s (by: %s)", deadlineText, deadlineDate);
-        Deadlines deadline = new Deadlines(userInput);
-        this.list.add(deadline);
-        System.out.println("\tGot it. I've added this task:");
-        System.out.println("\t" + deadline.toString());
-        displayTasks();
+    private void addDeadline(String[] userInput) throws DukeMissingArgumentException {
+        try {
+            int indexDeadline = userInput[1].indexOf("/by");
+            String deadlineText = userInput[1].substring(0, indexDeadline - 1);
+            String deadlineDate = userInput[1].substring(indexDeadline + 4);
+            String userInp = String.format("%s (by: %s)", deadlineText, deadlineDate);
+
+            Deadlines deadline = new Deadlines(userInp);
+            this.list.add(deadline);
+            System.out.println("\tGot it. I've added this task:");
+            System.out.println("\t" + deadline.toString());
+            displayTasks();
+        } catch(IndexOutOfBoundsException e) {
+            String task = "deadline";
+            throw new DukeMissingArgumentException(task);
+        }
     }
 
-    private void addEvent(String userInput) {
-        int indexFrom = userInput.indexOf("/from");
-        int indexTo = userInput.indexOf("/to");
-        String eventText = userInput.substring(0, indexFrom - 1);
-        String eventTo= userInput.substring(indexTo + 4);
-        String eventFrom = userInput.substring(indexFrom + 6, indexTo - 1);
+    private void addEvent(String[] userInput) throws DukeMissingArgumentException{
+        try {
+            int indexFrom = userInput[1].indexOf("/from");
+            int indexTo = userInput[1].indexOf("/to");
+            String eventText = userInput[1].substring(0, indexFrom - 1);
+            String eventTo = userInput[1].substring(indexTo + 4);
+            String eventFrom = userInput[1].substring(indexFrom + 6, indexTo - 1);
 
-        userInput = String.format("%s (from: %s to: %s)", eventText, eventFrom, eventTo);
-        Event event = new Event(userInput);
-        this.list.add(event);
-        System.out.println("\tGot it. I've added this task:");
-        System.out.println("\t" + event.toString());
-        displayTasks();
+            String userInp = String.format("%s (from: %s to: %s)", eventText, eventFrom, eventTo);
+            Event event = new Event(userInp);
+            this.list.add(event);
+            System.out.println("\tGot it. I've added this task:");
+            System.out.println("\t" + event.toString());
+            displayTasks();
+        }catch (IndexOutOfBoundsException e) {
+            String task = "event";
+            throw new DukeMissingArgumentException(task);
+        }
     }
 
     private void displayTasks() {
         int listSize = list.size();
         System.out.println(String.format("\tNow you have %d tasks in the list.", listSize));
     }
-    
-    public static void main(String[] args) {
+
+    private void printLine() {
+        System.out.println("------------------------------------------------------------------");
+    }
+
+    public static void main(String[] args)  {
         Duke dukeObj = new Duke();
 
         System.out.println("Welcome! I'm Duke.");
         System.out.println("What can I do for you?");
+        dukeObj.printLine();
         dukeObj.inputResponse();
     }
 }
