@@ -37,7 +37,7 @@ public class Duke {
         } else if (input.matches("^todo\\s.+$")) {
             return Command.TODO;
         } else {
-            return Command.ADD;
+            return Command.UNKNOWN;
         }
     }
 
@@ -54,6 +54,10 @@ public class Duke {
                     Printer.printTasks(tasks, numTasks);
                     break;
                 case DEADLINE:
+                    if (numTasks >= tasks.length) {
+                        Printer.printNotEnoughSpace();
+                        break;
+                    }
                     String[] dt = Parser.parseDeadline(input);
                     Deadline dl = new Deadline(dt[0], dt[1]);
                     tasks[numTasks] = dl;
@@ -61,6 +65,10 @@ public class Duke {
                     Printer.printAddedConfirmation(dl, numTasks);
                     break;
                 case EVENT:
+                    if (numTasks >= tasks.length) {
+                        Printer.printNotEnoughSpace();
+                        break;
+                    }
                     String[] et = Parser.parseEvent(input);
                     Event e = new Event(et[0], et[1], et[2]);
                     tasks[numTasks] = e;
@@ -68,19 +76,22 @@ public class Duke {
                     Printer.printAddedConfirmation(e, numTasks);
                     break;
                 case TODO:
+                    if (numTasks >= tasks.length) {
+                        Printer.printNotEnoughSpace();
+                        break;
+                    }
                     Todo td = new Todo(Parser.parseTodo(input));
                     tasks[numTasks] = td;
                     numTasks++;
                     Printer.printAddedConfirmation(td, numTasks);
                     break;
                 case MARK:
-                    // We can take this exact substring because its guaranteed that input is of form "mark %d"
-                    int markIndex = Integer.valueOf(input.substring(5)) - 1; // account for 1 indexing
+                    int markIndex = Parser.parseMark(input);
                     if (isValidMark(tasks, markIndex)) // Note that this check also prints out error messages if any
                         Printer.printWithDecorations(tasks[markIndex].markDone());
                     break;
                 case UNMARK:
-                    int unmarkIndex = Integer.valueOf(input.substring(7)) - 1; // account for 1 indexing
+                    int unmarkIndex = Parser.parseUnmark(input);
                     if (isValidMark(tasks, unmarkIndex)) // Note that this check also prints out error messages if any
                         Printer.printWithDecorations(tasks[unmarkIndex].unmarkDone());
                     break;

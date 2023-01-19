@@ -49,5 +49,9 @@ public class Printer {
         String s = String.format("Got it. I've added this task:\n   %s\nNow you have %d %s in the list.", task.toString(), numTasks, grammar);
         printWithDecorations(s);
     }
+
+    public static void printNotEnoughSpace() {
+        Printer.printWithDecorations("You have added too many tasks!");
+    }
     
 }

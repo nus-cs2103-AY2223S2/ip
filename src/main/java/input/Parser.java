@@ -26,4 +26,14 @@ public class Parser {
     public static String parseTodo(String input) {
         return input.substring(5, input.length()).strip();
     }
+
+    public static int parseMark(String input) {
+        int markIndex = Integer.valueOf(input.substring(5)) - 1; // account for 1 indexing
+        return markIndex;
+    }
+
+    public static int parseUnmark(String input) {
+        int unmarkIndex = Integer.valueOf(input.substring(7)) - 1; // account for 1 indexing
+        return unmarkIndex;
+    }
 }
