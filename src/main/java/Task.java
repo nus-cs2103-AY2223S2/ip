@@ -2,7 +2,7 @@ public class Task {
     private boolean isMarked;
     private String name;
 
-    public Task(String name,boolean isMarked) {
+    public Task(String name) {
         this.isMarked = false;
         this.name = name;
     }
@@ -18,8 +18,10 @@ public class Task {
     public String getStatusICon() {
         return (isMarked ? "X" : " ");
     }
-    public String getName() {
-        return this.name;
+
+    @Override
+    public String toString() {
+        return "[" + this.getStatusICon() + "] " + name;
     }
 
 }
