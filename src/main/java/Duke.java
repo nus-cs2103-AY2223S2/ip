@@ -11,7 +11,7 @@ public class Duke {
 
     public static void parser(String commandLine) throws DukeException {
 
-        System.out.println(DIV_OPEN);
+        System.out.printf(DIV_OPEN);
 
         String[] command = commandLine.split(" ");
 
@@ -64,6 +64,13 @@ public class Duke {
                     throw new DukeException("Check the format again!");
                 }
                 addEvent(command, fromIndex, toIndex);
+                break;
+
+            case "delete":
+                if (command.length != 2) {
+                    throw new DukeException("Please check the number of your arguments!");
+                }
+                deleteTask(command[1]);
                 break;
 
             default:
@@ -156,6 +163,21 @@ public class Duke {
         System.out.println("Got it. I've added this task:\n  " + list.get(listNum));
         System.out.println("Now you have " + listNum + " tasks in the list.");
         listNum++;
+    }
+
+    public static void deleteTask(String arg) throws DukeException {
+        try {
+            int num = Integer.parseInt(arg);
+            if (num >= listNum || num <= 0) {
+                throw new DukeException("Task number is out of bounds!");
+            }
+            System.out.println("Noted. I've removed this task:\n  " + list.get(num));
+            list.remove(num);
+            listNum--;
+            System.out.println("Now you have " + (listNum - 1) + " tasks in the list.");
+        } catch (NumberFormatException ex) {
+            throw new DukeException("Invalid number");
+        }
     }
 
     public static void main(String[] args) {
