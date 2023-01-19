@@ -35,14 +35,28 @@ public class Duke {
                 todoCommand(str);
             } else if (str.length() >= 6 && str.toLowerCase().startsWith("event ")) {
                 eventCommand(str);
-            } else if (str.length() >= 9 && str.startsWith("deadline ")) {
+            } else if (str.length() >= 9 && str.toLowerCase().startsWith("deadline ")) {
                 deadlineCommand(str);
+            } else if (str.length() >= 7 && str.toLowerCase().startsWith("delete ")) {
+                deleteCommand(str);
             } else {
-                System.out.println("OOPS!!! I'm sorry, but I don't know what that means :-(");
+                System.out.println("OOPS!!! I'm sorry, but I don't know what that means :-( Double check your spellings or spaces");
             }
         }
 
         bf.close();
+    }
+
+    private static void deleteCommand(String str) {
+        try {
+            int num = getTaskNumber(str, 7);
+            Task removed = arr.remove(num - 1);
+            System.out.println("Noted. I've removed this task:");
+            System.out.println(removed.toString());
+            System.out.println("Now you have " + arr.size() + " tasks in the list.");
+        } catch (MissingArguments | InvalidTaskNumber err) {
+            System.out.println(err.getMessage());
+        }
     }
 
     private static void deadlineCommand(String str) {
@@ -57,7 +71,7 @@ public class Duke {
             Task toAdd = new Deadline(foo[0], getDeadline(foo[1]));
             arr.add(toAdd);
             System.out.println("Got it. I've added this task:");
-            System.out.println(toAdd.toString());
+            System.out.println(toAdd);
             System.out.println("Now you have " + arr.size() + " tasks in the list.");
         } catch (MissingArguments | MissingTimeException | MissingNameException | InvalidSyntaxException err) {
             System.out.println(err.getMessage());
@@ -75,7 +89,7 @@ public class Duke {
             Task toAdd = new Event(foo[0], bar[0], bar[1]);
             arr.add(toAdd);
             System.out.println("Got it. I've added this task:");
-            System.out.println(toAdd.toString());
+            System.out.println(toAdd);
             System.out.println("Now you have " + arr.size() + " tasks in the list.");
         } catch (MissingArguments | MissingNameException | MissingTimeException | InvalidSyntaxException err) {
             System.out.println(err.getMessage());
@@ -119,7 +133,7 @@ public class Duke {
             Task toAdd = new ToDo(getName(str, 5));
             arr.add(toAdd);
             System.out.println("Got it. I've added this task:");
-            System.out.println(toAdd.toString());
+            System.out.println(toAdd);
             System.out.println("Now you have " + arr.size() + " tasks in the list.");
         } catch (MissingArguments | MissingNameException err) {
             System.out.println(err.getMessage());
