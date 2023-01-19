@@ -1,3 +1,7 @@
-todo 2103
+deadline t /by today
 mark 1
 list
+mark 1
+unmark 1
+delete 1
+bye
