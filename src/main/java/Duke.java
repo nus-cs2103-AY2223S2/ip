@@ -19,25 +19,38 @@ public class Duke {
 
         Scanner scanner = new Scanner(System.in);
         while (true) {
-            String word = scanner.nextLine();
-            if (word.equals("bye")) {
+            String input = scanner.nextLine();
+            String[] arrStr = input.split(" ", 2);
+            String command = arrStr[0];
+
+            if (command.equals("bye")) {
+                // Bye - exit program
                 printResponse("Bye. Hope to see you again soon!");
                 break;
-            } else if (word.equals("list")) {
+            } else if (command.equals("list")) {
+                // List = print list of task
                 list();
-            } else if (word.split(" ")[0].equals("mark")) {
-                int taskNum = Integer.parseInt(word.split(" ")[1]);
+            } else if (command.equals("mark")) {
+                // Mark - mark a task as done
+                int taskNum = Integer.parseInt(arrStr[1]);
                 Task taskToMark = arr.get(taskNum - 1);
                 taskToMark.mark();
                 printResponse("Nice! I've marked this task as done: \n " + taskToMark);
-            } else if (word.split(" ")[0].equals("unmark")) {
-                int taskNum = Integer.parseInt(word.split(" ")[1]);
+            } else if (command.equals("unmark")) {
+                // Unmark - unmark a task as undone
+                int taskNum = Integer.parseInt(arrStr[1]);
                 Task taskToMark = arr.get(taskNum - 1);
                 taskToMark.unmark();
                 printResponse("OK, I've marked this task as not done yet \n" + taskToMark);
-            } else {
-                add(word);
+            } else if (command.equals("todo")) {
+                // todo - add a task with type todo
+                add(arrStr[1], 'T');
+            } else if (command.equals("deadline")) {
+                add(arrStr[1], 'D');
+            } else if (command.equals("event")) {
+                add(arrStr[1], 'E');
             }
+
         }
     }
 
@@ -47,9 +60,26 @@ public class Duke {
         System.out.println(str);
     }
 
-    public static void add(String response) {
-       arr.add(new Task(response));
-       printResponse("Added: " + response);
+    public static void add(String response, char type) {
+       if(type == 'T') {
+           Task newTask = new Task(response, 'T');
+           arr.add(newTask);
+           printResponse("Got it. I've added this task: \n" + newTask + "\nNow you have " + arr.size()
+                   + " tasks in the list.");
+       } else if(type == 'D') {
+           String[] strArr = response.split(" /by ", 2);
+           Task newTask = new Task(strArr[0], 'D', "(by: " + strArr[1] + ")");
+           arr.add(newTask);
+           printResponse("Got it. I've added this task: \n" + newTask + "\nNow you have " + arr.size()
+                   + " tasks in the list.");
+       } else if(type =='E') {
+           String[] strArr = response.split(" /from ", 2);
+           String[] timings = strArr[1].split(" /to ", 2);
+           Task newTask = new Task(strArr[0], 'E', "(from: " + timings[0] + " to: " + timings[1] + ")");
+           arr.add(newTask);
+           printResponse("Got it. I've added this task: \n" + newTask + "\nNow you have " + arr.size()
+                   + " tasks in the list.");
+       }
     }
 
     public static void list() {

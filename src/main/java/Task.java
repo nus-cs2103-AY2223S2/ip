@@ -1,15 +1,25 @@
 public class Task {
     String name;
     boolean done;
+    char type;
+    String notes = null;
 
     public Task(String name) {
         this.name = name;
         this.done = false;
+        this.type = ' ';
     }
 
-    public Task(String name, boolean done) {
+    public Task(String name, char type) {
         this.name = name;
         this.done = false;
+        this.type = type;
+    }
+
+    public Task(String name, char type, String notes) {
+        this.name = name;
+        this.type = type;
+        this.notes = notes;
     }
 
     public void mark() {
@@ -22,13 +32,17 @@ public class Task {
 
     @Override
     public String toString() {
-        String str;
+        String str = "[" + this.type + "] ";
         if(done) {
-            str = "[X]";
+            str = str + "[X]";
         } else {
-            str = "[ ]";
+            str = str + "[ ]";
         }
-        return str + " " + this.name;
+        if(notes == null) {
+            return str + " " + this.name;
+        } else {
+            return str + " " + this.name + " " + notes;
+        }
     }
 
     @Override
@@ -39,7 +53,7 @@ public class Task {
 
         if(obj instanceof Task) {
             Task x = (Task) obj;
-            if(this.name.equals(x.name)) {
+            if(this.name.equals(x.name) && this.type == x.type) {
                 return true;
             }
         }
