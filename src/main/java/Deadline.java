@@ -16,7 +16,6 @@ public class Deadline extends Task {
         if(this == obj) {
             return true;
         }
-
         if(obj instanceof Deadline) {
             Deadline x = (Deadline) obj;
             if(this.name.equals(x.name)) {

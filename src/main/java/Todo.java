@@ -13,7 +13,6 @@ public class Todo extends Task {
         if(this == obj) {
             return true;
         }
-
         if(obj instanceof Todo) {
             Todo x = (Todo) obj;
             if(this.name.equals(x.name)) {
