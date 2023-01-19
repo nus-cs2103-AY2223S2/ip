@@ -7,6 +7,15 @@ import java.util.Scanner;
  * Currently, Duke accepts the commands: {@code echo, list, mark, unmark, todo, deadline, event, bye}
  */
 public class Duke {
+
+    /**
+     * The Commands enum represents Duke's available commands.
+     */
+    public enum Commands {
+        ECHO, LIST, MARK, UNMARK, TODO, DEADLINE, EVENT, DELETE, BYE;
+
+    }
+
     private static ArrayList<Task> tasks = new ArrayList<>();
 
     /**
@@ -43,48 +52,56 @@ public class Duke {
         Scanner sc = new Scanner(System.in);
 
         while (true) {
-            String command = sc.next();
-
             try {
+                Commands command = readCommand(sc);
                 switch (command) {
-                case "list":
+                case LIST:
                     sc.nextLine(); // throws away the remaining line
                     printDukeList();
                     break;
-                case "echo":
+                case ECHO:
                     echo(sc.nextLine().strip());
                     break;
-                case "mark":
+                case MARK:
                     markTask(sc.nextLine().strip());
                     break;
-                case "unmark":
+                case UNMARK:
                     unmarkTask(sc.nextLine().strip());
                     break;
-                case "todo":
+                case TODO:
                     addTodo(sc.nextLine().strip());
                     break;
-                case "deadline":
+                case DEADLINE:
                     addDeadline(sc.nextLine().strip());
                     break;
-                case "event":
+                case EVENT:
                     addEvent(sc.nextLine().strip());
                     break;
-                case "delete":
+                case DELETE:
                     deleteTask(sc.nextLine().strip());
                     break;
-                case "bye":
+                case BYE:
                     sc.close();
                     exit();
                     return;
                 default:
-                    sc.nextLine(); // throws away the remaining line
-                    throw new DukeException(
-                            "I only understand {echo, list, mark, unmark, todo, deadline, event} commands.");
+                    // this should not run
+                    break;
                 }
             } catch (DukeException e) {
                 printWithPartition("\t" + e.getMessage() + "\n");
             }
 
+        }
+    }
+
+    private static Commands readCommand(Scanner sc) throws DukeException {
+        try {
+            return Commands.valueOf(sc.next().toUpperCase());
+        } catch (IllegalArgumentException e) {
+            sc.nextLine(); // throw away remaining lines
+            throw new DukeException(
+                    "I only understand {echo, list, mark, unmark, todo, deadline, event} commands.");
         }
     }
 
