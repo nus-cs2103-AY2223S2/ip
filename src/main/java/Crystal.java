@@ -11,7 +11,7 @@ class Crystal {
 
 
         ArrayList<Task> list = new ArrayList<>();
-        while (!input.equals("bye")) {
+        while (true) {
             try {
                 if (input.equals("list")) {
                     System.out.println(" ____________________________________________________________");
