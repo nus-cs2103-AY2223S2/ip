@@ -12,6 +12,7 @@ public final class Resource {
     public final static String cmdTodo = "todo";
     public final static String cmdDdl = "deadline";
     public final static String cmdEvent = "event";
+    public final static String cmdDel = "delete";
     public final static String kwDdl = "by";
     public final static String kwStt = "from";
     public final static String kwEnd = "to";
@@ -20,6 +21,7 @@ public final class Resource {
     public final static String notifMk = " Booyah! Marked this task as done:\n";
     public final static String notifUnmk = " OK. Marked this task as not done:\n";
     public final static String notifUsage = " Usage: ";
+    public final static String notifDel = " OK. Removed this task:\n";
     public final static String logo = " __  __\n|  \\/  |\n| \\  / | ___  __ _  __ _ _   _\n| |\\/| |/ _ \\/ _` |/ _`" +
             " | | | |\n| |  | |  __/ (_| | (_| | |_| |\n|_|  |_|\\___|\\__, |\\__, |\\__, |\n              __/ | __/ " +
             "| __/ |\n             |___/ |___/ |___/\n";

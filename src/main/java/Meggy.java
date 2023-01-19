@@ -6,7 +6,7 @@ import java.util.Map;
 import java.util.Scanner;
 
 /**
- * The chatbot. Supports customized input stream and output stream
+ * The chatbot. Supports customized input stream and output stream.
  */
 public class Meggy implements Runnable {
     /**
@@ -46,7 +46,8 @@ public class Meggy implements Runnable {
                 Resource.cmdUnmk, s -> markTaskStatus(s, false),
                 Resource.cmdTodo, s -> addTask(s, Util.todoNew),
                 Resource.cmdDdl, s -> addTask(s, Util.ddlNew),
-                Resource.cmdEvent, s -> addTask(s, Util.eventNew)
+                Resource.cmdEvent, s -> addTask(s, Util.eventNew),
+                Resource.cmdDel, this::deleteTask
         );
     }
 
@@ -64,9 +65,9 @@ public class Meggy implements Runnable {
 
     /**
      * @param arg Trimmed string
-     * @return
+     * @return Parsed idx (starts with 0)
      */
-    private int parseArg(String arg) throws MeggyException {
+    private int parseIdx(String arg) throws MeggyException {
         arg = Util.get1stArg(arg);
         if ("".equals(arg))
             throw new MeggyNoArgException();
@@ -88,7 +89,7 @@ public class Meggy implements Runnable {
     private String markTaskStatus(String arg, boolean newStatus) {
         final int idx;
         try {
-            idx = parseArg(arg);
+            idx = parseIdx(arg);
         } catch (MeggyException e) {
             return e.getMessage() + Util.usageIdxCmd(newStatus ? Resource.cmdMk : Resource.cmdUnmk);
         }
@@ -100,7 +101,25 @@ public class Meggy implements Runnable {
     private String addTask(String args, MeggyException.Function<String, UserTask> newTask) throws MeggyException {
         final UserTask task = newTask.apply(args);
         tasks.add(task);
-        return Resource.notifAdd + Resource.taskIndent + task + '\n' + Resource.nTaskFmt(tasks.size());
+        return Resource.notifAdd + reportChangedTaskAndList(task);
+    }
+
+    /**
+     * @param arg Index (start with 1) of task to be updated.
+     */
+    private String deleteTask(String arg) {
+        final int idx;
+        try {
+            idx = parseIdx(arg);
+        } catch (MeggyException e) {
+            return e.getMessage() + Util.usageIdxCmd(Resource.cmdDel);
+        }
+        final UserTask task = tasks.remove(idx);
+        return Resource.notifDel + reportChangedTaskAndList(task);
+    }
+
+    private String reportChangedTaskAndList(UserTask task) {
+        return Resource.taskIndent + task + '\n' + Resource.nTaskFmt(tasks.size());
     }
 
     /**
@@ -114,7 +133,6 @@ public class Meggy implements Runnable {
         out.print(Resource.greetings);
         out.print(Resource.msgTl);
         while (in.hasNextLine()) { // reads user input and reply in each iteration
-
             //Parse command and args
             final String line = in.nextLine().trim();
             final int spaceIdx = line.indexOf(' ');
@@ -139,7 +157,6 @@ public class Meggy implements Runnable {
             out.print(Resource.msgTl);
             if (Resource.cmdExit.equals(cmd))
                 return;
-
         }
         out.println("WARNING: REACHED END OF INPUT WITHOUT 'BYE' COMMAND");
     }

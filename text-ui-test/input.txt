@@ -12,4 +12,11 @@ deadline return book /by Sunday
 event project meeting /from Mon 2pm /to 4pm
 deadline do homework /by no idea :-p
 list
-bye
+mark 0
+unmark 100
+unmark a
+delete -1
+delete 3
+delete 100
+delete x
+list
