@@ -9,7 +9,7 @@ public class Deadline extends Task {
     }
 
     public String toString() {
-        return "[D]" + super.toString() + String.format(" by: %s", by);
+        return "[D]" + super.toString() + String.format(" (by: %s)", by);
     }
 
 }
