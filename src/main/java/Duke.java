@@ -10,6 +10,19 @@ public class Duke {
         System.out.println(Values.HLINE);
     }
 
+    private static void listCommand() {
+        String output = "List:\n";
+        for (int i = 0; i < list.size(); i++) {
+            output += "\t" + (i + 1) + ". " + list.get(i).description + "\n";
+        }
+        PixlPrint(output);
+    }
+
+    private static void addCommand(String taskName) {
+        list.add(new Task(taskName));
+        PixlPrint("added: " + taskName);
+    }
+
     public static void main(String[] args) {
         // Print the logo and welcome user.
         System.out.println("Welcome to\n" + Values.LOGO);
@@ -21,14 +34,9 @@ public class Duke {
 
         while (!command.equals("bye")) {
             if (command.equals("list")) {
-                String output = "List:\n";
-                for (int i = 0; i < list.size(); i++) {
-                    output += "\t" + (i + 1) + ". " + list.get(i).description + "\n";
-                }
-                PixlPrint(output);
+                listCommand();
             } else {
-                list.add(new Task(command));
-                PixlPrint("added: " + command);
+                addCommand(command);
             }
 
             System.out.print("You: ");
