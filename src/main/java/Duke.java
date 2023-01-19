@@ -1,3 +1,4 @@
+import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Duke {
@@ -19,8 +20,7 @@ public class Duke {
         System.out.println("Hello I'm Duke\n"
                 + "What can I do for you?\n");
 
-        Task[] taskArray = new Task[100];
-        int arrayIndex = 0;
+        ArrayList<Task> taskArray = new ArrayList<>();
         Scanner sc = new Scanner(System.in);
 
         while(sc.hasNextLine()) {
@@ -32,15 +32,15 @@ public class Duke {
                     System.out.println("Bye. Hope to see you again soon!");
                     return;
                 case "list":
-                    for (int i = 0; i < arrayIndex; i++) {
+                    for (int i = 0; i < taskArray.size(); i++) {
                         int listNumber = i + 1;
-                        System.out.println(listNumber + ". " + taskArray[i].toString());
+                        System.out.println(listNumber + ". " + taskArray.get(i).toString());
                     }
                     System.out.println("");
                     break;
                 case "mark":
                     int toMark = input.charAt(5) - 48;
-                    Task toMarkTask = taskArray[toMark - 1];
+                    Task toMarkTask = taskArray.get(toMark - 1);
                     toMarkTask.markTask();
 
                     System.out.println("Nice! I've marked this task as done:\n   "
@@ -48,7 +48,7 @@ public class Duke {
                     break;
                 case "unmark":
                     int toUnMark = input.charAt(7) - 48;
-                    Task toUnMarkTask = taskArray[toUnMark - 1];
+                    Task toUnMarkTask = taskArray.get(toUnMark - 1);
                     toUnMarkTask.unmarkTask();
 
                     System.out.println("OK, I've marked this task as not done yet:\n   "
@@ -57,12 +57,11 @@ public class Duke {
                 case "todo":
                     try {
                         ToDo toDoTask = new ToDo(input.substring(5));
-                        taskArray[arrayIndex] = toDoTask;
-                        arrayIndex++;
+                        taskArray.add(toDoTask);
 
                         System.out.println("Got it. I've added this task:\n   "
                                 + toDoTask
-                                + "\nNow you have " + arrayIndex + " tasks in your list\n");
+                                + "\nNow you have " + taskArray.size() + " tasks in your list\n");
                     } catch (StringIndexOutOfBoundsException e) {
                         throw new DukeException("☹ OOPS!!! The description of a todo cannot be empty.");
                     }
@@ -73,12 +72,11 @@ public class Duke {
                     String deadline = dSegments[1].substring(3);
 
                     Deadline deadlineTask = new Deadline(deadlineName, deadline);
-                    taskArray[arrayIndex] = deadlineTask;
-                    arrayIndex++;
+                    taskArray.add(deadlineTask);
 
                     System.out.println("Got it. I've added this task:\n   "
                             + deadlineTask
-                            + "\nNow you have " + arrayIndex + " tasks in your list\n");
+                            + "\nNow you have " + taskArray.size() + " tasks in your list\n");
                     break;
                 case "event":
                     String[] eSegments = input.split("/");
@@ -87,12 +85,20 @@ public class Duke {
                     String endTime = eSegments[2].substring(3);
 
                     Event eventTask = new Event(eventName, startTime, endTime);
-                    taskArray[arrayIndex] = eventTask;
-                    arrayIndex++;
+                    taskArray.add(eventTask);
 
                     System.out.println("Got it. I've added this task:\n   "
                             + eventTask
-                            + "\nNow you have " + arrayIndex + " tasks in your list\n");
+                            + "\nNow you have " + taskArray.size() + " tasks in your list\n");
+                    break;
+                case "delete":
+                    int taskNumber = Integer.parseInt(input.split(" ")[1]);
+                    Task toDelete = taskArray.get(taskNumber - 1);
+                    taskArray.remove(taskNumber - 1);
+
+                    System.out.println("Got it. I've removed this task:\n   "
+                            + toDelete
+                            + "\nNow you have " + taskArray.size() + " tasks in your list\n");
                     break;
                 default:
                     throw new DukeException("☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
