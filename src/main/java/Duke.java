@@ -1,29 +1,40 @@
 import java.util.*;
 public class Duke {
-    private static String[] tasks = new String[100];
+    private static ArrayList<String> tasks = new ArrayList<>();
 
     public void awaitInstruction(){
-        System.out.println("Hello I am Duke\nWhat can I do for you?");
         Scanner sc = new Scanner(System.in);
-        String answer = sc.next();
+        String answer = sc.nextLine();
+        System.out.println("___________________");
         if (answer.equals("bye")){
             System.out.println("Goodbye");
-        } else{
-            System.out.println(answer);
         }
-
+        if (answer.equals("list")){
+            for (int i = 0; i < tasks.size(); i++){
+                System.out.print((i+1) + ": " + tasks.get(i) + "\n");
+            }
+        }
+        else{
+            tasks.add(answer);
+            System.out.println("added:" + answer);
+        }
+        System.out.println("___________________");
     }
 
-    
+
+
+
     public static void main(String[] args) {
         String logo = " ____        _        \n"
                 + "|  _ \\ _   _| | _____ \n"
                 + "| | | | | | | |/ / _ \\\n"
                 + "| |_| | |_| |   <  __/\n"
                 + "|____/ \\__,_|_|\\_\\___|\n";
-
+        System.out.println("Hello I am Duke\nWhat can I do for you?");
         Duke duke = new Duke();
-        duke.awaitInstruction();
+        while (true){
+            duke.awaitInstruction();
+        }
     }
 
 }
