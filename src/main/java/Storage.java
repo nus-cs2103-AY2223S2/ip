@@ -13,7 +13,9 @@ public class Storage {
 
     public void addTask(Task task) {
         this.taskList.add(task);
-        System.out.println("Added: " + task);
+        String statement = "Got it! I've added this task:\n" + task + "\nNow you have ";
+        String t = this.getNumberOfTasks() == 1 ? " task" : " tasks";
+        System.out.println(statement + this.getNumberOfTasks() + t + " in the list.");
     }
 
     public void markTask(int i) {
@@ -33,7 +35,7 @@ public class Storage {
             System.out.println("This task is already marked as not done!");
         } else {
             task.unmarkFromDone();
-            System.out.println("Oh no, I've marked this task as not done yet:");
+            System.out.println("Okay, I've marked this task as not done yet:");
         }
         System.out.println(task);
     }

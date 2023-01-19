@@ -17,12 +17,16 @@ public class JeoBot {
             s = s.trim();
             String command = s.replaceAll("\\s", "").toLowerCase();
             // Check if first word of command is "mark" or "unmark", and if an integer follows after
-            if (command.contains("unmark") && command.startsWith("unmark")
-                    && command.substring(6).matches("-?\\d+")) {
+            if (command.startsWith("unmark") && command.substring(6).matches("-?\\d+")) {
                 command = "unmark";
-            } else if (command.contains("mark") && command.startsWith("mark")
-                    && command.substring(4).matches("-?\\d+")) {
+            } else if (command.startsWith("mark") && command.substring(4).matches("-?\\d+")) {
                 command = "mark";
+            } else if (command.startsWith("todo") && !command.substring(4).equals("")) {
+                command = "todo";
+            } else if (command.startsWith("deadline") && command.contains("/by")) {
+                command = "deadline";
+            } else if (command.startsWith("event") && command.contains("/from") && command.contains("/to")) {
+                command = "event";
             }
             System.out.println(divider);
             switch (command) {
@@ -63,11 +67,81 @@ public class JeoBot {
                         System.out.println("Invalid task number given!");
                     }
                     break;
-                default:
-                    Task task = new Task(s);
+                case "todo":
+                    if (s.replaceAll("\\s", "").toLowerCase().equals("todo")) {
+                        System.out.println("Invalid command given!");
+                        break;
+                    }
+                    Task task = new ToDo(s.substring(4).trim());
                     st.addTask(task);
-                    System.out.println(divider);
+                    break;
+                case "deadline":
+                    if (s.replaceAll("\\s", "").toLowerCase().equals("deadline")) {
+                        System.out.println("Invalid command given!");
+                        break;
+                    }
+                    s = s.substring(8).trim();
+                    System.out.println(s);
+                    StringBuilder sb = new StringBuilder();
+                    int i = 0;
+                    while (i < s.length()) {
+                        if (s.charAt(i) != '/') {
+                            sb.append(s.charAt(i));
+                        } else {
+                            if (s.substring(i, i+3).equals("/by")) {
+                                s = s.substring(i+3).trim();
+                                break;
+                            }
+                        }
+                        i++;
+                    }
+                    String desc = sb.toString().trim();
+                    String by = s;
+                    task = new Deadline(desc, by);
+                    st.addTask(task);
+                    break;
+                case "event":
+                    if (s.replaceAll("\\s", "").toLowerCase().equals("event")) {
+                        System.out.println("Invalid command given!");
+                        break;
+                    }
+                    s = s.substring(5).trim();
+                    sb = new StringBuilder();
+                    i = 0;
+                    while (i < s.length()) {
+                        if (s.charAt(i) != '/') {
+                            sb.append(s.charAt(i));
+                        } else {
+                            if (s.substring(i, i+5).equals("/from")) {
+                                s = s.substring(i+5).trim();
+                                break;
+                            }
+                        }
+                        i++;
+                    }
+                    desc = sb.toString().trim();
+                    sb = new StringBuilder();
+                    i = 0;
+                    while (i < s.length()) {
+                        if (s.charAt(i) != '/') {
+                            sb.append(s.charAt(i));
+                        } else {
+                            if (s.substring(i, i+3).equals("/to")) {
+                                s = s.substring(i+3).trim();
+                                break;
+                            }
+                        }
+                        i++;
+                    }
+                    String from = sb.toString().trim();
+                    String to = s;
+                    task = new Event(desc, from, to);
+                    st.addTask(task);
+                    break;
+                default:
+                    System.out.println("Invalid command given!");
             }
+            System.out.println(divider);
         }
     }
 
