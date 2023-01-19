@@ -53,12 +53,47 @@ public class Duke {
                     System.out.println("Ok, I've marked this task as not done yet:\n  " + list[unmarkNum]);
                     break;
 
+                case "todo":
+                    msg = sc.nextLine();
+                    Todo todo = new Todo(msg);
+                    list[listNum] = todo;
+                    System.out.println("Got it. I've added this task:\n  " + list[listNum]);
+                    System.out.println("Now you have " + listNum + " tasks in the list.");
+                    listNum++;
+                    break;
+
+                case "deadline":
+                    msg = sc.nextLine();
+                    int byIndex = msg.indexOf(" /by ");
+                    String dlName = msg.substring(0, byIndex);
+                    String dlBy = msg.substring(byIndex + 5);
+                    Deadline deadline = new Deadline(dlName, dlBy);
+                    list[listNum] = deadline;
+                    System.out.println("Got it. I've added this task:\n  " + list[listNum]);
+                    System.out.println("Now you have " + listNum + " tasks in the list.");
+                    listNum++;
+                    break;
+
+                case "event":
+                    msg = sc.nextLine();
+                    int fromIndex = msg.indexOf(" /from ");
+                    int toIndex = msg.indexOf(" /to ");
+                    String eventName = msg.substring(0, fromIndex);
+                    String eventFrom = msg.substring(fromIndex + 7, toIndex);
+                    String eventTo = msg.substring(toIndex + 5);
+                    Event event = new Event(eventName, eventFrom, eventTo);
+                    list[listNum] = event;
+                    System.out.println("Got it. I've added this task:\n  " + list[listNum]);
+                    System.out.println("Now you have " + listNum + " tasks in the list.");
+                    listNum++;
+                    break;
+
                 default:
                     msg += sc.nextLine(); // read finish the task
                     Task task = new Task(msg);
                     list[listNum] = task;
-                    listNum++;
                     System.out.println("added: " + msg);
+                    listNum++;
             }
 
             System.out.println(DIV_CLOSE); // DIV_CLOSE for output
