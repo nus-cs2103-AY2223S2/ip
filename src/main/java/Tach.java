@@ -26,6 +26,7 @@ public class Tach {
         parser.registerCommand(new HAddTask(ts));
         parser.registerCommand(new HShowTaskList(ts));
         parser.registerCommand(new HMarkTask(ts));
+        parser.registerCommand(new HDeleteTask(ts));
         parser.registerError(new ETodoEmptyDescription());
         parser.setExitHandler(new HBye());
         parser.setToExit(() -> shouldContinue = false);

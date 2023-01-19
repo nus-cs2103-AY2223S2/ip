@@ -21,6 +21,10 @@ public final class TaskStorage {
         this.tasks.get(n - 1).setUndone();
     }
 
+    public void deleteByNo(int n) {
+        this.tasks.remove(n-1);
+    }
+
     public List<Task> getTasks() {
         return Collections.unmodifiableList(this.tasks);
     }
