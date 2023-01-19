@@ -1,0 +1,15 @@
+hello
+there
+todo mark 1
+mark 1
+event mark 2 /from sunday /to wednesday
+event wrong event /from today to tomorrow
+event no / from today to tomorrow
+event /wrongly from today /to tomorrow
+mark 5
+list
+deadline complete work /by today
+deadline wrong deadline by today\
+deadline wrong deadline2 /from today
+list
+bye

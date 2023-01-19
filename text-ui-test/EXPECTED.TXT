@@ -5,3 +5,65 @@ Hello from
 | |_| | |_| |   <  __/
 |____/ \__,_|_|\_\___|
 
+What can I do for you?
+--------------------
+☹ OOPS!!! I'm sorry, but I don't know what that means :-(
+Command: hello
+--------------------
+--------------------
+☹ OOPS!!! I'm sorry, but I don't know what that means :-(
+Command: there
+--------------------
+--------------------
+Got it. I've added this task:
+[T][ ] mark 1
+Now you have 1 tasks in the list.
+--------------------
+--------------------
+Nice! I've marked this task as done:
+[T][X] mark 1
+--------------------
+--------------------
+Got it. I've added this task:
+[E][ ] mark 2  (by: sunday  to: wednesday)
+Now you have 2 tasks in the list.
+--------------------
+--------------------
+☹ OOPS!!! I'm sorry, but I don't know what that means :-(
+Command: event wrong event /from today to tomorrow
+--------------------
+--------------------
+☹ OOPS!!! I'm sorry, but I don't know what that means :-(
+Command: event no / from today to tomorrow
+--------------------
+--------------------
+☹ OOPS!!! I'm sorry, but I don't know what that means :-(
+Command: event /wrongly from today /to tomorrow
+--------------------
+--------------------
+☹ OOPS!!! I'm sorry, but I don't know what that means :-(
+mark 5
+--------------------
+--------------------
+1[T][X] mark 1
+2[E][ ] mark 2  (by: sunday  to: wednesday)
+--------------------
+--------------------
+Got it. I've added this task:
+[D][ ] complete work  (by: today)
+Now you have 3 tasks in the list.
+--------------------
+--------------------
+☹ OOPS!!! I'm sorry, but I don't know what that means :-(
+Command: deadline wrong deadline by today\
+--------------------
+--------------------
+☹ OOPS!!! I'm sorry, but I don't know what that means :-(
+Command: deadline wrong deadline2 /from today
+--------------------
+--------------------
+1[T][X] mark 1
+2[E][ ] mark 2  (by: sunday  to: wednesday)
+3[D][ ] complete work  (by: today)
+--------------------
+Bye. Hope to see you again soon!
