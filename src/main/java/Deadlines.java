@@ -3,7 +3,7 @@ public class Deadlines extends Task {
 
     public Deadlines(String[] content) throws DukeException {
         super(content[0]);
-        if (content[0].isEmpty()) {
+        if (content.length == 1 || content[0].isEmpty()) {
             throw new DukeException("OOPS!!! Command should be in the format 'deadline [M] /by [M]'\n" +
                     "The description, [M] cannot be empty.");
         }
