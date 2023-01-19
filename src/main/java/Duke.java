@@ -12,7 +12,7 @@ public class Duke {
                 + "\n";
         String greetings = "Hello! I'm Duke\n"
                 + "What can I do for you?\n";
-        String[] list = new String[101];
+        Task[] list = new Task[101];
         int listNum = 1; // starts from 1 for convenience
         boolean running = true;
         System.out.println(DIV_OPEN + logo + greetings + DIV_CLOSE);
@@ -49,7 +49,9 @@ public class Duke {
                     break;
 
                 default:
-                    list[listNum] = msg;
+                    msg += " " + sc.nextLine(); // read finish the task
+                    Task task = new Task(msg);
+                    list[listNum] = task;
                     listNum++;
                     System.out.println("added: " + msg);
             }
