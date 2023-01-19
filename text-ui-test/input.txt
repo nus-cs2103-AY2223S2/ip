@@ -16,5 +16,7 @@ unmark -1
 byeeee
 helloooo
 deadline /by this day
+delete 2
+delete 11
 bye
 

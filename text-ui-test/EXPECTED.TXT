@@ -35,7 +35,11 @@ OOPS! The time element is missing.
 OOPS! Invalid syntax here, double check your spelling
 OOOPS! The task number is not available. Try another number!
 OOOPS! The task number is not available. Try another number!
-OOPS!!! I'm sorry, but I don't know what that means :-(
-OOPS!!! I'm sorry, but I don't know what that means :-(
+OOPS!!! I'm sorry, but I don't know what that means :-( Double check your spellings or spaces
+OOPS!!! I'm sorry, but I don't know what that means :-( Double check your spellings or spaces
 OOPS! The task name is missing.
+Noted. I've removed this task:
+[E][ ] project meeting  (from: Aug 6th 2pm  to: 4pm)
+Now you have 4 tasks in the list.
+OOOPS! The task number is not available. Try another number!
 Bye. Hope to see you again soon!
