@@ -5,6 +5,7 @@ import java.util.Scanner;
 
 public class Duke {
     public static String LINE = "____________________________________________________________\n";
+    public enum Input { bye, list, mark, unmark, delete, todo, deadline, event };
 
     public static void main(String[] args) throws DukeException {
         String logo = " ____        _        \n"
@@ -18,24 +19,34 @@ public class Duke {
         boolean flag_continue = true;
         Scanner sc = new Scanner(System.in);
         List<Task> tasks = new ArrayList<Task>();
+
         while (flag_continue) {
             String[] input = sc.nextLine().trim().split(" ", 2);
             StringBuilder output = new StringBuilder(LINE);
+
             try {
-                switch(input[0]) {
-                    case "bye":
+                Input op;
+
+                try {
+                    op = Input.valueOf(input[0]);
+                } catch(IllegalArgumentException e) {
+                    throw new DukeException("I'm sorry, but I don't know what that means :-(");
+                }
+
+                switch(op) {
+                    case bye:
                         flag_continue = false;
                         output.append(" Bye. Hope to see you again soon!\n");
                         break;
 
-                    case "list":
+                    case list:
                         if(tasks.size() == 0) { throw new DukeException("You have 0 tasks in the list\n"); }
                         for(int i = 0; i < tasks.size(); i++) {
                             output.append(i + 1).append(".").append(tasks.get(i)).append("\n");
                         }
                         break;
 
-                    case "mark":
+                    case mark:
                         try {
                             int n = Integer.parseInt(input[1]) - 1;
                             Task task = tasks.get(n);
@@ -51,7 +62,7 @@ public class Duke {
                             throw new DukeException("The index to be marked must be an integer.");
                         }
 
-                    case "unmark":
+                    case unmark:
                         try {
                             int n = Integer.parseInt(input[1]) - 1;
                             Task task = tasks.get(n);
@@ -67,7 +78,7 @@ public class Duke {
                             throw new DukeException("The index to be unmarked must be an integer.");
                         }
 
-                    case "delete":
+                    case delete:
                         try {
                             int n = Integer.parseInt(input[1]) - 1;
                             Task task = tasks.get(n);
@@ -83,7 +94,7 @@ public class Duke {
                             throw new DukeException("The index to be deleted must be an integer.");
                         }
 
-                    case "todo":
+                    case todo:
                         try {
                             input[1] = input[1].trim();
                             if(input[1].equals("")) { throw new ArrayIndexOutOfBoundsException(); }
@@ -96,7 +107,7 @@ public class Duke {
                             throw new DukeException("The description of a todo cannot be empty.");
                         }
 
-                    case "deadline":
+                    case deadline:
                         try {
                             String[] cmd = input[1].split(" /by ", 2);
                             if(cmd[0].trim().equals("")) { throw new DukeException("The description of a deadline cannot be empty."); }
@@ -114,7 +125,7 @@ public class Duke {
                             }
                         }
 
-                    case "event":
+                    case event:
                         try {
                             String[] cmd = input[1].split(" /by ", 2);
                             String[] time = cmd[1].split(" /to ", 2);
@@ -132,9 +143,6 @@ public class Duke {
                                 throw new DukeException("An invalid duration was given.");
                             }
                         }
-
-                    default:
-                        throw new DukeException();
                 }
                 output.append(LINE);
                 System.out.println(output);
