@@ -6,4 +6,6 @@ mark 2
 list
 todo
 blah
+delete 2
+list
 bye
