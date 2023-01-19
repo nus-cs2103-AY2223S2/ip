@@ -8,7 +8,6 @@ import java.util.function.Consumer;
 import java.util.function.Function;
 
 public final class Duke {
-
     private final static String joiner(String[] args, int from, int to) {
         return String.join(" ", Arrays.copyOfRange(args, from, to));
     }
@@ -55,7 +54,7 @@ public final class Duke {
         "mark", (args) -> {
             try {
                 if (args.length == 1) {
-                    System.out.println("Needed a index for mark");
+                    System.out.println("Needed an index for mark");
                     return;
                 }
 
@@ -68,7 +67,7 @@ public final class Duke {
         },
         "unmark", (args) -> {
             if (args.length == 1) {
-                System.out.println("Needed a index for unmark");
+                System.out.println("Needed an index for unmark");
                 return;
             }
             try {
@@ -76,7 +75,7 @@ public final class Duke {
                 tasks.get(index - 1).setDone(false);
                 System.out.format("Marked this as not done!\n\t%s\n", tasks.get(index - 1).toString());
             } catch (NumberFormatException e) {
-                System.out.println("Invalid index!\n");
+                System.out.println("Invalid index!");
             }
         },
         "todo", (args) -> {
@@ -155,6 +154,20 @@ public final class Duke {
         
             Task task = new Event(taskStr, fromStr, toStr);
             addTask.accept(task);
+        },
+        "delete", (args) -> {
+          try {
+                if (args.length == 1) {
+                    System.out.println("Needed an index for delete");
+                    return;
+                }
+
+                int index = intParser.apply(args[1]);
+                Task removed = tasks.remove(index - 1);
+                System.out.format("Removed this task!\n\t%s\n", removed.toString());
+            } catch (NumberFormatException e) {
+                System.out.println("Invalid index!");
+            }
         });
 
         while (true) {
