@@ -3,12 +3,8 @@ import java.util.Scanner;
 
 public class Duke {
     public static void main(String[] args) throws DukeException {
-        String logo = " ____        _        \n"
-                + "|  _ \\ _   _| | _____ \n"
-                + "| | | | | | | |/ / _ \\\n"
-                + "| |_| | |_| |   <  __/\n"
-                + "|____/ \\__,_|_|\\_\\___|\n";
-        System.out.println("Hello I'm Duke\nWhat can I do for you?" + logo);
+        System.out.println("Hello I'm Duke");
+        System.out.println("What can I do for you?");
         ArrayList<Task> array = new ArrayList<>(100);
         Scanner myObj = new Scanner(System.in);
         String reply = myObj.nextLine();
@@ -23,7 +19,7 @@ public class Duke {
                 Deadline deadline = new Deadline(replies[0],replies[1]);
                 array.add(deadline);
                 count += 1;
-                System.out.println("Got it. I've added this task: ");
+                System.out.println("Got it. I've added this task:");
                 System.out.println(deadline);
                 System.out.println("Now you have " + Task.actions + " tasks in the list");
 
@@ -34,7 +30,7 @@ public class Duke {
                 ToDo todo = new ToDo(reply);
                 array.add(todo);
                 count += 1;
-                System.out.println("Got it. I've added this task: ");
+                System.out.println("Got it. I've added this task:");
                 System.out.println(todo);
                 System.out.println("Now you have " + Task.actions + " tasks in the list");
 
@@ -46,7 +42,7 @@ public class Duke {
                 Event event = new Event(replies[0],replies[1],replies[2]);
                 array.add(event);
                 count += 1;
-                System.out.println("Got it. I've added this task: ");
+                System.out.println("Got it. I've added this task:");
                 System.out.println(event);
                 System.out.println("Now you have " + Task.actions + " tasks in the list");
 

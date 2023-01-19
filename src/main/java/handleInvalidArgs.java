@@ -17,20 +17,20 @@ public class handleInvalidArgs {
 
     public void checkForToDo(String replies) throws DukeException{
         if (replies.length() < 1) {
-            throw new DukeException("☹ OOPS!!! The description of a todo cannot be empty.");
+            throw new DukeException(" OOPS!!! The description of a todo cannot be empty.");
         }
     }
 
     public void checkForDeadline(String[] replies) throws DukeException{
         if (replies.length != 2) {
-            throw new DukeException("☹ OOPS!!! The description of a todo cannot be empty.");
+            throw new DukeException(" OOPS!!! The description of a todo cannot be empty.");
         }
     }
 
     public void checkForRandomWords(String replies) throws DukeException{
         if (!(toString().startsWith("deadline") || toString().startsWith("todo") || toString().startsWith("list")
                 || toString().startsWith("event") || toString().startsWith("mark") || toString().startsWith("unmark"))) {
-            throw new DukeException("☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
+            throw new DukeException(" OOPS!!! I'm sorry, but I don't know what that means :-(");
         }
     }
 }
