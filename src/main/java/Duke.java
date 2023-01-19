@@ -83,7 +83,7 @@ public class Duke {
                 }
                 // parse commands with arguments
                 else if (command.equals("mark")) {
-                    // possible errors for mark and unmark
+                    // possible errors for mark and unmark and delete
                     // 1. invalid # arguments (no mark target given)
                     // 2. mark target doesnt exist (out of range)
                     int index = Integer.parseInt(arguments[0]) - 1;
@@ -100,6 +100,15 @@ public class Duke {
                     currentTask.unmarkAsDone();
                     String s = String.format(
                         "Ok, I've marked this task as not done yet:\n %s",
+                        currentTask.toString()
+                    );
+                    Duke.prettyPrint(s);
+                } else if (command.equals("delete")) {
+                    int index = Integer.parseInt(arguments[0]) - 1;
+                    Task currentTask = list.get(index);
+                    list.remove(index);
+                    String s = String.format(
+                        "Noted. I've removed this task:\n %s",
                         currentTask.toString()
                     );
                     Duke.prettyPrint(s);
