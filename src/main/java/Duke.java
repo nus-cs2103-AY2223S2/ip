@@ -10,29 +10,33 @@ public class Duke {
         greeting();
         Scanner sc = new Scanner(System.in);
         boolean active = true;
+        List list = new List();
         while(active) {
-            String input = sc.next();
+            String input = sc.nextLine();
             switch(input) {
                 case "bye":
                     end();
                     active = false;
                     break;
+                case "list":
+                    list.print();
+                    break;
                 default:
-                    echo(input);
+                    list.add(input);
             }
         }
     }
 
     public static void greeting() {
         System.out.println(line);
+        System.out.println(
+                " ____        _        \n" +
+                "|  _ \\ _   _| | _____ \n" +
+                "| | | | | | | |/ / _ \\\n" +
+                "| |_| | |_| |   <  __/\n" +
+                "|____/ \\__,_|_|\\_\\___|");
         System.out.println("Hello! I'm Duke");
         System.out.println("What can I do for you?");
-        System.out.println(line);
-    }
-
-    public static void echo(String input) {
-        System.out.println(line);
-        System.out.println(input);
         System.out.println(line);
     }
 
