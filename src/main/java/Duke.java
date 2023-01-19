@@ -68,7 +68,20 @@ public class Duke {
                 } catch (IndexOutOfBoundsException e) {
                     System.out.println("Please add a task description, from and to date!!!");
                 }
-            } else {
+            } else if (input[0].equals("delete")) {
+                try {
+                    int toDelete = Integer.parseInt(input[1]) - 1;
+
+                    Task removedTask = allTasks.get(toDelete);
+                    allTasks.remove(toDelete);
+                    counter--;
+                    System.out.println("Alright, let me remove this task..." + "\n" + removedTask.currToPrint() + "\n" + "Now you have " + counter +
+                            " tasks in the list!" + "\n");
+                } catch (IndexOutOfBoundsException e) {
+                    System.out.println("Please add a correct task number");
+                }
+            }
+            else {
                 System.out.println("This is an incorrect input!!");
             }
         }
