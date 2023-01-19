@@ -44,6 +44,27 @@ public class DukeList {
     return;
   }
 
+  public static void insertToDo(String name) {
+    TaskToDo t = new TaskToDo(name);
+    records.add(t);
+    System.out.println(Duke.format("Got it. I've added this task:\n" + t.toString()));
+  }
+
+  public static void insertDeadline(String name, String time) {
+    TaskDeadline d = new TaskDeadline(name, time);
+    records.add(d);
+    System.out.println(Duke.format("Got it. I've added this task:\n" + d.toString()));
+  }
+
+  public static void insertEvent(String name, String time) {
+    String[] times = time.split("/", 2);
+    String from = times[0];
+    String to = times[1];
+    TaskEvent e = new TaskEvent(name, from, to);
+    records.add(e);
+    System.out.println(Duke.format("Got it. I've added this task:\n" + e.toString()));
+  }
+
   public Task getTask(int index) {
     return records.get(index);
   }

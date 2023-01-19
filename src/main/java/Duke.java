@@ -18,16 +18,28 @@ public class Duke {
   }
 
   public static void handleInput(String input, DukeList d) {
-    String[] split = input.split(" ");
-    String command = split[0];
-    if (split.length > 1) {
-      Integer index = Integer.parseInt(split[1]);
-      handleMultipleInput(command, index, d);
+    if (input.contains("/")) {
+      String[] split = input.split("/", 2);
+      String[] secondSplit = split[0].split(" ", 2);
+
+      String command = secondSplit[0];
+      String name = secondSplit[1];
+      String time = split[1];
+      handleThreeInputs(command, name, time, d);
     }
     else {
-      handleSingleInput(command, d);
+      String[] split = input.split(" ", 2);
+      String command = split[0];
+      if ("todo".equalsIgnoreCase(command)) {
+        d.insertToDo(split[1]);
+      }
+      else if (split.length > 1) {
+        Integer index = Integer.parseInt(split[1]);
+        handleTwoInputs(command, index, d);
+      } else {
+        handleSingleInput(command, d);
+      }
     }
-
   }
 
   public static void handleSingleInput(String command, DukeList d) {
@@ -43,13 +55,27 @@ public class Duke {
     }
   }
 
-  public static void handleMultipleInput(String command, Integer index, DukeList d) {
+  public static void handleTwoInputs(String command, Integer index, DukeList d) {
     switch (command) {
       case "mark":
         d.mark(index);
         break;
       case "unmark":
         d.unMark(index);
+        break;
+    }
+  }
+
+  public static void handleThreeInputs(String command, String name, String time, DukeList d) {
+    switch (command) {
+      case "deadline":
+        d.insertDeadline(name, time);
+        break;
+      case "event":
+        d.insertEvent(name, time);
+        break;
+      case "todo":
+        d.insertToDo(name);
         break;
     }
   }
