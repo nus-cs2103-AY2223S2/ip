@@ -15,7 +15,9 @@ public class Duke {
         System.out.println(new TextBorder("Waddup the name's Duncan. Sorry but Duke couldn't make it, had a pretty bad stomach-ache."));
         System.out.println(new TextBorder("So what do you need bro?"));
         while (true) {
-            String currWord = scanner.next();
+            String currWord = scanner.nextLine();
+            String[] array = currWord.split(" ", 2);
+            String first = array[0];
             if (currWord.equals("bye") ) {
                 System.out.println(new TextBorder("Sweet, seeya."));
                 break;
@@ -25,8 +27,15 @@ public class Duke {
                 } else {
                     System.out.println(new TextBorder(dukeList.toString()));
                 }
+            } else if (first.equals("mark")) {
+                String inputTask = array[1];
+                dukeList.findAndMark(inputTask, true);
+            } else if (first.equals("unmark")) {
+                String inputTask = array[1];
+                dukeList.findAndMark(inputTask, false);
+            } else{
+                dukeList.add(currWord);
             }
-            dukeList.add(currWord);
         }
     }
 }
