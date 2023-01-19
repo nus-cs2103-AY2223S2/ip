@@ -45,6 +45,10 @@ public class Duke {
                     String[] eventTask = temp2.split("/from|/to");
                     list.add(eventTask[0], eventTask[1], eventTask[2]);
                     break;
+                case "delete":
+                    int deleteIdx = sc.nextInt();
+                    list.remove(deleteIdx);
+                    break;
             }
             System.out.println(line + "\n");
         }

@@ -4,41 +4,49 @@ public class List {
     private ArrayList<Task> list = new ArrayList<>();
 
     public List() {
-        list.add(new ToDo("zeroth"));
+        this.list.add(new ToDo("zeroth"));
     }
 
     public void add(String input) {
         ToDo newTask = new ToDo(input);
-        list.add(newTask);
+        this.list.add(newTask);
         System.out.println("    Got it. I've added this task:");
         System.out.println("    " + newTask.toString());
-        System.out.println("    Now you have " + (list.size() - 1) + " tasks in the list.");
+        System.out.println("    Now you have " + (this.list.size() - 1) + " tasks in the list.");
     }
 
     public void add(String input, String deadline) {
         Deadline newTask = new Deadline(input, deadline);
-        list.add(newTask);
+        this.list.add(newTask);
         System.out.println("    Got it. I've added this task:");
         System.out.println("    " + newTask.toString());
-        System.out.println("    Now you have " + (list.size() - 1) + " tasks in the list.");
+        System.out.println("    Now you have " + (this.list.size() - 1) + " tasks in the list.");
     }
 
     public void add(String input, String from, String to) {
         Event newTask = new Event(input, from, to);
-        list.add(newTask);
+        this.list.add(newTask);
         System.out.println("    Got it. I've added this task:");
         System.out.println("    " + newTask.toString());
-        System.out.println("    Now you have " + (list.size() - 1) + " tasks in the list.");
+        System.out.println("    Now you have " + (this.list.size() - 1) + " tasks in the list.");
+    }
+
+    public void remove(int index) {
+        Task removedTask = this.list.get(index);
+        this.list.remove(index);
+        System.out.println("    Noted. I've removed this task:");
+        System.out.println("    " + removedTask.toString());
+        System.out.println("    Now you have " + (this.list.size() - 1) + " tasks in the list.");
     }
 
     public Task get(int index) {
-        return list.get(index);
+        return this.list.get(index);
     }
 
     public void print() {
         System.out.println("    Here are the tasks in your list:");
-        for (int i = 1; i < list.size(); i++) {
-            System.out.println("    " + i + ". " + list.get(i).toString());
+        for (int i = 1; i < this.list.size(); i++) {
+            System.out.println("    " + i + ". " + this.list.get(i).toString());
         }
     }
 }
