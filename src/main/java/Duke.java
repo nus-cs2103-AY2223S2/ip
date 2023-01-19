@@ -1,42 +1,12 @@
 import java.util.*;
 
 public class Duke {
-    public class Task {
-        protected String description;
-        protected boolean isDone;
-
-        public Task(String description) {
-            this.description = description;
-            this.isDone = false;
-        }
-
-        public String getStatusIcon() {
-            return (isDone ? "X" : " "); // mark done task with X
-        }
-
-        public void setDone(){
-            this.isDone = true;
-        }
-
-        public void setNotDone(){
-            this.isDone = false;
-        }
-
-        public String getName(){
-            return this.description;
-        }
-
-        @Override
-        public String toString (){
-            return "[" + getStatusIcon() + "] " + this.description +"\n";
-        }
-
-    }
-
 
     public static void main(String[] args) {
-        Task[] list = new Task[100];
-        int listLen = 0;
+//        Task[] list = new Task[100];
+//        int listLen = 0;
+//
+        TaskList taskList = new TaskList();
 
         String intro = "  ________________________________\n"
                 + "  Hello! I'm Mark\n"
@@ -58,49 +28,52 @@ public class Duke {
 
             //List Command
             if(splitStr[0].equals("list")) {
-                System.out.print("  ________________________________\n");
-                System.out.print("  Here are the tasks in tour list:\n");
-                for(int i = 0; i < listLen ; i++){
-                    int index = i + 1;
-                    String item = "  " + index + ". " + list[i].toString();
-                    System.out.print(item);
-                }
-                System.out.print("  ________________________________\n");
+                taskList.list();
                 continue;
             }
 
+            //mark
             if(splitStr[0].equals("mark")) {
                 int index = Integer.parseInt(splitStr[1]) - 1;
-                list[index].setDone();
-                String reply = "  ________________________________\n"
-                        + "  Nice! I've marked this task as done:\n"
-                        + "    " + list[index].toString()
-                        + "  ________________________________\n";
-
-                System.out.print(reply);
+                taskList.setDone(index);
                 continue;
             }
 
+            //unmark
             if(splitStr[0].equals("unmark")) {
                 int index = Integer.parseInt(splitStr[1]) - 1;
-                list[index].setNotDone();
-                String reply = "  ________________________________\n"
-                        + "  OK, I've marked this task as not done:\n"
-                        + "    " + list[index].toString()
-                        + "  ________________________________\n";
-
-                System.out.print(reply);
+               taskList.setNotDone(index);
                 continue;
             }
 
-            Task curr = new Duke().new Task(str);
-            list[listLen] = curr;
-            listLen++;
+            String requestContent = str.split(" ", 2).length == 2
+                    ? str.split(" ", 2)[1]
+                    : "";
 
-            String reply = "  ________________________________\n"
-                    + "  added: " + str + "\n"
-                    + "  ________________________________\n";
-            System.out.print(reply);
+            if (splitStr[0].equals("todo")) {
+                taskList.addToDo(requestContent);
+                continue;
+            }
+
+            if (splitStr[0].equals("deadline")) {
+                String[] requestInfo = requestContent.split("/by");
+                String description = requestInfo[0];
+                String by = requestInfo[1];
+                taskList.addDeadline(description, by);
+                continue;
+            }
+
+            if (splitStr[0].equals("event")) {
+                String[] requestInfo = requestContent.split("/from");
+                String description = requestInfo[0];
+                String[] fromTo = requestInfo[1].split("/to");
+
+                String from = fromTo[0];
+                String to = fromTo[1];
+                taskList.addEvent(description, from, to);
+                continue;
+            }
+
 
 
         }
