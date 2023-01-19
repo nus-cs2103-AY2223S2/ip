@@ -17,6 +17,23 @@ public class TaskList {
         return str;
     }
 
+    public String deleteTask(String deleteIndex) {
+        int index = Integer.parseInt(deleteIndex) - 1;
+        if (index < 0 || index > 99 || tasks[index] == null) {
+            throw new RuntimeException("Task does not exist!\n");
+        }
+        String str = "Got it! This task has been removed:\n";
+        str += this.printTask(index);
+        this.index--;
+        String sp = this.index == 1 ? "task" : "tasks";
+        str += "You now have " + this.index + " " + sp + " in the list.\n";
+        for (int i = index ; i < 99 ; i++) {
+            this.tasks[i] = this.tasks[i + 1];
+        }
+        this.tasks[99] = null;
+        return str;
+    }
+
     public String markTask(String markIndex) {
         int index = Integer.parseInt(markIndex) - 1;
         if (index < 0 || index > 99 || tasks[index] == null) {
@@ -28,12 +45,12 @@ public class TaskList {
         return str;
     }
 
-    public String unmarkTask(String unmarkIndex) {
+    public String unMarkTask(String unmarkIndex) {
         int index = Integer.parseInt(unmarkIndex) - 1;
         if (index < 0 || index > 99 || tasks[index] == null) {
             throw new RuntimeException("Task does not exist!\n");
         }
-        this.tasks[index].unmark();
+        this.tasks[index].unMark();
         String str = "Noted! This task has been marked as undone:\n";
         str += printTask(index);
         return str;

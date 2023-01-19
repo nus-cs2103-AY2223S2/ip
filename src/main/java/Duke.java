@@ -51,7 +51,16 @@ public class Duke {
             } else if (data.startsWith("unmark ")) {
                 try {
                     String unmarked_index = data.substring(7);
-                    System.out.println(taskList.unmarkTask(unmarked_index));
+                    System.out.println(taskList.unMarkTask(unmarked_index));
+                } catch (NumberFormatException e) {
+                    System.out.println("Target was not a number!");
+                } catch (RuntimeException e) {
+                    System.out.println(e.getMessage());
+                }
+            } else if (data.startsWith("delete ")) {
+                try {
+                    String deleted_index = data.substring(7);
+                    System.out.println(taskList.deleteTask(deleted_index));
                 } catch (NumberFormatException e) {
                     System.out.println("Target was not a number!");
                 } catch (RuntimeException e) {
@@ -64,6 +73,8 @@ public class Duke {
                 } catch (RuntimeException e) {
                     System.out.println(e.getMessage());
                 }
+            } else if (data.equals("")) {
+                continue;
             } else {
                 try {
                     throw new RuntimeException("Huh? I don't know what that means :(\n");

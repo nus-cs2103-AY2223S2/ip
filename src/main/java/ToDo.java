@@ -1,6 +1,6 @@
 public class ToDo extends Task {
     private ToDo(String description) {
-        super("T", description);
+        super(TaskType.TODO, description);
     }
 
     public static ToDo to(String str) {
