@@ -32,7 +32,12 @@ public class Homie {
         }
     }
 
-    public static void addTask(String[] command) {
+    public static void addTask(String[] command) throws HomieException {
+
+        if (command.length < 2) {
+            throw new EmptyDescriptionException("");
+        }
+
         String taskType = command[0];
         String description = command[1];
 
@@ -66,8 +71,8 @@ public class Homie {
         }
 
         Homie.print("   > Chu have " + taskList.size() + " tasks in the list.");
-    }
 
+    }
 
     public static void shutdown() {
         Homie.print("   > Aight imma head out");
@@ -78,31 +83,42 @@ public class Homie {
         Scanner sc = new Scanner(System.in);
 
         while (true) {
-            input = sc.nextLine();
+            try {
+                input = sc.nextLine();
 
-            // If input is bye, terminate
-            if (input.equals("bye")) {
-                Homie.shutdown();
-                break;
+                // If input is bye, terminate
+                if (input.equals("bye")) {
+                    Homie.shutdown();
+                    break;
+                }
+
+                // If input is list, list out the content in task list
+                if (input.equals("list")) {
+                    Homie.listTasks();
+                    continue;
+                }
+
+                // Split strings into 2, first part is the instruction, 2nd part is the description
+                String[] command = input.split(" ", 2);
+
+                // If command is to mark or unmark task, do accordingly
+                if (command[0].equals("mark") || command[0].equals("unmark")) {
+                    Homie.modifyTask(command);
+                    continue;
+                }
+
+                // Else input is a task, add to task list
+                if (command[0].equals("todo") || command[0].equals("deadline") || command[0].equals("event")) {
+                    Homie.addTask(command);
+                    continue;
+                }
+
+                // If reached here, bot do not understand
+                throw new IndecipherableTextException("");
+
+            } catch (HomieException e) {
+                Homie.print(e.toString());
             }
-
-            // If input is list, list out the content in task list
-            if (input.equals("list")) {
-                Homie.listTasks();
-                continue;
-            }
-
-            // Split strings into 2, first part is the instruction, 2nd part is the description
-            String[] command = input.split(" ", 2);
-
-            // If command is to mark or unmark task, do accordingly
-            if (command[0].equals("mark") || command[0].equals("unmark")) {
-                Homie.modifyTask(command);
-                continue;
-            }
-
-            // Else input is a task, add to task list
-            Homie.addTask(command);
         }
     }
 
