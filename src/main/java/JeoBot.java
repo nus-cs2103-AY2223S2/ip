@@ -10,10 +10,10 @@ public class JeoBot {
     public static void echo() {
         String divider = "________________________________________________________________";
         boolean hasInput = true;
+        Scanner sc = new Scanner(System.in);
         Storage st = new Storage();
         while (hasInput) {
-            Scanner in = new Scanner(System.in);
-            String s = in.nextLine();
+            String s = sc.nextLine();
             s = s.trim();
             String command = s.replaceAll("\\s", "").toLowerCase();
             // Check if first word of command is "mark" or "unmark", and if an integer follows after
@@ -69,7 +69,7 @@ public class JeoBot {
                     break;
                 case "todo":
                     if (s.replaceAll("\\s", "").toLowerCase().equals("todo")) {
-                        System.out.println("Invalid command given!");
+                        System.out.println("Please add a description!");
                         break;
                     }
                     Task task = new ToDo(s.substring(4).trim());
@@ -77,11 +77,10 @@ public class JeoBot {
                     break;
                 case "deadline":
                     if (s.replaceAll("\\s", "").toLowerCase().equals("deadline")) {
-                        System.out.println("Invalid command given!");
+                        System.out.println("Please add a description!");
                         break;
                     }
                     s = s.substring(8).trim();
-                    System.out.println(s);
                     StringBuilder sb = new StringBuilder();
                     int i = 0;
                     while (i < s.length()) {
@@ -102,7 +101,7 @@ public class JeoBot {
                     break;
                 case "event":
                     if (s.replaceAll("\\s", "").toLowerCase().equals("event")) {
-                        System.out.println("Invalid command given!");
+                        System.out.println("Please add a description!");
                         break;
                     }
                     s = s.substring(5).trim();
@@ -139,10 +138,11 @@ public class JeoBot {
                     st.addTask(task);
                     break;
                 default:
-                    System.out.println("Invalid command given!");
+                    System.out.println("Sorry, I don't understand what you're saying :(");
             }
             System.out.println(divider);
         }
+        sc.close();
     }
 
     public static void main(String[] args) {

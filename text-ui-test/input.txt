@@ -1,0 +1,16 @@
+todo read book
+deadline assignment /by Friday 2pm
+event attend interview /from Thursday 9.30am /to 10am
+todo apply for internships
+todo
+todo exercise
+list
+mark 2
+unmark 2
+mark 5
+mark 6
+mark 5
+unmark 1
+list
+hello
+bye
