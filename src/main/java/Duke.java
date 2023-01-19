@@ -1,38 +1,50 @@
+import java.util.Arrays;
 import java.util.Scanner;
 
 public class Duke {
-    static String processCommand(String command, TaskList taskList) {
-        String commandArr[] = command.split(" ");
-        if (commandArr[0].equals("list")) {
+    static String processCommand(String command, TaskList taskList) throws DukeException {
+        String[] commandArr = command.split(" ");
+        if ("list".equals(commandArr[0])) {
             return taskList.toString();
-        } else if (commandArr[0].equals("mark")) {
+        } else if ("mark".equals(commandArr[0])) {
             return taskList.markTask(Integer.parseInt(commandArr[1]));
-        } else if (commandArr[0].equals("unmark")) {
+        } else if ("unmark".equals(commandArr[0])) {
             return taskList.unmarkTask(Integer.parseInt(commandArr[1]));
-        } else {
-            return taskList.addTask(command);
         }
+        return taskList.addTask(command);
     }
 
     static String greetings() {
-        return "\tHello! I'm Duke\n\tWhat can I do for you?\n";
+        return "Hello! I'm Duke\nWhat can I do for you?";
     }
 
     static String goodbye() {
-        return "\tBye. Hope to see you soon!\n";
+        return "Bye. Hope to see you soon!";
     }
 
     static String display(String response) {
         String horizontalLine = "\t______________________________________\n";
-        return String.format("%s%s%s", horizontalLine, response, horizontalLine);
+        String[] responseArr = response.split("\\r?\\n");
+        String responseFinal = "";
+        //add indentation
+        for (String r: responseArr) {
+            responseFinal += "\t" + r + "\n";
+        }
+        return String.format("%s%s%s", horizontalLine, responseFinal, horizontalLine);
     }
     public static void main(String[] args) {
-        Scanner sc = new Scanner(System .in);
+        Scanner sc = new Scanner(System.in);
         System.out.println(display(greetings()));
-        String command;
+        String command = "", printable = "";
         TaskList taskList = new TaskList();
         while (!(command = sc.nextLine()).equals("bye")) {
-            System.out.println(display(processCommand(command, taskList)));
+            try {
+                printable = processCommand(command, taskList);
+            } catch (Exception e) {
+                printable = "OOPS! " + e.getMessage();
+            } finally {
+                System.out.println(display(printable));
+            }
         }
         System.out.println(display(goodbye()));
     }

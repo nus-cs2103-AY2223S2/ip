@@ -27,6 +27,10 @@
 	______________________________________
 
 	______________________________________
+	OOPS! The description of a task cannot be empty!
+	______________________________________
+
+	______________________________________
 	Got it. I've added this task:
 	   [E][ ] project meeting (from: Mon 2pm to: 4pm)
 	Now you have 3 tasks in the list.
@@ -40,6 +44,10 @@
 	______________________________________
 	Nice! I've marked this task as done:
 	   [D][X] return book (by: Sunday)
+	______________________________________
+
+	______________________________________
+	OOPS! I'm sorry, I don't understand what that means :-(
 	______________________________________
 
 	______________________________________
