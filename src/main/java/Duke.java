@@ -3,16 +3,18 @@ import java.util.*;
 public class Duke {
     private static final String divider = "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\n";
     private static ArrayList<Task> al = new ArrayList<>();
+    private static StringBuilder sb = new StringBuilder();
+    private static BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
 
 
     public static void welcome() {
         String welcome = "Welcome hooman!\n" +
-                "Wat u want today?\n";
-        System.out.println(divider + "Hello from\n" + welcome + divider);
+                "Wat u want to do today?\n";
+        System.out.println(divider + welcome + divider);
     }
 
     public static void bye() {
-        System.out.println(divider + "Ah..... okkkk nehmind. GO. BYE. :)");
+        System.out.println(divider + "Ah..... okkkk nehmind. GO. BYE. :)\n" + divider);
     }
 
     public static void printList() {
@@ -27,32 +29,44 @@ public class Duke {
                 System.out.print(curr);
                 count++;
             }
-            System.out.print(divider);
+            System.out.println(divider);
         }
     }
     public static void printDefault(Task t) {
-        System.out.println(divider + "Aite letsgetit you added: \n" + t.toString() + "\n" +
-                "currently you have " + t.numberTask() + " tasks \n" + divider);
+        System.out.println(divider + "Aite letsgetit you added:\n" + t.toString()  +
+                "currently you have " + t.numberTask() + " tasks\n" + divider);
     }
 
-    public static void mark(String i) {
+    public static void mark(String i) throws Exception{
         int cint = Integer.parseInt(i) - 1;
-        Task curr = al.get(cint);
-        curr.mark();
-        System.out.println(divider + "Congrats this has been done:\n"
-                        + curr.toString() + "\nOne down, Leskooo!\n" + divider);
+        try {
+            Task curr = al.get(cint);
+            curr.mark();
+            System.out.println(divider + "Congrats this has been done:\n"
+                    + curr.toString() + "\nOne down, Leskooo!\n" + divider);
+        } catch (Exception m){
+            System.out.println("Number entered out of range, type the number again");
+            String s = br.readLine();
+            mark(s);
+        }
     }
 
-    public static void unmark(String i) {
+    public static void unmark(String i) throws Exception{
         int cint = Integer.parseInt(i) - 1 ;
-        Task curr = al.get(cint);
-        curr.unmark();
-        System.out.println(divider + "Alright, new task:\n" + curr.toString()
-                + "\nWe can do dis!\n" + divider);
+        try {
+            Task curr = al.get(cint);
+            curr.unmark();
+            System.out.println(divider + "Alright, new task:\n" + curr.toString()
+                    + "\nWe can do dis!\n" + divider);
+        } catch (Exception m) {
+            System.out.println("Number entered out of range, type the number again");
+            String s = br.readLine();
+            unmark(s);
+        }
     }
 
     public static Event createEvent(String[] splited) {
-        StringBuilder sb = new StringBuilder();
+
         boolean one = true;
         boolean two = false;
         boolean three = false;
@@ -88,7 +102,6 @@ public class Duke {
     }
 
     public static Deadline createDeadline(String[] splited) {
-        StringBuilder sb = new StringBuilder();
         boolean one = true;
         String n = " ", e = " ";
         for (int i = 1; i < splited.length; i++) {
@@ -110,10 +123,28 @@ public class Duke {
         e = sb.toString();
         return new Deadline(n, e);
     }
-    public static void main(String[] args) throws IOException {
+
+    public static Todo createTodo(String[] splited) throws Exception{
+        if (splited.length == 1) {
+            System.out.println("What do u need to do ah? u never write.");
+            String s = br.readLine();
+            Todo t = new Todo(s);
+            sb.setLength(0);
+            return t;
+        } else {
+            for (int i = 1; i < splited.length; i++) {
+                sb.append(splited[i]);
+                if (i + 1 != splited.length) {
+                    sb.append(" ");
+                }
+            }
+            Todo t = new Todo(sb.toString());
+            sb.setLength(0);
+            return t;
+        }
+    }
+    public static void main(String[] args) throws Exception {
         welcome();
-        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
-        StringBuilder sb = new StringBuilder();
         String in = br.readLine();
         String[] splited = in.split(" ");
         String bye = "bye";
@@ -129,12 +160,7 @@ public class Duke {
                     unmark(splited[1]);
                     break;
                 case "TODO" :
-                    for (int i = 1; i < splited.length; i++) {
-                        sb.append(splited[i]);
-                        sb.append(" ");
-                    }
-                    Todo t = new Todo(sb.toString());
-                    sb.setLength(0);
+                    Todo t = createTodo(splited);
                     al.add(t);
                     printDefault(t);
                     break;
@@ -149,6 +175,7 @@ public class Duke {
                     printDefault(d);
                     break;
                 default:
+                    System.out.println(divider+ "I have no idea what is going on, try again?\n" + divider);
                     break;
 
             }
