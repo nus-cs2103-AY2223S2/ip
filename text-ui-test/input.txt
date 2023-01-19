@@ -1,0 +1,14 @@
+todo clean room
+deadline homework /by Friday
+event sleep /from 10pm /to 6am
+list
+mark 1
+mark 3
+list
+unmark 1
+list
+echo meow!
+todo
+deadline /from tomorrow /to yesterday
+event whatever /to tomorrow
+bye
