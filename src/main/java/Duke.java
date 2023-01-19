@@ -21,11 +21,10 @@ public class Duke {
         List<Task> tasks = new ArrayList<Task>();
 
         while (flag_continue) {
-            String[] input = sc.nextLine().trim().split(" ", 2);
-            StringBuilder output = new StringBuilder(LINE);
-
             try {
                 Input op;
+                StringBuilder output = new StringBuilder(LINE);
+                String[] input = sc.nextLine().trim().split(" ", 2);
 
                 try {
                     op = Input.valueOf(input[0]);
@@ -127,7 +126,7 @@ public class Duke {
 
                     case event:
                         try {
-                            String[] cmd = input[1].split(" /by ", 2);
+                            String[] cmd = input[1].split(" /from ", 2);
                             String[] time = cmd[1].split(" /to ", 2);
                             Task task = new Event(cmd[0], time[0], time[1]);
                             tasks.add(task);
@@ -136,7 +135,7 @@ public class Duke {
                             break;
                         } catch(ArrayIndexOutOfBoundsException e) {
                             if(input.length == 1) { throw new DukeException("The description of an event cannot be empty."); }
-                            String[] cmd = input[1].split(" /by ", 2);
+                            String[] cmd = input[1].split(" /from ", 2);
                             if(cmd.length == 1) {
                                 throw new DukeException("An event must have a duration.");
                             } else {
