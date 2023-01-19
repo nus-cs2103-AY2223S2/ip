@@ -2,8 +2,19 @@ import java.util.*;
 
 public class Duke {
     private static Scanner sc = new Scanner(System.in);
-    private static String horizontalLine = "________________________________\n";
+    private static String horizontalLine = "________________________________________________________________\n";
     private static ArrayList<Task> taskList = new ArrayList<Task>();
+
+    private static enum Action {
+        todo,
+        deadline,
+        event,
+        list,
+        mark,
+        unmark,
+        delete,
+        bye;
+    }
 
     public static void main(String[] args) {
         greeting();
@@ -13,7 +24,7 @@ public class Duke {
                 if (printMenu(input)) {
                     break;
                 }
-            } catch (DukeException | NoSuchElementException e) {
+            } catch (DukeException | NoSuchElementException | IllegalArgumentException e) {
                 System.out.println(e.getMessage());
             }
         }
@@ -49,53 +60,53 @@ public class Duke {
      * @param   input   User input for the program menu
      * @return  Status whether the program should exit or not
      */
-    private static boolean printMenu(String input) throws DukeException, NoSuchElementException {
+    private static boolean printMenu(String input) throws DukeException, NoSuchElementException, IllegalArgumentException {
         boolean exitStatus = false;
 
         String[] splitInput = input.split(" ");
-        String action = splitInput[0];
+        Action action = Action.valueOf(splitInput[0]);
 
         switch (action) {
-            case "todo":
+            case todo:
                 if (splitInput.length < 2) {
                     throw new DukeException("The description of a todo cannot be empty.");
                 }
                 todo(input.split(" ", 2)[1]);
                 break;
-            case "deadline":
+            case deadline:
                 if (splitInput.length < 2) {
                     throw new DukeException("The description of a deadline cannot be empty.");
                 }
                 deadline(input.split(" ", 2)[1]);
                 break;
-            case "event":
+            case event:
                 if (splitInput.length < 2) {
                     throw new DukeException("The description of a event cannot be empty.");
                 }
                 event(input.split(" ", 2)[1]);
                 break;
-            case "list":
+            case list:
                 list();
                 break;
-            case "mark":
+            case mark:
                 if (splitInput.length < 2) {
                     throw new DukeException("The task index cannot be empty.");
                 }
                 mark(splitInput[1]);
                 break;
-            case "unmark":
+            case unmark:
                 if (splitInput.length < 2) {
                     throw new DukeException("The task index cannot be empty.");
                 }
                 unmark(splitInput[1]);
                 break;
-            case "delete":
+            case delete:
                 if (splitInput.length < 2) {
                     throw new DukeException("The task index cannot be empty.");
                 }
                 delete(splitInput[1]);
                 break;
-            case "bye":
+            case bye:
                 exit();
                 exitStatus = true;
                 break;
