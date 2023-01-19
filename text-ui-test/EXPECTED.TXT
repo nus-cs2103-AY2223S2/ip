@@ -1,7 +1,31 @@
-Hello from
- ____        _        
-|  _ \ _   _| | _____ 
-| | | | | | | |/ / _ \
-| |_| | |_| |   <  __/
-|____/ \__,_|_|\_\___|
-
+Whats good its duke
+what do you want from me
+Gotchu fam
+I've added
+[T][ ] read book
+to all the shit u need to do
+shag bro now u got 1 tasks
+Gotchu fam
+I've added
+[E][ ] event meeting (from: now to: later)
+to all the shit u need to do
+shag bro now u got 2 tasks
+Gotchu fam
+I've added
+[D][ ] deadline return book (by:  tomorrow)
+to all the shit u need to do
+shag bro now u got 3 tasks
+1.[T][ ] read book
+2.[E][ ] event meeting (from: now to: later)
+3.[D][ ] deadline return book (by:  tomorrow)
+Congrats bro you've done something with your life
+[T][X] read book
+1.[T][X] read book
+2.[E][ ] event meeting (from: now to: later)
+3.[D][ ] deadline return book (by:  tomorrow)
+Stop being useless why u ask me to unmark
+[T][ ] read book
+1.[T][ ] read book
+2.[E][ ] event meeting (from: now to: later)
+3.[D][ ] deadline return book (by:  tomorrow)
+Thanks for using me brother
