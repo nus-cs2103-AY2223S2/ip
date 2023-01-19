@@ -9,7 +9,7 @@ public class Duke {
                 + "|____/ \\__,_|_|\\_\\___|\n";
         System.out.println("Hello from\n" + logo + "How may I be of service to you? \nEnter your command:");
         String commandToEcho = sc.nextLine();
-        while (!commandToEcho.equals("bye") {
+        while (!commandToEcho.equals("bye")) {
             System.out.println(commandToEcho);
             commandToEcho = sc.nextLine();
         }
