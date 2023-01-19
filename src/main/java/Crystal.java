@@ -58,9 +58,10 @@ class Crystal {
                 } else if (input.contains("deadline")) {
                     System.out.println(" ____________________________________________________________");
                     String s = input.replace("deadline", "");
-                    int index = s.indexOf("/");
-                    String subs = s.substring(0, index);
-                    String subsubs = s.substring(index + 3);
+                    String[] arr = s.split("/");
+                    String subs = arr[0];
+                    String n = arr[1];
+                    String subsubs = n.replace("by", "");
                     Deadline d = new Deadline(subs, subsubs);
                     d.isSet = true;
                     System.out.println("Alright, I've added this task: ");
@@ -71,15 +72,12 @@ class Crystal {
                 } else if (input.contains("event")) {
                     System.out.println(" ____________________________________________________________");
                     String s = input.replace("event", "");
-                    String temp = s;
-                    int index = s.indexOf("/");
-                    String subs = s.substring(0, index);
-                    temp = temp.substring(temp.indexOf("/") + 1);
-                    temp = temp.substring(0, temp.indexOf("/"));
-                    String subsubs = temp.substring(4);
-                    String lastsub = s.substring(s.lastIndexOf("/") + 1);
-                    String sublastsub = lastsub.substring(3);
-
+                    String[] arr = s.split("/");
+                    String subs = arr[0];
+                    String n = arr[1];
+                    String subsubs = n.replace("from", "");
+                    String t = arr[2];
+                    String sublastsub = t.replace("to", "");
                     Event e = new Event(subs, subsubs, sublastsub);
                     e.isSet = true;
                     System.out.println("Alright, I've added this task: ");
