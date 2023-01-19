@@ -20,7 +20,7 @@ public class Joe {
             try {
                 if (input[0].equals("list")) {
                     taskList.returnList();
-                } else if (input[0] == "bye") {
+                } else if (input[0].equals("bye")) {
                     sayBye();
                 } else {
                     throw new UnknownCommandException();
@@ -36,6 +36,8 @@ public class Joe {
                 case ("unmark"):
                     taskList.unmark(input[1]);
                     break;
+                case ("delete"):
+                    taskList.delete(input[1]);
                 default:
                     taskList.addTask(input);
                     break;
