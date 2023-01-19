@@ -1,13 +1,13 @@
 public class Task {
-	private String desc;
-	private boolean isDone;
+	protected String desc;
+	protected boolean isDone;
 	
 	Task(String desc) {
 		this.desc = desc;
 		this.isDone = false;
 	}
 	
-	String getIcon() {
+	String getStatus() {
 		if (this.isDone) {
 			return "X";
 		} else {
@@ -17,8 +17,8 @@ public class Task {
 	
 	@Override
 	public String toString() {
-		return String.format("[%s]  %s",
-				getIcon(), this.desc);
+		return String.format("[T][%s]  %s",
+				getStatus(), this.desc);
 	}
 	
 	boolean yesDo() {

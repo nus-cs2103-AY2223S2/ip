@@ -2,7 +2,7 @@ import java.util.Scanner;
 
 public class Cbot {
     public static void main(String[] args) {
-		ToDo td = new ToDo();
+		TaskList tl = new TaskList();
 		
         String dukeLogo = " ____        _\n"
                 + "|  _ \\ _   _| | _____ \n"
@@ -17,61 +17,145 @@ public class Cbot {
 				+ " \\_____]|_,_*_/\\_*_/ |_/\n";
 		
 		// Frequently Used Strings
-		String indent = "      ~ ";
-		String prompt = " v v\n";
-		String stall = "\n   o\n   o\n   o\n\n";
+		String INDENT	= "      ~ ";
+		String WARNING	= "      ! ";
+		String PROMPT 	= " v v\n";
+		String STALL 	= "\n   o\n   o\n   o\n\n";
 		
-		// Command Words
-		String endString = "bye";
-		String listTasks = "list";
-		String toMark = "mark";
-		int markLen = toMark.length();
-		String toUnmark = "unmark";
-		int unmarkLen = toUnmark.length();
-		
-        System.out.println(stall + indent + "Hey! D:< I'm not\n" + dukeLogo);
-		System.out.println(indent + "I'm\n" + cbotLogo);
-		System.out.println(stall + indent
-				+ "How can I help you today?\n" + prompt);
+        System.out.println(STALL + INDENT + "Hey! D:< I'm not\n" + dukeLogo);
+		System.out.println(INDENT + "I'm\n" + cbotLogo);
+		System.out.println(STALL + INDENT
+				+ "How can I help you today?\n");
 		
 		Scanner sc = new Scanner(System.in);
-		String userInput = sc.nextLine();
+		boolean loop = true;
 		
-		while (!userInput.equals(endString)) {
-			System.out.println();
+		while (loop) {
+			System.out.println(PROMPT);
+			String userInput = sc.nextLine();
 			
-			if (userInput.equals(listTasks)) {
-				if (td.getCount() == 0) {
-					System.out.println(indent + "Freedom! You have no tasks :D");
-				} else {
-					System.out.println(indent + "Here's what you have:");
-					td.printTasks();
-					System.out.println();
+			Command com = Command.NOMATCH;
+			String userText = userInput;
+			
+			for (Command c : Command.values()) {
+				if (c.match(userInput)) {
+					userText = c.getText(userInput);
+					com = c;
+					break;
 				}
-			} else if (userInput.length() > markLen + 1
-					&& userInput.substring(0, markLen).equals(toMark)) {
-				try {
-					int num = Integer.valueOf(userInput.substring(markLen + 1));
-					System.out.println(indent + td.mark(num));
-				} catch (NumberFormatException ex) {
-					System.out.println("Hm, that's not a valid index!");
-				}
-			} else if (userInput.length() > unmarkLen + 1
-					&& userInput.substring(0, unmarkLen).equals(toUnmark)) {
-				try {
-					int num = Integer.valueOf(userInput.substring(unmarkLen + 1));
-					System.out.println(indent + td.unmark(num));
-				} catch (NumberFormatException ex) {
-					System.out.println("Hm, that's not a valid index!");
-				}
-			} else {
-				System.out.println(indent + td.addTask(userInput));
 			}
 			
-			System.out.println(prompt);
-			userInput = sc.nextLine();
+			switch (com) {
+				case BYE:
+					loop = false;
+					break;
+				
+				case LIST:
+					if (tl.getCount() == 0) {
+						System.out.println(INDENT + "Freedom! You have no tasks :D");
+					} else {
+						System.out.println(INDENT + "Here's what you have:");
+						tl.printTasks();
+						System.out.println();
+					}
+					break;
+				
+				case MARK:
+					try {
+						int num = Integer.valueOf(userText);
+						System.out.println(INDENT + tl.mark(num));
+					} catch (NumberFormatException ex) {
+						System.out.println(WARNING + "<Error> Invalid index!");
+					}
+					break;
+				
+				case UNMARK:
+					try {
+						int num = Integer.valueOf(userText);
+						System.out.println(INDENT + tl.unmark(num));
+					} catch (NumberFormatException ex) {
+						System.out.println(WARNING + "<Error> Invalid index!");
+					}
+					break;
+				
+				case TODO:
+					System.out.println(INDENT + tl.addTask(new Task(userText)));
+					break;
+				
+				case DEADLINE:
+					String BY_KEYWORD = " /by ";
+					int BY_LENGTH = BY_KEYWORD.length();
+				
+					if (userText.contains(BY_KEYWORD)) {
+						int byIndex = userText.indexOf(BY_KEYWORD);
+						
+						if (byIndex == 0) {
+							// no desc
+							System.out.println(WARNING + "<Error> Missing deadline description");
+						} else if (byIndex + BY_LENGTH == userText.length()) {
+							// no due date
+							System.out.println(WARNING + "<Error> Missing due date");
+						} else {
+							// all's good
+							String dlDesc = userText.substring(0, byIndex);
+							String dlDue = userText.substring(byIndex + BY_LENGTH);
+							
+							System.out.println(INDENT + tl.addTask(new Deadline(dlDesc, dlDue)));
+						}
+					} else {
+						// no /by
+						System.out.println(WARNING + "<Error> Missing \"/by\" keyword");
+					}
+					break;
+				
+				case EVENT:
+					String FROM_KEYWORD = " /from ";
+					String TO_KEYWORD = " /to ";
+					int FROM_LENGTH = FROM_KEYWORD.length();
+					int TO_LENGTH = TO_KEYWORD.length();
+				
+					if (userText.contains(FROM_KEYWORD)) {
+						int fromIndex = userText.indexOf(FROM_KEYWORD);
+						
+						if (userText.contains(TO_KEYWORD)) {
+							int toIndex = userText.indexOf(TO_KEYWORD);
+							
+							if (toIndex < toIndex) {
+								// /to before /from
+								System.out.println(WARNING + "<Error> \"/to\" before \"from\"");
+							} else if (fromIndex == 0) {
+								// no desc
+								System.out.println(WARNING + "<Error> Missing event description");
+							} else if (fromIndex + FROM_LENGTH >= toIndex) {
+								// no start
+								System.out.println(WARNING + "<Error> Missing start date");
+							} else if (toIndex + TO_LENGTH == userText.length()) {
+								// no end
+								System.out.println(WARNING + "<Error> Missing end date");
+							} else {
+								// all's good
+								String eDesc = userText.substring(0, fromIndex);
+								String eStart = userText.substring(fromIndex + FROM_LENGTH, toIndex);
+								String eEnd = userText.substring(toIndex + TO_LENGTH);
+							
+								System.out.println(INDENT + tl.addTask(new Event(eDesc, eStart, eEnd)));
+							}
+						} else {
+							// no /to
+							System.out.println(WARNING + "<Error> Missing \"/to\" keyword");
+						}
+					} else {
+						// no /by
+						System.out.println(WARNING + "<Error> Missing \"/from\" keyword");
+					}
+					break;
+				
+				case NOMATCH:
+					System.out.println(INDENT + "Sorry, I don't recognize that command :<");
+					break;
+			}
 		}
 		
-		System.out.println(stall + indent + "See you again!");
+		System.out.println(STALL + INDENT + "See you again!");
     }
 }

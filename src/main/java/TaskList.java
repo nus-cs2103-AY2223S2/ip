@@ -1,12 +1,12 @@
 import java.util.ArrayList;
 
-public class ToDo {
+public class TaskList {
 	private static final int MAX_SIZE = 100;
 	//private static final int GAPS = 11;
 	private static final String GAP = "             ";
 	private ArrayList<Task> tdl;
 	
-	ToDo() {
+	TaskList() {
 		this.tdl = new ArrayList<Task>();
 	}
 	
@@ -14,9 +14,10 @@ public class ToDo {
 		return this.tdl.size();
 	}
 	
-	String addTask(String str) {
-		this.tdl.add(new Task(str));
-		return "Task \"" + str + "\" added!";
+	String addTask(Task task) {
+		this.tdl.add(task);
+		return String.format("\"%s\" added!",
+				task.toString());
 	}
 	
 	void printTasks() {
@@ -48,7 +49,7 @@ public class ToDo {
 		int index = num - 1;
 		
 		if (tdl.get(index).yesDo()) {
-			return "Yay! You've completed:\n" + GAP
+			return "Woohoo! You've completed:\n" + GAP
 					+ tdl.get(index).toString();
 		} else {
 			return "You've already done:\n" + GAP
@@ -64,7 +65,7 @@ public class ToDo {
 		int index = num - 1;
 		
 		if (tdl.get(index).noDo()) {
-			return "Aw :( I've unmarked:\n" + GAP
+			return "Aw, okay :( I've unmarked:\n" + GAP
 					+ tdl.get(index).toString();
 		} else {
 			return "Hm, you haven't yet done:\n" + GAP
