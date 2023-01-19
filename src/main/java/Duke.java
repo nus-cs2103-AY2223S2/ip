@@ -21,20 +21,21 @@ public class Duke {
         System.out.println("\t____________________________________________________________");
         for (int i = 0; i < input.size(); i++) {
             Task t = input.get(i);
-            System.out.println("\t" + (i + 1) + ".[" + (t.done ? "X" : " ") + "] " + t.task);
+            System.out.println("\t" + (i + 1) + "." + t.toString());
         }
         System.out.println("\t____________________________________________________________");
     }
 
     public static void taskMarker(Task input) {
         System.out.println("\t____________________________________________________________");
+
         if (input.done) {
             System.out.println("\tNice! I've marked this task as done:");
-            System.out.println("\t[X] " + input.task);
+
         } else {
             System.out.println("\tNice! I've marked this task as not done:");
-            System.out.println("\t[ ] " + input.task);
         }
+        System.out.println("\t" + input.toString());
         System.out.println("\t____________________________________________________________");
     }
 

@@ -14,4 +14,8 @@ public class Task {
     public void markAsNotDone() {
         done = false;
     }
+
+    public String toString() {
+        return "[" + (done ? "X" : " ") + "] " + task;
+    }
 }
