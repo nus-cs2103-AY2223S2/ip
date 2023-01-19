@@ -34,6 +34,7 @@ public class TokenUtilities {
             if (delim.contains(token)) {
                 currentDelim = token;
                 rightBuilders.put(token, new StringBuilder());
+                continue;
             }
             if (currentDelim == null) {
                 left.append(token);

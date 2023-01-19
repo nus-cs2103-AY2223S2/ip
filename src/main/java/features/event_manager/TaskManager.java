@@ -4,6 +4,8 @@ package features.event_manager;
 import event_loop.*;
 
 import java.util.ArrayList;
+import java.util.Map;
+import java.util.Set;
 import java.util.function.Function;
 import java.util.function.Supplier;
 
@@ -26,7 +28,9 @@ public class TaskManager implements ExecutableRegisterable {
         this(new ArrayList<>());
     }
 
-    /// The list of tasks that this manager contains.
+    /**
+     * The list of tasks that this manager contains.
+     */
     private ArrayList<Task> tasks;
 
     /**
@@ -43,7 +47,7 @@ public class TaskManager implements ExecutableRegisterable {
      * @param id the id of the task instance.
      * @return the executable for adding a Task to this class.
      */
-    IdentifiableExecutable getAddTaskExecutable(Function<String, Task> taskSupplier, String id) {
+    IdentifiableExecutable getAddTaskExecutable(Function<String[], Task> taskSupplier, String id) {
         return new IdentifiableExecutable() {
             @Override
             public String getId() {
@@ -56,8 +60,7 @@ public class TaskManager implements ExecutableRegisterable {
                 for (int i = 0; i < tokens.length - 1; i++) {
                     newTokens[i] = tokens[i+1];
                 }
-                final String name = String.join(" ", newTokens);
-                final Task task = taskSupplier.apply(name);
+                final Task task = taskSupplier.apply(newTokens);
                 addTodo(task);
                 System.out.println("added: " + task);
                 return ExitStatus.finishCurrentIteration;
@@ -116,15 +119,15 @@ public class TaskManager implements ExecutableRegisterable {
     @Override
     public void register(NestableExecutableObject nestable) {
         nestable.registerIdentifiableExecutable(getAddTaskExecutable(
-                ToDo::new,
+                ToDo::fromTokens,
                 "todo"
         ));
         nestable.registerIdentifiableExecutable(getAddTaskExecutable(
-                Deadline::new,
+                Deadline::fromTokens,
                 "deadline"
         ));
         nestable.registerIdentifiableExecutable(getAddTaskExecutable(
-                Event::new,
+                Event::fromTokens,
                 "event"
         ));
         nestable.registerIdentifiableExecutable(getListTodosExecutable());
