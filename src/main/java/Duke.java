@@ -11,9 +11,18 @@ public class Duke {
     public static void main(String[] args) {
         System.out.println(intro());
         
-        String userInput = askForInput();
-        EventType curEvent = decodeInput(userInput);
+        String userInput;
+        EventType curEvent;
         loop: while (true) {
+
+            userInput = askForInput();
+            try {
+                curEvent = decodeInput(userInput);
+            } catch (DukeException e) {
+                System.out.println(e.getMessage());
+                continue;
+            }
+
             switch (curEvent) {
             case ADD:
                 storedInputs.add(new Task(userInput));
@@ -41,8 +50,6 @@ public class Duke {
                 break;
             }
             
-            userInput = askForInput();
-            curEvent = decodeInput(userInput);
         }
 
         System.out.println("Good Riddance!");
@@ -65,7 +72,7 @@ public class Duke {
         return getInput.nextLine();
     }
 
-    private static EventType decodeInput(String input) {
+    private static EventType decodeInput(String input) throws DukeException {
         String[] arr = input.split(" ");
         
         if (arr[0].equals("bye")) {
@@ -89,8 +96,8 @@ public class Duke {
         if (arr[0].equals("event")) {
             return EventType.EVENT;
         }
-
-        return EventType.ADD;
+        
+        throw new DukeException("☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
     }
 
     private static void markEvent(String userInput) {
