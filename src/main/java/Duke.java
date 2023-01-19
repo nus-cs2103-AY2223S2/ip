@@ -29,15 +29,17 @@ public class Duke {
             }
 
             // Commands
-            System.out.println(DIV_OPEN); // DIV_OPEN for output
+            System.out.printf(DIV_OPEN); // DIV_OPEN for output
 
             // List
             if (msg.equals("list")) {
                 for (int i = 1; i < listNum; i++) {
-                    System.out.println(listNum + ". " + list[i] + "\n");
+                    System.out.println(i + ". " + list[i]);
                 }
             } else { // Add
-                
+                list[listNum] = msg;
+                listNum++;
+                System.out.println("added: " + msg);
             }
 
             System.out.println(DIV_CLOSE); // DIV_CLOSE for output
