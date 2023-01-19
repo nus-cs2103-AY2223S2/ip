@@ -37,6 +37,12 @@
     ____________________________________________________________
 
     ____________________________________________________________
+    Got it. I've added this task:
+      [E][ ] project meeting (from: Sun 2pm to: Tues 4pm)
+    Now you have 5 task in the list.
+    ____________________________________________________________
+
+    ____________________________________________________________
     Nice! I've marked this task as done:
       [T][X] borrow book
     ____________________________________________________________
@@ -57,6 +63,7 @@
     2. [D][ ] return book (by: Sunday)
     3. [D][X] do homework (by: no idea :-p)
     4. [E][X] project meeting (from: Mon 2pm to: 4pm)
+    5. [E][ ] project meeting (from: Sun 2pm to: Tues 4pm)
     ____________________________________________________________
 
     ____________________________________________________________
@@ -80,6 +87,7 @@
     2. [D][ ] return book (by: Sunday)
     3. [D][ ] do homework (by: no idea :-p)
     4. [E][ ] project meeting (from: Mon 2pm to: 4pm)
+    5. [E][ ] project meeting (from: Sun 2pm to: Tues 4pm)
     ____________________________________________________________
 
     ____________________________________________________________
