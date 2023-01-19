@@ -29,6 +29,7 @@ public class Duke {
             "To see an list of your tasks, type \"list\".\n" +
             "To mark a task as done, type \"mark <task number>\".\n"  +
             "To mark a task as not done, type \"unmark <task number>\".\n"  +
+            "To delete a task, type \"delete <task number>\".\n" +
             "A task marked with a X is done. " +
             "To close me, type \"bye\".\n" +
             "Have fun!";
@@ -67,7 +68,6 @@ public class Duke {
             throw new MissingFieldException(message);
         }
     }
-
 
     enum Command {
         help, bye, list, mark, unmark, delete, todo, deadline, event
