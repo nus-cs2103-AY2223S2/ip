@@ -57,6 +57,9 @@ public class TreeBot {
             case "unmark":
                 unmarkTask(Integer.parseInt(splitStr[1]));
                 break;
+            case "delete":
+                deleteTask(Integer.parseInt(splitStr[1]));
+                break;
             default:
                 throw new InvalidCommandException("This command is invalid");
         }
@@ -75,6 +78,12 @@ public class TreeBot {
     private void unmarkTask(int idx) {
         this.tasks.get(idx - 1).markAsUndone();
     }
+
+    private void deleteTask(int idx) {
+        this.tasks.remove(idx - 1);
+    }
+
+
     private void greet() {
         System.out.println("Hello, I'm a tree. How may I be of service?");
     }
