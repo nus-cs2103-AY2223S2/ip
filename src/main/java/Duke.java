@@ -14,7 +14,7 @@ public class Duke {
         String input = sc.nextLine();
 
         while (!input.equals("bye")) {
-            System.out.println("(\\ (\\ \n" +
+            System.out.println("(\\ (\\\n" +
                     "(„• ֊ •„) ♡\n" +
                     "━O━O━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━");
 
@@ -62,7 +62,7 @@ public class Duke {
                     t = new Event(input.substring(6));
                 }
                 tasks.add(t);
-                System.out.println("Alright! I've added this task: ");
+                System.out.println("Alright! I've added this task:");
                 System.out.println(t);
                 if (tasks.size() == 1) { // grammar
                     System.out.println("Now you have 1 task on your list.");
