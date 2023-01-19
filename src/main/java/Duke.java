@@ -43,6 +43,14 @@ public class Duke {
                 System.out.println("I have unmarked the task as not done yet.");
                 System.out.println("\t " + unmarkedTask.toString());
                 break;    
+            case "todo":
+                String tName = String.join(" ", Arrays.copyOfRange(input, 1, input.length));
+                ToDo toDoObj = new ToDo(tName);
+                lists.add(toDoObj);
+                System.out.println("\tGot it. I've added this task: ");
+                System.out.println("\t\t "+ toDoObj.toString());
+                System.out.println(String.format("Now you have %d tasks in the list", lists.size()));
+                break;
             case "deadline":
                 int deadlineIndex = 1;
                 for(int i = 0; i < input.length; i++) {
@@ -86,10 +94,10 @@ public class Duke {
                 break;
             default:
                 String combString = String.join(" ", input);
-                ToDo toDoObj = new ToDo(combString);
-                lists.add(toDoObj);
+                ToDo tdObj = new ToDo(combString);
+                lists.add(tdObj);
                 System.out.println("\tGot it. I've added this task: ");
-                System.out.println("\t\t "+ toDoObj.toString());
+                System.out.println("\t\t "+ tdObj.toString());
                 System.out.println(String.format("Now you have %d tasks in the list", lists.size()));
         }
         System.out.println(bracket);
