@@ -10,10 +10,27 @@ public class Jane {
         System.out.println("Hello from\n" + logo);
         String output = "";
         Scanner in = new Scanner(System.in);
-        while (!output.equals("bye")) {
-           output = in.nextLine();
-            System.out.println(output);
+        int count = 1;
+        String[] str = new String[101];
+        while (in.hasNext()) {
+            output = in.nextLine();
+            if (output.equals("bye")) {
+                break;
+            }
+            if (!output.equals("list") ) {
+                str[count] = output;
+                count+=1;
+                System.out.println("added: "+ output);
+            } else {
+                for (int i = 1; i < count; i++) {
+                    String s = String.format("%d. %s", i, str[i]);
+                    System.out.println(s);
+                }
+
+            }
         }
         System.out.println("Bye! Hope to see you again soon!");
     }
+
+
 }
