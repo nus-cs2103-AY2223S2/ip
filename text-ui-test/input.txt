@@ -1,14 +1,19 @@
 todo read book
 deadline get bread /by 26 Jan
+eat bread
+event lunch /from tomorrow 12pm /to 1pm /from 11am
 event lunch /from tomorrow 12pm /to 1pm
 list
 todo git-push
 mark 4
+todo
 mark 1
 list
 unmark 3
 unmark 4
-deadline ip /by 23:59
+deadline
+deadline ip /by 23:59 /by lecture
+event lecture /to 4pm /from 2pm
 list
 mark 4
 bye

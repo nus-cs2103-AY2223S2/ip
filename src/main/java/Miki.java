@@ -1,7 +1,14 @@
+import java.text.ParseException;
 import java.util.Scanner;
 import java.util.ArrayList;
 
 public class Miki {
+    private static class CmdTypeException extends Exception {
+        protected CmdTypeException(String message) {
+            super(message);
+        }
+    }
+
     private static void printDiv() {
         System.out.println("    ____________________________________________________________");
     }
@@ -45,112 +52,70 @@ public class Miki {
             if (cmd_line.contains(" ")) {
                 cmd_args = cmd_line.substring(cmd.length() + 1).split(" ");
             }
-            switch (cmd) {
-                case "bye":
-                    exit_cmd = true;
-                    break;
-                case "list":
-                    printDiv();
-                    print("caught in 4k:");
-                    for (int i = 0; i < tasks.size(); i++) {
-                        print(Integer.toString(i + 1) + ". " + tasks.get(i));
+            try {
+                printDiv();
+                switch (cmd) {
+                    case "bye":
+                        exit_cmd = true;
+                        print("Otsumiki!~ I'll see you later!");
+                        break;
+                    case "list":
+                        print("caught in 4k:");
+                        for (int i = 0; i < tasks.size(); i++) {
+                            print(Integer.toString(i + 1) + ". " + tasks.get(i));
+                        }
+                        break;
+                    case "mark": {
+                        int idx = Integer.parseInt(cmd_args[0]) - 1;
+                        if (idx < 0 || idx >= tasks.size()) {
+                            String message = "There's no task #" + cmd_args[0] + "! ";
+                            if (tasks.size() == 1) message += "There is currently 1 task...";
+                            else message += "There are currently " + tasks.size() + " tasks...";
+                            throw new ArrayIndexOutOfBoundsException(message);
+                        }
+                        tasks.get(idx).mark();
+                        print("Yay!! Task marked as done:");
+                        print("  " + tasks.get(idx));
+                        break;
                     }
-                    printDiv();
-                    break;
-                case "mark": {
-                    int idx = Integer.parseInt(cmd_args[0]) - 1;
-                    tasks.get(idx).mark();
-                    printDiv();
-                    print("Yay!! Task marked as done:");
-                    print("  " + tasks.get(idx));
-                    printDiv();
-                    break;
-                }
-                case "unmark": {
-                    int idx = Integer.parseInt(cmd_args[0]) - 1;
-                    tasks.get(idx).unmark();
-                    printDiv();
-                    print("okay...! task unmarked as undone:");
-                    print("  " + tasks.get(idx));
-                    printDiv();
-                    break;
-                }
-                case "todo": {
-                    String objective = "";
-                    for (int i = 0; i < cmd_args.length; i++) {
-                        objective += (objective.isEmpty() ? "" : " ") + cmd_args[i];
+                    case "unmark": {
+                        int idx = Integer.parseInt(cmd_args[0]) - 1;
+                        if (idx < 0 || idx >= tasks.size()) {
+                            String message = "There's no task #" + cmd_args[0] + "! ";
+                            if (tasks.size() == 1) message += "There is currently 1 task...";
+                            else message += "There are currently " + tasks.size() + " tasks...";
+                            throw new ArrayIndexOutOfBoundsException(message);
+                        }
+                        tasks.get(idx).unmark();
+                        print("okay...! task unmarked as undone:");
+                        print("  " + tasks.get(idx));
+                        break;
                     }
-                    Todo newTodo = new Todo(objective);
-                    tasks.add(newTodo);
-                    printDiv();
-                    printAdded(newTodo, tasks.size());
-                    printDiv();
-                    break;
-                }
-                case "deadline": {
-                    String objective = "";
-                    String by = "";
-                    boolean token_by = false;
-                    for (int i = 0; i < cmd_args.length; i++) {
-                        if (cmd_args[i].equals("/by")) {
-                            token_by = true;
-                            continue;
-                        }
-                        if (token_by) {
-                            by += (by.isEmpty() ? "" : " ") + cmd_args[i];
-                        } else {
-                            objective += (objective.isEmpty() ? "" : " ") + cmd_args[i];
-                        }
+                    case "todo": {
+                        Todo newTodo = Todo.parseArgs(cmd_args);
+                        tasks.add(newTodo);
+                        printAdded(newTodo, tasks.size());
+                        break;
                     }
-                    Deadline newDeadline = new Deadline(objective, by);
-                    tasks.add(newDeadline);
-                    printDiv();
-                    printAdded(newDeadline, tasks.size());
-                    printDiv();
-                    break;
-                }
-                case "event": {
-                    String objective = "";
-                    String from = "";
-                    String to = "";
-                    boolean token_from = false;
-                    boolean token_to = false;
-                    for (int i = 0; i < cmd_args.length; i++) {
-                        if (cmd_args[i].equals("/from")) {
-                            token_from = true;
-                            token_to = false;
-                            continue;
-                        }
-                        if (cmd_args[i].equals("/to")) {
-                            token_from = false;
-                            token_to = true;
-                            continue;
-                        }
-                        if (token_from) {
-                            from += (from.isEmpty() ? "" : " ") + cmd_args[i];
-                        } else if (token_to) {
-                            to += (to.isEmpty() ? "" : " ") + cmd_args[i];
-                        } else {
-                            objective += (objective.isEmpty() ? "" : " ") + cmd_args[i];
-                        }
+                    case "deadline": {
+                        Deadline newDeadline = Deadline.parseArgs(cmd_args);
+                        tasks.add(newDeadline);
+                        printAdded(newDeadline, tasks.size());
+                        break;
                     }
-                    Event newEvent = new Event(objective, from, to);
-                    tasks.add(newEvent);
-                    printDiv();
-                    printAdded(newEvent, tasks.size());
-                    printDiv();
-                    break;
+                    case "event": {
+                        Event newEvent = Event.parseArgs(cmd_args);
+                        tasks.add(newEvent);
+                        printAdded(newEvent, tasks.size());
+                        break;
+                    }
+                    default:
+                        throw new CmdTypeException("\"" + cmd + "\" isn't a real word!");
                 }
-                default:
-                    Task newTask = new Task(cmd_line);
-                    tasks.add(newTask);
-                    printDiv();
-                    printAdded(newTask, tasks.size());
-                    printDiv();
+            } catch (TaskParseException | CmdTypeException | ArrayIndexOutOfBoundsException ex) {
+                print("?!?!? " + ex.getMessage());
             }
+            printDiv();
         }
-        printDiv();
-        print("Otsumiki!~ I'll see you later!");
-        printDiv();
     }
 }
