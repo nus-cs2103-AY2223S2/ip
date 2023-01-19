@@ -12,20 +12,35 @@ public class Duke {
                 + "\n";
         String greetings = "Hello! I'm Duke\n"
                 + "What can I do for you?\n";
-        String[] list = new String[100];
-        int listNum = 1;
+        String[] list = new String[101];
+        int listNum = 1; // starts from 1 for convenience
         System.out.println(DIV_OPEN + logo + greetings + DIV_CLOSE);
         // Initialization complete
 
         // Accept user input in a loop
         Scanner sc = new Scanner(System.in);
-
         while(true) {
+
             String msg = sc.nextLine();
+
+            // Terminate Duke
             if (msg.equals("bye")) {
                 break;
             }
-            System.out.println(DIV_OPEN + msg + "\n" + DIV_CLOSE);
+
+            // Commands
+            System.out.println(DIV_OPEN); // DIV_OPEN for output
+
+            // List
+            if (msg.equals("list")) {
+                for (int i = 1; i < listNum; i++) {
+                    System.out.println(listNum + ". " + list[i] + "\n");
+                }
+            } else { // Add
+                
+            }
+
+            System.out.println(DIV_CLOSE); // DIV_CLOSE for output
         }
 
 
