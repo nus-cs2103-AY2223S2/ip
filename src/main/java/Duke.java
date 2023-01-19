@@ -28,9 +28,27 @@ public class Duke {
                     list.get(num - 1).unmark();
                     System.out.println("OK, I've marked this task as not done yet: \n" + list.get(num-1));
            } else {
-                Task newTask = new Task(input);
+                Task newTask;
+                String[] inputs = input.split(" ");
+                String type = inputs[0];
+                if (type.equals("todo")) {
+                    String name = input.split(" ", 2)[1];
+                    newTask = new ToDo(name);
+                } else if (type.equals("deadline")) {
+                    String[] nameAndDeadline = input.split(" ", 2)[1].split(" /by ");
+                    String name = nameAndDeadline[0];
+                    String deadline = nameAndDeadline[1];
+                    newTask = new Deadline(name, deadline);
+                } else {
+                    String[] nameAndStart = input.split(" ", 2)[1].split(" /from ");
+                    String name = nameAndStart[0];
+                    String[] startAndEnd = nameAndStart[1].split(" /to ");
+                    String start = startAndEnd[0];
+                    String end = startAndEnd[1];
+                    newTask = new Event(name, start, end);
+                }
                 list.add(newTask);
-                System.out.println("added: " + newTask);
+                System.out.println("Got it. I've added this task:\n" + newTask + "\nNow you have " + list.size() + " tasks in the list.");
             }
             input = sc.nextLine();
         }
