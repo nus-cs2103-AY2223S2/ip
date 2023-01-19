@@ -7,6 +7,9 @@ import jarvis.exception.MissingParameterException;
 import jarvis.task.ToDoTask;
 
 
+/**
+ * Command class for creating a todo task.
+ */
 public class ToDoCommand extends Command {
 
     public ToDoCommand(Action action, String body) {

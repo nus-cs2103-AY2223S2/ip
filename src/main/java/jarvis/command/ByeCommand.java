@@ -6,6 +6,9 @@ import jarvis.Ui;
 import jarvis.exception.TaskIOException;
 
 
+/**
+ * Command class to exit the bot.
+ */
 public class ByeCommand extends Command {
     public ByeCommand() {
         super(null, null, null);

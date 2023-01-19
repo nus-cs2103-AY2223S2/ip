@@ -8,6 +8,10 @@ import jarvis.task.TaskFilter;
 
 import java.util.List;
 
+
+/**
+ * Command class to list and filter tasks.
+ */
 public class ListCommand extends Command {
     private TaskFilter filter;
 

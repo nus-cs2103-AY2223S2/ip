@@ -2,6 +2,9 @@ package jarvis;
 
 import java.util.List;
 
+/**
+ * Ui class to present a text-based interface.
+ */
 public class Ui {
     private static final String LOGO = "     _   _    ______     _____ ____  \n" +
             "    | | / \\  |  _ \\ \\   / /_ _/ ___| \n" +
@@ -20,6 +23,7 @@ public class Ui {
 
     /**
      * Constructor for the Ui class.
+     *
      * @param name Name of the bot.
      */
     public Ui(String name) {

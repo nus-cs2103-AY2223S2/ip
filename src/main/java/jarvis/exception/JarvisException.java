@@ -1,5 +1,8 @@
 package jarvis.exception;
 
+/**
+ * Base exception from Jarvis.
+ */
 public class JarvisException extends Exception {
     private final String friendlyMessage;
 

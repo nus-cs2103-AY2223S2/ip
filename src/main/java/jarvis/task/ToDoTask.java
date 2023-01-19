@@ -2,9 +2,13 @@ package jarvis.task;
 
 import jarvis.exception.MissingParameterException;
 
+/**
+ * Task class representing a todo task.
+ */
 public class ToDoTask extends Task {
     /**
      * Constructor of a todo task, marked as undone.
+     *
      * @param description Description of the task.
      * @throws MissingParameterException If description is null or blank.
      */
@@ -14,6 +18,7 @@ public class ToDoTask extends Task {
 
     /**
      * Constructor of a todo task.
+     *
      * @param description Description of the task.
      * @param isDone Whether the task is to be marked as done.
      * @throws MissingParameterException If description is null or blank.

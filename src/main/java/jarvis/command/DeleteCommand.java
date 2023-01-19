@@ -6,6 +6,9 @@ import jarvis.Ui;
 import jarvis.exception.MissingParameterException;
 
 
+/**
+ * Command class to delete tasks.
+ */
 public class DeleteCommand extends Command {
     private final int index;
 

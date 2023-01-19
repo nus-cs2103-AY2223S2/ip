@@ -7,11 +7,16 @@ import jarvis.exception.MissingParameterException;
 import java.time.LocalDate;
 import java.time.format.DateTimeParseException;
 
+/**
+ * Task class representing a deadline task
+ * with 'by' information.
+ */
 public class DeadlineTask extends Task {
     private final LocalDate deadline;
 
     /**
      * Constructor for a deadline task, marked as undone.
+     *
      * @param description Description of the task.
      * @param deadline Date string of the deadline.
      * @throws CommandParseException If the description or deadline is invalid.
@@ -22,6 +27,7 @@ public class DeadlineTask extends Task {
 
     /**
      * Constructor for a deadline task.
+     *
      * @param description Description of the task.
      * @param deadline Date string of the deadline.
      * @param isDone Whether the task is marked as done.

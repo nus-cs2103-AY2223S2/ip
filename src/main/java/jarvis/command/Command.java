@@ -7,6 +7,9 @@ import jarvis.exception.InvalidActionException;
 
 import java.util.List;
 
+/**
+ * Abstract command class.
+ */
 public abstract class Command {
 
     /**
@@ -48,20 +51,13 @@ public abstract class Command {
         }
     }
 
-    /**
-     * Executes the command.
-     * @param ui Ui object.
-     * @param taskList TaskList object.
-     * @param storage Storage object.
-     */
-    public abstract void execute(Ui ui, TaskList taskList, Storage storage);
-
     private final Action action;
     private final String body;
     private final List<Command> subCommands;
 
     /**
      * Constructor for a command.
+     *
      * @param action Determines the nature of the command.
      * @param body Supplementary information for the command.
      * @param subCommands Secondary commands as additional parameters.
@@ -71,6 +67,15 @@ public abstract class Command {
         this.body = body;
         this.subCommands = subCommands;
     }
+
+    /**
+     * Executes the command.
+     *
+     * @param ui Ui object.
+     * @param taskList TaskList object.
+     * @param storage Storage object.
+     */
+    public abstract void execute(Ui ui, TaskList taskList, Storage storage);
 
     /**
      * @return Whether the command should exit the bot.

@@ -7,12 +7,17 @@ import jarvis.exception.MissingParameterException;
 import java.time.LocalDate;
 import java.time.format.DateTimeParseException;
 
+/**
+ * Task class representing an event task
+ * with 'from' and 'to' information.
+ */
 public class EventTask extends Task {
     private final LocalDate fromDate;
     private final LocalDate toDate;
 
     /**
      * Constructor of an event task, marked as undone.
+     *
      * @param description Description of the task.
      * @param fromDate Date string when the event starts.
      * @param toDate Date string when the event ends.
@@ -28,6 +33,7 @@ public class EventTask extends Task {
 
     /**
      * Constructor of an event task.
+     *
      * @param description Description of the task.
      * @param fromDate Date string when the event starts.
      * @param toDate Date string when the event ends.

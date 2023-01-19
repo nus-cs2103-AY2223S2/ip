@@ -5,19 +5,16 @@ import jarvis.exception.MissingParameterException;
 
 import java.util.Scanner;
 
+/**
+ * Abstract task class.
+ */
 public abstract class Task {
-
-    /**
-     * Serializes a task for storage.
-     * @return Serial string.
-     */
-    public abstract String serialize();
-
     private boolean isDone;
     private final String description;
 
     /**
      * Constructor for a task, marked as undone.
+     *
      * @param description Description of the task.
      * @throws MissingParameterException If description is null or blank.
      */
@@ -32,6 +29,7 @@ public abstract class Task {
 
     /**
      * Constructor for a task.
+     *
      * @param description Description of the task.
      * @param isDone Whether the task is marked as done.
      * @throws MissingParameterException If description is null or blank.
@@ -41,6 +39,19 @@ public abstract class Task {
         this.isDone = isDone;
     }
 
+    /**
+     * Serializes a task for storage.
+     *
+     * @return Serial string.
+     */
+    public abstract String serialize();
+
+    /**
+     * Creates a task from the given serial string.
+     *
+     * @param serial Serial string.
+     * @return Created task.
+     */
     public static Task deserialize(String serial) {
         if (serial == null || serial.isBlank()) {
             return null;
@@ -94,7 +105,6 @@ public abstract class Task {
     }
 
     /**
-     * Setter of isDone.
      * @param isDone Whether the task is to be marked as done.
      */
     public void setDone(boolean isDone) {
@@ -102,7 +112,6 @@ public abstract class Task {
     }
 
     /**
-     * Getter of description.
      * @return Task description.
      */
     public String getDescription() {
@@ -111,6 +120,7 @@ public abstract class Task {
 
     /**
      * Returns whether the task satisfies the given filter.
+     *
      * @param filter Task filter.
      * @return Whether the task satisfies the given filter.
      */

@@ -8,6 +8,10 @@ import jarvis.task.DeadlineTask;
 
 import java.util.List;
 
+
+/**
+ * Command class to delete deadline tasks.
+ */
 public class DeadlineCommand extends Command {
     private final String deadline;
 

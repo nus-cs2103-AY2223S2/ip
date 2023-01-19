@@ -8,6 +8,9 @@ import jarvis.task.EventTask;
 
 import java.util.List;
 
+/**
+ * Command class to create event tasks.
+ */
 public class EventCommand extends Command {
     private final String fromDate;
     private final String toDate;

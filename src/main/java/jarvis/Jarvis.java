@@ -6,6 +6,9 @@ import jarvis.task.TaskList;
 
 import java.util.Scanner;
 
+/**
+ * Jarvis class to run the program.
+ */
 public class Jarvis {
     private static final String BOT_NAME = Jarvis.class.getSimpleName();
 
@@ -13,6 +16,9 @@ public class Jarvis {
     private final Ui ui;
     private final TaskList taskList;
 
+    /**
+     * Constructor for Jarvis.
+     */
     public Jarvis() {
         this.storage = new Storage();
         this.ui = new Ui(BOT_NAME);

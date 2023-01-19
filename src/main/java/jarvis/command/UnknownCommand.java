@@ -5,6 +5,9 @@ import jarvis.task.TaskList;
 import jarvis.Ui;
 
 
+/**
+ * Command class for an unrecognised command.
+ */
 public class UnknownCommand extends Command {
 
     public UnknownCommand() {

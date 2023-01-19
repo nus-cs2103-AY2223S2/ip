@@ -6,6 +6,9 @@ import jarvis.Ui;
 import jarvis.exception.InvalidParameterException;
 
 
+/**
+ * Command class to mark tasks as done or undone.
+ */
 public class MarkCommand extends Command {
     private final int index;
     private final boolean isDone;

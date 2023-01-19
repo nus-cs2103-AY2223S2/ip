@@ -9,6 +9,9 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.stream.Collectors;
 
+/**
+ * Container class for task filtering information.
+ */
 public class TaskFilter {
     private LocalDate afterDate;
     private LocalDate beforeDate;

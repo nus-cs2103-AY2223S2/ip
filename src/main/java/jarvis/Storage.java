@@ -12,6 +12,9 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.Scanner;
 
+/**
+ * Storage class to handle local storage of tasks.
+ */
 public class Storage {
     public static final String DATA_PATH = "data";
     public static final String TASKS_PATH = DATA_PATH + "/tasks.txt";
@@ -65,6 +68,7 @@ public class Storage {
 
     /**
      * Creates the folder and file to save tasks, if necessary.
+     *
      * @return The created file.
      * @throws TaskIOException If the folder or file cannot be created or accessed.
      */
@@ -87,6 +91,7 @@ public class Storage {
 
     /**
      * Deserializes a string serial to a task.
+     *
      * @param serial String serial from local storage,
      * @return A task.
      */
