@@ -20,8 +20,8 @@ public class Duke {
      */
     private static void greet() {
         printLine();
-        System.out.printf("    %s%n", "Hello! I'm Duke");
-        System.out.printf("    %s%n", "What can I do for you?");
+        System.out.printf("     %s%n", "Hello! I'm Duke");
+        System.out.printf("     %s%n", "What can I do for you?");
         printLine();
     }
 
@@ -29,9 +29,9 @@ public class Duke {
      *
      */
     private static void confirmAddition(Task t) {
-        System.out.printf("    %s%n", "Got it. I've added this task:");
-        System.out.printf("    %s%n", t.toString());
-        System.out.printf("    %s%d%s%n", "Now you have ", tasks.size(), " tasks in the list.");
+        System.out.printf("     %s%n", "Got it. I've added this task:");
+        System.out.printf("       %s%n", t.toString());
+        System.out.printf("     %s%d%s%n", "Now you have ", tasks.size(), " tasks in the list.");
     }
 
     /**
@@ -48,9 +48,9 @@ public class Duke {
             printLine();
 
             if (input.equals("list")) {
-                System.out.printf("    %s%n", "Here are the tasks in your list:");
+                System.out.printf("     %s%n", "Here are the tasks in your list:");
                 for (int i = 0; i < tasks.size(); i++) {
-                    System.out.printf("    %d.%s%n",
+                    System.out.printf("     %d.%s%n",
                             i + 1,
                             tasks.get(i).toString());
                 }
@@ -62,17 +62,17 @@ public class Duke {
                         taskNumber = Integer.parseInt(input.split(" ")[1]);
                         if (command.equals("mark")) {
                             tasks.get(taskNumber - 1).markAsDone();
-                            System.out.printf("    %s%n", "Nice! I've marked this task as done:");
+                            System.out.printf("     %s%n", "Nice! I've marked this task as done:");
                             System.out.printf("       %s%n",
                                     tasks.get(taskNumber - 1).toString());
                         } else {
                             tasks.get(taskNumber - 1).markAsNotDone();
-                            System.out.printf("    %s%n", "OK, I've marked this task as not done yet:");
+                            System.out.printf("     %s%n", "OK, I've marked this task as not done yet:");
                             System.out.printf("       %s%n",
                                     tasks.get(taskNumber - 1).toString());
                         }
                     } catch (NumberFormatException|IndexOutOfBoundsException e) {
-                        System.out.printf("    %s%n", "Please input valid task number.");
+                        System.out.printf("     %s%n", "Please input valid task number.");
                     }
                 } else {
                     String description, by, from, to;
@@ -103,7 +103,7 @@ public class Duke {
                             confirmAddition(t);
                             break;
                         default:
-                            System.out.printf("    %s%n", "Please input valid task type.");
+                            System.out.printf("     %s%n", "Please input valid task type.");
                     }
                 }
             }
@@ -112,7 +112,7 @@ public class Duke {
             input = sc.nextLine();
         }
         printLine();
-        System.out.printf("    %s%n", "Bye. Hope to see you again soon!");
+        System.out.printf("     %s%n", "Bye. Hope to see you again soon!");
         printLine();
     }
 
