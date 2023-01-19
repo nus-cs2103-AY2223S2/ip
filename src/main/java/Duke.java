@@ -53,7 +53,8 @@ public class Duke {
         Task task = new ToDo(taskName.toString());
         list.add(task);
         PixlPrint("Added new todo!\n" +
-                "\t" + formatTask(task));
+                "\t" + formatTask(task) +
+                "\nYou now have " + list.size() + " task(s) in the list.");
     }
 
     private static void deadlineCommand(String command) throws DukeException{
@@ -81,7 +82,8 @@ public class Duke {
         Task task = new Deadline(taskName.toString(), dueDate.toString());
         list.add(task);
         PixlPrint("Added new deadline!\n" +
-                "\t" + formatTask(task));
+                "\t" + formatTask(task) +
+                "\nYou now have " + list.size() + " task(s) in the list.");
     }
 
     private static void eventCommand(String command) throws DukeException {
@@ -116,7 +118,8 @@ public class Duke {
         Task task = new Event(taskName.toString(), startDate.toString(), endDate.toString());
         list.add(task);
         PixlPrint("Added new event!\n" +
-                "\t" + formatTask(task));
+                "\t" + formatTask(task) +
+                "\nYou now have " + list.size() + " task(s) in the list.");
     }
 
     private static void markCommand(String command) throws DukeException{
@@ -145,7 +148,8 @@ public class Duke {
         try {
             Task task = list.remove(Integer.parseInt(command.split("\\s+")[1]) - 1);
             PixlPrint("Removed the task:\n" +
-                    "\t" + formatTask(task));
+                    "\t" + formatTask(task) +
+                    "\nYou now have " + list.size() + " task(s) in the list.");
         } catch (Exception e) {
             throw new DukeException("Please provide a valid task number to delete.");
         }
