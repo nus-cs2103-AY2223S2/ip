@@ -1,4 +1,4 @@
-public class Task {
+public abstract class Task {
   public final String task;
   public boolean done;
 
@@ -6,8 +6,10 @@ public class Task {
     this.task = task;
   }
 
+  public abstract String getType();
+
   @Override
   public String toString() {
-    return String.format("[%s] %s", this.done ? "X" : " ", this.task);
+    return String.format("[%s][%s] %s", getType(),this.done ? "X" : " ", this.task);
   }
 }

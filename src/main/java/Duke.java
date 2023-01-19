@@ -7,6 +7,11 @@ import java.util.Map;
 import java.util.function.Consumer;
 
 public final class Duke {
+
+    private final static String joiner(String[] args, int from, int to) {
+        return String.join(" ", Arrays.copyOfRange(args, from, to));
+    }
+
     public final static void main(String[] vargs) throws IOException {
         String logo = " ____        _        \n"
                 + "|  _ \\ _   _| | _____ \n"
@@ -17,6 +22,12 @@ public final class Duke {
 
         final BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
         final ArrayList<Task> tasks = new ArrayList<>();
+
+        final Consumer<Task> addTask = (task) -> {
+            tasks.add(task);
+            System.out.format("%Added %s to the list!\nYou have %d tasks\n", task.toString(), tasks.size());
+        };
+
         final Map<String, Consumer<String[]>> funcMap = Map.of("bye", (args) -> {
             System.out.println("Ok bye bye!");
             System.exit(0);
@@ -53,6 +64,83 @@ public final class Duke {
             } catch (NumberFormatException e) {
                 System.out.println("Invalid index!\n");
             }
+        },
+        "todo", (args) -> {
+            if (args.length == 1) {
+                System.out.println("Expected a task!");
+                return;
+            }
+
+            String taskStr = joiner(args, 1, args.length);
+            Task task = new ToDo(taskStr);
+            addTask.accept(task);
+        },
+        "deadline", (args) -> {
+            int index = -1;
+            for(int i = 1; i < args.length; i++) {
+                if (args[i].equalsIgnoreCase("/by")) {
+                    index = i;
+                    break;
+                }
+            }
+
+            if (index == -1) {
+                System.out.println("Expected a /by directive!");
+                return;
+            } else if (index == 1) {
+                System.out.println("Expected a task!");
+                return;
+            } else if (index == args.length - 1) {
+                System.out.println("Expected a time after /by!");
+                return;
+            }
+
+            String taskStr = joiner(args, 1, index);
+            String time = joiner(args, index + 1, args.length);
+            Task task = new Deadline(taskStr, time);
+            addTask.accept(task);
+        },
+        "event", (args) -> {
+            int fromIndex = -1, toIndex = -1;
+            for(int i = 1; i < args.length; i++) {
+                if (args[i].equalsIgnoreCase("/from")) {
+                    fromIndex = i;
+                } else if (args[i].equalsIgnoreCase("/to")) {
+                    toIndex = i;
+                }
+
+                if (fromIndex != -1 && toIndex != -1) break;
+            }
+
+            if (fromIndex == -1) {
+                // No /from provided
+                System.out.println("Expected a /from directive!");
+                return;
+            } else if (toIndex == -1) {
+                // No /to provided
+                System.out.println("Expected a /to directive!");
+                return;
+            } else if (fromIndex == 1) {
+                // From was the first keyword after event
+                System.out.println("Expected a task!");
+                return;
+            } else if (fromIndex > toIndex) {
+                System.out.println("Expected /from to come before /to!");
+                return;
+            } else if (toIndex == args.length - 1) {
+                System.out.println("Expected a time after /to!");
+                return;
+            } else if (toIndex - fromIndex == 1) {
+                System.out.println("Expected a time after /from!");
+                return;
+            }
+
+            String taskStr = joiner(args, 1, fromIndex);
+            String fromStr = joiner(args, fromIndex + 1, toIndex);
+            String toStr = joiner(args, toIndex + 1, args.length);
+        
+            Task task = new Event(taskStr, fromStr, toStr);
+            addTask.accept(task);
         });
 
         while (true) {
@@ -62,9 +150,9 @@ public final class Duke {
             if (funcMap.containsKey(tokens[0])) {
                 funcMap.get(tokens[0]).accept(tokens);
             } else {
-                tasks.add(new Task(input));
-                System.out.format("added: %s\n", input);
+                System.out.format("Unknown command '%s'\n", input);
             }
+            
         }
     }
 }
