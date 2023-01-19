@@ -1,18 +1,26 @@
 public class Task {
-    public boolean done;
-    public String title;
+    private boolean done;
+    private String title;
 
     public Task(String title) {
         this.done = false;
         this.title = title;
     }
 
-    private void setDone(boolean done) {
-        this.done = done;
+    public String getTitle() {
+        return this.title;
     }
 
-    public void completed() {
-        setDone(true);
+    public void setTitle(String newTitle) {
+        this.title = newTitle;
+    }
+
+    public boolean getDone() {
+        return this.done;
+    }
+
+    public void setDone(boolean done) {
+        this.done = done;
     }
 
 }

@@ -4,38 +4,53 @@ import java.util.Scanner;
 
 public class Duke {
 
-    private static ArrayList<String> todoList = new ArrayList<>();
+    private static ArrayList<Task> todoList = new ArrayList<>();
     private static Scanner sc = new Scanner(System.in);
 
     private static void printLine() {
         System.out.println("----------------------------------------------------");
     }
 
-    private static void addToList(String task) {
+    private static void addToList(String title) {
+        Task task = new Task(title);
         todoList.add(task);
-        String toPrint = String.format("added: %s", task);
+        String toPrint = String.format("added: %s", task.getTitle());
         System.out.println(toPrint);
     }
 
     private static void printList() {
         System.out.println("Your tasks so far!!");
         for (int i = 0; i < todoList.size(); i++) {
-            String task = todoList.get(i);
-            String toPrint = String.format("%d. %s", i + 1, task);
+            Task task = todoList.get(i);
+            String completedSubstring = task.getDone() ? "[x]" : "[]";
+            String toPrint = String.format("%d.%s %s", i + 1, completedSubstring, task.getTitle());
             System.out.println(toPrint);
         }
     }
 
-    private static boolean commandHandler(String command) {
-//      TODO: Maybe remove this check here, and shift it to main loop
-        if (Objects.equals(command, "bye")) {
-            System.out.println("Sad...Alright bye!");
-            return false;
-        }
-        if (Objects.equals(command, "list")) {
-            printList();
+    private static boolean commandHandler(String rawCommand) {
+        int commandIndex = rawCommand.indexOf(' ');
+        String command;
+        String arguments;
+        if (commandIndex != -1) {
+            // There is no space character in the command
+            command = rawCommand.substring(0, commandIndex);
+            arguments = rawCommand.substring(commandIndex);
         } else {
-            addToList(command);
+            command = rawCommand;
+            arguments = null;
+        }
+
+        switch (command) {
+            case "bye":
+                System.out.println("Sad...Alright bye!");
+                return false;
+            case "list":
+                printList();
+                break;
+            default:
+                addToList(rawCommand);
+                break;
         }
         return true;
     }
