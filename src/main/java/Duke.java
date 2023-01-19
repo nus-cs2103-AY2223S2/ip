@@ -1,6 +1,7 @@
 import java.util.*;
+import java.util.ArrayList;
 public class Duke {
-    public static void main(String[] args) {
+    public static void main(String[] args) throws InvalidInputException, ToDoDescriptionException {
 
         Scanner sc = new Scanner(System.in);
         String logo = " ____        _        \n"
@@ -14,7 +15,7 @@ public class Duke {
         System.out.println("Whatsup bro");
         System.out.println("____________________________________________________________");
 
-        Task[] arr = new Task[100];
+        ArrayList<Task> list = new ArrayList<>();
         String command = sc.nextLine();
         int counter = 0;
         while(true) {
@@ -27,26 +28,31 @@ public class Duke {
                     System.out.println("____________________________________________________________");
                     System.out.println("Here are the tasks in your list:");
                     for (int i = 0; i < counter; i++) {
-                        System.out.println((i+1) + ". " + arr[i]);
+                        System.out.println((i+1) + ". " + list.get(i));
                     }
                     System.out.println("____________________________________________________________");
                     break;
                 case "todo":
-                    String todomessage = command.substring(5);
-                    Task todo = new ToDo(todomessage);
-                    arr[counter] = todo;
-                    counter++;
-                    System.out.println("____________________________________________________________");
-                    System.out.println("Got it. I've added this task:");
-                    System.out.println(todo);
-                    System.out.println("Now you have " + counter + " tasks in the list.");
-                    System.out.println("____________________________________________________________");
+                    try {
+                        String todomessage = command.replace("todo", "").trim();
+                        Task todo = new ToDo(todomessage);
+                        list.add(todo);
+                        counter++;
+                        System.out.println("____________________________________________________________");
+                        System.out.println("Got it. I've added this task:");
+                        System.out.println(todo);
+                        System.out.println("Now you have " + counter + " tasks in the list.");
+                        System.out.println("____________________________________________________________");
+                    } catch(ToDoDescriptionException e) {
+                        System.out.println(e);
+                    }
+
                     break;
                 case "deadline":
                     String by = command.substring(22);
                     String deadlinemessage = command.substring(9, 20);
                     Task deadline = new Deadline(deadlinemessage, by);
-                    arr[counter] = deadline;
+                    list.add(deadline);
                     counter++;
                     System.out.println("____________________________________________________________");
                     System.out.println("Got it. I've added this task:");
@@ -78,7 +84,7 @@ public class Duke {
                     }
 
                     Task event = new Event(eventmessage, from, to);
-                    arr[counter] = event;
+                    list.add(event);
                     counter++;
                     System.out.println("____________________________________________________________");
                     System.out.println("Got it. I've added this task:");
@@ -90,7 +96,7 @@ public class Duke {
 
                 case "unmark":
                     int num = Integer.parseInt(String.valueOf(command.charAt(len-1)));
-                    Task cur = arr[num-1];
+                    Task cur = list.get(num-1);
                     System.out.println("____________________________________________________________");
                     if (first.compareTo("mark") == 0) {
                         System.out.println("Nice! I've marked this task as done:");
@@ -108,7 +114,12 @@ public class Duke {
                     System.out.println("____________________________________________________________");
                     System.exit(0);
                 default:
-                    System.out.println("Please enter valid keyword");
+                    try {
+                        throw new InvalidInputException("☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
+                    } catch(InvalidInputException e) {
+                        System.out.println(e);
+                }
+
 
 
             }
