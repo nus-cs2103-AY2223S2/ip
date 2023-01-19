@@ -18,4 +18,12 @@ Good ta see yer dawg, Tom's at yer service.
 Gotcha, I've added:
   [T][ ] borrow book
 Now you have 1 in the list!
+Here are the tasks in your list dawg:
+1.[T][ ] borrow book
+Gotcha, I've added:
+  [D][ ] return book (by: Sunday)
+Now you have 2 in the list!
+Gotcha, I've added:
+  [E][ ] project meeting  (from: Mon 2pm to: 4pm)
+Now you have 3 in the list!
 See yer again RUFF!
