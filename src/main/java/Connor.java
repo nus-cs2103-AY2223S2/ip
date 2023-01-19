@@ -7,6 +7,18 @@ import java.nio.file.Paths;
 
 public class Connor {
 
+    public enum Commands {
+        HI,
+        BYE,
+        MARK,
+        UNMARK,
+        LIST,
+        TODO,
+        DEADLINE,
+        EVENT,
+        DELETE
+    }
+
     private static String getCommand(String input) {
         if (input.indexOf(' ') == -1) {
             return input.toUpperCase();
@@ -22,7 +34,10 @@ public class Connor {
         return input.substring(input.indexOf(' ') + 1).trim();
     }
 
-    private static File getFile(Path dataPath, Path directoryPath) {
+    private static File getFile() {
+        String homeDir = System.getProperty("user.dir");
+        Path directoryPath = Paths.get(homeDir, "data");
+        Path dataPath = Paths.get(homeDir, "data", "Connor.txt");
         try {
             if (Files.exists(dataPath)) {
                 Responses.printMessage("Existing data detected, loading data.");
@@ -40,46 +55,57 @@ public class Connor {
 
     private static void run() {
         Scanner sc = new Scanner(System.in);
-        String homeDir = System.getProperty("user.dir");
-        Path directoryPath = Paths.get(homeDir, "data");
-        Path dataPath = Paths.get(homeDir, "data", "Connor.txt");
-        File dataFile = getFile(dataPath, directoryPath);
+        File dataFile = getFile();
         TaskList list = new TaskList(dataFile);
         list.initialize();
-        while (sc.hasNextLine()) {
+        boolean sessionOver = false;
+        while (!sessionOver && sc.hasNextLine() ) {
             String input = sc.nextLine();
             String command = getCommand(input);
             try {
-                if (command.equals("HI")) {
-                    Responses.greetings("HI");
-                } else if (command.equals("BYE")) {
-                    Responses.greetings("BYE");
-                    sc.close();
-                    break;
-                } else if (command.equals("MARK")) {
-                    list.markDone(Integer.parseInt(getTask(input)));
-                } else if (command.equals("UNMARK")) {
-                    list.markUndone(Integer.parseInt(getTask(input)));
-                } else if (command.equals("LIST")) {
-                    list.getList();
-                } else if (command.equals("TODO") || command.equals("DEADLINE") || command.equals("EVENT")) {
-                    Task task = TaskFactory.parseCommand(command, getTask(input));
-                    list.addTask(task);
-                } else if (command.equals("DELETE")) {
-                    list.deleteTask(getTask(input));
-                } else {
-                    throw new InvalidCommandException();
+                switch (Commands.valueOf(command)) {
+                    case HI:
+                        Responses.greetings("HI");
+                        break;
+
+                    case BYE:
+                        Responses.greetings("BYE");
+                        sessionOver = true;
+                        break;
+
+                    case MARK:
+                        list.markDone(Integer.parseInt(getTask(input)));
+                        break;
+
+                    case UNMARK:
+                        list.markUndone(Integer.parseInt(getTask(input)));
+                        break;
+
+                    case LIST:
+                        list.getList();
+                        break;
+
+                    case TODO:
+                    case DEADLINE:
+                    case EVENT:
+                        Task task = TaskFactory.parseCommand(command, getTask(input));
+                        list.addTask(task);
+                        break;
+
+                    case DELETE:
+                        list.deleteTask(getTask(input));
+                        break;
                 }
-            } catch (InvalidCommandException | InvalidTaskException e) {
-                System.out.println(e.getMessage());
+            } catch (IllegalArgumentException | InvalidTaskException e) {
+                System.out.println("        INVALID INPUT");
             }
         }
+        sc.close();
     }
 
     public static void main(String[] args) {
         Responses.printMessage("Hello! I'm Connor, the android sent by Cyberlife.\n"
-                + "        "
-                + "Please type in your command below.");
+                + "        Please type in your command below.");
         run();
     }
 }

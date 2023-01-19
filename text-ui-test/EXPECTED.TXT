@@ -2,7 +2,7 @@
         Hello! I'm Connor, the android sent by Cyberlife.
         Please type in your command below.
         ________________________________________________________
-        Existing data detected, loading data.
+        No existing data detected, creating new save file.
         ________________________________________________________
         Hi, I hope that you are having a nice day.
         ________________________________________________________
@@ -14,11 +14,11 @@
         You have 1 tasks in the list
         ________________________________________________________
         I have added do CS2103T to my memory
-          [D][ ] do CS2103T (by: 2pm)
+          [D][ ] do CS2103T (by: MAY 5 2023 1800)
         You have 2 tasks in the list
         ________________________________________________________
         I have added Dinner to my memory
-          [E][ ] Dinner (from: 6pm to: 8pm)
+          [E][ ] Dinner (from: JAN 1 2023 1600 to: JAN 1 2023 1800)
         You have 3 tasks in the list
         ________________________________________________________
         Understood, I have marked the task as done:
@@ -26,35 +26,35 @@
         ________________________________________________________
 
         1.[T][X] buy food
-        2.[D][ ] do CS2103T (by: 2pm)
-        3.[E][ ] Dinner (from: 6pm to: 8pm)
+        2.[D][ ] do CS2103T (by: MAY 5 2023 1800)
+        3.[E][ ] Dinner (from: JAN 1 2023 1600 to: JAN 1 2023 1800)
         I have 3 tasks in my memory
         ________________________________________________________
         Understood, I have marked the task as done:
-        [D][X] do CS2103T (by: 2pm)
+        [D][X] do CS2103T (by: MAY 5 2023 1800)
         ________________________________________________________
 
         1.[T][X] buy food
-        2.[D][X] do CS2103T (by: 2pm)
-        3.[E][ ] Dinner (from: 6pm to: 8pm)
+        2.[D][X] do CS2103T (by: MAY 5 2023 1800)
+        3.[E][ ] Dinner (from: JAN 1 2023 1600 to: JAN 1 2023 1800)
         I have 3 tasks in my memory
         ________________________________________________________
         Understood, I have marked the task as undone:
-        [D][ ] do CS2103T (by: 2pm)
+        [D][ ] do CS2103T (by: MAY 5 2023 1800)
         ________________________________________________________
 
         1.[T][X] buy food
-        2.[D][ ] do CS2103T (by: 2pm)
-        3.[E][ ] Dinner (from: 6pm to: 8pm)
+        2.[D][ ] do CS2103T (by: MAY 5 2023 1800)
+        3.[E][ ] Dinner (from: JAN 1 2023 1600 to: JAN 1 2023 1800)
         I have 3 tasks in my memory
         ________________________________________________________
         Understood, I have marked the task as done:
-        [E][X] Dinner (from: 6pm to: 8pm)
+        [E][X] Dinner (from: JAN 1 2023 1600 to: JAN 1 2023 1800)
         ________________________________________________________
 
         1.[T][X] buy food
-        2.[D][ ] do CS2103T (by: 2pm)
-        3.[E][X] Dinner (from: 6pm to: 8pm)
+        2.[D][ ] do CS2103T (by: MAY 5 2023 1800)
+        3.[E][X] Dinner (from: JAN 1 2023 1600 to: JAN 1 2023 1800)
         I have 3 tasks in my memory
         ________________________________________________________
         Understood, I have marked the task as undone:
@@ -62,17 +62,17 @@
         ________________________________________________________
 
         1.[T][ ] buy food
-        2.[D][ ] do CS2103T (by: 2pm)
-        3.[E][X] Dinner (from: 6pm to: 8pm)
+        2.[D][ ] do CS2103T (by: MAY 5 2023 1800)
+        3.[E][X] Dinner (from: JAN 1 2023 1600 to: JAN 1 2023 1800)
         I have 3 tasks in my memory
         ________________________________________________________
         Understood, I have marked the task as undone:
-        [E][ ] Dinner (from: 6pm to: 8pm)
+        [E][ ] Dinner (from: JAN 1 2023 1600 to: JAN 1 2023 1800)
         ________________________________________________________
 
         1.[T][ ] buy food
-        2.[D][ ] do CS2103T (by: 2pm)
-        3.[E][ ] Dinner (from: 6pm to: 8pm)
+        2.[D][ ] do CS2103T (by: MAY 5 2023 1800)
+        3.[E][ ] Dinner (from: JAN 1 2023 1600 to: JAN 1 2023 1800)
         I have 3 tasks in my memory
         INVALID TASK DESCRIPTION
         INVALID TASK DESCRIPTION

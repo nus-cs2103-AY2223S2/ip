@@ -1,8 +1,8 @@
 Hi
 list
 todo buy food
-deadline do CS2103T /by 2pm
-event Dinner /from 6pm /to 8pm
+deadline do CS2103T /by 2023-05-05 1800
+event Dinner /from 2023-01-01 1600 /to 2023-01-01 1800
 mark 1
 list
 mark 2
@@ -22,8 +22,8 @@ deadline
 event
 event
 todo
-deadline   /by 2pm
-event   /from 2pm /to 8pm
+deadline   /by 2023-05-05 1800
+event   /from 2023-01-01 1600 /to 2023-01-01 1800
 delete 50
 delete 0
 delete -1
