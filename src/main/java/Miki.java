@@ -16,14 +16,26 @@ public class Miki {
     }
 
     public static void main(String[] args) {
+        boolean ascii_only = false;
+        for (int i = 0; i < args.length; i++) {
+            if (args[i].equals("--ascii-only")) ascii_only = true;
+        }
+
         ArrayList<Task> tasks = new ArrayList<>();
         Scanner sc = new Scanner(System.in);
+
         printDiv();
         String username = System.getProperty("user.name");
         print("in honour / fuzuki miki / 2020 | 2021");
-        print("\uD83C\uDF80✨");
-        print("Hello " + username + " !! Konmiki! ＼(￣▽￣)/");
+        if (!ascii_only) {
+            print("\uD83C\uDF80✨");
+            print("Hello " + username + " !! Konmiki! ＼(￣▽￣)/");
+        } else {
+            print("01 f3 80 / 27 28");
+            print("Hello " + username + " !! Konmiki! \\(^v^)/");
+        }
         printDiv();
+
         boolean exit_cmd = false;
         while (!exit_cmd) {
             System.out.print(">");

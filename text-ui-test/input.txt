@@ -1,0 +1,14 @@
+todo read book
+deadline get bread /by 26 Jan
+event lunch /from tomorrow 12pm /to 1pm
+list
+todo git-push
+mark 4
+mark 1
+list
+unmark 3
+unmark 4
+deadline ip /by 23:59
+list
+mark 4
+bye
