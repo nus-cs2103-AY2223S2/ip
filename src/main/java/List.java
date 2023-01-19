@@ -4,13 +4,31 @@ public class List {
     private ArrayList<Task> list = new ArrayList<>();
 
     public List() {
-        list.add(new Task("zeroth"));
+        list.add(new ToDo("zeroth"));
     }
 
     public void add(String input) {
-        Task newTask = new Task(input);
+        ToDo newTask = new ToDo(input);
         list.add(newTask);
-        System.out.println("    added: " + newTask.getTask());
+        System.out.println("    Got it. I've added this task:");
+        System.out.println("    " + newTask.toString());
+        System.out.println("    Now you have " + (list.size() - 1) + " tasks in the list.");
+    }
+
+    public void add(String input, String deadline) {
+        Deadline newTask = new Deadline(input, deadline);
+        list.add(newTask);
+        System.out.println("    Got it. I've added this task:");
+        System.out.println("    " + newTask.toString());
+        System.out.println("    Now you have " + (list.size() - 1) + " tasks in the list.");
+    }
+
+    public void add(String input, String from, String to) {
+        Event newTask = new Event(input, from, to);
+        list.add(newTask);
+        System.out.println("    Got it. I've added this task:");
+        System.out.println("    " + newTask.toString());
+        System.out.println("    Now you have " + (list.size() - 1) + " tasks in the list.");
     }
 
     public Task get(int index) {

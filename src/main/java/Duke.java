@@ -1,7 +1,7 @@
 import java.util.Scanner;
 
 public class Duke {
-    static String line = "    ______________________________________";
+    static String line = "    ______________________________________________________________";
 
     public static void main(String[] args) {
         startDuke();
@@ -13,10 +13,9 @@ public class Duke {
         boolean active = true;
         List list = new List();
         while (active) {
-            String raw = sc.nextLine();
+            String command = sc.next();
             System.out.println(line);
-            String[] input = raw.split("\\s+");
-            switch (input[0]) {
+            switch (command) {
                 case "bye":
                     end();
                     active = false;
@@ -25,13 +24,27 @@ public class Duke {
                     list.print();
                     break;
                 case "mark":
-                    list.get(Integer.parseInt(input[1])).markDone();
+                    int markIdx = sc.nextInt();
+                    list.get(markIdx).markDone();
                     break;
                 case "unmark":
-                    list.get(Integer.parseInt(input[1])).unmark();
+                    int unmarkIdx = sc.nextInt();
+                    list.get(unmarkIdx).unmark();
                     break;
-                default:
-                    list.add(raw);
+                case "todo":
+                    String todoTask = sc.nextLine();
+                    list.add(todoTask);
+                    break;
+                case "deadline":
+                    String temp = sc.nextLine();
+                    String[] dlTask = temp.split("/by");
+                    list.add(dlTask[0], dlTask[1]);
+                    break;
+                case "event":
+                    String temp2 = sc.nextLine();
+                    String[] eventTask = temp2.split("/from|/to");
+                    list.add(eventTask[0], eventTask[1], eventTask[2]);
+                    break;
             }
             System.out.println(line + "\n");
         }

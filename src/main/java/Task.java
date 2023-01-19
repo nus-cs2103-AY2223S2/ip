@@ -1,9 +1,9 @@
-public class Task {
+public abstract class Task {
     private boolean isDone = false;
     private String task;
 
-    public Task(String input) {
-        task = input;
+    public Task(String title) {
+        this.task = title;
     }
 
     public void markDone() {
