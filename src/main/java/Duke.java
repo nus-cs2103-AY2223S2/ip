@@ -1,8 +1,8 @@
-import java.util.Optional;
+
 import java.util.Scanner;
 
 public class Duke {
-    public static void main(String[] args) {
+    public static void main(String[] args) throws EmptyDescriptionException, UnknownInputException {
         Scanner scanner = new Scanner(System.in);
         DukeList dukeList = new DukeList();
         String logo = " ____        _        \n"
@@ -33,7 +33,20 @@ public class Duke {
             } else if (first.equals("unmark")) {
                 String inputTask = array[1];
                 dukeList.findAndMark(inputTask, false);
-            } else{
+            } else if (first.equals("delete")) {
+                try {
+                    dukeList.delete(Integer.parseInt(array[1]));
+                }  catch (TaskOutOfRangeException e) {
+                    System.out.println(e);
+                }
+            } else {
+                if (array.length != 2) {
+                    if (first.equals("todo") || first.equals("deadline") || first.equals("event")) {
+                        throw new EmptyDescriptionException("Sorry, your " + first + " task description is missing.");
+                    } else {
+                        throw new UnknownInputException("Hmm, I'm not sure what you're saying man.");
+                    }
+                }
                 dukeList.add(array[0], array[1]);
             }
         }
