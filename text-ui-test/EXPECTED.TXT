@@ -1,3 +1,5 @@
 Got it. I've added this task:
 added: [T][ ] hello
 Now you have 1 tasks in the list
+Here are the tasks in your list:
+1. [T][ ] hello
