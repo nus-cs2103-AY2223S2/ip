@@ -1,48 +1,61 @@
+import java.util.Arrays;
 import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Duke {
 
-  public static void main(String[] args) {
+  protected static ArrayList<String> commandList = new ArrayList<>(Arrays.asList
+                  ("todo", "deadline", "event", "mark", "unmark", "list", "bye", "delete"));
+  public static void main(String[] args) throws EmptyInputException, InvalidCommandException {
     greet();
     run();
   }
 
-  public static void run() {
+  public static void run() throws EmptyInputException, InvalidCommandException{
     DukeList records = new DukeList();
     Scanner userInput = new Scanner(System.in);
-    while (true) {
-      String input = userInput.nextLine();
-      handleInput(input, records);
-    }
+      while (true) {
+        try {
+          String input = userInput.nextLine();
+          if (input == "") {
+            throw new EmptyInputException();
+          }
+          handleInput(input, records);
+        }catch (EmptyInputException exception) {
+          System.out.println("Empty input detected, please enter a value.");
+          break;
+        }
+      }
   }
 
-  public static void handleInput(String input, DukeList d) {
-    if (input.contains("/")) {
-      String[] split = input.split("/", 2);
-      String[] secondSplit = split[0].split(" ", 2);
+  public static void handleInput(String input, DukeList d) throws EmptyInputException, InvalidCommandException {
+      if (input.contains("/")) {
+        String[] split = input.split("/", 2);
+        String[] secondSplit = split[0].split(" ", 2);
 
-      String command = secondSplit[0];
-      String name = secondSplit[1];
-      String time = split[1];
-      handleThreeInputs(command, name, time, d);
-    }
-    else {
-      String[] split = input.split(" ", 2);
-      String command = split[0];
-      if ("todo".equalsIgnoreCase(command)) {
-        d.insertToDo(split[1]);
-      }
-      else if (split.length > 1) {
-        Integer index = Integer.parseInt(split[1]);
-        handleTwoInputs(command, index, d);
+        String command = secondSplit[0];
+        String name = secondSplit[1];
+        String time = split[1];
+        handleThreeInputs(command, name, time, d);
       } else {
-        handleSingleInput(command, d);
+        String[] split = input.split(" ", 2);
+        String command = split[0];
+        if ("todo".equalsIgnoreCase(command)) {
+          d.insertToDo(split[1]);
+        } else if (split.length > 1) {
+          Integer index = Integer.parseInt(split[1]);
+          handleTwoInputs(command, index, d);
+        } else {
+          try {
+            handleSingleInput(command, d);
+          }catch (InvalidCommandException exception) {
+            System.out.println("Invalid command detected, please enter a value.");
+          }
       }
     }
   }
 
-  public static void handleSingleInput(String command, DukeList d) {
+  public static void handleSingleInput(String command, DukeList d) throws InvalidCommandException{
     switch (command) {
       case "bye":
         exit();
@@ -87,15 +100,13 @@ public class Duke {
   }
 
   public static void greet() {
-    String greeting = "____________________________________________________________\n" +
-            "Hello! I'm Duke\n" +
-            "What can I do for you?\n" +
-            "____________________________________________________________";
+    String greeting = format("if it isn't your favourite astronaut lawyer doctor plumber cleaner, Johnny Sins."
+    + "\n Ready to go on a self-exploration adventure?");
     System.out.println(greeting);
   }
 
-  public static void exit() {
-    String exitMsg = format("Bye. Hope to see you again soon!");
+  public static void exit(){
+    String exitMsg = format("Bye. Come back soon!");
     System.out.println(exitMsg);
     System.exit(1);
   }
