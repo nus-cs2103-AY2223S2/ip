@@ -35,12 +35,20 @@ public class Duke {
                 }
             }
             else if(command.equals("mark")){
+                if(params.equals("")){
+                    System.out.println("missing parameters.");
+                    continue;
+                }
                 int temp = parseInt(params);
                 System.out.println("marking task " + temp);
                 done[temp-1] = true;
 
             }
             else if(command.equals("unmark")){
+                if(params.equals("")){
+                    System.out.println("missing parameters.");
+                    continue;
+                }
                 int temp = parseInt(params);
                 System.out.println("unmarking task " + temp);
                 done[temp-1] = false;
@@ -51,6 +59,10 @@ public class Duke {
                 break;
             }
             else if(command.equals("todo")) {
+                if(params.equals("")){
+                    System.out.println("missing parameters.");
+                    continue;
+                }
                 System.out.println("added: " + params);
                 done[index] = false;
                 list[index] = params;
@@ -59,6 +71,10 @@ public class Duke {
                 System.out.println("You have "+index+" tasks.");
             }
             else if(command.equals("deadline")) {
+                if(params.equals("")){
+                    System.out.println("missing parameters.");
+                    continue;
+                }
                 System.out.println("added: " + params);
                 done[index] = false;
                 list[index] = params;
@@ -67,6 +83,10 @@ public class Duke {
                 System.out.println("You have "+index+" tasks.");
             }
             else if(command.equals("event")) {
+                if(params.equals("")){
+                    System.out.println("missing parameters.");
+                    continue;
+                }
                 System.out.println("added: " + params);
                 done[index] = false;
                 list[index] = params;
