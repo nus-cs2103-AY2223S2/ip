@@ -42,6 +42,9 @@ public class Duke {
             keyword = keyword + " " + tokens.nextToken();
           }
           keyword = keyword.strip();
+          if(keyword.equals("")) {
+            System.out.println(divider + "OOPS!!! The description of a " + action + "cannot be empty.\n" + divider);
+          }
 
           switch(action) {                            //For instructions with argument(s).
             case "add":
@@ -49,15 +52,29 @@ public class Duke {
               break;
 
             case "mark":
-              Task t1 = tasks.get(Integer.parseInt(keyword) - 1);
-              t1.mark();
-              System.out.println(divider + "Nice! I've marked this task as done:\n" + t1 + "\n" + divider);
+              try {
+                Task t1 = tasks.get(Integer.parseInt(keyword) - 1);
+                t1.mark();
+                System.out.println(divider + "Nice! I've marked this task as done:\n" + t1 + "\n" + divider);
+              } catch(IndexOutOfBoundsException ioobe) {
+                System.out.println("Sorry, the index number you've entered does not exist.");
+                continue;
+              } catch(NumberFormatException nfe) {
+                System.out.println("Please enter the number you wish to mark/unmark.");
+              }
               break;
 
             case "unmark":
-              Task t2 = tasks.get(Integer.parseInt(keyword) - 1);
-              t2.unmark();
-              System.out.println(divider + "OK! I've marked this task as not done yet:\n" + t2 + "\n" + divider);
+              try {
+                Task t2 = tasks.get(Integer.parseInt(keyword) - 1);
+                t2.unmark();
+                System.out.println(divider + "OK! I've marked this task as not done yet:\n" + t2 + "\n" + divider);
+              } catch(IndexOutOfBoundsException ioobe) {
+                System.out.println("Sorry, the index number you've entered does not exist.");
+                continue;
+              } catch(NumberFormatException nfe) {
+                System.out.println("Please enter the number you wish to mark/unmark.");
+              }
               break;
 
             case "todo":
@@ -67,14 +84,26 @@ public class Duke {
             case "deadline":
               String[] deadlineFinder = keyword.split(" /by "); //Split keyword into description and date, separated by "/by".
               keyword = deadlineFinder[0];
-              String deadline = deadlineFinder[1];
-              tasks.add(new Deadline(keyword, deadline));
+              try {
+                String deadline = deadlineFinder[1];
+                tasks.add(new Deadline(keyword, deadline));
+              } catch(IndexOutOfBoundsException ioobe) {
+                System.out.println("Please define a deadline following the keyword '/by'.");
+              }
               break;
 
             case "event":
               String[] startFinder = keyword.split(" /from ");  //Split keyword into description and start,end.
-              String[] endFinder = startFinder[1].split(" /to "); //Split start,end into start and end.
-              tasks.add(new Event(startFinder[0], endFinder[0], endFinder[1]));
+              try{
+                String[] endFinder = startFinder[1].split(" /to "); //Split start,end into start and end.
+                tasks.add(new Event(startFinder[0], endFinder[0], endFinder[1]));
+              } catch(IndexOutOfBoundsException ioobe) {
+                System.out.println("Please define a start time following the keyword '/from'\nand then an end time following the keyword '/to'.");
+              }
+              break;
+
+            default:
+              System.out.println(divider + "OOPS! I'm sorry, but I don't know what that means :-(\n" + divider);  //For unknown action.
           }
       }
     }
