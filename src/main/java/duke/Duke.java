@@ -10,14 +10,18 @@ import duke.command.MarkCommand;
 import duke.command.ToDoCommand;
 import duke.command.UnmarkCommand;
 import duke.exception.DukeException;
+import duke.io.FileStorage;
 import duke.task.TaskList;
 
+import java.nio.file.Path;
 import java.util.Scanner;
 
 /**
  * Main class for the chatbot
  */
 public class Duke {
+    private final static Path saveFilePath = Path.of("./save-data/task-list.csv");
+
     private final static ByeCommand byeCommand = new ByeCommand();
     private final static DeadlineCommand deadlineCommand = new DeadlineCommand();
     private final static DeleteCommand deleteCommand = new DeleteCommand();
@@ -27,7 +31,7 @@ public class Duke {
     private final static ToDoCommand toDoCommand = new ToDoCommand();
     private final static UnmarkCommand unmarkCommand = new UnmarkCommand();
 
-    private final static TaskList tasks = new TaskList();
+    private static TaskList tasks;
 
     /**
      * Main method for the chatbot
@@ -35,8 +39,28 @@ public class Duke {
      * @param args Command-line arguments
      */
     public static void main(String[] args) {
+        if (!setup()) {
+            return;
+        }
+
         printGreeting();
         runInputLoop();
+    }
+
+    private static boolean setup() {
+        try {
+            tasks = new TaskList(new FileStorage(saveFilePath));
+            return true;
+        } catch (DukeException e) {
+            printMessage(e.getMessage());
+            return false;
+        }
+    }
+
+    private static void printMessage(String message) {
+        System.out.println("    ____________________________________________________________");
+        System.out.printf("     %s\n", message.replace("\n", "\n     "));
+        System.out.print("    ____________________________________________________________\n\n");
     }
 
     private static void printGreeting() {
@@ -46,12 +70,6 @@ public class Duke {
                 + "| |_| | |_| |   <  __/\n"
                 + "|____/ \\__,_|_|\\_\\___|\n";
         printMessage(String.format("Hello from\n%s\nWhat can I do for you?", logo));
-    }
-
-    private static void printMessage(String message) {
-        System.out.println("    ____________________________________________________________");
-        System.out.printf("     %s\n", message.replace("\n", "\n     "));
-        System.out.print("    ____________________________________________________________\n\n");
     }
 
     private static void runInputLoop() {
