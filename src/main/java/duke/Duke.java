@@ -62,6 +62,7 @@ public class Duke {
      * @throws BadCommandException
      */
     public static void parseInput(String inputStr) throws BadCommandException {
+        inputStr = inputStr.trim();
         try {
             if (inputStr.equals("list")) {
                 listTasks();
@@ -72,7 +73,7 @@ public class Duke {
                 throw new BadCommandException("There are insufficient parameters!");
             }
             String command = inputSplit[0].trim();
-            String params = inputSplit[1];
+            String params = inputSplit[1].trim();
             if (command.equals("mark")) {
                 int idx = Integer.parseInt(params) - 1;
                 if (idx >= tasks.size() || idx < 0) {
@@ -128,7 +129,7 @@ public class Duke {
     }
     public static void main(String[] args) {
         Scanner inputScanner = new Scanner(System.in);
-        prettyPrint("Hello! I'm duke.Duke\n\tWhat can I do for you?");
+        prettyPrint("Hello! I'm Duke\n\tWhat can I do for you?");
         String inputStr = inputScanner.nextLine().trim();
         while (!inputStr.equals("bye")) {
             try {
