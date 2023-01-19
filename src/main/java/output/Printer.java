@@ -66,7 +66,8 @@ public class Printer {
         String s = String.format("Noted. I've removed this task:\n  %s\nNow you have %d %s in the list.", 
                                  task.toString(), 
                                  numTasksAfterDelete, 
-                                 grammar);        
+                                 grammar);
+        printWithDecorations(s);    
     }
     
 }
