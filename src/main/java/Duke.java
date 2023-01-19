@@ -1,5 +1,7 @@
 import java.util.Scanner;
 
+import exception.DukeException;
+import input.Advisor;
 import input.Command;
 import input.Parser;
 
@@ -49,54 +51,61 @@ public class Duke {
         String input = sc.nextLine();
         
         while (!input.equals("bye")) {
-            switch (Duke.getCommand(input)) {
-                case LIST:
-                    Printer.printTasks(tasks, numTasks);
-                    break;
-                case DEADLINE:
-                    if (numTasks >= tasks.length) {
-                        Printer.printNotEnoughSpace();
+            try {
+                switch (Duke.getCommand(input)) {
+                    case LIST:
+                        Printer.printTasks(tasks, numTasks);
                         break;
-                    }
-                    String[] dt = Parser.parseDeadline(input);
-                    Deadline dl = new Deadline(dt[0], dt[1]);
-                    tasks[numTasks] = dl;
-                    numTasks++;
-                    Printer.printAddedConfirmation(dl, numTasks);
-                    break;
-                case EVENT:
-                    if (numTasks >= tasks.length) {
-                        Printer.printNotEnoughSpace();
+                    case DEADLINE:
+                        if (numTasks >= tasks.length) {
+                            Printer.printNotEnoughSpace();
+                            break;
+                        }
+
+                        String[] dt = Parser.parseDeadline(input);
+                        Deadline dl = new Deadline(dt[0], dt[1]);
+                        tasks[numTasks] = dl;
+                        numTasks++;
+                        Printer.printAddedConfirmation(dl, numTasks);
                         break;
-                    }
-                    String[] et = Parser.parseEvent(input);
-                    Event e = new Event(et[0], et[1], et[2]);
-                    tasks[numTasks] = e;
-                    numTasks++;
-                    Printer.printAddedConfirmation(e, numTasks);
-                    break;
-                case TODO:
-                    if (numTasks >= tasks.length) {
-                        Printer.printNotEnoughSpace();
+                    case EVENT:
+                        if (numTasks >= tasks.length) {
+                            Printer.printNotEnoughSpace();
+                            break;
+                        }
+
+                        String[] et = Parser.parseEvent(input);
+                        Event e = new Event(et[0], et[1], et[2]);
+                        tasks[numTasks] = e;
+                        numTasks++;
+                        Printer.printAddedConfirmation(e, numTasks);
                         break;
-                    }
-                    Todo td = new Todo(Parser.parseTodo(input));
-                    tasks[numTasks] = td;
-                    numTasks++;
-                    Printer.printAddedConfirmation(td, numTasks);
-                    break;
-                case MARK:
-                    int markIndex = Parser.parseMark(input);
-                    if (isValidMark(tasks, markIndex)) // Note that this check also prints out error messages if any
-                        Printer.printWithDecorations(tasks[markIndex].markDone());
-                    break;
-                case UNMARK:
-                    int unmarkIndex = Parser.parseUnmark(input);
-                    if (isValidMark(tasks, unmarkIndex)) // Note that this check also prints out error messages if any
-                        Printer.printWithDecorations(tasks[unmarkIndex].unmarkDone());
-                    break;
-                default:
-                    Printer.printWithDecorations("OOPS!!! I'm sorry, but I don't know what that means :c");
+                    case TODO:
+                        if (numTasks >= tasks.length) {
+                            Printer.printNotEnoughSpace();
+                            break;
+                        }
+
+                        Todo td = new Todo(Parser.parseTodo(input));
+                        tasks[numTasks] = td;
+                        numTasks++;
+                        Printer.printAddedConfirmation(td, numTasks);
+                        break;
+                    case MARK:
+                        int markIndex = Parser.parseMark(input);
+                        if (isValidMark(tasks, markIndex)) // Note that this check also prints out error messages if any
+                            Printer.printWithDecorations(tasks[markIndex].markDone());
+                        break;
+                    case UNMARK:
+                        int unmarkIndex = Parser.parseUnmark(input);
+                        if (isValidMark(tasks, unmarkIndex)) // Note that this check also prints out error messages if any
+                            Printer.printWithDecorations(tasks[unmarkIndex].unmarkDone());
+                        break;
+                    default:
+                        Printer.printWithDecorations(Advisor.advise(input));
+                }
+            } catch (DukeException e) {
+                Printer.printError(e.getMessage());
             }
             input = sc.nextLine();
         }

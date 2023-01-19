@@ -53,5 +53,10 @@ public class Printer {
     public static void printNotEnoughSpace() {
         Printer.printWithDecorations("You have added too many tasks!");
     }
+
+    public static void printError(String errorMessage) {
+        System.err.println(errorMessage);
+        System.err.println("Please try again.");
+    }
     
 }
