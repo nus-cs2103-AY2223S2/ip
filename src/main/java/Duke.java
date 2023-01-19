@@ -111,7 +111,7 @@ public class Duke {
 }
 
 // custom Task class to store individual tasks that the user enters
-public class Task {
+class Task {
     protected String description;
     protected boolean isDone;
 
@@ -134,7 +134,7 @@ public class Task {
     }
 }
     
-public class Todo extends Task{
+class Todo extends Task {
 
     public Todo(String description) {
         super(description);
@@ -146,7 +146,7 @@ public class Todo extends Task{
     }
 }
 
-public class Deadline extends Task {
+class Deadline extends Task {
 
     protected String by;
 
@@ -161,7 +161,7 @@ public class Deadline extends Task {
     }
 }
 
-public class Event extends Task{
+class Event extends Task {
     protected String from;
     protected String to;
 
@@ -178,7 +178,7 @@ public class Event extends Task{
 
 }
 
-public class DukeException extends Exception {
+class DukeException extends Exception {
     public DukeException(String message) {
 
         super(message);
