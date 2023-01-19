@@ -14,14 +14,15 @@ public class Duke {
                 + "What can I do for you?\n";
         String[] list = new String[101];
         int listNum = 1; // starts from 1 for convenience
+        boolean running = true;
         System.out.println(DIV_OPEN + logo + greetings + DIV_CLOSE);
         // Initialization complete
 
         // Accept user input in a loop
         Scanner sc = new Scanner(System.in);
-        while(true) {
+        while(running) {
 
-            String msg = sc.nextLine();
+            String msg = sc.next();
 
             // Terminate Duke
             if (msg.equals("bye")) {
@@ -31,15 +32,26 @@ public class Duke {
             // Commands
             System.out.printf(DIV_OPEN); // DIV_OPEN for output
 
-            // List
-            if (msg.equals("list")) {
-                for (int i = 1; i < listNum; i++) {
-                    System.out.println(i + ". " + list[i]);
-                }
-            } else { // Add
-                list[listNum] = msg;
-                listNum++;
-                System.out.println("added: " + msg);
+            switch(msg) {
+
+                case "list":
+                    for (int i = 1; i < listNum; i++) {
+                        System.out.println(i + ". " + list[i]);
+                    }
+                    break;
+
+                case "mark":
+                    // mark
+                    break;
+
+                case "unmark":
+                    // unmark
+                    break;
+
+                default:
+                    list[listNum] = msg;
+                    listNum++;
+                    System.out.println("added: " + msg);
             }
 
             System.out.println(DIV_CLOSE); // DIV_CLOSE for output
