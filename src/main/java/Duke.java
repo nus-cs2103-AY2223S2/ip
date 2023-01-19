@@ -1,8 +1,8 @@
+import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Duke {
-    private static int numOfTasks = 0;
-    private static Task[] tasks = new Task[100];
+    private static ArrayList<Task> tasks = new ArrayList<Task>();
 
     /** 
      * Outputs given string with formatting.
@@ -40,18 +40,29 @@ public class Duke {
      * @param task Task to be added to task list.
      */
     private static void addTask(Task task) {
-        tasks[numOfTasks] = task;
-        numOfTasks++;
+        tasks.add(task);
         output("Got it. I've added this task:\n    " 
                 + task + "\n  "
-                + "Now you have " + numOfTasks + (numOfTasks == 1 ? " task " : " tasks ") + "in the list.\n");
+                + "Now you have " + tasks.size() + (tasks.size() == 1 ? " task " : " tasks ") + "in the list.\n");
+    }
+
+    /** 
+     * Removes task from task list and outputs success message.
+     * 
+     * @param taskIndex Index of task to be removed.
+     */
+    private static void removeTask(int taskIndex) {
+        Task task = tasks.remove(taskIndex);
+        output("Noted. I've removed this task:\n    " 
+                + task + "\n  "
+                + "Now you have " + tasks.size() + (tasks.size() == 1 ? " task " : " tasks ") + "in the list.\n");
     }
 
     // Outputs all the tasks stored in task list.
     private static void listTasks() {
         String listOfTasks = "Here are the tasks in your list:\n";
-        for(int idx = 0; idx < numOfTasks; idx++) {
-            Task task = tasks[idx];
+        for(int idx = 0; idx < tasks.size(); idx++) {
+            Task task = tasks.get(idx);
             listOfTasks = listOfTasks + "  " + (idx + 1) + "." + task + "\n";
         }
         output(listOfTasks);
@@ -77,6 +88,7 @@ public class Duke {
         output("OK, I've marked this task as not done yet:\n    " + task + "\n");
     }
 
+    // Handles unknown input.
     private static void handleUnknownInput() {
         try {
             throw new DukeException("OOPS!!! I'm sorry, but I don't know what that means :-(\n");
@@ -99,10 +111,10 @@ public class Duke {
                     listTasks();
                     break;
                 case "mark":
-                    markTask(tasks[Integer.parseInt(words[1]) - 1]);
+                    markTask(tasks.get(Integer.parseInt(words[1]) - 1));
                     break;
                 case "unmark":
-                    unmarkTask(tasks[Integer.parseInt(words[1]) - 1]);
+                    unmarkTask(tasks.get(Integer.parseInt(words[1]) - 1));
                     break;
                 case "todo":
                     try {
@@ -132,6 +144,9 @@ public class Duke {
                     } catch (DukeException e) {
                         output(e.getMessage());
                     }
+                    break;
+                case "delete":
+                    removeTask(Integer.parseInt(words[1]) - 1);
                     break;
                 case "bye":
                     exitMsg();
