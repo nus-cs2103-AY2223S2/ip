@@ -18,7 +18,7 @@ public class Duke {
     private static final String greeting = "Welcome to Lavender Network!\n" +
             "I'm Iris, your favourite teenage chatbot.\n" +
             "I'm here to keep track of your tasks so you don't have to :)\n" +
-            "Type \"/help\" to learn the commands.\n" +
+            "Type \"help\" to learn the commands.\n" +
             "What are you waiting for? Let's get started!";
 
     private static final String help_text = "Hello! You can use the following commands:\n" +
@@ -62,20 +62,25 @@ public class Duke {
         output("You have " + items.size() + " tasks.");
     }
 
+    enum Command {
+        help, bye, list, mark, unmark, delete, todo, deadline, event
+    }
+
     public static void main(String[] args) {
         output(greeting);
         loop:
         while (true) {
             getInput();
             Task task;
-            switch (input.split(" ")[0]) {
-                case "/help":
+            Command command = Command.valueOf(input.split(" ")[0]);
+            switch (command) {
+                case help:
                     output(help_text);
                     break;
-                case "bye":
+                case bye:
                     output(exitGreeting);
                     break loop;
-                case "list":
+                case list:
                     if (items.size() > 5) {
                         output("You have the following tasks: (So many >:O)!");
                     } else {
@@ -87,31 +92,31 @@ public class Duke {
                         output((i + 1) + ". " + task);
                     }
                     break;
-                case "mark":
+                case mark:
                     output("Good job! I've marked this task done:");
                     task = items.get(Integer.parseInt(input.split(" ")[1]) - 1);
                     task.mark();
                     output(task.toString());
                     break;
-                case "unmark":
+                case unmark:
                     output("Bummer! Have fun doing this:");
                     task = items.get(Integer.parseInt(input.split(" ")[1]) - 1);
                     task.unmark();
                     output(task.toString());
                     break;
-                case "delete":
+                case delete:
                     int i = Integer.parseInt(input.split(" ")[1]) - 1;
                     output("I've removed this task");
                     output(items.get(i).toString());
                     items.remove(i);
                     break;
-                case "todo":
+                case todo:
                     add_item(new Todo(input));
                     break;
-                case "deadline":
+                case deadline:
                     add_item(new Deadline(input));
                     break;
-                case "event":
+                case event:
                     add_item(new Event(input));
                     break;
                 default:
