@@ -10,24 +10,34 @@ public class Duke {
         System.out.println("Hello from\n" + logo);
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
         PrintWriter pw = new PrintWriter(new BufferedWriter(new OutputStreamWriter(System.out)));
+        StringBuilder sb = new StringBuilder();
         String text = "";
-        pw.println("    ____________________________________________________________");
-        pw.println("    Hello! I'm Duke");
-        pw.println("    What can I do for you?");
-        pw.println("    ____________________________________________________________");
+        sb.append("    ____________________________________________________________\n")
+                .append("    Hello! I'm Duke\n")
+                .append("    What can I do for you?\n")
+                .append("    ____________________________________________________________\n");
+        pw.println(sb.toString());  // Welcome Message bye Duke
         pw.flush();
-        while (true) {
+        sb.setLength(0);
+
+        while (true) {  // Echoing
             text = br.readLine();
-            if (text.equals("bye")) {
-                pw.println("    ____________________________________________________________");
-                pw.println("    Bye. Hope to see you again soon!");
-                pw.println("    ____________________________________________________________");
+            if (text.equalsIgnoreCase("bye")) { // Regardless of Uppercase & Lowercase "bye"
+            //if (text.equals("bye")) {
+                sb.append("    ____________________________________________________________\n")
+                                .append("    Bye. Hope to see you again soon!\n")
+                                        .append("    ____________________________________________________________\n");
+                pw.println(sb.toString());
+                pw.flush();
+                sb.setLength(0);
                 break;
             }
-            pw.println("    ____________________________________________________________");
-            pw.printf("    %s\n", text);
-            pw.println("    ____________________________________________________________");
+            sb.append("    ____________________________________________________________\n")
+                            .append("    ").append(text).append("\n")
+                                    .append("    ____________________________________________________________\n");
+            pw.println(sb.toString());
             pw.flush();
+            sb.setLength(0);
         }
         br.close();
         pw.close();
