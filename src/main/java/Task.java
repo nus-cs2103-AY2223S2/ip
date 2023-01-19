@@ -37,7 +37,7 @@ public class Task {
      * @return The status of the task.
      */
     public String getStatus() {
-        return "[" + (isDone ? "X" : ""); + "] " + this.nameOfTask;
+        return "[" + (isDone ? "X" : " "); + "] " + this.nameOfTask;
     }
 
     /**
