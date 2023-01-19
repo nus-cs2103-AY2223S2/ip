@@ -15,11 +15,13 @@ public class Duke {
 
         // Initialise list of tasks
         ArrayList<Task> TaskList = new ArrayList<>();
+        // Initialise Scanner object
+        Scanner UserScan = new Scanner(System.in);
 
         // while LoopEnd = true loop to accept user input
         boolean LoopEnd = false;
         while (!LoopEnd) {
-            Scanner UserScan = new Scanner(System.in);
+
             // try block to catch DukeException and prevent program from terminating itself.
             try{
                 // switch case for future commands
@@ -49,7 +51,7 @@ public class Duke {
                         }
                         StringBuilder ToPrint = new StringBuilder();
                         for (int i = 0; i < TaskList.size(); i++) {
-                            ToPrint.append(i).append(1).append(". ").append(TaskList.get(i).toString()).append("\n");
+                            ToPrint.append(i).append(". ").append(TaskList.get(i).toString()).append("\n");
                         }
                         System.out.println(border + "Here are your tasks:\n" + ToPrint + border);
                         break;
