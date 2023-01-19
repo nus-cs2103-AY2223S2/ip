@@ -84,24 +84,24 @@ public class Babe {
     }
 
     /**
-     * Returns the index of the dates in a Deadline or Event instruction
-     * Traverses through userInput array to find the index by locating "/by", "/from" or "/to".
+     * Finds and returns index of command arguments in userInput demarcated by given String pattern
      *
-     * @return An integer that is the index of the date of deadline, start date of event or end date of event .
+     * @args pattern A String pattern that precedes the input of command argument
+     * @return An integer that is the index of command argument.
      */
-    private int determineDate(String type) {
+    private int findArgument(String pattern) {
 
-       int date = -1;
+       int argIndex = -1;
 
-        for (int i = 1; i < userInputLen; i++) {
+        for (int i = 0; i < userInputLen; i++) {
             String currentString = userInput.get(i);
-            if (currentString.equals(type)) {
-                date = i + 1;
+            if (currentString.equals(pattern)) {
+                argIndex = i + 1;
                 break;
             }
         }
 
-        return date;
+        return argIndex;
     }
 
     /**
@@ -199,6 +199,21 @@ public class Babe {
         Babe.drawLine();
     }
 
+    /**
+     * Delete Task in memory specified by given index.
+     *
+     * @param index An integer that represents the index of the Task to be removed from memory.
+     */
+    public void deleteTask(int index) {
+        Task removedTask = this.memory.remove(index - 1);
+        memoryCount--;
+        Babe.drawLine();
+        System.out.println("One task down! I removed this from your list of tasks:");
+        System.out.println(removedTask.toString());
+        System.out.printf("Now you have %d task(s) left!\n", memoryCount);
+        Babe.drawLine();
+    }
+
     public static void main(String[] args) {
 
         Babe chatBot = new Babe();
@@ -231,18 +246,25 @@ public class Babe {
                     if (inputLength == 1) {
                         throw new NoDescriptionException();
                     }
-                    int deadline = chatBot.determineDate("/by");
+                    int deadline = chatBot.findArgument("/by");
                     chatBot.addDeadline(chatBot.rebuildUserInput(1, deadline - 1),
                             chatBot.rebuildUserInput(deadline, inputLength));
                 } else if (instruction.equalsIgnoreCase("event")) {
                     if (inputLength == 1) {
                         throw new NoDescriptionException();
                     }
-                    int startDate = chatBot.determineDate("/from");
-                    int endDate = chatBot.determineDate("/to");
+                    int startDate = chatBot.findArgument("/from");
+                    int endDate = chatBot.findArgument("/to");
                     chatBot.addEvent(chatBot.rebuildUserInput(1, startDate - 1),
                             chatBot.rebuildUserInput(startDate, endDate - 1),
                             chatBot.rebuildUserInput(endDate, inputLength));
+                } else if (instruction.equalsIgnoreCase("delete")) {
+                    if (inputLength == 1) {
+                        throw new NoDescriptionException();
+                    }
+                    int deleteIndex = chatBot.findArgument("delete");
+                    chatBot.deleteTask(deleteIndex);
+
                 } else {
                     throw new NonsenseInputException();
                 }
