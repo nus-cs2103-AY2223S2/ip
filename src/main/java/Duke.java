@@ -1,6 +1,11 @@
 import java.util.ArrayList;
 import java.util.Scanner;
 import java.lang.String;
+
+/**
+ * @author Shi Jiaao
+ */
+
 public class Duke {
     private static String printList(ArrayList<Task> toDoList) {
         String res = "";
