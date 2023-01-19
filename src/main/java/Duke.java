@@ -23,6 +23,8 @@ public class Duke {
                     commands.markTask(userInput);
                 } else if (taskType.equals("unmark")) {
                     commands.unmarkTask(userInput);
+                } else if (taskType.equals("delete")) {
+                    commands.deleteTask(userInput);
                 } else if (taskType.equals("todo")) {
                     commands.addToDoTask(userInput);
                 } else if (taskType.equals("deadline")) {

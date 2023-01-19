@@ -26,4 +26,8 @@ public class TaskList {
     public ArrayList<Task> getTaskList() {
         return taskList;
     }
+
+    public void deleteTask(int index) {
+        taskList.remove(index);
+    }
 }

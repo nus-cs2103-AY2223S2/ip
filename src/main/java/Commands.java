@@ -86,4 +86,16 @@ public class Commands {
         Event event = new Event(description, from, to);
         addTask(event);
     }
+
+    public void deleteTask(String input) throws DukeException {
+        if (input.split(" ").length == 1) {
+            throw new DukeException("Please specify the task number to delete.");
+        }
+        int index = Integer.parseInt(input.split(" ")[1]) - 1;
+        Task task = taskList.getTask(index);
+        System.out.println("\tNoted. I've removed this task:");
+        System.out.println("\t\t" + task.toString());
+        taskList.deleteTask(index);
+        System.out.println("\tNow you have " + taskList.getSize() + " tasks in the list.");
+    }
 }
