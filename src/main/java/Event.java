@@ -8,6 +8,6 @@ public class Event extends Deadline {
 
     @Override
     public String toString() {
-        return "Event/" + getTaskDescription() + "(from " + startDate + " to " + endDate + ")";
+        return "Event/" + getTaskDescription() + "(from" + startDate + "to" + endDate + ")";
     }
 }

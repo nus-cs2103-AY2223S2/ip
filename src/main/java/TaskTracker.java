@@ -7,9 +7,9 @@ public class TaskTracker {
         return tasks.size();
     }
 
-    public Task GetTask(int index) throws TaskNotFoundError {
+    public Task GetTask(int index) throws TaskNotFoundException {
         if (tasks.size() < index + 1) {
-            throw new TaskNotFoundError("Task " + index + " not found!");
+            throw new TaskNotFoundException("Task " + index + " not found!");
         }
 
         return tasks.get(index);
@@ -33,15 +33,15 @@ public class TaskTracker {
         return t;
     }
 
-    public Task MarkTask(int index) throws TaskNotFoundError {
+    public Task MarkTask(int index) throws TaskNotFoundException {
         return MarkUnmarkTask(index, true);
     }
 
-    public Task UnmarkTask(int index) throws TaskNotFoundError {
+    public Task UnmarkTask(int index) throws TaskNotFoundException {
         return MarkUnmarkTask(index, false);
     }
 
-    public Task MarkUnmarkTask(int index, boolean isMarked) throws TaskNotFoundError {
+    public Task MarkUnmarkTask(int index, boolean isMarked) throws TaskNotFoundException {
         Task task = GetTask(index);
         if (isMarked) {
             task.mark();
