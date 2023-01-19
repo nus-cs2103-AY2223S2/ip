@@ -41,9 +41,14 @@ public class UserInterface {
     }
 
     public String getInput() {
+        // if (!sc.hasNextLine()) return "";
         showPrompt();
         String input = sc.nextLine();
         return input;
+    }
+
+    public boolean hasNextLine() {
+        return sc.hasNextLine();
     }
 
     public void showTasks(TaskList list) {

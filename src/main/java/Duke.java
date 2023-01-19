@@ -11,6 +11,12 @@ public class Duke {
     public void run() {
         ui.showGreeting();
         while (true) {
+            // Check if there are available lines to read
+            if (!ui.hasNextLine()) {
+                return;
+            }
+
+
             String input = ui.getInput();
 
             if (input.equals("bye")) {
