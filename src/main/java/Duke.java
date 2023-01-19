@@ -10,12 +10,7 @@ public class Duke {
         String input;
         List<Task> list = new ArrayList<Task>();
         input = myObj.nextLine();
-        char m = 'm';
-        char a = 'a';
-        char r = 'r';
-        char k = 'k';
-        char u = 'u';
-        char n = 'n';
+
 
         while (!input.equals("bye")) {
             //print List
@@ -28,7 +23,7 @@ public class Duke {
                 input = myObj.nextLine();
 
                 //mark a Task
-            } else if (input.charAt(0) == m && input.charAt(1) == a && input.charAt(2) == r && input.charAt(3) == k) {
+            } else if (input.length() > 4 && input.substring(0, 4).equals("mark")) {
                 //getting the index
                 String indexString = input.substring(5);
                 //converting the index from String to Int
@@ -45,8 +40,7 @@ public class Duke {
                 input = myObj.nextLine();
 
                 //unmark a Task
-            } else if (input.charAt(0) == u && input.charAt(1) == n && input.charAt(2) == m && input.charAt(3) == a
-                    && input.charAt(4) == r && input.charAt(5) == k) {
+            } else if (input.length() > 6 && input.substring(0, 6).equals("unmark")) {
                 String indexString = input.substring(7);
                 //converting the index from String to Int
                 int indexInt = Integer.parseInt(indexString) - 1;
@@ -63,9 +57,45 @@ public class Duke {
 
                 //normal case: create Task and add Task to list
             } else {
-                Task t  = new Task(input);
-                list.add(t);
-                System.out.println("added: " + t.description);
+
+                //if the task is a todo
+                if (input.length() > 4 && input.substring(0, 4).equals("todo")) {
+
+                    Task t  = new Todo(input);
+                    list.add(t);
+                    System.out.println("Got it. I've added this task: \n"
+                            + t.toString()
+                            + "\nNow you have " + list.size() + " tasks in the list.");
+
+                    //if task is a deadline
+                } else if (input.length() > 8 && input.substring(0, 8).equals("deadline")) {
+                    int slashIndex = input.lastIndexOf("/");
+                    String date = input.substring(slashIndex + 4);
+                    Task t  = new Deadline(input.substring(9, slashIndex-1), date);
+                    list.add(t);
+                    System.out.println("Got it. I've added this task: \n"
+                            + t.toString()
+                            + "\nNow you have " + list.size() + " tasks in the list.");
+
+                    //if task is an Event
+                } else if (input.length() > 5 && input.substring(0, 5).equals("event")) {
+                    int fromIndex = input.lastIndexOf("from");
+                    int toIndex = input.lastIndexOf("to");
+                    String startDate = input.substring(fromIndex + 5, toIndex - 2);
+                    String endDate = input.substring(toIndex + 3);
+                    Task t  = new Event(input.substring(6, fromIndex - 2), startDate, endDate);
+                    list.add(t);
+                    System.out.println("Got it. I've added this task: \n"
+                            + t.toString()
+                            + "\nNow you have " + list.size() + " tasks in the list.");
+                } else {
+                    Task t = new Task(input);
+                    list.add(t);
+                    System.out.println("Got it. I've added this task: \n"
+                            + t.toString()
+                            + "\nNow you have " + list.size() + " tasks in the list.");
+                }
+
                 input = myObj.nextLine();
             }
         }
