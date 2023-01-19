@@ -3,6 +3,7 @@ import java.util.Scanner;
 
 public class Duke {
 
+    // pretty prints a given string
     public static void prettyPrint(String text) {
         System.out.println(
             "____________________________________________________________"
@@ -11,6 +12,17 @@ public class Duke {
         System.out.println(
             "____________________________________________________________\n"
         );
+    }
+
+    // adds a task to the list
+    public static void addTaskToList(Task task, ArrayList<Task> list) {
+        list.add(task);
+        String s = String.format(
+            "Got it. I've added this task:\n%s\nNow you have %d tasks in the list.",
+            task.toString(),
+            list.size()
+        );
+        Duke.prettyPrint(s);
     }
 
     public static void main(String[] args) {
@@ -39,7 +51,7 @@ public class Duke {
             rawSplit = rawInput.split(" ", 2);
             command = rawSplit[0];
             if (rawSplit.length > 1) {
-                arguments = rawSplit[1].split("\\/[a-zA-Z]+");
+                arguments = rawSplit[1].split("\\W\\/[a-zA-Z]+\\W");
             }
 
             // parse commands with no arguments
@@ -88,13 +100,17 @@ public class Duke {
             } else if (command.equals("todo")) {
                 // case: "todo"
                 Task currentTask = new ToDo(arguments[0]);
-                list.add(currentTask);
-                String s = String.format(
-                    "Got it. I've added this task:\n%s\nNow you have %d tasks in the list.",
-                    currentTask.toString(),
-                    list.size()
+                Duke.addTaskToList(currentTask, list);
+            } else if (command.equals("deadline")) {
+                Task currentTask = new Deadline(arguments[0], arguments[1]);
+                Duke.addTaskToList(currentTask, list);
+            } else if (command.equals("event")) {
+                Task currentTask = new Event(
+                    arguments[0],
+                    arguments[1],
+                    arguments[2]
                 );
-                Duke.prettyPrint(s);
+                Duke.addTaskToList(currentTask, list);
             } else {
                 Duke.prettyPrint(
                     "Sorry, I didn't understand your command. Maybe try again?"
