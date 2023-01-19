@@ -51,7 +51,7 @@ public class Duke {
 
         ArrayList<Task> taskList = new ArrayList<>();
 
-        String userInput = sc.nextLine();
+        String userInput = sc.nextLine().strip();
         while (!userInput.equals("bye")) {
             if (userInput.equals("list")) {
                 taskPrinter(taskList);
@@ -73,7 +73,7 @@ public class Duke {
                 Task task = new Task(userInput);
                 taskList.add(task);
             }
-            userInput = sc.nextLine();
+            userInput = sc.nextLine().strip();
 
         }
         sc.close();
