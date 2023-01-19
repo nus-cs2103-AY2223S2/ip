@@ -8,6 +8,9 @@ public class Task {
     public String getDescription() {
         return this.description;
     }
+    public boolean isComplete() {
+        return this.isComplete;
+    }
     public void mark() {
         this.isComplete = true;
     }
