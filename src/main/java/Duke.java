@@ -12,10 +12,6 @@ public class Duke {
         ui.showGreeting();
         while (true) {
             // Check if there are available lines to read
-            if (!ui.hasNextLine()) {
-                return;
-            }
-
 
             String input = ui.getInput();
 
@@ -32,8 +28,12 @@ public class Duke {
                 Task t = list.stream().filter(task -> task.id() == id).findFirst().get();
                 t.markPending();
                 ui.showMessage("Nice! I've marked this task as pending: \n " + t.toString());
-            }
-             else if (input.startsWith("todo")) {
+            } else if (input.startsWith("delete")) {
+                int id = Integer.parseInt(input.substring(7));
+                Task t = list.stream().filter(task -> task.id() == id).findFirst().get();
+                list.remove(t);
+                ui.showMessage("Noted. I've removed this task: \n " + t.toString());
+            } else if (input.startsWith("todo")) {
                 String desc = input.substring(5);
                 Task t = new Todo(list.nextId(), desc);
                 list.add(t);

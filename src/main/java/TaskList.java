@@ -18,6 +18,11 @@ public class TaskList {
         tasks.add(t);
     }
 
+    public Task remove (Task t) {
+        tasks.remove(t);
+        return t;
+    }
+
     public int nextId() {
         return nextId++;
     }
