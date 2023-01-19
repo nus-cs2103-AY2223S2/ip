@@ -7,9 +7,9 @@ public class TaskList {
         taskList = new ArrayList<>();
     }
 
-    public void addTask(String name) {
-        this.taskList.add(new Task(name));
-        System.out.println("Added task: " + name);
+    public void addTask(Task task) {
+        this.taskList.add(task);
+        System.out.println("Added task: " + task);
     }
 
     public int size() {
