@@ -16,6 +16,7 @@ public class Duke {
         loop: while (true) {
 
             userInput = askForInput();
+
             try {
                 curEvent = decodeInput(userInput);
             } catch (DukeException e) {
@@ -24,10 +25,6 @@ public class Duke {
             }
 
             switch (curEvent) {
-            case ADD:
-                storedInputs.add(new Task(userInput));
-                System.out.println("\nadded: " + userInput + "\n");
-                break;
             case BYE:
                 break loop;
             case LIST:
@@ -49,10 +46,9 @@ public class Duke {
                 eventEvent(userInput);
                 break;
             }
-            
         }
 
-        System.out.println("Good Riddance!");
+        System.out.println(outro());
     }
 
     private static String logo() {
@@ -65,6 +61,10 @@ public class Duke {
 
     private static String intro() {
         return "Hello! I'm\n" + logo() + "\nWhat can I do for you?";
+    }
+
+    private static String outro() {
+        return "Good Riddance!";
     }
 
     private static String askForInput() {
@@ -118,14 +118,37 @@ public class Duke {
         System.out.println("\nOK, I've marked this task as not done yet:\n  " + t + "\n");
     }
 
+   /**
+    * Remove the first word of the user input leaving only the decription 
+    * of the task.
+    *
+    * @param s a string that represent the user input
+    * @throws DukeException if there is only a single word
+    * @return the same string without the first word
+    */
     private static String removeFirstWord(String s) throws DukeException {
-        // no arguments, guaranteed to have at least 1
         try {
             s = s.substring(s.indexOf(" ")).trim();
         } catch (StringIndexOutOfBoundsException e) {
             throw new DukeException("☹ OOPS!!! The description of a todo cannot be empty.");
         }
         return s;
+    }
+
+    private static void todoEvent(String userInput) {
+        try {
+            userInput = removeFirstWord(userInput);
+        } catch (DukeException e) {
+            System.out.println(e.getMessage());
+            return;
+        }
+
+        Task temp = new ToDo(userInput);
+        storedInputs.add(temp);
+        
+        printConfirmation();
+        System.out.println("  " + temp);
+        printTotalTasks();
     }
 
     /**
@@ -145,19 +168,6 @@ public class Duke {
         return s;
     }
 
-    private static void todoEvent(String userInput) {
-        try {
-            String s = removeFirstWord(userInput);
-            Task temp = new ToDo(s);
-            storedInputs.add(temp);
-            printConfirmation();
-            System.out.println("  " + temp);
-            printTotalTasks();
-        } catch (DukeException e) {
-            System.out.println(e.getMessage());
-            return;
-        }
-    }
 
     private static void deadlineEvent(String userInput) {
         try {
