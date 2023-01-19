@@ -11,20 +11,31 @@ public class Duke {
 
     private static String hline = "--------------------";
 
+    // Color support obtained from https://stackoverflow.com/a/45444716
+    private static final String PURPLE = "\033[0;35m";  // PURPLE
+    private static final String RESET = "\033[0m";  // Text Reset
+
+    private static void PixlPrint(String text) {
+        System.out.println(PURPLE + "PixlBot: " + RESET + text);
+        System.out.println(hline);
+        System.out.println(hline);
+    }
+
     public static void main(String[] args) {
+        // Print the logo and welcome user.
         System.out.println("Welcome to\n" + logo);
-        System.out.println("Enter a command to start:\n");
+        System.out.println("Enter a command to start.\n");
 
         Scanner scanner = new Scanner(System.in);
+        System.out.print("You: ");
         String command = scanner.nextLine();
 
         while (!command.equals("bye")) {
-            System.out.println("\t" + command);
-            System.out.println(hline);
+            PixlPrint(command);
+            System.out.print("You: ");
             command = scanner.nextLine();
         }
 
-        System.out.println("Goodbye!");
-        System.out.println(hline + "\n" + hline);
+        PixlPrint("Goodbye! See you again :)");
     }
 }
