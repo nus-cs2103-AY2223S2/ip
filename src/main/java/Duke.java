@@ -3,56 +3,74 @@ import java.util.Scanner;
 
 public class Duke {
     private final static String INDENT_LINE = "____________________________________________________________";
-    public static void main(String[] args) {
+    private ArrayList<Task> taskList;
+
+    public Duke() {
+        taskList = new ArrayList<>();
+    }
+    private void bye() {
+        System.out.println(INDENT_LINE);
+        System.out.println("Bye. Hope to see you again soon!");
+        System.out.println(INDENT_LINE);
+    }
+
+    private void showList() {
+        System.out.println(INDENT_LINE);
+        System.out.println("Here are the tasks in your list:");
+        for (int i = 0; i < taskList.size(); i++) {
+            System.out.println((i+1) + "." + taskList.get(i));
+        }
+        System.out.println(INDENT_LINE);
+    }
+
+    private void mark(int index) {
+        taskList.get(index).markAsDone();
+        System.out.println(INDENT_LINE);
+        System.out.println("Nice! I've marked this task as done:");
+        System.out.println((index+1) + "." + taskList.get(index));
+        System.out.println(INDENT_LINE);
+    }
+
+    private void unmark(int index) {
+        taskList.get(index).markAsUndone();
+        System.out.println(INDENT_LINE);
+        System.out.println("OK, I've marked this task as not done yet:");
+        System.out.println((index+1) + "." + taskList.get(index));
+        System.out.println(INDENT_LINE);
+    }
+
+    private void delete(int index) {
+        Task deletedTask = taskList.get(index);
+        taskList.remove(index);
+        System.out.println(INDENT_LINE);
+        System.out.println("Noted. I've removed this task:");
+        System.out.println(deletedTask);
+        System.out.println("Now you have " + taskList.size() + " tasks in the list.");
+        System.out.println(INDENT_LINE);
+    }
+
+    public void start() {
         Scanner sc = new Scanner(System.in);
-
-
-        System.out.println(INDENT_LINE);
-        System.out.println("Hello! I'm Vincent");
-        System.out.println("What can I do for you?");
-        System.out.println(INDENT_LINE);
-
-        ArrayList<Task> taskList = new ArrayList<>();
 
         try {
             while (true) {
                 String task = sc.nextLine();
                 if (task.equals("bye")) {
-                    System.out.println(INDENT_LINE);
-                    System.out.println("Bye. Hope to see you again soon!");
-                    System.out.println(INDENT_LINE);
+                    bye();
                     break;
                 } else if (task.equals("list")) {
-                    System.out.println(INDENT_LINE);
-                    System.out.println("Here are the tasks in your list:");
-                    for (int i = 0; i < taskList.size(); i++) {
-                        System.out.println((i+1) + "." + taskList.get(i));
-                    }
-                    System.out.println(INDENT_LINE);
+                    showList();
                 } else if (task.startsWith("mark")) {
                     int index = Integer.parseInt(task.substring(5)) - 1;
-                    taskList.get(index).markAsDone();
-                    System.out.println(INDENT_LINE);
-                    System.out.println("Nice! I've marked this task as done:");
-                    System.out.println((index+1) + "." + taskList.get(index));
-                    System.out.println(INDENT_LINE);
+                    mark(index);
                 } else if (task.startsWith("unmark")) {
                     int index = Integer.parseInt(task.substring(7)) - 1;
-                    taskList.get(index).markAsUndone();
-                    System.out.println(INDENT_LINE);
-                    System.out.println("OK, I've marked this task as not done yet:");
-                    System.out.println((index+1) + "." + taskList.get(index));
-                    System.out.println(INDENT_LINE);
+                    unmark(index);
                 } else if (task.startsWith("delete")) {
                     int index = Integer.parseInt(task.substring(7)) - 1;
-                    Task deletedTask = taskList.get(index);
-                    taskList.remove(index);
-                    System.out.println(INDENT_LINE);
-                    System.out.println("Noted. I've removed this task:");
-                    System.out.println(deletedTask);
-                    System.out.println("Now you have " + taskList.size() + " tasks in the list.");
-                    System.out.println(INDENT_LINE);
-                } else {
+                    delete(index);
+                }
+                else {
                     if (task.startsWith("todo")) {
                         String description = task.substring(5);
                         if (description.trim().equals("")) {
@@ -84,6 +102,14 @@ public class Duke {
         } catch (DukeException e) {
             System.out.println(e.getMessage());
         }
+    }
+    public static void main(String[] args) {
+        System.out.println(INDENT_LINE);
+        System.out.println("Hello! I'm Vincent");
+        System.out.println("What can I do for you?");
+        System.out.println(INDENT_LINE);
 
+        Duke d = new Duke();
+        d.start();
     }
 }
