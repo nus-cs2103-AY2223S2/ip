@@ -1,9 +1,13 @@
 public abstract class Task {
-  public final String task;
-  public boolean done;
+  private final String task;
+  private boolean done;
 
   public Task(String task) {
     this.task = task;
+  }
+
+  public void setDone(boolean value) {
+    this.done = value;
   }
 
   public abstract String getType();

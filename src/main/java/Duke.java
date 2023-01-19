@@ -28,14 +28,16 @@ public final class Duke {
             System.out.format("%Added %s to the list!\nYou have %d tasks\n", task.toString(), tasks.size());
         };
 
-        final Map<String, Consumer<String[]>> funcMap = Map.of("bye", (args) -> {
+        final Map<String, Consumer<String[]>> funcMap = Map.of(
+        "bye", (args) -> {
             System.out.println("Ok bye bye!");
             System.exit(0);
         },
         "list", (args) -> {
             if (tasks.size() == 0) {
-                System.out.println("No stored items!");
+                System.out.println("No stored tasks!");
             } else {
+                System.out.format("A total of %d tasks\n", tasks.size());
                 for (int i = 0; i < tasks.size(); i++) {
                     System.out.format("%d. %s\n", i + 1, tasks.get(i).toString());
                 }
@@ -46,8 +48,8 @@ public final class Duke {
                 int index = Integer.parseInt(args[1]);
                 if (index < 1 || index > tasks.size()) throw new NumberFormatException();
                 else {
-                    tasks.get(index - 1).done = true;
-                    System.out.format("Marked this as done!\n\t%s\n", tasks.get(index - 1));
+                    tasks.get(index - 1).setDone(true);
+                    System.out.format("Marked this as done!\n\t%s\n", tasks.get(index - 1).toString());
                 }
             } catch (NumberFormatException e) {
                 System.out.println("Invalid index!\n");
@@ -58,8 +60,8 @@ public final class Duke {
                 int index = Integer.parseInt(args[1]);
                 if (index < 1 || index > tasks.size()) throw new NumberFormatException();
                 else {
-                    tasks.get(index - 1).done = false;
-                    System.out.format("Marked this as not done!\n\t%s\n", tasks.get(index - 1));
+                    tasks.get(index - 1).setDone(false);
+                    System.out.format("Marked this as not done!\n\t%s\n", tasks.get(index - 1).toString());
                 }
             } catch (NumberFormatException e) {
                 System.out.println("Invalid index!\n");
