@@ -14,6 +14,15 @@ public class Duke {
         return String.format("[%s][%s] %s", task.getTaskType(), task.getStatusIcon(), task.getDescription());
     }
 
+    private static int indexOf(String[] arr, String item) {
+        for (int i = 0; i < arr.length; i++) {
+            if (arr[i].equals(item)) {
+                return i;
+            }
+        }
+        return 0;
+    }
+
     private static void listCommand() {
         String output = "List:\n";
         for (int i = 0; i < list.size(); i++) {
@@ -22,36 +31,84 @@ public class Duke {
         PixlPrint(output);
     }
 
-    private static void todoCommand(String taskName) {
-        Task task = new ToDo(taskName);
+    private static void todoCommand(String command) {
+        String[] parts = command.split("\\s+");
+
+        // Get task name.
+        StringBuilder taskName = new StringBuilder();
+        for (int i = 1; i < parts.length; i++) {
+            taskName.append(i == 1 ? "" : Values.SPACE);
+            taskName.append(parts[i]);
+        }
+
+        Task task = new ToDo(taskName.toString());
         list.add(task);
         PixlPrint("Added new todo!\n" +
                 "\t" + formatTask(task));
     }
 
-    private static void deadlineCommand(String taskName, String dueDate) {
-        Task task = new Deadline(taskName, dueDate);
+    private static void deadlineCommand(String command) {
+        String[] parts = command.split("\\s+");
+        int byIndex = indexOf(parts, "/by");
+
+        // Get name of task.
+        StringBuilder taskName = new StringBuilder();
+        for (int i = 1; i < byIndex; i++) {
+            taskName.append(i == 1 ? "" : Values.SPACE);
+            taskName.append(parts[i]);
+        }
+        // Get due date.
+        StringBuilder dueDate = new StringBuilder();
+        for (int i = byIndex+1; i < parts.length; i++) {
+            dueDate.append(i == byIndex+1 ? "" : Values.SPACE);
+            dueDate.append(parts[i]);
+        }
+
+        Task task = new Deadline(taskName.toString(), dueDate.toString());
         list.add(task);
         PixlPrint("Added new deadline!\n" +
                 "\t" + formatTask(task));
     }
 
-    private static void eventCommand(String taskName, String startDate, String endDate) {
-        Task task = new Event(taskName, startDate, endDate);
+    private static void eventCommand(String command) {
+        String[] parts = command.split("\\s+");
+        int fromIndex = indexOf(parts, "/from");
+        int toIndex = indexOf(parts, "/to");
+
+        // Get task name.
+        StringBuilder taskName = new StringBuilder();
+        for (int i = 1; i < fromIndex; i++) {
+            taskName.append(i == 1 ? "" : Values.SPACE);
+            taskName.append(parts[i]);
+        }
+        // Get start date.
+        StringBuilder startDate = new StringBuilder();
+        for (int i = fromIndex+1; i < toIndex; i++) {
+            startDate.append(i == fromIndex+1 ? "" : Values.SPACE);
+            startDate.append(parts[i]);
+        }
+        // Get end date.
+        StringBuilder endDate = new StringBuilder();
+        for (int i = toIndex+1; i < parts.length; i++) {
+            endDate.append(i == toIndex+1 ? "" : Values.SPACE);
+            endDate.append(parts[i]);
+        }
+
+        Task task = new Event(taskName.toString(), startDate.toString(), endDate.toString());
         list.add(task);
         PixlPrint("Added new event!\n" +
                 "\t" + formatTask(task));
     }
 
-    private static void markCommand(int taskNumber) {
-        Task task = list.get(taskNumber - 1);
+    private static void markCommand(String command) {
+        Task task = list.get(Integer.parseInt(command.split("\\s+")[1]) - 1);
         task.complete();
         PixlPrint("You completed a task!\n" +
                 "\t" + formatTask(task));
     }
 
-    private static void unmarkCommand(int taskNumber) {
-        Task task = list.get(taskNumber - 1);
+    private static void unmarkCommand(String command) {
+        Task task = list.get(Integer.parseInt(command.split("\\s+")[1]) - 1);
         task.uncomplete();
         PixlPrint("Un-doing the task...\n"+
                 "\t" + formatTask(task));
@@ -70,17 +127,15 @@ public class Duke {
             if (command.equals("list")) {
                 listCommand();
             } else if (command.startsWith("mark")) {
-                markCommand(Integer.parseInt(command.split("\\s+")[1]));
+                markCommand(command);
             } else if (command.startsWith("unmark")) {
-                unmarkCommand(Integer.parseInt(command.split("\\s+")[1]));
+                unmarkCommand(command);
             } else if (command.startsWith("todo")) {
                 todoCommand(command);
             } else if (command.startsWith("deadline")) {
-                String[] parts = command.split("\\s+");
-                deadlineCommand(parts[1], parts[2]);
+                deadlineCommand(command);
             } else if (command.startsWith("event")) {
-                String[] parts = command.split("\\s+");
-                eventCommand(parts[1], parts[2], parts[3]);
+                eventCommand(command);
             }
 
             System.out.print("You: ");
