@@ -1,10 +1,14 @@
+import java.util.*;
 public class Duke {
+    public static boolean offBot = false;
     public static void main(String[] args) {
-        String logo = " ____        _        \n"
-                + "|  _ \\ _   _| | _____ \n"
-                + "| | | | | | | |/ / _ \\\n"
-                + "| |_| | |_| |   <  __/\n"
-                + "|____/ \\__,_|_|\\_\\___|\n";
-        System.out.println("Hello from\n" + logo);
+        System.out.println("Hello! I'm Duke\n" +
+                "What can I do for you?");
+        //CommandCreator creator = new CommandCreator();
+        while(!offBot) {
+            Scanner sc= new Scanner(System.in); //System.in is a standard input stream
+            CommandManager.createCommand(sc.nextLine());
+            CommandManager.executeQueue();
+        }
     }
 }
