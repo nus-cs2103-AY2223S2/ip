@@ -12,7 +12,7 @@ public class Duke {
     }
 
     private static String printTaskAdd(Task task, ArrayList<Task> toDoList) {
-        return String.format("Got it! I've added this task: \n" +
+        return String.format("Got it! I've added this task:\n" +
                 "    %s\n" +
                 "Now you have %d tasks in the list.",
                 task.toString(), toDoList.size());
@@ -40,23 +40,21 @@ public class Duke {
         while (true) {
             String command = sc.nextLine();
             String[] commandArr = command.split(" ");
+            int editIndex = Character.getNumericValue
+                    (command.charAt(command.length() - 1)) - 1;
             switch (commandArr[0]) {
                 case "list":
                     System.out.println(printList(toDoList));
                     break;
                 case "mark":
-                    int indexToMark = Character.getNumericValue
-                            (command.charAt(command.length() - 1)) - 1;
-                    toDoList.get(indexToMark).markDone();
+                    toDoList.get(editIndex).markDone();
                     System.out.println("Nice! I've marked this task as done:\n" + "    " +
-                            toDoList.get(indexToMark));
+                            toDoList.get(editIndex));
                     break;
                 case "unmark":
-                    indexToMark = Character.getNumericValue
-                            (command.charAt(command.length() - 1)) - 1;
-                    toDoList.get(indexToMark).markUndone();
+                    toDoList.get(editIndex).markUndone();
                     System.out.println("OK, I've marked this task as not done yet:\n" + "    " +
-                            toDoList.get(indexToMark));
+                            toDoList.get(editIndex));
                     break;
                 case "todo":
                     String taskName = "";
@@ -138,6 +136,13 @@ public class Duke {
                     System.out.println("Bye. Hope to see you again soon!");
                     sc.close();
                     return;
+                case "delete":
+                    System.out.println(String.format("Noted. I've removed this task:\n" +
+                                    "    %s\n" +
+                                    "Now you have %d tasks in the list.",
+                            toDoList.get(editIndex), toDoList.size() - 1));
+                    toDoList.remove(editIndex);
+                    break;
                 default:
                     System.out.println("☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
             }
