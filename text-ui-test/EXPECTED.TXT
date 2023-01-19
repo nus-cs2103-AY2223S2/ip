@@ -1,7 +1,66 @@
-Hello from
- ____        _        
-|  _ \ _   _| | _____ 
-| | | | | | | |/ / _ \
-| |_| | |_| |   <  __/
-|____/ \__,_|_|\_\___|
-
+    ____________________________________________________________
+    Hi! I'm Sunday, pleasure to meet you!
+    How can I help?
+    ____________________________________________________________
+    ____________________________________________________________
+    Got it. I've added this task:
+      [D][] Complete CS2103 Individual Project Week 2 (by: Friday 20/01/23, 11:59pm)
+    Now you have 1 task(s) in the list.
+    ____________________________________________________________
+    ____________________________________________________________
+    Got it. I've added this task:
+      [T][] check email for updates on NOC
+    Now you have 2 task(s) in the list.
+    ____________________________________________________________
+    ____________________________________________________________
+    Got it. I've added this task:
+      [E][] DJ gig at Cherry Discotheque (from: Saturday 21/01/23, 10pm to: 4am)
+    Now you have 3 task(s) in the list.
+    ____________________________________________________________
+    ____________________________________________________________
+    Here's everything I've noted down for you:
+    1. [D][] Complete CS2103 Individual Project Week 2 (by: Friday 20/01/23, 11:59pm)
+    2. [T][] check email for updates on NOC
+    3. [E][] DJ gig at Cherry Discotheque (from: Saturday 21/01/23, 10pm to: 4am)
+    ____________________________________________________________
+    ____________________________________________________________
+    Got it. I've added this task:
+      [T][] finalise DJ setlist
+    Now you have 4 task(s) in the list.
+    ____________________________________________________________
+    ____________________________________________________________
+    Well Done! I've marked this task as done:
+      [T][X] finalise DJ setlist
+    Now you have 3 task(s) in the list.
+    ____________________________________________________________
+    ____________________________________________________________
+    Got it. I've added this task:
+      [T][] buy body soap and cleaning wipes
+    Now you have 4 task(s) in the list.
+    ____________________________________________________________
+    ____________________________________________________________
+    OK, I've marked this task as not done yet:
+      [T][] finalise DJ setlist
+    Now you have 5 task(s) in the list.
+    ____________________________________________________________
+    ____________________________________________________________
+    Well Done! I've marked this task as done:
+      [T][X] buy body soap and cleaning wipes
+    Now you have 4 task(s) in the list.
+    ____________________________________________________________
+    ____________________________________________________________
+    Here's everything I've noted down for you:
+    1. [D][] Complete CS2103 Individual Project Week 2 (by: Friday 20/01/23, 11:59pm)
+    2. [T][] check email for updates on NOC
+    3. [E][] DJ gig at Cherry Discotheque (from: Saturday 21/01/23, 10pm to: 4am)
+    4. [T][] finalise DJ setlist
+    5. [T][X] buy body soap and cleaning wipes
+    ____________________________________________________________
+    ____________________________________________________________
+    Well Done! I've marked this task as done:
+      [T][X] check email for updates on NOC
+    Now you have 3 task(s) in the list.
+    ____________________________________________________________
+    ____________________________________________________________
+    Goodbye and have a pleasant day!
+    ____________________________________________________________
