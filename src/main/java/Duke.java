@@ -17,10 +17,23 @@ public class Duke {
         System.out.println("\t____________________________________________________________");
     }
 
-    public static void listPrinter(ArrayList<String> input) {
+    public static void taskPrinter(ArrayList<Task> input) {
         System.out.println("\t____________________________________________________________");
         for (int i = 0; i < input.size(); i++) {
-            System.out.println("\t" + (i + 1) + ". " + input.get(i));
+            Task t = input.get(i);
+            System.out.println("\t" + (i + 1) + ".[" + (t.done ? "X" : " ") + "] " + t.task);
+        }
+        System.out.println("\t____________________________________________________________");
+    }
+
+    public static void taskMarker(Task input) {
+        System.out.println("\t____________________________________________________________");
+        if (input.done) {
+            System.out.println("\tNice! I've marked this task as done:");
+            System.out.println("\t[X] " + input.task);
+        } else {
+            System.out.println("\tNice! I've marked this task as not done:");
+            System.out.println("\t[ ] " + input.task);
         }
         System.out.println("\t____________________________________________________________");
     }
@@ -36,15 +49,29 @@ public class Duke {
         String[] strings = { "Hello I'm Duke", "What can I do for you?" };
         printer(strings);
 
-        ArrayList<String> taskList = new ArrayList<>();
+        ArrayList<Task> taskList = new ArrayList<>();
 
         String userInput = sc.nextLine();
         while (!userInput.equals("bye")) {
             if (userInput.equals("list")) {
-                listPrinter(taskList);
+                taskPrinter(taskList);
+            } else if (userInput.split(" ")[0].equals("mark")) {
+                int taskId = Integer.parseInt(userInput.split(" ")[1]) - 1;
+                Task task = taskList.get(taskId);
+                task.markAsDone();
+                taskMarker(task);
+                taskList.set(taskId, task);
+
+            } else if (userInput.split(" ")[0].equals("unmark")) {
+                int taskId = Integer.parseInt(userInput.split(" ")[1]) - 1;
+                Task task = taskList.get(taskId);
+                task.markAsNotDone();
+                taskMarker(task);
+                taskList.set(taskId, task);
             } else {
                 printer("added: " + userInput);
-                taskList.add(userInput);
+                Task task = new Task(userInput);
+                taskList.add(task);
             }
             userInput = sc.nextLine();
 
