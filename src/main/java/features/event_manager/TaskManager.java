@@ -45,7 +45,8 @@ public class TaskManager implements ExecutableRegisterable {
      * @param id the id of the task instance.
      * @return the executable for adding a Task to this class.
      */
-    IdentifiableExecutable getAddTaskExecutable(ThrowingFunction<String[], Task, InvalidArgumentException> taskSupplier, String id) {
+    IdentifiableExecutable getAddTaskExecutable(ThrowingFunction<String[], Task,
+            InvalidArgumentException> taskSupplier, String id) {
         return new IdentifiableExecutable() {
             @Override
             public String getId() {
@@ -57,7 +58,7 @@ public class TaskManager implements ExecutableRegisterable {
                 String[] newTokens = TokenUtilities.instance.removeFirst(tokens);
                 final Task task;
                 try {
-                    task = taskSupplier.apply(tokens);
+                    task = taskSupplier.apply(newTokens);
                 } catch (InvalidArgumentException exception) {
                     System.out.println(exception.getMessage());
                     return ExitStatus.finishCurrentIteration;
@@ -90,6 +91,21 @@ public class TaskManager implements ExecutableRegisterable {
        };
     }
 
+    private int getIndex(String indexStr) throws InvalidArgumentException {
+        final int index;
+        try {
+            index = Integer.parseInt(indexStr) - 1;
+        } catch (NumberFormatException exception) {
+            throw new InvalidArgumentException("☹ OOPS, please input a " +
+                    "number!");
+        }
+        if (index >= tasks.size() || index < 0) {
+            throw new InvalidArgumentException("☹ OOPS, please input a number" +
+                    " that is within range!");
+        }
+        return index;
+    }
+
     /**
      * Gets the executable that will mark an item's isComplete as isComplete.
      * @param id the id for the marker executable.
@@ -102,7 +118,13 @@ public class TaskManager implements ExecutableRegisterable {
             @Override
             public ExitStatus execute(String[] tokens) {
                 final String indexStr = tokens[1];
-                final int index = Integer.parseInt(indexStr) - 1;
+                final int index;
+                try {
+                    index = getIndex(indexStr);
+                } catch (InvalidArgumentException exception) {
+                    System.out.println(exception.getMessage());
+                    return ExitStatus.finishCurrentIteration;
+                }
                 final Task item = tasks.get(index);
                 item.setComplete(isComplete);
                 System.out.println("Nice, I've marked this item as done:");
@@ -113,6 +135,30 @@ public class TaskManager implements ExecutableRegisterable {
             @Override
             public String getId() {
                 return id;
+            }
+        };
+    }
+
+    IdentifiableExecutable getDeleteExecutable() {
+        return new IdentifiableExecutable() {
+            @Override
+            public ExitStatus execute(String[] tokens) {
+                final String indexStr = tokens[1];
+                final int index;
+                try {
+                    index = getIndex(indexStr);
+                } catch (InvalidArgumentException exception) {
+                    System.out.println(exception.getMessage());
+                    return ExitStatus.finishCurrentIteration;
+                }
+                final Task res = tasks.remove(index);
+                System.out.println("removed: " + res);
+                return ExitStatus.finishCurrentIteration;
+            }
+
+            @Override
+            public String getId() {
+                return "delete";
             }
         };
     }
@@ -138,5 +184,6 @@ public class TaskManager implements ExecutableRegisterable {
         nestable.registerIdentifiableExecutable(
                 getMarkerExecutable(false, "unmark")
         );
+        nestable.registerIdentifiableExecutable(getDeleteExecutable());
     }
 }
