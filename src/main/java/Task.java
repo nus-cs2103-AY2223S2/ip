@@ -1,9 +1,9 @@
 public class Task {
-    private String s = "";
+    private String description = "";
     private boolean isDone;
 
-    public Task(String s) {
-        this.s = s;
+    public Task(String description) {
+        this.description = description;
         this.isDone = false;
     }
 
@@ -15,20 +15,12 @@ public class Task {
         this.isDone = false;
     }
 
-    public String getS() {
-        return s;
-    }
-
-    public void setS(String s) {
-        this.s = s;
+    public String getStatusIcon() {
+        return (this.isDone ? "X" : " "); // mark done task with X
     }
 
     @Override
     public String toString() {
-        if (this.isDone) {
-            return "[X] " + s;
-        } else {
-            return "[ ] " + s;
-        }
+        return "[" + getStatusIcon() + "] " + description;
     }
 }
