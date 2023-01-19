@@ -136,11 +136,21 @@ public class Duke {
                         System.out.println(String.format("Now you have %d tasks in the list.", list.size()));
                         System.out.println("---------------------------------------");
                         break;
+                    case ("delete"):
+                        if (split.length < 2) {
+                            throw new EmptyDescException("Sorry! you can't have empty descriptions!");
+                        }
+                        item = Integer.parseInt(split[1]);
+                        curr = list.remove(item - 1);
+                        System.out.println(String.format("ok, this task has been removed:\n %s", curr.toString()));
+                        System.out.println(String.format("Now you have %d tasks in the list",list.size()));
+                        System.out.println("---------------------------------------");
+                        break;
                     default:
                         throw new InvalidInputException("Sorry! I have no idea what that means ??? >:c");
                 }
             } catch (InvalidInputException e){
-                System.out.println(e.toString());
+                System.out.println(e);
                 System.out.println("---------------------------------------");
             }
             if (!sc.hasNextLine()) {
