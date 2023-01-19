@@ -4,7 +4,7 @@ import java.util.Scanner;
 
 public class Duke {
     private static final String bannerLine = "_".repeat(30);
-    private List<Task> taskList = new ArrayList<>();
+    private final List<Task> taskList = new ArrayList<>();
 
     public static void main(String[] args) {
         String logo = " ,ggg, ,ggggggg,                                                               ,ggg,\n"
@@ -35,23 +35,62 @@ public class Duke {
     }
 
     public void greet() {
-        printInBanner("Greetings humans~\n'tis I! Nakiri Ayame!~\nWhat can I do for you?");
+        printInBanner("Greetings humans~\n'Tis I! Nakiri Ayame!\nWhat can I do for you?");
     }
 
     public void commandLoop() {
         Scanner input = new Scanner(System.in);
         String cmd;
-        while (true) {
+        boolean acceptingInputs = true;
+        while (acceptingInputs) {
             cmd = input.nextLine();
-            if (cmd.equals("bye")) {
-                break;
+            String[] args = cmd.split(" ");
+            if (args.length == 0) {
+                continue;
             }
-            if (cmd.equals("list")) {
-                printTasks();
-            }
-            else {
-                taskList.add(new Task(cmd));
-                printInBanner("added: " + cmd);
+
+            String cmdVerb = args[0];
+            switch (cmdVerb) {
+                case "bye":
+                    acceptingInputs = false;
+                    break;
+                case "list":
+                    printTasks();
+                    break;
+                case "mark":
+                    if (args.length != 2) {
+                        addTask(args);
+                        continue;
+                    }
+
+                    int idx;
+                    try {
+                        idx = Integer.parseInt(args[1]) - 1;
+                    } catch (NumberFormatException e) {
+                        addTask(args);
+                        continue;
+                    }
+
+                    changeTaskStatus(idx, true);
+                    break;
+                case "unmark":
+                    if (args.length != 2) {
+                        addTask(args);
+                        continue;
+                    }
+
+                    try {
+                        idx = Integer.parseInt(args[1]) - 1;
+                    } catch (NumberFormatException e) {
+                        addTask(args);
+                        continue;
+                    }
+
+                    changeTaskStatus(idx, false);
+                    break;
+                default:
+                    addTask(args);
+                    break;
             }
         }
         printInBanner("Otsunakiri~\nByebye!~");
@@ -72,5 +111,26 @@ public class Duke {
             toPrint.append(i + 1).append(": ").append(taskList.get(i));
         }
         printInBanner(toPrint.toString());
+    }
+
+    private void addTask(String[] args) {
+        String cmd = String.join(" ", args);
+        taskList.add(new Task(cmd));
+        printInBanner("added: " + cmd);
+    }
+
+    private void changeTaskStatus(int idx, boolean done) {
+        if (idx < 0 || idx >= taskList.size()) {
+            printInBanner("Can't do that yo~\nInvalid index supplied~");
+            return;
+        }
+
+        if (done) {
+            taskList.get(idx).markAsDone();
+            printInBanner("Yatta! You have done this task!\n" + taskList.get(idx));
+        } else {
+            taskList.get(idx).unmarkAsDone();
+            printInBanner("Neee! Are you kidding me?\n" + taskList.get(idx));
+        }
     }
 }
