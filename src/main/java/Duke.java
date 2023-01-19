@@ -1,8 +1,8 @@
 import java.util.Scanner;
 
 public class Duke {
-    private static final String LOGO = " ____        _        \n"
-            + "|  _ \\ _   _| | _____ \n"
+    private static final String LOGO = " ____        _\n"
+            + "|  _ \\ _   _| | _____\n"
             + "| | | | | | | |/ / _ \\\n"
             + "| |_| | |_| |   <  __/\n"
             + "|____/ \\__,_|_|\\_\\___|\n";
@@ -17,7 +17,7 @@ public class Duke {
         Bot bot =  new Bot();
 
         boolean running =  true;
-        while (running) {
+        while (running & scanner.hasNext()) {
             String input = scanner.nextLine();
             BotResult result = bot.process(input);
 
