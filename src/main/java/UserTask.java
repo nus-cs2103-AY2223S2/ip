@@ -6,9 +6,11 @@ public class UserTask {
     public boolean status;
 
     /**
-     * @param desc Parsed string description of task.
+     * @param desc Parsed, trimmed string description of task.
      */
-    public UserTask(String desc) {
+    public UserTask(String desc) throws MeggyException {
+        if ("".equals(desc)) // No arguments
+            throw new MeggyNoArgException();
         this.desc = desc;
         status = false;
     }

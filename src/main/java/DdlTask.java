@@ -10,7 +10,7 @@ public class DdlTask extends UserTask {
     /**
      * Constructor of parsed strings.
      */
-    private DdlTask(String desc, String time) {
+    private DdlTask(String desc, String time) throws MeggyException {
         super(desc);
         this.time = time;
     }
@@ -18,7 +18,7 @@ public class DdlTask extends UserTask {
     /**
      * Factory method. Parses time and description.
      */
-    public static DdlTask of(String args) {
+    public static DdlTask of(String args) throws MeggyException {
         final int kwIdx = args.indexOf(kwFmt);
         // If no key word in args, time is set to "N/A".
         final String desc, time;

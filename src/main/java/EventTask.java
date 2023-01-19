@@ -20,13 +20,13 @@ public class EventTask extends UserTask {
      * @param start Parsed start time string of task.
      * @param end   Parsed end time string of task.
      */
-    private EventTask(String desc, String start, String end) {
+    private EventTask(String desc, String start, String end) throws MeggyException {
         super(desc);
         this.start = start;
         this.end = end;
     }
 
-    public static EventTask of(String args) {
+    public static EventTask of(String args) throws MeggyException {
         final int argLen = args.length();
         final ArrayList<KwIdxPair> indeces = new ArrayList<>();
         indeces.add(new KwIdxPair(null, argLen));

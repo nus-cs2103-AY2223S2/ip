@@ -2,7 +2,8 @@
  * Class that stores all customizable resource values statically.
  */
 public final class Resource {
-    public final static String errBase=" ☹ OOPS!!! ";
+    public final static String errBase = " ☹ OOPS!!! ";
+    public final static String errNoArgs = "Description of this command cannot be empty.\n";
     public final static String taskIndent = "    ";
     public final static String cmdExit = "bye";
     public final static String cmdList = "list";
@@ -19,11 +20,13 @@ public final class Resource {
     public final static String notifMk = " Booyah! Marked this task as done:\n";
     public final static String notifUnmk = " OK. Marked this task as not done:\n";
     public final static String notifUsage = " Usage: ";
-    public final static String logo = " __  __\n|  \\/  |\n| \\  / | ___  __ _  __ _ _   _\n| |\\/| |/ _ \\/ _` |/ _` | | | |\n| |  | |  __/ (_| | (_| | |_| |\n|_|  |_|\\___|\\__, |\\__, |\\__, |\n              __/ | __/ | __/ |\n             |___/ |___/ |___/\n";
+    public final static String logo = " __  __\n|  \\/  |\n| \\  / | ___  __ _  __ _ _   _\n| |\\/| |/ _ \\/ _` |/ _`" +
+            " | | | |\n| |  | |  __/ (_| | (_| | |_| |\n|_|  |_|\\___|\\__, |\\__, |\\__, |\n              __/ | __/ " +
+            "| __/ |\n             |___/ |___/ |___/\n";
     public final static String msgHd = "------------------------------------------------------------\n";
     public final static String msgTl = msgHd + "\n>";
-    public final static String greetings = "Wommy! Get REKT by the upcoming star of Inkopolis, Meggy!\n";
-    public final static String farewell = "OK gotta go play more Turf Wars. Have a nice day!";
+    public final static String greetings = " Wommy! Get REKT by the upcoming star of Inkopolis, Meggy!\n";
+    public final static String farewell = " OK gotta go play more Turf Wars. Have a nice day!\n";
     public final static char doneMk = 'X';
 
     /**
@@ -46,18 +49,28 @@ public final class Resource {
     public static String nTaskFmt(int nTask) {
         return " Now you have " + nTask + " task(s) in the list.\n";
     }
+
     /**
      * Msg of error created by NumberFormatException
-     * */
-    public static String errNFE(String arg){
-        return "Can not interpret \""+arg+"\" as an index number.";
+     */
+    public static String errNFE(String arg) {
+        return "Can not interpret \"" + arg + "\" as an index number.\n";
+    }
+
+
+    public static String errUnknownCmd(String cmd) {
+        return "".equals(cmd) ? "Umm that's all white space? Say something! Speak to me!\n" : "Don't know what \"" +
+                cmd + "\" means.\n";
     }
 
     /**
-     * Msg of error created by IndexOutOfBoundException
-     * */
-    public static String errIOBE(int idx,int size){
-        idx+=1;
-        return "Can not retrieve item with "+(idx>0?"index "+idx+" from a list of size "+size+'.':"non-positive index ("+idx+").");
+     * @param idx Index to program. Starts with 0.
+     */
+    public static String errOutOfBounds(int idx, int listSize) {
+        idx += 1;
+        return "Can not retrieve item with " +
+                (idx > 0 ? "index " + idx + " from a list of size " + listSize : "non-positive index (" + idx + ')')
+                + ".\n";
     }
+
 }
