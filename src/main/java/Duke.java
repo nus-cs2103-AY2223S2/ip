@@ -20,17 +20,27 @@ public class Duke {
 
             String[] instruction = input.split(" ",2);
 
-            if(instruction[0].equals("list")) {
-
+            if(instruction[0].equals("list")) { // printing list
                 toDo.printList();
-
-            } else if (instruction[0].equals("mark")){
+            } else if (instruction[0].equals("mark")){ //marking
                 toDo.changingStatus(0, Integer.parseInt(instruction[1]));
 
-            } else if (instruction[0].equals("unmark")) {
+            } else if (instruction[0].equals("unmark")) { //unmarking
                 toDo.changingStatus(1, Integer.parseInt(instruction[1]));
-            } else {
-                toDo.addItem(instruction[0] + " " + instruction[1]);
+            } else { // adding into list
+                System.out.println("Got it. I've added this task:");
+                if(instruction[0].equals("todo")) {
+                    toDo.addItem("T", instruction[1]);
+                } else if (instruction[0].equals("deadline")){
+                    String itemANDtime[] = instruction[1].split("/");
+                    toDo.addItemDeadline("D", itemANDtime[0], itemANDtime[1]);
+                } else {
+                    String itemANDtime[] = instruction[1].split("/");
+                    toDo.addItemEvent("E", itemANDtime[0], itemANDtime[1], itemANDtime[2]);
+                }
+
+                System.out.println("Now you have " + toDo.numberOfTask() + " tasks in the list.");
+
             }
 
             input = sc.nextLine();

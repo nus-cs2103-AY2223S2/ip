@@ -8,6 +8,10 @@ public class toDoList {
         allTasks =  new ArrayList<Task>();
     }
 
+    public int numberOfTask() {
+        return allTasks.size();
+    }
+
     public void printList() {
         System.out.println("Here are the tasks in your list:");
         for (int i = 0; i < allTasks.size(); i++) {
@@ -16,10 +20,27 @@ public class toDoList {
         }
     }
 
-    public void addItem(String x) {
-        Task newTask = new Task(x);
+    public void addItem(String type, String item) {
+        Task newTask = new Task(item, type);
         allTasks.add(newTask);
-        System.out.println("added: " + x);
+        System.out.println(" " + newTask.getItem());
+    }
+
+    public void addItemDeadline(String type, String item, String time) {
+        Task newTask = new Task(item, type);
+
+        newTask.setDeadLine(time);
+        allTasks.add(newTask);
+
+        System.out.println(" " + newTask.getItem());
+    }
+
+    public void addItemEvent(String type, String item, String time1, String time2) {
+        Task newTask = new Task(item, type);
+
+        newTask.setEventTime(time1, time2);
+        allTasks.add(newTask);
+        System.out.println(" " + newTask.getItem());
     }
 
     public void changingStatus(int x, int index) {
