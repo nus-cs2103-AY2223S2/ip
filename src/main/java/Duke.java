@@ -1,4 +1,3 @@
-import java.sql.SQLOutput;
 import java.util.LinkedList;
 import java.util.Scanner;
 
@@ -45,10 +44,9 @@ public class Duke {
         Scanner sc = new Scanner(System.in);
         System.out.println("Hello from\n" + logo + "  managed by Wesley Teo.\n\nWhat can I do for you?\n" + line);
         String input = sc.nextLine();
-        System.out.println(line);
 
-        //switch statements for query
         while (!input.equals("bye")) {
+        System.out.println(line);
             QueryType inputType = Query.queryType(input);
             String[] inputArr = input.split(" ");
             int index;
@@ -77,26 +75,10 @@ public class Duke {
                 default:
                     System.out.println("Invalid command, please try again");
             }
+            System.out.println(line);
             input = sc.nextLine();
         }
-
+        System.out.println(line);
         System.out.println("Bye. Hope to see you again soon!");
     }
 }
-//
-//        while (!input.equals("bye")) {
-//            String[] inputArr = input.split(" ");
-//            if (input.equals("list")) {
-//                list(todo);
-//            } else if (inputArr.length == 2 && inputArr[0].equals("mark") && isNumeric(inputArr[1]) ) {
-//                markTask(Integer.parseInt(inputArr[1]) -1);
-//            } else if (inputArr.length == 2 && inputArr[0].equals("unmark") && isNumeric(inputArr[1])){
-//                unmarkTask(Integer.parseInt(inputArr[1]) -1);
-//            }
-//            else {
-//                add(new Task(input));
-//            }
-//            System.out.println(line);
-//            input = sc.nextLine();
-//            System.out.println(line);
-//        }
