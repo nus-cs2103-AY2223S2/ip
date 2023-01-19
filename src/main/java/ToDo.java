@@ -1,3 +1,5 @@
+import errors.InsufficientToDoArgumentException;
+
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
@@ -16,26 +18,21 @@ public class ToDo extends Task{
         } else {
             completionDisplay = "[ ]";
         }
-        return ("TODO: " + super.getDetails() + completionDisplay);
+        return ("TO-DO: " + super.getDetails() + completionDisplay);
     }
 
 
-    public static HashMap<String, String> parseTodo(String input) throws IllegalArgumentException {
+    public static HashMap<String, String> parseTodo(String input) throws InsufficientToDoArgumentException {
 
         List<String> segments = Arrays.asList(input.split(" "));
 
         if (segments.size() <= 1) {
-            throw new IllegalArgumentException("Command must contain additional information");
+            throw new InsufficientToDoArgumentException("Command must contain additional information");
         }
 
-        int detailsIndex = segments.indexOf("todo") + 1;
+        int detailsIndex = segments.indexOf("to-do") + 1;
 
         List<String> detailsSublist = segments.subList(detailsIndex, segments.size());
-
-
-        if (detailsSublist.size() == 0) {
-            throw new IllegalArgumentException("Command must contain additional information, missing event '/from' or '/to' or event details");
-        }
 
         String details = String.join(" ", detailsSublist);
 

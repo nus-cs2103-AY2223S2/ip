@@ -1,7 +1,107 @@
-Hello from
- ____        _        
-|  _ \ _   _| | _____ 
-| | | | | | | |/ / _ \
-| |_| | |_| |   <  __/
-|____/ \__,_|_|\_\___|
+Hewwo! I'm UwU_TaskMaster! How c-can I hewp you?!?
 
+UwU_TaskMaster ＵｗＵ: Y-Y-Youw t-to-do has been successfuwwy added!!
+1. TO-DO: borrow books from library[ ]
+__________________________________________
+UwU_TaskMaster ＵｗＵ: Heww are your tasks UwU!
+1. TO-DO: borrow books from library[ ]
+__________________________________________
+
+UwU_TaskMaster ＵｗＵ: Ohh nyoo I cannyot ^w^ undewstand *cries* what you mean. Did you forget to include what you need to do?
+__________________________________________
+
+UwU_TaskMaster ＵｗＵ: Y-Y-Youw d-deadline has been successfuwwy added!!
+1. TO-DO: borrow books from library[ ]
+2. DEADLINE: do the dishes (By next morning)[ ]
+__________________________________________
+UwU_TaskMaster ＵｗＵ: Heww are your tasks UwU!
+1. TO-DO: borrow books from library[ ]
+2. DEADLINE: do the dishes (By next morning)[ ]
+__________________________________________
+
+UwU_TaskMaster ＵｗＵ: Ohh nyoo I cannyot ^w^ undewstand *cries* what you mean. Did you forget to add a deadline to your task?
+__________________________________________
+
+UwU_TaskMaster ＵｗＵ: Ohh nyoo I cannyot ^w^ undewstand *cries* what you mean. Did you forget to add a deadline to your task?
+__________________________________________
+
+UwU_TaskMaster ＵｗＵ: Y-Y-Youw e-eevent has been successfuwwy added!!
+1. TO-DO: borrow books from library[ ]
+2. DEADLINE: do the dishes (By next morning)[ ]
+3. EVENT: meet Alex for lunch (From 1pm to 3pm)[ ]
+__________________________________________
+UwU_TaskMaster ＵｗＵ: Heww are your tasks UwU!
+1. TO-DO: borrow books from library[ ]
+2. DEADLINE: do the dishes (By next morning)[ ]
+3. EVENT: meet Alex for lunch (From 1pm to 3pm)[ ]
+__________________________________________
+
+UwU_TaskMaster ＵｗＵ: Ohh nyoo I cannyot ^w^ undewstand *cries* what you mean. Did you forget to add details of your event?
+__________________________________________
+
+UwU_TaskMaster ＵｗＵ: Ohh nyoo I cannyot ^w^ undewstand *cries* what you mean. Did you forget to add details of your event?
+__________________________________________
+
+UwU_TaskMaster ＵｗＵ: Ohh nyoo I cannyot ^w^ undewstand *cries* what you mean. Did you forget to add details of your event?
+__________________________________________
+
+UwU_TaskMaster ＵｗＵ: Wowww c-congwatuwations on compweting youw task!!
+1. TO-DO: borrow books from library[X]
+2. DEADLINE: do the dishes (By next morning)[ ]
+3. EVENT: meet Alex for lunch (From 1pm to 3pm)[ ]
+__________________________________________
+
+UwU_TaskMaster ＵｗＵ: Wowww c-congwatuwations on compweting youw task!!
+1. TO-DO: borrow books from library[X]
+2. DEADLINE: do the dishes (By next morning)[X]
+3. EVENT: meet Alex for lunch (From 1pm to 3pm)[ ]
+__________________________________________
+
+UwU_TaskMaster ＵｗＵ: Wowww c-congwatuwations on compweting youw task!!
+1. TO-DO: borrow books from library[X]
+2. DEADLINE: do the dishes (By next morning)[X]
+3. EVENT: meet Alex for lunch (From 1pm to 3pm)[X]
+__________________________________________
+
+UwU_TaskMaster ＵｗＵ: Wowww c-congwatuwations on compweting youw task!!
+1. TO-DO: borrow books from library[X]
+2. DEADLINE: do the dishes (By next morning)[X]
+3. EVENT: meet Alex for lunch (From 1pm to 3pm)[X]
+__________________________________________
+
+UwU_TaskMaster ＵｗＵ: omg nyoooooo why you have nyot compwete youw t-task :(
+1. TO-DO: borrow books from library[X]
+2. DEADLINE: do the dishes (By next morning)[X]
+3. EVENT: meet Alex for lunch (From 1pm to 3pm)[ ]
+__________________________________________
+
+UwU_TaskMaster ＵｗＵ: Wowww c-congwatuwations on compweting youw task!!
+1. TO-DO: borrow books from library[X]
+2. DEADLINE: do the dishes (By next morning)[X]
+3. EVENT: meet Alex for lunch (From 1pm to 3pm)[ ]
+__________________________________________
+
+UwU_TaskMaster ＵｗＵ: omg nyoooooo why you have nyot compwete youw t-task :(
+1. TO-DO: borrow books from library[X]
+2. DEADLINE: do the dishes (By next morning)[ ]
+3. EVENT: meet Alex for lunch (From 1pm to 3pm)[ ]
+__________________________________________
+
+UwU_TaskMaster ＵｗＵ: Wowww c-congwatuwations on compweting youw task!!
+1. TO-DO: borrow books from library[X]
+2. DEADLINE: do the dishes (By next morning)[ ]
+3. EVENT: meet Alex for lunch (From 1pm to 3pm)[ ]
+__________________________________________
+
+UwU_TaskMaster ＵｗＵ: omg nyoooooo why you have nyot compwete youw t-task :(
+1. TO-DO: borrow books from library[ ]
+2. DEADLINE: do the dishes (By next morning)[ ]
+3. EVENT: meet Alex for lunch (From 1pm to 3pm)[ ]
+__________________________________________
+
+UwU_TaskMaster ＵｗＵ: Ohh nyoo I cannyot ^w^ undewstand *cries* what you mean
+__________________________________________
+
+UwU_TaskMaster ＵｗＵ: Ohh nyoo I cannyot ^w^ undewstand *cries* what you mean
+__________________________________________
+UwU_TaskMaster ＵｗＵ: Bye bye!!! UwU

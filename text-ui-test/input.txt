@@ -1,0 +1,21 @@
+to-do borrow books from library
+list
+to-do
+deadline do the dishes /by next morning
+list
+deadline do the dishes
+deadline
+event meet Alex for lunch /from 1pm /to 3pm
+list
+event meet Alex for lunch /from 1pm
+event meet Alex for lunch
+event
+mark 1
+mark 2
+mark 3
+unmark 3
+unmark 2
+unmark 1
+mark
+unmark
+bye

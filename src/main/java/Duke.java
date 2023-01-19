@@ -1,3 +1,7 @@
+import errors.InsufficientDeadlineArgumentException;
+import errors.InsufficientEventArgumentException;
+import errors.InsufficientToDoArgumentException;
+
 import java.util.HashMap;
 import java.util.Scanner;
 import java.util.ArrayList;
@@ -30,7 +34,6 @@ public class Duke {
         ArrayList<Task> taskList = new ArrayList<Task>();
 
         loop: while(true) {
-            System.out.print("You: ");
             input = scanner.nextLine();
 
             // checks for keywords in the user input
@@ -89,12 +92,16 @@ public class Duke {
 
                         HashMap<String, String> parsedDetails;
 
+                        if (input.equals("")) {
+                            break;
+                        }
+
                         if (input.contains("deadline")) {
 
                             try {
                                 parsedDetails = Deadline.parseDeadline(input);
-                            } catch (IllegalArgumentException e) {
-                                System.out.println("\nUwU_TaskMaster ＵｗＵ: Ohh nyoo I cannyot ^w^ undewstand *cries* what you mean");
+                            } catch (InsufficientDeadlineArgumentException e) {
+                                System.out.println("\nUwU_TaskMaster ＵｗＵ: Ohh nyoo I cannyot ^w^ undewstand *cries* what you mean. Did you forget to add a deadline to your task?");
                                 System.out.println("__________________________________________");
                                 break;
                             }
@@ -107,8 +114,8 @@ public class Duke {
 
                             try {
                                 parsedDetails = Event.parseEvent(input);
-                            } catch (IllegalArgumentException e) {
-                                System.out.println("\nUwU_TaskMaster ＵｗＵ: Ohh nyoo I cannyot ^w^ undewstand *cries* what you mean");
+                            } catch (InsufficientEventArgumentException e) {
+                                System.out.println("\nUwU_TaskMaster ＵｗＵ: Ohh nyoo I cannyot ^w^ undewstand *cries* what you mean. Did you forget to add details of your event?");
                                 System.out.println("__________________________________________");
                                 break;
                             }
@@ -118,19 +125,19 @@ public class Duke {
                             System.out.println("\nUwU_TaskMaster ＵｗＵ: Y-Y-Youw e-eevent has been successfuwwy added!!");
                             Duke.displayTasks(taskList, false);
 
-                        } else if (input.contains("todo")) {
+                        } else if (input.contains("to-do")) {
 
                             try {
                                 parsedDetails = ToDo.parseTodo(input);
-                            } catch (IllegalArgumentException e) {
-                                System.out.println("\nUwU_TaskMaster ＵｗＵ: Ohh nyoo I cannyot ^w^ undewstand *cries* what you mean");
+                            } catch (InsufficientToDoArgumentException e) {
+                                System.out.println("\nUwU_TaskMaster ＵｗＵ: Ohh nyoo I cannyot ^w^ undewstand *cries* what you mean. Did you forget to include what you need to do?");
                                 System.out.println("__________________________________________");
                                 break;
                             }
                             ToDo toDo = new ToDo(parsedDetails.get("details"));
                             taskList.add(toDo);
 
-                            System.out.println("\nUwU_TaskMaster ＵｗＵ: Y-Y-Youw t-todo has been successfuwwy added!!");
+                            System.out.println("\nUwU_TaskMaster ＵｗＵ: Y-Y-Youw t-to-do has been successfuwwy added!!");
                             Duke.displayTasks(taskList, false);
                         }
                     }

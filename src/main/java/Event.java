@@ -1,3 +1,5 @@
+import errors.InsufficientEventArgumentException;
+
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
@@ -25,26 +27,26 @@ public class Event extends Task{
     }
 
 
-    public static HashMap<String, String> parseEvent(String input) throws IllegalArgumentException {
+    public static HashMap<String, String> parseEvent(String input) throws InsufficientEventArgumentException {
 
         List<String> segments = Arrays.asList(input.split(" "));
 
         if (segments.size() <= 1) {
-            throw new IllegalArgumentException("Command must contain additional information");
+            throw new InsufficientEventArgumentException("Did you forget to add the event details?");
         }
 
         int detailsIndex = segments.indexOf("event") + 1;
         int fromIndex = segments.indexOf("/from") + 1;
         int toIndex = segments.indexOf("/to") + 1;
 
+        if (detailsIndex == 0 || fromIndex == 0 || toIndex == 0) {
+            throw new InsufficientEventArgumentException("Did you forget to add the event description or '/from' or '/to' details?");
+        }
+
         List<String> detailsSublist = segments.subList(detailsIndex, fromIndex - 1);
         List<String> fromSublist = segments.subList(fromIndex, toIndex - 1);
         List<String> toSublist = segments.subList(toIndex, segments.size());
 
-
-        if (detailsSublist.size() == 0 || fromSublist.size() == 0 || toSublist.size() == 0) {
-            throw new IllegalArgumentException("Command must contain additional information, missing event '/from' or '/to' or event details");
-        }
 
         String details = String.join(" ", detailsSublist);
         String from = String.join(" ", fromSublist);

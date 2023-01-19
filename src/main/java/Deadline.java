@@ -1,3 +1,5 @@
+import errors.InsufficientDeadlineArgumentException;
+
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
@@ -23,24 +25,26 @@ public class Deadline extends Task{
     }
 
 
-    public static HashMap<String, String> parseDeadline(String input) throws IllegalArgumentException {
+    public static HashMap<String, String> parseDeadline(String input) throws InsufficientDeadlineArgumentException {
 
         List<String> segments = Arrays.asList(input.split(" "));
 
+
         if (segments.size() <= 1) {
-            throw new IllegalArgumentException("Command must contain additional information");
+            throw new InsufficientDeadlineArgumentException("Command must contain additional information");
         }
 
         int detailsIndex = segments.indexOf("deadline") + 1;
         int deadlineIndex = segments.indexOf("/by") + 1;
 
+        if (detailsIndex == 0 || deadlineIndex == 0) {
+            throw new InsufficientDeadlineArgumentException("Command must contain additional information, missing either deadline or details");
+        }
 
         List<String> detailsSublist = segments.subList(detailsIndex, deadlineIndex - 1);
         List<String> deadlineSublist = segments.subList(deadlineIndex, segments.size());
 
-        if (detailsSublist.size() == 0 || deadlineSublist.size() == 0) {
-            throw new IllegalArgumentException("Command must contain additional information, missing either deadline or details");
-        }
+
 
         String details = String.join(" ", detailsSublist);
         String deadline = String.join(" ", deadlineSublist);
