@@ -81,7 +81,7 @@ public class Page {
     }
 
     private void log() {
-        System.out.println("Quest Log: ");
+        System.out.println("Quest Log:");
         for (int i = 0; i < quests.size(); i++) {
             Quest q = quests.get(i);
             System.out.println((i + 1) + ": " + q.toString());
