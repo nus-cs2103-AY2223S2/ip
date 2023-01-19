@@ -1,3 +1,4 @@
+import java.util.HashMap;
 import java.util.Scanner;
 import java.util.ArrayList;
 
@@ -9,18 +10,7 @@ public class Duke {
             System.out.println("UwU_TaskMaster ＵｗＵ: Heww are your tasks UwU!");
         }
         for (int i = 0; i < taskList.size(); i++) {
-            Task task = taskList.get(i);
-            String details = task.getDetails();
-            boolean hasCompleted = task.isCompleted();
-            String completionDisplay;
-
-            if (hasCompleted) {
-                completionDisplay = "[X]";
-            } else {
-                completionDisplay = "[ ]";
-            }
-
-            System.out.println((i + 1) + ". " + details + " " + completionDisplay);
+            System.out.println((i + 1) +". " + taskList.get(i).toString());
         }
         System.out.println("__________________________________________");
     }
@@ -46,7 +36,7 @@ public class Duke {
             // checks for keywords in the user input
             switch (input) {
                 case "bye":
-                    System.out.println("UwU_TaskMaster ＵｗＵ: Bye bye... UwU");
+                    System.out.println("UwU_TaskMaster ＵｗＵ: Bye bye!!! UwU");
                     break loop;
 
                 case "list":
@@ -96,15 +86,54 @@ public class Duke {
                         }
 
                     } else {
-                        if (!input.equals("")) {
-                            Task task = new Task(input);
-                            taskList.add(task);
-                            System.out.println("\nUwU_TaskMaster ＵｗＵ: Y-Y-Youw t-task has been successfuwwy added!!");
+
+                        HashMap<String, String> parsedDetails;
+
+                        if (input.contains("deadline")) {
+
+                            try {
+                                parsedDetails = Deadline.parseDeadline(input);
+                            } catch (IllegalArgumentException e) {
+                                System.out.println("\nUwU_TaskMaster ＵｗＵ: Ohh nyoo I cannyot ^w^ undewstand *cries* what you mean");
+                                System.out.println("__________________________________________");
+                                break;
+                            }
+                            Deadline deadline = new Deadline(parsedDetails.get("details"), parsedDetails.get("deadline"));
+                            taskList.add(deadline);
+                            System.out.println("\nUwU_TaskMaster ＵｗＵ: Y-Y-Youw d-deadline has been successfuwwy added!!");
+                            Duke.displayTasks(taskList, false);
+
+                        } else if (input.contains("event")) {
+
+                            try {
+                                parsedDetails = Event.parseEvent(input);
+                            } catch (IllegalArgumentException e) {
+                                System.out.println("\nUwU_TaskMaster ＵｗＵ: Ohh nyoo I cannyot ^w^ undewstand *cries* what you mean");
+                                System.out.println("__________________________________________");
+                                break;
+                            }
+                            Event event = new Event(parsedDetails.get("details"), parsedDetails.get("from"), parsedDetails.get("to"));
+                            taskList.add(event);
+
+                            System.out.println("\nUwU_TaskMaster ＵｗＵ: Y-Y-Youw e-eevent has been successfuwwy added!!");
+                            Duke.displayTasks(taskList, false);
+
+                        } else if (input.contains("todo")) {
+
+                            try {
+                                parsedDetails = ToDo.parseTodo(input);
+                            } catch (IllegalArgumentException e) {
+                                System.out.println("\nUwU_TaskMaster ＵｗＵ: Ohh nyoo I cannyot ^w^ undewstand *cries* what you mean");
+                                System.out.println("__________________________________________");
+                                break;
+                            }
+                            ToDo toDo = new ToDo(parsedDetails.get("details"));
+                            taskList.add(toDo);
+
+                            System.out.println("\nUwU_TaskMaster ＵｗＵ: Y-Y-Youw t-todo has been successfuwwy added!!");
                             Duke.displayTasks(taskList, false);
                         }
                     }
-
-
             }
 
         }
