@@ -102,6 +102,37 @@ public class Duke {
                         }
                         break;
 
+                    case "delete":
+                        int dindex = Integer.parseInt(arr2[1]);
+                        if (dindex < 1 || dindex > todo.size()) {
+                            throw new DukeException("Sorry, this task number is invalid.");
+                        }
+                        Task removed = todo.get(dindex - 1);
+                        todo.remove(dindex - 1);
+                        System.out.println("Noted. I've removed this task:");
+                        if (removed instanceof Todos) {
+                            System.out.print("[T]");
+                        } else if (removed instanceof Deadlines) {
+                            System.out.print("[D]");
+                        } else if (removed instanceof Events) {
+                            System.out.print("[E]");
+                        }
+                        if (removed.getStatus()) {
+                            System.out.print("[X] ");
+                        } else {
+                            System.out.print("[ ] ");
+                        }
+                        System.out.print(removed.getName());
+                        if (removed instanceof Deadlines) {
+                            System.out.printf(" (by: %s)\n", ((Deadlines) removed).getTime());
+                        } else if (removed instanceof Events) {
+                            System.out.printf(" (from: %s to: %s)\n", ((Events) removed).getStrtime(), ((Events) removed).getEndtime());
+                        } else {
+                            System.out.println("");
+                        }
+                        System.out.printf("Now you have %d tasks in the list.\n", todo.size());
+                        break;
+
                     case "todo":
                         if (arr2.length < 2) {
                             throw new DukeException("OOPS!!! The description of a todo cannot be empty.");
