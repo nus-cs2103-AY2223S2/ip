@@ -1,5 +1,9 @@
 package features.event_manager;
+import Exceptions.InvalidArgumentException;
 import event_loop.*;
+import fp.ThrowingFunction;
+import utils.TokenUtilities;
+
 import java.util.ArrayList;
 import java.util.function.Function;
 
@@ -41,7 +45,7 @@ public class TaskManager implements ExecutableRegisterable {
      * @param id the id of the task instance.
      * @return the executable for adding a Task to this class.
      */
-    IdentifiableExecutable getAddTaskExecutable(Function<String[], Task> taskSupplier, String id) {
+    IdentifiableExecutable getAddTaskExecutable(ThrowingFunction<String[], Task, InvalidArgumentException> taskSupplier, String id) {
         return new IdentifiableExecutable() {
             @Override
             public String getId() {
@@ -50,11 +54,14 @@ public class TaskManager implements ExecutableRegisterable {
 
             @Override
             public ExitStatus execute(String[] tokens) {
-                String[] newTokens = new String[tokens.length - 1];
-                for (int i = 0; i < tokens.length - 1; i++) {
-                    newTokens[i] = tokens[i+1];
+                String[] newTokens = TokenUtilities.instance.removeFirst(tokens);
+                final Task task;
+                try {
+                    task = taskSupplier.apply(tokens);
+                } catch (InvalidArgumentException exception) {
+                    System.out.println(exception.getMessage());
+                    return ExitStatus.finishCurrentIteration;
                 }
-                final Task task = taskSupplier.apply(newTokens);
                 addTodo(task);
                 System.out.println("added: " + task);
                 return ExitStatus.finishCurrentIteration;

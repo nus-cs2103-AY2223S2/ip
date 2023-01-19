@@ -1,4 +1,5 @@
 package features.event_manager;
+import Exceptions.InvalidArgumentException;
 import utils.Pair;
 import utils.TokenUtilities;
 import java.util.Map;
@@ -36,10 +37,17 @@ class Deadline extends Task {
      * @param tokens the tokens.
      * @return a new deadline from the given tokens.
      */
-    public static Deadline fromTokens(String[] tokens) {
-        final Pair<String, Map<String, String>> res =
+    public static Deadline fromTokens(String[] tokens) throws InvalidArgumentException {
+        final Pair<String, Map<String, String>> tmp =
                 TokenUtilities.instance.joinTokens(tokens, delims);
-        return new Deadline(res.getLeft(), res.getRight().get(deadlineKey));
+        if (tmp.getLeft().isBlank()) {
+            throw new InvalidArgumentException("☹ OOPS, the name for a deadline " +
+                    "should not be null", tokens);
+        } else if (tmp.getRight().get(deadlineKey) == null) {
+            throw new InvalidArgumentException("☹ OOPS, did you forgot to type " +
+                    deadlineKey + " for your deadline?");
+        }
+        return new Deadline(tmp.getLeft(), tmp.getRight().get(deadlineKey));
     }
 
     /**

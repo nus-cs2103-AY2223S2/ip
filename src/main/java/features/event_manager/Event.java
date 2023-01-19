@@ -1,4 +1,5 @@
 package features.event_manager;
+import Exceptions.InvalidArgumentException;
 import utils.Pair;
 import utils.TokenUtilities;
 import java.util.Map;
@@ -34,9 +35,19 @@ class Event extends Task {
         this(name, false, startAt, endAt);
     }
 
-    public static Event fromTokens(String[] tokens) {
+    public static Event fromTokens(String[] tokens) throws InvalidArgumentException {
         final Pair<String, Map<String, String>> tmp =
                 TokenUtilities.instance.joinTokens(tokens, delims);
+        if (tmp.getLeft().isBlank()) {
+            throw new InvalidArgumentException("☹ OOPS, the name for an event " +
+                    "should not be null", tokens);
+        } else if (tmp.getRight().get(startAtKey) == null) {
+            throw new InvalidArgumentException("☹ OOPS, did you forgot to type " +
+                    startAtKey + " for your event?");
+        } else if (tmp.getRight().get(endAtKey) == null) {
+            throw new InvalidArgumentException("☹ OOPS, did you forgot to type " +
+                    endAtKey + " for your event?");
+        }
         return new Event(tmp.getLeft(), tmp.getRight().get(startAtKey),
                 tmp.getRight().get(endAtKey));
     }

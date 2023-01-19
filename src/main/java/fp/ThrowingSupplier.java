@@ -1,2 +1,5 @@
-package fp;public interface ThrowingSupplier {
+package fp;
+@FunctionalInterface
+public interface ThrowingSupplier<R, E extends Exception> {
+    R supply() throws E;
 }

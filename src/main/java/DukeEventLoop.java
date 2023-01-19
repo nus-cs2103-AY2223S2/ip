@@ -3,6 +3,8 @@ import event_loop.Executable;
 import event_loop.NestableExecutableObject;
 import features.bye.Bye;
 import features.event_manager.TaskManager;
+import features.unknown_command.UnknownCommand;
+
 import java.util.Scanner;
 
 /**
@@ -23,6 +25,8 @@ public class DukeEventLoop extends EventLoop {
         // echo.register(executable);
         final TaskManager manager = new TaskManager();
         manager.register(executable);
+        final UnknownCommand unknown = new UnknownCommand();
+        unknown.register(executable);
         return new DukeEventLoop(scanner, executable);
     }
 
