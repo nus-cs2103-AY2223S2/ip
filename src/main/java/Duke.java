@@ -5,6 +5,17 @@ public class Duke {
     private Scanner sc = new Scanner(System.in);
     private ArrayList<Task> list = new ArrayList<>();
 
+    private enum DukeCommand {
+        BYE,
+        LIST,
+        MARK,
+        UNMARK,
+        TODO,
+        DEADLINE,
+        EVENT,
+        DELETE
+    }
+
 
     private void inputResponse() {
 
@@ -12,26 +23,40 @@ public class Duke {
             String input;
             input = this.sc.nextLine();
             String[] userInput = input.split(" ", 2);
+            String dukeQuery = userInput[0];
+            DukeCommand dukeCommand= DukeCommand.valueOf(dukeQuery.toUpperCase());
+
             try {
-                if (userInput[0].equals("bye")) {
-                    System.out.println("\tBye. Hope to see you again soon!");
-                    break;
-                } else if (userInput[0].equals("list")) {
-                    this.displayList();
-                } else if (userInput[0].equals("mark")) {
-                    this.markComplete(userInput);
-                } else if (userInput[0].equals("unmark")) {
-                    this.markInComplete(userInput);
-                } else if (userInput[0].equals("todo")) {
-                    this.addTodo(userInput);
-                } else if (userInput[0].equals("deadline")) {
-                    this.addDeadline(userInput);
-                } else if (userInput[0].equals("event")) {
-                    this.addEvent(userInput);
-                } else if (userInput[0].equals("delete")) {
-                    this.deleteTask(userInput);
-                } else {
-                    throw new DukeInvalidCommandException();
+                switch (dukeCommand) {
+                    case BYE :
+                        System.out.println("\tBye. Hope to see you again soon!");
+                        printLine();
+                        this.sc.close();
+                        return;
+                    case LIST :
+                        this.displayList();
+                        break;
+                    case MARK :
+                        this.markComplete(userInput);
+                        break;
+                    case UNMARK :
+                        this.markInComplete(userInput);
+                        break;
+                    case TODO :
+                        this.addTodo(userInput);
+                        break;
+                    case DEADLINE :
+                        this.addDeadline(userInput);
+                        break;
+                    case EVENT :
+                        this.addEvent(userInput);
+                        break;
+                    case DELETE :
+                        this.deleteTask(userInput);
+                        break;
+                    default :
+                        throw new DukeInvalidCommandException();
+
                 }
             } catch (DukeException e) {
                 System.out.printf("\t%s\n", e);
