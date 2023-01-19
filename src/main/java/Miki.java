@@ -10,6 +10,11 @@ public class Miki {
         System.out.println("     " + s);
     }
 
+    private static void printAdded(Task t, int taskCount) {
+        print("Added this thing! That makes " + taskCount + (taskCount == 1 ? " task" : " tasks") + ":");
+        print("  " + t.toString());
+    }
+
     public static void main(String[] args) {
         ArrayList<Task> tasks = new ArrayList<>();
         Scanner sc = new Scanner(System.in);
@@ -23,7 +28,7 @@ public class Miki {
         while (!exit_cmd) {
             System.out.print(">");
             String cmd_line = sc.nextLine();
-            String cmd = cmd_line.split(" ")[0];
+            String cmd = cmd_line.split(" ")[0].toLowerCase();
             String[] cmd_args = {};
             if (cmd_line.contains(" ")) {
                 cmd_args = cmd_line.substring(cmd.length() + 1).split(" ");
@@ -58,12 +63,77 @@ public class Miki {
                     printDiv();
                     break;
                 }
+                case "todo": {
+                    String objective = "";
+                    for (int i = 0; i < cmd_args.length; i++) {
+                        objective += (objective.isEmpty() ? "" : " ") + cmd_args[i];
+                    }
+                    Todo newTodo = new Todo(objective);
+                    tasks.add(newTodo);
+                    printDiv();
+                    printAdded(newTodo, tasks.size());
+                    printDiv();
+                    break;
+                }
+                case "deadline": {
+                    String objective = "";
+                    String by = "";
+                    boolean token_by = false;
+                    for (int i = 0; i < cmd_args.length; i++) {
+                        if (cmd_args[i].equals("/by")) {
+                            token_by = true;
+                            continue;
+                        }
+                        if (token_by) {
+                            by += (by.isEmpty() ? "" : " ") + cmd_args[i];
+                        } else {
+                            objective += (objective.isEmpty() ? "" : " ") + cmd_args[i];
+                        }
+                    }
+                    Deadline newDeadline = new Deadline(objective, by);
+                    tasks.add(newDeadline);
+                    printDiv();
+                    printAdded(newDeadline, tasks.size());
+                    printDiv();
+                    break;
+                }
+                case "event": {
+                    String objective = "";
+                    String from = "";
+                    String to = "";
+                    boolean token_from = false;
+                    boolean token_to = false;
+                    for (int i = 0; i < cmd_args.length; i++) {
+                        if (cmd_args[i].equals("/from")) {
+                            token_from = true;
+                            token_to = false;
+                            continue;
+                        }
+                        if (cmd_args[i].equals("/to")) {
+                            token_from = false;
+                            token_to = true;
+                            continue;
+                        }
+                        if (token_from) {
+                            from += (from.isEmpty() ? "" : " ") + cmd_args[i];
+                        } else if (token_to) {
+                            to += (to.isEmpty() ? "" : " ") + cmd_args[i];
+                        } else {
+                            objective += (objective.isEmpty() ? "" : " ") + cmd_args[i];
+                        }
+                    }
+                    Event newEvent = new Event(objective, from, to);
+                    tasks.add(newEvent);
+                    printDiv();
+                    printAdded(newEvent, tasks.size());
+                    printDiv();
+                    break;
+                }
                 default:
                     Task newTask = new Task(cmd_line);
                     tasks.add(newTask);
                     printDiv();
-                    print("Added this! :");
-                    print("  " + newTask.toString());
+                    printAdded(newTask, tasks.size());
                     printDiv();
             }
         }
