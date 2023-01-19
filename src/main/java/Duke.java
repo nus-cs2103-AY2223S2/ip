@@ -18,84 +18,90 @@ public class Duke {
         }
     }
     private static void markTask(String command) {
+        if (! command.matches("mark \\d+")) {
+            System.out.println("Please enter one task which you would like to mark as done.");
+            return;
+        }
         try {
             int taskIndex = Integer.parseInt(command.split(" ")[1]) - 1;
             tasks.get(taskIndex).setDone(true);
             System.out.println("Okay! I've marked this task as done!");
             System.out.println(tasks.get(taskIndex).printTask());
-        } catch (ArrayIndexOutOfBoundsException e) {
-            System.out.println("Which task do you want to mark as done?");
         } catch (IndexOutOfBoundsException e) {
             System.out.println("You don't have that many tasks!");
-        } catch (NumberFormatException e) {
-            System.out.println("Please enter a number.");
         }
     }
     private static void unmarkTask(String command) {
+        if (! command.matches("unmark \\d+")) {
+            System.out.println("Please enter one task which you would like to mark as undone.");
+            return;
+        } 
         try {
             int taskIndex = Integer.parseInt(command.split(" ")[1]) - 1;
             tasks.get(taskIndex).setDone(false);
             System.out.println("Okay! I've marked this task as not done yet!");
             System.out.println(tasks.get(taskIndex).printTask());
-        } catch (ArrayIndexOutOfBoundsException e) {
-            System.out.println("Which task do you want to mark as undone?");
         } catch (IndexOutOfBoundsException e) {
             System.out.println("You don't have that many tasks!");
-        } catch (NumberFormatException e) {
-            System.out.println("Please enter a number.");
-        }
+        } 
     }
     private static void addTodo(String command) {
-        try {
-            command = command.split(" ", 2)[1];
-            Task newTask = new Todo(command);
-            tasks.add(newTask);
-            System.out.println(String.format("Added: %s", newTask.printTask()));
-        } catch (ArrayIndexOutOfBoundsException e) {
-            System.out.println("Oops! The description of todo cannot be empty!");
+        if (! command.matches("todo .+")) {
+            System.out.println("Please enter the task you would like to do in the format \n>> todo [task]");
+            return;
         }
+        command = command.split(" ", 2)[1];
+        Task newTask = new Todo(command);
+        tasks.add(newTask);
+        System.out.println(String.format("Added: %s", newTask.printTask()));
     }
     private static void addDeadline(String command) {
-        try {
-            String delimiter = "/by ";
-            String task = command.substring("deadline ".length(), command.indexOf(delimiter) - 1);
-            String deadline = command.substring(command.indexOf(delimiter) + delimiter.length());
-            Task newTask = new Deadline(task, deadline);
-            tasks.add(newTask);
-            System.out.println(String.format("Added: %s", newTask.printTask()));
-        } /*catch (IllegalArgumentException e) {
-            System.out.println("Oops! What task do you want to set a deadline for?");
-        } catch (StringIndexOutOfBoundsException e) {
-            System.out.println("Oops! Please use /by to specify the deadline for the task.");
-        } */ catch (Exception e) {
+        if (! command.matches("deadline .+ /by .+")) {
             System.out.println("Sorry, that command is invalid. Specify a deadline task with \n >> deadline [description] /by [time]");
+            return;
         }
+        String delimiter = "/by ";
+        String task = command.substring("deadline ".length(), command.indexOf(delimiter) - 1);
+        String deadline = command.substring(command.indexOf(delimiter) + delimiter.length());
+        Task newTask = new Deadline(task, deadline);
+        tasks.add(newTask);
+        System.out.println(String.format("Added: %s", newTask.printTask()));
+        
     }
     private static void addEvent(String command) {
-        try {
-            String startDelimiter = "/from ";
-            String endDelimiter = "/to ";
-            String task = command.substring("event ".length(), command.indexOf(startDelimiter) - 1);
-            String startTime = command.substring(
-                    command.indexOf(startDelimiter) + startDelimiter.length(),
-                    command.indexOf(endDelimiter) - 1);
-            String endTime = command.substring(
-                    command.indexOf(endDelimiter) + endDelimiter.length());
-            Task newTask = new Event(task, startTime, endTime);
-            tasks.add(newTask);
-            System.out.println(String.format("Added: %s", newTask.printTask()));
-        } catch (Exception e) {
+        if (! command.matches("event .+ /from .+ /to .+")) {
             System.out.println("Sorry, that command is invalid. Specify an event task with \n >> event [description] /from [start time] /to [end time]");
+            return;
         }
+        String startDelimiter = "/from ";
+        String endDelimiter = "/to ";
+        String task = command.substring("event ".length(), command.indexOf(startDelimiter) - 1);
+        String startTime = command.substring(
+                command.indexOf(startDelimiter) + startDelimiter.length(),
+                command.indexOf(endDelimiter) - 1);
+        String endTime = command.substring(
+                command.indexOf(endDelimiter) + endDelimiter.length());
+        Task newTask = new Event(task, startTime, endTime);
+        tasks.add(newTask);
+        System.out.println(String.format("Added: %s", newTask.printTask()));
+        
     }
     private static void noMatch() {
         System.out.println("Sorry, I didn't understand that, please ask again.");
     }
     
     private static void deleteEvent(String command) {
-        int taskIndex = Integer.parseInt(command.split(" ")[1]) - 1;
-        System.out.println(String.format("Okay! I deleted task %s", tasks.get(taskIndex).printTask()));
-        tasks.remove(taskIndex);
+        if (! command.matches("delete \\d+")) {
+            System.out.println("Tell me the index of the event you want to delete! Type >>list to view your events again.");
+            return;
+        }
+        try {
+            int taskIndex = Integer.parseInt(command.split(" ")[1]) - 1;
+            System.out.println(String.format("Okay! I deleted task %s", tasks.get(taskIndex).printTask()));
+            tasks.remove(taskIndex);
+        } catch (IndexOutOfBoundsException e) {
+            System.out.println("You don't have that many tasks!");
+        }
     }
     public static void main(String[] args) {
         String logo = " ____        _        \n"
