@@ -81,13 +81,7 @@ public class Duke{
                             throw new DukeException("Please provide the index of the task!");
                         }
                         int index = Integer.parseInt(commandList[1]);
-                        if (index > tasks.size() || index <= 0) {
-                            System.out.println("There is no task at index " + index + "!");
-                        } else {
-                            Task task = tasks.get(index - 1);
-                            task.markAsDone();
-                            System.out.println("Good job! I have marked this task as done! \n" + "\t" + task);
-                        }
+                        tasks.markDone(index);
                         break;
                     }
                     case UNMARK: {
@@ -95,13 +89,14 @@ public class Duke{
                             throw new DukeException("Please provide the index of the task!");
                         }
                         int index = Integer.parseInt(commandList[1]);
-                        if (index > tasks.size() || index <= 0) {
-                            System.out.println("There is no task at index " + index + "!");
-                        } else {
-                            Task task = tasks.get(index - 1);
-                            task.markAsUndone();
-                            System.out.println("Oof! I have marked this task as undone for you! \n" + task);
+                        tasks.markUndone(index);
+                    }
+                    case DELETE: {
+                        if (tooFewArgs) {
+                            throw new DukeException("Please provide the index of the task!");
                         }
+                        int index = Integer.parseInt(commandList[1]);
+                        tasks.delete(index);
                         break;
                     }
                     case BYE: {
@@ -114,6 +109,8 @@ public class Duke{
             } catch (IllegalArgumentException e) {
                 System.out.println("Sorry, that command is not recognised. \n" +
                         "P.S. Maybe you could contact @dsja612 on github to request for more types of commands :)");
+            } catch (IndexOutOfBoundsException e) {
+                System.out.println("Please provide a valid index!");
             } finally {
                 sc.reset();
             }

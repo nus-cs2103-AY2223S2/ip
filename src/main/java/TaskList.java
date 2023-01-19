@@ -18,7 +18,25 @@ public class TaskList {
     }
 
     public Task get(int index) {
-        return taskList.get(index);
+        return this.taskList.get(index);
+    }
+
+    public void delete(int index) {
+        Task removed = this.taskList.remove(index - 1);
+        System.out.println("Removed task: " + removed);
+        System.out.println("You now have " + this.size() + " task(s) in your list.");
+    }
+
+    public void markDone(int index) {
+        Task task = this.taskList.get(index - 1);
+        task.markAsDone();
+        System.out.println("Good job! I have marked this task as done! \n" + "\t" + task);
+    }
+
+    public void markUndone(int index) {
+        Task task = this.taskList.get(index - 1);
+        task.markAsUndone();
+        System.out.println("Oof! I have marked this task as undone for you! \n" + task);
     }
 
     public boolean isEmpty() {
