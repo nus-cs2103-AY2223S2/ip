@@ -11,14 +11,29 @@ public class EventTask extends Task {
     private final LocalDate fromDate;
     private final LocalDate toDate;
 
+    /**
+     * Constructor of an event task, marked as undone.
+     * @param description Description of the task.
+     * @param fromDate Date string when the event starts.
+     * @param toDate Date string when the event ends.
+     * @throws CommandParseException If description, fromDate or toDate is invalid.
+     */
     public EventTask(
             String description,
             String fromDate,
-            String fromTime
+            String toDate
     ) throws CommandParseException {
-        this(description, fromDate, fromTime, false);
+        this(description, fromDate, toDate, false);
     }
 
+    /**
+     * Constructor of an event task.
+     * @param description Description of the task.
+     * @param fromDate Date string when the event starts.
+     * @param toDate Date string when the event ends.
+     * @param isDone Whether the event is to be marked as done.
+     * @throws CommandParseException If description, fromDate or toDate is invalid.
+     */
     public EventTask(String description, String fromDate, String toDate, boolean isDone) throws CommandParseException {
         super(description, isDone);
         if (fromDate == null || toDate == null || fromDate.isBlank() || toDate.isBlank()) {

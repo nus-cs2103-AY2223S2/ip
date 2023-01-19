@@ -9,6 +9,12 @@ public class TaskFilter {
     private final LocalDate afterDate;
     private final LocalDate beforeDate;
 
+    /**
+     * Constructor for a task filter.
+     * @param afterDate Date string where the search starts.
+     * @param beforeDate Date string where the search ends
+     * @throws InvalidParameterException If afterDate or beforeDate is invalid.
+     */
     public TaskFilter(String afterDate, String beforeDate) throws InvalidParameterException {
         try {
             this.afterDate = afterDate == null ? null : LocalDate.parse(afterDate);
@@ -21,14 +27,23 @@ public class TaskFilter {
         }
     }
 
+    /**
+     * @return Whether this filter is empty.
+     */
     public boolean isEmpty() {
         return this.afterDate == null && this.beforeDate == null;
     }
 
+    /**
+     * @return Date where the search starts.
+     */
     public LocalDate getAfterDate() {
         return afterDate;
     }
 
+    /**
+     * @return Date where the search ends.
+     */
     public LocalDate getBeforeDate() {
         return beforeDate;
     }

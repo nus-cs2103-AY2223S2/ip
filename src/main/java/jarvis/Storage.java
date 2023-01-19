@@ -1,7 +1,11 @@
 package jarvis;
 
+import jarvis.exception.CommandParseException;
 import jarvis.exception.TaskIOException;
+import jarvis.task.DeadlineTask;
+import jarvis.task.EventTask;
 import jarvis.task.Task;
+import jarvis.task.ToDoTask;
 
 import java.io.*;
 import java.util.LinkedList;
@@ -27,7 +31,7 @@ public class Storage {
         }
 
         while (scanner.hasNextLine()) {
-            Task task = Task.deserialize(scanner.nextLine());
+            Task task = this.deserialize(scanner.nextLine());
             if (task != null) tasks.add(task);
         }
 
@@ -55,6 +59,11 @@ public class Storage {
         }
     }
 
+    /**
+     * Creates the folder and file to save tasks, if necessary.
+     * @return The created file.
+     * @throws TaskIOException If the folder or file cannot be created or accessed.
+     */
     private File getFile() throws TaskIOException {
         File folder = new File(DATA_PATH);
         File file = new File(TASKS_PATH);
@@ -70,5 +79,44 @@ public class Storage {
         }
 
         return file;
+    }
+
+    /**
+     * Deserializes a string serial to a task.
+     * @param serial String serial from local storage,
+     * @return A task.
+     */
+    private Task deserialize(String serial) {
+        if (serial == null || serial.isBlank()) return null;
+
+        Scanner scanner = new Scanner(serial).useDelimiter("\\s*/\\s*");
+        String type = "";
+        boolean isDone = false;
+        String description = null;
+        String deadline = null;
+        String fromDateTime = null;
+        String toDateTime = null;
+
+        if (scanner.hasNext()) type = scanner.next();
+        if (scanner.hasNextBoolean()) isDone = scanner.nextBoolean();
+        if (scanner.hasNext()) description = scanner.next();
+
+        try {
+            switch (type) {
+                case "T":
+                    return new ToDoTask(description, isDone);
+                case "D":
+                    if (scanner.hasNext()) deadline = scanner.next();
+                    return new DeadlineTask(description, deadline, isDone);
+                case "E":
+                    if (scanner.hasNext()) fromDateTime = scanner.next();
+                    if (scanner.hasNext()) toDateTime = scanner.next();
+                    return new EventTask(description, fromDateTime, toDateTime, isDone);
+                default:
+                    return null;
+            }
+        } catch (CommandParseException e) {
+            return null;
+        }
     }
 }

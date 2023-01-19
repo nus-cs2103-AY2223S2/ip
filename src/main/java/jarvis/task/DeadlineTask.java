@@ -10,10 +10,23 @@ import java.time.format.DateTimeParseException;
 public class DeadlineTask extends Task {
     private final LocalDate deadline;
 
+    /**
+     * Constructor for a deadline task, marked as undone.
+     * @param description Description of the task.
+     * @param deadline Date string of the deadline.
+     * @throws CommandParseException If the description or deadline is invalid.
+     */
     public DeadlineTask(String description, String deadline) throws CommandParseException {
         this(description, deadline, false);
     }
 
+    /**
+     * Constructor for a deadline task.
+     * @param description Description of the task.
+     * @param deadline Date string of the deadline.
+     * @param isDone Whether the task is marked as done.
+     * @throws CommandParseException If the description or deadline is invalid.
+     */
     public DeadlineTask(String description, String deadline, boolean isDone) throws CommandParseException {
         super(description, isDone);
         if (deadline == null || deadline.isBlank()) {

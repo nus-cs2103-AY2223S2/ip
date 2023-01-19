@@ -2,8 +2,6 @@ package jarvis.task;
 
 import jarvis.exception.InvalidParameterException;
 import jarvis.exception.MissingParameterException;
-import jarvis.task.Task;
-import jarvis.task.TaskFilter;
 
 import java.util.ArrayList;
 import java.util.LinkedList;
