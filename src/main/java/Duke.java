@@ -27,9 +27,29 @@ public class Duke {
                 storeTasks[intTaskIndex].markUndone();
                 System.out.println("OK, I've marked this task as not done yet:\n " + storeTasks[intTaskIndex].toString());
             } else {
-                storeTasks[numElem] = new Task(commandToEcho);
+                System.out.println("Got it. I've added this task:");
+                Task currentTask;
+                if(commandToEcho.length()>=4 && commandToEcho.substring(0, 4).equals("todo")) {
+                    String desc = getDescToDo(5,commandToEcho);
+                    currentTask = new Todo(desc);
+                    storeTasks[numElem] = currentTask;
+                    System.out.println(currentTask);
+                } else if (commandToEcho.length()>=8 && commandToEcho.substring(0, 8).equals("deadline")) {
+                    String desc = getDesc(9,commandToEcho);
+                    String byWhen = getByWhen(commandToEcho);
+                    currentTask = new Deadline(desc,byWhen);
+                    storeTasks[numElem] = currentTask;
+                    System.out.println(currentTask);
+                } else if (commandToEcho.length()>=5 && commandToEcho.substring(0, 5).equals("event")) {
+                    String desc = getDesc(6,commandToEcho);
+                    String from = getFrom(commandToEcho);
+                    String to = getTo(commandToEcho);
+                    currentTask = new Event(desc,from,to);
+                    storeTasks[numElem] = currentTask;
+                    System.out.println(currentTask);
+                }
                 numElem++;
-                System.out.println("added: " + commandToEcho);
+                System.out.println(String.format("Now you have %d task(s) in the list.",numElem));
             }
             commandToEcho = sc.nextLine();
         }
@@ -48,5 +68,92 @@ public class Duke {
         }
         int intTaskIndex = Integer.parseInt(taskIndex) - 1;
         return intTaskIndex;
+    }
+    static String getDescToDo(int startIndex, String commandToEcho) {
+        String subString = commandToEcho.substring(startIndex);
+        String desc = "";
+        int index = 0;
+        char front = subString.charAt(index);
+        while (index < subString.length() - 1) {
+            desc = desc + front;
+            index++;
+            front = subString.charAt(index);
+        }
+        desc = desc + front;
+        return desc;
+    }
+
+    static String getDesc(int startIndex, String commandToEcho) {
+        String subString = commandToEcho.substring(startIndex);
+        String desc = "";
+        int index = 0;
+        char front = subString.charAt(index);
+        while (front != ('/')) {
+            desc = desc + front;
+            index++;
+            front = subString.charAt(index);
+        }
+        return desc;
+    }
+    static String getByWhen(String commandToEcho) {
+        String byWhen = "";
+        int toMinus = 1;
+        char fromBack = commandToEcho.charAt(commandToEcho.length() - toMinus);
+        while (fromBack != ('/')) {
+            byWhen = fromBack + byWhen;
+            toMinus++;
+            fromBack = commandToEcho.charAt(commandToEcho.length() - toMinus);
+        }
+        return byWhen;
+    }
+
+    static String getFrom(String commandToEcho) {
+        String from = "";
+        int index = 0;
+        String req = "";
+        char front = commandToEcho.charAt(index);
+        while (front != ('/')) {
+            index++;
+            front = commandToEcho.charAt(index);
+        }
+        while (!from.equals("/from ")) {
+            from = from + front;
+            index++;
+            front = commandToEcho.charAt(index);
+        }
+        while (front != ('/')) {
+            req = req + front;
+            index++;
+            front = commandToEcho.charAt(index);
+        }
+        return req;
+    }
+
+    static String getTo(String commandToEcho) {
+        int commandSize = commandToEcho.length();
+        String from = "";
+        int index = 0;
+        String req = "";
+        char front = commandToEcho.charAt(index);
+        int numSlash=0;
+        while (front != ('/') || numSlash!=1) {
+            if(front == ('/')) {
+                numSlash++;
+            }
+            index++;
+            front = commandToEcho.charAt(index);
+        }
+        while (!from.equals("/to ")) {
+            from = from + front;
+            index++;
+            front = commandToEcho.charAt(index);
+        }
+        while (index < commandSize-1) {
+            req = req + front;
+            index++;
+            front = commandToEcho.charAt(index);
+        }
+        req = req + front;
+        return req;
     }
 }
