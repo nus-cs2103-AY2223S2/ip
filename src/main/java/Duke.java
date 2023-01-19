@@ -4,12 +4,14 @@ import java.util.Scanner;
 public class Duke {
     static String processCommand(String command, TaskList taskList) throws DukeException {
         String[] commandArr = command.split(" ");
-        if ("list".equals(commandArr[0])) {
+        if (commandArr[0].equals("list")) {
             return taskList.toString();
-        } else if ("mark".equals(commandArr[0])) {
+        } else if (commandArr[0].equals("mark")) {
             return taskList.markTask(Integer.parseInt(commandArr[1]));
-        } else if ("unmark".equals(commandArr[0])) {
+        } else if (commandArr[0].equals("unmark")) {
             return taskList.unmarkTask(Integer.parseInt(commandArr[1]));
+        } else if (commandArr[0].equals("delete")) {
+            return taskList.deleteTask(Integer.parseInt(commandArr[1]));
         }
         return taskList.addTask(command);
     }

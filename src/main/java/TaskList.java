@@ -36,6 +36,12 @@ public class TaskList {
         return addTaskText(task);
     }
 
+    String deleteTask(int taskNum) {
+        Task task = taskList.remove(taskNum - 1);
+        return String.format("Noted, I've removed this task:\n   %s\nYou now have %d tasks in the list\n",
+                task.toString(), getNumOfTasks());
+    }
+
     String markTask(int taskNum) {
         Task task = taskList.get(taskNum - 1);
         task.completeTask();
@@ -52,6 +58,7 @@ public class TaskList {
         return String.format("Got it. I've added this task:\n   %s\nNow you have %s task%s in the list.\n",
                 task.toString(), getNumOfTasks(), getNumOfTasks() == 1 ? "" : "s");
     }
+
     int getNumOfTasks() {
         return taskList.size();
     }
