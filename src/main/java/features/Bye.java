@@ -1,4 +1,4 @@
-package features.bye;
+package features;
 
 import eventloop.ExecutableRegisterable;
 import eventloop.ExitStatus;

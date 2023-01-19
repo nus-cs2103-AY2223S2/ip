@@ -1,4 +1,4 @@
-package features.event_manager;
+package features.taskmanager;
 import exceptions.InvalidArgumentException;
 import eventloop.*;
 import fp.ThrowingFunction;

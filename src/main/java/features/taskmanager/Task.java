@@ -1,4 +1,4 @@
-package features.event_manager;
+package features.taskmanager;
 
 /**
  * This shall resemble a Task. The reason that no modifiers was added was

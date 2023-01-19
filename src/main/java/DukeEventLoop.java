@@ -1,9 +1,9 @@
 import eventloop.EventLoop;
 import eventloop.Executable;
 import eventloop.NestableExecutableObject;
-import features.bye.Bye;
-import features.event_manager.TaskManager;
-import features.unknown_command.UnknownCommand;
+import features.Bye;
+import features.taskmanager.TaskManager;
+import features.UnknownCommand;
 
 import java.util.Scanner;
 

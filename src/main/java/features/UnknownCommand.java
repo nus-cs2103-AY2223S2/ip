@@ -1,15 +1,14 @@
-package features.echo;
-
+package features;
 import eventloop.Executable;
 import eventloop.ExecutableRegisterable;
 import eventloop.ExitStatus;
 import eventloop.NestableExecutableObject;
 
-public class Echo implements Executable, ExecutableRegisterable {
+public class UnknownCommand implements Executable, ExecutableRegisterable {
     @Override
     public ExitStatus execute(String[] tokens) {
-        System.out.println(String.join(" ", tokens));
-        // after this, we would want it to skip the current execution loop.
+        System.out.println("☹ OOPS!!! I'm sorry, but I don't know what that " +
+                "means :-(");
         return ExitStatus.finishCurrentIteration;
     }
 
