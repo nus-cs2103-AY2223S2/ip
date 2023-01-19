@@ -5,3 +5,5 @@ mark 1
 event project meeting /from Aug 6th 2pm /to 4pm
 todo join sports club
 list
+delete 2
+list
