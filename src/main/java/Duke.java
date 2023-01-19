@@ -50,6 +50,12 @@ public class Duke {
                             System.out.println(formatOutput("Ok, I've marked this task as not done yet:\n\t\t" + currentTask.toString()));
                         }
                         break;
+                    case "delete":
+                        index = Integer.parseInt(inputArr[1]) - 1;
+                        Task toDelete = taskList.get(index);
+                        taskList.remove(index);
+                        System.out.println(formatOutput("Ok. I've removed this task:\n\t\t" + toDelete.toString() + "\n\t Now you have " + taskList.size() + " tasks in the list."));
+                        break;
                     case "todo":
                         if (isDescriptionEmpty(inputArr)) {
                             throw new DukeException(formatOutput("Hey now.. The description of a todo cannot be empty. >:("));
