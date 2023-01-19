@@ -55,7 +55,8 @@ public class Duke {
 
                 case "todo":
                     msg = sc.nextLine();
-                    Todo todo = new Todo(msg);
+                    String todoName = msg.substring(1);
+                    Todo todo = new Todo(todoName);
                     list[listNum] = todo;
                     System.out.println("Got it. I've added this task:\n  " + list[listNum]);
                     System.out.println("Now you have " + listNum + " tasks in the list.");
@@ -65,7 +66,7 @@ public class Duke {
                 case "deadline":
                     msg = sc.nextLine();
                     int byIndex = msg.indexOf(" /by ");
-                    String dlName = msg.substring(0, byIndex);
+                    String dlName = msg.substring(1, byIndex);
                     String dlBy = msg.substring(byIndex + 5);
                     Deadline deadline = new Deadline(dlName, dlBy);
                     list[listNum] = deadline;
@@ -78,7 +79,7 @@ public class Duke {
                     msg = sc.nextLine();
                     int fromIndex = msg.indexOf(" /from ");
                     int toIndex = msg.indexOf(" /to ");
-                    String eventName = msg.substring(0, fromIndex);
+                    String eventName = msg.substring(1, fromIndex);
                     String eventFrom = msg.substring(fromIndex + 7, toIndex);
                     String eventTo = msg.substring(toIndex + 5);
                     Event event = new Event(eventName, eventFrom, eventTo);
