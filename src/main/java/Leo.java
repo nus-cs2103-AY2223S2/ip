@@ -4,7 +4,7 @@ public class Leo {
 
     private ArrayList<Task> taskList = new ArrayList<>();
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws LeoException{
         // String logo = " ____ _ \n"
         // + "| _ \\ _ _| | _____ \n"
         // + "| | | | | | | |/ / _ \\\n"
@@ -14,7 +14,7 @@ public class Leo {
         new Leo().start();
     }
 
-    public void start() {
+    public void start() throws LeoException{
         Scanner sc = new Scanner(System.in);
         String cmd = sc.nextLine(); // reads in command fed by user
 
@@ -26,13 +26,17 @@ public class Leo {
         sc.close();
     }
 
-    private void addTask(String taskName, char type) {
-        taskList.add(Task.createTask(taskName, type));
-        System.out.printf("added: %s\n", taskList.get(taskList.size() - 1));
-        System.out.printf("You have %d tasks in your list, vamos, get moving!\n", taskList.size());
+    private void addTask(String taskName, char type) throws LeoException{
+        if (taskName.split(" ").length <= 1) {
+            throw new IllegalArgumentException("Task description cannot be empty but...can you do it on a rainy night in Stoke?\n");
+        } else {
+            taskList.add(Task.createTask(taskName, type));
+            System.out.printf("added: %s\n", taskList.get(taskList.size() - 1));
+            System.out.printf("You have %d tasks in your list, vamos, get moving!\n", taskList.size());
+        }
     }
 
-    private void processRequest(String cmd) {
+    private void processRequest(String cmd) throws LeoException{
         for (int i = 0; i < 25; i++) {
             System.out.print("*");
         }
@@ -57,7 +61,7 @@ public class Leo {
                 int cmdIdx = Integer.parseInt(cmdArr[1]) - 1;
                 if (cmdArr[0].equals("mark")) {
                     taskList.get(cmdIdx).setDone();
-                    System.out.println("Well done on completing the task! Let me mark that as done!");
+                    System.out.println("Well done on completing the task! Let me mark that as done! Campeon del mundo!");
                 } else {
                     taskList.get(cmdIdx).resetDone();
                     System.out.println("Ok, I've marked that as not done! Please get to it :(");
@@ -77,8 +81,7 @@ public class Leo {
                     addTask(cmd, 'e');
                     break;
                 default:
-                    System.out.println("I'm sorry, I don't know what you want. ¿Que miras bobo?");
-                    break;
+                    throw new EmptyTaskException();
             }
         }
         for (int i = 0; i < 25; i++) {
@@ -98,10 +101,21 @@ class Task {
         this.type = type;
     }
 
-    public static Task createTask(String taskName, char type) {
-        return type == 'd' ? new Deadline(taskName.substring(9).split("/")[0], 'D', taskName.split("/")[1])
-                : type == 'e' ? new Event(taskName.substring(6).split("/")[0], 'E', taskName.split("/")[1], taskName.split("/")[2])
-                        : new Todo(taskName.substring(5), 'T');
+    public static Task createTask(String taskName, char type) throws LeoException {
+        if (type == 'd') {
+            String[] taskData = taskName.split("/");
+            if (taskData.length <= 1) {
+                throw new MissingDeadlineException();
+            }
+            return new Deadline(taskName.substring(9).split("/")[0], 'D', taskName.split("/")[1]);
+        } if (type == 'e') { 
+            String[] taskData = taskName.split("/");
+            if (taskData.length < 3) {
+                throw new MissingTimelineException();
+            }
+            return new Event(taskName.substring(6).split("/")[0], 'E', taskName.split("/")[1], taskName.split("/")[2]);
+        }
+        return new Todo(taskName.substring(5), 'T');
     }
 
     public void setDone() {
@@ -161,4 +175,28 @@ class Task {
         }
     }
 
+}
+
+class LeoException extends Exception {
+    LeoException(String exceptionStr) {
+        super(exceptionStr);
+    }
+}
+
+class EmptyTaskException extends LeoException {
+    EmptyTaskException() {
+        super("I'm sorry, I don't know what you want. ¿Que miras bobo?\n");
+    }
+}
+
+class MissingDeadlineException extends LeoException {
+    MissingDeadlineException() {
+        super("When is it due bruv? I never make predictions, and I never will.\n");
+    }
+}
+
+class MissingTimelineException extends LeoException {
+    MissingTimelineException() {
+        super("Not this again, indicate a from and to. I'm as happy as I can be—but I have been happier.\n");
+    }
 }
