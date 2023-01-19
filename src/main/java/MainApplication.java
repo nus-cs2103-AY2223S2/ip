@@ -83,6 +83,21 @@ public class MainApplication {
                 "\t%s\n\tNow you have %d tasks in the list.\n", t, this.taskApplication.getNoOfTasks());
     }
 
+    private void deleteCommand(String command) throws DukeException {
+        String[] tokens = command.split(" ");
+        if (tokens.length < 2) throw new DukeInvalidArgumentException("The (mark)" +
+                "command requires 1 integer argument");
+        int index = -1;
+        try {
+            index = Integer.parseInt(tokens[1]) - 1;
+        } catch (NumberFormatException e) {
+            throw new DukeInvalidArgumentException("\tThe (mark)" +
+                    "command requires 1 integer argument\n");
+        }
+        Task t = this.taskApplication.popTask(index);
+        System.out.printf("\tNoted. I've removed this task:\n" +
+                "\t%s\n\tNow you have %d tasks in the list.\n", t, this.taskApplication.getNoOfTasks());
+    }
     private void parseCommand(String command) throws DukeException {
         String[] tokens = command.split(" ", 2);
 
@@ -105,12 +120,14 @@ public class MainApplication {
             case "event":
                 this.eventCommand(command);
                 break;
+            case "delete":
+                this.deleteCommand(command);
+                break;
             default:
                 throw new DukeUnknownCommandException("\tUnknown command\n");
         }
     }
     public void start() {
-        // Initialise variables
         Scanner scanner = new Scanner(System.in);
         String command;
         String logo = " ____        _        \n"
