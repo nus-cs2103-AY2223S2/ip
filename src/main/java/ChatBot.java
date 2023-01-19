@@ -28,8 +28,10 @@ public class ChatBot {
             case "unmark":
                 output = this.unmarkDone(argValues.get("unmark"));
                 break;
+            case "delete":
+                output = this.deleteTask(argValues.get("delete"));
+                break;
             default:
-                System.out.println(argValues);
                 if (this.inputToTask.containsKey(command)) {
                     try {
                         output = addTask(inputToTask.get(command),argValues);
@@ -102,10 +104,33 @@ public class ChatBot {
             return e.getMessage();
         }
         this.list.add(item);
-        return ("Item added!\n" + indent(item.toString()) +"\nYou now have " + this.list.size() +" tasks.");
+        return ("Item added!\n" + indent(item.toString()) +"\nYou now have " + this.list.size() +" task(s).");
+    }
+
+    private String deleteTask(String index) {
+        //removes a task at given index
+        int i;
+        try {
+            i = Integer.valueOf(index) - 1;
+        } catch (NumberFormatException e) {
+            return "Please specify the task by its index number.";
+        }
+
+        if (this.list.isEmpty()) {
+            return "There's nothing to delete la";
+        }
+
+        try {
+            Task removed = this.list.get(i);
+            this.list.remove(i);
+            return "Okie I removed this task:\n" + indent(removed.toString()) + "\nYou now have " + this.list.size() + " task(s) left.";
+        } catch (IndexOutOfBoundsException e) {
+            return "This task doesn't exist in your list.";
+        }
     }
 
     private String markAsDone(String index) {
+        // marks a task as done, but if a task is already done, notifies the user
         int i;
         try {
             i = Integer.valueOf(index);
@@ -122,6 +147,7 @@ public class ChatBot {
     }
 
     private String unmarkDone(String index) {
+        // marks a task as undone, but if already unmarked, notifies the user
         int i;
         try {
             i = Integer.valueOf(index);
