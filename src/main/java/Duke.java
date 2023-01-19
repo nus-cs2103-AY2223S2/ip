@@ -14,7 +14,7 @@ import java.io.*;
 public class Duke {
     private static BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
     private static ArrayList<Task> strArr = new ArrayList<>();
-    public static void main(String[] args) throws IOException{
+    public static void main(String[] args) throws IOException, EmptyNumberException{
         String logo = " ____        _        \n"
                 + "|  _ \\ _   _| | _____ \n"
                 + "| | | | | | | |/ / _ \\\n"
@@ -31,7 +31,7 @@ public class Duke {
 
     }
 
-    private static boolean runCommand() throws IOException{
+    private static boolean runCommand() throws IOException, EmptyNumberException{
         String[] word;
         System.out.print("Type your input below: \n");
         word = br.readLine().split(" ");
@@ -51,6 +51,8 @@ public class Duke {
                 }
             } catch(NumberFormatException e){
                 System.out.println("Invalid number. Please enter a number");
+            } catch(ArrayIndexOutOfBoundsException e){
+                throw new EmptyNumberException("The number for mark cannot be empty.");
             }
         } else if(word[0].equals("unmark")) {
             try { 
@@ -59,9 +61,11 @@ public class Duke {
                     t.unmark();
                     System.out.println("OK, I've marked this task as not done yet:");
                     System.out.println(t);
-                }
+            }
             } catch(NumberFormatException e){
                 System.out.println("Invalid number. Please enter a number");
+            } catch(ArrayIndexOutOfBoundsException e){
+                throw new EmptyNumberException("The number for unmark cannot be empty. Please try again!");
             }
         } else if(word[0].equals("todo")){
             String[] sliceWord = Arrays.copyOfRange(word, 1, word.length);
@@ -73,13 +77,11 @@ public class Duke {
             String[] sliceWord = Arrays.copyOfRange(word, 1, word.length);
             specialTask(sliceWord, 'E');
         }
-        
         else {
-            String mergeWord = String.join(" ", word);
-            strArr.add(new Task(mergeWord));
-            System.out.println(("added: " + mergeWord));
-            horizontalLine();
+            System.out.println(("Invalid command. Please try again!"));
+
         }
+        horizontalLine();
         return true;
     }
 
@@ -107,13 +109,20 @@ public class Duke {
         if (num <= strArr.size()) {
             return strArr.get(num-1);
         } else {
-            System.out.println("Number out of range/Invalid. Please try again");
+            System.out.println("Number out of range. Please try again");
             return null;
         }
     }
 
     private static void specialTask(String[] word, char type){
         Task t;
+        if (word.length == 0) {
+            String errMsg = (type == 'T') ? "todo" : (type == 'D')
+                                            ? "deadline"
+                                            : "event";
+            System.out.println("The description of " + errMsg + " cannot be empty. Pleas try again");
+            return;
+        }
         if(type == 'T'){
             t = new Todo(String.join(" ", word ));
         } else {
