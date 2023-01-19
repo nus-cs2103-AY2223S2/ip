@@ -35,7 +35,7 @@ public class DukeBot {
                 "     Hello! I'm Duke\n" +
                 "     What can I do for you?\n" +
                 this.frame);
-        while (this.isActive) {
+        while (this.isActive && this.scanner.hasNextLine()) {
             String line = this.scanner.nextLine();
             try {
                 System.out.println(this.text(line));
@@ -131,7 +131,7 @@ public class DukeBot {
         return this.frame +
                 " Noted. I've removed this task:\n" +
                 "       " + task +
-                "     Now you have " + this.lengthOfList +" tasks in the list." + "\n"
+                "     Now you have " + this.lengthOfList + " tasks in the list." + "\n"
                 + this.frame;
     }
 
