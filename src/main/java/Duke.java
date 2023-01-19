@@ -19,36 +19,61 @@ public class Duke {
         pw.println(sb.toString());  // Welcome Message bye Duke
         pw.flush();
         sb.setLength(0);
-        ArrayList<String> storage = new ArrayList<String>();
+        ArrayList<Task> storage2 = new ArrayList<Task>();
         while (true) {  // Echoing
             text = br.readLine();
-            if (text.equalsIgnoreCase("bye")) { // Termination of program
-                sb.append("    ____________________________________________________________\n")
-                                .append("    Bye. Hope to see you again soon!\n")
-                                        .append("    ____________________________________________________________\n");
-                pw.println(sb.toString());
-                pw.flush();
-                sb.setLength(0);
-                break;
+            String[] tempText = text.split(" ");
+            switch(tempText[0].toLowerCase()) {
+                case "bye":
+                    sb.append("    ____________________________________________________________\n")
+                            .append("    Bye. Hope to see you again soon!\n")
+                            .append("    ____________________________________________________________\n");
+                    break;
+                case "list":
+                    sb.append("    ____________________________________________________________\n")
+                            .append("    Here are the tasks in your list:\n");
+                    for (int i = 0; i < storage2.size(); i++) {
+                        sb.append("    ").append(i + 1).append(". ").append(storage2.get(i).getTaskInfo());
+                    }
+                    sb.append("    ____________________________________________________________\n");
+                    break;
+                case "mark":
+                    int taskNumber = Integer.parseInt(tempText[1]);
+                    // need to take care of this error where there isnt a tempText[1]
+                    if (taskNumber <= storage2.size()) {    // need to add in an else print an error statement
+                        // If the task number given is within the range of tasks in the list
+                        Task tempTask = storage2.get(taskNumber - 1);
+                        sb.append("    ____________________________________________________________\n")
+                                .append(tempTask.markAsDone())
+                                .append("    ____________________________________________________________\n");
+                        storage2.set(taskNumber -1, tempTask);
+                    }
+                    break;
+                case "unmark":
+                    int taskNumber2 = Integer.parseInt(tempText[1]);
+                    // need to take care of this error where there isnt a tempText[1]
+                    if (taskNumber2 <= storage2.size()) {    // need to add in an else print an error statement
+                        // If the task number given is within the range of tasks in the list
+                        Task tempTask = storage2.get(taskNumber2 - 1);
+                        sb.append("    ____________________________________________________________\n")
+                                .append(tempTask.markAsIncomplete())
+                                .append("    ____________________________________________________________\n");
+                        storage2.set(taskNumber2 -1, tempTask);
+                    }
+                    break;
+                default:
+                    Task newTask = new Task(text);
+                    storage2.add(newTask);
+                    sb.append("    ____________________________________________________________\n")
+                            .append("    added: ").append(newTask.getTaskInfo())
+                            .append("    ____________________________________________________________\n");
             }
-            if (text.equalsIgnoreCase("list")) {    // Displays the texts that are stored
-                sb.append("    ____________________________________________________________\n");
-                for (int i = 0; i < storage.size(); i++) {
-                    sb.append("    ").append(i + 1).append(". ").append(storage.get(i)).append("\n");
-                }
-                sb.append("    ____________________________________________________________\n");
-                pw.println(sb.toString());
-                pw.flush();
-                sb.setLength(0);
-                continue;
-            }
-            storage.add(text);
-            sb.append("    ____________________________________________________________\n")
-                            .append("    added: ").append(text).append("\n")
-                                    .append("    ____________________________________________________________\n");
             pw.println(sb.toString());
             pw.flush();
             sb.setLength(0);
+            if (tempText[0].equalsIgnoreCase("bye")) {
+                break;
+            }
         }
         br.close();
         pw.close();
