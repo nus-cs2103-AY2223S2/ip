@@ -7,6 +7,7 @@ public class Duke {
     private final static String list = "list";
     private final static String mark = "mark";
     private final static String unmark = "unmark";
+    private final static String delete = "delete";
     private static ArrayList<Task> tasks = new ArrayList<>();
 
     private static void indentedPrintln(String message) {
@@ -50,7 +51,7 @@ public class Duke {
             }
             return true;
         } else if (command.length() >= 5 && command.substring(0, 5).equals("event")) {
-            if (command.length() <= 9) {
+            if (command.length() <= 6) {
                 throw new DukeException("The description of an event cannot be empty.");
             }
             return true;
@@ -97,6 +98,14 @@ public class Duke {
         indentedPrintln("Now you have " + tasks.size() + " tasks in the list.");
     }
 
+    private static void deleteTask(int taskNumber) {
+        Task task = tasks.get(taskNumber - 1);
+        tasks.remove(taskNumber - 1);
+        indentedPrintln("Noted. I've removed this task:");
+        indentedPrintln("  " + task);
+        indentedPrintln("Now you have " + tasks.size() + " tasks in the list.");
+    }
+
     public static void main(String[] args) {
         String logo = " ____        _        \n"
                 + "|  _ \\ _   _| | _____ \n"
@@ -117,6 +126,8 @@ public class Duke {
                     unmark(Character.getNumericValue(str.charAt(7)));
                 } else if (isValidTask(str)) {
                     addTask(str);
+                } else if (str.length() >= 6 && str.substring(0, 6).equals(delete)) {
+                    deleteTask(Character.getNumericValue(str.charAt(7)));
                 } else {
                     throw new DukeException("I'm sorry, but I don't know what that means :-(");
                 }
