@@ -74,6 +74,9 @@ public class Duke {
                 index++;
                 System.out.println("You have "+index+" tasks.");
             }
+            else{
+                System.out.println(command + " command not recognized.");
+            }
         }
     }
 }

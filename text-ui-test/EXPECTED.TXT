@@ -5,3 +5,13 @@ Hello from
 | |_| | |_| |   <  __/
 |____/ \__,_|_|\_\___|
 
+How can I help you?
+
+added: borrow book
+You have 1 tasks.
+Here are your tasks:
+1.[T][ ] borrow book
+added: return book /by Sunday
+You have 2 tasks.
+added: project meeting /from Mon 2pm /to 4pm
+You have 3 tasks.
