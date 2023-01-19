@@ -33,8 +33,8 @@ public class Duke {
 
         boolean promptAgain = true;
         while (promptAgain) {
+            System.out.println("Enter your prompt below:");
             String command = sc.nextLine();
-            printLine();
             promptAgain = echoOrQuit(command);
             printLine();
         }
