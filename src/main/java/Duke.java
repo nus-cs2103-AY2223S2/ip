@@ -8,10 +8,10 @@ public class Duke {
                 + "| | | | | | | |/ / _ \\\n"
                 + "| |_| | |_| |   <  __/\n"
                 + "|____/ \\__,_|_|\\_\\___|\n"
-                + "\n"
-                + "Hello! I'm Duke\n"
+                + "\n";
+        String greetings = "Hello! I'm Duke\n"
                 + "What can I do for you?\n";
 
-        System.out.println(dividor + logo + dividor);
+        System.out.println(div_open + logo + greetings + div_close);
     }
 }
