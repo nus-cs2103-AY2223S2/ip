@@ -27,7 +27,7 @@ public class Task {
      * @return icon.
      */
     public String getStatusIcon() {
-        return (isMarked ? "X" : " ");
+        return (isMarked ? "[X]" : "[ ]");
     }
 
     /** 
@@ -37,8 +37,6 @@ public class Task {
      */
     @Override
     public String toString() {
-        return this.task.toString();
+        return this.getStatusIcon() + " " + this.task.toString();
     }
-
-
 }

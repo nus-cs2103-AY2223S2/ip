@@ -42,15 +42,17 @@ public class Duke {
     private static void addTask(Task task) {
         tasks[numOfTasks] = task;
         numOfTasks++;
-        output("added: " + task + "\n");
+        output("Got it. I've added this task:\n" 
+                + "  " + task + "\n"
+                + "Now you have " + numOfTasks + (numOfTasks == 1 ? " task " : " tasks ") + "in the list.\n");
     }
 
     // Outputs all the tasks stored in task list.
     private static void listTasks() {
-        String listOfTasks = "";
+        String listOfTasks = "Here are the tasks in your list:\n";
         for(int idx = 0; idx < numOfTasks; idx++) {
             Task task = tasks[idx];
-            listOfTasks = listOfTasks + (idx + 1) + ". [" + task.getStatusIcon() + "] " + task + "\n";
+            listOfTasks = listOfTasks + (idx + 1) + "." + task + "\n";
         }
         output(listOfTasks);
     }
@@ -62,7 +64,7 @@ public class Duke {
      */
     private static void markTask(Task task) {
         task.mark();
-        output("Nice! I've marked this task as done:\n  [X] " + task + "\n");
+        output("Nice! I've marked this task as done:\n  " + task + "\n");
     }
 
     /** 
@@ -72,22 +74,18 @@ public class Duke {
      */
     private static void unmarkTask(Task task) {
         task.unmark();
-        output("OK, I've marked this task as not done yet:\n  [ ] " + task + "\n");
+        output("OK, I've marked this task as not done yet:\n   " + task + "\n");
     }
 
 
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
-        String[] words = new String[2];
         welcomeMsg();
 
         while(true) {
             String input = sc.nextLine();
-
-            if(input.contains("mark")) {
-                words = input.split(" ");
-                input = words[0];
-            }
+            String[] words = input.split(" ", 2);
+            input = words[0];
             
             switch(input) {
                 case "list":
@@ -98,6 +96,18 @@ public class Duke {
                     break;
                 case "unmark":
                     unmarkTask(tasks[Integer.parseInt(words[1]) - 1]);
+                    break;
+                case "todo":
+                    String[] todoDescription = words[1].split("/");
+                    addTask(new Todo(todoDescription[0]));
+                    break;
+                case "deadline":
+                    String[] deadlineDescription = words[1].split("/by");
+                    addTask(new Deadline(deadlineDescription[0], deadlineDescription[1]));
+                    break;
+                case "event":
+                    String[] eventDescription = words[1].split("/from|/to");
+                    addTask(new Event(eventDescription[0], eventDescription[1], eventDescription[2]));
                     break;
                 case "bye":
                     exitMsg();
