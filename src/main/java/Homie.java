@@ -18,50 +18,91 @@ public class Homie {
         }
     }
 
-    public static void modifyTask(String[] request) {
-        String operation = request[0];
-        int idx = Integer.parseInt(request[1]);
+    public static void modifyTask(String[] command) {
+        String operation = command[0];
+        int idx = Integer.parseInt(command[1]);
         Task t = taskList.get(idx - 1);
 
         if (operation.equals("mark")) {
             t.markAsDone();
-            Homie.print("   > Task masked as done: " + t.toString());
+            Homie.print("   > Task masked as done: " + t);
         } else {
             t.markAsUndone();
-            Homie.print("   > Task masked as undone: " + t.toString());
+            Homie.print("   > Task masked as undone: " + t);
         }
     }
+
+    public static void addTask(String[] command) {
+        String taskType = command[0];
+        String description = command[1];
+
+        switch (taskType) {
+            case "todo":
+                Task todo = new ToDo(description);
+                taskList.add(todo);
+                Homie.print("   > Got chu homie, task added: " + todo);
+                break;
+
+            case "deadline":
+                String[] deadlineDescription = description.split("/by", 2);
+
+                Task deadline = new Deadline(deadlineDescription[0], deadlineDescription[1]);
+                taskList.add(deadline);
+                Homie.print("   > Got chu homie, task added: " + deadline);
+                break;
+
+            case "event":
+                String[] eventDescription = description.split("/from", 2);
+
+                // Parse the string to get to and from dates of the event
+                String[] fromAndTo = eventDescription[1].split("/to", 2);
+                String from = fromAndTo[0];
+                String to = fromAndTo[1];
+
+                Task event = new Event(eventDescription[0], from, to);
+                taskList.add(event);
+                Homie.print("   > Got chu homie, task added: " + event);
+                break;
+        }
+
+        Homie.print("   > Chu have " + taskList.size() + " tasks in the list.");
+    }
+
 
     public static void shutdown() {
         Homie.print("   > Aight imma head out");
     }
 
     public static void interact() {
-        String input = "";
+        String input;
         Scanner sc = new Scanner(System.in);
 
         while (true) {
             input = sc.nextLine();
 
+            // If input is bye, terminate
             if (input.equals("bye")) {
                 Homie.shutdown();
                 break;
             }
 
+            // If input is list, list out the content in task list
             if (input.equals("list")) {
                 Homie.listTasks();
                 continue;
             }
 
-            String[] split = input.split(" ", 2);
-            if (split[0].equals("mark") || split[0].equals("unmark")) {
-                Homie.modifyTask(split);
+            // Split strings into 2, first part is the instruction, 2nd part is the description
+            String[] command = input.split(" ", 2);
+
+            // If command is to mark or unmark task, do accordingly
+            if (command[0].equals("mark") || command[0].equals("unmark")) {
+                Homie.modifyTask(command);
                 continue;
             }
 
-            // If string is a task, add to task list
-            Homie.print("   > added: " + input);
-            Homie.taskList.add(new Task(input));
+            // Else input is a task, add to task list
+            Homie.addTask(command);
         }
     }
 
