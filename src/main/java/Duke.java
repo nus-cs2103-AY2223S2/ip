@@ -19,10 +19,10 @@ public class Duke {
         pw.println(sb.toString());  // Welcome Message bye Duke
         pw.flush();
         sb.setLength(0);
-
+        ArrayList<String> storage = new ArrayList<String>();
         while (true) {  // Echoing
             text = br.readLine();
-            if (text.equalsIgnoreCase("bye")) { // Regardless of Uppercase & Lowercase "bye"
+            if (text.equalsIgnoreCase("bye")) { // Termination of program
                 sb.append("    ____________________________________________________________\n")
                                 .append("    Bye. Hope to see you again soon!\n")
                                         .append("    ____________________________________________________________\n");
@@ -31,8 +31,20 @@ public class Duke {
                 sb.setLength(0);
                 break;
             }
+            if (text.equalsIgnoreCase("list")) {    // Displays the texts that are stored
+                sb.append("    ____________________________________________________________\n");
+                for (int i = 0; i < storage.size(); i++) {
+                    sb.append("    ").append(i + 1).append(". ").append(storage.get(i)).append("\n");
+                }
+                sb.append("    ____________________________________________________________\n");
+                pw.println(sb.toString());
+                pw.flush();
+                sb.setLength(0);
+                continue;
+            }
+            storage.add(text);
             sb.append("    ____________________________________________________________\n")
-                            .append("    ").append(text).append("\n")
+                            .append("    added: ").append(text).append("\n")
                                     .append("    ____________________________________________________________\n");
             pw.println(sb.toString());
             pw.flush();
