@@ -12,8 +12,10 @@ public class Duke {
 
         printWelcomeMessage();
 
+
         Scanner in = new Scanner(System.in);
-        Task[] tasks = new Task[MAX_TASK];
+        Task[] taskList = new Task[MAX_TASK];
+        int taskCounter = 0;
 
         // use while loop to deal with user input through scanner
         untilBye:
@@ -23,19 +25,20 @@ public class Duke {
             switch (splitMessage[0]) {
                 case "bye":
                     printByeMessage();
-                    break;
+                    break untilBye;
                 case "list":
-                    Task.printTaskList(tasks);
+                    Task.printTaskList(taskList);
                     break;
                 default:
-                    printSplitMessage(msgDescription);
+                    printMessage(msgDescription);
+                    taskList[taskCounter] = new Task(msgDescription);
+                    taskCounter++;
                     break ;
             }
         }
 
     }
 
-    //
     public static void printByeMessage() {
         Task.printHorizontalLine();
         System.out.println("     Bye. Hope to see you again soon!");
@@ -49,25 +52,9 @@ public class Duke {
         Task.printHorizontalLine();
     }
 
-    public static void printTaskMessage(String description) {
+    public static void printMessage(String msgDescription) {
         Task.printHorizontalLine();
-        System.out.println("     Hello! I'm Duke");
-        Task.printHorizontalLine();
-    }
-
-    public static void printSplitMessage(String splitMessage) {
-        Task.printHorizontalLine();
-////        String combineMessage = "";
-////        //
-////        while (true) {
-////
-////        }
-////        //
-//        String[] combineMessage =
-        System.out.println("     added: " + splitMessage);
-//        for (String a : combineMessage) {
-//
-//        }
+        System.out.println("     added: " + msgDescription);
         Task.printHorizontalLine();
     }
 }
