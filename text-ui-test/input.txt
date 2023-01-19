@@ -1,0 +1,16 @@
+wrong command
+todo Borrow book
+deadline return book /by Sunday
+
+event project meeting /from Mon 2pm /to 4pm
+event /from /to
+event Tennis /from Friday
+event /from 28 Jan 2023 /to 30 Jan 2023
+event Tennis /to Friday /from Monday
+list
+mark 1
+mark 2
+mark 5
+list
+unmark 2
+list
