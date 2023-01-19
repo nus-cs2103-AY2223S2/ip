@@ -1,4 +1,6 @@
 package eventloop;
+import utils.TokenUtilities;
+
 import java.util.*;
 
 /**
@@ -117,7 +119,9 @@ public class NestableExecutableObject implements Executable {
         if (!identifiedExecutables.isEmpty()) {
             final Executable executable = identifiedExecutables.get(tokens[0]);
             if (executable != null) {
-                status = executable.execute(tokens);
+                final String[] newTokens =
+                        TokenUtilities.instance.removeFirst(tokens);
+                status = executable.execute(newTokens);
                 if (status != ExitStatus.continueExecute) {
                     return status;
                 }

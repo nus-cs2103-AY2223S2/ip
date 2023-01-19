@@ -54,10 +54,9 @@ public class TaskManager implements ExecutableRegisterable {
 
             @Override
             public ExitStatus execute(String[] tokens) {
-                String[] newTokens = TokenUtilities.instance.removeFirst(tokens);
                 final Task task;
                 try {
-                    task = taskSupplier.apply(newTokens);
+                    task = taskSupplier.apply(tokens);
                 } catch (InvalidArgumentException exception) {
                     System.out.println(exception.getMessage());
                     return ExitStatus.finishCurrentIteration;
@@ -123,7 +122,7 @@ public class TaskManager implements ExecutableRegisterable {
         return new IdentifiableExecutable() {
             @Override
             public ExitStatus execute(String[] tokens) {
-                final String indexStr = tokens[1];
+                final String indexStr = tokens[0];
                 final int index;
                 try {
                     index = getIndex(indexStr);
@@ -149,7 +148,7 @@ public class TaskManager implements ExecutableRegisterable {
         return new IdentifiableExecutable() {
             @Override
             public ExitStatus execute(String[] tokens) {
-                final String indexStr = tokens[1];
+                final String indexStr = tokens[0];
                 final int index;
                 try {
                     index = getIndex(indexStr);
