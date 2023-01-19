@@ -30,16 +30,15 @@ public class Tasks {
         if (this.l.size() > num && num >= 0) {
             this.l.get(num).markTaskDone();
         } else {
-            System.out.println("Hey HEY HEY, you going too far >:[");
+            System.out.println("Hey HEY HEY, that's not within range >:[");
         }
-
     }
 
     public void markTaskUndone(int num) {
-        if (this.l.size() > num && num >= 0) {
+        if (this.l.size() > num && num >= 0 ) {
             this.l.get(num).markTaskUndone();
         } else {
-            System.out.println("Hey HEY HEY, you going too far >:[");
+            System.out.println("Hey HEY HEY, that's not within range >:[");
         }
     }
 }

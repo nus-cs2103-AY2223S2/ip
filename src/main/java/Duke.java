@@ -37,12 +37,29 @@ public class Duke {
                 tasks.addToList(new Event(details[0], time[0], time[1]));
 
             } else if (task.split(" ")[0].equalsIgnoreCase("mark")) {
-                int taskNum = Integer.parseInt(task.split(" ")[1]) - 1;
-                tasks.markTaskDone(taskNum);
+                try {
+                    int taskNum = Integer.parseInt(task.split(" ")[1]) - 1;
+                    tasks.markTaskDone(taskNum);
+                } catch (Exception e) {
+                    System.out.println("Come on now, try again. I asked for an number.");
+                }
+
             }
             else if (task.split(" ")[0].equalsIgnoreCase("unmark")) {
-                int taskNum = Integer.parseInt(task.split(" ")[1]) - 1;
-                tasks.markTaskUndone(taskNum);
+                try {
+                    int taskNum = Integer.parseInt(task.split(" ")[1]) - 1;
+                    tasks.markTaskUndone(taskNum);
+                } catch (Exception e) {
+                    System.out.println("Come on now, try again. I asked for an number.");
+                }
+            }
+
+            else if (task.isEmpty()) {
+                    System.out.println("Don't appreciate the silence :(");
+            }
+
+            else {
+                System.out.println("Bzzt... My bad, didn't catch what you said, did you mess up your spelling? 0_o");
             }
 
             divider();
