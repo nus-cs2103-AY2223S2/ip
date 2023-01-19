@@ -22,8 +22,8 @@ public class Page {
         if (input.equals("bye")) {
             bye();
             return;
-        } else if (input.equals("list")) {
-            list();
+        } else if (input.equals("log")) {
+            log();
         } else if (input.equals("help")) {
             help();
         }
@@ -57,7 +57,7 @@ public class Page {
         System.out.println("Added to Quest Log: " + input);
     }
 
-    private void list() {
+    private void log() {
         System.out.println("Quest Log: ");
         for (int i = 0; i < quests.size(); i++) {
             Quest q = quests.get(i);
