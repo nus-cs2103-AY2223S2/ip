@@ -30,8 +30,8 @@ public class Duke {
                     task.unmark();
                     System.out.println("OK, I've marked this task as not done yet:");
                     System.out.println(task);
-                } else if (input.startsWith("todo ")) {
-                    if (input.length() < 4) {
+                } else if (input.startsWith("todo")) {
+                    if (input.length() < 5) {
                         throw new DukeException("☹ OOPS!!! The description of a todo cannot be empty.");
                     }
                     String taskName = input.substring(5);
@@ -39,7 +39,7 @@ public class Duke {
                     tasks.add(todo);
                     System.out.println("Got it. I've added this task: \n" + todo);
                     System.out.println("Now you have " + tasks.size() + " tasks in the list.");
-                } else if (input.startsWith("deadline ")) {
+                } else if (input.startsWith("deadline")) {
                     int dash_index = input.indexOf("/");
                     String taskName = input.substring(9, dash_index);
                     String by = input.substring(dash_index + 4);
@@ -47,7 +47,7 @@ public class Duke {
                     tasks.add(deadline);
                     System.out.println("Got it. I've added this task: \n" + deadline);
                     System.out.println("Now you have " + tasks.size() + " tasks in the list.");
-                } else if (input.startsWith("event ")) {
+                } else if (input.startsWith("event")) {
                     int first_dash_index = input.indexOf("/");
                     int second_dash_index = input.lastIndexOf("/");
                     String taskName = input.substring(6, first_dash_index);
