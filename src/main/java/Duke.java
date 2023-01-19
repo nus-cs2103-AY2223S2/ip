@@ -1,20 +1,33 @@
+import java.util.ArrayList;
 import java.util.Objects;
 import java.util.Scanner;
 
 public class Duke {
 
+    private static ArrayList<String> todoList = new ArrayList<>();
     private static Scanner sc = new Scanner(System.in);
 
-    public static void printLine() {
+    private static void printLine() {
         System.out.println("----------------------------------------------------");
     }
 
-    public static boolean echoOrQuit(String command) {
+    private static void addToList(String task) {
+        todoList.add(task);
+        String toPrint = String.format("added: %s", task);
+        System.out.println(toPrint);
+    }
+
+    private static boolean commandHandler(String command) {
+//      TODO: Maybe remove this check here, and shift it to main loop
         if (Objects.equals(command, "bye")) {
             System.out.println("Sad...Alright bye!");
             return false;
         }
-        System.out.println(command);
+        if (Objects.equals(command, "list")) {
+            // TODO: Print list
+        } else {
+            addToList(command);
+        }
         return true;
     }
 
@@ -35,7 +48,7 @@ public class Duke {
         while (promptAgain) {
             System.out.println("Enter your prompt below:");
             String command = sc.nextLine();
-            promptAgain = echoOrQuit(command);
+            promptAgain = commandHandler(command);
             printLine();
         }
     }
