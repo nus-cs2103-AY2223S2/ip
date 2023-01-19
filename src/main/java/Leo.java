@@ -28,10 +28,20 @@ public class Leo {
 
     private void addTask(String taskName, char type) throws LeoException{
         if (taskName.split(" ").length <= 1) {
-            throw new IllegalArgumentException("Task description cannot be empty but...can you do it on a rainy night in Stoke?\n");
+            throw new EmptyTaskException();
         } else {
             taskList.add(Task.createTask(taskName, type));
             System.out.printf("added: %s\n", taskList.get(taskList.size() - 1));
+            System.out.printf("You have %d tasks in your list, vamos, get moving!\n", taskList.size());
+        }
+    }
+
+    private void deleteTask(int taskId) throws LeoException{
+        if (taskList.isEmpty()) {
+            throw new EmptyDeletionException();
+        } else {
+            String taskDesc = taskList.remove(taskId - 1).toString();
+            System.out.printf("Alright! I've removed this from your list: %s\n", taskDesc);
             System.out.printf("You have %d tasks in your list, vamos, get moving!\n", taskList.size());
         }
     }
@@ -68,7 +78,16 @@ public class Leo {
                 }
                 System.out.printf("  %s\n", taskList.get(cmdIdx));
             }
-        } else {
+        } else if (cmd.contains("delete")) {
+            String[] cmdArr = cmd.split(" ");
+            if (cmdArr.length <= 1) {
+                throw new EmptyCommandException();
+            }
+            int cmdIdx = Integer.parseInt(cmdArr[1]);
+            deleteTask(cmdIdx);
+        }
+        
+        else {
             char cmdlet = cmd.toLowerCase().charAt(0);
             switch (cmdlet) {
                 case 't':
@@ -81,7 +100,7 @@ public class Leo {
                     addTask(cmd, 'e');
                     break;
                 default:
-                    throw new EmptyTaskException();
+                    throw new InvalidCommandException();
             }
         }
         for (int i = 0; i < 25; i++) {
@@ -183,8 +202,20 @@ class LeoException extends Exception {
     }
 }
 
+class EmptyCommandException extends LeoException {
+    EmptyCommandException() {
+        super("Command description cannot be empty but...can you do it on a rainy night in Stoke?\n");
+    }
+}
+
 class EmptyTaskException extends LeoException {
     EmptyTaskException() {
+        super("Task description cannot be empty but...can you do it on a rainy night in Stoke?\n");
+    }
+}
+
+class InvalidCommandException extends LeoException {
+    InvalidCommandException() {
         super("I'm sorry, I don't know what you want. ¿Que miras bobo?\n");
     }
 }
@@ -198,5 +229,11 @@ class MissingDeadlineException extends LeoException {
 class MissingTimelineException extends LeoException {
     MissingTimelineException() {
         super("Not this again, indicate a from and to. I'm as happy as I can be—but I have been happier.\n");
+    }
+}
+
+class EmptyDeletionException extends LeoException {
+    EmptyDeletionException() {
+        super("Bruh, why are you trying to delete from an empty task list...\n");
     }
 }
