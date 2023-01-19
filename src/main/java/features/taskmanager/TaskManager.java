@@ -1,7 +1,7 @@
 package features.taskmanager;
 import exceptions.InvalidArgumentException;
 import eventloop.*;
-import fp.ThrowingFunction;
+import utils.fp.ThrowingFunction;
 import utils.TokenUtilities;
 
 import java.util.ArrayList;
