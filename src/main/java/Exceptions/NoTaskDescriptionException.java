@@ -1,4 +1,4 @@
-package Exceptions;
+package exceptions;
 
 public class NoTaskDescriptionException extends Exception {
     public NoTaskDescriptionException(String string) {

@@ -1,6 +1,12 @@
 todo something
+todo
+list
 event some event /today 3pm /friday 5pm
+blah
 deadline homework /tomorrow 23 59
 mark 2
 unmark 3
+list
+delete 3
+list
 bye

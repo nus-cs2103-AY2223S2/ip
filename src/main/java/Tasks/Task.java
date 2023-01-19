@@ -1,7 +1,7 @@
-package Tasks;
-import java.util.ArrayList;
+package tasks;
 
-import Exceptions.*;
+import java.util.ArrayList;
+import exceptions.*;
 
 public class Task {
     private static ArrayList<Task> arr = new ArrayList<>();
@@ -43,13 +43,13 @@ public class Task {
             default:
                 throw new UnknownTaskException(command);
         }
-        System.out.println("The following task has been added to your list: \n" + arr.get(curr) 
-                            + "\nCurrently, your list has " + ++curr + (curr== 1 ? " task" : " tasks."));
+        System.out.println("The following task has been added to your list: \n    " + arr.get(curr) 
+                            + "\n \nCurrently, your list has " + ++curr + (curr== 1 ? " task" : " tasks."));
     }
 
     public static void deleteTask(int task) {
-        System.out.println("The following task has been removed: \n" + arr.get(task) 
-                            + "\nCurrently, you have " + --curr + (curr==1 ? " task" : " tasks") + " left in your list.");
+        System.out.println("The following task has been removed: \n    " + arr.get(task) 
+                            + "\n \nCurrently, you have " + --curr + (curr==1 ? " task" : " tasks") + " left in your list.");
         arr.remove(task);
     }
 

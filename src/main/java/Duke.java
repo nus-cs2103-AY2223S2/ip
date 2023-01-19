@@ -1,6 +1,6 @@
 import java.io.*;
 
-import Tasks.*;
+import tasks.*;
 
 public class Duke {
     
@@ -26,22 +26,42 @@ public class Duke {
         System.out.println("\n----------------------------------\n\n Bye! Hope to see you again!\n\n----------------------------------");
     }
 
+    enum Job {
+        LIST,
+        MARK,
+        UNMARK,
+        TODO,
+        DEADLINE,
+        EVENT,
+        DELETE,
+        INVALID
+    }
+
     private static void handleInput(String userInput) {
         System.out.println("\n----------------------------------\n");
         
         String[] commands = userInput.split(" ");
 
-        switch(commands[0].toUpperCase()) {
-            case "LIST":
+        String j = commands[0].toUpperCase();
+        Job job;
+
+        try {
+            job = Job.valueOf(j);
+        } catch (IllegalArgumentException e) {
+            job = Job.INVALID;
+        }
+
+        switch(job) {
+            case LIST:
                 Task.listTasks();
                 break;
-            case "MARK":
+            case MARK:
                 Task.markTasks(Integer.parseInt(commands[1])-1);
                 break;
-            case "UNMARK":
+            case UNMARK:
                 Task.unmarkTasks(Integer.parseInt(commands[1])-1);
                 break;
-            case "DELETE":
+            case DELETE:
                 Task.deleteTask(Integer.parseInt(commands[1])-1);
                 break;
             default:

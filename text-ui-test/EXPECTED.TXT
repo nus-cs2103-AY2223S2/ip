@@ -13,8 +13,25 @@
 ----------------------------------
 
 The following task has been added to your list: 
-[T] [ ] something
-Currently, your list has 1 tasks.
+    [T] [ ] something 
+ 
+Currently, your list has 1 task
+
+----------------------------------
+
+
+----------------------------------
+
+OOPS!!! The description of a ToDo cannot be empty!
+
+----------------------------------
+
+
+----------------------------------
+
+Here are the items in your list: 
+
+    1) [T] [ ] something 
 
 ----------------------------------
 
@@ -22,7 +39,8 @@ Currently, your list has 1 tasks.
 ----------------------------------
 
 The following task has been added to your list: 
-[E] [ ] some event (from: today 3pm ) (to: friday 5pm)
+    [E] [ ] some event ( from: today 3pm ) ( to: friday 5pm )
+ 
 Currently, your list has 2 tasks.
 
 ----------------------------------
@@ -30,8 +48,16 @@ Currently, your list has 2 tasks.
 
 ----------------------------------
 
+OH NO!! I DONT KNOW WHAT BLAH MEANS!!
+
+----------------------------------
+
+
+----------------------------------
+
 The following task has been added to your list: 
-[D] [ ] homework (by: tomorrow 23 59)
+    [D] [ ] homework ( by: tomorrow 23 59 )
+ 
 Currently, your list has 3 tasks.
 
 ----------------------------------
@@ -40,7 +66,7 @@ Currently, your list has 3 tasks.
 ----------------------------------
 
 This task is marked as done: 
-    [E] [X] some event (from: today 3pm ) (to: friday 5pm)
+    [E] [X] some event ( from: today 3pm ) ( to: friday 5pm )
 
 ----------------------------------
 
@@ -48,7 +74,38 @@ This task is marked as done:
 ----------------------------------
 
 Okay. This task is marked as not done yet: 
-    [D] [ ] homework (by: tomorrow 23 59)
+    [D] [ ] homework ( by: tomorrow 23 59 )
+
+----------------------------------
+
+
+----------------------------------
+
+Here are the items in your list: 
+
+    1) [T] [ ] something 
+    2) [E] [X] some event ( from: today 3pm ) ( to: friday 5pm )
+    3) [D] [ ] homework ( by: tomorrow 23 59 )
+
+----------------------------------
+
+
+----------------------------------
+
+The following task has been removed: 
+    [D] [ ] homework ( by: tomorrow 23 59 )
+ 
+Currently, you have 2 tasks left in your list.
+
+----------------------------------
+
+
+----------------------------------
+
+Here are the items in your list: 
+
+    1) [T] [ ] something 
+    2) [E] [X] some event ( from: today 3pm ) ( to: friday 5pm )
 
 ----------------------------------
 

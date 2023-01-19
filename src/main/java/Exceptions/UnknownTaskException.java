@@ -1,4 +1,4 @@
-package Exceptions;
+package exceptions;
 
 public class UnknownTaskException extends Exception {
     public UnknownTaskException(String s) {

@@ -1,6 +1,6 @@
-package Tasks;
+package tasks;
 
-import Exceptions.NoTaskDescriptionException;
+import exceptions.NoTaskDescriptionException;
 
 public class Deadline extends Task {
     private String endDate;
