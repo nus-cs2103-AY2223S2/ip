@@ -1,10 +1,11 @@
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Scanner;
 public class Duke {
     private static String DIV_OPEN = "____________________________________________________________\n";
     private static String DIV_CLOSE = "____________________________________________________________\n";
 
-    public static Task[] list = new Task[101];
+    public static ArrayList<Task> list = new ArrayList<Task>();
     public static int listNum = 1;
     public static boolean running = true;
 
@@ -175,7 +176,7 @@ public class Duke {
         String greetings = "Hello! I'm Duke\n"
                 + "What can I do for you?\n";
 
-
+        list.add(new Task("DUMMY"));
 
         System.out.println(DIV_OPEN + logo + greetings + DIV_CLOSE); // Initialization complete
 
