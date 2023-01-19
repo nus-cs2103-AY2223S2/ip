@@ -31,8 +31,8 @@ public class Duke {
           System.out.println(divider + "Bye. Hope to see you again soon!\n" + divider);
           return;
 
-        //Other single word commands go here.
-        
+          //Other single word commands go here.
+
         default:                                      //Instructions with arguments
           StringTokenizer tokens = new StringTokenizer(instr, " ");
           String action = tokens.nextToken(); //Splitting the action and args.
@@ -45,6 +45,18 @@ public class Duke {
           switch(action) {                            //For instructions with argument(s).
             case "add":
               tasks.add(new Task(keyword));
+              break;
+
+            case "mark":
+              Task t1 = tasks.get(Integer.parseInt(keyword.strip()) - 1);
+              t1.mark();
+              System.out.println(divider + "Nice! I've marked this task as done:\n" + t1 + "\n" + divider);
+              break;
+
+            case "unmark":
+              Task t2 = tasks.get(Integer.parseInt(keyword.strip()) - 1);
+              t2.unmark();
+              System.out.println(divider + "OK! I've marked this task as not done yet:\n" + t2 + "\n" + divider);
               break;
 
           }
