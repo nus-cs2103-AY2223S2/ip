@@ -18,7 +18,12 @@ public class Homie {
         }
     }
 
-    public static void modifyTask(String[] command) {
+    public static void modifyTask(String[] command) throws NoTaskException {
+
+        if (command.length < 2) {
+            throw new NoTaskException("");
+        }
+
         String operation = command[0];
         int idx = Integer.parseInt(command[1]);
         Task t = taskList.get(idx - 1);
@@ -78,6 +83,19 @@ public class Homie {
         Homie.print("   > Aight imma head out");
     }
 
+    public static void deleteTask(String[] command) throws NoTaskException {
+
+        if (command.length < 2) {
+            throw new NoTaskException("");
+        }
+
+        int idx = Integer.parseInt(command[1]);
+        Task t = taskList.get(idx - 1);
+        taskList.remove(t);
+        Homie.print("   > Task deleted: " + t);
+        Homie.print("   > Chu have " + taskList.size() + " tasks remained.");
+    }
+
     public static void interact() {
         String input;
         Scanner sc = new Scanner(System.in);
@@ -113,6 +131,10 @@ public class Homie {
                     continue;
                 }
 
+                if (command[0].equals("delete")) {
+                    Homie.deleteTask(command);
+                    continue;
+                }
                 // If reached here, bot do not understand
                 throw new IndecipherableTextException("");
 
