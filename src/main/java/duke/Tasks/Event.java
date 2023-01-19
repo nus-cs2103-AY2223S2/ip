@@ -4,7 +4,7 @@ public class Event extends Task{
     protected String from;
 
     protected String to;
-    //, String to
+
     public Event(String description, String from, String to) {
         super(description);
         this.from = from;
@@ -21,6 +21,5 @@ public class Event extends Task{
     public String toString() {
         return "[E]" + "[" + getStatusIcon() + "] " + getDescription() +
                 " (" + "from: " + this.from + " " + "to: " + this.to + ")";
-        //+ "to:" + this.to
     }
 }

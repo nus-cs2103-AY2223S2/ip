@@ -35,38 +35,70 @@ public class Duke {
                 if (command.equals("list")) {
                     list();
                 } else if (words[0].equals("mark")) {
-                    done(words[1]);
+                    try {
+                        done(words[1]);
+                    } catch (Exception e) {
+                        System.out.println(Indentation + Horizontal);
+                        System.out.println("  ☹ OOPS!!! The index number cannot be empty.");
+                        System.out.println(Indentation + Horizontal);
+                    }
                 } else if (words[0].equals("unmark")) {
-                    undone(words[1]);
+                    try{
+                        undone(words[1]);
+                    } catch (Exception e) {
+                        System.out.println(Indentation + Horizontal);
+                        System.out.println("  ☹ OOPS!!! The The index number cannot be empty.");
+                        System.out.println(Indentation + Horizontal);
+                    }
+
                 } else if (words[0].equals("todo")) {
-                    info = command.substring(command.indexOf(" ") + 1);
-                    listname[count] = new Todo(info);
-                    count++;
+                    try {
+                        if (words[1].equals(null)) {
+                            System.out.println(Indentation + Horizontal);
+                            System.out.println("  ☹ OOPS!!! The description of a todo cannot be empty.");
+                            System.out.println(Indentation + Horizontal);
+                        }
+                        info = command.substring(command.indexOf(" ") + 1);
+                        listname[count] = new Todo(info);
+                        count++;
+                    } catch (Exception e) {
+                        System.out.println(Indentation + Horizontal);
+                        System.out.println("  ☹ OOPS!!! The description of a todo cannot be empty.");
+                        System.out.println(Indentation + Horizontal);
+                    }
+
                 } else if (words[0].equals("deadline")) {
-                    info = command.substring(command.indexOf(" ") + 1, command.indexOf(" /by "));
-                    String deadline = command.substring(command.indexOf("/by") + 4);
-                    listname[count] = new Deadline(info, deadline);
-                    count++;
+                    try {
+                        info = command.substring(command.indexOf(" ") + 1, command.indexOf(" /by "));
+                        String deadline = command.substring(command.indexOf("/by") + 4);
+                        listname[count] = new Deadline(info, deadline);
+                        count++;
+
+                    } catch (Exception e) {
+                        System.out.println(Indentation + Horizontal);
+                        System.out.println("  ☹ OOPS!!! The description of a deadline cannot be empty.");
+                        System.out.println(Indentation + Horizontal);
+                    }
+
 
                 } else if (words[0].equals("event")) {
-                    info = command.substring(command.indexOf(" ") + 1, command.indexOf(" /from "));
-                    String fromtime = command.substring(command.indexOf(" /from ") + 6, command.indexOf(" /to "));
-                    String totime = command.substring(command.indexOf(" /to ")  + 4);
-//                    System.out.println(info);
-//                    System.out.println(fromtime);
-//                    System.out.println(totime);
-                    listname[count] = new Event(info, fromtime, totime);
-                    count++;
+                    try {
+                        info = command.substring(command.indexOf(" ") + 1, command.indexOf(" /from "));
+                        String fromtime = command.substring(command.indexOf(" /from ") + 6, command.indexOf(" /to "));
+                        String totime = command.substring(command.indexOf(" /to ")  + 4);
+                        listname[count] = new Event(info, fromtime, totime);
+                        count++;
+                    } catch (Exception e) {
+                        System.out.println(Indentation + Horizontal);
+                        System.out.println("  ☹ OOPS!!! The description of a event cannot be empty.");
+                        System.out.println(Indentation + Horizontal);
+                    }
 
+                } else {
+                    System.out.println(Indentation + Horizontal);
+                    System.out.println(" ☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
+                    System.out.println(Indentation + Horizontal);
                 }
-//                else {
-//                    listname[count] = new Task(command);
-//                    count++;
-//                    state = " ";
-//                    System.out.println(Indentation + Horizontal);
-//                    System.out.println(Indentation + "Added: " + command);
-//                    System.out.println(Indentation + Horizontal);
-//                }
             }
 
         } while (!command.equals("bye"));
