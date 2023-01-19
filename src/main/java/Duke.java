@@ -9,10 +9,10 @@ public class Duke {
     private static String currentInput;
     private static TaskList taskList = new TaskList();
 
-    public static String mark(boolean toMark) {
+    public static String mark(boolean toMark) throws DukeException{
         int index = Integer.parseInt(toMark ? currentInput.substring(5) : currentInput.substring(7)) - 1;
         if (index >= taskList.size() || index < 0) {
-            return "Task index out of bounds, please input a valid index";
+            throw new DukeException("Task index out of bounds, please input a valid index");
         } else {
             Task curTask = taskList.getTask(index);
             curTask.setCompleted(toMark);
@@ -26,7 +26,7 @@ public class Duke {
         }
     }
 
-    public static String addTask() {
+    public static String addTask() throws DukeException {
         StringBuilder response = new StringBuilder();
         response.append("Got it. I've added this task:\n");
         if (currentInput.matches("^todo .*")) {
@@ -36,8 +36,7 @@ public class Duke {
             //Adding a Deadline
             int byPos = currentInput.indexOf(" /by ");
             if (byPos == -1) {
-                reply("Deadline not specified with /by");
-                return "";
+                throw new DukeException("Deadline not specified with /by");
             }
             taskList.add(new Deadline(currentInput.substring(9, byPos), currentInput.substring(byPos + 5)));
         } else {
@@ -45,16 +44,13 @@ public class Duke {
             int fromPos = currentInput.indexOf(" /from ");
             int toPos = currentInput.indexOf(" /to ");
             if (fromPos == -1 || toPos == -1 || toPos > currentInput.length() + 4) {
-                reply("Please include both /from and /to");
-                return "";
+                throw new DukeException("Please include both /from and /to");
             }
             if (fromPos > toPos) {
-                reply("Please add the from date first followed by to date");
-                return "";
+                throw new DukeException("Please add the from date first followed by to date");
             }
             if (fromPos == 5) {
-                reply("Please include a description of the task");
-                return "";
+                throw new DukeException("Please include a description of the task");
             }
             String description = currentInput.substring(6, fromPos);
             String from = currentInput.substring(fromPos + 7, toPos);
@@ -67,10 +63,10 @@ public class Duke {
         return response.toString();
     }
 
-    public static String deleteTask(String command) {
+    public static String deleteTask(String command) throws DukeException {
         int index = Integer.parseInt(command.substring(7)) - 1;
         if (index < 0 || index >= taskList.size()) {
-            return "Error: Please input a valid task index!";
+            throw new DukeException("Error: Please input a valid task index!");
         } else {
             return taskList.removeTask(index);
         }
@@ -81,21 +77,26 @@ public class Duke {
         greet();
         currentInput = sc.nextLine();
         while (!currentInput.equalsIgnoreCase("bye")) {
-            //when there is no input
-            if (currentInput.equals("")) {
-                reply("Please input a command");
-            } else if (currentInput.equalsIgnoreCase("list")) {
-                reply(taskList.toString());
-            } else if (currentInput.matches("mark \\d+") || currentInput.matches("unmark \\d+")) {
-                boolean toMark = currentInput.matches("mark \\d+");
-                reply(mark(toMark));
-            } else if (currentInput.matches("^(todo|deadline|event) .*")) {
-                reply(addTask());
-            } else if (currentInput.matches("^delete \\d+")) {
-                reply(deleteTask(currentInput));
-            } else {
-                reply("Unknown command, please try again");
+            try{
+                //when there is no input
+                if (currentInput.equals("")) {
+                    reply("Please input a command");
+                } else if (currentInput.equalsIgnoreCase("list")) {
+                    reply(taskList.toString());
+                } else if (currentInput.matches("mark \\d+") || currentInput.matches("unmark \\d+")) {
+                    boolean toMark = currentInput.matches("mark \\d+");
+                    reply(mark(toMark));
+                } else if (currentInput.matches("^(todo|deadline|event) .*")) {
+                    reply(addTask());
+                } else if (currentInput.matches("^delete \\d+")) {
+                    reply(deleteTask(currentInput));
+                } else {
+                    reply("Unknown command, please try again");
+                }
+            } catch (DukeException e) {
+                reply(e.toString());
             }
+
             currentInput = sc.nextLine();
         }
         //Signing off

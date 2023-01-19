@@ -5,7 +5,7 @@ public class UI {
         if (s.equals("")) {
             return;
         }
-        String linebreak = "    _________________________________________________________";
+        String linebreak = "    ___________________________________________________________________________________";
         System.out.println(linebreak);
         System.out.println(FormatHelper.indent(4, s));
         System.out.println(linebreak);
