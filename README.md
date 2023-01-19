@@ -1,3 +1,29 @@
+# Willy Bot - How to use?
+
+For the Willy Bot, we can take and save 3 different types of task
+
+Please enter commands into the terminal in the following format.
+
+Task Type Name, Example 
+
+todo -> todo borrow book
+Note: "todo" keyword must be infront.
+
+deadline -> deadline return book /by Sunday
+Note: "deadline" keyword must be infront and the date must come after the first instance of "/"
+
+event -> event project meeting /from Mon 2pm /to 4pm
+Note: "event" keyword must be infront. the from and to must be in said order and come after the first and second instance of "/" in order accordingly.
+
+# Additional commands
+
+mark %d: It will mark the task in the index of the list as done
+unmark %d: It will mark the task in the index of the list as undone
+delete %d: It will delete the task in the said position in the list
+list: to generate the list of Tasks
+bye: to close the program
+
+
 # Duke project template
 
 This is a project template for a greenfield Java project. It's named after the Java mascot _Duke_. Given below are instructions on how to use it.

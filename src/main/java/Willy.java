@@ -1,5 +1,4 @@
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 import java.util.Scanner;
 
@@ -14,7 +13,7 @@ public class Willy {
         List<Task> lst = new ArrayList<Task>();
 
         while (true) {
-
+            // Init scanner
             String command = sc.nextLine();
 
             // For marking
@@ -59,7 +58,6 @@ public class Willy {
                         } else {
                             throw new WillyException("☹ OOPS!!! The description of a todo cannot be empty.");
                         }
-
                     }
                     if (command.contains("deadline")) {
                         Deadline newD = new Deadline(tempAdd[0], tempAdd[1]);
