@@ -25,7 +25,7 @@ public class Event extends Task {
      */
     @Override
     public String toString() {
-        String toPrint = String.format("[E] %s (from: %s to: %s)",
+        String toPrint = String.format("[E]%s (from: %s to: %s)",
                 super.toString(), this.start, this.end);
         return toPrint;
     }

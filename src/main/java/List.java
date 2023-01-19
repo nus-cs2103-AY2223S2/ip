@@ -38,9 +38,9 @@ public class List {
         }
         this.taskList[count] = t;
         this.count++;
-        System.out.println("Got it. I've added this task :");
+        System.out.println("Got it. I've added this task:");
         System.out.println(" " + t);
-        System.out.println("Now you have " + this.count + " task(s) in the list.\n");
+        System.out.println("Now you have " + this.count + " task(s) in your list.\n");
     }
 
     /**

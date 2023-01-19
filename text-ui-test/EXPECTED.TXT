@@ -5,3 +5,39 @@ Hello from
 | |_| | |_| |   <  __/
 |____/ \__,_|_|\_\___|
 
+Hi! I am Duke. How may I help you today?
+Got it. I've added this task:
+ [T][ ] buy food
+Now you have 1 task(s) in your list.
+
+Got it. I've added this task:
+ [D][ ] do hw (by: Monday)
+Now you have 2 task(s) in your list.
+
+Got it. I've added this task:
+ [E][ ] cca (from: Jan 1 to: Jan 5)
+Now you have 3 task(s) in your list.
+
+Here are the tasks in your list:
+1. [T][ ] buy food
+2. [D][ ] do hw (by: Monday)
+3. [E][ ] cca (from: Jan 1 to: Jan 5)
+
+Nice! I've marked this task as done:
+ [T][X] buy food
+
+Here are the tasks in your list:
+1. [T][X] buy food
+2. [D][ ] do hw (by: Monday)
+3. [E][ ] cca (from: Jan 1 to: Jan 5)
+
+OK, I've marked this task as not done:
+ [T][ ] buy food
+
+Here are the tasks in your list:
+1. [T][ ] buy food
+2. [D][ ] do hw (by: Monday)
+3. [E][ ] cca (from: Jan 1 to: Jan 5)
+
+Bye! Hope to see you again soon!
+
