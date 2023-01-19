@@ -11,6 +11,7 @@ public class Duke {
         System.out.println();
         System.out.print("User: ");
     }
+    
     private static void addToList(Task t) {
         list.add(t);
         System.out.print("Duke: ");
