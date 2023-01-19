@@ -70,5 +70,30 @@ DukeException: ☹ OOPS!!! The format of a event: event {activity} /from {dateti
 DukeException: ☹ OOPS!!! I'm sorry, but I don't know what that means :-(
 --------------------------------------------------------------------
 --------------------------------------------------------------------
+Noted. I've removed this task:
+[E][ ] project meeting (from: Aug 6th 2pm to: 4pm)
+ Now you have 6 tasks in the list.
+--------------------------------------------------------------------
+--------------------------------------------------------------------
+1. [T][X] read book
+2. [D][ ] return book (by: June 6th)
+3. [T][X] join sports club
+4. [T][ ] borrow book
+5. [D][ ] return book (by: Sunday)
+6. [E][ ] project meeting (from: Mon 2pm to: 4pm)
+--------------------------------------------------------------------
+--------------------------------------------------------------------
+Noted. I've removed this task:
+[D][ ] return book (by: June 6th)
+ Now you have 5 tasks in the list.
+--------------------------------------------------------------------
+--------------------------------------------------------------------
+1. [T][X] read book
+2. [T][X] join sports club
+3. [T][ ] borrow book
+4. [D][ ] return book (by: Sunday)
+5. [E][ ] project meeting (from: Mon 2pm to: 4pm)
+--------------------------------------------------------------------
+--------------------------------------------------------------------
 Bye. Hope to see you again soon!
 --------------------------------------------------------------------

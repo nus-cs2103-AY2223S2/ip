@@ -13,4 +13,8 @@ todo
 deadline test2
 event test3
 blah
+delete 3
+list
+delete 2
+list
 bye
