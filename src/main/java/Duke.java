@@ -1,4 +1,8 @@
+import java.text.BreakIterator;
 import java.util.Scanner;
+import java.util.ArrayList;
+
+import javax.imageio.plugins.tiff.ExifTIFFTagSet;
 
 public class Duke {
     public static void main(String[] args) {
@@ -15,24 +19,41 @@ public class Duke {
         //print welcome message, ask for user input
 
         System.out.println("  ───── ･ ｡ﾟ☆: *.☽ .* :☆ﾟ. ───── \n Hello! I'm Broccoli the dinosaur \n           <|°▿▿▿▿°|/ \n      What can I do for you? \n   ──── ･ ｡ﾟ☆: *.☽ .* :☆ﾟ. ────" ); 
-        getInput();
-    }
+        //getInput();
+        ArrayList<String> array=new ArrayList<String>();
 
-    private static void getInput() {
-        //create scanner object
-        Scanner sc = new Scanner(System.in);
-        //get user input
-        String userinput = sc.next();
-        if (userinput.equals("bye")) {
-            System.out.println("    ────────────── ⋆⋅☆⋅⋆ ───────────────");
-            System.out.println( "      Bye. Hope to see you again soon!");
-            System.out.println("\n   ‧˚₊꒷꒦︶︶︶︶︶꒷꒦︶︶︶︶︶꒦꒷‧₊˚⊹");
+        int i = 0;
+        while (i<100) {
+            String hello = getInput();
+            if(hello.equals("bye")) {
+                System.out.println("    ──────── ⋅ ∙ ∘ ☽ ༓ ☾ ∘ ⋅ ⋅ ─────────");
+                System.out.println( "      Bye. Hope to see you again soon!");
+                System.out.println("\n   ‧˚₊꒷꒦︶︶︶︶︶꒷꒦︶︶︶︶︶꒦꒷‧₊˚⊹");
+                break;
 
-        } else {
-            System.out.println("    ═══*.·:·.☽✧    ✦    ✧☾.·:·.*═══");
-            System.out.println("     " + userinput);
-            System.out.println("\n    ═══*.·:·.☽✧    ✦    ✧☾.·:·.*═══");
-            getInput();
+            } else if (hello.equals("list")){
+                System.out.println("    ────────────── ⋆⋅☆⋅⋆ ───────────────");
+                for(int j=0; j<array.size(); j++) {
+                    System.out.println( "       "+ (j+1) + ". "+ array.get(j));
+                }
+                System.out.println("    ────────────── ⋆⋅☆⋅⋆ ───────────────");
+            } else {
+                System.out.println("    ═══*.·:·.☽✧    ✦    ✧☾.·:·.*═══");
+                System.out.println("     added:" + hello);
+                System.out.println("\n    ═══*.·:·.☽✧    ✦    ✧☾.·:·.*═══");
+                array.add(hello);
+                i++;
+            }
         }
+
     }
+
+    private static String getInput(){
+        Scanner sc = new Scanner(System.in);
+        String userinput = sc.nextLine();
+        return userinput;
+    }
+
+
+
 }
