@@ -1,4 +1,3 @@
-import java.util.Objects;
 import java.util.Scanner;
 
 public class Duke {
@@ -12,13 +11,21 @@ public class Duke {
 
         greet();
 
-        //echoing till user says bye
+        UserList tasks = new UserList();
         Scanner myScan = new Scanner(System.in);
-        String input = myScan.nextLine();
+        String task = myScan.nextLine();
 
-        while (!(input.equalsIgnoreCase("bye"))) {
-            echo(input);
-            input = myScan.nextLine();
+        while (!(task.equalsIgnoreCase("bye"))) {
+            if (task.equalsIgnoreCase("list")) {
+                divider();
+                tasks.printList();
+                divider();
+            } else {
+                divider();
+                tasks.addToList(task);
+                divider();
+            }
+            task = myScan.nextLine();
         }
 
         exit();
@@ -31,12 +38,6 @@ public class Duke {
 
     public static void exit() {
         System.out.println("YAY Thank GOD! BYEEEEE~");
-    }
-
-    public static void echo(String s) {
-        divider();
-        System.out.println(s);
-        divider();
     }
 
     public static void divider() {
