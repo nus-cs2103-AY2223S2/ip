@@ -46,25 +46,37 @@ public class Duke {
                 String[] parts = ip.split(" ");
                 Task t = new Task(ip);
 
-                if (parts[0].equalsIgnoreCase("todo")) {
-                    t = new Todo(ip.substring(5));
-                } else if (parts[0].equalsIgnoreCase("deadline")) {
-                    int index = ip.indexOf("/by");
-                    if (index != -1) {
-                        t = new Deadline(ip.substring(9, index), ip.substring(index + 4));
+                try {
+                    if (parts[0].equalsIgnoreCase("todo")) {
+                        if (ip.length() == 5) {
+                            throw new DukeException("OOPS!!! The description of a todo cannot be empty.");
+                        }
+                        t = new Todo(ip.substring(5));
+                    } else if (parts[0].equalsIgnoreCase("deadline")) {
+                        int index = ip.indexOf("/by");
+                        if (index != -1) {
+                            t = new Deadline(ip.substring(9, index), ip.substring(index + 4));
+                        } else {
+                            throw new DukeException("OOPS!!! Can't find a /by time for a deadline.");
+                        }
+                    } else if ((parts[0].equalsIgnoreCase("event"))) {
+                        int indexFrom = ip.indexOf("/from");
+                        int indexTo = ip.indexOf("/to");
+                        if (indexFrom != -1 && indexTo != -1) {
+                            t = new Event(ip.substring(6, indexFrom), ip.substring(indexFrom + 6, indexTo - 1), ip.substring(indexTo + 4));
+                        }  else {
+                            throw new DukeException("OOPS!!! Can't find a /from or /to time for an event.");
+                        }
+                    } else {
+                        throw new DukeException("OOPS!!! I'm sorry, but I don't know what that means :-(");
                     }
-                } else if ((parts[0].equalsIgnoreCase("event"))) {
-                    int indexFrom = ip.indexOf("/from");
-                    int indexTo = ip.indexOf("/to");
-                    if (indexFrom != -1 && indexTo != -1) {
-                        t = new Event(ip.substring(6, indexFrom), ip.substring(indexFrom + 6, indexTo - 1), ip.substring(indexTo + 4));
-                    }
+                    arr.add(t);
+                    System.out.println("added: " + t + "\n");
+                    String len = (arr.size() == 1 ? arr.size() + " task" : arr.size() + " tasks");
+                    System.out.println("Now you have " + len + " in the list.");
+                } catch (DukeException ex) {
+                    System.out.println(ex);
                 }
-
-                arr.add(t);
-                System.out.println("added: " + t + "\n");
-                String len = (arr.size() == 1 ? arr.size() + " task" : arr.size() + " tasks");
-                System.out.println("Now you have " + len + " in the list.");
             }
 
         }
