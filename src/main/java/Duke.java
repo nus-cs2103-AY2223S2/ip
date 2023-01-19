@@ -44,7 +44,10 @@ public class Duke {
 
             case "deadline":
                 int byIndex = Arrays.asList(command).indexOf("/by");
-                if (command.length < 4 || byIndex == -1 || byIndex == command.length - 1) {
+                if (command.length < 4 || byIndex == -1) {
+                    throw new DukeException("Too few arguments!");
+                }
+                if (byIndex == command.length - 1) {
                     throw new DukeException("Check the format again!");
                 }
                 addDeadline(command, byIndex);
@@ -53,8 +56,10 @@ public class Duke {
             case "event":
                 int fromIndex = Arrays.asList(command).indexOf("/from");
                 int toIndex = Arrays.asList(command).indexOf("/to");
-                if (command.length < 6 || fromIndex == -1 || toIndex == -1 || fromIndex + 1 >= toIndex
-                            || toIndex == command.length - 1) {
+                if (command.length < 6 || fromIndex == -1 || toIndex == -1) {
+                    throw new DukeException("Too few arguments!");
+                }
+                if (fromIndex + 1 >= toIndex || toIndex == command.length - 1) {
                     throw new DukeException("Check the format again!");
                 }
                 addEvent(command, fromIndex, toIndex);
@@ -189,6 +194,7 @@ public class Duke {
                 parser(msg);
             } catch (DukeException ex) {
                 System.out.println(ex.getMessage());
+                System.out.println(DIV_CLOSE);
             }
         }
 
