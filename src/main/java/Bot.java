@@ -2,16 +2,8 @@ import javax.management.Query;
 import java.util.StringTokenizer;
 
 public class Bot {
-    private static final String BYE_QUERY_TYPE = "bye";
-    private static final String LIST_QUERY_TYPE = "list";
-    private static final String MARK_QUERY_TYPE = "mark";
-    private static final String UNMARK_QUERY_TYPE = "unmark";
-    private static final String DELETE_QUERY_TYPE = "delete";
-    private static final String TODO_QUERY_TYPE = "todo";
-    private static final String DEADLINE_QUERY_TYPE = "deadline";
-    private static final String EVENT_QUERY_TYPE = "event";
     private static final String GOODBYE_RES = "GOOD BYE\n";
-    private static final int HISTORY_CAPACITY = 100;
+    private static final String UNKNOWN_COMMAND_RES = "Your command is not of the known tongue!";
 
     private TaskTracker tt = new TaskTracker();
 
@@ -20,9 +12,9 @@ public class Bot {
         BotResult.BotStatus status = BotResult.BotStatus.Successful;
         String response;
         StringTokenizer query = new StringTokenizer(input);
-        String queryType = query.nextToken();
+        QueryType queryType = QueryTypeUtil.GetQueryTypeFromString(query.nextToken());
 
-        if (queryType.equals(BYE_QUERY_TYPE)) {
+        if (queryType == QueryType.EXIT) {
             status = BotResult.BotStatus.Exit;
         }
 
@@ -37,26 +29,26 @@ public class Bot {
         return new BotResult(status, res);
     }
 
-    private IQueryHandler GetQueryHandler(String queryType) throws UnknownCommandException {
+    private IQueryHandler GetQueryHandler(QueryType queryType) throws UnknownCommandException {
         switch(queryType) {
-            case TODO_QUERY_TYPE:
+            case TODO:
                 return new TodoQueryHandler(tt);
-            case DEADLINE_QUERY_TYPE:
+            case DEADLINE:
                 return new DeadlineQueryHandler(tt);
-            case EVENT_QUERY_TYPE:
+            case EVENT:
                 return new EventQueryHandler(tt);
-            case LIST_QUERY_TYPE:
+            case LIST   :
                 return new ListQueryHandler(tt);
-            case MARK_QUERY_TYPE:
+            case MARK:
                 return new MarkQueryHandler(tt);
-            case UNMARK_QUERY_TYPE:
+            case UNMARK:
                 return new UnmarkQueryHandler(tt);
-            case DELETE_QUERY_TYPE:
+            case DELETE:
                 return new DeleteQueryHandler(tt);
-            case BYE_QUERY_TYPE:
+            case EXIT:
                 return new SimpleResponseQueryHandler(GOODBYE_RES);
             default:
-                throw new UnknownCommandException("Your command is not of the known tongue!");
+                throw new UnknownCommandException(UNKNOWN_COMMAND_RES);
         }
     }
 }
