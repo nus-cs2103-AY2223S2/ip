@@ -18,10 +18,11 @@ public class Task {
         this.isDone = false;
     }
 
-
-    public String getTask(){
+    @Override
+    public String toString() {
         return "[" + this.getStatusIcon() + "]" + " " + this.description;
     }
+ 
     //public static void main(String[] args) {
     //    Task t = new Task("read book");
     //    t.markAsDone();
