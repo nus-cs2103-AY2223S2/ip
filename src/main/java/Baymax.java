@@ -1,3 +1,4 @@
+import java.nio.channels.ScatteringByteChannel;
 import java.util.*;
 public class Baymax {
     public static void main(String[] args) {
@@ -6,7 +7,7 @@ public class Baymax {
         System.out.println("See you soon!");
     }
 
-    public static void makeDecision() {
+    public static void makeDecision(){
         String exit = "bye";
         String outputL = "list";
         String mark = "mark";
@@ -35,19 +36,19 @@ public class Baymax {
                 Task t = myList.get(Integer.valueOf(currentInput.split("\\s+")[1]) - 1);
                 t.markAsNotDone();
             } else {
-                if (to.equals(currentInput.split("\\s+", 2)[0])) {
-                    Task todo = new Todo(currentInput.split(" ", 2)[1]);
-                    myList.add(todo);
-                    System.out.println("Done. I've added the task: " + todo.toString());
-                } else if (dead.equals(currentInput.split("\\s+", 2)[0])) {
-                    Task deadline = new Deadline(currentInput.split(" ", 2)[1].split(" /by ")[0], currentInput.split(" ", 2)[1].split(" /by ")[1]);
-                    myList.add(deadline);
-                    System.out.println("Done. I've added the deadline: " + deadline.toString());
-                } else if (event.equals(currentInput.split("\\s+", 2)[0])) {
-                    Task even = new Event(currentInput.split(" ", 2)[1].split(" /from ", 2)[0],currentInput.split(" ", 2)[1].split(" /from ", 2)[1].split(" /to ", 2)[0], currentInput.split(" ", 2)[1].split(" /from ", 2)[1].split(" /to ", 2)[1]);
-                    myList.add(even);
-                    System.out.println("Done. I've added the Event: " + even.toString());
-                }
+                    if (to.equals(currentInput.split("\\s+", 2)[0])) {
+                        Task todo = new Todo(currentInput.split(" ", 2)[1]);
+                        myList.add(todo);
+                        System.out.println("Done. I've added the task: " + todo.toString());
+                    } else if (dead.equals(currentInput.split("\\s+", 2)[0])) {
+                        Task deadline = new Deadline(currentInput.split(" ", 2)[1].split(" /by ")[0], currentInput.split(" ", 2)[1].split(" /by ")[1]);
+                        myList.add(deadline);
+                        System.out.println("Done. I've added the deadline: " + deadline.toString());
+                    } else if (event.equals(currentInput.split("\\s+", 2)[0])) {
+                        Task even = new Event(currentInput.split(" ", 2)[1].split(" /from ", 2)[0], currentInput.split(" ", 2)[1].split(" /from ", 2)[1].split(" /to ", 2)[0], currentInput.split(" ", 2)[1].split(" /from ", 2)[1].split(" /to ", 2)[1]);
+                        myList.add(even);
+                        System.out.println("Done. I've added the Event: " + even.toString());
+                    }
             }
         }
     }
