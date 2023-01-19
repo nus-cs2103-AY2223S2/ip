@@ -1,23 +1,26 @@
 import java.util.ArrayList;
 
 public class List {
-    private ArrayList<String> list = new ArrayList<>();
+    private ArrayList<Task> list = new ArrayList<>();
+
     public List() {
-        list.add("zeroth");
+        list.add(new Task("zeroth"));
     }
 
     public void add(String input) {
-        list.add(input);
-        System.out.println(Duke.line);
-        System.out.println("added: " + input);
-        System.out.println(Duke.line);
+        Task newTask = new Task(input);
+        list.add(newTask);
+        System.out.println("    added: " + newTask.getTask());
+    }
+
+    public Task get(int index) {
+        return list.get(index);
     }
 
     public void print() {
-        System.out.println(Duke.line);
+        System.out.println("    Here are the tasks in your list:");
         for (int i = 1; i < list.size(); i++) {
-            System.out.println(i + ". " + list.get(i));
+            System.out.println("    " + i + ". " + list.get(i).toString());
         }
-        System.out.println(Duke.line);
     }
 }
