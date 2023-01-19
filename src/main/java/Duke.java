@@ -27,7 +27,7 @@ public class Duke {
         // parse user input
         Scanner scanner = new Scanner(System.in);
         String command;
-        ArrayList<String> list = new ArrayList<String>();
+        ArrayList<Task> list = new ArrayList<>();
 
         // level 2 functionality:
         while (true) {
@@ -45,7 +45,12 @@ public class Duke {
                 // construct string to be printed
                 StringBuilder sb = new StringBuilder();
                 for (int i = 0; i < list.size(); i++) {
-                    String s = String.format("%d: %s\n", i + 1, list.get(i));
+                    Task currentTask = list.get(i);
+                    String s = String.format(
+                        "%d: %s\n",
+                        i + 1,
+                        currentTask.toString()
+                    );
                     sb.append(s);
                 }
                 // pprint string
@@ -53,7 +58,8 @@ public class Duke {
             } else {
                 // case: everything else
                 // add item to list
-                list.add(command);
+                Task currentTask = new Task(command);
+                list.add(currentTask);
                 Duke.prettyPrint("added:" + command);
             }
         }
