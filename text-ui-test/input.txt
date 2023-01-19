@@ -1,0 +1,8 @@
+event school trip /from Tues 12pm /to 8pm
+todo CS2109S Problem Set
+deadline buy food /by tonight
+list
+mark 2
+list
+unmark 2
+bye

@@ -11,8 +11,8 @@ public class Duke {
     }
 
     public static void main(String[] args) {
-        String logo = " ____        _        \n"
-                + "|  _ \\ _   _| | _____ \n"
+        String logo = " ____        _\n"
+                + "|  _ \\ _   _| | _____\n"
                 + "| | | | | | | |/ / _ \\\n"
                 + "| |_| | |_| |   <  __/\n"
                 + "|____/ \\__,_|_|\\_\\___|\n";
@@ -90,12 +90,12 @@ public class Duke {
 
     public void markTaskAsDone(int taskNumber) {
         list.get(taskNumber - 1).markAsDone();
-        printMessage("Nice! I've marked this task as done: \n\t" + list.get(taskNumber - 1));
+        printMessage("Nice! I've marked this task as done:\n\t" + list.get(taskNumber - 1));
     }
 
     public void markTaskAsNotDone(int taskNumber) {
         list.get(taskNumber - 1).markAsNotDone();
-        printMessage("OK, I've marked this task as not done yet: \n\t" + list.get(taskNumber - 1));
+        printMessage("OK, I've marked this task as not done yet:\n\t" + list.get(taskNumber - 1));
     }
 
     public void printList() {
