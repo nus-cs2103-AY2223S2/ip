@@ -24,4 +24,21 @@ unmark NON-NUMERIC
 unmark -1
 unmark 0
 unmark 999
+todo
+todo   
+deadline
+deadline   
+deadline DESCRIPTION   
+deadline DESCRIPTION /by   
+event
+event   
+event DESCRIPTION   
+event DESCRIPTION /from   
+event DESCRIPTION /from FROM TIME   
+event DESCRIPTION /from /to   
+event DESCRIPTION /from FROM TIME /to   
+event DESCRIPTION /to   
+event DESCRIPTION /to TO TIME   
+event DESCRIPTION /to /from   
+event DESCRIPTION /to TO TIME /from   
 quit

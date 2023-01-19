@@ -71,7 +71,11 @@ public class Duke {
         System.out.println(indentation + horizontalLine + '\n');
     }
 
-    private static void addTodo(Command command, TaskList tasks) {
+    private static void addTodo(Command command, TaskList tasks) throws DukeInvalidArgumentException {
+        if (command.hasEmptyBody()) {
+            throw new DukeInvalidArgumentException("The description of a todo cannot be empty.");
+        }
+        
         String description = command.body;
         Task task = new TaskTodo(description);
         tasks.add(task);
@@ -82,7 +86,17 @@ public class Duke {
         );
     }
 
-    private static void addDeadline(Command command, TaskList tasks) {
+    private static void addDeadline(Command command, TaskList tasks) throws DukeInvalidArgumentException {
+        if (command.hasEmptyBody()) {
+            throw new DukeInvalidArgumentException("The description of a deadline cannot be empty.");
+        }
+        if (!command.namedParameters.containsKey("by")) {
+            throw new DukeInvalidArgumentException("The \"/by\" parameter of a deadline is missing.");
+        }
+        if (command.namedParameters.get("by").isEmpty()) {
+            throw new DukeInvalidArgumentException("The \"/by\" parameter of a deadline cannot be empty.");
+        }
+
         String description = command.body;
         Task task = new TaskDeadline(description, command.namedParameters.get("by"));
         tasks.add(task);
@@ -93,7 +107,23 @@ public class Duke {
         );
     }
 
-    private static void addEvent(Command command, TaskList tasks) {
+    private static void addEvent(Command command, TaskList tasks) throws DukeInvalidArgumentException {
+        if (command.hasEmptyBody()) {
+            throw new DukeInvalidArgumentException("The description of an event cannot be empty.");
+        }
+        if (!command.namedParameters.containsKey("from")) {
+            throw new DukeInvalidArgumentException("The \"/from\" parameter of an event is missing.");
+        }
+        if (command.namedParameters.get("from").isEmpty()) {
+            throw new DukeInvalidArgumentException("The \"/from\" parameter of an event cannot be empty.");
+        }
+        if (!command.namedParameters.containsKey("to")) {
+            throw new DukeInvalidArgumentException("The \"/to\" parameter of an event is missing.");
+        }
+        if (command.namedParameters.get("to").isEmpty()) {
+            throw new DukeInvalidArgumentException("The \"/to\" parameter of an event cannot be empty.");
+        }
+
         String description = command.body;
         Task task = new TaskEvent(
             description, 
