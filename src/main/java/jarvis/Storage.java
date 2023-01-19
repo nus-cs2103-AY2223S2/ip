@@ -28,7 +28,9 @@ public class Storage {
 
         while (scanner.hasNextLine()) {
             Task task = Task.deserialize(scanner.nextLine());
-            if (task != null) tasks.add(task);
+            if (task != null) {
+                tasks.add(task);
+            }
         }
 
         return tasks;

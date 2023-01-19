@@ -27,7 +27,9 @@ public abstract class Task {
     }
 
     public static Task deserialize(String serial) {
-        if (serial == null || serial.isBlank()) return null;
+        if (serial == null || serial.isBlank()) {
+            return null;
+        }
 
         Scanner scanner = new Scanner(serial).useDelimiter("\\s*/\\s*");
         String type = "";
@@ -37,20 +39,32 @@ public abstract class Task {
         String fromDateTime = null;
         String toDateTime = null;
 
-        if (scanner.hasNext()) type = scanner.next();
-        if (scanner.hasNextBoolean()) isDone = scanner.nextBoolean();
-        if (scanner.hasNext()) description = scanner.next();
+        if (scanner.hasNext()) {
+            type = scanner.next();
+        }
+        if (scanner.hasNextBoolean()) {
+            isDone = scanner.nextBoolean();
+        }
+        if (scanner.hasNext()) {
+            description = scanner.next();
+        }
 
         try {
             switch (type) {
             case "T":
                 return new ToDoTask(description, isDone);
             case "D":
-                if (scanner.hasNext()) deadline = scanner.next();
+                if (scanner.hasNext()) {
+                    deadline = scanner.next();
+                }
                 return new DeadlineTask(description, deadline, isDone);
             case "E":
-                if (scanner.hasNext()) fromDateTime = scanner.next();
-                if (scanner.hasNext()) toDateTime = scanner.next();
+                if (scanner.hasNext()) {
+                    fromDateTime = scanner.next();
+                }
+                if (scanner.hasNext()) {
+                    toDateTime = scanner.next();
+                }
                 return new EventTask(description, fromDateTime, toDateTime, isDone);
             default:
                 return null;

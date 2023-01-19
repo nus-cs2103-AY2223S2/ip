@@ -77,7 +77,9 @@ public abstract class Command {
 
     public boolean hasAction(Action ...actions) {
         for (Action action : actions) {
-            if (this.action == action) return true;
+            if (this.action == action) {
+                return true;
+            }
         }
         return false;
     }
