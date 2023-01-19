@@ -56,6 +56,10 @@ public class toDoList {
             System.out.println(" " + allTasks.get(index-1).toString());
         }
     }
-    
+
+    public void deleteTask(int index) {
+        System.out.println(" " + allTasks.get(index-1).toString());
+        allTasks.remove(index-1);
+    }
 
 }
