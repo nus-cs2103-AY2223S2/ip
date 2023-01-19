@@ -8,7 +8,8 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public class Parser {
-    private static final Pattern VALID_COMMAND = Pattern.compile("(?<cmd>\\S+)(?<arguments>.*)?");
+    private static final Pattern VALID_COMMAND =
+            Pattern.compile("^(?<cmd>list|bye|mark|date|unmark|delete|todo|deadline|event)(?<arguments>.*)?");
     private static final Command invalidCommand =  new Command(CommandType.INVALID) {
         @Override
         public void execute() throws DukeException {
@@ -16,17 +17,17 @@ public class Parser {
         }
     };
 
-    private static Command parse(String cmd, String arguments) {
+    private static Command parse(CommandType cmd, String arguments) {
         switch(cmd) {
-            case "bye":      return new GoodbyeCommand();
-            case "list":     return new ListCommand();
-            case "mark":     return new MarkCommand(arguments);
-            case "date":     return new DateCommand(arguments);
-            case "unmark":   return new UnmarkCommand(arguments);
-            case "delete":   return new DeleteCommand(arguments);
-            case "todo":     return new TodoCommand(arguments);
-            case "deadline": return new DeadlineCommand(arguments);
-            case "event":    return new EventCommand(arguments);
+            case BYE:        return new GoodbyeCommand();
+            case LIST:       return new ListCommand();
+            case MARK:       return new MarkCommand(arguments);
+            case DATE:       return new DateCommand(arguments);
+            case UNMARK:     return new UnmarkCommand(arguments);
+            case DELETE:     return new DeleteCommand(arguments);
+            case TODO:       return new TodoCommand(arguments);
+            case DEADLINE:   return new DeadlineCommand(arguments);
+            case EVENT:      return new EventCommand(arguments);
             default:         return invalidCommand;
         }
     }
@@ -35,7 +36,8 @@ public class Parser {
         String uInput = input.toLowerCase();
         Matcher matcher = VALID_COMMAND.matcher(uInput);
         if (matcher.find()) {
-            String cmdType = matcher.group("cmd");
+            String cmd  = matcher.group("cmd").strip().toUpperCase();
+            CommandType cmdType = CommandType.valueOf(cmd);
             return parse(cmdType, uInput);
         } else {
             return invalidCommand;
