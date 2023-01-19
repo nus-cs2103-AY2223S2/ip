@@ -46,22 +46,28 @@ public class Duke {
                         printList(list);
                         break;
                     case "mark":
+                        if(userInput.indexOf(" ") == -1) {
+                            throw new missingNumber("mark");
+                        }
                         chosenTask = Integer.parseInt(userInput.split("\\s+")[1]);
                         if(chosenTask > list.size() || chosenTask < 1) {
                             throw new taskNotExist();
                         }
                         list.get(chosenTask - 1).setIsDone();
                         System.out.println("Nice! I've marked this task as done:");
-                        System.out.println("[" + list.get(chosenTask - 1).getStatusIcon() + "] " + list.get(chosenTask - 1).getTaskDes());
+                        System.out.println(list.get(chosenTask - 1));
                         break;
                     case "unmark":
+                        if(userInput.indexOf(" ") == -1) {
+                            throw new missingNumber("unmark");
+                        }
                         chosenTask = Integer.parseInt(userInput.split("\\s+")[1]);
                         if(chosenTask > list.size() || chosenTask < 1) {
                             throw new taskNotExist();
                         }
                         list.get(chosenTask - 1).revertIsDone();
                         System.out.println("OK, I've marked this task as not done yet:");
-                        System.out.println("[" + list.get(chosenTask - 1).getStatusIcon() + "] " + list.get(chosenTask - 1).getTaskDes());
+                        System.out.println(list.get(chosenTask - 1));
                         break;
                     case "todo":
                         if(userInput.indexOf(" ") == -1) {
@@ -98,13 +104,26 @@ public class Duke {
                         System.out.println("Got it. I've added this task:\n" + event);
                         numOfTasks(list);
                         break;
+                    case "delete":
+                        if(userInput.indexOf(" ") == -1) {
+                            throw new missingNumber("delete");
+                        }
+                        chosenTask = Integer.parseInt(userInput.split("\\s+")[1]);
+                        if(chosenTask > list.size() || chosenTask < 1) {
+                            throw new taskNotExist();
+                        }
+                        System.out.println("Noted. I've removed this task:");
+                        System.out.println(list.get(chosenTask - 1));
+                        list.remove(chosenTask - 1);
+                        numOfTasks(list);
+                        break;
                     default:
                         throw new unknownInputException();
                 }
             } catch (DukeException e) {
                 System.out.println(e.eMessage);
             } catch(NumberFormatException e) {
-                System.out.println("mark must follow by a integer");
+                System.out.println("The operation must follow by a integer");
             }
             printDashes();
         }
@@ -200,6 +219,12 @@ class unknownInputException extends DukeException {
 class missingDescription extends DukeException {
     public missingDescription(String taskType) {
         super("Oh no, the description of a " + taskType + " cannot be empty! Please try again.");
+    }
+}
+
+class missingNumber extends DukeException {
+    public missingNumber(String operationType) {
+        super("Oh no, the " + operationType + " must specific the task number! Please try again.");
     }
 }
 
