@@ -25,7 +25,8 @@ public class Task {
         status = false;
     }
 
-    public void talk() {
-        System.out.println(this.getStatusIcon() + msg);
+    @Override
+    public String toString() {
+        return this.getStatusIcon() + msg;
     }
 }
