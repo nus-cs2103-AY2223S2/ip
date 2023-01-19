@@ -1,5 +1,6 @@
 import DukeExceptions.DukeEmptyInputException;
 import DukeExceptions.DukeInvalidInputException;
+import DukeExceptions.DukeTooManyInputsException;
 import java.util.regex.Pattern;
 import java.util.regex.Matcher;
 
@@ -31,9 +32,9 @@ public class ToDoList {
 
     public String changeState(String param, String action) throws DukeInvalidInputException, DukeEmptyInputException {
         Pattern pattern = Pattern.compile("\\s");
-        Matcher matcher = pattern.matcher(param);
-        if (matcher.matches()) {
-            throw new DukeInvalidInputException("Sorry you need to specify a single input.");
+        Matcher matcher = pattern.matcher(param.trim());
+        if (matcher.find()) {
+            throw new DukeTooManyInputsException();
         }
         try {
             int index = Integer.parseInt(param.trim());
@@ -48,6 +49,27 @@ public class ToDoList {
         } catch (IndexOutOfBoundsException e) {
             throw new DukeInvalidInputException(String.format("You gave me an invalid number to %s. ", action) +
                     "Type list to see what you have in the list so far.");
+        }
+    }
+
+    public String delete(String input) throws DukeInvalidInputException {
+        Pattern pattern = Pattern.compile("\\s");
+        Matcher matcher = pattern.matcher(input.trim());
+        if (matcher.find()) {
+            throw new DukeTooManyInputsException();
+        }
+        try {
+            int index = Integer.parseInt(input.trim());
+            Task removed = list.remove(index - 1);
+            int size = list.size();
+            return String.format("Sure thing. This task has been deleted:\n\t%s\nNow you have %d task%s in the list",
+                    removed, size, size == 1 ? "" : "s");
+        } catch (IndexOutOfBoundsException e) {
+            throw new DukeInvalidInputException("I can't delete what doesn't exist. " +
+                    "Type list to see what you have in the list so far.");
+        } catch (NumberFormatException e) {
+            throw new DukeInvalidInputException("Sorry but I can only delete it if you give me its number. " +
+                    "Try inputting a number instead!");
         }
     }
 }

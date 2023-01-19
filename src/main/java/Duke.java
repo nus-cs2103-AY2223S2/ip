@@ -31,6 +31,9 @@ public class Duke {
                     case "event":
                         printResponse(lst.add(Event.createEvent(scanner.nextLine())));
                         break;
+                    case "delete":
+                        printResponse(lst.delete(scanner.nextLine()));
+                        break;
                     default:
                         throw new DukeUnknownInputException();
                 }
