@@ -1,8 +1,10 @@
 public abstract class Task {
     private TaskStatus status;
+    private int id;
 
-    public Task() {
+    public Task(int id) {
         status = TaskStatus.Pending;
+        this.id = id;
     }
 
     public boolean isCompleted() {
@@ -11,6 +13,10 @@ public abstract class Task {
 
     public void markCompleted() {
         status = TaskStatus.Completed;
+    }
+
+    public int id() {
+        return this.id;
     }
 
     abstract String description();
