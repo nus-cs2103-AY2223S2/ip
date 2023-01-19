@@ -1,3 +1,4 @@
+import java.util.HashMap;
 import java.util.Scanner;
 
 public class JeoBot {
@@ -8,141 +9,192 @@ public class JeoBot {
     }
 
     public static void echo() {
-        String divider = "________________________________________________________________";
+        String divider = "________________________________________________________________________________";
         boolean hasInput = true;
         Scanner sc = new Scanner(System.in);
         Storage st = new Storage();
         while (hasInput) {
             String s = sc.nextLine();
             s = s.trim();
-            String command = s.replaceAll("\\s", "").toLowerCase();
-            // Check if first word of command is "mark" or "unmark", and if an integer follows after
-            if (command.startsWith("unmark") && command.substring(6).matches("-?\\d+")) {
-                command = "unmark";
-            } else if (command.startsWith("mark") && command.substring(4).matches("-?\\d+")) {
-                command = "mark";
-            } else if (command.startsWith("todo") && !command.substring(4).equals("")) {
-                command = "todo";
-            } else if (command.startsWith("deadline") && command.contains("/by")) {
-                command = "deadline";
-            } else if (command.startsWith("event") && command.contains("/from") && command.contains("/to")) {
-                command = "event";
-            }
-            System.out.println(divider);
-            switch (command) {
-                case "bye":
-                    hasInput = false;
-                    System.out.println("Thank you for using JeoBot. Hope to see you again soon!");
-                    break;
-                case "list":
-                    st.showTasks();
-                    break;
-                case "mark":
-                    s = s.replaceAll("\\s", "");
-                    // Check if input command given is just "mark" without an integer (no task number)
-                    if (s.substring(4).equals("")) {
-                        System.out.println("Please indicate task number!");
+            // Parse
+            try {
+                System.out.println(divider);
+                HashMap<String, String> hm = parseString(s);
+                String command = hm.get("command");
+                switch (command) {
+                    case "bye":
+                        hasInput = false;
+                        System.out.println("Thank you for using JeoBot. Hope to see you again soon!");
                         break;
-                    }
-                    int index = Integer.parseInt(s.substring(4)) - 1;
-                    // Check if integer falls within the list of task numbers
-                    if (index >= 0 && index < st.getNumberOfTasks()) {
+                    case "list":
+                        st.showTasks();
+                        break;
+                    case "mark":
+                        if (hm.get("index").isEmpty()) {
+                            throw new JeoException("Please enter a task number to be marked.");
+                        }
+                        int index = Integer.parseInt(hm.get("index")) - 1;
+                        if (index < 0 || index >= st.getNumberOfTasks()) {
+                            throw new JeoException("Task number cannot be negative, zero, or exceed the total number of tasks.");
+                        }
                         st.markTask(index);
-                    } else {
-                        System.out.println("Invalid task number given!");
-                    }
-                    break;
-                case "unmark":
-                    s = s.replaceAll("\\s", "");
-                    // Check if input command given is just "unmark" without an integer (no task number)
-                    if (s.substring(6).equals("")) {
-                        System.out.println("Please indicate task number!");
                         break;
-                    }
-                    index = Integer.parseInt(s.substring(6)) - 1;
-                    // Check if integer falls within the list of task numbers
-                    if (index >= 0 && index < st.getNumberOfTasks()) {
+                    case "unmark":
+                        if (hm.get("index").isEmpty()) {
+                            throw new JeoException("Please enter a task number to be unmarked.");
+                        }
+                        index = Integer.parseInt(hm.get("index")) - 1;
+                        if (index < 0 || index >= st.getNumberOfTasks()) {
+                            throw new JeoException("Task number cannot be negative, zero, or exceed the total number of tasks.");
+                        }
                         st.unmarkTask(index);
-                    } else {
-                        System.out.println("Invalid task number given!");
-                    }
-                    break;
-                case "todo":
-                    if (s.replaceAll("\\s", "").toLowerCase().equals("todo")) {
-                        System.out.println("Please add a description!");
                         break;
-                    }
-                    Task task = new ToDo(s.substring(4).trim());
-                    st.addTask(task);
-                    break;
-                case "deadline":
-                    if (s.replaceAll("\\s", "").toLowerCase().equals("deadline")) {
-                        System.out.println("Please add a description!");
+                    case "todo":
+                        String desc = hm.get("description");
+                        if (desc.isEmpty()) {
+                            throw new JeoException("Please enter a task description.");
+                        }
+                        Task task = new ToDo(desc);
+                        st.addTask(task);
                         break;
-                    }
-                    s = s.substring(8).trim();
-                    StringBuilder sb = new StringBuilder();
-                    int i = 0;
-                    while (i < s.length()) {
-                        if (s.charAt(i) != '/') {
-                            sb.append(s.charAt(i));
-                        } else {
-                            if (s.substring(i, i+3).equals("/by")) {
-                                s = s.substring(i+3).trim();
-                                break;
-                            }
+                    case "deadline":
+                        desc = hm.get("description");
+                        String by = hm.get("by");
+                        if (desc.isEmpty()) {
+                            throw new JeoException("Please enter a task description.");
                         }
-                        i++;
-                    }
-                    String desc = sb.toString().trim();
-                    String by = s;
-                    task = new Deadline(desc, by);
-                    st.addTask(task);
-                    break;
-                case "event":
-                    if (s.replaceAll("\\s", "").toLowerCase().equals("event")) {
-                        System.out.println("Please add a description!");
+                        if (by.isEmpty()) {
+                            throw new JeoException("Please enter a date/time after \"/by\".");
+                        }
+                        task = new Deadline(desc, by);
+                        st.addTask(task);
                         break;
-                    }
-                    s = s.substring(5).trim();
-                    sb = new StringBuilder();
-                    i = 0;
-                    while (i < s.length()) {
-                        if (s.charAt(i) != '/') {
-                            sb.append(s.charAt(i));
-                        } else {
-                            if (s.substring(i, i+5).equals("/from")) {
-                                s = s.substring(i+5).trim();
-                                break;
-                            }
+                    case "event":
+                        desc = hm.get("description");
+                        String from = hm.get("from");
+                        String to = hm.get("to");
+                        if (desc.isEmpty()) {
+                            throw new JeoException("Please enter a task description.");
                         }
-                        i++;
-                    }
-                    desc = sb.toString().trim();
-                    sb = new StringBuilder();
-                    i = 0;
-                    while (i < s.length()) {
-                        if (s.charAt(i) != '/') {
-                            sb.append(s.charAt(i));
-                        } else {
-                            if (s.substring(i, i+3).equals("/to")) {
-                                s = s.substring(i+3).trim();
-                                break;
-                            }
+                        if (from.isEmpty() && to.isEmpty()) {
+                            throw new JeoException("Please enter a date/time after \"/from\" and \"/to\".");
                         }
-                        i++;
-                    }
-                    String from = sb.toString().trim();
-                    String to = s;
-                    task = new Event(desc, from, to);
-                    st.addTask(task);
-                    break;
-                default:
-                    System.out.println("Sorry, I don't understand what you're saying :(");
+                        if (from.isEmpty()) {
+                            throw new JeoException("Please enter a date/time after \"/from\".");
+                        }
+                        if (to.isEmpty()) {
+                            throw new JeoException("Please enter a date/time after \"/to\".");
+                        }
+                        task = new Event(desc, from, to);
+                        st.addTask(task);
+                        break;
+                    default:
+                        System.out.println("Sorry, I don't understand what you're saying :(");
+                }
+            } catch (JeoException e) {
+                System.out.println(e.getMessage());
             }
             System.out.println(divider);
         }
         sc.close();
+    }
+
+    // Throw empty description, by, from, to, index in echo()
+    // Also for index, handle if it's within valid number of tasks
+    public static HashMap<String, String> parseString(String s) throws JeoException {
+        HashMap<String, String> hm = new HashMap<>();
+        if (s.equalsIgnoreCase("bye")) {
+            hm.put("command", "bye");
+        } else if (s.equalsIgnoreCase("list")) {
+            hm.put("command", "list");
+        } else if (s.toLowerCase().startsWith("todo")) {
+            hm.put("command", "todo");
+            s = s.substring(4).trim();
+            hm.put("description", s);
+        } else if (s.toLowerCase().startsWith("deadline")) {
+            hm.put("command", "deadline");
+            s = s.substring(8).trim();
+            if (!s.toLowerCase().contains("/by")) {
+                throw new JeoException(s.isEmpty()
+                        ? "Please enter a task description."
+                        : "Please follow the format: deadline <description> /by <date/time>");
+            }
+            String[] arr = parseSubstring(s, "deadline");
+            String desc = arr[0];
+            String by = arr[1];
+            hm.put("description", desc);
+            hm.put("by", by);
+        } else if (s.toLowerCase().startsWith("event")) {
+            hm.put("command", "event");
+            s = s.substring(5).trim();
+            if (!s.toLowerCase().contains("/from") || !s.toLowerCase().contains("/to")) {
+                throw new JeoException(s.isEmpty()
+                        ? "Please enter a task description."
+                        : "Please follow the format: event <description> /from <date/time> /to <date/time>");
+            }
+            String[] arr = parseSubstring(s, "event1");
+            String desc = arr[0];
+            s = arr[1];
+            arr = parseSubstring(s, "event2");
+            String from = arr[0];
+            String to = arr[1];
+            hm.put("description", desc);
+            hm.put("from", from);
+            hm.put("to", to);
+        } else if (s.toLowerCase().startsWith("mark")) {
+            hm.put("command", "mark");
+            s = s.substring(4).trim();
+            int i;
+            try {
+                i = Integer.parseInt(s);
+            } catch (NumberFormatException e) {
+                throw new JeoException("Task number needs to be an integer value to be marked.");
+            }
+            hm.put("index", Integer.toString(i));
+        } else if (s.toLowerCase().startsWith("unmark")) {
+            hm.put("command", "unmark");
+            s = s.substring(6).trim();
+            int i;
+            try {
+                i = Integer.parseInt(s);
+            } catch (NumberFormatException e) {
+                throw new JeoException("Task number needs to be an integer value to be unmarked.");
+            }
+            hm.put("index", Integer.toString(i));
+        } else {
+            hm.put("command", "");
+        }
+        return hm;
+    }
+
+    public static String[] parseSubstring(String s, String c) {
+        StringBuilder sb = new StringBuilder();
+        int i = 0;
+        String first = "";
+        String second  = "";
+        while (i < s.length()) {
+            if (s.charAt(i) != '/') {
+                sb.append(s.charAt(i));
+            } else {
+                String temp1 = s.substring(i + 3).trim();
+                if (c.equals("deadline") && s.startsWith("/by", i)) {
+                    first = sb.toString().trim();
+                    second = temp1;
+                } else if (c.equals("event1") && s.startsWith("/from", i)) {
+                    first = sb.toString().trim();
+                    second = s.substring(i + 5).trim();
+                } else if ((c.equals("event1") || c.equals("event2")) && s.startsWith("/to", i)) {
+                    first = sb.toString().trim();
+                    second = temp1;
+                } else if (c.equals("event2") && s.startsWith("/from", i)) {
+                    first = s.substring(i + 5).trim();
+                    second = sb.toString().trim();
+                }
+                break;
+            }
+            i++;
+        }
+        return new String[]{first, second};
     }
 
     public static void main(String[] args) {
