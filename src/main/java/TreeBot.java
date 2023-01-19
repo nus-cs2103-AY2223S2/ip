@@ -3,7 +3,7 @@ import java.util.Scanner;
 
 public class TreeBot {
     private static final String EXIT_TOKEN = "bye";
-    private ArrayList<String> items = new ArrayList<>();
+    private ArrayList<Task> tasks = new ArrayList<>();
     public void start() {
         greet();
         listen();
@@ -31,19 +31,31 @@ public class TreeBot {
 
         switch (command) {
             case "list":
-                listItems();
+                listTasks();
+                break;
+            case "mark":
+                markTask(Integer.parseInt(splitStr[1]));
+                break;
+            case "unmark":
+                unmarkTask(Integer.parseInt(splitStr[1]));
                 break;
             default:
-                addItem(commandString);
+                addTask(new Task(commandString));
         }
     }
-    private void addItem(String item) {
-        this.items.add(item);
+    private void addTask(Task task) {
+        this.tasks.add(task);
     }
-    private void listItems() {
-        for (int i = 0; i < this.items.size(); i++) {
-            System.out.println(i + 1 + ". " + this.items.get(i));
+    private void listTasks() {
+        for (int i = 0; i < this.tasks.size(); i++) {
+            System.out.println(i + 1 + "." + this.tasks.get(i));
         }
+    }
+    private void markTask(int idx) {
+        this.tasks.get(idx - 1).markAsDone();
+    }
+    private void unmarkTask(int idx) {
+        this.tasks.get(idx - 1).markAsUndone();
     }
     private void greet() {
         System.out.println("Hello, I'm a tree. How may I be of service?");
