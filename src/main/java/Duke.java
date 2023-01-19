@@ -20,17 +20,34 @@ public class Duke {
             if (s.equals("bye")) {
                 break;
             }
-            else if (!s.equals("list")) {
+            else if ((!s.equals("list")) && !s.equals("mark") && !s.equals("unmark")) {
                 System.out.println(String.format("added: %s", s));
-                listOfAction[i] = String.format("%d. %s", i + 1, s);
+                listOfAction[i] = String.format("[ ] %s", s);
                 i++;
             }
-            else {
+            else if (s.equals("list")) {
+                System.out.println("Here are the tasks in your list");
                 for (int j = 0; j < listOfAction.length; j ++) {
                     if (listOfAction[j] == null) {
                         break;
                     }
-                    System.out.println(listOfAction[j]);
+                    System.out.println(String.format("%d.%s", j + 1,listOfAction[j]));
+                }
+            } else if (s.equals("mark")) {
+                int num = Integer.parseInt(sc.next()) - 1;
+                if (listOfAction[num] != null) {
+                    System.out.println("Nice! I've marked this task as done:");
+                    String original = listOfAction[num];
+                    listOfAction[num] = String.format("[X] %s", original.substring(4));
+                    System.out.println(listOfAction[num]);
+                }
+            } else if (s.equals("unmark")) {
+                int num = Integer.parseInt(sc.next()) - 1;
+                if (listOfAction[num] != null) {
+                    System.out.println("OK, I've marked this task as not done yet:");
+                    String original = listOfAction[num];
+                    listOfAction[num] = String.format("[ ] %s", original.substring(4));
+                    System.out.println(listOfAction[num]);
                 }
             }
         }
