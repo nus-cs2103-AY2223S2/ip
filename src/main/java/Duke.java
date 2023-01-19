@@ -2,7 +2,6 @@
 import java.sql.Array;
 import java.util.Scanner;
 import java.util.ArrayList;
-import java.util.StringTokenizer;
 public class Duke {
     /*public static void main(String[] args) {
         String logo = " ____        _        \n"
@@ -39,15 +38,33 @@ public class Duke {
                     System.out.println("    " + numbering + "." + toDoList.get(i).toString());
                 }
             } else if (parts[0].equals("mark")) {
-                int selection = Integer.parseInt(parts[1]) - 1;
-                toDoList.get(selection).mark();
-                System.out.println("    OK, I've marked this task as done:");
-                System.out.println("     " + toDoList.get(selection).toString());
+                try {
+                    int selection = Integer.parseInt(parts[1]) - 1;
+                    toDoList.get(selection).mark();
+                    System.out.println("    OK, I've marked this task as done:");
+                    System.out.println("     " + toDoList.get(selection).toString());
+                } catch (IndexOutOfBoundsException e) {
+                    System.out.println("    OOPS!!! Please specify which task to mark.");
+                }
             } else if (parts[0].equals("unmark")) {
-                int selection = Integer.parseInt(parts[1]) - 1;
-                toDoList.get(selection).unmark();
-                System.out.println("    OK, I've marked this task as not done yet:");
-                System.out.println("     " + toDoList.get(selection).toString());
+                try {
+                    int selection = Integer.parseInt(parts[1]) - 1;
+                    toDoList.get(selection).unmark();
+                    System.out.println("    OK, I've marked this task as not done yet:");
+                    System.out.println("     " + toDoList.get(selection).toString());
+                } catch (IndexOutOfBoundsException e) {
+                    System.out.println("    OOPS!!! Please specify which task to unmark.");
+                }
+            } else if (parts[0].equals("delete")) {
+                try {
+                    int selection = Integer.parseInt(parts[1]) - 1;
+                    System.out.println("    Noted. I've removed this task:");
+                    System.out.println("     " + toDoList.get(selection).toString());
+                    toDoList.remove(selection);
+                    System.out.println("    Now you have " + toDoList.size() + " tasks in the list");
+                } catch (IndexOutOfBoundsException e) {
+                    System.out.println("    OOPS!!! Please specify which task to delete.");
+                }
             } else if (parts[0].equals("todo")){
                 try {
                     Todo newToDo = new Todo(parts[1]);
@@ -87,11 +104,6 @@ public class Duke {
             } else {
                 System.out.println("    OOPS!!! I'm sorry, but I don't know what that means :<");
             }
-
         }
-
-        //split by first delimiter " "
-        //split 2nd token by / delimiter
-
     }
 }
