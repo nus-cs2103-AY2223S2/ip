@@ -8,12 +8,14 @@ public class Duke {
     //                + "| |_| | |_| |   <  __/\n"
     //                + "|____/ \\__,_|_|\\_\\___|\n";
     //        System.out.println("Hello from\n" + logo);
+
     String divider = "____________________________________________________________\n";
     System.out.println(divider + "Hello! I'm Duke");
     System.out.println("What can I do for you?\n" + divider);
 
-    ArrayList<String> tasks = new ArrayList<>();
+    ArrayList<Task> tasks = new ArrayList<>();
     Scanner sc = new Scanner(System.in);
+
     while(sc.hasNext()) {
       String instr = sc.nextLine();
       switch(instr) {                                 //Single-word instructions
@@ -27,7 +29,7 @@ public class Duke {
 
         case "bye":   //Exit
           System.out.println(divider + "Bye. Hope to see you again soon!\n" + divider);
-          break;
+          return;
 
         //Other single word commands go here.
         
@@ -42,8 +44,9 @@ public class Duke {
 
           switch(action) {                            //For instructions with argument(s).
             case "add":
-              tasks.add(keyword);
+              tasks.add(new Task(keyword));
               break;
+
           }
       }
     }
