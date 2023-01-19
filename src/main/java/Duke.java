@@ -1,12 +1,13 @@
 import java.util.Scanner;
 import java.util.ArrayList;
+import java.lang.RuntimeException;
 
 public class Duke {
 
-    enum Type {
-        TODO,
-        DEADLINE,
-        EVENT,
+    private static class DukeException extends RuntimeException {
+        public DukeException(String errMsg, Throwable err) {
+            super(errMsg, err);
+        }
     }
     private static class Task {
         public String title;
@@ -89,24 +90,50 @@ public class Duke {
 
         String input = sc.nextLine();
         while(!input.equals("bye")) {
+
             if (input.equals("list")) {
                 printTasks();
-            } else if (input.split(" ")[0].equals("mark")){
-                markTask(Integer.parseInt(input.split(" ")[1]));
-            } else if (input.split(" ")[0].equals("unmark")){
-                unmarkTask(Integer.parseInt(input.split(" ")[1]));
-            } else if (input.split(" ")[0].equals("todo")){
-                addTodo(input.replaceAll("todo", "").trim());
-            } else if (input.split(" ")[0].equals("deadline")){
-                String[] s = input.split("/by");
-                addDeadline(s[0].split("/by")[0].replaceAll("deadline", "").trim(),
-                            s[1].substring(1));
-            } else if (input.split(" ")[0].equals("event")){
-                String[] words = input.split("/from");
-                String title = words[0].replaceAll("event", "").trim();
-                String from = words[1].split("/to")[0].trim();
-                String to = words[1].split("/to")[1].trim();
-                addEvent(title, from, to);
+            } else {
+
+                if (input.split(" ")[0].equals("mark")) {
+                    markTask(Integer.parseInt(input.split(" ")[1]));
+                } else if (input.split(" ")[0].equals("unmark")) {
+                    unmarkTask(Integer.parseInt(input.split(" ")[1]));
+                } else if (input.split(" ")[0].equals("todo")) {
+                    if (input.split(" ").length == 1) {
+                        System.out.println("    ____________________________________________________________");
+                        System.out.println("     ☹ OOPS!!! The description of a todo cannot be empty.");
+                        System.out.println("    ____________________________________________________________");
+                    } else {
+                        addTodo(input.replaceAll("todo", "").trim());
+                    }
+                } else if (input.split(" ")[0].equals("deadline")) {
+                    if (input.split(" ").length == 1) {
+                        System.out.println("    ____________________________________________________________");
+                        System.out.println("     ☹ OOPS!!! The description of a deadline cannot be empty.");
+                        System.out.println("    ____________________________________________________________");
+                    } else {
+                        String[] s = input.split("/by");
+                        addDeadline(s[0].split("/by")[0].replaceAll("deadline", "").trim(),
+                                s[1].substring(1));
+                    }
+                } else if (input.split(" ")[0].equals("event")) {
+                    if (input.split(" ").length == 1) {
+                        System.out.println("    ____________________________________________________________");
+                        System.out.println("     ☹ OOPS!!! The description of a event cannot be empty.");
+                        System.out.println("    ____________________________________________________________");
+                    } else {
+                        String[] words = input.split("/from");
+                        String title = words[0].replaceAll("event", "").trim();
+                        String from = words[1].split("/to")[0].trim();
+                        String to = words[1].split("/to")[1].trim();
+                        addEvent(title, from, to);
+                    }
+                } else {
+                    System.out.println("    ____________________________________________________________");
+                    System.out.println("     ☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
+                    System.out.println("    ____________________________________________________________");
+                }
             }
         input = sc.nextLine();
         }
