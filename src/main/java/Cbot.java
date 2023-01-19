@@ -5,7 +5,7 @@ public class Cbot {
 		TaskList tl = new TaskList();
 		
         String dukeLogo = " ____        _\n"
-                + "|  _ \\ _   _| | _____ \n"
+                + "|  _ \\ _   _| | _____\n"
                 + "| | | | | | | |/ / _ \\\n"
                 + "| |_| | |_| |   <  __/\n"
                 + "|____/ \\__,_|_|\\_\\___|\n";
