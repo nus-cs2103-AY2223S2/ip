@@ -49,6 +49,10 @@ public class Duke {
                         sub = input[1];
                         ls.unmarkTask(Integer.parseInt(sub));
                         break;
+                    case "delete":
+                        sub = input[1];
+                        ls.delete(Integer.parseInt(sub));
+                        break;
                     case "todo":
                         sub = input[1];
                         ls.add(new ToDoTask(sub));

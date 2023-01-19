@@ -17,6 +17,16 @@ public class ToDoList {
                 + "You now have " + this.toDoCount + " task!\n"+ divider);
     }
 
+    public void delete(int ind) {
+        String divider = "@~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~@\n";
+        Task rm = arr.get(ind);
+        arr.remove(ind);
+        --this.toDoCount;
+        System.out.println(divider + "The Duke has removed the following task: \n"
+                + " - " + rm + "\n"
+                + "You now have " + this.toDoCount + " task!\n"+ divider);
+    }
+
 
     public void unmarkTask(int ind) {
         String divider = "@~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~@\n";
