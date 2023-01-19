@@ -55,9 +55,9 @@ public class Duke {
         if (items.size() < 4) {
             output("Added your task: " + task);
         } else if (items.size() > 10) {
-            output("What?!! You're going to dieee! Added your task: \"" + task);
+            output("What?!! You're going to dieee! Added your task: " + task);
         } else {
-            output("Another task? Phew >:(. Added your task:" + task);
+            output("Another task? Phew >:(. Added your task: " + task);
         }
         output("You have " + items.size() + " tasks.");
     }
@@ -98,6 +98,12 @@ public class Duke {
                     task = items.get(Integer.parseInt(input.split(" ")[1]) - 1);
                     task.unmark();
                     output(task.toString());
+                    break;
+                case "delete":
+                    int i = Integer.parseInt(input.split(" ")[1]) - 1;
+                    output("I've removed this task");
+                    output(items.get(i).toString());
+                    items.remove(i);
                     break;
                 case "todo":
                     add_item(new Todo(input));
