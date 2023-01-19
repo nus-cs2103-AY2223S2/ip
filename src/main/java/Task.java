@@ -3,7 +3,10 @@ public abstract class Task {
     private static final String NOT_COMPLETED = "[ ]";
     private final String name;
     private boolean isCompleted;
-    Task(String name) {
+    Task(String name) throws DukeException {
+        if (name.isEmpty()) {
+            throw new DukeException("Empty description for task");
+        }
         this.name = name;
         isCompleted = false;
     }

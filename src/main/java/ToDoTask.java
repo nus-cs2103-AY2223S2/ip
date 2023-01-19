@@ -1,5 +1,5 @@
 public class ToDoTask extends Task{
-    ToDoTask(String name) {
+    ToDoTask(String name) throws DukeException {
         super(name);
     }
 

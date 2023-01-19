@@ -9,32 +9,41 @@ public class Duke {
         System.out.println(DukeIO.wrapContent(DukeIO.GREET));
         taskList = new DukeList();
     }
-    public static void waitForInput() throws Exception {
+    public static void waitForInput() {
         while(true) {
-            String input = scanner.nextLine();
-            if (input.startsWith("mark ")) {
-                int taskIndex = Integer.parseInt(input.substring(5));
-                taskList.markTask(taskIndex);
-                continue;
-            }
-            if (input.startsWith("unmark ")) {
-                int taskIndex = Integer.parseInt(input.substring(7));
-                taskList.unmarkTask(taskIndex);
-                continue;
-            }
-            if (input.equals(DukeIO.terminateString)) {
-                System.out.println(DukeIO.wrapContent(DukeIO.FAREWELL));
-                return;
-            }
-            if (input.equals(DukeIO.listString)) {
-                System.out.println(DukeIO.wrapContent(taskList.toString()));
-                continue;
-            }
+            try {
+                String input = scanner.nextLine();
+                if (input.startsWith("mark ")) {
+                    int taskIndex = Integer.parseInt(input.substring(5));
+                    taskList.markTask(taskIndex);
+                    continue;
+                }
+                if (input.startsWith("unmark ")) {
+                    int taskIndex = Integer.parseInt(input.substring(7));
+                    taskList.unmarkTask(taskIndex);
+                    continue;
+                }
+                if (input.startsWith("delete ")) {
+                    int taskIndex = Integer.parseInt(input.substring(7));
+                    taskList.deleteTask(taskIndex);
+                    continue;
+                }
+                if (input.equals(DukeIO.terminateString)) {
+                    System.out.println(DukeIO.wrapContent(DukeIO.FAREWELL));
+                    return;
+                }
+                if (input.equals(DukeIO.listString)) {
+                    System.out.println(DukeIO.wrapContent(taskList.toString()));
+                    continue;
+                }
 
-            taskList.addTask(input);
+                taskList.addTask(input);
+            } catch (DukeException e) {
+                System.out.println(DukeIO.wrapContent(e.getMessage()));
+            }
         }
     }
-    public static void main(String[] args) throws Exception {
+    public static void main(String[] args) {
         initialiseIO();
         waitForInput();
     }
