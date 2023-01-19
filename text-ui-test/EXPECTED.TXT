@@ -265,3 +265,8 @@ Nice! I've marked this task as done:
   [E][X] hey (from: hello to: bye)
 OwO OwO OwO OwO OwO OwO
 
+
+OwO OwO OwO OwO OwO OwO
+Bye. Hope to see you again soon!
+OwO OwO OwO OwO OwO OwO
+

@@ -1,5 +1,8 @@
 package output;
 
+import java.util.ArrayList;
+import java.util.Collection;
+
 import task.Task;
 
 public class Printer {
@@ -26,20 +29,20 @@ public class Printer {
         printWithDecorations(bye);
     }
 
-    public static void printTasks(Task[] tasks, int numTasks) {
+    public static void printTasks(ArrayList<Task> tasks) {
         String s;
 
-        if (numTasks <= 0) {
+        if (tasks.size() <= 0) {
             s = "No task found! Please add a task.";
-        } else if (numTasks == 1) {
+        } else if (tasks.size() == 1) {
             s = "Here is the task in your list:\n";
         } else {
             s = "Here are the tasks in your list:\n";
         }
-
+        
         StringBuilder sb = new StringBuilder(s);
-        for (int i = 0; i < numTasks; i++) {
-            sb.append(String.format("%d.%s\n", i+1, tasks[i].toString()));
+        for (int i = 0; i < tasks.size(); i++) {
+            sb.append(String.format("%d.%s\n", i+1, tasks.get(i).toString()));
         }
         printWithDecorations(sb.toString());
     }
