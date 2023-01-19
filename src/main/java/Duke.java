@@ -1,6 +1,7 @@
 public class Duke {
 
-    private static String dividor = "____________________________________________________________\n";
+    private static String div_open = "____________________________________________________________\n";
+    private static String div_close = "____________________________________________________________\n" + "\n";
     public static void main(String[] args) {
         String logo = " ____        _        \n"
                 + "|  _ \\ _   _| | _____ \n"
