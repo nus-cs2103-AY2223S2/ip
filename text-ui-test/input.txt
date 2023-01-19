@@ -9,4 +9,6 @@ list
 unmark 2
 todo borrow book
 list
+test
+todo
 bye
