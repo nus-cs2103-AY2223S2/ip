@@ -7,6 +7,10 @@ public class Deadline extends Task{
         this.by = by;
         this.code = "[D]";
     }
+    
+    public String getCode(){
+        return this.code;
+    }
 
     @Override
     public String toString() {

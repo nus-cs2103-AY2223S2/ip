@@ -1,4 +1,4 @@
-public class ToDos extends Task{
+public class ToDos extends Task {
     private String code;
 
     public ToDos(String msg) {
@@ -6,9 +6,13 @@ public class ToDos extends Task{
         this.code = "[T]";
     }
 
+    public String getCode() {
+        return this.code;
+    }
+
     @Override
     public String toString() {
         return code + super.toString();
     }
-    
+
 }

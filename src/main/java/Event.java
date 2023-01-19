@@ -10,6 +10,10 @@ public class Event extends Task{
         this.code = "[E]";
     }
 
+    public String getCode(){
+        return this.code;
+    }
+
     @Override
     public String toString() {
         return code + super.toString() + " (" + from + to + ")";

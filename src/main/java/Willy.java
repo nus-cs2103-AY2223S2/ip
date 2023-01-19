@@ -14,6 +14,7 @@ public class Willy {
         List<Task> lst = new ArrayList<Task>();
 
         while (true) {
+
             String command = sc.nextLine();
 
             // For marking
@@ -23,41 +24,52 @@ public class Willy {
             String[] tempAdd = command.split("/");
             // Task tempAddTask = lst.get(Integer.parseInt(temp[1]) - 1);
 
-            if (command.contains("mark")) {
-                Task tempTask = lst.get(Integer.parseInt(temp[1]) - 1);
-                tempTask.mark();
-            } else if (command.contains("unmark")) {
-                Task tempTask = lst.get(Integer.parseInt(temp[1]) - 1);
-                tempTask.unmark();
-            } else if (command.equals("list")) {
-                for (int index = 0; index < lst.size(); index++) {
-                    Task curr = lst.get(index);
-                    System.out.println((index + 1) + " " + curr.getStatusIcon() + curr.getMsg());
-                }
-            } else if (command.equals("bye")) {
-                System.out.println("Bye. Hope to see you again soon!");
-                System.exit(0);
-                sc.close();
-            } else {
-                if (command.contains("todo")) {
-                    ToDos newT = new ToDos(command);
-                    lst.add(newT);
-                    System.out.println(newT.toString());
-                    System.out.format("Now you have %d things in your list%n", lst.size());
-                }
-                if (command.contains("deadline")) {
-                    Deadline newD = new Deadline(tempAdd[0], tempAdd[1]);
-                    lst.add(newD);
-                    System.out.println(newD.toString());
-                    System.out.format("Now you have %d things in your list %n", lst.size());
-                }
-                if (command.contains("event")) {
-                    Event newE = new Event(tempAdd[0], tempAdd[1], tempAdd[2]);
-                    lst.add(newE);
-                    System.out.println(newE.toString());
-                    System.out.format("Now you have %d things in your list %n", lst.size());
-                }
+            try {
+                if (command.contains("mark")) {
+                    Task tempTask = lst.get(Integer.parseInt(temp[1]) - 1);
+                    tempTask.mark();
+                } else if (command.contains("unmark")) {
+                    Task tempTask = lst.get(Integer.parseInt(temp[1]) - 1);
+                    tempTask.unmark();
+                } else if (command.equals("list")) {
+                    for (int index = 0; index < lst.size(); index++) {
+                        Task curr = lst.get(index);
+                        System.out.println((index + 1) + ") "+ curr.toString() );
+                    }
+                } else if (command.equals("bye")) {
+                    System.out.println("Bye. Hope to see you again soon!");
+                    System.exit(0);
+                    sc.close();
+                } else if (command.equals("blah")) {
+                    throw new WillyException("☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
+                } else {
+                    if (command.contains("todo")) {
+                        if (command.length() > 4) {
+                            ToDos newT = new ToDos(command);
+                            lst.add(newT);
+                            System.out.println(newT.toString());
+                            System.out.format("Now you have %d things in your list%n", lst.size());
+                        } else {
+                            throw new WillyException("☹ OOPS!!! The description of a todo cannot be empty.");
+                        }
 
+                    }
+                    if (command.contains("deadline")) {
+                        Deadline newD = new Deadline(tempAdd[0], tempAdd[1]);
+                        lst.add(newD);
+                        System.out.println(newD.toString());
+                        System.out.format("Now you have %d things in your list %n", lst.size());
+                    }
+                    if (command.contains("event")) {
+                        Event newE = new Event(tempAdd[0], tempAdd[1], tempAdd[2]);
+                        lst.add(newE);
+                        System.out.println(newE.toString());
+                        System.out.format("Now you have %d things in your list %n", lst.size());
+                    }
+
+                }
+            } catch (WillyException e) {
+                System.out.println(e.getMessage());
             }
 
         }
