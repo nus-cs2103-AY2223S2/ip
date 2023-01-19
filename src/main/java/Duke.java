@@ -13,42 +13,66 @@ public class Duke {
         System.out.println("How can I help you?");
         String list[] = new String[100];
         Boolean done[] = new Boolean[100];
+        String Type[] = new String[100];
         int index = 0;
         while(true) {
             Scanner myObj = new Scanner(System.in);
-            String input = myObj.nextLine();
-            if(input.equals("list")){
+            String input[] = myObj.nextLine().split(" ",2);
+            String command = input[0];
+            String params = "";
+            if(input.length>1){
+                params = input[1];
+            }
+            if(command.equals("list")){
                 System.out.println("Here are your tasks:");
                 for(int i = 0; i<index; i++){
                     if(done[i]){
-                        System.out.println(i + 1 + ".[x] " + list[i]);
+                        System.out.println(i + 1 + ".["+ Type[i]+ "]"+"[x] " + list[i]);
                     }
                     else {
-                        System.out.println(i + 1 + ":[ ] " + list[i]);
+                        System.out.println(i + 1 + ".["+ Type[i]+ "]"+"[ ] " + list[i]);
                     }
                 }
             }
-            else if(input.split(" ")[0].equals("mark")){
-                int temp = parseInt(input.split(" ")[1]);
+            else if(command.equals("mark")){
+                int temp = parseInt(params);
                 System.out.println("marking task " + temp);
                 done[temp-1] = true;
 
             }
-            else if(input.split(" ")[0].equals("unmark")){
-                int temp = parseInt(input.split(" ")[1]);
+            else if(command.equals("unmark")){
+                int temp = parseInt(params);
                 System.out.println("unmarking task " + temp);
                 done[temp-1] = false;
 
             }
-            else if(input.equals("bye")){
+            else if(command.equals("bye")){
                 System.out.println("bai");
                 break;
             }
-            else {
-                System.out.println("added: " +input);
+            else if(command.equals("todo")) {
+                System.out.println("added: " + params);
                 done[index] = false;
-                list[index] = input;
+                list[index] = params;
+                Type[index] = "T";
                 index++;
+                System.out.println("You have "+index+" tasks.");
+            }
+            else if(command.equals("deadline")) {
+                System.out.println("added: " + params);
+                done[index] = false;
+                list[index] = params;
+                Type[index] = "D";
+                index++;
+                System.out.println("You have "+index+" tasks.");
+            }
+            else if(command.equals("event")) {
+                System.out.println("added: " + params);
+                done[index] = false;
+                list[index] = params;
+                Type[index] = "E";
+                index++;
+                System.out.println("You have "+index+" tasks.");
             }
         }
     }
