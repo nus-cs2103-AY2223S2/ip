@@ -50,29 +50,26 @@ public class Duke {
         String[] strings = { "Hello I'm Duke", "What can I do for you?" };
         printer(strings);
 
-        ArrayList<Task> taskList = new ArrayList<>();
+        TaskList taskList = new TaskList();
+        Commands commands = new Commands(taskList);
 
         String userInput = sc.nextLine().strip();
         while (!userInput.equals("bye")) {
-            if (userInput.equals("list")) {
-                taskPrinter(taskList);
-            } else if (userInput.split(" ")[0].equals("mark")) {
+            String taskType = userInput.split(" ")[0];
+            if (taskType.equals("list")) {
+                commands.listTasks();
+            } else if (taskType.equals("mark")) {
                 int taskId = Integer.parseInt(userInput.split(" ")[1]) - 1;
-                Task task = taskList.get(taskId);
-                task.markAsDone();
-                taskMarker(task);
-                taskList.set(taskId, task);
-
-            } else if (userInput.split(" ")[0].equals("unmark")) {
+                commands.markTask(taskId);
+            } else if (taskType.equals("unmark")) {
                 int taskId = Integer.parseInt(userInput.split(" ")[1]) - 1;
-                Task task = taskList.get(taskId);
-                task.markAsNotDone();
-                taskMarker(task);
-                taskList.set(taskId, task);
-            } else {
-                printer("added: " + userInput);
-                Task task = new Task(userInput);
-                taskList.add(task);
+                commands.unmarkTask(taskId);
+            } else if (taskType.equals("todo")) {
+                commands.addToDoTask(userInput);
+            } else if (taskType.equals("deadline")) {
+                commands.addDeadlineTask(userInput);
+            } else if (taskType.equals("event")) {
+                commands.addEventTask(userInput);
             }
             userInput = sc.nextLine().strip();
 
