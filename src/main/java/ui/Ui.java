@@ -38,6 +38,11 @@ public class Ui {
         System.out.println(indentedResponse);
     }
 
+    /**
+     * Prints the formatted error in the console.
+     *
+     * @param exception the exception to be printed
+     */
     public void printFormattedError(DukeException exception) {
         printFormattedResponse("☹ OOPS!!! " + exception.toString());
     }

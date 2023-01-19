@@ -8,32 +8,52 @@ import ui.Ui;
 import java.util.Scanner;
 
 public class Duke {
-    public static void main(String[] args) {
-        LocalStorage localTaskList = new LocalStorage("./data/tasks.txt");
+    private LocalStorage localTaskList;
+    private TaskList tasks;
+    private Ui ui;
 
-        Ui ui = new Ui();
-        ui.printStartUpMessage();
+    public Duke() {
+        this.ui = new Ui();
+        this.tasks = new TaskList();
+    }
+
+    public Duke(String filepath) {
+        this.ui = new Ui();
+        this.tasks = new TaskList();
+        try {
+            this.localTaskList = new LocalStorage(filepath);
+            this.localTaskList.loadIntoProgramTaskList(this.tasks);
+        } catch (DukeException error) {
+            ui.printFormattedError(error);
+        }
+    }
+
+    public void run() {
+        this.ui.printStartUpMessage();
 
         Scanner scanner = new Scanner(System.in);
-        TaskList taskList = new TaskList();
-
-        localTaskList.loadIntoProgramTaskList(taskList);
 
         while (true) {
             String request = scanner.nextLine();
             if (request.equalsIgnoreCase("BYE")) {
-                localTaskList.writeFromProgramTaskList(taskList);
+                if (this.localTaskList != null) {
+                    this.localTaskList.writeFromProgramTaskList(this.tasks);
+                }
                 break;
             }
             try {
                 Command command = new Request(request).parse();
-                String reply = command.run(taskList);
-                ui.printFormattedResponse(reply);
+                String reply = command.run(this.tasks);
+                this.ui.printFormattedResponse(reply);
             } catch (DukeException error) {
-                ui.printFormattedError(error);
+                this.ui.printFormattedError(error);
             }
         }
 
-        ui.printExitingMessage();
+        this.ui.printExitingMessage();
+    }
+
+    public static void main(String[] args) {
+        new Duke("./data/tasks.txt").run();
     }
 }

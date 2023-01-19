@@ -2,6 +2,7 @@ package storage;
 
 import command.*;
 import dukeexeption.InvalidArgumentException;
+import dukeexeption.UnknownCommandException;
 import task.Task;
 
 import java.io.*;
@@ -63,7 +64,7 @@ public class LocalStorage {
                             break;
                         default:
                             System.out.println("Error occurs at: " + s);
-                            throw new RuntimeException("Datafile provided is corrupted," +
+                            throw new UnknownCommandException("Datafile provided is corrupted," +
                                     "create a new file or follow the format.");
                     }
 
@@ -76,13 +77,13 @@ public class LocalStorage {
                             break;
                         default:
                             System.out.println("Error occurs at: " + s);
-                            throw new RuntimeException("Datafile provided is corrupted," +
+                            throw new UnknownCommandException("Datafile provided is corrupted," +
                                     "create a new file or follow the format.");
                     }
 
                     currIndex++;
                 } catch (IndexOutOfBoundsException error) {
-                    throw new RuntimeException("Datafile provided is corrupted," +
+                    throw new InvalidArgumentException("Datafile provided is corrupted," +
                             "create a new file or follow the format.");
                 }
             }
@@ -90,7 +91,7 @@ public class LocalStorage {
             reader.close();
             fr.close();
         } catch (IOException error) {
-            error.printStackTrace();
+            throw new InvalidArgumentException(error.toString());
         }
     }
 
@@ -111,7 +112,7 @@ public class LocalStorage {
             writer.close();
             fw.close();
         } catch (IOException error) {
-            error.printStackTrace();
+            throw new InvalidArgumentException(error.toString());
         }
     }
 }
