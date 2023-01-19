@@ -90,6 +90,13 @@ public class TaskManager implements ExecutableRegisterable {
        };
     }
 
+    /**
+     * Gets a index number from the index string.
+     * @param indexStr the string from which the index number is get.
+     * @return the index as an int.
+     * @throws InvalidArgumentException the exception whose value should be
+     * displayed.
+     */
     private int getIndex(String indexStr) throws InvalidArgumentException {
         final int index;
         try {
