@@ -34,6 +34,7 @@ public class Duke{
             try {
                 String[] commandList = command.split(" ");
                 String type = commandList[0].toLowerCase();
+                boolean missingCommandInfo = commandList.length <= 1;
 
                 switch(type) {
                     case LIST_TASKS: {
@@ -45,7 +46,7 @@ public class Duke{
                         break;
                     }
                     case DEADLINE: {
-                        if (commandList.length <= 1) {
+                        if (missingCommandInfo) {
                             throw new DukeException("Please give a name for your deadline!");
                         } else if (!command.contains(" /by ")) {
                             throw new DukeException("Please give a date/time for your deadline!");
@@ -57,14 +58,14 @@ public class Duke{
                         break;
                     }
                     case TODO: {
-                        if (commandList.length <= 1) {
+                        if (missingCommandInfo) {
                             throw new DukeException("Please give a name for your ToDo task!");
                         }
                         tasks.addTask(new ToDo(command.replaceFirst("todo ", "").strip()));
                         break;
                     }
                     case EVENT: {
-                        if (commandList.length <= 1) {
+                        if (missingCommandInfo) {
                             throw new DukeException("Please give a name for your event!");
                         } else if (!command.contains(" /from ")) {
                             throw new DukeException("Please give a starting date/time for your event!");
@@ -80,6 +81,9 @@ public class Duke{
                         break;
                     }
                     case MARK: {
+                        if (missingCommandInfo) {
+                            throw new DukeException("Please provide the index of the task!");
+                        }
                         int index = Integer.parseInt(commandList[1]);
                         if (index > tasks.size() || index <= 0) {
                             System.out.println("There is no task at index " + index + "!");
@@ -91,6 +95,9 @@ public class Duke{
                         break;
                     }
                     case UNMARK: {
+                        if (missingCommandInfo) {
+                            throw new DukeException("Please provide the index of the task!");
+                        }
                         int index = Integer.parseInt(commandList[1]);
                         if (index > tasks.size() || index <= 0) {
                             System.out.println("There is no task at index " + index + "!");
