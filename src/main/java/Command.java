@@ -28,31 +28,13 @@ public enum Command {
     MARK("mark") {
         @Override
         public void execute(String args) {
-            String[] parts = args.split("\\s");
-            if (parts.length > 1) {
-                String number = parts[1];
-                if (number.matches("^\\d+")) {
-                    int i = Integer.valueOf(number);
-                    Saturday.mark(i);
-                }
-            } else {
-                throw new IllegalArgumentException("Please input the number of the item you would like to mark");
-            }
+            Saturday.mark(args);
         }
     },
     UNMARK("unmark") {
         @Override
         public void execute(String args) {
-            String[] parts = args.split("\\s");
-            if (parts.length > 1) {
-                String number = parts[1];
-                if (number.matches("^\\d+")) {
-                    int i = Integer.valueOf(number);
-                    Saturday.unMark(i);
-                }
-            } else {
-                throw new IllegalArgumentException("Please input the number of the item you would like to mark");
-            }
+            Saturday.unMark(args);
         }
     },
     BYE("bye") {
@@ -76,6 +58,6 @@ public enum Command {
                 return c;
             }
         }
-        throw new IllegalArgumentException("Invalid command: " + input);
+        throw new SaturdayException("OOPS!!! I'm sorry, but I don't know what that means :-(");
     }
 }

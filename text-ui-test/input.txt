@@ -10,4 +10,8 @@ list
 unmark 3
 event dinner date /from Tues 8pm /to 10pm
 list
+todo
+blah
+deadline french assignment
+event group meeting /from
 bye

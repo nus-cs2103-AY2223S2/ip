@@ -18,8 +18,8 @@ public class Saturday {
             try {
                 Command command = Command.getCommand(input);
                 command.execute(input);
-            } catch (IllegalArgumentException e) {
-                System.out.println(e.getMessage());
+            } catch (SaturdayException e) {
+                Utils.output(e.getMessage());
             }
             Utils.divider();
             Utils.newline();
@@ -32,6 +32,8 @@ public class Saturday {
             String description = text.substring(s + 1);
             ToDo task = new ToDo(description);
             taskList.addTask(task);
+        } else {
+            throw new SaturdayException("OOPS!!! The description of a todo cannot be empty");
         }
     }
 
@@ -44,7 +46,7 @@ public class Saturday {
             Deadline task = new Deadline(description, deadline);
             taskList.addTask(task);
         } else {
-            throw new IllegalArgumentException("Please specify the deadline");
+            throw new SaturdayException("OOPS!!! The deadline cannot be empty (use /by)");
         }
     }
 
@@ -59,7 +61,7 @@ public class Saturday {
             Event task = new Event(description, from, to);
             taskList.addTask(task);
         } else {
-            throw new IllegalArgumentException("Please specify the timeframe");
+            throw new SaturdayException("OOPS!!! The timeframe cannot be empty (use /from and /to)");
         }
     }
 
@@ -67,12 +69,30 @@ public class Saturday {
         Utils.output(taskList.toString());
     }
 
-    public static void mark(int i) {
-        taskList.mark(i);
+    public static void mark(String text) {
+        String[] parts = text.split("\\s");
+        if (parts.length > 1) {
+            String number = parts[1];
+            if (number.matches("^\\d+")) {
+                int i = Integer.valueOf(number);
+                taskList.mark(i);
+            }
+        } else {
+            throw new SaturdayException("OOPS!!! Please input the number of the item you would like to mark");
+        }
     }
 
-    public static void unMark(int i) {
-        taskList.unMark(i);
+    public static void unMark(String text) {
+        String[] parts = text.split("\\s");
+        if (parts.length > 1) {
+            String number = parts[1];
+            if (number.matches("^\\d+")) {
+                int i = Integer.valueOf(number);
+                taskList.unMark(i);
+            }
+        } else {
+            throw new SaturdayException("OOPS!!! Please input the number of the item you would like to mark");
+        }
     }
 
     public static void exit() {
