@@ -233,10 +233,15 @@ public class Duke {
 
         ui.showWelcome();
         boolean isExit = false;
+        boolean isFirst = true;
 
         while (!isExit) {
             ui.readCommand();
             this.taskList = ui.execute(this.taskList);
+            
+            //if (!isFirst) {
+            //}
+            //isFirst = false;
             storage.writeToFile(taskList.toString());
         }
 

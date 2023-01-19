@@ -3,7 +3,7 @@ package duke;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.time.temporal.ChronoUnit;
-
+import java.time.format.DateTimeParseException;
 
 class Events extends Task {
 
@@ -24,11 +24,14 @@ class Events extends Task {
     
     
     String localDateParser(String date) {
-        LocalDate localDate = LocalDate.parse(date);
-        return localDate.format(DateTimeFormatter.ofPattern("MMM dd yyyy"));
+        try {
+            LocalDate localDate = LocalDate.parse(date);
+            return localDate.format(DateTimeFormatter.ofPattern("MMM dd yyyy"));
+        } catch (DateTimeParseException e) {
+            return date;
+        }
     }
     
-
     @Override
     Events markAsDone() {
         return new Events(this.getDescription(), from, to, true);

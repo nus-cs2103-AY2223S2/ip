@@ -3,6 +3,7 @@ package duke;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.time.temporal.ChronoUnit;
+import java.time.format.DateTimeParseException;
 
 class Deadline extends Task {
 
@@ -20,8 +21,12 @@ class Deadline extends Task {
     
     
     String localDateParser() {
-        LocalDate date = LocalDate.parse(by);
-        return date.format(DateTimeFormatter.ofPattern("MMM dd yyyy"));
+        try {
+            LocalDate date = LocalDate.parse(by);
+            return date.format(DateTimeFormatter.ofPattern("MMM dd yyyy"));
+        } catch (DateTimeParseException e) {
+            return by;
+        }
     }
     
     @Override

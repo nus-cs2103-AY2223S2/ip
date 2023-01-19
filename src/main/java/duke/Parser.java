@@ -108,7 +108,7 @@ class Parser {
             throw new DukeException("Deadline must not be empty");
         }
         try {
-            String[] dateRange = description.split("/");
+            String[] dateRange = description.split("/by");
             Task newTask = new Deadline(dateRange[0],dateRange[1].replaceFirst("by",""));
             return tasks.add(newTask);
         } catch (DukeException e) {
@@ -132,8 +132,8 @@ class Parser {
         if (description.trim().length() == 0) {
             throw new DukeException("Event must not be empty");
         }
-        String[] dateRange = description.split("/");
-        Task newTask = new Events(dateRange[0],dateRange[1].replaceFirst("from",""),dateRange[2].replaceFirst("to",""));
+        String[] dateRange = description.split("/from");
+        Task newTask = new Events(dateRange[0],dateRange[1].split("/to")[0],dateRange[1].split("/to")[1]);
         return tasks.add(newTask);
     }
 

@@ -22,7 +22,7 @@ class Ui {
 
     TaskList<Task> execute(TaskList<Task> tasks) {        
         if (description.equals(Parser.SHOW_TASKS)) {
-            this.tasks.listAllTasks();
+            this.tasks = tasks.listAllTasks();
         } else if (description.equals(Parser.TERMINATE)) {
             Parser.exit();
         } else if (description.equals(Parser.MARK)) {
@@ -49,7 +49,6 @@ class Ui {
             if (Parser.INVALID_COMMANDS.contains(description)) {
                 throw new DukeUnknownException("Illegal command");
             } else {
-                System.out.println("test");
                 Task newTask = new Task(description);
                 this.tasks = tasks.add(newTask);
                 return this.tasks;

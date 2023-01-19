@@ -23,10 +23,11 @@ class TaskList<Task> {
         return this.tasks.size();
     }
 
-    void listAllTasks() {
+    TaskList<Task> listAllTasks() {
         for (int i=0; i < this.numberOfTasks(); i++) {
             System.out.println(i + INCREMENT + "." + this.get(i));    
         }
+        return new TaskList<Task>(this.tasks);
     }
 
     Task get(int index) {
