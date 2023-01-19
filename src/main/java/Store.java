@@ -13,7 +13,7 @@ public class Store extends Commands {
             String back = content.substring(9);
             String[] substrings = back.split("/");
             String date = substrings[1];
-            task = new Deadline(substrings[0], date.split(" ")[1]);
+            task = new Deadline(substrings[0], date.substring(3));
         } else if (content.matches("^event\\s.*$")) {
             String back = content.substring(6);
             String[] substrings = back.split("/");

@@ -24,6 +24,16 @@ public class User {
         this.tasks.get(index).markTask(done);
     }
 
+    public void deleteTask(int index) {
+        this.tasks.remove(index);
+        this.taskCount -= 1;
+        System.out.println("Now you have " + this.taskCount + " tasks in the list.");
+    }
+
+    public Tasks getTask(int index) {
+        return this.tasks.get(index);
+    }
+
     public String getTaskIcon(int index) {
         return this.tasks.get(index).getStatusIcon();
     }
