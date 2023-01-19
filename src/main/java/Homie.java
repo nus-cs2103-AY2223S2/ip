@@ -23,15 +23,23 @@ public class Homie {
         }
     }
 
-    public static void modifyTask(String[] command) throws NoTaskException {
+    public static void modifyTask(String[] command) throws HomieException {
 
         if (command.length < 2) {
             throw new NoTaskException("");
         }
 
         String operation = command[0];
-        int idx = Integer.parseInt(command[1]);
-        Task t = taskList.get(idx - 1);
+        String idx = command[1];
+
+        // If idx is not an integer or idx is out of bound
+        if (!idx.matches("-?\\d+")
+                || Integer.parseInt(idx) < 1
+                || Integer.parseInt(idx) > taskList.size()) {
+            throw new TaskOutOfBoundException("");
+        }
+
+        Task t = taskList.get(Integer.parseInt(idx) - 1);
 
         if (operation.equals("mark")) {
             t.markAsDone();
@@ -84,21 +92,29 @@ public class Homie {
 
     }
 
-    public static void shutdown() {
-        Homie.print("   > Aight imma head out");
-    }
-
-    public static void deleteTask(String[] command) throws NoTaskException {
+    public static void deleteTask(String[] command) throws HomieException {
 
         if (command.length < 2) {
             throw new NoTaskException("");
         }
 
-        int idx = Integer.parseInt(command[1]);
-        Task t = taskList.get(idx - 1);
+        String idx = command[1];
+
+        // If idx is not an integer or idx is out of bound
+        if (!idx.matches("-?\\d+")
+                || Integer.parseInt(idx) < 1
+                || Integer.parseInt(idx) > taskList.size()) {
+            throw new TaskOutOfBoundException("");
+        }
+
+        Task t = taskList.get(Integer.parseInt(idx) - 1);
         taskList.remove(t);
         Homie.print("   > Task deleted: " + t);
         Homie.print("   > Chu have " + taskList.size() + " tasks remained.");
+    }
+
+    public static void shutdown() {
+        Homie.print("   > Aight imma head out");
     }
 
     public static void interact() {
