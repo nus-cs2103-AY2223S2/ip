@@ -1,3 +1,8 @@
+import DukeExceptions.DukeEmptyInputException;
+import DukeExceptions.DukeInvalidInputException;
+import java.util.regex.Pattern;
+import java.util.regex.Matcher;
+
 import java.util.ArrayList;
 public class ToDoList {
     private ArrayList<Task> list;
@@ -9,9 +14,8 @@ public class ToDoList {
     public String add(Task t) {
         list.add(t);
         int size = list.size();
-        String reply = String.format("Sure no problem. I've added this task:\n\t%s\nNow you have %d task%s in the list",
+        return String.format("Sure no problem. I've added this task:\n\t%s\nNow you have %d task%s in the list",
                 t.toString(), size, size == 1 ? "" : "s");
-        return reply;
     }
 
     public String listItems() {
@@ -22,36 +26,28 @@ public class ToDoList {
             count++;
         }
         str.deleteCharAt(str.length() - 1);
-        return String.format("Here are the tasks in your list:\n%s", str.toString());
+        return String.format("Here are the tasks in your list:\n%s", str);
     }
 
-//    public String mark(int index) {
-//        int size = list.size();
-//        if (index >= size || index < 1) {
-//            return "Hey just to let you know, you gave me an invalid number to mark!\nType list to see what's in the list.";
-//        }
-//        return list.get(index - 1).markAsDone();
-//    }
-//
-//    public String unmark(int index) {
-//        int size = list.size();
-//        if (index >= size || index < 1) {
-//            return "Hey just to let you know, you gave me an invalid number to unmark!\nType list to see what's in the list.";
-//        }
-//        return list.get(index - 1).markNotDone();
-//    }
-
-    public String changeState(int index, String action) {
-        int size = list.size();
-        if (index - 1 >= size || index < 1) {
-            return String.format("Sorry, you gave me an invalid number to %s!\nType list to see what's in the list", action);
+    public String changeState(String param, String action) throws DukeInvalidInputException, DukeEmptyInputException {
+        Pattern pattern = Pattern.compile("\\s");
+        Matcher matcher = pattern.matcher(param);
+        if (matcher.matches()) {
+            throw new DukeInvalidInputException("Sorry you need to specify a single input.");
         }
-        if (action.equals("mark")) {
-            return list.get(index - 1).markAsDone();
-        } else if (action.equals("unmark")) {
-            return list.get(index - 1).markNotDone();
-        } else {
-            return "Invalid action was inputted";
+        try {
+            int index = Integer.parseInt(param.trim());
+            if (action.equals("mark")) {
+                return list.get(index - 1).markAsDone();
+            } else {
+                return list.get(index - 1).markNotDone();
+            }
+        } catch (NumberFormatException e) {
+            throw new DukeInvalidInputException(String.format("I'd love to %s that but I only understand numbers. ", action) +
+                    "Try inputting a number instead!");
+        } catch (IndexOutOfBoundsException e) {
+            throw new DukeInvalidInputException(String.format("You gave me an invalid number to %s. ", action) +
+                    "Type list to see what you have in the list so far.");
         }
     }
 }
