@@ -1,3 +1,10 @@
+import dukeexceptions.MissingArgumentException;
+import dukeexceptions.UnknownCommandException;
+import tasks.Deadline;
+import tasks.Events;
+import tasks.Task;
+import tasks.ToDo;
+
 public class TaskList {
     protected Task[] list;
     protected int len;
@@ -40,7 +47,11 @@ public class TaskList {
         System.out.print(reply + "\n");
     }
 
-    public void addToDo(String description){
+    public void addToDo(String description) throws MissingArgumentException {
+        if (description.trim().equals("")) {
+            throw new MissingArgumentException("☹ OOPS!!! The description of a todo cannot be empty.");
+        }
+
         this.list[len] = new ToDo(description);
         this.len++;
 
@@ -52,7 +63,17 @@ public class TaskList {
         System.out.print(reply);
     }
 
-    public void addDeadline(String description, String by){
+    public void addDeadline(String requestContent) throws MissingArgumentException {
+        String[] splitWithBy = requestContent.split(" /by ", 2);
+        String description = splitWithBy[0].trim();
+
+        if (description.equals("")) {
+            throw new MissingArgumentException("☹ OOPS!!! The description of a deadline cannot be empty.");
+        } else if (splitWithBy.length != 2 || splitWithBy[1].trim().equals("")) {
+            throw new MissingArgumentException("☹ OOPS!!! The deadline cannot be empty.");
+        }
+
+        String by = splitWithBy[1].trim();
         this.list[len] = new Deadline(description, by);
         this.len++;
 
@@ -64,7 +85,26 @@ public class TaskList {
         System.out.print(reply);
     }
 
-    public void addEvent(String description, String from, String to){
+    public void addEvent(String requestContent) throws MissingArgumentException{
+        String[] splitFrom = requestContent.split(" /from ", 2);
+        String description = splitFrom[0].trim();
+
+        if (description.equals("")) {
+            throw new MissingArgumentException("☹ OOPS!!! The description of an event cannot be empty.");
+        } else if (splitFrom.length != 2) {
+            throw new MissingArgumentException("☹ OOPS!!! The from cannot be empty.");
+        }
+
+        String[] splitTo = splitFrom[1].split(" /to ", 2);
+        String from = splitTo[0].trim();
+        String to = splitTo[1].trim();
+
+        if (from.equals("")) {
+            throw new MissingArgumentException("☹ OOPS!!! The from cannot be empty.");
+        }else if (splitTo.length != 2 || splitTo[1].trim().equals("")) {
+            throw new MissingArgumentException("☹ OOPS!!! The to cannot be empty.");
+        }
+
         this.list[len] = new Events(description, from, to);
         this.len++;
 
@@ -78,5 +118,9 @@ public class TaskList {
 
     public String taskToString(int index){
         return list[index].toString();
+    }
+
+    public void unknownCommand() throws MissingArgumentException{
+        throw new UnknownCommandException();
     }
 }
