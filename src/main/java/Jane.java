@@ -86,6 +86,9 @@ public class Jane {
                 }
 
             }
+            else if (output.equals("todo")||output.equals("deadline") ||output.equals("event")){
+                System.out.println("Please specify the task to be done :(((");
+            }
             else if (output.startsWith("todo")) {
                 String des = output.substring(5);
                 count+=1;
@@ -96,6 +99,10 @@ public class Jane {
             else if (output.startsWith("deadline")) {
                 String des = output.substring(9);
                 String[] s = des.split("/");
+                if (s.length == 1) {
+                    System.out.println("Please specify when the deadline is :(((");
+                    continue;
+                }
                 count+=1;
                 Deadline d = new Deadline(count, s[0], s[1]);
                 tasks.add(d);
@@ -104,6 +111,10 @@ public class Jane {
             else if(output.startsWith("event")) {
                 String des = output.substring(6);
                 String[] s = des.split("/");
+                if (s.length == 1) {
+                    System.out.println("Please specify when the event is :(((");
+                    continue;
+                }
                 count+=1;
                 Event e = new Event(count, s[0], s[1], s[2]);
                 tasks.add(e);
@@ -122,10 +133,7 @@ public class Jane {
                 }
             }
             else if (!output.equals("list") ) {
-                Task t = new Task(count + 1, output);
-                count+=1;
-                tasks.add(t);
-                System.out.println("added: "+ t.description);
+                System.out.println("Im sorry I don't understand what you mean :((");
             } else {
                 for (int i = 0; i < count; i++) {
                     System.out.println(tasks.get(i).toString());
