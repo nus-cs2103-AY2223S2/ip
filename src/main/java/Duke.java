@@ -1,3 +1,5 @@
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Scanner;
 
 public class Duke {
@@ -7,22 +9,33 @@ public class Duke {
                 + "| | | | | | | |/ / _ \\\n"
                 + "| |_| | |_| |   <  __/\n"
                 + "|____/ \\__,_|_|\\_\\___|\n";
-        final String START_MESSAGE = "Hello! I'm Duke\n What can I do for you?";
-        final String END_MESSAGE= "Goodbye";
-        final String TERMINATING_MESSAGE = "bye";
-
+        final String MESSAGE_START = "Hello! I'm Duke\n What can I do for you?";
+        final String MESSAGE_END= "Goodbye";
+        final String MESSAGE_TERMINATE = "bye";
+        final String MESSAGE_LIST = "list";
+        List<String> tasks = new ArrayList<String>();
 
         System.out.println("Hello from\n" + logo);
-        System.out.println(START_MESSAGE);
+        System.out.println(MESSAGE_START);
         Scanner input = new Scanner(System.in);
         while(true){
            String nextLine = input.nextLine();
             switch(nextLine){
-                case TERMINATING_MESSAGE:
-                    System.out.println(END_MESSAGE);
+                case MESSAGE_LIST:
+                    int i = 0;
+                    for(String entry : tasks){
+                        i += 1;
+                        System.out.println(i + ": " + entry);
+
+                    }
+
+                    break;
+                case MESSAGE_TERMINATE:
+                    System.out.println(MESSAGE_END);
                     return;
                 default:
-                    System.out.println(nextLine);
+                    tasks.add(nextLine);
+                    System.out.println("added: " + nextLine);
 
             }
 
