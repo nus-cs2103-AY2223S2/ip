@@ -4,10 +4,9 @@ import java.util.*;
 
 /**
  * This class shall contain several executable objects, hence it shall be
- * considered 'nestable' executable. It shall serve as the base class for
- * many other classes.
+ * considered 'nestable' executable.
  */
-public abstract class NestableExecutableObject implements Executable {
+public class NestableExecutableObject implements Executable {
     /**
      * Instantiates a new TokensManager.
      * @param preExecutables the executables to be executed first in an
@@ -85,7 +84,7 @@ public abstract class NestableExecutableObject implements Executable {
      * to that executable.
      * @param executable the executable to be put into the keyword executable loop.
      */
-    public void registerKeywordExecutable(IdentifiableExecutable executable) {
+    public void registerIdentifiableExecutable(IdentifiableExecutable executable) {
         final String key = executable.getId();
         identifiedExecutables.put(key, executable);
     }

@@ -9,17 +9,8 @@ public class Duke {
                 + "|____/ \\__,_|_|\\_\\___|\n";
         System.out.println("Hello from\n" + logo);
         final Scanner scanner = new Scanner(System.in);
-        while (true) {
-            String input = scanner.nextLine();
-            // sanitize the input
-            input.trim();
-            if (input.equals("bye")) {
-                System.out.println('\t' + "Bye, hope to see you again!");
-                break;
-            } else {
-                System.out.println('\t' + input);
-            }
-        }
-
+        final DukeEventLoop eventLoop = DukeEventLoop.createEventLoop(scanner);
+        eventLoop.run();
+        scanner.close();
     }
 }
