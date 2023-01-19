@@ -76,6 +76,12 @@ public class Duke {
         } else if(word[0].equals("event")){
             String[] sliceWord = Arrays.copyOfRange(word, 1, word.length);
             specialTask(sliceWord, 'E');
+        } else if(word[0].equals("delete")) {
+            try { 
+                deleteTask(Integer.parseInt(word[1]));
+            } catch(NumberFormatException e){
+                System.out.println("Invalid number. Please enter a number");
+            }
         }
         else {
             System.out.println(("Invalid command. Please try again!"));
@@ -106,9 +112,9 @@ public class Duke {
     }
 
     private static Task getTask(int num){
-        if (num <= strArr.size()) {
+        try {
             return strArr.get(num-1);
-        } else {
+        } catch(IndexOutOfBoundsException e){
             System.out.println("Number out of range. Please try again");
             return null;
         }
@@ -148,5 +154,15 @@ public class Duke {
         System.out.println("Got it. I've added this task:");
         System.out.println(t);
         System.out.println("Now you have " + strArr.size() + " tasks in the list.");
+    }
+
+    private static void deleteTask(int num){
+        Task selectedTask = getTask(num);
+        if(selectedTask != null){
+            strArr.remove(selectedTask);
+            System.out.println("Noted. I've removed this task:");
+            System.out.println(selectedTask);
+            System.out.println("Now you have " + strArr.size() + " tasks in the list.");
+        }
     }
 }
