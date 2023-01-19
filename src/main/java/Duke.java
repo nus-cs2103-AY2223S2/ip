@@ -18,6 +18,9 @@ public class Duke {
         public void setIsDone(boolean status) {
             this.isDone = status;
         }
+        public void setId(int id) {
+            this.id = id;
+        }
         @Override
         public String toString() {
             String statusIcon = this.getStatusIcon();
@@ -80,6 +83,14 @@ public class Duke {
         while(myObj.hasNext()) {
             String input = myObj.nextLine();
             if (input.equals("list")) {
+                try { //check if list is empty
+                    if(tasks.isEmpty()) {
+                        throw new DukeExceptions("List is empty!");
+                    }
+                } catch(DukeExceptions de) {
+                    System.out.println("List is empty!");
+                    continue;
+                }
                 tasks.forEach(x -> {
                     System.out.println(x);
                 });
@@ -168,7 +179,7 @@ public class Duke {
                     System.out.println("Input cannot be empty!");
                     continue;
                 }
-                String[] inp = input.split("/"
+                String[] inp = input.split("/");
                 try { //Catching for input format error
                     if(inp.length != 3) {
                         throw new DukeExceptions("Format is task, start, end!");
@@ -192,6 +203,18 @@ public class Duke {
                 Event ev = new Event(tasks.size() + 1, desc, start, end);
                 tasks.add(ev);
                 continue;
+            }
+            if (input.startsWith("delete ")) {
+                String[] inp = input.split(" ");
+                int id = Integer.parseInt(inp[1]);
+                try {
+                    Task del = tasks.remove(id - 1);
+                    tasks.forEach(x -> x.setId(tasks.indexOf(x) + 1)); //update id of all items after removing
+                    continue;
+                } catch(Exception e) {
+                    System.out.println("No such task found!");
+                    continue;
+                }
             }
             Task tsk = new Task(tasks.size() + 1,input);
             tasks.add(tsk);
