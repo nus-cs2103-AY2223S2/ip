@@ -38,6 +38,12 @@ public class Task {
         System.out.println(separator);
     }
 
+    public void announceRemoved(ArrayList<Task> myTask) {
+        System.out.println("Noted. I've removed this task:");
+        System.out.println(this.toString());
+        System.out.println("Now we have " + myTask.size() + " tasks in the list.");
+    }
+
 
 }
 

@@ -48,6 +48,14 @@ public class Duke {
                 }
                 int taskNumber = Integer.parseInt(input.substring(5));
                 taskNumber--;
+
+                try {
+                    if (taskNumber < 0 || taskNumber >= myTasks.size()){
+                        throw new DukeException("☹ OOPS!!! The number to mark is invalid.");
+                    }
+                } catch (DukeException e) {
+                    System.out.println(e.getMessage());
+                }
                 Task task = myTasks.get(taskNumber);
                 task.taskDone();
             } else if (input.startsWith("unmark")) {
@@ -62,6 +70,13 @@ public class Duke {
                 }
                 int taskNumber = Integer.parseInt(input.substring(7));
                 taskNumber--;
+                try {
+                    if (taskNumber < 0 || taskNumber >= myTasks.size()){
+                        throw new DukeException("☹ OOPS!!! The number to unmark is invalid.");
+                    }
+                } catch (DukeException e) {
+                    System.out.println(e.getMessage());
+                }
                 Task task = myTasks.get(taskNumber);
                 task.taskNotDone();
             } else if (input.startsWith("todo")) {
@@ -112,11 +127,31 @@ public class Duke {
                 Event task = new Event(taskDescription, from, to);
                 myTasks.add(task);
                 task.announceAdded(myTasks);
+            } else if (input.startsWith("delete")) {
+                try {
+                    String pattern = "delete \\d*";
+                    boolean isMatch = input.matches(pattern);
+                    if (!isMatch){
+                        throw new DukeException("☹ OOPS!!! The description of a delete cannot be empty.");
+                    }
+                } catch (DukeException e) {
+                    System.out.println(e.getMessage());
+                }
+
+                int taskNumber = Integer.parseInt(input.substring(7));
+                taskNumber--;
+
+                try {
+                    if (taskNumber < 0 || taskNumber >= myTasks.size()){
+                        throw new DukeException("☹ OOPS!!! The number to delete is invalid.");
+                    }
+                } catch (DukeException e) {
+                    System.out.println(e.getMessage());
+                }
+                Task task = myTasks.get(taskNumber);
+                myTasks.remove(task);
+                task.announceRemoved(myTaskstodo);
             } else {
-//                Task task = new Task(input);
-//                myTasks.add(task);
-//                System.out.println("added: " + task.getDescription());
-//                System.out.println(separator);
                 System.out.println("Invalid response. Please try: todo, deadline or event. :)");
             }
         }
