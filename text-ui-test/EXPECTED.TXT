@@ -1,7 +1,40 @@
-Hello from
  ____        _        
 |  _ \ _   _| | _____ 
 | | | | | | | |/ / _ \
 | |_| | |_| |   <  __/
 |____/ \__,_|_|\_\___|
 
+Hello! I'm Duke
+What can I do for you?
+    Duke says:
+    Added
+    [T][ ] borrow book
+    Now you have 1 task(s) in the list.
+    OK, Here are the items in your list: 
+    1. [T][ ] borrow book
+    Duke says:
+    Added
+    [D][ ] return book (by: Sunday)
+    Now you have 2 task(s) in the list.
+    Duke says:
+    Added
+    [E][ ] project meeting (from: Mon 2pm to: 4pm)
+    Now you have 3 task(s) in the list.
+    OK, Here are the items in your list: 
+    1. [T][ ] borrow book
+    2. [D][ ] return book (by: Sunday)
+    3. [E][ ] project meeting (from: Mon 2pm to: 4pm)
+    OK I've marked this task as done: 
+    [T][X] borrow book
+    OK, Here are the items in your list: 
+    1. [T][X] borrow book
+    2. [D][ ] return book (by: Sunday)
+    3. [E][ ] project meeting (from: Mon 2pm to: 4pm)
+    OK I've marked this task as not done yet:
+    [T][ ] borrow book
+    OK, Here are the items in your list: 
+    1. [T][ ] borrow book
+    2. [D][ ] return book (by: Sunday)
+    3. [E][ ] project meeting (from: Mon 2pm to: 4pm)
+    Duke says:
+    Bye. Hope you run this program again!
