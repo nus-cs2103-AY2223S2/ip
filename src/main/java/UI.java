@@ -22,6 +22,22 @@ public class UI {
     }
 
     /**
+     * Return the number of current tasks.
+     * @param nameOfTask The number of tasks.
+     */
+    public String numberOfTasks(Task nameOfTask) {
+        return "Now you have " + Task.getNameOfTask().length() + "tasks in the list.";
+    }
+
+    /**
+     * Return the list of all the current tasks.
+     * @param nameOfTask The name of tasks.
+     */
+    public String printAllTasks(Task nameOfTask) {
+        return "Here are the tasks in your list: \n" + nameOfTask;
+    }
+
+    /**
      * Returns the message when a task is added.
      * @param added The newly added task.
      */

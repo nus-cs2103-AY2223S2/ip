@@ -5,7 +5,7 @@
  */
 public class Task {
     private final String nameOfTask;
-    private final boolean isDone;
+    private boolean isDone;
 
     /**
      * The constructor for Task.
@@ -20,8 +20,8 @@ public class Task {
      * A function to get the name of Task.
      * @return The name of Task.
      */
-    public String getNameOfTask() {
-        return nameOfTask;
+    public static String getNameOfTask() {
+        return this.nameOfTask;
     }
 
     /**
@@ -37,7 +37,7 @@ public class Task {
      * @return The status of the task.
      */
     public String getStatus() {
-        return "[" + (isDone ? "X" : " "); + "] " + this.nameOfTask;
+        return "[" + (isDone ? "X" : " ") + "] " + this.nameOfTask;
     }
 
     /**
