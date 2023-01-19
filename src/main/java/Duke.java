@@ -28,7 +28,7 @@ public class Duke {
         }
 
         String [] cmdParts = command.split(" ");
-        String cmdHeader = cmdParts[0];
+        String cmdHeader = cmdParts[0].toLowerCase();
 
         if (cmdHeader.equals("list")) {
             listTasks();
@@ -211,11 +211,11 @@ public class Duke {
 
         while (true) {
             System.out.print("You:\n");
-            String command = sc.nextLine().strip().toLowerCase();
+            String command = sc.nextLine().strip();
 
             System.out.println("\nDuke:");
 
-            if (command.equals("bye")) {
+            if (command.equalsIgnoreCase("bye")) {
                 System.out.println("Bye. Have a nice day!\n");
                 System.out.println(LINE);
                 break;
