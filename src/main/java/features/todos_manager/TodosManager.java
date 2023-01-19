@@ -2,8 +2,10 @@ package features.todos_manager;
 
 
 import event_loop.*;
+import utils.Pair;
 
 import java.util.ArrayList;
+import java.util.function.Function;
 
 /**
  * A class for managing todos.
@@ -37,8 +39,7 @@ public class TodosManager implements ExecutableRegisterable {
 
     /**
      * The executable for adding a TodoItem to this class.
-     * @return ExecutionStatus.finishCurrentIteration, i.e. this own event
-     * should take an entire iteration in the outer event loop.
+     * @return the executable for adding a TodoItem to this class.
      */
     Executable getAddTodoExecutable() {
         return new Executable() {
@@ -55,7 +56,7 @@ public class TodosManager implements ExecutableRegisterable {
 
     /**
      * Gets the executable for listing TodoItems.
-     * @return
+     * @return the executable for listing all the TodoItems.
      */
     IdentifiableExecutable getListTodosExecutable() {
        return new IdentifiableExecutable() {
@@ -74,9 +75,42 @@ public class TodosManager implements ExecutableRegisterable {
        };
     }
 
+    /**
+     * Gets the executable that will mark an item's isComplete as isComplete.
+     * @param id the id for the marker executable.
+     * @param isComplete whether if the marker executable will mark item as
+     *                   complete or not.
+     * @return the executable that will mark an item's isComplete.
+     */
+    IdentifiableExecutable getMarkerExecutable(boolean isComplete, String id) {
+        return new IdentifiableExecutable() {
+            @Override
+            public ExitStatus execute(String[] tokens) {
+                final String indexStr = tokens[1];
+                final int index = Integer.parseInt(indexStr) - 1;
+                final TodoItem item = todoItems.get(index);
+                item.setComplete(isComplete);
+                System.out.println("Nice, I've marked this item as done:");
+                System.out.println("\t" + item);
+                return ExitStatus.finishCurrentIteration;
+            }
+
+            @Override
+            public String getId() {
+                return id;
+            }
+        };
+    }
+
     @Override
     public void register(NestableExecutableObject nestable) {
         nestable.registerPostExecutable(getAddTodoExecutable());
         nestable.registerIdentifiableExecutable(getListTodosExecutable());
+        nestable.registerIdentifiableExecutable(
+                getMarkerExecutable(true, "mark")
+        );
+        nestable.registerIdentifiableExecutable(
+                getMarkerExecutable(false, "unmark")
+        );
     }
 }
