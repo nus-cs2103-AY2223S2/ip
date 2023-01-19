@@ -17,6 +17,7 @@ public class Duke {
         add("todo");
         add("deadline");
         add("event");
+        add("delete");
         add("bye");
     }};
 
@@ -36,7 +37,7 @@ public class Duke {
         }
 
         //Invalid command
-        if(!commandMap.contains(input[0]) || input.length > 2 && (input[0].equals("mark") || input[0].equals("unmark"))) {
+        if(!commandMap.contains(input[0]) || input.length > 2 && (input[0].equals("mark") || input[0].equals("unmark") || input[0].equals("delete"))) {
             throw new DukeException(1);
         }
 
@@ -46,7 +47,7 @@ public class Duke {
         }
 
         //Non-numerical parameters
-        if(input[0].equals("mark") || input[0].equals("unmark")) {
+        if(input[0].equals("mark") || input[0].equals("unmark") || input[0].equals("delete")) {
             if(!isNumeric(input[1])) throw new DukeException(3); 
         }
 
@@ -152,6 +153,14 @@ public class Duke {
                     lists.add(eventObj);
                     System.out.println("\tGot it. I've added this task: ");
                     System.out.println("\t\t "+ eventObj.toString());
+                    System.out.println(String.format("Now you have %d tasks in the list", lists.size()));
+                    break;
+                case "delete": 
+                    int deleteIndex = Integer.parseInt(input[1]) - 1;
+                    Task deletedTask = lists.get(deleteIndex);
+                    lists.remove(deleteIndex);
+                    System.out.println("Following Task has been deleted:");
+                    System.out.println("\t " + deletedTask.toString());
                     System.out.println(String.format("Now you have %d tasks in the list", lists.size()));
                     break;
                 case "bye":
