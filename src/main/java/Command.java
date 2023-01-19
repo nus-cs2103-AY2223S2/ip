@@ -1,14 +1,27 @@
+import java.util.Arrays;
+
 public enum Command {
-    ADD("add") {
+    TODO("todo") {
         @Override
         public void execute(String args) {
-            Saturday.add(args);
+            Saturday.todo(args);
+        }
+    },
+    DEADLINE("deadline") {
+        @Override
+        public void execute(String args) {
+            Saturday.deadline(args);
+        }
+    },
+    EVENT("event") {
+        @Override
+        public void execute(String args) {
+            Saturday.event(args);
         }
     },
     LIST("list") {
         @Override
         public void execute(String args) {
-            // code to handle "list" command
             Saturday.displayList();
         }
     },
@@ -23,7 +36,7 @@ public enum Command {
                     Saturday.mark(i);
                 }
             } else {
-                System.out.println("Please input the number of the item you would like to mark");
+                throw new IllegalArgumentException("Please input the number of the item you would like to mark");
             }
         }
     },
@@ -38,7 +51,7 @@ public enum Command {
                     Saturday.unMark(i);
                 }
             } else {
-                System.out.println("Please input the number of the item you would like to mark");
+                throw new IllegalArgumentException("Please input the number of the item you would like to mark");
             }
         }
     },
@@ -59,17 +72,10 @@ public enum Command {
 
     public static Command getCommand(String input) {
         for (Command c : Command.values()) {
-            if (input.startsWith("unmark")) {
-                return UNMARK;
-            } else if (input.startsWith("mark")) {
-                return MARK;
-            } else if (c.command.equals(input)) {
+            if (input.startsWith(c.command)) {
                 return c;
             }
-//            if (c.command.equals(input)) {
-//                return c;
-//            }
         }
-        return ADD;
+        throw new IllegalArgumentException("Invalid command: " + input);
     }
 }

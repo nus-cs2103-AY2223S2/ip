@@ -7,52 +7,79 @@ public class Saturday {
     public static void main(String[] args) {
         // Greeting
         Utils.divider();
-        System.out.println("\t Hello! I'm Saturday\n\t What can I do for you?");
+        Utils.output("\t Hello! I'm Saturday\n\t What can I do for you?");
         Utils.divider();
-        System.out.println("");
+        Utils.newline();
 
         Scanner scanner = new Scanner(System.in);
         while (isActive) {
             String input = scanner.nextLine();
+            Utils.divider();
             try {
                 Command command = Command.getCommand(input);
                 command.execute(input);
             } catch (IllegalArgumentException e) {
                 System.out.println(e.getMessage());
             }
+            Utils.divider();
+            Utils.newline();
         }
     }
 
-    private static void output(String text) {
-        Utils.divider();
-        System.out.println("\t" + text);
-        Utils.divider();
-        System.out.println("");
+
+
+    public static void todo(String text) {
+        int s = text.indexOf(" ");
+        if (s != -1) {
+            String description = text.substring(s + 1);
+            ToDo task = new ToDo(description);
+            taskList.addTask(task);
+        }
     }
 
-    public static void add(String text) {
-        Task task = new Task(text);
-        taskList.addTask(task);
-        output("added: " + text);
+    public static void deadline(String text) {
+        int s = text.indexOf(" ");
+        int d = text.indexOf("/by");
+        if (s != -1 && d != -1 && d > s) {
+            String description = text.substring(s + 1, d - 1);
+            String deadline = text.substring(d + 4);
+            Deadline task = new Deadline(description, deadline);
+            taskList.addTask(task);
+        } else {
+            throw new IllegalArgumentException("Please specify the deadline");
+        }
+    }
+
+    public static void event(String text) {
+        int s = text.indexOf(" ");
+        int f = text.indexOf("/from");
+        int t = text.indexOf("/to");
+        if (s != -1 && f != -1 && t != -1 && t > f && f > s) {
+            String description = text.substring(s + 1, f - 1);
+            String from = text.substring(f + 6, t - 1);
+            String to = text.substring(t + 4);
+            Event task = new Event(description, from, to);
+            taskList.addTask(task);
+        } else {
+            throw new IllegalArgumentException("Please specify the timeframe");
+        }
     }
 
     public static void displayList() {
-        output(taskList.toString());
+        Utils.output(taskList.toString());
     }
 
     public static void mark(int i) {
         taskList.mark(i);
-        output("Nice! I've marked this task as done:\n\t  " + taskList.get(i));
     }
 
     public static void unMark(int i) {
         taskList.unMark(i);
-        output("OK, I've marked this task as not done yet:\n\t  " + taskList.get(i));
     }
 
     public static void exit() {
         isActive = false;
-        output("Bye. Hope to see you again soon!");
+        Utils.output("Bye. Hope to see you again soon!");
     }
 
 }

@@ -8,6 +8,7 @@ public class TaskList extends ArrayList<Task> {
 
     public void addTask(Task task) {
         super.add(task);
+        Utils.output("Got it. I've added this task:\n\t " + task + "\n\tNow you have " + size() + " tasks in the list.");
     }
 
     public void removeTask(Task task) {
@@ -16,10 +17,12 @@ public class TaskList extends ArrayList<Task> {
 
     public void mark(int i) {
         super.get(i-1).mark();
+        Utils.output("Nice! I've marked this task as done:\n\t  " + get(i));
     }
 
     public void unMark(int i) {
         super.get(i-1).unMark();
+        Utils.output("OK, I've marked this task as not done yet:\n\t  " + get(i));
     }
 
     @Override
@@ -32,8 +35,12 @@ public class TaskList extends ArrayList<Task> {
         StringBuilder sb = new StringBuilder();
         int i = 1;
         for (Task task : this) {
-            sb.append(i+".").append(task).append("\n\t");
-            i++;
+            if (i == size()) {
+                sb.append(i+".").append(task).append("\t");
+            } else {
+                sb.append(i + ".").append(task).append("\n\t");
+                i++;
+            }
         }
         return sb.toString();
     }
