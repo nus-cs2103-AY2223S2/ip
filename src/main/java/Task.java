@@ -1,6 +1,6 @@
 abstract class Task {
     protected final String description;
-    protected final boolean done;
+    protected final boolean isDone;
     protected final String taskType;
 
     /*
@@ -9,18 +9,12 @@ abstract class Task {
      */
     protected Task(String description, boolean isDone, String taskType) {
         this.description = description;
-        this.done = isDone;
+        this.isDone = isDone;
         this.taskType = taskType;
     }
 
-    // checking if the Task object is done
-    public boolean isDone () {
-        return this.done;
-    }
-
     public String getStatusCheckbox() {
-        String taskStatus = (this.done) ? "[X]" : "[]";
-        return taskStatus;
+        return (this.isDone) ? "[X]" : "[]";
     }
 
     public String getTaskTypeBox() {

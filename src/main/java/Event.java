@@ -13,7 +13,7 @@ public class Event extends Task{
     }
 
     public Task markTask() throws DukeException {
-        if (super.done) {
+        if (super.isDone) {
             throw new DukeException("This task is already marked!");
         }
         System.out.println("Nice! I've marked this task as done:");
@@ -23,7 +23,7 @@ public class Event extends Task{
     }
 
     public Task unmarkTask() throws DukeException {
-        if (!super.done) {
+        if (!super.isDone) {
             throw new DukeException("This task is already unmarked!");
         }
         System.out.println("Ok, I've marked this task as not done yet:");
