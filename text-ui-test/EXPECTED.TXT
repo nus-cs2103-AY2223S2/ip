@@ -58,3 +58,17 @@ Got it. I've added this task:
 [E][ ] project meeting (from: Mon 2pm to: 4pm)
  Now you have 7 tasks in the list.
 --------------------------------------------------------------------
+DukeException: ☹ OOPS!!! I'm sorry, but list cannot have a description.
+--------------------------------------------------------------------
+DukeException: ☹ OOPS!!! The description of a todo cannot be empty.
+--------------------------------------------------------------------
+DukeException: ☹ OOPS!!! The format of a deadline: deadline {activity} /by {date}.
+--------------------------------------------------------------------
+DukeException: ☹ OOPS!!! The format of a event: event {activity} /from {datetime} /to {datetime}.
+--------------------------------------------------------------------
+--------------------------------------------------------------------
+DukeException: ☹ OOPS!!! I'm sorry, but I don't know what that means :-(
+--------------------------------------------------------------------
+--------------------------------------------------------------------
+Bye. Hope to see you again soon!
+--------------------------------------------------------------------
