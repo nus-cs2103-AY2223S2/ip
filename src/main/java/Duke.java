@@ -19,12 +19,16 @@ public class Duke {
         untilBye:
         while (true) {
             String msgDescription = in.nextLine();
-            switch (msgDescription) {
+            String[] splitMessage = msgDescription.split(" ");
+            switch (splitMessage[0]) {
                 case "bye":
                     printByeMessage();
                     break;
+                case "list":
+                    Task.printTaskList(tasks);
+                    break;
                 default:
-                    printTaskMessage(msgDescription);
+                    printSplitMessage(msgDescription);
                     break ;
             }
         }
@@ -47,7 +51,23 @@ public class Duke {
 
     public static void printTaskMessage(String description) {
         Task.printHorizontalLine();
-        System.out.println(description);
+        System.out.println("     Hello! I'm Duke");
+        Task.printHorizontalLine();
+    }
+
+    public static void printSplitMessage(String splitMessage) {
+        Task.printHorizontalLine();
+////        String combineMessage = "";
+////        //
+////        while (true) {
+////
+////        }
+////        //
+//        String[] combineMessage =
+        System.out.println("     added: " + splitMessage);
+//        for (String a : combineMessage) {
+//
+//        }
         Task.printHorizontalLine();
     }
 }
