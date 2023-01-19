@@ -25,13 +25,55 @@ public class Duke {
         }
     }
 
+    public static class ToDo extends Task {
+
+        public ToDo(int id, String description) {
+            super(id, description);
+        }
+        @Override
+        public String toString() {
+            String statusIcon = this.getStatusIcon();
+            return this.id + ". [T][" + statusIcon + "] " + this.desc;
+        }
+    }
+
+    public static class Deadline extends Task {
+        protected String deadline;
+
+        public Deadline(int id, String description, String deadline) {
+            super(id, description);
+            this.deadline = deadline;
+        }
+
+        @Override
+        public String toString() {
+            String statusIcon = this.getStatusIcon();
+            return id + ". [D][" + statusIcon + "] " + this.desc + " (" + this.deadline + ")";
+        }
+    }
+
+    public static class Event extends Task {
+        protected String start;
+        protected String end;
+
+        public Event(int id, String description, String start, String end) {
+            super(id, description);
+            this.start = start;
+            this.end = end;
+        }
+        @Override
+        public String toString() {
+            String statusIcon = this.getStatusIcon();
+            return id + ". [E][" + statusIcon + "] " + this.desc + "(" + this.start + this.end + ")";
+        }
+    }
+
     public static void main(String[] args) {
         ArrayList<Task> tasks = new ArrayList<>();
         Scanner myObj = new Scanner(System.in);
         System.out.println("Hey! This is Duke at your service!");
         while(myObj.hasNext()) {
             String input = myObj.nextLine();
-            Task tsk = new Task(tasks.size() + 1,input);
             if (input.equals("list")) {
                 tasks.forEach(x -> {
                     System.out.println(x);
@@ -66,6 +108,32 @@ public class Duke {
                 System.out.println("What a bummer! This task is now unmarked\n" + unmarked);
                 continue;
             }
+            if(input.startsWith("todo ")) {
+                String td = input.substring(5);
+                ToDo todo = new ToDo(tasks.size() + 1, td);
+                tasks.add(todo);
+                continue;
+            }
+            if(input.startsWith("deadline ")) {
+                String[] inp = input.split("/");
+                String deadline = inp[1];
+                String undesc = inp[0];
+                String desc = undesc.substring(9);
+                Deadline dl = new Deadline(tasks.size() + 1, desc, deadline);
+                tasks.add(dl);
+                continue;
+            }
+            if(input.startsWith("event ")) {
+                String[] inp = input.split("/");
+                String start = inp[1];
+                String end = inp[2];
+                String undesc = inp[0];
+                String desc = undesc.substring(6);
+                Event ev = new Event(tasks.size() + 1, desc, start, end);
+                tasks.add(ev);
+                continue;
+            }
+            Task tsk = new Task(tasks.size() + 1,input);
             tasks.add(tsk);
             System.out.println(input);
         }
