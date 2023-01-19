@@ -1,4 +1,5 @@
 import java.util.Scanner;
+import java.util.ArrayList;
 
 public class Duke {
     public static void main(String[] args) {
@@ -9,7 +10,8 @@ public class Duke {
         String s = sc.nextLine();
 
         // initialise array of Task objects and task counter
-        Task[] tasks = new Task[100];
+        ArrayList<Task> tasks = new ArrayList<Task>();
+        //Task[] tasks = new Task[100];
         int taskCounter = 0;
 
         // loop while user has not entered 'bye' command
@@ -31,36 +33,36 @@ public class Duke {
 
     // handleCommand takes in command String s, current tasks, and current number of tasks
     // updates task array and returns taskCounter
-    public static int handleCommand(String s, Task[] tasks, int taskCounter){
+    public static int handleCommand(String s, ArrayList<Task> tasks, int taskCounter) {
         // user enters list command
         if (s.contains("list")) {
-            if (tasks[0] == null) {
+            if (tasks.isEmpty()) {
                 System.out.println("    You have no tasks");
             } else {
                 for (int i = 0; i < taskCounter; i++) {
-                    Task task = tasks[i];
-                    System.out.println("    " + (i + 1) + ". " + task.toString());
+                    Task task = tasks.get(i);
+                    System.out.println("    " + (i + 1) + ". " + task);
                 }
             }
 
             // user enters mark or unmark command
         } else if (s.contains("mark") || s.contains("unmark")) {
             int taskNumber = Integer.parseInt(s.substring(s.length() - 1)) - 1;
-            tasks[taskNumber].toggleMarked();
+            tasks.get(taskNumber).toggleMarked();
             if (s.contains("unmark")) {
                 System.out.println("    OK, I've marked this task as not done yet:");
             } else {
                 System.out.println("    Nice! I've marked this task as done:");
             }
-            System.out.println("  " + tasks[taskNumber].toString());
+            System.out.println("  " + tasks.get(taskNumber).toString());
 
             // user enters a new task
-        }  else if (s.contains("todo")) {
+        } else if (s.contains("todo")) {
             if (s.substring(4).isBlank()) {
                 System.out.println("    OOPS!!! The description of a todo cannot be empty.");
             } else {
                 Task newTask = new Todo(s.substring(5));
-                tasks[taskCounter] = newTask;
+                tasks.add(newTask);
                 System.out.println("    added: " + newTask);
                 return taskCounter + 1;
             }
@@ -71,7 +73,7 @@ public class Duke {
             } else {
                 String by = s.substring(s.indexOf("/") + 4);
                 Task newTask = new Deadline(s.substring(9, s.indexOf("/") - 1), by);
-                tasks[taskCounter] = newTask;
+                tasks.add(newTask);
                 System.out.println("    added: " + newTask);
                 return taskCounter + 1;
             }
@@ -83,11 +85,21 @@ public class Duke {
                 String from = s.substring(s.indexOf("/") + 6, s.lastIndexOf("/"));
                 String to = s.substring(s.lastIndexOf("/") + 4);
                 Task newTask = new Event(s.substring(6, s.indexOf("/") - 1), from, to);
-                tasks[taskCounter] = newTask;
+                tasks.add(newTask);
                 System.out.println("    added: " + newTask);
                 return taskCounter + 1;
             }
 
+        } else if (s.contains("delete")) {
+            if (s.substring(6).isBlank()) {
+                System.out.println("    OOPS!!! You have not entered anything to delete.");
+            } else {
+                int taskNumber = Integer.parseInt(s.substring(s.length() - 1)) - 1;
+                System.out.println("    Noted. I've removed this task:\n      " + tasks.get(taskNumber) +
+                        "\n    Now you have " + (taskCounter - 1) + " tasks in the list");
+                tasks.remove(taskNumber);
+                return taskCounter - 1;
+            }
         } else {
             //throw new DukeException("OOPS!!! I'm sorry, but I don't know what that means :-(");
             System.out.println("    OOPS!!! I'm sorry, but I don't know what that means :-(");
