@@ -22,4 +22,9 @@ public class Task {
     public String getStatusIcon() {
         return (isDone ? "X" : " "); // mark done task with X
     }
+
+    @Override
+    public String toString() {
+        return String.format("[%s] %s", this.getStatusIcon(), this.desc);
+    }
 }
