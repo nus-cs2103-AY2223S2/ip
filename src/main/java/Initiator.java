@@ -24,6 +24,10 @@ public class Initiator {
             return new Deadline();
         } else if (commands == "bye") {
             return new Exit();
+        } else if (commands == "delete") {
+            return new Delete();
+        } else {
+            throw new DukeException("I am sorry but I failed to comprehend your command.");
         }
         return null;
     }

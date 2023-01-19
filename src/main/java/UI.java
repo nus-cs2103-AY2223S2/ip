@@ -57,8 +57,12 @@ public class UI {
      * Returns the message when a task is marked as undone.
      * @param unmark The task to be unmarked as done.
      */
-    public  String markUndone(Task unmark) {
+    public String markUndone(Task unmark) {
         return "Noted. This task has been marked as not done yet: \n" + unmark.getStatus();
+    }
+
+    public String deleteTask(Task deleted) {
+        return "Alright. This task has been deleted: \n" + deleted.getStatus();
     }
 
 }
