@@ -118,11 +118,6 @@ public class Duke {
                         }
 
                     default:
-                        /*task = new Task(input);
-                        tasks.add(task);
-                        output.append(task).append("\n");
-                        output.append("Now you have ").append(tasks.size()).append(" tasks in the list.\n");
-                        break;*/
                         throw new DukeException();
                 }
                 output.append(LINE);
