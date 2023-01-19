@@ -1,3 +1,6 @@
+/**
+ * Encapsulation of a task.
+ */
 public class Task {
     //name of the task.
     private String name;

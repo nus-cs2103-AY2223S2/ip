@@ -23,11 +23,11 @@ public class Duke {
                 myList.print();
             }
             else if (cmd.startsWith("mark")) {
-                int index = Integer.parseInt(cmd.substring(5));
+                int index = Integer.parseInt(cmd.substring(4).strip());
                 myList.mark(index);
             }
             else if (cmd.startsWith("unmark")) {
-                int index = Integer.parseInt(cmd.substring(7));
+                int index = Integer.parseInt(cmd.substring(6).strip());
                 myList.unmark(index);
             }
             else {
