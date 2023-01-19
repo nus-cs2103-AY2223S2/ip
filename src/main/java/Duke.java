@@ -14,12 +14,10 @@ public class Duke {
         while(true) {
             System.out.print("Type your input: ");
             word = sc.nextLine();
-            if(word.toUpperCase().equals("BYE")) {
-                horizontalLine();
-                break;
-            }
             System.out.println((word));
             horizontalLine();
+            if(word.toUpperCase().equals("BYE"))
+                break;
         }
         System.out.println("Bye. Hope to see you again soon!");
     }
