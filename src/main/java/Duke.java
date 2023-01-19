@@ -1,7 +1,7 @@
 import java.util.Scanner;
 
 public class Duke {
-    //    public static void main(String[] args) {
+//    public static void main(String[] args) {
 //        String logo = " ____        _        \n"
 //                + "|  _ \\ _   _| | _____ \n"
 //                + "| | | | | | | |/ / _ \\\n"
@@ -24,23 +24,39 @@ public class Duke {
                 }
             }
             else {
-                String[] words = s.split(" ");
-                if (words.length == 2) {
+                String firstWord = s.substring(0, s.indexOf(" "));
+                String restOfString = s.substring(s.indexOf(" ") + 1);
+                if (firstWord.equals("mark")) {
                     try {
-                        int i = Integer.parseInt(words[1]);
-                        if (words[0].equals("mark")) {
-                            ls[i-1].markUnmark(true);
-                        } else if (words[0].equals("unmark")) {
-                            ls[i-1].markUnmark(false);
-                        }
-                        s = sc.nextLine();
-                        continue;
+                        int i = Integer.parseInt(restOfString);
+                        ls[i-1].markUnmark(true);
                     } catch (NumberFormatException err) {
                     }
                 }
-                ls[lsCount] = new Task(s);
-                lsCount += 1;
-                System.out.println("added: " + s);
+                else if (firstWord.equals("unmark")) {
+                    try {
+                        int i = Integer.parseInt(restOfString);
+                        ls[i-1].markUnmark(false);
+                    } catch (NumberFormatException err) {
+                    }
+                } else if (firstWord.equals("todo")) {
+                    ToDo t = ToDo.addToDo(restOfString);
+                    ls[lsCount] = t;
+                    lsCount += 1;
+                    System.out.println("Now you have " + lsCount + " tasks in the list.");
+                } else if (firstWord.equals("deadline")) {
+                    Deadline t = Deadline.addDeadline(restOfString);
+                    ls[lsCount] = t;
+                    lsCount += 1;
+                    System.out.println("Now you have " + lsCount + " tasks in the list.");
+                } else if (firstWord.equals("event")) {
+                    Event t = Event.addEvent(restOfString);
+                    ls[lsCount] = t;
+                    lsCount += 1;
+                    System.out.println("Now you have " + lsCount + " tasks in the list.");
+                } else {
+
+                }
             }
             s = sc.nextLine();
         }
