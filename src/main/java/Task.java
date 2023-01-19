@@ -6,6 +6,12 @@ public class Task {
         this.isDone = false;
     };
 
+    public String getTitle() {
+        return this.title;
+    }
+    public boolean getIsDone() {
+        return this.isDone;
+    }
     public void setIsDone(boolean status) {
         this.isDone = status;
     }
