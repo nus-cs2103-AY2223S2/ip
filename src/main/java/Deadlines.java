@@ -13,9 +13,9 @@ public class Deadlines extends Task {
     public String toString() {
         String toReturn = "";
         if (this.done) {
-            toReturn = "[D][X] " + this.name + "(by: " + endsBy + ")";
+            toReturn = "[D][X]" + this.name + "(by: " + endsBy + ")";
         } else {
-            toReturn = "[D][ ] " + this.name + "(by: " + endsBy + ")";            
+            toReturn = "[D][ ]" + this.name + "(by: " + endsBy + ")";            
         }
         return toReturn;
     }

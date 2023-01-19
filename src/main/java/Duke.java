@@ -6,16 +6,16 @@ public class Duke {
 
     static List<Task> storedText = new ArrayList<Task>();
     public static void main(String[] args) throws IOException, DukeExceptions, StringIndexOutOfBoundsException{
-        // String logo = " ____        _        \n"
-        //         + "|  _ \\ _   _| | _____ \n"
-        //         + "| | | | | | | |/ / _ \\\n"
-        //         + "| |_| | |_| |   <  __/\n"
-        //         + "|____/ \\__,_|_|\\_\\___|\n";
-        // System.out.println("Hello from\n" + logo);
+        String logo = " ____        _        \n"
+                + "|  _ \\ _   _| | _____ \n"
+                + "| | | | | | | |/ / _ \\\n"
+                + "| |_| | |_| |   <  __/\n"
+                + "|____/ \\__,_|_|\\_\\___|\n";
+        System.out.println("Hello from\n" + logo);
         greeting();
         BufferedReader bReader = new BufferedReader(new InputStreamReader(System.in));
         processUserInput(bReader);
-        System.out.println("Bye! Hope to see you soon again!");
+        System.out.println("Bye! Hope to see you again soon!");
     }
 
     public static void greeting() {
@@ -28,7 +28,7 @@ public class Duke {
         while (!userInput.equals("bye")) {
             try {
                 if (userInput.equals("list")) {
-                    System.out.println("Here are the tasks in your list:\n");
+                    System.out.println("Here are the tasks in your list:");
                     for (int i = 0; i < storedText.size(); i++) {
                         Integer currIndex = i + 1;
                         Task currTask = storedText.get(i);
@@ -66,7 +66,8 @@ public class Duke {
                     }
                     Task currTask = storedText.get(indexToUse);
                     currTask.setDone();
-                    String toOutput = "Nice! I've marked this task as done:\n" + "[X] " + currTask.getName();
+                    // String toOutput = "Nice! I've marked this task as done:\n" + "[X] " + currTask.getName();
+                    String toOutput = "Nice! I've marked this task as done:\n  " + currTask.toString();
                     System.out.println(toOutput);
                     userInput = brToUse.readLine();
                     continue;
@@ -83,7 +84,7 @@ public class Duke {
                     }
                     Task currTask = storedText.get(indexToUse);
                     currTask.setUndone();
-                    String toOutput = "Ok, I've marked this task as not done yet:\n" + "[ ] " + currTask.getName();
+                    String toOutput = "Ok, I've marked this task as not done yet:\n  " + currTask.toString();
                     System.out.println(toOutput);
                     userInput = brToUse.readLine();
                     continue;
