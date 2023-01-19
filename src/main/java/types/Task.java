@@ -3,16 +3,22 @@ package types;
 public abstract class Task {
     protected String name;
     protected String typeMark;
-    protected boolean done;
+    protected TaskStatus status;
 
     protected Task(String n, String tm) {
         name = n;
         typeMark = tm;
-        done = false;
+        status = TaskStatus.INCOMPLETE;
     }
 
     public String getDoneMark() {
-        return done ? "[X]" : "[ ]";
+        switch(status) {
+            case COMPLETED:
+                return "X";
+            case INCOMPLETE:
+                return " ";
+        }
+        return "ERROR";
     }
 
     public String getTypeMark() {
@@ -24,11 +30,11 @@ public abstract class Task {
     }
 
     public void setDone() {
-        done = true;
+        status = TaskStatus.COMPLETED;
     }
 
     public void setUndone() {
-        done = false;
+        status = TaskStatus.INCOMPLETE;
     }
 
     @Override
