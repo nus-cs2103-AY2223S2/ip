@@ -1,5 +1,6 @@
 import java.util.ArrayList;
 import java.util.Scanner;
+import utils.FormatHelper;
 
 public class Duke {
     private static Scanner sc = new Scanner(System.in);
@@ -12,7 +13,7 @@ public class Duke {
         }
         String linebreak = "    _________________________________________________________";
         System.out.println(linebreak);
-        System.out.println(s);
+        System.out.println(FormatHelper.indent(4, s));
         System.out.println(linebreak);
     }
 
