@@ -27,7 +27,14 @@ public class Duke {
         Task task = list.get(taskNumber - 1);
         task.complete();
         PixlPrint("You completed a task!\n" +
-                "[" + task.getStatusIcon() + "] " + task.description);
+                "\t[" + task.getStatusIcon() + "] " + task.description);
+    }
+
+    private static void unmarkCommand(int taskNumber) {
+        Task task = list.get(taskNumber - 1);
+        task.uncomplete();
+        PixlPrint("Un-doing the task...\n"+
+                "\t[" + task.getStatusIcon() + "] " + task.description);
     }
 
     public static void main(String[] args) {
@@ -44,6 +51,8 @@ public class Duke {
                 listCommand();
             } else if (command.startsWith("mark")) {
                 markCommand(Integer.parseInt(command.split("\\s+")[1]));
+            } else if (command.startsWith("unmark")) {
+                unmarkCommand(Integer.parseInt(command.split("\\s+")[1]));
             } else {
                 addCommand(command);
             }
