@@ -64,11 +64,6 @@ public class Duke {
                     lst.add(t);
                     System.out.println("Got it. I've added this task:\n" + t
                             + "\n Now you have " + lst.size() + " tasks in the list.");
-                } else if (cmdtype.equals("delete")) {
-                    int id = Integer.parseInt(cmd.split(" ")[1]);
-                    Task t = lst.remove(id - 1);
-                    System.out.println("Noted. I've removed this task:\n" + t
-                            + "\n Now you have " + lst.size() + " tasks in the list.");
                 } else {
                     throw new DukeException("☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
                 }
