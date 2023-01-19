@@ -3,12 +3,30 @@ public class Task {
 
     public String description;
     public int id;
+    public boolean isDone;
     public static int totalNumberOfTask = 0;
 
     public Task(String description) {
         this.description = description;
         totalNumberOfTask++;
         this.id = totalNumberOfTask;
+        this.isDone = false;
+    }
+
+    public String getDoneStatus() {
+        if (isDone) {
+            return "X";
+        } else {
+            return " ";
+        }
+    }
+
+    public void setDone() {
+        this.isDone = true;
+    }
+
+    public void setNotDone() {
+        this.isDone = false;
     }
 
     public static int getTotalNumberOfTask() {
@@ -25,6 +43,20 @@ public class Task {
         for (int i = 0; i < Task.getTotalNumberOfTask(); i++) {
             System.out.println("     " + taskList[i].id + ". " + taskList[i].description);
         }
+        Task.printHorizontalLine();
+    }
+
+    public void printMark() {
+        Task.printHorizontalLine();
+        System.out.println("     Nice! I've marked this task as done:");
+        System.out.println("       " + this);
+        Task.printHorizontalLine();
+    }
+
+    public void printUnmark() {
+        Task.printHorizontalLine();
+        System.out.println("     OK, I've marked this task as not done yet:");
+        System.out.println("       " + this);
         Task.printHorizontalLine();
     }
 
