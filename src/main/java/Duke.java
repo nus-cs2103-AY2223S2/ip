@@ -67,6 +67,22 @@ public class Duke {
                             throw new DukeException("The index to be unmarked must be an integer.");
                         }
 
+                    case "delete":
+                        try {
+                            int n = Integer.parseInt(input[1]) - 1;
+                            Task task = tasks.get(n);
+                            tasks.remove(n);
+                            output.append("Noted. I've removed this task:\n  ").append(task).append("\n");
+                            output.append("Now you have ").append(tasks.size()).append(" tasks in the list.\n");
+                            break;
+                        } catch(ArrayIndexOutOfBoundsException e) {
+                            throw new DukeException("The index to be deleted cannot be empty.");
+                        } catch(IndexOutOfBoundsException e) {
+                            throw new DukeException("The index to be deleted must be in the list.");
+                        } catch(NumberFormatException e) {
+                            throw new DukeException("The index to be deleted must be an integer.");
+                        }
+
                     case "todo":
                         try {
                             input[1] = input[1].trim();
