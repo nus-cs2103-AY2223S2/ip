@@ -17,6 +17,14 @@ public class Duke {
         System.out.println(toPrint);
     }
 
+    private static void printList() {
+        for (int i = 0; i < todoList.size(); i++) {
+            String task = todoList.get(i);
+            String toPrint = String.format("%d. %s", i + 1, task);
+            System.out.println(toPrint);
+        }
+    }
+
     private static boolean commandHandler(String command) {
 //      TODO: Maybe remove this check here, and shift it to main loop
         if (Objects.equals(command, "bye")) {
@@ -24,7 +32,7 @@ public class Duke {
             return false;
         }
         if (Objects.equals(command, "list")) {
-            // TODO: Print list
+            printList();
         } else {
             addToList(command);
         }
