@@ -28,6 +28,19 @@ public class Duke {
         }
     }
 
+    private static void changeTaskCompletionStatus(int taskNumber, boolean completionStatus) {
+        Task task = todoList.get(taskNumber);
+        task.setDone(completionStatus);
+        String completedSubstring = completionStatus ? "[x]" : "[]";
+        if (completionStatus) {
+            System.out.println("Solid work man! This task is marked done");
+        } else {
+            System.out.println("Aww what happened? This task is marked as undone");
+        }
+        String toPrint = String.format("  %s %s", completedSubstring, task.getTitle());
+        System.out.println(toPrint);
+    }
+
     private static boolean commandHandler(String rawCommand) {
         int commandIndex = rawCommand.indexOf(' ');
         String command;
@@ -47,6 +60,12 @@ public class Duke {
                 return false;
             case "list":
                 printList();
+                break;
+            case "mark":
+                changeTaskCompletionStatus(Integer.parseInt(arguments.substring(1)) - 1, true);
+                break;
+            case "unmark":
+                changeTaskCompletionStatus(Integer.parseInt(arguments.substring(1)) - 1, false);
                 break;
             default:
                 addToList(rawCommand);
