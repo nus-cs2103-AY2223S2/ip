@@ -1,11 +1,10 @@
 package features.event_manager;
-import Exceptions.InvalidArgumentException;
-import event_loop.*;
+import exceptions.InvalidArgumentException;
+import eventloop.*;
 import fp.ThrowingFunction;
 import utils.TokenUtilities;
 
 import java.util.ArrayList;
-import java.util.function.Function;
 
 /**
  * A class for managing tasks.

@@ -1,4 +1,4 @@
-package event_loop;
+package eventloop;
 
 /**
  * The interface that can registers its executables to the event loop.

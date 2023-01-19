@@ -1,6 +1,6 @@
-import event_loop.EventLoop;
-import event_loop.Executable;
-import event_loop.NestableExecutableObject;
+import eventloop.EventLoop;
+import eventloop.Executable;
+import eventloop.NestableExecutableObject;
 import features.bye.Bye;
 import features.event_manager.TaskManager;
 import features.unknown_command.UnknownCommand;

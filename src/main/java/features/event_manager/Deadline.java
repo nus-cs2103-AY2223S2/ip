@@ -1,5 +1,5 @@
 package features.event_manager;
-import Exceptions.InvalidArgumentException;
+import exceptions.InvalidArgumentException;
 import utils.Pair;
 import utils.TokenUtilities;
 import java.util.Map;

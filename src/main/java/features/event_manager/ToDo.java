@@ -1,6 +1,6 @@
 package features.event_manager;
 
-import Exceptions.InvalidArgumentException;
+import exceptions.InvalidArgumentException;
 
 /**
  * A ToDo is just a very boring task.

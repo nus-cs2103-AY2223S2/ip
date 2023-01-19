@@ -1,9 +1,9 @@
 package features.echo;
 
-import event_loop.Executable;
-import event_loop.ExecutableRegisterable;
-import event_loop.ExitStatus;
-import event_loop.NestableExecutableObject;
+import eventloop.Executable;
+import eventloop.ExecutableRegisterable;
+import eventloop.ExitStatus;
+import eventloop.NestableExecutableObject;
 
 public class Echo implements Executable, ExecutableRegisterable {
     @Override

@@ -1,4 +1,4 @@
-package event_loop;
+package eventloop;
 
 /**
  * This is the return type of executing any command. It should signify what the
