@@ -20,8 +20,10 @@ public class Duke {
         {
             Pattern mark = Pattern.compile("mark [0-9]+");
             Pattern unmark = Pattern.compile("unmark [0-9]+");
+            Pattern delete = Pattern.compile("delete [0-9]+");
             Matcher matchMark = mark.matcher(userInput);
             Matcher matchUnmark = unmark.matcher(userInput);
+            Matcher matchDelete = delete.matcher(userInput);
 
             if (userInput.equals("list"))
             {
@@ -44,6 +46,14 @@ public class Duke {
                 int idx = Integer.parseInt(userInput.split(" ")[1]);
                 userTasks.get(idx - 1).unmarkTask();
                 System.out.println("    " + idx + "." + userTasks.get(idx - 1));
+            }
+            else if (matchDelete.matches())
+            {
+                System.out.println("Noted. I've removed this task:");
+                int idx = Integer.parseInt(userInput.split(" ")[1]);
+                System.out.println("    " + idx + "." + userTasks.get(idx - 1));
+                userTasks.remove(idx - 1);
+                System.out.println("Now you have " + userTasks.size() + " tasks in the list.");
             }
             else
             {
