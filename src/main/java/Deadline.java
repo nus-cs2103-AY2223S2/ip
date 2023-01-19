@@ -1,0 +1,13 @@
+public class Deadline extends Task {
+    private String deadline;
+
+    public Deadline(String des, String deadline) {
+        super(des);
+        this.deadline = deadline;
+    }
+
+    @Override
+    public String getStatusIcon() {
+        return String.format("[D]%s (by: %s)", super.getStatusIcon(), this.deadline);
+    }
+}

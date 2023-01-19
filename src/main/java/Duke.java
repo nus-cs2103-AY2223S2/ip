@@ -29,7 +29,23 @@ public class Duke {
                     System.out.println("OK, I've marked this task as not done yet:\n\t" + unmarked);
                 }
             } else { // add task
-                Task task = new Task(echo); // convert into a task
+                Task task = null; // to be converted into the right (sub) task below
+                if (echo.matches("todo .+")) {
+                    String info = echo.substring(5);
+                    task = new ToDo(info); // pass description of todo
+                } else if (echo.matches("deadline .+ /by .+")) {
+                    String info = echo.substring(9);
+                    String[] sp = info.split(" /by ");
+                    task = new Deadline(sp[0], sp[1]);
+                } else if (echo.matches("event .+ /from .+ /to .+")) {
+                    String info = echo.substring(6);
+                    String[] sp = info.split(" /from ");
+                    String[] time = sp[1].split(" /to ");
+                    task = new Event(sp[0], time[0], time[1]);
+                } else {
+                    System.out.println("Not one of the 3 commands!");
+                    continue;
+                }
                 tasks.addTask(task);
                 System.out.println("Got it. I've added this task:\n\t" + task.getDescription() + "\n" + "Now you have " + tasks.size() + " task(s) in the list.");
             }
