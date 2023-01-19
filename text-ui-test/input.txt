@@ -15,4 +15,15 @@ list
 mark 3
 mark 2
 list
+delete 2
+delete 3
+list
+todo
+deadline
+event
+deadline do stuff /limit 3am
+event midterms /from3pm/to5pm
+event midterms /from 3pm
+event midterms /from 3pm /until 5pm
+delete 4
 bye
