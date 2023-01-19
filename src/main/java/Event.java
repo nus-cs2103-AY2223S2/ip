@@ -10,4 +10,14 @@ public class Event extends Task{
         this.startDate = startDate;
         this.endDate = endDate;
     }
+
+    @Override
+    public String getTaskType() {
+        return "E";
+    }
+
+    @Override
+    public String getDescription() {
+        return this.description + " (from: " + this.startDate + " to: " + this.endDate + ")";
+    }
 }

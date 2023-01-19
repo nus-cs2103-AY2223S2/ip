@@ -2,7 +2,7 @@
  * A class to represent a task.
  * @author mmaimer33
  */
-public class Task {
+public abstract class Task {
     protected String description;
     private boolean completed;
 
@@ -33,4 +33,7 @@ public class Task {
     public void uncomplete() {
         this.completed = false;
     }
+
+    public abstract String getTaskType();
+    public abstract String getDescription();
 }

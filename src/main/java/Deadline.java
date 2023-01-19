@@ -8,4 +8,14 @@ public class Deadline extends Task{
         super(description);
         this.dueDate = dueDate;
     }
+
+    @Override
+    public String getTaskType() {
+        return "D";
+    }
+
+    @Override
+    public String getDescription() {
+        return this.description + " (by: " + this.dueDate + ")";
+    }
 }
