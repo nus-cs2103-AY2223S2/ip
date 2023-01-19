@@ -22,7 +22,7 @@ public class Duke {
                 } else {
                     for (int i = 0; i < taskCounter; i++) {
                         Task task = tasks[i];
-                        System.out.println("    " + (i + 1) + ". " + task.getStatusIcon() + " " + task.getDescription());
+                        System.out.println("    " + (i + 1) + ". " + task.toString());
                     }
                 }
 
@@ -35,14 +35,31 @@ public class Duke {
                 } else {
                     System.out.println("    Nice! I've marked this task as done:");
                 }
-                System.out.println("  " + tasks[taskNumber].getStatusIcon() + " " + tasks[taskNumber].getDescription());
+                System.out.println("  " + tasks[taskNumber].toString());
 
             // user enters a new task
-            }  else {
-                Task newTask = new Task(s);
+            }  else if (s.contains("todo")) {
+                Task newTask = new Todo(s);
                 tasks[taskCounter] = newTask;
                 taskCounter++;
-                System.out.println("    added: " + s);
+                System.out.println("    added: " + newTask);
+
+            } else if (s.contains("deadline")) {
+                String by = s.substring(s.indexOf("/") + 4);
+                Task newTask = new Deadline(s.substring(9, s.indexOf("/") - 1), by);
+                tasks[taskCounter] = newTask;
+                taskCounter++;
+                System.out.println("    added: " + newTask);
+
+            } else if (s.contains("event")) {
+                String from = s.substring(s.indexOf("/") + 6, s.lastIndexOf("/"));
+                String to = s.substring(s.lastIndexOf("/") + 4);
+                Task newTask = new Event(s.substring(6, s.indexOf("/") - 1), from, to);
+                tasks[taskCounter] = newTask;
+                taskCounter++;
+                System.out.println("    added: " + newTask);
+            } else {
+                System.out.println("OOPS!!! I'm sorry, but I don't know what that means :-(");
             }
 
             // take in next command
@@ -68,12 +85,56 @@ public class Task {
         return (isDone ? "[X]" : "[ ]"); // mark done task with X
     }
 
-    public String getDescription() {
-        return this.description;
-    }
-
     public void toggleMarked() {
         this.isDone = !this.isDone;
     }
+
+    @Override
+    public String toString() {
+        return this.getStatusIcon() + " " + this.description;
+    }
 }
     
+public class Todo extends Task{
+
+    public Todo(String description) {
+        super(description);
+    }
+
+    @Override
+    public String toString() {
+        return "[T]" + super.toString();
+    }
+}
+
+public class Deadline extends Task {
+
+    protected String by;
+
+    public Deadline(String description, String by) {
+        super(description);
+        this.by = by;
+    }
+
+    @Override
+    public String toString() {
+        return "[D]" + super.toString() + " (by: " + by + ")";
+    }
+}
+
+public class Event extends Task{
+    protected String from;
+    protected String to;
+
+    public Event(String description, String from, String to) {
+        super(description);
+        this.from = from;
+        this.to = to;
+    }
+
+    @Override
+    public String toString() {
+        return "[E]" + super.toString() + " (from: " + from + "to: " + to + ")";
+    }
+
+}
