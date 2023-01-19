@@ -1,0 +1,11 @@
+todo owo
+todo uwu
+todo haha
+todo hoho
+delete 4
+list
+mark 1
+mark 2
+mark 2
+list
+bye
