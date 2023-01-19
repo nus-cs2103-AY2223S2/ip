@@ -103,7 +103,7 @@ public class Duke {
                 + indent + "| | | | | | | |/ / _ \\\n"
                 + indent + "| |_| | |_| |   <  __/\n"
                 + indent + "|____/ \\__,_|_|\\_\\___|\n";
-        System.out.println(logo);
+        //System.out.println(logo);
         System.out.println(divider);
         System.out.println(indent + "Hello! I'm Duke");
         System.out.println(indent + "What can I do for you?");
