@@ -5,7 +5,9 @@ import java.util.Scanner;
 
 public class Duke {
     private static final String FULL_LINE = "_______________________________________________\n";
-    private static final String ADD_TASK_OUTPUT = "Got it. I've added this task:\n\t%s\nNow you have %d tasks in the list";
+    private static final String ADD_TASK_OUTPUT = "Got it. I've added this task:\n\t%s\nNow you have %d tasks in the list.";
+    private static final String DELETE_TASK_INPUT = "Noted. I've removed this task:\n\t%s\nNow you have %d tasks in the list.";
+    private static final String INVALID_INDEX = "Invalid index!\nThere are only %d tasks in the list.";
     private static ArrayList<Task> taskList = new ArrayList<>();
 
     public static void main(String[] args) {
@@ -30,15 +32,29 @@ public class Duke {
                         output += String.format("\n%d.%s", i + 1, taskList.get(i).toString());
                     }
                 } else if (input.matches("mark \\d+")) {
-                    int index = Integer.parseInt(input.replace("mark ", "")) - 1;
-                    Task task = taskList.get(index);
+                    int index = Integer.parseInt(input.replace("mark ", ""));
+                    if (index == 0 || index > taskList.size()) {
+                        throw new DukeException(String.format(INVALID_INDEX, taskList.size()));
+                    }
+                    Task task = taskList.get(index - 1);
                     task.markAsDone();
                     output = "Nice! I've marked this task as done:\n" + task.toString();
                 } else if (input.matches("unmark \\d+")) {
-                    int index = Integer.parseInt(input.replace("unmark ", "")) - 1;
-                    Task task = taskList.get(index);
+                    int index = Integer.parseInt(input.replace("unmark ", ""));
+                    if (index == 0 || index > taskList.size()) {
+                        throw new DukeException(String.format(INVALID_INDEX, taskList.size()));
+                    }
+                    Task task = taskList.get(index - 1);
                     task.markAsUndone();
                     output = "OK, I've marked this task as not done yet:\n" + task.toString();
+                } else if (input.matches("delete \\d+")) {
+                    int index = Integer.parseInt(input.replace("delete ", ""));
+                    if (index == 0 || index > taskList.size()) {
+                        throw new DukeException(String.format(INVALID_INDEX, taskList.size()));
+                    }
+                    Task task = taskList.get(index - 1);
+                    taskList.remove(index - 1);
+                    output = String.format(DELETE_TASK_INPUT, task.toString(), taskList.size());
                 } else if (input.startsWith("todo")) {
                     String desc = input.replace("todo", "").trim();
                     if (desc.isBlank()) {
