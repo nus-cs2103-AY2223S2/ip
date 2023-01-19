@@ -2,6 +2,9 @@ import java.util.HashMap;
 import java.util.Scanner;
 
 public class JeoBot {
+    public enum Command {
+        BYE, LIST, MARK, UNMARK, DELETE, TODO, DEADLINE, EVENT
+    }
     public static void greeting() {
         String name = "JeoBot";
         String divider = "-----------------------";
@@ -20,28 +23,28 @@ public class JeoBot {
             try {
                 System.out.println(divider);
                 HashMap<String, String> hm = parseString(s);
-                String command = hm.get("command");
+                Command command = Command.valueOf(hm.get("command").toUpperCase());
                 switch (command) {
-                    case "bye":
+                    case BYE:
                         hasInput = false;
                         System.out.println("Thank you for using JeoBot. Hope to see you again soon!");
                         break;
-                    case "list":
+                    case LIST:
                         st.showTasks();
                         break;
-                    case "mark":
+                    case MARK:
                         int index = Integer.parseInt(hm.get("index"));
                         st.markTask(index);
                         break;
-                    case "unmark":
+                    case UNMARK:
                         index = Integer.parseInt(hm.get("index"));
                         st.unmarkTask(index);
                         break;
-                    case "delete":
+                    case DELETE:
                         index = Integer.parseInt(hm.get("index"));
                         st.deleteTask(index);
                         break;
-                    case "todo":
+                    case TODO:
                         String desc = hm.get("description");
                         if (desc.isEmpty()) {
                             throw new JeoException("Please enter a task description.");
@@ -49,7 +52,7 @@ public class JeoBot {
                         Task task = new ToDo(desc);
                         st.addTask(task);
                         break;
-                    case "deadline":
+                    case DEADLINE:
                         desc = hm.get("description");
                         String by = hm.get("by");
                         if (desc.isEmpty()) {
@@ -61,7 +64,7 @@ public class JeoBot {
                         task = new Deadline(desc, by);
                         st.addTask(task);
                         break;
-                    case "event":
+                    case EVENT:
                         desc = hm.get("description");
                         String from = hm.get("from");
                         String to = hm.get("to");
@@ -80,13 +83,13 @@ public class JeoBot {
                         task = new Event(desc, from, to);
                         st.addTask(task);
                         break;
-                    default:
-                        System.out.println("[Error] Sorry, I don't understand what you're saying :(");
                 }
-            } catch (JeoException e) {
-                System.out.println(e.getMessage());
+            } catch (IllegalArgumentException e) {
+                System.out.println("[Error] Sorry, I don't understand what you're saying :(");
             } catch (IndexOutOfBoundsException e) {
                 System.out.println("[Error] Task number cannot be negative, zero, or exceed the total number of tasks.");
+            } catch (JeoException e) {
+                System.out.println(e.getMessage());
             }
             System.out.println(divider);
         }
