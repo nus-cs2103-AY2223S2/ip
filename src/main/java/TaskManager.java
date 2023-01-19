@@ -2,6 +2,7 @@ import java.util.ArrayList;
 
 public class TaskManager {
     protected ArrayList<Task> taskArr;
+    protected String taskMenu;
 
     public TaskManager() {
         this.taskArr = new ArrayList<>();
@@ -19,6 +20,18 @@ public class TaskManager {
         task.markAsUndone();
         System.out.println("No worries! I have unchecked this task in the list: ");
         System.out.println(task);
+    }
+
+    public void deleteTask(int index) {
+        System.out.println("Okay! I have removed the task!");
+        taskArr.remove(index);
+        System.out.println("There are currently " + taskArr.size() + " task(s) in the list!");
+    }
+
+    public void addTaskToList(Task task) {
+        taskArr.add(task);
+        System.out.println("I have added: " + task + "!");
+        System.out.println("There are currently " + taskArr.size() + " task(s) in the list!");
     }
 
     //credit: https://stackabuse.com/java-check-if-string-is-a-number/
@@ -39,13 +52,6 @@ public class TaskManager {
         return false;
     }
 
-
-    public void addTaskToList(Task task) {
-        taskArr.add(task);
-        System.out.println("I have added: " + task + "!");
-        System.out.println("There are currently " + taskArr.size() + " task(s) in the list!");
-    }
-
     //display items in list method
     public void displayList() {
         if(taskArr.isEmpty()) {
@@ -55,6 +61,11 @@ public class TaskManager {
             Task tsk = taskArr.get(i);
             System.out.println(i + 1 + ". " + tsk);
         }
+    }
+
+    public String getTaskMenu() {
+        this.taskMenu = "list, check, uncheck, todo, event, deadline, bye";
+        return this.taskMenu;
     }
 
 }

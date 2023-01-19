@@ -7,5 +7,6 @@ public class Duke {
         ChatBot chat = new ChatBot(input, welcome);
 
         chat.run();
+        input.close();
     }
 }

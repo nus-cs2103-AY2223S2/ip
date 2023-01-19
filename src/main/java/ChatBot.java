@@ -18,7 +18,7 @@ public class ChatBot {
 
     public void run() {
         //main logic loop
-        loop: while(true) {
+        loop: while(input.hasNextLine()) {
 
             //convert user input to String array
             String ip = input.nextLine();
@@ -36,6 +36,10 @@ public class ChatBot {
                     case "bye":
                         System.out.println("ByeBye! Come play with me again!");
                         break loop;
+                    case "menu":
+                        //NOT WORKING
+                        taskManager.getTaskMenu();
+                        break;
                     case "":
                         continue;
                     default:
@@ -61,11 +65,12 @@ public class ChatBot {
                         case "uncheck":
                             taskManager.uncheckTask(index);
                             break;
-                        case "menu":
-                            //taskManager.getMenu();
+                        case "delete":
+                            taskManager.deleteTask(index);
                             break;
                         default:
-                            System.out.println("I haven't learnt this command yet!");
+                            System.out.println("I haven't learnt this command yet!\n" +
+                                    "Type menu to see the commands I know.");
                             break;
                     }
                 } else { //snd is a string input
@@ -90,9 +95,8 @@ public class ChatBot {
                             taskManager.addTaskToList(deadline);
                             break;
                         default:
-                            System.out.println("I haven't learnt this command yet!");
-//                            Task t = new Task(snd);
-//                            taskManager.addTaskToList(t);
+                            System.out.println("I haven't learnt this command yet!\n" +
+                                    "Type menu to see the commands I know.");
                             break;
                     }
                 }
