@@ -11,6 +11,11 @@ public class Duke {
         System.out.println(Values.HLINE);
     }
 
+    private static void PixlPrint(String text, String textColor) {
+        System.out.println(Values.PURPLE + "PixlBot: " + textColor + text + Values.RESET);
+        System.out.println(Values.HLINE);
+    }
+
     private static String formatTask(Task task) {
         return String.format("[%s][%s] %s", task.getTaskType(), task.getStatusIcon(), task.getDescription());
     }
@@ -32,8 +37,11 @@ public class Duke {
         PixlPrint(output);
     }
 
-    private static void todoCommand(String command) {
+    private static void todoCommand(String command) throws DukeException{
         String[] parts = command.split("\\s+");
+        if (parts.length == 1) {
+            throw new DukeException("ToDo description cannot be empty.");
+        }
 
         // Get task name.
         StringBuilder taskName = new StringBuilder();
@@ -48,7 +56,7 @@ public class Duke {
                 "\t" + formatTask(task));
     }
 
-    private static void deadlineCommand(String command) {
+    private static void deadlineCommand(String command) throws DukeException{
         String[] parts = command.split("\\s+");
         int byIndex = indexOf(parts, "/by");
 
@@ -65,13 +73,18 @@ public class Duke {
             dueDate.append(parts[i]);
         }
 
+        if (taskName.length() == 0 || dueDate.length() == 0) {
+            throw new DukeException("Please provide both a deadline description and a due date.\n" +
+                    "Format: deadline <description> /by <due_date>");
+        }
+
         Task task = new Deadline(taskName.toString(), dueDate.toString());
         list.add(task);
         PixlPrint("Added new deadline!\n" +
                 "\t" + formatTask(task));
     }
 
-    private static void eventCommand(String command) {
+    private static void eventCommand(String command) throws DukeException {
         String[] parts = command.split("\\s+");
         int fromIndex = indexOf(parts, "/from");
         int toIndex = indexOf(parts, "/to");
@@ -95,24 +108,55 @@ public class Duke {
             endDate.append(parts[i]);
         }
 
+        if (taskName.length() == 0 || startDate.length() == 0 || endDate.length() == 0) {
+            throw new DukeException("Please provide a description, start date, and end date.\n" +
+                    "Format: event <description> /from <start_date> /to <end_date>");
+        }
+
         Task task = new Event(taskName.toString(), startDate.toString(), endDate.toString());
         list.add(task);
         PixlPrint("Added new event!\n" +
                 "\t" + formatTask(task));
     }
 
-    private static void markCommand(String command) {
-        Task task = list.get(Integer.parseInt(command.split("\\s+")[1]) - 1);
-        task.complete();
-        PixlPrint("You completed a task!\n" +
-                "\t" + formatTask(task));
+    private static void markCommand(String command) throws DukeException{
+        try {
+            Task task = list.get(Integer.parseInt(command.split("\\s+")[1]) - 1);
+            task.complete();
+            PixlPrint("You completed a task!\n" +
+                    "\t" + formatTask(task));
+        } catch (Exception e) {
+            throw new DukeException("Please provide a valid task number to mark.");
+        }
     }
 
-    private static void unmarkCommand(String command) {
-        Task task = list.get(Integer.parseInt(command.split("\\s+")[1]) - 1);
-        task.uncomplete();
-        PixlPrint("Un-doing the task...\n"+
-                "\t" + formatTask(task));
+    private static void unmarkCommand(String command) throws DukeException {
+        try {
+            Task task = list.get(Integer.parseInt(command.split("\\s+")[1]) - 1);
+            task.uncomplete();
+            PixlPrint("Un-doing the task...\n" +
+                    "\t" + formatTask(task));
+        } catch (Exception e) {
+            throw new DukeException("Please provide a valie task number to unmark.");
+        }
+    }
+
+    private static void chatCycle(String command) throws DukeException{
+        if (command.startsWith("list")) {
+            listCommand();
+        } else if (command.startsWith("mark")) {
+            markCommand(command);
+        } else if (command.startsWith("unmark")) {
+            unmarkCommand(command);
+        } else if (command.startsWith("todo")) {
+            todoCommand(command);
+        } else if (command.startsWith("deadline")) {
+            deadlineCommand(command);
+        } else if (command.startsWith("event")) {
+            eventCommand(command);
+        } else {
+            throw new DukeException("I don't know that command.");
+        }
     }
 
     public static void main(String[] args) {
@@ -125,18 +169,10 @@ public class Duke {
         String command = scanner.nextLine();
 
         while (!command.equals("bye")) {
-            if (command.equals("list")) {
-                listCommand();
-            } else if (command.startsWith("mark")) {
-                markCommand(command);
-            } else if (command.startsWith("unmark")) {
-                unmarkCommand(command);
-            } else if (command.startsWith("todo")) {
-                todoCommand(command);
-            } else if (command.startsWith("deadline")) {
-                deadlineCommand(command);
-            } else if (command.startsWith("event")) {
-                eventCommand(command);
+            try {
+                chatCycle(command);
+            } catch (Exception e) {
+                PixlPrint("Uh oh! " + e.getMessage(), Values.RED);
             }
 
             System.out.print("You: ");
