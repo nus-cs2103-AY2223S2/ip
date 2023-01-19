@@ -6,7 +6,7 @@ public class Lulu {
 
     public void greet() {
         System.out.println(LINE);
-        System.out.println("Hello! I am lulu");
+        System.out.println("Hello! I am lulu (=◕ᆽ◕ฺ=)");
         System.out.println("What can I do for you?");
         System.out.println(LINE);
     }
@@ -19,18 +19,24 @@ public class Lulu {
 
     public void exit() {
         System.out.println(LINE);
-        System.out.println("Bye! Hope to see you again soon!");
+        System.out.println("Bye! Hope to see you again soon! (=◉ᆽ◉=)");
         System.out.println(LINE);
     }
 
     public void add(String s) {
-        this.LIST[LIST_COUNTER] = Task.of(s);
-        LIST_COUNTER++;
-        System.out.println(LINE);
-        System.out.println("Got it. I've added this task:");
-        System.out.println("  " + LIST[LIST_COUNTER-1]);
-        System.out.println("Now you have " + (LIST_COUNTER) + " tasks in the list.");
-        System.out.println(LINE);
+        try {
+            this.LIST[LIST_COUNTER] = Task.of(s);
+            LIST_COUNTER++;
+            System.out.println(LINE);
+            System.out.println("Got it. I've added this task:");
+            System.out.println("  " + LIST[LIST_COUNTER - 1]);
+            System.out.println("Now you have " + (LIST_COUNTER) + " tasks in the list.");
+            System.out.println(LINE);
+        } catch (LuluException e) {
+            System.out.println(LINE);
+            System.out.println(e);
+            System.out.println(LINE);
+        }
     }
 
     public void list() {

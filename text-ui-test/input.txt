@@ -1,6 +1,13 @@
+blabla
+todo
 todo borrow book
+deadline
+deadline return
 deadline return book /by Sunday
 list
+event
+event project
+event project meeting /from Mon 2pm
 event project meeting /from Mon 2pm /to 4pm
 list
 
