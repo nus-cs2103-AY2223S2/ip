@@ -1,11 +1,14 @@
+import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Duke {
     private static final String FULL_LINE = "_______________________________________________\n";
+    private static ArrayList<String> inputList = new ArrayList<>();
     public static void main(String[] args) {
-        String welcomeString = "Hello I'm Duke! Type anything and I'll echo it.\n";
-        String byeString = "Bye. Hope to see you again soon!\n";
-        System.out.println(FULL_LINE + welcomeString + FULL_LINE + "\n");
+        String welcomeString = "Hello I'm Duke! Type anything and I'll echo it.";
+        String byeString = "Bye. Hope to see you again soon!";
+
+        printFormattedOutput(welcomeString);
 
         String input = "";
         Scanner sc = new Scanner(System.in);
@@ -13,11 +16,24 @@ public class Duke {
         while (true) {
             input = sc.nextLine();
             if (input.equals("bye")) {
-                System.out.println(FULL_LINE + byeString + FULL_LINE);
+                printFormattedOutput(byeString);
                 break;
+            } else if (input.equals("list")) {
+                String output = "";
+                for (int i = 0; i < inputList.size(); ++i) {
+                    output += (i + 1) + ". " + inputList.get(i) + "\n";
+                }
+                printFormattedOutput(output);
             } else {
-                System.out.println(FULL_LINE + input + "\n" + FULL_LINE);
+                inputList.add(input);
+                String output = "Added: " + input;
+                printFormattedOutput(output);
             }
         }
+    }
+
+    public static void printFormattedOutput(String output) {
+        output = FULL_LINE + output + "\n" + FULL_LINE;
+        System.out.println(output);
     }
 }
