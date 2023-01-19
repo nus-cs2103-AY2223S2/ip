@@ -1,14 +1,13 @@
-package main.java;
-
 import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Duke {
     private Scanner sc = new Scanner(System.in);
-    private ArrayList<String> list;
+//    private ArrayList<String> list;
+    private ArrayList<Task> list;
 
     public Duke() {
-        this.list = new ArrayList<String>();
+        this.list = new ArrayList<Task>();
     }
 
     public static void main(String[] args) {
@@ -45,9 +44,19 @@ public class Duke {
         System.out.println("\t____________________________________________________________");
     }
 
-    public void inputToList(String s) {
-        list.add(s);
+    public void inputToTaskList(String s) {
+        list.add(new Task(s));
         printMessage("added: " + s);
+    }
+
+    public void markTaskAsDone(int taskNumber) {
+        list.get(taskNumber - 1).markAsDone();
+        printMessage("Nice! I've marked this task as done: \n\t" + list.get(taskNumber - 1));
+    }
+
+    public void markTaskAsNotDone(int taskNumber) {
+        list.get(taskNumber - 1).markAsNotDone();
+        printMessage("OK, I've marked this task as not done yet: \n\t" + list.get(taskNumber - 1));
     }
 
     public void printList() {
@@ -68,8 +77,12 @@ public class Duke {
                 enteredBye = true;
             } else if (input.equals("list")) {
                 printList();
+            } else if (input.startsWith("mark ")) {
+                markTaskAsDone(Integer.parseInt(input.split(" ")[1]));
+            } else if (input.startsWith("unmark ")) {
+                markTaskAsNotDone(Integer.parseInt(input.split(" ")[1]));
             } else {
-                inputToList(input);
+                inputToTaskList(input);
             }
         }
         goodbyeMessage();
