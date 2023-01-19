@@ -1,8 +1,8 @@
+import java.util.ArrayList;
 
 public class Lulu {
     public static String LINE = "____________________________________________________________";
-    public static Task[] LIST = new Task[100];
-    public static int LIST_COUNTER = 0;
+    public static ArrayList<Task> list = new ArrayList<>();
 
     public void greet() {
         System.out.println(LINE);
@@ -25,12 +25,11 @@ public class Lulu {
 
     public void add(String s) {
         try {
-            this.LIST[LIST_COUNTER] = Task.of(s);
-            LIST_COUNTER++;
+            list.add(Task.of(s));
             System.out.println(LINE);
             System.out.println("Got it. I've added this task:");
-            System.out.println("  " + LIST[LIST_COUNTER - 1]);
-            System.out.println("Now you have " + (LIST_COUNTER) + " tasks in the list.");
+            System.out.println("  " + list.get(list.size()-1).toString());
+            System.out.println("Now you have " + list.size() + " tasks in the list. ฅ(=චᆽච=ฅ)");
             System.out.println(LINE);
         } catch (LuluException e) {
             System.out.println(LINE);
@@ -41,27 +40,36 @@ public class Lulu {
 
     public void list() {
         System.out.println(LINE);
-        System.out.println("Here are the tasks in your list: ");
-        for (int i = 0; i < LIST_COUNTER; i++) {
+        System.out.println("ฅ(=චᆽච=ฅ) Here are the tasks in your list: ");
+        int length = list.size();
+        for (int i = 0; i < length; i++) {
             System.out.print(i+1);
-            System.out.println(". " + LIST[i]);
+            System.out.println(". " + list.get(i));
         }
         System.out.println(LINE);
     }
 
     public void mark(int taskNumber) {
-        this.LIST[taskNumber-1].markAsDone();
+        list.get(taskNumber-1).markAsDone();
         System.out.println(LINE);
-        System.out.println("Nice! I've marked this task as done:");
-        System.out.println(" " + this.LIST[taskNumber-1].toString());
+        System.out.println("(₌♥ᆽ♥₌) Nice! I've marked this task as done:");
+        System.out.println(" " + list.get(taskNumber-1).toString());
         System.out.println(LINE);
     }
 
     public void unmark(int taskNumber) {
-        this.LIST[taskNumber-1].markAsUndone();
+        list.get(taskNumber-1).markAsUndone();
         System.out.println(LINE);
-        System.out.println("OK, I've marked this task as not done yet:");
-        System.out.println(" " + this.LIST[taskNumber-1].toString());
+        System.out.println("(₌ ᵕ̣̣̣̣̣ ᆽ ᵕ̣̣̣̣̣₌) OK, I've marked this task as not done yet:");
+        System.out.println(" " + list.get(taskNumber-1).toString());
         System.out.println(LINE);
+    }
+    public void delete(int taskNumber) {
+        System.out.println(LINE);
+        System.out.println("Noted! I've removed this task:");
+        System.out.println("  " + list.get(taskNumber-1).toString());
+        System.out.println("Now you have " + (list.size()-1) + " tasks in the list. ฅ(=චᆽච=ฅ)");
+        System.out.println(LINE);
+        list.remove(taskNumber-1);
     }
 }

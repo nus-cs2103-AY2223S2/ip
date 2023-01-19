@@ -10,5 +10,13 @@ event project
 event project meeting /from Mon 2pm
 event project meeting /from Mon 2pm /to 4pm
 list
+mark 1
+unmark 1
+mark 3
+mark 4
+delete 2
+list
+bye
+
 
 
