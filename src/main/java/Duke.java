@@ -71,7 +71,7 @@ public class Duke {
             } else if (info.equals("list")) {
                 showList();
             } else {
-                if (info.contains(" ")) {
+                try {
                     String[] segments = info.split(" ", 2);
                     String first = segments[0];
                     switch (first) {
@@ -115,14 +115,10 @@ public class Duke {
                             System.out.println("Now you have " + task_list.size() + " tasks in the list.");
                             break;
                         default:
-                            System.out.println("added: " + info);
-                            Task th = new Task(info);
-                            task_list.add(th);
+                            System.out.println("OOPS!!! I'm sorry, but I don't know what that means :-(");
                     }
-                } else {
-                    System.out.println("added: " + info);
-                    Task th = new Task(info);
-                    task_list.add(th);
+                } catch (ArrayIndexOutOfBoundsException e) {
+                    System.out.println("OOPS!!! Arguments not enough.");
                 }
             }
         }
