@@ -22,6 +22,14 @@ public class Duke {
             if (cmd.equals("list")) {
                 myList.print();
             }
+            else if (cmd.startsWith("mark")) {
+                int index = Integer.parseInt(cmd.substring(5));
+                myList.mark(index);
+            }
+            else if (cmd.startsWith("unmark")) {
+                int index = Integer.parseInt(cmd.substring(7));
+                myList.unmark(index);
+            }
             else {
                 myList.add(cmd);
             }
