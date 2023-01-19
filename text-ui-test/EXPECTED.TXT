@@ -19,4 +19,3 @@ Gotcha, I've added:
   [T][ ] borrow book
 Now you have 1 in the list!
 See yer again RUFF!
-
