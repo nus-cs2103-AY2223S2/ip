@@ -27,10 +27,8 @@ public class toDoList {
     }
 
     public void addItemDeadline(String type, String item, String time) {
-        //Task newTask = new Task(item, type);
 
         Task newTask = new Deadline(item, type, time);
-        //newTask.setDeadLine(time);
         allTasks.add(newTask);
 
         System.out.println(" " + newTask.toString());
