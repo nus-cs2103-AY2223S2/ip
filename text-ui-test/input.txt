@@ -4,14 +4,17 @@ event project meeting /from Aug 6th 2pm /to 4pm
 todo join sports club
 mark 1
 mark 4
+delete 1
 todo borrow book
 list
 deadline return book /by Sunday
 event project meeting /from Mon 2pm /to 4pm
 deadline do homework /by no idea :-p
 list
-mark 8
+mark 7
+mark 5
 list
-unmark 8
+unmark 7
+delete 6
 list
 bye

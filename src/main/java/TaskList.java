@@ -15,6 +15,10 @@ public class TaskList {
         this.tasks.add(task);
     }
 
+    public Task delete(int taskNum) {
+        return this.tasks.remove(taskNum-1);
+    }
+
     public String toggleMark(int idx) {
         Task task = tasks.get(idx);
         task.markTask();

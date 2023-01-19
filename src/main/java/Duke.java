@@ -26,8 +26,15 @@ public class Duke {
                     String[] sp = echo.split(" ");
                     int taskNum = Integer.valueOf(sp[1]);
                     if (sp.length == 2 && 1 <= taskNum && taskNum <= tasks.size()) { // otherwise, invalid unmark and ignore for now
-                        String unmarked= tasks.toggleUnmark(taskNum-1);
+                        String unmarked = tasks.toggleUnmark(taskNum-1);
                         System.out.println("OK, I've marked this task as not done yet:\n\t" + unmarked);
+                    }
+                }  else if (echo.matches("delete \\d+")) {
+                    String[] sp = echo.split(" ");
+                    int taskNum = Integer.valueOf(sp[1]);
+                    if (sp.length == 2 && 1 <= taskNum && taskNum <= tasks.size()) { // otherwise, invalid delete, error handling later
+                        Task removed = tasks.delete(taskNum);
+                        System.out.println("Noted. I've removed this task:\n\t" + removed.getStatusIcon() + "\n" + "Now you have " + tasks.size() + " task(s) in the list.");
                     }
                 } else { // add task
                     Task task = null; // to be converted into the right (sub) task below
