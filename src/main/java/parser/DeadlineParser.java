@@ -14,12 +14,14 @@ public class DeadlineParser implements Parser {
         String[] splitWithBy = requestContent.split(" /by ", 2);
         String task = splitWithBy[0].trim();
         if (task.equals("")) {
-            throw new MissingArgumentException("The description of a deadline cannot be empty.");
+            throw new MissingArgumentException("The description of a deadline cannot be empty. " +
+                    "Format: deadline [task] /by [YYYY-MM-DD]");
         } else if (
             splitWithBy.length != 2 ||
             splitWithBy[1].trim().equals("")
         ) {
-            throw new MissingArgumentException("The deadline cannot be empty.");
+            throw new MissingArgumentException("The deadline cannot be empty. " +
+                    "Format: deadline [task] /by [YYYY-MM-DD]");
         }
         LocalDate deadline;
         try {

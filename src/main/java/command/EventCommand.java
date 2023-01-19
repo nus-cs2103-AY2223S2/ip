@@ -1,5 +1,6 @@
 package command;
 
+import dukeexeption.InvalidArgumentException;
 import storage.TaskList;
 import task.Event;
 
@@ -23,7 +24,10 @@ public class EventCommand extends Command {
     }
 
     @Override
-    public String run(TaskList taskList) {
+    public String run(TaskList taskList) throws InvalidArgumentException {
+        if (this.endTime.isBefore(this.startTime)) {
+            throw new InvalidArgumentException("End date must not be earlier than start date.");
+        }
         Event newEvent = taskList.createEvent(this.task, this.startTime, this.endTime);
         return "Got it. I've added this task:\n" + newEvent +
                 "\nNow you have " + taskList.countTask() + " tasks in the list.";

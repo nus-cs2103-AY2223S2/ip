@@ -2,6 +2,7 @@ import command.Command;
 import dukeexeption.DukeException;
 import parser.Request;
 import storage.TaskList;
+import task.Deadline;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
