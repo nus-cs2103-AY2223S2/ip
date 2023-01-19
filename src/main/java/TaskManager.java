@@ -28,6 +28,32 @@ public class TaskManager {
         if (cmdHeader.equals("list")) {
             listTasks();
 
+        } else if (cmdHeader.equals("delete")) {
+
+            if (cmdParts.length != 2) {
+                throw new DukeInvalidCommandException("Sorry... That is an invalid command :/");
+            }
+
+            try {
+                int taskNumber = Integer.parseInt(cmdParts[1]);
+                boolean isValidTaskNumber =
+                        (taskNumber > 0 && taskNumber <= this.TASKS.size());
+
+                if (isValidTaskNumber) {
+                    Task removedTask = this.TASKS.remove(taskNumber - 1);
+                    System.out.println("I have removed Task " + taskNumber + " from the list.");
+                    System.out.println(removedTask);
+                    System.out.println("You now have " + this.TASKS.size() + " tasks in the list.");
+
+                } else {
+                    throw new DukeInvalidCommandException("Sorry... That is an invalid task number :/");
+                }
+
+            } catch (NumberFormatException e) {
+                throw new DukeInvalidCommandException("Sorry... That is an invalid task number :/");
+            }
+
+
         } else if (cmdHeader.equals("mark") || cmdHeader.equals("unmark")) {
 
             if (cmdParts.length != 2) {
