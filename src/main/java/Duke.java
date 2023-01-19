@@ -13,6 +13,7 @@ public class Duke {
 
         while (true) {
             String input = sc.nextLine();
+            String[] chunked = input.split(" ");
             try {
                 if (input.equals("bye")) {
                     Duke.quit();
@@ -22,19 +23,33 @@ public class Duke {
                 System.out.println("(\\ (\\\n" +
                         "(„• ֊ •„) ♡\n" +
                         "━O━O━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━");
-                if (input.startsWith("mark")) {
-                    Duke.mark(tasks, Integer.parseInt(input.split(" ")[1]));
-                } else if (input.startsWith("unmark")) {
-                    Duke.unmark(tasks, Integer.parseInt(input.split(" ")[1]));
+                if (chunked[0].equals("mark")) {
+                    if (chunked.length == 1) {
+                        throw new DukeInvalidCommandException("Huh? You didn't give me a task to mark!");
+                    } else {
+                        Duke.mark(tasks, Integer.parseInt(chunked[1]));
+                    }
+                } else if (chunked[0].equals("unmark")) {
+                    if (chunked.length == 1) {
+                        throw new DukeInvalidCommandException("Huh? You didn't give me a task to unmark!");
+                    } else {
+                        Duke.unmark(tasks, Integer.parseInt(chunked[1]));
+                    }
+                } else if (chunked[0].equals("delete")) {
+                    if (chunked.length == 1) {
+                        throw new DukeInvalidCommandException("Huh? You didn't give me a task to delete!");
+                    } else {
+                        Duke.delete(tasks, Integer.parseInt(chunked[1]));
+                    }
                 } else if (input.equals("list")) {
                     Duke.list(tasks);
-                } else if (input.startsWith("todo")) {
+                } else if (chunked[0].equals("todo")) {
                     Duke.addToDo(tasks, input);
-                } else if (input.startsWith("deadline")) {
+                } else if (chunked[0].equals("deadline")) {
                     Duke.addDeadline(tasks, input);
-                } else if (input.startsWith("event")) {
+                } else if (chunked[0].equals("event")) {
                     Duke.addEvent(tasks, input);
-                } else { // error
+                } else {
                     throw new DukeInvalidCommandException("Huh? Sorry, I don't know what this means :(");
                 }
             }
@@ -81,6 +96,24 @@ public class Duke {
                 t.unmark();
                 System.out.println("Okie! I've marked this task as not done yet:");
                 System.out.println(t);
+            }
+        }
+    }
+
+    static void delete(ArrayList<Task> tasks, int num) throws DukeException {
+        if (num <= 0) {
+            throw new DukeInvalidArgumentException("Huh? Your task number needs to be greater than zero!");
+        } else if (num > tasks.size()) {
+            throw new DukeInvalidArgumentException("Huh? You don't even have that many items on your list!");
+        } else {
+            Task t = tasks.get(num - 1);
+            tasks.remove(num - 1);
+            System.out.println("Okie! I've removed this task:");
+            System.out.println(t);
+            if (tasks.size() == 1) { // grammar
+                System.out.println("Now you have 1 task on your list.");
+            } else {
+                System.out.println(String.format("Now you have %s tasks on your list.", tasks.size()));
             }
         }
     }

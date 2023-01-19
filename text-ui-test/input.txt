@@ -1,15 +1,15 @@
 bloop
 mark 0
-mark 1
 todo
 todo read book
-deadline return book
 deadline return book /by
 deadline return book /by Sunday
 event project meeting /from Mon 2pm /to 4pm
-event art market /from Sat 8am /to
+event art market /to 8pm
 list
 mark 1
 mark 1
+delete
+delete 3
 list
 bye

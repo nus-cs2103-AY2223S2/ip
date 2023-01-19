@@ -12,10 +12,6 @@ Huh? Your task number needs to be greater than zero!
 (\ (\
 („• ֊ •„) ♡
 ━O━O━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-Huh? You don't even have that many items on your list!
-(\ (\
-(„• ֊ •„) ♡
-━O━O━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 Hey! You didn't give me a task description.
 (\ (\
 („• ֊ •„) ♡
@@ -23,10 +19,6 @@ Hey! You didn't give me a task description.
 Alright! I've added this task:
 [T][ ] read book
 Now you have 1 task on your list.
-(\ (\
-(„• ֊ •„) ♡
-━O━O━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-Hey! You didn't mention a deadline D:
 (\ (\
 („• ֊ •„) ♡
 ━O━O━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
@@ -46,7 +38,7 @@ Now you have 3 tasks on your list.
 (\ (\
 („• ֊ •„) ♡
 ━O━O━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-Hey! You didn't mention an end time D:
+Hey! You didn't mention a start time D:
 (\ (\
 („• ֊ •„) ♡
 ━O━O━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
@@ -66,8 +58,17 @@ Huh? You've already done this task!
 (\ (\
 („• ֊ •„) ♡
 ━O━O━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+Huh? You didn't give me a task to delete!
+(\ (\
+(„• ֊ •„) ♡
+━O━O━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+Okie! I've removed this task:
+[E][ ] project meeting (from: Mon 2pm to: 4pm)
+Now you have 2 tasks on your list.
+(\ (\
+(„• ֊ •„) ♡
+━O━O━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 Here are all the things on your list!
 1.[T][X] read book
 2.[D][ ] return book (by: Sunday)
-3.[E][ ] project meeting (from: Mon 2pm to: 4pm)
 Bye bye :( Hope to see you again soon!
