@@ -23,8 +23,8 @@ public class TaskManager {
     }
 
     public void deleteTask(int index) {
-        System.out.println("Okay! I have removed the task!");
         taskArr.remove(index);
+        System.out.println("Okay! I have removed the task!");
         System.out.println("There are currently " + taskArr.size() + " task(s) in the list!");
     }
 

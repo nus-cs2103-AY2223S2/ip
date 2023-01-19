@@ -20,13 +20,19 @@ public class ChatBot {
         //main logic loop
         loop: while(input.hasNextLine()) {
 
+            //remove leading and trailing whitespaces
+            String ip = input.nextLine().trim();
+
             //convert user input to String array
-            String ip = input.nextLine();
             this.inputArr = ip.split(" ", 2);
             int len = inputArr.length;
 
-            //if length = 1, cases: list, bye, smth invalid
-            if(len == 1) {
+            //if blank input is given
+            if(ip.isBlank()) {
+                System.out.println("No command given, please give me one!");
+            }
+            //if arr length = 1, cases: list, bye, other single word commands
+            if (len == 1) {
                 String command = inputArr[0];
 
                 switch (command) {
@@ -47,34 +53,39 @@ public class ChatBot {
                                 "Type menu to see the commands I know.");
                         break;
                 }
-            } else if(len == 2) {
-                //cases: check, uncheck, add(default? maybe)
+            } else if (len == 2) {
+                //cases: check 1, uncheck 2, event project meeting, etc
+                //format: keyword{whitespace}command
 
                 String fst = inputArr[0];
                 String snd = inputArr[1];
                 Boolean isNum = taskManager.isNumeric(snd);
 
-                //if it is numeric : cases are check/uncheck
-                //else add to task(for now)
-                if(isNum) {
-                    int index = Integer.parseInt(snd) - 1;
-                    switch(fst) {
-                        case "check":
-                            taskManager.checkTask(index);
-                            break;
-                        case "uncheck":
-                            taskManager.uncheckTask(index);
-                            break;
-                        case "delete":
-                            taskManager.deleteTask(index);
-                            break;
-                        default:
-                            System.out.println("I haven't learnt this command yet!\n" +
-                                    "Type menu to see the commands I know.");
-                            break;
+                //if snd is numeric : cases are check/uncheck etc
+                if (isNum) {
+                    try {
+                        int index = Integer.parseInt(snd) - 1;
+                        switch (fst) {
+                            case "check":
+                                taskManager.checkTask(index);
+                                break;
+                            case "uncheck":
+                                taskManager.uncheckTask(index);
+                                break;
+                            case "delete":
+                                taskManager.deleteTask(index);
+                                break;
+                            default:
+                                System.out.println("I haven't learnt this command yet!\n" +
+                                        "Type menu to see the commands I know.");
+                                break;
+                        }
+                    } catch (IndexOutOfBoundsException e) {
+                        System.out.println("Item does not exist in list! Please check your list again.");
                     }
+
                 } else { //snd is a string input
-                    switch(fst) {
+                    switch (fst) {
                         case "todo":
                             ToDos todo = new ToDos(snd);
                             taskManager.addTaskToList(todo);
@@ -100,11 +111,6 @@ public class ChatBot {
                             break;
                     }
                 }
-                //add exception over here if they don't specify keyword
-                //add exception if they have trailing spaces i.e. "hello "
-            } else {
-                //if input is empty
-
             }
         }
     }

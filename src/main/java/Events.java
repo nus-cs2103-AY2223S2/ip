@@ -10,6 +10,6 @@ public class Events extends Task{
 
     @Override
     public String toString() {
-        return "[E]" + super.toString() + "(Start: " + start + " End: " + end + ")";
+        return "[E]" + super.toString() + " (Start: " + start + " End: " + end + ")";
     }
 }
