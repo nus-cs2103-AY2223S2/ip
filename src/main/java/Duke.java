@@ -1,13 +1,30 @@
-import utils.DukeIO;
+import java.util.Scanner;
+
 public class Duke {
+    private static Scanner scanner;
+    private static DukeList taskList;
+    public static void initialiseIO() {
+        scanner = new Scanner(System.in);
+        System.out.println(DukeIO.LOGO);
+        System.out.println(DukeIO.wrapContent(DukeIO.GREET));
+        taskList = new DukeList();
+    }
+    public static void waitForInput() {
+        while(true) {
+            String input = scanner.nextLine();
+            if (input.equals(DukeIO.terminateString)) {
+                System.out.println(DukeIO.wrapContent(DukeIO.FAREWELL));
+                return;
+            }
+            if (input.equals(DukeIO.listString)) {
+                System.out.println(DukeIO.wrapContent(taskList.toString()));
+                continue;
+            }
+            taskList.addTask(input);
+        }
+    }
     public static void main(String[] args) {
-        String logo = " ____        _        \n"
-                + "|  _ \\ _   _| | _____ \n"
-                + "| | | | | | | |/ / _ \\\n"
-                + "| |_| | |_| |   <  __/\n"
-                + "|____/ \\__,_|_|\\_\\___|\n";
-        System.out.println(logo);
-        DukeIO.initialiseIO();
-        DukeIO.waitForInput();
+        initialiseIO();
+        waitForInput();
     }
 }
