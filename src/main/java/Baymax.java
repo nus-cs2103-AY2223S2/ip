@@ -15,6 +15,7 @@ public class Baymax {
         String to = "todo";
         String dead = "deadline";
         String event = "event";
+        String delete = "delete";
 
         Scanner input = new Scanner(System.in);
         String currentInput;
@@ -35,6 +36,10 @@ public class Baymax {
             } else if (unmark.equals(currentInput.split("\\s+")[0])) {
                 Task t = myList.get(Integer.valueOf(currentInput.split("\\s+")[1]) - 1);
                 t.markAsNotDone();
+            }
+            else if (delete.equals(currentInput.split("\\s+")[0])) {
+                myList.remove(Integer.valueOf(currentInput.split(" ",2)[1]) - 1);
+                System.out.println("Done. I've deleted the task");
             } else {
                     if (to.equals(currentInput.split("\\s+", 2)[0])) {
                         Task todo = new Todo(currentInput.split(" ", 2)[1]);
