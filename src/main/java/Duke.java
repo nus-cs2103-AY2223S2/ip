@@ -27,7 +27,7 @@ public class Duke {
             // level 1
             // System.out.println(ip + "\n");
 
-            else if (ip.contains("mark")) {
+            else if (ip.startsWith("mark") || ip.startsWith("unmark") ) {
                 String[] parts = ip.split(" ");
                 if (parts.length != 2) {
                     System.out.println("invalid\n");
@@ -42,6 +42,20 @@ public class Duke {
                     arr.get(index).setStatus(parts[0]);
                 }
                 System.out.printf(arr.get(index).toString() + "\n");
+            } else if ((ip.startsWith("delete"))) {
+                String[] parts = ip.split(" ");
+                if (parts.length != 2) {
+                    System.out.println("invalid\n");
+                    continue;
+                }
+                int index = Integer.parseInt(parts[1]) - 1;
+                if (index < arr.size()) {
+                    System.out.println("Noted. I've removed this task:");
+                    System.out.printf(arr.get(index).toString() + "\n");
+                    arr.remove(index);
+                    String len = (arr.size() == 1 ? arr.size() + " task" : arr.size() + " tasks");
+                    System.out.println("Now you have " + len + " in the list.");
+                }
             } else {
                 String[] parts = ip.split(" ");
                 Task t = new Task(ip);
@@ -64,7 +78,7 @@ public class Duke {
                         int indexTo = ip.indexOf("/to");
                         if (indexFrom != -1 && indexTo != -1) {
                             t = new Event(ip.substring(6, indexFrom), ip.substring(indexFrom + 6, indexTo - 1), ip.substring(indexTo + 4));
-                        }  else {
+                        } else {
                             throw new DukeException("OOPS!!! Can't find a /from or /to time for an event.");
                         }
                     } else {
