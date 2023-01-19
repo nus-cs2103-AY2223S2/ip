@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Map;
 import java.util.function.Consumer;
+import java.util.function.Function;
 
 public final class Duke {
 
@@ -28,6 +29,14 @@ public final class Duke {
             System.out.format("%Added %s to the list!\nYou have %d tasks\n", task.toString(), tasks.size());
         };
 
+        final Function<String, Integer> intParser = (value) -> {
+            int index = Integer.parseInt(value);
+            if (index < 1 || index > tasks.size()) {
+                throw new NumberFormatException();
+            }
+            return index;
+        };
+
         final Map<String, Consumer<String[]>> funcMap = Map.of(
         "bye", (args) -> {
             System.out.println("Ok bye bye!");
@@ -45,24 +54,27 @@ public final class Duke {
         },
         "mark", (args) -> {
             try {
-                int index = Integer.parseInt(args[1]);
-                if (index < 1 || index > tasks.size()) throw new NumberFormatException();
-                else {
-                    tasks.get(index - 1).setDone(true);
-                    System.out.format("Marked this as done!\n\t%s\n", tasks.get(index - 1).toString());
+                if (args.length == 1) {
+                    System.out.println("Needed a index for mark");
+                    return;
                 }
+
+                int index = intParser.apply(args[1]);
+                tasks.get(index - 1).setDone(true);
+                System.out.format("Marked this as done!\n\t%s\n", tasks.get(index - 1).toString());
             } catch (NumberFormatException e) {
                 System.out.println("Invalid index!\n");
             }
         },
         "unmark", (args) -> {
+            if (args.length == 1) {
+                System.out.println("Needed a index for unmark");
+                return;
+            }
             try {
-                int index = Integer.parseInt(args[1]);
-                if (index < 1 || index > tasks.size()) throw new NumberFormatException();
-                else {
-                    tasks.get(index - 1).setDone(false);
-                    System.out.format("Marked this as not done!\n\t%s\n", tasks.get(index - 1).toString());
-                }
+                int index = intParser.apply(args[1]);
+                tasks.get(index - 1).setDone(false);
+                System.out.format("Marked this as not done!\n\t%s\n", tasks.get(index - 1).toString());
             } catch (NumberFormatException e) {
                 System.out.println("Invalid index!\n");
             }
