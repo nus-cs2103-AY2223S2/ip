@@ -11,12 +11,21 @@ public class Duke {
             if (input.equals("bye")) {
                 break;
             } else if (input.equals("list")) {
+                System.out.println("\tHere are the tasks in your list:");
                 for (Task task: tasks) {
                     if (task == null) {
                         break;
                     }
                     System.out.println(task);
                 }
+            } else if (input.contains("unmark")) {
+                int chosenId = Integer.parseInt(input.split(" ")[1]);
+                Task chosenTask = tasks[chosenId - 1];
+                System.out.println(chosenTask.unmark());
+            } else if(input.contains("mark")) {
+                int chosenId = Integer.parseInt(input.split(" ")[1]);
+                Task chosenTask = tasks[chosenId - 1];
+                System.out.println(chosenTask.mark());
             } else {
                 tasks[idx] = new Task(idx + 1, input);
                 idx++;
