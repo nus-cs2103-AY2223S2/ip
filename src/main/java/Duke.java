@@ -2,6 +2,11 @@ import java.util.Scanner;
 import java.util.ArrayList;
 public class Duke {
     static protected ArrayList<Task> tasks = new ArrayList<>();
+
+    /**
+     * Helper function to add a new task to the ArrayList, while outputting a message
+     * @param newTask the new Task object to be added
+     */
     public static void addTask(Task newTask) {
         tasks.add(newTask);
         prettyPrint(String.format(
@@ -11,6 +16,12 @@ public class Duke {
                 tasks.size() > 1 ? "s" : ""
         ));
     }
+
+    /**
+     * Helper function to add a new task to the ArrayList, while outputting a message
+     * @param idx The index of the task to be removed
+     * @throws BadCommandException
+     */
     public static void removeTask(int idx) throws BadCommandException {
         if (idx >= tasks.size()) {
             throw new BadCommandException("Index given is out of bounds!");
@@ -24,6 +35,10 @@ public class Duke {
                 tasks.size() > 1 ? "s" : ""
         ));
     }
+
+    /**
+     * Helper function the output a list of tasks
+     */
     public static void listTasks() {
         StringBuilder listOutput = new StringBuilder("Here are the tasks in your list:\n");
         for (int i = 0; i < tasks.size(); i++) {
@@ -39,6 +54,11 @@ public class Duke {
         prettyPrint(listOutput.toString());
     }
 
+    /**
+     * Helper function to parse the commands and params (if available)
+     * @param inputStr the inputted string by the user
+     * @throws BadCommandException
+     */
     public static void parseInput(String inputStr) throws BadCommandException {
         try {
             if (inputStr.equals("list")) {
@@ -95,6 +115,11 @@ public class Duke {
             prettyPrint(e.getMessage());
         }
     }
+
+    /**
+     * Helper function to output to the user "prettily".
+     * @param out the string to output
+     */
     public static void prettyPrint(String out) {
         final String divider = "____________________________________________________________";
         System.out.println(String.format("\t%s\n\t%s\n\t%s", divider, out, divider));

@@ -12,6 +12,10 @@ public class Event extends Task {
             throw new DukeException("The start and/or end time of a deadline cannot be empty.");
         }
     }
+    /**
+     * Represent Event as a string
+     * @return String representation of a Event
+     */
     @Override
     public String toString() {
         return String.format("[E]%s (from: %s to: %s)", super.toString(), startTime, endTime);

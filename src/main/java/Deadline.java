@@ -10,6 +10,11 @@ public class Deadline extends Task {
             throw new DukeException("The 'by' date of a deadline cannot be empty.");
         }
     }
+
+    /**
+     * Represent Deadline as a string
+     * @return String representation of a Deadline
+     */
     @Override
     public String toString() {
         return String.format("[D]%s (by: %s)", super.toString(), by);
