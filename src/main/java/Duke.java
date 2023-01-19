@@ -43,11 +43,11 @@ public class Duke {
                     String[] time = sp[1].split(" /to ");
                     task = new Event(sp[0], time[0], time[1]);
                 } else {
-                    System.out.println("Not one of the 3 commands!");
+                    System.out.println("Not one of the commands/incorrectly formatted!");
                     continue;
                 }
                 tasks.addTask(task);
-                System.out.println("Got it. I've added this task:\n\t" + task.getDescription() + "\n" + "Now you have " + tasks.size() + " task(s) in the list.");
+                System.out.println("Got it. I've added this task:\n\t" + task.getStatusIcon() + "\n" + "Now you have " + tasks.size() + " task(s) in the list.");
             }
         }
     }
