@@ -48,13 +48,13 @@ public class Duke {
     }
 
     private static void bye() {
-        System.out.println("Bye. Hope to see you again soon! \uD83D\uDC4B\uD83D\uDE18");
+        System.out.println("Bye. Hope to see you again soon! :^)");
     }
 
     private static void list(ArrayList<Task> taskList) {
         int taskCount = taskList.size();
         if (taskCount == 0) {
-            System.out.println("You don't have any tasks now! \uD83E\uDD73");
+            System.out.println("You don't have any tasks now!");
         }
         else {
             for (int i = 0; i < taskCount; i++) {
@@ -119,7 +119,7 @@ public class Duke {
         try {
             int i = Integer.parseInt(restOfString);
             Task removedTask = taskList.remove(i-1);
-            System.out.println("Noted. I've removed the task:");
+            System.out.println("Noted. I've removed this task:");
             System.out.println(removedTask);
             System.out.println("Now you have " + taskList.size() + " tasks in the list.");
         } catch (NumberFormatException err) {
