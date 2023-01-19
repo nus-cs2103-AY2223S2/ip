@@ -76,6 +76,9 @@ public class Duke {
       case "unmark":
         d.unMark(index);
         break;
+      case "delete":
+        d.deleteTask(index);
+        break;
     }
   }
 

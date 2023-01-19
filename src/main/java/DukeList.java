@@ -69,6 +69,12 @@ public class DukeList {
     return records.get(index);
   }
 
+  public void deleteTask(int index) {
+    Task t = records.get(index);
+    records.remove(index);
+    System.out.println(Duke.format("Noted. I've removed this task:\n" + t.toString()));
+  }
+
   @Override
   public String toString() {
     String output = "";
