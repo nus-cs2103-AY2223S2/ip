@@ -4,8 +4,7 @@ import java.util.regex.Pattern;
 import java.util.regex.Matcher;
 
 public class Duke {
-    public static void main(String[] args)
-    {
+    public static void main(String[] args) throws DukeException {
         String logo = " ____        _        \n"
                 + "|  _ \\ _   _| | _____ \n"
                 + "| | | | | | | |/ / _ \\\n"
