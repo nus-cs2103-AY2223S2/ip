@@ -1,11 +1,17 @@
 public class Task {
     protected String description;
-    protected boolean isDone;
+    protected TaskStatus status;
+
+    public enum TaskStatus {
+        DONE,
+        NOT_DONE,
+        DOING;
+    }
 
 
     public Task(String description) {
         this.description = description;
-        this.isDone = false;
+        this.status = TaskStatus.NOT_DONE;
     }
 
     @Override
@@ -14,14 +20,27 @@ public class Task {
     }
 
     public String getStatusIcon() {
-        return (isDone ? "X" : " ");
+        switch(status) {
+            case DONE:
+                return "X";
+            case NOT_DONE:
+                return " ";
+            case DOING:
+                return "~";
+            default:
+                return "?";
+        }
     }
 
     public void markDone() {
-        this.isDone = true;
+        this.status = TaskStatus.DONE;
     }
 
     public void markUndone() {
-        this.isDone = false;
+        this.status = TaskStatus.NOT_DONE;
+    }
+
+    public void markDoing() {
+        this.status = TaskStatus.DOING;
     }
 }
