@@ -2,9 +2,9 @@ import java.io.*;
 import java.util.*;
 public class Duke {
     private static final String divider = "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\n";
-    private static ArrayList<Task> al = new ArrayList<>();
-    private static StringBuilder sb = new StringBuilder();
-    private static BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+    private static final ArrayList<Task> al = new ArrayList<>();
+    private static final StringBuilder sb = new StringBuilder();
+    private static final BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
 
 
     public static void welcome() {
@@ -43,7 +43,7 @@ public class Duke {
             Task curr = al.get(cint);
             curr.mark();
             System.out.println(divider + "Congrats this has been done:\n"
-                    + curr.toString() + "\nOne down, Leskooo!\n" + divider);
+                    + curr + "\nOne down, Leskooo!\n" + divider);
         } catch (Exception m){
             System.out.println("Number entered out of range, type the number again");
             String s = br.readLine();
@@ -56,12 +56,27 @@ public class Duke {
         try {
             Task curr = al.get(cint);
             curr.unmark();
-            System.out.println(divider + "Alright, new task:\n" + curr.toString()
+            System.out.println(divider + "Alright, new task:\n" + curr
                     + "\nWe can do dis!\n" + divider);
         } catch (Exception m) {
             System.out.println("Number entered out of range, type the number again");
             String s = br.readLine();
             unmark(s);
+        }
+    }
+
+    public static void delete(String i) throws Exception{
+        int cint = Integer.parseInt(i) - 1;
+        try {
+            Task curr = al.get(cint);
+            curr.minus();
+            al.remove(cint);
+            System.out.println(divider + "Alright, deleted task:\n" + curr
+                    + "\n" + curr.numberTask() + " tasks left!\n" + divider);
+        } catch (Exception m){
+            System.out.println("Number entered out of range, type the number again");
+            String s = br.readLine();
+            delete(s);
         }
     }
 
@@ -173,6 +188,9 @@ public class Duke {
                     Deadline d = createDeadline(splited);
                     al.add(d);
                     printDefault(d);
+                    break;
+                case "DELETE" :
+                    delete(splited[1]);
                     break;
                 default:
                     System.out.println(divider+ "I have no idea what is going on, try again?\n" + divider);

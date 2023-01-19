@@ -22,6 +22,8 @@ public class Task {
         return count;
     }
 
+    public void minus() {count--; }
+
     @Override
     public String toString() {
         return done ? "[X] " + name
