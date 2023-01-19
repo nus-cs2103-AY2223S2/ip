@@ -23,7 +23,6 @@ public class Duke {
         while (true) {  // Echoing
             text = br.readLine();
             if (text.equalsIgnoreCase("bye")) { // Regardless of Uppercase & Lowercase "bye"
-            //if (text.equals("bye")) {
                 sb.append("    ____________________________________________________________\n")
                                 .append("    Bye. Hope to see you again soon!\n")
                                         .append("    ____________________________________________________________\n");
