@@ -1,8 +1,9 @@
 import java.sql.SQLOutput;
 import java.util.Scanner;
+import java.util.ArrayList;
 
 public class Duke {
-    static String[] arr = new String[100];
+    static ArrayList<Task> arr = new ArrayList<Task>();
     static String str = "------------------------------------------------------------";
 
 
@@ -22,8 +23,18 @@ public class Duke {
             if (word.equals("bye")) {
                 printResponse("Bye. Hope to see you again soon!");
                 break;
-            } else if (word.equals("list")){
+            } else if (word.equals("list")) {
                 list();
+            } else if (word.split(" ")[0].equals("mark")) {
+                int taskNum = Integer.parseInt(word.split(" ")[1]);
+                Task taskToMark = arr.get(taskNum - 1);
+                taskToMark.mark();
+                printResponse("Nice! I've marked this task as done: \n " + taskToMark);
+            } else if (word.split(" ")[0].equals("unmark")) {
+                int taskNum = Integer.parseInt(word.split(" ")[1]);
+                Task taskToMark = arr.get(taskNum - 1);
+                taskToMark.unmark();
+                printResponse("OK, I've marked this task as not done yet \n" + taskToMark);
             } else {
                 add(word);
             }
@@ -37,27 +48,20 @@ public class Duke {
     }
 
     public static void add(String response) {
-        for(int i = 0; i < 100; i++) {
-            if(arr[i] == null) {
-                arr[i] = response;
-                printResponse("Added: " + response);
-                break;
-            }
-        }
+       arr.add(new Task(response));
+       printResponse("Added: " + response);
     }
 
     public static void list() {
         int x = 1;
         String lst = "";
-        for(int i = 0; i < 100; i++) {
-            if(arr[i] != null) {
-                if(!lst.equals("")) {
-                    lst = lst + "\n";
-                }
-                lst = lst + x + ". " + arr[i];
-                x++;
+        for(int i = 0; i < arr.size(); i++) {
+            if(!lst.equals("")) {
+                lst = lst + "\n";
             }
+            lst = lst + x + ". " + arr.get(i);
+            x++;
         }
-        printResponse(lst);
+        printResponse("Here are the task in your list: \n" + lst);
     }
 }
