@@ -8,6 +8,11 @@ list
 deadline Demo task 2 /by tomorrow
 deadline Demo task 2 /by 2023-10-07
 event Demo task 3 /from 2023-10-07 /to 2023-10-08
+event Demo task 3 /from 2023-10-09 /to 2023-10-08
+on 2023-10-06
+on 2023-10-07
+on 2023-10-08
+on 2023-10-09
 delete 0
 delete 4
 delete 3
