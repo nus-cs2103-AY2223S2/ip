@@ -27,7 +27,7 @@ public class Tasks {
     }
 
     public void markTaskDone(int num) {
-        if (this.l.size() > num && num >= 0) {
+        if (withinRange(num)) {
             this.l.get(num).markTaskDone();
         } else {
             System.out.println("Hey HEY HEY, that's not within range >:[");
@@ -35,11 +35,25 @@ public class Tasks {
     }
 
     public void markTaskUndone(int num) {
-        if (this.l.size() > num && num >= 0 ) {
+        if (withinRange(num)) {
             this.l.get(num).markTaskUndone();
         } else {
             System.out.println("Hey HEY HEY, that's not within range >:[");
         }
+    }
+
+    public void deleteTask(int num) {
+        if (withinRange(num)) {
+            System.out.println("Into the bin it goes! This is now deleted!\n" + this.l.get(num).printTask());
+            this.l.remove(num);
+            System.out.printf("%d task(s) left to go :/\n", this.l.size());
+        } else {
+            System.out.println("Hey HEY HEY, that's not within range >:[");
+        }
+    }
+
+    public boolean withinRange(int num) {
+        return this.l.size() > num && num >= 0;
     }
 }
 

@@ -53,6 +53,11 @@ public class Duke {
                     System.out.println("Come on now, try again. I asked for an number.");
                 }
             }
+            else if (task.split(" ")[0].equalsIgnoreCase("delete")) {
+                int taskNum = Integer.parseInt(task.split(" ")[1]) - 1;
+                tasks.deleteTask(taskNum);
+
+            }
 
             else if (task.isEmpty()) {
                     System.out.println("Don't appreciate the silence :(");
