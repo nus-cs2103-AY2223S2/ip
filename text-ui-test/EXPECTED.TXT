@@ -67,7 +67,7 @@ DukeException: ☹ OOPS!!! The format of a deadline: deadline {activity} /by {da
 DukeException: ☹ OOPS!!! The format of a event: event {activity} /from {datetime} /to {datetime}.
 --------------------------------------------------------------------
 --------------------------------------------------------------------
-DukeException: ☹ OOPS!!! I'm sorry, but I don't know what that means :-(
+☹ OOPS!!! I'm sorry, but I don't know what that means :-(
 --------------------------------------------------------------------
 --------------------------------------------------------------------
 Noted. I've removed this task:
