@@ -3,13 +3,10 @@ import java.util.Scanner;
 import java.util.ArrayList;
 
 public class Duke {
-<<<<<<< HEAD
     static ArrayList<Task> arr = new ArrayList<Task>();
     static String str = "------------------------------------------------------------";
 
 
-=======
->>>>>>> parent of 964f459 (add Duke.java)
     public static void main(String[] args) {
         String logo = " ____        _        \n"
                 + "|  _ \\ _   _| | _____ \n"
@@ -18,9 +15,10 @@ public class Duke {
                 + "|____/ \\__,_|_|\\_\\___|\n";
         System.out.println("Hello from\n" + logo);
 
+        printResponse("Hello! I'm Duke\n" + "What can I do for you?");
+
         Scanner scanner = new Scanner(System.in);
         while (true) {
-<<<<<<< HEAD
             String input = scanner.nextLine();
             String[] arrStr = input.split(" ", 2);
             String command = arrStr[0];
@@ -96,14 +94,4 @@ public class Duke {
         }
         printResponse("Here are the task in your list: \n" + lst);
     }
-=======
-            String word = scanner.nextLine();
-            if (word.equals("bye")) {
-                System.out.println("Bye. Hope to see you again soon!");
-                break;
-            }
-            System.out.println(word);
-        }
-    }
->>>>>>> parent of 964f459 (add Duke.java)
 }

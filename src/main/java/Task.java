@@ -31,7 +31,6 @@ public class Task {
         if(this == obj) {
             return true;
         }
-
         if(obj instanceof Task) {
             Task x = (Task) obj;
             if(this.name.equals(x.name)) {

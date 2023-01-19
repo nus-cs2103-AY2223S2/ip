@@ -18,7 +18,6 @@ public class Event extends Task {
         if(this == obj) {
             return true;
         }
-
         if(obj instanceof Event) {
             Event x = (Event) obj;
             if(this.name.equals(x.name)) {
