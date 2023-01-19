@@ -5,6 +5,7 @@ import java.util.Scanner;
 
 public class Duke {
     private static final String FULL_LINE = "_______________________________________________\n";
+    private static final String ADD_TASK_OUTPUT = "Got it. I've added this task:\n\t%s\nNow you have %d tasks in the list";
     private static ArrayList<Task> taskList = new ArrayList<>();
 
     public static void main(String[] args) {
@@ -37,10 +38,21 @@ public class Duke {
                 Task task = taskList.get(index);
                 task.markAsUndone();
                 output = "OK, I've marked this task as not done yet:\n" + task.toString();
-            } else {
-                Task task = new Task(input);
+            } else if (input.startsWith("todo ")){
+                String desc = input.replace("todo ", "");
+                Todo task = new Todo(desc);
                 taskList.add(task);
-                output = "Added: " + input;
+                output = String.format(ADD_TASK_OUTPUT, task.toString(), taskList.size());
+            } else if (input.startsWith("deadline ")){
+                String[] params = input.replace("deadline ", "").split(" /by ");
+                Deadline task = new Deadline(params[0], params[1]);
+                taskList.add(task);
+                output = String.format(ADD_TASK_OUTPUT, task.toString(), taskList.size());
+            } else if (input.startsWith("event ")){
+                String[] params = input.replace("event ", "").split("( /from | /to )");
+                Event task = new Event(params[0], params[1], params[2]);
+                taskList.add(task);
+                output = String.format(ADD_TASK_OUTPUT, task.toString(), taskList.size());
             }
             printFormattedOutput(output);
         }
