@@ -62,6 +62,19 @@ public class Duke {
                         storage2.set(taskNumber2 -1, tempTask);
                     }
                     break;
+                case "delete":
+                    int taskNumber3 = Integer.parseInt(tempText[1]);
+                    // need to take care of this error where there isnt a tempText[1]
+                    if (taskNumber3 <= storage2.size()) {   // need to add in an else print an error statement
+                        // If the task number given is within the range of tasks in the list
+                        Task tempTask = storage2.remove(taskNumber3 - 1);
+                        sb.append("    ____________________________________________________________\n")
+                                .append("    Noted. I've removed this task:\n")
+                                .append("      ").append(tempTask.getTaskInfo())
+                                .append("\n    Now you have ").append(--noOfTasks).append(" tasks in the list.\n")
+                                .append("    ____________________________________________________________\n");
+                    }
+                    break;
                 default:
                     Task newTask = new Task(text);
                     if (tempText[0].equals("todo")) {
@@ -78,12 +91,11 @@ public class Duke {
                         // need to take care of error where there isnt a tempText3[1] / tempText4[1]
                         newTask = new Event(tempText3[0], tempText4[0], tempText4[1]);
                     }
-                    noOfTasks++;
                     storage2.add(newTask);
                     sb.append("    ____________________________________________________________\n")
                             .append("    Got it. I've added this task:\n")
                             .append("      ").append(newTask.getTaskInfo())
-                            .append("\n    Now you have ").append(noOfTasks).append(" tasks in the list.\n")
+                            .append("\n    Now you have ").append(++noOfTasks).append(" tasks in the list.\n")
                             .append("    ____________________________________________________________\n");
             }
             pw.println(sb.toString());
