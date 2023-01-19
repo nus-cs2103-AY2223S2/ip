@@ -1,12 +1,11 @@
-do test
-running
 list
-mark 2
 todo exam
 deadline gaming /by 29th april 2023
 event 2103t /from 1/1/2023 /to 4/29/2023
 list
-mark 5
+mark 2
+mark 3
+list
 unmark 2
 list
 bye

@@ -6,19 +6,18 @@ public class Duke {
         Scanner sc = new Scanner(System.in);
         ToDoList ls = new ToDoList();
 
-        //welcome message
-        String logo = " ____        _        \n"
-                + "|  _ \\ _   _| | _____ \n"
-                + "| | | | | | | |/ / _ \\\n"
-                + "| |_| | |_| |   <  __/\n"
-                + "|____/ \\__,_|_|\\_\\___|\n";
-        System.out.println("Hello from\n" + logo);
         Duke.welcomeMsg();
         Duke.input(sc, ls);
         Duke.endMsg();
     }
 
     private static void welcomeMsg() {
+        String logo = " ____        _        \n"
+                + "|  _ \\ _   _| | _____ \n"
+                + "| | | | | | | |/ / _ \\\n"
+                + "| |_| | |_| |   <  __/\n"
+                + "|____/ \\__,_|_|\\_\\___|\n";
+        System.out.println("Hello from\n" + logo);
         String divider = "____________________________________________________________\n";
         System.out.println(divider + "What can the Duke help you with today?\n" + divider);
     }
@@ -29,48 +28,46 @@ public class Duke {
     }
 
     private static void input(Scanner sc, ToDoList ls) {
-        String divider = "@~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~@\n";
         while (true) {
-            String input = sc.nextLine();
-            if (input.equals("bye")) { //close input reading
-                break;
-            }
-            if (input.equals("list")) { //list out todoList
-                System.out.println(ls);
-                continue;
-            }
+            try {
+                String input[] = sc.nextLine().split(" ", 2);
+                String command = input[0];
+                String sub;
+                String subinput[];
 
-            //tick & untick operations
-            if (input.startsWith("mark")) {
-                String ind = input.substring(5);
-                ls.markTask(Integer.parseInt(ind));
-                continue;
+                switch (command) {
+                    case "bye":
+                        return;
+                    case "list":
+                        System.out.println(ls);
+                        break;
+                    case "mark":
+                        sub = input[1];
+                        ls.markTask(Integer.parseInt(sub));
+                        break;
+                    case "unmark":
+                        sub = input[1];
+                        ls.unmarkTask(Integer.parseInt(sub));
+                        break;
+                    case "todo":
+                        sub = input[1];
+                        ls.add(new ToDoTask(sub));
+                        break;
+                    case "deadline":
+                        sub = input[1];
+                        subinput = sub.split(" /by ");
+                        ls.add(new DeadlineTask(subinput[0], subinput[1]));
+                        break;
+                    case "event":
+                        sub = input[1];
+                        subinput = sub.split(" /from ");
+                        String duration[] = subinput[1].split(" /to ");
+                        ls.add(new EventTask(subinput[0], duration[0], duration[1]));
+                        break;
+                }
+            } catch (Exception e) {
+                System.out.println(e);
             }
-            if (input.startsWith("unmark")) {
-                String ind = input.substring(7);
-                ls.unmarkTask(Integer.parseInt(ind));
-                continue;
-            }
-
-            //task addition operations
-            if (input.startsWith("todo")) {
-                String sub = input.substring(5);
-                ls.add(new ToDoTask(sub));
-                continue;
-            }
-            if (input.startsWith("deadline")) {
-                String inputArr[] = input.split(" /");
-                ls.add(new DeadlineTask(inputArr[0].substring(9), inputArr[1].substring(3)));
-                continue;
-            }
-            if (input.startsWith("event")) {
-                String inputArr[] = input.split(" /");
-                ls.add(new EventTask(inputArr[0].substring(6),
-                        inputArr[1].substring(5),
-                        inputArr[2].substring(3)));
-                continue;
-            }
-            ls.add(new Task(input));
         }
     }
 }

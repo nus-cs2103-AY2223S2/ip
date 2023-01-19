@@ -10,53 +10,37 @@ What can the Duke help you with today?
 ____________________________________________________________
 
 @~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~@
-The Duke has added the following task:
- - [ ] do test
-You now have 1 task!
-@~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~@
-
-@~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~@
-The Duke has added the following task:
- - [ ] running
-You now have 2 task!
-@~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~@
-
-@~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~@
 TO DO LIST:
-1.[ ] do test
-2.[ ] running
-@~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~@
-
-@~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~@
-The Duke has marked the following task:
- - [x] running
 @~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~@
 
 @~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~@
 The Duke has added the following task:
  - [T][ ] exam
-You now have 3 task!
+You now have 1 task!
 @~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~@
 
 @~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~@
 The Duke has added the following task:
  - [D][ ] gaming (by: 29th april 2023)
-You now have 4 task!
+You now have 2 task!
 @~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~@
 
 @~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~@
 The Duke has added the following task:
  - [E][ ] 2103t (from: 1/1/2023 to: 4/29/2023)
-You now have 5 task!
+You now have 3 task!
 @~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~@
 
 @~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~@
 TO DO LIST:
-1.[ ] do test
-2.[x] running
-3.[T][ ] exam
-4.[D][ ] gaming (by: 29th april 2023)
-5.[E][ ] 2103t (from: 1/1/2023 to: 4/29/2023)
+1.[T][ ] exam
+2.[D][ ] gaming (by: 29th april 2023)
+3.[E][ ] 2103t (from: 1/1/2023 to: 4/29/2023)
+@~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~@
+
+@~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~@
+The Duke has marked the following task:
+ - [D][x] gaming (by: 29th april 2023)
 @~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~@
 
 @~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~@
@@ -65,17 +49,22 @@ The Duke has marked the following task:
 @~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~@
 
 @~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~@
+TO DO LIST:
+1.[T][ ] exam
+2.[D][x] gaming (by: 29th april 2023)
+3.[E][x] 2103t (from: 1/1/2023 to: 4/29/2023)
+@~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~@
+
+@~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~@
 The Duke has unmarked the following task:
- - [ ] running
+ - [D][ ] gaming (by: 29th april 2023)
 @~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~@
 
 @~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~@
 TO DO LIST:
-1.[ ] do test
-2.[ ] running
-3.[T][ ] exam
-4.[D][ ] gaming (by: 29th april 2023)
-5.[E][x] 2103t (from: 1/1/2023 to: 4/29/2023)
+1.[T][ ] exam
+2.[D][ ] gaming (by: 29th april 2023)
+3.[E][x] 2103t (from: 1/1/2023 to: 4/29/2023)
 @~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~@
 
 ____________________________________________________________
