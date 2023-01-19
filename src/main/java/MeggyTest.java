@@ -3,7 +3,7 @@ import java.io.FileInputStream;
 import java.io.IOException;
 
 /**
- * For testing purpose only.
+ * For text UI testing purpose only.
  */
 public class MeggyTest {
     public static void main(String[] args) throws IOException {
@@ -12,6 +12,6 @@ public class MeggyTest {
         String actual = out.toString().replaceAll("\r", "");
         String expected = new String(new FileInputStream("text-ui-test/EXPECTED.txt").readAllBytes()).
                 replaceAll("\r", "");
-        System.out.println(actual);
+        System.out.println(actual.equals(expected));
     }
 }

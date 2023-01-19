@@ -8,28 +8,25 @@
               __/ | __/ | __/ |
              |___/ |___/ |___/
 
-Wommy! Get REKT by the upcoming star of Inkopolis, Meggy!
+ Wommy! Get REKT by the upcoming star of Inkopolis, Meggy!
 ------------------------------------------------------------
 
 >------------------------------------------------------------
  Got it. Added this task:
     [T][ ] read book
  Now you have 1 task(s) in the list.
-
 ------------------------------------------------------------
 
 >------------------------------------------------------------
  Got it. Added this task:
     [D][ ] return book (by: N/A)
  Now you have 2 task(s) in the list.
-
 ------------------------------------------------------------
 
 >------------------------------------------------------------
  Here are the tasks in your list:
  1.[T][ ] read book
  2.[D][ ] return book (by: N/A)
-
 ------------------------------------------------------------
 
 >------------------------------------------------------------
@@ -51,21 +48,18 @@ Wommy! Get REKT by the upcoming star of Inkopolis, Meggy!
  Got it. Added this task:
     [E][ ] project meeting (from: Aug 6th 2pm to: 4pm)
  Now you have 3 task(s) in the list.
-
 ------------------------------------------------------------
 
 >------------------------------------------------------------
  Got it. Added this task:
     [T][ ] join sports club
  Now you have 4 task(s) in the list.
-
 ------------------------------------------------------------
 
 >------------------------------------------------------------
  Got it. Added this task:
     [T][ ] borrow book
  Now you have 5 task(s) in the list.
-
 ------------------------------------------------------------
 
 >------------------------------------------------------------
@@ -75,28 +69,24 @@ Wommy! Get REKT by the upcoming star of Inkopolis, Meggy!
  3.[E][ ] project meeting (from: Aug 6th 2pm to: 4pm)
  4.[T][ ] join sports club
  5.[T][ ] borrow book
-
 ------------------------------------------------------------
 
 >------------------------------------------------------------
  Got it. Added this task:
     [D][ ] return book (by: Sunday)
  Now you have 6 task(s) in the list.
-
 ------------------------------------------------------------
 
 >------------------------------------------------------------
  Got it. Added this task:
     [E][ ] project meeting (from: Mon 2pm to: 4pm)
  Now you have 7 task(s) in the list.
-
 ------------------------------------------------------------
 
 >------------------------------------------------------------
  Got it. Added this task:
     [D][ ] do homework (by: no idea :-p)
  Now you have 8 task(s) in the list.
-
 ------------------------------------------------------------
 
 >------------------------------------------------------------
@@ -109,11 +99,57 @@ Wommy! Get REKT by the upcoming star of Inkopolis, Meggy!
  6.[D][ ] return book (by: Sunday)
  7.[E][ ] project meeting (from: Mon 2pm to: 4pm)
  8.[D][ ] do homework (by: no idea :-p)
-
 ------------------------------------------------------------
 
 >------------------------------------------------------------
-OK gotta go play more Turf Wars. Have a nice day!
+ ☹ OOPS!!! Can not retrieve item with non-positive index (0).
+ Usage: mark <idx: integer between 1 and list size (inclusive)>
+------------------------------------------------------------
+
+>------------------------------------------------------------
+ ☹ OOPS!!! Can not retrieve item with index 100 from a list of size 8.
+ Usage: unmark <idx: integer between 1 and list size (inclusive)>
+------------------------------------------------------------
+
+>------------------------------------------------------------
+ ☹ OOPS!!! Can not interpret "a" as an index number.
+ Usage: unmark <idx: integer between 1 and list size (inclusive)>
+------------------------------------------------------------
+
+>------------------------------------------------------------
+ ☹ OOPS!!! Can not retrieve item with non-positive index (-1).
+ Usage: delete <idx: integer between 1 and list size (inclusive)>
+------------------------------------------------------------
+
+>------------------------------------------------------------
+ OK. Removed this task:
+    [E][ ] project meeting (from: Aug 6th 2pm to: 4pm)
+ Now you have 7 task(s) in the list.
+------------------------------------------------------------
+
+>------------------------------------------------------------
+ ☹ OOPS!!! Can not retrieve item with index 100 from a list of size 7.
+ Usage: delete <idx: integer between 1 and list size (inclusive)>
+------------------------------------------------------------
+
+>------------------------------------------------------------
+ ☹ OOPS!!! Can not interpret "x" as an index number.
+ Usage: delete <idx: integer between 1 and list size (inclusive)>
+------------------------------------------------------------
+
+>------------------------------------------------------------
+ Here are the tasks in your list:
+ 1.[T][X] read book
+ 2.[D][ ] return book (by: N/A)
+ 3.[T][ ] join sports club
+ 4.[T][ ] borrow book
+ 5.[D][ ] return book (by: Sunday)
+ 6.[E][ ] project meeting (from: Mon 2pm to: 4pm)
+ 7.[D][ ] do homework (by: no idea :-p)
+------------------------------------------------------------
+
+>------------------------------------------------------------
+ OK gotta go play more Turf Wars. Have a nice day!
 ------------------------------------------------------------
 
 >
