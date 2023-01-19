@@ -4,9 +4,33 @@ What can I do for you today?
 (\ (\
 („• ֊ •„) ♡
 ━O━O━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+Huh? Sorry, I don't know what this means :(
+(\ (\
+(„• ֊ •„) ♡
+━O━O━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+Huh? Your task number needs to be greater than zero!
+(\ (\
+(„• ֊ •„) ♡
+━O━O━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+Huh? You don't even have that many items on your list!
+(\ (\
+(„• ֊ •„) ♡
+━O━O━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+Hey! You didn't give me a task description.
+(\ (\
+(„• ֊ •„) ♡
+━O━O━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 Alright! I've added this task:
-[T][ ] borrow book
+[T][ ] read book
 Now you have 1 task on your list.
+(\ (\
+(„• ֊ •„) ♡
+━O━O━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+Hey! You didn't mention a deadline D:
+(\ (\
+(„• ֊ •„) ♡
+━O━O━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+Hey! You didn't mention a deadline D:
 (\ (\
 („• ֊ •„) ♡
 ━O━O━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
@@ -22,32 +46,28 @@ Now you have 3 tasks on your list.
 (\ (\
 („• ֊ •„) ♡
 ━O━O━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+Hey! You didn't mention an end time D:
+(\ (\
+(„• ֊ •„) ♡
+━O━O━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 Here are all the things on your list!
-1.[T][ ] borrow book
+1.[T][ ] read book
 2.[D][ ] return book (by: Sunday)
 3.[E][ ] project meeting (from: Mon 2pm to: 4pm)
 (\ (\
 („• ֊ •„) ♡
 ━O━O━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 Okie! I've marked this task as done:
-[D][X] return book (by: Sunday)
+[T][X] read book
+(\ (\
+(„• ֊ •„) ♡
+━O━O━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+Huh? You've already done this task!
 (\ (\
 („• ֊ •„) ♡
 ━O━O━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 Here are all the things on your list!
-1.[T][ ] borrow book
-2.[D][X] return book (by: Sunday)
-3.[E][ ] project meeting (from: Mon 2pm to: 4pm)
-(\ (\
-(„• ֊ •„) ♡
-━O━O━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-Okie! I've marked this task as not done yet:
-[D][ ] return book (by: Sunday)
-(\ (\
-(„• ֊ •„) ♡
-━O━O━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-Here are all the things on your list!
-1.[T][ ] borrow book
+1.[T][X] read book
 2.[D][ ] return book (by: Sunday)
 3.[E][ ] project meeting (from: Mon 2pm to: 4pm)
 Bye bye :( Hope to see you again soon!
