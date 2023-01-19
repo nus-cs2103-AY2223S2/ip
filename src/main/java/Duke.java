@@ -21,7 +21,9 @@ public class Duke {
         String str;
         while ((str = bf.readLine()) != null) {
             if (str.equals("bye")) {
+                lineUI();
                 System.out.println("Bye. Hope to see you again soon!");
+                lineUI();
                 arr = new ArrayList<>();
                 break;
             }
@@ -51,9 +53,12 @@ public class Duke {
         try {
             int num = getTaskNumber(str, 7);
             Task removed = arr.remove(num - 1);
+            lineUI();
             System.out.println("Noted. I've removed this task:");
             System.out.println(removed.toString());
             System.out.println("Now you have " + arr.size() + " tasks in the list.");
+            lineUI();
+
         } catch (MissingArguments | InvalidTaskNumber err) {
             System.out.println(err.getMessage());
         }
@@ -70,9 +75,11 @@ public class Duke {
 
             Task toAdd = new Deadline(foo[0], getDeadline(foo[1]));
             arr.add(toAdd);
+            lineUI();
             System.out.println("Got it. I've added this task:");
             System.out.println(toAdd);
             System.out.println("Now you have " + arr.size() + " tasks in the list.");
+            lineUI();
         } catch (MissingArguments | MissingTimeException | MissingNameException | InvalidSyntaxException err) {
             System.out.println(err.getMessage());
         }
@@ -89,9 +96,11 @@ public class Duke {
             String[] bar = getDuration(foo[1]);
             Task toAdd = new Event(foo[0], bar[0], bar[1]);
             arr.add(toAdd);
+            lineUI();
             System.out.println("Got it. I've added this task:");
             System.out.println(toAdd);
             System.out.println("Now you have " + arr.size() + " tasks in the list.");
+            lineUI();
         } catch (MissingArguments | MissingNameException | MissingTimeException | InvalidSyntaxException err) {
             System.out.println(err.getMessage());
         }
@@ -111,8 +120,10 @@ public class Duke {
         try {
             Task itemToMark = arr.get(getTaskNumber(str,5) - 1);
             itemToMark.markDone();
+            lineUI();
             System.out.println("Nice! I've marked this task as done:");
             System.out.println("[X] " + itemToMark.getTaskName());
+            lineUI();
         } catch (MissingArguments | InvalidTaskNumber err) {
             System.out.println(err.getMessage());
         }
@@ -122,8 +133,10 @@ public class Duke {
         try {
             Task itemToMark = arr.get(getTaskNumber(str, 7) - 1);
             itemToMark.markUndone();
+            lineUI();
             System.out.println("OK, I've marked this task as not done yet:");
             System.out.println("[] " + itemToMark.getTaskName());
+            lineUI();
         } catch (MissingArguments | InvalidTaskNumber err) {
             System.out.println(err.getMessage());
         }
@@ -133,9 +146,11 @@ public class Duke {
         try {
             Task toAdd = new ToDo(getName(str, 5));
             arr.add(toAdd);
+            lineUI();
             System.out.println("Got it. I've added this task:");
             System.out.println(toAdd);
             System.out.println("Now you have " + arr.size() + " tasks in the list.");
+            lineUI();
         } catch (MissingArguments | MissingNameException err) {
             System.out.println(err.getMessage());
         }
@@ -199,7 +214,7 @@ public class Duke {
             if (toReturn.isBlank()) {
                 throw new MissingTimeException();
             }
-            if (!toReturn.startsWith("by ")) {
+            if (!line.startsWith("by ")) {
                 throw new InvalidSyntaxException();
             }
             return toReturn;
@@ -227,4 +242,9 @@ public class Duke {
             throw new MissingArguments();
         }
     }
+
+    private static void lineUI() {
+        System.out.println("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
+    }
+
 }
