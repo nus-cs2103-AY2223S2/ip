@@ -69,7 +69,9 @@ public class EventTask extends Task {
 
     @Override
     public boolean satisfies(TaskFilter filter) {
-        if (filter == null || filter.isEmpty()) return true;
+        if (filter == null || filter.isEmpty()) {
+            return true;
+        }
         boolean isBefore = filter.getBeforeDate() == null || !filter.getBeforeDate().isBefore(this.fromDate);
         boolean isAfter = filter.getAfterDate() == null || !filter.getAfterDate().isAfter(this.toDate);
         return isBefore && isAfter;

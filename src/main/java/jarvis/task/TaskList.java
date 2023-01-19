@@ -23,6 +23,7 @@ public class TaskList {
 
     /**
      * Constructor for a task list populated with the given tasks.
+     *
      * @param tasks Tasks to populate the list with.
      */
     public TaskList(List<Task> tasks) {
@@ -31,6 +32,7 @@ public class TaskList {
 
     /**
      * Adds a task to the list.
+     *
      * @param task Task to add.
      * @return List of response lines.
      */
@@ -44,6 +46,7 @@ public class TaskList {
 
     /**
      * Deletes a task from the list at the given index.
+     *
      * @param index Index of the task to delete.
      * @return List of response lines.
      * @throws MissingParameterException If the index to delete is invalid.
@@ -65,6 +68,7 @@ public class TaskList {
 
     /**
      * Marks a task as done or undone as given.
+     *
      * @param index 1-based index of the task.
      * @param isDone Whether the task is marked as done.
      * @return List of response lines.
@@ -91,6 +95,7 @@ public class TaskList {
 
     /**
      * Returns a list of response lines to display the task list.
+     *
      * @return List of response lines.
      */
     public List<String> getTasksForPrint() {
@@ -99,6 +104,7 @@ public class TaskList {
 
     /**
      * Returns a list of response lines to display the task list, after applying the given filter.
+     *
      * @param filter List filter.
      * @return List of response lines.
      */
@@ -112,6 +118,7 @@ public class TaskList {
 
     /**
      * Returns a list of response lines to display the given tasks.
+     *
      * @param tasks List of tasks.
      * @return List of response lines.
      */

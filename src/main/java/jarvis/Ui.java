@@ -28,6 +28,7 @@ public class Ui {
 
     /**
      * Formats and prints multiple lines of response.
+     *
      * @param lines List of response lines.
      */
     public void print(List<String> lines) {
@@ -40,6 +41,7 @@ public class Ui {
 
     /**
      * Formats and prints a single line of response.
+     *
      * @param line Response line.
      */
     public void print(String line) {
@@ -48,29 +50,31 @@ public class Ui {
 
     /**
      * Prints one of the predefined responses.
+     *
      * @param response Type of response.
      */
     public void printStandard(Response response) {
         switch (response) {
-            case INTRO:
-                print(String.format("Hello, I'm %s, how may I help you?", this.name));
-                break;
-            case GOODBYE:
-                print("Goodbye, and see you again!");
-                break;
-            case CONFUSED:
-                print("I don't quite understand, please try again.");
-                break;
-            case REJECT:
-                print("Sorry, I can't handle that right now.");
-                break;
-            default:
-                print("I'm most definitely a teapot.");
+        case INTRO:
+            print(String.format("Hello, I'm %s, how may I help you?", this.name));
+            break;
+        case GOODBYE:
+            print("Goodbye, and see you again!");
+            break;
+        case CONFUSED:
+            print("I don't quite understand, please try again.");
+            break;
+        case REJECT:
+            print("Sorry, I can't handle that right now.");
+            break;
+        default:
+            print("I'm most definitely a teapot.");
         }
     }
 
     /**
      * Prints an error response.
+     *
      * @param message Error message.
      */
     public void printError(String message) {

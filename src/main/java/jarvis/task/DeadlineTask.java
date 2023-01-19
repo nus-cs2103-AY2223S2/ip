@@ -41,7 +41,9 @@ public class DeadlineTask extends Task {
 
     @Override
     public boolean satisfies(TaskFilter filter) {
-        if (filter == null || filter.isEmpty()) return true;
+        if (filter == null || filter.isEmpty()) {
+            return true;
+        }
         boolean isAfter = filter.getAfterDate() == null || !filter.getAfterDate().isAfter(this.deadline);
         boolean isBefore = filter.getBeforeDate() == null || !filter.getBeforeDate().isBefore(this.deadline);
         return isAfter && isBefore;
