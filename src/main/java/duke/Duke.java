@@ -5,9 +5,14 @@ import java.util.Scanner;
 public class Duke {
         
     private Tasks<Task> tasks;
+    private TaskList<Task> taskList;
+    private Storage storage; 
+    private Ui ui;
+    
 
     Duke() {
         this.tasks = new Tasks<Task>();
+        this.taskList = new TaskList<Task>();
     }
     
     //Level 1
@@ -215,16 +220,27 @@ public class Duke {
         }
     }
     
-    //Level 7
-    void moreOOP() {
+    //Level 9
+    void moreOop() {
         
-        Printable.greet();
-        Scanner sc = new Scanner(System.in);
-        Save saver = new Save();
-        saver.readFromFile();
-        this.tasks = saver.getTasks();
-        saver.createDirectory();        
-            
+        //Printable.greet();
+        //Scanner sc = new Scanner(System.in);
+        storage = new Storage();
+        storage.readFromFile();
+        this.taskList = storage.getTasks();
+        storage.createDirectory();        
+        ui = new Ui();
+
+        ui.showWelcome();
+        boolean isExit = false;
+
+        while (!isExit) {
+            ui.readCommand();
+            this.taskList = ui.execute(this.taskList);
+            storage.writeToFile(taskList.toString());
+        }
+
+        /*
         while (true) {
             String description = sc.next();
             if (description.equals(Printable.SHOW_TASKS)) {
@@ -246,12 +262,13 @@ public class Duke {
             }  else {
                 dukeExceptionWarning(description);
             }
-            saver.writeToFile(tasks.toString());
+            storage.writeToFile(tasks.toString());
         }
+        */
     }
     
     public static void main(String[] args) {
         Duke duke = new Duke();
-        duke.saveFiles();
+        duke.moreOop();
     }
 }
