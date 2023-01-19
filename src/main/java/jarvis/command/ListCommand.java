@@ -9,7 +9,7 @@ import jarvis.task.TaskFilter;
 import java.util.List;
 
 public class ListCommand extends Command {
-    private final TaskFilter filter;
+    private TaskFilter filter;
 
     public ListCommand(Action action, String body, List<Command> subCommands) {
         super(action, body, subCommands);
@@ -23,11 +23,12 @@ public class ListCommand extends Command {
                 afterDate = command.getBody();
             }
         }
-        TaskFilter filter = null;
         try {
-            filter = new TaskFilter(afterDate, beforeDate);
+            this.filter = new TaskFilter()
+                    .setAfterDate(afterDate)
+                    .setBeforeDate(beforeDate)
+                    .addKeywords(body);
         } catch (InvalidParameterException ignored) {}
-        this.filter = filter;
     }
 
     @Override

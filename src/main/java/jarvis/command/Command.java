@@ -15,6 +15,7 @@ public abstract class Command {
     public enum Action {
         BYE("bye"),
         LIST("list"),
+        FIND("find"),
         MARK_DONE("mark"),
         MARK_UNDONE("unmark"),
         CREATE_TODO("todo"),
