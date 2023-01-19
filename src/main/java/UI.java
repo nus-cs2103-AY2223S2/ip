@@ -21,4 +21,28 @@ public class UI {
         return "It has been a great pleasure serving you. \n" + "Have a nice day.";
     }
 
+    /**
+     * Returns the message when a task is added.
+     * @param added The newly added task.
+     */
+    public String addTaskMessage(Task added) {
+        return "Understood. I have added this task: \n" + added.getStatus();
+    }
+
+    /**
+     * Return the message when a task is mark as done.
+     * @param mark The task to be marked as done.
+     */
+    public String markDone(Task mark) {
+        return "Nice work! This task has been marked as done: \n" + mark.getStatus();
+    }
+
+    /**
+     * Returns the message when a task is marked as undone.
+     * @param unmark The task to be unmarked as done.
+     */
+    public  String markUndone(Task unmark) {
+        return "Noted. This task has been marked as not done yet: \n" + unmark.getStatus();
+    }
+
 }
