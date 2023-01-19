@@ -18,6 +18,7 @@ public class Duke {
     }
 
     private static void printList() {
+        System.out.println("Your tasks so far!!");
         for (int i = 0; i < todoList.size(); i++) {
             String task = todoList.get(i);
             String toPrint = String.format("%d. %s", i + 1, task);
