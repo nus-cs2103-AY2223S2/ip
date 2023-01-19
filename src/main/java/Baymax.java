@@ -3,6 +3,7 @@ public class Baymax {
     public static void main(String[] args) {
         System.out.println("Hello, I am Baymax your personal Chatbot Companion. \nWhat can I do for you today?");
         returnSame();
+        System.out.println("See you soon!");
     }
     public static void returnSame() {
         Scanner input = new Scanner(System.in);
@@ -16,7 +17,6 @@ public class Baymax {
                 System.out.println(currentInput);
             }
         }
-        System.out.println("See you soon!");
     }
 
 }
