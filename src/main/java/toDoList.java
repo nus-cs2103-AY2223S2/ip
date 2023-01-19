@@ -16,31 +16,32 @@ public class toDoList {
         System.out.println("Here are the tasks in your list:");
         for (int i = 0; i < allTasks.size(); i++) {
             int index = i + 1;
-            System.out.println(index + ". "+ allTasks.get(i).getItem());
+            System.out.println(index + ". "+ allTasks.get(i).toString());
         }
     }
 
     public void addItem(String type, String item) {
         Task newTask = new Task(item, type);
         allTasks.add(newTask);
-        System.out.println(" " + newTask.getItem());
+        System.out.println(" " + newTask.toString());
     }
 
     public void addItemDeadline(String type, String item, String time) {
-        Task newTask = new Task(item, type);
+        //Task newTask = new Task(item, type);
 
-        newTask.setDeadLine(time);
+        Task newTask = new Deadline(item, type, time);
+        //newTask.setDeadLine(time);
         allTasks.add(newTask);
 
-        System.out.println(" " + newTask.getItem());
+        System.out.println(" " + newTask.toString());
     }
 
     public void addItemEvent(String type, String item, String time1, String time2) {
-        Task newTask = new Task(item, type);
+        Task newTask = new Event(item, type, time1, time2);
 
-        newTask.setEventTime(time1, time2);
+        //newTask.setEventTime(time1, time2);
         allTasks.add(newTask);
-        System.out.println(" " + newTask.getItem());
+        System.out.println(" " + newTask.toString());
     }
 
     public void changingStatus(int x, int index) {
@@ -48,13 +49,13 @@ public class toDoList {
             allTasks.get(index-1).mark();
 
             System.out.println("Nice! I've marked this task as done:");
-            System.out.println(" " + allTasks.get(index-1).getItem());
+            System.out.println(" " + allTasks.get(index-1).toString());
 
         } else { //unmarked
             allTasks.get(index-1).unmark();
 
             System.out.println("OK, I've marked this task as not done yet:");
-            System.out.println(" " + allTasks.get(index-1).getItem());
+            System.out.println(" " + allTasks.get(index-1).toString());
         }
     }
 
