@@ -11,13 +11,13 @@ public class Duke {
      */
     private static void output(String string) {
         System.out.println("____________________________________________________________\n" +
-                            string + 
+                            "  " + string + 
                             "____________________________________________________________\n");
     }
 
     // Outputs welcome message.
     private static void welcomeMsg() {
-        output("Hello! I'm Duke\nWhat can I do for you?\n");
+        output("Hello! I'm Duke\n  What can I do for you?\n");
     }
     
     // Outputs exit message.
@@ -42,8 +42,8 @@ public class Duke {
     private static void addTask(Task task) {
         tasks[numOfTasks] = task;
         numOfTasks++;
-        output("Got it. I've added this task:\n" 
-                + "  " + task + "\n"
+        output("Got it. I've added this task:\n    " 
+                + task + "\n  "
                 + "Now you have " + numOfTasks + (numOfTasks == 1 ? " task " : " tasks ") + "in the list.\n");
     }
 
@@ -52,7 +52,7 @@ public class Duke {
         String listOfTasks = "Here are the tasks in your list:\n";
         for(int idx = 0; idx < numOfTasks; idx++) {
             Task task = tasks[idx];
-            listOfTasks = listOfTasks + (idx + 1) + "." + task + "\n";
+            listOfTasks = listOfTasks + "  " + (idx + 1) + "." + task + "\n";
         }
         output(listOfTasks);
     }
@@ -64,7 +64,7 @@ public class Duke {
      */
     private static void markTask(Task task) {
         task.mark();
-        output("Nice! I've marked this task as done:\n  " + task + "\n");
+        output("Nice! I've marked this task as done:\n    " + task + "\n");
     }
 
     /** 
@@ -74,9 +74,16 @@ public class Duke {
      */
     private static void unmarkTask(Task task) {
         task.unmark();
-        output("OK, I've marked this task as not done yet:\n   " + task + "\n");
+        output("OK, I've marked this task as not done yet:\n    " + task + "\n");
     }
 
+    private static void handleUnknownInput() {
+        try {
+            throw new DukeException("OOPS!!! I'm sorry, but I don't know what that means :-(\n");
+        } catch (DukeException e) {
+            output(e.getMessage());
+        }
+    }
 
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
@@ -98,22 +105,39 @@ public class Duke {
                     unmarkTask(tasks[Integer.parseInt(words[1]) - 1]);
                     break;
                 case "todo":
-                    String[] todoDescription = words[1].split("/");
-                    addTask(new Todo(todoDescription[0]));
+                    try {
+                        if (words.length != 2) 
+                            throw new DukeException("OOPS!!! The description of a todo cannot be empty.\n");
+                        addTask(new Todo(words[1]));
+                    } catch (DukeException e) {
+                        output(e.getMessage());
+                    }
                     break;
                 case "deadline":
-                    String[] deadlineDescription = words[1].split("/by");
-                    addTask(new Deadline(deadlineDescription[0], deadlineDescription[1]));
+                    try {
+                        String[] deadlineDescription = words[1].split("/by");
+                        if (deadlineDescription.length != 2) 
+                            throw new DukeException("OOPS!!! The description of a deadline cannot be empty.\n");
+                        addTask(new Deadline(deadlineDescription[0], deadlineDescription[1]));
+                    } catch (DukeException e) {
+                        output(e.getMessage());
+                    }
                     break;
                 case "event":
-                    String[] eventDescription = words[1].split("/from|/to");
-                    addTask(new Event(eventDescription[0], eventDescription[1], eventDescription[2]));
+                    try {
+                        String[] eventDescription = words[1].split("/from|/to");
+                        if (eventDescription.length != 3) 
+                            throw new DukeException("OOPS!!! The description of an event cannot be empty.\n");
+                        addTask(new Event(eventDescription[0], eventDescription[1], eventDescription[2]));
+                    } catch (DukeException e) {
+                        output(e.getMessage());
+                    }
                     break;
                 case "bye":
                     exitMsg();
                     return;
                 default:
-                    addTask(new Task(input));
+                    handleUnknownInput();
             }
         }
     }
