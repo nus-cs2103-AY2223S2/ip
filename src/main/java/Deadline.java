@@ -45,7 +45,6 @@ public class Deadline extends Task{
         List<String> deadlineSublist = segments.subList(deadlineIndex, segments.size());
 
 
-
         String details = String.join(" ", detailsSublist);
         String deadline = String.join(" ", deadlineSublist);
 
