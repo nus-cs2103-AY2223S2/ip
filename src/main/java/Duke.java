@@ -27,6 +27,10 @@ public class Duke {
                   int position = Integer.valueOf(userInput.substring(7));
                   storage.get(position - 1).markAsNotDone();
                   System.out.println("OK, I've marked this task as not done yet:\n" + "[" + storage.get(position - 1).getStatusIcon() + "] " + storage.get(position - 1).description);
+              } else if (userInput.contains("delete") && userInput.substring(0,6).equals("delete")) {
+                  int position = Integer.valueOf(userInput.substring(7));
+                  System.out.println("Noted. I've removed this task:\n" + storage.get(position - 1).toString() + "\nNow you have " + (storage.size() - 1) + " tasks in the list");
+                  storage.remove(position - 1);
               } else if (userInput.contains("todo") && userInput.substring(0,4).equals("todo")) {
                   if (userInput.substring(5).equals("")){
                       throw new DukeException("☹ OOPS!!! The description of a todo cannot be empty.");
