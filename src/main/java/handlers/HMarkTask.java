@@ -8,7 +8,7 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public final class HMarkTask implements ICommand {
-    private final Pattern p = Pattern.compile("(un)?mark ([0-9]*)");
+    private static final Pattern p = Pattern.compile("(un)?mark ([0-9]*)");
     private final TaskStorage ts;
 
     public HMarkTask(TaskStorage ts) {

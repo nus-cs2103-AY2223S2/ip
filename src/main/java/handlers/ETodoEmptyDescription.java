@@ -5,7 +5,7 @@ import types.ICommand;
 import java.util.regex.Pattern;
 
 public class ETodoEmptyDescription implements ICommand {
-    private final Pattern p = Pattern.compile("todo");
+    private static final Pattern p = Pattern.compile("todo");
 
     @Override
     public void take(String s) {

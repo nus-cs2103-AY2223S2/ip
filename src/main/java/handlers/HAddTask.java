@@ -7,10 +7,11 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public final class HAddTask implements ICommand {
-    private final Pattern todo_p = Pattern.compile("(todo) (.*)");
-    private final Pattern event_p = Pattern.compile("(event) (.*) /from (.*) /to (.*)");
-    private final Pattern deadline_p = Pattern.compile("(deadline) (.*) /by (.*)");
-    private final Pattern p = Pattern.compile("(todo) (.*)|(deadline) (.*) /by (.*)|(event) (.*) /from (.*) /to (.*)");
+    private static final Pattern todo_p = Pattern.compile("(todo) (.*)");
+    private static final Pattern event_p = Pattern.compile("(event) (.*) /from (.*) /to (.*)");
+    private static final Pattern deadline_p = Pattern.compile("(deadline) (.*) /by (.*)");
+    private static final Pattern p = Pattern
+            .compile("(todo) (.*)|(deadline) (.*) /by (.*)|(event) (.*) /from (.*) /to (.*)");
     private final TaskStorage ts;
 
     public HAddTask(TaskStorage ts) {

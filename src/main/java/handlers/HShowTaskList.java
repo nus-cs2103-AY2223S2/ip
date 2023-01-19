@@ -7,7 +7,7 @@ import types.Task;
 import java.util.regex.Pattern;
 
 public final class HShowTaskList implements ICommand {
-    private final Pattern p = Pattern.compile("list");
+    private static final Pattern p = Pattern.compile("list");
     private final TaskStorage ts;
 
     public HShowTaskList(TaskStorage ts) {
