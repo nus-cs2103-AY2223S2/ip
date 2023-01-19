@@ -1,16 +1,30 @@
 import java.util.ArrayList;
 
+/**
+ * Storage which stores a list of tasks to be kept track of
+ */
 public class Storage {
     protected ArrayList<Task> taskList;
 
+    /**
+     * Creates a storage object which stores a task list
+     */
     public Storage() {
         this.taskList = new ArrayList<>();
     }
 
+    /**
+     * Gets the current total number of tasks in the list
+     * @return current number of tasks
+     */
     public int getNumberOfTasks() {
         return this.taskList.size();
     }
 
+    /**
+     * Adds task to the list
+     * @param task Task to be added
+     */
     public void addTask(Task task) {
         this.taskList.add(task);
         String statement = "Got it! I've added this task:\n" + task + "\nNow you have ";
@@ -18,6 +32,10 @@ public class Storage {
         System.out.println(statement + this.getNumberOfTasks() + t + " in the list.");
     }
 
+    /**
+     * Deletes task from the list
+     * @param i Index of task to be deleted
+     */
     public void deleteTask(int i) {
         Task task = this.taskList.get(i);
         this.taskList.remove(i);
@@ -27,6 +45,10 @@ public class Storage {
         System.out.println("Now you have " + this.getNumberOfTasks() + t + " in the list.");
     }
 
+    /**
+     * Marks task as done
+     * @param i Index of task to be marked
+     */
     public void markTask(int i) {
         Task task = this.taskList.get(i);
         if (task.getStatusIcon().equals("X")) {
@@ -38,6 +60,10 @@ public class Storage {
         System.out.println(task);
     }
 
+    /**
+     * Marks task as not done
+     * @param i Index of task to be unmarked
+     */
     public void unmarkTask(int i) {
         Task task = this.taskList.get(i);
         if (task.getStatusIcon().equals(" ")) {
@@ -49,6 +75,9 @@ public class Storage {
         System.out.println(task);
     }
 
+    /**
+     * Prints out the list of current tasks
+     */
     public void showTasks() {
         System.out.println("Here are the tasks in your list:");
         for (int i = 0; i < this.getNumberOfTasks(); i++) {
