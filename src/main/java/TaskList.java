@@ -7,9 +7,14 @@ public class TaskList {
         this.tasks = new Task[100];
     }
 
-    public void addTask(Task task) {
+    public String addTask(Task task) {
         this.tasks[this.index] = task;
+        String str = "Got it! This task has been added:\n";
+        str += this.printTask(index);
         this.index++;
+        String sp = this.index == 1 ? "task" : "tasks";
+        str += "You now have " + this.index + " " + sp + " in the list.\n";
+        return str;
     }
 
     public String markTask(String markIndex) {

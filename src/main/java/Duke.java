@@ -26,10 +26,9 @@ public class Duke {
             } else if (data.startsWith("unmark ")) {
                 String unmarked_index = data.substring(7);
                 System.out.println(taskList.unmarkTask(unmarked_index));
-            } else {
-                Task task = new Task(data);
-                taskList.addTask(task);
-                System.out.println("Added: " + task);
+            } else if (data.startsWith("todo ") || data.startsWith("deadline ") || data.startsWith("event ")) {
+                Task task = Task.makeTask(data);
+                System.out.println(taskList.addTask(task));
             }
         }
     }
