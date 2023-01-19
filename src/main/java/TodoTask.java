@@ -1,11 +1,14 @@
 /**
- * Users task that has no time whatsoever
+ * {@link UserTask} that has no time whatsoever
  */
 public class TodoTask extends UserTask {
+    /**
+     * Bracketed icon of task type.
+     */
     public final static String label = getTaskTypeLabel(Resource.cmdTodo);
 
     /**
-     * @param desc Parsed string description of task.
+     * @param desc Non-null. Description string of task with command removed.
      */
     public TodoTask(String desc) throws MeggyException {
         super(desc);
