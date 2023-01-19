@@ -7,7 +7,7 @@ Hello from
 
 What's on your mind today?
 
-MyDuke >  |     invalid command
+MyDuke >  |     Invalid Command! Try: [list, todo, deadline, event, mark/unmark]
 MyDuke >  |     Successfully added:
 [T][ ]  word
 

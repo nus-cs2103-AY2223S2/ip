@@ -24,32 +24,36 @@ public class MyDuke {
                             + "See you soon!");
     }
 
-    public void exec(String[] tokens) {
-
-        switch (tokens[0]) {
-            case "list":
-                showAll();
-                break;
-            case "todo":
-                addTodo(tokens);
-                showCount();
-                break;
-            case "deadline":
-                addDeadline(tokens);
-                showCount();
-                break;
-            case "event":
-                addEvent(tokens);
-                showCount();
-                break;
-            case "mark":
-                toggle(tokens);
-                break;
-            case "unmark":
-                toggle(tokens);
-                break;
-            default:
-                System.out.println("invalid command");
+    public void exec(String[] tokens) throws InvalidCommandException {
+        try {
+            switch (tokens[0]) {
+                case "list":
+                    showAll();
+                    break;
+                case "todo":
+                    addTodo(tokens);
+                    showCount();
+                    break;
+                case "deadline":
+                    addDeadline(tokens);
+                    showCount();
+                    break;
+                case "event":
+                    addEvent(tokens);
+                    showCount();
+                    break;
+                case "mark":
+                    toggle(tokens);
+                    break;
+                case "unmark":
+                    toggle(tokens);
+                    break;
+                default:
+                    throw new InvalidCommandException("Invalid Command! Try: " +
+                                                    "[list, todo, deadline, event, mark/unmark]");
+            }
+        } catch (InvalidCommandException e) {
+            System.out.println(e.errorMessage);
         }
     }
 
@@ -83,8 +87,28 @@ public class MyDuke {
     }
 
     private void toggle(String[] tokens) {
-        int taskIndex = Integer.parseInt(tokens[1]);
-        // What if token is not an integer?
+        int taskIndex = 0;
+
+        try {
+            if (tokens.length == 1) {
+                throw new InvalidCommandException(
+                    "ERROR: Please mark/unmark tasks with task number! Find the task number with 'list'.");
+            }
+            taskIndex = Integer.parseInt(tokens[1]);
+            if (taskIndex <= 0 || taskIndex > taskCount) {
+                throw new InvalidCommandException(
+                    "ERROR: No such task. View all tasks with 'list'");
+            }
+        // NaN input from user to mark/unmark task
+        } catch (NumberFormatException e) {
+            System.out.println(
+                "ERROR: Please mark/unmark tasks with task number! Find the task number with 'list'.");
+            return;
+        } catch (InvalidCommandException e) {
+            System.out.println(e.errorMessage);
+            return;
+        }
+
         Task task = allTasks.get(taskIndex-1);
         if (!task.isDone() && tokens[0].equals("mark")) {
             task.toggleDoneOrNot();
@@ -103,8 +127,15 @@ public class MyDuke {
 
     private void addTodo(String[] tokens) {
         // if input is only "todo"
-        if (tokens.length == 1) {
-            // raise invalid command
+        try {
+            if (tokens.length == 1) {
+                // raise invalid command
+                throw new InvalidCommandException(
+                    "ERROR: Missing task name. Add todo task with: todo {name}.");
+            }
+        } catch (InvalidCommandException e) {
+            System.out.println(e.errorMessage);
+            return;
         }
 
         String t = "";
@@ -123,8 +154,22 @@ public class MyDuke {
         List<String> t = Arrays.asList(tokens);
         int byIndex = t.indexOf("/by");
 
-        if (byIndex == -1) {
-            // raise invalid command
+        try {
+            if (byIndex == -1) {
+                throw new InvalidCommandException(
+                    "ERROR: Set a deadline with: deadline {task name} /by {deadline}");
+            }
+            if (byIndex + 1 == t.size()) {
+                throw new InvalidCommandException(
+                    "ERROR: Please specify a date/time.");
+            }
+            if (byIndex == 1) {
+                throw new InvalidCommandException(
+                    "ERROR: Missing task name.");
+            }
+        } catch (InvalidCommandException e) {
+            System.out.println(e.errorMessage);
+            return;
         }
 
         String desc = String.join(" ",t.subList(1, byIndex));
@@ -138,8 +183,20 @@ public class MyDuke {
         List<String> t = Arrays.asList(tokens);
         int fromIndex = t.indexOf("/from"); int toIndex = t.indexOf("/to");
 
-        if (fromIndex == -1 || toIndex == -1) {
-            // raise invalid command
+        try {
+            if (fromIndex == -1 || toIndex == -1) {
+                // raise invalid command
+                throw new InvalidCommandException(
+                    "ERROR: Missing 'from' and 'to times'. Please specify 'from' and 'to' times.");
+            }
+
+            if (fromIndex + 1 == toIndex || toIndex + 1 == t.size()) {
+                throw new InvalidCommandException(
+                    "ERROR: Please specify both 'from' and 'to' times");
+            }
+        } catch (InvalidCommandException e) {
+            System.out.println(e.errorMessage);
+            return;
         }
 
         String desc = String.join(" ",t.subList(1, fromIndex));
