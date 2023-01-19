@@ -49,6 +49,18 @@ public class Duke {
                     System.out.println("☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
                     System.out.println("Command: " + word);
                 }
+            } else if (word.startsWith("delete ")) {
+                try {
+                    int index = Integer.parseInt(word.substring(7));
+                    Task task = listOfWords.remove(--index);
+                    System.out.println("Noted. I've removed this task:");
+                    System.out.println(task);
+                    System.out.println("Now you have " + listOfWords.size() + " tasks in the list.");
+                } catch (NumberFormatException | IndexOutOfBoundsException e) {
+                    // incorrect syntax
+                    System.out.println("☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
+                    System.out.println(word);
+                }
             } else {
                 System.out.println("☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
                 System.out.println("Command: " + word);
