@@ -7,14 +7,14 @@ import static utils.UI.*;
 public class Duke {
     private static Scanner sc = new Scanner(System.in);
     private static String currentInput;
-    private static ArrayList<Task> taskList = new ArrayList<>();
+    private static TaskList taskList = new TaskList();
 
     public static String mark(boolean toMark) {
         int index = Integer.parseInt(toMark ? currentInput.substring(5) : currentInput.substring(7)) - 1;
         if (index >= taskList.size() || index < 0) {
             return "Task index out of bounds, please input a valid index";
         } else {
-            Task curTask = taskList.get(index);
+            Task curTask = taskList.getTask(index);
             curTask.setCompleted(toMark);
             String output;
             if (toMark) {
@@ -23,22 +23,6 @@ public class Duke {
                 output = "OK, I've marked this task as not done yet:\n";
             }
             return output + "  " + curTask.toString();
-        }
-    }
-
-    public static String list() {
-        if (taskList.size() == 0) {
-            return "List empty, add tasks!";
-        } else {
-            StringBuilder response = new StringBuilder();
-            for (int i = 0; i < taskList.size(); i++) {
-                Task curTask = taskList.get(i);
-                response.append((i+ 1)).append(".").append(curTask.toString());
-                if (i < taskList.size() - 1) {
-                    response.append("\n");
-                }
-            }
-            return response.toString();
         }
     }
 
@@ -78,23 +62,18 @@ public class Duke {
             taskList.add(new Event(description, from, to));
         }
         int count = taskList.size();
-        response.append("  ").append(taskList.get(count - 1).toString()).append("\n");
+        response.append("  ").append(taskList.getTaskString(count - 1)).append("\n");
         response.append("Now you have ").append(count).append(" tasks in the list.");
         return response.toString();
     }
 
     public static String deleteTask(String command) {
-        StringBuilder response = new StringBuilder();
         int index = Integer.parseInt(command.substring(7)) - 1;
         if (index < 0 || index >= taskList.size()) {
             return "Error: Please input a valid task index!";
         } else {
-            response.append("Noted. I've removed this task:\n");
-            response.append("  ").append(taskList.get(index).toString()).append("\n");
-            taskList.remove(index);
-            response.append("Now you have ").append(taskList.size()).append(" tasks in the list.");
+            return taskList.removeTask(index);
         }
-        return response.toString();
     }
 
     public static void main(String[] args) {
@@ -106,7 +85,7 @@ public class Duke {
             if (currentInput.equals("")) {
                 reply("Please input a command");
             } else if (currentInput.equalsIgnoreCase("list")) {
-                reply(list());
+                reply(taskList.toString());
             } else if (currentInput.matches("mark \\d+") || currentInput.matches("unmark \\d+")) {
                 boolean toMark = currentInput.matches("mark \\d+");
                 reply(mark(toMark));
