@@ -1,0 +1,16 @@
+todo coding assignment
+deadline cs1205 assignment /by next friday
+event career fair /from 10am /to 5pm
+list
+list 456789654
+deadline
+deadline /by 7
+deadline sleep
+mark 1
+mark 100
+mark -1
+mark 3.11
+unmark 8
+wwwwww
+23333
+bye

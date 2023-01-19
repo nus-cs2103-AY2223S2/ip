@@ -1,6 +1,7 @@
 import sebastianExceptions.*;
 import formatters.Formatter;
 
+import java.util.Arrays;
 import java.util.Scanner;
 
 public class Sebastian {
@@ -42,7 +43,7 @@ public class Sebastian {
      * @return notice that the task has been added
      */
     private String addTask(Task task){
-        return Formatter.space() + "Noted. I've added this task: " + "\n" +
+        return Formatter.space() + "Noted. I've added this task:" + "\n" +
                 Formatter.space() + Formatter.space() + task + "\n" +
                 Formatter.space() + "Now you have " + this.tasks.getTotalTasks() + " tasks in the list";
     }
@@ -80,7 +81,10 @@ public class Sebastian {
             String[] task = deadline.split("/by");
             if(task.length != 2) {
                 throw new DeadlineFormatMismatchException();
-            } else {
+            } else if(task[0].equals("")) {
+                throw new LackOfArgumentException();
+            }
+            else {
                 return this.addTask(this.tasks.addDeadline(task[0], task[1].trim()));
             }
         }
@@ -102,7 +106,10 @@ public class Sebastian {
             String[] task = event.split("/from|/to");
             if(task.length!=3) {
                 throw new EventFormatMismatchException();
-            } else {
+            } else if(task[0].equals("")){
+                throw new LackOfArgumentException();
+            }
+            else {
                 return this.addTask(this.tasks.addEvent(task[0],task[1].trim(), task[2].trim()));
             }
         }
@@ -209,8 +216,7 @@ public class Sebastian {
      * Start a prompt-response cycle
      * @throws IllegalInputException when user input does not constitute a valid instruction
      */
-    private void onDuty() throws IllegalInputException{
-        Scanner scan = new Scanner(System.in);
+    private void onDuty(Scanner scan) throws IllegalInputException{
         String instruction = scan.nextLine();
         String action = instruction.split(" ")[0];
         String res;
@@ -249,10 +255,11 @@ public class Sebastian {
     public static void main(String[] args) {
         Sebastian sebastian = new Sebastian();
         Formatter.printFormattedString(sebastian.greet());
+        Scanner scan = new Scanner(System.in);
         boolean flag = true;
         while(flag){
             try {
-                sebastian.onDuty();
+                sebastian.onDuty(scan);
                 flag = false;
             } catch (IllegalInputException | TaskNotExistException | InputFormatMismatchException e) {
                 Formatter.printFormattedString(Formatter.space() + e.getMessage());
