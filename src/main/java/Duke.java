@@ -10,7 +10,9 @@ public class Duke {
     final static String WELCOME_MSG = "Greetings! JEDI GRANDMASTER YODA here\n" + "For you, What can I do?";
     final static String BANNER = "____________________________________________________________";
     final static String BYE_MSG = "Be Gone, You Must. May the Force be with You!";
-
+    enum Command {
+        LIST, MARK, UNMARK, DELETE
+    }
     public static void main(String[] args) {
         Duke.displayWelcomeMessage();
         Scanner scanner = new Scanner(System.in);
@@ -31,23 +33,25 @@ public class Duke {
                     throw new IncompleteCommandException(String.format("Hrrmmm. Not enough arguments, " +
                             "%s has. Hmm", commands[0]), null);
                 }
-                switch (commands[0]) {
-                    case "list":
-                        taskList.listItems();
-                        break;
-                    case "mark":
-                        taskList.markTask(commands[1]);
-                        break;
-                    case "unmark":
-                        taskList.unmarkTask(commands[1]);
-                        break;
-                    case "delete":
-                        taskList.deleteTask(commands[1]);
-                        break;
-                    default:
-                        Task newTask = parser.obtainTask(response);
-                        taskList.addTask(newTask);
-                        break;
+                try {
+                    Command command = Command.valueOf(commands[0].toUpperCase());
+                    switch (command) {
+                        case LIST:
+                            taskList.listItems();
+                            break;
+                        case MARK:
+                            taskList.markTask(commands[1]);
+                            break;
+                        case UNMARK:
+                            taskList.unmarkTask(commands[1]);
+                            break;
+                        case DELETE:
+                            taskList.deleteTask(commands[1]);
+                            break;
+                    }
+                } catch (IllegalArgumentException e) {
+                    Task newTask = parser.obtainTask(response);
+                    taskList.addTask(newTask);
                 }
             } catch (DukeException e) {
                 System.out.println(e.getMessage());
