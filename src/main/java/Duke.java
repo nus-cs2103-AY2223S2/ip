@@ -25,7 +25,7 @@ public final class Duke {
 
         final Consumer<Task> addTask = (task) -> {
             tasks.add(task);
-            System.out.format("%Added %s to the list!\nYou have %d tasks\n", task.toString(), tasks.size());
+            System.out.format("Added %s to the list!\nYou now have %d tasks\n", task.toString(), tasks.size());
         };
 
         final Function<String, Integer> intParser = (value) -> {
