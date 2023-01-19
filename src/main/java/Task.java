@@ -7,6 +7,10 @@ public class Task {
         this.done = false;
     }
 
+    public String getTask() {
+        return task;
+    }
+
     public void markAsDone() {
         done = true;
     }
