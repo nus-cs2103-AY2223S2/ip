@@ -5,8 +5,40 @@ import Task.Task;
 import todo.todo;
 import Event.Event;
 import Deadline.Deadline;
+import Exception.*;
 
 public class Duke {
+
+    public static Task parseEcho(String echo) throws noTaskDescriptionException {
+        if (echo.startsWith("todo")) {
+            if (echo.substring(4).trim().isEmpty()) {
+                throw(new noTaskDescriptionException("     ☹ OOPS!!! The description of a todo cannot be empty."));
+            }
+            return new todo(echo.substring(4).trim());
+    
+        } else if (echo.startsWith("deadline")) {
+            String deadlineArguments = echo.substring(8).trim();
+            if (deadlineArguments.isEmpty()) {
+                throw(new noTaskDescriptionException("     ☹ OOPS!!! The description of a deadline cannot be empty."));
+            }
+            String splitArguments[] = deadlineArguments.split("/");
+            
+            return new Deadline(splitArguments[0], splitArguments[1].substring(2).trim());
+    
+        } else if (echo.startsWith("event")) {
+            String eventArguments = echo.substring(5).trim();
+            if (eventArguments.isEmpty()) {
+                throw(new noTaskDescriptionException("     ☹ OOPS!!! The description of a event cannot be empty."));
+            }
+            String splitArguments[] = eventArguments.split("/");
+            return new Event(splitArguments[0], splitArguments[1].substring(4).trim(), splitArguments[2].substring(2).trim());
+    
+        } else {
+            // System.out.println("Placeholder");
+            throw(new invalidInputException("      ☹ OOPS!!! I'm sorry, but I don't know what that means :-("));
+        }
+    }
+
     public static void main(String[] args) {
         String logo = " ____        _        \n"
                 + "|  _ \\ _   _| | _____ \n"
@@ -65,24 +97,36 @@ public class Duke {
 
             Task item;
 
-            if (echo.startsWith("todo")) {
-                item = new todo(echo.substring(4).trim());
+            // Create a separate function in order to assign to item;
+            try {
+                item = parseEcho(echo);
 
-            } else if (echo.startsWith("deadline")) {
-                String deadlineArguments = echo.substring(8).trim();
-                String splitArguments[] = deadlineArguments.split("/");
-                
-                item = new Deadline(splitArguments[0], splitArguments[1].substring(2).trim());
-
-            } else if (echo.startsWith("event")) {
-                String eventArguments = echo.substring(5).trim();
-                String splitArguments[] = eventArguments.split("/");
-                item = new Event(splitArguments[0], splitArguments[1].substring(4).trim(), splitArguments[2].substring(2).trim());
-
-            } else {
-                System.out.println("Placeholder");
+            } catch (dukeException e) {
+                // TODO: handle exception
+                System.out.println(e.getMessage());
                 continue;
             }
+            //
+
+
+            // if (echo.startsWith("todo")) {
+            //     item = new todo(echo.substring(4).trim());
+
+            // } else if (echo.startsWith("deadline")) {
+            //     String deadlineArguments = echo.substring(8).trim();
+            //     String splitArguments[] = deadlineArguments.split("/");
+                
+            //     item = new Deadline(splitArguments[0], splitArguments[1].substring(2).trim());
+
+            // } else if (echo.startsWith("event")) {
+            //     String eventArguments = echo.substring(5).trim();
+            //     String splitArguments[] = eventArguments.split("/");
+            //     item = new Event(splitArguments[0], splitArguments[1].substring(4).trim(), splitArguments[2].substring(2).trim());
+
+            // } else {
+            //     System.out.println("Placeholder");
+            //     continue;
+            // }
 
 
             list_to_store.add(item);
