@@ -1,9 +1,9 @@
-public class TodoList {
+public class TaskList {
     // taskList is 1 indexed
     private Task[] taskList;
     private int taskCount;
 
-    public TodoList() {
+    public TaskList() {
         this.taskList = new Task[100];
         this.taskCount = 0;
     }
@@ -12,8 +12,12 @@ public class TodoList {
         return taskList[taskNumber - 1];
     }
 
-    public void addTask(String taskDescription) {
-        this.taskList[taskCount] = new Task(taskDescription);
+    public int getLength() {
+        return taskCount;
+    }
+
+    public void addTask(Task task) {
+        this.taskList[taskCount] = task;
         this.taskCount++;
     }
 
