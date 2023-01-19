@@ -1,6 +1,6 @@
 public class Task {
-    private String message;
-    private boolean marked = false;
+    protected String message;
+    protected boolean marked = false;
 
     /**
      * Constructor for the Task
