@@ -39,7 +39,7 @@ public class Duke {
                 if (command.length < 2) {
                     throw new DukeException("The description of a todo cannot be empty!");
                 }
-                addTodo(Arrays.copyOfRange(command, 1, command.length));
+                addTodo(command);
                 break;
 
             case "deadline":
@@ -47,29 +47,17 @@ public class Duke {
                 if (command.length < 4 || byIndex == -1 || byIndex == command.length - 1) {
                     throw new DukeException("Check the format again!");
                 }
-                addDeadline(Arrays.copyOfRange(command, 1, command.length));
-                int byIndex = msg.indexOf(" /by ");
-                String dlName = msg.substring(1, byIndex);
-                String dlBy = msg.substring(byIndex + 5);
-                Deadline deadline = new Deadline(dlName, dlBy);
-                list[listNum] = deadline;
-                System.out.println("Got it. I've added this task:\n  " + list[listNum]);
-                System.out.println("Now you have " + listNum + " tasks in the list.");
-                listNum++;
+                addDeadline(command, byIndex);
                 break;
 
             case "event":
-                msg = sc.nextLine();
-                int fromIndex = msg.indexOf(" /from ");
-                int toIndex = msg.indexOf(" /to ");
-                String eventName = msg.substring(1, fromIndex);
-                String eventFrom = msg.substring(fromIndex + 7, toIndex);
-                String eventTo = msg.substring(toIndex + 5);
-                Event event = new Event(eventName, eventFrom, eventTo);
-                list[listNum] = event;
-                System.out.println("Got it. I've added this task:\n  " + list[listNum]);
-                System.out.println("Now you have " + listNum + " tasks in the list.");
-                listNum++;
+                int fromIndex = Arrays.asList(command).indexOf("/from");
+                int toIndex = Arrays.asList(command).indexOf("/to");
+                if (command.length < 6 || fromIndex == -1 || toIndex == -1 || fromIndex + 1 >= toIndex
+                            || toIndex == command.length - 1) {
+                    throw new DukeException("Check the format again!");
+                }
+                addEvent(command, fromIndex, toIndex);
                 break;
 
             default:
@@ -119,24 +107,53 @@ public class Duke {
 
     public static void addTodo(String[] args) {
         int len = args.length;
-        String taskName = "";
-        for (int i = 0; i < len - 1; i++) {
-            taskName += args[i] + " ";
+        StringBuilder taskName = new StringBuilder(args[1]);
+        for (int i = 2; i < len - 1; i++) {
+            taskName.append(" ").append(args[i]);
         }
-        taskName += args[len];
-        Todo todo = new Todo(taskName);
+        Todo todo = new Todo(taskName.toString());
         list[listNum] = todo;
         System.out.println("Got it. I've added this task:\n  " + list[listNum]);
         System.out.println("Now you have " + listNum + " tasks in the list.");
         listNum++;
     }
 
-    public static void addDeadline(String[] args) {
-
+    public static void addDeadline(String[] args, int by) {
+        int len = args.length;
+        StringBuilder taskName = new StringBuilder(args[1]);
+        for (int i = 2; i < by - 1; i++) {
+            taskName.append(" ").append(args[i]);
+        }
+        StringBuilder byWhen = new StringBuilder(args[by + 1]);
+        for (int i = by + 2; i < len; i++) {
+            byWhen.append(" ").append(args[i]);
+        }
+        Deadline deadline = new Deadline(taskName.toString(), byWhen.toString());
+        list[listNum] = deadline;
+        System.out.println("Got it. I've added this task:\n  " + list[listNum]);
+        System.out.println("Now you have " + listNum + " tasks in the list.");
+        listNum++;
     }
 
-    public static void addEvent(String[] args) {
-        
+    public static void addEvent(String[] args, int from, int to) {
+        int len = args.length;
+        StringBuilder taskName = new StringBuilder(args[1]);
+        for (int i = 2; i < from - 1; i++) {
+            taskName.append(" ").append(args[i]);
+        }
+        StringBuilder fromWhen = new StringBuilder(args[from + 1]);
+        for (int i = from + 2; i < to; i++) {
+            fromWhen.append(" ").append(args[i]);
+        }
+        StringBuilder toWhen = new StringBuilder(args[to + 1]);
+        for (int i = to + 2; i < len; i++) {
+            toWhen.append(" ").append(args[i]);
+        }
+        Event event = new Event(taskName.toString(), fromWhen.toString(), toWhen.toString());
+        list[listNum] = event;
+        System.out.println("Got it. I've added this task:\n  " + list[listNum]);
+        System.out.println("Now you have " + listNum + " tasks in the list.");
+        listNum++;
     }
 
     public static void main(String[] args) {
