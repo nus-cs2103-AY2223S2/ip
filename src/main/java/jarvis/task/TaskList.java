@@ -109,7 +109,7 @@ public class TaskList {
                 .stream()
                 .filter(task -> task.satisfies(filter))
                 .collect(Collectors.toList());
-        return getTasksForPrint(filteredTasks);
+        return this.getTasksForPrint(filteredTasks);
     }
 
     /**

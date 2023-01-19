@@ -12,6 +12,12 @@ public class ToDoTask extends Task {
     }
 
     @Override
+    public boolean satisfies(TaskFilter filter) {
+        if (!super.satisfies(filter)) return false;
+        return filter.hasNoDates();
+    }
+
+    @Override
     public String serialize() {
         String[] data = {"T", String.valueOf(this.isDone()), this.getDescription()};
         return String.join(" / ", data);

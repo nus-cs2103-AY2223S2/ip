@@ -73,7 +73,13 @@ public abstract class Task {
     }
 
     public boolean satisfies(TaskFilter filter) {
-        return filter == null || filter.isEmpty();
+        if (filter == null || filter.isEmpty() || filter.hasNoKeywords()) return true;
+
+        String lowerDescription = this.description.toLowerCase();
+        for (String keyword: filter.getKeywords()) {
+            if (lowerDescription.contains(keyword)) return true;
+        }
+        return false;
     }
 
     @Override

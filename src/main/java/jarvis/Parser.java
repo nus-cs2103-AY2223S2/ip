@@ -44,6 +44,7 @@ public class Parser {
             case BYE:
                 return new ByeCommand();
             case LIST:
+            case FIND:
                 return new ListCommand(action, body, subCommands);
             case MARK_DONE:
             case MARK_UNDONE:

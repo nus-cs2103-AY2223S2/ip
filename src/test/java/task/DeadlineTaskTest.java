@@ -27,12 +27,11 @@ public class DeadlineTaskTest {
     @Test
     public void filterTest() throws InvalidParameterException {
         assert task != null;
-        TaskFilter earlyFilter = new TaskFilter(null, DEADLINE.minusDays(1).toString());
-        TaskFilter lateFilter = new TaskFilter(DEADLINE.plusDays(1).toString(), null);
-        TaskFilter validFilter = new TaskFilter(
-                DEADLINE.minusDays(1).toString(),
-                DEADLINE.plusDays(1).toString()
-        );
+        TaskFilter earlyFilter = new TaskFilter().setBeforeDate(DEADLINE.minusDays(1).toString());
+        TaskFilter lateFilter = new TaskFilter().setAfterDate(DEADLINE.plusDays(1).toString());
+        TaskFilter validFilter = new TaskFilter()
+                .setAfterDate(DEADLINE.minusDays(1).toString())
+                .setBeforeDate(DEADLINE.plusDays(1).toString());
         assertFalse(task.satisfies(earlyFilter));
         assertFalse(task.satisfies(lateFilter));
         assertTrue(task.satisfies(validFilter));
