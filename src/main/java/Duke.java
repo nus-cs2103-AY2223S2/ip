@@ -15,7 +15,7 @@ public class Duke {
 
         Scanner input = new Scanner(System.in);
         String userInput = input.nextLine();
-        ArrayList<Task> userTasks = new ArrayList<Task>();
+        ArrayList<Task> userTasks = new ArrayList<>();
         while (!userInput.equals("bye"))
         {
             Pattern mark = Pattern.compile("mark [0-9]+");
@@ -47,28 +47,52 @@ public class Duke {
             }
             else
             {
-                Task userTask = null;
-                String taskType = userInput.split(" ")[0];
-                if (taskType.equals("todo"))
-                {
-                    String taskName = userInput.split(" ", 2)[1];
-                    userTask = new ToDo(taskName);
-                }
-                else if (taskType.equals("deadline"))
-                {
-                    String[] taskNameAndDeadline = userInput.split(" ", 2)[1].split(" /by ");
-                    String taskName = taskNameAndDeadline[0];
-                    String deadline = taskNameAndDeadline[1];
-                    userTask = new Deadline(taskName, deadline);
-                }
-                else if (taskType.equals("event"))
-                {
-                    String[] taskNameAndDate = userInput.split(" ", 2)[1].split(" /from ");
-                    String taskName = taskNameAndDate[0];
-                    String[] toAndFrom = taskNameAndDate[1].split(" /to ");
-                    String from = toAndFrom[0];
-                    String to = toAndFrom[1];
-                    userTask = new Event(taskName, from, to);
+                Task userTask;
+                String[] inputs = userInput.split(" ");
+                String taskType = inputs[0];
+                switch (taskType) {
+                    case "todo": {
+
+                        if (inputs.length < 2) {
+                            throw new DukeException("☹ OOPS!!! The description of a todo cannot be empty.");
+                        }
+                        String taskName = userInput.split(" ", 2)[1];
+                        userTask = new ToDo(taskName);
+                        break;
+                    }
+                    case "deadline": {
+                        if (inputs.length < 2) {
+                            throw new DukeException("☹ OOPS!!! The description of a deadline cannot be empty.");
+                        }
+                        String[] taskNameAndDeadline = userInput.split(" ", 2)[1].split(" /by ");
+                        if (taskNameAndDeadline.length < 2) {
+                            throw new DukeException("☹ OOPS!!! The date of a deadline cannot be empty.");
+                        }
+                        String taskName = taskNameAndDeadline[0];
+                        String deadline = taskNameAndDeadline[1];
+                        userTask = new Deadline(taskName, deadline);
+                        break;
+                    }
+                    case "event": {
+                        if (inputs.length < 2) {
+                            throw new DukeException("☹ OOPS!!! The description of an event cannot be empty.");
+                        }
+                        String[] taskNameAndDate = userInput.split(" ", 2)[1].split(" /from ");
+                        if (taskNameAndDate.length < 2) {
+                            throw new DukeException("☹ OOPS!!! The from date of an event cannot be empty.");
+                        }
+                        String taskName = taskNameAndDate[0];
+                        String[] toAndFrom = taskNameAndDate[1].split(" /to ");
+                        if (toAndFrom.length < 2) {
+                            throw new DukeException("☹ OOPS!!! The to date of an event cannot be empty.");
+                        }
+                        String from = toAndFrom[0];
+                        String to = toAndFrom[1];
+                        userTask = new Event(taskName, from, to);
+                        break;
+                    }
+                    default:
+                        throw new DukeException("☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
                 }
                 userTasks.add(userTask);
                 System.out.println("Got it. I've added this task: \n    " + userTask + "\nNow you have " + userTasks.size() + " tasks in the list.");
