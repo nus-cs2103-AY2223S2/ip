@@ -1,4 +1,10 @@
+/**
+ * A task with an associated deadline
+ */
 public class Deadline extends Task {
+  /**
+   * String representation of the deadline
+   */
   private final String time;
 
   public Deadline(String task, String time) {
