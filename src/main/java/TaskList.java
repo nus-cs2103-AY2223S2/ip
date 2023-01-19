@@ -72,4 +72,13 @@ public class TaskList {
 					+ tdl.get(index).toString();
 		}
 	}
+	
+	String delTask(int num) {
+		if (notInRange(num)) {
+			return rangeError(num);
+		}
+		
+		return "Got it! Deleted:\n" + GAP
+				+ tdl.remove(num - 1).toString();
+	}
 }

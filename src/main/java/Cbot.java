@@ -83,6 +83,15 @@ public class Cbot {
 					}
 					break;
 				
+				case DELETE:
+					try {
+						int num = Integer.valueOf(userText);
+						System.out.println(INDENT + tl.delTask(num));
+					} catch (NumberFormatException ex) {
+						System.out.println(WARNING + "<Error> Invalid index!");
+					}
+					break;
+				
 				case TODO:
 					System.out.println(INDENT + tl.addTask(new Task(userText)));
 					break;

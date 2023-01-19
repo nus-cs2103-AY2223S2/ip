@@ -5,6 +5,8 @@ public enum Command {
 	MARK_BAD	("mark", false),
 	UNMARK		("unmark ", true),
 	UNMARK_BAD	("unmark", false),
+	DELETE		("delete ", true),
+	DELETE_BAD	("delete", false),
 	TODO		("todo ", true),
 	TODO_BAD	("todo", false),
 	DEADLINE	("deadline ", true),
