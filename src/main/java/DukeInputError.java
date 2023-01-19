@@ -22,6 +22,6 @@ public class DukeInputError extends Exception{
 
     @Override
     public String toString() {
-        return "    ☹ OOPS!!! " + errorMessage;
+        return "    :( OOPS!!! " + errorMessage;
     }
 }

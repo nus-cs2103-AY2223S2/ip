@@ -5,7 +5,7 @@
     ____________________________________________________________
      Got it. I've added this task:
          [D][ ] do homework (by: no idea :-p)
-     Now you have 1 tasks in the list
+     Now you have 1 taskList in the list
     ____________________________________________________________
     ____________________________________________________________
     Bye. Hope to see you again soon!
