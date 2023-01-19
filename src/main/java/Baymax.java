@@ -11,6 +11,9 @@ public class Baymax {
         String outputL = "list";
         String mark = "mark";
         String unmark = "unmark";
+        String to = "todo";
+        String dead = "deadline";
+        String event = "event";
 
         Scanner input = new Scanner(System.in);
         String currentInput;
@@ -23,7 +26,7 @@ public class Baymax {
             } else if (outputL.equals(currentInput)) {
                 int index = 1;
                 for (Task s : myList) {
-                    System.out.println((index++) + ": " + s.description + "[" + s.getStatusIcon() + "]");
+                    System.out.println((index++) + ": " + s.toString());
                 }
             } else if (mark.equals(currentInput.split("\\s+")[0])) {
                 Task t = myList.get(Integer.valueOf(currentInput.split("\\s+")[1]) - 1);
@@ -32,12 +35,19 @@ public class Baymax {
                 Task t = myList.get(Integer.valueOf(currentInput.split("\\s+")[1]) - 1);
                 t.markAsNotDone();
             } else {
-                Task task = new Task(currentInput);
-                task.description = currentInput;
-                task.isDone = false;
-                myList.add(Counter, task);
-                System.out.println("added: " + task.description);
-                Counter++;
+                if (to.equals(currentInput.split("\\s+", 2)[0])) {
+                    Task todo = new Todo(currentInput.split(" ", 2)[1]);
+                    myList.add(todo);
+                    System.out.println("Done. I've added the task: " + todo.toString());
+                } else if (dead.equals(currentInput.split("\\s+", 2)[0])) {
+                    Task deadline = new Deadline(currentInput.split(" ", 2)[1].split(" /by ")[0], currentInput.split(" ", 2)[1].split(" /by ")[1]);
+                    myList.add(deadline);
+                    System.out.println("Done. I've added the deadline: " + deadline.toString());
+                } else if (event.equals(currentInput.split("\\s+", 2)[0])) {
+                    Task even = new Event(currentInput.split(" ", 2)[1].split(" /from ", 2)[0],currentInput.split(" ", 2)[1].split(" /from ", 2)[1].split(" /to ", 2)[0], currentInput.split(" ", 2)[1].split(" /from ", 2)[1].split(" /to ", 2)[1]);
+                    myList.add(even);
+                    System.out.println("Done. I've added the Event: " + even.toString());
+                }
             }
         }
     }

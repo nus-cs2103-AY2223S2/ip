@@ -20,4 +20,9 @@ public class Task {
         this.isDone = false;
         System.out.println("Task marked as not done");
     }
+
+    @Override
+    public String toString() {
+       return "[" + this.getStatusIcon() + "] " + this.description;
+    }
 }
