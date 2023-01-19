@@ -60,7 +60,7 @@ public final class Duke {
 
                 int index = intParser.apply(args[1]);
                 tasks.get(index - 1).setDone(true);
-                System.out.format("Marked this as done!\n\t%s\n", tasks.get(index - 1).toString());
+                System.out.format("Marked this as done!\n%s\n", tasks.get(index - 1).toString());
             } catch (NumberFormatException e) {
                 System.out.println("Invalid index!\n");
             }
@@ -73,7 +73,7 @@ public final class Duke {
             try {
                 int index = intParser.apply(args[1]);
                 tasks.get(index - 1).setDone(false);
-                System.out.format("Marked this as not done!\n\t%s\n", tasks.get(index - 1).toString());
+                System.out.format("Marked this as not done!\n%s\n", tasks.get(index - 1).toString());
             } catch (NumberFormatException e) {
                 System.out.println("Invalid index!");
             }
@@ -164,7 +164,7 @@ public final class Duke {
 
                 int index = intParser.apply(args[1]);
                 Task removed = tasks.remove(index - 1);
-                System.out.format("Removed this task!\n\t%s\n", removed.toString());
+                System.out.format("Removed this task!\n%s\n", removed.toString());
             } catch (NumberFormatException e) {
                 System.out.println("Invalid index!");
             }

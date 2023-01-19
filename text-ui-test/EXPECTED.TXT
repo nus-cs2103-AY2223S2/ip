@@ -5,3 +5,11 @@ Hello from
 | |_| | |_| |   <  __/
 |____/ \__,_|_|\_\___|
 
+Added [T][ ] read book to the list!
+You now have 1 tasks
+Added [D][ ] return book (by: Monday) to the list!
+You now have 2 tasks
+Added [E][ ] project (from: 4pm to: 6pm) to the list!
+You now have 3 tasks
+Marked this as done!
+[E][X] project (from: 4pm to: 6pm)
