@@ -110,6 +110,16 @@ public class Duke {
         return new Deadline(desc.toString(), by.toString());
     }
 
+    private static void delete(int num) {
+        if(num >= list.size()) {
+            System.out.println("Duke: Task no." + (num+1) + " not found. Try again.");
+        } else {
+            System.out.println("Duke: Ok! Following task is removed: ");
+            System.out.println(list.get(num));
+            list.remove(num);
+        }
+    }
+
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
         System.out.println(intro);
@@ -134,7 +144,7 @@ public class Duke {
                     markTask(num);
                     reset();
                 }
-            } else if(input.equals("unmark")) {
+            } else if (input.equals("unmark")) {
                 if(list.isEmpty()) {
                     emptyErr();
                 } else {
@@ -154,6 +164,14 @@ public class Duke {
                 Deadline temp = makeDeadline(raw);
                 addToList(temp);
                 reset();
+            } else if (input.equals("delete")) {
+                if(list.isEmpty()) {
+                    emptyErr();
+                } else {
+                    int num = (Integer.parseInt(raw[1]) - 1);
+                    delete(num);
+                    reset();
+                }
             } else {
                 System.out.println("Duke; Sorry I don't recognise that command :( Please try again.");
                 reset();
