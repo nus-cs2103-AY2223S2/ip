@@ -30,6 +30,18 @@ public class Duke {
         printMessage("Bye. Hope to see you again soon!");
     }
 
+    public boolean addEventCheck(String s) {
+        return s.startsWith("event ");
+    }
+
+    public boolean addDeadlineCheck(String s) {
+        return s.startsWith("deadline ");
+    }
+
+    public boolean addTodoCheck(String s) {
+        return s.startsWith("todo ");
+    }
+
     public void printMessage(String s) {
         printLongLine();
         System.out.println("\t" + s);
@@ -47,6 +59,33 @@ public class Duke {
     public void inputToTaskList(String s) {
         list.add(new Task(s));
         printMessage("added: " + s);
+    }
+
+    public void inputEvent(String s, String timeFrom, String timeTo) {
+        Event event = new Event(s, timeFrom, timeTo);
+        list.add(event);
+        addedTaskMessage(event);
+    }
+
+    public void inputDeadline(String s, String d) {
+        Deadline deadline = new Deadline(s, d);
+        list.add(deadline);
+        addedTaskMessage(deadline);
+
+    }
+
+    public void inputTodo(String s) {
+        Todo todo = new Todo(s);
+        list.add(todo);
+        addedTaskMessage(todo);
+    }
+
+    public void addedTaskMessage(Task t) {
+        printLongLine();
+        System.out.println("\tGot it. I've added this task:");
+        System.out.println("\t" + t);
+        System.out.println("\tNow you have " + list.size() + " tasks in the list.");
+        printLongLine();
     }
 
     public void markTaskAsDone(int taskNumber) {
@@ -81,6 +120,16 @@ public class Duke {
                 markTaskAsDone(Integer.parseInt(input.split(" ")[1]));
             } else if (input.startsWith("unmark ")) {
                 markTaskAsNotDone(Integer.parseInt(input.split(" ")[1]));
+            } else if (addEventCheck(input)) { // check if input type is event
+                String[] eventConstructor = input.replace("event ", "").split("/");
+                String timeFromModified = eventConstructor[1].replace("from ", "");
+                String timeToModified = eventConstructor[2].replace("to ", "");
+                inputEvent(eventConstructor[0], timeFromModified, timeToModified);
+            } else if (addDeadlineCheck(input)) { // check if input type is deadline
+                String[] deadlineConstructor = input.replace("deadline ", "").split(" /by ");
+                inputDeadline(deadlineConstructor[0], deadlineConstructor[1]);
+            } else if (addTodoCheck(input)) { // check if input type is todo
+                inputTodo(input.replace("todo ", ""));
             } else {
                 inputToTaskList(input);
             }
