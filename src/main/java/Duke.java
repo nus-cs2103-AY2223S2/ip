@@ -2,13 +2,19 @@ import java.util.Scanner;
 
 public class Duke {
     public static void main(String[] args) {
+
+
         begin();
+
+        TodoList todoList = new TodoList();
+        ChatBot bot = new ChatBot(todoList);
 
         Scanner scanner = new Scanner(System.in);
         String input = scanner.nextLine();
 
         while (!input.equals("bye")) {
-            execute(input);
+            bot.execute(input);
+            endCommand();
             input = scanner.nextLine(); //ready for next input
         }
 
@@ -31,11 +37,6 @@ public class Duke {
 
     private static void endCommand() {
         System.out.println("____________________________________________________________");
-    }
-
-    private static void execute(String command) {
-        System.out.println(command);
-        endCommand();
     }
 
     private static void bye() {
