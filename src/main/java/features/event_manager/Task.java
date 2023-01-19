@@ -1,25 +1,25 @@
-package features.todos_manager;
+package features.event_manager;
 
 /**
- * This shall resemble a TodoItem. The reason that no modifiers was added was
+ * This shall resemble a Task. The reason that no modifiers was added was
  * because this class shall be package private.
  */
-class TodoItem {
+abstract class Task {
     /**
-     * Creates a new TodoItem instance.
+     * Creates a new Task instance.
      * @param name the name of the list item.
-     * @param isComplete if the TodoItem is complete or not.
+     * @param isComplete if the Task is complete or not.
      */
-    TodoItem(String name, boolean isComplete) {
+    Task(String name, boolean isComplete) {
         this.name = name;
         this.isComplete = isComplete;
     }
 
     /**
-     * Initializes a new TodoItem instance, with its isComplete set to false.
-     * @param name the name of the TodoItem instance.
+     * Initializes a new Task instance, with its isComplete set to false.
+     * @param name the name of the Task instance.
      */
-    TodoItem(String name) {
+    Task(String name) {
         this(name, false);
     }
 

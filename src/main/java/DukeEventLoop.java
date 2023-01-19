@@ -1,9 +1,8 @@
 import event_loop.EventLoop;
 import event_loop.Executable;
 import event_loop.NestableExecutableObject;
-import features.echo.Echo;
 import features.bye.Bye;
-import features.todos_manager.TodosManager;
+import features.event_manager.TaskManager;
 
 import java.util.Scanner;
 
@@ -23,7 +22,7 @@ public class DukeEventLoop extends EventLoop {
         bye.register(executable);
         // final Echo echo = new Echo();
         // echo.register(executable);
-        final TodosManager manager = new TodosManager();
+        final TaskManager manager = new TaskManager();
         manager.register(executable);
         return new DukeEventLoop(scanner, executable);
     }

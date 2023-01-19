@@ -1,54 +1,65 @@
-package features.todos_manager;
+package features.event_manager;
 
 
 import event_loop.*;
-import utils.Pair;
 
 import java.util.ArrayList;
 import java.util.function.Function;
+import java.util.function.Supplier;
 
 /**
  * A class for managing todos.
  */
-public class TodosManager implements ExecutableRegisterable {
+public class TaskManager implements ExecutableRegisterable {
     /**
-     * Creates a new TodosManager with the todos set to items.
-     * @param items the todos that this TodosManager starts with.
+     * Creates a new TaskManager with the todos set to items.
+     * @param items the todos that this TaskManager starts with.
      */
-    public TodosManager(ArrayList<TodoItem> items) {
-        this.todoItems = items;
+    public TaskManager(ArrayList<Task> items) {
+        this.tasks = items;
     }
 
     /**
-     * Creates a new TodosManager with the todos set to empty.
+     * Creates a new TaskManager with the todos set to empty.
      */
-    public TodosManager() {
+    public TaskManager() {
         this(new ArrayList<>());
     }
 
-    /// The list of TodoItems that this manager contains.
-    private ArrayList<TodoItem> todoItems;
+    /// The list of tasks that this manager contains.
+    private ArrayList<Task> tasks;
 
     /**
-     * Adds a TodoItem to the todoItems.
-     * @param todo the TodoItem.
+     * Adds a Task to the todoItems.
+     * @param task the Task.
      */
-    void addTodo(TodoItem todo) {
-        todoItems.add(todo);
+    void addTodo(Task task) {
+        tasks.add(task);
     }
 
     /**
-     * The executable for adding a TodoItem to this class.
-     * @return the executable for adding a TodoItem to this class.
+     * The executable for adding a Task to this class.
+     * @param taskSupplier the function for creating a task instance.
+     * @param id the id of the task instance.
+     * @return the executable for adding a Task to this class.
      */
-    Executable getAddTodoExecutable() {
-        return new Executable() {
+    IdentifiableExecutable getAddTaskExecutable(Function<String, Task> taskSupplier, String id) {
+        return new IdentifiableExecutable() {
+            @Override
+            public String getId() {
+                return id;
+            }
+
             @Override
             public ExitStatus execute(String[] tokens) {
-                final String name = String.join(" ", tokens);
-                final TodoItem todoItem = new TodoItem(name);
-                addTodo(todoItem);
-                System.out.println("added: " + todoItem);
+                String[] newTokens = new String[tokens.length - 1];
+                for (int i = 0; i < tokens.length - 1; i++) {
+                    newTokens[i] = tokens[i+1];
+                }
+                final String name = String.join(" ", newTokens);
+                final Task task = taskSupplier.apply(name);
+                addTodo(task);
+                System.out.println("added: " + task);
                 return ExitStatus.finishCurrentIteration;
             }
         };
@@ -67,8 +78,8 @@ public class TodosManager implements ExecutableRegisterable {
 
            @Override
            public ExitStatus execute(String[] tokens) {
-               for (int i = 0; i < todoItems.size(); i++) {
-                   System.out.println((i+1) + ". " + todoItems.get(i));
+               for (int i = 0; i < tasks.size(); i++) {
+                   System.out.println((i+1) + ". " + tasks.get(i));
                }
                return null;
            }
@@ -88,7 +99,7 @@ public class TodosManager implements ExecutableRegisterable {
             public ExitStatus execute(String[] tokens) {
                 final String indexStr = tokens[1];
                 final int index = Integer.parseInt(indexStr) - 1;
-                final TodoItem item = todoItems.get(index);
+                final Task item = tasks.get(index);
                 item.setComplete(isComplete);
                 System.out.println("Nice, I've marked this item as done:");
                 System.out.println("\t" + item);
@@ -104,7 +115,18 @@ public class TodosManager implements ExecutableRegisterable {
 
     @Override
     public void register(NestableExecutableObject nestable) {
-        nestable.registerPostExecutable(getAddTodoExecutable());
+        nestable.registerIdentifiableExecutable(getAddTaskExecutable(
+                ToDo::new,
+                "todo"
+        ));
+        nestable.registerIdentifiableExecutable(getAddTaskExecutable(
+                Deadline::new,
+                "deadline"
+        ));
+        nestable.registerIdentifiableExecutable(getAddTaskExecutable(
+                Event::new,
+                "event"
+        ));
         nestable.registerIdentifiableExecutable(getListTodosExecutable());
         nestable.registerIdentifiableExecutable(
                 getMarkerExecutable(true, "mark")
