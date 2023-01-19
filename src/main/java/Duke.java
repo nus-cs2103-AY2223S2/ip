@@ -40,7 +40,7 @@ public class Duke {
             } else if (str.length() >= 7 && str.toLowerCase().startsWith("delete ")) {
                 deleteCommand(str);
             } else {
-                System.out.println("OOPS!!! I'm sorry, but I don't know what that means :-( Double check your spellings or spaces");
+                System.out.println(new InvalidCommandException().getMessage());
             }
         }
 
@@ -77,6 +77,7 @@ public class Duke {
             System.out.println(err.getMessage());
         }
     }
+
     private static void eventCommand(String str) {
         try {
             String[] foo;
@@ -111,7 +112,7 @@ public class Duke {
             Task itemToMark = arr.get(getTaskNumber(str,5) - 1);
             itemToMark.markDone();
             System.out.println("Nice! I've marked this task as done:");
-            System.out.println("[X] " + itemToMark.taskName);
+            System.out.println("[X] " + itemToMark.getTaskName());
         } catch (MissingArguments | InvalidTaskNumber err) {
             System.out.println(err.getMessage());
         }
@@ -122,7 +123,7 @@ public class Duke {
             Task itemToMark = arr.get(getTaskNumber(str, 7) - 1);
             itemToMark.markUndone();
             System.out.println("OK, I've marked this task as not done yet:");
-            System.out.println("[] " + itemToMark.taskName);
+            System.out.println("[] " + itemToMark.getTaskName());
         } catch (MissingArguments | InvalidTaskNumber err) {
             System.out.println(err.getMessage());
         }
@@ -207,7 +208,7 @@ public class Duke {
         }
     }
 
-    public static String[] getDuration(String line) throws MissingArguments, MissingTimeException, InvalidSyntaxException {
+    private static String[] getDuration(String line) throws MissingArguments, MissingTimeException, InvalidSyntaxException {
         try {
             String[] arr = line.split("/");
             if (!arr[0].startsWith("from ")) {
