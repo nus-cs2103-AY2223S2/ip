@@ -1,4 +1,5 @@
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Scanner;
 
 public class Duke {
@@ -19,7 +20,7 @@ public class Duke {
 
 
         while (loop) {
-        String[] input = inputScanner.nextLine().split(" ", 3);
+        String[] input = inputScanner.nextLine().split(" ", 10);
 
         System.out.println(bracket);
         switch(input[0]) {
@@ -27,29 +28,69 @@ public class Duke {
                 System.out.println("\t Here are the tasks in your list:");
                 for(int i = 0; i < lists.size(); i++) {
                     int index = i+1;
-                    System.out.println("\t " + index + "." + lists.get(i).getStatus() + " " + lists.get(i).toString());
+                    System.out.println("\t " + index + ". " + lists.get(i).toString());
                 }
                 break;
             case "mark": 
                 Task markedTask = lists.get(Integer.parseInt(input[1]) - 1);
                 markedTask.setStatus(true);
                 System.out.println("Nice! One Task Down!");
-                System.out.println("\t " + markedTask.getStatus() + " " + markedTask.toString());
+                System.out.println("\t " + markedTask.toString());
                 break;
             case "unmark": 
                 Task unmarkedTask = lists.get(Integer.parseInt(input[1]) - 1);
                 unmarkedTask.setStatus(false);
                 System.out.println("I have unmarked the task as not done yet.");
-                System.out.println("\t " + unmarkedTask.getStatus() + " " + unmarkedTask.toString());
+                System.out.println("\t " + unmarkedTask.toString());
                 break;    
+            case "deadline":
+                int deadlineIndex = 1;
+                for(int i = 0; i < input.length; i++) {
+                    if(input[i].equals("/by")) {
+                        deadlineIndex = i;
+                        break;
+                    }
+                }
+                String dName = String.join(" ", Arrays.copyOfRange(input, 1, deadlineIndex));
+                String dDate = String.join(" ", Arrays.copyOfRange(input, deadlineIndex + 1, input.length));
+                Deadline deadlineObj = new Deadline(dName, dDate);
+                lists.add(deadlineObj);
+                System.out.println("\tGot it. I've added this task: ");
+                System.out.println("\t\t "+ deadlineObj.toString());
+                System.out.println(String.format("Now you have %d tasks in the list", lists.size()));
+                break;
+            case "event":
+                int fromIndex = -1;
+                int toIndex = -1;
+                for(int i = 0; i < input.length; i++) {
+                    if(input[i].equals("/from")) {
+                        fromIndex = i;
+                    }
+
+                    if(input[i].equals("/to")) {
+                        toIndex = i;
+                    }
+                }
+                String eName = String.join(" ", Arrays.copyOfRange(input, 1, fromIndex));
+                String eFrom = String.join(" ", Arrays.copyOfRange(input, fromIndex + 1, toIndex));
+                String eTo = String.join(" ", Arrays.copyOfRange(input, toIndex + 1, input.length));
+                Event eventObj = new Event(eName, eFrom, eTo);
+                lists.add(eventObj);
+                System.out.println("\tGot it. I've added this task: ");
+                System.out.println("\t\t "+ eventObj.toString());
+                System.out.println(String.format("Now you have %d tasks in the list", lists.size()));
+                break;
             case "bye":
                 System.out.println("\tBye! See you soon!");
                 loop = false;
                 break;
             default:
                 String combString = String.join(" ", input);
-                lists.add(new Task(combString));
-                System.out.println("\t added " + combString);
+                ToDo toDoObj = new ToDo(combString);
+                lists.add(toDoObj);
+                System.out.println("\tGot it. I've added this task: ");
+                System.out.println("\t\t "+ toDoObj.toString());
+                System.out.println(String.format("Now you have %d tasks in the list", lists.size()));
         }
         System.out.println(bracket);
 

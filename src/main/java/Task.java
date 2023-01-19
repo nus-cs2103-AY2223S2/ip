@@ -10,13 +10,9 @@ public class Task {
     public void setStatus(boolean status) {
         this.status = status;
     }
-
-    public String getStatus() {
-        return this.status ? "[X]" : "[ ]";
-    }
-
+    
     @Override
     public String toString() {
-        return this.name;
+        return String.format("[%s] %s", this.status ? "X" : " ", this.name);
     }
 }
