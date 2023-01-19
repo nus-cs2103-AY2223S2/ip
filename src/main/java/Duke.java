@@ -21,9 +21,10 @@ public class Duke {
 
         System.out.println("Hello from\n" + logo);
 
-        while (true) {
+        while (scanner.hasNextLine()) {
             command = scanner.nextLine();
             System.out.println(delimiter);
+
             if (command.equals("bye")) {
                 System.out.println("\tBye. Hope to see you again soon!");
                 System.out.println(delimiter);
@@ -79,18 +80,9 @@ public class Duke {
                             "\t%s\n\tNow you have %d tasks in the list.\n", t, userTasks.size());
                     break;
                 default:
-                    System.out.printf("\tadded: %s\n", command);
-                    userTasks.add(new Task(command));
+                    System.out.printf("\tUnknown syntax\n");
             }
-//            if (command.equals("list")) {
-//
-//            } else if (tokens[0].equals("mark")) {
-//
-//            } else if (tokens[0].equals("unmark")){
-//
-//            } else {
-//
-//            }
+
             System.out.println(delimiter);
         }
     }
