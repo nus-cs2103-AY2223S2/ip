@@ -51,13 +51,48 @@ public class Duke {
                             lineBreak);
                     break;
                 }
-                default:
-                    taskList[taskCount] = new Task(user_input);
-                    System.out.println(lineBreak + '\n' +
-                            "added: " + user_input + '\n' +
-                            lineBreak);
+                case "todo": {
+                    String[] tempArray = user_input.split(" ", 2);
+                    Task currTask = new Todo(tempArray[1]);
+                    taskList[taskCount] = currTask;
                     taskCount++;
+                    System.out.println(lineBreak + '\n' +
+                            "Got it. I've added this task:" + '\n' +
+                            currTask + '\n' +
+                            "Now you have " + taskCount + " tasks in the list." + '\n' +
+                            lineBreak);
                     break;
+                }
+                case "deadline": {
+                    String[] dateArray = user_input.split("/by");
+                    String[] descriptionArray = dateArray[0].split(" ", 2);
+                    Task currTask = new Deadline(descriptionArray[1].stripLeading(), dateArray[1]);
+                    taskList[taskCount] = currTask;
+                    taskCount++;
+                    System.out.println(lineBreak + '\n' +
+                            "Got it. I've added this task:" + '\n' +
+                            currTask + '\n' +
+                            "Now you have " + taskCount + " tasks in the list." + '\n' +
+                            lineBreak);
+                    break;
+                }
+                case "event": {
+                    String[] dateArray = user_input.split("/");
+                    String[] descriptionArray = dateArray[0].split(" ", 2);
+                    String date = dateArray[1].substring(5);
+                    String[] timeArray = user_input.split("/to");
+                    String time = timeArray[1];
+                    Task currTask = new Event(descriptionArray[1].stripTrailing(), date, time);
+                    taskList[taskCount] = currTask;
+                    taskCount++;
+                    System.out.println(lineBreak + '\n' +
+                            "Got it. I've added this task:" + '\n' +
+                            currTask + '\n' +
+                            "Now you have " + taskCount + " tasks in the list." + '\n' +
+                            lineBreak);
+
+                    break;
+                }
             }
             user_input = sc.nextLine();
         }
