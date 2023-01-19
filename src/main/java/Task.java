@@ -12,7 +12,7 @@ public class Task {
     }
 
     public String getStatus() {
-        return this.status ? "X" : "";
+        return this.status ? "[X]" : "[ ]";
     }
 
     @Override

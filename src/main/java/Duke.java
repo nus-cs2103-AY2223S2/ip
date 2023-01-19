@@ -27,10 +27,21 @@ public class Duke {
                 System.out.println("\t Here are the tasks in your list:");
                 for(int i = 0; i < lists.size(); i++) {
                     int index = i+1;
-                    System.out.println("\t " + index + ". " + lists.get(i).toString());
+                    System.out.println("\t " + index + "." + lists.get(i).getStatus() + " " + lists.get(i).toString());
                 }
-                
                 break;
+            case "mark": 
+                Task markedTask = lists.get(Integer.parseInt(input[1]) - 1);
+                markedTask.setStatus(true);
+                System.out.println("Nice! One Task Down!");
+                System.out.println("\t " + markedTask.getStatus() + " " + markedTask.toString());
+                break;
+            case "unmark": 
+                Task unmarkedTask = lists.get(Integer.parseInt(input[1]) - 1);
+                unmarkedTask.setStatus(false);
+                System.out.println("I have unmarked the task as not done yet.");
+                System.out.println("\t " + unmarkedTask.getStatus() + " " + unmarkedTask.toString());
+                break;    
             case "bye":
                 System.out.println("\tBye! See you soon!");
                 loop = false;
