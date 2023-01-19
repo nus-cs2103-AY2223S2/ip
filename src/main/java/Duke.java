@@ -54,7 +54,7 @@ public class Duke {
     }
 }
 
-// custom Task class to store individual tasks that user enters
+// custom Task class to store individual tasks that the user enters
 public class Task {
     protected String description;
     protected boolean isDone;
