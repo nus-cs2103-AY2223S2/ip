@@ -3,7 +3,7 @@ package commands;
 import data.MyData;
 import ui.Ui;
 
-public class Mark extends Commands {
+public class Mark extends Command {
     private final int id;
 
     public Mark(int id) {

@@ -4,7 +4,7 @@ import data.MyData;
 import tasks.Event;
 import ui.Ui;
 
-public class AddEvent extends Commands {
+public class AddEvent extends Command {
     protected Event event;
 
     public AddEvent(String description, String from, String to) {

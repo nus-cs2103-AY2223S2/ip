@@ -10,6 +10,8 @@ public class MyData {
         return this.data.get(index);
     }
 
+    public void deleteData(int index) { this.data.remove(index); }
+
     public void setData(Task command) {
         data.add(command);
     }

@@ -4,7 +4,7 @@ import data.MyData;
 import tasks.ToDo;
 import ui.Ui;
 
-public class AddToDo extends Commands {
+public class AddToDo extends Command {
     protected ToDo todo;
 
     public AddToDo(String description) {

@@ -4,7 +4,7 @@ import data.MyData;
 import tasks.Deadline;
 import ui.Ui;
 
-public class AddDeadline extends Commands {
+public class AddDeadline extends Command {
     protected Deadline deadline;
 
     public AddDeadline(String description, String by) {

@@ -3,7 +3,7 @@ package commands;
 import data.MyData;
 import ui.Ui;
 
-public class Unmark extends Commands {
+public class Unmark extends Command {
     private final int id;
 
     public Unmark(int id) {

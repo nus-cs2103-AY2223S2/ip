@@ -3,7 +3,7 @@ package commands;
 import data.MyData;
 import ui.Ui;
 
-public class List extends Commands {
+public class List extends Command {
     public void execute(MyData data) {
         System.out.print(Ui.line());
         for (int i = 0; i < data.len(); i++) {
