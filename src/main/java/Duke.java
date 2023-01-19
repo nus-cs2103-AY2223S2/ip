@@ -15,8 +15,8 @@ public class Duke {
 
     private static final ArrayList<Task> items= new ArrayList<>();
 
-    private static final String greeting = "Welcome to Lavender Network! \n" +
-            "I'm Iris, your favourite teenage chatbot. \n" +
+    private static final String greeting = "Welcome to Lavender Network!\n" +
+            "I'm Iris, your favourite teenage chatbot.\n" +
             "I'm here to keep track of your tasks so you don't have to :)\n" +
             "Type \"/help\" to learn the commands.\n" +
             "What are you waiting for? Let's get started!";
@@ -30,7 +30,7 @@ public class Duke {
             "To mark a task as done, type \"mark <task number>\".\n"  +
             "To mark a task as not done, type \"unmark <task number>\".\n"  +
             "A task marked with a X is done. " +
-            "To close me, type \"bye\". \n" +
+            "To close me, type \"bye\".\n" +
             "Have fun!";
 
     private static final String exitGreeting = "Bye! Hope to see you soon!";
@@ -57,7 +57,7 @@ public class Duke {
         } else if (items.size() > 10) {
             output("What?!! You're going to dieee! Added your task: \"" + task);
         } else {
-            output("Another task? Phew >:(. Added your task: " + task);
+            output("Another task? Phew >:(. Added your task:" + task);
         }
         output("You have " + items.size() + " tasks.");
     }
@@ -77,7 +77,7 @@ public class Duke {
                     break loop;
                 case "list":
                     if (items.size() > 5) {
-                        output("You have the following tasks: (Soooo many >:O)!");
+                        output("You have the following tasks: (So many >:O)!");
                     } else {
                         output("You have the following tasks: (So few ~ good going!)");
                     }
@@ -94,7 +94,7 @@ public class Duke {
                     output(task.toString());
                     break;
                 case "unmark":
-                    output("Bummer! Have fun doing this: ");
+                    output("Bummer! Have fun doing this:");
                     task = items.get(Integer.parseInt(input.split(" ")[1]) - 1);
                     task.unmark();
                     output(task.toString());
