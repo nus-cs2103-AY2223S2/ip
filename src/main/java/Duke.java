@@ -13,6 +13,7 @@ public class Duke {
         System.out.println("How can I help you?");
         String list[] = new String[100];
         Boolean done[] = new Boolean[100];
+        Boolean deleted[] = new Boolean[100];
         String Type[] = new String[100];
         int index = 0;
         while(true) {
@@ -25,14 +26,28 @@ public class Duke {
             }
             if(command.equals("list")){
                 System.out.println("Here are your tasks:");
+                int num = 1;
                 for(int i = 0; i<index; i++){
+                    if(deleted[i]){
+                        continue;
+                    }
                     if(done[i]){
-                        System.out.println(i + 1 + ".["+ Type[i]+ "]"+"[x] " + list[i]);
+                        System.out.println(num + ".["+ Type[i]+ "]"+"[x] " + list[i]);
                     }
                     else {
-                        System.out.println(i + 1 + ".["+ Type[i]+ "]"+"[ ] " + list[i]);
+                        System.out.println(num + ".["+ Type[i]+ "]"+"[ ] " + list[i]);
                     }
+                    num++;
                 }
+            }
+            else if(command.equals("delete")) {
+                if(params.equals("")){
+                    System.out.println("missing parameters.");
+                    continue;
+                }
+                deleted[parseInt(params)-1] = true;
+                System.out.println("Task deleted.");
+
             }
             else if(command.equals("mark")){
                 if(params.equals("")){
@@ -65,6 +80,7 @@ public class Duke {
                 }
                 System.out.println("added: " + params);
                 done[index] = false;
+                deleted[index] = false;
                 list[index] = params;
                 Type[index] = "T";
                 index++;
@@ -77,6 +93,7 @@ public class Duke {
                 }
                 System.out.println("added: " + params);
                 done[index] = false;
+                deleted[index] = false;
                 list[index] = params;
                 Type[index] = "D";
                 index++;
@@ -89,6 +106,7 @@ public class Duke {
                 }
                 System.out.println("added: " + params);
                 done[index] = false;
+                deleted[index] = false;
                 list[index] = params;
                 Type[index] = "E";
                 index++;
