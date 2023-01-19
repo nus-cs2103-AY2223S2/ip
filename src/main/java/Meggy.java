@@ -66,7 +66,19 @@ public class Meggy implements Runnable {
      * @param arg Index (start with 1) of task to be updated.
      */
     private String markTaskStatus(String arg, boolean newStatus) {
-        final int idx = Integer.parseInt(arg) - 1;
+        final int whiteSpaceIdx=arg.indexOf(' ');
+        if(whiteSpaceIdx>=0)
+            arg=arg.substring(0,whiteSpaceIdx);
+        final int idx;
+        try {
+            idx = Integer.parseInt(arg) - 1;
+        }catch (NumberFormatException e){
+            return Resource.errBase+Resource.errNFE(arg)+'\n'+Util.usageIdxCmd(newStatus?Resource.cmdMk:Resource.cmdUnmk);
+        }
+        final int nTask=tasks.size();
+        if(idx<0||idx>=nTask)
+            return Resource.errBase+Resource.errIOBE(idx,nTask)+'\n'+Util.usageIdxCmd(newStatus?Resource.cmdMk:Resource.cmdUnmk);
+
         final UserTask task = tasks.get(idx);
         task.status = newStatus;
         return (newStatus ? Resource.notifMk : Resource.notifUnmk) + Resource.taskIndent + task;
@@ -100,11 +112,11 @@ public class Meggy implements Runnable {
             } else
                 args = spaceIdx < 0 ? "" : line.substring(spaceIdx + 1);
             out.print(Resource.msgHd);
-            out.println(job.apply(args));
+            out.println(job.apply(args.trim()));
             out.print(Resource.msgTl);
             if (Resource.cmdExit.equals(cmd))
                 return;
         }
-        out.println("REACHED END OF INPUT WITHOUT 'BYE' COMMAND");
+        out.println("WARNING: REACHED END OF INPUT WITHOUT 'BYE' COMMAND");
     }
 }

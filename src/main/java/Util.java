@@ -19,4 +19,12 @@ public final class Util {
     public static String parenthesize(char c) {
         return "[" + c + ']';
     }
+
+    /**
+     * @param cmd Index command. Currently 'mark', 'unmark', or 'delete' only.
+     * */
+    public static String usageIdxCmd(String cmd){
+        return Resource.notifUsage+cmd+" <idx: integer between 1 and list size (inclusive)>";
+    }
+
 }

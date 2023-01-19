@@ -2,6 +2,7 @@
  * Class that stores all customizable resource values statically.
  */
 public final class Resource {
+    public final static String errBase=" ☹ OOPS!!! ";
     public final static String taskIndent = "    ";
     public final static String cmdExit = "bye";
     public final static String cmdList = "list";
@@ -17,13 +18,13 @@ public final class Resource {
     public final static String notifList = " Here are the tasks in your list:\n";
     public final static String notifMk = " Booyah! Marked this task as done:\n";
     public final static String notifUnmk = " OK. Marked this task as not done:\n";
+    public final static String notifUsage = " Usage: ";
     public final static String logo = " __  __\n|  \\/  |\n| \\  / | ___  __ _  __ _ _   _\n| |\\/| |/ _ \\/ _` |/ _` | | | |\n| |  | |  __/ (_| | (_| | |_| |\n|_|  |_|\\___|\\__, |\\__, |\\__, |\n              __/ | __/ | __/ |\n             |___/ |___/ |___/\n";
     public final static String msgHd = "------------------------------------------------------------\n";
     public final static String msgTl = msgHd + "\n>";
     public final static String greetings = "Wommy! Get REKT by the upcoming star of Inkopolis, Meggy!\n";
     public final static String farewell = "OK gotta go play more Turf Wars. Have a nice day!";
     public final static char doneMk = 'X';
-    public final static char eventMk = Character.toUpperCase(cmdEvent.charAt(0));
 
     /**
      * @deprecated Class that stores all resource values statically. Should not be initialized.
@@ -44,5 +45,19 @@ public final class Resource {
 
     public static String nTaskFmt(int nTask) {
         return " Now you have " + nTask + " task(s) in the list.\n";
+    }
+    /**
+     * Msg of error created by NumberFormatException
+     * */
+    public static String errNFE(String arg){
+        return "Can not interpret \""+arg+"\" as an index number.";
+    }
+
+    /**
+     * Msg of error created by IndexOutOfBoundException
+     * */
+    public static String errIOBE(int idx,int size){
+        idx+=1;
+        return "Can not retrieve item with "+(idx>0?"index "+idx+" from a list of size "+size+'.':"non-positive index ("+idx+").");
     }
 }
