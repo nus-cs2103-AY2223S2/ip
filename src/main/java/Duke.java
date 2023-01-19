@@ -5,26 +5,53 @@ import java.util.Scanner;
 public class Duke {
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
-        List<String> todoList = new ArrayList<>();
+        List<Task> taskList = new ArrayList<>();
 
         System.out.println(formatOutput("Hey there! I'm Sirius\n\t What can I do for you today? :D"));
 
         String input = sc.nextLine();
         while (!isBye(input)) {
-            if (isList(input)) {
-                StringBuilder sb = new StringBuilder();
-                for (int i = 0; i < todoList.size(); i++) {
-                    int count = i + 1;
-                    String res = count + ". " + todoList.get(i);
-                    if(i != todoList.size() - 1) {
-                        res += "\n\t ";
+            String[] inputArr = input.split(" ");
+            String firstWord = inputArr[0];
+            int index = 0;
+            switch (firstWord) {
+                case "list":
+                    StringBuilder sb = new StringBuilder();
+                    sb.append("Here are the tasks in your list:\n\t ");
+                    for (int i = 0; i < taskList.size(); i++) {
+                        int count = i + 1;
+                        String res = count + "." + taskList.get(i).toString();
+                        if (i != taskList.size() - 1) {
+                            res += "\n\t ";
+                        }
+                        sb.append(res);
                     }
-                    sb.append(res);
-                }
-                System.out.println(formatOutput(sb.toString()));
-            } else {
-                todoList.add(input);
-                System.out.println(formatOutput("added: " + input));
+                    System.out.println(formatOutput(sb.toString()));
+                    break;
+                case "mark":
+                    index = Integer.parseInt(inputArr[1]) - 1;
+                    if (index >= taskList.size()) {
+                        System.out.println("Oopsies.. Seems like that task does not exist :(");
+                    } else {
+                        Task currentTask = taskList.get(index);
+                        currentTask.markAsDone();
+                        System.out.println(formatOutput("Great :D I knew you could do it! I've marked this task as done:\n\t\t" + currentTask.toString()));
+                    }
+                    break;
+                case "unmark":
+                    index = Integer.parseInt(inputArr[1]) - 1;
+                    if (index >= taskList.size()) {
+                        System.out.println("Oopsies.. Seems like that task does not exist :(");
+                    } else {
+                        Task currentTask = taskList.get(index);
+                        currentTask.markAsNotDone();
+                        System.out.println(formatOutput("Got it, I've marked this task as not done yet:\n\t\t" + currentTask.toString()));
+                    }
+                    break;
+                default:
+                    Task t = new Task(input);
+                    taskList.add(t);
+                    System.out.println(formatOutput("Got it, added: " + input));
             }
             input = sc.nextLine();
         }
