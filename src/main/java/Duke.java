@@ -7,14 +7,16 @@ public class Duke {
         while (sc.hasNext()) {
             String cmd = sc.nextLine();
             if (cmd.equals("bye")) {
-                bye(); break;
+                exit(); break;
+            } else if (cmd.equals("list")) {
+
             } else {
-                print(cmd);
+                print(echo(cmd));
             }
         }
         sc.close();
     }
-    public static void bye() {
+    public static void exit() {
         print("Bye. Hope to see you again soon!");
     }
     public static String ownName() {
