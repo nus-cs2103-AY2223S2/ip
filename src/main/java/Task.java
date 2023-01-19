@@ -1,32 +1,34 @@
 public class Task {
-    private int id;
-    private String description;
+    protected String description;
 
-    private boolean isDone;
+    protected boolean isDone;
 
-    public Task(int id, String description) {
-        this.id = id;
+    public Task(String description) {
         this.description = description;
         this.isDone = false;
     }
 
+    public String getStatusIcon() {
+        return (isDone ? "X" : " "); // mark done task with X
+    }
+
     public String mark() {
         this.isDone = true;
-        return String.format("\tNice! I've marked this task as done:\n\t  [X] %s", this.description);
+        return String.format("\tNice! I've marked this task as done:\n\t  [%s] %s", this.getStatusIcon(), this.description);
     }
 
     public String unmark() {
         this.isDone = false;
-        return String.format("\tOK, I've marked this task as not done yet:\n\t  [ ] %s", this.description);
+        return String.format("\tOK, I've marked this task as not done yet:\n\t  [%s] %s", this.getStatusIcon(), this.description);
     }
 
 
     @Override
     public String toString() {
         if (this.isDone) {
-            return String.format("\t%d.[X] %s", this.id, this.description);
+            return String.format(".[%s] %s", this.getStatusIcon(), this.description);
         }
-        return String.format("\t%d.[ ] %s", this.id, this.description);
+        return String.format(".[%s] %s", this.getStatusIcon(), this.description);
     }
 
 }
