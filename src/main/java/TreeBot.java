@@ -1,11 +1,10 @@
+import java.util.ArrayList;
 import java.util.Scanner;
 
 public class TreeBot {
-
     private static final String EXIT_TOKEN = "bye";
-
+    private ArrayList<String> items = new ArrayList<>();
     public void start() {
-
         greet();
         listen();
     }
@@ -13,7 +12,6 @@ public class TreeBot {
 
     private void listen() {
         Scanner sc = new Scanner(System.in);
-
         while (true) {
             String commandString = sc.nextLine();
 
@@ -22,12 +20,31 @@ public class TreeBot {
                 break;
             }
 
-            echo(commandString);
+            execute(commandString);
 
         }
 
     }
+    private void execute(String commandString) {
+        String[] splitStr = commandString.split("\\s+");
+        String command = splitStr[0];
 
+        switch (command) {
+            case "list":
+                listItems();
+                break;
+            default:
+                addItem(commandString);
+        }
+    }
+    private void addItem(String item) {
+        this.items.add(item);
+    }
+    private void listItems() {
+        for (int i = 0; i < this.items.size(); i++) {
+            System.out.println(i + 1 + ". " + this.items.get(i));
+        }
+    }
     private void greet() {
         System.out.println("Hello, I'm a tree. How may I be of service?");
     }
