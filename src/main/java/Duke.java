@@ -32,7 +32,7 @@ public class Duke {
                         printText(list.add(TaskType.Events, scanner.nextLine().strip()));
                         break;
                     default:
-                        throw new DukeException("\t OOPS!!! I'm sorry, but I don't know what that means :-(");
+                        throw new DukeUnknownCommandException();
                 }
             } catch (DukeException dukeException){
                 printText(dukeException.getMessage());
