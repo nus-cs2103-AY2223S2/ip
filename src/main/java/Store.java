@@ -6,7 +6,7 @@ public class Store extends Commands {
         this.setCommandStorage(str);
     }
     @Override
-    public void execute(User user) {
+    public void execute(User user){
         String content = this.getCommandStorage();
         Tasks task = null;
         if (content.matches("^deadline\\s.*$")) {
@@ -20,7 +20,7 @@ public class Store extends Commands {
             String from = substrings[1].substring(5);
             String to = substrings[2].substring(3);
             task = new Event(substrings[0], from, to);
-        } else {
+        } else if (content.matches("^todo\\s.*$")){
             String desc = content.substring(5);
             task = new Todo(desc);
         }

@@ -8,8 +8,12 @@ public class Duke {
         User user = new User();
         while(!offBot) {
             Scanner sc= new Scanner(System.in); //System.in is a standard input stream
-            CommandManager.createCommand(sc.nextLine());
-            CommandManager.executeQueue(user);
+            try {
+                CommandManager.createCommand(sc.nextLine());
+                CommandManager.executeQueue(user);
+            } catch (DukeException e) {
+                System.out.println(e.getMessage());
+            }
         }
     }
 }
