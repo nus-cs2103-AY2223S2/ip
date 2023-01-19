@@ -31,10 +31,17 @@ public class Willy {
                 } else if (command.contains("unmark")) {
                     Task tempTask = lst.get(Integer.parseInt(temp[1]) - 1);
                     tempTask.unmark();
+                } else if (command.contains("delete")) {
+                    System.out.println(" Noted. I've removed this task:");
+                    Task tempTask = lst.get(Integer.parseInt(temp[1]) - 1);
+                    System.out.println(tempTask.toString());
+
+                    lst.remove(Integer.parseInt(temp[1]) - 1);
+                    System.out.format("Now you have %d things in your list%n", lst.size());
                 } else if (command.equals("list")) {
                     for (int index = 0; index < lst.size(); index++) {
                         Task curr = lst.get(index);
-                        System.out.println((index + 1) + ") "+ curr.toString() );
+                        System.out.println((index + 1) + ") " + curr.toString());
                     }
                 } else if (command.equals("bye")) {
                     System.out.println("Bye. Hope to see you again soon!");
