@@ -20,17 +20,31 @@ public class Duke {
         pw.flush();
         sb.setLength(0);
         ArrayList<Task> storage2 = new ArrayList<Task>();
-        int noOfTasks = 0;
+        boolean goNext = false;
         while (true) {  // Echoing
             text = br.readLine();
             String[] tempText = text.split(" ", 2);
             switch(tempText[0].toLowerCase()) {
                 case "bye":
+                    try {
+                        DukeException.validate(tempText.length, 1, "bye");
+                    } catch (IncorrectNoOfArgumentException ex) {
+                        System.out.println(ex);
+                        goNext = true;
+                        break;
+                    }
                     sb.append("    ____________________________________________________________\n")
                             .append("    Bye. Hope to see you again soon!\n")
                             .append("    ____________________________________________________________\n");
                     break;
                 case "list":
+                    try {
+                        DukeException.validate(tempText.length, 1, "list");
+                    } catch (IncorrectNoOfArgumentException ex) {
+                        System.out.println(ex);
+                        goNext = true;
+                        break;
+                    }
                     sb.append("    ____________________________________________________________\n")
                             .append("    Here are the tasks in your list:\n");
                     for (int i = 0; i < storage2.size(); i++) {
@@ -39,10 +53,17 @@ public class Duke {
                     sb.append("    ____________________________________________________________\n");
                     break;
                 case "mark":
+                    try {
+                        DukeException.validate(tempText.length, 2, "mark");
+                        DukeException.validate(tempText[1], "mark");
+                    } catch (IncorrectNoOfArgumentException ex) {
+                        System.out.println(ex);
+                        goNext = true;
+                        break;
+                    }
                     int taskNumber = Integer.parseInt(tempText[1]);
-                    // need to take care of this error where there isnt a tempText[1]
-                    if (taskNumber <= storage2.size()) {    // need to add in an else print an error statement
-                        // If the task number given is within the range of tasks in the list
+                    if (taskNumber <= storage2.size()) {
+                        // need to add in an exception if out of range
                         Task tempTask = storage2.get(taskNumber - 1);
                         sb.append("    ____________________________________________________________\n")
                                 .append(tempTask.markAsDone())
@@ -51,10 +72,17 @@ public class Duke {
                     }
                     break;
                 case "unmark":
+                    try {
+                        DukeException.validate(tempText.length, 2, "unmark");
+                        DukeException.validate(tempText[1], "unmark");
+                    } catch (IncorrectNoOfArgumentException ex) {
+                        System.out.println(ex);
+                        goNext = true;
+                        break;
+                    }
                     int taskNumber2 = Integer.parseInt(tempText[1]);
-                    // need to take care of this error where there isnt a tempText[1]
-                    if (taskNumber2 <= storage2.size()) {    // need to add in an else print an error statement
-                        // If the task number given is within the range of tasks in the list
+                    if (taskNumber2 <= storage2.size()) {
+                        // need to add in an exception if out of range
                         Task tempTask = storage2.get(taskNumber2 - 1);
                         sb.append("    ____________________________________________________________\n")
                                 .append(tempTask.markAsIncomplete())
@@ -63,40 +91,111 @@ public class Duke {
                     }
                     break;
                 case "delete":
+                    try {
+                        DukeException.validate(tempText.length, 2, "delete");
+                        DukeException.validate(tempText[1], "delete");
+                    } catch (IncorrectNoOfArgumentException ex) {
+                        System.out.println(ex);
+                        goNext = true;
+                        break;
+                    }
                     int taskNumber3 = Integer.parseInt(tempText[1]);
-                    // need to take care of this error where there isnt a tempText[1]
-                    if (taskNumber3 <= storage2.size()) {   // need to add in an else print an error statement
-                        // If the task number given is within the range of tasks in the list
+                    if (taskNumber3 <= storage2.size()) {
+                        // need to add in an exception if out of range
                         Task tempTask = storage2.remove(taskNumber3 - 1);
                         sb.append("    ____________________________________________________________\n")
                                 .append("    Noted. I've removed this task:\n")
                                 .append("      ").append(tempTask.getTaskInfo())
-                                .append("\n    Now you have ").append(--noOfTasks).append(" tasks in the list.\n")
+                                .append("\n    Now you have ").append(storage2.size()).append(" tasks in the list.\n")
                                 .append("    ____________________________________________________________\n");
                     }
                     break;
                 default:
                     Task newTask = new Task(text);
-                    if (tempText[0].equals("todo")) {
-                        newTask = new ToDos(tempText[1]);
+                    switch (tempText[0]) {
+                        case "todo":
+                            try {
+                                DukeException.validate(tempText.length, 2, "todo");
+                                DukeException.validate(tempText[1], "todo");
+                            } catch (IncorrectNoOfArgumentException ex) {
+                                System.out.println(ex);
+                                goNext = true;
+                                break;
+                            }
+                            newTask = new ToDos(tempText[1]);
+                            break;
+                        case "deadline":
+                            try {
+                                DukeException.validate(tempText.length, 2, "deadLine");
+                                DukeException.validate(tempText[1], "deadLine");
+                            } catch (IncorrectNoOfArgumentException ex) {
+                                System.out.println(ex);
+                                goNext = true;
+                                break;
+                            }
+                            String[] tempText2 = tempText[1].split("/by", 2);
+                            try {
+                                DukeException.validate(tempText2.length, 2, "deadLine");
+                                DukeException.validate(tempText2[1], "deadLine");
+                            } catch (IncorrectNoOfArgumentException ex) {
+                                System.out.println(ex);
+                                goNext = true;
+                                break;
+                            }
+                            System.out.println(tempText2[1]);
+                            newTask = new Deadline(tempText2[0], tempText2[1]);
+                            break;
+                        case "event":
+                            try {
+                                DukeException.validate(tempText.length, 2, "event");
+                                DukeException.validate(tempText[1], "event");
+                            } catch (IncorrectNoOfArgumentException ex) {
+                                System.out.println(ex);
+                                goNext = true;
+                                break;
+                            }
+                            String[] tempText3 = tempText[1].split("/from", 2);
+                            try {
+                                DukeException.validate(tempText3.length, 2, "mark");
+                                DukeException.validate(tempText3[1], "event");
+                            } catch (IncorrectNoOfArgumentException ex) {
+                                System.out.println(ex);
+                                goNext = true;
+                                break;
+                            }
+                            String[] tempText4 = tempText3[1].split("/to", 2);
+                            try {
+                                DukeException.validate(tempText4.length, 2, "mark");
+                                DukeException.validate(tempText4[1], "event");
+                            } catch (IncorrectNoOfArgumentException ex) {
+                                System.out.println(ex);
+                                goNext = true;
+                                break;
+                            }
+                            newTask = new Event(tempText3[0], tempText4[0], tempText4[1]);
+                            break;
+                        default:
+                            try {
+                                DukeException.validate2();
+                            } catch (InvalidCommandException ex) {
+                                System.out.println(ex);
+                                goNext = true;
+                                break;
+                            }
                     }
-                    if (tempText[0].equals("deadline")) {
-                        String[] tempText2 = tempText[1].split("/by");
-                        // need to take care of this error where there isnt a tempText2[1]
-                        newTask = new Deadline(tempText2[0], tempText2[1]);
+                    if (!goNext) {
+                        storage2.add(newTask);
                     }
-                    if (tempText[0].equals("event")) {
-                        String[] tempText3 = tempText[1].split("/from");
-                        String[] tempText4 = tempText3[1].split("/to");
-                        // need to take care of error where there isnt a tempText3[1] / tempText4[1]
-                        newTask = new Event(tempText3[0], tempText4[0], tempText4[1]);
-                    }
-                    storage2.add(newTask);
                     sb.append("    ____________________________________________________________\n")
                             .append("    Got it. I've added this task:\n")
                             .append("      ").append(newTask.getTaskInfo())
-                            .append("\n    Now you have ").append(++noOfTasks).append(" tasks in the list.\n")
+                            .append("\n    Now you have ").append(storage2.size()).append(" tasks in the list.\n")
                             .append("    ____________________________________________________________\n");
+            }
+            if (goNext) {
+                goNext = false;
+                sb.setLength(0);
+                continue;
             }
             pw.println(sb.toString());
             pw.flush();
