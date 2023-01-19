@@ -36,6 +36,9 @@ public class Duke {
             case UNMARK:
                 unmarkEvent(userInput);
                 break;
+            case DELETE:
+                deleteEvent(userInput);
+                break;
             case TODO:
                 todoEvent(userInput);
                 break;
@@ -87,6 +90,9 @@ public class Duke {
         if (arr[0].equals("unmark")) {
             return EventType.UNMARK;
         }
+        if (arr[0].equals("delete")) {
+            return EventType.DELETE;
+        }
         if (arr[0].equals("todo")) {
             return EventType.TODO;
         }
@@ -96,7 +102,6 @@ public class Duke {
         if (arr[0].equals("event")) {
             return EventType.EVENT;
         }
-        
         throw new DukeException("☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
     }
 
@@ -116,6 +121,15 @@ public class Duke {
         Task t = storedInputs.get(num-1);
         t.markUnDone();
         System.out.println("\nOK, I've marked this task as not done yet:\n  " + t + "\n");
+    }
+
+    public static void deleteEvent(String userInput) {
+        String[] arr = userInput.split(" ");
+        int num = Integer.parseInt(arr[1]);
+
+        Task t = storedInputs.remove(num-1);
+        System.out.println("\nNoted. I've removed this task:\n  " + t);
+        printTotalTasks();
     }
 
    /**
@@ -196,6 +210,7 @@ public class Duke {
             return;
         }
     }
+
 
     private static String printList() {
         String s = "";
