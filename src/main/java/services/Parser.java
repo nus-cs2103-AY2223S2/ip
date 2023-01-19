@@ -7,6 +7,7 @@ import java.util.Objects;
 
 public final class Parser {
     private final ArrayList<ICommand> handlerRegistry = new ArrayList<>();
+    private final ArrayList<ICommand> errorRegistry = new ArrayList<>();
     private ICommand defaultHandler;
     private ICommand exitHandler;
     private Runnable toExit;
@@ -19,6 +20,15 @@ public final class Parser {
     @SuppressWarnings("unused")
     public void registerCommand(Class<ICommand> c) {
         this.handlerRegistry.add(CommandHelper.getObject(c));
+    }
+
+    public void registerError(ICommand c) {
+        this.errorRegistry.add(c);
+    }
+
+    @SuppressWarnings("unused")
+    public void registerError(Class<ICommand> c) {
+        this.errorRegistry.add(CommandHelper.getObject(c));
     }
 
     @SuppressWarnings("unused")
@@ -45,17 +55,15 @@ public final class Parser {
 
     public void handle(String expr) {
         if (Objects.equals(expr, "")) return;
-        if (this.exitHandler.canTake(expr)) {
-            this.exitHandler.take(expr);
+
+        if (CommandHelper.checkAndRun(exitHandler, expr)) {
             toExit.run();
             return;
         }
 
-        for (ICommand c : handlerRegistry) {
-            if (c.canTake(expr)) {
-                c.take(expr);
-                return;
-            }
+        if (CommandHelper.checkAndRun(handlerRegistry, expr) ||
+            CommandHelper.checkAndRun(errorRegistry, expr)) {
+            return;
         }
 
         this.defaultHandler.take(expr);

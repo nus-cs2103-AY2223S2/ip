@@ -1,7 +1,4 @@
-import handlers.HAddTask;
-import handlers.HBye;
-import handlers.HMarkTask;
-import handlers.HShowTaskList;
+import handlers.*;
 import services.Parser;
 import services.Prompt;
 import services.TaskStorage;
@@ -25,9 +22,11 @@ public class Tach {
     }
 
     private static void initParser() {
-        parser.setDefaultHandler(new HAddTask(ts));
+        parser.setDefaultHandler(new HThrowException());
+        parser.registerCommand(new HAddTask(ts));
         parser.registerCommand(new HShowTaskList(ts));
         parser.registerCommand(new HMarkTask(ts));
+        parser.registerError(new ETodoEmptyDescription());
         parser.setExitHandler(new HBye());
         parser.setToExit(() -> shouldContinue = false);
     }

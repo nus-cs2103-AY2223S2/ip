@@ -3,6 +3,7 @@ package services;
 import types.ICommand;
 
 import java.lang.reflect.InvocationTargetException;
+import java.util.List;
 
 public final class CommandHelper {
     @SuppressWarnings("unchecked")
@@ -22,5 +23,24 @@ public final class CommandHelper {
                  InstantiationException ignored) {
             return null;
         }
+    }
+
+    public static boolean checkAndRun(List<ICommand> handlers, String expr) {
+        for (ICommand c : handlers) {
+            if (c.canTake(expr)) {
+                c.take(expr);
+                return true;
+            }
+        }
+
+        return false;
+    }
+    public static boolean checkAndRun(ICommand c, String expr) {
+        if (c.canTake(expr)) {
+            c.take(expr);
+            return true;
+        }
+
+        return false;
     }
 }

@@ -2,12 +2,10 @@ package handlers;
 
 import types.ICommand;
 
-@SuppressWarnings("unused")
-public final class HEcho implements ICommand {
-
+public class HThrowException implements ICommand {
     @Override
     public void take(String s) {
-        System.out.println(s);
+        System.out.println("☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
     }
 
     @Override
