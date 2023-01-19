@@ -14,6 +14,7 @@ public class Storage {
 
     /**
      * Reads tasks from local storage.
+     *
      * @return List of tasks (can be empty).
      */
     public List<Task> readTasks() {
@@ -38,6 +39,7 @@ public class Storage {
 
     /**
      * Saves the given list of tasks to local storage.
+     *
      * @param tasks List of tasks to save.
      * @throws TaskIOException If the tasks cannot be saved.
      */

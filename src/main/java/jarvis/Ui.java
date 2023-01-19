@@ -24,6 +24,7 @@ public class Ui {
 
     /**
      * Formats and prints multiple lines of response.
+     *
      * @param lines List of response lines.
      */
     public void print(List<String> lines) {
@@ -36,6 +37,7 @@ public class Ui {
 
     /**
      * Formats and prints a single line of response.
+     *
      * @param line Response line.
      */
     public void print(String line) {
@@ -44,6 +46,7 @@ public class Ui {
 
     /**
      * Prints one of the predefined responses.
+     *
      * @param response Type of response.
      */
     public void printStandard(Response response) {
@@ -67,6 +70,7 @@ public class Ui {
 
     /**
      * Prints an error response.
+     *
      * @param message Error message.
      */
     public void printError(String message) {

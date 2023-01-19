@@ -15,6 +15,7 @@ public class Parser {
 
     /**
      * Parses a command string.
+     *
      * @param commandLine User input string.
      * @return Parsed command.
      * @throws InvalidActionException If command keyword is invalid.
@@ -25,6 +26,7 @@ public class Parser {
 
     /**
      * Parses a command from a Scanner.
+     *
      * @param scanner Scanner containing user input.
      * @return Parsed command.
      * @throws InvalidActionException If command keyword is invalid.
