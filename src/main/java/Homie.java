@@ -5,10 +5,17 @@ import java.util.Scanner;
 
 public class Homie {
 
-    private static final List<String> list = new ArrayList<>();
+    private static final List<Task> list = new ArrayList<>();
 
     public static void print(String s) {
         System.out.println(s);
+    }
+
+    public static void listTasks() {
+        for (int i = 0; i < list.size(); i++) {
+            Task task = list.get(i);
+            Homie.print("   > " + (i + 1) + ". " + task.toString());
+        }
     }
 
     public static void interact() {
@@ -18,24 +25,18 @@ public class Homie {
         while (true) {
             input = sc.nextLine();
 
-            switch (input) {
-            case "bye":
+            if (input.equals("bye")) {
                 Homie.print("   > Aight imma head out");
                 break;
-            case "list":
-                for (int i = 0; i < list.size(); i++) {
-                    String task = list.get(i);
-                    Homie.print("   > " + (i + 1) + ". " + task);
-                }
-                break;
-            default:
-                Homie.print("   > added:" + input);
-                Homie.list.add(input);
             }
 
-            if (input.equals("bye")) {
-                break;
+            if (input.equals("list")) {
+                Homie.listTasks();
+                continue;
             }
+
+            Homie.print("   > added: " + input);
+            Homie.list.add(new Task(input));
         }
     }
 
