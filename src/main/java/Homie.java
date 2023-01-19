@@ -12,6 +12,11 @@ public class Homie {
     }
 
     public static void listTasks() {
+
+        if (taskList.size() == 0) {
+            Homie.print("   > Aint no tasks around");
+        }
+
         for (int i = 0; i < taskList.size(); i++) {
             Task task = taskList.get(i);
             Homie.print("   > " + (i + 1) + ". " + task.toString());
