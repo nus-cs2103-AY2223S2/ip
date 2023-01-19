@@ -27,13 +27,103 @@ public class Duke {
         System.out.println(exitMessage);
     }
 
-    private static void addTask(String task) {
-        TASK_LIST.add(new Task(task));
+    private static void addToDo(String task) {
+        if (task.equals("")) {
+            System.out.println("Invalid command format!");
+            System.out.println("Use: `todo {description}`");
+            return;
+        }
+
+        ToDo toDo = new ToDo(task);
+        TASK_LIST.add(toDo);
         nTasks++;
-        System.out.println("New task added: " + task);
+        System.out.println("Got it. I've added this task:\n" + toDo
+                + "\nNow you have " + nTasks + " task(s) in the list.");
+    }
+
+    private static void addDeadline(String task) {
+        String[] taskParts = task.split("/by");
+        if (taskParts.length < 2 || taskParts[0].equals("")) {
+            System.out.println("Invalid command format!");
+            System.out.println("Use `deadline {description} /by {due date}`");
+            return;
+        }
+        String description = taskParts[0].trim();
+        String dueDate = taskParts[1].trim();
+
+        if (dueDate.equals("")) {
+            System.out.println("Please enter a valid due date!");
+            return;
+        }
+
+        Deadline deadline = new Deadline(description, dueDate);
+        TASK_LIST.add(deadline);
+        nTasks++;
+
+        System.out.println("Got it. I've added this task:\n" + deadline
+                + "\nNow you have " + nTasks + " task(s) in the list.");
+    }
+
+    private static void addEvent(String task) {
+        String[] taskParts = task.split("/from");
+        if (taskParts.length < 2 || taskParts[1].equals("")) {
+            System.out.println("Invalid command format!");
+            System.out.println("Use `event {description} /from {start date/time} /to {end date/time}`");
+            return;
+        }
+        String[] taskTimeParts = taskParts[1].split("/to");
+        if (taskTimeParts.length < 2) {
+            System.out.println("Invalid command format!");
+            System.out.println("Use `event {description} /from {start date/time} /to {end date/time}`");
+            return;
+        }
+
+        String description = taskParts[0].trim();
+        String startDateTime = taskTimeParts[0].trim();
+        String endDateTime = taskTimeParts[1].trim();
+
+        if (description.equals("") || startDateTime.equals("") || endDateTime.equals("")) {
+            System.out.println("Please enter valid description/ start time/ end time!");
+            return;
+        }
+
+        Event event = new Event(description, startDateTime, endDateTime);
+        TASK_LIST.add(event);
+        nTasks++;
+
+        System.out.println("Got it. I've added this task:\n" + event
+                + "\nNow you have " + nTasks + " task(s) in the list.");
+    }
+
+    private static void addTask(String userCommand) {
+        String[] userCommandParts = userCommand.split(" ", 2);
+        if (userCommandParts.length < 2) {
+            System.out.println("Invalid command format!");
+            System.out.println("Use: `{todo/deadline/event} {description} {...args}`");
+            return;
+        }
+
+        String command = userCommandParts[0];
+        String description = userCommandParts[1];
+
+        switch (command) {
+            case "todo":
+                addToDo(description);
+                break;
+            case "deadline":
+                addDeadline(description);
+                break;
+            case "event":
+                addEvent(description);
+                break;
+            default:
+                System.out.println("Please enter a valid command");
+                break;
+        }
     }
 
     private static void printTaskList() {
+        System.out.println("Your Tasks:");
         for (int i = 0; i < nTasks; i++) {
             System.out.println((i + 1) + ". " + TASK_LIST.get(i));
         }
