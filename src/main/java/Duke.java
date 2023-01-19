@@ -129,6 +129,8 @@ public class Duke {
                         String to = words[1].split("/to")[1].trim();
                         addEvent(title, from, to);
                     }
+                } else if (input.split(" ")[0].equals("delete")) {
+                    deleteTask(Integer.parseInt(input.split(" ")[1]));
                 } else {
                     System.out.println("    ____________________________________________________________");
                     System.out.println("     ☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
@@ -144,32 +146,42 @@ public class Duke {
 
     private static void addTodo(String title) {
         Todo newTodo = new Todo(title);
+        tasks.add(newTodo);
         System.out.println("    ____________________________________________________________");
         System.out.println("     Got it. I've added this task:");
         System.out.println("       " + newTodo);
-        System.out.println("     Now you have " + (tasks.size() + 1) + " tasks in the list");
+        System.out.println("     Now you have " + tasks.size() + " tasks in the list");
         System.out.println("    ____________________________________________________________");
-        tasks.add(newTodo);
     }
 
     private static void addEvent(String title, String from, String to) {
         Event newEvent = new Event(title, from, to);
+        tasks.add(newEvent);
         System.out.println("    ____________________________________________________________");
         System.out.println("     Got it. I've added this task:");
         System.out.println("       " + newEvent);
-        System.out.println("     Now you have " + (tasks.size() + 1) + " tasks in the list");
+        System.out.println("     Now you have " + tasks.size() + " tasks in the list");
         System.out.println("    ____________________________________________________________");
-        tasks.add(newEvent);
     }
 
     private static void addDeadline(String title, String by) {
         Deadline newDeadline = new Deadline(title, by);
+        tasks.add(newDeadline);
         System.out.println("    ____________________________________________________________");
         System.out.println("     Got it. I've added this task:");
         System.out.println("       " + newDeadline);
-        System.out.println("     Now you have " + (tasks.size() + 1) + " tasks in the list");
+        System.out.println("     Now you have " + tasks.size() + " tasks in the list");
         System.out.println("    ____________________________________________________________");
-        tasks.add(newDeadline);
+    }
+
+    private static void deleteTask(int taskNum) {
+        Task selectedTask = tasks.get(taskNum - 1);
+        tasks.remove(selectedTask);
+        System.out.println("    ____________________________________________________________");
+        System.out.println("     Noted. I've removed this task:");
+        System.out.println("       " + selectedTask);
+        System.out.println("     Now you have " + tasks.size() + " tasks in the list");
+        System.out.println("    ____________________________________________________________");
     }
 
     private static void printTasks() {
