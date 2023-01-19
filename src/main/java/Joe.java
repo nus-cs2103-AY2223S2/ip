@@ -17,11 +17,16 @@ public class Joe {
         int inputLength = input.length;
         printNewLine();
         if (inputLength == 1 ) {
-            if (input[0].equals("list")) {
-                taskList.returnList();
-            } else if (input[0] == "bye") {
-                sayBye();
-            } else {
+            try {
+                if (input[0].equals("list")) {
+                    taskList.returnList();
+                } else if (input[0] == "bye") {
+                    sayBye();
+                } else {
+                    throw new UnknownCommandException();
+                }
+            } catch (UnknownCommandException e) {
+                System.out.println(e.getMessage());
             }
         } else if (inputLength > 1) {
             switch (input[0]) {

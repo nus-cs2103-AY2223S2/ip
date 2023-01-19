@@ -20,27 +20,35 @@ public class TaskList {
         String taskType = input[0];
         input = Arrays.copyOfRange(input, 1, input.length);
         String task = String.join(" ", input);
+        Integer taskLength = task.length();
         String[] tempArray;
-        switch (taskType) {
-            case "todo":
-                taskList.add(new ToDo(task, "T"));
-                break;
-            case "deadline":
-                tempArray = task.split(" /");
-                String byTime = tempArray[1];
-                byTime = byTime.substring(byTime.indexOf(" "), byTime.length());
-                task = tempArray[0];
-                taskList.add(new Deadline(tempArray[0], "D", byTime));
-                break;
-            case "event":
-                tempArray = task.split(" /");
-                String fromTime = tempArray[1];
-                fromTime = fromTime.substring(fromTime.indexOf(" "), fromTime.length());
-                String toTime = tempArray[2];
-                toTime = toTime.substring(toTime.indexOf(" "), toTime.length());
-                task = tempArray[0];
-                taskList.add(new Event(tempArray[0], "E", fromTime, toTime));
-                break;
+        try {
+            switch (taskType) {
+                case "todo":
+                    if (taskLength == 1) {
+                        throw new ToDoException();
+                    }
+                    taskList.add(new ToDo(task, "T"));
+                    break;
+                case "deadline":
+                    tempArray = task.split(" /");
+                    String byTime = tempArray[1];
+                    byTime = byTime.substring(byTime.indexOf(" "), byTime.length());
+                    task = tempArray[0];
+                    taskList.add(new Deadline(tempArray[0], "D", byTime));
+                    break;
+                case "event":
+                    tempArray = task.split(" /");
+                    String fromTime = tempArray[1];
+                    fromTime = fromTime.substring(fromTime.indexOf(" "), fromTime.length());
+                    String toTime = tempArray[2];
+                    toTime = toTime.substring(toTime.indexOf(" "), toTime.length());
+                    task = tempArray[0];
+                    taskList.add(new Event(tempArray[0], "E", fromTime, toTime));
+                    break;
+            }
+        } catch (ToDoException e) {
+            System.out.println(e.getMessage());
         }
         System.out.println("added: " + task);
         printNewLine();
@@ -67,6 +75,15 @@ public class TaskList {
         Task tempTask = taskList.get(i);
         tempTask.unmark();
         String output =  String.format("\tNice! I've marked this task as not done yet:\n\t  %s", tempTask);
+        System.out.println(output);
+    }
+
+    void delete(String index) {
+        int i = Integer.parseInt(index) - 1;
+        Task tempTask = taskList.get(i);
+        taskList.remove(i)
+        String output =  String.format("\tNoted. I've removed this task:\n\t  %s", tempTask);
+        output += String.format("\n\tNow you have %d tasks in the list.", taskList.size());
         System.out.println(output);
     }
 
