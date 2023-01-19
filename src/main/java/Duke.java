@@ -52,15 +52,12 @@ public class Duke {
     }
 
     public static void greeting() {
-        System.out.println(line);
-        System.out.println("    ____        _        \n" +
-                "   |  _ \\ _   _| | _____ \n" +
-                "   | | | | | | | |/ / _ \\\n" +
-                "   | |_| | |_| |   <  __/\n" +
-                "   |____/ \\__,_|_|\\_\\___|");
-        System.out.println("    Hello! I'm Duke");
-        System.out.println("    What can I do for you?");
-        System.out.println(line + "\n");
+        String logo = " ____        _        \n"
+                + "|  _ \\ _   _| | _____ \n"
+                + "| | | | | | | |/ / _ \\\n"
+                + "| |_| | |_| |   <  __/\n"
+                + "|____/ \\__,_|_|\\_\\___|\n";
+        System.out.println("Hello from\n" + logo);
     }
 
     public static void end() {
