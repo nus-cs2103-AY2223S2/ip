@@ -19,42 +19,59 @@ public class Duke {
 
         while (true) {
             input = sc.nextLine();
-            String output = "";
-            if (input.equals("bye")) {
-                printFormattedOutput(byeString);
-                break;
-            } else if (input.equals("list")) {
-                output = "Here are the tasks in your list:";
-                for (int i = 0; i < taskList.size(); ++i) {
-                    output += String.format("\n%d.%s", i + 1, taskList.get(i).toString());
+            try {
+                String output = "";
+                if (input.equals("bye")) {
+                    printFormattedOutput(byeString);
+                    break;
+                } else if (input.equals("list")) {
+                    output = "Here are the tasks in your list:";
+                    for (int i = 0; i < taskList.size(); ++i) {
+                        output += String.format("\n%d.%s", i + 1, taskList.get(i).toString());
+                    }
+                } else if (input.matches("mark \\d+")) {
+                    int index = Integer.parseInt(input.replace("mark ", "")) - 1;
+                    Task task = taskList.get(index);
+                    task.markAsDone();
+                    output = "Nice! I've marked this task as done:\n" + task.toString();
+                } else if (input.matches("unmark \\d+")) {
+                    int index = Integer.parseInt(input.replace("unmark ", "")) - 1;
+                    Task task = taskList.get(index);
+                    task.markAsUndone();
+                    output = "OK, I've marked this task as not done yet:\n" + task.toString();
+                } else if (input.startsWith("todo")) {
+                    String desc = input.replace("todo", "").trim();
+                    if (desc.isBlank()) {
+                        throw new DukeException("☹ OOPS!!! The description of a todo cannot be empty.");
+                    }
+                    Todo task = new Todo(desc);
+                    taskList.add(task);
+                    output = String.format(ADD_TASK_OUTPUT, task.toString(), taskList.size());
+                } else if (input.startsWith("deadline")) {
+                    String desc = input.replace("deadline", "").trim();
+                    if (desc.isBlank()) {
+                        throw new DukeException("☹ OOPS!!! The description of a deadline cannot be empty.");
+                    }
+                    String[] params = desc.split(" /by ");
+                    Deadline task = new Deadline(params[0], params[1]);
+                    taskList.add(task);
+                    output = String.format(ADD_TASK_OUTPUT, task.toString(), taskList.size());
+                } else if (input.startsWith("event")) {
+                    String desc = input.replace("event", "").trim();
+                    if (desc.isBlank()) {
+                        throw new DukeException("☹ OOPS!!! The description of an event cannot be empty.");
+                    }
+                    String[] params = desc.split("( /from | /to )");
+                    Event task = new Event(params[0], params[1], params[2]);
+                    taskList.add(task);
+                    output = String.format(ADD_TASK_OUTPUT, task.toString(), taskList.size());
+                } else {
+                    throw new DukeException("☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
                 }
-            } else if (input.matches("mark \\d+")) {
-                int index = Integer.parseInt(input.replace("mark ", "")) - 1;
-                Task task = taskList.get(index);
-                task.markAsDone();
-                output = "Nice! I've marked this task as done:\n" + task.toString();
-            } else if (input.matches("unmark \\d+")) {
-                int index = Integer.parseInt(input.replace("unmark ", "")) - 1;
-                Task task = taskList.get(index);
-                task.markAsUndone();
-                output = "OK, I've marked this task as not done yet:\n" + task.toString();
-            } else if (input.startsWith("todo ")){
-                String desc = input.replace("todo ", "");
-                Todo task = new Todo(desc);
-                taskList.add(task);
-                output = String.format(ADD_TASK_OUTPUT, task.toString(), taskList.size());
-            } else if (input.startsWith("deadline ")){
-                String[] params = input.replace("deadline ", "").split(" /by ");
-                Deadline task = new Deadline(params[0], params[1]);
-                taskList.add(task);
-                output = String.format(ADD_TASK_OUTPUT, task.toString(), taskList.size());
-            } else if (input.startsWith("event ")){
-                String[] params = input.replace("event ", "").split("( /from | /to )");
-                Event task = new Event(params[0], params[1], params[2]);
-                taskList.add(task);
-                output = String.format(ADD_TASK_OUTPUT, task.toString(), taskList.size());
+                printFormattedOutput(output);
+            } catch (DukeException dukeException) {
+                printFormattedOutput(dukeException.getMessage());
             }
-            printFormattedOutput(output);
         }
     }
 
