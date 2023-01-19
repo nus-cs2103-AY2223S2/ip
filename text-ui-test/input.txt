@@ -1,2 +1,16 @@
 todo homework
+test
+
+deadline sleep /by 12pm
+event group meeting /from 2pm /to 3pm
+deadline
+list
+mark 2
+event play game
+list
+delete 1
+todo
+mark 5
+delete 3
+66666666
 bye
