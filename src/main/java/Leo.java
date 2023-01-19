@@ -36,22 +36,16 @@ public class Leo {
         }
         System.out.println();
 
-        // if (cmd.equals("bye")) {
-        // System.out.println("It was nice talking, see you soon!");
-        // } else if (cmd.equals("list")){
-        // for (int i = 0; i < taskList.size(); i++) {
-        // System.out.printf("%d) %s\n", i + 1, taskList.get(i));
-        // }
-        // } else {
-        // addTask(cmd);
-        // System.out.println("added: " + cmd);
-        // }
-
         if (cmd.equals("bye")) {
             System.out.println("It was nice talking, see you soon!");
         } else if (cmd.equals("list")) {
-            for (int i = 0; i < taskList.size(); i++) {
-                System.out.printf("%d) %s\n", i + 1, taskList.get(i));
+            if (taskList.isEmpty()) {
+                System.out.println("You have no tasks to do!");
+            } else {
+                System.out.println("Here are your tasks, vamos!");
+                for (int i = 0; i < taskList.size(); i++) {
+                    System.out.printf("%d) %s\n", i + 1, taskList.get(i));
+                }
             }
         } else if (cmd.contains("mark")) {
             if (taskList.isEmpty()) {
@@ -81,21 +75,25 @@ public class Leo {
 
 class Task {
     private String taskName;
-    private char isDone = ' ';
+    private boolean isDone = false;
 
     public Task(String taskName) {
         this.taskName = taskName;
     }
 
     public void setDone() {
-        isDone = 'X';
+        isDone = true;
     }
 
     public void resetDone() {
-        isDone = ' ';
+        isDone = false;
+    }
+
+    public char getDone() {
+        return isDone ? 'X' : ' ';
     }
 
     public String toString() {
-        return String.format("[%c] %s", isDone, taskName);
+        return String.format("[%c] %s", getDone(), taskName);
     }
 }
