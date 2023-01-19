@@ -34,7 +34,7 @@ public class Duke {
                 String inputTask = array[1];
                 dukeList.findAndMark(inputTask, false);
             } else{
-                dukeList.add(currWord);
+                dukeList.add(array[0], array[1]);
             }
         }
     }

@@ -1,6 +1,10 @@
 public class Task {
     private String text;
     private boolean marked;
+    public Task() {
+        this.text = "";
+        marked = false;
+    }
     public Task(String text) {
         this.text = text;
     }
