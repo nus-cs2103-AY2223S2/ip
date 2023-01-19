@@ -14,6 +14,7 @@ public class Leo {
         new Leo().start();
     }
 
+
     public void start() throws LeoException{
         Scanner sc = new Scanner(System.in);
         String cmd = sc.nextLine(); // reads in command fed by user
@@ -111,30 +112,36 @@ public class Leo {
 }
 
 class Task {
+
+    enum Type {TODO, DEADLINE, EVENT};
+
     private String taskName;
     private boolean isDone = false;
-    private char type;
+    private Type type;
 
     private Task(String taskName, char type) {
         this.taskName = taskName;
-        this.type = type;
+        this.type = type == 'd' ? Type.DEADLINE : type == 'e' ? Type.EVENT : Type.TODO;
     }
 
+    private char getType() {
+        return type == Type.DEADLINE ? 'D' : type == Type.EVENT ? 'E' : 'T';
+    }
     public static Task createTask(String taskName, char type) throws LeoException {
         if (type == 'd') {
             String[] taskData = taskName.split("/");
             if (taskData.length <= 1) {
                 throw new MissingDeadlineException();
             }
-            return new Deadline(taskName.substring(9).split("/")[0], 'D', taskName.split("/")[1]);
+            return new Deadline(taskName.substring(9).split("/")[0], type, taskName.split("/")[1]);
         } if (type == 'e') { 
             String[] taskData = taskName.split("/");
             if (taskData.length < 3) {
                 throw new MissingTimelineException();
             }
-            return new Event(taskName.substring(6).split("/")[0], 'E', taskName.split("/")[1], taskName.split("/")[2]);
+            return new Event(taskName.substring(6).split("/")[0], type, taskName.split("/")[1], taskName.split("/")[2]);
         }
-        return new Todo(taskName.substring(5), 'T');
+        return new Todo(taskName.substring(5), type);
     }
 
     public void setDone() {
@@ -149,9 +156,6 @@ class Task {
         return isDone ? 'X' : ' ';
     }
 
-    public char getType() {
-        return type;
-    }
 
     @Override
     public String toString() {
