@@ -121,6 +121,21 @@ public class Duke {
         }
     }
 
+    public static void deleteTask(String command) throws DukeException {
+        int index = Integer.parseInt(command.split(" ")[1]);
+        try {
+            Task task = listOfTasks.get(index - 1);
+            listOfTasks.remove(index - 1);
+            printLine();
+            System.out.println("\tNoted. I've removed this task:");
+            System.out.println("\t  " + task.toString());
+            System.out.println("\tNow you have " + listOfTasks.size() + " tasks in the list.");
+            printLine();
+        } catch (IndexOutOfBoundsException e) {
+            throw new DukeException(index);
+        }
+    }
+
     public static String stringConverter(String[] arr, int start_idx, int end_idx) {
         StringBuilder str_build = new StringBuilder();
         String str;
@@ -150,6 +165,8 @@ public class Duke {
                 markTask(command);
             } else if (firstWord.equalsIgnoreCase("unmark")) {
                 unmarkTask(command);
+            } else if (firstWord.equalsIgnoreCase("delete")) {
+                deleteTask(command);
             } else {
                 saveTask(command);
             }
