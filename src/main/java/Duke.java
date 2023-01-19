@@ -3,19 +3,28 @@ import java.util.List;
 import java.util.Scanner;
 
 public class Duke {
+
+    private enum Commands {
+        bye,
+        mark,
+        todo,
+        deadline,
+        event,
+        delete,
+    }
     public static void main(String[] args) {
         introDuke();
         Scanner scanner = new Scanner(System.in);
         String word = scanner.nextLine();
         List<Task> listOfWords = new ArrayList<>();
-        while (!word.equals("bye")) {
+        while (!word.equals(Commands.bye.name())) {
             System.out.println("-".repeat(20));
             if (word.equals("list")) {
                 int count = 1;
                 for (Task words: listOfWords) {
                     System.out.println(count++ + words.toString());
                 }
-            } else if (word.startsWith("mark ")) {
+            } else if (word.startsWith(Commands.mark.name())) {
                 try {
                     int index = Integer.parseInt(word.substring(5));
                     Task task = listOfWords.get(--index);
@@ -27,7 +36,7 @@ public class Duke {
                     System.out.println("☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
                     System.out.println(word);
                 }
-            } else if (word.startsWith("deadline ")) {
+            } else if (word.startsWith(Commands.deadline.name())) {
                 String[] words = word.split("/", 2);
                 if (words.length == 2 && words[1].startsWith("by ")){
                     Task task = new Deadline(words[0].substring(9), words[1].substring(3));
@@ -37,10 +46,11 @@ public class Duke {
                     System.out.println("Command: " + word);
                 }
 
-            } else if (word.startsWith("todo ")) {
+            } else if (word.startsWith(Commands.todo.name())) {
                 Task task = new ToDo(word.substring(5));
                 addingTask(task, listOfWords);
-            } else if (word.startsWith("event ")) {
+
+            } else if (word.startsWith(Commands.event.name())) {
                 String[] words = word.split("/", 3);
                 if (words.length == 3 && words[1].startsWith("from ") && words[2].startsWith("to ")) {
                     Task task = new Event(words[0].substring(6), words[1].substring(5), words[2].substring(3));
@@ -49,7 +59,8 @@ public class Duke {
                     System.out.println("☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
                     System.out.println("Command: " + word);
                 }
-            } else if (word.startsWith("delete ")) {
+
+            } else if (word.startsWith(Commands.delete.name())) {
                 try {
                     int index = Integer.parseInt(word.substring(7));
                     Task task = listOfWords.remove(--index);
@@ -61,6 +72,7 @@ public class Duke {
                     System.out.println("☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
                     System.out.println(word);
                 }
+
             } else {
                 System.out.println("☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
                 System.out.println("Command: " + word);
