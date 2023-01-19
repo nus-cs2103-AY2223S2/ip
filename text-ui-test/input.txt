@@ -6,4 +6,21 @@ mark 1
 list
 unmark 1
 list
+t
+todo
+tdo drink water
+deadline
+deadline a
+deadline /by
+deadline a /by
+event
+event a
+event a /from
+event a /from /to
+event a /to 4
+event a /from 4
+event a /from 4 /to
+event /from
+event /from /to
+event /from 2 /to 4
 bye

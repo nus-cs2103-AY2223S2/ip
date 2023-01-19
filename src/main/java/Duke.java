@@ -31,7 +31,12 @@ public class Duke {
                 myList.unmark(index);
             }
             else {
-                myList.add(cmd);
+                try {
+                    myList.add(cmd);
+                }
+                catch (DukeException e) {
+                    System.out.println(e);
+                }
             }
         }
     }

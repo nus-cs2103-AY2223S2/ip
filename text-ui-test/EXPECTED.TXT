@@ -39,5 +39,56 @@ Here are the tasks in your list:
 2. [D][ ] do hw (by: Monday)
 3. [E][ ] cca (from: Jan 1 to: Jan 5)
 
+OPPS! I'm sorry, there is no such command.
+Please try again.
+
+OPPS! The description of a todo cannot be empty!
+Please try again.
+
+OPPS! I'm sorry, there is no such command.
+Please try again.
+
+OPPS! Please add the due date/time!
+Please try again.
+
+OPPS! Please add the due date/time!
+Please try again.
+
+OPPS! The description of a deadline cannot be empty!
+Please try again.
+
+OPPS! Please add the due date/time!
+Please try again.
+
+OPPS! Please make sure that the start and end date/time are not empty!
+Please try again.
+
+OPPS! Please make sure that the start and end date/time are not empty!
+Please try again.
+
+OPPS! Please make sure that the start and end date/time are not empty!
+Please try again.
+
+OPPS! Please make sure that the start and end date/time are not empty!
+Please try again.
+
+OPPS! Please make sure that the start and end date/time are not empty!
+Please try again.
+
+OPPS! Please make sure that the start and end date/time are not empty!
+Please try again.
+
+OPPS! Please make sure that the start and end date/time are not empty!
+Please try again.
+
+OPPS! Please make sure that the start and end date/time are not empty!
+Please try again.
+
+OPPS! The description of an event cannot be empty!
+Please try again.
+
+OPPS! The description of an event cannot be empty!
+Please try again.
+
 Bye! Hope to see you again soon!
 
