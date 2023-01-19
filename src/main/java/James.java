@@ -76,6 +76,18 @@ public class James {
                } catch(JamesException e) {
                     System.out.println(e.getMessage());
                 }
+            } else if (input.startsWith("delete")) {
+                    try {
+                        int index = Integer.parseInt(input.substring(7)) - 1;
+                        Task deletedinput = inputs.remove(index);
+                        System.out.println("Noted. I've removed this task:");
+                        System.out.println("  " + deletedinput);
+                        System.out.println("Now you have " + inputs.size() + " tasks in the list.");
+                    } catch (NumberFormatException e) {
+                        System.out.println("OOPS!!! Invalid input. Please enter a valid number for the task index.");
+                    } catch (IndexOutOfBoundsException e) {
+                        System.out.println("OOPS!!! Invalid task index. Please enter a valid number for the task index.");
+                    }
             }
             else {
                 System.out.println("OOPS!!! I'm sorry, but I don't know what that means :-(");
