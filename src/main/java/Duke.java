@@ -4,6 +4,9 @@ import java.util.List;
 import java.util.Scanner;
 
 public class Duke {
+    enum TypeOfTask {
+        TODO, DEADLINE, EVENT
+    }
     private static List<Task> listOfTasks = new ArrayList<>();
 
     public static void printLine(){
@@ -23,61 +26,75 @@ public class Duke {
     }
 
     public static void saveTask(String command) throws DukeException {
-        int start_idx, end_idx;
+        int startIdx, endIdx;
         Task task;
         String description, by, from, to;
         String[] input = command.split(" ");
+        TypeOfTask taskType = null;
 
         if (input[0].equalsIgnoreCase("todo")) {
-            start_idx = 1;
-            end_idx = input.length;
-            description = stringConverter(input, start_idx, end_idx);
-            if (description.isBlank()) {
-                throw new DukeException(input[0]);
-            }
-
-            task = new Todo(description);
-
+            taskType = TypeOfTask.TODO;
         } else if (input[0].equalsIgnoreCase("deadline")) {
-            start_idx = 1;
-            end_idx = Arrays.asList(input).indexOf("/by");
-            description = stringConverter(input, start_idx, end_idx);
-            if (description.isBlank()) {
-                throw new DukeException(input[0]);
-            }
-
-            start_idx = end_idx + 1;
-            end_idx = input.length;
-            by = stringConverter(input, start_idx, end_idx);
-
-            task = new Deadline(description, by);
-
+            taskType = TypeOfTask.DEADLINE;
         } else if (input[0].equalsIgnoreCase("event")) {
-            start_idx = 1;
-            end_idx = Arrays.asList(input).indexOf("/from");
-            description = stringConverter(input, start_idx, end_idx);
-            if (description.isBlank()) {
-                throw new DukeException(input[0]);
+            taskType = TypeOfTask.EVENT;
+        }
+
+        try {
+            switch (taskType) {
+            case TODO:
+                startIdx = 1;
+                endIdx = input.length;
+                description = stringConverter(input, startIdx, endIdx);
+                if (description.isBlank()) {
+                    throw new DukeException(input[0]);
+                }
+
+                task = new Todo(description);
+                break;
+            case DEADLINE:
+                startIdx = 1;
+                endIdx = Arrays.asList(input).indexOf("/by");
+                description = stringConverter(input, startIdx, endIdx);
+                if (description.isBlank()) {
+                    throw new DukeException(input[0]);
+                }
+
+                startIdx = endIdx + 1;
+                endIdx = input.length;
+                by = stringConverter(input, startIdx, endIdx);
+
+                task = new Deadline(description, by);
+                break;
+            case EVENT:
+                startIdx = 1;
+                endIdx = Arrays.asList(input).indexOf("/from");
+                description = stringConverter(input, startIdx, endIdx);
+                if (description.isBlank()) {
+                    throw new DukeException(input[0]);
+                }
+
+                startIdx = endIdx + 1;
+                endIdx = Arrays.asList(input).indexOf("/to");
+                from = stringConverter(input, startIdx, endIdx);
+
+                startIdx = endIdx + 1;
+                endIdx = input.length;
+                to = stringConverter(input, startIdx, endIdx);
+
+                task = new Event(description, from, to);
+                break;
+            default:
+                throw new DukeException();
             }
-
-            start_idx = end_idx + 1;
-            end_idx = Arrays.asList(input).indexOf("/to");
-            from = stringConverter(input, start_idx, end_idx);
-
-            start_idx = end_idx + 1;
-            end_idx = input.length;
-            to = stringConverter(input, start_idx, end_idx);
-
-            task = new Event(description, from, to);
-
-        } else {
+        } catch (NullPointerException e) {
             throw new DukeException();
         }
 
         listOfTasks.add(task);
         printLine();
         System.out.println("\tGot it. I've added this task:");
-        System.out.println("\t  " + task.toString());
+        System.out.println("\t  " + task);
         System.out.println("\tNow you have " + listOfTasks.size() + " tasks in the list.");
         printLine();
     }
@@ -88,7 +105,7 @@ public class Duke {
         System.out.println("\tHere are the tasks in your list:");
         for (int i = 1; i <= listOfTasks.size(); i++) {
             task = listOfTasks.get(i - 1);
-            System.out.println("\t" + i + "." + task.toString());
+            System.out.println("\t" + i + "." + task);
         }
         printLine();
     }
@@ -100,7 +117,7 @@ public class Duke {
             task.markAsDone();
             printLine();
             System.out.println("\tNice! I've marked this task as done:");
-            System.out.println("\t  " + task.toString());
+            System.out.println("\t  " + task);
             printLine();
         } catch (IndexOutOfBoundsException e) {
             throw new DukeException(index);
@@ -114,7 +131,7 @@ public class Duke {
             task.markAsUndone();
             printLine();
             System.out.println("\tOK, I've marked this task as not done yet:");
-            System.out.println("\t  " + task.toString());
+            System.out.println("\t  " + task);
             printLine();
         } catch (IndexOutOfBoundsException e) {
             throw new DukeException(index);
@@ -128,7 +145,7 @@ public class Duke {
             listOfTasks.remove(index - 1);
             printLine();
             System.out.println("\tNoted. I've removed this task:");
-            System.out.println("\t  " + task.toString());
+            System.out.println("\t  " + task);
             System.out.println("\tNow you have " + listOfTasks.size() + " tasks in the list.");
             printLine();
         } catch (IndexOutOfBoundsException e) {
@@ -136,21 +153,22 @@ public class Duke {
         }
     }
 
-    public static String stringConverter(String[] arr, int start_idx, int end_idx) {
-        StringBuilder str_build = new StringBuilder();
+    public static String stringConverter(String[] arr, int startIdx, int endIdx) {
+        StringBuilder strBuild = new StringBuilder();
         String str;
-        for (int i = start_idx; i < end_idx; i++) {
-            str_build.append(arr[i]);
-            if (i == end_idx - 1) { break; }
-            str_build.append(" ");
+        for (int i = startIdx; i < endIdx; i++) {
+            strBuild.append(arr[i]);
+            if (i == endIdx - 1) {
+                break;
+            }
+            strBuild.append(" ");
         }
-        str = str_build.toString();
+        str = strBuild.toString();
         return str;
     }
 
     public static void main(String[] args) throws DukeException {
         Scanner input = new Scanner(System.in);
-        int index;
         String command, firstWord;
         greet();
         while (true) {
