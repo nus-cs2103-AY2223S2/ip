@@ -1,8 +1,66 @@
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.HashSet;
+import java.util.Map;
 import java.util.Scanner;
+import java.util.Set;
 
 public class Duke {
+    private Set<String> commandMap = new HashSet<>(){{
+        add("list");
+        add("mark");
+        add("unmark");
+        add("todo");
+        add("deadline");
+        add("event");
+        add("bye");
+    }};
+
+    private static boolean isNumeric(String str) {
+        try {  
+            Double.parseDouble(str);  
+            return true;
+        } catch(NumberFormatException e){  
+            return false;  
+        }  
+    }
+
+    public String[] checkInput(String[] input) throws DukeException {
+        //Empty commands
+        if(input == null) {
+            throw new DukeException(0);
+        }
+
+        //Invalid command
+        if(!commandMap.contains(input[0]) || input.length > 2 && (input[0].equals("mark") || input[0].equals("unmark"))) {
+            throw new DukeException(1);
+        }
+
+        //Empty parameters
+        if(input.length == 1) {
+            throw new DukeException(2);
+        }
+
+        //Non-numerical parameters
+        if(input[0].equals("mark") || input[0].equals("unmark")) {
+            if(!isNumeric(input[1])) throw new DukeException(3); 
+        }
+
+        if(input[0].equals("deadline") || input[0].equals("event")) {
+            boolean hasBy, hasFrom, hasTo;
+
+            for (String s : input) {
+                if(s.equals("/by")) hasBy = true;
+                if(s.equals("/from")) hasFrom = true;
+                if(s.equals("/to")) hasTo = true;
+            }
+
+            if(!hasBy || (hasFrom && !hasTo))
+        }
+
+        return input;
+    }
+
     public static void main(String[] args) {
         Scanner inputScanner = new Scanner(System.in);
         ArrayList<Task> lists = new ArrayList<>();
@@ -20,8 +78,12 @@ public class Duke {
 
 
         while (loop) {
-        String[] input = inputScanner.nextLine().split(" ", 10);
-
+        try {
+            String[] input = inputScanner.nextLine().split(" ", 10);
+        }catch (DukeException e) {
+            System.out.println(e);
+        }
+        
         System.out.println(bracket);
         switch(input[0]) {
             case "list":
