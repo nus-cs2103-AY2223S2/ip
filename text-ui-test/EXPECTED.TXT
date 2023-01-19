@@ -1,37 +1,69 @@
-Hello! I'm Duke
-What can I do for you?
+====================================
+HEY! I'm GRUMMY!
+How can I help you :>
+====================================
+====================================
 Got it. I've added this task:
     [T][ ] read book
 Now you have 1 task in the list.
-Here are the tasks in your list:
-1.[T][ ] read book
-Nice! I've marked this task as done:
+====================================
+====================================
+Here are your tasks:
+    1. [T][ ] read book
+====================================
+====================================
+OK, marking this task as complete:
     [T][X] read book
-Here are the tasks in your list:
-1.[T][X] read book
-OK, I've marked this task as not done yet:
+====================================
+====================================
+Here are your tasks:
+    1. [T][X] read book
+====================================
+====================================
+OK, marking this task as not done yet:
     [T][ ] read book
-Here are the tasks in your list:
-1.[T][ ] read book
-Noted. I've removed this task:
+====================================
+====================================
+Here are your tasks:
+    1. [T][ ] read book
+====================================
+====================================
+Noted, removing this task.
     [T][ ] read book
 You have no tasks in the list.
-You have no tasks. Hooray!
+====================================
+====================================
+HEY! You have no tasks. Hooray!
+====================================
+====================================
 Got it. I've added this task:
     [D][ ] read book (by: today)
 Now you have 1 task in the list.
-Here are the tasks in your list:
-1.[D][ ] read book (by: today)
+====================================
+====================================
+Here are your tasks:
+    1. [D][ ] read book (by: today)
+====================================
+====================================
 Got it. I've added this task:
     [E][ ] be stonk (from: today to: forever)
 Now you have 2 tasks in the list.
-Here are the tasks in your list:
-1.[D][ ] read book (by: today)
-2.[E][ ] be stonk (from: today to: forever)
-Nice! I've marked this task as done:
+====================================
+====================================
+Here are your tasks:
+    1. [D][ ] read book (by: today)
+    2. [E][ ] be stonk (from: today to: forever)
+====================================
+====================================
+OK, marking this task as complete:
     [E][X] be stonk (from: today to: forever)
-Nice! I've marked this task as done:
+====================================
+====================================
+OK, marking this task as complete:
     [D][X] read book (by: today)
-Here are the tasks in your list:
-1.[D][X] read book (by: today)
-2.[E][X] be stonk (from: today to: forever)
+====================================
+====================================
+Here are your tasks:
+    1. [D][X] read book (by: today)
+    2. [E][X] be stonk (from: today to: forever)
+====================================
