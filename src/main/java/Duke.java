@@ -1,7 +1,6 @@
-import java.util.Locale;
 import java.util.Scanner;
 
-public class Duke {
+public class Duke{
     private static final String EXIT_PROGRAM = "bye";
     private static final String LIST_TASKS = "list";
     private static final String TODO = "todo";
@@ -13,7 +12,7 @@ public class Duke {
     private static final TaskList tasks = new TaskList();
     private static final Scanner sc = new Scanner(System.in);
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws DukeException {
         greetings();
         acceptCommands();
         exit();
@@ -29,71 +28,90 @@ public class Duke {
                 + "What can I do for you today?");
     }
 
-    private static void acceptCommands() {
+    private static void acceptCommands() throws DukeException {
         String command = sc.nextLine();
         while (!command.equals(EXIT_PROGRAM)) {
-            String[] commandList = command.split(" ");
-            String type = commandList[0].toLowerCase();
+            try {
+                String[] commandList = command.split(" ");
+                String type = commandList[0].toLowerCase();
 
-            switch(type) {
-                case LIST_TASKS: {
-                    if (tasks.size() < 1) {
-                        System.out.println("You have not added any tasks yet!");
-                    } else {
-                        System.out.println(tasks);
+                switch(type) {
+                    case LIST_TASKS: {
+                        if (tasks.size() < 1) {
+                            System.out.println("You have not added any tasks yet!");
+                        } else {
+                            System.out.println(tasks);
+                        }
+                        break;
                     }
-                    break;
-                }
-                case DEADLINE: {
-                    String[] parseCommand = command.split("/by");
-                    String name = parseCommand[0].replaceFirst("deadline ", "");
-                    String by = parseCommand[1].strip();
-                    tasks.addTask(new Deadline(name, by));
-                    break;
-                }
-                case TODO: {
-                    tasks.addTask(new ToDo(command.replaceFirst("todo ", "").strip()));
-                    break;
-                }
-                case EVENT: {
-                    String[] parseCommand = command.split("/from");
-                    String name = parseCommand[0].replaceFirst("event ", "");
-                    parseCommand = parseCommand[1].split("/to");
-                    String from = parseCommand[0].strip();
-                    String by = parseCommand[1].strip();
-                    tasks.addTask(new Event(name, from, by));
-                    break;
-                }
-                case MARK: {
-                    int index = Integer.parseInt(commandList[1]);
-                    if (index > tasks.size() || index <= 0) {
-                        System.out.println("There is no task at index " + index + "!");
-                    } else {
-                        Task task = tasks.get(index - 1);
-                        task.markAsDone();
-                        System.out.println("Good job! I have marked this task as done! \n" + task);
+                    case DEADLINE: {
+                        if (commandList.length <= 1) {
+                            throw new DukeException("Please give a name for your deadline!");
+                        } else if (!command.contains(" /by ")) {
+                            throw new DukeException("Please give a date/time for your deadline!");
+                        }
+                        String[] parseCommand = command.split("/by");
+                        String name = parseCommand[0].replaceFirst("deadline ", "");
+                        String by = parseCommand[1].strip();
+                        tasks.addTask(new Deadline(name, by));
+                        break;
                     }
-                    break;
-                }
-                case UNMARK: {
-                    int index = Integer.parseInt(commandList[1]);
-                    if (index > tasks.size() || index <= 0) {
-                        System.out.println("There is no task at index " + index + "!");
-                    } else {
-                        Task task = tasks.get(index - 1);
-                        task.markAsUndone();
-                        System.out.println("Oof! I have marked this task as undone for you! \n" + task);
+                    case TODO: {
+                        if (commandList.length <= 1) {
+                            throw new DukeException("Please give a name for your ToDo task!");
+                        }
+                        tasks.addTask(new ToDo(command.replaceFirst("todo ", "").strip()));
+                        break;
                     }
-                    break;
-                }
-                default:
-                    System.out.println("Sorry, that command is not recognised. \n" +
-                            "Maybe you could contact @dsja612 on github to request for more types of commands :)");
+                    case EVENT: {
+                        if (commandList.length <= 1) {
+                            throw new DukeException("Please give a name for your event!");
+                        } else if (!command.contains(" /from ")) {
+                            throw new DukeException("Please give a starting date/time for your event!");
+                        } else if (!command.contains(" /to ")) {
+                            throw new DukeException("Please give an ending date/time for your event!");
+                        }
+                        String[] parseCommand = command.split("/from");
+                        String name = parseCommand[0].replaceFirst("event ", "");
+                        parseCommand = parseCommand[1].split("/to");
+                        String from = parseCommand[0].strip();
+                        String by = parseCommand[1].strip();
+                        tasks.addTask(new Event(name, from, by));
+                        break;
+                    }
+                    case MARK: {
+                        int index = Integer.parseInt(commandList[1]);
+                        if (index > tasks.size() || index <= 0) {
+                            System.out.println("There is no task at index " + index + "!");
+                        } else {
+                            Task task = tasks.get(index - 1);
+                            task.markAsDone();
+                            System.out.println("Good job! I have marked this task as done! \n" + "\t" + task);
+                        }
+                        break;
+                    }
+                    case UNMARK: {
+                        int index = Integer.parseInt(commandList[1]);
+                        if (index > tasks.size() || index <= 0) {
+                            System.out.println("There is no task at index " + index + "!");
+                        } else {
+                            Task task = tasks.get(index - 1);
+                            task.markAsUndone();
+                            System.out.println("Oof! I have marked this task as undone for you! \n" + task);
+                        }
+                        break;
+                    }
+                    default:
+                        System.out.println("Sorry, that command is not recognised. \n" +
+                                "Maybe you could contact @dsja612 on github to request for more types of commands :)");
 
+                }
+            } catch (DukeException e) {
+                System.out.println(e);
+                sc.reset();
             }
             command = sc.nextLine();
         }
-
         sc.close();
     }
 

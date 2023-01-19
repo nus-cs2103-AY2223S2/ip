@@ -10,6 +10,7 @@ public class TaskList {
     public void addTask(Task task) {
         this.taskList.add(task);
         System.out.println("Added task: " + task);
+        System.out.println("You now have " + this.size() + " task(s) in your list.");
     }
 
     public int size() {
