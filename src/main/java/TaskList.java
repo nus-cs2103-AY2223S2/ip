@@ -32,7 +32,7 @@ public class TaskList {
         System.out.println(String.format("Now have %d items.", this.tasks.size()));
     }
 
-    public void addItem(String taskType, String content) {
+    public void addItem(TaskType taskType, String content) {
         /**
          * Adds to the list if there is space.
          * @param item the string to add to the list.

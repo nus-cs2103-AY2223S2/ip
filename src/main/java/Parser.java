@@ -1,4 +1,5 @@
 public class Parser {
+
     public Parser() {
 
     }
@@ -24,7 +25,7 @@ public class Parser {
             case "todo":
             case "deadline":
             case "event":
-                taskList.addItem(firstWord, response);
+                taskList.addItem(TaskType.valueOf(firstWord.toUpperCase()), response);
                 break;
             default:
                 System.out.println("HUH? What you say?.");

@@ -8,7 +8,7 @@ public abstract class Task {
         this.content = content;
     }
 
-    public static Task create(String taskType, String content) {
+    public static Task create(TaskType taskType, String content) {
         /**
          * @param taskType whether it is a Todo, Deadline or Event.
          * @param content what to put in the task.
@@ -16,11 +16,11 @@ public abstract class Task {
          */
         String[] taskTypeAndContent = Parser.handleMissingField(content, " ","content", "Task Creation");
         switch (taskType) {
-        case "todo":
+        case TODO:
             return Todo.create(taskTypeAndContent[1]);
-        case "deadline":
+        case DEADLINE:
             return Deadline.create(taskTypeAndContent[1]);
-        case "event":
+        case EVENT:
             return Event.create(taskTypeAndContent[1]);
         default:
             return null;
