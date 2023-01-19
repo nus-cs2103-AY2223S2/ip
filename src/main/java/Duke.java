@@ -114,6 +114,17 @@ public class Duke {
                             System.out.println(e);
                             System.out.println("Now you have " + task_list.size() + " tasks in the list.");
                             break;
+                        case "delete":
+                            try {
+                                int index = Integer.parseInt(segments[1]) - 1;
+                                System.out.println("Noted. I've removed this task:");
+                                System.out.println(task_list.get(index));
+                                task_list.remove(index);
+                                System.out.println("Now you have " + task_list.size() + " tasks in the list.");
+                            } catch (IndexOutOfBoundsException a) {
+                                System.out.println("OOPS!!! You can not delete air~");
+                            }
+                            break;
                         default:
                             System.out.println("OOPS!!! I'm sorry, but I don't know what that means :-(");
                     }
