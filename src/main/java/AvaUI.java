@@ -19,6 +19,7 @@ public class AvaUI {
     private final String ADD_TASK_MESSAGE = "Added this task for you:";
     private final String MARK_TASK_MESSAGE = "Yayy! One more task done:";
     private final String UNMARK_TASK_MESSAGE = "Ahh! More work to be done on this task:";
+    private final String DELETE_TASK_MESSAGE = "Oof! I have deleted this task:";
     private final String EXIT_MESSAGE = "Have a nice day !!";
 
     //App Variables
@@ -36,29 +37,28 @@ public class AvaUI {
      */
     public void intialise() {
         this.displayIntro();
-        boolean done = false;
         Scanner myObj = new Scanner(System.in);
 
-        while (!done) {
+        while (true) {
             try {
                 this.ask();
                 String input = myObj.nextLine().toLowerCase();
+                String output = "";
                 if (input.contains("bye")){
-                    done = true;
                     this.displayExit();
+                    break;
                 } else if(input.contains("list")) {
-                    String output = this.LIST_MESSAGE + "\n" + this.tasks.formatTasks(FORMAT_SPACE);
-                    this.displayOutput(output);
+                    output = this.LIST_MESSAGE + "\n" + this.tasks.formatTasks(FORMAT_SPACE);
                 } else if (input.contains("unmark")){
-                    String output = this.UNMARK_TASK_MESSAGE + "\n" + this.tasks.toggleTask(input, FORMAT_SPACE);
-                    this.displayOutput(output);
+                    output = this.UNMARK_TASK_MESSAGE + "\n" + this.tasks.toggleTask(input, FORMAT_SPACE);
                 } else if (input.contains("mark")) {
-                    String output = this.MARK_TASK_MESSAGE + "\n" + this.tasks.toggleTask(input, FORMAT_SPACE);
-                    this.displayOutput(output);
-                }  else {
-                    String output = this.ADD_TASK_MESSAGE + "\n" + this.tasks.addTasks(input, FORMAT_SPACE);
-                    this.displayOutput(output);
+                    output = this.MARK_TASK_MESSAGE + "\n" + this.tasks.toggleTask(input, FORMAT_SPACE);
+                }  else if(input.contains("delete")) {
+                    output = this.DELETE_TASK_MESSAGE + "\n" + this.tasks.deleteTask(input, FORMAT_SPACE);
+                } else {
+                    output = this.ADD_TASK_MESSAGE + "\n" + this.tasks.addTasks(input, FORMAT_SPACE);
                 }
+                this.displayOutput(output);
             } catch (AvaException e){
                 this.displayOutput(e.getMessage());
             }

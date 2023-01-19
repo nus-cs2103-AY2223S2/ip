@@ -1,4 +1,8 @@
-public class Event extends Task{
+package Tasks;
+
+import Tasks.Task;
+
+public class Event extends Task {
     private final String TASK_SIGN = "[E]";
     private String from;
     private String to;

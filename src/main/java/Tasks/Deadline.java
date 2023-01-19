@@ -1,4 +1,8 @@
-public class Deadline extends Task{
+package Tasks;
+
+import Tasks.Task;
+
+public class Deadline extends Task {
     private final String TASK_SIGN = "[D]";
     private String by;
 

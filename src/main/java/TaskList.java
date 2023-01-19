@@ -1,8 +1,15 @@
 import Exceptions.CommandNotFoundException;
 import Exceptions.NonExistentTask;
+import Tasks.Deadline;
+import Tasks.Event;
+import Tasks.Task;
+import Tasks.Todo;
+
+import java.util.ArrayList;
+
 
 public class TaskList {
-    private Task[] tasks = new Task[100];
+    private  ArrayList<Task> tasks = new ArrayList<>();
     private int taskCount = 0;
 
     /**
@@ -17,23 +24,40 @@ public class TaskList {
             throw new CommandNotFoundException(input);
         }
         String message = splitCommand[1];
-
+        Task newTask = null;
         if (command.equals("todo")) {
-            tasks[taskCount] = new Todo(message);
+            newTask = new Todo(message);
         } else if (command.equals("deadline")) {
             String[] parsedMessage = this.parseDeadline(message);
-            tasks[taskCount] = new Deadline(parsedMessage[0] , parsedMessage[1]);
+            newTask = new Deadline(parsedMessage[0] , parsedMessage[1]);
         } else if (command.equals("event")) {
             String[] parsedMessage = this.parseEvent(message);
-            tasks[taskCount] = new Event(parsedMessage[0] , parsedMessage[1], parsedMessage[2]);
+            newTask = new Event(parsedMessage[0] , parsedMessage[1], parsedMessage[2]);
         } else {
             // Throw Error
             throw new CommandNotFoundException(input);
         }
+        tasks.add(newTask);
         taskCount++;
-        return formatSpace + tasks[taskCount - 1].getRepresentation();
+        return formatSpace + tasks.get(taskCount - 1).getRepresentation();
     }
 
+    public String deleteTask(String input,String formatSpace) throws NonExistentTask,CommandNotFoundException {
+        String[] parseInput = input.trim().split(" ",2);
+        Task temp = null;
+        if (parseInput.length == 1 || Integer.parseInt(parseInput[1].trim()) - 1 >= this.taskCount) {
+            throw new NonExistentTask(input);
+        }
+        int index = Integer.parseInt(parseInput[1].trim()) - 1;
+        if (parseInput[0].toLowerCase().equals("delete")) {
+            temp = tasks.get(index);
+            tasks.remove(index);
+            taskCount--;
+        } else {
+            throw new CommandNotFoundException(input);
+        }
+        return formatSpace + temp.getRepresentation();
+    }
     /**
      *
      * @param input
@@ -47,15 +71,14 @@ public class TaskList {
         }
         int index =  Integer.parseInt(parseInput[1].trim()) - 1;
          if (parseInput[0].toLowerCase().equals("unmark")) {
-            tasks[index].unmark();
-            return formatSpace + tasks[index].getRepresentation();
+            tasks.get(index).unmark();
         } else if (parseInput[0].toLowerCase().equals("mark")) {
-            tasks[index].mark();
-            return formatSpace + tasks[index].getRepresentation();
+            tasks.get(index).mark();
         }else {
             // Uknown Command
             throw new CommandNotFoundException(input);
         }
+        return formatSpace + tasks.get(index).getRepresentation();
     }
 
     /**
@@ -66,7 +89,7 @@ public class TaskList {
     public String formatTasks(String formatSpace) {
         String  res = "";
         for (int i = 0; i < taskCount; i++){
-                res +=  formatSpace + i + ". " + tasks[i].getRepresentation() + "\n";
+                res +=  formatSpace + i + ". " + tasks.get(i).getRepresentation() + "\n";
         }
         return res;
     }
