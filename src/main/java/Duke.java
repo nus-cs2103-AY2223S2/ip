@@ -13,47 +13,57 @@ public class Duke {
         System.out.println("I am Duke the Chatbot!\nHow may i help you today?\n");
         StorageList s = new StorageList();
 
-        try {
-            while (scanner.hasNextLine()) {
-                String line = scanner.nextLine();
-                String[] checker = line.split(" ");
-                if (line.toLowerCase().equals("bye")) {
-                    System.out.println("See you soon!");
-                    break;
-                } else if (line.toLowerCase().equals("list")) {
-                    s.printList();
-                } else if (checker[0].toLowerCase().equals("mark")) {
-                    int tasknumber = Integer.valueOf(checker[1]) - 1;
-                    s.markTask(tasknumber);
-                } else if (checker[0].toLowerCase().equals("unmark")) {
-                    int tasknumber = Integer.valueOf(checker[1]) - 1;
-                    s.unmarkTask(tasknumber);
-                } else {
-                    if (checker[0].toLowerCase().equals("todo")) {
+        while (scanner.hasNextLine()) {
+            String line = scanner.nextLine();
+            String[] checker = line.split(" ");
+            String type = checker[0].toLowerCase().trim();
+
+            try {
+                System.out.println(type);
+                Commands command = Commands.valueOf(type);
+                switch (command) {
+                    case bye:
+                        System.out.println("See you soon!");
+                        return;
+                    case list:
+                        s.printList();
+                        break;
+                    case mark:
+                        int tasknumbermark = Integer.valueOf(checker[1]) - 1;
+                        s.markTask(tasknumbermark);
+                        break;
+                    case unmark:
+                        int tasknumberunmark = Integer.valueOf(checker[1]) - 1;
+                        s.unmarkTask(tasknumberunmark);
+                        break;
+                    case todo:
                         String[] checker2 = line.split("todo ");
                         s.addTodo(checker2[1]);
-                    } else if (checker[0].toLowerCase().equals("deadline")) {
-                        String[] checker2 = line.split("/by ");
-                        String[] checker3 = checker2[0].split("deadline ");
-                        s.addDeadline(checker3[1], checker2[1]);
-                    } else if (checker[0].toLowerCase().equals("event")) {
-                        String[] checker2 = line.split("/");
-                        String[] checker3 = checker2[0].split("event ");
-                        String[] checker4 = checker2[1].split("from ");
-                        String[] checker5 = checker2[2].split("to ");
-                        s.addEvent(checker3[1], checker4[1], checker5[1]);
-                    } else if (checker[0].toLowerCase().equals("delete")) {
-                        int tasknumber = Integer.valueOf(checker[1]) - 1;
-                        s.deleteTask(tasknumber);
-                    } else {
-                        throw new DukeException("☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
-                    }
-                    System.out.println("Now you have " + s.lengthOflist() + " tasks in your list.\n");
-
+                        break;
+                    case deadline:
+                        String[] checkerby = line.split("/by ");
+                        String[] checkerdeadline = checkerby[0].split("deadline ");
+                        s.addDeadline(checkerdeadline[1], checkerby[1]);
+                        break;
+                    case event:
+                        String[] checkerslash = line.split("/");
+                        String[] checkerevent = checkerslash[0].split("event ");
+                        String[] checker4 = checkerslash[1].split("from ");
+                        String[] checker5 = checkerslash[2].split("to ");
+                        s.addEvent(checkerevent[1], checker4[1], checker5[1]);
+                        break;
+                    case delete:
+                        int tasknumberdel = Integer.valueOf(checker[1]) - 1;
+                        s.deleteTask(tasknumberdel);
+                        break;
                 }
+            } catch (ArrayIndexOutOfBoundsException e) {
+                throw new DukeException("☹ OOPS!!! The description of a todo cannot be empty.");
+            } catch (IllegalArgumentException e) {
+                throw new DukeException("☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
+            } finally {
+                System.out.println("Now you have " + s.lengthOflist() + " tasks in your list.\n");
             }
-        } catch (ArrayIndexOutOfBoundsException e) {
-            throw new DukeException("☹ OOPS!!! The description of a todo cannot be empty.");
         }
 
 
