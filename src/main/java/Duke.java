@@ -9,7 +9,7 @@ public class Duke {
                 + "|____/ \\__,_|_|\\_\\___|\n";
         System.out.println("Hello from\n" + logo);
         System.out.println("\nHello, I'm Duke");
-        System.out.println("What can I do for you?");
+        System.out.pgi rintln("What can I do for you?");
         Scanner sc = new Scanner(System.in);
         String bye = "bye";
         String s = "";
