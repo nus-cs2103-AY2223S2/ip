@@ -59,7 +59,7 @@ public class Commands {
             throw new DukeException("The description of a deadline cannot be empty.");
         }
         if (!input.contains(" /by ")) {
-            throw new DukeException("\tPlease use the format: deadline <description> /by <time>");
+            throw new DukeException("Please use the format: deadline <description> /by <time>");
         }
         String[] splitInput = input.split(" ", 2)[1].split(" /by ");
         String description = splitInput[0];
@@ -73,13 +73,13 @@ public class Commands {
             throw new DukeException("The description of an event cannot be empty.");
         }
         if (!input.contains(" /from ") || !input.contains(" /to ")) {
-            throw new DukeException("\tPlease use the format: event <description> /from <time> /to <time>");
+            throw new DukeException("Please use the format: event <description> /from <time> /to <time>");
         }
         String[] splitInput = input.split(" ", 2)[1].split(" /from ");
         String description = splitInput[0];
         String[] splitTime = splitInput[1].split(" /to ");
         if (splitTime.length != 2) {
-            throw new DukeException("\tPlease use the format: event <description> /from <time> /to <time>");
+            throw new DukeException("Please use the format: event <description> /from <time> /to <time>");
         }
         String from = splitTime[0];
         String to = splitTime[1];

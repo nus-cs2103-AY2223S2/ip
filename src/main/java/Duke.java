@@ -40,6 +40,7 @@ public class Duke {
 
         while (!userInput.equals("bye")) {
             Action taskType = Action.getAction(userInput.split(" ")[0]);
+            System.out.println("\t____________________________________________________________");
             try {
                 switch (taskType) {
                     case LIST:
@@ -64,14 +65,13 @@ public class Duke {
                         commands.addEventTask(userInput);
                         break;
                     case ERROR: {
-                        System.out.println("\t____________________________________________________________");
                         System.out.println("\t☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
-                        System.out.println("\t____________________________________________________________");
                     }
                 }
             } catch (DukeException e) {
                 System.out.println(e.getMessage());
             } finally {
+                System.out.println("\t____________________________________________________________");
                 userInput = sc.nextLine().strip();
             }
         }
