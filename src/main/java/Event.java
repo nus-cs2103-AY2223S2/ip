@@ -9,6 +9,7 @@ public class Event extends Task {
         this.end = end;
     }
 
+    @Override
     protected String getTaskType() {
         return "E";
     }
