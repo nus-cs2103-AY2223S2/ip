@@ -41,6 +41,7 @@ public class Duke {
           while(tokens.hasMoreTokens()) {
             keyword = keyword + " " + tokens.nextToken();
           }
+          keyword = keyword.strip();
 
           switch(action) {                            //For instructions with argument(s).
             case "add":
@@ -48,17 +49,32 @@ public class Duke {
               break;
 
             case "mark":
-              Task t1 = tasks.get(Integer.parseInt(keyword.strip()) - 1);
+              Task t1 = tasks.get(Integer.parseInt(keyword) - 1);
               t1.mark();
               System.out.println(divider + "Nice! I've marked this task as done:\n" + t1 + "\n" + divider);
               break;
 
             case "unmark":
-              Task t2 = tasks.get(Integer.parseInt(keyword.strip()) - 1);
+              Task t2 = tasks.get(Integer.parseInt(keyword) - 1);
               t2.unmark();
               System.out.println(divider + "OK! I've marked this task as not done yet:\n" + t2 + "\n" + divider);
               break;
 
+            case "todo":
+              tasks.add(new Todo(keyword));
+              break;
+
+            case "deadline":
+              String[] deadlineFinder = keyword.split(" /by "); //Split keyword into description and date, separated by "/by".
+              keyword = deadlineFinder[0];
+              String deadline = deadlineFinder[1];
+              tasks.add(new Deadline(keyword, deadline));
+              break;
+
+            case "event":
+              String[] startFinder = keyword.split(" /from ");  //Split keyword into description and start,end.
+              String[] endFinder = startFinder[1].split(" /to "); //Split start,end into start and end.
+              tasks.add(new Event(startFinder[0], endFinder[0], endFinder[1]));
           }
       }
     }
