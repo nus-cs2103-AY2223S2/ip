@@ -1,5 +1,6 @@
-import java.util.Scanner; 
 import java.util.ArrayList;
+import java.io.*;
+
 
 /**
  * A talking robot
@@ -10,7 +11,8 @@ import java.util.ArrayList;
  */
 
 public class Duke {
-    public static void main(String[] args) {
+    private static ArrayList<Task> strArr = new ArrayList<>();
+    public static void main(String[] args) throws IOException {
         String logo = " ____        _        \n"
                 + "|  _ \\ _   _| | _____ \n"
                 + "| | | | | | | |/ / _ \\\n"
@@ -18,20 +20,53 @@ public class Duke {
                 + "|____/ \\__,_|_|\\_\\___|\n";
         System.out.println("Hello from\n" + logo);
         System.out.println("Hello! I'm Eren\nWhat can I do for you?");
-        Scanner sc = new Scanner(System.in);  
-        String word = "";
-        ArrayList<String> strArr = new ArrayList<>();
+        String[] word;
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
         while(true) {
-            System.out.print("Type your input to store in a list: ");
-            word = sc.nextLine();
-            if(word.toUpperCase().equals("BYE")) {
+            System.out.print("Type your input: ");
+            word = br.readLine().split(" ");
+            if(word[0].toUpperCase().equals("BYE")) {
                 horizontalLine();
                 break;
-            } else if(word.toUpperCase().equals("LIST")){
-                printList(strArr);
-            } else {
-                strArr.add(word);
-                System.out.println(("added: " + word));
+            } else if(word[0].toUpperCase().equals("LIST")){
+                printList();
+            } else if(word[0].equals("mark")){
+                try{
+                    Task t = getTask(Integer.parseInt(word[1]));
+                    if(t == null){
+                        continue;
+                    }
+                    else {
+                        t.mark();
+                        System.out.println("Nice! I've marked this task as done:");
+                        System.out.println(t);
+                    }
+                } catch(NumberFormatException e){
+                    System.out.println("Invalid number. Please enter a number");
+                    continue;
+                }
+
+
+            } else if(word[0].equals("unmark")) {
+                try { 
+                    Task t = getTask(Integer.parseInt(word[1]));
+                    if(t == null){
+                        continue;
+                    }
+                    else {
+                        t.unmark();
+                        System.out.println("OK, I've marked this task as not done yet:");
+                        System.out.println(t);
+                    }
+                } catch(NumberFormatException e){
+                    System.out.println("Invalid number. Please enter a number");
+                    continue;
+                }
+            }
+            else {
+                String mergeWord = String.join(" ", word);
+                strArr.add(new Task(mergeWord));
+                System.out.println(("added: " + mergeWord));
                 horizontalLine();
             }
         }
@@ -48,11 +83,19 @@ public class Duke {
     /**
      * Function to print a list
      * 
-     * @param arrList Takes in a list that contains the user inputs
      */ 
-    private static void printList(ArrayList arrList){
-        for (int i = 0; i < arrList.size(); i++){
-            System.out.println((i+1) + ". " + arrList.get(i));
+    private static void printList(){
+        for (int i = 0; i < strArr.size(); i++){
+            System.out.println((i+1) + ". " + strArr.get(i));
+        }
+    }
+
+    private static Task getTask(int num){
+        if (num <= strArr.size()) {
+            return strArr.get(num-1);
+        } else {
+            System.out.println("Number out of range/Invalid. Please try again");
+            return null;
         }
     }
 }
