@@ -1,4 +1,7 @@
 import java.util.List;
+
+import javax.security.auth.kerberos.DelegationPermission;
+
 import java.util.Arrays;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -48,6 +51,9 @@ public class MyDuke {
                 case "unmark":
                     toggle(tokens);
                     break;
+                case "delete":
+                    delete(tokens);
+                    break;
                 default:
                     throw new InvalidCommandException("Invalid Command! Try: " +
                                                     "[list, todo, deadline, event, mark/unmark]");
@@ -90,7 +96,8 @@ public class MyDuke {
         int taskIndex = 0;
 
         try {
-            if (tokens.length == 1) {
+            // Can we handle batch mark/unmark?
+            if (tokens.length == 1 || tokens.length > 2) {
                 throw new InvalidCommandException(
                     "ERROR: Please mark/unmark tasks with task number! Find the task number with 'list'.");
             }
@@ -205,5 +212,35 @@ public class MyDuke {
         Event e = new Event(desc, from, to);
         addTask(e);
         System.out.println("Successfully added:\n" + e.toString());
+    }
+
+    private void delete(String[] tokens) {
+        int taskIndex = 0;
+
+        try {
+            // Can we handle batch delete?
+            if (tokens.length == 1 || tokens.length > 2) {
+                throw new InvalidCommandException(
+                    "ERROR: Missing task to delete. Please specify a task.");
+            }
+
+            taskIndex = Integer.parseInt(tokens[1]);
+            if (taskIndex <= 0 || taskIndex > taskCount) {
+                throw new InvalidCommandException(
+                    "ERROR: No such task. View all tasks with 'list'");
+            }
+        } catch (NumberFormatException e) {
+            System.out.println(
+                "ERROR: Please mark/unmark tasks with task number! Find the task number with 'list'.");
+            return;
+        } catch (InvalidCommandException e) {
+            System.out.println(e.errorMessage);
+            return;
+        }
+
+        System.out.println(allTasks.get(taskIndex).toString() + " deleted.");
+        allTasks.remove(taskIndex);
+        taskCount--;
+        showCount();
     }
 }
