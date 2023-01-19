@@ -17,6 +17,10 @@ public class Jane {
         public void changeState(boolean stat) {
             this.isDone = stat;
         }
+
+        public void changeNum() {
+            this.num -=1;
+        }
         @Override
         public String toString() {
             return String.format("%d. [%s] %s", this.num, this.getStatusIcon(), this.description);
@@ -129,6 +133,24 @@ public class Jane {
                     Task n = tasks.get(num-1);
                     n.changeState(false);
                     System.out.println(n.toString());
+                } else {
+                    System.out.println("Number out of index");
+                }
+            }
+            else if (output.startsWith("delete")) {
+                String[] s = output.split(" ");
+                int num = Integer.parseInt(s[1]);
+                if (num < count+1) {
+                    System.out.println("Noted. I've removed this task:");
+                    Task n = tasks.get(num-1);
+                    System.out.println(n.toString());
+                    for (int j = num; j <count;j++) {
+                        Task t = tasks.get(j);
+                        t.changeNum();
+                    }
+                    count -=1;
+                    tasks.remove(n);
+                    System.out.println("You now have " + count + " tasks");
                 } else {
                     System.out.println("Number out of index");
                 }
