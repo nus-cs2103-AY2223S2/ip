@@ -5,3 +5,20 @@ Hello from
 | |_| | |_| |   <  __/
 |____/ \__,_|_|\_\___|
 
+added: [T][ ] hello
+added: [D][ ] CS2103T Week 2 homework (by: 23:59 Thursday 19th, Jan)
+added: [E][ ] CS2101 Group Meeting (from: Wednesday 7PM to: Wednesday 9PM)
+1. [T][ ] hello
+2. [D][ ] CS2103T Week 2 homework (by: 23:59 Thursday 19th, Jan)
+3. [E][ ] CS2101 Group Meeting (from: Wednesday 7PM to: Wednesday 9PM)
+Nice, I've marked this item as done:
+	[T][x] hello
+1. [T][x] hello
+2. [D][ ] CS2103T Week 2 homework (by: 23:59 Thursday 19th, Jan)
+3. [E][ ] CS2101 Group Meeting (from: Wednesday 7PM to: Wednesday 9PM)
+Nice, I've marked this item as done:
+	[T][ ] hello
+1. [T][ ] hello
+2. [D][ ] CS2103T Week 2 homework (by: 23:59 Thursday 19th, Jan)
+3. [E][ ] CS2101 Group Meeting (from: Wednesday 7PM to: Wednesday 9PM)
+Bye! See you next time:-)

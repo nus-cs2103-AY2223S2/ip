@@ -1,0 +1,9 @@
+todo hello
+deadline CS2103T Week 2 homework /by 23:59 Thursday 19th, Jan
+event CS2101 Group Meeting /from Wednesday 7PM /to Wednesday 9PM
+list
+mark 1
+list
+unmark 1
+list
+bye
