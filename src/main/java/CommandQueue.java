@@ -2,12 +2,14 @@ import java.util.ArrayList;
 
 public class CommandQueue {
     private ArrayList<Commands> queue = new ArrayList<>(); // Create an ArrayList object
-    public void add(Commands command){
+
+    public void add(Commands command) {
         queue.add(command);
     }
-    public void executeQueue(){
+
+    public void executeQueue(User user) {
         for (Commands command : queue) {
-            command.execute();
+            command.execute(user);
         }
         queue.clear();
     }

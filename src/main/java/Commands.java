@@ -7,5 +7,5 @@ public abstract class Commands {
     public String getCommandStorage() {
         return this.commandStorage;
     };
-    public abstract void execute();
+    public abstract void execute(User user);
 }
