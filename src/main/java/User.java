@@ -1,18 +1,23 @@
 import java.util.ArrayList;
 
 public class User {
-    private ArrayList<Tasks> tasks = new ArrayList<Tasks>();
+    private int taskCount = 0;
+    private ArrayList<Tasks> tasks = new ArrayList<>();
     public void addTask(Tasks task) {
         this.tasks.add(task);
+        this.taskCount += 1;
     }
     public void listTasks() {
         int i = 1;
         System.out.println("Here are the tasks in your list: \n");
         for (Tasks tasks : tasks) {
-            System.out.println( i
-                    + ".[" + tasks.getStatusIcon() + "] " + tasks.seeTaskContent());
+            System.out.println( i + "." + tasks);
             i++;
         }
+    }
+
+    public int getTaskCount() {
+        return taskCount;
     }
 
     public void markTask(int index, boolean done){

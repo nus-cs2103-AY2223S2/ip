@@ -7,9 +7,7 @@ public class CommandManager {
                     queue.add(new Mark(input));
                 } else if (input.matches("unmark+ [0-9]+")) {
                     queue.add(new Unmark(input));
-                }
-
-                else {
+                } else {
                     queue.add(new Store(input));
                 }
                 break;
