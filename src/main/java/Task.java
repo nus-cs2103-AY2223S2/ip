@@ -15,10 +15,6 @@ public class Task{
         return String.format("[%s] %s", getStatusIcon(), this.description);
     }
 
-    public String printDescription() {
-        return this.description;
-    }
-
     public void markTaskDone() {
         this.isDone = true;
         System.out.println("WOW you got something done! A miracle!! I've marked this task as done now, ur wlcm :)");

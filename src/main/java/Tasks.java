@@ -22,11 +22,12 @@ public class Tasks {
 
     public void addToList(Task s) {
         l.add(s);
-        System.out.printf("Added to list: %s\n", s.printDescription());
+        System.out.printf("Added to list: %s\n", s.printTask());
+        System.out.printf("Now you've got %d task(s) in your bag, CHOP CHOP GET THEM DONE.\n", l.size());
     }
 
     public void markTaskDone(int num) {
-        if (this.l.size() > num) {
+        if (this.l.size() > num && num >= 0) {
             this.l.get(num).markTaskDone();
         } else {
             System.out.println("Hey HEY HEY, you going too far >:[");
@@ -35,7 +36,7 @@ public class Tasks {
     }
 
     public void markTaskUndone(int num) {
-        if (this.l.size() > num) {
+        if (this.l.size() > num && num >= 0) {
             this.l.get(num).markTaskUndone();
         } else {
             System.out.println("Hey HEY HEY, you going too far >:[");

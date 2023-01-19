@@ -16,31 +16,36 @@ public class Duke {
         String task = myScan.nextLine();
 
         while (!(task.equalsIgnoreCase("bye"))) {
+            divider();
+            
             if (task.equalsIgnoreCase("list")) {
-                divider();
                 tasks.printList();
-                divider();
             }
+            else if (task.split(" ")[0].equalsIgnoreCase("todo")) {
+                String desc = task.split(" ")[1];
+                tasks.addToList(new Todo(desc));
 
-            else if (task.split(" ")[0].equalsIgnoreCase("mark")) {
+            } else if (task.split(" ")[0].equalsIgnoreCase("deadline")) {
+                String temp = task.split(" ", 2)[1]; //task and deadline remain
+                String[] details = temp.split("/by ");
+                tasks.addToList(new Deadline(details[0], details[1]));
+
+            } else if (task.split(" ")[0].equalsIgnoreCase("event")) {
+                String temp = task.split(" ", 2)[1]; //task, from and to remain
+                String[] details = temp.split("/from ", 2);
+                String[] time = details[1].split("/to ");
+                tasks.addToList(new Event(details[0], time[0], time[1]));
+
+            } else if (task.split(" ")[0].equalsIgnoreCase("mark")) {
                 int taskNum = Integer.parseInt(task.split(" ")[1]) - 1;
-                divider();
                 tasks.markTaskDone(taskNum);
-                divider();
             }
-
             else if (task.split(" ")[0].equalsIgnoreCase("unmark")) {
                 int taskNum = Integer.parseInt(task.split(" ")[1]) - 1;
-                divider();
                 tasks.markTaskUndone(taskNum);
-                divider();
             }
 
-            else {
-                divider();
-                tasks.addToList(new Task(task));
-                divider();
-            }
+            divider();
             task = myScan.nextLine();
         }
 
