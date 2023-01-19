@@ -30,11 +30,11 @@ public class Duke {
     }
 
     private static void listCommand() {
-        String output = "List:\n";
+        StringBuilder output = new StringBuilder("Current list:\n");
         for (int i = 0; i < list.size(); i++) {
-            output += "\t" + (i+1) + ". " + formatTask(list.get(i)) + "\n";
+            output.append("\t").append(i + 1).append(". ").append(formatTask(list.get(i))).append("\n");
         }
-        PixlPrint(output);
+        PixlPrint(output.toString());
     }
 
     private static void todoCommand(String command) throws DukeException{
@@ -75,7 +75,7 @@ public class Duke {
 
         if (taskName.length() == 0 || dueDate.length() == 0) {
             throw new DukeException("Please provide both a deadline description and a due date.\n" +
-                    "Format: deadline <description> /by <due_date>");
+                    "\tFormat: deadline <description> /by <due_date>");
         }
 
         Task task = new Deadline(taskName.toString(), dueDate.toString());
@@ -110,7 +110,7 @@ public class Duke {
 
         if (taskName.length() == 0 || startDate.length() == 0 || endDate.length() == 0) {
             throw new DukeException("Please provide a description, start date, and end date.\n" +
-                    "Format: event <description> /from <start_date> /to <end_date>");
+                    "\tFormat: event <description> /from <start_date> /to <end_date>");
         }
 
         Task task = new Event(taskName.toString(), startDate.toString(), endDate.toString());
@@ -137,7 +137,17 @@ public class Duke {
             PixlPrint("Un-doing the task...\n" +
                     "\t" + formatTask(task));
         } catch (Exception e) {
-            throw new DukeException("Please provide a valie task number to unmark.");
+            throw new DukeException("Please provide a valid task number to unmark.");
+        }
+    }
+
+    private static void deleteCommand(String command) throws DukeException {
+        try {
+            Task task = list.remove(Integer.parseInt(command.split("\\s+")[1]) - 1);
+            PixlPrint("Removed the task:\n" +
+                    "\t" + formatTask(task));
+        } catch (Exception e) {
+            throw new DukeException("Please provide a valid task number to delete.");
         }
     }
 
@@ -154,6 +164,8 @@ public class Duke {
             deadlineCommand(command);
         } else if (command.startsWith("event")) {
             eventCommand(command);
+        } else if (command.startsWith("delete")) {
+            deleteCommand(command);
         } else {
             throw new DukeException("I don't know that command.");
         }
