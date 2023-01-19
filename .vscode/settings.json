@@ -1,0 +1,8 @@
+{
+  "java.configuration.runtimes": [
+    {
+      "name": "JavaSE-11",
+      "path": "~/source/cs2103/jdk-11.0.2.jdk/Contents/Home"
+    }
+  ]
+}
