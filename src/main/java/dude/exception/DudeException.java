@@ -1,7 +1,7 @@
 package dude.exception;
 
-public class DukeException extends Exception {
-    public DukeException(String message) {
+public class DudeException extends Exception {
+    public DudeException(String message) {
         super(message);
     }
 }
