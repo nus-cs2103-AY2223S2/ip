@@ -66,9 +66,22 @@ public class Duke {
                     if (index >= list.size() || index < 0) {
                         System.out.println("☹ OOPS!!! No such task in list.");
                     } else {
-                        task = list.get(Integer.parseInt(content.substring(1)) - 1);
+                        task = list.get(index);
                         task.unmarkDone();
                         System.out.println("Ok boss! Marked this task as not done yet: \n" + task.toString());
+                    }
+                }
+            } else if (command.equals("delete")) {
+                if (content.length() < 2) {
+                    System.out.println("☹ OOPS!!! Invalid input for delete command.");
+                } else {
+                    int index = Integer.parseInt(content.substring(1)) - 1;
+                    if (index >= list.size() || index < 0) {
+                        System.out.println("☹ OOPS!!! No such task in list.");
+                    } else {
+                        task = list.remove(index);
+                        System.out.println("Ok boss! Task removed: \n" + task.toString());
+                        System.out.println("Now you have " + list.size() + " in the list.");
                     }
                 }
             } else {
