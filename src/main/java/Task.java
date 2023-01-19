@@ -11,14 +11,12 @@ public class Task {
         return (isDone ? "[X]" : "[ ]");
     }
 
-    public String mark() {
+    public void mark() {
         this.isDone = true;
-        return "[X] " + description;
     }
 
-    public String unmark() {
+    public void unmark() {
         this.isDone = false;
-        return "[ ] " + description;
     }
 
     @Override
