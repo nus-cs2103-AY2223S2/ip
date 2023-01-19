@@ -1,3 +1,8 @@
+import java.io.File;
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -28,7 +33,7 @@ public class Duke {
     public static void echo(String[] arr) throws DukeException {
         switch (arr[0]) {
             case "bye":
-                exit();
+                sc.close();
                 break;
             case "list":
                 int counter = 1;
@@ -96,9 +101,8 @@ public class Duke {
     }
     public static void exit() {
         System.out.println("Bye. Hope to see you again soon!");
-        sc.close();
     }
-    public static void main(String[] args) throws DukeException {
+    public static void main(String[] args) throws DukeException, IOException {
         String logo = " ____        _        \n"
                 + "|  _ \\ _   _| | _____ \n"
                 + "| | | | | | | |/ / _ \\\n"
@@ -106,12 +110,16 @@ public class Duke {
                 + "|____/ \\__,_|_|\\_\\___|\n";
         System.out.println("Hello from\n" + logo);
         greet();
+
         try {
             while (sc.hasNext()) {
                 splitCommand(sc.nextLine());
             }
         } catch (IllegalStateException e) {
-            System.exit(0);
+            exit();
+        } finally {
+            Storage storer = new Storage();
+            storer.store(tasks);
         }
     }
 }
