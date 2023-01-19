@@ -1,5 +1,5 @@
 import java.util.Scanner;
-import java.util.ArrayList;
+
 public class Duke {
 
     public static void main(String[] args) {
@@ -13,16 +13,24 @@ public class Duke {
         Scanner sc = new Scanner(System.in);
         toDoList toDo = new toDoList();
 
-        // Level 1
         System.out.println("Hello I'm Duke \nWhat can I do for you?");
         String input = sc.nextLine();
 
         while(!input.equals("bye")) {
-            //Level 2
-            if(input.equals("list")) {
+
+            String[] instruction = input.split(" ",2);
+
+            if(instruction[0].equals("list")) {
+
                 toDo.printList();
+
+            } else if (instruction[0].equals("mark")){
+                toDo.changingStatus(0, Integer.parseInt(instruction[1]));
+
+            } else if (instruction[0].equals("unmark")) {
+                toDo.changingStatus(1, Integer.parseInt(instruction[1]));
             } else {
-                toDo.addItem(input);
+                toDo.addItem(instruction[0] + " " + instruction[1]);
             }
 
             input = sc.nextLine();
