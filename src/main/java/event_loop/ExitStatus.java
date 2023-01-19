@@ -17,7 +17,7 @@ package event_loop;
  * </li>
  */
 public enum ExitStatus {
-    skipCurrentLoop,
+    finishCurrentIteration,
     terminate,
     continueExecute;
 }
