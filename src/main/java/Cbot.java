@@ -45,6 +45,11 @@ public class Cbot {
 				}
 			}
 			
+			if (com.missingText(userInput)) {
+				System.out.println(WARNING + "<Error> That command needs an input");
+				continue;
+			}
+			
 			switch (com) {
 				case BYE:
 					loop = false;
@@ -83,7 +88,7 @@ public class Cbot {
 					break;
 				
 				case DEADLINE:
-					String BY_KEYWORD = " /by ";
+					String BY_KEYWORD = "/by ";
 					int BY_LENGTH = BY_KEYWORD.length();
 				
 					if (userText.contains(BY_KEYWORD)) {
@@ -109,8 +114,8 @@ public class Cbot {
 					break;
 				
 				case EVENT:
-					String FROM_KEYWORD = " /from ";
-					String TO_KEYWORD = " /to ";
+					String FROM_KEYWORD = "/from ";
+					String TO_KEYWORD = "/to ";
 					int FROM_LENGTH = FROM_KEYWORD.length();
 					int TO_LENGTH = TO_KEYWORD.length();
 				
@@ -122,7 +127,7 @@ public class Cbot {
 							
 							if (toIndex < toIndex) {
 								// /to before /from
-								System.out.println(WARNING + "<Error> \"/to\" before \"from\"");
+								System.out.println(WARNING + "<Error> \"/to\" before \"/from\"");
 							} else if (fromIndex == 0) {
 								// no desc
 								System.out.println(WARNING + "<Error> Missing event description");
@@ -153,6 +158,10 @@ public class Cbot {
 				case NOMATCH:
 					System.out.println(INDENT + "Sorry, I don't recognize that command :<");
 					break;
+				
+				default:
+					// catches all the BADs
+					System.out.println(WARNING + "<Error> That command needs an input");
 			}
 		}
 		
