@@ -72,6 +72,12 @@ public class Duke {
         printMessage("added: " + s);
     }
 
+    public void deleteTaskFromList(int i) {
+        Task toDelete = list.get(i - 1);
+        list.remove(i - 1);
+        deletedTaskMessage(toDelete);
+    }
+
     public void inputEvent(String s, String timeFrom, String timeTo) {
         Event event = new Event(s, timeFrom, timeTo);
         list.add(event);
@@ -96,6 +102,14 @@ public class Duke {
         System.out.println("\tGot it. I've added this task:");
         System.out.println("\t" + t);
         System.out.println("\tNow you have " + list.size() + " tasks in the list.");
+        printLongLine();
+    }
+
+    public void deletedTaskMessage(Task t) {
+        printLongLine();
+        System.out.println("\tNoted. I've removed this task:");
+        System.out.println("\t" + t);
+        System.out.println("\tNow you have " + list.size() + " tasks in the list");
         printLongLine();
     }
 
@@ -132,6 +146,8 @@ public class Duke {
                     markTaskAsDone(Integer.parseInt(input.split(" ")[1]));
                 } else if (input.startsWith("unmark ")) {
                     markTaskAsNotDone(Integer.parseInt(input.split(" ")[1]));
+                } else if (input.startsWith("delete ")) {
+                    deleteTaskFromList(Integer.parseInt(input.split(" ")[1]));
                 } else if (addEventCheck(input)) { // check if input type is event
                     String[] eventConstructor = input.replace("event ", "").split("/");
                     String timeFromModified = eventConstructor[1].replace("from ", "");
