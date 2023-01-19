@@ -14,4 +14,8 @@ todo
 blah
 deadline french assignment
 event group meeting /from
+delete 3
+delete 2
+mark 5
+delete 5
 bye

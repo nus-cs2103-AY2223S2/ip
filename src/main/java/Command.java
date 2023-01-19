@@ -37,6 +37,12 @@ public enum Command {
             Saturday.unMark(args);
         }
     },
+    DELETE("delete") {
+        @Override
+        public void execute(String args) {
+            Saturday.delete(args);
+        }
+    },
     BYE("bye") {
         @Override
         public void execute(String args) {

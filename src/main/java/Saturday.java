@@ -31,7 +31,8 @@ public class Saturday {
         if (s != -1) {
             String description = text.substring(s + 1);
             ToDo task = new ToDo(description);
-            taskList.addTask(task);
+            taskList.add(task);
+            Utils.output("Got it. I've added this task:\n\t " + task + "\n\tNow you have " + taskList.size() + " tasks in the list.");
         } else {
             throw new SaturdayException("OOPS!!! The description of a todo cannot be empty");
         }
@@ -44,7 +45,8 @@ public class Saturday {
             String description = text.substring(s + 1, d - 1);
             String deadline = text.substring(d + 4);
             Deadline task = new Deadline(description, deadline);
-            taskList.addTask(task);
+            taskList.add(task);
+            Utils.output("Got it. I've added this task:\n\t " + task + "\n\tNow you have " + taskList.size() + " tasks in the list.");
         } else {
             throw new SaturdayException("OOPS!!! The deadline cannot be empty (use /by)");
         }
@@ -59,14 +61,15 @@ public class Saturday {
             String from = text.substring(f + 6, t - 1);
             String to = text.substring(t + 4);
             Event task = new Event(description, from, to);
-            taskList.addTask(task);
+            taskList.add(task);
+            Utils.output("Got it. I've added this task:\n\t " + task + "\n\tNow you have " + taskList.size() + " tasks in the list.");
         } else {
             throw new SaturdayException("OOPS!!! The timeframe cannot be empty (use /from and /to)");
         }
     }
 
     public static void displayList() {
-        Utils.output(taskList.toString());
+        Utils.output("Here are the tasks in your list:\n\t" + taskList.toString());
     }
 
     public static void mark(String text) {
@@ -75,7 +78,12 @@ public class Saturday {
             String number = parts[1];
             if (number.matches("^\\d+")) {
                 int i = Integer.valueOf(number);
-                taskList.mark(i);
+                try {
+                    taskList.mark(i);
+                    Utils.output("Nice! I've marked this task as done:\n\t  " + taskList.get(i));
+                } catch (IndexOutOfBoundsException e) {
+                    Utils.output("OOPS!!! There's no such task in your list");
+                }
             }
         } else {
             throw new SaturdayException("OOPS!!! Please input the number of the item you would like to mark");
@@ -88,7 +96,30 @@ public class Saturday {
             String number = parts[1];
             if (number.matches("^\\d+")) {
                 int i = Integer.valueOf(number);
-                taskList.unMark(i);
+                try {
+                    taskList.unMark(i);
+                    Utils.output("OK, I've marked this task as not done yet:\n\t  " + taskList.get(i));
+                } catch (IndexOutOfBoundsException e) {
+                    Utils.output("OOPS!!! There's no such task in your list");
+                }
+            }
+        } else {
+            throw new SaturdayException("OOPS!!! Please input the number of the item you would like to mark");
+        }
+    }
+
+    public static void delete(String text) {
+        String[] parts = text.split("\\s");
+        if (parts.length > 1) {
+            String number = parts[1];
+            if (number.matches("^\\d+")) {
+                int i = Integer.valueOf(number);
+                try {
+                    Task removedTask = taskList.remove(i);
+                    Utils.output("Noted. I've removed this task:\n\t  " + removedTask + "\n\tNow you have " + taskList.size() + " tasks in the list.");
+                } catch (IndexOutOfBoundsException e) {
+                    Utils.output("OOPS!!! There's no such task in your list");
+                }
             }
         } else {
             throw new SaturdayException("OOPS!!! Please input the number of the item you would like to mark");
