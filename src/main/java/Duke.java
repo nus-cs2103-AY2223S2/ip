@@ -2,85 +2,7 @@ import java.util.Scanner;
 import java.util.ArrayList;
 //if user put in wrong format for deadline events, error will occur
 //need to handle them using wrong array index exception
-class Task {
-    boolean done;
-    String name;
-    public Task(String n) {
-        name = n;
-    }
-    public void mark() {
-        System.out.println("Nice! I've marked this task as done:");
-        this.done = true;
-        System.out.println(this.toString());
-    }
-    public void unmark() {
-        System.out.println("OK, I've marked this task as not done yet:");
-        this.done = false;
-        System.out.println(this.toString());
-    }
-    public String toString(){
-        return String.format("[%s] %s",this.done ? "X" : " ", this.name);
-    }
-    public static String[] parseCreate(String queryString) {
-        String[] tokens = queryString.split(" ", 2);
-        if (tokens.length != 2) return new String[] {"Error", "creating task requires a command and name minimally"};
-        String type = tokens[0];
-        if (type.equals("todo")) return tokens;
-        //parse params
-        String[] params = tokens[1].split(" /");
-        if (type.equals("deadline") && 
-            params.length == 2 && 
-            params[1].substring(0,2).equals("by")) {
-            
-            String[] tmp = params[1].split(" ", 2);
-            if (tmp.length != 2) return new String[] {"Error", "by cannot be empty"};
-            return new String[] {type, params[0], tmp[1]};
-        }
-        if (type.equals("event") && 
-            params.length == 3 && 
-            params[1].substring(0,4).equals("from") && 
-            params[2].substring(0,2).equals("to")) {
-    
-            String[] tmp1 = params[1].split(" ", 2);
-            if (tmp1.length != 2) return new String[] {"Error", "from cannot be empty"};
-            String[] tmp2 = params[2].split(" ", 2);
-            if (tmp2.length != 2) return new String[] {"Error", "to cannot be empty"};
-            return new String[] {type, params[0], tmp1[1], tmp2[1]};
-        }
-        return new String[] {"Error", "ensure proper format please"};
-    }
-}
-class Todo extends Task {
-    public Todo(String n) {
-        super(n);
-    }
-    public String toString(){
-        return String.format("[T][%s] %s",this.done ? "X" : " ", this.name);
-    }
-}
-class Deadline extends Task {
-    String by;
-    public Deadline(String n, String b) {
-        super(n);
-        by = b;
-    }
-    public String toString(){
-        return String.format("[D][%s] %s (by: %s)",this.done ? "X" : " ", this.name, this.by);
-    }
-}
-class Event extends Task {
-    String by;
-    String from;
-    String to;
-    public Event(String n, String f, String t) {
-        super(n);
-        from = f;
-        to = t;
-    }
-    public String toString(){
-        return String.format("[E][%s] %s (from: %s to %s)",this.done ? "X" : " ", this.name, this.from, this.to);
-    }
-}
+enum Query { LIST, MARK, UNMARK, TODO, DEADLINE, EVENT, DELETE }
 public class Duke {
     public static void main(String[] args) {
         System.out.println("Hello! I am your anime waifu!"); 
@@ -93,74 +15,100 @@ public class Duke {
         Scanner scan = new Scanner(System.in);
         ArrayList<Task> tasks = new ArrayList<Task>();
 
-        System.out.println("_____");        
         String input = scan.nextLine();
         while(!input.equals("bye")) {
-            if (input.equals("list")) {
-                for (int i=0;i<tasks.size();i++) System.out.printf("%d. %s%n",i+1,tasks.get(i).toString());
-            }
-            
-            else if (input.length() >= 5 && input.substring(0, 5).equals("mark ")) {
-                try{
-                    int index = Integer.parseInt(input.substring(5));
-                    if (index > tasks.size() || index <= 0) System.out.println("wrong index");
-                    else {
-                        tasks.get(index-1).mark();
-                    }
+            String[] tokens = input.split(" ",2);
+            try {
+                Query query = Query.valueOf(tokens[0].toUpperCase());
+                switch (query) {
+                    case LIST: 
+                        list(tasks);
+                        break; 
+                    case MARK:
+                        mark(true, tasks, tokens[1]);
+                        break;
+                    case UNMARK:
+                        mark(false, tasks, tokens[1]);
+                        break;
+                    case TODO:
+                        todo(tasks, tokens[1]);
+                        break;
+                    case DEADLINE:
+                        deadline(tasks, tokens[1]);
+                        break;
+                    case EVENT:
+                        event(tasks, tokens[1]);
+                        break;
+                    case DELETE:
+                        delete(tasks, tokens[1]);
+                        break;
                 }
-                catch (NumberFormatException ex){
-                    System.out.println("please mark corresponding task number");
-                }
-            }
-            
-            else if (input.length() >= 7 && input.substring(0, 7).equals("unmark ")) {
-                try{
-                    int index = Integer.parseInt(input.substring(7));
-                    if (index > tasks.size() || index <= 0) System.out.println("wrong index");
-                    else {
-                        tasks.get(index-1).unmark();
-                    }
-                }
-                catch (NumberFormatException ex){
-                    System.out.println("please mark corresponding task number");
-                }
-            }
-
-            else if (input.length() >= 7 && input.substring(0, 7).equals("delete ")) {
-                try{
-                    int index = Integer.parseInt(input.substring(7));
-                    if (index > tasks.size() || index <= 0) System.out.println("wrong index");
-                    else {
-                        System.out.printf("Noted, task removed: %n%s%n",tasks.get(index-1).toString());
-                        tasks.remove(index-1);
-                    }
-                }
-                catch (NumberFormatException ex){
-                    System.out.println("please mark corresponding task number");
-                }
-                
-            }
-            
-            else {
-                String[] parsed = Task.parseCreate(input);             
-                String type = parsed[0];
-                if (type == "Error") System.out.println(parsed[1]);
-                if (type.equals("todo")) {
-                    tasks.add(new Todo(parsed[1]));
-                    System.out.printf("added: %s%n", parsed[1]);
-                } 
-                else if (type.equals("deadline")) {
-                    tasks.add(new Deadline(parsed[1],parsed[2]));
-                    System.out.printf("added: %s%n", parsed[1]);
-                }
-                else if (type.equals("event")) {
-                    tasks.add(new Event(parsed[1],parsed[2], parsed[3]));
-                    System.out.printf("added: %s%n", parsed[1]);
-                }
-            }
-            System.out.println("_____");        
+            } catch(IllegalArgumentException e) {System.out.println("please make sure your command is valid!");
+            } catch(IndexOutOfBoundsException e) {System.out.println("please ensure there are arguments for particular commands!");}
+            System.out.println("----------");
             input = scan.nextLine();
         }
         System.out.println("Bye! Hope to see you again <3!");        
     }
+    private static void list(ArrayList<Task> a) {
+        System.out.println("Here are the tasks in your list:");
+        for (int i = 0; i < a.size(); i++) { System.out.format("%d.%s%n",i+1,a.get(i));}
+    }
+    private static void mark(boolean mark ,ArrayList<Task> a, String s) {
+        try {
+            int num = Integer.parseInt(s);
+            Task t = a.get(num - 1);
+            if (mark) {
+                t.mark();
+                System.out.println("Nice! I've marked this task as done:");
+            }
+            else {
+                t.unmark();
+                System.out.println("OK, I've marked this task as not done yet:");
+            }
+            System.out.println(t.toString());
+        } catch (NumberFormatException e) {System.out.println("please only input numbers");
+        } catch (IndexOutOfBoundsException e) {System.out.println("make sure the number is in range");}
+    }
+    private static void todo(ArrayList<Task> a, String s) {
+        Todo t = new Todo(s);
+        a.add(t);
+        System.out.println("Got it I've added a todo!");
+        System.out.println(t.toString());
+    }
+    private static void deadline(ArrayList<Task> a, String s) {
+        try {
+            String[] tokens = s.split(" /by ");
+            String name = tokens[0];
+            String by = tokens[1];
+            Deadline t = new Deadline(name, by);            
+            a.add(t);
+            System.out.println("Got it I've added a deadline");
+            System.out.println(t.toString());
+        } catch (IndexOutOfBoundsException e) { System.out.println("please ensure u have a /by option and that /by option argument exist");}
+    }
+    private static void event(ArrayList<Task> a, String s) {
+        try {
+            String[] tokens = s.split(" /from ");
+            String name = tokens[0];
+            String tmptoken = tokens[1];
+            String[] options = tmptoken.split(" /to ");
+            String from = options[0];
+            String to = options[1];
+            Event t = new Event(name, from, to);            
+            a.add(t);
+            System.out.println("Got it I've added an event");
+            System.out.println(t.toString());
+        } catch (IndexOutOfBoundsException e) { System.out.println("please ensure u have a /from /to (in that order!) option and that their arguments exist");}
+    }
+    private static void delete(ArrayList<Task> a, String s) {
+        try {
+            int num = Integer.parseInt(s);
+            Task t = a.remove(num - 1);
+            System.out.println("I have removed this task");
+            System.out.println(t);
+        } catch (NumberFormatException e) {System.out.println("please only input numbers");
+        } catch (IndexOutOfBoundsException e) {System.out.println("make sure the number is in range");}
+    }
+    
 }
