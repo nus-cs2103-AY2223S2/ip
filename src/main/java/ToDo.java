@@ -4,4 +4,10 @@ public class ToDo extends Task {
         super(title);
     }
 
+    @Override
+    public String toString() {
+        String doneString = this.getDone() ? "X" : " ";
+        return String.format("[T][%s] %s", doneString, this.getTitle());
+    }
+
 }

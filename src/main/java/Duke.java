@@ -10,11 +10,21 @@ public class Duke {
         System.out.println("----------------------------------------------------");
     }
 
-    private static void addToList(String title) {
-        Task task = new Task(title);
+    private static void addToList(String title, TaskType type) {
+        // TODO: Handle all task types
+        Task task;
+        if (type == TaskType.TODO) {
+            task = new ToDo(title);
+        } else if (type == TaskType.DEADLINE) {
+            task = new Deadline(title, "test");
+        } else if (type == TaskType.EVENT) {
+            task = new Event(title, "test", "test");
+        } else {
+            System.out.println("Something seems wrong...");
+            return;
+        }
         taskList.add(task);
-        String toPrint = String.format("added: %s", task.getTitle());
-        System.out.println(toPrint);
+        System.out.println(task.toString());
     }
 
     private static void printList() {
@@ -66,8 +76,17 @@ public class Duke {
             case "unmark":
                 changeTaskCompletionStatus(Integer.parseInt(arguments.substring(1)) - 1, false);
                 break;
+            case "todo":
+                addToList(rawCommand, TaskType.TODO);
+                break;
+            case "deadline":
+                addToList(rawCommand, TaskType.DEADLINE);
+                break;
+            case "event":
+                addToList(rawCommand, TaskType.EVENT);
+                break;
             default:
-                addToList(rawCommand);
+                System.out.println("Unrecognized Command");
                 break;
         }
         return true;
