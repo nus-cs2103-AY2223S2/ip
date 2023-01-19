@@ -65,6 +65,11 @@ public class Duke {
                     continue;
                 }
 
+//                else if (splitStr[0].equals("delete")) {
+//                    taskList.delete(requestContent);
+//                    continue;
+//                }
+
                 else {
                     taskList.unknownCommand();
                 }

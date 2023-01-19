@@ -49,7 +49,7 @@ public class TaskList {
 
     public void addToDo(String description) throws MissingArgumentException {
         if (description.trim().equals("")) {
-            throw new MissingArgumentException("☹ OOPS!!! The description of a todo cannot be empty.");
+            throw new MissingArgumentException("The description of a todo cannot be empty.");
         }
 
         this.list[len] = new ToDo(description);
@@ -68,9 +68,9 @@ public class TaskList {
         String description = splitWithBy[0].trim();
 
         if (description.equals("")) {
-            throw new MissingArgumentException("☹ OOPS!!! The description of a deadline cannot be empty.");
+            throw new MissingArgumentException("The description of a deadline cannot be empty.");
         } else if (splitWithBy.length != 2 || splitWithBy[1].trim().equals("")) {
-            throw new MissingArgumentException("☹ OOPS!!! The deadline cannot be empty.");
+            throw new MissingArgumentException("The deadline cannot be empty.");
         }
 
         String by = splitWithBy[1].trim();
@@ -90,9 +90,9 @@ public class TaskList {
         String description = splitFrom[0].trim();
 
         if (description.equals("")) {
-            throw new MissingArgumentException("☹ OOPS!!! The description of an event cannot be empty.");
+            throw new MissingArgumentException("The description of an event cannot be empty.");
         } else if (splitFrom.length != 2) {
-            throw new MissingArgumentException("☹ OOPS!!! The from cannot be empty.");
+            throw new MissingArgumentException("The from cannot be empty.");
         }
 
         String[] splitTo = splitFrom[1].split(" /to ", 2);
@@ -100,9 +100,9 @@ public class TaskList {
         String to = splitTo[1].trim();
 
         if (from.equals("")) {
-            throw new MissingArgumentException("☹ OOPS!!! The from cannot be empty.");
-        }else if (splitTo.length != 2 || splitTo[1].trim().equals("")) {
-            throw new MissingArgumentException("☹ OOPS!!! The to cannot be empty.");
+            throw new MissingArgumentException("The from cannot be empty.");
+        } else if (splitTo.length != 2 || splitTo[1].trim().equals("")) {
+            throw new MissingArgumentException("The to cannot be empty.");
         }
 
         this.list[len] = new Events(description, from, to);
@@ -123,4 +123,25 @@ public class TaskList {
     public void unknownCommand() throws MissingArgumentException{
         throw new UnknownCommandException();
     }
+
+//    public void delete(String requestContent) throws MissingArgumentException{
+//        if(requestContent.trim() == ""){
+//            throw new MissingArgumentException("The index cannot be empty.");
+//        }
+//
+//        int index = Integer.parseInt(requestContent.trim()) - 1;
+//
+//        for (int i = index+1; i < this.len; i++){
+//            this.list[i] = this.list[i+1];
+//        }
+//
+//        this.len--;
+//        String reply = "  ________________________________\n"
+//                + "  Noted. I've removed this task:\n"
+//                + "    " + list[index].toString()
+//                + "  Now you have " + this.len + " tasks in the list.\n"
+//                + "  ________________________________\n";
+//        System.out.print(reply);
+//
+//    }
 }
