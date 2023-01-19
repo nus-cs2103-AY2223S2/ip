@@ -6,13 +6,20 @@ public class Duke {
     // array that contains all the tasks thus far
     private static ArrayList<Task> listOfThings = new ArrayList<>();
 
-    // printing the texts with lines on top and at the bottom
+    /**
+     * prints out the text with lines on top and below
+     * @param text
+     */
     public static void printWithLines(String text) {
         System.out.println("    ____________________________________________________________");
         System.out.println("    " + text);
         System.out.println("    ____________________________________________________________");
     }
 
+    /**
+     *
+     * @return the string that updates the number of elements left in the string
+     */
     public static String listUpdate() {
         String plural = "";
         if (listOfThings.size() > 1) {
@@ -21,7 +28,12 @@ public class Duke {
         return "\n       Now you have " + listOfThings.size() + " task" + plural + " in the list.";
     }
 
-    // adding item to the list of things, as well as printing the task that is added
+    /**
+     *
+     * @param text the text containing the information of the command
+     * @param add type of add command use
+     * @throws DukeException when the format is wrong
+     */
     public static void addItem(String text, AddCommands add) throws DukeException {
 
         Task addedItem = null;
@@ -59,7 +71,9 @@ public class Duke {
         printWithLines(str + listUpdate());
     }
 
-    // printing though the list
+    /**
+     * iterates through the arraylist and prints out the elements inside
+     */
     public static void printList() {
 
         String totalString = "";
@@ -70,7 +84,10 @@ public class Duke {
         printWithLines(totalString);
     }
 
-    // removing the item
+    /**
+     * removes the item in the list
+     * @param index the index of the item to be removed
+     */
     public static void removeItem(int index) {
         String str = " Noted. I'm removing this task:\n       " + listOfThings.get(index).toString();
         listOfThings.remove(index);
@@ -78,7 +95,7 @@ public class Duke {
 
     }
 
-    // main driver function
+
     public static void main(String[] args) {
         printWithLines(" Hello! I'm Duke!\n     What can I do for you today?");
         Scanner input = new Scanner(System.in);
