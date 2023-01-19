@@ -1,10 +1,9 @@
-import java.util.InputMismatchException;
+import java.util.ArrayList;
 import java.util.Scanner;
-import java.util.Arrays;
 public class Duke {
 
     public static void main(String[] args) {
-        Task[] allTasks = new Task[100];
+        ArrayList<Task> allTasks = new ArrayList<Task>();
         int counter = 0;
         Scanner sc = new Scanner(System.in);
         System.out.println("Hi, I'm Nero and I am an automated chat bot" + "\n" + "What would you like to do?");
@@ -18,62 +17,60 @@ public class Duke {
                 System.out.println("Here are all your tasks: ");
                 for (int i = 0; i < counter; i++) {
                     int index = i + 1;
-                    Task currTask = allTasks[i];
+                    Task currTask = allTasks.get(i);
                     System.out.println(index + ". " + currTask.currToPrint());
                 }
             } else if (input[0].equals("mark")) {
                 int taskToMark = Integer.parseInt(input[1]) - 1;
-                Task currTask = allTasks[taskToMark];
+                Task currTask = allTasks.get(taskToMark);
                 currTask.markAsDone();
                 System.out.println("Great job on completing this task! " + "\n" + currTask.currToPrint());
             } else if (input[0].equals("unmark")) {
                 int taskToUnmark = Integer.parseInt(input[1]) - 1;
-                Task currTask = allTasks[taskToUnmark];
+                Task currTask = allTasks.get(taskToUnmark);
                 currTask.markAsUndone();
                 System.out.println("Remember to complete this task!! " + "\n" + currTask.currToPrint());
+            } else if (input[0].equals("todo")) {
+                int index = originalString.indexOf("todo");
+                try {
+                    String toAdd = originalString.substring(index + 5);
+                    Task newTask = new ToDo(toAdd);
+                    allTasks.add(newTask);
+                    counter++;
+                    System.out.println("Got it! I've added this task to the list!" + "\n" + newTask.currToPrint() + "\n" + "Now you have " + counter +
+                            " tasks in the list!" + "\n");
+                } catch (IndexOutOfBoundsException e) {
+                    System.out.println("Description of a todo cannot be empty!!!");
+                }
+            } else if (input[0].equals("deadline")) {
+                try {
+                    String[] splitString = originalString.split("/");
+                    String description = splitString[0].replace("deadline", "");
+                    String duration = splitString[1].replace("by", "by:");
+                    Task newTask = new Deadline(description, duration);
+                    allTasks.add(newTask);
+                    counter++;
+                    System.out.println("Got it! I've added this task to the list!" + "\n" + newTask.currToPrint() + "\n" + "Now you have " + counter +
+                            " tasks in the list!" + "\n");
+                } catch (IndexOutOfBoundsException e) {
+                    System.out.println("Please add a task description and deadline!!!");
+                }
+            } else if (input[0].equals("event")) {
+                try {
+                    String[] splitString = originalString.split("/");
+                    String description = splitString[0].replace("event", "");
+                    String duration = splitString[1].replace("from", "from:") + splitString[2].replace("to", "to:");
+                    Task newTask = new Event(description, duration);
+                    allTasks.add(newTask);
+                    counter++;
+                    System.out.println("Got it! I've added this task to the list!" + "\n" + newTask.currToPrint() + "\n" + "Now you have " + counter +
+                            " tasks in the list!" + "\n");
+                } catch (IndexOutOfBoundsException e) {
+                    System.out.println("Please add a task description, from and to date!!!");
+                }
             } else {
-                Duke newDuke = new Duke();
-                Task newTask = newDuke.getTask(originalString);
-                allTasks[counter] = newTask;
-                counter++;
-                System.out.println("Got it! I've added this task to the list!" + "\n" + newTask.currToPrint() + "\n" + "Now you have " + counter +
-                        " tasks in the list!" + "\n");
+                System.out.println("This is an incorrect input!!");
             }
-
-
-        }
-    }
-
-    public Task getTask(String originalString) {
-        String[] input = originalString.split(" ");
-        if (!input[0].equals("todo") && !input[0].equals("deadline") && !input[0].equals("event")) {
-            throw new InputMismatchException("Your input is invalid!!!");
-        }
-        if (input.length == 1) {
-            System.out.println("The description of a Task cannot be empty!!!");
-            throw new InputMismatchException();
-        }
-        if (input[0].equals("todo")) {
-            String toAdd = originalString.substring(originalString.indexOf("todo") + 5);
-            return new ToDo(toAdd);
-        } else if (input[0].equals("deadline")) {
-            String[] splitString = originalString.split("/");
-            if (splitString.length == 1) {
-                System.out.println("Please add an action and a deadline!");
-                throw new InputMismatchException();
-            }
-            String description = splitString[0].replace("deadline", "");
-            String duration = splitString[1].replace("by", "by:");
-            return new Deadline(description, duration);
-        } else {
-            String[] splitString = originalString.split("/");
-            if (splitString.length == 1) {
-                System.out.println("Please add an action, a starting date and an ending date!");
-                throw new InputMismatchException();
-            }
-            String description = splitString[0].replace("event", "");
-            String duration = splitString[1].replace("from", "from:") + splitString[2].replace("to", "to:");
-            return new Event(description, duration);
         }
     }
 }
