@@ -1,7 +1,16 @@
+package main.java;
+
+import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Duke {
     private Scanner sc = new Scanner(System.in);
+    private ArrayList<String> list;
+
+    public Duke() {
+        this.list = new ArrayList<String>();
+    }
+
     public static void main(String[] args) {
         String logo = " ____        _        \n"
                 + "|  _ \\ _   _| | _____ \n"
@@ -36,6 +45,20 @@ public class Duke {
         System.out.println("\t____________________________________________________________");
     }
 
+    public void inputToList(String s) {
+        list.add(s);
+        printMessage("added: " + s);
+    }
+
+    public void printList() {
+        printLongLine();
+        for (int i = 0; i < list.size(); i++) {
+            int number = i + 1;
+            System.out.printf("\t%d. %s\n", number, list.get(i));
+        }
+        printLongLine();
+    }
+
     public void runApp() {
         greetingMessage();
         boolean enteredBye = false;
@@ -43,8 +66,10 @@ public class Duke {
             String input = sc.nextLine();
             if (input.equals("bye")) {
                 enteredBye = true;
+            } else if (input.equals("list")) {
+                printList();
             } else {
-                echoMessage(input);
+                inputToList(input);
             }
         }
         goodbyeMessage();
