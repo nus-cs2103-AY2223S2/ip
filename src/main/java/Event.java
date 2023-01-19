@@ -39,14 +39,14 @@ public class Event extends Task{
         int fromIndex = segments.indexOf("/from") + 1;
         int toIndex = segments.indexOf("/to") + 1;
 
-        if (detailsIndex == 0 || fromIndex == 0 || toIndex == 0) {
+
+        if (detailsIndex == 0 || fromIndex == 0 || toIndex == 0)  {
             throw new InsufficientEventArgumentException("Did you forget to add the event description or '/from' or '/to' details?");
         }
 
         List<String> detailsSublist = segments.subList(detailsIndex, fromIndex - 1);
         List<String> fromSublist = segments.subList(fromIndex, toIndex - 1);
         List<String> toSublist = segments.subList(toIndex, segments.size());
-
 
         String details = String.join(" ", detailsSublist);
         String from = String.join(" ", fromSublist);

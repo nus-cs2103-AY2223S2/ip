@@ -54,7 +54,7 @@ public class Duke {
 
                 default:
 
-                    if (input.contains("mark") || input.contains("unmark")) {
+                    if (input.contains("mark") || input.contains("unmark") || input.contains("delete")) {
 
                         int index;
 
@@ -84,6 +84,13 @@ public class Duke {
                             Task taskToMark = taskList.get(index);
                             taskToMark.changeStatus(false);
                             System.out.println("\nUwU_TaskMaster ＵｗＵ: omg nyoooooo why you have nyot compwete youw t-task :(");
+                            Duke.displayTasks(taskList, false);
+
+                        }
+
+                        if (input.contains("delete")) {
+                            taskList.remove(index);
+                            System.out.println("\nUwU_TaskMaster ＵｗＵ: Okay your t-task is deweted!");
                             Duke.displayTasks(taskList, false);
 
                         }
