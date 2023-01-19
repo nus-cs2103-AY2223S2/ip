@@ -7,6 +7,7 @@ import java.io.IOException;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.time.LocalDate;
+import java.util.Objects;
 import java.util.Scanner;
 
 import duke.exception.InvalidInputException;
@@ -72,6 +73,8 @@ public class Storage {
                 boolean isDone = information[1].equals("[X]");
                 String description = information[2];
 
+                storageFormatChecker(taskTag, information[1]);
+
                 if (taskTag.equals("[T]")) {
                     TodoTask todo = new TodoTask(description);
                     if (isDone) {
@@ -100,6 +103,14 @@ public class Storage {
             throw new StorageFileException("☹ OOPS!!! There's something wrong "
                     + "when reading the Storage list");
         }
+    }
+
+    private void storageFormatChecker(String tag, String isDone) {
+        assert Objects.equals(tag, "[T]") || Objects.equals(tag, "[D]") || Objects.equals(tag, "[E]")
+                : "Type tag of event should be [T], [D], or [E]";
+
+        assert Objects.equals(isDone, "[X]") || Objects.equals(isDone, "[ ]")
+                : "IsDone tag of event should be [ ], or [X]";
     }
 
     //@@author Yufannnn-reused
