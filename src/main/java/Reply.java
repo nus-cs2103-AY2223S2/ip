@@ -1,3 +1,4 @@
+import java.util.List;
 import java.util.Scanner;
 
 public class Reply {
@@ -11,14 +12,14 @@ public class Reply {
         System.out.println("Bye. Hope to see you again soon!");
     }
 
-    public void list(Task[] data, int count) {
+    public void list(List<Task> tasks, int count) {
         System.out.println("Here are the tasks in your list:");
         for (int i = 0; i < count; i++) {
-            System.out.println((i+1) + "." + data[i].toString());
+            System.out.println((i+1) + "." + tasks.get(i).toString());
         }
     }
 
-    public void mark(Task[] data) {
+    public void mark(List<Task> tasks) {
         String action = command[0];
         try {
             if (command.length == 1) {
@@ -30,26 +31,26 @@ public class Reply {
                 throw new DukeException(null, null);
             }
             int index = sc.nextInt() - 1;
-            if (data[index] == null) {
+            if (tasks.get(index) == null) {
                 sc.close();
                 throw new DukeException(null, null);
             }
 
             if (action.equals("mark")) {
-                data[index].markAsDone(); 
+                tasks.get(index).markAsDone(); 
                 System.out.println("Nice! I've marked this task as done:");
             } else {
-                data[index].unmarkTask();
+                tasks.get(index).unmarkTask();
                 System.out.println("OK, I've marked this task as not done yet:");
             }
-            System.out.println(data[index].toString());
+            System.out.println(tasks.get(index).toString());
             sc.close();
         } catch (DukeException e) {
             System.out.println("☹ OOPS!!! A valid number has to follow the mark or unmark command.");
         }
     }
 
-    public void todo(Task[] data, int count) {
+    public void todo(List<Task> tasks, int count) {
         try {
             if (command.length == 1) {
                 throw new DukeException(null, null);
@@ -61,16 +62,16 @@ public class Reply {
                     sb.append(" ");
                 }
             }
-            data[count] = new Todo(sb.toString());
+            tasks.add(new Todo(sb.toString()));
             System.out.println("Got it. I've added this task:");
-            System.out.println(data[count].toString());
-            System.out.println("Now you have " + (count+1) + " tasks in the list.");
+            System.out.println(tasks.get(count).toString());
+            System.out.printf("Now you have %d tasks in the list.\n", count + 1);
         } catch (DukeException e) {
             System.out.println("☹ OOPS!!! The description cannot be empty!");
         }
     }
 
-    public void event(Task[] data, int count) {
+    public void event(List<Task> tasks, int count) {
         try {
             StringBuilder sb = new StringBuilder();
             StringBuilder from = new StringBuilder();
@@ -105,16 +106,16 @@ public class Reply {
             if (from.length() == 0 || to.length() == 0) {
                 throw new DukeException(null, null);
             }
-            data[count] = new Event(sb.toString(), from.toString(), to.toString());
+            tasks.add(new Event(sb.toString(), from.toString(), to.toString()));
             System.out.println("Got it. I've added this task:");
-            System.out.println(data[count].toString());
-            System.out.println("Now you have " + (count+1) + " tasks in the list.");
+            System.out.println(tasks.get(count).toString());
+            System.out.printf("Now you have %d tasks in the list.\n", count + 1);
         } catch (DukeException e) {
             System.out.println("☹ OOPS!!! The timing was not specified!");
         }
     }
 
-    public void deadline(Task[] data, int count) {
+    public void deadline(List<Task> tasks, int count) {
         try {
             StringBuilder sb = new StringBuilder();
             StringBuilder by = new StringBuilder();
@@ -138,12 +139,37 @@ public class Reply {
             if (by.length() == 0) {
                 throw new DukeException(null, null);
             }
-            data[count] = new Deadline(sb.toString(), by.toString());
+            tasks.add(new Deadline(sb.toString(), by.toString()));
             System.out.println("Got it. I've added this task:");
-            System.out.println(data[count].toString());
-            System.out.println("Now you have " + (count+1) + " tasks in the list.");
+            System.out.println(tasks.get(count).toString());
+            System.out.printf("Now you have %d tasks in the list.\n", count + 1);
         } catch (DukeException e) {
             System.out.println("☹ OOPS!!! The timing was not specified!");
+        }
+    }
+
+    public void delete(List<Task> tasks, int count) {
+        try {
+            if (command.length == 1) {
+                throw new DukeException(null, null);
+            }
+            Scanner sc = new Scanner(command[1]);
+            if (!sc.hasNextInt()) {
+                sc.close();
+                throw new DukeException(null, null);
+            }
+            int index = sc.nextInt() - 1;
+            if (tasks.get(index) == null) {
+                sc.close();
+                throw new DukeException(null, null);
+            }
+            System.out.println("Noted. I've removed this task:");
+            System.out.println(tasks.get(index).toString());
+            System.out.printf("Now you have %d tasks in the list.\n", count - 1);
+            tasks.remove(index);
+            sc.close();
+        } catch (DukeException e) {
+            System.out.println("☹ OOPS!!! A valid number has to follow the delete command.");
         }
     }
 

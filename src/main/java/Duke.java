@@ -1,3 +1,5 @@
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Scanner;
 
 public class Duke {
@@ -15,7 +17,7 @@ public class Duke {
 
     private static void chat() {
         int count = 0;
-        Task[] data = new Task[100];
+        List<Task> tasks = new ArrayList<>();
         Scanner sc = new Scanner(System.in);
         while (sc.hasNext()) {
             String echo = sc.nextLine();
@@ -27,25 +29,29 @@ public class Duke {
                     reply.bye();
                     return;
                 case "list":
-                    reply.list(data,count);
+                    reply.list(tasks,count);
                     break;
                 case "mark":
-                    reply.mark(data);
+                    reply.mark(tasks);
                     break;
                 case "unmark":
-                    reply.mark(data);
+                    reply.mark(tasks);
                     break;
                 case "todo":
-                    reply.todo(data,count);
+                    reply.todo(tasks,count);
                     count++;
                     break;
                 case "event":
-                    reply.event(data, count);
+                    reply.event(tasks, count);
                     count++;
                     break;
                 case "deadline":
-                    reply.deadline(data, count);
+                    reply.deadline(tasks, count);
                     count++;
+                    break;
+                case "delete":
+                    reply.delete(tasks, count);
+                    count--;
                     break;
                 default:
                     reply.def();
