@@ -1,5 +1,5 @@
 
-public class Tasks {
+public abstract class Tasks {
     private boolean marked;
     private String content;
 

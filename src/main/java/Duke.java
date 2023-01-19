@@ -2,7 +2,7 @@ import java.util.*;
 
 public class Duke {
 
-    static String line = "      -----------------------------------------------------------------";
+    static String line = "      _____________________________________________________________________";
     static ArrayList<Tasks> list = new ArrayList<Tasks>(100);
     public static void main(String[] args) {
         greet();
@@ -12,70 +12,106 @@ public class Duke {
 
         while(true) {
             String input = sc.nextLine();
-            String[] input_List = input.split(" ");
-            String firstWord = "";
-            String secondWord = "";
 
-            if (input_List.length == 2 ) {
-                firstWord = input_List[0];
-                secondWord = input_List[1];
-            }
-
-
-            if (input.equalsIgnoreCase("bye")) {
+            if (InputProcessor.is_Bye(input)) {
                 System.out.println("        byebye! Have an exquisite day, cutiepatootie");
                 break;
-            } else if (input.equalsIgnoreCase("list")) {
+            }
+
+            //list
+            else if (InputProcessor.is_List(input)) {
                 System.out.println(line);
                 for(int i = 0; i < list.size(); i++) {
                     System.out.println("        " + (i + 1) + ". " + list.get(i));
                 }
                 System.out.println(line);
-            } else if (firstWord.equalsIgnoreCase("mark")) {
-                String int_Str = secondWord;
+            }
+
+            //mark
+            else if (InputProcessor.is_Mark(input)) {
+                String int_Str = input.split(" ", 2)[1];
                 int index = Integer.parseInt(int_Str);
                 if(list.size() != 0 && index > 0 && index <= list.size() ) {
                     list.get(index - 1 ).mark();
-                } else{
+                } else {
                     System.out.println("Invalid Index!");
                 }
-            } else if (firstWord.equalsIgnoreCase("unmark")) {
-                String int_Str = secondWord;
+            }
+
+            //unmark
+            else if (InputProcessor.is_Unmark(input)) {
+                String int_Str = input.split(" ", 2)[1];
                 int index = Integer.parseInt(int_Str);
                 if(list.size() != 0 && index > 0 && index <= list.size()) {
-                    list.get(index).unmark();
+                    list.get(index - 1).unmark();
                 } else{
                     System.out.println("Invalid Index!");
                 }
             }
-                else {
-                //echoes input
+
+            //todo
+            else if (InputProcessor.is_toDo(input)) {
+                String todo = input.split(" ", 2)[1];
                 System.out.println("\n" + line);
-                addToList(input);
+                list.add(new ToDo(todo));
+                echo(list.get(list.size() - 1));
                 System.out.println(line);
+            }
+
+            //deadline
+            else if (InputProcessor.is_Deadline(input)) {
+                String deadline = input.split(" ", 2)[1];
+                String[] deadline_Arr = deadline.split(" /by");
+
+                if (deadline_Arr.length == 2) {
+                    String content = deadline_Arr[0];
+                    String date = deadline_Arr[1];
+                    System.out.println("\n" + line);
+                    list.add(new Deadline(content, date));
+                    echo(list.get(list.size() - 1));
+                    System.out.println(line);
+                    } else {
+                        System.out.println("Invalid Input! You need to specify date or content is empty!");
+                }
+            }
+
+            //event
+            else if (InputProcessor.is_Event(input)) {
+                String event = input.split(" ", 2)[1];
+                String[] event_Arr = event.split(" /from", 2);
+
+                if (event_Arr.length == 2) {
+                    String content = event_Arr[0];
+                    String[] period_Arr = event_Arr[1].split(" /to");
+                    if (period_Arr.length == 2) {
+                        String from = period_Arr[0];
+                        String to = period_Arr[1];
+                        System.out.println("\n" + line);
+                        list.add(new Event(content, from, to));
+                        echo(list.get(list.size() - 1));
+                        System.out.println(line);
+                    } else {
+                        System.out.println("Invalid Input! You need to specify a /from and /to or content is empty!");
+                    }
+                } else {
+                    System.out.println("Invalid Input! You need to specify date or content is empty!");
+                }
+            }
+
+            else {
+                System.out.println("Invalid Input!");
             }
         }
         sc.close();
         System.out.println(line);
     }
 
-    public static void addToList(String name) {
-        if (name == "" || name == null) {
-            System.out.println("Empty input!");
-        } else {
-            System.out.println();
-            System.out.println("        added: " + name);
-            list.add(new Tasks(name));
-        }
-    }
-
-    public static void echo(String name) {
-        if (name == "" || name.isEmpty()) {
-            System.out.println("Empty input!");
-        } else {
-            System.out.println();
-            System.out.println(name);
-        }
+    public static void echo(Tasks task) {
+        System.out.println(line);
+        System.out.println("Got it. I've added this task:");
+        System.out.println(task);
+        System.out.println("Now you have " + list.size() + " tasks in the list.");
+        System.out.println(line);
     }
 
     static void greet() {
