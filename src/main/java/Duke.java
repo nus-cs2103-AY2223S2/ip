@@ -11,6 +11,9 @@ public class Duke {
         //greet
         System.out.println("Hello I'm Duke\nWhat can I do for you?");
 
+        //assume no more than 100 tasks
+        String[] lstOfTasks = new String[100];
+        
         Scanner takingInput = new Scanner(System.in);
         String userTyped = takingInput.nextLine();
 
