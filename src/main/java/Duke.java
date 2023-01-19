@@ -35,21 +35,26 @@ public class Duke {
             switch(msg) {
 
                 case "list":
+                    System.out.println("Here are the tasks in your list:");
                     for (int i = 1; i < listNum; i++) {
                         System.out.println(i + ". " + list[i]);
                     }
                     break;
 
                 case "mark":
-                    // mark
+                    int markNum = sc.nextInt();
+                    list[markNum].markDone();
+                    System.out.println("Nice! I've marked this task as done:\n  " + list[markNum]);
                     break;
 
                 case "unmark":
-                    // unmark
+                    int unmarkNum = sc.nextInt();
+                    list[unmarkNum].markUndone();
+                    System.out.println("Ok, I've marked this task as not done yet:\n  " + list[unmarkNum]);
                     break;
 
                 default:
-                    msg += " " + sc.nextLine(); // read finish the task
+                    msg += sc.nextLine(); // read finish the task
                     Task task = new Task(msg);
                     list[listNum] = task;
                     listNum++;
