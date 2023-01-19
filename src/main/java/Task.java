@@ -7,15 +7,16 @@ public class Task {
         this.done = done;
     }
 
-    void markDone(){
-        this.done = true;
-    }
-
-    void markUndone(){
-        this.done = false;
+    void toggleDone() {
+        this.done = !this.done;
     }
 
     String getDoness(){
         return done ? "X" : " ";
+    }
+
+    @Override
+    public String toString() {
+        return "[" + this.getDoness() + "] " + this.desc;
     }
 }
