@@ -19,24 +19,45 @@ How can I help you today?
     ____________________________________________________________
     Here are your pending tasks: 
     1. [T][ ] borrow book
+    You have 1 tasks in the list
 
     ____________________________________________________________
     ____________________________________________________________
     Noted, task added: 
-      [D][ ] deadline return book  (by: Sunday)
+      [D][ ] deadline return book (by: Sunday)
     Number of tasks in the list: 2
 
     ____________________________________________________________
     ____________________________________________________________
     Noted, task added: 
-      [E][ ] event project meeting  (from: Mon 2pm to: 4pm)
+      [E][ ] event project meeting (from: Mon 2pm to: 4pm)
     Number of tasks in the list: 3
 
     ____________________________________________________________
     ____________________________________________________________
     Noted, task added: 
-      [D][ ] deadline do homework  (by: no idea :-p)
+      [D][ ] deadline do homework (by: no idea :-p)
     Number of tasks in the list: 4
+
+    ____________________________________________________________
+    ____________________________________________________________
+    Well done! Good job for completing your task!
+      [T][X] borrow book
+
+    ____________________________________________________________
+    ____________________________________________________________
+    Well done! Good job for completing your task!
+      [E][X] event project meeting (from: Mon 2pm to: 4pm)
+
+    ____________________________________________________________
+    ____________________________________________________________
+    I have un-mark this task. Remember to complete your task on time!
+      [T][ ] borrow book
+
+    ____________________________________________________________
+    ____________________________________________________________
+    Well done! Good job for completing your task!
+      [D][X] deadline return book (by: Sunday)
 
     ____________________________________________________________
     ____________________________________________________________
