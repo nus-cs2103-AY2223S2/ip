@@ -1,6 +1,8 @@
 import java.util.Scanner;
 import java.util.ArrayList;
-
+/**
+ * Duke is a personal assistant chatbot that help to keep track of various stuff.
+ */
 public class Duke {
     // Attribute
     static final String BORDER = "----------------------------------------";
@@ -73,7 +75,8 @@ public class Duke {
         System.out.println("Now you have " + tasks.size() + " tasks in this list\n" + BORDER);
     }
 
-    public void read(Scanner sc) {
+    // Read commands, possibly change to public. Return 0 at exit.
+    protected int read(Scanner sc) {
         String command = sc.next();
         // Useful variables
         int rank;
@@ -82,7 +85,7 @@ public class Duke {
             switch (command) {
                 case "bye":
                     System.out.println("Bye. Hope to see you again soon!");
-                    return;
+                    return 0;
                 case "list":
                     list();
                     break;
@@ -129,8 +132,10 @@ public class Duke {
         } catch (DukeException e) {
             System.out.println(e.getMessage() + "\n" + BORDER);
         }
+        return 1;
     }
 
+    // Driver function
     public static void main(String[] args) {
         String logo = " ____        _        \n"
                 + "|  _ \\ _   _| | _____ \n"
@@ -142,7 +147,9 @@ public class Duke {
         Duke duke1 = new Duke();
         Scanner sc = new Scanner(System.in);
         while (sc.hasNext()) {
-            duke1.read(sc);
+            if (duke1.read(sc) == 0) {
+                return;
+            }
         }
     }
 }

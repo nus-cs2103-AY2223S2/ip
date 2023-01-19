@@ -1,35 +1,39 @@
-// Class for each individual tasks.
-
+/**
+ * Represents a task with modifiable status.
+ */
 public class Task {
 
     private String content;
     private boolean isDone = false;
-    public Task(String content) {
+    protected Task(String content) {
         this.content = content;
     }
 
-    public String getStatusIcon() {
+    protected String getStatusIcon() {
         return (isDone ? "X" : " ");
     }
-    public void markAsDone() {
+    protected void markAsDone() {
         isDone = true;
     }
 
-    public void markAsUndone() {
+    protected void markAsUndone() {
         isDone = false;
     }
 
-    public String getTypeIcon() {
+    protected String getTypeIcon() {
         return " ";
     }
 
+    /**
+     * @return String representation of the generic task
+     */
     @Override
     public String toString() {
         return content;
     }
 
     // Status and message
-    public String fullMessage() {
+    protected String fullMessage() {
         return String.format("[%s][%s] %s", getTypeIcon(), getStatusIcon(), this);
     }
 

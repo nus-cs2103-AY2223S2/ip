@@ -1,8 +1,11 @@
+/**
+ * Represents an event task.
+ */
 public class Events extends Task {
     private String begin;
     private String end;
 
-    public Events(String[] content) throws DukeException {
+    protected Events(String[] content) throws DukeException {
         super(content[0]);
         if (content[0].isEmpty() || content.length != 3) {
             throw new DukeException("OOPS!!! Command should be in the format 'event [M] /from [M] /to [M]'\n" +
@@ -19,10 +22,13 @@ public class Events extends Task {
     }
 
     @Override
-    public String getTypeIcon() {
+    protected String getTypeIcon() {
         return "E";
     }
 
+    /**
+     * @return String representation of the event task
+     */
     @Override
     public String toString() {
         return super.toString() + "(from: " + begin + "to: " + end + ")";
