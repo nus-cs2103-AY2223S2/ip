@@ -11,4 +11,5 @@ todo borrow book
 list
 test
 todo
+delete 4
 bye

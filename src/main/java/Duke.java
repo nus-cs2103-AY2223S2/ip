@@ -87,6 +87,19 @@ public class Duke {
                     continue;
                 }
 
+                m = Pattern.compile("^delete (.+)").matcher(input);
+                if (m.find()) {
+                    Task curr = tasklist.remove(Integer.parseInt(m.group(1)) - 1);
+
+                    chatbox("Noted. I've removed this task:\n"
+                        + curr.toString() +
+                        String.format("\nNow you have %d tasks in the list.",
+                            tasklist.size())
+                        );
+                    continue;
+                }
+
+
                 if (Pattern.compile("^todo").matcher(input).find()) {
                     m = Pattern.compile("^todo (.+)").matcher(input);
                     if (!m.find()) {
