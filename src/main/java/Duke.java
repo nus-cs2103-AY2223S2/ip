@@ -26,23 +26,41 @@ public class Duke {
                     }
 
                 } else if (splitCheck[0].equals("mark")) {
-                    if (splitCheck[1].isEmpty()) {
+                    if (splitCheck.length == 1 || splitCheck[1].isEmpty()) {
                         throw new DukeException(" ☹ OOPS!!! The item number is required to mark.");
                     }
                     int taskNum = Integer.parseInt(splitCheck[1]);
+                    if (taskNum > taskList.size() || taskNum <= 0) {
+                        throw new DukeException(" ☹ OOPS!!! The item number is out of range.");
+                    }
                     Task oneTask = taskList.get(taskNum - 1);
                     oneTask.markTask();
                     message = "Nice! I've marked this task as done:\n " + oneTask.toString();
 
                 } else if (splitCheck[0].equals("unmark")) {
-                    if (splitCheck[1].isEmpty()) {
+                    if (splitCheck.length == 1 || splitCheck[1].isEmpty()) {
                         throw new DukeException(" ☹ OOPS!!! The item number is required to unmark.");
                     }
                     int taskNum = Integer.parseInt(splitCheck[1]);
+                    if (taskNum > taskList.size() || taskNum <= 0) {
+                        throw new DukeException(" ☹ OOPS!!! The item number is out of range.");
+                    }
                     Task oneTask = taskList.get(taskNum - 1);
                     oneTask.unmarkTask();
                     message = "OK! I've marked this task as not done yet:\n " + oneTask.toString();
 
+                } else if (splitCheck[0].equals("delete")) {
+                    if (splitCheck.length == 1 || splitCheck[1].isEmpty()) {
+                        throw new DukeException(" ☹ OOPS!!! The item number is required to delete.");
+                    }
+                    int taskNum = Integer.parseInt(splitCheck[1]);
+                    if (taskNum > taskList.size() || taskNum <= 0) {
+                        throw new DukeException(" ☹ OOPS!!! The item number is out of range.");
+                    }
+                    Task delTask = taskList.get(taskNum-1);
+                    taskList.remove(taskNum-1);
+                    message = "Noted. I've removed this task:\n " + delTask.toString();
+                    message += "\nNow you have " + taskList.size() + " tasks in the list.";
                 } else if (splitCheck[0].equals("todo")) {
                     if (splitCheck.length == 1 || splitCheck[1].isEmpty()) {
                         throw new DukeException(" ☹ OOPS!!! The description of a todo cannot be empty.");
