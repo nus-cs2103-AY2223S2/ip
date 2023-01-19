@@ -43,8 +43,16 @@ public class Duke {
                     System.out.println("OK, I've marked this task as not done yet:");
                     System.out.println((index+1) + "." + taskList.get(index));
                     System.out.println(INDENT_LINE);
+                } else if (task.startsWith("delete")) {
+                    int index = Integer.parseInt(task.substring(7)) - 1;
+                    Task deletedTask = taskList.get(index);
+                    taskList.remove(index);
+                    System.out.println(INDENT_LINE);
+                    System.out.println("Noted. I've removed this task:");
+                    System.out.println(deletedTask);
+                    System.out.println("Now you have " + taskList.size() + " tasks in the list.");
+                    System.out.println(INDENT_LINE);
                 } else {
-
                     if (task.startsWith("todo")) {
                         String description = task.substring(5);
                         if (description.trim().equals("")) {
