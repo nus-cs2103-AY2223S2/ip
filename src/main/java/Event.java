@@ -2,10 +2,10 @@ public class Event extends Task{
     String from;
     String to;
 
-    Event(String name) {
-        super(name.split("/")[0].substring(6));
-        this.from = name.split("/")[1].substring(5);
-        this.to = name.split("/")[2].substring(3);
+    Event(String name, String from, String to) {
+        super(name);
+        this.from = from;
+        this.to = to;
     }
 
     @Override
