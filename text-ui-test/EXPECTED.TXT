@@ -1,7 +1,58 @@
-Hello from
  ____        _        
 |  _ \ _   _| | _____ 
 | | | | | | | |/ / _ \
 | |_| | |_| |   <  __/
 |____/ \__,_|_|\_\___|
 
+	~~~
+	Hello, I'm Ekud! What can I do for you?
+	~~~
+	~~~
+	Task added:
+		[T][ ] task1
+	Now you have 1 tasks in the list.
+	~~~
+	~~~
+	Current tasks in list:
+	1. [T][ ] task1
+	~~~
+	~~~
+	Well done. Task has been marked as completed:
+		[T][O] task1
+	~~~
+	~~~
+	Current tasks in list:
+	1. [T][O] task1
+	~~~
+	~~~
+	Task added:
+		[D][ ] task2 (by: Sunday)
+	Now you have 2 tasks in the list.
+	~~~
+	~~~
+	Well done. Task has been marked as completed:
+		[D][O] task2 (by: Sunday)
+	~~~
+	~~~
+	Got it. Task has been unmarked:
+		[D][ ] task2 (by: Sunday)
+	~~~
+	~~~
+	Current tasks in list:
+	1. [T][O] task1
+	2. [D][ ] task2 (by: Sunday)
+	~~~
+	~~~
+	Task added:
+		[E][ ] task3 (from: FirstDay to: SecondDay)
+	Now you have 3 tasks in the list.
+	~~~
+	~~~
+	Current tasks in list:
+	1. [T][O] task1
+	2. [D][ ] task2 (by: Sunday)
+	3. [E][ ] task3 (from: FirstDay to: SecondDay)
+	~~~
+	~~~
+	Bye. Always at your service.
+	~~~
