@@ -1,5 +1,5 @@
 import java.util.*;
-//TODO: COMMIT CHANGES
+
 public class Duke {
     private static boolean isRunning = true;
     private static List<Task> tasks = new ArrayList<Task>();
@@ -47,11 +47,11 @@ public class Duke {
     }
     private static void addTodo(String command) {
         try {
-            command = command.substring("todo ".length());
+            command = command.split(" ", 2)[1];
             Task newTask = new Todo(command);
             tasks.add(newTask);
             System.out.println(String.format("Added: %s", newTask.printTask()));
-        } catch (IllegalArgumentException e) {
+        } catch (ArrayIndexOutOfBoundsException e) {
             System.out.println("Oops! The description of todo cannot be empty!");
         }
     }
@@ -91,6 +91,12 @@ public class Duke {
     private static void noMatch() {
         System.out.println("Sorry, I didn't understand that, please ask again.");
     }
+    
+    private static void deleteEvent(String command) {
+        int taskIndex = Integer.parseInt(command.split(" ")[1]) - 1;
+        System.out.println(String.format("Okay! I deleted task %s", tasks.get(taskIndex).printTask()));
+        tasks.remove(taskIndex);
+    }
     public static void main(String[] args) {
         String logo = " ____        _        \n"
                 + "|  _ \\ _   _| | _____ \n"
@@ -119,16 +125,18 @@ public class Duke {
                 endDuke();
             } else if (command.equals("list")) {
                 showTasks();
-            } else if (command.startsWith("mark ")) {
+            } else if (command.startsWith("mark")) {
                 markTask(command);
-            } else if (command.startsWith("unmark ")) {
+            } else if (command.startsWith("unmark")) {
                 unmarkTask(command);
-            } else if (command.startsWith("todo ")) {
+            } else if (command.startsWith("todo")) {
                 addTodo(command);
-            } else if (command.startsWith("deadline ")) {
+            } else if (command.startsWith("deadline")) {
                 addDeadline(command);
-            } else if (command.startsWith("event ")) {
+            } else if (command.startsWith("event")) {
                 addEvent(command);
+            } else if (command.startsWith("delete")) {
+                deleteEvent(command);
             } else {
                 noMatch();
             }
