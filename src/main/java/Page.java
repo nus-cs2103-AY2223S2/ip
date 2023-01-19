@@ -28,15 +28,25 @@ public class Page {
             help();
         }
         else {
-            String[] splitInput = input.split(" ");
-            if (splitInput[0].equals("complete")) {
-                int questNum = Integer.parseInt(splitInput[1]);
+            String[] splitBySpace = input.split(" ");
+            String firstWord = splitBySpace[0];
+            if (firstWord.equals("complete")) {
+                int questNum = Integer.parseInt(splitBySpace[1]);
                 quests.get(questNum - 1).markComplete();
-            } else if (splitInput[0].equals("incomplete")) {
-                int questNum = Integer.parseInt(splitInput[1]);
+            } else if (firstWord.equals("incomplete")) {
+                int questNum = Integer.parseInt(splitBySpace[1]);
                 quests.get(questNum - 1).markIncomplete();
-            } else {
-                addQuest(input);
+            } else if (firstWord.equals("todo")) {
+                input = input.replaceFirst("todo ", "");
+                addTodo(input);
+            } else if (firstWord.equals("deadline")) {
+                input = input.replaceFirst("deadline ", "");
+                String[] splitByBy = input.split(" /by ");
+                addDeadline(splitByBy[0], splitByBy[1]);
+            } else if (firstWord.equals("event")) {
+                input = input.replaceFirst("event ", "");
+                String[] splitByFromTo = input.split(" /from | /to");
+                addEvent(splitByFromTo[0], splitByFromTo[1], splitByFromTo[2]);
             }
         }
         listen();
@@ -52,16 +62,29 @@ public class Page {
         System.out.println(helptext);
     }
 
-    private void addQuest(String input) {
-        quests.add(new Quest(input));
-        System.out.println("Added to Quest Log: " + input);
+    private void addTodo(String input) {
+        Todo t = new Todo(input);
+        quests.add(t);
+        System.out.println("Added to Quest Log: " + t.toString());
+    }
+
+    private void addDeadline(String input, String to) {
+        Deadline d = new Deadline(input, to);
+        quests.add(d);
+        System.out.println("Added to Quest Log: " + d.toString());
+    }
+
+    private void addEvent(String input, String from, String to) {
+        Event e = new Event(input, from, to);
+        quests.add(e);
+        System.out.println("Added to Quest Log: " + e.toString());
     }
 
     private void log() {
         System.out.println("Quest Log: ");
         for (int i = 0; i < quests.size(); i++) {
             Quest q = quests.get(i);
-            System.out.println((i + 1) + ": " + q.getCompletionIcon() + " " + q.getDescription());
+            System.out.println((i + 1) + ": " + q.toString());
         }
     }
 

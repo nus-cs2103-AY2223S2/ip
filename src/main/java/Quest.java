@@ -7,7 +7,7 @@ public class Quest {
         this.isCompleted = false;
     }
 
-    public String getCompletionIcon() {
+    private String getCompletionIcon() {
         if (isCompleted) {
             return "[X]";
         } else {
@@ -15,26 +15,26 @@ public class Quest {
         }
     }
 
-    public String getDescription() {
-        return description;
-    }
-
     public void markComplete() {
         if (isCompleted) {
-            System.out.println("Quest is already complete!\n" + getCompletionIcon() + " " + description);
+            System.out.println("Quest is already complete!\n" + toString());
         } else {
             isCompleted = true;
-            System.out.println("Quest Complete! Hooray!\n" + getCompletionIcon() + " " + description);
+            System.out.println("Quest Complete! Hooray!\n" + toString());
         }
     }
 
     public void markIncomplete() {
         if (isCompleted) {
             isCompleted = false;
-            System.out.println("Quest Incomplete, the realm is in mortal danger!\n" + getCompletionIcon() + " " + description);
+            System.out.println("Quest Incomplete, the realm is in mortal danger!\n" + toString());
         } else {
-            System.out.println("Quest is already incomplete...\n" + getCompletionIcon() + " " + description);
+            System.out.println("Quest is already incomplete...\n" + toString());
         }
+    }
 
+    @Override
+    public String toString() {
+        return getCompletionIcon() + " " + description;
     }
 }
