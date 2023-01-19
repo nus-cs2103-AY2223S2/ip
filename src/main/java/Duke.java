@@ -39,11 +39,20 @@ public class Duke {
     }
 
     private static boolean isValidTask(String command) {
-        if (command.length() >= 6 && command.substring(0, 4).equals("todo")) {
+        if (command.length() >= 4 && command.substring(0, 4).equals("todo")) {
+            if (command.length() <= 5) {
+                throw new DukeException("The description of a todo cannot be empty.");
+            }
             return true;
-        } else if (command.length() >= 10 && command.substring(0, 8).equals("deadline")) {
+        } else if (command.length() >= 8 && command.substring(0, 8).equals("deadline")) {
+            if (command.length() <= 9) {
+                throw new DukeException("The description of a deadline cannot be empty.");
+            }
             return true;
-        } else if (command.length() >= 7 && command.substring(0, 5).equals("event")) {
+        } else if (command.length() >= 5 && command.substring(0, 5).equals("event")) {
+            if (command.length() <= 9) {
+                throw new DukeException("The description of an event cannot be empty.");
+            }
             return true;
         }
         return false;
@@ -99,19 +108,24 @@ public class Duke {
         Scanner sc = new Scanner(System.in);
         String str = sc.nextLine();
         while (!str.equals(bye)) {
-            if (str.equals(list)) {
-                list();
-            } else if (str.length() >= 4 && str.substring(0, 4).equals(mark)) {
-                mark(Character.getNumericValue(str.charAt(5)));
-            } else if (str.length() >= 6 && str.substring(0, 6).equals(unmark)) {
-                unmark(Character.getNumericValue(str.charAt(7)));
-            } else if (isValidTask(str)) {
-                addTask(str);
-            } else {
-                // Exception
+            try {
+                if (str.equals(list)) {
+                    list();
+                } else if (str.length() >= 4 && str.substring(0, 4).equals(mark)) {
+                    mark(Character.getNumericValue(str.charAt(5)));
+                } else if (str.length() >= 6 && str.substring(0, 6).equals(unmark)) {
+                    unmark(Character.getNumericValue(str.charAt(7)));
+                } else if (isValidTask(str)) {
+                    addTask(str);
+                } else {
+                    throw new DukeException("I'm sorry, but I don't know what that means :-(");
+                }
+            } catch (DukeException e) {
+                System.err.println("     " + e);
+            } finally {
+                System.out.println();
+                str = sc.nextLine();
             }
-            System.out.println();
-            str = sc.nextLine();
         }
         indentedPrintln(goodbyeMessage);
     }
