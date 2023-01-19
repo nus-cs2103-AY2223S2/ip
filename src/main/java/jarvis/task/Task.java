@@ -43,17 +43,17 @@ public abstract class Task {
 
         try {
             switch (type) {
-                case "T":
-                    return new ToDoTask(description, isDone);
-                case "D":
-                    if (scanner.hasNext()) deadline = scanner.next();
-                    return new DeadlineTask(description, deadline, isDone);
-                case "E":
-                    if (scanner.hasNext()) fromDateTime = scanner.next();
-                    if (scanner.hasNext()) toDateTime = scanner.next();
-                    return new EventTask(description, fromDateTime, toDateTime, isDone);
-                default:
-                    return null;
+            case "T":
+                return new ToDoTask(description, isDone);
+            case "D":
+                if (scanner.hasNext()) deadline = scanner.next();
+                return new DeadlineTask(description, deadline, isDone);
+            case "E":
+                if (scanner.hasNext()) fromDateTime = scanner.next();
+                if (scanner.hasNext()) toDateTime = scanner.next();
+                return new EventTask(description, fromDateTime, toDateTime, isDone);
+            default:
+                return null;
             }
         } catch (CommandParseException e) {
             return null;

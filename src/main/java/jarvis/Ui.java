@@ -48,20 +48,20 @@ public class Ui {
      */
     public void printStandard(Response response) {
         switch (response) {
-            case INTRO:
-                print(String.format("Hello, I'm %s, how may I help you?", this.name));
-                break;
-            case GOODBYE:
-                print("Goodbye, and see you again!");
-                break;
-            case CONFUSED:
-                print("I don't quite understand, please try again.");
-                break;
-            case REJECT:
-                print("Sorry, I can't handle that right now.");
-                break;
-            default:
-                print("I'm most definitely a teapot.");
+        case INTRO:
+            print(String.format("Hello, I'm %s, how may I help you?", this.name));
+            break;
+        case GOODBYE:
+            print("Goodbye, and see you again!");
+            break;
+        case CONFUSED:
+            print("I don't quite understand, please try again.");
+            break;
+        case REJECT:
+            print("Sorry, I can't handle that right now.");
+            break;
+        default:
+            print("I'm most definitely a teapot.");
         }
     }
 
