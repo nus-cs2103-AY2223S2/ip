@@ -29,40 +29,107 @@ public class Duke {
 
             } else {
                 Task taskNew;
+
+
+
+
                 if (commands[0].equals("todo")) {
-                    String description = echo.substring(5);
-                    taskNew = new Todos(description);
+
+                    try {
+
+                        if (commands.length == 1) {
+                            throw new NoArgsException("todo");
+                        } else {
+                            String description = echo.substring(5);
+
+                            addTask(new Todos(description), storer, logo);
+                        }
+
+                    } catch (DukeException err) {
+                        System.out.println(err.getMessage());
+                    }
+
+
 
 
                 } else if (commands[0].equals("deadline")) {
-                    String[] queries = echo.split(" /");
-                    String description = queries[0].substring(9);
-                    String deadline = queries[1];
-                    taskNew = new Deadlines(description, deadline);
+                    try {
+                        if (commands.length == 1) {
+
+                            throw new NoArgsException("deadline");
+                        } else {
+
+
+                            String[] queries = echo.split(" /");
+
+                            try {
+
+                                if (queries.length < 2) {
+                                    throw new IncompleteException();
+                                } else {
+                                    String description = queries[0].substring(9);
+                                    String deadline = queries[1];
+
+                                    addTask(new Deadlines(description, deadline), storer, logo);
+                                }
+                            } catch (IncompleteException err) {
+                                System.out.println(err.getMessage());
+                            }
+
+
+                        }
+
+                    } catch (DukeException err) {
+                        System.out.println(err.getMessage());
+                    }
+
+
 
 
                 } else if (commands[0].equals("event")) {
-                    String[] queries = echo.split(" /");
-                    String description = queries[0].substring(6);
-                    String from = queries[1];
-                    String to = queries[2];
 
-                    taskNew = new Events(description, from, to);
+                    try {
+                        if (commands.length == 1) {
+                            throw new NoArgsException("event");
+                        } else {
+
+                            try {
+                                String[] queries = echo.split(" /");
+                                if (queries.length < 3){
+                                    throw new IncompleteException();
+                                } else {
+                                    String description = queries[0].substring(6);
+                                    String from = queries[1];
+                                    String to = queries[2];
+                                    addTask(new Events(description, from, to), storer, logo);
+                                }
+
+
+                            } catch (IncompleteException err) {
+                                System.out.println(err.getMessage());
+                            }
+
+                        }
+
+                    } catch (DukeException err) {
+                        System.out.println(err.getMessage());
+                    }
+
+
 
 
                 } else if (echo.equals("bye")){
                     break;
 
                 } else {
-                    taskNew = new Task(echo);
+                    try {
+                        throw new EmptyException();
+                    } catch (DukeException err) {
+                         System.out.println(err.getMessage());
+                    }
                 }
 
-                System.out.println(logo);
-                System.out.println("Got it. I've added this task:");
-                storer.add(taskNew);
-                System.out.println(taskNew);
-                System.out.println(String.format("Now you have %s tasks in the list.", storer.size()));
-                System.out.println(logo);
+
 
             }
 
@@ -72,6 +139,15 @@ public class Duke {
 
         }
         System.out.println(logo + "Bye. Hope to see you again soon!" + logo);
+    }
+
+    static void addTask(Task taskNew, ArrayList<Task> storer, String logo) {
+        System.out.println(logo);
+        System.out.println("Got it. I've added this task:");
+        storer.add(taskNew);
+        System.out.println(taskNew);
+        System.out.println(String.format("Now you have %s tasks in the list.", storer.size()));
+        System.out.println(logo);
     }
 }
 
