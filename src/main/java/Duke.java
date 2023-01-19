@@ -49,7 +49,7 @@ public class Duke {
      *
      * @param input User input.
      */
-    private static void unmarkTask(String input) {
+    private static void unmarkTask(String input) throws DukeException {
         int taskNumber;
         try {
             taskNumber = Integer.parseInt(input.split(" ")[1]);
@@ -57,7 +57,7 @@ public class Duke {
             System.out.printf("     %s%n", "OK, I've marked this task as not done yet:");
             System.out.printf("       %s%n", tasks.get(taskNumber - 1).toString());
         } catch (NumberFormatException|IndexOutOfBoundsException e) {
-            System.out.printf("     %s%n", "Please input valid task number.");
+            throw new DukeException("Input a valid task number.");
         }
     }
 
@@ -122,6 +122,24 @@ public class Duke {
     }
 
     /**
+     * Delete task from list.
+     *
+     * @param input User input.
+     */
+    private static void deleteTask(String input) throws DukeException {
+        int taskNumber;
+        try {
+            taskNumber = Integer.parseInt(input.split(" ")[1]);
+            Task t = tasks.remove(taskNumber - 1);
+            System.out.printf("     %s%n", "Noted. I've removed this task:");
+            System.out.printf("       %s%n", t.toString());
+            System.out.printf("     %s%d%s%n", "Now you have ", tasks.size(), " tasks in the list.");
+        } catch (NumberFormatException|IndexOutOfBoundsException e) {
+            throw new DukeException("Input a valid task number.");
+        }
+    }
+
+    /**
      * Replies to user inputs according to requirements.
      * If user inputs "bye", return to exit Duke.
      * If user inputs "list", print current tasks.
@@ -159,6 +177,9 @@ public class Duke {
                             break;
                         case "event":
                             addEvent(input);
+                            break;
+                        case "delete":
+                            deleteTask(input);
                             break;
                         default:
                             throw new DukeException("I'm sorry, but I don't know what that means :-(");
