@@ -41,4 +41,11 @@ event DESCRIPTION /to
 event DESCRIPTION /to TO TIME   
 event DESCRIPTION /to /from   
 event DESCRIPTION /to TO TIME /from   
+delete 2
+list
+delete
+delete NON-NUMERIC
+delete -1
+delete 0
+delete 999
 quit

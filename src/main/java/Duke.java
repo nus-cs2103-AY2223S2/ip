@@ -42,6 +42,9 @@ public class Duke {
                     case "unmark":
                         Duke.unmark(command, tasks);
                         break;
+                    case "delete":
+                        Duke.delete(command, tasks);
+                        break;
                     case "list":
                         Duke.list(command, tasks);
                         break;
@@ -186,6 +189,32 @@ public class Duke {
         task.markAsNotDone();
         Duke.say(
             "OK, I've marked this task as not done yet:\n"
+                + "  " + task.toString()
+        );
+    }
+
+    private static void delete(Command command, TaskList tasks) throws DukeInvalidArgumentException {
+        if (command.hasEmptyBody()) {
+            throw new DukeInvalidArgumentException("No task index given.");
+        }
+        
+        Predicate<String> isNumeric = str -> str.matches("^-?\\d+$");
+        int taskIndex = Optional.of(command.body)
+            .filter(isNumeric)
+            .map(body -> Integer.parseInt(body) - 1)
+            .filter(i -> i >= 0)
+            .orElseThrow(() -> new DukeInvalidArgumentException(
+                "Invalid task index. Index needs to be a positive integer."
+            ));
+        Task task = Optional.of(taskIndex)
+            .filter(index -> index < tasks.size())
+            .map(index -> tasks.get(index))
+            .orElseThrow(() -> new DukeInvalidArgumentException(
+                "Task index is beyond the range of the task list."
+            ));
+        tasks.remove(taskIndex);
+        Duke.say(
+            "Noted. I've removed this task:\n"
                 + "  " + task.toString()
         );
     }
