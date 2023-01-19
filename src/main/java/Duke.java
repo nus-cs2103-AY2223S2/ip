@@ -2,6 +2,16 @@ import java.util.Scanner;
 
 public class Duke {
 
+  public static void prettyPrint(String text) {
+    System.out.println(
+      "____________________________________________________________"
+    );
+    System.out.println(text);
+    System.out.println(
+      "____________________________________________________________\n"
+    );
+  }
+
   public static void main(String[] args) {
     String logo =
       " ____        _        \n" +
@@ -10,14 +20,8 @@ public class Duke {
       "| |_| | |_| |   <  __/\n" +
       "|____/ \\__,_|_|\\_\\___|\n";
     System.out.println("Hello from\n" + logo);
-    System.out.println(
-      "\n____________________________________________________________"
-    );
-    System.out.println("Hello! I'm Duke");
-    System.out.println("What can I do for you?");
-    System.out.println(
-      "____________________________________________________________\n"
-    );
+
+    Duke.prettyPrint("Hello! I'm Duke\nWhat can I do for you?");
 
     // parse user input
     Scanner scanner = new Scanner(System.in);
@@ -26,20 +30,11 @@ public class Duke {
     // level 1 functionality
     while (true) {
       command = scanner.nextLine();
-      System.out.println(
-        "____________________________________________________________"
-      );
       if (command.equals("bye")) {
-        System.out.println("Bye. Hope to see you again soon!");
-        System.out.println(
-          "____________________________________________________________\n"
-        );
+        Duke.prettyPrint("Bye. Hope to see you again soon!");
         break;
       } else {
-        System.out.println(command);
-        System.out.println(
-          "____________________________________________________________\n"
-        );
+        Duke.prettyPrint(command);
       }
     }
   }
