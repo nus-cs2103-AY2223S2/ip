@@ -3,14 +3,17 @@ public class CommandManager {
     public static void createCommand (String input){
         switch (input){
             default : {
-                queue.add(new Store(input));
+                if (input.matches("[a-zA-Z]+ [0-9]+")) {
+                    queue.add(new Mark(input));
+                } else {
+                    queue.add(new Store(input));
+                }
                 break;
             }
             case "list": {
                 queue.add(new List(input));
                 break;
             }
-
             case "bye" : {
                 queue.add(new Bye(input));
                 break;

@@ -7,9 +7,23 @@ public class User {
     }
     public void listTasks() {
         int i = 1;
+        System.out.println("Here are the tasks in your list: \n");
         for (Tasks tasks : tasks) {
-            System.out.println(i + ". " + tasks.seeTaskContent());
+            System.out.println( i
+                    + ".[" + tasks.getStatusIcon() + "] " + tasks.seeTaskContent());
             i++;
         }
+    }
+
+    public void markTask(int index, boolean done){
+        this.tasks.get(index).markTask(done);
+    }
+
+    public String getTaskIcon(int index) {
+        return this.tasks.get(index).getStatusIcon();
+    }
+
+    public String getTaskContent(int index) {
+        return this.tasks.get(index).seeTaskContent();
     }
 }
