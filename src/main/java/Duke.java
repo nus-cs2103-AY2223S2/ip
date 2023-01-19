@@ -1,3 +1,4 @@
+import java.rmi.StubNotFoundException;
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -39,6 +40,10 @@ public class Duke {
         }
     }
 
+    static void printListNumber(ArrayList<Task> list) {
+        System.out.println("    Now you have " + list.size() + " task(s) in the list.");
+    }
+
     public static void main(String[] args) {
         String logo = " ____        _        \n"
                 + "|  _ \\ _   _| | _____ \n"
@@ -55,7 +60,7 @@ public class Duke {
         String echo;
         Scanner scan = new Scanner(System.in);
 
-        ArrayList<Task> list_to_store = new ArrayList<Task>();
+        ArrayList<Task> listToStore = new ArrayList<Task>();
 
 
         while (program_running_status) {
@@ -67,9 +72,9 @@ public class Duke {
 
             if (echo.equals("list")) {
                 System.out.println("    OK, Here are the items in your list: ");
-                for (int i = 0; i < list_to_store.size(); i++) {
+                for (int i = 0; i < listToStore.size(); i++) {
                     System.out.println("    " + (i + 1) + ". " 
-                            + list_to_store.get(i).toString());
+                            + listToStore.get(i).toString());
                 }
                 // put in loop to read the list
                 continue;
@@ -77,8 +82,8 @@ public class Duke {
 
             if (echo.startsWith("mark")) {
                 try {
-                    int task_to_mark = Integer.parseInt(echo.replaceAll("[^0-9]", ""));
-                    list_to_store.get(task_to_mark-1).mark_done();   
+                    int taskToModify = Integer.parseInt(echo.replaceAll("[^0-9]", ""));
+                    listToStore.get(taskToModify-1).mark_done();   
                 } catch (Exception e) {
                     // TODO: handle exception
                 }
@@ -87,8 +92,21 @@ public class Duke {
 
             if (echo.startsWith("unmark")) {
                 try {
-                    int task_to_mark = Integer.parseInt(echo.replaceAll("[^0-9]", ""));
-                    list_to_store.get(task_to_mark-1).mark_undone();   
+                    int taskToModify = Integer.parseInt(echo.replaceAll("[^0-9]", ""));
+                    listToStore.get(taskToModify-1).mark_undone();   
+                } catch (Exception e) {
+                    // TODO: handle exception
+                }
+                continue;
+            }
+
+            if (echo.startsWith("delete") || echo.startsWith("remove")) {
+                try {
+                    int taskToModify = Integer.parseInt(echo.replaceAll("[^0-9]", ""));
+                    System.out.println("    Noted. I have removed this task:");
+                    System.out.println("    " + listToStore.get(taskToModify-1).toString());
+                    listToStore.remove(taskToModify-1);   
+                    printListNumber(listToStore);
                 } catch (Exception e) {
                     // TODO: handle exception
                 }
@@ -129,12 +147,13 @@ public class Duke {
             // }
 
 
-            list_to_store.add(item);
+            listToStore.add(item);
 
             System.out.println("    Duke says:");
             System.out.println("    Added");
             System.out.println("    " + item.toString());
-            System.out.println("    Now you have " + list_to_store.size() + " task(s) in the list.");
+            printListNumber(listToStore);
+            // System.out.println("    Now you have " + listToStore.size() + " task(s) in the list.");
             
         }
         scan.close();
