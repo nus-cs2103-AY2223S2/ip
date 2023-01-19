@@ -4,16 +4,16 @@ import java.util.Scanner;
 public class Page {
 
     private Scanner scan;
-    private ArrayList<String> tasks;
+    private ArrayList<Quest> quests;
 
     public Page() {
-        scan = new Scanner(System.in);
-        tasks = new ArrayList<String>();
+        this.scan = new Scanner(System.in);
+        this.quests = new ArrayList<>();
     }
 
     private void greet() {
         String welcome = "Greetings! 'Tis I, Page, thy medieval assistant.\n" +
-                "Type 'help' for the list of commands I can recognise.";
+                "Type 'help' for the list of available commands.";
         System.out.println(welcome);
     }
 
@@ -21,36 +21,48 @@ public class Page {
         String input = scan.nextLine();
         if (input.equals("bye")) {
             bye();
+            return;
         } else if (input.equals("list")) {
             list();
         } else if (input.equals("help")) {
             help();
-        } else {
-            add(input);
         }
+        else {
+            String[] splitInput = input.split(" ");
+            if (splitInput[0].equals("complete")) {
+                int questNum = Integer.parseInt(splitInput[1]);
+                quests.get(questNum - 1).markComplete();
+            } else if (splitInput[0].equals("incomplete")) {
+                int questNum = Integer.parseInt(splitInput[1]);
+                quests.get(questNum - 1).markIncomplete();
+            } else {
+                addQuest(input);
+            }
+        }
+        listen();
     }
 
     private void help() {
         String helptext =
-                "type in a task (e.g. 'tax subjects') to add it to the list of tasks.\n" +
-                "type 'list' to show the current list of tasks.\n" +
+                "type in a task (e.g. 'slay dragon') to add it to the Quest Log.\n" +
+                "type 'log' to show the current Quest Log.\n" +
+                "type 'complete 1' to mark the 1st quest as complete.\n" +
+                "type 'incomplete 1' to mark the 1st quest as incomplete.\n" +
                 "type 'bye' to exit.";
         System.out.println(helptext);
-        listen();
     }
 
-    private void add(String input) {
-        tasks.add(input);
-        System.out.println("Added to the royal scrolls: " + input);
-        listen();
+    private void addQuest(String input) {
+        quests.add(new Quest(input));
+        System.out.println("Added to Quest Log: " + input);
     }
 
     private void list() {
-        System.out.println("Tasks for the management of the kingdom: ");
-        for (int i = 0; i < tasks.size(); i++) {
-            System.out.println((i + 1) + ": " + tasks.get(i));
+        System.out.println("Quest Log: ");
+        for (int i = 0; i < quests.size(); i++) {
+            Quest q = quests.get(i);
+            System.out.println((i + 1) + ": " + q.getCompletionIcon() + " " + q.getDescription());
         }
-        listen();
     }
 
     private void bye() {
