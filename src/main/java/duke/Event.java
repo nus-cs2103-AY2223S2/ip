@@ -1,3 +1,5 @@
+package duke;
+
 public class Event extends Task {
     protected String startTime;
     protected String endTime;
@@ -13,8 +15,8 @@ public class Event extends Task {
         }
     }
     /**
-     * Represent Event as a string
-     * @return String representation of a Event
+     * Represent duke.Event as a string
+     * @return String representation of a duke.Event
      */
     @Override
     public String toString() {

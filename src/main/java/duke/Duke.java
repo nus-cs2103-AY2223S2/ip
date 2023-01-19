@@ -1,3 +1,5 @@
+package duke;
+
 import java.util.ArrayList;
 import java.util.Scanner;
 public class Duke {
@@ -5,7 +7,7 @@ public class Duke {
 
     /**
      * Helper function to add a new task to the ArrayList, while outputting a message
-     * @param newTask the new Task object to be added
+     * @param newTask the new duke.Task object to be added
      */
     public static void addTask(Task newTask) {
         tasks.add(newTask);
@@ -23,7 +25,7 @@ public class Duke {
      * @throws BadCommandException
      */
     public static void removeTask(int idx) throws BadCommandException {
-        if (idx >= tasks.size()) {
+        if (idx >= tasks.size() || idx < 0) {
             throw new BadCommandException("Index given is out of bounds!");
         }
         Task taskToDelete = tasks.get(idx);
@@ -126,7 +128,7 @@ public class Duke {
     }
     public static void main(String[] args) {
         Scanner inputScanner = new Scanner(System.in);
-        prettyPrint("Hello! I'm Duke\n\tWhat can I do for you?");
+        prettyPrint("Hello! I'm duke.Duke\n\tWhat can I do for you?");
         String inputStr = inputScanner.nextLine().trim();
         while (!inputStr.equals("bye")) {
             try {

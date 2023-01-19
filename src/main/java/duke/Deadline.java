@@ -1,3 +1,5 @@
+package duke;
+
 public class Deadline extends Task {
     protected String by;
     public Deadline(String description, String by) throws DukeException {
@@ -12,8 +14,8 @@ public class Deadline extends Task {
     }
 
     /**
-     * Represent Deadline as a string
-     * @return String representation of a Deadline
+     * Represent duke.Deadline as a string
+     * @return String representation of a duke.Deadline
      */
     @Override
     public String toString() {
