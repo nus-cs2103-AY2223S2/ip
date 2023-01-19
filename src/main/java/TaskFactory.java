@@ -1,21 +1,37 @@
+import exception.InvalidCommandException;
+import exception.MissingTaskDescriptionException;
+import exception.TaskFactoryException;
+import exception.TreeBotException;
+
 public class TaskFactory {
-    public Task make(String instruction) {
+    public Task make(String instruction) throws TaskFactoryException {
         String[] splitStr = instruction.split("\\s+", 2);
         String taskType = splitStr[0];
-        switch (taskType) {
-            case "todo":
-                return makeTodo(instruction);
-            case"deadline":
-                return makeDeadline(instruction);
-            case "event":
-                return makeEvent(instruction);
-            default:
+
+        try {
+            switch (taskType) {
+                case "todo":
+                    return makeTodo(instruction);
+                case "deadline":
+                    return makeDeadline(instruction);
+                case "event":
+                    return makeEvent(instruction);
+                default:
+
+            }
+        } catch (MissingTaskDescriptionException e) {
+            throw e;
         }
         return null;
     }
 
-    private Task makeTodo(String instruction) {
+    private Task makeTodo(String instruction) throws MissingTaskDescriptionException {
         String[] splitStr = instruction.split("\\s+", 2);
+
+        if (splitStr.length < 2) {
+            throw new MissingTaskDescriptionException("Task Description cannot be empty!");
+        }
+
         String taskDescription = splitStr[1];
         return new Todo(taskDescription);
     }

@@ -1,3 +1,7 @@
+import exception.InvalidCommandException;
+import exception.TaskFactoryException;
+import exception.TreeBotException;
+
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -19,12 +23,16 @@ public class TreeBot {
                 break;
             }
 
-            execute(commandString);
+            try {
+                execute(commandString);
+            } catch (TreeBotException e) {
+                System.out.println(e.getMessage());
+            }
 
         }
 
     }
-    private void execute(String commandString) {
+    private void execute(String commandString) throws TreeBotException {
         String[] splitStr = commandString.split("\\s+", 2);
         String command = splitStr[0];
 
@@ -35,6 +43,12 @@ public class TreeBot {
             case "todo":
             case "deadline":
             case "event":
+                try {
+                    Task newTask = this.taskFactory.make(commandString);
+                } catch (TaskFactoryException e) {
+                    throw e;
+                }
+
                 addTask(this.taskFactory.make(commandString));
                 break;
             case "mark":
@@ -44,7 +58,7 @@ public class TreeBot {
                 unmarkTask(Integer.parseInt(splitStr[1]));
                 break;
             default:
-                return;
+                throw new InvalidCommandException("This command is invalid");
         }
     }
     private void addTask(Task task) {
