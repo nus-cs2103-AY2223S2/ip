@@ -29,51 +29,37 @@ public class Duke {
                 task.unmark();
                 System.out.println("OK, I've marked this task as not done yet:");
                 System.out.println(task);
-            } else {
-                Task task = new Task(input);
-                tasks.add(task);
-                System.out.println("added: " + task);
+            } else if (input.startsWith("todo ")) {
+                String taskName = input.substring(5);
+                Todo todo = new Todo(taskName);
+                tasks.add(todo);
+                System.out.println("Got it. I've added this task: \n" + todo);
+                System.out.println("Now you have " + tasks.size() + " tasks in the list.");
+            } else if (input.startsWith("deadline ")) {
+                int dash_index = input.indexOf("/");
+                String taskName = input.substring(9, dash_index);
+                String by = input.substring(dash_index + 4);
+                Deadline deadline = new Deadline(taskName, by);
+                tasks.add(deadline);
+                System.out.println("Got it. I've added this task: \n" + deadline);
+                System.out.println("Now you have " + tasks.size() + " tasks in the list.");
+            } else if (input.startsWith("event ")) {
+                int first_dash_index = input.indexOf("/");
+                int second_dash_index = input.lastIndexOf("/");
+                String taskName = input.substring(6, first_dash_index);
+                String from = input.substring(first_dash_index + 6, second_dash_index);
+                String to = input.substring(second_dash_index + 4);
+                Event event = new Event(taskName, from, to);
+                tasks.add(event);
+                System.out.println("Got it. I've added this task: \n" + event);
+                System.out.println("Now you have " + tasks.size() + " tasks in the list.");
             }
+
             input = scanner.nextLine();
         }
 
         System.out.println("Bye. Hope to see you again soon!");
 
         scanner.close();
-    }
-}
-
-class Task {
-    private String taskName;
-    private boolean done;
-
-    public Task(String taskName) {
-        this.taskName = taskName;
-        this.done = false;
-    }
-
-    public String getName() {
-        return taskName;
-    }
-
-    public boolean isDone() {
-        return done;
-    }
-
-    public void mark() {
-        this.done = true;
-    }
-
-    public void unmark() {
-        this.done = false;
-    }
-
-    @Override
-    public String toString() {
-        if (this.done) {
-            return "[X] " + this.taskName;
-        } else {
-            return "[ ] " + this.taskName;
-        }
     }
 }
