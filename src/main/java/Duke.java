@@ -111,13 +111,27 @@ public class Duke {
         System.out.println("\nOK, I've marked this task as not done yet:\n  " + t + "\n");
     }
 
+    private static String removeFirstWord(String s) throws DukeException {
+        // no arguments, guaranteed to have at least 1
+        try {
+            s = s.substring(s.indexOf(" ")).trim();
+        } catch (StringIndexOutOfBoundsException e) {
+            throw new DukeException("☹ OOPS!!! The description of a todo cannot be empty.");
+        }
+        return s;
+    }
+
     /**
     * Remove the first word of every chunk and whitespaces 
     * at the two ends of the Stirng
     *
     * @param s An array of Strings
     */
-    private static String[] removeFirstWord(String[] s) {
+    private static String[] removeFirstWord(String[] s) throws DukeException {
+        // no arguments, guaranteed to have at least 1
+        if (s.length == 1) {
+            throw new DukeException("Invalid!! Empty Input");
+        }
         for (int i = 0; i < s.length; i++) {
             s[i] = s[i].substring(s[i].indexOf(" ")).trim();
         }
@@ -125,30 +139,45 @@ public class Duke {
     }
 
     private static void todoEvent(String userInput) {
-        String[] s = removeFirstWord(userInput.split("/"));
-        Task temp = new ToDo(s[0]);
-        storedInputs.add(temp);
-        printConfirmation();
-        System.out.println("  " + temp);
-        printTotalTasks();
+        try {
+            String s = removeFirstWord(userInput);
+            Task temp = new ToDo(s);
+            storedInputs.add(temp);
+            printConfirmation();
+            System.out.println("  " + temp);
+            printTotalTasks();
+        } catch (DukeException e) {
+            System.out.println(e.getMessage());
+            return;
+        }
     }
 
     private static void deadlineEvent(String userInput) {
-        String[] s = removeFirstWord(userInput.split("/"));
-        Task temp = new Deadline(s[0], s[1]);
-        storedInputs.add(temp);
-        printConfirmation();
-        System.out.println("  " + temp);
-        printTotalTasks();
+        try {
+            String[] s = removeFirstWord(userInput.split("/"));
+            Task temp = new Deadline(s[0], s[1]);
+            storedInputs.add(temp);
+            printConfirmation();
+            System.out.println("  " + temp);
+            printTotalTasks();
+        } catch (DukeException e) {
+            System.out.println(e.getMessage());
+            return;
+        }
     }
 
     private static void eventEvent(String userInput) {
-        String[] s = removeFirstWord(userInput.split("/"));
-        Task temp = new Event(s[0], s[1], s[2]);
-        storedInputs.add(temp);
-        printConfirmation();
-        System.out.println("  " + temp);
-        printTotalTasks();
+        try {
+            String[] s = removeFirstWord(userInput.split("/"));
+            Task temp = new Event(s[0], s[1], s[2]);
+            storedInputs.add(temp);
+            printConfirmation();
+            System.out.println("  " + temp);
+            printTotalTasks();
+        } catch (DukeException e) {
+            System.out.println(e.getMessage());
+            return;
+        }
     }
 
     private static String printList() {
