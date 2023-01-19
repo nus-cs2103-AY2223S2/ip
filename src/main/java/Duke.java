@@ -61,11 +61,14 @@ public class Duke {
                 break;
 
             default:
+                /*
                 msg = sc.nextLine(); // read finish the task
                 Task task = new Task(msg);
                 list[listNum] = task;
                 System.out.println("added: " + msg);
                 listNum++;
+
+                 */
         }
 
         System.out.println(DIV_CLOSE); // DIV_CLOSE for output
@@ -108,7 +111,7 @@ public class Duke {
     public static void addTodo(String[] args) {
         int len = args.length;
         StringBuilder taskName = new StringBuilder(args[1]);
-        for (int i = 2; i < len - 1; i++) {
+        for (int i = 2; i < len; i++) {
             taskName.append(" ").append(args[i]);
         }
         Todo todo = new Todo(taskName.toString());
@@ -121,7 +124,7 @@ public class Duke {
     public static void addDeadline(String[] args, int by) {
         int len = args.length;
         StringBuilder taskName = new StringBuilder(args[1]);
-        for (int i = 2; i < by - 1; i++) {
+        for (int i = 2; i < by; i++) {
             taskName.append(" ").append(args[i]);
         }
         StringBuilder byWhen = new StringBuilder(args[by + 1]);
@@ -138,7 +141,7 @@ public class Duke {
     public static void addEvent(String[] args, int from, int to) {
         int len = args.length;
         StringBuilder taskName = new StringBuilder(args[1]);
-        for (int i = 2; i < from - 1; i++) {
+        for (int i = 2; i < from; i++) {
             taskName.append(" ").append(args[i]);
         }
         StringBuilder fromWhen = new StringBuilder(args[from + 1]);
@@ -182,8 +185,11 @@ public class Duke {
                 break;
             }
 
-            parser(msg);
-
+            try {
+                parser(msg);
+            } catch (DukeException ex) {
+                System.out.println(ex.getMessage());
+            }
         }
 
 
