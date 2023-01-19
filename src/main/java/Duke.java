@@ -24,8 +24,8 @@ public class Duke {
                     System.out.println(task);
                 } catch (NumberFormatException | IndexOutOfBoundsException e) {
                     // incorrect syntax
-                    Task task = new ToDo(word);
-                    addingTask(task, listOfWords);
+                    System.out.println("☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
+                    System.out.println(word);
                 }
             } else if (word.startsWith("deadline ")) {
                 String[] words = word.split("/", 2);
@@ -33,8 +33,8 @@ public class Duke {
                     Task task = new Deadline(words[0].substring(9), words[1].substring(3));
                     addingTask(task, listOfWords);
                 } else {
-                    Task task = new ToDo(word);
-                    addingTask(task, listOfWords);
+                    System.out.println("☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
+                    System.out.println("Command: " + word);
                 }
 
             } else if (word.startsWith("todo ")) {
@@ -46,12 +46,12 @@ public class Duke {
                     Task task = new Event(words[0].substring(6), words[1].substring(5), words[2].substring(3));
                     addingTask(task, listOfWords);
                 } else {
-                    Task task = new ToDo(word);
-                    addingTask(task, listOfWords);
+                    System.out.println("☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
+                    System.out.println("Command: " + word);
                 }
             } else {
-                Task task = new ToDo(word);
-                addingTask(task, listOfWords);
+                System.out.println("☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
+                System.out.println("Command: " + word);
             }
             System.out.println("-".repeat(20));
             word = scanner.nextLine();
@@ -60,10 +60,14 @@ public class Duke {
     }
 
     public static void addingTask(Task task, List<Task> list) {
-        System.out.println("Got it. I've added this task:");
-        System.out.println(task);
-        list.add(task);
-        System.out.println("Now you have " + list.size() + " tasks in the list.");
+        if (task.isEmpty()) {
+            System.out.println("☹ OOPS!!! The description of a task cannot be empty.");
+        } else {
+            System.out.println("Got it. I've added this task:");
+            System.out.println(task);
+            list.add(task);
+            System.out.println("Now you have " + list.size() + " tasks in the list.");
+        }
     }
     public static void introDuke() {
         String logo = " ____        _        \n"
