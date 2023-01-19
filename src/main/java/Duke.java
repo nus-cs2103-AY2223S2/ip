@@ -117,6 +117,22 @@ public class Duke {
 
 
 
+                } else if (commands[0].equals("delete")) {
+                    try {
+                        if (commands.length == 1) {
+                            throw new NoArgsException("event");
+
+                        } else {
+                            int index = Integer.valueOf(commands[1]);
+                            Task E = storer.remove(index - 1);
+                            System.out.println(logo + "Noted. I've removed this task:");
+                            System.out.println(E);
+                            System.out.println("Now you have " + storer.size() + " tasks in the list." + logo);
+                        }
+
+                    } catch (Exception err) {
+                        System.out.println(err.getMessage());
+                    }
 
                 } else if (echo.equals("bye")){
                     break;
