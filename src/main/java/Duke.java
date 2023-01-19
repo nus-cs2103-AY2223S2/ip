@@ -71,7 +71,7 @@ public class Duke {
             } while (!command.equals("bye"));
 
         } catch (Exception e) {
-            System.out.println("Encountered exception: " + e + "\n Exiting program");
+            System.out.println("Encountered exception: " + e + "\nExiting program");
         } finally {
             System.out.println("Goodbye!");
         }
