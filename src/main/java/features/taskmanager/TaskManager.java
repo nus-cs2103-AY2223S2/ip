@@ -2,7 +2,6 @@ package features.taskmanager;
 import exceptions.InvalidArgumentException;
 import eventloop.*;
 import utils.fp.ThrowingFunction;
-import utils.TokenUtilities;
 
 import java.util.ArrayList;
 
@@ -34,7 +33,7 @@ public class TaskManager implements ExecutableRegisterable {
      * Adds a Task to the todoItems.
      * @param task the Task.
      */
-    void addTodo(Task task) {
+    void addTask(Task task) {
         tasks.add(task);
     }
 
@@ -61,7 +60,7 @@ public class TaskManager implements ExecutableRegisterable {
                     System.out.println(exception.getMessage());
                     return ExitStatus.finishCurrentIteration;
                 }
-                addTodo(task);
+                addTask(task);
                 System.out.println("added: " + task);
                 return ExitStatus.finishCurrentIteration;
             }
