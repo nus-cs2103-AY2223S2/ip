@@ -25,13 +25,64 @@ public class Duke {
         printLine();
     }
 
+    private static void markTask(String input) {
+        int taskNumber;
+        try {
+            taskNumber = Integer.parseInt(input.split(" ")[1]);
+            tasks.get(taskNumber - 1).markAsDone();
+            System.out.printf("     %s%n", "Nice! I've marked this task as done:");
+            System.out.printf("       %s%n", tasks.get(taskNumber - 1).toString());
+        } catch (NumberFormatException|IndexOutOfBoundsException e) {
+            System.out.printf("     %s%n", "Please input valid task number.");
+        }
+    }
+
+    private static void unmarkTask(String input) {
+        int taskNumber;
+        try {
+            taskNumber = Integer.parseInt(input.split(" ")[1]);
+            tasks.get(taskNumber - 1).markAsNotDone();
+            System.out.printf("     %s%n", "OK, I've marked this task as not done yet:");
+            System.out.printf("       %s%n", tasks.get(taskNumber - 1).toString());
+        } catch (NumberFormatException|IndexOutOfBoundsException e) {
+            System.out.printf("     %s%n", "Please input valid task number.");
+        }
+    }
+
     /**
-     *
+     * Prints confirmation of added task and number of tasks currently in list.
      */
     private static void confirmAddition(Task t) {
         System.out.printf("     %s%n", "Got it. I've added this task:");
         System.out.printf("       %s%n", t.toString());
         System.out.printf("     %s%d%s%n", "Now you have ", tasks.size(), " tasks in the list.");
+    }
+
+    private static void addToDo(String input) {
+        String description = input.substring(5);
+        Task t = new ToDo(description);
+        tasks.add(t);
+        confirmAddition(t);
+    }
+
+    private static void addDeadline(String input) {
+        int byIndex = input.indexOf("/by");
+        String description = input.substring(9, byIndex - 1);
+        String by = input.substring(byIndex + 4);
+        Task t = new Deadline(description, by);
+        tasks.add(t);
+        confirmAddition(t);
+    }
+
+    private static void addEvent(String input) {
+        int fromIndex = input.indexOf("/from");
+        int toIndex = input.indexOf("/to");
+        String description = input.substring(6, fromIndex - 1);
+        String from = input.substring(fromIndex + 6, toIndex - 1);
+        String to = input.substring(toIndex + 4);
+        Task t = new Event(description, from, to);
+        tasks.add(t);
+        confirmAddition(t);
     }
 
     /**
@@ -56,61 +107,30 @@ public class Duke {
                 }
             } else {
                 String command = (input.split(" ")[0]).toLowerCase();
-                if (command.equals("mark") || command.equals(("unmark"))) {
-                    int taskNumber;
-                    try {
-                        taskNumber = Integer.parseInt(input.split(" ")[1]);
-                        if (command.equals("mark")) {
-                            tasks.get(taskNumber - 1).markAsDone();
-                            System.out.printf("     %s%n", "Nice! I've marked this task as done:");
-                            System.out.printf("       %s%n",
-                                    tasks.get(taskNumber - 1).toString());
-                        } else {
-                            tasks.get(taskNumber - 1).markAsNotDone();
-                            System.out.printf("     %s%n", "OK, I've marked this task as not done yet:");
-                            System.out.printf("       %s%n",
-                                    tasks.get(taskNumber - 1).toString());
-                        }
-                    } catch (NumberFormatException|IndexOutOfBoundsException e) {
-                        System.out.printf("     %s%n", "Please input valid task number.");
-                    }
-                } else {
-                    String description, by, from, to;
-                    Task t;
-                    switch (command) {
-                        case "todo":
-                            description = input.substring(5);
-                            t = new ToDo(description);
-                            tasks.add(t);
-                            confirmAddition(t);
-                            break;
-                        case "deadline":
-                            int byIndex = input.indexOf("/by");
-                            description = input.substring(9, byIndex - 1);
-                            by = input.substring(byIndex + 4);
-                            t = new Deadline(description, by);
-                            tasks.add(t);
-                            confirmAddition(t);
-                            break;
-                        case "event":
-                            int fromIndex = input.indexOf("/from");
-                            int toIndex = input.indexOf("/to");
-                            description = input.substring(6, fromIndex - 1);
-                            from = input.substring(fromIndex + 6, toIndex - 1);
-                            to = input.substring(toIndex + 4);
-                            t = new Event(description, from, to);
-                            tasks.add(t);
-                            confirmAddition(t);
-                            break;
-                        default:
-                            System.out.printf("     %s%n", "Please input valid task type.");
+                switch (command) {
+                    case "mark":
+                        markTask(input);
+                        break;
+                    case "unmark":
+                        unmarkTask(input);
+                        break;
+                    case "todo":
+                        addToDo(input);
+                        break;
+                    case "deadline":
+                        addDeadline(input);
+                        break;
+                    case "event":
+                        addEvent(input);
+                        break;
+                    default:
+                        System.out.printf("     %s%n", "Please input valid task type.");
                     }
                 }
-            }
-
             printLine();
             input = sc.nextLine();
-        }
+            }
+
         printLine();
         System.out.printf("     %s%n", "Bye. Hope to see you again soon!");
         printLine();
