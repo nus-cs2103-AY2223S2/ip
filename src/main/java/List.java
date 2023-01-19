@@ -1,14 +1,16 @@
+import java.util.*;
 /**
  * Encapsulation of the list containing tasks.
  */
 public class List {
-    //taskList containing the tasks added.
-    //We assume that a maximum of 100 tasks can be added.
-    private Task[] taskList = new Task[100];
+    /**
+     * An ArrayList to store the tasks.
+     */
+    private ArrayList<Task> taskList = new ArrayList<>();
 
-    //counter to keep track of the number of items added so far
-    private int count = 0;
-
+    private enum AddEnum {
+            TODO, DEADLINE, EVENT
+    }
     /**
      * Add tasks into the list and display added task when done.
      * @param desc The description of the task to be added.
@@ -17,7 +19,7 @@ public class List {
      *                       or throw InvalidInputException
      *                       if the input command is invalid.
      */
-    public void add(String desc) throws DukeException{
+    public void add(String desc) throws DukeException {
         Task t;
         if (desc.startsWith("deadline")) {
             int endIndex = desc.indexOf("/by");
@@ -63,44 +65,67 @@ public class List {
         else {
             throw new InvalidInputException("I'm sorry, there is no such command.");
         }
-        this.taskList[count] = t;
-        this.count++;
+        this.taskList.add(t);
         System.out.println("Got it. I've added this task:");
         System.out.println(" " + t);
-        System.out.println("Now you have " + this.count + " task(s) in your list.\n");
+        System.out.println("Now you have " + this.taskList.size() + " task(s) in your list.\n");
+    }
+
+    /**
+     * Delete item at the given index.
+     * @param index The index of item to be deleted
+     */
+    public void delete(int index) throws OutOfBoundsException {
+        if (index < 0 || index >= this.taskList.size()) {
+            throw new OutOfBoundsException("Item at given index does not exist! " +
+                    "Please enter a valid index.");
+        }
+        Task removed = this.taskList.remove(index);
+        System.out.println("Noted. I've removed this task:\n" +
+                " " + removed + "\nNow you have " +
+                this.taskList.size() + " task(s) in the list.\n");
     }
 
     /**
      * Mark the task at the given index as done.
      * @param index The index number of the task given.
      */
-    public void mark(int index) {
-        this.taskList[index-1].mark();
+    public void mark(int index) throws OutOfBoundsException {
+        if (index < 0 || index >= this.taskList.size()) {
+            throw new OutOfBoundsException("Item at given index does not exist! " +
+                    "Please enter a valid index.");
+        }
+        this.taskList.get(index).mark();
         System.out.println("Nice! I've marked this task as done:");
-        System.out.println(" " + this.taskList[index-1] + "\n");
+        System.out.println(" " + this.taskList.get(index) + "\n");
     }
 
     /**
      * Mark the task at the given index as not done.
      * @param index The index number of the task given.
      */
-    public void unmark(int index) {
-        this.taskList[index-1].unmark();
+    public void unmark(int index) throws OutOfBoundsException {
+        if (index < 0 || index >= this.taskList.size()) {
+            throw new OutOfBoundsException("Item at given index does not exist! " +
+                    "Please enter a valid index.");
+        }
+        this.taskList.get(index).unmark();
         System.out.println("OK, I've marked this task as not done:");
-        System.out.println(" " + this.taskList[index-1] + "\n");
+        System.out.println(" " + this.taskList.get(index) + "\n");
     }
 
     /**
      * Print the list.
      */
     public void print() {
-        if (this.count == 0) {
+        int size = this.taskList.size();
+        if (size == 0) {
             System.out.println("There are no items in the list.\n");
             return;
         }
         System.out.println("Here are the tasks in your list:");
-        for(int i = 0; i < this.count; i++) {
-            String toPrint = String.format("%d. %s", (i + 1), this.taskList[i]);
+        for(int i = 0; i < size; i++) {
+            String toPrint = String.format("%d. %s", (i + 1), this.taskList.get(i));
             System.out.println(toPrint);
         }
         System.out.println("");

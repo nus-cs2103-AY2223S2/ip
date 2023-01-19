@@ -90,5 +90,57 @@ Please try again.
 OPPS! The description of an event cannot be empty!
 Please try again.
 
+Got it. I've added this task:
+ [T][ ] a
+Now you have 4 task(s) in your list.
+
+Got it. I've added this task:
+ [T][ ] b
+Now you have 5 task(s) in your list.
+
+Here are the tasks in your list:
+1. [T][ ] buy food
+2. [D][ ] do hw (by: Monday)
+3. [E][ ] cca (from: Jan 1 to: Jan 5)
+4. [T][ ] a
+5. [T][ ] b
+
+Noted. I've removed this task:
+ [T][ ] a
+Now you have 4 task(s) in the list.
+
+Here are the tasks in your list:
+1. [T][ ] buy food
+2. [D][ ] do hw (by: Monday)
+3. [E][ ] cca (from: Jan 1 to: Jan 5)
+4. [T][ ] b
+
+OPPS! Item at given index does not exist! Please enter a valid index.
+Please try again.
+
+OPPS! Item at given index does not exist! Please enter a valid index.
+Please try again.
+
+OPPS! Item at given index does not exist! Please enter a valid index.
+Please try again.
+
+OPPS! Item at given index does not exist! Please enter a valid index.
+Please try again.
+
+OPPS! Item at given index does not exist! Please enter a valid index.
+Please try again.
+
+OPPS! Item at given index does not exist! Please enter a valid index.
+Please try again.
+
+OPPS! Item at given index does not exist! Please enter a valid index.
+Please try again.
+
+OPPS! Item at given index does not exist! Please enter a valid index.
+Please try again.
+
+OPPS! Item at given index does not exist! Please enter a valid index.
+Please try again.
+
 Bye! Hope to see you again soon!
 

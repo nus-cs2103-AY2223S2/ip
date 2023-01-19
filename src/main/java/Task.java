@@ -48,7 +48,6 @@ public class Task {
     @Override
     public String toString() {
         String status = this.getStatus();
-        String toPrint = String.format("[%s] %s", status, this.name);
-        return toPrint;
+        return (String.format("[%s] %s", status, this.name));
     }
 }
