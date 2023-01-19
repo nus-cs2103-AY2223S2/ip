@@ -1,5 +1,29 @@
 import java.util.Scanner;
 
+enum Action {
+    LIST("list"), MARK("mark"), UNMARK("unmark"), DELETE("delete"),
+    TODO("todo"), DEADLINE("deadline"), EVENT("event"), ERROR("error");
+
+    private String action;
+
+    Action(String action) {
+        this.action = action;
+    }
+
+    public String getAction() {
+        return action;
+    }
+
+    public static Action getAction(String action) {
+        for (Action a : Action.values()) {
+            if (a.getAction().equalsIgnoreCase(action)) {
+                return a;
+            }
+        }
+        return ERROR;
+    }
+}
+
 public class Duke {
     public static void main(String[] args) throws DukeException {
 
@@ -15,26 +39,35 @@ public class Duke {
         String userInput = sc.nextLine().strip();
 
         while (!userInput.equals("bye")) {
-            String taskType = userInput.split(" ")[0];
+            Action taskType = Action.getAction(userInput.split(" ")[0]);
             try {
-                if (taskType.equals("list")) {
-                    commands.listTasks();
-                } else if (taskType.equals("mark")) {
-                    commands.markTask(userInput);
-                } else if (taskType.equals("unmark")) {
-                    commands.unmarkTask(userInput);
-                } else if (taskType.equals("delete")) {
-                    commands.deleteTask(userInput);
-                } else if (taskType.equals("todo")) {
-                    commands.addToDoTask(userInput);
-                } else if (taskType.equals("deadline")) {
-                    commands.addDeadlineTask(userInput);
-                } else if (taskType.equals("event")) {
-                    commands.addEventTask(userInput);
-                } else {
-                    System.out.println("\t____________________________________________________________");
-                    System.out.println("\t☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
-                    System.out.println("\t____________________________________________________________");
+                switch (taskType) {
+                    case LIST:
+                        commands.listTasks();
+                        break;
+                    case MARK:
+                        commands.markTask(userInput);
+                        break;
+                    case UNMARK:
+                        commands.unmarkTask(userInput);
+                        break;
+                    case DELETE:
+                        commands.deleteTask(userInput);
+                        break;
+                    case TODO:
+                        commands.addToDoTask(userInput);
+                        break;
+                    case DEADLINE:
+                        commands.addDeadlineTask(userInput);
+                        break;
+                    case EVENT:
+                        commands.addEventTask(userInput);
+                        break;
+                    case ERROR: {
+                        System.out.println("\t____________________________________________________________");
+                        System.out.println("\t☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
+                        System.out.println("\t____________________________________________________________");
+                    }
                 }
             } catch (DukeException e) {
                 System.out.println(e.getMessage());
