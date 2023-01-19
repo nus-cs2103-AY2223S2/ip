@@ -47,7 +47,6 @@ public class DukeBehaviour {
         String taskType = userIn.split(" ")[0];
         //System.out.println("tasktype: " + taskType);
         if (taskType.equals("todo") ) {
-            //System.out.println("attempting to add todo");
             addToDo(userIn);
         } else if (taskType.equals("deadline")) {
             addDeadline(userIn);
@@ -60,9 +59,9 @@ public class DukeBehaviour {
     private void addEvent(String userIn) {
         String descAndTimes = userIn.replace("event", "");
         Event newEvent = new Event(
-                descAndTimes.split("/")[0],
-                descAndTimes.split("/")[1].replace("from", ""),
-                descAndTimes.split("/")[2].replace("to", "")
+                descAndTimes.split("/")[0].trim(),
+                descAndTimes.split("/")[1].replace("from", "").trim(),
+                descAndTimes.split("/")[2].replace("to", "").trim()
         );
         taskList.add(newEvent);
         System.out.println("Got it. I've added this task:");
@@ -71,7 +70,7 @@ public class DukeBehaviour {
 
     private void addDeadline(String userIn) {
         String descAndBy = userIn.replace("Deadline", "");
-        Deadline newDeadline = new Deadline(descAndBy.split("/")[0], descAndBy.split("/")[1].replace("by", ""));
+        Deadline newDeadline = new Deadline(descAndBy.split("/")[0].trim(), descAndBy.split("/")[1].replace("by", "").trim());
         taskList.add(newDeadline);
         System.out.println("Got it. I've added this task:");
         System.out.println(newDeadline);
