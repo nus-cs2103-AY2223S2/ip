@@ -1,4 +1,4 @@
-package interfaces;
+package event_loop;
 
 /**
  * This is the return type of executing any command. It should signify what the

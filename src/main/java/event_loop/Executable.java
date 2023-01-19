@@ -1,4 +1,4 @@
-package interfaces;
+package event_loop;
 
 /**
  * The interface for objects that can be run.
