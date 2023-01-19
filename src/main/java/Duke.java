@@ -16,14 +16,15 @@ public class Duke {
                 System.out.println("Here are the tasks in your list:\n" + tasks.listTasks()); // list all the stored tasks
             } else if (echo.matches("mark \\d+")) {
                 String[] sp = echo.split(" ");
-                if (sp.length == 2 && Integer.valueOf(sp[1]) <= tasks.size()) { // otherwise, invalid mark and ignore for now
-                    String marked = tasks.toggleMark(Integer.valueOf(sp[1])-1);
+                int taskNum = Integer.valueOf(sp[1]);
+                if (sp.length == 2 && 1 <= taskNum && taskNum <= tasks.size()) { // otherwise, invalid mark and ignore for now
+                    String marked = tasks.toggleMark(taskNum-1);
                     System.out.println("Nice! I've marked this task as done:\n\t" + marked);
                 }
             } else if (echo.matches("unmark \\d+")) {
                 String[] sp = echo.split(" ");
                 int taskNum = Integer.valueOf(sp[1]);
-                if (sp.length == 2 && taskNum <= tasks.size()) { // otherwise, invalid unmark and ignore for now
+                if (sp.length == 2 && 1 <= taskNum && taskNum <= tasks.size()) { // otherwise, invalid unmark and ignore for now
                     String unmarked= tasks.toggleUnmark(taskNum-1);
                     System.out.println("OK, I've marked this task as not done yet:\n\t" + unmarked);
                 }
