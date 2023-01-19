@@ -5,8 +5,8 @@ public class Record {
     public Record() {
         this.list = new ArrayList<>();
     }
-    public void add(String taskName) {
-        Task t = new Task(taskName);
+    public void add(String description) {
+        Task t = new Task(description);
         this.list.add(t);
     }
     public void mark(int index) {

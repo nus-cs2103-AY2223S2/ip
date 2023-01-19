@@ -47,9 +47,9 @@ public class Sunday {
     private static void greet() {
         print("Hi! I'm Sunday, pleasure to meet you!\n    What can I do for you?");
     }
-    private static void add(String taskName) {
-        list.add(taskName);
-        print("added: " + taskName);
+    private static void add(String description) {
+        list.add(description);
+        print("added: " + description);
     }
     private static void list() {
         print(list.toString());

@@ -1,23 +1,24 @@
 public class Task {
-    private String name;
-    private boolean completed = false;
-    public Task(String name) {
-        this.name = name;
+    private final String description;
+    private boolean isComplete;
+    public Task(String description) {
+        this.description = description;
+        this.isComplete  = false;
     }
-    public String getName() {
-        return this.name;
+    public String getDescription() {
+        return this.description;
     }
     public void mark() {
-        this.completed = true;
+        this.isComplete = true;
     }
     public void unmark() {
-        this.completed = false;
+        this.isComplete = false;
     }
     @Override
     public String toString() {
         StringBuilder sb = new StringBuilder();
-        sb.append("[] " + this.name);
-        if (this.completed) {
+        sb.append("[] " + this.description);
+        if (this.isComplete) {
             sb.insert(1, "X");
         }
         return sb.toString();
