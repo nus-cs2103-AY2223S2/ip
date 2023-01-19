@@ -39,7 +39,7 @@ public class EventTask extends DukeTask {
         } else {
             status = "[ ] | ";
         }
-        return "[D] | " + status + this.getInformation() + " | " + this.from + " | " + this.to;
+        return "[E] | " + status + this.getInformation() + " | " + this.from + " | " + this.to;
     }
 
     @Override

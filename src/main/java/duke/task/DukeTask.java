@@ -10,6 +10,8 @@ public abstract class DukeTask {
     private final String information;
     private final TaskType type;
     private boolean isDone;
+    private final String doneFlag = "[X] ";
+    private final String undoneFlag = "[ ] ";
 
     /**
      * Constructor for DukeTask that takes in the information of the task and its type.
@@ -92,9 +94,9 @@ public abstract class DukeTask {
     @Override
     public String toString() {
         if (getStatus()) {
-            return "[X] " + this.information;
+            return doneFlag + this.information;
         } else {
-            return "[ ] " + this.information;
+            return undoneFlag + this.information;
         }
     }
 }

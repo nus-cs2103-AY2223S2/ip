@@ -23,10 +23,9 @@ public class Duke {
      * @param filePath Specifies the path for the storage file
      */
     public Duke(String filePath) {
+        list = new TaskList();
         ui = new Ui();
         storage = new Storage(filePath);
-        list = new TaskList();
-
         try {
             list = storage.load();
         } catch (InvalidInputException e) {
@@ -47,8 +46,8 @@ public class Duke {
     public String getResponse(String input) {
         try {
             ui.reset();
-            Command c = Parser.parse(input);
-            c.execute(list, ui, storage);
+            Command command = Parser.parse(input);
+            command.execute(list, ui, storage);
             return ui.getResponse();
         } catch (DukeException e) {
             ui.appendResponse(e.getMessage());
