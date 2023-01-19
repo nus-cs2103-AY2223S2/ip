@@ -124,24 +124,24 @@ public class TaskList {
         throw new UnknownCommandException();
     }
 
-//    public void delete(String requestContent) throws MissingArgumentException{
-//        if(requestContent.trim() == ""){
-//            throw new MissingArgumentException("The index cannot be empty.");
-//        }
-//
-//        int index = Integer.parseInt(requestContent.trim()) - 1;
-//
-//        for (int i = index+1; i < this.len; i++){
-//            this.list[i] = this.list[i+1];
-//        }
-//
-//        this.len--;
-//        String reply = "  ________________________________\n"
-//                + "  Noted. I've removed this task:\n"
-//                + "    " + list[index].toString()
-//                + "  Now you have " + this.len + " tasks in the list.\n"
-//                + "  ________________________________\n";
-//        System.out.print(reply);
-//
-//    }
+    public void delete(String requestContent) throws MissingArgumentException{
+        if(requestContent.trim() == ""){
+            throw new MissingArgumentException("The index cannot be empty.");
+        }
+
+        int index = Integer.parseInt(requestContent.trim()) - 1;
+
+        for (int i = index+1; i < this.len; i++){
+            this.list[i] = this.list[i+1];
+        }
+
+        this.len--;
+        String reply = "  ________________________________\n"
+                + "  Noted. I've removed this task:\n"
+                + "    " + list[index].toString()
+                + "  Now you have " + this.len + " tasks in the list.\n"
+                + "  ________________________________\n";
+        System.out.print(reply);
+
+    }
 }
