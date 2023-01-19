@@ -6,6 +6,8 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.time.LocalDate;
+import java.util.Objects;
 import java.util.Scanner;
 
 import duke.exception.InvalidInputException;
@@ -87,6 +89,14 @@ public class Storage {
         } catch (FileNotFoundException e) {
             throw new StorageFileException(storageError);
         }
+    }
+
+    private void storageFormatChecker(String tag, String isDone) {
+        assert Objects.equals(tag, "[T]") || Objects.equals(tag, "[D]") || Objects.equals(tag, "[E]")
+                : "Type tag of event should be [T], [D], or [E]";
+
+        assert Objects.equals(isDone, "[X]") || Objects.equals(isDone, "[ ]")
+                : "IsDone tag of event should be [ ], or [X]";
     }
 
     //@@author Yufannnn-reused
