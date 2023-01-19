@@ -18,6 +18,15 @@ public class Storage {
         System.out.println(statement + this.getNumberOfTasks() + t + " in the list.");
     }
 
+    public void deleteTask(int i) {
+        Task task = this.taskList.get(i);
+        this.taskList.remove(i);
+        String t = this.getNumberOfTasks() <= 1 ? " task" : " tasks";
+        System.out.println("Got it! I've removed this task:");
+        System.out.println(task);
+        System.out.println("Now you have " + this.getNumberOfTasks() + t + " in the list.");
+    }
+
     public void markTask(int i) {
         Task task = this.taskList.get(i);
         if (task.getStatusIcon().equals("X")) {

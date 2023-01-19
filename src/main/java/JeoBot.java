@@ -9,7 +9,7 @@ public class JeoBot {
     }
 
     public static void echo() {
-        String divider = "________________________________________________________________________________";
+        String divider = "________________________________________________________________________________________";
         boolean hasInput = true;
         Scanner sc = new Scanner(System.in);
         Storage st = new Storage();
@@ -30,24 +30,16 @@ public class JeoBot {
                         st.showTasks();
                         break;
                     case "mark":
-                        if (hm.get("index").isEmpty()) {
-                            throw new JeoException("Please enter a task number to be marked.");
-                        }
-                        int index = Integer.parseInt(hm.get("index")) - 1;
-                        if (index < 0 || index >= st.getNumberOfTasks()) {
-                            throw new JeoException("Task number cannot be negative, zero, or exceed the total number of tasks.");
-                        }
+                        int index = Integer.parseInt(hm.get("index"));
                         st.markTask(index);
                         break;
                     case "unmark":
-                        if (hm.get("index").isEmpty()) {
-                            throw new JeoException("Please enter a task number to be unmarked.");
-                        }
-                        index = Integer.parseInt(hm.get("index")) - 1;
-                        if (index < 0 || index >= st.getNumberOfTasks()) {
-                            throw new JeoException("Task number cannot be negative, zero, or exceed the total number of tasks.");
-                        }
+                        index = Integer.parseInt(hm.get("index"));
                         st.unmarkTask(index);
+                        break;
+                    case "delete":
+                        index = Integer.parseInt(hm.get("index"));
+                        st.deleteTask(index);
                         break;
                     case "todo":
                         String desc = hm.get("description");
@@ -89,18 +81,18 @@ public class JeoBot {
                         st.addTask(task);
                         break;
                     default:
-                        System.out.println("Sorry, I don't understand what you're saying :(");
+                        System.out.println("[Error] Sorry, I don't understand what you're saying :(");
                 }
             } catch (JeoException e) {
                 System.out.println(e.getMessage());
+            } catch (IndexOutOfBoundsException e) {
+                System.out.println("[Error] Task number cannot be negative, zero, or exceed the total number of tasks.");
             }
             System.out.println(divider);
         }
         sc.close();
     }
 
-    // Throw empty description, by, from, to, index in echo()
-    // Also for index, handle if it's within valid number of tasks
     public static HashMap<String, String> parseString(String s) throws JeoException {
         HashMap<String, String> hm = new HashMap<>();
         if (s.equalsIgnoreCase("bye")) {
@@ -119,7 +111,7 @@ public class JeoBot {
                         ? "Please enter a task description."
                         : "Please follow the format: deadline <description> /by <date/time>");
             }
-            String[] arr = parseSubstring(s, "deadline");
+            String[] arr = parseSubstringTasks(s, "deadline");
             String desc = arr[0];
             String by = arr[1];
             hm.put("description", desc);
@@ -132,10 +124,10 @@ public class JeoBot {
                         ? "Please enter a task description."
                         : "Please follow the format: event <description> /from <date/time> /to <date/time>");
             }
-            String[] arr = parseSubstring(s, "event1");
+            String[] arr = parseSubstringTasks(s, "event1");
             String desc = arr[0];
             s = arr[1];
-            arr = parseSubstring(s, "event2");
+            arr = parseSubstringTasks(s, "event2");
             String from = arr[0];
             String to = arr[1];
             hm.put("description", desc);
@@ -143,31 +135,38 @@ public class JeoBot {
             hm.put("to", to);
         } else if (s.toLowerCase().startsWith("mark")) {
             hm.put("command", "mark");
-            s = s.substring(4).trim();
-            int i;
-            try {
-                i = Integer.parseInt(s);
-            } catch (NumberFormatException e) {
-                throw new JeoException("Task number needs to be an integer value to be marked.");
-            }
-            hm.put("index", Integer.toString(i));
+            int i = parseSubStringActions(s, 4);
+            hm.put("index", Integer.toString(i-1));
         } else if (s.toLowerCase().startsWith("unmark")) {
             hm.put("command", "unmark");
-            s = s.substring(6).trim();
-            int i;
-            try {
-                i = Integer.parseInt(s);
-            } catch (NumberFormatException e) {
-                throw new JeoException("Task number needs to be an integer value to be unmarked.");
-            }
-            hm.put("index", Integer.toString(i));
-        } else {
+            int i = parseSubStringActions(s, 6);
+            hm.put("index", Integer.toString(i-1));
+        } else if (s.toLowerCase().startsWith("delete")) {
+            hm.put("command", "delete");
+            int i = parseSubStringActions(s, 6);
+            hm.put("index", Integer.toString(i-1));
+        }
+        else {
             hm.put("command", "");
         }
         return hm;
     }
 
-    public static String[] parseSubstring(String s, String c) {
+    public static int parseSubStringActions(String s, int j) throws JeoException {
+        s = s.substring(j).trim();
+        if (s.isEmpty()) {
+            throw new JeoException("Please enter a task number.");
+        }
+        int i;
+        try {
+            i = Integer.parseInt(s);
+        } catch (NumberFormatException e) {
+            throw new JeoException("Task number needs to be an integer value.");
+        }
+        return i;
+    }
+
+    public static String[] parseSubstringTasks(String s, String c) {
         StringBuilder sb = new StringBuilder();
         int i = 0;
         String first = "";

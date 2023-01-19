@@ -12,5 +12,7 @@ mark 6
 mark 5
 unmark 1
 list
+delete 3
+delete 5
 hello
 bye
