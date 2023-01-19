@@ -15,10 +15,10 @@ public class Duke {
         System.out.println("Hello from\n" + logo);
         System.out.println(LINE + " Hello! I'm Duke\n What can I do for you?\n" + LINE);
 
-        List<Task> tasks = new ArrayList<Task>();
         boolean flag_continue = true;
+        Scanner sc = new Scanner(System.in);
+        List<Task> tasks = new ArrayList<Task>();
         while (flag_continue) {
-            Scanner sc = new Scanner(System.in);
             String[] input = sc.nextLine().trim().split(" ", 2);
             StringBuilder output = new StringBuilder(LINE);
             try {
@@ -125,7 +125,6 @@ public class Duke {
                         break;*/
                         throw new DukeException();
                 }
-
                 output.append(LINE);
                 System.out.println(output);
             } catch (DukeException e) {
