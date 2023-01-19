@@ -8,14 +8,21 @@ public class Task {
         this.name = name;
     }
 
-    public void setDone(boolean isDone) {
-        this.isDone = isDone;
+    public void markAsDone() {
+        this.isDone = true;
+    }
+
+    public void unmarkAsDone() {
+        this.isDone = false;
+    }
+
+    private String getStatusIcon() {
+        return (isDone ? "x" : " ");
     }
 
     @Override
     public String toString() {
-        String done = isDone ? "x" : " ";
-        String s = String.format("[%s] %s", done, this.name);
+        String s = String.format("[%s] %s", this.getStatusIcon(), this.name);
         return s;
     }
 }
