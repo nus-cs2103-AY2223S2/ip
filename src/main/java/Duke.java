@@ -10,7 +10,7 @@ public class Duke {
     // List out all tasks and their rank.
     private void list() {
         if (tasks.size() == 0) {
-            System.out.println("No tasks left :)");
+            System.out.println("No tasks left :)" + BORDER);
             return;
         }
         int rank = 1;
