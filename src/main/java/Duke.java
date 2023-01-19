@@ -1,7 +1,10 @@
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Scanner;
 
 public class Duke {
     private static final String bannerLine = "_".repeat(30);
+    private List<Task> taskList = new ArrayList<>();
 
     public static void main(String[] args) {
         String logo = " ,ggg, ,ggggggg,                                                               ,ggg,\n"
@@ -43,7 +46,13 @@ public class Duke {
             if (cmd.equals("bye")) {
                 break;
             }
-            printInBanner(cmd);
+            if (cmd.equals("list")) {
+                printTasks();
+            }
+            else {
+                taskList.add(new Task(cmd));
+                printInBanner("added: " + cmd);
+            }
         }
         printInBanner("Otsunakiri~\nByebye!~");
     }
@@ -52,5 +61,16 @@ public class Duke {
         System.out.println(bannerLine);
         System.out.println(message);
         System.out.println(bannerLine);
+    }
+
+    private void printTasks() {
+        StringBuilder toPrint = new StringBuilder();
+        for (int i = 0; i < taskList.size(); i++) {
+            if (i != 0) {
+                toPrint.append("\n");
+            }
+            toPrint.append(i + 1).append(": ").append(taskList.get(i));
+        }
+        printInBanner(toPrint.toString());
     }
 }
