@@ -50,9 +50,11 @@ public class Duke {
                     taskNew = new Events(description, from, to);
 
 
+                } else if (echo.equals("bye")){
+                    break;
+
                 } else {
                     taskNew = new Task(echo);
-
                 }
 
                 System.out.println(logo);
