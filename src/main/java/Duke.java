@@ -120,8 +120,12 @@ public class Duke {
                 } else if (commands[0].equals("delete")) {
                     try {
                         if (commands.length == 1) {
-                            throw new NoArgsException("event");
+                            throw new NoArgsException("delete command");
 
+                        } else if (commands.length > 1 && !commands[1].matches("\\d")) {
+                            throw new DukeException("☹☹☹☹☹☹ OOPS!!! Provide a number!");
+                        } else if (storer.size() == 0) {
+                            throw new StorerEmptyException();
                         } else {
                             int index = Integer.valueOf(commands[1]);
                             Task E = storer.remove(index - 1);
