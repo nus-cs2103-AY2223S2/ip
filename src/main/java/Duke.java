@@ -1,4 +1,3 @@
-import java.util.ArrayList;
 import java.util.Scanner;
 
 /**
@@ -16,10 +15,10 @@ public class Duke {
             + "| | | | | | | |/ / _ \\\n"
             + "| |_| | |_| |   <  __/\n"
             + "|____/ \\__,_|_|\\_\\___|\n";
-    private static final Feedback fb = new Feedback();
 
     private enum Command {
         TODO, DEADLINE, EVENT,
+        DELETE,
         MARK, UNMARK,
         LIST,
         HELP,
@@ -36,6 +35,8 @@ public class Duke {
                 return Command.DEADLINE;
             case "event":
                 return Command.EVENT;
+            case "delete":
+                return Command.DELETE;
             case "mark":
                 return Command.MARK;
             case "unmark":
@@ -51,34 +52,31 @@ public class Duke {
         }
     }
 
-    public static void addTask(ArrayList<Task> myTaskList, Task task) {
-        myTaskList.add(task);
-        fb.addedTask(myTaskList.size(), task);
-    }
-
-    public static void markTask(String input, ArrayList<Task> myTaskList, Boolean mark) {
+    public static void deleteOrMark(String cmd, TaskList taskList, String input) {
         int index = 0;
-        String cmd = mark ? "MARK" : "UNMARK";
         try {
-            index = Integer.parseInt(input.split(" ")[1]) - 1;
-            Task task = myTaskList.get(index);
-            if (mark) {
-                task.markDone();
-                fb.markedTask(task);
-            } else {
-                task.unmarkDone();
-                fb.unmarkedTask(task);
+            index = Integer.parseInt(input.split(" ")[1]);
+            switch (cmd) {
+                case "DELETE":
+                    taskList.deleteTask(index - 1);
+                    break;
+                case "MARK":
+                    taskList.markTask(index - 1);
+                    break;
+                case "UNMARK":
+                    taskList.unmarkTask(index - 1);
+                    break;
             }
         } catch (ArrayIndexOutOfBoundsException e) {
-            fb.warning("The index of a " + cmd + " command cannot be empty.");
+            Feedback.warning("The index of a " + cmd + " command cannot be empty.");
         } catch (NumberFormatException e) {
-            fb.warning("The index of a " + cmd + " command requires a number.");
+            Feedback.warning("The index of a " + cmd + " command requires a number.");
         } catch (IndexOutOfBoundsException e) {
-            fb.warning("Task " + index + " do not exist.");
+            Feedback.warning("Task " + index + " do not exist.");
         }
     }
 
-    private static void checkInput(Boolean isTrue, String errorMessage) throws DukeException {
+    private static void checkExist(Boolean isTrue, String errorMessage) throws DukeException {
         if (!isTrue) {
             throw new DukeException(errorMessage);
         }
@@ -87,81 +85,85 @@ public class Duke {
     public static void main(String[] args) {
         // Initialize components
         Scanner scn = new Scanner(System.in);
-        ArrayList<Task> myTaskList = new ArrayList<>(100);
+        TaskList myTaskList = new TaskList(100);
 
-        fb.greet(LOGO);
+        Feedback.greet(LOGO);
         String input = scn.nextLine();
-        Command command = getCommand(input);
+        Command cmd = getCommand(input);
 
-        while (!command.equals(Command.BYE)) {
+        while (!cmd.equals(Command.BYE)) {
             String msg, descr;
             try {
-                switch (command) {
+                switch (cmd) {
                     case TODO:
-                        msg = input.substring(4);
-                        checkInput(!msg.isEmpty(), "The description of a TODO command cannot be empty.");
-                        addTask(myTaskList, new Todo(msg));
+                        msg = input.substring(4).trim();
+                        checkExist(!msg.isBlank(), "The description of a TODO command cannot be empty.");
+                        myTaskList.addTask(new Todo(msg));
                         break;
 
                     case DEADLINE:
-                        msg = input.substring(8);
-                        String by = " /by ";
-                        checkInput(msg.contains(by), "The /by in a DEADLINE command cannot is missing.");
+                        msg = input.substring(8).trim();
+                        String by = "/by";
+                        checkExist(msg.contains(by), "The /by in the DEADLINE command is missing.");
 
                         int byIndex = msg.indexOf(by);
-                        descr = msg.substring(0, byIndex);
-                        String dateTime = msg.substring(byIndex + by.length());
-                        checkInput(!descr.isEmpty(), "The description of a DEADLINE command cannot be empty.");
-                        checkInput(!dateTime.isEmpty(), "The datetime of a DEADLINE command cannot be empty.");
+                        descr = msg.substring(0, byIndex).trim();
+                        String dateTime = msg.substring(byIndex + by.length()).trim();
+                        checkExist(!descr.isBlank(), "The description of a DEADLINE command cannot be empty.");
+                        checkExist(!dateTime.isBlank(), "The datetime of a DEADLINE command cannot be empty.");
 
-                        addTask(myTaskList, new Deadline(descr, dateTime));
+                        myTaskList.addTask(new Deadline(descr, dateTime));
                         break;
 
                     case EVENT:
-                        msg = input.substring(5);
-                        String from = " /from ";
-                        String to = " /to ";
-                        checkInput(msg.contains(from), "The /from in the EVENT command is missing.");
-                        checkInput(msg.contains(to), "The /to in the EVENT command is missing.");
+                        msg = input.substring(5).trim();
+                        String from = "/from";
+                        String to = "/to";
+                        checkExist(msg.contains(from), "The /from in the EVENT command is missing.");
+                        checkExist(msg.contains(to), "The /to in the EVENT command is missing.");
 
                         int fromIndex = msg.indexOf(from);
                         int toIndex = msg.indexOf(to);
-                        descr = msg.substring(0, fromIndex);
-                        String startDT = msg.substring(fromIndex + from.length(), toIndex);
-                        String endDT = msg.substring(toIndex + to.length());
-                        checkInput(!descr.isEmpty(), "The description of a EVENT command cannot be empty.");
-                        checkInput(!startDT.isEmpty(), "The starting datetime of a EVENT command cannot be empty.");
-                        checkInput(!endDT.isEmpty(), "The ending datetime of a EVENT command cannot be empty.");
+                        descr = msg.substring(0, fromIndex).trim();
+                        String startDT = msg.substring(fromIndex + from.length(), toIndex).trim();
+                        String endDT = msg.substring(toIndex + to.length()).trim();
+                        checkExist(!descr.isBlank(), "The description of a EVENT command cannot be empty.");
+                        checkExist(!startDT.isBlank(), "The starting datetime of a EVENT command cannot be empty.");
+                        checkExist(!endDT.isBlank(), "The ending datetime of a EVENT command cannot be empty.");
 
-                        addTask(myTaskList, new Event(descr, startDT, endDT));
+                        myTaskList.addTask(new Event(descr, startDT, endDT));
+                        break;
+
+                    case DELETE:
+                        deleteOrMark("DELETE", myTaskList, input);
                         break;
 
                     case MARK:
-                        markTask(input, myTaskList, true);
+                        deleteOrMark("MARK", myTaskList, input);
                         break;
 
                     case UNMARK:
-                        markTask(input, myTaskList, false);
+                        deleteOrMark("UNMARK", myTaskList, input);
                         break;
 
                     case LIST:
-                        fb.listTask(myTaskList);
+                        myTaskList.list();
                         break;
 
                     case HELP:
-                        fb.help();
+                        myTaskList.help();
                         break;
 
                     default:
-                        fb.invalid();
+                        myTaskList.invalid();
                 }
             } catch (DukeException e) {
                 throw new RuntimeException(e);
             }
             input = scn.nextLine();
-            command = getCommand(input);
+            cmd = getCommand(input);
         }
-        fb.exit();
+        Feedback.exit();
         scn.close();
     }
 }

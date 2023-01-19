@@ -9,9 +9,9 @@ import java.util.ArrayList;
 public class Feedback {
 
     private static final String INDENT = "    ";
-    private static final String LINE = "    ______________________________";
+    private static final String LINE = INDENT + "______________________________";
 
-    private void display(String message) {
+    private static void display(String message) {
         System.out.println(LINE);
         String[] lines = message.split("\n");
         for (String s : lines) {
@@ -20,14 +20,20 @@ public class Feedback {
         System.out.println(LINE + "\n");
     }
 
-    public void greet(String logo) {
+    public static void greet(String logo) {
         display("Hello I'm\n" + logo + "What can I do for you?\n\n" + commands());
     }
 
-    public void addedTask(int index, Task task) {
+    public void addedTask(Task task, int size) {
         display("Got it. I've added this task:\n"
                 + task.toString() + "\n"
-                + "Now you have " + index + " tasks in the list.");
+                + "Now you have " + size + " tasks in the list.");
+    }
+
+    public void deletedTask(Task task, int size) {
+        display("Noted. I've removed this task:\n"
+                + task.toString() + "\n"
+                + "Now you have " + size + " tasks in the list.");
     }
 
     public void markedTask(Task task) {
@@ -52,7 +58,7 @@ public class Feedback {
         display(commands());
     }
 
-    public void exit() {
+    public static void exit() {
         display("Bye. Hope to see you again soon!");
     }
 
@@ -60,17 +66,18 @@ public class Feedback {
         display("☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
     }
 
-    public void warning(String warning) {
-        display("☹ OOPS!!! " + warning);
+    public static void warning(String errorMessage) {
+        display(errorMessage);
     }
 
-    private String commands() {
+    private static String commands() {
         return "MY COMMANDS ARE:\n\n"
                 + "ADD TODO TASK:     todo [description]\n"
                 + "ADD DEADLINE TASK: deadline [description] /by [date time]\n"
                 + "ADD EVENT TASK:    event [description] /from [date time] /to [date time]\n"
                 + "MARK A TASK:       mark [index]\n"
                 + "UNMARK A TASK:     unmark [index]\n"
+                + "DELETE A TASK:     delete [index]\n"
                 + "LIST ALL TASKS:    list\n"
                 + "DISPLAY COMMANDS:  help\n"
                 + "EXIT PROGRAM:      bye";
