@@ -1,0 +1,14 @@
+list
+drink coffee
+todo drink coffee
+todo dunk on a noob
+list
+mark 2
+list
+event slap a duck's bum /from yesterday /to today
+deadline chinese new year /by saturday
+mark 3
+list
+unmark 2
+list
+bye

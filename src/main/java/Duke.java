@@ -20,6 +20,10 @@ public class Duke {
                     isRunning = false;
                     break;
                 case "list":
+                    if (taskList.size() == 0) {
+                        System.out.println("You have no tasks in your list!");
+                        break;
+                    }
                     System.out.println("Here are the tasks in your list:");
                     for (int i = 0; i < taskList.size(); i++) {
                         Task task = taskList.get(i);
@@ -81,7 +85,7 @@ public class Duke {
                     System.out.println("Now you have " + taskList.size() + " tasks in the list!");
                     break;
                 default:
-                    System.out.println("Please input a valid command");
+                    System.out.println("Please input a valid command.");
                     break;
             }
         }
