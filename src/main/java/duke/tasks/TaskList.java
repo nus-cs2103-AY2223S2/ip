@@ -1,3 +1,4 @@
+package duke.tasks;
 import java.util.ArrayList;
 import java.util.stream.Stream;
 
@@ -21,6 +22,10 @@ public class TaskList {
     public Task remove (Task t) {
         tasks.remove(t);
         return t;
+    }
+
+    public Task get(int i) {
+        return tasks.get(i);
     }
 
     public int nextId() {

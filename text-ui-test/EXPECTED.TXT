@@ -5,11 +5,11 @@ What can I do for you?
 ____________________________________________________________
 
 > 
-added: Play chess
+Got it. I've added this task: [T][ ] Play chess
 ____________________________________________________________
 
 > 
-added: Complete Assignment
+Got it. I've added this task: [D][ ] Complete Assignment (by: Friday)
 ____________________________________________________________
 
 > 
@@ -18,8 +18,7 @@ ____________________________________________________________
 ____________________________________________________________
 
 > 
-Nice! I've marked this task as done: 
- [D][X] Complete Assignment (by: Friday)
+Nice! I've marked this task as done: [D][X] Complete Assignment (by: Friday)
 ____________________________________________________________
 
 > 

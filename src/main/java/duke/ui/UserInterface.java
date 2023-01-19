@@ -1,14 +1,17 @@
+package duke.ui;
 import java.io.InputStream;
 import java.io.PrintStream;
 import java.util.Scanner;
 import java.util.stream.Collectors;
+
+import duke.tasks.TaskList;
 
 public class UserInterface {
     private InputStream in;
     private PrintStream out;
     private Scanner sc;
 
-    UserInterface() {
+    public UserInterface() {
         in = System.in;
         out = System.out;
         sc = new Scanner(in);
@@ -41,7 +44,6 @@ public class UserInterface {
     }
 
     public String getInput() {
-        // if (!sc.hasNextLine()) return "";
         showPrompt();
         String input = sc.nextLine();
         return input;
