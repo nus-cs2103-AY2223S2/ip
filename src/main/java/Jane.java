@@ -88,6 +88,7 @@ public class Jane {
             }
             else if (output.equals("todo")||output.equals("deadline") ||output.equals("event")){
                 System.out.println("Please specify the task to be done :(((");
+                continue;
             }
             else if (output.startsWith("todo")) {
                 String des = output.substring(5);
@@ -134,6 +135,7 @@ public class Jane {
             }
             else if (!output.equals("list") ) {
                 System.out.println("Im sorry I don't understand what you mean :((");
+                continue;
             } else {
                 for (int i = 0; i < count; i++) {
                     System.out.println(tasks.get(i).toString());
