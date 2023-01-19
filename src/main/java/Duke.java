@@ -101,6 +101,19 @@ public class Duke {
                     System.out.println(spacingIndent
                             + " Now list has " + storage.size() + " tasks.");
                     System.out.println(dashes);
+                } else if (curInput.startsWith("delete")) {
+                    int targetIndex = Integer.parseInt(
+                            curInput.substring(7)) - 1;
+                    Task removedTask = storage.get(targetIndex);
+                    storage.remove(targetIndex);
+                    System.out.println(dashes);
+                    System.out.println(spacingIndent
+                            + " Task removed:");
+                    System.out.println(spacingIndent
+                            + "   " + removedTask);
+                    System.out.println(spacingIndent
+                            + " Now list has " + storage.size() + " tasks.");
+                    System.out.println(dashes);
                 }
                 else {
                     throw new DukeException(
@@ -108,7 +121,8 @@ public class Duke {
                 }
             } catch (DukeException dukeException){
                 System.out.println(dashes);
-                System.out.println(spacingIndent + " " + dukeException.getMessage());
+                System.out.println(spacingIndent + " "
+                        + dukeException.getMessage());
                 System.out.println(dashes);
             }
         }
