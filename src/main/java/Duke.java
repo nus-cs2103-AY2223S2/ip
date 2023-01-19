@@ -10,7 +10,7 @@ public class Duke {
         if (s.equals("")) {
             return;
         }
-        String linebreak = "_________________________________________________________";
+        String linebreak = "    _________________________________________________________";
         System.out.println(linebreak);
         System.out.println(s);
         System.out.println(linebreak);
@@ -19,7 +19,7 @@ public class Duke {
     public static String mark(boolean toMark) {
         int index = Integer.parseInt(toMark ? currentInput.substring(5) : currentInput.substring(7)) - 1;
         if (index >= taskList.size() || index < 0) {
-            return "index out of bounds";
+            return "Task index out of bounds, please input a valid index";
         } else {
             Task curTask = taskList.get(index);
             curTask.setCompleted(toMark);
@@ -53,8 +53,10 @@ public class Duke {
         StringBuilder response = new StringBuilder();
         response.append("Got it. I've added this task:\n");
         if (currentInput.matches("^todo .*")) {
+            //Adding a Todo task
             taskList.add(new Todo(currentInput.substring(5)));
         } else if (currentInput.matches("^deadline .*")) {
+            //Adding a Deadline
             int byPos = currentInput.indexOf(" /by ");
             if (byPos == -1) {
                 reply("Deadline not specified with /by");
@@ -62,6 +64,7 @@ public class Duke {
             }
             taskList.add(new Deadline(currentInput.substring(9, byPos), currentInput.substring(byPos + 5)));
         } else {
+            //Adding an Event
             int fromPos = currentInput.indexOf(" /from ");
             int toPos = currentInput.indexOf(" /to ");
             if (fromPos == -1 || toPos == -1 || toPos > currentInput.length() + 4) {
@@ -93,8 +96,10 @@ public class Duke {
 
         currentInput = sc.nextLine();
         while (!currentInput.equalsIgnoreCase("bye")) {
-            StringBuilder response = new StringBuilder();
-            if (currentInput.equalsIgnoreCase("list")) {
+            //when there is no input
+            if (currentInput.equals("")) {
+                reply("Please input a command");
+            } else if (currentInput.equalsIgnoreCase("list")) {
                 reply(list());
             } else if (currentInput.matches("mark \\d+") || currentInput.matches("unmark \\d+")) {
                 boolean toMark = currentInput.matches("mark \\d+");
