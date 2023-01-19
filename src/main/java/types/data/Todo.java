@@ -1,4 +1,4 @@
-package types;
+package types.data;
 
 public class Todo extends Task {
     private Todo(String s) {

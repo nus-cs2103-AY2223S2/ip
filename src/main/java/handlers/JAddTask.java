@@ -2,11 +2,15 @@ package handlers;
 
 import services.TaskStorage;
 import types.*;
+import types.data.Deadline;
+import types.data.Event;
+import types.data.Task;
+import types.data.Todo;
 
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-public final class HAddTask implements ICommand {
+public final class JAddTask implements IHandler {
     private static final Pattern todo_p = Pattern.compile("(todo) (.*)");
     private static final Pattern event_p = Pattern.compile("(event) (.*) /from (.*) /to (.*)");
     private static final Pattern deadline_p = Pattern.compile("(deadline) (.*) /by (.*)");
@@ -14,7 +18,7 @@ public final class HAddTask implements ICommand {
             .compile("(todo) (.*)|(deadline) (.*) /by (.*)|(event) (.*) /from (.*) /to (.*)");
     private final TaskStorage ts;
 
-    public HAddTask(TaskStorage ts) {
+    public JAddTask(TaskStorage ts) {
         this.ts = ts;
     }
 

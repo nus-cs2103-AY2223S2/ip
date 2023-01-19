@@ -1,4 +1,4 @@
-package types;
+package types.data;
 
 public class Event extends Task {
     private final String start;

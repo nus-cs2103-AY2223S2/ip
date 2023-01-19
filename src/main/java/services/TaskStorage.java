@@ -1,6 +1,6 @@
 package services;
 
-import types.Task;
+import types.data.Task;
 
 import java.util.ArrayList;
 import java.util.Collections;

@@ -1,4 +1,4 @@
-package types;
+package types.data;
 
 public abstract class Task {
     protected String name;

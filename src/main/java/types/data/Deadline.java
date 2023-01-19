@@ -1,4 +1,4 @@
-package types;
+package types.data;
 
 public class Deadline extends Task {
     private final String before;

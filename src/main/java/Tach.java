@@ -1,6 +1,6 @@
 import handlers.*;
-import services.Parser;
-import services.Prompt;
+import services.Dispatcher;
+import utilities.Prompt;
 import services.TaskStorage;
 
 import java.util.Scanner;
@@ -13,7 +13,7 @@ public class Tach {
             + "  |____|  (____  /\\___  >___|  /\n"
             + "               \\/     \\/     \\/ \n";
     private static final Scanner scanner = new Scanner(System.in);
-    private static final Parser parser = new Parser();
+    private static final Dispatcher dispatcher = new Dispatcher();
     private static final TaskStorage ts = new TaskStorage();
     private static Boolean shouldContinue = true;
 
@@ -21,25 +21,25 @@ public class Tach {
         System.out.println("Yoooo from\n" + logo);
     }
 
-    private static void initParser() {
-        parser.setDefaultHandler(new HThrowException());
-        parser.registerCommand(new HAddTask(ts));
-        parser.registerCommand(new HShowTaskList(ts));
-        parser.registerCommand(new HMarkTask(ts));
-        parser.registerCommand(new HDeleteTask(ts));
-        parser.registerError(new ETodoEmptyDescription());
-        parser.setExitHandler(new HBye());
-        parser.setToExit(() -> shouldContinue = false);
+    private static void initDispatcher() {
+        dispatcher.setDefaultHandler(new JThrowException());
+        dispatcher.registerCommand(new JAddTask(ts));
+        dispatcher.registerCommand(new JShowTaskList(ts));
+        dispatcher.registerCommand(new JMarkTask(ts));
+        dispatcher.registerCommand(new JDeleteTask(ts));
+        dispatcher.registerError(new ETodoEmptyDescription());
+        dispatcher.setExitHandler(new JBye());
+        dispatcher.setToExit(() -> shouldContinue = false);
     }
 
     private static void takeInput() {
         Prompt.beforeInput();
-        parser.handle(scanner.nextLine());
+        dispatcher.handle(scanner.nextLine());
         Prompt.afterInput();
     }
 
     public static void main(String[] args) {
-        initParser();
+        initDispatcher();
         hello();
 
         while (shouldContinue) {

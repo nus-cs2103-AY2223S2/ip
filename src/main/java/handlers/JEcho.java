@@ -1,8 +1,8 @@
 package handlers;
 
-import types.ICommand;
+import types.IHandler;
 
-public final class HEcho implements ICommand {
+public final class JEcho implements IHandler {
     @Override
     public void take(String s) {
         System.out.println(s);

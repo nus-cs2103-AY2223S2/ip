@@ -1,17 +1,17 @@
 package handlers;
 
 import services.TaskStorage;
-import types.ICommand;
-import types.Task;
+import types.IHandler;
+import types.data.Task;
 
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-public class HDeleteTask implements ICommand {
+public class JDeleteTask implements IHandler {
     private static final Pattern p = Pattern.compile("delete ([0-9]*)");
     private final TaskStorage ts;
 
-    public HDeleteTask(TaskStorage ts) {
+    public JDeleteTask(TaskStorage ts) {
         this.ts = ts;
     }
 

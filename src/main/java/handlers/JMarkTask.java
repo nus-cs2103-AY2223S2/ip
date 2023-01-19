@@ -1,17 +1,17 @@
 package handlers;
 
 import services.TaskStorage;
-import types.ICommand;
+import types.IHandler;
 
 import java.util.Objects;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-public final class HMarkTask implements ICommand {
+public final class JMarkTask implements IHandler {
     private static final Pattern p = Pattern.compile("(un)?mark ([0-9]*)");
     private final TaskStorage ts;
 
-    public HMarkTask(TaskStorage ts) {
+    public JMarkTask(TaskStorage ts) {
         this.ts = ts;
     }
 

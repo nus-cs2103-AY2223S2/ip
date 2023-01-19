@@ -1,16 +1,16 @@
 package handlers;
 
 import services.TaskStorage;
-import types.ICommand;
-import types.Task;
+import types.IHandler;
+import types.data.Task;
 
 import java.util.regex.Pattern;
 
-public final class HShowTaskList implements ICommand {
+public final class JShowTaskList implements IHandler {
     private static final Pattern p = Pattern.compile("list");
     private final TaskStorage ts;
 
-    public HShowTaskList(TaskStorage ts) {
+    public JShowTaskList(TaskStorage ts) {
         this.ts = ts;
     }
 

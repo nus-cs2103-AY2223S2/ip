@@ -1,8 +1,8 @@
 package handlers;
 
-import types.ICommand;
+import types.IHandler;
 
-public class HThrowException implements ICommand {
+public class JThrowException implements IHandler {
     @Override
     public void take(String s) {
         System.out.println("☹ OOPS!!! I'm sorry, but I don't know what that means :-(");

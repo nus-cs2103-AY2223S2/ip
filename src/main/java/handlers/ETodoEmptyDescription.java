@@ -1,10 +1,10 @@
 package handlers;
 
-import types.ICommand;
+import types.IHandler;
 
 import java.util.regex.Pattern;
 
-public class ETodoEmptyDescription implements ICommand {
+public class ETodoEmptyDescription implements IHandler {
     private static final Pattern p = Pattern.compile("todo");
 
     @Override
