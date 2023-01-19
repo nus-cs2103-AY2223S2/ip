@@ -30,6 +30,7 @@ public class Duke {
                 System.out.println(DukeIO.wrapContent(taskList.toString()));
                 continue;
             }
+
             taskList.addTask(input);
         }
     }

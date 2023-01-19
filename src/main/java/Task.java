@@ -1,4 +1,4 @@
-public class Task {
+public abstract class Task {
     private static final String COMPLETED = "[O]";
     private static final String NOT_COMPLETED = "[ ]";
     private final String name;
@@ -10,19 +10,15 @@ public class Task {
 
     public void markTask() {
         isCompleted = true;
-        System.out.println(DukeIO.wrapContent("Well done. Task has been marked as completed:\n" + stringWithStatus()));
+        System.out.println(DukeIO.wrapContent("Well done. Task has been marked as completed:\n\t\t" + this));
     }
 
     public void unmarkTask() {
         isCompleted = false;
-        System.out.println(DukeIO.wrapContent("Got it. Task has been unmarked:\n" + stringWithStatus()));
-    }
-
-    public String stringWithStatus() {
-        return (isCompleted ? COMPLETED : NOT_COMPLETED) + " " + name;
+        System.out.println(DukeIO.wrapContent("Got it. Task has been unmarked:\n\t\t" + this));
     }
     @Override
     public String toString() {
-        return name;
+        return (isCompleted ? COMPLETED : NOT_COMPLETED) + " " + name;
     }
 }
