@@ -12,21 +12,24 @@ public class Duke {
         System.out.println("What can I do for you?");
 
         Scanner scanner = new Scanner(System.in);
-        String[] list = new String[100];
-        int index = 0;
+        TaskList taskList = new TaskList();
         while (true) {
             String data = scanner.nextLine();
             if (data.equals("bye")) {
                 System.out.println("Goodbye! It's been a pleasure talking to you!");
                 break;
             } else if (data.equals("list")) {
-                for (int i = 0 ; i < index ; i++) {
-                    System.out.println((i + 1) + ". " + list[i]);
-                }
+                System.out.println(taskList);
+            } else if (data.startsWith("mark ")) {
+                String marked_index = data.substring(5);
+                System.out.println(taskList.markTask(marked_index));
+            } else if (data.startsWith("unmark ")) {
+                String unmarked_index = data.substring(7);
+                System.out.println(taskList.unmarkTask(unmarked_index));
             } else {
-                list[index] = data;
-                index++;
-                System.out.println("Added: " + data);
+                Task task = new Task(data);
+                taskList.addTask(task);
+                System.out.println("Added: " + task);
             }
         }
     }
