@@ -3,6 +3,7 @@ import event_loop.Executable;
 import event_loop.NestableExecutableObject;
 import features.echo.Echo;
 import features.bye.Bye;
+import features.todos_manager.TodosManager;
 
 import java.util.Scanner;
 
@@ -18,8 +19,12 @@ public class DukeEventLoop extends EventLoop {
     static DukeEventLoop createEventLoop(Scanner scanner) {
         final NestableExecutableObject executable =
                 new NestableExecutableObject();
-        executable.registerIdentifiableExecutable(new Bye());
-        executable.registerPostExecutable(new Echo());
+        final Bye bye = new Bye();
+        bye.register(executable);
+        // final Echo echo = new Echo();
+        // echo.register(executable);
+        final TodosManager manager = new TodosManager();
+        manager.register(executable);
         return new DukeEventLoop(scanner, executable);
     }
 
