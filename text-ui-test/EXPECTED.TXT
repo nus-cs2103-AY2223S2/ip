@@ -66,4 +66,62 @@ Command: deadline wrong deadline2 /from today
 2[E][ ] mark 2  (by: sunday  to: wednesday)
 3[D][ ] complete work  (by: today)
 --------------------
+--------------------
+Noted. I've removed this task:
+[T][X] mark 1
+Now you have 2 tasks in the list.
+--------------------
+--------------------
+1[E][ ] mark 2  (by: sunday  to: wednesday)
+2[D][ ] complete work  (by: today)
+--------------------
+--------------------
+Nice! I've marked this task as done:
+[D][X] complete work  (by: today)
+--------------------
+--------------------
+Noted. I've removed this task:
+[D][X] complete work  (by: today)
+Now you have 1 tasks in the list.
+--------------------
+--------------------
+1[E][ ] mark 2  (by: sunday  to: wednesday)
+--------------------
+--------------------
+Noted. I've removed this task:
+[E][ ] mark 2  (by: sunday  to: wednesday)
+Now you have 0 tasks in the list.
+--------------------
+--------------------
+☹ OOPS!!! I'm sorry, but I don't know what that means :-(
+delete 1
+--------------------
+--------------------
+☹ OOPS!!! I'm sorry, but I don't know what that means :-(
+delete 0
+--------------------
+--------------------
+Got it. I've added this task:
+[T][ ] 1 
+Now you have 1 tasks in the list.
+--------------------
+--------------------
+Got it. I've added this task:
+[T][ ] 2
+Now you have 2 tasks in the list.
+--------------------
+--------------------
+Got it. I've added this task:
+[T][ ] 3
+Now you have 3 tasks in the list.
+--------------------
+--------------------
+Nice! I've marked this task as done:
+[T][X] 2
+--------------------
+--------------------
+1[T][ ] 1 
+2[T][X] 2
+3[T][ ] 3
+--------------------
 Bye. Hope to see you again soon!

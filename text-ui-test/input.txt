@@ -12,4 +12,17 @@ deadline complete work /by today
 deadline wrong deadline by today\
 deadline wrong deadline2 /from today
 list
+delete 1
+list
+mark 2
+delete 2
+list
+delete 1
+delete 1
+delete 0
+todo 1 
+todo 2
+todo 3
+mark 2
+list
 bye
