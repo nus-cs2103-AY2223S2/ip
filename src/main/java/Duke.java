@@ -1,4 +1,5 @@
 import java.util.Scanner;
+import java.util.ArrayList;
 
 import Exceptions.*;
 
@@ -7,7 +8,7 @@ public class Duke {
         System.out.println("Hello I'm Duke");
         System.out.println("What can I do for you?");
         Scanner scanner = new Scanner(System.in);
-        Task[] list = new Task[100];
+        ArrayList<Task> list = new ArrayList<>();
         int counter = 0;
 
         while(true) {
@@ -19,56 +20,52 @@ public class Duke {
             } else if(message.equals("list")){
                 for(int i = 0; i < counter; i++) {
                     int label = i + 1;
-                    System.out.println(label + ". " + list[i].toString());
+                    System.out.println("    " + label + ". " + list.get(i).toString());
                 }
             } else if(message.startsWith("mark") || message.startsWith("unmark")) {
-                int taskNumber = Integer.parseInt(message.split(" ")[1]);
-                if(taskNumber > counter) {
-                    System.out.println("Task " + taskNumber + " does not exist");
-                    continue;
-                }
+                try {
+                    int taskNumber = Integer.parseInt(message.split(" ")[1]);
+                    if (taskNumber > counter) {
+                        throw(new TaskNotFoundException("Task " + taskNumber +" does not exist"));
+                    }
 
-                Task currTask = list[taskNumber - 1];
-                if(message.startsWith("mark")) {
-                    currTask.setDone(true);
-                    System.out.println("Nice! I've marked this task as done:");
-                    System.out.println(currTask);
-                } else {
-                    currTask.setDone(false);
-                    System.out.println("OK, I've marked this task as not done yet:");
-                    System.out.println(currTask.toString());
+                    Task currTask = list.get(taskNumber - 1);
+                    if (message.startsWith("mark")) {
+                        currTask.setDone(true);
+                        System.out.println("Nice! I've marked this task as done:");
+                        System.out.println("    " + currTask);
+                    } else {
+                        currTask.setDone(false);
+                        System.out.println("OK, I've marked this task as not done yet:");
+                        System.out.println("    " + currTask);
+                    }
+                } catch(TaskNotFoundException e) {
+                    System.out.println(e.getMessage());
                 }
-            } else if(message.startsWith("todo")) {
+            } else if(message.startsWith("todo") || message.startsWith("deadline") || message.startsWith("event")) {
                 try {
-                    Task todo = addNewTask(message);
-                    list[counter] = todo;
+                    Task task = addNewTask(message);
+                    list.add(task);
                     counter++;
                     System.out.println("Got it. I've added this task:");
-                    System.out.println(todo);
+                    System.out.println("    " + task);
                     System.out.println("Now you have " + counter + " task in the list");
                 } catch(DukeException e) {
                     System.out.println(e.getMessage());
                 }
-            } else if(message.startsWith("deadline")) {
+            } else if(message.startsWith("delete")) {
                 try {
-                    Task deadline = addNewTask(message);
-                    list[counter] = deadline;
-                    counter++;
-                    System.out.println("Got it. I've added this task:");
-                    System.out.println(deadline);
-                    System.out.println("Now you have " + counter + " task in the list");
-                } catch(DukeException e) {
-                    System.out.println(e.getMessage());
-                }
-            } else if(message.startsWith("event")) {
-                try {
-                    Task event = addNewTask(message);
-                    list[counter] = event;
-                    counter++;
-                    System.out.println("Got it. I've added this task:");
-                    System.out.println(event);
-                    System.out.println("Now you have " + counter + " task in the list");
-                } catch(DukeException e) {
+                    int taskNumber = Integer.parseInt(message.split(" ")[1]);
+                    if (taskNumber > counter) {
+                        throw(new TaskNotFoundException("Task " + taskNumber +" does not exist"));
+                    }
+
+                    Task removedTask = list.remove(taskNumber - 1);
+                    counter--;
+                    System.out.println("Noted. I've removed this task:");
+                    System.out.println("    " + removedTask);
+                    System.out.println("Now you have " + counter + " tasks in the list.");
+                } catch(TaskNotFoundException e) {
                     System.out.println(e.getMessage());
                 }
             } else {
@@ -81,13 +78,13 @@ public class Duke {
         if(message.startsWith("todo")) {
             String info = message.substring(4).trim();
             if (info.isEmpty()) {
-                throw (new TaskNotFoundException("☹ OOPS!!! The description of a todo cannot be empty."));
+                throw (new TaskNoDescriptionException("☹ OOPS!!! The description of a todo cannot be empty."));
             }
             return new Todo(info);
         } else if(message.startsWith("deadline")) {
             String info = message.substring(8).trim();
             if (info.isEmpty()) {
-                throw(new TaskNotFoundException("☹ OOPS!!! The description of a deadline cannot be empty."));
+                throw(new TaskNoDescriptionException("☹ OOPS!!! The description of a deadline cannot be empty."));
             }
 
             try {
@@ -99,7 +96,7 @@ public class Duke {
         } else if(message.startsWith("event")) {
             String info = message.substring(5).trim();
             if (info.isEmpty()) {
-                throw (new TaskNotFoundException("☹ OOPS!!! The description of an event cannot be empty."));
+                throw (new TaskNoDescriptionException("☹ OOPS!!! The description of an event cannot be empty."));
             }
 
             try {
@@ -110,7 +107,7 @@ public class Duke {
             }
         } else {
             // this should only happen when addNewTask is being called in the wrong place
-            throw(new TaskNotFoundException("There is an error in the code. This message does not belong here"));
+            throw(new TaskNoDescriptionException("There is an error in the code. This message does not belong here"));
         }
     }
 }
