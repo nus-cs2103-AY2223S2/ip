@@ -8,23 +8,23 @@ public class Duke {
         start, list, bye, todo, mark, unmark, event, deadline, delete
     }
 
-    public static void markTask(ArrayList<Task> taskList, int index) {
+    public static void markTask(ArrayList<Task> taskList, int index) throws DukeException {
         try {
             Task unmarkedTask = taskList.get(index);
             Task markedTask = unmarkedTask.markTask();
             taskList.set(index, markedTask);
-        } catch (DukeException err) {
-            System.out.println(err.getErrorMessage());
+        } catch (NumberFormatException err) {
+            throw new DukeException("The task number given is not numeric!");
         }
     }
 
-    public static void unmarkTask(ArrayList<Task> taskList, int index) {
+    public static void unmarkTask(ArrayList<Task> taskList, int index)  throws DukeException {
         try {
             Task markedTask = taskList.get(index);
             Task unmarkedTask = markedTask.unmarkTask();
             taskList.set(index, unmarkedTask);
         } catch (DukeException err) {
-            System.out.println(err.getErrorMessage());
+            throw new DukeException("The task number given is not numeric!");
         }
     }
 
@@ -35,12 +35,16 @@ public class Duke {
         System.out.printf("Now you have %d tasks in the list.%n", taskList.size());
     }
 
-    public static void deleteTask(ArrayList<Task> taskList, int index) {
-        Task deletedTask = taskList.get(index);
-        taskList.remove(index);
-        System.out.println("Noted. I've removed this task:");
-        System.out.println(deletedTask);
-        System.out.printf("Now you have %d tasks in the list.%n", taskList.size());
+    public static void deleteTask(ArrayList<Task> taskList, int index) throws DukeException {
+        try {
+            Task deletedTask = taskList.get(index);
+            taskList.remove(index);
+            System.out.println("Noted. I've removed this task:");
+            System.out.println(deletedTask);
+            System.out.printf("Now you have %d tasks in the list.%n", taskList.size());
+        } catch (NumberFormatException err) {
+            throw new DukeException("The task number given is not numeric!");
+        }
     }
 
     public static String checkCommand(String command) throws DukeException {
@@ -53,23 +57,24 @@ public class Duke {
     }
 
     public static String getTaskNumber(String[] splitInput) throws DukeException {
-        try {
-            if (splitInput.length == 1) {
-                throw new DukeException("No task number was given!");
-            } else {
-                return splitInput[1];
-            }
-        } catch (DukeException err) {
-            throw new DukeException("The task number given is not numeric!");
+        if (splitInput.length == 1) {
+            throw new DukeException("No task number was given!");
+        } else {
+            return splitInput[1];
         }
     }
 
+
     public static int checkTaskNumber(ArrayList<Task> taskList, String taskNumber) throws DukeException {
-        int index = Integer.parseInt(taskNumber) - 1;
-        if (index >= taskList.size() || index < 0) {
-            throw new DukeException("The task number given does not exist!");
-        } else {
-            return index;
+        try {
+            int index = Integer.parseInt(taskNumber) - 1;
+            if (index >= taskList.size() || index < 0) {
+                throw new DukeException("The task number given does not exist!");
+            } else {
+                return index;
+            }
+        } catch (NumberFormatException err) {
+            throw new DukeException("The task number given is not numeric!");
         }
     }
 
