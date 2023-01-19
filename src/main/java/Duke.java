@@ -22,7 +22,7 @@ public class Duke {
         printLine();
     }
 
-    public static void saveTask(String command) {
+    public static void saveTask(String command) throws DukeException {
         int start_idx, end_idx;
         Task task;
         String description, by, from, to;
@@ -32,6 +32,9 @@ public class Duke {
             start_idx = 1;
             end_idx = input.length;
             description = stringConverter(input, start_idx, end_idx);
+            if (description.isBlank()) {
+                throw new DukeException(input[0]);
+            }
 
             task = new Todo(description);
 
@@ -39,6 +42,9 @@ public class Duke {
             start_idx = 1;
             end_idx = Arrays.asList(input).indexOf("/by");
             description = stringConverter(input, start_idx, end_idx);
+            if (description.isBlank()) {
+                throw new DukeException(input[0]);
+            }
 
             start_idx = end_idx + 1;
             end_idx = input.length;
@@ -46,10 +52,13 @@ public class Duke {
 
             task = new Deadline(description, by);
 
-        } else {
+        } else if (input[0].equalsIgnoreCase("event")) {
             start_idx = 1;
             end_idx = Arrays.asList(input).indexOf("/from");
             description = stringConverter(input, start_idx, end_idx);
+            if (description.isBlank()) {
+                throw new DukeException(input[0]);
+            }
 
             start_idx = end_idx + 1;
             end_idx = Arrays.asList(input).indexOf("/to");
@@ -61,6 +70,8 @@ public class Duke {
 
             task = new Event(description, from, to);
 
+        } else {
+            throw new DukeException();
         }
 
         listOfTasks.add(task);
@@ -82,24 +93,32 @@ public class Duke {
         printLine();
     }
 
-    public static void markTask(String command) {
+    public static void markTask(String command) throws DukeException {
         int index = Integer.parseInt(command.split(" ")[1]);
-        Task task = listOfTasks.get(index - 1);
-        task.markAsDone();
-        printLine();
-        System.out.println("\tNice! I've marked this task as done:");
-        System.out.println("\t  " + task.toString());
-        printLine();
+        try {
+            Task task = listOfTasks.get(index - 1);
+            task.markAsDone();
+            printLine();
+            System.out.println("\tNice! I've marked this task as done:");
+            System.out.println("\t  " + task.toString());
+            printLine();
+        } catch (IndexOutOfBoundsException e) {
+            throw new DukeException(index);
+        }
     }
 
-    public static void unmarkTask(String command) {
+    public static void unmarkTask(String command) throws DukeException {
         int index = Integer.parseInt(command.split(" ")[1]);
-        Task task = listOfTasks.get(index - 1);
-        task.markAsUndone();
-        printLine();
-        System.out.println("\tOK, I've marked this task as not done yet:");
-        System.out.println("\t  " + task.toString());
-        printLine();
+        try {
+            Task task = listOfTasks.get(index - 1);
+            task.markAsUndone();
+            printLine();
+            System.out.println("\tOK, I've marked this task as not done yet:");
+            System.out.println("\t  " + task.toString());
+            printLine();
+        } catch (IndexOutOfBoundsException e) {
+            throw new DukeException(index);
+        }
     }
 
     public static String stringConverter(String[] arr, int start_idx, int end_idx) {
@@ -114,13 +133,13 @@ public class Duke {
         return str;
     }
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws DukeException {
         Scanner input = new Scanner(System.in);
         int index;
         String command, firstWord;
         greet();
         while (true) {
-            command = input.nextLine();
+            command = input.nextLine().trim();
             firstWord = command.split(" ")[0];
             if (command.equalsIgnoreCase("bye")) {
                 exit();
