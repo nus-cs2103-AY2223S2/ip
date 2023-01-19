@@ -33,16 +33,24 @@ public class Duke {
                     System.out.println((i + 1) + "." + inputs.get(i));
                 }
             } else if(isMarkTask) {
-                    Task taskToMark = inputs.get(Integer.parseInt(splitStr[1]) - 1);
+                int taskNo = 0;
+                try {
+                    taskNo = Integer.parseInt(splitStr[1]);
+                    Task taskToMark = inputs.get(taskNo - 1);
                     mark(type, taskToMark);
                     System.out.println(taskToMark);
+                } catch (NumberFormatException e) {
+                    System.out.println("Mark commands need to be followed by an integer!");
+                } catch (IndexOutOfBoundsException e) {
+                    System.out.println("I'm sorry but task number " + taskNo + " has not been added yet!");
+                }
             } else if(isSuppTask) {
                 try {
                     addSuppTask(type, inputs, splitStr);
                     System.out.println("Got it. I've added this task:");
                     System.out.println(inputs.get(inputs.size() - 1));
                     System.out.println("Now you have " + Task.getCount() + " tasks in the list.");
-                } catch(DukeException e) {
+                } catch (DukeException e) {
                     System.out.println(e);
                 }
             } else if(type.equals("delete")) {
