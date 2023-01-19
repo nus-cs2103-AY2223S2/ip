@@ -43,21 +43,26 @@ public class DukeBehaviour {
     }
 
     private void addTask(String userIn){
+
         String taskType = userIn.split(" ")[0];
         //System.out.println("tasktype: " + taskType);
-        switch (taskType) {
-            case "todo":
-                addToDo(userIn);
-                break;
-            case "deadline":
-                addDeadline(userIn);
-                break;
-            case "event":
-                addEvent(userIn);
-                break;
+        try{
+            switch (taskType) {
+                case "todo":
+                    addToDo(userIn);
+                    break;
+                case "deadline":
+                    addDeadline(userIn);
+                    break;
+                case "event":
+                    addEvent(userIn);
+                    break;
+                default:
+                    throw new DukeException("I'm sorry, I could not understand that command.");
+            }
+        } catch (DukeException e) {
+            System.out.println(e.getMessage());
         }
-        //todo: nest switch in a try catch block add default uwuw
-        System.out.println("Now you have " + taskList.size() + " tasks in the list.");
     }
 
     private void addEvent(String userIn) {
@@ -70,6 +75,7 @@ public class DukeBehaviour {
         taskList.add(newEvent);
         System.out.println("Got it. I've added this task:");
         System.out.println(newEvent);
+        System.out.println("Now you have " + taskList.size() + " tasks in the list.");
     }
 
     private void addDeadline(String userIn) {
@@ -78,13 +84,18 @@ public class DukeBehaviour {
         taskList.add(newDeadline);
         System.out.println("Got it. I've added this task:");
         System.out.println(newDeadline);
+        System.out.println("Now you have " + taskList.size() + " tasks in the list.");
     }
 
-    private void addToDo(String userIn){
+    private void addToDo(String userIn) throws DukeException{
+        if (userIn.split(" ").length == 1) {
+            throw new DukeException("todo cannot have no description!");
+        }
         ToDo newToDo = new ToDo(userIn.replace("ToDo", ""));
         taskList.add(newToDo);
         System.out.println("Got it. I've added this task:");
         System.out.println(newToDo);
+        System.out.println("Now you have " + taskList.size() + " tasks in the list.");
     }
 
     private void displayList() {

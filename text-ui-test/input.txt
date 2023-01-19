@@ -18,4 +18,6 @@ todo task2
 event event2 /from 2pm /to 3pm
 deadline dead2 /by tomorrow
 list
+todo
+bleh
 bye

@@ -57,5 +57,7 @@ Here are the tasks in your list:
 5. [E][ ] 2 (from: 2pm to: 3pm)
 6. [D][ ] deadline dead2 (by: tomorrow)
 End of task list.
+todo cannot have no description!
+I'm sorry, I could not understand that command.
 Bye. Hope to see you again soon!
 
