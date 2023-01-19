@@ -1,0 +1,9 @@
+buy book
+todo mark scripts
+mark 2
+list
+deadline return book /by june 6th
+event project meeting event /from Mon 2pm /to 4pm
+mark 4
+unmark 2
+list
