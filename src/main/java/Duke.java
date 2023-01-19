@@ -36,40 +36,74 @@ public class Duke {
             } else if (input.equals("list")) {
                 printList(myTasks);
                 System.out.println(separator);
-
             } else if (input.startsWith("mark")) {
+                try {
+                    String pattern = "mark \\d*";
+                    boolean isMatch = input.matches(pattern);
+                    if (!isMatch){
+                        throw new DukeException("☹ OOPS!!! The description of a mark cannot be empty.");
+                    }
+                } catch (DukeException e) {
+                    System.out.println(e.getMessage());
+                }
                 int taskNumber = Integer.parseInt(input.substring(5));
                 taskNumber--;
                 Task task = myTasks.get(taskNumber);
                 task.taskDone();
-                System.out.println("Nice! I've marked this task as done:");
-                System.out.println(task.toString());
-                System.out.println(separator);
             } else if (input.startsWith("unmark")) {
+                try {
+                    String pattern = "unmark \\d*";
+                    boolean isMatch = input.matches(pattern);
+                    if (!isMatch){
+                        throw new DukeException("☹ OOPS!!! The description of a unmark cannot be empty.");
+                    }
+                } catch (DukeException e) {
+                    System.out.println(e.getMessage());
+                }
                 int taskNumber = Integer.parseInt(input.substring(7));
                 taskNumber--;
                 Task task = myTasks.get(taskNumber);
                 task.taskNotDone();
-                System.out.println("OK, I've marked this task as not done yet:");
-                System.out.println(task.toString());
-                System.out.println(separator);
             } else if (input.startsWith("todo")) {
+                try {
+                    String pattern = "todo \\S*";
+                    boolean isMatch = input.matches(pattern);
+                    if (!isMatch){
+                        throw new DukeException("☹ OOPS!!! The description of a todo cannot be empty.");
+                    }
+                } catch (DukeException e) {
+                    System.out.println(e.getMessage());
+                }
                 String taskDescription = input.substring(5);
                 Todo task = new Todo(taskDescription);
                 myTasks.add(task);
-                System.out.println("Got it. I've added this task:");
-                System.out.println("Now we have " + myTasks.size() + " tasks in the list.");
-                System.out.println(separator);
+                task.announceAdded(myTasks);
             } else if (input.startsWith("deadline")) {
+                try {
+                    String pattern = "deadline \\S* /by \\S*";
+                    boolean isMatch = input.matches(pattern);
+                    if (!isMatch){
+                        throw new DukeException("☹ OOPS!!! The description of a deadline cannot be empty.");
+                    }
+                } catch (DukeException e) {
+                    System.out.println(e.getMessage());
+                }
                 String[] temp = input.substring(9).split(" /by ");
                 String taskDescription = temp[0];
                 String by = temp[1];
                 Deadline task = new Deadline(taskDescription, by);
                 myTasks.add(task);
-                System.out.println("Got it. I've added this task:");
-                System.out.println("Now we have " + myTasks.size() + " tasks in the list.");
-                System.out.println(separator);
+                task.announceAdded(myTasks);
             } else if (input.startsWith("event")) {
+                try {
+                    String pattern = "event \\S* /from \\S* /to \\S*";
+                    boolean isMatch = input.matches(pattern);
+                    if (!isMatch){
+                        throw new DukeException("☹ OOPS!!! The description of a event cannot be empty.");
+                    }
+                } catch (DukeException e) {
+                    System.out.println(e.getMessage());
+                }
                 String[] temp = input.substring(6).split(" /from ");
                 String taskDescription = temp[0];
                 String[] time = temp[1].split(" /to ");
@@ -77,14 +111,13 @@ public class Duke {
                 String to = time[1];
                 Event task = new Event(taskDescription, from, to);
                 myTasks.add(task);
-                System.out.println("Got it. I've added this task:");
-                System.out.println("Now we have " + myTasks.size() + " tasks in the list.");
-                System.out.println(separator);
+                task.announceAdded(myTasks);
             } else {
-                Task task = new Task(input);
-                myTasks.add(task);
-                System.out.println("added: " + task.getDescription());
-                System.out.println(separator);
+//                Task task = new Task(input);
+//                myTasks.add(task);
+//                System.out.println("added: " + task.getDescription());
+//                System.out.println(separator);
+                System.out.println("Invalid response. Please try: todo, deadline or event. :)");
             }
         }
     }
