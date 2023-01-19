@@ -1,21 +1,13 @@
 import java.util.ArrayList;
 import java.util.Scanner;
-import utils.FormatHelper;
+
+import static utils.UI.*;
+
 
 public class Duke {
     private static Scanner sc = new Scanner(System.in);
     private static String currentInput;
     private static ArrayList<Task> taskList = new ArrayList<>();
-
-    public static void reply(String s) {
-        if (s.equals("")) {
-            return;
-        }
-        String linebreak = "    _________________________________________________________";
-        System.out.println(linebreak);
-        System.out.println(FormatHelper.indent(4, s));
-        System.out.println(linebreak);
-    }
 
     public static String mark(boolean toMark) {
         int index = Integer.parseInt(toMark ? currentInput.substring(5) : currentInput.substring(7)) - 1;
@@ -107,8 +99,7 @@ public class Duke {
 
     public static void main(String[] args) {
         //Introduction
-        reply("Hello! I'm Duke\n What can I do for you?");
-
+        greet();
         currentInput = sc.nextLine();
         while (!currentInput.equalsIgnoreCase("bye")) {
             //when there is no input
@@ -129,6 +120,6 @@ public class Duke {
             currentInput = sc.nextLine();
         }
         //Signing off
-        reply("Bye. Hope to see you again!");
+        signOff();
     }
 }
