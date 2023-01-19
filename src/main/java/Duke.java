@@ -2,10 +2,8 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.ArrayList;
-import java.util.HashMap;
 
 public class Duke {
-    private static int counter;
     private static ArrayList<Task> taskList;
 
     public static void main(String[] args)  {
@@ -21,10 +19,12 @@ public class Duke {
         System.out.println("           Hello! I am\n" + logo);
         System.out.println("    What can I do for you?");
 
+
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
         while (!terminate) {
 
             try {
-                BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+                
                 String command = br.readLine().trim();
 
                 if (!command.isEmpty()) {
