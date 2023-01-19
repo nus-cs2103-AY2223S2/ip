@@ -11,48 +11,70 @@ public class Duke {
         String content = scanner.nextLine();
         Task task;
         while (!command.equals("bye")) {
+            System.out.println(line);
             if (command.equals("list")) {
-                System.out.println(line);
                 System.out.println("Here are the tasks in your list");
                 for (int i = 0; i < list.size(); i++) {
                     System.out.println((i + 1) + "." + list.get(i).toString());
                 }
-                System.out.println(line);
             } else if (command.equals("todo")) {
-                task = Todo.create(content.substring(1));
-                list.add(task);
-                System.out.println(line);
-                System.out.println("Ok boss. Added task:\n" + task.toString());
-                System.out.println("Now you have " + list.size() + " in the list.");
-                System.out.println(line);
-            } else if (command.equals("deadline")) {
-                task = Deadline.create(content.substring(1));
-                list.add(task);
-                System.out.println(line);
-                System.out.println("Ok boss. Added task:\n" + task.toString());
-                System.out.println("Now you have " + list.size() + " in the list.");
-                System.out.println(line);
-            } else if (command.equals("event")) {
-                task = Event.create(content.substring(1));
-                list.add(task);
-                System.out.println(line);
-                System.out.println("Ok boss. Added task:\n" + task.toString());
-                System.out.println("Now you have " + list.size() + " in the list.");
-                System.out.println(line);
-            } else if (command.equals("mark")) {
-                task = list.get(Integer.parseInt(content.substring(1)) - 1);
-                task.markDone();
-                System.out.println(line);
-                System.out.println("Ok boss! Marked this task as done: \n" + task.toString());
-                System.out.println(line);
-            } else if (command.equals("unmark")) {
-                task = list.get(Integer.parseInt(content.substring(1)) - 1);
-                task.unmarkDone();
-                System.out.println(line);
-                System.out.println("Ok boss! Marked this task as not done yet: \n" + task.toString());
-                System.out.println(line);
-            }
+                try {
+                    task = Todo.create(content);
+                    list.add(task);
+                    System.out.println("Ok boss. Added task:\n" + task.toString());
+                    System.out.println("Now you have " + list.size() + " in the list.");
+                } catch (DukeException e) {
+                    System.out.println("☹ OOPS!!! The description of a todo cannot be empty.");
+                }
 
+            } else if (command.equals("deadline")) {
+                try {
+                    task = Deadline.create(content);
+                    list.add(task);
+                    System.out.println("Ok boss. Added task:\n" + task.toString());
+                    System.out.println("Now you have " + list.size() + " in the list.");
+                } catch (DukeException e) {
+                    System.out.println("☹ OOPS!!! Invalid input for deadline.");
+                }
+            } else if (command.equals("event")) {
+                try {
+                    task = Event.create(content);
+                    list.add(task);
+                    System.out.println("Ok boss. Added task:\n" + task.toString());
+                    System.out.println("Now you have " + list.size() + " in the list.");
+                } catch (DukeException e) {
+                    System.out.println("☹ OOPS!!! Invalid input for event.");
+                }
+            } else if (command.equals("mark")) {
+                if (content.length() < 2) {
+                    System.out.println("☹ OOPS!!! Invalid input for mark command.");
+                } else {
+                    int index = Integer.parseInt(content.substring(1)) - 1;
+                    if (index >= list.size() || index < 0) {
+                        System.out.println("☹ OOPS!!! No such task in list.");
+                    } else {
+                        task = list.get(index);
+                        task.markDone();
+                        System.out.println("Ok boss! Marked this task as done: \n" + task.toString());
+                    }
+                }
+            } else if (command.equals("unmark")) {
+                if (content.length() < 2) {
+                    System.out.println("☹ OOPS!!! Invalid input for unmark command.");
+                } else {
+                    int index = Integer.parseInt(content.substring(1)) - 1;
+                    if (index >= list.size() || index < 0) {
+                        System.out.println("☹ OOPS!!! No such task in list.");
+                    } else {
+                        task = list.get(Integer.parseInt(content.substring(1)) - 1);
+                        task.unmarkDone();
+                        System.out.println("Ok boss! Marked this task as not done yet: \n" + task.toString());
+                    }
+                }
+            } else {
+                System.out.println("☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
+            }
+            System.out.println(line);
             command = scanner.next();
             content = scanner.nextLine();
         }
