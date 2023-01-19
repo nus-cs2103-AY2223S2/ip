@@ -12,6 +12,7 @@ import java.io.*;
  */
 
 public class Duke {
+    private static BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
     private static ArrayList<Task> strArr = new ArrayList<>();
     public static void main(String[] args) throws IOException{
         String logo = " ____        _        \n"
@@ -32,8 +33,7 @@ public class Duke {
 
     private static boolean runCommand() throws IOException{
         String[] word;
-        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
-        System.out.print("Type your input: ");
+        System.out.print("Type your input below: \n");
         word = br.readLine().split(" ");
         if(word[0].toUpperCase().equals("BYE")) {
             horizontalLine();
