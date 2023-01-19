@@ -8,7 +8,7 @@ public class Duke {
             + "| |_| | |_| |   <  __/\n"
             + "|____/ \\__,_|_|\\_\\___|\n";
 
-    private static final List<String> TASK_LIST =  new ArrayList<>();
+    private static final List<Task> TASK_LIST =  new ArrayList<>();
     private static int nTasks = 0;
 
     private static void greet() {
@@ -28,7 +28,7 @@ public class Duke {
     }
 
     private static void addTask(String task) {
-        TASK_LIST.add(task);
+        TASK_LIST.add(new Task(task));
         nTasks++;
         System.out.println("New task added: " + task);
     }
@@ -39,11 +39,33 @@ public class Duke {
         }
     }
 
-    private static void processCommand(String command) {
-        if (command.equals("list")) {
+    private static void processCommand(String userCommand) {
+
+        String[] userCommandParts = userCommand.split(" ");
+        String command = userCommandParts[0];
+
+        if (userCommand.equals("")) {
+            System.out.println("Please enter a valid command");
+
+        } else if (userCommand.equals("list")) {
             printTaskList();
+
+        } else if (command.equals("mark") && userCommandParts.length == 2) {
+            String taskNumber = userCommandParts[1];
+            int taskIndex = Integer.parseInt(taskNumber) - 1; // handle NumberFormatException
+            if (0 <= taskIndex && taskIndex < nTasks) {
+                TASK_LIST.get(taskIndex).setDone();
+            }
+
+        } else if (command.equals("unmark") && userCommandParts.length == 2) {
+            String taskNumber = userCommandParts[1];
+            int taskIndex = Integer.parseInt(taskNumber) - 1; // handle NumberFormatException
+            if (0 <= taskIndex && taskIndex < nTasks) {
+                TASK_LIST.get(taskIndex).setNotDone();
+            }
+
         } else {
-            addTask(command);
+            addTask(userCommand);
         }
 
         System.out.print("\n");
