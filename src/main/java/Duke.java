@@ -13,7 +13,7 @@ public class Duke {
         Scanner sc = new Scanner(System.in);
         toDoList toDo = new toDoList();
 
-        System.out.println("Hello I'm Duke \nWhat can I do for you?");
+        System.out.println("Hello I'm Duke\nWhat can I do for you?");
         String input = sc.nextLine();
 
         while(!input.equals("bye")) {
@@ -34,9 +34,11 @@ public class Duke {
                 } else if (instruction[0].equals("deadline")){
                     String itemANDtime[] = instruction[1].split("/");
                     toDo.addItemDeadline("D", itemANDtime[0], itemANDtime[1]);
-                } else {
+                } else if (instruction[0].equals("event")){
                     String itemANDtime[] = instruction[1].split("/");
                     toDo.addItemEvent("E", itemANDtime[0], itemANDtime[1], itemANDtime[2]);
+                } else {
+                    
                 }
 
                 System.out.println("Now you have " + toDo.numberOfTask() + " tasks in the list.");
