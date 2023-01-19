@@ -1,0 +1,32 @@
+list\n
+todo
+todo
+todo task 1
+mark
+mark
+mark 2
+mark 1
+list
+unmark
+unmark
+unmark 2
+unmark 1
+list
+deadline
+deadline
+deadline task 2
+deadline  /by Monday
+deadline   /by Monday
+deadline task 2 /by
+deadline task 2 /by
+deadline task 2 /by Monday
+list
+event
+event
+event task 3
+event task 3 /from
+event task 3 /from Tuesday
+event task 3 /from Tuesday /to
+event task 3 /from Tuesday /to Wednesday
+list
+bye
