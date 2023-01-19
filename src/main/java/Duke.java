@@ -13,7 +13,7 @@ public class Duke {
     private static void listCommand() {
         String output = "List:\n";
         for (int i = 0; i < list.size(); i++) {
-            output += "\t" + (i + 1) + ". " + list.get(i).description + "\n";
+            output += "\t" + (i + 1) + ". [" + list.get(i).getStatusIcon() + "] " + list.get(i).description + "\n";
         }
         PixlPrint(output);
     }
@@ -21,6 +21,13 @@ public class Duke {
     private static void addCommand(String taskName) {
         list.add(new Task(taskName));
         PixlPrint("added: " + taskName);
+    }
+
+    private static void markCommand(int taskNumber) {
+        Task task = list.get(taskNumber - 1);
+        task.complete();
+        PixlPrint("You completed a task!\n" +
+                "[" + task.getStatusIcon() + "] " + task.description);
     }
 
     public static void main(String[] args) {
@@ -35,6 +42,8 @@ public class Duke {
         while (!command.equals("bye")) {
             if (command.equals("list")) {
                 listCommand();
+            } else if (command.startsWith("mark")) {
+                markCommand(Integer.parseInt(command.split("\\s+")[1]));
             } else {
                 addCommand(command);
             }
