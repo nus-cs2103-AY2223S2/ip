@@ -1,18 +1,16 @@
 import java.util.*;
+import java.util.regex.*;
 
 public class Duke {
     public static int MAXCHAR = 60;
-    public static LinkedList<Task> memory;
-    public static String[] phrases = {
-        "I am Duke.\nHow may I be of service?",
-        "Goodbye. Shutting down.",
-        "Here are the tasks in your list:",
-        "Nice, I've marked this task as done:",
-        "OK, I've marked this task as not done yet:"
-    };
+    public static LinkedList<Task> tasklist = new LinkedList<Task>();;
 
     public static void chatboxFrame() {
         System.out.println("\t____________________________________________________________");
+    }
+
+    public static void chatbox(String text) {
+        chatbox(text, true);
     }
 
     public static void chatbox(String text, boolean frame) {
@@ -34,79 +32,64 @@ public class Duke {
         }
     }
 
-    public static void chatbox(String text) {
-        chatbox(text, true);
-    }
-
-    public static void chatbox(LinkedList<Task> input) {
-        chatboxFrame();
-        chatbox(phrases[2], false);
-        int tmp = memory.size();
-        int n = 0;
-        while (tmp != 0) {
-            tmp = tmp/10;
-            n++;
-        }
-        int i = 0;
-        for (Task item : input) {
-            i++;
-            chatbox(
-                String.format("%" + n + "d", i).replace(' ', '0')
-                + ". "
-                + item.toString(),
-                false);
-        }
-        chatboxFrame();
-    }
-
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
-        memory = new LinkedList<Task>();
         String input;
-
-        chatbox(phrases[0]);
+        Matcher m;
+        chatbox("I am Duke.\nHow may I be of service?");
 
         boolean loop = true;
         while (loop) {
             input = sc.nextLine();
 
-            switch (input) {
-                case "bye":
-                    chatbox(phrases[1]);
-                    loop = false;
-                    break;
-                case "list":
-                    chatbox(memory);
-                    break;
-                default:
-                    if (input.length() > 5 &&
-                        input.substring(0, 5).equals("mark ")) {
-
-                        Task foo = memory.get(Integer.parseInt(input.substring(5, input.length())) - 1);
-                        foo.setDone(true);
-
-                        chatboxFrame();
-                        chatbox(phrases[3], false);
-                        chatbox(foo.toString(), false);
-                        chatboxFrame();
-
-                    } else if (input.length() > 7 &&
-                        input.substring(0, 7).equals("unmark ")) {
-
-                        Task foo = memory.get(Integer.parseInt(input.substring(7, input.length())) - 1);
-
-                        chatboxFrame();
-                        chatbox(phrases[4], false);
-                        chatbox(foo.toString(), false);
-                        chatboxFrame();
-
-                    } else {
-                        memory.add(new Task(input));
-                        chatbox("added: " + input);
-                    }
+            m = Pattern.compile("bye").matcher(input);
+            if (m.find()) {
+                chatbox("Goodbye. Shutting down.");
+                break;
             }
 
+            m = Pattern.compile("list").matcher(input);
+            if (m.find()) {
+                chatboxFrame();
+                chatbox("Here are the tasks in your list:", false);
+                int n = 1 + (int) Math.floor(Math.log10(tasklist.size()));
+                int i = 0;
+                for (Task item : tasklist) {
+                    i++;
+                    chatbox(
+                        String.format("%" + n + "d", i).replace(' ', '0')
+                        + ". "
+                        + item.toString(),
+                        false);
+                }
+                chatboxFrame();
+                continue;
+            }
+
+            m = Pattern.compile("mark (.+)").matcher(input);
+            if (m.find()) {
+                Task curr = tasklist.get(Integer.parseInt(m.group(1)) - 1);
+                curr.setDone(true);
+
+                chatbox("Nice, I've marked this task as done:\n"
+                    + curr.toString());
+                continue;
+            }
+
+            m = Pattern.compile("unmark (.+)").matcher(input);
+            if (m.find()) {
+                Task curr = tasklist.get(Integer.parseInt(m.group(1)) - 1);
+                curr.setDone(false);
+
+                chatbox("OK, I've marked this task as not done yet:\n"
+                    + curr.toString());
+                continue;
+            }
+
+            //default add
+            chatbox("added: " + input);
+            tasklist.add(new Task(input));
         }
 
-    }
+     }
 }
