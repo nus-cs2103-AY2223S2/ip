@@ -1,0 +1,4 @@
+deadline first deadline /by a random date
+todo ToDo: make sure duke is working properly
+event Learn how to use github! /from tomorrow /to also tomorrow
+bye

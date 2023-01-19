@@ -46,18 +46,18 @@ public class Duke {
                 }
                 case DEADLINE: {
                     String[] parseCommand = command.split("/by");
-                    String name = parseCommand[0].replace("deadline ", "");
+                    String name = parseCommand[0].replaceFirst("deadline ", "");
                     String by = parseCommand[1].strip();
                     tasks.addTask(new Deadline(name, by));
                     break;
                 }
                 case TODO: {
-                    tasks.addTask(new ToDo(command.replace("todo ", "").strip()));
+                    tasks.addTask(new ToDo(command.replaceFirst("todo ", "").strip()));
                     break;
                 }
                 case EVENT: {
                     String[] parseCommand = command.split("/from");
-                    String name = parseCommand[0].replace("event ", "");
+                    String name = parseCommand[0].replaceFirst("event ", "");
                     parseCommand = parseCommand[1].split("/to");
                     String from = parseCommand[0].strip();
                     String by = parseCommand[1].strip();

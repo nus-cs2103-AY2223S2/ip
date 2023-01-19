@@ -4,4 +4,9 @@ Hello from
 | | | | | | | |/ / _ \
 | |_| | |_| |   <  __/
 |____/ \__,_|_|\_\___|
-
+, your personal assistant.
+What can I do for you today?
+Added task: [D][ ] first deadline (by a random date)
+Added task: [T][ ] ToDo: make sure duke is working properly
+Added task: [E][ ] Learn how to use github! (Starts from tomorrow; ends at also tomorrow)
+I hope you've managed to be productive today. Bye!
