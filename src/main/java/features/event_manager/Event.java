@@ -6,6 +6,12 @@ import utils.TokenUtilities;
 import java.util.Map;
 import java.util.Set;
 
+/**
+ * An Event is a Task with a starting time and a ending time.
+ * Note that this class is not set to public by design. It is supposed to be
+ * package private only. Therefore, anything that's related to this task
+ * manager shall remain in this task manager.
+ */
 class Event extends Task {
     /**
      * Creates a new event.

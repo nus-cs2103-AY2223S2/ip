@@ -7,6 +7,12 @@ import java.util.ArrayList;
 import java.util.Map;
 import java.util.Set;
 
+/**
+ * A Deadline is a Task with a deadline.
+ * Note that this class is not set to public by design. It is supposed to be
+ * package private only. Therefore, anything that's related to this task
+ * manager shall remain in this task manager.
+ */
 class Deadline extends Task {
     /**
      * Creates a new deadline object whose isComplete is set to false.

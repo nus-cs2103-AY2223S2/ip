@@ -1,5 +1,11 @@
 package features.event_manager;
 
+/**
+ * A ToDo is just a very boring task.
+ * Note that this class is not set to public by design. It is supposed to be
+ * package private only. Therefore, anything that's related to this task
+ * manager shall remain in this task manager.
+ */
 class ToDo extends Task {
     /**
      * Creates a new todo.
