@@ -3,7 +3,29 @@ import java.util.ArrayList;
 
 public class Duke {
 
-    private static ArrayList<String> tasks = new ArrayList<>(100);
+    private static class Task {
+        public String title;
+        private Boolean done;
+
+        public Task(String title) {
+            this.title = title;
+            this.done = false;
+        }
+
+        public void mark() {
+            this.done = true;
+        }
+
+        public void unmark() {
+            this.done = false;
+        }
+
+        public Boolean isDone() {
+            return this.done;
+        }
+    }
+
+    private static ArrayList<Task> tasks = new ArrayList<>(100);
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
         String logo = " ____        _        \n"
@@ -22,6 +44,10 @@ public class Duke {
         while(!input.equals("bye")) {
             if (input.equals("list")) {
                 printTasks();
+            } else if (input.split(" ")[0].equals("mark")){
+                markTask(Integer.parseInt(input.split(" ")[1]));
+            } else if (input.split(" ")[0].equals("unmark")){
+                unmarkTask(Integer.parseInt(input.split(" ")[1]));
             } else {
                 addTask(input);
             }
@@ -34,16 +60,38 @@ public class Duke {
 
     private static void addTask(String task) {
         printMsg("added: " + task);
-        tasks.add((task));
+        tasks.add((new Task(task)));
     }
 
     private static void printTasks() {
         int count = 1;
         System.out.println("    ____________________________________________________________");
-        for (String task : tasks) {
-            System.out.println("     " + count + ". " + task);
+        System.out.println("     Here are the tasks in your list:");
+        for (Task task : tasks) {
+            String check = task.isDone() ? "[X]" : "[ ]";
+            System.out.println("     " +  count + "." + check + " " + task.title);
             count++;
         }
+        System.out.println("    ____________________________________________________________");
+    }
+
+    private static void markTask(int taskNum) {
+        Task selectedTask = tasks.get(taskNum - 1);
+        selectedTask.mark();
+
+        System.out.println("    ____________________________________________________________");
+        System.out.println("     Nice! I've marked this task as done:");
+        System.out.println("       [X] " + selectedTask.title);
+        System.out.println("    ____________________________________________________________");
+    }
+
+    private static void unmarkTask(int taskNum) {
+        Task selectedTask = tasks.get(taskNum - 1);
+        selectedTask.unmark();
+
+        System.out.println("    ____________________________________________________________");
+        System.out.println("     OK! I've marked this task as not done yet:");
+        System.out.println("       [ ] " + selectedTask.title);
         System.out.println("    ____________________________________________________________");
     }
 
