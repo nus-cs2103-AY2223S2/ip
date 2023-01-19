@@ -1,3 +1,4 @@
+import java.util.InputMismatchException;
 import java.util.Scanner;
 import java.util.Arrays;
 public class Duke {
@@ -30,35 +31,49 @@ public class Duke {
                 Task currTask = allTasks[taskToUnmark];
                 currTask.markAsUndone();
                 System.out.println("Remember to complete this task!! " + "\n" + currTask.currToPrint());
-            } else if (input[0].equals("todo")) {
-                String toAdd = "";
-                for (int i = 1; i < input.length; i++) {
-                    toAdd += input[i] + " ";
-                }
-                Task newTask = new ToDo(toAdd);
-                allTasks[counter] = newTask;
-                counter++;
-                System.out.println("Got it! I've added this task to the list!" + "\n" + newTask.currToPrint() + "\n" + "Now you have " + counter +
-                        " tasks in the list!" + "\n");
-            } else if (input[0].equals("deadline")) {
-                String[] splitString = originalString.split("/");
-                String description = splitString[0].replace("deadline", "");
-                String duration = splitString[1].replace("by", "by:");
-                Task newTask = new Deadline(description, duration);
-                allTasks[counter] = newTask;
-                counter++;
-                System.out.println("Got it! I've added this task to the list!" + "\n" + newTask.currToPrint() + "\n" + "Now you have " + counter +
-                        " tasks in the list!" + "\n");
-            } else if (input[0].equals("event")) {
-                String[] splitString = originalString.split("/");
-                String description = splitString[0].replace("event", "");
-                String duration = splitString[1].replace("from", "from:") + splitString[2].replace("to", "to:");
-                Task newTask = new Event(description, duration);
+            } else {
+                Duke newDuke = new Duke();
+                Task newTask = newDuke.getTask(originalString);
                 allTasks[counter] = newTask;
                 counter++;
                 System.out.println("Got it! I've added this task to the list!" + "\n" + newTask.currToPrint() + "\n" + "Now you have " + counter +
                         " tasks in the list!" + "\n");
             }
+
+
+        }
+    }
+
+    public Task getTask(String originalString) {
+        String[] input = originalString.split(" ");
+        if (!input[0].equals("todo") && !input[0].equals("deadline") && !input[0].equals("event")) {
+            throw new InputMismatchException("Your input is invalid!!!");
+        }
+        if (input.length == 1) {
+            System.out.println("The description of a Task cannot be empty!!!");
+            throw new InputMismatchException();
+        }
+        if (input[0].equals("todo")) {
+            String toAdd = originalString.substring(originalString.indexOf("todo") + 5);
+            return new ToDo(toAdd);
+        } else if (input[0].equals("deadline")) {
+            String[] splitString = originalString.split("/");
+            if (splitString.length == 1) {
+                System.out.println("Please add an action and a deadline!");
+                throw new InputMismatchException();
+            }
+            String description = splitString[0].replace("deadline", "");
+            String duration = splitString[1].replace("by", "by:");
+            return new Deadline(description, duration);
+        } else {
+            String[] splitString = originalString.split("/");
+            if (splitString.length == 1) {
+                System.out.println("Please add an action, a starting date and an ending date!");
+                throw new InputMismatchException();
+            }
+            String description = splitString[0].replace("event", "");
+            String duration = splitString[1].replace("from", "from:") + splitString[2].replace("to", "to:");
+            return new Event(description, duration);
         }
     }
 }
