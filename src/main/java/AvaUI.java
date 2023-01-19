@@ -1,3 +1,5 @@
+import Exceptions.AvaException;
+
 import java.util.Locale;
 import java.util.Scanner;
 
@@ -36,24 +38,29 @@ public class AvaUI {
         this.displayIntro();
         boolean done = false;
         Scanner myObj = new Scanner(System.in);
+
         while (!done) {
-            this.ask();
-            String input = myObj.nextLine().toLowerCase();
-            if (input.contains("bye")){
-                done = true;
-                this.displayExit();
-            } else if(input.contains("list")) {
-                String output = this.LIST_MESSAGE + "\n" + this.tasks.formatTasks(FORMAT_SPACE);
-                this.displayOutput(output);
-            } else if (input.contains("unmark")){
-                String output = this.UNMARK_TASK_MESSAGE + "\n" + this.tasks.toggleTask(input, FORMAT_SPACE);
-                this.displayOutput(output);
-            } else if (input.contains("mark")) {
-                String output = this.MARK_TASK_MESSAGE + "\n" + this.tasks.toggleTask(input, FORMAT_SPACE);
-                this.displayOutput(output);
-            }  else {
-                String output = this.ADD_TASK_MESSAGE + "\n" + this.tasks.addTasks(input, FORMAT_SPACE);
-                this.displayOutput(output);
+            try {
+                this.ask();
+                String input = myObj.nextLine().toLowerCase();
+                if (input.contains("bye")){
+                    done = true;
+                    this.displayExit();
+                } else if(input.contains("list")) {
+                    String output = this.LIST_MESSAGE + "\n" + this.tasks.formatTasks(FORMAT_SPACE);
+                    this.displayOutput(output);
+                } else if (input.contains("unmark")){
+                    String output = this.UNMARK_TASK_MESSAGE + "\n" + this.tasks.toggleTask(input, FORMAT_SPACE);
+                    this.displayOutput(output);
+                } else if (input.contains("mark")) {
+                    String output = this.MARK_TASK_MESSAGE + "\n" + this.tasks.toggleTask(input, FORMAT_SPACE);
+                    this.displayOutput(output);
+                }  else {
+                    String output = this.ADD_TASK_MESSAGE + "\n" + this.tasks.addTasks(input, FORMAT_SPACE);
+                    this.displayOutput(output);
+                }
+            } catch (AvaException e){
+                this.displayOutput(e.getMessage());
             }
         }
     }

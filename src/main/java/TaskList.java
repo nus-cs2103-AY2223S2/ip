@@ -1,4 +1,5 @@
-import java.util.Locale;
+import Exceptions.CommandNotFoundException;
+import Exceptions.NonExistentTask;
 
 public class TaskList {
     private Task[] tasks = new Task[100];
@@ -9,9 +10,12 @@ public class TaskList {
      * @param input
      * @return
      */
-    public String addTasks(String input,String formatSpace) {
+    public String addTasks(String input,String formatSpace) throws CommandNotFoundException{
         String[] splitCommand = input.trim().split(" ", 2);
         String command = splitCommand[0].toLowerCase();
+        if (splitCommand.length == 1) {
+            throw new CommandNotFoundException(input);
+        }
         String message = splitCommand[1];
 
         if (command.equals("todo")) {
@@ -24,6 +28,7 @@ public class TaskList {
             tasks[taskCount] = new Event(parsedMessage[0] , parsedMessage[1], parsedMessage[2]);
         } else {
             // Throw Error
+            throw new CommandNotFoundException(input);
         }
         taskCount++;
         return formatSpace + tasks[taskCount - 1].getRepresentation();
@@ -35,18 +40,21 @@ public class TaskList {
      * @param formatSpace
      * @return return formatted task representation.
      */
-    public String toggleTask(String input, String formatSpace) {
+    public String toggleTask(String input, String formatSpace) throws NonExistentTask, CommandNotFoundException{
         String[] parseInput = input.trim().split(" ",2);
-        int index =  Integer.parseInt(parseInput[1]) - 1;
-         if (parseInput[0].toLowerCase().contains("unmark")) {
+        if (parseInput.length == 1 || Integer.parseInt(parseInput[1].trim()) - 1 >= this.taskCount) {
+            throw new NonExistentTask(input);
+        }
+        int index =  Integer.parseInt(parseInput[1].trim()) - 1;
+         if (parseInput[0].toLowerCase().equals("unmark")) {
             tasks[index].unmark();
             return formatSpace + tasks[index].getRepresentation();
-        } else if (parseInput[0].toLowerCase().contains("mark")) {
+        } else if (parseInput[0].toLowerCase().equals("mark")) {
             tasks[index].mark();
             return formatSpace + tasks[index].getRepresentation();
         }else {
             // Uknown Command
-            return "Command not Found.";
+            throw new CommandNotFoundException(input);
         }
     }
 
