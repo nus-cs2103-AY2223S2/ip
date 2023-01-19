@@ -43,7 +43,7 @@ public class Duke {
           }
           keyword = keyword.strip();
           if(keyword.equals("")) {
-            System.out.println(divider + "OOPS!!! The description of a " + action + "cannot be empty.\n" + divider);
+            System.out.println(divider + "OOPS!!! The description of a " + action + " cannot be empty.\n" + divider);
           }
 
           switch(action) {                            //For instructions with argument(s).
@@ -60,7 +60,7 @@ public class Duke {
                 System.out.println("Sorry, the index number you've entered does not exist.");
                 continue;
               } catch(NumberFormatException nfe) {
-                System.out.println("Please enter the number you wish to mark/unmark.");
+                System.out.println("Please enter the index number you wish to mark/unmark.");
               }
               break;
 
@@ -73,7 +73,7 @@ public class Duke {
                 System.out.println("Sorry, the index number you've entered does not exist.");
                 continue;
               } catch(NumberFormatException nfe) {
-                System.out.println("Please enter the number you wish to mark/unmark.");
+                System.out.println("Please enter the index number you wish to mark/unmark.");
               }
               break;
 
@@ -102,6 +102,17 @@ public class Duke {
               }
               break;
 
+            case "delete":
+              try {
+                int deleteIdx = Integer.parseInt(keyword);
+                tasks.remove(deleteIdx - 1);
+              } catch(NumberFormatException nfe) {
+                System.out.println("Please enter the index number you wish to delete.");
+              } catch(IndexOutOfBoundsException ioobe) {
+                System.out.println("Sorry, the index number you've entered does not exist.");
+                continue;
+              }
+              break;
             default:
               System.out.println(divider + "OOPS! I'm sorry, but I don't know what that means :-(\n" + divider);  //For unknown action.
           }
