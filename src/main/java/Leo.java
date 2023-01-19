@@ -99,7 +99,7 @@ class Task {
     }
 
     public static Task createTask(String taskName, char type) {
-        return type == 'd' ? new Deadline(taskName.substring(8).split("/")[0], 'D', taskName.split("/")[1])
+        return type == 'd' ? new Deadline(taskName.substring(9).split("/")[0], 'D', taskName.split("/")[1])
                 : type == 'e' ? new Event(taskName.substring(6).split("/")[0], 'E', taskName.split("/")[1], taskName.split("/")[2])
                         : new Todo(taskName.substring(5), 'T');
     }
