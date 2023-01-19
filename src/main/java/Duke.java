@@ -21,7 +21,7 @@ public class Duke {
             if (userInput.equals("list")) {
                 System.out.println(" Here are the tasks in your list:");
                 for (int i = 0; i < myList.size(); i++) {
-                    System.out.println(String.valueOf(i + 1) + ".[" + myList.get(i).getStatusIcon() + "] " +  myList.get(i).getTaskDesc());
+                    System.out.println(String.valueOf(i + 1) + "." + myList.get(i).toString());
                 }
             }
             else if (userInput.startsWith("mark")) {
@@ -30,7 +30,7 @@ public class Duke {
                     int lastInteger = Integer.parseInt(matcher.group()) - 1;
                     myList.get(lastInteger).setDone();
                     System.out.println("Nice! I've marked this task as done:");
-                    System.out.println("[" + myList.get(lastInteger).getStatusIcon() + "] " + myList.get(lastInteger).getTaskDesc());
+                    System.out.println(myList.get(lastInteger).toString());
                 }
 
             }
@@ -40,14 +40,40 @@ public class Duke {
                     int lastInteger = Integer.parseInt(matcher.group()) - 1;
                     myList.get(lastInteger).setUndone();
                     System.out.println("OK, I've marked this task as not done yet:");
-                    System.out.println("[" + myList.get(lastInteger).getStatusIcon() + "] " + myList.get(lastInteger).getTaskDesc());
+                    System.out.println(myList.get(lastInteger).toString());
 
                 }
             }
             else {
-                Task task = new Task(userInput);
+                Task task;
+                if (userInput.startsWith("todo")) {
+                    int idx = userInput.indexOf(" ");
+                    String taskName = userInput.substring(idx + 1);
+                    task = new ToDos(taskName);
+                }
+                else if (userInput.startsWith("deadline")) {
+                    int idx = userInput.indexOf(" ");
+                    int by_idx = userInput.indexOf("/by");
+                    String taskName = userInput.substring(idx + 1, by_idx);
+                    String modifier = userInput.substring(by_idx + 3);
+                    task = new Deadline(taskName, modifier);
+                }
+                else if (userInput.startsWith("event")) {
+                    int idx = userInput.indexOf(" ");
+                    int from_idx = userInput.indexOf("/from");
+                    int to_idx = userInput.indexOf("/to");
+                    String taskName = userInput.substring(idx + 1, from_idx);
+                    String fromDate = userInput.substring(from_idx + 5, to_idx);
+                    String toDate = userInput.substring(to_idx + 3);
+                    task = new Events(taskName, fromDate , toDate);
+                }
+                else {
+                    task = new Task(userInput);
+                }
                 myList.add(task);
-                System.out.println("added: " + task.getTaskDesc());
+                System.out.println("Got it. I've added this task:");
+                System.out.println(task.toString());
+                System.out.println("Now you have " + String.valueOf(myList.size()) + " tasks in the list.");
             }
             userInput = myObj.nextLine();
         }

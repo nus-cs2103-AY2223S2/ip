@@ -22,4 +22,8 @@ public class Task {
     public String getTaskDesc() {
         return this.description;
     }
+
+    public String toString() {
+        return "[" + this.getStatusIcon() + "] " + this.description;
+    }
 }
