@@ -5,6 +5,7 @@
  */
 public class Task {
     private final String nameOfTask;
+    private final boolean isDone;
 
     /**
      * The constructor for Task.
@@ -12,6 +13,7 @@ public class Task {
      */
     public Task(String nameOfTask) {
         this.nameOfTask = nameOfTask;
+        this.isDone = false;
     }
 
     /**
@@ -20,5 +22,28 @@ public class Task {
      */
     public String getNameOfTask() {
         return nameOfTask;
+    }
+
+    /**
+     * Determines if a task is done or not.
+     * @return true or false, whether a task is done or not.
+     */
+    public boolean isDone() {
+        return this.isDone;
+    }
+
+    /**
+     * Determines the status of a task.
+     * @return The status of the task.
+     */
+    public String getStatus() {
+        return "[" + (isDone ? "X" : ""); + "] " + this.nameOfTask;
+    }
+
+    /**
+     * A function to mark a task as done.
+     */
+    public void markAsDone() {
+        this.isDone = true;
     }
 }
