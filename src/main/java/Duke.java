@@ -14,7 +14,9 @@ public class Duke {
             String input = sc.nextLine();
 
             if (InputProcessor.is_Bye(input)) {
-                System.out.println("        byebye! Have an exquisite day, cutiepatootie");
+                System.out.println(line);
+                System.out.println("        byebye! Have an exquisite day");
+                System.out.println(line);
                 break;
             }
 

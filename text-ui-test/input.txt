@@ -1,2 +1,7 @@
 todo eat lunch
+deadline do HW /by 10 Jan
+event play tennis /from 11 Jan 2pm /to 4pm
+list
+mark 1
+unmark 1
 bye
