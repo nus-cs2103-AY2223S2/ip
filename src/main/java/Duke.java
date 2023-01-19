@@ -15,10 +15,10 @@ public class Duke {
             if (input.equals("bye")) {
                 break;
             } else {
-                System.out.println(input);
+                System.out.println("\t" + input);
             }
         }
-        System.out.println("Bye. Hope to see you again soon!");
+        System.out.println("\tBye. Hope to see you again soon!");
     }
 
 }
