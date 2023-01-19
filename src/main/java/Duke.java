@@ -38,6 +38,7 @@ public class Duke {
                     case "todo" -> Duke.addTodo(taskList, restOfString);
                     case "deadline" -> Duke.addDeadline(taskList, restOfString);
                     case "event" -> Duke.addEvent(taskList, restOfString);
+                    case "delete" -> Duke.delete(taskList, restOfString);
                     default -> throw new DukeException("☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
                 }
             } catch (DukeException e) {
@@ -114,4 +115,17 @@ public class Duke {
         }
     }
 
+    private static void delete(ArrayList<Task> taskList, String restOfString) throws DukeException {
+        try {
+            int i = Integer.parseInt(restOfString);
+            Task removedTask = taskList.remove(i-1);
+            System.out.println("Noted. I've removed the task:");
+            System.out.println(removedTask);
+            System.out.println("Now you have " + taskList.size() + " tasks in the list.");
+        } catch (NumberFormatException err) {
+            throw new DukeException("☹ OOPS!!! " + restOfString + " is not a valid integer for indexing the task list.");
+        } catch (IndexOutOfBoundsException err) {
+            throw new DukeException("☹ OOPS!!! There are less than " + restOfString + " tasks.");
+        }
+    }
 }
