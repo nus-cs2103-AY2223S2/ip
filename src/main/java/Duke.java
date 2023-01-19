@@ -3,6 +3,11 @@ import java.util.ArrayList;
 
 public class Duke {
 
+    enum Type {
+        TODO,
+        DEADLINE,
+        EVENT,
+    }
     private static class Task {
         public String title;
         private Boolean done;
@@ -22,6 +27,48 @@ public class Duke {
 
         public Boolean isDone() {
             return this.done;
+        }
+
+        @Override
+        public String toString() {
+            String checkBox = this.done ? "[X]" : "[ ]";
+            return checkBox + " " + this.title;
+        }
+    }
+
+    private static class Todo extends Task {
+        public Todo(String title) {
+            super(title);
+        }
+        @Override
+        public String toString() {
+            return "[T]" + super.toString();
+        }
+    }
+
+    private static class Deadline extends Task {
+        private String by;
+        public Deadline(String title, String by) {
+            super(title);
+            this.by = by;
+        }
+        @Override
+        public String toString() {
+            return "[D]" + super.toString() + " (by: " + this.by + ")";
+        }
+    }
+
+    private static class Event extends Task {
+        private String from;
+        private String to;
+        public Event(String title, String from, String to) {
+            super(title);
+            this.from = from;
+            this.to = to;
+        }
+        @Override
+        public String toString() {
+            return "[E]" + super.toString() + " (from: " + this.from + " to: " + this.to + ")";
         }
     }
 
@@ -48,19 +95,54 @@ public class Duke {
                 markTask(Integer.parseInt(input.split(" ")[1]));
             } else if (input.split(" ")[0].equals("unmark")){
                 unmarkTask(Integer.parseInt(input.split(" ")[1]));
-            } else {
-                addTask(input);
+            } else if (input.split(" ")[0].equals("todo")){
+                addTodo(input.replaceAll("todo", "").trim());
+            } else if (input.split(" ")[0].equals("deadline")){
+                String[] s = input.split("/by");
+                addDeadline(s[0].split("/by")[0].replaceAll("deadline", "").trim(),
+                            s[1].substring(1));
+            } else if (input.split(" ")[0].equals("event")){
+                String[] words = input.split("/from");
+                String title = words[0].replaceAll("event", "").trim();
+                String from = words[1].split("/to")[0].trim();
+                String to = words[1].split("/to")[1].trim();
+                addEvent(title, from, to);
             }
-            input = sc.nextLine();
+        input = sc.nextLine();
         }
 
         printMsg("Bye. Hope to see you again soon!");
 
     }
 
-    private static void addTask(String task) {
-        printMsg("added: " + task);
-        tasks.add((new Task(task)));
+    private static void addTodo(String title) {
+        Todo newTodo = new Todo(title);
+        System.out.println("    ____________________________________________________________");
+        System.out.println("     Got it. I've added this task:");
+        System.out.println("       " + newTodo);
+        System.out.println("     Now you have " + (tasks.size() + 1) + " tasks in the list");
+        System.out.println("    ____________________________________________________________");
+        tasks.add(newTodo);
+    }
+
+    private static void addEvent(String title, String from, String to) {
+        Event newEvent = new Event(title, from, to);
+        System.out.println("    ____________________________________________________________");
+        System.out.println("     Got it. I've added this task:");
+        System.out.println("       " + newEvent);
+        System.out.println("     Now you have " + (tasks.size() + 1) + " tasks in the list");
+        System.out.println("    ____________________________________________________________");
+        tasks.add(newEvent);
+    }
+
+    private static void addDeadline(String title, String by) {
+        Deadline newDeadline = new Deadline(title, by);
+        System.out.println("    ____________________________________________________________");
+        System.out.println("     Got it. I've added this task:");
+        System.out.println("       " + newDeadline);
+        System.out.println("     Now you have " + (tasks.size() + 1) + " tasks in the list");
+        System.out.println("    ____________________________________________________________");
+        tasks.add(newDeadline);
     }
 
     private static void printTasks() {
@@ -68,8 +150,7 @@ public class Duke {
         System.out.println("    ____________________________________________________________");
         System.out.println("     Here are the tasks in your list:");
         for (Task task : tasks) {
-            String check = task.isDone() ? "[X]" : "[ ]";
-            System.out.println("     " +  count + "." + check + " " + task.title);
+            System.out.println("     " +  count + "." + task.toString());
             count++;
         }
         System.out.println("    ____________________________________________________________");
@@ -81,7 +162,7 @@ public class Duke {
 
         System.out.println("    ____________________________________________________________");
         System.out.println("     Nice! I've marked this task as done:");
-        System.out.println("       [X] " + selectedTask.title);
+        System.out.println("       " + selectedTask);
         System.out.println("    ____________________________________________________________");
     }
 
@@ -91,7 +172,7 @@ public class Duke {
 
         System.out.println("    ____________________________________________________________");
         System.out.println("     OK! I've marked this task as not done yet:");
-        System.out.println("       [ ] " + selectedTask.title);
+        System.out.println("       " + selectedTask);
         System.out.println("    ____________________________________________________________");
     }
 
