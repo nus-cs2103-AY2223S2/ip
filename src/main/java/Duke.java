@@ -9,9 +9,9 @@ public class Duke {
                 + "| | | | | | | |/ / _ \\\n"
                 + "| |_| | |_| |   <  __/\n"
                 + "|____/ \\__,_|_|\\_\\___|\n";
-        System.out.println("---------------------------------------------------------------------");
+        System.out.println("--------------------------------------------------------------------");
         System.out.println(logo + "\nHello! I'm Duke\nWhat can I do for you?");
-        System.out.println("---------------------------------------------------------------------");
+        System.out.println("--------------------------------------------------------------------");
 
         ArrayList<Task> lst = new ArrayList<>();
         Scanner input = new Scanner(System.in);
