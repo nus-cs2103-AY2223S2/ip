@@ -1,5 +1,3 @@
-import java.time.LocalDate;
-
 public class Duke {
     private UserInterface ui;
     private TaskList list;
@@ -27,8 +25,7 @@ public class Duke {
                 String desc = input.substring(9);
                 String dueDate = desc.substring(desc.indexOf("/by") + 4);
                 desc = desc.substring(0, desc.indexOf("/by") - 1);
-                LocalDate date = LocalDate.parse(dueDate);
-                Task t = new Deadline(list.nextId(), desc, date);
+                Task t = new Deadline(list.nextId(), desc, dueDate);
                 list.add(t);
                 ui.showMessage("added: " + t.description());
             } else if (input.startsWith("event")) {
@@ -36,9 +33,7 @@ public class Duke {
                 String from = desc.substring(desc.indexOf("/from") + 6, desc.indexOf("/to") - 1);
                 String to = desc.substring(desc.indexOf("/to") + 4);
                 desc = desc.substring(0, desc.indexOf("/from") - 1);
-                LocalDate fromD = LocalDate.parse(from);
-                LocalDate toD = LocalDate.parse(to);
-                Task t = new Event(list.nextId(), desc, fromD, toD);
+                Task t = new Event(list.nextId(), desc, from, to);
                 list.add(t);
                 ui.showMessage("added: " + t.description());
 
