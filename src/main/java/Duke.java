@@ -26,7 +26,8 @@ public class Duke {
         list_index++;
         System.out.println("> Duke's response:");
         System.out.println("I've added the following task to your list:");
-        System.out.println(list_item.printTask());
+        System.out.println(list_item.toString());
+        System.out.println("Current tasks count: " + (list_index));
         System.out.println("--------------------------------\n");
     }
 
@@ -34,7 +35,7 @@ public class Duke {
         int pos = 0;
         System.out.println("Here are the tasks in your list:");
         while (pos < list_index) {
-            System.out.println((pos + 1) + ". " + storage_list[pos].printTask());
+            System.out.println((pos + 1) + ". " + storage_list[pos].toString());
             pos++;
         }
         System.out.println("End of list!\n");
@@ -54,20 +55,41 @@ public class Duke {
         while (!user_input.equals(exit_command)) {
             if (!user_input.equals("list")) {
                 // If input = "mark x" set task x completed? to True
-                if (user_input.length() > 5 && user_input.startsWith("mark ")){
+                if (user_input.startsWith("mark ")){
                     int task_num = Integer.parseInt(user_input.substring(5));
                     storage_list[task_num - 1].setCompleted(true);
                 }
 
                 // If input = "unmark x" set task x completed? to False
-                else if (user_input.length() > 7 && user_input.startsWith("unmark ")){
+                else if (user_input.startsWith("unmark ")){
                     int task_num = Integer.parseInt(user_input.substring(7));
                     storage_list[task_num - 1].setCompleted(false);
                 }
 
+                // If input is a deadline, create deadline and add to task list
+                else if (user_input.startsWith("deadline ")) {
+                    String title = user_input.substring(9, user_input.indexOf("/by ") - 1);
+                    String by_date = user_input.substring(user_input.indexOf("/by ") + 4);
+                    add_to_list(new Deadline(title, by_date));
+                }
+
+                // If input is an event, create event and add to task list
+                else if (user_input.startsWith("event ")) {
+                    String title = user_input.substring(6, user_input.indexOf("/from ") - 1);
+                    String from_date = user_input.substring(user_input.indexOf("/from ") + 6, user_input.indexOf("/to ") - 1);
+                    String to_date = user_input.substring(user_input.indexOf("/to ") + 4);
+                    add_to_list(new Event(title, from_date, to_date));
+                }
+
+                // If input is a ToDos item, create ToDos item and add to task list
+                else if (user_input.startsWith("todo ")) {
+                    String title = user_input.substring(5);
+                    add_to_list(new Todo(title));
+                }
+
                 // Else create and add task to list
                 else {
-                    add_to_list(new Task(false, user_input));
+                    add_to_list(new Task(user_input));
                 }
             }
             else {

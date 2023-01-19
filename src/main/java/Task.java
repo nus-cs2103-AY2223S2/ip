@@ -4,13 +4,13 @@ public class Task {
     protected String title;
 
     // Constructor:
-    public Task(boolean completed, String title) {
-        this.completed = completed;
+    public Task(String title) {
+        this.completed = false;
         this.title = title;
     }
 
     // Methods:
-    public String printTask() {
+    public String toString() {
         if (this.completed) {
             return "[X] " + title;
         }
@@ -21,11 +21,11 @@ public class Task {
         this.completed = setting;
         if (setting) {
             System.out.println("Nice! I've marked this task as completed:");
-            System.out.println(" " + this.printTask() + "\n");
+            System.out.println(" " + this.toString() + "\n");
         }
         else {
             System.out.println("OK, I've marked this task as incomplete:");
-            System.out.println(" " + this.printTask() + "\n");
+            System.out.println(" " + this.toString() + "\n");
         }
     }
 }
