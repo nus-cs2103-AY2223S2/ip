@@ -21,6 +21,10 @@ public class TaskList {
         return taskList.get(index);
     }
 
+    public boolean isEmpty() {
+        return (this.size() == 0);
+    }
+
     @Override
     public String toString() {
         StringBuilder result = new StringBuilder();

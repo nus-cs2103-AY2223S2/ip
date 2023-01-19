@@ -33,12 +33,12 @@ public class Duke{
         while (!command.equals(EXIT_PROGRAM)) {
             try {
                 String[] commandList = command.split(" ");
-                String type = commandList[0].toLowerCase();
-                boolean missingCommandInfo = commandList.length <= 1;
+                String commandType = commandList[0].toLowerCase();
+                boolean tooFewArgs = commandList.length <= 1;
 
-                switch(type) {
+                switch(commandType) {
                     case LIST_TASKS: {
-                        if (tasks.size() < 1) {
+                        if (tasks.isEmpty()) {
                             System.out.println("You have not added any tasks yet!");
                         } else {
                             System.out.println(tasks);
@@ -46,7 +46,7 @@ public class Duke{
                         break;
                     }
                     case DEADLINE: {
-                        if (missingCommandInfo) {
+                        if (tooFewArgs) {
                             throw new DukeException("Please give a name for your deadline!");
                         } else if (!command.contains(" /by ")) {
                             throw new DukeException("Please give a date/time for your deadline!");
@@ -58,14 +58,14 @@ public class Duke{
                         break;
                     }
                     case TODO: {
-                        if (missingCommandInfo) {
+                        if (tooFewArgs) {
                             throw new DukeException("Please give a name for your ToDo task!");
                         }
                         tasks.addTask(new ToDo(command.replaceFirst("todo ", "").strip()));
                         break;
                     }
                     case EVENT: {
-                        if (missingCommandInfo) {
+                        if (tooFewArgs) {
                             throw new DukeException("Please give a name for your event!");
                         } else if (!command.contains(" /from ")) {
                             throw new DukeException("Please give a starting date/time for your event!");
@@ -81,7 +81,7 @@ public class Duke{
                         break;
                     }
                     case MARK: {
-                        if (missingCommandInfo) {
+                        if (tooFewArgs) {
                             throw new DukeException("Please provide the index of the task!");
                         }
                         int index = Integer.parseInt(commandList[1]);
@@ -95,7 +95,7 @@ public class Duke{
                         break;
                     }
                     case UNMARK: {
-                        if (missingCommandInfo) {
+                        if (tooFewArgs) {
                             throw new DukeException("Please provide the index of the task!");
                         }
                         int index = Integer.parseInt(commandList[1]);
@@ -110,7 +110,7 @@ public class Duke{
                     }
                     default:
                         System.out.println("Sorry, that command is not recognised. \n" +
-                                "Maybe you could contact @dsja612 on github to request for more types of commands :)");
+                                "P.S. Maybe you could contact @dsja612 on github to request for more types of commands :)");
 
                 }
             } catch (DukeException e) {
