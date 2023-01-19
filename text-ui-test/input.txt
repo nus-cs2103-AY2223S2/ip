@@ -4,4 +4,5 @@ event project meeting /from Mon 2pm /to 4pm
 list
 todo
 blah
+delete 3
 bye
