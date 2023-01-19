@@ -1,4 +1,3 @@
-import java.awt.*;
 import java.util.ArrayList;
 
 public class DukeBehaviour {
@@ -7,12 +6,12 @@ public class DukeBehaviour {
 
 
     public DukeBehaviour() {
-        System.out.println("DukeBehaviour constructor called...");
+        //System.out.println("DukeBehaviour constructor called...");
     }
 
     public void receiveInput(String userIn){
         if (userIn.equals("bye")){
-            System.out.println("exit command received, exiting...");
+            //System.out.println("exit command received, exiting...");
             isActive = false;
         } else if (userIn.equals("list")){
             displayList();
@@ -46,13 +45,18 @@ public class DukeBehaviour {
     private void addTask(String userIn){
         String taskType = userIn.split(" ")[0];
         //System.out.println("tasktype: " + taskType);
-        if (taskType.equals("todo") ) {
-            addToDo(userIn);
-        } else if (taskType.equals("deadline")) {
-            addDeadline(userIn);
-        } else if (taskType.equals("event")) {
-            addEvent(userIn);
+        switch (taskType) {
+            case "todo":
+                addToDo(userIn);
+                break;
+            case "deadline":
+                addDeadline(userIn);
+                break;
+            case "event":
+                addEvent(userIn);
+                break;
         }
+        //todo: nest switch in a try catch block add default uwuw
         System.out.println("Now you have " + taskList.size() + " tasks in the list.");
     }
 
@@ -82,8 +86,6 @@ public class DukeBehaviour {
         System.out.println("Got it. I've added this task:");
         System.out.println(newToDo);
     }
-
-
 
     private void displayList() {
         System.out.println("Here are the tasks in your list: ");

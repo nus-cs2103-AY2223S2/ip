@@ -3,7 +3,7 @@ public class Duke {
 
 
     public static void main(String[] args) {
-        System.out.println("Duke started, initializing Duke behaviour");
+        //System.out.println("Duke started, initializing Duke behaviour");
         DukeBehaviour mainBehaviour = new DukeBehaviour();
         System.out.println("Hello! I'm Duke\n");
         System.out.println("What can I do for you?\n");
