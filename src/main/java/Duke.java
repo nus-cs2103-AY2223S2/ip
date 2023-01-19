@@ -1,5 +1,7 @@
 import java.util.ArrayList;
 import java.util.Scanner;
+
+import exception.DukeException;
 import task.Task;
 import task.ToDo;
 import task.Deadline;
@@ -25,6 +27,11 @@ public class Duke {
         printLine();
     }
 
+    /**
+     * Mark task (selected by position in list).
+     *
+     * @param input User input.
+     */
     private static void markTask(String input) {
         int taskNumber;
         try {
@@ -37,6 +44,11 @@ public class Duke {
         }
     }
 
+    /**
+     * Unmark task (selected by position in list).
+     *
+     * @param input User input.
+     */
     private static void unmarkTask(String input) {
         int taskNumber;
         try {
@@ -51,6 +63,8 @@ public class Duke {
 
     /**
      * Prints confirmation of added task and number of tasks currently in list.
+     *
+     * @param t Task to confirm addition of.
      */
     private static void confirmAddition(Task t) {
         System.out.printf("     %s%n", "Got it. I've added this task:");
@@ -58,13 +72,30 @@ public class Duke {
         System.out.printf("     %s%d%s%n", "Now you have ", tasks.size(), " tasks in the list.");
     }
 
-    private static void addToDo(String input) {
+    /**
+     * Add ToDo task to list.
+     *
+     * @param input User input.
+     * @throws DukeException on empty ToDo description.
+     */
+    private static void addToDo(String input) throws DukeException {
+        if (input.length() <= 5) {
+            throw new DukeException("The description of a todo cannot be empty.");
+        }
         String description = input.substring(5);
+        if (description.isBlank()) {
+            throw new DukeException("The description of a todo cannot be empty.");
+        }
         Task t = new ToDo(description);
         tasks.add(t);
         confirmAddition(t);
     }
 
+    /**
+     * Add Deadline task to list.
+     *
+     * @param input User input.
+     */
     private static void addDeadline(String input) {
         int byIndex = input.indexOf("/by");
         String description = input.substring(9, byIndex - 1);
@@ -74,6 +105,11 @@ public class Duke {
         confirmAddition(t);
     }
 
+    /**
+     * Add Event task to list.
+     *
+     * @param input User input.
+     */
     private static void addEvent(String input) {
         int fromIndex = input.indexOf("/from");
         int toIndex = input.indexOf("/to");
@@ -106,27 +142,31 @@ public class Duke {
                             tasks.get(i).toString());
                 }
             } else {
-                String command = (input.split(" ")[0]).toLowerCase();
-                switch (command) {
-                    case "mark":
-                        markTask(input);
-                        break;
-                    case "unmark":
-                        unmarkTask(input);
-                        break;
-                    case "todo":
-                        addToDo(input);
-                        break;
-                    case "deadline":
-                        addDeadline(input);
-                        break;
-                    case "event":
-                        addEvent(input);
-                        break;
-                    default:
-                        System.out.printf("     %s%n", "Please input valid task type.");
+                try {
+                    String command = (input.split(" ")[0]).toLowerCase();
+                    switch (command) {
+                        case "mark":
+                            markTask(input);
+                            break;
+                        case "unmark":
+                            unmarkTask(input);
+                            break;
+                        case "todo":
+                            addToDo(input);
+                            break;
+                        case "deadline":
+                            addDeadline(input);
+                            break;
+                        case "event":
+                            addEvent(input);
+                            break;
+                        default:
+                            throw new DukeException("I'm sorry, but I don't know what that means :-(");
                     }
+                } catch (DukeException e) {
+                    System.out.printf("     ☹ OOPS!!! %s%n", e.getMessage());
                 }
+            }
             printLine();
             input = sc.nextLine();
             }
