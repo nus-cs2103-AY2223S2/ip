@@ -2,6 +2,7 @@
  * The Task class.
  * Stores whatever tasks entered by the user and display them back to the user
  * when requested.
+ * Acts as a superclass for all Task types.
  */
 public class Task {
     private final String nameOfTask;
@@ -9,9 +10,11 @@ public class Task {
 
     /**
      * The constructor for Task.
+     *
      * @param nameOfTask The name of task.
+     * @param isDone
      */
-    public Task(String nameOfTask) {
+    public Task(String nameOfTask, boolean isDone) {
         this.nameOfTask = nameOfTask;
         this.isDone = false;
     }
@@ -21,7 +24,7 @@ public class Task {
      * @return The name of Task.
      */
     public static String getNameOfTask() {
-        return this.nameOfTask;
+        return nameOfTask;
     }
 
     /**
