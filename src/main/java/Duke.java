@@ -20,7 +20,7 @@ public class Duke {
       String instr = sc.nextLine();
       switch(instr) {                                 //Single-word instructions
         case "list":  //List down
-          System.out.println(divider);
+          System.out.println(divider + "Here are the tasks in your list:\n");
           for(int i = 1; i <= tasks.size(); i++) {
             System.out.println(i + ". " + tasks.get(i-1));
           }
