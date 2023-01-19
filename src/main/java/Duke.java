@@ -33,8 +33,9 @@ public class Duke {
                         break;
 
                     case "mark":
-                        if (splitInput.length == 1)
+                        if (splitInput.length == 1) {
                             throw new DukeException("'mark' requires additional arguments!");
+                        }
                         try {
                             taskIndex = Integer.valueOf(splitInput[1]) - 1;
                         } catch (NumberFormatException ex) {
@@ -51,8 +52,9 @@ public class Duke {
                         System.out.println(task);
                         break;
                     case "unmark":
-                        if (splitInput.length == 1)
+                        if (splitInput.length == 1) {
                             throw new DukeException("'unmark' requires additional arguments!");
+                        }
                         try {
                             taskIndex = Integer.valueOf(splitInput[1]) - 1;
                         } catch (NumberFormatException ex) {
@@ -69,15 +71,17 @@ public class Duke {
                         System.out.println(task);
                         break;
                     case "todo":
-                        if (splitInput.length == 1)
+                        if (splitInput.length == 1) {
                             throw new DukeException("'todo' requires additional arguments!");
+                        }
                         taskList.add(new ToDo(splitInput[1]));
                         System.out.println("Added Todo task:\n" + taskList.get(taskList.size() - 1));
                         System.out.println("Now you have " + taskList.size() + " tasks in the list!");
                         break;
                     case "deadline":
-                        if (splitInput.length == 1)
+                        if (splitInput.length == 1) {
                             throw new DukeException("'deadline' requires additional arguments!");
+                        }
                         Integer indexBy = splitInput[1].indexOf("/by ");
                         taskList.add(
                             new Deadline(splitInput[1].substring(0, indexBy - 1),
@@ -86,8 +90,9 @@ public class Duke {
                         System.out.println("Now you have " + taskList.size() + " tasks in the list!");
                         break;
                     case "event":
-                        if (splitInput.length == 1)
+                        if (splitInput.length == 1) {
                             throw new DukeException("'event' requires additional arguments!");
+                        }
                         Integer indexFrom = splitInput[1].indexOf("/from ");
                         Integer indexTo = splitInput[1].indexOf("/to ");
                         taskList.add(new Event(
@@ -96,6 +101,25 @@ public class Duke {
                             splitInput[1].substring(indexTo + 4)));
                         System.out.println("Added Event task:\n" + taskList.get(taskList.size() - 1));
                         System.out.println("Now you have " + taskList.size() + " tasks in the list!");
+                        break;
+                    case "delete":
+                        if (splitInput.length == 1) {
+                            throw new DukeException("'delete' requires additional arguments!");
+                        }
+                        try {
+                            taskIndex = Integer.valueOf(splitInput[1]) - 1;
+                        } catch (NumberFormatException ex) {
+                            ex.printStackTrace();
+                            break;
+                        }
+
+                        if (taskIndex < 0 || taskIndex > taskList.size()) {
+                            System.out.println("invalid task index!");
+                            break;
+                        }
+                        System.out.println("Gotcha, removed this task: ");
+                        System.out.println(taskList.get(taskIndex));
+                        taskList.remove(taskIndex.intValue());
                         break;
                     default:
                         throw new DukeException("Please enter a valid command!");
