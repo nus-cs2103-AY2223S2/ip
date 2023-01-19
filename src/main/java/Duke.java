@@ -1,14 +1,7 @@
+import enums.CommandType;
 import java.util.Scanner;
 
 public class Duke{
-    private static final String EXIT_PROGRAM = "bye";
-    private static final String LIST_TASKS = "list";
-    private static final String TODO = "todo";
-    private static final String DEADLINE = "deadline";
-    private static final String EVENT = "event";
-    private static final String MARK = "mark";
-    private static final String UNMARK = "unmark";
-
     private static final TaskList tasks = new TaskList();
     private static final Scanner sc = new Scanner(System.in);
 
@@ -30,14 +23,17 @@ public class Duke{
 
     private static void acceptCommands() throws DukeException {
         String command = sc.nextLine();
-        while (!command.equals(EXIT_PROGRAM)) {
+        boolean exitCommandGiven = false;
+
+        while (!exitCommandGiven) {
             try {
                 String[] commandList = command.split(" ");
-                String commandType = commandList[0].toLowerCase();
+                CommandType commandType = CommandType.valueOf(commandList[0].toUpperCase().strip());
+
                 boolean tooFewArgs = commandList.length <= 1;
 
                 switch(commandType) {
-                    case LIST_TASKS: {
+                    case LIST: {
                         if (tasks.isEmpty()) {
                             System.out.println("You have not added any tasks yet!");
                         } else {
@@ -108,13 +104,17 @@ public class Duke{
                         }
                         break;
                     }
-                    default:
-                        System.out.println("Sorry, that command is not recognised. \n" +
-                                "P.S. Maybe you could contact @dsja612 on github to request for more types of commands :)");
-
+                    case BYE: {
+                        exitCommandGiven = true;
+                        break;
+                    }
                 }
             } catch (DukeException e) {
                 System.out.println(e);
+            } catch (IllegalArgumentException e) {
+                System.out.println("Sorry, that command is not recognised. \n" +
+                        "P.S. Maybe you could contact @dsja612 on github to request for more types of commands :)");
+            } finally {
                 sc.reset();
             }
             command = sc.nextLine();
