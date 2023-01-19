@@ -105,6 +105,6 @@ public class Duke {
 
         // End of program
         sc.close();
-        System.out.println(DIV_OPEN + "Bye. Hope to see you again soon!\n"+ DIV_CLOSE);
+        System.out.printf(DIV_OPEN + "Bye. Hope to see you again soon!\n"+ DIV_CLOSE);
     }
 }
