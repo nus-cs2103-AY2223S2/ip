@@ -1,12 +1,19 @@
 import java.util.Scanner;
 
 public class Duke {
-    public static void main(String[] args) {
+    public static void main(String[] args) throws DukeException {
         String logo = " ____        _        \n"
                 + "|  _ \\ _   _| | _____ \n"
                 + "| | | | | | | |/ / _ \\\n"
                 + "| |_| | |_| |   <  __/\n"
                 + "|____/ \\__,_|_|\\_\\___|\n";
+        /*
+        String logo2 = "    ___     _____    __     ___  \n"
+                     + "   /   \\   |  ___|  |  |   /   \\ \n"
+                     + "  /  |  \\  |  |__   |  |  |  |  | \n"
+                     + "  |     |  |  ___|  |  |  |  |  | \n"
+                     + "  |__|__|  |__|     |__|   \\__/\\_\\";
+         */
         System.out.println("Hello from\n" + logo);
 
         System.out.println("Hello I'm Duke\n"
@@ -19,6 +26,7 @@ public class Duke {
         while(sc.hasNextLine()) {
             String input = sc.nextLine();
             String instruction =  input.split(" ")[0];
+
             switch(instruction) {
                 case "bye":
                     System.out.println("Bye. Hope to see you again soon!");
@@ -35,10 +43,10 @@ public class Duke {
                     Task toMarkTask = taskArray[toMark - 1];
                     toMarkTask.markTask();
 
-                    System.out.println("Nice! I,ve marked this task as done:\n   "
+                    System.out.println("Nice! I've marked this task as done:\n   "
                                         + toMarkTask + "\n");
                     break;
-                case "unMark":
+                case "unmark":
                     int toUnMark = input.charAt(7) - 48;
                     Task toUnMarkTask = taskArray[toUnMark - 1];
                     toUnMarkTask.unmarkTask();
@@ -47,13 +55,17 @@ public class Duke {
                             + toUnMarkTask + "\n");
                     break;
                 case "todo":
-                    ToDo toDoTask = new ToDo(input.substring(5));
-                    taskArray[arrayIndex] = toDoTask;
-                    arrayIndex++;
+                    try {
+                        ToDo toDoTask = new ToDo(input.substring(5));
+                        taskArray[arrayIndex] = toDoTask;
+                        arrayIndex++;
 
-                    System.out.println("Got it. I've added this task:\n   "
-                            + toDoTask
-                            + "\nNow you have " + arrayIndex + " tasks in your list\n");
+                        System.out.println("Got it. I've added this task:\n   "
+                                + toDoTask
+                                + "\nNow you have " + arrayIndex + " tasks in your list\n");
+                    } catch (StringIndexOutOfBoundsException e) {
+                        throw new DukeException("☹ OOPS!!! The description of a todo cannot be empty.");
+                    }
                     break;
                 case "deadline":
                     String[] dSegments = input.split("/");
@@ -83,10 +95,7 @@ public class Duke {
                             + "\nNow you have " + arrayIndex + " tasks in your list\n");
                     break;
                 default:
-                    Task currTask = new Task(input);
-                    taskArray[arrayIndex] = currTask;
-                    System.out.println("added: " + currTask.getName());
-                    arrayIndex++;
+                    throw new DukeException("☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
             }
         }
     }
