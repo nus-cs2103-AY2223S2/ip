@@ -6,33 +6,31 @@ public class TaskList {
     public TaskList() {}
 
     public String add(TaskType type, String s) throws DukeException {
+
         String output = "\t Got it. I've added this task:\n";
         switch (type) {
             case ToDos:
                 if (s.isBlank()) {
-                    throw new DukeException("\t OOPS!!! The description of a todo cannot be empty.");
+                    throw new DukeMissingDescriptionException();
                 }
-
                 ToDos todo = new ToDos(s);
-
                 list.add(todo);
                 output += "\t   " + todo;
                 break;
 
             case Deadlines: {
                 if (s.isBlank()) {
-                    throw new DukeException("\t OOPS!!! Please provide a description and a date/time");
+                    throw new DukeMissingDescriptionException();
                 }
                 int index = s.indexOf(" /by ");
                 if (index == -1 || s.substring(index + 5)
                         .isBlank()) {
-                    throw new DukeException("\t OOPS!!! The date/time of a deadline cannot be empty.");
+                    throw new DukeMissingDeadlineException();
                 }
                 String desc = s.substring(0, index).strip();
                 if (index == 0 || desc.isEmpty()) {
-                    throw new DukeException("\t OOPS!!! The description of a deadline cannot be empty.");
+                    throw new DukeMissingDescriptionException();
                 }
-
 
                 Deadlines deadline = new Deadlines(desc,
                         s.substring(index + 5).strip());
@@ -43,7 +41,7 @@ public class TaskList {
 
             case Events: {
                 if (s.isBlank()) {
-                    throw new DukeException("\t OOPS!!! Please provide a description and a duration");
+                    throw new DukeMissingDescriptionException();
                 }
                 int from = s.indexOf(" /from ");
                 int to = s.indexOf(" /to ");
@@ -52,12 +50,12 @@ public class TaskList {
                         to < from + 7 ||
                         s.substring(from + 7, to).isBlank() ||
                         s.substring(to + 5).isBlank()) {
-                    throw new DukeException("\t OOPS!!! The start/end date of an event cannot be empty.");
+                    throw new DukeMissingEventDateException();
                 }
                 String desc = s.substring(0, from).strip();
 
                 if (from == 0 || to == 0 || desc.isEmpty()) {
-                    throw new DukeException("\t OOPS!!! The description of an event cannot be empty.");
+                    throw new DukeMissingDescriptionException();
                 }
 
                 Events event = new Events(s.substring(0, from)
@@ -74,25 +72,28 @@ public class TaskList {
 
     public String mark(String s) throws DukeException {
         int num = TaskList.stringToInt(s);
+
         if (num < -1 || num >= list.size()) {
-            throw new DukeException("\t OOPS!!! Task number out of range.");
+            throw new DukeTaskNumberOutOfRangeException();
         }
         return list.get(num).mark();
     }
 
     public String unMark(String s) throws DukeException {
         int num = TaskList.stringToInt(s);
+
         if (num < -1 || num >= list.size()) {
-            throw new DukeException("\t OOPS!!! Task number out of range.");
+            throw new DukeTaskNumberOutOfRangeException();
         }
         return list.get(num).unMark();
     }
 
     public String delete(String s) throws DukeException {
         int num = TaskList.stringToInt(s);
+
         String output = "\t Noted. I've removed this task:\n";
         if (num < -1 || num >= list.size()) {
-            throw new DukeException("\t OOPS!!! Task number out of range.");
+            throw new DukeTaskNumberOutOfRangeException();
         }
         Task removed = list.remove(num);
         return String.format("%s\t   %s\n\t Now you have %d tasks in the list.", output, removed, list.size());
@@ -112,11 +113,11 @@ public class TaskList {
         return output.substring(0, output.length() - 1);
     }
 
-    private static int stringToInt(String s) throws DukeException {
+    private static int stringToInt(String s) throws DukeInvalidTaskNumberException {
         try {
             return Integer.parseInt(s);
         } catch (NumberFormatException e) {
-            throw new DukeException("\t OOPS!!! Task number must be a number.");
+            throw new DukeInvalidTaskNumberException();
         }
     }
 }
