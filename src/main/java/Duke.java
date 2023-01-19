@@ -42,13 +42,13 @@ public class Duke {
         while (loop) {
             input = sc.nextLine();
 
-            m = Pattern.compile("bye").matcher(input);
+            m = Pattern.compile("^bye").matcher(input);
             if (m.find()) {
                 chatbox("Goodbye. Shutting down.");
                 break;
             }
 
-            m = Pattern.compile("list").matcher(input);
+            m = Pattern.compile("^list").matcher(input);
             if (m.find()) {
                 chatboxFrame();
                 chatbox("Here are the tasks in your list:", false);
@@ -66,7 +66,7 @@ public class Duke {
                 continue;
             }
 
-            m = Pattern.compile("mark (.+)").matcher(input);
+            m = Pattern.compile("^mark (.+)").matcher(input);
             if (m.find()) {
                 Task curr = tasklist.get(Integer.parseInt(m.group(1)) - 1);
                 curr.setDone(true);
@@ -76,7 +76,7 @@ public class Duke {
                 continue;
             }
 
-            m = Pattern.compile("unmark (.+)").matcher(input);
+            m = Pattern.compile("^unmark (.+)").matcher(input);
             if (m.find()) {
                 Task curr = tasklist.get(Integer.parseInt(m.group(1)) - 1);
                 curr.setDone(false);
@@ -86,7 +86,7 @@ public class Duke {
                 continue;
             }
 
-            m = Pattern.compile("todo (.+)").matcher(input);
+            m = Pattern.compile("^todo (.+)").matcher(input);
             if (m.find()) {
                 tasklist.add(new Todo(m.group(1)));
                 chatbox("Got it. I've added this task:\n" +
@@ -97,7 +97,7 @@ public class Duke {
                 continue;
             }
 
-            m = Pattern.compile("deadline (.+) /by (.+)").matcher(input);
+            m = Pattern.compile("^deadline (.+) /by (.+)").matcher(input);
             if (m.find()) {
                 tasklist.add(new Deadline(m.group(1), m.group(2)));
                 chatbox("Got it. I've added this task:\n" +
@@ -108,7 +108,7 @@ public class Duke {
                 continue;
             }
 
-            m = Pattern.compile("event (.+) /from (.+) /to (.+)").matcher(input);
+            m = Pattern.compile("^event (.+) /from (.+) /to (.+)").matcher(input);
             if (m.find()) {
                 tasklist.add(new Event(m.group(1), m.group(2), m.group(3)));
                 chatbox("Got it. I've added this task:\n" +
