@@ -12,16 +12,28 @@ public class Duke {
 
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
         String text = "";
-        ArrayList < String > list = new ArrayList < String >();
+        ArrayList <tasks> list = new ArrayList <tasks>();
 
         while( !(text = br.readLine()).equals("bye")) {
             if ( text.equals("list")) {
                 for (int i = 0; i < list.size(); i++) {
                     int j = i + 1;
-                    System.out.println(j + " " + list.get(i));
+                    char c = ' ';
+                    if(list.get(i).isMark()) {
+                        c = 'X';
+                    }
+                    System.out.println(j + ".[" + c + "]" + list.get(i).getValue());
                 }
-            } else {
-                list.add(text);
+            } else if ( text.contains("mark")) {
+                StringTokenizer tk = new StringTokenizer(text);
+                tk.nextToken();
+                int index = Integer.parseInt(tk.nextToken());
+                list.get(index - 1).setMark(true);
+                System.out.println("Nice! I've marked this task as done: [X]" + list.get(index - 1).getValue());
+            }
+            else {
+                tasks t = new tasks(false,text);
+                list.add(t);
                 System.out.println("Added : " + text);
             }
         }
