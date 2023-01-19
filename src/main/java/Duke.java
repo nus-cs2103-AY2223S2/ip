@@ -8,6 +8,7 @@ public class Duke {
                 + "|____/ \\__,_|_|\\_\\___|\n";
         System.out.println("Hello from\n" + logo);
 
+        List myList = new List();
         System.out.println("Hi! I am Duke. How may I help you today?");
 
         Scanner sc = new Scanner(System.in);
@@ -18,7 +19,12 @@ public class Duke {
                 System.out.println("Bye! Hope to see you again soon!\n");
                 return;
             }
-            System.out.println(cmd + "\n");
+            if (cmd.equals("list")) {
+                myList.print();
+            }
+            else {
+                myList.add(cmd);
+            }
         }
     }
 }
