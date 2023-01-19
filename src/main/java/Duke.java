@@ -226,9 +226,9 @@ public class Duke {
     private static void delete(String strIdx) throws DukeException {
         int idx = Integer.parseInt(strIdx);
         checkIdx(idx);
-        taskList.get(idx - 1).getTask();
         System.out.println(horizontalLine
                 + "Noted. I've removed this task:");
+        taskList.get(idx - 1).getTask();
         taskList.remove(idx - 1);
         System.out.println("Now you have " + taskList.size() + " tasks in the list.\n"
                 + horizontalLine);
