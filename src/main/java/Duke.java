@@ -62,20 +62,20 @@ public class Duke {
 
     public static void add(String response, char type) {
        if(type == 'T') {
-           Task newTask = new Task(response, 'T');
+           Todo newTask = new Todo(response);
            arr.add(newTask);
            printResponse("Got it. I've added this task: \n" + newTask + "\nNow you have " + arr.size()
                    + " tasks in the list.");
        } else if(type == 'D') {
            String[] strArr = response.split(" /by ", 2);
-           Task newTask = new Task(strArr[0], 'D', "(by: " + strArr[1] + ")");
+           Deadline newTask = new Deadline(strArr[0], strArr[1]);
            arr.add(newTask);
            printResponse("Got it. I've added this task: \n" + newTask + "\nNow you have " + arr.size()
                    + " tasks in the list.");
        } else if(type =='E') {
            String[] strArr = response.split(" /from ", 2);
            String[] timings = strArr[1].split(" /to ", 2);
-           Task newTask = new Task(strArr[0], 'E', "(from: " + timings[0] + " to: " + timings[1] + ")");
+           Event newTask = new Event(strArr[0], timings[0], timings[1]);
            arr.add(newTask);
            printResponse("Got it. I've added this task: \n" + newTask + "\nNow you have " + arr.size()
                    + " tasks in the list.");
