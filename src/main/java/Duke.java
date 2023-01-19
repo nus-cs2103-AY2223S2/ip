@@ -18,13 +18,20 @@ public class Duke {
     private static final String greeting = "Welcome to Lavender Network! \n" +
             "I'm Iris, your favourite teenage chatbot. \n" +
             "I'm here to keep track of your tasks so you don't have to :)\n" +
-            "To add a task, type a word or phrase and press enter.\n" +
-            "To see an list of your task, type \"list\".\n" +
+            "Type \"/help\" to learn the commands.\n" +
+            "What are you waiting for? Let's get started!";
+
+    private static final String help_text = "Hello! You can use the following commands:\n" +
+            "To add a todo task, type \"todo \" + your task.\n" +
+            "To add a task with a deadline, type \"deadline \" + your task + \"/by \" + your deadline.\n" +
+            "To add an event, type \"event \" + your event + " +
+            "\"/from \" + event start time + \"/to \" + event end time.\n" +
+            "To see an list of your tasks, type \"list\".\n" +
             "To mark a task as done, type \"mark <task number>\".\n"  +
             "To mark a task as not done, type \"unmark <task number>\".\n"  +
             "A task marked with a X is done. " +
             "To close me, type \"bye\". \n" +
-            "What are you waiting for? Let's get started!";
+            "Have fun!";
 
     private static final String exitGreeting = "Bye! Hope to see you soon!";
 
@@ -43,6 +50,18 @@ public class Duke {
         System.out.println("\033[35m" + out);
     }
 
+    private static void add_item(Task task) {
+        items.add(task);
+        if (items.size() < 4) {
+            output("Added your task: " + task);
+        } else if (items.size() > 10) {
+            output("What?!! You're going to dieee! Added your task: \"" + task);
+        } else {
+            output("Another task? Phew >:(. Added your task: " + task);
+        }
+        output("You have " + items.size() + " tasks.");
+    }
+
     public static void main(String[] args) {
         output(greeting);
         loop:
@@ -50,6 +69,9 @@ public class Duke {
             getInput();
             Task task;
             switch (input.split(" ")[0]) {
+                case "/help":
+                    output(help_text);
+                    break;
                 case "bye":
                     output(exitGreeting);
                     break loop;
@@ -77,16 +99,17 @@ public class Duke {
                     task.unmark();
                     output(task.toString());
                     break;
+                case "todo":
+                    add_item(new Todo(input));
+                    break;
+                case "deadline":
+                    add_item(new Deadline(input));
+                    break;
+                case "event":
+                    add_item(new Event(input));
+                    break;
                 default:
-                    task = new Task(input);
-                    items.add(task);
-                    if (items.size() < 4) {
-                        output("Added your task: " + task);
-                    } else if (items.size() > 10) {
-                        output("What?!! You're going to dieee! Added your task: \"" + task);
-                    } else {
-                        output("Another task? Phew >:(. Added your task: " + task);
-                    }
+                    add_item(new Task(input));
             }
         }
     }
