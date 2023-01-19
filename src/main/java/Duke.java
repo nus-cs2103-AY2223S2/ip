@@ -26,13 +26,17 @@ public class Duke {
 
         // parse user input
         Scanner scanner = new Scanner(System.in);
+        String rawInput;
+        String[] arguments;
         String command;
         ArrayList<Task> list = new ArrayList<>();
 
-        // level 2 functionality:
+        // level 3 functionality:
         while (true) {
             // scan for user input
-            command = scanner.nextLine();
+            rawInput = scanner.nextLine();
+            arguments = rawInput.split(" ");
+            command = arguments[0];
 
             // parse cases
             if (command.equals("bye")) {
@@ -55,12 +59,32 @@ public class Duke {
                 }
                 // pprint string
                 Duke.prettyPrint(sb.toString());
+            } else if (command.equals("mark")) {
+                // case: "mark'
+                int index = Integer.parseInt(arguments[1]) - 1;
+                Task currentTask = list.get(index);
+                currentTask.markAsDone();
+                String s = String.format(
+                    "Nice! I've marked this task as done:\n %s",
+                    currentTask.toString()
+                );
+                Duke.prettyPrint(s);
+            } else if (command.equals("unmark")) {
+                // case: "unmark'
+                int index = Integer.parseInt(arguments[1]) - 1;
+                Task currentTask = list.get(index);
+                currentTask.unmarkAsDone();
+                String s = String.format(
+                    "Ok, I've marked this task as not done yet:\n %s",
+                    currentTask.toString()
+                );
+                Duke.prettyPrint(s);
             } else {
                 // case: everything else
                 // add item to list
-                Task currentTask = new Task(command);
+                Task currentTask = new Task(rawInput);
                 list.add(currentTask);
-                Duke.prettyPrint("added:" + command);
+                Duke.prettyPrint("added:" + rawInput);
             }
         }
     }
