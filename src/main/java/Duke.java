@@ -1,10 +1,9 @@
 import java.util.ArrayList;
-import java.util.Objects;
 import java.util.Scanner;
 
 public class Duke {
 
-    private static ArrayList<Task> todoList = new ArrayList<>();
+    private static ArrayList<Task> taskList = new ArrayList<>();
     private static Scanner sc = new Scanner(System.in);
 
     private static void printLine() {
@@ -13,15 +12,15 @@ public class Duke {
 
     private static void addToList(String title) {
         Task task = new Task(title);
-        todoList.add(task);
+        taskList.add(task);
         String toPrint = String.format("added: %s", task.getTitle());
         System.out.println(toPrint);
     }
 
     private static void printList() {
         System.out.println("Your tasks so far!!");
-        for (int i = 0; i < todoList.size(); i++) {
-            Task task = todoList.get(i);
+        for (int i = 0; i < taskList.size(); i++) {
+            Task task = taskList.get(i);
             String completedSubstring = task.getDone() ? "[x]" : "[]";
             String toPrint = String.format("%d.%s %s", i + 1, completedSubstring, task.getTitle());
             System.out.println(toPrint);
@@ -29,7 +28,7 @@ public class Duke {
     }
 
     private static void changeTaskCompletionStatus(int taskNumber, boolean completionStatus) {
-        Task task = todoList.get(taskNumber);
+        Task task = taskList.get(taskNumber);
         task.setDone(completionStatus);
         String completedSubstring = completionStatus ? "[x]" : "[]";
         if (completionStatus) {
