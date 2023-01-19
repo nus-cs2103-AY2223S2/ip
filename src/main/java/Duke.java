@@ -20,9 +20,10 @@ public class Duke {
         pw.flush();
         sb.setLength(0);
         ArrayList<Task> storage2 = new ArrayList<Task>();
+        int noOfTasks = 0;
         while (true) {  // Echoing
             text = br.readLine();
-            String[] tempText = text.split(" ");
+            String[] tempText = text.split(" ", 2);
             switch(tempText[0].toLowerCase()) {
                 case "bye":
                     sb.append("    ____________________________________________________________\n")
@@ -33,7 +34,7 @@ public class Duke {
                     sb.append("    ____________________________________________________________\n")
                             .append("    Here are the tasks in your list:\n");
                     for (int i = 0; i < storage2.size(); i++) {
-                        sb.append("    ").append(i + 1).append(". ").append(storage2.get(i).getTaskInfo());
+                        sb.append("    ").append(i + 1).append(".").append(storage2.get(i).getTaskInfo()).append("\n");
                     }
                     sb.append("    ____________________________________________________________\n");
                     break;
@@ -45,7 +46,7 @@ public class Duke {
                         Task tempTask = storage2.get(taskNumber - 1);
                         sb.append("    ____________________________________________________________\n")
                                 .append(tempTask.markAsDone())
-                                .append("    ____________________________________________________________\n");
+                                .append("\n    ____________________________________________________________\n");
                         storage2.set(taskNumber -1, tempTask);
                     }
                     break;
@@ -57,15 +58,32 @@ public class Duke {
                         Task tempTask = storage2.get(taskNumber2 - 1);
                         sb.append("    ____________________________________________________________\n")
                                 .append(tempTask.markAsIncomplete())
-                                .append("    ____________________________________________________________\n");
+                                .append("\n    ____________________________________________________________\n");
                         storage2.set(taskNumber2 -1, tempTask);
                     }
                     break;
                 default:
                     Task newTask = new Task(text);
+                    if (tempText[0].equals("todo")) {
+                        newTask = new ToDos(tempText[1]);
+                    }
+                    if (tempText[0].equals("deadline")) {
+                        String[] tempText2 = tempText[1].split("/by");
+                        // need to take care of this error where there isnt a tempText2[1]
+                        newTask = new Deadline(tempText2[0], tempText2[1]);
+                    }
+                    if (tempText[0].equals("event")) {
+                        String[] tempText3 = tempText[1].split("/from");
+                        String[] tempText4 = tempText3[1].split("/to");
+                        // need to take care of error where there isnt a tempText3[1] / tempText4[1]
+                        newTask = new Event(tempText3[0], tempText4[0], tempText4[1]);
+                    }
+                    noOfTasks++;
                     storage2.add(newTask);
                     sb.append("    ____________________________________________________________\n")
-                            .append("    added: ").append(newTask.getTaskInfo())
+                            .append("    Got it. I've added this task:\n")
+                            .append("      ").append(newTask.getTaskInfo())
+                            .append("\n    Now you have ").append(noOfTasks).append(" tasks in the list.\n")
                             .append("    ____________________________________________________________\n");
             }
             pw.println(sb.toString());

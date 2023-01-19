@@ -19,9 +19,9 @@ public class Task {
 
     public String getTaskInfo() {
         if (isCompleted) {
-            return "[X] " + this.taskInfo + "\n";
+            return "[X] " + this.taskInfo;
         } else {
-            return "[ ] " + this.taskInfo + "\n";
+            return "[ ] " + this.taskInfo;
         }
     }
 }
