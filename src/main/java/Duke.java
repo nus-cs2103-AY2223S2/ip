@@ -86,6 +86,39 @@ public class Duke {
                 continue;
             }
 
+            m = Pattern.compile("todo (.+)").matcher(input);
+            if (m.find()) {
+                tasklist.add(new Todo(m.group(1)));
+                chatbox("Got it. I've added this task:\n" +
+                    tasklist.get(tasklist.size() - 1).toString() +
+                    String.format("\nNow you have %d tasks in the list.",
+                        tasklist.size())
+                    );
+                continue;
+            }
+
+            m = Pattern.compile("deadline (.+) /by (.+)").matcher(input);
+            if (m.find()) {
+                tasklist.add(new Deadline(m.group(1), m.group(2)));
+                chatbox("Got it. I've added this task:\n" +
+                    tasklist.get(tasklist.size() - 1).toString() +
+                    String.format("\nNow you have %d tasks in the list.",
+                        tasklist.size())
+                    );
+                continue;
+            }
+
+            m = Pattern.compile("event (.+) /from (.+) /to (.+)").matcher(input);
+            if (m.find()) {
+                tasklist.add(new Event(m.group(1), m.group(2), m.group(3)));
+                chatbox("Got it. I've added this task:\n" +
+                    tasklist.get(tasklist.size() - 1).toString() +
+                    String.format("\nNow you have %d tasks in the list.",
+                        tasklist.size())
+                    );
+                continue;
+            }
+
             //default add
             chatbox("added: " + input);
             tasklist.add(new Task(input));
