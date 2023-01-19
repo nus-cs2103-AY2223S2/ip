@@ -1,5 +1,7 @@
 import java.util.Scanner;
 
+import Exceptions.*;
+
 public class Duke {
     public static void main(String[] args) {
         System.out.println("Hello I'm Duke");
@@ -37,36 +39,78 @@ public class Duke {
                     System.out.println(currTask.toString());
                 }
             } else if(message.startsWith("todo")) {
-                String info = message.split(" ", 2)[1];
-                Todo todo = new Todo(info);
-                list[counter] = todo;
-                counter++;
-                System.out.println("Got it. I've added this task:");
-                System.out.println(todo);
-                System.out.println("Now you have " + counter + " task in the list");
+                try {
+                    Task todo = addNewTask(message);
+                    list[counter] = todo;
+                    counter++;
+                    System.out.println("Got it. I've added this task:");
+                    System.out.println(todo);
+                    System.out.println("Now you have " + counter + " task in the list");
+                } catch(DukeException e) {
+                    System.out.println(e.getMessage());
+                }
             } else if(message.startsWith("deadline")) {
-                String info = message.split(" ", 2)[1];
-                String[] info_parts = info.split("/", 2);
-                Deadline deadline = new Deadline(info_parts[0], info_parts[1]);
-                list[counter] = deadline;
-                counter++;
-                System.out.println("Got it. I've added this task:");
-                System.out.println(deadline);
-                System.out.println("Now you have " + counter + " task in the list");
+                try {
+                    Task deadline = addNewTask(message);
+                    list[counter] = deadline;
+                    counter++;
+                    System.out.println("Got it. I've added this task:");
+                    System.out.println(deadline);
+                    System.out.println("Now you have " + counter + " task in the list");
+                } catch(DukeException e) {
+                    System.out.println(e.getMessage());
+                }
             } else if(message.startsWith("event")) {
-                String info = message.split(" ", 2)[1];
-                String[] info_parts = info.split("/", 3);
-                Event event = new Event(info_parts[0],info_parts[1],info_parts[2]);
-                list[counter] = event;
-                counter++;
-                System.out.println("Got it. I've added this task:");
-                System.out.println(event);
-                System.out.println("Now you have " + counter + " task in the list");
+                try {
+                    Task event = addNewTask(message);
+                    list[counter] = event;
+                    counter++;
+                    System.out.println("Got it. I've added this task:");
+                    System.out.println(event);
+                    System.out.println("Now you have " + counter + " task in the list");
+                } catch(DukeException e) {
+                    System.out.println(e.getMessage());
+                }
             } else {
-                list[counter] = new Task(message);
-                counter++;
-                System.out.println("added: " + message);
+                System.out.println("☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
             }
+        }
+    }
+
+    private static Task addNewTask(String message) throws DukeException {
+        if(message.startsWith("todo")) {
+            String info = message.substring(4).trim();
+            if (info.isEmpty()) {
+                throw (new TaskNotFoundException("☹ OOPS!!! The description of a todo cannot be empty."));
+            }
+            return new Todo(info);
+        } else if(message.startsWith("deadline")) {
+            String info = message.substring(8).trim();
+            if (info.isEmpty()) {
+                throw(new TaskNotFoundException("☹ OOPS!!! The description of a deadline cannot be empty."));
+            }
+
+            try {
+                String[] info_parts = info.split("/", 2);
+                return new Deadline(info_parts[0], info_parts[1]);
+            } catch(ArrayIndexOutOfBoundsException e) {
+                throw(new NotEnoughArgumentsException("☹ OOPS!!! Deadline requires a date after the description."));
+            }
+        } else if(message.startsWith("event")) {
+            String info = message.substring(5).trim();
+            if (info.isEmpty()) {
+                throw (new TaskNotFoundException("☹ OOPS!!! The description of an event cannot be empty."));
+            }
+
+            try {
+                String[] info_parts = info.split("/", 3);
+                return new Event(info_parts[0],info_parts[1],info_parts[2]);
+            } catch(ArrayIndexOutOfBoundsException e) {
+                throw(new NotEnoughArgumentsException("☹ OOPS!!! Event requires a start time and an end time."));
+            }
+        } else {
+            // this should only happen when addNewTask is being called in the wrong place
+            throw(new TaskNotFoundException("There is an error in the code. This message does not belong here"));
         }
     }
 }
