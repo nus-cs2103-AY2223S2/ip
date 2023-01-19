@@ -9,4 +9,9 @@ mark 4
 list
 unmark 1
 list
+delete 1
+todo
+delete4
+mark 1
+list
 bye
