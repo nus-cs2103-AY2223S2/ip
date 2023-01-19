@@ -28,7 +28,7 @@ public class Leo {
 
     private void addTask(String taskName, char type) {
         taskList.add(Task.createTask(taskName, type));
-        System.out.printf("added: %s\n", taskName);
+        System.out.printf("added: %s\n", taskList.get(taskList.size() - 1));
         System.out.printf("You have %d tasks in your list, vamos, get moving!\n", taskList.size());
     }
 
@@ -99,8 +99,8 @@ class Task {
     }
 
     public static Task createTask(String taskName, char type) {
-        return type == 'D' ? new Deadline(taskName.substring(8), 'D', taskName.split("/")[1])
-                : type == 'E' ? new Event(taskName.substring(6), 'E', taskName.split("/")[1], taskName.split("/")[2])
+        return type == 'd' ? new Deadline(taskName.substring(8).split("/")[0], 'D', taskName.split("/")[1])
+                : type == 'e' ? new Event(taskName.substring(6).split("/")[0], 'E', taskName.split("/")[1], taskName.split("/")[2])
                         : new Todo(taskName.substring(5), 'T');
     }
 
@@ -157,7 +157,7 @@ class Task {
 
         @Override
         public String toString() {
-            return String.format("%s (from: %s, to:)", super.toString(), this.from, this.to);
+            return String.format("%s (from: %s, to: %s)", super.toString(), from, to);
         }
     }
 
