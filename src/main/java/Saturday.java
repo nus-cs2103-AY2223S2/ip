@@ -7,7 +7,7 @@ public class Saturday {
     public static void main(String[] args) {
         // Greeting
         Utils.divider();
-        Utils.output("\t Hello! I'm Saturday\n\t What can I do for you?");
+        Utils.output("Hello! I'm Saturday\n\tWhat can I do for you?");
         Utils.divider();
         Utils.newline();
 
@@ -25,8 +25,6 @@ public class Saturday {
             Utils.newline();
         }
     }
-
-
 
     public static void todo(String text) {
         int s = text.indexOf(" ");
