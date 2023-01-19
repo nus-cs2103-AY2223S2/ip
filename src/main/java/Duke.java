@@ -1,9 +1,9 @@
-import java.io.InputStream;
-import java.io.InputStreamReader;
 import java.util.Scanner;
+import java.util.ArrayList;
 
 public class Duke {
-    public static String newline = "\t____________________________________________________________";
+    public static ArrayList<String> storedStrings = new ArrayList<>();
+
     public static void main(String[] args) {
         String logo = "  ╔╗        \n" +
                     "  ║║        \n" +
@@ -18,37 +18,52 @@ public class Duke {
                 "\tWhat Can I do for you?";
 
         System.out.println("Hello from\n" + logo);
-        System.out.println(newline);
+        printNewLine();
         System.out.println(greeting);
-        System.out.println(newline);
+
         Scanner sc = new Scanner(System.in);
         while(true) {
             getResponse(sc);
         }
     }
 
-    public static void returnList() {
+    public static void printNewLine() {
+        String newline = "\t____________________________________________________________";
+        System.out.println(newline);
+    }
 
+    public static void returnList() {
+        for (int i = 1; i  <= storedStrings.size(); i++) {
+            System.out.println(i + ". " + storedStrings.get(i-1));
+        }
+        printNewLine();
     }
 
     public static void sayBye() {
-
+        System.out.println("\tBye. Hope to see you again soon!");
+        printNewLine();
+        System.exit(0);
     }
 
-    public static void reply() {
+    public static void reply(String input) {
+        storedStrings.add(input);
+        System.out.println("added: " + input);
+        printNewLine();
     }
 
     public static void getResponse(Scanner sc){
         String input = sc.nextLine();
-        System.out.println(newline);
+        printNewLine();
         switch (input) {
             case ("bye"):
-                System.out.println("\tBye. Hope to see you again soon!");
-                System.out.println(newline);
-                System.exit(0);
+                sayBye();
+                break;
+            case ("list"):
+                returnList();
                 break;
             default:
-                System.out.println("\t" + input);
+                reply(input);
+                break;
         }
 
     }
