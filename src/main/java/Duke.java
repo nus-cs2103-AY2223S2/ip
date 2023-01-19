@@ -54,6 +54,17 @@ public class Duke {
                         }
                     }
 
+                    //delete
+                    else if (InputProcessor.is_Delete(input)) {
+                        String int_Str = input.split(" ", 2)[1];
+                        int index = Integer.parseInt(int_Str);
+                        if (list.size() != 0 && index > 0 && index <= list.size()) {
+                            delete(index - 1, list);
+                        } else {
+                            throw new DukeException("Invalid Index!");
+                        }
+                    }
+
                     //todo
                     else if (InputProcessor.is_toDo(input)) {
                         String todo = input.split(" ", 2)[1];
@@ -112,13 +123,22 @@ public class Duke {
             }
     }
 
-        public static void echo (Tasks task){
+        public static void echo(Tasks task){
         System.out.println(line);
-        System.out.println("Got it. I've added this task:");
-        System.out.println(task);
-        System.out.println("Now you have " + list.size() + " tasks in the list.");
+        System.out.println("        Got it. I've added this task:");
+        System.out.println("        " + task);
+        System.out.println("        Now you have " + list.size() + " tasks in the list.");
         System.out.println(line);
     }
+
+        public static void delete(int i, ArrayList<Tasks> list){
+            System.out.println(line);
+            System.out.println("        Got it. I've removed this task:");
+            System.out.println("        " + list.get(i));
+            list.remove(i);
+            System.out.println("        Now you have " + list.size() + " tasks in the list.");
+            System.out.println(line);
+        }
 
         static void greet () {
         String logo = " ____        _        \n"
@@ -127,7 +147,7 @@ public class Duke {
                 + "| |_| | |_| |   <  __/\n"
                 + "|____/ \\__,_|_|\\_\\___|\n";
         System.out.println(line);
-        System.out.println("\nHello! I'm Oli\n" + "What can I do for you?");
+        System.out.println("\n      Hello! I'm Oli\n" + "       What can I do for you?");
     }
 
 

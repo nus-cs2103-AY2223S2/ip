@@ -13,15 +13,15 @@ public abstract class Tasks {
     }
 
     public void mark() {
-        System.out.println("    Nice! I've marked this task as done:");
+        System.out.println("        Nice! I've marked this task as done:");
         marked = true;
-        System.out.println(this);
+        System.out.println("        " + this);
     }
 
     public void unmark() {
-        System.out.println("    OK, I've marked this task as not done yet:");
+        System.out.println("        OK, I've marked this task as not done yet:");
         marked = false;
-        System.out.println(this);
+        System.out.println("        " + this);
     }
 
     public boolean is_Marked() {

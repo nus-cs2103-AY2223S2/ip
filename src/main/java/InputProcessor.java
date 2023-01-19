@@ -61,6 +61,16 @@ public class InputProcessor {
         return input.equalsIgnoreCase("bye");
     }
 
+    public static boolean is_Delete(String input) {
+        String[] firstword_Arr = input.split(" ", 2);
+        if (firstword_Arr.length == 2 ) {
+            if (firstword_Arr[0].equalsIgnoreCase("delete")) {
+                return true;
+            }
+        }
+        return false;
+    }
+
 
 
 
