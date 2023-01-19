@@ -34,59 +34,77 @@ public class Duke {
         printDashes();
 
         while(!request.equals("bye")) {
-            String userInput = sc.nextLine();
+            String userInput = sc.nextLine().trim();
             request = userInput.split("\\s+")[0];
 
-            switch(request) {
-                case "bye":
-                    System.out.println("Bye. Hope to see you again soon! ^_^");
-                    break;
-                case "list":
-                    printList(list);
-                    break;
-                case "mark":
-                    chosenTask = Integer.parseInt(userInput.split("\\s+")[1]);
-                    list.get(chosenTask - 1).setIsDone();
-                    System.out.println("Nice! I've marked this task as done:");
-                    System.out.println("[" + list.get(chosenTask - 1).getStatusIcon() + "] " + list.get(chosenTask - 1).getTaskDes());
-                    break;
-                case "unmark":
-                    chosenTask = Integer.parseInt(userInput.split("\\s+")[1]);
-                    list.get(chosenTask - 1).revertIsDone();
-                    System.out.println("OK, I've marked this task as not done yet:");
-                    System.out.println("[" + list.get(chosenTask - 1).getStatusIcon() + "] " + list.get(chosenTask - 1).getTaskDes());
-                    break;
-                case "todo":
-                    String todo_descrip = userInput.substring(userInput.indexOf(" ")).trim();
-                    Todo todo = new Todo(todo_descrip);
-                    list.add(todo);
-                    System.out.println("Got it. I've added this task:\n" + todo);
-                    numOfTasks(list);
-                    break;
-                case "deadline":
-                    String dd_full = userInput.substring(userInput.indexOf(" ")).trim();
-                    String dd_descrip = dd_full.split("/")[0];
-                    //String dd_date = dd_full.substring(dd_full.lastIndexOf(" ")).trim();
-                    String dd_date = dd_full.split("/")[1].substring(dd_full.split("/")[1].indexOf(" ")).trim();
-                    Deadline deadline = new Deadline(dd_descrip, dd_date);
-                    list.add(deadline);
-                    System.out.println("Got it. I've added this task:\n" + deadline);
-                    numOfTasks(list);
-                    break;
-                case "event":
-                    String event_full = userInput.substring(userInput.indexOf(" ")).trim();
-                    String event_descrip = event_full.split("/")[0];
-                    String event_from = event_full.split("/")[1].substring(event_full.split("/")[1].indexOf(" ")).trim();
-                    String event_to = event_full.split("/")[2].substring(event_full.split("/")[2].indexOf(" ")).trim();
-                    Event event = new Event(event_descrip, event_from, event_to);
-                    list.add(event);
-                    System.out.println("Got it. I've added this task:\n" + event);
-                    numOfTasks(list);
-                    break;
-                default:
-                    System.out.println("*added: " + userInput);
-                    Task userTask = new Task(userInput);
-                    list.add(userTask);
+            try{
+                switch(request) {
+                    case "bye":
+                        System.out.println("Bye. Hope to see you again soon! ^_^");
+                        break;
+                    case "list":
+                        printList(list);
+                        break;
+                    case "mark":
+                        chosenTask = Integer.parseInt(userInput.split("\\s+")[1]);
+                        if(chosenTask > list.size() || chosenTask < 1) {
+                            throw new taskNotExist();
+                        }
+                        list.get(chosenTask - 1).setIsDone();
+                        System.out.println("Nice! I've marked this task as done:");
+                        System.out.println("[" + list.get(chosenTask - 1).getStatusIcon() + "] " + list.get(chosenTask - 1).getTaskDes());
+                        break;
+                    case "unmark":
+                        chosenTask = Integer.parseInt(userInput.split("\\s+")[1]);
+                        if(chosenTask > list.size() || chosenTask < 1) {
+                            throw new taskNotExist();
+                        }
+                        list.get(chosenTask - 1).revertIsDone();
+                        System.out.println("OK, I've marked this task as not done yet:");
+                        System.out.println("[" + list.get(chosenTask - 1).getStatusIcon() + "] " + list.get(chosenTask - 1).getTaskDes());
+                        break;
+                    case "todo":
+                        if(userInput.indexOf(" ") == -1) {
+                            throw new missingDescription("todo");
+                        }
+                        String todo_descrip = userInput.substring(userInput.indexOf(" ")).trim();
+                        Todo todo = new Todo(todo_descrip);
+                        list.add(todo);
+                        System.out.println("Got it. I've added this task:\n" + todo);
+                        numOfTasks(list);
+                        break;
+                    case "deadline":
+                        if(userInput.indexOf(" ") == -1) {
+                            throw new missingDescription("deadline");
+                        }
+                        String dd_full = userInput.substring(userInput.indexOf(" ")).trim();
+                        String dd_descrip = dd_full.split("/")[0];
+                        String dd_date = dd_full.split("/")[1].substring(dd_full.split("/")[1].indexOf(" ")).trim();
+                        Deadline deadline = new Deadline(dd_descrip, dd_date);
+                        list.add(deadline);
+                        System.out.println("Got it. I've added this task:\n" + deadline);
+                        numOfTasks(list);
+                        break;
+                    case "event":
+                        if(userInput.indexOf(" ") == -1) {
+                            throw new missingDescription("event");
+                        }
+                        String event_full = userInput.substring(userInput.indexOf(" ")).trim();
+                        String event_descrip = event_full.split("/")[0];
+                        String event_from = event_full.split("/")[1].substring(event_full.split("/")[1].indexOf(" ")).trim();
+                        String event_to = event_full.split("/")[2].substring(event_full.split("/")[2].indexOf(" ")).trim();
+                        Event event = new Event(event_descrip, event_from, event_to);
+                        list.add(event);
+                        System.out.println("Got it. I've added this task:\n" + event);
+                        numOfTasks(list);
+                        break;
+                    default:
+                        throw new unknownInputException();
+                }
+            } catch (DukeException e) {
+                System.out.println(e.eMessage);
+            } catch(NumberFormatException e) {
+                System.out.println("mark must follow by a integer");
             }
             printDashes();
         }
@@ -164,5 +182,32 @@ class Event extends Task {
         return "[E]" + super.toString() + "(from: " + from + " to: " + to + ")";
     }
 }
+
+class DukeException extends Exception {
+    protected String eMessage;
+
+    public DukeException(String eMessage) {
+        this.eMessage = eMessage;
+    }
+}
+
+class unknownInputException extends DukeException {
+    public unknownInputException() {
+        super("Oh no, I am not sure what that means, could you try again?");
+    }
+}
+
+class missingDescription extends DukeException {
+    public missingDescription(String taskType) {
+        super("Oh no, the description of a " + taskType + " cannot be empty! Please try again.");
+    }
+}
+
+class taskNotExist extends DukeException {
+    public taskNotExist() {
+        super("Oh no, the task is not exist yet! Please try again.");
+    }
+}
+
 
 
