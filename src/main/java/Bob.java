@@ -158,6 +158,24 @@ public class Bob {
         Task t = taskList.get(taskList.size() - 1);
         formattedPrint("I've added a new task!\n" + getTaskDescription(t));
     }
+
+    private boolean isDelete(String input) {
+        String[] command = input.split(" ");
+        return command.length == 2 && command[0].equals("delete") && isInt(command[1]);
+    }
+
+    private void deleteTask(String input) throws BobException {
+        String[] command = input.split(" ");
+        Integer index = Integer.valueOf(command[1]);
+
+        if (index < 1 || index > taskList.size()) {
+            throw new BobException("Index given is out of range");
+        }
+        formattedPrint("Sure, removing this task!\n" +
+                       getTaskDescription(taskList.get(index - 1)));
+        taskList.remove(index - 1);
+    }
+
     /**
      * Main program for Bob, our chat-bot
      */
@@ -176,6 +194,8 @@ public class Bob {
                     printList();
                 } else if (isMarkCommand(input)) { // Marking task
                     handleMarkCommand(input);
+                } else if (isDelete(input)) {
+                    deleteTask(input);
                 } else {  // Add to list
                     addTask(input);
                 }
