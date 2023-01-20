@@ -1,4 +1,5 @@
 package duke;
+import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 
@@ -19,9 +20,12 @@ public class Storage {
     public String load() throws DukeException {
         try {
             Path dirPath = Paths.get(this.dirPath);
-            System.out.println(dirPath);
             if (!Files.exists(dirPath)) {
                 Files.createDirectory(dirPath);
+            }
+            if (!Files.exists(Paths.get(this.dirPath + this.fileName))) {
+                File f = new File(this.dirPath + this.fileName);
+                f.createNewFile();
             }
             return Files.readString(Paths.get(this.dirPath + this.fileName));
         } catch (IOException e) {
