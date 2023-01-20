@@ -13,6 +13,8 @@ public class Duke {
             + "|____/ \\__,_|_|\\_\\___|";
 
 
+    private ArrayList<Task> taskList;
+
     enum State {
         LIST,
         TODO, DEADLINE, EVENT,
@@ -20,6 +22,44 @@ public class Duke {
         DELETE,
         EXIT,
         UNKNOWN,
+    }
+
+    public Duke() {
+        taskList = new ArrayList<>();
+    }
+
+    private Duke displayTaskCount() {
+        if (taskList == null)
+            return this;
+
+        if (taskList.isEmpty())
+            Duke.display("You do not have any task!");
+        else
+            Duke.display("Now you have " + taskList.size() + " task(s) in the list.");
+
+        return this;
+    }
+    private Duke displayTasks() {
+        if (taskList == null)
+            return this;
+
+        if (taskList.size() == 0)
+            Duke.display("Your list is empty.");
+        else {
+            Duke.display("You have the following task(s):");
+            for (int i = 0; i < taskList.size(); i++)
+                Duke.display("\t" + (i + 1) + ". " + taskList.get(i));
+        }
+
+        return this;
+    }
+    private Duke addNewTask(Task task) {
+        taskList.add(task);
+        Duke.display("Got it. I've added this task:");
+        Duke.display("\t" + task);
+        displayTaskCount();
+
+        return this;
     }
 
     private static void display(Object obj) {
@@ -41,33 +81,7 @@ public class Duke {
     private static void displayLine() {
         Duke.display("____________________________________________________________");
     }
-    private static void displayTaskCount(ArrayList<Task> taskList) {
-        if (taskList == null)
-            return;
 
-        if (taskList.isEmpty())
-            Duke.display("You do not have any task!");
-        else
-            Duke.display("Now you have " + taskList.size() + " task(s) in the list.");
-    }
-    private static void displayTaskList(ArrayList<Task> taskList) {
-        if (taskList == null)
-            return;
-
-        if (taskList.size() == 0)
-            Duke.display("Your list is empty.");
-        else {
-            Duke.display("You have the following task(s):");
-            for (int i = 0; i < taskList.size(); i++)
-                Duke.display("\t" + (i + 1) + ". " + taskList.get(i));
-        }
-    }
-    private static void addNewTask(ArrayList<Task> taskList, Task task) {
-        taskList.add(task);
-        Duke.display("Got it. I've added this task:");
-        Duke.display("\t" + task);
-        Duke.displayTaskCount(taskList);
-    }
     private static State detectState(String command) {
         // Suppress all upper case letters, gets only the first word
         String cmd = command.toLowerCase().split(" ")[0];
@@ -115,7 +129,7 @@ public class Duke {
         Task activeTask;
         State currentState = State.UNKNOWN;
         Scanner sc = new Scanner(System.in);
-        ArrayList<Task> taskList = new ArrayList<Task>();
+        Duke duke = new Duke();
 
         System.out.println("System is ready!");
         Duke.display("\n\n");
@@ -139,7 +153,7 @@ public class Duke {
                     case TODO:
                         taskDescription = userCmd.substring(4).trim(); // exclude "todo" keyword
                         activeTask = new Todo(taskDescription);
-                        Duke.addNewTask(taskList, activeTask);
+                        duke.addNewTask(activeTask);
                         break;
 
                     case DEADLINE:
@@ -155,7 +169,7 @@ public class Duke {
                         Duke.assertThis(!taskDescription.isEmpty(), "Task description cannot be empty.");
                         Duke.assertThis(!duedate.isEmpty(), "Due date cannot be empty.");
 
-                        Duke.addNewTask(taskList, new Deadline(taskDescription, duedate));
+                        duke.addNewTask(new Deadline(taskDescription, duedate));
                         break;
 
                     case EVENT:
@@ -176,11 +190,11 @@ public class Duke {
                         Duke.assertThis(!start.isEmpty(), "Start date/time cannot be empty.");
                         Duke.assertThis(!end.isEmpty(), "End date/time cannot be empty.");
 
-                        Duke.addNewTask(taskList, new Event(taskDescription, start, end));
+                        duke.addNewTask(new Event(taskDescription, start, end));
                         break;
 
                     case LIST:
-                        Duke.displayTaskList(taskList);
+                        duke.displayTasks();
                         break;
 
                     case MARK:
@@ -198,9 +212,9 @@ public class Duke {
 
                             try {
                                 taskIdx = Integer.parseInt(inputs[i]) - 1;
-                                Duke.assertThis(taskIdx >= 0 && taskIdx < taskList.size(), "");
+                                Duke.assertThis(taskIdx >= 0 && taskIdx < duke.taskList.size(), "");
 
-                                activeTask = taskList.get(taskIdx);
+                                activeTask = duke.taskList.get(taskIdx);
                                 activeTask.setDone(currentState == State.MARK); // Note: false means unmark
                                 Duke.display("\t" + activeTask);
                             }
@@ -226,9 +240,9 @@ public class Duke {
 
                             try {
                                 taskIdx = Integer.parseInt(inputs[i]) - 1;
-                                Duke.assertThis(taskIdx >= 0 && taskIdx < taskList.size(), "");
+                                Duke.assertThis(taskIdx >= 0 && taskIdx < duke.taskList.size(), "");
 
-                                activeTask = taskList.get(taskIdx);
+                                activeTask = duke.taskList.get(taskIdx);
                                 markedDelete.add(taskIdx);
                             }
                             catch(NumberFormatException e) {
@@ -245,9 +259,10 @@ public class Duke {
                         Collections.sort(markedDelete);
                         Collections.reverse(markedDelete);
                         for (int i : markedDelete) // Note: need to be int and not Integer
-                            Duke.display("\t" + taskList.remove(i)); // or else remove(Object o) is used (wrong) instead of remove(int index)
+                            Duke.display("\t" + duke.taskList.remove(i)); // or else remove(Object o) is used (wrong)
+                        // instead of remove(int index)
 
-                        Duke.displayTaskCount(taskList);
+                        duke.displayTaskCount();
                         break;
 
                     case UNKNOWN:
