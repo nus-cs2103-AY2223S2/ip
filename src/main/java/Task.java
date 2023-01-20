@@ -22,4 +22,8 @@ public class Task {
     public String toString() {
         return "[" + (done ? "X" : " ") + "] " + task;
     }
+
+    public String toFileString() {
+        return (done ? "1" : "0") + " | " + task;
+    }
 }
