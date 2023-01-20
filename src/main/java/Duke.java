@@ -17,9 +17,11 @@ public class Duke {
         String userInput = null;
         while(!(userInput = scan.nextLine()).equals("bye")) {
             String[] splitCheck = userInput.split(" ", 2);
-
             try {
-                switch(Command.valueOf(splitCheck[0].toUpperCase())) {
+                Command inputCommand = validateCommand(splitCheck[0])
+                        ? Command.valueOf(splitCheck[0].toUpperCase())
+                        : Command.INVALID;
+                switch(inputCommand) {
                     case LIST:
                         listTask();
                         break;
@@ -47,9 +49,7 @@ public class Duke {
 
             } catch (DukeException de) {
                 dukeSpeak(de.getMessage());
-            } catch (IllegalArgumentException illegalArg) {
-                dukeSpeak(" ☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
-            }
+            } 
         } // end of while-loop
 
         dukeSpeak("Bye. Hope to see you again soon!");
@@ -153,6 +153,15 @@ public class Duke {
         dukeSpeak(message);
     }
 
+    public static boolean validateCommand(String command) {
+        Command[] allCommands = Command.values();
+        for (int i = 0; i < allCommands.length; i++) {
+            if (allCommands[i].toString().equals(command.toUpperCase())){
+                return true;
+            }
+        }
+        return false;
+    }
     public static void dukeSpeak(String message) {
         System.out.println("____________________________________________________________");
         System.out.println(message);
