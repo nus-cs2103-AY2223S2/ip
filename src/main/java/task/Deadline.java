@@ -13,8 +13,8 @@ public class Deadline extends Task {
     /**
      * Constructs a new deadline.
      *
-     * @param description The description of the task.
-     * @param by The deadline of the task.
+     * @param description Description of the task.
+     * @param by Deadline of the task.
      */
     public Deadline(String description, String by) {
         super(description);

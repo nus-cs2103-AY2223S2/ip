@@ -14,7 +14,7 @@ public class Task {
     /**
      * Constructs a new task.
      *
-     * @param description the description of the task
+     * @param description Description of the task.
      */
     public Task(String description) {
         this.description = description;
@@ -28,9 +28,9 @@ public class Task {
         isDone = !isDone;
     }
 
-    /** Returns whether the task is completed
+    /** Returns whether the task is completed.
      *
-     * @return true if the task is completed, false otherwise
+     * @return true if the task is completed, false otherwise.
      */
     public boolean getIsDone() {
         return isDone;

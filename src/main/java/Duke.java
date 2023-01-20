@@ -23,7 +23,7 @@ public class Duke {
     /**
      * Entry point to start and run duke.
      *
-     * @param args command.Command line arguments.
+     * @param args Command line arguments.
      */
     public static void main(String[] args) {
         Duke duke = new Duke();

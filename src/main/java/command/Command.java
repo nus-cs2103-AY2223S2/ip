@@ -9,7 +9,7 @@ import java.util.LinkedHashMap;
 public class Command {
 
     /**
-     * Types of command arguments
+     * Types of command arguments.
      */
     public enum Argument {
         BYE,
@@ -31,9 +31,11 @@ public class Command {
     /**
      * Constructs a new command.
      *
-     * @param input input string of the command.
+     * @param input Input string of the command.
+     * @throws IllegalArgumentException If input string is not a valid command.
      */
-    public Command(String input) {
+    public Command(String input)
+        throws IllegalArgumentException {
         arguments = new LinkedHashMap<>();
         for (String term : input.strip().split(" /")) {
             int firstSpace = term.indexOf(" ");
@@ -51,7 +53,7 @@ public class Command {
     /**
      * Returns the type of command.
      *
-     * @return the type of command.
+     * @return Type of command.
      */
     public Argument getName() {
         return arguments.entrySet().iterator().next().getKey();
@@ -60,14 +62,15 @@ public class Command {
     /**
      * Returns the value of an argument.
      *
-     * @param arg the argument to retrieve value of.
-     * @return the value of the argument.
+     * @param arg Argument to retrieve value of.
+     * @return Value of the argument.
      */
     public String getArgumentValue(Argument arg) {
         return arguments.get(arg);
     }
 
-    private Argument parseArgument(String arg) {
+    private Argument parseArgument(String arg)
+            throws IllegalArgumentException {
         if (arg.equals("")) {
             return Argument.NO_OP;
         }
@@ -79,7 +82,8 @@ public class Command {
         }
     }
 
-    private void checkArguments() {
+    private void checkArguments()
+            throws IllegalArgumentException {
         ArrayList<Argument> requiredArgs = new ArrayList<>();
         ArrayList<Argument> requiredValues = new ArrayList<>();
         switch (getName()) {
@@ -113,7 +117,8 @@ public class Command {
         checkHasValues(requiredValues);
     }
 
-    private void checkHasOnlyArgs(ArrayList<Argument> args) {
+    private void checkHasOnlyArgs(ArrayList<Argument> args)
+            throws IllegalArgumentException {
         if (arguments.size() != args.size() + 1) {
             throw new IllegalArgumentException("command.Command " + getName()
                     + " takes in " + (args.size() + 1) + " argument(s) but "
@@ -127,7 +132,8 @@ public class Command {
         }
     }
 
-    private void checkHasValues(ArrayList<Argument> args) {
+    private void checkHasValues(ArrayList<Argument> args)
+            throws IllegalArgumentException {
         for (Argument arg : args) {
             if (!arguments.containsKey(arg) || arguments.get(arg).equals("")) {
                 throw new IllegalArgumentException("command.Command " + getName()
