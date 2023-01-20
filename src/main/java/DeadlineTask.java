@@ -29,11 +29,13 @@ public class DeadlineTask extends Task {
                 }
             }
         }
-        t.addTask(new DeadlineTask(taskName, deadline));
+        DeadlineTask d = new DeadlineTask(taskName, deadline);
+        t.addTask(d);
+        DeadlineTask.saveTaskData(d, 1);
     }
 
     @Override
     public String toString() {
-        return String.format("  %s%s %s (by: %s)", displayType(), displayMark(), this.taskName, this.deadline);
+        return String.format("%s (by: %s)", super.toString(),  this.deadline);
     }
 }

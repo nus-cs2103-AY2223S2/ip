@@ -1,5 +1,4 @@
 public class ToDo extends Task {
-    protected String taskType;
 
     public ToDo(String taskName) {
         super(taskName);
@@ -15,12 +14,14 @@ public class ToDo extends Task {
                 taskName.append(" ");
             }
         }
-        t.addTask(new ToDo(taskName.toString()));
+        ToDo todo = new ToDo(taskName.toString());
+        t.addTask(todo);
+        ToDo.saveTaskData(todo, 1);
     }
 
     @Override
     public String toString() {
-        return String.format("  %s%s %s", displayType(), displayMark(), this.taskName);
+        return String.format("%s", super.toString());
     }
 
 }

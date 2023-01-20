@@ -14,6 +14,7 @@ public class TaskTracker {
     }
 
     public void listTasks() {
+        System.out.println("    Here are the tasks in your list:");
         int counter = 1;
         for (Task t : taskList) {
             System.out.println(counter + ". " + t.toString());
@@ -21,7 +22,7 @@ public class TaskTracker {
         }
     }
 
-    public void manageTask(String command) throws DukeInputError{
+    public void manageTask(String command) throws DukeInputError {
         String[] input = command.split(" ");
         if ((input.length != 2)) {
             throw new DukeInputError(input[0]);
@@ -32,16 +33,17 @@ public class TaskTracker {
         }
         if (input[0].equals("delete")) {
             Task task = taskList.remove(taskNumber);
-            System.out.println(String.format("     Noted. I've removed this task:\n       %s\n%s",
+            System.out.println(String.format("    Noted. I've removed this task:\n       %s\n%s",
                     task, numTasks()));
         } else {
             boolean completion = input[0].equals("mark");
             Task task = taskList.get(taskNumber);
             task.setCompletion(completion);
+            Task.saveTaskData(task, completion ? 1 : 0);
         }
     }
 
     public String numTasks() {
-        return String.format("     Now you have %d taskList in the list", taskList.size());
+        return String.format("     Now you have %d tasks in the list", taskList.size());
     }
 }

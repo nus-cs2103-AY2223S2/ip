@@ -12,7 +12,7 @@ public class Event extends Task{
         this.taskType = "E";
     }
 
-    public static void createEvent(String command, TaskTracker t) throws DukeInputError{
+    public static void createEvent(String command, TaskTracker t) throws DukeInputError {
         ArrayList<String> input = new ArrayList(Arrays.asList(command.split(" ")));
         if (input.size() <= 1) throw new DukeInputError("event");
         int fromIndex = input.indexOf("/from");
@@ -38,12 +38,14 @@ public class Event extends Task{
                 }
             }
         }
-        t.addTask(new Event(taskName, start, end));
+        System.out.println(taskName);
+        Event e = new Event(taskName, start, end);
+        t.addTask(e);
+        Event.saveTaskData(e, 1);
     }
 
     @Override
     public String toString() {
-        return String.format("  %s%s %s (from: %s to: %s)", displayType(), displayMark(),
-                this.taskName, this.start, this.end);
+        return String.format("%s (from: %s to: %s)", super.toString(), this.start, this.end);
     }
 }
