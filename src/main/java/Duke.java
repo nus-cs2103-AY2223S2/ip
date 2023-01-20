@@ -13,7 +13,7 @@ public class Duke {
         StringBuilder sb = new StringBuilder();
         String text = "";
         sb.append("    ____________________________________________________________\n")
-                .append("    Hello! I'm Duke\n")
+                .append("    Hello! I'm Duke.\n")
                 .append("    What can I do for you?\n")
                 .append("    ____________________________________________________________\n");
         pw.println(sb.toString());  // Welcome Message bye Duke
@@ -21,7 +21,7 @@ public class Duke {
         sb.setLength(0);
         ArrayList<Task> storage2 = new ArrayList<Task>();
         boolean goNext = false;
-        while (true) {  // Echoing
+        while (true) {
             text = br.readLine();
             String[] tempText = text.split(" ", 2);
             switch(tempText[0].toLowerCase()) {
@@ -119,84 +119,75 @@ public class Duke {
                                 .append("    ____________________________________________________________\n");
                     }
                     break;
-                default:
+                default:    // add new Task into the Reminder list
                     Task newTask = new Task(text);
-                    switch (tempText[0]) {
-                        case "todo":
-                            try {
-                                DukeException.validate(tempText.length, 2, "todo");
-                                DukeException.validate(tempText[1], "todo");
-                            } catch (IncorrectNoOfArgumentException ex) {
-                                System.out.println(ex);
-                                goNext = true;
+                    try {
+                        DukeException.validate(tempText.length, 2, tempText[0]);
+                        DukeException.validate(tempText[1], tempText[0]);
+                    } catch (IncorrectNoOfArgumentException ex) {
+                        System.out.println(ex);
+                        goNext = true;
+                        break;
+                    }
+                    if (!goNext) {
+                        switch (tempText[0]) {
+                            case "todo":
+                                newTask = new ToDos(tempText[1]);
                                 break;
-                            }
-                            newTask = new ToDos(tempText[1]);
-                            break;
-                        case "deadline":
-                            try {
-                                DukeException.validate(tempText.length, 2, "deadLine");
-                                DukeException.validate(tempText[1], "deadLine");
-                            } catch (IncorrectNoOfArgumentException ex) {
-                                System.out.println(ex);
-                                goNext = true;
+                            case "deadline":
+                                String[] tempText2 = tempText[1].split("/by", 2);
+                                try {
+                                    DukeException.validate(tempText2.length, 2, "deadLine");
+                                    DukeException.validate(tempText2[1], "deadLine");
+                                } catch (IncorrectNoOfArgumentException ex) {
+                                    System.out.println(ex);
+                                    goNext = true;
+                                    break;
+                                }
+                                if (!goNext) {
+                                    newTask = new Deadline(tempText2[0], tempText2[1]);
+                                }
                                 break;
-                            }
-                            String[] tempText2 = tempText[1].split("/by", 2);
-                            try {
-                                DukeException.validate(tempText2.length, 2, "deadLine");
-                                DukeException.validate(tempText2[1], "deadLine");
-                            } catch (IncorrectNoOfArgumentException ex) {
-                                System.out.println(ex);
-                                goNext = true;
+                            case "event":
+                                String[] tempText3 = tempText[1].split("/from", 2);
+                                try {
+                                    DukeException.validate(tempText3.length, 2, "event");
+                                    DukeException.validate(tempText3[1], "event");
+                                } catch (IncorrectNoOfArgumentException ex) {
+                                    System.out.println(ex);
+                                    goNext = true;
+                                    break;
+                                }
+                                if (!goNext) {
+                                    String[] tempText4 = tempText3[1].split("/to", 2);
+                                    try {
+                                        DukeException.validate(tempText4.length, 2, "event");
+                                        DukeException.validate(tempText4[1], "event");
+                                    } catch (IncorrectNoOfArgumentException ex) {
+                                        System.out.println(ex);
+                                        goNext = true;
+                                        break;
+                                    }
+                                    if (!goNext) {
+                                        newTask = new Event(tempText3[0], tempText4[0], tempText4[1]);
+                                    }
+                                }
                                 break;
-                            }
-                            System.out.println(tempText2[1]);
-                            newTask = new Deadline(tempText2[0], tempText2[1]);
-                            break;
-                        case "event":
-                            try {
-                                DukeException.validate(tempText.length, 2, "event");
-                                DukeException.validate(tempText[1], "event");
-                            } catch (IncorrectNoOfArgumentException ex) {
-                                System.out.println(ex);
-                                goNext = true;
-                                break;
-                            }
-                            String[] tempText3 = tempText[1].split("/from", 2);
-                            try {
-                                DukeException.validate(tempText3.length, 2, "mark");
-                                DukeException.validate(tempText3[1], "event");
-                            } catch (IncorrectNoOfArgumentException ex) {
-                                System.out.println(ex);
-                                goNext = true;
-                                break;
-                            }
-                            String[] tempText4 = tempText3[1].split("/to", 2);
-                            try {
-                                DukeException.validate(tempText4.length, 2, "mark");
-                                DukeException.validate(tempText4[1], "event");
-                            } catch (IncorrectNoOfArgumentException ex) {
-                                System.out.println(ex);
-                                goNext = true;
-                                break;
-                            }
-                            newTask = new Event(tempText3[0], tempText4[0], tempText4[1]);
-                            break;
-                        default:
-                            try {
-                                DukeException.validate2();
-                            } catch (InvalidCommandException ex) {
-                                System.out.println(ex);
-                                goNext = true;
-                                break;
-                            }
+                            default:    // throw an error as the user is trying to call a function that does not exist
+                                try {
+                                    DukeException.validate2();
+                                } catch (InvalidCommandException ex) {
+                                    System.out.println(ex);
+                                    goNext = true;
+                                    break;
+                                }
+                        }
                     }
                     if (!goNext) {
                         storage2.add(newTask);
                     }
                     sb.append("    ____________________________________________________________\n")
-                            .append("    Got it. I've added this task:\n")
+                            .append("    Got it. I've added this task to the list:\n")
                             .append("      ").append(newTask.getTaskInfo())
                             .append("\n    Now you have ").append(storage2.size()).append(" tasks in the list.\n")
                             .append("    ____________________________________________________________\n");

@@ -14,7 +14,7 @@ public class Task {
 
     public String markAsIncomplete() {
         this.isCompleted = false;
-        return "     OK, I've marked this task as not done yet:\n       " + this.getTaskInfo();
+        return "     Alright, I've marked this task as not done yet:\n       " + this.getTaskInfo();
     }
 
     public String getTaskInfo() {
