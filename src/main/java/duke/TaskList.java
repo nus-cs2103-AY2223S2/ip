@@ -1,12 +1,14 @@
 package duke;
+
 import java.util.ArrayList;
 import java.util.Scanner;
 
 import duke.exception.DukeException;
+
 import duke.task.Task;
 
 public class TaskList {
-    private ArrayList<Task> taskStore = new ArrayList<>(100);
+    private ArrayList<Task> tasks = new ArrayList<>(100);
 
     public TaskList() {
 
@@ -17,7 +19,7 @@ public class TaskList {
     }
 
     public void addTask(Task task) {
-        taskStore.add(task);
+        tasks.add(task);
     }
 
     public Task deleteTask(int index) throws DukeException {
@@ -27,7 +29,7 @@ public class TaskList {
             throw new DukeException("I don't recognise that task number.");
         }
         Task task = this.getTaskAtIndex(index);
-        this.taskStore.remove(index);
+        this.tasks.remove(index);
         return task;
     }
 
@@ -62,14 +64,14 @@ public class TaskList {
 
     public String createTaskListString() {
         StringBuffer representation = new StringBuffer();
-        for (Task t : taskStore) {
+        for (Task t : tasks) {
             representation.append(t.getFileRepresentation() + "\n");
         }
         return representation.toString();
     }
 
     public int getSize() {
-        return this.taskStore.size();
+        return this.tasks.size();
     }
 
     @Override
@@ -85,7 +87,7 @@ public class TaskList {
     }
 
     private Task getTaskAtIndex(int index) {
-        return this.taskStore.get(index);
+        return this.tasks.get(index);
     }
 
 }

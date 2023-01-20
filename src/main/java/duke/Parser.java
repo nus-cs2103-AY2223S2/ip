@@ -1,4 +1,5 @@
 package duke;
+
 import java.time.format.DateTimeParseException;
 
 import duke.command.AddCommand;
@@ -8,7 +9,9 @@ import duke.command.ExitCommand;
 import duke.command.ListCommand;
 import duke.command.MarkCommand;
 import duke.command.UnmarkCommand;
+
 import duke.exception.DukeException;
+
 import duke.task.Deadline;
 import duke.task.Event;
 import duke.task.Task;
@@ -24,9 +27,9 @@ public class Parser {
     private static final String TODO_COMMAND = "todo";
     private static final String EVENT_COMMAND = "event";
     private static final String DELETE_COMMAND = "delete";
-    private static final String byIndicator = "/by";
-    private static final String fromIndicator = "/from";
-    private static final String toIndicator = "/to";
+    private static final String BY_INDICATOR = "/by";
+    private static final String FROM_INDICATOR = "/from";
+    private static final String TO_INDICATOR = "/to";
 
     public static Command parseCommand(String command) throws DukeException {
         if (command.equals(Parser.END_COMMAND)) {
@@ -90,8 +93,8 @@ public class Parser {
         case Parser.DEADLINE_COMMAND:
             try {
                 String details = line.split(Parser.DEADLINE_COMMAND)[1].trim();
-                String name = details.split(Parser.byIndicator)[0].trim();
-                String deadline = details.split(Parser.byIndicator)[1].trim();
+                String name = details.split(Parser.BY_INDICATOR)[0].trim();
+                String deadline = details.split(Parser.BY_INDICATOR)[1].trim();
                 if (name.isEmpty() || deadline.isEmpty()) {
                     throw new DukeException("The description and /by of a deadline cannot be empty.");
                 }
@@ -105,9 +108,9 @@ public class Parser {
         case Parser.EVENT_COMMAND:
             try {
                 String details = line.split(Parser.EVENT_COMMAND)[1].trim();
-                String name = details.split(Parser.fromIndicator)[0].trim();
-                String from = details.split(Parser.fromIndicator)[1].split(Parser.toIndicator)[0].trim();
-                String to = details.split(Parser.fromIndicator)[1].split(Parser.toIndicator)[1].trim();
+                String name = details.split(Parser.FROM_INDICATOR)[0].trim();
+                String from = details.split(Parser.FROM_INDICATOR)[1].split(Parser.TO_INDICATOR)[0].trim();
+                String to = details.split(Parser.FROM_INDICATOR)[1].split(Parser.TO_INDICATOR)[1].trim();
                 if (name.isEmpty() || from.isEmpty() || to.isEmpty()) {
                     throw new DukeException("The description, /from and /to of a deadline cannot be empty.");
                 }

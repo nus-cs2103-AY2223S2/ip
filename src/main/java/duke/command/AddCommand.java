@@ -15,10 +15,10 @@ public class AddCommand extends Command {
     }
 
     @Override
-    public void execute(TaskList taskStore, Ui ui, Storage storage) throws DukeException {
-        taskStore.addTask(task);
-        storage.save(taskStore.createTaskListString());
-        ui.showAddTask(task, taskStore);
+    public void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
+        tasks.addTask(task);
+        storage.save(tasks.createTaskListString());
+        ui.showAddTask(task, tasks);
     }
 
 }
