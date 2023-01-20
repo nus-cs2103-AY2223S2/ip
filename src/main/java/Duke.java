@@ -185,7 +185,7 @@ class Deadline extends Task {
             throw new DeadlineByNotSpecified("Deadline task requires keyword '/by'");
         } 
 
-        String taskName = command.substring(9, indexOfBy);
+        String taskName = command.substring(9, indexOfBy - 1);
         if (taskName.equals("")) {
             throw new TaskNameNotSpecified("Deadline description canont be empty.");
         }
@@ -226,7 +226,7 @@ class Event extends Task {
             throw new EventFromToNotSpecified("Event task requires keywords '/from' and '/to'");
         }
 
-        String taskName = command.substring(0, indexOfFrom);
+        String taskName = command.substring(0, indexOfFrom - 1);
         if (taskName.equals("")) {
             throw new TaskNameNotSpecified("The description of an event cannot be empty.");
         }
