@@ -1,7 +1,9 @@
 package duke;
+
 import java.util.Scanner;
 
 import duke.exception.DukeException;
+
 import duke.task.Task;
 
 /** Class that handles user interface */
@@ -61,23 +63,23 @@ public class Ui {
     /**
      * Print user's tasks.
      *
-     * @param taskStore User's task list.
+     * @param tasks User's task list.
      */
-    public void showList(TaskList taskStore) {
+    public void showList(TaskList tasks) {
         System.out.println("Here are the tasks in your list:");
-        System.out.println(taskStore);
+        System.out.println(tasks);
     }
 
     /**
      * Print text for adding task to task list.
      *
      * @param task Task to be added.
-     * @param taskStore Task list.
+     * @param tasks Task list.
      */
-    public void showAddTask(Task task, TaskList taskStore) {
+    public void showAddTask(Task task, TaskList tasks) {
         System.out.println("Got it. I've added this task:");
         System.out.println(task);
-        System.out.println("Now you have " + taskStore.getSize() + " tasks in the list.");
+        System.out.println("Now you have " + tasks.getSize() + " tasks in the list.");
     }
 
     /**
@@ -104,12 +106,12 @@ public class Ui {
      * Print text for deleting task.
      *
      * @param task Deleted task.
-     * @param taskStore Task list.
+     * @param tasks Task list.
      */
-    public void showDeleteTask(Task task, TaskList taskStore) {
+    public void showDeleteTask(Task task, TaskList tasks) {
         System.out.println("Noted. I've removed this task:");
         System.out.println(task);
-        System.out.println("Now you have " + taskStore.getSize() + " tasks in the list.");
+        System.out.println("Now you have " + tasks.getSize() + " tasks in the list.");
     }
 
     /**

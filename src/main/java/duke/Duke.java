@@ -1,6 +1,7 @@
 package duke;
 
 import duke.command.Command;
+
 import duke.exception.DukeException;
 
 /** Class that encapsulates the Duke chatbot */

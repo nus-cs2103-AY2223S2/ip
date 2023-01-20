@@ -23,12 +23,12 @@ public abstract class Command {
     /**
      * Execute this command.
      *
-     * @param taskStore Current task list.
+     * @param tasks Current task list.
      * @param ui User interface.
      * @param storage Storage.
      * @throws DukeException if execution fails.
      */
-    public abstract void execute(TaskList taskStore, Ui ui, Storage storage) throws DukeException;
+    public abstract void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException;
 
     public boolean isExit() {
         return this.isExit;
