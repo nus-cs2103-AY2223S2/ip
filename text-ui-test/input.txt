@@ -1,0 +1,5 @@
+deadline finish homework /by 1st Feb
+event meet my friend /from 2pm /to 1pm
+todo clean house
+list
+bye

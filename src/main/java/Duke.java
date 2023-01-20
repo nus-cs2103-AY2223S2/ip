@@ -69,7 +69,6 @@ public class Duke {
             else {
 
             }
-
             cur = sc.nextLine();
         }
         System.out.println("------------------------------------------------------------------------------");
