@@ -2,6 +2,7 @@ import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.nio.file.Files;
+import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
@@ -22,11 +23,14 @@ public class Duke {
     private static final String fromIndicator = "/from";
     private static final String toIndicator = "/to";
     
-    private static final String filePath = "data/duke.txt";
+    private static final String filePath = "./data/duke.txt";
 
     public static void main(String[] args) {
         try {
-            Files.createDirectory(Paths.get("data"));
+            Path dirPath = Paths.get("./data");
+            if (!Files.exists(dirPath)) {
+                Files.createDirectory(dirPath);
+            }
             File savedData = new File(Duke.filePath);
             savedData.createNewFile();
             Scanner dataReader = new Scanner(savedData);
