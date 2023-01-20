@@ -25,7 +25,9 @@ public class Duke {
     }
 
     public void parseInput(String input) {
-        switch (input) {
+        String[] delimited = input.split(" ");
+        int index;
+        switch (delimited[0].toLowerCase()) {
             case "bye":
                 this.isActive = false;
                 this.printOutput("\t Bye. Hope to see you again soon!");
@@ -34,6 +36,22 @@ public class Duke {
                 System.out.println(LINE);
                 this.tasklist.viewList();
                 System.out.println(LINE);
+                break;
+            case "mark":
+                index = Integer.parseInt(delimited[1]) - 1;
+                if (this.tasklist.mark(index)) {
+                    printOutput("\t I've marked this as done:\n \t " + this.tasklist.get(index));
+                } else {
+                    printOutput("\t The selected task has already been marked as done.");
+                }
+                break;
+            case "unmark":
+                index = Integer.parseInt(delimited[1]) - 1;
+                if (this.tasklist.unmark(index)) {
+                    printOutput("\t I've marked this as not done yet:\n \t " + this.tasklist.get(index));
+                } else {
+                    printOutput("\t The selected task has not yet been marked as done.");
+                }
                 break;
             default:
                 this.tasklist.addTask(input);
