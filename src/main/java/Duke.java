@@ -62,13 +62,16 @@ public class Duke {
                         break;
                     }
                     int taskNumber = Integer.parseInt(tempText[1]);
-                    if (taskNumber <= storage2.size()) {
-                        // need to add in an exception if out of range
+                    if ( (taskNumber <= storage2.size()) && (taskNumber > 0) ) {
                         Task tempTask = storage2.get(taskNumber - 1);
                         sb.append("    ____________________________________________________________\n")
                                 .append(tempTask.markAsDone())
                                 .append("\n    ____________________________________________________________\n");
                         storage2.set(taskNumber -1, tempTask);
+                    } else {
+                        sb.append("    ____________________________________________________________\n")
+                                .append("    The task you are trying to mark is out of range! Try again!\n")
+                                .append("    ____________________________________________________________\n");
                     }
                     break;
                 case "unmark":
@@ -81,13 +84,16 @@ public class Duke {
                         break;
                     }
                     int taskNumber2 = Integer.parseInt(tempText[1]);
-                    if (taskNumber2 <= storage2.size()) {
-                        // need to add in an exception if out of range
+                    if ( (taskNumber2 <= storage2.size()) && (taskNumber2 > 0) ) {
                         Task tempTask = storage2.get(taskNumber2 - 1);
                         sb.append("    ____________________________________________________________\n")
                                 .append(tempTask.markAsIncomplete())
                                 .append("\n    ____________________________________________________________\n");
                         storage2.set(taskNumber2 -1, tempTask);
+                    } else {
+                        sb.append("    ____________________________________________________________\n")
+                                .append("    The task you are trying to unmark is out of range! Try again!\n")
+                                .append("    ____________________________________________________________\n");
                     }
                     break;
                 case "delete":
@@ -100,13 +106,16 @@ public class Duke {
                         break;
                     }
                     int taskNumber3 = Integer.parseInt(tempText[1]);
-                    if (taskNumber3 <= storage2.size()) {
-                        // need to add in an exception if out of range
+                    if ( (taskNumber3 <= storage2.size()) && (taskNumber3 > 0) ) {
                         Task tempTask = storage2.remove(taskNumber3 - 1);
                         sb.append("    ____________________________________________________________\n")
                                 .append("    Noted. I've removed this task:\n")
                                 .append("      ").append(tempTask.getTaskInfo())
                                 .append("\n    Now you have ").append(storage2.size()).append(" tasks in the list.\n")
+                                .append("    ____________________________________________________________\n");
+                    } else {
+                        sb.append("    ____________________________________________________________\n")
+                                .append("    The task you are trying to delete is out of range! Try again!\n")
                                 .append("    ____________________________________________________________\n");
                     }
                     break;
