@@ -1,18 +1,23 @@
 import java.io.*;
+import java.nio.file.*;
 import java.util.*;
+import java.util.stream.*;
 import java.util.regex.*;
 
 public class Chungus {
     private Writer out;
     private ArrayList<Task> tasks;
+    private ChungusDB db;
 
     private static Pattern deadlinePattern = Pattern.compile("^deadline\\s+(.+)\\s+/by\\s+(.+)$");
     private static Pattern eventPattern = Pattern.compile("^event\\s+(.+)\\s+/from\\s+(.+)\\s+/to\\s+(.+)$");
 
+    private final static String defaultDbPath = System.getProperty("user.dir") + "/chungus.db";
+
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
         PrintWriter writer = new PrintWriter(System.out);
-        Chungus chungus = new Chungus(writer);
+        Chungus chungus = new Chungus(writer, defaultDbPath);
 
         while (true) {
             writer.append("chungus> ").flush();
@@ -26,9 +31,26 @@ public class Chungus {
         sc.close();
     }
 
-    public Chungus(Writer _out) {
+    public Chungus(Writer _out, String _dbPath) {
         out = _out;
         tasks = new ArrayList<>();
+
+        File dbFile = new File(_dbPath);
+        if (dbFile.exists() && !dbFile.isFile()) {
+            // this means that the path represents a directory
+            throw new RuntimeException(String.format("%s is not a file", _dbPath));
+        }
+        try {
+            db = new ChungusDB(dbFile);
+            if (dbFile.createNewFile()) {
+                info("Created a database file at %s\n", _dbPath);
+            } else {
+                tasks = new ArrayList<>(db.read());
+                info("Read %s task(s) from %s\n", tasks.size(), _dbPath);
+            }
+        } catch (IOException e) {
+            throw new RuntimeException(String.format("Failed to create/read db file %s", _dbPath), e);
+        }
 
         info("Hello, I'm Chungus.");
         info("What can I do for you?\n");
@@ -38,8 +60,10 @@ public class Chungus {
         try {
             boolean shouldExit = handleInputImpl(msg);
             flush();
+            // overwrite the database after every command
+            db.write(tasks);
             return shouldExit;
-        } catch (TaskNotExistException e) {
+        } catch (TaskNotFoundException e) {
             error("Could not find the requested task. You currently have exactly %d %s",
                     tasks.size(), tasks.size() == 1 ? "task" : "tasks");
             error("Reason: %s", e.getMessage());
@@ -163,7 +187,7 @@ public class Chungus {
         String[] xs = s.split("\\s+");
         int num = Integer.parseInt(xs[xs.length - 1]);
         if (num > tasks.size() || num <= 0)
-            throw new TaskNotExistException(num);
+            throw new TaskNotFoundException(num);
         return num;
     }
 
@@ -198,20 +222,29 @@ public class Chungus {
             throw new RuntimeException(e);
         }
     }
-}
 
-class ChungusException extends RuntimeException {
-    public ChungusException(String msg) {
-        super(msg);
-    }
+    private static class ChungusDB {
+        File file;
 
-    public ChungusException(String msg, Throwable cause) {
-        super(msg, cause);
-    }
-}
+        public ChungusDB(File _file) {
+            file = _file;
+        }
 
-class TaskNotExistException extends ChungusException {
-    public TaskNotExistException(int idx) {
-        super(String.format("Task %d does not exist.", idx));
+        public List<Task> read() throws IOException {
+            return Files
+                    .readAllLines(file.toPath())
+                    .stream()
+                    .map(line -> Task.unmarshal(line))
+                    .collect(Collectors.toList());
+        }
+
+        public void write(List<Task> tasks) {
+            String data = tasks.stream().map(task -> task.marshal()).collect(Collectors.joining("\n"));
+            try {
+                Files.write(file.toPath(), data.getBytes());
+            } catch (IOException e) {
+                throw new RuntimeException("Failed to save tasks to file", e);
+            }
+        }
     }
 }

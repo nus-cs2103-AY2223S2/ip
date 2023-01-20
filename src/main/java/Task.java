@@ -7,7 +7,7 @@ abstract class Task {
 		isDone = false;
 	}
 
-	public String desc() {
+	protected String format() {
 		return (isDone() ? "[X] " : "[ ] ") + desc;
 	}
 
@@ -23,9 +23,35 @@ abstract class Task {
 		isDone = false;
 	}
 
-	public abstract String toString();
-}
+	public String desc() {
+		return desc;
+	}
 
+	@Override
+	public abstract String toString();
+
+	public abstract String marshal();
+
+	public static Task unmarshal(String s) {
+		char typ = s.charAt(0);
+		switch (typ) {
+			case 'T':
+				return Todo.unmarshal(s);
+			case 'D':
+				return Deadline.unmarshal(s);
+			case 'E':
+				return Event.unmarshal(s);
+			default:
+				return null;
+		}
+	}
+
+	protected static void trueOrThrow(boolean cond, RuntimeException t) {
+		if (!cond) {
+			throw t;
+		}
+	}
+}
 
 class Todo extends Task {
 	public Todo(String desc) {
@@ -34,10 +60,36 @@ class Todo extends Task {
 
 	@Override
 	public String toString() {
-		return "[T]" + desc();
+		return "[T]" + format();
+	}
+
+	@Override
+	public String marshal() {
+		StringBuilder builder = new StringBuilder();
+
+		builder.append('T');
+		builder.append(isDone() ? '1' : '0');
+		builder.append(desc());
+
+		return builder.toString();
+	}
+
+	public static Todo unmarshal(String s) {
+		trueOrThrow(s.charAt(0) == 'T', new TaskMarshalException(s));
+
+		boolean isDone = s.charAt(1) == '0' ? false : true;
+
+		String desc = s.substring(2, s.length());
+		Todo ret = new Todo(desc);
+		if (isDone) {
+			ret.setDone();
+		} else {
+			ret.setNotDone();
+		}
+
+		return ret;
 	}
 }
-
 
 class Deadline extends Task {
 	String deadline;
@@ -49,10 +101,49 @@ class Deadline extends Task {
 
 	@Override
 	public String toString() {
-		return "[D]" + desc() + String.format(" (by: %s)", deadline);
+		return "[D]" + format() + String.format(" (by: %s)", deadline);
+	}
+
+	@Override
+	public String marshal() {
+		StringBuilder builder = new StringBuilder();
+
+		builder.append('D');
+		builder.append(isDone() ? '1' : '0');
+		builder.append(Chonk.chonkify(desc()));
+		builder.append(Chonk.chonkify(deadline));
+
+		return builder.toString();
+	}
+
+	public static Deadline unmarshal(String s) {
+		if (s.charAt(0) != 'D') {
+			throw new TaskMarshalException(s);
+		}
+		boolean isDone = s.charAt(1) == '0' ? false : true;
+
+		int idx = 2;
+		Pair<String, Integer> dechonked;
+
+		dechonked = Chonk.dechonkify(s, idx);
+		trueOrThrow(dechonked != null, new TaskMarshalException(s));
+		String desc = dechonked.first();
+		idx = dechonked.second();
+
+		dechonked = Chonk.dechonkify(s, idx);
+		trueOrThrow(dechonked != null, new TaskMarshalException(s));
+		String deadline = dechonked.first();
+
+		Deadline ret = new Deadline(desc, deadline);
+		if (isDone) {
+			ret.setDone();
+		} else {
+			ret.setNotDone();
+		}
+
+		return ret;
 	}
 }
-
 
 class Event extends Task {
 	String from, to;
@@ -65,6 +156,52 @@ class Event extends Task {
 
 	@Override
 	public String toString() {
-		return "[E]" + desc() + String.format(" (from: %s to: %s)", from, to);
+		return "[E]" + format() + String.format(" (from: %s to: %s)", from, to);
+	}
+
+	@Override
+	public String marshal() {
+		StringBuilder builder = new StringBuilder();
+
+		builder.append('E');
+		builder.append(isDone() ? '1' : '0');
+		builder.append(Chonk.chonkify(desc()));
+		builder.append(Chonk.chonkify(from));
+		builder.append(Chonk.chonkify(to));
+
+		return builder.toString();
+	}
+
+	public static Event unmarshal(String s) {
+		if (s.charAt(0) != 'E') {
+			throw new TaskMarshalException(s);
+		}
+		boolean isDone = s.charAt(1) == '0' ? false : true;
+
+		int idx = 2;
+		Pair<String, Integer> dechonked;
+
+		dechonked = Chonk.dechonkify(s, idx);
+		trueOrThrow(dechonked != null, new TaskMarshalException(s));
+		String desc = dechonked.first();
+		idx = dechonked.second();
+
+		dechonked = Chonk.dechonkify(s, idx);
+		trueOrThrow(dechonked != null, new TaskMarshalException(s));
+		String from = dechonked.first();
+		idx = dechonked.second();
+
+		dechonked = Chonk.dechonkify(s, idx);
+		trueOrThrow(dechonked != null, new TaskMarshalException(s));
+		String to = dechonked.first();
+
+		Event ret = new Event(desc, from, to);
+		if (isDone) {
+			ret.setDone();
+		} else {
+			ret.setNotDone();
+		}
+
+		return ret;
 	}
 }
