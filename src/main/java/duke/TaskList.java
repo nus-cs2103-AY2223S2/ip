@@ -115,7 +115,7 @@ public class TaskList {
             this.tasks.get(ind).mark();
             indexes.add(ind);
         };
-        this.find(indStr, mark);
+        this.consume(indStr, mark);
         this.save();
         if (indexes.size() == 0) {
             throw new IllegalArgumentException("No tasks found.");
@@ -144,7 +144,7 @@ public class TaskList {
             }
             indexes.add(ind);
         };
-        this.find(indStr, delete);
+        this.consume(indStr, delete);
         if (indexes.size() == 0) {
             throw new IllegalArgumentException("No tasks found.");
         } else if (indexes.size() == 1) {
@@ -181,7 +181,7 @@ public class TaskList {
         String keyword = argument[0].toLowerCase();
         List<Task> matches = this.tasks.stream()
             .parallel()
-            .filter(t -> t.desc.toLowerCase().contains(keyword))
+            .filter(t -> t.getDesc().toLowerCase().contains(keyword))
             .toList();
         if (matches.size() < 1){
             return new String[]{"No matches found."};

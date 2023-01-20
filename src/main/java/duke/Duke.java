@@ -87,6 +87,7 @@ public class Duke {
         this.ui.print();
       }
     }
+    scanner.close();
   }
 
     /**

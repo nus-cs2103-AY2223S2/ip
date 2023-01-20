@@ -34,6 +34,14 @@ public class Task implements Serializable {
     }
 
     /**
+     * Returns the description of the task.
+     * @return description of the task.
+     */
+    public String getDesc() {
+      return this.desc;
+  }
+
+    /**
      * Returns the status of the task.
      * @return True if the task is marked as done.
      */
