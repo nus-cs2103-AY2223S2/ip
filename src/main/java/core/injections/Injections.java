@@ -1,10 +1,4 @@
 package core.injections;
-
-import domain.models.core.Executable;
-import domain.models.core.Writable;
-import domain.usecases.ByeUsecase;
-import presentation.ui.SystemOut;
-
 import java.util.HashMap;
 import java.util.Map;
 import java.util.function.Supplier;

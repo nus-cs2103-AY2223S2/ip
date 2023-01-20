@@ -5,11 +5,7 @@ import domain.models.core.ExecutableRegisterable;
 import domain.models.core.ExitStatus;
 import domain.models.core.IdentifiableExecutable;
 import domain.models.core.NestableExecutableObject;
-import domain.models.taskmanager.Deadline;
-import domain.models.taskmanager.Event;
-import domain.models.taskmanager.Task;
-import domain.models.taskmanager.ToDo;
-
+import domain.models.taskmanager.*;
 import java.util.ArrayList;
 
 /**
