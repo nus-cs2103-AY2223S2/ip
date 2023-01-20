@@ -2,7 +2,7 @@ import java.util.*;
 
 public class Duke {
     public static void main(String[] args) {
-        String[] inputs = new String[100];
+        ArrayList<Task> tasks = new ArrayList<>();
 
         Scanner sc = new Scanner(System.in);
 
@@ -13,27 +13,32 @@ public class Duke {
                 + "|____/ \\__,_|_|\\_\\___|\n";
         System.out.println("Hello from\n" + logo);
 
-        int index = -1;
+        int index = 0;
         String lineBreak = "***---***---***---***---***---***---***" + "\n" + "    ";
 
         while (sc.hasNext()) {
-            String input = sc.nextLine();
-            if (input.equals("bye")) {
+            String firstWord = sc.next();
+            if (firstWord.equals("bye")) {
                 System.out.println(lineBreak + "\n" + "    GoodBye, have a nice day!");
                 break;
-            } else if (input.equals("list")) {
-                StringBuilder sb = new StringBuilder();
-                for (int i = 1; i <= 100; i++) {
-                    if (inputs[i - 1] != null) {
-                        sb.append(i + ". " + input + "\n");
-                    }
+            } else if (firstWord.equals("list")) {
+                for (Task t : tasks) {
+                    System.out.println(t);
                 }
-
-                System.out.println(lineBreak + sb.toString());
-            } else {
+            } else if (firstWord.equals("mark")) {
+                int ind = Integer.parseInt(sc.next());
+                Task updatedTask = tasks.get(ind).mark();
+                tasks.set(ind, updatedTask);
+            } else if (firstWord.equals("unmark")) {
+                int ind = Integer.parseInt(sc.next());
+                Task updatedTask = tasks.get(ind).unmark();
+                tasks.set(ind, updatedTask);
+            }
+            else {
                 index++;
-                inputs[index] = input;
-                System.out.println(lineBreak + "added: " + input);
+                String remaining = sc.nextLine();
+                Task task = new Task(index, firstWord + remaining, false);
+                tasks.add(task);
             }
         }
     }
