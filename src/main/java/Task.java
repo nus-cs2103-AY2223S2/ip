@@ -24,6 +24,10 @@ public class Task {
         this.doneOrNot = true;
     }
 
+    public void unstrike() {
+        this.doneOrNot = false;
+    }
+
     public String getName() {
         return name;
     }
