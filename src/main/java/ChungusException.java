@@ -16,6 +16,6 @@ class TaskNotFoundException extends ChungusException {
 
 class TaskMarshalException extends ChungusException {
 	public TaskMarshalException(String s) {
-		super(String.format("Bad marshalled format: \"%s\"", s));
+		super(String.format("Bad marshal format: \"%s\"", s));
 	}
 }

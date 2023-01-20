@@ -1,6 +1,11 @@
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+
 abstract class Task {
 	private String desc;
 	private boolean isDone;
+
+	protected final static DateTimeFormatter dateTimeFmt = DateTimeFormatter.ISO_LOCAL_DATE_TIME;
 
 	public Task(String _desc) {
 		desc = _desc;
@@ -92,9 +97,9 @@ class Todo extends Task {
 }
 
 class Deadline extends Task {
-	String deadline;
+	LocalDateTime deadline;
 
-	public Deadline(String desc, String _deadline) {
+	public Deadline(String desc, LocalDateTime _deadline) {
 		super(desc);
 		deadline = _deadline;
 	}
@@ -111,7 +116,7 @@ class Deadline extends Task {
 		builder.append('D');
 		builder.append(isDone() ? '1' : '0');
 		builder.append(Chonk.chonkify(desc()));
-		builder.append(Chonk.chonkify(deadline));
+		builder.append(Chonk.chonkify(deadline.format(dateTimeFmt)));
 
 		return builder.toString();
 	}
@@ -134,7 +139,7 @@ class Deadline extends Task {
 		trueOrThrow(dechonked != null, new TaskMarshalException(s));
 		String deadline = dechonked.first();
 
-		Deadline ret = new Deadline(desc, deadline);
+		Deadline ret = new Deadline(desc, LocalDateTime.parse(deadline, dateTimeFmt));
 		if (isDone) {
 			ret.setDone();
 		} else {
@@ -146,9 +151,9 @@ class Deadline extends Task {
 }
 
 class Event extends Task {
-	String from, to;
+	LocalDateTime from, to;
 
-	public Event(String desc, String _from, String _to) {
+	public Event(String desc, LocalDateTime _from, LocalDateTime _to) {
 		super(desc);
 		from = _from;
 		to = _to;
@@ -166,8 +171,8 @@ class Event extends Task {
 		builder.append('E');
 		builder.append(isDone() ? '1' : '0');
 		builder.append(Chonk.chonkify(desc()));
-		builder.append(Chonk.chonkify(from));
-		builder.append(Chonk.chonkify(to));
+		builder.append(Chonk.chonkify(from.format(dateTimeFmt)));
+		builder.append(Chonk.chonkify(to.format(dateTimeFmt)));
 
 		return builder.toString();
 	}
@@ -195,7 +200,7 @@ class Event extends Task {
 		trueOrThrow(dechonked != null, new TaskMarshalException(s));
 		String to = dechonked.first();
 
-		Event ret = new Event(desc, from, to);
+		Event ret = new Event(desc, LocalDateTime.parse(from, dateTimeFmt), LocalDateTime.parse(to, dateTimeFmt));
 		if (isDone) {
 			ret.setDone();
 		} else {

@@ -1,8 +1,17 @@
-import java.io.*;
-import java.nio.file.*;
-import java.util.*;
-import java.util.stream.*;
-import java.util.regex.*;
+import java.io.File;
+import java.io.IOException;
+import java.io.PrintWriter;
+import java.io.Writer;
+import java.nio.file.Files;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Scanner;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+import java.util.stream.Collectors;
 
 public class Chungus {
     private Writer out;
@@ -13,6 +22,8 @@ public class Chungus {
     private static Pattern eventPattern = Pattern.compile("^event\\s+(.+)\\s+/from\\s+(.+)\\s+/to\\s+(.+)$");
 
     private final static String defaultDbPath = System.getProperty("user.dir") + "/chungus.db";
+
+    private final static DateTimeFormatter dateTimeFmt = DateTimeFormatter.ofPattern("dd/MM/yyyy HHmm");
 
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
@@ -110,7 +121,7 @@ public class Chungus {
                 }
 
                 String desc = matcher.group(1);
-                String deadline = matcher.group(2);
+                LocalDateTime deadline = parseLocalDateTime(matcher.group(2));
 
                 Deadline task = new Deadline(desc, deadline);
                 tasks.add(task);
@@ -126,8 +137,8 @@ public class Chungus {
                 }
 
                 String desc = matcher.group(1);
-                String from = matcher.group(2);
-                String to = matcher.group(3);
+                LocalDateTime from = parseLocalDateTime(matcher.group(2));
+                LocalDateTime to = parseLocalDateTime(matcher.group(3));
 
                 Event task = new Event(desc, from, to);
                 tasks.add(task);
@@ -189,6 +200,14 @@ public class Chungus {
         if (num > tasks.size() || num <= 0)
             throw new TaskNotFoundException(num);
         return num;
+    }
+
+    private static LocalDateTime parseLocalDateTime(String s) {
+        try {
+            return LocalDateTime.parse(s, dateTimeFmt);
+        } catch (DateTimeParseException e) {
+            throw new ChungusException(String.format("Bad datetime format \"%s\": expected dd/MM/yyyy HHmm", s), e);
+        }
     }
 
     private void info(String msg, Object... args) {
