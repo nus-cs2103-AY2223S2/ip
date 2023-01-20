@@ -20,3 +20,6 @@ text-ui-test/data/
 
 # storage
 data/
+
+# artifacts
+out/artifacts/ip_jar
