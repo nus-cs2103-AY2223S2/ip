@@ -1,5 +1,7 @@
 import java.util.Scanner;
 import java.util.ArrayList;
+import java.io.FileNotFoundException;
+import java.io.IOException;
 
 public class Duke {
     public static void main(String[] args) {
@@ -16,12 +18,26 @@ public class Duke {
 
         Scanner scanner = new Scanner(System.in);
         ArrayList<Task> list = new ArrayList<>();
-        int index = 0;
+
+        try {
+            FileReadWrite.readFile(list);
+        } catch (FileNotFoundException f) {
+            System.out.println(f.getMessage());
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        int index = list.size();
         String input = scanner.nextLine();
         while(!input.equals("bye")){
             if (input.contains("unmark")){
                 int i = Integer.parseInt(input.substring(7,8));
-                unmarkTask(list, i);
+                Task t = unmarkTask(list, i);
+                try {
+                    FileReadWrite.writeUnmark(i, t);
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
                 line();
                 indent("Alright! I've unmarked this task :(\n");
                 indent("  " + list.get(i - 1));
@@ -29,7 +45,12 @@ public class Duke {
             }
             else if (input.contains("mark")){
                 int i = Integer.parseInt(input.substring(5,6));
-                markTask(list, i);
+                Task t = markTask(list, i);
+                try {
+                    FileReadWrite.writeMark(i, t);
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
                 line();
                 indent("OK! I've marked this task as complete :)\n");
                 indent("  " + list.get(i - 1));
@@ -43,6 +64,11 @@ public class Duke {
                 indent(String.format("Now you have %d tasks in the list", index - 1));
                 line();
                 delete(list, i);
+                try{
+                    FileReadWrite.writeDelete(i);
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
                 index--;
             }
             else{
@@ -57,6 +83,11 @@ public class Duke {
                         try {
                             Task newTask = parseInput(input);
                             list.add(newTask);
+                            try{
+                                FileReadWrite.writeTask(list);
+                            } catch (IOException e) {
+                                e.printStackTrace();
+                            }
                             index++;
                             line();
                             indent("Roger! I've added this task to the list:\n");
@@ -96,12 +127,18 @@ public class Duke {
         }
     }
 
-    public static void markTask(ArrayList<Task> list, int index){
-        list.get(index - 1).mark();
+    public static Task markTask(ArrayList<Task> list, int index){
+
+        Task  t = list.get(index - 1);
+        t.mark();
+        return t;
     }
 
-    public static void unmarkTask(ArrayList<Task> list, int index){
-        list.get(index - 1).unmark();
+    public static Task unmarkTask(ArrayList<Task> list, int index){
+
+        Task t = list.get(index-1);
+        t.unmark();
+        return t;
     }
 
     public static void delete(ArrayList<Task> list, int index){
@@ -114,21 +151,21 @@ public class Duke {
             if (input.equals("todo")){
                 throw new EmptyArgException("Did not provide argument");
             }
-            newTask = new Todo(input.substring(5));
+            newTask = new Todo(input.substring(5), false);
             return newTask;
         } else if (input.contains("deadline")){
             if (input.equals("deadline")){
                 throw new EmptyArgException("Did not provide argument");
             }
             String[] arr = input.substring(9).split("/");
-            newTask = new Deadline(arr[1], arr[0]);
+            newTask = new Deadline(arr[0],false, arr[1]);
             return newTask;
         } else if (input.contains("event")){
             if (input.equals("event")){
                 throw new EmptyArgException("Did not provide argument");
             }
             String[] arr = input.substring(6).split("/");
-            newTask = new Event(arr[1], arr[2], arr[0]);
+            newTask = new Event(arr[0],false, arr[1], arr[2]);
             return newTask;
         } else {
             throw new UnknownInputException("Unknown Input!");
