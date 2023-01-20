@@ -132,16 +132,24 @@ public class Duke {
                         System.out.println("You didn't type a todo man!");
                     }
                 } else if (frontWord.equals("deadline")) {
-                    String actualDeadlineTask = userTyped.split(" ", 2)[1].split(" /by ",2)[0];
-                    String byWhen = userTyped.split(" ", 2)[1].split(" /by ",2)[1];
-                    addTimeSensitive(actualDeadlineTask,byWhen);
+                    try {
+                        String actualDeadlineTask = userTyped.split(" ", 2)[1].split(" /by ",2)[0];
+                        String byWhen = userTyped.split(" ", 2)[1].split(" /by ",2)[1];
+                        addTimeSensitive(actualDeadlineTask,byWhen);
+                    } catch (ArrayIndexOutOfBoundsException e) {
+                        System.out.println("You didn't type a deadline man!");
+                    }
                 } else if (frontWord.equals("event")) {
-                    String actualEvent = userTyped.split(" ",2)[1].split(" /from ", 2)[0];
-                    String startTime =  userTyped.split(" ",2)[1].split(" /from ", 2)[1]
-                                        .split(" /to ",2)[0];
-                    String endTime =  userTyped.split(" ",2)[1].split(" /from ", 2)[1]
-                            .split(" /to ",2)[1];
-                    addAnEvent(actualEvent,startTime,endTime);
+                    try {
+                        String actualEvent = userTyped.split(" ",2)[1].split(" /from ", 2)[0];
+                        String startTime =  userTyped.split(" ",2)[1].split(" /from ", 2)[1]
+                                .split(" /to ",2)[0];
+                        String endTime =  userTyped.split(" ",2)[1].split(" /from ", 2)[1]
+                                .split(" /to ",2)[1];
+                        addAnEvent(actualEvent,startTime,endTime);
+                    } catch (ArrayIndexOutOfBoundsException e) {
+                        System.out.println("You didn't type an event man!");
+                    }
                 } else {
                     System.out.println("Try again fat fingers!");
                 }
