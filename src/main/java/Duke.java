@@ -58,7 +58,7 @@ public class Duke {
                             + " " + thingInList.getName());
                 }
             }
-            System.out.print(txt);
+            System.out.println(txt);
         }
     public static void main(String[] args) {
         //start by greeting
@@ -76,6 +76,7 @@ public class Duke {
                     displayLst();
                 } else if (frontWord.equals("mark")) {
                     completeTask(userTyped.substring(userTyped.length() - 1));
+
                 } else {
                     //else the user is just adding another thing to list
                     addStufftoLst(userTyped);
