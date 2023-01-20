@@ -2,6 +2,11 @@ package duke.tasks;
 
 import java.time.LocalDateTime;
 
+/**
+ * Deadlines tasks tracks when the task has to be completed by.
+ *
+ * @author Cheam Jia wei
+ */
 public class Deadlines extends Task {
     private LocalDateTime end;
 

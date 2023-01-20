@@ -3,8 +3,13 @@ package duke.commands;
 import duke.Storage;
 import duke.TaskList;
 import duke.Ui;
-import duke.tasks.*;
+import duke.tasks.Task;
 
+/**
+ * Command to be executed when an Events task is to be created.
+ *
+ * @author Cheam Jia Wei
+ */
 public class EventCommand extends Command {
     private String input;
 

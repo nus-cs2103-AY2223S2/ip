@@ -3,8 +3,13 @@ package duke.commands;
 import duke.Storage;
 import duke.TaskList;
 import duke.Ui;
-import duke.tasks.*;
+import duke.tasks.Task;
 
+/**
+ * Command to be executed when a Todos task is to be created.
+ *
+ * @author Cheam Jia Wei
+ */
 public class TodoCommand extends Command {
     private String input;
 

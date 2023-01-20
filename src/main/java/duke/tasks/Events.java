@@ -2,6 +2,11 @@ package duke.tasks;
 
 import java.time.LocalDateTime;
 
+/**
+ * Events task tracks when the task starts and ends.
+ *
+ * @author Cheam Jia Wei
+ */
 public class Events extends Task {
     private LocalDateTime start;
     private LocalDateTime end;
