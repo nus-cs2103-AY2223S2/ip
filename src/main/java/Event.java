@@ -1,7 +1,9 @@
+import java.time.LocalDateTime;
+
 public class Event extends Task {
-    private String startDateTime;
-    private String endDateTime;
-    public Event(String description, String startDateTime, String endDateTime) {
+    private LocalDateTime startDateTime;
+    private LocalDateTime endDateTime;
+    public Event(String description, LocalDateTime startDateTime, LocalDateTime endDateTime) {
         super(description);
         this.startDateTime = startDateTime;
         this.endDateTime = endDateTime;
@@ -15,6 +17,7 @@ public class Event extends Task {
 
     @Override
     public String toString() {
-        return "[E]" + super.toString() + "(from: " + startDateTime + "to: " + endDateTime + ")";
+        return "[E]" + super.toString() + "(from: " + startDateTime.format(Task.format) + "to: "
+                + endDateTime.format(Task.format) + ")";
     }
 }

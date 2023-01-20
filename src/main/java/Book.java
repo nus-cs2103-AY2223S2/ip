@@ -2,8 +2,14 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
+
 import java.nio.file.Path;
 import java.nio.file.Paths;
+
+import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
+import java.time.LocalDateTime;
+
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -48,10 +54,10 @@ public class Book {
         while (!command.equals("bye")) {
             try {
                 parse(command);
-            } catch (InvalidInputException exception){
+            } catch (InvalidInputException | IncompleteInputException exception){
                 System.out.print(LINE + exception.getMessage() + "\n" + LINE);
-            } catch (IncompleteInputException exception){
-                System.out.print(LINE + exception.getMessage() + "\n" + LINE);
+            } catch (DateTimeParseException exception) {
+                System.out.print(LINE + "Please use the format dd/MM/yy-HHmm.\n" + LINE);
             } finally {
                 save(bookSave, list);
                 command = input.nextLine();
@@ -69,9 +75,9 @@ public class Book {
                 if (task[0].equals("T")) {
                     list.add(new ToDo(task[2]));
                 } else if (task[0].equals("D")) {
-                    list.add(new Deadline(task[2], task[3]));
+                    list.add(new Deadline(task[2], parseDateTime(task[3])));
                 } else {
-                    list.add(new Event(task[2], task[3], task[4]));
+                    list.add(new Event(task[2], parseDateTime(task[3]), parseDateTime(task[4])));
                 }
                 if (task[1].equals("true")) {
                     list.get(index).mark();
@@ -93,16 +99,25 @@ public class Book {
             System.out.println("Book was unable to write to the history book.");
         }
     }
-    private static void parse(String text) throws InvalidInputException, IncompleteInputException {
+
+    public static LocalDateTime parseDateTime(String dateTime) throws DateTimeParseException {
+        DateTimeFormatter format = DateTimeFormatter.ofPattern("dd/MM/yy-HHmm");
+        return LocalDateTime.parse(dateTime, format);
+    }
+    private static void parse(String text) throws InvalidInputException, IncompleteInputException,
+            DateTimeParseException {
         String[] inputs = text.split(" ", 2);
-        if (inputs[0].equals("list")) {
+        switch (inputs[0]) {
+        case "list":
             System.out.print(LINE + "Here are the tasks stored in Book:\n");
             for (int i = 0; i < index; i++) {
                 System.out.println((i + 1) + ".  " + list.get(i));
             }
             System.out.print(LINE);
-        } else if (inputs[0].equals("mark") || inputs[0].equals("unmark")
-                || inputs[0].equals("delete")) {
+            break;
+        case "mark":
+        case "unmark":
+        case "delete":
             if (inputs.length < 2) {
                 throw new IncompleteInputException("Without the index, Book cannot find the task" +
                         "you are looking for.");
@@ -123,43 +138,46 @@ public class Book {
                 System.out.print(LINE + "Acknowledged, striking the following task off the list:\n    "
                         + task + "\n" + index + " task(s) remain on the list.\n" + LINE);
             }
-        } else if (inputs[0].equals("todo")) {
+            break;
+        case "todo":
             if (inputs.length < 2) {
                 throw new IncompleteInputException("The description of the todo is missing.");
             }
-            int addedToDoIndex = index++;
             ToDo newToDo = new ToDo(inputs[1]);
             list.add(newToDo);
             System.out.print(LINE + "Understood, adding:\n    " + newToDo
-                    + "\nThere are " + index + " task(s) in Book\n" + LINE);
-        } else if (inputs[0].equals("deadline")) {
+                    + "\nThere are " + ++index + " task(s) in Book\n" + LINE);
+            break;
+        case "deadline":
             if (inputs.length < 2) {
                 throw new IncompleteInputException("The deadline is missing some information.");
             }
-            int addedDeadlineIndex = index++;
             String[] deadlineDetails = inputs[1].split("/by ", 2);
             if (deadlineDetails.length < 2) {
                 throw new IncompleteInputException("The deadline is missing.");
             }
-            Deadline newDeadLine = new Deadline(deadlineDetails[0], deadlineDetails[1]);
+            Deadline newDeadLine = new Deadline(deadlineDetails[0],
+                    parseDateTime(deadlineDetails[1]));
             list.add(newDeadLine);
             System.out.print(LINE + "Understood, adding the deadline:\n    " + newDeadLine
-                    + "\nThere are " + index + " task(s) in Book.\n" + LINE);
-        } else if (inputs[0].equals("event")) {
+                    + "\nThere are " + ++index + " task(s) in Book.\n" + LINE);
+            break;
+        case "event":
             if (inputs.length < 2) {
                 throw new IncompleteInputException("The event is missing some information.");
             }
-            int addedEventIndex = index++;
-            String[] eventDetails = inputs[1].split("/from |/to ", 3);
-            if (eventDetails.length < 2) {
+            String[] eventDetails = inputs[1].split("/from | /to ", 3);
+            if (eventDetails.length < 3) {
                 throw new IncompleteInputException("The information regarding event duration is "
                         + "missing.");
             }
-            Event newEvent = new Event(eventDetails[0], eventDetails[1], eventDetails[2]);
+            Event newEvent = new Event(eventDetails[0], parseDateTime(eventDetails[1]),
+                    parseDateTime(eventDetails[2]));
             list.add(newEvent);
             System.out.print(LINE + "Understood, adding the event:\n    " + newEvent
-                    + "\nThere are " + index + " task(s) in Book.\n" + LINE);
-        } else {
+                    + "\nThere are " + ++index + " task(s) in Book.\n" + LINE);
+            break;
+        default:
             throw new InvalidInputException("Sorry, this command is not in Book's dictionary.");
         }
     }
