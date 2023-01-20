@@ -32,7 +32,20 @@ public class Task {
         return name;
     }
 
+    public String getCompletedOrNotSign() {
+        if (!doneOrNot) {
+            return "[ ] ";
+        } else {
+            return "[X] ";
+        }
+    }
+
     public int getRank() {
         return rank;
+    }
+
+    @Override
+    public String toString() {
+        return this.getCompletedOrNotSign() + " " + this.name;
     }
 }
