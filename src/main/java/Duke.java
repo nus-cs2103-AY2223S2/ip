@@ -24,7 +24,7 @@ public class Duke {
             } else if (firstWord.equals("list")) {
                 System.out.println(lineBreak);
                 for (Task t : tasks) {
-                    System.out.println(t);
+                    System.out.println("    " + t);
                 }
             } else if (firstWord.equals("mark")) {
                 int ind = Integer.parseInt(sc.next());
@@ -33,7 +33,7 @@ public class Duke {
                 } else {
                     Task updatedTask = tasks.get(ind - 1).mark();
                     tasks.set(ind - 1, updatedTask);
-                    System.out.println(lineBreak + "Congrats on completing the following task:\n" + updatedTask);
+                    System.out.println(lineBreak + "Congrats on completing the following task:\n    " + updatedTask);
                 }
             } else if (firstWord.equals("unmark")) {
                 int ind = Integer.parseInt(sc.next());
@@ -42,33 +42,33 @@ public class Duke {
                 } else {
                     Task updatedTask = tasks.get(ind - 1).unmark();
                     tasks.set(ind - 1, updatedTask);
-                    System.out.println(lineBreak + "Unchecked the following task:\n" + updatedTask);
+                    System.out.println(lineBreak + "Unchecked the following task:\n    " + updatedTask);
                 }
             }
             else if (firstWord.equals("deadline")) {
                 index++;
                 String remaining = sc.nextLine();
                 String[] parts = remaining.split("/");
-                Deadline task = new Deadline(index, firstWord + remaining, false, parts[1]);
+                Deadline task = new Deadline(index, parts[0], false, parts[1]);
                 tasks.add(task);
-                System.out.println(lineBreak + "Successfully added the following task:\n" + task);
+                System.out.println(lineBreak + "Successfully added the following task:\n    " + task);
             }
 
             else if (firstWord.equals("event")) {
                 index++;
                 String remaining = sc.nextLine();
                 String[] parts = remaining.split("/");
-                Event task = new Event(index, firstWord + remaining, false, parts[1], parts[2]);
+                Event task = new Event(index, parts[0], false, parts[1], parts[2]);
                 tasks.add(task);
-                System.out.println(lineBreak + "Successfully added the following task:\n" + task);
+                System.out.println(lineBreak + "Successfully added the following task:\n    " + task);
             }
 
             else if (firstWord.equals("todo")) {
                 index++;
                 String remaining = sc.nextLine();
-                Todo task = new Todo(index, firstWord + remaining, false);
+                Todo task = new Todo(index, remaining, false);
                 tasks.add(task);
-                System.out.println(lineBreak + "Successfully added the following task:\n" + task);
+                System.out.println(lineBreak + "Successfully added the following task:\n    " + task);
             }
         }
     }

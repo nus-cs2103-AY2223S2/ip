@@ -5,3 +5,30 @@ Hello from
 | |_| | |_| |   <  __/
 |____/ \__,_|_|\_\___|
 
+***---***---***---***---***---***---***
+    Successfully added the following task:
+    1.[T][ ]  borrow book
+***---***---***---***---***---***---***
+    Successfully added the following task:
+    2.[D][ ]  return book (by Sunday)
+***---***---***---***---***---***---***
+    Successfully added the following task:
+    3.[E][ ]  project meeting (from Mon 2pm to 4pm)
+***---***---***---***---***---***---***
+    
+    1.[T][ ]  borrow book
+    2.[D][ ]  return book (by Sunday)
+    3.[E][ ]  project meeting (from Mon 2pm to 4pm)
+***---***---***---***---***---***---***
+    Congrats on completing the following task:
+    1.[T][X]  borrow book
+***---***---***---***---***---***---***
+    Congrats on completing the following task:
+    2.[D][X]  return book (by Sunday)
+***---***---***---***---***---***---***
+    
+    1.[T][X]  borrow book
+    2.[D][X]  return book (by Sunday)
+    3.[E][ ]  project meeting (from Mon 2pm to 4pm)
+***---***---***---***---***---***---***
+    GoodBye, have a nice day!
