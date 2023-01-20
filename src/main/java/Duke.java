@@ -27,7 +27,7 @@ public class Duke {
                     toMarkUndone.markUndone();
                     System.out.printf("OK, I've marked this task as not done yet:\n %s\n", toMarkUndone.description());
                 } else if (firstWord.equals("todo")) {
-                    Task newTask = new ToDos(line);
+                    Task newTask = new ToDos(line.substring(5));
                     tasks.add(newTask);
                     System.out.printf("Got it. I've added this task:\n %s \n Now you have %d tasks in the list.\n",
                             newTask.description(), tasks.size());
@@ -48,6 +48,13 @@ public class Duke {
                     tasks.add(newTask);
                     System.out.printf("Got it. I've added this task:\n %s \n Now you have %d tasks in the list.\n",
                             newTask.description(), tasks.size());
+                } else if (firstWord.equals("delete")) {
+                    Task toDelete = tasks.get(Integer.parseInt(line.split(" ")[1]) - 1);
+                    tasks.remove(Integer.parseInt(line.split(" ")[1]) - 1);
+                    System.out.printf("Noted. I've removed this task:\n %s \n Now you have %d tasks in the list.\n",
+                            toDelete.description(), tasks.size());
+                } else {
+                    throw new DukeException();
                 }
                 line = br.readLine();
             }
@@ -55,6 +62,10 @@ public class Duke {
         }
         catch (IOException ioe) {
             System.out.println("IO Exception raised");
+        } catch (DukeException e) {
+            System.out.println("☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
+        } catch (StringIndexOutOfBoundsException oobe) {
+            System.out.println("☹ OOPS!!! The description of a task cannot be empty.");
         }
     }
 }
