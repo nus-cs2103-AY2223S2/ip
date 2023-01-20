@@ -27,7 +27,7 @@ public class Duke {
     public static boolean isValidTask(String[] command) {
         String idx = command[1];
 
-        // If idx is not an integer or idx is out of bounds
+        // False if idx is not an integer or idx is out of bounds
         return (!idx.matches("-?\\d+")
                 || Integer.parseInt(idx) < 1
                 || Integer.parseInt(idx) > taskList.size());
@@ -42,7 +42,7 @@ public class Duke {
             throw new DukeException("    > chu gave me no task");
         }
 
-        if (isValidTask(command)) {
+        if (!isValidTask(command)) {
             throw new DukeException("    > aint no such task available");
         }
     }
