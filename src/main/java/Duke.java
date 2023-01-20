@@ -1,3 +1,4 @@
+import java.util.ArrayList;
 import java.util.Scanner;
 public class Duke {
         String logo = " ____        _        \n"
@@ -17,7 +18,7 @@ public class Duke {
     static String howLongListNowMessage = "\nNow you have " + numOfThings + " tasks in the list";
 
         //assume no more than 100 tasks
-        static Task[] lstOfTasks = new Task[100];
+        static ArrayList<Task> lstOfTasks = new ArrayList<>();
 
         //method to greet
         public static void hello() {
@@ -29,7 +30,7 @@ public class Duke {
         }
 
         public static void addStufftoLst(String xx) {
-            lstOfTasks[numOfThings] = new Task(xx);
+            lstOfTasks.add(new Task(xx));
             numOfThings += 1;
             System.out.println("added: " + xx);
         }
@@ -82,7 +83,7 @@ public class Duke {
 
     public static void addAToDo(String todo) {
         ToDo mustDo = new ToDo(todo);
-        lstOfTasks[numOfThings] = mustDo;
+        lstOfTasks.add(mustDo);
         numOfThings += 1;
         System.out.println("Got it. I've added this task:\n" + mustDo.toString() +
                             "\nNow you have " + numOfThings + " tasks in the list.");
@@ -90,7 +91,7 @@ public class Duke {
 
     public static void addTimeSensitive(String name, String doByWhen) {
         Deadline dateline = new Deadline(name, doByWhen);
-        lstOfTasks[numOfThings] = dateline;
+        lstOfTasks.add(dateline);
         numOfThings += 1;
         System.out.println("Got it. I've added this task:\n" + dateline.toString() +
                             "\nNow you have " + numOfThings + " tasks in the list");
@@ -98,10 +99,23 @@ public class Duke {
 
     public static void addAnEvent(String name, String startTime, String endTime) {
         Event suitAndTie = new Event(name, startTime, endTime);
-        lstOfTasks[numOfThings] = suitAndTie;
+        lstOfTasks.add(suitAndTie);
         numOfThings += 1;
         System.out.println("Got it. I've added this task:\n" + suitAndTie.toString() +
                 "\nNow you have " + numOfThings + " tasks in the list");
+    }
+
+    public static void delete (String userTyped) {
+        try {
+            String rankOfTaskToDelete = userTyped.split(" ",2)[1];
+            int taskToDeleteInt = Integer.parseInt(rankOfTaskToDelete);
+            Task deleted = lstOfTasks.remove(taskToDeleteInt - 1);
+            numOfThings --;
+            System.out.println("Noted. I've removed this task.\n" + deleted.toString()
+                    + "\nNow you have " + numOfThings + " tasks in the list.");
+        } catch (ArrayIndexOutOfBoundsException e) {
+            System.out.println("You didn't enter a valid task to delete man!");
+        }
     }
 
 
@@ -150,6 +164,8 @@ public class Duke {
                     } catch (ArrayIndexOutOfBoundsException e) {
                         System.out.println("You didn't type an event man!");
                     }
+                } else if (frontWord.equals("delete")) {
+                    delete(userTyped);
                 } else {
                     System.out.println("Try again fat fingers!");
                 }
