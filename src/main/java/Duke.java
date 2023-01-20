@@ -35,10 +35,15 @@ public class Duke {
                         System.out.println("Toggled state:\n [" + tasks.get(index).getDoness() + "] " + tasks.get(index).desc);
                         break;
                     case ("todo"):
-                        body = body.substring(1);
-                        ToDo curr = new ToDo(body, false);
-                        tasks.add(curr);
-                        printNotif(curr);
+                        try {
+                            body = body.substring(1);
+                            ToDo curr = new ToDo(body, false);
+                            tasks.add(curr);
+                            printNotif(curr);
+                        } catch (Exception e){
+                            System.out.println("Please input something TO DO????!!");
+                        }
+                        break;
                     case ("deadline"):
                         body = body.substring(1);
                         Matcher dlMatcher = DEADLINE_PATTERN.matcher(body);
@@ -65,7 +70,7 @@ public class Duke {
                         }
                         break;
                     default:
-                        System.out.println("ERROR: Unknown command");
+                        System.out.println("I DONT KNOW WHAT YOU WANT");
                         break;
                 }
             } while (!command.equals("bye"));
