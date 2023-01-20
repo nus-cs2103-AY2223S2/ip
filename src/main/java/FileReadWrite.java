@@ -10,8 +10,9 @@ public abstract class FileReadWrite {
             "data/duke.txt").toString();
 
 
-    public static void readFile(ArrayList<Task> taskList) throws IOException {
+    public static TaskList readFile() throws IOException {
         File file = new File(FILEPATH);
+        TaskList taskList = new TaskList();
         if (! file.exists()) {
             file.mkdir();
         }
@@ -38,6 +39,7 @@ public abstract class FileReadWrite {
             }
             taskList.add(nextTask);
         }
+        return taskList;
     }
 
     public static void writeTask(ArrayList<Task> list) throws IOException {

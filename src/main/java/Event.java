@@ -22,7 +22,7 @@ public class Event extends Task{
 
     @Override
     public String summary(){
-        String s = "D___";
+        String s = "E___";
         String d = this.getDone()? "✓" : "X";
         return s + d + "___" + this.getTask() + "___" + this.getDate1() + "___" + this.getDate2();
     }
