@@ -1,7 +1,32 @@
-Hello from
- ____        _        
-|  _ \ _   _| | _____ 
-| | | | | | | |/ / _ \
-| |_| | |_| |   <  __/
-|____/ \__,_|_|\_\___|
-
+    > What's up dawg
+    > Got chu homie, new todo task added: [T][ ] eat
+    > Chu have 1 task(s) in the list.
+    > Got chu homie, new todo task added: [T][ ] sleep
+    > Chu have 2 task(s) in the list.
+    > Got chu homie, new todo task added: [T][ ] repeat
+    > Chu have 3 task(s) in the list.
+    > 1. [T][ ] eat
+    > 2. [T][ ] sleep
+    > 3. [T][ ] repeat
+    > chu gave me no task
+    > aint no such task available
+    > Task masked as done: [T][X] eat
+    > 1. [T][X] eat
+    > 2. [T][ ] sleep
+    > 3. [T][ ] repeat
+    > Task masked as undone: [T][ ] eat
+    > 1. [T][ ] eat
+    > 2. [T][ ] sleep
+    > 3. [T][ ] repeat
+    > Task deleted: [T][ ] sleep
+    > Chu have 2 task(s) remained.
+    > aint no such task available
+    > Got chu homie, new deadline added: [D][ ] sleep (by: 10pm)
+    > Chu have 3 task(s) in the list.
+    > Got chu homie, new event added: [E][ ] repeat (from: today to: tomorrow)
+    > Chu have 4 task(s) in the list.
+    > 1. [T][ ] eat
+    > 2. [T][ ] repeat
+    > 3. [D][ ] sleep (by: 10pm)
+    > 4. [E][ ] repeat (from: today to: tomorrow)
+    > Aight imma head out
