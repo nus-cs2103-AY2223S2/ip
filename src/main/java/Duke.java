@@ -17,7 +17,7 @@ public class Duke {
             endCommand();
             input = scanner.nextLine(); //ready for next input
         }
-
+        scanner.close();
         bye();
     }
 

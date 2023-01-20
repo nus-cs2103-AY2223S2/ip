@@ -1,27 +1,29 @@
 public class ChatBot {
-    TodoList todoList;
+    private TodoList todoList;
 
     public ChatBot(TodoList todoList) {
         this.todoList = todoList;
     }
 
     public void execute(String command) {
-        if (command.equals("list")) {
+        String[] split_command = command.split(" ", 2);
+        String instruction = split_command[0];
+        if (instruction.equals("list")) {
             String shown_list = todoList.toString();
             System.out.println(shown_list);
         }
-        else if (Character.isDigit(command.charAt(command.length() - 1))) {
-            String[] input = command.split(" ");
-            int digit = Integer.parseInt(input[1]);
-            if (input[0].equals("mark")) {
-                todoList.mark(digit);
-            } else {
-                todoList.unmark(digit);
-            }
+        else if (instruction.equals("mark")) {
+            int digit = Integer.parseInt(split_command[1]);
+            todoList.mark(digit);
+        }
+        else if (instruction.equals("unmark")) {
+            int digit = Integer.parseInt(split_command[1]);
+            todoList.unmark(digit);
         }
         else {
-            todoList.add(command);
-            System.out.println("added: " + command);
+            System.out.println("Got it. I've added this task:");
+            todoList.add(instruction, split_command[1]);
+            System.out.println(String.format("Now I have %d tasks in the list.", todoList.number_of_tasks()));
         }
     }
 
