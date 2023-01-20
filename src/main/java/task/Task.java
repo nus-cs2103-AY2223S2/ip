@@ -18,14 +18,14 @@ public class Task {
      */
     public Task(String description) {
         this.description = description;
-        this.isDone = false;
+        isDone = false;
     }
 
     /**
      * Toggles the completion status of the task.
      */
     public void toggleDone() {
-        this.isDone = !this.isDone;
+        isDone = !isDone;
     }
 
     /** Returns whether the task is completed
@@ -33,11 +33,11 @@ public class Task {
      * @return true if the task is completed, false otherwise
      */
     public boolean getIsDone() {
-        return this.isDone;
+        return isDone;
     }
 
     @Override
     public String toString() {
-        return (this.isDone ? "[X] " : "[ ] ") + this.description;
+        return (isDone ? "[X] " : "[ ] ") + description;
     }
 }

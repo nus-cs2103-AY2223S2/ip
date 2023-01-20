@@ -34,16 +34,16 @@ public class Duke {
      * Runs the duke.
      */
     public void run() {
-        this.init();
-        while (this.isRunning) {
-            this.execute(this.scanner.nextLine());
+        init();
+        while (isRunning) {
+            execute(scanner.nextLine());
         }
-        this.exit();
+        exit();
     }
     private void init() {
-        this.scanner = new Scanner(System.in);
-        this.isRunning = true;
-        this.tasks = new ArrayList<>();
+        scanner = new Scanner(System.in);
+        isRunning = true;
+        tasks = new ArrayList<>();
         System.out.println("Hello!");
     }
 
@@ -54,32 +54,32 @@ public class Duke {
                 case NO_OP:
                     break;
                 case BYE:
-                    this.isRunning = false;
+                    isRunning = false;
                     break;
                 case TODO:
-                    this.addTask(new Todo(
+                    addTask(new Todo(
                             command.getArgumentValue(Command.Argument.TODO)));
                     break;
                 case DEADLINE:
-                    this.addTask(new Deadline(
+                    addTask(new Deadline(
                             command.getArgumentValue(Command.Argument.DEADLINE),
                             command.getArgumentValue(Command.Argument.BY)));
                     break;
                 case EVENT:
-                    this.addTask(new Event(
+                    addTask(new Event(
                             command.getArgumentValue(Command.Argument.EVENT),
                             command.getArgumentValue(Command.Argument.FROM),
                             command.getArgumentValue(Command.Argument.TO)));
                     break;
                 case LIST:
-                    this.showTasks();
+                    showTasks();
                     break;
                 case MARK:
-                    this.toggleTask(this.tasks.get(Integer.parseInt(
+                    toggleTask(tasks.get(Integer.parseInt(
                             command.getArgumentValue(Command.Argument.MARK))));
                     break;
                 case DELETE:
-                    this.deleteTask(this.tasks.get(Integer.parseInt(
+                    deleteTask(tasks.get(Integer.parseInt(
                             command.getArgumentValue(Command.Argument.DELETE))));
                     break;
             }
@@ -89,18 +89,18 @@ public class Duke {
     }
 
     private void exit() {
-        this.scanner.close();
+        scanner.close();
         System.out.println("Good bye!");
     }
 
     private void addTask(Task task) {
-        this.tasks.add(task);
+        tasks.add(task);
         System.out.println("Added task.Task " + task);
     }
 
     private void showTasks() {
         int index = 1;
-        for (Task task : this.tasks) {
+        for (Task task : tasks) {
            System.out.println(index + ". " + task);
            index += 1;
         }
@@ -112,7 +112,7 @@ public class Duke {
     }
 
     private void deleteTask(Task task) {
-        this.tasks.remove(task);
+        tasks.remove(task);
         System.out.println("Deleted task.Task " + task);
     }
 }

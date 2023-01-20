@@ -34,7 +34,7 @@ public class Command {
      * @param input input string of the command.
      */
     public Command(String input) {
-        this.arguments = new LinkedHashMap<>();
+        arguments = new LinkedHashMap<>();
         for (String term : input.strip().split(" /")) {
             int firstSpace = term.indexOf(" ");
             Argument argument = parseArgument((firstSpace == -1
@@ -43,9 +43,9 @@ public class Command {
             String value = (firstSpace == -1
                     ? ""
                     : term.substring(firstSpace + 1));
-            this.arguments.put(argument, value);
+            arguments.put(argument, value);
         }
-        this.checkArguments();
+        checkArguments();
     }
 
     /**
@@ -54,7 +54,7 @@ public class Command {
      * @return the type of command.
      */
     public Argument getName() {
-        return this.arguments.entrySet().iterator().next().getKey();
+        return arguments.entrySet().iterator().next().getKey();
     }
 
     /**
@@ -64,7 +64,7 @@ public class Command {
      * @return the value of the argument.
      */
     public String getArgumentValue(Argument arg) {
-        return this.arguments.get(arg);
+        return arguments.get(arg);
     }
 
     private Argument parseArgument(String arg) {
@@ -82,7 +82,7 @@ public class Command {
     private void checkArguments() {
         ArrayList<Argument> requiredArgs = new ArrayList<>();
         ArrayList<Argument> requiredValues = new ArrayList<>();
-        switch (this.getName()) {
+        switch (getName()) {
         case BYE:
             // Fallthrough
         case LIST:
@@ -114,14 +114,14 @@ public class Command {
     }
 
     private void checkHasOnlyArgs(ArrayList<Argument> args) {
-        if (this.arguments.size() != args.size() + 1) {
-            throw new IllegalArgumentException("command.Command " + this.getName()
+        if (arguments.size() != args.size() + 1) {
+            throw new IllegalArgumentException("command.Command " + getName()
                     + " takes in " + (args.size() + 1) + " argument(s) but "
-                    + this.arguments.size() + " were given");
+                    + arguments.size() + " were given");
         }
         for (Argument arg : args) {
-            if (!this.arguments.containsKey(arg)) {
-                throw new IllegalArgumentException("command.Command " + this.getName()
+            if (!arguments.containsKey(arg)) {
+                throw new IllegalArgumentException("command.Command " + getName()
                         + " requires argument " + arg + " but was not given");
             }
         }
@@ -129,9 +129,8 @@ public class Command {
 
     private void checkHasValues(ArrayList<Argument> args) {
         for (Argument arg : args) {
-            if (!this.arguments.containsKey(arg)
-                    || this.arguments.get(arg).equals("")) {
-                throw new IllegalArgumentException("command.Command " + this.getName()
+            if (!arguments.containsKey(arg) || arguments.get(arg).equals("")) {
+                throw new IllegalArgumentException("command.Command " + getName()
                         + " requires argument " + arg + " but was not given");
             }
         }
