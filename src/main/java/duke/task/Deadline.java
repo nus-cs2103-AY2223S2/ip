@@ -2,21 +2,24 @@ package duke.task;
 
 import duke.exception.DukeException;
 import duke.utils.BooleanUtils;
+import duke.utils.LocalDateTimeUtils;
+
+import java.time.LocalDateTime;
 
 /**
  * Represents a deadline task.
  */
 public class Deadline extends Task {
-    private final String deadline;
+    private final LocalDateTime deadline;
 
     /**
-     * Creates a DeadlineTask object.
+     * Creates a Deadline object.
      *
      * @param isDone Is the task done.
      * @param description Description of the task.
      * @param deadline Deadline of the task.
      */
-    public Deadline(boolean isDone, String description, String deadline) {
+    public Deadline(boolean isDone, String description, LocalDateTime deadline) {
         super(isDone, description);
 
         this.deadline = deadline;
@@ -50,6 +53,8 @@ public class Deadline extends Task {
 
     @Override
     public String toString() {
-        return String.format("[D]%s (by: %s)", super.toString(), deadline);
+        String deadlineStr = deadline.format(LocalDateTimeUtils.outputDateTimeFormatter);
+
+        return String.format("[D]%s (by: %s)", super.toString(), deadlineStr);
     }
 }
