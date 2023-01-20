@@ -19,9 +19,10 @@ public class Task {
         return (isMarked ? "X" : " ");
     }
 
+
     @Override
     public String toString() {
-        return "[" + this.getStatusICon() + "] " + name;
+        return "[" + this.getStatusICon() + "] " + this.name;
     }
 
 }

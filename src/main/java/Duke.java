@@ -11,35 +11,41 @@ public class Duke {
             input = input.trim();
             String[] separateInput = input.split(" ");
             String str = separateInput[0];
-            if(str.equals("bye")) {
+            if(input.equals("bye")) {
                 System.out.println("Bye. Hope to see you again soon!");
                 sc.close();
                 return;
-            } else if(str.equals("list")) {
+            } else if(input.equals("list")) {
                 list.inString();
-            } else if(str.contains("unmark")) {
-                String[] splitString = str.split(" ");
+            } else if(input.contains("unmark")) {
+                String[] splitString = input.split(" ");
                 int index = Integer.parseInt(splitString[1]) - 1;
-                list.markTaskasDone(index);
-            } else if(str.contains("mark")) {
-                String[] splitString = str.split(" ");
+                list.unmarkTask(index);
+            } else if(input.contains("mark")) {
+                String[] splitString = input.split(" ");
                 int index = Integer.parseInt(splitString[1]) - 1;
-                list.markTaskasDone(index);
-            } else if(str.contains("todo")) {
+                list.markTaskAsDone(index);
+            } else if(input.contains("delete")) {
+                String[] splitString = input.split(" ");
+                int index = Integer.parseInt(splitString[1]) - 1;
+                list.deleteTask(index);
+
+            } else if(str.equals("todo")) {
                 int startIndex = str.length();
-                if(startIndex >= str.length()) {
+                if(startIndex >= input.length()) {
                     throw new DukeException("☹ OOPS!!! The description of a todo cannot be empty.");
                 }
-                Todo task = new Todo(str);
+                String taskFullDetails = input.substring(startIndex);
+                Todo task = new Todo(taskFullDetails);
                 list.add(task);
                 list.totalNumberOfTasks();
-            } else if(str.contains("deadline")){
+            } else if(str.equals("deadline")){
                 int startIndex = str.length();
-                if(startIndex >= str.length()) {
+                if(startIndex >= input.length()) {
                     throw new DukeException("☹ OOPS!!! The description of a deadline cannot be empty.");
                 }
-                int detailIndex= str.lastIndexOf("deadline");
-                String taskFullDetails = str.substring(detailIndex);
+                int detailIndex= input.lastIndexOf("deadline");
+                String taskFullDetails = input.substring(detailIndex);
                 String[] splitDetails = taskFullDetails.split("/");
                 if(splitDetails.length < 2) {
                     throw new DukeException("☹ OOPS!!! The deadline must be specified.");
@@ -47,13 +53,13 @@ public class Duke {
                 Deadline task = new Deadline(splitDetails[0], splitDetails[1]);
                 list.add(task);
                 list.totalNumberOfTasks();
-            } else if(str.contains("event")) {
+            } else if(str.equals("event")) {
                 int startIndex = str.length();
-                if(startIndex >= str.length()) {
+                if(startIndex >= input.length()) {
                     throw new DukeException("☹ OOPS!!! The description of a event cannot be empty.");
                 }
-                int detailIndex = str.lastIndexOf("event");
-                String taskFullDetails = str.substring(detailIndex);
+                int detailIndex = input.lastIndexOf("event");
+                String taskFullDetails = input.substring(detailIndex);
                 String[] splitDetails = taskFullDetails.split("/");
                 if(splitDetails.length < 3) {
                     throw new DukeException("☹ OOPS!!! The start and end both must be specified.");

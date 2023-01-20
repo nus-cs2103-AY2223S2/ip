@@ -6,9 +6,9 @@ public class Tasklist {
     }
     public void add(Task task) {
         this.list.add(task);
-        System.out.println("Got it. I've added this task:\n " + task);
+        System.out.println("Got it. I've added this task:\n " + task.toString());
     }
-    public void markTaskasDone(int index) {
+    public void markTaskAsDone(int index) {
         this.list.get(index).markDone();
         System.out.println( "Nice! I've marked this task as done:\n"
                 + list.get(index).toString());
@@ -17,6 +17,13 @@ public class Tasklist {
         this.list.get(index).unmark();
         System.out.println( "Nice! I've marked this task as done:\n"
                 + list.get(index).toString());
+    }
+
+    public void deleteTask(int index) {
+        this.list.remove(index);
+        System.out.println("Noted. I've removed this task:\n"
+                + list.get(index).toString() );
+        totalNumberOfTasks();
     }
     public void totalNumberOfTasks() {
         System.out.println("Now you have " + this.list.size() + " tasks in the list.");
