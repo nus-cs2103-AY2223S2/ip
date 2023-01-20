@@ -12,14 +12,24 @@ public class Duke {
 
         System.out.println("Hello! I'm Duke\n" + "What can I do for you?");
 
+        String[] array = new String[100];
+
         Scanner scan = new Scanner(System.in);
-        String input = scan.next();
+        String input = scan.nextLine();
+        int index = 0;
 
         while (!Objects.equals(input, "bye")) {
-            System.out.println(input);
-            input = scan.next();
+            array[index] = input;
+            if (Objects.equals(input, "list")) {
+                for (int i = 0; i < index; i++) {
+                    System.out.println(i + 1 + ". " + array[i]);
+                }
+            } else {
+                System.out.println("added:" + input);
+            }
+            input = scan.nextLine();
+            index++;
         }
-
         System.out.println("Bye. Hope to see you again soon!");
     }
 }
