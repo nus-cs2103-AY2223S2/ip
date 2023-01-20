@@ -121,6 +121,11 @@ public class Ui {
         System.out.println("Bye. Hope to see you again soon!");
     }
 
+    public void showFind(TaskList tasks) {
+        System.out.println("Here are the matching tasks in your list:");
+        System.out.println(tasks);
+    }
+
     public void closeScanner() {
         this.sc.close();
     }

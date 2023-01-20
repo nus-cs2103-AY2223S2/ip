@@ -6,6 +6,7 @@ import duke.command.AddCommand;
 import duke.command.Command;
 import duke.command.DeleteCommand;
 import duke.command.ExitCommand;
+import duke.command.FindCommand;
 import duke.command.ListCommand;
 import duke.command.MarkCommand;
 import duke.command.UnmarkCommand;
@@ -29,6 +30,7 @@ public class Parser {
     private static final String TODO_COMMAND = "todo";
     private static final String EVENT_COMMAND = "event";
     private static final String DELETE_COMMAND = "delete";
+    private static final String FIND_COMMAND = "find";
     private static final String BY_INDICATOR = "/by";
     private static final String FROM_INDICATOR = "/from";
     private static final String TO_INDICATOR = "/to";
@@ -66,6 +68,8 @@ public class Parser {
         } else if (command.equals(Parser.TODO_COMMAND) || command.equals(Parser.DEADLINE_COMMAND)
             || command.equals(Parser.EVENT_COMMAND)) {
             return addTask(command, line);
+        } else if (command.equals(Parser.FIND_COMMAND)) {
+            return processFind(line);
         } else {
             throw new DukeException("I'm sorry, but I don't know what that means :-(");
         }
@@ -157,5 +161,14 @@ public class Parser {
             break;
         }
         return new AddCommand(task);
+    }
+
+    private static Command processFind(String line) throws DukeException {
+        try {
+            String keyword = line.split(Parser.FIND_COMMAND)[1].trim();
+            return new FindCommand(keyword);
+        } catch (IndexOutOfBoundsException e) {
+            throw new DukeException("No keyword has been provided!");
+        }
     }
 }

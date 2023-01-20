@@ -68,4 +68,8 @@ public abstract class Task {
         return newTask;
     }
 
+    public boolean nameContainsKeyword(String keyword) {
+        return this.name.contains(keyword);
+    }
+
 }

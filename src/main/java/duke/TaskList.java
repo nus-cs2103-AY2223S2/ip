@@ -140,4 +140,14 @@ public class TaskList {
         return this.tasks.get(index);
     }
 
+    public TaskList findTasksByKeyword(String keyword) {
+        TaskList filteredTaskList = new TaskList();
+        for (Task t : this.tasks) {
+            if (t.nameContainsKeyword(keyword)) {
+                filteredTaskList.addTask(t);
+            }
+        }
+        return filteredTaskList;
+    }
+
 }
