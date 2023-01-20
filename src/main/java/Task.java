@@ -1,7 +1,10 @@
+import java.time.format.DateTimeFormatter;
+
 public abstract class Task {
     private String description;
     private boolean isDone;
 
+    protected static DateTimeFormatter format = DateTimeFormatter.ofPattern("dd MMM '('EEE')' - hh:mma");
     public Task(String description) {
         this.description = description;
         this.isDone = false;
