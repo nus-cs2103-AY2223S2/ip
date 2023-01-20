@@ -27,7 +27,12 @@ public class Duke {
                     int num = Integer.parseInt(input.split(" ")[1]);
                     list.get(num - 1).unmark();
                     System.out.println("OK, I've marked this task as not done yet: \n" + list.get(num-1));
-           } else {
+
+           } else if (input.split(" ")[0].equals("delete")) {
+                    int num = Integer.parseInt(input.split(" ")[1]);
+                    Task removed = list.remove(num - 1);
+                    System.out.println("Noted. I've removed this task: \n" + removed + "\nNow you have " + list.size() + " tasks in the list.");
+            } else {
                 Task newTask;
                 String[] inputs = input.split(" ");
                 String type = inputs[0];
