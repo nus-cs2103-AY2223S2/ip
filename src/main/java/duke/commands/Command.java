@@ -10,7 +10,7 @@ import duke.Ui;
  *
  * @author Cheam Jia Wei
  */
-abstract public class Command {
+public abstract class Command {
     /**
      * Executes what the Command is supposed to do.
      *

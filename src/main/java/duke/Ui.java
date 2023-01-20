@@ -1,8 +1,8 @@
 package duke;
 
-import java.util.Scanner;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+import java.util.Scanner;
 
 import duke.tasks.Task;
 
@@ -130,10 +130,37 @@ public class Ui {
         System.out.println(Ui.LINE);
     }
 
+    /**
+     * Displays the tasks that contain the specified keyword.
+     *
+     * @param input The keyword to find in the name of the tasks.
+     * @param taskList The TaskList containing all the tasks.
+     */
+    public void find(String input, TaskList taskList) {
+        int i = 1;
+        System.out.println(Ui.LINE + "Here are the matching tasks in your list:");
+        for (int j = 0; j < taskList.size(); j++) {
+            Task t = taskList.get(j);
+            if (t.doesContain(input)) {
+                System.out.println(i + "." + t);
+                i++;
+            }
+        }
+        System.out.println(Ui.LINE);
+    }
+
+    /**
+     * Displays when the data file is unable to be found in the computer.
+     */
     public void loadError() {
         System.out.println("Task file does not exist");
     }
 
+    /**
+     * Displays the error message of the exception.
+     *
+     * @param e Error message of the exception
+     */
     public void printError(String e) {
         System.out.println(Ui.LINE + e);
         System.out.println(Ui.LINE);

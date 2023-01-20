@@ -39,7 +39,6 @@ public class Storage {
         while (sc.hasNext()) {
             String[] line = sc.nextLine().split(" \\| ");
             taskList.loader(line);
-
         }
         sc.close();
     }

@@ -11,6 +11,13 @@ public class Events extends Task {
     private LocalDateTime start;
     private LocalDateTime end;
 
+    /**
+     * Constructor for Events task.
+     *
+     * @param name Name of the task.
+     * @param start Date of when the task starts.
+     * @param end Date of when the task ends.
+     */
     public Events(String name, String start, String end) {
         super(name);
         this.start = LocalDateTime.parse(start);
@@ -25,7 +32,7 @@ public class Events extends Task {
     @Override
     public String toString() {
         return "[E]" + super.toString()
-                + " (from: "  + dateFormat(this.start)
+                + " (from: " + dateFormat(this.start)
                 + " to: " + dateFormat(this.end) + ")";
     }
 

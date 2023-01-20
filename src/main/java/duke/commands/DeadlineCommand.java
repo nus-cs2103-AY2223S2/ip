@@ -17,6 +17,13 @@ public class DeadlineCommand extends Command {
         this.input = input;
     }
 
+    /**
+     * Executes the DeadlineCommand and makes a new Deadlines task.
+     *
+     * @param taskList The TaskList that will be modified or accessed.
+     * @param inter The Ui that will interact with the user.
+     * @param store The storage that will help store the task into the data file if TaskList is modified.
+     */
     public void execute(TaskList taskList, Ui inter, Storage store) {
         Task added = taskList.deadline(input);
         inter.taskAdded(added, taskList.size());

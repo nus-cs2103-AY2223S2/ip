@@ -17,6 +17,13 @@ public class UnmarkCommand extends Command {
         this.input = input;
     }
 
+    /**
+     * Executes Unmark command.
+     *
+     * @param taskList The TaskList that will be modified or accessed.
+     * @param inter The Ui that will interact with the user.
+     * @param store The storage that will help store the task into the data file if TaskList is modified.
+     */
     public void execute(TaskList taskList, Ui inter, Storage store) {
         Task changed = taskList.unmark(input);
         inter.unmark(changed);

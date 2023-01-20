@@ -21,9 +21,7 @@ public class Duke {
      * Constructor for Duke.
      *
      * @param path The relative file path where data will be stored into
-     * @author Cheam Jia Wei
      */
-
     public Duke(String path) {
         this.store = new Storage(path);
         this.taskList = new TaskList();
@@ -36,7 +34,7 @@ public class Duke {
     }
 
     /**
-     * Function to initialise and run Duke
+     * Function to run Duke
      *
      * @author Cheam Jia Wei
      */
@@ -60,6 +58,11 @@ public class Duke {
         }
     }
 
+    /**
+     * Main method to initialise and run the Duke program.
+     *
+     * @param args Placeholder
+     */
     public static void main(String[] args) {
         String path = System.getProperty("user.home") + "/data/duke.txt";
         Duke duke = new Duke(path);

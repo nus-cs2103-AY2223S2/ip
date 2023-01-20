@@ -69,6 +69,23 @@ public class Task {
     }
 
     /**
+     * Returns a boolean if a word contains in the name of the task.
+     *
+     * @param word The specified to be searched in the task name.
+     * @return If the specified word is in the task name.
+     */
+    public boolean doesContain(String word) {
+        String[] split = this.name.split(" ");
+        for (String s : split) {
+            String toTest = s.toLowerCase();
+            if (toTest.equals(word.toLowerCase())) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    /**
      * Returns the task in its string form to be displayed by the Ui.
      *
      * @return The task as a string.
