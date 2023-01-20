@@ -24,7 +24,7 @@ public class Duke {
         TODO, DEADLINE, EVENT,
         MARK, UNMARK,
         DELETE,
-        EXIT,
+        SAVE, EXIT,
         UNKNOWN,
     }
 
@@ -132,6 +132,8 @@ public class Duke {
             return State.UNMARK;
         else if (cmd.compareTo("delete") == 0)
             return State.DELETE;
+        else if (cmd.compareTo("save") == 0)
+            return State.SAVE;
 
         // multiple exit keywords
         switch (cmd) {
@@ -251,6 +253,7 @@ public class Duke {
 
                                 activeTask = duke.taskList.get(taskIdx);
                                 activeTask.setDone(currentState == State.MARK); // Note: false means unmark
+                                duke.saveDataToFile();
                                 Duke.display("\t" + activeTask);
                             }
                             catch(NumberFormatException e) {
@@ -297,8 +300,14 @@ public class Duke {
                             Duke.display("\t" + duke.taskList.remove(i)); // or else remove(Object o) is used (wrong)
                         // instead of remove(int index)
 
+                        duke.saveDataToFile();
                         duke.displayTaskCount();
                         break;
+
+                case SAVE:
+                    duke.saveDataToFile();
+                    Duke.display("Your list have been saved.");
+                    break;
 
                     case UNKNOWN:
                         Duke.warn("Sorry, I don't understand your request :(");
