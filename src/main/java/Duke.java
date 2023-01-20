@@ -8,7 +8,7 @@ public class Duke {
                 + "| |_| | |_| |   <  __/\n"
                 + "|____/ \\__,_|_|\\_\\___|\n";
         System.out.println("Hello from\n" + logo);
-        String[] history = new String[100];
+        Task[] history = new Task[100];
         int count = 0;
         String input = "";
 
@@ -23,6 +23,28 @@ public class Duke {
         while (!input.equals("bye")) {
             Scanner sc = new Scanner(System.in);
             input = sc.nextLine();
+            String[] tokens = input.split(" ", 2);
+            try {
+                if (tokens.length == 2) {
+                    int index = Integer.parseInt(tokens[1]);
+                    if (tokens[0].equals("mark") && index > 0 && index <= 100) {
+                        history[index - 1].markDone();
+                        System.out.println("-----------------------------------------");
+                        System.out.println("I've marked this task as done:");
+                        System.out.println(history[index - 1]);
+                        System.out.println("-----------------------------------------");
+                        continue;
+                    } else if (tokens[0].equals("unmark") && index > 0 && index <= 100) {
+                        history[index - 1].markUndone();
+                        System.out.println("-----------------------------------------");
+                        System.out.println("I've unmarked this task as not done yet:");
+                        System.out.println(history[index - 1]);
+                        System.out.println("-----------------------------------------");
+                        continue;
+                    }
+                }
+            } catch (NumberFormatException nfe){}
+
             if (input.equals("list")) {
                 System.out.println("-----------------------------------------");
                 for (int i = 0; i < count; i++) {
@@ -31,7 +53,7 @@ public class Duke {
                 System.out.println("-----------------------------------------");
             }
             else {
-                history[count] = input;
+                history[count] = new Task(input);
                 count++;
                 System.out.println("-----------------------------------------\n" +
                         "added: " + input + "\n" +
