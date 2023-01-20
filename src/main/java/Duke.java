@@ -60,6 +60,19 @@ public class Duke {
             }
             System.out.println(txt);
         }
+
+        public static void undoCompleteTask(String xx) {
+            int taskNum = Integer.parseInt(xx);
+            String txt = "Try again!";
+            for (Task thingInList : lstOfTasks) {
+                if (thingInList != null && (thingInList.getRank() == taskNum)) {
+                    thingInList.unstrike();
+                    txt = ("Ok, I've marked this task as not done yet:\n" + thingInList.isCompleted()
+                            + " " + thingInList.getName());
+                }
+            }
+            System.out.println(txt);
+        }
     public static void main(String[] args) {
         //start by greeting
         hello();
@@ -77,6 +90,8 @@ public class Duke {
                 } else if (frontWord.equals("mark")) {
                     completeTask(userTyped.substring(userTyped.length() - 1));
 
+                } else if (frontWord.equals("unmark")) {
+                    undoCompleteTask(userTyped.substring(userTyped.length() - 1));
                 } else {
                     //else the user is just adding another thing to list
                     addStufftoLst(userTyped);
