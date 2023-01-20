@@ -1,3 +1,4 @@
+import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -28,37 +29,53 @@ public class Duke {
 
                 } else if (nextLine.startsWith("deadline")) {
                     String[] splitArray = nextLine.split("/");
+                    String[] splitTask = splitArray[0].split(" ");
+                    String taskName = "";
+                    for (int i = 1; i < splitTask.length; i++) {
+                        taskName += splitTask[i];
+                    }
                     String by = splitArray[1];
-                    String name = splitArray[0];
-                    addToTasks(name, new Deadline(name, by), tasks);
+                    addToTasks(taskName, new Deadline(taskName, by), tasks);
                     nextLine = sc.nextLine();
 
                 } else if (nextLine.startsWith("event")) {
                     String[] splitArray = nextLine.split("/");
                     String from = splitArray[1];
                     String to = splitArray[2];
-                    String name = splitArray[0];
-                    addToTasks(name, new Event(name, from, to), tasks);
+                    String[] splitTask = splitArray[0].split(" ");
+                    String taskName = "";
+                    for (int i = 1; i < splitTask.length; i++) {
+                        taskName += splitTask[i];
+                    }
+                    addToTasks(taskName, new Event(taskName, from, to), tasks);
                     nextLine = sc.nextLine();
+
                 } else if (nextLine.startsWith("mark")) {
                     String theSplitPart = nextLine.split(" ")[1];
-                    int whichNumberedTask = Integer.parseInt(theSplitPart);
-                    markTasks(whichNumberedTask, tasks);
+                    int taskNumber = Integer.parseInt(theSplitPart);
+                    markTasks(taskNumber, tasks);
                     nextLine = sc.nextLine();
 
                 } else if (nextLine.startsWith("unmark")) {
                     String theSplitPart = nextLine.split(" ")[1];
-                    int whichNumberedTask = Integer.parseInt(theSplitPart);
-                    unmarkTasks(whichNumberedTask, tasks);
+                    int taskNumber = Integer.parseInt(theSplitPart);
+                    unmarkTasks(taskNumber, tasks);
                     nextLine = sc.nextLine();
 
                 } else if (nextLine.equals("list")) {
                     printTaskList(tasks);
                     nextLine = sc.nextLine();
 
+                } else if (nextLine.startsWith("delete")) {
+                    String theSplitPart = nextLine.split(" ")[1];
+                    int taskNumber = Integer.parseInt(theSplitPart);
+                    delete(tasks, taskNumber);
+                    nextLine = sc.nextLine();
+
                 } else {
                     throw new DukeException("☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
                 }
+
                 }
                 catch (DukeException e) {
                     System.out.println(e);
@@ -69,11 +86,20 @@ public class Duke {
         exit();
     }
 
-    static String returnTasksLeftString(ArrayList<Task> tasks) {
+    static void delete(ArrayList<Task> tasks, int taskNumber) { //abstraction for delete
+        Task taskToRemove = tasks.get(taskNumber - 1);
+        tasks.remove(taskNumber - 1);
+        printDashedLines();
+        System.out.println("\t  Noted. I've removed this task:");
+        System.out.println(String.format("\t\t%s", taskToRemove.toString()));
+        returnTasksLeftString(tasks);
+        printDashedLines();
+    }
+    static String returnTasksLeftString(ArrayList<Task> tasks) { // abstraction for number of tasks left in list
         int taskSize = tasks.size();
         return String.format("\t  Now you have %d tasks in your list", taskSize);
     }
-    static void printDashedLines() {
+    static void printDashedLines() { //abstraction just for dashed line printing
         System.out.println("\t____________________________________________________________");
     }
 
@@ -81,7 +107,7 @@ public class Duke {
         System.out.println(String.format("\t\t%s", whatToEcho));
     }
 
-    static void greet() {
+    static void greet() { //to start off with a beautiful totoro
         String hello = " ╱▔▔▔▔▔▔▔▔▔▔▔▔▔╲\n" +
                 " ▏     ┏┓┏┳━┳┓┏┓┏━━┓      ▕\n" +
                 " ▏     ┃┗┛┃┏┛┃┃┃┃┏┓┃      ▕\n" +
@@ -117,14 +143,14 @@ public class Duke {
         printDashedLines();
     }
 
-    static void exit() {
+    static void exit() { //abstraction for exiting the code when "bye" is read
         printDashedLines();
         System.out.println("\t\tBye. Hope to see you soon!");
         printDashedLines();
         System.exit(0);
     }
 
-    static void markTasks(int theTaskNumberToMark, ArrayList<Task> tasks) {
+    static void markTasks(int theTaskNumberToMark, ArrayList<Task> tasks) { //abstraction to mark tasks
         if (theTaskNumberToMark > tasks.size()) {
             printDashedLines();
             System.out.println("\t\tThere is not enough tasks to mark this :O");
@@ -135,7 +161,7 @@ public class Duke {
         }
     }
 
-    static void unmarkTasks(int theTaskNumberToUnmark, ArrayList<Task> tasks) {
+    static void unmarkTasks(int theTaskNumberToUnmark, ArrayList<Task> tasks) { //abstraction to unmark tasks
         if (theTaskNumberToUnmark > tasks.size()) {
             printDashedLines();
             System.out.println("\t\tThere is not enough tasks to mark this :O");
@@ -146,7 +172,7 @@ public class Duke {
         }
     }
 
-    static void addToTasks(String taskName, Task newTask, ArrayList<Task> tasks) {
+    static void addToTasks(String taskName, Task newTask, ArrayList<Task> tasks) { //abstraction to add tasks
         tasks.add(newTask);
         printDashedLines();
         System.out.println("\t  Got it. I've added this task:");
@@ -155,7 +181,7 @@ public class Duke {
         printDashedLines();
     }
 
-    static void printTaskList(ArrayList<Task> tasks) {
+    static void printTaskList(ArrayList<Task> tasks) { //abstraction for when list is called
         printDashedLines();
         System.out.println("\t  Here are the tasks in your list:");
         for (int i = 0; i < tasks.size(); i++) {
