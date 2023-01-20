@@ -6,6 +6,8 @@ public abstract class Task {
         this.description = description;
     }
 
+
+
     public String getDescription() {
         return description;
     }
@@ -16,6 +18,10 @@ public abstract class Task {
 
     void setDone(boolean isDone) {
         this.isDone = isDone;
+    }
+
+    public String toCsv() {
+        return (isDone ? "1":"0") + "," + description;
     }
 
     @Override

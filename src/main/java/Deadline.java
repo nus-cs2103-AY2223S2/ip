@@ -16,6 +16,11 @@ public class Deadline extends Task {
     }
 
     @Override
+    public String toCsv() {
+        return "D," + super.toCsv() + "," + by;
+    }
+
+    @Override
     public String toString() {
         return "[D]" + super.toString()
                 + " (By: " + by + ")";

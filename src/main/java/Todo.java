@@ -5,6 +5,11 @@ public class Todo extends Task {
     }
 
     @Override
+    public String toCsv() {
+        return "T," + super.toCsv();
+    }
+
+    @Override
     public String toString() {
         return "[T]" + super.toString();
     }

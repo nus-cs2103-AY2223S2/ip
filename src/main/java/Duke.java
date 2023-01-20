@@ -1,3 +1,7 @@
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Scanner;
@@ -39,6 +43,7 @@ public class Duke {
 
         return this;
     }
+
     private Duke displayTasks() {
         if (taskList == null)
             return this;
@@ -53,11 +58,37 @@ public class Duke {
 
         return this;
     }
+
     private Duke addNewTask(Task task) {
         taskList.add(task);
         Duke.display("Got it. I've added this task:");
         Duke.display("\t" + task);
+
+        saveDataToFile();
         displayTaskCount();
+
+        return this;
+    }
+
+    private Duke saveDataToFile() {
+        final String FILE_PATH = "./data/duke/tasks.csv";
+
+        StringBuilder sb = new StringBuilder();
+        for (Task t : taskList) {
+            sb.append(t.toCsv()).append("\n");
+        }
+
+        // Write prepared data to file
+        try {
+            Path f = Paths.get(FILE_PATH);
+            Files.createDirectories(f.getParent()); // Create directory (if not exist)
+            if (!Files.exists(f)) {
+                Files.createFile(f); // Create non-existing file
+            }
+            Files.writeString(f, sb.toString()); // Write to file
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
 
         return this;
     }
@@ -71,6 +102,7 @@ public class Duke {
     private static void warn(String message) {
         System.out.println("OOPS! " + message);
     }
+
     private static void assertThis(boolean expectsTrue, String failureMessage) throws DukeException {
         if (!expectsTrue)
             throw new DukeException(failureMessage);
@@ -130,6 +162,9 @@ public class Duke {
         State currentState = State.UNKNOWN;
         Scanner sc = new Scanner(System.in);
         Duke duke = new Duke();
+
+        // TODO: Retrieve saved data (if any)
+
 
         System.out.println("System is ready!");
         Duke.display("\n\n");
@@ -272,6 +307,8 @@ public class Duke {
                         break;
 
                     case EXIT:
+                        Duke.display("Saving your list ... ");
+                        duke.saveDataToFile();
                         Duke.display("Goodbye!");
                         Duke.displayLine();
                         Duke.displayLogo();
