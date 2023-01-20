@@ -16,6 +16,10 @@ public class Duke {
                 System.out.println(formatStr(listThings(tasks)));
             } else if (splitArr[0].equals("mark") || splitArr[0].equals("unmark")) {
                 mark(splitArr[0], Integer.parseInt(splitArr[1]) - 1, tasks);
+            } else if (splitArr[0].equals("delete")) {
+                Task newTask = tasks.get(Integer.parseInt(splitArr[1]) - 1);
+                tasks.remove(Integer.parseInt(splitArr[1]));
+                System.out.println(formatStr(deleteReport(newTask, tasks)));
             } else if (splitArr[0].equals("todo")) {
                 Todo newTodo = new Todo(input);
                 tasks.add(newTodo);
@@ -47,61 +51,9 @@ public class Duke {
         return returnstr;
     }
 
-    public static class Todo extends Task {
-        public Todo(String content) {
-            super(content.substring(5));
-        }
-
-        public String toString() {
-            String sign = "";
-            if (super.mark == false) {
-                sign = " ";
-            } else {
-                sign = "X";
-            }
-            return ". [T][" + sign + "] " + super.content;
-        }
-    }
-    public static class Deadline extends Task {
-        private String deadlineDue;
-        public Deadline(String content) {
-            super(content.substring(9).split("/")[0]);
-            String[] strArr = content.split("/");
-            this.deadlineDue = "(" + "by:" + strArr[1].substring(2) + ")";
-        }
-
-        public String toString() {
-            String sign = "";
-            if (super.mark == false) {
-                sign = " ";
-            } else {
-                sign = "X";
-            }
-            return ". [D][" + sign + "] " + super.content + deadlineDue;
-        }
-    }
-    public static class Event extends Task {
-        private String eventSpan;
-        public Event(String content) {
-            super(content.substring(6).split("/")[0]);
-            String[] strArr = content.split("/");
-            this.eventSpan = "(" + "by:" + strArr[1].substring(4) + "to:" + strArr[2].substring(2) + ")";
-        }
-
-        public String toString() {
-            String sign = "";
-            if (super.mark == false) {
-                sign = " ";
-            } else {
-                sign = "X";
-            }
-            return ". [E][" + sign + "] " + super.content + this.eventSpan;
-        }
-    }
-
     public static class Task {
-        private boolean mark;
-        private String content;
+        protected boolean mark;
+        protected String content;
 
         public Task(String content) {
             this.content = content;
@@ -113,10 +65,10 @@ public class Duke {
             String outputStr;
             if (mark == true) {
                 outputStr = "NICE! You finished this: \n"
-                + "[" + markSign(this.mark) + "] " + this.content;
+                        + "[" + markSign(this.mark) + "] " + this.content;
             } else {
                 outputStr = "Ok, you have undone this: \n"
-                + "[" + markSign(this.mark) + "] " + this.content;
+                        + "[" + markSign(this.mark) + "] " + this.content;
             }
             System.out.println(formatStr(outputStr));
         }
@@ -141,12 +93,18 @@ public class Duke {
         return returnStr;
     }
 
+    public static String deleteReport(Task task, List<Task> taskList) {
+        String returnStr = "gotcha.\nyou you have deleted: " + task.toString().substring(2) + "\n"
+                + numberOfTasks(taskList);
+        return returnStr;
+    }
+
     public static String numberOfTasks(List<Task> taskList) {
         return "You have " + taskList.size() + " tasks in this list!";
     }
 
     public static String listThings(List<Task> arrList) {
-        String returnstr = "";
+        String returnstr = "Alright, here are the things: \n";
         for (int i = 0; i < arrList.size(); i++) {
             if (i == arrList.size() - 1) {
                 returnstr += Integer.toString(i+1) + arrList.get(i).toString();
