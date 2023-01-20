@@ -5,6 +5,9 @@
 # Prevent class files from being tracked under git
 *.class
 
+# Data logger file
+"src/main/data/duke.txt"
+
 # Gradle build files
 /.gradle/
 /build/
