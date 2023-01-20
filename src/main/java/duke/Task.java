@@ -24,7 +24,7 @@ class Task {
     }
 
     public String getStatusIcon() {
-        return (isDone ? "X" : " ");
+        return (isDone ? Parser.MARK_SYMBOL : " ");
     }
 
     String getDescription() {

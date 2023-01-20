@@ -223,53 +223,21 @@ public class Duke {
     //Level 9
     void moreOop() {
         
-        //Printable.greet();
-        //Scanner sc = new Scanner(System.in);
         storage = new Storage();
         storage.readFromFile();
         this.taskList = storage.getTasks();
         storage.createDirectory();        
+        
         ui = new Ui();
-
         ui.showWelcome();
+        
         boolean isExit = false;
-        boolean isFirst = true;
-
+        
         while (!isExit) {
             ui.readCommand();
-            this.taskList = ui.execute(this.taskList);
-            
-            //if (!isFirst) {
-            //}
-            //isFirst = false;
+            taskList = ui.execute(taskList);
             storage.writeToFile(taskList.toString());
         }
-
-        /*
-        while (true) {
-            String description = sc.next();
-            if (description.equals(Printable.SHOW_TASKS)) {
-                this.tasks.listAllTasks();
-            } else if (description.equals(Printable.TERMINATE)) {
-                Printable.exit();
-            } else if (description.equals(Printable.MARK)) {
-                tasks = Printable.mark(sc, this.tasks);
-            }  else if (description.equals(Printable.UNMARK)) {
-                tasks = Printable.unmark(sc, this.tasks);
-            } else if (description.equals(Printable.TODO)) {
-                tasks = Printable.toDo(sc, this.tasks);
-            } else if (description.equals(Printable.DEADLINE)) {
-                tasks = Printable.deadline(sc, this.tasks);
-            } else if (description.equals(Printable.EVENT)) {
-                tasks = Printable.events(sc, this.tasks);
-            } else if (description.equals(Printable.DELETE)) {
-                tasks = Printable.delete(sc, this.tasks);
-            }  else {
-                dukeExceptionWarning(description);
-            }
-            storage.writeToFile(tasks.toString());
-        }
-        */
     }
     
     public static void main(String[] args) {

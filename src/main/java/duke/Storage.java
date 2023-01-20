@@ -41,20 +41,18 @@ class Storage {
           String path = System.getProperty("user.dir") + "/dukeList.txt";
           Scanner scanner = new Scanner(new File(path));
           String inputFromFile = scanner.useDelimiter("\\A").next();
-          System.out.println("String " + inputFromFile);
           String[] inputArr = inputFromFile.substring(1,inputFromFile.length()-1).split(",");
-          for (String task : inputArr) {
-            
+          for (String task : inputArr) {  
             if (("" + task.charAt(0)).equals(" ")) {
                 task = task.substring(1);
             }
-            if (isSymbol(task, "X") || isSymbol(task, " ")) {
+            if (isSymbol(task, Parser.MARK_SYMBOL) || isSymbol(task, " ")) {
                 rephraseNoDate(task);
-            } else if (isSymbol(task, "T")) {
+            } else if (isSymbol(task, Parser.TODO_SYMBOL)) {
                 rephraseToDo(task);
-            } else if (isSymbol(task, "D")) {
+            } else if (isSymbol(task, Parser.DEADLINE_SYMBOL)) {
                 rephraseDeadline(task);
-            } else if (isSymbol(task, "E")) {
+            } else if (isSymbol(task, Parser.EVENT_SYMBOL)) {
                 rephraseEvents(task);
             }
           }
@@ -73,7 +71,7 @@ class Storage {
     }
 
     void markTask(String task) {
-        boolean isMark = ("" + task.charAt(1)).equals("X") ? true : false;
+        boolean isMark = ("" + task.charAt(1)).equals(Parser.MARK_SYMBOL) ? true : false;
         if (isMark) {
             this.tasks = Parser.mark(this.tasks.numberOfTasks() - 1, this.tasks);
         } 

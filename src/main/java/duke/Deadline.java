@@ -31,12 +31,12 @@ class Deadline extends Task {
     
     @Override
     Deadline markAsDone() {
-        return new Deadline(this.getDescription(), by, true);
+        return new Deadline(getDescription(), by, true);
     }
     
     @Override
     Deadline markAsUndone() {
-        return new Deadline(this.getDescription(), by, false);
+        return new Deadline(getDescription(), by, false);
     }
     
     @Override

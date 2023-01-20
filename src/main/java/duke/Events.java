@@ -21,8 +21,7 @@ class Events extends Task {
         this.from = from;
         this.to = to;
     }
-    
-    
+        
     String localDateParser(String date) {
         try {
             LocalDate localDate = LocalDate.parse(date);
@@ -34,12 +33,12 @@ class Events extends Task {
     
     @Override
     Events markAsDone() {
-        return new Events(this.getDescription(), from, to, true);
+        return new Events(getDescription(), from, to, true);
     }
     
     @Override
     Events markAsUndone() {
-        return new Events(this.getDescription(), from, to, false);
+        return new Events(getDescription(), from, to, false);
     }
 
     @Override
