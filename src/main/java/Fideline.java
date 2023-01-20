@@ -1,5 +1,5 @@
-import java.util.ArrayList;
 import java.util.Scanner;
+import java.util.regex.Pattern;
 
 public class Fideline {
 
@@ -22,8 +22,8 @@ public class Fideline {
     public void start() {
         // init Scanner to view user response
         Scanner sc = new Scanner(System.in);
-        // init list to store user input
-        ArrayList<String> list = new ArrayList<String>();
+        // init TaskManager to manage all tasks from user
+        TaskManager taskManager = new TaskManager();
         // print greeting message
         greeting();
         // running boolean checks if bot is still running
@@ -35,23 +35,34 @@ public class Fideline {
                 // bye command stops the bot
                 running = false;
                 farewell();
-            } else if (userInput.equals("list")) {
-                // list command shows current list
-                // tells user if list is empty
-                if (list.size() == 0) {
+            } else if (userInput.equals("list")) {  // list command shows current list
+                String listMessage = taskManager.listTasks();
+                if (listMessage.equals("")) {
                     botSays("eh are you stupid? \nyour list is currently empty!");
                 } else {
-                    // compiles and formats list objects into listMessage
-                    String listMessage = "";
-                    for (int i = 0; i < list.size(); i++) {
-                        listMessage += (i + 1) + ". " + list.get(i) + "\n";
-                    }
-                    botSays(listMessage);
+                    botSays("here! your list:" + listMessage);
                 }
-            }
-            else {
+            } else if (Pattern.matches("mark \\d+?", userInput)) {
+                int taskNum = Integer.valueOf(userInput.split(" ")[1]);
+                if (taskManager.markTask(taskNum)) { // marked successfully
+                    botSays("nice work! i've taken note!: \n" +
+                            "   [X] " + taskManager.getTaskName(taskNum)); // success message (marked)
+                } else { // unable to mark, task at given index does not exist
+                    botSays("uh hello?? can you check properly? \n " +
+                            "task does not exist bro"); // failure to mark message
+                };
+            } else if (Pattern.matches("unmark \\d+?", userInput)) {
+                int taskNum = Integer.valueOf(userInput.split(" ")[1]);
+                if (taskManager.unmarkTask(taskNum)) { // unmarked successfully
+                    botSays("uhh okay... i've unmarked your task: \n" +
+                            "   [ ] " + taskManager.getTaskName(taskNum)); // success message (unmarked)
+                } else { // unable to unmark, task at given index does not exist
+                    botSays("uh hello?? can you check properly? \n " +
+                            "task does not exist bro"); // failure to mark message
+                };
+            } else {
                 // adds userInput to list
-                list.add(userInput);
+                taskManager.addTask(userInput);
                 // notifies user that list has been updated
                 botSays("ok! i've added \"" + userInput + "\" to your list!");
             }
