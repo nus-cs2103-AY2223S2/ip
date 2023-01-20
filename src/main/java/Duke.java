@@ -51,16 +51,43 @@ public class Duke {
                     System.out.println((i + 1) + ". " + history[i]);
                 }
                 System.out.println("-----------------------------------------");
+                continue;
             }
-            else {
-                history[count] = new Task(input);
-                count++;
+
+            String[] newTask = input.split(" ", 2);
+            if (newTask[0].equals("todo")) {
+                history[count] = new Todo(newTask[1]);
                 System.out.println("-----------------------------------------\n" +
-                        "added: " + input + "\n" +
+                        "added: " + history[count] + "\n" +
+                        "Now you have " + (count + 1) + " task(s) in the list.\n" +
                         "-----------------------------------------\n");
+                count++;
             }
+            if (newTask[0].equals("deadline")) {
+                String[] taskTime = newTask[1].split("/", 2);
+                history[count] = new Deadline(taskTime[0], String.join(",", taskTime[1].split("/")));
+                System.out.println("-----------------------------------------\n" +
+                        "added: " + history[count] + "\n" +
+                        "Now you have " + (count + 1) + " task(s) in the list.\n" +
+                        "-----------------------------------------\n");
+                count++;
+            }
+            if (newTask[0].equals("event")) {
+                String[] taskTime = newTask[1].split("/", 2);
+                history[count] = new Event(taskTime[0], String.join(",", taskTime[1].split("/")));
+                System.out.println("-----------------------------------------\n" +
+                        "added: " + history[count] + "\n" +
+                        "Now you have " + (count + 1) + " task(s) in the list.\n" +
+                        "-----------------------------------------\n");
+                count++;
+            }
+
+
         }
 
         System.out.println(goodbye);
+
     }
+
 }
+
