@@ -1,0 +1,5 @@
+THINGS TO DO:
+- abstract everything
+- processor for Strings into tokens
+- make Runnable subclasses
+- store types of Tasks in a HashMap<String, Runnable>

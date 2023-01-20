@@ -1,3 +1,7 @@
+package collections;
+
+import models.Task;
+
 import java.util.ArrayList;
 
 public class TaskList extends ArrayList<Task> {
@@ -6,18 +10,12 @@ public class TaskList extends ArrayList<Task> {
         super();
     }
 
-    public void mark(int i) {
-        super.get(i-1).mark();
-    }
+    public void mark(int i) { super.get(i-1).mark(); }
 
-    public void unMark(int i) {
-        super.get(i-1).unMark();
-    }
+    public void unMark(int i) { super.get(i-1).unMark(); }
 
     @Override
-    public Task get(int i) {
-        return super.get(i-1);
-    }
+    public Task get(int i) { return super.get(i-1); }
 
     @Override
     public Task remove(int i) {

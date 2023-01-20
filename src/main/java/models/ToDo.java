@@ -1,3 +1,7 @@
+package models;
+
+import models.Task;
+
 public class ToDo extends Task {
 
     public ToDo(String description) {
@@ -5,7 +9,5 @@ public class ToDo extends Task {
     }
 
     @Override
-    public String toString() {
-        return "[T]" + super.toString();
-    }
+    public String toString() { return "[T]" + super.toString(); }
 }
