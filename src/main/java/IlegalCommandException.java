@@ -23,6 +23,8 @@ public class IlegalCommandException extends DukeException {
                 return "Command Exception: Make sure that your event command is as such\n\nevent name-of-task /from start-date /to end-date\n";
             case DEADLINE:
                 return "Command Exception: Make sure that your deadline command is as such\n\ndeadline name-of-task /by date-of-deadline\n";
+            case DELETE:
+                return "Command Exception: Make sure that your delete command is as such\n\ndelete index-of-task\n";
             case UNRECOGNIZED:
                 return "Command Exception: That is not a recognized command!\n";
         }

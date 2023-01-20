@@ -6,5 +6,6 @@ public enum Commands {
     TODO,
     EVENT,
     DEADLINE,
-    UNRECOGNIZED
+    UNRECOGNIZED,
+    DELETE
 }

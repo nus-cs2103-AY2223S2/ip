@@ -11,7 +11,6 @@ public class Duke {
     }
 
     private static void addToList(String title, TaskType type, String start, String end) {
-        // TODO: Handle all task types
         Task task;
         if (type == TaskType.TODO) {
             task = new ToDo(title);
@@ -26,7 +25,14 @@ public class Duke {
         taskList.add(task);
         System.out.println("Added this to your task list:");
         System.out.println("  " + task.toString());
-        System.out.println(String.format("Number of tasks: %d", taskList.size()));
+        System.out.println(String.format("Number of tasks left: %d", taskList.size()));
+    }
+
+    private static void deleteTask(int taskIndex) {
+        Task deletedTask = taskList.remove(taskIndex);
+        System.out.println("Removed this from your task list:");
+        System.out.println("  " + deletedTask.toString());
+        System.out.println(String.format("Number of tasks left: %d", taskList.size()));
     }
 
     private static void printList() {
@@ -78,19 +84,19 @@ public class Duke {
                 int markIndex;
                 try {
                     markIndex = Integer.parseInt(arguments) - 1;
+                    changeTaskCompletionStatus(markIndex, true);
                 } catch (Throwable e) {
                     throw new IlegalCommandException(Commands.MARK);
                 }
-                changeTaskCompletionStatus(markIndex, true);
                 break;
             case "unmark":
                 int unmarkIndex;
                 try {
                     unmarkIndex = Integer.parseInt(arguments) - 1;
+                    changeTaskCompletionStatus(unmarkIndex, false);
                 } catch (Throwable e) {
                     throw new IlegalCommandException(Commands.UNMARK);
                 }
-                changeTaskCompletionStatus(unmarkIndex, false);
                 break;
             case "todo":
                 if (arguments == null || arguments.trim().equals("")) {
@@ -104,10 +110,10 @@ public class Duke {
                 try {
                     slashIndex = arguments.indexOf('/');
                     dateBy = arguments.substring(slashIndex + 4);
+                    addToList(arguments.substring(0, slashIndex - 1), TaskType.DEADLINE, null, dateBy);
                 } catch (Throwable e) {
                     throw new IlegalCommandException(Commands.DEADLINE);
                 }
-                addToList(arguments.substring(0, slashIndex - 1), TaskType.DEADLINE, null, dateBy);
                 break;
             case "event":
                 int firstSlashIndex, secondSlashIndex;
@@ -118,10 +124,19 @@ public class Duke {
                     secondSlashIndex = startAndEnd.indexOf('/');
                     start = startAndEnd.substring(0, secondSlashIndex - 1);
                     end = startAndEnd.substring(secondSlashIndex + 4);
+                    addToList(arguments.substring(0, firstSlashIndex - 1), TaskType.EVENT, start, end);
                 } catch (Throwable e) {
                     throw new IlegalCommandException(Commands.EVENT);
                 }
-                addToList(arguments.substring(0, firstSlashIndex - 1), TaskType.EVENT, start, end);
+                break;
+            case "delete":
+                int deleteIndex;
+                try {
+                    deleteIndex = Integer.parseInt(arguments) - 1;
+                    deleteTask(deleteIndex);
+                } catch (Throwable e) {
+                    throw new IlegalCommandException(Commands.DELETE);
+                }
                 break;
             default:
                 throw new IlegalCommandException(Commands.UNRECOGNIZED);

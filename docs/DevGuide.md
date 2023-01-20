@@ -1,0 +1,7 @@
+# Developer Guide
+
+### If you make a new command
+1. Add to the command handler in Duke.java
+2. Make new command enum
+3. Add functionality for error handling
+4. Add command functionality
