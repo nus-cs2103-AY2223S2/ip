@@ -23,6 +23,10 @@ public class Item {
         this.done = false;
     }
 
+    public String messageWhenAdded() {
+        return "DukeyList just added a new item: ";
+    }
+
     @Override
     public String toString() {
         if (this.isDone()) {

@@ -10,7 +10,7 @@ public class ItemList {
 
     public void addItem(Item item) {
         this.list.add(item);
-        System.out.println("DukeyList just added: " + item.toString());
+        System.out.println(item.messageWhenAdded() + " " + item.toString());
     }
 
     public void readList() {
