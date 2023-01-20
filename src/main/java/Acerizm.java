@@ -35,7 +35,7 @@ public class Acerizm {
             } else if(input.equals("list")){
                 System.out.println("*-".repeat(100));
                 for(int i=0; i < itemList.size();i++){
-                    System.out.println(String.format("%d. %s",i,itemList.get(i)));
+                    System.out.println(String.format("%d. %s",i+1,itemList.get(i)));
                 }
                 System.out.println("*-".repeat(100));
             }
