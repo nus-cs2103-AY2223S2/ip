@@ -43,7 +43,7 @@ public class TaskManager implements ExecutableRegisterable {
      * @param id the id of the task instance.
      * @return the executable for adding a Task to this class.
      */
-    IdentifiableExecutable getAddTaskExecutable(ThrowingFunction<String[], Task,
+    private IdentifiableExecutable getAddTaskExecutable(ThrowingFunction<String[], Task,
             InvalidArgumentException> taskSupplier, String id) {
         return new IdentifiableExecutable() {
             @Override
@@ -71,7 +71,7 @@ public class TaskManager implements ExecutableRegisterable {
      * Gets the executable for listing TodoItems.
      * @return the executable for listing all the TodoItems.
      */
-    IdentifiableExecutable getListTodosExecutable() {
+    private IdentifiableExecutable getListTodosExecutable() {
        return new IdentifiableExecutable() {
            @Override
            public String getId() {
@@ -117,7 +117,8 @@ public class TaskManager implements ExecutableRegisterable {
      *                   complete or not.
      * @return the executable that will mark an item's isComplete.
      */
-    IdentifiableExecutable getMarkerExecutable(boolean isComplete, String id) {
+    private IdentifiableExecutable getMarkerExecutable(boolean isComplete,
+                                                 String id) {
         return new IdentifiableExecutable() {
             @Override
             public ExitStatus execute(String[] tokens) {
@@ -143,7 +144,7 @@ public class TaskManager implements ExecutableRegisterable {
         };
     }
 
-    IdentifiableExecutable getDeleteExecutable() {
+    private IdentifiableExecutable getDeleteExecutable() {
         return new IdentifiableExecutable() {
             @Override
             public ExitStatus execute(String[] tokens) {
