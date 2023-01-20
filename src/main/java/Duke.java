@@ -70,14 +70,6 @@ public class Duke {
                     } catch (ArrayIndexOutOfBoundsException e1) {
                         printResponse("OOPS!!! The description of this event is incomplete.");
                     }
-                } else if (command.equals("delete")) {
-                    try {
-                        Task deleteTask = arr.remove(Integer.parseInt(arrStr[1]) - 1);
-                        printResponse("Noted. I've removed this task: \n" + deleteTask + "\nNow you have " + arr.size() + " " +
-                                "tasks in the list.");
-                    } catch (ArrayIndexOutOfBoundsException e1) {
-                        printResponse("OOPS!!! Please choose a Task to delete.");
-                    }
                 } else {
                     throw new IllegalArgumentException();
                 }
