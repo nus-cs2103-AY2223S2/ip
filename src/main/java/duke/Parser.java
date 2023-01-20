@@ -14,8 +14,10 @@ import duke.task.Event;
 import duke.task.Task;
 import duke.task.Todo;
 
+/** Class that parses user input */
 public class Parser {
 
+    /** Constant Strings to represent each command supported by Duke */
     private static final String END_COMMAND = "bye";
     private static final String LIST_COMMAND = "list";
     private static final String MARK_COMMAND = "mark";
@@ -28,16 +30,30 @@ public class Parser {
     private static final String fromIndicator = "/from";
     private static final String toIndicator = "/to";
 
-    public static Command parseCommand(String command) throws DukeException {
-        if (command.equals(Parser.END_COMMAND)) {
+    /**
+     * Parses the given command string.
+     *
+     * @param line String representing user command.
+     * @return Command object representing user command.
+     * @throws DukeException if given command string cannot be parsed.
+     */
+    public static Command parseCommand(String line) throws DukeException {
+        if (line.equals(Parser.END_COMMAND)) {
             return new ExitCommand();
-        } else if (command.equals(Parser.LIST_COMMAND)) {
+        } else if (line.equals(Parser.LIST_COMMAND)) {
             return new ListCommand();
         } else {
-            return processCommand(command);
+            return processCommand(line);
         }
     }
 
+    /**
+     * Parses multi-word command strings.
+     *
+     * @param line String representing multi-word command.
+     * @return Command object representing multi-word command.
+     * @throws DukeException if given multi-word command string cannot be parsed.
+     */
     private static Command processCommand(String line) throws DukeException {
         String[] splitCommand = line.split(" ");
         String command = splitCommand[0];
@@ -52,6 +68,15 @@ public class Parser {
         }
     }
 
+    /**
+     * Parses command strings to do with altering the task list
+     * or the state of tasks.
+     *
+     * @param command Command keyword.
+     * @param splitCommand Command string split by spaces.
+     * @return Command object representing user command.
+     * @throws DukeException if given command string cannot be parsed.
+     */
     private static Command processTask(String command, String[] splitCommand) throws DukeException {
         if (splitCommand.length == 1) {
             throw new DukeException("A task number needs to be provided.");
@@ -73,6 +98,13 @@ public class Parser {
 
     }
 
+    /**
+     * Parses command strings to do with adding tasks.
+     * @param command Command keyword.
+     * @param line String representing user command.
+     * @return Command object.
+     * @throws DukeException if task cannot be created.
+     */
     private static Command addTask(String command, String line) throws DukeException {
         Task task = null;
         switch (command) {

@@ -9,14 +9,31 @@ import java.nio.file.Paths;
 
 import duke.exception.DukeException;
 
+/** Class that saves to and loads from task storage */
 public class Storage {
+
+    /** Relative path to the data directory used for storing tasks */
     private String dirPath;
+    /** Name of file used for storing tasks */
     private final String fileName = "duke.txt";
 
+    /**
+     * Constructs a Storage object with a specified path
+     * to the data directory used for storing tasks.
+     *
+     * @param dirPath Relative path to the data directory
+     *                used for storing tasks.
+     */
     public Storage(String dirPath) {
         this.dirPath = dirPath;
     }
 
+    /**
+     * Loads tasks from storage.
+     *
+     * @return String representing all stored tasks
+     * @throws DukeException if loading from storage fails.
+     */
     public String load() throws DukeException {
         try {
             Path dirPath = Paths.get(this.dirPath);
@@ -33,6 +50,12 @@ public class Storage {
         }
     }
 
+    /**
+     * Save tasks to storage.
+     *
+     * @param taskList String representing all tasks to save
+     * @throws DukeException if saving to storage fails.
+     */
     public void save(String taskList) throws DukeException {
         try {
             FileWriter fw = new FileWriter(this.dirPath + this.fileName);

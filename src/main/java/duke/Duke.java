@@ -3,16 +3,28 @@ package duke;
 import duke.command.Command;
 import duke.exception.DukeException;
 
+/** Class that encapsulates the Duke chatbot */
 public class Duke {
 
+    /** Relative path to the data directory used for storing tasks */
     private static final String dirPath = "./data/";
+    /** Storage object to interact with storage */
     private Storage storage;
+    /** TaskList object to store tasks */
     private TaskList tasks;
+    /** UI object to display user interface and read user input */
     private Ui ui;
 
-    public Duke(String filePath) {
+    /**
+     * Constructs a Duke object with a specified path
+     * to the data directory used for storing tasks.
+     *
+     * @param dirPath Relative path to the data directory
+     *                used for storing tasks.
+    */
+    public Duke(String dirPath) {
         this.ui = new Ui();
-        this.storage = new Storage(filePath);
+        this.storage = new Storage(dirPath);
         try {
             this.tasks = new TaskList(storage.load());
         } catch (DukeException e) {
@@ -21,6 +33,11 @@ public class Duke {
         }
     }
 
+    /**
+     * Run the main loop of the Duke chatbot
+     * where Duke takes in user input
+     * and responds to the commands given.
+     */
     public void run() {
         this.ui.showGreeting();
         this.ui.showSeparator();
