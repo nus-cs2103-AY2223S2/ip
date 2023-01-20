@@ -2,18 +2,28 @@ import java.util.*;
 import java.io.*;
 
 public class DukeException {
-    static void validate (int actualArgs, int expectedArgs,String command) throws IncorrectNoOfArgumentException {
+    private static int expectedArgs = 1;
+    static void validate (boolean secondaryCheck, String command, String[] text) throws IncorrectNoOfArgumentException {
         StringBuilder sb = new StringBuilder();
-        if (actualArgs != expectedArgs) {
+        if (secondaryCheck) {
+            expectedArgs = 2;
+        } else {
+            expectedArgs = 1;
+        }
+        if (text.length != expectedArgs) {
             sb.append("\n    ____________________________________________________________\n")
                     .append("     ☹ OOPS!!! You have provided incorrect number of arguments for the command '")
                     .append(command).append("'.\n     Please try again after checking!\n")
                     .append("    ____________________________________________________________\n");
             throw new IncorrectNoOfArgumentException(sb.toString());
         }
+        if (secondaryCheck) {
+            validate(text[1], command);
+        }
     }
 
     static void validate (String text, String command) throws IncorrectNoOfArgumentException {
+        // Checking for blank spaces
         StringBuilder sb = new StringBuilder();
         if ( (text.equals("")) || (text.isBlank()) ) {
             sb.append("\n    ____________________________________________________________\n")

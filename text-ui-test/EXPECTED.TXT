@@ -6,30 +6,212 @@ Hello from
 |____/ \__,_|_|\_\___|
 
     ____________________________________________________________
-    Hello! I'm Duke
+    Hello! I'm Duke.
     What can I do for you?
     ____________________________________________________________
 
+InvalidCommandException:     ____________________________________________________________
+     ☹ OOPS!!! This is an incorrect command!
+     Please try again with a valid command!
     ____________________________________________________________
-    Got it. I've added this task:
+
+IncorrectNoOfArgumentException: 
+    ____________________________________________________________
+     ☹ OOPS!!! You have provided incorrect number of arguments for the command 'todo'.
+     Please try again after checking!
+    ____________________________________________________________
+
+    ____________________________________________________________
+    Got it. I've added this task to the list:
       [T][ ] borrow book
     Now you have 1 tasks in the list.
     ____________________________________________________________
 
     ____________________________________________________________
-    Here are the tasks in your list:
-    1.[T][ ] borrow book
+    Got it. I've added this task to the list:
+      [T][ ] return book
+    Now you have 2 tasks in the list.
+    ____________________________________________________________
+
+IncorrectNoOfArgumentException: 
+    ____________________________________________________________
+     ☹ OOPS!!! You have provided incorrect number of arguments for the command 'list'.
+     Please try again after checking!
     ____________________________________________________________
 
     ____________________________________________________________
-    Got it. I've added this task:
-      [D][ ] return book  (by: Sunday)
+    Here are the tasks in your list:
+    1.[T][ ] borrow book
+    2.[T][ ] return book
+    ____________________________________________________________
+
+    ____________________________________________________________
+    Here are the tasks in your list:
+    1.[T][ ] borrow book
+    2.[T][ ] return book
+    ____________________________________________________________
+
+IncorrectNoOfArgumentException: 
+    ____________________________________________________________
+     ☹ OOPS!!! You have provided incorrect number of arguments for the command 'mark'.
+     Please try again after checking!
+    ____________________________________________________________
+
+    ____________________________________________________________
+    The task you are trying to mark is out of range! Try again!
+    ____________________________________________________________
+
+    ____________________________________________________________
+     Nice! I've marked this task as done:
+       [T][X] return book
+    ____________________________________________________________
+
+    ____________________________________________________________
+     Nice! I've marked this task as done:
+       [T][X] borrow book
+    ____________________________________________________________
+
+    ____________________________________________________________
+    Here are the tasks in your list:
+    1.[T][X] borrow book
+    2.[T][X] return book
+    ____________________________________________________________
+
+IncorrectNoOfArgumentException: 
+    ____________________________________________________________
+     ☹ OOPS!!! You have provided incorrect number of arguments for the command 'unmark'.
+     Please try again after checking!
+    ____________________________________________________________
+
+    ____________________________________________________________
+     Alright, I've marked this task as not done yet:
+       [T][ ] borrow book
+    ____________________________________________________________
+
+    ____________________________________________________________
+     Alright, I've marked this task as not done yet:
+       [T][ ] return book
+    ____________________________________________________________
+
+    ____________________________________________________________
+    Here are the tasks in your list:
+    1.[T][ ] borrow book
+    2.[T][ ] return book
+    ____________________________________________________________
+
+IncorrectNoOfArgumentException: 
+    ____________________________________________________________
+     ☹ OOPS!!! You have provided incorrect number of arguments for the command 'delete'.
+     Please try again after checking!
+    ____________________________________________________________
+
+    ____________________________________________________________
+    Noted. I've removed this task:
+      [T][ ] borrow book
+    Now you have 1 tasks in the list.
+    ____________________________________________________________
+
+    ____________________________________________________________
+    The task you are trying to delete is out of range! Try again!
+    ____________________________________________________________
+
+    ____________________________________________________________
+    Noted. I've removed this task:
+      [T][ ] return book
+    Now you have 0 tasks in the list.
+    ____________________________________________________________
+
+    ____________________________________________________________
+    Here are the tasks in your list:
+    ____________________________________________________________
+
+IncorrectNoOfArgumentException: 
+    ____________________________________________________________
+     ☹ OOPS!!! You have provided incorrect number of arguments for the command 'deadline'.
+     Please try again after checking!
+    ____________________________________________________________
+
+IncorrectNoOfArgumentException: 
+    ____________________________________________________________
+     ☹ OOPS!!! You have provided incorrect number of arguments for the command 'deadline'.
+     Please try again after checking!
+    ____________________________________________________________
+
+IncorrectNoOfArgumentException: 
+    ____________________________________________________________
+     ☹ OOPS!!! You have provided incorrect number of arguments for the command 'deadline'.
+     Please try again after checking!
+    ____________________________________________________________
+
+    ____________________________________________________________
+    Got it. I've added this task to the list:
+      [D][ ] HW1  (by: Tuesday)
+    Now you have 1 tasks in the list.
+    ____________________________________________________________
+
+    ____________________________________________________________
+    Got it. I've added this task to the list:
+      [D][ ] HW2  (by: Wednesday)
     Now you have 2 tasks in the list.
     ____________________________________________________________
 
     ____________________________________________________________
-    Got it. I've added this task:
-      [E][ ] project meeting (from: Mon 2pm to: 4pm)
+    Here are the tasks in your list:
+    1.[D][ ] HW1  (by: Tuesday)
+    2.[D][ ] HW2  (by: Wednesday)
+    ____________________________________________________________
+
+IncorrectNoOfArgumentException: 
+    ____________________________________________________________
+     ☹ OOPS!!! You have provided incorrect number of arguments for the command 'event'.
+     Please try again after checking!
+    ____________________________________________________________
+
+IncorrectNoOfArgumentException: 
+    ____________________________________________________________
+     ☹ OOPS!!! You have provided incorrect number of arguments for the command 'event'.
+     Please try again after checking!
+    ____________________________________________________________
+
+IncorrectNoOfArgumentException: 
+    ____________________________________________________________
+     ☹ OOPS!!! You have provided incorrect number of arguments for the command 'event'.
+     Please try again after checking!
+    ____________________________________________________________
+
+IncorrectNoOfArgumentException: 
+    ____________________________________________________________
+     ☹ OOPS!!! You have provided incorrect number of arguments for the command 'event'.
+     Please try again after checking!
+    ____________________________________________________________
+
+    ____________________________________________________________
+    Got it. I've added this task to the list:
+      [E][ ] Birthday Party (from: 10am Sunday to: 10pm Sunday)
     Now you have 3 tasks in the list.
+    ____________________________________________________________
+
+    ____________________________________________________________
+    Got it. I've added this task to the list:
+      [E][ ] Birthday Party2 (from: 8am Monday to: 8pm Monday)
+    Now you have 4 tasks in the list.
+    ____________________________________________________________
+
+    ____________________________________________________________
+    Here are the tasks in your list:
+    1.[D][ ] HW1  (by: Tuesday)
+    2.[D][ ] HW2  (by: Wednesday)
+    3.[E][ ] Birthday Party (from: 10am Sunday to: 10pm Sunday)
+    4.[E][ ] Birthday Party2 (from: 8am Monday to: 8pm Monday)
+    ____________________________________________________________
+
+IncorrectNoOfArgumentException: 
+    ____________________________________________________________
+     ☹ OOPS!!! You have provided incorrect number of arguments for the command 'bye'.
+     Please try again after checking!
+    ____________________________________________________________
+
+    ____________________________________________________________
+    Bye. Hope to see you again soon!
     ____________________________________________________________
 
