@@ -11,13 +11,14 @@ public class Event extends Task {
 
     @Override
     public String saveString() {
-        return "E;" + this.isDone + ";" + this.description + ";" + this.startDateTime + ";"
-                + this.endDateTime;
+        return "E;" + this.isDone + ";" + this.description + ";"
+                + startDateTime.format(Task.saveFormat) + ";"
+                + endDateTime.format(Task.saveFormat);
     }
 
     @Override
     public String toString() {
-        return "[E]" + super.toString() + "(from: " + startDateTime.format(Task.format) + "to: "
-                + endDateTime.format(Task.format) + ")";
+        return "[E]" + super.toString() + "(from: " + startDateTime.format(Task.printFormat)
+                + " to: " + endDateTime.format(Task.printFormat) + ")";
     }
 }

@@ -9,11 +9,12 @@ public class Deadline extends Task {
 
     @Override
     public String saveString() {
-        return "D;" + this.isDone + ";" + this.description + ";" + this.dateTime;
+        return "D;" + this.isDone + ";" + this.description + ";"
+                + dateTime.format(Task.saveFormat);
     }
 
     @Override
     public String toString() {
-        return "[D]" + super.toString() + "(by: " + dateTime.format(Task.format) + ")";
+        return "[D]" + super.toString() + "(by: " + dateTime.format(Task.printFormat) + ")";
     }
 }

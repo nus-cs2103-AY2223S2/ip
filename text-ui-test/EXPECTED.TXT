@@ -15,19 +15,19 @@ There are 1 task(s) in Book
 ________________________________________________________________________________
 ________________________________________________________________________________
 Understood, adding the deadline:
-    [D][ ] return book (by: Jan 20th)
+    [D][ ] return book (by: 20 Jan (Fri) - 08:00AM)
 There are 2 task(s) in Book.
 ________________________________________________________________________________
 ________________________________________________________________________________
 Understood, adding the event:
-    [E][ ] book release (from: Jan 18th 12pm to: 2pm)
+    [E][ ] book release (from: 18 Jan (Wed) - 12:00PM to: 18 Jan (Wed) - 02:00PM)
 There are 3 task(s) in Book.
 ________________________________________________________________________________
 ________________________________________________________________________________
 Here are the tasks stored in Book:
 1.  [T][ ] pick up book
-2.  [D][ ] return book (by: Jan 20th)
-3.  [E][ ] book release (from: Jan 18th 12pm to: 2pm)
+2.  [D][ ] return book (by: 20 Jan (Fri) - 08:00AM)
+3.  [E][ ] book release (from: 18 Jan (Wed) - 12:00PM to: 18 Jan (Wed) - 02:00PM)
 ________________________________________________________________________________
 ________________________________________________________________________________
 The following task has been marked as done:
@@ -35,27 +35,27 @@ The following task has been marked as done:
 ________________________________________________________________________________
 ________________________________________________________________________________
 The following task has been marked as done:
-    [D][X] return book (by: Jan 20th)
+    [D][X] return book (by: 20 Jan (Fri) - 08:00AM)
 ________________________________________________________________________________
 ________________________________________________________________________________
 The following task has been marked as done:
-    [E][X] book release (from: Jan 18th 12pm to: 2pm)
+    [E][X] book release (from: 18 Jan (Wed) - 12:00PM to: 18 Jan (Wed) - 02:00PM)
 ________________________________________________________________________________
 ________________________________________________________________________________
 Here are the tasks stored in Book:
 1.  [T][X] pick up book
-2.  [D][X] return book (by: Jan 20th)
-3.  [E][X] book release (from: Jan 18th 12pm to: 2pm)
+2.  [D][X] return book (by: 20 Jan (Fri) - 08:00AM)
+3.  [E][X] book release (from: 18 Jan (Wed) - 12:00PM to: 18 Jan (Wed) - 02:00PM)
 ________________________________________________________________________________
 ________________________________________________________________________________
 The following task has been marked as not done:
-    [D][ ] return book (by: Jan 20th)
+    [D][ ] return book (by: 20 Jan (Fri) - 08:00AM)
 ________________________________________________________________________________
 ________________________________________________________________________________
 Here are the tasks stored in Book:
 1.  [T][X] pick up book
-2.  [D][ ] return book (by: Jan 20th)
-3.  [E][X] book release (from: Jan 18th 12pm to: 2pm)
+2.  [D][ ] return book (by: 20 Jan (Fri) - 08:00AM)
+3.  [E][X] book release (from: 18 Jan (Wed) - 12:00PM to: 18 Jan (Wed) - 02:00PM)
 ________________________________________________________________________________
 ________________________________________________________________________________
 Bye! Pick up Book again soon!

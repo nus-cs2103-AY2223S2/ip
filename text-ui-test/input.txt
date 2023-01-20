@@ -1,6 +1,6 @@
 todo pick up book
-deadline return book /by Jan 20th
-event book release /from Jan 18th 12pm /to 2pm
+deadline return book /by 20/01/23-0800
+event book release /from 18/01/23-1200 /to 18/01/23-1400
 list
 mark 1
 mark 2
