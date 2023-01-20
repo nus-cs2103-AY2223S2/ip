@@ -46,6 +46,6 @@ public class Task {
 
     @Override
     public String toString() {
-        return this.getCompletedOrNotSign() + " " + this.name;
+        return this.getCompletedOrNotSign() + this.name;
     }
 }
