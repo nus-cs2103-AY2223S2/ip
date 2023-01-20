@@ -55,6 +55,8 @@ public class Duke {
         try {
             Command command = new Command(input);
             switch (command.getName()) {
+            case NO_OP:
+                break;
             case BYE:
                 this.isRunning = false;
                 break;
@@ -95,6 +97,11 @@ public class Duke {
         System.out.println("Good bye!");
     }
 
+    /**
+     * Entry point to start and run duke.
+     *
+     * @param args Command line arguments.
+     */
     public static void main(String[] args) {
         Duke duke = new Duke();
         duke.run();

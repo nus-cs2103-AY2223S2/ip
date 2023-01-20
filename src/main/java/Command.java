@@ -1,5 +1,4 @@
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.LinkedHashMap;
 public class Command {
 
@@ -14,7 +13,7 @@ public class Command {
         LIST,
         MARK,
         DELETE,
-        NONE
+        NO_OP
     }
 
     /** Arguments of the command */
@@ -42,6 +41,7 @@ public class Command {
 
     /**
      * Returns the type of command.
+     *
      * @return the type of command.
      */
     public Argument getName() {
@@ -59,37 +59,18 @@ public class Command {
     }
 
     private Argument parseArgument(String arg) {
-        switch (arg) {
-        case "bye":
-            return Argument.BYE;
-        case "todo":
-            return Argument.TODO;
-        case "deadline":
-            return Argument.DEADLINE;
-        case "by":
-            return Argument.BY;
-        case "event":
-            return Argument.EVENT;
-        case "from":
-            return Argument.FROM;
-        case "to":
-            return Argument.TO;
-        case "list":
-            return Argument.LIST;
-        case "mark":
-            return Argument.MARK;
-        case "delete":
-            return Argument.DELETE;
-        case "":
-            return Argument.NONE;
-        default:
+        if (arg.equals("")) {
+            return Argument.NO_OP;
+        }
+        try {
+            return Argument.valueOf(arg.toUpperCase());
+        } catch (IllegalArgumentException e) {
             throw new IllegalArgumentException("Command "
                     + arg + " not recognised");
         }
     }
 
     private void checkArguments() {
-        Argument name = this.getName();
         ArrayList<Argument> requiredArgs = new ArrayList<>();
         ArrayList<Argument> requiredValues = new ArrayList<>();
         switch (this.getName()) {
