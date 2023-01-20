@@ -5,6 +5,7 @@ import duke.utils.BooleanUtils;
 import duke.utils.LocalDateTimeUtils;
 
 import java.time.LocalDateTime;
+import java.time.format.DateTimeParseException;
 
 /**
  * Represents a deadline task.
@@ -30,7 +31,7 @@ public class Deadline extends Task {
      *
      * @param args Data about the deadline that was loaded from storage.
      * @return The Deadline object created using data loaded from storage.
-     * @throws DukeException Indicates missing data or incorrect data type in args.
+     * @throws DukeException Indicates missing data or incorrect data type or format in args.
      */
     public static Deadline createFromStorage(String[] args) throws DukeException {
         if (args.length != 4) {
@@ -43,12 +44,20 @@ public class Deadline extends Task {
 
         args = Task.formatStringsFromStorage(args);
 
-        return new Deadline(Boolean.parseBoolean(args[1]), args[2], args[3]);
+        LocalDateTime deadline;
+        try {
+            deadline = LocalDateTime.parse(args[3]);
+        } catch (DateTimeParseException e) {
+            throw new DukeException("Failed to load a deadline from storage due to failure to parse cutoff date and"
+                    + "time.");
+        }
+
+        return new Deadline(Boolean.parseBoolean(args[1]), args[2], deadline);
     }
 
     @Override
     public String getStorageString() {
-        return String.format("D | %s | %s", super.getStorageString(), Task.formatStringForStorage(deadline));
+        return String.format("D | %s | %s", super.getStorageString(), Task.formatStringForStorage(deadline.toString()));
     }
 
     @Override

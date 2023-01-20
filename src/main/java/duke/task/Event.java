@@ -5,6 +5,7 @@ import duke.utils.BooleanUtils;
 import duke.utils.LocalDateTimeUtils;
 
 import java.time.LocalDateTime;
+import java.time.format.DateTimeParseException;
 
 /**
  * Represents an event task.
@@ -33,7 +34,7 @@ public class Event extends Task {
      *
      * @param args Data about the event that was loaded from storage.
      * @return The Event object created using data loaded from storage.
-     * @throws DukeException Indicates missing data or incorrect data type in args.
+     * @throws DukeException Indicates missing data or incorrect data type or format in args.
      */
     public static Event createFromStorage(String[] args) throws DukeException {
         if (args.length != 5) {
@@ -46,13 +47,27 @@ public class Event extends Task {
 
         args = Task.formatStringsFromStorage(args);
 
-        return new Event(Boolean.parseBoolean(args[1]), args[2], args[3], args[4]);
+        LocalDateTime start;
+        try {
+            start = LocalDateTime.parse(args[3]);
+        } catch (DateTimeParseException e) {
+            throw new DukeException("Failed to load an event from storage due to failure to parse start of event.");
+        }
+
+        LocalDateTime end;
+        try {
+            end = LocalDateTime.parse(args[4]);
+        } catch (DateTimeParseException e) {
+            throw new DukeException("Failed to load an event from storage due to failure to parse end of event.");
+        }
+
+        return new Event(Boolean.parseBoolean(args[1]), args[2], start, end);
     }
 
     @Override
     public String getStorageString() {
-        String startStr = Task.formatStringForStorage(start);
-        String endStr = Task.formatStringForStorage(end);
+        String startStr = Task.formatStringForStorage(start.toString());
+        String endStr = Task.formatStringForStorage(end.toString());
 
         return String.format("E | %s | %s | %s", super.getStorageString(), startStr, endStr);
     }
