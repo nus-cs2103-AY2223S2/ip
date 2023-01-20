@@ -125,8 +125,12 @@ public class Duke {
                 } else if (frontWord.equals("unmark")) {
                     undoCompleteTask(userTyped.substring(userTyped.length() - 1));
                 } else if (frontWord.equals("todo")) {
-                    String actualTask = userTyped.split(" ", 2)[1];
-                    addAToDo(actualTask);
+                    try {
+                        String actualTask = userTyped.split(" ", 2)[1];
+                        addAToDo(actualTask);
+                    } catch (ArrayIndexOutOfBoundsException e) {
+                        System.out.println("You didn't type a todo man!");
+                    }
                 } else if (frontWord.equals("deadline")) {
                     String actualDeadlineTask = userTyped.split(" ", 2)[1].split(" /by ",2)[0];
                     String byWhen = userTyped.split(" ", 2)[1].split(" /by ",2)[1];
