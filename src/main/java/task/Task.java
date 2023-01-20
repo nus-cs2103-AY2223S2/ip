@@ -1,3 +1,5 @@
+package task;
+
 public class Task {
 
     private final String details;

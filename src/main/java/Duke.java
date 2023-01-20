@@ -1,13 +1,40 @@
-import errors.InsufficientDeadlineArgumentException;
-import errors.InsufficientEventArgumentException;
-import errors.InsufficientToDoArgumentException;
+import errors.DukeInsufficientArgumentException;
+import errors.DukeRuntimeException;
+import formatters.Parser;
+import task.Deadline;
+import task.Event;
+import task.Task;
+import task.ToDo;
 
 import java.util.HashMap;
 import java.util.Scanner;
 import java.util.ArrayList;
 
+/**
+ * A bot with an UwU personality to help users keep track
+ * of tasks such as events, deadlines and to-dos
+ * @author Nicholas Lee
+ */
 
 public class Duke {
+
+
+    /* TODO: 20/1/23
+    - Abstract out task creation, update and delete process in parser
+    - Store responses in separate class or enum
+    - abstract out completion display method
+     */
+
+
+    /**
+     * Prints out the users tasks
+     *
+     * Calls the toString() method of each task type and formats the lists of tasks
+     * by printing to the console line by line
+     *
+     * @param taskList description of the parameter
+     * @param showMessage description of the parameter
+     */
 
     public static void displayTasks(ArrayList<Task> taskList, boolean showMessage) {
         if (showMessage) {
@@ -19,8 +46,10 @@ public class Duke {
         System.out.println("__________________________________________");
     }
 
-
-
+    /**
+     * Runs the bot and reads in user input in a loop, parses it and responds accordingly
+     * @param args
+     */
 
     public static void main(String[] args) {
 
@@ -106,8 +135,8 @@ public class Duke {
                         if (input.contains("deadline")) {
 
                             try {
-                                parsedDetails = Deadline.parseDeadline(input);
-                            } catch (InsufficientDeadlineArgumentException e) {
+                                parsedDetails = Deadline.parse(input);
+                            } catch (DukeRuntimeException e) {
                                 System.out.println("\nUwU_TaskMaster ＵｗＵ: Ohh nyoo I cannyot ^w^ undewstand *cries* what you mean. Did you forget to add a deadline to your task?");
                                 System.out.println("__________________________________________");
                                 break;
@@ -120,8 +149,8 @@ public class Duke {
                         } else if (input.contains("event")) {
 
                             try {
-                                parsedDetails = Event.parseEvent(input);
-                            } catch (InsufficientEventArgumentException e) {
+                                parsedDetails = Event.parse(input);
+                            } catch (DukeRuntimeException e) {
                                 System.out.println("\nUwU_TaskMaster ＵｗＵ: Ohh nyoo I cannyot ^w^ undewstand *cries* what you mean. Did you forget to add details of your event?");
                                 System.out.println("__________________________________________");
                                 break;
@@ -135,8 +164,8 @@ public class Duke {
                         } else if (input.contains("to-do")) {
 
                             try {
-                                parsedDetails = ToDo.parseTodo(input);
-                            } catch (InsufficientToDoArgumentException e) {
+                                parsedDetails = ToDo.parse(input);
+                            } catch (DukeRuntimeException e) {
                                 System.out.println("\nUwU_TaskMaster ＵｗＵ: Ohh nyoo I cannyot ^w^ undewstand *cries* what you mean. Did you forget to include what you need to do?");
                                 System.out.println("__________________________________________");
                                 break;

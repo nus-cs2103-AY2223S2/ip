@@ -1,3 +1,5 @@
+package formatters;
+
 public class Parser {
 
     public int parseCommand(String input) throws IllegalArgumentException {

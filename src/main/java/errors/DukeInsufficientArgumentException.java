@@ -5,8 +5,8 @@ package errors;
  * @author Nicholas Lee
  */
 
-public class InsufficientDeadlineArgumentException extends DukeRuntimeException{
-    public InsufficientDeadlineArgumentException(String message) {
+public class DukeInsufficientArgumentException extends DukeRuntimeException{
+    public DukeInsufficientArgumentException(String message) {
         super(message);
     }
 }
