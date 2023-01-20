@@ -1,9 +1,16 @@
 package duke.task;
 
+/** Class that represents a task */
 public abstract class Task {
     private boolean isDone = false;
     private String name;
 
+    /**
+     * Construct a Task object with the specified
+     * name.
+     *
+     * @param name Name to give task.
+     */
     public Task(String name) {
         this.name = name;
     }
@@ -16,6 +23,12 @@ public abstract class Task {
         return this.isDone;
     }
 
+    /**
+     * Convert the task to a string representation
+     * that can be saved in storage.
+     *
+     * @return String representation to be saved in storage.
+     */
     public abstract String getFileRepresentation();
 
     protected String getName() {
@@ -27,6 +40,13 @@ public abstract class Task {
         return (this.isDone ? "[X] " : "[ ] ") + this.name;
     }
 
+    /**
+     * Convert the string representation of a task from storage
+     * to a Task object.
+     *
+     * @param stringRepresentation String representation of a task from storage.
+     * @return Task object.
+     */
     public static Task createTaskFromStringRepresentation(String stringRepresentation) {
         char typeOfTask = stringRepresentation.charAt(0);
         String[] details = stringRepresentation.split("@");
