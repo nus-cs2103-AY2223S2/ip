@@ -1,38 +1,14 @@
 public class Parser {
-
-    public Parser() {
-
-    }
-
-    public static void parseResponse(String response, TaskList taskList) {
+    public static Command parse(String response) {
         /**
          * @param response the string response given by the user.
-         * @param taskList the task list that handles the tasks.
          */
-        String firstWord = (response + " ").split(" ", 2)[0];
-        try {
-            switch (firstWord) {
-            case "list":
-                taskList.listItems();
-                break;
-            case "delete":
-                taskList.deleteItem(response);
-                break;
-            case "mark":
-            case "unmark":
-                taskList.markItem(response, firstWord.equals("mark"));
-                break;
-            case "todo":
-            case "deadline":
-            case "event":
-                taskList.addItem(TaskType.valueOf(firstWord.toUpperCase()), response);
-                break;
-            default:
-                System.out.println("HUH? What you say?.");
-            }
-        } catch (DukeException err) {
-            System.out.println(err.getMessage());
+        String strippedResponse = response.strip();
+        if (strippedResponse.equals("")) {
+            throw new EmptyCommandException();
         }
+        String[] commandWordContent = (strippedResponse + " ").split(" ", 2);
+        return Command.create(commandWordContent);
     }
 
     public static int parseInt(String s, String source) {

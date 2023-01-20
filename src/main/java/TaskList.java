@@ -4,7 +4,18 @@ public class TaskList {
     private ArrayList<Task> tasks;
 
     public TaskList() {
-        this.tasks = new ArrayList<Task>();
+        this.tasks = new ArrayList<>();
+    }
+
+    public TaskList(ArrayList<Triple<Character, Boolean, String>> triples) {
+        this.tasks = new ArrayList<>();
+        for (Triple<Character, Boolean, String> triple : triples) {
+            Task task = Task.create(triple.getFirst(), triple.getThird());
+            if (task != null) {
+                task.mark(triple.getSecond());
+                this.tasks.add(task);
+            }
+        }
     }
 
     public boolean isEmpty() {
@@ -32,38 +43,28 @@ public class TaskList {
         System.out.println(String.format("Now have %d items.", this.tasks.size()));
     }
 
-    public void addItem(TaskType taskType, String content) {
+    public void addTask(Task task) {
         /**
          * Adds to the list if there is space.
          * @param item the string to add to the list.
          */
-        Task task = Task.create(taskType, content);
-        if (task == null) {
-            System.out.println("FAILURE.");
-            return;
-        }
         this.tasks.add(task);
         System.out.println("OK I put in for you: " + task);
         this.printSize();
     }
 
-    public void deleteItem(String response) {
+    public void deleteTask(int index) {
         /**
          * Deletes the specified item.
          * @param response tries to parse this response.
          */
-        String[] splitted = Parser.handleMissingField(response, " ", "number", "Item Deletion");
-
-        String rawId = splitted[1];
-        int id = Parser.parseInt(rawId, "Item Deletion");
-        this.isInList(id);
-
-        System.out.println("OK I take out for you: " + this.tasks.get(id));
-        this.tasks.remove(id);
+        this.isInList(index);
+        System.out.println("OK I take out for you: " + this.tasks.get(index));
+        this.tasks.remove(index);
         this.printSize();
     }
 
-    public void printItem(int id, boolean withNumber) {
+    public void printTask(int id, boolean withNumber) {
         /**
          * Prints the item at this id.
          * @param id the index of the item to be printed.
@@ -84,20 +85,28 @@ public class TaskList {
 
         System.out.println("Here's your list:");
         for (int id = 0; id < this.tasks.size(); id++) {
-            this.printItem(id, true);
+            this.printTask(id, true);
         }
     }
 
-    public void markItem(String response, boolean isToMark) {
+    public void markTask(int index, boolean isToMark) {
         /**
          * Marks the specified item.
          * @param response tries to parse this response.
          * @param toMark whether to mark it or unmark it.
          */
-        String[] splitted = Parser.handleMissingField(response, " ", "number", "Item Marking");
-        String rawId = splitted[1];
-        int id = Parser.parseInt(rawId, "Item Marking");
-        this.isInList(id);
-        this.tasks.get(id).mark(isToMark);
+        this.isInList(index);
+        Task task = this.tasks.get(index);
+        task.mark(isToMark);
+        System.out.println(String.format("OK %smark for you already: ", isToMark ? "" : "un") + task);
+    }
+
+    public String tasksStorageString(String delimiter) {
+        String finalString = "";
+        for (Task task : this.tasks) {
+            finalString += task.toStorageString();
+            finalString += delimiter;
+        }
+        return finalString;
     }
 }

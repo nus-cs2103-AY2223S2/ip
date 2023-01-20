@@ -33,4 +33,9 @@ public class Event extends Task {
     public String toString() {
         return String.format("[E]%s (from: %s to: %s)", super.toString(), this.from, this.to);
     }
+
+    @Override
+    public String toStorageString() {
+        return String.format("E|%d|%s /from %s /to %s", this.isMarked() ? 1 : 0, this.getContent(), this.from, this.to);
+    }
 }

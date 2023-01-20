@@ -1,5 +1,4 @@
 public abstract class Task {
-
     private boolean marked;
     private String content;
 
@@ -8,33 +7,29 @@ public abstract class Task {
         this.content = content;
     }
 
-    public static Task create(TaskType taskType, String content) {
+    public static Task create(char taskType, String content) {
         /**
          * @param taskType whether it is a Todo, Deadline or Event.
          * @param content what to put in the task.
          * @returns the output Task object.
          */
-        String[] taskTypeAndContent = Parser.handleMissingField(content, " ","content", "Task Creation");
         switch (taskType) {
-        case TODO:
-            return Todo.create(taskTypeAndContent[1]);
-        case DEADLINE:
-            return Deadline.create(taskTypeAndContent[1]);
-        case EVENT:
-            return Event.create(taskTypeAndContent[1]);
+        case 'T':
+            return Todo.create(content);
+        case 'D':
+            return Deadline.create(content);
+        case 'E':
+            return Event.create(content);
         default:
             return null;
         }
     }
 
-
-
     public void mark(boolean isToMark) {
         /**
-         * @param toMark whether to mark or unmark the task.
+         * @param isToMark whether to mark or unmark the task.
          */
         this.marked = isToMark;
-        System.out.println(String.format("OK %smark for you already: ", isToMark ? "" : "un") + this);
     }
 
     public boolean isMarked() {
@@ -50,4 +45,6 @@ public abstract class Task {
         String markedStatus = this.isMarked() ? "X" : " ";
         return String.format("[%s] %s", markedStatus, this.getContent());
     }
+
+    public abstract String toStorageString();
 }

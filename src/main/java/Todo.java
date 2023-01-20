@@ -17,4 +17,9 @@ public class Todo extends Task {
     public String toString() {
         return "[T]" + super.toString();
     }
+
+    @Override
+    public String toStorageString() {
+        return String.format("T|%d|%s", this.isMarked() ? 1 : 0, this.getContent());
+    }
 }
