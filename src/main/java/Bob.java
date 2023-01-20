@@ -54,24 +54,24 @@ public class Bob {
 
         return true;
     }
-    private void handleMarkCommand(String s) {
+    private void handleMarkCommand(String s) throws BobException{
         String[] commands = s.split(" ");
         Integer index = Integer.valueOf(commands[1]);
 
         if (index < 1 || index > taskList.size()) { // Index not in range
-            formattedPrint("Index given is out of range!");
-        } else {
-            Task t = taskList.get(index - 1);
+            throw new BobException("Index given is out of range!");
+        }
 
-            if (commands[0].equals("mark")) { // mark task
-                t.mark();
-                formattedPrint("I've marked this task as done!\n" +
-                        getTaskDescription(t));
-            } else { // unmark task
-                t.unmark();
-                formattedPrint("I've unmarked this task as not done!\n" +
-                        getTaskDescription(t));
-            }
+        Task t = taskList.get(index - 1);
+
+        if (commands[0].equals("mark")) { // mark task
+            t.mark();
+            formattedPrint("I've marked this task as done!\n" +
+                    getTaskDescription(t));
+        } else { // unmark task
+            t.unmark();
+            formattedPrint("I've unmarked this task as not done!\n" +
+                    getTaskDescription(t));
         }
     }
 
@@ -143,25 +143,20 @@ public class Bob {
 
         taskList.add(d);
     }
-    private void addTask(String input) {
-        Boolean added = false;
+    private void addTask(String input) throws BobException {
         if (isTodo(input)) {
             addTodo(input);
-            added = true;
         } else if (isEvent(input)) {
             addEvent(input);
-            added = true;
         } else if (isDeadline(input)) {
             addDeadline(input);
-            added = true;
+        } else { // Invalid command
+            throw new BobException("Sorry :( no valid command was entered");
         }
 
-        if (added) {
-            Task t = taskList.get(taskList.size() - 1);
-            formattedPrint("I've added a new task!\n" + getTaskDescription(t));
-        } else {
-            formattedPrint("Sorry :( no valid command was entered");
-        }
+        // Get added task
+        Task t = taskList.get(taskList.size() - 1);
+        formattedPrint("I've added a new task!\n" + getTaskDescription(t));
     }
     /**
      * Main program for Bob, our chat-bot
@@ -176,12 +171,16 @@ public class Bob {
         String input = scanner.nextLine();
 
         while (!input.equals(flag)) {
-            if (input.equals("list")) { // Output list
-                printList();
-            } else if (isMarkCommand(input)) { // Marking task
-                handleMarkCommand(input);
-            } else {  // Add to list
-                addTask(input);
+            try {
+                if (input.equals("list")) { // Output list
+                    printList();
+                } else if (isMarkCommand(input)) { // Marking task
+                    handleMarkCommand(input);
+                } else {  // Add to list
+                    addTask(input);
+                }
+            } catch (BobException e) {
+                formattedPrint(e.getMessage());
             }
             input = scanner.nextLine();
         }
