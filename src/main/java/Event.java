@@ -1,18 +1,22 @@
-public class Event extends Task{
-    private String date1;
-    private String date2;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 
-    public Event(String name, boolean done, String date1, String date2){
+public class Event extends Task{
+    private LocalDate date1;
+    private LocalDate date2;
+
+    public Event(String name, boolean done, String date1, String date2) {
         super(name, done);
-        this.date1 = date1;
-        this.date2 = date2;
+        this.date1 = LocalDate.parse(date1);
+        this.date2 = LocalDate.parse(date2);
     }
 
-    public String getDate1() {
+
+    public LocalDate getDate1() {
         return this.date1;
     }
 
-    public String getDate2() {
+    public LocalDate getDate2() {
         return this.date2;
     }
 
@@ -25,7 +29,9 @@ public class Event extends Task{
 
     @Override
     public String toString(){
-        String s = "[ E ]" + super.toString() + String.format("(%s %s)", date1, date2);
+        String d1 = date1.format(DateTimeFormatter.ofPattern("MMM d yyyy"));
+        String d2 = date2.format(DateTimeFormatter.ofPattern("MMM d yyyy"));
+        String s = "[ E ]" + super.toString() + String.format("(%s %s)", d1, d2);
         return s;
     }
 }
