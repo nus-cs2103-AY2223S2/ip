@@ -79,9 +79,9 @@ public class Duke {
         }
 
     public static void addAToDo(String todo) {
-        numOfThings += 1;
         ToDo mustDo = new ToDo(todo);
         lstOfTasks[numOfThings] = mustDo;
+        numOfThings += 1;
         System.out.println(gotItMessage + mustDo.toString() + howLongListNowMessage);
     }
 
