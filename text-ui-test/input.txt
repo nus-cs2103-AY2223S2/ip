@@ -1,4 +1,5 @@
 list
+lis
 todo Eat
 deadline Sleep /by tonight
 event Rave /from now /to tomorrow
@@ -8,5 +9,6 @@ mark 3
 list
 unmark 1
 delete 2
+delete 3
 list
 bye

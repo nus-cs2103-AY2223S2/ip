@@ -29,11 +29,6 @@ public class Duke {
 
                     // loop breaks, ending program if input is "bye"
                     case ("bye"):
-                        // ERROR: bye format is anything other than [ bye ]
-                        if (UserScan.nextLine().length()>0) {
-                            throw new DukeException("\n" + border + "[ERROR]\nUh, bye command format is used wrongly.\nCorrect format is as follows:\n" +
-                                    "[ bye ]\n" + border);
-                        }
                         System.out.println(border + "Goodbye, then!\n" + border);
                         LoopEnd = true;
                         break;
@@ -50,8 +45,8 @@ public class Duke {
                             break;
                         }
                         StringBuilder ToPrint = new StringBuilder();
-                        for (int i = 0; i < TaskList.size(); i++) {
-                            ToPrint.append(i).append(". ").append(TaskList.get(i).toString()).append("\n");
+                        for (int i = 1; i < TaskList.size()+1; i++) {
+                            ToPrint.append(i).append(". ").append(TaskList.get(i-1).toString()).append("\n");
                         }
                         System.out.println(border + "Here are your tasks:\n" + ToPrint + border);
                         break;
