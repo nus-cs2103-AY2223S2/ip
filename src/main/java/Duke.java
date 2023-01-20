@@ -12,7 +12,7 @@ public class Duke {
 
     static void add(Task cur) {
         System.out.println("Got it. I've added this task:");
-        System.out.println("[" + cur.symbol + "] " +  "[" + cur.getStatusIcon() + "] " + cur.description);
+        System.out.println("[" + cur.symbol + "] " + "[" + cur.getStatusIcon() + "] " + cur.description);
         todo.add(cur);
         System.out.println("Now you have " + todo.size() + " tasks in the list.");
     }
@@ -20,7 +20,7 @@ public class Duke {
     static void list(LinkedList<Task> list) {
         System.out.println("Here are the taks in your list:");
         for (Task cur : todo) {
-            System.out.println(todo.indexOf(cur) + 1 + ". [" + cur.symbol + "] " +  "[" + cur.getStatusIcon() + "] " + cur.description);
+            System.out.println(todo.indexOf(cur) + 1 + ". [" + cur.symbol + "] " + "[" + cur.getStatusIcon() + "] " + cur.description);
         }
     }
 
@@ -44,39 +44,45 @@ public class Duke {
         Scanner sc = new Scanner(System.in);
         System.out.println("Hello from\n" + logo + "  managed by Wesley Teo.\n\nWhat can I do for you?\n" + line);
         String input = sc.nextLine();
-
         while (!input.equals("bye")) {
-        System.out.println(line);
-            QueryType inputType = Query.queryType(input);
-            String[] inputArr = input.split(" ");
-            int index;
+            try {
+                System.out.println(line);
+                QueryType inputType = Query.queryType(input);
+                String[] inputArr = input.split(" ");
+                int index;
 
-            switch (inputType) {
-                case list:
-                    list(todo);
-                    break;
-                case todo:
-                    add(new Todo(input));
-                    break;
-                case deadline:
-                    add(new Deadline(input));
-                    break;
-                case event:
-                    add(new Event(input));
-                    break;
-                case mark:
-                    index = Integer.parseInt(inputArr[1]) - 1;
-                    markTask(index);
-                    break;
-                case unmark:
-                    index = Integer.parseInt(inputArr[1]) - 1;
-                    unmarkTask(index);
-                    break;
-                default:
-                    System.out.println("Invalid command, please try again");
+                switch (inputType) {
+                    case list:
+                        list(todo);
+                        break;
+                    case todo:
+                        Todo todo = new Todo(input);
+                        add(todo);
+                        break;
+                    case deadline:
+                        Deadline deadline = new Deadline(input);
+                        add(deadline);
+                        break;
+                    case event:
+                        Event event = new Event(input);
+                        add(event);
+                        break;
+                    case mark:
+                        index = Integer.parseInt(inputArr[1]) - 1;
+                        markTask(index);
+                        break;
+                    case unmark:
+                        index = Integer.parseInt(inputArr[1]) - 1;
+                        unmarkTask(index);
+                        break;
+                    default:
+                        throw new InvalidCommandDukeException("Invalid command, please try again");
+                }
+            } catch (DukeException err) {
+                System.out.println(err.getMessage());
             }
-            System.out.println(line);
-            input = sc.nextLine();
+                System.out.println(line);
+                input = sc.nextLine();
         }
         System.out.println(line);
         System.out.println("Bye. Hope to see you again soon!");
