@@ -15,4 +15,4 @@ bin/
 
 /text-ui-test/ACTUAL.TXT
 text-ui-test/EXPECTED-UNIX.TXT
-src/Main/java/Test
+src/Main/java/Test.java
