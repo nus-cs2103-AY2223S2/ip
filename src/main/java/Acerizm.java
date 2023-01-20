@@ -54,28 +54,26 @@ public class Acerizm {
                     String description = currentTask.getDescription();
                     String isMarked = currentTask.getStatusIcon();
                     String currentStatus = currentTask.getTypeOfTask();
-                    System.out.println(String.format("%d.[%s][%s] %s",i+1,currentStatus,isMarked,description));
+                    System.out.println(String.format("%d. %s",i+1,currentTask.toString()));
                 }
                 System.out.println("*-".repeat(100));
             } else if(actionTaken == Actions.mark){
                 // for marking tasks
                 System.out.println("*-".repeat(100));
                 int userMarkIndex = Integer.parseInt(input[1]) - 1;
-                String userInput = taskList.get(userMarkIndex).getDescription();
                 Task currentTask = taskList.get(userMarkIndex);
                 currentTask.markAsDone();
                 System.out.println("Nice! I've marked this task as done:");
-                System.out.println(String.format(" [%s][%s] %s",currentTask.getTypeOfTask(),currentTask.getStatusIcon(),userInput));
+                System.out.println(currentTask.toString());
                 System.out.println("*-".repeat(100));
             } else if(actionTaken == Actions.unmark){
                 // for unmarking tasks
                 System.out.println("*-".repeat(100));
                 int userMarkIndex = Integer.parseInt(input[1]) - 1;
-                String userInput = taskList.get(userMarkIndex).getDescription();
                 Task currentTask = taskList.get(userMarkIndex);
                 currentTask.unmarkAsDone();
                 System.out.println("OK, I've marked this task as not done yet:");
-                System.out.println(String.format(" [%s][%s] %s",currentTask.getTypeOfTask(),currentTask.getStatusIcon(),userInput));
+                System.out.println(currentTask.toString());
                 System.out.println("*-".repeat(100));
             } else if(actionTaken == Actions.todo){
                 // for todo tasks
@@ -99,11 +97,25 @@ public class Acerizm {
                 System.out.println(newTask.toString());
                 System.out.println(String.format("Now you have %d tasks in the list",taskList.size()));
                 System.out.println("*-".repeat(100));
-            }
-            else {
+            } else if (actionTaken == Actions.event) {
+                // for event
+                System.out.println("*-".repeat(100));
+                String userInput = convertToUserInput(input,Actions.event,"");
+                // added additional variable to store the start and end time of event
+                String startTime = convertToUserInput(input,Actions.event,"/from");
+                String endTime = convertToUserInput(input,Actions.event,"/to");
+                Task newTask = new Event(userInput,startTime,endTime);
+                taskList.add(newTask);
+                System.out.println("Got it. I've added this task:");
+                System.out.println(newTask.toString());
+                System.out.println(String.format("Now you have %d tasks in the list",taskList.size()));
+                System.out.println("*-".repeat(100));
+
+            } else {
                 // if it doesn't match any action, do nothing
                 // print error
                 System.out.println("Oh no! You forgot to type in something useful :p");
+                System.out.println("What can I do for you?");
             }
         }
     }
