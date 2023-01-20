@@ -111,6 +111,11 @@ public class Duke {
             int taskToDeleteInt = Integer.parseInt(rankOfTaskToDelete);
             Task deleted = lstOfTasks.remove(taskToDeleteInt - 1);
             numOfThings --;
+            //making sure every task after point of deletion has its rank updated to -1
+            /* for (int i = taskToDeleteInt; i < numOfThings; i++) {
+                int updatedRank = lstOfTasks.get(i).getRank() - 1;
+
+            } */
             System.out.println("Noted. I've removed this task.\n" + deleted.toString()
                     + "\nNow you have " + numOfThings + " tasks in the list.");
         } catch (ArrayIndexOutOfBoundsException e) {
