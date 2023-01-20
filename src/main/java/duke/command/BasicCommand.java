@@ -12,8 +12,9 @@ public class BasicCommand extends Command {
 
   /**
    * Creates a new BasicCommand.
-   * @param name The name of the command.
-   * @param helpStr The help string of the command.
+   *
+   * @param name     The name of the command.
+   * @param helpStr  The help string of the command.
    * @param supplier The supplier to be called when the command is executed.
    */
   public BasicCommand(String name, String helpStr, Supplier<String[]> supplier) {

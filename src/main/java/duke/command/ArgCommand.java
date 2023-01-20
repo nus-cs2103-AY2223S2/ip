@@ -13,13 +13,13 @@ public class ArgCommand extends Command {
   /**
    * Creates a new ArgCommand.
    *
-   * @param name The name of the command.
-   * @param helpStr The help string of the command.
-   * @param params The named parameters of the command.
+   * @param name     The name of the command.
+   * @param helpStr  The help string of the command.
+   * @param params   The named parameters of the command.
    * @param function The function to be called when the command is executed.
    */
-  public ArgCommand(String name, String helpStr, String[] params,
-                    Function<String[], String[]> function) {
+  public ArgCommand(String name, String helpStr,
+                    String[] params, Function<String[], String[]> function) {
     super(name, helpStr, true, params);
     this.function = function;
   }

@@ -1,3 +1,11 @@
+/**
+ * CS2103T Individual Project.
+ *
+ * @author Wang Jiefan
+ * @version 1.0
+ * @since 1/20/2023
+ */
+
 package duke;
 
 import duke.command.ArgCommand;
@@ -14,48 +22,27 @@ public class Duke {
   private final Ui ui;
   private final Parser parser;
 
-    private Duke(String filename) {
-        this.ui = new Ui();
-        TaskList taskList;
-        try {
-            taskList = new TaskList(filename);
-        } catch (Exception e) {
-            ui.loadError(e);
-            taskList = new TaskList(new ArrayList<>());
-        }
-        Command[] commands = new Command[]{
-                new BasicCommand("exit"
-                        , "exit the app"
-                        , () -> new String[]{"Goodbye."}),
-                new BasicCommand("help"
-                        , "show this help message"
-                        , () -> {
-                    ui.print();
-                    return new String[]{};
-                }),
-                new BasicCommand("list"
-                        , "list tasks"
-                        , taskList::stringify),
-                new ArgCommand("add"
-                        , "add task"
-                        , new String[]{"\\s"}
-                        , taskList::add),
-                new ArgCommand("mark"
-                        , "mark/unmark task as done"
-                        , new String[]{}
-                        , taskList::mark),
-                new ArgCommand("delete"
-                        , "delete task"
-                        , new String[]{}
-                        , taskList::delete),
-                new ArgCommand("find"
-                    , "find tasks containing text fragment"
-                    , new String[]{}
-                    , taskList::find),
-        };
-        ui.setCommands(commands);
-        this.parser = new Parser(commands);
+  private Duke(String filename) {
+    this.ui = new Ui();
+    TaskList taskList;
+    try {
+      taskList = new TaskList(filename);
+    } catch (Exception e) {
+      ui.loadError(e);
+      taskList = new TaskList(new ArrayList<>());
     }
+    Command[] commands = new Command[]{
+        new BasicCommand("exit", "exit the app", () -> new String[]{"Goodbye."}),
+        new BasicCommand("help", "show this help message", ui::getHelpMsg),
+        new BasicCommand("list", "list tasks", taskList::stringify),
+        new ArgCommand("add", "add task", new String[]{"\\s"}, taskList::add),
+        new ArgCommand("mark", "mark/unmark task as done", new String[]{}, taskList::mark),
+        new ArgCommand("delete", "delete task", new String[]{}, taskList::delete),
+        new ArgCommand("find", "find tasks containing text fragment",
+            new String[]{}, taskList::find)};
+    ui.setCommands(commands);
+    this.parser = new Parser(commands);
+  }
 
   private void run() {
     this.ui.printIntro();
@@ -84,17 +71,17 @@ public class Duke {
         }
       } catch (Exception e) {
         this.ui.error(e);
-        this.ui.print();
       }
     }
     scanner.close();
   }
 
-    /**
-     * The start of execution of the Duke program.
-     * @param args  The command line arguments.
-     */
-    public static void main(String[] args) {
-        new Duke("data.txt").run();
-    }
+  /**
+   * The start of execution of the Duke program.
+   *
+   * @param args The command line arguments.
+   */
+  public static void main(String[] args) {
+    new Duke("data.txt").run();
+  }
 }

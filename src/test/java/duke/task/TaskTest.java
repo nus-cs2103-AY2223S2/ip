@@ -13,6 +13,7 @@ public class TaskTest {
     @Test
     void testToDo() {
         assertFalse(toDo.isDone());
+        assertEquals("test", toDo.getDesc());
         assertEquals("[T][ ] test", toDo.toString());
     }
 
@@ -26,6 +27,7 @@ public class TaskTest {
     @Test
     void testDeadline() {
         assertFalse(deadline.isDone());
+        assertEquals("test", deadline.getDesc());
         assertEquals("[D][ ] test (by: Wed, 1 Jan 2020)", deadline.toString());
     }
 
@@ -39,6 +41,7 @@ public class TaskTest {
     @Test
     void testEvent() {
         assertFalse(event.isDone());
+        assertEquals("test", event.getDesc());
         assertEquals("[E][ ] test (from: Wed, 1 Jan 2020) (to: Thu, 2 Jan 2020)", event.toString());
     }
 
