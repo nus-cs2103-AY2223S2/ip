@@ -5,14 +5,16 @@ public class Duke {
                 + "| | | | | | | |/ / _ \\\n"
                 + "| |_| | |_| |   <  __/\n"
                 + "|____/ \\__,_|_|\\_\\___|\n";
-        private static String greetingsFromSkittles = "Hello I'm Skittles\nWhat can I do for you?\n";
-        private static String adiosFromSkittles = "Bye. Hope to see you again soon!";
 
-        private static String gotItMessage = "Got it. I've added this task:\n";
+    private static String greetingsFromSkittles = "Hello I'm Skittles\nWhat can I do for you?\n";
+    private static String adiosFromSkittles = "Bye. Hope to see you again soon!";
 
-        //keeping track of number of things in list
-        static int numOfThings = 0;
-        private static String howLongListNowMessage = "\nNow you have " + numOfThings + " tasks in the list";
+    private static String gotItMessage = "Got it. I've added this task:\n";
+
+    //keeping track of number of things in list
+    static int numOfThings = 0;
+    static String howLongListNowMessage = "\nNow you have " + numOfThings + " tasks in the list";
+
         //assume no more than 100 tasks
         static Task[] lstOfTasks = new Task[100];
 
@@ -34,11 +36,12 @@ public class Duke {
         //basically print out the list. must be numbered.
         public static void displayLst() {
             boolean isItMT = false;
-            StringBuilder txtToDisplay = new StringBuilder("");
+            StringBuilder txtToDisplay = new StringBuilder("Here are the tasks in your list:");
             for (Task thingInList : lstOfTasks) {
                 if (thingInList != null) {
                     isItMT = true;
-                    txtToDisplay.append("\n").append(thingInList.getRank()).append(".").append(thingInList.toString());
+                    txtToDisplay.append("\n").append(thingInList.getRank()).append(".")
+                            .append(thingInList.toString());
                 }
             }
             if (!isItMT) {
@@ -75,27 +78,30 @@ public class Duke {
             System.out.println(txt);
         }
 
-        public static void addAToDo(String todo) {
-            ToDo mustDo = new ToDo(todo);
-            lstOfTasks[numOfThings] = mustDo;
-            numOfThings += 1;
-            System.out.println(gotItMessage + mustDo.toString() + howLongListNowMessage);
-        }
+    public static void addAToDo(String todo) {
+        numOfThings += 1;
+        ToDo mustDo = new ToDo(todo);
+        lstOfTasks[numOfThings] = mustDo;
+        System.out.println(gotItMessage + mustDo.toString() + howLongListNowMessage);
+    }
 
-        public static void addTimeSensitive(String name, String doByWhen) {
-            Deadline dateline = new Deadline(name, doByWhen);
-            lstOfTasks[numOfThings] = dateline;
-            numOfThings += 1;
-            System.out.println(gotItMessage + dateline.toString() + howLongListNowMessage);
-        }
+    public static void addTimeSensitive(String name, String doByWhen) {
+        Deadline dateline = new Deadline(name, doByWhen);
+        lstOfTasks[numOfThings] = dateline;
+        numOfThings += 1;
+        System.out.println(gotItMessage + dateline.toString() + howLongListNowMessage);
+    }
 
-        public static void addAnEvent(String name, String startTime, String endTime) {
-            Event suitAndTie = new Event(name, startTime, endTime);
-            lstOfTasks[numOfThings] = suitAndTie;
-            numOfThings += 1;
-            System.out.println(gotItMessage + suitAndTie.toString() + howLongListNowMessage);
-        }
+    public static void addAnEvent(String name, String startTime, String endTime) {
+        Event suitAndTie = new Event(name, startTime, endTime);
+        lstOfTasks[numOfThings] = suitAndTie;
+        numOfThings += 1;
+        System.out.println(gotItMessage + suitAndTie.toString() + howLongListNowMessage);
+    }
+
+
     public static void main(String[] args) {
+
         //start by greeting
         hello();
         while (true) {
@@ -111,7 +117,6 @@ public class Duke {
                     displayLst();
                 } else if (frontWord.equals("mark")) {
                     completeTask(userTyped.substring(userTyped.length() - 1));
-
                 } else if (frontWord.equals("unmark")) {
                     undoCompleteTask(userTyped.substring(userTyped.length() - 1));
                 } else if (frontWord.equals("todo")) {
