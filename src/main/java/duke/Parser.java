@@ -1,6 +1,15 @@
 package duke;
 
-import duke.commands.*;
+import duke.commands.ByeCommand;
+import duke.commands.Command;
+import duke.commands.DeadlineCommand;
+import duke.commands.DeleteCommand;
+import duke.commands.EventCommand;
+import duke.commands.ListCommand;
+import duke.commands.MarkCommand;
+import duke.commands.ThroughCommand;
+import duke.commands.TodoCommand;
+import duke.commands.UnmarkCommand;
 
 /**
  * A parser that will parse the input String from the user into

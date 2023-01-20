@@ -6,7 +6,7 @@ package duke.tasks;
  * @author Cheam Jia Wei
  */
 public class Todos extends Task {
-    public Todos (String name) {
+    public Todos(String name) {
         super(name);
     }
 

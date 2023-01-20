@@ -10,7 +10,13 @@ import java.time.LocalDateTime;
 public class Deadlines extends Task {
     private LocalDateTime end;
 
-    public Deadlines (String name, String end) {
+    /**
+     * Constructor for Deadlines task.
+     *
+     * @param name Name of task.
+     * @param end Date task has to be completed by
+     */
+    public Deadlines(String name, String end) {
         super(name);
         this.end = LocalDateTime.parse(end);
     }

@@ -3,6 +3,7 @@ package duke;
 import java.util.Scanner;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+
 import duke.tasks.Task;
 
 /**
@@ -11,8 +12,8 @@ import duke.tasks.Task;
  * @author Cheam Jia Wei
  */
 public class Ui {
-    private Scanner sc;
     private static final String LINE = "__________________________________________________________\n";
+    private Scanner sc;
 
     /**
      * Constructor for the Ui class.
