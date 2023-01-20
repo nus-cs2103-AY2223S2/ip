@@ -1,11 +1,13 @@
+import java.time.LocalDateTime;
+
 public class Event extends Task {
-    protected String from;
-    protected String to;
+    protected LocalDateTime from;
+    protected LocalDateTime to;
 
     Event(String title, String from, String to) throws DukeException {
         super(title);
-        this.from = from.replace("/from", "").trim();
-        this.to = to.replace("/to", "").trim();
+        this.from = LocalDateTime.parse(from.replace("/from", "").trim());
+        this.to = LocalDateTime.parse(to.replace("/to", "").trim());
     }
 
     @Override

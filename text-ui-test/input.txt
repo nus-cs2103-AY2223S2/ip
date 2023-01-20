@@ -7,14 +7,14 @@ list
 unmark 1
 unmark2
 list
-deadline ip project /by 19 jan
-deadlineip project2 /by20 jan
+deadline ip project /by 2023-01-19T18:00
+deadlineip project2 /by2023-01-20T18:00
 list
 delete 1
 delete1
 list
-event hack and roll /from 14 jan /to 15 jan
-eventhack and roll2 /from4 jan /to5 jan
+event hack and roll /from 2023-01-14T12:30 /to 2023-01-15T12:30
+eventhack and roll2 /from2023-01-24T12:30 /to2023-01-25T12:30
 mark1
 list
 todo
