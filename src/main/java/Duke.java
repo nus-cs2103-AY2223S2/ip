@@ -1,6 +1,14 @@
+import Exceptions.EmptyCommandException;
+import Exceptions.EmptyArgumentException;
+import Exceptions.InvalidCommandException;
+import Tasks.Deadline;
+import Tasks.Event;
+import Tasks.Task;
+import Tasks.ToDo;
+
 import java.util.Scanner;
 public class Duke {
-    public static void main(String[] args) {
+    public static void main(String[] args) throws EmptyCommandException, InvalidCommandException, EmptyArgumentException {
         System.out.println("Hello! I'm Duke\nWhat can I do for you?");
 
         Task[] arr = new Task[100];
@@ -9,6 +17,9 @@ public class Duke {
         while (true) {
             Scanner bucky = new Scanner(System. in);
             String str = bucky.nextLine();
+
+            if (str.equals("")) { throw new EmptyCommandException();}
+
             String s[] = str.split(" ", 2);
             String firstWord = s[0];
 
@@ -27,7 +38,10 @@ public class Duke {
                 int num = Integer.parseInt(s[1]) - 1;
                 arr[num].unmark();
                 System.out.println("OK, I've marked this task as not done yet:\n" + arr[num]);
-            } else {
+            } else if (firstWord.equals("todo") || firstWord.equals("deadline") || firstWord.equals("event")){
+                if (s.length <= 1) {
+                    throw new EmptyArgumentException();
+                }
                 if (firstWord.equals("todo")) {
                     arr[nextIndex++] = new ToDo(s[1]);
                 }
@@ -41,8 +55,10 @@ public class Duke {
                 }
                 System.out.println("Got it. I've added this task:\n" + arr[nextIndex-1]
                     + "\nNow you have " + nextIndex + " tasks in the list.");
+            } else {
+                throw new InvalidCommandException();
             }
         }
-        
+
     }
 }
