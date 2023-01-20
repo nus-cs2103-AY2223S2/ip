@@ -14,10 +14,11 @@ public class Duke {
         while (true) {
             String input = sc.nextLine();
             String[] chunked = input.split(" ");
+            // code for abstraction + error handling adapted from EvitanRelta's comment:
+            // https://github.com/nus-cs2103-AY2223S2/forum/issues/20#issuecomment-1396557797
             try {
                 if (input.equals("bye")) {
                     Duke.quit();
-                    sc.close();
                     break;
                 }
                 System.out.println("(\\ (\\\n" +
