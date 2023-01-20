@@ -13,6 +13,7 @@ public class Duke {
 
     //keeping track of number of things in list
     static int numOfThings = 0;
+
     static String howLongListNowMessage = "\nNow you have " + numOfThings + " tasks in the list";
 
         //assume no more than 100 tasks
@@ -82,21 +83,24 @@ public class Duke {
         ToDo mustDo = new ToDo(todo);
         lstOfTasks[numOfThings] = mustDo;
         numOfThings += 1;
-        System.out.println(gotItMessage + mustDo.toString() + howLongListNowMessage);
+        System.out.println("Got it. I've added this task:\n" + mustDo.toString() +
+                            "\nNow you have " + numOfThings + " tasks in the list.");
     }
 
     public static void addTimeSensitive(String name, String doByWhen) {
         Deadline dateline = new Deadline(name, doByWhen);
         lstOfTasks[numOfThings] = dateline;
         numOfThings += 1;
-        System.out.println(gotItMessage + dateline.toString() + howLongListNowMessage);
+        System.out.println("Got it. I've added this task:\n" + dateline.toString() +
+                            "\nNow you have " + numOfThings + " tasks in the list");
     }
 
     public static void addAnEvent(String name, String startTime, String endTime) {
         Event suitAndTie = new Event(name, startTime, endTime);
         lstOfTasks[numOfThings] = suitAndTie;
         numOfThings += 1;
-        System.out.println(gotItMessage + suitAndTie.toString() + howLongListNowMessage);
+        System.out.println("Got it. I've added this task:\n" + suitAndTie.toString() +
+                "\nNow you have " + numOfThings + " tasks in the list");
     }
 
 
