@@ -25,29 +25,29 @@ Now you have 2 task(s) in the list.
 	[E][ ] project meeting (From: Mon 2pm To: 4pm)
 Now you have 3 task(s) in the list.
 
- > Here's your list of tasks:
-1. [T][ ] read book
-2. [D][ ] return book (By: June 6th)
-3. [E][ ] project meeting (From: Mon 2pm To: 4pm)
+ > You have the following task(s):
+	1. [T][ ] read book
+	2. [D][ ] return book (By: June 6th)
+	3. [E][ ] project meeting (From: Mon 2pm To: 4pm)
 
- > Nice I've marked this task as done:
-[D][√] return book (By: June 6th)
+ > Nice I've marked the task(s) as done:
+	[D][√] return book (By: June 6th)
 
- > Nice I've marked this task as done:
-[T][√] read book
+ > Nice I've marked the task(s) as done:
+	[T][√] read book
 
- > Here's your list of tasks:
-1. [T][√] read book
-2. [D][√] return book (By: June 6th)
-3. [E][ ] project meeting (From: Mon 2pm To: 4pm)
+ > You have the following task(s):
+	1. [T][√] read book
+	2. [D][√] return book (By: June 6th)
+	3. [E][ ] project meeting (From: Mon 2pm To: 4pm)
 
- > OK, I've marked this task as not done yet:
-[D][ ] return book (By: June 6th)
+ > OK, I've marked the task(s) as not done yet:
+	[D][ ] return book (By: June 6th)
 
- > Here's your list of tasks:
-1. [T][√] read book
-2. [D][ ] return book (By: June 6th)
-3. [E][ ] project meeting (From: Mon 2pm To: 4pm)
+ > You have the following task(s):
+	1. [T][√] read book
+	2. [D][ ] return book (By: June 6th)
+	3. [E][ ] project meeting (From: Mon 2pm To: 4pm)
 
  > Goodbye!
 ____________________________________________________________
