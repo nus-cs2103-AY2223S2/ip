@@ -36,26 +36,38 @@ public class YJ {
                     System.out.println(task.toString());
                 }
             } else if (input.startsWith("todo")) {
-                ToDo newToDo = new ToDo(input.replaceAll("todo ", "").trim());
-                tasks.add(newToDo);
-                System.out.println("Ok! I've added this todo! " + newToDo.toString());
-                System.out.println("You now have this many tasks: " + tasks.size());
+                try {
+                    ToDo newToDo = new ToDo(input.replaceAll("todo ", "").trim());
+                    tasks.add(newToDo);
+                    System.out.println("Ok! I've added this todo! " + newToDo.toString());
+                    System.out.println("You now have this many tasks: " + tasks.size());
+                } catch (IllegalArgumentException e) {
+                    System.out.println(e.getMessage());
+                }
             } else if (input.startsWith("deadline")) {
-                String by = input.split("/by")[1].trim();
-                Deadline newDeadline = new Deadline(input.split("/by")[0].trim(), by);
-                tasks.add(newDeadline);
-                System.out.println("Ok! I've added this deadline!" + newDeadline.toString());
-                System.out.println("You now have this many tasks: " + tasks.size());
+                try {
+                    String by = input.split("/by")[1].trim();
+                    Deadline newDeadline = new Deadline(input.split("/by")[0].trim(), by);
+                    tasks.add(newDeadline);
+                    System.out.println("Ok! I've added this deadline!" + newDeadline.toString());
+                    System.out.println("You now have this many tasks: " + tasks.size());
+                } catch (ArrayIndexOutOfBoundsException e) {
+                    System.out.println("Crapadoodle! You need to specify a deadline in the correct format!");
+                }
             } else if (input.startsWith("event")) {
-                // Given this string: "event project meeting /from Mon 2pm /to 4pm" extract the string after /from and after /to
-                String from = input.split("/from")[1].split("/to")[0].trim();
-                String to = input.split("/to")[1].trim();
-                Event newEvent = new Event(input.split("/from")[0].trim(), from, to);
-                tasks.add(newEvent);
-                System.out.println("Ok! I've added this event!" + newEvent.toString());
-                System.out.println("You now have this many tasks: " + tasks.size());
+                try {
+                    // Given this string: "event project meeting /from Mon 2pm /to 4pm" extract the string after /from and after /to
+                    String from = input.split("/from")[1].split("/to")[0].trim();
+                    String to = input.split("/to")[1].trim();
+                    Event newEvent = new Event(input.split("/from")[0].trim(), from, to);
+                    tasks.add(newEvent);
+                    System.out.println("Ok! I've added this event!" + newEvent.toString());
+                    System.out.println("You now have this many tasks: " + tasks.size());
+                } catch (ArrayIndexOutOfBoundsException e) {
+                    System.out.println("Crapadoodle! You need to specify an event in the correct format!");
+                }
             } else {
-                System.out.println("HUH??? YJ CONFUSED LIAO");
+                System.out.println("Crapdoodledy, I don't know what that means man");
             }
 
             input = sc.nextLine();
