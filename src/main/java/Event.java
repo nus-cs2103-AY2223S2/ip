@@ -8,6 +8,9 @@ public class Event extends Task {
         super(title);
         this.from = LocalDateTime.parse(from.replace("/from", "").trim());
         this.to = LocalDateTime.parse(to.replace("/to", "").trim());
+        if(this.to.isBefore(this.from)){
+            throw new DukeException(Views.DATE_WRONG_ORDER_STRING.eng());
+        }
     }
 
     @Override
