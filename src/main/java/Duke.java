@@ -3,6 +3,7 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
+import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -161,6 +162,8 @@ public class Duke {
                 task = new Deadline(name, deadline);
             } catch (IndexOutOfBoundsException e) {
                 throw new DukeException("The description and /by of a deadline cannot be empty.");
+            } catch (DateTimeParseException e) {
+                throw new DukeException("The inputted date(s) aren't formatted correctly!");
             }
             break;
         case Duke.EVENT_COMMAND:
@@ -175,6 +178,8 @@ public class Duke {
                 task = new Event(name, from, to);
             } catch (IndexOutOfBoundsException e) {
                 throw new DukeException("The description, /from and /to of a deadline cannot be empty.");
+            } catch (DateTimeParseException e) {
+                throw new DukeException("The inputted date(s) aren't formatted correctly!");
             }
             break;
         default:
