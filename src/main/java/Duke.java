@@ -1,8 +1,8 @@
-import java.util.LinkedList;
+import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Duke {
-    static LinkedList<Task> todo = new LinkedList<>();
+    static ArrayList<Task> todo = new ArrayList<>();
     static String logo = " ____        _        \n"
             + "|  _ \\ _   _| | _____ \n"
             + "| | | | | | | |/ / _ \\\n"
@@ -17,8 +17,8 @@ public class Duke {
         System.out.println("Now you have " + todo.size() + " tasks in the list.");
     }
 
-    static void list(LinkedList<Task> list) {
-        System.out.println("Here are the taks in your list:");
+    static void list(ArrayList<Task> list) {
+        System.out.println("Here are the tasks in your list:");
         for (Task cur : todo) {
             System.out.println(todo.indexOf(cur) + 1 + ". [" + cur.symbol + "] " + "[" + cur.getStatusIcon() + "] " + cur.description);
         }
@@ -29,7 +29,6 @@ public class Duke {
         cur.markDone();
         System.out.println("Nice! I've marked this task as done: ");
         System.out.println("[" + cur.getStatusIcon() + "] " + cur.description);
-
     }
 
     static void unmarkTask(int index) {
@@ -37,7 +36,13 @@ public class Duke {
         cur.markUndone();
         System.out.println("OK, I've marked this task as not done yet: ");
         System.out.println("[" + cur.getStatusIcon() + "] " + cur.description);
-
+    }
+    static void deleteTask(int index) {
+        Task cur = todo.get(index);
+        todo.remove(index);
+        System.out.println("Noted, I've removed this task: ");
+        System.out.println("[" + cur.getStatusIcon() + "] " + cur.description);
+        System.out.println("Now you have " + todo.size() + " tasks in the list.");
     }
 
     public static void main(String[] args) {
@@ -74,6 +79,10 @@ public class Duke {
                     case unmark:
                         index = Integer.parseInt(inputArr[1]) - 1;
                         unmarkTask(index);
+                        break;
+                    case delete:
+                        index = Integer.parseInt(inputArr[1]) - 1;
+                        deleteTask(index);
                         break;
                     default:
                         throw new InvalidCommandDukeException("Invalid command, please try again");
