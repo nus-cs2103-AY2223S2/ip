@@ -1,3 +1,4 @@
+import java.io.BufferedReader;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
@@ -9,6 +10,7 @@ import java.util.Scanner;
 public class Duke {
 
     static final String AUTHOR = "lhy-hoyin";
+    static final String TASKS_FILE_PATH = "./data/duke/tasks.csv";
     static final String LOGO
             = " ____        _\n"
             + "|  _ \\ _   _| | _____\n"
@@ -71,8 +73,8 @@ public class Duke {
     }
 
     private Duke saveDataToFile() {
-        final String FILE_PATH = "./data/duke/tasks.csv";
 
+        // Prepare data into string format for saving
         StringBuilder sb = new StringBuilder();
         for (Task t : taskList) {
             sb.append(t.toCsv()).append("\n");
@@ -80,7 +82,7 @@ public class Duke {
 
         // Write prepared data to file
         try {
-            Path f = Paths.get(FILE_PATH);
+            Path f = Paths.get(TASKS_FILE_PATH);
             Files.createDirectories(f.getParent()); // Create directory (if not exist)
             if (!Files.exists(f)) {
                 Files.createFile(f); // Create non-existing file
@@ -88,6 +90,42 @@ public class Duke {
             Files.writeString(f, sb.toString()); // Write to file
         } catch (IOException e) {
             throw new RuntimeException(e);
+        }
+
+        return this;
+    }
+
+    private Duke loadDataFromFile() {
+
+        Path f = Paths.get(TASKS_FILE_PATH);
+        if (!Files.exists(f)) {
+            return this; // No saved data, do nothing
+        }
+
+        // Purge current taskList
+        taskList.clear();
+
+        try {
+            BufferedReader br = Files.newBufferedReader(f);
+            String currentLine;
+
+            while ((currentLine = br.readLine()) != null) {
+                String[] taskInfo = currentLine.split(",");
+
+                if (taskInfo[0].compareTo("T") == 0)
+                    taskList.add(new Todo(Boolean.parseBoolean(taskInfo[1]), taskInfo[2]));
+                if (taskInfo[0].compareTo("D") == 0)
+                    taskList.add(new Deadline(Boolean.parseBoolean(taskInfo[1]), taskInfo[2], taskInfo[3]));
+                if (taskInfo[0].compareTo("E") == 0)
+                    taskList.add(new Event(Boolean.parseBoolean(taskInfo[1]), taskInfo[2], taskInfo[3], taskInfo[4]));
+            }
+
+
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+        catch (IndexOutOfBoundsException e) {
+            Duke.warn("Corrupt data. Cannot load from file.");
         }
 
         return this;
@@ -165,8 +203,8 @@ public class Duke {
         Scanner sc = new Scanner(System.in);
         Duke duke = new Duke();
 
-        // TODO: Retrieve saved data (if any)
-
+        // Retrieve saved data (if any)
+        duke.loadDataFromFile();
 
         System.out.println("System is ready!");
         Duke.display("\n\n");
@@ -188,7 +226,7 @@ public class Duke {
                 // State handling
                 switch (currentState) {
                     case TODO:
-                        taskDescription = userCmd.substring(4).trim(); // exclude "todo" keyword
+                        taskDescription = userCmd.substring(4).trim(); // exclude keyword
                         activeTask = new Todo(taskDescription);
                         duke.addNewTask(activeTask);
                         break;

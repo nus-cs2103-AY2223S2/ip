@@ -4,9 +4,13 @@ public abstract class Task {
 
     public Task(String description) {
         this.description = description;
+        this.isDone = false;
     }
 
-
+    public Task(boolean isDone, String description) {
+        this.isDone = isDone;
+        this.description = description;
+    }
 
     public String getDescription() {
         return description;
@@ -21,7 +25,7 @@ public abstract class Task {
     }
 
     public String toCsv() {
-        return (isDone ? "1":"0") + "," + description;
+        return (isDone ? "true":"false") + "," + description;
     }
 
     @Override

@@ -9,6 +9,12 @@ public class Event extends Task {
         this.to = to;
     }
 
+    public Event(boolean isDone, String description, String from, String to) {
+        super(isDone, description);
+        this.from = from;
+        this.to = to;
+    }
+
     String getFrom() {
         return from;
     }

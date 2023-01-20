@@ -7,6 +7,11 @@ public class Deadline extends Task {
         this.by = by;
     }
 
+    public Deadline(boolean isDone, String description, String by) {
+        super(isDone, description);
+        this.by = by;
+    }
+
     String getBy() {
         return by;
     }
