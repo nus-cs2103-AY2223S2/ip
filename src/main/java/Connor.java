@@ -64,37 +64,37 @@ public class Connor {
             String command = getCommand(input);
             try {
                 switch (Commands.valueOf(command)) {
-                    case HI:
-                        Responses.greetings("HI");
-                        break;
+                case HI:
+                    Responses.greetings("HI");
+                    break;
+                    
+                case BYE:
+                    Responses.greetings("BYE");
+                    sessionOver = true;
+                    break;
 
-                    case BYE:
-                        Responses.greetings("BYE");
-                        sessionOver = true;
-                        break;
+                case MARK:
+                    list.markDone(Integer.parseInt(getTask(input)));
+                    break;
 
-                    case MARK:
-                        list.markDone(Integer.parseInt(getTask(input)));
-                        break;
+                case UNMARK:
+                    list.markUndone(Integer.parseInt(getTask(input)));
+                    break;
 
-                    case UNMARK:
-                        list.markUndone(Integer.parseInt(getTask(input)));
-                        break;
+                case LIST:
+                    list.getList();
+                    break;
 
-                    case LIST:
-                        list.getList();
-                        break;
+                case TODO:
+                case DEADLINE:
+                case EVENT:
+                    Task task = TaskFactory.parseCommand(command, getTask(input));
+                    list.addTask(task);
+                    break;
 
-                    case TODO:
-                    case DEADLINE:
-                    case EVENT:
-                        Task task = TaskFactory.parseCommand(command, getTask(input));
-                        list.addTask(task);
-                        break;
-
-                    case DELETE:
-                        list.deleteTask(getTask(input));
-                        break;
+                case DELETE:
+                    list.deleteTask(getTask(input));
+                    break;
                 }
             } catch (IllegalArgumentException | InvalidTaskException e) {
                 System.out.println("        INVALID INPUT");
