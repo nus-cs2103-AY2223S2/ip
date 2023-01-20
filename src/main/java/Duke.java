@@ -163,26 +163,26 @@ public class Duke {
                 try {
                     String command = (input.split(" ")[0]).toLowerCase();
                     switch (command) {
-                        case "mark":
-                            markTask(input);
-                            break;
-                        case "unmark":
-                            unmarkTask(input);
-                            break;
-                        case "todo":
-                            addToDo(input);
-                            break;
-                        case "deadline":
-                            addDeadline(input);
-                            break;
-                        case "event":
-                            addEvent(input);
-                            break;
-                        case "delete":
-                            deleteTask(input);
-                            break;
-                        default:
-                            throw new DukeException("I'm sorry, but I don't know what that means :-(");
+                    case "mark":
+                        markTask(input);
+                        break;
+                    case "unmark":
+                        unmarkTask(input);
+                        break;
+                    case "todo":
+                        addToDo(input);
+                        break;
+                    case "deadline":
+                        addDeadline(input);
+                        break;
+                    case "event":
+                        addEvent(input);
+                        break;
+                    case "delete":
+                        deleteTask(input);
+                        break;
+                    default:
+                        throw new DukeException("I'm sorry, but I don't know what that means :-(");
                     }
                 } catch (DukeException e) {
                     System.out.printf("     ☹ OOPS!!! %s%n", e.getMessage());
