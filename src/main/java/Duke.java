@@ -29,7 +29,7 @@ public class Duke {
         sc.close();
     }
 
-    public static boolean handleGeneralCommand(String command) throws DukeInputError{
+    public static boolean handleGeneralCommand(String command) throws DukeInputError {
         if (command.startsWith("list")) {
             tasks.listTasks();
         } else if ((command.startsWith("mark")) || (command.startsWith("unmark")) ||
