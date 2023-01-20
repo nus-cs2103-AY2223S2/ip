@@ -5,7 +5,7 @@ import java.time.LocalDateTime;
 public class Deadlines extends Task {
     private LocalDateTime end;
 
-    public Deadlines (String name, String end) {
+    public Deadlines(String name, String end) {
         super(name);
         this.end = LocalDateTime.parse(end);
     }

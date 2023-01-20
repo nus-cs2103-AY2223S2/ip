@@ -1,7 +1,11 @@
 package duke;
 
-import duke.tasks.*;
 import java.util.ArrayList;
+
+import duke.tasks.Deadlines;
+import duke.tasks.Events;
+import duke.tasks.Task;
+import duke.tasks.Todos;
 
 public class TaskList {
     private final ArrayList<Task> taskList;
@@ -63,35 +67,41 @@ public class TaskList {
     }
 
     public void loader(String[] line) {
-        switch(line[0]) {
-        case "T": {
-            Todos toAdd = new Todos(line[2]);
-            if (line[1].equals("1")) {
-                toAdd.mark();
+        try {
+            switch (line[0]) {
+            case "T": {
+                Todos toAdd = new Todos(line[2]);
+                if (line[1].equals("1")) {
+                    toAdd.mark();
+                }
+                this.taskList.add(toAdd);
             }
-            this.taskList.add(toAdd);
-        }
-        break;
+            break;
 
-        case "D": {
-            Deadlines toAdd = new Deadlines(line[2], line[3]);
-            if (line[1].equals("1")) {
-                toAdd.mark();
+            case "D": {
+                Deadlines toAdd = new Deadlines(line[2], line[3]);
+                if (line[1].equals("1")) {
+                    toAdd.mark();
+                }
+                this.taskList.add(toAdd);
             }
-            this.taskList.add(toAdd);
-        }
-        break;
+            break;
 
-        case "E": {
-            Events toAdd = new Events(line[2], line[3], line[4]);
-            if (line[1].equals("1")) {
-                toAdd.mark();
+            case "E": {
+                Events toAdd = new Events(line[2], line[3], line[4]);
+                if (line[1].equals("1")) {
+                    toAdd.mark();
+                }
+                this.taskList.add(toAdd);
             }
-            this.taskList.add(toAdd);
-        }
-        break;
+            break;
+
+            default:
+                throw new DukeException("Invalid data found");
+
+            }
+        } catch (DukeException e) {
+            System.out.println(e.getMessage());
         }
     }
-
-
 }

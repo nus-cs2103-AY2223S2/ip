@@ -1,8 +1,9 @@
 package duke;
 
-import duke.commands.*;
+import java.io.FileNotFoundException;
 import java.time.format.DateTimeParseException;
-import java.io.*;
+
+import duke.commands.Command;
 
 public class Duke {
     private final Storage store;
@@ -24,19 +25,17 @@ public class Duke {
         this.inter.greet();
         boolean isExit = false;
 
-        while(!isExit) {
+        while (!isExit) {
             try {
                 String fullCommand = this.inter.uiRead();
                 Command c = Parser.parse(fullCommand);
                 c.execute(this.taskList, this.inter, this.store);
                 isExit = c.isExit();
-            }
-            catch (IllegalArgumentException e) {
+            } catch (IllegalArgumentException e) {
                 this.inter.printError("Unrecognised command. Try again.");
             } catch (DateTimeParseException e) {
                 this.inter.printError("Key in date and time in this format. yyyy-mm-ddThh:mm");
-            }
-            catch (Exception e) {
+            } catch (Exception e) {
                 this.inter.printError(e.getMessage());
             }
         }

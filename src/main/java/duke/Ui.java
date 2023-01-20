@@ -1,13 +1,14 @@
 package duke;
 
-import duke.tasks.Task;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.Scanner;
 
+import duke.tasks.Task;
+
 public class Ui {
-    private Scanner sc;
     private static final String LINE = "__________________________________________________________\n";
+    private Scanner sc;
 
     public Ui() {
         this.sc = new Scanner(System.in);
