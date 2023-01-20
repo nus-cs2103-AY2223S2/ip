@@ -15,10 +15,10 @@ public class TodoList {
         System.out.println(newTask);
     }
 
-    public void mark(int index) {
+    public void mark(int index) throws DukeExceptions{
         int todo_list_length = todo_list.size();
         if (index < 0 || index > todo_list_length) {
-            return;
+            throw new DukeExceptions("Please use list command to check the index!");
         }
         Task task = todo_list.get(index - 1);
         task.markTask();
@@ -26,16 +26,26 @@ public class TodoList {
         System.out.println(todo_list.get(index-1));
     }
 
-    public void unmark(int index) {
+    public void unmark(int index) throws DukeExceptions{
         int todo_list_length = todo_list.size();
         if (index < 0 || index > todo_list_length) {
-            return;
+            throw new DukeExceptions("Please use list command to check the index!");
         }
         Task task = todo_list.get(index - 1);
         task.unmarkTask();
         System.out.println("OK, I've marked this task as not done yet:");
         System.out.println(todo_list.get(index-1));
 
+    }
+
+    public void delete(int index) throws DukeExceptions {
+        int todo_list_length = todo_list.size();
+        if (index < 0 || index > todo_list_length) {
+            throw new DukeExceptions("Please use list command to check the index!");
+        }
+        Task task = todo_list.remove(index - 1);
+        System.out.println("Noted. I've removed this task:");
+        System.out.println(task);
     }
 
     public int number_of_tasks() {

@@ -47,7 +47,6 @@ ____________________________________________________________
 ____________________________________________________________
 Nice! I've marked this task as done:
 [T][X] read book
-OOPS!!! I'm sorry, but I don't know what that means.
 ____________________________________________________________
 1. [T][X] read book
 2. [D][ ] return book (by: Sunday 2pm)
@@ -56,7 +55,6 @@ ____________________________________________________________
 ____________________________________________________________
 Nice! I've marked this task as done:
 [D][X] return book (by: Sunday 2pm)
-OOPS!!! I'm sorry, but I don't know what that means.
 ____________________________________________________________
 1. [T][X] read book
 2. [D][X] return book (by: Sunday 2pm)
@@ -65,11 +63,27 @@ ____________________________________________________________
 ____________________________________________________________
 OK, I've marked this task as not done yet:
 [D][ ] return book (by: Sunday 2pm)
-OOPS!!! I'm sorry, but I don't know what that means.
 ____________________________________________________________
 1. [T][X] read book
 2. [D][ ] return book (by: Sunday 2pm)
 3. [E][ ] programming study (from: 5pm to: 9pm)
+
+____________________________________________________________
+OOPS!!! The description of a delete cannot be empty.
+____________________________________________________________
+Please use list command to check the index!
+____________________________________________________________
+1. [T][X] read book
+2. [D][ ] return book (by: Sunday 2pm)
+3. [E][ ] programming study (from: 5pm to: 9pm)
+
+____________________________________________________________
+Noted. I've removed this task:
+[T][X] read book
+Now I have 2 tasks in the list.
+____________________________________________________________
+1. [D][ ] return book (by: Sunday 2pm)
+2. [E][ ] programming study (from: 5pm to: 9pm)
 
 ____________________________________________________________
 Bye. Hope to see you again soon!
