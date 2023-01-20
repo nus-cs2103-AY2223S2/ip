@@ -1,3 +1,7 @@
+import exceptions.DukeException;
+
+import java.util.Scanner;
+
 public class Duke {
 
     private static final String LINE = "\t____________________________________________________________";
@@ -20,18 +24,26 @@ public class Duke {
         System.out.println("Hello from\n" + LOGO + "\nWhat can I do for you?");
     }
 
+    public static void main(String[] args) {
+        Duke duke = new Duke();
+
+        Scanner s = new Scanner(System.in);
+        while (duke.isActive()) {
+            String input = s.nextLine();
+            duke.parseInput(input);
+        }
+    }
+
     public boolean isActive() {
         return this.isActive;
     }
 
     public void parseInput(String input) {
         String[] delimited = input.split(" ");
-        int index;
-        String[] temp = new String[0];
         switch (delimited[0].toLowerCase()) {
             case "bye":
                 this.isActive = false;
-                this.printOutput("\t Bye. Hope to see you again soon!");
+                this.printOutput("Bye. Hope to see you again soon!");
                 break;
             case "list":
                 System.out.println(LINE);
@@ -39,40 +51,140 @@ public class Duke {
                 System.out.println(LINE);
                 break;
             case "mark":
-                index = Integer.parseInt(delimited[1]) - 1;
-                if (this.tasklist.mark(index)) {
-                    printOutput("\t I've marked this as done:\n \t " + this.tasklist.get(index));
-                } else {
-                    printOutput("\t The selected task has already been marked as done.");
+                try {
+                    this.mark(delimited);
+                } catch (DukeException e) {
+                    this.printOutput(e.getMessage());
                 }
                 break;
             case "unmark":
-                index = Integer.parseInt(delimited[1]) - 1;
-                if (this.tasklist.unmark(index)) {
-                    printOutput("\t I've marked this as not done yet:\n \t " + this.tasklist.get(index));
-                } else {
-                    printOutput("\t The selected task has not yet been marked as done.");
+                try {
+                    this.unmark(delimited);
+                } catch (DukeException e) {
+                    this.printOutput(e.getMessage());
                 }
                 break;
             case "todo":
-                this.tasklist.addTask(new Todo(input.replaceAll("todo ", "")));
+                try {
+                    this.addTask("todo", input, delimited);
+                } catch (DukeException e) {
+                    this.printOutput(e.getMessage());
+                }
                 break;
             case "deadline":
-                temp = input.split(" /by ");
-                this.tasklist.addTask(new Deadline(temp[0].replaceAll("deadline ", ""), temp[1]));
+                try {
+                    this.addTask("deadline", input, delimited);
+                } catch (DukeException e) {
+                    this.printOutput(e.getMessage());
+                }
                 break;
             case "event":
-                temp = input.split(" /from ");
-                String startDate = temp[1].split(" /to ")[0];
-                String endDate = temp[1].split(" /to ")[1];
-                this.tasklist.addTask(new Event(temp[0].replaceAll("event ", ""), startDate, endDate));
+                try {
+                    this.addTask("event", input, delimited);
+                } catch (DukeException e) {
+                    this.printOutput(e.getMessage());
+                }
                 break;
+            case "delete":
+                try {
+                    this.deleteTask(delimited);
+                } catch (DukeException e) {
+                    this.printOutput(e.getMessage());
+                }
+                break;
+            default:
+                this.printOutput("I don't quite get what that means.");
         }
     }
 
-    public static void printOutput(String text) {
+    private void printOutput(String text) {
         System.out.println(LINE);
-        System.out.println(text);
+        System.out.println("\t " + text);
         System.out.println(LINE);
+    }
+
+    private void mark(String[] input) throws DukeException{
+        int index = this.retrieveIndex(input);
+        if (this.tasklist.mark(index)) {
+            printOutput("I've marked this as done:\n\t " + this.tasklist.get(index));
+        } else {
+            printOutput("The selected task has already been marked as done.");
+        }
+    }
+
+    private void unmark(String[] input) throws DukeException{
+        int index = this.retrieveIndex(input);
+        if (this.tasklist.unmark(index)) {
+            printOutput("I've marked this as not done yet:\n\t " + this.tasklist.get(index));
+        } else {
+            printOutput("The selected task has not yet been marked as done.");
+        }
+    }
+
+    private int retrieveIndex(String[] input) throws DukeException {
+        if (input.length < 2) {
+            throw new DukeException("Please provide a task number.");
+        }
+        try {
+            int index = Integer.parseInt(input[1]);
+            if (index > this.tasklist.size()) {
+                throw new DukeException("Invalid task number provided. " +
+                        "Given task number is " + index +
+                        " but there are only " + this.tasklist.size() + " task(s) in the list");
+            }
+            if (index < 1) {
+                throw new DukeException("Invalid task number provided. Number cannot be less than 1.");
+            }
+            return index - 1;
+        } catch (NumberFormatException e) {
+            throw new DukeException("Invalid task number provided.");
+        }
+
+    }
+
+    private void addTask(String type, String input, String[] delimitedInput) throws DukeException{
+        if (delimitedInput.length < 2) {
+            throw new DukeException("Invalid description provided. The description of a task cannot be empty.");
+        }
+        Task task = new Task("");
+        if (type.equals("todo")) {
+            String name = input.split(" ", 2)[1];
+            task = new Todo(name);
+        } else if (type.equals("deadline")) {
+            if (!input.contains("/by")) {
+                throw new DukeException("Please provide a deadline using /by");
+            }
+            String[] temp = input.split(" /by ");
+            if (temp.length < 2) {
+                throw new DukeException("Please provide a valid deadline.");
+            }
+            String name = temp[0].split(" ", 2)[1];
+            String deadline = temp[1];
+            task = new Deadline(name, deadline);
+        } else if (type.equals("event")) {
+            if (!input.contains("/from") || !input.contains("/to")) {
+                throw new DukeException("Please provide a start date and end date using /from and /to respectively.");
+            }
+            String[] temp = input.split(" /from ");
+            String name = temp[0].split(" ", 2)[1];
+            String[] dates = temp[1].split(" /to ");
+            if (dates.length < 2) {
+                throw new DukeException("Please provide a valid start and end date.");
+            }
+            String startDate = dates[0];
+            String endDate = dates[1];
+            task = new Event(name, startDate, endDate);
+        }
+        this.tasklist.addTask(task);
+        this.printOutput(
+                "I've added the following to your list of tasks:\n\t\t" +
+                        task + "\n\t You now have " + this.tasklist.size() + " task(s) in the list.");
+    }
+
+    private void deleteTask(String[] delimitedInput) throws DukeException{
+        int index = retrieveIndex(delimitedInput);
+        Task task = this.tasklist.deleteTask(index);
+        this.printOutput("I've removed the following from your list of tasks:\n\t\t" +
+                task + "\n\t You now have " + this.tasklist.size() + " task(s) in the list.");
     }
 }

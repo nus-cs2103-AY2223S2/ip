@@ -19,4 +19,11 @@ deadline project /by
 event cny /from 10am
 event dinner /to 8pm
 event event /from /to
+delete
+delete 1
+list
+delete 2
+delete 50
+delete asdojv
+delete -214
 bye
