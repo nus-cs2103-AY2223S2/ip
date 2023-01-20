@@ -4,7 +4,7 @@ import duke.Storage;
 import duke.TaskList;
 import duke.Ui;
 import duke.exception.DukeException;
-import task.Task;
+import duke.task.Task;
 
 public class AddCommand extends Command {
     private Task task;

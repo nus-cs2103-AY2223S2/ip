@@ -3,7 +3,7 @@ import java.util.ArrayList;
 import java.util.Scanner;
 
 import duke.exception.DukeException;
-import task.Task;
+import duke.task.Task;
 
 public class TaskList {
     private ArrayList<Task> taskStore = new ArrayList<>(100);

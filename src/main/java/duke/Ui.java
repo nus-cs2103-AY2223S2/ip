@@ -2,7 +2,7 @@ package duke;
 import java.util.Scanner;
 
 import duke.exception.DukeException;
-import task.Task;
+import duke.task.Task;
 
 public class Ui {
 
