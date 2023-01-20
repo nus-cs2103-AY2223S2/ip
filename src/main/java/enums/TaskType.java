@@ -3,7 +3,7 @@ package enums;
 import exceptions.DukeException;
 
 /**
- * Enum for Task.
+ * Enum types for Task.
  */
 public enum TaskType {
     TODO("todo", new DukeException("Your format is incorrect.\n" +

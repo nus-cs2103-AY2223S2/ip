@@ -1,7 +1,7 @@
 package enums;
 
 /**
- * Types of commands.
+ * Enum types for commands.
  */
 public enum CommandType {
     BYE,

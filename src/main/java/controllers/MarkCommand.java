@@ -1,17 +1,25 @@
 package controllers;
 
+import java.util.Optional;
+import java.util.function.Supplier;
+import java.util.regex.Matcher;
+
 import entities.Task;
 import entities.TaskList;
 import enums.CommandType;
 import exceptions.DukeException;
 
-import java.util.Optional;
-import java.util.function.Supplier;
-import java.util.regex.Matcher;
-
+/**
+ * Represents the Mark Command.
+ * The mark command can be used to mark a task as completed.
+ */
 public class MarkCommand extends Command {
     private final String args;
 
+    /**
+     * Initializes a Mark Command.
+     * @param args The parsed arguments.
+     */
     public MarkCommand(String args) {
         super(CommandType.MARK);
         this.args = args;

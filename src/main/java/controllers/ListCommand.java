@@ -1,12 +1,19 @@
 package controllers;
 
+import java.util.function.Supplier;
+
 import entities.TaskList;
 import enums.CommandType;
 
-import java.util.function.Supplier;
-
+/**
+ * Represents the List Command.
+ * The list command can be used to list all tasks.
+ */
 public class ListCommand extends Command {
 
+    /**
+     * Initializes a list command.
+     */
     public ListCommand() {
         super(CommandType.LIST);
     }

@@ -1,17 +1,25 @@
 package controllers;
 
+import java.util.function.Supplier;
+import java.util.regex.Matcher;
+
 import entities.Task;
 import entities.TaskList;
 import enums.CommandType;
 import enums.TaskType;
 import exceptions.DukeException;
 
-import java.util.function.Supplier;
-import java.util.regex.Matcher;
-
+/**
+ * Represents the Todo Command.
+ * The todo command can be used to add a new task.
+ */
 public class TodoCommand extends Command {
     private final String args;
 
+    /**
+     * Initializes the Todo Command.
+     * @param arguments The parsed arguments.
+     */
     public TodoCommand(String arguments) {
         super(CommandType.TODO);
         this.args = arguments;

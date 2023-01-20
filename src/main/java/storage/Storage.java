@@ -1,12 +1,5 @@
 package storage;
 
-import entities.SerializableTask;
-import entities.Task;
-import entities.TaskList;
-import enums.TaskType;
-import exceptions.DukeException;
-import utils.Loader;
-
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileWriter;
@@ -15,10 +8,25 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.Scanner;
 
+import entities.SerializableTask;
+import entities.Task;
+import entities.TaskList;
+import enums.TaskType;
+import exceptions.DukeException;
+import utils.Loader;
+
+/**
+ * Represents a Storage class which save the tasks in the hard disk automatically whenever the task list changes.
+ * Load the data from the hard disk when Duke starts up.
+ */
 public class Storage implements Loader<TaskList> {
     private static final String GENERIC_ERROR = "An error occurred when creating the database: ";
     private final File file;
 
+    /**
+     * Initializes a Storage object with the specified filename.
+     * @param filename Filename to store the data.
+     */
     public Storage(String filename) {
         String FILE_DIRECTORY = "data";
         this.file = new File(String.format("%s/%s", FILE_DIRECTORY, filename));
@@ -44,6 +52,12 @@ public class Storage implements Loader<TaskList> {
         }
     }
 
+    /**
+     * Loads the data from the specified filename.
+     * @param taskList TaskList to add the loaded data to.
+     * @return A boolean value indicating the success of the operation.
+     * @throws DukeException An exception to be thrown if there are any errors that occur.
+     */
     public Boolean load(TaskList taskList) throws DukeException {
         try {
             Scanner reader = new Scanner(file);
@@ -56,16 +70,18 @@ public class Storage implements Loader<TaskList> {
                 SerializableTask task;
 
                 switch(taskType) {
-                    case TODO:
-                    case DEADLINE:
-                    case EVENT:
-                        String aFlags = data.subList(3, data.size()).toString();
-                        String flags = aFlags.substring(1, aFlags.length()-1);
-                        task = new SerializableTask(taskType, isDone, description, flags);
-                        break;
-                    default: task = null;
+                case TODO:
+                case DEADLINE:
+                case EVENT:
+                    String aFlags = data.subList(3, data.size()).toString();
+                    String flags = aFlags.substring(1, aFlags.length() - 1);
+                    task = new SerializableTask(taskType, isDone, description, flags);
+                    break;
+                default: task = null;
                 }
-                if (task != null) taskList.addTask(task.unmarshal(), false);
+                if (task != null) {
+                    taskList.addTask(task.unmarshal(), false);
+                }
             }
             return true;
         } catch (FileNotFoundException e) {
@@ -73,6 +89,11 @@ public class Storage implements Loader<TaskList> {
         }
     }
 
+    /**
+     * Writes all task currently in memory to the hard disk.
+     * @param taskList The tasklist in memory.
+     * @throws DukeException An exception to be thrown if there are any errors that occur.
+     */
     public void write(TaskList taskList) throws DukeException {
         try {
             FileWriter fileWriter = new FileWriter(file);
