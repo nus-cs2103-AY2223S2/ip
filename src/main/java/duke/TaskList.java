@@ -2,26 +2,68 @@ package duke;
 
 import java.util.ArrayList;
 
+
+/**
+ * TaskList is the class to store all the tasks keyed in by the user during
+ * the session. It has a generic type of Task, which means the type of data
+ * stored in the list is Task. It is an immutable list and will always
+ * return a new list if modified.
+ *
+ * @author Muhammad Reyaaz 
+ * @version %I% %G%
+ * @since 11
+ */
+
 class TaskList<Task> {
     
     private final ArrayList<Task> tasks;
+    //List starts numbering from 1
     private final static int INCREMENT = 1;
    
+    /**
+     * Instantiate new list of tasks from an ArrayList
+     *
+     * @param newTasks Type TaskList<Task>
+     */
+
     TaskList(TaskList<Task> newTasks) {
         this.tasks = new ArrayList<Task>(newTasks.tasks);
     }
     
-    TaskList() {
+    /**
+     * Instantiate an empty ArrayList of tasks
+     */
+    
+    protected TaskList() {
         this.tasks = new ArrayList<Task>();
     }
+    
+    /**
+     * Only allow the TaskList class to instantiate the list of task from an
+     * ArrayList of previous tasks
+     */
 
     private TaskList(ArrayList<Task> oldTasks) {
         this.tasks = new ArrayList<Task>(oldTasks);
     }
     
+    /**
+     * Get the total number of tasks in the list.
+     * 
+     * @return sizeOfTasks
+     */
+
     int numberOfTasks() {
         return this.tasks.size();
     }
+    
+    /**
+     * Display to the user in a pretty format all the tasks in the list,
+     * starting from 1.
+     *
+     * @return TaskList<Task>
+     *
+     */
 
     TaskList<Task> listAllTasks() {
         for (int i=0; i < this.numberOfTasks(); i++) {
@@ -30,9 +72,22 @@ class TaskList<Task> {
         return new TaskList<Task>(this.tasks);
     }
 
+    /**
+     * Get a task in a specific position 
+     * @return positionOfTask
+     */
+
     Task get(int index) {
         return this.tasks.get(index);
     }
+    
+    /**
+     * Insert a new Task. However, due to the TaskList being immutable, a
+     * new TaskList is returned with the added task.
+     *
+     * @param newTask Task to add
+     * @return TaskList<Task>
+     */
 
     TaskList<Task> add(Task newTask) {
         TaskList<Task> newTasks = new TaskList<Task>(this.tasks);
@@ -41,12 +96,29 @@ class TaskList<Task> {
         return newTasks;
     }
 
+    /**
+     * Modify a task in the list, such as to mark it as done or undone. Due
+     * to the immutability nature of TaskList, a new TaskList will be
+     * returned with the modified marked / unmarked status of a particular
+     * task.
+     *
+     * @return TaskList<Task>
+     */
+
     TaskList<Task> set(int index, Task task) {
         TaskList<Task> newTasks = new TaskList<Task>(this.tasks);
         newTasks.tasks.set(index, task);
         return newTasks;
     }
-
+    
+    /**
+     * Delete a particular task present in the list. However, due to the
+     * immutability nature of TaskList, a new TaskList will be returned with
+     * the corresponding task deleted.
+     *
+     * @return TaskList<Task> 
+     */
+    
     TaskList<Task> removeTask(int index) {
         TaskList<Task> newTasks = new TaskList<Task>(this.tasks);
         newTasks.tasks.remove(index);

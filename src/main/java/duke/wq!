@@ -25,7 +25,7 @@ class Ui {
      */
 
     protected Ui() {
-        this.scanner = new Scanner(System.in);    
+        scanner = new Scanner(System.in);    
     }
 
     /**
@@ -41,7 +41,7 @@ class Ui {
      */
     
     void readCommand() {
-       this.description = scanner.next();
+       description = scanner.next();
     }
     
     /**
@@ -75,6 +75,18 @@ class Ui {
         }
         return this.tasks;
     }
+    
+    /** Checks the user input against a list of invalid commands
+     * (blacklist). If the input is blacklisted, a new DukeUnknownException
+     * is thrown. Otherwise, a new Task will be created and added to the lit
+     * of previously keyed in Task. 
+     *
+     * @param description The user's task title in String 
+     * @throws IllegalArgumentException
+     * @throws DukeUnknownException
+     *
+     *
+     */
     
     TaskList<Task> dukeExceptionWarning(String description, TaskList<Task> tasks) {
         try {
