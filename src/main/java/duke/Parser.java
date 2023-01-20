@@ -1,3 +1,10 @@
+package duke;
+
+import duke.Deadline;
+import duke.DukeException;
+import duke.EmptyArgException;
+import duke.FileReadWrite;
+
 import java.io.IOException;
 
 public class Parser {
@@ -70,7 +77,7 @@ public class Parser {
         return true;
     }
 
-    public static Task createTask(String input) throws DukeException{
+    public static Task createTask(String input) throws DukeException {
         Task newTask;
         if (input.contains("todo")){
             if (input.equals("todo")){
