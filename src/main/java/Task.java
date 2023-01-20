@@ -11,6 +11,10 @@ public class Task {
         counter += 1;
     }
 
+    public static void decreaseCounter() {
+        counter -= 1;
+    }
+
     public String getStatusIcon() {
         return (isDone ? "X" : " "); // mark done task with X
     }
