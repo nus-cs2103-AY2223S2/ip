@@ -1,5 +1,6 @@
 package domain.models.taskmanager;
 import core.exceptions.InvalidArgumentException;
+import core.injections.Injections;
 import core.utils.Pair;
 import core.utils.TokenUtilities;
 import java.util.Map;
@@ -37,7 +38,7 @@ public class Event extends Task {
 
     public static Event fromTokens(String[] tokens) throws InvalidArgumentException {
         final Pair<String, Map<String, String>> tmp =
-                TokenUtilities.instance.joinTokens(tokens, delims);
+                Injections.get(TokenUtilities.class).joinTokens(tokens, delims);
         if (tmp.getLeft().isBlank()) {
             throw new InvalidArgumentException("☹ OOPS, the name for an event " +
                     "should not be null", tokens);

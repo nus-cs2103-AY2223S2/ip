@@ -8,7 +8,7 @@ import domain.models.core.NestableExecutableObject;
 public class ByeUsecase implements IdentifiableExecutable, ExecutableRegisterable {
     @Override
     public ExitStatus execute(String[] tokens) {
-        System.out.println("ByeUsecase! See you next time:-)");
+        System.out.println("Bye! See you next time:-)");
         return ExitStatus.terminate;
     }
 

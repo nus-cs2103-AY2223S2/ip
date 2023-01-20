@@ -9,12 +9,7 @@ public class TokenUtilities {
     /**
      * Instantiates a TokenUtilities.
      */
-    private TokenUtilities() {}
-
-    /**
-     * The singleton instance for the given token joiner.
-      */
-    public static final TokenUtilities instance = new TokenUtilities();
+    public TokenUtilities() {}
 
     /**
      * Joins the tokens together

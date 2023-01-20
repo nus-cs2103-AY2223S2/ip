@@ -1,21 +1,32 @@
 package core.injections;
 
+import domain.models.core.Executable;
+import domain.models.core.Writable;
+import domain.usecases.ByeUsecase;
 import presentation.ui.SystemOut;
 
 import java.util.HashMap;
 import java.util.Map;
 import java.util.function.Supplier;
 
+/**
+ * The utilities class for handling the registering singletons. To use it, call
+ * <code>Injections.registerSingleton(Hello.class, new Hello());</code>
+ * This way, it can provide a new layer of abstraction, and if any concrete
+ * implementations were to change, any code calling <code>Injections.get</code>
+ * would not need to be changed, unless, or course, you directly call the
+ * class itself.
+ */
 public class Injections {
     /**
      * The dependencies stored in this dependencies section.
      */
-    static private Map<Class<?>, Object> dependencies = new HashMap<>();
+    static private final Map<Class<?>, Object> dependencies = new HashMap<>();
 
     /**
      * The dependency suppliers, used for lazy registration.
      */
-    static private Map<Class<?>, Supplier<?>> dependencySuppliers =
+    static private final Map<Class<?>, Supplier<?>> dependencySuppliers =
             new HashMap<>();
 
     /**
@@ -58,7 +69,7 @@ public class Injections {
         if (dependencies.containsKey(cls)) {
             return cls.cast(dependencies.get(cls));
         } else if (dependencySuppliers.containsKey(cls)) {
-            final T object = cls.cast(dependencySuppliers.get(cls));
+            final T object = cls.cast(dependencySuppliers.get(cls).get());
             dependencies.put(cls, object);
             return object;
         }
