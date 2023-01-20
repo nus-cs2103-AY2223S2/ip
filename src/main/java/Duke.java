@@ -66,21 +66,21 @@ public class Duke {
                 break;
             case "todo":
                 try {
-                    this.addTask("todo", input, delimited);
+                    this.addTask(TaskTypes.TODO, input, delimited);
                 } catch (DukeException e) {
                     this.printOutput(e.getMessage());
                 }
                 break;
             case "deadline":
                 try {
-                    this.addTask("deadline", input, delimited);
+                    this.addTask(TaskTypes.DEADLINE, input, delimited);
                 } catch (DukeException e) {
                     this.printOutput(e.getMessage());
                 }
                 break;
             case "event":
                 try {
-                    this.addTask("event", input, delimited);
+                    this.addTask(TaskTypes.EVENT, input, delimited);
                 } catch (DukeException e) {
                     this.printOutput(e.getMessage());
                 }
@@ -142,38 +142,44 @@ public class Duke {
 
     }
 
-    private void addTask(String type, String input, String[] delimitedInput) throws DukeException{
+    private void addTask(TaskTypes type, String input, String[] delimitedInput) throws DukeException{
         if (delimitedInput.length < 2) {
             throw new DukeException("Invalid description provided. The description of a task cannot be empty.");
         }
         Task task = new Task("");
-        if (type.equals("todo")) {
-            String name = input.split(" ", 2)[1];
-            task = new Todo(name);
-        } else if (type.equals("deadline")) {
-            if (!input.contains("/by")) {
-                throw new DukeException("Please provide a deadline using /by");
-            }
-            String[] temp = input.split(" /by ");
-            if (temp.length < 2) {
-                throw new DukeException("Please provide a valid deadline.");
-            }
-            String name = temp[0].split(" ", 2)[1];
-            String deadline = temp[1];
-            task = new Deadline(name, deadline);
-        } else if (type.equals("event")) {
-            if (!input.contains("/from") || !input.contains("/to")) {
-                throw new DukeException("Please provide a start date and end date using /from and /to respectively.");
-            }
-            String[] temp = input.split(" /from ");
-            String name = temp[0].split(" ", 2)[1];
-            String[] dates = temp[1].split(" /to ");
-            if (dates.length < 2) {
-                throw new DukeException("Please provide a valid start and end date.");
-            }
-            String startDate = dates[0];
-            String endDate = dates[1];
-            task = new Event(name, startDate, endDate);
+        String[] temp;
+        String name;
+        switch (type) {
+            case TODO:
+                name = input.split(" ", 2)[1];
+                task = new Todo(name);
+                break;
+            case DEADLINE:
+                if (!input.contains("/by")) {
+                    throw new DukeException("Please provide a deadline using /by");
+                }
+                temp = input.split(" /by ");
+                if (temp.length < 2) {
+                    throw new DukeException("Please provide a valid deadline.");
+                }
+                name = temp[0].split(" ", 2)[1];
+                String deadline = temp[1];
+                task = new Deadline(name, deadline);
+                break;
+            case EVENT:
+                if (!input.contains("/from") || !input.contains("/to")) {
+                    throw new DukeException("Please provide a start date and end date using /from and /to respectively.");
+                }
+                temp = input.split(" /from ");
+                name = temp[0].split(" ", 2)[1];
+                String[] dates = temp[1].split(" /to ");
+                if (dates.length < 2) {
+                    throw new DukeException("Please provide a valid start and end date.");
+                }
+                String startDate = dates[0];
+                String endDate = dates[1];
+                task = new Event(name, startDate, endDate);
+                break;
         }
         this.tasklist.addTask(task);
         this.printOutput(
