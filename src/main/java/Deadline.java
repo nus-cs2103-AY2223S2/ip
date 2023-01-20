@@ -2,7 +2,7 @@ public class Deadline extends Task {
 
     private String deadline;
 
-    private Deadline(String description, String deadline) {
+    public Deadline(String description, String deadline) {
         super(description);
         this.deadline = deadline;
     }
@@ -20,6 +20,14 @@ public class Deadline extends Task {
         String deadline = input.substring(byIndex + 1);
         String deadlineDescription = input.substring(9, byIndex - 1);
         return new Deadline(deadlineDescription, deadline);
+    }
+
+    public static Deadline create(String description, String deadline, String marked) {
+        Deadline task = new Deadline(description, deadline);
+        if (marked.equals("1")) {
+            task.markSilent();
+        }
+        return task;
     }
 
     /**

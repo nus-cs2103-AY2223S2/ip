@@ -1,3 +1,5 @@
+import java.util.Arrays;
+
 public class TaskInfoParser {
 
     /**
@@ -22,5 +24,50 @@ public class TaskInfoParser {
                 " for not know what %s means!!", commands[0]), null);
     }
 
+    public static Task obtainTask(String[] stringArray) {
+        int length = stringArray.length;
+        //System.out.println(Arrays.deepToString(stringArray));
+        switch(stringArray[0]) {
+            case "T":
+                return ToDo.create(joinString(stringArray, 2, length - 1), stringArray[1]);
+            case "D":
+                int byIndex = searchString(stringArray, "by");
+                String description = joinString(stringArray, 2, byIndex - 1);
+                String deadline = joinString(stringArray, byIndex + 1, length - 1);
+                return Deadline.create(description, deadline, stringArray[1]);
+            case "E":
+                int fromIndex = searchString(stringArray, "from");
+                int toIndex = searchString(stringArray, "to");
+                String description1 = joinString(stringArray, 2, fromIndex - 1);
+                String startTime = joinString(stringArray, fromIndex + 1, toIndex - 1);
+                String endTime = joinString(stringArray, toIndex + 1, length - 1);
+                return Event.create(description1, startTime, endTime, stringArray[1]);
+        }
+        return null;
+    }
+
+    /**
+     * Concatenates strings from a string array from index start to index end.
+     * @param array String array
+     * @param start start index
+     * @param end end index
+     * @return concatenated string from the start index to end index of the array
+     */
+    public static String joinString(String[] array, int start, int end) {
+        String string = "";
+        for (int i = start; i < end; i++) {
+            string += array[i] + " ";
+        }
+        return string + array[end];
+    }
+
+    public static int searchString(String[] array, String string) {
+        for (int i = 0; i < array.length; i++) {
+            if (array[i].equals(string)) {
+                return i;
+            }
+        }
+        return -1;
+    }
 
 }

@@ -17,8 +17,16 @@ public class TaskList {
      */
     public void addTask(Task task) {
         System.out.println(String.format("%s\n %s", ADDTASKMSG, task.toString()));
-        this.taskList.add(task);
+        addTaskSilent(task);
         System.out.println(String.format("%d tasks in the list, you have now.", getSize()));
+    }
+
+    /**
+     * Adds task to task list without any messages
+     * @param task task object
+     */
+    public void addTaskSilent(Task task) {
+        this.taskList.add(task);
     }
 
     /**

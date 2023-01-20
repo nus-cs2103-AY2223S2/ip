@@ -1,4 +1,8 @@
+import java.lang.reflect.Array;
+import java.util.Arrays;
 import java.util.Scanner;
+import java.io.File;
+import java.io.FileNotFoundException;
 
 public class Duke {
 
@@ -15,12 +19,18 @@ public class Duke {
     }
     public static void main(String[] args) {
         Duke.displayWelcomeMessage();
+
         Scanner scanner = new Scanner(System.in);
         String response = "";
-
         TaskList taskList = new TaskList();
         TaskInfoParser parser = new TaskInfoParser();
-
+        try {
+            taskList = Duke.readFromFile("src/main/data/duke.txt");
+            System.out.println("Hrmm Hrmm, some past tasks I see!!\n'list' command to see more, you must enter");
+            System.out.println(BANNER);
+        } catch (FileNotFoundException e) {
+            System.out.println("Not Found the file is! Hrmmm Hrmmm");
+        }
         while (true) {
             response = scanner.nextLine();
             if (response.equals("bye")) {
@@ -88,6 +98,20 @@ public class Duke {
         return command.equals("mark")
                 || command.equals("unmark")
                 || command.equals("delete");
+    }
+
+    public static TaskList readFromFile(String path) throws FileNotFoundException {
+        TaskList taskList = new TaskList();
+        File file = new File(path);
+        Scanner fileScanner = new Scanner(file);
+        while(fileScanner.hasNext()) {
+            String line = fileScanner.nextLine();
+            String[] commandArray = line.trim().split(" ");
+            //System.out.println(Arrays.deepToString(commandArray));
+            Task task = TaskInfoParser.obtainTask(commandArray);
+            taskList.addTaskSilent(task);
+        }
+        return taskList;
     }
 
 }

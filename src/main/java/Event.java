@@ -3,7 +3,7 @@ public class Event extends Task {
     private String startTime;
     private String endTime;
 
-    private Event(String description, String start, String end) {
+    public Event(String description, String start, String end) {
         super(description);
         this.startTime = start;
         this.endTime = end;
@@ -24,6 +24,14 @@ public class Event extends Task {
         String startTime = input.substring(fromIndex + 6, toIndex - 1);
         String endTime = input.substring(toIndex + 4);
         return new Event(eventDescription, startTime, endTime);
+    }
+
+    public static Event create(String description, String from, String to, String marked) {
+        Event task = new Event(description, from , to);
+        if (marked.equals("1")) {
+            task.markSilent();
+        }
+        return task;
     }
 
     /**

@@ -18,6 +18,14 @@ public class ToDo extends Task{
         return new ToDo(toDoDescription);
     }
 
+    public static ToDo create(String description, String marked) {
+        ToDo newTask = new ToDo(description);
+        if (marked.equals("1")) {
+            newTask.markSilent();
+        }
+        return newTask;
+    }
+
     /**
      * Concatenates the strings from [start, end] indices of commands array to form
      * required description of the task.

@@ -15,8 +15,12 @@ abstract public class Task {
      * Checks the status of the task and logs to stdout.
      */
     public void mark() {
-        this.isDone = true;
+        markSilent();
         System.out.println("Nice! Marked this task as done, I have:");
+    }
+
+    public void markSilent() {
+        this.isDone = true;
     }
 
     /**
