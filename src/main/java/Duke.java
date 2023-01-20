@@ -49,8 +49,9 @@ public class Duke {
 
                     break;
                 case "deadline":
-                    String by = command.substring(22);
-                    String deadlinemessage = command.substring(9, 20);
+                    int index_by = command.indexOf("/by");
+                    String by = command.substring(index_by + 4);
+                    String deadlinemessage = command.substring(9, index_by - 1);
                     Task deadline = new Deadline(deadlinemessage, by);
                     list.add(deadline);
                     counter++;
