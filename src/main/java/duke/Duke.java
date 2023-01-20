@@ -12,6 +12,7 @@ import duke.command.UnmarkCommand;
 import duke.exception.DukeException;
 import duke.io.FileStorage;
 import duke.task.TaskList;
+import duke.ui.Ui;
 
 import java.nio.file.Path;
 import java.util.Scanner;
@@ -21,6 +22,8 @@ import java.util.Scanner;
  */
 public class Duke {
     private final static Path saveFilePath = Path.of("./save-data/task-list.csv");
+
+    private final static Ui ui = new Ui();
 
     private final static ByeCommand byeCommand = new ByeCommand();
     private final static DeadlineCommand deadlineCommand = new DeadlineCommand();
@@ -52,15 +55,9 @@ public class Duke {
             tasks = new TaskList(new FileStorage(saveFilePath));
             return true;
         } catch (DukeException e) {
-            printMessage(e.getMessage());
+            ui.print(e.getMessage());
             return false;
         }
-    }
-
-    private static void printMessage(String message) {
-        System.out.println("    ____________________________________________________________");
-        System.out.printf("     %s\n", message.replace("\n", "\n     "));
-        System.out.print("    ____________________________________________________________\n\n");
     }
 
     private static void printGreeting() {
@@ -69,7 +66,7 @@ public class Duke {
                 + "| | | | | | | |/ / _ \\\n"
                 + "| |_| | |_| |   <  __/\n"
                 + "|____/ \\__,_|_|\\_\\___|\n";
-        printMessage(String.format("Hello from\n%s\nWhat can I do for you?", logo));
+        ui.print(String.format("Hello from\n%s\nWhat can I do for you?", logo));
     }
 
     private static void runInputLoop() {
@@ -82,11 +79,11 @@ public class Duke {
             try {
                 message = getCommand(input).run(input, tasks);
             } catch (DukeException e) {
-                printMessage(e.getMessage());
+                ui.print(e.getMessage());
                 continue;
             }
 
-            printMessage(message);
+            ui.print(message);
 
             if (shouldExit(input)) {
                 break;
