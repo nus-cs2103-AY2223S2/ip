@@ -1,6 +1,6 @@
-public class todoException extends Exception{
+public class ToDoException extends Exception{
     String message;
-    todoException(String str) {
+    ToDoException(String str) {
         message = str;
     }
     public String toString() {
