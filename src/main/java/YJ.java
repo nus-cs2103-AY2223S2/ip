@@ -19,6 +19,19 @@ public class YJ {
                     Task task = tasks.get(i);
                     System.out.println((i + 1) + "." + task.toString());
                 }
+
+            } else if (input.startsWith("delete")) {
+                try {
+                    Integer taskNumber = Integer.parseInt(input.split(" ")[1]);
+                    if (taskNumber != null && tasks.get(taskNumber - 1) != null) {
+                        Task task = tasks.remove(taskNumber - 1);
+                        System.out.println("I've removed this task as u lazily requested:");
+                        System.out.println(task.toString());
+                        System.out.println("Now you have likee this many tasks left: " + tasks.size());
+                    }
+                } catch (IndexOutOfBoundsException e) {
+                    System.out.println("Crapadoodle! You need to specify a task number or a valid task to delete.");
+                }
             } else if (input.startsWith("mark")) {
                 Integer taskNumber = Integer.parseInt(input.split(" ")[1]);
                 if (taskNumber != null && tasks.get(taskNumber - 1) != null) {
