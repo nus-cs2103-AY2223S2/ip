@@ -1,8 +1,6 @@
 package duke; 
 
 import java.util.Scanner;
-
-
 /**
  * Ui is a class to handle the intial greetings, final greetings, and all
  * the deciphering of the user's input. Ui invokes the appropriate classes
@@ -12,38 +10,30 @@ import java.util.Scanner;
  * @version %I% %G%
  * @since 11
  */
-
 class Ui {
     
     private Scanner scanner;
     private String description;
     private TaskList<Task> tasks;
-
     /**
      * Default constructor instantiates the scanner to read from the user
      * machine's keyboard
      */
-
     protected Ui() {
-        this.scanner = new Scanner(System.in);    
+        scanner = new Scanner(System.in);    
     }
-
     /**
      * Display the custom football Alex Furguson character message
      */
-
     void showWelcome() {
         Parser.greet();
     }
-
     /**
      * Handle the user input from the user's machine keyboard
      */
-    
     void readCommand() {
-       this.description = scanner.next();
+       description = scanner.next();
     }
-    
     /**
      * Match the user's input to the relevant type of input that can be
      * processed by Duke, and call the relevant classes in Parser. Due to
@@ -52,7 +42,6 @@ class Ui {
      *
      * @return TaskList<Task>
      */
-
     TaskList<Task> execute(TaskList<Task> tasks) {        
         if (description.equals(Parser.SHOW_TASKS)) {
             this.tasks = tasks.listAllTasks();
@@ -74,14 +63,24 @@ class Ui {
             dukeExceptionWarning(description, tasks);
         }
         return this.tasks;
-    }
-    
+    } 
+    /** Checks the user input against a list of invalid commands
+     * (blacklist). If the input is blacklisted, a new DukeUnknownException
+     * is thrown. Otherwise, a new Task will be created and added to the lit
+     * of previously keyed in Task. 
+     *
+     * @param description The user's task title in String 
+     * @throws IllegalArgumentException
+     * @throws DukeUnknownException
+     *
+     *
+     */
     TaskList<Task> dukeExceptionWarning(String description, TaskList<Task> tasks) {
         try {
             if (Parser.INVALID_COMMANDS.contains(description)) {
                 throw new DukeUnknownException("Illegal command");
             } else {
-                Task newTask = new Task(description);
+                Task newTask = new Task(description + scanner.nextLine());
                 this.tasks = tasks.add(newTask);
                 return this.tasks;
             }

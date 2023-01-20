@@ -12,11 +12,11 @@ class Todos extends Task {
     
     @Override
     Todos markAsDone() {
-        return new Todos(this.getDescription(), true);
+        return new Todos(getDescription(), true);
     }
 
     Todos markAsUndone() {
-        return new Todos(this.getDescription(), false);
+        return new Todos(getDescription(), false);
     }
 
     @Override
@@ -24,4 +24,3 @@ class Todos extends Task {
         return "[T]" + super.toString();
     }
 }
-

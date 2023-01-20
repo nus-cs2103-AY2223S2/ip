@@ -4,7 +4,6 @@ import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.time.temporal.ChronoUnit;
 import java.time.format.DateTimeParseException;
-
 /**
  * Events is a sub class of Task, because it allows the user to key in
  * additional data: the start date and the end date of the event task. By
@@ -21,21 +20,17 @@ import java.time.format.DateTimeParseException;
  *  @see Task
  *
  */
-
 class Events extends Task {
 
     protected String from;
     protected String to;
-
     /**
     * Sole constructor. (For invocation by subclass
     * constructors, typically implicit)
     */
-
     protected Events() {
 
     }
-    
     /**
      * Allows the user's input to be processed as the task's title, the
      * start time of the event and the end time of the event 
@@ -44,13 +39,11 @@ class Events extends Task {
      * @param from The start time of the event task 
      * @param to The end time of the event task 
      */
-
     Events(String description, String from, String to) {
         super(description);
         this.from = from;
         this.to = to;
     }
-    
     /**
      * Allows the user's input to be processed as the task's title, the
      * start time of the event and the end time of the event, and make the
@@ -63,13 +56,11 @@ class Events extends Task {
      * @param isDone The boolean state of whether the event task is marked
      * as completed or yet to be completed
      */
-
     Events(String description,String from, String to, boolean isDone) {
         super(description, isDone);
         this.from = from;
         this.to = to;
-    }
-        
+    } 
     /**
      * Process the user's from and to date as a LocalDate into String if the
      * user keys in a valid format for LocalDate to process (MMM dd YYYY) in
@@ -90,7 +81,6 @@ class Events extends Task {
             return date;
         }
     }
-    
     /**
      * Since the Event class is immutable, a new Event object will be
      * returned with the exact same description, from and to, except now,
@@ -98,12 +88,10 @@ class Events extends Task {
      *
      *  @return Events The new Event task object 
      */
-
     @Override
     Events markAsDone() {
         return new Events(getDescription(), from, to, true);
     }
-    
     /**
      * Since the Event class is immutable, a new Event object will be
      * returned with the exact same description, from and to, except now,
@@ -111,7 +99,6 @@ class Events extends Task {
      *
      *  @return Events The new Event task object 
      */
-
     @Override
     Events markAsUndone() {
         return new Events(getDescription(), from, to, false);

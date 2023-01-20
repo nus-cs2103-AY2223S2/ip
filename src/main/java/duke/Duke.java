@@ -1,7 +1,6 @@
 package duke;
 
 import java.util.Scanner;
-
 /**
  * Duke is the main class that directly handles the user input, and abstract
  * / encapsulates various information that is needed to store and display
@@ -25,7 +24,6 @@ import java.util.Scanner;
  * @see Storage
  * @see Ui
  */
-
 public class Duke {
         
     private Tasks<Task> tasks;
@@ -33,19 +31,16 @@ public class Duke {
     
     private Storage storage; 
     
-    private Ui ui;
-    
+    private Ui ui; 
     /**
      * Default constructor that is made explicit. Tasks and TaskList have
      * essentially the same type of characteristics, but it is to satisfy
      * different levels in the iterative approach
      */
-
     Duke() {
         this.tasks = new Tasks<Task>();
         this.taskList = new TaskList<Task>();
     }
-    
     /**
      * Satisfies Level 1. The user is welcomed with a custom message when the user
      * runs Duke. The custom message is encapsulated in a Printable class.
@@ -55,7 +50,6 @@ public class Duke {
      * full line the user keys in. It will just display the exact same line
      * the user keys in. When the user keys in exit, the program terminates.
      */
-
     void greetEcho() {
 
         Printable.greet();
@@ -71,7 +65,6 @@ public class Duke {
             }
         }
     }
-
     /**
      * Satisfies Level 2. The user is welcomed with a custom message when the user
      * runs Duke. The custom message is encapsulated in a Printable class.
@@ -82,7 +75,6 @@ public class Duke {
      * during the session, and the user can list all the lines keyed in. When 
      * the user keys in exit, the program terminates.
      */
-
     void addAndList() {
 
         Printable.greet();
@@ -100,7 +92,6 @@ public class Duke {
             }
         }
     }
-
     /**
      * Satisfies Level 3. The user is welcomed with a custom message when the user
      * runs Duke. The custom message is encapsulated in a Printable class.
@@ -113,7 +104,6 @@ public class Duke {
      * mark the Task as done or undone. When the user keys in exit, the program 
      * terminates.
      */
-
     void markAsDone() {
 
         Printable.greet();
@@ -137,7 +127,6 @@ public class Duke {
             }
         }
     }
-    
     /* Satisfies Level 4. On top of the features implemented in level 3,
      * which is mark as done or undone, the user will be able to create
      * different type of Tasks. This include Todo, Deadline and Events. Todo
@@ -150,7 +139,6 @@ public class Duke {
      * beginning date, and the other is the end date. Naturally, this makes
      * it a more specific type of Task as compared to Deadline
      */
-
     void trackingEvents() {
 
         Printable.greet();
@@ -188,7 +176,6 @@ public class Duke {
             }
         }
     }
-
     /**
      * Satisfies Level 5. On top of the functionalities implemented in Level
      * 4, error handling is done. Two custom classes: dukeExceptionWarning
@@ -226,7 +213,6 @@ public class Duke {
             }
         }
     }
-    
     /** Checks the user input against a list of invalid commands
      * (blacklist). If the input is blacklisted, a new DukeUnknownException
      * is thrown. Otherwise, a new Task will be created and added to the lit
@@ -250,15 +236,13 @@ public class Duke {
             System.out.println(Printable.ILLEGAL_COMMAND);
         }
     }
-    
-    //Level 6
     /** Satisfies Level 6. On top of satisfying Level 5, it allows the user
      * to delete Task that was previosuly keyed in. Task are deleted by
      * specifying the index of the list of Tasks (starting from 1). 
      *
      * @exception DukeException
      *
-     */
+     */ 
     void deleteHandling() {
         
         Printable.greet();
@@ -287,7 +271,6 @@ public class Duke {
             }
         }
     }
-    
     /** Satisfies Level 7. On top of Level 6 which allows user to delete
      * previously keyed in Task, whenever the user changes the list of
      * tasks, the new list will be saved into a file in the hardisk.
@@ -333,8 +316,9 @@ public class Duke {
             saver.writeToFile(tasks.toString());
         }
     }
-    
-    //Level 9
+    /**
+     * Satisfies Level 9, which is encapsulating and abstracting every class
+     */
     void moreOop() {
         
         storage = new Storage();
