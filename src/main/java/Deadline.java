@@ -20,4 +20,4 @@ public class Deadline extends Task {
     public String getFileRepresentation() {
         return "D" + "@" + (super.isDone() ? "1" : "0") + "@" + this.getName() + "@" + this.by;
     }
- }
+}

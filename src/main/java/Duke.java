@@ -22,7 +22,7 @@ public class Duke {
     private static final String byIndicator = "/by";
     private static final String fromIndicator = "/from";
     private static final String toIndicator = "/to";
-    
+
     private static final String filePath = "./data/duke.txt";
 
     public static void main(String[] args) {
@@ -38,7 +38,7 @@ public class Duke {
                 createTaskListFromFile(dataReader.nextLine());
             }
             dataReader.close();
-        } catch(IOException e) {
+        } catch (IOException e) {
             System.out.println("Reading from storage failed");
         }
 
@@ -68,8 +68,8 @@ public class Duke {
                     }
                 } else {
                     processCommand(command);
-                } 
-            } catch(DukeException e) {
+                }
+            } catch (DukeException e) {
                 System.out.println(e.getMessage());
             } finally {
                 System.out.println(separator);
@@ -152,7 +152,7 @@ public class Duke {
                 }
                 task = new Todo(description);
             } catch (IndexOutOfBoundsException e) {
-                throw new DukeException("The description of a todo cannot be empty.");                
+                throw new DukeException("The description of a todo cannot be empty.");
             }
             break;
         case Duke.DEADLINE_COMMAND:
