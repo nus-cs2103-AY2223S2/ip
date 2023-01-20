@@ -1,44 +1,44 @@
 Hello!
-Added Task [T][ ] task1
+Added task.Task [T][ ] task1
 1. [T][ ] task1
-Added Task [T][ ] task2
+Added task.Task [T][ ] task2
 1. [T][ ] task1
 2. [T][ ] task2
-Marked Task [T][X] task1 as done
+Marked task.Task [T][X] task1 as done
 1. [T][X] task1
 2. [T][ ] task2
-Added Task [D][ ] task3 (by: tomorrow)
+Added task.Task [D][ ] task3 (by: tomorrow)
 1. [T][X] task1
 2. [T][ ] task2
 3. [D][ ] task3 (by: tomorrow)
-Marked Task [T][X] task2 as done
+Marked task.Task [T][X] task2 as done
 1. [T][X] task1
 2. [T][X] task2
 3. [D][ ] task3 (by: tomorrow)
-Marked Task [T][ ] task1 as not done
+Marked task.Task [T][ ] task1 as not done
 1. [T][ ] task1
 2. [T][X] task2
 3. [D][ ] task3 (by: tomorrow)
-Added Task [E][ ] task4 (from: wednesday to: thursday)
+Added task.Task [E][ ] task4 (from: wednesday to: thursday)
 1. [T][ ] task1
 2. [T][X] task2
 3. [D][ ] task3 (by: tomorrow)
 4. [E][ ] task4 (from: wednesday to: thursday)
-Added Task [T][ ] task5
-Deleted Task [T][X] task2
+Added task.Task [T][ ] task5
+Deleted task.Task [T][X] task2
 1. [T][ ] task1
 2. [D][ ] task3 (by: tomorrow)
 3. [E][ ] task4 (from: wednesday to: thursday)
 4. [T][ ] task5
-Command invalidCmd not recognised
-Command TODO requires argument TODO but was not given
-Command TODO requires argument TODO but was not given
-Command invalidArg not recognised
-Command DEADLINE takes in 2 argument(s) but 1 were given
-Command DEADLINE takes in 2 argument(s) but 1 were given
-Command DEADLINE requires argument BY but was not given
-Added Task [D][ ] task8 (by: 6th May)
-Command EVENT takes in 3 argument(s) but 2 were given
-Command EVENT requires argument TO but was not given
-Added Task [E][ ] task11 (from: 7th July 5am to: 7th July 10am)
+command.Command invalidCmd not recognised
+command.Command TODO requires argument TODO but was not given
+command.Command TODO requires argument TODO but was not given
+command.Command invalidArg not recognised
+command.Command DEADLINE takes in 2 argument(s) but 1 were given
+command.Command DEADLINE takes in 2 argument(s) but 1 were given
+command.Command DEADLINE requires argument BY but was not given
+Added task.Task [D][ ] task8 (by: 6th May)
+command.Command EVENT takes in 3 argument(s) but 2 were given
+command.Command EVENT requires argument TO but was not given
+Added task.Task [E][ ] task11 (from: 7th July 5am to: 7th July 10am)
 Good bye!

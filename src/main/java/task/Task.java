@@ -1,3 +1,8 @@
+package task;
+
+/**
+ * Task containing their relevant information and completion status.
+ */
 public class Task {
 
     /** Description of the task */
@@ -7,7 +12,7 @@ public class Task {
     protected boolean isDone;
 
     /**
-     * Creates a new task.
+     * Constructs a new task.
      *
      * @param description the description of the task
      */
@@ -17,7 +22,7 @@ public class Task {
     }
 
     /**
-     * Toggles the completion of the task.
+     * Toggles the completion status of the task.
      */
     public void toggleDone() {
         this.isDone = !this.isDone;
@@ -35,5 +40,4 @@ public class Task {
     public String toString() {
         return (this.isDone ? "[X] " : "[ ] ") + this.description;
     }
-
 }

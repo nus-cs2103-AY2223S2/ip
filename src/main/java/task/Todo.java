@@ -1,3 +1,8 @@
+package task;
+
+/**
+ * A simple todo task.
+ */
 public class Todo extends Task {
 
     /**

@@ -1,6 +1,16 @@
+import command.Command;
+
 import java.util.ArrayList;
 import java.util.Scanner;
 
+import task.Deadline;
+import task.Event;
+import task.Task;
+import task.Todo;
+
+/**
+ * Duke command line tool that helps to track tasks.
+ */
 public class Duke {
     /** Scanner used by each duke */
     private Scanner scanner;
@@ -9,6 +19,16 @@ public class Duke {
 
     /** ArrayList of tasks */
     private ArrayList<Task> tasks;
+
+    /**
+     * Entry point to start and run duke.
+     *
+     * @param args command.Command line arguments.
+     */
+    public static void main(String[] args) {
+        Duke duke = new Duke();
+        duke.run();
+    }
 
     /**
      * Runs the duke.
@@ -20,10 +40,62 @@ public class Duke {
         }
         this.exit();
     }
+    private void init() {
+        this.scanner = new Scanner(System.in);
+        this.isRunning = true;
+        this.tasks = new ArrayList<>();
+        System.out.println("Hello!");
+    }
+
+    private void execute(String input) {
+        try {
+            Command command = new Command(input);
+            switch (command.getName()) {
+                case NO_OP:
+                    break;
+                case BYE:
+                    this.isRunning = false;
+                    break;
+                case TODO:
+                    this.addTask(new Todo(
+                            command.getArgumentValue(Command.Argument.TODO)));
+                    break;
+                case DEADLINE:
+                    this.addTask(new Deadline(
+                            command.getArgumentValue(Command.Argument.DEADLINE),
+                            command.getArgumentValue(Command.Argument.BY)));
+                    break;
+                case EVENT:
+                    this.addTask(new Event(
+                            command.getArgumentValue(Command.Argument.EVENT),
+                            command.getArgumentValue(Command.Argument.FROM),
+                            command.getArgumentValue(Command.Argument.TO)));
+                    break;
+                case LIST:
+                    this.showTasks();
+                    break;
+                case MARK:
+                    this.toggleTask(this.tasks.get(Integer.parseInt(
+                            command.getArgumentValue(Command.Argument.MARK))));
+                    break;
+                case DELETE:
+                    this.deleteTask(this.tasks.get(Integer.parseInt(
+                            command.getArgumentValue(Command.Argument.DELETE))));
+                    break;
+            }
+        } catch (IllegalArgumentException e) {
+            System.out.println(e.getMessage());
+        }
+    }
+
+    private void exit() {
+        this.scanner.close();
+        System.out.println("Good bye!");
+    }
 
     private void addTask(Task task) {
         this.tasks.add(task);
-        System.out.println("Added Task " + task);
+        System.out.println("Added task.Task " + task);
     }
 
     private void showTasks() {
@@ -36,74 +108,11 @@ public class Duke {
 
     private void toggleTask(Task task) {
         task.toggleDone();
-        System.out.println("Marked Task " + task + " as " + (task.getIsDone() ? "" : "not ") + "done");
+        System.out.println("Marked task.Task " + task + " as " + (task.getIsDone() ? "" : "not ") + "done");
     }
 
     private void deleteTask(Task task) {
         this.tasks.remove(task);
-        System.out.println("Deleted Task " + task);
-    }
-
-    private void init() {
-        this.scanner = new Scanner(System.in);
-        this.isRunning = true;
-        this.tasks = new ArrayList<>();
-        System.out.println("Hello!");
-    }
-
-    private void execute(String input) {
-        try {
-            Command command = new Command(input);
-            switch (command.getName()) {
-            case NO_OP:
-                break;
-            case BYE:
-                this.isRunning = false;
-                break;
-            case TODO:
-                this.addTask(new Todo(
-                        command.getArgumentValue(Command.Argument.TODO)));
-                break;
-            case DEADLINE:
-                this.addTask(new Deadline(
-                        command.getArgumentValue(Command.Argument.DEADLINE),
-                        command.getArgumentValue(Command.Argument.BY)));
-                break;
-            case EVENT:
-                this.addTask(new Event(
-                        command.getArgumentValue(Command.Argument.EVENT),
-                        command.getArgumentValue(Command.Argument.FROM),
-                        command.getArgumentValue(Command.Argument.TO)));
-                break;
-            case LIST:
-                this.showTasks();
-                break;
-            case MARK:
-                this.toggleTask(this.tasks.get(Integer.parseInt(
-                        command.getArgumentValue(Command.Argument.MARK))));
-                break;
-            case DELETE:
-                this.deleteTask(this.tasks.get(Integer.parseInt(
-                        command.getArgumentValue(Command.Argument.DELETE))));
-                break;
-            }
-        } catch (IllegalArgumentException e) {
-            System.out.println(e.getMessage());
-        }
-    }
-
-    private void exit() {
-        this.scanner.close();
-        System.out.println("Good bye!");
-    }
-
-    /**
-     * Entry point to start and run duke.
-     *
-     * @param args Command line arguments.
-     */
-    public static void main(String[] args) {
-        Duke duke = new Duke();
-        duke.run();
+        System.out.println("Deleted task.Task " + task);
     }
 }

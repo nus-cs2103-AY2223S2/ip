@@ -1,3 +1,8 @@
+package task;
+
+/**
+ * A task with a deadline.
+ */
 public class Deadline extends Task {
 
     /**
@@ -6,7 +11,7 @@ public class Deadline extends Task {
     protected String by;
 
     /**
-     * Constructs a new Deadline.
+     * Constructs a new deadline.
      *
      * @param description The description of the task.
      * @param by The deadline of the task.

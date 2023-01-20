@@ -1,8 +1,17 @@
+package command;
+
 import java.util.ArrayList;
 import java.util.LinkedHashMap;
+
+/**
+ * Command containing its arguments and their values.
+ */
 public class Command {
 
-    enum Argument {
+    /**
+     * Types of command arguments
+     */
+    public enum Argument {
         BYE,
         TODO,
         DEADLINE,
@@ -65,7 +74,7 @@ public class Command {
         try {
             return Argument.valueOf(arg.toUpperCase());
         } catch (IllegalArgumentException e) {
-            throw new IllegalArgumentException("Command "
+            throw new IllegalArgumentException("command.Command "
                     + arg + " not recognised");
         }
     }
@@ -106,13 +115,13 @@ public class Command {
 
     private void checkHasOnlyArgs(ArrayList<Argument> args) {
         if (this.arguments.size() != args.size() + 1) {
-            throw new IllegalArgumentException("Command " + this.getName()
+            throw new IllegalArgumentException("command.Command " + this.getName()
                     + " takes in " + (args.size() + 1) + " argument(s) but "
                     + this.arguments.size() + " were given");
         }
         for (Argument arg : args) {
             if (!this.arguments.containsKey(arg)) {
-                throw new IllegalArgumentException("Command " + this.getName()
+                throw new IllegalArgumentException("command.Command " + this.getName()
                         + " requires argument " + arg + " but was not given");
             }
         }
@@ -122,7 +131,7 @@ public class Command {
         for (Argument arg : args) {
             if (!this.arguments.containsKey(arg)
                     || this.arguments.get(arg).equals("")) {
-                throw new IllegalArgumentException("Command " + this.getName()
+                throw new IllegalArgumentException("command.Command " + this.getName()
                         + " requires argument " + arg + " but was not given");
             }
         }

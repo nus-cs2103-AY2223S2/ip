@@ -1,3 +1,8 @@
+package task;
+
+/**
+ * A task with a starting and ending date and time.
+ */
 public class Event extends Task {
 
     /** Starting date and time of event */
