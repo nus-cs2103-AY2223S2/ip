@@ -36,6 +36,17 @@ public class Task {
         return false;
     }
 
+    public boolean doesContain(String word) {
+        String[] split = this.name.split(" ");
+        for (String s : split) {
+            String toTest = s.toLowerCase();
+            if (toTest.equals(word.toLowerCase())) {
+                return true;
+            }
+        }
+        return false;
+    }
+
     @Override
     public String toString() {
         return marking() + this.name;

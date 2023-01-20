@@ -4,7 +4,7 @@ import duke.commands.*;
 
 public class Parser {
     private enum Word {
-        BYE, LIST, MARK, UNMARK, TODO, DEADLINE, EVENT, DELETE, THROUGH
+        BYE, LIST, MARK, UNMARK, TODO, DEADLINE, EVENT, DELETE, THROUGH, FIND
     }
     public static Command parse(String input) throws DukeException {
         String[] details = input.split(" ", 2);
@@ -58,6 +58,12 @@ public class Parser {
                 throw new DukeException("Please input a date.");
             }
             return new ThroughCommand(details[1]);
+
+        case FIND:
+            if (details.length < 2) {
+                throw new DukeException("Please input the necessary details.");
+            }
+            return new FindCommand(details[1]);
 
         default:
             throw new DukeException("Unrecognised command. Try again.");

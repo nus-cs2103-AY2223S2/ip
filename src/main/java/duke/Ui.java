@@ -75,6 +75,19 @@ public class Ui {
         System.out.println(Ui.LINE);
     }
 
+    public void find(String input, TaskList taskList) {
+        int i = 1;
+        System.out.println(Ui.LINE + "Here are the matching tasks in your list:");
+        for (int j = 0; j < taskList.size(); j++) {
+            Task t = taskList.get(j);
+            if (t.doesContain(input)) {
+                System.out.println(i + "." + t);
+                i++;
+            }
+        }
+        System.out.println(Ui.LINE);
+    }
+
     public void loadError() {
         System.out.println("Task file does not exist");
     }
