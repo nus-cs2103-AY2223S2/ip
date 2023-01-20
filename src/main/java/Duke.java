@@ -1,3 +1,5 @@
+import Exceptions.CommandNotFoundException;
+
 import java.util.Scanner;
 
 public class Duke {
@@ -36,20 +38,12 @@ public class Duke {
                 t.addTodo(splitDescription);
                 continue;
             } else if (splitCommand[0].equals("deadline")) {
-                String[] splitDesWithBy = splitDescription.split(" /by ", 2);
-                String description = splitDesWithBy[0].trim();
-                String dueDate = splitDesWithBy[1].trim();
-                t.addDeadline(description, dueDate);
+                t.addDeadline(splitDescription);
                 continue;
             } else if (splitCommand[0].equals("event")) {
-                String[] splitDesWithFrom = splitDescription.split(" /from ", 2);
-                String description = splitDesWithFrom[0].trim();
-                String startingTime = splitDesWithFrom[1].split(" /to ", 2)[0].trim();
-                String endingTime = splitDesWithFrom[1].split(" /to ", 2)[1].trim();
-                t.addEvent(description, startingTime, endingTime);
+                t.addEvent(splitDescription);
             } else {
-                t.add(input);
-                continue;
+                throw new CommandNotFoundException("I'm sorry, but I don't know what that means :-(");
             }
         }
 

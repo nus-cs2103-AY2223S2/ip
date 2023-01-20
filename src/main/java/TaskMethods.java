@@ -2,6 +2,9 @@ import Tasks.Task;
 import Tasks.Deadline;
 import Tasks.Todo;
 import Tasks.Event;
+import Exceptions.NoDescriptionException;
+import Exceptions.NoDeadlineException;
+
 
 public class TaskMethods {
     protected Task[] taskList;
@@ -28,7 +31,10 @@ public class TaskMethods {
         System.out.println("\tadded: " + input);
         System.out.println("\t--------------------------");
     }
-    public void addTodo(String input) {
+    public void addTodo(String input) throws NoDescriptionException {
+        if (input.trim().equals("")) {
+            throw new NoDescriptionException("The description of a todo cannot be empty.");
+        }
         Task newTodo = new Todo(input);
         this.taskList[this.index] = newTodo;
         this.index++;
@@ -39,8 +45,20 @@ public class TaskMethods {
         System.out.println("\t--------------------------");
     }
 
-    public void addDeadline(String input, String dueDate) {
-        Task newDeadline = new Deadline(input, dueDate);
+    public void addDeadline(String input) throws NoDescriptionException,
+            NoDeadlineException {
+        String[] splitDesWithBy = input.split(" /by ", 2);
+        String description = splitDesWithBy[0].trim();
+
+        if (description.equals("")) {
+            throw new NoDescriptionException("The description of a deadline cannot be empty.");
+        } else if (splitDesWithBy.length != 2) {
+            throw new NoDeadlineException("The due date cannot be empty.");
+        }
+
+        String dueDate = splitDesWithBy[1].trim();
+
+        Task newDeadline = new Deadline(description, dueDate);
         this.taskList[this.index] = newDeadline;
         this.index++;
         System.out.println("\t--------------------------");
@@ -50,8 +68,31 @@ public class TaskMethods {
         System.out.println("\t--------------------------");
     }
 
-    public void addEvent(String input, String startingTime, String endingTime) {
-        Task newEvent = new Event(input, startingTime, endingTime);
+    public void addEvent(String input) throws NoDeadlineException,
+            NoDescriptionException{
+        String[] splitDesWithFrom = input.split(" /from ", 2);
+        String description = splitDesWithFrom[0].trim();
+
+        if (description.equals("")) {
+            throw new NoDescriptionException("The description of an event cannot be empty.");
+        } else if (splitDesWithFrom.length != 2) {
+            throw new NoDeadlineException("The starting time cannot be empty");
+        }
+
+        String[] period = splitDesWithFrom[1].split(" /to ", 2);
+        String startingTime = period[0].trim();
+
+        if (startingTime.equals("")) {
+            throw new NoDeadlineException("The starting time cannot be empty.");
+        } else if (period.length != 2) {
+            throw new NoDeadlineException("The ending time cannot be empty.");
+        }
+
+        String endingTime = period[1].trim();
+
+
+
+        Task newEvent = new Event(description, startingTime, endingTime);
         this.taskList[this.index] = newEvent;
         this.index++;
         System.out.println("\t--------------------------");
