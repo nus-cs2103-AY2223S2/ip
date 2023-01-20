@@ -27,8 +27,8 @@ public class Duke {
                     break;
                 } else if (firstWord.equals("list")) {
                     System.out.println(lineBreak);
-                    for (Task t : tasks) {
-                        System.out.println("    " + t);
+                    for (int i = 1; i <= tasks.size(); i++) {
+                        System.out.println("    " + i + ". " + tasks.get(i - 1));
                     }
                 } else if (firstWord.equals("mark")) {
                     int ind = Integer.parseInt(words[1]);
@@ -48,29 +48,23 @@ public class Duke {
                         tasks.set(ind - 1, updatedTask);
                         System.out.println(lineBreak + "Unchecked the following task:\n    " + updatedTask);
                     }
-                }
-                else if (firstWord.equals("deadline")) {
-                    index++;
+                } else if (firstWord.equals("deadline")) {
                     String[] parts = inputLine.split("/");
-                    Deadline task = new Deadline(index, parts[0].split(" ")[1], false, parts[1]);
+                    Deadline task = new Deadline(parts[0].split(" ")[1], false, parts[1]);
                     tasks.add(task);
                     System.out.println(lineBreak + "Successfully added the following task:\n    " + task);
-                }
-
-                else if (firstWord.equals("event")) {
-                    index++;
+                } else if (firstWord.equals("event")) {
                     String[] parts = inputLine.split("/");
-                    Event task = new Event(index, parts[0].split(" ")[1], false, parts[1], parts[2]);
+                    Event task = new Event(parts[0].split(" ")[1], false, parts[1], parts[2]);
                     tasks.add(task);
                     System.out.println(lineBreak + "Successfully added the following task:\n    " + task);
-                }
-
-                else if (firstWord.equals("todo")) {
-                    index++;
+                } else if (firstWord.equals("todo")) {
                     String[] parts = inputLine.split(" ", 2);
-                    Todo task = new Todo(index, parts[1], false);
+                    Todo task = new Todo(parts[1], false);
                     tasks.add(task);
                     System.out.println(lineBreak + "Successfully added the following task:\n    " + task);
+                } else if (firstWord.equals("delete")) {
+                    tasks.remove(Integer.parseInt(words[1]) - 1);
                 }
             } catch (DukeException e) {
                 System.out.println(lineBreak + e.getMessage());
@@ -80,12 +74,10 @@ public class Duke {
 }
 
 class Task {
-    protected final int number;
     protected final String name;
     protected final String status;
 
-    public Task(int number, String name, boolean status) {
-        this.number = number;
+    public Task(String name, boolean status) {
         this.name = name;
         if (status) {
             this.status = "[X]";
@@ -95,36 +87,36 @@ class Task {
     }
 
     public String toString() {
-        return number + "." + status + " " + name;
+        return "." + status + " " + name;
     }
 
     public Task mark() {
-        return new Task(number, name, true);
+        return new Task(name, true);
     }
 
     public Task unmark() {
-        return new Task(number, name, false);
+        return new Task(name, false);
     }
 }
 
 class Deadline extends Task {
     protected final String deadline;
 
-    Deadline (int number, String name, boolean status, String deadline) {
-        super(number, name, status);
+    Deadline (String name, boolean status, String deadline) {
+        super(name, status);
         this.deadline = deadline;
     }
 
     public String toString() {
-        return number + ".[D]" + status + " " + name + "(" + deadline + ")";
+        return "[D]" + status + " " + name + "(" + deadline + ")";
     }
 
     public Deadline mark() {
-        return new Deadline(number, name, true, deadline);
+        return new Deadline(name, true, deadline);
     }
 
     public Deadline unmark() {
-        return new Deadline(number, name, false, deadline);
+        return new Deadline(name, false, deadline);
     }
 }
 
@@ -132,40 +124,40 @@ class Event extends Task {
     protected final String from;
     protected final String to;
 
-    Event(int number, String name, boolean status, String from, String to) {
-        super(number, name, status);
+    Event(String name, boolean status, String from, String to) {
+        super(name, status);
         this.from = from;
         this.to = to;
     }
 
     public String toString() {
-        return number + ".[E]" + status + " " + name + "(" + from + to + ")";
+        return "[E]" + status + " " + name + "(" + from + to + ")";
     }
 
     public Event mark() {
-        return new Event(number, name, true, from, to);
+        return new Event(name, true, from, to);
     }
 
     public Event unmark() {
-        return new Event(number, name, false, from, to);
+        return new Event(name, false, from, to);
     }
 }
 
 class Todo extends Task {
-    Todo(int number, String name, boolean status) {
-        super(number, name, status);
+    Todo(String name, boolean status) {
+        super(name, status);
     }
 
     public String toString() {
-        return number + ".[T]" + status + " " + name;
+        return "[T]" + status + " " + name;
     }
 
     public Todo mark() {
-        return new Todo(number, name, true);
+        return new Todo(name, true);
     }
 
     public Todo unmark() {
-        return new Todo(number, name, false);
+        return new Todo(name, false);
     }
 }
 
@@ -181,7 +173,9 @@ class DukeException extends Exception {
             throw new DukeException("☹ OOPS!!! The description of a todo cannot be empty.");
         } else if (inputLine.equals("event")) {
             throw new DukeException("☹ OOPS!!! The description of an event cannot be empty.");
-        }
+        } else if (inputLine.equals("delete")) {
+            throw new DukeException("☹ OOPS!!! Please specify which task to delete.");
+        } 
     }
 }
 
