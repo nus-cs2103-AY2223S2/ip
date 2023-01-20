@@ -1,14 +1,20 @@
 package domain.usecases;
 
-import domain.models.core.ExecutableRegisterable;
-import domain.models.core.ExitStatus;
-import domain.models.core.IdentifiableExecutable;
-import domain.models.core.NestableExecutableObject;
+import domain.models.core.*;
 
 public class ByeUsecase implements IdentifiableExecutable, ExecutableRegisterable {
+    /**
+     * Creates a new Bye Usecase.
+     * @param writable the destination that this ByeUsecase would write its
+     *                 content to.
+     */
+    public ByeUsecase(Writable writable) {
+        this.writable = writable;
+    }
+    private final Writable writable;
     @Override
     public ExitStatus execute(String[] tokens) {
-        System.out.println("Bye! See you next time:-)");
+        writable.writeln("Bye! See you next time:-)");
         return ExitStatus.terminate;
     }
 

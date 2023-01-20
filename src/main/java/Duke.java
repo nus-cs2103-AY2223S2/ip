@@ -1,10 +1,12 @@
 import core.injections.Injections;
 import core.utils.TokenUtilities;
+import domain.models.core.Writable;
 import domain.usecases.ByeUsecase;
 import domain.usecases.EchoUsecase;
 import domain.usecases.TaskManagerUsecase;
 import domain.usecases.UnknownCommandUsecase;
 import presentation.controllers.DukeEventLoop;
+import presentation.ui.SystemOut;
 
 import java.util.Scanner;
 
@@ -27,12 +29,15 @@ public class Duke {
      * This would register the singletons that we would be using later on.
      */
     private static void configureInjections() {
-        Injections.registerLazySingleton(ByeUsecase.class, ByeUsecase::new);
-        Injections.registerLazySingleton(EchoUsecase.class, EchoUsecase::new);
+        Injections.registerLazySingleton(Writable.class, SystemOut::new);
+        Injections.registerLazySingleton(ByeUsecase.class,
+                () -> new ByeUsecase(Injections.get(Writable.class)));
+        Injections.registerLazySingleton(EchoUsecase.class,
+                () -> new EchoUsecase(Injections.get(Writable.class)));
         Injections.registerLazySingleton(TaskManagerUsecase.class,
-                TaskManagerUsecase::new);
+                () -> new TaskManagerUsecase(Injections.get(Writable.class)));
         Injections.registerLazySingleton(UnknownCommandUsecase.class,
-                UnknownCommandUsecase::new);
+                () -> new UnknownCommandUsecase(Injections.get(Writable.class)));
         Injections.registerLazySingleton(TokenUtilities.class,
                 TokenUtilities::new);
     }

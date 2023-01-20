@@ -1,10 +1,11 @@
 package domain.usecases;
-import domain.models.core.Executable;
-import domain.models.core.ExecutableRegisterable;
-import domain.models.core.ExitStatus;
-import domain.models.core.NestableExecutableObject;
+import domain.models.core.*;
 
 public class UnknownCommandUsecase implements Executable, ExecutableRegisterable {
+    public UnknownCommandUsecase(Writable writable) {
+        this.writable = writable;
+    }
+    private final Writable writable;
     @Override
     public ExitStatus execute(String[] tokens) {
         System.out.println("☹ OOPS!!! I'm sorry, but I don't know what that " +

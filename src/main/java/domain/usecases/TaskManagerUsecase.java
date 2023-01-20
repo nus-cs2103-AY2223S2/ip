@@ -1,10 +1,7 @@
 package domain.usecases;
 import core.exceptions.InvalidArgumentException;
 import core.utils.fp.ThrowingFunction;
-import domain.models.core.ExecutableRegisterable;
-import domain.models.core.ExitStatus;
-import domain.models.core.IdentifiableExecutable;
-import domain.models.core.NestableExecutableObject;
+import domain.models.core.*;
 import domain.models.taskmanager.*;
 import java.util.ArrayList;
 
@@ -15,22 +12,30 @@ public class TaskManagerUsecase implements ExecutableRegisterable {
     /**
      * Creates a new TaskManagerUsecase with the todos set to items.
      * @param items the todos that this TaskManagerUsecase starts with.
+     * @param writable the writable that this manager writes to.
      */
-    public TaskManagerUsecase(ArrayList<Task> items) {
+    public TaskManagerUsecase(Writable writable, ArrayList<Task> items) {
         this.tasks = items;
+        this.writable = writable;
     }
 
     /**
      * Creates a new TaskManagerUsecase with the todos set to empty.
+     * @param writable the writable that this manager writes to.
      */
-    public TaskManagerUsecase() {
-        this(new ArrayList<>());
+    public TaskManagerUsecase(Writable writable) {
+        this(writable, new ArrayList<>());
     }
 
     /**
      * The list of tasks that this manager contains.
      */
     private ArrayList<Task> tasks;
+
+    /**
+     * The writable that this manager writes to.
+     */
+    private final Writable writable;
 
     /**
      * Adds a Task to the todoItems.
@@ -60,11 +65,11 @@ public class TaskManagerUsecase implements ExecutableRegisterable {
                 try {
                     task = taskSupplier.apply(tokens);
                 } catch (InvalidArgumentException exception) {
-                    System.out.println(exception.getMessage());
+                    writable.writeln(exception.getMessage());
                     return ExitStatus.finishCurrentIteration;
                 }
                 addTask(task);
-                System.out.println("added: " + task);
+                writable.writeln("added: " + task);
                 return ExitStatus.finishCurrentIteration;
             }
         };
@@ -84,7 +89,7 @@ public class TaskManagerUsecase implements ExecutableRegisterable {
            @Override
            public ExitStatus execute(String[] tokens) {
                for (int i = 0; i < tasks.size(); i++) {
-                   System.out.println((i+1) + ". " + tasks.get(i));
+                   writable.writeln((i+1) + ". " + tasks.get(i));
                }
                return null;
            }
@@ -130,13 +135,13 @@ public class TaskManagerUsecase implements ExecutableRegisterable {
                 try {
                     index = getIndex(indexStr);
                 } catch (InvalidArgumentException exception) {
-                    System.out.println(exception.getMessage());
+                    writable.writeln(exception.getMessage());
                     return ExitStatus.finishCurrentIteration;
                 }
                 final Task item = tasks.get(index);
                 item.setComplete(isComplete);
-                System.out.println("Nice, I've marked this item as done:");
-                System.out.println("\t" + item);
+                writable.writeln("Nice, I've marked this item as done:");
+                writable.writeln("\t" + item);
                 return ExitStatus.finishCurrentIteration;
             }
 
@@ -156,11 +161,11 @@ public class TaskManagerUsecase implements ExecutableRegisterable {
                 try {
                     index = getIndex(indexStr);
                 } catch (InvalidArgumentException exception) {
-                    System.out.println(exception.getMessage());
+                    writable.writeln(exception.getMessage());
                     return ExitStatus.finishCurrentIteration;
                 }
                 final Task res = tasks.remove(index);
-                System.out.println("removed: " + res);
+                writable.writeln("removed: " + res);
                 return ExitStatus.finishCurrentIteration;
             }
 

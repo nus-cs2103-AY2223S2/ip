@@ -1,14 +1,23 @@
 package domain.usecases;
 
-import domain.models.core.Executable;
-import domain.models.core.ExecutableRegisterable;
-import domain.models.core.ExitStatus;
-import domain.models.core.NestableExecutableObject;
+import domain.models.core.*;
 
 public class EchoUsecase implements Executable, ExecutableRegisterable {
+    /**
+     * Creates a new EchoUsecase.
+     * @param writable the writable that this EchoUsecase writes to.
+     */
+    public EchoUsecase(Writable writable) {
+        this.writable = writable;
+    }
+
+    /**
+     * The writable that this usecase writes to.
+     */
+    private final Writable writable;
     @Override
     public ExitStatus execute(String[] tokens) {
-        System.out.println(String.join(" ", tokens));
+        writable.writeln(String.join(" ", tokens));
         // after this, we would want it to skip the current execution loop.
         return ExitStatus.finishCurrentIteration;
     }
