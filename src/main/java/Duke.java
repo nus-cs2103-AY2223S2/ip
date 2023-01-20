@@ -4,15 +4,15 @@ import java.util.*;
 public class Duke {
     static ArrayList<Task> todoList;
     static String separator = "\u200E✽ ✾ \u200E✽ ✾ \u200E✽ ✾ \u200E✽ ✾";
-    static String invalidIndexMessage = "⚠ oh no...there's no task with this number\ntry asking for 'list' to see what numbers there are\n" + separator;
+    static String invalidIndexMessage = "⚠ oops...there's no task with this number\ntry asking for 'list' to check task numbers\n" + separator;
     static String forgottenArgumentMessage = "⚠ oops...seems like you forgot a description, please try again\n" + separator;
-    static String unknownCommandMessage = "⚠ oh no...we don't know what that means, please try again\n" + separator;
+    static String unknownCommandMessage = "⚠ oops...we don't know what that means, please try again\n" + separator;
 
     public static void main(String[] args) {
         Scanner s = new Scanner(System.in);
         todoList = new ArrayList<>();
 
-        System.out.println("｡ﾟﾟ･｡･ﾟﾟ｡\n" + "。 welcome to tigerlily to-do\n" + "　ﾟ･｡･ﾟ\n" + "✎ . . . . write a command");
+        System.out.println("｡ﾟﾟ･｡･ﾟﾟ｡\n" + "。 welcome to tigerlily to-do\n" + "　ﾟ･｡･ﾟ\n" + "✎ . . . . add your tasks here");
 
         while(s.hasNext()) {
             try {
