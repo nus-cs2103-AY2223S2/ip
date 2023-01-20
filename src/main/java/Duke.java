@@ -74,8 +74,6 @@ public class Duke {
 
                 //normal case: create Task and add Task to list
             } else {
-                //Check for empty task description exception
-
 
                 //if the task is a todo
                 if (input.length() > 4 && input.substring(0, 4).equals("todo")) {
