@@ -1,10 +1,13 @@
 import java.sql.SQLOutput;
+import java.util.ArrayList;
 import java.util.Scanner;
 public class Duke {
 
-    private static Task[] storage_list = new Task[100];
+    // Attributes
+    private static ArrayList<Task> task_list = new ArrayList<>();
     private static int list_index = 0;
 
+    // Methods
     public static void greet() {
         String logo = " ____        _        \n"
                 + "|  _ \\ _   _| | _____ \n"
@@ -22,7 +25,7 @@ public class Duke {
     }
 
     public static void add_to_list(Task list_item) {
-        storage_list[list_index] = list_item;
+        task_list.add(list_item);
         list_index++;
         System.out.println("> Duke's response:");
         System.out.println("I've added the following task to your list:");
@@ -31,11 +34,21 @@ public class Duke {
         System.out.println("--------------------------------\n");
     }
 
+    public static void remove_from_list(int pos) {
+        Task curr = task_list.remove(pos - 1);
+        list_index--;
+        System.out.println("> Duke's response:");
+        System.out.println("I've removed the following task from your list:");
+        System.out.println(curr.toString());
+        System.out.println("Current tasks count: " + (list_index));
+        System.out.println("--------------------------------\n");
+    }
+
     public static void display_list() {
         int pos = 0;
         System.out.println("Here are the tasks in your list:");
         while (pos < list_index) {
-            System.out.println((pos + 1) + ". " + storage_list[pos].toString());
+            System.out.println((pos + 1) + ". " + task_list.get(pos).toString());
             pos++;
         }
         System.out.println("End of list!\n");
@@ -61,13 +74,13 @@ public class Duke {
                 // If input = "mark x" set task x completed? to True
                 if (user_input.startsWith("mark ")){
                     int task_num = Integer.parseInt(user_input.substring(5));
-                    storage_list[task_num - 1].setCompleted(true);
+                    task_list.get(task_num - 1).setCompleted(true);
                 }
 
                 // If input = "unmark x" set task x completed? to False
                 else if (user_input.startsWith("unmark ")){
                     int task_num = Integer.parseInt(user_input.substring(7));
-                    storage_list[task_num - 1].setCompleted(false);
+                    task_list.get(task_num - 1).setCompleted(false);
                 }
 
                 // If input is a deadline, create deadline and add to task list
@@ -107,6 +120,18 @@ public class Duke {
                             System.out.println(de.toString());
                         }
                     }
+                }
+
+                // If command is delete, then remove from task list and return deleted task
+                else if (user_input.startsWith("delete ")) {
+                    // !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!___________handle non-int input
+                    try {
+                        int num = Integer.parseInt(user_input.substring(7));
+                        remove_from_list(num);
+                    } catch (NumberFormatException ex) {
+                        ex.printStackTrace();
+                    }
+
                 }
 
                 // Else create and add task to list
