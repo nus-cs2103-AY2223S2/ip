@@ -38,6 +38,7 @@ public class Duke {
         public static void displayLst() {
             boolean isItMT = false;
             StringBuilder txtToDisplay = new StringBuilder("Here are the tasks in your list:");
+            String nothingMessage = "Nothing in your list man!";
             for (Task thingInList : lstOfTasks) {
                 if (thingInList != null) {
                     isItMT = true;
@@ -46,7 +47,7 @@ public class Duke {
                 }
             }
             if (!isItMT) {
-                System.out.println("Your list is empty!");
+                System.out.println(nothingMessage);
             } else {
                 System.out.println(txtToDisplay);
             }
