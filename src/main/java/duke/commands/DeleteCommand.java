@@ -3,8 +3,13 @@ package duke.commands;
 import duke.Storage;
 import duke.TaskList;
 import duke.Ui;
-import duke.tasks.*;
+import duke.tasks.Task;
 
+/**
+ * Command to be executed when a task is to be deleted.
+ *
+ * @author Cheam Jia Wei
+ */
 public class DeleteCommand extends Command {
     private String input;
 

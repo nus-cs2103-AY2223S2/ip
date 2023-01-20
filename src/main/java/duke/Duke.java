@@ -1,13 +1,28 @@
 package duke;
 
-import duke.commands.*;
-import java.time.format.DateTimeParseException;
 import java.io.*;
+import java.time.format.DateTimeParseException;
 
+import duke.commands.*;
+
+/**
+ * Main class of the program.
+ * Contains the Storage, TaskList, Ui that will be used
+ * by the Duke program.
+ *
+ * @author Cheam Jia Wei
+ */
 public class Duke {
     private final Storage store;
     private final TaskList taskList;
     private final Ui inter;
+
+    /**
+     * Constructor for Duke.
+     *
+     * @param path The relative file path where data will be stored into
+     * @author Cheam Jia Wei
+     */
 
     public Duke(String path) {
         this.store = new Storage(path);
@@ -20,6 +35,11 @@ public class Duke {
         }
     }
 
+    /**
+     * Function to initialise and run Duke
+     *
+     * @author Cheam Jia Wei
+     */
     public void start() {
         this.inter.greet();
         boolean isExit = false;

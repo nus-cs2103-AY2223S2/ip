@@ -3,8 +3,13 @@ package duke.commands;
 import duke.Storage;
 import duke.TaskList;
 import duke.Ui;
-import duke.tasks.*;
+import duke.tasks.Task;
 
+/**
+ * Command to be executed when the user wants to unmark a task as completed.
+ *
+ * @author Cheam Jia Wei
+ */
 public class UnmarkCommand extends Command {
     private String input;
 

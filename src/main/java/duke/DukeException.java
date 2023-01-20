@@ -1,5 +1,10 @@
 package duke;
 
+/**
+ * Exception that will be thrown in the duke program
+ *
+ * @author Cheam Jia Wei
+ */
 public class DukeException extends Exception {
     private String message;
 

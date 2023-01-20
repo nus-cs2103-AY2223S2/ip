@@ -2,10 +2,25 @@ package duke;
 
 import duke.commands.*;
 
+/**
+ * A parser that will parse the input String from the user into
+ * the relevant Duke Commands with the necessary information required
+ *
+ * @author Cheam Jia Wei
+ */
 public class Parser {
     private enum Word {
         BYE, LIST, MARK, UNMARK, TODO, DEADLINE, EVENT, DELETE, THROUGH
     }
+
+    /**
+     * Parse function that will interpret the input by the user into
+     * the relevant Duke command.
+     *
+     * @param input String that was input by the user and picked up by the scanner
+     * @return A Duke Command that will be executed by the program
+     * @throws DukeException Throws exception when an invalid input in given
+     */
     public static Command parse(String input) throws DukeException {
         String[] details = input.split(" ", 2);
         Word w = Word.valueOf(details[0].toUpperCase());

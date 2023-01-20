@@ -4,6 +4,12 @@ import duke.Storage;
 import duke.TaskList;
 import duke.Ui;
 
+/**
+ * Command to be executed when user wants to search for tasks occurring
+ * through the specified date inputted.
+ *
+ * @author Cheam Jia Wei
+ */
 public class ThroughCommand extends Command {
     private String input;
 

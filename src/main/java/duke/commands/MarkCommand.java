@@ -3,8 +3,13 @@ package duke.commands;
 import duke.Storage;
 import duke.TaskList;
 import duke.Ui;
-import duke.tasks.*;
+import duke.tasks.Task;
 
+/**
+ * Command to be executed when user wants to mark a task as completed.
+ *
+ * @author Cheam Jia Wei
+ */
 public class MarkCommand extends Command {
     private String input;
 
