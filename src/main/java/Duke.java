@@ -4,7 +4,6 @@ import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.Iterator;
 
-
 public class Duke {
     public static void main(String[] args) throws IOException, DukeException {
 
@@ -86,6 +85,17 @@ public class Duke {
                         count++;
                         System.out.println("Added new event:\n  " + t + "\nNumber of tasks: " + count);
                         word = br.readLine().strip().split(" ",2);
+                    } else if (word[0].equals("delete")) {
+                        if (word.length == 1) {
+                            throw new DukeException("Delete needs a number.");
+                        }
+                        if (Integer.parseInt(word[1]) > count) {
+                            throw new DukeException("Invalid task.");
+                        }
+                        Task t = lst.remove(Integer.parseInt(word[1]) - 1);
+                        count--;
+                        System.out.println("Deleted task:\n  " + t + "\nNumber of tasks: " + count);
+                        word = br.readLine().strip().split(" ",2);
                     } else {
                         throw new DukeException("Sorry I do not understand the command");
                     }
@@ -97,6 +107,3 @@ public class Duke {
         System.out.println("Duke: Goodbye");
     }
 }
-
-
-
