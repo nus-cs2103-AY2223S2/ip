@@ -24,9 +24,9 @@ public class Duke {
                     mark(splitArr[0], Integer.parseInt(splitArr[1]) - 1, tasks);
                 } else if (splitArr[0].equals("delete")) {
                     if((Integer.parseInt(splitArr[1])) > tasks.size()) {
-                        throw new OutOfIndexException("Help! \n " +
+                        throw new OutOfIndexException("Help! \n" +
                                 "The number has to be within range of our task-list!\n" +
-                                "try again.");
+                                "Please try again!");
                     }
                     Task newTask = tasks.get(Integer.parseInt(splitArr[1]) - 1);
                     tasks.remove(Integer.parseInt(splitArr[1]));
@@ -44,10 +44,10 @@ public class Duke {
                     tasks.add(newEvent);
                     System.out.println(formatStr(addReport(newEvent, tasks)));
                 } else {
-                    throw new BlankInputException("Oh no! What do you mean? \n" +
+                    throw new VagueInputException("Oh no! What do you mean? \n" +
                             "I'm confused. Please specify... @.@");
                 }
-            } catch (BlankInputException ex) {
+            } catch (VagueInputException ex) {
                 System.out.println(formatStr(ex.getMessage()));
                 input = sc.nextLine();
                 continue;
