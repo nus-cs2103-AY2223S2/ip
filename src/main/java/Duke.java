@@ -18,6 +18,24 @@ public class Duke {
                 hist.printHist();
                 continue;
             }
+
+            if (input.contains("mark")) {
+                char query = input.charAt(input.length() - 1);
+                int pos = Character.getNumericValue(query);
+                hist.mark(pos-1);
+                System.out.println("Marked: ");
+                System.out.println(hist.getHist(pos-1).toString());
+                continue;
+            }
+
+            if (input.contains("unmark")) {
+                char query = input.charAt(input.length() - 1);
+                int pos = Character.getNumericValue(query);
+                hist.unmark(pos-1);
+                System.out.println("unmarked: ");
+                System.out.println(hist.getHist(pos-1).toString());
+                continue;
+            }
             hist.addHist(input);
         }
         return;
