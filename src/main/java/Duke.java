@@ -11,44 +11,61 @@ public class Duke {
         String nextLine = sc.nextLine();
         ArrayList<Task> tasks = new ArrayList<>();
 
-        while (!nextLine.equals("bye")) {
-            if (nextLine.startsWith("todo")) {
-                addToTasks(nextLine, new Todo(nextLine), tasks);
-                nextLine = sc.nextLine();
+            while (!nextLine.equals("bye")) {
+                try {
+                if (nextLine.startsWith("todo")) {
+                    String[] splitArray = nextLine.split(" ");
+                    if (splitArray.length < 2) {
+                        throw new DukeException("☹ OOPS!!! The description of a todo cannot be empty.");
+                    }
+                    String taskName = "";
+                    for (int i = 1; i < splitArray.length; i++) {
+                        taskName += splitArray[i];
+                    }
 
-            } else if (nextLine.startsWith("deadline")) {
-                String[] splitArray = nextLine.split("/");
-                String by = splitArray[1];
-                String name = splitArray[0];
-                addToTasks(name, new Deadline(name, by), tasks);
-                nextLine = sc.nextLine();
+                    addToTasks(nextLine, new Todo(taskName), tasks);
+                    nextLine = sc.nextLine();
 
-            } else if (nextLine.startsWith("event")) {
-                String[] splitArray = nextLine.split("/");
-                String from = splitArray[1];
-                String to = splitArray[2];
-                String name = splitArray[0];
-                addToTasks(name, new Event(name, from, to), tasks);
-                nextLine = sc.nextLine();
+                } else if (nextLine.startsWith("deadline")) {
+                    String[] splitArray = nextLine.split("/");
+                    String by = splitArray[1];
+                    String name = splitArray[0];
+                    addToTasks(name, new Deadline(name, by), tasks);
+                    nextLine = sc.nextLine();
+
+                } else if (nextLine.startsWith("event")) {
+                    String[] splitArray = nextLine.split("/");
+                    String from = splitArray[1];
+                    String to = splitArray[2];
+                    String name = splitArray[0];
+                    addToTasks(name, new Event(name, from, to), tasks);
+                    nextLine = sc.nextLine();
+                } else if (nextLine.startsWith("mark")) {
+                    String theSplitPart = nextLine.split(" ")[1];
+                    int whichNumberedTask = Integer.parseInt(theSplitPart);
+                    markTasks(whichNumberedTask, tasks);
+                    nextLine = sc.nextLine();
+
+                } else if (nextLine.startsWith("unmark")) {
+                    String theSplitPart = nextLine.split(" ")[1];
+                    int whichNumberedTask = Integer.parseInt(theSplitPart);
+                    unmarkTasks(whichNumberedTask, tasks);
+                    nextLine = sc.nextLine();
+
+                } else if (nextLine.equals("list")) {
+                    printTaskList(tasks);
+                    nextLine = sc.nextLine();
+
+                } else {
+                    throw new DukeException("☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
+                }
+                }
+                catch (DukeException e) {
+                    System.out.println(e);
+                    nextLine = sc.nextLine();
+                }
             }
 
-            if (nextLine.startsWith("mark")) {
-                String theSplitPart = nextLine.split(" ")[1];
-                int whichNumberedTask = Integer.parseInt(theSplitPart);
-                markTasks(whichNumberedTask, tasks);
-                nextLine = sc.nextLine();
-
-            } else if (nextLine.startsWith("unmark")) {
-                String theSplitPart = nextLine.split(" ")[1];
-                int whichNumberedTask = Integer.parseInt(theSplitPart);
-                unmarkTasks(whichNumberedTask, tasks);
-                nextLine = sc.nextLine();
-
-            } else if (nextLine.equals("list")) {
-                printTaskList(tasks);
-                nextLine = sc.nextLine();
-            }
-        }
         exit();
     }
 
