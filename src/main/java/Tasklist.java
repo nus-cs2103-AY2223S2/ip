@@ -8,8 +8,11 @@ public class Tasklist {
         this.tasks = new ArrayList<>();
     }
 
-    public void addTask(String name) {
-        tasks.add(new Task(name));
+    public void addTask(Task t) {
+        tasks.add(t);
+        Duke.printOutput(
+                "\t I've added the following to your list of tasks: \n\t\t" +
+                t + "\n\t You now have " + this.tasks.size() + " task(s) in the list.");
     }
 
     public Task get(int index) {

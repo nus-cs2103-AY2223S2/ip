@@ -27,6 +27,7 @@ public class Duke {
     public void parseInput(String input) {
         String[] delimited = input.split(" ");
         int index;
+        String[] temp = new String[0];
         switch (delimited[0].toLowerCase()) {
             case "bye":
                 this.isActive = false;
@@ -53,13 +54,23 @@ public class Duke {
                     printOutput("\t The selected task has not yet been marked as done.");
                 }
                 break;
-            default:
-                this.tasklist.addTask(input);
-                this.printOutput("\t added: " + input);
+            case "todo":
+                this.tasklist.addTask(new Todo(input.replaceAll("todo ", "")));
+                break;
+            case "deadline":
+                temp = input.split(" /by ");
+                this.tasklist.addTask(new Deadline(temp[0].replaceAll("deadline ", ""), temp[1]));
+                break;
+            case "event":
+                temp = input.split(" /from ");
+                String startDate = temp[1].split(" /to ")[0];
+                String endDate = temp[1].split(" /to ")[1];
+                this.tasklist.addTask(new Event(temp[0].replaceAll("event ", ""), startDate, endDate));
+                break;
         }
     }
 
-    private void printOutput(String text) {
+    public static void printOutput(String text) {
         System.out.println(LINE);
         System.out.println(text);
         System.out.println(LINE);
