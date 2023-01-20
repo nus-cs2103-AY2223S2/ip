@@ -18,4 +18,9 @@ public class Task {
     public void markAsNotDone() {
         isDone = false;
     }
+
+    public String toString() {
+        return description;
+    }
 }
+
