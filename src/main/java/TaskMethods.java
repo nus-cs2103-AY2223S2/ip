@@ -22,14 +22,19 @@ public class TaskMethods {
     public int getIndex() {
         return this.index;
     }
+    public void delete(int input) {
+        Task currTask = this.taskList[input - 1];
 
-    public void add(String input) {
-        Task newTask = new Task(input);
-        this.taskList[index] = newTask;
-        index++;
+        for (int i = input; i < this.index; i++) {
+            this.taskList[i] = this.taskList[i + 1];
+        }
+        this.index--;
         System.out.println("\t--------------------------");
-        System.out.println("\tadded: " + input);
+        System.out.println("\tNoted. I've removed this task:");
+        System.out.println("\t\t" + currTask.toString());
+        System.out.println("\tNow you have " + this.index + " tasks in the list.");
         System.out.println("\t--------------------------");
+
     }
     public void addTodo(String input) throws NoDescriptionException {
         if (input.trim().equals("")) {
@@ -103,10 +108,14 @@ public class TaskMethods {
     }
     public void list() {
         System.out.println("\t--------------------------");
-        System.out.println("\tHere are the tasks in your list:");
-        for (int i = 0; i < this.index; i++) {
-            Task currTask = this.taskList[i];
-            System.out.println("\t" + (i+1) + ". " + currTask.toString());
+        if (this.index == 0) {
+            System.out.println("\tThere is no task in the list.");
+        } else {
+            System.out.println("\tHere are the tasks in your list:");
+            for (int i = 0; i < this.index; i++) {
+                Task currTask = this.taskList[i];
+                System.out.println("\t" + (i + 1) + ". " + currTask.toString());
+            }
         }
         System.out.println("\t--------------------------");
     }
@@ -116,7 +125,7 @@ public class TaskMethods {
         currTask.markDone();
         System.out.println("\t--------------------------");
         System.out.println("\tNice! I've marked this task as done:");
-        System.out.println("\t[X] " + currTask.getDescription());
+        System.out.println("\t\t" + currTask.toString());
         System.out.println("\t--------------------------");
     }
 
@@ -125,7 +134,7 @@ public class TaskMethods {
         currTask.markNotDone();
         System.out.println("\t--------------------------");
         System.out.println("\tOK, I've marked this task as not done yet:");
-        System.out.println("\t[ ] " + currTask.getDescription());
+        System.out.println("\t\t" + currTask.toString());
         System.out.println("\t--------------------------");
     }
 

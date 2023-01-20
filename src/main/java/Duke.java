@@ -27,19 +27,16 @@ public class Duke {
                 break;
             } else if (splitCommand[0].equals("list")) {
                 t.list();
-                continue;
             } else if (splitCommand[0].equals("mark")) {
                 t.mark(Integer.parseInt(splitCommand[1]));
-                continue;
             } else if (splitCommand[0].equals("unmark")) {
                 t.unmark(Integer.parseInt(splitCommand[1]));
-                continue;
+            } else if (splitCommand[0].equals("delete")) {
+                t.delete(Integer.parseInt(splitCommand[1]));
             } else if (splitCommand[0].equals("todo")) {
                 t.addTodo(splitDescription);
-                continue;
             } else if (splitCommand[0].equals("deadline")) {
                 t.addDeadline(splitDescription);
-                continue;
             } else if (splitCommand[0].equals("event")) {
                 t.addEvent(splitDescription);
             } else {
