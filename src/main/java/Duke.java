@@ -56,7 +56,7 @@ public class Duke {
                 if (thingInList != null && (thingInList.getRank() == taskNum)) {
                     thingInList.strike();
                     txt = ("Nice! I've marked this task as done:\n" + thingInList.isCompleted()
-                            + " " + thingInList.getName());
+                            + thingInList.getName());
                 }
             }
             System.out.println(txt);
@@ -69,7 +69,7 @@ public class Duke {
                 if (thingInList != null && (thingInList.getRank() == taskNum)) {
                     thingInList.unstrike();
                     txt = ("Ok, I've marked this task as not done yet:\n" + thingInList.isCompleted()
-                            + " " + thingInList.getName());
+                            + thingInList.getName());
                 }
             }
             System.out.println(txt);
