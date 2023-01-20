@@ -16,6 +16,9 @@ bin/
 /text-ui-test/ACTUAL.TXT
 text-ui-test/EXPECTED-UNIX.TXT
 
+# User todo data
+*duke_data.txt
+
 #https://github.com/github/gitignore/blob/main/Java.gitignore
 # Compiled class file
 *.class

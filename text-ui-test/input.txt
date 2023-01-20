@@ -24,4 +24,7 @@ deadline /by
 event /from /to
 deadline test
 event test
+del 1
+del1
+clear
 bye
