@@ -5,6 +5,7 @@ import entities.Task;
 import entities.TaskList;
 import enums.TaskType;
 import exceptions.DukeException;
+import utils.Loader;
 
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -14,7 +15,7 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.Scanner;
 
-public class Storage {
+public class Storage implements Loader<TaskList> {
     private static final String GENERIC_ERROR = "An error occurred when creating the database: ";
     private final File file;
 
@@ -43,7 +44,7 @@ public class Storage {
         }
     }
 
-    public boolean load() {
+    public Boolean load(TaskList taskList) throws DukeException {
         try {
             Scanner reader = new Scanner(file);
             while (reader.hasNextLine()) {
@@ -64,12 +65,11 @@ public class Storage {
                         break;
                     default: task = null;
                 }
-                if (task != null) TaskList.addTask(task.unmarshal(), false);
+                if (task != null) taskList.addTask(task.unmarshal(), false);
             }
             return true;
         } catch (FileNotFoundException e) {
-            System.out.println(GENERIC_ERROR + e.getMessage());
-            return false;
+            throw new DukeException(GENERIC_ERROR + e.getMessage());
         }
     }
 

@@ -8,7 +8,7 @@ import storage.Storage;
 import views.UI;
 
 /**
- * Represents the Duke Chatbot.
+ * Represents the Duke Chat bot.
  * Running a duke object loads data from the specified file into memory,
  * and exiting the program writes data to the hard disk.
  */
@@ -19,7 +19,7 @@ public class Duke {
     private static UI ui;
 
     /**
-     * Duke Constructor for intializing the Duke Object.
+     * Duke Constructor for initializing the Duke Object.
      * @param filename location of Storage
      */
     public Duke(String filename) {
@@ -28,7 +28,7 @@ public class Duke {
         ui = new UI();
         try {
             storage.connect();
-            taskList = new TaskList(() -> storage.load());
+            taskList = new TaskList((taskList) -> storage.load(taskList));
         } catch (DukeException e) {
             System.out.println("There was an error loading the data. Storage will be reset.");
             taskList = new TaskList();
@@ -44,7 +44,7 @@ public class Duke {
         while (in.hasNext() && !isExit) {
             Command cmd = Parser.parse(in.nextLine());
             try {
-                cmd.execute();
+                cmd.execute(() -> taskList);
                 if (cmd.isTerminating()) {
                     storage.write(taskList);
                     isExit = true;

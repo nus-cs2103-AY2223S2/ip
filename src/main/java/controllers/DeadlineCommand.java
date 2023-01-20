@@ -4,6 +4,8 @@ import entities.*;
 import enums.CommandType;
 import enums.TaskType;
 import exceptions.DukeException;
+
+import java.util.function.Supplier;
 import java.util.regex.Matcher;
 
 public class DeadlineCommand extends Command {
@@ -15,8 +17,9 @@ public class DeadlineCommand extends Command {
     }
 
     @Override
-    public void execute() throws DukeException {
+    public void execute(Supplier<? extends TaskList> taskList) throws DukeException {
+        TaskList store = taskList.get();
         Matcher mDeadline = Task.DEADLINE.matcher(args);
-        Task.processTask(mDeadline, TaskType.DEADLINE);
+        Task.processTask(mDeadline, TaskType.DEADLINE, store);
     }
 }

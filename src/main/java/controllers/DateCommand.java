@@ -5,6 +5,7 @@ import enums.CommandType;
 import exceptions.DukeException;
 
 import java.time.LocalDate;
+import java.util.function.Supplier;
 import java.util.regex.Matcher;
 
 public class DateCommand extends Command {
@@ -16,12 +17,15 @@ public class DateCommand extends Command {
     }
 
     @Override
-    public void execute() throws DukeException {
+    public void execute(Supplier<? extends TaskList> taskList) throws DukeException {
+        TaskList store = taskList.get();
         Matcher matcher = DATE_FORMAT.matcher(args.strip());
         if (matcher.find()) {
-            TaskList.filter(task -> task.activeOn(LocalDate.parse(args.split(" ")[1])));
+            store.filter(task -> task.activeOn(LocalDate.parse(args.split(" ")[1])),
+                    "There are no active tasks on this date!");
         } else {
-            throw new DukeException("Invalid Date Format. Please follow: date [yyyy-mm-dd].");
+            String DATE_FORMAT_ERROR = "Invalid Date Format. Please follow: date [yyyy-mm-dd].";
+            throw new DukeException(DATE_FORMAT_ERROR);
         }
     }
 }

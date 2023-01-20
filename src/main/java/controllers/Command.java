@@ -1,12 +1,17 @@
 package controllers;
 
-import enums.CommandType;
-import exceptions.DukeException;
-import utils.Executable;
-
+import java.util.function.Supplier;
 import java.util.regex.Pattern;
 
-abstract public class Command implements Executable {
+import entities.TaskList;
+import enums.CommandType;
+import exceptions.DukeException;
+import utils.IExecutable;
+
+/**
+ * Command represents an abstraction over the inputs to the duke chatbot.
+ */
+public abstract class Command implements IExecutable<TaskList> {
     private final CommandType commandType;
     private boolean isTerminating = false;
     protected static final Pattern NUMBERS = Pattern.compile("[-+]?\\d+");
@@ -16,16 +21,20 @@ abstract public class Command implements Executable {
     public Command(CommandType cmdType) {
         this.commandType = cmdType;
     }
+
+    /**
+     * Initializes a new Command with the specified type and termination.
+     * @param cmdType A command type.
+     * @param isTerminating Termination command.
+     */
     public Command(CommandType cmdType, boolean isTerminating) {
         this.commandType = cmdType;
         this.isTerminating = isTerminating;
     }
 
-    public CommandType getCommandType() {
-        return commandType;
-    }
-
     @Override
-    public abstract void execute() throws DukeException;
-    public boolean isTerminating() { return isTerminating; }
+    public abstract void execute(Supplier<? extends TaskList> taskList) throws DukeException;
+    public boolean isTerminating() {
+        return isTerminating;
+    }
 }

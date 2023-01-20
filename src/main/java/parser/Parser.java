@@ -1,9 +1,11 @@
 package parser;
 
 import controllers.*;
+import entities.TaskList;
 import enums.CommandType;
 import exceptions.DukeException;
 
+import java.util.function.Supplier;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -13,7 +15,7 @@ public class Parser {
                     Pattern.CASE_INSENSITIVE);
     private static final Command invalidCommand =  new Command(CommandType.INVALID) {
         @Override
-        public void execute() throws DukeException {
+        public void execute(Supplier<? extends TaskList> taskList) throws DukeException {
             throw new DukeException("☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
         }
     };

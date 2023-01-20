@@ -14,7 +14,6 @@ public class DeadlineTest {
         assertTrue(tsk.isDone);
     }
 
-
     @Test
     public void unmarkTest(){
         Task tsk = new Deadline("Hello World", LocalDate.parse("2023-01-22"));

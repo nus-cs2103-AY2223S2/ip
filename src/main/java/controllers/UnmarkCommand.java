@@ -6,6 +6,7 @@ import enums.CommandType;
 import exceptions.DukeException;
 
 import java.util.Optional;
+import java.util.function.Supplier;
 import java.util.regex.Matcher;
 
 public class UnmarkCommand extends Command {
@@ -17,11 +18,11 @@ public class UnmarkCommand extends Command {
     }
 
     @Override
-    public void execute() throws DukeException {
+    public void execute(Supplier<? extends TaskList> taskList) throws DukeException {
+        TaskList store = taskList.get();
         Matcher m = NUMBERS.matcher(args);
         if (m.find()) {
-            Integer key = Integer.parseInt(m.group());
-            Optional<Task> task = TaskList.getTask(key);
+            Optional<Task> task = store.getTask(Integer.parseInt(m.group()));
             task.ifPresent(Task::unmarkTask);
         } else {
             throw new DukeException("Invalid format. Please ensure that you specify the task number.");

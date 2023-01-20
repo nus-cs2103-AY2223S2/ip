@@ -1,10 +1,12 @@
 package controllers;
 
 import entities.Task;
+import entities.TaskList;
 import enums.CommandType;
 import enums.TaskType;
 import exceptions.DukeException;
 
+import java.util.function.Supplier;
 import java.util.regex.Matcher;
 
 public class TodoCommand extends Command {
@@ -16,8 +18,9 @@ public class TodoCommand extends Command {
     }
 
     @Override
-    public void execute() throws DukeException {
+    public void execute(Supplier<? extends TaskList> taskList) throws DukeException {
+        TaskList store = taskList.get();
         Matcher mTodo = Task.TODO.matcher(args);
-        Task.processTask(mTodo, TaskType.TODO);
+        Task.processTask(mTodo, TaskType.TODO, store);
     }
 }
