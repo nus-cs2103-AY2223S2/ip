@@ -1,5 +1,6 @@
 import tasks.*;
 import java.util.*;
+
 public class Duke {
     static ArrayList<Task> todoList;
     static String separator = "\u200E✽ ✾ \u200E✽ ✾ \u200E✽ ✾ \u200E✽ ✾";
@@ -21,7 +22,7 @@ public class Duke {
                     System.out.println("(\\\\ (\\\\ \n" + "(„• ֊ •„)\n" + "━━O━O━━━━━━━━━━━━━━━\n" +
                             "bye, see you again soon!\n" + "━━━━━━━━━━━━━━━━━━━━\n");
                     break;
-                } else if (input.equals("list")) {
+                } else if(input.equals("list")) {
                     System.out.println(separator + "\nhere's your list:");
                     for (int i = 0; i < todoList.size(); i++) {
                         Task thisTask = todoList.get(i);
@@ -29,7 +30,7 @@ public class Duke {
                     }
                     System.out.println(separator);
 
-                } else if (input.startsWith("todo")) {
+                } else if(input.startsWith("todo")) {
                     try {
                         String description = input.substring(5);
                         ToDo newToDo = new ToDo(description);
@@ -37,18 +38,18 @@ public class Duke {
                     } catch(StringIndexOutOfBoundsException e) {
                         throw new DukeExceptions(forgottenArgumentMessage);
                     }
-                } else if (input.startsWith("deadline")) {
+                } else if(input.startsWith("deadline")) {
                     String[] s1 = input.substring(9).split("/by");
                     Deadline newDeadline = new Deadline(s1[0].trim(), s1[1].trim());
                     addTask(newDeadline);
 
-                } else if (input.startsWith("event")) {
+                } else if(input.startsWith("event")) {
                     String[] s1 = input.substring(6).split("/from");
                     String[] s2 = s1[1].split("/to");
                     Event newEvent = new Event(s1[0].trim(), s2[0].trim(), s2[1].trim());
                     addTask(newEvent);
 
-                } else if (input.startsWith("mark")) {
+                } else if(input.startsWith("mark")) {
                     int index = Integer.parseInt(input.substring(5)) - 1;
                     if(index >= todoList.size()) {
                         throw new DukeExceptions(invalidIndexMessage);
@@ -58,15 +59,26 @@ public class Duke {
                         message("\nwell done! you've completed this task: " + thisTask + "\n");
                     }
 
-                } else if (input.startsWith(("unmark"))) {
+                } else if(input.startsWith("unmark")) {
                     int index = Integer.parseInt(input.substring(7)) - 1;
-                    if(index >= todoList.size()) {
+                    if (index >= todoList.size()) {
                         throw new DukeExceptions(invalidIndexMessage);
                     } else {
                         Task thisTask = todoList.get(index);
                         thisTask.unmarkDone();
                         message("\noops...this task is now marked as not done yet: " + thisTask + "\n");
                     }
+
+                } else if(input.startsWith("delete")) {
+                    int index = Integer.parseInt(input.substring(7)) - 1;
+                    if (index >= todoList.size()) {
+                        throw new DukeExceptions(invalidIndexMessage);
+                    } else {
+                        Task thisTask = todoList.get(index);
+                        todoList.remove(index);
+                        message("\nokay, this task has been removed: " + thisTask + "\nthe list now has " + todoList.size() + " task(s) left\n");
+                    }
+
                 } else {
                     throw new DukeExceptions(unknownCommandMessage);
                 }
@@ -79,7 +91,7 @@ public class Duke {
 
     public static void addTask(Task task) {
         todoList.add(task);
-        message("\nperf, your task has been added:\n" + task.toString() + "\nthere are now  " + todoList.size() + " tasks in the list\n");
+        message("\nperf, your task has been added:\n" + task.toString() + "\nthe list now has " + todoList.size() + " task(s) in total\n");
     }
 
     public static void message(String message) {
