@@ -1,10 +1,10 @@
 .PHONY: run compile test
 
-run: compile
-	java -cp bin Main
+run:
+	./gradlew run -q --console=plain  
 
-compile: src/main/java/*.java
-	javac -cp src/main/java -Xlint:none -d bin src/main/java/*.java
+compile: 
+	./gradlew build
 
 test: 
 	cd text-ui-test; bash runtest.sh
