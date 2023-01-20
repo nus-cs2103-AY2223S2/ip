@@ -25,12 +25,19 @@ public class Duke {
     }
 
     public void parseInput(String input) {
-        if (input.equalsIgnoreCase("bye")) {
-            this.isActive = false;
-            this.printOutput("\t Bye. Hope to see you again soon!");
-        } else {
-            this.tasklist.addTask(input);
-            this.printOutput("\t added: " + input);
+        switch (input) {
+            case "bye":
+                this.isActive = false;
+                this.printOutput("\t Bye. Hope to see you again soon!");
+                break;
+            case "list":
+                System.out.println(LINE);
+                this.tasklist.viewList();
+                System.out.println(LINE);
+                break;
+            default:
+                this.tasklist.addTask(input);
+                this.printOutput("\t added: " + input);
         }
     }
 
