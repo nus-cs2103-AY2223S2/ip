@@ -75,25 +75,52 @@ public class Duke {
                 printList();
                 break;
             case "mark":
-                changeTaskCompletionStatus(Integer.parseInt(arguments) - 1, true);
+                int markIndex;
+                try {
+                    markIndex = Integer.parseInt(arguments) - 1;
+                } catch (Throwable e) {
+                    throw new IlegalCommandException(Commands.MARK);
+                }
+                changeTaskCompletionStatus(markIndex, true);
                 break;
             case "unmark":
-                changeTaskCompletionStatus(Integer.parseInt(arguments) - 1, false);
+                int unmarkIndex;
+                try {
+                    unmarkIndex = Integer.parseInt(arguments) - 1;
+                } catch (Throwable e) {
+                    throw new IlegalCommandException(Commands.UNMARK);
+                }
+                changeTaskCompletionStatus(unmarkIndex, false);
                 break;
             case "todo":
+                if (arguments == null || arguments.trim().equals("")) {
+                    throw new IlegalCommandException(Commands.TODO);
+                }
                 addToList(arguments, TaskType.TODO, null, null);
                 break;
             case "deadline":
-                int slashIndex = arguments.indexOf('/');
-                String dateBy = arguments.substring(slashIndex + 4);
+                int slashIndex;
+                String dateBy;
+                try {
+                    slashIndex = arguments.indexOf('/');
+                    dateBy = arguments.substring(slashIndex + 4);
+                } catch (Throwable e) {
+                    throw new IlegalCommandException(Commands.DEADLINE);
+                }
                 addToList(arguments.substring(0, slashIndex - 1), TaskType.DEADLINE, null, dateBy);
                 break;
             case "event":
-                int firstSlashIndex = arguments.indexOf('/');
-                String startAndEnd = arguments.substring(firstSlashIndex + 6);
-                int secondSlashIndex = startAndEnd.indexOf('/');
-                String start = startAndEnd.substring(0, secondSlashIndex - 1);
-                String end = startAndEnd.substring(secondSlashIndex + 4);
+                int firstSlashIndex, secondSlashIndex;
+                String startAndEnd, start, end;
+                try {
+                    firstSlashIndex = arguments.indexOf('/');
+                    startAndEnd = arguments.substring(firstSlashIndex + 6);
+                    secondSlashIndex = startAndEnd.indexOf('/');
+                    start = startAndEnd.substring(0, secondSlashIndex - 1);
+                    end = startAndEnd.substring(secondSlashIndex + 4);
+                } catch (Throwable e) {
+                    throw new IlegalCommandException(Commands.EVENT);
+                }
                 addToList(arguments.substring(0, firstSlashIndex - 1), TaskType.EVENT, start, end);
                 break;
             default:

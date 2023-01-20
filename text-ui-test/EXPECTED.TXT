@@ -12,10 +12,12 @@ Enter your prompt below:
 You have zero tasks now!
 ----------------------------------------------------
 Enter your prompt below:
-Unrecognized Command
+Command Exception: That is not a recognized command!
+
 ----------------------------------------------------
 Enter your prompt below:
-Unrecognized Command
+Command Exception: That is not a recognized command!
+
 ----------------------------------------------------
 Enter your prompt below:
 Added this to your task list:
