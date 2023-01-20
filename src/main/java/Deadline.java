@@ -1,9 +1,11 @@
+import java.time.LocalDateTime;
+
 public class Deadline extends Task {
-    protected String by;
+    protected LocalDateTime by;
 
     Deadline(String title, String by) throws DukeException {
         super(title);
-        this.by = by.replace("/by", "").trim();
+        this.by = LocalDateTime.parse(by.replace("/by", "").trim());
     }
 
     Deadline(String title, String by, boolean done) throws DukeException {

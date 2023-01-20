@@ -108,6 +108,8 @@ public class Duke {
                 // System.out.println(e);
                 if (e instanceof IndexOutOfBoundsException) {
                     printer(Views.OUT_RANGE_ERR_STRING.eng());
+                } else if (e instanceof java.time.format.DateTimeParseException) {
+                    printer(Views.DATE_PARSE_ERR_STRING.eng());
                 } else if (e instanceof DukeException) {
                     printer(e.getMessage());
                 } else {
