@@ -40,8 +40,9 @@ public class Parser {
     }
 
     private Command prepareCreateTodo(String input) throws DukeException {
-        if (input.isEmpty())
+        if (input.isEmpty()) {
             throw new DukeException("The description cannot be empty.");
+        }
         return new CreateTodo(input);
     }
 
