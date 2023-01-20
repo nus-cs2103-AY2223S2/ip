@@ -14,6 +14,12 @@ public abstract class Task {
         return this.isDone;
     }
 
+    public abstract String getFileRepresentation();
+
+    protected String getName() {
+        return this.name;
+    };
+
     @Override
     public String toString() {
         return (this.isDone ? "[X] " : "[ ] ") + this.name;

@@ -1,3 +1,8 @@
+import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -15,8 +20,23 @@ public class Duke {
     private static final String byIndicator = "/by";
     private static final String fromIndicator = "/from";
     private static final String toIndicator = "/to";
+    
+    private static final String filePath = "data/duke.txt";
 
     public static void main(String[] args) {
+        try {
+            Files.createDirectory(Paths.get("data"));
+            File savedData = new File(Duke.filePath);
+            savedData.createNewFile();
+            Scanner dataReader = new Scanner(savedData);
+            while (dataReader.hasNext()) {
+                createTaskListFromFile(dataReader.nextLine());
+            }
+            dataReader.close();
+        } catch(IOException e) {
+            System.out.println("Reading from storage failed");
+        }
+
         String logo = " ____        _        \n"
                 + "|  _ \\ _   _| | _____ \n"
                 + "| | | | | | | |/ / _ \\\n"
@@ -49,8 +69,17 @@ public class Duke {
             } finally {
                 System.out.println(separator);
             }
-            
         }
+
+        try {
+            String toSave = createTaskListString();
+            FileWriter fw = new FileWriter(filePath);
+            fw.write(toSave);
+            fw.close();
+        } catch (IOException e) {
+            System.out.println("Writing to storage failed");
+        }
+
     }
 
     private static void processCommand(String line) throws DukeException {
@@ -155,6 +184,35 @@ public class Duke {
         System.out.println("Got it. I've added this task:");
         System.out.println(task);
         System.out.println("Now you have " + Duke.taskStore.size() + " tasks in the list.");
+    }
+
+    private static void createTaskListFromFile(String task) {
+        char typeOfTask = task.charAt(0);
+        String[] details = task.split("@");
+        Task newTask = null;
+        switch (typeOfTask) {
+        case 'T':
+            newTask = new Todo(details[2]);
+            break;
+        case 'E':
+            newTask = new Event(details[2], details[3], details[4]);
+            break;
+        case 'D':
+            newTask = new Deadline(details[2], details[3]);
+            break;
+        default:
+            break;
+        }
+        newTask.setDone(details[1].equals("1"));
+        taskStore.add(newTask);
+    }
+
+    private static String createTaskListString() {
+        StringBuffer representation = new StringBuffer();
+        for (Task t : taskStore) {
+            representation.append(t.getFileRepresentation() + "\n");
+        }
+        return representation.toString();
     }
 
 }
