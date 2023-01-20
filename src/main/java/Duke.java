@@ -5,54 +5,64 @@ public class Duke {
     public Duke(Scanner sc) {
         this.sc = sc;
     }
-    public void start(ArrayList<Task> list) {
+    public void start(Tasklist list) throws DukeException {
         while(sc.hasNext()) {
-            String str = sc.nextLine();
+            String input = sc.nextLine();
+            input = input.trim();
+            String[] separateInput = input.split(" ");
+            String str = separateInput[0];
             if(str.equals("bye")) {
                 System.out.println("Bye. Hope to see you again soon!");
                 sc.close();
                 return;
             } else if(str.equals("list")) {
-                System.out.println("Here are the tasks in your list:\n");
-                for (int i = 0; i < list.size(); i++) {
-                    int index = i + 1;
-                    System.out.println( index + "." + list.get(i).toString());
-                }
+                list.inString();
             } else if(str.contains("unmark")) {
                 String[] splitString = str.split(" ");
-                int inputIndex = Integer.parseInt(splitString[1]) - 1;
-                list.get(inputIndex).unmark();
-                System.out.println( "OK, I've marked this task as not done yet:\n"
-                        + list.get(inputIndex).toString());
+                int index = Integer.parseInt(splitString[1]) - 1;
+                list.markTaskasDone(index);
             } else if(str.contains("mark")) {
                 String[] splitString = str.split(" ");
-                int inputIndex = Integer.parseInt(splitString[1]) - 1;
-                list.get(inputIndex).markDone();
-                System.out.println( "Nice! I've marked this task as done:\n"
-                        + list.get(inputIndex).toString());
+                int index = Integer.parseInt(splitString[1]) - 1;
+                list.markTaskasDone(index);
             } else if(str.contains("todo")) {
-                Todo t = new Todo(str);
-                list.add(t);
-                System.out.println( "Got it. I've added this task:\n" + t.toString()
-                + "\nNow you have " + list.size() + " tasks in the list");
+                int startIndex = str.length();
+                if(startIndex >= str.length()) {
+                    throw new DukeException("☹ OOPS!!! The description of a todo cannot be empty.");
+                }
+                Todo task = new Todo(str);
+                list.add(task);
+                list.totalNumberOfTasks();
             } else if(str.contains("deadline")){
-                int  detailIndex= str.lastIndexOf("deadline");
+                int startIndex = str.length();
+                if(startIndex >= str.length()) {
+                    throw new DukeException("☹ OOPS!!! The description of a deadline cannot be empty.");
+                }
+                int detailIndex= str.lastIndexOf("deadline");
                 String taskFullDetails = str.substring(detailIndex);
                 String[] splitDetails = taskFullDetails.split("/");
-                Deadline t = new Deadline(splitDetails[0], splitDetails[1]);
-                list.add(t);
-                System.out.println( "Got it. I've added this task:\n" + t.toString()
-                        + "\nNow you have " + list.size() + " tasks in the list");
+                if(splitDetails.length < 2) {
+                    throw new DukeException("☹ OOPS!!! The deadline must be specified.");
+                }
+                Deadline task = new Deadline(splitDetails[0], splitDetails[1]);
+                list.add(task);
+                list.totalNumberOfTasks();
             } else if(str.contains("event")) {
+                int startIndex = str.length();
+                if(startIndex >= str.length()) {
+                    throw new DukeException("☹ OOPS!!! The description of a event cannot be empty.");
+                }
                 int detailIndex = str.lastIndexOf("event");
                 String taskFullDetails = str.substring(detailIndex);
                 String[] splitDetails = taskFullDetails.split("/");
-                Event t = new Event(splitDetails[0], splitDetails[1], splitDetails[2]);
-                list.add(t);
-                System.out.println("Got it. I've added this task:\n" + t.toString()
-                        +"\nNow you have " + list.size() + " tasks in the list");
+                if(splitDetails.length < 3) {
+                    throw new DukeException("☹ OOPS!!! The start and end both must be specified.");
+                }
+                Event task = new Event(splitDetails[0], splitDetails[1], splitDetails[2]);
+                list.add(task);
+                list.totalNumberOfTasks();
             } else {
-                System.out.println("Cannot!");
+                throw new DukeException("☹ OOPS!!! I'm sorry,try again later!");
             }
         }
     }
@@ -60,10 +70,13 @@ public class Duke {
 
         System.out.println("Hello! I'm Duke What can I do for you?");
 
-        ArrayList<Task> list = new ArrayList<Task>();
+        Tasklist list = new Tasklist();
         Scanner sc= new Scanner(System.in);
         Duke duke = new Duke(sc);
-        duke.start(list);
-
+        try {
+            duke.start(list);
+        } catch(DukeException e) {
+            System.out.println(e);
+        }
     }
 }
