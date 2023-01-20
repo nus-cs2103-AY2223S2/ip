@@ -1,26 +1,26 @@
-package core.injections;
+package core.singletons;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.function.Supplier;
 
 /**
  * The utilities class for handling the registering singletons. To use it, call
- * <code>Injections.registerSingleton(Hello.class, new Hello());</code>
+ * <code>Singletons.registerSingleton(Hello.class, new Hello());</code>
  * This way, it can provide a new layer of abstraction, and if any concrete
- * implementations were to change, any code calling <code>Injections.get</code>
+ * implementations were to change, any code calling <code>Singletons.get</code>
  * would not need to be changed, unless, or course, you directly call the
  * class itself.
  */
-public class Injections {
+public class Singletons {
     /**
      * The dependencies stored in this dependencies section.
      */
-    static private final Map<Class<?>, Object> dependencies = new HashMap<>();
+    static private final Map<Class<?>, Object> singletons = new HashMap<>();
 
     /**
      * The dependency suppliers, used for lazy registration.
      */
-    static private final Map<Class<?>, Supplier<?>> dependencySuppliers =
+    static private final Map<Class<?>, Supplier<?>> lazySingletons =
             new HashMap<>();
 
     /**
@@ -32,10 +32,10 @@ public class Injections {
      */
     static public <T> void registerSingleton(Class<T> cls,
                                              T object) {
-        if (dependencies.containsKey(cls) || dependencySuppliers.containsKey(cls)) {
+        if (singletons.containsKey(cls) || lazySingletons.containsKey(cls)) {
             return;
         }
-        dependencies.put(cls, object);
+        singletons.put(cls, object);
     }
 
     /**
@@ -47,10 +47,10 @@ public class Injections {
      */
     static public <T> void registerLazySingleton(Class<T> cls,
                                                  Supplier<T> supplier) {
-        if (dependencies.containsKey(cls) || dependencySuppliers.containsKey(cls)) {
+        if (singletons.containsKey(cls) || lazySingletons.containsKey(cls)) {
             return;
         }
-        dependencySuppliers.put(cls, supplier);
+        lazySingletons.put(cls, supplier);
     }
 
     /**
@@ -60,11 +60,12 @@ public class Injections {
      * @param <T> the type of the object.
      */
     static public <T> T get(Class<T> cls) {
-        if (dependencies.containsKey(cls)) {
-            return cls.cast(dependencies.get(cls));
-        } else if (dependencySuppliers.containsKey(cls)) {
-            final T object = cls.cast(dependencySuppliers.get(cls).get());
-            dependencies.put(cls, object);
+        if (singletons.containsKey(cls)) {
+            return cls.cast(singletons.get(cls));
+        } else if (lazySingletons.containsKey(cls)) {
+            final T object = cls.cast(lazySingletons.get(cls).get());
+            singletons.put(cls, object);
+            lazySingletons.remove(cls);
             return object;
         }
         throw new RuntimeException("Dependency for " + cls.getName() + " has " +

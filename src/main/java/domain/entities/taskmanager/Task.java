@@ -1,4 +1,4 @@
-package domain.models.taskmanager;
+package domain.entities.taskmanager;
 
 /**
  * This shall resemble a Task. The reason that no modifiers was added was

@@ -1,4 +1,4 @@
-package domain.models.core;
+package domain.entities.core;
 
 /**
  * An interface wrapping around things that can be written to.

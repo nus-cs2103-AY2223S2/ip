@@ -1,4 +1,4 @@
-package domain.models.taskmanager;
+package domain.entities.taskmanager;
 
 import core.exceptions.InvalidArgumentException;
 

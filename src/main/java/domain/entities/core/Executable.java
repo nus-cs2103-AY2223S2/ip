@@ -1,4 +1,4 @@
-package domain.models.core;
+package domain.entities.core;
 
 /**
  * The interface for objects that can be run.

@@ -1,6 +1,6 @@
-import core.injections.Injections;
+import core.singletons.Singletons;
 import core.utils.TokenUtilities;
-import domain.models.core.Writable;
+import domain.entities.core.Writable;
 import domain.usecases.ByeUsecase;
 import domain.usecases.EchoUsecase;
 import domain.usecases.TaskManagerUsecase;
@@ -29,16 +29,16 @@ public class Duke {
      * This would register the singletons that we would be using later on.
      */
     private static void configureInjections() {
-        Injections.registerLazySingleton(Writable.class, SystemOut::new);
-        Injections.registerLazySingleton(ByeUsecase.class,
-                () -> new ByeUsecase(Injections.get(Writable.class)));
-        Injections.registerLazySingleton(EchoUsecase.class,
-                () -> new EchoUsecase(Injections.get(Writable.class)));
-        Injections.registerLazySingleton(TaskManagerUsecase.class,
-                () -> new TaskManagerUsecase(Injections.get(Writable.class)));
-        Injections.registerLazySingleton(UnknownCommandUsecase.class,
-                () -> new UnknownCommandUsecase(Injections.get(Writable.class)));
-        Injections.registerLazySingleton(TokenUtilities.class,
+        Singletons.registerLazySingleton(Writable.class, SystemOut::new);
+        Singletons.registerLazySingleton(ByeUsecase.class,
+                () -> new ByeUsecase(Singletons.get(Writable.class)));
+        Singletons.registerLazySingleton(EchoUsecase.class,
+                () -> new EchoUsecase(Singletons.get(Writable.class)));
+        Singletons.registerLazySingleton(TaskManagerUsecase.class,
+                () -> new TaskManagerUsecase(Singletons.get(Writable.class)));
+        Singletons.registerLazySingleton(UnknownCommandUsecase.class,
+                () -> new UnknownCommandUsecase(Singletons.get(Writable.class)));
+        Singletons.registerLazySingleton(TokenUtilities.class,
                 TokenUtilities::new);
     }
 }

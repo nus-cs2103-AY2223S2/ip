@@ -1,9 +1,9 @@
 package presentation.controllers;
 
-import core.injections.Injections;
-import domain.models.core.EventLoop;
-import domain.models.core.Executable;
-import domain.models.core.NestableExecutableObject;
+import core.singletons.Singletons;
+import domain.entities.core.EventLoop;
+import domain.entities.core.Executable;
+import domain.entities.core.NestableExecutableObject;
 import domain.usecases.ByeUsecase;
 import domain.usecases.TaskManagerUsecase;
 import domain.usecases.UnknownCommandUsecase;
@@ -23,15 +23,15 @@ public class DukeEventLoop extends EventLoop {
         final NestableExecutableObject executable =
                 new NestableExecutableObject();
 
-        final ByeUsecase bye = Injections.get(ByeUsecase.class);
+        final ByeUsecase bye = Singletons.get(ByeUsecase.class);
         bye.register(executable);
         // final EchoUsecase echo = new EchoUsecase();
         // echo.register(executable);
         final TaskManagerUsecase manager =
-                Injections.get(TaskManagerUsecase.class);
+                Singletons.get(TaskManagerUsecase.class);
         manager.register(executable);
         final UnknownCommandUsecase unknown =
-                Injections.get(UnknownCommandUsecase.class);
+                Singletons.get(UnknownCommandUsecase.class);
         unknown.register(executable);
         return new DukeEventLoop(scanner, executable);
     }

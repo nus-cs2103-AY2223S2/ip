@@ -1,8 +1,8 @@
 package domain.usecases;
 import core.exceptions.InvalidArgumentException;
 import core.utils.fp.ThrowingFunction;
-import domain.models.core.*;
-import domain.models.taskmanager.*;
+import domain.entities.core.*;
+import domain.entities.taskmanager.*;
 import java.util.ArrayList;
 
 /**

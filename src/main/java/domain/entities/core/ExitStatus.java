@@ -1,4 +1,4 @@
-package domain.models.core;
+package domain.entities.core;
 
 /**
  * This is the return type of executing any command. It should signify what the

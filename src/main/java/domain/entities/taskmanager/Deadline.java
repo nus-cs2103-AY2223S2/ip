@@ -1,6 +1,6 @@
-package domain.models.taskmanager;
+package domain.entities.taskmanager;
 import core.exceptions.InvalidArgumentException;
-import core.injections.Injections;
+import core.singletons.Singletons;
 import core.utils.Pair;
 import core.utils.TokenUtilities;
 import java.util.Map;
@@ -40,7 +40,7 @@ public class Deadline extends Task {
      */
     public static Deadline fromTokens(String[] tokens) throws InvalidArgumentException {
         final Pair<String, Map<String, String>> tmp =
-                Injections.get(TokenUtilities.class).joinTokens(tokens, delims);
+                Singletons.get(TokenUtilities.class).joinTokens(tokens, delims);
         if (tmp.getLeft().isBlank()) {
             throw new InvalidArgumentException("☹ OOPS, the name for a deadline " +
                     "should not be null", tokens);

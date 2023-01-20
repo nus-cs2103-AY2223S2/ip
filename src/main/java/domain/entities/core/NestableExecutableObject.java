@@ -1,5 +1,5 @@
-package domain.models.core;
-import core.injections.Injections;
+package domain.entities.core;
+import core.singletons.Singletons;
 import core.utils.TokenUtilities;
 
 import java.util.*;
@@ -121,7 +121,7 @@ public class NestableExecutableObject implements Executable {
             final Executable executable = identifiedExecutables.get(tokens[0]);
             if (executable != null) {
                 final String[] newTokens =
-                        Injections.get(TokenUtilities.class).removeFirst(tokens);
+                        Singletons.get(TokenUtilities.class).removeFirst(tokens);
                 status = executable.execute(newTokens);
                 if (status != ExitStatus.continueExecute) {
                     return status;

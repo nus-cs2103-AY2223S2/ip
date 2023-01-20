@@ -1,6 +1,6 @@
 package domain.usecases;
 
-import domain.models.core.*;
+import domain.entities.core.*;
 
 public class EchoUsecase implements Executable, ExecutableRegisterable {
     /**

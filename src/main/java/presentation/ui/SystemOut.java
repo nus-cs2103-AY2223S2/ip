@@ -1,6 +1,6 @@
 package presentation.ui;
 
-import domain.models.core.Writable;
+import domain.entities.core.Writable;
 
 /**
  * This will be writing the contents to the System's output stream.

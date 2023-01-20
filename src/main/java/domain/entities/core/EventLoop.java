@@ -1,4 +1,4 @@
-package domain.models.core;
+package domain.entities.core;
 
 /**
  * This shall serve as the base for implementing an event loop. An event loop
