@@ -56,6 +56,7 @@ public class Main {
         duke.print_structured_string(duke.endMsg());
     }
 
+    
     public static boolean checkCommand(String s, Command c) {
         boolean isCommand = false;
         switch (c) {
@@ -69,6 +70,7 @@ public class Main {
             case EVENT:
             case DELETE:
                 isCommand = s.toUpperCase().startsWith(c.name());
+                break;
         }
         return isCommand;
     }
