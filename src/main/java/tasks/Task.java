@@ -14,15 +14,15 @@ public class Task {
 
     public String mark(){
         isDone = !isDone;
+        String response;
         if (isDone) {
-            String response = "Alright, I've marked this task as done!\n"
+            response = "Alright, I've marked this task as done!\n"
                     + this.toString();
-            return response;
         } else {
-            String response = "Aight, I marked the task as not done, but wtf did you do, un" + this.description + "?\n"
+            response = "Aight, I marked the task as not done, but wtf did you do, un" + this.description + "?\n"
                     + this.toString();
-            return response;
         }
+        return response;
     }
 
     public String getDescription() {
