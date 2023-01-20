@@ -9,6 +9,10 @@ public class Task {
         this.title = title;
     }
 
+    public Task(int x) throws DukeException {
+        throw new DukeException();
+    }
+
     // Methods:
     public String toString() {
         if (this.completed) {

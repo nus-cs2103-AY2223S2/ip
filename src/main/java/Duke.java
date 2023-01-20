@@ -41,6 +41,10 @@ public class Duke {
         System.out.println("End of list!\n");
     }
 
+    public static void exception_thrower(String exception_type) throws DukeException {
+        throw new DukeException(exception_type);
+    }
+
     public static void exit() {
         System.out.println("> Duke's response:");
         System.out.println("Bye. Hope to see you again!");
@@ -68,28 +72,51 @@ public class Duke {
 
                 // If input is a deadline, create deadline and add to task list
                 else if (user_input.startsWith("deadline ")) {
-                    String title = user_input.substring(9, user_input.indexOf("/by ") - 1);
-                    String by_date = user_input.substring(user_input.indexOf("/by ") + 4);
-                    add_to_list(new Deadline(title, by_date));
+                    if (user_input.contains("/by ")) {
+                        add_to_list(new Deadline(user_input));
+                    } else {
+                        try {
+                            exception_thrower("deadline");
+                        } catch (DukeException de) {
+                            System.out.println(de.toString());
+                        }
+                    }
                 }
 
                 // If input is an event, create event and add to task list
                 else if (user_input.startsWith("event ")) {
-                    String title = user_input.substring(6, user_input.indexOf("/from ") - 1);
-                    String from_date = user_input.substring(user_input.indexOf("/from ") + 6, user_input.indexOf("/to ") - 1);
-                    String to_date = user_input.substring(user_input.indexOf("/to ") + 4);
-                    add_to_list(new Event(title, from_date, to_date));
+                    if (user_input.contains("/from ") && user_input.contains("/to ")) {
+                        add_to_list(new Event(user_input));
+                    } else {
+                        try {
+                            exception_thrower("event");
+                        } catch (DukeException de) {
+                            System.out.println(de.toString());
+                        }
+                    }
                 }
 
                 // If input is a ToDos item, create ToDos item and add to task list
                 else if (user_input.startsWith("todo ")) {
-                    String title = user_input.substring(5);
-                    add_to_list(new Todo(title));
+                    if (user_input.length() > 5) {
+                        add_to_list(new Todo(user_input));
+                    } else {
+                        try {
+                            exception_thrower("todo");
+                        } catch (DukeException de) {
+                            System.out.println(de.toString());
+                        }
+                    }
                 }
 
                 // Else create and add task to list
                 else {
-                    add_to_list(new Task(user_input));
+                    try {
+                        add_to_list(new Task(0));
+                    }
+                    catch (DukeException de){
+                        System.out.println(de.toString());
+                    }
                 }
             }
             else {

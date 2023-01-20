@@ -4,9 +4,10 @@ public class Deadline extends Task {
     protected String by_date;
 
     // Constructor:
-    public Deadline(String title, String by_date) {
-        super(title);
-        this.by_date = by_date;
+    public Deadline(String user_input) {
+        // use if-else and string.contains to check if this doesn't work
+        super(user_input.substring(9, user_input.indexOf("/by ") - 1)); // title
+        this.by_date = user_input.substring(user_input.indexOf("/by ") + 4); // due date
     }
 
     // Methods:

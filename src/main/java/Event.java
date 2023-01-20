@@ -5,10 +5,10 @@ public class Event extends Task {
     protected String to_date;
 
     // Constructor:
-    public Event(String title, String from_date, String to_date) {
-        super(title);
-        this.from_date = from_date;
-        this.to_date = to_date;
+    public Event(String user_input) {
+        super(user_input.substring(6, user_input.indexOf("/from ") - 1));
+        this.from_date = user_input.substring(user_input.indexOf("/from ") + 6, user_input.indexOf("/to ") - 1);
+        this.to_date = user_input.substring(user_input.indexOf("/to ") + 4);
     }
 
     // Methods:
