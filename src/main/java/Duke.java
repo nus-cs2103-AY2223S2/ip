@@ -3,6 +3,7 @@ import java.util.Scanner;
 public class Duke {
 
     public static void userInput() {
+        data hist = new data();
         System.out.println("Greetings");
         Scanner user = new Scanner(System.in);
 
@@ -12,7 +13,12 @@ public class Duke {
                 System.out.println("Bye!");
                 break;
             }
-            System.out.println(input);
+
+            if (input.equals("list")) {
+                hist.printHist();
+                continue;
+            }
+            hist.addHist(input);
         }
         return;
     }
