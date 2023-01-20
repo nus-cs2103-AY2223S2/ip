@@ -44,6 +44,10 @@ public class Task {
         return rank;
     }
 
+    public void setRank(int n) {
+        this.rank = n;
+    }
+
     @Override
     public String toString() {
         return this.getCompletedOrNotSign() + this.name;
