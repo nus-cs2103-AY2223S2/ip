@@ -8,6 +8,6 @@ public class Event extends Task {
     }
 
     public String toString() {
-        return String.format("%s | %s to %s ", this.description, this.start, this.end);
+        return String.format("%s | %s to %s", this.description, this.start, this.end);
     }
 }

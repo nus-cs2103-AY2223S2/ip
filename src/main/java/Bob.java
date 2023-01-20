@@ -1,18 +1,15 @@
-
 import java.util.Arrays;
 import java.util.Scanner;
 import java.util.ArrayList;
 import org.apache.commons.lang3.StringUtils;
 
-import javax.sound.midi.SysexMessage;
-
 public class Bob {
-    private Scanner scanner = new Scanner(System.in);
+    private final Scanner scanner = new Scanner(System.in);
 
     private ArrayList<Task> taskList = new ArrayList<>();
-    private static Integer spacing = 5;
+    private static final Integer spacing = 5;
 
-    private static String wrapper = padLeft("~".repeat(30));
+    private static final String wrapper = padLeft("~".repeat(30));
 
     private static String padLeft (String s) {
         return " ".repeat(spacing) + s;
@@ -29,7 +26,7 @@ public class Bob {
     }
 
     private String getTaskDescription(Task t) {
-        return String.format("[%s][%s] %s", t.getTaskType(), t.getStatusIcon(), t.toString());
+        return String.format("[%s][%s] %s", t.getTaskType(), t.getStatusIcon(), t);
     }
     private void printList() {
         System.out.println(wrapper);
@@ -68,11 +65,11 @@ public class Bob {
 
             if (commands[0].equals("mark")) { // mark task
                 t.mark();
-                formattedPrint("I've marked this task as done! \n" +
+                formattedPrint("I've marked this task as done!\n" +
                         getTaskDescription(t));
             } else { // unmark task
                 t.unmark();
-                formattedPrint("I've unmarked this task as not done! \n" +
+                formattedPrint("I've unmarked this task as not done!\n" +
                         getTaskDescription(t));
             }
         }
@@ -86,7 +83,7 @@ public class Bob {
         Integer max = taskList.size();
 
         return words.length == 2
-                && Arrays.stream(markCommands).anyMatch(words[0]::equals) // Check if word[0] matches any command
+                && Arrays.asList(markCommands).contains(words[0]) // Check if word[0] matches any command
                 && isInt(words[1]);
     }
 
@@ -173,7 +170,7 @@ public class Bob {
         String flag = "bye";
 
         //Introduction message
-        formattedPrint("Hi, my name is Bob :) \n" +
+        formattedPrint("Hi, my name is Bob :)\n" +
                 "How may I help you?");
 
         String input = scanner.nextLine();
