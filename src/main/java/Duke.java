@@ -1,3 +1,5 @@
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Scanner;
 
 public class Duke {
@@ -13,6 +15,7 @@ public class Duke {
 
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
+        List<String> tasks = new ArrayList<>();
 
         printHorizontalLine();
 
@@ -28,7 +31,18 @@ public class Duke {
 
         while (!command.equals("bye")) {
             printHorizontalLine();
-            System.out.println("Karen:\n" + command);
+            System.out.println("Karen:");
+
+            if (command.equals("list")) {
+                for (int i = 0; i < tasks.size(); i++) {
+                    String currTask = tasks.get(i);
+                    System.out.printf("%d. %s\n", i + 1, currTask);
+                }
+            } else {
+                tasks.add(command);
+                System.out.printf("added: %s\n", command);
+            }
+
             printHorizontalLine();
             command = sc.nextLine();
         }
