@@ -10,7 +10,7 @@ public class Deadline extends Task {
 
     Deadline(String title, String by, boolean done) throws DukeException {
         super(title, done);
-        this.by = by.replace("/by", "").trim();
+        this.by = LocalDateTime.parse(by.replace("/by", "").trim());
     }
 
     @Override

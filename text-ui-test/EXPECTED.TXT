@@ -143,13 +143,13 @@ Hello from
 
     ____________________________________________________________
       Noted. I've removed this task:
-       [D][X] ip project (by: 19 jan)
+       [D][X] ip project (by: 2023-01-19T18:00)
       Now you have 3 tasks in the list.
     ____________________________________________________________
 
     ____________________________________________________________
       Noted. I've removed this task:
-       [D][ ] ip project2 (by: 20 jan)
+       [D][ ] ip project2 (by: 2023-01-20T18:00)
       Now you have 2 tasks in the list.
     ____________________________________________________________
 
