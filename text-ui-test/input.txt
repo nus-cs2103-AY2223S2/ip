@@ -3,8 +3,20 @@ deadline homework /by tomorrow
 event team meeting /from 10pm /to 11pm
 mark 1
 mark 1
+mark 100
+mark -10
+mark asdf
+mark
+unmark
 unmark 2
 mark 2
 unmark 2
 list
+todo
+deadline
+event
+deadline project /by
+event cny /from 10am
+event dinner /to 8pm
+event event /from /to
 bye
