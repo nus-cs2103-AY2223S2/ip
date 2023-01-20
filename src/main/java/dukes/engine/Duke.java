@@ -1,3 +1,6 @@
+package dukes.engine;
+
+import dukes.util.*;
 import java.util.*;
 
 public class Duke {

@@ -1,3 +1,5 @@
+package dukes.engine;
+
 class Event extends Task {
     String start;
     String end;

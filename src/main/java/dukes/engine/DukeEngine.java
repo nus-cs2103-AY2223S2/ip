@@ -1,3 +1,6 @@
+package dukes.engine;
+
+import dukes.util.*;
 import java.util.*;
 
 public class DukeEngine {
@@ -21,6 +24,9 @@ public class DukeEngine {
 
     public List<Task> taskList = new ArrayList<Task>();
 
+    /**
+     * Print the greeting line and horizontal lines for the chat engine. Returns nothing.
+     */
     public void greet() {
         // String divisionLine = "________________________________________";
         System.out.println(divisionLine);
@@ -29,18 +35,33 @@ public class DukeEngine {
         System.out.println(divisionLine);
     }
 
+    /**
+     * Print an echoing copy of the command string. Returns nothing.
+     * @command the command to be echoed.
+     */
     public void echo(String command) {
         System.out.println(divisionLine);
         System.out.println(command);
         System.out.println(divisionLine);
     }
 
+    /**
+     * (deprecated) add the command task into the taskList.
+     * @command the command to be added to the task.
+     */
     public void addTask(String command) {
         Task theTask = new Task(command);
         taskList.add(theTask);
         System.out.println("added: " + command);
     }
 
+    /**
+     * Validate if the ToDo command is valid.
+     * If valid, continue to handle the ToDo task; otherwise, throw a DukeException
+     * of empty content of ToDo.
+     * @command the command to be validated.
+     * @throws DukeException if command.length < 2 (i.e. have no content).
+     */
     void validateToDo(String command) throws DukeException {
         String[] splited = command.split(" ");
         if (splited.length < 2) {
@@ -50,6 +71,11 @@ public class DukeEngine {
         }
     }
 
+    /**
+     * Interpret the ToDo command, add the content into the taskList,
+     * and display the number of items in list.
+     * @command the command to be interpreted. Assumed to be valid.
+     */
     public void handleToDo(String command) {
         String[] splited = command.split(" ");
         StringBuilder sb = new StringBuilder();
@@ -68,6 +94,14 @@ public class DukeEngine {
                 " tasks in the list.");
     }
 
+    /**
+     * Validate if the DeadLine command is valid.
+     * If valid, continue to handle the DeadLine task; otherwise, throw a DukeException.
+     * @command the command to be validated.
+     * @throws DukeException if
+     * command.length < 2 (i.e. have no task content); OR
+     * the timestamp after "/by" is empty.
+     */
     void validateDeadLine(String command) throws DukeException {
         String[] splited = command.split(" ");
         if (splited.length < 2) {
@@ -81,6 +115,11 @@ public class DukeEngine {
         }
     }
 
+    /**
+     * Interpret the DeadLine command, add the content into the taskList,
+     * and display the number of items in list.
+     * @command the command to be interpreted. Assumed to be valid.
+     */
     public void handleDeadLine(String command) {
         String[] splited = command.split(" ");
         StringBuilder sb = new StringBuilder();
@@ -109,6 +148,14 @@ public class DukeEngine {
                 " tasks in the list.");
     }
 
+    /**
+     * Validate if the Event command is valid.
+     * If valid, continue to handle the Event task; otherwise, throw a DukeException.
+     * @command the command to be validated.
+     * @throws DukeException if
+     * command.length < 2 (i.e. have no event content); OR
+     * the timestamp after "/by" is empty.
+     */
     void validateEvent(String command) throws DukeException {
         String[] splited = command.split(" ");
         if (splited.length < 2) {

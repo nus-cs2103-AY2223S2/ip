@@ -1,9 +1,11 @@
-class Task {
+package dukes.engine;
+
+public class Task {
     protected String taskName;
     protected boolean isDone;
     protected String tag;
 
-    Task(String taskName) {
+    public Task(String taskName) {
         this.taskName = taskName;
         this.isDone = false;
         this.tag = "";
