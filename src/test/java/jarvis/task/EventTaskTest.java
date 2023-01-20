@@ -1,7 +1,6 @@
-package task;
+package jarvis.task;
 
 import jarvis.exception.CommandParseException;
-import jarvis.task.EventTask;
 import org.junit.jupiter.api.Test;
 
 import java.time.LocalDate;

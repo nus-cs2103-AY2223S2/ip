@@ -1,9 +1,7 @@
-package task;
+package jarvis.task;
 
 import jarvis.exception.CommandParseException;
 import jarvis.exception.InvalidParameterException;
-import jarvis.task.DeadlineTask;
-import jarvis.task.TaskFilter;
 import org.junit.jupiter.api.Test;
 
 import java.time.LocalDate;

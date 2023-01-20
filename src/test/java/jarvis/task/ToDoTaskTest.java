@@ -1,7 +1,6 @@
-package task;
+package jarvis.task;
 
 import jarvis.exception.MissingParameterException;
-import jarvis.task.ToDoTask;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;

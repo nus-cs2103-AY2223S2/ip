@@ -1,8 +1,8 @@
 package jarvis.command;
 
-import jarvis.Storage;
+import jarvis.storage.Storage;
 import jarvis.task.TaskList;
-import jarvis.Ui;
+import jarvis.ui.Ui;
 import jarvis.exception.InvalidActionException;
 
 import java.util.List;

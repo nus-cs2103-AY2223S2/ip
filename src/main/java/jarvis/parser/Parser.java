@@ -1,4 +1,4 @@
-package jarvis;
+package jarvis.parser;
 
 import jarvis.command.*;
 import jarvis.exception.InvalidActionException;

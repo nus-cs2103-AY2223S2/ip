@@ -1,4 +1,4 @@
-package jarvis;
+package jarvis.ui;
 
 import java.util.List;
 
