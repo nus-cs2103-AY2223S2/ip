@@ -13,42 +13,28 @@ public class Duke {
             String input = scanner.nextLine();
             String[] tokens = input.split(" ", 2);
 
-            // Handles the case when no command entered so user does enter
-            //if (tokens[0].equals("")) {
-            //System.out.println("No command has been entered. Please enter a valid command!");
-            //}
-
-            //Exit program once user says bye (DONE)
-            if (tokens[0].equals("bye")) {
-                System.out.print("Bye. Hope to see you again soon!");
-                break;
-            }
-
-            // List all tasks (DONE)
-            if (tokens[0].equals("list")) {
-                System.out.println("Here are the tasks in your list:");
-                printList(taskList);
-                continue;
-            }
-
-            // Unmark a task as not done yet
-            if (tokens[0].equals("unmark")) {
-                unmarkTask(tokens, taskList);
-                continue;
-            }
-
-            // Mark a task as done
-            if (tokens[0].equals("mark")) {
-                markTask(tokens, taskList);
-                continue;
-            }
-
-            if (tokens[0].equals("delete")) {
-                deleteTask(tokens, taskList);
-                continue;
-            }
-
-            switch (tokens[0]) {
+            switch(tokens[0]) {
+                case "bye": {
+                    System.out.print("Bye. Hope to see you again soon!");
+                    break;
+                }
+                case "list": {
+                    System.out.println("Here are the tasks in your list:");
+                    printList(taskList);
+                    break;
+                }
+                case "unmark" : {
+                    unmarkTask(tokens, taskList);
+                    break;
+                }
+                case "mark" : {
+                    markTask(tokens, taskList);
+                    break;
+                }
+                case "delete": {
+                    deleteTask(tokens, taskList);
+                    break;
+                }
                 case "todo": {
                     if (tokens.length < 2) {
                         System.out.println("The description of a todo cannot be empty!");
@@ -94,7 +80,8 @@ public class Duke {
                     break;
                 }
                 default:
-                    System.out.println("OOPS!!! I'm sorry, but I don't know what that means :-(");
+                    System.out.println("Invalid command entered!");
+
             }
         }
     }
