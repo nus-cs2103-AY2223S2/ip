@@ -1,16 +1,24 @@
 package controllers;
 
-import entities.TaskList;
-import enums.CommandType;
-import exceptions.DukeException;
-
 import java.time.LocalDate;
 import java.util.function.Supplier;
 import java.util.regex.Matcher;
 
+import entities.TaskList;
+import enums.CommandType;
+import exceptions.DukeException;
+
+/**
+ * Represents the DateCommand.
+ * The date command can be used to determine active tasks on a certain date.
+ */
 public class DateCommand extends Command {
     private final String args;
 
+    /**
+     * Initializes the Date Command.
+     * @param args The parsed arguments.
+     */
     public DateCommand(String args) {
         super(CommandType.DATE);
         this.args = args;

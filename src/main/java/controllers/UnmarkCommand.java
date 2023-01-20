@@ -1,17 +1,25 @@
 package controllers;
 
+import java.util.Optional;
+import java.util.function.Supplier;
+import java.util.regex.Matcher;
+
 import entities.Task;
 import entities.TaskList;
 import enums.CommandType;
 import exceptions.DukeException;
 
-import java.util.Optional;
-import java.util.function.Supplier;
-import java.util.regex.Matcher;
-
+/**
+ * Represents the Unmark Command.
+ * The unmark command can be used to unmark a task.
+ */
 public class UnmarkCommand extends Command {
     private final String args;
 
+    /**
+     * Initializes an unmark Command.
+     * @param args The parsed arguments.
+     */
     public UnmarkCommand(String args) {
         super(CommandType.UNMARK);
         this.args = args;

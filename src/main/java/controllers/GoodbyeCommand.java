@@ -1,10 +1,14 @@
 package controllers;
 
+import java.util.function.Supplier;
+
 import entities.TaskList;
 import enums.CommandType;
 
-import java.util.function.Supplier;
-
+/**
+ * Represents the Goodbye Command.
+ * The goodbye command can be used to terminate the program and save date to hard disk.
+ */
 public class GoodbyeCommand extends Command {
     private static final String message = "Goodbye!";
 

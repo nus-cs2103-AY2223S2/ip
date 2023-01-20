@@ -1,14 +1,22 @@
 package entities;
 
-import enums.TaskType;
-
 import java.time.LocalDate;
 
+import enums.TaskType;
+
+
+/**
+ * Represents the Todo task.
+ */
 public class Todo extends Task {
     public Todo(String description) {
         super(description);
     }
 
+    /**
+     * Serialize the task.
+     * @return Returns serialized representation.
+     */
     @Override
     public SerializableTask serialize() {
         return new SerializableTask(TaskType.TODO, isDone, description);
