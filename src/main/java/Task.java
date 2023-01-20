@@ -1,3 +1,5 @@
+import java.time.LocalDateTime;
+
 abstract class Task {
 	private String desc;
 	private boolean isDone;
@@ -26,7 +28,6 @@ abstract class Task {
 	public abstract String toString();
 }
 
-
 class Todo extends Task {
 	public Todo(String desc) {
 		super(desc);
@@ -38,11 +39,10 @@ class Todo extends Task {
 	}
 }
 
-
 class Deadline extends Task {
-	String deadline;
+	LocalDateTime deadline;
 
-	public Deadline(String desc, String _deadline) {
+	public Deadline(String desc, LocalDateTime _deadline) {
 		super(desc);
 		deadline = _deadline;
 	}
@@ -53,11 +53,10 @@ class Deadline extends Task {
 	}
 }
 
-
 class Event extends Task {
-	String from, to;
+	LocalDateTime from, to;
 
-	public Event(String desc, String _from, String _to) {
+	public Event(String desc, LocalDateTime _from, LocalDateTime _to) {
 		super(desc);
 		from = _from;
 		to = _to;
