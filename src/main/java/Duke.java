@@ -5,7 +5,6 @@ import java.util.Scanner;
 public class Duke {
     public static void main(String[] args) {
         Scanner s = new Scanner(System.in);
-        List ls = new ArrayList<>();
         Task t = new Task();
 
         System.out.println("Hello from Bench Monster");
@@ -21,10 +20,10 @@ public class Duke {
             } else if (tokens[0].equals("list")) {
                 t.showList();
             } else if(tokens[0].equals("mark")) {
-                    Integer i = Integer.parseInt(tokens[1]);
+                    int i = Integer.parseInt(tokens[1]);
                     t.markTask(i);
             } else if(tokens[0].equals("unmark")) {
-                    Integer i = Integer.parseInt(tokens[1]);
+                    int i = Integer.parseInt(tokens[1]);
                     t.unmarkedTask(i);
             } else {
                 t.addTask(type);
