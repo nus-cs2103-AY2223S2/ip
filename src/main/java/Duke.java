@@ -6,26 +6,66 @@ public class Duke {
     public static void main(String[] args) {
         Scanner s = new Scanner(System.in);
         List ls = new ArrayList<>();
+        Task t = new Task();
 
         System.out.println("Hello from Bench Monster");
         System.out.println("What can I do for you?");
-        String type = s.nextLine();
+
 
         while (true) {
-            if (type.equals("bye")) {
+            String type = s.nextLine();
+            String[] tokens = type.split(" ");
+            if (tokens[0].equals("bye")) {
                 System.out.println("Bye. Hope to see you again soon!");
                 break;
-            } else if(type.equals("list")) {
-                for(int i=0; i < ls.size(); i++) {
-                    int index = i + 1;
-                    System.out.println(index + ". " + ls.get(i));
-                }
-                type = s.nextLine();
+            } else if (tokens[0].equals("list")) {
+                t.showList();
+            } else if(tokens[0].equals("mark")) {
+                    Integer i = Integer.parseInt(tokens[1]);
+                    t.markTask(i);
+            } else if(tokens[0].equals("unmark")) {
+                    Integer i = Integer.parseInt(tokens[1]);
+                    t.unmarkedTask(i);
             } else {
-                System.out.println("added: " + type);
-                ls.add(type);
-                type = s.nextLine();
+                t.addTask(type);
+            }
+
             }
         }
-    }
 }//class
+
+class Task {
+    String s;
+    List<String> task = new ArrayList<>();
+    List<String> marked = new ArrayList<>();
+
+
+    public void showList() {
+        System.out.println("Here are the tasks in your list");
+        for (int i = 0; i < task.size(); i++) {
+            int index = i + 1;
+            System.out.println(index + "." + marked.get(i) + " " + task.get(i));
+        }
+    }
+
+    public void markTask(int i) {
+        int index = i-1;
+        marked.set(index, "[X]");
+        System.out.println("Nice! I've marked this task as done:");
+        System.out.println(marked.get(index) + " " + task.get(index));
+    }
+
+    public void unmarkedTask(int i) {
+        int index = i-1;
+        marked.set(index, "[ ]");
+        System.out.println("OK, I've marked this task as not done yet:");
+        System.out.println(marked.get(index) + " " + task.get(index));
+    }
+
+    public void addTask(String s) {
+        task.add(s);
+        marked.add("[ ]");
+        System.out.println("added: " + s);
+    }
+}
+
