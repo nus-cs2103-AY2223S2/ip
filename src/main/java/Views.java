@@ -3,6 +3,7 @@ public enum Views {
     WELCOME_STRING("Hello! I'm Duke\n      What can I do for grades?"),
     END_STRING("Bye. Hope to see you again soon!"),
     EMPTY_LIST_STRING("Hey, the list is empty!"),
+    CLEAR_LIST_STRING("Ive cleared the list!"),
     MARK_DONE_STRING("Nice! I've marked this task as done\n       "),
     UNMARK_DONE_STRING("OK, I've marked this task as not done yet\n       "),
     DELETE_DONE_STRING("Noted. I've removed this task:\n       "),

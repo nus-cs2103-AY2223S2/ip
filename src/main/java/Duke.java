@@ -33,6 +33,10 @@ public class Duke {
                             printer(toPrint.substring(0, toPrint.length() - 7));
                         }
                         break;
+                    case "clear":
+                        tasksList.clear();
+                        printer(Views.CLEAR_LIST_STRING.eng());
+                        break;
                     case "bye":
                         end = true;
                         printer(Views.END_STRING.eng());
