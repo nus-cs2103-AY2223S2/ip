@@ -1,4 +1,4 @@
-package domain.eventloop;
+package domain.models.core;
 
 /**
  * An interface for objects that have a id, so that in a sense they could be

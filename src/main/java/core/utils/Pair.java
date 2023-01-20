@@ -1,4 +1,4 @@
-package utils;
+package core.utils;
 
 /**
  * A Pair of objects.

@@ -1,3 +1,5 @@
+import presentation.controllers.DukeEventLoop;
+
 import java.util.Scanner;
 
 public class Duke {

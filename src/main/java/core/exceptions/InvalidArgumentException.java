@@ -1,4 +1,4 @@
-package exceptions;
+package core.exceptions;
 
 /**
  * The exception thrown when the argument does not match the expected.

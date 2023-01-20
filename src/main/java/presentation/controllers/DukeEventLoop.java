@@ -1,4 +1,4 @@
-package presentation;
+package presentation.controllers;
 
 import domain.models.core.EventLoop;
 import domain.models.core.Executable;
@@ -21,6 +21,7 @@ public class DukeEventLoop extends EventLoop {
     public static DukeEventLoop createEventLoop(Scanner scanner) {
         final NestableExecutableObject executable =
                 new NestableExecutableObject();
+
         final ByeUsecase bye = new ByeUsecase();
         bye.register(executable);
         // final EchoUsecase echo = new EchoUsecase();

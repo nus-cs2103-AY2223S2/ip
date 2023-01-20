@@ -1,30 +1,33 @@
-package domain.features.taskmanager;
+package domain.usecases;
 import core.exceptions.InvalidArgumentException;
-import domain.eventloop.*;
 import core.utils.fp.ThrowingFunction;
-import domain.features.taskmanager.models.Deadline;
-import domain.features.taskmanager.models.Event;
-import domain.features.taskmanager.models.Task;
-import domain.features.taskmanager.models.ToDo;
+import domain.models.core.ExecutableRegisterable;
+import domain.models.core.ExitStatus;
+import domain.models.core.IdentifiableExecutable;
+import domain.models.core.NestableExecutableObject;
+import domain.models.taskmanager.Deadline;
+import domain.models.taskmanager.Event;
+import domain.models.taskmanager.Task;
+import domain.models.taskmanager.ToDo;
 
 import java.util.ArrayList;
 
 /**
  * A class for managing tasks.
  */
-public class TaskManager implements ExecutableRegisterable {
+public class TaskManagerUsecase implements ExecutableRegisterable {
     /**
-     * Creates a new TaskManager with the todos set to items.
-     * @param items the todos that this TaskManager starts with.
+     * Creates a new TaskManagerUsecase with the todos set to items.
+     * @param items the todos that this TaskManagerUsecase starts with.
      */
-    public TaskManager(ArrayList<Task> items) {
+    public TaskManagerUsecase(ArrayList<Task> items) {
         this.tasks = items;
     }
 
     /**
-     * Creates a new TaskManager with the todos set to empty.
+     * Creates a new TaskManagerUsecase with the todos set to empty.
      */
-    public TaskManager() {
+    public TaskManagerUsecase() {
         this(new ArrayList<>());
     }
 

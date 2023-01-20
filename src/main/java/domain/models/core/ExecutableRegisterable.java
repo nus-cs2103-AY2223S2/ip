@@ -1,4 +1,4 @@
-package domain.eventloop;
+package domain.models.core;
 
 /**
  * The interface that can registers its executables to the event loop.

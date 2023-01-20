@@ -1,14 +1,14 @@
-package domain.features;
+package domain.usecases;
 
-import domain.eventloop.ExecutableRegisterable;
-import domain.eventloop.ExitStatus;
-import domain.eventloop.IdentifiableExecutable;
-import domain.eventloop.NestableExecutableObject;
+import domain.models.core.ExecutableRegisterable;
+import domain.models.core.ExitStatus;
+import domain.models.core.IdentifiableExecutable;
+import domain.models.core.NestableExecutableObject;
 
-public class Bye implements IdentifiableExecutable, ExecutableRegisterable {
+public class ByeUsecase implements IdentifiableExecutable, ExecutableRegisterable {
     @Override
     public ExitStatus execute(String[] tokens) {
-        System.out.println("Bye! See you next time:-)");
+        System.out.println("ByeUsecase! See you next time:-)");
         return ExitStatus.terminate;
     }
 

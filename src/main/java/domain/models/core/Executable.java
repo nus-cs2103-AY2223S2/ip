@@ -1,4 +1,4 @@
-package domain.eventloop;
+package domain.models.core;
 
 /**
  * The interface for objects that can be run.

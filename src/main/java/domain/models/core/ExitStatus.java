@@ -1,4 +1,4 @@
-package domain.eventloop;
+package domain.models.core;
 
 /**
  * This is the return type of executing any command. It should signify what the

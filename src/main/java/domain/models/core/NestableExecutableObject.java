@@ -1,4 +1,4 @@
-package domain.eventloop;
+package domain.models.core;
 import core.utils.TokenUtilities;
 
 import java.util.*;
