@@ -2,12 +2,23 @@ ____________________________________________________________
 Hello from Duke
 What can I do for you?
 ____________________________________________________________
+OOPS!!! I'm sorry, but I don't know what that means.
+____________________________________________________________
+OOPS!!! The description of a todo cannot be empty.
+____________________________________________________________
 Got it. I've added this task:
 [T][ ] read book
 Now I have 1 tasks in the list.
 ____________________________________________________________
+OOPS!!! The description of a list cannot have other parameters
+____________________________________________________________
 1. [T][ ] read book
 
+____________________________________________________________
+OOPS!!! The description of a deadline cannot be empty.
+____________________________________________________________
+OOPS!!! Looks like someone forget his/her deadline :)
+ Please use /by to indicate deadline
 ____________________________________________________________
 Got it. I've added this task:
 [D][ ] return book (by: Sunday 2pm)
@@ -16,6 +27,14 @@ ____________________________________________________________
 1. [T][ ] read book
 2. [D][ ] return book (by: Sunday 2pm)
 
+____________________________________________________________
+OOPS!!! The description of a event cannot be empty.
+____________________________________________________________
+OOPS!!! Looks like someone forget when the event begins :)
+ Please use /from to indicate begin time
+____________________________________________________________
+OOPS!!! Looks like someone forget when the event ends :)
+ Please use /to to indicate end time
 ____________________________________________________________
 Got it. I've added this task:
 [E][ ] programming study (from: 5pm to: 9pm)
@@ -28,6 +47,7 @@ ____________________________________________________________
 ____________________________________________________________
 Nice! I've marked this task as done:
 [T][X] read book
+OOPS!!! I'm sorry, but I don't know what that means.
 ____________________________________________________________
 1. [T][X] read book
 2. [D][ ] return book (by: Sunday 2pm)
@@ -36,6 +56,7 @@ ____________________________________________________________
 ____________________________________________________________
 Nice! I've marked this task as done:
 [D][X] return book (by: Sunday 2pm)
+OOPS!!! I'm sorry, but I don't know what that means.
 ____________________________________________________________
 1. [T][X] read book
 2. [D][X] return book (by: Sunday 2pm)
@@ -44,6 +65,7 @@ ____________________________________________________________
 ____________________________________________________________
 OK, I've marked this task as not done yet:
 [D][ ] return book (by: Sunday 2pm)
+OOPS!!! I'm sorry, but I don't know what that means.
 ____________________________________________________________
 1. [T][X] read book
 2. [D][ ] return book (by: Sunday 2pm)

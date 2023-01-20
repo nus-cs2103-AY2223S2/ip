@@ -5,32 +5,17 @@ public class Task {
         this.isDone = false;
     }
 
-    public Task createNewTask(String type, String task) {
+    public Task createNewTask(String type, String task) throws DukeExceptions{
         if (type.equals("todo")) {
-            return todo(task);
+            return new Todo(task);
         } else if (type.equals("deadline")) {
-            return deadline(task);
+            return new Deadline(task);
         } else if (type.equals("event")) {
-            return event(task);
+            return new Event(task);
         } else {
             System.out.println("unknown command! Please try again.");
             return null;
         }
-    }
-
-    private Task todo(String task) {
-        Task todo_task = new Todo(task);
-        return todo_task;
-    }
-
-    private Task deadline(String task) {
-        Task deadline_task = new Deadline(task);
-        return deadline_task;
-    }
-
-    private Task event(String task) {
-        Task event_task = new Event(task);
-        return event_task;
     }
 
     public void markTask() {
@@ -61,9 +46,12 @@ public class Task {
         private String task;
         private String deadline;
 
-        public Deadline(String task) {
+        public Deadline(String task) throws DukeExceptions {
             super();
             String[] commands = task.split(" /by ");
+            if (commands.length == 1) {
+                throw new DukeExceptions("OOPS!!! Looks like someone forget his/her deadline :)\n Please use /by to indicate deadline");
+            }
             this.task = commands[0];
             this.deadline = commands[1];
         }
@@ -80,11 +68,17 @@ public class Task {
         private String from;
         private String to;
 
-        public Event(String task) {
+        public Event(String task) throws DukeExceptions {
             super();
             String[] commands = task.split(" /from ");
+            if (commands.length == 1) {
+                throw new DukeExceptions("OOPS!!! Looks like someone forget when the event begins :)\n Please use /from to indicate begin time");
+            }
             this.task = commands[0];
             String[] from_to_timeline = commands[1].split(" /to ");
+            if (from_to_timeline.length == 1) {
+                throw new DukeExceptions("OOPS!!! Looks like someone forget when the event ends :)\n Please use /to to indicate end time");
+            }
             this.from = from_to_timeline[0];
             this.to = from_to_timeline[1];
         }

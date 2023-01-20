@@ -1,6 +1,8 @@
 import java.util.Scanner;
 
 public class Duke {
+
+
     public static void main(String[] args) {
 
 
@@ -13,7 +15,11 @@ public class Duke {
         String input = scanner.nextLine();
 
         while (!input.equals("bye")) {
-            bot.execute(input);
+            try {
+                bot.execute(input);
+            } catch (DukeExceptions error) {
+                System.out.println(error.getErrorMessage());
+            }
             endCommand();
             input = scanner.nextLine(); //ready for next input
         }

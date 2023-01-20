@@ -1,7 +1,15 @@
+tola
+todo
 todo read book
+list appear
 list
+deadline
+deadline return book
 deadline return book /by Sunday 2pm
 list
+event
+event programming study
+event programming study /from 5pm
 event programming study /from 5pm /to 9pm
 list
 mark 1

@@ -7,9 +7,10 @@ public class TodoList {
         this.todo_list = new ArrayList<>(100);
     }
 
-    public void add(String type, String task) {
+    public void add(String type, String task) throws DukeExceptions{
         Task taskObject = new Task();
         Task newTask = taskObject.createNewTask(type, task);
+        System.out.println("Got it. I've added this task:");
         todo_list.add(newTask);
         System.out.println(newTask);
     }
