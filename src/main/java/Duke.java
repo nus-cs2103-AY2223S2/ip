@@ -74,11 +74,13 @@ public class Duke {
 
                 //normal case: create Task and add Task to list
             } else {
+                //Check for empty task description exception
+
 
                 //if the task is a todo
                 if (input.length() > 4 && input.substring(0, 4).equals("todo")) {
 
-                    Task t  = new Todo(input);
+                    Task t  = new Todo(input.substring(5));
                     list.add(t);
                     System.out.println("Got it. I've added this task: \n"
                             + t.toString()
@@ -107,12 +109,22 @@ public class Duke {
                             + "\nNow you have " + list.size() + " tasks in the list.");
                 } else {
 
-                    System.out.println("☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
-//                    Task t = new Task(input);
-//                    list.add(t);
-//                    System.out.println("Got it. I've added this task: \n"
-//                            + t.toString()
-//                            + "\nNow you have " + list.size() + " tasks in the list.");
+                    //Exception for tasks without description
+                    try {
+                        if ((input.length() == 4 && input.substring(0).equals("todo"))
+                                || (input.length() == 8 && input.substring(0).equals("deadline"))
+                                || (input.length() == 5 && input.substring(0).equals("event"))) {
+                            throw new EmptyDescriptionException();
+                            //Exception for tasks without their type (event, etc) stated
+                        } else {
+                            throw new InvalidTaskException();
+                        }
+
+                    } catch(EmptyDescriptionException e) {
+                        System.out.println(e.getMessage());
+                    } catch (InvalidTaskException e) {
+                        System.out.println(e.getMessage());
+                    }
                 }
 
                 input = myObj.nextLine();
@@ -129,3 +141,5 @@ public class Duke {
 //        System.out.println("Hello from\n" + logo);
     }
 }
+
+
