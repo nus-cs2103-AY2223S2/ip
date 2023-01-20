@@ -1,0 +1,7 @@
+todo task 1
+deadline task 2 /by sun
+event task 3 /from sun /to mon
+list
+mark 2
+unmark 2
+bye
