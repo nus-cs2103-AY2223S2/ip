@@ -34,13 +34,24 @@ public class Duke {
                         tasks.get(index).toggleDone();
                         System.out.println("Toggled state:\n [" + tasks.get(index).getDoness() + "] " + tasks.get(index).desc);
                         break;
+                    case ("delete"):
+                        try {
+                            body = body.substring(1);
+                            int i = Integer.parseInt(body) - 1;
+                            printDelete(tasks.get(i));
+                            tasks.remove(i);
+                            break;
+                        } catch (Exception e) {
+                            System.out.println("ERROR: input a number to delete or item does not exist");
+                        }
+                        break;
                     case ("todo"):
                         try {
                             body = body.substring(1);
                             ToDo curr = new ToDo(body, false);
                             tasks.add(curr);
                             printNotif(curr);
-                        } catch (Exception e){
+                        } catch (Exception e) {
                             System.out.println("Please input something TO DO????!!");
                         }
                         break;
@@ -80,6 +91,14 @@ public class Duke {
         } finally {
             System.out.println("Goodbye!");
         }
+    }
+
+    private static void printDelete(Task task) {
+        System.out.println("____________________________________________________________");
+        System.out.println("SENDING TASK TO THE VOID (DELETING)");
+        System.out.println("\t" + task);
+        System.out.println("You currently have " + tasks.size() + " tracked tasks");
+        System.out.println("____________________________________________________________");
     }
 
     private static void printNotif(Task curr) {
