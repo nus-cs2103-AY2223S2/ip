@@ -8,6 +8,12 @@ public class Event extends Task {
         this.to = to.replace("/to", "").trim();
     }
 
+    Event(String title, String from, String to, boolean done) throws DukeException {
+        super(title, done);
+        this.from = from.replace("/from", "").trim();
+        this.to = to.replace("/to", "").trim();
+    }
+
     @Override
     public String toString() {
         return "[E]" + super.toString() + " (from: " + from + " to: " + to + ")";

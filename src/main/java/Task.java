@@ -9,6 +9,14 @@ public abstract class Task {
         this.title = title.trim();
     }
 
+    Task(String title, boolean done) throws DukeException {
+        if (title.trim().length() == 0) {
+            throw new DukeException(Views.EMPTY_ERR_STRING.eng());
+        }
+        this.title = title.trim();
+        this.done = done;
+    }
+
     void markAsDone() {
         this.done = true;
     }
