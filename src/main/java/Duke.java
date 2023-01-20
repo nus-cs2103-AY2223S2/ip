@@ -45,10 +45,28 @@ public class Duke {
                     System.out.println(lineBreak + "Unchecked the following task:\n" + updatedTask);
                 }
             }
-            else {
+            else if (firstWord.equals("deadline")) {
                 index++;
                 String remaining = sc.nextLine();
-                Task task = new Task(index, firstWord + remaining, false);
+                String[] parts = remaining.split("/");
+                Deadline task = new Deadline(index, firstWord + remaining, false, parts[1]);
+                tasks.add(task);
+                System.out.println(lineBreak + "Successfully added the following task:\n" + task);
+            }
+
+            else if (firstWord.equals("event")) {
+                index++;
+                String remaining = sc.nextLine();
+                String[] parts = remaining.split("/");
+                Event task = new Event(index, firstWord + remaining, false, parts[1], parts[2]);
+                tasks.add(task);
+                System.out.println(lineBreak + "Successfully added the following task:\n" + task);
+            }
+
+            else if (firstWord.equals("todo")) {
+                index++;
+                String remaining = sc.nextLine();
+                Todo task = new Todo(index, firstWord + remaining, false);
                 tasks.add(task);
                 System.out.println(lineBreak + "Successfully added the following task:\n" + task);
             }
@@ -57,17 +75,17 @@ public class Duke {
 }
 
 class Task {
-    private final int number;
-    private final String name;
-    private final String status;
+    protected final int number;
+    protected final String name;
+    protected final String status;
 
     public Task(int number, String name, boolean status) {
         this.number = number;
         this.name = name;
         if (status) {
-            this.status = "[ ]";
-        } else {
             this.status = "[X]";
+        } else {
+            this.status = "[ ]";
         }
     }
 
@@ -83,3 +101,75 @@ class Task {
         return new Task(number, name, false);
     }
 }
+
+class Deadline extends Task {
+    protected final String deadline;
+
+    Deadline (int number, String name, boolean status, String deadline) {
+        super(number, name, status);
+        this.deadline = deadline;
+    }
+
+    public String toString() {
+        return number + ".[D]" + status + " " + name + "(" + deadline + ")";
+    }
+
+    public Deadline mark() {
+        return new Deadline(number, name, true, deadline);
+    }
+
+    public Deadline unmark() {
+        return new Deadline(number, name, false, deadline);
+    }
+}
+
+class Event extends Task {
+    protected final String from;
+    protected final String to;
+
+    Event(int number, String name, boolean status, String from, String to) {
+        super(number, name, status);
+        this.from = from;
+        this.to = to;
+    }
+
+    public String toString() {
+        return number + ".[E]" + status + " " + name + "(" + from + to + ")";
+    }
+
+    public Event mark() {
+        return new Event(number, name, true, from, to);
+    }
+
+    public Event unmark() {
+        return new Event(number, name, false, from, to);
+    }
+}
+
+class Todo extends Task {
+    Todo(int number, String name, boolean status) {
+        super(number, name, status);
+    }
+
+    public String toString() {
+        return number + ".[T]" + status + " " + name;
+    }
+
+    public Todo mark() {
+        return new Todo(number, name, true);
+    }
+
+    public Todo unmark() {
+        return new Todo(number, name, false);
+    }
+}
+
+
+
+
+
+
+
+
+
+
