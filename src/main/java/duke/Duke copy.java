@@ -1,3 +1,4 @@
+package duke;
 // previous copy of Duke as a backup
 
 /*import java.io.File;

@@ -1,5 +1,9 @@
+package duke;
 import java.util.ArrayList;
 import java.util.Scanner;
+
+import duke.exception.DukeException;
+import task.Task;
 
 public class TaskList {
     private ArrayList<Task> taskStore = new ArrayList<>(100);
