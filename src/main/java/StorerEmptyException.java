@@ -1,5 +1,5 @@
 public class StorerEmptyException extends DukeException {
     public StorerEmptyException() {
-        super("☹ OOPS!!! I'm sorry, you cannot delete that which is not there :-(");
+        super("☹ OOPS!!! I'm sorry, your list is empty :-(");
     }
 }

@@ -6,122 +6,81 @@ public class Duke {
         Scanner sc = new Scanner(System.in);
         String logo = "\n____________________________________________________________\n";
 
-        System.out.println(logo + "Hello! I'm GPT-1!");
-        System.out.println("What can I do for you?" + logo);
+
+        say("Hello! I'm GPT0.01!\nWhat can I do for you?", logo);
 
         ArrayList<Task> storer = new ArrayList<>();
         while (!echo.equals("bye")) {
-            echo = sc.nextLine();
-            String[] commands = echo.split(" ");
-            if (echo.equals("list")) {
-                System.out.println(logo);
-                for (int i = 1; i <= storer.size(); i++) {
-                    int j = i - 1;
-                    System.out.println(i + ". " + storer.get(j));
-                }
-                System.out.println(logo);
+            try {
+                echo = sc.nextLine();
+                String[] commands = echo.split(" ");
+                if (echo.equals("list")) {
 
-            } else if (commands[0].equals("mark")) {
-                int num = Integer.valueOf(commands[1]);
-                storer.get(num - 1).mark();
-                System.out.println("Nice! I've marked this task as done:");
-                System.out.println(storer.get(num - 1));
+                    String concat = "";
+                    for (int i = 1; i <= storer.size(); i++) {
+                        int j = i - 1;
+                        concat = concat + "\n" + i + ". " + storer.get(j);
 
-            } else {
-                Task taskNew;
+                    }
 
+                    if (concat == "") {
+                        throw new StorerEmptyException();
+                    } else {
+                        say(concat, logo);
+                    }
 
 
+                } else if (commands[0].equals("mark")) {
+                    int num = Integer.valueOf(commands[1]);
+                    storer.get(num - 1).mark();
+                    say(String.format(
+                            "Nice! I've marked this task as done:\n %s", storer.get(num - 1)), logo);
 
-                if (commands[0].equals("todo")) {
+                } else {
+                    Task taskNew;
 
-                    try {
+                    if (commands[0].equals("todo")) {
 
                         if (commands.length == 1) {
                             throw new NoArgsException("todo");
                         } else {
                             String description = echo.substring(5);
-
                             addTask(new Todos(description), storer, logo);
                         }
 
-                    } catch (DukeException err) {
-                        System.out.println(err.getMessage());
-                    }
+                    } else if (commands[0].equals("deadline")) {
 
-
-
-
-                } else if (commands[0].equals("deadline")) {
-                    try {
                         if (commands.length == 1) {
-
                             throw new NoArgsException("deadline");
                         } else {
-
-
                             String[] queries = echo.split(" /");
-
-                            try {
-
-                                if (queries.length < 2) {
-                                    throw new IncompleteException();
-                                } else {
-                                    String description = queries[0].substring(9);
-                                    String deadline = queries[1];
-
-                                    addTask(new Deadlines(description, deadline), storer, logo);
-                                }
-                            } catch (IncompleteException err) {
-                                System.out.println(err.getMessage());
+                            if (queries.length < 2) {
+                                throw new IncompleteException();
+                            } else {
+                                String description = queries[0].substring(9);
+                                String deadline = queries[1];
+                                addTask(new Deadlines(description, deadline), storer, logo);
                             }
-
-
                         }
-
-                    } catch (DukeException err) {
-                        System.out.println(err.getMessage());
-                    }
-
-
-
-
-                } else if (commands[0].equals("event")) {
-
-                    try {
+                    } else if (commands[0].equals("event")) {
                         if (commands.length == 1) {
                             throw new NoArgsException("event");
                         } else {
-
-                            try {
-                                String[] queries = echo.split(" /");
-                                if (queries.length < 3){
-                                    throw new IncompleteException();
-                                } else {
-                                    String description = queries[0].substring(6);
-                                    String from = queries[1];
-                                    String to = queries[2];
-                                    addTask(new Events(description, from, to), storer, logo);
-                                }
-
-
-                            } catch (IncompleteException err) {
-                                System.out.println(err.getMessage());
+                            String[] queries = echo.split(" /");
+                            if (queries.length < 3){
+                                throw new IncompleteException();
+                            } else {
+                                String description = queries[0].substring(6);
+                                String from = queries[1];
+                                String to = queries[2];
+                                addTask(new Events(description, from, to), storer, logo);
                             }
-
                         }
 
-                    } catch (DukeException err) {
-                        System.out.println(err.getMessage());
-                    }
+                    } else if (commands[0].equals("delete")) {
 
-
-
-                } else if (commands[0].equals("delete")) {
-                    try {
                         if (commands.length == 1) {
                             throw new NoArgsException("delete command");
-
                         } else if (commands.length > 1 && !commands[1].matches("\\d")) {
                             throw new DukeException("☹☹☹☹☹☹ OOPS!!! Provide a number!");
                         } else if (storer.size() == 0) {
@@ -129,45 +88,38 @@ public class Duke {
                         } else {
                             int index = Integer.valueOf(commands[1]);
                             Task E = storer.remove(index - 1);
-                            System.out.println(logo + "Noted. I've removed this task:");
-                            System.out.println(E);
-                            System.out.println("Now you have " + storer.size() + " tasks in the list." + logo);
+                            String speech = "Noted. I've removed this task:\n" +
+                                    E + "\n Now you have " + storer.size() + " tasks in the list.";
+                            say(speech, logo);
+
                         }
+                    } else if (echo.equals("bye")){
+                        break;
 
-                    } catch (Exception err) {
-                        System.out.println(err.getMessage());
-                    }
-
-                } else if (echo.equals("bye")){
-                    break;
-
-                } else {
-                    try {
+                    } else {
                         throw new EmptyException();
-                    } catch (DukeException err) {
-                         System.out.println(err.getMessage());
+
                     }
                 }
-
-
-
+            } catch (Exception err) {
+                say(err.getMessage(), logo);
             }
 
 
-
-
-
         }
-        System.out.println(logo + "Bye. Hope to see you again soon!" + logo);
+        say("Bye. Hope to see you again soon!", logo);
     }
 
     static void addTask(Task taskNew, ArrayList<Task> storer, String logo) {
-        System.out.println(logo);
-        System.out.println("Got it. I've added this task:");
         storer.add(taskNew);
-        System.out.println(taskNew);
-        System.out.println(String.format("Now you have %s tasks in the list.", storer.size()));
-        System.out.println(logo);
+        say("Got it. I've added this task:\n" + taskNew +
+                String.format("\nNow you have %s tasks in the list.", storer.size()), logo);
+
+
+    }
+
+    static void say(String str, String logo) {
+        System.out.println(logo + str + logo);
     }
 }
 
