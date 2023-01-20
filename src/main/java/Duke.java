@@ -54,7 +54,7 @@ public class Duke {
         System.out.println(toPrint);
     }
 
-    private static boolean commandHandler(String rawCommand) {
+    private static boolean commandHandler(String rawCommand) throws DukeException {
         int commandIndex = rawCommand.indexOf(' ');
         String command;
         String arguments;
@@ -97,8 +97,7 @@ public class Duke {
                 addToList(arguments.substring(0, firstSlashIndex - 1), TaskType.EVENT, start, end);
                 break;
             default:
-                System.out.println("Unrecognized Command");
-                break;
+                throw new IlegalCommandException(Commands.UNRECOGNIZED);
         }
         return true;
     }
@@ -120,7 +119,11 @@ public class Duke {
         while (promptAgain) {
             System.out.println("Enter your prompt below:");
             String command = sc.nextLine();
-            promptAgain = commandHandler(command);
+            try {
+                promptAgain = commandHandler(command);
+            } catch (DukeException e) {
+                System.out.println(e.toString());
+            }
             printLine();
         }
     }
