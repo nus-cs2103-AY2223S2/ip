@@ -8,11 +8,13 @@ public class Duke {
         private static String greetingsFromSkittles = "Hello I'm Skittles\nWhat can I do for you?\n";
         private static String adiosFromSkittles = "Bye. Hope to see you again soon!";
 
-        //assume no more than 100 tasks
-        static Task[] lstOfTasks = new Task[100];
+        private static String gotItMessage = "Got it. I've added this task:\n";
 
         //keeping track of number of things in list
         static int numOfThings = 0;
+        private static String howLongListNowMessage = "\nNow you have " + numOfThings + " tasks in the list";
+        //assume no more than 100 tasks
+        static Task[] lstOfTasks = new Task[100];
 
         //method to greet
         public static void hello() {
@@ -36,8 +38,7 @@ public class Duke {
             for (Task thingInList : lstOfTasks) {
                 if (thingInList != null) {
                     isItMT = true;
-                    txtToDisplay.append("\n").append(thingInList.getRank()).append(".").append(thingInList.isCompleted()).
-                            append(thingInList.getName());
+                    txtToDisplay.append("\n").append(thingInList.getRank()).append(".").append(thingInList.toString());
                 }
             }
             if (!isItMT) {
@@ -73,6 +74,27 @@ public class Duke {
             }
             System.out.println(txt);
         }
+
+        public static void addAToDo(String todo) {
+            ToDo mustDo = new ToDo(todo);
+            lstOfTasks[numOfThings] = mustDo;
+            numOfThings += 1;
+            System.out.println(gotItMessage + mustDo.toString() + howLongListNowMessage);
+        }
+
+        public static void addTimeSensitive(String name, String doByWhen) {
+            Deadline dateline = new Deadline(name, doByWhen);
+            lstOfTasks[numOfThings] = dateline;
+            numOfThings += 1;
+            System.out.println(gotItMessage + dateline.toString() + howLongListNowMessage);
+        }
+
+        public static void addAnEvent(String name, String startTime, String endTime) {
+            Event suitAndTie = new Event(name, startTime, endTime);
+            lstOfTasks[numOfThings] = suitAndTie;
+            numOfThings += 1;
+            System.out.println(gotItMessage + suitAndTie.toString() + howLongListNowMessage);
+        }
     public static void main(String[] args) {
         //start by greeting
         hello();
@@ -92,9 +114,22 @@ public class Duke {
 
                 } else if (frontWord.equals("unmark")) {
                     undoCompleteTask(userTyped.substring(userTyped.length() - 1));
+                } else if (frontWord.equals("todo")) {
+                    String actualTask = userTyped.split(" ", 2)[1];
+                    addAToDo(actualTask);
+                } else if (frontWord.equals("deadline")) {
+                    String actualDeadlineTask = userTyped.split(" ", 2)[1].split(" /by ",2)[0];
+                    String byWhen = userTyped.split(" ", 2)[1].split(" /by ",2)[1];
+                    addTimeSensitive(actualDeadlineTask,byWhen);
+                } else if (frontWord.equals("event")) {
+                    String actualEvent = userTyped.split(" ",2)[1].split(" /from ", 2)[0];
+                    String startTime =  userTyped.split(" ",2)[1].split(" /from ", 2)[1]
+                                        .split(" /to ",2)[0];
+                    String endTime =  userTyped.split(" ",2)[1].split(" /from ", 2)[1]
+                            .split(" /to ",2)[1];
+                    addAnEvent(actualEvent,startTime,endTime);
                 } else {
-                    //else the user is just adding another thing to list
-                    addStufftoLst(userTyped);
+                    System.out.println("Try again fat fingers!");
                 }
             }
         }
