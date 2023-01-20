@@ -22,7 +22,7 @@ public class Duke {
             Scanner sc = new Scanner(System.in);
             input = sc.nextLine();
             System.out.println("-----------------------------------------\n" +
-                                input + "\n"
+                                input + "\n" +
                                 "-----------------------------------------\n");
         }
 
