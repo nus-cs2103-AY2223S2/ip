@@ -1,10 +1,10 @@
-package features.taskmanager;
+package domain.features.taskmanager.models;
 
 /**
  * This shall resemble a Task. The reason that no modifiers was added was
  * because this class shall be package private.
  */
-abstract class Task {
+public abstract class Task {
     /**
      * Creates a new Task instance.
      * @param name the name of the list item.

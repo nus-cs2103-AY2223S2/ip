@@ -1,4 +1,4 @@
-package eventloop;
+package domain.eventloop;
 
 /**
  * This shall serve as the base for implementing an event loop. An event loop

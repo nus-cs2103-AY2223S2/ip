@@ -1,8 +1,8 @@
-package features;
-import eventloop.Executable;
-import eventloop.ExecutableRegisterable;
-import eventloop.ExitStatus;
-import eventloop.NestableExecutableObject;
+package domain.features;
+import domain.eventloop.Executable;
+import domain.eventloop.ExecutableRegisterable;
+import domain.eventloop.ExitStatus;
+import domain.eventloop.NestableExecutableObject;
 
 public class UnknownCommand implements Executable, ExecutableRegisterable {
     @Override

@@ -1,5 +1,5 @@
-package eventloop;
-import utils.TokenUtilities;
+package domain.eventloop;
+import core.utils.TokenUtilities;
 
 import java.util.*;
 

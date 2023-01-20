@@ -1,4 +1,4 @@
-package eventloop;
+package domain.eventloop;
 
 /**
  * The interface for objects that can be run.

@@ -1,9 +1,9 @@
-package features;
+package domain.features;
 
-import eventloop.ExecutableRegisterable;
-import eventloop.ExitStatus;
-import eventloop.IdentifiableExecutable;
-import eventloop.NestableExecutableObject;
+import domain.eventloop.ExecutableRegisterable;
+import domain.eventloop.ExitStatus;
+import domain.eventloop.IdentifiableExecutable;
+import domain.eventloop.NestableExecutableObject;
 
 public class Bye implements IdentifiableExecutable, ExecutableRegisterable {
     @Override

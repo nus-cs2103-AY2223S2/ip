@@ -1,9 +1,11 @@
-import eventloop.EventLoop;
-import eventloop.Executable;
-import eventloop.NestableExecutableObject;
-import features.Bye;
-import features.taskmanager.TaskManager;
-import features.UnknownCommand;
+package presentation;
+
+import domain.models.core.EventLoop;
+import domain.models.core.Executable;
+import domain.models.core.NestableExecutableObject;
+import domain.usecases.ByeUsecase;
+import domain.usecases.TaskManagerUsecase;
+import domain.usecases.UnknownCommandUsecase;
 
 import java.util.Scanner;
 
@@ -16,16 +18,16 @@ public class DukeEventLoop extends EventLoop {
         this.scanner = scanner;
     }
 
-    static DukeEventLoop createEventLoop(Scanner scanner) {
+    public static DukeEventLoop createEventLoop(Scanner scanner) {
         final NestableExecutableObject executable =
                 new NestableExecutableObject();
-        final Bye bye = new Bye();
+        final ByeUsecase bye = new ByeUsecase();
         bye.register(executable);
-        // final Echo echo = new Echo();
+        // final EchoUsecase echo = new EchoUsecase();
         // echo.register(executable);
-        final TaskManager manager = new TaskManager();
+        final TaskManagerUsecase manager = new TaskManagerUsecase();
         manager.register(executable);
-        final UnknownCommand unknown = new UnknownCommand();
+        final UnknownCommandUsecase unknown = new UnknownCommandUsecase();
         unknown.register(executable);
         return new DukeEventLoop(scanner, executable);
     }

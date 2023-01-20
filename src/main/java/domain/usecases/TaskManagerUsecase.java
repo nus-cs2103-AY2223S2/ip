@@ -1,7 +1,11 @@
-package features.taskmanager;
-import exceptions.InvalidArgumentException;
-import eventloop.*;
-import utils.fp.ThrowingFunction;
+package domain.features.taskmanager;
+import core.exceptions.InvalidArgumentException;
+import domain.eventloop.*;
+import core.utils.fp.ThrowingFunction;
+import domain.features.taskmanager.models.Deadline;
+import domain.features.taskmanager.models.Event;
+import domain.features.taskmanager.models.Task;
+import domain.features.taskmanager.models.ToDo;
 
 import java.util.ArrayList;
 

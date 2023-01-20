@@ -1,4 +1,4 @@
-package eventloop;
+package domain.eventloop;
 
 /**
  * The interface that can registers its executables to the event loop.

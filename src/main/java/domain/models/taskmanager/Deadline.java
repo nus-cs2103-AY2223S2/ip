@@ -1,7 +1,7 @@
-package features.taskmanager;
-import exceptions.InvalidArgumentException;
-import utils.Pair;
-import utils.TokenUtilities;
+package domain.features.taskmanager.models;
+import core.exceptions.InvalidArgumentException;
+import core.utils.Pair;
+import core.utils.TokenUtilities;
 import java.util.Map;
 import java.util.Set;
 
@@ -11,7 +11,7 @@ import java.util.Set;
  * package private only. Therefore, anything that's related to this task
  * manager shall remain in this task manager.
  */
-class Deadline extends Task {
+public class Deadline extends Task {
     /**
      * Creates a new deadline object whose isComplete is set to false.
      * @param name the name of the deadline object.

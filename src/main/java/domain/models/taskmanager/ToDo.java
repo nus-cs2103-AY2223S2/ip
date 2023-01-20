@@ -1,6 +1,6 @@
-package features.taskmanager;
+package domain.features.taskmanager.models;
 
-import exceptions.InvalidArgumentException;
+import core.exceptions.InvalidArgumentException;
 
 /**
  * A ToDo is just a very boring task.
@@ -8,7 +8,7 @@ import exceptions.InvalidArgumentException;
  * package private only. Therefore, anything that's related to this task
  * manager shall remain in this task manager.
  */
-class ToDo extends Task {
+public class ToDo extends Task {
     /**
      * Creates a new todo.
      * @param name the name of the new todo.
