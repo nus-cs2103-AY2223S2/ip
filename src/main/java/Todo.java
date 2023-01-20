@@ -1,11 +1,19 @@
 public class Todo extends Task{
-    public Todo(String taskDescription) {
-        super(taskDescription);
+
+    private static final String taskType = "T";
+
+    public Todo(int isCompleted, String taskDescription) {
+        super(taskDescription,isCompleted);
     }
 
     @Override
     public String toString() {
-        return "[T]" + super.toString();
+        return "["+ taskType +"]" + super.toString();
+    }
+
+    @Override
+    public String formatForSave() {
+        return taskType + "<>" + super.formatForSave();
     }
 }
 

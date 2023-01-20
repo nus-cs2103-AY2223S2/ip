@@ -9,4 +9,8 @@ public class EndTime {
     public String toString() {
         return "(by: " + this.endTime + ")";
     }
+
+    public String formatForSave() {
+        return this.endTime;
+    }
 }

@@ -1,5 +1,8 @@
 import formatters.Formatter;
 
+import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -13,36 +16,43 @@ public class TaskList {
         this.taskList = new ArrayList<>();
     }
 
+
     /**
      * Add a to-do to the task list
-     * @param task a description of the to-do to be added
+     * @param isCompleted completion status of the task 0:not done 1:done
+     * @param taskDescription a description of the to-do to be added
      * @return the to-do generated
      */
-    public Task addTodo(String task) {
-        Task newTask = new Todo(task);
+    public Task addTodo(int isCompleted, String taskDescription) {
+        Task newTask = new Todo(isCompleted, taskDescription);
         this.taskList.add(newTask);
+        saveToDisk();
         return newTask;
     }
 
     /**
      * Add a deadline to the task list
-     * @param task a description of the deadline to be added
+     * @param isCompleted completion status of the task 0:not done 1:done
+     * @param taskDescription a description of the deadline to be added
      * @return the deadline generated
      */
-    public Task addDeadline(String task, String endTime) {
-        Task newTask = new Deadline(task, new EndTime(endTime));
+    public Task addDeadline(int isCompleted, String taskDescription, String endTime) {
+        Task newTask = new Deadline(isCompleted ,taskDescription, new EndTime(endTime));
         this.taskList.add(newTask);
+        saveToDisk();
         return newTask;
     }
 
     /**
      * Add an event to the task list
-     * @param task a description of the event to be added
+     * @param isCompleted completion status of the task 0:not done 1:done
+     * @param taskDescription a description of the event to be added
      * @return the event generated
      */
-    public Task addEvent(String task, String from, String to) {
-        Task newTask = new Event(task, new Duration(from, to));
+    public Task addEvent(int isCompleted, String taskDescription, String from, String to) {
+        Task newTask = new Event(isCompleted ,taskDescription, new Duration(from, to));
         this.taskList.add(newTask);
+        saveToDisk();
         return newTask;
     }
 
@@ -52,8 +62,14 @@ public class TaskList {
      * @return the task
      * @throws IndexOutOfBoundsException when the task index is out of range
      */
-    public Task markTaskAtIndex(int taskIndex) throws IndexOutOfBoundsException{
-        return this.taskList.get(taskIndex-1).mark();
+    public Task markTaskAtIndex(int taskIndex) throws IndexOutOfBoundsException {
+        try {
+            Task task = this.taskList.get(taskIndex-1).mark();
+            saveToDisk();
+            return task;
+        } catch (IndexOutOfBoundsException e) {
+            throw new IndexOutOfBoundsException();
+        }
     }
 
     /**
@@ -63,7 +79,13 @@ public class TaskList {
      * @throws IndexOutOfBoundsException when the task index is out of range
      */
     public Task unmarkTaskAtIndex(int taskIndex) throws IndexOutOfBoundsException {
-        return this.taskList.get(taskIndex-1).unmark();
+        try {
+            Task task = this.taskList.get(taskIndex-1).unmark();
+            saveToDisk();
+            return task;
+        } catch (IndexOutOfBoundsException e) {
+            throw new IndexOutOfBoundsException();
+        }
     }
 
     /**
@@ -73,7 +95,13 @@ public class TaskList {
      * @throws IndexOutOfBoundsException when the task index is out of range
      */
     public Task deleteTaskAtIndex(int taskIndex) throws IndexOutOfBoundsException {
-        return this.taskList.remove(taskIndex-1);
+        try {
+            Task task = this.taskList.remove(taskIndex-1);
+            saveToDisk();
+            return task;
+        } catch (IndexOutOfBoundsException e) {
+            throw new IndexOutOfBoundsException();
+        }
     }
 
     /**
@@ -82,6 +110,20 @@ public class TaskList {
      */
     public int getTotalTasks() {
         return taskList.size();
+    }
+
+    /**
+     * Used to save existing tasks in the list into the hard disk
+     */
+    public void saveToDisk() {
+        try {
+            DataSaver.writeToDisk(this);
+        } catch (IOException e) {
+            Formatter.printFormattedString(
+                    Formatter.space() + "Task cannot be saved to disk, exiting the program will cause data to be lost"
+            );
+        }
+
     }
 
     @Override
@@ -96,5 +138,45 @@ public class TaskList {
             sb.delete(sb.length()-1, sb.length());
         }
         return sb.toString();
+    }
+
+    /**
+     * inner class used to save task list data to the disk
+     */
+    static class DataSaver {
+
+        private static File file;
+
+        /**
+         * Save tasks in the taskList into the hard disk.
+         * @param taskList a TaskList object
+         * @throws IOException if the file exists but is a directory rather than a regular file,
+         * does not exist but cannot be created, or cannot be opened for any other reason
+         */
+        private static void writeToDisk(TaskList taskList) throws IOException {
+            if(file == null){
+                file = new File("SebastianData.txt");
+            }
+            FileWriter fw = new FileWriter(file);
+            fw.write(formatTaskList(taskList));
+            fw.flush();
+            fw.close();
+        }
+
+        /**
+         * Format tasks in the taskList into a String ready to be written into the hard disk
+         * @param l the TaskList object
+         * @return formatted String
+         */
+        private static String formatTaskList(TaskList l) {
+            StringBuilder sb = new StringBuilder();
+            for(Task task: l.taskList){
+                sb.append(task.formatForSave()).append("\n");
+            }
+            if(sb.length()>0){
+                return sb.substring(0,sb.length()-1);
+            }
+            return sb.toString();
+        }
     }
 }

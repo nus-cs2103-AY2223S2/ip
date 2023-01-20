@@ -1,14 +1,16 @@
 import sebastianExceptions.*;
 import formatters.Formatter;
-
-import java.util.Arrays;
 import java.util.Scanner;
 
 public class Sebastian {
     private final TaskList tasks;
 
-    private Sebastian() {
-        this.tasks = new TaskList();
+    private Sebastian(TaskList tasks) {
+        if(tasks == null) {
+            this.tasks = new TaskList();
+        } else {
+            this.tasks = tasks;
+        }
     }
 
     /**
@@ -61,7 +63,7 @@ public class Sebastian {
             throw new LackOfArgumentException();
         } else {
             String task = instruction.substring(5);
-            return this.addTask(this.tasks.addTodo(task));
+            return this.addTask(this.tasks.addTodo(0, task));
         }
     }
 
@@ -85,7 +87,7 @@ public class Sebastian {
                 throw new LackOfArgumentException();
             }
             else {
-                return this.addTask(this.tasks.addDeadline(task[0], task[1].trim()));
+                return this.addTask(this.tasks.addDeadline(0, task[0], task[1].trim()));
             }
         }
     }
@@ -110,7 +112,7 @@ public class Sebastian {
                 throw new LackOfArgumentException();
             }
             else {
-                return this.addTask(this.tasks.addEvent(task[0],task[1].trim(), task[2].trim()));
+                return this.addTask(this.tasks.addEvent(0, task[0],task[1].trim(), task[2].trim()));
             }
         }
     }
@@ -253,7 +255,8 @@ public class Sebastian {
     }
 
     public static void main(String[] args) {
-        Sebastian sebastian = new Sebastian();
+        TaskList taskLog = DataReader.formTaskListFromData();
+        Sebastian sebastian = new Sebastian(taskLog);
         Formatter.printFormattedString(sebastian.greet());
         Scanner scan = new Scanner(System.in);
         boolean flag = true;
