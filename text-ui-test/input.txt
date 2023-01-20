@@ -1,0 +1,17 @@
+list
+test
+help
+todo borrow book
+deadline do problem set 0 /by Sunday
+event access party /from 1900hrs Sunday /to 0000hrs Monday
+list
+mark 2
+list
+unmark 2
+list
+mark 1
+unmark 1
+list
+todo do 2103t project
+list
+bye
