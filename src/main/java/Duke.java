@@ -17,58 +17,63 @@ public class Duke {
         String lineBreak = "***---***---***---***---***---***---***" + "\n" + "    ";
 
         while (sc.hasNext()) {
-            String firstWord = sc.next();
-            if (firstWord.equals("bye")) {
-                System.out.println(lineBreak + "GoodBye, have a nice day!");
-                break;
-            } else if (firstWord.equals("list")) {
-                System.out.println(lineBreak);
-                for (Task t : tasks) {
-                    System.out.println("    " + t);
+            try {    
+                String inputLine = sc.nextLine();
+                DukeException.checkInput(inputLine);
+                String words[] = inputLine.split(" ");
+                String firstWord = words[0];
+                if (firstWord.equals("bye")) {
+                    System.out.println(lineBreak + "GoodBye, have a nice day!");
+                    break;
+                } else if (firstWord.equals("list")) {
+                    System.out.println(lineBreak);
+                    for (Task t : tasks) {
+                        System.out.println("    " + t);
+                    }
+                } else if (firstWord.equals("mark")) {
+                    int ind = Integer.parseInt(words[1]);
+                    if (ind > tasks.size()) {
+                        System.out.println(lineBreak + "This task does not exist");
+                    } else {
+                        Task updatedTask = tasks.get(ind - 1).mark();
+                        tasks.set(ind - 1, updatedTask);
+                        System.out.println(lineBreak + "Congrats on completing the following task:\n    " + updatedTask);
+                    }
+                } else if (firstWord.equals("unmark")) {
+                    int ind = Integer.parseInt(words[1]);
+                    if (ind > tasks.size()) {
+                        System.out.println(lineBreak + "This task does not exist");
+                    } else {
+                        Task updatedTask = tasks.get(ind - 1).unmark();
+                        tasks.set(ind - 1, updatedTask);
+                        System.out.println(lineBreak + "Unchecked the following task:\n    " + updatedTask);
+                    }
                 }
-            } else if (firstWord.equals("mark")) {
-                int ind = Integer.parseInt(sc.next());
-                if (ind > tasks.size()) {
-                    System.out.println(lineBreak + "This task does not exist");
-                } else {
-                    Task updatedTask = tasks.get(ind - 1).mark();
-                    tasks.set(ind - 1, updatedTask);
-                    System.out.println(lineBreak + "Congrats on completing the following task:\n    " + updatedTask);
+                else if (firstWord.equals("deadline")) {
+                    index++;
+                    String[] parts = inputLine.split("/");
+                    Deadline task = new Deadline(index, parts[0].split(" ")[1], false, parts[1]);
+                    tasks.add(task);
+                    System.out.println(lineBreak + "Successfully added the following task:\n    " + task);
                 }
-            } else if (firstWord.equals("unmark")) {
-                int ind = Integer.parseInt(sc.next());
-                if (ind > tasks.size()) {
-                    System.out.println(lineBreak + "This task does not exist");
-                } else {
-                    Task updatedTask = tasks.get(ind - 1).unmark();
-                    tasks.set(ind - 1, updatedTask);
-                    System.out.println(lineBreak + "Unchecked the following task:\n    " + updatedTask);
-                }
-            }
-            else if (firstWord.equals("deadline")) {
-                index++;
-                String remaining = sc.nextLine();
-                String[] parts = remaining.split("/");
-                Deadline task = new Deadline(index, parts[0], false, parts[1]);
-                tasks.add(task);
-                System.out.println(lineBreak + "Successfully added the following task:\n    " + task);
-            }
 
-            else if (firstWord.equals("event")) {
-                index++;
-                String remaining = sc.nextLine();
-                String[] parts = remaining.split("/");
-                Event task = new Event(index, parts[0], false, parts[1], parts[2]);
-                tasks.add(task);
-                System.out.println(lineBreak + "Successfully added the following task:\n    " + task);
-            }
+                else if (firstWord.equals("event")) {
+                    index++;
+                    String[] parts = inputLine.split("/");
+                    Event task = new Event(index, parts[0].split(" ")[1], false, parts[1], parts[2]);
+                    tasks.add(task);
+                    System.out.println(lineBreak + "Successfully added the following task:\n    " + task);
+                }
 
-            else if (firstWord.equals("todo")) {
-                index++;
-                String remaining = sc.nextLine();
-                Todo task = new Todo(index, remaining, false);
-                tasks.add(task);
-                System.out.println(lineBreak + "Successfully added the following task:\n    " + task);
+                else if (firstWord.equals("todo")) {
+                    index++;
+                    String[] parts = inputLine.split(" ", 2);
+                    Todo task = new Todo(index, parts[1], false);
+                    tasks.add(task);
+                    System.out.println(lineBreak + "Successfully added the following task:\n    " + task);
+                }
+            } catch (DukeException e) {
+                System.out.println(lineBreak + e.getMessage());
             }
         }
     }
@@ -161,6 +166,22 @@ class Todo extends Task {
 
     public Todo unmark() {
         return new Todo(number, name, false);
+    }
+}
+
+class DukeException extends Exception {
+    public DukeException(String message) {
+        super(message);
+    }
+
+    public static void checkInput(String inputLine) throws DukeException {
+        if (inputLine.equals("deadline")) {
+            throw new DukeException("☹ OOPS!!! The description of a deadline cannot be empty.");
+        } else if (inputLine.equals("todo")) {
+            throw new DukeException("☹ OOPS!!! The description of a todo cannot be empty.");
+        } else if (inputLine.equals("event")) {
+            throw new DukeException("☹ OOPS!!! The description of an event cannot be empty.");
+        }
     }
 }
 
