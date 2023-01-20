@@ -1,3 +1,4 @@
+package tasks;
 /**
  * Deadlines are tasks which need to be done by a certain date/time
  */
@@ -13,5 +14,3 @@ public class Deadline extends Task {
         return "[D]" + super.toString() + " (by: " + when + ")";
     }
 }
-
-// remove the space in when

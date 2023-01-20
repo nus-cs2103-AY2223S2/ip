@@ -1,3 +1,5 @@
+package tasks;
+
 public class Task {
     private String description;
     private boolean status; // false meaning not done yet
