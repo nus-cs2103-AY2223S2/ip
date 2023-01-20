@@ -7,7 +7,8 @@ enum action {
     unmark,
     todo,
     deadline,
-    event
+    event,
+    delete
 }
 public class Duke {
     static void checkEmptyAction(String[] arr, String action) throws DukeException {
@@ -34,62 +35,6 @@ public class Duke {
         String[] arr = newLine.split(" ");
         s = arr[0];
 
-        /*action myAction = action.valueOf(s);
-        switch(myAction) {
-            case bye:
-                System.out.println("Bye. Hope to see you again soon!");
-                break;
-
-            case list:
-                System.out.println("Here are the tasks in your list:");
-                for (int j = 0; j < listOfAction.length; j++) {
-                    if (listOfAction[j] == null) {
-                        break;
-                    }
-                    System.out.println(String.format("%d.%s", j + 1,listOfAction[j]));
-                }
-                break;
-
-            case mark:
-                int num = Integer.parseInt(sc.next()) - 1;
-                if (listOfAction[num] != null) {
-                    System.out.println("OK, I've marked this task as not done yet:");
-                    String original = listOfAction[num];
-                    listOfAction[num] = String.format("%s[ ] %s", original.substring(0, 3), original.substring(4));
-                    System.out.println(listOfAction[num]);
-                }
-                break;
-
-            case unmark:
-                int num1 = Integer.parseInt(sc.next()) - 1;
-                if (listOfAction[num1] != null) {
-                    System.out.println("OK, I've marked this task as not done yet:");
-                    String original = listOfAction[num1];
-                    listOfAction[num1] = String.format("%s[ ] %s", original.substring(0, 3), original.substring(4));
-                    System.out.println(listOfAction[num1]);
-                }
-                break;
-
-            case todo:
-                //String newTask = sc.next();
-                System.out.println("Got it. I've added this task:");
-                //System.out.println(newTask);
-                break;
-
-            case deadline:
-                //String newTask = sc.next();
-                System.out.println("Got it. I've added this task:");
-                //System.out.println(newTask);
-                break;
-
-            case event:
-                //String newTask = sc.next();
-                System.out.println("Got it. I've added this task:");
-                //System.out.println(newTask);
-                break;
-
-
-        }*/
         int i = 0;
         while (!bye.equals(s)) {
             String remaining = "";
@@ -140,6 +85,35 @@ public class Duke {
                     }
                     break;
 
+                case delete:
+                    try {
+                        checkEmptyAction(arr, "delete");
+                        int num1 = Integer.parseInt(arr[1]) - 1;
+                        if (listOfAction[num1] != null) {
+                            System.out.println("Noted. I've removed this task:");
+                            String original = listOfAction[num1];
+                            System.out.println(original);
+                            i--;
+                            System.out.println(String.format("Now you have %d tasks in the list", i));
+                            int trace = num1;
+                            String[] originalList = new String[100];
+                            for (int k = 0; k < 100; k++) {
+                                originalList[k] = listOfAction[k];
+                            }
+
+                            listOfAction[trace] = originalList[trace + 1];
+                            trace++;
+
+                            while ((trace >= 1) && (originalList[trace - 1] != null)) {
+                                listOfAction[trace] = originalList[trace + 1];
+                                trace++;
+                            }
+                        }
+                    } catch (DukeException e) {
+                        System.out.println(e.getMessage());
+                    }
+                    break;
+
                 case todo:
                     try {
                         checkEmptyAction(arr, "todo");
@@ -153,7 +127,6 @@ public class Duke {
                         System.out.println(listOfAction[i]);
                         System.out.println(String.format("Now you have %d tasks in the list", i + 1));
                         i++;
-                        //System.out.println(newTask);
                     } catch (DukeException e) {
                         System.out.println(e.getMessage());
                     }
@@ -206,11 +179,8 @@ public class Duke {
                                 }
                                 k++;
                             } else if (arr[j-1].substring(1).equals("to") && (k!= 0)) {
-                                //remaining += ":";
                                 remaining += arr[j];
                             } else {
-                                //remaining += arr[j];
-                                //remaining += "";
                                 remaining += arr[j];
                             }
                         }
@@ -222,7 +192,6 @@ public class Duke {
                     } catch (DukeException e) {
                         System.out.println(e.getMessage());
                 }
-                    //System.out.println(newTask);
                     break;
             }
             } catch (IllegalArgumentException e) {
@@ -254,10 +223,5 @@ class DukeException extends  Exception {
     public DukeException(Throwable cause) {
         super(cause);
     }
-
-    /*public String printMessage() {
-        return super.getMessage();
-    }*/
-
 }
 
