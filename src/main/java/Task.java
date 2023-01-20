@@ -1,6 +1,6 @@
 public abstract class Task {
-    private String description;
-    private boolean isDone;
+    protected String description;
+    protected boolean isDone;
 
     public Task(String description) {
         this.description = description;
@@ -14,6 +14,8 @@ public abstract class Task {
     public void unmark() {
         this.isDone = false;
     }
+
+    public abstract String saveString();
 
     @Override
     public String toString() {

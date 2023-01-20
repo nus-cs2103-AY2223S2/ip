@@ -1,5 +1,11 @@
-import java.util.Scanner;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.ArrayList;
+import java.util.Scanner;
 
 public class Book {
     /** Logo for Book */
@@ -7,7 +13,7 @@ public class Book {
             + "|  _ \\  ___   ___  _\n"
             + "| |_| |/ _ \\ / _ \\| |  _\n"
             + "|  _ <| | | | | | | |/ /\n"
-            + "| |_| | |_| | |_| |   <  \n"
+            + "| |_| | |_| | |_| |   <\n"
             + "|____/ \\___/ \\___/|_|\\_\\\n";
     /** Horizontal line for separation. */
     private static final String LINE =
@@ -18,6 +24,24 @@ public class Book {
     private static ArrayList<Task> list = new ArrayList<Task>(100);
     private static int index = 0;
     public static void main(String[] args) {
+        Path savePath = Paths.get("save", "book.txt");
+        File bookSave = savePath.toFile();
+        File saveDir = bookSave.getParentFile();
+        if (!saveDir.exists()) {
+            try {
+                saveDir.mkdir();
+            } catch (SecurityException exception) {
+                System.out.println("Book had an issue with the save directory.");
+            }
+        }
+        if (!bookSave.exists()) {
+            try {
+                bookSave.createNewFile();
+            } catch (IOException exception) {
+                System.out.print("Book had an issue loading the history book.\n");
+            }
+        }
+        load(bookSave);
         System.out.print(LINE + "Good day! This is\n" + LOGO + "What may I help you with?\n"
                 + LINE);
         command = input.nextLine();
@@ -29,12 +53,46 @@ public class Book {
             } catch (IncompleteInputException exception){
                 System.out.print(LINE + exception.getMessage() + "\n" + LINE);
             } finally {
+                save(bookSave, list);
                 command = input.nextLine();
             }
         }
         System.out.print(LINE + "Bye! Pick up Book again soon!\n" + LINE);
     }
 
+    private static void load(File bookSave) {
+        try {
+            Scanner fileReader = new Scanner(bookSave);
+            while (fileReader.hasNextLine()) {
+                String taskLine = fileReader.nextLine();
+                String[] task = taskLine.split(";", 5);
+                if (task[0].equals("T")) {
+                    list.add(new ToDo(task[2]));
+                } else if (task[0].equals("D")) {
+                    list.add(new Deadline(task[2], task[3]));
+                } else {
+                    list.add(new Event(task[2], task[3], task[4]));
+                }
+                if (task[1].equals("true")) {
+                    list.get(index).mark();
+                }
+                index++;
+            }
+        } catch (FileNotFoundException exception) {
+            System.out.println("Book had an issue finding the history book.");
+        }
+    }
+    private static void save(File bookSave, ArrayList<Task> list) {
+        try {
+            FileWriter writeToFile = new FileWriter(bookSave);
+            for (Task task : list) {
+                writeToFile.write(task.saveString() + "\n");
+            }
+            writeToFile.close();
+        } catch (IOException exception) {
+            System.out.println("Book was unable to write to the history book.");
+        }
+    }
     private static void parse(String text) throws InvalidInputException, IncompleteInputException {
         String[] inputs = text.split(" ", 2);
         if (inputs[0].equals("list")) {
