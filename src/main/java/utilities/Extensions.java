@@ -1,4 +1,6 @@
-public class Utils {
+package utilities;
+
+public class Extensions {
     public static void divider() {
         System.out.println("\t_______________________________________________________");
     }
