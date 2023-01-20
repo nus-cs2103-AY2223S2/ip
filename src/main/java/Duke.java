@@ -56,7 +56,7 @@ public class Duke {
 
         public static void completeTask(String xx) {
             int taskNum = Integer.parseInt(xx);
-            String txt = "Try again!";
+            String txt = "Try again! You don't have that task in your list!";
             for (Task thingInList : lstOfTasks) {
                 if (thingInList != null && (thingInList.getRank() == taskNum)) {
                     thingInList.strike();
