@@ -4,6 +4,10 @@ import duke.exception.DukeException;
 import duke.task.Event;
 import duke.task.Task;
 import duke.task.TaskList;
+import duke.utils.LocalDateTimeUtils;
+
+import java.time.LocalDateTime;
+import java.time.format.DateTimeParseException;
 
 /**
  * Represents an add event task command.
@@ -15,7 +19,8 @@ public class EventCommand extends AddCommand {
      * @param input {@inheritDoc}
      * @param tasks {@inheritDoc}
      * @return {@inheritDoc}
-     * @throws DukeException Indicates missing start or end date/time or description in input.
+     * @throws DukeException Indicates an error in the input caused by one of the following: missing start or end
+     * date and/or time, missing description, incorrect format, invalid start and/or end date and/or time.
      */
     @Override
     public String run(String input, TaskList tasks) throws DukeException {
@@ -27,7 +32,8 @@ public class EventCommand extends AddCommand {
      *
      * @param input {@inheritDoc}
      * @return {@inheritDoc}
-     * @throws DukeException Indicates missing start or end date/time or description in input.
+     * @throws DukeException Indicates an error in the input caused by one of the following: missing start or end
+     * date and/or time, missing description, incorrect format, invalid start and/or end date and/or time.
      */
     @Override
     protected Task createTask(String input) throws DukeException {
@@ -36,41 +42,54 @@ public class EventCommand extends AddCommand {
     }
 
     private String[] extractValidArgs(String input) throws DukeException {
-        String argStr = input.replaceFirst("event", "");
-
-        String[] descriptionAndStartEnd = argStr.split(" /from ", 2);
-
-        if (descriptionAndStartEnd.length != 2) {
-            throw getDateRangeException();
+        if (!input.matches("event .+ /from .+ /to .+")) {
+            throw new DukeException("event command should be of the format:\n  event <description> /from <start of "
+                    + "event> /to <end of event>");
         }
 
-        descriptionAndStartEnd[0] = descriptionAndStartEnd[0].trim();
-        descriptionAndStartEnd[1] = descriptionAndStartEnd[1].trim();
+        String argStr = input.replaceFirst("event ", "");
+        String[] args = argStr.split("( /from | /to )", 3);
 
-        if (descriptionAndStartEnd[0].isEmpty()) {
+        for (int i = 0; i < args.length; ++i) {
+            args[i] = args[i].trim();
+        }
+
+        if (args[0].isEmpty()) {
             throw new DukeException("The description of an event cannot be empty.");
         }
 
-        String[] startAndEnd = descriptionAndStartEnd[1].split(" /to ", 2);
-        if (startAndEnd.length != 2) {
-            throw getDateRangeException();
+        if (args[1].isEmpty()) {
+            throw new DukeException("The start of an event must be specified.");
         }
 
-        startAndEnd[0] = startAndEnd[0].trim();
-        startAndEnd[1] = startAndEnd[1].trim();
-
-        if (startAndEnd[0].isEmpty() || startAndEnd[1].isEmpty()) {
-            throw getDateRangeException();
+        if (args[2].isEmpty()) {
+            throw new DukeException("The end of an event must be specified.");
         }
 
-        return new String[] {descriptionAndStartEnd[0], startAndEnd[0], startAndEnd[1]};
+        if (!args[1].matches(LocalDateTimeUtils.inputDateTimeRegex)
+                || !args[2].matches(LocalDateTimeUtils.inputDateTimeRegex)) {
+            throw new DukeException(String.format("Start and end of event should be of the format:\n  %s",
+                    LocalDateTimeUtils.inputDateTimeFormat));
+        }
+
+        return args;
     }
 
-    private Event createEvent(String[] args) {
-        return new Event(false, args[0], args[1], args[2]);
-    }
+    private Event createEvent(String[] args) throws DukeException {
+        LocalDateTime start;
+        try {
+            start = LocalDateTime.parse(args[1], LocalDateTimeUtils.inputDateTimeFormatter);
+        } catch (DateTimeParseException e) {
+            throw new DukeException("The start of the event contains an invalid date and/or time.");
+        }
 
-    private DukeException getDateRangeException() {
-        return new DukeException("The date range of an event must be specified.");
+        LocalDateTime end;
+        try {
+            end = LocalDateTime.parse(args[2], LocalDateTimeUtils.inputDateTimeFormatter);
+        } catch (DateTimeParseException e) {
+            throw new DukeException("The end of the event contains an invalid date and/or time.");
+        }
+
+        return new Event(false, args[0], start, end);
     }
 }

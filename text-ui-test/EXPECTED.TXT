@@ -37,28 +37,29 @@
 
     ____________________________________________________________
      Got it. I've added this task:
-       [D][ ] lorem ipsum (by: 01/01/24 1200)
+       [D][ ] lorem ipsum (by: Mon Jan 01, 2024 12:00 PM)
      Now you have 1 tasks in the list.
     ____________________________________________________________
 
     ____________________________________________________________
      Nice! I've marked this task as done:
-       [D][X] lorem ipsum (by: 01/01/24 1200)
+       [D][X] lorem ipsum (by: Mon Jan 01, 2024 12:00 PM)
     ____________________________________________________________
 
     ____________________________________________________________
      OK, I've marked this task as not done yet:
-       [D][ ] lorem ipsum (by: 01/01/24 1200)
+       [D][ ] lorem ipsum (by: Mon Jan 01, 2024 12:00 PM)
     ____________________________________________________________
 
     ____________________________________________________________
      Noted. I've removed this task:
-       [D][ ] lorem ipsum (by: 01/01/24 1200)
+       [D][ ] lorem ipsum (by: Mon Jan 01, 2024 12:00 PM)
      Now you have 0 tasks in the list.
     ____________________________________________________________
 
     ____________________________________________________________
-     OOPS!!! The cutoff of a deadline must be specified.
+     OOPS!!! deadline command should be of the format:
+       deadline <description> /by <cutoff>
     ____________________________________________________________
 
     ____________________________________________________________
@@ -66,37 +67,62 @@
     ____________________________________________________________
 
     ____________________________________________________________
-     OOPS!!! The cutoff of a deadline must be specified.
+     OOPS!!! deadline command should be of the format:
+       deadline <description> /by <cutoff>
+    ____________________________________________________________
+
+    ____________________________________________________________
+     OOPS!!! The description of a deadline cannot be empty.
+    ____________________________________________________________
+
+    ____________________________________________________________
+     OOPS!!! deadline command should be of the format:
+       deadline <description> /by <cutoff>
+    ____________________________________________________________
+
+    ____________________________________________________________
+     OOPS!!! deadline command should be of the format:
+       deadline <description> /by <cutoff>
     ____________________________________________________________
 
     ____________________________________________________________
      OOPS!!! The cutoff of a deadline must be specified.
+    ____________________________________________________________
+
+    ____________________________________________________________
+     OOPS!!! The cutoff of a deadline should be of the format:
+       dd/MM/yyyy HHmm
+    ____________________________________________________________
+
+    ____________________________________________________________
+     OOPS!!! The cutoff of the deadline contains an invalid date and/or time.
     ____________________________________________________________
 
     ____________________________________________________________
      Got it. I've added this task:
-       [E][ ] lorem ipsum (from: 01/01/24 1200 to: 02/01/24 1300)
+       [E][ ] lorem ipsum (from: Mon Jan 01, 2024 12:00 PM to: Tue Jan 02, 2024 01:00 PM)
      Now you have 1 tasks in the list.
     ____________________________________________________________
 
     ____________________________________________________________
      Nice! I've marked this task as done:
-       [E][X] lorem ipsum (from: 01/01/24 1200 to: 02/01/24 1300)
+       [E][X] lorem ipsum (from: Mon Jan 01, 2024 12:00 PM to: Tue Jan 02, 2024 01:00 PM)
     ____________________________________________________________
 
     ____________________________________________________________
      OK, I've marked this task as not done yet:
-       [E][ ] lorem ipsum (from: 01/01/24 1200 to: 02/01/24 1300)
+       [E][ ] lorem ipsum (from: Mon Jan 01, 2024 12:00 PM to: Tue Jan 02, 2024 01:00 PM)
     ____________________________________________________________
 
     ____________________________________________________________
      Noted. I've removed this task:
-       [E][ ] lorem ipsum (from: 01/01/24 1200 to: 02/01/24 1300)
+       [E][ ] lorem ipsum (from: Mon Jan 01, 2024 12:00 PM to: Tue Jan 02, 2024 01:00 PM)
      Now you have 0 tasks in the list.
     ____________________________________________________________
 
     ____________________________________________________________
-     OOPS!!! The date range of an event must be specified.
+     OOPS!!! event command should be of the format:
+       event <description> /from <start of event> /to <end of event>
     ____________________________________________________________
 
     ____________________________________________________________
@@ -104,27 +130,82 @@
     ____________________________________________________________
 
     ____________________________________________________________
-     OOPS!!! The date range of an event must be specified.
+     OOPS!!! event command should be of the format:
+       event <description> /from <start of event> /to <end of event>
     ____________________________________________________________
 
     ____________________________________________________________
-     OOPS!!! The date range of an event must be specified.
+     OOPS!!! The description of an event cannot be empty.
     ____________________________________________________________
 
     ____________________________________________________________
-     OOPS!!! The date range of an event must be specified.
+     OOPS!!! event command should be of the format:
+       event <description> /from <start of event> /to <end of event>
     ____________________________________________________________
 
     ____________________________________________________________
-     OOPS!!! The date range of an event must be specified.
+     OOPS!!! event command should be of the format:
+       event <description> /from <start of event> /to <end of event>
     ____________________________________________________________
 
     ____________________________________________________________
-     OOPS!!! The date range of an event must be specified.
+     OOPS!!! event command should be of the format:
+       event <description> /from <start of event> /to <end of event>
     ____________________________________________________________
 
     ____________________________________________________________
-     OOPS!!! The date range of an event must be specified.
+     OOPS!!! The start of an event must be specified.
+    ____________________________________________________________
+
+    ____________________________________________________________
+     OOPS!!! event command should be of the format:
+       event <description> /from <start of event> /to <end of event>
+    ____________________________________________________________
+
+    ____________________________________________________________
+     OOPS!!! The end of an event must be specified.
+    ____________________________________________________________
+
+    ____________________________________________________________
+     OOPS!!! event command should be of the format:
+       event <description> /from <start of event> /to <end of event>
+    ____________________________________________________________
+
+    ____________________________________________________________
+     OOPS!!! event command should be of the format:
+       event <description> /from <start of event> /to <end of event>
+    ____________________________________________________________
+
+    ____________________________________________________________
+     OOPS!!! event command should be of the format:
+       event <description> /from <start of event> /to <end of event>
+    ____________________________________________________________
+
+    ____________________________________________________________
+     OOPS!!! Start and end of event should be of the format:
+       dd/MM/yyyy HHmm
+    ____________________________________________________________
+
+    ____________________________________________________________
+     OOPS!!! Start and end of event should be of the format:
+       dd/MM/yyyy HHmm
+    ____________________________________________________________
+
+    ____________________________________________________________
+     OOPS!!! Start and end of event should be of the format:
+       dd/MM/yyyy HHmm
+    ____________________________________________________________
+
+    ____________________________________________________________
+     OOPS!!! The start of the event contains an invalid date and/or time.
+    ____________________________________________________________
+
+    ____________________________________________________________
+     OOPS!!! The end of the event contains an invalid date and/or time.
+    ____________________________________________________________
+
+    ____________________________________________________________
+     OOPS!!! The start of the event contains an invalid date and/or time.
     ____________________________________________________________
 
     ____________________________________________________________
@@ -139,20 +220,20 @@
 
     ____________________________________________________________
      Got it. I've added this task:
-       [D][ ] lorem ipsum (by: 01/01/24 1200)
+       [D][ ] lorem ipsum (by: Mon Jan 01, 2024 12:00 PM)
      Now you have 2 tasks in the list.
     ____________________________________________________________
 
     ____________________________________________________________
      Got it. I've added this task:
-       [E][ ] lorem ipsum (from: 01/01/24 1200 to: 02/01/24 1300)
+       [E][ ] lorem ipsum (from: Mon Jan 01, 2024 12:00 PM to: Tue Jan 02, 2024 01:00 PM)
      Now you have 3 tasks in the list.
     ____________________________________________________________
 
     ____________________________________________________________
      1.[T][ ] lorem ipsum
-     2.[D][ ] lorem ipsum (by: 01/01/24 1200)
-     3.[E][ ] lorem ipsum (from: 01/01/24 1200 to: 02/01/24 1300)
+     2.[D][ ] lorem ipsum (by: Mon Jan 01, 2024 12:00 PM)
+     3.[E][ ] lorem ipsum (from: Mon Jan 01, 2024 12:00 PM to: Tue Jan 02, 2024 01:00 PM)
     ____________________________________________________________
 
     ____________________________________________________________
@@ -163,13 +244,13 @@
 
     ____________________________________________________________
      Noted. I've removed this task:
-       [D][ ] lorem ipsum (by: 01/01/24 1200)
+       [D][ ] lorem ipsum (by: Mon Jan 01, 2024 12:00 PM)
      Now you have 1 tasks in the list.
     ____________________________________________________________
 
     ____________________________________________________________
      Noted. I've removed this task:
-       [E][ ] lorem ipsum (from: 01/01/24 1200 to: 02/01/24 1300)
+       [E][ ] lorem ipsum (from: Mon Jan 01, 2024 12:00 PM to: Tue Jan 02, 2024 01:00 PM)
      Now you have 0 tasks in the list.
     ____________________________________________________________
 

@@ -4,6 +4,10 @@ import duke.exception.DukeException;
 import duke.task.Deadline;
 import duke.task.Task;
 import duke.task.TaskList;
+import duke.utils.LocalDateTimeUtils;
+
+import java.time.LocalDateTime;
+import java.time.format.DateTimeParseException;
 
 /**
  * Represents an add deadline task command.
@@ -15,7 +19,8 @@ public class DeadlineCommand extends AddCommand {
      * @param input {@inheritDoc}
      * @param tasks {@inheritDoc}
      * @return {@inheritDoc}
-     * @throws DukeException Indicates missing cutoff date/time or description in input.
+     * @throws DukeException Indicates an error in the input caused by one of the following: missing cutoff date and/or
+     * time, missing description, incorrect format, invalid cutoff date and/or time.
      */
     @Override
     public String run(String input, TaskList tasks) throws DukeException {
@@ -27,7 +32,8 @@ public class DeadlineCommand extends AddCommand {
      *
      * @param input {@inheritDoc}
      * @return {@inheritDoc}
-     * @throws DukeException Indicates missing cutoff date/time or description in input.
+     * @throws DukeException Indicates an error in the input caused by one of the following: missing cutoff date and/or
+     * time, missing description, incorrect format, invalid cutoff date and/or time.
      */
     @Override
     protected Task createTask(String input) throws DukeException {
@@ -36,29 +42,41 @@ public class DeadlineCommand extends AddCommand {
     }
 
     private String[] extractValidArgs(String input) throws DukeException {
-        String argStr = input.replaceFirst("deadline", "");
-
-        String[] descriptionAndCutoff = argStr.split(" /by ", 2);
-
-        if (descriptionAndCutoff.length != 2) {
-            throw new DukeException("The cutoff of a deadline must be specified.");
+        if (!input.matches("deadline .+ /by .+")) {
+            throw new DukeException("deadline command should be of the format:\n  deadline <description> /by <cutoff>");
         }
 
-        descriptionAndCutoff[0] = descriptionAndCutoff[0].trim();
-        descriptionAndCutoff[1] = descriptionAndCutoff[1].trim();
+        String argStr = input.replaceFirst("deadline", "");
+        String[] args = argStr.split(" /by ", 2);
 
-        if (descriptionAndCutoff[0].isEmpty()) {
+        for (int i = 0; i < args.length; ++i) {
+            args[i] = args[i].trim();
+        }
+
+        if (args[0].isEmpty()) {
             throw new DukeException("The description of a deadline cannot be empty.");
         }
 
-        if (descriptionAndCutoff[1].isEmpty()) {
+        if (args[1].isEmpty()) {
             throw new DukeException("The cutoff of a deadline must be specified.");
         }
 
-        return descriptionAndCutoff;
+        if (!args[1].matches(LocalDateTimeUtils.inputDateTimeRegex)) {
+            throw new DukeException(String.format("The cutoff of a deadline should be of the format:\n  %s",
+                    LocalDateTimeUtils.inputDateTimeFormat));
+        }
+
+        return args;
     }
 
-    private Deadline createDeadline(String[] args) {
-        return new Deadline(false, args[0], args[1]);
+    private Deadline createDeadline(String[] args) throws DukeException {
+        LocalDateTime cutoff;
+        try {
+            cutoff = LocalDateTime.parse(args[1], LocalDateTimeUtils.inputDateTimeFormatter);
+        } catch (DateTimeParseException e) {
+            throw new DukeException("The cutoff of the deadline contains an invalid date and/or time.");
+        }
+
+        return new Deadline(false, args[0], cutoff);
     }
 }
