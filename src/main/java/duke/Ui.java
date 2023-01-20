@@ -55,11 +55,13 @@ class Ui {
             this.tasks = Parser.toDo(scanner, tasks);
         } else if (description.equals(Parser.DEADLINE)) {
             this.tasks = Parser.deadline(scanner, tasks);
-        } else if (description.equals(Printable.EVENT)) {
+        } else if (description.equals(Parser.EVENT)) {
             this.tasks = Parser.events(scanner, tasks);
-        } else if (description.equals(Printable.DELETE)) {
+        } else if (description.equals(Parser.DELETE)) {
             this.tasks = Parser.delete(scanner, tasks);
-        }  else {
+        } else if (description.equals(Parser.FIND)) {
+            this.tasks = Parser.find(scanner,tasks);            
+        } else {
             dukeExceptionWarning(description, tasks);
         }
         return this.tasks;

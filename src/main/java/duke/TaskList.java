@@ -11,7 +11,7 @@ import java.util.ArrayList;
  * @version %I% %G%
  * @since 11
  */
-class TaskList<Task> {
+class TaskList<T> {
     
     private final ArrayList<Task> tasks;
     //List starts numbering from 1
@@ -19,9 +19,9 @@ class TaskList<Task> {
     /**
      * Instantiate new list of tasks from an ArrayList
      *
-     * @param newTasks Type TaskList<Task>
+     * @param newTasks Type TaskList<T>
      */
-    TaskList(TaskList<Task> newTasks) {
+    TaskList(TaskList<T> newTasks) {
         tasks = new ArrayList<Task>(newTasks.tasks);
     }
     /**
@@ -49,15 +49,26 @@ class TaskList<Task> {
      * Display to the user in a pretty format all the tasks in the list,
      * starting from 1.
      *
-     * @return TaskList<Task>
+     * @return TaskList<T>
      *
      */
-    TaskList<Task> listAllTasks() {
+    TaskList<T> listAllTasks() {
         for (int i=0; i < numberOfTasks(); i++) {
             System.out.println(i + INCREMENT + "." + get(i));    
         }
-        return new TaskList<Task>(tasks);
+        return new TaskList<T>(tasks);
     }
+    
+    <T extends Task> TaskList<T> listFindTasks(String find, TaskList<T> list) { 
+        for (int i=0; i < numberOfTasks(); i++) {
+            Task currTask = (Task)get(i);
+            if (currTask.getDescription().contains(find.substring(1))) {
+                System.out.println(i + INCREMENT + "." + currTask);    
+            }
+        }
+        return new TaskList<T>(tasks);
+    } 
+
     /**
      * Get a task in a specific position 
      * @return positionOfTask
@@ -70,10 +81,10 @@ class TaskList<Task> {
      * new TaskList is returned with the added task.
      *
      * @param newTask Task to add
-     * @return TaskList<Task>
+     * @return TaskList<T>
      */
-    TaskList<Task> add(Task newTask) {
-        TaskList<Task> newTasks = new TaskList<Task>(tasks);
+    TaskList<T> add(Task newTask) {
+        TaskList<T> newTasks = new TaskList<T>(tasks);
         newTasks.tasks.add(newTask);
         System.out.println("SUI I have added this task. Remember, rest is as important as working hard!: " + newTask); 
         return newTasks;
@@ -84,10 +95,10 @@ class TaskList<Task> {
      * returned with the modified marked / unmarked status of a particular
      * task.
      *
-     * @return TaskList<Task>
+     * @return TaskList<T>
      */
-    TaskList<Task> set(int index, Task task) {
-        TaskList<Task> newTasks = new TaskList<Task>(tasks);
+    TaskList<T> set(int index, Task task) {
+        TaskList<T> newTasks = new TaskList<T>(tasks);
         newTasks.tasks.set(index, task);
         return newTasks;
     }
@@ -96,10 +107,10 @@ class TaskList<Task> {
      * immutability nature of TaskList, a new TaskList will be returned with
      * the corresponding task deleted.
      *
-     * @return TaskList<Task> 
+     * @return TaskList<T> 
      */
-    TaskList<Task> removeTask(int index) {
-        TaskList<Task> newTasks = new TaskList<Task>(tasks);
+    TaskList<T> removeTask(int index) {
+        TaskList<T> newTasks = new TaskList<T>(tasks);
         newTasks.tasks.remove(index);
         return newTasks;
     }
