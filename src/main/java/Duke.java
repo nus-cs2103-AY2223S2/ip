@@ -12,37 +12,55 @@ public class Duke {
         String input = sc.nextLine();
         while (!input.equals("bye")) {
             String[] splitArr = input.split(" ");
-            if (input.equals("list")) {
-                System.out.println(formatStr(listThings(tasks)));
-            } else if (splitArr[0].equals("mark") || splitArr[0].equals("unmark")) {
-                mark(splitArr[0], Integer.parseInt(splitArr[1]) - 1, tasks);
-            } else if (splitArr[0].equals("delete")) {
-                Task newTask = tasks.get(Integer.parseInt(splitArr[1]) - 1);
-                tasks.remove(Integer.parseInt(splitArr[1]));
-                System.out.println(formatStr(deleteReport(newTask, tasks)));
-            } else if (splitArr[0].equals("todo")) {
-                Todo newTodo = new Todo(input);
-                tasks.add(newTodo);
-                System.out.println(formatStr(addReport(newTodo, tasks)));
-            }else if (splitArr[0].equals("deadline")) {
-                Deadline newDead = new Deadline(input);
-                tasks.add(newDead);
-                System.out.println(formatStr(addReport(newDead, tasks)));
-            }else if (splitArr[0].equals("event")) {
-                Event newEvent = new Event(input);
-                tasks.add(newEvent);
-                System.out.println(formatStr(addReport(newEvent, tasks)));
-            } else {
-                Task newTask = new Task(input);
-                tasks.add(new Task(input));
-                System.out.println(formatStr(addReport(newTask, tasks)));
+            try {
+                if (input.equals("list")) {
+                    System.out.println(formatStr(listThings(tasks)));
+                } else if (splitArr[0].equals("mark") || splitArr[0].equals("unmark")) {
+                    if((Integer.parseInt(splitArr[1])) > tasks.size()) {
+                        throw new OutOfIndexException("Help! \n" +
+                                "The number has to be within range of our task-list!\n" +
+                                "try again.");
+                    }
+                    mark(splitArr[0], Integer.parseInt(splitArr[1]) - 1, tasks);
+                } else if (splitArr[0].equals("delete")) {
+                    if((Integer.parseInt(splitArr[1])) > tasks.size()) {
+                        throw new OutOfIndexException("Help! \n " +
+                                "The number has to be within range of our task-list!\n" +
+                                "try again.");
+                    }
+                    Task newTask = tasks.get(Integer.parseInt(splitArr[1]) - 1);
+                    tasks.remove(Integer.parseInt(splitArr[1]));
+                    System.out.println(formatStr(deleteReport(newTask, tasks)));
+                } else if (splitArr[0].equals("todo")) {
+                    Todo newTodo = new Todo(input);
+                    tasks.add(newTodo);
+                    System.out.println(formatStr(addReport(newTodo, tasks)));
+                } else if (splitArr[0].equals("deadline")) {
+                    Deadline newDead = new Deadline(input);
+                    tasks.add(newDead);
+                    System.out.println(formatStr(addReport(newDead, tasks)));
+                } else if (splitArr[0].equals("event")) {
+                    Event newEvent = new Event(input);
+                    tasks.add(newEvent);
+                    System.out.println(formatStr(addReport(newEvent, tasks)));
+                } else {
+                    throw new BlankInputException("Oh no! What do you mean? \n" +
+                            "I'm confused. Please specify... @.@");
+                }
+            } catch (BlankInputException ex) {
+                System.out.println(formatStr(ex.getMessage()));
+                input = sc.nextLine();
+                continue;
+            } catch (OutOfIndexException ex) {
+                System.out.println(formatStr(ex.getMessage()));
+                input = sc.nextLine();
+                continue;
             }
             input = sc.nextLine();
         }
-        String goodbyeMessage = formatStr("Bye. Come back again!");
-        System.out.println(goodbyeMessage);
-    }
-
+            String goodbyeMessage = formatStr("Bye. Come back again!");
+            System.out.println(goodbyeMessage);
+        }
 
     public static String formatStr(String str) {
         String returnstr =  ">>>>>>>>>>>>>>>>>>>>>>>>>>>>>\n"
