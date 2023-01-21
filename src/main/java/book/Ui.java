@@ -1,3 +1,7 @@
+package book;
+
+import book.task.Task;
+
 import java.util.Scanner;
 
 public class Ui {
@@ -21,14 +25,14 @@ public class Ui {
         System.out.println("Good day! This is\n" + LOGO + "What may I help you with?");
     }
     public void showExit() {
-        System.out.println("Bye! Pick up Book again soon!");
+        System.out.println("Bye! Pick up Book.Book again soon!");
 
     }
     public void showAdd(Task task) {
-        System.out.println("Understood, adding\n" + INDENT + task + "\nto Book.");
+        System.out.println("Understood, adding\n" + INDENT + task + "\nto Book.Book.");
     }
     public void showDelete(Task task) {
-        System.out.println("Acknowledged, striking the following task off of Book's pages:\n"
+        System.out.println("Acknowledged, striking the following task off of Book.Book's pages:\n"
                 + INDENT + task);
     }
     public void showMark(Task task) {
@@ -38,10 +42,10 @@ public class Ui {
         System.out.println("The following task has been marked incomplete:\n" + INDENT + task);
     }
     public void showTaskListSize(TaskList list) {
-        System.out.println(list.listSize() + " task(s) exist in Book's pages.");
+        System.out.println(list.listSize() + " task(s) exist in Book.Book's pages.");
     }
     public void showList(TaskList list) {
-        System.out.println("Here are the tasks stored in Book:");
+        System.out.println("Here are the tasks stored in Book.Book:");
         System.out.print(list);
     }
     public void showError(String message) {

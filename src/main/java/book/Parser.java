@@ -1,3 +1,21 @@
+package book;
+
+import book.command.AddCommand;
+import book.command.Command;
+import book.command.DeleteCommand;
+import book.command.ExitCommand;
+import book.command.ListCommand;
+import book.command.MarkCommand;
+import book.command.UnmarkCommand;
+
+import book.exception.IncompleteInputException;
+import book.exception.InvalidFormatException;
+import book.exception.InvalidInputException;
+
+import book.task.Deadline;
+import book.task.Event;
+import book.task.ToDo;
+
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
@@ -29,7 +47,7 @@ public final class Parser {
                 return new AddCommand(new Event(eventDetails[0], parseDateTime(eventDetails[1]),
                         parseDateTime(eventDetails[2])));
             default:
-                throw new InvalidInputException("Sorry, this command is not in Book's dictionary.");
+                throw new InvalidInputException("Sorry, this command is not in Book.Book's dictionary.");
             }
         } catch (ArrayIndexOutOfBoundsException exception) {
             throw new IncompleteInputException("This command is missing details");
