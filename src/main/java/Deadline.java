@@ -14,8 +14,8 @@ public class Deadline extends Task {
      *
      * @param desc description of the deadline task.
      */
-    public Deadline(String desc, String by) {
-        super(desc);
+    public Deadline(String desc, boolean marked, String by) {
+        super(desc, marked);
         this.by = by;
     }
 
@@ -27,5 +27,10 @@ public class Deadline extends Task {
     @Override
     public String toString() {
         return "[D]" + super.toString() + "(by: " + this.by + ")";
+    }
+
+    @Override
+    public String toTaskStorageString() {
+        return "D" + "|" + super.toTaskStorageString() + "|" + this.by;
     }
 }

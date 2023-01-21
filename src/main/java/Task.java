@@ -19,9 +19,9 @@ public abstract class Task {
      *
      * @param desc description of the task.
      */
-    public Task(String desc) {
+    public Task(String desc, boolean marked) {
         this.description = desc;
-        this.marked = false;
+        this.marked = marked;
     }
 
     /**
@@ -54,5 +54,10 @@ public abstract class Task {
      */
     public void unmark() {
         this.marked = false;
+    }
+
+    public String toTaskStorageString() {
+        String marked = String.valueOf(this.marked);
+        return marked + "|" + this.description;
     }
 }
