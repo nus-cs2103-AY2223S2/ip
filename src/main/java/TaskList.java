@@ -74,7 +74,6 @@ public class TaskList {
                         continue;
                     }
                     sb.append(inputArr[i]);
-                    // No need for whitespace at the end
                     if (i != inputArr.length - 1) {
                         sb.append(" ");
                     }
@@ -99,7 +98,6 @@ public class TaskList {
                         continue;
                     }
                     sb.append(inputArr[i]);
-                    // No need for whitespace at the end
                     if (i != inputArr.length - 1) {
                         sb.append(" ");
                     }

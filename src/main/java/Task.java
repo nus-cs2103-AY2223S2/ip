@@ -27,18 +27,9 @@ public class Task {
         this.isDone = (s.equals("0")) ? false : true;
     }
 
-//    public int getTaskNum() {
-//        return this.taskNum;
-//    }
-
-//    public int getNumberOfTasks() {
-//        return this.counter;
-//    }
-
     @Override
     public String toString() {
         return "[" + this.getStatusIcon() + "] " + this.description;
     }
 
-    //...
 }
