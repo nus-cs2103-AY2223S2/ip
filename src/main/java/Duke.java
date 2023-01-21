@@ -7,28 +7,37 @@ public class Duke {
         System.out.println("Hello! I'm Duke\nWhat can I do for you?");
         Scanner sc = new Scanner(System.in);
         list = new ArrayList<Task>();
-        String command = sc.nextLine();
+        String command = sc.next();
         while (!command.equals("bye")) {
             if (command.equals("list")) {
                 getList();
-            } else if (command.length() >= 6 && isMark(command) ) {
-                int index = Integer.parseInt(String.valueOf(command.charAt(command.length()-1)));
+            } else if (isMark(command) ) {
+                int index = Integer.parseInt(sc.next());
                 Task task = list.get(index-1);
                 task.mark();
                 System.out.println("Nice! I've marked this task as done:");
-                System.out.println(String.format("%s [%s] %s", "  ", task.getStatusIcon(), task.description));
-            } else if (command.length() >= 8 && isUnmark(command)) {
-                int index = Integer.parseInt(String.valueOf(command.charAt(command.length()-1)));
+                System.out.println("  " + task.toString());
+            } else if (isUnmark(command)) {
+                int index = Integer.parseInt(sc.next());
                 Task task = list.get(index-1);
                 task.unmark();
-                System.out.println("OK,, I've marked this task as not done yet");
-                System.out.println(String.format("%s [%s] %s", "  ", task.getStatusIcon(), task.description));
+                System.out.println("OK,, I've marked this task as not done yet:");
+                System.out.println("  " + task.toString());
             } else {
+                command += sc.nextLine();
+
+                Task newTask = new ToDo(command);
+                if (isDeadline(command)) {
+                    newTask = new Deadline(command);
+                } else {
+                    newTask = new Event(command);
+                }
                 Task newTask = new Task(command);
                 list.add(newTask);
-                System.out.println("added: " + command);
+                System.out.println("added: " + newTask.toString());
+                System.out.println(String.format("Now you have %d tasks in the list.", list.size()));
             }
-            command = sc.nextLine();
+            command = sc.next();
         }
         System.out.println("Bye. Hope to see you again soon!");
     }
@@ -36,16 +45,28 @@ public class Duke {
     public static void getList() {
         for (int i = 0; i < list.size(); i++) {
             Task task = list.get(i);
-            System.out.println(String.format("%d. [%s] %s", i+1, task.getStatusIcon(), task.description));
+            System.out.println(i+1 + "." + task.toString());
         }
     }
 
-    public static boolean isMark(String command) {
-        return command.substring(0,4).equals("mark");
+    public static boolean isMark(String word) {
+        return word.equals("mark");
     }
 
-    public static boolean isUnmark(String command) {
-        return command.substring(0,6).equals("unmark");
+    public static boolean isUnmark(String word) {
+        return word.equals("unmark");
+    }
+
+    public static boolean isToDo(String word) {
+        return word.equals("todo");
+    }
+
+    public static boolean isDeadline(String word) {
+        return word.equals("deadline");
+    }
+
+    public static boolean isEvent(String word) {
+        return word.equals("event");
     }
 }
 
