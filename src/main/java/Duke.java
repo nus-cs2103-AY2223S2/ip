@@ -1,10 +1,10 @@
 import java.util.Scanner;
 import java.util.ArrayList;
 
-enum Command {
-    TODO, DEADLINE, EVENT, DELETE, LIST, BYE, MARK, UNMARK;
-}
 public class Duke {
+    enum Command {
+        TODO, DEADLINE, EVENT, DELETE, LIST, BYE, MARK, UNMARK;
+    }
     public static void main(String[] args) {
         String chopper =
                         "           /\\_/\\\n" +
