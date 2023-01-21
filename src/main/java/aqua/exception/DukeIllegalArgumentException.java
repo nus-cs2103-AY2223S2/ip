@@ -1,4 +1,4 @@
-package exception;
+package aqua.exception;
 
 public class DukeIllegalArgumentException extends Exception {
     public DukeIllegalArgumentException() {}

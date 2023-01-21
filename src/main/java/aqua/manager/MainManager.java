@@ -1,5 +1,4 @@
-package manager;
-
+package aqua.manager;
 
 /** Manager of all managers of the app. */
 public class MainManager {

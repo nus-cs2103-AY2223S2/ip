@@ -1,4 +1,4 @@
-package manager;
+package aqua.manager;
 
 import java.util.ArrayList;
 

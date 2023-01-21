@@ -1,6 +1,6 @@
 package command;
 
-import exception.DukeIllegalArgumentException;
+import aqua.exception.DukeIllegalArgumentException;
 
 public class ListTaskFunc implements CommandFunction {
     @Override

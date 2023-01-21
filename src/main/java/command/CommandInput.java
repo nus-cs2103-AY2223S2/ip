@@ -5,8 +5,8 @@ import java.util.NoSuchElementException;
 import java.util.Optional;
 import java.util.Scanner;
 
-import exception.DukeIllegalArgumentException;
-import manager.MainManager;
+import aqua.exception.DukeIllegalArgumentException;
+import aqua.manager.MainManager;
 
 public class CommandInput {
     public static final String MAIN_INPUT_KEY = "MAIN_INPUT";

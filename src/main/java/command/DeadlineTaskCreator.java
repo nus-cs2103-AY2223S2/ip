@@ -1,6 +1,6 @@
 package command;
 
-import exception.DukeIllegalArgumentException;
+import aqua.exception.DukeIllegalArgumentException;
 import task.Deadline;
 
 public class DeadlineTaskCreator implements TaskCreator {

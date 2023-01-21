@@ -1,9 +1,9 @@
 import java.util.Scanner;
 
+import aqua.exception.DukeIllegalArgumentException;
+import aqua.manager.MainManager;
 import command.Command;
 import command.CommandInput;
-import exception.DukeIllegalArgumentException;
-import manager.MainManager;
 
 public class Duke {
     private static String SEPARATOR = "____________________________________________________________";
