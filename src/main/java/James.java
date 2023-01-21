@@ -84,7 +84,7 @@ public class James {
                         System.out.println("  " + deletedinput);
                         System.out.println("Now you have " + inputs.size() + " tasks in the list.");
                     } catch (NumberFormatException e) {
-                        System.out.println("OOPS!!! Invalid input. Please enter a valid number for the task index.");
+                        System.out.println("OOPS!!! Invalid number input. Please enter a valid number for the task index.");
                     } catch (IndexOutOfBoundsException e) {
                         System.out.println("OOPS!!! Invalid task index. Please enter a valid number for the task index.");
                     }
