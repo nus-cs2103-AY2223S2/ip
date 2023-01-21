@@ -17,8 +17,9 @@ public class TaskList extends ArrayList<Task> {
      * Function that prints all the tasks currently in the TaskList.
      *
      */
-    public void printList(){
-        for (int i = 0; i < this.size() ; i++){
+
+    public void printList() {
+        for (int i = 0; i < this.size(); i++) {
             int num = i + 1;
             String output = num + ". " + this.get(i);
             Ui.indent(output);
@@ -31,9 +32,10 @@ public class TaskList extends ArrayList<Task> {
      * @param index Index of task user wish to mark.
      * @return Task that has been marked done.
      */
-    public Task markTask(int index){
 
-        Task  t = this.get(index - 1);
+    public Task markTask(int index) {
+
+        Task t = this.get(index - 1);
         t.mark();
         return t;
     }
@@ -44,19 +46,22 @@ public class TaskList extends ArrayList<Task> {
      * @param index Index of task user wish to un-mark.
      * @return Task that has been marked undone.
      */
-    public Task unmarkTask(int index){
 
-        Task t = this.get(index-1);
+    public Task unmarkTask(int index) {
+
+        Task t = this.get(index - 1);
         t.unmark();
         return t;
     }
+
 
     /**
      * Deletes a task in the Task List at index.
      *
      * @param index Index of task user wish to delete from the TaskList.
      */
-    public void delete(int index){
+
+    public void delete(int index) {
         this.remove(index - 1);
     }
 }

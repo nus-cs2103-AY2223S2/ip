@@ -31,7 +31,7 @@ public class Duke {
      */
     public void run() throws IOException {
         ui.start();
-        while(parser.parseInput(ui.input())) {
+        while (parser.parseInput(ui.input())) {
         }
         ui.end();
     }

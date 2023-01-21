@@ -1,8 +1,8 @@
 package duke;
 
 import java.io.BufferedReader;
-import java.io.InputStreamReader;
 import java.io.IOException;
+import java.io.InputStreamReader;
 
 /**
  * Ui class handles all logic involved with the duke app communicating
@@ -123,11 +123,11 @@ public class Ui {
     /**
      * function to indent duke system messages
      */
-    public static void indent(String txt){
-        System.out.println("     " + txt );
+    public static void indent(String txt) {
+        System.out.println("     " + txt);
     }
 
-    public static void line(){
+    public static void line() {
         System.out.println("____________________________________________________________________________________");
     }
 }
