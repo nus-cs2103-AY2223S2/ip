@@ -1,3 +1,5 @@
+package tasktypes;
+
 public class Task {
 
     public static int numTask = 0;

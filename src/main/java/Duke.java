@@ -1,5 +1,6 @@
 import java.util.*;
 import java.util.regex.*;
+import tasktypes.*;
 public class Duke {
     public static void main(String[] args) {
 

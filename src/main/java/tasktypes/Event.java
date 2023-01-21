@@ -1,3 +1,5 @@
+package tasktypes;
+
 public class Event extends Task {
     String start;
     String end;

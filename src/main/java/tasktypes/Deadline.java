@@ -1,3 +1,5 @@
+package tasktypes;
+
 public class Deadline extends Task {
     String doneBy;
 
