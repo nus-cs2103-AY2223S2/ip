@@ -3,6 +3,9 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.time.DateTimeException;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -18,8 +21,14 @@ public class Duke {
     public static void splitCommand(String command) throws DukeException {
         String[] arr;
         if (command.contains("/")) {
+            String[] temp2;
             String[] temp = command.split(" ", 2);
-            String[] temp2 = temp[1].split("/");
+            if (temp[0].equals("deadline")) {
+                temp2 = temp[1].split("/", 2);
+            }  else {
+                temp2 = temp[1].split("/");
+            }
+            temp2[1] = temp2[1].replace("/", "-");
             arr = new String[temp.length + temp2.length -1];
             arr[0] = temp[0];
             System.arraycopy(temp2, 0, arr, temp.length-1, temp2.length);
@@ -27,7 +36,6 @@ public class Duke {
             arr = command.split(" ", 2);
         }
         echo(arr);
-
     }
 
     public static void echo(String[] arr) throws DukeException {
@@ -71,15 +79,18 @@ public class Duke {
                 }
             case "deadline":
                 try {
-                    Deadline deadline = new Deadline(arr[1], arr[2].substring(3));
+                    DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy HHmm");
+                    LocalDateTime dueDate = LocalDateTime.parse(arr[2].substring(3), formatter);
+                    Deadline deadline = new Deadline(arr[1], dueDate);
                     tasks.add(deadline);
                     System.out.println("Got it. I've added this task:\n  " + deadline + "\nNow you have " + tasks.size() + " tasks in the list.");
                 } catch (ArrayIndexOutOfBoundsException e) {
                     throw new DukeException(arr[0]);
+                } catch (DateTimeException e) {
+                    System.out.println("ERROR!! Please key in valid date format: dd-MM-yyyy HHmm");
                 } finally {
                     break;
                 }
-
             case "event":
                 try {
                     Event event = new Event(arr[1], arr[2].substring(5), arr[3].substring(3));
