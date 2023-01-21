@@ -25,7 +25,7 @@ public class Duke {
                 + "| | | | | | | |/ / _ \\\n"
                 + "| |_| | |_| |   <  __/\n"
                 + "|____/ \\__,_|_|\\_\\___|\n";
-        //System.out.println("Hello from\n" + logo);
+        System.out.println("Hello from\n" + logo);
 
         lining();
         System.out.println("Hello! I'm Duke\nWhat can I do for you?");
