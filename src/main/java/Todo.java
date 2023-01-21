@@ -6,11 +6,6 @@ public class Todo extends Task {
         super(description);
     }
 
-//    public String isolate() {
-//        String str = this.description.replace("todo", "");
-//        return str;
-//    }
-
     @Override
     public String toString() {
         return " " + "[T]" + "[" + super.getStatusIcon() + "]" + super.toString();
