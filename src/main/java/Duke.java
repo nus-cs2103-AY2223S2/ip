@@ -75,12 +75,7 @@ public class Duke {
      * Greets the user.
      */
     public static void greet() {
-        String logo = " ____        _        \n"
-                + "|  _ \\ _   _| | _____ \n"
-                + "| | | | | | | |/ / _ \\\n"
-                + "| |_| | |_| |   <  __/\n"
-                + "|____/ \\__,_|_|\\_\\___|\n";
-        System.out.println("Hello from\n" + logo + "\n" + "How may I be of assistance today? :)");
+        System.out.println("Hi, my name's Duke, how may I be of assistance today? :)");
     }
 
     /**
