@@ -64,3 +64,7 @@ shadowJar {
 run{
     standardInput = System.in
 }
+
+checkstyle {
+    toolVersion = '10.3.4'
+}

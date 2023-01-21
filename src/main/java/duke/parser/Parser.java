@@ -81,23 +81,26 @@ public class Parser {
     public Command parseCommand(String input) throws DukeException {
         Action action = parseAction(input);
         switch (action) {
-            case LIST:
-                return new ListTasksCommand();
-            case MARK:
-                return new MarkTaskCommand(Integer.parseInt(input.split(" ")[1]) - 1);
-            case UNMARK:
-                return new UnmarkTaskCommand(Integer.parseInt(input.split(" ")[1]) - 1);
-            case DELETE:
-                return new RemoveTaskCommand(Integer.parseInt(input.split(" ")[1]) - 1);
-            case TODO:
-                return new AddToDoCommand(parseToDoTask(input));
-            case DEADLINE:
-                return new AddDeadlineCommand(parseDeadlineTask(input));
-            case EVENT:
-                return new AddEventCommand(parseEventTask(input));
-            default:
-                throw new DukeException("I'm sorry, but I don't know what that means :-(");
+        case LIST:
+            return new ListTasksCommand();
+        case MARK:
+            return new MarkTaskCommand(Integer.parseInt(input.split(" ")[1]) - 1);
+        case UNMARK:
+            return new UnmarkTaskCommand(Integer.parseInt(input.split(" ")[1]) - 1);
+        case DELETE:
+            return new RemoveTaskCommand(Integer.parseInt(input.split(" ")[1]) - 1);
+        case TODO:
+            return new AddToDoCommand(parseToDoTask(input));
+        case DEADLINE:
+            return new AddDeadlineCommand(parseDeadlineTask(input));
+        case ERROR:
+            break;
+        case EVENT:
+            return new AddEventCommand(parseEventTask(input));
+        default:
+            throw new DukeException("I'm sorry, but I don't know what that means :-(");
         }
+        return null;
     }
 
 }

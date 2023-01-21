@@ -15,5 +15,4 @@ public class AddDeadlineCommand extends Command {
         taskList.addTask(deadline);
         ui.printTaskAdded(deadline, taskList.getSize());
     }
-
 }

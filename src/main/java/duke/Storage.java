@@ -12,8 +12,8 @@ import duke.task.ToDo;
 
 public class Storage {
 
-    String filePath = "data/duke.txt";
-    File file;
+    private String filePath = "data/duke.txt";
+    private File file;
 
     Storage() throws DukeException {
         try {
@@ -34,16 +34,12 @@ public class Storage {
             Scanner sc = new Scanner(file);
             while (sc.hasNextLine()) {
                 String[] task = sc.nextLine().split(" \\| ");
-                switch (task[0]) {
-                    case "T":
-                        taskList.addTask(new ToDo(task[2]));
-                        break;
-                    case "D":
-                        taskList.addTask(new Deadline(task[2], task[3]));
-                        break;
-                    case "E":
-                        taskList.addTask(new Event(task[2], task[3], task[4]));
-                        break;
+                if ("T".equals(task[0])) {
+                    taskList.addTask(new ToDo(task[2]));
+                } else if ("D".equals(task[0])) {
+                    taskList.addTask(new Deadline(task[2], task[3]));
+                } else if ("E".equals(task[0])) {
+                    taskList.addTask(new Event(task[2], task[3], task[4]));
                 }
                 if (task[1].equals("1")) {
                     taskList.markTask(taskList.getTaskList().size() - 1);
