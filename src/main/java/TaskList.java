@@ -4,6 +4,14 @@ public class TaskList{
     public TaskList(){
         taskList = new ArrayList<>();
     }
+
+    public String deleteTask(String taskNum){
+        int index = Integer.parseInt(taskNum) - 1;
+        Task task = taskList.remove(index);
+        return "Noted. I've removed this task:\n" + task.toString()
+                + "\nNow you have " + this.getSize() + " tasks in the list";
+    }
+
     public String listTasks(){
         String list = "Here are the tasks in your list:\n";
         for (int i = 0; i < taskList.size(); i++){

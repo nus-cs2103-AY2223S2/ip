@@ -1,5 +1,8 @@
 import java.util.*;
 public class Duke {
+    //private enum COMMANDS{
+    //    DELETE`````````````````````````````````````````````````````````````````````````````````````````````````````````````
+    //}
     public static void main(String[] args) throws DukeException{
         String logo = " ____        _        \n"
                 + "|  _ \\ _   _| | _____ \n"
@@ -13,10 +16,12 @@ public class Duke {
         Scanner sc = new Scanner(System.in);
         StringParser sp = new StringParser();
         while (!isBye) {
-
             try {
                 String answer = sc.nextLine();
                 String[] wordArr = answer.split(" ", 2);
+                String command = wordArr[0].toUpperCase();
+                //System.out.println(command);
+                //System.out.println(COMMANDS.DELETE);
                 System.out.println("___________________");
                 if (wordArr[0].equals("mark")) {
                     String index = wordArr[1];
@@ -27,6 +32,9 @@ public class Duke {
                 } else if (answer.equals("bye")) {
                     isBye = true;
                     System.out.println("Goodbye");
+                } else if (wordArr[0].equals("delete")) {
+                    String index = wordArr[1];
+                    System.out.println(taskList.deleteTask(index));
                 } else if (answer.equals("list")) { //return list of tasks
                     System.out.println(taskList.listTasks());
                 } else if (wordArr[0].equals("todo")) {
