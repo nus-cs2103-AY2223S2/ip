@@ -2,6 +2,10 @@ package duke;
 
 import duke.Task;
 
+/**
+ * Todo extends the Task class and represents a simple task description
+ * without any information associated with it
+ */
 public class Todo extends Task {
     public Todo(String name, boolean done){
         super(name, done);

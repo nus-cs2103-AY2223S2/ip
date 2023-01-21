@@ -1,12 +1,13 @@
 package duke;
 
-import duke.Task;
-import duke.TaskList;
-
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
 import java.io.IOException;
 
+/**
+ * Ui class handles all logic involved with the duke app communicating
+ * with the user.
+ */
 public class Ui {
 
     private BufferedReader reader;
@@ -15,10 +16,19 @@ public class Ui {
         this.reader = new BufferedReader(new InputStreamReader(System.in));
     }
 
+    /**
+     * Method that reads the user's text input.
+     *
+     * @return User's input as a string.
+     */
     public String input() throws IOException {
         return this.reader.readLine();
     }
 
+    /**
+     * Prints welcome statement upon starting the duke app
+     *
+     */
     public void start() {
         String logo = " ____        _        \n"
                 + "|  _ \\ _   _| | _____ \n"
@@ -32,22 +42,35 @@ public class Ui {
         line();
     }
 
+    /**
+     * Prints ending message when user terminates the duke app
+     *
+     */
     public void end() {
         line();
         indent("Bye. Hope to hear from you again! :)");
         line();
     }
 
+    /**
+     * Prints error message for when user provides empty dates.
+     */
     public static void emptyError() {
         indent("Sorry! You provided an empty description. Pls provide a correct input :)");
         line();
     }
 
+    /**
+     * Error message for when the user input an invalid statement
+     */
     public static void invalidInputError() {
         indent("Sorry! I did not quite understand what you meant :( Pls try again!");
         line();
     }
 
+    /**
+     * Message for un-mark operation
+     */
     public static void printUnmark(TaskList taskList, int i) {
         line();
         indent("Alright! I've unmarked this task :(\n");
@@ -55,6 +78,9 @@ public class Ui {
         line();
     }
 
+    /**
+     * Message for mark operation
+     */
     public static void printMark(TaskList taskList, int i) {
         line();
         indent("Alright! I've marked this task as done :) !\n");
@@ -62,6 +88,9 @@ public class Ui {
         line();
     }
 
+    /**
+     * Message for delete operation
+     */
     public static void printDelete(TaskList taskList, int i, int size) {
         line();
         indent("OK! I've deleted this task :)\n");
@@ -70,6 +99,9 @@ public class Ui {
         line();
     }
 
+    /**
+     * Message for list operation
+     */
     public static void printListCommand(TaskList taskList) {
         line();
         indent("Here are the remaining tasks in your list:\n");
@@ -77,6 +109,9 @@ public class Ui {
         line();
     }
 
+    /**
+     * Message for add task operation
+     */
     public static void printAddTask(Task task, int size) {
         line();
         indent("Roger! I've added this task to the list:\n");
@@ -85,6 +120,9 @@ public class Ui {
         line();
     }
 
+    /**
+     * function to indent duke system messages
+     */
     public static void indent(String txt){
         System.out.println("     " + txt );
     }

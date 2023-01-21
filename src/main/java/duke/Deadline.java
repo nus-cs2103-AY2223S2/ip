@@ -3,6 +3,10 @@ package duke;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
+/**
+ * Deadline class also extends task. A deadline is a category of task in
+ * duke that has a deadline(date).
+ */
 public class Deadline extends Task {
     private LocalDate date;
 

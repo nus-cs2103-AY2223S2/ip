@@ -1,12 +1,11 @@
 package duke;
 
-import duke.Deadline;
-import duke.DukeException;
-import duke.EmptyArgException;
-import duke.FileReadWrite;
-
 import java.io.IOException;
 
+/**
+ * Parser class to convert user's input into commands
+ * for the duke application.
+ */
 public class Parser {
 
     private TaskList taskList;
@@ -17,6 +16,13 @@ public class Parser {
         this.size = taskList.size();
     }
 
+    /**
+     * Function that parses the input string from ui class to determine
+     * the duke operation to perform next.
+     *
+     * @param input input string from user read from the Ui class
+     * @return boolean return false if the user indicates the end of current session
+     */
     public boolean parseInput (String input) {
         if (input.equals("bye")) {
             return false;
@@ -77,6 +83,14 @@ public class Parser {
         return true;
     }
 
+    /**
+     * Function that creates the Task objects from user inputs pertaining
+     * to adding tasks onto the list.
+     *
+     * @param input from the user indicating which operation he wants duke to perform
+     * @return Task return the task object created from the user input
+     * @throws DukeException if the input is invalid.
+     */
     public static Task createTask(String input) throws DukeException {
         Task newTask;
         if (input.contains("todo")){

@@ -1,6 +1,5 @@
 package duke;
 
-import duke.Deadline;
 
 import java.io.File;
 import java.nio.file.Paths;
@@ -9,11 +8,21 @@ import java.util.ArrayList;
 import java.io.FileWriter;
 import java.io.IOException;
 
+/**
+ * Class that handles writing and reading from the duke.txt file
+ */
 public abstract class FileReadWrite {
     private static String FILEPATH = Paths.get(Paths.get(System.getProperty("user.dir")).toString(),
             "data/duke.txt").toString();
 
 
+    /**
+     * Returns lateral location of the specified position.
+     * If the position is unset, NaN is returned.
+     *
+     * @return Task List that is read and interpreted from the duke.txt file
+     * @throws IOException  If the user input is interrupted.
+     */
     public static TaskList readFile() throws IOException {
         File file = new File(FILEPATH);
         TaskList taskList = new TaskList();
@@ -46,6 +55,12 @@ public abstract class FileReadWrite {
         return taskList;
     }
 
+    /**
+     * Function that updates duke.txt file when a task is added
+     * to keep an updated version of the task list for future reference.
+     *
+     * @throws IOException if the write operation is interrupted.
+     */
     public static void writeTask(ArrayList<Task> list) throws IOException {
         FileWriter fileWriter = new FileWriter(FILEPATH);
         for (Task t : list) {
@@ -54,6 +69,12 @@ public abstract class FileReadWrite {
         fileWriter.close();
     }
 
+    /**
+     * Function that updates duke.txt file with task marking operation
+     * to keep an updated version of the task list for future reference.
+     *
+     * @throws IOException if the write operation is interrupted.
+     */
     public static void writeMark(int i, Task t) throws IOException {
         File file = new File(FILEPATH);
         Scanner scanner = new Scanner(file);
@@ -71,6 +92,12 @@ public abstract class FileReadWrite {
         fileWriter.close();
     }
 
+    /**
+     * Function that updates duke.txt file with any task manipulation operation
+     * to keep an updated version of the task list for future reference.
+     *
+     * @throws IOException if the write operation is interrupted.
+     */
     public static void writeUnmark(int i, Task t) throws IOException {
         File file = new File(FILEPATH);
         Scanner scanner = new Scanner(file);
@@ -88,6 +115,12 @@ public abstract class FileReadWrite {
         fileWriter.close();
     }
 
+    /**
+     * Function that updates duke.txt file after a delete operation
+     * to keep an updated version of the task list for future reference.
+     *
+     * @throws IOException if the write operation is interrupted.
+     */
     public static void writeDelete(int i) throws IOException {
         File file = new File(FILEPATH);
         Scanner scanner = new Scanner(file);

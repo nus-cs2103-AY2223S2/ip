@@ -2,6 +2,10 @@ package duke;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
+/**
+ * Event class extends Task class as well and is a category of tasks that
+ * includes a description start date and end date.
+ */
 public class Event extends Task{
     private LocalDate date1;
     private LocalDate date2;
