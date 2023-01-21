@@ -21,7 +21,7 @@ class Parser {
     static String MARK_COMMAND = "SUI, I have marked this task from the training room: ";
     static String UNMARK_COMMAND = "SUI, I have unmarked this task from the training room: ";
     static String DELETE_COMMAND = "Tasks successfully deleted. SUI.";
-    static String FIND_COMMAND = "Here are matching tasks in your list";
+    static String FIND_COMMAND = "Here are matching tasks in your list sir";
     //Whitelist commands
     static String SHOW_TASKS = "list";
     static String TERMINATE = "exit";
