@@ -5,7 +5,7 @@ import java.io.PrintWriter;
 import java.io.Writer;
 import java.util.Scanner;
 
-public class Ui {
+class Ui {
 	private Scanner in;
 	private Writer out;
 

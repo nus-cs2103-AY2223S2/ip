@@ -5,13 +5,12 @@ import java.io.OutputStream;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
-import java.util.ArrayList;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public class Chungus {
     private Ui ui;
-    private ArrayList<Task> tasks;
+    TaskList tasks;
     private Storage db;
 
     private static final Pattern deadlinePattern = Pattern.compile("^deadline\\s+(.+)\\s+/by\\s+(.+)$");
@@ -27,7 +26,7 @@ public class Chungus {
 
     public Chungus(InputStream in, OutputStream out, String dbPath) {
         ui = new Ui(in, out);
-        tasks = new ArrayList<>();
+        tasks = new TaskList();
 
         File dbFile = new File(dbPath);
         if (dbFile.exists() && !dbFile.isFile()) {
@@ -39,8 +38,8 @@ public class Chungus {
             if (dbFile.createNewFile()) {
                 ui.info("Created a database file at %s\n", dbPath);
             } else {
-                tasks = new ArrayList<>(db.read());
-                ui.info("Read %s task(s) from %s\n", tasks.size(), dbPath);
+                tasks = db.read();
+                ui.info("Read %s task(s) from %s\n", tasks.count(), dbPath);
             }
         } catch (IOException e) {
             throw new RuntimeException(String.format("Failed to create/read db file %s", dbPath), e);
@@ -68,8 +67,8 @@ public class Chungus {
             db.write(tasks);
             return shouldExit;
         } catch (TaskNotFoundException e) {
-            ui.error("Could not find the requested task. You currently have exactly %d %s", tasks.size(),
-                    tasks.size() == 1 ? "task" : "tasks");
+            ui.error("Could not find the requested task. You currently have exactly %d %s", tasks.count(),
+                    tasks.count() == 1 ? "task" : "tasks");
             ui.error("Reason: %s", e.getMessage());
             return false;
         } catch (ChungusException e) {
@@ -88,10 +87,7 @@ public class Chungus {
         }
         case "list": {
             ui.info("Here are the tasks in your list:");
-            for (int i = 0; i < tasks.size(); i++) {
-                Task task = tasks.get(i);
-                ui.info("  %d.%s", i + 1, task);
-            }
+            ui.info("%s", tasks);
             return false;
         }
         case "todo": {
@@ -142,22 +138,20 @@ public class Chungus {
         case "mark": {
             int idx = getTaskNumberArg(args[1]) - 1;
 
-            Task task = tasks.get(idx);
-            task.setDone();
+            tasks.setDone(idx);
 
             ui.info("Okay, I've marked this task as completed:");
-            ui.info("  %s", task);
+            ui.info("  %s", tasks.get(idx));
 
             return false;
         }
         case "unmark": {
             int idx = getTaskNumberArg(args[1]) - 1;
 
-            Task task = tasks.get(idx);
-            task.setNotDone();
+            tasks.setNotDone(idx);
 
             ui.info("Okay, I've marked this task as incomplete:");
-            ui.info("  %s", task);
+            ui.info("  %s", tasks.get(idx));
 
             return false;
         }
@@ -178,20 +172,18 @@ public class Chungus {
     private void reportNewTask(Task task) {
         ui.info("Okay, I've added this task:");
         ui.info("  %s", task);
-        ui.info("Now you have %d %s.", tasks.size(), tasks.size() == 1 ? "task" : "tasks");
+        ui.info("Now you have %d %s.", tasks.count(), tasks.count() == 1 ? "task" : "tasks");
     }
 
     private void reportDeletedTask(Task task) {
         ui.info("Okay, I've deleted this task:");
         ui.info("  %s", task);
-        ui.info("Now you have %d %s.", tasks.size(), tasks.size() == 1 ? "task" : "tasks");
+        ui.info("Now you have %d %s.", tasks.count(), tasks.count() == 1 ? "task" : "tasks");
     }
 
     private int getTaskNumberArg(String s) {
         String[] xs = s.split("\\s+");
         int num = Integer.parseInt(xs[xs.length - 1]);
-        if (num > tasks.size() || num <= 0)
-            throw new TaskNotFoundException(num);
         return num;
     }
 

@@ -1,5 +1,8 @@
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.stream.Collectors;
 
 abstract class Task {
     private String desc;
@@ -207,6 +210,64 @@ class Event extends Task {
             ret.setNotDone();
         }
 
+        return ret;
+    }
+}
+
+class TaskList {
+    private ArrayList<Task> tasks;
+
+    public TaskList() {
+        tasks = new ArrayList<>();
+    }
+
+    public TaskList(List<Task> _tasks) {
+        tasks = new ArrayList<>(_tasks);
+    }
+
+    @Override
+    public String toString() {
+        StringBuilder b = new StringBuilder();
+        for (int i = 0; i < tasks.size(); i++) {
+            Task task = tasks.get(i);
+            b.append(String.format("  %d.%s\n", i + 1, task));
+        }
+        return b.toString();
+    }
+
+    public String marshal() {
+        return tasks.stream()
+                .map(task -> task.marshal())
+                .collect(Collectors.joining("\n"));
+    }
+
+    public int count() {
+        return tasks.size();
+    }
+
+    public void add(Task task) {
+        tasks.add(task);
+    }
+
+    public Task get(int idx) {
+        try {
+            return tasks.get(idx);
+        } catch (IndexOutOfBoundsException e) {
+            throw new TaskNotFoundException(idx);
+        }
+    }
+
+    public void setDone(int idx) {
+        get(idx).setDone();
+    }
+
+    public void setNotDone(int idx) {
+        get(idx).setNotDone();
+    }
+
+    public Task remove(int idx) {
+        Task ret = get(idx);
+        tasks.remove(idx);
         return ret;
     }
 }
