@@ -1,9 +1,10 @@
+import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Duke {
     private static Scanner scanner = new Scanner(System.in);
     private static String horizontalLine = "************************";
-    private static Task[] taskArr = new Task[100];
+    private static ArrayList<Task> taskArr = new ArrayList<>();
     private static int count = 0;
 
     public static void main(String[] args) {
@@ -39,6 +40,8 @@ public class Duke {
                 addDeadline(input);
             } else if (input.startsWith("event")) {
                 addEvent(input);
+            } else if (input.startsWith("delete")) {
+                deleteTask(input);
             } else {
                 throw new DukeException("I DON'T UNDERSTAND THAT!");
             }
@@ -57,7 +60,7 @@ public class Duke {
 
     private static void addTodo(String input) throws DukeException {
         // Error handling
-        if (input.length() <= 4) {
+        if (input.length() <= 5) {
             throw new DukeException("TODO NEEDS A DESCRIPTION!");
         }
 
@@ -73,7 +76,7 @@ public class Duke {
         System.out.println(horizontalLine);
         System.out.println("OK. I'VE ADDED THIS TASK:");
         System.out.println("[T][ ] " + newTodo);
-        taskArr[count] = newTodo;
+        taskArr.add(newTodo);
         count++;
         showCount();
         System.out.println(horizontalLine);
@@ -82,7 +85,7 @@ public class Duke {
 
     private static void addDeadline(String input) throws DukeException {
         // Error handling
-        if (input.length() <= 8) {
+        if (input.length() <= 9) {
             throw new DukeException("DEADLINE NEEDS A DESCRIPTION!");
         }
 
@@ -101,7 +104,7 @@ public class Duke {
         System.out.println(horizontalLine);
         System.out.println("OK. I'VE ADDED THIS TASK:");
         System.out.println("[D][ ] " + newDeadline);
-        taskArr[count] = newDeadline;
+        taskArr.add(newDeadline);
         count++;
         showCount();
         System.out.println(horizontalLine);
@@ -110,7 +113,7 @@ public class Duke {
 
     private static void addEvent(String input) throws DukeException {
         // Error handling
-        if (input.length() <= 5) {
+        if (input.length() <= 6) {
             throw new DukeException("EVENT NEEDS A DESCRIPTION!");
         }
 
@@ -131,29 +134,50 @@ public class Duke {
         System.out.println(horizontalLine);
         System.out.println("OK. I'VE ADDED THIS TASK:");
         System.out.println("[E][ ] " + newEvent);
-        taskArr[count] = newEvent;
+        taskArr.add(newEvent);
         count++;
         showCount();
         System.out.println(horizontalLine);
         readInput();
     }
 
+    private static void deleteTask(String input) throws DukeException {
+        // Error handling
+        if (input.length() <= 7) {
+            throw new DukeException("DELETE NEEDS A TASK NUMBER!");
+        }
+
+        // Get delete task number
+        int index = Integer.parseInt(input.substring(7));
+
+        System.out.println(horizontalLine);
+        System.out.println("OK! I'VE DELETED THIS TASK: ");
+        System.out.println("" + (index) + ". " +
+                "[" + taskArr.get(index-1).getIcon() + "]" +
+                "[" + taskArr.get(index-1).getStatusIcon() + "] " +
+                taskArr.get(index-1));
+        taskArr.remove(index-1);
+        count--;
+        System.out.println(horizontalLine);
+        readInput();
+    }
+
     private static void showMark(String input) {
-        int index = Integer.parseInt(input.substring(5, 6));
+        int index = Integer.parseInt(input.substring(5));
         System.out.println(horizontalLine);
         System.out.println("I'VE MARKED THIS TASK AS DONE: ");
-        System.out.println("[X] " + taskArr[index-1]);
-        taskArr[index-1].setDone(true);
+        System.out.println("[X] " + taskArr.get(index-1));
+        taskArr.get(index-1).setDone(true);
         System.out.println(horizontalLine);
         readInput();
     }
 
     private static void showUnmark(String input) {
-        int index = Integer.parseInt(input.substring(7, 8));
+        int index = Integer.parseInt(input.substring(7));
         System.out.println(horizontalLine);
         System.out.println("I'VE MARKED THIS TASK AS UNDONE: ");
-        System.out.println("[ ] " + taskArr[index-1]);
-        taskArr[index-1].setDone(false);
+        System.out.println("[ ] " + taskArr.get(index-1));
+        taskArr.get(index-1).setDone(false);
         System.out.println(horizontalLine);
         readInput();
     }
@@ -163,9 +187,9 @@ public class Duke {
         System.out.println("HERE ARE YOUR TASKS!");
         for (int i = 0; i < count; i++) {
             System.out.println("" + (i+1) + ". " +
-                    "[" + taskArr[i].getIcon() + "]" +
-                    "[" + taskArr[i].getStatusIcon() + "] " +
-                    taskArr[i]);
+                    "[" + taskArr.get(i).getIcon() + "]" +
+                    "[" + taskArr.get(i).getStatusIcon() + "] " +
+                    taskArr.get(i));
         }
         System.out.println(horizontalLine);
         readInput();
