@@ -11,7 +11,7 @@ public class Duke {
                     + "| | | | | | | |/ / _ \\\n"
                     + "| |_| | |_| |   <  __/\n"
                     + "|____/ \\__,_|_|\\_\\___|\n";
-    private Tasklist tasklist;
+    private final Tasklist tasklist;
     private boolean isActive;
 
     public Duke() {
@@ -41,59 +41,59 @@ public class Duke {
     public void parseInput(String input) {
         String[] delimited = input.split(" ");
         switch (delimited[0].toLowerCase()) {
-            case "bye":
-                this.isActive = false;
-                this.printOutput("Bye. Hope to see you again soon!");
-                break;
-            case "list":
-                System.out.println(LINE);
-                this.tasklist.viewList();
-                System.out.println(LINE);
-                break;
-            case "mark":
-                try {
-                    this.mark(delimited);
-                } catch (DukeException e) {
-                    this.printOutput(e.getMessage());
-                }
-                break;
-            case "unmark":
-                try {
-                    this.unmark(delimited);
-                } catch (DukeException e) {
-                    this.printOutput(e.getMessage());
-                }
-                break;
-            case "todo":
-                try {
-                    this.addTask(TaskTypes.TODO, input, delimited);
-                } catch (DukeException e) {
-                    this.printOutput(e.getMessage());
-                }
-                break;
-            case "deadline":
-                try {
-                    this.addTask(TaskTypes.DEADLINE, input, delimited);
-                } catch (DukeException e) {
-                    this.printOutput(e.getMessage());
-                }
-                break;
-            case "event":
-                try {
-                    this.addTask(TaskTypes.EVENT, input, delimited);
-                } catch (DukeException e) {
-                    this.printOutput(e.getMessage());
-                }
-                break;
-            case "delete":
-                try {
-                    this.deleteTask(delimited);
-                } catch (DukeException e) {
-                    this.printOutput(e.getMessage());
-                }
-                break;
-            default:
-                this.printOutput("I don't quite get what that means.");
+        case "bye":
+            this.isActive = false;
+            this.printOutput("Bye. Hope to see you again soon!");
+            break;
+        case "list":
+            System.out.println(LINE);
+            this.tasklist.viewList();
+            System.out.println(LINE);
+            break;
+        case "mark":
+            try {
+                this.mark(delimited);
+            } catch (DukeException e) {
+                this.printOutput(e.getMessage());
+            }
+            break;
+        case "unmark":
+            try {
+                this.unmark(delimited);
+            } catch (DukeException e) {
+                this.printOutput(e.getMessage());
+            }
+            break;
+        case "todo":
+            try {
+                this.addTask(TaskTypes.TODO, input, delimited);
+            } catch (DukeException e) {
+                this.printOutput(e.getMessage());
+            }
+            break;
+        case "deadline":
+            try {
+                this.addTask(TaskTypes.DEADLINE, input, delimited);
+            } catch (DukeException e) {
+                this.printOutput(e.getMessage());
+            }
+            break;
+        case "event":
+            try {
+                this.addTask(TaskTypes.EVENT, input, delimited);
+            } catch (DukeException e) {
+                this.printOutput(e.getMessage());
+            }
+            break;
+        case "delete":
+            try {
+                this.deleteTask(delimited);
+            } catch (DukeException e) {
+                this.printOutput(e.getMessage());
+            }
+            break;
+        default:
+            this.printOutput("I don't quite get what that means.");
         }
     }
 
@@ -103,7 +103,7 @@ public class Duke {
         System.out.println(LINE);
     }
 
-    private void mark(String[] input) throws DukeException{
+    private void mark(String[] input) throws DukeException {
         int index = this.retrieveIndex(input);
         if (this.tasklist.mark(index)) {
             printOutput("I've marked this as done:\n\t " + this.tasklist.get(index));
@@ -112,7 +112,7 @@ public class Duke {
         }
     }
 
-    private void unmark(String[] input) throws DukeException{
+    private void unmark(String[] input) throws DukeException {
         int index = this.retrieveIndex(input);
         if (this.tasklist.unmark(index)) {
             printOutput("I've marked this as not done yet:\n\t " + this.tasklist.get(index));
@@ -142,7 +142,7 @@ public class Duke {
 
     }
 
-    private void addTask(TaskTypes type, String input, String[] delimitedInput) throws DukeException{
+    private void addTask(TaskTypes type, String input, String[] delimitedInput) throws DukeException {
         if (delimitedInput.length < 2) {
             throw new DukeException("Invalid description provided. The description of a task cannot be empty.");
         }
@@ -150,36 +150,36 @@ public class Duke {
         String[] temp;
         String name;
         switch (type) {
-            case TODO:
-                name = input.split(" ", 2)[1];
-                task = new Todo(name);
-                break;
-            case DEADLINE:
-                if (!input.contains("/by")) {
-                    throw new DukeException("Please provide a deadline using /by");
-                }
-                temp = input.split(" /by ");
-                if (temp.length < 2) {
-                    throw new DukeException("Please provide a valid deadline.");
-                }
-                name = temp[0].split(" ", 2)[1];
-                String deadline = temp[1];
-                task = new Deadline(name, deadline);
-                break;
-            case EVENT:
-                if (!input.contains("/from") || !input.contains("/to")) {
-                    throw new DukeException("Please provide a start date and end date using /from and /to respectively.");
-                }
-                temp = input.split(" /from ");
-                name = temp[0].split(" ", 2)[1];
-                String[] dates = temp[1].split(" /to ");
-                if (dates.length < 2) {
-                    throw new DukeException("Please provide a valid start and end date.");
-                }
-                String startDate = dates[0];
-                String endDate = dates[1];
-                task = new Event(name, startDate, endDate);
-                break;
+        case TODO:
+            name = input.split(" ", 2)[1];
+            task = new Todo(name);
+            break;
+        case DEADLINE:
+            if (!input.contains("/by")) {
+                throw new DukeException("Please provide a deadline using /by");
+            }
+            temp = input.split(" /by ");
+            if (temp.length < 2) {
+                throw new DukeException("Please provide a valid deadline.");
+            }
+            name = temp[0].split(" ", 2)[1];
+            String deadline = temp[1];
+            task = new Deadline(name, deadline);
+            break;
+        case EVENT:
+            if (!input.contains("/from") || !input.contains("/to")) {
+                throw new DukeException("Please provide a start date and end date using /from and /to respectively.");
+            }
+            temp = input.split(" /from ");
+            name = temp[0].split(" ", 2)[1];
+            String[] dates = temp[1].split(" /to ");
+            if (dates.length < 2) {
+                throw new DukeException("Please provide a valid start and end date.");
+            }
+            String startDate = dates[0];
+            String endDate = dates[1];
+            task = new Event(name, startDate, endDate);
+            break;
         }
         this.tasklist.addTask(task);
         this.printOutput(
@@ -187,7 +187,7 @@ public class Duke {
                         task + "\n\t You now have " + this.tasklist.size() + " task(s) in the list.");
     }
 
-    private void deleteTask(String[] delimitedInput) throws DukeException{
+    private void deleteTask(String[] delimitedInput) throws DukeException {
         int index = retrieveIndex(delimitedInput);
         Task task = this.tasklist.deleteTask(index);
         this.printOutput("I've removed the following from your list of tasks:\n\t\t" +
