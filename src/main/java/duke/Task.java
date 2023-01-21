@@ -1,3 +1,4 @@
+package duke;
 public class Task {
         boolean status;
         String des;

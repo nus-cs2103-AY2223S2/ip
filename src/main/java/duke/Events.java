@@ -1,3 +1,4 @@
+package duke;
 public class Events extends TimedTask{
     String des;
     public Events(boolean status, String des) {

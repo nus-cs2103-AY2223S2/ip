@@ -1,3 +1,4 @@
+package duke;
 public class Deadlines extends TimedTask{
     String des;
     public Deadlines(boolean status, String des) {

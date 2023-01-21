@@ -1,3 +1,4 @@
+package duke;
 public class ToDos extends Task{
     public ToDos(boolean status, String des) {
         super(status, des);
