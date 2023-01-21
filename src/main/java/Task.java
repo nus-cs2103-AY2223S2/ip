@@ -20,9 +20,9 @@ public class Task {
 
     public String status() {
         if (!done) {
-            return ("[ ] " + name);
+            return ("[ ]" + name);
         } else {
-            return ("[X] " + name);
+            return ("[X]" + name);
         }
     }
 
