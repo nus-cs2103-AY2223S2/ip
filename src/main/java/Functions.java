@@ -11,6 +11,39 @@ public class Functions {
     public void list(String inp) {
         String[] s = inp.split(" ");
 
+        /*
+        if (s.length>1) {
+            String[] temp = Arrays.copyOfRange(s, 1, s.length);
+            String datetime = String.join(" ", temp);
+            String[] x = datetime.split(" /find ");
+            //check date format
+            try {
+                LocalDateTime query = LocalDateTime.parse(x[0]);
+                //search and only print those that match date
+                for (int i = 0; i < ls.count(); i++) {
+                    Task ts = ls.getTask(i);
+                    if (ts instanceof TimedTask) {
+                        if (query.isEqual(((TimedTask) ts).end) || query.isEqual(((TimedTask) ts).start)) {
+                            ts.printStatus();
+                        }
+                    }
+                }
+                //report end of search
+                System.out.println("Search done!");
+            } catch (DateTimeParseException e) {
+                System.out.println("Date Time format is dd/mm/yyyy hh:mm");
+            }
+
+
+        } else {
+            System.out.println("Here are the tasks in your list:");
+            for (int i = 0; i < ls.count(); i++) {
+                System.out.print(i + 1 + ".");
+                ls.getTask(i).printStatus();
+            }
+        }
+        */
+
         System.out.println("Here are the tasks in your list:");
         for (int i = 0; i < ls.count(); i++) {
             System.out.print(i + 1 + ".");
