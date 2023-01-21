@@ -33,20 +33,15 @@ public class Duke {
         while (!command.equals("bye")) {
             printHorizontalLine();
             System.out.println("Karen:");
-
-            if (command.equals("list")) {
-                for (int i = 0; i < tasks.size(); i++) {
-                    Task currTask = tasks.get(i);
-                    System.out.println((i + 1) + ". " + currTask.toString());
-                }
-            } else if (command.contains("mark") || command.contains("unmark")) {
-                int taskNumber = Integer.parseInt(command.split(" ")[1]);
-                String action = command.split(" ")[0];
-
-                // check if task number is valid
-                if (taskNumber > tasks.size() || taskNumber <= 0) {
-                    System.out.println("Can you please get your eyes checked?");
-                } else {
+            try {
+                if (command.equals("list")) {
+                    for (int i = 0; i < tasks.size(); i++) {
+                        Task currTask = tasks.get(i);
+                        System.out.println((i + 1) + ". " + currTask.toString());
+                    }
+                } else if (command.contains("mark") || command.contains("unmark")) {
+                    int taskNumber = Integer.parseInt(command.split(" ")[1]);
+                    String action = command.split(" ")[0];
                     Task currTask = tasks.get(taskNumber - 1);
 
                     if (action.equals("mark")) {
@@ -62,44 +57,79 @@ public class Duke {
                             currTask.toString()
                         );
                     }
-                }
-            } else {
-                String type = command.split(" ")[0];
-                String description = command.split(type + " ")[1];
+                } else {
+                    String type = command.split(" ")[0];
+                    String[] commandArr = command.split(" ", 2);
 
-                switch (type) {
-                    case "todo":
-                        Todo todo = new Todo(description);
-                        tasks.add(todo);
-                        System.out.println(
-                            "You better finish this soon:\n" +
-                            todo.toString() +
-                            "\nCan you finish all " + tasks.size() + " tasks in your list?"
-                        );
-                        break;
-                    case "deadline":
-                        String[] deadlineArr = description.split(" /by ");
-                        Deadline deadline = new Deadline(deadlineArr[0], deadlineArr[1]);
-                        tasks.add(deadline);
-                        System.out.println(
-                            "You better finish this soon:\n" +
-                            deadline.toString() +
-                            "\nCan you finish all " + tasks.size() + " tasks in your list?"
-                        );
-                        break;
-                    case "event":
-                        String[] eventArr = description.split(" /from ");
-                        String[] fromToArr = eventArr[1].split(" /to ");
-                        Event event = new Event(eventArr[0], fromToArr[0], fromToArr[1]);
-                        tasks.add(event);
-                        System.out.println(
-                            "You better finish this soon:\n" +
-                            event.toString() +
-                            "\nCan you finish all " + tasks.size() + " tasks in your list?"
-                        );
-                        break;
-                    default:
+                    switch (type) {
+                        case "todo":
+                            if (commandArr.length == 1) {
+                                throw new DukeException("How are you gonna do an empty todo?");
+                            }
+
+                            String todoDescription = commandArr[1];
+                            Todo todo = new Todo(todoDescription);
+                            tasks.add(todo);
+                            System.out.println(
+                                "You better finish this soon:\n" +
+                                todo.toString() +
+                                "\nCan you finish all " + tasks.size() + " tasks in your list?"
+                            );
+                            break;
+                        case "deadline":
+                            if (commandArr.length == 1) {
+                                throw new DukeException("Deadline for...?");
+                            }
+
+                            String[] deadlineArr = commandArr[1].split(" /by ");
+
+                            if (deadlineArr.length == 1) {
+                                throw new DukeException("What's the deadline for your task??");
+                            }
+
+                            Deadline deadline = new Deadline(deadlineArr[0], deadlineArr[1]);
+                            tasks.add(deadline);
+                            System.out.println(
+                                "You better finish this soon:\n" +
+                                deadline.toString() +
+                                "\nCan you finish all " + tasks.size() + " tasks in your list?"
+                            );
+                            break;
+                        case "event":
+                            if (commandArr.length == 1) {
+                                throw new DukeException("What event is this??");
+                            }
+
+                            String[] eventArr = commandArr[1].split(" /from ");
+
+                            if (eventArr.length == 1) {
+                                throw new DukeException("When does your event start??");
+                            }
+
+                            String[] fromToArr = eventArr[1].split(" /to ");
+
+                            if (fromToArr.length == 1) {
+                                throw new DukeException("When does your event end??");
+                            }
+
+                            Event event = new Event(eventArr[0], fromToArr[0], fromToArr[1]);
+                            tasks.add(event);
+                            System.out.println(
+                                "You better finish this soon:\n" +
+                                event.toString() +
+                                "\nCan you finish all " + tasks.size() + " tasks in your list?"
+                            );
+                            break;
+                        default:
+                            throw new DukeException("Sorry I don't understand what you're talking about.");
+                    }
                 }
+            } catch (DukeException e) {
+                System.out.println(e.getMessage());
+            } catch (IndexOutOfBoundsException e) {
+                System.out.println("Can you please double check your task number?");
+            } catch (NumberFormatException e) {
+                System.out.println("Can you please pass in a number?");
             }
 
             printHorizontalLine();
