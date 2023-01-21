@@ -12,12 +12,38 @@ import java.util.Scanner;
 
 public class Duke {
 
+    /**
+     * Special commands that the user can issue.
+     */
     enum Command {
+        /**
+         * List command
+         */
         LIST,
+
+        /**
+         * Mark Command
+         */
         MARK,
+
+        /**
+         * Unmark command
+         */
         UNMARK,
+
+        /**
+         * Creation of new task
+         */
         TASK,
+
+        /**
+         * Delete command
+         */
         DELETE,
+
+        /**
+         * Duke does not know this command
+         */
         UNKNOWN
     }
 
@@ -80,34 +106,32 @@ public class Duke {
 
         Command processedCommand = checkForCommand(command);
 
-        //Handle "list" command
-        if (processedCommand.equals(Command.LIST)) {
+        switch (processedCommand) {
+
+        case LIST:
             taskMemory.list();
             makeSeperation();
-        }
+            break;
 
-        //Handle "mark" command
-        else if (processedCommand.equals(Command.MARK)) {
+        case MARK:
             int index = getMarkIndex(command) - 1;
             taskMemory.markTask(index);
 
             System.out.println("\tNice! I've marked this task as done:\n\t  "
                     + taskMemory.taskToString(index));
             makeSeperation();
-        }
+            break;
 
-        //Handle "unmark" command
-        else if (processedCommand.equals(Command.UNMARK)) {
-            int index = getMarkIndex(command) - 1;
+        case UNMARK:
+            index = getMarkIndex(command) - 1;
             taskMemory.unmarkTask(index);
 
             System.out.println("\tOK, I've marked this task as not done yet:\n\t  "
                     + taskMemory.taskToString(index));
             makeSeperation();
-        }
+            break;
 
-        //Handle normal task
-        else if (processedCommand.equals(Command.TASK)){
+        case TASK:
             try {
                 Task current_task = createTask(command);
 
@@ -119,24 +143,23 @@ public class Duke {
                 makeSeperation();
             } catch (DukeBadInstructionFormatException e) {
                 handleDukeException(e);
+            } finally {
+                break;
             }
 
-        }
-
-        //Handle "delete" command
-        else if (processedCommand.equals(Command.DELETE)) {
-            int index = getMarkIndex(command) - 1;
+        case DELETE:
+            index = getMarkIndex(command) - 1;
             Task removed = taskMemory.delete(index);
 
             System.out.println("\tNoted. I've removed this task:\n\t  " +
                     removed.toString() + String.format("\n\tNow you have %d tasks in the list."
                     , taskMemory.getLength()));
             makeSeperation();
-        }
+            break;
 
-        //Program doesn't know how to handle.
-        else {
+        default:
             throw new DukeUnknownInputException("Unknown input.");
+
         }
 
     }
@@ -151,8 +174,9 @@ public class Duke {
     public static Task createTask(String command) throws DukeBadInstructionFormatException {
         String[] splitted = command.split(" ");
 
-        //TODO: consider splitting into separate methods for each task
-        if (splitted[0].equals("todo")) {
+        switch (splitted[0]) {
+
+        case "todo":
             //Handle no description for a ToDo input
             if (splitted.length == 1) {
                 throw new DukeBadInstructionFormatException(
@@ -166,9 +190,8 @@ public class Duke {
             //Make Todo
             ToDo curToDO = new ToDo(description);
             return curToDO;
-        }
 
-        else if (splitted[0].equals("deadline")) {
+        case "deadline":
             //Get 'Deadline' description and 'by' index
             int byStartIndex = -1;
 
@@ -187,10 +210,10 @@ public class Duke {
             }
 
             //Make description and by string
-            String[] descriptionArray = Arrays.copyOfRange(splitted, 1, byStartIndex);
+            descriptionArray = Arrays.copyOfRange(splitted, 1, byStartIndex);
             String[] byArray = Arrays.copyOfRange(splitted, byStartIndex + 1,
                     splitted.length);
-            String description = String.join(" ", descriptionArray);
+            description = String.join(" ", descriptionArray);
             String by = String.join(" ", byArray);
 
             //Handle no description for a Deadline
@@ -202,9 +225,8 @@ public class Duke {
             //Make Deadline
             Deadline deadline = new Deadline(description, by);
             return deadline;
-        }
 
-        else if (splitted[0].equals("event")) {
+        case "event":
             //Get 'Deadline' description, 'from' and 'to' index
             int fromStartIndex = -1;
             int toStartIndex = -1;
@@ -228,12 +250,12 @@ public class Duke {
             }
 
             //Make description and by string
-            String[] descriptionArray = Arrays.copyOfRange(splitted, 1, fromStartIndex);
+            descriptionArray = Arrays.copyOfRange(splitted, 1, fromStartIndex);
             String[] fromArray = Arrays.copyOfRange(splitted, fromStartIndex + 1,
                     toStartIndex);
             String[] toArray = Arrays.copyOfRange(splitted, toStartIndex + 1,
                     splitted.length);
-            String description = String.join(" ", descriptionArray);
+            description = String.join(" ", descriptionArray);
             String from = String.join(" ", fromArray);
             String to = String.join(" ", toArray);
 
@@ -246,13 +268,13 @@ public class Duke {
             //Make Event
             Event event = new Event(description, from, to);
             return event;
-        }
 
-        else {
+        default:
             //TODO: better error handling
             System.out.println("Error: unknown Task type");
             return null;
         }
+
     }
 
     /**
@@ -264,20 +286,33 @@ public class Duke {
      */
     public static Command checkForCommand(String command) {
         String[] splitted = command.split(" ");
-        if (splitted[0].equals("list")) {
+        switch (splitted[0]) {
+
+        case "list":
             return Command.LIST;
-        } else if (splitted[0].equals("mark")) {
+
+        case "mark":
             return Command.MARK;
-        } else if (splitted[0].equals("unmark")) {
+
+        case "unmark":
             return Command.UNMARK;
-        } else if (splitted[0].equals("todo") || splitted[0].equals("deadline")
-                || splitted[0].equals("event")){
+
+        case "todo":
             return Command.TASK;
-        } else if (splitted[0].equals("delete")) {
+
+        case "deadline":
+            return Command.TASK;
+
+        case "event":
+            return Command.TASK;
+
+        case "delete":
             return Command.DELETE;
-        } else {
+
+        default:
             return Command.UNKNOWN;
         }
+
     }
 
     /**
