@@ -1,8 +1,10 @@
 import java.io.FileNotFoundException;
+import java.time.format.DateTimeFormatter;
 import java.util.*;
 import java.lang.*;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.time.*;
 
 enum type {
     todo,
@@ -94,6 +96,10 @@ public class Duke {
                     String[] parts = doit.split("/by");
                     Task current = new Deadline(parts[0], parts[1]);
                     tasklist.add(current);
+                    if(parts[1].contains("/")) {
+                        DateTimeFormatter dtf = DateTimeFormatter.ofPattern("dd/mm/yyyy");
+                        LocalDate date = LocalDate.parse(parts[1], dtf);
+                    }
                     lining();
                     System.out.println("Got it. I've added this task:");
                     System.out.println(current.toString());
