@@ -13,6 +13,9 @@ public class AddDeadlineCommand extends AddTaskCommand {
                 .orElseThrow(() -> new IllegalSyntaxException("Name disappeared!"));
         String by = args.get("by")
                 .orElseThrow(() -> new IllegalSyntaxException("[by] disappeared!"));
-        return new AquaDeadline(name, by);
+        boolean isCompleted = args.get("completed")
+                .map(isComp -> Boolean.parseBoolean(isComp))
+                .orElse(false);
+        return new AquaDeadline(name, isCompleted, by);
     }
 }

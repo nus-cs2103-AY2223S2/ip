@@ -14,6 +14,9 @@ public class AddEventCommand extends AddTaskCommand {
                 .orElseThrow(() -> new IllegalSyntaxException("[from] disappeared!"));
         String to = args.get("to")
                 .orElseThrow(() -> new IllegalSyntaxException("[to] disappeared!"));
-        return new AquaEvent(name, from, to);
+        boolean isCompleted = args.get("completed")
+                .map(isComp -> Boolean.parseBoolean(isComp))
+                .orElse(false);
+        return new AquaEvent(name, isCompleted, from, to);
     }
 }
