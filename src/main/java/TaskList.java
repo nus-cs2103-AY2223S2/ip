@@ -17,8 +17,12 @@ public class TaskList {
     public void removeTask(int index) {
         this.list.remove(index);
     }
-    public Task getTask(int index) {
-        return this.list.get(index);
+    public Task getTask(int index) throws taskNotFoundException{
+        try {
+            return this.list.get(index);
+        } catch (IndexOutOfBoundsException e){
+            throw new taskNotFoundException();
+        }
     }
 
     public int count() {

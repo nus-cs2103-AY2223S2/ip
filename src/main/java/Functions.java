@@ -1,19 +1,15 @@
-import java.io.FileNotFoundException;
 import java.util.Arrays;
-import java.io.File;
-import java.io.IOException;
-import java.io.FileWriter;
-import java.time.LocalDateTime;
-import java.time.format.DateTimeParseException;
 
 public class Functions {
-    TaskList ls;
+    TaskList tl;
+    Storage st;
 
-    public Functions(TaskList ls) {
-        this.ls = ls;
+    public Functions(TaskList ls, Storage st) {
+        this.tl = ls;
+        this.st = st;
     }
 
-    public void list(String inp) {
+    public void list(String inp) throws DukeException{
         String[] s = inp.split(" ");
 
         /*
@@ -50,9 +46,10 @@ public class Functions {
         */
 
         System.out.println("Here are the tasks in your list:");
-        for (int i = 0; i < ls.count(); i++) {
+        for (int i = 0; i < tl.count(); i++) {
             System.out.print(i + 1 + ".");
-            ls.getTask(i).printStatus();
+            tl.getTask(i).printStatus();
+
         }
     }
 
@@ -61,109 +58,78 @@ public class Functions {
         return false;
     }
 
-    public void save() {
-        String pathname = "task.txt";
-        File f = new File(pathname);
-        //create file if not created already
-        try {
-            if (f.createNewFile()) {}
-        } catch (IOException e) {
-            System.out.println(e);
-        }
-
-        //overwrite all in tasklist into file
-        try{
-            FileWriter fw = new FileWriter(pathname);
-            for (int i = 0; i < ls.count(); i++) {
-                fw.write(ls.getTask(i).toString() + "\n");
-            }
-            fw.close();
-        } catch (IOException e) {
-            System.out.println(e);
-        }
-    }
-
     public void mark(String inp) throws DukeException{
         String[] s = inp.split(" ");
         if (s.length<2) {
-            throw new DukeException("I don't know which task to mark...");
+            throw new markException();
         }
         int index = Integer.parseInt(s[1]) - 1;
-        if (index > ls.count()) { //this not working
-            throw new DukeException("Task not found...");
-        }
-        Task t = ls.getTask(index);
+        Task t = tl.getTask(index);
         t.setStatus(true);
         System.out.println("Nice! I've marked this task as done:");
         t.printStatus();
-        this.save();
+        this.st.save(tl);
     }
 
     public void unmark(String inp) throws DukeException{
         String[] s = inp.split(" ");
         if (s.length<2) {
-            throw new DukeException("I don't know which task to mark...");
+            throw new markException();
         }
         int index = Integer.parseInt(s[1]) - 1;
-        if (index > ls.count()) { //this not working
-            throw new DukeException("Task not found...");
-        }
-        Task t = ls.getTask(index);
+        Task t = tl.getTask(index);
         t.setStatus(false);
         System.out.println("OK, I've marked this task as not done yet:");
         t.printStatus();
-        this.save();
+        this.st.save(tl);
     }
 
     public void delete(String inp) throws DukeException{
         String[] s = inp.split(" ");
         if (s.length<2) {
-            throw new DukeException("I don't know which task to delete...");
+            throw new deleteException();
         }
         int index = Integer.parseInt(s[1]) - 1;
-        if (index > ls.count()) {
-            throw new DukeException("Task not found...");
-        }
         System.out.println("Noted. I've removed this task:");
-        ls.getTask(index).printStatus();
-        ls.removeTask(index);
-        ls.printCount();
-        this.save();
+        tl.getTask(index).printStatus();
+        tl.removeTask(index);
+        tl.printCount();
+        this.st.save(tl);
     }
 
     public void todo(String inp) throws DukeException{
         String[] s = inp.split(" ");
         if (s.length<2) {
-            throw new DukeException("☹ OOPS!!! The description of a todo cannot be empty.");
+            throw new todoException();
         }
         String[] temp = Arrays.copyOfRange(s, 1, s.length);
         String taskDes = String.join(" ", temp);
         ToDos td = new ToDos(false, taskDes);
-        ls.addTask(td);
-        this.save();
+        tl.addTask(td);
+        this.st.save(tl);
     }
 
     public void deadline(String inp) throws DukeException {
         String[] s = inp.split(" ");
         if (s.length<2) {
-            throw new DukeException("☹ OOPS!!! The description of a deadline cannot be empty.");
+            throw new deadlineException();
         }
         String[] temp = Arrays.copyOfRange(s, 1, s.length);
         String taskDes = String.join(" ", temp);
         Deadlines dl = new Deadlines(false, taskDes);
-        ls.addTask(dl);
-        this.save();
+        tl.addTask(dl);
+        this.st.save(tl);
     }
 
     public void events(String inp) throws DukeException {
         String[] s = inp.split(" ");
         if (s.length<2) {
-            throw new DukeException("☹ OOPS!!! The description of a event cannot be empty.");
+            throw new eventException();
         }
         String[] temp = Arrays.copyOfRange(s, 1, s.length);
         String taskDes = String.join(" ", temp);
         Events ev = new Events(false, taskDes);
-        ls.addTask(ev);
-        this.save();
+        tl.addTask(ev);
+        this.st.save(tl);
     }
 }
