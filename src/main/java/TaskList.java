@@ -27,7 +27,7 @@ public class TaskList {
         return taskList;
     }
 
-    public void deleteTask(int index) {
-        taskList.remove(index);
+    public Task deleteTask(int index) {
+        return taskList.remove(index);
     }
 }

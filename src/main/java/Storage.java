@@ -3,12 +3,12 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.util.Scanner;
 
-public class FileHandler {
+public class Storage {
 
     String filePath = "data/duke.txt";
     File file;
 
-    FileHandler() throws DukeException {
+    Storage() throws DukeException {
         try {
             file = new File(filePath);
             if (!file.exists()) {
@@ -28,15 +28,15 @@ public class FileHandler {
             while (sc.hasNextLine()) {
                 String[] task = sc.nextLine().split(" \\| ");
                 switch (task[0]) {
-                case "T":
-                    taskList.addTask(new ToDo(task[2]));
-                    break;
-                case "D":
-                    taskList.addTask(new Deadline(task[2], task[3]));
-                    break;
-                case "E":
-                    taskList.addTask(new Event(task[2], task[3], task[4]));
-                    break;
+                    case "T":
+                        taskList.addTask(new ToDo(task[2]));
+                        break;
+                    case "D":
+                        taskList.addTask(new Deadline(task[2], task[3]));
+                        break;
+                    case "E":
+                        taskList.addTask(new Event(task[2], task[3], task[4]));
+                        break;
                 }
                 if (task[1].equals("1")) {
                     taskList.markTask(taskList.getTaskList().size() - 1);
