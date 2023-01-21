@@ -34,6 +34,13 @@ public class Munch {
                     int i = Integer.parseInt(words[1]) - 1;
                     tasks.get(i).wording(words[0]);
 
+                } else if (words[0].equals("delete")) {
+                    int i = Integer.parseInt(words[1]) - 1;
+                    System.out.println("Aites, I've deleted this task for you :)");
+                    System.out.println(tasks.get(i));
+                    tasks.remove(i);
+                    count--;
+                    System.out.println("Now you have " + count + " task(s) in the list ~~");
                 } else if (words[0].equals("todo")) {
                     String separator = "todo";
                     int sepPos = word.indexOf(separator);
@@ -46,6 +53,7 @@ public class Munch {
                         count++;
                         System.out.println("Now you have " + count + " task(s) in the list ~~");
                     } else {
+                        count--;
                         throw new IncompleteInputException();
                     }
 
@@ -56,7 +64,6 @@ public class Munch {
                         int sepPos1 = word.indexOf(separator1);
                         int sepPos2 = word.indexOf(separator2);
                         String str = word.substring(sepPos1 + separator1.length(), sepPos2);
-                        System.out.println(str.length());
                         String time = word.substring(sepPos2 + separator2.length());
                         Deadlines deadline = new Deadlines(str, time);
                         tasks.add(deadline);
@@ -65,6 +72,7 @@ public class Munch {
                         count++;
                         System.out.println("Now you have " + count + " task(s) in the list ~~");
                     } else {
+                        count--;
                         throw new IncompleteInputException();
                     }
 
@@ -86,6 +94,7 @@ public class Munch {
                         count++;
                         System.out.println("Now you have " + count + " task(s) in the list ~~");
                     } else {
+                        count--;
                         throw new IncompleteInputException();
                     }
 
