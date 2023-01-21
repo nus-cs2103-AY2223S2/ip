@@ -14,6 +14,26 @@ public class Event extends Task {
     }
 
     @Override
+    public TaskType getTaskType() {
+        return TaskType.EVENT;
+    }
+
+    @Override
+    public String getDeadline() {
+        return Task.EMPTY;
+    }
+
+    @Override
+    public String getStartDateTime() {
+        return this.start;
+    }
+
+    @Override
+    public String getEndDateTime() {
+        return this.end;
+    }
+
+    @Override
     public String toString() {
         return Event.TAG + super.toString() + " (from: " + this.start + " to: " + this.end + ")";
     }

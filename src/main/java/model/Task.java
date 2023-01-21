@@ -1,22 +1,24 @@
 package model;
 
-import storage.File;
+import storage.Outputable;
 import utils.Printer;
 
 import java.io.IOException;
+import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
-import java.util.Arrays;
+import java.util.Base64;
 import java.util.LinkedList;
 
-public class Task {
+abstract public class Task {
+    protected static final String EMPTY = "~";
+    private static LinkedList<Task> tasks = new LinkedList<>();
 
-    private String title;
-    private static final LinkedList<Task> tasks = new LinkedList<>();
-    private TaskStatus status = TaskStatus.NEW;
+    private final String title;
+    private TaskStatus status;
 
     protected Task(String title) {
         this.title = title;
-
+        this.status = TaskStatus.NEW;
         Task.tasks.add(this);
     }
 
@@ -75,17 +77,69 @@ public class Task {
             case COMPLETED:
                 return "X";
             default:
+                // Should not reach here
                 return "?";
         }
     }
 
-    public static void save() {
+    public static void save(Outputable out) {
+        Base64.Encoder e = Base64.getEncoder();
+        StringBuilder sb = new StringBuilder();
+        for (Task t : Task.tasks) {
+
+            String s = String.format("%s | %s | %s | %s | %s | %s",
+                    e.encodeToString(t.getTaskType().toString().getBytes(StandardCharsets.UTF_8)),
+                    e.encodeToString(t.title.getBytes(StandardCharsets.UTF_8)),
+                    e.encodeToString(t.status.toString().getBytes(StandardCharsets.UTF_8)),
+                    e.encodeToString(t.getDeadline().getBytes(StandardCharsets.UTF_8)),
+                    e.encodeToString(t.getStartDateTime().getBytes(StandardCharsets.UTF_8)),
+                    e.encodeToString(t.getEndDateTime().getBytes(StandardCharsets.UTF_8)));
+            sb.append(s).append("\n");
+        }
+
         try {
-            File.saveToFile(String.join("\n", listAll()));
-        } catch (IOException e) {
-            Printer.printlnError(e.toString());
+            out.write(sb.toString());
+        } catch (IOException err) {
+            Printer.printlnError(err.toString());
         }
     }
+
+    public static void load(ArrayList<String> in) {
+        Base64.Decoder d = Base64.getDecoder();
+        for (String s : in) {
+            String[] split = s.split(" \\| ");
+
+            byte[] taskType = d.decode(split[0]);
+            byte[] title = d.decode(split[1]);
+            byte[] status = d.decode(split[2]);
+            byte[] deadline = d.decode(split[3]);
+            byte[] startDateTime = d.decode(split[4]);
+            byte[] endDateTime = d.decode(split[5]);
+
+            Task restoredTask = null;
+            switch (TaskType.valueOf(new String(taskType, StandardCharsets.UTF_8))) {
+                case TODO:
+                    restoredTask = new ToDo(new String(title, StandardCharsets.UTF_8));
+                    break;
+                case DEADLINE:
+                    restoredTask = new Deadline(new String(title, StandardCharsets.UTF_8),
+                            new String(deadline, StandardCharsets.UTF_8));
+                    break;
+                case EVENT:
+                    restoredTask = new Event(new String(title, StandardCharsets.UTF_8),
+                            new String(startDateTime, StandardCharsets.UTF_8),
+                            new String(endDateTime, StandardCharsets.UTF_8));
+                    break;
+            }
+
+            restoredTask.setStatus(TaskStatus.valueOf(new String(status, StandardCharsets.UTF_8)));
+        }
+    }
+
+    abstract public TaskType getTaskType();
+    abstract public String getDeadline();
+    abstract public String getStartDateTime();
+    abstract public String getEndDateTime();
 
     @Override
     public String toString() {
@@ -96,4 +150,10 @@ public class Task {
  enum TaskStatus {
     NEW,
     COMPLETED
+}
+
+enum TaskType {
+    TODO,
+    DEADLINE,
+    EVENT
 }

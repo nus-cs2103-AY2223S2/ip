@@ -2,13 +2,14 @@ import model.Deadline;
 import model.Event;
 import model.Task;
 import model.ToDo;
-import storage.File;
+import storage.StorageManager;
 import utils.*;
 
 import java.io.IOException;
 import java.util.Scanner;
 
 public class Membot {
+    private static final String FILE_NAME = "./data/tasks.txt";
     private static final String LOGO =
               "                             _             _   \n"
             + " _ __ ___    ___  _ __ ___  | |__    ___  | |_ \n"
@@ -17,8 +18,10 @@ public class Membot {
             + "|_| |_| |_| \\___||_| |_| |_||_.__/  \\___/  \\__|\n";
 
     public static void main(String[] args) {
+        StorageManager manager = null;
         try {
-            File.init();
+            manager = new StorageManager(FILE_NAME);
+            Task.load(manager.loadFromFile());
         } catch (IOException e) {
             Printer.printlnError(e.toString());
         }
@@ -143,7 +146,10 @@ public class Membot {
         }
 
         scanner.close();
-        Task.save();
+
+        if (manager != null) {
+            Task.save(manager);
+        }
     }
 
     private static void printTasks() {
