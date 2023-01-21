@@ -1,4 +1,7 @@
 import java.util.Scanner;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
 enum Query { LIST, MARK, UNMARK, TODO, DEADLINE, EVENT, DELETE }
 public class Duke {
@@ -81,12 +84,14 @@ public class Duke {
             String[] tokens = s.split(" /by ");
             String name = tokens[0];
             String by = tokens[1];
-            Deadline t = new Deadline(name, by);            
+            Deadline t = new Deadline(name, parseDate(by));            
             a.add(t);
             Save.makeSave(a);
             System.out.println("Got it I've added a deadline");
             System.out.println(t.toString());
-        } catch (IndexOutOfBoundsException e) { System.out.println("please ensure u have a /by option and that /by option argument exist");}
+        } catch (IndexOutOfBoundsException e) { System.out.println("please ensure u have a /by option and that /by option argument exist");
+        } catch (DateTimeParseException e) {System.out.println("please ensure yyyy-MM-dd format");}
+        
     }
     private static void event(ArrayList<Task> a, String s) {
         try {
@@ -96,12 +101,13 @@ public class Duke {
             String[] options = tmptoken.split(" /to ");
             String from = options[0];
             String to = options[1];
-            Event t = new Event(name, from, to);            
+            Event t = new Event(name, parseDate(from), parseDate(to));            
             a.add(t);
             Save.makeSave(a);
             System.out.println("Got it I've added an event");
             System.out.println(t.toString());
-        } catch (IndexOutOfBoundsException e) { System.out.println("please ensure u have a /from /to (in that order!) option and that their arguments exist");}
+        } catch (IndexOutOfBoundsException e) { System.out.println("please ensure u have a /from /to (in that order!) option and that their arguments exist");
+        } catch (DateTimeParseException e) {System.out.println("please ensure yyyy-MM-dd format");}    
     }
     private static void delete(ArrayList<Task> a, String s) {
         try {
@@ -113,5 +119,8 @@ public class Duke {
         } catch (NumberFormatException e) {System.out.println("please only input numbers");
         } catch (IndexOutOfBoundsException e) {System.out.println("make sure the number is in range");}
     }
-    
+    private static LocalDate parseDate(String date) throws DateTimeParseException {
+        DateTimeFormatter format = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+        return LocalDate.parse(date, format);
+    }
 }

@@ -1,4 +1,5 @@
 import java.io.Serializable;
+import java.time.LocalDate;
 
 class Task implements Serializable{
     boolean done;
@@ -29,8 +30,8 @@ class Todo extends Task {
     }
 }
 class Deadline extends Task {
-    String by;
-    public Deadline(String n, String b) {
+    LocalDate by;
+    public Deadline(String n, LocalDate b) {
         super(n);
         by = b;
     }
@@ -39,10 +40,9 @@ class Deadline extends Task {
     }
 }
 class Event extends Task {
-    String by;
-    String from;
-    String to;
-    public Event(String n, String f, String t) {
+    LocalDate from;
+    LocalDate to;
+    public Event(String n, LocalDate f, LocalDate t) {
         super(n);
         from = f;
         to = t;
