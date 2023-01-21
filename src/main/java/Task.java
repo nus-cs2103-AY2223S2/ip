@@ -1,29 +1,15 @@
-public class Task {
-    private String name;    // title of the task
-    private boolean isDone;   // is the task completed?
+public abstract class TaskNew {
+    private String description;
 
-    // task is by default uncompleted.
-    Task(String name) {
-        this.name = name;
-        this.isDone = false;
+    private boolean isDone;
+
+    public String toString() {
+        return description;
     }
 
-    // 2 commands to change completeness of task
-    public void mark() {
-        this.isDone = true;
-    }
+    public void mark() { this.isDone = true; }
 
-    public void unmark() {
-        this.isDone = false;
-    }
+    public void unmark() {this.isDone = false; }
 
-    // returns done status
-    public String getStatusIcon() {
-        return isDone ? "X" : " ";
-    }
-
-    // returns name
-    public String getName() {
-        return name;
-    }
+    
 }
