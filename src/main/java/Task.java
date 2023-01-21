@@ -40,14 +40,14 @@ abstract class Task {
     public static Task unmarshal(String s) {
         char typ = s.charAt(0);
         switch (typ) {
-            case 'T':
-                return Todo.unmarshal(s);
-            case 'D':
-                return Deadline.unmarshal(s);
-            case 'E':
-                return Event.unmarshal(s);
-            default:
-                return null;
+        case 'T':
+            return Todo.unmarshal(s);
+        case 'D':
+            return Deadline.unmarshal(s);
+        case 'E':
+            return Event.unmarshal(s);
+        default:
+            return null;
         }
     }
 
@@ -70,13 +70,13 @@ class Todo extends Task {
 
     @Override
     public String marshal() {
-        StringBuilder builder = new StringBuilder();
+        StringBuilder b = new StringBuilder();
 
-        builder.append('T');
-        builder.append(isDone() ? '1' : '0');
-        builder.append(desc());
+        b.append('T');
+        b.append(isDone() ? '1' : '0');
+        b.append(desc());
 
-        return builder.toString();
+        return b.toString();
     }
 
     public static Todo unmarshal(String s) {
@@ -111,14 +111,14 @@ class Deadline extends Task {
 
     @Override
     public String marshal() {
-        StringBuilder builder = new StringBuilder();
+        StringBuilder b = new StringBuilder();
 
-        builder.append('D');
-        builder.append(isDone() ? '1' : '0');
-        builder.append(Chonk.chonkify(desc()));
-        builder.append(Chonk.chonkify(deadline.format(dateTimeFmt)));
+        b.append('D');
+        b.append(isDone() ? '1' : '0');
+        b.append(Chonk.chonkify(desc()));
+        b.append(Chonk.chonkify(deadline.format(dateTimeFmt)));
 
-        return builder.toString();
+        return b.toString();
     }
 
     public static Deadline unmarshal(String s) {
@@ -166,15 +166,15 @@ class Event extends Task {
 
     @Override
     public String marshal() {
-        StringBuilder builder = new StringBuilder();
+        StringBuilder b = new StringBuilder();
 
-        builder.append('E');
-        builder.append(isDone() ? '1' : '0');
-        builder.append(Chonk.chonkify(desc()));
-        builder.append(Chonk.chonkify(from.format(dateTimeFmt)));
-        builder.append(Chonk.chonkify(to.format(dateTimeFmt)));
+        b.append('E');
+        b.append(isDone() ? '1' : '0');
+        b.append(Chonk.chonkify(desc()));
+        b.append(Chonk.chonkify(from.format(dateTimeFmt)));
+        b.append(Chonk.chonkify(to.format(dateTimeFmt)));
 
-        return builder.toString();
+        return b.toString();
     }
 
     public static Event unmarshal(String s) {
