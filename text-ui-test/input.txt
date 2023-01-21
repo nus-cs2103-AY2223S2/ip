@@ -6,9 +6,9 @@ unmark 1
 list
 delete 1
 list
-deadline read book /by today
+deadline read book /by 2023-01-21
 list
-event be stonk /from today /to forever
+event be stonk /at 2023-01-21
 list
 mark 2
 mark 1

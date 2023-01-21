@@ -1,47 +1,37 @@
-import Exceptions.EmptyEventException;
-
-import java.util.ArrayList;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 
 public class Event extends Task {
 
-    protected String from;
-    protected String to;
+    protected LocalDate at;
 
-    public Event(String description, String from, String to) {
+    public Event(String description, LocalDate at) {
         super(description);
-        this.from = from;
-        this.to = to;
+        this.at = at;
     }
 
-    public static void createEvent(ArrayList<Task> taskList, String desc) {
-        String[] s = desc.split("/");
-        Format.line();
-        System.out.println("Got it. I've added this task:");
-        Event event = new Event(s[0], s[1].substring(4), s[2].substring(2));
-        taskList.add(event);
-        Format.indent("" + event);
+    public static void createEvent(TaskList taskList, String desc) {
+        Ui.addedTask();
+        String[] splitInput = desc.split("/",2);
+        String input = splitInput[0];
+        String[] splitDate = splitInput[1].split(" ", 2);
+        String date = splitDate[1];
+        Event event = new Event(input, LocalDate.parse(date));
+        taskList.addTask(event);
+        Ui.indent("" + event);
     }
 
-    public static void runEvent(ArrayList<Task> taskList, String description) {
-        try {
-            if (description.length() == 0) {
-                throw new EmptyEventException("");
-            }
-            Event.createEvent(taskList, description);
-            Format.checkList(taskList);
-        } catch (EmptyEventException e) {
-            Format.line();
-            System.out.println(e.getMessage());
-            Format.line();
-        } catch (ArrayIndexOutOfBoundsException e) {
-            Format.line();
-            System.out.println("Hey! The description of a deadline cannot be empty!");
-            Format.line();
-        }
+    public static void runEvent(TaskList taskList, String description) {
+        createEvent(taskList, description);
+        Ui.checkList(taskList);
+    }
+
+    @Override public String toSave() {
+        return "E | " + super.toSave() + "| " + at;
     }
 
     @Override
     public String toString() {
-        return "[E]" + super.toString() + "(from:" + from + "to:" + to + ")";
+        return "[E]" + super.toString() + " (at: " + at.format(DateTimeFormatter.ofPattern("MMM dd yyyy")) + ")";
     }
 }
