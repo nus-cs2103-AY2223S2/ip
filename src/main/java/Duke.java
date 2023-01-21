@@ -18,7 +18,7 @@ public class Duke {
             else if (input.equals("list")) {
                 int len = actions.size();
                 for (int i = 0; i < len; i++) {
-                    System.out.println(i + 1 + ". " + actions.get(i).toString());
+                    System.out.println(i + 1 + ". " + actions.get(i).status());
                 }
 
             } else if (input_arr[0].equals("mark") || input_arr[0].equals("unmark")) {
@@ -31,9 +31,17 @@ public class Duke {
                 }
             }
             else {
-                Task newTask = new Task(input);
+                Task newTask;
+                if (input_arr[0].equals("todo")) {
+                    newTask = new ToDo(input.replaceFirst("todo ", ""));
+                } else if (input_arr[0].equals("deadline")) {
+                    newTask = new Deadline(input.replaceFirst("deadline ", ""));
+                } else {
+                    newTask = new Event(input.replaceFirst("event ", ""));
+                }
                 actions.add(newTask);
-                System.out.println("NOM NOM NOM added: " + input);
+                System.out.println(newTask.toString());
+
             }
 
         }
