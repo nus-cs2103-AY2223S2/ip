@@ -6,21 +6,21 @@ import java.util.Optional;
 import java.util.Scanner;
 
 import aqua.exception.DukeIllegalArgumentException;
-import aqua.manager.MainManager;
+import aqua.manager.AppManager;
 
 public class CommandInput {
     public static final String MAIN_INPUT_KEY = "MAIN_INPUT";
 
     private final HashMap<String, String> inputMap = new HashMap<>();
-    private final MainManager mainManager;
+    private final AppManager mainManager;
 
 
-    private CommandInput(MainManager mainManager) {
+    private CommandInput(AppManager mainManager) {
         this.mainManager = mainManager;
     }
 
 
-    public static CommandInput parse(String args, MainManager mainManager) throws DukeIllegalArgumentException {
+    public static CommandInput parse(String args, AppManager mainManager) throws DukeIllegalArgumentException {
         CommandInput input = new CommandInput(mainManager);
         args = args.strip() + " ";
         if (args.isBlank()) {
@@ -64,7 +64,7 @@ public class CommandInput {
     }
 
 
-    public MainManager getMainManager() {
+    public AppManager getMainManager() {
         return mainManager;
     }
 }

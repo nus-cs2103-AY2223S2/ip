@@ -1,7 +1,7 @@
 import java.util.Scanner;
 
 import aqua.exception.DukeIllegalArgumentException;
-import aqua.manager.MainManager;
+import aqua.manager.AppManager;
 import command.Command;
 import command.CommandInput;
 
@@ -24,7 +24,7 @@ public class Duke {
                 + "|____/ \\__,_|_|\\_\\___|\n";
         System.out.println("Hello from\n" + logo);
 
-        MainManager manager = new MainManager();
+        AppManager manager = new AppManager();
 
         try {
             System.out.println(formatMessage(Command.GREET.execute(CommandInput.parse("", manager))));
@@ -54,7 +54,7 @@ public class Duke {
     }
 
 
-    private String execute(String rawInput, MainManager manager) throws DukeIllegalArgumentException {
+    private String execute(String rawInput, AppManager manager) throws DukeIllegalArgumentException {
         String msg = rawInput;
         String inputString = "";
         Command command;

@@ -1,11 +1,11 @@
 package aqua.manager;
 
 /** Manager of all managers of the app. */
-public class MainManager {
+public class AppManager {
     private final TaskManager taskManager;
 
 
-    public MainManager() {
+    public AppManager() {
         this.taskManager = new TaskManager();
     }
 
