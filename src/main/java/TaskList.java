@@ -1,9 +1,14 @@
 import java.util.ArrayList;
 import java.lang.StringBuilder;
+import java.io.File;
+import java.io.IOException;
+import java.io.FileNotFoundException;
 
 public class TaskList {
     protected ArrayList<Task> taskList;
     protected int numOfTasks;
+    protected File f;
+    protected File dir;
     public TaskList() {
         this.taskList = new ArrayList<>();
         this.numOfTasks = 0;
@@ -19,6 +24,8 @@ public class TaskList {
     public void unMarkStatus(String index) {
         taskList.get(Integer.parseInt(index) - 1).markStatus(false);
     }
+
+
 
     public void addTasks(String[] inputArr, String taskType) throws EmptyDescException {
         String desc = "variable not initialised";
@@ -94,4 +101,6 @@ public class TaskList {
         System.out.println("  " + task);
         System.out.println("Now you have " + this.numOfTasks + " in the list!");
     }
+
+
 }

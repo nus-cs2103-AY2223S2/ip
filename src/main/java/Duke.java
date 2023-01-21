@@ -1,3 +1,5 @@
+import java.io.File;
+import java.io.IOException;
 import java.util.Scanner;
 
 public class Duke {
@@ -19,7 +21,21 @@ public class Duke {
                 "⠀⠀⠀⠀⠀⠀⠀⠀⠀⠈⢿⣧⠀⠀⠀⠀⠀⣸⣿⣿⠏⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀\n" +
                 "⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⣿⣷⣤⣤⣤⡾⣿⡿⠁⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀\n" +
                 "⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠘⠿⢶⣾⣶⠾⠛⠁⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀";
-        System.out.println("Good ta see yer dawg, Tom's at yer service.\n" + dog);
+        System.out.println("Good ta see yer dawg, Duke's at yer service.\n" + dog);
+        try {
+            File dir = new File("./data/");
+            File f = new File("data/duke.txt");
+            if (!dir.exists() && !f.exists()) {
+                dir.mkdir(); f.createNewFile();
+            }
+            else if (!f.exists()) {
+                f.createNewFile();
+            }
+            // TODO: move file to data directory if file exists but not directory
+        } catch (IOException e) {
+            System.out.println("Error occurred");
+            e.printStackTrace();
+        }
         Scanner sc = new Scanner(System.in);
         while(true) {
             String input = sc.nextLine();
