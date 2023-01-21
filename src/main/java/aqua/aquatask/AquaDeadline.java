@@ -32,6 +32,17 @@ public class AquaDeadline extends AquaTask {
 
 
     @Override
+    public String getReloadString() {
+        return String.format(
+            "deadline %s /%s %s /%s %s",
+            getName(),
+            BY_TAG, by,
+            IS_COMPLETED_TAG, isComplete
+        );
+    }
+
+
+    @Override
     public String toString() {
         return String.format("[D]%s (by: %s)", super.toString(), this.by);
     }

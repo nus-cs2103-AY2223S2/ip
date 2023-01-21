@@ -28,6 +28,16 @@ public class AquaToDo extends AquaTask {
 
 
     @Override
+    public String getReloadString() {
+        return String.format(
+            "todo %s /%s %s",
+            getName(),
+            IS_COMPLETED_TAG, isComplete
+        );
+    }
+
+
+    @Override
     public String toString() {
         return String.format("[T]%s", super.toString());
     }

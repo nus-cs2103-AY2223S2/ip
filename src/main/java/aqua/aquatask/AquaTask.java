@@ -1,7 +1,8 @@
 package aqua.aquatask;
 
+import aqua.storage.Reloadable;
 
-public abstract class AquaTask {
+public abstract class AquaTask implements Reloadable {
     public static final String IS_COMPLETED_TAG = "completed";
 
     private final String name;
