@@ -1,4 +1,3 @@
-________________________________________________________________________________
 Good day! This is
  ____
 |  _ \  ___   ___  _
@@ -8,55 +7,50 @@ Good day! This is
 |____/ \___/ \___/|_|\_\
 What may I help you with?
 ________________________________________________________________________________
-________________________________________________________________________________
-Understood, adding:
+Understood, adding
     [T][ ] pick up book
-There are 1 task(s) in Book
+to Book.
+1 task(s) exist in Book's pages.
 ________________________________________________________________________________
-________________________________________________________________________________
-Understood, adding the deadline:
+Understood, adding
     [D][ ] return book (by: 20 Jan (Fri) - 08:00AM)
-There are 2 task(s) in Book.
+to Book.
+2 task(s) exist in Book's pages.
 ________________________________________________________________________________
-________________________________________________________________________________
-Understood, adding the event:
+Understood, adding
     [E][ ] book release (from: 18 Jan (Wed) - 12:00PM to: 18 Jan (Wed) - 02:00PM)
-There are 3 task(s) in Book.
-________________________________________________________________________________
+to Book.
+3 task(s) exist in Book's pages.
 ________________________________________________________________________________
 Here are the tasks stored in Book:
 1.  [T][ ] pick up book
-2.  [D][ ] return book (by: 20 Jan (Fri) - 08:00AM)
-3.  [E][ ] book release (from: 18 Jan (Wed) - 12:00PM to: 18 Jan (Wed) - 02:00PM)
+1.  [D][ ] return book (by: 20 Jan (Fri) - 08:00AM)
+1.  [E][ ] book release (from: 18 Jan (Wed) - 12:00PM to: 18 Jan (Wed) - 02:00PM)
+3 task(s) exist in Book's pages.
 ________________________________________________________________________________
-________________________________________________________________________________
-The following task has been marked as done:
+The following task has been marked complete:
     [T][X] pick up book
 ________________________________________________________________________________
-________________________________________________________________________________
-The following task has been marked as done:
+The following task has been marked complete:
     [D][X] return book (by: 20 Jan (Fri) - 08:00AM)
 ________________________________________________________________________________
-________________________________________________________________________________
-The following task has been marked as done:
+The following task has been marked complete:
     [E][X] book release (from: 18 Jan (Wed) - 12:00PM to: 18 Jan (Wed) - 02:00PM)
 ________________________________________________________________________________
-________________________________________________________________________________
 Here are the tasks stored in Book:
 1.  [T][X] pick up book
-2.  [D][X] return book (by: 20 Jan (Fri) - 08:00AM)
-3.  [E][X] book release (from: 18 Jan (Wed) - 12:00PM to: 18 Jan (Wed) - 02:00PM)
+1.  [D][X] return book (by: 20 Jan (Fri) - 08:00AM)
+1.  [E][X] book release (from: 18 Jan (Wed) - 12:00PM to: 18 Jan (Wed) - 02:00PM)
+3 task(s) exist in Book's pages.
 ________________________________________________________________________________
-________________________________________________________________________________
-The following task has been marked as not done:
+The following task has been marked incomplete:
     [D][ ] return book (by: 20 Jan (Fri) - 08:00AM)
 ________________________________________________________________________________
-________________________________________________________________________________
 Here are the tasks stored in Book:
 1.  [T][X] pick up book
-2.  [D][ ] return book (by: 20 Jan (Fri) - 08:00AM)
-3.  [E][X] book release (from: 18 Jan (Wed) - 12:00PM to: 18 Jan (Wed) - 02:00PM)
-________________________________________________________________________________
+1.  [D][ ] return book (by: 20 Jan (Fri) - 08:00AM)
+1.  [E][X] book release (from: 18 Jan (Wed) - 12:00PM to: 18 Jan (Wed) - 02:00PM)
+3 task(s) exist in Book's pages.
 ________________________________________________________________________________
 Bye! Pick up Book again soon!
 ________________________________________________________________________________

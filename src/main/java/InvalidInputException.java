@@ -1,4 +1,4 @@
-public class InvalidInputException extends Exception {
+public class InvalidInputException extends BookException {
     public InvalidInputException(String message) {
         super(message);
     }

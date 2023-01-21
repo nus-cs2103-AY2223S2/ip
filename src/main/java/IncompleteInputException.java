@@ -1,4 +1,4 @@
-public class IncompleteInputException extends Exception {
+public class IncompleteInputException extends BookException {
     public IncompleteInputException(String message) {
         super(message);
     }
