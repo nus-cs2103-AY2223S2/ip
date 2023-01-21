@@ -11,6 +11,10 @@ abstract public class Task {
         return (isDone ? "X" : " "); // mark done task with X
     }
 
+    public boolean isCompleted() {
+        return this.isDone;
+    }
+
     /**
      * Checks the status of the task and logs to stdout.
      */
@@ -44,4 +48,6 @@ abstract public class Task {
      * @return string type of task
      */
     abstract public String getTaskType();
+
+    abstract public String writeTask();
 }

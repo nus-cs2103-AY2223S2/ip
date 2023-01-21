@@ -102,4 +102,8 @@ public class TaskList {
             System.out.println(out + String.format("%d.%s", this.getSize(), taskList.get(this.getSize() - 1).toString()));
         }
     }
+
+    public ArrayList<Task> getTaskList() {
+        return taskList;
+    }
 }

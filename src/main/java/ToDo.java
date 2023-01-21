@@ -10,12 +10,13 @@ public class ToDo extends Task{
      * @return a ToDo object based on commands.
      */
     public static ToDo create(String[] commands) {
-        if (commands.length < 2) {
+        commands = StringUtils.removeWhiteSpace(commands);
+        if (commands.length == 1) {
             throw new IncompleteCommandException(String.format("Hrrmmm. Not enough arguments, " +
                     "%s has. Hmm", "todo"), null);
         }
-        String toDoDescription = buildDescription(commands, 1, commands.length - 1);
-        return new ToDo(toDoDescription);
+        String description = StringUtils.joinString(commands, 1, commands.length - 1);
+        return new ToDo(description);
     }
 
     public static ToDo create(String description, String marked) {
@@ -81,9 +82,17 @@ public class ToDo extends Task{
      */
     @Override
     public String toString() {
-        return String.format(String.format("[%s][%s] %s",
+        return String.format("[%s][%s] %s",
                 this.getTaskType(),
                 this.getStatusIcon(),
-                this.description));
+                this.description);
+    }
+
+    @Override
+    public String writeTask() {
+        return String.format("%s %d %s",
+                this.getTaskType(),
+                super.isCompleted() ? 1 : 0,
+                this.description);
     }
 }

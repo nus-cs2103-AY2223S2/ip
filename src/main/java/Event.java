@@ -15,14 +15,19 @@ public class Event extends Task {
      * @return an Event task object based on command input
      */
     public static Event create(String input) {
-        int fromIndex = input.indexOf("/from");
-        int toIndex = input.indexOf("/to");
-        if (fromIndex == -1 || toIndex == -1) {
+        String[] splitInput = input.split(" ");
+        splitInput = StringUtils.removeWhiteSpace(splitInput);
+        int fromIndex = StringUtils.searchString(splitInput, "/from");
+        int toIndex = StringUtils.searchString(splitInput, "/to");
+        if (fromIndex == -1 || toIndex == -1 || fromIndex + 1 == toIndex || fromIndex == 1) {
             throw new IncompleteCommandException("Incomplete arguments for command event, I have found", null);
+        } else if (fromIndex > toIndex) {
+            throw new UnknownCommandException("This command I do not know, only :\n " +
+                    "event <description> /from <start> /to <end>", null);
         }
-        String eventDescription = input.substring(6, fromIndex - 1);
-        String startTime = input.substring(fromIndex + 6, toIndex - 1);
-        String endTime = input.substring(toIndex + 4);
+        String eventDescription = StringUtils.joinString(splitInput, 1, fromIndex - 1);
+        String startTime = StringUtils.joinString(splitInput, fromIndex + 1, toIndex - 1);
+        String endTime = StringUtils.joinString(splitInput, toIndex + 1, splitInput.length - 1);
         return new Event(eventDescription, startTime, endTime);
     }
 
@@ -80,6 +85,16 @@ public class Event extends Task {
         return String.format("[%s][%s] %s (from: %s to: %s)",
                 this.getTaskType(),
                 this.getStatusIcon(),
+                this.description,
+                this.startTime,
+                this.endTime);
+    }
+
+    @Override
+    public String writeTask() {
+        return String.format("%s %d %s from %s to %s",
+                this.getTaskType(),
+                super.isCompleted() ? 1 : 0,
                 this.description,
                 this.startTime,
                 this.endTime);
