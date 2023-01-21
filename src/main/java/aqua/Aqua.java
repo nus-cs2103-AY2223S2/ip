@@ -20,6 +20,7 @@ public class Aqua {
 
 
     private void start() {
+        System.out.println(formatMessage(manager.getReplyFormatManager().getGreeting()));
         try (Scanner scanner = new Scanner(System.in)) {
             while (!manager.isClosed()) {
                 String input = scanner.nextLine();

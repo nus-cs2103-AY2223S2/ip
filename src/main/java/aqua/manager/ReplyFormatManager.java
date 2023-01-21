@@ -4,6 +4,8 @@ import aqua.exception.IllegalSyntaxException;
 import aqua.exception.ProcedureExecutionException;
 
 public class ReplyFormatManager {
+    private static final String GREETING = 
+            "Konaqua~~ Perfect idol gamer nekomimi super maid Minato Aqua desu - ̗̀ ( ˶'ᵕ'˶) ̖́-";
     private static final String SYNTAX_ERROR_FORMAT =
             "Hanya??\n" +
             "I do not understand because:\n" +
@@ -31,5 +33,10 @@ public class ReplyFormatManager {
             deathEx.printStackTrace();
             return String.format(DEATH_EXCEPTION_FORMAT, deathEx.toString());
         }
+    }
+
+
+    public String getGreeting() {
+        return GREETING;
     }
 }
