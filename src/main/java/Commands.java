@@ -1,3 +1,5 @@
+import java.time.format.DateTimeParseException;
+
 public class Commands {
     TaskList taskList;
 
@@ -64,8 +66,13 @@ public class Commands {
         String[] splitInput = input.split(" ", 2)[1].split(" /by ");
         String description = splitInput[0];
         String by = splitInput[1];
-        Deadline deadline = new Deadline(description, by);
-        addTask(deadline);
+        try {
+            Deadline deadline = new Deadline(description, by);
+            addTask(deadline);
+        } catch (DateTimeParseException e) {
+            throw new DukeException("Please use time format: d/MM/yyyy HHmm");
+        }
+
     }
 
     public void addEventTask(String input) throws DukeException {
@@ -83,8 +90,12 @@ public class Commands {
         }
         String from = splitTime[0];
         String to = splitTime[1];
-        Event event = new Event(description, from, to);
-        addTask(event);
+        try {
+            Event event = new Event(description, from, to);
+            addTask(event);
+        } catch (DateTimeParseException e) {
+            throw new DukeException("Please use time format: d/MM/yyyy HHmm");
+        }
     }
 
     public void deleteTask(String input) throws DukeException {

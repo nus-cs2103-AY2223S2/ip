@@ -1,15 +1,22 @@
-public class Event extends Task {
-    String from;
-    String to;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
 
-    Event(String task, String from, String to) {
+public class Event extends Task {
+    LocalDateTime from;
+    LocalDateTime to;
+
+    Event(String task, String from, String to) throws DateTimeParseException {
         super(task);
-        this.from = from;
-        this.to = to;
+        DateTimeFormatter parser = DateTimeFormatter.ofPattern("d/MM/yyyy HHmm");
+        this.from = LocalDateTime.parse(from, parser);
+        this.to = LocalDateTime.parse(to, parser);
     }
 
     public String toString() {
-        return "[E]" + super.toString() + " (from: " + from + " to: " + to + ")";
+        return "[E]" + super.toString() + " (from: " +
+                from.format(DateTimeFormatter.ofPattern("MMM dd yyyy HH:mm")) + " to: " +
+                to.format(DateTimeFormatter.ofPattern("MMM dd yyyy HH:mm")) + ")";
     }
 
 }
