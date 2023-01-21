@@ -20,7 +20,10 @@ public class Event extends Task {
     }
 
     public String toFileString() {
-        return "E | " + super.toFileString() + " | " + from + " | " + to;
+        
+        return "E | " + super.toFileString() + " | " + 
+            from.format(DateTimeFormatter.ofPattern("d/MM/yyyy HHmm")) + 
+            " | " + to.format(DateTimeFormatter.ofPattern("d/MM/yyyy HHmm"));
     }
 
 }
