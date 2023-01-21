@@ -2,9 +2,12 @@ package aqua;
 
 import java.util.Scanner;
 
+import aqua.exception.LoadException;
 import aqua.logic.CommandLineInput;
 import aqua.logic.ExecutionDispatcher;
+import aqua.logic.command.ListCommand;
 import aqua.manager.AppManager;
+import aqua.storage.Loader;
 
 
 public class Aqua {
@@ -21,6 +24,13 @@ public class Aqua {
 
     private void start() {
         System.out.println(formatMessage(manager.getReplyFormatManager().getGreeting()));
+        try {
+            Loader.load(manager.getTaskManager().getSavePath(), manager);
+            replyMessage("I remembered all your previous tasks! Praise me");
+            initiateDispatcher(new ListCommand().getDispatcher(null, manager));
+        } catch (LoadException loadEx) {
+            replyError(loadEx);
+        }
         try (Scanner scanner = new Scanner(System.in)) {
             while (!manager.isClosed()) {
                 String input = scanner.nextLine();
