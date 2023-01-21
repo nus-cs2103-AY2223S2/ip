@@ -14,7 +14,7 @@ public class DeleteCommand implements CommandDispatcherCreator {
         return ExecutionDispatcher.of(new ExecutionTask<AquaTask>(args, manager) {
             @Override
             public AquaTask process(ArgumentMap args, AppManager manager)
-                    throws IllegalSyntaxException, ProcedureExecutionException{
+                    throws IllegalSyntaxException, ProcedureExecutionException {
                 try {
                     String indexString = args.getMainInput().filter(num -> !num.isBlank())
                             .orElseThrow(() -> new IllegalSyntaxException("Task number disappered!"));
