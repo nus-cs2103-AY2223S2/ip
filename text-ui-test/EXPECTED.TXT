@@ -21,12 +21,12 @@ What can I do for you?
 ---------------------
 ---------------------
 	Got it. I've added this task:
-	  [D][ ] return book (by: June 6th)
+	  [D][ ] return book (by: Tue, 6 Jun 23)
 	Now you have 2 tasks in the list.
 ---------------------
 ---------------------
 	Got it. I've added this task:
-	  [E][ ] project meeting (from: Aug 6th 2pm to: 4pm)
+	  [E][ ] project meeting (from: Sun, 06 Aug to: Tue, 08 Aug 23)
 	Now you have 3 tasks in the list.
 ---------------------
 ---------------------
@@ -42,8 +42,8 @@ What can I do for you?
 ---------------------
 	Here are the tasks in your list:
 	1.[T][ ] read book
-	2.[D][ ] return book (by: June 6th)
-	3.[E][ ] project meeting (from: Aug 6th 2pm to: 4pm)
+	2.[D][ ] return book (by: Tue, 6 Jun 23)
+	3.[E][ ] project meeting (from: Sun, 06 Aug to: Tue, 08 Aug 23)
 	4.[T][ ] join sports club
 	5.[T][ ] borrow book
 ---------------------
@@ -73,19 +73,19 @@ What can I do for you?
 ---------------------
 	Here are the tasks in your list:
 	1.[T][X] read book
-	2.[D][ ] return book (by: June 6th)
-	3.[E][ ] project meeting (from: Aug 6th 2pm to: 4pm)
+	2.[D][ ] return book (by: Tue, 6 Jun 23)
+	3.[E][ ] project meeting (from: Sun, 06 Aug to: Tue, 08 Aug 23)
 	4.[T][X] join sports club
 	5.[T][ ] borrow book
 ---------------------
 ---------------------
 	Got it. I've added this task:
-	  [D][ ] return book (by: Sunday)
+	  [D][ ] return book (by: Sat, 2 Sep 23)
 	Now you have 6 tasks in the list.
 ---------------------
 ---------------------
 	Got it. I've added this task:
-	  [E][ ] project meeting (from: Mon 2pm to: 4pm)
+	  [E][ ] project meeting (from: Sat, 17 Jun to: Sun, 18 Jun 23)
 	Now you have 7 tasks in the list.
 ---------------------
 ---------------------
@@ -94,14 +94,25 @@ What can I do for you?
 	Now you have 8 tasks in the list.
 ---------------------
 ---------------------
+	Here are the important tasks in your list:
+	1.[D][ ] return book (by: Tue, 6 Jun 23)
+	2.[E][ ] project meeting (from: Sat, 17 Jun to: Sun, 18 Jun 23)
+	3.[E][ ] project meeting (from: Sun, 06 Aug to: Tue, 08 Aug 23)
+	4.[D][ ] return book (by: Sat, 2 Sep 23)
+	5.[T][ ] borrow book
+	6.[T][ ] a
+	7.[T][X] read book
+	8.[T][X] join sports club
+---------------------
+---------------------
 	Here are the tasks in your list:
 	1.[T][X] read book
-	2.[D][ ] return book (by: June 6th)
-	3.[E][ ] project meeting (from: Aug 6th 2pm to: 4pm)
+	2.[D][ ] return book (by: Tue, 6 Jun 23)
+	3.[E][ ] project meeting (from: Sun, 06 Aug to: Tue, 08 Aug 23)
 	4.[T][X] join sports club
 	5.[T][ ] borrow book
-	6.[D][ ] return book (by: Sunday)
-	7.[E][ ] project meeting (from: Mon 2pm to: 4pm)
+	6.[D][ ] return book (by: Sat, 2 Sep 23)
+	7.[E][ ] project meeting (from: Sat, 17 Jun to: Sun, 18 Jun 23)
 	8.[T][ ] a
 ---------------------
 ---------------------
@@ -111,26 +122,26 @@ What can I do for you?
 ---------------------
 ---------------------
 	Here are the tasks in your list:
-	1.[D][ ] return book (by: June 6th)
-	2.[E][ ] project meeting (from: Aug 6th 2pm to: 4pm)
+	1.[D][ ] return book (by: Tue, 6 Jun 23)
+	2.[E][ ] project meeting (from: Sun, 06 Aug to: Tue, 08 Aug 23)
 	3.[T][X] join sports club
 	4.[T][ ] borrow book
-	5.[D][ ] return book (by: Sunday)
-	6.[E][ ] project meeting (from: Mon 2pm to: 4pm)
+	5.[D][ ] return book (by: Sat, 2 Sep 23)
+	6.[E][ ] project meeting (from: Sat, 17 Jun to: Sun, 18 Jun 23)
 	7.[T][ ] a
 ---------------------
 ---------------------
 	Noted. I've removed this task:
-	  [D][ ] return book (by: June 6th)
+	  [D][ ] return book (by: Tue, 6 Jun 23)
 	Now you have 6 tasks in the list.
 ---------------------
 ---------------------
 	Here are the tasks in your list:
-	1.[E][ ] project meeting (from: Aug 6th 2pm to: 4pm)
+	1.[E][ ] project meeting (from: Sun, 06 Aug to: Tue, 08 Aug 23)
 	2.[T][X] join sports club
 	3.[T][ ] borrow book
-	4.[D][ ] return book (by: Sunday)
-	5.[E][ ] project meeting (from: Mon 2pm to: 4pm)
+	4.[D][ ] return book (by: Sat, 2 Sep 23)
+	5.[E][ ] project meeting (from: Sat, 17 Jun to: Sun, 18 Jun 23)
 	6.[T][ ] a
 ---------------------
 ---------------------
@@ -140,10 +151,10 @@ What can I do for you?
 ---------------------
 ---------------------
 	Here are the tasks in your list:
-	1.[E][ ] project meeting (from: Aug 6th 2pm to: 4pm)
+	1.[E][ ] project meeting (from: Sun, 06 Aug to: Tue, 08 Aug 23)
 	2.[T][X] join sports club
-	3.[D][ ] return book (by: Sunday)
-	4.[E][ ] project meeting (from: Mon 2pm to: 4pm)
+	3.[D][ ] return book (by: Sat, 2 Sep 23)
+	4.[E][ ] project meeting (from: Sat, 17 Jun to: Sun, 18 Jun 23)
 	5.[T][ ] a
 ---------------------
 ---------------------
@@ -151,7 +162,7 @@ What can I do for you?
 ---------------------
 ---------------------
 	Noted. I've removed this task:
-	  [E][ ] project meeting (from: Aug 6th 2pm to: 4pm)
+	  [E][ ] project meeting (from: Sun, 06 Aug to: Tue, 08 Aug 23)
 	Now you have 4 tasks in the list.
 ---------------------
 ---------------------
@@ -161,12 +172,12 @@ What can I do for you?
 ---------------------
 ---------------------
 	Noted. I've removed this task:
-	  [D][ ] return book (by: Sunday)
+	  [D][ ] return book (by: Sat, 2 Sep 23)
 	Now you have 2 tasks in the list.
 ---------------------
 ---------------------
 	Noted. I've removed this task:
-	  [E][ ] project meeting (from: Mon 2pm to: 4pm)
+	  [E][ ] project meeting (from: Sat, 17 Jun to: Sun, 18 Jun 23)
 	Now you have 1 tasks in the list.
 ---------------------
 ---------------------
@@ -202,39 +213,39 @@ What can I do for you?
 ---------------------
 ---------------------
 	Duke: OOPS!!! The event command should be used like this:
-	event {name} /from {start} /to {end}
+	event {name} /from {YYYY-MM-DD} /to {YYYY-MM-DD}
 ---------------------
 ---------------------
 	Duke: OOPS!!! The event command should be used like this:
-	event {name} /from {start} /to {end}
+	event {name} /from {YYYY-MM-DD} /to {YYYY-MM-DD}
 ---------------------
 ---------------------
 	Duke: OOPS!!! The event command should be used like this:
-	event {name} /from {start} /to {end}
+	event {name} /from {YYYY-MM-DD} /to {YYYY-MM-DD}
 ---------------------
 ---------------------
 	Duke: OOPS!!! The event command should be used like this:
-	event {name} /from {start} /to {end}
+	event {name} /from {YYYY-MM-DD} /to {YYYY-MM-DD}
 ---------------------
 ---------------------
 	Duke: OOPS!!! The event command should be used like this:
-	event {name} /from {start} /to {end}
+	event {name} /from {YYYY-MM-DD} /to {YYYY-MM-DD}
 ---------------------
 ---------------------
 	Duke: OOPS!!! The event command should be used like this:
-	event {name} /from {start} /to {end}
+	event {name} /from {YYYY-MM-DD} /to {YYYY-MM-DD}
 ---------------------
 ---------------------
 	Duke: OOPS!!! The event command should be used like this:
-	event {name} /from {start} /to {end}
+	event {name} /from {YYYY-MM-DD} /to {YYYY-MM-DD}
 ---------------------
 ---------------------
 	Duke: OOPS!!! The event command should be used like this:
-	event {name} /from {start} /to {end}
+	event {name} /from {YYYY-MM-DD} /to {YYYY-MM-DD}
 ---------------------
 ---------------------
 	Duke: OOPS!!! The event command should be used like this:
-	event {name} /from {start} /to {end}
+	event {name} /from {YYYY-MM-DD} /to {YYYY-MM-DD}
 ---------------------
 ---------------------
 	Goodbye!
