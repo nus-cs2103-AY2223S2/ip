@@ -21,15 +21,48 @@ public class Duke {
                 respond("Goodbye! Have a nice day ahead.\n");
                 break;
 
-            } if (userInput.equals("list")) {
+            }
+            if (userInput.equals("list")) {
                 taskStorage.listTasks();
                 continue;
 
-            } if (firstWord.equals("mark") || firstWord.equals("unmark")) {
+            }
+            if (firstWord.equals("mark") || firstWord.equals("unmark")) {
                 String secondWord = userInput.split(" ", 3)[1];
                 int taskNumber = Integer.parseInt(secondWord);
                 taskStorage.updateTask(taskNumber);
                 respond("The status of your specified task has been updated!");
+                continue;
+
+
+            }
+            if (firstWord.equals("todo")) {
+                String bodyMessage = userInput.split(" ", 2)[1];
+                ToDo newTask = new ToDo(bodyMessage);
+                taskStorage.storeTasks(newTask);
+                respond("I have added this new task:\n" + newTask.provideDetails()
+                        + "\nYou now currently have "
+                        + taskStorage.getStorageCount() + " tasks.");
+                continue;
+
+            } if (firstWord.equals("deadline")) {
+                String bodyMessage = userInput.split(" ", 2)[1];
+                Deadline newTask = new Deadline(bodyMessage);
+                taskStorage.storeTasks(newTask);
+                respond("I have added this new task:\n" + newTask.provideDetails()
+                        +  "\nYou now currently have "
+                        + taskStorage.getStorageCount() + " tasks.");
+                continue;
+
+
+            }  if (firstWord.equals("event")) {
+                String bodyMessage = userInput.split(" ", 2)[1];
+                Event newTask = new Event(bodyMessage);
+                taskStorage.storeTasks(newTask);
+                respond("I have added this new task:\n" + newTask.provideDetails()
+                        + "\nYou now currently have "
+                        + taskStorage.getStorageCount() + " tasks.");
+
 
             } else {
                 respond("Added: " + userInput);
@@ -64,87 +97,3 @@ public class Duke {
 }
 
 
-/**
- * A storage of Tasks.
- */
-class TaskStorage {
-    /**
-     * An array of Tasks.
-     */
-    Task[] storage = new Task[100];
-    /**
-     * Keeps track of number of Tasks stored.
-     */
-    int storageCount = 0;
-
-    /**
-     * Lists all the tasks stored.
-     */
-    public void listTasks() {
-        String topDivider = "~~~~~~~~~~~~~~~~o~~~~~~~~~~~~~~~~\n" + "Duke's Response: \n";
-        String botDivider = "~~~~~~~~~~~~~~~~o~~~~~~~~~~~~~~~~";
-        System.out.println(topDivider);
-
-        for (int i = 0; i < this.storageCount; i++) {
-            String output = this.storage[i].provideDetails();
-            System.out.println((i + 1) + "." + output);
-        }
-
-        System.out.println(botDivider);
-    }
-
-
-    /**
-     * Stores a new task in storage.
-     * @param task The task to be stored.
-     */
-    public void storeTasks(Task task) {
-        this.storage[this.storageCount] = task;
-        this.storageCount++;
-    }
-
-    /**
-     * Updates the status of a Task.
-     * @param number The number representing the task to be updated.
-     */
-    public void updateTask(int number) {
-        this.storage[number -  1].updateTask();
-    }
-}
-
-
-/**
- * Encapsulates a Task.
- */
-class Task {
-    /**
-     * Status of the Task.
-     */
-    boolean completed = false;
-
-    /**
-     * Details of the Task.
-     */
-    String task;
-
-    public Task(String task) {
-        this.task = task;
-    }
-
-    /**
-     * Provides Details of the Task.
-     * @return String detail message of Task.
-     */
-    public String provideDetails() {
-        return completed ? "[x] " + task
-                         : "[ ] " + task;
-    }
-
-    /**
-     * Flips the status of the Task.
-     */
-    public void updateTask() {
-        this.completed = !this.completed;
-    }
-
-}
