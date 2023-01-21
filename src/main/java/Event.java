@@ -6,8 +6,12 @@ public class Event extends Task {
 
     Event(String title, String from, String to) throws DukeException {
         super(title);
-        this.from = LocalDateTime.parse(from.replace("/from", "").trim());
-        this.to = LocalDateTime.parse(to.replace("/to", "").trim());
+        try {
+            this.from = LocalDateTime.parse(from.replace("/from", "").trim());
+            this.to = LocalDateTime.parse(to.replace("/to", "").trim());
+        } catch (java.time.format.DateTimeParseException e) {
+            throw new DukeException(Views.DATE_PARSE_ERR_STRING.eng());
+        }
         if (this.to.isBefore(this.from)) {
             throw new DukeException(Views.DATE_WRONG_ORDER_STRING.eng());
         }
@@ -15,8 +19,12 @@ public class Event extends Task {
 
     Event(String title, String from, String to, boolean done) throws DukeException {
         super(title, done);
-        this.from = LocalDateTime.parse(from.replace("/from", "").trim());
-        this.to = LocalDateTime.parse(to.replace("/to", "").trim());
+        try {
+            this.from = LocalDateTime.parse(from.replace("/from", "").trim());
+            this.to = LocalDateTime.parse(to.replace("/to", "").trim());
+        } catch (java.time.format.DateTimeParseException e) {
+            throw new DukeException(Views.DATE_PARSE_ERR_STRING.eng());
+        }
         if (this.to.isBefore(this.from)) {
             throw new DukeException(Views.DATE_WRONG_ORDER_STRING.eng());
         }
