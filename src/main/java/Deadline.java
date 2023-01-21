@@ -1,8 +1,11 @@
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+
 /**
- * The Deadline class extends the Task class and represents a task that has a due date.
+ * The Deadline class extends the DatedTask class and represents a datedtask with a due date.
  */
-public class Deadline extends Task {
-    private String date;
+public class Deadline extends DatedTask {
+    private LocalDate date;
 
     /**
      * Constructs a Deadline Task with a due date.
@@ -11,8 +14,8 @@ public class Deadline extends Task {
      * @param date The date of when the task is due.
      */
     public Deadline(String name, String date) {
-        super(name);
-        this.date = date;
+        super(name, LocalDate.parse(date));
+        this.date = LocalDate.parse(date);
     }
 
     /**
@@ -22,7 +25,8 @@ public class Deadline extends Task {
      */
     @Override
     public String toString() {
-        return "[D]" + super.toString() + " (by: " + this.date + ")";
+        DateTimeFormatter daydmy = DateTimeFormatter.ofPattern("E, d MMM uu");
+        return "[D]" + super.toString() + " (by: " + this.date.format(daydmy) + ")";
     }
 
 }

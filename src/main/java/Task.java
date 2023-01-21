@@ -1,7 +1,7 @@
 /**
  * This Task class represents a task.
  */
-public class Task {
+public class Task implements Comparable<Task> {
     private String name;
     private boolean isDone;
 
@@ -40,6 +40,30 @@ public class Task {
      */
     public boolean isMarkedDone() {
         return this.isDone;
+    }
+
+    /**
+     * Informs the user if the task has a set time.
+     *
+     * @return True if it has a set time, false otherwise.
+     */
+    public boolean hasDate() {
+        return false;
+    }
+
+    @Override
+    public int compareTo(Task t) {
+        if (t.isMarkedDone() && this.isMarkedDone()) {
+            return 0;
+        } else if (!t.isMarkedDone() && !this.isMarkedDone()) {
+            if (t.hasDate()) {
+                return 1;
+            } else {
+                return 0;
+            }
+        } else {
+            return this.isMarkedDone() ? 1 : -1;
+        }
     }
 
     /**

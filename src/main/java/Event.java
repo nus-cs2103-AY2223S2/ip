@@ -1,9 +1,12 @@
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+
 /**
- * The Event class extends the Task class and represents an event with a start and end date.
+ * The Event class extends the DatedTask class and represents an event with a start and end date.
  */
-public class Event extends Task {
-    private String start;
-    private String end;
+public class Event extends DatedTask {
+    private LocalDate start;
+    private LocalDate end;
 
     /**
      * Constructs an Event task with a start and end date.
@@ -11,11 +14,17 @@ public class Event extends Task {
      * @param name  The name of the event.
      * @param start The date the event begins on.
      * @param end   The date the event ends on.
+     * @throws DukeException If the dates are not formatted properly.
      */
-    public Event(String name, String start, String end) {
-        super(name);
-        this.start = start;
-        this.end = end;
+    public Event(String name, String start, String end) throws DukeException {
+        super(name, LocalDate.parse(end));
+        this.start = LocalDate.parse(start);
+        this.end = LocalDate.parse(end);
+    }
+
+    @Override
+    public boolean hasDate() {
+        return true;
     }
 
     /**
@@ -25,6 +34,9 @@ public class Event extends Task {
      */
     @Override
     public String toString() {
-        return "[E]" + super.toString() + " (from: " + start + " to: " + end + ")";
+        DateTimeFormatter daydm = DateTimeFormatter.ofPattern("E, dd MMM");
+        DateTimeFormatter daydmyy = DateTimeFormatter.ofPattern("E, dd MMM uu");
+        return "[E]" + super.toString() + " (from: " + start.format(daydm) + " to: " + end.format(daydmyy)
+                + ")";
     }
 }
