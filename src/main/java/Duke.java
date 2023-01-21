@@ -11,6 +11,7 @@ public class Duke {
 
     private static ArrayList<Task> tasks = new ArrayList<>();
     private static Storage store;
+    private static Ui ui = Ui.getInstance();
 
     /**
      * The Commands enum represents Duke's available commands.
@@ -26,25 +27,8 @@ public class Duke {
      * @param args The modifiers to run Duke with (currently no modifiers are avaliable).
      */
     public static void main(String[] args) {
-        greet();
+        ui.greet();
         loopDukeFunctions();
-    }
-
-    /**
-     * Prints Duke's greetings.
-     */
-    private static void greet() {
-        // @formatter:off
-        String logo = " ____        _        \n"
-                    + "|  _ \\ _   _| | _____ \n"
-                    + "| | | | | | | |/ / _ \\\n"
-                    + "| |_| | |_| |   <  __/\n"
-                    + "|____/ \\__,_|_|\\_\\___|\n";
-        // @formatter:on
-
-        System.out.println("Hello from\n" + logo);
-        System.out.println("What can I do for you?");
-        System.out.println("---------------------\n");
     }
 
     /**
@@ -52,12 +36,11 @@ public class Duke {
      */
     private static void loopDukeFunctions() {
         Scanner sc = new Scanner(System.in);
-
         try {
             store = new Storage("src/main/resources/duke.txt");
             loadFromFile();
         } catch (DukeException e) {
-            printWithPartition("\t" + e.getMessage() + "\n");
+            ui.printWithPartition("\t" + e.getMessage() + "\n");
         }
         while (true) {
             try {
@@ -106,7 +89,7 @@ public class Duke {
                     break;
                 }
             } catch (DukeException e) {
-                printWithPartition("\t" + e.getMessage() + "\n");
+                ui.printWithPartition("\t" + e.getMessage() + "\n");
             }
 
         }
@@ -131,22 +114,6 @@ public class Duke {
         }
     }
 
-    /**
-     * Prints the partitions, ----, then prints the string in-between. \n is required for the end of the
-     * string. <blockquote> ---------------------
-     * <p>
-     * your string here
-     * <p>
-     * --------------------- </blockquote>
-     *
-     * @param s The string in between the ---- partitions.
-     */
-    private static void printWithPartition(String s) {
-        System.out.println("---------------------");
-        System.out.print(s);
-        System.out.println("---------------------");
-    }
-
     // region DUKE FUNCTIONS
     // ------------------------------------------------------------------------
 
@@ -159,7 +126,7 @@ public class Duke {
             Task temp = tasks.get(i);
             ls = ls + "\t" + Integer.toString(i + 1) + "." + temp.toString() + "\n";
         }
-        printWithPartition(ls);
+        ui.printWithPartition(ls);
     }
 
     private static void printPrioritisedDukeList() {
@@ -170,7 +137,7 @@ public class Duke {
             Task temp = sortedTasks.get(i);
             ls = ls + "\t" + Integer.toString(i + 1) + "." + temp.toString() + "\n";
         }
-        printWithPartition(ls);
+        ui.printWithPartition(ls);
     }
 
     /**
@@ -179,7 +146,7 @@ public class Duke {
      * @param w The string to echo.
      */
     private static void echo(String w) {
-        printWithPartition("\tDuke: " + w + "\n");
+        ui.printWithPartition("\tDuke: " + w + "\n");
     }
 
     /**
@@ -193,7 +160,7 @@ public class Duke {
             int index = Integer.parseInt(num) - 1;
             Task task = tasks.get(index);
             task.setAsDone();
-            printWithPartition("\tNice! I've marked this task as done:\n\t  " + task.toString() + "\n");
+            ui.printWithPartition("\tNice! I've marked this task as done:\n\t  " + task.toString() + "\n");
         } catch (Exception e) {
             if (tasks.size() == 0) {
                 throw new DukeException("There are no tasks to be marked as done.");
@@ -214,7 +181,7 @@ public class Duke {
             int index = Integer.parseInt(num) - 1;
             Task task = tasks.get(index);
             task.setAsNotDone();
-            printWithPartition(
+            ui.printWithPartition(
                     "\tOK, I've marked this task as not done yet:" + "\n\t  " + task.toString() + "\n");
         } catch (Exception e) {
             if (tasks.size() == 0) {
@@ -238,7 +205,7 @@ public class Duke {
 
         ToDo task = new ToDo(w);
         tasks.add(task);
-        printWithPartition("\tGot it. I've added this task:\n" + "\t  " + task.toString()
+        ui.printWithPartition("\tGot it. I've added this task:\n" + "\t  " + task.toString()
                 + "\n\tNow you have " + Integer.toString(tasks.size()) + " tasks in the list.\n");
 
     }
@@ -256,7 +223,7 @@ public class Duke {
             String date = sorted[1].strip();
             Deadline task = new Deadline(name, date);
             tasks.add(task);
-            printWithPartition("\tGot it. I've added this task:\n" + "\t  " + task.toString()
+            ui.printWithPartition("\tGot it. I've added this task:\n" + "\t  " + task.toString()
                     + "\n\tNow you have " + Integer.toString(tasks.size()) + " tasks in the list.\n");
         } catch (ArrayIndexOutOfBoundsException e) {
             throw new DukeException(
@@ -280,7 +247,7 @@ public class Duke {
             String[] dates = sorted[1].strip().split(" /to ");
             Event task = new Event(name, dates[0], dates[1]);
             tasks.add(task);
-            printWithPartition("\tGot it. I've added this task:\n" + "\t  " + task.toString()
+            ui.printWithPartition("\tGot it. I've added this task:\n" + "\t  " + task.toString()
                     + "\n\tNow you have " + Integer.toString(tasks.size()) + " tasks in the list.\n");
         } catch (ArrayIndexOutOfBoundsException e) {
             throw new DukeException("The event command should be used like this:\n"
@@ -302,7 +269,7 @@ public class Duke {
             int index = Integer.parseInt(num) - 1;
             Task task = tasks.get(index);
             tasks.remove(index);
-            printWithPartition("\tNoted. I've removed this task:\n\t  " + task.toString() + "\n"
+            ui.printWithPartition("\tNoted. I've removed this task:\n\t  " + task.toString() + "\n"
                     + "\tNow you have " + Integer.toString(tasks.size()) + " tasks in the list.\n");
         } catch (Exception e) {
             if (tasks.size() == 0) {
@@ -317,7 +284,7 @@ public class Duke {
      * Prints goodbye and Duke shuts down.
      */
     private static void exit() {
-        printWithPartition("\tGoodbye!\n");
+        ui.printWithPartition("\tGoodbye!\n");
     }
 
     // ------------------------------------------------------------------------
