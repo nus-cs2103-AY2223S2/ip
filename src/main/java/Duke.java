@@ -94,8 +94,6 @@ public class Duke {
             Integer secondInt = 0;
             String bye = "bye";
             String showList = "list";
-            String mark = "mark";
-            String unmark = "unmark";
             String byWhen = "";
             String fromWhen = "";
             String toWhen = "";
@@ -124,6 +122,16 @@ public class Duke {
                     System.out.println(thisTask);
                 } catch (Exception ex) {
                     System.err.println("Please indicate a valid task!");
+                }
+            } else if (msg.contains("delete")) {
+                try {
+                    secondInt = Integer.parseInt(msg.substring(msg.indexOf(" ") + 1, msg.length()));
+                    System.out.println("Noted. I've removed this task!");
+                    System.out.println(listOfThings.get(secondInt - 1));
+                    listOfThings.remove(secondInt - 1);
+                    System.out.println("Now you have " + listOfThings.size() + " tasks in the list.");
+                } catch (Exception ex) {
+                    System.err.println("Please indicate a valid task to delete!");
                 }
             } else if (msg.contains("todo")) {
                 try {
