@@ -1,14 +1,18 @@
 package aqua.manager;
 
+import aqua.logic.parser.ArgumentParser;
+import aqua.logic.parser.CommandLineInputParser;
+
 /** Manager of all managers of the app. */
 public class AppManager {
-    private final TaskManager taskManager;
+    private final CommandLineInputParser inputParser = new CommandLineInputParser(new ArgumentParser());
+    private final TaskManager taskManager = new TaskManager();
     
     private boolean isClosed = false;
 
 
-    public AppManager() {
-        this.taskManager = new TaskManager();
+    public CommandLineInputParser getInputParser() {
+        return inputParser;
     }
 
 
