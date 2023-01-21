@@ -1,15 +1,28 @@
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Scanner;
 
 //TODO: consider changing to TaskManager class; handles everything related to tasks
 /**
- * This class encapsulates everything the Task arraylist needs to do.
+ * This class encapsulates everything the Task arraylist needs to do. Also
+ * handles saving tasks to Duke.txt.
  */
 public class DukeMemory {
 
     /**
      * The arraylist storing all of Duke's tasks.
      */
-    private ArrayList<Task> taskList = new ArrayList<>();
+    private ArrayList<Task> taskList;
+
+    /**
+     * Constructor for DukeMemory. Takes care of file access of Duke.
+     */
+    public DukeMemory() {
+        this.taskList = new ArrayList<>();
+    }
 
     /**
      * Getter for a task given its index.
@@ -95,5 +108,11 @@ public class DukeMemory {
         Task removed = taskList.get(index);
         taskList.remove(index);
         return removed;
+    }
+
+    public void syncTasks(ArrayList<Task> tasks) {
+        if (tasks != null) {
+            this.taskList = tasks;
+        }
     }
 }

@@ -33,4 +33,10 @@ public class Deadline extends Task {
     public String toString() {
         return "[D]" + super.toString() + " (by: " + this.by + ")";
     }
+
+    @Override
+    public String getFileFormatString() {
+        //to be split using "|"
+        return "D" + "@" + this.isDone + "@" + this.description + "@" + this.by;
+    }
 }

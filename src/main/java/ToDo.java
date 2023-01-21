@@ -25,4 +25,10 @@ public class ToDo extends Task{
     public String toString() {
         return "[T]" + super.toString();
     }
+
+    @Override
+    public String getFileFormatString() {
+        //to be split using "|"
+        return "T" + "@" + this.isDone + "@" + this.description;
+    }
 }
