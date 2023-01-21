@@ -1,3 +1,5 @@
+package chungus;
+
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
@@ -40,14 +42,14 @@ abstract class Task {
     public static Task unmarshal(String s) {
         char typ = s.charAt(0);
         switch (typ) {
-        case 'T':
-            return Todo.unmarshal(s);
-        case 'D':
-            return Deadline.unmarshal(s);
-        case 'E':
-            return Event.unmarshal(s);
-        default:
-            return null;
+            case 'T':
+                return Todo.unmarshal(s);
+            case 'D':
+                return Deadline.unmarshal(s);
+            case 'E':
+                return Event.unmarshal(s);
+            default:
+                return null;
         }
     }
 

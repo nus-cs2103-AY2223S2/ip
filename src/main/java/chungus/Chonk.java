@@ -1,3 +1,5 @@
+package chungus;
+
 class Chonk {
     public static String chonkify(String s) {
         return s.length() + " " + s;

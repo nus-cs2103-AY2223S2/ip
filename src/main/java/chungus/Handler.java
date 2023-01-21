@@ -1,3 +1,5 @@
+package chungus;
+
 import java.time.LocalDateTime;
 
 @FunctionalInterface

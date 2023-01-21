@@ -1,3 +1,5 @@
+package chungus;
+
 class ChungusException extends RuntimeException {
     public ChungusException(String msg) {
         super(msg);
