@@ -19,14 +19,14 @@ public class TaskList {
         return this.tasks.remove(taskNum-1);
     }
 
-    public String toggleMark(int idx) {
-        Task task = tasks.get(idx);
+    public String toggleMark(int taskNum) {
+        Task task = tasks.get(taskNum-1);
         task.markTask();
         return task.getStatusIcon();
     }
 
-    public String toggleUnmark(int idx) {
-        Task task = tasks.get(idx);
+    public String toggleUnmark(int taskNum) {
+        Task task = tasks.get(taskNum-1);
         task.unmarkTask();
         return task.getStatusIcon();
     }
