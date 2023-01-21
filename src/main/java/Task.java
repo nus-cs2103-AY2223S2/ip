@@ -23,6 +23,10 @@ public class Task {
         this.isDone = status;
     }
 
+    public void markStatus(String s) {
+        this.isDone = (s.equals("0")) ? false : true;
+    }
+
 //    public int getTaskNum() {
 //        return this.taskNum;
 //    }

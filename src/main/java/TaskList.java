@@ -1,3 +1,4 @@
+import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.lang.StringBuilder;
@@ -11,8 +12,6 @@ public class TaskList {
         this.taskList = new ArrayList<>();
         this.numOfTasks = 0;
         this.filePath = "./data/duke.txt";
-        // initialisation check;
-
     }
 
     public void printList() {
@@ -27,7 +26,24 @@ public class TaskList {
         taskList.get(Integer.parseInt(index) - 1).markStatus(false);
     }
 
-    public void loadTasks() {}
+    public void loadTasks(String[] inputArr, String taskType) {
+        switch (taskType) {
+            case "T":
+                Todo todo = new Todo(inputArr[2]);
+                this.taskList.add(todo); this.numOfTasks++;
+                todo.markStatus(inputArr[1]);
+                break;
+            case "D":
+                Deadline deadline = new Deadline(inputArr[2], inputArr[3]);
+                this.taskList.add(deadline); this.numOfTasks++;
+                deadline.markStatus(inputArr[1]);
+                break;
+            case "E":
+                Event ev = new Event(inputArr[2], inputArr[3], inputArr[4]);
+                this.taskList.add(ev); this.numOfTasks++;
+                ev.markStatus(inputArr[1]);
+        }
+    }
 
 
     public void addTasks(String[] inputArr, String taskType) throws EmptyDescException, IOException {
@@ -43,7 +59,7 @@ public class TaskList {
                         sb.append(" ");
                     }
                 }
-                Todo todo = new Todo(sb.toString());
+                Todo todo = new Todo(sb.toString().trim());
                 this.taskList.add(todo); this.numOfTasks++;
                 this.updateDrive();
                 System.out.println("Gotcha, I've added:");
@@ -63,7 +79,7 @@ public class TaskList {
                         sb.append(" ");
                     }
                 }
-                Deadline deadline = new Deadline(desc, sb.toString());
+                Deadline deadline = new Deadline(desc, sb.toString().trim());
                 this.taskList.add(deadline); this.numOfTasks++;
                 this.updateDrive();
                 System.out.println("Gotcha, I've added:");
@@ -88,7 +104,7 @@ public class TaskList {
                         sb.append(" ");
                     }
                 }
-                Event event = new Event(desc, from, sb.toString());
+                Event event = new Event(desc, from, sb.toString().trim());
                 this.taskList.add(event); this.numOfTasks++;
                 this.updateDrive();
                 System.out.println("Gotcha, I've added:");
@@ -98,14 +114,16 @@ public class TaskList {
         }
     }
 
-    public void deleteTasks(int inputIndex) {
+    public void deleteTasks(int inputIndex) throws IOException {
         Task task = this.taskList.get(inputIndex-1);
         this.taskList.remove(inputIndex-1);
         this.numOfTasks--;
+        this.updateDrive();
         System.out.println("Removing your task? It's gone now RUFF:");
         System.out.println("  " + task);
         System.out.println("Now you have " + this.numOfTasks + " in the list!");
     }
+
 //    @SuppressWarnings("uncheckedExceptions");
     public void updateDrive() throws IOException {
         Task task;
@@ -115,15 +133,20 @@ public class TaskList {
             task = this.taskList.get(i);
             String taskName = task.getName();
 //            System.out.println(taskName);
-            sb.append(taskName); sb.append(" | ");
-            sb.append(task.getStatusIcon()); sb.append(" | ");
+            sb.append(taskName); sb.append("|");
+            if (task.getStatusIcon().equals("X")) {
+                sb.append("1");
+            } else {
+                sb.append("0");
+            }
+            sb.append("|");
             sb.append(task.getDescription());
             if (taskName.equals("D")) {
                 Deadline d = (Deadline) task;
-                sb.append(" | "); sb.append(d.getBy());
+                sb.append("|"); sb.append(d.getBy());
             } else if (taskName.equals("E")) {
                 Event ev = (Event) task;
-                sb.append(" | "); sb.append(ev.getFrom()); sb.append(" | "); sb.append(ev.getTo());
+                sb.append("|"); sb.append(ev.getFrom()); sb.append("|"); sb.append(ev.getTo());
             }
             sb.append("\n");
         }
