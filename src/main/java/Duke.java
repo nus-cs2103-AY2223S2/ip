@@ -24,9 +24,6 @@ public class Duke {
         System.exit(0);
     }
 
-    public void printList(int currentNumber, Task task) {
-        System.out.println("\t" + currentNumber + "." + task.getStatusIcon() + task.getDescription());
-    }
 
     public void list() {
         separator();
@@ -34,15 +31,38 @@ public class Duke {
             int currentNumber = i+1;
             Task task = storage.get(i);
 
-            printList(currentNumber, task);
+            System.out.println("\t" + currentNumber + "." + task);
         }
         separator();
     }
 
-    public void add(String str) {
-        storage.add(new Task(str));
+    public void add(String type, String taskDetails) {
+        Task task;
         separator();
-        System.out.println("\tadded: " + str );
+        switch(type) {
+            case "todo":
+                task = new ToDo(taskDetails);
+                storage.add(task);
+                System.out.println("\t" + task);
+                break;
+            case "deadline":
+                String[] arr = taskDetails.split("/by", 2);
+                task = new Deadline(arr[0], arr[1]);
+                storage.add(task);
+                System.out.println("\t" + task);
+                break;
+            case "event":
+                String[] description_others = taskDetails.split("/from", 2);
+                String[] from_to = description_others[1].split("/to", 2);
+                task = new Event(description_others[0], from_to[0], from_to[1]);
+                storage.add(task);
+                System.out.println("\t" + task);
+                break;
+            default:
+                System.out.println("Please insert either a todo, deadline or event.");
+                break;
+        }
+        System.out.println("Now you have " + storage.size() + " tasks in the list.");
         separator();
     }
 
@@ -51,7 +71,7 @@ public class Duke {
         task.setDone(isDone);
         separator();
         System.out.println("\tOk, I have marked this task as " + (isDone ? "done" : "not done yet")  +  ":\n\t\t"
-                + task.getStatusIcon() + task.getDescription());
+                + task);
         separator();
     }
 
@@ -80,7 +100,7 @@ public class Duke {
                     addressBook.setTaskStatus(Integer.parseInt(arr[1]), false);
                     break;
                 default:
-                    addressBook.add(str);
+                    addressBook.add(arr[0], arr[1]);
                     break;
             }
         }

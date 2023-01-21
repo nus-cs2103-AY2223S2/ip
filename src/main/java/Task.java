@@ -1,5 +1,4 @@
 public class Task {
-
     private final String description;
     private Boolean done;
 
@@ -18,5 +17,10 @@ public class Task {
 
     public void setDone(Boolean done) {
         this.done = done;
+    }
+
+    @Override
+    public String toString() {
+        return this.getStatusIcon() + " " + this.getDescription();
     }
 }
