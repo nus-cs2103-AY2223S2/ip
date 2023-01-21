@@ -1,0 +1,8 @@
+list
+todo
+todo go and do some stuff
+list
+deadline wake up
+deadline wake up /by 1200hrs
+list
+event have lunch /from 1200hrs /to 1800hrs
