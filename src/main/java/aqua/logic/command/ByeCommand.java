@@ -6,9 +6,9 @@ import aqua.logic.ExecutionTask;
 import aqua.manager.AppManager;
 
 
-public class ByeCommand implements CommandDispatcherCreator {
+public class ByeCommand implements Command {
     @Override
-    public ExecutionDispatcher createDispatcher(ArgumentMap args, AppManager manager) {
+    public ExecutionDispatcher getDispatcher(ArgumentMap args, AppManager manager) {
         return ExecutionDispatcher.of(new ExecutionTask<String>(args, manager) {
             @Override
             public String process(ArgumentMap args, AppManager manager) {

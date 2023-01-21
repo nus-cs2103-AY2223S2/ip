@@ -8,7 +8,7 @@ import aqua.logic.ExecutionDispatcher;
 import aqua.logic.ExecutionTask;
 import aqua.manager.AppManager;
 
-public class MarkTaskCommand implements CommandDispatcherCreator {
+public class MarkTaskCommand implements Command {
     private boolean isCompletedMarker;
 
 
@@ -18,7 +18,7 @@ public class MarkTaskCommand implements CommandDispatcherCreator {
 
 
     @Override
-    public ExecutionDispatcher createDispatcher(ArgumentMap args, AppManager manager) {
+    public ExecutionDispatcher getDispatcher(ArgumentMap args, AppManager manager) {
         return ExecutionDispatcher.of(new ExecutionTask<AquaTask>(args, manager) {
             @Override
             public AquaTask process(ArgumentMap args, AppManager manager)

@@ -8,9 +8,9 @@ import aqua.logic.ExecutionDispatcher;
 import aqua.logic.ExecutionTask;
 import aqua.manager.AppManager;
 
-public class DeleteCommand implements CommandDispatcherCreator {
+public class DeleteCommand implements Command {
     @Override
-    public ExecutionDispatcher createDispatcher(ArgumentMap args, AppManager manager) {
+    public ExecutionDispatcher getDispatcher(ArgumentMap args, AppManager manager) {
         return ExecutionDispatcher.of(new ExecutionTask<AquaTask>(args, manager) {
             @Override
             public AquaTask process(ArgumentMap args, AppManager manager)

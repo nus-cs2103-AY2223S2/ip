@@ -8,12 +8,12 @@ import aqua.logic.ExecutionTask;
 import aqua.manager.AppManager;
 
 
-public abstract class AddTaskCommand implements CommandDispatcherCreator {
+public abstract class AddTaskCommand implements Command {
     public abstract AquaTask createTask(ArgumentMap args) throws IllegalSyntaxException;
 
 
     @Override
-    public ExecutionDispatcher createDispatcher(ArgumentMap args, AppManager manager) {
+    public ExecutionDispatcher getDispatcher(ArgumentMap args, AppManager manager) {
         return ExecutionDispatcher.of(new ExecutionTask<AquaTask>(args, manager) {
             @Override
             public AquaTask process(ArgumentMap args, AppManager manager)

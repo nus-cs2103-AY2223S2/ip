@@ -4,7 +4,14 @@ import java.util.Scanner;
 
 import aqua.exception.IllegalSyntaxException;
 import aqua.logic.CommandLineInput;
+import aqua.logic.command.AddDeadlineCommand;
+import aqua.logic.command.AddEventCommand;
+import aqua.logic.command.AddToDoCommand;
+import aqua.logic.command.ByeCommand;
 import aqua.logic.command.Command;
+import aqua.logic.command.DeleteCommand;
+import aqua.logic.command.ListCommand;
+import aqua.logic.command.MarkTaskCommand;
 
 
 public class CommandLineInputParser implements Parser<CommandLineInput> {
@@ -22,7 +29,7 @@ public class CommandLineInputParser implements Parser<CommandLineInput> {
 
         try (Scanner scanner = new Scanner(input)) {
             if (scanner.hasNext()) {
-                command = Command.valueOf(scanner.next().toUpperCase());
+                command = getCommand(scanner.next());
 
                 if (scanner.hasNext()) {
                     argString = scanner.nextLine().strip();
@@ -35,5 +42,29 @@ public class CommandLineInputParser implements Parser<CommandLineInput> {
         }
 
         return new CommandLineInput(command, argumentParser.parse(argString));
+    }
+
+
+    private static Command getCommand(String input) throws IllegalSyntaxException {
+        switch (input) {
+            case "list":
+                return new ListCommand();
+            case "mark":
+                return new MarkTaskCommand(true);
+            case "unmark":
+                return new MarkTaskCommand(false);
+            case "todo":
+                return new AddToDoCommand();
+            case "event":
+                return new AddEventCommand();
+            case "deadline":
+                return new AddDeadlineCommand();
+            case "delete":
+                return new DeleteCommand();
+            case "bye":
+                return new ByeCommand();
+            default:
+                throw new IllegalSyntaxException("I do not know what command is suppose to do");
+        }
     }
 }

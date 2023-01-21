@@ -7,9 +7,9 @@ import aqua.manager.AppManager;
 import aqua.manager.TaskManager;
 
 
-public class ListCommand implements CommandDispatcherCreator {
+public class ListCommand implements Command {
     @Override
-    public ExecutionDispatcher createDispatcher(ArgumentMap args, AppManager manager) {
+    public ExecutionDispatcher getDispatcher(ArgumentMap args, AppManager manager) {
         return ExecutionDispatcher.of(new ExecutionTask<TaskManager>(args, manager) {
             @Override
             public TaskManager process(ArgumentMap args, AppManager manager) {

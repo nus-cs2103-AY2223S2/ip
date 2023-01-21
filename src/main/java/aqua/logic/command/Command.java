@@ -5,26 +5,6 @@ import aqua.logic.ExecutionDispatcher;
 import aqua.manager.AppManager;
 
 
-public enum Command {
-    LIST(new ListCommand()),
-    TODO(new AddToDoCommand()),
-    DEADLINE(new AddDeadlineCommand()),
-    EVENT(new AddEventCommand()),
-    MARK(new MarkTaskCommand(true)),
-    UNMAARK(new MarkTaskCommand(false)),
-    DELETE(new DeleteCommand()),
-    BYE(new ByeCommand());
-
-
-    private final CommandDispatcherCreator creator;
-
-
-    private Command(CommandDispatcherCreator creator) {
-        this.creator = creator;
-    }
-
-
-    public ExecutionDispatcher getDispatcher(ArgumentMap args, AppManager manager) {
-        return creator.createDispatcher(args, manager);
-    }
+public interface Command {
+    public ExecutionDispatcher getDispatcher(ArgumentMap args, AppManager manager);
 }
