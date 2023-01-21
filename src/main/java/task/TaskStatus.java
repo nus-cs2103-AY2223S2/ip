@@ -1,3 +1,5 @@
+package task;
+
 /**
  * An Enum class representing the completion status of a task
  */
