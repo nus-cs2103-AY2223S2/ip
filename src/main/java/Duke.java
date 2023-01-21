@@ -1,7 +1,5 @@
 import java.util.Scanner;
 import java.util.ArrayList;
-//if user put in wrong format for deadline events, error will occur
-//need to handle them using wrong array index exception
 enum Query { LIST, MARK, UNMARK, TODO, DEADLINE, EVENT, DELETE }
 public class Duke {
     public static void main(String[] args) {
@@ -13,7 +11,7 @@ public class Duke {
         System.out.println("  |-|");        
 
         Scanner scan = new Scanner(System.in);
-        ArrayList<Task> tasks = new ArrayList<Task>();
+        ArrayList<Task> tasks = Save.loadSave();
 
         String input = scan.nextLine();
         while(!input.equals("bye")) {
@@ -49,6 +47,7 @@ public class Duke {
             input = scan.nextLine();
         }
         System.out.println("Bye! Hope to see you again <3!");        
+        scan.close();
     }
     private static void list(ArrayList<Task> a) {
         System.out.println("Here are the tasks in your list:");
@@ -73,6 +72,7 @@ public class Duke {
     private static void todo(ArrayList<Task> a, String s) {
         Todo t = new Todo(s);
         a.add(t);
+        Save.makeSave(a);
         System.out.println("Got it I've added a todo!");
         System.out.println(t.toString());
     }
@@ -83,6 +83,7 @@ public class Duke {
             String by = tokens[1];
             Deadline t = new Deadline(name, by);            
             a.add(t);
+            Save.makeSave(a);
             System.out.println("Got it I've added a deadline");
             System.out.println(t.toString());
         } catch (IndexOutOfBoundsException e) { System.out.println("please ensure u have a /by option and that /by option argument exist");}
@@ -97,6 +98,7 @@ public class Duke {
             String to = options[1];
             Event t = new Event(name, from, to);            
             a.add(t);
+            Save.makeSave(a);
             System.out.println("Got it I've added an event");
             System.out.println(t.toString());
         } catch (IndexOutOfBoundsException e) { System.out.println("please ensure u have a /from /to (in that order!) option and that their arguments exist");}
@@ -105,6 +107,7 @@ public class Duke {
         try {
             int num = Integer.parseInt(s);
             Task t = a.remove(num - 1);
+            Save.makeSave(a);
             System.out.println("I have removed this task");
             System.out.println(t);
         } catch (NumberFormatException e) {System.out.println("please only input numbers");

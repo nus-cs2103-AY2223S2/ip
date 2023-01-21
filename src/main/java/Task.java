@@ -1,5 +1,6 @@
+import java.io.Serializable;
 
-class Task {
+class Task implements Serializable{
     boolean done;
     String name;
     public Task(String n) {
