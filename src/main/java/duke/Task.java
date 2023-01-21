@@ -1,16 +1,35 @@
 package duke;
 
-public class Task {
+public abstract class Task {
+    public enum TaskSymbol {
+        TODO ("T"),
+        EVENT ("E"),
+        DEADLINE ("D");
+        private final String symbol;
+        TaskSymbol(String symbol) {
+            this.symbol = symbol;
+        }
+
+        /**
+         * Getter function for the symbol of the enum
+         * @return Symbol string
+         */
+        public String getSymbol() {
+            return symbol;
+        }
+    };
     protected String description;
     protected boolean isDone;
+    protected TaskSymbol symbol;
 
     /**
      * Constructor for task
      * @param description Description of the task
      */
-    public Task(String description) {
+    protected Task(String description, TaskSymbol symbol) {
         this.description = description;
         this.isDone = false;
+        this.symbol = symbol;
     }
 
     /**
@@ -44,12 +63,28 @@ public class Task {
     }
 
     /**
+     * Getter function for isDone
+     * @return isDone
+     */
+    public boolean isDone() {
+        return isDone;
+    }
+
+    /**
+     * Getter function for the task type
+     * @return Task type enum
+     */
+    public TaskSymbol getTaskType() {
+        return this.symbol;
+    }
+
+    /**
      * toString function to represent the task as a string
      * @return String representation of the task
      */
     @Override
     public String toString() {
-        return String.format("[%s] %s", getStatusIcon(), getDescription());
+        return String.format("[%s][%s] %s", this.symbol.getSymbol(), getStatusIcon(), getDescription());
     }
 
 }

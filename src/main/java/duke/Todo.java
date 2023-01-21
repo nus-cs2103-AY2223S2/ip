@@ -2,7 +2,7 @@ package duke;
 
 public class Todo extends Task {
     public Todo(String description) throws DukeException {
-        super(description.trim());
+        super(description.trim(), TaskSymbol.TODO);
         if (this.description.equals("")) {
             throw new DukeException("The description of a todo cannot be empty.");
         }
@@ -13,6 +13,6 @@ public class Todo extends Task {
      */
     @Override
     public String toString() {
-        return String.format("[T]%s", super.toString());
+        return String.format("%s", super.toString());
     }
 }

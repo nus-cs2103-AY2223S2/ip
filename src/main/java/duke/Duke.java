@@ -1,9 +1,15 @@
 package duke;
 
 import java.util.ArrayList;
+import java.io.File;
+import java.io.FileWriter;
+import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.util.Scanner;
 public class Duke {
     static protected ArrayList<Task> tasks = new ArrayList<>();
+    static protected final String DATA_DIR = "data/";
+    static protected final String DATA_FILENAME = "duke.txt";
 
     /**
      * Helper function to add a new task to the ArrayList, while outputting a message
@@ -114,11 +120,90 @@ public class Duke {
             } else {
                 throw new BadCommandException("I'm sorry, but I don't know what that means :-(");
             }
+            saveTasks();
         } catch (DukeException e) {
             prettyPrint(e.getMessage());
         }
     }
-
+    public static void saveTasks() {
+        File dataDirectory = new File(DATA_DIR);
+        if (!dataDirectory.exists()) {
+            dataDirectory.mkdir();
+        }
+        File dataFile = new File(DATA_DIR + DATA_FILENAME);
+        try {
+            FileWriter fw = new FileWriter(dataFile.getAbsoluteFile());
+            for (Task task: tasks) {
+                ArrayList<String> params = new ArrayList<>();
+                params.add(task.getTaskType().getSymbol());
+                params.add(task.isDone() ? "1" : "0");
+                params.add(task.getDescription());
+                if (task instanceof Event) {
+                    Event castedTask = (Event) task;
+                    params.add(castedTask.getStartTime());
+                    params.add(castedTask.getEndTime());
+                } else if (task instanceof Deadline) {
+                    Deadline castedTask = (Deadline) task;
+                    params.add(castedTask.getByDate());
+                }
+                String outputStr = String.join(" | ", params);
+                fw.write(outputStr + System.lineSeparator());
+            }
+            fw.close();
+        } catch (IOException e) {
+            prettyPrint("Error saving to hard drive: " + e.getMessage());
+        }
+    }
+    public static void retrieveData() {
+        File dataFile = new File(DATA_DIR + DATA_FILENAME);
+        if (!dataFile.exists()) {
+            return;
+        }
+        try {
+            Scanner fileScanner = new Scanner(dataFile);
+            int rowCnt = 0;
+            while (fileScanner.hasNext()) {
+                rowCnt++;
+                String[] inputStr = fileScanner.nextLine().trim().split(" \\| ");
+                if (inputStr.length < 3) {
+                    continue;
+                }
+                try {
+                    Task newTask = null;
+                    if (inputStr[0].equals(Task.TaskSymbol.TODO.getSymbol())) {
+                        newTask = new Todo(inputStr[2]);
+                        tasks.add(newTask);
+                    } else if (inputStr[0].equals(Task.TaskSymbol.DEADLINE.getSymbol())) {
+                        if (inputStr.length < 4) {
+                            continue;
+                        }
+                        newTask = new Deadline(inputStr[2], inputStr[3]);
+                        tasks.add(newTask);
+                    } else if (inputStr[0].equals(Task.TaskSymbol.EVENT.getSymbol())) {
+                        if (inputStr.length < 5) {
+                            continue;
+                        }
+                        newTask = new Event(inputStr[2], inputStr[3], inputStr[4]);
+                        tasks.add(newTask);
+                    }
+                    if (newTask != null) {
+                        if (Integer.parseInt(inputStr[1]) == 1) {
+                            newTask.markAsDone();
+                        }
+                    }
+                } catch (DukeException e) {
+                    prettyPrint(String.format(
+                            "Error processing row %d of %s: %s",
+                            rowCnt,
+                            DATA_DIR + DATA_FILENAME,
+                            e.getMessage()
+                    ));
+                }
+            }
+        } catch (FileNotFoundException e) {
+            prettyPrint("Error retrieving local data: " + e.getMessage());
+        }
+    }
     /**
      * Helper function to output to the user "prettily".
      * @param out the string to output
@@ -128,6 +213,9 @@ public class Duke {
         System.out.println(String.format("\t%s\n\t%s\n\t%s", divider, out, divider));
     }
     public static void main(String[] args) {
+        // Retrieve list from data/duke.txt
+        retrieveData();
+        // Start receiving inputs from terminal
         Scanner inputScanner = new Scanner(System.in);
         prettyPrint("Hello! I'm Duke\n\tWhat can I do for you?");
         String inputStr = inputScanner.nextLine().trim();

@@ -3,7 +3,7 @@ package duke;
 public class Deadline extends Task {
     protected String by;
     public Deadline(String description, String by) throws DukeException {
-        super(description.trim());
+        super(description.trim(), TaskSymbol.DEADLINE);
         this.by = by.trim();
         if (this.description.equals("")) {
             throw new DukeException("The description of a deadline cannot be empty.");
@@ -14,11 +14,18 @@ public class Deadline extends Task {
     }
 
     /**
+     * Getter function for by date
+     * @return The by date
+     */
+    public String getByDate() {
+        return by;
+    }
+    /**
      * Represent duke.Deadline as a string
      * @return String representation of a duke.Deadline
      */
     @Override
     public String toString() {
-        return String.format("[D]%s (by: %s)", super.toString(), by);
+        return String.format("%s (by: %s)", super.toString(), by);
     }
 }
