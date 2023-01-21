@@ -4,6 +4,7 @@ import model.Task;
 import model.ToDo;
 import utils.*;
 
+import java.time.DateTimeException;
 import java.util.Scanner;
 
 public class Membot {
@@ -129,6 +130,9 @@ public class Membot {
                              NoEndDateTimeFoundException e) {
                         Printer.printlnError("Invalid Syntax - \"event [title] /from [start] /to [end]\"" +
                                 "(e.g. \"event piano concert /from tomorrow 3pm /to tomorrow 6pm\")");
+                    } catch (DateTimeException e) {
+                        Task.deleteLast();
+                        Printer.printlnError(e.getMessage());
                     }
 
                     break;
