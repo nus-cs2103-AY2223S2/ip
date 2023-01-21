@@ -1,3 +1,4 @@
+clear
 todo one
 todotwo
 list
@@ -29,4 +30,5 @@ event test
 del 1
 del1
 clear
+asdf
 bye
