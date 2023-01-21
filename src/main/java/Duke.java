@@ -39,6 +39,12 @@ public class Duke {
                     System.out.println(i + "." + task.toString());
                 }
 
+            } else if (input.startsWith("delete")) {
+                String index = input.split(" ", 2)[1];
+                Task task = list.get(Integer.parseInt(index) - 1);
+                list.remove(Integer.parseInt(index) - 1);
+                System.out.println("Noted. I've removed this task:\n" + task.toString() + "\nNow you have "
+                        + list.size() + " tasks in the list.");
             } else {
                 try {
                     if (input.contains("todo")) {
