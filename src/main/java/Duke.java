@@ -36,6 +36,15 @@ public class Duke {
         separator();
     }
 
+    public void delete(int index) {
+        separator();
+        Task task = storage.get(index - 1);
+        storage.remove(index - 1);
+        System.out.println("Noted. I've removed this task:" + "\n\t" + task);
+        System.out.println("Now you have " + storage.size() +" tasks in the list.");
+        separator();
+    }
+
     public void addToDo(String taskDetails) {
         ToDo task = new ToDo(taskDetails);
         storage.add(task);
@@ -115,6 +124,12 @@ public class Duke {
                             throw new DukeException("Please include the task index to unmark.");
                         }
                         addressBook.setTaskStatus(Integer.parseInt(arr[1]), false);
+                        break;
+                    case "delete":
+                        if (!details) {
+                            throw new DukeException("Please include the task index to delete.");
+                        }
+                        addressBook.delete(Integer.parseInt(arr[1]));
                         break;
                     case "todo":
                         if (!details) {
