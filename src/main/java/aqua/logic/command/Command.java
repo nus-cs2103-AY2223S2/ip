@@ -9,6 +9,7 @@ public enum Command {
     TODO(new AddToDoCommand()),
     DEADLINE(new AddDeadlineCommand()),
     EVENT(new AddEventCommand()),
+    DELETE(new DeleteCommand()),
     BYE(new ByeCommand());
 
 
