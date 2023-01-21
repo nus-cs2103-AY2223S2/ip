@@ -12,6 +12,8 @@ public class Mark extends Command {
 
     public void execute(MyData data) {
         data.markDone(this.id);
+        data.saveToFile();
+
         System.out.print(Ui.line() +
                 "    Nice! I've marked this task as done:\n" +
                 "    " + data.getData(this.id) + "\n" +

@@ -18,5 +18,6 @@ public class Delete extends Command {
                 "     Now you have " + itemCount + " tasks in the list.\n" +
                 Ui.line());
         data.deleteData(id);
+        data.saveToFile();
     }
 }

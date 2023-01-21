@@ -3,11 +3,18 @@ import exceptions.DukeException;
 import parser.Parser;
 import commands.Command;
 import ui.Ui;
+
+import java.io.IOException;
 import java.util.Scanner;
 
 public class Duke {
     public static void main(String[] args) {
         MyData data = new MyData();
+        try {
+            data.loadData();
+        } catch (IOException e) {
+            System.out.println(e.getMessage());
+        }
         Parser parser = new Parser(data);
         Ui.display();
 

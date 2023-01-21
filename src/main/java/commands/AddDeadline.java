@@ -13,6 +13,8 @@ public class AddDeadline extends Command {
 
     public void execute(MyData data) {
         data.setData(deadline);
+        data.saveToFile();
+
         System.out.print(Ui.line() +
                 "     Got it. I've added this task:\n" +
                 "       " + deadline + "\n" +
