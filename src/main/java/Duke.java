@@ -1,24 +1,22 @@
 import command.Command;
 
+import java.io.IOException;
 import java.util.Scanner;
 
-import task.Deadline;
-import task.Event;
 import task.Task;
 import task.TaskList;
-import task.Todo;
 
 /**
  * Duke command line tool that helps to track tasks.
  */
 public class Duke {
     /** Scanner used by each duke */
-    private Scanner scanner;
+    private final Scanner scanner;
     /** Whether the duke is still running or has been commanded to end */
     private boolean isRunning;
 
     /** Task list */
-    private TaskList tasks;
+    private final TaskList tasks;
 
     /**
      * Constructs a duke.
@@ -26,7 +24,8 @@ public class Duke {
     public Duke() {
         scanner = new Scanner(System.in);
         isRunning = false;
-        tasks = new TaskList("/data/tasks");
+        System.out.println("Hello!");
+        tasks = new TaskList("./tasks.txt");
     }
 
     /**
@@ -44,7 +43,7 @@ public class Duke {
      */
     public void run() {
         isRunning = true;
-        System.out.println("Hello!");
+        System.out.println("Awaiting commands...");
         while (isRunning) {
             try {
                 execute(new Command(scanner.nextLine()));
@@ -67,24 +66,28 @@ public class Duke {
         case DEADLINE:
             // FallThrough
         case EVENT:
-            System.out.println("Added task.Task " + tasks.execute(command));
+            System.out.println("Added task: " + tasks.execute(command));
             break;
         case LIST:
             System.out.println(tasks);
             break;
         case MARK:
             Task task = tasks.execute(command);
-            System.out.println("Marked task.Task " + task + " as " + (task.getIsDone() ? "" : "not ") + "done");
+            System.out.println("Marked task: " + task + " as " + (task.getIsDone() ? "" : "not ") + "done");
             break;
         case DELETE:
-            System.out.println("Deleted task.Task " + tasks.execute(command));
+            System.out.println("Deleted task: " + tasks.execute(command));
             break;
         }
     }
 
     private void exit() {
         scanner.close();
-        tasks.save();
+        try {
+            tasks.save();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
         System.out.println("Good bye!");
     }
 

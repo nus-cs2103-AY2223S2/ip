@@ -22,6 +22,15 @@ public class Deadline extends Task {
     }
 
     @Override
+    public String getRecreateCommand(int id) {
+        String result = "deadline " + description + " /by " + by;
+        if (isDone) {
+            result += "\nmark " + id;
+        }
+        return result;
+    }
+
+    @Override
     public String toString() {
         return "[D]" + super.toString() + " (by: " + by + ")";
     }
