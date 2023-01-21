@@ -1,5 +1,5 @@
 public class Deadline extends Task{
-    protected String type = "[D]";
+    protected String type = "[ D ]";
     protected String date;
     public Deadline(String description, String date) {
         super(description);
@@ -8,6 +8,6 @@ public class Deadline extends Task{
 
     @Override
     public String toString() {
-        return type + super.toString() + "(by: " + this.date + ")";
+        return type + super.toString() + "by: " + this.date + " ";
     }
 }

@@ -1,5 +1,5 @@
 public class ToDo extends Task{
-    protected String type = "[T]";
+    protected String type = "[ T ]";
     public ToDo(String description) {
         super(description);
     }
