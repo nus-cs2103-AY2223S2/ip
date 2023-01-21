@@ -17,7 +17,7 @@ public class Duke {
         System.out.println("What can I do for you hmm?");
         System.out.println(line);
         String inp;
-        String[] taskstorage = new String[100];
+        Task[] taskstorage = new Task[100];
         /**
          * Simply echoes commands entered by the user,
          * and exits when the user types "bye".
@@ -25,9 +25,11 @@ public class Duke {
         int ind = 0;
         while (true) {
             inp = br.readLine();
+            String[] input = inp.split(" ");
             System.out.println(line);
-            switch(inp) {
+            switch(input[0]) {
                 case "list":
+                    System.out.println("Tasks:");
                     for (int i = 0; i < ind; i++) {
                         System.out.println(i + 1 + ". " + taskstorage[i]);
                     }
@@ -35,19 +37,32 @@ public class Duke {
 
                 case "bye":
                     System.out.println("Byeee! Hope to see you again! Signing off, Duke.");
-                    System.out.println(line);
                     break;
 
+                case "mark":
+                    //System.out.println("Nice! I've marked this task as done:");
+                    int taskNo = Integer.parseInt(input[1]);
+                    taskNo--;
+                    taskstorage[taskNo].markasDone();
+                    break;
+
+                case "unmark":
+                    int taskNoUnmark = Integer.parseInt(input[1]);
+                    taskNoUnmark--;
+                    taskstorage[taskNoUnmark].markasUnDone();
+                    break;
                 default:
                     System.out.println("added: " + inp);
-                    taskstorage[ind] = inp;
+                    Task t = new Task(inp);
+                    //System.out.println(t);
+                    taskstorage[ind] = t;
                     ind++;
             }
+            System.out.println(line);
             if (inp.equals("bye")) {
                 break;
             }
-            //System.out.println(inp);
-            System.out.println(line);
+
         }
 
 
