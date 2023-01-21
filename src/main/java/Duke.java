@@ -24,26 +24,50 @@ public class Duke {
     private static void readInput() {
         String input = scanner.nextLine();
 
-        if (input.equals("bye")) {
-            showBye();
-        } else if (input.equals("list")) {
-            showList();
-        } else if (input.startsWith("mark")) {
-            showMark(input);
-        } else if (input.startsWith("unmark")) {
-            showUnmark(input);
-        } else if (input.startsWith("todo")) {
-            addTodo(input);
-        } else if (input.startsWith("deadline")) {
-            addDeadline(input);
-        } else if (input.startsWith("event")) {
-            addEvent(input);
+        try {
+            if (input.equals("bye")) {
+                showBye();
+            } else if (input.equals("list")) {
+                showList();
+            } else if (input.startsWith("mark")) {
+                showMark(input);
+            } else if (input.startsWith("unmark")) {
+                showUnmark(input);
+            } else if (input.startsWith("todo")) {
+                addTodo(input);
+            } else if (input.startsWith("deadline")) {
+                addDeadline(input);
+            } else if (input.startsWith("event")) {
+                addEvent(input);
+            } else {
+                throw new DukeException("I DON'T UNDERSTAND THAT!");
+            }
+        } catch (DukeException e) {
+            showUnknown(e.getMessage());
         }
+
     }
 
-    private static void addTodo(String input) {
-        // Get todo name
+    private static void showUnknown(String errorMsg) {
+        System.out.println(horizontalLine);
+        System.out.println(":( SORRY! " + errorMsg);
+        System.out.println(horizontalLine);
+        readInput();
+    }
+
+    private static void addTodo(String input) throws DukeException {
+        // Error handling
+        if (input.length() <= 4) {
+            throw new DukeException("TODO NEEDS A DESCRIPTION!");
+        }
+
+        // Get to-do name
         String todo = input.substring(5);
+
+        // Error handling
+        if (todo.length() == 0) {
+            throw new DukeException("TODO DESCRIPTION CANNOT BE EMPTY!");
+        }
 
         Task newTodo = new Task(todo);
         System.out.println(horizontalLine);
@@ -56,12 +80,22 @@ public class Duke {
         readInput();
     }
 
-    private static void addDeadline(String input) {
+    private static void addDeadline(String input) throws DukeException {
+        // Error handling
+        if (input.length() <= 8) {
+            throw new DukeException("DEADLINE NEEDS A DESCRIPTION!");
+        }
+
         // Get by String
         String inputInfo = input.substring(9);
         String[] inputs = inputInfo.split(" /by ");
         String taskName = inputs[0];
         String by = inputs[1];
+
+        // Error handling
+        if (taskName.length() == 0 || by.length() == 0) {
+            throw new DukeException("DEADLINE DESCRIPTION AND BY DATE CANNOT BE EMPTY!");
+        }
 
         Deadline newDeadline = new Deadline(taskName, by);
         System.out.println(horizontalLine);
@@ -74,7 +108,12 @@ public class Duke {
         readInput();
     }
 
-    private static void addEvent(String input) {
+    private static void addEvent(String input) throws DukeException {
+        // Error handling
+        if (input.length() <= 5) {
+            throw new DukeException("EVENT NEEDS A DESCRIPTION!");
+        }
+
         // Get from and to Strings
         String inputInfo = input.substring(6);
         String[] inputs1 = inputInfo.split(" /from ");
@@ -82,6 +121,11 @@ public class Duke {
         String[] inputs2 = inputs1[1].split(" /to ");
         String from = inputs2[0];
         String to = inputs2[1];
+
+        // Error handling
+        if (taskName.length() == 0 || from.length() == 0 || to.length() == 0) {
+            throw new DukeException("EVENT DESCRIPTION AND FROM/TO DATE CANNOT BE EMPTY!");
+        }
 
         Event newEvent = new Event(taskName, from, to);
         System.out.println(horizontalLine);
