@@ -40,7 +40,7 @@ public class Duke {
                     Task task = null; // to be converted into the right (sub) task below
                     if (echo.matches("todo\\s*.*")) {
                         if (echo.length() < 6) {
-                            throw new MissingArgumentException(Span.format("The description of a todo cannot be empty."), "todo");
+                            throw new MissingArgumentException("The description of a todo cannot be empty.", "todo");
                         }
                         String info = echo.substring(5);
                         task = new ToDo(info); // pass description of todo
@@ -54,7 +54,7 @@ public class Duke {
                         String[] time = sp[1].split(" /to ");
                         task = new Event(sp[0], time[0], time[1]);
                     } else {
-                        throw new UnknownCommandException(Span.format("I'm sorry, but I don't know what that means :-("), echo);
+                        throw new UnknownCommandException("I'm sorry, but I don't know what that means :-(", echo);
                     }
                     tasks.addTask(task);
                     System.out.println(Span.format("Got it. I've added this task:\n\t" + task.getStatusIcon() + "\n" + "Now you have " + tasks.size() + " task(s) in the list."));

@@ -11,9 +11,11 @@ deadline return book /by Sunday
 event project meeting /from Mon 2pm /to 4pm
 deadline do homework /by no idea :-p
 list
+xd
 mark 7
 mark 5
 list
+nani
 unmark 7
 delete 6
 list
