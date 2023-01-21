@@ -1,4 +1,8 @@
 todo reading
 deadline assignment /by 30 jan
+event wedding /from 28 jan /to 2nd feb
 list
 mark 1
+mark 2
+deadline
+unmark 2
