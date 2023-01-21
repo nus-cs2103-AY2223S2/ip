@@ -72,13 +72,25 @@ public class Duke {
     }
 
     public void addEvent(String taskDetails) {
-        String[] description_others = taskDetails.split("/from", 2);
-        String[] from_to = description_others[1].split("/to", 2);
-        Event task = new Event(description_others[0], from_to[0], from_to[1]);
-        storage.add(task);
-        System.out.println("\t" + task);
-        System.out.println("Now you have " + storage.size() + " tasks in the list.");
-        separator();
+        try {
+            String[] descriptionOthers = taskDetails.split("/from", 2);
+            if (descriptionOthers.length == 1) {
+                throw new DukeException("Please insert the date the event takes place from, after /from ");
+            }
+            String[] fromTo = descriptionOthers[1].split("/to", 2);
+            if (fromTo.length == 1) {
+                throw new DukeException("Please insert the date the event takes place until, after /to ");
+            }
+            Event task = new Event(descriptionOthers[0], fromTo[0], fromTo[1]);
+            storage.add(task);
+            System.out.println("\t" + task);
+            System.out.println("Now you have " + storage.size() + " tasks in the list.");
+            separator();
+        } catch (DukeException e) {
+            separator();
+            System.out.println("\t" + e);
+            separator();
+        }
     }
 
     public void setTaskStatus(int index, boolean isDone) {
