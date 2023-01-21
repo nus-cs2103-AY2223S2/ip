@@ -1,5 +1,3 @@
-package duke.tasks;
-
 /**
  * A task with an associated deadline
  */
