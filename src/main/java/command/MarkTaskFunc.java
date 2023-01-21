@@ -1,6 +1,6 @@
 package command;
 
-import aqua.exception.DukeIllegalArgumentException;
+import aqua.exception.IllegalSyntaxException;
 import task.Task;
 
 
@@ -12,17 +12,17 @@ public class MarkTaskFunc implements CommandFunction {
     }
 
     @Override
-    public String apply(CommandInput input) throws DukeIllegalArgumentException {
+    public String apply(CommandInput input) throws IllegalSyntaxException {
         try {
             int taskNum = input.getMainInput()
                 .map(numString -> Integer.parseInt(numString) - 1)
-                .orElseThrow(() -> new DukeIllegalArgumentException("Missing task number"));
+                .orElseThrow(() -> new IllegalSyntaxException("Missing task number"));
             Task task = input.getMainManager().getTaskManager().mark(taskNum, marker);
             return formMessage(task);
         } catch (NumberFormatException numEx) {
-            throw new DukeIllegalArgumentException("Task number must be an integer", numEx);
+            throw new IllegalSyntaxException("Task number must be an integer", numEx);
         } catch (IndexOutOfBoundsException oobEx) {
-            throw new DukeIllegalArgumentException("Task number out of bounds", oobEx);
+            throw new IllegalSyntaxException("Task number out of bounds", oobEx);
         }
     }
 

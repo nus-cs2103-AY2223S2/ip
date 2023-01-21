@@ -1,6 +1,6 @@
 package command;
 
-import aqua.exception.DukeIllegalArgumentException;
+import aqua.exception.IllegalSyntaxException;
 
 public enum Command {
     GREET(input -> "Kon aqua~~"),
@@ -21,7 +21,7 @@ public enum Command {
     }
 
 
-    public String execute(CommandInput input) throws DukeIllegalArgumentException {
+    public String execute(CommandInput input) throws IllegalSyntaxException {
         return commandFunc.apply(input);
     }
 }

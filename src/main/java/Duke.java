@@ -1,6 +1,6 @@
 import java.util.Scanner;
 
-import aqua.exception.DukeIllegalArgumentException;
+import aqua.exception.IllegalSyntaxException;
 import aqua.manager.AppManager;
 import command.Command;
 import command.CommandInput;
@@ -28,7 +28,7 @@ public class Duke {
 
         try {
             System.out.println(formatMessage(Command.GREET.execute(CommandInput.parse("", manager))));
-        } catch (DukeIllegalArgumentException dukeIllArgEx) {
+        } catch (IllegalSyntaxException dukeIllArgEx) {
             System.out.println(formatMessage(String.format(
                 "Failed to greet...\n%s",
                 dukeIllArgEx.toString()
@@ -40,7 +40,7 @@ public class Duke {
                 String message;
                 try {
                     message = execute(scanner.nextLine(), manager);
-                } catch (DukeIllegalArgumentException dukeIllArgEx) {
+                } catch (IllegalSyntaxException dukeIllArgEx) {
                     message = String.format(
                         "Hanya?? I was unable to process that...\n" +
                         "Please try again after fixing this:\n" +
@@ -54,7 +54,7 @@ public class Duke {
     }
 
 
-    private String execute(String rawInput, AppManager manager) throws DukeIllegalArgumentException {
+    private String execute(String rawInput, AppManager manager) throws IllegalSyntaxException {
         String msg = rawInput;
         String inputString = "";
         Command command;
@@ -70,7 +70,7 @@ public class Duke {
                 return "Hanya?? Did you say something?";
             }
         } catch (IllegalArgumentException illArgEx) {
-            throw new DukeIllegalArgumentException("Unknown command");
+            throw new IllegalSyntaxException("Unknown command");
         }
 
         if (command.equals(Command.BYE)) {

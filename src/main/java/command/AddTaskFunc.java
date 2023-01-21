@@ -1,6 +1,6 @@
 package command;
 
-import aqua.exception.DukeIllegalArgumentException;
+import aqua.exception.IllegalSyntaxException;
 import task.Task;
 
 
@@ -13,10 +13,10 @@ public class AddTaskFunc implements CommandFunction {
 
 
     @Override
-    public String apply(CommandInput input) throws DukeIllegalArgumentException {
+    public String apply(CommandInput input) throws IllegalSyntaxException {
         Task task = taskCreator.apply(input);
         if (task.getName().isBlank()) {
-            throw new DukeIllegalArgumentException("Task name cannot be blank");
+            throw new IllegalSyntaxException("Task name cannot be blank");
         }
         input.getMainManager().getTaskManager().add(task);
         return String.format(

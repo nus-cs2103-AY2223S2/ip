@@ -5,7 +5,7 @@ import java.util.NoSuchElementException;
 import java.util.Optional;
 import java.util.Scanner;
 
-import aqua.exception.DukeIllegalArgumentException;
+import aqua.exception.IllegalSyntaxException;
 import aqua.manager.AppManager;
 
 public class CommandInput {
@@ -20,7 +20,7 @@ public class CommandInput {
     }
 
 
-    public static CommandInput parse(String args, AppManager mainManager) throws DukeIllegalArgumentException {
+    public static CommandInput parse(String args, AppManager mainManager) throws IllegalSyntaxException {
         CommandInput input = new CommandInput(mainManager);
         args = args.strip() + " ";
         if (args.isBlank()) {
@@ -40,7 +40,7 @@ public class CommandInput {
 
 
     private static void addInput(String token, HashMap<String, String> inputMap)
-            throws DukeIllegalArgumentException {
+            throws IllegalSyntaxException {
         try (Scanner scanner = new Scanner(token)) {
             String key = scanner.next();
             String value = "";
@@ -49,7 +49,7 @@ public class CommandInput {
             }
             inputMap.put(key, value);
         } catch (NoSuchElementException noElmEx) {
-            throw new DukeIllegalArgumentException("Parameter name cannot be empty");
+            throw new IllegalSyntaxException("Parameter name cannot be empty");
         }
     }
 
