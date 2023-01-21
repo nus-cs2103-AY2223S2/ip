@@ -14,4 +14,10 @@ abstract class Task {
   protected char getStatusIcon() {
     return isDone ? 'X' : ' ';
   }
+
+  protected int getStatusNo() {
+    return isDone ? 1 : 0;
+  }
+
+  abstract public String toSaveFormat();
 }

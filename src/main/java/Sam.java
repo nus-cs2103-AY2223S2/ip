@@ -1,11 +1,15 @@
 import java.util.HashMap;
 import java.util.Scanner;
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
 
 public class Sam {
   private static Scanner scanner;
   private static TaskList tasks;
   private static HashMap<String, String> taskArgs;
   private static boolean live;
+  private static Path savePath;
 
 	public static void main(String[] args) {
     initSam();
@@ -17,6 +21,7 @@ public class Sam {
     scanner = new Scanner(System.in);
     tasks = new TaskList();
     taskArgs = new HashMap<>();
+    savePath = Path.of("data", "sam.txt");
     live = true;
   }
 
@@ -44,7 +49,8 @@ public class Sam {
 
   private static void processInput(String[] input)
     throws SamUnknownCommandException, SamMissingTaskException, SamInvalidTaskException,
-      SamMissingTaskTitleException, SamMissingTaskValueException, SamMissingTaskArgException
+      SamMissingTaskTitleException, SamMissingTaskValueException, SamMissingTaskArgException,
+      SamSaveFailedException
   {
     Command command = null;
     for (Command c : Command.values())
@@ -79,6 +85,7 @@ public class Sam {
         tasks.markTask(id, true);
         talk("Great! I'll check the task:",
           tasks.printTask(id));
+        save();
         break;
       }
       case UNMARK: {
@@ -92,6 +99,7 @@ public class Sam {
         tasks.markTask(id, false);
         talk("Okay, I'll uncheck the task:",
           tasks.printTask(id));
+          save();
         break;
       }
       case TODO: {
@@ -101,6 +109,7 @@ public class Sam {
         Task task = new ToDo(input[1]);
         tasks.addTask(task);
         newTask(task);
+        save();
         break;
       }
       case EVENT: {
@@ -115,6 +124,7 @@ public class Sam {
         Task task = new Event(title[0], taskArgs.get("from"), taskArgs.get("to"));
         tasks.addTask(task);
         newTask(task);
+        save();
         break;
       }
       case DEADLINE: {
@@ -129,6 +139,7 @@ public class Sam {
         Task task = new Deadline(title[0], taskArgs.get("by"));
         tasks.addTask(task);
         newTask(task);
+        save();
         break;
       }
       case DELETE: {
@@ -142,6 +153,7 @@ public class Sam {
         Task task = tasks.removeTask(id);
         talk("Ok, I'll remove the task from your list:",
           task.toString());
+        save();
         break;
       }
     }
@@ -168,5 +180,28 @@ public class Sam {
       System.out.println("  " + message);
     }
     System.out.println("└───────────────────────────────────────────┘");
+  }
+
+  private static void save() throws SamSaveFailedException {
+    try {
+      if (!Files.exists(savePath.getParent())) {
+        Files.createDirectory(savePath.getParent());
+      }
+      if (!Files.exists(savePath)) {
+        Files.createFile(savePath);
+      }
+
+      String[] list = new String[tasks.count()];
+      for (int i = 0; i < tasks.count(); i++) {
+        Task t = tasks.getTask(i + 1);
+        list[i] = t.toSaveFormat();
+      }
+
+      if (list.length > 0) {
+        Files.writeString(savePath, String.join("\n", list));
+      }
+    } catch (IOException e) {
+      throw new SamSaveFailedException();
+    }
   }
 }

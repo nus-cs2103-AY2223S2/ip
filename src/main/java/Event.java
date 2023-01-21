@@ -9,6 +9,14 @@ public class Event extends Task {
   }
 
   @Override
+  public String toSaveFormat() {
+    return String.format(
+      "E | %d | %s | %s | %s",
+      getStatusNo() , title, from, to
+    );
+  }
+
+  @Override
   public String toString() {
     return String.format(
       "[E][%c] %s (from: %s to: %s)",
