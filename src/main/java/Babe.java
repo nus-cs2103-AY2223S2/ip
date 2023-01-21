@@ -19,8 +19,6 @@ import task.ToDo;
  * @since 17 January 2023
  */
 public class Babe {
-
-
     /**
      * A string input from user.
      */
@@ -274,7 +272,7 @@ public class Babe {
                 Babe.drawLine();
             } catch (NoDescriptionException e2) {
                 Babe.drawLine();
-                System.out.println("I need to know what is the description of your task, bestie!");
+                System.out.println("I need to know what is the description of your task, bestie.");
                 Babe.drawLine();
             }
         }
