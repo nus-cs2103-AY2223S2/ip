@@ -16,4 +16,10 @@ public class Events extends Task{
         String s = (status)? "X":" ";
         System.out.println("[E][" +s+ "] " + this.des + " (from: " +this.start+ " to: "+this.end+")");
     }
+
+    @Override
+    public String toString() {
+        String s = (status)? "X":" ";
+        return "E | " + s + " | " + this.des + " | " + this.start + " to " + this.end;
+    }
 }

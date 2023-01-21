@@ -11,6 +11,12 @@ public class Deadlines extends Task{
     @Override
     public void printStatus() {
         String s = (status)? "X":" ";
-        System.out.println("[D][" +s+ "] " + this.des + " (by: " +this.deadline+ ")");
+        System.out.println("[D][" +s+ "] " + this.des + " (by: " + this.deadline + ")");
+    }
+
+    @Override
+    public String toString() {
+        String s = (status)? "X":" ";
+        return "D | " + s + " | " + this.des + " | " + this.deadline;
     }
 }

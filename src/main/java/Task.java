@@ -27,4 +27,9 @@ public class Task {
                 String s = (status)? "X":" ";
                 System.out.println("[" +s+ "] " + this.des);
         }
+
+        public String toString() {
+                String s = (status)? "X":" ";
+                return "  | " + s + this.des;
+        }
 }

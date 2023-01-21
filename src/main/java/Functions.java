@@ -1,4 +1,8 @@
+import java.io.FileNotFoundException;
 import java.util.Arrays;
+import java.io.File;
+import java.io.IOException;
+import java.io.FileWriter;
 
 public class Functions {
     TaskList ls;
@@ -20,6 +24,28 @@ public class Functions {
         return false;
     }
 
+    public void save() {
+        String pathname = "task.txt";
+        File f = new File(pathname);
+        //create file if not created already
+        try {
+            if (f.createNewFile()) {}
+        } catch (IOException e) {
+            System.out.println(e);
+        }
+
+        //overwrite all in tasklist into file
+        try{
+            FileWriter fw = new FileWriter(pathname);
+            for (int i = 0; i < ls.count(); i++) {
+                fw.write(ls.getTask(i).toString() + "\n");
+            }
+            fw.close();
+        } catch (IOException e) {
+            System.out.println(e);
+        }
+    }
+
     public void mark(String inp) throws DukeException{
         String[] s = inp.split(" ");
         if (s.length<2) {
@@ -33,6 +59,7 @@ public class Functions {
         t.setStatus(true);
         System.out.println("Nice! I've marked this task as done:");
         t.printStatus();
+        this.save();
     }
 
     public void unmark(String inp) throws DukeException{
@@ -48,6 +75,7 @@ public class Functions {
         t.setStatus(false);
         System.out.println("OK, I've marked this task as not done yet:");
         t.printStatus();
+        this.save();
     }
 
     public void delete(String inp) throws DukeException{
@@ -63,6 +91,7 @@ public class Functions {
         ls.getTask(index).printStatus();
         ls.removeTask(index);
         ls.printCount();
+        this.save();
     }
 
     public void todo(String inp) throws DukeException{
@@ -74,6 +103,7 @@ public class Functions {
         String taskDes = String.join(" ", temp);
         ToDos td = new ToDos(false, taskDes);
         ls.addTask(td);
+        this.save();
     }
 
     public void deadline(String inp) throws DukeException {
@@ -85,6 +115,7 @@ public class Functions {
         String taskDes = String.join(" ", temp);
         Deadlines dl = new Deadlines(false, taskDes);
         ls.addTask(dl);
+        this.save();
     }
 
     public void events(String inp) throws DukeException {
@@ -96,5 +127,6 @@ public class Functions {
         String taskDes = String.join(" ", temp);
         Events ev = new Events(false, taskDes);
         ls.addTask(ev);
+        this.save();
     }
 }

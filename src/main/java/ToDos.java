@@ -8,4 +8,10 @@ public class ToDos extends Task{
         String s = (status)? "X":" ";
         System.out.println("[T][" +s+ "] " + this.des);
     }
+
+    @Override
+    public String toString() {
+        String s = (status)? "X":" ";
+        return "T | " + s + " | " + this.des;
+    }
 }
