@@ -4,16 +4,27 @@ public class TaskManager {
     private ArrayList<Task> taskList;
     TaskManager() {
         // init list to store tasks
-        taskList = new ArrayList<Task>();
+        this.taskList = new ArrayList<Task>();
     }
-    public void addTask(String taskName) {
-        Task newTask = new Task(taskName);
-        taskList.add(newTask);
+
+    public void addTodo(String taskName) {
+        Todo newTodo = new Todo(taskName);
+        this.taskList.add(newTodo);
+    }
+
+    public void addDeadline(String taskName, String deadlineTiming) {
+        Deadline newDeadline = new Deadline(taskName, deadlineTiming);
+        this.taskList.add(newDeadline);
+    }
+
+    public void addEvent(String taskName, String startTime, String endTime) {
+        Event newEvent = new Event(taskName, startTime, endTime);
+        this.taskList.add(newEvent);
     }
 
     // get the name of the task at a given index
-    public String getTaskName(int taskNumber) {
-        return taskList.get(taskNumber - 1).getName();
+    public String getTaskString(int taskNumber) {
+        return this.taskList.get(taskNumber - 1).toString();
     }
 
     // changes Task at given index to marked. returns a boolean stating if process is successful
@@ -22,7 +33,7 @@ public class TaskManager {
             return false; // taskNumber is outside existing range of tasks
         } else {
             taskList.get(taskNumber - 1).mark();
-            return true; // success marking
+            return true; // successful marking
         }
     }
 
@@ -32,23 +43,23 @@ public class TaskManager {
             return false; // taskNumber is outside existing range of tasks
         } else {
             taskList.get(taskNumber - 1).unmark();
-            return true; // success unmarking
+            return true; // successful unmarking
         }
     }
 
     // formats and returns the list of tasks
     public String listTasks() {
-        if (taskList.size() == 0) { // returns empty string if no tasks
-            return "";
-        } else {
-            String listMessage = "";
-            for (int i = 0; i < taskList.size(); i++) {
-                Task curTask = taskList.get(i);
-                listMessage += "\n" + (i + 1)
-                        + ".[" + curTask.getStatusIcon()
-                        + "] " + curTask.getName();
+        String listMessage = "";    // returns empty string if no tasks
+        if (taskList.size() != 0) { // formats and adds each task to list
+            for (int i = 1; i <= taskList.size(); i++) {
+                listMessage += "\n" + i + ". "
+                        + getTaskString(i);
             }
-            return listMessage;
         }
+    return listMessage;
+    }
+
+    public int getTaskCount() {
+        return this.taskList.size();
     }
 }
