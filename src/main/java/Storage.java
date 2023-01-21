@@ -12,7 +12,6 @@ public class Storage {
         String directoryPath = System.getProperty("user.dir") + System.getProperty("file.separator") + "lists";
         File directory = new File(directoryPath);
         if (!directory.exists()) {
-            directory.mkdir();
             File taskList = new File(directoryPath, "taskList.txt");
             try {
                 FileWriter fileWriter = new FileWriter(taskList);
@@ -49,6 +48,7 @@ public class Storage {
                 String[] s = task.split("\\|");
                 String taskType = s[0].substring(0, 1);
                 switch (taskType) {
+                    // for Todo
                     case "T":
                         String todoName = s[2].substring(1);
                         Todo todo = new Todo(todoName);
@@ -57,6 +57,7 @@ public class Storage {
                         }
                         taskList.addTask(todo);
                         break;
+                    //for Deadline
                     case "D":
                         String deadlineName = s[2].substring(1);
                         String[] deadlineDescription = s[3].substring(1).split(" ");
@@ -67,6 +68,7 @@ public class Storage {
                         }
                         taskList.addTask(deadline);
                         break;
+                    // for Event
                     case "E":
                         String eventName = s[2].substring(1);
                         String[] eventDescription = s[3].substring(1).split(" ");
