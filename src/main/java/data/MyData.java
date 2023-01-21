@@ -1,7 +1,8 @@
 package data;
 
 import java.util.ArrayList;
-import tasks.Task;
+
+import tasks.*;
 
 public class MyData {
     private final ArrayList<Task> data = new ArrayList<Task>();
@@ -25,6 +26,6 @@ public class MyData {
     }
 
     public int len() {
-        return data.size();
+        return this.data.size();
     }
 }

@@ -4,6 +4,9 @@ import commands.*;
 import data.MyData;
 import exceptions.DukeException;
 import ui.Ui;
+
+import java.time.LocalDate;
+import java.time.format.DateTimeParseException;
 import java.util.Arrays;
 
 public class Parser {
@@ -17,8 +20,20 @@ public class Parser {
         return new Bye();
     }
 
-    public Command parseList(String[] commandArr) {
+    public Command parseList() {
         return new List();
+    }
+
+    public Command parseListDate(String[] commandArr) throws DukeException{
+        if (commandArr.length <= 1) {
+            throw new DukeException(Ui.wrapLines("Please enter a date e.g. listdate 'yyyy-MM-dd'"));
+        }
+        try {
+            LocalDate date = LocalDate.parse(commandArr[1]);
+            return new ListDate(date);
+        } catch (DateTimeParseException e) {
+            throw new DukeException(Ui.wrapLines("Please enter a date e.g. listdate 'yyyy-MM-dd'"));
+        }
     }
 
     public Command parseMark(String[] commandArr) throws DukeException {
@@ -49,9 +64,13 @@ public class Parser {
 
     public Command parseDeadline(String[] slashed) throws DukeException {
         if (slashed.length != 2 || removeCommand(slashed[0]).isEmpty() || removeCommand(slashed[1]).isEmpty()) {
-            throw new DukeException(Ui.wrapLines("Invalid format. e.g. deadline 'description' / 'due date'"));
+            throw new DukeException(Ui.wrapLines("Invalid format.\n    e.g. deadline 'description' / 'yyyy-MM-dd HH-mm'"));
         }
-        return new AddDeadline(removeCommand(slashed[0]), removeCommand(slashed[1]));
+        try {
+            return new AddDeadline(removeCommand(slashed[0]), removeCommand(slashed[1]));
+        } catch (DateTimeParseException e) {
+            throw new DukeException(Ui.wrapLines("Invalid format.\n    e.g. deadline 'description' / 'yyyy-MM-dd HH-mm'"));
+        }
     }
 
     public Command parseEvent(String[] slashed) throws DukeException {
@@ -59,11 +78,18 @@ public class Parser {
                 || removeCommand(slashed[0]).isEmpty()
                 || removeCommand(slashed[1]).isEmpty()
                 || removeCommand(slashed[2]).isEmpty()) {
-            throw new DukeException(Ui.wrapLines("Invalid format.\n    e.g. event 'description' / 'time' / 'time'"));
+            throw new DukeException(Ui.wrapLines("Invalid format. From and To formatted as 'yyyy-MM-dd HH-mm'" +
+                    "\n    e.g. event 'description' / 'From' / 'To'"));
         }
-        return new AddEvent(removeCommand(slashed[0]),
-                removeCommand(slashed[1]),
-                removeCommand(slashed[2]));
+        try {
+            return new AddEvent(removeCommand(slashed[0]),
+                    removeCommand(slashed[1]),
+                    removeCommand(slashed[2]));
+        } catch (DateTimeParseException e) {
+            throw new DukeException(Ui.wrapLines("Invalid format. From and To formatted as 'yyyy-MM-dd HH-mm'" +
+                    "\n    e.g. event 'description' / 'From' / 'To'"));
+        }
+
     }
 
     public Command parseDelete(String[] commandArr) throws DukeException {
@@ -87,7 +113,9 @@ public class Parser {
             case "bye":
                 return parseBye();
             case "list":
-                return parseList(commandArr);
+                return parseList();
+            case "listdate":
+                return parseListDate(commandArr);
             case "mark":
                 return parseMark(commandArr);
             case "unmark":

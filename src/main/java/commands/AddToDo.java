@@ -13,6 +13,7 @@ public class AddToDo extends Command {
 
     public void execute(MyData data) {
         data.setData(todo);
+
         System.out.print(Ui.line() +
                 "     Got it. I've added this task:\n" +
                 "       " + todo + "\n" +

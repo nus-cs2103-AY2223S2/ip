@@ -3,6 +3,8 @@ import exceptions.DukeException;
 import parser.Parser;
 import commands.Command;
 import ui.Ui;
+
+import java.io.IOException;
 import java.util.Scanner;
 
 public class Duke {
