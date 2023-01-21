@@ -1,8 +1,11 @@
 public class Event extends Task {
     private String type = "[E]";
+    private String start;
+    private String end;
 
     public Event(String name) {
         super(name);
+
     }
 
     @Override

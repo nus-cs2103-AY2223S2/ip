@@ -35,8 +35,13 @@ public class Duke {
                 if (input_arr[0].equals("todo")) {
                     newTask = new ToDo(input.replaceFirst("todo ", ""));
                 } else if (input_arr[0].equals("deadline")) {
+                    input = input.replaceFirst( "/by", "(by:");
+                    input = input + ")";
                     newTask = new Deadline(input.replaceFirst("deadline ", ""));
                 } else {
+                    input = input.replaceFirst( "/from", "(from:");
+                    input = input.replaceFirst( "/to ", "to: ");
+                    input = input + ")";
                     newTask = new Event(input.replaceFirst("event ", ""));
                 }
                 actions.add(newTask);
