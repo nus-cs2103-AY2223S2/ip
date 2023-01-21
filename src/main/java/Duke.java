@@ -16,7 +16,7 @@ public class Duke {
             switch(tokens[0]) {
                 case "bye": {
                     System.out.print("Bye. Hope to see you again soon!");
-                    break;
+                    System.exit(0);
                 }
                 case "list": {
                     System.out.println("Here are the tasks in your list:");
@@ -81,7 +81,6 @@ public class Duke {
                 }
                 default:
                     System.out.println("Invalid command entered!");
-
             }
         }
     }
@@ -101,7 +100,7 @@ public class Duke {
             chosenTask.mark();
             System.out.println("Nice! I've marked this task as done:\n" + chosenTask);
         } catch (NumberFormatException | IndexOutOfBoundsException e) {
-            System.out.println("Given task number is invalid");
+            System.out.println("Given task number is invalid!");
         }
     }
 
@@ -112,7 +111,7 @@ public class Duke {
             chosenTask.unmark();
             System.out.println("OK, I've marked this task as not done yet:\n" + chosenTask);
         } catch (NumberFormatException | IndexOutOfBoundsException e) {
-            System.out.println("Given task number is invalid");
+            System.out.println("Given task number is invalid!");
         }
     }
 
@@ -124,7 +123,7 @@ public class Duke {
             System.out.println("Noted. I've removed this task:\n" + chosenTask);
             System.out.printf("Now you have %d tasks in the list.\n", tasks.size());
         } catch (NumberFormatException | IndexOutOfBoundsException e) {
-            System.out.println("Given task number is invalid");
+            System.out.println("Given task number is invalid!");
         }
     }
 

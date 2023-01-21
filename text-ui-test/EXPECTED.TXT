@@ -1,11 +1,18 @@
 Hello! I'm Duke
 What can I do for you?
+The description of a todo cannot be empty!
 Got it. I've added this task:
 [T][ ] borrow book
 Now you have 1 tasks in the list.
+The description of a deadline cannot be empty!
+Deadline needs to include a specific end date or time!
 Got it. I've added this task:
 [D][ ] return book (by: Sunday)
 Now you have 2 tasks in the list.
+The description of a event cannot be empty!
+Event needs to include a start date/time and a end date/time!
+Event needs to include a start date/time and a end date/time!
+Event needs to include a start date/time and a end date/time!
 Got it. I've added this task:
 [E][ ] project meeting (from: Mon 2pm to: 4pm)
 Now you have 3 tasks in the list.
@@ -13,4 +20,17 @@ Here are the tasks in your list:
 1.[T][ ] borrow book
 2.[D][ ] return book (by: Sunday)
 3.[E][ ] project meeting (from: Mon 2pm to: 4pm)
+Nice! I've marked this task as done:
+[T][X] borrow book
+Nice! I've marked this task as done:
+[D][X] return book (by: Sunday)
+Given task number is invalid!
+OK, I've marked this task as not done yet:
+[T][ ] borrow book
+Given task number is invalid!
+Noted. I've removed this task:
+[E][ ] project meeting (from: Mon 2pm to: 4pm)
+Now you have 2 tasks in the list.
+Given task number is invalid!
+Invalid command entered!
 Bye. Hope to see you again soon!
