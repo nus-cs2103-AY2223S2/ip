@@ -1,6 +1,11 @@
 package model;
 
+import storage.File;
+import utils.Printer;
+
+import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.LinkedList;
 
 public class Task {
@@ -71,6 +76,14 @@ public class Task {
                 return "X";
             default:
                 return "?";
+        }
+    }
+
+    public static void save() {
+        try {
+            File.saveToFile(String.join("\n", listAll()));
+        } catch (IOException e) {
+            Printer.printlnError(e.toString());
         }
     }
 

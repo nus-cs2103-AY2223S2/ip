@@ -2,8 +2,10 @@ import model.Deadline;
 import model.Event;
 import model.Task;
 import model.ToDo;
+import storage.File;
 import utils.*;
 
+import java.io.IOException;
 import java.util.Scanner;
 
 public class Membot {
@@ -15,6 +17,11 @@ public class Membot {
             + "|_| |_| |_| \\___||_| |_| |_||_.__/  \\___/  \\__|\n";
 
     public static void main(String[] args) {
+        try {
+            File.init();
+        } catch (IOException e) {
+            Printer.printlnError(e.toString());
+        }
         Printer.println("Welcome to\n" + LOGO);
         Printer.println("How may I assist you today?");
         Scanner scanner = new Scanner(System.in);
@@ -136,6 +143,7 @@ public class Membot {
         }
 
         scanner.close();
+        Task.save();
     }
 
     private static void printTasks() {
