@@ -1,3 +1,7 @@
+/**
+ * Represents a Deadline task. A Deadline task has a description,
+ * a 'by' timeframe, and can be marked as done.
+ */
 public class Deadline extends Task {
     protected String by;
 
@@ -11,15 +15,30 @@ public class Deadline extends Task {
         this.by = by;
     }
 
+    /**
+     * Marks a Deadline task as done.
+     * @return Deadline task marked as done.
+     */
     @Override
     public Deadline markAsDone() {
         return new Deadline(description, true, by);
     }
 
+    /**
+     * Unmarks a Deadline task from being done.
+     * @return Deadline task unmarked from being done.
+     */
     @Override
     public Deadline unmarkAsDone() {
         return new Deadline(description, by);
     }
+
+    /**
+     * Returns data for storage purposes.
+     * @return Data for storage purposes.
+     */
+    @Override
+    public String getDataToSave() { return "D / " + getStatusNum() + " / " + getDesc() + " / " + by; }
 
     @Override
     public String toString() {
