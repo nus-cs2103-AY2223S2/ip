@@ -2,23 +2,14 @@ import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
-import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
-import java.time.format.DateTimeParseException;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 
 public class Chungus {
     private Ui ui;
-    TaskList tasks;
+    private TaskList tasks;
     private Storage db;
-
-    private static final Pattern deadlinePattern = Pattern.compile("^deadline\\s+(.+)\\s+/by\\s+(.+)$");
-    private static final Pattern eventPattern = Pattern.compile("^event\\s+(.+)\\s+/from\\s+(.+)\\s+/to\\s+(.+)$");
+    private boolean isRunning;
 
     private static final String defaultDbPath = System.getProperty("user.dir") + "/chungus.db";
-
-    private static final DateTimeFormatter dateTimeFmt = DateTimeFormatter.ofPattern("dd/MM/yyyy HHmm");
 
     public static void main(String[] args) {
         new Chungus(System.in, System.out, defaultDbPath).spin();
@@ -27,6 +18,8 @@ public class Chungus {
     public Chungus(InputStream in, OutputStream out, String dbPath) {
         ui = new Ui(in, out);
         tasks = new TaskList();
+
+        isRunning = true;
 
         File dbFile = new File(dbPath);
         if (dbFile.exists() && !dbFile.isFile()) {
@@ -50,148 +43,30 @@ public class Chungus {
     }
 
     public void spin() {
-        while (true) {
+        while (isRunning) {
             ui.print("chungus> ");
-            boolean shouldExit = handleInput(ui.nextLine());
-            if (shouldExit) {
-                break;
-            }
-            ui.print("\n");
+
+            String cmd = ui.nextLine();
+            Handler handler = Parser.parse(cmd);
+            execHandler(handler, cmd);
+
+            ui.print("\n"); // add an extra line
         }
     }
 
-    public boolean handleInput(String msg) {
+    private void execHandler(Handler handler, String cmd) {
         try {
-            boolean shouldExit = handleInputImpl(msg);
+            boolean shouldExit = handler.handle(tasks, ui, db);
             // overwrite the database after every command
             db.write(tasks);
-            return shouldExit;
+            isRunning = !shouldExit;
         } catch (TaskNotFoundException e) {
             ui.error("Could not find the requested task. You currently have exactly %d %s", tasks.count(),
                     tasks.count() == 1 ? "task" : "tasks");
             ui.error("Reason: %s", e.getMessage());
-            return false;
         } catch (ChungusException e) {
-            ui.error("Could not handle command \"%s\".", msg);
+            ui.error("Could not handle command \"%s\".", cmd);
             ui.error("Reason: %s", e.getMessage());
-            return false;
-        }
-    }
-
-    private boolean handleInputImpl(String msg) {
-        String[] args = msg.split("\\s+");
-        switch (args[0]) {
-        case "bye": {
-            ui.info("Bye!");
-            return true;
-        }
-        case "list": {
-            ui.info("Here are the tasks in your list:");
-            ui.info("%s", tasks);
-            return false;
-        }
-        case "todo": {
-            String[] pair = msg.split("\\s+", 2);
-            if (pair.length < 2) {
-                throw new ChungusException("Description of todo cannot be empty.");
-            }
-
-            Todo task = new Todo(pair[1]);
-            tasks.add(task);
-            reportNewTask(task);
-
-            return false;
-        }
-        case "deadline": {
-            Matcher matcher = deadlinePattern.matcher(msg);
-            if (!matcher.find()) {
-                throw new ChungusException(
-                        "Bad format for creating deadline task. Must be of the form deadline <task> /by <datetime>.");
-            }
-
-            String desc = matcher.group(1);
-            LocalDateTime deadline = parseLocalDateTime(matcher.group(2));
-
-            Deadline task = new Deadline(desc, deadline);
-            tasks.add(task);
-            reportNewTask(task);
-
-            return false;
-        }
-        case "event": {
-            Matcher matcher = eventPattern.matcher(msg);
-            if (!matcher.find()) {
-                throw new ChungusException(
-                        "Bad format for creating event. Must be of the form event <name> /from <datetime> /to <datetime>.");
-            }
-
-            String desc = matcher.group(1);
-            LocalDateTime from = parseLocalDateTime(matcher.group(2));
-            LocalDateTime to = parseLocalDateTime(matcher.group(3));
-
-            Event task = new Event(desc, from, to);
-            tasks.add(task);
-            reportNewTask(task);
-
-            return false;
-        }
-        case "mark": {
-            int idx = getTaskNumberArg(args[1]) - 1;
-
-            tasks.setDone(idx);
-
-            ui.info("Okay, I've marked this task as completed:");
-            ui.info("  %s", tasks.get(idx));
-
-            return false;
-        }
-        case "unmark": {
-            int idx = getTaskNumberArg(args[1]) - 1;
-
-            tasks.setNotDone(idx);
-
-            ui.info("Okay, I've marked this task as incomplete:");
-            ui.info("  %s", tasks.get(idx));
-
-            return false;
-        }
-        case "delete": {
-            int idx = getTaskNumberArg(args[1]) - 1;
-
-            Task task = tasks.remove(idx);
-            reportDeletedTask(task);
-
-            return false;
-        }
-        default: {
-            throw new ChungusException("Unknown command.");
-        }
-        }
-    }
-
-    private void reportNewTask(Task task) {
-        ui.info("Okay, I've added this task:");
-        ui.info("  %s", task);
-        ui.info("Now you have %d %s.", tasks.count(), tasks.count() == 1 ? "task" : "tasks");
-    }
-
-    private void reportDeletedTask(Task task) {
-        ui.info("Okay, I've deleted this task:");
-        ui.info("  %s", task);
-        ui.info("Now you have %d %s.", tasks.count(), tasks.count() == 1 ? "task" : "tasks");
-    }
-
-    private int getTaskNumberArg(String s) {
-        String[] xs = s.split("\\s+");
-        int num = Integer.parseInt(xs[xs.length - 1]);
-        return num;
-    }
-
-    private static LocalDateTime parseLocalDateTime(String s) {
-        try {
-            return LocalDateTime.parse(s, dateTimeFmt);
-        } catch (DateTimeParseException e) {
-            throw new ChungusException(String.format("Bad datetime format \"%s\": expected dd/MM/yyyy HHmm", s), e);
         }
     }
 }
