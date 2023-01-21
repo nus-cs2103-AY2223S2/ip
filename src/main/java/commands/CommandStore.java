@@ -1,7 +1,8 @@
 package commands;
 
-import java.util.HashMap;
 import java.util.Map;
+import java.util.function.Function;
+import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 import duke.Duke;
@@ -13,12 +14,10 @@ public class CommandStore {
     this.store = store;
   }
 
-  public CommandStore() {
-    this(new HashMap<>());
-  }
-
-  public void addCommand(Command cmd) {
-    store.put(cmd.getLabel(), cmd);
+  public CommandStore(Stream<Command> cmds) {
+    this(cmds.collect(
+      Collectors.toUnmodifiableMap(Command::getLabel, Function.identity())
+    ));
   }
 
   public Stream<String> executeCommand(String input, final Duke instance) {

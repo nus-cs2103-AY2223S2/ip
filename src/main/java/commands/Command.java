@@ -8,15 +8,14 @@ import duke.Duke;
 
 public abstract class Command implements BiFunction<String[], Duke, Stream<String>> {
   private final String label;
-  private final Builder<String> streamBuilder;
+  private Builder<String> streamBuilder;
 
   public Command(String label) {
     this.label = label;
-    this.streamBuilder = Stream.builder();
   }
 
-  protected void output(String stuff) {
-    streamBuilder.accept(stuff);
+  protected void output(String str) {
+    streamBuilder.accept(str);
   } 
 
   protected void output(String formatStr, Object ...args) {
@@ -27,7 +26,8 @@ public abstract class Command implements BiFunction<String[], Duke, Stream<Strin
 
   protected abstract void execute(String[] tokens, final Duke instance);
 
-  public Stream<String> apply(String[] tokens, final Duke instance) {
+  public final Stream<String> apply(String[] tokens, final Duke instance) {
+    this.streamBuilder = Stream.builder();
     execute(tokens, instance);
     return streamBuilder.build();
   }

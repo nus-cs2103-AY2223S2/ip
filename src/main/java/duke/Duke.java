@@ -5,9 +5,13 @@ import java.io.InputStreamReader;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.function.Supplier;
 import java.util.stream.Stream;
 
+import commands.Command;
 import commands.CommandStore;
+import duke.commands.*;
+import duke.commands.taskCommand.*;
 import duke.tasks.Task;
 
 public class Duke {
@@ -16,7 +20,15 @@ public class Duke {
 
     public Duke() {
       this.tasks = new ArrayList<>();
-      this.commands = new CommandStore();
+      this.commands = new CommandStore(Stream.<Supplier<Command>>of(
+        ListCommand::new,
+        MarkCommand::new,
+        UnmarkCommand::new,
+        TodoCommand::new,
+        DeadlineCommand::new,
+        EventCommand::new,
+        DeleteCommand::new
+      ).map(Supplier::get));
     }
 
     public final List<Task> getTaskList() { return tasks; }
