@@ -1,4 +1,4 @@
-import java.util.Scanner;
+import java.util.*;
 public class Duke {
     public static void main(String[] args) {
         /*String logo = " ____        _        \n"
@@ -8,6 +8,7 @@ public class Duke {
                 + "|____/ \\__,_|_|\\_\\___|\n";
          */
         String newLine = System.getProperty("line.separator");
+        ArrayList<String> tostore = new ArrayList<>(100);
         System.out.println("-------------------------------------------------------" +
                 newLine + "Hello! Jak Sie Masz! I am Duke.\n What I do for you boss?");
 
@@ -20,8 +21,16 @@ public class Duke {
             if (inData.equals("bye")) {
                 exit = true;
                 System.out.println("Bye. Hope to see you again soon!");
+            } else if (inData.equals("list")){
+                int counter = 0;
+                for(String i: tostore) {
+                    counter++;
+                    System.out.println(counter + ". " + i);
+                }
+                inData = scan.nextLine();
             } else {
-                System.out.println(inData);
+                System.out.println("added: " + inData);
+                tostore.add(inData);
                 inData = scan.nextLine();
             }
         }
