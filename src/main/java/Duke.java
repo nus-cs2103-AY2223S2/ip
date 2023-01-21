@@ -8,7 +8,7 @@ public class Duke {
 
         //Introductory Responses
 
-        String name = "C4PO-Storage";
+        String name = "C4PO-Storage-Duke";
         String line = "-----------------------------------------------";
         String quote = "Hello. I don’t believe we have been introduced. A pleasure to meet you. I am " + name + " Human-Computer Relations.";
         String job = "I collect words which you say.";
