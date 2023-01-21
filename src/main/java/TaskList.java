@@ -22,8 +22,9 @@ public class TaskList {
     }
 
     public void deleteTask(int index) {
-        this.taskList.remove(index);
-        this.fb.deletedTask(this.taskList.get(index), this.taskList.size());
+        Task task = this.taskList.get(index);
+        this.taskList.remove(task);
+        this.fb.deletedTask(task, this.taskList.size());
     }
 
     public void markTask(int index) {
