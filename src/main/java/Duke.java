@@ -8,9 +8,9 @@ public class Duke {
 //                + "| |_| | |_| |   <  __/\n"
 //                + "|____/ \\__,_|_|\\_\\___|\n";
 //        System.out.println("Hello from\n" + logo);
-        System.out.println("Greetings, I am Nibbalim!\n" + "I will echo whatever you say!\n");
+        System.out.println("Greetings, I am Nibbalim!\n" + "Your wish is my command!\n");
         Scanner sc = new Scanner(System.in);
-        Level1 level = new Level1(sc);
+        DukeList level = new DukeList(sc);
         level.output();
         System.out.println("Kay thanks bye!");
     }
