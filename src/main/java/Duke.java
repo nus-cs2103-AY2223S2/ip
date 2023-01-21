@@ -1,11 +1,11 @@
 import command.Command;
 
-import java.util.ArrayList;
 import java.util.Scanner;
 
 import task.Deadline;
 import task.Event;
 import task.Task;
+import task.TaskList;
 import task.Todo;
 
 /**
@@ -17,8 +17,8 @@ public class Duke {
     /** Whether the duke is still running or has been commanded to end */
     private boolean isRunning;
 
-    /** ArrayList of tasks */
-    private ArrayList<Task> tasks;
+    /** Task list */
+    private TaskList tasks;
 
     /**
      * Entry point to start and run duke.
@@ -43,7 +43,7 @@ public class Duke {
     private void init() {
         scanner = new Scanner(System.in);
         isRunning = true;
-        tasks = new ArrayList<>();
+        tasks = new TaskList();
         System.out.println("Hello!");
     }
 
@@ -90,6 +90,7 @@ public class Duke {
 
     private void exit() {
         scanner.close();
+        tasks.save();
         System.out.println("Good bye!");
     }
 
