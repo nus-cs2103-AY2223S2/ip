@@ -37,7 +37,7 @@ public class Duke {
             if (command.equals("list")) {
                 for (int i = 0; i < tasks.size(); i++) {
                     Task currTask = tasks.get(i);
-                    System.out.printf("%d.[%s] %s\n", i + 1, currTask.getStatusIcon(), currTask.getDescription());
+                    System.out.println((i + 1) + ". " + currTask.toString());
                 }
             } else if (command.contains("mark") || command.contains("unmark")) {
                 int taskNumber = Integer.parseInt(command.split(" ")[1]);
@@ -51,21 +51,55 @@ public class Duke {
 
                     if (action.equals("mark")) {
                         currTask.markAsDone();
-                        System.out.printf(
+                        System.out.println(
                             "Congrats, I guess you get a medal?\n" +
-                            "[%s] %s\n", currTask.getStatusIcon(), currTask.getDescription()
+                            currTask.toString()
                         );
                     } else if (action.equals("unmark")) {
                         currTask.markAsNotDone();
-                        System.out.printf(
+                        System.out.println(
                             "Why are you so lazy?\n" +
-                            "[%s] %s\n", currTask.getStatusIcon(), currTask.getDescription()
+                            currTask.toString()
                         );
                     }
                 }
             } else {
-                tasks.add(new Task(command));
-                System.out.printf("added: %s\n", command);
+                String type = command.split(" ")[0];
+                String description = command.split(type + " ")[1];
+
+                switch (type) {
+                    case "todo":
+                        Todo todo = new Todo(description);
+                        tasks.add(todo);
+                        System.out.println(
+                            "You better finish this soon:\n" +
+                            todo.toString() +
+                            "\nCan you finish all " + tasks.size() + " tasks in your list?"
+                        );
+                        break;
+                    case "deadline":
+                        String[] deadlineArr = description.split(" /by ");
+                        Deadline deadline = new Deadline(deadlineArr[0], deadlineArr[1]);
+                        tasks.add(deadline);
+                        System.out.println(
+                            "You better finish this soon:\n" +
+                            deadline.toString() +
+                            "\nCan you finish all " + tasks.size() + " tasks in your list?"
+                        );
+                        break;
+                    case "event":
+                        String[] eventArr = description.split(" /from ");
+                        String[] fromToArr = eventArr[1].split(" /to ");
+                        Event event = new Event(eventArr[0], fromToArr[0], fromToArr[1]);
+                        tasks.add(event);
+                        System.out.println(
+                            "You better finish this soon:\n" +
+                            event.toString() +
+                            "\nCan you finish all " + tasks.size() + " tasks in your list?"
+                        );
+                        break;
+                    default:
+                }
             }
 
             printHorizontalLine();
