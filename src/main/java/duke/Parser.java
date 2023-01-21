@@ -56,6 +56,9 @@ public class Parser {
                     e.printStackTrace();
                 }
                 this.size--;
+            } else if (input.contains("find")) {
+                String keyword = input.substring(5);
+                Ui.printFindList(taskList, keyword);
             } else {
                 switch (input) {
                 case "list":

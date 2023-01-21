@@ -26,6 +26,19 @@ public class TaskList extends ArrayList<Task> {
         }
     }
 
+    public void findList(String input) {
+        int size = this.size();
+        int index = 1;
+        for (int i = 0; i < size; i++) {
+            Task t = this.get(i);
+            if (t.getTask().contains(input)) {
+                String output = index + ". " + t;
+                Ui.indent(output);
+                index++;
+            }
+        }
+    }
+
     /**
      * Marks a task in the Task List at index as done.
      *

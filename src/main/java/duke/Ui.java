@@ -120,11 +120,19 @@ public class Ui {
         line();
     }
 
+
     /**
      * function to indent duke system messages
      */
     public static void indent(String txt) {
         System.out.println("     " + txt);
+    }
+
+    public static void printFindList(TaskList taskList, String input) {
+        line();
+        indent("Here are the matching tasks in your list");
+        taskList.findList(input);
+        line();
     }
 
     public static void line() {
