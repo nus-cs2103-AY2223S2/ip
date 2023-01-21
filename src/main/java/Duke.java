@@ -90,9 +90,6 @@ public class Duke {
             String showList = "list";
             String mark = "mark";
             String unmark = "unmark";
-            String todo = "todo";
-            String list = "list";
-            String event = "event";
             String byWhen = "";
             String fromWhen = "";
             String toWhen = "";
@@ -130,7 +127,8 @@ public class Duke {
                 System.out.println("Now you have " + listOfThings.size() + " tasks in the list.");
             }
             if (bye.equalsIgnoreCase(msg)) {
-                System.out.println("Bye. Hope to see Byou again soon!");
+                System.out.println("Bye. Hope to see you again soon!");
+                echoScanner.close();
                 loop = false;
             } else if (showList.equalsIgnoreCase(msg)) {
                 for (int i = 0; i < listOfThings.size(); i++) {
