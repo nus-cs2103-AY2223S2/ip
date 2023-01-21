@@ -19,8 +19,8 @@ public class Event extends Task {
      */
     public Event(String description, String from, String to) {
         super(description);
-        this.from = from;
-        this.to = to;
+        this.from = from.trim();
+        this.to = to.trim();
     }
 
     /**
@@ -29,6 +29,6 @@ public class Event extends Task {
      */
     @Override
     public String toString() {
-        return "[E] " + super.toString() + " (from: " + from + "to: " + to + " )";
+        return "[E] " + super.toString() + " (from: " + from + " to: " + to + " )";
     }
 }

@@ -6,9 +6,14 @@
  * This class is the main class for the duke ip.
  */
 
+import java.io.FileWriter;
+import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Scanner;
+import java.io.File;
+import java.io.FileNotFoundException;
 
 public class Duke {
 
@@ -23,7 +28,7 @@ public class Duke {
         delete
     }
 
-    public static void main(String[] args) throws DukeException {
+    public static void main(String[] args) {
         //Scanner to scan user input.
         Scanner sc = new Scanner(System.in);
 
@@ -49,6 +54,12 @@ public class Duke {
         //Start of program.
         System.out.println("Hello from\n" + logo);
         System.out.println("____________________________________________________________");
+        try {
+            counter = readAddFileContents(storage, "data/duke.txt");
+        } catch (FileNotFoundException e) {
+            System.out.println("File not found");
+            System.exit(0);
+        }
         while(true) {
             description = "";
             input = sc.nextLine();
@@ -149,6 +160,14 @@ public class Duke {
                         System.out.println("Now you have " + counter + " task(s) in the list.");
                         break;
                 }
+                try {
+                    writeToFile(storage, "data/duke.txt");
+                } catch (IOException e) {
+                    System.out.println("Something went wrong: " + e.getMessage());
+                }
+                if(userCommand.name().equals("bye")) {
+                    break;
+                }
             } catch (DukeException e) { // Catches the DukeException.
                     System.out.println(e.getMessage());
             }
@@ -204,5 +223,54 @@ public class Duke {
             throw new DukeException(message);
         }
         return Commands.valueOf(command);
+    }
+
+    private static int readAddFileContents(List<Task> storage, String filePath) throws FileNotFoundException {
+        File f = new File(filePath);
+        Scanner fileScanner = new Scanner(f);
+        while(fileScanner.hasNext()) {
+            String[] currArray = fileScanner.nextLine().split("\\|");
+            boolean mark = false;
+            if(currArray[1].trim().equals("1")) mark = true;
+            if(currArray[0].trim().equals("T")) {
+                Todo t = new Todo(currArray[2]);
+                if(mark) {
+                    t.mark();
+                }
+                storage.add(t);
+            } else if(currArray[0].trim().equals("D")) {
+                Deadline d = new Deadline(currArray[2], currArray[3]);
+                if(mark) {
+                    d.mark();
+                }
+                storage.add(d);
+            } else {
+                Event e = new Event(currArray[2], currArray[3], currArray[4]);
+                if(mark) {
+                    e.mark();
+                }
+                storage.add(e);
+            }
+        }
+        return storage.size();
+    }
+
+    private static void writeToFile(List<Task> storage, String filePath) throws IOException {
+        FileWriter fw = new FileWriter(filePath);
+        for(Task element : storage) {
+            String mark = "0";
+            if(element.getStatusIcon().equals("X")) mark = "1";
+            if(element instanceof Todo) {
+                fw.write("T | " + mark + " | " + element.description);
+            }
+            if(element instanceof Deadline) {
+                fw.write("D | " + mark + " | " + element.description + " | " + ((Deadline) element).by);
+            }
+            if(element instanceof Event){
+                fw.write("E | " + mark + " | " + element.description + " | " + ((Event) element).from + " | " + ((Event) element).to);
+            }
+            fw.write(System.lineSeparator());
+        }
+        fw.close();
     }
 }

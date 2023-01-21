@@ -17,7 +17,7 @@ public class Deadline extends Task {
      */
     public Deadline(String description, String by){
         super(description);
-        this.by = by;
+        this.by = by.trim();
     }
 
     /**
