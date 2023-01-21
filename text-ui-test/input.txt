@@ -18,10 +18,11 @@ todo /
 todo /abc
 todo ////////////////////////////////////////
 todo /abc/
+todo /dupe/dupe
 todo /MAIN_INPUT NO_HANYA_TASK_01
 todo NO_HANYA_TASK_02 /sth sth
 todo NO_HANYA_TASK_03 /sth
-todo NO_HANYA_TASK_04 /sth/sth
+todo NO_HANYA_TASK_04 /sth/sthelse
 deadline
 deadline bleh /abc /efg
 deadline NO_HANYA_TASK_05 /by
