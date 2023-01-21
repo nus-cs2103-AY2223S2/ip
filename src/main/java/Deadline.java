@@ -6,9 +6,12 @@
  * This class is for the Deadlines Task added by the User.
  */
 
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+
 public class Deadline extends Task {
 
-    protected String by;
+    protected LocalDate by;
 
     /**
      * Constructor for the class Deadline.
@@ -17,7 +20,7 @@ public class Deadline extends Task {
      */
     public Deadline(String description, String by){
         super(description);
-        this.by = by;
+        this.by = LocalDate.parse(by);
     }
 
     /**
@@ -26,6 +29,7 @@ public class Deadline extends Task {
      */
     @Override
     public String toString() {
-        return "[D] " + super.toString() + " (by: " + by + " )";
+        return "[D] " + super.toString() + " (by: "
+                + by.format(DateTimeFormatter.ofPattern("MMM dd yyyy")) + " )";
     }
 }
