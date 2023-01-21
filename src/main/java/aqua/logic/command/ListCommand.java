@@ -19,7 +19,7 @@ public class ListCommand implements Command {
             @Override
             public String getDataDisplay(TaskManager taskManager, AppManager manager) {
                 return String.format(
-                    "Here is your task list ( ꜆ 'ᵕ' )꜆\n" +
+                    "Here is your task list\n" +
                     "%s",
                     getListMessage(taskManager)
                 );
@@ -32,6 +32,6 @@ public class ListCommand implements Command {
         if (manager.size() > 0) {
             return manager.toString();
         }
-        return "Nothing!! - ̗̀ ( ˶'ᵕ'˶) ̖́-";
+        return "Nothing!!";
     }
 }

@@ -13,7 +13,7 @@ public class ByeCommand implements Command {
             @Override
             public String process(ArgumentMap args, AppManager manager) {
                 manager.setClose(true);
-                return "Bye bye ՞⸝⸝> ̫ <⸝⸝՞";
+                return "Bye bye";
             }
 
             @Override

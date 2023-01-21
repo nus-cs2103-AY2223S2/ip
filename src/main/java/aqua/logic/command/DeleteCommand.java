@@ -48,10 +48,10 @@ public class DeleteCommand implements Command {
         int numTask = manager.getTaskManager().size();
         if (numTask > 0) {
             return String.format(
-                "You have %d task(s) left, all the best ( ง*`꒳´*)ว",
+                "You have %d task(s) left, all the best",
                 numTask
             );
         }
-        return "٩ (ˊᗜˋ *) و You have no task left~ ☆";
+        return "You have no task left~";
     }
 }

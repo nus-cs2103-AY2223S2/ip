@@ -42,13 +42,12 @@ public class MarkTaskCommand implements Command {
                 if (isCompletedMarker) {
                     return String.format(
                         "I have marked this task:\n" +
-                        "  %s\n" +
-                        "__(⌒(_ ́-ω・)▄【┻┳══━一",
+                        "  %s\n",
                         task.toString()
                     );
                 }
                 return String.format(
-                    "Uah (๑•﹏•) Okay I have unmarked the task:\n" +
+                    "Uah... Okay I have unmarked the task:\n" +
                     "  %s\n",
                     task.toString()
                 );

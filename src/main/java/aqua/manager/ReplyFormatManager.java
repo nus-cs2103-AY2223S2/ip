@@ -5,17 +5,17 @@ import aqua.exception.ProcedureExecutionException;
 
 public class ReplyFormatManager {
     private static final String GREETING = 
-            "Konaqua~~ Perfect idol gamer nekomimi super maid Minato Aqua desu - ̗̀ ( ˶'ᵕ'˶) ̖́-";
+            "Konaqua~~ Perfect idol gamer nekomimi super maid Minato Aqua desu!";
     private static final String SYNTAX_ERROR_FORMAT =
             "Hanya??\n" +
             "I do not understand because:\n" +
             "  %s\n" +
-            "Gomennasai!! (╥﹏╥)";
+            "Gomennasai!!";
     private static final String EXECUTION_EXCEPTION_FORMAT = 
             "Hanya??\n" +
             "I was doing what you told me to do half way but messed up because:\n" +
             "  %s\n" +
-            "Gomennasai!! (╥﹏╥)";
+            "Gomennasai!!";
     private static final String DEATH_EXCEPTION_FORMAT =
             "UWAWAWA!!\n" +
             "I messed up big time...\n" +
