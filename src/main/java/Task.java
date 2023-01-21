@@ -7,15 +7,8 @@ class Task implements Serializable{
     public Task(String n) {
         name = n;
     }
-    public void mark() {
-        System.out.println("Nice! I've marked this task as done:");
-        this.done = true;
-        System.out.println(this.toString());
-    }
-    public void unmark() {
-        System.out.println("OK, I've marked this task as not done yet:");
-        this.done = false;
-        System.out.println(this.toString());
+    public void mark(boolean isMarked) {
+        this.done = isMarked;
     }
     public String toString(){
         return String.format("[%s] %s",this.done ? "X" : " ", this.name);

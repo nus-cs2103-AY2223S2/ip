@@ -36,9 +36,7 @@ class Save {
         try (FileOutputStream fos = new FileOutputStream("./save");
                 ObjectOutputStream oos = new ObjectOutputStream(fos);
         ) {
-            System.out.println("run 1");
             oos.writeObject(tasks); 
-            System.out.println("run 1");
         } catch (IOException e) {
             e.printStackTrace();
         }
