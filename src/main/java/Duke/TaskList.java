@@ -1,3 +1,5 @@
+package Duke;
+
 import java.util.ArrayList;
 
 public class TaskList {
@@ -32,8 +34,10 @@ public class TaskList {
             if (index >= 0 && index < taskList.size()) {
                 Ui.displayMarked(taskList, index);
             } else {
+                Ui.line();
                 System.out.println("Please enter a valid number!");
                 Ui.checkList(taskList);
+                Ui.line();
             }
         } catch (NumberFormatException e) {
             System.out.println("enter valid number");
@@ -46,8 +50,10 @@ public class TaskList {
             if (index >= 0 && index < taskList.size()) {
                 Ui.displayUnmarked(taskList, index);
             } else {
+                Ui.line();
                 System.out.println("Please enter a valid number!");
                 Ui.checkList(taskList);
+                Ui.line();
             }
         } catch (NumberFormatException e) {
             System.out.println("enter valid number");
@@ -60,8 +66,10 @@ public class TaskList {
             if (index >= 0 && index < taskList.size()) {
                 Ui.displayDelete(taskList, index);
             } else {
+                Ui.line();
                 System.out.println("Please enter a valid number!");
                 Ui.checkList(taskList);
+                Ui.line();
             }
         } catch (NumberFormatException e) {
             System.out.println("enter valid number");

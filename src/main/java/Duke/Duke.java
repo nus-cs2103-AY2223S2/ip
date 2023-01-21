@@ -1,3 +1,5 @@
+package Duke;
+
 public class Duke {
     TaskList taskList;
     Storage storage;

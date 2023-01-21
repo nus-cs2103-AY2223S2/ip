@@ -1,3 +1,6 @@
+package Duke;
+
+import Duke.Event;
 import Exceptions.DukeException;
 
 public class Parser {
@@ -45,7 +48,7 @@ public class Parser {
                     storage.save(taskList);
                     break;
                 }
-                // Create Todo task
+                // Create Duke.Todo task
                 case TODO: {
                     try {
                         String input = description[1];
