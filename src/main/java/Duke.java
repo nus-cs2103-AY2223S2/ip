@@ -1,3 +1,4 @@
+import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -15,7 +16,7 @@ public class Duke {
      * The Commands enum represents Duke's available commands.
      */
     public enum Commands {
-        ECHO, LIST, SAVE, LOAD, MARK, UNMARK, TODO, DEADLINE, EVENT, DELETE, BYE;
+        ECHO, LIST, PRIORITY, MARK, UNMARK, TODO, DEADLINE, EVENT, DELETE, BYE;
 
     }
 
@@ -65,6 +66,9 @@ public class Duke {
                 case LIST:
                     sc.nextLine(); // throws away the remaining line
                     printDukeList();
+                    break;
+                case PRIORITY:
+                    printPrioritisedDukeList();
                     break;
                 case ECHO:
                     echo(sc.nextLine().strip());
@@ -158,6 +162,17 @@ public class Duke {
         printWithPartition(ls);
     }
 
+    private static void printPrioritisedDukeList() {
+        String ls = "\tHere are the important tasks in your list:\n";
+        ArrayList<Task> sortedTasks = new ArrayList<>(tasks);
+        sortedTasks.sort(null);
+        for (int i = 0; i < tasks.size(); i++) {
+            Task temp = sortedTasks.get(i);
+            ls = ls + "\t" + Integer.toString(i + 1) + "." + temp.toString() + "\n";
+        }
+        printWithPartition(ls);
+    }
+
     /**
      * Echoes the user's input.
      *
@@ -246,6 +261,9 @@ public class Duke {
         } catch (ArrayIndexOutOfBoundsException e) {
             throw new DukeException(
                     "The deadline command should be used like this:\n" + "\tdeadline {name} /by {date}");
+        } catch (DateTimeParseException e) {
+            throw new DukeException(
+                    "The deadline command should be used like this:\n" + "\tdeadline {name} /by {date}");
         }
     }
 
@@ -266,7 +284,10 @@ public class Duke {
                     + "\n\tNow you have " + Integer.toString(tasks.size()) + " tasks in the list.\n");
         } catch (ArrayIndexOutOfBoundsException e) {
             throw new DukeException("The event command should be used like this:\n"
-                    + "\tevent {name} /from {start} /to {end}");
+                    + "\tevent {name} /from {YYYY-MM-DD} /to {YYYY-MM-DD}");
+        } catch (DateTimeParseException e) {
+            throw new DukeException("The event command should be used like this:\n"
+                    + "\tevent {name} /from {YYYY-MM-DD} /to {YYYY-MM-DD}");
         }
     }
 
