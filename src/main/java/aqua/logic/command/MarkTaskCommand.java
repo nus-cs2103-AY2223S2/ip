@@ -52,6 +52,6 @@ public class MarkTaskCommand implements Command {
                     task.toString()
                 );
             }
-        });
+        }).setFollowUp(new WriteTaskCommand().getDispatcher(args, manager));
     }
 }
