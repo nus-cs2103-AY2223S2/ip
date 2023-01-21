@@ -12,7 +12,7 @@ public class Duke {
         ind++;
     }
 
-    public static void main(String[] args) throws IOException {
+    public static void main(String[] args) throws IOException, DukeException {
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
         PrintWriter pw = new PrintWriter(new BufferedWriter(new OutputStreamWriter(System.out)));
         StringBuilder sb = new StringBuilder();
@@ -63,42 +63,68 @@ public class Duke {
                     break;
 
                 case "todo":
-                    String[] inpTodo = inp.split(" ");
-                    if (inpTodo.length == 1) {
-                        DukeException e = new DukeException("☹ OOPS!!! The description of a todo cannot be empty.");
+                    try {
+                        String[] inpTodo = inp.split(" ");
+                        if (inpTodo.length == 1) {
+                            throw new DukeException("☹ OOPS!!! The description of a todo cannot be empty.");
+                        }
+                        String todoTask = inp.substring(5);
+                        Task todo = new Todo(todoTask);
+                        addTask(todo);
+                        break;
+                    } catch (DukeException e) {
                         System.out.println(e.getMessage());
+                    } finally {
                         break;
                     }
-                    String todoTask = inp.substring(5);
-                    Task todo = new Todo(todoTask);
-                    addTask(todo);
-                    break;
+
 
                 case "deadline":
-                    String deadlineStr = inp.substring(9);
-                    String[] inputDeadline = deadlineStr.split("/");
-                    String deadLineTaskStr = inputDeadline[0];
-                    String end = inputDeadline[1].substring(3);
-                    Task deadLineTask = new Deadline(deadLineTaskStr, end);
-                    addTask(deadLineTask);
-                    break;
+                    try {
+                        if (inp.length() == 8) {
+                            throw new DukeException("☹ OOPS!!! The description of a deadline must have a date.");
+                        }
+                        String deadlineStr = inp.substring(9);
+                        String[] inputDeadline = deadlineStr.split("/");
+                        if (inputDeadline.length != 2) {
+                            throw new DukeException("☹ OOPS!!! The description of a deadline must have a date.");
+                        }
+                        String deadLineTaskStr = inputDeadline[0];
+                        String end = inputDeadline[1].substring(3);
+                        Task deadLineTask = new Deadline(deadLineTaskStr, end);
+                        addTask(deadLineTask);
+                    } catch (DukeException e) {
+                        System.out.println(e.getMessage());
+                    } finally {
+                        break;
+                    }
+
 
                 case "event":
-                    String eventStr = inp.substring(6);
-                    String[] eventStrsplit = eventStr.split("/");
-                    String eventTaskStr = eventStrsplit[0];
-                    String eventBegin = eventStrsplit[1].substring(5);
-                    String eventEnd = eventStrsplit[2].substring(3);
-                    Task eventTask = new Event(eventTaskStr, eventBegin, eventEnd);
-                    addTask(eventTask);
-                    break;
+                    try {
+                        if (inp.length() == 6) {
+                            throw new DukeException("☹ OOPS!!! The description of an event must have a start and end time.");
+                        }
+                        String eventStr = inp.substring(6);
+
+                        String[] eventStrsplit = eventStr.split("/");
+                        if (eventStrsplit.length != 3) {
+                            throw new DukeException("☹ OOPS!!! The description of an event must have a start and end time.");
+                        }
+                        String eventTaskStr = eventStrsplit[0];
+                        String eventBegin = eventStrsplit[1].substring(5);
+                        String eventEnd = eventStrsplit[2].substring(3);
+                        Task eventTask = new Event(eventTaskStr, eventBegin, eventEnd);
+                        addTask(eventTask);
+                    } catch (DukeException e) {
+                        System.out.println(e.getMessage());
+                    } finally {
+                        break;
+                    }
 
                 default:
                     DukeException dukeException = new DukeException();
                     System.out.println(dukeException.getMessage());
-//                    System.out.println("added: " + inp);
-//                    Task t = new Task(inp);
-//                    addTask(t);
             }
             System.out.println(line);
             if (inp.equals("bye")) {
