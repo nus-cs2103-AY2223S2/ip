@@ -20,3 +20,4 @@ public class Mark extends Command {
                 Ui.line());
     }
 }
+

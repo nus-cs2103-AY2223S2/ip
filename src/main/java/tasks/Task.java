@@ -1,7 +1,11 @@
 package tasks;
 
+import java.time.format.DateTimeFormatter;
+
 public class Task {
     protected String description;
+    protected DateTimeFormatter formatInput = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
+    protected DateTimeFormatter formatOutput = DateTimeFormatter.ofPattern("MMM d yyyy HH:mm");
     protected boolean isDone = false;
 
     public Task(String description) {

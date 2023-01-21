@@ -22,3 +22,4 @@ public class AddEvent extends Command {
                 Ui.line());
     }
 }
+
