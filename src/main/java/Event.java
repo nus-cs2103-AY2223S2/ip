@@ -3,10 +3,14 @@ public class Event extends Task {
     private String start;
     private String end;
 
-    public Event(String desc, String start, String end) {
-        super(desc);
+    public Event(String desc, boolean isDone, String start, String end) {
+        super(desc, isDone);
         this.start = start;
         this.end = end;
+    }
+
+    public String statusStringForFile() {
+        return String.format("EVENT / %s / %s / %s", super.stringFormatForFile(), this.start.trim(), this.end.trim());
     }
 
     /**

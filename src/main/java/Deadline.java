@@ -2,9 +2,13 @@ public class Deadline extends Task {
 
     private String end;
 
-    public Deadline(String desc, String end) {
-        super(desc);
+    public Deadline(String desc, boolean isDone, String end) {
+        super(desc, isDone);
         this.end = end;
+    }
+
+    public String statusStringForFile() {
+        return String.format("DEADLINE / %s / %s", super.stringFormatForFile(), this.end.trim());
     }
 
     /**

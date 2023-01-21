@@ -2,9 +2,9 @@ public class Task {
     private String description;
     private boolean isDone;
 
-    public Task(String description) {
+    public Task(String description, boolean isDone) {
         this.description = description;
-        this.isDone = false;
+        this.isDone = isDone;
     }
 
     /**
@@ -23,6 +23,10 @@ public class Task {
         this.isDone = false;
         String str = " OK, I've marked this task as not done yet:\n" + "       " + this.toString();
         Duke.printWithLines(str);
+    }
+
+    public String stringFormatForFile() {
+        return ((this.isDone ? "1" : "0") + " / " + this.description.trim()).trim();
     }
 
     /**
