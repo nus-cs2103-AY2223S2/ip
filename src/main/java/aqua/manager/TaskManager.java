@@ -3,9 +3,10 @@ package aqua.manager;
 import java.util.ArrayList;
 
 import aqua.aquatask.AquaTask;
+import aqua.storage.Reloadable;
 
 /** Manager of tasks. */
-public class TaskManager {
+public class TaskManager implements Reloadable {
     private final ArrayList<AquaTask> taskList = new ArrayList<>();
 
 
@@ -27,6 +28,17 @@ public class TaskManager {
 
     public int size() {
         return taskList.size();
+    }
+
+
+    @Override
+    public String getReloadString() {
+        StringBuilder builder = new StringBuilder();
+        for (AquaTask task : taskList) {
+            builder.append(task.getReloadString());
+            builder.append("\n");
+        }
+        return builder.toString().strip();
     }
 
 
