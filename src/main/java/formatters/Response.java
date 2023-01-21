@@ -15,14 +15,14 @@ public enum Response {
     MISSING_DEADLINE_DETAILS {
         @Override
         public String toString() {
-            return "Oh nyoo did you fowget t-to add a date t-to this deadline?!? *blushes*";
+            return "Oh nyoo did you fowget t-to name or add a date t-to this deadline?!? *blushes*";
         }
     },
 
     MISSING_EVENT_DETAILS {
         @Override
         public String toString() {
-            return "Oh nyoo did you fowget t-to add a /from or /to t-to this event?!? *blushes*";
+            return "Oh nyoo did you fowget t-to name or add a /from or /to t-to this event?!? *blushes*";
         }
     },
 
@@ -75,6 +75,37 @@ public enum Response {
             return "Y-Y-Youw t-to-do has been successfuwwy added!";
         }
     },
+
+    TASK_NOT_FOUND {
+        @Override
+        public String toString() {
+            return "I can't find youw t-task oh nyooo!";
+        }
+    },
+
+    TASK_DELETED {
+        @Override
+        public String toString() {
+            return "Okay your t-task is deweted!";
+        }
+    },
+    BYE_BYE {
+        @Override
+        public String toString() {
+            return "Bye byee!!! UwU";
+        }
+    },
+
+    DEFAULT {
+        @Override
+        public String toString() {
+            return "I don't understand! Type in a c-c-command and ill hewp *sweats* you out!";
+        }
+    }
+
+
+
+
 
 }
 

@@ -7,7 +7,6 @@ package formatters;
 
 public class Format {
 
-
     public static String getCompletionDisplay(boolean isCompleted) {
         String completionDisplay;
         if (isCompleted) {
@@ -16,6 +15,10 @@ public class Format {
             completionDisplay = "[ ]";
         }
         return completionDisplay;
+    }
+
+    public static String formatResponse(String output) {
+        return "\nUwU_TaskMaster ＵｗＵ: " + output;
     }
 
 

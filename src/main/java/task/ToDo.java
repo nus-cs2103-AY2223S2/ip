@@ -27,14 +27,15 @@ public class ToDo extends Task{
     }
 
     /**
-     * Returns a hashmap containing parsed information specific to a "to-do" command
+     * Returns parsed information specific to a "to-do" command
      *
      * Keys: "details" (the name of the to-do)
      * Throws a DukeInsufficientArgumentException if the input is unable to be parsed correctly
      *
      * @param input A to-do user command
-     * @exception DukeInsufficientArgumentException If the to-do details are out of order
-     * or the user did not include any details with the "to-do" command
+     * @exception DukeInsufficientArgumentException if the user did not include any details with the "to-do" command
+     * @exception DukeInvalidCommandException If the to-do details are out of order
+     * @return A hashmap with key "details"
      */
     public static HashMap<String, String> parse(String input) throws DukeRuntimeException {
 
@@ -51,6 +52,10 @@ public class ToDo extends Task{
             detailsSublist = segments.subList(detailsIndex, segments.size());
         } catch (IndexOutOfBoundsException e) {
             throw new DukeInvalidCommandException(Response.INVALID_COMMAND.toString());
+        }
+
+        if (detailsSublist.isEmpty()) {
+            throw new DukeInsufficientArgumentException(Response.MISSING_TASK_NAME.toString());
         }
 
         String details = String.join(" ", detailsSublist);

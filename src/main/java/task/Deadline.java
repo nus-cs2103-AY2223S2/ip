@@ -37,14 +37,15 @@ public class Deadline extends Task{
 
 
     /**
-     * Returns a hashmap containing parsed information specific to a "deadline" command
+     * Returns parsed information specific to a "deadline" command
      *
      * Keys: "details" (the name of the deadline), "deadline" (the date of the deadline)
      * Throws a DukeInsufficientArgumentException if the input is unable to be parsed correctly
      *
      * @param input A deadline user command
-     * @exception DukeRuntimeException If the deadline details are out of order
-     * or the user did not include any details with the "deadline" command
+     * @exception DukeInsufficientArgumentException if the user did not include any details with the "deadline" command
+     * @exception DukeInvalidCommandException If the deadline details are out of order
+     * @return A hashmap with keys "details" and "deadline"
      */
     public static HashMap<String, String> parse(String input) throws DukeRuntimeException {
 
@@ -59,12 +60,16 @@ public class Deadline extends Task{
             throw new DukeInsufficientArgumentException(Response.MISSING_DEADLINE_DETAILS.toString());
         }
 
-
         try {
             detailsSublist = segments.subList(detailsIndex, deadlineIndex - 1);
             deadlineSublist = segments.subList(deadlineIndex, segments.size());
+            System.out.println(deadlineSublist);
         } catch (IndexOutOfBoundsException e) {
             throw new DukeInvalidCommandException(Response.INVALID_COMMAND.toString());
+        }
+
+        if (detailsSublist.isEmpty() || deadlineSublist.isEmpty()) {
+            throw new DukeInsufficientArgumentException(Response.MISSING_DEADLINE_DETAILS.toString());
         }
 
         String details = String.join(" ", detailsSublist);

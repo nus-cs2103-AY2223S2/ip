@@ -35,14 +35,15 @@ public class Event extends Task{
     }
 
     /**
-     * Returns a hashmap containing parsed information specific to an "event" command
+     * Returns parsed information specific to an "event" command
      *
      * Keys: "details" (the name of the event), "from" (event start date), "to" (event end date)
      * Throws a DukeInsufficientArgumentException if the input is unable to be parsed correctly
      *
      * @param input An event user command
-     * @exception DukeInsufficientArgumentException If the event details are out of order
-     * or the user did not include any details with the "event" command
+     * @exception DukeInsufficientArgumentException if the user did not include any details with the "event" command
+     * @exception DukeInvalidCommandException If the event details are out of order
+     * @return A hashmap with keys "details", "from" and "to"
      */
     public static HashMap<String, String> parse(String input) throws DukeRuntimeException {
 
@@ -65,6 +66,10 @@ public class Event extends Task{
             toSublist = segments.subList(toIndex, segments.size());
         } catch (IndexOutOfBoundsException e) {
             throw new DukeInvalidCommandException(Response.INVALID_COMMAND.toString());
+        }
+
+        if (detailsSublist.isEmpty() || fromSublist.isEmpty() || toSublist.isEmpty()) {
+            throw new DukeInsufficientArgumentException(Response.MISSING_EVENT_DETAILS.toString());
         }
 
         String details = String.join(" ", detailsSublist);
