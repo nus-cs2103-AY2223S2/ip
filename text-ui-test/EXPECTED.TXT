@@ -1,7 +1,66 @@
-Hello from
- ____        _        
-|  _ \ _   _| | _____ 
-| | | | | | | |/ / _ \
-| |_| | |_| |   <  __/
-|____/ \__,_|_|\_\___|
+    ____________________________________________________________
+    Hello I'm
+     ____        _
+    |  _ \ _   _| | _____
+    | | | | | | | |/ / _ \
+    | |_| | |_| |   <  __/
+    |____/ \__,_|_|\_\___|
+    What can I do for you?
+    
+    MY COMMANDS ARE:
+    ADD TODO TASK:     todo [description]
+    ADD DEADLINE TASK: deadline [description] /by [date time]
+    ADD EVENT TASK:    event [description] /from [date time] /to [date time]
+    MARK A TASK:       mark [index]
+    UNMARK A TASK:     unmark [index]
+    DELETE A TASK:     delete [index]
+    LIST ALL TASKS:    list
+    DISPLAY COMMANDS:  help
+    EXIT PROGRAM:      bye
+    ____________________________________________________________
+
+    ____________________________________________________________
+    Got it. I've added this task:
+    [T][ ] borrow book
+    Now you have 1 tasks in the list.
+    ____________________________________________________________
+
+    ____________________________________________________________
+    Got it. I've added this task:
+    [D][ ] return book (by: Sunday)
+    Now you have 2 tasks in the list.
+    ____________________________________________________________
+
+    ____________________________________________________________
+    Got it. I've added this task:
+    [E][ ] project meeting (from: Mon 2pm to: 4pm)
+    Now you have 3 tasks in the list.
+    ____________________________________________________________
+
+    ____________________________________________________________
+    Here are the tasks in your list:
+    1. [T][ ] borrow book
+    2. [D][ ] return book (by: Sunday)
+    3. [E][ ] project meeting (from: Mon 2pm to: 4pm)
+    ____________________________________________________________
+
+    ____________________________________________________________
+    Nice! I've marked this task as done:
+    [T][X] borrow book
+    ____________________________________________________________
+
+    ____________________________________________________________
+    OK, I've marked this task as not done yet:
+    [T][ ] borrow book
+    ____________________________________________________________
+
+    ____________________________________________________________
+    Noted. I've removed this task:
+    [T][ ] borrow book
+    Now you have 2 tasks in the list.
+    ____________________________________________________________
+
+    ____________________________________________________________
+    Bye. Hope to see you again soon!
+    ____________________________________________________________
 
