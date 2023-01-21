@@ -1,3 +1,4 @@
+import java.io.IOException;
 import java.lang.reflect.Array;
 import java.util.Arrays;
 import java.util.Scanner;
@@ -14,6 +15,7 @@ public class Duke {
     final static String WELCOME_MSG = "Greetings! JEDI GRANDMASTER YODA here\n" + "For you, What can I do?";
     final static String BANNER = "____________________________________________________________";
     final static String BYE_MSG = "Be Gone, You Must. May the Force be with You!";
+    private final static String FILEPATH = "src/main/data/duke.txt";
     enum Command {
         LIST, MARK, UNMARK, DELETE
     }
@@ -25,12 +27,11 @@ public class Duke {
         TaskList taskList = new TaskList();
         TaskInfoParser parser = new TaskInfoParser();
         try {
-            taskList = Duke.readFromFile("src/main/data/duke.txt");
-            System.out.println("Hrmm Hrmm, some past tasks I see!!\n'list' command to see more, you must enter");
-            System.out.println(BANNER);
-        } catch (FileNotFoundException e) {
-            System.out.println("Not Found the file is! Hrmmm Hrmmm");
+            taskList = Duke.loadData(taskList);
+        } catch (IOException e) {
+            System.out.println("Transmission error, I encountered! Jumping into hyperspace, it might be!");
         }
+
         while (true) {
             response = scanner.nextLine();
             if (response.equals("bye")) {
@@ -69,6 +70,7 @@ public class Duke {
                 System.out.println(BANNER);
             }
         }
+        Duke.saveData(FILEPATH, taskList);
         Duke.respond(BYE_MSG, true);
     }
 
@@ -111,7 +113,26 @@ public class Duke {
             Task task = TaskInfoParser.obtainTask(commandArray);
             taskList.addTaskSilent(task);
         }
+        fileScanner.close();
         return taskList;
+    }
+
+    public static TaskList loadData(TaskList taskList) throws IOException {
+        try {
+            taskList = Duke.readFromFile(FILEPATH);
+            System.out.println("Hrmm Hrmm, some past tasks I see!!\n'list' command to see more, you must enter");
+            System.out.println(BANNER);
+            return taskList;
+        } catch (FileNotFoundException e) {
+            File newTaskFile = new File(FILEPATH);
+            newTaskFile.createNewFile();
+            System.out.println("A new file created, I have!");
+        }
+        return null;
+    }
+
+    public static void saveData(String filepath, TaskList taskList) {
+        DukeFileWriter.writeToFile(filepath, taskList);
     }
 
 }
