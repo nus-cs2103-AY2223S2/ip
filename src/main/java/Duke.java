@@ -44,30 +44,30 @@ public class Duke {
             System.out.println("\t____________________________________________________________");
             try {
                 switch (taskType) {
-                    case LIST:
-                        commands.listTasks();
-                        break;
-                    case MARK:
-                        commands.markTask(userInput);
-                        break;
-                    case UNMARK:
-                        commands.unmarkTask(userInput);
-                        break;
-                    case DELETE:
-                        commands.deleteTask(userInput);
-                        break;
-                    case TODO:
-                        commands.addToDoTask(userInput);
-                        break;
-                    case DEADLINE:
-                        commands.addDeadlineTask(userInput);
-                        break;
-                    case EVENT:
-                        commands.addEventTask(userInput);
-                        break;
-                    case ERROR: {
-                        System.out.println("\t☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
-                    }
+                case LIST:
+                    commands.listTasks();
+                    break;
+                case MARK:
+                    commands.markTask(userInput);
+                    break;
+                case UNMARK:
+                    commands.unmarkTask(userInput);
+                    break;
+                case DELETE:
+                    commands.deleteTask(userInput);
+                    break;
+                case TODO:
+                    commands.addToDoTask(userInput);
+                    break;
+                case DEADLINE:
+                    commands.addDeadlineTask(userInput);
+                    break;
+                case EVENT:
+                    commands.addEventTask(userInput);
+                    break;
+                case ERROR: {
+                    System.out.println("\t☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
+                }
                 }
             } catch (DukeException e) {
                 System.out.println(e.getMessage());

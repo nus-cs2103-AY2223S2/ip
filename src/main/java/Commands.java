@@ -1,7 +1,7 @@
 import java.time.format.DateTimeParseException;
 
 public class Commands {
-    TaskList taskList;
+    private TaskList taskList;
 
     public Commands(TaskList taskList) {
         this.taskList = taskList;

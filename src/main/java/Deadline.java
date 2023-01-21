@@ -3,7 +3,7 @@ import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 
 public class Deadline extends Task {
-    LocalDateTime deadline;
+    private LocalDateTime deadline;
 
     Deadline(String task, String deadline) throws DateTimeParseException {
         super(task);
@@ -12,12 +12,12 @@ public class Deadline extends Task {
     }
 
     public String toString() {
-        return "[D]" + super.toString() + " (by: " +
-                deadline.format(DateTimeFormatter.ofPattern("MMM dd yyyy HH:mm")) + ")";
+        return "[D]" + super.toString() + " (by: " 
+                + deadline.format(DateTimeFormatter.ofPattern("MMM dd yyyy HH:mm")) + ")";
     }
 
     public String toFileString() {
-        return "D | " + super.toFileString() + " | " + 
-                deadline.format(DateTimeFormatter.ofPattern("d/MM/yyyy HHmm"));
+        return "D | " + super.toFileString() + " | "  
+                + deadline.format(DateTimeFormatter.ofPattern("d/MM/yyyy HHmm"));
     }
 }
