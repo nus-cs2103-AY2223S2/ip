@@ -3,7 +3,7 @@ import java.util.Scanner;
 
 public class Duke {
 
-    private static ArrayList<Task> taskList = new ArrayList<>();
+    private static ArrayList<Task> allTasks = new ArrayList<>();
     private static Scanner sc = new Scanner(System.in);
 
     private static void printLine() {
@@ -22,34 +22,34 @@ public class Duke {
             System.out.println("Something seems wrong...");
             return;
         }
-        taskList.add(task);
+        allTasks.add(task);
         System.out.println("Added this to your task list:");
         System.out.println("  " + task.toString());
-        System.out.println(String.format("Number of tasks left: %d", taskList.size()));
+        System.out.println(String.format("Number of tasks left: %d", allTasks.size()));
     }
 
     private static void deleteTask(int taskIndex) {
-        Task deletedTask = taskList.remove(taskIndex);
+        Task deletedTask = allTasks.remove(taskIndex);
         System.out.println("Removed this from your task list:");
         System.out.println("  " + deletedTask.toString());
-        System.out.println(String.format("Number of tasks left: %d", taskList.size()));
+        System.out.println(String.format("Number of tasks left: %d", allTasks.size()));
     }
 
     private static void printList() {
-        if (taskList.size() == 0) {
+        if (allTasks.size() == 0) {
             System.out.println("You have zero tasks now!");
             return;
         }
         System.out.println("Your tasks so far!!");
-        for (int i = 0; i < taskList.size(); i++) {
-            Task task = taskList.get(i);
+        for (int i = 0; i < allTasks.size(); i++) {
+            Task task = allTasks.get(i);
             String toPrint = String.format("%d. %s", i + 1, task.toString());
             System.out.println(toPrint);
         }
     }
 
     private static void changeTaskCompletionStatus(int taskNumber, boolean completionStatus) {
-        Task task = taskList.get(taskNumber);
+        Task task = allTasks.get(taskNumber);
         task.setDone(completionStatus);
         if (completionStatus) {
             System.out.println("Solid work man! This task is marked done");
@@ -60,86 +60,76 @@ public class Duke {
         System.out.println(toPrint);
     }
 
-    private static boolean commandHandler(String rawCommand) throws DukeException {
+    private static boolean handleCommands(String rawCommand) throws DukeException {
         int commandIndex = rawCommand.indexOf(' ');
-        String command;
-        String arguments;
+        String command = rawCommand;
+        String arguments = "";
         if (commandIndex != -1) {
-            // There is no space character in the command
+            // There is a space character in the command
             command = rawCommand.substring(0, commandIndex);
             arguments = rawCommand.substring(commandIndex + 1).trim();
-        } else {
-            command = rawCommand;
-            arguments = null;
         }
 
         switch (command) {
-            case "bye":
-                System.out.println("Sad...Alright bye!");
-                return false;
-            case "list":
-                printList();
-                break;
-            case "mark":
-                int markIndex;
-                try {
-                    markIndex = Integer.parseInt(arguments) - 1;
-                    changeTaskCompletionStatus(markIndex, true);
-                } catch (Throwable e) {
-                    throw new IlegalCommandException(Commands.MARK);
-                }
-                break;
-            case "unmark":
-                int unmarkIndex;
-                try {
-                    unmarkIndex = Integer.parseInt(arguments) - 1;
-                    changeTaskCompletionStatus(unmarkIndex, false);
-                } catch (Throwable e) {
-                    throw new IlegalCommandException(Commands.UNMARK);
-                }
-                break;
-            case "todo":
-                if (arguments == null || arguments.trim().equals("")) {
-                    throw new IlegalCommandException(Commands.TODO);
-                }
-                addToList(arguments, TaskType.TODO, null, null);
-                break;
-            case "deadline":
-                int slashIndex;
-                String dateBy;
-                try {
-                    slashIndex = arguments.indexOf('/');
-                    dateBy = arguments.substring(slashIndex + 4);
-                    addToList(arguments.substring(0, slashIndex - 1), TaskType.DEADLINE, null, dateBy);
-                } catch (Throwable e) {
-                    throw new IlegalCommandException(Commands.DEADLINE);
-                }
-                break;
-            case "event":
-                int firstSlashIndex, secondSlashIndex;
-                String startAndEnd, start, end;
-                try {
-                    firstSlashIndex = arguments.indexOf('/');
-                    startAndEnd = arguments.substring(firstSlashIndex + 6);
-                    secondSlashIndex = startAndEnd.indexOf('/');
-                    start = startAndEnd.substring(0, secondSlashIndex - 1);
-                    end = startAndEnd.substring(secondSlashIndex + 4);
-                    addToList(arguments.substring(0, firstSlashIndex - 1), TaskType.EVENT, start, end);
-                } catch (Throwable e) {
-                    throw new IlegalCommandException(Commands.EVENT);
-                }
-                break;
-            case "delete":
-                int deleteIndex;
-                try {
-                    deleteIndex = Integer.parseInt(arguments) - 1;
-                    deleteTask(deleteIndex);
-                } catch (Throwable e) {
-                    throw new IlegalCommandException(Commands.DELETE);
-                }
-                break;
-            default:
-                throw new IlegalCommandException(Commands.UNRECOGNIZED);
+        case "bye":
+            System.out.println("Sad...Alright bye!");
+            return false;
+        case "list":
+            printList();
+            break;
+        case "mark":
+            try {
+                int markIndex = Integer.parseInt(arguments) - 1;
+                changeTaskCompletionStatus(markIndex, true);
+            } catch (Throwable e) {
+                throw new IlegalCommandException(Commands.MARK);
+            }
+            break;
+        case "unmark":
+            try {
+                int unmarkIndex = Integer.parseInt(arguments) - 1;
+                changeTaskCompletionStatus(unmarkIndex, false);
+            } catch (Throwable e) {
+                throw new IlegalCommandException(Commands.UNMARK);
+            }
+            break;
+        case "todo":
+            if (arguments.trim().equals("")) {
+                throw new IlegalCommandException(Commands.TODO);
+            }
+            addToList(arguments, TaskType.TODO, null, null);
+            break;
+        case "deadline":
+            try {
+                int slashIndex = arguments.indexOf('/');
+                String dateBy = arguments.substring(slashIndex + 4);
+                addToList(arguments.substring(0, slashIndex - 1), TaskType.DEADLINE, null, dateBy);
+            } catch (Throwable e) {
+                throw new IlegalCommandException(Commands.DEADLINE);
+            }
+            break;
+        case "event":
+            try {
+                int firstSlashIndex = arguments.indexOf('/');
+                String startAndEnd = arguments.substring(firstSlashIndex + 6);
+                int secondSlashIndex = startAndEnd.indexOf('/');
+                String start = startAndEnd.substring(0, secondSlashIndex - 1);
+                String end = startAndEnd.substring(secondSlashIndex + 4);
+                addToList(arguments.substring(0, firstSlashIndex - 1), TaskType.EVENT, start, end);
+            } catch (Throwable e) {
+                throw new IlegalCommandException(Commands.EVENT);
+            }
+            break;
+        case "delete":
+            try {
+                int deleteIndex = Integer.parseInt(arguments) - 1;
+                deleteTask(deleteIndex);
+            } catch (Throwable e) {
+                throw new IlegalCommandException(Commands.DELETE);
+            }
+            break;
+        default:
+            throw new IlegalCommandException(Commands.UNRECOGNIZED);
         }
         return true;
     }
@@ -162,7 +152,7 @@ public class Duke {
             System.out.println("Enter your prompt below:");
             String command = sc.nextLine();
             try {
-                promptAgain = commandHandler(command);
+                promptAgain = handleCommands(command);
             } catch (DukeException e) {
                 System.out.println(e.toString());
             }

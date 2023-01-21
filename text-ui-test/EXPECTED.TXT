@@ -22,17 +22,89 @@ Command Exception: That is not a recognized command!
 Enter your prompt below:
 Added this to your task list:
   [T][ ] borrow book
-Number of tasks: 1
+Number of tasks left: 1
 ----------------------------------------------------
 Enter your prompt below:
 Added this to your task list:
   [D][ ] do problem set 0 (by: Sunday)
-Number of tasks: 2
+Number of tasks left: 2
 ----------------------------------------------------
 Enter your prompt below:
 Added this to your task list:
   [E][ ] access party (from: 1900hrs Sunday, to: 0000hrs Monday)
-Number of tasks: 3
+Number of tasks left: 3
+----------------------------------------------------
+Enter your prompt below:
+Command Exception: Make sure that your todo command is as such
+
+todo name-of-task
+
+----------------------------------------------------
+Enter your prompt below:
+Command Exception: Make sure that your deadline command is as such
+
+deadline name-of-task /by date-of-deadline
+
+----------------------------------------------------
+Enter your prompt below:
+Command Exception: Make sure that your event command is as such
+
+event name-of-task /from start-date /to end-date
+
+----------------------------------------------------
+Enter your prompt below:
+Command Exception: Make sure that your deadline command is as such
+
+deadline name-of-task /by date-of-deadline
+
+----------------------------------------------------
+Enter your prompt below:
+Command Exception: Make sure that your deadline command is as such
+
+deadline name-of-task /by date-of-deadline
+
+----------------------------------------------------
+Enter your prompt below:
+Command Exception: Make sure that your deadline command is as such
+
+deadline name-of-task /by date-of-deadline
+
+----------------------------------------------------
+Enter your prompt below:
+Command Exception: Make sure that your event command is as such
+
+event name-of-task /from start-date /to end-date
+
+----------------------------------------------------
+Enter your prompt below:
+Command Exception: Make sure that your event command is as such
+
+event name-of-task /from start-date /to end-date
+
+----------------------------------------------------
+Enter your prompt below:
+Command Exception: Make sure that your event command is as such
+
+event name-of-task /from start-date /to end-date
+
+----------------------------------------------------
+Enter your prompt below:
+Command Exception: Make sure that your event command is as such
+
+event name-of-task /from start-date /to end-date
+
+----------------------------------------------------
+Enter your prompt below:
+Command Exception: Make sure that your event command is as such
+
+event name-of-task /from start-date /to end-date
+
+----------------------------------------------------
+Enter your prompt below:
+Command Exception: Make sure that your event command is as such
+
+event name-of-task /from start-date /to end-date
+
 ----------------------------------------------------
 Enter your prompt below:
 Your tasks so far!!
@@ -77,7 +149,7 @@ Your tasks so far!!
 Enter your prompt below:
 Added this to your task list:
   [T][ ] do 2103t project
-Number of tasks: 4
+Number of tasks left: 4
 ----------------------------------------------------
 Enter your prompt below:
 Your tasks so far!!
@@ -85,6 +157,52 @@ Your tasks so far!!
 2. [D][ ] do problem set 0 (by: Sunday)
 3. [E][ ] access party (from: 1900hrs Sunday, to: 0000hrs Monday)
 4. [T][ ] do 2103t project
+----------------------------------------------------
+Enter your prompt below:
+Command Exception: Make sure that your mark command is as such
+
+mark index-of-task
+
+----------------------------------------------------
+Enter your prompt below:
+Command Exception: Make sure that your mark command is as such
+
+mark index-of-task
+
+----------------------------------------------------
+Enter your prompt below:
+Command Exception: Make sure that your unmark command is as such
+
+unmark index-of-task
+
+----------------------------------------------------
+Enter your prompt below:
+Command Exception: Make sure that your unmark command is as such
+
+unmark index-of-task
+
+----------------------------------------------------
+Enter your prompt below:
+Removed this from your task list:
+  [T][ ] do 2103t project
+Number of tasks left: 3
+----------------------------------------------------
+Enter your prompt below:
+Command Exception: Make sure that your delete command is as such
+
+delete index-of-task
+
+----------------------------------------------------
+Enter your prompt below:
+Command Exception: Make sure that your delete command is as such
+
+delete index-of-task
+
+----------------------------------------------------
+Enter your prompt below:
+Removed this from your task list:
+  [D][ ] do problem set 0 (by: Sunday)
+Number of tasks left: 2
 ----------------------------------------------------
 Enter your prompt below:
 Sad...Alright bye!
