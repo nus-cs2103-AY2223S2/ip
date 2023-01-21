@@ -1,4 +1,3 @@
-package duke.tasks;
 /**
  * A task with an associated start and end time
  */
