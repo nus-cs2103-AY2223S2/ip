@@ -47,6 +47,11 @@ public class TaskManager implements Reloadable {
     }
 
 
+    public Path getSavePath() {
+        return Paths.get(SAVE_DIRECTORY, SAVE_FILE);
+    }
+
+
     @Override
     public String getReloadString() {
         StringBuilder builder = new StringBuilder();
