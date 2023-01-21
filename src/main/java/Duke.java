@@ -3,7 +3,7 @@ import java.util.Scanner;
 
 public class Duke {
 
-    private final ArrayList<String> storage = new ArrayList<>();
+    private final ArrayList<Task> storage = new ArrayList<>();
 
     private final Scanner sc = new Scanner(System.in);
 
@@ -24,21 +24,34 @@ public class Duke {
         System.exit(0);
     }
 
+    public void printList(int currentNumber, Task task) {
+        System.out.println("\t" + currentNumber + "." + task.getStatusIcon() + task.getDescription());
+    }
+
     public void list() {
         separator();
         for (int i=0; i < this.storage.size(); i++) {
             int currentNumber = i+1;
-            String currentList = storage.get(i);
-            System.out.println("\t" + currentNumber + ". " + currentList);
+            Task task = storage.get(i);
 
+            printList(currentNumber, task);
         }
         separator();
     }
 
     public void add(String str) {
-        storage.add(str);
+        storage.add(new Task(str));
         separator();
         System.out.println("\tadded: " + str );
+        separator();
+    }
+
+    public void setTaskStatus(int index, boolean isDone) {
+        Task task = storage.get(index - 1);
+        task.setDone(isDone);
+        separator();
+        System.out.println("\tOk, I have marked this task as " + (isDone ? "done" : "not done yet")  +  ":\n\t\t"
+                + task.getStatusIcon() + task.getDescription());
         separator();
     }
 
@@ -52,12 +65,23 @@ public class Duke {
         addressBook.greet();
         while (addressBook.sc.hasNextLine()) {
             String str = addressBook.sc.nextLine();
-            if (str.equals("bye")) {
-                addressBook.exit();
-            } else if (str.equals("list")) {
-                addressBook.list();
-            } else {
-                addressBook.add(str);
+            String[] arr = str.split(" ", 2);
+            switch (arr[0]) {
+                case "bye":
+                    addressBook.exit();
+                    break;
+                case "list":
+                    addressBook.list();
+                    break;
+                case "mark":
+                    addressBook.setTaskStatus(Integer.parseInt(arr[1]), true);
+                    break;
+                case "unmark":
+                    addressBook.setTaskStatus(Integer.parseInt(arr[1]), false);
+                    break;
+                default:
+                    addressBook.add(str);
+                    break;
             }
         }
     }
