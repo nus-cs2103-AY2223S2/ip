@@ -39,7 +39,7 @@ public class Duke {
                         Task currTask = tasks.get(i);
                         System.out.println((i + 1) + ". " + currTask.toString());
                     }
-                } else if (command.contains("mark") || command.contains("unmark")) {
+                } else if (command.startsWith("mark") || command.startsWith("unmark")) {
                     int taskNumber = Integer.parseInt(command.split(" ")[1]);
                     String action = command.split(" ")[0];
                     Task currTask = tasks.get(taskNumber - 1);
@@ -57,6 +57,16 @@ public class Duke {
                             currTask.toString()
                         );
                     }
+                } else if (command.startsWith("delete")) {
+                    int taskNumber = Integer.parseInt(command.split(" ")[1]);
+                    Task taskToDelete = tasks.get(taskNumber - 1);
+                    tasks.remove(taskToDelete);
+
+                    System.out.println(
+                        "Okay okay, this has been removed:\n" +
+                        taskToDelete.toString() +
+                        "\nNow you have " + tasks.size() + " tasks left."
+                    );
                 } else {
                     String type = command.split(" ")[0];
                     String[] commandArr = command.split(" ", 2);
