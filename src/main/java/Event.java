@@ -1,16 +1,19 @@
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+
 public class Event extends Task{
     protected String type = "[ E ]";
-    protected String fromDate;
-    protected String toDate;
+    protected LocalDate fromDate;
+    protected LocalDate toDate;
     public Event(String description, String fromDate, String toDate) {
         super(description);
-        this.fromDate = fromDate;
-        this.toDate = toDate;
+        this.fromDate = LocalDate.parse(fromDate);
+        this.toDate = LocalDate.parse(toDate);
     }
 
 
     @Override
     public String toString() {
-        return type + super.toString() + "from:" + this.fromDate + " to:" + this.toDate;
+        return type + super.toString() + "from:" + this.fromDate.format(DateTimeFormatter.ofPattern("MMM dd yyyy")) + " to:" + this.toDate.format(DateTimeFormatter.ofPattern("MMM dd yyyy"));
     }
 }

@@ -181,14 +181,16 @@ public class Duke {
                 toI = i;
 
                 for (int j = fromI + 1; j < toI; j++) {
-                    if(echoSplit[j].equals(" "))
-                        continue;;
-                    from = from + " " + echoSplit[j];
+                    if(j == toI - 1)
+                        from += echoSplit[j];
+                    else
+                        from += echoSplit[j]+ " ";
                 }
                 for (int j = toI + 1; j < echoSplit.length; j++) {
-                    if(echoSplit[j].equals(" "))
-                        continue;;
-                    to = to + " " +  echoSplit[j];
+                    if(j == echoSplit.length - 1)
+                        to += echoSplit[j];
+                    else
+                        to += echoSplit[j] + " ";
                 }
                 for (int j = 1; j < fromI; j++) {
                     task += echoSplit[j] + " ";
@@ -210,10 +212,16 @@ public class Duke {
             if(echoSplit[i].equals("/by") || echoSplit[i].equals("by:")){
 
                 for (int j = 1; j < i; j++) {
-                    task += echoSplit[j] + " ";
+                    if(j == i-1)
+                        task += echoSplit[j];
+                    else
+                        task += echoSplit[j] + " ";
                 }
                 for (int j = i + 1; j < echoSplit.length; j++) {
-                    date += echoSplit[j] + " ";
+                    if(j == echoSplit.length - 1)
+                        date += echoSplit[j];
+                    else
+                        date += echoSplit[j] + " ";
                 }
 
                 list.add(new Deadline(task, date));
