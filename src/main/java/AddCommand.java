@@ -1,6 +1,6 @@
 public class AddCommand extends Command {
-    private char taskType;
-    private String content;
+    private final char taskType;
+    private final String content;
 
     public AddCommand(char taskType, String commandContent) {
         this.taskType = taskType;

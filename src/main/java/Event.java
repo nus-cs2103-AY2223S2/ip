@@ -1,11 +1,13 @@
+import java.time.LocalDateTime;
+
 public class Event extends Task {
-    private String from;
-    private String to;
+    private final LocalDateTime from;
+    private final LocalDateTime to;
 
     public Event(String content, String from, String to) {
         super(content);
-        this.from = from;
-        this.to = to;
+        this.from = DateParser.parse(from);
+        this.to = DateParser.parse(to);
     }
 
     public static Event create(String content) {
@@ -16,7 +18,7 @@ public class Event extends Task {
         String source = "Event Creation";
 
         String[] contentAndFrom = Parser.handleMissingField(content, "/from", "from", source);
-        String[] fromAndTo = Parser.handleMissingField(content, "/to", "to", source);
+        String[] fromAndTo = Parser.handleMissingField(contentAndFrom[1], "/to", "to", source);
 
         String parsedContent = contentAndFrom[0].strip();
         String from = fromAndTo[0].strip();
@@ -31,11 +33,20 @@ public class Event extends Task {
 
     @Override
     public String toString() {
-        return String.format("[E]%s (from: %s to: %s)", super.toString(), this.from, this.to);
+        return String.format(
+                "[E]%s (from: %s to: %s)",
+                super.toString(),
+                DateParser.formatDateToPrint(this.from),
+                DateParser.formatDateToPrint(this.to));
     }
 
     @Override
     public String toStorageString() {
-        return String.format("E|%d|%s /from %s /to %s", this.isMarked() ? 1 : 0, this.getContent(), this.from, this.to);
+        return String.format(
+                "E|%d|%s /from %s /to %s",
+                this.isMarked() ? 1 : 0,
+                this.getContent(),
+                DateParser.formatDateToStore(this.from),
+                DateParser.formatDateToStore(this.to));
     }
 }

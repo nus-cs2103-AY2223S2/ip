@@ -1,9 +1,11 @@
+import java.time.LocalDateTime;
+
 public class Deadline extends Task {
-    private String by;
+    private final LocalDateTime by;
 
     public Deadline(String content, String by) {
         super(content);
-        this.by = by;
+        this.by = DateParser.parse(by);
     }
 
     public static Deadline create(String content) {
@@ -25,11 +27,18 @@ public class Deadline extends Task {
 
     @Override
     public String toString() {
-        return String.format("[D]%s (by: %s)", super.toString(), this.by);
+        return String.format(
+                "[D]%s (by: %s)",
+                super.toString(),
+                DateParser.formatDateToPrint(this.by));
     }
 
     @Override
     public String toStorageString() {
-        return String.format("D|%d|%s /by %s", this.isMarked() ? 1 : 0, this.getContent(), this.by);
+        return String.format(
+                "D|%d|%s /by %s",
+                this.isMarked() ? 1 : 0,
+                this.getContent(),
+                DateParser.formatDateToStore(this.by));
     }
 }
