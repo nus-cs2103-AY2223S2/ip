@@ -10,6 +10,8 @@ public enum Command {
     TODO(new AddToDoCommand()),
     DEADLINE(new AddDeadlineCommand()),
     EVENT(new AddEventCommand()),
+    MARK(new MarkTaskCommand(true)),
+    UNMAARK(new MarkTaskCommand(false)),
     DELETE(new DeleteCommand()),
     BYE(new ByeCommand());
 
