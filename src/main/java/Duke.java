@@ -36,32 +36,38 @@ public class Duke {
         separator();
     }
 
-    public void add(String type, String taskDetails) {
-        Task task;
+    public void addToDo(String taskDetails) {
+        ToDo task = new ToDo(taskDetails);
+        storage.add(task);
+        System.out.println("\t" + task);
+        System.out.println("Now you have " + storage.size() + " tasks in the list.");
         separator();
-        switch(type) {
-            case "todo":
-                task = new ToDo(taskDetails);
-                storage.add(task);
-                System.out.println("\t" + task);
-                break;
-            case "deadline":
-                String[] arr = taskDetails.split("/by", 2);
-                task = new Deadline(arr[0], arr[1]);
-                storage.add(task);
-                System.out.println("\t" + task);
-                break;
-            case "event":
-                String[] description_others = taskDetails.split("/from", 2);
-                String[] from_to = description_others[1].split("/to", 2);
-                task = new Event(description_others[0], from_to[0], from_to[1]);
-                storage.add(task);
-                System.out.println("\t" + task);
-                break;
-            default:
-                System.out.println("Please insert either a todo, deadline or event.");
-                break;
+    }
+
+    public void addDeadline(String taskDetails) {
+        String[] arr = taskDetails.split("/by", 2);
+        try {
+            if (arr.length == 1) {
+                throw new DukeException("Please insert deadline date after /by");
+            }
+            Deadline task = new Deadline(arr[0], arr[1]);
+            storage.add(task);
+            System.out.println("\t" + task);
+            System.out.println("Now you have " + storage.size() + " tasks in the list.");
+            separator();
+        } catch (DukeException e) {
+            separator();
+            System.out.println("\t" + e);
+            separator();
         }
+    }
+
+    public void addEvent(String taskDetails) {
+        String[] description_others = taskDetails.split("/from", 2);
+        String[] from_to = description_others[1].split("/to", 2);
+        Event task = new Event(description_others[0], from_to[0], from_to[1]);
+        storage.add(task);
+        System.out.println("\t" + task);
         System.out.println("Now you have " + storage.size() + " tasks in the list.");
         separator();
     }
@@ -83,27 +89,59 @@ public class Duke {
     public static void main(String[] args) {
         Duke addressBook = new Duke();
         addressBook.greet();
+
         while (addressBook.sc.hasNextLine()) {
-            String str = addressBook.sc.nextLine();
-            String[] arr = str.split(" ", 2);
-            switch (arr[0]) {
-                case "bye":
-                    addressBook.exit();
-                    break;
-                case "list":
-                    addressBook.list();
-                    break;
-                case "mark":
-                    addressBook.setTaskStatus(Integer.parseInt(arr[1]), true);
-                    break;
-                case "unmark":
-                    addressBook.setTaskStatus(Integer.parseInt(arr[1]), false);
-                    break;
-                default:
-                    addressBook.add(arr[0], arr[1]);
-                    break;
+            try {
+
+                String str = addressBook.sc.nextLine();
+                String[] arr = str.split(" ", 2);
+                boolean details = arr.length != 1;
+                switch (arr[0]) {
+                    case "bye":
+                        addressBook.exit();
+                        break;
+                    case "list":
+                        addressBook.list();
+                        break;
+                    case "mark":
+                        if (!details) {
+                            throw new DukeException("Please include the task index to mark");
+                        } else {
+                            addressBook.setTaskStatus(Integer.parseInt(arr[1]), true);
+                            break;
+                        }
+                    case "unmark":
+                        if (!details) {
+                            throw new DukeException("Please include the task index to unmark.");
+                        }
+                        addressBook.setTaskStatus(Integer.parseInt(arr[1]), false);
+                        break;
+                    case "todo":
+                        if (!details) {
+                            throw new DukeException("Please include the todo details.");
+                        }
+                        addressBook.addToDo(arr[1]);
+                        break;
+                    case "deadline":
+                        if (!details) {
+                            throw new DukeException("Please include the deadline details.");
+                        }
+                        addressBook.addDeadline(arr[1]);
+                        break;
+                    case "event":
+                        if (!details) {
+                            throw new DukeException("Please include the event details.");
+                        }
+                        addressBook.addEvent(arr[1]);
+                        break;
+                    default:
+                        throw new DukeException("Sorry, I don't know what that means.");
+                }
+            } catch (DukeException e) {
+                separator();
+                System.out.println("\t" + e);
+                separator();
             }
         }
     }
-
 }
