@@ -57,6 +57,7 @@ public class Aqua {
             replyMessage(dispatcher.dispatch());
         } catch (Throwable ex) {
             replyError(ex);
+            return;
         }
         dispatcher.followUpDispatcher().ifPresent(this::initiateDispatcher);
     }
