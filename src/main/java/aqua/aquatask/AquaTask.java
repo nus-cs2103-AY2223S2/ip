@@ -2,6 +2,8 @@ package aqua.aquatask;
 
 
 public abstract class AquaTask {
+    public static final String IS_COMPLETED_TAG = "completed";
+
     private final String name;
 
 

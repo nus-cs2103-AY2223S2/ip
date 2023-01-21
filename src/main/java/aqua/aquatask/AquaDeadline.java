@@ -2,6 +2,8 @@ package aqua.aquatask;
 
 
 public class AquaDeadline extends AquaTask {
+    public static final String BY_TAG = "by";
+
     private final boolean isComplete;
     private final String by;
 

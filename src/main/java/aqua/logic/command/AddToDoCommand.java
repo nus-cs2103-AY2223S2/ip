@@ -11,7 +11,7 @@ public class AddToDoCommand extends AddTaskCommand {
         String name = args.getMainInput()
                 .filter(n -> !n.isBlank())
                 .orElseThrow(() -> new IllegalSyntaxException("Name disappeared!"));
-        boolean isComplete = args.get("completed")
+        boolean isComplete = args.get(AquaToDo.IS_COMPLETED_TAG)
                     .map(isComp -> Boolean.parseBoolean(isComp))
                     .orElse(false);
         return new AquaToDo(name, isComplete);

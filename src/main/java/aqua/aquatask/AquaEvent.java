@@ -2,6 +2,9 @@ package aqua.aquatask;
 
 
 public class AquaEvent extends AquaTask {
+    public static final String FROM_TAG = "from";
+    public static final String TO_TAG = "to";
+
     private final boolean isComplete;
     private final String from;
     private final String to;

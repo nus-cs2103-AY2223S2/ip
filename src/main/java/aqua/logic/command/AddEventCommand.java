@@ -10,11 +10,11 @@ public class AddEventCommand extends AddTaskCommand {
     public AquaEvent createTask(ArgumentMap args) throws IllegalSyntaxException {
         String name = args.getMainInput().filter(n -> !n.isBlank())
                 .orElseThrow(() -> new IllegalSyntaxException("Name disappeared!"));
-        String from = args.get("from")
+        String from = args.get(AquaEvent.FROM_TAG)
                 .orElseThrow(() -> new IllegalSyntaxException("[from] disappeared!"));
-        String to = args.get("to")
+        String to = args.get(AquaEvent.TO_TAG)
                 .orElseThrow(() -> new IllegalSyntaxException("[to] disappeared!"));
-        boolean isCompleted = args.get("completed")
+        boolean isCompleted = args.get(AquaEvent.IS_COMPLETED_TAG)
                 .map(isComp -> Boolean.parseBoolean(isComp))
                 .orElse(false);
         return new AquaEvent(name, isCompleted, from, to);
