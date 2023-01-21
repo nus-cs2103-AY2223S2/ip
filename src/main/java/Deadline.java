@@ -12,10 +12,10 @@ public class Deadline extends Task{
 
     public static void createDeadline(TaskList taskList, String desc) {
         Ui.addedTask();
-        String[] splitInput = desc.split("/",2);
-        String input = splitInput[0];
-        String[] splitDate = splitInput[1].split(" ", 2);
-        String date = splitDate[1];
+        String[] inputSplit = desc.split("/",2);
+        String input = inputSplit[0];
+        String[] dateSplit = inputSplit[1].split(" ", 2);
+        String date = dateSplit[1];
         Deadline deadline = new Deadline(input, LocalDate.parse(date));
         taskList.addTask(deadline);
         Ui.indent("" + deadline);

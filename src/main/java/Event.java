@@ -12,10 +12,10 @@ public class Event extends Task {
 
     public static void createEvent(TaskList taskList, String desc) {
         Ui.addedTask();
-        String[] splitInput = desc.split("/",2);
-        String input = splitInput[0];
-        String[] splitDate = splitInput[1].split(" ", 2);
-        String date = splitDate[1];
+        String[] inputSplit = desc.split("/",2);
+        String input = inputSplit[0];
+        String[] dateSplit = inputSplit[1].split(" ", 2);
+        String date = dateSplit[1];
         Event event = new Event(input, LocalDate.parse(date));
         taskList.addTask(event);
         Ui.indent("" + event);
