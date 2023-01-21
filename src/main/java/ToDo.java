@@ -2,6 +2,7 @@
  * The ToDo class extends the Task class and represents a task that needs to be done.
  */
 public class ToDo extends Task {
+    private static final long serialVersionUID = 101;
 
     /**
      * Constructor for the ToDo class

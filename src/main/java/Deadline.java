@@ -2,6 +2,8 @@
  * The Deadline class extends the Task class and represents a task that has a due date.
  */
 public class Deadline extends Task {
+    private static final long serialVersionUID = 102;
+
     private String date;
 
     /**

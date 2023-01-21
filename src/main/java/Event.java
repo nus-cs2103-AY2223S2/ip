@@ -2,6 +2,8 @@
  * The Event class extends the Task class and represents an event with a start and end date.
  */
 public class Event extends Task {
+    private static final long serialVersionUID = 103;
+
     private String start;
     private String end;
 
