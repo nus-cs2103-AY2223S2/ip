@@ -1,3 +1,5 @@
+package duke.parser;
+
 public enum Action {
     LIST("list"), MARK("mark"), UNMARK("unmark"), DELETE("delete"),
     TODO("todo"), DEADLINE("deadline"), EVENT("event"), ERROR("error");

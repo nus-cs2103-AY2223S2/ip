@@ -1,3 +1,5 @@
+package duke.task;
+
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
@@ -6,7 +8,7 @@ public class Event extends Task {
     private LocalDateTime from;
     private LocalDateTime to;
 
-    Event(String task, String from, String to) throws DateTimeParseException {
+    public Event(String task, String from, String to) throws DateTimeParseException {
         super(task);
         DateTimeFormatter parser = DateTimeFormatter.ofPattern("d/MM/yyyy HHmm");
         this.from = LocalDateTime.parse(from, parser);
@@ -20,10 +22,10 @@ public class Event extends Task {
     }
 
     public String toFileString() {
-        
-        return "E | " + super.toFileString() + " | " + 
-            from.format(DateTimeFormatter.ofPattern("d/MM/yyyy HHmm")) + 
-            " | " + to.format(DateTimeFormatter.ofPattern("d/MM/yyyy HHmm"));
+
+        return "E | " + super.toFileString() + " | " +
+                from.format(DateTimeFormatter.ofPattern("d/MM/yyyy HHmm")) +
+                " | " + to.format(DateTimeFormatter.ofPattern("d/MM/yyyy HHmm"));
     }
 
 }

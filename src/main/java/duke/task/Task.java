@@ -1,3 +1,5 @@
+package duke.task;
+
 public class Task {
     boolean done;
     String task;

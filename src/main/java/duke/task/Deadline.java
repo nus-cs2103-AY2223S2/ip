@@ -1,3 +1,5 @@
+package duke.task;
+
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
@@ -5,19 +7,19 @@ import java.time.format.DateTimeParseException;
 public class Deadline extends Task {
     private LocalDateTime deadline;
 
-    Deadline(String task, String deadline) throws DateTimeParseException {
+    public Deadline(String task, String deadline) throws DateTimeParseException {
         super(task);
         DateTimeFormatter parser = DateTimeFormatter.ofPattern("d/MM/yyyy HHmm");
         this.deadline = LocalDateTime.parse(deadline, parser);
     }
 
     public String toString() {
-        return "[D]" + super.toString() + " (by: " 
+        return "[D]" + super.toString() + " (by: "
                 + deadline.format(DateTimeFormatter.ofPattern("MMM dd yyyy HH:mm")) + ")";
     }
 
     public String toFileString() {
-        return "D | " + super.toFileString() + " | "  
+        return "D | " + super.toFileString() + " | "
                 + deadline.format(DateTimeFormatter.ofPattern("d/MM/yyyy HHmm"));
     }
 }

@@ -1,3 +1,9 @@
+package duke.command;
+
+import duke.DukeException;
+import duke.TaskList;
+import duke.UI;
+
 public abstract class Command {
     protected TaskList taskList;
     protected UI ui;

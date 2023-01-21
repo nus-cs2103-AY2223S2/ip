@@ -1,3 +1,8 @@
+package duke.command;
+
+import duke.DukeException;
+import duke.task.Task;
+
 public class MarkTaskCommand extends Command {
     private int taskNumber;
 
