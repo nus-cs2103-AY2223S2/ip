@@ -1,5 +1,8 @@
+import java.io.FileNotFoundException;
 import java.util.*;
 import java.lang.*;
+import java.io.FileWriter;
+import java.io.IOException;
 
 enum type {
     todo,
@@ -11,8 +14,10 @@ public class Duke {
     public static void lining() {
         System.out.println("____________________________________________________________");
     }
-    public static void main(String[] args) {
+    public static void main(String[] args) throws IOException {
         Scanner sc = new Scanner(System.in);
+        FileWriter fw = new FileWriter("saves/data.txt");
+
         String logo = " ____        _        \n"
                 + "|  _ \\ _   _| | _____ \n"
                 + "| | | | | | | |/ / _ \\\n"
@@ -49,6 +54,7 @@ public class Duke {
                     System.out.println("Nice! I've marked this task as done:");
                     System.out.println("[X] " + current.content);
                     lining();
+                    fw.write(current.toString() +System.lineSeparator());
 
                 } else if (comm.startsWith("unmark")) {
                     String str = comm.substring(comm.length() - 1);
@@ -59,6 +65,7 @@ public class Duke {
                     System.out.println("OK, I've marked this task as not done yet:");
                     System.out.println("[ ]" +current.content);
                     lining();
+                    fw.write(current.toString() +System.lineSeparator());
 
                 } else if(comm.startsWith("delete")) {
                     String str = comm.substring(comm.length() -1);
@@ -80,6 +87,7 @@ public class Duke {
                     System.out.println(current.toString());
                     System.out.println("Now you have " + tasklist.size() + " tasks in the list");
                     lining();
+                    fw.write(current.toString() +System.lineSeparator());
 
                 } else if (comm.startsWith("deadline")) {
                     String doit = comm.substring(9, comm.length());
@@ -91,6 +99,7 @@ public class Duke {
                     System.out.println(current.toString());
                     System.out.println("Now you have " + tasklist.size() + " tasks in the list");
                     lining();
+                    fw.write(current.toString() +System.lineSeparator());
 
                 } else if (comm.startsWith("event")) {
                     String doit = comm.substring(6, comm.length());
@@ -103,6 +112,7 @@ public class Duke {
                     System.out.println("Got it. I've added this task:");
                     System.out.println(current.toString());
                     lining();
+                    fw.write(current.toString() +System.lineSeparator());
 
                 } else if (!comm.equals("bye")){
                     lining();
@@ -112,11 +122,13 @@ public class Duke {
             }
         } catch (IndexOutOfBoundsException e) {
             System.out.println("☹ OOPS!!! The description of a todo cannot be empty.");
+        } catch (FileNotFoundException e) {
+            System.out.println("File doesn't exist!");
         }
             lining();
             System.out.println("Bye. Hope to see you again soon!");
             lining();
-
+            fw.close();
 
 
     }
