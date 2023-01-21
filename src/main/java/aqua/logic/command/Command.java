@@ -6,7 +6,8 @@ import aqua.manager.AppManager;
 
 
 public enum Command {
-    TODO(new AddToDoCommand());
+    TODO(new AddToDoCommand()),
+    DEADLINE(new AddDeadlineCommand());
 
 
     private final CommandDispatcherCreator creator;
