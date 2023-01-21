@@ -1,25 +1,26 @@
-package manager;
+package aqua.manager;
 
 import java.util.ArrayList;
 
-import task.Task;
+import aqua.aquatask.AquaTask;
 
 /** Manager of tasks. */
 public class TaskManager {
-    private final ArrayList<Task> taskList = new ArrayList<>();
+    private final ArrayList<AquaTask> taskList = new ArrayList<>();
 
 
-    public void add(Task task) {
+    public void add(AquaTask task) {
         taskList.add(task);
     }
 
-    public Task mark(int taskNum, boolean isDone) throws IndexOutOfBoundsException {
-        taskList.set(taskNum, taskList.get(taskNum).mark(isDone));
+    
+    public AquaTask mark(int taskNum, boolean isComplete) throws IndexOutOfBoundsException {
+        taskList.set(taskNum, taskList.get(taskNum).mark(isComplete));
         return taskList.get(taskNum);
     }
 
 
-    public Task delete(int taskNum) throws IndexOutOfBoundsException {
+    public AquaTask delete(int taskNum) throws IndexOutOfBoundsException {
         return taskList.remove(taskNum);
     }
 
