@@ -1,8 +1,15 @@
 import java.io.BufferedReader;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
 import java.io.InputStreamReader;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
 import java.util.Map;
 import java.util.function.Consumer;
 import java.util.function.Function;
@@ -10,6 +17,27 @@ import java.util.function.Function;
 public final class Duke {
     private final static String joiner(String[] args, int from, int to) {
         return String.join(" ", Arrays.copyOfRange(args, from, to));
+    }
+
+    private final static List<Task> loadTasks() {
+        if (Files.exists(Paths.get("data,dat"))) {
+            try (
+                final FileInputStream ifstream = new FileInputStream("data.dat");
+                final ObjectInputStream inStream = new ObjectInputStream(ifstream);
+            ) {
+                @SuppressWarnings("unchecked")
+                List<Task> tasks = (List<Task>) inStream.readObject();
+                return tasks;
+            } catch (IOException e) {
+                System.out.println("Oh no an IOException occurred while we were trying to load your tasks!");
+                System.out.print(e);
+            } catch (ClassNotFoundException e) {
+                System.out.println("Oh no your data file does not contain tasks!");
+                System.out.print(e);
+            }
+        }
+
+        return new ArrayList<>();
     }
 
     public final static void main(String[] vargs) throws IOException {
@@ -21,7 +49,8 @@ public final class Duke {
         System.out.println("Hello from\n" + logo);
 
         final BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
-        final ArrayList<Task> tasks = new ArrayList<>();
+        final List<Task> tasks = loadTasks();
+        System.out.format("You currently have %d tasks!\n", tasks.size());
 
         final Consumer<Task> addTask = (task) -> {
             tasks.add(task);
@@ -167,6 +196,19 @@ public final class Duke {
                 System.out.format("Removed this task!\n%s\n", removed.toString());
             } catch (NumberFormatException e) {
                 System.out.println("Invalid index!");
+            }
+        }, 
+        "save", (args) -> {
+            if (tasks.size() < 1) return;
+
+            try (
+                final FileOutputStream ofstream = new FileOutputStream("data.dat");
+                final ObjectOutputStream outStream = new ObjectOutputStream(ofstream);
+            ) {
+                outStream.writeObject(tasks);
+            } catch (IOException e) {
+                System.out.println("Oh no an IOException occurred while we were trying to save your data!");
+                System.out.print(e);
             }
         });
 

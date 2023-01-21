@@ -1,7 +1,9 @@
+import java.io.Serializable;
+
 /**
  * Abstract class from which all other tasks are derived
  */
-public abstract class Task {
+public abstract class Task implements Serializable {
   /**
    * String label for the task
    */
