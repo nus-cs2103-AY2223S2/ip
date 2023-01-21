@@ -1,8 +1,18 @@
 import formatters.Formatter;
+import sebastianExceptions.DeadlineFormatMismatchException;
+import sebastianExceptions.EventFormatMismatchException;
+import task.*;
+import time.*;
 
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
+
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -16,6 +26,9 @@ public class TaskList {
         this.taskList = new ArrayList<>();
     }
 
+    public TaskList(List<Task> taskList) {
+        this.taskList = taskList;
+    }
 
     /**
      * Add a to-do to the task list
@@ -36,11 +49,15 @@ public class TaskList {
      * @param taskDescription a description of the deadline to be added
      * @return the deadline generated
      */
-    public Task addDeadline(int isCompleted, String taskDescription, String endTime) {
-        Task newTask = new Deadline(isCompleted ,taskDescription, new EndTime(endTime));
-        this.taskList.add(newTask);
-        saveToDisk();
-        return newTask;
+    public Task addDeadline(int isCompleted, String taskDescription, String endTime) throws DeadlineFormatMismatchException{
+        try {
+            Task newTask = new Deadline(isCompleted, taskDescription, new EndTime(convertStringToDate(endTime)));
+            this.taskList.add(newTask);
+            saveToDisk();
+            return newTask;
+        } catch (DateTimeParseException e) {
+            throw new DeadlineFormatMismatchException();
+        }
     }
 
     /**
@@ -49,11 +66,20 @@ public class TaskList {
      * @param taskDescription a description of the event to be added
      * @return the event generated
      */
-    public Task addEvent(int isCompleted, String taskDescription, String from, String to) {
-        Task newTask = new Event(isCompleted ,taskDescription, new Duration(from, to));
-        this.taskList.add(newTask);
-        saveToDisk();
-        return newTask;
+    public Task addEvent(int isCompleted, String taskDescription, String from, String to) throws EventFormatMismatchException {
+        try {
+            Task newTask = new Event(isCompleted, taskDescription, new Duration(convertStringToDate(from), convertStringToDate(to)));
+            this.taskList.add(newTask);
+            saveToDisk();
+            return newTask;
+        } catch (DateTimeParseException e) {
+            throw new EventFormatMismatchException();
+        }
+    }
+
+    private LocalDateTime convertStringToDate(String dateTime) throws DateTimeParseException {
+        DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern(DatePattern.USER_INPUT_FORMAT.toString());
+        return LocalDateTime.parse(dateTime, dateTimeFormatter);
     }
 
     /**
@@ -102,6 +128,26 @@ public class TaskList {
         } catch (IndexOutOfBoundsException e) {
             throw new IndexOutOfBoundsException();
         }
+    }
+
+    public TaskList getTasksOnDate(String date) throws DateTimeParseException{
+        DateTimeFormatter dtf = DateTimeFormatter.ofPattern(DatePattern.TASK_ON_DATE_FORMAT.toString());
+        LocalDate ld = LocalDate.parse(date, dtf);
+        List<Task> tasksOnDate = new ArrayList<>();
+        for(Task t: taskList) {
+            if(t instanceof Deadline) {
+                Deadline d = (Deadline) t;
+                if(d.isOnSameDay(ld)) {
+                    tasksOnDate.add(t);
+                }
+            } else if(t instanceof Event) {
+                Event e = (Event) t;
+                if(e.isOnSameDay(ld)) {
+                    tasksOnDate.add(t);
+                }
+            }
+        }
+        return new TaskList(tasksOnDate);
     }
 
     /**

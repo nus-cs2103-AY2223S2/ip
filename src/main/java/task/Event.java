@@ -1,4 +1,11 @@
-public class Event extends Task{
+package task;
+
+import time.Duration;
+
+import java.time.LocalDate;
+
+
+public class Event extends Task {
 
     private Duration duration;
     private static String taskType = "E";
@@ -7,9 +14,14 @@ public class Event extends Task{
         super(taskDescription, isCompleted);
         this.duration = duration;
     }
+
+    public boolean isOnSameDay(LocalDate ld) {
+        return duration.isSameDay(ld);
+    }
+
     @Override
     public String toString() {
-        return "[" + taskType + "]" + super.toString() + this.duration.toString();
+        return "[" + taskType + "]" + super.toString() + " " + this.duration.toString();
     }
 
     @Override

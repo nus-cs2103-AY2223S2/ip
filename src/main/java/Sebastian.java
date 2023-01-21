@@ -1,5 +1,10 @@
 import sebastianExceptions.*;
 import formatters.Formatter;
+
+import task.Task;
+
+import java.time.format.DateTimeParseException;
+
 import java.util.Scanner;
 
 public class Sebastian {
@@ -63,7 +68,7 @@ public class Sebastian {
             throw new LackOfArgumentException();
         } else {
             String task = instruction.substring(5);
-            return this.addTask(this.tasks.addTodo(0, task));
+            return this.addTask(this.tasks.addTodo(0, task.trim()));
         }
     }
 
@@ -74,7 +79,7 @@ public class Sebastian {
      * @throws LackOfArgumentException when the user did not specify a deadline to add
      * @throws DeadlineFormatMismatchException when the format for adding a deadline is not followed
      */
-    private String addDeadline(String instruction) throws LackOfArgumentException, DeadlineFormatMismatchException{
+    private String addDeadline(String instruction) throws LackOfArgumentException, DeadlineFormatMismatchException {
         String[] insArr = instruction.split(" ");
         if(insArr.length == 1) {
             throw new LackOfArgumentException();
@@ -87,7 +92,7 @@ public class Sebastian {
                 throw new LackOfArgumentException();
             }
             else {
-                return this.addTask(this.tasks.addDeadline(0, task[0], task[1].trim()));
+                return this.addTask(this.tasks.addDeadline(0, task[0].trim(), task[1].trim()));
             }
         }
     }
@@ -99,7 +104,7 @@ public class Sebastian {
      * @throws LackOfArgumentException when the user did not specify an event to add
      * @throws EventFormatMismatchException when the format for adding an event is not followed
      */
-    private String addEvent(String instruction) throws LackOfArgumentException, EventFormatMismatchException{
+    private String addEvent(String instruction) throws LackOfArgumentException, EventFormatMismatchException {
         String[] insArr = instruction.split(" ");
         if(insArr.length == 1) {
             throw new LackOfArgumentException();
@@ -112,7 +117,7 @@ public class Sebastian {
                 throw new LackOfArgumentException();
             }
             else {
-                return this.addTask(this.tasks.addEvent(0, task[0],task[1].trim(), task[2].trim()));
+                return this.addTask(this.tasks.addEvent(0, task[0].trim(),task[1].trim(), task[2].trim()));
             }
         }
     }
@@ -206,6 +211,27 @@ public class Sebastian {
     }
 
     /**
+     * Get the tasks occurring on the specified date
+     * @param instruction user input
+     * @return a list of tasks occurring on the specified date
+     * @throws LackOfArgumentException when user did not specify a date
+     * @throws DateFormatMismatchException when user did not follow the format to retrieve tasks on a specific date
+     */
+    private String getTasks(String instruction) throws LackOfArgumentException, DateFormatMismatchException{
+        String[] insArr = instruction.split(" ");
+        if(insArr.length == 1) {
+            throw new LackOfArgumentException();
+        } else if(insArr.length == 2) {
+            try {
+                return tasks.getTasksOnDate(insArr[1]).toString();
+            } catch (DateTimeParseException e) {
+                throw new DateFormatMismatchException();
+            }
+        } else {
+            throw new DateFormatMismatchException();
+        }
+    }
+    /**
      * Show the current task list
      * @param instruction user input
      * @return the current task list
@@ -244,6 +270,9 @@ public class Sebastian {
                     break;
                 case "delete" :
                     res  = this.deleteTask(instruction);
+                    break;
+                case "get" :
+                    res = this.getTasks(instruction);
                     break;
                 default:
                     throw new IllegalInputException();

@@ -1,4 +1,11 @@
-public class Deadline extends Task{
+package task;
+
+import time.EndTime;
+
+import java.time.LocalDate;
+
+
+public class Deadline extends Task {
 
     private EndTime endTime;
     private static final String taskType = "D";
@@ -7,9 +14,14 @@ public class Deadline extends Task{
         super(taskDescription, isCompleted);
         this.endTime = endTime;
     }
+
+    public boolean isOnSameDay(LocalDate ldt) {
+        return endTime.isSameDay(ldt);
+    }
+
     @Override
     public String toString() {
-        return "["+ taskType +"]" + super.toString()  + this.endTime.toString();
+        return "["+ taskType +"]" + super.toString() + " " + this.endTime.toString();
     }
 
     @Override

@@ -1,9 +1,10 @@
-public class Todo extends Task{
+package task;
 
+public class Todo extends Task{
     private static final String taskType = "T";
 
     public Todo(int isCompleted, String taskDescription) {
-        super(taskDescription,isCompleted);
+        super(taskDescription, isCompleted);
     }
 
     @Override
