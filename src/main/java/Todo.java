@@ -1,7 +1,7 @@
 public class Todo extends Task {
     private static final String taskType = "[T]";
 
-    public Todo(String description) {
+    public Todo(String description) throws MissingDescriptionException {
         super(description);
     }
 

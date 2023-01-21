@@ -40,32 +40,46 @@ public class Duke {
                 }
 
             } else {
+                try {
+                    if (input.contains("todo")) {
+                        String description = input.replace("todo", "");
+                        Todo todo = new Todo(description);
+                        list.add(todo);
+                        System.out.println("Got it. I've added this task:\n" + todo.toString() + "\nNow you have "
+                                + list.size() + " tasks in the list.");
+                    } else if (input.contains("deadline")) {
+                        String command = input.replace("deadline", "");
+                        String description = command.split("/by")[0];
+                        if (description.equals("") || description.equals(" ")) {
+                            throw new MissingDescriptionException();
+                        } else {
+                            String date = command.split("/by")[1];
+                            Deadline deadline = new Deadline(description, date);
+                            list.add(deadline);
+                            System.out
+                                    .println("Got it. I've added this task:\n" + deadline.toString() + "\nNow you have "
+                                            + list.size() + " tasks in the list.");
+                        }
+                    } else if (input.contains("event")) {
+                        String command = input.replace("event", "");
+                        String description = command.split("/from")[0];
+                        if (description.equals("") || description.equals(" ")) {
+                            throw new MissingDescriptionException();
+                        } else {
+                            String remainder = command.split("/from")[1];
+                            String from = remainder.split("/to")[0];
+                            String to = remainder.split("/to")[1];
 
-                if (input.contains("todo")) {
-                    String description = input.replace("todo", "");
-                    Todo todo = new Todo(description);
-                    list.add(todo);
-                    System.out.println("Got it. I've added this task:\n" + todo.toString() + "\nNow you have "
-                            + list.size() + " tasks in the list.");
-                } else if (input.contains("deadline")) {
-                    String command = input.replace("deadline", "");
-                    String description = command.split("/by")[0];
-                    String date = command.split("/by")[1];
-                    Deadline deadline = new Deadline(description, date);
-                    list.add(deadline);
-                    System.out.println("Got it. I've added this task:\n" + deadline.toString() + "\nNow you have "
-                            + list.size() + " tasks in the list.");
-                } else if (input.contains("event")) {
-                    String command = input.replace("event", "");
-                    String description = command.split("/from")[0];
-                    String remainder = command.split("/from")[1];
-                    String from = remainder.split("/to")[0];
-                    String to = remainder.split("/to")[1];
-
-                    Event event = new Event(description, from, to);
-                    list.add(event);
-                    System.out.println("Got it. I've added this task:\n" + event.toString() + "\nNow you have "
-                            + list.size() + " tasks in the list.");
+                            Event event = new Event(description, from, to);
+                            list.add(event);
+                            System.out.println("Got it. I've added this task:\n" + event.toString() + "\nNow you have "
+                                    + list.size() + " tasks in the list.");
+                        }
+                    } else {
+                        throw new UnknownCommandException();
+                    }
+                } catch (DukeException e) {
+                    System.out.println(e.toString());
                 }
             }
 
