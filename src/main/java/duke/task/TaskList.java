@@ -1,7 +1,9 @@
 package duke.task;
 
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.List;
+import java.util.stream.Collectors;
 
 /**
  * A TaskList class that encapsulates the information and actions of a task list.
@@ -14,6 +16,10 @@ public class TaskList {
      */
     public TaskList() {
         this.list = new ArrayList<>();
+    }
+
+    public TaskList(ArrayList<DukeTask> list) {
+        this.list = list;
     }
 
     /**
@@ -51,6 +57,18 @@ public class TaskList {
      */
     public DukeTask getTask(int index) {
         return this.list.get(index);
+    }
+
+    public TaskList extractDeadlines() {
+        List<DukeTask> result = this.list.stream()
+                .filter(task -> task.getType() == TaskType.DEADLINE && !task.getStatus())
+                .sorted(Comparator.comparing(task -> {
+                    DeadlineTask ddlTask = (DeadlineTask) task;
+                    return ddlTask.getDeadline();
+                }))
+                .collect(Collectors.toList());
+
+        return new TaskList(new ArrayList<>(result));
     }
 
     @Override

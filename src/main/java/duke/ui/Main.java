@@ -27,6 +27,7 @@ public class Main extends Application {
             fxmlLoader.<MainWindow>getController().setDuke(duke);
             stage.getIcons().add(new Image("/images/icon.png"));
             stage.setTitle("Mr. Bear");
+            stage.isResizable();
             stage.show();
         } catch (IOException e) {
             e.printStackTrace();

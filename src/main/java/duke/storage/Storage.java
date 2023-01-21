@@ -6,7 +6,6 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.nio.file.Path;
 import java.nio.file.Paths;
-import java.time.LocalDate;
 import java.util.Objects;
 import java.util.Scanner;
 
@@ -28,6 +27,8 @@ public class Storage {
     private final String todoTag = "[T]";
     private final String deadlineTag = "[D]";
     private final String eventTag = "[E]";
+    private final String isDoneTag = "[X]";
+    private final String notDoneTag = "[ ]";
     private final String storageError = "OOPS!!! There's something wrong "
             + "when reading the Storage list";
 
@@ -92,10 +93,10 @@ public class Storage {
     }
 
     private void storageFormatChecker(String tag, String isDone) {
-        assert Objects.equals(tag, "[T]") || Objects.equals(tag, "[D]") || Objects.equals(tag, "[E]")
+        assert Objects.equals(tag, todoTag) || Objects.equals(tag, deadlineTag) || Objects.equals(tag, eventTag)
                 : "Type tag of event should be [T], [D], or [E]";
 
-        assert Objects.equals(isDone, "[X]") || Objects.equals(isDone, "[ ]")
+        assert Objects.equals(isDone, isDoneTag) || Objects.equals(isDone, notDoneTag)
                 : "IsDone tag of event should be [ ], or [X]";
     }
 

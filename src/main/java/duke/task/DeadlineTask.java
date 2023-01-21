@@ -44,6 +44,10 @@ public class DeadlineTask extends DukeTask {
                 + this.deadline.format(DateTimeFormatter.ofPattern("MMM d yyyy")) + ")";
     }
 
+    public LocalDate getDeadline() {
+        return getDeadline();
+    }
+
     @Override
     public boolean equals(Object obj) {
         if (obj == this) {
