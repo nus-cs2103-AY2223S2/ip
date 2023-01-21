@@ -1,5 +1,10 @@
 package model;
 
+import utils.DateTimeParser;
+
+import java.time.LocalDateTime;
+import java.time.format.DateTimeParseException;
+
 public class Deadline extends Task {
     public static final String TAG = "[D]";
 
@@ -8,7 +13,12 @@ public class Deadline extends Task {
     public Deadline(String title, String deadline) {
         super(title);
 
-        this.deadline = deadline;
+        try {
+            LocalDateTime dateTime = DateTimeParser.parse(deadline);
+            this.deadline = DateTimeParser.format(dateTime);
+        } catch (DateTimeParseException e) {
+            this.deadline = deadline;
+        }
     }
 
     @Override

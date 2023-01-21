@@ -50,6 +50,10 @@ abstract public class Task {
         return Task.tasks.remove(id - 1);
     }
 
+    public static Task deleteLast() throws IndexOutOfBoundsException {
+        return Task.tasks.removeLast();
+    }
+
     private void setStatus(TaskStatus status) {
         this.status = status;
     }
