@@ -67,7 +67,7 @@ public class Duke {
         if (commandIndex != -1) {
             // There is no space character in the command
             command = rawCommand.substring(0, commandIndex);
-            arguments = rawCommand.substring(commandIndex + 1);
+            arguments = rawCommand.substring(commandIndex + 1).trim();
         } else {
             command = rawCommand;
             arguments = null;
