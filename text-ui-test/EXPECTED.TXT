@@ -5,3 +5,16 @@ Hello from
 | |_| | |_| |   <  __/
 |____/ \__,_|_|\_\___|
 
+************************
+HELLO! I'M DUKE!
+HOW CAN I HELP?
+************************
+************************
+OK. I'VE ADDED THIS TASK:
+[T][ ] borrow book
+NOW YOU HAVE 1 TASK IN THE LIST!
+************************
+************************
+HERE ARE YOUR TASKS!
+1. [T][ ] borrow book
+************************
