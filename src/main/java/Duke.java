@@ -32,7 +32,7 @@ public class Duke {
 
                 switch (s[0]) {
                     case "list":
-                        fn.list();
+                        fn.list(inp);
                         break;
                     case "bye":
                         flag = fn.bye();

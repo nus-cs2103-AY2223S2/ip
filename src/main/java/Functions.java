@@ -1,5 +1,6 @@
 import java.util.Arrays;
-
+import java.time.LocalDateTime;
+import java.time.format.DateTimeParseException;
 public class Functions {
     TaskList ls;
 
@@ -7,7 +8,9 @@ public class Functions {
         this.ls = ls;
     }
 
-    public void list() {
+    public void list(String inp) {
+        String[] s = inp.split(" ");
+
         System.out.println("Here are the tasks in your list:");
         for (int i = 0; i < ls.count(); i++) {
             System.out.print(i + 1 + ".");
