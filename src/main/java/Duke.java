@@ -63,6 +63,12 @@ public class Duke {
                     break;
 
                 case "todo":
+                    String[] inpTodo = inp.split(" ");
+                    if (inpTodo.length == 1) {
+                        DukeException e = new DukeException("☹ OOPS!!! The description of a todo cannot be empty.");
+                        System.out.println(e.getMessage());
+                        break;
+                    }
                     String todoTask = inp.substring(5);
                     Task todo = new Todo(todoTask);
                     addTask(todo);
@@ -88,9 +94,11 @@ public class Duke {
                     break;
 
                 default:
-                    System.out.println("added: " + inp);
-                    Task t = new Task(inp);
-                    addTask(t);
+                    DukeException dukeException = new DukeException();
+                    System.out.println(dukeException.getMessage());
+//                    System.out.println("added: " + inp);
+//                    Task t = new Task(inp);
+//                    addTask(t);
             }
             System.out.println(line);
             if (inp.equals("bye")) {
@@ -98,9 +106,5 @@ public class Duke {
             }
 
         }
-
-
-
-
     }
 }
