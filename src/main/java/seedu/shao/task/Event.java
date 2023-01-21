@@ -1,4 +1,4 @@
-package seedu.shao;
+package seedu.shao.task;
 
 import java.time.LocalDateTime;
 
@@ -10,6 +10,14 @@ public class Event extends Task {
 		super(description);
 		this.from = fromTo[0];
 		this.to = fromTo[1];
+	}
+
+	public LocalDateTime getFrom() {
+		return from;
+	}
+
+	public LocalDateTime getTo() {
+		return to;
 	}
 
 	@Override

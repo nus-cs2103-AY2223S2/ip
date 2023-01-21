@@ -1,6 +1,9 @@
 package seedu.shao;
 
 import org.junit.jupiter.api.Test;
+
+import seedu.shao.task.Event;
+
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import java.time.LocalDate;

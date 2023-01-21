@@ -1,6 +1,9 @@
 package seedu.shao;
 
 import org.junit.jupiter.api.Test;
+
+import seedu.shao.task.Todo;
+
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class TodoTest {

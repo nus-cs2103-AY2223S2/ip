@@ -1,4 +1,4 @@
-package seedu.shao;
+package seedu.shao.task;
 
 public class Todo extends Task {
 
