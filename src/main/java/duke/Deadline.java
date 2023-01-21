@@ -16,14 +16,14 @@ public class Deadline extends Task {
     }
 
     @Override
-    public String summary(){
+    public String summary() {
         String s = "D___";
-        String d = this.getDone()? "✓" : " X";
+        String d = this.getDone() ? "✓" : " X";
         return s + d + "___" + this.getTask() + "___" + this.getDate();
     }
 
     @Override
-    public String toString(){
+    public String toString() {
         String dateFormatted = date.format(DateTimeFormatter.ofPattern("MMM d yyyy"));
         String s = "[ D ]" + super.toString() + String.format("(%s)", dateFormatted);
         return s;

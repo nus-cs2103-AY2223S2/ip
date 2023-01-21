@@ -1,23 +1,22 @@
 package duke;
 
-import duke.Deadline;
-
 import java.io.File;
-import java.nio.file.Paths;
-import java.util.Scanner;
-import java.util.ArrayList;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.nio.file.Paths;
+import java.util.ArrayList;
+import java.util.Scanner;
+
 
 public abstract class FileReadWrite {
-    private static String FILEPATH = Paths.get(Paths.get(System.getProperty("user.dir")).toString(),
+    private static final String FILE_PATH = Paths.get(Paths.get(System.getProperty("user.dir")).toString(),
             "data/duke.txt").toString();
 
 
     public static TaskList readFile() throws IOException {
-        File file = new File(FILEPATH);
+        File file = new File(FILE_PATH);
         TaskList taskList = new TaskList();
-        if (! file.exists()) {
+        if (!file.exists()) {
             file.mkdir();
         }
         Scanner scanner = new Scanner(file);
@@ -47,58 +46,58 @@ public abstract class FileReadWrite {
     }
 
     public static void writeTask(ArrayList<Task> list) throws IOException {
-        FileWriter fileWriter = new FileWriter(FILEPATH);
+        FileWriter fileWriter = new FileWriter(FILE_PATH);
         for (Task t : list) {
-            fileWriter.write(t.summary() +"\n");
+            fileWriter.write(t.summary() + "\n");
         }
         fileWriter.close();
     }
 
     public static void writeMark(int i, Task t) throws IOException {
-        File file = new File(FILEPATH);
+        File file = new File(FILE_PATH);
         Scanner scanner = new Scanner(file);
         ArrayList<String> lines = new ArrayList<>();
-        while (scanner.hasNext()){
+        while (scanner.hasNext()) {
             lines.add(scanner.nextLine());
         }
         lines.remove(i - 1);
         t.mark();
         lines.add(i - 1, t.summary());
-        FileWriter fileWriter = new FileWriter(FILEPATH);
-        for (String s : lines){
+        FileWriter fileWriter = new FileWriter(FILE_PATH);
+        for (String s : lines) {
             fileWriter.write(s + "\n");
         }
         fileWriter.close();
     }
 
     public static void writeUnmark(int i, Task t) throws IOException {
-        File file = new File(FILEPATH);
+        File file = new File(FILE_PATH);
         Scanner scanner = new Scanner(file);
         ArrayList<String> lines = new ArrayList<>();
-        while (scanner.hasNext()){
+        while (scanner.hasNext()) {
             lines.add(scanner.nextLine());
         }
         lines.remove(i - 1);
         t.unmark();
         lines.add(i - 1, t.summary());
-        FileWriter fileWriter = new FileWriter(FILEPATH);
-        for (String s : lines){
+        FileWriter fileWriter = new FileWriter(FILE_PATH);
+        for (String s : lines) {
             fileWriter.write(s + "\n");
         }
         fileWriter.close();
     }
 
     public static void writeDelete(int i) throws IOException {
-        File file = new File(FILEPATH);
+        File file = new File(FILE_PATH);
         Scanner scanner = new Scanner(file);
         ArrayList<String> lines = new ArrayList<>();
-        while (scanner.hasNext()){
+        while (scanner.hasNext()) {
             lines.add(scanner.nextLine());
         }
         lines.remove(i - 1);
 
-        FileWriter fileWriter = new FileWriter(FILEPATH);
-        for (String s : lines){
+        FileWriter fileWriter = new FileWriter(FILE_PATH);
+        for (String s : lines) {
             fileWriter.write(s + "\n");
         }
         fileWriter.close();

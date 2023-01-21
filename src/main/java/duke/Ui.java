@@ -1,11 +1,8 @@
 package duke;
 
-import duke.Task;
-import duke.TaskList;
-
 import java.io.BufferedReader;
-import java.io.InputStreamReader;
 import java.io.IOException;
+import java.io.InputStreamReader;
 
 public class Ui {
 
@@ -85,11 +82,11 @@ public class Ui {
         line();
     }
 
-    public static void indent(String txt){
-        System.out.println("     " + txt );
+    public static void indent(String txt) {
+        System.out.println("     " + txt);
     }
 
-    public static void line(){
+    public static void line() {
         System.out.println("____________________________________________________________________________________");
     }
 }

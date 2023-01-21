@@ -2,7 +2,7 @@ package duke;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
-public class Event extends Task{
+public class Event extends Task {
     private LocalDate date1;
     private LocalDate date2;
 
@@ -22,14 +22,14 @@ public class Event extends Task{
     }
 
     @Override
-    public String summary(){
+    public String summary() {
         String s = "E___";
-        String d = this.getDone()? "✓" : "X";
+        String d = this.getDone() ? "✓" : "X";
         return s + d + "___" + this.getTask() + "___" + this.getDate1() + "___" + this.getDate2();
     }
 
     @Override
-    public String toString(){
+    public String toString() {
         String d1 = date1.format(DateTimeFormatter.ofPattern("MMM d yyyy"));
         String d2 = date2.format(DateTimeFormatter.ofPattern("MMM d yyyy"));
         String s = "[ E ]" + super.toString() + String.format("(%s %s)", d1, d2);
