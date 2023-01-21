@@ -16,10 +16,10 @@ public abstract class ExecutionTask<T> {
     }
 
 
-    protected abstract T process(ArgumentMap args, AppManager manager)
+    public abstract T process(ArgumentMap args, AppManager manager)
             throws IllegalSyntaxException, ProcedureExecutionException;
 
-    protected abstract String getDataDisplay(T data, AppManager manager);
+    public abstract String getDataDisplay(T data, AppManager manager);
 
 
     public String execute() throws IllegalSyntaxException, ProcedureExecutionException {
