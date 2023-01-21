@@ -1,4 +1,2 @@
-T | 0 | borrow book
-D | 1 | return book | Sunday
-E | 0 | project meeting | Mon 2pm | 4pm
-D | 1 | do homework | no idea :-p
+D | 0 | return book | 2/12/2019 1800
+E | 1 | hackathon | 4/01/2023 0100 | 5/01/2023 1200
