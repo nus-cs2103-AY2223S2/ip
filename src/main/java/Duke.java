@@ -4,7 +4,6 @@ import java.util.Scanner;
 
 public class Duke {
     public static void main(String[] args) {
-        TaskList taskList = new TaskList();
         String dog = "⠀⠀⠀⠀⠀⠀⠀⢀⣀⣀⠀⣀⣀⣀⣀⢀⣀⣀⣀⣀⣀⣀⣀⣀⠀⠀⠀⠀⠀⠀⠀⠀\n" +
                 "⠀⠀⠀⠀⠀⣀⣰⣿⣿⡻⠟⠋⠉⠉⣻⠟⠉⠉⠉⠛⢯⡛⢿⣿⣷⣤⣀⠀⠀⠀⠀⠀\n" +
                 "⠀⣠⣴⠾⠛⢋⣿⠟⠋⠀⠀⠀⠀⢀⡟⠀⠀⠀⠀⠀⠀⠈⠂⣹⣿⡈⠙⠻⢶⣄⡀⠀\n" +
@@ -22,6 +21,7 @@ public class Duke {
                 "⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⣿⣷⣤⣤⣤⡾⣿⡿⠁⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀\n" +
                 "⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠘⠿⢶⣾⣶⠾⠛⠁⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀";
         System.out.println("Good ta see yer dawg, Duke's at yer service.\n" + dog);
+        TaskList taskList = new TaskList();
         try {
             File dir = new File("./data/");
             File f = new File("data/duke.txt");
@@ -31,7 +31,25 @@ public class Duke {
             else if (!f.exists()) {
                 f.createNewFile();
             }
-            // TODO: move file to data directory if file exists but not directory
+            else if (!dir.exists() && f.exists()) {
+                // TODO: move file to data directory if file exists but not directory
+            }
+            else {
+//                 Dir + file exists, update taskList arr
+//                Scanner sc = new Scanner(f);
+//                while (sc.hasNextLine()) {
+//                    String input = sc.nextLine();
+//                    String[] inputArr;
+//                    inputArr = input.split(" ");
+//                    if (inputArr[0].equals("todo") || inputArr[0].equals("deadline") || inputArr[0].equals("event")) {
+//                        try {
+//                            taskList.loadTasks(inputArr, inputArr[0]);
+//                        } catch (IOException e) {
+//                            e.printStackTrace();
+//                        }
+//                    }
+//                }
+            }
         } catch (IOException e) {
             System.out.println("Error occurred");
             e.printStackTrace();
@@ -56,7 +74,7 @@ public class Duke {
             } else if (inputArr[0].equals("todo") || inputArr[0].equals("deadline") || inputArr[0].equals("event")) {
                 try {
                     taskList.addTasks(inputArr, inputArr[0]);
-                } catch (EmptyDescException e) {
+                } catch (EmptyDescException | IOException e) {
                     e.printStackTrace();
                 }
             } else if (inputArr[0].equals("delete")) {

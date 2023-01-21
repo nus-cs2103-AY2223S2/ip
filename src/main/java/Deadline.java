@@ -7,6 +7,16 @@ public class Deadline extends Task{
     }
 
     @Override
+    public String getName() {
+        return "D";
+    }
+
+    public String getBy() {
+        return this.by;
+    }
+
+
+    @Override
     public String toString() {
         return "[D]" + super.toString() + "(by: " + by + ")";
     }
