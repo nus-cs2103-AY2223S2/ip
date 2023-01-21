@@ -21,6 +21,15 @@ public class Duke {
     private TaskList tasks;
 
     /**
+     * Constructs a duke.
+     */
+    public Duke() {
+        scanner = new Scanner(System.in);
+        isRunning = false;
+        tasks = new TaskList("/data/tasks");
+    }
+
+    /**
      * Entry point to start and run duke.
      *
      * @param args Command line arguments.
@@ -34,57 +43,42 @@ public class Duke {
      * Runs the duke.
      */
     public void run() {
-        init();
+        isRunning = true;
+        System.out.println("Hello!");
         while (isRunning) {
-            execute(scanner.nextLine());
+            try {
+                execute(new Command(scanner.nextLine()));
+            } catch (IllegalArgumentException e) {
+                System.out.println(e.getMessage());
+            }
         }
         exit();
     }
-    private void init() {
-        scanner = new Scanner(System.in);
-        isRunning = true;
-        tasks = new TaskList();
-        System.out.println("Hello!");
-    }
 
-    private void execute(String input) {
-        try {
-            Command command = new Command(input);
-            switch (command.getName()) {
-                case NO_OP:
-                    break;
-                case BYE:
-                    isRunning = false;
-                    break;
-                case TODO:
-                    addTask(new Todo(
-                            command.getArgumentValue(Command.Argument.TODO)));
-                    break;
-                case DEADLINE:
-                    addTask(new Deadline(
-                            command.getArgumentValue(Command.Argument.DEADLINE),
-                            command.getArgumentValue(Command.Argument.BY)));
-                    break;
-                case EVENT:
-                    addTask(new Event(
-                            command.getArgumentValue(Command.Argument.EVENT),
-                            command.getArgumentValue(Command.Argument.FROM),
-                            command.getArgumentValue(Command.Argument.TO)));
-                    break;
-                case LIST:
-                    showTasks();
-                    break;
-                case MARK:
-                    toggleTask(tasks.get(Integer.parseInt(
-                            command.getArgumentValue(Command.Argument.MARK))));
-                    break;
-                case DELETE:
-                    deleteTask(tasks.get(Integer.parseInt(
-                            command.getArgumentValue(Command.Argument.DELETE))));
-                    break;
-            }
-        } catch (IllegalArgumentException e) {
-            System.out.println(e.getMessage());
+    private void execute(Command command) {
+        switch (command.getName()) {
+        case NO_OP:
+            break;
+        case BYE:
+            isRunning = false;
+            break;
+        case TODO:
+            // FallThrough
+        case DEADLINE:
+            // FallThrough
+        case EVENT:
+            System.out.println("Added task.Task " + tasks.execute(command));
+            break;
+        case LIST:
+            System.out.println(tasks);
+            break;
+        case MARK:
+            Task task = tasks.execute(command);
+            System.out.println("Marked task.Task " + task + " as " + (task.getIsDone() ? "" : "not ") + "done");
+            break;
+        case DELETE:
+            System.out.println("Deleted task.Task " + tasks.execute(command));
+            break;
         }
     }
 
@@ -94,26 +88,4 @@ public class Duke {
         System.out.println("Good bye!");
     }
 
-    private void addTask(Task task) {
-        tasks.add(task);
-        System.out.println("Added task.Task " + task);
-    }
-
-    private void showTasks() {
-        int index = 1;
-        for (Task task : tasks) {
-           System.out.println(index + ". " + task);
-           index += 1;
-        }
-    }
-
-    private void toggleTask(Task task) {
-        task.toggleDone();
-        System.out.println("Marked task.Task " + task + " as " + (task.getIsDone() ? "" : "not ") + "done");
-    }
-
-    private void deleteTask(Task task) {
-        tasks.remove(task);
-        System.out.println("Deleted task.Task " + task);
-    }
 }
