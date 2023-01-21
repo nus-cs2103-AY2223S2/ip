@@ -33,7 +33,8 @@ public class Duke {
         System.out.println("\tWhat can I do for you?");
 
         System.out.println("\t____________________________________________________________");
-        TaskList taskList = new TaskList();
+        FileHandler fileHandler = new FileHandler();
+        TaskList taskList = fileHandler.readFromFile();
         Commands commands = new Commands(taskList);
 
         String userInput = sc.nextLine().strip();
@@ -77,6 +78,7 @@ public class Duke {
         }
 
         sc.close();
+        fileHandler.writeToFile(taskList);
         System.out.println("\t____________________________________________________________");
         System.out.println("Bye. Hope to see you again soon!");
         System.out.println("\t____________________________________________________________");
