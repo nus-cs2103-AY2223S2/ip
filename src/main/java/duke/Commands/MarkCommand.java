@@ -1,26 +1,28 @@
-package Commands;
+package duke.Commands;
 
-import Exceptions.DukeException;
-import Exceptions.TaskException;
-import Storage.Storage;
-import TaskList.TaskList;
-import Ui.Ui;
+import duke.Exceptions.DukeException;
+import duke.Exceptions.TaskException;
+import duke.Storage.Storage;
+import duke.TaskList.TaskList;
+import duke.Ui.Ui;
 
-public class DeleteCommand implements Command {
+public class MarkCommand implements Command {
 
+    private boolean toMark;
     private String fullCommand;
 
-    public DeleteCommand(String fullCommand) {
+    public MarkCommand(boolean toMark, String fullCommand) {
+        this.toMark = toMark;
         this.fullCommand = fullCommand;
     }
 
     @Override
     public void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
         try {
-            int taskNum = Integer.parseInt(fullCommand.substring(7));
+            int taskNum = Integer.parseInt(this.fullCommand.substring(toMark ? 5 : 7));
             if (taskNum > tasks.size() || taskNum < 1)
                 throw new TaskException("Please enter a valid task number!");
-            tasks.deleteTask(taskNum, storage, ui);
+            tasks.markTask(taskNum, storage, ui, toMark);
         } catch (NumberFormatException | StringIndexOutOfBoundsException e) {
             throw new TaskException("Please enter a valid task number!");
         }

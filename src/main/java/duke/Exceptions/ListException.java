@@ -1,4 +1,4 @@
-package Exceptions;
+package duke.Exceptions;
 
 public class ListException extends DukeException {
     public ListException(String message) {

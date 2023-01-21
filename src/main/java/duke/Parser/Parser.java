@@ -1,12 +1,12 @@
-package Parser;
+package duke.Parser;
 
-import Commands.Command;
-import Commands.ByeCommand;
-import Commands.DeleteCommand;
-import Commands.InvalidCommand;
-import Commands.ListCommand;
-import Commands.MarkCommand;
-import Commands.TaskCommand;
+import duke.Commands.ByeCommand;
+import duke.Commands.Command;
+import duke.Commands.DeleteCommand;
+import duke.Commands.InvalidCommand;
+import duke.Commands.ListCommand;
+import duke.Commands.MarkCommand;
+import duke.Commands.TaskCommand;
 
 public class Parser {
 

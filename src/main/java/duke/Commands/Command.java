@@ -1,9 +1,9 @@
-package Commands;
+package duke.Commands;
 
-import Exceptions.DukeException;
-import Storage.Storage;
-import TaskList.TaskList;
-import Ui.Ui;
+import duke.Exceptions.DukeException;
+import duke.Storage.Storage;
+import duke.TaskList.TaskList;
+import duke.Ui.Ui;
 
 public interface Command {
     public void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException;

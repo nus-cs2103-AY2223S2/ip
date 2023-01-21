@@ -1,10 +1,10 @@
-package Ui;
+package duke.Ui;
 
 import java.util.ArrayList;
 import java.util.Scanner;
 
-import Task.Task;
-import TaskList.TaskList;
+import duke.Task.Task;
+import duke.TaskList.TaskList;
 
 public class Ui {
 

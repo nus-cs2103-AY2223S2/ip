@@ -1,4 +1,4 @@
-package Storage;
+package duke.Storage;
 
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -11,11 +11,11 @@ import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Scanner;
 
-import Exceptions.DukeException;
-import Task.Deadline;
-import Task.Event;
-import Task.Task;
-import Task.Todo;
+import duke.Exceptions.DukeException;
+import duke.Task.Deadline;
+import duke.Task.Event;
+import duke.Task.Task;
+import duke.Task.Todo;
 
 public class Storage {
     private Path filePath;

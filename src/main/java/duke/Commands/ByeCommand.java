@@ -1,8 +1,8 @@
-package Commands;
+package duke.Commands;
 
-import Storage.Storage;
-import TaskList.TaskList;
-import Ui.Ui;
+import duke.Storage.Storage;
+import duke.TaskList.TaskList;
+import duke.Ui.Ui;
 
 public class ByeCommand implements Command {
     @Override
