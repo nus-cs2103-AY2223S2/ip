@@ -86,6 +86,16 @@ public class Duke {
                     System.out.println("    " + completedTask.toString());
                     break;
                 }
+                case "delete": {
+                    Task toDelete = getTaskForMarking(toFindFirstWord);
+                    taskStore.remove(toDelete);
+
+                    System.out.println("  I've removed this task:");
+                    System.out.println("    " + toDelete.toString());
+                    System.out.println("  Now you have "+ String.valueOf(Duke.countTasks()) +
+                            " tasks in the list!");
+                    break;
+                }
                 case "deadline": {
                     String[] parsed = parser(command, ParseFunctions.DEADLINE);
                     Task newDeadline = new Deadline(parsed[1], parsed[2]);
