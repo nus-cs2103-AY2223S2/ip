@@ -1,16 +1,22 @@
 package aqua.logic;
 
 import aqua.logic.command.Command;
+import aqua.manager.AppManager;
 
 
 public class CommandLineInput {
     private final Command command;
-    private final ArgumentMap argumentMap;
+    private final ArgumentMap args;
 
 
-    public CommandLineInput(Command command, ArgumentMap argumentMap) {
+    public CommandLineInput(Command command, ArgumentMap args) {
         this.command = command;
-        this.argumentMap = argumentMap;
+        this.args = args;
+    }
+
+
+    public ExecutionDispatcher getDispatcher(AppManager manager) {
+        return command.getDispatcher(args, manager);
     }
 
 
@@ -18,7 +24,7 @@ public class CommandLineInput {
     public String toString() {
         return String.format("CommandLineInput(cmd=%s args=%s)",
             command.toString(),
-            argumentMap.toString()
+            args.toString()
         );
     }
 }
