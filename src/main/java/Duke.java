@@ -1,15 +1,25 @@
 import java.io.*;
-import java.util.*;
+import java.util.Collections;
+import java.util.ArrayList;
 public class Duke {
 
-    private static Task[] taskstorage = new Task[101];
-    private static int ind = 1;
+    //private static Task[] taskstorage = new Task[101];
+    private static ArrayList<Task> taskstorage = new ArrayList<Task>(); // Create an ArrayList object
+    private static int ind = 0;
     public static void addTask(Task t) {
         System.out.println("Got it. I've added this task:");
         System.out.println("  " + t);
-        taskstorage[ind] = t;
-        System.out.println("Now you have " + ind + " task(s) in the list.");
+        taskstorage.add(t);
         ind++;
+        System.out.println("Now you have " + ind + " task(s) in the list.");
+    }
+
+    public static void deleteTask(Task t) {
+        System.out.println("Noted. I've removed this task:");
+        System.out.println("  " + t);
+        taskstorage.remove(t);
+        ind--;
+        System.out.println("Now you have " + ind + " task(s) in the list.");
     }
 
     public static void main(String[] args) throws IOException, DukeException {
@@ -41,9 +51,10 @@ public class Duke {
             switch(input[0]) {
                 case "list":
                     System.out.println("Tasks:");
-                    for (int i = 1; i < ind; i++) {
-                        System.out.print(i + ".");
-                        System.out.println(taskstorage[i]);
+                    //System.out.println(taskstorage);
+                    for (int i = 0; i < ind; i++) {
+                        System.out.print(i + 1 + ".");
+                        System.out.println(taskstorage.get(i));
                     }
                     break;
 
@@ -53,14 +64,34 @@ public class Duke {
 
                 case "mark":
                     //System.out.println("Nice! I've marked this task as done:");
-                    int taskNo = Integer.parseInt(input[1]);
-                    taskstorage[taskNo].markasDone();
-                    break;
+                    try {
+                        int taskNo = Integer.parseInt(input[1]);
+                        if (taskNo >= ind || taskNo <= 0) {
+                            throw new DukeException("Give a vaild number");
+                        }
+                        taskstorage.get(taskNo - 1).markasDone();
+                    } catch (NumberFormatException e) {
+                        System.out.println("Number should be typed in");
+                    } catch (DukeException e){
+                        System.out.println(e.getMessage());
+                    } finally {
+                        break;
+                    }
 
                 case "unmark":
-                    int taskNoUnmark = Integer.parseInt(input[1]);
-                    taskstorage[taskNoUnmark].markasUnDone();
-                    break;
+                    try {
+                        int taskNoUnmark = Integer.parseInt(input[1]);
+                        if (taskNoUnmark >= ind || taskNoUnmark <= 0) {
+                            throw new DukeException("Give a valid number");
+                        }
+                        taskstorage.get(taskNoUnmark - 1).markasUnDone();
+                    } catch (NumberFormatException e) {
+                        System.out.println("Number should be typed in");
+                    } catch (DukeException e) {
+                        System.out.println(e.getMessage());
+                    } finally {
+                        break;
+                    }
 
                 case "todo":
                     try {
@@ -117,6 +148,22 @@ public class Duke {
                         Task eventTask = new Event(eventTaskStr, eventBegin, eventEnd);
                         addTask(eventTask);
                     } catch (DukeException e) {
+                        System.out.println(e.getMessage());
+                    } finally {
+                        break;
+                    }
+
+                case "delete":
+                    try {
+                        int taskNo = Integer.parseInt(input[1]);
+                        if (taskNo > ind || taskNo <= 0) {
+                            throw new DukeException("Give a vaild number");
+                        }
+                        Task eventTask = taskstorage.get(taskNo - 1);
+                        deleteTask(eventTask);
+                    } catch (NumberFormatException e) {
+                        System.out.println("Number should be typed in");
+                    } catch (DukeException e){
                         System.out.println(e.getMessage());
                     } finally {
                         break;
