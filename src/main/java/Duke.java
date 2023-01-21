@@ -8,15 +8,16 @@ import java.util.Scanner;
  */
 public class Duke {
 
+    private static ArrayList<Task> tasks = new ArrayList<>();
+    private static Storage store;
+
     /**
      * The Commands enum represents Duke's available commands.
      */
     public enum Commands {
-        ECHO, LIST, MARK, UNMARK, TODO, DEADLINE, EVENT, DELETE, BYE;
+        ECHO, LIST, SAVE, LOAD, MARK, UNMARK, TODO, DEADLINE, EVENT, DELETE, BYE;
 
     }
-
-    private static ArrayList<Task> tasks = new ArrayList<>();
 
     /**
      * Initialises and runs the Duke chatbot.
@@ -51,6 +52,12 @@ public class Duke {
     private static void loopDukeFunctions() {
         Scanner sc = new Scanner(System.in);
 
+        try {
+            store = new Storage("src/main/resources/duke.txt");
+            loadFromFile();
+        } catch (DukeException e) {
+            printWithPartition("\t" + e.getMessage() + "\n");
+        }
         while (true) {
             try {
                 Commands command = readCommand(sc);
@@ -64,21 +71,27 @@ public class Duke {
                     break;
                 case MARK:
                     markTask(sc.nextLine().strip());
+                    saveToFile();
                     break;
                 case UNMARK:
                     unmarkTask(sc.nextLine().strip());
+                    saveToFile();
                     break;
                 case TODO:
                     addTodo(sc.nextLine().strip());
+                    saveToFile();
                     break;
                 case DEADLINE:
                     addDeadline(sc.nextLine().strip());
+                    saveToFile();
                     break;
                 case EVENT:
                     addEvent(sc.nextLine().strip());
+                    saveToFile();
                     break;
                 case DELETE:
                     deleteTask(sc.nextLine().strip());
+                    saveToFile();
                     break;
                 case BYE:
                     sc.close();
@@ -93,6 +106,15 @@ public class Duke {
             }
 
         }
+    }
+
+    private static void saveToFile() {
+        store.saveToFile(tasks);
+    }
+
+    private static void loadFromFile() {
+        ArrayList<Task> temp = store.loadFromFile();
+        tasks = temp == null ? tasks : temp;
     }
 
     private static Commands readCommand(Scanner sc) throws DukeException {
