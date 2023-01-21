@@ -6,9 +6,54 @@ import java.time.LocalTime;
 import java.util.Arrays;
 import java.util.stream.Stream;
 
+import seedu.shao.task.Deadline;
+import seedu.shao.task.Event;
+import seedu.shao.task.Task;
+import seedu.shao.task.Todo;
+import seedu.shao.tasklist.TaskList;
 import seedu.shao.ui.Ui;
 
 public class Parser {
+
+	enum TaskType {
+		TODO, DEADLINE, EVENT
+	}
+
+	public void parseInput(String input, TaskList tasklist) {
+		String inputLower = input.toLowerCase();
+		if (inputLower.isBlank())
+			return;
+		String[] inputArr = inputLower.split("\\|");
+		TaskType operationType = inputLower.startsWith("t")
+				? TaskType.TODO
+				: inputLower.startsWith("d")
+						? TaskType.DEADLINE
+						: TaskType.EVENT;
+
+		Task newTask = null;
+
+		switch (operationType) {
+			case TODO:
+				newTask = new Todo(inputArr[2]);
+				break;
+
+			case DEADLINE:
+				newTask = new Deadline(inputArr[2], parseDateTimeStr(inputArr[3]));
+				break;
+
+			case EVENT:
+				newTask = new Event(inputArr[2],
+						new LocalDateTime[] { parseDateTimeStr(inputArr[3]),
+								parseDateTimeStr(inputArr[4]) });
+				break;
+
+			default:
+				break;
+		}
+		if (inputArr[1].equals("1"))
+			newTask.markAsDone();
+		tasklist.add(newTask);
+	}
 
 	public LocalDateTime getBy(String[] inputArr, Ui ui) {
 		int l = inputArr.length;

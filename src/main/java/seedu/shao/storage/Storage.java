@@ -9,29 +9,19 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
-import java.time.LocalDateTime;
 import java.util.Scanner;
 import java.util.stream.Stream;
 
-import seedu.shao.task.Task;
-import seedu.shao.task.Todo;
 import seedu.shao.parser.Parser;
-import seedu.shao.task.Deadline;
-import seedu.shao.task.Event;
+import seedu.shao.task.Task;
 import seedu.shao.tasklist.TaskList;
 import seedu.shao.ui.Ui;
 
 public class Storage {
 
-	enum TaskType {
-		TODO, DEADLINE, EVENT
-	}
-
 	private String dataDirectory = "data";
 
-	private String sep = File.separator;
-
-	private String dataFilePath = dataDirectory + sep + "shao.txt";
+	private String dataFilePath = dataDirectory + File.separator + "shao.txt";
 
 	private File myDir = new File(dataDirectory);
 
@@ -41,53 +31,21 @@ public class Storage {
 		try {
 			Scanner myReader = new Scanner(myFile);
 			while (myReader.hasNextLine()) {
-				fetchData(myReader.nextLine().trim(), tasklist, parser);
+				parser.parseInput(myReader.nextLine().trim(), tasklist);
 			}
 			myReader.close();
 		} catch (FileNotFoundException e) {
-			try {
-				myDir.mkdirs();
-				myFile.createNewFile();
-			} catch (IOException ex) {
-				Ui.printError("Something went wrong while creating a new file.");
-			}
+			createFile();
 		}
 	}
 
-	private void fetchData(String input, TaskList tasklist, Parser parser) {
-		String inputLower = input.toLowerCase();
-		if (inputLower.isBlank())
-			return;
-		String[] inputArr = inputLower.split("\\|");
-		TaskType operationType = inputLower.startsWith("t")
-				? TaskType.TODO
-				: inputLower.startsWith("d")
-						? TaskType.DEADLINE
-						: TaskType.EVENT;
-
-		Task newTask = null;
-
-		switch (operationType) {
-			case TODO:
-				newTask = new Todo(inputArr[2]);
-				break;
-
-			case DEADLINE:
-				newTask = new Deadline(inputArr[2], parser.parseDateTimeStr(inputArr[3]));
-				break;
-
-			case EVENT:
-				newTask = new Event(inputArr[2],
-						new LocalDateTime[] { parser.parseDateTimeStr(inputArr[3]),
-								parser.parseDateTimeStr(inputArr[4]) });
-				break;
-
-			default:
-				break;
+	private void createFile() {
+		try {
+			myDir.mkdirs();
+			myFile.createNewFile();
+		} catch (IOException ex) {
+			Ui.printError("Something went wrong while creating a new file.");
 		}
-		if (inputArr[1].equals("1"))
-			newTask.markAsDone();
-		tasklist.add(newTask);
 	}
 
 	public <T extends Task> void saveNewData(T task) {
@@ -111,12 +69,10 @@ public class Storage {
 
 	private void modifyLineFile(String filePath, int lineNum, String newLine) {
 		String content = "";
-		BufferedReader reader = null;
-		FileWriter writer = null;
 		int curLineNum = 1;
 
-		try {
-			reader = new BufferedReader(new FileReader(myFile));
+		try (BufferedReader reader = new BufferedReader(new FileReader(myFile));
+				FileWriter writer = new FileWriter(myFile)) {
 			String line = reader.readLine();
 
 			while (line != null) {
@@ -128,28 +84,18 @@ public class Storage {
 				line = reader.readLine();
 				curLineNum += 1;
 			}
-			writer = new FileWriter(myFile);
 			writer.write(content);
 		} catch (IOException e) {
 			Ui.printError("Something went wrong while modifying the file.");
-		} finally {
-			try {
-				reader.close();
-				writer.close();
-			} catch (IOException e) {
-				Ui.printError("Something went wrong while modifying the file.");
-			}
 		}
 	}
 
 	public void deleteLineFile(int lineNum) {
 		String content = "";
-		BufferedReader reader = null;
-		FileWriter writer = null;
 		int curLineNum = 1;
 
-		try {
-			reader = new BufferedReader(new FileReader(myFile));
+		try (BufferedReader reader = new BufferedReader(new FileReader(myFile));
+				FileWriter writer = new FileWriter(myFile)) {
 			String line = reader.readLine();
 
 			while (line != null) {
@@ -159,17 +105,9 @@ public class Storage {
 				line = reader.readLine();
 				curLineNum += 1;
 			}
-			writer = new FileWriter(myFile);
 			writer.write(content);
 		} catch (IOException e) {
 			Ui.printError("Something went wrong while deleting a line from the file.");
-		} finally {
-			try {
-				reader.close();
-				writer.close();
-			} catch (IOException e) {
-				Ui.printError("Something went wrong while deleting a line from the file.");
-			}
 		}
 	}
 
