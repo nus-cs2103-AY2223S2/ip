@@ -130,9 +130,7 @@ public class TaskList {
         for (int i = 0; i < this.getSize() - 1; i++) {
             res.append((i + 1) + ". " + this.getTaskAtIndex(i) + "\n");
         }
-        if (this.getSize() - 1 >= 0) {
-            res.append(this.getSize() + ". " + this.getTaskAtIndex(this.getSize() - 1));
-        }
+        res.append(this.getSize() + ". " + this.getTaskAtIndex(this.getSize() - 1));
         return res.toString();
     }
 

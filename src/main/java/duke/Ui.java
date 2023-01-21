@@ -66,8 +66,13 @@ public class Ui {
      * @param tasks User's task list.
      */
     public void showList(TaskList tasks) {
-        System.out.println("Here are the tasks in your list:");
-        System.out.println(tasks);
+        if (tasks.getSize() == 0) {
+            System.out.println("There are currently no tasks in your list.");
+        } else {
+            System.out.println("Here are the tasks in your list:");
+            System.out.println(tasks);
+        }
+
     }
 
     /**
@@ -122,8 +127,12 @@ public class Ui {
     }
 
     public void showFind(TaskList tasks) {
-        System.out.println("Here are the matching tasks in your list:");
-        System.out.println(tasks);
+        if (tasks.getSize() == 0) {
+            System.out.println("There are no matching tasks.");
+        } else {
+            System.out.println("Here are the matching tasks in your list:");
+            System.out.println(tasks);
+        }
     }
 
     public void closeScanner() {
