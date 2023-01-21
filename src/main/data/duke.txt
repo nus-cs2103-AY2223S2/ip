@@ -1,7 +1,2 @@
-T 1 read book
-D 1 return book by June 6th
-T 1 join sports club
-T 1 wash face
-D 1 ip 7 by week 3
-D 0 cs2109s tutorial by thursday
-T 0 MA3252 tutorial
+T 0 fired up
+E 1 vjc homecoming from sat 8am to sat 11pm

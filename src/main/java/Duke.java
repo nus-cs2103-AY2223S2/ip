@@ -1,6 +1,7 @@
 import java.io.IOException;
-import java.lang.reflect.Array;
-import java.util.Arrays;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.Scanner;
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -31,7 +32,6 @@ public class Duke {
         } catch (IOException e) {
             System.out.println("Transmission error, I encountered! Jumping into hyperspace, it might be!");
         }
-
         while (true) {
             response = scanner.nextLine();
             if (response.equals("bye")) {
@@ -124,11 +124,13 @@ public class Duke {
             System.out.println(BANNER);
             return taskList;
         } catch (FileNotFoundException e) {
+            Path path = Paths.get("src/main/data");
+            Files.createDirectories(path);
             File newTaskFile = new File(FILEPATH);
             newTaskFile.createNewFile();
             System.out.println("A new file created, I have!");
         }
-        return null;
+        return new TaskList();
     }
 
     public static void saveData(String filepath, TaskList taskList) {
