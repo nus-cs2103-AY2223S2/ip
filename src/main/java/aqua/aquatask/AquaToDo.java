@@ -17,7 +17,7 @@ public class AquaToDo extends AquaTask {
 
     @Override
     public AquaToDo mark(boolean isComplete) {
-        return new AquaToDo(this.getName(), this.isComplete);
+        return new AquaToDo(this.getName(), isComplete);
     }
 
     

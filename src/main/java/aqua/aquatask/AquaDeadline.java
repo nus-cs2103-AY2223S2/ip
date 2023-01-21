@@ -19,7 +19,7 @@ public class AquaDeadline extends AquaTask {
 
     @Override
     public AquaDeadline mark(boolean isComplete) {
-        return new AquaDeadline(this.getName(), this.isComplete, this.by);
+        return new AquaDeadline(this.getName(), isComplete, this.by);
     }
 
 
