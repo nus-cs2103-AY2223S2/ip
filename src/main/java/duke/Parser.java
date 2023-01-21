@@ -21,8 +21,8 @@ public class Parser {
         if (input.equals("bye")) {
             return false;
         } else {
-            if (input.contains("unmark")){
-                int i = Integer.parseInt(input.substring(7,8));
+            if (input.contains("unmark")) {
+                int i = Integer.parseInt(input.substring(7, 8));
                 Task t = taskList.unmarkTask(i);
                 try {
                     FileReadWrite.writeUnmark(i, t);
@@ -31,7 +31,7 @@ public class Parser {
                 }
                 Ui.printUnmark(taskList, i);
             } else if (input.contains("mark")) {
-                int i = Integer.parseInt(input.substring(5,6));
+                int i = Integer.parseInt(input.substring(5, 6));
                 Task t = taskList.markTask(i);
                 try {
                     FileReadWrite.writeMark(i, t);
@@ -40,15 +40,18 @@ public class Parser {
                 }
                 Ui.printMark(taskList, i);
             } else if (input.contains("delete")) {
-                int i = Integer.parseInt(input.substring(7,8));
+                int i = Integer.parseInt(input.substring(7, 8));
                 Ui.printDelete(taskList, i, this.size);
                 taskList.delete(i);
-                try{
+                try {
                     FileReadWrite.writeDelete(i);
                 } catch (IOException e) {
                     e.printStackTrace();
                 }
                 this.size--;
+            } else if (input.contains("find")) {
+                String keyword = input.substring(5);
+                Ui.printFindList(taskList, keyword);
             } else {
                 switch (input){
                 case "list":
