@@ -15,61 +15,75 @@ public class Duke {
 
         while (sc.hasNextLine()) {
             String userInput = sc.nextLine();
-            String firstWord = userInput.split(" ", 2)[0];
-
-            if (userInput.equals("bye")) {
-                respond("Goodbye! Have a nice day ahead.\n");
-                break;
-
-            }
-            if (userInput.equals("list")) {
-                taskStorage.listTasks();
-                continue;
-
-            }
-            if (firstWord.equals("mark") || firstWord.equals("unmark")) {
-                String secondWord = userInput.split(" ", 3)[1];
-                int taskNumber = Integer.parseInt(secondWord);
-                taskStorage.updateTask(taskNumber);
-                respond("The status of your specified task has been updated!");
-                continue;
-
-
-            }
-            if (firstWord.equals("todo")) {
-                String bodyMessage = userInput.split(" ", 2)[1];
-                ToDo newTask = new ToDo(bodyMessage);
-                taskStorage.storeTasks(newTask);
-                respond("I have added this new task:\n" + newTask.provideDetails()
-                        + "\nYou now currently have "
-                        + taskStorage.getStorageCount() + " tasks.");
-                continue;
-
-            } if (firstWord.equals("deadline")) {
-                String bodyMessage = userInput.split(" ", 2)[1];
-                Deadline newTask = new Deadline(bodyMessage);
-                taskStorage.storeTasks(newTask);
-                respond("I have added this new task:\n" + newTask.provideDetails()
-                        +  "\nYou now currently have "
-                        + taskStorage.getStorageCount() + " tasks.");
-                continue;
-
-
-            }  if (firstWord.equals("event")) {
-                String bodyMessage = userInput.split(" ", 2)[1];
-                Event newTask = new Event(bodyMessage);
-                taskStorage.storeTasks(newTask);
-                respond("I have added this new task:\n" + newTask.provideDetails()
-                        + "\nYou now currently have "
-                        + taskStorage.getStorageCount() + " tasks.");
-
-
-            } else {
-                respond("Added: " + userInput);
-                taskStorage.storeTasks(new Task(userInput));
+            try {
+                oneWordCommand(userInput, taskStorage);
+            } catch (Exception e) {
+                respond("I'm sorry, but to use this command, you must have a valid body message.");
             }
         }
     }
+
+
+    public static void oneWordCommand(String userInput, TaskStorage taskStorage) throws Exception {
+        String firstWord = userInput.split(" ", 2)[0];
+
+        if (userInput.equals("bye")) {
+            respond("Goodbye! Have a nice day ahead.\n");
+            return;
+        }
+
+        if (userInput.equals("list")) {
+            taskStorage.listTasks();
+            return;
+        }
+
+        if (firstWord.equals("mark") || firstWord.equals("unmark")) {
+
+            String secondWord = userInput.split(" ", 2)[1];
+            int taskNumber = Integer.parseInt(secondWord);
+            taskStorage.updateTask(taskNumber);
+            respond("The status of your specified task has been updated!");
+            return;
+
+        }
+
+        if (firstWord.equals("todo")) {
+            String bodyMessage = userInput.split(" ", 2)[1];
+            ToDo newTask = new ToDo(bodyMessage);
+            taskStorage.storeTasks(newTask);
+            respond("I have added this new task:\n" + newTask.provideDetails()
+                    + "\nYou now currently have "
+                    + taskStorage.getStorageCount() + " tasks.");
+            return;
+
+
+        } if (firstWord.equals("deadline")) {
+            String bodyMessage = userInput.split(" ", 2)[1];
+            Deadline newTask = new Deadline(bodyMessage);
+            taskStorage.storeTasks(newTask);
+            respond("I have added this new task:\n" + newTask.provideDetails()
+                    +  "\nYou now currently have "
+                    + taskStorage.getStorageCount() + " tasks.");
+            return;
+
+
+        }  if (firstWord.equals("event")) {
+            String bodyMessage = userInput.split(" ", 2)[1];
+            Event newTask = new Event(bodyMessage);
+            taskStorage.storeTasks(newTask);
+            respond("I have added this new task:\n" + newTask.provideDetails()
+                    + "\nYou now currently have "
+                    + taskStorage.getStorageCount() + " tasks.");
+
+        } else {
+            respond("OOPS!!! I'm sorry, but I don't know what that means :-(");
+
+        }
+
+
+    }
+
+
 
     /**
      * Greets the user.
