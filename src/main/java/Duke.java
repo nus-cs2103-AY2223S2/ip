@@ -10,16 +10,18 @@ import java.io.FileWriter;
 
 public class Duke {
 
+
+
     // array that contains all the tasks thus far
     private static ArrayList<Task> listOfThings = new ArrayList<>();
-//    private static File f = new File("./src/main/data/duke");
     private static File f = null;
-
+    private static final String dirName = "." + File.separator + "src" + File.separator + "main" + File.separator + "data";
+    private static final String pathName = dirName + File.separator + "duke";
 
 
     /**
      * prints out the text with lines on top and below
-     * @param text
+     * @param text the content that is to be printed out
      */
     public static void printWithLines(String text) {
         System.out.println("    ____________________________________________________________");
@@ -113,7 +115,7 @@ public class Duke {
     public static void writeToFile(Task item) {
         try {
             String fileInputString = taskStringFormatter(item);
-            FileWriter fw = new FileWriter("./src/main/data/duke", true);
+            FileWriter fw = new FileWriter(pathName, true);
             fw.write(fileInputString + System.lineSeparator());
             fw.close();
         } catch (IOException e) {
@@ -148,14 +150,15 @@ public class Duke {
     }
 
 
+
     /**
      * loads all the items from the duke file
      */
     public static void loadFromFile() {
         try {
-            Files.createDirectories(Paths.get("./src/main/data"));
+            Files.createDirectories(Paths.get(dirName));
             if (f == null) {
-                f = new File("./src/main/data/duke");
+                f = new File(pathName);
             }
             f.createNewFile();
             Scanner sc = new Scanner(f);
