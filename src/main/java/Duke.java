@@ -109,7 +109,6 @@ public class Duke {
         while(fileScanner.hasNext()) {
             String line = fileScanner.nextLine();
             String[] commandArray = line.trim().split(" ");
-            //System.out.println(Arrays.deepToString(commandArray));
             Task task = TaskInfoParser.obtainTask(commandArray);
             taskList.addTaskSilent(task);
         }

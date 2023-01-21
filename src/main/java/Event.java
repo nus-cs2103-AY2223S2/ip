@@ -1,12 +1,28 @@
+import java.time.LocalDate;
+import java.time.LocalTime;
+import java.time.format.DateTimeFormatter;
+
 public class Event extends Task {
 
-    private String startTime;
-    private String endTime;
+    private String startTimeString;
+    private String endTimeString;
+    private String startDateString;
+    private String endDateString;
+    private LocalDate startDate;
+    private LocalDate endDate;
+    private LocalTime startTime;
+    private LocalTime endTime;
 
-    public Event(String description, String start, String end) {
+    public Event(String description, String startDate, String endDate, String startTime, String endTime) {
         super(description);
-        this.startTime = start;
-        this.endTime = end;
+        this.startDateString = startDate;
+        this.endDateString = endDate;
+        this.startTimeString = startTime;
+        this.endTimeString = endTime;
+        this.startDate = LocalDate.parse(startDate);
+        this.endDate = LocalDate.parse(endDate);
+        this.startTime = LocalTime.parse(startTime, DateTimeFormatter.ofPattern("Hmm"));
+        this.endTime = LocalTime.parse(endTime, DateTimeFormatter.ofPattern("Hmm"));
     }
 
     /**
@@ -26,13 +42,31 @@ public class Event extends Task {
                     "event <description> /from <start> /to <end>", null);
         }
         String eventDescription = StringUtils.joinString(splitInput, 1, fromIndex - 1);
-        String startTime = StringUtils.joinString(splitInput, fromIndex + 1, toIndex - 1);
-        String endTime = StringUtils.joinString(splitInput, toIndex + 1, splitInput.length - 1);
-        return new Event(eventDescription, startTime, endTime);
+        String startDateExtract = splitInput[fromIndex + 1];
+        String startTimeExtract = splitInput[fromIndex + 2];
+        String endDateExtract = splitInput[toIndex + 1];
+        String endTimeExtract = splitInput[toIndex + 2];
+        if (!DateTimeUtils.isCorrectDateFormat(startDateExtract)
+                || !DateTimeUtils.isCorrectDateFormat(endDateExtract)) {
+            throw new UnknownCommandException("Not a valid date format, it is!", null);
+        } else if (!DateTimeUtils.isCorrectTimeFormat(startTimeExtract)
+                || !DateTimeUtils.isCorrectTimeFormat(endTimeExtract)) {
+            throw new UnknownCommandException("Not a valid time format, it is!", null);
+        }
+        return new Event(eventDescription, startDateExtract, endDateExtract,
+                startTimeExtract, endTimeExtract);
     }
 
-    public static Event create(String description, String from, String to, String marked) {
-        Event task = new Event(description, from , to);
+    public static Event create(String description, String startDate, String endDate,
+                               String startTime, String endTime, String marked) {
+        if (!DateTimeUtils.isCorrectDateFormat(startDate)
+                || !DateTimeUtils.isCorrectDateFormat(endDate)) {
+            throw new UnknownCommandException("Not a valid date format, it is!", null);
+        } else if (!DateTimeUtils.isCorrectTimeFormat(startTime)
+                || !DateTimeUtils.isCorrectTimeFormat(endTime)) {
+            throw new UnknownCommandException("Not a valid time format, it is!", null);
+        }
+        Event task = new Event(description, startDate, endDate, startTime, endTime);
         if (marked.equals("1")) {
             task.markSilent();
         }
@@ -45,12 +79,14 @@ public class Event extends Task {
     @Override
     public void mark() {
         super.mark();
-        System.out.println(String.format(" [%s][%s] %s (from: %s to: %s)",
+        System.out.println(String.format(" [%s][%s] %s (from: %s %s to: %s %s)",
                 this.getTaskType(),
                 this.getStatusIcon(),
                 this.description,
-                this.startTime,
-                this.endTime));
+                this.startDate.format(DateTimeFormatter.ofPattern("MMM d yyyy")),
+                this.startTime.format(DateTimeFormatter.ofPattern("h:mm a")),
+                this.endDate.format(DateTimeFormatter.ofPattern("MMM d yyyy")),
+                this.endTime.format(DateTimeFormatter.ofPattern("h:mm a"))));
     }
 
     /**
@@ -59,12 +95,14 @@ public class Event extends Task {
     @Override
     public void unmark() {
         super.unmark();
-        System.out.println(String.format(" [%s][%s] %s (from: %s to: %s)",
+        System.out.println(String.format(" [%s][%s] %s (from: %s %s to: %s %s)",
                 this.getTaskType(),
                 this.getStatusIcon(),
                 this.description,
-                this.startTime,
-                this.endTime));
+                this.startDate.format(DateTimeFormatter.ofPattern("MMM d yyyy")),
+                this.startTime.format(DateTimeFormatter.ofPattern("h:mm a")),
+                this.endDate.format(DateTimeFormatter.ofPattern("MMM d yyyy")),
+                this.endTime.format(DateTimeFormatter.ofPattern("h:mm a"))));
     }
 
     /**
@@ -82,21 +120,25 @@ public class Event extends Task {
      */
     @Override
     public String toString() {
-        return String.format("[%s][%s] %s (from: %s to: %s)",
+        return String.format("[%s][%s] %s (from: %s %s to: %s %s)",
                 this.getTaskType(),
                 this.getStatusIcon(),
                 this.description,
-                this.startTime,
-                this.endTime);
+                this.startDate.format(DateTimeFormatter.ofPattern("MMM d yyyy")),
+                this.startTime.format(DateTimeFormatter.ofPattern("h:mm a")),
+                this.endDate.format(DateTimeFormatter.ofPattern("MMM d yyyy")),
+                this.endTime.format(DateTimeFormatter.ofPattern("h:mm a")));
     }
 
     @Override
     public String writeTask() {
-        return String.format("%s %d %s from %s to %s",
+        return String.format("%s %d %s from %s %s to %s %s",
                 this.getTaskType(),
                 super.isCompleted() ? 1 : 0,
                 this.description,
-                this.startTime,
-                this.endTime);
+                this.startDateString,
+                this.startTimeString,
+                this.endDateString,
+                this.endTimeString);
     }
 }

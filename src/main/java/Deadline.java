@@ -1,11 +1,20 @@
+import java.time.LocalDate;
+import java.time.LocalTime;
+import java.time.format.DateTimeFormatter;
 import java.util.Arrays;
 
 public class Deadline extends Task {
 
+    private LocalDate deadlineDate;
+    private LocalTime deadlineTime;
+    private String time;
     private String deadline;
 
-    public Deadline(String description, String deadline) {
+    public Deadline(String description, String deadline, String time) {
         super(description);
+        this.deadlineDate = LocalDate.parse(deadline);
+        this.deadlineTime = LocalTime.parse(time, DateTimeFormatter.ofPattern("Hmm"));
+        this.time = time;
         this.deadline = deadline;
     }
 
@@ -29,12 +38,18 @@ public class Deadline extends Task {
             throw new IncompleteCommandException("No Task Description, You have entered", null);
         }
         String description = StringUtils.joinString(splitCommands, deadlineIndex + 1, byIndex - 1);
-        String deadline = StringUtils.joinString(splitCommands, byIndex + 1, splitCommands.length - 1);
-        return new Deadline(description, deadline);
+        String deadlineDatePart = splitCommands[splitCommands.length - 2];
+        String deadlineTimePart = splitCommands[splitCommands.length - 1];
+        if (!DateTimeUtils.isCorrectDateFormat(deadlineDatePart)) {
+            throw new UnknownCommandException("Not a valid date format, it is!", null);
+        } else if (!DateTimeUtils.isCorrectTimeFormat(deadlineTimePart)) {
+            throw new UnknownCommandException("Not a valid time format, it is!", null);
+        }
+        return new Deadline(description, deadlineDatePart, deadlineTimePart);
     }
 
-    public static Deadline create(String description, String deadline, String marked) {
-        Deadline task = new Deadline(description, deadline);
+    public static Deadline create(String description, String deadline, String time, String marked) {
+        Deadline task = new Deadline(description, deadline, time);
         if (marked.equals("1")) {
             task.markSilent();
         }
@@ -47,11 +62,12 @@ public class Deadline extends Task {
     @Override
     public void mark() {
         super.mark();
-        System.out.println(String.format(" [%s][%s] %s (by: %s)",
+        System.out.println(String.format(" [%s][%s] %s (by: %s %s)",
                 this.getTaskType(),
                 this.getStatusIcon(),
                 this.description,
-                this.deadline));
+                this.deadlineDate.format(DateTimeFormatter.ofPattern("MMM d yyyy")),
+                this.deadlineTime.format(DateTimeFormatter.ofPattern("h:mm a"))));
     }
 
     /**
@@ -60,11 +76,12 @@ public class Deadline extends Task {
     @Override
     public void unmark() {
         super.unmark();
-        System.out.println(String.format(" [%s][%s] %s (by: %s)",
+        System.out.println(String.format(" [%s][%s] %s (by: %s %s)",
                 this.getTaskType(),
                 this.getStatusIcon(),
                 this.description,
-                this.deadline));
+                this.deadlineDate.format(DateTimeFormatter.ofPattern("MMM d yyyy")),
+                this.deadlineTime.format(DateTimeFormatter.ofPattern("h:mm a"))));
     }
 
     /**
@@ -82,11 +99,12 @@ public class Deadline extends Task {
      */
     @Override
     public String toString() {
-        return String.format("[%s][%s] %s (by: %s)",
+        return String.format("[%s][%s] %s (by: %s %s)",
                 this.getTaskType(),
                 this.getStatusIcon(),
                 this.description,
-                this.deadline);
+                this.deadlineDate.format(DateTimeFormatter.ofPattern("MMM d yyyy")),
+                this.deadlineTime.format(DateTimeFormatter.ofPattern("h:mm a")));
     }
 
     @Override
@@ -95,6 +113,6 @@ public class Deadline extends Task {
                 this.getTaskType(),
                 super.isCompleted() ? 1 : 0,
                 this.description,
-                this.deadline);
+                this.deadline + " " + time);
     }
 }

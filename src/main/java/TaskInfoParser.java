@@ -26,6 +26,7 @@ public class TaskInfoParser {
 
     public static Task obtainTask(String[] stringArray) {
         int length = stringArray.length;
+        stringArray = StringUtils.removeWhiteSpace(stringArray);
         //System.out.println(Arrays.deepToString(stringArray));
         switch(stringArray[0]) {
             case "T":
@@ -33,26 +34,20 @@ public class TaskInfoParser {
             case "D":
                 int byIndex = StringUtils.searchString(stringArray, "by");
                 String description = StringUtils.joinString(stringArray, 2, byIndex - 1);
-                String deadline = StringUtils.joinString(stringArray, byIndex + 1, length - 1);
-                return Deadline.create(description, deadline, stringArray[1]);
+                String deadline = stringArray[length - 2];
+                String time = stringArray[length - 1];
+                return Deadline.create(description, deadline, time, stringArray[1]);
             case "E":
                 int fromIndex = StringUtils.searchString(stringArray, "from");
                 int toIndex = StringUtils.searchString(stringArray, "to");
                 String description1 = StringUtils.joinString(stringArray, 2, fromIndex - 1);
-                String startTime = StringUtils.joinString(stringArray, fromIndex + 1, toIndex - 1);
-                String endTime = StringUtils.joinString(stringArray, toIndex + 1, length - 1);
-                return Event.create(description1, startTime, endTime, stringArray[1]);
+                String startDate = stringArray[fromIndex + 1];
+                String startTime = stringArray[fromIndex + 2];
+                String endDate = stringArray[toIndex + 1];
+                String endTime = stringArray[toIndex + 2];
+                assert(toIndex + 3 == length - 1);
+                return Event.create(description1, startDate, endDate, startTime, endTime, stringArray[1]);
         }
         return null;
     }
-
-    /**
-     * Concatenates strings from a string array from index start to index end.
-     * @param array String array
-     * @param start start index
-     * @param end end index
-     * @return concatenated string from the start index to end index of the array
-     */
-
-
 }
