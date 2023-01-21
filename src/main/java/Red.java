@@ -1,4 +1,6 @@
+import java.io.IOException;
 import java.util.Scanner;
+import java.io.File;
 
 public class Red{
     private static TaskList tasks = new TaskList(100);
@@ -21,6 +23,16 @@ public class Red{
                  +    "██╔══██╗██╔══╝░░██║░░██║\n"
                  +    "██║░░██║███████╗██████╔╝\n"
                  +    "╚═╝░░╚═╝╚══════╝╚═════╝░\n";
+
+        TaskFile fi = new TaskFile();
+        fi.createFile();
+        File f = new File("data\\tasklist.txt");
+
+
+        System.out.println("full path: " + f.getAbsolutePath());
+        System.out.println("file exists?: " + f.exists());
+        System.out.println("is Directory?: " + f.isDirectory());
+
 
 
 
@@ -93,6 +105,14 @@ public class Red{
 
 
         }
+
+        String TaskListCopy = tasks.toString();
+        try {
+            fi.writeToFile(TaskListCopy);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
 
         System.out.println("Goodbye.");
 

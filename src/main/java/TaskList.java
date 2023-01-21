@@ -32,6 +32,18 @@ public class TaskList {
         this.items.remove(index - 1);
     }
 
+    public void recordTaskList() {
+        String str = "";
+        int count = 0;
+        while (count < this.items.size()) {
+            int counter = count + 1;
+            str += counter + ". " + this.items.get(count) + " \n";
+
+            count++;
+        }
+
+    }
+
     /**
      * Returns the string representation of the queue.
      *
