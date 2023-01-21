@@ -96,8 +96,10 @@ public class Connor {
                     list.deleteTask(getTask(input));
                     break;
                 }
-            } catch (IllegalArgumentException | InvalidTaskException e) {
-                System.out.println("        INVALID INPUT");
+            } catch (IllegalArgumentException e) {
+                System.out.println("        INVALID COMMAND");
+            } catch (InvalidTaskException e) {
+                System.out.println(e.getMessage());
             }
         }
         sc.close();
