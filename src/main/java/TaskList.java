@@ -6,59 +6,35 @@ import java.util.Scanner;
 
 public class TaskList {
     private LinkedList<Task> tasks;
-    private File dataFile;
+    private Storage storage;
+    private Ui ui;
 
-    public TaskList(File dataFile) {
-        this.dataFile = dataFile;
-        this.tasks = new LinkedList<>();
-    }
-
-    public Task interpretLine(String str) {
-        String[] directives = str.split("\\|");
-        return TaskFactory.parseLine(directives);
-    }
-
-    public void readFile(Scanner sc) {
-        while (sc.hasNextLine()) {
-            this.tasks.add(interpretLine(sc.nextLine()));
-        }
-    }
-
-    public void initialize() {
+    public TaskList(Storage storage, Ui ui) {
+        this.storage = storage;
+        this.ui = ui;
         try {
-            this.dataFile.createNewFile();
-            Scanner sc = new Scanner(this.dataFile);
-            readFile(sc);
+            this.tasks = storage.initialize();
         } catch (IOException e) {
-            Responses.printMessage("Error detected, proceeding to generate new save file");
+            this.tasks = new LinkedList<>();
         }
     }
 
     private void updateFile() {
-        try {
-            FileWriter writer = new FileWriter(String.valueOf(this.dataFile));
-            writer.write("");
-            for (int i = 0; i < this.tasks.size(); i++) {
-                writer.append(this.tasks.get(i).dataFormat() + "\n");
-            }
-            writer.close();
-        } catch (IOException e) {
-            Responses.printMessage("ALERT! Unable to overwrite data, input is not saved!");
-        }
+        this.storage.updateFile(this.tasks);
     }
 
     public void addTask(Task task) {
         this.tasks.add(task);
-        updateFile();
+        this.updateFile();
         String message = "I have added " + task.getTaskName() + " to my memory\n";
         message = message + "          " + task.toString() + "\n";
         message = message + "        You have " + tasks.size() + " tasks in the list";
-        Responses.printMessage(message);
+        this.ui.printMessage(message);
     }
 
     public void deleteTask(String number) throws InvalidTaskException {
         if (number.equals("all")) {
-            Responses.printMessage("All tasks on the list have been cleared");
+            this.ui.printMessage("All tasks on the list have been cleared");
             this.tasks.clear();
         } else {
             try {
@@ -70,32 +46,32 @@ public class TaskList {
                     String message = "I have removed " + task.getTaskName() + " from my memory\n";
                     message = message + "          " + task.toString() + "\n";
                     message = message + "        You have " + tasks.size() + " tasks in the list";
-                    Responses.printMessage(message);
+                    this.ui.printMessage(message);
                 }
             } catch (NumberFormatException e){
                 throw new InvalidTaskException();
             }
         }
-        updateFile();
+        this.updateFile();
     }
 
     public void markDone(int number) {
         this.tasks.get(number - 1).mark();
-        updateFile();
-        Responses.printMessage("Understood, I have marked the task as done:\n"
+        this.updateFile();
+        this.ui.printMessage("Understood, I have marked the task as done:\n"
                 + "        "
                 + this.tasks.get(number - 1).toString());
     }
     public void markUndone(int number) {
         this.tasks.get(number - 1).unmark();
-        updateFile();
-        Responses.printMessage("Understood, I have marked the task as undone:\n"
+        this.updateFile();
+        this.ui.printMessage("Understood, I have marked the task as undone:\n"
                 + "        "
                 + this.tasks.get(number - 1).toString());
     }
 
     public void getList() {
-        System.out.println(Responses.LINE);
+        System.out.println(this.ui.LINE);
         for (int i = 0; i < this.tasks.size(); i++) {
             System.out.println("        "
                     + (i + 1)

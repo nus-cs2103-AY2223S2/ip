@@ -19,7 +19,17 @@ public class Connor {
         DELETE
     }
 
-    private static String getCommand(String input) {
+    private Storage storage;
+    private TaskList tasks;
+    private Ui ui;
+    public Connor() {
+        ui = new Ui();
+        this.ui.greet();
+        storage = new Storage(getFile(), ui);
+        this.tasks = new TaskList(this.storage, ui);
+    }
+
+    private String getCommand(String input) {
         if (input.indexOf(' ') == -1) {
             return input.toUpperCase();
         } else {
@@ -27,87 +37,83 @@ public class Connor {
         }
     }
 
-    private static String getTask(String input) throws InvalidTaskException {
+    private String getTask(String input) throws InvalidTaskException {
         if (input.indexOf(' ') == -1) {
             throw new InvalidTaskException();
         }
         return input.substring(input.indexOf(' ') + 1).trim();
     }
 
-    private static File getFile() {
+    private File getFile() {
         String homeDir = System.getProperty("user.dir");
         Path directoryPath = Paths.get(homeDir, "data");
         Path dataPath = Paths.get(homeDir, "data", "Connor.txt");
         try {
             if (Files.exists(dataPath)) {
-                Responses.printMessage("Existing data detected, loading data.");
+                this.ui.printMessage("Existing data detected, loading data.");
                 return new File(String.valueOf(dataPath));
             } else {
-                Responses.printMessage("No existing data detected, creating new save file.");
+                this.ui.printMessage("No existing data detected, creating new save file.");
                 Files.createDirectories(directoryPath);
                 return new File("data/Connor.txt");
             }
         } catch (IOException e) {
-            Responses.printMessage("ALERT! FAILED TO CREATE DIRECTORY!");
+            this.ui.printMessage("ALERT! FAILED TO CREATE DIRECTORY!");
         }
-        return null;
+        return new File("data/Connor.txt");
     }
 
-    private static void run() {
+    private void run() {
         Scanner sc = new Scanner(System.in);
-        File dataFile = getFile();
-        TaskList list = new TaskList(dataFile);
-        list.initialize();
-        boolean sessionOver = false;
-        while (!sessionOver && sc.hasNextLine() ) {
+        boolean isOver = false;
+        while (!isOver && sc.hasNextLine() ) {
             String input = sc.nextLine();
-            String command = getCommand(input);
+            String command = getCommand(input).trim();
             try {
                 switch (Commands.valueOf(command)) {
                 case HI:
-                    Responses.greetings("HI");
+                    this.ui.greetings("HI");
                     break;
                     
                 case BYE:
-                    Responses.greetings("BYE");
-                    sessionOver = true;
-                    break;
-
-                case MARK:
-                    list.markDone(Integer.parseInt(getTask(input)));
-                    break;
-
-                case UNMARK:
-                    list.markUndone(Integer.parseInt(getTask(input)));
+                    this.ui.greetings("BYE");
+                    isOver = true;
                     break;
 
                 case LIST:
-                    list.getList();
+                    this.tasks.getList();
                     break;
+
+                case MARK:
+                    this.tasks.markDone(Integer.parseInt(getTask(input)));
+                    break;
+
+                case UNMARK:
+                    this.tasks.markUndone(Integer.parseInt(getTask(input)));
+                    break;
+
 
                 case TODO:
                 case DEADLINE:
                 case EVENT:
-                    Task task = TaskFactory.parseCommand(command, getTask(input));
-                    list.addTask(task);
+                    Task task = Parser.parseCommand(command, getTask(input));
+                    this.tasks.addTask(task);
                     break;
 
                 case DELETE:
-                    list.deleteTask(getTask(input));
+                    this.tasks.deleteTask(getTask(input));
                     break;
                 }
             } catch (IllegalArgumentException e) {
-                System.out.println("        INVALID COMMAND");
+                this.ui.printMessage("INVALID COMMAND");
             } catch (InvalidTaskException e) {
-                System.out.println(e.getMessage());
+                this.ui.printMessage(e.getMessage());
             }
         }
         sc.close();
     }
 
     public static void main(String[] args) {
-        Responses.printMessage("Hello! I'm Connor, the android sent by Cyberlife.\n"
-                + "        Please type in your command below.");
-        run();
+        new Connor().run();
     }
 }

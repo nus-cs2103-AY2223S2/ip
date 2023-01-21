@@ -2,10 +2,8 @@
 import java.time.DateTimeException;
 import java.time.LocalDateTime;
 
-import java.nio.file.Path;
 
-
-public class TaskFactory {
+public class Parser {
 
     private static void validateName(String input) throws InvalidTaskException {
         if (input.trim().length() < 1) {
@@ -48,17 +46,9 @@ public class TaskFactory {
         return date + "T" + hrStr + ":" + minStr + ":00";
     }
 
-    public static LocalDateTime parseDateTime(String input) {
-        String[] dateTimePair = input.split(" ");
-        String date = dateTimePair[0];
-        String time = dateTimePair[1];
-        try {
-            String formattedDateTime = formatDateTime(input);
-            return LocalDateTime.parse(formattedDateTime);
-        } catch (DateTimeException e) {
-            Responses.printMessage(e.getMessage());
-        }
-        return null;
+    public static LocalDateTime parseDateTime(String input) throws DateTimeException {
+        String formattedDateTime = formatDateTime(input);
+        return LocalDateTime.parse(formattedDateTime);
     }
 
     public static Task parseCommand(String command, String information) throws InvalidTaskException {
@@ -67,14 +57,14 @@ public class TaskFactory {
             return new Todo(information);
         } else if (command.equals("DEADLINE")) {
             String[] pair = getNameDeadlinePair(information);
-            return new Deadline(pair[0], parseDateTime(pair[1]), formatDateTime(pair[1]));
+            return new Deadline(pair[0], pair[1]);
         } else {
             String[] tuple = getNameStartEndTuple(information);
-            return new Event(tuple[0], parseDateTime(tuple[1]), parseDateTime(tuple[2]), formatDateTime(tuple[1]), formatDateTime(tuple[2]));
+            return new Event(tuple[0], tuple[1], tuple[2]);
         }
     }
 
-    public static Task parseLine(String[] directives) {
+    public static Task parseLine(String[] directives) throws CorruptedDataException {
         if (directives[0].equals("T")) {
             return new Todo(directives[2], Boolean.parseBoolean(directives[1]));
         } else if (directives[0].equals("D")) {
@@ -82,6 +72,6 @@ public class TaskFactory {
         } else if (directives[0].equals("E")) {
             return new Event(directives[2], Boolean.parseBoolean(directives[1]), directives[3], directives[4]);
         }
-        return null;
+        throw new CorruptedDataException();
     }
 }

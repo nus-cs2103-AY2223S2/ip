@@ -2,7 +2,7 @@
         Hello! I'm Connor, the android sent by Cyberlife.
         Please type in your command below.
         ________________________________________________________
-        No existing data detected, creating new save file.
+        Existing data detected, loading data.
         ________________________________________________________
         Hi, I hope that you are having a nice day.
         ________________________________________________________
@@ -74,20 +74,35 @@
         2.[D][ ] do CS2103T (by: MAY 5 2023 1800)
         3.[E][ ] Dinner (from: JAN 1 2023 1600 to: JAN 1 2023 1800)
         I have 3 tasks in my memory
+        ________________________________________________________
         INVALID TASK DESCRIPTION
+        ________________________________________________________
         INVALID TASK DESCRIPTION
+        ________________________________________________________
         INVALID TASK DESCRIPTION
+        ________________________________________________________
         INVALID TASK DESCRIPTION
+        ________________________________________________________
         INVALID TASK DESCRIPTION
+        ________________________________________________________
         INVALID TASK DESCRIPTION
+        ________________________________________________________
         INVALID TASK DESCRIPTION
+        ________________________________________________________
         INVALID TASK DESCRIPTION
+        ________________________________________________________
         INVALID TASK DESCRIPTION
+        ________________________________________________________
         INVALID TASK DESCRIPTION
+        ________________________________________________________
         INVALID TASK DESCRIPTION
+        ________________________________________________________
         INVALID TASK DESCRIPTION
+        ________________________________________________________
         INVALID TASK DESCRIPTION
+        ________________________________________________________
         INVALID TASK DESCRIPTION
+        ________________________________________________________
         INVALID TASK DESCRIPTION
         ________________________________________________________
         All tasks on the list have been cleared

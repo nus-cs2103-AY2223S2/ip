@@ -1,4 +1,4 @@
-import java.time.LocalDate;
+import java.time.DateTimeException;
 import java.time.LocalDateTime;
 
 public class Event extends Task {
@@ -7,12 +7,16 @@ public class Event extends Task {
     private String dataFormat1;
     private String dataFormat2;
 
-    public Event(String taskName, LocalDateTime startTime, LocalDateTime endTime, String dataFormat1, String dataFormat2) {
+    public Event(String taskName,String taskStart, String taskEnd) {
         super(taskName);
-        this.startTime = startTime;
-        this.endTime = endTime;
-        this.dataFormat1 = dataFormat1;
-        this.dataFormat2 = dataFormat2;
+        try {
+            this.startTime = Parser.parseDateTime(taskStart);
+            this.endTime = Parser.parseDateTime(taskEnd);
+        } catch (DateTimeException e) {
+            System.out.println("        " + e.getMessage());
+        }
+        this.dataFormat1 = Parser.formatDateTime(taskStart);
+        this.dataFormat2 = Parser.formatDateTime(taskEnd);
     }
 
     public Event(String taskName, Boolean isDone, String startData, String endData) {

@@ -1,4 +1,4 @@
-import java.time.LocalDate;
+import java.time.DateTimeException;
 import java.time.LocalDateTime;
 
 public class Deadline extends Task {
@@ -6,11 +6,15 @@ public class Deadline extends Task {
     private LocalDateTime deadline;
     private String dataFormat;
 
-    public Deadline(String taskName, LocalDateTime deadline, String dataFormat) {
+    public Deadline(String taskName, String task) {
         super(taskName);
         this.taskName = taskName;
-        this.deadline = deadline;
-        this.dataFormat = dataFormat;
+        try {
+            this.deadline = Parser.parseDateTime(task);
+            this.dataFormat = Parser.formatDateTime(task);
+        } catch (DateTimeException e) {
+            System.out.println("        " + e.getMessage());
+        }
     }
 
     public Deadline(String taskName, Boolean isDone, String dataFormat) {
