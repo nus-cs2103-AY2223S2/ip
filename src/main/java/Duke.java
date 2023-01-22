@@ -14,37 +14,63 @@ public class Duke {
 
 
         loop:
-        while (true) {
+        while (true){
             String input = sc.nextLine();
             String[] tokens = input.split(" ");
-            String without_key = input.replace("todo","");
-            //echo(input);
+            String without_key = input.replace(tokens[0], "");
             switch (tokens[0]) {
                 case "bye":
                     echo(input);
                     break loop;
 
-                case "list": manager.displayAll();
+                case "list":
+                    manager.displayAll();
                     break;
 
-                case "mark": manager.mark(Integer.parseInt(tokens[1]) - 1);
+                case "mark":
+
+                    manager.mark(Integer.parseInt(tokens[1]) - 1);
                     break;
 
-                case "unmark": manager.unmark(Integer.parseInt(tokens[1]) - 1);
+                case "unmark":
+                    manager.unmark(Integer.parseInt(tokens[1]) - 1);
                     break;
 
-                case "todo": ToDo todo = new ToDo(without_key,false);
-                              manager.add(todo);
-                             break;
-                case "deadline": Deadlines deadlines = new Deadlines(without_key, false);
-                                  manager.add(deadlines);
-                                  break;
 
-                case "event": Events events = new Events(without_key, false);
-                              manager.add(events);
-                              break;
+                case "todo":
+                    try {
+                        if (without_key.equals("") || without_key.equals(" "))
+                            throw new DukeException("OOPS!!! The description of a todo cannot be empty.\n");
+                        ToDo todo = new ToDo(without_key, false);
+                        manager.add(todo);
+                    } catch (DukeException e) {
+                        System.out.println("OOPS!!! The description of a todo cannot be empty.\n");
+                    }
+                    break;
 
-                default: System.out.println("Wrong Input");
+                case "deadline":
+                    try {
+                        if (without_key.equals("") || without_key.equals(" "))
+                            throw new DukeException("OOPS!!! The description of a Deadline cannot be empty.\n");
+                        Deadlines deadlines = new Deadlines(without_key, false);
+                        manager.add(deadlines);
+                    } catch (DukeException e) {
+                        System.out.println("OOPS!!! The description of a deadline cannot be empty.\n");
+                    }
+                    break;
+
+                case "event":
+                    try {
+                        if (without_key.equals("") || without_key.equals(" "))
+                            throw new DukeException("OOPS!!! The description of a Event cannot be empty.\n");
+                        Events events = new Events(without_key, false);
+                        manager.add(events);
+                    } catch (DukeException e) {
+                        System.out.println("OOPS!!! The description of a events cannot be empty.\n");
+                    }
+                    break;
+                default:
+                    System.out.println("OOPS!!! I'm sorry, but I don't know what that means :-(\n");
 
             }
 
@@ -55,14 +81,12 @@ public class Duke {
     static void greeting(String message) {
         System.out.println(message);
     }
-
     static void echo(String input) {
         if (input.equals("bye"))
             System.out.println("Bye. Hope to see you again soon!\n");
         else
             System.out.println(input);
     }
-
 }
 
 class memory {
@@ -123,6 +147,10 @@ class memory {
 }
 
 abstract class Task {
+    static final String add = "Got it. I've added this task:\n";
+    static final String mark = "Nice! I've marked this task as done:\n";
+    static final String unmark = "OK, I've marked this task as not done yet:\n";
+    static final String displaylist = "Here are the tasks in your list\n";
     String task_name;
     String message_add;
     String message_marked;
@@ -130,12 +158,7 @@ abstract class Task {
     String message_display;
     boolean done;
 
-    static final String add = "Got it. I've added this task:\n";
-    static final String mark = "Nice! I've marked this task as done:\n";
-    static final String unmark = "OK, I've marked this task as not done yet:\n";
-    static final String displaylist = "Here are the tasks in your list\n";
-
-    Task(String name, boolean done){
+    Task(String name, boolean done) {
         this.task_name = name;
         this.done = done;
         this.message_add = "";
@@ -143,11 +166,15 @@ abstract class Task {
         this.message_unmarked = "";
         //this.message_display = done ? "[X] " : "[ ] ";
     }
+
     abstract void add();
+
     abstract void marked();
+
     abstract void unmarked();
+
     abstract void display();
-    }
+}
 
 class ToDo extends Task {
     ToDo(String name, boolean done) {
@@ -161,10 +188,10 @@ class ToDo extends Task {
 
     @Override
     void display() {
-        if(done) {
-           message_display = "[T][X]" + task_name;
+        if (done) {
+            message_display = "[T][X]" + task_name;
         } else {
-           message_display = "[T][ ]" + task_name;
+            message_display = "[T][ ]" + task_name;
         }
 
     }
@@ -177,7 +204,7 @@ class ToDo extends Task {
 
     @Override
     void unmarked() {
-        message_unmarked = Task.unmark+ " [T][ ] " + task_name;
+        message_unmarked = Task.unmark + " [T][ ] " + task_name;
         done = false;
     }
 
@@ -186,6 +213,7 @@ class ToDo extends Task {
 class Deadlines extends Task {
 
     String endDate;
+
     Deadlines(String name, boolean done) {
         super(name, done);
         extract();
@@ -196,13 +224,13 @@ class Deadlines extends Task {
         String[] date = tokens[1].split(" ");
         task_name = tokens[0];
         StringBuilder temp = new StringBuilder("(" + date[0] + ": ");
-        if(date.length > 3) {
-            for(int x = 1; x<date.length; x++) {
+        if (date.length > 3) {
+            for (int x = 1; x < date.length; x++) {
                 temp.append(date[x]).append(" ");
             }
             temp.append(")");
         }
-        if(date.length > 3) {
+        if (date.length > 3) {
             endDate = temp.toString();
         } else {
             endDate = date.length == 2 ? "(" + date[0] + ": " + date[1] + ")"
@@ -219,7 +247,7 @@ class Deadlines extends Task {
 
     @Override
     void display() {
-        if(done)
+        if (done)
             message_display = "[D][X] " + task_name + endDate;
         else
             message_display = "[D][ ] " + task_name + endDate;
@@ -227,7 +255,7 @@ class Deadlines extends Task {
 
     @Override
     void marked() {
-        message_marked = Task.mark +  "  [D][X] " + task_name + endDate;
+        message_marked = Task.mark + "  [D][X] " + task_name + endDate;
         done = true;
     }
 
@@ -242,6 +270,7 @@ class Events extends Task {
 
     String start;
     String end;
+
     Events(String name, boolean done) {
         super(name, done);
         extract();
@@ -253,11 +282,10 @@ class Events extends Task {
         String[] enddate = tokens[2].split(" ");
         task_name = tokens[0];
         start = startdate.length == 3 ? "(" + startdate[0] + ": " + startdate[1] + " " + startdate[2] + " "
-                                      : "(" + startdate[0] + ": " + startdate[1] + " " + startdate[2] + " " + startdate[3] + " ";
-        end = enddate[0]+": " + enddate[1] + ")";
+                : "(" + startdate[0] + ": " + startdate[1] + " " + startdate[2] + " " + startdate[3] + " ";
+        end = enddate[0] + ": " + enddate[1] + ")";
 
     }
-
 
 
     @Override
@@ -267,7 +295,7 @@ class Events extends Task {
 
     @Override
     void display() {
-        if(done)
+        if (done)
             message_display = "[E][X] " + task_name + start + end;
         else
             message_display = "[E][ ] " + task_name + start + end;
@@ -281,7 +309,7 @@ class Events extends Task {
 
     @Override
     void unmarked() {
-        message_unmarked =Task.unmark + "  [E][ ] " + task_name + start + end;
+        message_unmarked = Task.unmark + "  [E][ ] " + task_name + start + end;
         done = false;
     }
 }
@@ -289,22 +317,22 @@ class Events extends Task {
 class TaskManager {
     ArrayList<Task> ListOfTasks;
 
-    TaskManager(){
+    TaskManager() {
         //default size
         ListOfTasks = new ArrayList<>(100);
     }
 
-    void add(Task input){
+    void add(Task input) {
         ListOfTasks.add(input);
         input.add();
         System.out.println(input.message_add + "\n Now you have " + ListOfTasks.size() + " tasks in the list");
     }
 
-    void displayAll(){
+    void displayAll() {
         System.out.println(Task.displaylist);
-        for(int x = 0; x < ListOfTasks.size(); x++) {
+        for (int x = 0; x < ListOfTasks.size(); x++) {
             ListOfTasks.get(x).display();
-            System.out.println(x+1 + ". " + ListOfTasks.get(x).message_display);
+            System.out.println(x + 1 + ". " + ListOfTasks.get(x).message_display);
         }
     }
 
@@ -320,4 +348,10 @@ class TaskManager {
         System.out.println(temp.message_unmarked);
     }
 
+}
+
+class DukeException extends Exception {
+    DukeException(String errorMessage) {
+        super(errorMessage);
+    }
 }
