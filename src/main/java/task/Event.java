@@ -1,15 +1,19 @@
 package task;
 
+import datetime.DateTime;
+
+import java.util.Date;
+
 /**
  * A task with a starting and ending date and time.
  */
 public class Event extends Task {
 
     /** Starting date and time of event */
-    protected String from;
+    protected DateTime from;
 
     /** Ending date and time of event */
-    protected String to;
+    protected DateTime to;
 
     /**
      * Constructs a new event.
@@ -20,8 +24,8 @@ public class Event extends Task {
      */
     public Event(String description, String from, String to) {
         super(description);
-        this.from = from;
-        this.to = to;
+        this.from = new DateTime(from);
+        this.to = new DateTime(to);
     }
 
     @Override

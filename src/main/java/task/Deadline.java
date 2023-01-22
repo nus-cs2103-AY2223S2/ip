@@ -1,5 +1,7 @@
 package task;
 
+import datetime.DateTime;
+
 /**
  * A task with a deadline.
  */
@@ -8,7 +10,7 @@ public class Deadline extends Task {
     /**
      * The deadline of the task.
      */
-    protected String by;
+    protected DateTime by;
 
     /**
      * Constructs a new deadline.
@@ -18,7 +20,7 @@ public class Deadline extends Task {
      */
     public Deadline(String description, String by) {
         super(description);
-        this.by = by;
+        this.by = new DateTime(by);
     }
 
     @Override

@@ -4,13 +4,13 @@ todo task2
 list
 mark 0
 list
-deadline task3 /by tomorrow
+deadline task3 /by 2022-01-20 1200
 list
 mark 1
 list
 mark 0
 list
-event task4 /from wednesday /to thursday
+event task4 /from 2022-01-22 0800 /to 2022-01-22 1300
 list
 todo task5
 delete 1
@@ -27,5 +27,5 @@ deadline task7 /by
 deadline task8 /by 6th May
 event task9 /by 2pm
 event task10 /from 7th July 5am /to
-event task11 /from 7th July 5am /to 7th July 10am
+event task11 /from 2022-06-20 /to 7th July 10am
 bye
