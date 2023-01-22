@@ -1,3 +1,5 @@
+package Utils;
+
 import java.util.Arrays;
 
 public class StringUtils {

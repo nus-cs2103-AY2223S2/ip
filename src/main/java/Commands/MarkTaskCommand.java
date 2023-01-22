@@ -1,3 +1,10 @@
+package Commands;
+
+import Exceptions.DukeException;
+import Files.Storage;
+import Tasks.TaskList;
+import Ui.Ui;
+
 public class MarkTaskCommand extends Command {
     private String taskIndex;
 
@@ -7,12 +14,12 @@ public class MarkTaskCommand extends Command {
 
 
     @Override
-    boolean isExit() {
+    public boolean isExit() {
         return false;
     }
 
     @Override
-    void execute(TaskList taskList, Ui ui, Storage storage) {
+    public void execute(TaskList taskList, Ui ui, Storage storage) {
         try {
             taskList.markTask(this.taskIndex);
         } catch (DukeException e) {

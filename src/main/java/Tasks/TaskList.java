@@ -1,3 +1,8 @@
+package Tasks;
+
+import Exceptions.InvalidIndexException;
+import Exceptions.NoSuchTaskException;
+
 import java.util.ArrayList;
 
 public class TaskList {

@@ -1,3 +1,5 @@
+package Ui;
+
 import java.util.Scanner;
 
 public class Ui {
@@ -5,10 +7,6 @@ public class Ui {
     private final static String BANNER = "____________________________________________________________";
     private final static String WELCOME_MSG = "Greetings! JEDI GRANDMASTER YODA here\n" + "For you, What can I do?";
     private final static String BYE_MSG = "Be Gone, You Must. May the Force be with You!";
-    enum Command {
-
-    }
-
 
     /**
      * Responds to the command given by standard input with the appropriate formatting.

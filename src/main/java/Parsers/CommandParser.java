@@ -1,4 +1,16 @@
-import java.util.Arrays;
+package Parsers;
+
+import Commands.Command;
+import Commands.Commands;
+import Commands.AddTaskCommand;
+import Commands.DeleteTaskCommand;
+import Commands.ExitCommand;
+import Commands.ListCommand;
+import Commands.MarkTaskCommand;
+import Commands.UnmarkTaskCommand;
+import Exceptions.DukeException;
+import Exceptions.IncompleteCommandException;
+import Exceptions.UnknownCommandException;
 
 public class CommandParser extends Parser {
 
@@ -29,12 +41,12 @@ public class CommandParser extends Parser {
                 case EVENT:
                     return new AddTaskCommand(response);
                 default :
-                    throw new UnknownCommandException("Fall to the Dark Side, you must not. Invalid Command!", null);
+                    throw new UnknownCommandException("Fall to the Dark Side, you must not. Invalid Commands.Commands.Command!", null);
                 }
         } catch (DukeException e) {
             throw e;
         } catch (IllegalArgumentException e) {
-            throw new UnknownCommandException("Fall to the Dark Side, you must not. Invalid Command!", null);
+            throw new UnknownCommandException("Fall to the Dark Side, you must not. Invalid Commands.Commands.Command!", null);
         }
     }
 

@@ -1,3 +1,12 @@
+package Commands;
+
+import Exceptions.DukeException;
+import Files.Storage;
+import Parsers.TaskInfoParser;
+import Tasks.TaskList;
+import Tasks.Task;
+import Ui.Ui;
+
 public class AddTaskCommand extends Command {
     private String response;
     public AddTaskCommand(String response) {
@@ -6,12 +15,11 @@ public class AddTaskCommand extends Command {
     }
 
     @Override
-    boolean isExit() {
+    public boolean isExit() {
         return false;
     }
 
-    @Override
-    void execute(TaskList taskList, Ui ui, Storage storage) {
+    public void execute(TaskList taskList, Ui ui, Storage storage) {
         try {
             Task task = TaskInfoParser.parse(this.response);
             taskList.addTask(task);

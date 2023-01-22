@@ -1,3 +1,11 @@
+package Commands;
+
+
+import Exceptions.DukeException;
+import Files.Storage;
+import Tasks.TaskList;
+import Ui.Ui;
+
 public class DeleteTaskCommand extends Command {
     private String indexString;
     public DeleteTaskCommand(String command) {
@@ -6,12 +14,12 @@ public class DeleteTaskCommand extends Command {
     }
 
     @Override
-    boolean isExit() {
+    public boolean isExit() {
         return false;
     }
 
     @Override
-    void execute(TaskList taskList,Ui ui, Storage storage) {
+    public void execute(TaskList taskList, Ui ui, Storage storage) {
         try {
             taskList.deleteTask(this.indexString);
         } catch (DukeException e) {
