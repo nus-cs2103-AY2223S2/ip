@@ -1,3 +1,6 @@
+import Tasks.Event;
+import Tasks.Task;
+
 import java.io.IOException;
 
 public class CommandEvent extends Command{

@@ -1,3 +1,6 @@
+import Tasks.Task;
+import Tasks.ToDo;
+
 import java.io.IOException;
 
 public class CommandToDo extends Command{
@@ -7,7 +10,7 @@ public class CommandToDo extends Command{
             String toDoName = Duke.userScan.nextLine();
             // ERROR: To-Do description is blank.
             if (toDoName.strip().length()==0) {
-                throw new DukeException(Duke.ui.formatLogicError("ToDo description cannot be blank."));
+                throw new DukeException(Duke.ui.formatLogicError("Tasks.ToDo description cannot be blank."));
             }
             Task taskToAdd = new ToDo(toDoName);
             Duke.taskList.add(new ToDo(toDoName));

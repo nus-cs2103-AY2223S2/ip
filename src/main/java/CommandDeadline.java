@@ -1,3 +1,6 @@
+import Tasks.Deadline;
+import Tasks.Task;
+
 import java.io.IOException;
 
 public class CommandDeadline extends Command{

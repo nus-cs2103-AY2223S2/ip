@@ -11,7 +11,7 @@ public class Parser {
                 new CommandBye().handle();
                 break;
 
-            // Duke lists out all Task names in TaskList when input is "list"
+            // Duke lists out all Tasks.Task names in TaskList when input is "list"
             case ("list"):
                 new CommandList().handle();
                 break;
@@ -31,17 +31,17 @@ public class Parser {
                 new CommandDelete().handle();
                 break;
 
-            // Duke adds Deadline
+            // Duke adds Tasks.Deadline
             case ("deadline"):
                 new CommandDeadline().handle();
                 break;
 
-            // Duke adds Event
+            // Duke adds Tasks.Event
             case ("event"):
                 new CommandEvent().handle();
                 break;
 
-            // Duke adds ToDo
+            // Duke adds Tasks.ToDo
             case ("todo"):
                 new CommandToDo().handle();
                 break;

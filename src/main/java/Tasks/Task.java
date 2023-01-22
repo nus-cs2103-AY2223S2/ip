@@ -1,3 +1,5 @@
+package Tasks;
+
 public class Task {
     protected String name;
     protected boolean isDone;
@@ -22,12 +24,12 @@ public class Task {
     public void MarkNotDone() {
         this.isDone = false;
     }
-    // properly formats Task as String
+    // properly formats Tasks.Task as String
     @Override
     public String toString() {
         return getName();
     }
-    // properly formats Task as String for saving progress
+    // properly formats Tasks.Task as String for saving progress
     public String toSaveString() {
         return getName().strip();
     }
