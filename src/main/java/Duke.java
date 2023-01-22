@@ -1,7 +1,8 @@
 import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Scanner;
 import java.io.File;
 import java.io.FileWriter;
@@ -61,7 +62,9 @@ public class Duke {
     }
 
     public void addDeadline(String description, String by ) {
-        Deadline task = new Deadline(description, by);
+        DateTimeFormatter format = DateTimeFormatter.ofPattern("dd-MM-yyyy");
+        LocalDate date = LocalDate.parse(by, format);
+        Deadline task = new Deadline(description, date);
         storage.add(task);
         System.out.println("\t" + task);
         System.out.println("Now you have " + storage.size() + " tasks in the list.");
