@@ -25,7 +25,6 @@ public class Duke {
 
         try {
             this.storage = new Storage(filePath);
-            storage.initializeStorage();
             this.taskList = new TaskList(storage.getTasks());
         } catch (IOException exception) {
             this.ui.replyError(exception.getMessage());

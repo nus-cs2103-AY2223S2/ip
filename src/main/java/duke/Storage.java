@@ -12,12 +12,10 @@ public class Storage {
 
     public Storage(String path) throws IOException {
         this.file = new File(path);
+        this.file.getParentFile().mkdirs();
+        this.file.createNewFile();
         this.writer = new BufferedWriter(new FileWriter(path, true));
         this.reader = new BufferedReader(new FileReader(path));
-    }
-
-    public void initializeStorage() throws IOException {
-        this.file.createNewFile();
     }
 
     public ArrayList<Task> getTasks() throws IOException{
