@@ -8,4 +8,9 @@ mark 3
 list
 unmark 2
 list
+find book
+find re
+list
+delete 3
+list
 bye

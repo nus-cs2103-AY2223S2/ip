@@ -9,48 +9,72 @@ What may I help you with?
 ________________________________________________________________________________
 Understood, adding
     [T][ ] pick up book
-to book.book.
-1 task(s) exist in book.book's pages.
+to Book.
+1 task(s) exist in Book's pages.
 ________________________________________________________________________________
 Understood, adding
-    [D][ ] return book (by: 20 Jan (Fri) - 08:00AM)
-to book.book.
-2 task(s) exist in book.book's pages.
+    [D][ ] return book  (by: 20 Jan (Fri) - 08:00AM)
+to Book.
+2 task(s) exist in Book's pages.
 ________________________________________________________________________________
 Understood, adding
-    [E][ ] book release (from: 18 Jan (Wed) - 12:00PM to: 18 Jan (Wed) - 02:00PM)
-to book.book.
-3 task(s) exist in book.book's pages.
+    [E][ ] book release  (from: 18 Jan (Wed) - 12:00PM to: 18 Jan (Wed) - 02:00PM)
+to Book.
+3 task(s) exist in Book's pages.
 ________________________________________________________________________________
-Here are the tasks stored in book.book:
+Here are the tasks stored in Book:
 1.  [T][ ] pick up book
-1.  [D][ ] return book (by: 20 Jan (Fri) - 08:00AM)
-1.  [E][ ] book release (from: 18 Jan (Wed) - 12:00PM to: 18 Jan (Wed) - 02:00PM)
-3 task(s) exist in book.book's pages.
+2.  [D][ ] return book  (by: 20 Jan (Fri) - 08:00AM)
+3.  [E][ ] book release  (from: 18 Jan (Wed) - 12:00PM to: 18 Jan (Wed) - 02:00PM)
+3 task(s) exist in Book's pages.
 ________________________________________________________________________________
 The following task has been marked complete:
     [T][X] pick up book
 ________________________________________________________________________________
 The following task has been marked complete:
-    [D][X] return book (by: 20 Jan (Fri) - 08:00AM)
+    [D][X] return book  (by: 20 Jan (Fri) - 08:00AM)
 ________________________________________________________________________________
 The following task has been marked complete:
-    [E][X] book release (from: 18 Jan (Wed) - 12:00PM to: 18 Jan (Wed) - 02:00PM)
+    [E][X] book release  (from: 18 Jan (Wed) - 12:00PM to: 18 Jan (Wed) - 02:00PM)
 ________________________________________________________________________________
-Here are the tasks stored in book.book:
+Here are the tasks stored in Book:
 1.  [T][X] pick up book
-1.  [D][X] return book (by: 20 Jan (Fri) - 08:00AM)
-1.  [E][X] book release (from: 18 Jan (Wed) - 12:00PM to: 18 Jan (Wed) - 02:00PM)
-3 task(s) exist in book.book's pages.
+2.  [D][X] return book  (by: 20 Jan (Fri) - 08:00AM)
+3.  [E][X] book release  (from: 18 Jan (Wed) - 12:00PM to: 18 Jan (Wed) - 02:00PM)
+3 task(s) exist in Book's pages.
 ________________________________________________________________________________
 The following task has been marked incomplete:
-    [D][ ] return book (by: 20 Jan (Fri) - 08:00AM)
+    [D][ ] return book  (by: 20 Jan (Fri) - 08:00AM)
 ________________________________________________________________________________
-Here are the tasks stored in book.book:
+Here are the tasks stored in Book:
 1.  [T][X] pick up book
-1.  [D][ ] return book (by: 20 Jan (Fri) - 08:00AM)
-1.  [E][X] book release (from: 18 Jan (Wed) - 12:00PM to: 18 Jan (Wed) - 02:00PM)
-3 task(s) exist in book.book's pages.
+2.  [D][ ] return book  (by: 20 Jan (Fri) - 08:00AM)
+3.  [E][X] book release  (from: 18 Jan (Wed) - 12:00PM to: 18 Jan (Wed) - 02:00PM)
+3 task(s) exist in Book's pages.
 ________________________________________________________________________________
-Bye! Pick up book.book again soon!
+Book found the following matching tasks stored:
+1.  [T][X] pick up book
+2.  [D][ ] return book  (by: 20 Jan (Fri) - 08:00AM)
+3.  [E][X] book release  (from: 18 Jan (Wed) - 12:00PM to: 18 Jan (Wed) - 02:00PM)
+________________________________________________________________________________
+Book found the following matching tasks stored:
+2.  [D][ ] return book  (by: 20 Jan (Fri) - 08:00AM)
+3.  [E][X] book release  (from: 18 Jan (Wed) - 12:00PM to: 18 Jan (Wed) - 02:00PM)
+________________________________________________________________________________
+Here are the tasks stored in Book:
+1.  [T][X] pick up book
+2.  [D][ ] return book  (by: 20 Jan (Fri) - 08:00AM)
+3.  [E][X] book release  (from: 18 Jan (Wed) - 12:00PM to: 18 Jan (Wed) - 02:00PM)
+3 task(s) exist in Book's pages.
+________________________________________________________________________________
+Acknowledged, striking the following task off of Book's pages:
+    [E][X] book release  (from: 18 Jan (Wed) - 12:00PM to: 18 Jan (Wed) - 02:00PM)
+2 task(s) exist in Book's pages.
+________________________________________________________________________________
+Here are the tasks stored in Book:
+1.  [T][X] pick up book
+2.  [D][ ] return book  (by: 20 Jan (Fri) - 08:00AM)
+2 task(s) exist in Book's pages.
+________________________________________________________________________________
+Bye! Pick up Book again soon!
 ________________________________________________________________________________

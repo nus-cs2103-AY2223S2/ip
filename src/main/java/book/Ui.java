@@ -103,6 +103,12 @@ public class Ui {
         System.out.print(list);
     }
 
+    /**
+     * Prints the message for showing the {@code Task}s matching the given {@code String} keyword
+     * in {@code TaskList} in {@code Book}.
+     * @param list {@code TaskList} associated with the message.
+     * @param keyword {@code String} keyword associated with the message.
+     */
     public void showMatchingTasksList(TaskList list, String keyword) {
         System.out.println("Book found the following matching tasks stored:");
         System.out.print(list.matchingTasks(keyword));
