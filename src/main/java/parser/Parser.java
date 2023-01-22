@@ -1,4 +1,4 @@
-package seedu.shao.parser;
+package parser;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
@@ -6,18 +6,19 @@ import java.time.LocalTime;
 import java.util.Arrays;
 import java.util.stream.Stream;
 
-import seedu.shao.commands.AddCommand;
-import seedu.shao.commands.Command;
-import seedu.shao.commands.DeleteCommand;
-import seedu.shao.commands.ExitCommand;
-import seedu.shao.commands.ListCommand;
-import seedu.shao.commands.MarkCommand;
-import seedu.shao.task.Deadline;
-import seedu.shao.task.Event;
-import seedu.shao.task.Task;
-import seedu.shao.task.Todo;
-import seedu.shao.tasklist.TaskList;
-import seedu.shao.ui.Ui;
+import commands.AddCommand;
+import commands.Command;
+import commands.DateTimeCommand;
+import commands.DeleteCommand;
+import commands.ExitCommand;
+import commands.ListCommand;
+import commands.MarkCommand;
+import task.Deadline;
+import task.Event;
+import task.Task;
+import task.Todo;
+import tasklist.TaskList;
+import ui.Ui;
 
 public class Parser {
 
@@ -33,6 +34,8 @@ public class Parser {
 				return new ExitCommand(inputArr);
 			case "list":
 				return new ListCommand(inputArr);
+			case "datetime":
+				return new DateTimeCommand(inputArr);
 			case "mark":
 			case "unmark":
 				return new MarkCommand(inputArr, opType.startsWith("mark"));

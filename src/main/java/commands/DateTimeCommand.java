@@ -1,8 +1,8 @@
-package seedu.shao.commands;
+package commands;
 
-import seedu.shao.parser.Parser;
-import seedu.shao.tasklist.TaskList;
-import seedu.shao.ui.Ui;
+import parser.Parser;
+import tasklist.TaskList;
+import ui.Ui;
 
 public class DateTimeCommand extends Command {
 

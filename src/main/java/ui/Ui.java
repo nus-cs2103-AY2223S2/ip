@@ -1,14 +1,14 @@
-package seedu.shao.ui;
+package ui;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.Scanner;
 
-import seedu.shao.parser.Parser;
-import seedu.shao.task.Deadline;
-import seedu.shao.task.Event;
-import seedu.shao.task.Task;
-import seedu.shao.tasklist.TaskList;
+import parser.Parser;
+import task.Deadline;
+import task.Event;
+import task.Task;
+import tasklist.TaskList;
 
 public class Ui {
 
@@ -73,6 +73,7 @@ public class Ui {
 		LocalDateTime dateTime = parser.parseDateTimeStr(dateTimeStr, this);
 		String dtStrOutput = dateTime.format(DateTimeFormatter.ofPattern("MMM d yyyy hh:mm a"));
 
+		int itemNum = 1;
 		for (int i = 0; i < tasklist.size(); i++) {
 			Task curTask = tasklist.get(i);
 			if (curTask instanceof Deadline) {
@@ -83,7 +84,8 @@ public class Ui {
 								"These are the deadline/events that occur on %s", dtStrOutput));
 					}
 					hasItem = true;
-					println(String.format("%d.%s", i + 1, deadline));
+					println(String.format("%d.%s", itemNum, deadline));
+					itemNum += 1;
 				}
 			}
 			if (curTask instanceof Event) {
@@ -94,7 +96,8 @@ public class Ui {
 								"These are the deadline/events that occur on %s", dtStrOutput));
 					}
 					hasItem = true;
-					println(String.format("%d.%s", i + 1, event));
+					println(String.format("%d.%s", itemNum, event));
+					itemNum += 1;
 				}
 			}
 		}

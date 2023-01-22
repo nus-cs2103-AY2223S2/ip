@@ -1,10 +1,8 @@
-package seedu.shao;
-
-import seedu.shao.commands.Command;
-import seedu.shao.parser.Parser;
-import seedu.shao.storage.Storage;
-import seedu.shao.tasklist.TaskList;
-import seedu.shao.ui.Ui;
+import commands.Command;
+import parser.Parser;
+import storage.Storage;
+import tasklist.TaskList;
+import ui.Ui;
 
 public class Shao {
 

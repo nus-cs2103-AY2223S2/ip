@@ -1,6 +1,6 @@
-package seedu.shao.commands;
+package commands;
 
-import seedu.shao.ui.Ui;
+import ui.Ui;
 
 public class Command {
 	private String[] messageArray;

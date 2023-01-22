@@ -1,4 +1,4 @@
-package seedu.shao.storage;
+package storage;
 
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
@@ -12,10 +12,10 @@ import java.nio.file.Paths;
 import java.util.Scanner;
 import java.util.stream.Stream;
 
-import seedu.shao.parser.Parser;
-import seedu.shao.task.Task;
-import seedu.shao.tasklist.TaskList;
-import seedu.shao.ui.Ui;
+import parser.Parser;
+import task.Task;
+import tasklist.TaskList;
+import ui.Ui;
 
 public class Storage {
 

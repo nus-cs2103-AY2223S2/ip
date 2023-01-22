@@ -1,8 +1,8 @@
-package seedu.shao.commands;
+package commands;
 
-import seedu.shao.storage.Storage;
-import seedu.shao.tasklist.TaskList;
-import seedu.shao.ui.Ui;
+import storage.Storage;
+import tasklist.TaskList;
+import ui.Ui;
 
 public class DeleteCommand extends Command {
 

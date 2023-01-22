@@ -1,7 +1,7 @@
-package seedu.shao.commands;
+package commands;
 
-import seedu.shao.tasklist.TaskList;
-import seedu.shao.ui.Ui;
+import tasklist.TaskList;
+import ui.Ui;
 
 public class ListCommand extends Command {
 

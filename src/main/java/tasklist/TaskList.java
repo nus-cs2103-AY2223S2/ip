@@ -1,11 +1,11 @@
-package seedu.shao.tasklist;
+package tasklist;
 
 import java.util.ArrayList;
 import java.util.List;
 
-import seedu.shao.storage.Storage;
-import seedu.shao.task.Task;
-import seedu.shao.ui.Ui;
+import storage.Storage;
+import task.Task;
+import ui.Ui;
 
 public class TaskList {
 
