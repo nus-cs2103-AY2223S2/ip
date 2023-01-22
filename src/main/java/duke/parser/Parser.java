@@ -1,12 +1,13 @@
-package duke.Parser;
+package duke.parser;
 
-import duke.Commands.ByeCommand;
-import duke.Commands.Command;
-import duke.Commands.DeleteCommand;
-import duke.Commands.InvalidCommand;
-import duke.Commands.ListCommand;
-import duke.Commands.MarkCommand;
-import duke.Commands.TaskCommand;
+import duke.commands.ByeCommand;
+import duke.commands.Command;
+import duke.commands.DeleteCommand;
+import duke.commands.InvalidCommand;
+import duke.commands.ListCommand;
+import duke.commands.MarkCommand;
+import duke.commands.TaskCommand;
+
 /**
  * Parser class that parses the user input.
  */
@@ -21,22 +22,23 @@ public class Parser {
     public static Command parse(String fullCommand) {
         String lowercaseCommand = fullCommand.toLowerCase();
         Command command;
-        if (lowercaseCommand.equals("bye"))
+        if (lowercaseCommand.equals("bye")) {
             command = new ByeCommand();
-        else if (lowercaseCommand.equals("list"))
+        } else if (lowercaseCommand.equals("list")) {
             command = new ListCommand();
-        else if (lowercaseCommand.startsWith("todo"))
+        } else if (lowercaseCommand.startsWith("todo")) {
             command = new TaskCommand('T', fullCommand);
-        else if (lowercaseCommand.startsWith("deadline"))
+        } else if (lowercaseCommand.startsWith("deadline")) {
             command = new TaskCommand('D', fullCommand);
-        else if (lowercaseCommand.startsWith("event"))
+        } else if (lowercaseCommand.startsWith("event")) {
             command = new TaskCommand('E', fullCommand);
-        else if (lowercaseCommand.startsWith("delete"))
+        } else if (lowercaseCommand.startsWith("delete")) {
             command = new DeleteCommand(fullCommand);
-        else if (lowercaseCommand.contains("mark"))
+        } else if (lowercaseCommand.contains("mark")) {
             command = new MarkCommand(!lowercaseCommand.startsWith("unmark"), fullCommand);
-        else
+        } else {
             command = new InvalidCommand();
+        }
         return command;
     }
 

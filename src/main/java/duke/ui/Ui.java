@@ -1,10 +1,10 @@
-package duke.Ui;
+package duke.ui;
 
 import java.util.ArrayList;
 import java.util.Scanner;
 
-import duke.Task.Task;
-import duke.TaskList.TaskList;
+import duke.task.Task;
+import duke.tasklist.TaskList;
 
 /**
  * Ui class that handles all user interactions.
@@ -53,10 +53,11 @@ public class Ui {
      * @param tasks The current task list.
      */
     public void showSuccessfulLoad(TaskList tasks) {
-        if (tasks.size() == 0)
+        if (tasks.size() == 0) {
             System.out.println("  Data file was loaded but no tasks could be found.");
-        else
+        } else {
             System.out.println("  Tasks loaded successfully!");
+        }
     }
 
     
@@ -103,10 +104,11 @@ public class Ui {
      * @param toAdd True if task is to be added, false otherwise.
      */
     public void printTask(Task task, ArrayList<Task> taskList, boolean toAdd) {
-        if (toAdd)
+        if (toAdd) {
             System.out.println("  Got it. I've added this task:");
-        else
+        } else {
             System.out.println("  Noted. I've removed this task:");
+        }
         System.out.println(String.format("  %s", task.toString()));
         System.out.println(String.format("  Now you have %d %s in the list.", taskList.size(),
                 taskList.size() == 1 ? "task" : "tasks"));
@@ -120,10 +122,11 @@ public class Ui {
      * @param toMark True if task is to be marked as done, false otherwise.
      */
     public void printMarkTask(Task task, boolean toMark) {
-        if (toMark)
+        if (toMark) {
             System.out.println("  Nice! I've marked this task as done:");
-        else
+        } else {
             System.out.println("  I've marked this task as not done:");
+        }
         System.out.println(String.format("  %s", task.toString()));
     }
 

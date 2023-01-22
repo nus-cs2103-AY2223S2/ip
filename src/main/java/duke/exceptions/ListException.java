@@ -1,4 +1,5 @@
-package duke.Exceptions;
+package duke.exceptions;
+
 /**
  * ListException class that extends DukeException.
  */

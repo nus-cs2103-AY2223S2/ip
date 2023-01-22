@@ -1,12 +1,13 @@
-package duke.Commands;
+package duke.commands;
 
-import duke.Exceptions.DukeException;
-import duke.Storage.Storage;
-import duke.TaskList.TaskList;
-import duke.Ui.Ui;
+import duke.exceptions.DukeException;
+import duke.storage.Storage;
+import duke.tasklist.TaskList;
+import duke.ui.Ui;
 /**
  * Command interface that is implemented by all commands.
  */
+
 public interface Command {
 
     /**

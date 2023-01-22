@@ -1,8 +1,8 @@
-package duke.Commands;
+package duke.commands;
 
-import duke.Storage.Storage;
-import duke.TaskList.TaskList;
-import duke.Ui.Ui;
+import duke.storage.Storage;
+import duke.tasklist.TaskList;
+import duke.ui.Ui;
 
 public class ByeCommand implements Command {
     

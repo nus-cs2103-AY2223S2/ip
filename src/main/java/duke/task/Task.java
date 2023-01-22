@@ -1,7 +1,9 @@
-package duke.Task;
+package duke.task;
+
 /**
  * Task class that represents a task.
  */
+
 public class Task {
     private String description;
     private boolean isMark;

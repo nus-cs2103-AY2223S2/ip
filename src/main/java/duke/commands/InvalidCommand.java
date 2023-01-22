@@ -1,13 +1,14 @@
-package duke.Commands;
+package duke.commands;
 
-import duke.Exceptions.DukeException;
-import duke.Exceptions.InvalidInputException;
-import duke.Storage.Storage;
-import duke.TaskList.TaskList;
-import duke.Ui.Ui;
+import duke.exceptions.DukeException;
+import duke.exceptions.InvalidInputException;
+import duke.storage.Storage;
+import duke.tasklist.TaskList;
+import duke.ui.Ui;
 /**
  * InvalidCommand class that implements the Command interface.
  */
+
 public class InvalidCommand implements Command {
 
     /** 
