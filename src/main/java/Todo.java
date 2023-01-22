@@ -7,4 +7,8 @@ public class Todo extends Task1{
     System.out.print("[T]");
   }
 
+  @Override
+  public String toString() {
+    return "todo";
+  }
 }

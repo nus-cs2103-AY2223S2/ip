@@ -13,4 +13,9 @@ public class Deadline extends Task1{
   public void printTime() {
     System.out.println(" (by: " + time + ")");
   }
+
+  @Override
+  public String toString() {
+    return "deadline";
+  }
 }

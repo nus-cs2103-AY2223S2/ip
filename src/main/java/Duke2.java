@@ -29,52 +29,71 @@ public class Duke2 {
     return curStr.toString();
   }
 
-  public static void addTodo(String[] strArr, ArrayList<Task1> tasks) {
-    System.out.println("---------------------------");
-    System.out.println("Got it. I've added this task:");
-    String curString = combineStrArr(strArr);
-    System.out.println(" [T][ ] " + curString);
-    Task1 curTask = new Todo(curString);
-    tasks.add(curTask);
-    int taskNum = tasks.size();
-    System.out.println("Now you have " + taskNum + " tasks in the list.");
-    System.out.println("---------------------------");
+  public static void addTodo(String[] strArr, ArrayList<Task1> tasks) throws EmptyDescription {
+    if (strArr.length < 2) {
+      throw new EmptyDescription(new Todo(""));
+    } else {
+      System.out.println("---------------------------");
+      System.out.println("Got it. I've added this task:");
+      String curString = combineStrArr(strArr);
+      System.out.println(" [T][ ] " + curString);
+      Task1 curTask = new Todo(curString);
+      tasks.add(curTask);
+      int taskNum = tasks.size();
+      System.out.println("Now you have " + taskNum + " tasks in the list.");
+      System.out.println("---------------------------");
+    }
   }
 
-  public static void addDeadline(String str, ArrayList<Task1> tasks) {
-    System.out.println("---------------------------");
-    System.out.println("Got it. I've added this task:");
-    String[] strArr1 = str.split("/");
-    String timeWithBy = strArr1[strArr1.length - 1];
-    String[] strArr2 = timeWithBy.split(" ");
-    String time = combineStrArr(strArr2);
-    String[] strArr3 = strArr1[0].split(" ");
-    String task = combineStrArr(strArr3);
-    System.out.println(" [D][ ] " + task + " (by: " + time + ")");
-    Task1 curTask = new Deadline(task, time);
-    tasks.add(curTask);
-    System.out.println("Now you have " + tasks.size() + " tasks in the list.");
-    System.out.println("---------------------------");
+  public static void addDeadline(String str, ArrayList<Task1> tasks) throws EmptyDescription, EmptyTime {
+    String[] strArr = str.split(" ");
+    String[] strArrP = str.split("/");
+    if (strArr.length < 2) {
+      throw new EmptyDescription(new Deadline("", ""));
+    } else if (strArrP.length < 2) {
+      throw new EmptyTime(new Deadline("", ""));
+    } else {
+      System.out.println("---------------------------");
+      System.out.println("Got it. I've added this task:");
+      String[] strArr1 = str.split("/");
+      String timeWithBy = strArr1[strArr1.length - 1];
+      String[] strArr2 = timeWithBy.split(" ");
+      String time = combineStrArr(strArr2);
+      String[] strArr3 = strArr1[0].split(" ");
+      String task = combineStrArr(strArr3);
+      System.out.println(" [D][ ] " + task + " (by: " + time + ")");
+      Task1 curTask = new Deadline(task, time);
+      tasks.add(curTask);
+      System.out.println("Now you have " + tasks.size() + " tasks in the list.");
+      System.out.println("---------------------------");
+    }
   }
-
-  public static void addEvent(String str, ArrayList<Task1> tasks) {
-    System.out.println("---------------------------");
-    System.out.println("Got it. I've added this task:");
-    String[] strArr1 = str.split("/");
-    String timeWithFrom = strArr1[strArr1.length - 2];
-    String timeWithTo = strArr1[strArr1.length - 1];
-    String[] strArr2 = timeWithFrom.split(" ");
-    String[] strArr3 = timeWithTo.split(" ");
-    String[] strArr4 = strArr1[0].split(" ");
-    String startTime = combineStrArr(strArr2);
-    String endTime = combineStrArr(strArr3);
-    String task = combineStrArr(strArr4);
-    System.out.println(" [E][ ] " + task + " (from: "
-        + startTime + " to: " + endTime + ")");
-    Task1 curTask = new Event(task, startTime, endTime);
-    tasks.add(curTask);
-    System.out.println("Now you have " + tasks.size() + " tasks in the list.");
-    System.out.println("---------------------------");
+  public static void addEvent(String str, ArrayList<Task1> tasks) throws EmptyDescription, EmptyTime {
+    String[] strArr = str.split(" ");
+    String[] strArrP = str.split("/");
+    if (strArr.length < 2) {
+      throw new EmptyDescription(new Event("", "", ""));
+    } else if (strArrP.length < 3) {
+      throw new EmptyTime(new Event("", "", ""));
+    } else {
+      System.out.println("---------------------------");
+      System.out.println("Got it. I've added this task:");
+      String[] strArr1 = str.split("/");
+      String timeWithFrom = strArr1[strArr1.length - 2];
+      String timeWithTo = strArr1[strArr1.length - 1];
+      String[] strArr2 = timeWithFrom.split(" ");
+      String[] strArr3 = timeWithTo.split(" ");
+      String[] strArr4 = strArr1[0].split(" ");
+      String startTime = combineStrArr(strArr2);
+      String endTime = combineStrArr(strArr3);
+      String task = combineStrArr(strArr4);
+      System.out.println(" [E][ ] " + task + " (from: "
+          + startTime + " to: " + endTime + ")");
+      Task1 curTask = new Event(task, startTime, endTime);
+      tasks.add(curTask);
+      System.out.println("Now you have " + tasks.size() + " tasks in the list.");
+      System.out.println("---------------------------");
+    }
   }
 
   public static void markTask(Task1 curTask, Boolean mark) {
@@ -97,7 +116,11 @@ public class Duke2 {
     System.out.println("---------------------------");
   }
 
-  public static void main(String[] args) throws IOException {
+  public static void throwDontKnow() throws DontKnow{
+    throw new DontKnow();
+  }
+
+  public static void main(String[] args) throws IOException, EmptyDescription {
     String logo = " ____        _        \n"
         + "|  _ \\ _   _| | _____ \n"
         + "| | | | | | | |/ / _ \\\n"
@@ -123,11 +146,39 @@ public class Duke2 {
         Task1 curTask = tasks.get(curIndex);
         markTask(curTask, false);
       } else if (strArr[0].equals("todo")) {
-        addTodo(strArr, tasks);
+        try {
+          addTodo(strArr, tasks);
+        } catch (EmptyDescription ep) {
+          System.out.println(ep.emptyDescription);
+          System.out.println("---------------------------");
+        }
       } else if (strArr[0].equals("deadline")) {
-        addDeadline(str, tasks);
+        try {
+          addDeadline(str, tasks);
+        } catch (EmptyDescription ep) {
+          System.out.println(ep.emptyDescription);
+          System.out.println("---------------------------");
+        } catch (EmptyTime e) {
+          System.out.println(e.emptyTime);
+          System.out.println("---------------------------");
+        }
       } else if (strArr[0].equals("event")) {
-        addEvent(str, tasks);
+        try {
+          addEvent(str, tasks);
+        } catch (EmptyDescription ep) {
+          System.out.println(ep.emptyDescription);
+          System.out.println("---------------------------");
+        } catch (EmptyTime e) {
+          System.out.println(e.emptyTime);
+          System.out.println("---------------------------");
+        }
+      } else {
+        try {
+          throwDontKnow();
+        } catch (DontKnow dontKnow) {
+          System.out.println(dontKnow.dontKnow);
+          System.out.println("---------------------------");
+        }
       }
       str = br.readLine();
       strArr = str.split(" ");

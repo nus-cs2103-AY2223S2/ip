@@ -15,4 +15,9 @@ public class Event extends Task1{
     System.out.println(" (from: " + startTime
         + " to: " + endTime + ")");
   }
+
+  @Override
+  public String toString() {
+    return "event";
+  }
 }
