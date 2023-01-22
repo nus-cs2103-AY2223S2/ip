@@ -1,22 +1,26 @@
 package Tasks;
 
 
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+
 /**
  * Represents the Event class
  */
 public class Event extends Task {
-    protected String startTime;
-    protected String endTime;
+    protected LocalDateTime startTime;
+    protected LocalDateTime endTime;
 
     /**
      * The constructor of Event
      * @param desc the description of event
-     * @param time the time of event
+     * @param startTime the start time of event
+     * @param endTime the end time of event
      * @param done whether the event is done
      */
-    public Event(String desc, String starTime, String endTime, boolean done) {
+    public Event(String desc, LocalDateTime startTime, LocalDateTime endTime, boolean done) {
         super(done, desc);
-        this.startTime = starTime;
+        this.startTime = startTime;
         this.endTime = endTime;
     }
 
@@ -59,7 +63,8 @@ public class Event extends Task {
      */
     @Override
     public String toString() {
-        return "[E]" + super.toString() + " (/from" + this.startTime + "/to" + this.endTime + ")";
+        return "[E]" + super.toString() + " (from: " + this.startTime.format(DateTimeFormatter.ofPattern("MMM dd yyyy HH:mm")) +
+                " to " + this.endTime.format(DateTimeFormatter.ofPattern("MMM dd yyyy HH:mm")) + ")";
     }
 
     @Override
@@ -72,4 +77,7 @@ public class Event extends Task {
         }
         return "E | " + d + " | " + this.desc +" | " + this.startTime + " | " + this.endTime;
     }
+
+
+
 }
