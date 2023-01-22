@@ -1,0 +1,17 @@
+hello
+todo run
+deadline project /Monday 5pm
+event meeting /Thursday 4pm /6pm
+event training /Wednesday 7pm /9pm
+todo
+deadline tutorial
+event lecture /Monday
+list
+mark 2
+mark 3
+unmark 3
+delete 3
+mark 2
+unmark 3
+delete 5
+bye
