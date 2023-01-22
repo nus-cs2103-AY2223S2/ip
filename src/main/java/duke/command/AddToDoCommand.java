@@ -2,8 +2,11 @@ package duke.command;
 
 import duke.task.ToDo;
 
+/**
+ * The command to add a todo to the task list.
+ */
 public class AddToDoCommand extends Command {
-    private ToDo toDo;
+    private final ToDo toDo;
 
     public AddToDoCommand(ToDo task) {
         this.toDo = task;

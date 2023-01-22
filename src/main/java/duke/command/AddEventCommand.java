@@ -2,8 +2,11 @@ package duke.command;
 
 import duke.task.Event;
 
+/**
+ * The command to add an event to the task list.
+ */
 public class AddEventCommand extends Command {
-    private Event event;
+    private final Event event;
 
     public AddEventCommand(Event event) {
         this.event = event;

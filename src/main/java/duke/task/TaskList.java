@@ -2,10 +2,12 @@ package duke.task;
 
 import java.util.ArrayList;
 
-import duke.task.Task;
-
+/**
+ * The task list class.
+ * Contains the task list and operations to modify the task list.
+ */
 public class TaskList {
-    private ArrayList<Task> taskList = new ArrayList<>();
+    private final ArrayList<Task> taskList = new ArrayList<>();
 
     public void addTask(Task task) {
         taskList.add(task);

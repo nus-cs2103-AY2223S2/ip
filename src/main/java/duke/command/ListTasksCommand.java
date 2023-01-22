@@ -1,5 +1,8 @@
 package duke.command;
 
+/**
+ * The command to list all tasks in the task list.
+ */
 public class ListTasksCommand extends Command {
     public ListTasksCommand() {
     }

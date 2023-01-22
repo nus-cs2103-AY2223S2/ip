@@ -1,9 +1,16 @@
 package duke.task;
 
+/**
+ * The task class.
+ */
 public class Task {
     private boolean done;
-    private String task;
+    private final String task;
 
+    /**
+     * Creates a new task.
+     * @param task The task.
+     */
     public Task(String task) {
         this.task = task;
         this.done = false;

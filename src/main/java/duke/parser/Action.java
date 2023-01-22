@@ -4,7 +4,7 @@ enum Action {
     DEADLINE("deadline"), DELETE("delete"), ERROR("error"), EVENT("event"),
     LIST("list"), MARK("mark"), TODO("todo"), UNMARK("unmark");
 
-    private String action;
+    private final String action;
 
     Action(String action) {
         this.action = action;

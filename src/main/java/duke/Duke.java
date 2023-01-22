@@ -6,17 +6,21 @@ import duke.storage.Storage;
 import duke.task.TaskList;
 import duke.ui.Ui;
 
+/**
+ * The main class of the Duke program.
+ * The Duke program is a task manager that allows users to add, delete and mark
+ * tasks as done.
+ */
 public class Duke {
-    private Ui ui;
-    private Storage storage;
-    private TaskList taskList;
-    private Parser parser;
 
+    /**
+     * The main method of the Duke program.
+     */
     public Duke() throws DukeException {
-        ui = new Ui();
-        parser = new Parser();
-        storage = new Storage();
-        taskList = storage.readFromFile();
+        Ui ui = new Ui();
+        Parser parser = new Parser();
+        Storage storage = new Storage();
+        TaskList taskList = storage.readFromFile();
 
         ui.printWelcomeMessage();
         String userInput = ui.readCommand();
