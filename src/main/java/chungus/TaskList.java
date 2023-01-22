@@ -57,4 +57,21 @@ class TaskList {
         tasks.remove(idx);
         return ret;
     }
+
+    @Override
+    public boolean equals(Object _other) {
+        if (!(_other instanceof TaskList)) {
+            return false;
+        }
+        TaskList other = (TaskList) _other;
+        if (this.tasks.size() != other.tasks.size()) {
+            return false;
+        }
+        for (int i = 0; i < this.tasks.size(); i++) {
+            if (!(this.tasks.get(i).equals(other.tasks.get(i)))) {
+                return false;
+            }
+        }
+        return true;
+    }
 }

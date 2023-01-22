@@ -1,5 +1,7 @@
 package chungus;
 
+import chungus.util.Pair;
+
 class Chonk {
     public static String chonkify(String s) {
         return s.length() + " " + s;
@@ -27,23 +29,5 @@ class Chonk {
         }
         String v = s.substring(idx, idx + chonkLen);
         return new Pair<>(v, idx + chonkLen);
-    }
-}
-
-class Pair<S, T> {
-    private S first;
-    private T second;
-
-    public Pair(S _first, T _second) {
-        first = _first;
-        second = _second;
-    }
-
-    public S first() {
-        return first;
-    }
-
-    public T second() {
-        return second;
     }
 }

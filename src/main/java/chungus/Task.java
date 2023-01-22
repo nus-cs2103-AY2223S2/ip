@@ -3,6 +3,8 @@ package chungus;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
+import chungus.util.Pair;
+
 abstract class Task {
     private String desc;
     private boolean isDone;
@@ -96,6 +98,15 @@ class Todo extends Task {
 
         return ret;
     }
+
+    @Override
+    public boolean equals(Object _other) {
+        if (!(_other instanceof Todo)) {
+            return false;
+        }
+        Todo other = (Todo) _other;
+        return this.desc().equals(other.desc());
+    }
 }
 
 class Deadline extends Task {
@@ -150,10 +161,20 @@ class Deadline extends Task {
 
         return ret;
     }
+
+    @Override
+    public boolean equals(Object _other) {
+        if (!(_other instanceof Deadline)) {
+            return false;
+        }
+        Deadline other = (Deadline) _other;
+        return this.desc().equals(other.desc()) && this.deadline.equals(other.deadline);
+    }
 }
 
 class Event extends Task {
-    LocalDateTime from, to;
+    LocalDateTime from;
+    LocalDateTime to;
 
     public Event(String desc, LocalDateTime _from, LocalDateTime _to) {
         super(desc);
@@ -210,5 +231,14 @@ class Event extends Task {
         }
 
         return ret;
+    }
+
+    @Override
+    public boolean equals(Object _other) {
+        if (!(_other instanceof Event)) {
+            return false;
+        }
+        Event other = (Event) _other;
+        return this.desc().equals(other.desc()) && this.from.equals(other.from) && this.to.equals(other.to);
     }
 }
