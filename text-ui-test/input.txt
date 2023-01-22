@@ -2,11 +2,11 @@ todo borrow book
 list
 mark 1
 unmark 1
-deadline return book /by Sunday
+deadline return book /by 2022-11-11/11:00
 list
 mark 2
 unmark 2
-event project meeting /from Mon 2pm /to 4pm
+event project meeting /from 2022-10-11/11:00 /to 2022-10-11/12:00
 mark 3
 list
 unmark 3
@@ -17,7 +17,7 @@ deadline return book
 deadline return book /by
 deadline /by sunday
 deadline /by
-deadline /by 2020-11-12
+deadline /by 2020-11-12-1000/11:00
 event
 event /from /to
 event meeting /from sunday
@@ -25,7 +25,7 @@ event meeting /from /to
 event /from
 event /to
 event meeting /from /to sunday
-event meeting /from 2022-11-11 /to 2022-11-12
+event meeting /from 2022-11-11-1000/11:00 /to 2022-11-11-1100/12:00
 delete
 delete 1
 delete k

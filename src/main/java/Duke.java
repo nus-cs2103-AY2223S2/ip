@@ -88,7 +88,7 @@ public class Duke {
                 Task task = new Deadline(taskName, dueDate);
                 addToList(task);
             } catch (DateTimeParseException e) {
-                displayMessage("Please enter a valid date in the format YYYY-MM-DD\n");
+                displayMessage("Please enter a valid date in the format YYYY-MM-DD/HH:mm\n");
             }
         }
     }
@@ -128,7 +128,7 @@ public class Duke {
                 Task task = new Event(taskName, taskFrom, taskTo);
                 addToList(task);
             } catch (DateTimeParseException e) {
-                System.out.println("Please enter valid dates in the format YYYY-MM-DD");
+                displayMessage("Please enter valid dates in the format YYYY-MM-DD/HH:mm\n");
             }
 
         }
