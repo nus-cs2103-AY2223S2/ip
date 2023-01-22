@@ -28,4 +28,11 @@ deadline task8 /by 6th May
 event task9 /by 2pm
 event task10 /from 7th July 5am /to
 event task11 /from 7th July 5am /to 7th July 10am
+delete 5
+delete 4
+delete 3
+delete 2
+delete 1
+delete 0
+list
 bye

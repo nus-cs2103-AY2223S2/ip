@@ -25,6 +25,16 @@ public class Event extends Task {
     }
 
     @Override
+    public String getRecreateCommand(int id) {
+        String result = "event " + description + " /from "
+                + from + " /to " + to;
+        if (isDone) {
+            result += "\nmark " + id;
+        }
+        return result;
+    }
+
+    @Override
     public String toString() {
         return "[E]" + super.toString() + " (from: " + from + " to: " + to + ")";
     }

@@ -15,6 +15,14 @@ public class Todo extends Task {
     }
 
     @Override
+    public String getRecreateCommand(int id) {
+        String result = "todo " + description;
+        if (isDone) {
+            result += "\nmark " + id;
+        }
+        return result;
+    }
+    @Override
     public String toString() {
         return "[T]" + super.toString();
     }

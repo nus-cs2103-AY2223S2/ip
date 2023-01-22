@@ -1,24 +1,32 @@
 import command.Command;
 
+import java.io.IOException;
 import java.util.Scanner;
 
-import task.Deadline;
-import task.Event;
 import task.Task;
 import task.TaskList;
-import task.Todo;
 
 /**
  * Duke command line tool that helps to track tasks.
  */
 public class Duke {
     /** Scanner used by each duke */
-    private Scanner scanner;
+    private final Scanner scanner;
     /** Whether the duke is still running or has been commanded to end */
     private boolean isRunning;
 
     /** Task list */
-    private TaskList tasks;
+    private final TaskList tasks;
+
+    /**
+     * Constructs a duke.
+     */
+    public Duke() {
+        scanner = new Scanner(System.in);
+        isRunning = false;
+        System.out.println("Hello!");
+        tasks = new TaskList("./data/tasks.txt");
+    }
 
     /**
      * Entry point to start and run duke.
@@ -34,86 +42,53 @@ public class Duke {
      * Runs the duke.
      */
     public void run() {
-        init();
+        isRunning = true;
+        System.out.println("Awaiting commands...");
         while (isRunning) {
-            execute(scanner.nextLine());
+            try {
+                execute(new Command(scanner.nextLine()));
+            } catch (IllegalArgumentException e) {
+                System.out.println(e.getMessage());
+            }
         }
         exit();
     }
-    private void init() {
-        scanner = new Scanner(System.in);
-        isRunning = true;
-        tasks = new TaskList();
-        System.out.println("Hello!");
-    }
 
-    private void execute(String input) {
-        try {
-            Command command = new Command(input);
-            switch (command.getName()) {
-                case NO_OP:
-                    break;
-                case BYE:
-                    isRunning = false;
-                    break;
-                case TODO:
-                    addTask(new Todo(
-                            command.getArgumentValue(Command.Argument.TODO)));
-                    break;
-                case DEADLINE:
-                    addTask(new Deadline(
-                            command.getArgumentValue(Command.Argument.DEADLINE),
-                            command.getArgumentValue(Command.Argument.BY)));
-                    break;
-                case EVENT:
-                    addTask(new Event(
-                            command.getArgumentValue(Command.Argument.EVENT),
-                            command.getArgumentValue(Command.Argument.FROM),
-                            command.getArgumentValue(Command.Argument.TO)));
-                    break;
-                case LIST:
-                    showTasks();
-                    break;
-                case MARK:
-                    toggleTask(tasks.get(Integer.parseInt(
-                            command.getArgumentValue(Command.Argument.MARK))));
-                    break;
-                case DELETE:
-                    deleteTask(tasks.get(Integer.parseInt(
-                            command.getArgumentValue(Command.Argument.DELETE))));
-                    break;
-            }
-        } catch (IllegalArgumentException e) {
-            System.out.println(e.getMessage());
+    private void execute(Command command) {
+        switch (command.getName()) {
+        case NO_OP:
+            break;
+        case BYE:
+            isRunning = false;
+            break;
+        case TODO:
+            // FallThrough
+        case DEADLINE:
+            // FallThrough
+        case EVENT:
+            System.out.println("Added task: " + tasks.execute(command));
+            break;
+        case LIST:
+            System.out.println(tasks);
+            break;
+        case MARK:
+            Task task = tasks.execute(command);
+            System.out.println("Marked task: " + task + " as " + (task.getIsDone() ? "" : "not ") + "done");
+            break;
+        case DELETE:
+            System.out.println("Deleted task: " + tasks.execute(command));
+            break;
         }
     }
 
     private void exit() {
         scanner.close();
-        tasks.save();
+        try {
+            tasks.save();
+        } catch (IOException e) {
+            System.out.println("Error saving tasks to disk!");
+        }
         System.out.println("Good bye!");
     }
 
-    private void addTask(Task task) {
-        tasks.add(task);
-        System.out.println("Added task.Task " + task);
-    }
-
-    private void showTasks() {
-        int index = 1;
-        for (Task task : tasks) {
-           System.out.println(index + ". " + task);
-           index += 1;
-        }
-    }
-
-    private void toggleTask(Task task) {
-        task.toggleDone();
-        System.out.println("Marked task.Task " + task + " as " + (task.getIsDone() ? "" : "not ") + "done");
-    }
-
-    private void deleteTask(Task task) {
-        tasks.remove(task);
-        System.out.println("Deleted task.Task " + task);
-    }
 }

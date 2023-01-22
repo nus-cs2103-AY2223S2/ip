@@ -3,7 +3,7 @@ package task;
 /**
  * Task containing their relevant information and completion status.
  */
-public class Task {
+public abstract class Task {
 
     /** Description of the task */
     protected String description;
@@ -40,4 +40,12 @@ public class Task {
     public String toString() {
         return (isDone ? "[X] " : "[ ] ") + description;
     }
+
+    /**
+     * Returns the command(s) required to recreate the task.
+     *
+     * @param id Identifier of the task, usually assigned by task list.
+     * @return the command(s).
+     */
+    public abstract String getRecreateCommand(int id);
 }

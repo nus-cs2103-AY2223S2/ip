@@ -77,7 +77,7 @@ public class Command {
         try {
             return Argument.valueOf(arg.toUpperCase());
         } catch (IllegalArgumentException e) {
-            throw new IllegalArgumentException("command.Command "
+            throw new IllegalArgumentException("Command "
                     + arg + " not recognised");
         }
     }
@@ -120,13 +120,13 @@ public class Command {
     private void checkHasOnlyArgs(ArrayList<Argument> args)
             throws IllegalArgumentException {
         if (arguments.size() != args.size() + 1) {
-            throw new IllegalArgumentException("command.Command " + getName()
+            throw new IllegalArgumentException("Command " + getName()
                     + " takes in " + (args.size() + 1) + " argument(s) but "
                     + arguments.size() + " were given");
         }
         for (Argument arg : args) {
             if (!arguments.containsKey(arg)) {
-                throw new IllegalArgumentException("command.Command " + getName()
+                throw new IllegalArgumentException("Command " + getName()
                         + " requires argument " + arg + " but was not given");
             }
         }
@@ -136,7 +136,7 @@ public class Command {
             throws IllegalArgumentException {
         for (Argument arg : args) {
             if (!arguments.containsKey(arg) || arguments.get(arg).equals("")) {
-                throw new IllegalArgumentException("command.Command " + getName()
+                throw new IllegalArgumentException("Command " + getName()
                         + " requires argument " + arg + " but was not given");
             }
         }
