@@ -6,7 +6,6 @@ import java.time.format.DateTimeParseException;
 public class DateTimeUtils {
     public static boolean isCorrectDateFormat(String date) {
         try {
-            System.out.println(date);
             LocalDate localDate = LocalDate.parse(date);
         } catch (DateTimeParseException e) {
             return false;

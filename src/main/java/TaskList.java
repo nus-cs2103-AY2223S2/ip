@@ -3,6 +3,7 @@ import java.util.ArrayList;
 public class TaskList {
     private ArrayList<Task> taskList;
     private final static String ADDTASKMSG = "Got it. Added this task, I have:";
+    private final static String BANNER = "____________________________________________________________";
 
     /**
      * Constructor for Task List.
