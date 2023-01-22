@@ -1,3 +1,4 @@
 D | 0 | return book | 2/12/2019 1800
 E | 1 | hackathon | 4/01/2023 0100 | 5/01/2023 1200
 T | 1 | no more
+T | 1 | read book

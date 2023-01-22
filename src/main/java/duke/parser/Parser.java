@@ -7,6 +7,7 @@ import duke.command.AddDeadlineCommand;
 import duke.command.AddEventCommand;
 import duke.command.AddToDoCommand;
 import duke.command.Command;
+import duke.command.FindTasksCommand;
 import duke.command.ListTasksCommand;
 import duke.command.MarkTaskCommand;
 import duke.command.RemoveTaskCommand;
@@ -103,6 +104,8 @@ public class Parser {
                 return new AddDeadlineCommand(parseDeadlineTask(input));
             case EVENT:
                 return new AddEventCommand(parseEventTask(input));
+            case FIND:
+                return new FindTasksCommand(parseTask(input));
             default:
                 throw new DukeException("I'm sorry, but I don't know what that means :-(");
         }

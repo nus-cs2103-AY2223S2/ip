@@ -2,8 +2,6 @@ package duke.task;
 
 import java.util.ArrayList;
 
-import duke.task.Task;
-
 public class TaskList {
     private ArrayList<Task> taskList = new ArrayList<>();
 
@@ -33,6 +31,16 @@ public class TaskList {
 
     public Task deleteTask(int index) {
         return taskList.remove(index);
+    }
+
+    public ArrayList<Task> findTasks(String keyword) {
+        ArrayList<Task> foundTasks = new ArrayList<>();
+        for (Task task : taskList) {
+            if (task.getTask().contains(keyword)) {
+                foundTasks.add(task);
+            }
+        }
+        return foundTasks;
     }
 
     @Override

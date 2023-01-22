@@ -1,5 +1,6 @@
 package duke.ui;
 
+import java.util.ArrayList;
 import java.util.Scanner;
 
 import duke.DukeException;
@@ -49,6 +50,14 @@ public class Ui {
         System.out.println("\tHere are the tasks in your list:");
         for (int i = 0; i < taskList.getSize(); i++) {
             Task t = taskList.getTask(i);
+            System.out.println("\t\t" + (i + 1) + "." + t);
+        }
+    }
+
+    public void printFoundTasks(ArrayList<Task> foundTasks) {
+        System.out.println("\tHere are the matching tasks in your list:");
+        for (int i = 0; i < foundTasks.size(); i++) {
+            Task t = foundTasks.get(i);
             System.out.println("\t\t" + (i + 1) + "." + t);
         }
     }
