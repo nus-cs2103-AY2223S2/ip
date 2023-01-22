@@ -1,9 +1,6 @@
 package duke;
 
-import duke.task.DeadlineTask;
-import duke.task.EventTask;
-import duke.task.Task;
-import duke.task.TodoTask;
+import duke.task.*;
 
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -24,7 +21,11 @@ public class Duke {
 
     private final String SAVE_FILE_PATH = "./data/data.txt";
 
-    private final ArrayList<Task> tasks = new ArrayList<>();
+    private final TaskList taskList;
+
+    public Duke() {
+        taskList = new TaskList();
+    }
 
     /**
      * Saves the task data on to local storage.
@@ -46,7 +47,7 @@ public class Duke {
         }
 
         FileWriter fw = new FileWriter(saveFile);
-        for (Task task : tasks) {
+        for (Task task : taskList.allTasks()) {
             fw.write(task.serialise());
             fw.write(System.lineSeparator());
         }
@@ -85,7 +86,7 @@ public class Duke {
                     task = Task.deserialise(data);
                     break;
                 }
-                tasks.add(task);
+                taskList.addTask(task);
             }
         } catch (FileNotFoundException e) {
             return false;
@@ -99,7 +100,7 @@ public class Duke {
      * @param task duke.task.Task to be created.
      */
     private void createTask(Task task) {
-        tasks.add(task);
+        taskList.addTask(task);
         System.out.println("Hey new task added!");
         System.out.println(task);
     }
@@ -122,7 +123,7 @@ public class Duke {
      * @throws DukeException Exception thrown if index is invalid.
      */
     private void validateTaskIndex(Integer index) throws DukeException {
-        if (index < 0 || index >= tasks.size()) {
+        if (index < 0 || index >= taskList.size()) {
             throw new DukeException("No such task!");
         }
     }
@@ -184,7 +185,7 @@ public class Duke {
                 LocalDate targetDate = LocalDate.parse(dueArgs);
 
                 System.out.println("Relevant tasks on specified date:  ");
-                for (Task task : tasks) {
+                for (Task task : taskList.allTasks()) {
                     if (task instanceof EventTask) {
                         EventTask eventTask = (EventTask) task;
                         if (eventTask.getFrom().isEqual(targetDate) || eventTask.getFrom().isBefore(targetDate) ||
@@ -203,8 +204,8 @@ public class Duke {
 
             case list:
                 System.out.println("Arii has retrieved your current tasks...");
-                for (int i = 0; i < tasks.size(); i++) {
-                    System.out.printf("%d. %s\n", i + 1, tasks.get(i));
+                for (int i = 0; i < taskList.size(); i++) {
+                    System.out.printf("%d. %s\n", i + 1, taskList.get(i));
                 }
                 break;
 
@@ -213,10 +214,10 @@ public class Duke {
                 taskIndex = Integer.parseInt(cmd.split(" ")[1]) - 1;
                 validateTaskIndex(taskIndex);
 
-                tasks.get(taskIndex).setIsDone(true);
+                taskList.get(taskIndex).setIsDone(true);
 
                 System.out.println("This task is now done, what's next?");
-                System.out.println(tasks.get(taskIndex));
+                System.out.println(taskList.get(taskIndex));
                 break;
 
             case unmark:
@@ -224,10 +225,10 @@ public class Duke {
                 taskIndex = Integer.parseInt(cmd.split(" ")[1]) - 1;
                 validateTaskIndex(taskIndex);
 
-                tasks.get(taskIndex).setIsDone(false);
+                taskList.get(taskIndex).setIsDone(false);
 
                 System.out.println("This task is now not done, how disappointing...");
-                System.out.println(tasks.get(taskIndex));
+                System.out.println(taskList.get(taskIndex));
                 break;
 
             case delete:
@@ -235,7 +236,7 @@ public class Duke {
                 taskIndex = Integer.parseInt(cmd.split(" ")[1]) - 1;
                 validateTaskIndex(taskIndex);
 
-                tasks.remove(taskIndex);
+                taskList.remove(taskIndex);
 
                 System.out.println("duke.task.Task deleted. Are you skipping on work again?");
                 break;
