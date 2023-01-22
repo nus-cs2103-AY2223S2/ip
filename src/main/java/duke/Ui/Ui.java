@@ -81,4 +81,21 @@ public class Ui {
         }
     }
 
+    /**
+     * Prints all tasks that contain the keyword.
+     * @param matchingTasksIndex An arraylist of the indexes of the tasks that contain the keyword.
+     * @param tasks The current task list.
+     */
+    public void printMatchingTasks(ArrayList<Integer> matchingTasksIndex, ArrayList<Task> tasks) {
+        if (matchingTasksIndex.isEmpty()) {
+            System.out.println("  No matching tasks found.");
+        } else {
+            System.out.println("  Here are the matching tasks in your list:");
+            for (int i = 0; i < matchingTasksIndex.size(); i++) {
+                int taskIndex = matchingTasksIndex.get(i);
+                System.out.println(String.format("  %d.%s", taskIndex + 1, tasks.get(taskIndex).toString()));
+            }
+        }
+    }
+
 }

@@ -1,6 +1,7 @@
 package duke.TaskList;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 
 import duke.Exceptions.DukeException;
 import duke.Storage.Storage;
@@ -48,5 +49,20 @@ public class TaskList {
 
     public int size() {
         return this.tasks.size();
+    }
+
+    /**
+     * Finds tasks that contain the keyword and prints them out.
+     * @param keyword The keyword to search for.
+     * @param ui The ui object that handles printing to the user.
+     */
+    public void findTask(String keyword, Ui ui) {
+        ArrayList<Integer> matchingTasksIndex = new ArrayList<>();
+        for (int i = 0; i < this.tasks.size(); i++) {
+            if (this.tasks.get(i).getDescription().contains(keyword)) {
+                matchingTasksIndex.add(i);
+            }
+        }
+        ui.printMatchingTasks(matchingTasksIndex, this.tasks);
     }
 }
