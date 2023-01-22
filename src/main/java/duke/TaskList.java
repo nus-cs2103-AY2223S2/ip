@@ -53,4 +53,13 @@ public class TaskList {
             }
         }
     }
+
+    public String serializeTasks() {
+        StringBuilder sb = new StringBuilder();
+        for (Task task : this.list) {
+            sb.append(task.serialize());
+            sb.append("\n");
+        }
+        return sb.toString();
+    }
 }
