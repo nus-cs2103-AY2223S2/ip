@@ -1,11 +1,10 @@
-import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Duke {
 
     static Ui ui = new Ui();
     static Storage dukeSave = new Storage();
-    static ArrayList<Task> taskList = dukeSave.loadTaskList();
+    static TaskList taskList = dukeSave.loadTaskList();
     static Scanner userScan = new Scanner(System.in);
     static boolean loopEnd = false;
 

@@ -1,15 +1,14 @@
 import java.io.FileNotFoundException;
 import java.io.IOException;
-import java.util.ArrayList;
 import java.io.File;
 import java.util.Scanner;
 import java.io.FileWriter;
 
 public class Storage {
 
-    public ArrayList<Task> loadTaskList() {
+    public TaskList loadTaskList() {
         File dukeSave = new File("data/duke.txt");
-        ArrayList<Task> toLoad = new ArrayList<>();
+        TaskList toLoad = new TaskList();
         if (dukeSave.exists()) {
             try {
                 Scanner fileScan = new Scanner(dukeSave);
@@ -48,10 +47,10 @@ public class Storage {
         return toLoad;
     }
 
-    public void saveTaskList(ArrayList<Task> toSave) throws IOException {
+    public void saveTaskList(TaskList toSave) throws IOException {
         FileWriter dukeWrite = new FileWriter("data/duke.txt");
-        for (Task task : toSave) {
-            dukeWrite.write(task.toSaveString() + "\n");
+        for (int i = 0; i < toSave.size(); i++) {
+            dukeWrite.write(toSave.get(i).toSaveString() + "\n");
         }
         dukeWrite.close();
     }
