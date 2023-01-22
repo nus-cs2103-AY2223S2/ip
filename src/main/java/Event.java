@@ -1,3 +1,5 @@
+import java.time.temporal.TemporalAccessor;
+
 /**
  * A task with an associated start and end time
  */
@@ -5,14 +7,14 @@ public class Event extends Task {
   /**
    * String representation of the start time
    */
-  private final String start;
+  private final TemporalAccessor start;
 
   /**
    * String representation of the end time
    */
-  private final String end;
+  private final TemporalAccessor end;
 
-  public Event(String task, String start, String end) {
+  public Event(String task, TemporalAccessor start, TemporalAccessor end) {
     super(task);
     this.start = start;
     this.end = end;
@@ -23,6 +25,10 @@ public class Event extends Task {
 
   @Override
   public String toString() {
-    return String.format("%s (from: %s to: %s)", super.toString(), start, end);
+    return String.format("%s (from: %s to: %s)",
+     super.toString(), 
+     Utils.timeToString(start),
+     Utils.timeToString(end)
+    );
   }
 }

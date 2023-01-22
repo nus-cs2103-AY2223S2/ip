@@ -1,17 +1,14 @@
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
+import java.time.format.DateTimeParseException;
+import java.time.temporal.TemporalAccessor;
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Map;
 import java.util.function.Consumer;
 import java.util.function.Function;
 
 public final class Duke {
-    private final static String joiner(String[] args, int from, int to) {
-        return String.join(" ", Arrays.copyOfRange(args, from, to));
-    }
-
     public final static void main(String[] vargs) throws IOException {
         String logo = " ____        _        \n"
                 + "|  _ \\ _   _| | _____ \n"
@@ -84,7 +81,7 @@ public final class Duke {
                 return;
             }
 
-            String taskStr = joiner(args, 1, args.length);
+            String taskStr = Utils.joiner(args, 1, args.length);
             Task task = new ToDo(taskStr);
             addTask.accept(task);
         },
@@ -108,10 +105,15 @@ public final class Duke {
                 return;
             }
 
-            String taskStr = joiner(args, 1, index);
-            String time = joiner(args, index + 1, args.length);
-            Task task = new Deadline(taskStr, time);
-            addTask.accept(task);
+
+            try {
+                TemporalAccessor deadline = Utils.parseDateTime(args[index + 1], index + 2 >= args.length ? null : args[index + 2]);
+                String taskStr = Utils.joiner(args, 1, index);
+                Task task = new Deadline(taskStr, deadline);
+                addTask.accept(task);
+            } catch (DateTimeParseException e) {
+                System.out.format("Error parsing deadline: %s\n", e.getMessage());
+            }
         },
         "event", (args) -> {
             int fromIndex = -1, toIndex = -1;
@@ -148,12 +150,17 @@ public final class Duke {
                 return;
             }
 
-            String taskStr = joiner(args, 1, fromIndex);
-            String fromStr = joiner(args, fromIndex + 1, toIndex);
-            String toStr = joiner(args, toIndex + 1, args.length);
-        
-            Task task = new Event(taskStr, fromStr, toStr);
-            addTask.accept(task);
+            try {
+                String taskStr = Utils.joiner(args, 1, fromIndex);
+
+                TemporalAccessor fromTime = Utils.parseDateTime(args[fromIndex + 1], toIndex - fromIndex == 2 ? null : args[fromIndex + 2]);
+                TemporalAccessor toTime = Utils.parseDateTime(args[toIndex + 1], toIndex + 2 >= args.length ? null : args[toIndex + 2]);
+            
+                Task task = new Event(taskStr, fromTime, toTime);
+                addTask.accept(task);
+            } catch (DateTimeParseException e) {
+                System.out.format("Failed to parse the date you've given: %s\n", e.getParsedString());
+            }
         },
         "delete", (args) -> {
           try {
@@ -172,6 +179,8 @@ public final class Duke {
 
         while (true) {
             String input = reader.readLine();
+            if (input.isEmpty()) continue;
+
             String[] tokens = input.split(" ");
 
             if (funcMap.containsKey(tokens[0])) {
