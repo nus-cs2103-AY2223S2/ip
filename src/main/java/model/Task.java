@@ -1,7 +1,6 @@
 package model;
 
 import storage.Outputable;
-import utils.Printer;
 
 import java.io.IOException;
 import java.nio.charset.StandardCharsets;
@@ -86,7 +85,7 @@ abstract public class Task {
         }
     }
 
-    public static void save(Outputable out) {
+    public static void save(Outputable out) throws IOException {
         Base64.Encoder e = Base64.getEncoder();
         StringBuilder sb = new StringBuilder();
         for (Task t : Task.tasks) {
@@ -101,11 +100,7 @@ abstract public class Task {
             sb.append(s).append("\n");
         }
 
-        try {
-            out.write(sb.toString());
-        } catch (IOException err) {
-            Printer.printlnError(err.toString());
-        }
+        out.write(sb.toString());
     }
 
     public static void load(ArrayList<String> in) {

@@ -1,15 +1,7 @@
-package utils;
+package view;
 
-public class Printer {
+public class Printer implements Printable {
     private static final String SEPARATOR = "====================";
-
-    public static void println(String out) {
-        System.out.printf(out + "\n%s\n", SEPARATOR);
-    }
-
-    public static void printlnIndent(String out) {
-        System.out.printf("\t%s\n%s\n", out, SEPARATOR);
-    }
 
     public static void listPrint(String... args) {
         for (int i = 1; i <= args.length; ++i) {
@@ -18,11 +10,23 @@ public class Printer {
         System.out.println(SEPARATOR);
     }
 
-    public static void printIndent(String out) {
+    @Override
+    public void println(String out) {
+        System.out.printf(out + "\n%s\n", SEPARATOR);
+    }
+
+    @Override
+    public void printlnIndent(String out) {
+        System.out.printf("\t%s\n%s\n", out, SEPARATOR);
+    }
+
+    @Override
+    public void printIndent(String out) {
         System.out.printf("\t%s\n", out);
     }
 
-    public static void printlnError(String out) {
+    @Override
+    public void printlnError(String out) {
         System.out.printf("\t*Error* %s\n%s\n", out, SEPARATOR);
     }
 }

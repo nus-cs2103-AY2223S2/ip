@@ -5,15 +5,6 @@ import java.util.Arrays;
 import java.util.List;
 
 public class InputValidator {
-
-    private static final String TERMINATE_KEY = "bye";
-    private static final String LIST_KEY = "list";
-    private static final String CHECK_KEY = "done";
-    private static final String UNCHECK_KEY = "undone";
-    private static final String DELETE_KEY = "delete";
-    private static final String TODO_KEY = "todo";
-    private static final String DEADLINE_KEY = "deadline";
-    private static final String EVENT_KEY = "event";
     private static final String[] RESERVED = new String[]{"/by", "/to", "/from"};
 
     public static boolean isCheckInputValid(String input) {
@@ -118,38 +109,6 @@ public class InputValidator {
         res[2] = extractStartDateTime(input);
         res[3] = extractEndDateTime(input);
         return res;
-    }
-
-    public static Command extractCommandFromInput(String input) throws EmptyInputException, InvalidCommandException {
-        if (input.isEmpty()) {
-            throw new EmptyInputException("Input cannot be empty");
-        }
-
-        switch (input) {
-            case TERMINATE_KEY:
-                return Command.BYE;
-            case LIST_KEY:
-                return Command.LIST;
-        }
-
-        String[] inputArr = input.split(" ");
-
-        switch (inputArr[0]) {
-            case CHECK_KEY:
-                return Command.DONE;
-            case UNCHECK_KEY:
-                return Command.UNDONE;
-            case DELETE_KEY:
-                return Command.DELETE;
-            case TODO_KEY:
-                return Command.TODO;
-            case DEADLINE_KEY:
-                return Command.DEADLINE;
-            case EVENT_KEY:
-                return Command.EVENT;
-        }
-
-        throw new InvalidCommandException(String.format("%s is not a valid command!", inputArr[0]));
     }
 
     public static String extractDeadline(String input) throws NoDeadlineFoundException {
