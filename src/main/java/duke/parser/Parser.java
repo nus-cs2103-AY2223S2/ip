@@ -16,6 +16,9 @@ import duke.task.Deadline;
 import duke.task.Event;
 import duke.task.ToDo;
 
+/**
+ * Parses the user input and returns the appropriate command.
+ */
 public class Parser {
 
     public Action parseAction(String actionString) {

@@ -4,9 +4,18 @@ import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 
+/**
+ * The task that has a deadline.
+ */
 public class Deadline extends Task {
-    private LocalDateTime deadline;
+    private final LocalDateTime deadline;
 
+    /**
+     * Constructor for Deadline.
+     * @param task     The task description.
+     * @param deadline The deadline of the task.
+     * @throws DateTimeParseException If the deadline is not in the correct format.
+     */
     public Deadline(String task, String deadline) throws DateTimeParseException {
         super(task);
         DateTimeFormatter parser = DateTimeFormatter.ofPattern("d/MM/yyyy HHmm");

@@ -4,10 +4,22 @@ import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 
+/**
+ * The task that has a duration.
+ */
 public class Event extends Task {
     private final LocalDateTime from;
     private final LocalDateTime to;
 
+    /**
+     * Constructor for Event.
+     *
+     * @param task The task description.
+     * @param from The start time of the event.
+     * @param to   The end time of the event.
+     * @throws DateTimeParseException If the start time or end time is not in the
+     *                                correct format.
+     */
     public Event(String task, String from, String to) throws DateTimeParseException {
         super(task);
         DateTimeFormatter parser = DateTimeFormatter.ofPattern("d/MM/yyyy HHmm");

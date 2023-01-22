@@ -12,11 +12,21 @@ import duke.task.Task;
 import duke.task.TaskList;
 import duke.task.ToDo;
 
+/**
+ * The class that handles the storage of the task list.
+ * It reads from the file and writes to the file.
+ * It also creates the file if it does not exist.
+ * The file is stored in the data folder.
+ */
 public class Storage {
 
     private String filePath = "data/duke.txt";
     private File file;
 
+    /**
+     * Creates the storage object.
+     * @throws DukeException If the file cannot be created.
+     */
     public Storage() throws DukeException {
         try {
             file = new File(filePath);
@@ -30,6 +40,11 @@ public class Storage {
         }
     }
 
+    /**
+     * Reads the file and returns the task list
+     * @return The task list.
+     * @throws DukeException If the file cannot be read.
+     */
     public TaskList readFromFile() throws DukeException {
         TaskList taskList = new TaskList();
         try {
@@ -55,6 +70,11 @@ public class Storage {
         return taskList;
     }
 
+    /**
+     * Writes the task list to the file.
+     * @param taskList The task list to be written.
+     * @throws DukeException If the file cannot be written.
+     */
     public void writeToFile(TaskList taskList) throws DukeException {
         try {
             FileWriter fw = new FileWriter(filePath);
@@ -69,6 +89,10 @@ public class Storage {
         }
     }
 
+    /**
+     * Clears the file.
+     * @throws DukeException If the file cannot be cleared.
+     */
     public void clearFile() throws DukeException {
         try {
             FileWriter fw = new FileWriter(filePath);

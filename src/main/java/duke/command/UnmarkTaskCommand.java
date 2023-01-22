@@ -3,6 +3,9 @@ package duke.command;
 import duke.DukeException;
 import duke.task.Task;
 
+/**
+ * The command to mark a task as not done.
+ */
 public class UnmarkTaskCommand extends Command {
     private final int index;
 

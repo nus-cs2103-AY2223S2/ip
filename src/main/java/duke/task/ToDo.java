@@ -1,5 +1,9 @@
 package duke.task;
 
+/**
+ * The todo class.
+ * A todo is a task that does not have a deadline.
+ */
 public class ToDo extends Task {
     public ToDo(String task) {
         super(task);
