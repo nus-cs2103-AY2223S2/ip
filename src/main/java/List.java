@@ -7,7 +7,10 @@ public class List {
         this.list.add(new ToDo("zeroth"));
     }
 
-    public void add(String input) {
+    public void add(String input) throws DukeException {
+        if (isEmpty(input)) {
+            throw new DukeException("The description of a todo cannot be empty.");
+        }
         ToDo newTask = new ToDo(input);
         this.list.add(newTask);
         System.out.println("    Got it. I've added this task:");
@@ -15,7 +18,10 @@ public class List {
         System.out.println("    Now you have " + (this.list.size() - 1) + " tasks in the list.");
     }
 
-    public void add(String input, String deadline) {
+    public void add(String input, String deadline) throws DukeException {
+        if (isEmpty(input) || isEmpty(deadline)) {
+            throw new DukeException("The description and deadline of a deadline cannot be empty.");
+        }
         Deadline newTask = new Deadline(input, deadline);
         this.list.add(newTask);
         System.out.println("    Got it. I've added this task:");
@@ -23,12 +29,23 @@ public class List {
         System.out.println("    Now you have " + (this.list.size() - 1) + " tasks in the list.");
     }
 
-    public void add(String input, String from, String to) {
+    public void add(String input, String from, String to) throws DukeException {
+        if (input.equals("") || from.equals("") || to.equals("")) {
+            throw new DukeException("The descriptiom and duration of an event cannot be empty.");
+        }
         Event newTask = new Event(input, from, to);
         this.list.add(newTask);
         System.out.println("    Got it. I've added this task:");
         System.out.println("    " + newTask.toString());
         System.out.println("    Now you have " + (this.list.size() - 1) + " tasks in the list.");
+    }
+
+    public boolean isEmpty(String str) {
+        String temp = str.replaceAll("\\s+", "");
+        if (temp.equals("")) {
+            return true;
+        }
+        return false;
     }
 
     public void remove(int index) {

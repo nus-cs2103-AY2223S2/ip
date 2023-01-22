@@ -33,22 +33,50 @@ public class Duke {
                     break;
                 case "todo":
                     String todoTask = sc.nextLine();
-                    list.add(todoTask);
+                    try {
+                        list.add(todoTask);
+                    } catch (DukeException e) {
+                        System.out.println(e);
+                    }
                     break;
                 case "deadline":
                     String temp = sc.nextLine();
+                    if (!temp.matches("^.+(\\s)/by(\\s).+$")) {
+                        DukeException msgMismatch = new DukeException(
+                                "Please use the correct format to add a deadline.");
+                        System.out.println(msgMismatch);
+                        break;
+                    }
                     String[] dlTask = temp.split("/by");
-                    list.add(dlTask[0], dlTask[1]);
+                    try {
+                        list.add(dlTask[0], dlTask[1]);
+                    } catch (DukeException e) {
+                        System.out.println(e);
+                        break;
+                    }
                     break;
                 case "event":
                     String temp2 = sc.nextLine();
+                    if (!temp2.matches("^.+(\\s)/from(\\s).+(\\s)/to.*$")) {
+                        DukeException msgMismatch = new DukeException("Please use the correct format to add an event.");
+                        System.out.println(msgMismatch);
+                        break;
+                    }
                     String[] eventTask = temp2.split("/from|/to");
-                    list.add(eventTask[0], eventTask[1], eventTask[2]);
+                    try {
+                        list.add(eventTask[0], eventTask[1], eventTask[2]);
+                    } catch (DukeException e) {
+                        System.out.println(e);
+                        break;
+                    }
                     break;
                 case "delete":
                     int deleteIdx = sc.nextInt();
                     list.remove(deleteIdx);
                     break;
+                default:
+                    DukeException unknowCmd = new DukeException("I'm sorry, but I don't know what that means :-(");
+                    System.out.println(unknowCmd);
             }
             System.out.println(line + "\n");
         }
