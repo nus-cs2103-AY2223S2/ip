@@ -10,8 +10,7 @@ public class ByeCommand extends Command {
 
     @Override
     public void execute(TaskList taskList, Ui ui) throws DukeException {
-        ui.addToMessage("Bye. Hope to see you again soon!");
-
+        ui.addToMessage("Bye. Hope to see you again soon!", true);
     }
 
     @Override
