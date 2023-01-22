@@ -18,6 +18,7 @@ public class TaskList {
 
     /**
      * Initializes a TaskList with preloaded data.
+     *
      * @param preloader A Loader which loads data.
      */
     public TaskList(Loader<TaskList> preloader) throws DukeException {
@@ -34,6 +35,7 @@ public class TaskList {
 
     /**
      * A generic filter function which parses through the TaskList and return tasks that match.
+     *
      * @param predicate A boolean function.
      */
     public void filter(Predicate<? super Task> predicate, String emptyMsg) {
@@ -47,6 +49,7 @@ public class TaskList {
 
     /**
      * Adds a given task into the TaskList.
+     *
      * @param task The task to be added.
      * @param print Boolean value indicating if console messages should be printed.
      */
@@ -77,6 +80,7 @@ public class TaskList {
 
     /**
      * Deletes the given task.
+     *
      * @param key The task identifier.
      */
     public void deleteTask(Integer key) throws DukeException {
@@ -96,6 +100,7 @@ public class TaskList {
 
     /**
      * Lists the tasks in the TaskList.
+     *
      * @return A list of tasks to be logged.
      */
     public String listTasks() {

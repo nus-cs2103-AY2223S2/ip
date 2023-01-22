@@ -24,6 +24,7 @@ public abstract class Command implements IExecutable<TaskList> {
 
     /**
      * Initializes a new Command with the specified type and termination.
+     *
      * @param cmdType A command type.
      * @param isTerminating Termination command.
      */

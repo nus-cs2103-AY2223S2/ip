@@ -20,6 +20,7 @@ public class Duke {
 
     /**
      * Duke Constructor for initializing the Duke Object.
+     *
      * @param filename location of Storage
      */
     public Duke(String filename) {
@@ -57,6 +58,7 @@ public class Duke {
 
     /**
      * Main entrypoint for running the Duke chatbot.
+     *
      * @param args Command Line Args
      */
     public static void main(String[] args) {

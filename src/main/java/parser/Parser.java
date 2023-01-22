@@ -41,6 +41,7 @@ public abstract class Parser {
 
     /**
      * Parses the string input and returns an appropriate command.
+     *
      * @param input String user input.
      * @return Command to be executed.
      */

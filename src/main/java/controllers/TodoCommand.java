@@ -18,6 +18,7 @@ public class TodoCommand extends Command {
 
     /**
      * Initializes the Todo Command.
+     *
      * @param arguments The parsed arguments.
      */
     public TodoCommand(String arguments) {

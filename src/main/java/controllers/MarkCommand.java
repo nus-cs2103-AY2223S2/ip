@@ -18,6 +18,7 @@ public class MarkCommand extends Command {
 
     /**
      * Initializes a Mark Command.
+     *
      * @param args The parsed arguments.
      */
     public MarkCommand(String args) {

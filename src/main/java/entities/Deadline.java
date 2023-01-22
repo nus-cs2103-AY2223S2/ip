@@ -15,6 +15,7 @@ public class Deadline extends Task {
 
     /**
      * Initialize the Deadline task.
+     *
      * @param description The description of the task.
      * @param by The deadline for the task.
      */
@@ -25,6 +26,7 @@ public class Deadline extends Task {
 
     /**
      * Overloaded constructor that takes in a string representation instead.
+     *
      * @param description The description of the task.
      * @param by The deadline for the task.
      */
@@ -35,6 +37,7 @@ public class Deadline extends Task {
 
     /**
      * Serialize the task.
+     *
      * @return Returns serialized representation.
      */
     public SerializableTask serialize() {

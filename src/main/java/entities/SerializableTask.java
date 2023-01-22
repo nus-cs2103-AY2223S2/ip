@@ -15,6 +15,7 @@ public class SerializableTask implements IMarshal<String>, IUnmarshal<Task> {
 
     /**
      * Initialize a Serializable Task.
+     *
      * @param taskType The type of task.
      * @param done The status of task.
      * @param description The description of task.
@@ -27,6 +28,7 @@ public class SerializableTask implements IMarshal<String>, IUnmarshal<Task> {
 
     /**
      * Initialize a Serializable Task.
+     *
      * @param taskType The type of task.
      * @param done The status of task.
      * @param description The description of task.

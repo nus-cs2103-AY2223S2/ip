@@ -16,6 +16,7 @@ public class Event extends Task {
 
     /**
      * Initializes the Event task.
+     *
      * @param description The description of the task.
      * @param from The start date.
      * @param to The end date.
@@ -28,6 +29,7 @@ public class Event extends Task {
 
     /**
      * Overloaded constructor which accepts a string array of flags instead.
+     *
      * @param description Description of the task.
      * @param flags The flags required to specify the dates.
      */
@@ -39,6 +41,7 @@ public class Event extends Task {
 
     /**
      * Serialize the task.
+     *
      * @return Returns serialized representation.
      */
     public SerializableTask serialize() {

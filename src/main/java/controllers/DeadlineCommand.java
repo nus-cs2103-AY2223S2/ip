@@ -17,6 +17,7 @@ public class DeadlineCommand extends Command {
 
     /**
      * Initializes a Deadline Command.
+     *
      * @param arguments The parsed arguments.
      */
     public DeadlineCommand(String arguments) {

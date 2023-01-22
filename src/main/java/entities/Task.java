@@ -27,6 +27,7 @@ public abstract class Task {
 
     /**
      * Instantiate a Task Object that can be placed into the TaskList.
+     *
      * @param description The description of the task.
      */
     public Task(String description) {
@@ -36,6 +37,7 @@ public abstract class Task {
 
     /**
      * Converts an existing task to a SerializableTask that can marshal and unmarshal.
+     *
      * @return SerializableTask
      */
     public abstract SerializableTask serialize();
@@ -80,6 +82,7 @@ public abstract class Task {
 
     /**
      * Process the given task by creating and storing into the TaskList.
+     *
      * @param matcher A regex matcher that matches the type of command.
      * @param type Specifies the task type.
      * @throws DukeException An exception to be thrown if an invalid task is to be created.

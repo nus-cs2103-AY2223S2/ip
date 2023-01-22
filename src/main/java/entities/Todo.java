@@ -15,6 +15,7 @@ public class Todo extends Task {
 
     /**
      * Serialize the task.
+     *
      * @return Returns serialized representation.
      */
     @Override

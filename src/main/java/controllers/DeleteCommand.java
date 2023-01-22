@@ -16,7 +16,8 @@ public class DeleteCommand extends Command {
 
     /**
      * Initializes a Delete Command.
-     * @param args The paresed arguments.
+     *
+     * @param args The parsed arguments.
      */
     public DeleteCommand(String args) {
         super(CommandType.DELETE);

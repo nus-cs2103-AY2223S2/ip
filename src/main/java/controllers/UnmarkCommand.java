@@ -18,6 +18,7 @@ public class UnmarkCommand extends Command {
 
     /**
      * Initializes an unmark Command.
+     *
      * @param args The parsed arguments.
      */
     public UnmarkCommand(String args) {

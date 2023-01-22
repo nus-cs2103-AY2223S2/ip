@@ -4,6 +4,7 @@ import exceptions.DukeException;
 
 /**
  * An interface for performing the loading action.
+ *
  * @param <T> The store to load to.
  */
 @FunctionalInterface

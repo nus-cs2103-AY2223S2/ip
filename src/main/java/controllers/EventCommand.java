@@ -18,6 +18,7 @@ public class EventCommand extends Command {
 
     /**
      * Initializes an Event Command.
+     *
      * @param arguments The parsed arguments.
      */
     public EventCommand(String arguments) {

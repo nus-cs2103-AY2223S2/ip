@@ -25,6 +25,7 @@ public class Storage implements Loader<TaskList> {
 
     /**
      * Initializes a Storage object with the specified filename.
+     *
      * @param filename Filename to store the data.
      */
     public Storage(String filename) {
@@ -54,6 +55,7 @@ public class Storage implements Loader<TaskList> {
 
     /**
      * Loads the data from the specified filename.
+     *
      * @param taskList TaskList to add the loaded data to.
      * @return A boolean value indicating the success of the operation.
      * @throws DukeException An exception to be thrown if there are any errors that occur.
@@ -91,6 +93,7 @@ public class Storage implements Loader<TaskList> {
 
     /**
      * Writes all task currently in memory to the hard disk.
+     *
      * @param taskList The tasklist in memory.
      * @throws DukeException An exception to be thrown if there are any errors that occur.
      */
