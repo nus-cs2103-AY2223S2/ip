@@ -1,4 +1,3 @@
-package duke;
 public abstract class Task {
     String type;
     String taskName;

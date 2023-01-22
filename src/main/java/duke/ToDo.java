@@ -1,4 +1,3 @@
-package duke;
 public class ToDo extends Task {
 
     // Factory method

@@ -1,4 +1,3 @@
-package duke;
 public class Event extends Task {
     String fromDate;
     String toDate;

@@ -1,4 +1,3 @@
-package duke;
 import java.util.ArrayList;
 import java.util.Optional;
 import java.util.Scanner;
@@ -20,6 +19,7 @@ public class Duke {
         while (!line.equals("bye")) {
             if (!line.equals("init")) {
                 Optional<Command> cmd = Command.getCommand(line);
+                if (!cmd.isEmpty()) {
                 Command command = cmd.get();
                 switch (command) {
                 case LIST:
@@ -43,10 +43,11 @@ public class Duke {
                     Task removedTask = removeTask(line);
                     displayMsg("Noted. I've removed this task:\n" + indentString(removedTask.toString(), 1) + "\n" + countTasks());
                     break;
-                Task newTask;
+
                 case EVENT:
                 case DEADLINE:
                 case TODO:
+                    Task newTask;
                     try {
                         if (line.startsWith("event")) {
                             newTask = Event.create(line);
@@ -56,22 +57,22 @@ public class Duke {
                             newTask = ToDo.create(line);
                         } 
                         dukeList.add(newTask);
-                        StringBuilder output = new StringBuilder();
-                        output.append("Got it. I've added this task:\n" + indentString(newTask.toString(), 1) + "\n" + countTasks());
-                        displayMsg(output.toString());
+                        StringBuilder output2 = new StringBuilder();
+                        output2.append("Got it. I've added this task:\n" + indentString(newTask.toString(), 1) + "\n" + countTasks());
+                        displayMsg(output2.toString());
                     } catch (TaskInitError e) {
                         displayMsg("OOPS!!! " + e.getMessage());
                     }
                     break;
-                default:
-                    displayMsg("OOPS!!! I'm sorry, but I don't know what that means :-(");
-                System.out.println("");   
-                } 
-            line = sc.nextLine();
+                }
+            } else {
+                displayMsg("OOPS!!! I'm sorry, but I don't know what that means :-(");
             }
-            sc.close();
-            displayMsg("Bye. Hope to see you again soon!");
+            }
+            line = sc.nextLine();
         }
+        sc.close();
+        displayMsg("Bye. Hope to see you again soon!");
     }
 
     public static String outputList() {
