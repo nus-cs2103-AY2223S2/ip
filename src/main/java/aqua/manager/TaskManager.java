@@ -1,11 +1,19 @@
 package aqua.manager;
 
+import java.io.IOException;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.ArrayList;
 
 import aqua.aquatask.AquaTask;
+import aqua.storage.Reloadable;
+import aqua.util.FileUtils;
 
 /** Manager of tasks. */
-public class TaskManager {
+public class TaskManager implements Reloadable {
+    private static final String SAVE_DIRECTORY = "SAVE_DATA";
+    private static final String SAVE_FILE = "Goshujin-sama you promised to never touch this.txt";
+
     private final ArrayList<AquaTask> taskList = new ArrayList<>();
 
 
@@ -27,6 +35,31 @@ public class TaskManager {
 
     public int size() {
         return taskList.size();
+    }
+
+
+    public void saveToFile() throws IOException {
+        Path dirPath = Paths.get(SAVE_DIRECTORY);
+        if (!FileUtils.mkdirs(dirPath)) {
+            throw new IOException("Failed to create save directory");
+        }
+        FileUtils.writeFile(dirPath.resolve(SAVE_FILE), getReloadString());
+    }
+
+
+    public Path getSavePath() {
+        return Paths.get(SAVE_DIRECTORY, SAVE_FILE);
+    }
+
+
+    @Override
+    public String getReloadString() {
+        StringBuilder builder = new StringBuilder();
+        for (AquaTask task : taskList) {
+            builder.append(task.getReloadString());
+            builder.append("\n");
+        }
+        return builder.toString().strip();
     }
 
 

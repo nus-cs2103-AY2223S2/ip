@@ -35,6 +35,6 @@ public abstract class AddTaskCommand implements Command {
                     manager.getTaskManager().size()
                 );
             }
-        });
+        }).setFollowUp(new WriteTaskCommand().getDispatcher(args, manager));
     }
 }

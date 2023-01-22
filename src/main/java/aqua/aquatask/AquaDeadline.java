@@ -6,6 +6,8 @@ import java.util.Optional;
 import aqua.util.DateUtils;
 
 public class AquaDeadline extends AquaTask {
+    public static final String BY_TAG = "by";
+
     private final boolean isComplete;
     private final LocalDateTime by;
 
@@ -36,6 +38,16 @@ public class AquaDeadline extends AquaTask {
     @Override
     public Optional<LocalDateTime> getEnd() {
         return Optional.ofNullable(by);
+    }
+    
+    
+    public String getReloadString() {
+        return String.format(
+            "deadline %s /%s %s /%s %s",
+            getName(),
+            BY_TAG, by,
+            IS_COMPLETED_TAG, isComplete
+        );
     }
 
 

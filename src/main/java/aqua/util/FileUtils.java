@@ -27,13 +27,18 @@ public class FileUtils {
      */
     public static String readFile(Path path) throws IOException {
         StringBuilder builder = new StringBuilder();
-        try (InputStream inputStream = new BufferedInputStream(new FileInputStream(path.toFile()))) {
+        try (InputStream inputStream = getInputStream(path)) {
             byte[] arr = new byte[READ_LIMIT];
             while (inputStream.read(arr) > 0) {
                 builder.append(new String(arr));
             }
         }
         return builder.toString();
+    }
+
+
+    public static BufferedInputStream getInputStream(Path path) throws IOException {
+        return new BufferedInputStream(new FileInputStream(path.toFile()));
     }
 
 

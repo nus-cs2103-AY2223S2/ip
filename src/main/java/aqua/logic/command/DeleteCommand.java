@@ -40,7 +40,7 @@ public class DeleteCommand implements Command {
                     getRemainingMessage(manager)
                 );
             }
-        });
+        }).setFollowUp(new WriteTaskCommand().getDispatcher(args, manager));
     }
 
 

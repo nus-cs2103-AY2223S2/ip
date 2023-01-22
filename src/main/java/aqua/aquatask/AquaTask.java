@@ -3,7 +3,11 @@ package aqua.aquatask;
 import java.time.LocalDateTime;
 import java.util.Optional;
 
-public abstract class AquaTask {
+import aqua.storage.Reloadable;
+
+public abstract class AquaTask implements Reloadable {
+    public static final String IS_COMPLETED_TAG = "completed";
+
     private final String name;
 
 

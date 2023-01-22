@@ -19,6 +19,9 @@ public class AddEventCommand extends AddTaskCommand {
         String toString = args.get("to")
                 .orElseThrow(() -> new IllegalSyntaxException("[to] disappeared!"));
         LocalDateTime to = DateUtils.parse(toString);
-        return new AquaEvent(name, from, to);
+        boolean isCompleted = args.get(AquaEvent.IS_COMPLETED_TAG)
+                .map(isComp -> Boolean.parseBoolean(isComp))
+                .orElse(false);
+        return new AquaEvent(name, isCompleted, from, to);
     }
 }

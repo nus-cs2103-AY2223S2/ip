@@ -8,9 +8,12 @@ import aqua.logic.ArgumentMap;
 public class AddToDoCommand extends AddTaskCommand {
     @Override
     public AquaToDo createTask(ArgumentMap args) throws IllegalSyntaxException {
-        return args.getMainInput()
-            .filter(name -> !name.isBlank())
-            .map(name -> new AquaToDo(name))
-            .orElseThrow(() -> new IllegalSyntaxException("Name disappeared!"));
+        String name = args.getMainInput()
+                .filter(n -> !n.isBlank())
+                .orElseThrow(() -> new IllegalSyntaxException("Name disappeared!"));
+        boolean isComplete = args.get(AquaToDo.IS_COMPLETED_TAG)
+                    .map(isComp -> Boolean.parseBoolean(isComp))
+                    .orElse(false);
+        return new AquaToDo(name, isComplete);
     }
 }

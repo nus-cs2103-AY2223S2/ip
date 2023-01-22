@@ -6,6 +6,9 @@ import java.util.Optional;
 import aqua.util.DateUtils;
 
 public class AquaEvent extends AquaTask {
+    public static final String FROM_TAG = "from";
+    public static final String TO_TAG = "to";
+
     private final boolean isComplete;
     private final LocalDateTime from;
     private final LocalDateTime to;
@@ -44,6 +47,17 @@ public class AquaEvent extends AquaTask {
     @Override
     public Optional<LocalDateTime> getEnd() {
         return Optional.ofNullable(to);
+    }
+
+    
+    public String getReloadString() {
+        return String.format(
+            "event %s /%s %s /%s %s /%s %s",
+            getName(),
+            FROM_TAG, from,
+            TO_TAG, to,
+            IS_COMPLETED_TAG, isComplete
+        );
     }
 
 

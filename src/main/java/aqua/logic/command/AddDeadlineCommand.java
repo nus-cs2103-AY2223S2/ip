@@ -16,7 +16,10 @@ public class AddDeadlineCommand extends AddTaskCommand {
                 .orElseThrow(() -> new IllegalSyntaxException("Name disappeared!"));
         String byString = args.get("by")
                 .orElseThrow(() -> new IllegalSyntaxException("[by] disappeared!"));
-        LocalDateTime byTime = DateUtils.parse(byString);
-        return new AquaDeadline(name, byTime);
+        LocalDateTime by = DateUtils.parse(byString);
+        boolean isCompleted = args.get(AquaDeadline.IS_COMPLETED_TAG)
+                .map(isComp -> Boolean.parseBoolean(isComp))
+                .orElse(false);
+        return new AquaDeadline(name, isCompleted, by);
     }
 }
