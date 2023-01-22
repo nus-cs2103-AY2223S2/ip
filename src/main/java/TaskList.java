@@ -78,7 +78,14 @@ public class TaskList {
                         sb.append(" ");
                     }
                 }
-                Deadline deadline = new Deadline(desc, sb.toString().trim());
+                // TODO: Code can be shortened
+                String[] dateTime = sb.toString().split(" ");
+                String[] date = dateTime[0].split("/");
+                sb.setLength(0);
+                sb.append(date[2]); sb.append("-");
+                if (date[1].length() == 1) sb.append("0"); sb.append(date[1]); sb.append("-");
+                if (date[0].length() == 1) sb.append("0"); sb.append(date[0]);
+                Deadline deadline = new Deadline(desc, sb.toString(), dateTime[1]);
                 this.taskList.add(deadline); this.numOfTasks++;
                 this.updateDrive();
                 System.out.println("Gotcha, I've added:");
