@@ -1,4 +1,4 @@
-import java.util.*;
+import java.util.Scanner;
 
 public class Ui {
     Scanner sc = new Scanner(System.in);
