@@ -1,6 +1,5 @@
 package smartduke.command;
 
-import smartduke.DukeException;
 import smartduke.TaskList;
 import smartduke.Ui;
 import smartduke.task.Task;

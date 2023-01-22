@@ -17,7 +17,7 @@ public class TaskList {
         this.tasks = new ArrayList<>();
     }
 
-    public TaskList(ArrayList<Task> tasks) throws DukeException  {
+    public TaskList(ArrayList<Task> tasks) throws DukeException {
         this.tasks = tasks;
     }
 
@@ -36,8 +36,8 @@ public class TaskList {
     /**
      * Delete the task with the given task number from the list.
      * @param taskNo the given task number
-     * @throws DukeException If there is no such task in the list with the given task number.
      * @return The deleted task.
+     * @throws DukeException If there is no such task in the list with the given task number.
      */
     public Task delete(int taskNo) throws DukeException {
         try {
@@ -58,8 +58,8 @@ public class TaskList {
     /**
      * Marks the task with the given task number as done.
      * @param taskNo the given task number
-     * @throws DukeException If there is no such task in the list with the given task number.
      * @return The marked task.
+     * @throws DukeException If there is no such task in the list with the given task number.
      */
     public Task mark(int taskNo) throws DukeException {
         try {
@@ -74,8 +74,8 @@ public class TaskList {
     /**
      * Marks the task with the given task number as not done.
      * @param taskNo the given task number
-     * @throws DukeException If there is no such task in the list with the given task number.
      * @return The unmarked task.
+     * @throws DukeException If there is no such task in the list with the given task number.
      */
     public Task unmark(int taskNo) throws DukeException {
         try {

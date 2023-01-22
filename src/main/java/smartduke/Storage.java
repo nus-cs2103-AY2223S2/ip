@@ -16,7 +16,7 @@ import java.util.Scanner;
  * Storage deals with loading tasks from the file and saving tasks in the file.
  */
 public class Storage {
-    Path filePath;
+    private Path filePath;
 
     public Storage(Path filePath) {
         this.filePath = filePath;
@@ -24,8 +24,8 @@ public class Storage {
 
     /**
      * Loads the saved tasks from local file into the list.
-     * @throws DukeException If the directory that stores the tasks data does not exist.
      * @return The list of tasks stored in the local file.
+     * @throws DukeException If the directory that stores the tasks data does not exist.
      */
     public ArrayList<Task> load() throws DukeException {
         try {
@@ -48,22 +48,24 @@ public class Storage {
                     /* Add the task to taskList */
                     Task task = null;
                     switch (taskSymbol) {
-                        case "T":
-                            task = new ToDo(taskDescription);
-                            break;
-                        case "D":
-                            String by = parsedTaskData[3];
-                            task = new Deadline(taskDescription, by);
-                            break;
-                        case "E":
-                            String from = parsedTaskData[3];
-                            String to = parsedTaskData[4];
-                            task = new Event(taskDescription, from, to);
-                            break;
+                    case "T":
+                        task = new ToDo(taskDescription);
+                        break;
+                    case "D":
+                        String by = parsedTaskData[3];
+                        task = new Deadline(taskDescription, by);
+                        break;
+                    case "E":
+                        String from = parsedTaskData[3];
+                        String to = parsedTaskData[4];
+                        task = new Event(taskDescription, from, to);
+                        break;
                         default:
                             throw new DukeException("Task is not recorded in a valid format...");
                     }
-                    if (isTaskDone) task.markDone();
+                    if (isTaskDone) {
+                        task.markDone();
+                    }
                     tasks.add(task);
                 } catch (DukeException e) {
                     System.err.println(e.getMessage());

@@ -33,6 +33,10 @@ public class Parser {
          */
         private Pattern pattern;
 
+        CommandPattern(String regex) {
+            this.pattern = Pattern.compile(regex);
+        }
+
         /**
          * Checks if the given string matches this Command.
          * @param userCommand The given string provided by the user.
@@ -40,10 +44,6 @@ public class Parser {
          */
         public boolean match(String userCommand) {
             return this.pattern.matcher(userCommand).matches();
-        }
-
-        private CommandPattern(String regex) {
-            this.pattern = Pattern.compile(regex);
         }
     }
 
@@ -58,7 +58,8 @@ public class Parser {
             DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-M-d HHmm");
             return LocalDateTime.parse(dateTimeString, formatter);
         } catch (DateTimeParseException e) {
-            throw new DukeException("You have provided an invalid date format. Make sure it is in yyyy-M-d HHmm format!");
+            throw new DukeException("You have provided an invalid date format. "
+                    + "Make sure it is in yyyy-M-d HHmm format!");
         }
     }
 
@@ -125,7 +126,9 @@ public class Parser {
         } else if (CommandPattern.END_CHAT.match(userCommand)) {
             /* End the session */
             return new ExitCommand();
-        } else throw new DukeException("Huh? I don't understand you...");
+        } else {
+            throw new DukeException("Huh? I don't understand you...");
+        }
 
     }
 }

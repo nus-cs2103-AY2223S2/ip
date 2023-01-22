@@ -5,6 +5,9 @@ import smartduke.command.Command;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 
+/**
+ * The Duke ChatBot
+ */
 public class SmartDuke {
     private TaskList taskList;
     private Ui ui;
