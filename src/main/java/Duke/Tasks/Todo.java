@@ -56,7 +56,10 @@ public class Todo extends Task {
         return "[T]"  + super.toString();
     }
 
-
+    /**
+     * Override the reformat method and convert to standard output
+     * @return String
+     */
     @Override
     public String reformat() {
         String d;

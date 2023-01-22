@@ -61,6 +61,10 @@ public class Deadline extends Task{
         return "[D]" + super.toString() + " (by: " + time.format(DateTimeFormatter.ofPattern("MMM dd yyyy HH:mm")) + ")";
     }
 
+    /**
+     * Override the reformat method and convert to standard output
+     * @return String
+     */
     @Override
     public String reformat() {
         String d;
