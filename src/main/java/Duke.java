@@ -99,6 +99,29 @@ public class Duke {
                     createTask(new EventTask(eventDesc, eventFrom, eventBy));
                     break;
 
+                case check:
+                    validateNotEmptyArgs(cmd);
+                    String dueArgs = cmd.substring(6);
+                    LocalDate targetDate = LocalDate.parse(dueArgs);
+
+                    System.out.println("Relevant tasks on specified date:  ");
+                    for (Task task : tasks) {
+                        if (task instanceof EventTask) {
+                            EventTask eventTask = (EventTask) task;
+                            if (eventTask.from.isEqual(targetDate) || eventTask.from.isBefore(targetDate) ||
+                                    eventTask.to.isEqual(targetDate) || eventTask.to.isAfter(targetDate)) {
+                                System.out.println(eventTask);
+                            }
+                        }
+                        else if (task instanceof DeadlineTask) {
+                            DeadlineTask deadlineTask = (DeadlineTask) task;
+                            if (deadlineTask.by.isEqual(targetDate) || deadlineTask.by.isAfter(targetDate)) {
+                                System.out.println(deadlineTask);
+                            }
+                        }
+                    }
+                    break;
+
                 case list:
                     System.out.println("Arii has retrieved your current tasks...");
                     for (int i = 0; i < tasks.size(); i++) {
