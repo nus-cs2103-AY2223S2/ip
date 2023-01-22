@@ -11,10 +11,10 @@ public class Chungus {
     private Storage db;
     private boolean isRunning;
 
-    private static final String defaultDbPath = System.getProperty("user.dir") + "/chungus.db";
+    private static final String DEFAULT_DB_PATH = System.getProperty("user.dir") + "/chungus.db";
 
     public static void main(String[] args) {
-        new Chungus(System.in, System.out, defaultDbPath).spin();
+        new Chungus(System.in, System.out, DEFAULT_DB_PATH).spin();
     }
 
     public Chungus(InputStream in, OutputStream out, String dbPath) {
