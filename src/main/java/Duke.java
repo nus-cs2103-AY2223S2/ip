@@ -1,10 +1,9 @@
 import java.util.Scanner;
-import java.util.ArrayList;
 
-enum Command {
-    TODO, DEADLINE, EVENT, DELETE, LIST, BYE, MARK, UNMARK;
-}
 public class Duke {
+    enum Command {
+        TODO, DEADLINE, EVENT, DELETE, LIST, BYE, MARK, UNMARK;
+    }
     public static void main(String[] args) {
         String chopper =
                         "           /\\_/\\\n" +
@@ -13,7 +12,9 @@ public class Duke {
         System.out.println(chopper);
         System.out.println("    Hello I'm chopper\n    What can I do for you?");
 
-        ArrayList<Task> Tasks = new ArrayList<Task>();
+        TaskList Tasks = new TaskList();
+        Tasks = Save.loadTaskList();
+
         Scanner sc = new Scanner(System.in);
 
 
@@ -24,6 +25,7 @@ public class Duke {
                 String[] words = input.split(" ");
                 Command command = Command.valueOf(words[0].toUpperCase());
                 if (command == Command.BYE) {
+                    Save.saveTaskList(Tasks);
                     System.out.println("    " + "Bye. Hope to see you again soon!");
                     break;
                 }
@@ -55,14 +57,14 @@ public class Duke {
             }
         }
     }
-    private static void list(ArrayList<Task> tasks) {
+    private static void list(TaskList tasks) {
         System.out.println("    Here are the tasks in your list:");
         for (int i = 0; i < tasks.size(); i++) {
             int num = i + 1;
             System.out.print("    " + num + ". " + tasks.get(i) + "\n");
         }
     }
-    private static void deadline(ArrayList<Task> tasks, String input) {
+    private static void deadline(TaskList tasks, String input) {
         try {
             int index_by = input.indexOf("/");
             if (index_by - 1 < 9) {
@@ -74,6 +76,7 @@ public class Duke {
             Deadline d = new Deadline(input.substring(9, index_by - 1),
                     input.substring(index_by + 4, input.length()));
             tasks.add(d);
+            Save.saveTaskList(tasks);
             System.out.println("    Got it. I've added this task:");
             System.out.println("      " + d);
             System.out.println("    Now you have " + tasks.size() + " tasks in the list.");
@@ -81,21 +84,22 @@ public class Duke {
             System.out.println(de.getMessage());
         }
     }
-    private static void todo(ArrayList<Task> tasks, String input) {
+    private static void todo(TaskList tasks, String input) {
         try {
             if (5 > input.length()) {
                 throw new DukeException("    OOPS!!! The description of a todo cannot be empty.");
             }
             Todo td = new Todo(input.substring(5, input.length()));
+            tasks.add(td);
+            Save.saveTaskList(tasks);
             System.out.println("    Got it. I've added this task:");
             System.out.println("      " + td);
-            tasks.add(td);
             System.out.println("    Now you have " + tasks.size() + " tasks in the list.");
         } catch (DukeException de) {
             System.out.println(de.getMessage());
         }
     }
-    private static void event(ArrayList<Task> tasks, String input) {
+    private static void event(TaskList tasks, String input) {
         try {
             int index_from = input.indexOf("/");
             int index_to = input.lastIndexOf("/");
@@ -112,6 +116,7 @@ public class Duke {
                     input.substring(index_from + 6, index_to - 1),
                     input.substring(index_to + 4, input.length()));
             tasks.add(e);
+            Save.saveTaskList(tasks);
             System.out.println("    Got it. I've added this task:");
             System.out.println("      " + e);
             System.out.println("    Now you have " + tasks.size() + " tasks in the list.");
@@ -119,7 +124,7 @@ public class Duke {
             System.out.println(de.getMessage());
         }
     }
-    private static void delete(ArrayList<Task> tasks, String input) {
+    private static void delete(TaskList tasks, String input) {
         try {
             if (input.length() <= 7) {
                 throw new DukeException("    OOPS!!! Delete must be followed by an int.");
@@ -127,6 +132,7 @@ public class Duke {
             int index = Integer.parseInt(input.substring(7));
             Task task = tasks.get(index - 1);
             tasks.remove(index - 1);
+            Save.saveTaskList(tasks);
             System.out.println("    Noted. I've removed this task:");
             System.out.println("      " + task);
             System.out.println("    Now you have " + tasks.size() + " tasks in the list.");
@@ -134,7 +140,7 @@ public class Duke {
             System.out.println(de.getMessage());
         }
     }
-    private static void mark(ArrayList<Task> tasks, String input) {
+    private static void mark(TaskList tasks, String input) {
         try {
             if (input.length() <= 5) {
                 throw new DukeException("    OOPS!!! You are missing the number of the task to be marked.");
@@ -142,6 +148,7 @@ public class Duke {
             int index = Integer.parseInt(input.substring(5));
             Task task = tasks.get(index - 1);
             task.mark();
+            Save.saveTaskList(tasks);
             System.out.println("    Nice! I've marked this task as done:");
             System.out.println("      " + task);
         } catch (DukeException de) {
@@ -152,7 +159,7 @@ public class Duke {
             System.out.println("    OOPS!!! There are insufficient tasks.");
         }
     }
-    private static void unmark(ArrayList<Task> tasks, String input) {
+    private static void unmark(TaskList tasks, String input) {
         try {
             if (input.length() <= 7) {
                 throw new DukeException("    OOPS!!! You are missing the number of the task to be unmarked.");
@@ -160,6 +167,7 @@ public class Duke {
             int index = Integer.parseInt(input.substring(7));
             Task task = tasks.get(index - 1);
             task.unmark();
+            Save.saveTaskList(tasks);
             System.out.println("    OK, I've marked this task as not done yet:");
             System.out.println("      " + task);
         } catch (DukeException de) {
