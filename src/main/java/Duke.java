@@ -1,26 +1,40 @@
 import commands.*;
 import exceptions.DukeException;
-import tasks.ITask;
-import uitilties.UserInterface;
+import utilities.UserInterface;
+import utilities.TaskManager;
 
-import java.util.ArrayList;
-
-import static uitilties.UserInterface.receptor;
 
 public class Duke {
-    static ArrayList<ITask> tasks = new ArrayList<>();
+    private TaskManager _taskManger;
+    private final UserInterface _ui;
+
+    public Duke(String filePath) {
+        _ui = new UserInterface();
+        try {
+            _taskManger = new TaskManager(filePath);
+        } catch (DukeException e) {
+            _ui.showLoadingError(e.getMessage());
+            _taskManger = new TaskManager();
+        }
+    }
+
+    public void run() {
+        _ui.showWelcome();
+        boolean isDone = false;
+        while (!isDone) {
+            try {
+                ICommand cmd  = _ui.readCommand(_taskManger);
+                isDone = cmd.run();
+                _ui.Speak(cmd.getMsg());
+            } catch (DukeException e) {
+                _ui.showError(e.getMessage());
+            } finally {
+                _ui.getCommand("Enter new command to continue: ");
+            }
+        }
+    }
 
     public static void main(String[] args) {
-        UserInterface.greeting();
-        boolean done = false;
-        while (!done)
-            try {
-                ICommand cmd = receptor(tasks);
-                done = cmd.run();
-            } catch (DukeException e) {
-                System.out.println(e.getMessage());
-                UserInterface.Speak("Type any command to continue...");
-            }
-
+        new Duke("data/tasks.txt").run();
     }
 }

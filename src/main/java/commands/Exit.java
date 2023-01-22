@@ -1,7 +1,6 @@
 package commands;
 
-import uitilties.Parser;
-import uitilties.UserInterface;
+import utilities.Parser;
 
 
 public class Exit extends ICommand{
@@ -11,7 +10,7 @@ public class Exit extends ICommand{
 
     @Override
     public boolean run() {
-        UserInterface.Speak("Bye. Hope to see you again soon!");
+        setMsg("Bye. Hope to see you again soon!");
         return true;
     }
 }

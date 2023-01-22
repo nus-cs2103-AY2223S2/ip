@@ -1,8 +1,8 @@
 package commands;
 
+import exceptions.DukeException;
 import tasks.ITask;
-import uitilties.Parser;
-import uitilties.UserInterface;
+import utilities.Parser;
 
 public class ListTasks extends ICommand {
 
@@ -11,16 +11,16 @@ public class ListTasks extends ICommand {
     }
 
     @Override
-    public boolean run() {
+    public boolean run() throws DukeException {
 
         int i = 1;
         StringBuilder sentence = new StringBuilder("Here are the tasks in your list:\n");
-        for (ITask item : getParser().getTasks()) {
+        for (ITask item : getParser().getTaskManager().getTasks()) {
              sentence.append(i).append(".").append(item).append("\n");
             i++;
         }
-        sentence.append("You have total ").append(getParser().getTasks().size()).append(" tasks in the list.");
-        UserInterface.Speak(sentence.toString());
+        sentence.append("You have total ").append(getParser().getTaskManager().size()).append(" tasks in the list.");
+        setMsg(sentence.toString());
         return false;
 
     }

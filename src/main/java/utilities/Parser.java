@@ -1,4 +1,4 @@
-package uitilties;
+package utilities;
 
 import exceptions.ContentEmpty;
 import exceptions.DukeException;
@@ -6,7 +6,6 @@ import exceptions.IncompleteCommandException;
 import exceptions.InvalidMarkInput;
 import tasks.ITask;
 
-import java.util.ArrayList;
 
 public class Parser {
     private boolean processed = false;
@@ -19,13 +18,13 @@ public class Parser {
 
     public void forDeadline() throws DukeException {
         if (!processed) {
-            if (!_input.contains("/b")) {
-                throw new IncompleteCommandException("/b");
+            if (!_input.contains("/by")) {
+                throw new IncompleteCommandException("/by");
             }
 
-            String[] temp = _input.split("/b");
+            String[] temp = _input.split("/by");
             if (temp.length < 1) {
-                throw new ContentEmpty("'/b command'");
+                throw new ContentEmpty("'/by command'");
             }
             _description = temp[0].trim();
             _by = temp[1].trim();
@@ -53,7 +52,7 @@ public class Parser {
     private String _to;
 
 
-    private final ArrayList<ITask> _tasks;
+    private final TaskManager _taskManager;
 
     public ITask.TaskTypes getType() {
         return _type;
@@ -63,23 +62,23 @@ public class Parser {
     private int _index;
 
 
-    public Parser(ArrayList<ITask> tasks) {
-        _tasks = tasks;
+    public Parser(TaskManager taskManager) {
+        _taskManager = taskManager;
     }
 
-    public Parser(String input, ArrayList<ITask> tasks) {
+    public Parser(String input, TaskManager taskManager) {
         _input = input;
-        _tasks = tasks;
+        _taskManager = taskManager;
     }
 
-    public Parser(ArrayList<ITask> tasks, String input, ITask.TaskTypes type) {
-        _tasks = tasks;
+    public Parser(TaskManager taskManager, String input, ITask.TaskTypes type) {
+        _taskManager = taskManager;
         _input = input;
         _type = type;
     }
 
-    public ArrayList<ITask> getTasks() {
-        return _tasks;
+    public TaskManager getTaskManager() {
+        return _taskManager;
     }
 
 
@@ -90,7 +89,7 @@ public class Parser {
             } catch (NumberFormatException e) {
                 throw new InvalidMarkInput(_input);
             }
-            if (_index < 0 || _index > _tasks.size() - 1) {
+            if (_index < 0 || _index > _taskManager.size() - 1) {
                 throw new InvalidMarkInput(_input);
             }
             processed = true;

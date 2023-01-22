@@ -55,7 +55,11 @@ public abstract class ITask {
         this.description = description;
         this.isDone = false;
     }
-
+    public ITask(String description, boolean isDone) {
+        this.description = description;
+        this.isDone = isDone;
+    }
+    abstract public String toSaveFormat();
 
     public String getStatusIcon() {
         return (isDone ? "X" : " "); // mark done task with X
