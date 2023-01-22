@@ -39,7 +39,6 @@ public class Duke {
                     System.out.println("Nice! I've marked this task as done:");
                     System.out.println(myList.get(lastInteger).toString());
                 }
-
             }
             else if (userInput.startsWith("unmark")) {
                 Matcher matcher = Pattern.compile("\\d+$").matcher(userInput);
@@ -49,6 +48,16 @@ public class Duke {
                     System.out.println("OK, I've marked this task as not done yet:");
                     System.out.println(myList.get(lastInteger).toString());
 
+                }
+            }
+            else if (userInput.startsWith("delete")) {
+                Matcher matcher = Pattern.compile("\\d+$").matcher(userInput);
+                if (matcher.find()) {
+                    int lastInteger = Integer.parseInt(matcher.group()) - 1;
+                    System.out.println("Noted. I've removed this task:");
+                    System.out.println(myList.get(lastInteger).toString());
+                    System.out.println("Now you have " + String.valueOf(myList.size() - 1) + " tasks in the list.");
+                    myList.remove(lastInteger);
                 }
             }
             else {
