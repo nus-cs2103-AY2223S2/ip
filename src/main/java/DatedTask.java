@@ -1,5 +1,6 @@
 
 import java.time.LocalDate;
+import java.time.format.DateTimeParseException;
 
 /**
  * The DatedTask represents a Task that contains a date.
@@ -13,9 +14,14 @@ public class DatedTask extends Task {
      * @param name
      * @param impDate
      */
-    protected DatedTask(String name, LocalDate impDate) {
+    protected DatedTask(String name, String impDate) throws DukeException {
         super(name);
-        this.imptDate = impDate;
+        try {
+            this.imptDate = LocalDate.parse(impDate);
+        } catch (DateTimeParseException e) {
+            throw new DukeException("Write the date in this format: YYYY-MM-DD");
+        }
+
     }
 
     @Override

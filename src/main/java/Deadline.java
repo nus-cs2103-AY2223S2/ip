@@ -1,5 +1,6 @@
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
 
 /**
  * The Deadline class extends the DatedTask class and represents a datedtask with a due date.
@@ -15,9 +16,15 @@ public class Deadline extends DatedTask {
      * @param name The name of the task.
      * @param date The date of when the task is due.
      */
-    public Deadline(String name, String date) {
-        super(name, LocalDate.parse(date));
-        this.date = LocalDate.parse(date);
+    public Deadline(String name, String date) throws DukeException {
+        super(name, date);
+        try {
+            this.date = LocalDate.parse(date);
+        } catch (DateTimeParseException e) {
+            throw new DukeException(
+                    "The deadline command should be used like this:\n" + "\tdeadline {name} /by {date}");
+        }
+
     }
 
     /**

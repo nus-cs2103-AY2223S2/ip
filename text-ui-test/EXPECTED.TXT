@@ -48,19 +48,19 @@ What can I do for you?
 	5.[T][ ] borrow book
 ---------------------
 ---------------------
-	Duke: OOPS!!! Please enter a number from 1 to 5
+	Duke: OOPS!!! Please input a valid task number
 ---------------------
 ---------------------
-	Duke: OOPS!!! Please enter a number from 1 to 5
+	Duke: OOPS!!! Please input a valid task number
 ---------------------
 ---------------------
-	Duke: OOPS!!! Please enter a number from 1 to 5
+	Duke: OOPS!!! Please input a valid task number
 ---------------------
 ---------------------
-	Duke: OOPS!!! Please enter a number from 1 to 5
+	Duke: OOPS!!! Please input a valid task number
 ---------------------
 ---------------------
-	Duke: OOPS!!! Please enter a number from 1 to 5
+	Duke: OOPS!!! Please input a valid task number
 ---------------------
 ---------------------
 	Nice! I've marked this task as done:
@@ -94,7 +94,7 @@ What can I do for you?
 	Now you have 8 tasks in the list.
 ---------------------
 ---------------------
-	Here are the important tasks in your list:
+	Here are the tasks in your list:
 	1.[D][ ] return book (by: Tue, 6 Jun 23)
 	2.[E][ ] project meeting (from: Sat, 17 Jun to: Sun, 18 Jun 23)
 	3.[E][ ] project meeting (from: Sun, 06 Aug to: Tue, 08 Aug 23)
@@ -158,7 +158,7 @@ What can I do for you?
 	5.[T][ ] a
 ---------------------
 ---------------------
-	Duke: OOPS!!! Please enter a number from 1 to 5
+	Duke: OOPS!!! Please enter a number between 1 and 5
 ---------------------
 ---------------------
 	Noted. I've removed this task:
@@ -189,7 +189,7 @@ What can I do for you?
 	Duke: OOPS!!! There are no tasks to be deleted.
 ---------------------
 ---------------------
-	Duke: OOPS!!! I only understand {echo, list, mark, unmark, todo, deadline, event} commands.
+	Duke: OOPS!!! I don't understand that command
 ---------------------
 ---------------------
 	Duke: OOPS!!! The deadline command should be used like this:
@@ -200,18 +200,16 @@ What can I do for you?
 	deadline {name} /by {date}
 ---------------------
 ---------------------
-	Duke: OOPS!!! The deadline command should be used like this:
-	deadline {name} /by {date}
+	Duke: OOPS!!! Write the date in this format: YYYY-MM-DD
+---------------------
+---------------------
+	Duke: OOPS!!! Write the date in this format: YYYY-MM-DD
 ---------------------
 ---------------------
 	Duke: OOPS!!! The deadline command should be used like this:
 	deadline {name} /by {date}
 ---------------------
 ---------------------
-	Duke: OOPS!!! The deadline command should be used like this:
-	deadline {name} /by {date}
----------------------
----------------------
 	Duke: OOPS!!! The event command should be used like this:
 	event {name} /from {YYYY-MM-DD} /to {YYYY-MM-DD}
 ---------------------
@@ -228,12 +226,10 @@ What can I do for you?
 	event {name} /from {YYYY-MM-DD} /to {YYYY-MM-DD}
 ---------------------
 ---------------------
-	Duke: OOPS!!! The event command should be used like this:
-	event {name} /from {YYYY-MM-DD} /to {YYYY-MM-DD}
+	Duke: OOPS!!! Write the date in this format: YYYY-MM-DD
 ---------------------
 ---------------------
-	Duke: OOPS!!! The event command should be used like this:
-	event {name} /from {YYYY-MM-DD} /to {YYYY-MM-DD}
+	Duke: OOPS!!! Write the date in this format: YYYY-MM-DD
 ---------------------
 ---------------------
 	Duke: OOPS!!! The event command should be used like this:

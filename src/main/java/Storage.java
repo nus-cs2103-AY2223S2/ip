@@ -5,7 +5,6 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
-import java.util.ArrayList;
 
 /**
  * This storage class represents Duke's storage.
@@ -47,7 +46,7 @@ public class Storage {
      *
      * @param tasks The tasks to save.
      */
-    public void saveToFile(ArrayList<Task> tasks) {
+    public void saveToFile(TaskList tasks) {
         try {
             //Solution below adapted from https://www.geeksforgeeks.org/serialization-in-java/
             FileOutputStream temp = new FileOutputStream(store);
@@ -67,15 +66,14 @@ public class Storage {
      *
      * @return The arraylist containing the tasks.
      */
-    public ArrayList<Task> loadFromFile() {
+    public TaskList loadFromFile() {
         try {
             //Solution below adapted from https://www.geeksforgeeks.org/serialization-in-java/
             FileInputStream temp = new FileInputStream(store);
             ObjectInputStream in = new ObjectInputStream(temp);
 
             // Any corruption will be handled below.
-            @SuppressWarnings("unchecked")
-            ArrayList<Task> output = (ArrayList<Task>) in.readObject();
+            TaskList output = (TaskList) in.readObject();
 
             in.close();
             temp.close();

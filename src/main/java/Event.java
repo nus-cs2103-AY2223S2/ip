@@ -1,5 +1,6 @@
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
 
 /**
  * The Event class extends the DatedTask class and represents an event with a start and end date.
@@ -19,9 +20,14 @@ public class Event extends DatedTask {
      * @throws DukeException If the dates are not formatted properly.
      */
     public Event(String name, String start, String end) throws DukeException {
-        super(name, LocalDate.parse(end));
-        this.start = LocalDate.parse(start);
-        this.end = LocalDate.parse(end);
+        super(name, end);
+        try {
+            this.start = LocalDate.parse(start);
+            this.end = LocalDate.parse(end);
+        } catch (DateTimeParseException e) {
+            throw new DukeException("The event command should be used like this:\n"
+                    + "\tevent {name} /from {YYYY-MM-DD} /to {YYYY-MM-DD}");
+        }
     }
 
     @Override
