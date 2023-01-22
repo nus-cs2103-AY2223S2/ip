@@ -49,15 +49,15 @@ public class Chungus {
             ui.print("chungus> ");
 
             String cmd = ui.nextLine();
-            Handler handler = Parser.parse(cmd);
-            execHandler(handler, cmd);
+            parseAndExec(cmd);
 
             ui.print("\n"); // add an extra line
         }
     }
 
-    private void execHandler(Handler handler, String cmd) {
+    private void parseAndExec(String cmd) {
         try {
+            Handler handler = Parser.parse(cmd);
             boolean shouldExit = handler.handle(tasks, ui, db);
             // overwrite the database after every command
             db.write(tasks);

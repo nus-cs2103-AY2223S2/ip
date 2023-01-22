@@ -61,7 +61,7 @@ class Parser {
                 return Handlers.mark(idx);
             }
             default: {
-                throw new ChungusException(String.format("Unknown command \"%s\"", args[0]));
+                return Handlers.unknown(args[0]);
             }
         }
     }

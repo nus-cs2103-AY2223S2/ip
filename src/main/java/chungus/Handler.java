@@ -20,14 +20,14 @@ interface Handler {
 }
 
 class Handlers {
-    static Handler bye() {
+    public static Handler bye() {
         return (TaskList tasks, Ui ui, Storage storage) -> {
             ui.info("Bye!");
             return true;
         };
     }
 
-    static Handler list() {
+    public static Handler list() {
         return (TaskList tasks, Ui ui, Storage storage) -> {
             ui.info("Here are the tasks in your list:");
             tasks.forEach((task, idx) -> {
@@ -37,7 +37,7 @@ class Handlers {
         };
     }
 
-    static Handler todo(String desc) {
+    public static Handler todo(String desc) {
         return (TaskList tasks, Ui ui, Storage storage) -> {
             Todo task = new Todo(desc);
             tasks.add(task);
@@ -47,7 +47,7 @@ class Handlers {
         };
     }
 
-    static Handler deadline(String desc, LocalDateTime deadline) {
+    public static Handler deadline(String desc, LocalDateTime deadline) {
         return (TaskList tasks, Ui ui, Storage storage) -> {
             Deadline task = new Deadline(desc, deadline);
             tasks.add(task);
@@ -57,7 +57,7 @@ class Handlers {
         };
     }
 
-    static Handler event(String desc, LocalDateTime from, LocalDateTime to) {
+    public static Handler event(String desc, LocalDateTime from, LocalDateTime to) {
         return (TaskList tasks, Ui ui, Storage storage) -> {
             Event task = new Event(desc, from, to);
             tasks.add(task);
@@ -67,7 +67,7 @@ class Handlers {
         };
     }
 
-    static Handler mark(int idx) {
+    public static Handler mark(int idx) {
         return (TaskList tasks, Ui ui, Storage storage) -> {
             tasks.setDone(idx);
 
@@ -78,7 +78,7 @@ class Handlers {
         };
     }
 
-    static Handler unmark(int idx) {
+    public static Handler unmark(int idx) {
         return (TaskList tasks, Ui ui, Storage storage) -> {
             tasks.setNotDone(idx);
 
@@ -89,12 +89,18 @@ class Handlers {
         };
     }
 
-    static Handler delete(int idx) {
+    public static Handler delete(int idx) {
         return (TaskList tasks, Ui ui, Storage storage) -> {
             Task task = tasks.remove(idx);
             Handler.reportDeletedTask(task, ui, tasks);
 
             return false;
+        };
+    }
+
+    public static Handler unknown(String cmd) {
+        return (TaskList tasks, Ui ui, Storage storage) -> {
+            throw new ChungusException(String.format("Unknown command \"%s\"", cmd));
         };
     }
 }
