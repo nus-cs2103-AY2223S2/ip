@@ -1,4 +1,6 @@
 import java.io.FileNotFoundException;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 import java.util.Objects;
 import java.util.ArrayList;
 import java.util.Iterator;
@@ -9,12 +11,13 @@ import java.util.Scanner;
 
 
 public class Duke {
-    protected final String RECORD_PATH = "./data/duke.txt";
+    protected final String RECORD_DIR = "./data";
+    protected final String RECORD_NAME = "/duke.txt";
     protected final ArrayList<Task> tasks = new ArrayList<>();
-    protected final String name;
+    protected final String myName;
 
     public Duke() {
-        this.name = "Duke";
+        this.myName = "Duke";
     }
 
     /**
@@ -133,7 +136,7 @@ public class Duke {
      * @return the hello message
      */
     public String greeting() {
-        return String.format("Hello! I'm %s \nWhat can I do for you?", this.name);
+        return String.format("Hello! I'm %s \nWhat can I do for you?", this.myName);
     }
 
     /**
@@ -141,7 +144,7 @@ public class Duke {
      * @return the bye-bye message to be printed out
      */
     public String endMsg() throws DukeException {
-        this.saveToFile(this.RECORD_PATH);
+        this.saveToFile(this.RECORD_DIR);
         return "Bye. Hope to see you again soon!";
     }
 
@@ -213,11 +216,17 @@ public class Duke {
         String taskListString = this.getTaskListString(false); // no index for file
         // https://www.w3schools.com/java/java_files_create.asp
         try {
-            File file = new File(path);
-            if (!file.createNewFile()) {
-                throw new DukeException("File already exists at " + path);
+            // create the directory and the record file
+            // https://stackoverflow.com/questions/15571496/how-to-check-if-a-folder-exists
+            if (!(new File(this.RECORD_DIR).exists())) {
+                Files.createDirectories(Paths.get(path));
             }
-            FileWriter myWriter = new FileWriter(path);
+            String recordPath = this.RECORD_DIR + "/" + this.RECORD_NAME;
+            File file = new File(recordPath);
+            file.createNewFile();
+
+            // write to the file
+            FileWriter myWriter = new FileWriter(recordPath);
             myWriter.write(taskListString);
             myWriter.close();
         } catch (IOException e) {
