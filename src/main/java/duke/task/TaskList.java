@@ -1,5 +1,9 @@
+package duke.task;
+
 import java.util.ArrayList;
 import java.util.Collections;
+
+import duke.exception.DukeException;
 
 /**
  * The tasklist represents the list of tasks.

@@ -1,4 +1,12 @@
+package duke.command;
+
 import java.time.format.DateTimeParseException;
+
+import duke.exception.DukeException;
+import duke.storage.Storage;
+import duke.task.Deadline;
+import duke.task.TaskList;
+import duke.ui.Ui;
 
 /**
  * Represents Duke's deadline function

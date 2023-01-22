@@ -1,3 +1,5 @@
+package duke.task;
+
 /**
  * The ToDo class extends the Task class and represents a task that needs to be done.
  */

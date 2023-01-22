@@ -1,6 +1,9 @@
+package duke.task;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeParseException;
+
+import duke.exception.DukeException;
 
 /**
  * The DatedTask represents a Task that contains a date.

@@ -1,3 +1,11 @@
+
+import duke.command.Command;
+import duke.command.Parser;
+import duke.exception.DukeException;
+import duke.storage.Storage;
+import duke.task.TaskList;
+import duke.ui.Ui;
+
 /**
  * The Duke class represents a CLI chatbot that performs operations based on CLI user input.
  * <p>

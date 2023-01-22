@@ -1,3 +1,5 @@
+package duke.storage;
+
 import java.io.EOFException;
 import java.io.File;
 import java.io.FileInputStream;
@@ -5,6 +7,9 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
+
+import duke.exception.DukeException;
+import duke.task.TaskList;
 
 /**
  * This storage class represents Duke's storage.
@@ -66,7 +71,7 @@ public class Storage {
      *
      * @return The arraylist containing the tasks.
      */
-    public TaskList loadFromFile() {
+    public TaskList loadFromFile() throws DukeException {
         try {
             //Solution below adapted from https://www.geeksforgeeks.org/serialization-in-java/
             FileInputStream temp = new FileInputStream(store);
@@ -82,7 +87,7 @@ public class Storage {
         } catch (EOFException e) {
             // do nothing, empty save file
         } catch (Exception e) {
-            System.out.println(e.getMessage());
+            throw new DukeException("Unable to read file: " + e.getMessage());
         }
 
         return null;

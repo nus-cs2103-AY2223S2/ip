@@ -1,3 +1,5 @@
+package duke.exception;
+
 /**
  * The DukeException class extends the Exception class and represents that an error has occured in Duke
  */

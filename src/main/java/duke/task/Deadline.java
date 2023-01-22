@@ -1,6 +1,10 @@
+package duke.task;
+
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
+
+import duke.exception.DukeException;
 
 /**
  * The Deadline class extends the DatedTask class and represents a datedtask with a due date.

@@ -1,3 +1,5 @@
+package duke.command;
+
 /**
  * The Commands enum represents Duke's available commands.
  */

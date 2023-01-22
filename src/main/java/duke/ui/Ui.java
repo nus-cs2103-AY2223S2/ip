@@ -1,4 +1,10 @@
+package duke.ui;
+
 import java.util.Scanner;
+
+import duke.exception.DukeException;
+import duke.task.Task;
+import duke.task.TaskList;
 
 /**
  * The Ui class represents Duke's user interface that interacts with the user.
