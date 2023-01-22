@@ -1,3 +1,5 @@
+package Features;
+
 public class Ui {
     protected String logo = " ____        _        \n"
             + "|  _ \\ _   _| | _____ \n"
@@ -7,12 +9,14 @@ public class Ui {
     protected String border = "_________________________________________\n";
 
     public Ui() {
-        // Welcome message upon initialisation of new Ui
+    }
+
+    public void welcome() {
         System.out.println("Hello from\n" + logo);
         System.out.println(border + "Sup, Duke here.\nWhat do you want from me?\n" + border);
     }
 
-    public void print(String toFormat){
+    public void print(String toFormat) {
         System.out.println(border + toFormat + "\n" + border);
     }
 

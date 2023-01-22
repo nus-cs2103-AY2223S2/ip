@@ -1,3 +1,5 @@
+package Features;
+
 public class DukeException extends Exception{
     protected String errorMessage;
 

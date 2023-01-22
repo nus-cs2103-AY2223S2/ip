@@ -1,5 +1,6 @@
-import Tasks.Task;
+package Features;
 
+import Tasks.Task;
 import java.util.ArrayList;
 
 public class TaskList {
@@ -24,5 +25,18 @@ public class TaskList {
 
     public void remove(int index) {
         this.list.remove(index);
+    }
+
+    public void clone(TaskList cloneFrom) {
+        TaskList tempList = new TaskList();
+        for (int i = 0; i < cloneFrom.size(); i++) {
+            tempList.add(cloneFrom.get(i));
+        }
+        while (this.list.size()>0) {
+            this.list.remove(0);
+        }
+        for (int i = 0; i < tempList.size(); i++) {
+            this.list.add(tempList.get(i));
+        }
     }
 }

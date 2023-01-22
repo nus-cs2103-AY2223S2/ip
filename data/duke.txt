@@ -1,3 +1,3 @@
-E=X=Repeat=Nov 12 2022, 1511 hrs=Nov 13 2022, 1512 hrs
-E=X=here=now=forever
-D= =sleep more=2022/12/11 13:55
+T=X=Ear
+T= =Sleep
+T=X=5
