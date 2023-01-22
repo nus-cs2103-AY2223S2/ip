@@ -1,6 +1,5 @@
 package utilities;
 
-import exceptions.DateParseException;
 import exceptions.DukeException;
 import exceptions.LoadFileException;
 import exceptions.SaveFileException;
@@ -12,8 +11,8 @@ import tasks.Todo;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.text.ParseException;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.Scanner;
 
 public class Storage {
@@ -54,9 +53,9 @@ public class Storage {
 
                     String by = line.substring(line.indexOf("/by:") + 4, line.indexOf("/content:")).trim();
                     if (line.contains("[X]")) {
-                        result.add(new Deadline(line.substring(markIndex).trim(), Parser.dateFormat.parse(by), true));
+                        result.add(new Deadline(line.substring(markIndex).trim(), new  Date(Long.parseLong(by)), true));
                     } else {
-                        result.add(new Deadline(line.substring(unmarkIndex).trim(), Parser.dateFormat.parse(by), false));
+                        result.add(new Deadline(line.substring(unmarkIndex).trim(), new  Date(Long.parseLong(by)), false));
                     }
 
                 } else if (line.contains("[E]")) {
@@ -65,10 +64,10 @@ public class Storage {
 
                     if (line.contains("[X]")) {
                         result.add(new Event(line.substring(markIndex).trim(),
-                                Parser.dateFormat.parse(from), Parser.dateFormat.parse(to), true));
+                                new  Date(Long.parseLong(from)), new  Date(Long.parseLong(to)), true));
                     } else {
                         result.add(new Event(line.substring(unmarkIndex).trim(),
-                                Parser.dateFormat.parse(from), Parser.dateFormat.parse(to), false));
+                                new  Date(Long.parseLong(from)), new  Date(Long.parseLong(to)), false));
                     }
                 }
             }
@@ -76,8 +75,6 @@ public class Storage {
 
         } catch (IOException e) {
             throw new LoadFileException(_path, e.getMessage());
-        } catch (ParseException e) {
-            throw new DateParseException(e.getMessage());
         }
 
     }

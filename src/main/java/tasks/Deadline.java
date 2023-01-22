@@ -17,7 +17,7 @@ public class Deadline extends ITask {
     }
     @Override
     public String toSaveFormat() {
-        return "[D] " + "/by: " + _by + " /content: " + super.toString() ;
+        return "[D] " + "/by: " + _by.getTime() + " /content: " + super.toString() ;
     }
 
     @Override
