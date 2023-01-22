@@ -1,8 +1,5 @@
 package duke.task;
 import duke.exception.DukeException;
-import duke.task.Events;
-import duke.task.Task;
-import duke.task.ToDos;
 
 import java.util.ArrayList;
 
