@@ -5,3 +5,21 @@ Hello from
 | |_| | |_| |   <  __/
 |____/ \__,_|_|\_\___|
 
+Meow I'm Toto! What can I do for you?
+Meow! Just added:
+[T][ ] buy veggies
+By when?
+Meow! Just added:
+[D][ ] english hw (by: tues 2pm)
+From?
+To?
+Meow! Just added:
+[E][ ] ballroom dancing (from: thursday 5pm to: 6pm)
+1. [T][ ] buy veggies
+2. [D][ ] english hw (by: tues 2pm)
+3. [E][ ] ballroom dancing (from: thursday 5pm to: 6pm)
+I've marked this task as done: [D][X] english hw (by: tues 2pm)
+1. [T][ ] buy veggies
+2. [D][X] english hw (by: tues 2pm)
+3. [E][ ] ballroom dancing (from: thursday 5pm to: 6pm)
+Byebye CATch you later!
