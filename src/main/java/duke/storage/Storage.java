@@ -1,3 +1,6 @@
+package duke.storage;
+import duke.task.Task;
+
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileWriter;
@@ -34,7 +37,6 @@ public class Storage {
     public void store(ArrayList<Task> list) {
         try {
                 String home = System.getProperty("user.home");
-            System.out.println(home);
                 Path path = Paths.get(home);
                 File f = new File( "./text-ui-test/duke.txt");
                 if (!f.exists()) {

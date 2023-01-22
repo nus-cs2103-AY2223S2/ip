@@ -1,3 +1,9 @@
+package duke.command;
+
+import duke.Ui.Ui;
+import duke.storage.Storage;
+import duke.task.TaskList;
+
 public class MarkCommand extends Command{
     protected String fullCommand;
     protected String markOrNot;

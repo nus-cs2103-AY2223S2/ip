@@ -1,6 +1,10 @@
-import java.lang.reflect.Array;
+package duke.task;
+import duke.exception.DukeException;
+import duke.task.Events;
+import duke.task.Task;
+import duke.task.ToDos;
+
 import java.util.ArrayList;
-import java.util.Scanner;
 
 public class TaskList {
 
@@ -77,7 +81,7 @@ public class TaskList {
         listDataBase.add(taskName);
         System.out.println("Now you have " + listDataBase.size()+ " tasks in the list.");
     }
-    public void event(String[] s) throws DukeException{
+    public void event(String[] s) throws DukeException {
         String taskDescription = "";
         boolean isStartTime = false;
         boolean isEndTime = false;
