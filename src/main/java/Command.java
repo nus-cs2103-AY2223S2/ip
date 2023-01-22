@@ -1,10 +1,15 @@
-public enum AddCommands {
+public enum Command {
     TODO,
     DEADLINE,
-    EVENT;
+    EVENT,
+    BYE,
+    LIST,
+    MARK,
+    UNMARK,
+    DELETE;
 
     public static boolean contains(String str) {
-        for (AddCommands ac:values()) {
+        for (Command ac:values()) {
             if (ac.name().equals(str.toUpperCase())) {
                 return true;
             }

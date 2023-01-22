@@ -3,7 +3,7 @@ import java.time.format.DateTimeFormatter;
 
 public class Deadline extends Task {
 
-    private LocalDateTime end;
+    private final LocalDateTime end;
     private static final DateTimeFormatter FORMATTER = DateTimeFormatter.ofPattern("dd MMM uuuu h.mm a");
 
     public Deadline(String desc, boolean isDone, LocalDateTime end) {

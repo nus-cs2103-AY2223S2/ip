@@ -3,8 +3,8 @@ import java.time.format.DateTimeFormatter;
 
 public class Event extends Task {
 
-    private LocalDateTime start;
-    private LocalDateTime end;
+    private final LocalDateTime start;
+    private final LocalDateTime end;
     private static final DateTimeFormatter FORMATTER = DateTimeFormatter.ofPattern("dd MMM uuuu h.mm a");
 
 
