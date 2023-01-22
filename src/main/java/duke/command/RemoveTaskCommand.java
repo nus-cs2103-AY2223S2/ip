@@ -4,7 +4,7 @@ import duke.DukeException;
 import duke.task.Task;
 
 public class RemoveTaskCommand extends Command {
-    private int index;
+    private final int index;
 
     public RemoveTaskCommand(int index) {
         this.index = index;
@@ -17,6 +17,19 @@ public class RemoveTaskCommand extends Command {
         }
         Task removedTask = taskList.deleteTask(index);
         ui.printTaskDeleted(removedTask, taskList.getSize());
+    }
+
+    @Override
+    public String toString() {
+        return String.format("RemoveTaskCommand{index=%d}", index);
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (obj instanceof RemoveTaskCommand) {
+            return index == ((RemoveTaskCommand) obj).index;
+        }
+        return false;
     }
 
 }

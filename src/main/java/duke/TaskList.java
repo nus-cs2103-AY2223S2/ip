@@ -34,4 +34,13 @@ public class TaskList {
     public Task deleteTask(int index) {
         return taskList.remove(index);
     }
+
+    @Override
+    public String toString() {
+        String output = "";
+        for (int i = 0; i < taskList.size(); i++) {
+            output += (i + 1) + ". " + taskList.get(i) + "\n";
+        }
+        return output;
+    }
 }

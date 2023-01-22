@@ -21,6 +21,7 @@ public class Task {
         done = false;
     }
 
+    @Override
     public String toString() {
         return "[" + (done ? "X" : " ") + "] " + task;
     }
@@ -31,6 +32,14 @@ public class Task {
 
     public boolean isDone() {
         return done;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (obj instanceof Task) {
+            return task.equals(((Task) obj).task) && done == ((Task) obj).done;
+        }
+        return false;
     }
 
 }

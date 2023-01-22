@@ -5,11 +5,18 @@ public class ToDo extends Task {
         super(task);
     }
 
+    @Override
     public String toString() {
         return "[T]" + super.toString();
     }
 
+    @Override
     public String toFileString() {
         return "T | " + super.toFileString();
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        return super.equals(obj);
     }
 }

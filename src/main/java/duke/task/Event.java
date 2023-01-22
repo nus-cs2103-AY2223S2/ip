@@ -23,6 +23,7 @@ public class Event extends Task {
         return to.format(DateTimeFormatter.ofPattern("d/MM/yyyy HHmm"));
     }
 
+    @Override
     public String toString() {
         return String.format("[E]%s (from: %s to: %s)",
                 super.toString(),
@@ -30,11 +31,22 @@ public class Event extends Task {
                 to.format(DateTimeFormatter.ofPattern("MMM dd yyyy HH:mm")));
     }
 
+    @Override
     public String toFileString() {
         return String.format("E | %s | %s | %s",
                 super.toFileString(),
                 from.format(DateTimeFormatter.ofPattern("d/MM/yyyy HHmm")),
                 to.format(DateTimeFormatter.ofPattern("d/MM/yyyy HHmm")));
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (obj instanceof Event) {
+            return super.equals(obj)
+                    && from.equals(((Event) obj).from)
+                    && to.equals(((Event) obj).to);
+        }
+        return super.equals(obj);
     }
 
 }

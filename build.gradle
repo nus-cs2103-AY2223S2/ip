@@ -30,6 +30,8 @@ task coverage(type: JacocoReport) {
 }
 
 dependencies {
+    implementation 'junit:junit:4.13.1'
+    implementation 'junit:junit:4.13.1'
     String jUnitVersion = '5.4.0'
     String javaFxVersion = '11'
     
