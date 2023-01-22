@@ -1,4 +1,5 @@
 import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 
 public class DeadlineTask extends Task {
     protected LocalDate by;
@@ -16,6 +17,7 @@ public class DeadlineTask extends Task {
 
     @Override
     public String toString() {
-        return "[D]" + super.toString() + " (by: " + by + ")";
+        String byString = by.format(DateTimeFormatter.ofPattern("yyyy/MM/dd"));
+        return "[D]" + super.toString() + " (by: " + byString + ")";
     }
 }
