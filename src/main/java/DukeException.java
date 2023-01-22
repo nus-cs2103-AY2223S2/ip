@@ -1,13 +1,13 @@
 public class DukeException extends Exception{
-    protected String ErrorMessage;
+    protected String errorMessage;
 
-    public DukeException(String ErrorMessage) {
-        super(ErrorMessage);
-        this.ErrorMessage = ErrorMessage;
+    public DukeException(String errorMessage) {
+        super(errorMessage);
+        this.errorMessage = errorMessage;
     }
 
-    public String PrintErrorMessage () {
-        return this.ErrorMessage;
+    public String printErrorMessage() {
+        return this.errorMessage;
     }
 
 }

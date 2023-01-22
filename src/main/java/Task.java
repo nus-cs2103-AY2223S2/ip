@@ -2,8 +2,8 @@ public class Task {
     protected String name;
     protected boolean isDone;
 
-    public Task(String TaskName) {
-        this.name = TaskName;
+    public Task(String taskName) {
+        this.name = taskName;
         this.isDone = false;
     }
     // gets name of task

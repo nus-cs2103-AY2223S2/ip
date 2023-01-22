@@ -1,3 +1,2 @@
-D= =Sleep=2021/11/12 15:40
 E=X=Repeat=Nov 12 2022, 1511 hrs=Nov 13 2022, 1512 hrs
 E= =here=now=forever
