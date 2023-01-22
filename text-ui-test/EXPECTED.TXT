@@ -13,6 +13,10 @@ ____________________________________________________________
 TO DO LIST:
 @~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~@
 
+!!!~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~!!!
+The Duke does not understand your words!
+!!!~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~!!!
+
 @~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~@
 The Duke has added the following task:
  - [T][ ] exam
@@ -38,6 +42,67 @@ TO DO LIST:
 3.[E][ ] 2103t (from: 1/1/2023 to: 4/29/2023)
 @~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~@
 
+!!!~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~!!!
+The Duke does not understand your words!
+!!!~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~!!!
+
+!!!~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~!!!
+Not enough details are given!
+ The Duke expects more information!
+!!!~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~!!!
+
+!!!~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~!!!
+Not enough details are given!
+The Duke expects more information!
+!!!~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~!!!
+
+!!!~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~!!!
+Not enough details are given!
+The Duke expects more information!
+!!!~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~!!!
+
+@~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~@
+TO DO LIST:
+1.[T][ ] exam
+2.[D][ ] gaming (by: 29th april 2023)
+3.[E][ ] 2103t (from: 1/1/2023 to: 4/29/2023)
+@~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~@
+
+!!!~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~!!!
+The Duke does not understand your words!
+!!!~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~!!!
+
+!!!~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~!!!
+Not enough details are given!
+The Duke expects more information!
+!!!~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~!!!
+
+!!!~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~!!!
+Not enough details are given!
+The Duke expects more information!
+!!!~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~!!!
+
+!!!~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~!!!
+Not enough details are given!
+The Duke expects more information!
+!!!~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~!!!
+
+!!!~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~!!!
+Not enough details are given!
+The Duke expects more information!
+!!!~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~!!!
+
+@~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~@
+TO DO LIST:
+1.[T][ ] exam
+2.[D][ ] gaming (by: 29th april 2023)
+3.[E][ ] 2103t (from: 1/1/2023 to: 4/29/2023)
+@~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~@
+
+!!!~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~!!!
+The Duke does not understand your words!
+!!!~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~!!!
+
 @~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~@
 The Duke has marked the following task:
  - [D][x] gaming (by: 29th april 2023)
@@ -48,6 +113,10 @@ The Duke has marked the following task:
  - [E][x] 2103t (from: 1/1/2023 to: 4/29/2023)
 @~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~@
 
+!!!~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~!!!
+It seems like the number given isn't on the list!
+!!!~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~!!!
+
 @~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~@
 TO DO LIST:
 1.[T][ ] exam
@@ -55,10 +124,18 @@ TO DO LIST:
 3.[E][x] 2103t (from: 1/1/2023 to: 4/29/2023)
 @~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~@
 
+!!!~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~!!!
+The Duke does not understand your words!
+!!!~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~!!!
+
 @~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~@
 The Duke has unmarked the following task:
  - [D][ ] gaming (by: 29th april 2023)
 @~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~@
+
+!!!~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~!!!
+It seems like the number given isn't on the list!
+!!!~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~!!!
 
 @~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~@
 TO DO LIST:
@@ -67,17 +144,29 @@ TO DO LIST:
 3.[E][x] 2103t (from: 1/1/2023 to: 4/29/2023)
 @~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~@
 
+!!!~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~!!!
+The Duke does not understand your words!
+!!!~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~!!!
+
 @~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~@
 The Duke has removed the following task:
  - [D][ ] gaming (by: 29th april 2023)
 You now have 2 task!
 @~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~@
 
+!!!~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~!!!
+It seems like the number given isn't on the list!
+!!!~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~!!!
+
 @~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~@
 TO DO LIST:
 1.[T][ ] exam
 2.[E][x] 2103t (from: 1/1/2023 to: 4/29/2023)
 @~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~@
+
+!!!~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~!!!
+The Duke does not understand your words!
+!!!~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~!!!
 
 @~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~@
 The Duke has unmarked the following task:
@@ -89,6 +178,10 @@ TO DO LIST:
 1.[T][ ] exam
 2.[E][ ] 2103t (from: 1/1/2023 to: 4/29/2023)
 @~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~@
+
+!!!~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~!!!
+The Duke does not understand your words!
+!!!~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~!!!
 
 ____________________________________________________________
 Goodbye, feel free to call the Duke again whenever you need.

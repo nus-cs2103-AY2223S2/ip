@@ -30,10 +30,9 @@ public class Duke {
     private static void input(Scanner sc, ToDoList ls) {
         while (true) {
             try {
-                String input[] = sc.nextLine().split(" ", 2);
+                String input[] = Duke.commandHandler(sc.nextLine(), " ", 2, 1);
                 String command = input[0];
                 String sub;
-                String subinput[];
 
                 switch (command) {
                     case "bye":
@@ -43,35 +42,57 @@ public class Duke {
                         break;
                     case "mark":
                         sub = input[1];
-                        ls.markTask(Integer.parseInt(sub));
+                        ls.markTask(Integer.parseInt(sub)); //numbersformatexception to be handled
                         break;
                     case "unmark":
                         sub = input[1];
-                        ls.unmarkTask(Integer.parseInt(sub));
+                        ls.unmarkTask(Integer.parseInt(sub)); //numbersformatexception to be handled
                         break;
                     case "delete":
                         sub = input[1];
-                        ls.delete(Integer.parseInt(sub));
+                        ls.delete(Integer.parseInt(sub)); //numbersformatexception to be handled
                         break;
                     case "todo":
-                        sub = input[1];
-                        ls.add(new ToDoTask(sub));
-                        break;
-                    case "deadline":
-                        sub = input[1];
-                        subinput = sub.split(" /by ");
-                        ls.add(new DeadlineTask(subinput[0], subinput[1]));
-                        break;
                     case "event":
-                        sub = input[1];
-                        subinput = sub.split(" /from ");
-                        String duration[] = subinput[1].split(" /to ");
-                        ls.add(new EventTask(subinput[0], duration[0], duration[1]));
+                    case "deadline":
+                        Duke.taskCommandHandler(input, ls);
                         break;
+                    default:
+                        throw new DukeException("The Duke does not understand your words!");
                 }
             } catch (Exception e) {
-                System.out.println(e);
+                System.out.println(e.getMessage());
             }
         }
     }
+
+    private static String[] commandHandler(String input, String regex,int limit, int minSize) throws DukeException {
+        String sub[] = input.split(regex, limit);
+        if (sub.length < minSize) {
+            throw new DukeException("Not enough details are given!\nThe Duke expects more information!");
+        }
+        return sub;
+    }
+
+    private static void taskCommandHandler(String[] input, ToDoList ls) throws DukeException {
+        String command = input[0];
+        if (input.length < 2) {
+            throw new DukeException("Not enough details are given!\n The Duke expects more information!");
+        }
+        if (command.equals("todo")) {
+            ls.add(new ToDoTask(input[1]));
+            return;
+        }
+        if (command.equals("deadline")) {
+            String[] sub = Duke.commandHandler(input[1], " /by ", 2, 2);
+            ls.add(new DeadlineTask(sub[0], sub[1]));
+            return;
+        }
+        if (command.equals("event")) {
+            String[] sub = Duke.commandHandler(input[1], " /from ", 2, 2);
+            String[] subDuration = Duke.commandHandler(sub[1], " /to ", 2, 2);
+            ls.add(new EventTask(sub[0], subDuration[0], subDuration[1]));
+        }
+    }
+
 }

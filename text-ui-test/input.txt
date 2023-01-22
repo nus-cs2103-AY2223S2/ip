@@ -1,15 +1,35 @@
 list
+
 todo exam
 deadline gaming /by 29th april 2023
 event 2103t /from 1/1/2023 /to 4/29/2023
 list
+
+todo
+deadline test error
+deadline /by test error
+list
+
+event test error
+event test /from error
+event /from error /to error
+event test /to error
+list
+
 mark 2
 mark 3
+mark 4
 list
+
 unmark 2
+unmark -1
 list
+
 delete 2
+delete 5
 list
+
 unmark 2
 list
+
 bye

@@ -17,8 +17,11 @@ public class ToDoList {
                 + "You now have " + this.toDoCount + " task!\n"+ divider);
     }
 
-    public void delete(int ind) {
+    public void delete(int ind) throws DukeException {
         String divider = "@~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~@\n";
+        if (ind < 1 || ind > toDoCount) {
+            throw new DukeException("It seems like the number given isn't on the list!");
+        }
         Task rm = arr.get(ind);
         arr.remove(ind);
         --this.toDoCount;
@@ -28,15 +31,21 @@ public class ToDoList {
     }
 
 
-    public void unmarkTask(int ind) {
+    public void unmarkTask(int ind) throws DukeException {
         String divider = "@~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~@\n";
+        if (ind < 1 || ind > toDoCount) {
+            throw new DukeException("It seems like the number given isn't on the list!");
+        }
         arr.get(ind).markNotDone();
         System.out.println(divider + "The Duke has unmarked the following task: \n"
                 + " - " + arr.get(ind) + "\n" + divider);
     }
 
-    public void  markTask(int ind) {
+    public void  markTask(int ind) throws DukeException {
         String divider = "@~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~@\n";
+        if (ind < 1 || ind > toDoCount) {
+            throw new DukeException("It seems like the number given isn't on the list!");
+        }
         arr.get(ind).markDone();
         System.out.println(divider + "The Duke has marked the following task: \n"
                 + " - " + arr.get(ind) + "\n" + divider);
