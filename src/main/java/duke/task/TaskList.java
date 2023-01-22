@@ -1,3 +1,7 @@
+package duke.task;
+
+import duke.DukeException;
+
 import java.util.ArrayList;
 
 public class TaskList {
@@ -46,7 +50,7 @@ public class TaskList {
     public Task deleteTask(int taskNumber) throws DukeException {
         int size = this.taskList.size();
         if (size == 0 || taskNumber > size) {
-            throw  new DukeException("Task number does not exist.");
+            throw  new DukeException("duke.task.Task number does not exist.");
         }
 
         Task task = taskList.get(taskNumber - 1);

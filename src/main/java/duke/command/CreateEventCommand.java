@@ -1,3 +1,11 @@
+package duke.command;
+
+import duke.Storage;
+import duke.Ui;
+import duke.task.Event;
+import duke.task.Task;
+import duke.task.TaskList;
+
 import java.io.IOException;
 
 public class CreateEventCommand extends Command {

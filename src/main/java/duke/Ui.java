@@ -1,3 +1,8 @@
+package duke;
+
+import duke.task.Task;
+import duke.task.TaskList;
+
 public class Ui {
     private void displayText(String text) {
         System.out.println(text);
@@ -8,11 +13,11 @@ public class Ui {
     }
 
     public void endChat() {
-        this.displayText("Chat with Duke has ended");
+        this.displayText("Chat with duke.Duke has ended");
     }
 
     public void greetUser() {
-        this.displayText("Hello. This is Duke");
+        this.displayText("Hello. This is duke.Duke");
     }
 
     public void replyTotalTasks(TaskList taskList) {

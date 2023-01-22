@@ -1,3 +1,8 @@
+package duke;
+
+import duke.command.Command;
+import duke.task.TaskList;
+
 import java.io.IOException;
 import java.util.Scanner;
 
@@ -8,7 +13,7 @@ import java.util.Scanner;
  */
 public class Duke {
     /**
-     * Storage of user's tasks.
+     * duke.Storage of user's tasks.
      */
     private TaskList taskList;
     private Storage storage;
