@@ -26,6 +26,10 @@ public class AddCommand extends Command {
 		setTaskType(messageArray[0]);
 	}
 
+	public TaskType getTaskType() {
+		return this.taskType;
+	}
+
 	private void setTaskType(String message) {
 		String commandLower = message.toLowerCase();
 		this.taskType = commandLower.startsWith("todo")

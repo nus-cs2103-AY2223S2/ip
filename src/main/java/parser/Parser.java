@@ -50,10 +50,11 @@ public class Parser {
 		}
 	}
 
-	public void parseData(String input, TaskList tasklist, Ui ui) {
+	public void parseAndSetData(String input, TaskList tasklist, Ui ui) {
 		String inputLower = input.toLowerCase();
-		if (inputLower.isBlank())
+		if (inputLower.isBlank()) {
 			return;
+		}
 		String[] inputArr = inputLower.split("\\|");
 		TaskType operationType = inputLower.startsWith("t")
 				? TaskType.TODO
@@ -84,16 +85,6 @@ public class Parser {
 		if (inputArr[1].equals("1"))
 			newTask.markAsDone();
 		tasklist.add(newTask);
-	}
-
-	public LocalDateTime getBy(String[] inputArr, Ui ui) {
-		int l = inputArr.length;
-		for (int i = 0; i < l; i++) {
-			if (i < l - 1 && inputArr[i].equals("/by")) {
-				return parseDateTimeStr(sliceArrAndConcate(inputArr, i + 1, l), ui);
-			}
-		}
-		return null;
 	}
 
 	public LocalDateTime parseDateTimeStr(String dateTimeStr, Ui ui) {
@@ -128,6 +119,16 @@ public class Parser {
 			return null;
 		}
 
+	}
+
+	public LocalDateTime getBy(String[] inputArr, Ui ui) {
+		int l = inputArr.length;
+		for (int i = 0; i < l; i++) {
+			if (i < l - 1 && inputArr[i].equals("/by")) {
+				return parseDateTimeStr(sliceArrAndConcate(inputArr, i + 1, l), ui);
+			}
+		}
+		return null;
 	}
 
 	public LocalDateTime[] getFromTo(String[] inputArr, Ui ui) {

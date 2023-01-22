@@ -31,7 +31,7 @@ public class Storage {
 		try {
 			Scanner myReader = new Scanner(myFile);
 			while (myReader.hasNextLine()) {
-				parser.parseData(myReader.nextLine().trim(), tasklist, ui);
+				parser.parseAndSetData(myReader.nextLine().trim(), tasklist, ui);
 			}
 			myReader.close();
 		} catch (FileNotFoundException e) {

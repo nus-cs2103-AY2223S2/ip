@@ -14,10 +14,6 @@ public class Ui {
 
 	private Scanner scan = new Scanner(System.in);
 
-	enum TaskType {
-		TODO, DEADLINE, EVENT
-	}
-
 	public void printError(String errorMessage) {
 		println(errorMessage);
 	}

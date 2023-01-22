@@ -13,6 +13,10 @@ public class MarkCommand extends Command {
 		this.isMark = isMark;
 	}
 
+	public boolean getIsMark() {
+		return this.isMark;
+	}
+
 	@Override
 	public void execute(Object... args) {
 		Ui ui = (Ui) args[0];
