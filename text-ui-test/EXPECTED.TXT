@@ -9,28 +9,28 @@ Added task: [T][ ] task2
 Marked task: [T][X] task1 as done
 0. [T][X] task1
 1. [T][ ] task2
-Added task: [D][ ] task3 (by: tomorrow)
+Added task: [D][ ] task3 (by: 20 January 2022 12:00)
 0. [T][X] task1
 1. [T][ ] task2
-2. [D][ ] task3 (by: tomorrow)
+2. [D][ ] task3 (by: 20 January 2022 12:00)
 Marked task: [T][X] task2 as done
 0. [T][X] task1
 1. [T][X] task2
-2. [D][ ] task3 (by: tomorrow)
+2. [D][ ] task3 (by: 20 January 2022 12:00)
 Marked task: [T][ ] task1 as not done
 0. [T][ ] task1
 1. [T][X] task2
-2. [D][ ] task3 (by: tomorrow)
-Added task: [E][ ] task4 (from: wednesday to: thursday)
+2. [D][ ] task3 (by: 20 January 2022 12:00)
+Added task: [E][ ] task4 (from: 22 January 2022 08:00 to: 22 January 2022 13:00)
 0. [T][ ] task1
 1. [T][X] task2
-2. [D][ ] task3 (by: tomorrow)
-3. [E][ ] task4 (from: wednesday to: thursday)
+2. [D][ ] task3 (by: 20 January 2022 12:00)
+3. [E][ ] task4 (from: 22 January 2022 08:00 to: 22 January 2022 13:00)
 Added task: [T][ ] task5
 Deleted task: [T][X] task2
 0. [T][ ] task1
-1. [D][ ] task3 (by: tomorrow)
-2. [E][ ] task4 (from: wednesday to: thursday)
+1. [D][ ] task3 (by: 20 January 2022 12:00)
+2. [E][ ] task4 (from: 22 January 2022 08:00 to: 22 January 2022 13:00)
 3. [T][ ] task5
 Command invalidCmd not recognised
 Command TODO requires argument TODO but was not given
@@ -39,15 +39,13 @@ Command invalidArg not recognised
 Command DEADLINE takes in 2 argument(s) but 1 were given
 Command DEADLINE takes in 2 argument(s) but 1 were given
 Command DEADLINE requires argument BY but was not given
-Added task: [D][ ] task8 (by: 6th May)
+Invalid format for date, expected: "YYYY-MM-DD" actual: 6th
 Command EVENT takes in 3 argument(s) but 2 were given
 Command EVENT requires argument TO but was not given
-Added task: [E][ ] task11 (from: 7th July 5am to: 7th July 10am)
-Deleted task: [E][ ] task11 (from: 7th July 5am to: 7th July 10am)
-Deleted task: [D][ ] task8 (by: 6th May)
+Invalid format for date and time, expected: "YYYY-MM-DD TTTT" actual: 2022-06-20
 Deleted task: [T][ ] task5
-Deleted task: [E][ ] task4 (from: wednesday to: thursday)
-Deleted task: [D][ ] task3 (by: tomorrow)
+Deleted task: [E][ ] task4 (from: 22 January 2022 08:00 to: 22 January 2022 13:00)
+Deleted task: [D][ ] task3 (by: 20 January 2022 12:00)
 Deleted task: [T][ ] task1
 
 Good bye!
