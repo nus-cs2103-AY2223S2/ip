@@ -8,7 +8,7 @@ import java.io.FileWriter;
 public class SaveFile {
 
     public ArrayList<Task> loadTaskList() {
-        File dukeSave = new File("duke.txt");
+        File dukeSave = new File("data/duke.txt");
         ArrayList<Task> toLoad = new ArrayList<>();
         if (dukeSave.exists()) {
             try {
@@ -49,7 +49,7 @@ public class SaveFile {
     }
 
     public void saveTaskList(ArrayList<Task> toSave) throws IOException {
-        FileWriter dukeWrite = new FileWriter("duke.txt");
+        FileWriter dukeWrite = new FileWriter("data/duke.txt");
         for (Task task : toSave) {
             dukeWrite.write(task.toSaveString() + "\n");
         }

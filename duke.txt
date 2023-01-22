@@ -1,5 +1,0 @@
-D= =Sleep=tonight
-E=X=Kill=tomorrow=now
-D= =Eat=2023/11/12 13:55
-E= =Rave=Oct 21 2022, 1456 hrs=Apr 01 2023, 1544 hrs
-T= =Repeat

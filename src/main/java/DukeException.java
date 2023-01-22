@@ -9,4 +9,5 @@ public class DukeException extends Exception{
     public String PrintErrorMessage () {
         return this.ErrorMessage;
     }
+
 }
