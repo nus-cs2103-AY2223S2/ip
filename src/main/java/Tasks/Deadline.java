@@ -69,6 +69,6 @@ public class Deadline extends Task{
         } else {
             d = "0";
         }
-        return "D | " + d + " | " + this.desc + " | " + this.time;
+        return "D | " + d + " | " + this.desc + " | " + this.time.format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm"));
     }
 }

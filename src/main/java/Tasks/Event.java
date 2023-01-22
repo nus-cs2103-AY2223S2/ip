@@ -75,7 +75,8 @@ public class Event extends Task {
         } else {
             d = "0";
         }
-        return "E | " + d + " | " + this.desc +" | " + this.startTime + " | " + this.endTime;
+        return "E | " + d + " | " + this.desc +" | " + this.startTime.format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm")) +
+                " | " + this.endTime.format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm"));
     }
 
 

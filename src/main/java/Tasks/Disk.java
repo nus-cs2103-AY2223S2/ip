@@ -14,6 +14,7 @@ import java.time.LocalDateTime;
 public class Disk {
 
     private final String path;
+    private final DateTimeFormatter format = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
 
 
     /**
@@ -36,9 +37,10 @@ public class Disk {
                 if (currentTask[0].equals("T")) {
                     taskTable.add(new Todo(currentTask[2], done));
                 } else if(currentTask[0].equals("D")) {
-                    taskTable.add(new Deadline(currentTask[2], currentTask[3], done));
+                    taskTable.add(new Deadline(currentTask[2], LocalDateTime.parse(currentTask[3], format), done));
                 } else if(currentTask[0].equals("E")) {
-                    taskTable.add(new Event(currentTask[2], currentTask[3], currentTask[4], done));
+                    taskTable.add(new Event(currentTask[2], LocalDateTime.parse(currentTask[3], format),
+                            LocalDateTime.parse(currentTask[4], format) , done));
                 } else {}
             }
         } catch (FileNotFoundException e) {
