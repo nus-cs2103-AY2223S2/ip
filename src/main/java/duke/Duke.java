@@ -13,6 +13,10 @@ public class Duke {
     private Ui ui;
     private Storage storage;
 
+    /**
+     * Constructor for Duke.
+     * @param filePath The path of the local file where tasks are stored from the previous session.
+     */
     public Duke(Path filePath) {
         this.ui = new Ui();
         this.storage = new Storage(filePath);

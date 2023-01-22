@@ -22,12 +22,20 @@ public class Deadline extends Task {
         this.by = by;
     }
 
+    /**
+     * Gets the formatted string representing this task to be saved to the local file.
+     * @return The formatted string.
+     */
     @Override
     public String getSavedFormat() {
         return "D | " + (this.isDone ? "1" : "0") + " | " + this.description + " | "
                 + Parser.dePrettifyDateTime(this.by);
     }
 
+    /**
+     * Gets the string representation of this task to be displayed on the Ui.
+     * @return The string representation of this task.
+     */
     @Override
     public String toString() {
         return "[D]" + super.toString() + " (by: "
