@@ -13,12 +13,12 @@
     ____________________________________________________________
     ____________________________________________________________
      Got it. I've added this task:
-       [E][ ] read book (from: 13 Jun 2005, 08:00 to: 27 Apr 2011, 13:52)
+       [E][ ] read book (from: 13 Jun 2005 8.00 am to: 27 Apr 2011 1.52 pm)
      Now you have 2 tasks in the list.
     ____________________________________________________________
     ____________________________________________________________
      Got it. I've added this task:
-       [D][ ] submit book report (by: 21 May 2011, 11:26)
+       [D][ ] submit book report (by: 21 May 2011 11.26 am)
      Now you have 3 tasks in the list.
     ____________________________________________________________
     ____________________________________________________________
@@ -27,17 +27,17 @@
     ____________________________________________________________
     ____________________________________________________________
      Nice! I've marked this task as done!:
-       [E][X] read book (from: 13 Jun 2005, 08:00 to: 27 Apr 2011, 13:52)
+       [E][X] read book (from: 13 Jun 2005 8.00 am to: 27 Apr 2011 1.52 pm)
     ____________________________________________________________
     ____________________________________________________________
      Nice! I've marked this task as done!:
-       [D][X] submit book report (by: 21 May 2011, 11:26)
+       [D][X] submit book report (by: 21 May 2011 11.26 am)
     ____________________________________________________________
     ____________________________________________________________
      Here are the tasks in your list:
      1.[T][X] borrow book
-     2.[E][X] read book (from: 13 Jun 2005, 08:00 to: 27 Apr 2011, 13:52)
-     3.[D][X] submit book report (by: 21 May 2011, 11:26)
+     2.[E][X] read book (from: 13 Jun 2005 8.00 am to: 27 Apr 2011 1.52 pm)
+     3.[D][X] submit book report (by: 21 May 2011 11.26 am)
     ____________________________________________________________
     ____________________________________________________________
      Got it. I've added this task:
@@ -51,8 +51,8 @@
     ____________________________________________________________
      Here are the tasks in your list:
      1.[T][X] borrow book
-     2.[E][X] read book (from: 13 Jun 2005, 08:00 to: 27 Apr 2011, 13:52)
-     3.[D][X] submit book report (by: 21 May 2011, 11:26)
+     2.[E][X] read book (from: 13 Jun 2005 8.00 am to: 27 Apr 2011 1.52 pm)
+     3.[D][X] submit book report (by: 21 May 2011 11.26 am)
      4.[T][X] return book
     ____________________________________________________________
     ____________________________________________________________
@@ -62,40 +62,40 @@
     ____________________________________________________________
      Here are the tasks in your list:
      1.[T][X] borrow book
-     2.[E][X] read book (from: 13 Jun 2005, 08:00 to: 27 Apr 2011, 13:52)
-     3.[D][X] submit book report (by: 21 May 2011, 11:26)
+     2.[E][X] read book (from: 13 Jun 2005 8.00 am to: 27 Apr 2011 1.52 pm)
+     3.[D][X] submit book report (by: 21 May 2011 11.26 am)
      4.[T][ ] return book
     ____________________________________________________________
     ____________________________________________________________
      OK, I've marked this task as not done yet:
-       [E][ ] read book (from: 13 Jun 2005, 08:00 to: 27 Apr 2011, 13:52)
+       [E][ ] read book (from: 13 Jun 2005 8.00 am to: 27 Apr 2011 1.52 pm)
     ____________________________________________________________
     ____________________________________________________________
      Got it. I've added this task:
-       [D][ ] get chinese new year clothes (by: 05 Jan 2017, 10:32)
+       [D][ ] get chinese new year clothes (by: 05 Jan 2017 10.32 am)
      Now you have 5 tasks in the list.
     ____________________________________________________________
     ____________________________________________________________
      Got it. I've added this task:
-       [E][ ] chinese new year! (from: 01 Jan 2008, 03:43 to: 22 Mar 2010, 11:39)
+       [E][ ] chinese new year! (from: 01 Jan 2008 3.43 am to: 22 Mar 2010 11.39 am)
      Now you have 6 tasks in the list.
     ____________________________________________________________
     ____________________________________________________________
      Noted. I'm removing this task:
-       [D][X] submit book report (by: 21 May 2011, 11:26)
+       [D][X] submit book report (by: 21 May 2011 11.26 am)
      Now you have 5 tasks in the list.
     ____________________________________________________________
     ____________________________________________________________
      Here are the tasks in your list:
      1.[T][X] borrow book
-     2.[E][ ] read book (from: 13 Jun 2005, 08:00 to: 27 Apr 2011, 13:52)
+     2.[E][ ] read book (from: 13 Jun 2005 8.00 am to: 27 Apr 2011 1.52 pm)
      3.[T][ ] return book
-     4.[D][ ] get chinese new year clothes (by: 05 Jan 2017, 10:32)
-     5.[E][ ] chinese new year! (from: 01 Jan 2008, 03:43 to: 22 Mar 2010, 11:39)
+     4.[D][ ] get chinese new year clothes (by: 05 Jan 2017 10.32 am)
+     5.[E][ ] chinese new year! (from: 01 Jan 2008 3.43 am to: 22 Mar 2010 11.39 am)
     ____________________________________________________________
     ____________________________________________________________
      Got it. I've added this task:
-       [D][ ] get productive (by: 25 Jun 2019, 12:52)
+       [D][ ] get productive (by: 25 Jun 2019 12.52 pm)
      Now you have 6 tasks in the list.
     ____________________________________________________________
     ____________________________________________________________

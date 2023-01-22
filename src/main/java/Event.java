@@ -5,7 +5,7 @@ public class Event extends Task {
 
     private LocalDateTime start;
     private LocalDateTime end;
-    private static final DateTimeFormatter FORMATTER = DateTimeFormatter.ofPattern("dd MMM uuuu, HH:mm");
+    private static final DateTimeFormatter FORMATTER = DateTimeFormatter.ofPattern("dd MMM uuuu h.mm a");
 
 
     public Event(String desc, boolean isDone, LocalDateTime start, LocalDateTime end) {

@@ -92,14 +92,12 @@ public class Duke {
      */
     public static void addItem(String text, AddCommands add) throws DukeException {
         Task addedItem = null;
-        boolean isValidToAdd = false;
         if (add.equals(AddCommands.TODO)) {
             String contents = text.substring(4);
             if (contents.length() == 0) {
                 throw new DukeException("The description of a todo cannot be empty");
             }
             addedItem = new Todo(contents, false);
-            isValidToAdd = true;
 
         } else if (add.equals(AddCommands.DEADLINE)) {
             String contents = text.substring(8);
@@ -110,7 +108,6 @@ public class Duke {
             LocalDateTime end = createLocalDateTime(arr[1]);
             if (end != null) {
                 addedItem = new Deadline(arr[0], false, end);
-                isValidToAdd = true;
             } else {
                 throw new DukeException("Format date as YYYY-MM-DD HH:mm");
             }
@@ -129,18 +126,15 @@ public class Duke {
             LocalDateTime end = createLocalDateTime(arr2[1]);
             if (start != null && end != null) {
                 addedItem = new Event(arr1[0], false, start, end);
-                isValidToAdd = true;
             } else {
                 throw new DukeException("Format date as YYYY-MM-DD HH:mm");
             }
         }
-        if (isValidToAdd) {
-            LISTOFTHINGS.add(addedItem);
-            writeToFile(addedItem);
-            String str = "  " + addedItem.toString();
-            str = " Got it. I've added this task:\n     " + str;
-            printWithLines(str + listUpdate());
-        }
+        LISTOFTHINGS.add(addedItem);
+        writeToFile(addedItem);
+        String str = "  " + addedItem.toString();
+        str = " Got it. I've added this task:\n     " + str;
+        printWithLines(str + listUpdate());
     }
 
 
