@@ -1,3 +1,5 @@
+import java.io.File;
+import java.io.FileNotFoundException;
 import java.io.IOException;
 
 import java.nio.file.FileAlreadyExistsException;
@@ -6,6 +8,7 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Scanner;
 
 public class Duke {
@@ -38,20 +41,36 @@ public class Duke {
 
             try {
                 Files.createFile(desiredPath);
-                System.out.println("DONE!");
             } catch (FileAlreadyExistsException err) {
                 System.err.println("already exists: " + err.getMessage());
             } catch (IOException err) {
                 System.out.println(err);
             }
         } else {
-            // Idea for the following code snippet is taken from:
-            // https://stackoverflow.com/questions/1053467/how-do-i-save-a-string-to-a-text-file-using-java
             try {
-                Files.write(Paths.get(path), "Hello".getBytes());
-            } catch (IOException err) {
+                File savedFile = new File(path);
+                Scanner fileScanner = new Scanner(savedFile);
+                int noOfTasks = Integer.parseInt(fileScanner.nextLine());
+                for (int i = 0; i < noOfTasks; i++) {
+                    String curr = fileScanner.nextLine();
+                    parseTask(lstOfItems, curr);
+                }
+            } catch (FileNotFoundException err) {
                 System.out.println(err);
             }
+        }
+
+        // Idea for the following code snippet is taken from:
+        // https://stackoverflow.com/questions/1053467/how-do-i-save-a-string-to-a-text-file-using-java
+        try {
+            ArrayList<String> lst = new ArrayList<>();
+            lst.add("3");
+            lst.add("[T][X] read book");
+            lst.add("[D][ ] return book (by: June 6th)");
+            lst.add("[E][ ] project meeting (from: Aug 6th 2pm to: 4pm)");
+            Files.write(Paths.get(path), lst);
+        } catch (IOException err) {
+            System.out.println(err);
         }
 
         while (!checker.checkEnd(userInput)) {
@@ -157,5 +176,28 @@ public class Duke {
             System.out.print(" tasks");
         }
         System.out.println(" in the list");
+    }
+
+    public static void parseTask(ArrayList<Task> lstOfItems, String currentTask) {
+        Task task = null;
+        if (currentTask.charAt(1) == 'T') {
+            task = new Todo(currentTask.substring(7));
+        } else if (currentTask.charAt(1) == 'D') {
+            String[] split = currentTask.split("by: ");
+            String description = split[0].substring(7, split[0].length() - 2);
+            String date = split[1].substring(0, split[1].length() - 1);
+            task = new Deadline(description, date);
+        } else {
+            String[] split = currentTask.split("from: ");
+            String description = split[0].substring(7, split[0].length() - 2);
+            String[] dateSplit = split[1].split(" to: ");
+            String from = dateSplit[0];
+            String to = dateSplit[1].substring(0, dateSplit[1].length() - 1);
+            task = new Event(description, from, to);
+        }
+        if (currentTask.charAt(4) == 'X') {
+            task.makeCompleted();
+        }
+        lstOfItems.add(task);
     }
 }
