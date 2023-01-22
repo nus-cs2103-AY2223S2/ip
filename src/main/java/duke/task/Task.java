@@ -9,7 +9,7 @@ public class Task {
 
     /**
      * Defualt constructor with default done status.
-     * 
+     *
      * @param title
      * @param isDone
      */
@@ -20,7 +20,7 @@ public class Task {
 
     /**
      * Defualt constructor with self define done status.
-     * 
+     *
      * @param title
      * @param isDone
      */
@@ -31,7 +31,7 @@ public class Task {
 
     /**
      * Converts mark status in to an string indicator.
-     * 
+     *
      * @return {@link String} object
      */
     private String getStatusIcon() {
@@ -54,7 +54,7 @@ public class Task {
 
     /**
      * Converts task into csv string.
-     * 
+     *
      * @return {@link String} object
      */
     public String toCsv() {
@@ -63,7 +63,7 @@ public class Task {
 
     /**
      * Converts task into a specific string format.
-     * 
+     *
      * @return {@link String} object
      */
     @Override

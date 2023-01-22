@@ -26,7 +26,7 @@ public class DateUtil {
     /**
      * Attempts to convert a string to a LocalDateTime object.
      * Solution below adapted from https://stackoverflow.com/a/48280447
-     * 
+     *
      * @param input {@link String} object
      * @return {@link LocalDateTime} object
      * @throws DateTimeParseException if the provide input does not follow the date
@@ -45,7 +45,7 @@ public class DateUtil {
 
     /**
      * Converts date object to string.
-     * 
+     *
      * @param date {@link LocalDateTime} object
      * @return {@link String} object
      */

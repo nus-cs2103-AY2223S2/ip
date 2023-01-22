@@ -1,11 +1,12 @@
 package duke.database;
 
 import java.util.List;
+
 import duke.task.Task;
 
 /**
  * A implementation class of DukeRepo
- * 
+ *
  * @see DukeRepo
  */
 public class DukeRepoImpl extends DukeRepo {

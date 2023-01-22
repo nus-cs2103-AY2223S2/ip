@@ -12,6 +12,9 @@ import duke.task.Event;
 import duke.task.Task;
 import duke.ui.Ui;
 
+/**
+ * ListCommand
+ */
 public class ListCommand extends Command {
 
     private Optional<LocalDateTime> filterDate;
@@ -25,14 +28,23 @@ public class ListCommand extends Command {
         this.filterString = Optional.empty();
     }
 
+    /**
+     * Default for filtering by date
+     */
     public ListCommand(LocalDateTime filterDate) {
         this(Optional.of(filterDate), Optional.empty());
     }
 
+    /**
+     * Default for filtering by keyword
+     */
     public ListCommand(String filterString) {
         this(Optional.empty(), Optional.of(filterString));
     }
 
+    /**
+     * Constructor
+     */
     public ListCommand(Optional<LocalDateTime> filterDate, Optional<String> filterString) {
         this.filterDate = filterDate;
         this.filterString = filterString;
@@ -40,8 +52,8 @@ public class ListCommand extends Command {
 
     /**
      * List all task from database and print the list.
-     * 
-     * @see Command#execute(DukeRepo, Ui)
+     *
+     * {@inheritDoc}
      */
     @Override
     public void execute(DukeRepo db, Ui ui) {
@@ -88,7 +100,7 @@ public class ListCommand extends Command {
     }
 
     /**
-     * @see Command#isExit()
+     * {@inheritDoc}
      */
     @Override
     public boolean isExit() {

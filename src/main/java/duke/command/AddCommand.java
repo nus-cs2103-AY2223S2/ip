@@ -12,6 +12,9 @@ import duke.task.Task;
 import duke.task.Todo;
 import duke.ui.Ui;
 
+/**
+ * AddCommand
+ */
 public class AddCommand extends Command {
 
     private DukeCommand tType;
@@ -22,7 +25,7 @@ public class AddCommand extends Command {
 
     /**
      * Constructor for adding a todo.
-     * 
+     *
      * @param tType  {@link DukeCommand} enum
      * @param title  {@link String} object
      * @param isDone boolean
@@ -33,7 +36,7 @@ public class AddCommand extends Command {
 
     /**
      * Constructor for adding a deadline.
-     * 
+     *
      * @param tType  {@link DukeCommand} enum
      * @param title  {@link String} object
      * @param isDone boolean
@@ -45,7 +48,7 @@ public class AddCommand extends Command {
 
     /**
      * Constructor for adding a eveny.
-     * 
+     *
      * @param tType  {@link DukeCommand} enum
      * @param title  {@link String} object
      * @param isDone boolean
@@ -62,8 +65,8 @@ public class AddCommand extends Command {
 
     /**
      * Add task to database and print the output.
-     * 
-     * @see Command#execute(DukeRepo, Ui)
+     *
+     * {@inheritDoc}
      */
     @Override
     public void execute(DukeRepo db, Ui ui) throws InvalidTaskTypeException {
@@ -74,25 +77,25 @@ public class AddCommand extends Command {
 
     /**
      * Produces the corresponding task object for add command variants.
-     * 
+     *
      * @return {@link Task} object
      * @throws InvalidTaskTypeException
      */
     public Task getTask() throws InvalidTaskTypeException {
         switch (tType) {
-            case TODO:
-                return new Todo(title, isDone);
-            case DEADLINE:
-                return new Deadline(title, isDone, date1);
-            case EVENT:
-                return new Event(title, isDone, date1, date2);
-            default:
-                throw new InvalidTaskTypeException(Message.EXCEPTION_INVALID_TASK_TYPE);
+        case TODO:
+            return new Todo(title, isDone);
+        case DEADLINE:
+            return new Deadline(title, isDone, date1);
+        case EVENT:
+            return new Event(title, isDone, date1, date2);
+        default:
+            throw new InvalidTaskTypeException(Message.EXCEPTION_INVALID_TASK_TYPE);
         }
     }
 
     /**
-     * @see Command#isExit()
+     * {@inheritDoc}
      */
     @Override
     public boolean isExit() {

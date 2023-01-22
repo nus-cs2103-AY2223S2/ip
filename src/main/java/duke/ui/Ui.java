@@ -14,7 +14,7 @@ public class Ui {
 
     /**
      * Default constructor that uses System.in/out.
-     * 
+     *
      */
     public Ui() {
         this(System.in, System.out);
@@ -22,7 +22,7 @@ public class Ui {
 
     /**
      * Constructor for self provided in/out channels.
-     * 
+     *
      * @param in  {@link InputStream} object
      * @param out {@link PrintStream} object
      */
@@ -54,7 +54,7 @@ public class Ui {
 
     /**
      * Reads from System.in.
-     * 
+     *
      * @return {@link String} object
      */
     public String readCommand() {
@@ -63,7 +63,7 @@ public class Ui {
 
     /**
      * System.out inputs line by line.
-     * 
+     *
      * @param lines {@link String} array
      */
     public void println(Object... lines) {
@@ -74,7 +74,7 @@ public class Ui {
 
     /**
      * System.out inputs line by line with error indicator.
-     * 
+     *
      * @param lines {@link String} array
      */
     public void showError(Object... lines) {

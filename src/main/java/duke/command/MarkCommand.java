@@ -5,6 +5,9 @@ import duke.database.DukeRepo;
 import duke.task.Task;
 import duke.ui.Ui;
 
+/**
+ * MarkCommand
+ */
 public class MarkCommand extends Command {
 
     private int taskId;
@@ -12,7 +15,7 @@ public class MarkCommand extends Command {
 
     /**
      * Default constructor
-     * 
+     *
      * @param taskId   int
      * @param markDone boolean
      */
@@ -23,8 +26,8 @@ public class MarkCommand extends Command {
 
     /**
      * Mark or unmark task from database and print the output.
-     * 
-     * @see Command#execute(DukeRepo, Ui)
+     *
+     * {@inheritDoc}
      */
     @Override
     public void execute(DukeRepo db, Ui ui) {
@@ -46,7 +49,7 @@ public class MarkCommand extends Command {
     }
 
     /**
-     * @see Command#isExit()
+     * {@inheritDoc}
      */
     @Override
     public boolean isExit() {

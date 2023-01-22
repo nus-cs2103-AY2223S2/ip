@@ -33,7 +33,7 @@ class DukeLocalDatabase {
 
     /**
      * Retrives all entries from list
-     * 
+     *
      * @return {@link Task} List
      */
     public List<Task> getAllTask() {
@@ -42,7 +42,7 @@ class DukeLocalDatabase {
 
     /**
      * Retrives an entry from list by id
-     * 
+     *
      * @param taskId int
      * @return {@link Task} object
      */
@@ -52,7 +52,7 @@ class DukeLocalDatabase {
 
     /**
      * Add an entry to list
-     * 
+     *
      * @param task {@link Task} object
      * @return {@link Task} object
      */
@@ -63,7 +63,7 @@ class DukeLocalDatabase {
 
     /**
      * Update an entry from list by id
-     * 
+     *
      * @param taskId int
      * @return {@link Task} object
      */
@@ -73,7 +73,7 @@ class DukeLocalDatabase {
 
     /**
      * Remove an entry from list by id
-     * 
+     *
      * @param taskId
      * @return {@link Task} object
      */
@@ -109,12 +109,12 @@ class DukeLocalDatabase {
     public void close() {
         try {
             File dataDir = new File(DATA_FILE_DIR);
-            if (!dataDir.exists()){
+            if (!dataDir.exists()) {
                 dataDir.mkdirs();
             }
 
             File dataFile = new File(DATA_FILE_DIR + "/" + DATA_FILE_PATH);
-            if (!dataFile.exists()){
+            if (!dataFile.exists()) {
                 dataFile.createNewFile();
             }
 
@@ -130,7 +130,7 @@ class DukeLocalDatabase {
 
     /**
      * The number of entries in list.
-     * 
+     *
      * @return int
      */
     public int count() {

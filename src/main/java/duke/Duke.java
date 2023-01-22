@@ -28,14 +28,6 @@ public class Duke {
     /**
      * Constructor for managed in/out streams.
      */
-    public Duke(InputStream in, PrintStream out) {
-        db = new DukeRepoImpl();
-        ui = new Ui(in, out);
-    }
-
-    /**
-     * Constructor for testing
-     */
     Duke(InputStream in, PrintStream out) {
         db = new DukeRepoImpl();
         ui = new Ui(in, out);

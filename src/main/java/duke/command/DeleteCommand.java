@@ -4,13 +4,16 @@ import duke.constant.Message;
 import duke.database.DukeRepo;
 import duke.ui.Ui;
 
+/**
+ * DeleteCommand
+ */
 public class DeleteCommand extends Command {
 
     private int taskId;
 
     /**
      * Default constructor
-     * 
+     *
      * @param taskId int
      */
     public DeleteCommand(int taskId) {
@@ -19,8 +22,8 @@ public class DeleteCommand extends Command {
 
     /**
      * Delete task from database and print the output.
-     * 
-     * @see Command#execute(DukeRepo, Ui)
+     *
+     * {@inheritDoc}
      */
     @Override
     public void execute(DukeRepo db, Ui ui) {
@@ -34,7 +37,7 @@ public class DeleteCommand extends Command {
     }
 
     /**
-     * @see Command#isExit()
+     * {@inheritDoc}
      */
     @Override
     public boolean isExit() {

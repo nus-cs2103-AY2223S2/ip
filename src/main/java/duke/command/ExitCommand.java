@@ -4,12 +4,15 @@ import duke.constant.Message;
 import duke.database.DukeRepo;
 import duke.ui.Ui;
 
+/**
+ * ExitCommand
+ */
 public class ExitCommand extends Command {
 
     /**
      * Closes the database and say farewell.
-     * 
-     * @see Command#execute(DukeRepo, Ui)
+     *
+     * {@inheritDoc}
      */
     @Override
     public void execute(DukeRepo db, Ui ui) {
@@ -18,7 +21,7 @@ public class ExitCommand extends Command {
     }
 
     /**
-     * @see Command#isExit()
+     * {@inheritDoc}
      */
     @Override
     public boolean isExit() {

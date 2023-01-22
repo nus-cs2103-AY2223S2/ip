@@ -31,5 +31,5 @@ public class Message {
     public static final String COUNT_TASK = "Now you have %d tasks in the list.";
     public static final Object LIST_EMPTY = "No task found in the list.";
     public static final Object FIND_TASKS = "Here are the matching tasks in your list:";
-    
+
 }
