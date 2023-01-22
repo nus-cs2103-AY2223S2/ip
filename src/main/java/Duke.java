@@ -1,3 +1,4 @@
+import java.util.ArrayList;
 import java.util.Scanner;
 public class Duke {
     //@@author IceFire
@@ -24,19 +25,32 @@ public class Duke {
         System.out.println("Hi everyone, Dukethony Codetano here, the internet's busiest program; hope you're doing well. \n"
                 + "How can I help you?");
         System.out.println(dashedLine());
-        while(true) {
+        ArrayList<String> list = new ArrayList<>();
+        boolean end = false;
+        while(!end) {
             System.out.print("Please Input: ");
-            String input = userInput.nextLine();
-            if (input.equals("bye")) {
-                System.out.println(dashedLine());
+            end = processInput(userInput.nextLine(), list, end);
+        }
+    }
+
+    private static boolean processInput(String input, ArrayList<String> list, boolean end) {
+        System.out.println(dashedLine());
+        switch (input) {
+            case "bye":
                 System.out.println("Tran \n" +
                         "sition. Anthony Fantano, Code, Forever.");
-                System.out.println(dashedLine());
+                end = true;
                 break;
-            }
-            System.out.println(dashedLine());
-            System.out.println(input);
-            System.out.println(dashedLine());
+            case "list":
+                for (int i = 1; i <= list.size(); i++){
+                    System.out.println(i + ". " + list.get(i-1));
+                }
+                break;
+            default:
+                System.out.println("Just added " + "\"" + input + "\" to the tracklist.");
+                list.add(input);
         }
+        System.out.println(dashedLine());
+        return end;
     }
 }
