@@ -5,7 +5,6 @@ import java.util.Scanner;
 
 public class Duke {
     private static ArrayList<Task> dukeList = new ArrayList<>();
-    private static String[] taskCreationCommands = {"todo", "deadline", "event"};
 
     public static void main(String[] args) {
         String logo = " ____        _        \n"
