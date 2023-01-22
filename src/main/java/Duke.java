@@ -9,7 +9,7 @@ public class Duke {
     static String eventTimeNotFound = "☹ Ohno! seems like you forgot to put the time of the event ";
     static String endNotFound = "☹ Ohno! seems like you forgot to put the ending time of the event ";
     static String unknownInput = " ☹ Ohno! I'm sorry, but I don't know what that means ";
-
+    static String deleteNumberNotFound = "☹ Ohno! I don't know which task to delete :(";
     public static void main(String[] args) throws DukeExceptions {
         String logo =
                         "⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢀⡶⠶⢦⣄⠀⠀⠀⠀⠀⣴⠟⠛⢧⣠⣶⣿⠻⣆⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀ ⠀\n" +
@@ -105,6 +105,17 @@ public class Duke {
                 System.out.println("   okie dokie. I've added this task:" + "\n" + eventTask);
                 toDoList.add(eventTask);
                 System.out.println("   Now you have " + toDoList.size() + " tasks in the list.");
+            }
+            else if (input.startsWith("delete")) {
+                if (input.length() < 7) {
+                    throw new DukeExceptions(deleteNumberNotFound);
+                }
+                int index_de = Integer.parseInt(input.substring(7));
+                Task task = toDoList.get(index_de - 1);
+                toDoList.remove(index_de - 1);
+                System.out.println("   okie dokie. I've removed this task:\n" + task);
+                System.out.println("   Now you have " + toDoList.size() + " tasks in the list.");
+
             }
             else {
 //                Task task = new Task(input);
