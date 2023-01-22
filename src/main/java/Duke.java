@@ -1,10 +1,14 @@
+import java.time.DateTimeException;
 import java.util.Scanner;
 import java.util.ArrayList;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 
 public class Duke {
 
     // array that contains all the tasks thus far
-    private static ArrayList<Task> listOfThings = new ArrayList<>();
+    private static ArrayList<Task> LISTOFTHINGS = new ArrayList<>();
+    private static DateTimeFormatter FORMATTER = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
 
     /**
      * prints out the text with lines on top and below
@@ -22,11 +26,30 @@ public class Duke {
      */
     public static String listUpdate() {
         String plural = "";
-        if (listOfThings.size() > 1) {
+        if (LISTOFTHINGS.size() > 1) {
             plural = "s";
         }
-        return "\n       Now you have " + listOfThings.size() + " task" + plural + " in the list.";
+        return "\n     Now you have " + LISTOFTHINGS.size() + " task" + plural + " in the list.";
     }
+
+
+    /**
+     * creates the localdatetime by parsing the text string
+     * @param dateTime the string representation of the local date time
+     * @return the LocalDateTime object being created
+     */
+    public static LocalDateTime createLocalDateTime(String dateTime) {
+        LocalDateTime date;
+        try {
+            String stringWithNoTrailingWhitespaces = dateTime.trim();
+            date = LocalDateTime.parse(stringWithNoTrailingWhitespaces, FORMATTER);
+        } catch (DateTimeException e) {
+            date = null;
+        }
+        return date;
+    }
+
+
 
     /**
      *
@@ -37,6 +60,7 @@ public class Duke {
     public static void addItem(String text, AddCommands add) throws DukeException {
 
         Task addedItem = null;
+        boolean isValidToAdd = false;
         if (add.equals(AddCommands.TODO)) {
             String contents = text.substring(4);
             if (contents.length() == 0) {
@@ -44,6 +68,7 @@ public class Duke {
             }
 
             addedItem = new Todo(contents);
+            isValidToAdd = true;
 
         } else if (add.equals(AddCommands.DEADLINE)) {
             String contents = text.substring(8);
@@ -51,7 +76,13 @@ public class Duke {
             if (arr.length != 2) {
                 throw new DukeException("I don't know what that means. Format it as 'deadline [do something] /by [date]");
             }
-            addedItem = new Deadline(arr[0], arr[1]);
+            LocalDateTime end = createLocalDateTime(arr[1]);
+            if (end != null) {
+                addedItem = new Deadline(arr[0], end);
+                isValidToAdd = true;
+            } else {
+                throw new DukeException("Format date as YYYY-MM-DD HH:mm");
+            }
         } else {
             String contents = text.substring(5);
             String[] arr1 = contents.split("/from");
@@ -63,13 +94,25 @@ public class Duke {
                 throw new DukeException("I don't know what that means. Format it as 'event [do something] /from [start date] /to [end date]'");
 
             }
-            addedItem = new Event(arr1[0], arr2[0], arr2[1]);
+            LocalDateTime start = createLocalDateTime(arr2[0]);
+            LocalDateTime end = createLocalDateTime(arr2[1]);
+
+            if (start != null && end != null) {
+                addedItem = new Event(arr1[0], start, end);
+                isValidToAdd = true;
+            } else {
+                throw new DukeException("Format date as YYYY-MM-DD HH:mm");
+            }
         }
-        listOfThings.add(addedItem);
-        String str = "  " + addedItem.toString();
-        str = " Got it. I've added this task:\n     " + str;
-        printWithLines(str + listUpdate());
+        if (isValidToAdd) {
+            LISTOFTHINGS.add(addedItem);
+            String str = "  " + addedItem.toString();
+            str = " Got it. I've added this task:\n     " + str;
+            printWithLines(str + listUpdate());
+        }
     }
+
+
 
     /**
      * iterates through the arraylist and prints out the elements inside
@@ -78,19 +121,21 @@ public class Duke {
 
         String totalString = "";
         totalString += " Here are the tasks in your list:";
-        for (int i = 0; i < listOfThings.size(); i++) {
-            totalString += "\n     " + (i+1) + "." + listOfThings.get(i).toString();
+        for (int i = 0; i < LISTOFTHINGS.size(); i++) {
+            totalString += "\n     " + (i+1) + "." + LISTOFTHINGS.get(i).toString();
         }
         printWithLines(totalString);
     }
+
+
 
     /**
      * removes the item in the list
      * @param index the index of the item to be removed
      */
     public static void removeItem(int index) {
-        String str = " Noted. I'm removing this task:\n       " + listOfThings.get(index).toString();
-        listOfThings.remove(index);
+        String str = " Noted. I'm removing this task:\n       " + LISTOFTHINGS.get(index).toString();
+        LISTOFTHINGS.remove(index);
         printWithLines(str + listUpdate());
 
     }
@@ -129,10 +174,10 @@ public class Duke {
                             throw new DukeException("Index should be a number");
                         }
                         int idx = Integer.parseInt(arr[1]) - 1;
-                        if (idx >= listOfThings.size() || idx < 0) {
+                        if (idx >= LISTOFTHINGS.size() || idx < 0) {
                             throw new DukeException("This index doesn't exist.");
                         }
-                        Task thisTask = listOfThings.get(idx);
+                        Task thisTask = LISTOFTHINGS.get(idx);
                         thisTask.markDone();
                     } else if (sc.equals(StartingCommands.UNMARK)) {
                         String[] arr = upperLine.split(" ");
@@ -143,10 +188,10 @@ public class Duke {
                             throw new DukeException("Index should be a number");
                         }
                         int idx = Integer.parseInt(arr[1]) - 1;
-                        if (idx >= listOfThings.size() || idx < 0) {
+                        if (idx >= LISTOFTHINGS.size() || idx < 0) {
                             throw new DukeException("This index doesn't exist.");
                         }
-                        Task thisTask = listOfThings.get(idx);
+                        Task thisTask = LISTOFTHINGS.get(idx);
                         thisTask.markUndone();
 
                     } else if (sc.equals(StartingCommands.DELETE)) {
@@ -159,7 +204,7 @@ public class Duke {
                             throw new DukeException("Argument must be a digit");
                         }
                         int idx = Integer.parseInt(idxStr) - 1;
-                        if (idx >= listOfThings.size() || idx < 0) {
+                        if (idx >= LISTOFTHINGS.size() || idx < 0) {
                             throw new DukeException("This index doesn't exist.");
                         }
                         removeItem(idx);

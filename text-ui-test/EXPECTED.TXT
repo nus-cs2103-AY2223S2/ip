@@ -5,7 +5,7 @@
     ____________________________________________________________
      Got it. I've added this task:
        [T][ ] borrow book
-       Now you have 1 task in the list.
+     Now you have 1 task in the list.
     ____________________________________________________________
     ____________________________________________________________
      Here are the tasks in your list:
@@ -13,13 +13,13 @@
     ____________________________________________________________
     ____________________________________________________________
      Got it. I've added this task:
-       [E][ ] read book (from: sunday to: monday)
-       Now you have 2 tasks in the list.
+       [E][ ] read book (from: 13 Jun 2005, 08:00 to: 27 Apr 2011, 13:52)
+     Now you have 2 tasks in the list.
     ____________________________________________________________
     ____________________________________________________________
      Got it. I've added this task:
-       [D][ ] submit book report (by: monday 2359)
-       Now you have 3 tasks in the list.
+       [D][ ] submit book report (by: 21 May 2011, 11:26)
+     Now you have 3 tasks in the list.
     ____________________________________________________________
     ____________________________________________________________
      Nice! I've marked this task as done!:
@@ -27,22 +27,22 @@
     ____________________________________________________________
     ____________________________________________________________
      Nice! I've marked this task as done!:
-       [E][X] read book (from: sunday to: monday)
+       [E][X] read book (from: 13 Jun 2005, 08:00 to: 27 Apr 2011, 13:52)
     ____________________________________________________________
     ____________________________________________________________
      Nice! I've marked this task as done!:
-       [D][X] submit book report (by: monday 2359)
+       [D][X] submit book report (by: 21 May 2011, 11:26)
     ____________________________________________________________
     ____________________________________________________________
      Here are the tasks in your list:
      1.[T][X] borrow book
-     2.[E][X] read book (from: sunday to: monday)
-     3.[D][X] submit book report (by: monday 2359)
+     2.[E][X] read book (from: 13 Jun 2005, 08:00 to: 27 Apr 2011, 13:52)
+     3.[D][X] submit book report (by: 21 May 2011, 11:26)
     ____________________________________________________________
     ____________________________________________________________
      Got it. I've added this task:
        [T][ ] return book
-       Now you have 4 tasks in the list.
+     Now you have 4 tasks in the list.
     ____________________________________________________________
     ____________________________________________________________
      Nice! I've marked this task as done!:
@@ -51,8 +51,8 @@
     ____________________________________________________________
      Here are the tasks in your list:
      1.[T][X] borrow book
-     2.[E][X] read book (from: sunday to: monday)
-     3.[D][X] submit book report (by: monday 2359)
+     2.[E][X] read book (from: 13 Jun 2005, 08:00 to: 27 Apr 2011, 13:52)
+     3.[D][X] submit book report (by: 21 May 2011, 11:26)
      4.[T][X] return book
     ____________________________________________________________
     ____________________________________________________________
@@ -62,41 +62,41 @@
     ____________________________________________________________
      Here are the tasks in your list:
      1.[T][X] borrow book
-     2.[E][X] read book (from: sunday to: monday)
-     3.[D][X] submit book report (by: monday 2359)
+     2.[E][X] read book (from: 13 Jun 2005, 08:00 to: 27 Apr 2011, 13:52)
+     3.[D][X] submit book report (by: 21 May 2011, 11:26)
      4.[T][ ] return book
     ____________________________________________________________
     ____________________________________________________________
      OK, I've marked this task as not done yet:
-       [E][ ] read book (from: sunday to: monday)
+       [E][ ] read book (from: 13 Jun 2005, 08:00 to: 27 Apr 2011, 13:52)
     ____________________________________________________________
     ____________________________________________________________
      Got it. I've added this task:
-       [D][ ] get chinese new year clothes (by: tomorrow)
-       Now you have 5 tasks in the list.
+       [D][ ] get chinese new year clothes (by: 05 Jan 2017, 10:32)
+     Now you have 5 tasks in the list.
     ____________________________________________________________
     ____________________________________________________________
      Got it. I've added this task:
-       [E][ ] chinese new year! (from: tomorrow to: next sunday)
-       Now you have 6 tasks in the list.
+       [E][ ] chinese new year! (from: 01 Jan 2008, 03:43 to: 22 Mar 2010, 11:39)
+     Now you have 6 tasks in the list.
     ____________________________________________________________
     ____________________________________________________________
      Noted. I'm removing this task:
-       [D][X] submit book report (by: monday 2359)
-       Now you have 5 tasks in the list.
+       [D][X] submit book report (by: 21 May 2011, 11:26)
+     Now you have 5 tasks in the list.
     ____________________________________________________________
     ____________________________________________________________
      Here are the tasks in your list:
      1.[T][X] borrow book
-     2.[E][ ] read book (from: sunday to: monday)
+     2.[E][ ] read book (from: 13 Jun 2005, 08:00 to: 27 Apr 2011, 13:52)
      3.[T][ ] return book
-     4.[D][ ] get chinese new year clothes (by: tomorrow)
-     5.[E][ ] chinese new year! (from: tomorrow to: next sunday)
+     4.[D][ ] get chinese new year clothes (by: 05 Jan 2017, 10:32)
+     5.[E][ ] chinese new year! (from: 01 Jan 2008, 03:43 to: 22 Mar 2010, 11:39)
     ____________________________________________________________
     ____________________________________________________________
      Got it. I've added this task:
-       [D][ ] get productive (by: friday)
-       Now you have 6 tasks in the list.
+       [D][ ] get productive (by: 25 Jun 2019, 12:52)
+     Now you have 6 tasks in the list.
     ____________________________________________________________
     ____________________________________________________________
      Bye! Hope to see you again soon!
