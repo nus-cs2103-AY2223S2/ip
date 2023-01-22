@@ -1,4 +1,5 @@
 package duke;
+
 import java.io.File;
 
 import duke.Commands.Command;
@@ -7,7 +8,9 @@ import duke.Parser.Parser;
 import duke.Storage.Storage;
 import duke.TaskList.TaskList;
 import duke.Ui.Ui;
-
+/**
+ * Main Duke class that drives the program.
+ */
 public class Duke {
     private Storage storage;
     private TaskList tasks;
@@ -26,6 +29,9 @@ public class Duke {
         }
     }
 
+    /**
+     * Runs the Duke program.
+     **/
     public void run() {
         ui.showWelcome();
         boolean isExit = false;
@@ -45,6 +51,11 @@ public class Duke {
         ui.closeScanner();
     }
 
+    /**
+     * Main method to initialize Duke.
+     * 
+     * @param args The command line arguments.
+     **/
     public static void main(String[] args) {
         String filePath = String.format("data%sduke.txt", File.separator);
         new Duke(filePath).run();

@@ -3,6 +3,9 @@ package duke.Task;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
+/**
+ * Deadline class that extends Task class.
+ */
 public class Deadline extends Task {
 
     private LocalDateTime by;
@@ -16,7 +19,7 @@ public class Deadline extends Task {
         return by;
     }
 
-    public String parseDateTime(LocalDateTime dateTime) {
+    private String parseDateTime(LocalDateTime dateTime) {
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("MMM dd yyyy hh:mma");
         return dateTime.format(formatter);
     }

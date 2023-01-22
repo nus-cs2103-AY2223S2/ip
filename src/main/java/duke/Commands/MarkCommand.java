@@ -5,7 +5,9 @@ import duke.Exceptions.TaskException;
 import duke.Storage.Storage;
 import duke.TaskList.TaskList;
 import duke.Ui.Ui;
-
+/**
+ * MarkCommand class that implements the Command interface.
+ */
 public class MarkCommand implements Command {
 
     private boolean toMark;
@@ -16,6 +18,14 @@ public class MarkCommand implements Command {
         this.fullCommand = fullCommand;
     }
 
+    /** 
+     * Toggles a task to done or not done.
+     * 
+     * @param tasks The current task list.
+     * @param ui The ui object that handles printing to the user.
+     * @param storage The storage object that handles saving to the data file.
+     * @throws DukeException If there is an exception saving to the data file or invalid input.
+     */
     @Override
     public void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
         try {

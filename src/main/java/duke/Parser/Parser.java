@@ -7,9 +7,17 @@ import duke.Commands.InvalidCommand;
 import duke.Commands.ListCommand;
 import duke.Commands.MarkCommand;
 import duke.Commands.TaskCommand;
-
+/**
+ * Parser class that parses the user input.
+ */
 public class Parser {
 
+    /**
+     * Parses the user input and returns the appropriate command to be executed.
+     *
+     * @param fullCommand The user input.
+     * @return The appropriate command.
+     */
     public static Command parse(String fullCommand) {
         String lowercaseCommand = fullCommand.toLowerCase();
         Command command;

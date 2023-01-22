@@ -1,5 +1,7 @@
 package duke.Task;
-
+/**
+ * Todo class that extends Task.
+ */
 public class Todo extends Task {
 
     public Todo(String description) {
