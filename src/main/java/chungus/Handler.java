@@ -173,7 +173,6 @@ class Handlers {
      * @return A handler to delete the specified task.
      */
     public static Handler delete(int idx) {
-
         return (TaskList tasks, Ui ui, Storage storage) -> {
             Task task = tasks.remove(idx);
             Handler.reportDeletedTask(task, ui, tasks);

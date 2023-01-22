@@ -12,7 +12,7 @@ abstract class Task {
     private String desc;
     private boolean isDone;
 
-    protected final static DateTimeFormatter DATETIME_FMT = DateTimeFormatter.ISO_LOCAL_DATE_TIME;
+    protected static final DateTimeFormatter DATETIME_FMT = DateTimeFormatter.ISO_LOCAL_DATE_TIME;
 
     /**
      * Constructor for a task. All tasks require a description.
