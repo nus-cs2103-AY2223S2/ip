@@ -6,19 +6,16 @@ import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.nio.file.Files;
 import java.nio.file.Paths;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeParseException;
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
 import java.util.function.Consumer;
 import java.util.function.Function;
 
 public final class Duke {
-    private final static String joiner(String[] args, int from, int to) {
-        return String.join(" ", Arrays.copyOfRange(args, from, to));
-    }
-
     private final static List<Task> loadTasks() {
         if (Files.exists(Paths.get("data,dat"))) {
             try (
@@ -113,7 +110,7 @@ public final class Duke {
                 return;
             }
 
-            String taskStr = joiner(args, 1, args.length);
+            String taskStr = Utils.joiner(args, 1, args.length);
             Task task = new ToDo(taskStr);
             addTask.accept(task);
         },
@@ -137,10 +134,21 @@ public final class Duke {
                 return;
             }
 
-            String taskStr = joiner(args, 1, index);
-            String time = joiner(args, index + 1, args.length);
-            Task task = new Deadline(taskStr, time);
-            addTask.accept(task);
+
+            try {
+                LocalDateTime deadline = Utils.parseDateTime(args[index + 1], index + 2 >= args.length ? null : args[index + 2]);
+
+                if (deadline.isBefore(LocalDateTime.now())) {
+                    System.out.println("I can't create something's that's due in the past!");
+                    return;
+                }
+
+                String taskStr = Utils.joiner(args, 1, index);
+                Task task = new Deadline(taskStr, deadline);
+                addTask.accept(task);
+            } catch (DateTimeParseException e) {
+                System.out.format("Error parsing deadline: %s\n", e.getMessage());
+            }
         },
         "event", (args) -> {
             int fromIndex = -1, toIndex = -1;
@@ -177,12 +185,21 @@ public final class Duke {
                 return;
             }
 
-            String taskStr = joiner(args, 1, fromIndex);
-            String fromStr = joiner(args, fromIndex + 1, toIndex);
-            String toStr = joiner(args, toIndex + 1, args.length);
-        
-            Task task = new Event(taskStr, fromStr, toStr);
-            addTask.accept(task);
+            try {
+                LocalDateTime fromTime = Utils.parseDateTime(args[fromIndex + 1], toIndex - fromIndex == 2 ? null : args[fromIndex + 2]);
+                LocalDateTime toTime = Utils.parseDateTime(args[toIndex + 1], toIndex + 2 >= args.length ? null : args[toIndex + 2]);
+
+                if (fromTime.isBefore(toTime)) {
+                    System.out.println("I can't create an event that ends before it starts!");
+                    return;
+                }
+
+                String taskStr = Utils.joiner(args, 1, fromIndex);
+                Task task = new Event(taskStr, fromTime, toTime);
+                addTask.accept(task);
+            } catch (DateTimeParseException e) {
+                System.out.format("Failed to parse the date you've given: %s\n", e.getParsedString());
+            }
         },
         "delete", (args) -> {
           try {
@@ -214,6 +231,8 @@ public final class Duke {
 
         while (true) {
             String input = reader.readLine();
+            if (input.isEmpty()) continue;
+
             String[] tokens = input.split(" ");
 
             if (funcMap.containsKey(tokens[0])) {
