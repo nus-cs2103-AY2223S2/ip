@@ -66,10 +66,18 @@ public class Duke {
                 System.out.println("Here are the tasks in your list dawg:");
                 taskList.printList();
             } else if (inputArr[0].equals("mark")) {
-                taskList.markStatus(inputArr[1]);
+                try {
+                    taskList.markStatus(inputArr[1]);
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
                 System.out.println("The task is marked, dawg");
             } else if (inputArr[0].equals("unmark")){
-                taskList.unMarkStatus(inputArr[1]);
+                try {
+                    taskList.unMarkStatus(inputArr[1]);
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
                 System.out.println("Gotcha dawg, unmarked.");
             } else if (inputArr[0].equals("todo") || inputArr[0].equals("deadline") || inputArr[0].equals("event")) {
                 try {

@@ -2,11 +2,16 @@ import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
 public class Deadline extends Task {
-    protected LocalDate byDate;
+    protected String unFormatted;
+    protected String byDate;
     protected String byTime;
     public Deadline(String description, String byDate, String byTime) {
         super(description);
-        this.byDate = LocalDate.parse(byDate);
+        this.unFormatted = byDate;
+        DateTimeFormatter parseFormatter = DateTimeFormatter.ofPattern("M/dd/yyyy");
+        LocalDate d = LocalDate.parse(byDate, parseFormatter);
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("MMM d yyyy");
+        this.byDate = d.format(formatter);
         this.byTime = byTime;
     }
 
@@ -15,14 +20,14 @@ public class Deadline extends Task {
         return "D";
     }
 
-    public String getBy() {
-        return this.by;
+    public String getDateTime() {
+        return this.unFormatted + " " + this.byTime;
     }
 
 
     @Override
     public String toString() {
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("MMM d yyyy");
-        return "[D]" + super.toString() + "(by: " + this.byDate.format(formatter) + " " + this.byTime + ")";
+
+        return "[D]" + super.toString() + "(by: " + this.byDate + " " + this.byTime + ")";
     }
 }

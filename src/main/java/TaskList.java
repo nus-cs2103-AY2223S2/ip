@@ -18,12 +18,14 @@ public class TaskList {
         for (int i = 0; i < this.numOfTasks; i++) System.out.println((i+1) + "." + this.taskList.get(i));
     }
 
-    public void markStatus(String index) {
+    public void markStatus(String index) throws IOException {
         taskList.get(Integer.parseInt(index) - 1).markStatus(true);
+        this.updateDrive();
     }
 
-    public void unMarkStatus(String index) {
+    public void unMarkStatus(String index) throws IOException {
         taskList.get(Integer.parseInt(index) - 1).markStatus(false);
+        this.updateDrive();
     }
 
     public void loadTasks(String[] inputArr, String taskType) {
@@ -34,7 +36,8 @@ public class TaskList {
                 todo.markStatus(inputArr[1]);
                 break;
             case "D":
-                Deadline deadline = new Deadline(inputArr[2], inputArr[3]);
+                String[] dateTime = inputArr[3].split(" ");
+                Deadline deadline = new Deadline(inputArr[2], dateTime[0], dateTime[1]);
                 this.taskList.add(deadline); this.numOfTasks++;
                 deadline.markStatus(inputArr[1]);
                 break;
@@ -80,12 +83,12 @@ public class TaskList {
                 }
                 // TODO: Code can be shortened
                 String[] dateTime = sb.toString().split(" ");
-                String[] date = dateTime[0].split("/");
-                sb.setLength(0);
-                sb.append(date[2]); sb.append("-");
-                if (date[1].length() == 1) sb.append("0"); sb.append(date[1]); sb.append("-");
-                if (date[0].length() == 1) sb.append("0"); sb.append(date[0]);
-                Deadline deadline = new Deadline(desc, sb.toString(), dateTime[1]);
+//                String[] date = dateTime[0].split("/");
+//                sb.setLength(0);
+//                sb.append(date[2]); sb.append("-");
+//                if (date[1].length() == 1) sb.append("0"); sb.append(date[1]); sb.append("-");
+//                if (date[0].length() == 1) sb.append("0"); sb.append(date[0]);
+                Deadline deadline = new Deadline(desc, dateTime[0], dateTime[1]);
                 this.taskList.add(deadline); this.numOfTasks++;
                 this.updateDrive();
                 System.out.println("Gotcha, I've added:");
@@ -148,7 +151,7 @@ public class TaskList {
             sb.append(task.getDescription());
             if (taskName.equals("D")) {
                 Deadline d = (Deadline) task;
-                sb.append("|"); sb.append(d.getBy());
+                sb.append("|"); sb.append(d.getDateTime());
             } else if (taskName.equals("E")) {
                 Event ev = (Event) task;
                 sb.append("|"); sb.append(ev.getFrom()); sb.append("|"); sb.append(ev.getTo());
