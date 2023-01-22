@@ -1,3 +1,4 @@
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -8,14 +9,15 @@ import java.util.Scanner;
  */
 public class Duke {
     /**
-     * The name of the chatbot.
-     */
-    public String name = "Duke";
-
-    /**
      * Storage of user's tasks.
      */
-    private final ArrayList<Task> taskStorage = new ArrayList<>();
+    private ArrayList<Task> taskList;
+
+    private final Storage storage;
+
+    public Duke(Storage storage) {
+        this.storage = storage;
+    }
 
     /**
      * This is the main method which starts off the chatbot.
@@ -23,8 +25,18 @@ public class Duke {
      * @param args Unused.
      */
     public static void main(String[] args) {
-        Duke duke = new Duke();
-        System.out.println("Hello. This is " + duke.name);
+        Duke duke;
+        try {
+            Storage storage = new Storage("data/duke.txt");
+            storage.initializeStorage();
+            duke = new Duke(storage);
+            duke.loadTask();
+        } catch (IOException e) {
+            System.out.println(e.getMessage());
+            return;
+        }
+
+        System.out.println("Hello. This is Duke");
         Scanner scanner = new Scanner(System.in);
         boolean end = false;
 
@@ -53,20 +65,20 @@ public class Duke {
                 return false;
             } else if (text.startsWith("todo ")) {
                 this.checkTextLength(text, 5);
-                Task task = new Todo(text.substring(5));
+                Task task = new Todo(text.substring(5), false);
                 this.storeTask(task);
                 return false;
             } else if (text.startsWith("deadline ")) {
                 String[] textArr = text.split("/", 2);
                 this.checkTextLength(textArr[0], 9);
-                Task task = new Deadline(textArr[0].substring(9),
+                Task task = new Deadline(textArr[0].substring(9), false,
                         textArr[1].substring(3));
                 this.storeTask(task);
                 return false;
             } else if (text.startsWith("event ")) {
                 String[] textArr = text.split("/", 3);
                 this.checkTextLength(textArr[0], 6);
-                Task task = new Event(textArr[0].substring(6),
+                Task task = new Event(textArr[0].substring(6), false,
                         textArr[1].substring(5), textArr[2].substring(3));
                 this.storeTask(task);
                 return false;
@@ -120,10 +132,17 @@ public class Duke {
      * @param task the task to be added.
      */
     private void storeTask(Task task) {
-        this.taskStorage.add(task);
+        try {
+            this.taskList.add(task);
+            this.storage.storeTask(task);
+        } catch (IOException e) {
+            System.out.println("Failed to add task");
+            System.out.println(e.getMessage());
+        }
+
         this.reply("The following task has been added:");
         this.reply("  " + task.toString());
-        this.reply("Total tasks: " + this.taskStorage.size());
+        this.reply("Total tasks: " + this.taskList.size());
     }
 
     /**
@@ -131,7 +150,7 @@ public class Duke {
      * by the chatbot in order.
      */
     private void displayTaskStorage() {
-        int size = this.taskStorage.size();
+        int size = this.taskList.size();
 
         if (size == 0) {
             this.reply("No task stored.");
@@ -141,7 +160,7 @@ public class Duke {
         this.reply("The following tasks are stored:");
 
         for (int i = 0; i < size; i++) {
-            Task task = this.taskStorage.get(i);
+            Task task = this.taskList.get(i);
             this.reply((i + 1) + "." + task.toString());
         }
     }
@@ -153,8 +172,16 @@ public class Duke {
      * @param taskNumber the task order in the storage.
      */
     private void markTask(int taskNumber) {
-        Task task = this.taskStorage.get(taskNumber - 1);
-        task.mark();
+        Task task = this.taskList.get(taskNumber - 1);
+
+        try {
+            task.mark();
+            this.storage.restructure(taskList);
+        } catch (IOException e) {
+            System.out.println("Failed to mark task");
+            System.out.println(e.getMessage());
+        }
+
         this.reply("The following task is marked as done:");
         this.reply("  " + task.toString());
     }
@@ -166,8 +193,16 @@ public class Duke {
      * @param taskNumber the task order in the storage.
      */
     private void unmarkTask(int taskNumber) {
-        Task task = this.taskStorage.get(taskNumber - 1);
-        task.unmark();
+        Task task = this.taskList.get(taskNumber - 1);
+
+        try {
+            task.unmark();
+            this.storage.restructure(taskList);
+        } catch (IOException e) {
+            System.out.println("Failed to unmark task");
+            System.out.println(e.getMessage());
+        }
+
         this.reply("The following task is marked as not done:");
         this.reply("  " + task.toString());
     }
@@ -193,15 +228,27 @@ public class Duke {
      * @throws DukeException if task does not exist.
      */
     private void deleteTask(int taskNumber) throws DukeException {
-        int size = this.taskStorage.size();
+        int size = this.taskList.size();
         if (size == 0 || taskNumber > size) {
             throw  new DukeException("Task number does not exist.");
         }
 
-        Task task = this.taskStorage.get(taskNumber - 1);
-        this.taskStorage.remove(taskNumber - 1);
+        Task task = this.taskList.get(taskNumber - 1);
+
+        try {
+            this.taskList.remove(taskNumber - 1);
+            this.storage.restructure(taskList);
+        } catch (IOException e) {
+            System.out.println("Failed to delete task");
+            System.out.println(e.getMessage());
+        }
+
         this.reply("The following task has been deleted:");
         this.reply("  " + task.toString());
-        this.reply("Total tasks: " + this.taskStorage.size());
+        this.reply("Total tasks: " + this.taskList.size());
+    }
+
+    private void loadTask() throws IOException {
+        this.taskList = storage.getTasks();
     }
 }

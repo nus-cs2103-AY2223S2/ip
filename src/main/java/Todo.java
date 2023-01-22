@@ -9,8 +9,8 @@ public class Todo extends Task {
      *
      * @param desc description of the todo task.
      */
-    public Todo(String desc) {
-        super(desc);
+    public Todo(String desc, boolean marked) {
+        super(desc, marked);
     }
 
     /**
@@ -21,5 +21,10 @@ public class Todo extends Task {
     @Override
     public String toString() {
         return "[T]" + super.toString();
+    }
+
+    @Override
+    public String toTaskStorageString() {
+        return "T" + "|" + super.toTaskStorageString();
     }
 }

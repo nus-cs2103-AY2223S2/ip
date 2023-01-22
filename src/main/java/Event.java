@@ -19,8 +19,8 @@ public class Event extends Task {
      *
      * @param desc description of the event task.
      */
-    public Event(String desc, String from, String to) {
-        super(desc);
+    public Event(String desc, boolean marked, String from, String to) {
+        super(desc, marked);
         this.from = from;
         this.to = to;
     }
@@ -34,5 +34,11 @@ public class Event extends Task {
     public String toString() {
         return "[E]" + super.toString() + "(from: "
                 + this.from + "to: " + this.to + ")";
+    }
+
+    @Override
+    public String toTaskStorageString() {
+        return "E" + "|" + super.toTaskStorageString() + "|"
+                + this.from + "|" + this.to;
     }
 }
