@@ -93,7 +93,7 @@ public class Duke {
             try {
                 makeResponse(userInput);
             }
-            catch (DukeUnknownInputException e) {
+            catch (DukeException e) {
                 handleDukeException(e);
             }
         }
@@ -106,7 +106,7 @@ public class Duke {
      *
      * @param command The user input received.
      */
-    public static void makeResponse(String command) throws DukeUnknownInputException {
+    public static void makeResponse(String command) throws DukeException {
 
         Command processedCommand = checkForCommand(command);
 

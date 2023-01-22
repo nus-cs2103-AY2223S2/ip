@@ -1,3 +1,4 @@
+Existing tasks found. Loaded existing tasks.
 Hello from
  ____        _        
 |  _ \ _   _| | _____ 
@@ -10,11 +11,10 @@ Hello from
 	____________________________________________________________
 	____________________________________________________________
 	1. [T][X] read book
-	2. [D][ ] return book (by: June 6th)
+	2. [D][ ] return book (by: 06 Jun 2023 1800)
 	3. [T][X] join sports club
 	4. [T][ ] borrow book
-	5. [D][ ] return book (by: Sunday)
-	6. [E][ ] project meeting (from: Mon 2pm to: 4pm)
+	5. [E][ ] project meeting (from: 22 Jan 2023 0800 to: 22 Jan 2023 2200)
 	____________________________________________________________
 	Bye. Hope to see you again soon!
 	____________________________________________________________

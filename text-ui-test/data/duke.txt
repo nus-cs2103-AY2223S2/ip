@@ -1,6 +1,5 @@
 T@true@read book
-D@false@return book@June 6th
+D@false@return book@06/06/2023 1800
 T@true@join sports club
 T@false@borrow book
-D@false@return book@Sunday
-E@false@project meeting@Mon 2pm@4pm
+E@false@project meeting@22/01/2023 0800@22/01/2023 2200

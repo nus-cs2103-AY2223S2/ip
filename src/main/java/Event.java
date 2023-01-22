@@ -16,12 +16,16 @@ public class Event extends Task {
     /**
      * A string representing the start of this Event instance.
      */
-    protected LocalDateTime from;
+    private LocalDateTime from;
 
     /**
      * A string representation of the end of this Event instance.
      */
-    protected LocalDateTime to;
+    private LocalDateTime to;
+
+    private String fromString;
+
+    private String toString;
 
     /**
      * Constructor for an Event instance.
@@ -37,6 +41,8 @@ public class Event extends Task {
         super(description);
 
         try {
+            this.fromString = from;
+            this.toString = to;
             this.from = Task.getLocalDateTime(from);
             this.to = Task.getLocalDateTime(to);
         } catch (DateTimeParseException e) {
@@ -60,6 +66,6 @@ public class Event extends Task {
     public String getFileFormatString() {
         //to be split using "|"
         return "E" + "@" + this.isDone + "@" + this.description + "@"
-                + this.from + "@" + this.to;
+                + this.fromString + "@" + this.toString;
     }
 }

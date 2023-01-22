@@ -1,7 +1,6 @@
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
-import java.util.Date;
 
 /**
  * Task class used by Duke to keep track of user's tasks inputted.
@@ -88,7 +87,8 @@ public abstract class Task {
 
     public abstract String getFileFormatString();
 
-    public static Task getTaskFromFileFormat(String fileFormat) {
+    public static Task getTaskFromFileFormat(String fileFormat)
+            throws DukeBadInstructionFormatException {
         String[] splitted = fileFormat.split("@", 5);
 
         switch (splitted[0]) {

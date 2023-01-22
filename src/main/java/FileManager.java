@@ -19,8 +19,8 @@ public class FileManager {
 
         try {
             this.tasksFromFile = getTaskArrayFromFile();
-        } catch (FileNotFoundException e) {
-            System.out.println("File not found");
+        } catch (DukeBadInstructionFormatException e) {
+            System.out.println(e.getMessage());
         }
     }
 
@@ -39,7 +39,7 @@ public class FileManager {
         }
     }
 
-    public void fileMarkTask(int index) {
+    public void fileMarkTask(int index) throws DukeBadInstructionFormatException {
         int i = 0;
 
         try {
@@ -71,7 +71,7 @@ public class FileManager {
 
     }
 
-    public void fileUnmarkTask(int index) {
+    public void fileUnmarkTask(int index) throws DukeBadInstructionFormatException {
         int i = 0;
 
         try {
@@ -132,18 +132,25 @@ public class FileManager {
 
     }
 
-    public ArrayList<Task> getTaskArrayFromFile() throws FileNotFoundException {
-        File taskFile = new File(this.taskFilePath);
-        Scanner scanner = new Scanner(taskFile);
-        ArrayList<Task> returnList = new ArrayList<>();
+    public ArrayList<Task> getTaskArrayFromFile()
+            throws DukeBadInstructionFormatException {
+        try {
+            File taskFile = new File(this.taskFilePath);
+            Scanner scanner = new Scanner(taskFile);
+            ArrayList<Task> returnList = new ArrayList<>();
 
-        while (scanner.hasNext()) {
-            String taskInFileFormat = scanner.nextLine();
-            Task curTask = Task.getTaskFromFileFormat(taskInFileFormat);
-            returnList.add(curTask);
+            while (scanner.hasNext()) {
+                String taskInFileFormat = scanner.nextLine();
+                Task curTask = Task.getTaskFromFileFormat(taskInFileFormat);
+                returnList.add(curTask);
+            }
+            System.out.println("Existing tasks found. Loaded existing tasks.");
+            return returnList;
+        } catch (FileNotFoundException e) {
+            System.out.println("No previous tasks found. Initialising fresh start.");
+            ArrayList<Task> newList = new ArrayList<>();
+            return newList;
         }
-
-        return returnList;
 
     }
 
