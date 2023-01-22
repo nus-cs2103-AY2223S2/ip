@@ -3,7 +3,7 @@ import java.io.File;
 
 public class DukeException {
     private static int expectedArgs = 1;
-    static void validate (boolean secondaryCheck, String command, String[] text) throws IncorrectNoOfArgumentException {
+    static void validate(boolean secondaryCheck, String command, String[] text) throws IncorrectNoOfArgumentException {
         StringBuilder sb = new StringBuilder();
         if (secondaryCheck) {
             expectedArgs = 2;
@@ -22,7 +22,7 @@ public class DukeException {
         }
     }
 
-    static void validate (String text, String command) throws IncorrectNoOfArgumentException {
+    static void validate(String text, String command) throws IncorrectNoOfArgumentException {
         // Checking for blank spaces
         StringBuilder sb = new StringBuilder();
         if ( (text.equals("")) || (text.isBlank()) ) {
@@ -34,7 +34,7 @@ public class DukeException {
         }
     }
 
-    static void validate2 () throws InvalidCommandException {
+    static void validate2() throws InvalidCommandException {
         StringBuilder sb = new StringBuilder();
         sb.append("\n    ____________________________________________________________\n")
                 .append("     ☹ OOPS!!! This is an incorrect command!\n")
