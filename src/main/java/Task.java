@@ -7,6 +7,11 @@ public class Task {
         this.status = " ";
     }
 
+    protected Task(String name, String status) {
+        this.name = name;
+        this.status = status;
+    }
+
     public String getStatus() {
         return status;
     }
@@ -22,5 +27,9 @@ public class Task {
     @Override
     public String toString() {
         return "[" + this.status + "] " + this.name;
+    }
+
+    public String asTokens() {
+        return this.status + ',' + this.name;
     }
 }

@@ -1,7 +1,9 @@
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
-import java.util.Scanner;
+
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.util.*;
 
 public class Duke {
     private final List<Task> tasks;
@@ -19,6 +21,15 @@ public class Duke {
     }
 
     private void init() {
+        try {
+            Scanner sc = new Scanner(new File("src/data/duke.txt"));
+            while (sc.hasNextLine()) {
+                String[] tokens = sc.nextLine().split(",");
+                parseEventFromFile(tokens);
+            }
+        } catch (FileNotFoundException e) {
+            System.out.println(e.getMessage());
+        }
         displayMessage("""
                 Hello! I'm Bob
                 What can I do for you?
@@ -27,6 +38,17 @@ public class Duke {
 
     private void exit() {
         displayMessage("Bye. Hope to see you again soon!\n");
+    }
+
+    private void parseEventFromFile(String[] tokens) {
+        String taskType = tokens[0];
+        if (Objects.equals(taskType, "T")) {
+            tasks.add(new ToDo(tokens[2], tokens[1]));
+        } else if (Objects.equals(taskType, "D")) {
+            tasks.add(new Deadline(tokens[2], tokens[3], tokens[1]));
+        } else if (Objects.equals(taskType, "E")) {
+            tasks.add(new Event(tokens[2], tokens[3], tokens[4], tokens[1]));
+        }
     }
 
     private void displayItemList() {
@@ -49,6 +71,7 @@ public class Duke {
                 "\nNow you have " +
                 tasks.size() +
                 " tasks in the list\n");
+        updateData();
     }
 
     private void addToDo(String[] tokens) throws DukeException {
@@ -128,6 +151,7 @@ public class Duke {
             tasks.get(listIndex).setStatus("X");
             displayMessage("Nice! I've marked this task as done:\n" +
                     tasks.get(listIndex).toString() + "\n");
+            updateData();
         } catch (NumberFormatException e) {
             displayMessage("Please specify a numerical task index to mark\n");
         } catch (IndexOutOfBoundsException e) {
@@ -141,6 +165,7 @@ public class Duke {
             tasks.get(listIndex).setStatus(" ");
             displayMessage("OK, I've marked this task as not done yet:\n" +
                     tasks.get(listIndex).toString() + "\n");
+            updateData();
         } catch (NumberFormatException e) {
             displayMessage("Please specify a numerical task index to unmark\n");
         } catch (IndexOutOfBoundsException e) {
@@ -160,10 +185,28 @@ public class Duke {
             displayMessage("Noted. I've removed this task:\n" +
                     removed.toString() +
                     "\nNow you have " + tasks.size() + " tasks in the list\n");
+            updateData();
         } catch (NumberFormatException e) {
             displayMessage("please specify a valid number to delete entry\n");
         } catch (IndexOutOfBoundsException e) {
             displayMessage("please specify a valid index to delete\n");
+        }
+    }
+
+    private void updateData() {
+        String path = "src/data/duke.txt";
+        File file = new File(path);
+        file.getParentFile().mkdirs();
+        try {
+            FileWriter fw = new FileWriter(file);
+            StringBuilder sb = new StringBuilder();
+            for (Task task : tasks) {
+                sb.append(task.asTokens()).append('\n');
+            }
+            fw.write(sb.toString());
+            fw.close();
+        } catch (IOException e) {
+            System.out.println(e.getMessage());
         }
     }
 
@@ -210,7 +253,7 @@ public class Duke {
                 }
 
             } else {
-                displayMessage("unknown command\n");//TODO
+                displayMessage("unknown command\n");
             }
 
         }
