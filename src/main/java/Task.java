@@ -27,4 +27,8 @@ public class Task {
     public String toString() {
         return getName();
     }
+    // properly formats Task as String for saving progress
+    public String toSaveString() {
+        return getName().strip();
+    }
 }

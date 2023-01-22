@@ -1,4 +1,8 @@
-import java.util.*;
+import java.io.IOException;
+import java.util.InputMismatchException;
+
+import java.util.ArrayList;
+import java.util.Scanner;
 
 public class Duke {
     public static void main(String[] args) {
@@ -13,10 +17,14 @@ public class Duke {
         String border = "_________________________________________\n";
         System.out.println(border + "Sup, Duke here.\nWhat do you want from me?\n" + border);
 
+        // Initialise save file
+        SaveFile dukeSave = new SaveFile();
         // Initialise list of tasks
-        ArrayList<Task> TaskList = new ArrayList<>();
+        ArrayList<Task> TaskList = dukeSave.loadTaskList();
         // Initialise Scanner object
         Scanner UserScan = new Scanner(System.in);
+
+
 
         // while LoopEnd = true loop to accept user input
         boolean LoopEnd = false;
@@ -64,7 +72,11 @@ public class Duke {
                             TaskList.get(MarkInput).MarkDone();
                             System.out.println(border + "Okay, the following task is marked as done!\n");
                             System.out.println((MarkInput+1 + ". ") + TaskList.get(MarkInput).toString() + "\n" + border);
+                            dukeSave.saveTaskList(TaskList);
                             break;
+                        }
+                        catch (IOException err) {
+                            throw new DukeException("\n" + border + "[ERROR]\nOops, we couldn't save that!\n" + err.getMessage() + border);
                         }
                         // ERROR: mark is NOT paired with an integer (e.g. unmark two, unmark 2.3)
                         catch (NumberFormatException | InputMismatchException err) {
@@ -89,7 +101,11 @@ public class Duke {
                             TaskList.get(UnmarkInput).MarkNotDone();
                             System.out.println(border + "Okay, the following task is marked as NOT done!\n");
                             System.out.println((UnmarkInput+1 + ". ") + TaskList.get(UnmarkInput).toString() + "\n" + border);
+                            dukeSave.saveTaskList(TaskList);
                             break;
+                        }
+                        catch (IOException err) {
+                            throw new DukeException("\n" + border + "[ERROR]\nOops, we couldn't save that!\n" + border);
                         }
                         // ERROR: unmark is NOT paired with an integer (e.g. unmark two, unmark 2.3)
                         catch (NumberFormatException | InputMismatchException err) {
@@ -115,7 +131,11 @@ public class Duke {
                             TaskList.remove(DeleteInput);
                             System.out.println(border + "Okay, i've deleted the following task!\n");
                             System.out.println((DeleteInput+1 + ". ") + DeletedTask.toString() + "\n" + border);
+                            dukeSave.saveTaskList(TaskList);
                             break;
+                        }
+                        catch (IOException err) {
+                            throw new DukeException("\n" + border + "[ERROR]\nOops, we couldn't save that!\n" + border);
                         }
                         // ERROR: delete is NOT paired with an integer (e.g. delete two, delete 2.3)
                         catch (NumberFormatException | InputMismatchException err) {
@@ -145,7 +165,11 @@ public class Duke {
                             TaskList.add(DeadlineToAdd);
                             System.out.println(border + "Task added:\n " + DeadlineToAdd + "\n"
                                     + "There are now " + TaskList.size() + " task(s) in your list.\n" + border);
+                            dukeSave.saveTaskList(TaskList);
                             break;
+                        }
+                        catch (IOException err) {
+                            throw new DukeException("\n" + border + "[ERROR]\nOops, we couldn't save that!\n" + border);
                         }
                         // ERROR: deadline format is anything other than [ deadline /by <insert deadline> ]
                         catch (StringIndexOutOfBoundsException err) {
@@ -176,7 +200,11 @@ public class Duke {
                             TaskList.add(EventToAdd);
                             System.out.println(border + "Task added:\n " + EventToAdd + "\n"
                                     + "There are now " + TaskList.size() + " task(s) in your list.\n"+ border);
+                            dukeSave.saveTaskList(TaskList);
                             break;
+                        }
+                        catch (IOException err) {
+                            throw new DukeException("\n" + border + "[ERROR]\nOops, we couldn't save that!\n" + border);
                         }
                         // ERROR: event format is anything other than [ event /from <insert from field> /to <insert to field> ]
                         catch (StringIndexOutOfBoundsException err) {
@@ -186,16 +214,22 @@ public class Duke {
 
                         // Duke adds To-Do
                     case ("todo"):
-                        String ToDoName = UserScan.nextLine();
-                        // ERROR: To-Do description is blank.
-                        if (ToDoName.strip().length()==0) {
-                            throw new DukeException("\n" + border + "[ERROR]\nUh, To-Do description cannot be blank.\nTry again.\n" + border);
+                        try {
+                            String ToDoName = UserScan.nextLine();
+                            // ERROR: To-Do description is blank.
+                            if (ToDoName.strip().length()==0) {
+                                throw new DukeException("\n" + border + "[ERROR]\nUh, To-Do description cannot be blank.\nTry again.\n" + border);
+                            }
+                            Task TaskToAdd = new ToDo(ToDoName);
+                            TaskList.add(new ToDo(ToDoName));
+                            System.out.println(border + "Task added:\n " + TaskToAdd + "\n"
+                                    + "There are now " + TaskList.size() + " task(s) in your list.\n"+ border);
+                            dukeSave.saveTaskList(TaskList);
+                            break;
                         }
-                        Task TaskToAdd = new ToDo(ToDoName);
-                        TaskList.add(new ToDo(ToDoName));
-                        System.out.println(border + "Task added:\n " + TaskToAdd + "\n"
-                                + "There are now " + TaskList.size() + " task(s) in your list.\n"+ border);
-                        break;
+                        catch (IOException err) {
+                            throw new DukeException("\n" + border + "[ERROR]\nOops, we couldn't save that!\n" + border);
+                        }
 
                     // Duke does not understand any other commands (yet).
                     default:
