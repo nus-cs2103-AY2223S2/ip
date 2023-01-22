@@ -1,5 +1,4 @@
-package Tasks;
-import Tasks.Task;
+package Duke.Tasks;
 //import TaskTable;
 
 import java.util.Scanner;
@@ -32,7 +31,7 @@ public class Monitor {
      */
     public void welcome() {
         String start = "    ____________________________________________________________\n" +
-                "     Yo this is Duke.\n" +
+                "     Yo this is Duke.Duke.\n" +
                 "     Give me something exciting to do.\n" +
                 "    ____________________________________________________________\n";
         System.out.println(start);
@@ -98,7 +97,7 @@ public class Monitor {
 
 
     /**
-     * The method showTable shows the whole table of Tasks
+     * The method showTable shows the whole table of Duke.Tasks
      * @param table the task table
      */
     public void showTable(TaskTable table) {

@@ -1,4 +1,4 @@
-package Exceptions;
+package Duke.Exceptions;
 
 /**
  * The class represents the InvalidCommandException

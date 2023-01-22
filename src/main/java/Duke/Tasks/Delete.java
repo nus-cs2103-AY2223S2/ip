@@ -1,4 +1,4 @@
-package Tasks;
+package Duke.Tasks;
 
 /**
  * The class of deletion

@@ -1,5 +1,7 @@
-import Exceptions.*;
-import Tasks.*;
+package Duke;
+
+import Duke.Exceptions.*;
+import Duke.Tasks.*;
 
 
 import java.lang.String;
@@ -7,7 +9,7 @@ import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
 /**
- * The Interpreter interpreters the users' input
+ * The Duke.Interpreter interpreters the users' input
  */
 public class Interpreter {
     private final static DateTimeFormatter format = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");

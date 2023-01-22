@@ -1,9 +1,7 @@
-package Tasks;
+package Duke.Tasks;
 
 import java.io.IOException;
 import java.util.ArrayList;
-import java.io.IOException;
-import Tasks.*;
 import java.io.File;
 import java.util.Scanner;
 import java.io.FileNotFoundException;
@@ -18,7 +16,7 @@ public class Disk {
 
 
     /**
-     * The constructor for Tasks.Disk method
+     * The constructor for Duke.Tasks.Disk method
      * @param path
      */
     public Disk(String path) {

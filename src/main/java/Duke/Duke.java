@@ -1,8 +1,10 @@
-import Exceptions.EmptyCommandException;
-import Exceptions.InvalidCommandException;
-import Exceptions.InvalidTimeFormatException;
-import Exceptions.MissingDescriptionException;
-import Tasks.*;
+package Duke;
+
+import Duke.Exceptions.EmptyCommandException;
+import Duke.Exceptions.InvalidCommandException;
+import Duke.Exceptions.InvalidTimeFormatException;
+import Duke.Exceptions.MissingDescriptionException;
+import Duke.Tasks.*;
 import java.io.IOException;
 
 /**
@@ -11,7 +13,7 @@ import java.io.IOException;
  */
 
 /**
- * Represents class of Duke
+ * Represents class of Duke.Duke
  */
 public class Duke {
 
@@ -19,7 +21,7 @@ public class Duke {
     private TaskTable table;
 
     /**
-     * Constructor of Duke
+     * Constructor of Duke.Duke
      * @throws EmptyCommandException
      * @throws InvalidTimeFormatException
      * @throws InvalidCommandException
