@@ -1,5 +1,12 @@
+import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Scanner;
+import java.io.File;
+import java.io.FileWriter;
+
+
 
 public class Duke {
 
@@ -53,44 +60,20 @@ public class Duke {
         separator();
     }
 
-    public void addDeadline(String taskDetails) {
-        String[] arr = taskDetails.split("/by", 2);
-        try {
-            if (arr.length == 1) {
-                throw new DukeException("Please insert deadline date after /by");
-            }
-            Deadline task = new Deadline(arr[0], arr[1]);
-            storage.add(task);
-            System.out.println("\t" + task);
-            System.out.println("Now you have " + storage.size() + " tasks in the list.");
-            separator();
-        } catch (DukeException e) {
-            separator();
-            System.out.println("\t" + e);
-            separator();
-        }
+    public void addDeadline(String description, String by ) {
+        Deadline task = new Deadline(description, by);
+        storage.add(task);
+        System.out.println("\t" + task);
+        System.out.println("Now you have " + storage.size() + " tasks in the list.");
+        separator();
     }
 
-    public void addEvent(String taskDetails) {
-        try {
-            String[] descriptionOthers = taskDetails.split("/from", 2);
-            if (descriptionOthers.length == 1) {
-                throw new DukeException("Please insert the date the event takes place from, after /from ");
-            }
-            String[] fromTo = descriptionOthers[1].split("/to", 2);
-            if (fromTo.length == 1) {
-                throw new DukeException("Please insert the date the event takes place until, after /to ");
-            }
-            Event task = new Event(descriptionOthers[0], fromTo[0], fromTo[1]);
+    public void addEvent(String description, String from, String to) {
+            Event task = new Event(description, from, to);
             storage.add(task);
             System.out.println("\t" + task);
             System.out.println("Now you have " + storage.size() + " tasks in the list.");
             separator();
-        } catch (DukeException e) {
-            separator();
-            System.out.println("\t" + e);
-            separator();
-        }
     }
 
     public void setTaskStatus(int index, boolean isDone) {
@@ -106,60 +89,126 @@ public class Duke {
         System.out.println("---------------------------------------------------------------");
     }
 
+    public void fileHandler(File f) throws DukeException {
+        try {
+            Scanner s = new Scanner(f);
+            while (s.hasNext()) {
+                String[] task = s.nextLine().split(" \\| ");
+                switch (task[0]) {
+                    case "T":
+                        addToDo(task[2]);
+                        break;
+                    case "D":
+                        addDeadline(task[2], task[3]);
+                        break;
+                    case "E":
+                        addEvent(task[2], task[3], task[4]);
+                        break;
+                }
+                if (task[1].equals("1")) {
+                    setTaskStatus(storage.size(), true);
+                }
+            }
+            s.close();
+        } catch (FileNotFoundException e) {
+            throw new DukeException("Could not find file.");
+        }
+    }
 
-    public static void main(String[] args) {
-        Duke addressBook = new Duke();
-        addressBook.greet();
+    public void writeFile() throws DukeException{
+        try {
+            FileWriter fw = new FileWriter("data/duke.txt");
+            StringBuilder str = new StringBuilder();
+            for (Task task : storage) {
+                str.append(task.toFileString());
+            }
+            fw.write(String.valueOf(str));
+            fw.close();
+        } catch (IOException e) {
+            throw new DukeException("Could not write to file path");
+        }
+    }
 
-        while (addressBook.sc.hasNextLine()) {
+
+
+    public static void main(String[] args) throws DukeException {
+        Duke dukeList = new Duke();
+        dukeList.greet();
+
+//        File folderFile = new File("/data");
+//        folderFile.mkdirs();
+        File f = new File("data/duke.txt");
+        f.getParentFile().mkdirs();
+        try {
+            f.createNewFile();
+        } catch (IOException e) {
+            throw new DukeException("Unable to open and create file.");
+        }
+
+        dukeList.fileHandler(f);
+
+        while (dukeList.sc.hasNextLine()) {
             try {
 
-                String str = addressBook.sc.nextLine();
+                String str = dukeList.sc.nextLine();
                 String[] arr = str.split(" ", 2);
                 boolean details = arr.length != 1;
                 switch (arr[0]) {
                     case "bye":
-                        addressBook.exit();
+                        dukeList.exit();
                         break;
                     case "list":
-                        addressBook.list();
+                        dukeList.list();
                         break;
                     case "mark":
                         if (!details) {
                             throw new DukeException("Please include the task index to mark");
                         } else {
-                            addressBook.setTaskStatus(Integer.parseInt(arr[1]), true);
+                            dukeList.setTaskStatus(Integer.parseInt(arr[1]), true);
                             break;
                         }
                     case "unmark":
                         if (!details) {
                             throw new DukeException("Please include the task index to unmark.");
                         }
-                        addressBook.setTaskStatus(Integer.parseInt(arr[1]), false);
+                        dukeList.setTaskStatus(Integer.parseInt(arr[1]), false);
                         break;
                     case "delete":
                         if (!details) {
                             throw new DukeException("Please include the task index to delete.");
                         }
-                        addressBook.delete(Integer.parseInt(arr[1]));
+                        dukeList.delete(Integer.parseInt(arr[1]));
                         break;
                     case "todo":
                         if (!details) {
                             throw new DukeException("Please include the todo details.");
                         }
-                        addressBook.addToDo(arr[1]);
+                        dukeList.addToDo(arr[1]);
                         break;
                     case "deadline":
                         if (!details) {
                             throw new DukeException("Please include the deadline details.");
                         }
-                        addressBook.addDeadline(arr[1]);
+                        String[] descriptionBy = arr[1].split("/by", 2);
+                            if (descriptionBy.length == 1) {
+                                throw new DukeException("Please insert deadline date after /by");
+                            }
+
+                        dukeList.addDeadline(descriptionBy[0], descriptionBy[1]);
                         break;
                     case "event":
                         if (!details) {
                             throw new DukeException("Please include the event details.");
                         }
-                        addressBook.addEvent(arr[1]);
+                        String[] descriptionOthers = arr[1].split("/from", 2);
+                        if (descriptionOthers.length == 1) {
+                            throw new DukeException("Please insert the date the event takes place from, after /from ");
+                        }
+                        String[] fromTo = descriptionOthers[1].split("/to", 2);
+                        if (fromTo.length == 1) {
+                            throw new DukeException("Please insert the date the event takes place until, after /to ");
+                        }
+                        dukeList.addEvent(descriptionOthers[0], fromTo[0], fromTo[1]);
                         break;
                     default:
                         throw new DukeException("Sorry, I don't know what that means.");
@@ -169,6 +218,10 @@ public class Duke {
                 System.out.println("\t" + e);
                 separator();
             }
+
+            // handle changes to arraylist
+            dukeList.writeFile();
+
         }
     }
 }
