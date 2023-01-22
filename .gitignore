@@ -13,11 +13,12 @@ src/main/resources/docs/
 *.iml
 bin/
 
-/text-ui-test/ACTUAL.TXT
+# Test files
+/text-ui-test/*.TXT
 text-ui-test/EXPECTED-UNIX.TXT
+/text-ui-test/data/
 
 # Other files
 *.class
 /docs
 /.vscode/
-/text-ui-test/data/
