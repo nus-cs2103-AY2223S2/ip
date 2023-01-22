@@ -40,7 +40,7 @@ public class Event extends Task{
 
     @Override
     public String toString() {
-        return "[E]" + "[" + super.getStatus() + "]" + super.toString()
+        return "[E]" + "[" + super.getStatus() + "] " + super.toString().strip()
                 + " (from: " + this.getFromTime() + " to: " + this.getToTime() + ")";
     }
 
