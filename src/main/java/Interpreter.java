@@ -3,11 +3,14 @@ import Tasks.*;
 
 
 import java.lang.String;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 
 /**
  * The Interpreter interpreters the users' input
  */
 public class Interpreter {
+    private final static DateTimeFormatter format = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
     private static enum Operation {
         // all the operations
         mark, list, delete, deadline, event, bye, todo, unmark
@@ -142,11 +145,11 @@ public class Interpreter {
                     } else {
                         try {
                             // System.out.println("wwowowoowowowowo");
-                            String deadlineName = deadlineAndTime.split(" /by ")[0];
-                            String deadlineTime = deadlineAndTime.split(" /by ")[1];
+                            String deadlineName = (deadlineAndTime.split(" /by ")[0]);
+                            LocalDateTime deadlineTime = LocalDateTime.parse(deadlineAndTime.split(" /by ")[1], format);
                             return new Deadline(deadlineName, deadlineTime, false);
                         } catch (Exception e) {
-                            // e.printStackTrace();
+                            e.printStackTrace();
                             throw new InvalidTimeFormatException();
                         }
                     }
@@ -163,10 +166,10 @@ public class Interpreter {
                         throw new InvalidTimeFormatException();
                     } else {
                         try {
-                            String eventName = eventAndTime.split("/from")[0];
-                            String eventTime = eventAndTime.split("/from")[1];
-                            String startTime = eventTime.split("/to")[0];
-                            String endTime = eventTime.split("/to")[1];
+                            String eventName = eventAndTime.split(" /from ")[0];
+                            String eventTime = eventAndTime.split(" /from ")[1];
+                            LocalDateTime startTime = LocalDateTime.parse(eventTime.split(" /to ")[0], format);
+                            LocalDateTime endTime = LocalDateTime.parse(eventTime.split(" /to ")[1], format);
                             return new Event(
                                     eventName, startTime, endTime, false);
                         } catch (Exception e) {
