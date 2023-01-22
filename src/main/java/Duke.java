@@ -2,6 +2,11 @@
  * Represents Duke itself, the Chat bot.
  */
 
+import java.time.LocalDate;
+import java.time.LocalTime;
+import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
+import java.util.Optional;
 import java.util.Scanner;
 import java.util.List;
 import java.io.FileWriter;
@@ -51,51 +56,51 @@ public class Duke {
 
     /**
      * Returns description of a Deadline task.
-     * @param str Command details.
+     * @param str User input.
      * @return Description of a deadline task.
      */
     public String getDeadlineDesc(String str) {
-        String[] split = str.split(" /by ");
+        String[] split = getCommandDetails(str).split(" /by ");
         return split[0];
     }
 
     /**
      * Returns deadline of a Deadline task.
-     * @param str Command details.
+     * @param str User input.
      * @return Deadline of a deadline task.
      */
     public String getDeadline(String str) {
-        String[] split = str.split(" /by ");
+        String[] split = getCommandDetails(str).split(" /by ");
         return split[1];
     }
 
     /**
      * Returns description of an Event task.
-     * @param str Command details.
+     * @param str User input.
      * @return Description of an Event task.
      */
     public String getEventDesc(String str) {
-        String[] split = str.split(" /from ");
+        String[] split = getCommandDetails(str).split(" /from ");
         return split[0];
     }
 
     /**
      * Returns "from" timeframe of an Event task.
-     * @param str Command details.
+     * @param str User input.
      * @return "From" timeframe of an Event task.
      */
     public String getEventFrom(String str) {
-        String[] split = str.split(" /from ");
+        String[] split = getCommandDetails(str).split(" /from ");
         return split[1].split(" /to ")[0];
     }
 
     /**
      * Returns "to" timeframe of an Event task.
-     * @param str Command details.
+     * @param str User input.
      * @return "To" timeframe of an Event task.
      */
     public String getEventTo(String str) {
-        String[] split = str.split(" /from ");
+        String[] split = getCommandDetails(str).split(" /from ");
         return split[1].split(" /to ")[1];
     }
 
@@ -120,7 +125,7 @@ public class Duke {
      */
     public void run() {
         Scanner sc = new Scanner(System.in);
-        System.out.println("---\n hi i'm Duke! what's up? \n---");
+        System.out.println("---\nhi i'm Duke! what's up?\n---");
 
         while (sc.hasNextLine()) {
             String userInput = sc.nextLine();
@@ -163,8 +168,19 @@ public class Duke {
                 break;
             case "deadline":
                 try {
-                    Deadline newDeadline = new Deadline(getDeadlineDesc(getCommandDetails(userInput)),
-                            getDeadline(getCommandDetails(userInput)));
+                    String deadlineStr = getDeadline(userInput);
+                    String[] split = deadlineStr.split(" ");
+                    LocalDate deadlineDate = LocalDate.parse(split[0]);
+                    Optional<LocalTime> deadlineTime;
+                    if (split.length > 1) {
+                        // Time is specified by user
+                        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("HHmm");
+                        deadlineTime = Optional.of(LocalTime.parse(split[1], formatter));
+                    } else {
+                        deadlineTime = Optional.empty();
+                    }
+                    Deadline newDeadline = new Deadline(getDeadlineDesc(userInput),
+                            getDeadline(userInput));
                     tasks = tasks.add(newDeadline);
                     System.out.println("---\ni've added this task with deadline:\n" + newDeadline);
                     if (tasks.size() == 1) {
@@ -174,14 +190,44 @@ public class Duke {
                     }
                 } catch (ArrayIndexOutOfBoundsException ex) {
                     System.out.println("---\n"
-                            + new DukeException("pls specify the description and deadline for this task!")
+                            + new DukeException("pls specify the description and deadline for this task!\n" +
+                            "use the format: deadline [description] /by yyyy-MM-dd HHmm")
+                            + "\n---");
+                } catch (DateTimeParseException ex) {
+                    System.out.println("---\n"
+                            + new DukeException("pls specify the description and deadline for this task!\n" +
+                            "use the format: deadline [description] /by yyyy-MM-dd HHmm")
                             + "\n---");
                 }
                 break;
             case "event":
                 try {
-                    Event newEvent = new Event(getEventDesc(getCommandDetails(userInput)),
-                            getEventFrom(getCommandDetails(userInput)), getEventTo(getCommandDetails(userInput)));
+                    String eventFromStr = getEventFrom(userInput);
+                    String[] splitFrom = eventFromStr.split(" ");
+                    LocalDate eventFromDate = LocalDate.parse(splitFrom[0]);
+                    Optional<LocalTime> eventFromTime;
+                    if (splitFrom.length > 1) {
+                        // Time is specified by user
+                        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("HHmm");
+                        eventFromTime = Optional.of(LocalTime.parse(splitFrom[1], formatter));
+                    } else {
+                        eventFromTime = Optional.empty();
+                    }
+
+                    String eventToStr = getEventTo(userInput);
+                    String[] splitTo = eventToStr.split(" ");
+                    LocalDate eventToDate = LocalDate.parse(splitTo[0]);
+                    Optional<LocalTime> eventToTime;
+                    if (splitTo.length > 1) {
+                        // Time is specified by user
+                        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("HHmm");
+                        eventToTime = Optional.of(LocalTime.parse(splitTo[1], formatter));
+                    } else {
+                        eventToTime = Optional.empty();
+                    }
+
+                    Event newEvent = new Event(getEventDesc(userInput),
+                            getEventFrom(userInput), getEventTo(userInput));
                     tasks = tasks.add(newEvent);
                     System.out.println("---\ni've added this event:\n" + newEvent);
                     if (tasks.size() == 1) {
@@ -191,7 +237,13 @@ public class Duke {
                     }
                 } catch (ArrayIndexOutOfBoundsException ex) {
                     System.out.println("---\n"
-                            + new DukeException("pls specify the description and duration for this event!")
+                            + new DukeException("pls specify the description and duration for this event!\n" +
+                            "use the format: event [description] /from yyyy-MM-dd HHmm /to yyyy-MM-dd HHmm")
+                            + "\n---");
+                } catch (DateTimeParseException ex) {
+                    System.out.println("---\n"
+                            + new DukeException("pls specify the description and duration for this event!\n" +
+                            "use the format: event [description] /from yyyy-MM-dd HHmm /to yyyy-MM-dd HHmm")
                             + "\n---");
                 }
                 break;
