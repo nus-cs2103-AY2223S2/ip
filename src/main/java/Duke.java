@@ -1,5 +1,7 @@
 import exceptions.DukeException;
 
+import java.time.LocalDate;
+import java.time.format.DateTimeParseException;
 import java.util.Scanner;
 
 public class Duke {
@@ -163,8 +165,12 @@ public class Duke {
                 throw new DukeException("Please provide a valid deadline.");
             }
             name = temp[0].split(" ", 2)[1];
-            String deadline = temp[1];
-            task = new Deadline(name, deadline);
+            try {
+                LocalDate deadline = LocalDate.parse(temp[1]);
+                task = new Deadline(name, deadline);
+            } catch (DateTimeParseException e) {
+                throw new DukeException("Please provide the deadline in the following format: YYYY-MM-DD.");
+            }
             break;
         case EVENT:
             if (!input.contains("/from") || !input.contains("/to")) {
@@ -176,9 +182,13 @@ public class Duke {
             if (dates.length < 2) {
                 throw new DukeException("Please provide a valid start and end date.");
             }
-            String startDate = dates[0];
-            String endDate = dates[1];
-            task = new Event(name, startDate, endDate);
+            try {
+                LocalDate startDate = LocalDate.parse(dates[0]);
+                LocalDate endDate = LocalDate.parse(dates[1]);
+                task = new Event(name, startDate, endDate);
+            } catch (DateTimeParseException e) {
+                throw new DukeException("Please provide the dates in the following format: YYYY-MM-DD.");
+            }
             break;
         }
         this.tasklist.addTask(task);
