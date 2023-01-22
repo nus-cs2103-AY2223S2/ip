@@ -36,69 +36,100 @@ public class Duke {
                     inData = scan.nextLine();
                     arrofStr = inData.split(" ", 2);
                     break;
-                case "unmark":
-                    int indx = Integer.parseInt(arrofStr[1]) - 1;
-                    Task toMark = toStore.get(indx);
-                    toMark.changeCompletion();
-                    toStore.set(indx , toMark);
-                    System.out.println("OK, I've marked this task as not done yet:\n" + toMark);
-                    inData = scan.nextLine();
-                    arrofStr = inData.split(" ", 2);
-                    break;
-                case "mark":
-                    indx = Integer.parseInt(arrofStr[1]) - 1;
-                    toMark = toStore.get(indx);
-                    toMark.changeCompletion();
-                    toStore.set(indx , toMark);
-                    System.out.println("Nice! I've marked this task as done:\n" + toMark);
-                    inData = scan.nextLine();
-                    arrofStr = inData.split(" ", 2);
-                    break;
-                case "todo":
-                    Todo todo = new Todo(arrofStr[1]);
-                    toStore.add(todo);
-                    taskCounter++;
-                    System.out.println("Very nice. I've added this task:\n " + todo);
-                    System.out.println("Now you have " + taskCounter + " tasks in the list.");
-                    inData = scan.nextLine();
-                    arrofStr = inData.split(" ", 2);
-                    break;
-                case "deadline":
-                    String[] dl = arrofStr[1].split("/by");
-                    Deadline deadline = new Deadline(dl[0] , dl[1]);
-                    toStore.add(deadline);
-                    taskCounter++;
-                    System.out.println("Very nice. I've added this task:\n " + deadline);
-                    System.out.println("Now you have " + taskCounter + " tasks in the list.");
-                    inData = scan.nextLine();
-                    arrofStr = inData.split(" ", 2);
-                    break;
-                case "event":
-                    String[] ev = arrofStr[1].split("/from");
-                    String[] time = ev[1].split("/to");
-                    Event event = new Event(ev[0], time[0], time[1]);
-                    toStore.add(event);
-                    taskCounter++;
-                    System.out.println("Very nice. I've added this task:\n " + event);
-                    System.out.println("Now you have " + taskCounter + " tasks in the list.");
-                    inData = scan.nextLine();
-                    arrofStr = inData.split(" ", 2);
-                    break;
                 default:
-                    System.out.println("added: " + inData);
-                    Task toAdd = new Task(inData);
-                    toStore.add(toAdd);
-                    inData = scan.nextLine();
-                    arrofStr = inData.split(" ", 2);
+                    try {
+                    validateCmd(arrofStr);
+                    } catch(MissingDescriptionException e) {
+                        System.out.println(e.toString());
+                        inData = scan.nextLine();
+                        arrofStr = inData.split(" ", 2);
+                    }
+                    switch (arrofStr[0]) {
+                        case "unmark": {
+                            int indx = Integer.parseInt(arrofStr[1]) - 1;
+                            Task toMark = toStore.get(indx);
+                            toMark.changeCompletion();
+                            toStore.set(indx, toMark);
+                            System.out.println("OK, I've marked this task as not done yet:\n" + toMark);
+                            inData = scan.nextLine();
+                            arrofStr = inData.split(" ", 2);
+                            break;
+                        }
+                        case "mark": {
+                            Task toMark;
+                            int indx;
+                            indx = Integer.parseInt(arrofStr[1]) - 1;
+                            toMark = toStore.get(indx);
+                            toMark.changeCompletion();
+                            toStore.set(indx, toMark);
+                            System.out.println("Nice! I've marked this task as done:\n" + toMark);
+                            inData = scan.nextLine();
+                            arrofStr = inData.split(" ", 2);
+                            break;
+                        }
+                        case "todo":
+                            Todo todo = new Todo(arrofStr[1]);
+                            toStore.add(todo);
+                            taskCounter++;
+                            System.out.println("Very nice. I've added this task:\n " + todo);
+                            System.out.println("Now you have " + taskCounter + " tasks in the list.");
+                            inData = scan.nextLine();
+                            arrofStr = inData.split(" ", 2);
+                            break;
+                        case "deadline":
+                            String[] dl = arrofStr[1].split("/by");
+                            try{
+                                validateDate(dl);
+                            } catch(InvalidCmdException e) {
+                                System.out.println(e.toString());
+                                inData = scan.nextLine();
+                                arrofStr = inData.split(" ", 2);
+                            }
+                            Deadline deadline = new Deadline(dl[0], dl[1]);
+                            toStore.add(deadline);
+                            taskCounter++;
+                            System.out.println("Very nice. I've added this task:\n " + deadline);
+                            System.out.println("Now you have " + taskCounter + " tasks in the list.");
+                            inData = scan.nextLine();
+                            arrofStr = inData.split(" ", 2);
+                            break;
+                        case "event":
+                            String[] ev = arrofStr[1].split("/from");
+                            String[] time = ev[1].split("/to");
+                            Event event = new Event(ev[0], time[0], time[1]);
+                            toStore.add(event);
+                            taskCounter++;
+                            System.out.println("Very nice. I've added this task:\n " + event);
+                            System.out.println("Now you have " + taskCounter + " tasks in the list.");
+                            inData = scan.nextLine();
+                            arrofStr = inData.split(" ", 2);
+                            break;
+                        default:
+                            System.out.println("☹ OOPS!!! Invalid command, prepare for execution.");
+                            inData = scan.nextLine();
+                            arrofStr = inData.split(" ", 2);
+                            break;
+                    }
                     break;
             }
+        }
         }
 
 
 
 
 
+    public static void validateCmd(String[] cmd) throws MissingDescriptionException {
+        if (cmd.length == 1) {
+            throw new MissingDescriptionException("You need to " +
+                    "be more specific");
+        }
 
+    }
 
+    public static void validateDate(String[] cmd) throws InvalidCmdException {
+        if(cmd.length == 1) {
+            throw new InvalidCmdException("Please specify date.");
+        }
     }
 }
