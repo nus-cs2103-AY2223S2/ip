@@ -6,7 +6,7 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 
 /**
- * The Duke ChatBot
+ * The Duke ChatBot.
  */
 public class Duke {
     private TaskList taskList;
