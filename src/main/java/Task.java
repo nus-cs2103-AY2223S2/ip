@@ -1,4 +1,4 @@
-public class Task {
+public abstract class Task {
     protected String name;
     protected boolean isDone;
 
@@ -13,11 +13,19 @@ public class Task {
 
     public String markAsDone() {
         this.isDone = true;
-        return "Nice! I've marked this task as done:" + "\n" + "[X] " + this.name;
+        return "Nice! I've marked this task as done:" + "\n" + "[" + this.getTaskType() + "][X] " + this.toString();
     }
 
     public String markAsUndone() {
         this.isDone = false;
-        return "OK, I've marked this task as not done yet:" + "\n" + "[ ] " + this.name;
+        return "OK, I've marked this task as not done yet:" + "\n" + "[" + this.getTaskType() + "][X] "
+                + this.toString();
+    }
+
+    public abstract String getTaskType();
+
+    @Override
+    public String toString() {
+        return this.name;
     }
 }
