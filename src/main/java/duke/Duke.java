@@ -1,5 +1,8 @@
 package duke;
 
+import java.io.InputStream;
+import java.io.PrintStream;
+
 import duke.command.Command;
 import duke.database.DukeRepo;
 import duke.database.DukeRepoImpl;
@@ -21,6 +24,14 @@ public class Duke {
     Duke() {
         db = new DukeRepoImpl();
         ui = new Ui();
+    }
+
+    /**
+     * Constructor for testing
+     */
+    Duke(InputStream in, PrintStream out) {
+        db = new DukeRepoImpl();
+        ui = new Ui(in, out);
     }
 
     /**
