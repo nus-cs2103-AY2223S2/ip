@@ -1,6 +1,6 @@
 import java.util.Arrays;
 
-public class TaskInfoParser {
+public class TaskInfoParser extends Parser {
 
     /**
      * This is a parser to extract information from the task to decide which object it is referring
@@ -8,7 +8,7 @@ public class TaskInfoParser {
      * @param input command input from stdin
      * @return Task object specific to the command input string
      */
-    public static Task obtainTask(String input) {
+    public static Task parse(String input) {
         String[] commands = input.split(" ");
         switch(commands[0]) {
             case "todo" :
@@ -24,10 +24,9 @@ public class TaskInfoParser {
                 " for not know what %s means!!", commands[0]), null);
     }
 
-    public static Task obtainTask(String[] stringArray) {
+    public static Task parse(String[] stringArray) {
         int length = stringArray.length;
         stringArray = StringUtils.removeWhiteSpace(stringArray);
-        //System.out.println(Arrays.deepToString(stringArray));
         switch(stringArray[0]) {
             case "T":
                 return ToDo.create(StringUtils.joinString(stringArray, 2, length - 1), stringArray[1]);
