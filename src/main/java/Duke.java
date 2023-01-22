@@ -30,7 +30,28 @@ public class Duke {
                 Task task = toDoList.get(index - 1);
                 task.unmark();
                 System.out.println("Ok, I've marked this task as not done yet: " + "\n" + task);
-            } else {
+            } else if (input.startsWith("todo")) {
+                Todo tdTask = new Todo(input.substring(5, input.length()));
+                System.out.println("Got it. I've added this task:" + "\n" + tdTask);
+                toDoList.add(tdTask);
+                System.out.println("Now you have " + toDoList.size() + " tasks in the list.");
+            } else if (input.startsWith("deadline")) {
+                int index_ddl = input.indexOf("/");
+                Ddl ddlTask = new Ddl(input.substring(9, index_ddl - 1), input.substring(index_ddl + 4, input.length()));
+                System.out.println("Got it. I've added this task:" + "\n" + ddlTask);
+                toDoList.add(ddlTask);
+                System.out.println("Now you have " + toDoList.size() + " tasks in the list.");
+            } else if (input.startsWith("event")) {
+                int index_e1 = input.indexOf("/");
+                int index_e2 = input.lastIndexOf("/");
+                Event eventTask = new Event(input.substring(6, index_e1 - 1),
+                        input.substring(index_e1 + 6, index_e2 - 1),
+                        input.substring(index_e2 + 4, input.length()));
+                System.out.println("Got it. I've added this task:" + "\n" + eventTask);
+                toDoList.add(eventTask);
+                System.out.println("Now you have " + toDoList.size() + " tasks in the list.");
+            }
+            else {
                 Task task = new Task(input);
                 toDoList.add(task);
                 System.out.println("added: " + task);
