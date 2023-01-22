@@ -36,6 +36,13 @@ interface Handler {
         ui.info("Now you have %d %s.", tasks.count(), tasks.count() == 1 ? "task" : "tasks");
     }
 
+    /**
+     * Prints each task in a list, with two spaces of indentation. Just a
+     * convenience method.
+     * 
+     * @param tasks The list of tasks.
+     * @param ui    The Ui instance to use.
+     */
     static void printTasksIndented(TaskList tasks, Ui ui) {
         tasks.forEach((task, idx) -> {
             ui.info("  %d.%s", idx + 1, task);
@@ -175,6 +182,12 @@ class Handlers {
         };
     }
 
+    /**
+     * Returns a handler for finding tasks by description.
+     * 
+     * @param searchTerm The term(s) to search for.
+     * @return A handler for finding tasks.
+     */
     public static Handler find(String searchTerm) {
         return (TaskList tasks, Ui ui, Storage storage) -> {
             TaskList filtered = tasks.filter(task -> task.desc().contains(searchTerm));

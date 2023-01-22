@@ -40,6 +40,12 @@ class TaskList {
         }
     }
 
+    /**
+     * Creates a new task list by applying some predicate to the current list.
+     * 
+     * @param f The predicate to apply.
+     * @return The new filtered list.
+     */
     public TaskList filter(Predicate<Task> f) {
         return new TaskList(tasks.stream().filter(f).collect(Collectors.toList()));
     }
