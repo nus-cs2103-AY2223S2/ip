@@ -13,17 +13,10 @@ public class Event extends Task {
     private final LocalDateTime to;
 
     /**
-<<<<<<< HEAD
      * Constructor for Event object.
      * @param content The content of the Event.
      * @param from The start datetime of the Event, as a String.
      * @param to The end datetime of the Event, as a String.
-=======
-     * Constructor for Event.
-     * @param content Content to be placed inside the Event.
-     * @param from Start datetime of the Event.
-     * @param to End datetime of the Event.
->>>>>>> master
      */
     public Event(String content, String from, String to) {
         super(content);

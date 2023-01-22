@@ -13,11 +13,7 @@ public class DeleteCommand extends Command {
 
     /**
      * Constructor for DeleteCommand.
-<<<<<<< HEAD
      * @param commandContent Potentially contains the id of the task being deleted.
-=======
-     * @param commandContent Potentially contains the index of the task to be deleted.
->>>>>>> master
      */
     public DeleteCommand(String commandContent) {
         this.index = Parser.parseInt(commandContent, "Delete Item") - 1;

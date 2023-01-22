@@ -8,11 +8,7 @@ import task.TaskList;
 import ui.Ui;
 
 /**
-<<<<<<< HEAD
  * Duke chatbot that will respond to users' commands.
-=======
- * Duke chatbot.
->>>>>>> master
  */
 public class Duke {
     private final Storage storage;

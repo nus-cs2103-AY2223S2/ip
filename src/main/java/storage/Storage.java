@@ -15,11 +15,8 @@ import struct.Triple;
 import task.TaskList;
 
 /**
-<<<<<<< HEAD
  * Storage module for handling file saves and loads.
-=======
  * Storage module for handling saves and loads.
->>>>>>> master
  */
 public class Storage {
     private final String filePath;

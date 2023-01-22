@@ -6,11 +6,7 @@ import task.TaskList;
 import ui.Ui;
 
 /**
-<<<<<<< HEAD
  * Command to be executed.
-=======
- * Command that can be executed.
->>>>>>> master
  */
 public abstract class Command {
     /**
@@ -35,6 +31,8 @@ public abstract class Command {
         case "deadline":
         case "event":
             return new AddCommand(commandWord.toUpperCase().charAt(0), commandContent);
+        case "find":
+            return new FindCommand(commandContent);
         default:
             throw new UnknownCommandException();
         }

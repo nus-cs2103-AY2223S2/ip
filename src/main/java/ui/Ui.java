@@ -1,17 +1,6 @@
 package ui;
 
 import java.util.Scanner;
-<<<<<<< HEAD
-
-/**
- * User interface module for handling user inputs and outputs.
- */
-public class Ui {
-    private static final String ERROR_HORIZONTAL = "X".repeat(40);
-    private static final String HORIZONTAL = "+=".repeat(20);
-    private static final String INDENT = "> ";
-
-=======
 
 /**
  * Ui module for handling user inputs and outputs.
@@ -20,7 +9,6 @@ public class Ui {
     private static final String ERROR_HORIZONTAL = "X".repeat(40);
     private static final String HORIZONTAL = "+=".repeat(20);
     private static final String INDENT = "> ";
->>>>>>> master
     private final Scanner scanner;
 
     public Ui() {

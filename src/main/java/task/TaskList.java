@@ -1,32 +1,27 @@
 package task;
 
 import java.util.ArrayList;
+import java.util.function.Function;
 
 import dukeexception.NotFoundException;
 import struct.Triple;
 
 /**
-<<<<<<< HEAD
  * Task list to contain the tasks that the user has to complete.
-=======
- * Task list for containing tasks.
->>>>>>> master
  */
 public class TaskList {
     private final ArrayList<Task> tasks;
 
+    /**
+     * Constructor for empty TaskList.
+     */
     public TaskList() {
         this.tasks = new ArrayList<>();
     }
 
     /**
-<<<<<<< HEAD
      * Overloaded constructor for TaskList
      * @param triples Triple structs containing the task's type, mark status, and content.
-=======
-     * Overloaded constructor for TaskList.
-     * @param triples Tuples of data containing the task type, mark status, and task content.
->>>>>>> master
      */
     public TaskList(ArrayList<Triple<Character, Boolean, String>> triples) {
         this.tasks = new ArrayList<>();
@@ -87,27 +82,39 @@ public class TaskList {
     }
 
     /**
-     * Prints the contents of the task.
-     * @param id The id of the task to be printed.
-     * @param withNumber Whether to print the task with its index.
+     * Gets the task in the id spot.
+     * @param id Index of the task to be retrieved.
+     * @return The task at that index.
      */
-    public void printTask(int id, boolean withNumber) {
-        String numbering = withNumber ? (id + 1) + ". " : "";
-        System.out.println(numbering + this.tasks.get(id));
+    private Task getTask(int id) {
+        return this.tasks.get(id);
     }
 
     /**
      * Prints out all tasks in the list.
      */
     public void listItems() {
+        this.listItems((t) -> true);
+    }
+
+    /**
+     * Prints out some items from the list.
+     * @param taskFilter A filter that returns a boolean.
+     */
+    public void listItems(Function<Task, Boolean> taskFilter) {
         if (this.isEmpty()) {
             System.out.println("List empty!");
             return;
         }
 
         System.out.println("Here's your list:");
+        int count = 0;
         for (int id = 0; id < this.tasks.size(); id++) {
-            this.printTask(id, true);
+            Task task = this.getTask(id);
+            if (taskFilter.apply(task)) {
+                System.out.printf("%d. %s\n", count + 1, task);
+                count += 1;
+            }
         }
     }
 

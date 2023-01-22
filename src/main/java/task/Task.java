@@ -1,24 +1,15 @@
 package task;
 
 /**
-<<<<<<< HEAD
  * Task object encapsulating Todo, Deadline, and Event tasks.
-=======
- * Task object to be stored inside the task list.
->>>>>>> master
  */
 public abstract class Task {
     private boolean marked;
     private final String content;
 
     /**
-<<<<<<< HEAD
      * Constructor for Task object.
      * @param content Content to be placed in the task.
-=======
-     * Constructor for Task.
-     * @param content Content to be placed inside the task.
->>>>>>> master
      */
     public Task(String content) {
         this.marked = false;

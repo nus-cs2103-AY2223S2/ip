@@ -6,25 +6,15 @@ import parser.DateParser;
 import parser.Parser;
 
 /**
-<<<<<<< HEAD
  * Deadline object with a 'by' clause.
-=======
- * Deadline task with a 'by' clause.
->>>>>>> master
  */
 public class Deadline extends Task {
     private final LocalDateTime by;
 
     /**
-<<<<<<< HEAD
      * Constructor for the Deadline object.
      * @param content Content to be put in the object.
      * @param by The deadline of the task as a String.
-=======
-     * Constructor for Deadline tasks.
-     * @param content Content to be put inside the task.
-     * @param by The deadline of the task.
->>>>>>> master
      */
     public Deadline(String content, String by) {
         super(content);

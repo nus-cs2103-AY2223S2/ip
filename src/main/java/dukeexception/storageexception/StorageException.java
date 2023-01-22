@@ -6,6 +6,10 @@ import dukeexception.DukeException;
  * Exception for handling storage-related problems.
  */
 public class StorageException extends DukeException {
+    /**
+     * Constructor for StorageException.
+     * @param message Message to be displayed.
+     */
     public StorageException(String message) {
         super(message, null);
     }
