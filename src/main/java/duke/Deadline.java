@@ -1,5 +1,5 @@
 package duke;
-class Deadline extends Task {
+public class Deadline extends Task {
     String dueDate;
 
     // Factory method

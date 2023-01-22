@@ -1,5 +1,5 @@
 package duke;
-class ToDo extends Task {
+public class ToDo extends Task {
 
     // Factory method
     public static ToDo create(String command) throws TaskNameNotSpecified {

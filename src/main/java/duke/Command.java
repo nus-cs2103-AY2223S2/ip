@@ -2,7 +2,7 @@ package duke;
 import java.util.Arrays;
 import java.util.Optional;
 
-enum Command {
+public enum Command {
     TODO("todo"),
     DEADLINE("deadline"),
     EVENT("event"),

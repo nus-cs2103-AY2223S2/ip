@@ -1,5 +1,5 @@
 package duke;
-abstract class Task {
+public abstract class Task {
     String type;
     String taskName;
     boolean completed = false;

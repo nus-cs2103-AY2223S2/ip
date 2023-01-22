@@ -1,5 +1,5 @@
 package duke;
-class Event extends Task {
+public class Event extends Task {
     String fromDate;
     String toDate;
 
