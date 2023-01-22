@@ -46,11 +46,12 @@ public class Storage {
         this.writer.flush();
     }
 
-    public void restructure(ArrayList<Task> taskList) throws IOException {
+    public void restructure(TaskList taskList) throws IOException {
         new FileWriter(this.file.getPath(), false).close();
+        int size = taskList.getSize();
 
-        for (Task task : taskList) {
-            this.storeTask(task);
+        for (int i = 1; i <= size; i++) {
+            this.storeTask(taskList.getTask(i));
         }
     }
 
