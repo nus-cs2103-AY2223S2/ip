@@ -1,6 +1,8 @@
 import java.io.IOException;
 
+import java.nio.file.FileAlreadyExistsException;
 import java.nio.file.Files;
+import java.nio.file.Path;
 import java.nio.file.Paths;
 
 import java.util.ArrayList;
@@ -22,10 +24,34 @@ public class Duke {
         ArrayList<Task> lstOfItems = new ArrayList<>();
         String path = "src/data/duke.txt";
 
-        try {
-            Files.write(Paths.get(path), "Hello".getBytes());
-        } catch (IOException err) {
-            System.out.println(err);
+        // Idea for the following code snippet to create a file is referenced from:
+        // https://stackoverflow.com/questions/6142901/how-to-create-a-file-in-a-directory-in-java
+        boolean isExistFile = new java.io.File("src/data/duke.txt").exists();
+        if (!isExistFile) {
+            Path desiredPath = Paths.get("src/data/duke.txt");
+
+            try {
+                Files.createDirectories(desiredPath.getParent());
+            } catch (IOException err) {
+                System.out.println(err);
+            }
+
+            try {
+                Files.createFile(desiredPath);
+                System.out.println("DONE!");
+            } catch (FileAlreadyExistsException err) {
+                System.err.println("already exists: " + err.getMessage());
+            } catch (IOException err) {
+                System.out.println(err);
+            }
+        } else {
+            // Idea for the following code snippet is taken from:
+            // https://stackoverflow.com/questions/1053467/how-do-i-save-a-string-to-a-text-file-using-java
+            try {
+                Files.write(Paths.get(path), "Hello".getBytes());
+            } catch (IOException err) {
+                System.out.println(err);
+            }
         }
 
         while (!checker.checkEnd(userInput)) {
