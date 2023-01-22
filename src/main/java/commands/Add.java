@@ -5,8 +5,7 @@ import tasks.Deadline;
 import tasks.Event;
 import tasks.ITask;
 import tasks.Todo;
-import uitilties.Parser;
-import uitilties.UserInterface;
+import utilities.Parser;
 
 public class Add extends ICommand {
 
@@ -22,22 +21,23 @@ public class Add extends ICommand {
             case Events:
                 getParser().forEvent();
                 task = new Event(getParser().getDescription(), getParser().getFrom(),getParser().getTo());
-                getParser().getTasks().add(task);
+                getParser().getTaskManager().add(task);
                 break;
             case Deadlines:
                 getParser().forDeadline();
                 task = new Deadline(getParser().getDescription(), getParser().getBy());
-                getParser().getTasks().add(task);
+                getParser().getTaskManager().add(task);
                 break;
-            default: //ToDos:
+            default:
                 getParser().forTodo();
                 task = new Todo(getParser().getDescription());
-                getParser().getTasks().add(task);
+                getParser().getTaskManager().add(task);
                 break;
 
         }
-        UserInterface.Speak(task + "\nAdded"+ "\nNow you have "
-                + getParser().getTasks().size() + " tasks in the list.");
+        setMsg(task + "\nAdded"+ "\nNow you have "
+                + getParser().getTaskManager().size() + " tasks in the list.");
+
         return false;
 
     }

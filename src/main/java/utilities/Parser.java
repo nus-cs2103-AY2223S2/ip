@@ -1,4 +1,4 @@
-package uitilties;
+package utilities;
 
 import exceptions.*;
 import tasks.ITask;
@@ -6,15 +6,14 @@ import tasks.ITask;
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
 import java.util.Date;
 
 public class Parser {
     private boolean processed = false;
     private String _input;
     private String _description;
-    private final DateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy HHmm");
-    public static DateFormat outputFormat = new SimpleDateFormat("MM-dd-yyyy HH:mm:ss aa");
+    public static final DateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy HHmm");
+    public static final DateFormat outputFormat = new SimpleDateFormat("MM-dd-yyyy HH:mm:ss aa");
 
     public Date getBy() {
         return _by;
@@ -62,7 +61,7 @@ public class Parser {
     private Date _to;
 
 
-    private final ArrayList<ITask> _tasks;
+    private final TaskManager _taskManager;
 
     public ITask.TaskTypes getType() {
         return _type;
@@ -72,23 +71,23 @@ public class Parser {
     private int _index;
 
 
-    public Parser(ArrayList<ITask> tasks) {
-        _tasks = tasks;
+    public Parser(TaskManager taskManager) {
+        _taskManager = taskManager;
     }
 
-    public Parser(String input, ArrayList<ITask> tasks) {
+    public Parser(String input, TaskManager taskManager) {
         _input = input;
-        _tasks = tasks;
+        _taskManager = taskManager;
     }
 
-    public Parser(ArrayList<ITask> tasks, String input, ITask.TaskTypes type) {
-        _tasks = tasks;
+    public Parser(TaskManager taskManager, String input, ITask.TaskTypes type) {
+        _taskManager = taskManager;
         _input = input;
         _type = type;
     }
 
-    public ArrayList<ITask> getTasks() {
-        return _tasks;
+    public TaskManager getTaskManager() {
+        return _taskManager;
     }
 
 
@@ -99,7 +98,7 @@ public class Parser {
             } catch (NumberFormatException e) {
                 throw new InvalidMarkInput(_input);
             }
-            if (_index < 0 || _index > _tasks.size() - 1) {
+            if (_index < 0 || _index > _taskManager.size() - 1) {
                 throw new InvalidMarkInput(_input);
             }
             processed = true;

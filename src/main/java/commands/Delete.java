@@ -2,8 +2,7 @@ package commands;
 
 import exceptions.DukeException;
 import tasks.ITask;
-import uitilties.Parser;
-import uitilties.UserInterface;
+import utilities.Parser;
 
 public class Delete extends ICommand {
 
@@ -13,11 +12,11 @@ public class Delete extends ICommand {
 
     @Override
     public boolean run() throws DukeException {
-        ITask t = getParser().getTasks().remove(getParser().getIndex());
+        ITask t = getParser().getTaskManager().remove(getParser().getIndex());
 
-        UserInterface.Speak("Noted. I've removed this task:\n" + t + "\nNow you have "
-                + getParser().getTasks().size() + " in the list.");
 
+        setMsg("Noted. I've removed this task:\n" + t + "\nNow you have "
+                + getParser().getTaskManager().size() + " in the list.");
         return false;
     }
 }
