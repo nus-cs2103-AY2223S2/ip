@@ -3,7 +3,8 @@ package controllers;
 import java.util.function.Supplier;
 import java.util.regex.Matcher;
 
-import entities.*;
+import entities.Task;
+import entities.TaskList;
 import enums.CommandType;
 import enums.TaskType;
 import exceptions.DukeException;

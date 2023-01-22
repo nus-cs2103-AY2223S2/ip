@@ -4,11 +4,16 @@ import java.time.LocalDate;
 
 import enums.TaskType;
 
-
 /**
  * Represents the Todo task.
  */
 public class Todo extends Task {
+
+    /**
+     * Instantiate a todo object.
+     *
+     * @param description the description of the task
+     */
     public Todo(String description) {
         super(description);
         this.taskType = TaskType.TODO;

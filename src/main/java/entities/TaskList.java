@@ -46,7 +46,7 @@ public class TaskList {
         }
         ListIterator<Task> it = filteredList.listIterator();
         while (it.hasNext()) {
-              System.out.println(it.nextIndex() + 1 + ". " + it.next());
+            System.out.println(it.nextIndex() + 1 + ". " + it.next());
         }
     }
 

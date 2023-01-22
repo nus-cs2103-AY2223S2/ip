@@ -1,27 +1,26 @@
 package entities;
 
-import enums.TaskType;
-import exceptions.DukeException;
-import utils.CustomValidator;
-
 import java.time.LocalDate;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
+
+import enums.TaskType;
+import exceptions.DukeException;
+import utils.CustomValidator;
 
 /**
  * Represents a Task Object.
  */
 public abstract class Task {
-    private static final Pattern FORMAT_DATE =
-            Pattern.compile("^(?<year>\\d{4})-(?<month>0[0-9]|1[0-2])-(?<day>0[0-9]|1[0-9]|2[0-9]|3[0-1])$");
-
     public static final Pattern DEADLINE =
             Pattern.compile("^(deadline) (?<description>.+) /by (?<by>.+)$", Pattern.CASE_INSENSITIVE);
     public static final Pattern EVENT =
             Pattern.compile("^(event) (?<description>.+) /from (?<from>.+) /to (?<to>.+)$", Pattern.CASE_INSENSITIVE);
     public static final Pattern TODO = Pattern.compile("^(todo) (?<description>.+)$", Pattern.CASE_INSENSITIVE);
-
+    private static final Pattern FORMAT_DATE =
+            Pattern.compile("^(?<year>\\d{4})-(?<month>0[0-9]|1[0-2])-(?<day>0[0-9]|1[0-9]|2[0-9]|3[0-1])$");
     private static final String INVALID_DATE_MESSAGE = "Date is not valid! Please try again.";
+
 
     protected TaskType taskType;
 
@@ -50,6 +49,12 @@ public abstract class Task {
     public abstract SerializableTask serialize();
     public abstract boolean activeOn(LocalDate date);
 
+    /**
+     * Filters a task based on the matched string.
+     *
+     * @param string The string to match.
+     * @return a boolean value indicating if a match is found.
+     */
     public boolean matchString(String string) {
         Matcher pattern = Pattern.compile(".*" + string + ".*$", Pattern.CASE_INSENSITIVE).matcher(description);
         return pattern.matches();
