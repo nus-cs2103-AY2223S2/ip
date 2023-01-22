@@ -1,5 +1,9 @@
 import com.sun.jdi.connect.IllegalConnectorArgumentsException;
 
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -11,7 +15,46 @@ public class Duke {
             " \\ \\_\\ \\_\\  \\ \\_\\ \\_\\  \\ \\_\\  \\ \\_\\ \n" +
             "  \\/_/\\/_/   \\/_/ /_/   \\/_/   \\/_/ \n";
 
+    private final String SAVE_FILE_PATH = "./data/data.txt";
+
     private final ArrayList<Task> tasks = new ArrayList<>();
+
+    private boolean loadData() {
+        File saveFile = new File(SAVE_FILE_PATH);
+        if (!saveFile.exists()) {
+            return true;
+        }
+
+        try {
+            Scanner s = new Scanner(saveFile);
+            while (s.hasNext()) {
+                String data = s.next();
+                String identifier = data.split(",")[0];
+                Task task;
+
+                switch (identifier) {
+                case "TT":
+                    task = TodoTask.deserialise(data);
+                    break;
+                case "ET":
+                    task = EventTask.deserialise(data);
+                    break;
+                case "DT":
+                    task = DeadlineTask.deserialise(data);
+                    break;
+                case "T":
+                default:
+                    task = Task.deserialise(data);
+                    break;
+                }
+                tasks.add(task);
+            }
+        } catch (FileNotFoundException e) {
+            return false;
+        }
+
+        return true;
+    }
 
     /**
      * Adds task to the current task list.
@@ -57,88 +100,112 @@ public class Duke {
 
         try {
             switch(DukeCommand.valueOf(firstCmd)) {
-                case bye:
-                    System.out.println("Till next time...");
-                    return true;
+            case bye:
+                System.out.println("Till next time...");
+                return true;
 
-                case todo:
-                    validateNotEmptyArgs(cmd);
-                    String description = cmd.substring(5);
+            case todo:
+                validateNotEmptyArgs(cmd);
+                String description = cmd.substring(5);
 
-                    createTask(new TodoTask(description));
-                    break;
+                createTask(new TodoTask(description));
+                break;
 
-                case deadline:
-                    validateNotEmptyArgs(cmd);
-                    String deadlineArgs = cmd.substring(9);
+            case deadline:
+                validateNotEmptyArgs(cmd);
+                String deadlineArgs = cmd.substring(9);
 
-                    // Validation of input
-                    if (deadlineArgs.split(" /by ").length < 2) {
-                        throw new DukeException("Insufficient details given...");
+                // Validation of input
+                if (deadlineArgs.split(" /by ").length < 2) {
+                    throw new DukeException("Insufficient details given...");
+                }
+
+                String deadlineDesc = deadlineArgs.split(" /by ")[0];
+                String deadlineBy = deadlineArgs.split(" /by ")[1];
+                createTask(new DeadlineTask(deadlineDesc, deadlineBy));
+                break;
+
+            case event:
+                validateNotEmptyArgs(cmd);
+                String eventArgs = cmd.substring(6);
+
+                // Validation of input
+                if (eventArgs.split(" /from ").length < 2 || eventArgs.split(" /to ").length < 2) {
+                    throw new DukeException("Insufficient details given...");
+                }
+
+                String eventDesc = eventArgs.split(" /from ")[0];
+                String eventFrom = eventArgs.split(" /from ")[1].split(" /to ")[0];
+                String eventBy = eventArgs.split(" /from ")[1].split(" /to ")[1];
+                createTask(new EventTask(eventDesc, eventFrom, eventBy));
+                break;
+
+            case list:
+                System.out.println("Arii has retrieved your current tasks...");
+                for (int i = 0; i < tasks.size(); i++) {
+                    System.out.printf("%d. %s\n", i + 1, tasks.get(i));
+                }
+                break;
+
+            case mark:
+                validateNotEmptyArgs(cmd);
+                taskIndex = Integer.parseInt(cmd.split(" ")[1]) - 1;
+                validateTaskIndex(taskIndex);
+
+                tasks.get(taskIndex).setIsDone(true);
+
+                System.out.println("This task is now done, what's next?");
+                System.out.println(tasks.get(taskIndex));
+                break;
+
+            case unmark:
+                validateNotEmptyArgs(cmd);
+                taskIndex = Integer.parseInt(cmd.split(" ")[1]) - 1;
+                validateTaskIndex(taskIndex);
+
+                tasks.get(taskIndex).setIsDone(false);
+
+                System.out.println("This task is now not done, how disappointing...");
+                System.out.println(tasks.get(taskIndex));
+                break;
+
+            case delete:
+                validateNotEmptyArgs(cmd);
+                taskIndex = Integer.parseInt(cmd.split(" ")[1]) - 1;
+                validateTaskIndex(taskIndex);
+
+                tasks.remove(taskIndex);
+
+                System.out.println("Task deleted. Are you skipping on work again?");
+                break;
+
+            case save:
+                File saveFile = new File(SAVE_FILE_PATH);
+                if (!saveFile.getParentFile().exists()) {
+                    if (!saveFile.getParentFile().mkdirs()) {
+                       throw new DukeException("Arii can't create the directories. Is your system faulty?");
                     }
+                }
 
-                    String deadlineDesc = deadlineArgs.split(" /by ")[0];
-                    String deadlineBy = deadlineArgs.split(" /by ")[1];
-                    createTask(new DeadlineTask(deadlineDesc, deadlineBy));
-                    break;
-
-                case event:
-                    validateNotEmptyArgs(cmd);
-                    String eventArgs = cmd.substring(6);
-
-                    // Validation of input
-                    if (eventArgs.split(" /from ").length < 2 || eventArgs.split(" /to ").length < 2) {
-                        throw new DukeException("Insufficient details given...");
+                if (!saveFile.exists()) {
+                    if (!saveFile.createNewFile()) {
+                        throw new DukeException("Arii can't create the data file. Is your system faulty?");
                     }
+                }
 
-                    String eventDesc = eventArgs.split(" /from ")[0];
-                    String eventFrom = eventArgs.split(" /from ")[1].split(" /to ")[0];
-                    String eventBy = eventArgs.split(" /from ")[1].split(" /to ")[1];
-                    createTask(new EventTask(eventDesc, eventFrom, eventBy));
-                    break;
+                FileWriter fw = new FileWriter(saveFile);
+                for (Task task : tasks) {
+                    fw.write(task.serialise());
+                    fw.write(System.lineSeparator());
+                }
+                fw.close();
+                break;
 
-                case list:
-                    System.out.println("Arii has retrieved your current tasks...");
-                    for (int i = 0; i < tasks.size(); i++) {
-                        System.out.printf("%d. %s\n", i + 1, tasks.get(i));
-                    }
-                    break;
-
-                case mark:
-                    validateNotEmptyArgs(cmd);
-                    taskIndex = Integer.parseInt(cmd.split(" ")[1]) - 1;
-                    validateTaskIndex(taskIndex);
-
-                    tasks.get(taskIndex).setIsDone(true);
-
-                    System.out.println("This task is now done, what's next?");
-                    System.out.println(tasks.get(taskIndex));
-                    break;
-
-                case unmark:
-                    validateNotEmptyArgs(cmd);
-                    taskIndex = Integer.parseInt(cmd.split(" ")[1]) - 1;
-                    validateTaskIndex(taskIndex);
-
-                    tasks.get(taskIndex).setIsDone(false);
-
-                    System.out.println("This task is now not done, how disappointing...");
-                    System.out.println(tasks.get(taskIndex));
-                    break;
-
-                case delete:
-                    validateNotEmptyArgs(cmd);
-                    taskIndex = Integer.parseInt(cmd.split(" ")[1]) - 1;
-                    validateTaskIndex(taskIndex);
-
-                    tasks.remove(taskIndex);
-
-                    System.out.println("Task deleted. Are you skipping on work again?");
-                    break;
-
-                default:
-                    throw new DukeException("Arii does not recognise this command...");
+            default:
+                throw new DukeException("Arii does not recognise this command...");
             }
+        } catch (IOException e) {
+            throw new DukeException("Arii can't access your files... Fix your system first.");
         } catch (NumberFormatException e) {
             throw new DukeException("That's not a number! Go count your numbers before trying again.");
         } catch (IllegalArgumentException e) {
@@ -150,6 +217,8 @@ public class Duke {
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
         Duke duke = new Duke();
+
+        duke.loadData();
 
         System.out.println("Hello, I am \n" + Duke.LOGO);
         System.out.println("How shall I assist you today?");
