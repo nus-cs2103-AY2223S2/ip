@@ -1,17 +1,19 @@
 package aqua.aquatask;
 
+import java.time.LocalDateTime;
+import java.util.Optional;
 
 public class AquaEvent extends AquaTask {
     private final boolean isComplete;
-    private final String from;
-    private final String to;
+    private final LocalDateTime from;
+    private final LocalDateTime to;
 
 
-    public AquaEvent(String name, String from, String to) {
+    public AquaEvent(String name, LocalDateTime from, LocalDateTime to) {
         this(name, false, from, to);
     }
 
-    public AquaEvent(String name, boolean isComplete, String from, String to) {
+    public AquaEvent(String name, boolean isComplete, LocalDateTime from, LocalDateTime to) {
         super(name);
         this.isComplete = isComplete;
         this.from = from;
@@ -32,7 +34,19 @@ public class AquaEvent extends AquaTask {
 
 
     @Override
+    public Optional<LocalDateTime> getStart() {
+        return Optional.ofNullable(from);
+    }
+
+
+    @Override
+    public Optional<LocalDateTime> getEnd() {
+        return Optional.ofNullable(to);
+    }
+
+
+    @Override
     public String toString() {
-        return String.format("[E]%s (from: %s to: %s)", super.toString(), this.from, this.to);
+        return String.format("[E]%s (from: %s to: %s)", super.toString(), from, to);
     }
 }

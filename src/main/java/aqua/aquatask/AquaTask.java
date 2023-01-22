@@ -1,5 +1,7 @@
 package aqua.aquatask;
 
+import java.time.LocalDateTime;
+import java.util.Optional;
 
 public abstract class AquaTask {
     private final String name;
@@ -21,6 +23,16 @@ public abstract class AquaTask {
 
     public String getName() {
         return name;
+    }
+
+
+    public Optional<LocalDateTime> getStart() {
+        return Optional.empty();
+    }
+
+
+    public Optional<LocalDateTime> getEnd() {
+        return Optional.empty();
     }
 
 
