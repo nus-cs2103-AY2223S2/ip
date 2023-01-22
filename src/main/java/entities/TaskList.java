@@ -42,7 +42,10 @@ public class TaskList {
             System.out.println(emptyMsg);
             return;
         }
-        filteredList.forEach(System.out::println);
+        ListIterator<Task> it = filteredList.listIterator();
+        while (it.hasNext()) {
+              System.out.println(it.nextIndex() + 1 + ". " + it.next());
+        }
     }
 
     /**
@@ -96,24 +99,8 @@ public class TaskList {
 
     /**
      * Lists the tasks in the TaskList.
-     * @return A list of tasks to be logged.
      */
-    public String listTasks() {
-        if (taskList.size() > 0) {
-            StringBuilder sb = new StringBuilder();
-            ListIterator<Task> it = taskList.listIterator();
-            while (it.hasNext()) {
-                sb.append(it.nextIndex() + 1).append(". ").append(it.next()).append("\n");
-            }
-            sb.deleteCharAt(sb.length() - 1);
-            return sb.toString();
-        } else {
-            return "There are no outstanding tasks!";
-        }
-    }
-
-    @Override
-    public String toString() {
-        return listTasks();
+    public void listTasks(Predicate<? super Task> predicate) {
+        this.filter(predicate, "There are no outstanding tasks!");
     }
 }

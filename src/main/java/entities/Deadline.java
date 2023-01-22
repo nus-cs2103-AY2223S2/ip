@@ -12,11 +12,13 @@ public class Deadline extends Task {
     public Deadline(String description, LocalDate by) {
         super(description);
         this.by = by;
+        this.taskType = TaskType.DEADLINE;
     }
 
     public Deadline(String description, String by) {
         super(description);
         this.by = LocalDate.parse(by);
+        this.taskType = TaskType.DEADLINE;
     }
 
     public SerializableTask serialize() {

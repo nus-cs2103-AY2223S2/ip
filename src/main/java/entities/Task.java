@@ -22,6 +22,8 @@ public abstract class Task {
 
     private static final String INVALID_DATE_MESSAGE = "Date is not valid! Please try again.";
 
+    protected TaskType taskType;
+
     protected String description;
     protected boolean isDone;
 
@@ -34,12 +36,21 @@ public abstract class Task {
         this.isDone = false;
     }
 
+    public TaskType getTaskType() {
+        return taskType;
+    }
+
     /**
      * Converts an existing task to a SerializableTask that can marshal and unmarshal.
      * @return SerializableTask
      */
     public abstract SerializableTask serialize();
     public abstract boolean activeOn(LocalDate date);
+
+    public boolean matchString(String string) {
+        Matcher pattern = Pattern.compile(".*" + string + ".*$", Pattern.CASE_INSENSITIVE).matcher(description);
+        return pattern.matches();
+    }
 
     public String getStatusIcon() {
         return (isDone ? "X" : " "); // mark done task with X

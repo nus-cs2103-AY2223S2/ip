@@ -22,7 +22,7 @@ public class DeleteCommand extends Command {
         if (m.find()) {
             store.deleteTask(Integer.parseInt(m.group()));
         } else {
-            throw new DukeException("Invalid format. Please ensure that you specify the task number.");
+            throw new DukeException(INVALID_FORMAT_ERROR + " " + "Please ensure that you specify the task number.");
         }
     }
 }

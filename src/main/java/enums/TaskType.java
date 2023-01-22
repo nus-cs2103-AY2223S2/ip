@@ -2,6 +2,8 @@ package enums;
 
 import exceptions.DukeException;
 
+import java.util.Objects;
+
 /**
  * Enum for Task.
  */
@@ -11,7 +13,8 @@ public enum TaskType {
     EVENT("event", new DukeException("Your format is incorrect.\n" +
             "Please try again with the following format: event [description] /from [yyyy-mm-dd] /to [yyyy-mm-dd].")),
     DEADLINE("deadline", new DukeException("Your format is incorrect.\n" +
-            "Please try again with the following format: deadline [description] /by [yyyy-mm-dd]."));
+            "Please try again with the following format: deadline [description] /by [yyyy-mm-dd].")),
+    ALL("*", new DukeException("Your format is incorrect."));
     private final String type;
     private final DukeException err;
 
@@ -26,5 +29,9 @@ public enum TaskType {
 
     public DukeException getErr() {
         return err;
+    }
+
+    public boolean isAll() {
+        return Objects.equals(this.getType(), "*");
     }
 }
