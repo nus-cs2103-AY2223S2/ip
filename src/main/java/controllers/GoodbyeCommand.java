@@ -16,6 +16,10 @@ public class GoodbyeCommand extends Command {
         super(CommandType.BYE, true);
     }
 
+    /**
+     * {@inheritDoc}
+     * The method returns a terminating goodbye message.
+     */
     @Override
     public void execute(Supplier<? extends TaskList> taskList) {
         System.out.println(message);

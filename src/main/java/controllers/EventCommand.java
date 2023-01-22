@@ -25,6 +25,11 @@ public class EventCommand extends Command {
         super(CommandType.EVENT);
         this.args = arguments;
     }
+
+    /**
+     * {@inheritDoc}
+     * The method verifies the command and add a new task with the specified from and to dates.
+     */
     @Override
     public void execute(Supplier<? extends TaskList> taskList) throws DukeException {
         TaskList store = taskList.get();

@@ -25,6 +25,10 @@ public class DeadlineCommand extends Command {
         this.args = arguments;
     }
 
+    /**
+     * {@inheritDoc}
+     * This method verify the command and add a new task with the deadline specified.
+     */
     @Override
     public void execute(Supplier<? extends TaskList> taskList) throws DukeException {
         TaskList store = taskList.get();

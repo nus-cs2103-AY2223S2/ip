@@ -12,8 +12,9 @@ import java.util.regex.Pattern;
  * Represents a Task Object.
  */
 public abstract class Task {
-    private static final Pattern DATE_FORMAT =
+    private static final Pattern FORMAT_DATE =
             Pattern.compile("^(?<year>\\d{4})-(?<month>0[0-9]|1[0-2])-(?<day>0[0-9]|1[0-9]|2[0-9]|3[0-1])$");
+
     public static final Pattern DEADLINE =
             Pattern.compile("^(deadline) (?<description>.+) /by (?<by>.+)$", Pattern.CASE_INSENSITIVE);
     public static final Pattern EVENT =
@@ -48,7 +49,7 @@ public abstract class Task {
     }
 
     private static boolean validateDate(String date) {
-        return CustomValidator.validate(date, (String val) -> DATE_FORMAT.matcher(val).matches());
+        return CustomValidator.validate(date, (String val) -> FORMAT_DATE.matcher(val).matches());
     }
 
     private static Task createTask(TaskType type, String description, Matcher matcher) throws DukeException {
@@ -105,7 +106,7 @@ public abstract class Task {
     }
 
     /**
-     * Marks the given task as uncomplete.
+     * Marks the given task as incomplete.
      */
     public void unmarkTask() {
         isDone = false;
