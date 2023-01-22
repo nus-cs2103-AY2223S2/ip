@@ -75,6 +75,7 @@ public class KiraBot {
                         printFormatString(output);
                         break;
                     }
+                    database.save();
                 } catch (IllegalArgumentException e) {
                     throw new KiraException("Sorry, I don't know this command :C\n");
                 }

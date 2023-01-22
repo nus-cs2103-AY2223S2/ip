@@ -1,3 +1,6 @@
+import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.util.ArrayList;
 
 public class Store {
@@ -95,5 +98,21 @@ public class Store {
         ret.append(currentTask.toString());
         ret.append("\n");
         return ret.toString();
+    }
+
+    public void save() throws KiraException {
+        try {
+            File saveFile = new File("./store.csv");
+            FileWriter fw = new FileWriter(saveFile);
+            for (Task t : this.database) {
+                fw.write(t.saveFormat());
+                fw.write("\n");
+            }
+            fw.flush();
+            fw.close();
+        } catch (IOException e) {
+            throw new KiraException(e.getMessage());
+        }
+        
     }
 }
