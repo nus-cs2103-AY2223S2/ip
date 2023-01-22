@@ -8,7 +8,7 @@ import duke.exception.DukeException;
 
 public class Parser {
     enum ActionP {
-        bye, list, unmark, mark, todo, deadline, event, delete;
+        bye, list, unmark, mark, todo, deadline, event, delete, find;
 
     }
 
@@ -28,6 +28,8 @@ public class Parser {
         } else if (command.equals(ActionP.delete.name())) {
             int taskNumberDelete = Integer.parseInt(s[1]);
             return new DeleteCommand(taskNumberDelete);
+        } else if (command.equals((ActionP.find.name()))) {
+            return new FindCommand(s);
         } else {
             throw new DukeException("☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
         }

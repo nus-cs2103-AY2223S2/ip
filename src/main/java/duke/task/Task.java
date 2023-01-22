@@ -22,6 +22,13 @@ public class Task {
         this.isDone = false;
     }
 
+    public boolean find(String word) {
+        if(word.equals(this.description)) {
+            return true;
+        }
+        return false;
+    }
+
     @Override
     public String toString() {
         return "[" + this.getStatusIcon() + "] " + this.description;
