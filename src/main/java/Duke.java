@@ -1,3 +1,8 @@
+import java.io.IOException;
+
+import java.nio.file.Files;
+import java.nio.file.Paths;
+
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -15,6 +20,13 @@ public class Duke {
         Scanner scan = new Scanner(System.in);
         String userInput = scan.nextLine();
         ArrayList<Task> lstOfItems = new ArrayList<>();
+        String path = "src/data/duke.txt";
+
+        try {
+            Files.write(Paths.get(path), "Hello".getBytes());
+        } catch (IOException err) {
+            System.out.println(err);
+        }
 
         while (!checker.checkEnd(userInput)) {
             if (checker.checkListRequest(userInput)) {
