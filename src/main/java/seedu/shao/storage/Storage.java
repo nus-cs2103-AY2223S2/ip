@@ -27,47 +27,47 @@ public class Storage {
 
 	private File myFile = new File(dataFilePath);
 
-	public void getFile(TaskList tasklist, Parser parser) {
+	public void getFile(TaskList tasklist, Parser parser, Ui ui) {
 		try {
 			Scanner myReader = new Scanner(myFile);
 			while (myReader.hasNextLine()) {
-				parser.parseInput(myReader.nextLine().trim(), tasklist);
+				parser.parseData(myReader.nextLine().trim(), tasklist, ui);
 			}
 			myReader.close();
 		} catch (FileNotFoundException e) {
-			createFile();
+			createFile(ui);
 		}
 	}
 
-	private void createFile() {
+	private void createFile(Ui ui) {
 		try {
 			myDir.mkdirs();
 			myFile.createNewFile();
 		} catch (IOException ex) {
-			Ui.printError("Something went wrong while creating a new file.");
+			ui.printError("Something went wrong while creating a new file.");
 		}
 	}
 
-	public <T extends Task> void saveNewData(T task) {
+	public <T extends Task> void saveNewData(T task, Ui ui) {
 		try (BufferedWriter bw = new BufferedWriter(new FileWriter(dataFilePath, true))) {
 			bw.write(task.getSavedFormat());
 			bw.newLine();
 		} catch (IOException e) {
-			Ui.printError("Something went wrong while saving the new task.");
+			ui.printError("Something went wrong while saving the new task.");
 		}
 	}
 
-	public void markSavedTask(int idx, boolean isMark) {
+	public void markSavedTask(int idx, boolean isMark, Ui ui) {
 		try (Stream<String> lines = Files.lines(Paths.get(dataFilePath))) {
 			String line = lines.skip(idx).findFirst().get();
 			modifyLineFile(dataFilePath, idx + 1,
-					line.replaceFirst("[01]", isMark ? "1" : "0"));
+					line.replaceFirst("[01]", isMark ? "1" : "0"), ui);
 		} catch (IOException ex) {
-			Ui.printError("Something went wrong while marking the task status.");
+			ui.printError("Something went wrong while marking the task status.");
 		}
 	}
 
-	private void modifyLineFile(String filePath, int lineNum, String newLine) {
+	private void modifyLineFile(String filePath, int lineNum, String newLine, Ui ui) {
 		String content = "";
 		int curLineNum = 1;
 
@@ -86,11 +86,11 @@ public class Storage {
 			}
 			writer.write(content);
 		} catch (IOException e) {
-			Ui.printError("Something went wrong while modifying the file.");
+			ui.printError("Something went wrong while modifying the file.");
 		}
 	}
 
-	public void deleteLineFile(int lineNum) {
+	public void deleteLineFile(int lineNum, Ui ui) {
 		String content = "";
 		int curLineNum = 1;
 
@@ -107,7 +107,7 @@ public class Storage {
 			}
 			writer.write(content);
 		} catch (IOException e) {
-			Ui.printError("Something went wrong while deleting a line from the file.");
+			ui.printError("Something went wrong while deleting a line from the file.");
 		}
 	}
 

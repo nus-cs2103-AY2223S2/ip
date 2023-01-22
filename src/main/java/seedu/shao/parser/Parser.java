@@ -6,6 +6,11 @@ import java.time.LocalTime;
 import java.util.Arrays;
 import java.util.stream.Stream;
 
+import seedu.shao.commands.AddCommand;
+import seedu.shao.commands.Command;
+import seedu.shao.commands.ExitCommand;
+import seedu.shao.commands.ListCommand;
+import seedu.shao.commands.MarkCommand;
 import seedu.shao.task.Deadline;
 import seedu.shao.task.Event;
 import seedu.shao.task.Task;
@@ -19,7 +24,27 @@ public class Parser {
 		TODO, DEADLINE, EVENT
 	}
 
-	public void parseInput(String input, TaskList tasklist) {
+	public Command parseInput(String input) {
+		String[] inputArr = input.split(" ");
+		String opType = inputArr[0].toLowerCase();
+		switch (opType) {
+			case "bye":
+				return new ExitCommand(inputArr);
+			case "list":
+				return new ListCommand(inputArr);
+			case "mark":
+			case "unmark":
+				return new MarkCommand(inputArr, opType.startsWith("mark"));
+			case "todo":
+			case "deadline":
+			case "event":
+				return new AddCommand(inputArr);
+			default:
+				return new Command(inputArr);
+		}
+	}
+
+	public void parseData(String input, TaskList tasklist, Ui ui) {
 		String inputLower = input.toLowerCase();
 		if (inputLower.isBlank())
 			return;
@@ -38,13 +63,13 @@ public class Parser {
 				break;
 
 			case DEADLINE:
-				newTask = new Deadline(inputArr[2], parseDateTimeStr(inputArr[3]));
+				newTask = new Deadline(inputArr[2], parseDateTimeStr(inputArr[3], ui));
 				break;
 
 			case EVENT:
 				newTask = new Event(inputArr[2],
-						new LocalDateTime[] { parseDateTimeStr(inputArr[3]),
-								parseDateTimeStr(inputArr[4]) });
+						new LocalDateTime[] { parseDateTimeStr(inputArr[3], ui),
+								parseDateTimeStr(inputArr[4], ui) });
 				break;
 
 			default:
@@ -59,13 +84,13 @@ public class Parser {
 		int l = inputArr.length;
 		for (int i = 0; i < l; i++) {
 			if (i < l - 1 && inputArr[i].equals("/by")) {
-				return parseDateTimeStr(sliceArrAndConcate(inputArr, i + 1, l));
+				return parseDateTimeStr(sliceArrAndConcate(inputArr, i + 1, l), ui);
 			}
 		}
 		return null;
 	}
 
-	public LocalDateTime parseDateTimeStr(String dateTimeStr) {
+	public LocalDateTime parseDateTimeStr(String dateTimeStr, Ui ui) {
 		if (dateTimeStr.isBlank()) {
 			return null;
 		}
@@ -78,7 +103,7 @@ public class Parser {
 				int min = Integer.parseInt(dateTimeArr[1].substring(2, 4));
 				time = LocalTime.of(hr, min);
 			} catch (NumberFormatException ex) {
-				Ui.printError("Oops! Time format needs to be specified in proper form.");
+				ui.printError("Oops! Time format needs to be specified in proper form.");
 				return null;
 			}
 		}
@@ -93,7 +118,7 @@ public class Parser {
 			dateArr = Stream.of(dateTimeArr[0].split("-")).map(Integer::valueOf).toArray(Integer[]::new);
 			return LocalDateTime.of(LocalDate.of(dateArr[0], dateArr[1], dateArr[2]), time);
 		} catch (ArrayIndexOutOfBoundsException ex) {
-			Ui.printError("Oops! Time format needs to be specified in proper form.");
+			ui.printError("Oops! Time format needs to be specified in proper form.");
 			return null;
 		}
 
@@ -116,10 +141,10 @@ public class Parser {
 			}
 		}
 		if (fromStartIdx > -1) {
-			from = parseDateTimeStr(sliceArrAndConcate(inputArr, fromStartIdx, fromEndIdx));
+			from = parseDateTimeStr(sliceArrAndConcate(inputArr, fromStartIdx, fromEndIdx), ui);
 		}
 		if (toStartIdx > -1) {
-			to = parseDateTimeStr(sliceArrAndConcate(inputArr, toStartIdx, l));
+			to = parseDateTimeStr(sliceArrAndConcate(inputArr, toStartIdx, l), ui);
 		}
 		return new LocalDateTime[] { from, to };
 	}

@@ -1,5 +1,6 @@
 package seedu.shao;
 
+import seedu.shao.commands.Command;
 import seedu.shao.parser.Parser;
 import seedu.shao.storage.Storage;
 import seedu.shao.tasklist.TaskList;
@@ -16,15 +17,30 @@ public class Shao {
         new Shao().run(args);
     }
 
-    public void run(String[] args) {
+    private void initServices() {
         ui = new Ui();
         parser = new Parser();
         storage = new Storage();
         tasklist = new TaskList();
+    }
+
+    public void run(String[] args) {
+        initServices();
+
+        storage.getFile(tasklist, parser, ui);
 
         ui.greetUser();
-        storage.getFile(tasklist, parser);
-        ui.readInput(tasklist, storage, parser);
+        boolean isExit = false;
+        while (!isExit) {
+            ui.printRowDivider();
+            String fullCommand = ui.readCommand();
+            Command c = parser.parseInput(fullCommand);
+            c.execute(ui, parser, storage, tasklist);
+            ui.printRowDivider();
+            isExit = c.isExit();
+        }
+        ui.cleanUp();
+        // ui.readInput(tasklist, storage, parser);
     }
 
 }
