@@ -1,5 +1,8 @@
 package duke.command;
 
+/**
+ * The command to find tasks in the task list.
+ */
 public class FindTasksCommand extends Command {
     private String keyword;
 

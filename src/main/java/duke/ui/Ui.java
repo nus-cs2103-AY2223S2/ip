@@ -36,7 +36,6 @@ public class Ui {
 
     /**
      * Prints the task added message.
-     * 
      * @param task      The task that was added.
      * @param taskCount The number of tasks in the task list after addition.
      */
@@ -48,7 +47,6 @@ public class Ui {
 
     /**
      * Prints the task marked message.
-     * 
      * @param task The task that was marked.
      */
     public void printTaskMarked(Task task) {
@@ -58,7 +56,6 @@ public class Ui {
 
     /**
      * Prints the task unmarked message.
-     * 
      * @param task The task that was unmarked.
      */
     public void printTaskUnmarked(Task task) {
@@ -68,7 +65,6 @@ public class Ui {
 
     /**
      * Prints the task deleted message.
-     * 
      * @param task      The task that was deleted.
      * @param taskCount The number of tasks in the task list after deletion.
      */
@@ -80,7 +76,6 @@ public class Ui {
 
     /**
      * Prints the task list.
-     * 
      * @param taskList The task list to be printed.
      */
     public void printTaskList(TaskList taskList) {
@@ -91,6 +86,10 @@ public class Ui {
         }
     }
 
+    /**
+     * Prints the found tasks.
+     * @param foundTasks The list of found tasks.
+     */
     public void printFoundTasks(ArrayList<Task> foundTasks) {
         System.out.println("\tHere are the matching tasks in your list:");
         for (int i = 0; i < foundTasks.size(); i++) {
@@ -98,7 +97,10 @@ public class Ui {
             System.out.println("\t\t" + (i + 1) + "." + t);
         }
     }
-
+    /**
+     * Prints the error message for a DukeException.
+     * @param e The DukeException to be printed.
+     */
     public void printError(DukeException e) {
         // System.out.println("\t____________________________________________________________");
         System.out.println("\t" + e.getMessage());
@@ -116,7 +118,6 @@ public class Ui {
 
     /**
      * Reads the command from the user.
-     * 
      * @return The command entered by the user.
      */
     public String readCommand() {

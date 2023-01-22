@@ -2,10 +2,10 @@ package duke.command;
 
 import duke.task.Deadline;
 
+/**
+ * The command to add a deadline to the task list.
+ */
 public class AddDeadlineCommand extends Command {
-    /**
-     * The command to add a deadline to the task list.
-     */
     private final Deadline deadline;
 
     public AddDeadlineCommand(Deadline deadline) {

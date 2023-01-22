@@ -37,6 +37,11 @@ public class TaskList {
         return taskList.remove(index);
     }
 
+    /**
+     * Finds tasks that contain the keyword.
+     * @param keyword The keyword to search for.
+     * @return The list of tasks that contain the keyword.
+     */
     public ArrayList<Task> findTasks(String keyword) {
         ArrayList<Task> foundTasks = new ArrayList<>();
         for (Task task : taskList) {
