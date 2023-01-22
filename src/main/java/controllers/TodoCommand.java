@@ -17,6 +17,10 @@ public class TodoCommand extends Command {
         this.args = arguments;
     }
 
+    /**
+     * {@inheritDoc}
+     * The method verifies the command and adds a new todo task into the store.
+     */
     @Override
     public void execute(Supplier<? extends TaskList> taskList) throws DukeException {
         TaskList store = taskList.get();

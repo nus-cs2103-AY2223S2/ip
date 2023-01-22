@@ -11,6 +11,10 @@ public class ListCommand extends Command {
         super(CommandType.LIST);
     }
 
+    /**
+     * {@inheritDoc}
+     * The method verifies the command and list all tasks in the store.
+     */
     @Override
     public void execute(Supplier<? extends TaskList> taskList) {
         TaskList store = taskList.get();

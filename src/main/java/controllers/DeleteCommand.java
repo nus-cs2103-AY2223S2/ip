@@ -15,10 +15,14 @@ public class DeleteCommand extends Command {
         this.args = args;
     }
 
+    /**
+     * {@inheritDoc}
+     * The method verifies the command and delete the task specified.
+     */
     @Override
     public void execute(Supplier<? extends TaskList> taskList) throws DukeException {
         TaskList store = taskList.get();
-        Matcher m = NUMBERS.matcher(args);
+        Matcher m = VALID_NUMBER.matcher(args);
         if (m.find()) {
             store.deleteTask(Integer.parseInt(m.group()));
         } else {
