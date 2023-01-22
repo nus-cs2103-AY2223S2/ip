@@ -6,11 +6,23 @@ import java.time.format.DateTimeParseException;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+/**
+ * This class contains the logic needed to parse user entered commands and
+ * dispatch them to appropriate handlers.
+ */
 class Parser {
     private static final Pattern deadlinePattern = Pattern.compile("^deadline\\s+(.+)\\s+/by\\s+(.+)$");
     private static final Pattern eventPattern = Pattern.compile("^event\\s+(.+)\\s+/from\\s+(.+)\\s+/to\\s+(.+)$");
     private static final DateTimeFormatter dateTimeFmt = DateTimeFormatter.ofPattern("dd/MM/yyyy HHmm");
 
+    /**
+     * Parses a command, and selects a suitable handler. This is a pure function.
+     * The handler returned is not safe to be ran multiple times.
+     * 
+     * @param cmd The raw command to parse.
+     * @return An appropriate handler for the command.
+     * @throws ChungusException When the expected command format is wrong.
+     */
     public static Handler parse(String cmd) {
         String[] args = cmd.split("\\s+");
         switch (args[0]) {

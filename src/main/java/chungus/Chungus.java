@@ -5,7 +5,10 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
 
-public class Chungus {
+/**
+ * A task management app.
+ */
+class Chungus {
     private Ui ui;
     private TaskList tasks;
     private Storage db;
@@ -17,6 +20,13 @@ public class Chungus {
         new Chungus(System.in, System.out, defaultDbPath).spin();
     }
 
+    /**
+     * A constructor for the Chungus class.
+     * 
+     * @param in     Some input stream.
+     * @param out    Some output stream.
+     * @param dbPath Path to a database file to read and write tasks from.
+     */
     public Chungus(InputStream in, OutputStream out, String dbPath) {
         ui = new Ui(in, out);
         tasks = new TaskList();
@@ -44,6 +54,9 @@ public class Chungus {
         ui.info("What can I do for you?\n");
     }
 
+    /**
+     * Runs the Chungus app.
+     */
     public void spin() {
         while (isRunning) {
             ui.print("chungus> ");
@@ -55,6 +68,9 @@ public class Chungus {
         }
     }
 
+    /**
+     * Wraps command parsing and handler execution with better error handling.
+     */
     private void parseAndExec(String cmd) {
         try {
             Handler handler = Parser.parse(cmd);

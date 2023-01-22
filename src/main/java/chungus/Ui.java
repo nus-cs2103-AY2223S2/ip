@@ -7,24 +7,49 @@ import java.io.PrintWriter;
 import java.io.Writer;
 import java.util.Scanner;
 
+/**
+ * A simple console based UI.
+ */
 class Ui {
     private Scanner in;
     private Writer out;
 
+    /**
+     * Constructor for a Ui. By default, stdin and stdout are used for I/O.
+     */
     public Ui() {
         in = new Scanner(System.in);
         out = new PrintWriter(System.out);
     }
 
+    /**
+     * Another constructor for Ui.
+     * 
+     * @param _in  Some input.
+     * @param _out Some output.
+     */
     public Ui(InputStream _in, OutputStream _out) {
         in = new Scanner(_in);
         out = new PrintWriter(_out);
     }
 
+    /**
+     * Gets the next line from input. The line is guaranteed to be trimmed of
+     * whitespaces.
+     * 
+     * @return The next line.
+     */
     public String nextLine() {
         return in.nextLine().trim();
     }
 
+    /**
+     * Prints something to the output with no special formatting.
+     * 
+     * @param msg  A format string.
+     * @param args Arguments for the format string.
+     * @throws RuntimeException If some I/O exception occurs.
+     */
     public void print(String msg, Object... args) {
         try {
             out.append(String.format(msg, args)).flush();
@@ -33,6 +58,13 @@ class Ui {
         }
     }
 
+    /**
+     * Displays something and formats it as "information".
+     * 
+     * @param msg  A format string.
+     * @param args Arguments for the format string.
+     * @throws RuntimeException If some I/O exception occurs.
+     */
     public void info(String msg, Object... args) {
         try {
             out.append("\u001b[36m")
@@ -45,6 +77,13 @@ class Ui {
         }
     }
 
+    /**
+     * Displays something and formats it as an error.
+     * 
+     * @param msg  A format string.
+     * @param args Arguments for the format string.
+     * @throws RuntimeException If some I/O exception occurs.
+     */
     public void error(String msg, Object... args) {
         try {
             out.append("\u001b[31m")
