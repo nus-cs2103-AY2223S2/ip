@@ -8,8 +8,8 @@ public class Deadline extends Task {
 
     @Override
     public String saveFormat() {
-        StringBuilder temp = new StringBuilder("D," + super.saveFormat());
-        temp.append("," + deadline);
+        StringBuilder temp = new StringBuilder("D\",\"" + super.saveFormat());
+        temp.append("\",\"" + deadline);
         return temp.toString();
     }
     

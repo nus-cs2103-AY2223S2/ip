@@ -10,9 +10,9 @@ public class Event extends Task {
 
     @Override
     public String saveFormat() {
-        StringBuilder temp = new StringBuilder("E," + super.saveFormat());
-        temp.append("," + startDate);
-        temp.append("," + endDate);
+        StringBuilder temp = new StringBuilder("E\",\"" + super.saveFormat());
+        temp.append("\",\"" + startDate);
+        temp.append("\",\"" + endDate);
         return temp.toString();
     }
 

@@ -25,6 +25,13 @@ public class KiraBot {
         Scanner sc = new Scanner(System.in);
         boolean isActive = true;
         Store database = new Store();
+        try {
+            database.load();
+        } catch (KiraException e) {
+            printFormatString("I can't find the save file.\n"
+                    + "Ignore if this is your first time!\n");
+        }
+        
 
         while (isActive) {
             try {

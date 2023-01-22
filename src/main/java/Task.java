@@ -23,7 +23,7 @@ public abstract class Task {
 
     public String saveFormat() {
         String[] temp = new String[] {this.data, this.isDone ? "y" : "n"};
-        return String.join(",", temp);
+        return String.join("\",\"", temp);
     }
 
     @Override
