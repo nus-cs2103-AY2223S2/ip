@@ -38,7 +38,7 @@ public class Disk {
                 } else if(currentTask[0].equals("D")) {
                     taskTable.add(new Deadline(currentTask[2], currentTask[3], done));
                 } else if(currentTask[0].equals("E")) {
-                    taskTable.add(new Event(currentTask[2], currentTask[3], done));
+                    taskTable.add(new Event(currentTask[2], currentTask[3], currentTask[4], done));
                 } else {}
             }
         } catch (FileNotFoundException e) {

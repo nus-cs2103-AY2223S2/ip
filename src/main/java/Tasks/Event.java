@@ -7,7 +7,6 @@ package Tasks;
 public class Event extends Task {
     protected String startTime;
     protected String endTime;
-    protected String time;
 
     /**
      * The constructor of Event
@@ -15,9 +14,10 @@ public class Event extends Task {
      * @param time the time of event
      * @param done whether the event is done
      */
-    public Event(String desc, String time, boolean done) {
+    public Event(String desc, String starTime, String endTime, boolean done) {
         super(done, desc);
-        this.time = time;
+        this.startTime = starTime;
+        this.endTime = endTime;
     }
 
     /**
@@ -59,7 +59,7 @@ public class Event extends Task {
      */
     @Override
     public String toString() {
-        return "[E]" + super.toString() + " (at: /from" + this.time + ")";
+        return "[E]" + super.toString() + " (/from" + this.startTime + "/to" + this.endTime + ")";
     }
 
     @Override
@@ -70,6 +70,6 @@ public class Event extends Task {
         } else {
             d = "0";
         }
-        return "E | " + d + " | " + this.desc +" | " + this.time;
+        return "E | " + d + " | " + this.desc +" | " + this.startTime + " | " + this.endTime;
     }
 }
