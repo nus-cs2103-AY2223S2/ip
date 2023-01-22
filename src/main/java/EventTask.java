@@ -1,6 +1,9 @@
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+
 public class EventTask extends Task{
-    protected String from;
-    protected String to;
+    protected LocalDate from;
+    protected LocalDate to;
 
     /**
      * Constructor to create a new instance of Task.
@@ -10,7 +13,7 @@ public class EventTask extends Task{
      * @param from Start date of this task.
      * @param to End date of this task.
      */
-    private EventTask(String description, boolean isDone, String from, String to) {
+    private EventTask(String description, boolean isDone, LocalDate from, LocalDate to) {
         super(description, isDone);
         this.from = from;
         this.to = to;
@@ -24,7 +27,7 @@ public class EventTask extends Task{
      * @param from Start date of this task.
      * @param to End date of this task.
      */
-    public EventTask(String description, String from, String to) {
+    public EventTask(String description, LocalDate from, LocalDate to) {
         this(description, false, from, to);
     }
 
@@ -52,14 +55,16 @@ public class EventTask extends Task{
 
         boolean taskDone = args[1].equals("Y");
         String taskDesc = args[2];
-        String taskFrom = args[3];
-        String taskTo = args[4];
+        LocalDate taskFrom = LocalDate.parse(args[3]);
+        LocalDate taskTo = LocalDate.parse(args[4]);
 
         return new EventTask(taskDesc, taskDone, taskFrom, taskTo);
     }
 
     @Override
     public String toString() {
-        return "[E]" + super.toString() + " (from: " + from + " to: " + to + ")";
+        String fromString = from.format(DateTimeFormatter.ofPattern("yyyy/MM/dd"));
+        String toString = to.format(DateTimeFormatter.ofPattern("yyyy/MM/dd"));
+        return "[E]" + super.toString() + " (from: " + fromString + " to: " + toString + ")";
     }
 }

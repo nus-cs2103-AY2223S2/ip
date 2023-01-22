@@ -1,5 +1,8 @@
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+
 public class DeadlineTask extends Task {
-    protected String by;
+    protected LocalDate by;
 
     /**
      * Constructor to create a new instance of Task.
@@ -8,7 +11,7 @@ public class DeadlineTask extends Task {
      * @param isDone True if task is completed.
      * @param by Deadline of this task.
      */
-    private DeadlineTask(String description, boolean isDone, String by) {
+    private DeadlineTask(String description, boolean isDone, LocalDate by) {
         super(description, isDone);
         this.by = by;
     }
@@ -20,7 +23,7 @@ public class DeadlineTask extends Task {
      * @param description Title of the task
      * @param by Deadline of this task.
      */
-    public DeadlineTask(String description, String by) {
+    public DeadlineTask(String description, LocalDate by) {
         this(description, false, by);
     }
 
@@ -48,13 +51,14 @@ public class DeadlineTask extends Task {
 
         boolean taskDone = args[1].equals("Y");
         String taskDesc = args[2];
-        String taskBy = args[3];
+        LocalDate taskBy = LocalDate.parse(args[3]);
 
         return new DeadlineTask(taskDesc, taskDone, taskBy);
     }
 
     @Override
     public String toString() {
-        return "[D]" + super.toString() + " (by: " + by + ")";
+        String byString = by.format(DateTimeFormatter.ofPattern("yyyy/MM/dd"));
+        return "[D]" + super.toString() + " (by: " + byString + ")";
     }
 }

@@ -7,5 +7,6 @@ public enum DukeCommand {
     mark,
     unmark,
     delete,
-    save
+    save,
+    check,
 }

@@ -4,6 +4,8 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.time.LocalDate;
+import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -152,7 +154,7 @@ public class Duke {
                 }
 
                 String deadlineDesc = deadlineArgs.split(" /by ")[0];
-                String deadlineBy = deadlineArgs.split(" /by ")[1];
+                LocalDate deadlineBy = LocalDate.parse(deadlineArgs.split(" /by ")[1]);
                 createTask(new DeadlineTask(deadlineDesc, deadlineBy));
                 break;
 
@@ -166,9 +168,32 @@ public class Duke {
                 }
 
                 String eventDesc = eventArgs.split(" /from ")[0];
-                String eventFrom = eventArgs.split(" /from ")[1].split(" /to ")[0];
-                String eventBy = eventArgs.split(" /from ")[1].split(" /to ")[1];
+                LocalDate eventFrom = LocalDate.parse(eventArgs.split(" /from ")[1].split(" /to ")[0]);
+                LocalDate eventBy = LocalDate.parse(eventArgs.split(" /from ")[1].split(" /to ")[1]);
                 createTask(new EventTask(eventDesc, eventFrom, eventBy));
+                break;
+
+            case check:
+                validateNotEmptyArgs(cmd);
+                String dueArgs = cmd.substring(6);
+                LocalDate targetDate = LocalDate.parse(dueArgs);
+
+                System.out.println("Relevant tasks on specified date:  ");
+                for (Task task : tasks) {
+                    if (task instanceof EventTask) {
+                        EventTask eventTask = (EventTask) task;
+                        if (eventTask.from.isEqual(targetDate) || eventTask.from.isBefore(targetDate) ||
+                                eventTask.to.isEqual(targetDate) || eventTask.to.isAfter(targetDate)) {
+                            System.out.println(eventTask);
+                        }
+                    }
+                    else if (task instanceof DeadlineTask) {
+                        DeadlineTask deadlineTask = (DeadlineTask) task;
+                        if (deadlineTask.by.isEqual(targetDate) || deadlineTask.by.isAfter(targetDate)) {
+                            System.out.println(deadlineTask);
+                        }
+                    }
+                }
                 break;
 
             case list:
@@ -220,6 +245,8 @@ public class Duke {
             }
         } catch (IOException e) {
             throw new DukeException("Arii can't access your files... Fix your system first.");
+        } catch (DateTimeParseException e) {
+            throw new DukeException("That's not a date! Use the format: yyyy-mm-dd");
         } catch (NumberFormatException e) {
             throw new DukeException("That's not a number! Go count your numbers before trying again.");
         } catch (IllegalArgumentException e) {
