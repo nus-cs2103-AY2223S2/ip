@@ -25,55 +25,39 @@ OK, I've marked this task as not done yet:
 -----------------------------------------------------------
 
 -----------------------------------------------------------
-Got it. I've added this task:
-[D][ ] return book (by: Sunday)
-Now you have 2 tasks in the list
+Please enter a valid date in the format YYYY-MM-DD
 -----------------------------------------------------------
 
 -----------------------------------------------------------
 Here are the tasks in your list:
 1.[T][ ] borrow book
-2.[D][ ] return book (by: Sunday)
 -----------------------------------------------------------
 
 -----------------------------------------------------------
-Nice! I've marked this task as done:
-[D][X] return book (by: Sunday)
+Please specify a valid index to mark
 -----------------------------------------------------------
 
 -----------------------------------------------------------
-OK, I've marked this task as not done yet:
-[D][ ] return book (by: Sunday)
+Please specify a valid index to unmark
 -----------------------------------------------------------
 
+Please enter valid dates in the format YYYY-MM-DD
 -----------------------------------------------------------
-Got it. I've added this task:
-[E][ ] project meeting (from: Mon 2pm to: 4pm)
-Now you have 3 tasks in the list
------------------------------------------------------------
-
------------------------------------------------------------
-Nice! I've marked this task as done:
-[E][X] project meeting (from: Mon 2pm to: 4pm)
+Please specify a valid index to mark
 -----------------------------------------------------------
 
 -----------------------------------------------------------
 Here are the tasks in your list:
 1.[T][ ] borrow book
-2.[D][ ] return book (by: Sunday)
-3.[E][X] project meeting (from: Mon 2pm to: 4pm)
 -----------------------------------------------------------
 
 -----------------------------------------------------------
-OK, I've marked this task as not done yet:
-[E][ ] project meeting (from: Mon 2pm to: 4pm)
+Please specify a valid index to unmark
 -----------------------------------------------------------
 
 -----------------------------------------------------------
 Here are the tasks in your list:
 1.[T][ ] borrow book
-2.[D][ ] return book (by: Sunday)
-3.[E][ ] project meeting (from: Mon 2pm to: 4pm)
 -----------------------------------------------------------
 
 -----------------------------------------------------------
@@ -98,6 +82,10 @@ The description of a deadline cannot be empty
 
 -----------------------------------------------------------
 please specify a deadline after the /by tag
+-----------------------------------------------------------
+
+-----------------------------------------------------------
+The description of a deadline cannot be empty
 -----------------------------------------------------------
 
 -----------------------------------------------------------
@@ -129,13 +117,19 @@ please specify a start datetime after /from flag
 -----------------------------------------------------------
 
 -----------------------------------------------------------
+Got it. I've added this task:
+[E][ ] meeting (from: NOVEMBER 11 2022 to: NOVEMBER 12 2022)
+Now you have 2 tasks in the list
+-----------------------------------------------------------
+
+-----------------------------------------------------------
 please specify delete command as delete [list index]
 -----------------------------------------------------------
 
 -----------------------------------------------------------
 Noted. I've removed this task:
 [T][ ] borrow book
-Now you have 2 tasks in the list
+Now you have 1 tasks in the list
 -----------------------------------------------------------
 
 -----------------------------------------------------------

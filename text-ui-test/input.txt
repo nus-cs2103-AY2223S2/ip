@@ -17,6 +17,7 @@ deadline return book
 deadline return book /by
 deadline /by sunday
 deadline /by
+deadline /by 2020-11-12
 event
 event /from /to
 event meeting /from sunday
@@ -24,6 +25,7 @@ event meeting /from /to
 event /from
 event /to
 event meeting /from /to sunday
+event meeting /from 2022-11-11 /to 2022-11-12
 delete
 delete 1
 delete k

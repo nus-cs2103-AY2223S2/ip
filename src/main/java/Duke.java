@@ -1,3 +1,4 @@
+import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -83,7 +84,12 @@ public class Duke {
                 sb.append(tokens[i]).append(" ");
             }
             String dueDate = sb.deleteCharAt(sb.length()-1).toString();
-            addToList(new Deadline(taskName, dueDate));
+            try {
+                Task task = new Deadline(taskName, dueDate);
+                addToList(task);
+            } catch (DateTimeParseException e) {
+                displayMessage("Please enter a valid date in the format YYYY-MM-DD\n");
+            }
         }
     }
 
@@ -118,7 +124,13 @@ public class Duke {
                 sb.append(tokens[i]).append(" ");
             }
             String taskTo = sb.deleteCharAt(sb.length()-1).toString();
-            addToList(new Event(taskName, taskFrom, taskTo));
+            try {
+                Task task = new Event(taskName, taskFrom, taskTo);
+                addToList(task);
+            } catch (DateTimeParseException e) {
+                System.out.println("Please enter valid dates in the format YYYY-MM-DD");
+            }
+
         }
     }
 
