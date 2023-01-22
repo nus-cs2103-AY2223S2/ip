@@ -1,6 +1,6 @@
 package smartduke;
 
-import smartduke.command.Command;
+import command.Command;
 
 import java.nio.file.Path;
 import java.nio.file.Paths;

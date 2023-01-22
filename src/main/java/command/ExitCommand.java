@@ -1,4 +1,4 @@
-package smartduke.command;
+package command;
 
 import smartduke.DukeException;
 import smartduke.TaskList;

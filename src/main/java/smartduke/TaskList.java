@@ -1,6 +1,6 @@
 package smartduke;
 
-import smartduke.task.Task;
+import task.Task;
 
 import java.util.ArrayList;
 

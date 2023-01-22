@@ -2,3 +2,5 @@ D | 1 | read book | 2023-1-1 1200
 E | 0 | play ball | 2023-1-5 1800 | 2023-1-5 2300
 T | 1 | read newspaper
 D | 0 | do assignment 1 | 2022-1-1 1515
+T | 1 | do assignment 2
+D | 0 | play game | 2022-1-1 1600

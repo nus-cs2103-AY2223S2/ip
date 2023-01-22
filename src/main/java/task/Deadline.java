@@ -1,4 +1,4 @@
-package smartduke.task;
+package task;
 
 import smartduke.DukeException;
 import smartduke.Parser;
@@ -17,12 +17,9 @@ public class Deadline extends Task {
      * @param by The deadline of the task.
      * @throws DukeException If there is no description or deadline indicated.
      */
-    public Deadline(String description, String by) throws DukeException {
+    public Deadline(String description, LocalDateTime by) {
         super(description);
-        if (by.length() == 0) {
-            throw new DukeException("OOPS!!! You need to indicate a deadline for this task...");
-        }
-        this.by = Parser.parseDateTime(by);
+        this.by = by;
     }
 
     @Override

@@ -1,22 +1,22 @@
-package smartduke.command;
+package command;
 
 import smartduke.DukeException;
 import smartduke.TaskList;
 import smartduke.Ui;
-import smartduke.task.Task;
+import task.Task;
 
-public class MarkCommand extends Command {
+public class UnmarkCommand extends Command {
     private int taskNo;
 
-    public MarkCommand(int taskNo) {
+    public UnmarkCommand(int taskNo) {
         this.taskNo = taskNo;
     }
 
     @Override
     public void execute(TaskList tasks, Ui ui) throws DukeException {
-        Task markedTask = tasks.mark(this.taskNo);
-        ui.showSuccess("ok i've marked this task as done:");
-        ui.showSuccess(markedTask.toString());
+        Task unmarkedTask = tasks.unmark(this.taskNo);
+        ui.showSuccess("ok i've marked this task as not done yet");
+        ui.showSuccess(unmarkedTask.toString());
     }
 
     @Override

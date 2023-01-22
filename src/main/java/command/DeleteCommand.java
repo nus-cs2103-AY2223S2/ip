@@ -1,9 +1,9 @@
-package smartduke.command;
+package command;
 
 import smartduke.DukeException;
 import smartduke.TaskList;
 import smartduke.Ui;
-import smartduke.task.Task;
+import task.Task;
 
 public class DeleteCommand extends Command {
     private int taskNo;

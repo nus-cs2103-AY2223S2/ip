@@ -1,8 +1,8 @@
-package smartduke.command;
+package command;
 
 import smartduke.TaskList;
 import smartduke.Ui;
-import smartduke.task.Task;
+import task.Task;
 
 public class AddCommand extends Command {
     private Task task;

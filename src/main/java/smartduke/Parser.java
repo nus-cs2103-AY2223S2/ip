@@ -1,10 +1,10 @@
 package smartduke;
 
-import smartduke.command.*;
-import smartduke.task.Deadline;
-import smartduke.task.Event;
-import smartduke.task.Task;
-import smartduke.task.ToDo;
+import command.*;
+import task.Deadline;
+import task.Event;
+import task.Task;
+import task.ToDo;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
@@ -18,7 +18,7 @@ public class Parser {
     /**
      * Enumerates the different types of string patterns of user commands available on SmartDuke.
      */
-    enum CommandPattern {
+    private enum CommandPattern {
         ADD_TODO("todo.*"),
         ADD_DEADLINE("deadline.*/by.*"),
         ADD_EVENT("event.*/from.*/to.*"),
@@ -91,6 +91,9 @@ public class Parser {
         if (CommandPattern.ADD_TODO.match(userCommand)) {
             /* add todo task */
             String taskDesc = userCommand.substring(4).trim();
+            if (taskDesc.length() == 0) {
+                throw new DukeException("OOPS!!! The description of a todo cannot be empty.");
+            }
             Task todoTask = new ToDo(taskDesc);
             return new AddCommand(todoTask);
         } else if (CommandPattern.ADD_DEADLINE.match(userCommand)) {
@@ -98,15 +101,27 @@ public class Parser {
             String[] parsedCommand = userCommand.substring(8).split("/by", -1);
             String taskDesc = parsedCommand[0].trim();
             String by = parsedCommand[1].trim();
-            Task deadlineTask = new Deadline(taskDesc, by);
+            if (taskDesc.length() == 0) {
+                throw new DukeException("OOPS!!! The description of a todo cannot be empty.");
+            }
+            if (by.length() == 0) {
+                throw new DukeException("OOPS!!! You need to indicate a deadline for this task...");
+            }
+            Task deadlineTask = new Deadline(taskDesc, Parser.parseDateTime(by));
             return new AddCommand(deadlineTask);
         } else if (CommandPattern.ADD_EVENT.match(userCommand)) {
             /* add event task */
             String[] parsedCommand = userCommand.substring(5).split("/from|/to", -1);
             String taskDesc = parsedCommand[0].trim();
+            if (taskDesc.length() == 0) {
+                throw new DukeException("OOPS!!! The description of a todo cannot be empty.");
+            }
             String from = parsedCommand[1].trim();
             String to = parsedCommand[2].trim();
-            Task eventTask = new Event(taskDesc, from, to);
+            if (from.length() == 0 || to.length() == 0) {
+                throw new DukeException("OOPS!!! You need to indicate a start and end date/time for this task...");
+            }
+            Task eventTask = new Event(taskDesc, Parser.parseDateTime(from), Parser.parseDateTime(to));
             return new AddCommand(eventTask);
         } else if (CommandPattern.DELETE_TASK.match(userCommand)) {
             /* delete task */

@@ -1,9 +1,9 @@
 package smartduke;
 
-import smartduke.task.Deadline;
-import smartduke.task.Event;
-import smartduke.task.Task;
-import smartduke.task.ToDo;
+import task.Deadline;
+import task.Event;
+import task.Task;
+import task.ToDo;
 
 import java.io.File;
 import java.io.FileWriter;
@@ -53,12 +53,12 @@ public class Storage {
                         break;
                     case "D":
                         String by = parsedTaskData[3];
-                        task = new Deadline(taskDescription, by);
+                        task = new Deadline(taskDescription, Parser.parseDateTime(by));
                         break;
                     case "E":
                         String from = parsedTaskData[3];
                         String to = parsedTaskData[4];
-                        task = new Event(taskDescription, from, to);
+                        task = new Event(taskDescription, Parser.parseDateTime(from), Parser.parseDateTime(to));
                         break;
                         default:
                             throw new DukeException("Task is not recorded in a valid format...");

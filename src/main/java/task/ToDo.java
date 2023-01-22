@@ -1,4 +1,4 @@
-package smartduke.task;
+package task;
 
 import smartduke.DukeException;
 
@@ -11,7 +11,7 @@ public class ToDo extends Task {
      * @param description The task description.
      * @throws DukeException If there is no description indicated.
      */
-    public ToDo(String description) throws DukeException {
+    public ToDo(String description) {
         super(description);
     }
 

@@ -1,6 +1,6 @@
-todo todo smartduke.task
-deadline deadline smartduke.task /by 25/04/2022
-event event smartduke.task /from 12 Mar 22 /to 5 Dec 22
+todo todo task 1
+deadline task 2 /by 2022-01-01 1600
+event task 2 /from 2022-01-01 1600 /to 2023-01-12 0000
 list
 mark 2
 mark 1

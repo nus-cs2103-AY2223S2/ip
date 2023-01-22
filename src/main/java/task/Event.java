@@ -1,4 +1,4 @@
-package smartduke.task;
+package task;
 
 import smartduke.DukeException;
 import smartduke.Parser;
@@ -19,13 +19,10 @@ public class Event extends Task {
      * @param to The end date/time of the task.
      * @throws DukeException If there is no description or start or end date/time indicated.
      */
-    public Event(String description, String from, String to) throws DukeException {
+    public Event(String description, LocalDateTime from, LocalDateTime to) {
         super(description);
-        if (from.length() == 0 || to.length() == 0) {
-            throw new DukeException("OOPS!!! You need to indicate a start and end date/time for this task...");
-        }
-        this.from = Parser.parseDateTime(from);
-        this.to = Parser.parseDateTime(to);
+        this.from = from;
+        this.to = to;
     }
 
     @Override
