@@ -3,6 +3,8 @@
  * a 'from' and 'to' timeframe, and can be marked as done.
  */
 
+package duke;
+
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;

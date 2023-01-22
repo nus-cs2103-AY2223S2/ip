@@ -1,6 +1,9 @@
 /**
  * Represents a Todo task. A Todo task has a description and can be marked as done.
  */
+
+package duke;
+
 public class Todo extends Task {
     public Todo(String description) {
         super(description);

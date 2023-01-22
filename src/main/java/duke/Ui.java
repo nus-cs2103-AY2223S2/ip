@@ -2,8 +2,9 @@
  * Deals with interactions with the user.
  */
 
-public class Ui {
+package duke;
 
+public class Ui {
     /**
      * Prints the welcome message.
      */

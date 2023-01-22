@@ -1,6 +1,7 @@
 /**
  * Represents Duke itself, the Chat bot.
  */
+package duke;
 
 import java.time.LocalDate;
 import java.time.LocalTime;

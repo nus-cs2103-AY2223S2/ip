@@ -1,6 +1,9 @@
 /**
  * Represents a task. Tasks can be in the form of a Todo, a Deadline, or an Event.
  */
+
+package duke;
+
 public class Task {
     protected String description;
     protected boolean isDone;

@@ -1,6 +1,9 @@
 /**
  * Represents exceptions specific to Duke.
  */
+
+package duke;
+
 public class DukeException extends Exception {
     public DukeException(String message) {
         super(message);

@@ -2,11 +2,13 @@
  * Represents a Deadline task. A Deadline task has a description,
  * a 'by' timeframe, and can be marked as done.
  */
+package duke;
 
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 import java.util.Optional;
+
 public class Deadline extends Task {
     protected String by;
     protected LocalDate byDate;
