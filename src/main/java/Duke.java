@@ -24,17 +24,25 @@ public class Duke {
                 System.out.println("OK,, I've marked this task as not done yet:");
                 System.out.println("  " + task.toString());
             } else {
-                command += sc.nextLine();
-
-                Task newTask = new ToDo(command);
+                String fullCommand = sc.nextLine();
+                Task newTask = new ToDo(fullCommand);
                 if (isDeadline(command)) {
-                    newTask = new Deadline(command);
-                } else {
-                    newTask = new Event(command);
+                    String[] splitedString = fullCommand.split(" /by ");
+                    String action = splitedString[0];
+                    String date = splitedString[1];
+                    newTask = new Deadline(action, date);
+                } else if (isEvent(command)) {
+                    String[] splitedString = fullCommand.split(" /from ");
+                    String action = splitedString[0];
+                    String duration = splitedString[1];
+                    String[] fromTo = duration.split(" /to ");
+                    String from = fromTo[0];
+                    String to = fromTo[1];
+                    newTask = new Event(action, from, to);
                 }
-                Task newTask = new Task(command);
                 list.add(newTask);
-                System.out.println("added: " + newTask.toString());
+                System.out.println("Got it. I've added this task:");
+                System.out.println("  " + newTask.toString());
                 System.out.println(String.format("Now you have %d tasks in the list.", list.size()));
             }
             command = sc.next();
@@ -43,6 +51,7 @@ public class Duke {
     }
 
     public static void getList() {
+        System.out.println("Here are the tassks in your list:");
         for (int i = 0; i < list.size(); i++) {
             Task task = list.get(i);
             System.out.println(i+1 + "." + task.toString());
