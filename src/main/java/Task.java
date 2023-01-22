@@ -18,4 +18,8 @@ public class Task {
     public void unMark() {
         this.isDone = false;
     }
+
+    public String toString() {
+        return "[" + getStatusIcon() + "] " + description;
+    }
 }
