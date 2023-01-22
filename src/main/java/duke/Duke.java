@@ -1,4 +1,9 @@
-import com.sun.jdi.connect.IllegalConnectorArgumentsException;
+package duke;
+
+import duke.task.DeadlineTask;
+import duke.task.EventTask;
+import duke.task.Task;
+import duke.task.TodoTask;
 
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -91,7 +96,7 @@ public class Duke {
 
     /**
      * Adds task to the current task list.
-     * @param task Task to be created.
+     * @param task duke.task.Task to be created.
      */
     private void createTask(Task task) {
         tasks.add(task);
@@ -182,14 +187,14 @@ public class Duke {
                 for (Task task : tasks) {
                     if (task instanceof EventTask) {
                         EventTask eventTask = (EventTask) task;
-                        if (eventTask.from.isEqual(targetDate) || eventTask.from.isBefore(targetDate) ||
-                                eventTask.to.isEqual(targetDate) || eventTask.to.isAfter(targetDate)) {
+                        if (eventTask.getFrom().isEqual(targetDate) || eventTask.getFrom().isBefore(targetDate) ||
+                                eventTask.getTo().isEqual(targetDate) || eventTask.getTo().isAfter(targetDate)) {
                             System.out.println(eventTask);
                         }
                     }
                     else if (task instanceof DeadlineTask) {
                         DeadlineTask deadlineTask = (DeadlineTask) task;
-                        if (deadlineTask.by.isEqual(targetDate) || deadlineTask.by.isAfter(targetDate)) {
+                        if (deadlineTask.getBy().isEqual(targetDate) || deadlineTask.getBy().isAfter(targetDate)) {
                             System.out.println(deadlineTask);
                         }
                     }
@@ -232,7 +237,7 @@ public class Duke {
 
                 tasks.remove(taskIndex);
 
-                System.out.println("Task deleted. Are you skipping on work again?");
+                System.out.println("duke.task.Task deleted. Are you skipping on work again?");
                 break;
 
             case save:

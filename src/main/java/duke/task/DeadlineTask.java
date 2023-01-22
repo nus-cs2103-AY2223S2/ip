@@ -1,3 +1,5 @@
+package duke.task;
+
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
@@ -5,7 +7,7 @@ public class DeadlineTask extends Task {
     protected LocalDate by;
 
     /**
-     * Constructor to create a new instance of Task.
+     * Constructor to create a new instance of duke.task.Task.
      *
      * @param description Title of the task
      * @param isDone True if task is completed.
@@ -17,7 +19,7 @@ public class DeadlineTask extends Task {
     }
 
     /**
-     * Constructor to create a new instance of Task.
+     * Constructor to create a new instance of duke.task.Task.
      * Tasks created are by default not completed.
      *
      * @param description Title of the task
@@ -25,6 +27,10 @@ public class DeadlineTask extends Task {
      */
     public DeadlineTask(String description, LocalDate by) {
         this(description, false, by);
+    }
+
+    public LocalDate getBy() {
+        return by;
     }
 
     /**
@@ -44,7 +50,7 @@ public class DeadlineTask extends Task {
     /**
      * Returns an instance of the task represented by the given data.
      * @param data The serialised string of the task.
-     * @return An instance of DeadlineTask.
+     * @return An instance of duke.task.DeadlineTask.
      */
     public static Task deserialise(String data) {
         String[] args = data.split(",");

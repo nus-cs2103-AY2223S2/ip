@@ -1,9 +1,11 @@
+package duke.task;
+
 public class Task {
     protected boolean isDone;
     protected String description;
 
     /**
-     * Constructor to create a new instance of Task.
+     * Constructor to create a new instance of duke.task.Task.
      * @param description Title of the task
      * @param isDone True if task is completed.
      */
@@ -13,7 +15,7 @@ public class Task {
     }
 
     /**
-     * Constructor to create a new instance of Task.
+     * Constructor to create a new instance of duke.task.Task.
      * Tasks created are by default not completed.
      * @param description Title of the task
      */
@@ -48,7 +50,7 @@ public class Task {
     /**
      * Returns an instance of the task represented by the given data.
      * @param data The serialised string of the task.
-     * @return An instance of Task.
+     * @return An instance of duke.task.Task.
      */
     public static Task deserialise(String data) {
         String[] args = data.split(",");

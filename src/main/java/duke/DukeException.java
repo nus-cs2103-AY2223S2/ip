@@ -1,8 +1,10 @@
+package duke;
+
 public class DukeException extends Exception {
     private final String message;
 
     /**
-     * Constructor for DukeException.
+     * Constructor for duke.DukeException.
      * @param message A string that describes the error.
      */
     public DukeException(String message) {

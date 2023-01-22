@@ -1,3 +1,5 @@
+package duke.task;
+
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
@@ -6,7 +8,7 @@ public class EventTask extends Task{
     protected LocalDate to;
 
     /**
-     * Constructor to create a new instance of Task.
+     * Constructor to create a new instance of duke.task.Task.
      *
      * @param description Title of the task.
      * @param isDone True if task is completed.
@@ -20,7 +22,7 @@ public class EventTask extends Task{
     }
 
     /**
-     * Constructor to create a new instance of Task.
+     * Constructor to create a new instance of duke.task.Task.
      * Tasks created are by default not completed.
      *
      * @param description Title of the task.
@@ -29,6 +31,14 @@ public class EventTask extends Task{
      */
     public EventTask(String description, LocalDate from, LocalDate to) {
         this(description, false, from, to);
+    }
+
+    public LocalDate getFrom() {
+        return from;
+    }
+
+    public LocalDate getTo() {
+        return to;
     }
 
     /**
@@ -48,7 +58,7 @@ public class EventTask extends Task{
     /**
      * Returns an instance of the task represented by the given data.
      * @param data The serialised string of the task.
-     * @return An instance of EventTask.
+     * @return An instance of duke.task.EventTask.
      */
     public static Task deserialise(String data) {
         String[] args = data.split(",");

@@ -1,7 +1,9 @@
+package duke.task;
+
 public class TodoTask extends Task{
 
     /**
-     * Constructor to create a new instance of Task.
+     * Constructor to create a new instance of duke.task.Task.
      *
      * @param description Title of the task
      * @param isDone True if task is completed.
@@ -11,7 +13,7 @@ public class TodoTask extends Task{
     }
 
     /**
-     * Constructor to create a new instance of Task.
+     * Constructor to create a new instance of duke.task.Task.
      * Tasks created are by default not completed.
      *
      * @param description Title of the task
@@ -36,7 +38,7 @@ public class TodoTask extends Task{
     /**
      * Returns an instance of the task represented by the given data.
      * @param data The serialised string of the task.
-     * @return An instance of TodoTask.
+     * @return An instance of duke.task.TodoTask.
      */
     public static Task deserialise(String data) {
         String[] args = data.split(",");
