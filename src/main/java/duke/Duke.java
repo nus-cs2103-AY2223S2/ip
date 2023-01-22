@@ -43,22 +43,6 @@ public class Duke {
     }
 
     /**
-     * Prints the tasks in the TaskList upon command "list".
-     */
-    public void printTaskList() {
-        int num = 1;
-        ui.showLine();
-        for (Task a : tasks.getTasks()) {
-            System.out.println(num + ". " + a);
-            num++;
-        }
-        if (num == 1) {
-            System.out.println("there are no items in your task list");
-        }
-        ui.showLine();
-    }
-
-    /**
      * Duke takes in user input and addresses it accordingly.
      */
     public void run() {
@@ -106,7 +90,9 @@ public class Duke {
                 System.exit(0);
                 break;
             case "list":
-                printTaskList();
+                ui.showLine();
+                System.out.println(tasks);
+                ui.showLine();
                 break;
             case "todo":
                 try {

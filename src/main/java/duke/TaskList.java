@@ -1,6 +1,8 @@
 package duke;
 
+import java.lang.StringBuilder;
 import java.util.List;
+import java.util.ArrayList;
 
 /**
  * Represents a List of Tasks. Uses basic methods from ArrayList.
@@ -8,6 +10,7 @@ import java.util.List;
 public class TaskList {
     private final List<Task> tasks;
 
+    public TaskList() { this.tasks = new ArrayList<>(); }
     public TaskList(List<Task> tasks) {
         this.tasks = tasks;
     }
@@ -69,5 +72,22 @@ public class TaskList {
      */
     public int size() {
         return this.tasks.size();
+    }
+
+    @Override
+    public String toString() {
+        StringBuilder str = new StringBuilder();
+        int num = 1;
+        for (Task a : tasks) {
+            str.append(num).append(". ").append(a);
+            if (num != tasks.size()) {
+                str.append("\n");
+            }
+            num++;
+        }
+        if (num == 1) {
+            str.append("there are no items in your task list");
+        }
+        return str.toString();
     }
 }
