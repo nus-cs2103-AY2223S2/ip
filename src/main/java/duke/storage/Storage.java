@@ -6,7 +6,11 @@ import java.io.IOException;
 import java.util.Scanner;
 
 import duke.DukeException;
-import duke.task.*;
+import duke.task.Deadline;
+import duke.task.Event;
+import duke.task.Task;
+import duke.task.TaskList;
+import duke.task.ToDo;
 
 public class Storage {
 

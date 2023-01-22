@@ -89,22 +89,22 @@ public class Parser {
     public Command parseCommand(String input) throws DukeException {
         Action action = parseAction(input);
         switch (action) {
-            case LIST:
-                return new ListTasksCommand();
-            case MARK:
-                return new MarkTaskCommand(parseIndex(input));
-            case UNMARK:
-                return new UnmarkTaskCommand(parseIndex(input));
-            case DELETE:
-                return new RemoveTaskCommand(parseIndex(input));
-            case TODO:
-                return new AddToDoCommand(parseToDoTask(input));
-            case DEADLINE:
-                return new AddDeadlineCommand(parseDeadlineTask(input));
-            case EVENT:
-                return new AddEventCommand(parseEventTask(input));
-            default:
-                throw new DukeException("I'm sorry, but I don't know what that means :-(");
+        case LIST:
+            return new ListTasksCommand();
+        case MARK:
+            return new MarkTaskCommand(parseIndex(input));
+        case UNMARK:
+            return new UnmarkTaskCommand(parseIndex(input));
+        case DELETE:
+            return new RemoveTaskCommand(parseIndex(input));
+        case TODO:
+            return new AddToDoCommand(parseToDoTask(input));
+        case DEADLINE:
+            return new AddDeadlineCommand(parseDeadlineTask(input));
+        case EVENT:
+            return new AddEventCommand(parseEventTask(input));
+        default:
+            throw new DukeException("I'm sorry, but I don't know what that means :-(");
         }
     }
 
