@@ -9,6 +9,11 @@ public class Duke {
                                     + "|____/ \\__,_|_|\\_\\___|\n";
     ArrayList<Task> taskList = new ArrayList<>();
 
+    private void addTask(Task task, String name) {
+        taskList.add(task);
+        System.out.println("Item added: " + name);
+    }
+
     public boolean readInput(String input) {
         String firstInput = input.split(" ")[0];
 
@@ -19,6 +24,7 @@ public class Duke {
                     int currItem = i + 1;
                     System.out.println(currItem + ": " + taskList.get(i));
                 }
+                System.out.println("You now have " + taskList.size() + " items in your list.");
                 return true;
 
             case "bye":
@@ -51,11 +57,33 @@ public class Duke {
                     break;
                 }
 
-            default:
-                Task newTask = new Task(input);
-                taskList.add(newTask);
-                System.out.println("Item added: " + input);
+            case "todo":
+                String todoTaskName = input.substring(5);
+                TodoTask todoTask = new TodoTask(todoTaskName);
+                addTask(todoTask, todoTaskName);
                 return true;
+
+
+            case "deadline":
+                String deadlineDetails = input.substring(9);
+                String deadlineName = deadlineDetails.split(" /by ")[0];
+                String deadlineDate = deadlineDetails.split(" /by ")[1];
+                DeadlineTask deadlineTask = new DeadlineTask(deadlineName, deadlineDate);
+                addTask(deadlineTask, deadlineName);
+                return true;
+
+            case "event":
+                String eventDetails = input.substring(6);
+                String eventName = eventDetails.split(" /from ")[0];
+                String eventDate = eventDetails.split(" /from ")[1];
+                String eventStart = eventDate.split(" /to ")[0];
+                String eventEnd = eventDate.split(" /to ")[1];
+                EventTask eventTask = new EventTask(eventName, eventStart, eventEnd);
+                addTask(eventTask, eventName);
+                return true;
+
+            default:
+                System.out.println("Oops I do not recognise this command...");
         }
 
         return true;
