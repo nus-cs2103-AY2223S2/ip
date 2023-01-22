@@ -1,3 +1,8 @@
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
+import java.util.Date;
+
 /**
  * Task class used by Duke to keep track of user's tasks inputted.
  *
@@ -11,6 +16,10 @@ public class Task {
      * String describing task.
      */
     protected String description;
+
+    public static final String STORE_DATE_TIME_FORMAT = "dd/MM/yyyy HHmm";
+
+    public static final String DISPLAY_DATE_TIME_FORMAT = "dd LLL yyyy HHmm";
 
     /**
      * Boolean representing if user set task to 'done' state. True if done. False
@@ -49,6 +58,19 @@ public class Task {
      */
     public void markAsNotDone() {
         this.isDone = false;
+    }
+
+    public static LocalDateTime getLocalDateTime(String dateTime)
+            throws DateTimeParseException {
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern(STORE_DATE_TIME_FORMAT);
+        LocalDateTime localDateTime = LocalDateTime.parse(dateTime,
+                formatter);
+        return localDateTime;
+    }
+
+    public static String getDateTimeString(LocalDateTime dateTime) {
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern(DISPLAY_DATE_TIME_FORMAT);
+        return dateTime.format(formatter);
     }
 
     /**

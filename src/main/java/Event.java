@@ -1,3 +1,9 @@
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
+import java.time.temporal.ChronoUnit;
+
 /**
  * Subclass of Task class used by Duke to keep track of user's tasks inputted.
  *
@@ -10,12 +16,12 @@ public class Event extends Task {
     /**
      * A string representing the start of this Event instance.
      */
-    protected String from;
+    protected LocalDateTime from;
 
     /**
      * A string representation of the end of this Event instance.
      */
-    protected String to;
+    protected LocalDateTime to;
 
     /**
      * Constructor for an Event instance.
@@ -26,10 +32,17 @@ public class Event extends Task {
      *
      * @param to String representing the end of this Event.
      */
-    public Event(String description, String from, String to) {
+    public Event(String description, String from, String to)
+            throws DukeBadInstructionFormatException {
         super(description);
-        this.from = from;
-        this.to = to;
+
+        try {
+            this.from = Task.getLocalDateTime(from);
+            this.to = Task.getLocalDateTime(to);
+        } catch (DateTimeParseException e) {
+            throw new DukeBadInstructionFormatException("Use date/time format: " +
+                    Task.STORE_DATE_TIME_FORMAT);
+        }
     }
 
     /**
@@ -39,7 +52,7 @@ public class Event extends Task {
      */
     @Override
     public String toString() {
-        return "[E]" + super.toString() + " (from: " + this.from +
-                " to: " + this.to + ")";
+        return "[E]" + super.toString() + " (from: " + Task.getDateTimeString(this.from) +
+                " to: " + Task.getDateTimeString(this.to) + ")";
     }
 }

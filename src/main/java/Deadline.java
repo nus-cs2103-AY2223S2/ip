@@ -1,3 +1,8 @@
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
+import java.time.temporal.ChronoUnit;
+
 /**
  * Subclass of Task class used by Duke to keep track of user's tasks inputted.
  *
@@ -10,7 +15,7 @@ public class Deadline extends Task {
     /**
      * A string representing the deadline of the Deadline instance.
      */
-    protected String by;
+    protected LocalDateTime by;
 
     /**
      * Constructor for a Deadline instance.
@@ -19,9 +24,15 @@ public class Deadline extends Task {
      *
      * @param by deadline of this Deadline.
      */
-    public Deadline(String description, String by) {
+    public Deadline(String description, String by) throws DukeBadInstructionFormatException {
         super(description);
-        this.by = by;
+
+        try {
+            this.by = Task.getLocalDateTime(by);
+        } catch (DateTimeParseException e) {
+            throw new DukeBadInstructionFormatException("Use date/time format: " +
+                    Task.STORE_DATE_TIME_FORMAT);
+        }
     }
 
     /**
@@ -31,6 +42,6 @@ public class Deadline extends Task {
      */
     @Override
     public String toString() {
-        return "[D]" + super.toString() + " (by: " + this.by + ")";
+        return "[D]" + super.toString() + " (by: " + Task.getDateTimeString(this.by) + ")";
     }
 }
