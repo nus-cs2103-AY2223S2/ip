@@ -103,6 +103,11 @@ public class Ui {
         System.out.print(list);
     }
 
+    public void showMatchingTasksList(TaskList list, String keyword) {
+        System.out.println("Book found the following matching tasks stored:");
+        System.out.print(list.matchingTasks(keyword));
+    }
+
     /**
      * Prints the message for showing errors in the execution of {@code Book}.
      * @param message {@code String} message associated with the error.

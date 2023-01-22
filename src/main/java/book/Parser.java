@@ -4,13 +4,7 @@ import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 
-import book.command.AddCommand;
-import book.command.Command;
-import book.command.DeleteCommand;
-import book.command.ExitCommand;
-import book.command.ListCommand;
-import book.command.MarkCommand;
-import book.command.UnmarkCommand;
+import book.command.*;
 import book.exception.IncompleteInputException;
 import book.exception.InvalidFormatException;
 import book.exception.InvalidInputException;
@@ -49,6 +43,8 @@ public final class Parser {
                 return new UnmarkCommand(Integer.parseInt(inputs[1]));
             case "delete":
                 return new DeleteCommand(Integer.parseInt(inputs[1]));
+            case "find":
+                return new FindCommand(inputs[1]);
             case "todo":
                 return new AddCommand(new ToDo(inputs[1]));
             case "deadline":

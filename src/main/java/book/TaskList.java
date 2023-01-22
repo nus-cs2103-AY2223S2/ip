@@ -62,6 +62,19 @@ public class TaskList {
         return this.list.size();
     }
 
+    public String matchingTasks(String keyword) {
+        int index = 1;
+        String listString = "";
+        for (Task task : this.list) {
+            if (task.containsKeyword(keyword)) {
+                listString += index++ + ".  " + task + "\n";
+            } else {
+                index++;
+            }
+        }
+        return listString;
+    }
+
     /**
      * Returns the {@code String} representation of the {@code TaskList}.
      * @return {@code String} representation of the {@code TaskList}.

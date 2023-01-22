@@ -44,6 +44,10 @@ public abstract class Task {
      */
     public abstract String saveString();
 
+    public boolean containsKeyword(String keyword) {
+        return this.description.contains(keyword);
+    }
+
     /**
      * Returns the {@code String} representation of the {@code Task}.
      * @return {@code String} representation of the {@code Task}.
