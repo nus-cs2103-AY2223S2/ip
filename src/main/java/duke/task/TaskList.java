@@ -137,4 +137,17 @@ public class TaskList {
         }
         return null;
     }
+    public void find(String word) {
+        int count = 1;
+        System.out.println("Here are the matching tasks in your list:");
+        for (int i = 0; i < listDataBase.size(); i++) {
+            Task task = listDataBase.get(i);
+            if(task.find(word)) {
+                System.out.print(count);
+                System.out.print('.');
+                System.out.println(task.toString());
+                count++;
+            }
+        }
+    }
 }

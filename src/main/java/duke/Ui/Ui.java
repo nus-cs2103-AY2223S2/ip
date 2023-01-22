@@ -23,7 +23,7 @@ public class Ui {
         for (int n = 0; n < 50; n++) {
             System.out.print("-");
         }
-        System.out.println("\n");
+        System.out.print("\n");
 
     }
 
