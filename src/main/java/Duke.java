@@ -38,36 +38,36 @@ public class Duke {
         word[0] = word[0].toUpperCase();
         try{ 
             switch(word[0]){
-                case "BYE":
-                    horizontalLine();
-                    System.out.println("Bye. Hope to see you again soon!");
-                    return false;
-                case "LIST":
-                    printList();
-                    break;
-                case "MARK":
-                    Task markTask = getTask(Integer.parseInt(word[1]));
-                    markTask.mark();
-                    System.out.println("Nice! I've marked this task as done:");
-                    System.out.println(markTask);
-                    break;
-                case "UNMARK":
-                    Task unmarkTask = getTask(Integer.parseInt(word[1]));
-                    unmarkTask.unmark();
-                    System.out.println("OK, I've marked this task as not done yet:");
-                    System.out.println(unmarkTask);
-                    break;
-                case "TODO":
-                case "DEADLINE":
-                case "EVENT":
-                    String[] sliceWord = Arrays.copyOfRange(word, 1, word.length);
-                    specialTask(sliceWord, word[0]);
-                    break;
-                case "DELETE":
-                    deleteTask(Integer.parseInt(word[1]));
-                    break;
-                default:
-                    throw new InvalidCommandException("");
+            case "BYE":
+                horizontalLine();
+                System.out.println("Bye. Hope to see you again soon!");
+                return false;
+            case "LIST":
+                printList();
+                break;
+            case "MARK":
+                Task markTask = getTask(Integer.parseInt(word[1]));
+                markTask.mark();
+                System.out.println("Nice! I've marked this task as done:");
+                System.out.println(markTask);
+                break;
+            case "UNMARK":
+                Task unmarkTask = getTask(Integer.parseInt(word[1]));
+                unmarkTask.unmark();
+                System.out.println("OK, I've marked this task as not done yet:");
+                System.out.println(unmarkTask);
+                break;
+            case "TODO":
+            case "DEADLINE":
+            case "EVENT":
+                String[] sliceWord = Arrays.copyOfRange(word, 1, word.length);
+                specialTask(sliceWord, word[0]);
+                break;
+            case "DELETE":
+                deleteTask(Integer.parseInt(word[1]));
+                break;
+            default:
+                throw new InvalidCommandException("");
             }
             horizontalLine();
             return true;
@@ -162,3 +162,4 @@ public class Duke {
         System.out.println("Now you have " + strArr.size() + " tasks in the list.");
     }
 }
+
