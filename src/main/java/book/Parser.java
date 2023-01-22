@@ -24,7 +24,7 @@ public final class Parser {
         try {
             String[] inputs = command.split(" ", 2);
             switch (inputs[0]) {
-            case "bye" :
+            case "bye":
                 return new ExitCommand();
             case "list":
                 return new ListCommand();
