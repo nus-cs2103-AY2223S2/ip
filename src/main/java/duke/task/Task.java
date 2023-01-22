@@ -28,4 +28,9 @@ public class Task {
     public String toFileString() {
         return (done ? "1" : "0") + " | " + task;
     }
+
+    public boolean isDone() {
+        return done;
+    }
+
 }

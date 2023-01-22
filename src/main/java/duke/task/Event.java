@@ -15,6 +15,14 @@ public class Event extends Task {
         this.to = LocalDateTime.parse(to, parser);
     }
 
+    public String getFrom() {
+        return from.format(DateTimeFormatter.ofPattern("d/MM/yyyy HHmm"));
+    }
+
+    public String getTo() {
+        return to.format(DateTimeFormatter.ofPattern("d/MM/yyyy HHmm"));
+    }
+
     public String toString() {
         return String.format("[E]%s (from: %s to: %s)",
                 super.toString(),

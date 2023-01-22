@@ -13,6 +13,10 @@ public class Deadline extends Task {
         this.deadline = LocalDateTime.parse(deadline, parser);
     }
 
+    public String getDeadline() {
+        return deadline.format(DateTimeFormatter.ofPattern("d/MM/yyyy HHmm"));
+    }
+
     public String toString() {
         return "[D]" + super.toString() + " (by: "
                 + deadline.format(DateTimeFormatter.ofPattern("MMM dd yyyy HH:mm")) + ")";
