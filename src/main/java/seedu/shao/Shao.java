@@ -29,18 +29,19 @@ public class Shao {
 
         storage.getFile(tasklist, parser, ui);
 
+        ui.printRowDivider();
         ui.greetUser();
+        ui.printRowDivider();
         boolean isExit = false;
         while (!isExit) {
-            ui.printRowDivider();
             String fullCommand = ui.readCommand();
             Command c = parser.parseInput(fullCommand);
+            ui.printRowDivider();
             c.execute(ui, parser, storage, tasklist);
             ui.printRowDivider();
             isExit = c.isExit();
         }
         ui.cleanUp();
-        // ui.readInput(tasklist, storage, parser);
     }
 
 }

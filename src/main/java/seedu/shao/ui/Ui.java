@@ -19,9 +19,7 @@ public class Ui {
 	}
 
 	public void printError(String errorMessage) {
-		printRowDivider();
 		println(errorMessage);
-		printRowDivider();
 	}
 
 	public void printRowDivider() {
@@ -46,20 +44,16 @@ public class Ui {
 		String body = isMark
 				? "Nice! I've marked this task as done:"
 				: "OK, I've marked this task as not done yet:";
-		printRowDivider();
 		println(body);
 		println(task.toString());
-		printRowDivider();
 	}
 
 	public void printItemDeleted(Task task, int tasksCnt) {
-		printRowDivider();
 		println("Sure, I've removed this task:");
 		println("  " + task.toString());
 		println(String.format(
 				"You have %d %s in your list currently.",
 				tasksCnt, tasksCnt > 1 ? "tasks" : "task"));
-		printRowDivider();
 	}
 
 	public void printList(TaskList tasklist) {
@@ -67,13 +61,11 @@ public class Ui {
 		String header = numItems == 0 ? "There are no tasks in your list. Please add one."
 				: "Here are the tasks in your list: ";
 
-		printRowDivider();
 		println(header);
 		for (int i = 0; i < numItems; i++) {
 			Task curTask = tasklist.get(i);
 			println(String.format("%d.%s", i + 1, curTask));
 		}
-		printRowDivider();
 	}
 
 	public void printDeadlineEventOnDatetime(TaskList tasklist, String dateTimeStr, Parser parser) {
@@ -113,13 +105,14 @@ public class Ui {
 	}
 
 	public void greetUser() {
-		printRowDivider();
 		println("\tHi There! I'm Shao");
 		println("\tWhat can I do for you?");
-		printRowDivider();
 	}
 
 	public String readCommand() {
+		if (!scan.hasNextLine()) {
+			return "";
+		}
 		String input = scan.nextLine().trim();
 		return input;
 	}

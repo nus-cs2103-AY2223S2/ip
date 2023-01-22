@@ -60,19 +60,18 @@ public class Storage {
 	public void markSavedTask(int idx, boolean isMark, Ui ui) {
 		try (Stream<String> lines = Files.lines(Paths.get(dataFilePath))) {
 			String line = lines.skip(idx).findFirst().get();
-			modifyLineFile(dataFilePath, idx + 1,
+			modifyLineFile(idx + 1,
 					line.replaceFirst("[01]", isMark ? "1" : "0"), ui);
 		} catch (IOException ex) {
 			ui.printError("Something went wrong while marking the task status.");
 		}
 	}
 
-	private void modifyLineFile(String filePath, int lineNum, String newLine, Ui ui) {
+	private void modifyLineFile(int lineNum, String newLine, Ui ui) {
 		String content = "";
 		int curLineNum = 1;
 
-		try (BufferedReader reader = new BufferedReader(new FileReader(myFile));
-				FileWriter writer = new FileWriter(myFile)) {
+		try (BufferedReader reader = new BufferedReader(new FileReader(myFile));) {
 			String line = reader.readLine();
 
 			while (line != null) {
@@ -84,7 +83,9 @@ public class Storage {
 				line = reader.readLine();
 				curLineNum += 1;
 			}
+			FileWriter writer = new FileWriter(myFile);
 			writer.write(content);
+			writer.close();
 		} catch (IOException e) {
 			ui.printError("Something went wrong while modifying the file.");
 		}
@@ -94,8 +95,7 @@ public class Storage {
 		String content = "";
 		int curLineNum = 1;
 
-		try (BufferedReader reader = new BufferedReader(new FileReader(myFile));
-				FileWriter writer = new FileWriter(myFile)) {
+		try (BufferedReader reader = new BufferedReader(new FileReader(myFile));) {
 			String line = reader.readLine();
 
 			while (line != null) {
@@ -105,7 +105,9 @@ public class Storage {
 				line = reader.readLine();
 				curLineNum += 1;
 			}
+			FileWriter writer = new FileWriter(myFile);
 			writer.write(content);
+			writer.close();
 		} catch (IOException e) {
 			ui.printError("Something went wrong while deleting a line from the file.");
 		}

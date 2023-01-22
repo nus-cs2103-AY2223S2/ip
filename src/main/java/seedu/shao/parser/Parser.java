@@ -8,6 +8,7 @@ import java.util.stream.Stream;
 
 import seedu.shao.commands.AddCommand;
 import seedu.shao.commands.Command;
+import seedu.shao.commands.DeleteCommand;
 import seedu.shao.commands.ExitCommand;
 import seedu.shao.commands.ListCommand;
 import seedu.shao.commands.MarkCommand;
@@ -35,6 +36,8 @@ public class Parser {
 			case "mark":
 			case "unmark":
 				return new MarkCommand(inputArr, opType.startsWith("mark"));
+			case "delete":
+				return new DeleteCommand(inputArr);
 			case "todo":
 			case "deadline":
 			case "event":
