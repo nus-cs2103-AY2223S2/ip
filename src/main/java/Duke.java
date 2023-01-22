@@ -1,17 +1,11 @@
 import java.util.ArrayList;
-import java.util.Scanner;
 
 public class Duke {
 
-    // pretty prints a given string
-    public static void prettyPrint(String text) {
-        System.out.println(
-            "____________________________________________________________"
-        );
-        System.out.println(text);
-        System.out.println(
-            "____________________________________________________________\n"
-        );
+    private Ui ui;
+
+    public Duke() {
+        this.ui = new Ui();
     }
 
     // adds a task to the list
@@ -22,33 +16,29 @@ public class Duke {
             task.toString(),
             list.size()
         );
-        Duke.prettyPrint(s);
+        Ui.prettyPrint(s);
     }
 
     public static void main(String[] args) {
-        String logo =
-            " ____        _        \n" +
-            "|  _ \\ _   _| | _____ \n" +
-            "| | | | | | | |/ / _ \\\n" +
-            "| |_| | |_| |   <  __/\n" +
-            "|____/ \\__,_|_|\\_\\___|\n";
-        System.out.println("Hello from\n" + logo);
+        Duke duke = new Duke();
+        duke.run();
+    }
 
-        Duke.prettyPrint("Hello! I'm Duke\nWhat can I do for you?");
+    public void run(){
+        // print welcome message
+        this.ui.showWelcome();
 
         // parse user input
-        Scanner scanner = new Scanner(System.in);
         String rawInput;
         String[] rawSplit;
         String[] arguments = {};
         String command;
         ArrayList<Task> list = new ArrayList<>();
 
-        // level 3 functionality:
         while (true) {
             try {
                 // scan for user input
-                rawInput = scanner.nextLine();
+                rawInput = this.ui.readCommand();
                 rawSplit = rawInput.split(" ", 2);
                 command = rawSplit[0];
                 if (rawSplit.length > 1) {
@@ -59,11 +49,11 @@ public class Duke {
 
                 // parse commands with no arguments
                 if (command.equals("bye")) {
-                    Duke.prettyPrint("Bye. Hope to see you again soon!");
+                    Ui.prettyPrint("Bye. Hope to see you again soon!");
                     break;
                 } else if (command.equals("list")) {
                     if (list.size() == 0) {
-                        Duke.prettyPrint("You have no tasks! Try adding some.");
+                        Ui.prettyPrint("You have no tasks! Try adding some.");
                     } else {
                         StringBuilder sb = new StringBuilder(
                             "Here are the tasks in your list:\n"
@@ -78,7 +68,7 @@ public class Duke {
                             sb.append(s);
                         }
                         // pprint string
-                        Duke.prettyPrint(sb.toString());
+                        Ui.prettyPrint(sb.toString());
                     }
                 }
                 // parse commands with arguments
@@ -93,7 +83,7 @@ public class Duke {
                         "Nice! I've marked this task as done:\n %s",
                         currentTask.toString()
                     );
-                    Duke.prettyPrint(s);
+                    Ui.prettyPrint(s);
                 } else if (command.equals("unmark")) {
                     int index = Integer.parseInt(arguments[0]) - 1;
                     Task currentTask = list.get(index);
@@ -102,7 +92,7 @@ public class Duke {
                         "Ok, I've marked this task as not done yet:\n %s",
                         currentTask.toString()
                     );
-                    Duke.prettyPrint(s);
+                    Ui.prettyPrint(s);
                 } else if (command.equals("delete")) {
                     int index = Integer.parseInt(arguments[0]) - 1;
                     Task currentTask = list.get(index);
@@ -111,7 +101,7 @@ public class Duke {
                         "Noted. I've removed this task:\n %s",
                         currentTask.toString()
                     );
-                    Duke.prettyPrint(s);
+                    Ui.prettyPrint(s);
                 } else if (command.equals("todo")) {
                     // implicitly handles todo commands with empty descriptions
                     // as those will have 0 arguments
@@ -159,7 +149,7 @@ public class Duke {
                     throw new UnknownCommandException(rawInput);
                 }
             } catch (DukeException e) {
-                Duke.prettyPrint(e.toString());
+                Ui.prettyPrint(e.toString());
             }
         }
     }
