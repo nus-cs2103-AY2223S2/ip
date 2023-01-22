@@ -44,7 +44,13 @@ public class Duke {
                             + "  [" + t_1.getStatusIcon() + "] " + t_1.description);
                     break;
                 case 2:
-                    Task a = new Todo(str.substring(5));
+                    Task a;
+                    try {
+                        a = new Todo(str.substring(5));
+                    } catch (DukeException e) {
+                        System.out.println(e.getMessage());
+                        break;
+                    }
                     list.add(a);
                     System.out.println("Got it. I've added this task:\n  "
                                         + a.toString() + "\nNow you have " + list.size()
@@ -52,7 +58,13 @@ public class Duke {
                     break;
                 case 3:
                     int ind = str.indexOf("/by");
-                    Task b = new Deadline(str.substring(9, ind), str.substring(ind+3));
+                    Task b = null;
+                    try {
+                        b = new Deadline(str.substring(9, ind), str.substring(ind+3));
+                    } catch (DukeException e) {
+                        System.out.println(e.getMessage());
+                        break;
+                    }
                     list.add(b);
                     System.out.println("Got it. I've added this task:\n  "
                             + b.toString() + "\nNow you have " + list.size()
@@ -61,13 +73,22 @@ public class Duke {
                 case 4:
                     int index_1 = str.indexOf("/from");
                     int index_2 = str.indexOf("/to");
-                    Task c = new Event(str.substring(6, index_1), str.substring(index_1+5, index_2),
-                                            str.substring(index_2 + 3));
+                    Task c = null;
+                    try {
+                        c = new Event(str.substring(6, index_1), str.substring(index_1+5, index_2),
+                                                str.substring(index_2 + 3));
+                    } catch (DukeException e) {
+                        System.out.println(e.getMessage());
+                        break;
+                    }
                     list.add(c);
                     System.out.println("Got it. I've added this task:\n  "
                             + c.toString() + "\nNow you have " + list.size()
                             + " tasks in the list.");
                     break;
+                case 5:
+                    System.out.println("☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
+
             }
         }
         System.out.println("Bye. Hope to see you again soon!");
