@@ -30,8 +30,12 @@ public class Duke {
                     } else {
                         System.out.println(task.unmark());
                     }
+                } else if (input_arr[0].equals("delete")) {
+                    int index = Integer.valueOf(input_arr[1]) - 1;
+                    Task action = actions.remove(index);
+                    System.out.println(action.remove());
                 } else if (input_arr[0].equals("todo") || input_arr[0].equals("deadline") || input_arr[0].equals("event")) {
-                    Task newTask;
+                    Task newTask = null;
                     if (input_arr[0].equals("todo")) {
                         input = input.replaceFirst("todo", "");
                         if (input.equals("")) {

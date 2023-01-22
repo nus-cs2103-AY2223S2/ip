@@ -14,6 +14,15 @@ public class Event extends Task {
     }
 
     @Override
+    public String remove() {
+        total--;
+        return "Noted I've removed this task:\n "
+                + this.status() + "\n" + "Now you have "
+                + super.total
+                + " tasks in the list";
+    }
+
+    @Override
     public String toString(){
         return "Got it. I've added this task:\n " + this.status() + "\n" + "Now you have " + super.total + " tasks in the list";
     }
