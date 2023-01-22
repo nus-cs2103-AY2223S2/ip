@@ -4,7 +4,14 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public class Duke {
-    public static void main(String[] args) {
+
+    static void validate(Integer length, Integer error_length, String name) throws DukeException {
+        if (length == error_length) {
+            throw new DukeException("☹ OOPS!!! The description of a " + name + " cannot be empty.");
+        }
+    }
+
+    public static void main(String[] args) throws DukeException {
         String logo = " ____        _        \n"
                 + "|  _ \\ _   _| | _____ \n"
                 + "| | | | | | | |/ / _ \\\n"
@@ -47,11 +54,13 @@ public class Duke {
             else {
                 Task task;
                 if (userInput.startsWith("todo")) {
+                    validate(userInput.length(), 4, "todo");
                     int idx = userInput.indexOf(" ");
                     String taskName = userInput.substring(idx + 1);
                     task = new ToDos(taskName);
                 }
                 else if (userInput.startsWith("deadline")) {
+                    validate(userInput.length(), 8, "deadline");
                     int idx = userInput.indexOf(" ");
                     int by_idx = userInput.indexOf("/by");
                     String taskName = userInput.substring(idx + 1, by_idx);
@@ -59,6 +68,7 @@ public class Duke {
                     task = new Deadline(taskName, modifier);
                 }
                 else if (userInput.startsWith("event")) {
+                    validate(userInput.length(), 5, "event");
                     int idx = userInput.indexOf(" ");
                     int from_idx = userInput.indexOf("/from");
                     int to_idx = userInput.indexOf("/to");
@@ -68,7 +78,7 @@ public class Duke {
                     task = new Events(taskName, fromDate , toDate);
                 }
                 else {
-                    task = new Task(userInput);
+                    throw new DukeException("☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
                 }
                 myList.add(task);
                 System.out.println("Got it. I've added this task:");
