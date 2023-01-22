@@ -1,11 +1,15 @@
 package tasks;
 
+import uitilties.Parser;
+
+import java.util.Date;
+
 public class Event extends ITask {
 
-    private final String from;
-    private final String to;
+    private final Date from;
+    private final Date to;
 
-    public Event(String description , String from, String to) {
+    public Event(String description , Date from, Date to) {
         super(description);
         this.from = from;
         this.to = to;
@@ -13,6 +17,7 @@ public class Event extends ITask {
 
     @Override
     public String toString() {
-        return "[E]" + super.toString() + " (from: " + this.from + "to: " + this.to + ")";
+        return "[E]" + super.toString() + " (from: " + Parser.outputFormat.format(this.from) + "to: "
+                + Parser.outputFormat.format(this.to) + ")";
     }
 }

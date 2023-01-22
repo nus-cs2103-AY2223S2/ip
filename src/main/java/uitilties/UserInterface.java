@@ -4,11 +4,11 @@ import commands.*;
 import exceptions.DukeException;
 import exceptions.InvalidCommandException;
 import tasks.ITask;
-
 import java.util.ArrayList;
 import java.util.Scanner;
 
 public class UserInterface {
+
     public static void Speak(String sentence) {
         String dialogSeparator = "____________________________________________________________";
         System.out.println(dialogSeparator);

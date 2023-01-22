@@ -1,14 +1,17 @@
 package tasks;
 
-public class Deadline extends ITask {
-    private final String _by;
+import uitilties.Parser;
+import java.util.Date;
 
-    public Deadline(String description , String by) {
+public class Deadline extends ITask {
+    private final Date _by;
+
+    public Deadline(String description , Date by) {
         super(description);
         _by =  by;
     }
     @Override
     public String toString() {
-        return "[D]" + super.toString() + " (by: " + this._by + ")";
+        return "[D]" + super.toString() + " (by: " + Parser.outputFormat.format(this._by) + ")";
     }
 }

@@ -1,56 +1,65 @@
 package uitilties;
 
-import exceptions.ContentEmpty;
-import exceptions.DukeException;
-import exceptions.IncompleteCommandException;
-import exceptions.InvalidMarkInput;
+import exceptions.*;
 import tasks.ITask;
 
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 
 public class Parser {
     private boolean processed = false;
     private String _input;
     private String _description;
+    private final DateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy HHmm");
+    public static DateFormat outputFormat = new SimpleDateFormat("MM-dd-yyyy HH:mm:ss aa");
 
-    public String getBy() {
+    public Date getBy() {
         return _by;
     }
 
     public void forDeadline() throws DukeException {
         if (!processed) {
-            if (!_input.contains("/b")) {
-                throw new IncompleteCommandException("/b");
+            if (!_input.contains("/by")) {
+                throw new IncompleteCommandException("/by");
             }
 
-            String[] temp = _input.split("/b");
+            String[] temp = _input.split("/by");
             if (temp.length < 1) {
-                throw new ContentEmpty("'/b command'");
+                throw new ContentEmpty("'/by command'");
             }
             _description = temp[0].trim();
-            _by = temp[1].trim();
+
+            try {
+                _by = dateFormat.parse(temp[1].trim());
+            } catch (ParseException e) {
+                throw new DateParseException(e.getMessage());
+            }
+
             processed = true;
         }
     }
 
 
-    public String getFrom() throws DukeException {
-        if (_from.isEmpty()) {
+    public Date getFrom() throws DukeException {
+        if (_from == null) {
             throw new ContentEmpty("'from'");
         }
         return _from;
     }
 
-    public String getTo() throws DukeException {
-        if (_to.isEmpty()) {
+    public Date getTo() throws DukeException {
+        if (_to == null) {
             throw new ContentEmpty("'to'");
         }
         return _to;
     }
 
-    private String _by;
-    private String _from;
-    private String _to;
+    private Date _by;
+    private Date _from;
+    private Date _to;
 
 
     private final ArrayList<ITask> _tasks;
@@ -121,8 +130,12 @@ public class Parser {
         }
         result[1] = temp2[0];
         result[2] = temp2[1];
-        _from = result[1].trim();
-        _to = result[2].trim();
+        try {
+            _from = dateFormat.parse(result[1].trim());
+            _to = dateFormat.parse(result[2].trim());
+        } catch (ParseException e) {
+            throw new DateParseException(e.getMessage());
+        }
         _description = result[0].trim();
         processed = true;
 
