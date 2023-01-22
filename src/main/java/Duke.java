@@ -15,7 +15,7 @@ public class Duke {
         while (!loopEnd) {
             // try block to catch DukeException and prevent program from terminating itself.
             try {
-                new Parser().parse(userScan);
+                new Parser().parse();
             }
             // Catches DukeException if thrown and prevents program from terminating.
             catch(DukeException ex){
