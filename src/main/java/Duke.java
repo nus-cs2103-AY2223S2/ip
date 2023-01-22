@@ -19,6 +19,37 @@ public class Duke {
 
     private final ArrayList<Task> tasks = new ArrayList<>();
 
+    /**
+     * Saves the task data on to local storage.
+     * @throws DukeException thrown if files/directories failed to create.
+     * @throws IOException thrown if file access error.
+     */
+    private void saveData() throws DukeException, IOException {
+        File saveFile = new File(SAVE_FILE_PATH);
+        if (!saveFile.getParentFile().exists()) {
+            if (!saveFile.getParentFile().mkdirs()) {
+                throw new DukeException("Arii can't create the directories. Is your system faulty?");
+            }
+        }
+
+        if (!saveFile.exists()) {
+            if (!saveFile.createNewFile()) {
+                throw new DukeException("Arii can't create the data file. Is your system faulty?");
+            }
+        }
+
+        FileWriter fw = new FileWriter(saveFile);
+        for (Task task : tasks) {
+            fw.write(task.serialise());
+            fw.write(System.lineSeparator());
+        }
+        fw.close();
+    }
+
+    /**
+     * Loads the task data from local storage.
+     * @return True if successfully loads data, or no data to load.
+     */
     private boolean loadData() {
         File saveFile = new File(SAVE_FILE_PATH);
         if (!saveFile.exists()) {
@@ -180,25 +211,8 @@ public class Duke {
                 break;
 
             case save:
-                File saveFile = new File(SAVE_FILE_PATH);
-                if (!saveFile.getParentFile().exists()) {
-                    if (!saveFile.getParentFile().mkdirs()) {
-                       throw new DukeException("Arii can't create the directories. Is your system faulty?");
-                    }
-                }
-
-                if (!saveFile.exists()) {
-                    if (!saveFile.createNewFile()) {
-                        throw new DukeException("Arii can't create the data file. Is your system faulty?");
-                    }
-                }
-
-                FileWriter fw = new FileWriter(saveFile);
-                for (Task task : tasks) {
-                    fw.write(task.serialise());
-                    fw.write(System.lineSeparator());
-                }
-                fw.close();
+                saveData();
+                System.out.println("Your tasks is now safely stored.");
                 break;
 
             default:
