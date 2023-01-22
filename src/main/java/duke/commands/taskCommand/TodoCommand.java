@@ -3,24 +3,23 @@ package duke.commands.taskCommand;
 import java.util.Optional;
 
 import duke.Duke;
-import duke.tasks.Task;
-import duke.tasks.ToDo;
-import utils.Utils;
+import duke.Utils;
+import duke.task.ToDo;
 
-public class TodoCommand extends TaskCommand {
+public class TodoCommand extends TaskCommand<ToDo> {
 
   public TodoCommand() {
     super("todo");
   }
 
   @Override
-  protected Optional<Task> getTask(String[] args, Duke instance) {
+  protected Optional<ToDo> getTask(String[] args, Duke instance) {
     if (args.length == 1) {
       output("Expected a task!");
       return Optional.empty();
     }
 
-    String taskStr = Utils.joiner(args, 1, args.length);
+    String taskStr = Utils.stringJoiner(args, 1, args.length);
     return Optional.of(new ToDo(taskStr));
   }
 }

@@ -1,3 +1,4 @@
+package duke.task;
 /**
  * A task without any associated times
  */

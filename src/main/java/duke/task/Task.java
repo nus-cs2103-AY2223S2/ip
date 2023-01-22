@@ -1,3 +1,4 @@
+package duke.task;
 import java.io.Serializable;
 
 /**
@@ -34,6 +35,6 @@ public abstract class Task implements Serializable {
 
   @Override
   public String toString() {
-    return String.format("[%s][%s] %s", getType(),this.done ? "X" : " ", this.task);
+    return String.format("[%s][%s] %s", getType(), this.done ? "X" : " ", this.task);
   }
 }

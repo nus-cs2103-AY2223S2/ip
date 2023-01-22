@@ -1,4 +1,4 @@
-package commands;
+package duke.commands;
 
 import java.util.Map;
 import java.util.function.Function;

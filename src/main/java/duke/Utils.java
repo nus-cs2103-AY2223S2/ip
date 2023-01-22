@@ -1,3 +1,4 @@
+package duke;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
@@ -12,18 +13,8 @@ import java.util.function.BiFunction;
 import java.util.function.Function;
 
 public final class Utils {
-  public final static String joiner(String[] args, int from, int to) {
+  public final static String stringJoiner(String[] args, int from, int to) {
     return String.join(" ", Arrays.copyOfRange(args, from, to));
-  }
-
-  public static String timeToString(TemporalAccessor deadline) {
-    if (deadline instanceof LocalDate) {
-      return ((LocalDate) deadline).format(DateTimeFormatter.ofPattern("dd/MM"));
-    } else if (deadline instanceof LocalTime) {
-      return ((LocalTime) deadline).format(DateTimeFormatter.ofPattern("kk:mm"));
-    } else {
-      return ((LocalDateTime) deadline).format(DateTimeFormatter.ofPattern("dd/MM kk:hh"));
-    }
   }
 
   private final static <T extends TemporalAccessor> Function<String, Optional<T>> createParser(
@@ -55,9 +46,9 @@ public final class Utils {
     Function<String, Optional<LocalTime>> timeParser = createParser(timeFormats, LocalTime::parse);
 
     if (str0 == null && str1 == null) {
-        throw new IllegalArgumentException("Both str0 and str1 cannot be null!", null);
+      throw new IllegalArgumentException("Both str0 and str1 cannot be null!", null);
     } else if (str0 == null && str1 != null) {
-        return parseDateTime(str1, null);
+      return parseDateTime(str1, null);
     } 
     
     LocalDateTime currentTime = LocalDateTime.now();

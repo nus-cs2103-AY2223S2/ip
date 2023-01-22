@@ -1,4 +1,4 @@
-package commands;
+package duke.commands;
 
 import java.util.function.BiFunction;
 import java.util.stream.Stream;

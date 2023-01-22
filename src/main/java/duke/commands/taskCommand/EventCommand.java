@@ -1,19 +1,20 @@
 package duke.commands.taskCommand;
 
+import java.time.LocalDateTime;
+import java.time.format.DateTimeParseException;
 import java.util.Optional;
 
 import duke.Duke;
-import duke.tasks.Event;
-import duke.tasks.Task;
-import utils.Utils;
+import duke.Utils;
+import duke.task.Event;
 
-public class EventCommand extends TaskCommand {
+public class EventCommand extends TaskCommand<Event> {
   public EventCommand() {
     super("event");
   }
 
   @Override
-  protected Optional<Task> getTask(String[] args, Duke instance) {
+  protected Optional<Event> getTask(String[] args, Duke instance) {
     int fromIndex = -1, toIndex = -1;
     for(int i = 1; i < args.length; i++) {
         if (args[i].equalsIgnoreCase("/from")) {
@@ -27,31 +28,41 @@ public class EventCommand extends TaskCommand {
 
     if (fromIndex == -1) {
         // No /from provided
-        System.out.println("Expected a /from directive!");
+        output("Expected a /from directive!");
         return Optional.empty();
     } else if (toIndex == -1) {
         // No /to provided
-        System.out.println("Expected a /to directive!");
+        output("Expected a /to directive!");
         return Optional.empty();
     } else if (fromIndex == 1) {
         // From was the first keyword after event
-        System.out.println("Expected a task!");
+        output("Expected a task!");
         return Optional.empty();
     } else if (fromIndex > toIndex) {
-        System.out.println("Expected /from to come before /to!");
+        output("Expected /from to come before /to!");
         return Optional.empty();
     } else if (toIndex == args.length - 1) {
-        System.out.println("Expected a time after /to!");
+        output("Expected a time after /to!");
         return Optional.empty();
     } else if (toIndex - fromIndex == 1) {
-        System.out.println("Expected a time after /from!");
+        output("Expected a time after /from!");
         return Optional.empty();
     }
 
-    String taskStr = Utils.joiner(args, 1, fromIndex);
-    String fromStr = Utils.joiner(args, fromIndex + 1, toIndex);
-    String toStr = Utils.joiner(args, toIndex + 1, args.length);
+    try {
+        LocalDateTime fromTime = Utils.parseDateTime(args[fromIndex + 1], toIndex - fromIndex == 2 ? null : args[fromIndex + 2]);
+        LocalDateTime toTime = Utils.parseDateTime(args[toIndex + 1], toIndex + 2 >= args.length ? null : args[toIndex + 2]);
 
-    return Optional.of(new Event(taskStr, fromStr, toStr));
+        if (fromTime.isBefore(toTime)) {
+            output("I can't create an event that ends before it starts!");
+            return Optional.empty();
+        }
+
+        String taskStr = Utils.stringJoiner(args, 1, fromIndex);
+        return Optional.of(new Event(taskStr, fromTime, toTime));
+    } catch (DateTimeParseException e) {
+        output("Failed to parse the date you've given: %s\n", e.getParsedString());
+        return Optional.empty();
+    }
   }
 }
