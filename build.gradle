@@ -20,38 +20,13 @@ application {
 }
 
 test {
-  // Discover and execute JUnit4-based tests
-  useJUnitPlatform()
-
-  // explicitly include or exclude tests
-  include 'src/test/**'
-
-  // show standard out and standard error of the test JVM(s) on the console
-  testLogging.showStandardStreams = true
-
-  // set heap size for the test JVM(s)
-  minHeapSize = "128m"
-  maxHeapSize = "512m"
-
-  // set JVM arguments for the test JVM(s)
-  jvmArgs '-XX:MaxPermSize=256m'
-
-  // listen to events in the test execution lifecycle
-  beforeTest { descriptor ->
-     logger.lifecycle("Running test: " + descriptor)
-  }
-
-  // Fail the 'test' task on the first test failure
-  failFast = true
-
-  // listen to standard out and standard error of the test JVM(s)
-  onOutput { descriptor, event ->
-     logger.lifecycle("Test: " + descriptor + " produced standard out/err: " + event.message )
-  }
+    useJUnitPlatform()
 }
 
 dependencies {
     testImplementation group: 'org.junit.jupiter', name: 'junit-jupiter-api', version: '5.5.0'
+    // this is needed for vscode
+    testImplementation('org.junit.platform:junit-platform-launcher:1.5.2')
     testRuntimeOnly group: 'org.junit.jupiter', name: 'junit-jupiter-engine', version: '5.5.0'
 }
 

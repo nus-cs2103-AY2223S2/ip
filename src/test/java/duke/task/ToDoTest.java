@@ -12,7 +12,10 @@ public class ToDoTest {
     }
 
     @Test
-    public void anotherDummyTest() {
-        assertEquals(4, 4);
+    public void testStringConversion() {
+        String name = "tests";
+        ToDo a = new ToDo(name);
+        assertEquals("[T][ ] " + name, a.toString());
     }
+
 }
