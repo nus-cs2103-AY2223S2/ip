@@ -1,12 +1,12 @@
-package utilities;
+package duke.utilities;
 
-import exceptions.DukeException;
-import exceptions.LoadFileException;
-import exceptions.SaveFileException;
-import tasks.Deadline;
-import tasks.Event;
-import tasks.ITask;
-import tasks.Todo;
+import duke.exceptions.DukeException;
+import duke.exceptions.LoadFileException;
+import duke.exceptions.SaveFileException;
+import duke.tasks.Deadline;
+import duke.tasks.Event;
+import duke.tasks.ITask;
+import duke.tasks.Todo;
 
 import java.io.File;
 import java.io.FileWriter;

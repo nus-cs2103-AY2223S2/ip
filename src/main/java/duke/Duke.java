@@ -1,8 +1,8 @@
-import commands.*;
-import exceptions.DukeException;
-import utilities.UserInterface;
-import utilities.TaskManager;
-
+package duke;
+import duke.commands.*;
+import duke.exceptions.DukeException;
+import duke.utilities.UserInterface;
+import duke.utilities.TaskManager;
 
 public class Duke {
     private TaskManager _taskManger;
@@ -37,7 +37,7 @@ public class Duke {
     }
 
     public static void main(String[] args) {
-        new Duke("data/tasks.txt").run();
+        new Duke("data/duke.tasks.txt").run();
     }
 }
 

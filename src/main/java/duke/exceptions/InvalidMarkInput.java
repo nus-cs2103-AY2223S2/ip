@@ -1,4 +1,4 @@
-package exceptions;
+package duke.exceptions;
 
 public class InvalidMarkInput extends DukeException {
     public InvalidMarkInput(String index) {

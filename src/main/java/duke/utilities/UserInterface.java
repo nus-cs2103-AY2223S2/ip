@@ -1,9 +1,9 @@
-package utilities;
+package duke.utilities;
 
-import commands.*;
-import exceptions.DukeException;
-import exceptions.InvalidCommandException;
-import tasks.ITask;
+import duke.commands.*;
+import duke.exceptions.DukeException;
+import duke.exceptions.InvalidCommandException;
+import duke.tasks.ITask;
 
 import java.util.Scanner;
 

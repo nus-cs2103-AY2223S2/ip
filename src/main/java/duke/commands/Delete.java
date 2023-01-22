@@ -1,8 +1,8 @@
-package commands;
+package duke.commands;
 
-import exceptions.DukeException;
-import tasks.ITask;
-import utilities.Parser;
+import duke.exceptions.DukeException;
+import duke.tasks.ITask;
+import duke.utilities.Parser;
 
 public class Delete extends ICommand {
 

@@ -1,6 +1,6 @@
-package commands;
+package duke.commands;
 
-import utilities.Parser;
+import duke.utilities.Parser;
 
 
 public class Exit extends ICommand{

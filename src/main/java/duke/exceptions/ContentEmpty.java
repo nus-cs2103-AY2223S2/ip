@@ -1,4 +1,4 @@
-package exceptions;
+package duke.exceptions;
 
 public class ContentEmpty extends DukeException {
     public ContentEmpty(String content) {

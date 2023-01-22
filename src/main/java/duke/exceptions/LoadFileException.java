@@ -1,4 +1,4 @@
-package exceptions;
+package duke.exceptions;
 
 public class LoadFileException  extends DukeException {
     public LoadFileException(String file,String msg) {

@@ -1,7 +1,7 @@
-package utilities;
+package duke.utilities;
 
-import exceptions.DukeException;
-import tasks.ITask;
+import duke.exceptions.DukeException;
+import duke.tasks.ITask;
 
 import java.util.ArrayList;
 

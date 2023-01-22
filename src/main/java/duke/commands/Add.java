@@ -1,11 +1,11 @@
-package commands;
+package duke.commands;
 
-import exceptions.DukeException;
-import tasks.Deadline;
-import tasks.Event;
-import tasks.ITask;
-import tasks.Todo;
-import utilities.Parser;
+import duke.exceptions.DukeException;
+import duke.tasks.Deadline;
+import duke.tasks.Event;
+import duke.tasks.ITask;
+import duke.tasks.Todo;
+import duke.utilities.Parser;
 
 public class Add extends ICommand {
 
@@ -36,7 +36,7 @@ public class Add extends ICommand {
 
         }
         setMsg(task + "\nAdded"+ "\nNow you have "
-                + getParser().getTaskManager().size() + " tasks in the list.");
+                + getParser().getTaskManager().size() + " duke.tasks in the list.");
 
         return false;
 

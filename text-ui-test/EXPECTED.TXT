@@ -10,27 +10,27 @@ What can I do for you?
 ____________________________________________________________
 [T][ ] x
 Added
-Now you have 1 tasks in the list.
+Now you have 1 duke.tasks in the list.
 ____________________________________________________________
 Enter new command to continue:
 [D][ ] y (by: a)
 Added
-Now you have 2 tasks in the list.
+Now you have 2 duke.tasks in the list.
 ____________________________________________________________
 Enter new command to continue:
 [E][ ] z (from: b to: c)
 Added
-Now you have 3 tasks in the list.
+Now you have 3 duke.tasks in the list.
 ____________________________________________________________
 Enter new command to continue:
 Nice! I've marked this task as done:
 [D][X] y (by: a)
 ____________________________________________________________
 Enter new command to continue:
-Here are the tasks in your list:
+Here are the duke.tasks in your list:
 1.[T][ ] x
 2.[D][X] y (by: a)
 3.[E][ ] z (from: bto: c)
-You have total 3 tasks in the list.
+You have total 3 duke.tasks in the list.
 ____________________________________________________________
 Enter new command to continue:

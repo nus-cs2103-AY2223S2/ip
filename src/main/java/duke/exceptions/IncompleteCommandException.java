@@ -1,4 +1,4 @@
-package exceptions;
+package duke.exceptions;
 
 public class IncompleteCommandException extends DukeException {
     public IncompleteCommandException(String content) {

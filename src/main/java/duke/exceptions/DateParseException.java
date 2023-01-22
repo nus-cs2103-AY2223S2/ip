@@ -1,4 +1,4 @@
-package exceptions;
+package duke.exceptions;
 
 public class DateParseException extends DukeException {
     public DateParseException(String msg) {

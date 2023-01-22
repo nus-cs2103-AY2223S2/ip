@@ -1,7 +1,7 @@
-package utilities;
+package duke.utilities;
 
-import exceptions.*;
-import tasks.ITask;
+import duke.exceptions.*;
+import duke.tasks.ITask;
 
 import java.text.DateFormat;
 import java.text.ParseException;

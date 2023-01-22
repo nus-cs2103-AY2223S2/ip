@@ -1,4 +1,4 @@
-package exceptions;
+package duke.exceptions;
 
 public class SaveFileException  extends DukeException {
     public SaveFileException(String file,String msg) {

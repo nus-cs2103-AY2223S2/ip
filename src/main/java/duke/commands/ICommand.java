@@ -1,7 +1,7 @@
-package commands;
+package duke.commands;
 
-import exceptions.DukeException;
-import utilities.Parser;
+import duke.exceptions.DukeException;
+import duke.utilities.Parser;
 
 public abstract class ICommand {
     public Parser getParser() {
