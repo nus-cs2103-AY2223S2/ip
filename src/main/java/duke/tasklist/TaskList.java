@@ -1,11 +1,11 @@
-package duke.TaskList;
+package duke.tasklist;
 
 import java.util.ArrayList;
 
-import duke.Exceptions.DukeException;
-import duke.Storage.Storage;
-import duke.Task.Task;
-import duke.Ui.Ui;
+import duke.exceptions.DukeException;
+import duke.storage.Storage;
+import duke.task.Task;
+import duke.ui.Ui;
 
 public class TaskList {
 

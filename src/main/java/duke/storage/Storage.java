@@ -1,4 +1,4 @@
-package duke.Storage;
+package duke.storage;
 
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -11,11 +11,11 @@ import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Scanner;
 
-import duke.Exceptions.DukeException;
-import duke.Task.Deadline;
-import duke.Task.Event;
-import duke.Task.Task;
-import duke.Task.Todo;
+import duke.exceptions.DukeException;
+import duke.task.Deadline;
+import duke.task.Event;
+import duke.task.Task;
+import duke.task.Todo;
 
 public class Storage {
     private Path filePath;
@@ -36,19 +36,22 @@ public class Storage {
                 String[] args = scanner.nextLine().split(" \\| ");
                 if ("T".equals(args[0])) {
                     Todo newTodo = new Todo(args[2]);
-                    if (args[1].equals("1"))
+                    if (args[1].equals("1")) {
                         newTodo.toggleMark();
+                    }
                     loadedList.add(newTodo);
                 } else if ("D".equals(args[0])) {
                     Deadline newDeadline = new Deadline(args[2], LocalDateTime.parse(args[3], formatter));
-                    if (args[1].equals("1"))
+                    if (args[1].equals("1")) {
                         newDeadline.toggleMark();
+                    }
                     loadedList.add(newDeadline);
                 } else if ("E".equals(args[0])) {
                     Event newEvent = new Event(args[2], LocalDateTime.parse(args[3], formatter),
                             LocalDateTime.parse(args[4], formatter));
-                    if (args[1].equals("1"))
+                    if (args[1].equals("1")) {
                         newEvent.toggleMark();
+                    }
                     loadedList.add(newEvent);
                 }
             }
@@ -73,13 +76,13 @@ public class Storage {
             for (Task task : tasks) {
                 int mark = task.getMark().equals('X') ? 1 : 0;
                 String newString = String.format("T | %d | %s%n", mark, task.getDescription());
-                if (task instanceof Deadline)
-                    newString = String.format("D | %d | %s | %s%n", mark, task.getDescription(),
-                            ((Deadline) task).getBy());
-                else if (task instanceof Event)
-                    newString = String.format("E | %d | %s | %s | %s%n", mark, task.getDescription(),
-                            ((Event) task).getFrom(),
-                            ((Event) task).getTo());
+                if (task instanceof Deadline) {
+                    newString = String.format("D | %d | %s | %s%n", mark,
+                            task.getDescription(), ((Deadline) task).getBy());
+                } else if (task instanceof Event) {
+                    newString = String.format("E | %d | %s | %s | %s%n", mark,
+                            task.getDescription(), ((Event) task).getFrom(), ((Event) task).getTo());
+                }
                 fileWriter.write(newString);
             }
         } catch (IOException e) {

@@ -1,12 +1,12 @@
 package duke;
 import java.io.File;
 
-import duke.Commands.Command;
-import duke.Exceptions.DukeException;
-import duke.Parser.Parser;
-import duke.Storage.Storage;
-import duke.TaskList.TaskList;
-import duke.Ui.Ui;
+import duke.commands.Command;
+import duke.exceptions.DukeException;
+import duke.parser.Parser;
+import duke.storage.Storage;
+import duke.tasklist.TaskList;
+import duke.ui.Ui;
 
 public class Duke {
     private Storage storage;

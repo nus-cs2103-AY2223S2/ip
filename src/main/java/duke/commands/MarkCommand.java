@@ -1,10 +1,10 @@
-package duke.Commands;
+package duke.commands;
 
-import duke.Exceptions.DukeException;
-import duke.Exceptions.TaskException;
-import duke.Storage.Storage;
-import duke.TaskList.TaskList;
-import duke.Ui.Ui;
+import duke.exceptions.DukeException;
+import duke.exceptions.TaskException;
+import duke.storage.Storage;
+import duke.tasklist.TaskList;
+import duke.ui.Ui;
 
 public class MarkCommand implements Command {
 
@@ -20,8 +20,9 @@ public class MarkCommand implements Command {
     public void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
         try {
             int taskNum = Integer.parseInt(this.fullCommand.substring(toMark ? 5 : 7));
-            if (taskNum > tasks.size() || taskNum < 1)
+            if (taskNum > tasks.size() || taskNum < 1) {
                 throw new TaskException("Please enter a valid task number!");
+            }
             tasks.markTask(taskNum, storage, ui, toMark);
         } catch (NumberFormatException | StringIndexOutOfBoundsException e) {
             throw new TaskException("Please enter a valid task number!");
