@@ -15,9 +15,11 @@ public class Duke {
     protected final String RECORD_NAME = "/duke.txt";
     protected final ArrayList<Task> tasks = new ArrayList<>();
     protected final String myName;
+    protected final ArrayList<String> commandList = new ArrayList<>();
 
     public Duke() {
         this.myName = "Duke";
+        loadUpRecordIfExists(getRecordPath());
     }
 
     /**
@@ -62,34 +64,40 @@ public class Duke {
     /**
      * Handles the input string from the user
      * @param inMsg: the input message from the user
+     * @param suppressPrint: suppress print out message or not
      * @throws DukeException when the command is unknown
      */
-    public void handleCommand(String inMsg) throws DukeException {
+    public void handleCommand(String inMsg, boolean suppressPrint) throws DukeException {
+        String stringToPrint = "";
         if (checkCommand(inMsg,Command.LIST)) {
-            print_structured_string(listTasksMsg());
+            stringToPrint = listTasksMsg();
         } else if (checkCommand(inMsg,Command.MARK)) {
             int idx = Integer.parseInt(inMsg.substring(5)) - 1;
-            print_structured_string(markTaskDone(idx));
+            stringToPrint = markTaskDone(idx);
         } else if (checkCommand(inMsg,Command.UNMARK)) {
             int idx = Integer.parseInt(inMsg.substring(7)) - 1;
-            print_structured_string(unmarkTaskDone(idx));
+            stringToPrint = unmarkTaskDone(idx);
         } else if (checkCommand(inMsg, Command.TODO)){
             String todoName = getCommandContent(inMsg, Command.TODO);
             ToDo todo = new ToDo(todoName);
-            print_structured_string(addTask(todo));
+            stringToPrint = addTask(todo);
         } else if (checkCommand(inMsg, Command.DEADLINE)) {
             String deadlineContent = getCommandContent(inMsg, Command.DEADLINE);
             Deadline ddl = new Deadline(deadlineContent);
-            print_structured_string(addTask(ddl));
+            stringToPrint = addTask(ddl);
         } else if (checkCommand(inMsg, Command.EVENT)) {
             String eventContent = getCommandContent(inMsg, Command.EVENT);
             Event event = new Event(eventContent);
-            print_structured_string(addTask(event));
+            stringToPrint = addTask(event);
         } else if (checkCommand(inMsg, Command.DELETE)) {
             String indexToDelete = getCommandContent(inMsg, Command.DELETE);
-            print_structured_string(deleteTask(Integer.parseInt(indexToDelete)));
+            stringToPrint = deleteTask(Integer.parseInt(indexToDelete));
         } else {
             throw new DukeException("  OOPS!!! I'm sorry, but I don't know what that means :-(");
+        }
+
+        if (!suppressPrint) {
+            printStructuredString(stringToPrint);
         }
     }
 
@@ -97,7 +105,7 @@ public class Duke {
      * Print the string in a pre-specified format
      * @param string: the string content to print out
      */
-    public void print_structured_string(String string) {
+    public void printStructuredString(String string) {
         String longLine = "____________________________________________________________";
         System.out.println(longLine + "\n" + string + "\n" + longLine);
     }
@@ -208,12 +216,32 @@ public class Duke {
         return String.format("Noted. I've removed this task:\n  %s\nNow you have %d tasks in the list.", t, tasks.size());
     }
 
+    private String getRecordPath() {
+        return this.RECORD_DIR + "/" + this.RECORD_NAME;
+    }
+
+    /**
+     * Add user command to a list
+     * @param string: the user-input command
+     */
+    public void addCommandList(String string) {
+        commandList.add(string);
+    }
+
+    public String getCommandListString() {
+        String string = "";
+        for (String s: commandList) {
+            string = string + s + "\n";
+        }
+        return string;
+    }
+
     /**
      * Saves the list of tasks to a file
      * @param path: the path of the file to save to
      */
     public void saveToFile(String path) throws DukeException {
-        String taskListString = this.getTaskListString(false); // no index for file
+        // String taskListString = this.getTaskListString(false); // no index for file
         // https://www.w3schools.com/java/java_files_create.asp
         try {
             // create the directory and the record file
@@ -221,13 +249,14 @@ public class Duke {
             if (!(new File(this.RECORD_DIR).exists())) {
                 Files.createDirectories(Paths.get(path));
             }
-            String recordPath = this.RECORD_DIR + "/" + this.RECORD_NAME;
+            String recordPath = getRecordPath();
             File file = new File(recordPath);
             file.createNewFile();
 
             // write to the file
             FileWriter myWriter = new FileWriter(recordPath);
-            myWriter.write(taskListString);
+            String commandListString = getCommandListString();
+            myWriter.write(commandListString);
             myWriter.close();
         } catch (IOException e) {
             System.out.println("An error occurred.");
@@ -235,18 +264,31 @@ public class Duke {
         }
     }
 
+    /**
+     * Load up the record file at start-up
+     * @param path: path to the record file
+     */
     public void loadUpRecordIfExists(String path) {
+        String recordPath = getRecordPath();
+        File file = new File(recordPath);
+        if (!file.exists()) {
+            return;
+        }
+
+        // read the file
         try {
-            File file = new File("filename.txt");
             Scanner myReader = new Scanner(file);
+
             while (myReader.hasNextLine()) {
                 String data = myReader.nextLine();
-                System.out.println(data);
+                handleCommand(data, true);
             }
             myReader.close();
         } catch (FileNotFoundException e) {
             System.out.println("An error occurred.");
             e.printStackTrace();
+        } catch (DukeException e) {
+            ;
         }
     }
 }

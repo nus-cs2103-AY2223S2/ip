@@ -5,7 +5,7 @@ public class Main {
         Duke duke = new Duke();
 
         // greeting
-        duke.print_structured_string(duke.greeting());
+        duke.printStructuredString(duke.greeting());
 
         // read input
         Scanner scanner = new Scanner(System.in);
@@ -18,19 +18,20 @@ public class Main {
                 break;
             }
             try {
-                duke.handleCommand(inMsg);
+                duke.handleCommand(inMsg, false);
+                duke.addCommandList(inMsg);
             } catch (DukeException e) {
-                duke.print_structured_string(e.toString());
+                duke.printStructuredString(e.toString());
             } catch (NumberFormatException e) {
-                duke.print_structured_string("Please enter a number.");
+                duke.printStructuredString("Please enter a number.");
             }
         }
 
         try {
             // bye-bye message
-            duke.print_structured_string(duke.endMsg());
+            duke.printStructuredString(duke.endMsg());
         } catch (DukeException e) {
-            duke.print_structured_string(e.toString());
+            duke.printStructuredString(e.toString());
         }
     }
 }
