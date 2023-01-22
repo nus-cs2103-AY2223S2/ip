@@ -1,6 +1,6 @@
 todo read book
-deadline return book /by 3 Mar
-event life /from start of time /to when you stop suffering
+deadline return book /by 4450-10-10
+event life /from 0001-01-01 /to 4450-10-10
 list
 todo wake up tmr
 list
@@ -25,9 +25,11 @@ todo NO_HANYA_TASK_03 /sth
 todo NO_HANYA_TASK_04 /sth/sthelse
 deadline
 deadline bleh /abc /efg
-deadline NO_HANYA_TASK_05 /by
-deadline NO_HANYA_TASK_06 /!@#$%^&*()_+ QWERTYUIO /by
-event NO_HANYA_TASK_07/from/to
+deadline bleh /by 0000-00-00 0000
+deadline bleh /by 0001-01-99 0000
+deadline NO_HANYA_TASK_05 /by 0001-01-01
+deadline NO_HANYA_TASK_06 /!@#$%^&*()_+ QWERTYUIO /by 4450-10-10 1234
+event NO_HANYA_TASK_07/from 3350-3-5 /to 4450-10-10 1234
 delete 1
 list
 delete 10
