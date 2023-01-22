@@ -4,6 +4,9 @@ import duke.DukeException;
 import duke.TaskList;
 import duke.Ui;
 
+/**
+ * Command deals with executing a user command.
+ */
 public abstract class Command {
     /**
      * Executes the command which might cause changes to the existing task list and ui.

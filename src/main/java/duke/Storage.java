@@ -1,16 +1,16 @@
 package duke;
 
-import task.Deadline;
-import task.Event;
-import task.Task;
-import task.ToDo;
-
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.Scanner;
+
+import task.Deadline;
+import task.Event;
+import task.Task;
+import task.ToDo;
 
 /**
  * Storage deals with loading tasks from the file and saving tasks in the file.
@@ -64,8 +64,8 @@ public class Storage {
                         String to = parsedTaskData[4];
                         task = new Event(taskDescription, Parser.parseDateTime(from), Parser.parseDateTime(to));
                         break;
-                        default:
-                            throw new DukeException("Task is not recorded in a valid format...");
+                    default:
+                        throw new DukeException("Task is not recorded in a valid format...");
                     }
                     if (isTaskDone) {
                         task.markDone();

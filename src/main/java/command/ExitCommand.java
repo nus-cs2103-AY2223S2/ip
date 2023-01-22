@@ -4,6 +4,9 @@ import duke.DukeException;
 import duke.TaskList;
 import duke.Ui;
 
+/**
+ * Command to exit the chat session.
+ */
 public class ExitCommand extends Command {
     @Override
     public void execute(TaskList tasks, Ui ui) throws DukeException {
