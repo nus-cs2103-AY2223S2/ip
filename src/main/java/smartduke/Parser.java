@@ -11,6 +11,9 @@ import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 import java.util.regex.Pattern;
 
+/**
+ * Parser deals with making sense of the user command and input date strings.
+ */
 public class Parser {
     /**
      * Enumerates the different types of string patterns of user commands available on SmartDuke.

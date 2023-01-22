@@ -2,6 +2,9 @@ package smartduke;
 
 import java.util.Scanner;
 
+/**
+ * Ui deals with interactions with the user (e.g. displays pretty-formatted messages).
+ */
 public class Ui {
     Scanner userInput;
 

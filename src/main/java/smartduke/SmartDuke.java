@@ -2,24 +2,29 @@ package smartduke;
 
 import smartduke.command.Command;
 
+import java.nio.file.Path;
+import java.nio.file.Paths;
+
 public class SmartDuke {
     private TaskList taskList;
     private Ui ui;
+    private Storage storage;
 
-    public SmartDuke() {
+    public SmartDuke(Path filePath) {
+        this.ui = new Ui();
+        this.storage = new Storage(filePath);
         try {
-            this.taskList = new TaskList();
+            this.taskList = new TaskList(this.storage.load());
         } catch (DukeException e) {
             ui.showError(e.getMessage());
+            this.taskList = new TaskList();
         }
-        this.ui = new Ui();
-        this.startSession();
     }
 
     /**
      * Begins the chat session with the user.
      */
-    private void startSession() {
+    public void run() {
         /* Greet the user */
         ui.showLine();
         ui.showWelcome();
@@ -42,9 +47,15 @@ public class SmartDuke {
         }
 
         ui.close();
+
+        try {
+            this.storage.save(this.taskList);
+        } catch (DukeException e) {
+            ui.showError(e.getMessage());
+        }
     }
 
     public static void main(String[] args) {
-        new SmartDuke();
+        new SmartDuke(Paths.get(".", "data", "smartduke.txt")).run();
     }
 }

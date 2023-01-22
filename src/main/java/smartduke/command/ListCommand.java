@@ -10,7 +10,7 @@ import java.util.Iterator;
 public class ListCommand extends Command {
     @Override
     public void execute(TaskList tasks, Ui ui) {
-        Iterator<Task> tasksIterator = tasks.list();
+        Iterator<Task> tasksIterator = tasks.list().iterator();
         if (!tasksIterator.hasNext()) {
             ui.showSuccess("There are currently no tasks in your list.");
             return;
