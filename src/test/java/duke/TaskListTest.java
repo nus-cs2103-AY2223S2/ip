@@ -2,6 +2,7 @@ package duke;
 
 import org.junit.jupiter.api.Test;
 import task.Task;
+import task.TaskList;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.fail;
@@ -57,6 +58,17 @@ public class TaskListTest {
         }
     }
 
+    @Test
+    public void find() {
+        TaskList taskList = new TaskList();
+
+        TaskStub dummy1 = new TaskStub("Dummy Task");
+        TaskStub dummy2 = new TaskStub("dummy Task");
+        taskList.add(dummy1);
+        taskList.add(dummy2);
+
+        assertEquals(1, taskList.find("Dum").size());
+    }
 }
 
 class TaskStub extends Task {

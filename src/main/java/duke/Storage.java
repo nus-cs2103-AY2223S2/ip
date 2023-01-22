@@ -7,10 +7,7 @@ import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.Scanner;
 
-import task.Deadline;
-import task.Event;
-import task.Task;
-import task.ToDo;
+import task.*;
 
 /**
  * Storage deals with loading tasks from the file and saving tasks in the file.

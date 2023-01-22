@@ -25,6 +25,7 @@ public class Parser {
         DELETE_TASK("delete[\\s]*[0-9]+[\\s]*"),
         MARK_TASK("mark[\\s]*[0-9]+[\\s]*"),
         UNMARK_TASK("unmark[\\s]*[0-9]+[\\s]*"),
+        FIND_TASK("find\\s.*"),
         LIST_TASKS("list"),
         END_CHAT("bye");
 
@@ -138,6 +139,9 @@ public class Parser {
         } else if (CommandPattern.LIST_TASKS.match(userCommand)) {
             /* list tasks */
             return new ListCommand();
+        } else if (CommandPattern.FIND_TASK.match(userCommand)) {
+            String query = userCommand.substring(5);
+            return new FindCommand(query);
         } else if (CommandPattern.END_CHAT.match(userCommand)) {
             /* End the session */
             return new ExitCommand();
