@@ -1,3 +1,5 @@
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -54,12 +56,14 @@ public class Duke {
     }
 
     public void addDeadline(String taskDetails) {
-        String[] arr = taskDetails.split("/by", 2);
+        String[] arr = taskDetails.split("/by ", 2);
         try {
             if (arr.length == 1) {
                 throw new DukeException("Please insert deadline date after /by");
             }
-            Deadline task = new Deadline(arr[0], arr[1]);
+            DateTimeFormatter format = DateTimeFormatter.ofPattern("dd-MM-yyyy");
+            LocalDate date = LocalDate.parse(arr[1], format);
+            Deadline task = new Deadline(arr[0], date);
             storage.add(task);
             System.out.println("\t" + task);
             System.out.println("Now you have " + storage.size() + " tasks in the list.");
