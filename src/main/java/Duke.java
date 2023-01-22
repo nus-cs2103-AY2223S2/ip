@@ -1,4 +1,5 @@
 import java.io.IOException;
+
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -79,7 +80,7 @@ public class Duke {
                 String[] textArr = text.split("/", 3);
                 this.checkTextLength(textArr[0], 6);
                 Task task = new Event(textArr[0].substring(6), false,
-                        textArr[1].substring(5), textArr[2].substring(3));
+                        textArr[1].substring(5).trim(), textArr[2].substring(3));
                 this.storeTask(task);
                 return false;
             } else if (text.startsWith("delete ")) {

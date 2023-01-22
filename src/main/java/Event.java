@@ -1,3 +1,6 @@
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+
 /**
  * Represents a event task.
  *
@@ -7,12 +10,12 @@ public class Event extends Task {
     /**
      * End of the event.
      */
-    private String to;
+    private LocalDate to;
 
     /**
      * Start of the event.
      */
-    private String from;
+    private LocalDate from;
 
     /**
      * Constructor for Event class.
@@ -21,8 +24,8 @@ public class Event extends Task {
      */
     public Event(String desc, boolean marked, String from, String to) {
         super(desc, marked);
-        this.from = from;
-        this.to = to;
+        this.from = LocalDate.parse(from);
+        this.to = LocalDate.parse(to);
     }
 
     /**
@@ -32,8 +35,9 @@ public class Event extends Task {
      */
     @Override
     public String toString() {
-        return "[E]" + super.toString() + "(from: "
-                + this.from + "to: " + this.to + ")";
+        DateTimeFormatter pattern = DateTimeFormatter.ofPattern("MMM dd yyyy");
+        return "[E]" + super.toString() + "(from: " + this.from.format(pattern)
+                + " to: " + this.to.format(pattern) + ")";
     }
 
     @Override
