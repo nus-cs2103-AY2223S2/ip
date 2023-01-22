@@ -4,14 +4,19 @@ public class Task {
 
     /**
      * Constructor to create a new instance of Task.
-     * Tasks created are by default not completed.
      * @param description Title of the task
+     * @param isDone True if task is completed.
      */
     protected Task(String description, boolean isDone) {
         this.isDone = isDone;
         this.description = description;
     }
 
+    /**
+     * Constructor to create a new instance of Task.
+     * Tasks created are by default not completed.
+     * @param description Title of the task
+     */
     public Task(String description) {
         this(description, false);
     }
@@ -32,10 +37,19 @@ public class Task {
         this.isDone = isDone;
     }
 
+    /**
+     * Serialise task to be saved in local storage.
+     * @return Serialised string of this task.
+     */
     public String serialise() {
         return String.format("T,%s,%s", isDone ? "Y" : "N", description);
     }
 
+    /**
+     * Returns an instance of the task represented by the given data.
+     * @param data The serialised string of the task.
+     * @return An instance of Task.
+     */
     public static Task deserialise(String data) {
         String[] args = data.split(",");
 
