@@ -104,6 +104,8 @@ public class Parser {
                 return new AddDeadlineCommand(parseDeadlineTask(input));
             case EVENT:
                 return new AddEventCommand(parseEventTask(input));
+            case FIND:
+                return new FindTasksCommand(parseTask(input));
             default:
                 throw new DukeException("I'm sorry, but I don't know what that means :-(");
         }
