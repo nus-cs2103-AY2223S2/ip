@@ -1,5 +1,7 @@
+import java.time.LocalDate;
+
 public class DeadlineTask extends Task {
-    protected String by;
+    protected LocalDate by;
 
     /**
      * Constructor to create a new instance of Task.
@@ -7,7 +9,7 @@ public class DeadlineTask extends Task {
      *
      * @param description Title of the task
      */
-    public DeadlineTask(String description, String by) {
+    public DeadlineTask(String description, LocalDate by) {
         super(description);
         this.by = by;
     }

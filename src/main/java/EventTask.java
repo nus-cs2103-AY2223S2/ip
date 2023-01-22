@@ -1,6 +1,8 @@
+import java.time.LocalDate;
+
 public class EventTask extends Task{
-    protected String from;
-    protected String to;
+    protected LocalDate from;
+    protected LocalDate to;
 
     /**
      * Constructor to create a new instance of Task.
@@ -8,7 +10,7 @@ public class EventTask extends Task{
      *
      * @param description Title of the task
      */
-    public EventTask(String description, String from, String to) {
+    public EventTask(String description, LocalDate from, LocalDate to) {
         super(description);
         this.from = from;
         this.to = to;

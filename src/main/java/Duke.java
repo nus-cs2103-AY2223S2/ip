@@ -1,5 +1,7 @@
 import com.sun.jdi.connect.IllegalConnectorArgumentsException;
 
+import java.time.LocalDate;
+import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -56,7 +58,7 @@ public class Duke {
         int taskIndex;
 
         try {
-            switch(DukeCommand.valueOf(firstCmd)) {
+            switch (DukeCommand.valueOf(firstCmd)) {
                 case bye:
                     System.out.println("Till next time...");
                     return true;
@@ -78,7 +80,7 @@ public class Duke {
                     }
 
                     String deadlineDesc = deadlineArgs.split(" /by ")[0];
-                    String deadlineBy = deadlineArgs.split(" /by ")[1];
+                    LocalDate deadlineBy = LocalDate.parse(deadlineArgs.split(" /by ")[1]);
                     createTask(new DeadlineTask(deadlineDesc, deadlineBy));
                     break;
 
@@ -92,8 +94,8 @@ public class Duke {
                     }
 
                     String eventDesc = eventArgs.split(" /from ")[0];
-                    String eventFrom = eventArgs.split(" /from ")[1].split(" /to ")[0];
-                    String eventBy = eventArgs.split(" /from ")[1].split(" /to ")[1];
+                    LocalDate eventFrom = LocalDate.parse(eventArgs.split(" /from ")[1].split(" /to ")[0]);
+                    LocalDate eventBy = LocalDate.parse(eventArgs.split(" /from ")[1].split(" /to ")[1]);
                     createTask(new EventTask(eventDesc, eventFrom, eventBy));
                     break;
 
@@ -139,6 +141,8 @@ public class Duke {
                 default:
                     throw new DukeException("Arii does not recognise this command...");
             }
+        } catch (DateTimeParseException e) {
+            throw new DukeException("That's not a date! Use the format: yyyy-mm-dd");
         } catch (NumberFormatException e) {
             throw new DukeException("That's not a number! Go count your numbers before trying again.");
         } catch (IllegalArgumentException e) {
