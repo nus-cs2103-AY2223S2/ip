@@ -1,18 +1,21 @@
 package parser;
 
-import dukeException.InvalidDateException;
-
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 
+import dukeexception.InvalidDateException;
+
+/**
+ * Parser for datetime objects.
+ */
 public class DateParser {
-    private final static String PARSE_DATE_FORMAT = "yyyy-MM-dd";
-    private final static String PARSE_DATETIME_FORMAT = PARSE_DATE_FORMAT + " HH:mm";
-    private final static String OUTPUT_DATE_FORMAT = "dd MMM yyyy";
-    private final static String OUTPUT_DATETIME_FORMAT = OUTPUT_DATE_FORMAT + " @ HH:mm";
-    private final static String STORAGE_DATETIME_FORMAT = PARSE_DATETIME_FORMAT;
+    private static final String PARSE_DATE_FORMAT = "yyyy-MM-dd";
+    private static final String PARSE_DATETIME_FORMAT = PARSE_DATE_FORMAT + " HH:mm";
+    private static final String OUTPUT_DATE_FORMAT = "dd MMM yyyy";
+    private static final String OUTPUT_DATETIME_FORMAT = OUTPUT_DATE_FORMAT + " @ HH:mm";
+    private static final String STORAGE_DATETIME_FORMAT = PARSE_DATETIME_FORMAT;
 
     /**
      * Parses raw dates into the LocalDateTime format.
@@ -29,6 +32,8 @@ public class DateParser {
             return LocalDate.now().plusDays(1).atTime(0, 0);
         case "next week":
             return LocalDate.now().plusDays(7).atTime(0, 0);
+        default:
+            break;
         }
         try {
             if (rawDateString.strip().split(" ").length == 1) {

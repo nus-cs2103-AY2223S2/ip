@@ -1,10 +1,13 @@
 package command;
 
-import dukeException.StorageException.SaveFileException;
+import dukeexception.storageexception.SaveFileException;
 import storage.Storage;
 import task.TaskList;
 import ui.Ui;
 
+/**
+ * Command for ending the program.
+ */
 public class ExitCommand extends Command {
     public ExitCommand() {
 

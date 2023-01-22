@@ -1,9 +1,12 @@
 package parser;
 
 import command.Command;
-import dukeException.CommandException.EmptyCommandException;
-import dukeException.CommandException.InputFormatException;
+import dukeexception.commandexception.EmptyCommandException;
+import dukeexception.commandexception.InputFormatException;
 
+/**
+ * Parser for user commands.
+ */
 public class Parser {
     /**
      * Parses the response given by the user.

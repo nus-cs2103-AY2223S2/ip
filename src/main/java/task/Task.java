@@ -1,9 +1,16 @@
 package task;
 
+/**
+ * Task object encapsulating Todo, Deadline, and Event tasks.
+ */
 public abstract class Task {
     private boolean marked;
-    private String content;
+    private final String content;
 
+    /**
+     * Constructor for Task object.
+     * @param content Content to be placed in the task.
+     */
     public Task(String content) {
         this.marked = false;
         this.content = content;

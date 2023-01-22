@@ -1,18 +1,24 @@
 package task;
 
-import dukeException.NotFoundException;
-import struct.Triple;
-import struct.Triple;
-
 import java.util.ArrayList;
 
+import dukeexception.NotFoundException;
+import struct.Triple;
+
+/**
+ * Task list to contain the tasks that the user has to complete.
+ */
 public class TaskList {
-    private ArrayList<Task> tasks;
+    private final ArrayList<Task> tasks;
 
     public TaskList() {
         this.tasks = new ArrayList<>();
     }
 
+    /**
+     * Overloaded constructor for TaskList
+     * @param triples Triple structs containing the task's type, mark status, and content.
+     */
     public TaskList(ArrayList<Triple<Character, Boolean, String>> triples) {
         this.tasks = new ArrayList<>();
         for (Triple<Character, Boolean, String> triple : triples) {
@@ -37,7 +43,7 @@ public class TaskList {
      * @param id The id of the potential item.
      */
     private void isInList(int id) {
-        if (id >= this.tasks.size()) {
+        if (id >= this.tasks.size() || id < 0) {
             throw new NotFoundException("List",
                     String.format("Haiya we only got %d things lah.", this.tasks.size()), null);
         }

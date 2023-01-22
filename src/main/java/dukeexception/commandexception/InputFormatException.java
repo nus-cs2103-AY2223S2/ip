@@ -1,7 +1,10 @@
-package dukeException.CommandException;
+package dukeexception.commandexception;
 
-import dukeException.DukeException;
+import dukeexception.DukeException;
 
+/**
+ * Exception for handling incorrect input format for user commands.
+ */
 public class InputFormatException extends DukeException {
     public InputFormatException(String source, String reason, Throwable err) {
         super("Haiya input format wrong. \nHere is where you mess up: " + source + "\nHere is why you wrong: " + reason, err);
