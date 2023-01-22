@@ -26,7 +26,7 @@ public class Save {
                 ois.close();
                 fis.close();
             } catch (Exception e) {
-                e.printStackTrace();
+                System.out.println("File is empty");
             }
             return tl;
         } else {

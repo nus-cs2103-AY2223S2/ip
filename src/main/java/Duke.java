@@ -1,3 +1,4 @@
+import java.time.format.DateTimeParseException;
 import java.util.Scanner;
 
 public class Duke {
@@ -10,7 +11,17 @@ public class Duke {
                         "          ( o.o )\n" +
                         "           > ^ <\n";
         System.out.println(chopper);
-        System.out.println("    Hello I'm chopper\n    What can I do for you?");
+        System.out.println("    Hello I'm chopper\n" +
+                "    My commands are the following:\n" +
+                "      1. todo <description>\n" +
+                "      2. deadline <description> /by <yyyy-MM-dd HHmm(optional)>\n" +
+                "      3. event <description> /from <date> /to <date>\n" +
+                "      4. delete <task number>\n" +
+                "      5. mark <task number>\n" +
+                "      6. unmark <task number>\n" +
+                "      7. list\n" +
+                "      8. bye\n" +
+                "    What can I do for you?");
 
         TaskList Tasks = new TaskList();
         Tasks = Save.loadTaskList();
@@ -73,8 +84,12 @@ public class Duke {
             if (index_by + 4 > input.length()) {
                 throw new DukeException("    OOPS!!! You are missing the deadline of a deadline.");
             }
+            if (!input.substring(index_by, index_by + 4).equals("/by ")) {
+                throw new DukeException("    OOPS!!! Deadline should be followed by a /by command.");
+            }
             Deadline d = new Deadline(input.substring(9, index_by - 1),
-                    input.substring(index_by + 4, input.length()));
+                        input.substring(index_by + 4, input.length()));
+
             tasks.add(d);
             Save.saveTaskList(tasks);
             System.out.println("    Got it. I've added this task:");
@@ -82,6 +97,8 @@ public class Duke {
             System.out.println("    Now you have " + tasks.size() + " tasks in the list.");
         } catch (DukeException de) {
             System.out.println(de.getMessage());
+        } catch (DateTimeParseException new_e) {
+            System.out.println("    Deadline must have a date of the following format:\n    1. yyyy-MM-dd\n    2. yyyy-MM-dd HHmm");
         }
     }
     private static void todo(TaskList tasks, String input) {
@@ -112,6 +129,10 @@ public class Duke {
             if (index_to + 4 > input.length()) {
                 throw new DukeException("    OOPS!!! You are missing the ending of the event date.");
             }
+            if (!(input.substring(index_from, index_from + 6).equals("/from ") &&
+                    input.substring(index_to, index_to + 4).equals("/to "))) {
+                throw new DukeException("    OOPS!!! Deadline should be followed by a /from and a /to command.");
+            }
             Event e = new Event(input.substring(6, index_from - 1),
                     input.substring(index_from + 6, index_to - 1),
                     input.substring(index_to + 4, input.length()));
@@ -138,6 +159,8 @@ public class Duke {
             System.out.println("    Now you have " + tasks.size() + " tasks in the list.");
         } catch (DukeException de) {
             System.out.println(de.getMessage());
+        } catch (IndexOutOfBoundsException e) {
+            System.out.println("    OOPS!!! Insufficient items in the list to be deleted.");
         }
     }
     private static void mark(TaskList tasks, String input) {
