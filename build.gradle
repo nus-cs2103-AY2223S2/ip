@@ -29,7 +29,7 @@ test {
 }
 
 application {
-    mainClassName = "seedu.duke.Duke"
+    mainClassName = "book.Book"
 }
 
 checkstyle {
@@ -37,7 +37,7 @@ checkstyle {
 }
 
 shadowJar {
-    archiveBaseName = "duke"
+    archiveBaseName = "book"
     archiveClassifier = null
 }
 
