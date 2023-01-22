@@ -108,6 +108,12 @@ public final class Duke {
 
             try {
                 LocalDateTime deadline = Utils.parseDateTime(args[index + 1], index + 2 >= args.length ? null : args[index + 2]);
+
+                if (deadline.isBefore(LocalDateTime.now())) {
+                    System.out.println("I can't create something's that's due in the past!");
+                    return;
+                }
+
                 String taskStr = Utils.joiner(args, 1, index);
                 Task task = new Deadline(taskStr, deadline);
                 addTask.accept(task);
@@ -151,11 +157,15 @@ public final class Duke {
             }
 
             try {
-                String taskStr = Utils.joiner(args, 1, fromIndex);
-
                 LocalDateTime fromTime = Utils.parseDateTime(args[fromIndex + 1], toIndex - fromIndex == 2 ? null : args[fromIndex + 2]);
                 LocalDateTime toTime = Utils.parseDateTime(args[toIndex + 1], toIndex + 2 >= args.length ? null : args[toIndex + 2]);
-            
+
+                if (fromTime.isBefore(toTime)) {
+                    System.out.println("I can't create an event that ends before it starts!");
+                    return;
+                }
+
+                String taskStr = Utils.joiner(args, 1, fromIndex);
                 Task task = new Event(taskStr, fromTime, toTime);
                 addTask.accept(task);
             } catch (DateTimeParseException e) {
