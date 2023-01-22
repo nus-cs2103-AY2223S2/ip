@@ -25,6 +25,7 @@ public class Duke {
                 + "How can I help you?");
         System.out.println(dashedLine());
         while(true) {
+            System.out.print("Please Input: ");
             String input = userInput.nextLine();
             if (input.equals("bye")) {
                 System.out.println(dashedLine());
