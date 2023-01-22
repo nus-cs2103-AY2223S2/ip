@@ -10,20 +10,6 @@ public class Duke {
     ArrayList<Task> taskList = new ArrayList<>();
 
     public boolean readInput(String input) {
-//        if (input.equals("bye")) {
-//            System.out.println("It was a pleasure to help, goodbye!");
-//            return false;
-//        } else if (input.equals("list")) {
-//            for (int i = 0; i < taskList.size(); i += 1) {
-//                int currItem = i + 1;
-//                System.out.println(currItem + ": " + taskList.get(i));
-//            }
-//            return true;
-//        } else {
-//            taskList.add(input);
-//            System.out.println("Item added: " + input);
-//            return true;
-//        }
         String firstInput = input.split(" ")[0];
 
         switch(firstInput) {
