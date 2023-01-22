@@ -14,7 +14,11 @@ public class Duke {
     private static List<Task> current_list = new ArrayList<>();
 
     // Methods
-
+    private static void checkInput(String[] current_input_array) throws EmptyDescriptionException {
+        if (current_input_array.length < 2) {
+            throw new EmptyDescriptionException("");
+        }
+    }
     private static void handleExit() {
         System.out.println("Bye. Hope to see you again soon!");
     }
@@ -27,7 +31,8 @@ public class Duke {
         }
     }
 
-    private static void handleMark(String[] current_input_array) {
+    private static void handleMark(String[] current_input_array) throws EmptyDescriptionException{
+        checkInput(current_input_array);
         int task_number = Integer.parseInt(current_input_array[1]);
         Task current_task = current_list.get(task_number - 1);
         current_task.markAsDone();
@@ -35,7 +40,8 @@ public class Duke {
         System.out.println(current_task.toString());
     }
 
-    private static void handleUnmark(String[] current_input_array) {
+    private static void handleUnmark(String[] current_input_array) throws EmptyDescriptionException{
+        checkInput(current_input_array);
         int task_number = Integer.parseInt(current_input_array[1]);
         Task current_task = current_list.get(task_number - 1);
         current_task.markAsUndone();
@@ -43,7 +49,8 @@ public class Duke {
         System.out.println(current_task.toString());
     }
 
-    private static void handleTodo(String[] current_input_array) {
+    private static void handleTodo(String[] current_input_array) throws EmptyDescriptionException{
+        checkInput(current_input_array);
         Task current_task = new Todo(current_input_array[1]);
         current_list.add(current_task);
         System.out.println("Got it. I've added this task:");
@@ -51,7 +58,8 @@ public class Duke {
         System.out.println(String.format("Now you have %d tasks in the list.", current_list.size()));
     }
 
-    private static void handleEvent(String[] current_input_array) {
+    private static void handleEvent(String[] current_input_array) throws EmptyDescriptionException{
+        checkInput(current_input_array);
         current_input_array = current_input_array[1].split(" /from ", 2);
         String description = current_input_array[0];
         current_input_array = current_input_array[1].split(" /to ", 2);
@@ -64,7 +72,8 @@ public class Duke {
         System.out.println(String.format("Now you have %d tasks in the list.", current_list.size()));
     }
 
-    private static void handleDeadline(String[] current_input_array) {
+    private static void handleDeadline(String[] current_input_array) throws EmptyDescriptionException{
+        checkInput(current_input_array);
         current_input_array = current_input_array[1].split(" /by ", 2);
         String description = current_input_array[0];
         String by = current_input_array[1];
@@ -82,34 +91,41 @@ public class Duke {
         System.out.println("What can I do for you?");
 
         while (true){
-            // Handling Input
-            String current_input = user_input.nextLine();
-            String[] current_input_array = current_input.split(" ", 2);
-            String input_command = current_input_array[0];
+            try {
+                // Handling Input
+                String current_input = user_input.nextLine();
+                System.out.println(PARTITION);
+                String[] current_input_array = current_input.split(" ", 2);
+                String input_command = current_input_array[0];
 
-            // Partition in UI
-            System.out.println(PARTITION);
+                // Partition in UI
 
-            // Handling Various Commnds
-            if (input_command.equals(EXIT_COMMAND)) {
-                handleExit();
-                break;
-            } else if (input_command.equals(LIST_COMMAND)) {
-                handleList();
-            } else if (input_command.equals(MARK_COMMAND)) {
-                handleMark(current_input_array);
-            } else if (input_command.equals(UNMARK_COMMAND)) {
-                handleUnmark(current_input_array);
-            } else if (input_command.equals(TODO_COMMAND)) {
-                handleTodo(current_input_array);
-            } else if (input_command.equals(EVENT_COMMAND)) {
-                handleEvent(current_input_array);
-            } else if (input_command.equals(DEADLINE_COMMAND)) {
-                handleDeadline(current_input_array);
-            } else {
-                System.out.println("I'm not sure what the command is...");
+                // Handling Various Commnds
+                if (input_command.equals(EXIT_COMMAND)) {
+                    handleExit();
+                    break;
+                } else if (input_command.equals(LIST_COMMAND)) {
+                    handleList();
+                } else if (input_command.equals(MARK_COMMAND)) {
+                    handleMark(current_input_array);
+                } else if (input_command.equals(UNMARK_COMMAND)) {
+                    handleUnmark(current_input_array);
+                } else if (input_command.equals(TODO_COMMAND)) {
+                    handleTodo(current_input_array);
+                } else if (input_command.equals(EVENT_COMMAND)) {
+                    handleEvent(current_input_array);
+                } else if (input_command.equals(DEADLINE_COMMAND)) {
+                    handleDeadline(current_input_array);
+                } else {
+                    throw new InvalidCommandException("");
+                }
+                System.out.println(PARTITION);
+            } catch (Exception e) {
+                // handle exception
+                System.out.println(e.getMessage());
+                System.out.println(PARTITION);
             }
-            System.out.println(PARTITION);
+            
         }
         user_input.close();
     }
