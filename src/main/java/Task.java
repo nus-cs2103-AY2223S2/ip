@@ -22,5 +22,9 @@ public class Task {
     public String toString() {
         return description;
     }
+
+    public String toSaveString() {
+        return "T | " + (isDone ? 1 : 0) + " | " + description;
+    }
 }
 

@@ -1,14 +1,65 @@
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
 public class YJ {
     public static void main(String[] args) {
-
         System.out.println("Hello! I'm YJ. What can I do for you?");
-
-        // ArrayList of String
+        // List of tasks
         List<Task> tasks = new ArrayList<>();
+
+        // Create tasks file if it doesn't exist
+        File tasksFile = new File("tasks.txt");
+        if (!tasksFile.exists()) {
+            try {
+                tasksFile.createNewFile();
+            } catch (Exception e) {
+                System.out.println("Crapadoodle! I couldn't create a new file. Something went wrong.");
+            }
+        }
+
+        // Read tasks from file
+        try {
+            Scanner scanner = new Scanner(tasksFile);
+            while (scanner.hasNextLine()) {
+                String taskLine = scanner.nextLine();
+                String[] taskLineParts = taskLine.split("\\|");
+
+                String taskType = taskLineParts[0].trim();
+                int isDone = Integer.parseInt(taskLineParts[1].trim());
+                String description = taskLineParts[2].trim();
+
+                Task task;
+                switch (taskType) {
+                    case "T":
+                        task = new ToDo(description);
+                        break;
+                    case "D":
+                        String by = taskLineParts[3].trim();
+                        task = new Deadline(description, by);
+                        break;
+                    case "E":
+                        String from = taskLineParts[3].trim();
+                        String to = taskLineParts[4].trim();
+                        task = new Event(description, from, to);
+                        break;
+                    default:
+                        task = new Task("");
+                }
+                if (isDone == 1) {
+                    task.markAsDone();
+                }
+                tasks.add(task);
+                // code to parse the task from the line and add it to the tasks list
+            }
+        } catch (FileNotFoundException e) {
+            throw new RuntimeException(e);
+        }
+
 
         Scanner sc = new Scanner(System.in);
         String input = sc.nextLine();
@@ -84,6 +135,17 @@ public class YJ {
             }
 
             input = sc.nextLine();
+        }
+
+        // Write tasks to file
+        try {
+            FileWriter fileWriter = new FileWriter(tasksFile);
+            for (Task task : tasks) {
+                fileWriter.write(task.toSaveString() + "\n");
+            }
+            fileWriter.close();
+        } catch (IOException e) {
+            System.out.println("Crapadoodle! I couldn't write to the file. Something went wrong.");
         }
 
         System.out.println("Byebye, YJ will miss you :(");

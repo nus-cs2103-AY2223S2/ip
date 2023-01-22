@@ -12,4 +12,10 @@ public class ToDo extends Task {
         // [T][X] read book
         return "[T]" + " " + super.getStatusIcon() + " " + super.toString();
     }
+
+    @Override
+    public String toSaveString() {
+        // D | 0 | return book | June 6th
+        return "T | " + (isDone ? 1 : 0) + " | " + super.toString();
+    }
 }
