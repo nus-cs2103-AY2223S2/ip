@@ -1,3 +1,4 @@
+import java.io.File;
 import java.util.Arrays;
 import java.util.Scanner;
 
@@ -52,6 +53,7 @@ public class Duke {
      */
     private static DukeMemory taskMemory = new DukeMemory();
 
+    private static FileManager fileManager = new FileManager();
 
     public static void main(String[] args) {
         String logo = " ____        _        \n"
@@ -62,6 +64,8 @@ public class Duke {
         System.out.println("Hello from\n" + logo);
 
         greet();
+
+        Duke.fileManager.init(Duke.taskMemory);
 
         //Keeps taking user input until 'bye' command entered
         takeCommand();
@@ -115,6 +119,7 @@ public class Duke {
 
         case MARK:
             int index = getMarkIndex(command) - 1;
+            fileManager.fileMarkTask(index);
             taskMemory.markTask(index);
 
             System.out.println("\tNice! I've marked this task as done:\n\t  "
@@ -124,6 +129,7 @@ public class Duke {
 
         case UNMARK:
             index = getMarkIndex(command) - 1;
+            fileManager.fileUnmarkTask(index);
             taskMemory.unmarkTask(index);
 
             System.out.println("\tOK, I've marked this task as not done yet:\n\t  "
@@ -135,6 +141,7 @@ public class Duke {
             try {
                 Task current_task = createTask(command);
 
+                fileManager.fileAppend(current_task);
                 taskMemory.append(current_task);
 
                 System.out.println("\tGot it. I've added this task:\n\t  " + current_task
@@ -149,6 +156,8 @@ public class Duke {
 
         case DELETE:
             index = getMarkIndex(command) - 1;
+
+            fileManager.fileDeleteTask(index);
             Task removed = taskMemory.delete(index);
 
             System.out.println("\tNoted. I've removed this task:\n\t  " +

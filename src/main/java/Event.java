@@ -42,4 +42,11 @@ public class Event extends Task {
         return "[E]" + super.toString() + " (from: " + this.from +
                 " to: " + this.to + ")";
     }
+
+    @Override
+    public String getFileFormatString() {
+        //to be split using "|"
+        return "E" + "@" + this.isDone + "@" + this.description + "@"
+                + this.from + "@" + this.to;
+    }
 }
