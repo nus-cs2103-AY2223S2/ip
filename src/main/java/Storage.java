@@ -35,8 +35,8 @@ public class Storage {
             while (scanner.hasNext()) {
                 String line = scanner.nextLine();
                 boolean done = line.indexOf("[X]") == -1 ? false : true;
-                line.replace("[ ]", "");
-                line.replace("[X]", "");
+                line = line.replace("[ ]", "");
+                line = line.replace("[X]", "");
                 if (line.startsWith(Commands.TODO.cmd())) {
                     String title = line.substring(Commands.TODO.cmd().length());
                     Task newTask = new Todo(title, done);
