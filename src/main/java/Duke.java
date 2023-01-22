@@ -44,12 +44,12 @@ public class Duke {
         boolean acceptingInputs = true;
         while (acceptingInputs) {
             cmd = input.nextLine();
-            String[] args = cmd.split(" ");
-            if (args.length == 0) {
+            List<String> args = List.of(cmd.split(" "));
+            if (args.size() == 0) {
                 continue;
             }
 
-            String cmdVerb = args[0];
+            String cmdVerb = args.get(0);
             switch (cmdVerb) {
                 case "bye":
                     acceptingInputs = false;
@@ -58,38 +58,32 @@ public class Duke {
                     printTasks();
                     break;
                 case "mark":
-                    if (args.length != 2) {
-                        addTask(args);
-                        continue;
+                    int idx = getMarkArgument(args);
+                    if (idx == -1) {
+                        handleInvalidArguments();
+                    } else {
+                        changeTaskStatus(idx, true);
                     }
-
-                    int idx;
-                    try {
-                        idx = Integer.parseInt(args[1]) - 1;
-                    } catch (NumberFormatException e) {
-                        addTask(args);
-                        continue;
-                    }
-
-                    changeTaskStatus(idx, true);
                     break;
                 case "unmark":
-                    if (args.length != 2) {
-                        addTask(args);
-                        continue;
+                    idx = getMarkArgument(args);
+                    if (idx == -1) {
+                        handleInvalidArguments();
+                    } else {
+                        changeTaskStatus(idx, false);
                     }
-
-                    try {
-                        idx = Integer.parseInt(args[1]) - 1;
-                    } catch (NumberFormatException e) {
-                        addTask(args);
-                        continue;
-                    }
-
-                    changeTaskStatus(idx, false);
+                    break;
+                case "todo":
+                    addTodo(args.subList(1, args.size()));
+                    break;
+                case "deadline":
+                    addDeadline(args.subList(1, args.size()));
+                    break;
+                case "event":
+                    addEvent(args.subList(1, args.size()));
                     break;
                 default:
-                    addTask(args);
+                    handleInvalidArguments();
                     break;
             }
         }
@@ -113,10 +107,80 @@ public class Duke {
         printInBanner(toPrint.toString());
     }
 
-    private void addTask(String[] args) {
+    private void addTodo(List<? extends String> args) {
         String cmd = String.join(" ", args);
-        taskList.add(new Task(cmd));
-        printInBanner("added: " + cmd);
+        Todo newTask = new Todo(cmd);
+        taskList.add(newTask);
+        printInBanner("Don't forget to do this task yo~\n  " + newTask + "\nNow you have " + taskList.size() + " items on your list.");
+    }
+
+    private void addDeadline(List<? extends String> args) {
+        int byIndex = args.indexOf("/by");
+        if (byIndex == -1 || byIndex == args.size() - 1) {
+            handleInvalidArguments();
+            return;
+        }
+
+        @SuppressWarnings("unchecked")  // args already takes in objects that are subclasses of String so it is a safe typecast
+        List<String> description = (List<String>) args.subList(0, byIndex);
+        @SuppressWarnings("unchecked")
+        List<String> byDate = (List<String>) args.subList(byIndex + 1, args.size());
+        Deadline newTask = new Deadline(String.join(" ", description), String.join(" ", byDate));
+        taskList.add(newTask);
+        printInBanner("Don't forget to do this task yo~\n  " + newTask + "\nNow you have " + taskList.size() + " items on your list.");
+    }
+
+    private void addEvent(List<? extends String> args) {
+        int fromIndex = args.indexOf("/from");
+        int toIndex = args.indexOf("/to");
+        if (fromIndex == -1 || fromIndex == args.size() - 1 || toIndex == -1 || toIndex == args.size() - 1) {
+            handleInvalidArguments();
+            return;
+        }
+
+        Event newTask;
+        if (fromIndex < toIndex) {
+            if (fromIndex + 1 == toIndex) {
+                handleInvalidArguments();
+                return;
+            }
+            @SuppressWarnings("unchecked")  // args already takes in objects that are subclasses of String so it is a safe typecast
+            List<String> description = (List<String>) args.subList(0, fromIndex);
+            @SuppressWarnings("unchecked")
+            List<String> fromDate = (List<String>) args.subList(fromIndex + 1, toIndex);
+            @SuppressWarnings("unchecked")
+            List<String> toDate = (List<String>) args.subList(toIndex + 1, args.size());
+
+            newTask = new Event(String.join(" ", description), String.join(" ", fromDate), String.join(" ", toDate));
+        } else {
+            if (toIndex + 1 == fromIndex) {
+                handleInvalidArguments();
+                return;
+            }
+            @SuppressWarnings("unchecked")
+            List<String> description = (List<String>) args.subList(0, toIndex);
+            @SuppressWarnings("unchecked")
+            List<String> toDate = (List<String>) args.subList(toIndex + 1, fromIndex);
+            @SuppressWarnings("unchecked")
+            List<String> fromDate = (List<String>) args.subList(fromIndex + 1, args.size());
+
+            newTask = new Event(String.join(" ", description), String.join(" ", fromDate), String.join(" ", toDate));
+        }
+
+        taskList.add(newTask);
+        printInBanner("Don't forget to do this task yo~\n  " + newTask + "\nNow you have " + taskList.size() + " items on your list.");
+    }
+
+    private int getMarkArgument(List<? extends String> args) {
+        if (args.size() != 2) {
+            return -1;
+        }
+
+        try {
+            return Integer.parseInt(args.get(1)) - 1;
+        } catch (NumberFormatException e) {
+            return -1;
+        }
     }
 
     private void changeTaskStatus(int idx, boolean done) {
@@ -132,5 +196,9 @@ public class Duke {
             taskList.get(idx).unmarkAsDone();
             printInBanner("Neee! Are you kidding me?\n" + taskList.get(idx));
         }
+    }
+
+    private void handleInvalidArguments() {
+        printInBanner("Wakandeyo!!! >:(");
     }
 }
