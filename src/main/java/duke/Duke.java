@@ -1,4 +1,4 @@
-package smartduke;
+package duke;
 
 import command.Command;
 
@@ -8,12 +8,12 @@ import java.nio.file.Paths;
 /**
  * The Duke ChatBot
  */
-public class SmartDuke {
+public class Duke {
     private TaskList taskList;
     private Ui ui;
     private Storage storage;
 
-    public SmartDuke(Path filePath) {
+    public Duke(Path filePath) {
         this.ui = new Ui();
         this.storage = new Storage(filePath);
         try {
@@ -59,6 +59,6 @@ public class SmartDuke {
     }
 
     public static void main(String[] args) {
-        new SmartDuke(Paths.get(".", "data", "smartduke.txt")).run();
+        new Duke(Paths.get(".", "data", "duke.txt")).run();
     }
 }

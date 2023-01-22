@@ -1,6 +1,6 @@
 package task;
 
-import smartduke.DukeException;
+import duke.DukeException;
 
 /**
  * Task encapsulates the description of a task and its 'done' status.

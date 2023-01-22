@@ -1,7 +1,7 @@
 package task;
 
-import smartduke.DukeException;
-import smartduke.Parser;
+import duke.DukeException;
+import duke.Parser;
 
 import java.time.LocalDateTime;
 

@@ -1,4 +1,4 @@
-package smartduke;
+package duke;
 
 import command.*;
 import task.Deadline;

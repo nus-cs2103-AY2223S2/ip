@@ -1,7 +1,7 @@
 package command;
 
-import smartduke.TaskList;
-import smartduke.Ui;
+import duke.TaskList;
+import duke.Ui;
 import task.Task;
 
 public class AddCommand extends Command {

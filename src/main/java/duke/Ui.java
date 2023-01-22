@@ -1,4 +1,4 @@
-package smartduke;
+package duke;
 
 import java.util.Scanner;
 

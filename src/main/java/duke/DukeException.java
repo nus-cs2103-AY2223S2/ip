@@ -1,4 +1,4 @@
-package smartduke;
+package duke;
 
 /**
  * DukeException represents an exception specific to Duke.

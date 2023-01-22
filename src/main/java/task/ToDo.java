@@ -1,6 +1,6 @@
 package task;
 
-import smartduke.DukeException;
+import duke.DukeException;
 
 /**
  * ToDo is a Task without any date/time attached to it.

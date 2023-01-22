@@ -1,8 +1,8 @@
 package command;
 
-import smartduke.DukeException;
-import smartduke.TaskList;
-import smartduke.Ui;
+import duke.DukeException;
+import duke.TaskList;
+import duke.Ui;
 import task.Task;
 
 public class UnmarkCommand extends Command {
