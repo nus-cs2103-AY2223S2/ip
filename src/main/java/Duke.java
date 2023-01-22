@@ -3,7 +3,7 @@ import java.util.Scanner;
 
 public class Duke {
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws EmptyDescription, WrongTask {
         String logo = " ____        _        \n"
                 + "|  _ \\ _   _| | _____ \n"
                 + "| | | | | | | |/ / _ \\\n"
@@ -81,58 +81,94 @@ public class Duke {
         int index = 0;
 
         Scanner scan = new Scanner(System.in);
+
         String next = scan.next();
+        if (!Objects.equals(next, "todo") && !Objects.equals(next, "deadline") && !Objects.equals(next, "event")) {
+            if (!Objects.equals(next, "list") && !Objects.equals(next, "mark") && !Objects.equals(next, "unmark")) {
+                throw new WrongTask(" I'm sorry, but I don't know what that means :-(");
+            }
+        }
         String nextLine = scan.nextLine();
+        if (nextLine.equals("")) {
+            throw new EmptyDescription(" The description of " + next + " cannot be empty.");
+        }
 
         Task input = null;
-        if (Objects.equals(next, "todo")) {
-            input = new Todo(nextLine.substring(1));
-        } else if (Objects.equals(next, "deadline")) {
-            String[] split = nextLine.split("/by ");
-            input = new Deadline(split[0], split[1]);
-        } else if (Objects.equals(next, "event")) {
-            String[] split = nextLine.split("/");
-            input = new Event(split[0], split[1].substring(5), split[2].substring(3));
+        switch (next) {
+            case "todo":
+                input = new Todo(nextLine.substring(1));
+                break;
+            case "deadline": {
+                String[] split = nextLine.split("/by ");
+                input = new Deadline(split[0], split[1]);
+                break;
+            }
+            case "event": {
+                String[] split = nextLine.split("/");
+                input = new Event(split[0], split[1].substring(5), split[2].substring(3));
+                break;
+            }
         }
 
         while (true) {
             assert input != null;
             if (Objects.equals(next, "bye")) break;
-            if (Objects.equals(next, "todo")) {
-                input = new Todo(nextLine.substring(1));
-            } else if (Objects.equals(next, "deadline")) {
-                String[] split = nextLine.split("/by ");
-                input = new Deadline(split[0], split[1]);
-            } else if (Objects.equals(next, "event")) {
-                String[] split = nextLine.split("/");
-                input = new Event(split[0], split[1].substring(5), split[2].substring(3));
+            switch (next) {
+                case "todo":
+                    input = new Todo(nextLine.substring(1));
+                    break;
+                case "deadline": {
+                    String[] split = nextLine.split("/by ");
+                    input = new Deadline(split[0], split[1]);
+                    break;
+                }
+                case "event": {
+                    String[] split = nextLine.split("/");
+                    input = new Event(split[0], split[1].substring(5), split[2].substring(3));
+                    break;
+                }
             }
 
-            if (Objects.equals(next, "mark")) {
-                int number = Integer.parseInt(nextLine.substring(1));
-                Task toMarkDone = array[number - 1];
-                toMarkDone.markAsDone();
-                System.out.println("Nice! I've marked this task as done:");
-                System.out.println(" " + toMarkDone);
-            } else if (Objects.equals(next, "list")) {
-                System.out.println("Here are the tasks in your list:");
-                for (int i = 0; i < index; i++) {
-                    System.out.println(i+1 + "." + array[i]);
+            switch (next) {
+                case "mark": {
+                    int number = Integer.parseInt(nextLine.substring(1));
+                    Task toMarkDone = array[number - 1];
+                    toMarkDone.markAsDone();
+                    System.out.println("Nice! I've marked this task as done:");
+                    System.out.println(" " + toMarkDone);
+                    break;
                 }
-            } else if (Objects.equals(next, "unmark")) {
-                int number = Integer.parseInt(nextLine.substring(1));
-                Task toUnMarkDone = array[number - 1];
-                toUnMarkDone.unMarkAsDone();
-                System.out.println("OK, I've marked this task as not done yet:");
-                System.out.println(" " + toUnMarkDone);
-            } else {
-                array[index] = input;
-                System.out.println("Got it. I've added this task:\n" + "  " + input);
-                index++;
-                System.out.println("Now you have " + index + " tasks in the list.");
+                case "list":
+                    System.out.println("Here are the tasks in your list:");
+                    for (int i = 0; i < index; i++) {
+                        System.out.println(i + 1 + "." + array[i]);
+                    }
+                    break;
+                case "unmark": {
+                    int number = Integer.parseInt(nextLine.substring(1));
+                    Task toUnMarkDone = array[number - 1];
+                    toUnMarkDone.unMarkAsDone();
+                    System.out.println("OK, I've marked this task as not done yet:");
+                    System.out.println(" " + toUnMarkDone);
+                    break;
+                }
+                default:
+                    array[index] = input;
+                    System.out.println("Got it. I've added this task:\n" + "  " + input);
+                    index++;
+                    System.out.println("Now you have " + index + " tasks in the list.");
+                    break;
             }
             next = scan.next();
+            if (!Objects.equals(next, "todo") && !Objects.equals(next, "deadline") && !Objects.equals(next, "event")) {
+                if (!Objects.equals(next, "list") && !Objects.equals(next, "mark") && !Objects.equals(next, "unmark")) {
+                    throw new WrongTask(" I'm sorry, but I don't know what that means :-(");
+                }
+            }
             nextLine = scan.nextLine();
+            if (nextLine.equals("") && !next.equals("list")) {
+                throw new EmptyDescription(" The description of " + next + " cannot be empty.");
+            }
         }
         System.out.println("Bye. Hope to see you again soon!");
     }
