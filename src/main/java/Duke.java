@@ -1,4 +1,5 @@
 import java.util.Scanner;
+import java.util.ArrayList;
 
 public class Duke {
     public static String projName = " ____        _        \n"
@@ -6,13 +7,21 @@ public class Duke {
                                     + "| | | | | | | |/ / _ \\\n"
                                     + "| |_| | |_| |   <  __/\n"
                                     + "|____/ \\__,_|_|\\_\\___|\n";
+    ArrayList<String> taskList = new ArrayList<>();
 
     public boolean readInput(String input) {
         if (input.equals("bye")) {
             System.out.println("It was a pleasure to help, goodbye!");
             return false;
+        } else if (input.equals("list")) {
+            for (int i = 0; i < taskList.size(); i += 1) {
+                int currItem = i + 1;
+                System.out.println(currItem + ": " + taskList.get(i));
+            }
+            return true;
         } else {
-            System.out.println(input);
+            taskList.add(input);
+            System.out.println("Item added: " + input);
             return true;
         }
     }
@@ -30,5 +39,6 @@ public class Duke {
             String input = scanner.nextLine();
             cont = duke.readInput(input);
         }
+        scanner.close();
     }
 }
