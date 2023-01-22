@@ -8,6 +8,7 @@ import java.lang.String;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
+
 /**
  * The Duke.Interpreter interpreters the users' input
  */
@@ -15,7 +16,7 @@ public class Interpreter {
     private final static DateTimeFormatter format = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
     private static enum Operation {
         // all the operations
-        mark, list, delete, deadline, event, bye, todo, unmark
+        mark, list, delete, deadline, event, bye, todo, unmark, find
     }
 
     // format the time in the form of 11/10/2019 5pm
@@ -187,6 +188,21 @@ public class Interpreter {
     }
 
     /**
+     * The method find finds the keyword in all the Tasks
+     * @param command the find command
+     * @param table the taskTable
+     * @return Find
+     * @throws MissingDescriptionException
+     */
+    public static Find find(String command, TaskTable table) throws MissingDescriptionException {
+        if (command.split(" ").length == 1) {
+            throw new MissingDescriptionException("find method");
+        } else {
+            return new Find(command.substring(5), table);
+        }
+    }
+
+    /**
      * The method interpret interprets the command
      * @param command the command from the user
      * @param table the task table
@@ -223,6 +239,8 @@ public class Interpreter {
                     return delete(command, table);
                 case list:
                     return new Table();
+                case find:
+                    return find(command, table);
                 default:
                     throw new InvalidCommandException();
             }
