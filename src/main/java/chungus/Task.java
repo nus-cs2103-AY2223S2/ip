@@ -5,33 +5,62 @@ import java.time.format.DateTimeFormatter;
 
 import chungus.util.Pair;
 
+/**
+ * Represents a task.
+ */
 abstract class Task {
     private String desc;
     private boolean isDone;
 
     protected final static DateTimeFormatter dateTimeFmt = DateTimeFormatter.ISO_LOCAL_DATE_TIME;
 
+    /**
+     * Constructor for a task. All tasks require a description.
+     * 
+     * @param _desc Description for the task.
+     */
     public Task(String _desc) {
         desc = _desc;
         isDone = false;
     }
 
+    /**
+     * Returns a user-friendly format of the task.
+     * 
+     * @return A user-friendly format of the task.
+     */
     protected String format() {
         return (isDone() ? "[X] " : "[ ] ") + desc;
     }
 
+    /**
+     * Returns whether the task is complete.
+     * 
+     * @return Whether the task is complete.
+     */
     public boolean isDone() {
         return isDone;
     }
 
+    /**
+     * Marks the task as complete.
+     */
     public void setDone() {
         isDone = true;
     }
 
+    /**
+     * Marks the task as incomplete.
+     */
     public void setNotDone() {
         isDone = false;
     }
 
+    /**
+     * Retrieves the raw description for the task.
+     * 
+     * @return The raw description.
+     */
     public String desc() {
         return desc;
     }
@@ -39,8 +68,20 @@ abstract class Task {
     @Override
     public abstract String toString();
 
+    /**
+     * Serialies the task to make it suitable for storing to disk.
+     * 
+     * @return The serialized string.
+     */
     public abstract String marshal();
 
+    /**
+     * Tries to deserialize a string to produce a task.
+     * 
+     * @param s The serialized string.
+     * @return The task.
+     * @throws TaskMarshalException If the string is invalid.
+     */
     public static Task unmarshal(String s) {
         char typ = s.charAt(0);
         switch (typ) {
@@ -51,10 +92,16 @@ abstract class Task {
             case 'E':
                 return Event.unmarshal(s);
             default:
-                return null;
+                throw new TaskMarshalException(s);
         }
     }
 
+    /**
+     * Throws an exception if the condition is false. Just a convenience method.
+     * 
+     * @param cond The boolean condition.
+     * @param t    The exception to throw.
+     */
     protected static void trueOrThrow(boolean cond, RuntimeException t) {
         if (!cond) {
             throw t;
@@ -62,7 +109,15 @@ abstract class Task {
     }
 }
 
+/**
+ * A todo.
+ */
 class Todo extends Task {
+    /**
+     * Constructor for a todo.
+     * 
+     * @param desc Description for the todo.
+     */
     public Todo(String desc) {
         super(desc);
     }
@@ -83,6 +138,13 @@ class Todo extends Task {
         return b.toString();
     }
 
+    /**
+     * Tries to deserialize a string to produce a todo.
+     * 
+     * @param s The serialized string.
+     * @return The todo.
+     * @throws TaskMarshalException If the string is invalid.
+     */
     public static Todo unmarshal(String s) {
         trueOrThrow(s.charAt(0) == 'T', new TaskMarshalException(s));
 
@@ -109,9 +171,18 @@ class Todo extends Task {
     }
 }
 
+/**
+ * A task with deadline.
+ */
 class Deadline extends Task {
-    LocalDateTime deadline;
+    private LocalDateTime deadline;
 
+    /**
+     * Constructor for a deadline task.
+     * 
+     * @param desc      The task's description.
+     * @param _deadline Deadline for the task.
+     */
     public Deadline(String desc, LocalDateTime _deadline) {
         super(desc);
         deadline = _deadline;
@@ -134,6 +205,13 @@ class Deadline extends Task {
         return b.toString();
     }
 
+    /**
+     * Tries to deserialize a string to produce a task with deadline.
+     * 
+     * @param s The serialized string.
+     * @return The deadline task.
+     * @throws TaskMarshalException If the string is invalid.
+     */
     public static Deadline unmarshal(String s) {
         if (s.charAt(0) != 'D') {
             throw new TaskMarshalException(s);
@@ -172,10 +250,20 @@ class Deadline extends Task {
     }
 }
 
+/**
+ * An event.
+ */
 class Event extends Task {
-    LocalDateTime from;
-    LocalDateTime to;
+    private LocalDateTime from;
+    private LocalDateTime to;
 
+    /**
+     * Constructor for an event.
+     * 
+     * @param desc  Description for the event.
+     * @param _from When the event starts.
+     * @param _to   When the event ends.
+     */
     public Event(String desc, LocalDateTime _from, LocalDateTime _to) {
         super(desc);
         from = _from;
@@ -200,6 +288,13 @@ class Event extends Task {
         return b.toString();
     }
 
+    /**
+     * Tries to deserialize a string to produce an event.
+     * 
+     * @param s The serialized string.
+     * @return The event object.
+     * @throws TaskMarshalException If the string is invalid.
+     */
     public static Event unmarshal(String s) {
         if (s.charAt(0) != 'E') {
             throw new TaskMarshalException(s);
