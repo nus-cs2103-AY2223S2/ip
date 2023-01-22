@@ -1,9 +1,16 @@
 package task;
 
+/**
+ * Task object to be stored inside the task list.
+ */
 public abstract class Task {
     private boolean marked;
-    private String content;
+    private final String content;
 
+    /**
+     * Constructor for Task.
+     * @param content Content to be placed inside the task.
+     */
     public Task(String content) {
         this.marked = false;
         this.content = content;

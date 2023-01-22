@@ -4,11 +4,10 @@ import storage.Storage;
 import task.TaskList;
 import ui.Ui;
 
+/**
+ * Command for listing the contents of a task list.
+ */
 public class ListCommand extends Command {
-    public ListCommand() {
-
-    }
-
     @Override
     public void execute(TaskList taskList, Ui ui, Storage storage) {
         taskList.listItems();

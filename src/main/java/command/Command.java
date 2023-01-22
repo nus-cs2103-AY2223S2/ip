@@ -1,15 +1,14 @@
 package command;
 
-import dukeException.CommandException.UnknownCommandException;
+import dukeexception.commandexception.UnknownCommandException;
 import storage.Storage;
 import task.TaskList;
 import ui.Ui;
 
+/**
+ * Command that can be executed.
+ */
 public abstract class Command {
-    public Command() {
-
-    }
-
     /**
      * Creates a new Command object based on the command given.
      * @param commandWordContent The content of the user response.
@@ -19,21 +18,21 @@ public abstract class Command {
         String commandWord = commandWordContent[0];
         String commandContent = commandWordContent[1];
         switch (commandWord) {
-            case "bye":
-                return new ExitCommand();
-            case "list":
-                return new ListCommand();
-            case "delete":
-                return new DeleteCommand(commandContent);
-            case "mark":
-            case "unmark":
-                return new MarkCommand(commandWord, commandContent);
-            case "todo":
-            case "deadline":
-            case "event":
-                return new AddCommand(commandWord.toUpperCase().charAt(0), commandContent);
-            default:
-                throw new UnknownCommandException();
+        case "bye":
+            return new ExitCommand();
+        case "list":
+            return new ListCommand();
+        case "delete":
+            return new DeleteCommand(commandContent);
+        case "mark":
+        case "unmark":
+            return new MarkCommand(commandWord, commandContent);
+        case "todo":
+        case "deadline":
+        case "event":
+            return new AddCommand(commandWord.toUpperCase().charAt(0), commandContent);
+        default:
+            throw new UnknownCommandException();
         }
     };
 

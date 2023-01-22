@@ -1,14 +1,23 @@
 package task;
 
+import java.time.LocalDateTime;
+
 import parser.DateParser;
 import parser.Parser;
 
-import java.time.LocalDateTime;
-
+/**
+ * Event task with a 'from' and a 'to' clause.
+ */
 public class Event extends Task {
     private final LocalDateTime from;
     private final LocalDateTime to;
 
+    /**
+     * Constructor for Event.
+     * @param content Content to be placed inside the Event.
+     * @param from Start datetime of the Event.
+     * @param to End datetime of the Event.
+     */
     public Event(String content, String from, String to) {
         super(content);
         this.from = DateParser.parse(from);

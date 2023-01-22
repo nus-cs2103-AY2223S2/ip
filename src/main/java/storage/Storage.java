@@ -1,12 +1,5 @@
 package storage;
 
-import dukeException.StorageException.CorruptedFileException;
-import dukeException.StorageException.CreateFileException;
-import dukeException.StorageException.LoadFileException;
-import dukeException.StorageException.SaveFileException;
-import struct.Triple;
-import task.TaskList;
-
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileWriter;
@@ -14,6 +7,16 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Scanner;
 
+import dukeexception.storageexception.CorruptedFileException;
+import dukeexception.storageexception.CreateFileException;
+import dukeexception.storageexception.LoadFileException;
+import dukeexception.storageexception.SaveFileException;
+import struct.Triple;
+import task.TaskList;
+
+/**
+ * Storage module for handling saves and loads.
+ */
 public class Storage {
     private final String filePath;
 
@@ -27,9 +30,9 @@ public class Storage {
     public void create() {
         try {
             File folder = new File("./data");
-            boolean folderCreationSuccessful = folder.mkdir();
+            boolean folderCreationIsSuccessful = folder.mkdir();
             File file = new File(this.filePath);
-            boolean isFileCreated = file.createNewFile();
+            boolean fileIsCreated = file.createNewFile();
         } catch (IOException e) {
             throw new CreateFileException();
         }

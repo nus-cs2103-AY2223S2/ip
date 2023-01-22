@@ -1,15 +1,14 @@
 package command;
 
-import dukeException.StorageException.SaveFileException;
+import dukeexception.storageexception.SaveFileException;
 import storage.Storage;
 import task.TaskList;
 import ui.Ui;
 
+/**
+ * Command for ending the chatbot program.
+ */
 public class ExitCommand extends Command {
-    public ExitCommand() {
-
-    }
-
     @Override
     public void execute(TaskList taskList, Ui ui, Storage storage) {
         ui.sayBye();

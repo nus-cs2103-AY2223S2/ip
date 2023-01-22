@@ -1,13 +1,21 @@
 package task;
 
+import java.time.LocalDateTime;
+
 import parser.DateParser;
 import parser.Parser;
 
-import java.time.LocalDateTime;
-
+/**
+ * Deadline task with a 'by' clause.
+ */
 public class Deadline extends Task {
     private final LocalDateTime by;
 
+    /**
+     * Constructor for Deadline tasks.
+     * @param content Content to be put inside the task.
+     * @param by The deadline of the task.
+     */
     public Deadline(String content, String by) {
         super(content);
         this.by = DateParser.parse(by);

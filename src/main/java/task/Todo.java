@@ -2,6 +2,9 @@ package task;
 
 import parser.Parser;
 
+/**
+ * Todo task without any datetime field.
+ */
 public class Todo extends Task {
 
     public Todo(String content) {

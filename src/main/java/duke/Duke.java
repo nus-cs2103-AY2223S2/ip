@@ -1,18 +1,23 @@
 package duke;
 
 import command.Command;
-import dukeException.DukeException;
+import dukeexception.DukeException;
 import parser.Parser;
 import storage.Storage;
 import task.TaskList;
 import ui.Ui;
 
+/**
+ * Duke chatbot.
+ */
 public class Duke {
-
     private final Storage storage;
     private TaskList taskList;
     private final Ui ui;
 
+    /**
+     * Constructor for Duke.
+     */
     public Duke() {
         this.storage = new Storage("./data/taskList.txt");
         this.taskList = new TaskList();

@@ -1,18 +1,24 @@
 package task;
 
-import dukeException.NotFoundException;
-import struct.Triple;
-import struct.Triple;
-
 import java.util.ArrayList;
 
+import dukeexception.NotFoundException;
+import struct.Triple;
+
+/**
+ * Task list for containing tasks.
+ */
 public class TaskList {
-    private ArrayList<Task> tasks;
+    private final ArrayList<Task> tasks;
 
     public TaskList() {
         this.tasks = new ArrayList<>();
     }
 
+    /**
+     * Overloaded constructor for TaskList.
+     * @param triples Tuples of data containing the task type, mark status, and task content.
+     */
     public TaskList(ArrayList<Triple<Character, Boolean, String>> triples) {
         this.tasks = new ArrayList<>();
         for (Triple<Character, Boolean, String> triple : triples) {
@@ -77,7 +83,7 @@ public class TaskList {
      * @param withNumber Whether to print the task with its index.
      */
     public void printTask(int id, boolean withNumber) {
-        String numbering = withNumber ? (id+1) + ". " : "";
+        String numbering = withNumber ? (id + 1) + ". " : "";
         System.out.println(numbering + this.tasks.get(id));
     }
 
@@ -114,11 +120,11 @@ public class TaskList {
      * @return The string representation of the task list in storage.
      */
     public String tasksStorageString(String delimiter) {
-        String finalString = "";
+        StringBuilder finalString = new StringBuilder();
         for (Task task : this.tasks) {
-            finalString += task.toStorageString();
-            finalString += delimiter;
+            finalString.append(task.toStorageString());
+            finalString.append(delimiter);
         }
-        return finalString;
+        return finalString.toString();
     }
 }

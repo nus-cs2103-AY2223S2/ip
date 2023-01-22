@@ -1,12 +1,15 @@
 package ui;
 
 import java.util.Scanner;
-public class Ui {
-    static String ERROR_HORIZONTAL = "X".repeat(40);
-    static String HORIZONTAL = "+=".repeat(20);
-    static String INDENT = "> ";
 
-    private Scanner scanner;
+/**
+ * Ui module for handling user inputs and outputs.
+ */
+public class Ui {
+    private static final String ERROR_HORIZONTAL = "X".repeat(40);
+    private static final String HORIZONTAL = "+=".repeat(20);
+    private static final String INDENT = "> ";
+    private final Scanner scanner;
 
     public Ui() {
         this.scanner = new Scanner(System.in);
@@ -36,7 +39,7 @@ public class Ui {
     }
 
     /**
-     * Greets the user good bye.
+     * Greets the user goodbye.
      */
     public void sayBye() {
         System.out.println("Bye Bye. Leave good review please! PLEAASEEE!");

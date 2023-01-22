@@ -1,6 +1,6 @@
 package parser;
 
-import dukeException.CommandException.InputFormatException;
+import dukeexception.commandexception.InputFormatException;
 
 import org.junit.jupiter.api.Test;
 
