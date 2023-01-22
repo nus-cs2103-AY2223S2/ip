@@ -102,11 +102,11 @@ public class Parser {
         } catch (NumberFormatException e) {
             throw new DukeException("I don't recognise that task number.");
         }
-
     }
 
     /**
      * Parses command strings to do with adding tasks.
+     *
      * @param command Command keyword.
      * @param line String representing user command.
      * @return Command object.
@@ -163,6 +163,14 @@ public class Parser {
         return new AddCommand(task);
     }
 
+    /**
+     * Parses command strings to do with finding matching
+     * tasks.
+     *
+     * @param line String representing user command.
+     * @return Command object.
+     * @throws DukeException if no keyword is provided.
+     */
     private static Command processFind(String line) throws DukeException {
         try {
             String keyword = line.split(Parser.FIND_COMMAND)[1].trim();

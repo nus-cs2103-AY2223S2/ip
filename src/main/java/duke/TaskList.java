@@ -31,7 +31,7 @@ public class TaskList {
     }
 
     /**
-     * Add a task to the task list.
+     * Adds a task to the task list.
      *
      * @param task Task to add.
      */
@@ -40,7 +40,7 @@ public class TaskList {
     }
 
     /**
-     * Delete the task at the given index.
+     * Deletes the task at the given index.
      *
      * @param index Index to delete task from.
      * @return Deleted task.
@@ -58,7 +58,7 @@ public class TaskList {
     }
 
     /**
-     * Mark the task at the given index.
+     * Marks the task at the given index.
      *
      * @param index Index to mark tast at.
      * @return Task that was marked.
@@ -75,7 +75,7 @@ public class TaskList {
     }
 
     /**
-     * Unmark the test at the given index.
+     * Unmarks the test at the given index.
      *
      * @param index Index to unmark test at.
      * @return Task that was unmarked.
@@ -92,8 +92,8 @@ public class TaskList {
     }
 
     /**
-     * Process a String representing a group of tasks
-     * and add these tasks to the list.
+     * Processes a String representing a group of tasks
+     * and adds these tasks to the list.
      *
      * @param taskList String representing a group of tasks.
      */
@@ -107,7 +107,7 @@ public class TaskList {
     }
 
     /**
-     * Convert the task list to a String
+     * Converts the task list to a String
      * for storage.
      *
      * @return String representing tasks in task list.
@@ -138,6 +138,14 @@ public class TaskList {
         return this.tasks.get(index);
     }
 
+    /**
+     * Finds all tasks in the list that contains the given
+     * keyword and returns a new TaskList containing only
+     * these tasks.
+     *
+     * @param keyword The given keyword that tasks must contain.
+     * @return New TaskList containing only matching tasks.
+     */
     public TaskList findTasksByKeyword(String keyword) {
         TaskList filteredTaskList = new TaskList();
         for (Task t : this.tasks) {

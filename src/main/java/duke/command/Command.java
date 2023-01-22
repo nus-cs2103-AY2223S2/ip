@@ -21,7 +21,7 @@ public abstract class Command {
     }
 
     /**
-     * Execute this command.
+     * Executes this command.
      *
      * @param tasks Current task list.
      * @param ui User interface.

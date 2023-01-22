@@ -35,7 +35,7 @@ public class Duke {
     }
 
     /**
-     * Run the main loop of the Duke chatbot
+     * Runs the main loop of the Duke chatbot
      * where Duke takes in user input
      * and responds to the commands given.
      */

@@ -13,7 +13,7 @@ public class Ui {
     private Scanner sc = new Scanner(System.in);
 
     /**
-     * Print greeting text.
+     * Prints greeting text.
      */
     public void showGreeting() {
         String logo = " ____        _        \n"
@@ -28,21 +28,21 @@ public class Ui {
     }
 
     /**
-     * Print arrow to indicate user should input something.
+     * Prints arrow to indicate user should input something.
      */
     public void showArrow() {
         System.out.print("> ");
     }
 
     /**
-     * Print separator.
+     * Prints separator.
      */
     public void showSeparator() {
         System.out.println("____________________________________________________________\n");
     }
 
     /**
-     * Print error message.
+     * Prints error message.
      *
      * @param e Error.
      */
@@ -51,7 +51,7 @@ public class Ui {
     }
 
     /**
-     * Read in user's next command.
+     * Reads in user's next command.
      *
      * @return User's next command.
      */
@@ -61,7 +61,7 @@ public class Ui {
     }
 
     /**
-     * Print user's tasks.
+     * Prints user's tasks.
      *
      * @param tasks User's task list.
      */
@@ -76,7 +76,7 @@ public class Ui {
     }
 
     /**
-     * Print text for adding task to task list.
+     * Prints text for adding task to task list.
      *
      * @param task Task to be added.
      * @param tasks Task list.
@@ -88,7 +88,7 @@ public class Ui {
     }
 
     /**
-     * Print text for marking task.
+     * Prints text for marking task.
      *
      * @param task Task that has been marked.
      */
@@ -98,7 +98,7 @@ public class Ui {
     }
 
     /**
-     * Print text for unmarking task.
+     * Prints text for unmarking task.
      *
      * @param task Task that has been unmarked.
      */
@@ -108,7 +108,7 @@ public class Ui {
     }
 
     /**
-     * Print text for deleting task.
+     * Prints text for deleting task.
      *
      * @param task Deleted task.
      * @param tasks Task list.
@@ -120,12 +120,16 @@ public class Ui {
     }
 
     /**
-     * Print goodbye text.
+     * Prints goodbye text.
      */
     public void showGoodbye() {
         System.out.println("Bye. Hope to see you again soon!");
     }
 
+    /**
+     * Prints matching tasks.
+     * @param tasks TaskList containing matching tasks.
+     */
     public void showFind(TaskList tasks) {
         if (tasks.getSize() == 0) {
             System.out.println("There are no matching tasks.");

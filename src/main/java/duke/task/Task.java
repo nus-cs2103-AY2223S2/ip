@@ -6,7 +6,7 @@ public abstract class Task {
     private String name;
 
     /**
-     * Construct a Task object with the specified
+     * Constructs a Task object with the specified
      * name.
      *
      * @param name Name to give task.
@@ -24,7 +24,7 @@ public abstract class Task {
     }
 
     /**
-     * Convert the task to a string representation
+     * Converts the task to a string representation
      * that can be saved in storage.
      *
      * @return String representation to be saved in storage.
@@ -41,7 +41,7 @@ public abstract class Task {
     }
 
     /**
-     * Convert the string representation of a task from storage
+     * Converts the string representation of a task from storage
      * to a Task object.
      *
      * @param stringRepresentation String representation of a task from storage.
