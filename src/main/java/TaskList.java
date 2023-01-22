@@ -8,43 +8,21 @@ public class TaskList {
         this.init = init;
     }
 
-    public void addTask(String desc) {
-        this.list.add(desc);
+    public void addTask(Task t) {
+        this.list.add(t);
     }
 
-    public void processList() {
-        for (int i = 0; i < list.size(); i++) {
-            Task element = list.get(i);
-            System.out.println(String.format("%d.%s", i + 1, element.toString()));
-        }
-        System.out.println("---------------------------------------");
+    public int getSize() {
+        return this.list.size();
     }
 
-    public void processEvent() {
-
+    public Task getTask(int index) {
+        return this.list.get(index);
     }
 
-    public void processDeadline() {
-
+    public void deleteTask(int index) {
+        this.list.remove(index);
     }
 
-    public void processTodo() {
-
-    }
-
-    public void processMark(int index) {
-        Task task = list.get(index);
-        task.setDone();
-        System.out.println(String.format("Nice, this task has been marked as done:\n %s", task.toString()));
-        System.out.println("---------------------------------------");
-    }
-
-    public void processUnmark() {
-
-    }
-
-    public void processDelete(int item) {
-        this.list.remove(item);
-    }
 
 }

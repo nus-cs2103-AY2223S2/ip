@@ -9,6 +9,7 @@ public enum Commands {
     MARK("mark"),
     UNMARK("unmark"),
     DELETE("delete");
+
     private final String command;
 
     Commands(String command) {
