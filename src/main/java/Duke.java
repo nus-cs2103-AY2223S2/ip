@@ -15,10 +15,12 @@ public class Duke {
 
     private TaskList tasks;
     private final Storage storage;
+    private final Ui ui;
 
     public Duke(String filePath) {
         storage = new Storage(filePath);
         tasks = new TaskList(storage.load());
+        ui = new Ui();
     }
 
     /**
@@ -35,81 +37,11 @@ public class Duke {
     }
 
     /**
-     * Returns the command (e.g. "bye", "mark", "event", etc.).
-     * @param str User input.
-     * @return Command.
-     */
-    public String getCommand(String str) {
-        String[] split = str.split(" ", 2);
-        return split[0];
-    }
-
-    /**
-     * Returns details (e.g. the index for a "mark" command, or the description for an "event" command).
-     * @param str User input.
-     * @return Command details.
-     */
-    public String getCommandDetails(String str) {
-        String[] split = str.split(" ", 2);
-        return split[1];
-    }
-
-    /**
-     * Returns description of a Deadline task.
-     * @param str User input.
-     * @return Description of a deadline task.
-     */
-    public String getDeadlineDesc(String str) {
-        String[] split = getCommandDetails(str).split(" /by ");
-        return split[0];
-    }
-
-    /**
-     * Returns deadline of a Deadline task.
-     * @param str User input.
-     * @return Deadline of a deadline task.
-     */
-    public String getDeadline(String str) {
-        String[] split = getCommandDetails(str).split(" /by ");
-        return split[1];
-    }
-
-    /**
-     * Returns description of an Event task.
-     * @param str User input.
-     * @return Description of an Event task.
-     */
-    public String getEventDesc(String str) {
-        String[] split = getCommandDetails(str).split(" /from ");
-        return split[0];
-    }
-
-    /**
-     * Returns "from" timeframe of an Event task.
-     * @param str User input.
-     * @return "From" timeframe of an Event task.
-     */
-    public String getEventFrom(String str) {
-        String[] split = getCommandDetails(str).split(" /from ");
-        return split[1].split(" /to ")[0];
-    }
-
-    /**
-     * Returns "to" timeframe of an Event task.
-     * @param str User input.
-     * @return "To" timeframe of an Event task.
-     */
-    public String getEventTo(String str) {
-        String[] split = getCommandDetails(str).split(" /from ");
-        return split[1].split(" /to ")[1];
-    }
-
-    /**
      * Prints the tasks in the TaskList upon command "list".
      */
     public void printTaskList() {
         int num = 1;
-        System.out.println("---");
+        ui.showLine();
         for (Task a : tasks.getTasks()) {
             System.out.println(num + ". " + a);
             num++;
@@ -117,7 +49,7 @@ public class Duke {
         if (num == 1) {
             System.out.println("there are no items in your task list");
         }
-        System.out.println("---");
+        ui.showLine();
     }
 
     /**
@@ -125,27 +57,46 @@ public class Duke {
      */
     public void run() {
         Scanner sc = new Scanner(System.in);
-        System.out.println("---\nhi i'm Duke! what's up?\n---");
+        Parser parser = new Parser();
+        ui.showWelcome();
 
         while (sc.hasNextLine()) {
             String userInput = sc.nextLine();
-            String command = getCommand(userInput);
+            String command = parser.getCommand(userInput);
             int index;
             switch (command) {
             case "mark":
-                index = Integer.parseInt(getCommandDetails(userInput)) - 1;
-                tasks = tasks.set(index, tasks.get(index).markAsDone());
-                System.out.println("---\nnice! i've marked this task as done:\n"
-                        + tasks.get(index) + "\n---");
+                try {
+                    index = Integer.parseInt(parser.getCommandDetails(userInput)) - 1;
+                    tasks = tasks.set(index, tasks.get(index).markAsDone());
+                    ui.showLine();
+                    System.out.println("nice! i've marked this task as done:\n"
+                            + tasks.get(index));
+                    ui.showLine();
+                } catch (IndexOutOfBoundsException|NumberFormatException ex) {
+                    ui.showLine();
+                    System.out.println(new DukeException("pls specify an existing task number in the task list!\n" +
+                            "use the format: mark [task number]"));
+                    ui.showLine();
+                }
                 break;
             case "unmark":
-                index = Integer.parseInt(getCommandDetails(userInput)) - 1;
-                tasks = tasks.set(index, tasks.get(index).unmarkAsDone());
-                System.out.println("---\nok, i've marked this task as not done yet:\n"
-                        + tasks.get(index) + "\n---");
+                try {
+                    index = Integer.parseInt(parser.getCommandDetails(userInput)) - 1;
+                    tasks = tasks.set(index, tasks.get(index).unmarkAsDone());
+                    ui.showLine();
+                    System.out.println("ok, i've marked this task as not done yet:\n"
+                            + tasks.get(index));
+                    ui.showLine();
+                } catch (IndexOutOfBoundsException|NumberFormatException ex) {
+                    ui.showLine();
+                    System.out.println(new DukeException("pls specify an existing task number in the task list!\n" +
+                            "use the format: unmark [task number]"));
+                    ui.showLine();
+                }
                 break;
             case "bye":
-                System.out.println("---\nbye! see u soon! :-)\n---");
+                ui.showBye();
                 System.exit(0);
                 break;
             case "list":
@@ -153,22 +104,25 @@ public class Duke {
                 break;
             case "todo":
                 try {
-                    Todo newTodo = new Todo(getCommandDetails(userInput));
+                    Todo newTodo = new Todo(parser.getCommandDetails(userInput));
                     tasks = tasks.add(newTodo);
-                    System.out.println("---\ni've added this task:\n" + newTodo);
+                    ui.showLine();
+                    System.out.println("i've added this task:\n" + newTodo);
                     if (tasks.size() == 1) {
-                        System.out.println("you have 1 task in the list\n---");
+                        System.out.println("you have 1 task in the list");
                     } else {
-                        System.out.println("you have " + tasks.size() + " tasks in the list\n---");
+                        System.out.println("you have " + tasks.size() + " tasks in the list");
                     }
+                    ui.showLine();
                 } catch (ArrayIndexOutOfBoundsException ex) {
-                    System.out.println("---\n"
-                            + new DukeException("pls add a description for this task!") + "\n---");
+                    ui.showLine();
+                    System.out.println(new DukeException("pls add a description for this task!"));
+                    ui.showLine();
                 }
                 break;
             case "deadline":
                 try {
-                    String deadlineStr = getDeadline(userInput);
+                    String deadlineStr = parser.getDeadline(userInput);
                     String[] split = deadlineStr.split(" ");
                     LocalDate deadlineDate = LocalDate.parse(split[0]);
                     Optional<LocalTime> deadlineTime;
@@ -179,30 +133,27 @@ public class Duke {
                     } else {
                         deadlineTime = Optional.empty();
                     }
-                    Deadline newDeadline = new Deadline(getDeadlineDesc(userInput),
-                            getDeadline(userInput));
+                    Deadline newDeadline = new Deadline(parser.getDeadlineDesc(userInput),
+                            parser.getDeadline(userInput));
                     tasks = tasks.add(newDeadline);
-                    System.out.println("---\ni've added this task with deadline:\n" + newDeadline);
+                    ui.showLine();
+                    System.out.println("i've added this task with deadline:\n" + newDeadline);
                     if (tasks.size() == 1) {
-                        System.out.println("you have 1 task in the list\n---");
+                        System.out.println("you have 1 task in the list");
                     } else {
-                        System.out.println("you have " + tasks.size() + " tasks in the list\n---");
+                        System.out.println("you have " + tasks.size() + " tasks in the list");
                     }
-                } catch (ArrayIndexOutOfBoundsException ex) {
-                    System.out.println("---\n"
-                            + new DukeException("pls specify the description and deadline for this task!\n" +
-                            "use the format: deadline [description] /by yyyy-MM-dd HHmm")
-                            + "\n---");
-                } catch (DateTimeParseException ex) {
-                    System.out.println("---\n"
-                            + new DukeException("pls specify the description and deadline for this task!\n" +
-                            "use the format: deadline [description] /by yyyy-MM-dd HHmm")
-                            + "\n---");
+                    ui.showLine();
+                } catch (ArrayIndexOutOfBoundsException|DateTimeParseException ex) {
+                    ui.showLine();
+                    System.out.println(new DukeException("pls specify the description and deadline for this task!\n" +
+                            "use the format: deadline [description] /by yyyy-MM-dd HHmm"));
+                    ui.showLine();
                 }
                 break;
             case "event":
                 try {
-                    String eventFromStr = getEventFrom(userInput);
+                    String eventFromStr = parser.getEventFrom(userInput);
                     String[] splitFrom = eventFromStr.split(" ");
                     LocalDate eventFromDate = LocalDate.parse(splitFrom[0]);
                     Optional<LocalTime> eventFromTime;
@@ -214,7 +165,7 @@ public class Duke {
                         eventFromTime = Optional.empty();
                     }
 
-                    String eventToStr = getEventTo(userInput);
+                    String eventToStr = parser.getEventTo(userInput);
                     String[] splitTo = eventToStr.split(" ");
                     LocalDate eventToDate = LocalDate.parse(splitTo[0]);
                     Optional<LocalTime> eventToTime;
@@ -226,39 +177,47 @@ public class Duke {
                         eventToTime = Optional.empty();
                     }
 
-                    Event newEvent = new Event(getEventDesc(userInput),
-                            getEventFrom(userInput), getEventTo(userInput));
+                    Event newEvent = new Event(parser.getEventDesc(userInput),
+                            parser.getEventFrom(userInput), parser.getEventTo(userInput));
                     tasks = tasks.add(newEvent);
-                    System.out.println("---\ni've added this event:\n" + newEvent);
+                    ui.showLine();
+                    System.out.println("i've added this event:\n" + newEvent);
                     if (tasks.size() == 1) {
-                        System.out.println("you have 1 task in the list\n---");
+                        System.out.println("you have 1 task in the list");
                     } else {
-                        System.out.println("you have " + tasks.size() + " tasks in the list\n---");
+                        System.out.println("you have " + tasks.size() + " tasks in the list");
                     }
-                } catch (ArrayIndexOutOfBoundsException ex) {
-                    System.out.println("---\n"
-                            + new DukeException("pls specify the description and duration for this event!\n" +
-                            "use the format: event [description] /from yyyy-MM-dd HHmm /to yyyy-MM-dd HHmm")
-                            + "\n---");
-                } catch (DateTimeParseException ex) {
-                    System.out.println("---\n"
-                            + new DukeException("pls specify the description and duration for this event!\n" +
-                            "use the format: event [description] /from yyyy-MM-dd HHmm /to yyyy-MM-dd HHmm")
-                            + "\n---");
+                    ui.showLine();
+                } catch (ArrayIndexOutOfBoundsException|DateTimeParseException ex) {
+                    ui.showLine();
+                    System.out.println(new DukeException("pls specify the description and duration for this event!\n" +
+                            "use the format: event [description] /from yyyy-MM-dd HHmm /to yyyy-MM-dd HHmm"));
+                    ui.showLine();
                 }
                 break;
             case "delete":
-                index = Integer.parseInt(getCommandDetails(userInput)) - 1;
-                System.out.println("---\ni've removed this task:\n" + tasks.get(index));
-                tasks = tasks.remove(index);
-                if (tasks.size() == 1) {
-                    System.out.println("you have 1 task in the list\n---");
-                } else {
-                    System.out.println("you have " + tasks.size() + " tasks in the list\n---");
+                try {
+                    index = Integer.parseInt(parser.getCommandDetails(userInput)) - 1;
+                    ui.showLine();
+                    System.out.println("i've removed this task:\n" + tasks.get(index));
+                    tasks = tasks.remove(index);
+                    if (tasks.size() == 1) {
+                        System.out.println("you have 1 task in the list");
+                    } else {
+                        System.out.println("you have " + tasks.size() + " tasks in the list");
+                    }
+                    ui.showLine();
+                } catch (IndexOutOfBoundsException|NumberFormatException ex) {
+                    ui.showLine();
+                    System.out.println(new DukeException("pls specify an existing task number in the task list!\n" +
+                            "use the format: delete [task number]"));
+                    ui.showLine();
                 }
                 break;
             default:
-                System.out.println("---\n" + new DukeException("invalid command") + "\n---");
+                ui.showLine();
+                System.out.println(new DukeException("invalid command"));
+                ui.showLine();
             }
             try {
                 saveTaskList(tasks.getTasks());
