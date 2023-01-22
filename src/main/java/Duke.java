@@ -25,7 +25,7 @@ public class Duke {
         scanner = new Scanner(System.in);
         isRunning = false;
         System.out.println("Hello!");
-        tasks = new TaskList("./tasks.txt");
+        tasks = new TaskList("./data/tasks.txt");
     }
 
     /**
@@ -86,7 +86,7 @@ public class Duke {
         try {
             tasks.save();
         } catch (IOException e) {
-            e.printStackTrace();
+            System.out.println("Error saving tasks to disk!");
         }
         System.out.println("Good bye!");
     }

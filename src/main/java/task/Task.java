@@ -40,5 +40,12 @@ public abstract class Task {
     public String toString() {
         return (isDone ? "[X] " : "[ ] ") + description;
     }
-    abstract String getRecreateCommand(int id);
+
+    /**
+     * Returns the command(s) required to recreate the task.
+     *
+     * @param id Identifier of the task, usually assigned by task list.
+     * @return the command(s).
+     */
+    public abstract String getRecreateCommand(int id);
 }

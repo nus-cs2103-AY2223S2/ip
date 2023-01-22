@@ -7,13 +7,24 @@ import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.Scanner;
 
-public class TaskList implements Iterable<Task> {
+/**
+ * Task List to manage tasks.
+ */
+public class TaskList {
+
+    /** ArrayList of tasks */
     private final ArrayList<Task> tasks;
+
+    /** File path to retrieve and save tasks */
     private final String filePath;
 
+    /**
+     * Constructs a new task list and populate it with tasks saved on disk.
+     *
+     * @param filePath File path to read saved tasks from.
+     */
     public TaskList(String filePath) {
         tasks = new ArrayList<>();
         this.filePath = filePath;
@@ -37,6 +48,12 @@ public class TaskList implements Iterable<Task> {
         }
     }
 
+    /**
+     * Executes a given command.
+     *
+     * @param command Command to be executed.
+     * @return The task involved in the command.
+     */
     public Task execute(Command command) {
         Task task = null;
         switch (command.getName()) {
@@ -72,11 +89,16 @@ public class TaskList implements Iterable<Task> {
         return task;
     }
 
+    /**
+     * Saves the task list to disk.
+     *
+     * @throws IOException when there is an exception when writing to file or directory.
+     */
     public void save() throws IOException {
         File file = new File(filePath);
-        FileWriter fileWriter = new FileWriter(filePath);
+        file.getParentFile().mkdirs();
+        FileWriter fileWriter = new FileWriter(file);
         for (int i = 0; i < tasks.size(); i++) {
-            System.out.println("writing");
             fileWriter.write(tasks.get(i).getRecreateCommand(i));
             fileWriter.write("\n");
         }
@@ -95,10 +117,5 @@ public class TaskList implements Iterable<Task> {
             }
         }
         return result.toString();
-    }
-
-    @Override
-    public Iterator<Task> iterator() {
-        return tasks.iterator();
     }
 }
