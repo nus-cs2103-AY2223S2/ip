@@ -1,5 +1,9 @@
 import exceptions.DukeException;
 
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.Scanner;
 
 public class Duke {
@@ -11,17 +15,29 @@ public class Duke {
                     + "| | | | | | | |/ / _ \\\n"
                     + "| |_| | |_| |   <  __/\n"
                     + "|____/ \\__,_|_|\\_\\___|\n";
+    private static final String FILE_PATH = "data/data.txt";
     private final Tasklist tasklist;
     private boolean isActive;
 
     public Duke() {
-        this.tasklist = new Tasklist();
+        Path path = Paths.get(FILE_PATH);
+        if (!Files.exists(path)) {
+            try {
+                Files.createDirectories(path.getParent());
+                Files.createFile(Paths.get(FILE_PATH));
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+        this.tasklist = new Tasklist(path);
         this.isActive = true;
         this.greet();
     }
 
     public void greet() {
-        System.out.println("Hello from\n" + LOGO + "\nWhat can I do for you?");
+        System.out.println("Hello from\n"
+                + LOGO
+                + "\nWhat can I do for you?");
     }
 
     public static void main(String[] args) {
@@ -115,7 +131,8 @@ public class Duke {
     private void unmark(String[] input) throws DukeException {
         int index = this.retrieveIndex(input);
         if (this.tasklist.unmark(index)) {
-            printOutput("I've marked this as not done yet:\n\t " + this.tasklist.get(index));
+            printOutput("I've marked this as not done yet:\n\t "
+                    + this.tasklist.get(index));
         } else {
             printOutput("The selected task has not yet been marked as done.");
         }
@@ -128,18 +145,19 @@ public class Duke {
         try {
             int index = Integer.parseInt(input[1]);
             if (index > this.tasklist.size()) {
-                throw new DukeException("Invalid task number provided. " +
-                        "Given task number is " + index +
-                        " but there are only " + this.tasklist.size() + " task(s) in the list");
+                throw new DukeException("Invalid task number provided. "
+                        + "Given task number is " + index
+                        + " but there are only " + this.tasklist.size()
+                        + " task(s) in the list");
             }
             if (index < 1) {
-                throw new DukeException("Invalid task number provided. Number cannot be less than 1.");
+                throw new DukeException("Invalid task number provided. " +
+                        "Number cannot be less than 1.");
             }
             return index - 1;
         } catch (NumberFormatException e) {
             throw new DukeException("Invalid task number provided.");
         }
-
     }
 
     private void addTask(TaskTypes type, String input, String[] delimitedInput) throws DukeException {
@@ -181,7 +199,7 @@ public class Duke {
             task = new Event(name, startDate, endDate);
             break;
         }
-        this.tasklist.addTask(task);
+        this.tasklist.addTask(task, type);
         this.printOutput(
                 "I've added the following to your list of tasks:\n\t\t" +
                         task + "\n\t You now have " + this.tasklist.size() + " task(s) in the list.");
@@ -190,7 +208,7 @@ public class Duke {
     private void deleteTask(String[] delimitedInput) throws DukeException {
         int index = retrieveIndex(delimitedInput);
         Task task = this.tasklist.deleteTask(index);
-        this.printOutput("I've removed the following from your list of tasks:\n\t\t" +
-                task + "\n\t You now have " + this.tasklist.size() + " task(s) in the list.");
+        this.printOutput("I've removed the following from your list of tasks:\n\t\t"
+                + task + "\n\t You now have " + this.tasklist.size() + " task(s) in the list.");
     }
 }
