@@ -22,9 +22,6 @@ public class Duke {
         System.out.println("---------------------------------------");
     }
 
-    // echoes strings inputted by the user
-
-
     //exits the application when "exit" is inputted
     private static void exit() {
         System.out.println("Bye. Hope to see you again soon!");
@@ -53,8 +50,8 @@ public class Duke {
                     if (split.length < 2) {
                         throw new EmptyDescException("Sorry! you can't have empty descriptions!");
                     }
-                    int item = Integer.parseInt(split[1]);
-                    Task curr = list.get(item - 1);
+                    int item = Integer.parseInt(split[1]) - 1;
+                    Task curr = list.get(item);
                     curr.setDone();
                     System.out.println(String.format("Nice, this task has been marked as done:\n %s", curr.toString()));
                     System.out.println("---------------------------------------");
@@ -110,8 +107,8 @@ public class Duke {
                     if (split.length < 2) {
                         throw new EmptyDescException("Sorry! you can't have empty descriptions!");
                     }
-                    item = Integer.parseInt(split[1]);
-                    curr = list.remove(item - 1);
+                    item = Integer.parseInt(split[1]) - 1;
+                    curr = list.remove(item);
                     System.out.println(String.format("ok, this task has been removed:\n %s", curr.toString()));
                     System.out.println(String.format("Now you have %d tasks in the list", list.size()));
                     System.out.println("---------------------------------------");
