@@ -22,45 +22,46 @@ public class Duke {
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
         PrintWriter pw = new PrintWriter(new BufferedWriter(new OutputStreamWriter(System.out)));
         StringBuilder sb = new StringBuilder();
-        boolean canRun = true;
+        boolean hasFile = true;
         String text = "";
         sb.append("    ____________________________________________________________\n")
                 .append("    Hello! I'm Duke.\n")
                 .append("    What can I do for you?\n")
                 .append("    ____________________________________________________________\n");
-        pw.println(sb.toString());  // Welcome Message bye Duke
-        pw.flush();
-        sb.setLength(0);
+        pw.println(sb.toString());  // Welcome Message by Duke
+        pw.flush(); // To force the PrintWriter to print
+        sb.setLength(0);    // Clear strings stored in StringBuilder after use
         try {
-            DukeException.folderCheck("data");
-            BufferedReader fr = new BufferedReader(new FileReader("data/storages.txt"));
+            DukeException.folderCheck("data");  // Checks if the folder exists
+            BufferedReader fr = new BufferedReader(new FileReader("data/storage.txt"));
+            // Checks if the storage file is in the right folder
         } catch (FolderNotFoundException em) {
             System.out.println(em);
-            canRun = false;
+            hasFile = false;
         } catch (FileNotFoundException e) {
             sb.append("    ____________________________________________________________\n")
                     .append("    File 'storage' cannot be found.\n")
                     .append("    Please download the latest version of Duke or create")
                     .append("\n    'storage.txt' under the folder 'data'.\n")
                     .append("    ____________________________________________________________\n");
-            pw.println(sb.toString());  // Welcome Message bye Duke
+            pw.println(sb.toString());
             pw.flush();
             sb.setLength(0);
-            canRun = false;
+            hasFile = false;
         }
         ArrayList<Task> storage2 = new ArrayList<Task>();
-        while (canRun) {
-            boolean goNext = false;
-            boolean secondaryCheck = false;
+        while (hasFile) {
+            boolean hasIssue = false;   // check if there's insufficient arguments provided by user
+            boolean isAvailable = false;    // check if user is calling a supported function provided by Duke
             text = br.readLine();
             String[] tempText = text.split(" ", 2);
             String tempCmd = tempText[0].toLowerCase();
             if ( (tempCmd.equals("mark")) || (tempCmd.equals("unmark")) || (tempCmd.equals("delete")) ||
                     (tempCmd.equals("todo")) || (tempCmd.equals("deadline")) || (tempCmd.equals("event")) ) {
-                secondaryCheck = true;
+                isAvailable = true;
             }
-            try {   // Primary Level of Checking to ensure User's Input has no issue!
-                DukeException.validate(secondaryCheck, tempCmd, tempText);
+            try {   // Primary Level Check to predetermine function called by the user and if there's required arguments
+                DukeException.validate(isAvailable, tempCmd, tempText);
             } catch (IncorrectNoOfArgumentException ex) {
                 System.out.println(ex);
                 continue;
@@ -134,7 +135,7 @@ public class Duke {
                         DukeException.validate(true, tempCmd, tempText2);
                     } catch (IncorrectNoOfArgumentException ex) {
                         System.out.println(ex);
-                        goNext = true;
+                        hasIssue = true;
                         break;
                     }
                     newTask = new Deadline(tempText2[0], tempText2[1]);
@@ -145,7 +146,7 @@ public class Duke {
                         DukeException.validate(true, tempCmd, tempText3);
                     } catch (IncorrectNoOfArgumentException ex) {
                         System.out.println(ex);
-                        goNext = true;
+                        hasIssue = true;
                         break;
                     }
                     String[] tempText4 = tempText3[1].split("/to", 2);
@@ -153,7 +154,7 @@ public class Duke {
                         DukeException.validate(true, tempCmd, tempText4);
                     } catch (IncorrectNoOfArgumentException ex) {
                         System.out.println(ex);
-                        goNext = true;
+                        hasIssue = true;
                         break;
                     }
                     newTask = new Event(tempText3[0], tempText4[0], tempText4[1]);
@@ -163,11 +164,11 @@ public class Duke {
                         DukeException.validate2();
                     } catch (InvalidCommandException ex) {
                         System.out.println(ex);
-                        goNext = true;
+                        hasIssue = true;
                         break;
                     }
                 }
-                if (!goNext) {
+                if (!hasIssue) {
                     storage2.add(newTask);
                 }
                 sb.append("    ____________________________________________________________\n")
@@ -176,14 +177,14 @@ public class Duke {
                         .append("\n    Now you have ").append(storage2.size()).append(" tasks in the list.\n")
                         .append("    ____________________________________________________________\n");
             }
-            if (goNext) {
+            if (hasIssue) {
                 sb.setLength(0);
                 continue;
             }
             pw.println(sb.toString());
             pw.flush();
             sb.setLength(0);
-            if (tempText[0].equalsIgnoreCase("bye")) {
+            if (tempCmd.equals("bye")) {    // Terminate the program as desired by user
                 break;
             }
         }
