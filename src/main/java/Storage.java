@@ -5,7 +5,7 @@ import java.io.File;
 import java.util.Scanner;
 import java.io.FileWriter;
 
-public class SaveFile {
+public class Storage {
 
     public ArrayList<Task> loadTaskList() {
         File dukeSave = new File("data/duke.txt");

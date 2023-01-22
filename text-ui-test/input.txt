@@ -1,8 +1,8 @@
 list
 lis
 todo Eat
-deadline Sleep /by tonight
-event Rave /from now /to tomorrow
+deadline Sleep /by 2023/11/12 18:47
+event Rave /from 2024/04/15 15:45 /to tomorrow
 list
 mark 1
 mark 3

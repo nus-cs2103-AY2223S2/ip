@@ -12,10 +12,14 @@ public class Event extends Task{
         this.to = to;
         try {
             this.fromDateTime = LocalDateTime.parse(from, DateTimeFormatter.ofPattern("yyyy/MM/dd HH:mm"));
-            this.toDateTime = LocalDateTime.parse(to, DateTimeFormatter.ofPattern("yyyy/MM/dd HH:mm"));
         }
         catch (DateTimeParseException err) {
             this.fromDateTime = null;
+        }
+        try {
+            this.toDateTime = LocalDateTime.parse(to, DateTimeFormatter.ofPattern("yyyy/MM/dd HH:mm"));
+        }
+        catch (DateTimeParseException err) {
             this.toDateTime = null;
         }
     }

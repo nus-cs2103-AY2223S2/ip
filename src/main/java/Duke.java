@@ -8,7 +8,7 @@ public class Duke {
     public static void main(String[] args) {
 
         Ui ui = new Ui();
-        SaveFile dukeSave = new SaveFile();
+        Storage dukeSave = new Storage();
         ArrayList<Task> TaskList = dukeSave.loadTaskList();
         Scanner UserScan = new Scanner(System.in);
 
