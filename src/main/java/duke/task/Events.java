@@ -5,6 +5,9 @@ import duke.task.Task;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
+/**
+ * A class of events that encapsulates the event object created by event command
+ */
 public class Events extends Task {
 
     protected LocalDateTime startTime;

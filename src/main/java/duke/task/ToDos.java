@@ -2,6 +2,9 @@ package duke.task;
 
 import duke.task.Task;
 
+/**
+ * A todo class for the todo command
+ */
 public class ToDos extends Task {
     /**
      * A constructor to create a todo object

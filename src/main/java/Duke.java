@@ -6,8 +6,10 @@ import duke.task.*;
 import duke.command.*;
 
 
+
 /**
  * Main Duke class which keep track a list of tasks
+
  */
 class Duke {
 
@@ -17,7 +19,6 @@ class Duke {
 
     /**
      * Duke constructor that creates a new list with the specified input file directory
-     *
      * @param filePath a file location that has all the commands to Duke
      */
     public Duke(String filePath) {
@@ -31,6 +32,9 @@ class Duke {
         }
     }
 
+    /**
+     * Main Program that reads the commands and processes them onto DUKE
+     */
     public void run() {
         ui.showWelcome();
         boolean isExit = false;
