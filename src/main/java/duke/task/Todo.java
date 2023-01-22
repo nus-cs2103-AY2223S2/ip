@@ -6,28 +6,28 @@ package duke.task;
 public class Todo extends Task {
 
     /**
-     * @see Task#Task()
+     * Constructor
      */
     public Todo(String title) {
         this(title, false);
     }
 
     /**
-     * @see Task#Task(String title, boolean isDone)
+     * Constructor with predefined done state
      */
     public Todo(String title, boolean isDone) {
         super(title, isDone);
     }
 
     /**
-     * @see Task#toCsv()
+     * {@inheritDoc}
      */
     public String toCsv() {
         return "T," + super.toCsv() + ",,";
     }
 
     /**
-     * @see Task#toString()
+     * {@inheritDoc}
      */
     @Override
     public String toString() {

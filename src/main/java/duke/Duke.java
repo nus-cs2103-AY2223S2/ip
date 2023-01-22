@@ -34,6 +34,14 @@ public class Duke {
     }
 
     /**
+     * Constructor for testing
+     */
+    Duke(InputStream in, PrintStream out) {
+        db = new DukeRepoImpl();
+        ui = new Ui(in, out);
+    }
+
+    /**
      * Starts an interative console session with duke agent.
      */
     public void run() {
