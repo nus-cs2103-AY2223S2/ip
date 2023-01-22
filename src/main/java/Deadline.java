@@ -1,18 +1,21 @@
+/**
+ * A deadline class extends from the Task.
+ * It has a deadline attribute on top of the task.
+ */
 public class Deadline extends Task {
     protected String type;
-    protected String time;
+    protected String deadline;
 
-    public Deadline(String name, String time) {
-        super(name);
-        this.time = time;
-        this.type = "D";
-    }
-
+    /***
+     *
+     * @param description: the content of the user command
+     * @throws DukeException when the command is incomplete
+     */
     public Deadline(String description) throws DukeException {
         super();
         int indexOfBy = description.indexOf("/by");
         try {
-            this.time = description.substring(indexOfBy + "/by ".length());
+            this.deadline = description.substring(indexOfBy + "/by ".length());
             this.name = description.substring(0, indexOfBy - " ".length());
         } catch (StringIndexOutOfBoundsException e) {
             throw new DukeException("The command argument is not complete.");
@@ -20,12 +23,12 @@ public class Deadline extends Task {
         this.type = "D";
     }
 
-    public static String parseTime(String s) {
-        return s.substring(s.indexOf("/by") + "/by ".length());
-    }
-
+    /**
+     * Returns the string representation
+     * @return string representation of a deadline task, where the deadline is specified
+     */
     @Override
     public String toString() {
-        return String.format("[%s]%s (by: %s)", this.type, super.toString(), this.time);
+        return String.format("[%s]%s (by: %s)", this.type, super.toString(), this.deadline);
     }
 }

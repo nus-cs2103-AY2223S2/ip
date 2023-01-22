@@ -10,6 +10,11 @@ import java.io.FileWriter;
 import java.util.Scanner;
 
 
+/**
+ * Duke is the class that responds to user enquiry
+ * It performs processing user-input commands, recording, as well as
+ * carrying out actual operations.
+ */
 public class Duke {
     protected final String RECORD_DIR = "./data";
     protected final String RECORD_NAME = "/duke.txt";
@@ -17,6 +22,9 @@ public class Duke {
     protected final String myName;
     protected final ArrayList<String> commandList = new ArrayList<>();
 
+    /**
+     * Constructor
+     */
     public Duke() {
         this.myName = "Duke";
         loadUpRecordIfExists(getRecordPath());
@@ -26,7 +34,7 @@ public class Duke {
      * Returns whether the input string is of the specified command type
      * @param string: the input string from the user
      * @param command: a candidate command to check against
-     * @return: whether the input string is of the specified command type
+     * @return whether the input string is of the specified command type
      */
     public boolean checkCommand(String string, Command command) {
         boolean isCommand = false;
@@ -176,24 +184,43 @@ public class Duke {
                 task, tasks.size());
     }
 
+    /**
+     * Mark a task as done
+     * @param idx: index of the task
+     * @return the string message to print out
+     */
     public String markTaskDone(int idx) {
         Task t = this.tasks.get(idx);
         t.markDone();
         return String.format("Nice! I've marked this task as done:\n  %s", t);
     }
 
+    /**
+     * Mark a task as undone
+     * @param idx: index of the task
+     * @return the string message to print out
+     */
     public String unmarkTaskDone(int idx) {
         Task t = this.tasks.get(idx);
         t.unmarkDone();
         return String.format("OK, I've marked this task as not done yet:\n  %s", t);
     }
 
+    /**
+     * Delete a task
+     * @param idx: the index of the task
+     * @return the string message to print out
+     */
     public String deleteTask(int idx) {
         Task t = tasks.get(idx);
         tasks.remove(idx);
         return String.format("Noted. I've removed this task:\n  %s\nNow you have %d tasks in the list.", t, tasks.size());
     }
 
+    /**
+     * Obtain the path to the record path
+     * @return the path to the record
+     */
     private String getRecordPath() {
         return this.RECORD_DIR + "/" + this.RECORD_NAME;
     }
@@ -206,6 +233,10 @@ public class Duke {
         commandList.add(string);
     }
 
+    /**
+     * Get the string containing all commands
+     * @return the string containing all commands
+     */
     public String getCommandListString() {
         String string = "";
         for (String s: commandList) {
@@ -218,8 +249,7 @@ public class Duke {
      * Saves the list of tasks to a file
      * @param path: the path of the file to save to
      */
-    public void saveToFile(String path) throws DukeException {
-        // String taskListString = this.getTaskListString(false); // no index for file
+    public void saveToFile(String path) {
         // https://www.w3schools.com/java/java_files_create.asp
         try {
             // create the directory and the record file
@@ -237,7 +267,7 @@ public class Duke {
             myWriter.write(commandListString);
             myWriter.close();
         } catch (IOException e) {
-            System.out.println("An error occurred.");
+            System.out.println("An error occurred while saving record.");
             e.printStackTrace();
         }
     }
@@ -247,8 +277,8 @@ public class Duke {
      * @param path: path to the record file
      */
     public void loadUpRecordIfExists(String path) {
-        String recordPath = getRecordPath();
-        File file = new File(recordPath);
+        // check if file exists
+        File file = new File(path);
         if (!file.exists()) {
             return;
         }
@@ -256,17 +286,17 @@ public class Duke {
         // read the file
         try {
             Scanner myReader = new Scanner(file);
-
             while (myReader.hasNextLine()) {
                 String data = myReader.nextLine();
+                addCommandList(data);
                 handleCommand(data, true);
             }
             myReader.close();
         } catch (FileNotFoundException e) {
-            System.out.println("An error occurred.");
+            System.out.println("An error occurred while loading up record. ");
             e.printStackTrace();
         } catch (DukeException e) {
-            ;
+            System.out.println(e);
         }
     }
 }
