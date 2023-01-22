@@ -1,10 +1,13 @@
 package Tasks;
 
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+
 /**
  * Represents the Deadline class
  */
 public class Deadline extends Task{
-    protected String time;
+    protected LocalDateTime time;
 
     /**
      * Constructor of Deadline
@@ -12,7 +15,7 @@ public class Deadline extends Task{
      * @param time the time
      * @param done whether the task is done
      */
-    public Deadline(String desc, String time, boolean done) {
+    public Deadline(String desc, LocalDateTime time, boolean done) {
         super(done, desc);
         this.time = time;
     }
@@ -54,6 +57,6 @@ public class Deadline extends Task{
      */
     @Override
     public String toString() {
-        return "[D]" + super.toString() + " (by: " + this.time + ")";
+        return "[D]" + super.toString() + " (by: " + time.format(DateTimeFormatter.ofPattern("MMM dd yyyy HH:mm")) + ")";
     }
 }

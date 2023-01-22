@@ -1,12 +1,14 @@
 package Tasks;
 
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 
 /**
  * Represents the Event class
  */
 public class Event extends Task {
-    protected String startTime;
-    protected String endTime;
+    protected LocalDateTime startTime;
+    protected LocalDateTime endTime;
 
     /**
      * The constructor of Event
@@ -15,7 +17,7 @@ public class Event extends Task {
      * @param endTime the end time of event
      * @param done whether the event is done
      */
-    public Event(String desc, String startTime, String endTime, boolean done) {
+    public Event(String desc, LocalDateTime startTime, LocalDateTime endTime, boolean done) {
         super(done, desc);
         this.startTime = startTime;
         this.endTime = endTime;
