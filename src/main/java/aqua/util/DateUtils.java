@@ -16,12 +16,12 @@ public class DateUtils {
                 if (dateString.matches("\\d{4}-\\d{1,2}-\\d{1,2} \\d{4}")) {
                     return LocalDateTime.parse(
                         dateString,
-                        DateTimeFormatter.ofPattern("yyyy-M-d kkmm")
+                        DateTimeFormatter.ofPattern("yyyy-M-d HHmm")
                     );
                 } else if (dateString.matches("\\d{4}-\\d{1,2}-\\d{1,2}")) {
                     return LocalDateTime.parse(
                         dateString + " 0000",
-                        DateTimeFormatter.ofPattern("yyyy-M-d kkmm")
+                        DateTimeFormatter.ofPattern("yyyy-M-d HHmm")
                     );
                 }
             } catch (DateTimeParseException ex) {
