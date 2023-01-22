@@ -13,12 +13,12 @@ What can I do for you?
 	____________________________________________________________
 	____________________________________________________________
 	 I've added the following to your list of tasks:
-		[D][ ] homework (by: tomorrow)
+		[D][ ] homework (by: 2 Feb 2022)
 	 You now have 2 task(s) in the list.
 	____________________________________________________________
 	____________________________________________________________
 	 I've added the following to your list of tasks:
-		[E][ ] team meeting (from: 10pm to: 11pm)
+		[E][ ] team meeting (from: 1 Jan 2023 to: 6 Apr 2023)
 	 You now have 3 task(s) in the list.
 	____________________________________________________________
 	____________________________________________________________
@@ -48,17 +48,17 @@ What can I do for you?
 	____________________________________________________________
 	____________________________________________________________
 	 I've marked this as done:
-	 [D][X] homework (by: tomorrow)
+	 [D][X] homework (by: 2 Feb 2022)
 	____________________________________________________________
 	____________________________________________________________
 	 I've marked this as not done yet:
-	 [D][ ] homework (by: tomorrow)
+	 [D][ ] homework (by: 2 Feb 2022)
 	____________________________________________________________
 	____________________________________________________________
 	 Here is a list of your tasks:
 	 1.[T][X] read book
-	 2.[D][ ] homework (by: tomorrow)
-	 3.[E][ ] team meeting (from: 10pm to: 11pm)
+	 2.[D][ ] homework (by: 2 Feb 2022)
+	 3.[E][ ] team meeting (from: 1 Jan 2023 to: 6 Apr 2023)
 	____________________________________________________________
 	____________________________________________________________
 	 Invalid description provided. The description of a task cannot be empty.
@@ -82,6 +82,12 @@ What can I do for you?
 	 Please provide a valid start and end date.
 	____________________________________________________________
 	____________________________________________________________
+	 Please provide the deadline in the following format: YYYY-MM-DD.
+	____________________________________________________________
+	____________________________________________________________
+	 Please provide the dates in the following format: YYYY-MM-DD.
+	____________________________________________________________
+	____________________________________________________________
 	 Please provide a task number.
 	____________________________________________________________
 	____________________________________________________________
@@ -91,12 +97,12 @@ What can I do for you?
 	____________________________________________________________
 	____________________________________________________________
 	 Here is a list of your tasks:
-	 1.[D][ ] homework (by: tomorrow)
-	 2.[E][ ] team meeting (from: 10pm to: 11pm)
+	 1.[D][ ] homework (by: 2 Feb 2022)
+	 2.[E][ ] team meeting (from: 1 Jan 2023 to: 6 Apr 2023)
 	____________________________________________________________
 	____________________________________________________________
 	 I've removed the following from your list of tasks:
-		[E][ ] team meeting (from: 10pm to: 11pm)
+		[E][ ] team meeting (from: 1 Jan 2023 to: 6 Apr 2023)
 	 You now have 1 task(s) in the list.
 	____________________________________________________________
 	____________________________________________________________

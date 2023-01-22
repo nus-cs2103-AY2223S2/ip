@@ -3,6 +3,8 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.StandardOpenOption;
 
+import java.time.LocalDate;
+
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -31,10 +33,10 @@ public class Tasklist {
                 t = new Todo(task[2]);
                 break;
             case "D":
-                t = new Deadline(task[2], task[3]);
+                t = new Deadline(task[2], LocalDate.parse(task[3]));
                 break;
             case "E":
-                t = new Event(task[2], task[3], task[4]);
+                t = new Event(task[2], LocalDate.parse(task[3]), LocalDate.parse(task[4]));
                 break;
             default:
                 throw new IllegalStateException("Unexpected value: " + type);
