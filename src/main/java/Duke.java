@@ -18,6 +18,7 @@ public class Duke {
             }
             if (str.equals("list")) {
                 recite(list);
+                continue;
             }
 
             switch (getSwitch(str)) {
@@ -87,6 +88,20 @@ public class Duke {
                             + " tasks in the list.");
                     break;
                 case 5:
+                    int nD;
+                    Task tD;
+                    String numD;
+                    numD = str.substring(7);
+                    nD = Integer.parseInt(numD) - 1;
+                    tD = list.get(nD);
+                    list.remove(nD);
+                    System.out.println("Noted. I've removed this task:\n  "
+                            + tD.toString()
+                            + "\nNow you have " + list.size()
+                            + " tasks in the list.");
+                    break;
+
+                case 6:
                     System.out.println("☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
 
             }
@@ -106,6 +121,7 @@ public class Duke {
         if (str.startsWith("todo ")) return 2;
         if (str.startsWith("deadline ")) return 3;
         if (str.startsWith("event ")) return 4;
-        return 5;
+        if (str.startsWith("delete ")) return 5;
+        return 6;
     }
 }
