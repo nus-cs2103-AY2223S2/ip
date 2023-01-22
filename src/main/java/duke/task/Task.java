@@ -1,3 +1,8 @@
+package duke.task;
+
+import duke.enums.Views;
+import duke.DukeException;
+
 public abstract class Task {
     private String title;
     private boolean done = false;
@@ -17,11 +22,11 @@ public abstract class Task {
         this.done = done;
     }
 
-    void markAsDone() {
+    public void markAsDone() {
         this.done = true;
     }
 
-    void unmarkAsDone() {
+    public void unmarkAsDone() {
         this.done = false;
     }
 

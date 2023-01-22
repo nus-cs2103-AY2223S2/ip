@@ -1,4 +1,20 @@
+package duke;
+
 import java.util.regex.Pattern;
+
+import duke.command.Command;
+import duke.command.ClearCommand;
+import duke.command.DeadlineCommand;
+import duke.command.DeleteCommand;
+import duke.command.EventCommand;
+import duke.command.ExitCommand;
+import duke.command.ListCommand;
+import duke.command.MarkCommand;
+import duke.command.TodoCommand;
+import duke.command.UnmarkCommand;
+import duke.enums.Commands;
+import duke.enums.Views;
+
 import java.util.regex.Matcher;
 
 public class Parser {

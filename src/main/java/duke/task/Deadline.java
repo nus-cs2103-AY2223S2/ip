@@ -1,9 +1,14 @@
+package duke.task;
+
 import java.time.LocalDateTime;
+
+import Views;
+import duke.DukeException;
 
 public class Deadline extends Task {
     protected LocalDateTime by;
 
-    Deadline(String title, String by) throws DukeException {
+    public Deadline(String title, String by) throws DukeException {
         super(title);
         try {
             this.by = LocalDateTime.parse(by.replace("/by", "").trim());
@@ -12,7 +17,7 @@ public class Deadline extends Task {
         }
     }
 
-    Deadline(String title, String by, boolean done) throws DukeException {
+    public Deadline(String title, String by, boolean done) throws DukeException {
         super(title, done);
         try {
             this.by = LocalDateTime.parse(by.replace("/by", "").trim());

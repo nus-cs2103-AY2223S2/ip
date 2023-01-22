@@ -1,10 +1,15 @@
+package duke.task;
+
 import java.time.LocalDateTime;
+
+import duke.DukeException;
+import duke.enums.Views;
 
 public class Event extends Task {
     protected LocalDateTime from;
     protected LocalDateTime to;
 
-    Event(String title, String from, String to) throws DukeException {
+    public Event(String title, String from, String to) throws DukeException {
         super(title);
         try {
             this.from = LocalDateTime.parse(from.replace("/from", "").trim());
@@ -17,7 +22,7 @@ public class Event extends Task {
         }
     }
 
-    Event(String title, String from, String to, boolean done) throws DukeException {
+    public Event(String title, String from, String to, boolean done) throws DukeException {
         super(title, done);
         try {
             this.from = LocalDateTime.parse(from.replace("/from", "").trim());

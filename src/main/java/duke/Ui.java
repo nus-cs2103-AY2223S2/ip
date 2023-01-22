@@ -1,4 +1,9 @@
+package duke;
+
 import java.util.Scanner;
+
+import duke.task.Task;
+import duke.enums.Views;
 
 public class Ui {
     Scanner sc = new Scanner(System.in);
