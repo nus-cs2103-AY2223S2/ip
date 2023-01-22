@@ -23,13 +23,14 @@ public class Duke {
         Scanner scanner = new Scanner(System.in);
         String answer = scanner.nextLine();
         if (answer.equals("bye")) {
-            System.out.println("Byebye see you again!");
+            System.out.println("Byebye CATch you later!");
             return;
         }
         if (answer.equals("list")) {
             list(arrayList);
             return;
         }
+
         if (answer.startsWith("mark ")) {
             int index = Integer.valueOf(answer.substring(5, answer.length()));
             arrayList.get(index - 1).markAsDone();
@@ -44,10 +45,27 @@ public class Duke {
             echo(arrayList);
             return;
         }
-            System.out.println("added: " + answer);
-            Task t = new Task(answer);
-            arrayList.add(t);
-            echo(arrayList);
+        Task t = null;
+        if (answer.startsWith("todo ")) {
+            t = new Todo(answer.substring(5, answer.length()));
+        }
+        if (answer.startsWith("deadline ")) {
+            System.out.println("By when?");
+            String by = scanner.nextLine();
+            t = new Deadline(answer.substring(9, answer.length()), by);
+        }
+        if (answer.startsWith("event ")) {
+            System.out.println("From?");
+            String from = scanner.nextLine();
+            System.out.println("To?");
+            String to = scanner.nextLine();
+            t = new Event(answer.substring(6, answer.length()), from, to);
+        }
+        System.out.println("Meow! Just added: \n" + t);
+        arrayList.add(t);
+
+
+        echo(arrayList);
     }
 
     public static void list(ArrayList<Task> arrayList) {
@@ -56,4 +74,5 @@ public class Duke {
         }
         echo(arrayList);
     }
+
 }
