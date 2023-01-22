@@ -1,3 +1,5 @@
+package duke.exception;
+
 public abstract class DukeException extends Exception {
 
     public DukeException(String msg) {
@@ -8,11 +10,7 @@ public abstract class DukeException extends Exception {
 
     @Override
     public String toString() {
-        String s = String.format(
-            "%s: %s",
-            this.getExceptionName(),
-            super.getMessage()
-        );
+        String s = String.format("%s: %s", this.getExceptionName(), super.getMessage());
         return s;
     }
 }

@@ -1,4 +1,6 @@
-class UnknownCommandException extends DukeException {
+package duke.exception;
+
+public class UnknownCommandException extends DukeException {
 
     public UnknownCommandException(String cmd) {
         super(cmd);

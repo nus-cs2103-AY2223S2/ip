@@ -1,3 +1,11 @@
+package duke.command;
+
+import duke.TaskList;
+import duke.Ui;
+import duke.exception.DukeException;
+import duke.task.Deadline;
+import duke.task.Task;
+
 public class DeadlineCommand extends Command {
 
     private final String NAME = "deadline";
@@ -14,4 +22,5 @@ public class DeadlineCommand extends Command {
         Task task = new Deadline(this.title, this.deadline);
         taskList.addTask(task);
     }
+
 }

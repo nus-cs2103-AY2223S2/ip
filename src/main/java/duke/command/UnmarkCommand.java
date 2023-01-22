@@ -1,3 +1,9 @@
+package duke.command;
+
+import duke.TaskList;
+import duke.Ui;
+import duke.exception.DukeException;
+
 public class UnmarkCommand extends Command {
 
     private final String NAME = "unmark";

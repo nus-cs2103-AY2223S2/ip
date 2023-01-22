@@ -1,3 +1,11 @@
+package duke.command;
+
+import duke.TaskList;
+import duke.Ui;
+import duke.exception.DukeException;
+import duke.task.Task;
+import duke.task.ToDo;
+
 public class ToDoCommand extends Command {
 
     private final String NAME = "todo";

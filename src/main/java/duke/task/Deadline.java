@@ -1,3 +1,5 @@
+package duke.task;
+
 public class Deadline extends Task {
 
     private String deadline;
@@ -14,11 +16,7 @@ public class Deadline extends Task {
 
     @Override
     public String toString() {
-        String s = String.format(
-            "%s (by: %s)",
-            super.toString(),
-            this.deadline
-        );
+        String s = String.format("%s (by: %s)", super.toString(), this.deadline);
         return s;
     }
 }

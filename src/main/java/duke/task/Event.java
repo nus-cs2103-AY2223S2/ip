@@ -1,3 +1,5 @@
+package duke.task;
+
 public class Event extends Task {
 
     private String start;
@@ -16,12 +18,7 @@ public class Event extends Task {
 
     @Override
     public String toString() {
-        String s = String.format(
-            "%s (from: %s to: %s)",
-            super.toString(),
-            this.start,
-            this.end
-        );
+        String s = String.format("%s (from: %s to: %s)", super.toString(), this.start, this.end);
         return s;
     }
 }

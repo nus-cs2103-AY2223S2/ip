@@ -1,3 +1,5 @@
+package duke.task;
+
 public abstract class Task {
 
     private boolean isDone;
@@ -24,12 +26,7 @@ public abstract class Task {
 
     @Override
     public String toString() {
-        String s = String.format(
-            "[%s][%s] %s",
-            this.getTaskType(),
-            this.getStatusIcon(),
-            this.name
-        );
+        String s = String.format("[%s][%s] %s", this.getTaskType(), this.getStatusIcon(), this.name);
         return s;
     }
 }

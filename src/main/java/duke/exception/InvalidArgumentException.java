@@ -1,4 +1,6 @@
-class InvalidArgumentException extends DukeException {
+package duke.exception;
+
+public class InvalidArgumentException extends DukeException {
     private String command;
 
     public InvalidArgumentException(String command) {

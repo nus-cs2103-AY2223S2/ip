@@ -1,4 +1,7 @@
+package duke;
+
 import java.util.ArrayList;
+import duke.task.Task;
 
 public class TaskList {
 
@@ -28,9 +31,7 @@ public class TaskList {
         this.list.add(task);
         this.ui.addToMessage("Got it. I've added this task:");
         this.ui.addToMessage(task.toString());
-        this.ui.addToMessage(
-                String.format("Now you have %d tasks in the list.", list.size())
-            );
+        this.ui.addToMessage(String.format("Now you have %d tasks in the list.", list.size()));
     }
 
     public void deleteTask(int index) {
@@ -47,11 +48,7 @@ public class TaskList {
             this.ui.addToMessage("Here are the tasks in your list:");
             for (int i = 0; i < this.list.size(); i++) {
                 Task currentTask = this.list.get(i);
-                String s = String.format(
-                    "%d: %s",
-                    i + 1,
-                    currentTask.toString()
-                );
+                String s = String.format("%d: %s", i + 1, currentTask.toString());
                 this.ui.addToMessage(s);
             }
         }
