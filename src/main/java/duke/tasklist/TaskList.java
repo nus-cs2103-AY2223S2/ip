@@ -89,6 +89,7 @@ public class TaskList {
 
     /**
      * Returns the number of tasks in the task list.
+     * 
      * @return int The number of tasks in the task list.
      */
     public int size() {
