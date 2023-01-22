@@ -13,7 +13,9 @@ import duke.Task.Event;
 import duke.Task.Todo;
 import duke.TaskList.TaskList;
 import duke.Ui.Ui;
-
+/**
+ * TaskCommand class that implements the Command interface.
+ */
 public class TaskCommand implements Command {
 
     private Character taskType;
@@ -24,6 +26,15 @@ public class TaskCommand implements Command {
         this.fullCommand = fullCommand;
     }
 
+    
+    /** 
+     * Adds a task to the task list depending on what type of task it is.
+     * 
+     * @param tasks The current task list.
+     * @param ui The ui object that handles printing to the user.
+     * @param storage The storage object that handles saving to the data file.
+     * @throws DukeException If there is an exception due to invalid input or the task list is full.
+     */
     @Override
     public void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
         if (tasks.size() >= 100)
@@ -82,7 +93,7 @@ public class TaskCommand implements Command {
         return false;
     }
 
-    private static LocalDateTime storeDateTime(String dateTimeString) throws DateTimeParseException {
+    private LocalDateTime storeDateTime(String dateTimeString) throws DateTimeParseException {
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy HHmm");
         return LocalDateTime.parse(dateTimeString, formatter);
     }

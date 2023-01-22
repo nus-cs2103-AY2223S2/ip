@@ -16,7 +16,9 @@ import duke.Task.Deadline;
 import duke.Task.Event;
 import duke.Task.Task;
 import duke.Task.Todo;
-
+/**
+ * Storage class that handles the loading and saving of tasks.
+ */
 public class Storage {
     private Path filePath;
 
@@ -24,6 +26,13 @@ public class Storage {
         this.filePath = Paths.get(filePath);
     }
 
+    
+    /** 
+     * Loads the tasks from the data file into the task list.
+     * 
+     * @return ArrayList<Task> Returns an ArrayList containing the tasks from the data file.
+     * @throws DukeException If the data file could not be found.
+     */
     public ArrayList<Task> loadTasks() throws DukeException {
         File file = this.filePath.toFile();
         if (!file.exists()) {
@@ -58,6 +67,13 @@ public class Storage {
         return loadedList;
     }
 
+    
+    /** 
+     * Saves the tasks in the tasklist into the data file.
+     * 
+     * @param tasks The task list converted to an ArrayList to be saved.
+     * @throws DukeException If the data file could not be found or there was an error creating the data file.
+     */
     public void saveTasks(ArrayList<Task> tasks) throws DukeException {
         File file = filePath.toFile();
         if (!file.exists()) {

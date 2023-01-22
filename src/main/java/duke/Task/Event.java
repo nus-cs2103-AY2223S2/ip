@@ -2,7 +2,9 @@ package duke.Task;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
-
+/**
+ * Event class that extends Task class.
+ */
 public class Event extends Task {
 
     private LocalDateTime from;
@@ -22,7 +24,7 @@ public class Event extends Task {
         return to;
     }
 
-    public String parseDateTime(LocalDateTime dateTime) {
+    private String parseDateTime(LocalDateTime dateTime) {
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("MMM dd yyyy hh:mma");
         return dateTime.format(formatter);
     }
