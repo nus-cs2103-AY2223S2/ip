@@ -20,7 +20,7 @@ public abstract class Task {
     }
 
     /**
-     * Get icon representing the 'done' status of this Task.
+     * Gets icon representing the 'done' status of this Task.
      * @return the 'done' status icon
      */
     public String getStatusIcon() {
@@ -28,21 +28,29 @@ public abstract class Task {
     }
 
     /**
-     * Mark this task as done.
+     * Marks this task as done.
      */
     public void markDone() {
         this.isDone = true;
     }
 
     /**
-     * Mark this task as not done
+     * Marks this task as not done
      */
     public void markNotDone() {
         this.isDone = false;
     }
 
+    /**
+     * Gets the formatted string representing this task to be saved to the local file.
+     * @return The formatted string.
+     */
     public abstract String getSavedFormat();
 
+    /**
+     * Gets the string representation of this task to be displayed on the Ui.
+     * @return The string representation of this task.
+     */
     @Override
     public String toString() {
         return "[" + this.getStatusIcon() + "] " + this.description;

@@ -18,12 +18,16 @@ import java.util.Scanner;
 public class Storage {
     private Path filePath;
 
+    /**
+     * Constructor for Storage.
+     * @param filePath The path of the local file where tasks are stored from the previous session.
+     */
     public Storage(Path filePath) {
         this.filePath = filePath;
     }
 
     /**
-     * Loads the saved tasks from local file into the list.
+     * Retrieves saved tasks from local file.
      * @return The list of tasks stored in the local file.
      * @throws DukeException If the directory that stores the tasks data does not exist.
      */
@@ -80,6 +84,7 @@ public class Storage {
 
     /**
      * Saves the current tasks from the task list into local file.
+     * @param taskList The latest updated task list of the current chat session.
      * @throws DukeException If the directory that stores the tasks data does not exist.
      */
     public void save(TaskList taskList) throws DukeException {

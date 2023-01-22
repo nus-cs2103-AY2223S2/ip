@@ -25,12 +25,20 @@ public class Event extends Task {
         this.to = to;
     }
 
+    /**
+     * Gets the formatted string representing this task to be saved to the local file.
+     * @return The formatted string.
+     */
     @Override
     public String getSavedFormat() {
         return "E | " + (this.isDone ? "1" : "0") + " | " + this.description + " | "
                 + Parser.dePrettifyDateTime(this.from) + " | " + Parser.dePrettifyDateTime(this.to);
     }
 
+    /**
+     * Gets the string representation of this task to be displayed on the Ui.
+     * @return The string representation of this task.
+     */
     @Override
     public String toString() {
         return "[E]" + super.toString() + " (from: " + Parser.prettifyDateTime(this.from)
