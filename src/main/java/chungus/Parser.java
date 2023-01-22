@@ -58,7 +58,7 @@ class Parser {
             }
             case "unmark": {
                 int idx = getTaskNumberArg(args[1]) - 1;
-                return Handlers.mark(idx);
+                return Handlers.unmark(idx);
             }
             default: {
                 return Handlers.unknown(args[0]);
