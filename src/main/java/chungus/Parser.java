@@ -11,9 +11,10 @@ import java.util.regex.Pattern;
  * dispatch them to appropriate handlers.
  */
 class Parser {
-    private static final Pattern deadlinePattern = Pattern.compile("^deadline\\s+(.+)\\s+/by\\s+(.+)$");
-    private static final Pattern eventPattern = Pattern.compile("^event\\s+(.+)\\s+/from\\s+(.+)\\s+/to\\s+(.+)$");
-    private static final DateTimeFormatter dateTimeFmt = DateTimeFormatter.ofPattern("dd/MM/yyyy HHmm");
+    private static final Pattern DEADLINE_PATTERN = Pattern.compile("^deadline\\s+(.+)\\s+/by\\s+(.+)$");
+    private static final Pattern EVENT_PATTERN = Pattern.compile("^event\\s+(.+)\\s+/from\\s+(.+)\\s+/to\\s+(.+)$");
+
+    private static final DateTimeFormatter DATETIME_FMT = DateTimeFormatter.ofPattern("dd/MM/yyyy HHmm");
 
     /**
      * Parses a command, and selects a suitable handler. This is a pure function.
@@ -40,7 +41,7 @@ class Parser {
                 return Handlers.todo(pair[1]);
             }
             case "deadline": {
-                Matcher matcher = deadlinePattern.matcher(cmd);
+                Matcher matcher = DEADLINE_PATTERN.matcher(cmd);
                 if (!matcher.find()) {
                     throw new ChungusException(
                             "Bad format for creating deadline task. Must be of the form deadline <task> /by <datetime>.");
@@ -52,7 +53,7 @@ class Parser {
                 return Handlers.deadline(desc, deadline);
             }
             case "event": {
-                Matcher matcher = eventPattern.matcher(cmd);
+                Matcher matcher = EVENT_PATTERN.matcher(cmd);
                 if (!matcher.find()) {
                     throw new ChungusException(
                             "Bad format for creating event. Must be of the form event <name> /from <datetime> /to <datetime>.");
@@ -80,7 +81,7 @@ class Parser {
 
     private static LocalDateTime parseDateTimeInput(String s) {
         try {
-            return LocalDateTime.parse(s, dateTimeFmt);
+            return LocalDateTime.parse(s, DATETIME_FMT);
         } catch (DateTimeParseException e) {
             throw new ChungusException(String.format("Bad datetime format \"%s\": expected dd/MM/yyyy HHmm", s), e);
         }

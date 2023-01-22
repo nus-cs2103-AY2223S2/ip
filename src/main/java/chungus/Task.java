@@ -12,7 +12,7 @@ abstract class Task {
     private String desc;
     private boolean isDone;
 
-    protected final static DateTimeFormatter dateTimeFmt = DateTimeFormatter.ISO_LOCAL_DATE_TIME;
+    protected final static DateTimeFormatter DATETIME_FMT = DateTimeFormatter.ISO_LOCAL_DATE_TIME;
 
     /**
      * Constructor for a task. All tasks require a description.
@@ -200,7 +200,7 @@ class Deadline extends Task {
         b.append('D');
         b.append(isDone() ? '1' : '0');
         b.append(Chonk.chonkify(desc()));
-        b.append(Chonk.chonkify(deadline.format(dateTimeFmt)));
+        b.append(Chonk.chonkify(deadline.format(DATETIME_FMT)));
 
         return b.toString();
     }
@@ -230,7 +230,7 @@ class Deadline extends Task {
         trueOrThrow(dechonked != null, new TaskMarshalException(s));
         String deadline = dechonked.first();
 
-        Deadline ret = new Deadline(desc, LocalDateTime.parse(deadline, dateTimeFmt));
+        Deadline ret = new Deadline(desc, LocalDateTime.parse(deadline, DATETIME_FMT));
         if (isDone) {
             ret.setDone();
         } else {
@@ -282,8 +282,8 @@ class Event extends Task {
         b.append('E');
         b.append(isDone() ? '1' : '0');
         b.append(Chonk.chonkify(desc()));
-        b.append(Chonk.chonkify(from.format(dateTimeFmt)));
-        b.append(Chonk.chonkify(to.format(dateTimeFmt)));
+        b.append(Chonk.chonkify(from.format(DATETIME_FMT)));
+        b.append(Chonk.chonkify(to.format(DATETIME_FMT)));
 
         return b.toString();
     }
@@ -318,7 +318,7 @@ class Event extends Task {
         trueOrThrow(dechonked != null, new TaskMarshalException(s));
         String to = dechonked.first();
 
-        Event ret = new Event(desc, LocalDateTime.parse(from, dateTimeFmt), LocalDateTime.parse(to, dateTimeFmt));
+        Event ret = new Event(desc, LocalDateTime.parse(from, DATETIME_FMT), LocalDateTime.parse(to, DATETIME_FMT));
         if (isDone) {
             ret.setDone();
         } else {
