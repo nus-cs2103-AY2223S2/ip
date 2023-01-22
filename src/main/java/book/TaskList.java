@@ -29,12 +29,25 @@ public class TaskList {
         return this.list.size();
     }
 
-    @Override
-    public String toString() {
-        int index = 0;
+    public String matchingTasks(String keyword) {
+        int index = 1;
         String listString = "";
         for (Task task : this.list) {
-            listString += "1.  " + task + "\n";
+            if (task.containsKeyword(keyword)) {
+                listString += index++ + ".  " + task + "\n";
+            } else {
+                index++;
+            }
+        }
+        return listString;
+    }
+
+    @Override
+    public String toString() {
+        int index = 1;
+        String listString = "";
+        for (Task task : this.list) {
+            listString += index++ + ".  " + task + "\n";
         }
         return listString;
     }

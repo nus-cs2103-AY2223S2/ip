@@ -23,6 +23,10 @@ public abstract class Task {
 
     public abstract String saveString();
 
+    public boolean containsKeyword(String keyword) {
+        return this.description.contains(keyword);
+    }
+
     @Override
     public String toString() {
         String done = isDone ? "X" : " ";

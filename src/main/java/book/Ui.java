@@ -48,6 +48,10 @@ public class Ui {
         System.out.println("Here are the tasks stored in Book:");
         System.out.print(list);
     }
+    public void showMatchingTasksList(TaskList list, String keyword) {
+        System.out.println("Book found the following matching tasks stored:");
+        System.out.print(list.matchingTasks(keyword));
+    }
     public void showError(String message) {
         System.out.println(message);
     }
