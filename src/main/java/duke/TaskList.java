@@ -1,11 +1,10 @@
-/**
- * Represents a List of Tasks. Uses basic methods from ArrayList.
- */
-
 package duke;
 
 import java.util.List;
 
+/**
+ * Represents a List of Tasks. Uses basic methods from ArrayList.
+ */
 public class TaskList {
     private final List<Task> tasks;
 

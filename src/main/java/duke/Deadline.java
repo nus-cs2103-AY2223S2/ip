@@ -1,7 +1,3 @@
-/**
- * Represents a Deadline task. A Deadline task has a description,
- * a 'by' timeframe, and can be marked as done.
- */
 package duke;
 
 import java.time.LocalDate;
@@ -9,11 +5,20 @@ import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 import java.util.Optional;
 
+/**
+ * Represents a Deadline task. A Deadline task has a description,
+ * a 'by' timeframe, and can be marked as done.
+ */
 public class Deadline extends Task {
     protected String by;
     protected LocalDate byDate;
     protected Optional<LocalTime> byTime;
 
+    /**
+     * Constructor for Deadline task, marked as undone.
+     * @param description Deadline task description.
+     * @param by Deadline date/time.
+     */
     public Deadline(String description, String by) {
         super(description);
         this.by = by;
@@ -28,6 +33,12 @@ public class Deadline extends Task {
         }
     }
 
+    /**
+     * Constructor for Deadline task with boolean specified.
+     * @param description Deadline task description.
+     * @param bool Indicates whether task is marked as done.
+     * @param by Deadline date/time.
+     */
     public Deadline(String description, boolean bool, String by) {
         super(description, bool);
         this.by = by;
@@ -65,7 +76,9 @@ public class Deadline extends Task {
      * @return Data for storage purposes.
      */
     @Override
-    public String getDataToSave() { return "D / " + getStatusNum() + " / " + getDesc() + " / " + by; }
+    public String getDataToSave() {
+        return "D / " + getStatusNum() + " / " + getDesc() + " / " + by;
+    }
 
     @Override
     public String toString() {

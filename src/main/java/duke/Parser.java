@@ -1,9 +1,8 @@
+package duke;
+
 /**
  * Deals with making sense of the user command.
  */
-
-package duke;
-
 public class Parser {
     /**
      * Returns the command (e.g. "bye", "mark", "event", etc.).

@@ -1,8 +1,3 @@
-/**
- * Represents an Event task. An Event task has a description,
- * a 'from' and 'to' timeframe, and can be marked as done.
- */
-
 package duke;
 
 import java.time.LocalDate;
@@ -10,6 +5,10 @@ import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 import java.util.Optional;
 
+/**
+ * Represents an Event task. An Event task has a description,
+ * a 'from' and 'to' timeframe, and can be marked as done.
+ */
 public class Event extends Task {
     protected String from;
     protected String to;
@@ -18,6 +17,12 @@ public class Event extends Task {
     protected LocalDate toDate;
     protected Optional<LocalTime> toTime;
 
+    /**
+     * Constructor for Event task, marked as undone.
+     * @param description Event task description.
+     * @param from Event start date/time.
+     * @param to Event end date/time.
+     */
     public Event(String description, String from, String to) {
         super(description);
         this.from = from;
@@ -42,6 +47,13 @@ public class Event extends Task {
         }
     }
 
+    /**
+     * Constructor for Event task with boolean specified.
+     * @param description Event task description.
+     * @param bool Indicates whether task is marked as done.
+     * @param from Event start date/time.
+     * @param to Event end date/time.
+     */
     public Event(String description, boolean bool, String from, String to) {
         super(description, bool);
         this.from = from;
@@ -89,7 +101,9 @@ public class Event extends Task {
      * @return Data for storage purposes.
      */
     @Override
-    public String getDataToSave() { return "E / " + getStatusNum() + " / " + getDesc() + " / " + from + " / " + to; }
+    public String getDataToSave() {
+        return "E / " + getStatusNum() + " / " + getDesc() + " / " + from + " / " + to;
+    }
 
     @Override
     public String toString() {

@@ -1,18 +1,26 @@
+package duke;
+
 /**
  * Represents a task. Tasks can be in the form of a Todo, a Deadline, or an Event.
  */
-
-package duke;
-
 public class Task {
     protected String description;
     protected boolean isDone;
 
+    /**
+     * Constructor for Task, marked as undone.
+     * @param description Task description.
+     */
     public Task(String description) {
         this.description = description;
         this.isDone = false;
     }
 
+    /**
+     * Constructor for Task with boolean specified.
+     * @param description Task description.
+     * @param bool Indicates whether task is marked as done.
+     */
     public Task(String description, Boolean bool) {
         this.description = description;
         this.isDone = bool;
@@ -30,7 +38,9 @@ public class Task {
      * Returns the number indicating whether a task is done.
      * @return 1 if task is done, 0 otherwise.
      */
-    public int getStatusNum() { return (isDone ? 1 : 0); }
+    public int getStatusNum() {
+        return (isDone ? 1 : 0);
+    }
 
     /**
      * Marks a task as done.
@@ -52,13 +62,17 @@ public class Task {
      * Returns task description.
      * @return Task description.
      */
-    public String getDesc() { return description; }
+    public String getDesc() {
+        return description;
+    }
 
     /**
      * Returns data for storage purposes, should be called in subclasses.
      * @return Data for storage purposes.
      */
-    public String getDataToSave() { return "task"; }
+    public String getDataToSave() {
+        return "task";
+    }
 
     @Override
     public String toString() {

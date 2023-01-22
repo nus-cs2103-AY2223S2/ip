@@ -1,16 +1,16 @@
+package duke;
+
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Scanner;
+
 /**
  * Contains the filepath where previous data is stored.
  * Allows for retrieval of the previously saved TaskList.
  */
-
-package duke;
-
-import java.io.FileNotFoundException;
-import java.util.List;
-import java.util.ArrayList;
-import java.io.File;
-import java.io.IOException;
-import java.util.Scanner;
 public class Storage {
     private final String filePath;
 
@@ -74,6 +74,8 @@ public class Storage {
                         tasks.add(new Event(taskDetails[2], false, taskDetails[3], taskDetails[4]));
                     }
                     break;
+                default:
+                    System.out.println("Something went wrong!");
                 }
             }
         } catch (FileNotFoundException e) {

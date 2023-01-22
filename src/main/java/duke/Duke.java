@@ -1,23 +1,28 @@
-/**
- * Represents Duke itself, the Chat bot.
- */
 package duke;
 
+import java.io.FileWriter;
+import java.io.IOException;
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
+import java.util.List;
 import java.util.Optional;
 import java.util.Scanner;
-import java.util.List;
-import java.io.FileWriter;
-import java.io.IOException;
+
+/**
+ * Represents Duke itself, the Chat bot.
+ */
 public class Duke {
 
     private TaskList tasks;
     private final Storage storage;
     private final Ui ui;
 
+    /**
+     * Constructor for Duke.
+     * @param filePath File path to store/retrieve previous task list.
+     */
     public Duke(String filePath) {
         storage = new Storage(filePath);
         tasks = new TaskList(storage.load());
@@ -74,10 +79,10 @@ public class Duke {
                     System.out.println("nice! i've marked this task as done:\n"
                             + tasks.get(index));
                     ui.showLine();
-                } catch (IndexOutOfBoundsException|NumberFormatException ex) {
+                } catch (IndexOutOfBoundsException | NumberFormatException ex) {
                     ui.showLine();
-                    System.out.println(new DukeException("pls specify an existing task number in the task list!\n" +
-                            "use the format: mark [task number]"));
+                    System.out.println(new DukeException("pls specify an existing task number in the task list!\n"
+                            + "use the format: mark [task number]"));
                     ui.showLine();
                 }
                 break;
@@ -89,10 +94,10 @@ public class Duke {
                     System.out.println("ok, i've marked this task as not done yet:\n"
                             + tasks.get(index));
                     ui.showLine();
-                } catch (IndexOutOfBoundsException|NumberFormatException ex) {
+                } catch (IndexOutOfBoundsException | NumberFormatException ex) {
                     ui.showLine();
-                    System.out.println(new DukeException("pls specify an existing task number in the task list!\n" +
-                            "use the format: unmark [task number]"));
+                    System.out.println(new DukeException("pls specify an existing task number in the task list!\n"
+                            + "use the format: unmark [task number]"));
                     ui.showLine();
                 }
                 break;
@@ -145,10 +150,10 @@ public class Duke {
                         System.out.println("you have " + tasks.size() + " tasks in the list");
                     }
                     ui.showLine();
-                } catch (ArrayIndexOutOfBoundsException|DateTimeParseException ex) {
+                } catch (ArrayIndexOutOfBoundsException | DateTimeParseException ex) {
                     ui.showLine();
-                    System.out.println(new DukeException("pls specify the description and deadline for this task!\n" +
-                            "use the format: deadline [description] /by yyyy-MM-dd HHmm"));
+                    System.out.println(new DukeException("pls specify the description and deadline for this task!\n"
+                            + "use the format: deadline [description] /by yyyy-MM-dd HHmm"));
                     ui.showLine();
                 }
                 break;
@@ -189,10 +194,10 @@ public class Duke {
                         System.out.println("you have " + tasks.size() + " tasks in the list");
                     }
                     ui.showLine();
-                } catch (ArrayIndexOutOfBoundsException|DateTimeParseException ex) {
+                } catch (ArrayIndexOutOfBoundsException | DateTimeParseException ex) {
                     ui.showLine();
-                    System.out.println(new DukeException("pls specify the description and duration for this event!\n" +
-                            "use the format: event [description] /from yyyy-MM-dd HHmm /to yyyy-MM-dd HHmm"));
+                    System.out.println(new DukeException("pls specify the description and duration for this event!\n"
+                            + "use the format: event [description] /from yyyy-MM-dd HHmm /to yyyy-MM-dd HHmm"));
                     ui.showLine();
                 }
                 break;
@@ -208,10 +213,10 @@ public class Duke {
                         System.out.println("you have " + tasks.size() + " tasks in the list");
                     }
                     ui.showLine();
-                } catch (IndexOutOfBoundsException|NumberFormatException ex) {
+                } catch (IndexOutOfBoundsException | NumberFormatException ex) {
                     ui.showLine();
-                    System.out.println(new DukeException("pls specify an existing task number in the task list!\n" +
-                            "use the format: delete [task number]"));
+                    System.out.println(new DukeException("pls specify an existing task number in the task list!\n"
+                            + "use the format: delete [task number]"));
                     ui.showLine();
                 }
                 break;

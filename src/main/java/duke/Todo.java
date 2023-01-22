@@ -1,9 +1,8 @@
+package duke;
+
 /**
  * Represents a Todo task. A Todo task has a description and can be marked as done.
  */
-
-package duke;
-
 public class Todo extends Task {
     public Todo(String description) {
         super(description);
@@ -36,7 +35,9 @@ public class Todo extends Task {
      * @return Data for storage purposes.
      */
     @Override
-    public String getDataToSave() { return "T / " + getStatusNum() + " / " + getDesc(); }
+    public String getDataToSave() {
+        return "T / " + getStatusNum() + " / " + getDesc();
+    }
 
     @Override
     public String toString() {
