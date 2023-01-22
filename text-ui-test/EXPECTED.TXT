@@ -1,5 +1,5 @@
 ---
- hi i'm Duke! what's up? 
+hi i'm Duke! what's up?
 ---
 ---
 i've added this task:
@@ -11,94 +11,48 @@ nice! i've marked this task as done:
 [T][X] read book
 ---
 ---
+pls specify the description and deadline for this task!
+use the format: deadline [description] /by yyyy-MM-dd HHmm
+---
+---
 i've added this task with deadline:
-[D][ ] return book (by: June 6th)
+[D][ ] return book (by: Jun 06 2023)
 you have 2 tasks in the list
 ---
 ---
+pls specify the description and duration for this event!
+use the format: event [description] /from yyyy-MM-dd HHmm /to yyyy-MM-dd HHmm
+---
+---
 i've added this event:
-[E][ ] project meeting (from: Aug 6th 2pm to: 4pm)
+[E][ ] project meeting (from: Aug 06 2023 14:00 to: Aug 06 2023 16:00)
 you have 3 tasks in the list
 ---
 ---
-i've added this task:
-[T][ ] join sports club
-you have 4 tasks in the list
----
----
-i've added this task:
-[T][ ] borrow book
-you have 5 tasks in the list
----
----
-nice! i've marked this task as done:
-[T][X] join sports club
----
----
 1. [T][X] read book
-2. [D][ ] return book (by: June 6th)
-3. [E][ ] project meeting (from: Aug 6th 2pm to: 4pm)
-4. [T][X] join sports club
-5. [T][ ] borrow book
----
----
-i've added this task with deadline:
-[D][ ] return book (by: Sunday)
-you have 6 tasks in the list
----
----
-i've added this event:
-[E][ ] project meeting (from: Mon 2pm to: 4pm)
-you have 7 tasks in the list
----
----
-i've added this task with deadline:
-[D][ ] do homework (by: no idea :-p)
-you have 8 tasks in the list
----
----
-1. [T][X] read book
-2. [D][ ] return book (by: June 6th)
-3. [E][ ] project meeting (from: Aug 6th 2pm to: 4pm)
-4. [T][X] join sports club
-5. [T][ ] borrow book
-6. [D][ ] return book (by: Sunday)
-7. [E][ ] project meeting (from: Mon 2pm to: 4pm)
-8. [D][ ] do homework (by: no idea :-p)
----
----
-pls add a description for this task!
----
----
-pls specify the description and deadline for this task!
----
----
-pls specify the description and duration for this event!
+2. [D][ ] return book (by: Jun 06 2023)
+3. [E][ ] project meeting (from: Aug 06 2023 14:00 to: Aug 06 2023 16:00)
 ---
 ---
 invalid command
 ---
 ---
 i've removed this task:
+[E][ ] project meeting (from: Aug 06 2023 14:00 to: Aug 06 2023 16:00)
+you have 2 tasks in the list
+---
+---
+i've removed this task:
 [T][X] read book
-you have 7 tasks in the list
+you have 1 task in the list
 ---
 ---
 i've removed this task:
-[E][ ] project meeting (from: Aug 6th 2pm to: 4pm)
-you have 6 tasks in the list
+[D][ ] return book (by: Jun 06 2023)
+you have 0 tasks in the list
 ---
 ---
-i've removed this task:
-[D][ ] return book (by: Sunday)
-you have 5 tasks in the list
----
----
-1. [D][ ] return book (by: June 6th)
-2. [T][X] join sports club
-3. [T][ ] borrow book
-4. [E][ ] project meeting (from: Mon 2pm to: 4pm)
-5. [D][ ] do homework (by: no idea :-p)
+there are no items in your task list
 ---
 ---
 bye! see u soon! :-)
