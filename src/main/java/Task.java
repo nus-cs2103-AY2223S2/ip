@@ -8,6 +8,10 @@ public class Task {
         this.isDone = false;
     }
 
+    public String getName() {
+        return name;
+    }
+
     public boolean markAsDone() {
         if (!this.isDone) {
             this.isDone = true;
