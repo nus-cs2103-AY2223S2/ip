@@ -1,4 +1,7 @@
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
+import java.util.Locale;
 
 public class TaskList {
     private ArrayList<Task> list = new ArrayList<>();
@@ -45,7 +48,8 @@ public class TaskList {
 
             content = dateSplit[0];
             String dueDate = dateSplit[1];
-            taskToAdd = new Deadline(content,dueDate);
+            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy HHmm", Locale.ENGLISH);
+            taskToAdd = new Deadline(content, LocalDateTime.parse(dueDate, formatter));
         } else {
             if (contentSplit.length == 1) {
                 throw new InvalidEventException("The description of an event task cannot be empty\n");
