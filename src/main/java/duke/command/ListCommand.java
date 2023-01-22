@@ -7,6 +7,13 @@ import duke.task.TaskList;
 public class ListCommand extends Command{
 
     public String fullCommand;
+<<<<<<< Updated upstream
+=======
+
+    /**
+     * Creates a new ListCommand
+     */
+>>>>>>> Stashed changes
     public ListCommand(String fullCommand) {
         this.fullCommand = fullCommand;
     }

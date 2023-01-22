@@ -5,12 +5,26 @@ import duke.storage.Storage;
 import duke.task.*;
 import duke.command.*;
 
+<<<<<<< Updated upstream
+=======
+/**
+ * Main Duke class which keep track a list of tasks
+ */
+>>>>>>> Stashed changes
 class Duke {
 
     private Storage storage;
     private TaskList tasks;
     private Ui ui;
 
+<<<<<<< Updated upstream
+=======
+    /**
+     * Duke constructor that creates a new list with the specified input file directory
+     *
+     * @param filePath a file location that has all the commands to Duke
+     */
+>>>>>>> Stashed changes
     public Duke(String filePath) {
         ui = new Ui();
         storage = new Storage(filePath);
@@ -41,8 +55,9 @@ class Duke {
             }
         }
     }
+
     public static void main(String[] args) {
         new Duke("./././text-ui-test/input.txt").run();
-        }
+    }
 
 }

@@ -1,4 +1,5 @@
 package duke.storage;
+
 import duke.task.Task;
 
 import java.io.File;
@@ -13,6 +14,7 @@ import java.util.Scanner;
 public class Storage {
 
     private String filePath;
+
     public Storage(String filePath) {
         this.filePath = filePath;
     }
@@ -36,26 +38,26 @@ public class Storage {
 
     public void store(ArrayList<Task> list) {
         try {
-                String home = System.getProperty("user.home");
-                Path path = Paths.get(home);
-                File f = new File( "./text-ui-test/duke.txt");
-                if (!f.exists()) {
-                    f.createNewFile();
-                } else {
-                    f.delete();
-                    f.createNewFile();
-                }
-                FileWriter fw = new FileWriter("./text-ui-test/duke.txt");
-                for (int i = 0; i < list.size(); i++) {
-                    fw.write(list.get(i).toString());
-                    fw.write('\n');
-                }
-                fw.close();
+            String home = System.getProperty("user.home");
+            Path path = Paths.get(home);
+            File f = new File("./text-ui-test/duke.txt");
+            if (!f.exists()) {
+                f.createNewFile();
+            } else {
+                f.delete();
+                f.createNewFile();
+            }
+            FileWriter fw = new FileWriter("./text-ui-test/duke.txt");
+            for (int i = 0; i < list.size(); i++) {
+                fw.write(list.get(i).toString());
+                fw.write('\n');
+            }
+            fw.close();
         } catch (IOException e) {
             System.out.println("An error occurred.");
             e.printStackTrace();
         }
 
     }
-    }
+}
 
