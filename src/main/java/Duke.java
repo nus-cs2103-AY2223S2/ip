@@ -1,23 +1,59 @@
+import java.io.IOException;
+import java.nio.file.Paths;
 import java.util.Scanner;
 import java.util.ArrayList;
+import java.io.File;
+import java.io.FileWriter;
+import java.nio.file.Path;
 
 class Duke {
     enum Action {
         bye, list, unmark, mark, todo, deadline, event, delete;
 
     }
+
+    public static void writeToFile(int fileIndex, int currentIndex, ArrayList<Task> list) {
+        try {
+            if (fileIndex != currentIndex) {
+                String home = System.getProperty("user.home");
+                Path path = Paths.get(home);
+                String filePath = "/duke.txt";
+                File f = new File(path + filePath);
+                if (!f.exists()) {
+                    f.createNewFile();
+                } else {
+                    f.delete();
+                    f.createNewFile();
+                }
+                fileIndex = 0;
+                FileWriter fw = new FileWriter(path + filePath);
+                for (int i = 0; i < currentIndex; i++) {
+                    fw.write(list.get(i).toString());
+                    fw.write('\n');
+                    fileIndex++;
+                }
+                fw.close();
+            }
+        } catch (IOException e) {
+            System.out.println("An error occurred.");
+            e.printStackTrace();
+        }
+
+    }
+
     public static void main(String[] args) {
 
         System.out.println("Hello! I'm Duke");
         System.out.println("What can I do for you?");
 
-            Scanner myObj = new Scanner(System.in);
-            String input = myObj.nextLine();
-            String[] s = input.split(" ");
-            ArrayList<Task> list = new ArrayList<>();
-            int currentIndex = 0;
-            while (!input.equals(Action.bye.name())) {
-                try {
+        Scanner myObj = new Scanner(System.in);
+        String input = myObj.nextLine();
+        String[] s = input.split(" ");
+        ArrayList<Task> list = new ArrayList<>();
+        int currentIndex = 0;
+        int fileIndex = 0;
+        while (!input.equals(Action.bye.name())) {
+            try {
                 if (input.equals(Action.list.name())) {
                     System.out.println("Here are the tasks in your list");
                     for (int i = 0; i < currentIndex; i++) {
@@ -57,6 +93,10 @@ class Duke {
                     System.out.println("Now you have " + currentIndex + " tasks in the list.");
                     input = myObj.nextLine();
                     s = input.split(" ");
+                    if (fileIndex != currentIndex) {
+                        writeToFile(0, currentIndex,list);
+                        fileIndex++;
+                    }
                 } else if (s[0].equals(Action.deadline.name())) {
                     String taskDescription = "";
                     boolean isTime = false;
@@ -79,6 +119,7 @@ class Duke {
                             taskDescription += " ";
                         }
                     }
+
                     Deadlines taskName = new Deadlines(taskDescription, time);
                     System.out.println("Got it. I've added this task:");
                     System.out.println(taskName.toString());
@@ -87,6 +128,10 @@ class Duke {
                     System.out.println("Now you have " + currentIndex + " tasks in the list.");
                     input = myObj.nextLine();
                     s = input.split(" ");
+                    if (fileIndex != currentIndex) {
+                        writeToFile(0, currentIndex,list);
+                        fileIndex++;
+                    }
                 } else if (s[0].equals(Action.event.name())) {
                     String taskDescription = "";
                     boolean isStartTime = false;
@@ -124,32 +169,37 @@ class Duke {
                     System.out.println("Now you have " + currentIndex + " tasks in the list.");
                     input = myObj.nextLine();
                     s = input.split(" ");
+                    if (fileIndex != currentIndex) {
+                        writeToFile(0, currentIndex,list);
+                        fileIndex++;
+                    }
                 } else if (s[0].equals(Action.delete.name())) {
                     Task currentTask = list.get(Integer.parseInt(s[1]) - 1);
                     System.out.println("Noted. I've removed this task:");
                     System.out.println(currentTask.toString());
-                    currentIndex --;
+                    currentIndex--;
                     System.out.println("Now you have " + currentIndex + " tasks in the list");
                     list.remove(Integer.parseInt(s[1]) - 1);
                     input = myObj.nextLine();
                     s = input.split(" ");
-                }
-                else {
+                    if (fileIndex != currentIndex) {
+                        writeToFile(0, currentIndex,list);
+                        fileIndex--;
+                    }
+                } else {
                     throw new DukeException("☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
                 }
 
+            } catch (Exception e) {
+                System.out.println(e);
+                input = myObj.nextLine();
+                s = input.split(" ");
+
             }
-                catch (Exception e) {
-                    System.out.println(e);
-                    input = myObj.nextLine();
-                    s = input.split(" ");
-
-                }
-
 
 
         }
         System.out.println("Bye. Hope to see you again soon!");
-        }
+    }
 
 }
