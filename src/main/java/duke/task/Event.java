@@ -13,14 +13,14 @@ public class Event extends Task {
     private LocalDateTime to;
 
     /**
-     * @see Task#Task()
+     * Constructor
      */
     public Event(String title, LocalDateTime from, LocalDateTime to) {
         this(title, false, from, to);
     }
 
     /**
-     * @see Task#Task(String, boolean)
+     * Constructor with predefined done state
      */
     public Event(String title, boolean isDone, LocalDateTime from, LocalDateTime to) {
         super(title, isDone);
@@ -44,14 +44,14 @@ public class Event extends Task {
     }
 
     /**
-     * @see Task#toCsv()
+     * {@inheritDoc}
      */
     public String toCsv() {
         return "E," + super.toCsv() + "," + DateUtil.dateToString(from) + "," + DateUtil.dateToString(to);
     }
 
     /**
-     * @see Task#toString()
+     * {@inheritDoc}
      */
     @Override
     public String toString() {

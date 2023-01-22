@@ -12,14 +12,14 @@ public class Deadline extends Task {
     private LocalDateTime by;
 
     /**
-     * @see Task#Task()
+     * Constructor
      */
     public Deadline(String title, LocalDateTime by) {
         this(title, false, by);
     }
 
     /**
-     * @see Task#Task(String, boolean)
+     * Constructor with predefined done state
      */
     public Deadline(String title, boolean isDone, LocalDateTime by) {
         super(title, isDone);
@@ -35,14 +35,14 @@ public class Deadline extends Task {
     }
 
     /**
-     * @see Task#toCsv()
+     * {@inheritDoc}
      */
     public String toCsv() {
         return "D," + super.toCsv() + "," + DateUtil.dateToString(by) + ",";
     }
 
     /**
-     * @see Task#toString()
+     * {@inheritDoc}
      */
     @Override
     public String toString() {

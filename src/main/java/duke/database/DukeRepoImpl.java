@@ -20,7 +20,7 @@ public class DukeRepoImpl extends DukeRepo {
     }
 
     /**
-     * @see DukeRepo#getAllTask()
+     * {@inheritDoc}
      */
     @Override
     public List<Task> getAllTask() {
@@ -28,7 +28,7 @@ public class DukeRepoImpl extends DukeRepo {
     }
 
     /**
-     * @see DukeRepo#getTask()
+     * {@inheritDoc}
      */
     @Override
     public Task getTask(int taskId) {
@@ -36,7 +36,7 @@ public class DukeRepoImpl extends DukeRepo {
     }
 
     /**
-     * @see DukeRepo#addTask()
+     * {@inheritDoc}
      */
     @Override
     public Task addTask(Task task) {
@@ -44,7 +44,7 @@ public class DukeRepoImpl extends DukeRepo {
     }
 
     /**
-     * @see DukeRepo#updateTask()
+     * {@inheritDoc}
      */
     @Override
     public Task updateTask(int taskId, Task task) {
@@ -52,7 +52,7 @@ public class DukeRepoImpl extends DukeRepo {
     }
 
     /**
-     * @see DukeRepo#removeTask()
+     * {@inheritDoc}
      */
     @Override
     public Task removeTask(int taskId) {
@@ -60,7 +60,7 @@ public class DukeRepoImpl extends DukeRepo {
     }
 
     /**
-     * @see DukeRepo#close()
+     * {@inheritDoc}
      */
     @Override
     public void close() {
@@ -68,7 +68,7 @@ public class DukeRepoImpl extends DukeRepo {
     }
 
     /**
-     * @see DukeRepo#count()
+     * {@inheritDoc}
      */
     @Override
     public int count() {
