@@ -11,7 +11,7 @@ public class DukeList {
         this.list = new ArrayList<>();
     }
 
-    public void output() {
+    public void output() throws DukeException {
         while (true) {
             String input = sc.nextLine();
             if ("bye".equals(input)) {
@@ -30,26 +30,22 @@ public class DukeList {
                 int taskindex = Integer.parseInt(input.substring(7)) - 1;
                 this.list.get(taskindex).markAsNotDone();
                 System.out.println("Aight, marking this as not done:\n" + this.list.get(taskindex).toString());
-            } else {
-                Task task;
-
-
-                if (isDeadline(input)) {
+            } else { //Task Creation
+                Task task = null;
+                if (isToDo(input)) {
+                    task = new ToDo(input);
+                    this.list.add(task);
+                } else if (isDeadline(input)) {
                     int index = input.indexOf(" /by ");
                     task = new Deadline(input.substring(0, index), input.substring(index + 5));
                     this.list.add(task);
                 } else if (isEvent(input)) {
                     int fromdex = input.indexOf(" /from ");
                     int todex = input.indexOf(" /to ");
-                    if (fromdex + 7 > todex) {
-                        task = new ToDo(input);
-                    } else {
-                        task = new Event(input.substring(0, fromdex), input.substring(fromdex + 7, todex), input.substring(todex + 5));
-                    }
+                    task = new Event(input.substring(0, fromdex), input.substring(fromdex + 7, todex), input.substring(todex + 5));
                     this.list.add(task);
                 } else {
-                    task = new ToDo(input);
-                    this.list.add(task);
+                    throw new DukeException("What are you saying");
                 }
                 System.out.println("Roger. This task has been added:\n" + "  " + task.toString());
                 System.out.println("Now you have " + list.size() + " tasks in your list.");
@@ -73,12 +69,41 @@ public class DukeList {
             return false;
     }
 
-    public static boolean isDeadline(String input) {
-        return input.contains(" /by ");
+    public static boolean isToDo(String input) throws DukeException {
+        if (input.length() >= 5 && input.substring(0, 5).equals("todo ")) {
+            if (input.length() == 5) {
+                throw new DukeException("TODO needs a description!");
+            }
+            return true;
+        }
+        return false;
     }
 
-    public static boolean isEvent(String input) {
-        return input.contains(" /from ") && input.contains(" /to ");
+    public static boolean isDeadline(String input) throws DukeException {
+        if (input.length() >= 9 && input.substring(0, 9).equals("deadline ") && input.contains(" /by ")) {
+            if (input.length() == 9) {
+                throw new DukeException("DEADLINE needs a description!");
+            }
+            return true;
+        }
+        return false;
+    }
+
+    public static boolean isEvent(String input) throws DukeException {
+
+        if (input.length() >= 6 && input.substring(0, 6).equals("event ") &&
+                input.contains(" /from ") && input.contains(" /to ")) {
+            int fromdex = input.indexOf(" /from ");
+            int todex = input.indexOf(" /to ");
+            if (fromdex + 7 > todex) {
+                throw new DukeException("What are you saying?");
+            }
+            if (input.length() == 6) {
+                throw new DukeException("EVENT needs a description!");
+            }
+            return true;
+        }
+        return false;
     }
     public static boolean isNumeric(String strNum) {
         if (strNum == null) {

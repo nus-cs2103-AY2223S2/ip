@@ -1,9 +1,12 @@
 public class Task {
     protected String description;
+    protected String name;
     protected boolean isDone = false;
 
-    public Task(String description) {
+
+    public Task(String description, String name) {
         this.description = description;
+        this.name = name;
         this.isDone = false;
     }
 
@@ -21,6 +24,10 @@ public class Task {
 
     public void markAsNotDone() {
         this.isDone = false;
+    }
+
+    public String name() {
+        return this.name;
     }
 
     @Override
