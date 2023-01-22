@@ -22,9 +22,16 @@ public class UI {
         System.out.println("Hello! I'm Duke. What can i do for you?");
         System.out.println(
                 "These are the available commands:"
+                        + indentMessage("bye")
+                        + indentMessage("find     [.*]")
+                        + indentMessage("delete   [index]")
+                        + indentMessage("mark     [index]")
+                        + indentMessage("unmark   [index]")
                         + indentMessage("todo     [description]")
-                        + indentMessage("event    [description] /from [" + DATE_FORMAT + "] /to [" + DATE_FORMAT + "]")
+                        + indentMessage("date     [" + DATE_FORMAT + "]")
+                        + indentMessage("list     (todo | deadline | event)?")
                         + indentMessage("deadline [description] /by   [" + DATE_FORMAT + "]")
+                        + indentMessage("event    [description] /from [" + DATE_FORMAT + "] /to [" + DATE_FORMAT + "]")
                         + separatorLine());
     }
 }
