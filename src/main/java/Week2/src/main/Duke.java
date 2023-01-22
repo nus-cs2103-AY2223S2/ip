@@ -157,6 +157,5 @@ public class Duke {
             lining();
             System.out.println("Bye. Hope to see you again soon!");
             lining();
-
     }
 }
