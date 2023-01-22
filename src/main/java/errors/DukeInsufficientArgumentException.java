@@ -1,7 +1,7 @@
 package errors;
 
 /**
- * Exception class for indicating when a user provides insufficient details to a deadline command.
+ * Exception class for indicating when a user provides insufficient details to a bot command.
  * @author Nicholas Lee
  */
 

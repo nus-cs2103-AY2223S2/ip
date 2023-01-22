@@ -63,7 +63,6 @@ public class Deadline extends Task{
         try {
             detailsSublist = segments.subList(detailsIndex, deadlineIndex - 1);
             deadlineSublist = segments.subList(deadlineIndex, segments.size());
-            System.out.println(deadlineSublist);
         } catch (IndexOutOfBoundsException e) {
             throw new DukeInvalidCommandException(Response.INVALID_COMMAND.toString());
         }
@@ -80,9 +79,4 @@ public class Deadline extends Task{
         result.put("deadline", deadline);
         return result;
     }
-
-
-
-
-
 }

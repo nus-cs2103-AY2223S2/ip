@@ -15,7 +15,7 @@ public class Duke {
 
     /**
      * Runs the bot and reads in user input in a loop, parses it and responds accordingly
-     * @param args
+     * @param args program args
      */
     public static void main(String[] args) {
 
