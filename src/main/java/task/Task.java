@@ -4,7 +4,7 @@ package task;
  * This class represents a task
  */
 public class Task {
-    private String taskDescription;
+    private final String taskDescription;
     private TaskStatus taskStatus;
 
     public Task(String taskDescription) {

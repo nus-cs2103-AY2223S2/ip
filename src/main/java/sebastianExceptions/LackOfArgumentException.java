@@ -1,5 +1,6 @@
 package sebastianExceptions;
 
+
 /**
  * Exception when the user did not specify a body for their task declaration/instruction
  */

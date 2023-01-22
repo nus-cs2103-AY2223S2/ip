@@ -8,8 +8,7 @@ import formatters.Formatter;
 public class InstructionFormatMismatchException extends InputFormatMismatchException{
     public InstructionFormatMismatchException(String instruction) {
         super(
-                "Please give an instruction in the format of: " + "\n" +
-                        Formatter.space() + instruction + " [task index]"
+                "Please give an instruction in the format of: " + "\n" + instruction + " [task index]"
                 );
     }
 }

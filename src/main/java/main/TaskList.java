@@ -1,12 +1,9 @@
-import formatters.Formatter;
+package main;
+
 import sebastianExceptions.DeadlineFormatMismatchException;
 import sebastianExceptions.EventFormatMismatchException;
 import task.*;
 import time.*;
-
-import java.io.File;
-import java.io.FileWriter;
-import java.io.IOException;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
@@ -39,7 +36,6 @@ public class TaskList {
     public Task addTodo(int isCompleted, String taskDescription) {
         Task newTask = new Todo(isCompleted, taskDescription);
         this.taskList.add(newTask);
-        saveToDisk();
         return newTask;
     }
 
@@ -53,7 +49,6 @@ public class TaskList {
         try {
             Task newTask = new Deadline(isCompleted, taskDescription, new EndTime(convertStringToDate(endTime)));
             this.taskList.add(newTask);
-            saveToDisk();
             return newTask;
         } catch (DateTimeParseException e) {
             throw new DeadlineFormatMismatchException();
@@ -70,7 +65,6 @@ public class TaskList {
         try {
             Task newTask = new Event(isCompleted, taskDescription, new Duration(convertStringToDate(from), convertStringToDate(to)));
             this.taskList.add(newTask);
-            saveToDisk();
             return newTask;
         } catch (DateTimeParseException e) {
             throw new EventFormatMismatchException();
@@ -90,9 +84,7 @@ public class TaskList {
      */
     public Task markTaskAtIndex(int taskIndex) throws IndexOutOfBoundsException {
         try {
-            Task task = this.taskList.get(taskIndex-1).mark();
-            saveToDisk();
-            return task;
+            return this.taskList.get(taskIndex-1).mark();
         } catch (IndexOutOfBoundsException e) {
             throw new IndexOutOfBoundsException();
         }
@@ -106,9 +98,7 @@ public class TaskList {
      */
     public Task unmarkTaskAtIndex(int taskIndex) throws IndexOutOfBoundsException {
         try {
-            Task task = this.taskList.get(taskIndex-1).unmark();
-            saveToDisk();
-            return task;
+            return this.taskList.get(taskIndex-1).unmark();
         } catch (IndexOutOfBoundsException e) {
             throw new IndexOutOfBoundsException();
         }
@@ -122,9 +112,7 @@ public class TaskList {
      */
     public Task deleteTaskAtIndex(int taskIndex) throws IndexOutOfBoundsException {
         try {
-            Task task = this.taskList.remove(taskIndex-1);
-            saveToDisk();
-            return task;
+            return this.taskList.remove(taskIndex-1);
         } catch (IndexOutOfBoundsException e) {
             throw new IndexOutOfBoundsException();
         }
@@ -158,27 +146,13 @@ public class TaskList {
         return taskList.size();
     }
 
-    /**
-     * Used to save existing tasks in the list into the hard disk
-     */
-    public void saveToDisk() {
-        try {
-            DataSaver.writeToDisk(this);
-        } catch (IOException e) {
-            Formatter.printFormattedString(
-                    Formatter.space() + "Task cannot be saved to disk, exiting the program will cause data to be lost"
-            );
-        }
-
-    }
-
     @Override
     public String toString() {
         StringBuilder sb = new StringBuilder();
         int totalTasks = this.getTotalTasks();
         for(int i = 0; i < totalTasks; i ++ ) {
             Task t = taskList.get(i);
-            sb.append(Formatter.space()).append(i+1).append(".").append(t.toString()).append("\n");
+            sb.append(i+1).append(".").append(t.toString()).append("\n");
         }
         if(sb.length()!=0) {
             sb.delete(sb.length()-1, sb.length());
@@ -187,42 +161,17 @@ public class TaskList {
     }
 
     /**
-     * inner class used to save task list data to the disk
+     * Format tasks in the taskList into a String ready to be written into the hard disk
+     * @return formatted String ready to be written to disk
      */
-    static class DataSaver {
-
-        private static File file;
-
-        /**
-         * Save tasks in the taskList into the hard disk.
-         * @param taskList a TaskList object
-         * @throws IOException if the file exists but is a directory rather than a regular file,
-         * does not exist but cannot be created, or cannot be opened for any other reason
-         */
-        private static void writeToDisk(TaskList taskList) throws IOException {
-            if(file == null){
-                file = new File("SebastianData.txt");
-            }
-            FileWriter fw = new FileWriter(file);
-            fw.write(formatTaskList(taskList));
-            fw.flush();
-            fw.close();
+    public String formatTaskListForSave() {
+        StringBuilder sb = new StringBuilder();
+        for(Task task: this.taskList){
+            sb.append(task.formatForSave()).append("\n");
         }
-
-        /**
-         * Format tasks in the taskList into a String ready to be written into the hard disk
-         * @param l the TaskList object
-         * @return formatted String
-         */
-        private static String formatTaskList(TaskList l) {
-            StringBuilder sb = new StringBuilder();
-            for(Task task: l.taskList){
-                sb.append(task.formatForSave()).append("\n");
-            }
-            if(sb.length()>0){
-                return sb.substring(0,sb.length()-1);
-            }
-            return sb.toString();
+        if(sb.length()>0){
+            return sb.substring(0,sb.length()-1);
         }
+        return sb.toString();
     }
 }
