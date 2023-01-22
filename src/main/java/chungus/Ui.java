@@ -25,12 +25,12 @@ class Ui {
     /**
      * Another constructor for Ui.
      * 
-     * @param _in  Some input.
-     * @param _out Some output.
+     * @param in  Some input.
+     * @param out Some output.
      */
-    public Ui(InputStream _in, OutputStream _out) {
-        in = new Scanner(_in);
-        out = new PrintWriter(_out);
+    public Ui(InputStream in, OutputStream out) {
+        this.in = new Scanner(in);
+        this.out = new PrintWriter(out);
     }
 
     /**

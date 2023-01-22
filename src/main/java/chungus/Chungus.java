@@ -26,6 +26,7 @@ class Chungus {
      * @param in     Some input stream.
      * @param out    Some output stream.
      * @param dbPath Path to a database file to read and write tasks from.
+     * @throws RuntimeException For errors related to the database file.
      */
     public Chungus(InputStream in, OutputStream out, String dbPath) {
         ui = new Ui(in, out);

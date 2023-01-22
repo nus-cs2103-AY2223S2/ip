@@ -14,16 +14,17 @@ class Storage {
     /**
      * Constructor for Storage.
      * 
-     * @param _file The file to use for reading and writing of tasks.
+     * @param file The file to use for reading and writing of tasks.
      */
-    public Storage(File _file) {
-        file = _file;
+    public Storage(File file) {
+        this.file = file;
     }
 
     /**
      * Reads tasks from disk.
      * 
      * @return A list of tasks.
+     * @throws IOException When reading the file fails.
      */
     public TaskList read() throws IOException {
         return new TaskList(Files.readAllLines(file.toPath())

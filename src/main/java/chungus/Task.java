@@ -17,10 +17,10 @@ abstract class Task {
     /**
      * Constructor for a task. All tasks require a description.
      * 
-     * @param _desc Description for the task.
+     * @param desc Description for the task.
      */
-    public Task(String _desc) {
-        desc = _desc;
+    public Task(String desc) {
+        this.desc = desc;
         isDone = false;
     }
 
@@ -85,14 +85,14 @@ abstract class Task {
     public static Task unmarshal(String s) {
         char typ = s.charAt(0);
         switch (typ) {
-            case 'T':
-                return Todo.unmarshal(s);
-            case 'D':
-                return Deadline.unmarshal(s);
-            case 'E':
-                return Event.unmarshal(s);
-            default:
-                throw new TaskMarshalException(s);
+        case 'T':
+            return Todo.unmarshal(s);
+        case 'D':
+            return Deadline.unmarshal(s);
+        case 'E':
+            return Event.unmarshal(s);
+        default:
+            throw new TaskMarshalException(s);
         }
     }
 
@@ -162,12 +162,12 @@ class Todo extends Task {
     }
 
     @Override
-    public boolean equals(Object _other) {
-        if (!(_other instanceof Todo)) {
+    public boolean equals(Object other) {
+        if (!(other instanceof Todo)) {
             return false;
         }
-        Todo other = (Todo) _other;
-        return this.desc().equals(other.desc());
+        Todo otherTodo = (Todo) other;
+        return this.desc().equals(otherTodo.desc());
     }
 }
 
@@ -180,12 +180,12 @@ class Deadline extends Task {
     /**
      * Constructor for a deadline task.
      * 
-     * @param desc      The task's description.
-     * @param _deadline Deadline for the task.
+     * @param desc     The task's description.
+     * @param deadline Deadline for the task.
      */
-    public Deadline(String desc, LocalDateTime _deadline) {
+    public Deadline(String desc, LocalDateTime deadline) {
         super(desc);
-        deadline = _deadline;
+        this.deadline = deadline;
     }
 
     @Override
@@ -216,7 +216,6 @@ class Deadline extends Task {
         if (s.charAt(0) != 'D') {
             throw new TaskMarshalException(s);
         }
-        boolean isDone = s.charAt(1) == '0' ? false : true;
 
         int idx = 2;
         Pair<String, Integer> dechonked;
@@ -231,6 +230,8 @@ class Deadline extends Task {
         String deadline = dechonked.first();
 
         Deadline ret = new Deadline(desc, LocalDateTime.parse(deadline, DATETIME_FMT));
+        boolean isDone = s.charAt(1) == '0' ? false : true;
+
         if (isDone) {
             ret.setDone();
         } else {
@@ -241,12 +242,12 @@ class Deadline extends Task {
     }
 
     @Override
-    public boolean equals(Object _other) {
-        if (!(_other instanceof Deadline)) {
+    public boolean equals(Object other) {
+        if (!(other instanceof Deadline)) {
             return false;
         }
-        Deadline other = (Deadline) _other;
-        return this.desc().equals(other.desc()) && this.deadline.equals(other.deadline);
+        Deadline otherDeadline = (Deadline) other;
+        return this.desc().equals(otherDeadline.desc()) && this.deadline.equals(otherDeadline.deadline);
     }
 }
 
@@ -260,14 +261,14 @@ class Event extends Task {
     /**
      * Constructor for an event.
      * 
-     * @param desc  Description for the event.
-     * @param _from When the event starts.
-     * @param _to   When the event ends.
+     * @param desc Description for the event.
+     * @param from When the event starts.
+     * @param to   When the event ends.
      */
-    public Event(String desc, LocalDateTime _from, LocalDateTime _to) {
+    public Event(String desc, LocalDateTime from, LocalDateTime to) {
         super(desc);
-        from = _from;
-        to = _to;
+        this.from = from;
+        this.to = to;
     }
 
     @Override
@@ -329,11 +330,12 @@ class Event extends Task {
     }
 
     @Override
-    public boolean equals(Object _other) {
-        if (!(_other instanceof Event)) {
+    public boolean equals(Object other) {
+        if (!(other instanceof Event)) {
             return false;
         }
-        Event other = (Event) _other;
-        return this.desc().equals(other.desc()) && this.from.equals(other.from) && this.to.equals(other.to);
+        Event otherEvent = (Event) other;
+        return this.desc().equals(otherEvent.desc()) && this.from.equals(otherEvent.from)
+                && this.to.equals(otherEvent.to);
     }
 }

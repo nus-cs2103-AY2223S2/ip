@@ -27,63 +27,64 @@ class Parser {
     public static Handler parse(String cmd) {
         String[] args = cmd.split("\\s+");
         switch (args[0]) {
-            case "bye": {
-                return Handlers.bye();
+        case "bye": {
+            return Handlers.bye();
+        }
+        case "list": {
+            return Handlers.list();
+        }
+        case "todo": {
+            String[] pair = cmd.split("\\s+", 2);
+            if (pair.length < 2) {
+                throw new ChungusException("Description of todo cannot be empty.");
             }
-            case "list": {
-                return Handlers.list();
+            return Handlers.todo(pair[1]);
+        }
+        case "deadline": {
+            Matcher matcher = DEADLINE_PATTERN.matcher(cmd);
+            if (!matcher.find()) {
+                throw new ChungusException(
+                        "Bad format for creating deadline task. Must be of the form deadline <task> /by <datetime>.");
             }
-            case "todo": {
-                String[] pair = cmd.split("\\s+", 2);
-                if (pair.length < 2) {
-                    throw new ChungusException("Description of todo cannot be empty.");
-                }
-                return Handlers.todo(pair[1]);
-            }
-            case "deadline": {
-                Matcher matcher = DEADLINE_PATTERN.matcher(cmd);
-                if (!matcher.find()) {
-                    throw new ChungusException(
-                            "Bad format for creating deadline task. Must be of the form deadline <task> /by <datetime>.");
-                }
 
-                String desc = matcher.group(1);
-                LocalDateTime deadline = parseDateTimeInput(matcher.group(2));
+            String desc = matcher.group(1);
+            LocalDateTime deadline = parseDateTimeInput(matcher.group(2));
 
-                return Handlers.deadline(desc, deadline);
+            return Handlers.deadline(desc, deadline);
+        }
+        case "event": {
+            Matcher matcher = EVENT_PATTERN.matcher(cmd);
+            if (!matcher.find()) {
+                throw new ChungusException(
+                        "Bad format for creating event."
+                                + "Must be of the form event <name> /from <datetime> /to <datetime>.");
             }
-            case "event": {
-                Matcher matcher = EVENT_PATTERN.matcher(cmd);
-                if (!matcher.find()) {
-                    throw new ChungusException(
-                            "Bad format for creating event. Must be of the form event <name> /from <datetime> /to <datetime>.");
-                }
 
-                String desc = matcher.group(1);
-                LocalDateTime from = parseDateTimeInput(matcher.group(2));
-                LocalDateTime to = parseDateTimeInput(matcher.group(3));
+            String desc = matcher.group(1);
+            LocalDateTime from = parseDateTimeInput(matcher.group(2));
+            LocalDateTime to = parseDateTimeInput(matcher.group(3));
 
-                return Handlers.event(desc, from, to);
+            return Handlers.event(desc, from, to);
+        }
+        case "mark": {
+            int idx = getTaskNumberArg(args[1]) - 1;
+            return Handlers.mark(idx);
+        }
+        case "unmark": {
+            int idx = getTaskNumberArg(args[1]) - 1;
+            return Handlers.unmark(idx);
+        }
+        case "find": {
+            String[] pair = cmd.split("\\s+", 2);
+            String searchTerm = "";
+            if (pair.length == 2) {
+                searchTerm = pair[1];
             }
-            case "mark": {
-                int idx = getTaskNumberArg(args[1]) - 1;
-                return Handlers.mark(idx);
-            }
-            case "unmark": {
-                int idx = getTaskNumberArg(args[1]) - 1;
-                return Handlers.unmark(idx);
-            }
-            case "find": {
-                String[] pair = cmd.split("\\s+", 2);
-                String searchTerm = "";
-                if (pair.length == 2) {
-                    searchTerm = pair[1];
-                }
-                return Handlers.find(searchTerm);
-            }
-            default: {
-                return Handlers.unknown(args[0]);
-            }
+            return Handlers.find(searchTerm);
+        }
+        default: {
+            return Handlers.unknown(args[0]);
+        }
         }
     }
 

@@ -22,10 +22,10 @@ class TaskList {
     /**
      * Another constructor for a task list.
      * 
-     * @param _tasks A list of tasks.
+     * @param tasks A list of tasks.
      */
-    public TaskList(List<Task> _tasks) {
-        tasks = new ArrayList<>(_tasks);
+    public TaskList(List<Task> tasks) {
+        this.tasks = new ArrayList<>(tasks);
     }
 
     /**
@@ -125,16 +125,16 @@ class TaskList {
     }
 
     @Override
-    public boolean equals(Object _other) {
-        if (!(_other instanceof TaskList)) {
+    public boolean equals(Object other) {
+        if (!(other instanceof TaskList)) {
             return false;
         }
-        TaskList other = (TaskList) _other;
-        if (this.tasks.size() != other.tasks.size()) {
+        TaskList otherList = (TaskList) other;
+        if (this.tasks.size() != otherList.tasks.size()) {
             return false;
         }
         for (int i = 0; i < this.tasks.size(); i++) {
-            if (!(this.tasks.get(i).equals(other.tasks.get(i)))) {
+            if (!(this.tasks.get(i).equals(otherList.tasks.get(i)))) {
                 return false;
             }
         }

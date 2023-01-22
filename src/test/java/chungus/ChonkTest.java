@@ -6,9 +6,8 @@ import static org.junit.jupiter.api.Assertions.assertNull;
 
 import java.util.List;
 
-import org.junit.jupiter.api.Test;
-
 import chungus.util.Pair;
+import org.junit.jupiter.api.Test;
 
 public class ChonkTest {
     private List<Pair<String, String>> tests = List.of(

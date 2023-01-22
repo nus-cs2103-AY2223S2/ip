@@ -10,12 +10,12 @@ public class Pair<S, T> {
     /**
      * Constructor for a pair.
      * 
-     * @param _first  The first item.
-     * @param _second The second item.
+     * @param first  The first item.
+     * @param second The second item.
      */
-    public Pair(S _first, T _second) {
-        first = _first;
-        second = _second;
+    public Pair(S first, T second) {
+        this.first = first;
+        this.second = second;
     }
 
     /**
@@ -41,6 +41,8 @@ public class Pair<S, T> {
      * 
      * @param first  The first item.
      * @param second The second item.
+     * @param <S>    Type for the first item.
+     * @param <T>    Type for the second item.
      * @return The new pair.
      */
     public static <S, T> Pair<S, T> of(S first, T second) {
