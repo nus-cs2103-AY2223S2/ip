@@ -2,12 +2,12 @@ package controllers;
 
 import java.time.LocalDate;
 import java.util.function.Supplier;
-import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import entities.TaskList;
 import enums.CommandType;
 import exceptions.DukeException;
+import utils.CustomValidator;
 
 /**
  * Represents the DateCommand.
@@ -15,7 +15,7 @@ import exceptions.DukeException;
  */
 public class DateCommand extends Command {
     private final String args;
-    private final Pattern DATE_FORMAT =
+    private final Pattern VALID_DATE =
             Pattern.compile("(?<year>\\d{4})-(?<month>0[0-9]|1[0-2])-(?<day>0[0-9]|1[0-9]|2[0-9]|3[0-1])$");
 
     /**
@@ -35,8 +35,8 @@ public class DateCommand extends Command {
     @Override
     public void execute(Supplier<? extends TaskList> taskList) throws DukeException {
         TaskList store = taskList.get();
-        Matcher matcher = VALID_DATE.matcher(args.strip());
-        if (matcher.find()) {
+        boolean valid = CustomValidator.validate(args.strip(), input -> VALID_DATE.matcher(input).find());
+        if (valid) {
             store.filter(task -> task.activeOn(LocalDate.parse(args.split(" ")[1])),
                     "There are no active tasks on this date!");
         } else {

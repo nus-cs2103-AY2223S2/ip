@@ -97,13 +97,30 @@ public class Storage implements Loader<TaskList> {
      * @param taskList The tasklist in memory.
      * @throws DukeException An exception to be thrown if there are any errors that occur.
      */
-    public void write(TaskList taskList) throws DukeException {
+    public void writeAll(TaskList taskList) throws DukeException {
         try {
             FileWriter fileWriter = new FileWriter(file);
             for (Task task : taskList.getTaskList()) {
                 SerializableTask tsk = task.serialize();
                 fileWriter.write( tsk.marshal() + "\n");
             }
+            fileWriter.close();
+        } catch (IOException e) {
+            throw new DukeException(GENERIC_ERROR + e.getMessage());
+        }
+    }
+
+    /**
+     * Append current task in memory to the hard disk.
+     *
+     * @param task The task in memory.
+     * @throws DukeException An exception to be thrown if there are any errors that occur.
+     */
+    public void write(Task task) throws DukeException {
+        try {
+            FileWriter fileWriter = new FileWriter(file, true);
+            SerializableTask tsk = task.serialize();
+            fileWriter.write(tsk.marshal() + "\n");
             fileWriter.close();
         } catch (IOException e) {
             throw new DukeException(GENERIC_ERROR + e.getMessage());
