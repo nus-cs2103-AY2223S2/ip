@@ -3,6 +3,7 @@ package duke.parser;
 import duke.commands.ByeCommand;
 import duke.commands.Command;
 import duke.commands.DeleteCommand;
+import duke.commands.FindCommand;
 import duke.commands.InvalidCommand;
 import duke.commands.ListCommand;
 import duke.commands.MarkCommand;
@@ -36,6 +37,8 @@ public class Parser {
             command = new DeleteCommand(fullCommand);
         } else if (lowercaseCommand.contains("mark")) {
             command = new MarkCommand(!lowercaseCommand.startsWith("unmark"), fullCommand);
+        } else if (lowercaseCommand.startsWith("find")) {
+            command = new FindCommand(fullCommand);
         } else {
             command = new InvalidCommand();
         }

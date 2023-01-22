@@ -87,13 +87,26 @@ public class TaskList {
         return this.tasks.get(index);
     }
 
-    
-    /** 
+    /**
      * Returns the number of tasks in the task list.
-     * 
      * @return int The number of tasks in the task list.
      */
     public int size() {
         return this.tasks.size();
+    }
+
+    /**
+     * Returns the number of tasks in the task list.
+     * 
+     * @return int The number of tasks in the task list.
+     */
+    public void findTask(String keyword, Ui ui) {
+        ArrayList<Integer> matchingTasksIndex = new ArrayList<>();
+        for (int i = 0; i < this.tasks.size(); i++) {
+            if (this.tasks.get(i).getDescription().contains(keyword)) {
+                matchingTasksIndex.add(i);
+            }
+        }
+        ui.printMatchingTasks(matchingTasksIndex, this.tasks);
     }
 }
