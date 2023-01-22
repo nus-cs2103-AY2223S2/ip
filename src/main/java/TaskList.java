@@ -7,9 +7,6 @@ public class TaskList {
 
     public TaskList(Ui ui) {
         this.list = new ArrayList<Task>();
-        Task t = new ToDo("something");
-        this.list.add(t);
-
         this.ui = ui;
     }
 
@@ -25,6 +22,22 @@ public class TaskList {
         task.unmarkAsDone();
         this.ui.addToMessage("Ok, I've marked this task as not done yet:");
         this.ui.addToMessage(task.toString());
+    }
+
+    public void addTask(Task task) {
+        this.list.add(task);
+        this.ui.addToMessage("Got it. I've added this task:");
+        this.ui.addToMessage(task.toString());
+        this.ui.addToMessage(
+                String.format("Now you have %d tasks in the list.", list.size())
+            );
+    }
+
+    public void deleteTask(int index) {
+        Task currentTask = list.get(index);
+        list.remove(index);
+        this.ui.addToMessage("Noted. I've removed this task:");
+        this.ui.addToMessage(currentTask.toString());
     }
 
     public void displayTasks() {
