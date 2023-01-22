@@ -11,8 +11,9 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 import javafx.scene.layout.Region;
-
-
+import java.io.ByteArrayOutputStream;
+import java.io.PrintStream;
+import javafx.scene.control.Label;
 
 /**
  * Duke is the main class that directly handles the user input, and abstract
@@ -344,21 +345,47 @@ public class Duke extends Application {
         
         storage = new Storage();
         storage.readFromFile();
-        this.taskList = storage.getTasks();
-        storage.createDirectory();        
         
+        ByteArrayOutputStream storeString = new ByteArrayOutputStream();
+        PrintStream printStream = new PrintStream(storeString);
+        PrintStream oldPrintStream = System.out;
+        System.setOut(printStream);
+
+        this.taskList = storage.getTasks();
+        storage.createDirectory();
+ 
         ui = new Ui();
         ui.showWelcome();
+        
+        System.out.flush();
+        System.setOut(oldPrintStream);
+        System.out.println(storeString.toString());
         
         boolean isExit = false;
         
         while (!isExit) {
             ui.readCommand();
+            
+            /*
+            storeString = new ByteArrayOutputStream();
+            printStream = new PrintStream(storeString);
+            System.setOut(printStream);
+            */
+
             taskList = ui.execute(taskList);
+            
+            System.out.println("store string " + storeString); 
+            
+            /*
+            System.out.flush();
+            System.setOut(System.out);
+            System.out.println(storeString.toString());
+            */
+
             storage.writeToFile(taskList.toString());
         }
     }
-
+    
     @Override
     public void start(Stage stage) {
         //Step 1. Setting up required components
@@ -407,14 +434,37 @@ public class Duke extends Application {
 
         AnchorPane.setLeftAnchor(userInput , 1.0);
         AnchorPane.setBottomAnchor(userInput, 1.0);
+        
+        sendButton.setOnMouseClicked((event) -> {
+        dialogContainer.getChildren().add(getDialogLabel(userInput.getText()));
+        userInput.clear();
+    });
 
-        // more code to be added here later
+    userInput.setOnAction((event) -> {
+        dialogContainer.getChildren().add(getDialogLabel(userInput.getText()));
+        userInput.clear();
+    });
     }
 
+    /**
+     * Iteration 1:
+     * Creates a label with the specified text and adds it to the dialog container.
+     * @param text String containing text to add
+     * @return a label with the specified text that has word wrap enabled.
+     */
+    private Label getDialogLabel(String text) {
+        // You will need to import `javafx.scene.control.Label`.
+        Label textToAdd = new Label(text);
+        textToAdd.setWrapText(true);
+
+        return textToAdd;
+    }
+   
     /*
     public static void main(String[] args) {
         Duke duke = new Duke();
         duke.moreOop();
     }
     */
+    
 }
