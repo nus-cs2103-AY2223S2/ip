@@ -6,13 +6,13 @@ import task.TaskList;
 import ui.Ui;
 
 /**
+<<<<<<< HEAD
  * Command for ending the program.
+=======
+ * Command for ending the chatbot program.
+>>>>>>> master
  */
 public class ExitCommand extends Command {
-    public ExitCommand() {
-
-    }
-
     @Override
     public void execute(TaskList taskList, Ui ui, Storage storage) {
         ui.sayBye();

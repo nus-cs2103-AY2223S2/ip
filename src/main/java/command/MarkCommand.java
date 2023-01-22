@@ -6,7 +6,11 @@ import task.TaskList;
 import ui.Ui;
 
 /**
+<<<<<<< HEAD
  * Command for marking a task in a task list.
+=======
+ * Command for marking or unmarking a task.
+>>>>>>> master
  */
 public class MarkCommand extends Command {
     private final boolean isToMark;

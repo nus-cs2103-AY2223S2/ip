@@ -15,7 +15,11 @@ import struct.Triple;
 import task.TaskList;
 
 /**
+<<<<<<< HEAD
  * Storage module for handling file saves and loads.
+=======
+ * Storage module for handling saves and loads.
+>>>>>>> master
  */
 public class Storage {
     private final String filePath;
@@ -30,9 +34,9 @@ public class Storage {
     public void create() {
         try {
             File folder = new File("./data");
-            boolean folderCreationSuccessful = folder.mkdir();
+            boolean folderCreationIsSuccessful = folder.mkdir();
             File file = new File(this.filePath);
-            boolean isFileCreated = file.createNewFile();
+            boolean fileIsCreated = file.createNewFile();
         } catch (IOException e) {
             throw new CreateFileException();
         }

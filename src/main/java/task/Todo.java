@@ -3,7 +3,11 @@ package task;
 import parser.Parser;
 
 /**
+<<<<<<< HEAD
  * Todo task without any datetime fields.
+=======
+ * Todo task without any datetime field.
+>>>>>>> master
  */
 public class Todo extends Task {
 

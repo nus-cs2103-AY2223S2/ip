@@ -2,9 +2,15 @@ package struct;
 
 /**
  * Triple struct for handling complex data.
+<<<<<<< HEAD
  * @param <A> The type of the first value.
  * @param <B> The type of the second value.
  * @param <C> The type of the third value.
+=======
+ * @param <A> Type of first value.
+ * @param <B> Type of second value.
+ * @param <C> Type of third value.
+>>>>>>> master
  */
 public final class Triple<A, B, C> {
     private final A a;
@@ -12,10 +18,17 @@ public final class Triple<A, B, C> {
     private final C c;
 
     /**
+<<<<<<< HEAD
      * Constructor for Triple struct.
      * @param a First value.
      * @param b Second value.
      * @param c Third value.
+=======
+     * Constructor for Triple.
+     * @param a The first value.
+     * @param b The second value.
+     * @param c The third value.
+>>>>>>> master
      */
     public Triple(A a, B b, C c) {
         this.a = a;

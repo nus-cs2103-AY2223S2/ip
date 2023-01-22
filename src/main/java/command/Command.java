@@ -6,13 +6,13 @@ import task.TaskList;
 import ui.Ui;
 
 /**
+<<<<<<< HEAD
  * Command to be executed.
+=======
+ * Command that can be executed.
+>>>>>>> master
  */
 public abstract class Command {
-    public Command() {
-
-    }
-
     /**
      * Creates a new Command object based on the command given.
      * @param commandWordContent The content of the user response.
