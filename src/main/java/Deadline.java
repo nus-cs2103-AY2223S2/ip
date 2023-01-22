@@ -1,4 +1,5 @@
-import java.time.temporal.TemporalAccessor;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 
 /**
  * A task with an associated deadline
@@ -7,9 +8,9 @@ public class Deadline extends Task {
   /**
    * String representation of the deadline
    */
-  private final TemporalAccessor deadline;
+  private final LocalDateTime deadline;
 
-  public Deadline(String task, TemporalAccessor time) {
+  public Deadline(String task, LocalDateTime time) {
     super(task);
     this.deadline = time;
   }
@@ -21,7 +22,7 @@ public class Deadline extends Task {
   public String toString() {
     return String.format("%s (by: %s)", 
       super.toString(), 
-      Utils.timeToString(deadline)
+      deadline.format(DateTimeFormatter.ofPattern("dd/MM kk:hh"))
     );
   }
 }

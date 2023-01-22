@@ -40,7 +40,7 @@ public final class Utils {
     };
   }
 
-  public final static TemporalAccessor parseDateTime(String str0, String str1) {
+  public final static LocalDateTime parseDateTime(String str0, String str1) {
     List<String> dateFormats = List.of(
     "dd/MM" 
     );
@@ -58,13 +58,19 @@ public final class Utils {
         throw new IllegalArgumentException("Both str0 and str1 cannot be null!", null);
     } else if (str0 == null && str1 != null) {
         return parseDateTime(str1, null);
-    } else if (str0 != null && str1 == null) {
+    } 
+    
+    LocalDateTime currentTime = LocalDateTime.now();
+
+    if (str0 != null && str1 == null) {
       Optional<MonthDay> dateValue = dateParser.apply(str0);
       if (dateValue.isEmpty()) {
-          return timeParser.apply(str0)
-                  .orElseThrow(() -> new DateTimeParseException("Invalid date/time string!", str0, 0));
+        Optional<LocalTime> timeValue = timeParser.apply(str0);
+
+        if (timeValue.isEmpty()) throw new DateTimeParseException("Invalid date/time string!", str0, 0);
+        return LocalDateTime.of(currentTime.toLocalDate(), timeValue.get());
       }
-      return dateValue.get().atYear(LocalDate.now().getYear());
+      return LocalDateTime.of(dateValue.get().atYear(currentTime.getYear()), currentTime.toLocalTime());
     } else {
       Optional<MonthDay> date = dateParser.apply(str0);
       Optional<LocalTime> time = timeParser.apply(str1);
@@ -78,7 +84,7 @@ public final class Utils {
           throw new DateTimeParseException("Invalid date/time string!", str1, 0);
       }
 
-      LocalDate dateValue = date.get().atYear(LocalDate.now().getYear());
+      LocalDate dateValue = date.get().atYear(currentTime.getYear());
       return LocalDateTime.of(dateValue, time.get());
     }
   }

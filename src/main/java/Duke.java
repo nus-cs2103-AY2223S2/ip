@@ -1,7 +1,7 @@
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
+import java.time.LocalDateTime;
 import java.time.format.DateTimeParseException;
-import java.time.temporal.TemporalAccessor;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Map;
@@ -107,7 +107,7 @@ public final class Duke {
 
 
             try {
-                TemporalAccessor deadline = Utils.parseDateTime(args[index + 1], index + 2 >= args.length ? null : args[index + 2]);
+                LocalDateTime deadline = Utils.parseDateTime(args[index + 1], index + 2 >= args.length ? null : args[index + 2]);
                 String taskStr = Utils.joiner(args, 1, index);
                 Task task = new Deadline(taskStr, deadline);
                 addTask.accept(task);
@@ -153,8 +153,8 @@ public final class Duke {
             try {
                 String taskStr = Utils.joiner(args, 1, fromIndex);
 
-                TemporalAccessor fromTime = Utils.parseDateTime(args[fromIndex + 1], toIndex - fromIndex == 2 ? null : args[fromIndex + 2]);
-                TemporalAccessor toTime = Utils.parseDateTime(args[toIndex + 1], toIndex + 2 >= args.length ? null : args[toIndex + 2]);
+                LocalDateTime fromTime = Utils.parseDateTime(args[fromIndex + 1], toIndex - fromIndex == 2 ? null : args[fromIndex + 2]);
+                LocalDateTime toTime = Utils.parseDateTime(args[toIndex + 1], toIndex + 2 >= args.length ? null : args[toIndex + 2]);
             
                 Task task = new Event(taskStr, fromTime, toTime);
                 addTask.accept(task);
