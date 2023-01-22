@@ -3,6 +3,8 @@ package aqua.aquatask;
 import java.time.LocalDateTime;
 import java.util.Optional;
 
+import aqua.util.DateUtils;
+
 public class AquaDeadline extends AquaTask {
     private final boolean isComplete;
     private final LocalDateTime by;
@@ -39,6 +41,6 @@ public class AquaDeadline extends AquaTask {
 
     @Override
     public String toString() {
-        return String.format("[D]%s (by: %s)", super.toString(), by);
+        return String.format("[D]%s (by: %s)", super.toString(), DateUtils.formatNice(by));
     }
 }

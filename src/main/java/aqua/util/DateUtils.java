@@ -35,4 +35,9 @@ public class DateUtils {
             String.format("I do not understand when this is [%s]", dateString)
         );
     }
+
+
+    public static String formatNice(LocalDateTime time) {
+        return time.format(DateTimeFormatter.ofPattern("d LLL yyyy HHmm"));
+    }
 }

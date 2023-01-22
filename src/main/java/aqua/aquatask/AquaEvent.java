@@ -3,6 +3,8 @@ package aqua.aquatask;
 import java.time.LocalDateTime;
 import java.util.Optional;
 
+import aqua.util.DateUtils;
+
 public class AquaEvent extends AquaTask {
     private final boolean isComplete;
     private final LocalDateTime from;
@@ -47,6 +49,11 @@ public class AquaEvent extends AquaTask {
 
     @Override
     public String toString() {
-        return String.format("[E]%s (from: %s to: %s)", super.toString(), from, to);
+        return String.format(
+            "[E]%s (from: %s to: %s)",
+            super.toString(),
+            DateUtils.formatNice(from),
+            DateUtils.formatNice(to)
+        );
     }
 }
