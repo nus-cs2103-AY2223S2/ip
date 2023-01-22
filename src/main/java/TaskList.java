@@ -3,8 +3,18 @@ import java.util.ArrayList;
 public class TaskList {
     private ArrayList<Task> list = new ArrayList<>();
 
-    TaskList() {
+    TaskList(ArrayList<String> stringList) {
+        for (String task : stringList) {
+            try {
+                String[] taskSplit = task.split(" ", 2);
+                this.addTask(taskSplit[1]);
+                int taskNum = this.getTaskCount();
+                this.markTask(taskSplit[0], taskNum);
+            } catch (InvalidTodoException | InvalidDeadlineException | InvalidEventException e) {
+                System.out.println(e.getMessage());
+            }
 
+        }
     }
 
     @Override
@@ -45,7 +55,7 @@ public class TaskList {
 
             content = dateSplit[0];
             String dueDate = dateSplit[1];
-            taskToAdd = new Deadline(content,dueDate);
+            taskToAdd = new Deadline(content, dueDate);
         } else {
             if (contentSplit.length == 1) {
                 throw new InvalidEventException("The description of an event task cannot be empty\n");
@@ -62,6 +72,7 @@ public class TaskList {
             String fromToDate = dateSplit[1];
             taskToAdd = new Event(content, fromToDate);
         }
+
         this.list.add(taskToAdd);
 
         return taskToAdd;
@@ -92,4 +103,5 @@ public class TaskList {
     public int getTaskCount() {
         return list.size();
     }
+
 }

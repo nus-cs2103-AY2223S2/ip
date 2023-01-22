@@ -1,8 +1,10 @@
 public class MessageProcessor {
     TaskList taskList;
+    Storage storage;
 
-    MessageProcessor(TaskList taskList) {
+    MessageProcessor(TaskList taskList, Storage storage) {
         this.taskList = taskList;
+        this.storage = storage;
     }
 
     private Task processMark(String message) {
@@ -11,6 +13,9 @@ public class MessageProcessor {
         int taskNum = Integer.parseInt(messageSplit[1]);
 
         this.taskList.markTask(action, taskNum);
+
+        // Mark task in storage
+        this.storage.markTask(message);
 
         return this.taskList.getTask(taskNum);
     }
@@ -87,10 +92,18 @@ public class MessageProcessor {
             message = generateTaskMessage(status, task);
         } else if (isAdd(message)) {
             Task task = taskList.addTask(message);
+
+            // Add task in storage
+            this.storage.addTask(message);
+
             status = MessageStatus.ADD;
             message = generateTaskMessage(status, task);
         } else if (isDelete(message)) {
             Task task = taskList.deleteTask(message);
+
+            // Delete task in storage
+            this.storage.deleteTask(message);
+
             status = MessageStatus.DELETE;
             message = generateTaskMessage(status, task);
         } else {

@@ -3,8 +3,9 @@ import java.util.Scanner;
 public class Duke {
     public static void main(String[] args) {
         boolean end = false;
-        TaskList taskList = new TaskList();
-        MessageProcessor messageProcessor = new MessageProcessor(taskList);
+        Storage storage = new Storage();
+        TaskList taskList = new TaskList(storage.load());
+        MessageProcessor messageProcessor = new MessageProcessor(taskList, storage);
         DukeMessage initMessage = new DukeMessage(MessageStatus.START);
         System.out.println(initMessage);
 
