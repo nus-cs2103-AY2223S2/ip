@@ -10,6 +10,7 @@ import duke.task.TaskList;
 public class ListCommand extends Command{
 
     public String fullCommand;
+
     /**
      * Creates a new ListCommand
      */

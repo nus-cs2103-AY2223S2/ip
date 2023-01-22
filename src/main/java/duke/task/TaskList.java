@@ -1,4 +1,5 @@
 package duke.task;
+
 import duke.exception.DukeException;
 
 import java.util.ArrayList;
@@ -9,7 +10,7 @@ public class TaskList {
     protected ArrayList<Task> listDataBase = new ArrayList<>();
 
     public TaskList(ArrayList<String> commands) throws DukeException {
-            this.listOfCommands = commands;
+        this.listOfCommands = commands;
     }
 
     public TaskList() {
@@ -22,18 +23,21 @@ public class TaskList {
             System.out.println(listDataBase.get(i).toString());
         }
     }
+
     public void unmark(int taskNumber) {
         Task taskName = listDataBase.get(taskNumber - 1);
         taskName.unMark();
         System.out.println("OK, I've marked this task as not done yet");
         System.out.println(taskName.toString());
     }
+
     public void mark(int taskNumber) {
         Task taskName = listDataBase.get(taskNumber - 1);
         taskName.markAsDone();
         System.out.println("Nice! I've marked this task as done:");
         System.out.println(taskName.toString());
     }
+
     public void todo(String[] s) throws DukeException {
         String taskDescription = "";
         if (s.length < 2) {
@@ -76,8 +80,9 @@ public class TaskList {
         System.out.println("Got it. I've added this task:");
         System.out.println(taskName.toString());
         listDataBase.add(taskName);
-        System.out.println("Now you have " + listDataBase.size()+ " tasks in the list.");
+        System.out.println("Now you have " + listDataBase.size() + " tasks in the list.");
     }
+
     public void event(String[] s) throws DukeException {
         String taskDescription = "";
         boolean isStartTime = false;
@@ -121,9 +126,11 @@ public class TaskList {
         listDataBase.remove(taskNumberDelete - 1);
         System.out.println("Now you have " + listDataBase.size() + " tasks in the list");
     }
+
     public ArrayList<Task> getDataBase() {
         return this.listDataBase;
     }
+
     public String printCommands(int currIteration) {
         if (currIteration < listOfCommands.size()) {
             return listOfCommands.get(currIteration);

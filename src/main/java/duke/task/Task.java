@@ -9,6 +9,7 @@ public class Task {
 
     /**
      * Creates a task object
+     *
      * @param description the data to be stored
      */
     public Task(String description) {
@@ -18,6 +19,7 @@ public class Task {
 
     /**
      * The status icon X or no icon if the task is done or not done
+     *
      * @return a string of "X" or " "
      */
     public String getStatusIcon() {
@@ -41,13 +43,13 @@ public class Task {
 
     /**
      * A toString method of the format [x] todo_task
+     *
      * @return a string of above format
      */
     @Override
     public String toString() {
         return "[" + this.getStatusIcon() + "] " + this.description;
     }
-
 
 
 }

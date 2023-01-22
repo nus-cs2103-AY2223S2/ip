@@ -5,8 +5,11 @@ import duke.storage.Storage;
 import duke.task.*;
 import duke.command.*;
 
-/** Main Duke class which keep track a list of tasks
- *
+
+
+/**
+ * Main Duke class which keep track a list of tasks
+
  */
 class Duke {
 
@@ -51,8 +54,9 @@ class Duke {
             }
         }
     }
+
     public static void main(String[] args) {
         new Duke("./././text-ui-test/input.txt").run();
-        }
+    }
 
 }

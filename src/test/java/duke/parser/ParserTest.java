@@ -11,7 +11,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class ParserTest {
     @Test
-    public void checkToDoClass(){
+    public void checkToDoClass() {
         try {
             String fullCommand = "todo read book";
             String[] s = fullCommand.split(" ");
@@ -22,7 +22,7 @@ public class ParserTest {
     }
 
     @Test
-    public void checkDeleteClassTest(){
+    public void checkDeleteClassTest() {
         try {
             String fullCommand = "delete 1";
             String[] s = fullCommand.split(" ");
@@ -33,7 +33,7 @@ public class ParserTest {
     }
 
     @Test
-    public void checkExitClassTest(){
+    public void checkExitClassTest() {
         try {
             String fullCommand = "bye";
             String[] s = fullCommand.split(" ");

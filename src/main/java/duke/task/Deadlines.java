@@ -1,18 +1,20 @@
 package duke.task;
+
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
 /**
  * A class that creates a deadline object for the deadline command
  */
-public class Deadlines extends Task{
+public class Deadlines extends Task {
 
     protected LocalDateTime date;
 
     /**
      * A constructor to create a deadline object
+     *
      * @param description What task to be kept track
-     * @param date date and time the task is due
+     * @param date        date and time the task is due
      */
     public Deadlines(String description, String date) {
         super(description);
@@ -21,8 +23,10 @@ public class Deadlines extends Task{
 
     }
 
+
     /**
      * To String method that returns the specified (MMM d YYYY HHmm)
+     *
      * @return a string of the above format
      */
     @Override

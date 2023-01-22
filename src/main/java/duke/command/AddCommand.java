@@ -42,6 +42,7 @@ public class AddCommand extends Command{
 
     /**
      * Tests if at end of command stack
+     *
      * @return false if not at end, true if no more commands left
      */
     @Override

@@ -8,6 +8,7 @@ import duke.task.Task;
 public class ToDos extends Task {
     /**
      * A constructor to create a todo object
+     *
      * @param description the task to be kept
      */
     public ToDos(String description) {
@@ -16,6 +17,7 @@ public class ToDos extends Task {
 
     /**
      * A task Icon of T represented for todo
+     *
      * @return "T"
      */
     public String getTaskIcon() {
@@ -24,6 +26,7 @@ public class ToDos extends Task {
 
     /**
      * A toString method of format [T] task_todo
+     *
      * @return a string of above format
      */
     @Override

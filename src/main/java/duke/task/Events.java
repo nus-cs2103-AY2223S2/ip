@@ -16,9 +16,10 @@ public class Events extends Task {
 
     /**
      * A constructor of events object
+     *
      * @param description the task to be stored
-     * @param startTime the time the task starts
-     * @param endTime the time the task ends
+     * @param startTime   the time the task starts
+     * @param endTime     the time the task ends
      */
     public Events(String description, String startTime, String endTime) {
         super(description);
@@ -30,6 +31,7 @@ public class Events extends Task {
 
     /**
      * A to string method of format [E][] (from: MMM d yyyy HHmm to: MMM d yyyy HHmm)
+     *
      * @return the string of above specifications
      */
     @Override
