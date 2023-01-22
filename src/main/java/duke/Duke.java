@@ -25,7 +25,7 @@ public class Duke {
     }
 
     /**
-     * Begins the chat session with the user.
+     * Begins the chat session with the user
      */
     public void run() {
         /* Greet the user */
