@@ -51,7 +51,7 @@ public class Duke {
     }
 
     public static void getList() {
-        System.out.println("Here are the tassks in your list:");
+        System.out.println("Here are the tasks in your list:");
         for (int i = 0; i < list.size(); i++) {
             Task task = list.get(i);
             System.out.println(i+1 + "." + task.toString());
