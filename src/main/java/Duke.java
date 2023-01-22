@@ -23,6 +23,9 @@ public class Duke {
         PrintWriter pw = new PrintWriter(new BufferedWriter(new OutputStreamWriter(System.out)));
         StringBuilder sb = new StringBuilder();
         boolean hasFile = true;
+        boolean isStorageData = true;
+        ArrayList<String> storageElements = new ArrayList<String>();
+        ArrayList<Task> storage2 = new ArrayList<Task>();
         String text = "";
         sb.append("    ____________________________________________________________\n")
                 .append("    Hello! I'm Duke.\n")
@@ -35,10 +38,15 @@ public class Duke {
             DukeException.folderCheck("data");  // Checks if the folder exists
             BufferedReader fr = new BufferedReader(new FileReader("data/storage.txt"));
             // Checks if the storage file is in the right folder
-        } catch (FolderNotFoundException em) {
-            System.out.println(em);
+            String currLine;
+            while ( (currLine = fr.readLine()) != null) {
+                storageElements.add(currLine);  // Copy storage.txt elements over
+            }
+            fr.close();
+        } catch (FolderNotFoundException ex) {
+            System.out.println(ex);
             hasFile = false;
-        } catch (FileNotFoundException e) {
+        } catch (FileNotFoundException ex) {
             sb.append("    ____________________________________________________________\n")
                     .append("    File 'storage' cannot be found.\n")
                     .append("    Please download the latest version of Duke or create")
@@ -48,12 +56,18 @@ public class Duke {
             pw.flush();
             sb.setLength(0);
             hasFile = false;
+        } catch (IOException ex) {
+            ex.printStackTrace();
         }
-        ArrayList<Task> storage2 = new ArrayList<Task>();
         while (hasFile) {
             boolean hasIssue = false;   // check if there's insufficient arguments provided by user
             boolean isAvailable = false;    // check if user is calling a supported function provided by Duke
-            text = br.readLine();
+            if (storageElements.size() != 0) {
+                text = storageElements.remove(0);
+            } else {
+                isStorageData = false;
+                text = br.readLine();
+            }
             String[] tempText = text.split(" ", 2);
             String tempCmd = tempText[0].toLowerCase();
             if ( (tempCmd.equals("mark")) || (tempCmd.equals("unmark")) || (tempCmd.equals("delete")) ||
@@ -171,11 +185,13 @@ public class Duke {
                 if (!hasIssue) {
                     storage2.add(newTask);
                 }
-                sb.append("    ____________________________________________________________\n")
-                        .append("    Got it. I've added this task to the list:\n")
-                        .append("      ").append(newTask.getTaskInfo())
-                        .append("\n    Now you have ").append(storage2.size()).append(" tasks in the list.\n")
-                        .append("    ____________________________________________________________\n");
+                if (!isStorageData) {
+                    sb.append("    ____________________________________________________________\n")
+                            .append("    Got it. I've added this task to the list:\n")
+                            .append("      ").append(newTask.getTaskInfo())
+                            .append("\n    Now you have ").append(storage2.size()).append(" tasks in the list.\n")
+                            .append("    ____________________________________________________________\n");
+                }
             }
             if (hasIssue) {
                 sb.setLength(0);
