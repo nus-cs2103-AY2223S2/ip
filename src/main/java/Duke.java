@@ -4,6 +4,8 @@ import java.io.BufferedWriter;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;
+import java.io.FileReader;
+import java.io.FileNotFoundException;
 
 import java.lang.StringBuilder;
 
@@ -20,6 +22,7 @@ public class Duke {
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
         PrintWriter pw = new PrintWriter(new BufferedWriter(new OutputStreamWriter(System.out)));
         StringBuilder sb = new StringBuilder();
+        boolean canRun = true;
         String text = "";
         sb.append("    ____________________________________________________________\n")
                 .append("    Hello! I'm Duke.\n")
@@ -28,8 +31,25 @@ public class Duke {
         pw.println(sb.toString());  // Welcome Message bye Duke
         pw.flush();
         sb.setLength(0);
+        try {
+            DukeException.folderCheck("data");
+            BufferedReader fr = new BufferedReader(new FileReader("data/storages.txt"));
+        } catch (FolderNotFoundException em) {
+            System.out.println(em);
+            canRun = false;
+        } catch (FileNotFoundException e) {
+            sb.append("    ____________________________________________________________\n")
+                    .append("    File 'storage' cannot be found.\n")
+                    .append("    Please download the latest version of Duke or create")
+                    .append("\n    'storage.txt' under the folder 'data'.\n")
+                    .append("    ____________________________________________________________\n");
+            pw.println(sb.toString());  // Welcome Message bye Duke
+            pw.flush();
+            sb.setLength(0);
+            canRun = false;
+        }
         ArrayList<Task> storage2 = new ArrayList<Task>();
-        while (true) {
+        while (canRun) {
             boolean goNext = false;
             boolean secondaryCheck = false;
             text = br.readLine();
