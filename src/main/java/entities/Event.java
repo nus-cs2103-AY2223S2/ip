@@ -25,6 +25,7 @@ public class Event extends Task {
         super(description);
         this.from = from;
         this.to = to;
+        this.taskType = TaskType.EVENT;
     }
 
     /**
@@ -37,6 +38,7 @@ public class Event extends Task {
         super(description);
         this.from = LocalDate.parse(flags[0]);
         this.to = LocalDate.parse(flags[1]);
+        this.taskType = TaskType.EVENT;
     }
 
     /**

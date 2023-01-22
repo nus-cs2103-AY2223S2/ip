@@ -11,6 +11,7 @@ import enums.TaskType;
 public class Todo extends Task {
     public Todo(String description) {
         super(description);
+        this.taskType = TaskType.TODO;
     }
 
     /**

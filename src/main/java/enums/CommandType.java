@@ -13,5 +13,6 @@ public enum CommandType {
     MARK,
     UNMARK,
     INVALID,
-    DATE
+    DATE,
+    FIND
 }

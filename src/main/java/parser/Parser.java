@@ -15,7 +15,7 @@ import exceptions.DukeException;
  */
 public abstract class Parser {
     private static final Pattern VALID_COMMAND =
-            Pattern.compile("^(?<cmd>list|bye|mark|date|unmark|delete|todo|deadline|event)(?<arguments>.*)?",
+            Pattern.compile("^(?<cmd>list|bye|mark|date|unmark|delete|todo|deadline|event|find)(?<arguments>.*)?",
                     Pattern.CASE_INSENSITIVE);
     private static final Command invalidCommand = new Command(CommandType.INVALID) {
         @Override
@@ -35,6 +35,7 @@ public abstract class Parser {
         case TODO:       return new TodoCommand(arguments);
         case DEADLINE:   return new DeadlineCommand(arguments);
         case EVENT:      return new EventCommand(arguments);
+        case FIND:      return new FindCommand(arguments);
         default:         return invalidCommand;
         }
     }

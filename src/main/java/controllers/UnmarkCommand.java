@@ -38,7 +38,7 @@ public class UnmarkCommand extends Command {
             Optional<Task> task = store.getTask(Integer.parseInt(m.group()));
             task.ifPresent(Task::unmarkTask);
         } else {
-            throw new DukeException("Invalid format. Please ensure that you specify the task number.");
+            throw new DukeException(INVALID_FORMAT_ERROR + " " + "Please ensure that you specify the task number.");
         }
     }
 }

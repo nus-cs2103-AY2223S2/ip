@@ -17,8 +17,7 @@ public abstract class Command implements IExecutable<TaskList> {
     private final CommandType commandType;
     /** Indicates if the program should terminate after executing the command **/
     private boolean isTerminating = false;
-
-
+    protected static final String INVALID_FORMAT_ERROR = "Invalid format.";
     protected static final Pattern VALID_NUMBER = Pattern.compile("[-+]?\\d+");
     protected static final Pattern VALID_DATE =
             Pattern.compile("(?<year>\\d{4})-(?<month>0[0-9]|1[0-2])-(?<day>0[0-9]|1[0-9]|2[0-9]|3[0-1])$");
