@@ -37,12 +37,24 @@ public class Duke {
             return;
         }
 
-        if (firstWord.equals("mark") || firstWord.equals("unmark")) {
+        if (firstWord.equals("mark")) {
 
             String secondWord = userInput.split(" ", 2)[1];
             int taskNumber = Integer.parseInt(secondWord);
             taskStorage.updateTask(taskNumber);
-            respond("The status of your specified task has been updated!");
+            Task target = taskStorage.getTask(taskNumber);
+            respond("I have marked this task as done! \n" + target.provideDetails());
+            return;
+
+        }
+
+        if (firstWord.equals("unmark")) {
+
+            String secondWord = userInput.split(" ", 2)[1];
+            int taskNumber = Integer.parseInt(secondWord);
+            taskStorage.updateTask(taskNumber);
+            Task target = taskStorage.getTask(taskNumber);
+            respond("I have marked this task as undone! \n" + target.provideDetails());
             return;
 
         }
@@ -57,23 +69,37 @@ public class Duke {
             return;
 
 
-        } if (firstWord.equals("deadline")) {
+        }
+        if (firstWord.equals("deadline")) {
             String bodyMessage = userInput.split(" ", 2)[1];
             Deadline newTask = new Deadline(bodyMessage);
             taskStorage.storeTasks(newTask);
             respond("I have added this new task:\n" + newTask.provideDetails()
-                    +  "\nYou now currently have "
+                    + "\nYou now currently have "
                     + taskStorage.getStorageCount() + " tasks.");
             return;
 
 
-        }  if (firstWord.equals("event")) {
+        }
+        if (firstWord.equals("event")) {
             String bodyMessage = userInput.split(" ", 2)[1];
             Event newTask = new Event(bodyMessage);
             taskStorage.storeTasks(newTask);
             respond("I have added this new task:\n" + newTask.provideDetails()
                     + "\nYou now currently have "
                     + taskStorage.getStorageCount() + " tasks.");
+
+        } if (firstWord.equals("delete")) {
+            String bodyMessage = userInput.split(" ", 2)[1];
+            int taskNumber = Integer.parseInt(bodyMessage);
+            Task toDelete = taskStorage.getTask(taskNumber);
+            taskStorage.deleteTask(taskNumber);
+
+
+            respond("We have removed this task: " + toDelete.provideDetails() + "\nYou now have "
+                                + taskStorage.getStorageCount() + " tasks remaining");
+
+
 
         } else {
             respond("OOPS!!! I'm sorry, but I don't know what that means :-(");
