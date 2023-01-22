@@ -1,21 +1,19 @@
-package duke;
+package duke.storage;
 
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.Scanner;
 
-import duke.task.Deadline;
-import duke.task.Event;
-import duke.task.Task;
-import duke.task.ToDo;
+import duke.DukeException;
+import duke.task.*;
 
 public class Storage {
 
     private String filePath = "data/duke.txt";
     private File file;
 
-    Storage() throws DukeException {
+    public Storage() throws DukeException {
         try {
             file = new File(filePath);
             if (!file.exists()) {

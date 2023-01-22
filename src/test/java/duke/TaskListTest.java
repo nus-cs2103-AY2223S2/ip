@@ -6,6 +6,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 import org.junit.jupiter.api.Test;
 
 import duke.task.Task;
+import duke.task.TaskList;
 
 public class TaskListTest {
     @Test

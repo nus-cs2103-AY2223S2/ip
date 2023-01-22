@@ -1,17 +1,17 @@
 package duke.command;
 
 import duke.DukeException;
-import duke.TaskList;
-import duke.UI;
+import duke.ui.Ui;
+import duke.task.TaskList;
 
 public abstract class Command {
     protected TaskList taskList;
-    protected UI ui;
+    protected Ui ui;
 
     public Command() {
     }
 
-    public void assign(TaskList taskList, UI ui) {
+    public void assign(TaskList taskList, Ui ui) {
         this.taskList = taskList;
         this.ui = ui;
     }

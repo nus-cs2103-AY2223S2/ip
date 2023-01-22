@@ -9,9 +9,11 @@ import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
+import duke.ui.Ui;
+
 public class UiTest {
     private static final PrintStream originalOut = System.out;
-    private final UI ui = new UI();
+    private final Ui ui = new Ui();
     private final ByteArrayOutputStream outContent = new ByteArrayOutputStream();
 
     @BeforeEach

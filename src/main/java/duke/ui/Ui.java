@@ -1,10 +1,12 @@
-package duke;
+package duke.ui;
 
 import java.util.Scanner;
 
+import duke.DukeException;
 import duke.task.Task;
+import duke.task.TaskList;
 
-public class UI {
+public class Ui {
     private Scanner in = new Scanner(System.in);
 
     public void printWelcomeMessage() {

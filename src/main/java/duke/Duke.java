@@ -2,15 +2,18 @@ package duke;
 
 import duke.command.Command;
 import duke.parser.Parser;
+import duke.storage.Storage;
+import duke.task.TaskList;
+import duke.ui.Ui;
 
 public class Duke {
-    private UI ui;
+    private Ui ui;
     private Storage storage;
     private TaskList taskList;
     private Parser parser;
 
     public Duke() throws DukeException {
-        ui = new UI();
+        ui = new Ui();
         parser = new Parser();
         storage = new Storage();
         taskList = storage.readFromFile();
@@ -31,9 +34,5 @@ public class Duke {
         }
         storage.writeToFile(taskList);
         ui.printByeMessage();
-    }
-
-    public static void main(String[] args) throws DukeException {
-        new Duke();
     }
 }
