@@ -60,6 +60,14 @@ class Parser {
                 int idx = getTaskNumberArg(args[1]) - 1;
                 return Handlers.unmark(idx);
             }
+            case "find": {
+                String[] pair = cmd.split("\\s+", 2);
+                String searchTerm = "";
+                if (pair.length == 2) {
+                    searchTerm = pair[1];
+                }
+                return Handlers.find(searchTerm);
+            }
             default: {
                 return Handlers.unknown(args[0]);
             }

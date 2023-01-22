@@ -3,6 +3,7 @@ package chungus;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.function.BiConsumer;
+import java.util.function.Predicate;
 import java.util.stream.Collectors;
 
 class TaskList {
@@ -20,6 +21,10 @@ class TaskList {
         for (int i = 0; i < tasks.size(); i++) {
             f.accept(tasks.get(i), i);
         }
+    }
+
+    public TaskList filter(Predicate<Task> f) {
+        return new TaskList(tasks.stream().filter(f).collect(Collectors.toList()));
     }
 
     public String marshal() {
