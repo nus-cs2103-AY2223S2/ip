@@ -2,6 +2,9 @@ package aqua.aquatask;
 
 
 public class AquaEvent extends AquaTask {
+    public static final String FROM_TAG = "from";
+    public static final String TO_TAG = "to";
+
     private final boolean isComplete;
     private final String from;
     private final String to;
@@ -28,6 +31,18 @@ public class AquaEvent extends AquaTask {
     @Override
     public boolean isComplete() {
         return isComplete;
+    }
+
+
+    @Override
+    public String getReloadString() {
+        return String.format(
+            "event %s /%s %s /%s %s /%s %s",
+            getName(),
+            FROM_TAG, from,
+            TO_TAG, to,
+            IS_COMPLETED_TAG, isComplete
+        );
     }
 
 

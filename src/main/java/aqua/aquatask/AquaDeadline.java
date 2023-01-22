@@ -2,6 +2,8 @@ package aqua.aquatask;
 
 
 public class AquaDeadline extends AquaTask {
+    public static final String BY_TAG = "by";
+
     private final boolean isComplete;
     private final String by;
 
@@ -26,6 +28,17 @@ public class AquaDeadline extends AquaTask {
     @Override
     public boolean isComplete() {
         return this.isComplete;
+    }
+
+
+    @Override
+    public String getReloadString() {
+        return String.format(
+            "deadline %s /%s %s /%s %s",
+            getName(),
+            BY_TAG, by,
+            IS_COMPLETED_TAG, isComplete
+        );
     }
 
 

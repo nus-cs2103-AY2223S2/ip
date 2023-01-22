@@ -12,6 +12,11 @@ then
     rm ACTUAL.TXT
 fi
 
+if [ -e "./SAVE_DATA" ]
+then
+    rm -r SAVE_DATA
+fi
+
 # compile the code into the bin folder, terminates if error occurred
 if ! javac -cp ../src/main/java -Xlint:none -d ../bin ../src/main/java/aqua/*.java
 then

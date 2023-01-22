@@ -7,7 +7,7 @@ import aqua.logic.parser.CommandLineInputParser;
 public class AppManager {
     private final CommandLineInputParser inputParser = new CommandLineInputParser(new ArgumentParser());
     private final TaskManager taskManager = new TaskManager();
-    private static final ReplyFormatManager formatManager = new ReplyFormatManager();
+    private final ReplyFormatManager formatManager = new ReplyFormatManager();
     
     private boolean isClosed = false;
 

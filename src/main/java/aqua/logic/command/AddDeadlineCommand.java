@@ -11,8 +11,11 @@ public class AddDeadlineCommand extends AddTaskCommand {
         String name = args.getMainInput()
                 .filter(n -> !n.isBlank())
                 .orElseThrow(() -> new IllegalSyntaxException("Name disappeared!"));
-        String by = args.get("by")
+        String by = args.get(AquaDeadline.BY_TAG)
                 .orElseThrow(() -> new IllegalSyntaxException("[by] disappeared!"));
-        return new AquaDeadline(name, by);
+        boolean isCompleted = args.get(AquaDeadline.IS_COMPLETED_TAG)
+                .map(isComp -> Boolean.parseBoolean(isComp))
+                .orElse(false);
+        return new AquaDeadline(name, isCompleted, by);
     }
 }
