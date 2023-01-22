@@ -1,8 +1,8 @@
 package command;
 
 import duke.DukeException;
-import duke.TaskList;
 import duke.Ui;
+import task.TaskList;
 
 /**
  * Command deals with executing a user command.

@@ -64,7 +64,15 @@ public class ParserTest {
             fail();
         }
 
-        /* Test Case 8: end chat session */
+        /* Test Case 8: find tasks */
+        try {
+            Command findTasks = Parser.parse("find query");
+            assertEquals(FindCommand.class, findTasks.getClass());
+        } catch (DukeException e) {
+            fail();
+        }
+
+        /* Test Case 9: end chat session */
         try {
             Command endChat = Parser.parse("bye");
             assertEquals(ExitCommand.class, endChat.getClass());
@@ -131,7 +139,15 @@ public class ParserTest {
             return; /* passed */
         }
 
-        /* Test Case 8: totally unrecognised command */
+        /* Test Case 8: missing query string */
+        try {
+            Parser.parse("find ");
+            fail();
+        } catch (DukeException e) {
+            return; /* passed */
+        }
+
+        /* Test Case 9: totally unrecognised command */
         try {
             Parser.parse("add task 1");
             fail();

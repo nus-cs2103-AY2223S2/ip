@@ -1,8 +1,9 @@
-package duke;
+package task;
 
 import java.util.ArrayList;
+import java.util.Iterator;
 
-import task.Task;
+import duke.DukeException;
 
 /**
  * TaskList contains the task list which stores tasks and has operations to add/delete tasks in the list.
@@ -85,5 +86,25 @@ public class TaskList {
         } catch (IndexOutOfBoundsException e) {
             throw new DukeException("Sorry you have provided an invalid task number...");
         }
+    }
+
+    /**
+     * Finds tasks with description containing the query string.
+     * @param query The query string.
+     * @return The matched tasks.
+     */
+    public ArrayList<Task> find(String query) {
+        Iterator<Task> tasksIterator = this.tasks.iterator();
+
+        ArrayList<Task> results = new ArrayList<>();
+
+        while (tasksIterator.hasNext()) {
+            Task task = tasksIterator.next();
+            if (task.description.contains(query)) {
+                results.add(task);
+            }
+        }
+
+        return results;
     }
 }

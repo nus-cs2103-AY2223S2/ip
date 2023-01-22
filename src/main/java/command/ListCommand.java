@@ -2,14 +2,19 @@ package command;
 
 import java.util.Iterator;
 
-import duke.TaskList;
 import duke.Ui;
 import task.Task;
+import task.TaskList;
 
 /**
  * Command to list all the latest recorded tasks of the current chat session.
  */
 public class ListCommand extends Command {
+    /**
+     * Lists all tasks currently recorded in the chat session.
+     * @param tasks The existing task list.
+     * @param ui The ui of Duke chat.
+     */
     @Override
     public void execute(TaskList tasks, Ui ui) {
         Iterator<Task> tasksIterator = tasks.list().iterator();
@@ -26,6 +31,10 @@ public class ListCommand extends Command {
         }
     }
 
+    /**
+     * Determines if the current command is an exit command.
+     * @return False.
+     */
     @Override
     public boolean isExit() {
         return false;
