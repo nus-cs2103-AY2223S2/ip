@@ -15,11 +15,12 @@ public class Event extends Task {
         this.to = DateParser.parse(to);
     }
 
+    /**
+     * Creates a new Event object.
+     * @param content The content of the event.
+     * @return A new Event object.
+     */
     public static Event create(String content) {
-        /**
-         * @param content what to place in this seedu.task.
-         * @returns the output Task.Event object.
-         */
         String source = "Task.Event Creation";
 
         String[] contentAndFrom = Parser.handleMissingField(content, "/from", "from", source);

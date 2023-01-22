@@ -26,6 +26,9 @@ public class Duke {
         }
     }
 
+    /**
+     * Starts the Duke chatbot.
+     */
     public void run() {
         this.ui.sayHi();
         boolean isExit = false;

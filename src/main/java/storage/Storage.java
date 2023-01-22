@@ -21,6 +21,9 @@ public class Storage {
         this.filePath = filePath;
     }
 
+    /**
+     * Creates a folder and a file, if not already created.
+     */
     public void create() {
         try {
             File folder = new File("./data");
@@ -32,6 +35,10 @@ public class Storage {
         }
     }
 
+    /**
+     * Saves the data within the task list into a file.
+     * @param taskList The task list to be saved.
+     */
     public void save(TaskList taskList) {
         try {
             FileWriter writer = new FileWriter(this.filePath);
@@ -43,6 +50,10 @@ public class Storage {
         }
     }
 
+    /**
+     * Loads the data from the text file.
+     * @return A list of taskType-markedStatus-content triples is returned.
+     */
     public ArrayList<Triple<Character, Boolean, String>> load() {
         try {
             File file = new File(this.filePath);

@@ -8,11 +8,12 @@ public class Todo extends Task {
         super(content);
     }
 
+    /**
+     * Creates a new Todo object.
+     * @param content The content of the todo.
+     * @return A new Todo object.
+     */
     public static Todo create(String content) {
-        /**
-         * @param content what to place in this seedu.task.
-         * @returns the output Task.Todo object.
-         */
         Parser.handleEmptyField(content, "content", "Task.Todo Creation");
         return new Todo(content);
     }

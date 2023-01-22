@@ -9,12 +9,14 @@ public abstract class Task {
         this.content = content;
     }
 
+    /**
+     * Creates a task object based on a taskType.
+     * If taskType is invalid, then return null.
+     * @param taskType Whether it is a Task.Todo, Task.Deadline or Task.Event.
+     * @param content What to put in the task.
+     * @return Task object.
+     */
     public static Task create(char taskType, String content) {
-        /**
-         * @param taskType whether it is a Task.Todo, Task.Deadline or Task.Event.
-         * @param content what to put in the seedu.task.
-         * @returns the output Task.Task object.
-         */
         switch (taskType) {
         case 'T':
             return Todo.create(content);
@@ -27,17 +29,26 @@ public abstract class Task {
         }
     }
 
+    /**
+     * Either marks or unmarks the task.
+     * @param isToMark Whether to mark or unmark the task.
+     */
     public void mark(boolean isToMark) {
-        /**
-         * @param isToMark whether to mark or unmark the seedu.task.
-         */
         this.marked = isToMark;
     }
 
+    /**
+     * Returns whether the task is marked.
+     * @return Whether the task is marked.
+     */
     public boolean isMarked() {
         return this.marked;
     }
 
+    /**
+     * Returns the contents of the task.
+     * @return The contents of the task.
+     */
     public String getContent() {
         return this.content;
     }
@@ -48,5 +59,9 @@ public abstract class Task {
         return String.format("[%s] %s", markedStatus, this.getContent());
     }
 
+    /**
+     * Formats the task object for storage.
+     * @return The String representing the task.
+     */
     public abstract String toStorageString();
 }

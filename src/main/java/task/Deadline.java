@@ -13,11 +13,12 @@ public class Deadline extends Task {
         this.by = DateParser.parse(by);
     }
 
+    /**
+     * Creates a new Deadline object.
+     * @param content The content of the object.
+     * @return A new deadline object.
+     */
     public static Deadline create(String content) {
-        /**
-         * @param content what to place in this seedu.task.
-         * @returns the output Task.Deadline object.
-         */
         String source = "Task.Deadline Creation";
         String[] contentAndBy = Parser.handleMissingField(content, "/by", "by", source);
 

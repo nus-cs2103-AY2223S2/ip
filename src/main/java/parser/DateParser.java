@@ -14,6 +14,11 @@ public class DateParser {
     private final static String OUTPUT_DATETIME_FORMAT = OUTPUT_DATE_FORMAT + " @ HH:mm";
     private final static String STORAGE_DATETIME_FORMAT = PARSE_DATETIME_FORMAT;
 
+    /**
+     * Parses raw dates into the LocalDateTime format.
+     * @param rawDateString Date that needs to be parsed.
+     * @return The datetime as a LocalDateTime object.
+     */
     public static LocalDateTime parse(String rawDateString) {
         switch (rawDateString) {
         case "now":
@@ -35,6 +40,11 @@ public class DateParser {
         }
     }
 
+    /**
+     * Formats the datetime object for printing to System.out.
+     * @param datetime The datetime object to be formatted.
+     * @return A String representing the datetime object.
+     */
     public static String formatDateToPrint(LocalDateTime datetime) {
         if (datetime.getHour() + datetime.getMinute() == 0) {
             return datetime.format(DateTimeFormatter.ofPattern(OUTPUT_DATE_FORMAT));
@@ -42,6 +52,12 @@ public class DateParser {
         return datetime.format(DateTimeFormatter.ofPattern(OUTPUT_DATETIME_FORMAT));
     }
 
+    /**
+     * Formats the datetime object for storing in the text file.
+     * In particular, undoes the parse operation.
+     * @param datetime The datetime object to be formatted.
+     * @return A String representing the datetime object.
+     */
     public static String formatDateToStore(LocalDateTime datetime) {
         return datetime.format(DateTimeFormatter.ofPattern(STORAGE_DATETIME_FORMAT));
     }
