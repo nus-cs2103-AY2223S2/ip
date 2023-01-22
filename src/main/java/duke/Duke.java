@@ -1,9 +1,9 @@
 package duke;
 
-import command.Command;
-
 import java.nio.file.Path;
 import java.nio.file.Paths;
+
+import command.Command;
 
 /**
  * The Duke ChatBot

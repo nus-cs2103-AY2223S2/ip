@@ -1,9 +1,9 @@
 package task;
 
+import java.time.LocalDateTime;
+
 import duke.DukeException;
 import duke.Parser;
-
-import java.time.LocalDateTime;
 
 /**
  * Deadline is a task that needs to be done before a specific date/time.

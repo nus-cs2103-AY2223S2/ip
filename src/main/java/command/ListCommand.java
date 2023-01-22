@@ -1,11 +1,14 @@
 package command;
 
+import java.util.Iterator;
+
 import duke.TaskList;
 import duke.Ui;
 import task.Task;
 
-import java.util.Iterator;
-
+/**
+ * Command to list all the latest recorded tasks of the current chat session.
+ */
 public class ListCommand extends Command {
     @Override
     public void execute(TaskList tasks, Ui ui) {

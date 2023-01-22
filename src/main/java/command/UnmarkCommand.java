@@ -5,6 +5,9 @@ import duke.TaskList;
 import duke.Ui;
 import task.Task;
 
+/**
+ * Command to unmark a task as done.
+ */
 public class UnmarkCommand extends Command {
     private int taskNo;
 

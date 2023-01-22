@@ -1,15 +1,15 @@
 package duke;
 
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
+import java.util.regex.Pattern;
+
 import command.*;
 import task.Deadline;
 import task.Event;
 import task.Task;
 import task.ToDo;
-
-import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
-import java.time.format.DateTimeParseException;
-import java.util.regex.Pattern;
 
 /**
  * Parser deals with making sense of the user command and input date strings.
