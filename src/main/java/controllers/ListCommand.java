@@ -16,7 +16,7 @@ import exceptions.DukeException;
  */
 public class ListCommand extends Command {
     private final String arguments;
-    private final Pattern VALID_LIST_CMD = Pattern.compile("^(list\\s*)(\\s+(?<filter>todo|deadline|event))?$");
+    private final Pattern VALID_LIST_CMD = Pattern.compile("^(list\\s*)((?<filter>todo|deadline|event)\\s*$)?");
 
     /**
      * Initializes a list command.
@@ -37,10 +37,10 @@ public class ListCommand extends Command {
         if (matcher.find()) {
             String filter = matcher.group("filter");
             TaskType type = Optional.ofNullable(filter)
-                    .map(enumTask -> TaskType.valueOf(enumTask.toUpperCase()))
+                    .map(enumTask -> TaskType.valueOf(enumTask.trim().toUpperCase()))
                     .orElse(TaskType.ALL);
 
-            taskList.listTasks(task -> type.isAll() || task.getTaskType() == type);
+            taskList.listTasks(task -> type.isAll() || task.getTaskType() == type, type.isAll());
         } else {
             throw new DukeException(INVALID_FORMAT_ERROR);
         }

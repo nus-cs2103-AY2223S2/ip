@@ -14,7 +14,6 @@ import views.UI;
  */
 public class Duke {
     private static TaskList taskList;
-    private static Storage storage;
     private static Scanner in;
     private static UI ui;
 
@@ -24,15 +23,14 @@ public class Duke {
      * @param filename location of Storage
      */
     public Duke(String filename) {
-        storage = new Storage(filename);
+        Storage storage = new Storage(filename);
         in = new Scanner(System.in);
         ui = new UI();
         try {
             storage.connect();
-            taskList = new TaskList((taskList) -> storage.load(taskList));
+            taskList = new TaskList(storage);
         } catch (DukeException e) {
-            System.out.println("There was an error loading the data. Storage will be reset.");
-            taskList = new TaskList();
+            System.out.println(e.getMessage());
         }
     }
 
@@ -41,14 +39,12 @@ public class Duke {
      */
     public void run() {
         ui.printWelcomeMessage();
-        boolean isExit = false;
-        while (in.hasNext() && !isExit) {
+        while (in.hasNext()) {
             Command cmd = Parser.parse(in.nextLine());
             try {
                 cmd.execute(() -> taskList);
                 if (cmd.isTerminating()) {
-                    storage.write(taskList);
-                    isExit = true;
+                    break;
                 }
             } catch (DukeException e) {
                 System.out.println(e.getMessage());

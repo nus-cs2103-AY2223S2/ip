@@ -8,30 +8,33 @@ import java.util.function.Predicate;
 import java.util.stream.Collectors;
 
 import exceptions.DukeException;
-import utils.Loader;
+import storage.Storage;
 
 /**
  * TaskList represents a data structure that holds Tasks.
  */
 public class TaskList {
     private final List<Task> taskList = new ArrayList<>();
+    private final Storage storage;
 
     /**
      * Initializes a TaskList with preloaded data.
      *
-     * @param preloader A Loader which loads data.
+     * @param storage storage class for writing to hard disk.
      */
-    public TaskList(Loader<TaskList> preloader) throws DukeException {
-        Boolean success = preloader.load(this);
-        if (success) {
-            System.out.println("Successfully loaded data.");
+    public TaskList(Storage storage) throws DukeException {
+        this.storage = storage;
+        try {
+            Boolean success = storage.load(this);
+            if (success) {
+                System.out.println("Successfully loaded data.");
+            } else {
+                System.out.println("Data load unsuccessful. Initializing empty storage.");
+            }
+        } catch (DukeException e) {
+            System.out.println(e.getMessage() + "\n Initializing empty storage.");
         }
     }
-
-    /**
-     * Initializes an empty TaskList.
-     */
-    public TaskList() {}
 
     /**
      * A generic filter function which parses through the TaskList and return tasks that match.
@@ -39,14 +42,23 @@ public class TaskList {
      * @param predicate A boolean function.
      */
     public void filter(Predicate<? super Task> predicate, String emptyMsg) {
+        this.filter(predicate, emptyMsg, false);
+    }
+
+    private void filter(Predicate<? super Task> predicate, String emptyMsg, boolean index) {
         List<Task> filteredList = taskList.stream().filter(predicate).collect(Collectors.toList());
         if (filteredList.size() == 0) {
             System.out.println(emptyMsg);
             return;
         }
         ListIterator<Task> it = filteredList.listIterator();
+        System.out.println("These are the tasks you asked for.");
         while (it.hasNext()) {
-            System.out.println(it.nextIndex() + 1 + ". " + it.next());
+            if (index) {
+                System.out.println(it.nextIndex() + 1 + ". " + it.next());
+            } else {
+                System.out.println(it.next());
+            }
         }
     }
 
@@ -59,14 +71,16 @@ public class TaskList {
     public void addTask(Task task, boolean print) {
         taskList.add(task);
         if (print) {
-            System.out.println("Got it. I've added this task:");
-            System.out.println("\t" + task);
-            System.out.println("Now you have " + taskList.size() + " tasks in the list.");
+            System.out.println("Successfully added task to memory.");
         }
     }
 
-    public void addTask(Task task) {
-        addTask(task, true);
+    public void addTask(Task task) throws DukeException {
+        taskList.add(task);
+        storage.write(task);
+        System.out.println("Got it. I've added this task:");
+        System.out.println("\t" + task);
+        System.out.println("Now you have " + taskList.size() + " tasks in the list.");
     }
 
     private boolean isValidKey(Integer key) {
@@ -92,6 +106,8 @@ public class TaskList {
         }
         Task task = taskList.get(key - 1);
         taskList.remove(key - 1);
+        storage.writeAll(this);
+
         System.out.println("Noted. I've removed the task:");
         System.out.println("\t" + task);
         System.out.println("Now you have " + taskList.size() + " tasks in the list.");
@@ -104,7 +120,7 @@ public class TaskList {
     /**
      * Lists the tasks in the TaskList.
      */
-    public void listTasks(Predicate<? super Task> predicate) {
-        this.filter(predicate, "There are no outstanding tasks!");
+    public void listTasks(Predicate<? super Task> predicate, boolean index) {
+        this.filter(predicate, "There are no outstanding tasks!", index);
     }
 }
