@@ -9,7 +9,7 @@ import duke.task.Task;
 
 public class DukeRepoImplTest {
 
-    DukeRepo db;
+    private DukeRepo db;
 
     @BeforeEach
     void setUp() {

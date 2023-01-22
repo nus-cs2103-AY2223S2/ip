@@ -10,8 +10,8 @@ import org.junit.jupiter.api.Test;
 
 public class UiTest {
 
-    Ui ui;
     private final ByteArrayOutputStream outContent = new ByteArrayOutputStream();
+    private Ui ui;
 
     @BeforeEach
     void setUp() {
@@ -42,14 +42,13 @@ public class UiTest {
     void testShowWelcome() {
         ui.showWelcome();
         String expected = "Hello from\n"
-        + " ____       _\n"
-        + "|  _ \\ _  _| | ____ _\n"
-        + "| | | | | |  | |/ / _ \\\n"
-        + "| |_| | |_|  |   <  __/\n"
-        + "|____/ \\__,_|_|\\_\\___|\n"
-        + "What can I do for you?"
-        + "\n";
+            + " ____       _\n"
+            + "|  _ \\ _  _| | ____ _\n"
+            + "| | | | | |  | |/ / _ \\\n"
+            + "| |_| | |_|  |   <  __/\n"
+            + "|____/ \\__,_|_|\\_\\___|\n"
+            + "What can I do for you?"
+            + "\n";
         assertEquals(expected, outContent.toString());
     }
-    
 }
