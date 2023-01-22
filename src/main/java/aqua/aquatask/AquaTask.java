@@ -33,7 +33,7 @@ public abstract class AquaTask {
 
     public boolean isStarted() {
         return getStart()
-            .map(time -> LocalDateTime.now().isBefore(time))
+            .map(time -> LocalDateTime.now().isAfter(time))
             .orElse(true);
     }
 
