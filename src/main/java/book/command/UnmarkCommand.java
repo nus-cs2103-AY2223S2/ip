@@ -1,12 +1,10 @@
 package book.command;
 
-import book.exception.SaveException;
-
-import book.task.Task;
-
 import book.Storage;
 import book.TaskList;
 import book.Ui;
+import book.exception.SaveException;
+import book.task.Task;
 
 public class UnmarkCommand extends Command {
     private int index;

@@ -1,10 +1,10 @@
 package book;
 
-import book.command.Command;
-import book.exception.BookException;
-
 import java.nio.file.Path;
 import java.nio.file.Paths;
+
+import book.command.Command;
+import book.exception.BookException;
 
 public class Book {
     private Storage storage;

@@ -1,22 +1,19 @@
 package book;
 
-import book.exception.LoadException;
-import book.exception.SaveException;
-
-import book.task.Deadline;
-import book.task.Event;
-import book.task.Task;
-import book.task.ToDo;
-
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
-
 import java.nio.file.Path;
-
 import java.util.ArrayList;
 import java.util.Scanner;
+
+import book.exception.LoadException;
+import book.exception.SaveException;
+import book.task.Deadline;
+import book.task.Event;
+import book.task.Task;
+import book.task.ToDo;
 
 public class Storage {
     private File bookSave;

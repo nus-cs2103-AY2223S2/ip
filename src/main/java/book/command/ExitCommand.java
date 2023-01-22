@@ -1,10 +1,9 @@
 package book.command;
 
-import book.exception.SaveException;
-
 import book.Storage;
 import book.TaskList;
 import book.Ui;
+import book.exception.SaveException;
 
 public class ExitCommand extends Command {
     @Override

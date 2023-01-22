@@ -1,8 +1,8 @@
 package book;
 
-import book.task.Task;
-
 import java.util.Scanner;
+
+import book.task.Task;
 
 public class Ui {
     private static final String LOGO = " ____\n"

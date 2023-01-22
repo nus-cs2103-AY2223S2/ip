@@ -1,5 +1,9 @@
 package book;
 
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
+
 import book.command.AddCommand;
 import book.command.Command;
 import book.command.DeleteCommand;
@@ -7,18 +11,12 @@ import book.command.ExitCommand;
 import book.command.ListCommand;
 import book.command.MarkCommand;
 import book.command.UnmarkCommand;
-
 import book.exception.IncompleteInputException;
 import book.exception.InvalidFormatException;
 import book.exception.InvalidInputException;
-
 import book.task.Deadline;
 import book.task.Event;
 import book.task.ToDo;
-
-import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
-import java.time.format.DateTimeParseException;
 
 public final class Parser {
     public static Command parse(String command) throws IncompleteInputException,

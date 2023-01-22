@@ -1,8 +1,8 @@
 package book;
 
-import book.task.Task;
-
 import java.util.ArrayList;
+
+import book.task.Task;
 
 public class TaskList {
     private static ArrayList<Task> list;
