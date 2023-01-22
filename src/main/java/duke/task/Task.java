@@ -2,11 +2,11 @@ package duke.task;
 
 public abstract class Task {
 
-    private boolean isDone;
-    private String name;
+    protected boolean isDone;
+    protected String name;
 
-    public Task(String name) {
-        this.isDone = false;
+    public Task(String name, boolean isDone) {
+        this.isDone = isDone;
         this.name = name;
     }
 
@@ -23,6 +23,11 @@ public abstract class Task {
     }
 
     protected abstract String getTaskType();
+
+    public String serialize() {
+        String serialized = String.format("%s|%s|%s", this.getTaskType(), this.isDone ? 1 : 0, this.name);
+        return serialized;
+    }
 
     @Override
     public String toString() {
