@@ -4,6 +4,7 @@ public class Duke {
     final static String PARTITION = "*******************************************";
     final static String EXIT_COMMAND = "bye";
     final static String LIST_COMMAND = "list";
+    final static String DELETE_COMMAND = "delete";
     final static String MARK_COMMAND = "mark";
     final static String UNMARK_COMMAND = "unmark";
     final static String TODO_COMMAND = "todo";
@@ -29,6 +30,16 @@ public class Duke {
             Task current_task = current_list.get(i);
             System.out.println(String.format("%d.%s", i + 1, current_task.toString()));
         }
+    }
+    
+    private static void handleDelete(String[] current_input_array) throws EmptyDescriptionException {
+        checkInput(current_input_array);
+        int task_number = Integer.parseInt(current_input_array[1]);
+        Task current_task = current_list.get(task_number - 1);
+        System.out.println("Noted. I've removed this task:");
+        System.out.println("  " + current_task.toString());
+        current_list.remove(task_number - 1);
+        System.out.println(String.format("Now you have %d tasks in the list.", current_list.size()));
     }
 
     private static void handleMark(String[] current_input_array) throws EmptyDescriptionException{
@@ -106,6 +117,8 @@ public class Duke {
                     break;
                 } else if (input_command.equals(LIST_COMMAND)) {
                     handleList();
+                } else if (input_command.equals(DELETE_COMMAND)) {
+                    handleDelete(current_input_array);
                 } else if (input_command.equals(MARK_COMMAND)) {
                     handleMark(current_input_array);
                 } else if (input_command.equals(UNMARK_COMMAND)) {
