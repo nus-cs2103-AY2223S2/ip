@@ -1,4 +1,4 @@
-package duke;
+package seedu.duke;
 
 public class ToDo extends Task{
     protected String type = "[ T ]";
