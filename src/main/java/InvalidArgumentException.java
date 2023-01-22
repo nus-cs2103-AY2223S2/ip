@@ -1,18 +1,14 @@
 class InvalidArgumentException extends DukeException {
+    private String command;
 
-    public InvalidArgumentException(String command, int actual, int expects) {
-        super(
-            String.format(
-                "%d argument(s), expected %d for command %s",
-                actual,
-                expects,
-                command
-            )
-        );
+    public InvalidArgumentException(String command) {
+        super("Arguments are of the wrong type or format");
+        this.command = command;
     }
 
     @Override
     public String getExceptionName() {
-        return "Invalid Argument(s)";
+        String name = String.format("Invalid Argument(s) for %s", this.command);
+        return name;
     }
 }

@@ -12,7 +12,7 @@ public class EventCommand extends Command {
     }
 
     @Override
-    public void execute(TaskList taskList, Ui ui) {
+    public void execute(TaskList taskList, Ui ui) throws DukeException {
         Task task = new Event(this.title, this.from, this.to);
         taskList.addTask(task);
     }

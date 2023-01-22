@@ -8,7 +8,7 @@ public class MarkCommand extends Command {
     }
 
     @Override
-    public void execute(TaskList taskList, Ui ui) {
+    public void execute(TaskList taskList, Ui ui) throws DukeException {
         taskList.markTaskAsDone(this.index);
     }
 }

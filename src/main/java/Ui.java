@@ -4,15 +4,10 @@ public class Ui {
 
     private Scanner scanner;
     private StringBuilder msg;
-    private static final String DIVIDER =
-        "____________________________________________________________";
+    private static final String DIVIDER = "____________________________________________________________";
     private static final String NEWL = "\n";
-    private static final String LOGO =
-        " ____        _        \n" +
-        "|  _ \\ _   _| | _____ \n" +
-        "| | | | | | | |/ / _ \\\n" +
-        "| |_| | |_| |   <  __/\n" +
-        "|____/ \\__,_|_|\\_\\___|\n";
+    private static final String LOGO = " ____        _        \n" + "|  _ \\ _   _| | _____ \n"
+            + "| | | | | | | |/ / _ \\\n" + "| |_| | |_| |   <  __/\n" + "|____/ \\__,_|_|\\_\\___|\n";
 
     public Ui() {
         this.scanner = new Scanner(System.in);
@@ -30,6 +25,7 @@ public class Ui {
     public void displayMessage() {
         Ui.prettyPrint(this.msg.toString());
         this.msg.setLength(0);
+        System.out.print("> ");
     }
 
     public void addToMessage(String toAdd) {

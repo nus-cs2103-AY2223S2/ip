@@ -8,7 +8,7 @@ public class ToDoCommand extends Command {
     }
 
     @Override
-    public void execute(TaskList taskList, Ui ui) {
+    public void execute(TaskList taskList, Ui ui) throws DukeException {
         Task task = new ToDo(this.title);
         taskList.addTask(task);
     }
