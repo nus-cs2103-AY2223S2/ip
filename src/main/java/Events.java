@@ -1,17 +1,22 @@
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+
 public class Events extends Task{
 
-    protected String startTime;
+    protected LocalDateTime startTime;
 
-    protected String endTime;
+    protected LocalDateTime endTime;
 
     public Events(String description, String startTime, String endTime) {
         super(description);
-        this.startTime = startTime;
-        this.endTime = endTime;
+        DateTimeFormatter formatterStart = DateTimeFormatter.ofPattern("yyyy-MM-dd HHmm ");
+        this.startTime = LocalDateTime.parse(startTime, formatterStart);
+        DateTimeFormatter formatterEnd = DateTimeFormatter.ofPattern("yyyy-MM-dd HHmm");
+        this.endTime = LocalDateTime.parse(endTime, formatterEnd);
     }
     @Override
     public String toString() {
-        return "[E]" + super.toString() + " (from: " + this.startTime +
-                "to: " + this.endTime + ")";
+        return "[E]" + super.toString() + " (from: " + startTime.format(DateTimeFormatter.ofPattern("MMM d yyyy HHmm")) +
+                " to: " + endTime.format(DateTimeFormatter.ofPattern("MMM d yyyy HHmm")) + ")";
     }
 }

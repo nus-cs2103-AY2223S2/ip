@@ -1,6 +1,7 @@
 import java.util.Scanner;
 import java.util.ArrayList;
 
+
 class Duke {
     enum Action {
         bye, list, unmark, mark, todo, deadline, event, delete;
@@ -59,27 +60,33 @@ class Duke {
                     s = input.split(" ");
                 } else if (s[0].equals(Action.deadline.name())) {
                     String taskDescription = "";
-                    boolean isTime = false;
+                    boolean isDate = false;
                     String time = "";
+                    String date = "";
                     if (s.length < 2) {
                         throw new DukeException("☹ OOPS!!! The description of a deadline cannot be empty.");
                     }
                     for (int j = 1; j < s.length; j++) {
                         if (s[j].equals("/by")) {
-                            isTime = true;
-                        } else if (isTime) {
+                            isDate = true;
+                        } else if (isDate) {
                             if (j + 1 == s.length) {
-                                time += s[j];
+                                date += s[j];
                             } else {
-                                time += s[j];
-                                time += " ";
+                                date += s[j];
+                                date += " ";
                             }
-                        } else {
+                        }  else {
                             taskDescription += s[j];
                             taskDescription += " ";
                         }
                     }
+<<<<<<< Updated upstream
                     Deadlines taskName = new Deadlines(taskDescription, time);
+=======
+
+                    Deadlines taskName = new Deadlines(taskDescription, date);
+>>>>>>> Stashed changes
                     System.out.println("Got it. I've added this task:");
                     System.out.println(taskName.toString());
                     list.add(taskName);
