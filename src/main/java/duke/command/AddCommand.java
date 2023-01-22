@@ -24,14 +24,12 @@ public class AddCommand extends Command{
         }
     }
 
-<<<<<<< Updated upstream
-=======
     /**
      * Tests if at end of command stack
      *
      * @return false if not at end, true if no more commands left
      */
->>>>>>> Stashed changes
+
     @Override
     public boolean isExit() {
         return false;

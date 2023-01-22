@@ -3,14 +3,6 @@ package duke.task;
 import duke.task.Task;
 
 public class ToDos extends Task {
-<<<<<<< Updated upstream
-    public ToDos(String description) {
-        super(description);
-    }
-    public String getTaskIcon() {
-        return "T";
-    }
-=======
     /**
      * A constructor to create a todo object
      *
@@ -34,7 +26,6 @@ public class ToDos extends Task {
      *
      * @return a string of above format
      */
->>>>>>> Stashed changes
     @Override
     public String toString() {
         return "[T]" + super.toString();

@@ -3,12 +3,6 @@ package duke.task;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
-<<<<<<< Updated upstream
-public class Deadlines extends Task{
-
-    protected LocalDateTime date;
-
-=======
 /**
  * A class that creates a deadline object for the deadline command
  */
@@ -22,22 +16,19 @@ public class Deadlines extends Task {
      * @param description What task to be kept track
      * @param date        date and time the task is due
      */
->>>>>>> Stashed changes
     public Deadlines(String description, String date) {
         super(description);
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HHmm");
         this.date = LocalDateTime.parse(date, formatter);
 
     }
-<<<<<<< Updated upstream
-=======
+
 
     /**
      * To String method that returns the specified (MMM d YYYY HHmm)
      *
      * @return a string of the above format
      */
->>>>>>> Stashed changes
     @Override
     public String toString() {
 
