@@ -35,6 +35,12 @@ interface Handler {
         ui.info("  %s", task);
         ui.info("Now you have %d %s.", tasks.count(), tasks.count() == 1 ? "task" : "tasks");
     }
+
+    static void printTasksIndented(TaskList tasks, Ui ui) {
+        tasks.forEach((task, idx) -> {
+            ui.info("  %d.%s", idx + 1, task);
+        });
+    }
 }
 
 /**
@@ -61,9 +67,7 @@ class Handlers {
     public static Handler list() {
         return (TaskList tasks, Ui ui, Storage storage) -> {
             ui.info("Here are the tasks in your list:");
-            tasks.forEach((task, idx) -> {
-                ui.info("  %d.%s", idx + 1, task);
-            });
+            Handler.printTasksIndented(tasks, ui);
             return false;
         };
     }
@@ -167,6 +171,19 @@ class Handlers {
             Task task = tasks.remove(idx);
             Handler.reportDeletedTask(task, ui, tasks);
 
+            return false;
+        };
+    }
+
+    public static Handler find(String searchTerm) {
+        return (TaskList tasks, Ui ui, Storage storage) -> {
+            TaskList filtered = tasks.filter(task -> task.desc().contains(searchTerm));
+            if (filtered.count() == 0) {
+                ui.info("No task matching the term \"%s\" found.", searchTerm);
+            } else {
+                ui.info("Here are your task(s) containing the term \"%s\":", searchTerm);
+                Handler.printTasksIndented(filtered, ui);
+            }
             return false;
         };
     }
