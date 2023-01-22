@@ -1,4 +1,5 @@
 package duke.Ui;
+
 import duke.exception.DukeException;
 import duke.task.TaskList;
 
@@ -19,7 +20,7 @@ public class Ui {
     }
 
     public void showLine() {
-        for(int n = 0; n < 50; n++) {
+        for (int n = 0; n < 50; n++) {
             System.out.print("-");
         }
         System.out.print("\n");
