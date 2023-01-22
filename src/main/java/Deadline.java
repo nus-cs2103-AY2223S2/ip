@@ -1,14 +1,18 @@
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+
 public class Deadline extends Task {
 
-    private String end;
+    private LocalDateTime end;
+    private static final DateTimeFormatter FORMATTER = DateTimeFormatter.ofPattern("dd MMM uuuu, HH:mm");
 
-    public Deadline(String desc, boolean isDone, String end) {
+    public Deadline(String desc, boolean isDone, LocalDateTime end) {
         super(desc, isDone);
         this.end = end;
     }
 
     public String statusStringForFile() {
-        return String.format("DEADLINE / %s / %s", super.stringFormatForFile(), this.end.trim());
+        return String.format("DEADLINE / %s / %s", super.stringFormatForFile(), this.end.format(FORMATTER));
     }
 
     /**
@@ -17,6 +21,6 @@ public class Deadline extends Task {
      */
     @Override
     public String toString() {
-        return "[D]" + super.toString() + "(by:" + this.end + ")";
+        return "[D]" + super.toString() + "(by: " + this.end.format(FORMATTER) + ")";
     }
 }

@@ -1,22 +1,23 @@
 import java.io.IOException;
-import java.util.Locale;
 import java.util.Scanner;
 import java.util.ArrayList;
-import java.nio.file.Files;
-import java.nio.file.Path;
-import java.nio.file.Paths;
 import java.io.File;
 import java.io.FileWriter;
+import java.time.DateTimeException;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 
 public class Duke {
 
-
-
     // array that contains all the tasks thus far
-    private static ArrayList<Task> listOfThings = new ArrayList<>();
-    private static File f = null;
-    private static final String dirName = "." + File.separator + "src" + File.separator + "main" + File.separator + "data";
-    private static final String pathName = dirName + File.separator + "duke";
+    private static File DUKEFILE = null;
+    private static final String DIRNAME = "." + File.separator + "src" + File.separator + "main" + File.separator + "data";
+    private static final String PATHNAME = DIRNAME + File.separator + "duke";
+    private static ArrayList<Task> LISTOFTHINGS = new ArrayList<>();
+    private static DateTimeFormatter FORMATTER = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
+
 
 
     /**
@@ -29,19 +30,18 @@ public class Duke {
         System.out.println("    ____________________________________________________________");
     }
 
-
-
     /**
      *
      * @return the string that updates the number of elements left in the string
      */
     public static String listUpdate() {
         String plural = "";
-        if (listOfThings.size() > 1) {
+        if (LISTOFTHINGS.size() > 1) {
             plural = "s";
         }
-        return "\n       Now you have " + listOfThings.size() + " task" + plural + " in the list.";
+        return "\n     Now you have " + LISTOFTHINGS.size() + " task" + plural + " in the list.";
     }
+
 
 
     /**
@@ -66,6 +66,24 @@ public class Duke {
 
 
 
+     /**
+     * creates the localdatetime by parsing the text string
+     * @param dateTime the string representation of the local date time
+     * @return the LocalDateTime object being created
+     */
+    public static LocalDateTime createLocalDateTime(String dateTime) {
+        LocalDateTime date;
+        try {
+            String stringWithNoTrailingWhitespaces = dateTime.trim();
+            date = LocalDateTime.parse(stringWithNoTrailingWhitespaces, FORMATTER);
+        } catch (DateTimeException e) {
+            date = null;
+        }
+        return date;
+    }
+
+
+
     /**
      *
      * @param text the text containing the information of the command
@@ -74,19 +92,28 @@ public class Duke {
      */
     public static void addItem(String text, AddCommands add) throws DukeException {
         Task addedItem = null;
+        boolean isValidToAdd = false;
         if (add.equals(AddCommands.TODO)) {
             String contents = text.substring(4);
             if (contents.length() == 0) {
                 throw new DukeException("The description of a todo cannot be empty");
             }
             addedItem = new Todo(contents, false);
+            isValidToAdd = true;
+
         } else if (add.equals(AddCommands.DEADLINE)) {
             String contents = text.substring(8);
             String[] arr = contents.split("/by");
             if (arr.length != 2) {
                 throw new DukeException("I don't know what that means. Format it as 'deadline [do something] /by [date]");
             }
-            addedItem = new Deadline(arr[0], false, arr[1]);
+            LocalDateTime end = createLocalDateTime(arr[1]);
+            if (end != null) {
+                addedItem = new Deadline(arr[0], false, end);
+                isValidToAdd = true;
+            } else {
+                throw new DukeException("Format date as YYYY-MM-DD HH:mm");
+            }
         } else {
             String contents = text.substring(5);
             String[] arr1 = contents.split("/from");
@@ -98,13 +125,22 @@ public class Duke {
                 throw new DukeException("I don't know what that means. Format it as 'event [do something] /from [start date] /to [end date]'");
 
             }
-            addedItem = new Event(arr1[0], false, arr2[0], arr2[1]);
+            LocalDateTime start = createLocalDateTime(arr2[0]);
+            LocalDateTime end = createLocalDateTime(arr2[1]);
+            if (start != null && end != null) {
+                addedItem = new Event(arr1[0], false, start, end);
+                isValidToAdd = true;
+            } else {
+                throw new DukeException("Format date as YYYY-MM-DD HH:mm");
+            }
         }
-        listOfThings.add(addedItem);
-        writeToFile(addedItem);
-        String str = "  " + addedItem.toString();
-        str = " Got it. I've added this task:\n     " + str;
-        printWithLines(str + listUpdate());
+        if (isValidToAdd) {
+            LISTOFTHINGS.add(addedItem);
+            writeToFile(addedItem);
+            String str = "  " + addedItem.toString();
+            str = " Got it. I've added this task:\n     " + str;
+            printWithLines(str + listUpdate());
+        }
     }
 
 
@@ -115,7 +151,7 @@ public class Duke {
     public static void writeToFile(Task item) {
         try {
             String fileInputString = taskStringFormatter(item);
-            FileWriter fw = new FileWriter(pathName, true);
+            FileWriter fw = new FileWriter(PATHNAME, true);
             fw.write(fileInputString + System.lineSeparator());
             fw.close();
         } catch (IOException e) {
@@ -131,8 +167,8 @@ public class Duke {
     public static void printList() {
         String totalString = "";
         totalString += " Here are the tasks in your list:";
-        for (int i = 0; i < listOfThings.size(); i++) {
-            totalString += "\n     " + (i+1) + "." + listOfThings.get(i).toString();
+        for (int i = 0; i < LISTOFTHINGS.size(); i++) {
+            totalString += "\n     " + (i+1) + "." + LISTOFTHINGS.get(i).toString();
         }
         printWithLines(totalString);
     }
@@ -144,8 +180,8 @@ public class Duke {
      * @param index the index of the item to be removed
      */
     public static void removeItem(int index) {
-        String str = " Noted. I'm removing this task:\n       " + listOfThings.get(index).toString();
-        listOfThings.remove(index);
+        String str = " Noted. I'm removing this task:\n       " + LISTOFTHINGS.get(index).toString();
+        LISTOFTHINGS.remove(index);
         printWithLines(str + listUpdate());
     }
 
@@ -156,12 +192,12 @@ public class Duke {
      */
     public static void loadFromFile() {
         try {
-            Files.createDirectories(Paths.get(dirName));
-            if (f == null) {
-                f = new File(pathName);
+            Files.createDirectories(Paths.get(DIRNAME));
+            if (DUKEFILE == null) {
+                DUKEFILE = new File(PATHNAME);
             }
-            f.createNewFile();
-            Scanner sc = new Scanner(f);
+            DUKEFILE.createNewFile();
+            Scanner sc = new Scanner(DUKEFILE);
 
             while (sc.hasNext()) {
                 String str = sc.nextLine();
@@ -175,11 +211,14 @@ public class Duke {
                 if (commandType.equals(AddCommands.TODO)) {
                     thisTask = new Todo(valueArr[2], doneOrNot);
                 } else if (commandType.equals(AddCommands.DEADLINE)) {
-                    thisTask = new Deadline(valueArr[2], doneOrNot, valueArr[3]);
+                    LocalDateTime end = createLocalDateTime(valueArr[3]);
+                    thisTask = new Deadline(valueArr[2], doneOrNot, end);
                 } else {
-                    thisTask = new Event(valueArr[2], doneOrNot, valueArr[3], valueArr[4]);
+                    LocalDateTime start = createLocalDateTime(valueArr[3]);
+                    LocalDateTime end = createLocalDateTime(valueArr[4]);
+                    thisTask = new Event(valueArr[2], doneOrNot, start, end);
                 }
-                listOfThings.add(thisTask);
+                LISTOFTHINGS.add(thisTask);
             }
         } catch (IOException e) {
             System.out.println(e.getMessage());
@@ -193,8 +232,8 @@ public class Duke {
      * used for delete, mark and unmark when values are changed
      */
     public static void deleteFileAndRedo() {
-        if (f.delete()) {
-            for (Task item : listOfThings) {
+        if (DUKEFILE.delete()) {
+            for (Task item : LISTOFTHINGS) {
                 writeToFile(item);
             }
         } else {
@@ -236,10 +275,10 @@ public class Duke {
                             throw new DukeException("Index should be a number");
                         }
                         int idx = Integer.parseInt(arr[1]) - 1;
-                        if (idx >= listOfThings.size() || idx < 0) {
+                        if (idx >= LISTOFTHINGS.size() || idx < 0) {
                             throw new DukeException("This index doesn't exist.");
                         }
-                        Task thisTask = listOfThings.get(idx);
+                        Task thisTask = LISTOFTHINGS.get(idx);
                         thisTask.markDone();
                         deleteFileAndRedo();
                     } else if (sc.equals(StartingCommands.UNMARK)) {
@@ -251,10 +290,10 @@ public class Duke {
                             throw new DukeException("Index should be a number");
                         }
                         int idx = Integer.parseInt(arr[1]) - 1;
-                        if (idx >= listOfThings.size() || idx < 0) {
+                        if (idx >= LISTOFTHINGS.size() || idx < 0) {
                             throw new DukeException("This index doesn't exist.");
                         }
-                        Task thisTask = listOfThings.get(idx);
+                        Task thisTask = LISTOFTHINGS.get(idx);
                         thisTask.markUndone();
                         deleteFileAndRedo();
                     } else if (sc.equals(StartingCommands.DELETE)) {
@@ -267,7 +306,7 @@ public class Duke {
                             throw new DukeException("Argument must be a digit");
                         }
                         int idx = Integer.parseInt(idxStr) - 1;
-                        if (idx >= listOfThings.size() || idx < 0) {
+                        if (idx >= LISTOFTHINGS.size() || idx < 0) {
                             throw new DukeException("This index doesn't exist.");
                         }
                         removeItem(idx);

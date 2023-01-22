@@ -1,7 +1,7 @@
 todo borrow book
 list
-event read book /from sunday /to monday
-deadline submit book report /by monday 2359
+event read book /from 2005-06-13 08:00 /to 2011-04-27 13:52
+deadline submit book report /by 2011-05-21 11:26
 mark 1
 mark 2
 mark 3
@@ -12,10 +12,10 @@ list
 unmark 4
 list
 unmark 2
-deadline get chinese new year clothes /by tomorrow
-event chinese new year! /from tomorrow /to next sunday
+deadline get chinese new year clothes /by 2017-01-05 10:32
+event chinese new year! /from 2008-01-01 03:43 /to 2010-03-22 11:39
 delete 3
 list
-deadline get productive /by friday
+deadline get productive /by 2019-06-25 12:52
 bye
 
