@@ -5,9 +5,9 @@ import java.util.regex.Pattern;
 
 public class Duke {
 
-    static void validate(Integer length, Integer error_length, String name) throws DukeException {
+    static void validate(Integer length, Integer error_length, String task) throws DukeException {
         if (length == error_length) {
-            throw new DukeException("☹ OOPS!!! The description of a " + name + " cannot be empty.");
+            throw new DukeException("☹ OOPS!!! The description of a " + task + " cannot be empty.");
         }
     }
 
