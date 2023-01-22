@@ -159,16 +159,16 @@ public class Interpreter {
                     }
                 case event:
                     String eventAndTime = command.substring(6);
-                    if (eventAndTime.split("/from|\\/to").length != 3) {
+                    if (eventAndTime.split("/from").length != 2) {
                         throw new InvalidTimeFormatException();
                     } else {
                         try {
                             String eventName = eventAndTime.split("/from")[0];
                             String eventTime = eventAndTime.split("/from")[1];
-                            String startTime = eventTime.split("/to")[0];
-                            String endTime = eventTime.split("/to")[1];
+                            // String startTime = eventTime.split("/to")[0];
+                            // String endTime = eventTime.split("/to")[1];
                             return new Event(
-                                    eventName, startTime, endTime, false);
+                                    eventName, eventTime, false);
                         } catch (Exception e) {
                             e.printStackTrace();
                             throw new InvalidTimeFormatException();

@@ -3,6 +3,7 @@ import Exceptions.InvalidCommandException;
 import Exceptions.InvalidTimeFormatException;
 import Exceptions.MissingDescriptionException;
 import Tasks.*;
+import java.io.IOException;
 
 /**
  * @author Sun Yitong
@@ -24,19 +25,26 @@ public class Duke {
      * @throws InvalidCommandException
      * @throws MissingDescriptionException
      */
-    public Duke() throws EmptyCommandException, InvalidTimeFormatException, InvalidCommandException, MissingDescriptionException {
+    public Duke(String path) throws EmptyCommandException, InvalidTimeFormatException, InvalidCommandException, MissingDescriptionException {
         Monitor monitor = new Monitor();
+        Disk disk = new Disk(path);
 
         monitor.displayLogo();
         monitor.welcome();
 
-        table = new TaskTable();
+        try {
+            table = new TaskTable(disk.read());
+        } catch (IOException e) {
+            monitor.displayLoadingError();
+            table = new TaskTable();
+        }
+
         boolean running = true;
         while (running) {
             try {
                 String command = monitor.getCommand();
                 Task newTask = Interpreter.interpret(command, table);
-                newTask.run(table, monitor);
+                newTask.run(table, monitor, disk);
                 running = !newTask.exited; // if newTask exits stop running
             } catch (NullPointerException | InvalidTimeFormatException | MissingDescriptionException |
                      EmptyCommandException | InvalidCommandException e) {
@@ -55,7 +63,7 @@ public class Duke {
      * @throws MissingDescriptionException
      */
     public static void main(String[] args) throws EmptyCommandException, InvalidTimeFormatException, InvalidCommandException, MissingDescriptionException {
-            new Duke();
+            new Duke("data/tasks.txt");
     }
 
 }

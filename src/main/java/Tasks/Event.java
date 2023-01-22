@@ -7,18 +7,17 @@ package Tasks;
 public class Event extends Task {
     protected String startTime;
     protected String endTime;
+    protected String time;
 
     /**
      * The constructor of Event
      * @param desc the description of event
-     * @param startTime the start time of event
-     * @param endTime the end time of event
+     * @param time the time of event
      * @param done whether the event is done
      */
-    public Event(String desc, String startTime, String endTime, boolean done) {
+    public Event(String desc, String time, boolean done) {
         super(done, desc);
-        this.startTime = startTime;
-        this.endTime = endTime;
+        this.time = time;
     }
 
     /**
@@ -47,9 +46,10 @@ public class Event extends Task {
      * @param monitor the monitor
      */
     @Override
-    public void run(TaskTable table, Monitor monitor) {
+    public void run(TaskTable table, Monitor monitor, Disk disk) {
         table.add(this);
         monitor.displayAdd(table, table.size()-1);
+        disk.write(table.getTable());
 
     }
 
@@ -59,11 +59,17 @@ public class Event extends Task {
      */
     @Override
     public String toString() {
-        return "[E]" + super.toString() + " (from: " + this.startTime + " to " + this.endTime + ")";
+        return "[E]" + super.toString() + " (at: /from" + this.time + ")";
     }
 
-
-
-
-
+    @Override
+    public String reformat() {
+        String d;
+        if (done) {
+            d = "1";
+        } else {
+            d = "0";
+        }
+        return "E | " + d + " | " + this.desc +" | " + this.time;
+    }
 }

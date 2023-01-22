@@ -18,7 +18,7 @@ public class Table extends Task {
      * @param monitor the monitor
      */
     @Override
-    public void run(TaskTable table, Monitor monitor) {
+    public void run(TaskTable table, Monitor monitor, Disk disk) {
         monitor.showTable(table);
     }
 }

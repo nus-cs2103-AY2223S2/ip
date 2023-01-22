@@ -72,10 +72,18 @@ public class Task {
      * @param table the task table
      * @param monitor the monitor
      */
-    public void run(TaskTable table, Monitor monitor) {
+    public void run(TaskTable table, Monitor monitor, Disk disk) {
 
     };
 
-
+    public String reformat() {
+        String d;
+        if (done) {
+            d = "1";
+        } else {
+            d = "0";
+        }
+        return "|" + d + "|" + this.desc;
+    }
 
 }

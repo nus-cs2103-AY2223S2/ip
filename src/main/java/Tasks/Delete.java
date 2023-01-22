@@ -22,9 +22,9 @@ public class Delete extends Task{
      * @param monitor the monitor
      */
     @Override
-    public void run(TaskTable table, Monitor monitor) {
+    public void run(TaskTable table, Monitor monitor, Disk disk) {
         Task removedJob = table.delete(i);
         monitor.displayDelete(table, removedJob);
-
+        disk.write(table.getTable());
     }
 }

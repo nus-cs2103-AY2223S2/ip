@@ -43,9 +43,10 @@ public class Deadline extends Task{
      * @param monitor the monitor
      */
     @Override
-    public void run(TaskTable table, Monitor monitor) {
+    public void run(TaskTable table, Monitor monitor, Disk disk) {
         table.add(this);
         monitor.displayAdd(table, (table.size() - 1));
+        disk.write(table.getTable());
     }
 
     /**
@@ -55,5 +56,16 @@ public class Deadline extends Task{
     @Override
     public String toString() {
         return "[D]" + super.toString() + " (by: " + this.time + ")";
+    }
+
+    @Override
+    public String reformat() {
+        String d;
+        if (done) {
+            d = "1";
+        } else {
+            d = "0";
+        }
+        return "D | " + d + " | " + this.desc + " | " + this.time;
     }
 }
