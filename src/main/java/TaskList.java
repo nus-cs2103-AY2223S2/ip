@@ -8,7 +8,10 @@ public class TaskList {
   }
 
   public Task getTask(int id) {
-    return tasks.get(id - 1);
+    if (isValidId(id)) {
+      return tasks.get(id - 1);
+    }
+    return null;
   }
 
   public boolean addTask(Task task) {
@@ -16,19 +19,22 @@ public class TaskList {
   }
 
   public Task removeTask(int id) {
-    return tasks.remove(id - 1);
+    if (isValidId(id)) {
+      return tasks.remove(id - 1);
+    }
+    return null;
   }
 
-  public void markTask(int id, boolean done) {
-    tasks.get(id - 1).mark(done);
+  public boolean markTask(int id, boolean done) {
+    if (isValidId(id)) {
+      getTask(id).mark(done);
+      return true;
+    }
+    return false;
   }
 
   public int count() {
     return tasks.size();
-  }
-
-  public String printTask(int id) {
-    return tasks.get(id - 1).toString();
   }
 
   public String[] generateList() {
@@ -38,5 +44,9 @@ public class TaskList {
       list[i] = String.format("%d: %s", i + 1, t);
     }
     return list;
+  }
+
+  private boolean isValidId(int id) {
+    return !(id <= 0 || id > count());
   }
 }

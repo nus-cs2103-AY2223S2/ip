@@ -66,12 +66,12 @@ public class Sam {
           throw new SamMissingTaskException();
         }
         int id = Integer.parseInt(input[1]);
-        if (id <= 0 || id > tasks.count()) {
+        boolean success = tasks.markTask(id, true);
+        if (!success) {
           throw new SamInvalidTaskException();
         }
-        tasks.markTask(id, true);
         ui.talk("Great! I'll check the task:",
-          tasks.printTask(id));
+          tasks.getTask(id).toString());
         storage.save(tasks);
         break;
       }
@@ -80,12 +80,12 @@ public class Sam {
           throw new SamMissingTaskException();
         }
         int id = Integer.parseInt(input[1]);
-        if (id <= 0 || id > tasks.count()) {
+        boolean success = tasks.markTask(id, false);
+        if (!success) {
           throw new SamInvalidTaskException();
         }
-        tasks.markTask(id, false);
         ui.talk("Okay, I'll uncheck the task:",
-          tasks.printTask(id));
+          tasks.getTask(id).toString());
         storage.save(tasks);
         break;
       }
@@ -145,10 +145,10 @@ public class Sam {
           throw new SamMissingTaskException();
         }
         int id = Integer.parseInt(input[1]);
-        if (id <= 0 || id > tasks.count()) {
+        Task task = tasks.removeTask(id);
+        if (task == null) {
           throw new SamInvalidTaskException();
         }
-        Task task = tasks.removeTask(id);
         ui.talk("Ok, I'll remove the task from your list:",
           task.toString());
         storage.save(tasks);
