@@ -1,3 +1,5 @@
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.Scanner;
 import java.util.ArrayList;
 public class Duke {
@@ -31,17 +33,25 @@ public class Duke {
             else if (userInput.split(" ", 2)[0].equals("deadline")) {
                 try {
                     String[] input = userInput.split(" ", 2)[1].split(" /by ", 2);
-                    store.addTask(new Deadline(input[0], input[1]));
+                    // parser technically here, do a try catch and if error returns formatting issue
+                    // default format of yyyy-mm-dd
+                    // If you want to change how it takes input, add a formatter to the parse function
+                    LocalDate deadline = LocalDate.parse(input[1]);
+                    store.addTask(new Deadline(input[0], deadline));
                 } catch(Exception e) {
-                    throw new DukeException("The description and date of a deadline cannot be empty.");
+                    throw new DukeException("The description and date of a deadline cannot be empty. " +
+                            "Make sure dates are in this format yyyy-mm-dd.");
                 }
             }
             else if (userInput.split(" ", 2)[0].equals("event")) {
                 try {
                     String[] input = userInput.split(" ", 2)[1].split(" /", 3);
-                    store.addTask(new Event(input[0], input[1], input[2]));
+                    LocalDate startDate = LocalDate.parse(input[1].split("from ", 2)[1]);
+                    LocalDate endDate = LocalDate.parse(input[2].split("to ", 2)[1]);
+                    store.addTask(new Event(input[0], startDate, endDate));
                 } catch (Exception e) {
-                    throw new DukeException("The description, start time, and end time of a event cannot be empty.");
+                    throw new DukeException("The description, start time, and end time of a event cannot be empty. " +
+                            "Make sure dates are in this format yyyy-mm-dd.");
                 }
             } else if (userInput.split(" ", 2)[0].equals("mark")) {
                 store.markTask(Integer.parseInt(userInput.split(" ", 2)[1]) - 1);
