@@ -13,4 +13,10 @@ public class Event extends Task {
     return "[E]" + super.toString() + " (from: " +
         this.startTime + " to: " + this.endTime + ")";
   }
+
+  @Override
+  public String fileOutput() {
+    return String.format("E|%d|%s|%s|%s", this.isDone ? 1 : 0,
+        this.description, this.startTime, this.endTime);
+  }
 }

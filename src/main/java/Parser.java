@@ -6,7 +6,7 @@ public class Parser {
     }
   }
 
-  public Task makeTask(String input) {
+  public Task makeTaskFromInput(String input) {
     String rest = input.substring(input.indexOf(" ") + 1);
     switch (input.split(" ")[0]) {
       case "todo":
@@ -39,7 +39,7 @@ public class Parser {
       case "todo":
       case "deadline":
       case "event":
-        ui.print(taskList.addTask(makeTask(command)));
+        ui.print(taskList.addTask(makeTaskFromInput(command)));
         break;
       default:
         throw new InvalidCommandException("Invalid command nya!\n"

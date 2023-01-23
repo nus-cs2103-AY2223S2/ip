@@ -3,6 +3,10 @@ import java.util.ArrayList;
 public class TaskList {
   private ArrayList<Task> tasks = new ArrayList<>();
 
+  public ArrayList<Task> getTasks() {
+    return tasks;
+  }
+
   public String addTask(Task currTask) {
     tasks.add(currTask);
     return String.format("Added task nya!\n  %s\n"
