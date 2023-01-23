@@ -1,12 +1,23 @@
+import exception.DukeException;
+
+import java.time.LocalDate;
+import java.time.format.DateTimeParseException;
+
 public class Event extends Task {
 
-    protected String start;
-    protected String end;
+    protected LocalDate start;
+    protected LocalDate end;
 
-    public Event(String description, String start, String end) {
+    public Event(String description, String start, String end) throws DukeException {
         super(description);
-        this.start = start;
-        this.end = end;
+        try {
+            this.start =  LocalDate.parse(start);
+            this.end =  LocalDate.parse(end);
+        } catch (DateTimeParseException e) {
+            throw new DukeException("Parse Error: " + e.getMessage() +  "\n" +
+                    "\tAccepted format: \"YYYY-MM-DD\"");
+        }
+
     }
 
     @Override
@@ -25,6 +36,8 @@ public class Event extends Task {
 
     @Override
     public String toString() {
-        return "[E]" + super.toString() + " (from: " + start + " to: " + end + ")";
+        return "[E]" + super.toString() +
+        " (from: " + start.getMonth().toString().substring(0, 3) + " " + start.getDayOfMonth() + " " + start.getYear() +
+        " to: " + end.getMonth().toString().substring(0, 3) + " " + end.getDayOfMonth() + " " + end.getYear() + ")";
     }
 }
