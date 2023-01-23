@@ -1,5 +1,3 @@
-package exceptions;
-
 public class unspecTimeException extends Exception {
     public unspecTimeException(String message) {
         super(message);

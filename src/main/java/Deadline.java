@@ -1,10 +1,4 @@
-package taskmanager;
-
-import exceptions.emptyDescException;
-import exceptions.unrecogException;
-import exceptions.unspecTimeException;
-
-public class Deadline extends Tasks {
+public class Deadline extends Tasks{
     String icon = "[D]";
 
     String desc;
@@ -34,9 +28,11 @@ public class Deadline extends Tasks {
     }
 
     public String added() {
-        return super.added() + " " + this.icon + super.completed() + " " + this.getDesc();
+        return super.added() + " " + this.icon + super.symbol() + " " + this.desc.split(" ", 2)[1]
+                +"("+this.end+")";
     }
     public String deleted() {
-        return super.deleted() + " " + icon + super.completed() + " " + this.getDesc();
+        return super.deleted() + " " + icon + super.symbol() + " " + this.desc.split(" ", 2)[1] +
+                "(" + this.end + ")";
     }
 }

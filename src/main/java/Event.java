@@ -1,9 +1,3 @@
-package taskmanager;
-
-import exceptions.emptyDescException;
-import exceptions.unrecogException;
-import exceptions.unspecTimeException;
-
 public class Event extends Tasks{
     String icon = "[E]";
     String desc;
@@ -37,9 +31,11 @@ public class Event extends Tasks{
         return this.desc.split(" ", 2)[1]+ "("+this.timeframe+")";
     }
     public String added() {
-        return super.added() + " " + icon + super.completed() + " " + this.getDesc();
+        return super.added() + " " + icon + super.symbol() + " " + this.desc.split(" ", 2)[1]+
+                "("+this.timeframe+")";
     }
     public String deleted(){
-        return super.deleted() +  " " + icon + super.completed() + " " + this.getDesc();
+        return super.deleted() +  " " + icon + super.symbol() + " " + this.desc.split(" ", 2)[1]+
+                "("+this.timeframe+")";
     }
 }

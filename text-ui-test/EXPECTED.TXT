@@ -5,9 +5,9 @@ Hello from
 | |_| | |_| |   <  __/
 |____/ \__,_|_|\_\___|
 
-Hello! I'm bot.Duke
+Hello! I'm Duke
 What can I do for you? 
-('bye' to terminate bot.Duke)
+('bye' to terminate Duke)
 ('list' to access list of tasks)
 ('un/mark X' to un/mark X task on list)
 ('todo/deadline/event' for keeping note of different tasks)

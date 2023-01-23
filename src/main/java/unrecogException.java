@@ -1,5 +1,3 @@
-package exceptions;
-
 public class unrecogException extends Exception {
     public unrecogException(String message) {
         super(message);

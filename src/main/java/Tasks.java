@@ -1,5 +1,3 @@
-package taskmanager;
-
 public class Tasks {
     final protected String desc;
     protected Boolean done;
@@ -18,7 +16,7 @@ public class Tasks {
     public void unmark() {
         this.done = false;
     }
-    public String completed() {
+    public String symbol() {
         if(done) {
             return "[X]";
         } else {
