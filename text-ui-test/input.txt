@@ -1,0 +1,6 @@
+fuck
+todo Say hi
+event Buy bughatti /from 10 /to 2
+list
+deadline This project /by some date
+mark 1

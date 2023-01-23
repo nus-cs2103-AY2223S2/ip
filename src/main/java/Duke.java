@@ -72,14 +72,14 @@ public class Duke {
                 String deets = deadlineAnalyze[0].split("deadline")[1].trim();
                 Deadline newDead = new Deadline(deets.toString(), deadline);
                 list.add(newDead);
-                System.out.println("Got it cabrón, just added this task to the list.\n"
+                System.out.println("Got it sir, just added this task to the list.\n"
                                     + newDead + "\nYou now have " + list.size() + " tasks. Anything else?");
                 break;
             case "todo":
                 String[] todoAnalyze = input.split("todo ");
                 Todo newTodo = new Todo(todoAnalyze[1].trim());
                 list.add(newTodo);
-                System.out.println("Got it cabrón, just added this task to the list.\n"
+                System.out.println("Got it sir, just added this task to the list.\n"
                         + newTodo + "\nYou now have " + list.size() + " tasks. Anything else?");
                 break;
             case "event":
@@ -90,7 +90,7 @@ public class Duke {
                 String details = eventAnalyze[0].split("event")[1].trim();
                 Event newEvent = new Event(details, start, over);
                 list.add(newEvent);
-                System.out.println("Got it cabrón, just added this task to the list.\n"
+                System.out.println("Got it sir, just added this task to the list.\n"
                         + newEvent + "\nYou now have " + list.size() + " tasks. Anything else?");
                 break;
             default:
