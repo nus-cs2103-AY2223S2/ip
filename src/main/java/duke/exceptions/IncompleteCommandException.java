@@ -1,7 +1,14 @@
 package duke.exceptions;
-
+/**
+ * A DukeException to check if command is complete
+ */
 public class IncompleteCommandException extends DukeException {
-    public IncompleteCommandException(String content) {
-        super("☹ OOPS!!! The " + content + " cannot be empty from your command");
+    /**
+     * Constructor for IncompleteCommandException
+     *
+     * @param errorMessage the incomplete command
+     */
+    public IncompleteCommandException(String errorMessage) {
+        super("☹ OOPS!!! The " + errorMessage + " cannot be empty from your command");
     }
 }

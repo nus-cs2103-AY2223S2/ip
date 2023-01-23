@@ -3,7 +3,10 @@ package duke.commands;
 import duke.exceptions.DukeException;
 import duke.tasks.ITask;
 import duke.utilities.Parser;
-
+/**
+ * Represents delete action command. A <code>Delete</code> object corresponds to
+ * the action delete a task from task list
+ */
 public class Delete extends ICommand {
 
     public Delete(Parser parser) {
