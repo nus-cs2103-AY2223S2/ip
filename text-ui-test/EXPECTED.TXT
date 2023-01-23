@@ -95,6 +95,18 @@ What can I do for you?
 ---------------------
 ---------------------
 	Here are the tasks in your list:
+	1.[T][X] read book
+	2.[D][ ] return book (by: Tue, 6 Jun 23)
+	3.[T][ ] borrow book
+	4.[D][ ] return book (by: Sat, 2 Sep 23)
+---------------------
+---------------------
+	Here are the tasks in your list:
+	1.[E][ ] project meeting (from: Sun, 06 Aug to: Tue, 08 Aug 23)
+	2.[E][ ] project meeting (from: Sat, 17 Jun to: Sun, 18 Jun 23)
+---------------------
+---------------------
+	Here are the tasks in your list:
 	1.[D][ ] return book (by: Tue, 6 Jun 23)
 	2.[E][ ] project meeting (from: Sat, 17 Jun to: Sun, 18 Jun 23)
 	3.[E][ ] project meeting (from: Sun, 06 Aug to: Tue, 08 Aug 23)
