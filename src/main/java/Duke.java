@@ -135,7 +135,7 @@ public class Duke {
     }
 
     private void displayTasks() {
-        ui.printMessage("Your tasks are:\n" + taskList.toString());
+        new DisplayListCommand().execute(taskList, ui, storage);
     }
 
     private void markTaskAsDone(String arguments) throws InvalidArgumentDukeException {
