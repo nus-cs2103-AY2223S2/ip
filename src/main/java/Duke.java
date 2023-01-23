@@ -1,13 +1,4 @@
-import java.io.FileNotFoundException;
-import java.nio.file.Files;
-import java.nio.file.Paths;
-import java.util.Objects;
 import java.util.ArrayList;
-import java.util.Iterator;
-import java.io.File;
-import java.io.IOException;
-import java.io.FileWriter;
-import java.util.Scanner;
 
 
 /**
@@ -16,57 +7,65 @@ import java.util.Scanner;
  * carrying out actual operations.
  */
 public class Duke {
+    protected final TextUi ui;
+    private final Storage storage;
+    private final Parser parser;
+    protected final TaskList taskList;
+    protected final String myName;
+    protected final ArrayList<String> commandList;
     protected final String RECORD_DIR = "./data";
     protected final String RECORD_NAME = "/duke.txt";
-    protected final ArrayList<Task> tasks = new ArrayList<>();
-    protected final String myName;
-    protected final ArrayList<String> commandList = new ArrayList<>();
 
     /**
      * Constructor
      */
     public Duke() {
         this.myName = "Duke";
-        loadUpRecordIfExists(getRecordPath());
+        this.ui = new TextUi(this);
+        this.taskList = new TaskList();
+        this.storage = new Storage(RECORD_DIR, RECORD_NAME);
+        this.parser = new Parser();
+        this.commandList = new ArrayList<>();
+        loadUpRecord();
     }
 
-    /**
-     * Returns whether the input string is of the specified command type
-     * @param string: the input string from the user
-     * @param command: a candidate command to check against
-     * @return whether the input string is of the specified command type
-     */
-    public boolean checkCommand(String string, Command command) {
-        boolean isCommand = false;
-        switch (command) {
-        case LIST:
-            isCommand = string.equalsIgnoreCase("list");
-            break;
-        case MARK:
-        case UNMARK:
-        case TODO:
-        case DEADLINE:
-        case EVENT:
-        case DELETE:
-            isCommand = string.toUpperCase().startsWith(command.name());
-            break;
+    public void run() {
+        ui.showWelcome();
+
+        String inMsg = null;
+        while (true) {
+            inMsg = ui.getUserInput();
+            if (ui.isEnd(inMsg)) {
+                break;
+            }
+
+            try {
+                handleCommand(inMsg, false);
+                addCommandList(inMsg);
+            } catch (DukeException e) {
+                ui.printStructuredString(e.toString());
+            } catch (NumberFormatException e) {
+                ui.printStructuredString("Please enter a number.");
+            }
         }
-        return isCommand;
+
+        storage.saveToFile(getCommandListString());
+        ui.sayGoodbye();
     }
 
-    /**
-     * Gets the content of the command
-     * @param string: the command string
-     * @param command: a command type
-     * @return the content of the command
-     * @throws DukeException when the string is not complete
-     */
-    public String getCommandContent(String string, Command command) throws DukeException {
-        String commandString = command.name().toLowerCase();
-        if ((!commandString.equals("list")) && string.length() <= commandString.length() + 1) {
-            throw new DukeException("The command argument is not complete.");
+    public String getName() {
+        return myName;
+    }
+
+    public void loadUpRecord() {
+        storage.loadRecordIfExists(commandList);
+        for (String s: commandList) {
+            try {
+                handleCommand(s, true);
+            } catch (DukeException e) {
+                ;
+            }
         }
-        return string.substring(string.indexOf(commandString) + commandString.length() + " ".length());
     }
 
     /**
@@ -77,100 +76,46 @@ public class Duke {
      */
     public void handleCommand(String inMsg, boolean suppressPrint) throws DukeException {
         String stringToPrint = "";
-        if (checkCommand(inMsg,Command.LIST)) {
-            stringToPrint = listTasksMsg();
-        } else if (checkCommand(inMsg,Command.MARK)) {
+        if (parser.checkCommand(inMsg,Command.LIST)) {
+            stringToPrint = listTasks();
+        } else if (parser.checkCommand(inMsg,Command.MARK)) {
             int idx = Integer.parseInt(inMsg.substring(5)) - 1;
             stringToPrint = markTaskDone(idx);
-        } else if (checkCommand(inMsg,Command.UNMARK)) {
+        } else if (parser.checkCommand(inMsg,Command.UNMARK)) {
             int idx = Integer.parseInt(inMsg.substring(7)) - 1;
             stringToPrint = unmarkTaskDone(idx);
-        } else if (checkCommand(inMsg, Command.TODO)){
-            String todoName = getCommandContent(inMsg, Command.TODO);
+        } else if (parser.checkCommand(inMsg, Command.TODO)){
+            String todoName = parser.getCommandContent(inMsg, Command.TODO);
             ToDo todo = new ToDo(todoName);
             stringToPrint = addTask(todo);
-        } else if (checkCommand(inMsg, Command.DEADLINE)) {
-            String deadlineContent = getCommandContent(inMsg, Command.DEADLINE);
+        } else if (parser.checkCommand(inMsg, Command.DEADLINE)) {
+            String deadlineContent = parser.getCommandContent(inMsg, Command.DEADLINE);
             Deadline ddl = new Deadline(deadlineContent);
             stringToPrint = addTask(ddl);
-        } else if (checkCommand(inMsg, Command.EVENT)) {
-            String eventContent = getCommandContent(inMsg, Command.EVENT);
+        } else if (parser.checkCommand(inMsg, Command.EVENT)) {
+            String eventContent = parser.getCommandContent(inMsg, Command.EVENT);
             Event event = new Event(eventContent);
             stringToPrint = addTask(event);
-        } else if (checkCommand(inMsg, Command.DELETE)) {
-            String indexToDelete = getCommandContent(inMsg, Command.DELETE);
+        } else if (parser.checkCommand(inMsg, Command.DELETE)) {
+            String indexToDelete = parser.getCommandContent(inMsg, Command.DELETE);
             stringToPrint = deleteTask(Integer.parseInt(indexToDelete));
         } else {
             throw new DukeException("  OOPS!!! I'm sorry, but I don't know what that means :-(");
         }
 
         if (!suppressPrint) {
-            printStructuredString(stringToPrint);
+            ui.printStructuredString(stringToPrint);
         }
-    }
-
-    /**
-     * Print the string in a pre-specified format
-     * @param string: the string content to print out
-     */
-    public void printStructuredString(String string) {
-        String longLine = "____________________________________________________________";
-        System.out.println(longLine + "\n" + string + "\n" + longLine);
-    }
-
-    /**
-     * Return the string representation of the task list
-     * @param isIndexed: whether to add an index number at the beginning of each task
-     *                 or not
-     * @return the string representation of the task list
-     */
-    public String getTaskListString(boolean isIndexed) {
-        String s = "";
-        int count = 1;
-        for (Task t: this.tasks) {
-            s += (isIndexed ? (count + ". ") : "")  + t;
-            if (count < tasks.size()) {
-                s += "\n";
-            }
-            count += 1;
-        }
-        return s;
     }
 
     /**
      * Returns the string representation to be printed out when the command "list" is invoked
      * @return the string representation of the message
      */
-    public String listTasksMsg() {
+    public String listTasks() {
         String taskListString = "Here are the tasks in your list:\n" +
-                this.getTaskListString(true);
+                taskList.getTaskListString(true);
         return taskListString;
-    }
-
-    /**
-     * The hello message at start-up
-     * @return the hello message
-     */
-    public String greeting() {
-        return String.format("Hello! I'm %s \nWhat can I do for you?", this.myName);
-    }
-
-    /**
-     * Returns the end message and do final clean-up
-     * @return the bye-bye message to be printed out
-     */
-    public String endMsg() throws DukeException {
-        this.saveToFile(this.RECORD_DIR);
-        return "Bye. Hope to see you again soon!";
-    }
-
-    /**
-     * Checks if the command marks the end
-     * @param string: User-input string
-     * @return if the string marks the end of the conversation
-     */
-    public boolean isEnd(String string) {
-        return Objects.equals(string.toLowerCase(), "bye");
     }
 
     /**
@@ -179,9 +124,9 @@ public class Duke {
      * @return the string response after adding a task
      */
     public String addTask(Task task) {
-        this.tasks.add(task);
+        this.taskList.add(task);
         return String.format("Got it. I've added this task:\n  %s\nNow you have %d tasks in the list.",
-                task, tasks.size());
+                task, taskList.size());
     }
 
     /**
@@ -190,7 +135,7 @@ public class Duke {
      * @return the string message to print out
      */
     public String markTaskDone(int idx) {
-        Task t = this.tasks.get(idx);
+        Task t = taskList.get(idx);
         t.markDone();
         return String.format("Nice! I've marked this task as done:\n  %s", t);
     }
@@ -201,7 +146,7 @@ public class Duke {
      * @return the string message to print out
      */
     public String unmarkTaskDone(int idx) {
-        Task t = this.tasks.get(idx);
+        Task t = this.taskList.get(idx);
         t.unmarkDone();
         return String.format("OK, I've marked this task as not done yet:\n  %s", t);
     }
@@ -212,17 +157,9 @@ public class Duke {
      * @return the string message to print out
      */
     public String deleteTask(int idx) {
-        Task t = tasks.get(idx);
-        tasks.remove(idx);
-        return String.format("Noted. I've removed this task:\n  %s\nNow you have %d tasks in the list.", t, tasks.size());
-    }
-
-    /**
-     * Obtain the path to the record path
-     * @return the path to the record
-     */
-    private String getRecordPath() {
-        return this.RECORD_DIR + "/" + this.RECORD_NAME;
+        Task t = taskList.get(idx);
+        taskList.remove(idx);
+        return String.format("Noted. I've removed this task:\n  %s\nNow you have %d tasks in the list.", t, taskList.size());
     }
 
     /**
@@ -243,60 +180,5 @@ public class Duke {
             string = string + s + "\n";
         }
         return string;
-    }
-
-    /**
-     * Saves the list of tasks to a file
-     * @param path: the path of the file to save to
-     */
-    public void saveToFile(String path) {
-        // https://www.w3schools.com/java/java_files_create.asp
-        try {
-            // create the directory and the record file
-            // https://stackoverflow.com/questions/15571496/how-to-check-if-a-folder-exists
-            if (!(new File(this.RECORD_DIR).exists())) {
-                Files.createDirectories(Paths.get(path));
-            }
-            String recordPath = getRecordPath();
-            File file = new File(recordPath);
-            file.createNewFile();
-
-            // write to the file
-            FileWriter myWriter = new FileWriter(recordPath);
-            String commandListString = getCommandListString();
-            myWriter.write(commandListString);
-            myWriter.close();
-        } catch (IOException e) {
-            System.out.println("An error occurred while saving record.");
-            e.printStackTrace();
-        }
-    }
-
-    /**
-     * Load up the record file at start-up
-     * @param path: path to the record file
-     */
-    public void loadUpRecordIfExists(String path) {
-        // check if file exists
-        File file = new File(path);
-        if (!file.exists()) {
-            return;
-        }
-
-        // read the file
-        try {
-            Scanner myReader = new Scanner(file);
-            while (myReader.hasNextLine()) {
-                String data = myReader.nextLine();
-                addCommandList(data);
-                handleCommand(data, true);
-            }
-            myReader.close();
-        } catch (FileNotFoundException e) {
-            System.out.println("An error occurred while loading up record. ");
-            e.printStackTrace();
-        } catch (DukeException e) {
-            System.out.println(e);
-        }
     }
 }
