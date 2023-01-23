@@ -16,6 +16,14 @@ public class GetCommand extends Command{
         this.instruction = instruction;
     }
 
+    /**
+     * Retrieve the tasks occurring on a specific date
+     * @param taskList taskList instance created at the start of the session
+     * @param ui ui instance created at the start of the session
+     * @param storage storage instance created at the start of the session
+     * @throws LackOfArgumentException when user did not indicate a date
+     * @throws DateFormatMismatchException when user attempts to specify a data with the wrong format
+     */
     @Override
     public void execute(TaskList taskList, Ui ui, Storage storage)
             throws LackOfArgumentException, DateFormatMismatchException {

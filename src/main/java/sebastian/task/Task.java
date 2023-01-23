@@ -7,11 +7,6 @@ public class Task {
     private final String taskDescription;
     private TaskStatus taskStatus;
 
-    public Task(String taskDescription) {
-        this.taskDescription = taskDescription;
-        this.taskStatus = TaskStatus.NOT_DONE;
-    }
-
     public Task(String taskDescription, int isCompleted) {
         this.taskDescription = taskDescription;
         this.taskStatus = isCompleted == 0? TaskStatus.NOT_DONE : TaskStatus.DONE;
@@ -49,6 +44,10 @@ public class Task {
         return this.taskStatus + " " + this.taskDescription;
     }
 
+    /**
+     * Format a task into a suitable String representation to be written to the hard disk
+     * @return the formatted String representation
+     */
     public String formatForSave() {
         int isCompleted = taskStatus == TaskStatus.DONE? 1 : 0;
         return isCompleted + "<>" + taskDescription;

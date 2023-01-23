@@ -16,6 +16,16 @@ public class DeleteCommand extends Command{
         this.instruction = instruction;
     }
 
+    /**
+     * Remove a task from the task list
+     * @param taskList taskList instance created at the start of the session
+     * @param ui ui instance created at the start of the session
+     * @param storage storage instance created at the start of the session
+     * @throws LackOfArgumentException when user did not specify the task to be deleted
+     * @throws InstructionFormatMismatchException when user command is given in the wrong format
+     * @throws TaskNotExistException when user attempts to delete a non-exist task
+     * @throws CannotWriteDataException when fail to write task list to the hard disk
+     */
     @Override
     public void execute(TaskList taskList, Ui ui, Storage storage)
             throws LackOfArgumentException, InstructionFormatMismatchException,

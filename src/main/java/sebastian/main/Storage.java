@@ -7,6 +7,9 @@ import sebastian.sebastianExceptions.EventFormatMismatchException;
 
 import java.io.*;
 
+/**
+ * A class to store task list to hard disk and to retrieve data from the hard disk
+ */
 public class Storage {
     private File file;
 
