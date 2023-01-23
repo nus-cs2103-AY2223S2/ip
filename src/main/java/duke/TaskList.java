@@ -41,6 +41,21 @@ public class TaskList {
         this.ui.addToMessage(currentTask.toString());
     }
 
+    public void findTasks(String keyword) {
+        this.ui.addToMessage("Here are the matching tasks in your list:");
+        int numMatchingTasks = 1;
+        for (Task task : this.list) {
+            if (task.hasKeyword(keyword)) {
+                this.ui.addToMessage(String.format("%s: %s", numMatchingTasks, task.toString()));
+                numMatchingTasks += 1;
+            }
+        }
+        if (numMatchingTasks == 1) {
+            this.ui.clearMessage();
+            this.ui.addToMessage(String.format("Uh oh! You don't have any tasks matching '%s'", keyword));
+        }
+    }
+
     public void displayTasks() {
         if (list.size() == 0) {
             this.ui.addToMessage("You have no tasks! Try adding some.");

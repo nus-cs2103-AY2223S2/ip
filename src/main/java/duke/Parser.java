@@ -4,6 +4,7 @@ import duke.command.ByeCommand;
 import duke.command.Command;
 import duke.command.DeadlineCommand;
 import duke.command.EventCommand;
+import duke.command.FindCommand;
 import duke.command.ListCommand;
 import duke.command.MarkCommand;
 import duke.command.ToDoCommand;
@@ -45,6 +46,10 @@ public class Parser {
             index = Integer.parseInt(args[0]) - 1;
             command = new UnmarkCommand(index);
             break;
+        case "find":
+            args = Parser.getArgs(commandName, argString, 1);
+            command = new FindCommand(args[0]);
+            break;
         case "todo":
             args = Parser.getArgs(commandName, argString, 1, new String[] {});
             command = new ToDoCommand(args[0]);
@@ -63,7 +68,8 @@ public class Parser {
         return command;
     }
 
-    public static String[] getArgs(String commandName, String argString, int numArgs) throws InvalidArgumentException {
+    public static String[] getArgs(String commandName, String argString, int numArgs)
+            throws InvalidArgumentException {
         String[] args = argString.split(" ");
         if (args.length != numArgs) {
             throw new InvalidArgumentException(commandName);
