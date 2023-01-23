@@ -21,7 +21,18 @@ public class Task {
         }
 
         completedString += this.name;
-
         return completedString;
     }
+    public String parse() {
+        String completedString = "";
+        if (this.completed) {
+            completedString += "[X] ";
+        } else {
+            completedString += "[ ] ";
+        }
+
+        completedString += this.name;
+        return completedString;
+    }
+
 }

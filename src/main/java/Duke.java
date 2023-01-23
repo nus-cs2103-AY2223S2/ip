@@ -199,7 +199,7 @@ public class Duke {
             lst.add(String.valueOf(lstOfItems.size()));
             for (int i = 0; i < lstOfItems.size(); i++) {
                 Task current = lstOfItems.get(i);
-                lst.add(current.toString());
+                lst.add(current.parse());
             }
             Files.write(Paths.get(path), lst);
         } catch (IOException err) {
