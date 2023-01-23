@@ -1,9 +1,7 @@
 package kude;
 
 import kude.tui.Processor;
-import models.ItemList;
-
-import java.util.Scanner;
+import kude.models.ItemList;
 
 public class Duke {
 

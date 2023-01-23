@@ -1,10 +1,10 @@
 package kude.tui;
 
 import kude.DukeException;
-import models.Deadline;
-import models.Event;
-import models.ItemList;
-import models.Todo;
+import kude.models.Deadline;
+import kude.models.Event;
+import kude.models.ItemList;
+import kude.models.Todo;
 
 import java.io.InputStream;
 import java.io.PrintStream;
@@ -89,12 +89,13 @@ public class Processor {
     }
 
     public void run() {
-        outStream.println(">>>\tHello, I'm Kude!");
+        outStream.println("<<<\tHello, I'm Kude!");
 
         while (true) {
             outStream.print("> ");
             var line = inStreamScanner.nextLine();
             if (line.equals("bye")) {
+                outStream.println("<<<\tBye");
                 break;
             }
             var parser = new Parser(line);

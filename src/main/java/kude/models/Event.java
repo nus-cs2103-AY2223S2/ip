@@ -1,4 +1,4 @@
-package models;
+package kude.models;
 
 public class Event extends Item {
     private final String from;

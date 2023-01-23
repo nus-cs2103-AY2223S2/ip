@@ -1,8 +1,8 @@
 package kude.tui;
 
 import kude.DukeException;
-import models.Item;
-import models.ItemList;
+import kude.models.Item;
+import kude.models.ItemList;
 
 import java.util.Optional;
 

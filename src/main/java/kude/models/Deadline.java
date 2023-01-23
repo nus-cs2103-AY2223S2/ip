@@ -1,4 +1,4 @@
-package models;
+package kude.models;
 
 public class Deadline extends Item {
     private final String deadline;

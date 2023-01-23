@@ -1,4 +1,4 @@
-package models;
+package kude.models;
 
 public class Todo extends Item {
     public Todo(String content) {
