@@ -54,12 +54,10 @@ public class Duke extends Application {
     private Button sendButton;
     private Scene scene;
     
-    /*
-    private Image user = new Image(this.getClass().getResourceAsStream("../resources/images/Khabib.png"));
-    private Image duke = new Image(this.getClass().getResourceAsStream("../resources/images/Ronaldo.png"));
-    */
-
-    /**
+    private Image user = new Image(this.getClass().getResourceAsStream("/images/Khabib.png"));
+    private Image duke = new Image(this.getClass().getResourceAsStream("/images/Ronaldo.png"));
+    
+   /**
      * Default constructor that is made explicit. Tasks and TaskList have
      * essentially the same type of characteristics, but it is to satisfy
      * different levels in the iterative approach
@@ -448,6 +446,18 @@ public class Duke extends Application {
         });
         */
 
+        ByteArrayOutputStream storeString = new ByteArrayOutputStream();
+        PrintStream printStream = new PrintStream(storeString);
+        PrintStream oldPrintStream = System.out;
+        System.setOut(printStream);
+        ui = new Ui("Greetings");
+        ui.showWelcome();
+        System.out.flush();
+        System.setOut(oldPrintStream);
+        Label greeting = new Label(storeString.toString());
+
+        dialogContainer.getChildren().addAll(greeting);
+
         sendButton.setOnMouseClicked((event) -> {
         handleUserInput();
         });
@@ -474,12 +484,10 @@ public class Duke extends Application {
     private void handleUserInput() {
         Label userText = new Label(userInput.getText());
         Label dukeText = new Label(getResponse(userInput.getText()));
-        /*
         dialogContainer.getChildren().addAll(
                 new DialogBox(userText, new ImageView(user)),
                 new DialogBox(dukeText, new ImageView(duke))
         );
-        */
         dialogContainer.getChildren().addAll(userText, dukeText);
         userInput.clear();  
     }
@@ -509,20 +517,21 @@ public class Duke extends Application {
 
         /*
         ui = new Ui();
-        ui.showWelcome();
         */
         
-        /*
+        ui = new Ui(input);
+        /*        
+        ui.showWelcome();
+        Label greeting = new Label(storeString.toString());
+        */
         System.out.flush();
         System.setOut(oldPrintStream);
-        System.out.println(storeString.toString());
-        */
-
+        //System.out.println(storeString.toString());
+       
         storeString = new ByteArrayOutputStream();
         printStream = new PrintStream(storeString);
         System.setOut(printStream);
         
-        ui = new Ui(input);
 
         taskList = ui.execute(taskList);
          
