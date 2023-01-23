@@ -17,11 +17,11 @@ public class Task {
         return (isDone ? "X" : " ");
     }
     // marks task as done
-    public void MarkDone()  {
+    public void markDone() {
         this.isDone = true;
     }
     // marks task as NOT done
-    public void MarkNotDone() {
+    public void markNotDone() {
         this.isDone = false;
     }
     // properly formats Tasks.Task as String

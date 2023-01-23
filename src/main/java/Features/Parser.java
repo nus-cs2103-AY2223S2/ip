@@ -1,8 +1,15 @@
 package Features;
-import UserCommands.*;
-
 import java.io.IOException;
 import java.util.Scanner;
+
+import UserCommands.CommandBye;
+import UserCommands.CommandDeadline;
+import UserCommands.CommandDelete;
+import UserCommands.CommandEvent;
+import UserCommands.CommandList;
+import UserCommands.CommandMark;
+import UserCommands.CommandToDo;
+import UserCommands.CommandUnmark;
 
 public class Parser {
 
@@ -18,6 +25,21 @@ public class Parser {
     public void parse() throws DukeException {
         // switch case for future commands
         switch (this.userScan.next()) {
+        // loop breaks, ending program if input is "bye"
+        case ("bye"):
+            new CommandBye().print();
+            this.loopEnd = true;
+            break;
+
+        // Duke lists out all Tasks.Task names in TaskList when input is "list"
+        case ("list"):
+            new CommandList().print(this.userScan, this.taskList);
+            break;
+
+        // Duke allows user to mark tasks as done when input is "mark"
+        case ("mark"):
+            this.taskList.clone(new CommandMark().handle(this.userScan, this.taskList));
+            break;
         // loop breaks, ending program if input is "bye"
         case ("bye"):
             new CommandBye().print();
@@ -71,8 +93,7 @@ public class Parser {
     public void autoSave(TaskList taskList) throws DukeException {
         try {
             new Storage().saveTaskList(taskList);
-        }
-        catch (IOException err) {
+        } catch (IOException err) {
             throw new DukeException(new Ui().formatMessage("[ERROR]\nOops, we couldn't save that!"));
         }
     }

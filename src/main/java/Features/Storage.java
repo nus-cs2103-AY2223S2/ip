@@ -20,13 +20,16 @@ public class Storage {
 
         try {
             if (!dukePath.exists()) {
-                dukePath.mkdirs();
+                if (dukePath.mkdirs()) {
+                    new Ui().print("No save files detected. Creating new save file...");
+                }
                 if (!dukeSave.exists()) {
-                    dukeSave.createNewFile();
+                    if (dukeSave.createNewFile()) {
+                        new Ui().print("New save file created!");
+                    }
                 }
             }
-        }
-        catch (IOException err) {
+        } catch (IOException err) {
             new Ui().print("Sorry, could not save that.");
         }
 
@@ -39,28 +42,28 @@ public class Storage {
                 case ("T"):
                     ToDo addToDo = new ToDo(evalArray[2]);
                     if (evalArray[1].equals("X")) {
-                        addToDo.MarkDone();
+                        addToDo.markDone();
                     }
                     toLoad.add(addToDo);
                     break;
                 case ("D"):
                     Deadline addDeadline = new Deadline(evalArray[2], evalArray[3]);
                     if (evalArray[1].equals("X")) {
-                        addDeadline.MarkDone();
+                        addDeadline.markDone();
                     }
                     toLoad.add(addDeadline);
                     break;
                 case("E"):
                     Event addEvent = new Event(evalArray[2], evalArray[3], evalArray[4]);
                     if (evalArray[1].equals("X")) {
-                        addEvent.MarkDone();
+                        addEvent.markDone();
                     }
                     toLoad.add(addEvent);
                     break;
+                default:
                 }
             }
-        }
-        catch (FileNotFoundException err) {
+        } catch (FileNotFoundException err) {
             return toLoad;
         }
         return toLoad;
