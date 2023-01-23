@@ -64,15 +64,15 @@ public class Storage {
                 String eventType = dataArray[0].trim();
                 String isDone = dataArray[1].trim();
                 if (eventType.equals("T")) {
-                    task = new ToDo(dataArray[2]);
+                    task = new ToDo(dataArray[2].trim());
                 } else if (eventType.equals("D")) {
                     LocalDate deadline = LocalDate.parse(dataArray[3].trim());
-                    task = new Deadline(dataArray[2], deadline);
+                    task = new Deadline(dataArray[2].trim(), deadline);
                 } else {
                     String[] eventDetails = dataArray[3].split("- ");
                     LocalDate startDate = LocalDate.parse(eventDetails[0].trim());
                     LocalDate endDate = LocalDate.parse(eventDetails[1].trim());
-                    task = new Event(dataArray[2], startDate, endDate);
+                    task = new Event(dataArray[2].trim(), startDate, endDate);
                 }
                 if (isDone.equals("X")) {
                     task.markAsDone();
