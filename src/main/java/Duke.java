@@ -46,6 +46,12 @@ public class Duke {
             } catch (IOException err) {
                 System.out.println(err);
             }
+
+            try {
+                Files.write(Paths.get(path), "0".getBytes());
+            } catch (IOException err) {
+                System.out.println(err);
+            }
         } else {
             try {
                 File savedFile = new File(path);
