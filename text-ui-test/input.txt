@@ -1,11 +1,18 @@
 read book
+list
 todo borrow book
 deadline return book /by Sunday
+deadline return book /by 01012023
 event project meeting /from Mon 2pm /to 4pm
-run
+event project meeting /from 01012023 1400 /to 01032023 1600
+mark 1
 mark 2
-mark 5
+mark 3
 mark 4
 unmark 5
+unmark 2
+list
+filterdate 01012023
+filterdate 01022023
 list
 bye

@@ -4,7 +4,7 @@ import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 
 public class Deadline extends Task {
-    private LocalDateTime dateTime;
+    private LocalDateTime deadline;
 
     public Deadline(String description, String deadline) throws DukeException {
         super(description);
@@ -38,32 +38,32 @@ public class Deadline extends Task {
         }
         // If date or dateTime is still null, input is in invalid format
         if (date == null && dateTime == null) {
-            throw new DukeException.InvalidDateException("Reenter date in this format: (ddMMyyyy) or (ddMMyyyy HHmm).");
+            throw new DukeException("Reenter date in this format: (ddMMyyyy) or (ddMMyyyy HHmm).");
         }
 
         if (date != null) {
-            this.dateTime = date.atStartOfDay().plusDays(1).minusNanos(1);
+            this.deadline = date.atStartOfDay().plusDays(1).minusNanos(1);
         } else {
-            this.dateTime = dateTime;
+            this.deadline = dateTime;
         }
     }
 
     public LocalDateTime getDeadline() {
-        return dateTime;
+        return deadline;
     }
 
     public boolean isOverdue() {
-        return LocalDateTime.now().isAfter(dateTime);
+        return LocalDateTime.now().isAfter(deadline);
     }
 
     public boolean isUpcoming() {
-        return LocalDateTime.now().isBefore(dateTime);
+        return LocalDateTime.now().isBefore(deadline);
     }
 
     @Override
     public String toString() {
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("MMM dd yyyy HH:mm");
-        String deadline = this.dateTime.format(formatter);
+        String deadline = this.deadline.format(formatter);
         return "[D]" + super.toString() + " (by: " + deadline + ")";
     }
 }

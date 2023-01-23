@@ -55,7 +55,7 @@ public class Event extends Task {
 
         // If date or dateTime is still null, input is in invalid format
         if ((startDate == null && startDateTime == null) || (endDate == null && endDateTime == null)) {
-            throw new DukeException.InvalidDateException("Reenter dates in this format: (ddMMyyyy) or (ddMMyyyy HHmm).");
+            throw new DukeException("Reenter dates in this format: (ddMMyyyy) or (ddMMyyyy HHmm).");
         }
 
         if (startDate != null) {
@@ -70,7 +70,7 @@ public class Event extends Task {
         }
 
         if (this.endDateTime.isBefore(this.startDateTime)) {
-            throw new DukeException.InvalidDateException("End date cannot be before start date.");
+            throw new DukeException("End date cannot be before start date.");
         }
     }
 

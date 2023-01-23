@@ -11,31 +11,37 @@ import java.util.ArrayList;
 public class Storage {
     private Path filename;
 
-    public Storage() {
-        filename = Paths.get(".", "data", "tasks.ser");
+    public Storage(String filename) {
+        String[] parts = filename.split("/");
+        this.filename = Paths.get(parts[0], parts[1], parts[2]);
     }
 
-    public void saveTasks(ArrayList<Task> tasks) throws IOException {
-        File file = filename.toFile();
-        if (!file.exists()) {
-            file.getParentFile().mkdirs();
-            file.createNewFile();
-        }
+    public void save(TaskList tasks) throws DukeException {
         try (ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream(filename.toString()))) {
-            oos.writeObject(tasks);
+            oos.writeObject(tasks.getTasks());
+        } catch (IOException e) {
+            throw new DukeException(e.getMessage());
         }
     }
 
-    public ArrayList<Task> loadTasks() throws IOException, ClassNotFoundException {
-        ArrayList<Task> tasks = new ArrayList<>();
+    public TaskList load() throws DukeException {
+        TaskList tasks = new TaskList();
         File file = filename.toFile();
         if (!file.exists()) {
-            file.getParentFile().mkdirs();
-            file.createNewFile();
+            try {
+                file.getParentFile().mkdirs();
+                file.createNewFile();
+            } catch (IOException e) {
+                throw new DukeException(e.getMessage());
+            }
         }
         if(file.length() != 0) {
             try (ObjectInputStream ois = new ObjectInputStream(new FileInputStream(filename.toString()))) {
-                tasks = (ArrayList<Task>) ois.readObject();
+                tasks.setTasks((ArrayList<Task>) ois.readObject());
+            } catch (IOException e) {
+                throw new DukeException(e.getMessage());
+            } catch (ClassNotFoundException e) {
+                throw new DukeException(e.getMessage());
             }
         }
         return tasks;
