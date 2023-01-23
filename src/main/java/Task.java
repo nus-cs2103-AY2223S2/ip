@@ -36,4 +36,22 @@ public abstract class Task {
      * @return a String indicating the type and status of the task.
      */
     public abstract String getStatusOfTaskInString();
+
+    /**
+     * Gets the status of the task.
+     *
+     * @return true if task is done, else return false.
+     */
+    public boolean getStatusOfTask() {
+        return isDone;
+    }
+
+    /**
+     * Gets the name of the task.
+     *
+     * @return the name of the task.
+     */
+    public String getNameOfTask() {
+        return this.taskName;
+    }
 }

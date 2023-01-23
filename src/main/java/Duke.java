@@ -24,10 +24,6 @@ public class Duke {
     private static final String dataFilePath = Paths.get(System.getProperty("user.dir"), "data", "tasks.txt")
             .toString();
 
-
-
-
-
     /**
      * Launches the chatbot.
      *
@@ -44,22 +40,21 @@ public class Duke {
                 createFile();
             } catch (IOException e) {
                 System.out.println("Could not create data file to store task history. The following error occurred:");
-                e.printStackTrace();
+                System.out.println(e.getMessage());
                 return;
             }
         }
 
-        //Restores any task history if present
+        //Restores task history if present
         ArrayList<Task> tasks = new ArrayList<Task>();
         try {
             restoreTaskHistory(tasks);
         } catch (FileNotFoundException e) {
             System.out.println("Data file is missing. The following error occurred: ");
-            e.printStackTrace();
+            System.out.println(e.getMessage());
         }
 
 
-        printIntroductoryMessage();
 
         //Prepare input source
         Scanner sc = new Scanner(System.in);
@@ -99,6 +94,7 @@ public class Duke {
                                 Integer.toString(tasks.size()) + " tasks.");
                     }
                     markAsDone(tasks.get(indexOfTask));
+                    saveTasks(tasks);
                     break;
                 } catch (DukeException dukeException) {
                     System.out.println(STRAIGHT_LINE);
@@ -120,6 +116,7 @@ public class Duke {
                                 Integer.toString(tasks.size()) + " tasks.");
                     }
                     markAsUndone(tasks.get(indexOfTask));
+                    saveTasks(tasks);
                     break;
                 } catch (DukeException dukeException) {
                     System.out.println(STRAIGHT_LINE);
@@ -141,6 +138,7 @@ public class Duke {
                                 + Integer.toString(tasks.size()) + " tasks.");
                     }
                     deleteTask(indexOfTask, tasks);
+                    saveTasks(tasks);
                     break;
                 } catch (DukeException dukeException) {
                     System.out.println(STRAIGHT_LINE);
@@ -157,6 +155,7 @@ public class Duke {
                     String taskName = input.substring(indexOfType + 5);
                     ToDo newToDoTask = new ToDo(taskName);
                     addTask(newToDoTask, tasks);
+                    saveTasks(tasks);
                     break;
                 } catch (DukeException dukeException) {
                     System.out.println(STRAIGHT_LINE);
@@ -200,6 +199,7 @@ public class Duke {
                     }
                     Deadline newDeadlineTask = new Deadline(taskName, deadlineOfTask);
                     addTask(newDeadlineTask, tasks);
+                    saveTasks(tasks);
                     break;
                 } catch (DukeException dukeException) {
                     System.out.println(STRAIGHT_LINE);
@@ -255,6 +255,7 @@ public class Duke {
                     }
                     Event newEventTask = new Event(taskName, startDate, endDate);
                     addTask(newEventTask, tasks);
+                    saveTasks(tasks);
                     break;
                 } catch (DukeException dukeException) {
                     System.out.println(STRAIGHT_LINE);
@@ -268,10 +269,7 @@ public class Duke {
         }
 
 
-        //Exits the bot
-        //TODO: Save tasks
-
-        //Prints exit message
+        //Exits the bot after printing exit message
         printExitMessage();
         sc.close();
     }
@@ -495,6 +493,46 @@ public class Duke {
                 break;
             }
         }
+    }
+
+
+    /**
+     * Saves the tasks that are currently stored in the list into a data file stored in hard disk.
+     *
+     * @param tasks The list that contains the tasks to be saved.
+     */
+    public static void saveTasks(ArrayList<Task> tasks) {
+        try {
+            File dataFile = new File(dataFilePath);
+            FileWriter fw = new FileWriter(dataFilePath);
+            //Reset content of file
+            fw.write("");
+            fw = new FileWriter(dataFilePath, true);
+            //Append new content into file
+            for (int i = 0; i < tasks.size(); i = i + 1) {
+                Task currentTask = tasks.get(i);
+                String taskStatus = (currentTask.getStatusOfTask())
+                                    ? "1 | "
+                                    : "0 | ";
+                String lineToAdd = (currentTask instanceof ToDo)
+                                   ? "T | " + taskStatus + currentTask.getNameOfTask()
+                                   : (currentTask instanceof Deadline)
+                                   ? "D | " + taskStatus + currentTask.getNameOfTask() + " | "
+                                           + ((Deadline) currentTask).getDeadlineOfTask()
+                                   : "E | " + taskStatus + currentTask.getNameOfTask() + " | "
+                                           + ((Event) currentTask).getStartDate() + " | "
+                                                   + ((Event) currentTask).getEndDate();
+                if (i != tasks.size() - 1) {
+                    lineToAdd += "\n";
+                }
+                fw.write(lineToAdd);
+            }
+            fw.close();
+        } catch (IOException e) {
+            System.out.println("Could not save the tasks. The following error occurred: ");
+            System.out.println(e.getMessage());
+        }
+
     }
 
 
