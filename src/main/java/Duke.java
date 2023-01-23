@@ -5,7 +5,8 @@ public class Duke {
         String welcomeMsg = "Hello i'm Duke\nWhat can I do for you?";
         String goodbyeMsg = "Bye. Hope to see you again soon!";
         System.out.println(Span.format(welcomeMsg));
-        TaskList tasks = new TaskList(); // create a list for all the tasks
+        FileManagement fileManager = new FileManagement(); // to manage saved data
+        TaskList tasks = new TaskList(fileManager.retrieve()); // load existing list of tasks; creates empty if does not exist
         Scanner scanner = new Scanner(System.in); // creates a scanner object
         while (scanner.hasNextLine()) {
             String echo = scanner.nextLine().trim(); // get user input and trim trailing white sp
@@ -116,6 +117,7 @@ public class Duke {
                             tasks.size() +
                             " task(s) in the list."));
                 }
+                fileManager.save(tasks); // save regardless
             } catch (UnknownCommandException e) {
                 System.out.println(Span.format(e.toString()));
             } catch (MissingArgumentException e) {

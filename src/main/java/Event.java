@@ -10,6 +10,11 @@ public class Event extends Task {
 
     @Override
     public String getStatusIcon() {
-        return String.format("[E]%s (from: %s to: %s)", super.getStatusIcon(), this.startTime, this.endTime);
+        return String.format("[E]%s | FROM: %s TO: %s", super.getStatusIcon(), this.startTime, this.endTime);
+    }
+
+    @Override
+    public String encode() {
+        return String.format("%s ### %s ### %s ### %s", "event", super.encode(), this.startTime, this.endTime);
     }
 }

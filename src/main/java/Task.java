@@ -1,4 +1,4 @@
-public class Task {
+public abstract class Task {
     private String description;
     private boolean isDone;
 
@@ -21,5 +21,9 @@ public class Task {
 
     public String getDescription() {
         return this.description;
+    }
+
+    public String encode() {
+        return String.format("%s ### %s", this.isDone, this.description);
     }
 }

@@ -12,6 +12,12 @@ then
     rm ACTUAL.TXT
 fi
 
+# dun store data for test
+if [ -e "./data/duke.txt" ]
+then
+    rm data/duke.txt
+fi
+
 # compile the code into the bin folder, terminates if error occurred
 if ! javac -cp ../src/main/java -Xlint:none -d ../bin ../src/main/java/*.java
 then

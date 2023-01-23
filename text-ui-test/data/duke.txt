@@ -1,0 +1,6 @@
+deadline ### false ### return book ### June 6th
+event ### false ### project meeting ### Aug 6th 2pm ### 4pm
+todo ### true ### join sports club
+todo ### false ### borrow book
+deadline ### true ### return book ### Sunday
+deadline ### false ### do homework ### no idea :-p
