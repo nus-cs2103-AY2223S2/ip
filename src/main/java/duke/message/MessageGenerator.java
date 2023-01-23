@@ -31,7 +31,7 @@ public class MessageGenerator {
         return this.taskList.getTask(taskNum);
     }
 
-    private String generateTaskMessage(MessageStatus status, Task task) {
+    String generateTaskMessage(MessageStatus status, Task task) {
         String heading = "";
         String end = "";
 
@@ -56,7 +56,7 @@ public class MessageGenerator {
         return String.format("%s\n%s%s", heading, task.toString(), end);
     }
 
-    private String generateListMessage() {
+    String generateListMessage() {
         String heading = "Here are the tasks in your list:\n";
         return heading + this.taskList.toString();
     }
