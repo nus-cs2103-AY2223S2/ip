@@ -58,7 +58,7 @@ public class Event extends Task {
     @Override
     public String stringFields() {
         String fromDateString = this.chronoFromDate.isEmpty() ? this.fromDate : this.chronoFromDate.get().format(DateTimeFormatter.ofPattern("MMM d yyyy"));
-        String toDateString = this.chronoToDate.isEmpty() ? this.fromDate : this.chronoToDate.get().format(DateTimeFormatter.ofPattern("MMM d yyyy"));
+        String toDateString = this.chronoToDate.isEmpty() ? this.toDate : this.chronoToDate.get().format(DateTimeFormatter.ofPattern("MMM d yyyy"));
         return " (from: " + fromDateString + " to: " + toDateString + ")";
     }
 }
