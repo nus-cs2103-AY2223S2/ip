@@ -24,6 +24,9 @@ class Ui {
     }
 
     Ui(String description) {
+        if (!description.endsWith(" ")) {
+            description = description + " ";
+        }
         scanner = new Scanner(description);
         this.description = scanner.next();
     }
