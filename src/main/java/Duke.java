@@ -1,13 +1,16 @@
+import java.io.IOException;
 import java.util.Scanner;
 
 public class Duke {
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws IOException {
 
         TaskList taskList = new TaskList();
 
         Scanner sc = new Scanner(System.in);
         String line = "init";
+
+        taskList.loadFromFile();
 
         System.out.println("Hello I'm Duke! \nWhat can I do for you?");
         while (!line.equals("bye")) {
@@ -47,11 +50,8 @@ public class Duke {
             line = sc.nextLine();
         }
         sc.close();
-        try {
-            taskList.saveToFile();
-        } catch (Exception e) {
-            System.out.println(e.toString());
-        }
+        taskList.saveToFile();
+
         Ui.displayMsg("Bye. Hope to see you again soon!");
     }
 }

@@ -46,4 +46,15 @@ public class TaskList {
         out.close();
 
     }
+
+    public void loadFromFile() throws IOException {
+        Path fileName = Path.of("../../../data/duke.txt");
+        String strData = Files.readString(fileName);
+
+        String[] strTasks = strData.split("\n");
+        for (String task : strTasks) {
+            System.out.println(task);
+        }
+
+    }
 }
