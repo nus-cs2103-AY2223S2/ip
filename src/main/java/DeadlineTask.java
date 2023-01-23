@@ -12,4 +12,9 @@ public class DeadlineTask extends Task {
     public String toString() {
         return super.toString() + " (by: " + endTime + ")";
     }
+
+    @Override
+    public String toSaveString() {
+        return super.toSaveString() + "|" + endTime;
+    }
 }

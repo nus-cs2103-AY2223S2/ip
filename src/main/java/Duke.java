@@ -1,8 +1,15 @@
+import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 import java.util.Scanner;
+import java.util.List;
 
 // A chatbot
 public class Duke {
 
+    private static final String SAVE_PATH = "data/duke.txt";
     private static Scanner scanner = new Scanner(System.in);
     private static TaskList taskList = new TaskList();
 
@@ -64,6 +71,7 @@ public class Duke {
             } else {
                 executeCommandWithNoArgument(commandType);
             }
+            save();
         } catch (DukeException e) {
             printMessage(e.toString());
         }
@@ -178,8 +186,59 @@ public class Duke {
         }
     }
 
+    private static void save() {
+        File file = new File(SAVE_PATH);
+        try {
+            Files.createDirectories(Paths.get(SAVE_PATH).getParent());
+            file.createNewFile();
+            FileWriter writer = new FileWriter(file);
+            writer.write(taskList.toSaveString());
+            writer.close();
+        } catch (IOException e) {
+            printMessage(new CannotWriteFileDukeException().toString());
+        }
+    }
+
+    private static void load() {
+        File file = new File(SAVE_PATH);
+        if (!file.exists()) {
+            return;
+        }
+        try {
+            List<String> lst = Files.readAllLines(Paths.get(SAVE_PATH));
+            taskList = new TaskList();
+            Task task;
+            for (String line : lst) {
+                String[] parsed = line.split("\\|");
+                String taskSymbol = parsed[0];
+                boolean isTaskDone = Boolean.parseBoolean(parsed[1]);
+                String description = parsed[2];
+                switch (taskSymbol) {
+                case "T":
+                    task = new ToDoTask(description);
+                    break;
+                case "D":
+                    task = new DeadlineTask(description, parsed[3]);
+                    break;
+                case "E":
+                    task = new EventTask(description, parsed[3], parsed[4]);
+                    break;
+                default:
+                    throw new CannotReadFileDukeException();
+                }
+                if (isTaskDone) {
+                    task.setDone(true);
+                }
+                taskList.add(task);
+            }
+        } catch (IOException | IndexOutOfBoundsException | CannotReadFileDukeException e) {
+            printMessage(new CannotReadFileDukeException().toString());
+        }
+    }
+
     // Main method
     public static void main(String[] args) {
+        load();
         greet();
         acceptCommands();
         sayGoodbye();

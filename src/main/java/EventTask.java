@@ -14,4 +14,9 @@ public class EventTask extends Task {
     public String toString() {
         return super.toString() + " (from: " + startTime + " to: " + endTime + ")";
     }
+
+    @Override
+    public String toSaveString() {
+        return super.toSaveString() + "|" + startTime + "|" + endTime;
+    }
 }
