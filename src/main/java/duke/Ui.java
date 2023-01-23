@@ -24,8 +24,8 @@ class Ui {
     }
 
     Ui(String description) {
-        this.description = description;
         scanner = new Scanner(description);
+        this.description = scanner.next();
     }
 
     /**
