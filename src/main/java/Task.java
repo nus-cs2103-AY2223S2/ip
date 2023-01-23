@@ -22,4 +22,8 @@ public abstract class Task {
     public String getDescription() {
         return this.description;
     }
+
+    public String encode() {
+        return String.format("%s ### %s", this.isDone, this.description);
+    }
 }
