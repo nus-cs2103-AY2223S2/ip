@@ -1,8 +1,8 @@
 package tasks;
-abstract public class Task {
-    protected String description;
-    protected boolean isDone;
 
+public abstract class Task {
+    protected boolean isDone;
+    protected String description;
     public Task(String description) {
         this.description = description;
         this.isDone = false;
@@ -48,7 +48,7 @@ abstract public class Task {
      * Abstract method for child classes to return their type.
      * @return string type of task
      */
-    abstract public String getTaskType();
+    public abstract String getTaskType();
 
-    abstract public String writeTask();
+    public abstract String writeTask();
 }

@@ -1,15 +1,13 @@
 package tasks;
 
+import java.util.ArrayList;
+
 import exceptions.InvalidIndexException;
 import exceptions.NoSuchTaskException;
 
-import java.util.ArrayList;
-
 public class TaskList {
+    private static final String ADDTASKMSG = "Got it. Added this task, I have:";
     private ArrayList<Task> taskList;
-    private final static String ADDTASKMSG = "Got it. Added this task, I have:";
-    private final static String BANNER = "____________________________________________________________";
-
     /**
      * Constructor for Task List.
      */
@@ -45,7 +43,7 @@ public class TaskList {
 
     /**
      * Deletes a task in task list by their index counting from 1
-     * @param indexString
+     * @param indexString string index
      */
     public void deleteTask(String indexString) {
         int idx;
@@ -105,7 +103,8 @@ public class TaskList {
             for (int i = 0; i < this.getSize() - 1; i++) {
                 out += String.format("%d.%s\n", i + 1, taskList.get(i).toString());
             }
-            System.out.println(out + String.format("%d.%s", this.getSize(), taskList.get(this.getSize() - 1).toString()));
+            System.out.println(out + String.format("%d.%s", this.getSize(),
+                    taskList.get(this.getSize() - 1).toString()));
         }
     }
 

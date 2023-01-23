@@ -1,13 +1,14 @@
 package tasks;
 
+import java.time.LocalDate;
+import java.time.LocalTime;
+import java.time.format.DateTimeFormatter;
+
 import exceptions.IncompleteCommandException;
 import exceptions.UnknownCommandException;
 import formatters.DateTimeUtils;
 import formatters.StringUtils;
 
-import java.time.LocalDate;
-import java.time.LocalTime;
-import java.time.format.DateTimeFormatter;
 
 public class Event extends Task {
 
@@ -45,8 +46,8 @@ public class Event extends Task {
         if (fromIndex == -1 || toIndex == -1 || fromIndex + 1 == toIndex || fromIndex == 1) {
             throw new IncompleteCommandException("Incomplete arguments for command event, I have found", null);
         } else if (fromIndex > toIndex) {
-            throw new UnknownCommandException("This command I do not know, only :\n " +
-                    "event <description> /from <start> /to <end>", null);
+            throw new UnknownCommandException("This command I do not know, only :\n "
+                    + "event <description> /from <start> /to <end>", null);
         }
         String eventDescription = StringUtils.joinString(splitInput, 1, fromIndex - 1);
         String startDateExtract = splitInput[fromIndex + 1];

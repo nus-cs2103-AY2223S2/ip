@@ -1,13 +1,13 @@
 package tasks;
 
+import java.time.LocalDate;
+import java.time.LocalTime;
+import java.time.format.DateTimeFormatter;
+
 import exceptions.IncompleteCommandException;
 import exceptions.UnknownCommandException;
 import formatters.DateTimeUtils;
 import formatters.StringUtils;
-
-import java.time.LocalDate;
-import java.time.LocalTime;
-import java.time.format.DateTimeFormatter;
 
 public class Deadline extends Task {
 
@@ -33,7 +33,7 @@ public class Deadline extends Task {
         String[] splitCommands = input.trim().split(" ");
         splitCommands = StringUtils.removeWhiteSpace(splitCommands);
         int deadlineIndex = StringUtils.searchString(splitCommands, "deadline");
-        int byIndex = StringUtils.searchString(splitCommands,"/by");
+        int byIndex = StringUtils.searchString(splitCommands, "/by");
         if (byIndex == -1) {
             throw new IncompleteCommandException("Incomplete arguments for command deadline, I have found", null);
         }

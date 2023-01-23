@@ -4,9 +4,9 @@ import java.util.Scanner;
 
 public class Ui {
 
-    private final static String BANNER = "____________________________________________________________";
-    private final static String WELCOME_MSG = "Greetings! JEDI GRANDMASTER YODA here\n" + "For you, What can I do?";
-    private final static String BYE_MSG = "Be Gone, You Must. May the Force be with You!";
+    private static final String BANNER = "____________________________________________________________";
+    private static final String WELCOME_MSG = "Greetings! JEDI GRANDMASTER YODA here\n" + "For you, What can I do?";
+    private static final String BYE_MSG = "Be Gone, You Must. May the Force be with You!";
 
     /**
      * Responds to the command given by standard input with the appropriate formatting.

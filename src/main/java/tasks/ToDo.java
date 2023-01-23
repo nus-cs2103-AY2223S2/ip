@@ -3,7 +3,7 @@ package tasks;
 import exceptions.IncompleteCommandException;
 import formatters.StringUtils;
 
-public class ToDo extends Task{
+public class ToDo extends Task {
 
     private ToDo(String description) {
         super(description);
@@ -17,8 +17,8 @@ public class ToDo extends Task{
     public static ToDo create(String[] commands) {
         commands = StringUtils.removeWhiteSpace(commands);
         if (commands.length == 1) {
-            throw new IncompleteCommandException(String.format("Hrrmmm. Not enough arguments, " +
-                    "%s has. Hmm", "todo"), null);
+            throw new IncompleteCommandException(String.format("Hrrmmm. Not enough arguments, "
+                    + "%s has. Hmm", "todo"), null);
         }
         String description = StringUtils.joinString(commands, 1, commands.length - 1);
         return new ToDo(description);
