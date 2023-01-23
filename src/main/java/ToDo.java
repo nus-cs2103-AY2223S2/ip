@@ -3,6 +3,10 @@ public class ToDo extends Task{
         super(content);
     }
 
+    ToDo(String content, boolean done) {
+        super(content, done);
+    }
+
     @Override
     public String toString() {
         return "[T]" + super.toString();

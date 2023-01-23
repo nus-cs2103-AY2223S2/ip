@@ -47,6 +47,10 @@ public class TaskList {
         return tasks.get(tasks.size() - 1);
     }
 
+    public void addTask(Task t) {
+        this.tasks.add(t);
+    }
+
     public Task deleteTask(int i) {
         Task res = this.getTask(i);
         tasks.remove(i);
