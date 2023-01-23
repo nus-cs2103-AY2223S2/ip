@@ -2,9 +2,11 @@
  * A deadline class extends from the Task.
  * It has a deadline attribute on top of the task.
  */
+import java.time.LocalDate;
+
 public class Deadline extends Task {
     protected String type;
-    protected String deadline;
+    protected LocalDate time;
 
     /***
      *
@@ -15,7 +17,7 @@ public class Deadline extends Task {
         super();
         int indexOfBy = description.indexOf("/by");
         try {
-            this.deadline = description.substring(indexOfBy + "/by ".length());
+            this.time = Task.parseDate(description.substring(indexOfBy + "/by ".length()));
             this.name = description.substring(0, indexOfBy - " ".length());
         } catch (StringIndexOutOfBoundsException e) {
             throw new DukeException("The command argument is not complete.");
@@ -29,6 +31,6 @@ public class Deadline extends Task {
      */
     @Override
     public String toString() {
-        return String.format("[%s]%s (by: %s)", this.type, super.toString(), this.deadline);
+        return String.format("[%s]%s (by: %s)", type, super.toString(), Task.printDate(time));
     }
 }

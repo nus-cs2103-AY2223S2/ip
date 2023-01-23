@@ -1,10 +1,12 @@
 /**
  * The event class that extends the Task class
  */
+import java.time.LocalDate;
+
 public class Event extends Task {
     protected String type;
-    protected String startTime;
-    protected String endTime;
+    protected LocalDate startTime;
+    protected LocalDate endTime;
 
     /**
      * The default constructor
@@ -15,8 +17,8 @@ public class Event extends Task {
         int indexOfFrom = description.indexOf("/from");
         int indexOfTo = description.indexOf("/to");
         this.name = description.substring(0, indexOfFrom - " ".length());
-        this.startTime = description.substring(indexOfFrom + "/from ".length(), indexOfTo - " ".length());
-        this.endTime = description.substring(description.indexOf("/to") + "/to ".length());
+        this.startTime = Task.parseDate(description.substring(indexOfFrom + "/from ".length(), indexOfTo - " ".length()));
+        this.endTime = Task.parseDate(description.substring(description.indexOf("/to") + "/to ".length()));
         this.type = "E";
     }
 
@@ -44,6 +46,7 @@ public class Event extends Task {
      */
     @Override
     public String toString() {
-        return String.format("[%s]%s (from: %s to: %s)", this.type, super.toString(), this.startTime, this.endTime);
+        return String.format("[%s]%s (from: %s to: %s)", type,
+                super.toString(), Task.printDate(startTime), Task.printDate(endTime));
     }
 }
