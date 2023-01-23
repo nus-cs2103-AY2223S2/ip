@@ -63,7 +63,8 @@ public class Parser {
         return command;
     }
 
-    public static String[] getArgs(String commandName, String argString, int numArgs) throws InvalidArgumentException {
+    public static String[] getArgs(String commandName, String argString, int numArgs)
+            throws InvalidArgumentException {
         String[] args = argString.split(" ");
         if (args.length != numArgs) {
             throw new InvalidArgumentException(commandName);
