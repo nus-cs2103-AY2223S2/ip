@@ -17,54 +17,48 @@ public class Duke {
         String[] splitStr = currInput.split(" ", 2);
 
         while(!currInput.equals("bye")) {
-            String type = "";
             try {
-                type = outputType(splitStr);
-            } catch (DukeException e) {
-                System.out.println(e);
-            }
+                String type = splitStr[0];
+                boolean isMarkTask = type.equals("mark") || type.equals("unmark");
+                boolean isSuppTask = type.equals("todo") || type.equals("deadline") || type.equals("event");
 
-            boolean isMarkTask = type.equals("mark") || type.equals("unmark");
-            boolean isSuppTask = type.equals("todo") || type.equals("deadline") || type.equals("event");
-
-            if(currInput.equals("list")) {
-                System.out.println("Here are the tasks in your list:");
-                for(int i = 0; i < inputs.size(); i++) {
-                    System.out.println((i + 1) + "." + inputs.get(i));
-                }
-            } else if(isMarkTask) {
-                int taskNo = 0;
-                try {
-                    taskNo = Integer.parseInt(splitStr[1]);
+                if(currInput.equals("list")) {
+                    System.out.println("Here are the tasks in your list:");
+                    for(int i = 0; i < inputs.size(); i++) {
+                        System.out.println((i + 1) + "." + inputs.get(i));
+                    }
+                } else if(isMarkTask) {
+                    int taskNo = Integer.parseInt(splitStr[1]);
                     Task taskToMark = inputs.get(taskNo - 1);
                     mark(type, taskToMark);
                     System.out.println(taskToMark);
-                } catch (NumberFormatException e) {
-                    System.out.println("Mark commands need to be followed by an integer!");
-                } catch (IndexOutOfBoundsException e) {
-                    System.out.println("I'm sorry but task number " + taskNo + " has not been added yet!");
-                }
-            } else if(isSuppTask) {
-                try {
+                } else if(isSuppTask) {
                     addSuppTask(type, inputs, splitStr);
                     System.out.println("Got it. I've added this task:");
                     System.out.println(inputs.get(inputs.size() - 1));
                     System.out.println("Now you have " + Task.getCount() + " tasks in the list.");
-                } catch (DukeException e) {
-                    System.out.println(e);
+                } else if(type.equals("delete")) {
+                    Task taskToDelete = inputs.get(Integer.parseInt(splitStr[1]) - 1);
+                    System.out.println("Noted. I've removed this task:");
+                    System.out.println(taskToDelete);
+                    Task.setCount(Task.getCount() - 1);
+                    inputs.remove(Integer.parseInt(splitStr[1]) - 1);
+                    System.out.println("Now you have " + Task.getCount() + " tasks in the list.");
+                } else {
+                    throw new InvalidTaskException();
                 }
-            } else if(type.equals("delete")) {
-                Task taskToDelete = inputs.get(Integer.parseInt(splitStr[1]) - 1);
-                System.out.println("Noted. I've removed this task:");
-                System.out.println(taskToDelete);
-                Task.setCount(Task.getCount() - 1);
-                inputs.remove(Integer.parseInt(splitStr[1]) - 1);
-                System.out.println("Now you have " + Task.getCount() + " tasks in the list.");
+            } catch (DukeException e) {
+                System.out.println(e);
+            } catch (NumberFormatException e) {
+                System.out.println("Mark commands need to be followed by an integer!");
+            } catch (IndexOutOfBoundsException e) {
+                System.out.println(String.format("Sorry but there are only %d tasks stored!", Task.getCount()));
+            } finally {
+                System.out.println("____________________________________________________________\n");
+                currInput = scanner.nextLine();
+                splitStr = currInput.split(" ", 2);
+                System.out.println("____________________________________________________________");
             }
-            System.out.println("____________________________________________________________\n");
-            currInput = scanner.nextLine();
-            splitStr = currInput.split(" ", 2);
-            System.out.println("____________________________________________________________");
         }
         System.out.println("Bye. Hope to see you again soon!");
         System.out.println("____________________________________________________________\n");
@@ -81,12 +75,12 @@ public class Duke {
         }
     }
 
-    public static void addSuppTask(String type, ArrayList<Task> inputs, String[] splitstr) throws DukeException {
-        if(splitstr.length == 1) {
-            throw new DukeException(String.format("The description of a %s cannot be empty.", splitstr[0]));
+    public static void addSuppTask(String type, ArrayList<Task> inputs, String[] splitStr) throws EmptyTaskException {
+        if(splitStr.length == 1) {
+            throw new EmptyTaskException(splitStr[0]);
         }
 
-        String task = splitstr[1];
+        String task = splitStr[1];
         if(type.equals("todo")) {
             inputs.add(new Todo(task));
         } else if(type.equals("deadline")) {
@@ -100,24 +94,6 @@ public class Duke {
             String from = arr[1].substring(5).trim();
             String to = arr[2].substring(3);
             inputs.add(new Event(desc, from, to));
-        }
-    }
-
-    public static String outputType(String[] splitStr) throws DukeException {
-        String currType = splitStr[0];
-        String[] validTypes = new String[]{"list", "mark", "unmark", "todo", "deadline", "event", "delete"};
-        boolean valid = false;
-
-        for(String type : validTypes) {
-            if(currType.equals(type)) {
-                valid = true;
-            }
-        }
-
-        if(!valid) {
-            throw new DukeException("I'm sorry, but I don't know what that means :-(");
-        } else {
-            return currType;
         }
     }
 }
