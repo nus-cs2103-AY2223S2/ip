@@ -50,4 +50,19 @@ public abstract class Task {
     }
 
     public abstract boolean isToday(LocalDate date);
+
+    @Override
+    public boolean equals(Object o) {
+        if (o == this) {
+            return true;
+        }
+
+        if (!(o instanceof Task)) {
+            return false;
+        }
+
+        Task task = (Task) o;
+
+        return task.taskDescription.equals(this.taskDescription) && task.isDone == this.isDone;
+    }
 }

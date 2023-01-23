@@ -32,4 +32,19 @@ public class Event extends Task {
     public boolean isToday(LocalDate date) {
         return this.startTime.toLocalDate().isEqual(date) || this.endTime.toLocalDate().isEqual(date);
     }
+
+    @Override
+    public boolean equals(Object o) {
+        if (o == this) {
+            return true;
+        }
+
+        if (!(o instanceof Event)) {
+            return false;
+        }
+
+        Event event = (Event) o;
+
+        return super.equals(event) && event.startTime.equals(this.startTime) && event.endTime.equals(this.endTime);
+    }
 }

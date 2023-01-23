@@ -28,4 +28,19 @@ public class Deadline extends Task {
     public boolean isToday(LocalDate date) {
         return this.deadline.toLocalDate().isEqual(date);
     }
+
+    @Override
+    public boolean equals(Object o) {
+        if (o == this) {
+            return true;
+        }
+
+        if (!(o instanceof Deadline)) {
+            return false;
+        }
+
+        Deadline deadlineTask = (Deadline) o;
+
+        return super.equals(deadlineTask) && deadlineTask.deadline.equals(this.deadline);
+    }
 }
