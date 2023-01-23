@@ -1,3 +1,4 @@
+import java.io.*;
 import java.util.ArrayList;
 import java.util.Scanner;
 public class Duke {
@@ -9,17 +10,19 @@ public class Duke {
             + "|____/ \\__,_|_|\\_\\___|";
     private Scanner sc = new Scanner(System.in);
     private ArrayList<Task> tasks = new ArrayList<>(100);
+    private static String PATH = "./data/duke.txt";
 
     public static void main(String[] args) throws DukeException{
-        System.out.println("Hello from\n" + logo + "\n");
+        //System.out.println("Hello from\n" + logo + "\n");
         Duke duke = new Duke();
         duke.activate();
     }
     public void activate() throws DukeException {
         //this.printLine();
-        System.out.println("Hello from\n" + logo + "\n");
+        System.out.println("Hello from\n" + logo);
         this.printLine();
         this.greet();
+        loadData();
         this.printLine();
         String i = sc.nextLine();
 
@@ -54,7 +57,8 @@ public class Duke {
                 } else {
                     throw new InvalidInputException();
                 }
-            } catch (EmptyInputException | InvalidInputException e) {
+                writeListToFile();
+            } catch (EmptyInputException | InvalidInputException | IOException e) {
                 System.out.println(e.getMessage());
                 this.printLine();
             }
@@ -63,7 +67,7 @@ public class Duke {
         this.terminate();
     }
     public void greet() {
-        System.out.println("Hello! I'm Duke." + "\nWhat can I do for you?");
+        System.out.println("Hello! I'm Duke, a bot to help track your tasks.");
     }
     public void echoText(String s) {
         this.printLine();
@@ -77,7 +81,7 @@ public class Duke {
         sc.close();
     }
     public void printLine() {
-        System.out.println("__________________________________________________________");
+        System.out.println("_____________________________________________________________________");
     }
     public void storeTask(Task t) {
         this.tasks.add(t);
@@ -91,19 +95,19 @@ public class Duke {
         }
         this.printLine();
     }
-    public void addToDo(String i) {
+    public void addToDo(String i) throws IOException {
         //this.printLine();
         ToDo t = new ToDo(i.replace("todo ", ""));
         this.storeTask(t);
         this.addTaskMessage(t);
     }
-    public void addDeadline(String i) {
+    public void addDeadline(String i) throws IOException {
         String[] contents = i.split(" /by ");
         Deadline d = new Deadline(contents[0].replace("deadline ", ""), contents[1]);
         this.storeTask(d);
         this.addTaskMessage(d);
     }
-    public void addEvent(String i) {
+    public void addEvent(String i) throws IOException {
         String[] contents = i.split(" /from ");
         String[] fromTo = contents[1].split(" /to ");
         Event e = new Event(contents[0].replace("event ", ""), fromTo[0], fromTo[1]);
@@ -129,6 +133,47 @@ public class Duke {
         this.printLine();
     }
     public void deleteTask(int num) {
+
         this.tasks.remove(num - 1);
+    }
+    /* code reused from:
+    https://stackoverflow.com/questions/28947250/create-a-directory-if-it-does-not-exist-and-then-create-the-files-in-that-direct
+    author Aaron D
+     */
+    public void loadData() {
+            File directory = new File("./data");
+            if (! directory.exists()){
+                directory.mkdir();
+            }
+            File file = new File(PATH);
+            try{
+                if(file.createNewFile()) {
+                    System.out.println("Seems like you're new here. Welcome onboard and let's get started! ^-^");
+                } else {
+                    readTextFile(file);
+                }
+            } catch (IOException e){
+                e.printStackTrace();
+                System.exit(-1);
+            }
+    }
+    public void readTextFile(File f) throws FileNotFoundException {
+        Scanner fs = new Scanner(f);
+        if(!fs.hasNext()) {
+            System.out.println("Your task list is currently empty! Let's get started! ^-^");
+        } else {
+            System.out.println("Here, I've pulled up the most recent task list I have from you:");
+            while(fs.hasNext()) {
+                System.out.println("  " + fs.nextLine());
+            }
+        }
+    }
+    public void writeListToFile() throws IOException {
+        FileWriter fw = new FileWriter(PATH);
+        for(Task t : tasks) {
+            fw.write(t.toString());
+            fw.write("\n");
+        }
+        fw.close();
     }
 }
