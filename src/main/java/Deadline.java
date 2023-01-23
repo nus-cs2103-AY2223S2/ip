@@ -35,11 +35,13 @@ public class Deadline extends Task {
     }
 
     /**
-     * Gets the formatted deadline of the task.
+     * Gets the date object of the task.
      *
-     * @return a String with the deadline of the task formatted.
+     * @return the Temporal encapsulating the date and time.
      */
-    public String getFormattedDeadline() {
-        return this.formattedDeadline;
+    public Temporal getDeadline() {
+        return deadline;
     }
+
+
 }

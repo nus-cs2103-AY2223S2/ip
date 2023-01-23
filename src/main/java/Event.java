@@ -49,11 +49,24 @@ public class Event extends Task {
     }
 
     /**
-     * Gets the formatted start date of the task.
+     * Gets the start date object of the task.
      *
-     * @return a String with the deadline of the task formatted.
+     * @return the Temporal encapsulating the date and time of the start date.
      */
-    public String getFormattedStartDate() {
-        return this.formattedStartDate;
+    public Temporal getStartDate() {
+        return startDate;
     }
+
+    /**
+     * Gets the end date object of the task.
+     *
+     * @return the Temporal encapsulating the date and time of the end date.
+     */
+    public Temporal getEndDate() {
+        return endDate;
+    }
+
+
+
+
 }

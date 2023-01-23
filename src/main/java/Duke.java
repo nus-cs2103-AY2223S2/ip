@@ -44,7 +44,7 @@ public class Duke {
      */
     public static void main(String[] args) {
         //Stores tasks
-        ArrayList<Task> taskStorage = new ArrayList<Task>();
+        ArrayList<Task> tasks = new ArrayList<Task>();
 
         printIntroductoryMessage();
 
@@ -65,7 +65,7 @@ public class Duke {
             }
             //User typed in "list"
             else if (input.equals("list")) {
-                printUserTasks(taskStorage);
+                printUserTasks(tasks);
                 continue;
             }
             //User typed in "help"
@@ -88,11 +88,11 @@ public class Duke {
                         throw new DukeException("The mark command must be followed by a single integer.");
                     }
                     int indexOfTask = Integer.parseInt(inputArray[1]) - 1;
-                    if (! (indexOfTask <= taskStorage.size() - 1 && indexOfTask >= 0)) {
+                    if (! (indexOfTask <= tasks.size() - 1 && indexOfTask >= 0)) {
                         throw new DukeException("Please enter a valid task number. You currently have " +
-                                Integer.toString(taskStorage.size()) + " tasks.");
+                                Integer.toString(tasks.size()) + " tasks.");
                     }
-                    markAsDone(taskStorage.get(indexOfTask));
+                    markAsDone(tasks.get(indexOfTask));
                     break;
                 } catch (DukeException dukeException) {
                     System.out.println(straightLine);
@@ -109,11 +109,11 @@ public class Duke {
                         throw new DukeException("The unmark command must be followed by a single integer.");
                     }
                     int indexOfTask = Integer.parseInt(inputArray[1]) - 1;
-                    if (! (indexOfTask <= taskStorage.size() - 1 && indexOfTask >= 0)) {
+                    if (! (indexOfTask <= tasks.size() - 1 && indexOfTask >= 0)) {
                         throw new DukeException("Please enter a valid task number. You currently have " +
-                                Integer.toString(taskStorage.size()) + " tasks.");
+                                Integer.toString(tasks.size()) + " tasks.");
                     }
-                    markAsUndone(taskStorage.get(indexOfTask));
+                    markAsUndone(tasks.get(indexOfTask));
                     break;
                 } catch (DukeException dukeException) {
                     System.out.println(straightLine);
@@ -130,11 +130,11 @@ public class Duke {
                         throw new DukeException("The delete command must be followed by a single integer.");
                     }
                     int indexOfTask = Integer.parseInt(inputArray[1]) - 1;
-                    if (! (indexOfTask <= taskStorage.size() - 1 && indexOfTask >= 0)) {
+                    if (! (indexOfTask <= tasks.size() - 1 && indexOfTask >= 0)) {
                         throw new DukeException("Please enter a valid task number. You currently have "
-                                + Integer.toString(taskStorage.size()) + " tasks.");
+                                + Integer.toString(tasks.size()) + " tasks.");
                     }
-                    deleteTask(indexOfTask, taskStorage);
+                    deleteTask(indexOfTask, tasks);
                     break;
                 } catch (DukeException dukeException) {
                     System.out.println(straightLine);
@@ -150,7 +150,7 @@ public class Duke {
                     int indexOfType = input.indexOf("todo");
                     String taskName = input.substring(indexOfType + 5);
                     ToDo newToDoTask = new ToDo(taskName);
-                    addTask(newToDoTask, taskStorage);
+                    addTask(newToDoTask, tasks);
                     break;
                 } catch (DukeException dukeException) {
                     System.out.println(straightLine);
@@ -194,7 +194,7 @@ public class Duke {
                     }
                     //Checks if the deadline is a valid date and time
                     Deadline newDeadlineTask = new Deadline(taskName, getDateObject(deadlineOfTask));
-                    addTask(newDeadlineTask, taskStorage);
+                    addTask(newDeadlineTask, tasks);
                     break;
                 } catch (DukeException dukeException) {
                     System.out.println(straightLine);
@@ -263,13 +263,57 @@ public class Duke {
                     }
 
                     Event newEventTask = new Event(taskName,start, end);
-                    addTask(newEventTask, taskStorage);
+                    addTask(newEventTask, tasks);
                     break;
                 } catch (DukeException dukeException) {
                     System.out.println(straightLine);
                     System.out.println(dukeException.getMessage());
                     System.out.println(straightLine);
                     break;
+                } catch (DateTimeParseException dateTimeException) {
+                    System.out.println(straightLine);
+                    System.out.println("Please check that you entered a valid date, and that the date should be in "
+                            + "the format of yyyy-MM-dd hh:mm or yyyy-MM-dd");
+                    System.out.println(straightLine);
+                    break;
+                }
+            case "on":
+                try {
+                    String dateString = input.substring(3);
+                    if (dateString.equals("")) {
+                        throw new DukeException("The date cannot be left blank.");
+                    }
+                    Temporal dateObject = getDateObject(dateString);
+                    System.out.println(straightLine);
+                    System.out.println("Tasks on: " + Task.formatDate(dateObject));
+                    int count = 1;
+                    for (int t = 0; t < tasks.size(); t = t + 1) {
+                        Task currTask = tasks.get(t);
+                        if (currTask instanceof Deadline) {
+                            if (isEqualDate(dateObject, ((Deadline) currTask).getDeadline())) {
+                                System.out.println(Integer.toString(count) + ". " +
+                                        currTask.getStatusOfTaskInString());
+                                count += 1;
+                            }
+                        }
+                        else if (currTask instanceof Event) {
+                            if (isValidDuration(((Event) currTask).getStartDate(), dateObject) &&
+                                    isValidDuration(dateObject, ((Event) currTask).getEndDate())) {
+                                System.out.println(Integer.toString(count) + ". " +
+                                        currTask.getStatusOfTaskInString());
+                                count += 1;
+                            }
+                        }
+                    }
+                    if (count == 1) {
+                        System.out.println("You have no tasks on this day.");
+                    }
+                    System.out.println(straightLine);
+                    break;
+                } catch (DukeException dukeException) {
+                    System.out.println(straightLine);
+                    System.out.println(dukeException.getMessage());
+                    System.out.println(straightLine);
                 } catch (DateTimeParseException dateTimeException) {
                     System.out.println(straightLine);
                     System.out.println("Please check that you entered a valid date, and that the date should be in "
@@ -314,21 +358,21 @@ public class Duke {
     /**
      * Prints out all the user tasks that have been entered by the user thus far.
      *
-     * @param taskStorage The ArrayList that stores the user tasks to be printed out.
+     * @param tasks The ArrayList that stores the user tasks to be printed out.
      */
-    public static void printUserTasks(ArrayList<Task> taskStorage) {
+    public static void printUserTasks(ArrayList<Task> tasks) {
         System.out.println(straightLine);
-        if (taskStorage.size() == 0) {
+        if (tasks.size() == 0) {
             System.out.println("There are currently no tasks in your list.");
             System.out.println(straightLine);
             return;
         }
         System.out.println("Here are the tasks in your list:");
-        int numberOfTasks= taskStorage.size();
+        int numberOfTasks= tasks.size();
         //Process each task in the storage
         for (int i = 0; i < numberOfTasks; i = i + 1) {
             String numbering = Integer.toString(i + 1) + ". ";
-            String output = numbering + taskStorage.get(i).getStatusOfTaskInString();
+            String output = numbering + tasks.get(i).getStatusOfTaskInString();
             System.out.println(output);
         }
         System.out.println(straightLine);
@@ -338,17 +382,17 @@ public class Duke {
      * Adds user task into storage and informs the user.
      *
      * @param taskToAdd The task to be added to storage.
-     * @param taskStorage The ArrayList that stores the tasks.
+     * @param tasks The ArrayList that stores the tasks.
      */
-    public static void addTask(Task taskToAdd, ArrayList<Task> taskStorage) {
-        taskStorage.add(taskToAdd);
+    public static void addTask(Task taskToAdd, ArrayList<Task> tasks) {
+        tasks.add(taskToAdd);
         System.out.println(straightLine);
         System.out.println("Added task to list:");
         System.out.println(taskToAdd.getStatusOfTaskInString());
-        if (taskStorage.size() == 1) {
+        if (tasks.size() == 1) {
             System.out.println("Currently, there is 1 task in your list.");
         } else {
-            System.out.println("Currently, there are " + Integer.toString(taskStorage.size())
+            System.out.println("Currently, there are " + Integer.toString(tasks.size())
                     + " tasks in your list.");
         }
         System.out.println(straightLine);
@@ -393,15 +437,15 @@ public class Duke {
      * Deletes a task from the given list of task, and informs the user.
      *
      * @param indexOfTask Index of the task in the list that is to be deleted.
-     * @param taskStorage List containing all the tasks.
+     * @param tasks List containing all the tasks.
      */
-    public static void deleteTask(int indexOfTask, ArrayList<Task> taskStorage) {
-        Task taskToBeDeleted = taskStorage.get(indexOfTask);
-        taskStorage.remove(indexOfTask);
+    public static void deleteTask(int indexOfTask, ArrayList<Task> tasks) {
+        Task taskToBeDeleted = tasks.get(indexOfTask);
+        tasks.remove(indexOfTask);
         System.out.println(straightLine);
         System.out.println("Ta-da! The following task has been deleted.");
         System.out.println(taskToBeDeleted.getStatusOfTaskInString());
-        System.out.println("Current number of tasks is: " + Integer.toString(taskStorage.size()) + ".");
+        System.out.println("Current number of tasks is: " + Integer.toString(tasks.size()) + ".");
         System.out.println(straightLine);
     }
 
@@ -475,6 +519,33 @@ public class Duke {
         }
         return true;
     }
+
+    /**
+     * Determines if one date is equal to another date, based on year, month and day.
+     *
+     * @param start The Temporal encapsulating the start date and time.
+     * @param end The Temporal encapsulating the end date and time.
+     * @return true if both refer to the same day, else false.
+     */
+    public static boolean isEqualDate(Temporal start, Temporal end) {
+        if (start instanceof LocalDateTime && end instanceof LocalDateTime) {
+            return ((LocalDateTime) end).equals((LocalDateTime) start);
+        } else if (start instanceof LocalDate && end instanceof LocalDate) {
+            return ((LocalDate) end).equals((LocalDate) start);
+        } else if (start instanceof LocalDate && end instanceof LocalDateTime) {
+            LocalDate endDateOnly = LocalDate.of(((LocalDateTime) end).getYear(),
+                    ((LocalDateTime) end).getMonthValue(), ((LocalDateTime) end).getDayOfMonth());
+            return (endDateOnly.equals((LocalDate) start));
+        } else if (start instanceof LocalDateTime && end instanceof LocalDate) {
+            LocalDate startDateOnly = LocalDate.of(((LocalDateTime) start).getYear(),
+                    ((LocalDateTime) start).getMonthValue(), ((LocalDateTime) start).getDayOfMonth());
+            return (((LocalDate) end).equals(startDateOnly));
+        }
+        return true;
+    }
+
+
+
 }
 
 
