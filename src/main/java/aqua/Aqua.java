@@ -11,9 +11,6 @@ import aqua.storage.Loader;
 
 
 public class Aqua {
-    private static String SEPARATOR =
-            "____________________________________________________________";
-
     private final AppManager manager = new AppManager();
 
 
@@ -23,13 +20,13 @@ public class Aqua {
 
 
     private void start() {
-        System.out.println(formatMessage(manager.getReplyFormatManager().getGreeting()));
+        manager.getUiManager().greet();
         try {
             Loader.load(manager.getTaskManager().getSavePath(), manager);
-            replyMessage("I remembered all your previous tasks! Praise me");
+            manager.getUiManager().replyLoadSuccess();
             initiateDispatcher(new ListCommand().getDispatcher(null, manager));
         } catch (LoadException loadEx) {
-            replyError(loadEx);
+            manager.getUiManager().replyException(loadEx);
         }
         try (Scanner scanner = new Scanner(System.in)) {
             while (!manager.isClosed()) {
@@ -45,7 +42,7 @@ public class Aqua {
         try {
             commandInput = manager.getInputParser().parse(input);
         } catch (Throwable ex) {
-            replyError(ex);
+            manager.getUiManager().replyException(ex);
             return;
         }
         initiateDispatcher(commandInput.getDispatcher(manager));
@@ -54,34 +51,11 @@ public class Aqua {
 
     private void initiateDispatcher(ExecutionDispatcher dispatcher) {
         try {
-            replyMessage(dispatcher.dispatch());
+            manager.getUiManager().reply(dispatcher.dispatch());
         } catch (Throwable ex) {
-            replyError(ex);
+            manager.getUiManager().replyException(ex);
             return;
         }
         dispatcher.followUpDispatcher().ifPresent(this::initiateDispatcher);
-    }
-
-
-    private void replyMessage(String msg) {
-        System.out.println(formatMessage(msg));
-    }
-
-
-    private void replyError(Throwable ex) {
-        System.out.println(formatMessage(manager.getReplyFormatManager().getExceptionReply(ex)));
-    }
-
-
-    private String formatMessage(String msg) {
-        StringBuilder builder = new StringBuilder();
-        try (Scanner scanner = new Scanner(msg)) {
-            while (scanner.hasNextLine()) {
-                builder.append(String.format("\t  %s\n", scanner.nextLine()));
-            }
-        }
-        return String.format("\t%s\n%s\t%s\n",
-            SEPARATOR, builder.toString(), SEPARATOR
-        );
     }
 }
