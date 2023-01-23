@@ -1,6 +1,12 @@
+package duke;
+
 import java.time.LocalDate;
 import java.time.format.DateTimeParseException;
 import java.util.Optional;
+
+import duke.exceptions.DeadlineByNotSpecified;
+import duke.exceptions.EventFromToNotSpecified;
+import duke.exceptions.TaskNameNotSpecified;
 
 public class Parser {
     public static Optional<LocalDate> parseDate(String timeInput) {

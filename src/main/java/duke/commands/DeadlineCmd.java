@@ -1,3 +1,11 @@
+package duke.commands;
+
+import duke.Ui;
+import duke.exceptions.TaskInitError;
+import duke.tasks.Deadline;
+import duke.tasks.Task;
+import duke.tasks.TaskList;
+
 public class DeadlineCmd extends Command {
     Task deadline;
 

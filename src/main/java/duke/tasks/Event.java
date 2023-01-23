@@ -1,6 +1,12 @@
+package duke.tasks;
+
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.Optional;
+
+import duke.Parser;
+import duke.exceptions.EventFromToNotSpecified;
+import duke.exceptions.TaskNameNotSpecified;
 
 public class Event extends Task {
     String fromDate;

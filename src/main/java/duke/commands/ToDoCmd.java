@@ -1,3 +1,11 @@
+package duke.commands;
+
+import duke.Ui;
+import duke.exceptions.TaskInitError;
+import duke.tasks.Task;
+import duke.tasks.TaskList;
+import duke.tasks.ToDo;
+
 public class ToDoCmd extends Command {
     Task toDo;
 

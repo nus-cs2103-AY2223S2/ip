@@ -1,3 +1,11 @@
+package duke.commands;
+
+import duke.Ui;
+import duke.exceptions.TaskInitError;
+import duke.tasks.Event;
+import duke.tasks.Task;
+import duke.tasks.TaskList;
+
 public class EventCmd extends Command {
     Task event;
 

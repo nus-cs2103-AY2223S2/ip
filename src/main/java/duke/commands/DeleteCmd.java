@@ -1,3 +1,10 @@
+package duke.commands;
+
+import duke.Parser;
+import duke.Ui;
+import duke.tasks.Task;
+import duke.tasks.TaskList;
+
 public class DeleteCmd extends Command {
     Task task;
 

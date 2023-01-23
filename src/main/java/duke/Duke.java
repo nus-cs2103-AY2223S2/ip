@@ -1,4 +1,16 @@
+package duke;
+
 import java.io.IOException;
+
+import duke.commands.CommandInput;
+import duke.commands.DeadlineCmd;
+import duke.commands.DeleteCmd;
+import duke.commands.EventCmd;
+import duke.commands.ListCmd;
+import duke.commands.MarkCmd;
+import duke.commands.ToDoCmd;
+import duke.commands.UnmarkCmd;
+import duke.tasks.TaskList;
 
 public class Duke {
 

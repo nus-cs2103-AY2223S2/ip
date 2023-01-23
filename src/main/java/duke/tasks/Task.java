@@ -1,3 +1,5 @@
+package duke.tasks;
+
 public abstract class Task {
     String type;
     String taskName;
