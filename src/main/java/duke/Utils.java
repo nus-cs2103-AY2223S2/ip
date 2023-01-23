@@ -25,7 +25,9 @@ public final class Utils {
         for (String pattern : patterns) {
             try {
                 return Optional.of(parser.apply(str, DateTimeFormatter.ofPattern(pattern)));
-            } catch (DateTimeParseException r) { }
+            } catch (DateTimeParseException r) {
+              System.out.format("Couldn't match %s with %s\n", str, pattern);
+            }
         }
         return Optional.empty();
     };
@@ -33,13 +35,13 @@ public final class Utils {
 
   public final static LocalDateTime parseDateTime(String str0, String str1) {
     List<String> dateFormats = List.of(
-    "dd/MM" 
+      "dd/MM" 
     );
 
     List<String> timeFormats = List.of(
-    "hh:mma",
-        "kk:mm",
-    "kkmm"
+      "hh:mma",
+      "kk:mm",
+      "kkmm"
     );
 
     Function<String, Optional<MonthDay>> dateParser = createParser(dateFormats, MonthDay::parse);
@@ -56,7 +58,7 @@ public final class Utils {
     if (str0 != null && str1 == null) {
       Optional<MonthDay> dateValue = dateParser.apply(str0);
       if (dateValue.isEmpty()) {
-        Optional<LocalTime> timeValue = timeParser.apply(str0);
+        Optional<LocalTime> timeValue = timeParser.apply(str0.toUpperCase());
 
         if (timeValue.isEmpty()) throw new DateTimeParseException("Invalid date/time string!", str0, 0);
         return LocalDateTime.of(currentTime.toLocalDate(), timeValue.get());
@@ -64,11 +66,11 @@ public final class Utils {
       return LocalDateTime.of(dateValue.get().atYear(currentTime.getYear()), currentTime.toLocalTime());
     } else {
       Optional<MonthDay> date = dateParser.apply(str0);
-      Optional<LocalTime> time = timeParser.apply(str1);
+      Optional<LocalTime> time = timeParser.apply(str1.toUpperCase());
 
       if (date.isEmpty() || time.isEmpty()) {
           date = dateParser.apply(str1);
-          time = timeParser.apply(str0);
+          time = timeParser.apply(str0.toUpperCase());
       }
 
       if (date.isEmpty() || time.isEmpty()) {
