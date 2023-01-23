@@ -8,11 +8,13 @@ public abstract class Task {
         this.type = type;
     }
 
-    public void markDone() {
+    public Task markDone() {
         this.completed = true;
+        return this;
     } 
-    public void unmarkDone() {
+    public Task unmarkDone() {
         this.completed = false;
+        return this;
     }
 
     public abstract String stringFields(); 
