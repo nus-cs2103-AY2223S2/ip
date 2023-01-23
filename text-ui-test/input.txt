@@ -1,0 +1,18 @@
+deadline do homework /by no idea :-p
+event project meeting /from Mon 2pm /to 4pm
+deadline return book /by Sunday
+list
+mark 1
+list
+mark 2
+list
+unmark 1
+list
+mark 4
+mark 0
+mark aloha
+mark
+deadline
+deadline nani
+event nani /from sore
+bye

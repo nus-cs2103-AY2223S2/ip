@@ -1,7 +1,30 @@
-Hello from
- ____        _        
-|  _ \ _   _| | _____ 
-| | | | | | | |/ / _ \
-| |_| | |_| |   <  __/
-|____/ \__,_|_|\_\___|
-
+<<<	Hello, I'm Kude!
+> <	Added [D][ ] do homework (by: no idea :-p)
+<	List now contains 1 items
+> <	Added [E][ ] project meeting (from: Mon 2pm, to: 4pm)
+<	List now contains 2 items
+> <	Added [D][ ] return book (by: Sunday)
+<	List now contains 3 items
+> <	1. [D][ ] do homework (by: no idea :-p)
+<	2. [E][ ] project meeting (from: Mon 2pm, to: 4pm)
+<	3. [D][ ] return book (by: Sunday)
+> <	Marked [D][X] do homework (by: no idea :-p)
+> <	1. [D][X] do homework (by: no idea :-p)
+<	2. [E][ ] project meeting (from: Mon 2pm, to: 4pm)
+<	3. [D][ ] return book (by: Sunday)
+> <	Marked [E][X] project meeting (from: Mon 2pm, to: 4pm)
+> <	1. [D][X] do homework (by: no idea :-p)
+<	2. [E][X] project meeting (from: Mon 2pm, to: 4pm)
+<	3. [D][ ] return book (by: Sunday)
+> <	Unmarked [D][ ] do homework (by: no idea :-p)
+> <	1. [D][ ] do homework (by: no idea :-p)
+<	2. [E][X] project meeting (from: Mon 2pm, to: 4pm)
+<	3. [D][ ] return book (by: Sunday)
+> !	Invalid index
+> !	Invalid index
+> !	Index must be integer
+> !	Provide index
+> !	Provide content
+> !	Provide deadline
+> !	Provide to
+> <<<	Bye

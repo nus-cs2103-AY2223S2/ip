@@ -7,7 +7,8 @@ REM delete output from previous run
 if exist ACTUAL.TXT del ACTUAL.TXT
 
 REM compile the code into the bin folder
-javac  -cp ..\src\main\java -Xlint:none -d ..\bin ..\src\main\java\*.java
+dir /s /B ..\src\main\java\kude\*.java > ..\bin\sources.txt
+javac -sourcepath ..\src\main\java\kude -Xlint:none -d ..\bin @..\bin\sources.txt
 IF ERRORLEVEL 1 (
     echo ********** BUILD FAILURE **********
     exit /b 1
