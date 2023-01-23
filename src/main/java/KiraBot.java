@@ -1,104 +1,76 @@
 import java.util.Scanner;
 
-enum Command {
-    BYE, LIST, MARK, UNMARK, TODO, DEADLINE, EVENT, DELETE, TODAY
-}
+import kira.exception.KiraException;
+import kira.storage.SaveLoad;
+import kira.storage.TaskList;
+import kira.task.Task;
+import kira.ui.Parser;
+import kira.ui.Ui;
 
 public class KiraBot {
 
-    private static void printFormatString(String raw) {
-        StringBuilder response = new StringBuilder("============= KiraBot ============= \n");
-        response.append(raw);
-        response.append("=================================== \n");
-        System.out.println(response.toString());
+    private final Ui UI = new Ui();
+    private TaskList taskList;
+    private final String FILEPATH = "./store.csv";
+
+    private void run() {
+        UI.start();
+
+        try {
+            this.taskList = new TaskList(SaveLoad.load(FILEPATH));
+        } catch (KiraException e) {
+            UI.errMsg(e.getMessage());
+            this.taskList = new TaskList();
+        } finally {
+            listenForCommand();
+            UI.end();
+        }
     }
 
-    private static void printTaskFormatString(Task task, Store db) {
-        StringBuilder ret = new StringBuilder("Storing...\n");
-        ret.append(task);
-        ret.append("\nYou currently have ");
-        ret.append(db.getTotal() + " Tasks\n");
-        printFormatString(ret.toString());
-    }
-
-    private static void listenForCommand() {
+    private void listenForCommand() {
         Scanner sc = new Scanner(System.in);
         boolean isActive = true;
-        Store database = new Store();
-        try {
-            database.load();
-        } catch (KiraException e) {
-            printFormatString("I can't find the save file.\n"
-                    + "Ignore if this is your first time!\n");
-        }
-        
 
         while (isActive) {
             try {
-                String[] input = sc.nextLine().split(" ", 2);
-                Command command;
-                try {
-                    command = Command.valueOf(input[0].toUpperCase());
-                    switch (command) {
-                    case BYE:
-                        isActive = false;
-                        break;
-                    case LIST:
-                        String dataList = database.list();
-                        printFormatString(dataList);
-                        break;
-                    case MARK:
-                        int index = Integer.valueOf(input[1]);
-                        String output = database.mark(index);
-                        printFormatString(output);
-                        break;
-                    case UNMARK:
-                        index = Integer.valueOf(input[1]);
-                        output = database.unmark(index);
-                        printFormatString(output);
-                        break;
-                    case TODO:
-                        ToDo todo = new ToDo(input[1]);
-                        database.store(todo);
-                        printTaskFormatString(todo, database);
-                        break;
-                    case DEADLINE:
-                        String[] format = input[1].split(" /by ", 2);
-                        Deadline deadline = new Deadline(format[0], format[1]);
-                        database.store(deadline);
-                        printTaskFormatString(deadline, database);
-                        break;
-                    case EVENT:
-                        format = input[1].split(" /");
-                        Event event = new Event(format[0],
-                                            format[1].substring(5), 
-                                            format[2].substring(3));
-                        database.store(event);
-                        printTaskFormatString(event, database);
-                        break;
-                    case DELETE:
-                        index = Integer.valueOf(input[1]);
-                        output = database.delete(index);
-                        printFormatString(output);
-                        break;
-                    case TODAY:
-                        output = database.findToday();
-                        printFormatString(output);
-                        break;
-                    }
-                    database.save();
-                } catch (IllegalArgumentException e) {
-                    throw new KiraException("Sorry, I don't know this command :C\n");
+                Parser commandString = new Parser(sc.nextLine());
+                switch(commandString.command) {
+                case BYE:
+                    isActive = false;
+                    break;
+                case DEADLINE:
+                case EVENT:
+                case TODO:
+                    Task task = commandString.parseOutputTask();
+                    this.taskList.store(task);
+                    UI.storeTaskMsg(task, this.taskList.getTotal());
+                    break;
+                case DELETE:
+                    UI.deleteMsg(this.taskList.delete(commandString.getIndex()));
+                    break;
+                case LIST:
+                    UI.listMsg(this.taskList.getList());
+                    break;
+                case TODAY:
+                    UI.todayMsg(this.taskList.findToday());
+                    break;
+                case MARK:
+                    UI.markMsg(this.taskList.mark(commandString.getIndex()));
+                    break;
+                case UNMARK:
+                    UI.unmarkMsg(this.taskList.mark(commandString.getIndex()));
+                    break;
                 }
+                SaveLoad.save(taskList.getList(), FILEPATH);
             } catch (KiraException e) {
-                printFormatString("There seems to be an error...\n" + e.getMessage());
+                UI.errMsg(e.getMessage());
             }
         }
         sc.close();
     }
+
     public static void main(String[] args) {
-        printFormatString("Hi! I am KiraBot!\nHow may I help you today?\n");
-        listenForCommand();
-        printFormatString("Bye! Have a nice day :)\n");
+        KiraBot bot = new KiraBot();
+        bot.run();
     }
 }

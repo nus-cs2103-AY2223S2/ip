@@ -1,6 +1,9 @@
+package kira.task;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
+
+import kira.exception.KiraException;
 
 public class Event extends Task {
     LocalDateTime startDate;
@@ -12,8 +15,13 @@ public class Event extends Task {
             DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HHmm");
             this.startDate = LocalDateTime.parse(startDate, formatter);
             this.endDate = LocalDateTime.parse(endDate, formatter);
+            if (this.startDate.isAfter(this.endDate)) {
+                throw new KiraException("Start date cannot be after the end date!");
+            }
         } catch (DateTimeParseException e) {
-            throw new KiraException("Please input your date by this format: yyyy-MM-dd HHmm\n");
+            throw new KiraException(
+                    "Please input your date following this format:"
+                    + " yyyy-MM-dd HHmm");
         }
     }
 
@@ -29,9 +37,10 @@ public class Event extends Task {
 
     @Override
     public String saveFormat() {
-        StringBuilder temp = new StringBuilder("E\",\"" + super.saveFormat());
-        temp.append("\",\"" + startDate);
-        temp.append("\",\"" + endDate);
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HHmm");
+        StringBuilder temp = new StringBuilder("EVENT\",\"" + super.saveFormat());
+        temp.append("\",\"" + startDate.format(formatter));
+        temp.append("\",\"" + endDate.format(formatter));
         return temp.toString();
     }
 
@@ -40,8 +49,8 @@ public class Event extends Task {
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd MMM yyyy HHmm");
         StringBuilder ret = new StringBuilder("[E]");
         ret.append(super.toString())
-                .append("(from: " + startDate.format(formatter))
-                .append(" to: " + endDate.format(formatter) + ")");
+                .append(" (from: " + startDate.format(formatter))
+                .append(", to: " + endDate.format(formatter) + ")");
         return ret.toString();
     }
 }

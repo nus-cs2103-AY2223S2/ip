@@ -1,3 +1,4 @@
+package kira.exception;
 public class KiraException extends Exception {
     
     /**

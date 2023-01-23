@@ -1,3 +1,4 @@
+package kira.task;
 public class ToDo extends Task {
     
     public ToDo(String data) {
@@ -6,7 +7,7 @@ public class ToDo extends Task {
 
     @Override
     public String saveFormat() {
-        return "T\",\"" + super.saveFormat();
+        return "TODO\",\"" + super.saveFormat();
     }
 
     @Override

@@ -1,3 +1,4 @@
+package kira.task;
 public abstract class Task {
     private String data;
     private boolean isDone;
