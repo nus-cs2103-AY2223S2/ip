@@ -15,12 +15,12 @@ public class Duke {
         String userInput = sc.nextLine();
 
         while (!userInput.equals("bye")) {
-            String output = echo(userInput);
+            String output = seperate(echo(userInput));
             System.out.println(output);
             userInput = sc.nextLine();
         }
 
-        System.out.println(ending());
+        System.out.println(seperate(ending()));
     }
 
     public static String echo(String input) {
@@ -33,5 +33,10 @@ public class Duke {
 
     public static String greeting() {
         return "Hi~ I'm Duke>_< \nWhat can I do for you?";
+    }
+
+    public static String seperate(String str) {
+        String sep_line = "---------------------------------------------------------------";
+        return sep_line + "\n" + str + "\n" + sep_line;
     }
 }
