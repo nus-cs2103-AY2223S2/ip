@@ -19,31 +19,57 @@ public class Duke {
         while(!currInput.equals("bye")) {
             try {
                 String type = splitStr[0];
-                boolean isMarkTask = type.equals("mark") || type.equals("unmark");
-                boolean isSuppTask = type.equals("todo") || type.equals("deadline") || type.equals("event");
 
-                if(currInput.equals("list")) {
+                switch (type) {
+                case "list":
                     System.out.println("Here are the tasks in your list:");
-                    for(int i = 0; i < inputs.size(); i++) {
+                    for (int i = 0; i < inputs.size(); i++) {
                         System.out.println((i + 1) + "." + inputs.get(i));
                     }
-                } else if(isMarkTask) {
-                    int taskNo = Integer.parseInt(splitStr[1]);
-                    Task taskToMark = inputs.get(taskNo - 1);
-                    mark(type, taskToMark);
-                    System.out.println(taskToMark);
-                } else if(isSuppTask) {
-                    addSuppTask(type, inputs, splitStr);
-                    System.out.println("Got it. I've added this task:");
-                    System.out.println(inputs.get(inputs.size() - 1));
-                    System.out.println("Now you have " + inputs.size() + " tasks in the list.");
-                } else if(type.equals("delete")) {
+                    break;
+
+                case "mark":
+                    mark(true, splitStr[1], inputs);
+                    break;
+
+                case "unmark":
+                    mark(false, splitStr[1], inputs);
+                    break;
+
+                case "todo":
+                    checkTaskDesc(splitStr);
+                    inputs.add(new Todo(splitStr[1]));
+                    printTaskOutput(inputs);
+                    break;
+
+                case "deadline":
+                    checkTaskDesc(splitStr);
+                    String[] deadlineArr = splitStr[1].split("/", 2);
+                    String deadlineDesc = deadlineArr[0].trim();
+                    String by = deadlineArr[1].substring(3);
+                    inputs.add(new Deadline(deadlineDesc, by));
+                    printTaskOutput(inputs);
+                    break;
+
+                case "event":
+                    checkTaskDesc(splitStr);
+                    String[] eventArr = splitStr[1].split("/", 3);
+                    String eventDesc = eventArr[0].trim();
+                    String from = eventArr[1].substring(5).trim();
+                    String to = eventArr[2].substring(3);
+                    inputs.add(new Event(eventDesc, from, to));
+                    printTaskOutput(inputs);
+                    break;
+
+                case "delete":
                     Task taskToDelete = inputs.get(Integer.parseInt(splitStr[1]) - 1);
                     System.out.println("Noted. I've removed this task:");
                     System.out.println(taskToDelete);
                     inputs.remove(Integer.parseInt(splitStr[1]) - 1);
                     System.out.println("Now you have " + inputs.size() + " tasks in the list.");
-                } else {
+                    break;
+
+                default:
                     throw new InvalidTaskException();
                 }
             } catch (DukeException e) {
@@ -64,35 +90,28 @@ public class Duke {
         scanner.close();
     }
 
-    public static void mark(String type, Task taskToMark) {
-        if(type.equals("mark")) {
-            taskToMark.setIsDone(true);
+    public static void mark(boolean isDone, String taskId, ArrayList<Task> inputs) {
+        int taskNo = Integer.parseInt(taskId);
+        Task taskToMark = inputs.get(taskNo - 1);
+        taskToMark.setIsDone(isDone);
+
+        if(isDone) {
             System.out.println("Nice! I've marked this task as done:");
         } else {
-            taskToMark.setIsDone(false);
             System.out.println("OK, I've marked this task as not done yet:");
         }
+        System.out.println(taskToMark);
     }
 
-    public static void addSuppTask(String type, ArrayList<Task> inputs, String[] splitStr) throws EmptyTaskException {
+    public static void checkTaskDesc(String[] splitStr) throws EmptyTaskException {
         if(splitStr.length == 1) {
             throw new EmptyTaskException(splitStr[0]);
         }
+    }
 
-        String task = splitStr[1];
-        if(type.equals("todo")) {
-            inputs.add(new Todo(task));
-        } else if(type.equals("deadline")) {
-            String[] arr = task.split("/", 2);
-            String desc = arr[0].trim();
-            String by = arr[1].substring(3);
-            inputs.add(new Deadline(desc, by));
-        } else {
-            String[] arr = task.split("/", 3);
-            String desc = arr[0].trim();
-            String from = arr[1].substring(5).trim();
-            String to = arr[2].substring(3);
-            inputs.add(new Event(desc, from, to));
-        }
+    public static void printTaskOutput(ArrayList<Task> inputs) {
+        System.out.println("Got it. I've added this task:");
+        System.out.println(inputs.get(inputs.size() - 1));
+        System.out.println("Now you have " + inputs.size() + " tasks in the list.");
     }
 }
