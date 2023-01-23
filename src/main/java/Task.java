@@ -1,7 +1,8 @@
-public class Entry {
+public class Task {
     private boolean checked;
     private String details;
-    public Entry(String details) {
+
+    public Task(String details) {
         checked = false;
         this.details = details;
     }
@@ -9,6 +10,7 @@ public class Entry {
     public void setChecked(Boolean checked) {
         this.checked = checked;
     }
+
     @Override
     public String toString(){
         String checkSymbol = " ";

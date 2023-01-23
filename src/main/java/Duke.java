@@ -29,7 +29,7 @@ public class Duke {
         System.out.println("My name is Skyler White yo \n"
                 + "How can I help you?");
         System.out.println(dashedLine());
-        ArrayList<Entry> list = new ArrayList<>();
+        ArrayList<Task> list = new ArrayList<>();
         boolean end = false;
         while(!end) {
             System.out.print("Please Input: ");
@@ -37,9 +37,10 @@ public class Duke {
         }
     }
 
-    private static boolean processInput(String input, ArrayList<Entry> list, boolean end) {
+    private static boolean processInput(String input, ArrayList<Task> list, boolean end) {
+        String[] inputAnalyzed = input.split(" ");
         System.out.println(dashedLine());
-        switch (input) {
+        switch (inputAnalyzed[0].toLowerCase(Locale.ROOT)) {
             case "bye":
                 System.out.println("Pleasure doing business with you.");
                 end = true;
@@ -49,25 +50,52 @@ public class Duke {
                     System.out.println(i + ". " + list.get(i-1));
                 }
                 break;
-            default:
-                if (input.substring(0,4).toLowerCase(Locale.ROOT).equals("mark")) {
-                    int index = parseInt(input.substring(input.length() - 1));
-                    if (list.size() >= index) {
-                        list.get(index - 1).setChecked(true);
-                        System.out.println("It's all good man, just marked this task as done:\n"
-                                                + list.get(index - 1).toString());
-                    }
-                } else if (input.substring(0,6).toLowerCase(Locale.ROOT).equals("unmark")) {
-                    int index = parseInt(input.substring(input.length() - 1));
-                    if (list.size() >= index) {
-                        list.get(index - 1).setChecked(false);
-                        System.out.println("Alright, I marked this task as not done:\n"
-                                + list.get(index - 1).toString());
-                    }
-                } else {
-                    System.out.println("Just added " + "\"" + input + "\" to the list. Anything else?");
-                    list.add(new Entry(input));
+            case "mark":
+                int index = parseInt(inputAnalyzed[1]);
+                if (list.size() >= index) {
+                    list.get(index - 1).setChecked(true);
+                    System.out.println("It's all good man, just marked this task as done:\n"
+                            + list.get(index - 1).toString());
                 }
+                break;
+            case "unmark":
+                int index1 = parseInt(inputAnalyzed[1]);
+                if (list.size() >= index1) {
+                    list.get(index1 - 1).setChecked(false);
+                    System.out.println("Alright, I marked this task as not done:\n"
+                            + list.get(index1 - 1).toString());
+                }
+                break;
+            case "deadline":
+                String[] deadlineAnalyze = input.split("/by");
+                String deadline = deadlineAnalyze[1].trim();
+                String deets = deadlineAnalyze[0].split("deadline")[1].trim();
+                Deadline newDead = new Deadline(deets.toString(), deadline);
+                list.add(newDead);
+                System.out.println("Got it cabrón, just added this task to the list.\n"
+                                    + newDead + "\nYou now have " + list.size() + " tasks. Anything else?");
+                break;
+            case "todo":
+                String[] todoAnalyze = input.split("todo ");
+                Todo newTodo = new Todo(todoAnalyze[1].trim());
+                list.add(newTodo);
+                System.out.println("Got it cabrón, just added this task to the list.\n"
+                        + newTodo + "\nYou now have " + list.size() + " tasks. Anything else?");
+                break;
+            case "event":
+                String[] eventAnalyze = input.split("/from");
+                String[] timeAnalyze = eventAnalyze[1].split("/to");
+                String start = timeAnalyze[0].trim();
+                String over = timeAnalyze[1].trim();
+                String details = eventAnalyze[0].split("event")[1].trim();
+                Event newEvent = new Event(details, start, over);
+                list.add(newEvent);
+                System.out.println("Got it cabrón, just added this task to the list.\n"
+                        + newEvent + "\nYou now have " + list.size() + " tasks. Anything else?");
+                break;
+            default:
+                System.out.println("Sorry sir, didn't quite get that." +
+                        "\nYou have " + list.size() + " tasks. Anything else?");
         }
         System.out.println(dashedLine());
         return end;
