@@ -164,7 +164,7 @@ public class Duke {
     }
 
     /**
-     * Mark a task as done by index
+     * Marks a task as done by index
      *
      * @param idx: index of the task
      * @return the string message to print out
@@ -176,7 +176,7 @@ public class Duke {
     }
 
     /**
-     * Mark a task as undone by index
+     * Marks a task as undone by index
      *
      * @param idx: index of the task
      * @return the string message to print out
@@ -188,7 +188,7 @@ public class Duke {
     }
 
     /**
-     * Delete a task by index
+     * Deletes a task by index
      *
      * @param idx: the index of the task
      * @return the string message to print out
@@ -202,7 +202,7 @@ public class Duke {
     }
 
     /**
-     * Add user command to a list. The list will be used for
+     * Adds user command to a list. The list will be used for
      * saving to local files as history.
      *
      * @param string: the user-input command
@@ -212,7 +212,7 @@ public class Duke {
     }
 
     /**
-     * Get the string representation of all history commands.
+     * Returns the string representation of all history commands.
      * This is different from the string of all tasks.
      *
      * @return the string containing all commands
