@@ -101,7 +101,7 @@ public class Parser {
         case('T'):
             break;
         case('D'):
-            dueDate = info2[1].substring(4, info2[1].length() -1);
+            dueDate = info2[1].substring(4, info2[1].length() - 1);
             break;
         case('E'):
             String[] info3 = info2[1].split(" to: ");
