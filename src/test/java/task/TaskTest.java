@@ -10,19 +10,19 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 
 public class TaskTest {
     @Test
-    public void givenInvalidTaskType_whenCreate_thenNull() {
+    public void create_invalidTaskType_nullReturned() {
         assertNull(Task.create('W', "Content"));
     }
 
     @Test
-    public void givenTodo_whenCreate_thenTodo() {
+    public void create_validTodo_todoReturned() {
         Task task = Task.create('T', "Content");
         assertNotNull(task);
         assertEquals(task.getContent(), "Content");
     }
 
     @Test
-    public void givenValidTarget_whenMark_thenMark() {
+    public void mark_validTarget_taskMarked() {
         Task task = Task.create('T', "Content");
         assertNotNull(task);
         task.mark(true);
