@@ -1,4 +1,8 @@
 import java.util.*;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileWriter;
+import java.io.IOException;
 
 public class Duke {
     public static void main(String[] args) {
@@ -9,11 +13,15 @@ public class Duke {
 
         // Create Scanner object
         Scanner sc = new Scanner(System.in);
-        TaskList tl = new TaskList();
+        TaskList tl = Task.readTasks();
+
+        // Read existing tasks
 
         // Always ready to receive input
         while (sc.hasNextLine()) {
             String input = sc.nextLine();
+
+            // Handle control flow
             switch (input) {
                 case "bye":
                     // Exit Duke
@@ -22,8 +30,9 @@ public class Duke {
                 case "list":
                     // List tasks
                     System.out.println(tl.toString());
-                    break;
+                    continue;
                 default:
+                    // Change task list
                     if (input.matches("mark \\d+")) {
                         // Marking a task as done
                         Integer idx = Integer.valueOf(input.split(" ")[1]) - 1;
@@ -73,6 +82,9 @@ public class Duke {
                             System.out.println("☹ OOPS!!! The description of a " + e.command + " cannot be empty.");
                         }
                     }
+
+                    // Save tasks after every change to the list
+                    Task.saveTasks(tl);
             }
         }
     }
