@@ -1,11 +1,11 @@
-package message;
+package duke.message;
 
-import exception.InvalidDeadlineException;
-import exception.InvalidTodoException;
-import exception.InvalidEventException;
-import storage.Storage;
-import task.Task;
-import task.TaskList;
+import duke.exception.InvalidDeadlineException;
+import duke.exception.InvalidTodoException;
+import duke.exception.InvalidEventException;
+import duke.storage.Storage;
+import duke.task.Task;
+import duke.task.TaskList;
 
 
 public class MessageGenerator {

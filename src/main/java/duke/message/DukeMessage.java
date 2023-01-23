@@ -1,4 +1,4 @@
-package message;
+package duke.message;
 public class DukeMessage extends Message {
 
     MessageStatus status;

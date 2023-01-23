@@ -1,11 +1,13 @@
+package duke;
+
 import java.util.Scanner;
-import exception.*;
-import message.DukeMessage;
-import message.MessageGenerator;
-import message.MessageStatus;
-import parser.Parser;
-import storage.Storage;
-import task.TaskList;
+import duke.exception.*;
+import duke.message.DukeMessage;
+import duke.message.MessageGenerator;
+import duke.message.MessageStatus;
+import duke.parser.Parser;
+import duke.storage.Storage;
+import duke.task.TaskList;
 
 
 public class Duke {

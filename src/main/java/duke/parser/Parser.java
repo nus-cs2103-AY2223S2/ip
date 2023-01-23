@@ -1,7 +1,7 @@
-package parser;
+package duke.parser;
 
-import exception.InvalidInputException;
-import message.MessageStatus;
+import duke.exception.InvalidInputException;
+import duke.message.MessageStatus;
 
 public class Parser {
 

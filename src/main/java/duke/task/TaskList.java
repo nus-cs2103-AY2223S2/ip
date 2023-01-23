@@ -1,12 +1,12 @@
-package task;
+package duke.task;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Locale;
-import exception.InvalidTodoException;
-import exception.InvalidDeadlineException;
-import exception.InvalidEventException;
+import duke.exception.InvalidTodoException;
+import duke.exception.InvalidDeadlineException;
+import duke.exception.InvalidEventException;
 
 public class TaskList {
     private ArrayList<Task> list = new ArrayList<>();
