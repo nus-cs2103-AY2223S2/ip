@@ -70,6 +70,10 @@ public abstract class Task {
         return serialized;
     }
 
+    public boolean hasKeyword(String keyword) {
+        return this.name.contains(keyword);
+    }
+
     @Override
     public String toString() {
         String s = String.format("[%s][%s] %s", this.getTaskType(), this.getStatusIcon(), this.name);
