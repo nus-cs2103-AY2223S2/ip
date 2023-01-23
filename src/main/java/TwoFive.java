@@ -1,7 +1,12 @@
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
 import java.util.Scanner;
 
 public class TwoFive {
+    private static DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
+
     //Returns string to be printed when new task is added
     public static String taskAdded(Task task) {
         return "Got it. I've added this task:\n " + task + "\n";
@@ -125,11 +130,16 @@ public class TwoFive {
                             throw new EmptyDeadlineException();
                         } else {
                             String taskDescription = deadlineSplit[0].trim();
-                            String deadline = deadlineSplit[1].trim();
-                            Deadline newDeadline = new Deadline(taskDescription, deadline);
-                            //Adds new task to list of tasks
-                            tasks.add(newDeadline);
-                            System.out.println(taskAdded(newDeadline) + numTasksString(tasks.size()));
+                            String deadlineString = deadlineSplit[1].trim();
+                            try {
+                                LocalDateTime deadline = LocalDateTime.parse(deadlineString, formatter);
+                                Deadline newDeadline = new Deadline(taskDescription, deadline);
+                                //Adds new task to list of tasks
+                                tasks.add(newDeadline);
+                                System.out.println(taskAdded(newDeadline) + numTasksString(tasks.size()));
+                            } catch (DateTimeParseException e) {
+                                System.out.println("Deadline must be in the format yyyy-MM-dd HH:mm, e.g. 2023-01-23 16:31");
+                            }
                         }
                     }
                 } else if (input.contains("event")){
@@ -155,12 +165,21 @@ public class TwoFive {
                                 throw new EmptyEndTimeException();
                             } else {
                                 String taskDescription = startTimeSplit[0].trim();
-                                String startTime = endTimeSplit[0].trim();
-                                String endTime = endTimeSplit[1].trim();
-                                Event newEvent = new Event(taskDescription, startTime, endTime);
-                                //Adds new task to list of tasks
-                                tasks.add(newEvent);
-                                System.out.println(taskAdded(newEvent) + numTasksString(tasks.size()));
+                                try {
+                                    String startTimeString = endTimeSplit[0].trim();
+                                    String endTimeString = endTimeSplit[1].trim();
+
+                                    LocalDateTime startTime = LocalDateTime.parse(startTimeString, formatter);
+                                    LocalDateTime endTime = LocalDateTime.parse(endTimeString, formatter);
+                                    Event newEvent = new Event(taskDescription, startTime, endTime);
+
+                                    //Adds new task to list of tasks
+                                    tasks.add(newEvent);
+                                    System.out.println(taskAdded(newEvent) + numTasksString(tasks.size()));
+                                } catch (DateTimeParseException e) {
+                                    System.out.println("Start time and end time must be in the format yyyy-MM-dd HH:mm, e.g. 2023-01-23 16:31");
+                                }
+
                             }
                         }
                     }
