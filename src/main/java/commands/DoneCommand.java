@@ -4,11 +4,23 @@ import model.Task;
 import utils.InputValidator;
 import view.Printable;
 
+/**
+ * Represents a command which marks a <code>Task</code> as completed.
+ */
 public class DoneCommand extends Command {
+    /**
+     * Generates a <code>DoneCommand</code> object.
+     *
+     * @param input User input into the application.
+     * @param ui A Printable object used for UI display.
+     */
     public DoneCommand(String input, Printable ui) {
         super(input, ui);
     }
 
+    /**
+     * Marks a <code>Task</code> as completed.
+     */
     @Override
     public void execute() {
         if (InputValidator.isCheckInputValid(this.input)) {

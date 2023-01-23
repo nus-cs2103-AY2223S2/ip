@@ -4,11 +4,23 @@ import model.Task;
 import utils.InputValidator;
 import view.Printable;
 
+/**
+ * Represents a command which deletes a <code>Task</code>.
+ */
 public class DeleteCommand extends Command {
+    /**
+     * Generates a <code>DeleteCommand</code> object.
+     *
+     * @param input User input into the application.
+     * @param ui A Printable object used for UI display.
+     */
     public DeleteCommand(String input, Printable ui) {
         super(input, ui);
     }
 
+    /**
+     * Deletes a <code>Task</code>.
+     */
     @Override
     public void execute() {
         if (InputValidator.isCheckInputValid(this.input)) {

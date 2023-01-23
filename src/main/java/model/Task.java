@@ -135,11 +135,39 @@ abstract public class Task {
         }
     }
 
+    /**
+     * Returns the <code>Task</code> type.
+     *
+     * @return The <code>Task</code> type.
+     */
     abstract public TaskType getTaskType();
+
+    /**
+     * Returns the deadline attached to the <code>Task</code>.
+     *
+     * @return The deadline attached to the <code>Task</code>.
+     */
     abstract public String getDeadline();
+
+    /**
+     * Returns the start dateTime attached to the <code>Task</code>.
+     *
+     * @return The start dateTime attached to the <code>Task</code>.
+     */
     abstract public String getStartDateTime();
+
+    /**
+     * Returns the end dateTime attached to the <code>Task</code>.
+     *
+     * @return The end dateTime attached to the <code>Task</code>.
+     */
     abstract public String getEndDateTime();
 
+    /**
+     * Returns a <code>String</code> representation of the <code>Task</code>.
+     *
+     * @return A <code>String</code> representation of the <code>Task</code>.
+     */
     @Override
     public String toString() {
         return String.format("[%s] %s", this.printStatus(), this.title);

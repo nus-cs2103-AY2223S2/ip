@@ -30,26 +30,52 @@ public class Event extends Task {
         }
     }
 
+    /**
+     * Returns the <code>Task</code> type.
+     *
+     * @return The <code>Task</code> type.
+     */
     @Override
     public TaskType getTaskType() {
         return TaskType.EVENT;
     }
 
+    /**
+     * Returns <code>"~"</code> to signify that there is no deadline attached
+     * to any <code>Event</code> task.
+     *
+     * @return <code>"~"</code>.
+     */
     @Override
     public String getDeadline() {
         return Task.EMPTY;
     }
 
+    /**
+     * Returns the start dateTime attached to the <code>Event</code> task.
+     *
+     * @return The start dateTime attached to the <code>Event</code> task.
+     */
     @Override
     public String getStartDateTime() {
         return this.start;
     }
 
+    /**
+     * Returns the end dateTime attached to the <code>Event</code> task.
+     *
+     * @return The end dateTime attached to the <code>Event</code> task.
+     */
     @Override
     public String getEndDateTime() {
         return this.end;
     }
 
+    /**
+     * Returns a <code>String</code> representation of the <code>Event</code> task.
+     *
+     * @return A <code>String</code> representation of the <code>Event</code> task.
+     */
     @Override
     public String toString() {
         return Event.TAG + super.toString() + " (from: " + this.start + " to: " + this.end + ")";

@@ -7,11 +7,23 @@ import view.Printable;
 
 import java.time.DateTimeException;
 
+/**
+ * Represents a command which creates a <code>Task</code> that has a start and end dateTime attached to it.
+ */
 public class EventCommand extends Command {
+    /**
+     * Generates a <code>EventCommand</code> object.
+     *
+     * @param input User input into the application.
+     * @param ui A Printable object used for UI display.
+     */
     public EventCommand(String input, Printable ui) {
         super(input, ui);
     }
 
+    /**
+     * Creates a <code>Event</code> task.
+     */
     @Override
     public void execute() {
         try {

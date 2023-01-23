@@ -8,6 +8,9 @@ import view.Printer;
 import java.io.IOException;
 import java.util.Scanner;
 
+/**
+ * Main application class.
+ */
 public class Membot {
     private static final String FILE_NAME = "./data/tasks.txt";
     private static final String LOGO =
@@ -17,6 +20,9 @@ public class Membot {
             + "| | | | | ||  __/| | | | | || |_) || (_) || |_ \n"
             + "|_| |_| |_| \\___||_| |_| |_||_.__/  \\___/  \\__|\n";
 
+    /**
+     * Main application loop.
+     */
     private static void run() {
         Printable ui = new Printer();
         StorageManager manager = null;
@@ -60,6 +66,11 @@ public class Membot {
         }
     }
 
+    /**
+     * Main entry point to Membot.
+     *
+     * @param args Optional arguments when starting Membot.
+     */
     public static void main(String[] args) {
         run();
     }

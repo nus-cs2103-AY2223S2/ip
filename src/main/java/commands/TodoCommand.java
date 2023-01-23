@@ -5,11 +5,23 @@ import utils.InputValidator;
 import utils.InvalidCommandException;
 import view.Printable;
 
+/**
+ * Represents a command which creates a basic <code>Task</code>.
+ */
 public class TodoCommand extends Command {
+    /**
+     * Generates a <code>TodoCommand</code> object.
+     *
+     * @param input User input into the application.
+     * @param ui A Printable object used for UI display.
+     */
     public TodoCommand(String input, Printable ui) {
         super(input, ui);
     }
 
+    /**
+     * Creates a <code>Todo</code> task.
+     */
     @Override
     public void execute() {
         try {
