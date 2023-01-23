@@ -13,24 +13,6 @@ public abstract class ITask implements  ITaskPrint{
         Unknown
 
     }
-//    public String convertTaskTypeEnumToIcon() {
-//        switch (_type) {
-//            case ToDos: return "T";
-//            case Deadlines: return "D";
-//            case Events: return "E";
-//            case Unknown: return " ";
-//        }
-//        return " ";
-//    }
-//    public static String convertTaskTypeEnumToStr(ITask.TaskTypes type) {
-//        switch (type) {
-//            case ToDos: return "todo";
-//            case Deadlines: return "deadline";
-//            case Events: return "event";
-//            case Unknown: return "unknown";
-//        }
-//        return "unknown";
-//    }
 
     public static ITask.TaskTypes convertTaskTypeCmdToEnum(String cmd) {
         switch (cmd) {

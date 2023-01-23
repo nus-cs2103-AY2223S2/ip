@@ -1,6 +1,10 @@
 package duke.utilities;
 
-import duke.exceptions.*;
+import duke.exceptions.ContentEmpty;
+import duke.exceptions.DateParseException;
+import duke.exceptions.DukeException;
+import duke.exceptions.IncompleteCommandException;
+import duke.exceptions.InvalidMarkInput;
 import duke.tasks.ITask;
 
 import java.text.DateFormat;
@@ -12,8 +16,8 @@ public class Parser {
     private boolean processed = false;
     private String _input;
     private String _description;
-    public static final DateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy HHmm");
-    public static final DateFormat outputFormat = new SimpleDateFormat("MM-dd-yyyy HH:mm:ss aa");
+    public final static DateFormat DATE_FORMAT = new SimpleDateFormat("dd/MM/yyyy HHmm");
+    public final static DateFormat DATE_OUTPUT_FORMAT = new SimpleDateFormat("MM-dd-yyyy HH:mm:ss aa");
 
     public Date getBy() {
         return _by;
@@ -32,7 +36,7 @@ public class Parser {
             _description = temp[0].trim();
 
             try {
-                _by = dateFormat.parse(temp[1].trim());
+                _by = DATE_FORMAT.parse(temp[1].trim());
             } catch (ParseException e) {
                 throw new DateParseException(e.getMessage());
             }
@@ -132,8 +136,8 @@ public class Parser {
         result[1] = temp2[0];
         result[2] = temp2[1];
         try {
-            _from = dateFormat.parse(result[1].trim());
-            _to = dateFormat.parse(result[2].trim());
+            _from = DATE_FORMAT.parse(result[1].trim());
+            _to = DATE_FORMAT.parse(result[2].trim());
         } catch (ParseException e) {
             throw new DateParseException(e.getMessage());
         }

@@ -28,7 +28,7 @@ public class Event extends ITask {
 
     @Override
     public String toString() {
-        return "[E]" + super.toString() + " (from: " + Parser.outputFormat.format(this.from) + " to: "
-                + Parser.outputFormat.format(this.to) + ")";
+        return "[E]" + super.toString() + " (from: " + Parser.DATE_OUTPUT_FORMAT.format(this.from) + " to: "
+                + Parser.DATE_OUTPUT_FORMAT.format(this.to) + ")";
     }
 }

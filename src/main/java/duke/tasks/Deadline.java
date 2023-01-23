@@ -23,6 +23,6 @@ public class Deadline extends ITask {
     @Override
     public String toString() {
         return "[D]" + super.toString() + " (by: " +
-                Parser.outputFormat.format(this._by) + ")";
+                Parser.DATE_OUTPUT_FORMAT.format(this._by) + ")";
     }
 }
