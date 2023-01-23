@@ -3,7 +3,7 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.List;
 
-public class InputProcessor {
+public class Parser {
     protected static Map<String,String> splitArgs(String input) {
         // returns a Map mapping name of arg to arg value based on the raw format
         // raw format according to task is /<name> <value>
