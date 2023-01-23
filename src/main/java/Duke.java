@@ -26,15 +26,23 @@ public class Duke {
                 break;
             case "mark": {
                 int number = Integer.parseInt(split[1]) - 1;
-                list.get(number).setIsDone(true);
-                System.out.println("done");
+                try {
+                    list.get(number).setIsDone(true);
+                    System.out.println("done");
+                } catch (IndexOutOfBoundsException e) {
+                    System.out.println("Item does not exist");
+                }
                 printAllTasks(list);
                 break;
             }
             case "unmark": {
                 int number = Integer.parseInt(split[1]) - 1;
-                list.get(number).setIsDone(false);
-                System.out.println("done");
+                try {
+                    list.get(number).setIsDone(false);
+                    System.out.println("done");
+                } catch (IndexOutOfBoundsException e) {
+                    System.out.println("Item does not exist");
+                }
                 printAllTasks(list);
                 break;
             }
