@@ -135,6 +135,17 @@ abstract public class Task {
         }
     }
 
+    public static ArrayList<Task> find(String keyword) {
+        ArrayList<Task> res = new ArrayList<>();
+        for (Task t : Task.tasks) {
+            if (t.title.contains(keyword)) {
+                res.add(t);
+            }
+        }
+
+        return res;
+    }
+
     /**
      * Returns the <code>Task</code> type.
      *

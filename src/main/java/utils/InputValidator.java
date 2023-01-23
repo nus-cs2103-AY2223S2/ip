@@ -22,6 +22,12 @@ public class InputValidator {
         }
     }
 
+    public static boolean isFindInputValid(String input) {
+        String[] split = input.split(" ");
+
+        return split.length >= 2;
+    }
+
     public static String[] normaliseTodoInput(String input) throws InvalidCommandException {
         String[] split = input.split(" ");
         List<String> RESERVED_AL = Arrays.asList(RESERVED);
