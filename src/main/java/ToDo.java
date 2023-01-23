@@ -1,12 +1,16 @@
 public class ToDo extends Task {
 
     // Factory method
-    public static ToDo create(String command) throws TaskNameNotSpecified {
+    public static ToDo create(String commandInput) throws TaskNameNotSpecified {
         try {
-            return command.indexOf("todo") == -1 ? new ToDo(command) : new ToDo(command.substring(5));
+            return new ToDo(parseCmd(commandInput)[1]);
         } catch (StringIndexOutOfBoundsException e) {
             throw new TaskNameNotSpecified("ToDo description cannot be empty.");
         }
+    }
+
+    public static String[] parseCmd(String commandInput) {
+        return commandInput.split(" ");
     }
     
     public ToDo(String taskName) {
