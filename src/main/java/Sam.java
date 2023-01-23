@@ -1,18 +1,16 @@
 import java.time.LocalDate;
-import java.util.HashMap;
+import java.util.Map;
 
 public class Sam {
   private Ui ui;
   private Storage storage;
   private TaskList tasks;
-  private HashMap<String, String> taskArgs;
   private boolean live;
 
   public Sam(String first, String ...more) {
     ui = new Ui();
     storage = new Storage(first, more);
     tasks = new TaskList();
-    taskArgs = new HashMap<>();
     live = false;
   }
 
@@ -31,8 +29,6 @@ public class Sam {
         processInput(Parser.splitFirst(input));
       } catch (SamException e) {
         ui.talk(e.getMessage());
-      } finally {
-        taskArgs.clear();
       }
     }
   }
@@ -47,6 +43,7 @@ public class Sam {
       SamSaveFailedException, SamInvalidDateException
   {
     Command command = Parser.getCommand(input[0]);
+    Map<String, String> taskArgs;
     switch (command) {
       case BYE:
         live = false;
@@ -93,7 +90,7 @@ public class Sam {
         if (input.length <= 1) {
           throw new SamMissingTaskTitleException();
         }
-        Parser.parseTaskArgs(input[1], taskArgs);
+        taskArgs = Parser.parseTaskArgs(input[1]);
 
         String title = taskArgs.get("title");
         Task task = new ToDo(title);
@@ -107,7 +104,7 @@ public class Sam {
         if (input.length <= 1) {
           throw new SamMissingTaskTitleException();
         }
-        Parser.parseTaskArgs(input[1], taskArgs);
+        taskArgs = Parser.parseTaskArgs(input[1]);
         if (!taskArgs.containsKey("from") || !taskArgs.containsKey("to")) {
           throw new SamMissingTaskArgException();
         }
@@ -126,7 +123,7 @@ public class Sam {
         if (input.length <= 1) {
           throw new SamMissingTaskTitleException();
         }
-        Parser.parseTaskArgs(input[1], taskArgs);
+        taskArgs = Parser.parseTaskArgs(input[1]);
         if (!taskArgs.containsKey("by")) {
           throw new SamMissingTaskArgException();
         }
