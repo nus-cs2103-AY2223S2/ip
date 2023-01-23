@@ -19,6 +19,7 @@ public class DeadlineTask extends Task {
 
     @Override
     public String toSaveString() {
-        return super.toSaveString() + "|" + endTime;
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm");
+        return super.toSaveString() + "|" + endTime.format(formatter);
     }
 }

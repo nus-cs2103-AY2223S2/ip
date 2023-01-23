@@ -21,6 +21,7 @@ public class EventTask extends Task {
 
     @Override
     public String toSaveString() {
-        return super.toSaveString() + "|" + startTime + "|" + endTime;
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm");
+        return super.toSaveString() + "|" + startTime.format(formatter) + "|" + endTime.format(formatter);
     }
 }
