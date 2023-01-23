@@ -9,13 +9,16 @@ import duke.exception.DukeException;
  * The DatedTask represents a Task that contains a date.
  */
 public class DatedTask extends Task {
+    private static final long serialVersionUID = 110;
+
     private LocalDate imptDate;
 
     /**
      * Constructor for DatedTask
      *
-     * @param name
-     * @param impDate
+     * @param name    The name of the task.
+     * @param impDate The date to be used for comparisons.
+     * @throws DukeException If imptDate is not a valid date.
      */
     protected DatedTask(String name, String impDate) throws DukeException {
         super(name);
@@ -24,7 +27,6 @@ public class DatedTask extends Task {
         } catch (DateTimeParseException e) {
             throw new DukeException("Write the date in this format: YYYY-MM-DD");
         }
-
     }
 
     @Override

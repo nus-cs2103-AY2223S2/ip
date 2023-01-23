@@ -31,6 +31,11 @@ public class Duke {
         }
     }
 
+    /**
+     * Main function of Duke.
+     *
+     * @param args There are no options available for now.
+     */
     public static void main(String[] args) {
         new Duke().run();
     }

@@ -10,8 +10,14 @@ import duke.ui.Ui;
  * Represents Duke's Event function.
  */
 public class AddEventCommand extends Command {
+    /** Constructs the add event command. */
     public AddEventCommand() {}
 
+    /**
+     * Adds an Event task to the tasklist and stores the new tasklist.
+     *
+     * @throws DukeException If user input is invalid.
+     */
     @Override
     public void execute(TaskList tasks, Ui ui, Storage store) throws DukeException {
         String[] data = ui.getEvent();

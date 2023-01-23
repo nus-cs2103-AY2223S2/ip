@@ -70,6 +70,7 @@ public class Storage {
      * Loads from the storage file.
      *
      * @return The arraylist containing the tasks.
+     * @throws DukeException If the file cannot be read.
      */
     public TaskList loadFromFile() throws DukeException {
         try {
@@ -85,7 +86,7 @@ public class Storage {
 
             return output;
         } catch (EOFException e) {
-            // do nothing, empty save file
+            // do nothing, expected from empty save file
         } catch (Exception e) {
             throw new DukeException("Unable to read file: " + e.getMessage());
         }

@@ -75,10 +75,18 @@ public class Ui {
         printWithPartition("\tDuke: " + sc.nextLine().strip() + "\n");
     }
 
+    /**
+     * Prints the exception message as Duke.
+     *
+     * @param message The exception message.
+     */
     public void printException(String message) {
         printWithPartition("\t" + message + "\n");
     }
 
+    /**
+     * Prints Duke's goodbye message.
+     */
     public void printGoodbye() {
         printWithPartition("\tGoodbye!\n");
     }
@@ -86,10 +94,23 @@ public class Ui {
     // endregion
 
     // region Ui for input
+
+    /**
+     * Throws away a line of the input.
+     *
+     * <p>
+     * Warning: May prompt user for a line of input if not used properly.
+     */
     public void throwAwayInput() {
         sc.nextLine();
     }
 
+    /**
+     * Get a task number from the user.
+     *
+     * @return The task number.
+     * @throws DukeException If the input is not a valid number.
+     */
     public int getTaskNum() throws DukeException {
         try {
             String s = sc.nextLine().strip();
@@ -100,10 +121,21 @@ public class Ui {
         }
     }
 
+    /**
+     * Gets the command from the user.
+     *
+     * @return The string containing the user's command.
+     */
     public String getCommand() {
         return sc.next();
     }
 
+    /**
+     * Gets the name of a task from the user.
+     *
+     * @return The string containing the name of a task from the user.
+     * @throws DukeException If the name is empty.
+     */
     public String getName() throws DukeException {
         String name = sc.nextLine().strip();
         if (name == "") {
@@ -112,6 +144,12 @@ public class Ui {
         return name;
     }
 
+    /**
+     * Gets the name and date for a deadline task from the user.
+     *
+     * @return The string array containing the name and date for a deadline task.
+     * @throws DukeException If the name and date are not found.
+     */
     public String[] getDeadline() throws DukeException {
         try {
             String[] sorted = sc.nextLine().split(" /by ");
@@ -123,6 +161,12 @@ public class Ui {
         }
     }
 
+    /**
+     * Gets the name, start and end date for an event task from the user.
+     *
+     * @return The string array containing the name, start and end date for an event task.
+     * @throws DukeException If the name, start and end date are not found.
+     */
     public String[] getEvent() throws DukeException {
         try {
             String[] line = sc.nextLine().split(" /from ", 2);

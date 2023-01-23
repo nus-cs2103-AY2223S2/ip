@@ -8,10 +8,11 @@ import duke.exception.DukeException;
 public class Parser {
 
     /**
-     * Parses the input string as a command.
+     * Parses the input string to a specific command.
      *
-     * @param s
-     * @throws DukeException
+     * @param s The string representation of a CommandWord.
+     * @return The specific command to be executed.
+     * @throws DukeException If the string cannot be parsed to a CommandWord.
      */
     public static Command parseCommand(String s) throws DukeException {
         CommandWords command = readCommandWord(s);
@@ -37,11 +38,12 @@ public class Parser {
         case BYE:
             return new ExitCommand();
         default:
+            // default should be CommandWords.UNKNOWN
             return new UnknownCommand();
         }
     }
 
-    private static CommandWords readCommandWord(String s) throws DukeException {
+    private static CommandWords readCommandWord(String s) {
         try {
             return CommandWords.valueOf(s.toUpperCase());
         } catch (IllegalArgumentException e) {

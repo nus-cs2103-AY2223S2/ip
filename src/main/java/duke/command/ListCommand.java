@@ -9,8 +9,13 @@ import duke.ui.Ui;
  */
 public class ListCommand extends Command {
 
+    /** Constructs the list command. */
     public ListCommand() {}
 
+    /**
+     * Informs the user of the tasks in tasklist.
+     *
+     */
     @Override
     public void execute(TaskList tasks, Ui ui, Storage store) {
         ui.printList(tasks);

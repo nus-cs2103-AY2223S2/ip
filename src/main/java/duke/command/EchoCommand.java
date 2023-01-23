@@ -8,8 +8,13 @@ import duke.ui.Ui;
  * Represents Duke's Echo function.
  */
 public class EchoCommand extends Command {
+    /** Constructs the echo command. */
     public EchoCommand() {}
 
+    /**
+     * Echoes the user input.
+     *
+     */
     @Override
     public void execute(TaskList tasks, Ui ui, Storage store) {
         ui.printNextInput();

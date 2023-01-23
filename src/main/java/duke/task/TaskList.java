@@ -12,6 +12,9 @@ public class TaskList extends ArrayList<Task> {
     private static final long serialVersionUID = 200;
     private TaskList sorted;
 
+    /**
+     * Constructs the task list.
+     */
     public TaskList() {
         super();
     }
@@ -39,8 +42,9 @@ public class TaskList extends ArrayList<Task> {
     /**
      * Marks the task as done using the task number.
      *
-     * @param num
+     * @param num The task number of the task to be marked.
      * @return The string representation of the task marked as done.
+     * @throws DukeException If the num is invalid or there are no tasks.
      */
     public String mark(int num) throws DukeException {
         if (size() == 0) {
@@ -58,8 +62,9 @@ public class TaskList extends ArrayList<Task> {
     /**
      * Unmarks the task as done using the task number.
      *
-     * @param num
+     * @param num The task number of the task to be unmarked.
      * @return The string representation of the task unmarked.
+     * @throws DukeException If the num is invalid or there are no tasks.
      */
     public String unmark(int num) throws DukeException {
         if (size() == 0) {
@@ -77,8 +82,9 @@ public class TaskList extends ArrayList<Task> {
     /**
      * Deletes the task using the task number.
      *
-     * @param num
+     * @param num The task number of the task to be deleted.
      * @return The string representation of the task unmarked.
+     * @throws DukeException If the num is invalid or there are no tasks.
      */
     public String delete(int num) throws DukeException {
         if (size() == 0) {

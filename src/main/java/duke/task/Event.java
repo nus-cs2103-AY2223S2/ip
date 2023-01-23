@@ -21,7 +21,7 @@ public class Event extends DatedTask {
      * @param name  The name of the event.
      * @param start The date the event begins on.
      * @param end   The date the event ends on.
-     * @throws DukeException If the dates are not formatted properly.
+     * @throws DukeException If the dates are not formatted properly or the name is invalid.
      */
     public Event(String name, String start, String end) throws DukeException {
         super(name, end);

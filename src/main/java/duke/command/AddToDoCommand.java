@@ -12,6 +12,11 @@ import duke.ui.Ui;
 public class AddToDoCommand extends Command {
     public AddToDoCommand() {}
 
+    /**
+     * Adds a ToDo task to the tasklist and stores the new tasklist.
+     *
+     * @throws DukeException If user input is invalid.
+     */
     @Override
     public void execute(TaskList tasks, Ui ui, Storage store) throws DukeException {
         ToDo temp = new ToDo(ui.getName());

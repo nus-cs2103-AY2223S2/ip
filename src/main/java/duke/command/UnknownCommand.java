@@ -9,10 +9,14 @@ import duke.ui.Ui;
  * Represents an unknown command that Duke cannot execute
  */
 public class UnknownCommand extends Command {
+
+    /** Constructs an unknown command. */
     public UnknownCommand() {}
 
     /**
-     * An Unknown command.
+     * Throws a DukeException indicating that the command is not understood.
+     *
+     * @throws DukeException Always as command is not understood.
      */
     public void execute(TaskList tasks, Ui ui, Storage store) throws DukeException {
         ui.throwAwayInput();

@@ -19,6 +19,7 @@ public class Deadline extends DatedTask {
      *
      * @param name The name of the task.
      * @param date The date of when the task is due.
+     * @throws DukeException If the date given is invalid.
      */
     public Deadline(String name, String date) throws DukeException {
         super(name, date);
