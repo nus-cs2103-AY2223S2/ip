@@ -1,5 +1,10 @@
 package aqua.manager;
 
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.util.Optional;
 import java.util.Scanner;
 
 import aqua.exception.IllegalSyntaxException;
@@ -32,6 +37,24 @@ public class UiManager {
             "UWAWAWA!!\n" +
             "I messed up big time...\n" +
             "  %s";
+    
+    private final BufferedReader reader;
+
+
+    public UiManager() {
+        this(System.in);
+    }
+
+
+    public UiManager(InputStream inStream) {
+        reader = new BufferedReader(new InputStreamReader(inStream));
+    }
+    
+
+    public String readLine() throws IOException {
+        String msg = reader.readLine();
+        return Optional.ofNullable(msg).orElse("");
+    }
     
     
     public void replyException(Throwable ex) {

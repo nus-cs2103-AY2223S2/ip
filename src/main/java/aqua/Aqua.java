@@ -1,6 +1,6 @@
 package aqua;
 
-import java.util.Scanner;
+import java.io.IOException;
 
 import aqua.exception.LoadException;
 import aqua.logic.CommandLineInput;
@@ -28,10 +28,12 @@ public class Aqua {
         } catch (LoadException loadEx) {
             manager.getUiManager().replyException(loadEx);
         }
-        try (Scanner scanner = new Scanner(System.in)) {
-            while (!manager.isClosed()) {
-                String input = scanner.nextLine();
+        while (!manager.isClosed()) {
+            try {
+                String input = manager.getUiManager().readLine();
                 processInput(input);
+            } catch (IOException ioEx) {
+                manager.getUiManager().replyException(ioEx);
             }
         }
     }
