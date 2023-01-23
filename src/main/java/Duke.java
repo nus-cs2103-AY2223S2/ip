@@ -1,28 +1,29 @@
-import Features.DukeException;
-import Features.Storage;
-import Features.TaskList;
-import Features.Ui;
-
+import Features.*;
 import java.util.Scanner;
 
 public class Duke {
 
-    static Storage dukeSave = new Storage();
-    static TaskList taskList = dukeSave.loadTaskList();
-    static boolean loopEnd = false;
-
     public static void main(String[] args) {
 
-        // welcome message
-        new Ui().welcome();
+        // initialise storage, taskList and loop objects
+        Storage dukeSave = new Storage();
+        TaskList taskList = dukeSave.loadTaskList();
+        boolean loopEnd = false;
+
         // initialise Scanner
         Scanner userScan = new Scanner(System.in);
+        // welcome message
+        new Ui().welcome();
+
 
         // while LoopEnd = true loop to accept user input
         while (!loopEnd) {
             // try block to catch DukeException and prevent program from terminating itself.
             try {
-                new Parser().parse(userScan);
+                Parser parser = new Parser(userScan, taskList);
+                parser.parse();
+                taskList = parser.updateTaskList();
+                loopEnd = parser.updateLoopEnd();
             }
             // Catches DukeException if thrown and prevents program from terminating.
             catch(DukeException ex){

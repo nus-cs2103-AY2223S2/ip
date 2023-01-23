@@ -13,8 +13,10 @@ import java.io.FileWriter;
 public class Storage {
 
     public TaskList loadTaskList() {
+
         File dukeSave = new File("data/duke.txt");
         TaskList toLoad = new TaskList();
+
         if (dukeSave.exists()) {
             try {
                 Scanner fileScan = new Scanner(dukeSave);
