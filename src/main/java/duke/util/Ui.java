@@ -1,3 +1,7 @@
+package duke.util;
+
+import duke.taskers.Task;
+
 import java.util.ArrayList;
 
 public class Ui {
@@ -25,7 +29,7 @@ public class Ui {
     }
 
     public void greetings() {
-        this.printWithLines(" Hello! I'm Duke!\n     What can I do for you today?");
+        this.printWithLines(" Hello! I'm duke.Duke!\n     What can I do for you today?");
 
     }
 

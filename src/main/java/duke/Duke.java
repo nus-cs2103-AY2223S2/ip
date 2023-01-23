@@ -1,3 +1,11 @@
+package duke;
+
+import duke.taskers.Task;
+import duke.util.Parser;
+import duke.util.Storage;
+import duke.util.TaskList;
+import duke.util.Ui;
+
 import java.util.Scanner;
 import java.io.File;
 import java.time.DateTimeException;
