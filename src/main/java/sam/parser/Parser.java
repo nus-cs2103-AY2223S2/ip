@@ -57,7 +57,7 @@ public class Parser {
     return input.split(" ", 2);
   }
 
-  public static Command getCommand(String input) throws SamUnknownCommandException {
+  public static Command parseCommand(String input) throws SamUnknownCommandException {
     String[] commandArgs = splitFirst(input);
     Command c = null;
     String args = commandArgs.length > 1 ? commandArgs[1] : "";

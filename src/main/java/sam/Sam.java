@@ -32,7 +32,7 @@ public class Sam {
     while (live) {
       String input = ui.acceptInput();
       try {
-        Command c = Parser.getCommand(input);
+        Command c = Parser.parseCommand(input);
         c.execute(tasks, ui, storage);
         live = !(c instanceof ExitCommand);
       } catch (SamException e) {
