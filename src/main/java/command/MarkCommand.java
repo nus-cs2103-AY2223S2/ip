@@ -1,3 +1,8 @@
+package command;
+
+import duke.Storage;
+import duke.TaskList;
+import duke.Ui;
 import exceptions.DukeException;
 import exceptions.InvalidNumberException;
 
@@ -9,7 +14,7 @@ public class MarkCommand extends Command{
     private int index;
 
     /***
-     * Constructor for MarkCommand
+     * Constructor for command.MarkCommand
      * @param index
      */
     public MarkCommand(int index){

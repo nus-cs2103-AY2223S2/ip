@@ -1,6 +1,11 @@
+package command;
 
-
+import duke.Storage;
+import duke.TaskList;
+import duke.Ui;
 import exceptions.DukeException;
+import tasks.Event;
+import tasks.Task;
 
 
 public class EventCommand extends Command {
@@ -13,7 +18,7 @@ public class EventCommand extends Command {
     }
 
     /***
-     * Adds an Event Task into the taskList and updates storage files
+     * Adds an tasks.Event tasks.Task into the taskList and updates storage files
      * if duplicate detected, no changes made to taskList or storage
      * @param taskList
      * @param ui

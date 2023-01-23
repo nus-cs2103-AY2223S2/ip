@@ -1,3 +1,7 @@
+package duke;
+
+import tasks.Task;
+
 import java.util.ArrayList;
 import java.util.NoSuchElementException;
 import java.util.Scanner;
@@ -33,7 +37,7 @@ public class Ui {
      * prints greet message
      */
     public static String greet() {
-        return "Hello! I'm Duke.\n" + "What can I do for you?";
+        return "Hello! I'm duke.Duke.\n" + "What can I do for you?";
     }
 
     /***

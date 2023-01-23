@@ -1,4 +1,10 @@
+package command;
+
+import duke.Storage;
+import duke.TaskList;
+import duke.Ui;
 import exceptions.DukeException;
+import tasks.Task;
 
 /***
  * this class handles deleting a task as a command
@@ -8,7 +14,7 @@ public class DeleteCommand extends Command{
     private int index;
 
     /**
-     * Constructor for DeleteCommand
+     * Constructor for command.DeleteCommand
      * @param index
      */
     public DeleteCommand(int index){

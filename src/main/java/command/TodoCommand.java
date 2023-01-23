@@ -1,14 +1,21 @@
+package command;
+
+import duke.Storage;
+import duke.TaskList;
+import duke.Ui;
 import exceptions.DukeException;
+import tasks.Task;
+import tasks.Todo;
 
 /**
- * This class handles when a Todo task is added
+ * This class handles when a tasks.Todo task is added
  */
 public class TodoCommand extends Command{
 
     private String input;
 
     /***
-     * Constructor for TodoCommand
+     * Constructor for command.TodoCommand
      * @param input
      */
     public TodoCommand(String input){

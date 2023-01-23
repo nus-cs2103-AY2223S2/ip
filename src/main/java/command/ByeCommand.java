@@ -1,7 +1,9 @@
-import exceptions.DukeException;
+package command;
 
-import java.util.Timer;
-import java.util.TimerTask;
+import duke.Storage;
+import duke.TaskList;
+import duke.Ui;
+import exceptions.DukeException;
 
 /***
  * This class has to do with exiting the program
@@ -10,7 +12,7 @@ import java.util.TimerTask;
 public class ByeCommand extends Command {
 
     /**
-     * constructor for ByeCommand
+     * constructor for command.ByeCommand
      */
     public ByeCommand() {
         super();

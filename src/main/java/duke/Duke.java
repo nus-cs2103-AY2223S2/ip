@@ -1,6 +1,9 @@
+package duke;
+
 import java.io.File;
 import java.io.IOException;
 
+import command.Command;
 import exceptions.DukeException;
 
 
@@ -17,7 +20,7 @@ class Duke {
     private TaskList tasks;
     private Ui ui;
 
-    // once duke gets initiated, create duke.Ui object, create storage
+    // once duke gets initiated, create duke.duke.Ui object, create storage
     public Duke(String directory, String filePath) {
         ui = new Ui();
         storage = new Storage(directory, filePath);

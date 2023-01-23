@@ -1,5 +1,11 @@
+package command;
+
+import duke.Storage;
+import duke.TaskList;
+import duke.Ui;
+
 /**
- * This class handles listing the entire TaskList
+ * This class handles listing the entire duke.TaskList
  */
 public class ListCommand extends Command {
 

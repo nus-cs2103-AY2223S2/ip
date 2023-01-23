@@ -1,3 +1,6 @@
+package duke;
+
+import command.*;
 import exceptions.BlankException;
 import exceptions.InvalidInstructionException;
 import exceptions.*;
@@ -23,7 +26,7 @@ public class Parser {
      * Constructor.
      *
      * @param storage The storage list used.
-     * @param ui   The duke.Ui interface used.
+     * @param ui   The duke.duke.Ui interface used.
      */
     public Parser(Storage storage, Ui ui) {
         this.storage = storage;
