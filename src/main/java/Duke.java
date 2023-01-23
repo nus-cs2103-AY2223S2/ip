@@ -1,6 +1,4 @@
-import java.util.*;
-
-import static java.lang.System.exit;
+import java.util.Scanner;
 
 public class Duke {
     protected static String logo = " ____        _        \n"
@@ -120,7 +118,7 @@ public class Duke {
 
     public static void end() {
         printLine();
-        System.out.println("Bye bye! Hope to see you again soon!!");
+        System.out.println("Bye bye! Hope to see you again soon!! :>");
         printLine();
     }
 
