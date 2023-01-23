@@ -4,6 +4,7 @@ public class Duke {
     final static String ENTRY = "Hello! I'm Duke\nWhat can I do for you?";
     final static String EXIT_COMMAND = "bye";
     final static String LIST_COMMAND = "list";
+    final static String DELETE_COMMAND = "delete";
 
 
     public static ArrayList<Task> list;
@@ -33,6 +34,8 @@ public class Duke {
                     handleDeadline(inputWords);
                 } else if (isEvent(command)) {
                     handleEvent(inputWords);
+                } else if (command.equals(DELETE_COMMAND)) {
+                    handleDelete(inputWords);
                 } else {
                     throw new InvalidInputException();
                 }
@@ -40,6 +43,15 @@ public class Duke {
                 System.out.println(e.getMessage());
             }
         }
+    }
+
+    public static void handleDelete(String[] inputWords) {
+        int index = Integer.parseInt(inputWords[1]);
+        Task task = list.get(index - 1);
+        list.remove(index-1);
+        System.out.println("Noted. I've removed this task:");
+        System.out.println("  " + task.toString());
+        System.out.println(String.format("Now you have %d tasks in the list.", list.size()));
     }
 
     public static void handleMark(String[] inputWords) {
