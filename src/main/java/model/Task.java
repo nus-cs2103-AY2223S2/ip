@@ -75,13 +75,13 @@ abstract public class Task {
 
     private String printStatus() {
         switch (this.status) {
-            case NEW:
-                return " ";
-            case COMPLETED:
-                return "X";
-            default:
-                // Should not reach here
-                return "?";
+        case NEW:
+            return " ";
+        case COMPLETED:
+            return "X";
+        default:
+            // Should not reach here
+            return "?";
         }
     }
 
@@ -117,18 +117,18 @@ abstract public class Task {
 
             Task restoredTask = null;
             switch (TaskType.valueOf(new String(taskType, StandardCharsets.UTF_8))) {
-                case TODO:
-                    restoredTask = new ToDo(new String(title, StandardCharsets.UTF_8));
-                    break;
-                case DEADLINE:
-                    restoredTask = new Deadline(new String(title, StandardCharsets.UTF_8),
-                            new String(deadline, StandardCharsets.UTF_8));
-                    break;
-                case EVENT:
-                    restoredTask = new Event(new String(title, StandardCharsets.UTF_8),
-                            new String(startDateTime, StandardCharsets.UTF_8),
-                            new String(endDateTime, StandardCharsets.UTF_8));
-                    break;
+            case TODO:
+                restoredTask = new ToDo(new String(title, StandardCharsets.UTF_8));
+                break;
+            case DEADLINE:
+                restoredTask = new Deadline(new String(title, StandardCharsets.UTF_8),
+                        new String(deadline, StandardCharsets.UTF_8));
+                break;
+            case EVENT:
+                restoredTask = new Event(new String(title, StandardCharsets.UTF_8),
+                        new String(startDateTime, StandardCharsets.UTF_8),
+                        new String(endDateTime, StandardCharsets.UTF_8));
+                break;
             }
 
             restoredTask.setStatus(TaskStatus.valueOf(new String(status, StandardCharsets.UTF_8)));

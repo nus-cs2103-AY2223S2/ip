@@ -27,25 +27,25 @@ abstract public class Command {
 
         try {
             switch (CommandType.valueOf(inputArr[0].toUpperCase())) {
-                case LIST:
-                    return new ListCommand(ui);
-                case BYE:
-                    return new ByeCommand(ui);
-                case DONE:
-                    return new DoneCommand(input, ui);
-                case UNDONE:
-                    return new UndoneCommand(input, ui);
-                case DELETE:
-                    return new DeleteCommand(input, ui);
-                case TODO:
-                    return new TodoCommand(input, ui);
-                case DEADLINE:
-                    return new DeadlineCommand(input, ui);
-                case EVENT:
-                    return new EventCommand(input, ui);
-                default:
-                    // Should not reach here
-                    throw new InvalidCommandException(String.format("%s is not a valid command!", inputArr[0]));
+            case LIST:
+                return new ListCommand(ui);
+            case BYE:
+                return new ByeCommand(ui);
+            case DONE:
+                return new DoneCommand(input, ui);
+            case UNDONE:
+                return new UndoneCommand(input, ui);
+            case DELETE:
+                return new DeleteCommand(input, ui);
+            case TODO:
+                return new TodoCommand(input, ui);
+            case DEADLINE:
+                return new DeadlineCommand(input, ui);
+            case EVENT:
+                return new EventCommand(input, ui);
+            default:
+                // Should not reach here
+                throw new InvalidCommandException(String.format("%s is not a valid command!", inputArr[0]));
             }
         } catch (IllegalArgumentException e) {
             throw new InvalidCommandException(String.format("%s is not a valid command!", inputArr[0]));
