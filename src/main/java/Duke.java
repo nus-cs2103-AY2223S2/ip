@@ -10,6 +10,7 @@ public class Duke {
         boolean terminate = false;
         taskList = new ArrayList<>();
 
+        String line = "    ----------------------------------------";
         String logo = "____    ____  __    __   __    __  \n"
                     + "\\   \\  /   / |  |  |  | |  |  |  |\n"
                     + " \\   \\/   /  |  |  |  | |  |  |  | \n"
@@ -24,7 +25,7 @@ public class Duke {
         while (!terminate) {
 
             try {
-                
+                System.out.println(line);
                 String command = br.readLine().trim();
 
                 if (!command.isEmpty()) {
@@ -60,6 +61,7 @@ public class Duke {
                         throw new DukeException("☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
                     }
                 }
+
 
             } catch (IOException e) {
                 System.out.println("    " + e.getMessage());

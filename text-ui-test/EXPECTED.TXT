@@ -1,13 +1,85 @@
            Hello! I am
-____    ____  __    __   __    __  
+____    ____  __    __   __    __
 \   \  /   / |  |  |  | |  |  |  |
- \   \/   /  |  |  |  | |  |  |  | 
-  \_    _/   |  |  |  | |  |  |  | 
-    |  |     |  `--'  | |  `--'  | 
-    |__|      \______/   \______/  
+ \   \/   /  |  |  |  | |  |  |  |
+  \_    _/   |  |  |  | |  |  |  |
+    |  |     |  `--'  | |  `--'  |
+    |__|      \______/   \______/
 
     What can I do for you?
+    ----------------------------------------
+    ☹ OOPS!!! I'm sorry, but I don't know what that means :-(
+    ----------------------------------------
+    ☹ OOPS!!! Missing Task Name.
+    ----------------------------------------
     Got it. I've added this task:
-      [T][ ] borrow book
+      [T][ ] read books
     Now you have 1 tasks in the list.
+    ----------------------------------------
+    ☹ OOPS!!! Missing Task Name.
+    ----------------------------------------
+    ☹ OOPS!!! Missing /by keyword.
+    ----------------------------------------
+    ☹ OOPS!!! Missing End Date.
+    ----------------------------------------
+    Got it. I've added this task:
+      [D][ ] study (by: tonight)
+    Now you have 2 tasks in the list.
+    ----------------------------------------
+    ☹ OOPS!!! Missing Task Name.
+    ----------------------------------------
+    ☹ OOPS!!! Missing /from keyword.
+    ----------------------------------------
+    ☹ OOPS!!! Missing Start Date.
+    ----------------------------------------
+    ☹ OOPS!!! Missing /to keyword.
+    ----------------------------------------
+    ☹ OOPS!!! Missing End Date.
+    ----------------------------------------
+    Got it. I've added this task:
+      [E][ ] buy food (from: today to: tomorrow)
+    Now you have 3 tasks in the list.
+    ----------------------------------------
+    Here are the tasks in your list:
+    1.[T][ ] read books
+    2.[D][ ] study (by: tonight)
+    3.[E][ ] buy food (from: today to: tomorrow)
+    ----------------------------------------
+    ☹ OOPS!!! Invalid task number :(
+    ----------------------------------------
+    ☹ OOPS!!! Invalid task number :(
+    ----------------------------------------
+    Nice! I've marked this task as done:
+      [T][X] read books
+    ----------------------------------------
+    Here are the tasks in your list:
+    1.[T][X] read books
+    2.[D][ ] study (by: tonight)
+    3.[E][ ] buy food (from: today to: tomorrow)
+    ----------------------------------------
+    ☹ OOPS!!! Invalid task number :(
+    ----------------------------------------
+    ☹ OOPS!!! Invalid task number :(
+    ----------------------------------------
+    OK, I've marked this task as not done yet:
+      [T][ ] read books
+    ----------------------------------------
+    Here are the tasks in your list:
+    1.[T][ ] read books
+    2.[D][ ] study (by: tonight)
+    3.[E][ ] buy food (from: today to: tomorrow)
+    ----------------------------------------
+        Correct command: delete <valid task index>
+    ----------------------------------------
+    ☹ OOPS!!! Invalid task number :(
+    ----------------------------------------
+    ☹ OOPS!!! Invalid task number :(
+    ----------------------------------------
+    Noted. I've removed this task:
+      [D][ ] study (by: tonight)
+    ----------------------------------------
+    Here are the tasks in your list:
+    1.[T][ ] read books
+    2.[E][ ] buy food (from: today to: tomorrow)
+    ----------------------------------------
     Bye. Hope to see you again soon!
