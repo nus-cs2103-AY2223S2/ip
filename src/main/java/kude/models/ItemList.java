@@ -1,11 +1,12 @@
 package kude.models;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Stream;
 
-public class ItemList {
+public class ItemList implements Serializable {
     private List<Item> items;
 
     public ItemList() {
