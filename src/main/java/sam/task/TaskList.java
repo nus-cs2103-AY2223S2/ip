@@ -1,6 +1,7 @@
 package sam.task;
 
 import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Represents a list of tasks.
@@ -53,7 +54,7 @@ public class TaskList {
     /**
      * Sets the task with the specified id as done or not done.
      * 
-     * @param id The id of the task to mark.
+     * @param id     The id of the task to mark.
      * @param isDone Indicates whether the task is done.
      * @return {@code true} if successful.
      */
@@ -75,15 +76,31 @@ public class TaskList {
     }
 
     /**
-     * Generates a numbered string array of the list.
+     * Generates a numbered string array of all tasks in the list.
      * 
-     * @return A string array of the list.
+     * @return A string array of the tasks.
      */
-    public String[] generateList() {
-        String[] list = new String[count()];
+    public List<String> getTasks() {
+        List<String> list = new ArrayList<>(count());
+        for (int i = 0; i < count(); i++) {
+            Task task = tasks.get(i);
+            list.add(String.format("%d: %s", i + 1, task));
+        }
+        return list;
+    }
+
+    /**
+     * Generates a numbered string array of the tasks containing the specified substring.
+     * 
+     * @return A string array of the tasks.
+     */
+    public List<String> findTasks(String subString) {
+        List<String> list = new ArrayList<>();
         for (int i = 0; i < count(); i++) {
             Task t = tasks.get(i);
-            list[i] = String.format("%d: %s", i + 1, t);
+            if (t.title.contains(subString)) {
+                list.add(String.format("%d: %s", i + 1, t));
+            }
         }
         return list;
     }
