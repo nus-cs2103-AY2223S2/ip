@@ -1,15 +1,10 @@
-import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Duke {
-    private static ArrayList<Task> dukeList = new ArrayList<>();
 
     public static void main(String[] args) {
-        String logo = " ____        _        \n"
-                + "|  _ \\ _   _| | _____ \n"
-                + "| | | | | | | |/ / _ \\\n"
-                + "| |_| | |_| |   <  __/\n"
-                + "|____/ \\__,_|_|\\_\\___|\n";
+
+        TaskList taskList = new TaskList();
                 
         Scanner sc = new Scanner(System.in);
         String line = "init";
@@ -20,12 +15,12 @@ public class Duke {
                 Command command = Command.getCommand(line);
                 switch (command) {
                 case LIST:
-                    displayMsg(outputList());
+                    displayMsg(taskList.outputList());
                     break;
                 case MARK:  
                 case UNMARK:
                     int listIndex = Integer.parseInt(line.split(" ")[1]) - 1;
-                    Task targetTask = dukeList.get(listIndex);
+                    Task targetTask = taskList.get(listIndex);
                     String output; 
                     if (command == Command.MARK){
                         targetTask.markDone();
@@ -37,8 +32,8 @@ public class Duke {
                     displayMsg(output + "\n" + indentString(targetTask.toString(), 1));
                     break;
                 case DELETE:
-                    Task removedTask = removeTask(line);
-                    displayMsg("Noted. I've removed this task:\n" + indentString(removedTask.toString(), 1) + "\n" + countTasks());
+                    Task removedTask = taskList.removeTask(line);
+                    displayMsg("Noted. I've removed this task:\n" + indentString(removedTask.toString(), 1) + "\n" + taskList.countTasks());
                     break;
 
                 case EVENT:
@@ -53,9 +48,9 @@ public class Duke {
                         } else {
                             newTask = ToDo.create(line);
                         } 
-                        dukeList.add(newTask);
+                        taskList.add(newTask);
                         StringBuilder output2 = new StringBuilder();
-                        output2.append("Got it. I've added this task:\n" + indentString(newTask.toString(), 1) + "\n" + countTasks());
+                        output2.append("Got it. I've added this task:\n" + indentString(newTask.toString(), 1) + "\n" + taskList.countTasks());
                         displayMsg(output2.toString());
                     } catch (TaskInitError e) {
                         displayMsg("OOPS!!! " + e.getMessage());
@@ -65,20 +60,12 @@ public class Duke {
                     displayMsg("OOPS!!! I'm sorry, but I don't know what that means :-(");
                     break;
                 }
+                System.out.println("");
             }
-            System.out.println("");
             line = sc.nextLine();
         }
         sc.close();
         displayMsg("Bye. Hope to see you again soon!");
-    }
-
-    public static String outputList() {
-        StringBuilder result = new StringBuilder("Here are the tasks in your list:");
-        for (int index = 0; index < dukeList.size(); index++) {
-            result.append("\n" + (index + 1) + ". " + dukeList.get(index).toString());
-        }
-        return result.toString();
     }
 
     public static void displayMsg(String msg) {
@@ -98,14 +85,5 @@ public class Duke {
             result.append(indent + lines[i] + (i + 1 < lines.length ? "\n" : ""));
         }
         return result.toString();
-    }
-
-    public static Task removeTask(String command) {
-        int index = Integer.parseInt(command.split(" ")[1]) - 1;
-        return dukeList.remove(index);
-    }
-
-    public static String countTasks() {
-        return "Now you have " + dukeList.size() + " task" + (dukeList.size() == 1 ? "" : "s") + " in the list.";
     }
 }
