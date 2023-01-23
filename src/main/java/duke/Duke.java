@@ -1,5 +1,9 @@
+package duke;
+
+import duke.task.TaskList;
+
 import java.util.ArrayList;
-import java.util.Scanner;
+
 public class Duke {
     private static String[] spStg;
     private Ui ui;

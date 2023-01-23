@@ -1,3 +1,8 @@
+package duke.task;
+
+import duke.Parser;
+import duke.Ui;
+
 import java.util.ArrayList;
 import java.time.format.DateTimeParseException;
 
@@ -19,12 +24,12 @@ public class TaskList {
     }
 
     public void addTask() {
-        System.out.println("Got it. I've added this task:\n" + list.get(list.size() - 1));
+        System.out.println("Got it. I've added this duke.task:\n" + list.get(list.size() - 1));
         System.out.println("Now you have " + list.size() + " tasks in the list.");
     }
 
     public void delete(int i) {
-        System.out.println("Noted. I've removed this task:");
+        System.out.println("Noted. I've removed this duke.task:");
         System.out.println(list.get(i));
         list.remove(i);
         System.out.println("Now you have " + list.size() + " tasks in the list.");
@@ -32,12 +37,12 @@ public class TaskList {
 
     public void mark(int i) {
         list.get(i).mark();
-        System.out.println("Nice! I've marked this task as done:\n" + list.get(i));
+        System.out.println("Nice! I've marked this duke.task as done:\n" + list.get(i));
     }
 
     public void unmark(int i) {
         list.get(i).unmark();
-        System.out.println("OK, I've marked this task as not done yet:\n" + list.get(i));
+        System.out.println("OK, I've marked this duke.task as not done yet:\n" + list.get(i));
     }
 
     public void addTodo(String command) {
