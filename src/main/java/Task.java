@@ -3,7 +3,7 @@ public class Task {
     String tag = "[ ]";
     Boolean done = false;
 
-    public void genDscp(String input) {
+    public void genDscp(String input) throws DukeExceptions {
         this.task = input;
     }
     public void mark() {

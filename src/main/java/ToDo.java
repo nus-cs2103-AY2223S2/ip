@@ -5,8 +5,11 @@ public class ToDo extends Task{
     }
 
     @Override
-    public void genDscp(String input) {
+    public void genDscp(String input) throws InvalidTodo{
         String dscp = input.replace("todo ", "");
+        if (dscp.isBlank()) {
+            throw new InvalidTodo();
+        }
         super.task = dscp;
     }
 

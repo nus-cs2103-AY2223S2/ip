@@ -39,31 +39,46 @@ public class Duke {
                 continue;
             }
 
-            if (input.contains("todo")) {
+            if (input.contains("todo ")) {
                 Task todo = new ToDo();
-                todo.genDscp(input);
+                try {
+                    todo.genDscp(input);
+                } catch (DukeExceptions e){
+                    System.out.println(e.getMessage());
+                    continue;
+                }
                 hist.addHist(todo);
                 System.out.println(String.format("Now you have %d tasks in the list", hist.getNum()));
                 continue;
             }
 
-            if (input.contains("event")) {
+            if (input.contains("event ")) {
                 Task event = new Event();
-                event.genDscp(input);
+                try {
+                    event.genDscp(input);
+                } catch (DukeExceptions e) {
+                    System.out.println(e.getMessage());
+                    continue;
+                }
                 hist.addHist(event);
                 System.out.println(String.format("Now you have %d tasks in the list", hist.getNum()));
                 continue;
             }
 
-            if (input.contains("deadline")) {
+            if (input.contains("deadline ")) {
                 Task deadline = new Deadline();
-                deadline.genDscp(input);
+                try {
+                    deadline.genDscp(input);
+                } catch (DukeExceptions e) {
+                    System.out.println(e.getMessage());
+                    continue;
+                }
+
                 hist.addHist(deadline);
                 System.out.println(String.format("Now you have %d tasks in the list", hist.getNum()));
                 continue;
             }
-//            Task newTask = new Task(input);
-//            hist.addHist(newTask);
+            System.out.println("I do not understand your instructions...");
         }
         return;
     }
