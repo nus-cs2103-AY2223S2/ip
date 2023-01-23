@@ -18,7 +18,7 @@ public class Duke {
                 CommandInput command = CommandInput.getCommandInput(line);
                 switch (command) {
                 case LIST:
-                    new ListCmd(taskList).execute();
+                    new ListCmd(taskList, line).execute();
                     break;
                 case MARK:  
                     new MarkCmd(taskList, line).execute();

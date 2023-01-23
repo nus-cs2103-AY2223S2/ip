@@ -1,7 +1,7 @@
 public class ListCmd extends Command {
     
-    public ListCmd(TaskList taskList) {
-        super(taskList);
+    public ListCmd(TaskList taskList, String lineInput) {
+        super(taskList, lineInput);
     } 
 
     public void execute() {

@@ -1,9 +1,8 @@
 public class DeadlineCmd extends Command {
-    String lineInput;
     Task deadline;
 
     public DeadlineCmd(TaskList taskList, String lineInput) {
-        super(taskList);
+        super(taskList, lineInput);
         this.lineInput = lineInput;
     }
 

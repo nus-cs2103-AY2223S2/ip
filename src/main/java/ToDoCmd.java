@@ -1,9 +1,8 @@
 public class ToDoCmd extends Command {
-    String lineInput;
     Task toDo;
 
     public ToDoCmd(TaskList taskList, String lineInput) {
-        super(taskList);
+        super(taskList, lineInput);
         this.lineInput = lineInput;
     }
 
