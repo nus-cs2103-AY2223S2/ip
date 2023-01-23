@@ -27,4 +27,8 @@
 > !	Provide content
 > !	Provide deadline
 > !	Provide to
+> <	Deleted [D][ ] do homework (by: no idea :-p)
+<	List now contains 2 items
+> !	Invalid index
+> !	Invalid index
 > <<<	Bye

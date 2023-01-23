@@ -15,4 +15,7 @@ mark
 deadline
 deadline nani
 event nani /from sore
+delete 1
+delete 0
+delete 90
 bye

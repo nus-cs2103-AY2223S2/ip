@@ -34,6 +34,11 @@ public class Context {
         output.writeLine("List now contains " + items.list().count() + " items");
     }
 
+    public void notifyDeleted(Item item) {
+        output.writeLine("Deleted " + item);
+        output.writeLine("List now contains " + items.list().count() + " items");
+    }
+
     public String getArg(String provideName) {
         return parser.getArg().orElseThrow(() -> new DukeException("Provide " + provideName));
     }

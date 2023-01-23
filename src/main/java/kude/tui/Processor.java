@@ -82,6 +82,14 @@ public class Processor {
             ctx.getItems().add(item);
             ctx.notifyAdded(item);
         });
+
+        register("delete", ctx -> {
+            var index = ctx.getIndexArg();
+            var item = ctx.getItem(index);
+
+            ctx.getItems().delete(item);
+            ctx.notifyDeleted(item);
+        });
     }
 
     public void register(String command, Command cmd) {

@@ -20,6 +20,10 @@ public class ItemList {
         return items.stream();
     }
 
+    public boolean delete(Item item) {
+        return items.remove(item);
+    }
+
     public Optional<Item> get(int index) {
         if (index < 0 || index >= items.size()) {
             return Optional.empty();
