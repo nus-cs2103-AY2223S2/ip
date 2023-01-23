@@ -18,7 +18,8 @@ public class Deadline extends Task {
 
     @Override
     public String toFileString() {
-        return "D | " + super.toFileString() + " | " + this.by + "\n";
+        String formattedDate = this.by.format(DateTimeFormatter.ofPattern("dd-MM-yyyy"));
+        return "D | " + super.toFileString() + " | " + formattedDate+ "\n";
     }
 }
 
