@@ -1,8 +1,11 @@
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Scanner;
 
 public class Peppa {
@@ -101,51 +104,64 @@ public class Peppa {
     public static void insertTask(Command cmd, String input) throws PeppaEmptyDescriptionException, PeppaFormatException {
         String desc = extractDescription(cmd, input);
         switch (cmd) {
-            case TODO:
-                addTask(new Todo(desc));
-                break;
-            case EVENT:
-                int fromStartIndex = input.indexOf("/from") + 6;
-                int fromEndIndex = input.indexOf("/to") - 1;
-                int toStartIndex = input.indexOf("/to") + 4;
-                String from = input.substring(fromStartIndex, fromEndIndex);
-                String to = input.substring(toStartIndex);
+        case TODO:
+            addTask(new Todo(desc));
+            break;
+        case EVENT:
+            int fromStartIndex = input.indexOf("/from") + 6;
+            int fromEndIndex = input.indexOf("/to") - 1;
+            int toStartIndex = input.indexOf("/to") + 4;
+            try {
+                LocalDate from = LocalDate.parse(input.substring(fromStartIndex, fromEndIndex),
+                        DateTimeFormatter.ofPattern("dd/MM/yyyy"));
+                LocalDate to = LocalDate.parse(input.substring(toStartIndex),
+                        DateTimeFormatter.ofPattern("dd/MM/yyyy"));
                 addTask(new Event(desc, from, to));
-                break;
-            case DEADLINE:
-                int dueStartIndex = input.indexOf("/by") + 4;
-                if (dueStartIndex == 3) {
-                    throw new PeppaFormatException("Boink! Please ensure that your input is formatted correctly and try again.");
-                }
-                String due = input.substring(dueStartIndex);
-                addTask(new Deadline(desc, due));
+            } catch (DateTimeParseException e) {
+                System.out.println("Boink! Incorrect date format detected. " +
+                        "Please enter the date in dd/MM/yyyy.");
+            }
+            break;
+        case DEADLINE:
+            int dueStartIndex = input.indexOf("/by") + 4;
+            if (dueStartIndex == 3) {
+                throw new PeppaFormatException("Boink! Please ensure that your input is formatted correctly and try again.");
+            }
+            try {
+                LocalDateTime dueDate = LocalDateTime.parse(input.substring(dueStartIndex),
+                        DateTimeFormatter.ofPattern("dd/MM/yyyy HHmm"));
+                addTask(new Deadline(desc, dueDate));
+            } catch (DateTimeParseException e) {
+                System.out.println("Boink! Incorrect datetime format detected. " +
+                        "Please enter the date in dd/MM/yyyy and time in HHmm (ie. 24h).");
+            }
         }
     }
 
     public static void parseCommand(Command cmd, String input) throws PeppaEmptyDescriptionException, PeppaFormatException, IOException {
         switch (cmd) {
-            case LIST:
-                displayList();
-                break;
-            case MARK:
-                markDone(getTask(input));
+        case LIST:
+            displayList();
+            break;
+        case MARK:
+            markDone(getTask(input));
+            saveChanges();
+            break;
+        case UNMARK:
+            unmarkDone(getTask(input));
+            saveChanges();
+            break;
+        case DELETE:
+            deleteTask(input);
+            saveChanges();
+            break;
+        default:
+            try {
+                insertTask(cmd, input);
                 saveChanges();
-                break;
-            case UNMARK:
-                unmarkDone(getTask(input));
-                saveChanges();
-                break;
-            case DELETE:
-                 deleteTask(input);
-                 saveChanges();
-                 break;
-            default:
-                try {
-                    insertTask(cmd, input);
-                    saveChanges();
-                } catch (IndexOutOfBoundsException e) {
-                    System.out.println("Boink! Please ensure that your input is formatted correctly and try again.");
-                }
+            } catch (IndexOutOfBoundsException e) {
+                System.out.println("Boink! Please ensure that your input is formatted correctly and try again.");
+            }
         }
     }
 
@@ -181,10 +197,13 @@ public class Peppa {
             break;
         case("E"):
             String[] eventFields = fields[3].split("-");
-            tasks.add(new Event(taskDesc, eventFields[0], eventFields[1]));
+            tasks.add(new Event(taskDesc, LocalDate.parse(eventFields[0],
+                    DateTimeFormatter.ofPattern("MMM dd yyyy")),
+                    LocalDate.parse(eventFields[1], DateTimeFormatter.ofPattern("MMM dd yyyy"))));
             break;
         case("D"):
-            String deadline = fields[3];
+            LocalDateTime deadline = LocalDateTime.parse(fields[3],
+                    DateTimeFormatter.ofPattern("MMM dd yyyy',' hh'.'mma"));
             tasks.add(new Deadline(taskDesc, deadline));
             break;
         }
