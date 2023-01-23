@@ -1,6 +1,4 @@
 import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
-import java.time.format.DateTimeParseException;
 import java.util.HashMap;
 
 public class Sam {
@@ -29,9 +27,8 @@ public class Sam {
     }
     while (live) {
       String input = ui.acceptInput();
-      String[] splitInput = input.split(" ", 2);
       try {
-        processInput(splitInput);
+        processInput(Parser.splitFirst(input));
       } catch (SamException e) {
         ui.talk(e.getMessage());
       } finally {
@@ -49,14 +46,7 @@ public class Sam {
       SamMissingTaskTitleException, SamMissingTaskValueException, SamMissingTaskArgException,
       SamSaveFailedException, SamInvalidDateException
   {
-    Command command = null;
-    for (Command c : Command.values())
-      if (c.matches(input[0])) command = c;
-
-    if (command == null) {
-      throw new SamUnknownCommandException();
-    }
-    
+    Command command = Parser.getCommand(input[0]);
     switch (command) {
       case BYE:
         live = false;
@@ -103,25 +93,29 @@ public class Sam {
         if (input.length <= 1) {
           throw new SamMissingTaskTitleException();
         }
-        Task task = new ToDo(input[1]);
+        Parser.parseTaskArgs(input[1], taskArgs);
+
+        String title = taskArgs.get("title");
+        Task task = new ToDo(title);
+
         tasks.addTask(task);
         newTask(task);
         storage.save(tasks);
         break;
       }
       case EVENT: {
-        if (input.length <= 1 || input[1].strip().charAt(0) == '/') {
+        if (input.length <= 1) {
           throw new SamMissingTaskTitleException();
         }
-        String[] title = input[1].strip().split(" /", 2);
-        if (title.length > 1) parseTaskArgs(title[1]);
+        Parser.parseTaskArgs(input[1], taskArgs);
         if (!taskArgs.containsKey("from") || !taskArgs.containsKey("to")) {
           throw new SamMissingTaskArgException();
         }
 
-        LocalDate from = parseDate(taskArgs.get("from"));
-        LocalDate to = parseDate(taskArgs.get("to"));
-        Task task = new Event(title[0], from, to);
+        String title = taskArgs.get("title");
+        LocalDate from = Parser.parseDate(taskArgs.get("from"));
+        LocalDate to = Parser.parseDate(taskArgs.get("to"));
+        Task task = new Event(title, from, to);
 
         tasks.addTask(task);
         newTask(task);
@@ -129,19 +123,17 @@ public class Sam {
         break;
       }
       case DEADLINE: {
-        if (input.length <= 1 || input[1].strip().charAt(0) == '/') {
+        if (input.length <= 1) {
           throw new SamMissingTaskTitleException();
         }
-        String[] title = input[1].strip().split(" /", 2);
-        if (title.length > 1) parseTaskArgs(title[1]);
+        Parser.parseTaskArgs(input[1], taskArgs);
         if (!taskArgs.containsKey("by")) {
           throw new SamMissingTaskArgException();
         }
 
-
-        System.out.println(taskArgs.get("by"));
-        LocalDate by = parseDate(taskArgs.get("by"));
-        Task task = new Deadline(title[0], by);
+        String title = taskArgs.get("title");
+        LocalDate by = Parser.parseDate(taskArgs.get("by"));
+        Task task = new Deadline(title, by);
 
         tasks.addTask(task);
         newTask(task);
@@ -165,25 +157,9 @@ public class Sam {
     }
   }
 
-  private void parseTaskArgs(String input) throws SamMissingTaskValueException {
-    for (String arg : input.strip().split(" /")) {
-      String[] keyValue = arg.split(" ", 2);
-      if (keyValue.length <= 1) throw new SamMissingTaskValueException();
-      taskArgs.put(keyValue[0], keyValue[1]);
-    }
-  }
-
   private void newTask(Task task) {
     ui.talk("Gotcha, I'll add the task to your list:",
       task.toString(),
       String.format("Now you have %d tasks in the list", tasks.count()));
-  }
-  
-  public static LocalDate parseDate(String input) throws SamInvalidDateException {
-    try {
-      return LocalDate.parse(input, DateTimeFormatter.ofPattern("d/M/yyyy"));
-    } catch (DateTimeParseException e) {
-      throw new SamInvalidDateException();
-    }
   }
 }

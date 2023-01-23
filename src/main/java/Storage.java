@@ -51,13 +51,13 @@ public class Storage {
             t = new ToDo(arr[2], isDone);
             break; 
           case "E": {
-            LocalDate from = Sam.parseDate(arr[3]);
-            LocalDate to = Sam.parseDate(arr[4]);
+            LocalDate from = Parser.parseDate(arr[3]);
+            LocalDate to = Parser.parseDate(arr[4]);
             t = new Event(arr[2], from, to, isDone);
             break; 
           }
           case "D": {
-            LocalDate by = Sam.parseDate(arr[3]);
+            LocalDate by = Parser.parseDate(arr[3]);
             t = new Deadline(arr[2], by, isDone);
             break;
           }
