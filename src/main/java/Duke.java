@@ -15,12 +15,15 @@ public class Duke {
                 CommandInput command = CommandInput.getCommandInput(line);
                 switch (command) {
                 case LIST:
-                    Ui.listReply(taskList);
+                    new ListCmd(taskList).execute();;
                     break;
                 case MARK:  
+                    int listIndexMark = Integer.parseInt(line.split(" ")[1]) - 1;
+                    new MarkCmd(taskList, listIndexMark).execute();
+                    break;
                 case UNMARK:
-                    int listIndex = Integer.parseInt(line.split(" ")[1]) - 1;
-                    Task targetTask = taskList.get(listIndex);
+                    int listIndexUnmark = Integer.parseInt(line.split(" ")[1]) - 1;
+                    Task targetTask = taskList.get(listIndexUnmark);
                     String output; 
                     if (command == CommandInput.MARK){
                         targetTask.markDone();
