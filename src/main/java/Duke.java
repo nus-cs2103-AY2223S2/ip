@@ -1,17 +1,12 @@
-import java.awt.*;
 import java.io.File;
 import java.io.FileReader;
 import java.io.FileWriter;
-import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
-import java.lang.reflect.Array;
 import java.util.*;
 import java.util.List;
 import java.util.regex.Pattern;
-
-
 
 public class Duke {
 
@@ -68,16 +63,13 @@ public class Duke {
 
     public String[] deadlineSplitter(String message) throws DukeException  {
         String[] resultArr = new String[2];
-        String temp[] = message.split("/", 2);
-        if (temp.length == 1) {
+        Pattern p = Pattern.compile("/by");
+        String temp[] = p.split(message);
+        if (temp.length < 2) {
             throw new DukeException("Invalid format for Deadline.\nUsage: deadline <task> /by <date/time>\n");
         }
         String description = temp[0].trim();
-        String[] byTemp= temp[1].split(" ", 2);
-        if (byTemp.length == 1) {
-            throw new DukeException("Invalid format for Deadline.\nUsage: deadline <task> /by <date/time>\n");
-        }
-        String by = byTemp[1].trim();
+        String by = temp[1].trim();
         resultArr[0] = description;
         resultArr[1] = by;
         return resultArr;
@@ -85,21 +77,19 @@ public class Duke {
 
     public String[] eventSplitter(String message) throws DukeException {
         String[] resultArr = new String[3];
-        String temp[] = message.split("/", 3);
-        if (temp.length < 3) {
+        Pattern p1 = Pattern.compile("/from");
+        String temp1[] = p1.split(message);
+        if (temp1.length < 2) {
             throw new DukeException("Invalid format for Event.\nUsage: <task> /from <date/time> /to <date/time>\n");
         }
-        String description = temp[0].trim();
-        String[] fromTemp = temp[1].split(" ", 2);
-        if (fromTemp.length == 1) {
+        String description = temp1[0].trim();
+        Pattern p2 = Pattern.compile("/to");
+        String[] temp2 = p2.split(temp1[1]);
+        if (temp2.length < 2) {
             throw new DukeException("Invalid format for Event.\nUsage: <task> /from <date/time> /to <date/time>\n");
         }
-        String from = fromTemp[1].trim();
-        String[] toTemp = temp[2].split(" ", 2);
-        if (toTemp.length == 1) {
-            throw new DukeException("Invalid format for Event.\nUsage: <task> /from <date/time> /to <date/time>\n");
-        }
-        String to = toTemp[1].trim();
+        String from = temp2[0].trim();
+        String to = temp2[1].trim();
         resultArr[0] = description;
         resultArr[1] = from;
         resultArr[2] = to;

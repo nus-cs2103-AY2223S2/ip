@@ -1,7 +1,7 @@
 todo borrow book
 list
-deadline return book /by Sunday
-event project meeting /from Mon 2pm /to 4pm
+deadline return book /by 12/04/2023
+event orientation week /from 4/10/2023 /to 11/10/2023
 mark 2
 list
 invalid input
@@ -12,6 +12,5 @@ delete 2
 list
 deadline wrong
 event wrong /from wrong
-unmark 2
 list
 bye
