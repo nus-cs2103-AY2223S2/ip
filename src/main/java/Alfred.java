@@ -89,9 +89,9 @@ public class Alfred {
             default:
                 throw new AlfredException("I'm sorry, but I don't know what that means :<");
         }
-
+        String numTasks = itemsList.size() == 1 ? "task" : "tasks";
         String command = String.format("Noted, task added: \n      %s\n" +
-                "    Number of tasks in the list: %d\n", task, itemsList.size());
+                "    Number of %s in the list: %d\n", task, numTasks, itemsList.size());
         Alfred.echoCommand(command);
     }
 
@@ -153,7 +153,8 @@ public class Alfred {
             command.append(String.format("    %d. %s\n", itemIndex, item));
             itemIndex++;
         }
-        command.append(String.format("    You have %d tasks in the list\n", itemsList.size()));
+        String numTasks = itemsList.size() == 1 ? "task" : "tasks";
+        command.append(String.format("    You have %d %s in the list\n", itemsList.size(), numTasks));
         Alfred.echoCommand(command.toString());
     }
 
