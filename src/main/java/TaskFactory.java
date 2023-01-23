@@ -10,13 +10,13 @@ public class TaskFactory {
 
         try {
             switch (taskType) {
-                case "todo":
-                    return makeTodo(instruction);
-                case "deadline":
-                    return makeDeadline(instruction);
-                case "event":
-                    return makeEvent(instruction);
-                default:
+            case "todo":
+                return makeTodo(instruction);
+            case "deadline":
+                return makeDeadline(instruction);
+            case "event":
+                return makeEvent(instruction);
+            default:
 
             }
         } catch (MissingTaskDescriptionException e) {

@@ -37,25 +37,25 @@ public class TreeBot {
         String command = splitStr[0];
 
         switch (command) {
-            case "list":
-                listTasks();
-                break;
-            case "todo":
-            case "deadline":
-            case "event":
-                addTask(this.taskFactory.make(commandString));
-                break;
-            case "mark":
-                markTask(Integer.parseInt(splitStr[1]));
-                break;
-            case "unmark":
-                unmarkTask(Integer.parseInt(splitStr[1]));
-                break;
-            case "delete":
-                deleteTask(Integer.parseInt(splitStr[1]));
-                break;
-            default:
-                throw new InvalidCommandException("This command is invalid");
+        case "list":
+            listTasks();
+            break;
+        case "todo":
+        case "deadline":
+        case "event":
+            addTask(this.taskFactory.make(commandString));
+            break;
+        case "mark":
+            markTask(Integer.parseInt(splitStr[1]));
+            break;
+        case "unmark":
+            unmarkTask(Integer.parseInt(splitStr[1]));
+            break;
+        case "delete":
+            deleteTask(Integer.parseInt(splitStr[1]));
+            break;
+        default:
+            throw new InvalidCommandException("This command is invalid");
         }
     }
     private void addTask(Task task) {
