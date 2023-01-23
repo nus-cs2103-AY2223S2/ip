@@ -5,7 +5,7 @@ import java.util.List;
 public class Duke {
 
     private static Scanner sc = new Scanner(System.in);
-    private static List<String> backlog = new ArrayList<>();
+    private static TaskList taskList = new TaskList();
     public static void main(String[] args) {
         /*
         String logo = " ____        _        \n"
@@ -26,18 +26,25 @@ public class Duke {
                 break;
             }
 
-            if (command.equals("list")) {
-                int index = 1;
-                for (String logs : backlog) {
-                    System.out.println(index + "." + logs);
-                    index++;
+            if (command.contains("mark") || command.contains("unmark")) {
+                if (command.substring(0, 4).equals("mark")) {
+                    taskList.markTask(Integer.parseInt(command.substring(5)));
+                    continue;
                 }
-                System.out.println("");
+
+                if (command.substring(0, 6).equals("unmark")) {
+                    taskList.unmarkTask(Integer.parseInt(command.substring(7)));
+                    continue;
+                }
+            }
+
+            if (command.equals("list")) {
+                taskList.printTasks();
                 continue;
             }
 
-            backlog.add(command);
-            System.out.println("added: " + command + "\n");
+            Task task = new Task(command);
+            taskList.add(task);
         }
     }
 }
