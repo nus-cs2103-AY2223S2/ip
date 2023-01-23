@@ -20,17 +20,19 @@ public abstract class Task {
         return (isDone ? "X" : " "); // mark done task with X
     }
 
-    public void markAsDone() throws Exception{
-        if (isDone) {
-            throw new Exception("Already Done");
-        }
+    public boolean isDone() {
+        return this.isDone;
+    }
+
+    public String getDesc() {
+        return this.description;
+    }
+
+    public void markAsDone() {
         isDone = true;
     }
 
-    public void unmarkDone() throws Exception {
-        if (!isDone) {
-            throw new Exception("Task is already marked undone");
-        }
+    public void unmarkDone() {
         isDone = false;
     }
 
