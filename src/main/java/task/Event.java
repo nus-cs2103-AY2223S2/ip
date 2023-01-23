@@ -1,13 +1,13 @@
 package task;
 
-/**
- * The event class that extends the Task.Task class
- */
-
 import java.time.LocalDate;
 import ui.Parser;
 import duke.DukeException;
 
+/**
+ * The event class that extends the Task class.
+ * An even should have a start and an end date.
+ */
 public class Event extends Task {
     protected LocalDate startTime;
     protected LocalDate endTime;

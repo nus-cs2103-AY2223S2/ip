@@ -16,6 +16,11 @@ public class DukeException extends Exception {
         this.errorMessage = errorMessage;
     }
 
+    /**
+     * Returns the error message as a string
+     *
+     * @return the string error message
+     */
     @Override
     public String toString() {
         return this.errorMessage;

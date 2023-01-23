@@ -14,4 +14,3 @@ public class EventTest {
         assertEquals("[E][ ] Love Iko (from: Aug 19 2022 to: Dec 31 +999999999)", event.toString());
     }
 }
-

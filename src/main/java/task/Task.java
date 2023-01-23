@@ -1,12 +1,11 @@
 package task;
 
-/**
- * The base class for all tasks
- */
-
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
+/**
+ * The base class for all tasks.
+ */
 
 public class Task {
     protected String name;
@@ -23,7 +22,8 @@ public class Task {
     /**
      * The task string description
      *
-     * @param description: a string describing the task
+     * @param description: a string describing the task, which should include the parameters
+     *                   corresponding to the task
      */
     public Task(String description) {
         this.name = description;
@@ -41,7 +41,7 @@ public class Task {
     }
 
     /**
-     * Get the name of the task
+     * Get the name of the task. The name is the content of the task (what to do)
      *
      * @return the string name of the task
      */
@@ -50,7 +50,7 @@ public class Task {
     }
 
     /**
-     * Get whether the task is done
+     * Get whether the task is done.
      *
      * @return the status of the task
      */
@@ -59,21 +59,21 @@ public class Task {
     }
 
     /**
-     * Mark this task as done
+     * Mark the task as done.
      */
     public void markDone() {
         this.isDone = true;
     }
 
     /**
-     * Mark this task as undone
+     * Mark the task as undone.
      */
     public void unmarkDone() {
         this.isDone = false;
     }
 
     /**
-     * Get the string icon of the status of the task
+     * Get the string icon of the status of the task. It is either space or X.
      *
      * @return the string icon of the task status
      */
@@ -82,7 +82,8 @@ public class Task {
     }
 
     /**
-     * Overriding
+     * Overrides the original toString method. The status and the task content
+     * are reflected in the string representation.
      *
      * @return the task string
      */
@@ -92,8 +93,10 @@ public class Task {
     }
 
     /**
-     * Return the type of the task.
-     * @return the type, which is a string
+     * Return the type of the task, which is a character,
+     * such as "D" for deadline and "E" for event
+     *
+     * @return the type character
      */
     public String getType() {
         return type;

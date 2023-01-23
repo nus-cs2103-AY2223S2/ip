@@ -1,7 +1,8 @@
 package task;
 
 /**
- * The to-do class extending from the Task.Task class
+ * The to-do class extending from the Task.Task class.
+ * To-do items have no starting date or deadlines.
  */
 public class ToDo extends Task {
     /**

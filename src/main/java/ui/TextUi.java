@@ -10,21 +10,34 @@ public class TextUi {
     protected final String name;
     protected final Scanner scanner;
 
+    /**
+     * Constructor
+     *
+     * @param name: string name of the robot duke.
+     */
     public TextUi(String name) {
         this.name = name;
         this.scanner = new Scanner(System.in);
     }
 
+    /**
+     * Prints a welcome message when starting up
+     */
     public void showWelcome() {
         printStructuredString(String.format("Hello! I'm %s\nWhat can I do for you?", name));
     }
 
+    /**
+     * Waits for and reads user input.
+     *
+     * @return the string input from the user
+     */
     public String getUserInput() {
         return scanner.nextLine();
     }
 
     /**
-     * Print the string in a pre-specified format
+     * Print the string in a pre-specified format.
      *
      * @param string: the string content to print out
      */
@@ -34,7 +47,8 @@ public class TextUi {
     }
 
     /**
-     * Returns the end message and do final clean-up
+     * Returns the end message and do final clean-up.
+     * Specifically history commands are saved to a local file.
      *
      */
     public void sayGoodbye() {
@@ -42,7 +56,7 @@ public class TextUi {
     }
 
     /**
-     * Checks if the command marks the end
+     * Checks if the command marks the end.
      *
      * @param string: User-input string
      * @return if the string marks the end of the conversation

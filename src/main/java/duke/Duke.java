@@ -15,9 +15,10 @@ import java.util.ArrayList;
 
 
 /**
- * duke.Duke is the class that responds to user enquiry
- * It performs processing user-input commands, recording, as well as
- * carrying out actual operations.
+ * duke.Duke is the class that responds to user enquiry.
+ * It has other objects such as UI and storage, and connected these components
+ * to process user-input commands, recording, carry out actual operations, and respond
+ * to users.
  */
 public class Duke {
     protected final TextUi ui;
@@ -79,7 +80,7 @@ public class Duke {
     }
 
     /**
-     * Load record from file
+     * Load record file
      */
     public void loadRecord() {
         storage.loadRecordIfExists(commandList);
@@ -87,13 +88,17 @@ public class Duke {
             try {
                 handleCommand(s, true);
             } catch (DukeException e) {
-                ;
+                System.out.println(e.toString());
             }
         }
     }
 
     /**
-     * Handles the input string from the user
+     * Handles the input string from the user. It checks whether the input is
+     * some command and performs the corresponding operation.
+     *
+     * In case of invalid or incomplete command, it throws an error message
+     * to the user and prompts for a new command.
      *
      * @param inMsg:         the input message from the user
      * @param suppressPrint: suppress print out message or not
@@ -157,7 +162,7 @@ public class Duke {
     }
 
     /**
-     * Mark a task as done
+     * Mark a task as done by index
      *
      * @param idx: index of the task
      * @return the string message to print out
@@ -169,7 +174,7 @@ public class Duke {
     }
 
     /**
-     * Mark a task as undone
+     * Mark a task as undone by index
      *
      * @param idx: index of the task
      * @return the string message to print out
@@ -181,7 +186,7 @@ public class Duke {
     }
 
     /**
-     * Delete a task
+     * Delete a task by index
      *
      * @param idx: the index of the task
      * @return the string message to print out
@@ -194,7 +199,8 @@ public class Duke {
     }
 
     /**
-     * Add user command to a list
+     * Add user command to a list. The list will be used for
+     * saving to local files as history.
      *
      * @param string: the user-input command
      */
@@ -203,7 +209,8 @@ public class Duke {
     }
 
     /**
-     * Get the string containing all commands
+     * Get the string representation of all history commands.
+     * This is different from the string of all tasks.
      *
      * @return the string containing all commands
      */

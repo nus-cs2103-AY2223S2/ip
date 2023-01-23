@@ -8,7 +8,7 @@ import java.time.LocalDate;
 import java.time.format.DateTimeParseException;
 
 /**
- * A string parser that processes user-input commands
+ * A string parser that processes user-input commands.
  */
 public class Parser {
     /**
@@ -53,7 +53,7 @@ public class Parser {
     }
 
     /**
-     * Parse the date into a date object
+     * Parse the user-input date string into a date object
      *
      * @param dateString: the string representation of the date
      * @return the date object

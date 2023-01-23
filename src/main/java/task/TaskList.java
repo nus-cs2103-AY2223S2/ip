@@ -4,7 +4,8 @@ import java.util.ArrayList;
 
 
 /**
- * A data structure that saves a list of tasks. It is directly inherited from ArrayList<Task.Task>
+ * A data structure that saves a list of tasks.
+ * It is directly inherited from ArrayList<Task.Task>
  */
 public class TaskList extends ArrayList<Task> {
     /**

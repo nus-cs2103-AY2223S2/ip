@@ -1,19 +1,19 @@
 package task;
 
-/**
- * A deadline class extends from the Task.Task.
- * It has a deadline attribute on top of the task.
- */
-
 import java.time.LocalDate;
 
 import duke.DukeException;
 import ui.Parser;
 
+/**
+ * A deadline class extends from the Task.Task.
+ * It has a deadline attribute on top of the task.
+ */
 public class Deadline extends Task {
     protected LocalDate time;
 
     /***
+     * Constructor.
      *
      * @param description: the content of the user command
      * @throws DukeException when the command is incomplete
@@ -31,7 +31,8 @@ public class Deadline extends Task {
     }
 
     /**
-     * Returns the string representation
+     * Returns the string representation of the task.
+     * The deadline date is included.
      *
      * @return string representation of a deadline task, where the deadline is specified
      */
