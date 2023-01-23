@@ -6,15 +6,6 @@ import duke.util.Parser;
 import duke.util.Storage;
 import duke.util.Ui;
 
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.FileWriter;
-import java.io.IOException;
-import java.time.LocalDate;
-import java.time.format.DateTimeParseException;
-import java.util.ArrayList;
-import java.util.Scanner;
-
 public class Duke {
 
     public static String LOGO = "______     ______     __     __    \n" +
