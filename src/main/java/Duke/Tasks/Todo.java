@@ -1,6 +1,5 @@
 package Duke.Tasks;
 
-
 /**
  * Represents the Todo class
  */

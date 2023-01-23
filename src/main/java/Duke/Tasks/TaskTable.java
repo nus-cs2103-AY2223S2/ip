@@ -2,7 +2,6 @@ package Duke.Tasks;
 
 import java.util.ArrayList;
 
-
 /**
  * Represents the class Task Table which keeps track of all the tasks
  */
