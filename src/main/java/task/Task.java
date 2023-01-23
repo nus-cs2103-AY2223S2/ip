@@ -31,16 +31,6 @@ public class Task {
     }
 
     /**
-     * Parse the date into a date object
-     *
-     * @param dateString: the string representation of the date
-     * @return the date object
-     */
-    protected static LocalDate parseDate(String dateString) {
-        return LocalDate.parse(dateString);
-    }
-
-    /**
      * Gives the string representation of date
      *
      * @param date: a date object

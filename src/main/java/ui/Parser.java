@@ -4,6 +4,9 @@ import command.Command;
 
 import duke.DukeException;
 
+import java.time.LocalDate;
+import java.time.format.DateTimeParseException;
+
 /**
  * A string parser that processes user-input commands
  */
@@ -47,5 +50,19 @@ public class Parser {
             break;
         }
         return isCommand;
+    }
+
+    /**
+     * Parse the date into a date object
+     *
+     * @param dateString: the string representation of the date
+     * @return the date object
+     */
+    public static LocalDate parseDate(String dateString) throws DukeException {
+        try {
+            return LocalDate.parse(dateString);
+        } catch (DateTimeParseException e) {
+            throw new DukeException("The date could not be parsed!");
+        }
     }
 }

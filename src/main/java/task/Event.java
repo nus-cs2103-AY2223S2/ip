@@ -1,8 +1,12 @@
-package task; /**
+package task;
+
+/**
  * The event class that extends the Task.Task class
  */
 
 import java.time.LocalDate;
+import ui.Parser;
+import duke.DukeException;
 
 public class Event extends Task {
     protected LocalDate startTime;
@@ -13,13 +17,13 @@ public class Event extends Task {
      *
      * @param description: the content of the command
      */
-    public Event(String description) {
+    public Event(String description) throws DukeException {
         super();
         int indexOfFrom = description.indexOf("/from");
         int indexOfTo = description.indexOf("/to");
         this.name = description.substring(0, indexOfFrom - " ".length());
-        this.startTime = Task.parseDate(description.substring(indexOfFrom + "/from ".length(), indexOfTo - " ".length()));
-        this.endTime = Task.parseDate(description.substring(description.indexOf("/to") + "/to ".length()));
+        this.startTime = Parser.parseDate(description.substring(indexOfFrom + "/from ".length(), indexOfTo - " ".length()));
+        this.endTime = Parser.parseDate(description.substring(description.indexOf("/to") + "/to ".length()));
         this.type = "E";
     }
 

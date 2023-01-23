@@ -8,6 +8,7 @@ package task;
 import java.time.LocalDate;
 
 import duke.DukeException;
+import ui.Parser;
 
 public class Deadline extends Task {
     protected LocalDate time;
@@ -21,7 +22,7 @@ public class Deadline extends Task {
         super();
         int indexOfBy = description.indexOf("/by");
         try {
-            this.time = Task.parseDate(description.substring(indexOfBy + "/by ".length()));
+            this.time = Parser.parseDate(description.substring(indexOfBy + "/by ".length()));
             this.name = description.substring(0, indexOfBy - " ".length());
         } catch (StringIndexOutOfBoundsException e) {
             throw new DukeException("The command argument is not complete.");
