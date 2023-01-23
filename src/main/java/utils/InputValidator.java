@@ -43,7 +43,7 @@ public class InputValidator {
     }
 
     public static String[] normaliseDeadlineInput(String input) throws
-            IndexOutOfBoundsException, InvalidCommandException, NoDeadlineFoundException {
+            InvalidCommandException, NoDeadlineFoundException {
         String[] split = input.split(" ");
         if (split.length < 4) {
             throw new InvalidCommandException("Invalid Syntax - \"deadline [title] /by [deadline]\" (e.g. \"deadline physics project /by tomorrow 3pm\"");
@@ -71,14 +71,18 @@ public class InputValidator {
         }
 
         String[] res = new String[3];
-        res[0] = input.substring(0, 8);
-        res[2] = extractDeadline(input);
-        res[1] = input.substring(9, input.indexOf("/by ") - 1);
+        try {
+            res[0] = input.substring(0, 8);
+            res[2] = extractDeadline(input);
+            res[1] = input.substring(9, input.indexOf("/by ") - 1);
+        } catch (IndexOutOfBoundsException e) {
+            throw new InvalidCommandException("Unable to normalise input as a Deadline input");
+        }
+
         return res;
     }
 
-    public static String[] normaliseEventInput(String input) throws
-            IndexOutOfBoundsException, InvalidCommandException,
+    public static String[] normaliseEventInput(String input) throws InvalidCommandException,
             NoStartDateTimeFoundException, NoEndDateTimeFoundException {
         String[] split = input.split(" ");
         if (split.length < 6) {
@@ -108,11 +112,15 @@ public class InputValidator {
         }
 
         String[] res = new String[4];
-        res[0] = input.substring(0, 5);
+        try {
+            res[0] = input.substring(0, 5);
+            res[1] = input.substring(6, input.indexOf(firstKeyword + " ") - 1);
+            res[2] = extractStartDateTime(input);
+            res[3] = extractEndDateTime(input);
+        } catch (IndexOutOfBoundsException e) {
+            throw new InvalidCommandException("Unable to normalise input as a Event input");
+        }
 
-        res[1] = input.substring(6, input.indexOf(firstKeyword + " ") - 1);
-        res[2] = extractStartDateTime(input);
-        res[3] = extractEndDateTime(input);
         return res;
     }
 
