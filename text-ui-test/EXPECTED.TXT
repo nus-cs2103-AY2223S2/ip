@@ -15,54 +15,21 @@ currently you have 1 tasks
 
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 Aite letsgetit you added:
-   [D][ ] proj  |by: today|
+   [D][ ] proj  |by:  today|
 currently you have 2 tasks
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 Aite letsgetit you added:
-   [E][ ] CNY  |from: sun  to:  tues|
+   [E][ ] CNY  |from:  sun  to:  tues|
 currently you have 3 tasks
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 Hurry up and finish these tasks:
    [T][ ] read
-   [D][ ] proj  |by: today|
-   [E][ ] CNY  |from: sun  to:  tues|
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-Congrats this has been done:
-   [T][X] read
-One down, Leskooo!
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-Congrats this has been done:
-   [D][X] proj  |by: today|
-One down, Leskooo!
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-Hurry up and finish these tasks:
-   [T][X] read
-   [D][X] proj  |by: today|
-   [E][ ] CNY  |from: sun  to:  tues|
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
-Number entered out of range, type the number again
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-Alright, new task:
-   [T][ ] read
-We can do dis!
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-Hurry up and finish these tasks:
-   [T][ ] read
-   [D][X] proj  |by: today|
-   [E][ ] CNY  |from: sun  to:  tues|
+   [D][ ] proj  |by:  today|
+   [E][ ] CNY  |from:  sun  to:  tues|
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
