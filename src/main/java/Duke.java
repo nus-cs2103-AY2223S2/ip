@@ -60,18 +60,7 @@ public class Duke {
             }
         }
 
-        // Idea for the following code snippet is taken from:
-        // https://stackoverflow.com/questions/1053467/how-do-i-save-a-string-to-a-text-file-using-java
-        try {
-            ArrayList<String> lst = new ArrayList<>();
-            lst.add("3");
-            lst.add("[T][X] read book");
-            lst.add("[D][ ] return book (by: June 6th)");
-            lst.add("[E][ ] project meeting (from: Aug 6th 2pm to: 4pm)");
-            Files.write(Paths.get(path), lst);
-        } catch (IOException err) {
-            System.out.println(err);
-        }
+
 
         while (!checker.checkEnd(userInput)) {
             if (checker.checkListRequest(userInput)) {
@@ -151,7 +140,7 @@ public class Duke {
             }
             userInput = scan.nextLine();
         }
-
+        addToFile(lstOfItems);
         endMessage();
 
     }
@@ -199,5 +188,22 @@ public class Duke {
             task.makeCompleted();
         }
         lstOfItems.add(task);
+    }
+
+    public static void addToFile(ArrayList<Task> lstOfItems) {
+        String path = "src/data/duke.txt";
+        // Idea for the following code snippet is taken from:
+        // https://stackoverflow.com/questions/1053467/how-do-i-save-a-string-to-a-text-file-using-java
+        try {
+            ArrayList<String> lst = new ArrayList<>();
+            lst.add(String.valueOf(lstOfItems.size()));
+            for (int i = 0; i < lstOfItems.size(); i++) {
+                Task current = lstOfItems.get(i);
+                lst.add(current.toString());
+            }
+            Files.write(Paths.get(path), lst);
+        } catch (IOException err) {
+            System.out.println(err);
+        }
     }
 }
