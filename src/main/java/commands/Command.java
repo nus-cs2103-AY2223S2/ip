@@ -37,6 +37,8 @@ abstract public class Command {
                     return new UndoneCommand(input, ui);
                 case DELETE:
                     return new DeleteCommand(input, ui);
+                case FIND:
+                    return new FindCommand(input, ui);
                 case TODO:
                     return new TodoCommand(input, ui);
                 case DEADLINE:
@@ -64,6 +66,7 @@ enum CommandType {
     DONE,
     UNDONE,
     DELETE,
+    FIND,
     TODO,
     DEADLINE,
     EVENT,
