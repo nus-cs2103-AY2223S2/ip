@@ -66,6 +66,7 @@ public class Duke {
                     break;
                 }
             }
+            System.out.println("");
             line = sc.nextLine();
         }
         sc.close();
