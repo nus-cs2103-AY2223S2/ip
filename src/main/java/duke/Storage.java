@@ -4,6 +4,8 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.Scanner;
 
 import duke.exception.InvalidArgumentException;
@@ -19,11 +21,14 @@ public class Storage {
     private Ui ui;
 
     public Storage(String path, Ui ui) {
-        this.dataFile = new File(path);
+        Path fullPath = Paths.get(System.getProperty("user.dir"), path);
+        System.out.println(fullPath.toString());
+        this.dataFile = fullPath.toFile();
         this.hasFile = true;
         this.ui = ui;
 
         try {
+            this.dataFile.getParentFile().mkdir();
             this.dataFile.createNewFile();
         } catch (IOException e) {
             // do nothing if we can't create the file.

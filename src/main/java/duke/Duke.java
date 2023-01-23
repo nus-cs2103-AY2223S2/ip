@@ -5,7 +5,7 @@ import duke.exception.DukeException;
 
 public class Duke {
 
-    private static final String PATH = "duke.txt";
+    private static final String PATH = "/data/duke.txt";
 
     private Ui ui;
     private TaskList taskList;
