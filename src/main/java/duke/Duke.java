@@ -10,23 +10,25 @@ import java.util.stream.Stream;
 
 import duke.commands.*;
 import duke.commands.taskCommand.*;
+import duke.main.Ui;
 import duke.task.Task;
 import duke.task.TaskList;
 
 public class Duke {
     private final TaskList tasks;
-    private final CommandStore commands;
+    private final Parser commands;
 
     public Duke(List<Task> tasks) {
       this.tasks = TaskList.fromIterable(tasks);
-      this.commands = new CommandStore(Stream.<Supplier<Command>>of(
+      this.commands = new Parser(Stream.<Supplier<Command>>of(
         ListCommand::new,
         MarkCommand::new,
         UnmarkCommand::new,
         TodoCommand::new,
         DeadlineCommand::new,
         EventCommand::new,
-        DeleteCommand::new
+        DeleteCommand::new,
+        SaveCommand::new
       ).map(Supplier::get));
     }
 
@@ -37,12 +39,7 @@ public class Duke {
     public final TaskList getTaskList() { return tasks; }
 
     public void runDuke() throws IOException {
-      String logo = " ____        _        \n"
-            + "|  _ \\ _   _| | _____ \n"
-            + "| | | | | | | |/ / _ \\\n"
-            + "| |_| | |_| |   <  __/\n"
-            + "|____/ \\__,_|_|\\_\\___|\n";
-      System.out.println("Hello from\n" + logo);        
+      Ui.printLogo();   
 
       try (final BufferedReader reader = new BufferedReader(new InputStreamReader(System.in))) {
         while (true) {
@@ -52,8 +49,7 @@ public class Duke {
                 return;
             } else if (input.isEmpty()) continue;
 
-            Stream<String> outputs = this.commands.executeCommand(input, this);
-            outputs.forEach(System.out::println);
+            this.commands.executeCommand(input, this);
         }
       }
     }

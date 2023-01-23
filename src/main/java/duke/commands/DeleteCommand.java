@@ -11,20 +11,16 @@ public class DeleteCommand extends Command {
   }
 
   @Override
-  protected void execute(String[] args, Duke instance) {
+  protected void execute(String[] args, Duke instance) throws ValidationException {
     try {
-        if (args.length == 1) {
-            output("Needed an index for delete");
-            return;
-        }
+        validate(args.length > 1, "Needed an index for delete");
 
         int index = Integer.parseInt(args[1]);
         List<Task> tasks = instance.getTaskList();
         Task removed = tasks.remove(index - 1);
         output("Removed this task!\n%s\n", removed.toString());
     } catch (NumberFormatException e) {
-        output("Invalid index!");
+        throw new ValidationException("Invalid index!");
     }
   }
-  
 }

@@ -12,13 +12,10 @@ public class UnmarkCommand extends Command {
   }
 
   @Override
-  protected void execute(String[] args, Duke instance) {
+  protected void execute(String[] args, Duke instance) throws ValidationException {
     List<Task> tasks = instance.getTaskList();
     try {
-      if (args.length == 1) {
-        output("Needed an index for unmark");
-        return;
-      }
+      validate(args.length > 1, "Needed an index for unmark");
 
       int index = Integer.parseInt(args[1]);
       if (index < 1 || index > tasks.size()) throw new NumberFormatException();
@@ -26,7 +23,7 @@ public class UnmarkCommand extends Command {
       tasks.get(index - 1).setDone(false);
       output("Marked this as not done!\n%s\n", tasks.get(index - 1).toString());
     } catch (NumberFormatException e) {
-      output("Invalid index!\n");
+      throw new ValidationException("Invalid index!\n");
     }
   }
 }
