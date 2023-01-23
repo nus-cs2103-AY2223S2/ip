@@ -331,10 +331,11 @@ public class DukeEngine {
             sb.append((currTask.hasDone()) ? "1" : "0").append("@");
             sb.append(currTask.getTaskName());
             if (currTask.getTag().equals("D")) {
+                // Here by default use pattern yyyy-MM-dd
                 sb.append("@").append(currTask.getDeadLine());
             } else if (currTask.getTag().equals("E")) {
-                sb.append("@").append(currTask.getFromTime()).
-                        append("@").append(currTask.getToTime());
+                sb.append("@").append(currTask.getStart()).
+                        append("@").append(currTask.getEnd());
             }
             sb.append("\n");
         }
@@ -343,7 +344,7 @@ public class DukeEngine {
 
     public static Task fetchTask(String fileLine) {
         // System.out.println(fileLine);
-        // still get issues
+        // Still get issues -- must be able to parse the date time!!
         Task newTask;
         // DO NOT USE | as separator!! You need \\| for escape. Better use @
         String[] temp = fileLine.split("@");
@@ -352,11 +353,16 @@ public class DukeEngine {
         if (temp[0].equals("T")) {
             newTask = new ToDo(temp[2], isDone);
         } else if (temp[0].equals("D")) {
-            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("d/MM/yyyy");
+            DateTimeFormatter formatter =
+                    DateTimeFormatter.ofPattern("yyyy-MM-dd", new Locale("en"));
             LocalDate deadline = LocalDate.parse(temp[3], formatter);
             newTask = new DeadLine(temp[2], isDone, deadline);
         } else {
-            newTask = new Event(temp[2], isDone, temp[3], temp[4]);
+            DateTimeFormatter formatter =
+                    DateTimeFormatter.ofPattern("yyyy-MM-dd", new Locale("en"));
+            LocalDate start = LocalDate.parse(temp[3], formatter);
+            LocalDate end = LocalDate.parse(temp[4], formatter);
+            newTask = new Event(temp[2], isDone, start, end);
         }
         return newTask;
     }
