@@ -52,9 +52,33 @@ public class TaskList {
         String strData = Files.readString(fileName);
 
         String[] strTasks = strData.split("\n");
-        for (String task : strTasks) {
-            System.out.println(task);
-        }
+        for (String strTask : strTasks) {
+            String[] info1 = strTask.split("\\[");
+            char taskType = info1[1].charAt(0);
+            boolean isDone = info1[2].charAt(0) == 'x';
 
+            String[] info2 = info1[2].split(" \\(");
+
+            Task task;
+            String taskName = info2[0].substring(3);;
+            switch (taskType) {
+            case ('T'):
+                task = new ToDo(taskName, isDone);
+                this.tasks.add(task);
+                break;
+            case ('D'):
+                String dueDate = info2[1].substring(4, info2[1].length() -1);
+                task = new Deadline(taskName, dueDate, isDone);
+                this.tasks.add(task);
+                break;
+            case ('E'):
+                String[] info3 = info2[1].split(" to: ");
+                String fromDate = info3[0].substring(6);
+                String toDate = info3[1].substring(0, info3[1].length() - 1);
+                task = new Event(taskName, fromDate, toDate, isDone);
+                this.tasks.add(task);
+                break;
+            }
+        }
     }
 }

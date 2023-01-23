@@ -4,7 +4,7 @@ public class Deadline extends Task {
     // Factory method
     public static Deadline create(String commandInput) throws TaskNameNotSpecified, DeadlineByNotSpecified {
         String[] parseInfo = parseCmd(commandInput);
-        return new Deadline(parseInfo[0], parseInfo[1]);
+        return new Deadline(parseInfo[0], parseInfo[1], false);
     }
 
     public static String[] parseCmd(String commandInput) throws TaskNameNotSpecified, DeadlineByNotSpecified {
@@ -35,9 +35,10 @@ public class Deadline extends Task {
 
     }
     
-    public Deadline(String taskName, String dueDate) {
+    public Deadline(String taskName, String dueDate, boolean isDone) {
         super(taskName, "D");
         this.dueDate = dueDate;
+        this.completed = isDone;
     }
 
     @Override

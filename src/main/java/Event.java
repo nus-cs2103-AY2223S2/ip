@@ -4,13 +4,14 @@ public class Event extends Task {
 
     public static Event create(String commandInput) throws TaskNameNotSpecified, EventFromToNotSpecified {
         String[] parseInfo = parseCmd(commandInput);
-        return new Event(parseInfo[0], parseInfo[1], parseInfo[2]);
+        return new Event(parseInfo[0], parseInfo[1], parseInfo[2], false);
     }
 
-    public Event(String taskName, String fromDate, String toDate) {
+    public Event(String taskName, String fromDate, String toDate, boolean isDone) {
         super(taskName, "E");
         this.fromDate = fromDate;
         this.toDate = toDate;
+        this.completed = isDone;
     }
 
     public static String[] parseCmd(String commandInput) throws TaskNameNotSpecified, EventFromToNotSpecified {

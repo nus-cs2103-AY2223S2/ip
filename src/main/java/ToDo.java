@@ -3,7 +3,7 @@ public class ToDo extends Task {
     // Factory method
     public static ToDo create(String commandInput) throws TaskNameNotSpecified {
         try {
-            return new ToDo(parseCmd(commandInput)[0]);
+            return new ToDo(parseCmd(commandInput)[0], false);
         } catch (StringIndexOutOfBoundsException e) {
             throw new TaskNameNotSpecified("ToDo description cannot be empty.");
         }
@@ -14,8 +14,9 @@ public class ToDo extends Task {
         return parseInfo;
     }
 
-    public ToDo(String taskName) {
+    public ToDo(String taskName, boolean isDone) {
         super(taskName, "T");
+        this.completed = isDone;
     }
 
     @Override
