@@ -1,4 +1,5 @@
 import java.io.IOException;
+import java.time.format.DateTimeParseException;
 
 public class TwoFive {
     private Ui ui;
@@ -12,6 +13,8 @@ public class TwoFive {
             tasks = new TaskList(storage.load());
         } catch (IOException | TwoFiveException e) {
             ui.showError(e.getMessage());
+        } catch (DateTimeParseException e) {
+            ui.showError("Deadline/start time/end time must be in the format yyyy-MM-dd HH:mm, e.g. 2023-01-23 16:31");
         }
     }
 

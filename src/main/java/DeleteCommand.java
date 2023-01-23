@@ -9,7 +9,9 @@ public class DeleteCommand extends Command {
         if (this.taskNum < 0 || this.taskNum >= tasks.getTasksNum()) {
             throw new InvalidTaskException();
         } else {
-            tasks.deleteTask(this.taskNum);
+            Task currentTask = tasks.deleteTask(this.taskNum);
+            ui.showMesssage("Noted. I've removed this task:\n " + currentTask + "\n"
+                    + "Now you have " + tasks.getTasksNum() + " tasks in the list");
         }
     }
 }

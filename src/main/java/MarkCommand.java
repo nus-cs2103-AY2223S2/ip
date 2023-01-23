@@ -10,7 +10,8 @@ public class MarkCommand extends Command {
         if (this.taskNum < 0 || this.taskNum >= tasks.getTasksNum()) {
             throw new InvalidTaskException();
         } else {
-            tasks.setTaskAsDone(taskNum);
+            Task currentTask = tasks.setTaskAsDone(taskNum);
+            ui.showMesssage("Nice! Congrats for completing this task:\n " + currentTask);
         }
     }
 }

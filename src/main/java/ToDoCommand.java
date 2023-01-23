@@ -10,5 +10,7 @@ public class ToDoCommand extends Command {
         ToDo newToDo = new ToDo(taskDescription);
         //Adds new task to list of tasks
         tasks.addTask(newToDo);
+        ui.showMesssage("Got it. I've added this task:\n " + newToDo + "\n"
+                + "Now you have " + tasks.getTasksNum() + " tasks in the list");
     }
 }

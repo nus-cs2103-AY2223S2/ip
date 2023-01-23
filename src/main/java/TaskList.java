@@ -14,63 +14,65 @@ public class TaskList {
         this.tasks = tasks;
     }
 
-    public void listTasks() {
-        System.out.println("Here are the tasks in your list:");
+    public String getTasksList() {
+        StringBuilder stringBuilder = new StringBuilder("Here are the tasks in your list:\n");
         int taskIndex = 1;
         for (Task task: tasks) {
-            System.out.println(taskIndex + ". " + task);
+            stringBuilder.append(taskIndex + ". " + task);
+            if (taskIndex - 1 < tasks.size() - 1) {
+                stringBuilder.append("\n");
+            }
             taskIndex++;
         }
+        return stringBuilder.toString();
     }
 
     public int getTasksNum() {
         return tasks.size();
     }
 
-    //Returns string to be printed when new task is added
-    private String numTasksString(int numTasks) {
-        return "Now you have " + numTasks + " tasks in the list";
-    }
-
-    //Returns string containing number of tasks added
-    private static String taskAdded(Task task) {
-        return "Got it. I've added this task:\n " + task + "\n";
-    }
-
-    public void deleteTask(int taskNum) {
+    public Task deleteTask(int taskNum) {
         Task currentTask = tasks.get(taskNum);
         tasks.remove(currentTask);
-        System.out.println("Noted. I've removed this task:\n " + currentTask + "\n"
-                + numTasksString(tasks.size()));
+        return currentTask;
     }
 
-    public void setTaskAsDone(int taskNum) throws TaskDoneException {
+    public Task setTaskAsDone(int taskNum) throws TaskDoneException {
         Task currentTask = tasks.get(taskNum);
         currentTask.setDone();
-        System.out.println("Nice! Congrats for completing this task:\n " + currentTask);
+        return currentTask;
     }
 
-    public void setTaskAsUndone(int taskNum) throws TaskUndoneException {
+    public Task setTaskAsUndone(int taskNum) throws TaskUndoneException {
         Task currentTask = tasks.get(taskNum);
         currentTask.setUndone();
-        System.out.println("OK, I've marked this task as not done yet:\n " + currentTask);
+        return currentTask;
     }
 
     public void addTask(Task task) {
         this.tasks.add(task);
-        System.out.println(taskAdded(task) + numTasksString(tasks.size()));
     }
 
-    public void listTasksOnDate(LocalDate date) {
+    public String getTasksOnDateList(LocalDate date) {
+        StringBuilder stringBuilder = new StringBuilder("Here are the tasks in your list due on "
+                + date.format(DateTimeFormatter.ofPattern("EEE MMM d yyyy")) + ":\n");
         int taskIndex = 1;
-        System.out.println("Here are the tasks in your list due on "
-                + date.format(DateTimeFormatter.ofPattern("EEE MMM d yyyy")) + ":");
-        for (Task task : tasks) {
+        int numTasksDue = 0;
+        for (Task task: tasks) {
             if (task.isToday(date)) {
-                System.out.println(taskIndex + ". " + task);
+                numTasksDue++;
+            }
+        }
+        for (Task task: tasks) {
+            if (task.isToday(date)) {
+                stringBuilder.append(taskIndex + ". " + task);
+                if (taskIndex - 1 < numTasksDue - 1) {
+                    stringBuilder.append("\n");
+                }
                 taskIndex++;
             }
         }
+        return stringBuilder.toString();
     }
 
     public String saveTasksString() {

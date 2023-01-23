@@ -20,6 +20,8 @@ public class DeadlineCommand extends Command {
 
             //Adds new task to list of tasks
             tasks.addTask(newDeadline);
+            ui.showMesssage("Got it. I've added this task:\n " + newDeadline + "\n"
+                    + "Now you have " + tasks.getTasksNum() + " tasks in the list");
         } catch (DateTimeParseException e) {
             ui.showError("Deadline must be in the format yyyy-MM-dd HH:mm, e.g. 2023-01-23 16:31");
         }
