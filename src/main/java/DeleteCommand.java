@@ -5,12 +5,12 @@ public class DeleteCommand extends Command {
 
   @Override
   public void execute(TaskList tasks, Ui ui, Storage storage)
-      throws SamUnknownCommandException, SamMissingTaskException, SamInvalidTaskException, SamMissingTaskTitleException,
+      throws SamUnknownCommandException, SamMissingTaskException, SamInvalidIntException, SamInvalidTaskException, SamMissingTaskTitleException,
       SamMissingTaskValueException, SamMissingTaskArgException, SamSaveFailedException, SamInvalidDateException {
     if (args.isEmpty()) {
       throw new SamMissingTaskException();
     }
-    int id = Integer.parseInt(args);
+    int id = Parser.parseInt(args);
     Task task = tasks.removeTask(id);
     if (task == null) {
       throw new SamInvalidTaskException();

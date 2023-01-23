@@ -16,6 +16,12 @@ class SamMissingTaskException extends SamException {
   }
 }
 
+class SamInvalidIntException extends SamException {
+  public SamInvalidIntException() {
+    super("Oops, I was expecting an integer!");
+  }
+}
+
 class SamMissingTaskTitleException extends SamException {
   public SamMissingTaskTitleException() {
     super("Oops, you forgot a title for your task!");

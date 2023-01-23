@@ -13,6 +13,14 @@ public class Parser {
     }
   }
 
+  public static int parseInt(String input) throws SamInvalidIntException {
+    try {
+      return Integer.parseInt(input);
+    } catch (NumberFormatException e) {
+      throw new SamInvalidIntException();
+    }
+  }
+
   public static Map<String, String> parseTaskArgs(String input)
       throws SamMissingTaskTitleException, SamMissingTaskValueException {
     if (input.strip().charAt(0) == '/') {

@@ -5,7 +5,7 @@ public class ListCommand extends Command {
 
   @Override
   public void execute(TaskList tasks, Ui ui, Storage storage)
-      throws SamUnknownCommandException, SamMissingTaskException, SamInvalidTaskException, SamMissingTaskTitleException,
+      throws SamUnknownCommandException, SamMissingTaskException, SamInvalidIntException, SamInvalidTaskException, SamMissingTaskTitleException,
       SamMissingTaskValueException, SamMissingTaskArgException, SamSaveFailedException, SamInvalidDateException {
     if (tasks.count() == 0) {
       ui.talk("Your list is empty!");

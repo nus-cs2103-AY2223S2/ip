@@ -11,7 +11,7 @@ public class AddCommand extends Command {
 
   @Override
   public void execute(TaskList tasks, Ui ui, Storage storage) 
-      throws SamUnknownCommandException, SamMissingTaskException, SamInvalidTaskException,
+      throws SamUnknownCommandException, SamMissingTaskException, SamInvalidTaskException, SamInvalidIntException,
           SamMissingTaskTitleException, SamMissingTaskValueException, SamMissingTaskArgException,
           SamSaveFailedException, SamInvalidDateException {    
     Map<String, String> taskArgs = Parser.parseTaskArgs(args);

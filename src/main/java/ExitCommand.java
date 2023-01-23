@@ -5,7 +5,7 @@ public class ExitCommand extends Command {
 
   @Override
   public void execute(TaskList tasks, Ui ui, Storage storage)
-      throws SamUnknownCommandException, SamMissingTaskException, SamInvalidTaskException, SamMissingTaskTitleException,
+      throws SamUnknownCommandException, SamMissingTaskException, SamInvalidIntException, SamInvalidTaskException, SamMissingTaskTitleException,
       SamMissingTaskValueException, SamMissingTaskArgException, SamSaveFailedException, SamInvalidDateException {
     ui.talk("Goodbye!");    
   }
