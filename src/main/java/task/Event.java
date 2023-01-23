@@ -22,8 +22,12 @@ public class Event extends Task {
         int indexOfFrom = description.indexOf("/from");
         int indexOfTo = description.indexOf("/to");
         this.name = description.substring(0, indexOfFrom - " ".length());
-        this.startTime = Parser.parseDate(description.substring(indexOfFrom + "/from ".length(), indexOfTo - " ".length()));
-        this.endTime = Parser.parseDate(description.substring(description.indexOf("/to") + "/to ".length()));
+        this.startTime = Parser.parseDate(
+                description.substring(indexOfFrom + "/from ".length(),
+                indexOfTo - " ".length()));
+        this.endTime = Parser.parseDate(
+                description.substring(
+                        description.indexOf("/to") + "/to ".length()));
         this.type = "E";
     }
 
@@ -34,7 +38,8 @@ public class Event extends Task {
      * @return the start time of the event
      */
     public static String parseStartTime(String s) {
-        return s.substring(s.indexOf("/from") + "/from ".length(), s.indexOf("/to") - " ".length());
+        return s.substring(s.indexOf("/from") + "/from ".length(),
+                s.indexOf("/to") - " ".length());
     }
 
     /**

@@ -157,8 +157,10 @@ public class Duke {
      */
     public String addTask(Task task) {
         this.taskList.add(task);
-        return String.format("Got it. I've added this task:\n  %s\nNow you have %d tasks in the list.",
-                task, taskList.size());
+        return String.format("Got it. I've added this task:\n  %s\n" +
+                        "Now you have %d tasks in the list.",
+                task,
+                taskList.size());
     }
 
     /**
@@ -195,7 +197,8 @@ public class Duke {
         idx = idx - 1;   // count from zero
         Task t = taskList.get(idx);
         taskList.remove(idx);
-        return String.format("Noted. I've removed this task:\n  %s\nNow you have %d tasks in the list.", t, taskList.size());
+        return String.format("Noted. I've removed this task:\n  %s\n" +
+                "Now you have %d tasks in the list.", t, taskList.size());
     }
 
     /**
