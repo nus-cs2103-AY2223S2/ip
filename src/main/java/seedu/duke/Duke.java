@@ -1,5 +1,7 @@
 package seedu.duke;
+
 import java.util.ArrayList;
+
 import java.io.IOException;
 
 
@@ -16,10 +18,10 @@ public class Duke {
 
     public void run() throws DukeException, IOException {
         //...
-        boolean running = true;
-        while (running) {
+        boolean isRunning = true;
+        while (isRunning) {
             try {
-                running = ui.getInput(tasks);
+                isRunning = ui.getInput(tasks);
                 storage.updateFile(tasks);
             } catch (DukeException e) {
                 throw new RuntimeException(e);
@@ -28,7 +30,8 @@ public class Duke {
         }
         storage.close();
     }
-    public static void main(String[] args) throws DukeException, IOException {
+    public static void main(String[] args)
+            throws DukeException, IOException {
 
         new Duke("duke.txt").run();
 

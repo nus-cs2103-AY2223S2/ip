@@ -18,10 +18,11 @@ public class Ui {
     public boolean getInput(TaskList tasks) throws DukeException {
         Scanner input = new Scanner(System.in);
         String echo = input.nextLine();
-        String echoSplit[] = echo.split(" ");
+        String[] echoSplit = echo.split(" ");
 
         if(echo.equals("bye")) {
-            System.out.println("    -------------------------------------------\n    Bye. Hope to see you again soon!\n    -------------------------------------------");
+            System.out.println("    -------------------------------------------\n"
+                    + "    Bye. Hope to see you again soon!\n    -------------------------------------------");
             return false;
         } else {
             Parser parser = new Parser();
