@@ -401,6 +401,9 @@ public class Duke extends Application {
         mainLayout.getChildren().addAll(scrollPane, userInput, sendButton);
 
         scene = new Scene(mainLayout);
+        scene.getStylesheets().add(this.getClass().getResource("/style.css").toExternalForm());
+
+
 
         stage.setScene(scene);
         stage.show();
