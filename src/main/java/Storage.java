@@ -11,7 +11,6 @@ import java.util.Scanner;
  */
 public class Storage {
     private final String filePath;
-
     /**
      *  Constructor to create data storage object
      */
