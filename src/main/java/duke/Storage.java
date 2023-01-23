@@ -6,6 +6,8 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.util.Scanner;
 
+import duke.exception.InvalidArgumentException;
+import duke.exception.InvalidDateException;
 import duke.task.Deadline;
 import duke.task.Event;
 import duke.task.Task;
@@ -38,14 +40,16 @@ public class Storage {
                 Task task = null;
                 switch (args[0]) {
                 case "T":
-                    task = new ToDo(args[2], Integer.parseInt(args[1]) == 1);
+                task = new ToDo(args[2], Integer.parseInt(args[1]) == 1);
                     break;
                 case "D":
-                    task = new Deadline(args[2], Integer.parseInt(args[1]) == 1, args[3]);
+                task = new Deadline(args[2], Integer.parseInt(args[1]) == 1, args[3]);
                     break;
                 case "E":
-                    task = new Event(args[2], Integer.parseInt(args[1]) == 1, args[3], args[4]);
+                task = new Event(args[2], Integer.parseInt(args[1]) == 1, args[3], args[4]);
                     break;
+                default:
+                throw new InvalidArgumentException(line);
                 }
                 taskList.addTask(task);
             }
@@ -53,6 +57,11 @@ public class Storage {
             reader.close();
         } catch (FileNotFoundException e) {
             this.notifyNoStorage();
+        } catch (InvalidDateException | InvalidArgumentException e) {
+            this.ui.clearMessage();
+            this.ui.addToMessage("Duke ran into an error while reading saved data.", false);
+            this.ui.displayMessage();
+            taskList.clearTasks();
         }
     }
 

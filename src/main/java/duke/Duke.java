@@ -20,8 +20,8 @@ public class Duke {
     public static void main(String[] args) {
         Duke duke = new Duke(PATH);
         // print welcome message
-        duke.ui.showWelcome();
         duke.storage.readToTaskList(duke.taskList);
+        duke.ui.showWelcome();
         duke.run();
     }
 

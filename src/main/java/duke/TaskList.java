@@ -62,4 +62,8 @@ public class TaskList {
         }
         return sb.toString();
     }
+
+    public void clearTasks() {
+        this.list.clear();
+    }
 }
