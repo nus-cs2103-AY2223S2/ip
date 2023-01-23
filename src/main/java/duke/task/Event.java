@@ -1,14 +1,23 @@
 package duke.task;
 
+import java.time.LocalDate;
+import java.time.format.DateTimeParseException;
+
+import duke.exception.InvalidDateException;
+
 public class Event extends Task {
 
-    private String start;
-    private String end;
+    private LocalDate start;
+    private LocalDate end;
 
-    public Event(String name, String start, String end) {
+    public Event(String name, String start, String end) throws InvalidDateException {
         super(name);
-        this.start = start;
-        this.end = end;
+        try {
+            this.start = Task.parseDate(start);
+            this.end = Task.parseDate(end);
+        } catch (DateTimeParseException e) {
+            throw new InvalidDateException(e.getParsedString());
+        }
     }
 
     @Override
@@ -18,7 +27,8 @@ public class Event extends Task {
 
     @Override
     public String toString() {
-        String s = String.format("%s (from: %s to: %s)", super.toString(), this.start, this.end);
+        String s = String.format("%s (from: %s to: %s)", super.toString(), Task.formatDate(this.start),
+                Task.formatDate(this.end));
         return s;
     }
 }
