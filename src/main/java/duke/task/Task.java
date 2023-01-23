@@ -12,15 +12,18 @@ public class Task implements Serializable {
     }
 
     public String getStatusIcon() {
-        return (isDone ? "x" : " "); // mark done duke.task with X
+        return (isDone ? "x" : " ");
     }
+
     public void mark() {
         this.isDone = true;
     }
 
     public void unmark() {
+
         this.isDone = false;
     }
+
     @Override
     public String toString() {
         return "[" + getStatusIcon() + "] " + description;
