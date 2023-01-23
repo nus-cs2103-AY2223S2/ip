@@ -1,6 +1,12 @@
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.util.Optional;
+
 public class Event extends Task {
     String fromDate;
     String toDate;
+    Optional<LocalDate> chronoFromDate;
+    Optional<LocalDate> chronoToDate;
 
     public static Event create(String commandInput) throws TaskNameNotSpecified, EventFromToNotSpecified {
         String[] parseInfo = parseCmd(commandInput);
@@ -12,6 +18,8 @@ public class Event extends Task {
         this.fromDate = fromDate;
         this.toDate = toDate;
         this.completed = isDone;
+        this.chronoFromDate = Parser.parseDate(fromDate);
+        this.chronoToDate = Parser.parseDate(toDate);
     }
 
     public static String[] parseCmd(String commandInput) throws TaskNameNotSpecified, EventFromToNotSpecified {
@@ -49,6 +57,8 @@ public class Event extends Task {
 
     @Override
     public String stringFields() {
-        return " (from: " + this.fromDate + " to: " + toDate + ")";
+        String fromDateString = this.chronoFromDate.isEmpty() ? this.fromDate : this.chronoFromDate.get().format(DateTimeFormatter.ofPattern("MMM d yyyy"));
+        String toDateString = this.chronoToDate.isEmpty() ? this.fromDate : this.chronoToDate.get().format(DateTimeFormatter.ofPattern("MMM d yyyy"));
+        return " (from: " + fromDateString + " to: " + toDateString + ")";
     }
 }
