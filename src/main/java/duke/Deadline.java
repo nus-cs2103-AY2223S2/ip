@@ -16,6 +16,7 @@ public class Deadline extends Task {
 
     /**
      * Constructor for Deadline task, marked as undone.
+     *
      * @param description Deadline task description.
      * @param by Deadline date/time.
      */
@@ -35,6 +36,7 @@ public class Deadline extends Task {
 
     /**
      * Constructor for Deadline task with boolean specified.
+     *
      * @param description Deadline task description.
      * @param bool Indicates whether task is marked as done.
      * @param by Deadline date/time.
@@ -54,7 +56,8 @@ public class Deadline extends Task {
     }
 
     /**
-     * Marks a Deadline task as done.
+     * Returns a Deadline task marked as done.
+     *
      * @return Deadline task marked as done.
      */
     @Override
@@ -63,7 +66,8 @@ public class Deadline extends Task {
     }
 
     /**
-     * Unmarks a Deadline task from being done.
+     * Returns a Deadline task unmarked from being done.
+     *
      * @return Deadline task unmarked from being done.
      */
     @Override
@@ -73,6 +77,7 @@ public class Deadline extends Task {
 
     /**
      * Returns data for storage purposes.
+     *
      * @return Data for storage purposes.
      */
     @Override

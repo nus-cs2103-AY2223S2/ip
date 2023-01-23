@@ -6,6 +6,7 @@ package duke;
 public class Parser {
     /**
      * Returns the command (e.g. "bye", "mark", "event", etc.).
+     *
      * @param str User input.
      * @return Command.
      */
@@ -16,6 +17,7 @@ public class Parser {
 
     /**
      * Returns details (e.g. the index for a "mark" command, or the description for an "event" command).
+     *
      * @param str User input.
      * @return Command details.
      */
@@ -26,6 +28,7 @@ public class Parser {
 
     /**
      * Returns description of a Deadline task.
+     *
      * @param str User input.
      * @return Description of a deadline task.
      */
@@ -36,6 +39,7 @@ public class Parser {
 
     /**
      * Returns deadline of a Deadline task.
+     *
      * @param str User input.
      * @return Deadline of a deadline task.
      */
@@ -46,6 +50,7 @@ public class Parser {
 
     /**
      * Returns description of an Event task.
+     *
      * @param str User input.
      * @return Description of an Event task.
      */
@@ -56,6 +61,7 @@ public class Parser {
 
     /**
      * Returns "from" timeframe of an Event task.
+     *
      * @param str User input.
      * @return "From" timeframe of an Event task.
      */
@@ -66,6 +72,7 @@ public class Parser {
 
     /**
      * Returns "to" timeframe of an Event task.
+     *
      * @param str User input.
      * @return "To" timeframe of an Event task.
      */
