@@ -1,7 +1,8 @@
+package sam.task;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
-abstract class Task {
+public abstract class Task {
   protected String title;
   protected boolean isDone;
 

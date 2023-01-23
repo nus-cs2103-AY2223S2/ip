@@ -1,3 +1,12 @@
+package sam;
+
+import sam.command.Command;
+import sam.command.ExitCommand;
+import sam.parser.Parser;
+import sam.storage.SamLoadFailedException;
+import sam.storage.Storage;
+import sam.task.TaskList;
+
 public class Sam {
   private Ui ui;
   private Storage storage;

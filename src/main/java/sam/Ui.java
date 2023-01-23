@@ -1,3 +1,4 @@
+package sam;
 import java.util.Scanner;
 
 public class Ui {
