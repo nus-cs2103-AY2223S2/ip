@@ -1,6 +1,7 @@
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -66,10 +67,13 @@ public class Storage {
                 if (eventType.equals("T")) {
                     task = new ToDo(dataArray[2]);
                 } else if (eventType.equals("D")) {
-                    task = new Deadline(dataArray[2], dataArray[3]);
+                    LocalDate deadline = LocalDate.parse(dataArray[3].trim());
+                    task = new Deadline(dataArray[2], deadline);
                 } else {
                     String[] eventDetails = dataArray[3].split("- ");
-                    task = new Event(dataArray[2], eventDetails[0], eventDetails[1]);
+                    LocalDate startDate = LocalDate.parse(eventDetails[0].trim());
+                    LocalDate endDate = LocalDate.parse(eventDetails[1].trim());
+                    task = new Event(dataArray[2], startDate, endDate);
                 }
                 if (isDone.equals("X")) {
                     task.markAsDone();

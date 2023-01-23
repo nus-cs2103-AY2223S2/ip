@@ -14,7 +14,7 @@ public class Event extends Task {
 
     @Override
     public String getStorageDetails() {
-        return this.description + " | " + this.from + " - " + this.to;
+        return this.description + " | " + this.startDate.toString() + " - " + this.endDate.toString();
     }
 
     @Override

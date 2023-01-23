@@ -12,7 +12,7 @@ public class Deadline extends Task {
 
     @Override
     public String getStorageDetails() {
-        return this.description + " | " + this.by;
+        return this.description + " | " + this.date.toString();
     }
 
     @Override
