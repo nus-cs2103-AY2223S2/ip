@@ -31,7 +31,7 @@ public class Parser {
 
 
     /**
-     * Return the by date of deadline task
+     * Return the 'by' date of deadline task
      *
      * @throws DukeException IF error occur
      */
@@ -73,7 +73,7 @@ public class Parser {
     }
 
     /**
-     * Return the from date of event task
+     * Return the 'from' date of event task
      *
      * @throws DukeException IF error occur
      */
@@ -85,7 +85,7 @@ public class Parser {
     }
 
     /**
-     * Return the to date of event task
+     * Return the 'to' date of event task
      *
      * @throws DukeException IF error occur
      */
@@ -198,7 +198,7 @@ public class Parser {
 
 
     /**
-     * Convert the user input to valid program input for a event
+     * Convert the user input to valid program input for an event
      * task
      *
      * @throws DukeException IF error occur
