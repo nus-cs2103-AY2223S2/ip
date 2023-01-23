@@ -19,7 +19,7 @@ public class Storage {
     protected final String fileName;
 
     /**
-     * Default constructor
+     * Constructor
      *
      * @param directory: directory of the record file
      * @param fileName:  the name of the record file
@@ -31,7 +31,7 @@ public class Storage {
     }
 
     /**
-     * Obtain the path to the record path
+     * Returns the path to the record file
      *
      * @return the path to the record
      */
@@ -40,7 +40,7 @@ public class Storage {
     }
 
     /**
-     * Saves the list of tasks to a file
+     * Saves the list of tasks to a txt file as a string
      *
      * @param commandListString: the string to write to
      */
@@ -66,7 +66,7 @@ public class Storage {
     }
 
     /**
-     * Load up the record file at start-up
+     * Loads the record file at start-up
      *
      * @param path: path to the record file
      */
