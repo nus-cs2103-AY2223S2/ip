@@ -37,6 +37,11 @@ public class Duke {
                 int taskindex = Integer.parseInt(input.substring(7)) - 1;
                 list.get(taskindex).markAsNotDone();
                 System.out.println("Aight, marking this as not done:\n" + list.get(taskindex).toString());
+            } else if (isDelete(input, list.size())) {
+                int taskindex = Integer.parseInt(input.substring(7)) - 1;
+                String removed = list.get(taskindex).toString();
+                list.remove(taskindex);
+                System.out.println("Swee! One less task to go! Removing...\n" + removed);
             } else { //Task Creation
                 Task task = null;
                 if (isToDo(input)) {
@@ -52,7 +57,7 @@ public class Duke {
                     task = new Event(input.substring(0, fromdex), input.substring(fromdex + 7, todex), input.substring(todex + 5));
                     list.add(task);
                 } else {
-                    throw new DukeException("What are you saying");
+                    throw new DukeException("What are you saying?\n" + "Please input a task with either todo, deadline or event prefixed!");
                 }
                 System.out.println("Roger. This task has been added:\n" + "  " + task.toString());
                 System.out.println("Now you have " + list.size() + " tasks in your list.");
@@ -70,6 +75,14 @@ public class Duke {
 
     public static boolean isUnMark(String input, int listSize) {
         if (input.length() >=  8 && input.startsWith("unmark ") && isNumeric(input.substring(7))) {
+            int taskindex = Integer.parseInt(input.substring(7)) - 1;
+            return !(taskindex < 0 || taskindex > listSize - 1);
+        }
+        return false;
+    }
+
+    public static boolean isDelete(String input, int listSize) {
+        if (input.length() >=  8 && input.startsWith("delete ") && isNumeric(input.substring(7))) {
             int taskindex = Integer.parseInt(input.substring(7)) - 1;
             return !(taskindex < 0 || taskindex > listSize - 1);
         }
