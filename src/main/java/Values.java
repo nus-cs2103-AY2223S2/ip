@@ -12,9 +12,9 @@ public final class Values {
     public static final String HLINE = "--------------------";
 
     // Color support obtained from https://stackoverflow.com/a/45444716
-    public static final String PURPLE = "\033[0;35m";  // PURPLE
-    public static final String RED = "\033[0;31m";     // RED
-    public static final String RESET = "\033[0m";  // Text Reset
+    public static final String COLOR_PURPLE = "\033[0;35m";  // PURPLE
+    public static final String COLOR_RED = "\033[0;31m";     // RED
+    public static final String COLOR_RESET = "\033[0m";  // Text Reset
 
     // Whitespace
     public static final String SPACE = " ";

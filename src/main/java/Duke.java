@@ -9,14 +9,14 @@ public class Duke {
 
     // For PixlBot printing
     private static void PixlPrint(String text) {
-        System.out.println(Values.PURPLE + "PixlBot: " + Values.RESET + text);
+        System.out.println(Values.COLOR_PURPLE + "PixlBot: " + Values.COLOR_RESET + text);
 //        System.out.println("Pixlbot: " + text);
         System.out.println(Values.HLINE);
     }
 
     // Specify color overload
     private static void PixlPrint(String text, String textColor) {
-        System.out.println(Values.PURPLE + "PixlBot: " + textColor + text + Values.RESET);
+        System.out.println(Values.COLOR_PURPLE + "PixlBot: " + textColor + text + Values.COLOR_RESET);
         System.out.println(Values.HLINE);
     }
 
@@ -46,7 +46,7 @@ public class Duke {
             oos.close();
             fos.close();
         } catch (IOException fe) {
-            PixlPrint("Error while saving data:" + fe.getMessage());
+            PixlPrint("Error while saving data:" + fe.getMessage(), Values.COLOR_RED);
         }
     }
 
@@ -64,7 +64,7 @@ public class Duke {
     }
 
     private static void listCommand() {
-        StringBuilder output = new StringBuilder("Current list:\n");
+        StringBuilder output = new StringBuilder("Your current task list:\n");
         for (int i = 0; i < list.size(); i++) {
             output.append("\t").append(i + 1).append(". ").append(formatTask(list.get(i))).append("\n");
         }
@@ -236,7 +236,7 @@ public class Duke {
             try {
                 chatCycle(command);
             } catch (Exception e) {
-                PixlPrint("Uh oh! " + e.getMessage(), Values.RED);
+                PixlPrint("Uh oh! " + e.getMessage(), Values.COLOR_RED);
             }
 
             System.out.print("You: ");
