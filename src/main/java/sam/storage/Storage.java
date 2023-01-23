@@ -13,6 +13,9 @@ import sam.task.Task;
 import sam.task.TaskList;
 import sam.task.ToDo;
 
+/**
+ * Handles saving/loading a TaskList.
+ */
 public class Storage {
   private Path savePath;
   
@@ -20,6 +23,12 @@ public class Storage {
     this.savePath = Path.of(first, more);
   }
 
+  /**
+   * Saves a TaskList into a file indicated by savePath.
+   * 
+   * @param tasks The TaskList object that contains the tasks to be saved.
+   * @throws SamSaveFailedException If the file fails to be written.
+   */
   public void save(TaskList tasks) throws SamSaveFailedException {
     try {
       if (!Files.exists(savePath.getParent())) {
@@ -45,6 +54,12 @@ public class Storage {
     }
   }
 
+  /**
+   * Loads the TaskList in the file indicated by savePath if it exists.
+   * 
+   * @param tasks The TaskList object to be populated.
+   * @throws SamLoadFailedException If an existing file cannot be read or a date is in the wrong format.
+   */
   public void load(TaskList tasks) throws SamLoadFailedException {
     try {
       if (!Files.exists(savePath)) {

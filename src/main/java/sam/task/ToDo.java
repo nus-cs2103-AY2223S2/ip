@@ -1,4 +1,8 @@
 package sam.task;
+
+/**
+ * Represents a simple task.
+ */
 public class ToDo extends Task {
   public ToDo(String title) {
     this(title, false);
