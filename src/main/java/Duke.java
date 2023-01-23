@@ -1,20 +1,26 @@
 import java.io.*;
-import java.util.*;
+import java.util.ArrayList;
 
 /**
- * This class represents a chatbot that one can interact with to keep track of tasks.
- *
- * @version CS2103T AY22/23 Sem 2 Individual Project
- * @author A0233828Y Eugene Tang
+ * Represents a chatbot that one can interact with to keep track of tasks.
  */
 public class Duke {
+    /** Logo for the name of the chatbot. **/
     private static final String logo = " |          ______    ______\n"
                                      + " | ____    |      |  |      |\n"
                                      + " |      |  |      |  |      |\n"
                                      + " | ____ |  |______|  |______|\n";
-    private static final String straightLine = "_______________________________________________________________________________________________";
+
+    /** Straight line that separates commands. **/
+    private static final String straightLine =
+            "_______________________________________________________________________________________________";
 
 
+    /**
+     * Launches the chatbot.
+     *
+     * @param args The command line arguments that one can type.
+     */
     public static void main(String[] args) {
         //Stores user input
         ArrayList<Task> taskStorage = new ArrayList<Task>();
@@ -50,9 +56,12 @@ public class Duke {
             //User typed in "list"
             else if (input.equals("list")) {
                 printUserTasks(taskStorage);
+                continue;
             }
-            //User typed in "mark":
-            else if (inputArray[0].equals("mark")) {
+
+            String firstWord = inputArray[0];
+            switch (firstWord) {
+            case "mark":
                 try {
                     if (inputArray.length != 2) {
                         throw new DukeException("The mark command must be followed by a single number.");
@@ -63,18 +72,17 @@ public class Duke {
                     int indexOfTask = Integer.parseInt(inputArray[1]) - 1;
                     if (! (indexOfTask <= taskStorage.size() - 1 && indexOfTask >= 0)) {
                         throw new DukeException("Please enter a valid task number. You currently have " +
-                                                    Integer.toString(taskStorage.size()) + " tasks.");
+                                Integer.toString(taskStorage.size()) + " tasks.");
                     }
                     markAsDone(taskStorage.get(indexOfTask));
+                    break;
                 } catch (DukeException dukeException) {
                     System.out.println(straightLine);
                     System.out.println(dukeException.getMessage());
                     System.out.println(straightLine);
-                    continue;
+                    break;
                 }
-            }
-            //User typed in "unmark":
-            else if (inputArray[0].equals("unmark")) {
+            case "unmark":
                 try {
                     if (inputArray.length != 2) {
                         throw new DukeException("The unmark command must be followed by a single number.");
@@ -88,15 +96,14 @@ public class Duke {
                                 Integer.toString(taskStorage.size()) + " tasks.");
                     }
                     markAsUndone(taskStorage.get(indexOfTask));
+                    break;
                 } catch (DukeException dukeException) {
                     System.out.println(straightLine);
                     System.out.println(dukeException.getMessage());
                     System.out.println(straightLine);
-                    continue;
+                    break;
                 }
-            }
-            //User typed in "delete"
-            else if (inputArray[0].equals("delete")) {
+            case "delete":
                 try {
                     if (inputArray.length != 2) {
                         throw new DukeException("The delete command must be followed by a single number.");
@@ -106,19 +113,18 @@ public class Duke {
                     }
                     int indexOfTask = Integer.parseInt(inputArray[1]) - 1;
                     if (! (indexOfTask <= taskStorage.size() - 1 && indexOfTask >= 0)) {
-                        throw new DukeException("Please enter a valid task number. You currently have " +
-                                Integer.toString(taskStorage.size()) + " tasks.");
+                        throw new DukeException("Please enter a valid task number. You currently have "
+                                + Integer.toString(taskStorage.size()) + " tasks.");
                     }
                     deleteTask(indexOfTask, taskStorage);
+                    break;
                 } catch (DukeException dukeException) {
                     System.out.println(straightLine);
                     System.out.println(dukeException.getMessage());
                     System.out.println(straightLine);
-                    continue;
+                    break;
                 }
-            }
-            //User typed in "to-do"
-            else if (inputArray[0].equals("todo")) {
+            case "todo":
                 try {
                     if (inputArray.length == 1) {
                         throw new DukeException("The todo command cannot be left blank.");
@@ -127,16 +133,14 @@ public class Duke {
                     String taskName = input.substring(indexOfType + 5);
                     ToDo newToDoTask = new ToDo(taskName);
                     addTask(newToDoTask, taskStorage);
+                    break;
                 } catch (DukeException dukeException) {
                     System.out.println(straightLine);
                     System.out.println(dukeException.getMessage());
                     System.out.println(straightLine);
-                    continue;
+                    break;
                 }
-
-            }
-            //User typed in "deadline"
-            else if (inputArray[0].equals("deadline")) {
+            case "deadline":
                 try {
                     int indexOfType = input.indexOf("deadline");
                     if (indexOfType + 8 > input.length() - 1) {
@@ -172,15 +176,14 @@ public class Duke {
                     }
                     Deadline newDeadlineTask = new Deadline(taskName, deadlineOfTask);
                     addTask(newDeadlineTask, taskStorage);
+                    break;
                 } catch (DukeException dukeException) {
                     System.out.println(straightLine);
                     System.out.println(dukeException.getMessage());
                     System.out.println(straightLine);
-                    continue;
+                    break;
                 }
-            }
-            //User typed in "event"
-            else if (inputArray[0].equals("event")) {
+            case "event":
                 try {
                     int indexOfType = input.indexOf("event");
                     if (indexOfType + 5 > input.length() - 1) {
@@ -228,15 +231,14 @@ public class Duke {
                     }
                     Event newEventTask = new Event(taskName, startDate, endDate);
                     addTask(newEventTask, taskStorage);
+                    break;
                 } catch (DukeException dukeException) {
                     System.out.println(straightLine);
                     System.out.println(dukeException.getMessage());
                     System.out.println(straightLine);
-                    continue;
+                    break;
                 }
-            }
-            //User did not type in a valid command
-            else {
+            default:
                 printInvalidMessage();
             }
         }
@@ -258,14 +260,14 @@ public class Duke {
         System.out.println("What can I help you with today?\n");
         System.out.println("Supported Commands:");
         String commandList =
-                "1. list -> Provides a list of existing tasks.\n" +
-                "2. mark X -> Marks task number X as done.\n" +
-                "3. unmark X -> Marks task number X as undone.\n" +
-                "4. todo taskName -> Creates a todo task with name taskName.\n" +
-                "5. deadline taskName /by date -> Creates a deadline task with name taskName and deadline date.\n" +
-                "6. event taskName /from startDate /to endDate -> Creates an event task with name taskName,\n" +
-                "   start date startDate, and end date endDate.\n" +
-                "7. delete X -> Deletes task number X from the list.";
+                "1. list -> Provides a list of existing tasks.\n"
+                + "2. mark X -> Marks task number X as done.\n"
+                + "3. unmark X -> Marks task number X as undone.\n"
+                + "4. todo taskName -> Creates a todo task with name taskName.\n"
+                + "5. deadline taskName /by date -> Creates a deadline task with name taskName and deadline date.\n"
+                + "6. event taskName /from startDate /to endDate -> Creates an event task with name taskName,\n"
+                + "   start date startDate, and end date endDate.\n"
+                + "7. delete X -> Deletes task number X from the list.";
         System.out.println(commandList);
 
 
@@ -285,6 +287,7 @@ public class Duke {
 
     /**
      * Prints out all the user tasks that have been entered by the user thus far.
+     *
      * @param taskStorage The ArrayList that stores the user tasks to be printed out.
      */
     public static void printUserTasks(ArrayList<Task> taskStorage) {
@@ -307,6 +310,7 @@ public class Duke {
 
     /**
      * Adds user task into storage and informs the user.
+     *
      * @param taskToAdd The task to be added to storage.
      * @param taskStorage The ArrayList that stores the tasks.
      */
@@ -317,15 +321,16 @@ public class Duke {
         System.out.println(taskToAdd.getStatusOfTaskInString());
         if (taskStorage.size() == 1) {
             System.out.println("Currently, there is 1 task in your list.");
-        }
-        else {
-            System.out.println("Currently, there are " + Integer.toString(taskStorage.size()) + " tasks in your list.");
+        } else {
+            System.out.println("Currently, there are " + Integer.toString(taskStorage.size())
+                    + " tasks in your list.");
         }
         System.out.println(straightLine);
     }
 
     /**
      * Marks a task as done and informs the user.
+     *
      * @param currentTask The task to be marked as done.
      */
    public static void markAsDone(Task currentTask) {
@@ -338,6 +343,7 @@ public class Duke {
 
     /**
      * Marks a task as undone and informs the user.
+     *
      * @param currentTask The task to be marked as undone.
      */
     public static void markAsUndone(Task currentTask) {
@@ -359,6 +365,7 @@ public class Duke {
 
     /**
      * Deletes a task from the given list of task, and informs the user.
+     *
      * @param indexOfTask Index of the task in the list that is to be deleted.
      * @param taskStorage List containing all the tasks.
      */
@@ -375,6 +382,7 @@ public class Duke {
 
     /**
      * Checks if a string can be converted into an Integer.
+     *
      * @param stringToCheck String to check whether the conversion is possible.
      * @return true if it can be converted, else return false.
      */

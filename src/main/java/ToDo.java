@@ -1,13 +1,10 @@
 /**
- * This class represents a to-do Task that can be kept track of,
- * having no date or time attached to it.
- *
- * @version CS2103T AY22/23 Sem 2 Individual Project
- * @author A0233828Y Eugene Tang
+ * Represents a to-do Task that can be kept track of, having no date or time attached to it.
  */
 public class ToDo extends Task {
     /**
      * Constructs a new ToDo task.
+     *
      * @param taskName Name of the ToDo task.
      */
     public ToDo(String taskName) {
@@ -16,6 +13,7 @@ public class ToDo extends Task {
 
     /**
      * Gets the status of the task with the task name.
+     *
      * @return a String indicating the type and status of the task.
      */
     @Override

@@ -1,16 +1,15 @@
 /**
- * This class represents a Task that can be kept track of.
- *
- * @version CS2103T AY22/23 Sem 2 Individual Project
- * @author A0233828Y Eugene Tang
+ * Represents a Task that can be kept track of.
  */
 public abstract class Task {
+    /** The name of the task. */
     protected String taskName;
-    //Status of the task
+    /** The status of the task. **/
     protected boolean isDone = false;
 
     /**
      * Constructs a user task.
+     *
      * @param taskName The name of the task
      */
     public Task(String taskName) {
@@ -33,6 +32,7 @@ public abstract class Task {
 
     /**
      * Gets the status of the task with the task name.
+     *
      * @return a String indicating the type and status of the task.
      */
     public abstract String getStatusOfTaskInString();
