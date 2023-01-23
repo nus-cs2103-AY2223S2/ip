@@ -9,31 +9,22 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 
 public class Sam {
-  private static Scanner scanner;
-  private static TaskList tasks;
-  private static HashMap<String, String> taskArgs;
-  private static boolean live;
-  private static Path savePath;
+  private Scanner scanner;
+  private TaskList tasks;
+  private HashMap<String, String> taskArgs;
+  private boolean live;
+  private Path savePath;
 
-	public static void main(String[] args) {
-    initSam();
-    startSam();
-    closeSam();
-  }
-
-  private static void initSam() {
+  public Sam() {
     scanner = new Scanner(System.in);
     tasks = new TaskList();
     taskArgs = new HashMap<>();
     savePath = Path.of("data", "sam.txt");
+    live = false;
+  }
+
+  public void run() {
     live = true;
-  }
-
-  private static void closeSam() {
-    scanner.close();
-  }
-
-  private static void startSam() {
     System.out.println(Assets.LOGO);
     talk("Hello, I am Sam!");
     try {
@@ -54,9 +45,18 @@ public class Sam {
         taskArgs.clear();
       }
     }
+    close();
   }
 
-  private static void processInput(String[] input)
+  private void close() {
+    scanner.close();
+  }
+
+	public static void main(String[] args) {
+    new Sam().run();
+  }
+
+  private void processInput(String[] input)
     throws SamUnknownCommandException, SamMissingTaskException, SamInvalidTaskException,
       SamMissingTaskTitleException, SamMissingTaskValueException, SamMissingTaskArgException,
       SamSaveFailedException, SamInvalidDateException
@@ -177,7 +177,7 @@ public class Sam {
     }
   }
 
-  private static void parseTaskArgs(String input) throws SamMissingTaskValueException {
+  private void parseTaskArgs(String input) throws SamMissingTaskValueException {
     for (String arg : input.strip().split(" /")) {
       String[] keyValue = arg.split(" ", 2);
       if (keyValue.length <= 1) throw new SamMissingTaskValueException();
@@ -185,13 +185,13 @@ public class Sam {
     }
   }
 
-  private static void newTask(Task task) {
+  private void newTask(Task task) {
     talk("Gotcha, I'll add the task to your list:",
       task.toString(),
       String.format("Now you have %d tasks in the list", tasks.count()));
   }
 
-  private static void talk(String ...messages) {
+  private void talk(String ...messages) {
     System.out.println(Assets.SAM);
     System.out.println("┌───────────────────────────────────────────┐");
     for (String message : messages) {
@@ -200,7 +200,7 @@ public class Sam {
     System.out.println("└───────────────────────────────────────────┘");
   }
 
-  private static void save() throws SamSaveFailedException {
+  private void save() throws SamSaveFailedException {
     try {
       if (!Files.exists(savePath.getParent())) {
         Files.createDirectory(savePath.getParent());
@@ -223,7 +223,7 @@ public class Sam {
     }
   }
 
-  private static void load() throws SamLoadFailedException {
+  private void load() throws SamLoadFailedException {
     try {
       if (!Files.exists(savePath)) {
         return;
@@ -258,7 +258,7 @@ public class Sam {
     }
   }
   
-  private static LocalDate parseDate(String input) throws SamInvalidDateException {
+  private LocalDate parseDate(String input) throws SamInvalidDateException {
     try {
       return LocalDate.parse(input, DateTimeFormatter.ofPattern("d/M/yyyy"));
     } catch (DateTimeParseException e) {
