@@ -1,14 +1,18 @@
-import java.time.LocalDate;
-
 public class Deadline extends Task {
     protected String type;
-    protected LocalDate time;
+    protected String time;
+
+    public Deadline(String name, String time) {
+        super(name);
+        this.time = time;
+        this.type = "D";
+    }
 
     public Deadline(String description) throws DukeException {
         super();
         int indexOfBy = description.indexOf("/by");
         try {
-            this.time = Task.parseDate(description.substring(indexOfBy + "/by ".length()));
+            this.time = description.substring(indexOfBy + "/by ".length());
             this.name = description.substring(0, indexOfBy - " ".length());
         } catch (StringIndexOutOfBoundsException e) {
             throw new DukeException("The command argument is not complete.");
@@ -22,6 +26,6 @@ public class Deadline extends Task {
 
     @Override
     public String toString() {
-        return String.format("[%s]%s (by: %s)", type, super.toString(), Task.printDate(time));
+        return String.format("[%s]%s (by: %s)", this.type, super.toString(), this.time);
     }
 }
