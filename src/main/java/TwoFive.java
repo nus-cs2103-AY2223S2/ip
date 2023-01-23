@@ -269,13 +269,13 @@ public class TwoFive {
             input = inputScanner.nextLine();
         }
 
+        System.out.println(divider);
         try {
             writeTaskFile(tasks);
+            System.out.println(" Tasks saved successfully.");
         } catch (IOException e) {
             System.out.println(e.getMessage());
         }
-
-        System.out.println(divider);
         System.out.println(" Bye. Hope to see you again soon!");
         System.out.println(divider);
     }
