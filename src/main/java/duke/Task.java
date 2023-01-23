@@ -1,3 +1,4 @@
+package duke;
 public class Task {
     private final String description;
     private Boolean done;
