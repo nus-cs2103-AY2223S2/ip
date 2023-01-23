@@ -43,37 +43,37 @@ public class Parser {
         // create commands depending on the command name
         switch (commandName) {
         case "bye":
-        command = new ByeCommand();
+            command = new ByeCommand();
             break;
         case "list":
-        command = new ListCommand();
+            command = new ListCommand();
             break;
         case "mark":
-        // TODO: throw exception in MarkCommand if mark index out of bounds
-        args = Parser.getArgs(commandName, argString, 1);
-        index = Integer.parseInt(args[0]) - 1;
-        command = new MarkCommand(index);
+            // TODO: throw exception in MarkCommand if mark index out of bounds
+            args = Parser.getArgs(commandName, argString, 1);
+            index = Integer.parseInt(args[0]) - 1;
+            command = new MarkCommand(index);
             break;
         case "unmark":
-        // TODO: throw exception in UnmarkCommand if mark index out of bounds
-        args = Parser.getArgs(commandName, argString, 1);
-        index = Integer.parseInt(args[0]) - 1;
-        command = new UnmarkCommand(index);
+            // TODO: throw exception in UnmarkCommand if mark index out of bounds
+            args = Parser.getArgs(commandName, argString, 1);
+            index = Integer.parseInt(args[0]) - 1;
+            command = new UnmarkCommand(index);
             break;
         case "todo":
-        args = Parser.getArgs(commandName, argString, 1, new String[] {});
-        command = new ToDoCommand(args[0]);
+            args = Parser.getArgs(commandName, argString, 1, new String[] {});
+            command = new ToDoCommand(args[0]);
             break;
         case "deadline":
-        args = Parser.getArgs(commandName, argString, 2, new String[] { "/by" });
-        command = new DeadlineCommand(args[0], args[1]);
+            args = Parser.getArgs(commandName, argString, 2, new String[] { "/by" });
+            command = new DeadlineCommand(args[0], args[1]);
             break;
         case "event":
-        args = Parser.getArgs(commandName, argString, 3, new String[] { "/from", "/to" });
-        command = new EventCommand(args[0], args[1], args[2]);
+            args = Parser.getArgs(commandName, argString, 3, new String[] { "/from", "/to" });
+            command = new EventCommand(args[0], args[1], args[2]);
             break;
         default:
-        throw new UnknownCommandException(commandName);
+            throw new UnknownCommandException(commandName);
         }
         return command;
     }

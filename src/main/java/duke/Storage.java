@@ -58,16 +58,16 @@ public class Storage {
                 Task task = null;
                 switch (args[0]) {
                 case "T":
-                task = new ToDo(args[2], Integer.parseInt(args[1]) == 1);
+                    task = new ToDo(args[2], Integer.parseInt(args[1]) == 1);
                     break;
                 case "D":
-                task = new Deadline(args[2], Integer.parseInt(args[1]) == 1, args[3]);
+                    task = new Deadline(args[2], Integer.parseInt(args[1]) == 1, args[3]);
                     break;
                 case "E":
-                task = new Event(args[2], Integer.parseInt(args[1]) == 1, args[3], args[4]);
+                    task = new Event(args[2], Integer.parseInt(args[1]) == 1, args[3], args[4]);
                     break;
                 default:
-                throw new InvalidArgumentException(line);
+                    throw new InvalidArgumentException(line);
                 }
                 taskList.addTask(task);
             }
