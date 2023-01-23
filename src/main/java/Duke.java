@@ -18,7 +18,7 @@ public class Duke {
                 CommandInput command = CommandInput.getCommandInput(line);
                 switch (command) {
                 case LIST:
-                    new ListCmd(taskList).execute();;
+                    new ListCmd(taskList).execute();
                     break;
                 case MARK:  
                     int listIndexMark = Integer.parseInt(line.split(" ")[1]) - 1;
@@ -29,8 +29,7 @@ public class Duke {
                     new UnmarkCmd(taskList, listIndexUnmark).execute();;
                     break;
                 case DELETE:
-                    Task removedTask = taskList.removeTask(line);
-                    Ui.displayMsg("Noted. I've removed this task:\n" + Ui.indentString(removedTask.toString(), 1) + "\n" + taskList.countTasks());
+                    new DeleteCmd(taskList, line).execute();
                     break;
                 case EVENT:
                     new EventCmd(taskList, line).execute();
