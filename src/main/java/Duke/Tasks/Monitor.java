@@ -1,9 +1,7 @@
 package Duke.Tasks;
-//import TaskTable;
 
 import java.util.Scanner;
 import java.lang.String;
-
 
 /**
  * Represents the Monitor class
