@@ -13,7 +13,10 @@ public class DeleteCmd extends Command {
     }
 
     public void uiReply() {
-        Ui.displayMsg("Noted. I've removed this task:\n" + Ui.indentString(this.task.toString(), 1) + "\n" + taskList.countTasks());
+        Ui.displayMsg("Noted. I've removed this task:\n" + 
+        Ui.indentString(this.task.toString(), 1));
+        
+        Ui.displayNumTask(this.taskList.countTasks());
     }
 
 }

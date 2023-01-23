@@ -6,6 +6,11 @@ public class Ui {
     public static String line;
     public static Scanner sc = new Scanner(System.in);
 
+
+    public static void displayNumTask(int numTask) {
+        displayMsg("Now you have " + numTask + " task" + (numTask == 1 ? "" : "s") + " in the list.");
+    }
+
     public static void greetUser() {
         System.out.println("Hello I'm Duke! \nWhat can I do for you?");
         line = sc.nextLine();

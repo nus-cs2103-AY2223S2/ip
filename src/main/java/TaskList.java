@@ -11,8 +11,8 @@ public class TaskList {
         return result.toString();
     }
 
-    public String countTasks() {
-        return "Now you have " + this.tasks.size() + " task" + (this.tasks.size() == 1 ? "" : "s") + " in the list.";
+    public int countTasks() {
+        return this.tasks.size();
     }
 
     public Task removeTask(int index) {

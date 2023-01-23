@@ -18,6 +18,8 @@ public class EventCmd extends Command {
     
     public void uiReply() {
         Ui.displayMsg("Got it. I've added this task:\n" + 
-        Ui.indentString(this.event.toString(), 1) + "\n" + taskList.countTasks());
+        Ui.indentString(this.event.toString(), 1));
+
+        Ui.displayNumTask(this.taskList.countTasks());
     };
 }
