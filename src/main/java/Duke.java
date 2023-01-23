@@ -33,7 +33,8 @@ public class Duke {
                     + "6. event taskName /from startDate /to endDate -> Creates an event task with name taskName,\n"
                     + "   start date startDate, and end date endDate.\n"
                     + "7. delete X -> Deletes task number X from the list.\n"
-                    + "8. help -> Gets the list of commands supported by this bot.\n\n"
+                    + "8. on givenDate -> Displays all the tasks that occur on givenDate.\n"
+                    + "9. help -> Prints the list of commands supported by this bot.\n\n"
                     + "Please enter dates in the format of either yyyy-MM-dd hh:mm or yyyy-MM-dd.";
 
     /**
@@ -42,7 +43,7 @@ public class Duke {
      * @param args The command line arguments that one can type.
      */
     public static void main(String[] args) {
-        //Stores user input
+        //Stores tasks
         ArrayList<Task> taskStorage = new ArrayList<Task>();
 
         printIntroductoryMessage();
@@ -254,7 +255,14 @@ public class Duke {
                         throw new DukeException("The end date cannot be left blank.");
                     }
                     //Create new event task
-                    Event newEventTask = new Event(taskName, getDateObject(startDate), getDateObject(endDate));
+                    Temporal start = getDateObject(startDate);
+                    Temporal end = getDateObject(endDate);
+
+                    if (! isValidDuration(start, end)) {
+                        throw new DukeException("Start date must be before end date.");
+                    }
+
+                    Event newEventTask = new Event(taskName,start, end);
                     addTask(newEventTask, taskStorage);
                     break;
                 } catch (DukeException dukeException) {
@@ -441,6 +449,31 @@ public class Duke {
             //A date without time
             return LocalDate.parse(rawDateString, formatterToUse);
         }
+    }
+
+    /**
+     * Determines if two dates specify a valid duration.
+     *
+     * @param start The Temporal encapsulating the start date and time.
+     * @param end The Temporal encapsulating the end date and time.
+     * @return true if start happens before or is equal to end, else false.
+     */
+    public static boolean isValidDuration(Temporal start, Temporal end) {
+        if (start instanceof LocalDateTime && end instanceof LocalDateTime) {
+            return ((LocalDateTime) end).isAfter((LocalDateTime) start) ||
+                    ((LocalDateTime) end).equals((LocalDateTime) start);
+        } else if (start instanceof LocalDate && end instanceof LocalDate) {
+            return ((LocalDate) end).isAfter((LocalDate) start) || ((LocalDate) end).equals((LocalDate) start);
+        } else if (start instanceof LocalDate && end instanceof LocalDateTime) {
+            LocalDate endDateOnly = LocalDate.of(((LocalDateTime) end).getYear(),
+                    ((LocalDateTime) end).getMonthValue(), ((LocalDateTime) end).getDayOfMonth());
+            return (endDateOnly.isAfter((LocalDate) start)) || (endDateOnly.equals((LocalDate) start));
+        } else if (start instanceof LocalDateTime && end instanceof LocalDate) {
+            LocalDate startDateOnly = LocalDate.of(((LocalDateTime) start).getYear(),
+                    ((LocalDateTime) start).getMonthValue(), ((LocalDateTime) start).getDayOfMonth());
+            return (((LocalDate) end).isAfter(startDateOnly)) || (((LocalDate) end).equals(startDateOnly));
+        }
+        return true;
     }
 }
 

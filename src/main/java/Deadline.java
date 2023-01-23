@@ -33,4 +33,13 @@ public class Deadline extends Task {
                ? "[" + typeOfTask + "][X] " + this.taskName + (" (by: ") + this.formattedDeadline + ")"
                : "[" + typeOfTask + "][ ] " + this.taskName + (" (by: ") + this.formattedDeadline + ")";
     }
+
+    /**
+     * Gets the formatted deadline of the task.
+     *
+     * @return a String with the deadline of the task formatted.
+     */
+    public String getFormattedDeadline() {
+        return this.formattedDeadline;
+    }
 }

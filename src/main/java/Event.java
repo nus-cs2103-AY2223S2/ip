@@ -47,4 +47,13 @@ public class Event extends Task {
                 : "[" + typeOfTask + "][ ] " + this.taskName + (" (from: ") + this.formattedStartDate +
                         " to: " + this.formattedEndDate + ")";
     }
+
+    /**
+     * Gets the formatted start date of the task.
+     *
+     * @return a String with the deadline of the task formatted.
+     */
+    public String getFormattedStartDate() {
+        return this.formattedStartDate;
+    }
 }
