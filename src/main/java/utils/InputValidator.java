@@ -124,7 +124,7 @@ public class InputValidator {
         return res;
     }
 
-    public static String extractDeadline(String input) throws NoDeadlineFoundException {
+    private static String extractDeadline(String input) throws NoDeadlineFoundException {
         int deadlineStartIndex = input.indexOf("/by ");
 
         if (deadlineStartIndex == -1) {
@@ -134,7 +134,7 @@ public class InputValidator {
         return input.substring(deadlineStartIndex + 4);
     }
 
-    public static String extractStartDateTime(String input) throws NoStartDateTimeFoundException {
+    private static String extractStartDateTime(String input) throws NoStartDateTimeFoundException {
         int dateTimeStartIndex = input.indexOf("/from ");
         if (dateTimeStartIndex == -1) {
             throw new NoStartDateTimeFoundException("Unable to find \"/from\" subcommand");
@@ -153,7 +153,7 @@ public class InputValidator {
         }
     }
 
-    public static String extractEndDateTime(String input) throws NoEndDateTimeFoundException {
+    private static String extractEndDateTime(String input) throws NoEndDateTimeFoundException {
         int dateTimeStartIndex = input.indexOf("/to ");
         if (dateTimeStartIndex == -1) {
             throw new NoEndDateTimeFoundException("Unable to find \"/to\" subcommand");
