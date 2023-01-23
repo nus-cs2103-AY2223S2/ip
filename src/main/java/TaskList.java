@@ -12,8 +12,16 @@ public class TaskList {
     public String addTask(Task task) {
         list.add(task);
         items++;
-        return "Got it. I've added this task:" + "\n" + " [" + task.getTaskType() + "][ ] " + task.toString() + "\n"
+        return "Got it. I've added this task:" + "\n" + " [" + task.getTaskType() + "][ ] " + task + "\n"
                 + "Now you have " + items + " tasks in the list.";
+    }
+
+    public String deleteTask(int taskNumber) {
+        Task removedTask = list.get(taskNumber);
+        list.remove(taskNumber);
+        items--;
+        return "Noted. I've removed this task:" + "\n" + " [" + removedTask.getTaskType() + "][ ] "
+                + removedTask + "\n" + "Now you have " + items + " tasks in the list.";
     }
 
     public String printTaskList() {

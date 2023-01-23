@@ -74,6 +74,16 @@ public class Duke {
                         String addConfirmation = tl.addTask(eventTask);
                         System.out.println(addConfirmation);
                         userInput = sc.nextLine();
+                    } else if (userInput.startsWith("delete")) {
+                        String[] strArr = userInput.split(" ", 2);
+                        int taskNumber = Integer.parseInt(strArr[1]);
+                        if (taskNumber < 1 || taskNumber > tl.items) {
+                            throw new InvalidTaskException(taskNumber);
+                        }
+                        String deleteConfirmation = tl.deleteTask(taskNumber - 1);
+                        System.out.println(deleteConfirmation);
+                        userInput = sc.nextLine();
+
                     } else {
                         throw new InvalidInputException(userInput);
                     }
