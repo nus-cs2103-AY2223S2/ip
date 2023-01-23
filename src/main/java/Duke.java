@@ -14,7 +14,7 @@ public class Duke {
     }
 
     public String msg_of_add(Task task) {
-        return "add: " + task.name;
+        return "add: " + task.toString();
     }
 
     public String print_curr_tasks() {
@@ -23,14 +23,27 @@ public class Duke {
             res = "Sorry this list is empty T^T";
             return res;
         }
+        res += "Here are the tasks in your list:\n";
         for (int i = 0; i < tasks.size(); i++) {
             if (i == tasks.size() - 1) {
-                res += i + ": " + tasks.get(i);
+                res += (i+1) + ". " + tasks.get(i);
             } else {
-                res += i + ": " + tasks.get(i) + "\n";
+                res += (i+1) + ". " + tasks.get(i) + "\n";
             }
         }
         return res;
+    }
+
+    public String mark_as_done(int index) {
+        Task task = this.tasks.get(index);
+        task.mark();
+        return "Nice! I've marked this task as done:\n" + task.toString();
+    }
+
+    public String mark_as_undone(int index) {
+        Task task = this.tasks.get(index);
+        task.unmark();
+        return "OK, I've marked this task as not done yet:\n" + task.toString();
     }
 
     public String echo(String input) {

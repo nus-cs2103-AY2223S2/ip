@@ -19,6 +19,16 @@ public class Execute {
             if (userInput.equals("list")) {
                 System.out.println(duke.separate(duke.print_curr_tasks()));
                 userInput = sc.nextLine();
+            } else if (userInput.matches("^mark\\s\\d*")) {
+                String[] words = userInput.split(" ");
+                int index = Integer.parseInt(words[1]) - 1;
+                System.out.println(duke.separate(duke.mark_as_done(index)));
+                userInput = sc.nextLine();
+            } else if (userInput.matches("^unmark\\s\\d*")) {
+                String[] words = userInput.split(" ");
+                int index = Integer.parseInt(words[1]) - 1;
+                System.out.println(duke.separate(duke.mark_as_undone(index)));
+                userInput = sc.nextLine();
             } else if (userInput.equals("bye")) {
                 break;
             } else {
