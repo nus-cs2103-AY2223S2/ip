@@ -26,7 +26,6 @@ public class Task {
     @Override
     public boolean equals(Object o) {
         if (o instanceof Task) {
-
             return ((Task) o).getDescription().equals(this.getDescription());
         }
         return false;

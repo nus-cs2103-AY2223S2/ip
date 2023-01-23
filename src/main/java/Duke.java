@@ -15,7 +15,9 @@ public class Duke {
 
     private static void addTask(Task newTask) {
         TASKS.add(newTask);
-        System.out.println(reply("added: " + newTask.getDescription() + "\n"));
+        System.out.println(reply("Got it. I've added this task:\n  "
+                + newTask
+                + "\nNow you have " + TASKS.size() + " tasks in the list\n"));
     }
 
     private static void mark(String command) {
@@ -42,6 +44,28 @@ public class Duke {
         System.out.println(reply(list_of_tasks));
     }
 
+    private static void handleTaskInput(String command) {
+        String description = command;
+        Task newTask = new Task(command);
+        if (command.startsWith("todo ")) {
+            description = description.substring(5);
+            newTask = new ToDo(description);
+        } else if (command.startsWith("deadline ")) {
+            String by = description.substring(description.indexOf(" /by ") + 5);
+            description = description.substring(9, description.indexOf(" /by "));
+            newTask = new Deadline(description, by);
+        } else if (command.startsWith("event ")) {
+            String start = description.substring(description.indexOf(" /from ") + 7,
+                    description.indexOf(" /to "));
+            String end = description.substring(description.indexOf(" /to ") + 5);
+            description = description.substring(6, description.indexOf(" /from "));
+            newTask = new Event(description, start, end);
+        }
+
+        if (!TASKS.contains(newTask)) {
+            addTask(newTask);
+        }
+    }
     private static String reply(String command) {
         return DIVIDER_LINE + command + DIVIDER_LINE;
     }
@@ -68,10 +92,7 @@ public class Duke {
                 continue;
             }
 
-            Task currentTask = new Task(command);
-            if (!TASKS.contains(currentTask)) {
-                addTask(currentTask);
-            }
+            handleTaskInput(command);
             command = input.nextLine();
         }
 
