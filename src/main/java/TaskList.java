@@ -1,6 +1,9 @@
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -14,66 +17,78 @@ public class TaskList {
     }
 
     public String add(TaskType type, String s) throws DukeException {
-
         String output = "\t Got it. I've added this task:\n";
         switch (type) {
-            case ToDos :
-                if (s.isBlank()) {
-                    throw new DukeMissingDescriptionException();
-                }
-                ToDos todo = new ToDos(s, false);
-                list.add(todo);
-                output += "\t   " + todo;
-                break;
-            case Deadlines: {
-                if (s.isBlank()) {
-                    throw new DukeMissingDescriptionException();
-                }
-                int index = s.indexOf(" /by ");
-                if (index == -1 || s.substring(index + 5)
-                        .isBlank()) {
-                    throw new DukeMissingDeadlineException();
-                }
-                String desc = s.substring(0, index).strip();
-                String by = s.substring(index + 5).strip();
-                if (index == 0 || desc.isEmpty()) {
-                    throw new DukeMissingDescriptionException();
-                }
+        case ToDos:
+            if (s.isBlank()) {
+                throw new DukeMissingDescriptionException();
+            }
+            ToDos todo = new ToDos(s, false);
+            list.add(todo);
+            output += "\t   " + todo;
+            break;
+        case Deadlines: {
+            if (s.isBlank()) {
+                throw new DukeMissingDescriptionException();
+            }
+            int index = s.indexOf(" /by ");
+            if (index == -1 || s.substring(index + 5)
+                    .isBlank()) {
+                throw new DukeMissingDeadlineException();
+            }
+            String desc = s.substring(0, index).strip();
+            String by = s.substring(index + 5).strip();
+            if (index == 0 || desc.isEmpty()) {
+                throw new DukeMissingDescriptionException();
+            }
 
-                Deadlines deadline = new Deadlines(desc, false, by);
+            Deadlines deadline = null;
+            try {
+                LocalDateTime localBy = LocalDateTime.parse(by, DateTimeFormatter.ofPattern("d/M/yyyy HHmm"));
+                deadline = new Deadlines(desc, false, localBy);
+            } catch (DateTimeParseException dateTimeParseException) {
+                System.out.println(dateTimeParseException.getMessage());
+                deadline = new Deadlines(desc, false, by);
+            } finally {
                 list.add(deadline);
                 output += "\t   " + deadline;
-                }
-                break;
-            case Events: {
-                if (s.isBlank()) {
-                    throw new DukeMissingDescriptionException();
-                }
-                int fromIndex = s.indexOf(" /from ");
-                int toIndex = s.indexOf(" /to ");
-                if (fromIndex == -1 ||
-                        toIndex == -1 ||
-                        toIndex < fromIndex + 7 ||
-                        s.substring(fromIndex + 7, toIndex).isBlank() ||
-                        s.substring(toIndex + 5).isBlank()) {
-                    throw new DukeMissingEventDateException();
-                }
-                String desc = s.substring(0, fromIndex).strip();
-                String from = s.substring(fromIndex + 7, toIndex).strip();
-                String to = s.substring(toIndex + 5).strip();
+            }
+            break;
+        }
+        case Events: {
+            if (s.isBlank()) {
+                throw new DukeMissingDescriptionException();
+            }
+            int fromIndex = s.indexOf(" /from ");
+            int toIndex = s.indexOf(" /to ");
+            if (fromIndex == -1 ||
+                    toIndex == -1 ||
+                    toIndex < fromIndex + 7 ||
+                    s.substring(fromIndex + 7, toIndex).isBlank() ||
+                    s.substring(toIndex + 5).isBlank()) {
+                throw new DukeMissingEventDateException();
+            }
+            String desc = s.substring(0, fromIndex).strip();
+            String from = s.substring(fromIndex + 7, toIndex).strip();
+            String to = s.substring(toIndex + 5).strip();
 
-                if (fromIndex == 0 || toIndex == 0 || desc.isEmpty()) {
-                    throw new DukeMissingDescriptionException();
-                }
+            if (fromIndex == 0 || toIndex == 0 || desc.isEmpty()) {
+                throw new DukeMissingDescriptionException();
+            }
 
-                Events event = new Events(s
-                            .substring(0, fromIndex)
-                            .strip(),
-                        false, from, to);
+            Events event = null;
+            try {
+                LocalDateTime localFrom = LocalDateTime.parse(from, DateTimeFormatter.ofPattern("d/M/yyyy HHmm"));
+                LocalDateTime localTo = LocalDateTime.parse(to, DateTimeFormatter.ofPattern("d/M/yyyy HHmm"));
+                event = new Events(desc, false, localFrom, localTo);
+            } catch (DateTimeParseException dateTimeParseException) {
+                event = new Events(desc, false, from, to);
+            } finally {
                 list.add(event);
                 output += "\t   " + event;
-                }
+            }
             break;
+        }
         }
         return String.format("%s\n\t Now you have %d tasks in the list.", output, list.size());
     }
