@@ -76,6 +76,10 @@ public class Task {
 
     };
 
+    /**
+     * The reformat method converts the task to standard output
+     * @return String
+     */
     public String reformat() {
         String d;
         if (done) {

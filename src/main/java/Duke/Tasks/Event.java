@@ -67,6 +67,10 @@ public class Event extends Task {
                 " to " + this.endTime.format(DateTimeFormatter.ofPattern("MMM dd yyyy HH:mm")) + ")";
     }
 
+    /**
+     * Override the reformat method and convert to standard output
+     * @return String
+     */
     @Override
     public String reformat() {
         String d;

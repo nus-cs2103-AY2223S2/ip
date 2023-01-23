@@ -23,6 +23,11 @@ public class Disk {
         this.path = path;
     }
 
+    /**
+     * Read data from txt file
+     * @return ArrayList
+     * @throws IOException
+     */
     public ArrayList<Task> read() throws IOException {
         ArrayList<Task> taskTable = new ArrayList<>();
         try {
@@ -51,6 +56,11 @@ public class Disk {
         return taskTable;
     }
 
+    /**
+     * Write data to txt file
+     * @return ArrayList
+     * @throws IOException
+     */
     public void write(ArrayList<Task> taskTable) {
         try {
             FileWriter fw = new FileWriter(path, false);

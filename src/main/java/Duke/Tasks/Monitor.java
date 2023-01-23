@@ -131,6 +131,9 @@ public class Monitor {
 
     }
 
+    /**
+     * The methods displayLoadingError shows the message when there is loading error
+     */
     public void displayLoadingError() {
         System.out.println("Loading Error!");
     }
