@@ -5,6 +5,7 @@ if not exist ..\bin mkdir ..\bin
 
 REM delete output from previous run
 if exist ACTUAL.TXT del ACTUAL.TXT
+if exist duke.txt del duke.txt
 
 REM compile the code into the bin folder
 dir /s /B ..\src\main\java\kude\*.java > ..\bin\sources.txt
