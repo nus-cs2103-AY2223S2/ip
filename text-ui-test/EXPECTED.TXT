@@ -1,10 +1,10 @@
-<<<	Hello, I'm Kude!
+<<<	Welcome to Kude!
 > <	Added [T][ ] be happy
-<	List now contains 1 items
+<	List now contains 1 tasks
 > <	Added [D][ ] do homework (by: 2023-02-04T12:00)
-<	List now contains 2 items
+<	List now contains 2 tasks
 > <	Added [E][ ] project meeting (from: 2023-03-04T12:00, to: 2023-03-04T13:00)
-<	List now contains 3 items
+<	List now contains 3 tasks
 > <	1. [T][ ] be happy
 <	2. [D][ ] do homework (by: 2023-02-04T12:00)
 <	3. [E][ ] project meeting (from: 2023-03-04T12:00, to: 2023-03-04T13:00)
@@ -28,7 +28,7 @@
 > !	Provide deadline
 > !	Invalid format for from. Use `2023-02-25 23:00`
 > <	Deleted [T][ ] be happy
-<	List now contains 2 items
+<	List now contains 2 tasks
 > !	Invalid index
 > !	Invalid index
 > !	Provide deadline

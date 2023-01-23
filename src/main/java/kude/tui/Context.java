@@ -1,8 +1,8 @@
 package kude.tui;
 
 import kude.DukeException;
-import kude.models.Item;
-import kude.models.ItemList;
+import kude.models.Task;
+import kude.models.TaskList;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
@@ -11,15 +11,15 @@ import java.util.Optional;
 
 public class Context {
     private final Parser parser;
-    private final ItemList items;
-    private final Output output;
+    private final TaskList tasks;
+    private final Ui ui;
     private final Processor processor;
     private final DateTimeFormatter parseDateTimeFormat;
 
-    public Context(Parser parser, ItemList items, Output output, Processor processor) {
+    public Context(Parser parser, Ui ui, Processor processor, TaskList tasks) {
         this.parser = parser;
-        this.items = items;
-        this.output = output;
+        this.tasks = tasks;
+        this.ui = ui;
         this.processor = processor;
         this.parseDateTimeFormat = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
     }
@@ -28,28 +28,28 @@ public class Context {
         return parser;
     }
 
-    public ItemList getItems() {
-        return items;
+    public TaskList getTasks() {
+        return tasks;
     }
 
-    public Output getOutput() {
-        return output;
+    public Ui getUi() {
+        return ui;
     }
 
-    public void notifyAdded(Item item) {
+    public void notifyAdded(Task task) {
         notifyMutated();
-        output.writeLine("Added " + item);
-        output.writeLine("List now contains " + items.list().count() + " items");
+        ui.writeLine("Added " + task);
+        ui.writeLine("List now contains " + tasks.list().count() + " tasks");
     }
 
-    public void notifyDeleted(Item item) {
+    public void notifyDeleted(Task task) {
         notifyMutated();
-        output.writeLine("Deleted " + item);
-        output.writeLine("List now contains " + items.list().count() + " items");
+        ui.writeLine("Deleted " + task);
+        ui.writeLine("List now contains " + tasks.list().count() + " tasks");
     }
 
     public void notifyMutated() {
-        processor.saveItems();
+        processor.saveTaskList();
     }
 
     public String getArg(String provideName) {
@@ -72,8 +72,8 @@ public class Context {
                 new DukeException("Invalid format for " + provideName + ". Use `2023-02-25 23:00`"));
     }
 
-    public Item getItem(int index) {
-        return items.get(index).orElseThrow(() -> new DukeException("Invalid index"));
+    public Task getTask(int index) {
+        return tasks.get(index).orElseThrow(() -> new DukeException("Invalid index"));
     }
 
     private Optional<Integer> parseInt(String s) {

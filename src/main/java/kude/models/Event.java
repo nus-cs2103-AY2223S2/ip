@@ -4,7 +4,7 @@ import kude.DukeException;
 
 import java.time.LocalDateTime;
 
-public class Event extends Item {
+public class Event extends Task {
     private final LocalDateTime from;
     private final LocalDateTime to;
 

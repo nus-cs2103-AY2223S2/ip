@@ -1,9 +1,14 @@
 package kude;
 
-import kude.models.ItemList;
+import kude.models.TaskList;
 
-import java.beans.XMLDecoder;
-import java.io.*;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.io.ObjectInputFilter;
+import java.io.ObjectOutputStream;
 
 public class Storage {
     private final String path;
@@ -12,23 +17,23 @@ public class Storage {
         this.path = path;
     }
 
-    public ItemList readItems() throws IOException, ClassNotFoundException {
+    public TaskList readTaskList() throws IOException, ClassNotFoundException {
         var file = new File(path);
         if (file.createNewFile()) {
-            writeItems(new ItemList());
+            writeTaskList(new TaskList());
         }
         var fis = new FileInputStream(file);
         var ois = new ObjectInputStream(fis);
         // restrict to only models
         var filter = ObjectInputFilter.Config.createFilter("kude.models.*;");
         ois.setObjectInputFilter(filter);
-        var items = (ItemList)ois.readObject();
+        var tasks = (TaskList)ois.readObject();
         ois.close();
         fis.close();
-        return items;
+        return tasks;
     }
 
-    public void writeItems(ItemList list) throws IOException {
+    public void writeTaskList(TaskList list) throws IOException {
         var file = new File(path);
         file.createNewFile();
         var fos = new FileOutputStream(file);

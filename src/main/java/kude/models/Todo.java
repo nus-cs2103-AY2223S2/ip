@@ -1,6 +1,6 @@
 package kude.models;
 
-public class Todo extends Item {
+public class Todo extends Task {
     public Todo(String content) {
         super(content);
     }

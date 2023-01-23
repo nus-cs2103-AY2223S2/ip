@@ -4,50 +4,39 @@ import kude.DukeException;
 import kude.Storage;
 import kude.models.Deadline;
 import kude.models.Event;
-import kude.models.ItemList;
+import kude.models.TaskList;
 import kude.models.Todo;
 
 import java.io.IOException;
-import java.io.InputStream;
-import java.io.PrintStream;
-import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
 import java.util.HashMap;
 import java.util.Optional;
-import java.util.Scanner;
 
 public class Processor {
-    private final InputStream inStream;
-    private final Scanner inStreamScanner;
-    private final PrintStream outStream;
-    private final Output output;
-    private final ItemList items;
+    private final Ui ui;
+    private final TaskList tasks;
     private final Storage storage;
     private final HashMap<String, Command> commands;
 
-    public Processor(InputStream in, PrintStream out, Storage storage) {
-        this.inStream = in;
-        this.outStream = out;
-        this.inStreamScanner = new Scanner(in);
-        this.output = new Output(out);
+    public Processor(Ui ui, Storage storage) {
+        this.ui = ui;
         this.storage = storage;
 
         this.commands = new HashMap<>();
         registerCommands();
 
-        ItemList items = null;
+        TaskList tasks = null;
         try {
-            items = storage.readItems();
+            tasks = storage.readTaskList();
         } catch (IOException ioe) {
-            this.output.writeErr("Save file could not be read from, reinitializing");
+            this.ui.writeErr("Save file could not be read from, reinitializing");
         } catch (ClassNotFoundException cnfe) {
-            this.output.writeErr("Save file corrupted or tampered with, reinitializing");
+            this.ui.writeErr("Save file corrupted or tampered with, reinitializing");
         }
-        if (items == null) {
-            items = new ItemList();
-            saveItems();
+        if (tasks == null) {
+            tasks = new TaskList();
+            saveTaskList();
         }
-        this.items = items;
+        this.tasks = tasks;
     }
 
     void registerCommands() {
@@ -55,62 +44,62 @@ public class Processor {
         register("list", ctx -> {
             var idx = new Integer[] {0};
 
-            ctx.getItems().list().forEachOrdered(item -> {
+            ctx.getTasks().list().forEachOrdered(task -> {
                 idx[0]++;
-                ctx.getOutput().writeLine(idx[0] + ". " + item);
+                ctx.getUi().writeLine(idx[0] + ". " + task);
             });
         });
 
         register("mark", ctx -> {
             var index = ctx.getIndexArg();
-            var item = ctx.getItem(index);
+            var task = ctx.getTask(index);
 
-            item.setIsDone(true);
+            task.setIsDone(true);
             ctx.notifyMutated();
 
-            ctx.getOutput().writeLine("Marked " + item);
+            ctx.getUi().writeLine("Marked " + task);
         });
 
         register("unmark", ctx -> {
             var index = ctx.getIndexArg();
-            var item = ctx.getItem(index);
+            var task = ctx.getTask(index);
 
-            item.setIsDone(false);
+            task.setIsDone(false);
             ctx.notifyMutated();
 
-            ctx.getOutput().writeLine("Unmarked " + item);
+            ctx.getUi().writeLine("Unmarked " + task);
         });
 
         register("todo", ctx -> {
             var content = ctx.getArg("content");
-            var item = new Todo(content);
-            ctx.getItems().add(item);
-            ctx.notifyAdded(item);
+            var task = new Todo(content);
+            ctx.getTasks().add(task);
+            ctx.notifyAdded(task);
         });
 
         register("deadline", ctx -> {
             var content = ctx.getArg("content");
             var deadline = ctx.getNamedDateTimeArg("by", "deadline");
-            var item = new Deadline(content, deadline);
-            ctx.getItems().add(item);
-            ctx.notifyAdded(item);
+            var task = new Deadline(content, deadline);
+            ctx.getTasks().add(task);
+            ctx.notifyAdded(task);
         });
 
         register("event", ctx -> {
             var content = ctx.getArg("content");
             var from = ctx.getNamedDateTimeArg("from", "from");
             var to = ctx.getNamedDateTimeArg("to", "to");
-            var item = new Event(content, from, to);
-            ctx.getItems().add(item);
-            ctx.notifyAdded(item);
+            var task = new Event(content, from, to);
+            ctx.getTasks().add(task);
+            ctx.notifyAdded(task);
         });
 
         register("delete", ctx -> {
             var index = ctx.getIndexArg();
-            var item = ctx.getItem(index);
+            var task = ctx.getTask(index);
 
-            ctx.getItems().delete(item);
-            ctx.notifyDeleted(item);
+            ctx.getTasks().delete(task);
+            ctx.notifyDeleted(task);
         });
     }
 
@@ -119,35 +108,35 @@ public class Processor {
     }
 
     public void run() {
-        outStream.println("<<<\tHello, I'm Kude!");
+        ui.writeWelcome();
 
         while (true) {
-            outStream.print("> ");
-            var line = inStreamScanner.nextLine();
+            ui.writePrompt();
+            var line = ui.getCommandLine();
             if (line.equals("bye")) {
-                outStream.println("<<<\tBye");
+                ui.writeBye();
                 break;
             }
             var parser = new Parser(line);
-            var context = new Context(parser, items, output, this);
+            var context = new Context(parser, ui, this, tasks);
             var cmdOpt = Optional.ofNullable(this.commands.get(parser.getCommand()));
             cmdOpt.ifPresentOrElse(cmd -> {
                 try {
                     cmd.run(context);
                 } catch (DukeException de) {
-                    output.writeErr(de.getMessage());
+                    ui.writeErr(de.getMessage());
                 } catch (Exception e) {
-                    output.writeErr("An unhandled exception occurred while running the command: " + e);
+                    ui.writeErr("An unhandled exception occurred while running the command: " + e);
                 }
-            }, () -> output.writeErr("No such command!"));
+            }, () -> ui.writeErr("No such command!"));
         }
     }
 
-    public void saveItems() {
+    public void saveTaskList() {
         try {
-            storage.writeItems(items);
+            storage.writeTaskList(tasks);
         } catch (IOException ioe) {
-            this.output.writeErr("Save file could not be written to!");
+            this.ui.writeErr("Save file could not be written to!");
             throw new RuntimeException(ioe);
         }
     }

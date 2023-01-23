@@ -2,11 +2,11 @@ package kude.models;
 
 import java.io.Serializable;
 
-public abstract class Item implements Serializable {
+public abstract class Task implements Serializable {
     private final String content;
     private boolean isDone;
 
-    public Item(String content) {
+    public Task(String content) {
         this.content = content;
         this.isDone = false;
     }
