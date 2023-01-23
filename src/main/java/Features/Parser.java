@@ -6,6 +6,7 @@ import UserCommands.CommandBye;
 import UserCommands.CommandDeadline;
 import UserCommands.CommandDelete;
 import UserCommands.CommandEvent;
+import UserCommands.CommandFind;
 import UserCommands.CommandList;
 import UserCommands.CommandMark;
 import UserCommands.CommandToDo;
@@ -40,22 +41,10 @@ public class Parser {
         case ("mark"):
             this.taskList.clone(new CommandMark().handle(this.userScan, this.taskList));
             break;
-        // loop breaks, ending program if input is "bye"
-        case ("bye"):
-            new CommandBye().print();
-            this.loopEnd = true;
-            break;
+
         // Duke finds and prints tasks that match user search input
         case ("find"):
             new CommandFind().print(this.userScan, this.taskList);
-            break;
-        // Duke lists out all Tasks.Task names in TaskList when input is "list"
-        case ("list"):
-            new CommandList().print(this.userScan, this.taskList);
-            break;
-        // Duke allows user to mark tasks as done when input is "mark"
-        case ("mark"):
-            this.taskList.clone(new CommandMark().handle(this.userScan, this.taskList));
             break;
 
         // Duke allows user to mark tasks as NOT done when input is "unmark"
