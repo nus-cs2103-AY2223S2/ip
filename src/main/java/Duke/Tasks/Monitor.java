@@ -134,4 +134,21 @@ public class Monitor {
     public void displayLoadingError() {
         System.out.println("Loading Error!");
     }
+
+    /**
+     * The method shows the result of find method
+     * @param table the task table
+     * @param keyword the keyword to be found
+     */
+    public void displayFind(TaskTable table, String keyword) {
+        String message = "    ____________________________________________________________\n" +
+                "     Here are the matching tasks in your list:\n";
+        System.out.println(message);
+        for (int i = 0; i < table.size(); i++) {
+            if(table.getTable().get(i).showDesc().contains(keyword)) {
+                System.out.println("    " + (i + 1) + "." + "    " + table.get(i));
+            }
+        }
+        System.out.println("    ____________________________________________________________\n");
+    }
 }

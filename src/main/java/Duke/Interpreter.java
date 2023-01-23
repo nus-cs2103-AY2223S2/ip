@@ -15,7 +15,7 @@ public class Interpreter {
     private final static DateTimeFormatter format = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
     private static enum Operation {
         // all the operations
-        mark, list, delete, deadline, event, bye, todo, unmark
+        mark, list, delete, deadline, event, bye, todo, unmark, find
     }
 
     // format the time in the form of 11/10/2019 5pm
@@ -186,6 +186,14 @@ public class Interpreter {
         return null; // to be modified
     }
 
+    public static Find find(String command, TaskTable table) throws MissingDescriptionException {
+        if (command.split(" ").length == 1) {
+            throw new MissingDescriptionException("find method");
+        } else {
+            return new Find(command.substring(5), table);
+        }
+    }
+
     /**
      * The method interpret interprets the command
      * @param command the command from the user
@@ -223,6 +231,8 @@ public class Interpreter {
                     return delete(command, table);
                 case list:
                     return new Table();
+                case find:
+                    return find(command, table);
                 default:
                     throw new InvalidCommandException();
             }
