@@ -1,36 +1,55 @@
 package dukes.engine;
 
-class Event extends Task {
-    String start;
-    String end;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.util.Locale;
 
-    Event(String taskName, String start, String end) {
+class Event extends Task {
+    LocalDate start;
+    LocalDate end;
+
+    Event(String taskName, LocalDate start, LocalDate end) {
         super(taskName);
         this.tag = "E";
         this.start = start;
         this.end = end;
     }
 
-    Event(String taskName, boolean isDone, String start, String end) {
+    Event(String taskName, boolean isDone, LocalDate start, LocalDate end) {
         super(taskName, isDone);
         this.tag = "E";
         this.start = start;
         this.end = end;
     }
 
+//    @Override
+//    String getFromTime() {
+//        return this.start;
+//    }
+//
+//    @Override
+//    String getToTime() {
+//        return this.end;
+//    }
     @Override
-    String getFromTime() {
+    public LocalDate getStart() {
         return this.start;
     }
 
     @Override
-    String getToTime() {
+    public LocalDate getEnd() {
         return this.end;
     }
 
     @Override
     public String toString() {
+        String startFormat = this.start.format(
+                DateTimeFormatter.ofPattern("MMM d yyyy", new Locale("en"))
+        );
+        String endFormat = this.end.format(
+                DateTimeFormatter.ofPattern("MMM d yyyy", new Locale("en"))
+        );
         return "[E]" + super.toString() + " (from: " +
-                this.start + " to: " + this.end + ")";
+                startFormat + " to: " + endFormat + ")";
     }
 }

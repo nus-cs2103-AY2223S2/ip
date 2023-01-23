@@ -1,6 +1,7 @@
 package dukes.engine;
 
 class ToDo extends Task {
+
     ToDo(String taskName) {
         super(taskName);
         this.tag = "T";

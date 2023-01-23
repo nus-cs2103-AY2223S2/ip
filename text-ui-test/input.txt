@@ -1,4 +1,11 @@
 todo play games
+deadline meeting /by 02/05/2023
+event project /from 1/03/2022 /to 25/12/2023
+event group project /from 02/03/2020 /to 05/04/2020
+todo being happy
+mark 2
+list
+search 02/05/2023
 deadline do homework /by Monday evening 11pm
 list
 event group project /from Sept 2nd 10am /to 12pm
