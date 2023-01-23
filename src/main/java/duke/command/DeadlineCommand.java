@@ -6,12 +6,19 @@ import duke.exception.DukeException;
 import duke.task.Deadline;
 import duke.task.Task;
 
+/** A representation of the "deadline" command in Duke. */
 public class DeadlineCommand extends Command {
 
     private final String NAME = "deadline";
     private String title;
     private String deadline;
 
+    /**
+     * Initializes a deadline command with a given title and deadline.
+     * 
+     * @param title    The title of the Deadline to be created
+     * @param deadline The deadline of the Deadline to be created
+     */
     public DeadlineCommand(String title, String deadline) {
         this.title = title;
         this.deadline = deadline;

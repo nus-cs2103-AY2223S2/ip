@@ -3,16 +3,27 @@ package duke;
 import java.util.ArrayList;
 import duke.task.Task;
 
+/** Manages the task list of Duke. */
 public class TaskList {
 
     private ArrayList<Task> list;
     private Ui ui;
 
+    /**
+     * Initializes a TaskList.
+     * 
+     * @param ui Ui object for the current session.
+     */
     public TaskList(Ui ui) {
         this.list = new ArrayList<Task>();
         this.ui = ui;
     }
 
+    /**
+     * Marks the task at the given index as done.
+     * 
+     * @param index Index of task to be marked as done.
+     */
     public void markTaskAsDone(int index) {
         Task task = this.list.get(index);
         task.markAsDone();
@@ -20,6 +31,11 @@ public class TaskList {
         this.ui.addToMessage(task.toString());
     }
 
+    /**
+     * Marks the task at the given index as undone.
+     * 
+     * @param index Index of task to be marked as undone.
+     */
     public void markTaskAsUndone(int index) {
         Task task = this.list.get(index);
         task.unmarkAsDone();
@@ -27,6 +43,11 @@ public class TaskList {
         this.ui.addToMessage(task.toString());
     }
 
+    /**
+     * Adds a task to the task list.
+     * 
+     * @param task Task to be added to the task list
+     */
     public void addTask(Task task) {
         this.list.add(task);
         this.ui.addToMessage("Got it. I've added this task:");
@@ -34,6 +55,11 @@ public class TaskList {
         this.ui.addToMessage(String.format("Now you have %d tasks in the list.", list.size()));
     }
 
+    /**
+     * Deletes a task from the task list.
+     * 
+     * @param index Task to be deleted from the task list.
+     */
     public void deleteTask(int index) {
         Task currentTask = list.get(index);
         list.remove(index);
@@ -41,6 +67,7 @@ public class TaskList {
         this.ui.addToMessage(currentTask.toString());
     }
 
+    /** Displays the current list of tasks. */
     public void displayTasks() {
         if (list.size() == 0) {
             this.ui.addToMessage("You have no tasks! Try adding some.");
@@ -54,6 +81,12 @@ public class TaskList {
         }
     }
 
+    /**
+     * Serializes all the tasks in the task list.
+     * 
+     * @return A string containing the serialized tasks. Each line is the string
+     *         representation of a task in the task list
+     */
     public String serializeTasks() {
         StringBuilder sb = new StringBuilder();
         for (Task task : this.list) {

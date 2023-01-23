@@ -5,10 +5,19 @@ import java.time.format.DateTimeParseException;
 
 import duke.exception.InvalidDateException;
 
+/** A representation of a task with a deadline. */
 public class Deadline extends Task {
 
+    /** Deadline of the task. */
     private LocalDate deadline;
 
+    /**
+     * Creates a Deadline object with a given name, completion status, and deadline.
+     * 
+     * @param name     The name of the object to be created
+     * @param isDone   The completion status of the object to be created
+     * @param deadline A string representation of the task's deadline
+     */
     public Deadline(String name, boolean isDone, String deadline) throws InvalidDateException {
         super(name, isDone);
         try {
@@ -18,6 +27,12 @@ public class Deadline extends Task {
         }
     }
 
+    /**
+     * Creates a Deadline object with a given name and deadline.
+     * 
+     * @param name     The name of the object to be created
+     * @param deadline A string representation of the task's deadline
+     */
     public Deadline(String name, String deadline) throws InvalidDateException {
         this(name, false, deadline);
     }

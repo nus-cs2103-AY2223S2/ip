@@ -1,11 +1,23 @@
 package duke.task;
 
+/** A representation of a task with no given deadline. */
 public class ToDo extends Task {
 
+    /**
+     * Creates a ToDo object with a given name and completion status.
+     * 
+     * @param name   The name of the object to be created
+     * @param isDone The completion status of the object to be created
+     */
     public ToDo(String name, boolean isDone) {
         super(name, isDone);
     }
 
+    /**
+     * Creates a ToDo object with a given name.
+     * 
+     * @param name The name of the object to be created
+     */
     public ToDo(String name) {
         this(name, false);
     }

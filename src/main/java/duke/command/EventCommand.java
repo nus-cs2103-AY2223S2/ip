@@ -6,6 +6,7 @@ import duke.exception.DukeException;
 import duke.task.Event;
 import duke.task.Task;
 
+/** A representation of the "event" command in Duke. */
 public class EventCommand extends Command {
 
     private final String NAME = "event";
@@ -13,6 +14,13 @@ public class EventCommand extends Command {
     private String from;
     private String to;
 
+    /**
+     * Initializes an event command with a given title, start date, and end date.
+     * 
+     * @param title The title of the Event to be created
+     * @param from  The start date of the Event to be created
+     * @param to    The end date of the Event to be created
+     */
     public EventCommand(String title, String from, String to) {
         this.title = title;
         this.from = from;

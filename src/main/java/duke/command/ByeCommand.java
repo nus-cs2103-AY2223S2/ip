@@ -4,6 +4,7 @@ import duke.TaskList;
 import duke.Ui;
 import duke.exception.DukeException;
 
+/** A representation of the "bye" command. */
 public class ByeCommand extends Command {
 
     private final String NAME = "bye";
