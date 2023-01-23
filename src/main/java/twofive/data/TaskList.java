@@ -81,7 +81,7 @@ public class TaskList {
         return stringBuilder.toString();
     }
 
-    public String saveTasksString() {
+    public String getSaveTasksString() {
         StringBuilder stringBuilder = new StringBuilder();
         for (Task task: tasks) {
             stringBuilder.append(task.getFileWriteString() + "\n");

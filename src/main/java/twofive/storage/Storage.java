@@ -33,7 +33,7 @@ public class Storage {
 
     public void save(TaskList tasks) throws IOException {
         FileWriter fw = new FileWriter(taskFile);
-        fw.write(tasks.saveTasksString());
+        fw.write(tasks.getSaveTasksString());
         fw.close();
     }
 }
