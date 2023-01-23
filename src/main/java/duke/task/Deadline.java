@@ -1,15 +1,24 @@
 package duke.task;
 
+import java.time.LocalDate;
+import java.time.format.DateTimeParseException;
+
+import duke.exception.InvalidDateException;
+
 public class Deadline extends Task {
 
-    private String deadline;
+    private LocalDate deadline;
 
-    public Deadline(String name, boolean isDone, String deadline) {
+    public Deadline(String name, boolean isDone, String deadline) throws InvalidDateException {
         super(name, isDone);
-        this.deadline = deadline;
+        try {
+            this.deadline = Task.parseDate(deadline);
+        } catch (DateTimeParseException e) {
+            throw new InvalidDateException(e.getParsedString());
+        }
     }
 
-    public Deadline(String name, String deadline) {
+    public Deadline(String name, String deadline) throws InvalidDateException {
         this(name, false, deadline);
     }
 
@@ -26,7 +35,7 @@ public class Deadline extends Task {
 
     @Override
     public String toString() {
-        String s = String.format("%s (by: %s)", super.toString(), this.deadline);
+        String s = String.format("%s (by: %s)", super.toString(), Task.formatDate(this.deadline));
         return s;
     }
 }
