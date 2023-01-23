@@ -156,23 +156,32 @@ public class Duke {
     }
 
     private static void chatCycle(String command) throws DukeException{
-        if (command.startsWith("list")) {
-            listCommand();
-        } else if (command.startsWith("mark")) {
-            markCommand(command);
-        } else if (command.startsWith("unmark")) {
-            unmarkCommand(command);
-        } else if (command.startsWith("todo")) {
-            todoCommand(command);
-        } else if (command.startsWith("deadline")) {
-            deadlineCommand(command);
-        } else if (command.startsWith("event")) {
-            eventCommand(command);
-        } else if (command.startsWith("delete")) {
-            deleteCommand(command);
-        } else {
-            throw new DukeException("I don't know that command.");
+        switch (command.split("\\s+")[0]) {
+            case "list":
+                listCommand();
+                break;
+            case "mark":
+                markCommand(command);
+                break;
+            case "unmark":
+                unmarkCommand(command);
+                break;
+            case "todo":
+                todoCommand(command);
+                break;
+            case "deadline":
+                deadlineCommand(command);
+                break;
+            case "event":
+                eventCommand(command);
+                break;
+            case "delete":
+                deleteCommand(command);
+                break;
+            default:
+                throw new DukeException("I don't know that command.");
         }
+
     }
 
     public static void main(String[] args) {
