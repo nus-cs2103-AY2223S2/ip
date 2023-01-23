@@ -61,7 +61,7 @@ public class Ui {
     }
 
     private String getUserGuide() {
-        String guide = "Here are the commands you can give me: \n " +
+        String guide = "Here are the commands you can give me: \n" +
                 "1. todo [a todo task] -- to add a todo to your task list\n" +
                 "2. deadline [a deadline] /by yyyy-MM-dd HHmm -- to add a deadline to you task list\n" +
                 "3. event [an event] /from yyyy-MM-dd HHmm /to yyyy-MM-dd HHmm -- to add an event to you task list\n" +
