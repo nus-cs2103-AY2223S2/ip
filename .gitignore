@@ -19,5 +19,5 @@ text-ui-test/EXPECTED-UNIX.TXT
 # Binary files
 /bin/*.class
 
-# Storage file
+# Save files
 store.csv

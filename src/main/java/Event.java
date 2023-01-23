@@ -28,6 +28,14 @@ public class Event extends Task {
     }
 
     @Override
+    public String saveFormat() {
+        StringBuilder temp = new StringBuilder("E\",\"" + super.saveFormat());
+        temp.append("\",\"" + startDate);
+        temp.append("\",\"" + endDate);
+        return temp.toString();
+    }
+
+    @Override
     public String toString() {
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd MMM yyyy HHmm");
         StringBuilder ret = new StringBuilder("[E]");

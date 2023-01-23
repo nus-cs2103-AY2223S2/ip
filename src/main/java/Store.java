@@ -1,4 +1,13 @@
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Scanner;
+
+enum TaskType {
+    T, D, E
+}
 
 public class Store {
     private ArrayList<Task> database;
@@ -123,5 +132,62 @@ public class Store {
             ret.append("\n");
         }
         return ret.toString();
+    }
+
+    /**
+     * Saves current tasks list to a CSV file.
+     * 
+     * @throws KiraException File-Output-Issue
+     */
+    public void save() throws KiraException {
+        try {
+            File saveFile = new File("./store.csv");
+            FileWriter fw = new FileWriter(saveFile);
+            for (Task t : this.database) {
+                fw.write(t.saveFormat());
+                fw.write("\n");
+            }
+            fw.flush();
+            fw.close();
+        } catch (IOException e) {
+            throw new KiraException(e.getMessage());
+        }
+    }
+
+    public void load() throws KiraException {
+        try {
+            File loadFile = new File("./store.csv");
+            Scanner sc = new Scanner(loadFile);
+            while (sc.hasNextLine()) {
+                String task = sc.nextLine();
+                String[] parsed = task.split("\",\"");
+                switch (TaskType.valueOf(parsed[0])) {
+                case T:
+                    ToDo tdo = new ToDo(parsed[1]);
+                    if (parsed[2].equals("y")) {
+                        tdo.mark();
+                    }
+                    store(tdo);
+                    break;
+                case D:
+                    Deadline deadline = new Deadline(parsed[1], parsed[3]);
+                    if (parsed[2].equals("y")) {
+                        deadline.mark();
+                    }
+                    store(deadline);
+                    break;
+                case E:
+                    Event evt = new Event(parsed[1], parsed[3], parsed[4]);
+                    if (parsed[2].equals("y")) {
+                        evt.mark();
+                    }
+                    store(evt);
+                    break;
+                }
+            }
+            sc.close();
+        } catch (FileNotFoundException e) {
+            throw new KiraException(e.getMessage());
+        }
     }
 }

@@ -1,4 +1,4 @@
-public class Task {
+public abstract class Task {
     private String data;
     private boolean isDone;
 
@@ -19,6 +19,11 @@ public class Task {
      */
     public void unmark() {
         this.isDone = false;
+    }
+
+    public String saveFormat() {
+        String[] temp = new String[] {this.data, this.isDone ? "y" : "n"};
+        return String.join("\",\"", temp);
     }
 
     @Override

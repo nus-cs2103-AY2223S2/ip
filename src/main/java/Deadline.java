@@ -26,6 +26,13 @@ public class Deadline extends Task {
                 .toLocalDate()
                 .equals(deadline.toLocalDate());
     }
+
+    @Override
+    public String saveFormat() {
+        StringBuilder temp = new StringBuilder("D\",\"" + super.saveFormat());
+        temp.append("\",\"" + deadline);
+        return temp.toString();
+    }
     
     @Override
     public String toString() {
