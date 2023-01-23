@@ -1,11 +1,13 @@
 package kude.tui;
 
 import kude.DukeException;
+import kude.Storage;
 import kude.models.Deadline;
 import kude.models.Event;
 import kude.models.ItemList;
 import kude.models.Todo;
 
+import java.io.IOException;
 import java.io.InputStream;
 import java.io.PrintStream;
 import java.util.HashMap;
@@ -18,17 +20,32 @@ public class Processor {
     private final PrintStream outStream;
     private final Output output;
     private final ItemList items;
+    private final Storage storage;
     private final HashMap<String, Command> commands;
 
-    public Processor(InputStream in, PrintStream out, ItemList items) {
+    public Processor(InputStream in, PrintStream out, Storage storage) {
         this.inStream = in;
         this.outStream = out;
         this.inStreamScanner = new Scanner(in);
-        this.items = items;
         this.output = new Output(out);
+        this.storage = storage;
 
         this.commands = new HashMap<>();
         registerCommands();
+
+        ItemList items = null;
+        try {
+            items = storage.readItems();
+        } catch (IOException ioe) {
+            this.output.writeErr("Save file could not be read from, reinitializing");
+        } catch (ClassNotFoundException cnfe) {
+            this.output.writeErr("Save file corrupted or tampered with, reinitializing");
+        }
+        if (items == null) {
+            items = new ItemList();
+            saveItems();
+        }
+        this.items = items;
     }
 
     void registerCommands() {
@@ -46,6 +63,7 @@ public class Processor {
             var item = ctx.getItem(index);
 
             item.setIsDone(true);
+            ctx.notifyMutated();
 
             ctx.getOutput().writeLine("Marked " + item);
         });
@@ -55,6 +73,7 @@ public class Processor {
             var item = ctx.getItem(index);
 
             item.setIsDone(false);
+            ctx.notifyMutated();
 
             ctx.getOutput().writeLine("Unmarked " + item);
         });
@@ -107,7 +126,7 @@ public class Processor {
                 break;
             }
             var parser = new Parser(line);
-            var context = new Context(parser, items, output);
+            var context = new Context(parser, items, output, this);
             var cmdOpt = Optional.ofNullable(this.commands.get(parser.getCommand()));
             cmdOpt.ifPresentOrElse(cmd -> {
                 try {
@@ -118,6 +137,15 @@ public class Processor {
                     output.writeErr("An unhandled exception occurred while running the command: " + e);
                 }
             }, () -> output.writeErr("No such command!"));
+        }
+    }
+
+    public void saveItems() {
+        try {
+            storage.writeItems(items);
+        } catch (IOException ioe) {
+            this.output.writeErr("Save file could not be written to!");
+            throw new RuntimeException(ioe);
         }
     }
 }

@@ -10,11 +10,13 @@ public class Context {
     private final Parser parser;
     private final ItemList items;
     private final Output output;
+    private final Processor processor;
 
-    public Context(Parser parser, ItemList items, Output output) {
+    public Context(Parser parser, ItemList items, Output output, Processor processor) {
         this.parser = parser;
         this.items = items;
         this.output = output;
+        this.processor = processor;
     }
 
     public Parser getParser() {
@@ -30,13 +32,19 @@ public class Context {
     }
 
     public void notifyAdded(Item item) {
+        notifyMutated();
         output.writeLine("Added " + item);
         output.writeLine("List now contains " + items.list().count() + " items");
     }
 
     public void notifyDeleted(Item item) {
+        notifyMutated();
         output.writeLine("Deleted " + item);
         output.writeLine("List now contains " + items.list().count() + " items");
+    }
+
+    public void notifyMutated() {
+        processor.saveItems();
     }
 
     public String getArg(String provideName) {
