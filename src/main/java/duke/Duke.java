@@ -187,6 +187,7 @@ public class Duke {
      * @return the string message to print out
      */
     public String deleteTask(int idx) {
+        idx = idx - 1;   // count from zero
         Task t = taskList.get(idx);
         taskList.remove(idx);
         return String.format("Noted. I've removed this task:\n  %s\nNow you have %d tasks in the list.", t, taskList.size());
