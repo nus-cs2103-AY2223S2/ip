@@ -21,7 +21,11 @@ public class TaskList {
                 throw new EmptyCommandException("Empty argument", "deadline");
             }
 
-            this.tasks.add(new Deadline(content, arr[1]));
+            try {
+                this.tasks.add(new Deadline(content, arr[1]));
+            } catch (InvalidDateFormatException e) {
+                System.out.println(e.getMessage());
+            }
         } else if (input.matches("event .* /from .* /to .*")) {
             // Handle event
             String[] arr = input.split(" /from ");
@@ -54,7 +58,11 @@ public class TaskList {
     }
 
     public void addDeadline(String task, String deadline) {
-        this.tasks.add(new Deadline(task, deadline));
+        try {
+            this.tasks.add(new Deadline(task, deadline));
+        } catch (InvalidDateFormatException e) {
+            System.out.println(e.getMessage());
+        }
     }
 
     public void addEvent(String task, String start, String end) {
