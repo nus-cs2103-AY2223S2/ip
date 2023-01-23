@@ -3,6 +3,7 @@ package duke;
 import duke.command.ByeCommand;
 import duke.command.Command;
 import duke.command.DeadlineCommand;
+import duke.command.DeleteCommand;
 import duke.command.EventCommand;
 import duke.command.FindCommand;
 import duke.command.ListCommand;
@@ -60,6 +61,12 @@ public class Parser {
             args = Parser.getArgs(commandName, argString, 1);
             index = Integer.parseInt(args[0]) - 1;
             command = new UnmarkCommand(index);
+            break;
+        case "delete":
+            // TODO: throw exception in UnmarkCommand if mark index out of bounds
+            args = Parser.getArgs(commandName, argString, 1);
+            index = Integer.parseInt(args[0]) - 1;
+            command = new DeleteCommand(index);
             break;
         case "find":
             args = Parser.getArgs(commandName, argString, 1);
