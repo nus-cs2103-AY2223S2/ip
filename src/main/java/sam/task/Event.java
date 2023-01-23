@@ -1,6 +1,9 @@
 package sam.task;
 import java.time.LocalDate;
 
+/**
+ * Represents a task with a start and end date.
+ */
 public class Event extends Task {
   protected LocalDate from;
   protected LocalDate to;

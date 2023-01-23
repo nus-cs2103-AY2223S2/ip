@@ -1,6 +1,9 @@
 package sam.task;
 import java.time.LocalDate;
 
+/**
+ * Represents a task with a due date.
+ */
 public class Deadline extends Task {
   protected LocalDate by;
 
