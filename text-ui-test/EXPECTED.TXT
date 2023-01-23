@@ -1,5 +1,5 @@
 RubiRyo Woof! I'm RubiRyo the Japanese Spitz!
-Give me a command or type menu to see the commands I know!
+Give me a command or type menu to see the command I know!
 Your list is empty, please add a task!
 I have added: [T][ ] homework!
 There are currently 1 task(s) in the list!
