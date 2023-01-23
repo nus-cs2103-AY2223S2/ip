@@ -43,12 +43,6 @@ public class TreeBot {
             case "todo":
             case "deadline":
             case "event":
-                try {
-                    Task newTask = this.taskFactory.make(commandString);
-                } catch (TaskFactoryException e) {
-                    throw e;
-                }
-
                 addTask(this.taskFactory.make(commandString));
                 break;
             case "mark":
