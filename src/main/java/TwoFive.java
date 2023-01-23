@@ -2,10 +2,19 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
+
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
+
 import java.util.ArrayList;
 import java.util.Scanner;
 
 public class TwoFive {
+    private static DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
+    private static DateTimeFormatter dueDateFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+
     //Returns string to be printed when new task is added
     private static String taskAdded(Task task) {
         return "Got it. I've added this task:\n " + task + "\n";
@@ -77,8 +86,13 @@ public class TwoFive {
                     break;
                 case "D":
                     if (taskSplit.length == 4) {
-                        String deadline = taskSplit[3].trim();
-                        currentTask = new Deadline(taskDescription, deadline);
+                        String deadlineString = taskSplit[3].trim();
+                        try {
+                            LocalDateTime deadline = LocalDateTime.parse(deadlineString, formatter);
+                            currentTask = new Deadline(taskDescription, deadline);
+                        } catch (DateTimeParseException e) {
+                            System.out.println("Deadline must be in the format yyyy-MM-dd HH:mm, e.g. 2023-01-23 16:31");
+                        }
                     } else {
                         // Missing deadline for Deadline task
                         throw new EmptyDeadlineException();
@@ -86,9 +100,15 @@ public class TwoFive {
                     break;
                 case "E":
                     if (taskSplit.length == 5) {
-                        String startTime = taskSplit[3].trim();
-                        String endTime = taskSplit[4].trim();
-                        currentTask = new Event(taskDescription, startTime, endTime);
+                        String startTimeString = taskSplit[3].trim();
+                        String endTimeString = taskSplit[4].trim();
+                        try {
+                            LocalDateTime startTime = LocalDateTime.parse(startTimeString, formatter);
+                            LocalDateTime endTime = LocalDateTime.parse(endTimeString, formatter);
+                            currentTask = new Event(taskDescription, startTime, endTime);
+                        } catch (DateTimeParseException e) {
+                            System.out.println("Start time and end time must be in the format yyyy-MM-dd HH:mm, e.g. 2023-01-23 16:31");
+                        }
                     } else {
                         if (taskSplit.length == 4) {
                             // Missing end time for Event task
@@ -217,11 +237,16 @@ public class TwoFive {
                             throw new EmptyDeadlineException();
                         } else {
                             String taskDescription = deadlineSplit[0].trim();
-                            String deadline = deadlineSplit[1].trim();
-                            Deadline newDeadline = new Deadline(taskDescription, deadline);
-                            //Adds new task to list of tasks
-                            tasks.add(newDeadline);
-                            System.out.println(taskAdded(newDeadline) + numTasksString(tasks.size()));
+                            String deadlineString = deadlineSplit[1].trim();
+                            try {
+                                LocalDateTime deadline = LocalDateTime.parse(deadlineString, formatter);
+                                Deadline newDeadline = new Deadline(taskDescription, deadline);
+                                //Adds new task to list of tasks
+                                tasks.add(newDeadline);
+                                System.out.println(taskAdded(newDeadline) + numTasksString(tasks.size()));
+                            } catch (DateTimeParseException e) {
+                                System.out.println("Deadline must be in the format yyyy-MM-dd HH:mm, e.g. 2023-01-23 16:31");
+                            }
                         }
                     }
                 } else if (input.contains("event")){
@@ -247,13 +272,46 @@ public class TwoFive {
                                 throw new EmptyEndTimeException();
                             } else {
                                 String taskDescription = startTimeSplit[0].trim();
-                                String startTime = endTimeSplit[0].trim();
-                                String endTime = endTimeSplit[1].trim();
-                                Event newEvent = new Event(taskDescription, startTime, endTime);
-                                //Adds new task to list of tasks
-                                tasks.add(newEvent);
-                                System.out.println(taskAdded(newEvent) + numTasksString(tasks.size()));
+                                try {
+                                    String startTimeString = endTimeSplit[0].trim();
+                                    String endTimeString = endTimeSplit[1].trim();
+
+                                    LocalDateTime startTime = LocalDateTime.parse(startTimeString, formatter);
+                                    LocalDateTime endTime = LocalDateTime.parse(endTimeString, formatter);
+                                    Event newEvent = new Event(taskDescription, startTime, endTime);
+
+                                    //Adds new task to list of tasks
+                                    tasks.add(newEvent);
+                                    System.out.println(taskAdded(newEvent) + numTasksString(tasks.size()));
+                                } catch (DateTimeParseException e) {
+                                    System.out.println("Start time and end time must be in the format yyyy-MM-dd HH:mm, e.g. 2023-01-23 16:31");
+                                }
+
                             }
+                        }
+                    }
+                } else if (input.contains("due")){
+                    //List all tasks added by the user due on the date provided
+                    String[] dueSplit = input.split("due");
+                    if (dueSplit.length <= 1 || dueSplit[1].trim().equals("")) {
+                        //If task description is empty
+                        throw new EmptyDateException();
+                    } else {
+                        String dueDateString = dueSplit[1].trim();
+                        try {
+                            LocalDate dueDate = LocalDate.parse(dueDateString, dueDateFormatter);
+                            int taskIndex = 1;
+                            System.out.println("Here are the tasks in your list due on "
+                                    + dueDate.format(DateTimeFormatter.ofPattern("EEE MMM d yyyy")) + ":");
+                            for (Task task : tasks) {
+                                if (task.isToday(dueDate)) {
+                                    System.out.println(taskIndex + ". " + task);
+                                    taskIndex++;
+                                }
+                            }
+                        } catch (DateTimeParseException e) {
+                            System.out.println(e.getMessage());
+                            System.out.println("Due date must be in the format yyyy-MM-dd, e.g. 2023-01-23");
                         }
                     }
                 } else {
