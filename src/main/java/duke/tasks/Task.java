@@ -1,3 +1,4 @@
+package duke.tasks;
 import java.io.Serializable;
 
 public class Task implements Serializable {
