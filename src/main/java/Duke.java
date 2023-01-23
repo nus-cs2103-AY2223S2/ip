@@ -10,18 +10,32 @@ import java.util.List;
 // A chatbot
 public class Duke {
 
-    private static final String SAVE_PATH = "data/duke.txt";
     private static TaskList taskList = new TaskList();
     private static Parser parser = new Parser();
-    private static Storage storage = new Storage(SAVE_PATH);
+    private static Storage storage;
     private static Ui ui = new Ui();
 
-    private static boolean isExitCommand(String input) {
+    private Duke(String filePath) {
+        storage = new Storage(filePath);
+        try {
+            taskList = storage.load(parser);
+        } catch (DukeException e) {
+            ui.printMessage(e.toString());
+        }
+    }
+
+    private void run() {
+        ui.greet();
+        acceptCommands();
+        ui.sayGoodbye();
+    }
+
+    private boolean isExitCommand(String input) {
         return input.equals(CommandType.EXIT.getCommand());
     }
 
     // Loop for user input
-    private static void acceptCommands() {
+    private void acceptCommands() {
         String input;
         while (true) {
             ui.printPromptForInput();
@@ -34,7 +48,7 @@ public class Duke {
     }
 
     // Executes a command, except exit command
-    private static void executeOneCommand(String input) {
+    private void executeOneCommand(String input) {
         // Split into two parts at the first space
         String[] parts = input.split(" ", 2);
         String command = parts[0];
@@ -53,7 +67,7 @@ public class Duke {
 
     }
 
-    public static void executeCommandWithArgument(CommandType command, String[] parts) throws DukeException {
+    public void executeCommandWithArgument(CommandType command, String[] parts) throws DukeException {
         if (parts.length < 2) {
             throw new EmptyArgumentDukeException();
         }
@@ -79,7 +93,7 @@ public class Duke {
         }
     }
 
-    public static void executeCommandWithNoArgument(CommandType command) {
+    public void executeCommandWithNoArgument(CommandType command) {
         switch (command) {
             case DISPLAY_LIST:
                 displayTasks();
@@ -87,13 +101,13 @@ public class Duke {
         }
     }
 
-    private static void addTodoToList(String description) {
+    private void addTodoToList(String description) {
         Task task = new ToDoTask(description);
         taskList.add(task);
         ui.printMessage("added: " + task);
     }
 
-    private static void addDeadlineToList(String arguments) throws DukeException {
+    private void addDeadlineToList(String arguments) throws DukeException {
         try {
             String[] splitArgs = arguments.split(" /by ");
             Task task = new DeadlineTask(splitArgs[0], parser.parseDateTime(splitArgs[1]));
@@ -106,7 +120,7 @@ public class Duke {
         }
     }
 
-    private static void addEventToList(String arguments) throws DukeException {
+    private void addEventToList(String arguments) throws DukeException {
         try {
             String[] splitArgs = arguments.split(" /from ");
             String[] times = splitArgs[1].split(" /to ");
@@ -120,11 +134,11 @@ public class Duke {
         }
     }
 
-    private static void displayTasks() {
+    private void displayTasks() {
         ui.printMessage("Your tasks are:\n" + taskList.toString());
     }
 
-    private static void markTaskAsDone(String arguments) throws InvalidArgumentDukeException {
+    private void markTaskAsDone(String arguments) throws InvalidArgumentDukeException {
         try {
             int number = Integer.parseInt(arguments);
             taskList.markTaskAsDone(number);
@@ -136,7 +150,7 @@ public class Duke {
         }
     }
 
-    private static void markTaskAsNotDone(String arguments) throws InvalidArgumentDukeException {
+    private void markTaskAsNotDone(String arguments) throws InvalidArgumentDukeException {
         try {
             int number = Integer.parseInt(arguments);
             taskList.markTaskAsNotDone(number);
@@ -148,7 +162,7 @@ public class Duke {
         }
     }
 
-    private static void deleteTask(String arguments) throws InvalidArgumentDukeException {
+    private void deleteTask(String arguments) throws InvalidArgumentDukeException {
         try {
             int number = Integer.parseInt(arguments);
             String taskString = taskList.getTaskString(number);
@@ -163,13 +177,7 @@ public class Duke {
 
     // Main method
     public static void main(String[] args) {
-        try {
-            taskList = storage.load(parser);
-        } catch (DukeException e) {
-            ui.printMessage(e.toString());
-        }
-        ui.greet();
-        acceptCommands();
-        ui.sayGoodbye();
+        Duke duke = new Duke("data/duke.txt");
+        duke.run();
     }
 }
