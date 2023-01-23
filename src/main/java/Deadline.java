@@ -8,6 +8,16 @@ public class Deadline extends Task {
     }
 
     @Override
+    public String getStorageDetails() {
+        return this.description + " | " + this.by;
+    }
+
+    @Override
+    public String eventType() {
+        return "D";
+    }
+
+    @Override
     public String toString() {
         return "[D]" + super.toString() + " (by: " + this.by + ")";
     }

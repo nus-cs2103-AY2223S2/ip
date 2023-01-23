@@ -8,6 +8,9 @@ public class Duke {
         // greetings
         System.out.println("Hello I'm Duke\n" + "What can I do for you?");
 
+        // create Storage and load initial data
+        Storage hardDrive = new Storage("data/file.txt");
+
         // obtaining first input by user
         Scanner myObj = new Scanner(System.in);
         String userInput = myObj.nextLine();
@@ -39,7 +42,7 @@ public class Duke {
             else if (userInput.split(" ", 2)[0].equals("event")) {
                 try {
                     String[] input = userInput.split(" ", 2)[1].split(" /", 3);
-                    store.addTask(new Event(input[0], input[1], input[2]));
+                    store.addTask(new Event(input[0], input[1].split("from ", 2)[1], input[2].split("to ", 2)[1]));
                 } catch (Exception e) {
                     throw new DukeException("The description, start time, and end time of a event cannot be empty.");
                 }
@@ -58,6 +61,8 @@ public class Duke {
             userInput = myObj.nextLine();
         }
         // prints exit statement
+        // saves task list data
+        hardDrive.saveData(store);
         System.out.println("Bye. Hope to see you again soon!");
     }
 }

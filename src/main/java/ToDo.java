@@ -5,6 +5,16 @@ public class ToDo extends Task {
     }
 
     @Override
+    public String eventType() {
+        return "T";
+    }
+
+    @Override
+    public String getStorageDetails() {
+        return this.description;
+    }
+
+    @Override
     public String toString() {
         return "[T]" + super.toString();
     }

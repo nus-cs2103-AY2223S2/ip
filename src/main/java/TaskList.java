@@ -3,7 +3,6 @@ import java.util.ArrayList;
 public class TaskList {
     protected ArrayList<Task> taskList;
 
-
     public TaskList(ArrayList<Task> taskList) {
         this.taskList = taskList;
     }
@@ -12,8 +11,12 @@ public class TaskList {
         return this.taskList.size();
     }
 
-    public Task getTask(int index) {
-        assert taskList.size() != -1: "List is empty!";
+    public Task getTask(int index) throws DukeException {
+        // handle errors out of range
+        if (index < 0 || index >= this.getSize()) {
+            int display = index + 1;
+            throw new DukeException("Task " + display + " does not exist.");
+        }
         return taskList.get(index);
     }
 
@@ -53,7 +56,6 @@ public class TaskList {
             int display = index + 1;
             throw new DukeException("Task " + display + " does not exist.");
         }
-        assert taskList.size() != -1: "List is empty!";
         System.out.println("Noted. I've removed this task:");
         System.out.println(this.getTask(index));
         taskList.remove(index);

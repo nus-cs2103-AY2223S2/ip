@@ -10,6 +10,16 @@ public class Event extends Task {
     }
 
     @Override
+    public String getStorageDetails() {
+        return this.description + " | " + this.from + " - " + this.to;
+    }
+
+    @Override
+    public String eventType() {
+        return "E";
+    }
+
+    @Override
     public String toString() {
         return "[E]" + super.toString() + " (from: " + this.from + " to: " + this.to + ")";
     }
