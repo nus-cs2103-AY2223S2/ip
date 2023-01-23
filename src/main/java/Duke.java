@@ -1,3 +1,6 @@
+import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -32,18 +35,21 @@ public class Duke {
                     case unmark:
                         int a = Integer.parseInt(parts[1]) - 1;
                         records.get(a).incomplete();
+                        updateFile();
                         break;
 
                     case mark:
                         int b = Integer.parseInt(parts[1]) - 1;
                         records.get(b).complete();
+                        updateFile();
                         break;
 
                     case todo:
                         records.add(new Todo(userinput.substring(5)));
                         index++;
+                        updateFile();
                         System.out.println("Added to-do mission:");
-                        System.out.println(records.get(index-1).toString());
+                        System.out.println(records.get(index - 1).toString());
                         System.out.println("You have " + index + " missions in the list");
                         break;
 
@@ -54,8 +60,9 @@ public class Duke {
                         }
                         records.add(new Deadline(parts[0], parts[1]));
                         index++;
+                        updateFile();
                         System.out.println("Added deadline mission:");
-                        System.out.println(records.get(index-1).toString());
+                        System.out.println(records.get(index - 1).toString());
                         System.out.println("You have " + index + " missions in the list");
                         break;
 
@@ -66,8 +73,9 @@ public class Duke {
                         }
                         records.add(new Event(parts[0], parts[1], parts[2]));
                         index++;
+                        updateFile();
                         System.out.println("Added event mission:");
-                        System.out.println(records.get(index-1).toString());
+                        System.out.println(records.get(index - 1).toString());
                         System.out.println("You have " + index + " missions in the list");
                         break;
 
@@ -78,6 +86,7 @@ public class Duke {
                         System.out.println(msg);
                         records.remove(c);
                         index--;
+                        updateFile();
                         break;
 
                     default:
@@ -94,6 +103,33 @@ public class Duke {
             } catch (IllegalArgumentException e) {
                 System.out.println("Command not recognised");
             }
+        }
+    }
+
+    private static void updateFile() {
+        String s = "";
+
+        try {
+            File file = new File("./" + "data/duke.txt");
+            file.createNewFile();
+            FileWriter fw = new FileWriter(file);
+
+            int n = records.size();
+
+            for (int i = 0; i < n; i++) {
+                if (i != n - 1) {
+                    s = s + (i + 1) + ". " + records.get(i).toString() + "\n";
+                }
+                else {
+                    s = s + (i + 1) + ". " + records.get(i).toString();
+                }
+            }
+
+            fw.write(s);
+            fw.close();
+
+        } catch (IOException e) {
+            e.getStackTrace();
         }
     }
 }
