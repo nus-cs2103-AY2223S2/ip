@@ -1,7 +1,11 @@
+/**
+ * A string parser that processes user-input commands
+ */
 public class Parser {
     /**
      * Gets the content of the command
-     * @param string: the command string
+     *
+     * @param string:  the command string
      * @param command: a command type
      * @return the content of the command
      * @throws DukeException when the string is not complete
@@ -16,7 +20,8 @@ public class Parser {
 
     /**
      * Returns whether the input string is of the specified command type
-     * @param string: the input string from the user
+     *
+     * @param string:  the input string from the user
      * @param command: a candidate command to check against
      * @return whether the input string is of the specified command type
      */

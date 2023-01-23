@@ -8,11 +8,20 @@ import java.util.ArrayList;
 import java.util.Scanner;
 
 
+/**
+ * Deals with loading and saving task record
+ */
 public class Storage {
     protected final String filePath;
     protected final String directory;
     protected final String fileName;
 
+    /**
+     * Default constructor
+     *
+     * @param directory: directory of the record file
+     * @param fileName:  the name of the record file
+     */
     public Storage(String directory, String fileName) {
         this.directory = directory;
         this.fileName = fileName;
@@ -21,6 +30,7 @@ public class Storage {
 
     /**
      * Obtain the path to the record path
+     *
      * @return the path to the record
      */
     private String getRecordPath() {
@@ -29,6 +39,7 @@ public class Storage {
 
     /**
      * Saves the list of tasks to a file
+     *
      * @param commandListString: the string to write to
      */
     public void saveToFile(String commandListString) {
@@ -54,6 +65,7 @@ public class Storage {
 
     /**
      * Load up the record file at start-up
+     *
      * @param path: path to the record file
      */
     public void loadRecordIfExists(ArrayList<String> commandList) {

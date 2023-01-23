@@ -1,6 +1,7 @@
 /**
  * The base class for all tasks
  */
+
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
@@ -18,6 +19,7 @@ public class Task {
 
     /**
      * The task string description
+     *
      * @param description: a string describing the task
      */
     public Task(String description) {
@@ -26,7 +28,28 @@ public class Task {
     }
 
     /**
+     * Parse the date into a date object
+     *
+     * @param dateString: the string representation of the date
+     * @return the date object
+     */
+    protected static LocalDate parseDate(String dateString) {
+        return LocalDate.parse(dateString);
+    }
+
+    /**
+     * Gives the string representation of date
+     *
+     * @param date: a date object
+     * @return the corresponding string representation
+     */
+    protected static String printDate(LocalDate date) {
+        return date.format(DateTimeFormatter.ofPattern("MMM d yyyy"));
+    }
+
+    /**
      * Get the name of the task
+     *
      * @return the string name of the task
      */
     public String getName() {
@@ -35,6 +58,7 @@ public class Task {
 
     /**
      * Get whether the task is done
+     *
      * @return the status of the task
      */
     public boolean getIsDone() {
@@ -57,6 +81,7 @@ public class Task {
 
     /**
      * Get the string icon of the status of the task
+     *
      * @return the string icon of the task status
      */
     public String getStatusIcon() {
@@ -65,28 +90,11 @@ public class Task {
 
     /**
      * Overriding
+     *
      * @return the task string
      */
     @Override
     public String toString() {
         return String.format("[%s] %s", getStatusIcon(), name);
-    }
-
-    /**
-     * Parse the date into a date object
-     * @param dateString: the string representation of the date
-     * @return the date object
-     */
-    protected static LocalDate parseDate(String dateString) {
-        return LocalDate.parse(dateString);
-    }
-
-    /**
-     * Gives the string representation of date
-     * @param date: a date object
-     * @return the corresponding string representation
-     */
-    protected static String printDate(LocalDate date) {
-        return date.format(DateTimeFormatter.ofPattern("MMM d yyyy"));
     }
 }

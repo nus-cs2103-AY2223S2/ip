@@ -2,6 +2,7 @@
  * A deadline class extends from the Task.
  * It has a deadline attribute on top of the task.
  */
+
 import java.time.LocalDate;
 
 public class Deadline extends Task {
@@ -27,6 +28,7 @@ public class Deadline extends Task {
 
     /**
      * Returns the string representation
+     *
      * @return string representation of a deadline task, where the deadline is specified
      */
     @Override

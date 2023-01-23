@@ -6,6 +6,7 @@ public class ToDo extends Task {
 
     /**
      * Default constructor
+     *
      * @param description: a string describing the to-do task
      */
     public ToDo(String description) {
@@ -15,6 +16,7 @@ public class ToDo extends Task {
 
     /**
      * Overriding
+     *
      * @return the string representation of the to-do task
      */
     @Override

@@ -1,6 +1,9 @@
 import java.util.Objects;
 import java.util.Scanner;
 
+/**
+ * The text UI interface that processes user input and prints outputs
+ */
 public class TextUi {
     protected final Duke duke;
     protected final Scanner scanner;
@@ -20,6 +23,7 @@ public class TextUi {
 
     /**
      * Print the string in a pre-specified format
+     *
      * @param string: the string content to print out
      */
     public void printStructuredString(String string) {
@@ -29,6 +33,7 @@ public class TextUi {
 
     /**
      * Returns the end message and do final clean-up
+     *
      * @return the bye-bye message to be printed out
      */
     public void sayGoodbye() {
@@ -37,13 +42,11 @@ public class TextUi {
 
     /**
      * Checks if the command marks the end
+     *
      * @param string: User-input string
      * @return if the string marks the end of the conversation
      */
     public boolean isEnd(String string) {
         return Objects.equals(string.toLowerCase(), "bye");
     }
-
-
-
 }

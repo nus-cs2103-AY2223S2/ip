@@ -1,6 +1,7 @@
 /**
  * The event class that extends the Task class
  */
+
 import java.time.LocalDate;
 
 public class Event extends Task {
@@ -10,6 +11,7 @@ public class Event extends Task {
 
     /**
      * The default constructor
+     *
      * @param description: the content of the command
      */
     public Event(String description) {
@@ -24,6 +26,7 @@ public class Event extends Task {
 
     /**
      * Parse the start time of the event from the user string
+     *
      * @param s: the user-input string
      * @return the start time of the event
      */
@@ -33,6 +36,7 @@ public class Event extends Task {
 
     /**
      * Parse the end time of the event from the user string
+     *
      * @param s: the user-input string
      * @return the end time of the event
      */
@@ -42,6 +46,7 @@ public class Event extends Task {
 
     /**
      * Overriding the toString class
+     *
      * @return the string representation of an event
      */
     @Override
