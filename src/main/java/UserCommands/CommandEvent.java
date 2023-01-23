@@ -8,6 +8,9 @@ import Features.Ui;
 import Tasks.Event;
 import Tasks.Task;
 
+/**
+ * Handles 'event' command.
+ */
 public class CommandEvent extends Command {
     @Override
     public TaskList handle(Scanner userScan, TaskList taskList) throws DukeException {

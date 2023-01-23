@@ -8,6 +8,9 @@ import Features.TaskList;
 import Features.Ui;
 import Tasks.Task;
 
+/**
+ * Handles 'delete' command.
+ */
 public class CommandDelete extends Command {
     @Override
     public TaskList handle(Scanner userScan, TaskList taskList) throws DukeException {

@@ -8,6 +8,9 @@ import Features.Ui;
 import Tasks.Task;
 import Tasks.ToDo;
 
+/**
+ * Handles 'todo' command.
+ */
 public class CommandToDo extends Command {
     @Override
     public TaskList handle(Scanner userScan, TaskList taskList) throws DukeException {

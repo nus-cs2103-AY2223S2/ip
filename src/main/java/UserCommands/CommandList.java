@@ -6,8 +6,17 @@ import Features.DukeException;
 import Features.TaskList;
 import Features.Ui;
 
+/**
+ * Handles 'list' command.
+ */
 public class CommandList extends Command {
 
+    /**
+     * Prints and labels content of TaskList.
+     * @param userScan Scanner object containing user input.
+     * @param taskList List of tasks.
+     * @throws DukeException  If format of 'list' input is wrong.
+     */
     public void print(Scanner userScan, TaskList taskList) throws DukeException {
         // ERROR: list format is anything other than [ list ]
         Ui ui = new Ui();

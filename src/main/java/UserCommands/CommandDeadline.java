@@ -8,6 +8,10 @@ import Features.Ui;
 import Tasks.Deadline;
 import Tasks.Task;
 
+
+/**
+ * Handles 'deadline' command.
+ */
 public class CommandDeadline extends Command {
     @Override
     public TaskList handle(Scanner userScan, TaskList taskList) throws DukeException {

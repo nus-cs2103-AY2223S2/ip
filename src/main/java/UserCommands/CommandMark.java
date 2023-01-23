@@ -7,6 +7,9 @@ import Features.DukeException;
 import Features.TaskList;
 import Features.Ui;
 
+/**
+ * Handles 'mark' command.
+ */
 public class CommandMark extends Command {
     @Override
     public TaskList handle(Scanner userScan, TaskList taskList) throws DukeException {
