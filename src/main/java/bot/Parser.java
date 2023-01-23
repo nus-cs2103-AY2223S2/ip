@@ -1,18 +1,18 @@
-import java.util.Scanner;
-import java.util.List;
-import java.util.ArrayList;
+package bot;
 
-public class Duke {
-    public static Scanner instr = new Scanner(System.in);
-    public static List<Tasks> todoList = new ArrayList<>(100);
-    public static void Greet() {
-        System.out.println("Hello! I'm Duke\nWhat can I do for you? "+
-                "\n('bye' to terminate Duke)" +
-                "\n('list' to access list of tasks)" +
-                "\n('un/mark X' to un/mark X task on list)" +
-                "\n('todo/deadline/event' for keeping note of different tasks)");
-    }
-    public static void command(String str) throws Exception {
+import exceptions.emptyDescException;
+import exceptions.unrecogException;
+import exceptions.unspecTimeException;
+import taskmanager.*;
+
+import java.io.IOException;
+
+public class Parser {
+    static Storage storage = new Storage("data/tasks.txt");
+    static TaskList todoList;
+
+    public static void parse(String str, TaskList tasks) throws IOException {
+        todoList = tasks;
         if (str.equals("bye")) {
             Exit();
         } else if(str.contains("delete")) {
@@ -22,6 +22,7 @@ public class Duke {
                 int index = Integer.parseInt((str.substring(7)));
                 Tasks t = todoList.get(index-1);
                 todoList.remove(index - 1);
+                TaskList.rewrite(todoList);
                 System.out.println(t.deleted() +
                         "\nNow you have " +
                         todoList.size() +
@@ -34,10 +35,10 @@ public class Duke {
                     System.out.println("You have nothing scheduled, add something to the list.");
                 } else {
                     int n = 1;
-                    for (Tasks t : todoList) {
+                    for (Tasks t : todoList.getList()) {
                         System.out.println(n + ". "
                                 + t.icon()
-                                + t.symbol() + " "
+                                + t.completed() + " "
                                 + t.getDesc());
                         n++;
                     }
@@ -47,15 +48,17 @@ public class Duke {
                     int index = Integer.parseInt((str.substring(7)));
                     Tasks t = todoList.get(index - 1);
                     t.unmark();
+                    TaskList.rewrite(todoList);
                     System.out.println("Oops! Stop procrastinating: \n"
-                            + t.symbol() + " " + t.getDesc());
+                            + t.completed() + " " + t.getDesc());
 
                 } else {
                     int index = Integer.parseInt(str.substring(5));
                     Tasks t = todoList.get(index - 1);
                     t.mark();
+                    TaskList.rewrite(todoList);
                     System.out.println("Nice! I've marked this task as done: \n"
-                            + t.symbol() + " " + t.getDesc());
+                            + t.completed() + " " + t.getDesc());
                 }
             } else {
                 String type = str.split(" ", 2)[0];
@@ -94,28 +97,21 @@ public class Duke {
                 } catch(emptyDescException e) {
                     System.out.println("☹ OOPS!!! The description of a "+type+" cannot be empty.\n");
                 }catch(unspecTimeException e) {
-                    System.out.println(" Please specify a timeframe (from/ ... to/ ...)\n");
+                    if(type.equals("event")) {
+                        System.out.println(" Please specify a timeframe (from/ ... to/ ...)\n");
+                    } else {
+                        System.out.println(" Please specify a deadline (by/...)\n");
+                    }
+                } catch (Exception e) {
+                    throw new RuntimeException(e);
                 }
-                }
+            }
         }
     }
+
     public static void Exit() {
         System.out.println("Bye. Hope to see you again soon!");
         System.exit(0);
-    }
-    public static void main(String[] args) throws Exception {
-        String logo = " ____        _        \n"
-                + "|  _ \\ _   _| | _____ \n"
-                + "| | | | | | | |/ / _ \\\n"
-                + "| |_| | |_| |   <  __/\n"
-                + "|____/ \\__,_|_|\\_\\___|\n";
-        System.out.println("Hello from\n" + logo);
-        Greet();
-        while (instr.hasNextLine()) {
-            String str = instr.nextLine();
-            command(str);
-        }
-
     }
 
 }
