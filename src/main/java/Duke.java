@@ -69,8 +69,9 @@ public class Duke {
                         break;
                     case "mark":
                     case "unmark":
+                    case "delete":
                         if (inputs.length <= 1) {
-                            throw new DukeException("Please input the numbering of the task you want to mark or unmark as well!");
+                            throw new DukeException("Please input the numbering of the task you want to" + command + "as well!");
                         } else {
                             String number = inputs[1]; // might have Number Format Exception here
                             int num = Integer.parseInt(number);
@@ -83,10 +84,16 @@ public class Duke {
                                     t.mark();
                                     System.out.println("Congratulations for completing the task ^^ I've marked it as done:");
                                     System.out.println(t);
-                                } else {
+                                } else if (command.equals("unmark")) {
                                     t.unmark();
                                     System.out.println("Ok, I've unmarked the task for you:");
                                     System.out.println(t);
+                                } else {
+                                    // deleting a task
+                                    System.out.println("Ok, I've deleted the following task for you:");
+                                    System.out.println(t);
+                                    tasks.remove(num - 1);
+                                    System.out.printf("You now have %d task(s) in your list!\n", tasks.size());
                                 }
                             }
 
