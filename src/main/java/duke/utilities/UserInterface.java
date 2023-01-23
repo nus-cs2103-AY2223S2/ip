@@ -56,6 +56,8 @@ public class UserInterface {
             case "deadline":
             case "event":
                 return new Add(new Parser(taskManager, content, ITask.convertTaskTypeCmdToEnum(cmd)));
+            case "find":
+                return new Find(new Parser(taskManager, content, ITask.convertTaskTypeCmdToEnum(cmd)));
             default:
                 throw new InvalidCommandException(cmd);
         }

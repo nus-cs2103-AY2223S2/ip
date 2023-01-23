@@ -14,12 +14,20 @@ public class TaskManager {
         _tasks = new ArrayList<>();
         _storage = new Storage(filePath);
     }
+    public int getObjectIndex(Object obj){
+        return _tasks.indexOf(obj);
+    }
+
     public void load() throws DukeException {
         _tasks = _storage.load();
     }
 
     public ArrayList<ITask> getTasks() {
         return _tasks;
+    }
+
+    public Object[] find(String keyword) {
+        return _tasks.stream().filter(x -> x.descriptionContain(keyword)).toArray();
     }
 
     public int size() {

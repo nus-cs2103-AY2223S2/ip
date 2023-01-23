@@ -1,10 +1,15 @@
 package duke.tasks;
 
-public abstract class ITask {
+public abstract class ITask implements  ITaskPrint{
+    public boolean descriptionContain(String keyword) {
+        return description.contains(keyword);
+    }
+
     public enum TaskTypes {
         ToDos,
         Deadlines,
         Events,
+        Find,
         Unknown
 
     }
@@ -32,6 +37,7 @@ public abstract class ITask {
             case "todo": return TaskTypes.ToDos;
             case "deadline": return TaskTypes.Deadlines;
             case "event": return TaskTypes.Events;
+            case "find": return TaskTypes.Find;
         }
         return TaskTypes.Unknown;
     }

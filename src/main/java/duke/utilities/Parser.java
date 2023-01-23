@@ -146,4 +146,10 @@ public class Parser {
         _description = _input;
         processed = true;
     }
+    public void forFind() {
+        _description = _input;
+        processed = true;
+    }
+
+
 }
