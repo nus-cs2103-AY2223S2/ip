@@ -1,5 +1,8 @@
+import java.io.FileWriter;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Scanner;
+import java.io.File;
 
 public class Duke {
 
@@ -16,10 +19,13 @@ public class Duke {
         Scanner sc = new Scanner(System.in);
         boolean DukeContinues = true;
         ArrayList<Task> taskList = new ArrayList<>();
+        String filePath = "data/duke.txt";
+        File file = new File(filePath);
         while (DukeContinues) {
             String s = sc.nextLine();
             String command = "";
             String restOfString = "";
+            boolean taskListChanged = false;
             if (s.contains(" ")) {
                 command = s.substring(0, s.indexOf(" "));
                 restOfString = s.substring(s.indexOf(" ") + 1);
@@ -33,15 +39,42 @@ public class Duke {
                         DukeContinues = false;
                     }
                     case "list" -> Duke.list(taskList);
-                    case "mark" -> Duke.mark(taskList, restOfString);
-                    case "unmark" -> Duke.unmark(taskList, restOfString);
-                    case "todo" -> Duke.addTodo(taskList, restOfString);
-                    case "deadline" -> Duke.addDeadline(taskList, restOfString);
-                    case "event" -> Duke.addEvent(taskList, restOfString);
-                    case "delete" -> Duke.delete(taskList, restOfString);
+                    case "mark" -> {
+                        Duke.mark(taskList, restOfString);
+                        taskListChanged = true;
+                    }
+                    case "unmark" -> {
+                        Duke.unmark(taskList, restOfString);
+                        taskListChanged = true;
+                    }
+                    case "todo" -> {
+                        Duke.addTodo(taskList, restOfString);
+                        taskListChanged = true;
+                    }
+                    case "deadline" -> {
+                        Duke.addDeadline(taskList, restOfString);
+                        taskListChanged = true;
+                    }
+                    case "event" -> {
+                        Duke.addEvent(taskList, restOfString);
+                        taskListChanged = true;
+                    }
+                    case "delete" -> {
+                        Duke.delete(taskList, restOfString);
+                        taskListChanged = true;
+                    }
                     default -> throw new DukeException("☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
                 }
-            } catch (DukeException e) {
+                if (taskListChanged) {
+                    file.createNewFile();
+                    FileWriter fw = new FileWriter(filePath);
+                    for (Task t : taskList) {
+                        fw.write(t.toString());
+                        fw.write("\n");
+                    }
+                    fw.close();
+                }
+            } catch (DukeException | IOException e) {
                 System.out.println(e.getMessage());
             }
         }
@@ -128,4 +161,5 @@ public class Duke {
             throw new DukeException("☹ OOPS!!! There are less than " + restOfString + " tasks.");
         }
     }
+
 }
