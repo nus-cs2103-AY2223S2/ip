@@ -1,9 +1,9 @@
-package UserCommands;
+package commands;
 
 import java.util.Scanner;
 
-import Features.TaskList;
-import Features.Ui;
+import features.TaskList;
+import features.Ui;
 
 /**
  * Handles 'bye' command.

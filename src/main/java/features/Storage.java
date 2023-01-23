@@ -1,4 +1,4 @@
-package Features;
+package features;
 
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -6,9 +6,9 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.util.Scanner;
 
-import Tasks.Deadline;
-import Tasks.Event;
-import Tasks.ToDo;
+import tasks.Deadline;
+import tasks.Event;
+import tasks.ToDo;
 
 /**
  * Saves and loads state of taskList to/from data/duke.txt.

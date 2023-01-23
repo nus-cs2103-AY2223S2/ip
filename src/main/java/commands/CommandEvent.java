@@ -1,12 +1,12 @@
-package UserCommands;
+package commands;
 
 import java.util.Scanner;
 
-import Features.DukeException;
-import Features.TaskList;
-import Features.Ui;
-import Tasks.Event;
-import Tasks.Task;
+import features.DukeException;
+import features.TaskList;
+import features.Ui;
+import tasks.Event;
+import tasks.Task;
 
 /**
  * Handles 'event' command.

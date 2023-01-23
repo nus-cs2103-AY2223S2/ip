@@ -1,4 +1,4 @@
-package Tasks;
+package tasks;
 
 /**
  * General purpose Task class.

@@ -1,6 +1,6 @@
 # User Guide
 
-## Features 
+## features 
 
 ### Feature-ABC
 

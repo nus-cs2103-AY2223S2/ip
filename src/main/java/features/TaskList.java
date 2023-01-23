@@ -1,8 +1,8 @@
-package Features;
+package features;
 
 import java.util.ArrayList;
 
-import Tasks.Task;
+import tasks.Task;
 
 /**
  * Contains and modifies tasks entered by the user.

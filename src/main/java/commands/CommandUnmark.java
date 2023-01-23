@@ -1,11 +1,11 @@
-package UserCommands;
+package commands;
 
 import java.util.InputMismatchException;
 import java.util.Scanner;
 
-import Features.DukeException;
-import Features.TaskList;
-import Features.Ui;
+import features.DukeException;
+import features.TaskList;
+import features.Ui;
 
 /**
  * Handles 'unmark' command.

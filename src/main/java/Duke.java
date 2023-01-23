@@ -1,10 +1,10 @@
 import java.util.Scanner;
 
-import Features.DukeException;
-import Features.Parser;
-import Features.Storage;
-import Features.TaskList;
-import Features.Ui;
+import features.DukeException;
+import features.Parser;
+import features.Storage;
+import features.TaskList;
+import features.Ui;
 
 /**
  * The project.

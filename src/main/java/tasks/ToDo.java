@@ -1,4 +1,4 @@
-package Tasks;
+package tasks;
 
 /**
  * Task class actually used in Duke.

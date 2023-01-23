@@ -1,10 +1,10 @@
-package UserCommands;
+package commands;
 
 import java.util.Scanner;
 
-import Features.DukeException;
-import Features.TaskList;
-import Features.Ui;
+import features.DukeException;
+import features.TaskList;
+import features.Ui;
 
 /**
  * Finds and prints tasks that match user input.

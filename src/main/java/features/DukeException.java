@@ -1,4 +1,4 @@
-package Features;
+package features;
 
 /**
  * General purpose Exception for use in Duke.

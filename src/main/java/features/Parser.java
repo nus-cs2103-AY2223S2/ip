@@ -1,16 +1,16 @@
-package Features;
+package features;
 import java.io.IOException;
 import java.util.Scanner;
 
-import UserCommands.CommandBye;
-import UserCommands.CommandDeadline;
-import UserCommands.CommandDelete;
-import UserCommands.CommandEvent;
-import UserCommands.CommandFind;
-import UserCommands.CommandList;
-import UserCommands.CommandMark;
-import UserCommands.CommandToDo;
-import UserCommands.CommandUnmark;
+import commands.CommandBye;
+import commands.CommandDeadline;
+import commands.CommandDelete;
+import commands.CommandEvent;
+import commands.CommandFind;
+import commands.CommandList;
+import commands.CommandMark;
+import commands.CommandToDo;
+import commands.CommandUnmark;
 
 /**
  * Handles user input commands.
