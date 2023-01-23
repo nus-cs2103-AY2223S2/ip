@@ -71,6 +71,7 @@ public class Ui {
                 "7. delete [task index] -- to delete a task from the task list\n" +
                 "8. get yyyy-MM-dd -- to retrieve the tasks on a specific date\n" +
                 "9. bye -- to exit the session\n" +
+                "10. find [keyword] -- find tasks containing the keyword\n" +
                 "You can start giving commands below";
         return guide;
     }

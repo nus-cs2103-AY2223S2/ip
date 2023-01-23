@@ -35,6 +35,15 @@ public class Task {
         return this;
     }
 
+    /**
+     * Checks if the task description contains the keyword
+     * @param keyword the keyword to be checked against
+     * @return whether the task description contains the keyword
+     */
+    public boolean containsKeyword(String keyword){
+        return taskDescription.contains(keyword);
+    }
+
     @Override
     public String toString() {
         return this.taskStatus + " " + this.taskDescription;

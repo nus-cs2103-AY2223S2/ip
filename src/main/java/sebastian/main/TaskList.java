@@ -144,6 +144,21 @@ public class TaskList {
     }
 
     /**
+     * Find all tasks which contains keyword as part of its task description
+     * @param keyword the keyword to be checked against
+     * @return A new Tasklist containing all the qualified tasks
+     */
+    public TaskList findTasks(String keyword) {
+        List<Task> res = new ArrayList<>();
+        for(Task t:taskList) {
+            if(t.containsKeyword(keyword)) {
+                res.add(t);
+            }
+        }
+        return new TaskList(res);
+    }
+
+    /**
      * The total tasks currently in the task list
      * @return the total number of tasks
      */

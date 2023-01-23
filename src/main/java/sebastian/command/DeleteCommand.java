@@ -26,8 +26,7 @@ public class DeleteCommand extends Command{
         String[] insArr = instruction.split(" ");
         if(insArr.length == 1) {
             throw new LackOfArgumentException();
-        }
-        else if(insArr.length == 2) {
+        } else if(insArr.length == 2) {
             try {
                 int taskIndex = Integer.parseInt(insArr[1]);
                 String res = "Noted. I have deleted this task: " + "\n" +
