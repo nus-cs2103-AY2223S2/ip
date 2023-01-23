@@ -186,7 +186,7 @@ public class Duke {
         }
     }
 
-    private static void save() {
+    private static void save() throws DukeException {
         File file = new File(SAVE_PATH);
         try {
             Files.createDirectories(Paths.get(SAVE_PATH).getParent());
@@ -195,11 +195,11 @@ public class Duke {
             writer.write(taskList.toSaveString());
             writer.close();
         } catch (IOException e) {
-            printMessage(new CannotWriteFileDukeException().toString());
+            throw new CannotWriteFileDukeException();
         }
     }
 
-    private static void load() {
+    private static void load() throws DukeException {
         File file = new File(SAVE_PATH);
         if (!file.exists()) {
             return;
@@ -232,13 +232,17 @@ public class Duke {
                 taskList.add(task);
             }
         } catch (IOException | IndexOutOfBoundsException | CannotReadFileDukeException e) {
-            printMessage(new CannotReadFileDukeException().toString());
+            throw new CannotReadFileDukeException();
         }
     }
 
     // Main method
     public static void main(String[] args) {
-        load();
+        try {
+            load();
+        } catch (DukeException e) {
+            printMessage(e.toString());
+        }
         greet();
         acceptCommands();
         sayGoodbye();
