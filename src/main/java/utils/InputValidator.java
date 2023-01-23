@@ -46,7 +46,8 @@ public class InputValidator {
             InvalidCommandException, NoDeadlineFoundException {
         String[] split = input.split(" ");
         if (split.length < 4) {
-            throw new InvalidCommandException("Invalid Syntax - \"deadline [title] /by [deadline]\" (e.g. \"deadline physics project /by tomorrow 3pm\"");
+            throw new InvalidCommandException("Invalid Syntax - \"deadline [title] /by [deadline]\" " +
+                    "(e.g. \"deadline physics project /by tomorrow 3pm\"");
         }
         int totalKeywords = 0;
         List<String> RESERVED_AL = Arrays.asList(RESERVED);
