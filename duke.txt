@@ -1,0 +1,5 @@
+[ T ][ N ] eat 
+[ T ][ N ] eat 5 burgers 
+[ T ][ N ] burgers 5 eat 
+[ T ][ N ] book 
+[ T ][ N ] read book 
