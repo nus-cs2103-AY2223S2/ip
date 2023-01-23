@@ -3,8 +3,15 @@ package tasks;
 import exceptions.IncompleteCommandException;
 import formatters.StringUtils;
 
-public class ToDo extends Task{
+/**
+ * Represents a basic task with no deadline or timeline.
+ */
+public class ToDo extends Task {
 
+    /**
+     * Constructor method for ToDo task.
+     * @param description what the task is about.
+     */
     private ToDo(String description) {
         super(description);
     }
@@ -24,6 +31,12 @@ public class ToDo extends Task{
         return new ToDo(description);
     }
 
+    /**
+     * Factory method to create a ToDo task based on data read from file.
+     * @param description string array of commands
+     * @param marked status of the task
+     * @return a ToDo object based on commands.
+     */
     public static ToDo create(String description, String marked) {
         ToDo newTask = new ToDo(description);
         if (marked.equals("1")) {
@@ -93,6 +106,10 @@ public class ToDo extends Task{
                 this.description);
     }
 
+    /**
+     * Data representation of the ToDo Task into file.
+     * @return data representation of the ToDo Task.
+     */
     @Override
     public String writeTask() {
         return String.format("%s %d %s",

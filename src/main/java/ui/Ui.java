@@ -2,6 +2,9 @@ package ui;
 
 import java.util.Scanner;
 
+/**
+ * Class which handles the interaction between the Duke and the user.
+ */
 public class Ui {
 
     private final static String BANNER = "____________________________________________________________";
@@ -22,10 +25,18 @@ public class Ui {
         System.out.println(answer);
     }
 
+    /**
+     * Displays the Good Bye message.
+     */
     public void displayByeMessage() {
         System.out.println(BYE_MSG);
     }
 
+    /**
+     * Listens to standard input for a command.
+     * @param scanner Scanner object to read the input
+     * @return String input
+     */
     public String readCommand(Scanner scanner) {
         return scanner.nextLine();
     }
@@ -37,6 +48,10 @@ public class Ui {
         System.out.println(String.format("%s\n%s\n%s", BANNER, WELCOME_MSG, BANNER));
     }
 
+    /**
+     * Shows exception message thrown to the UI.
+     * @param exception Exception for UI to display error message
+     */
     public void showLoadingErrorMessage(Exception exception) {
         System.out.println(exception.getMessage());
     }

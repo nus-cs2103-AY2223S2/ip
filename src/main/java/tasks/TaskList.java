@@ -5,6 +5,9 @@ import exceptions.NoSuchTaskException;
 
 import java.util.ArrayList;
 
+/**
+ * Represents a task list which stores all the tasks for Duke.
+ */
 public class TaskList {
     private ArrayList<Task> taskList;
     private final static String ADDTASKMSG = "Got it. Added this task, I have:";
@@ -109,6 +112,10 @@ public class TaskList {
         }
     }
 
+    /**
+     * Getter method to retrieve the task list.
+     * @return
+     */
     public ArrayList<Task> getTaskList() {
         return taskList;
     }

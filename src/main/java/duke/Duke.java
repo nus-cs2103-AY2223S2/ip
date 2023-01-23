@@ -11,7 +11,7 @@ import ui.Ui;
 
 
 /**
- * The main application runner which runs the task list.
+ * The main application runner which allows users to track their tasks.
  */
 public class Duke {
 

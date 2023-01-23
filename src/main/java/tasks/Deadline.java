@@ -16,6 +16,12 @@ public class Deadline extends Task {
     private String time;
     private String deadline;
 
+    /**
+     * Constructor for Deadline object.
+     * @param description what is being due
+     * @param deadline due date
+     * @param time due time
+     */
     public Deadline(String description, String deadline, String time) {
         super(description);
         this.deadlineDate = LocalDate.parse(deadline);
@@ -54,6 +60,12 @@ public class Deadline extends Task {
         return new Deadline(description, deadlineDatePart, deadlineTimePart);
     }
 
+    /**
+     * Factory method to create a deadline task based on data read from file.
+     * @param description string array of commands
+     * @param marked status of the task
+     * @return a deadline object based on commands.
+     */
     public static Deadline create(String description, String deadline, String time, String marked) {
         Deadline task = new Deadline(description, deadline, time);
         if (marked.equals("1")) {
@@ -113,6 +125,10 @@ public class Deadline extends Task {
                 this.deadlineTime.format(DateTimeFormatter.ofPattern("h:mm a")));
     }
 
+    /**
+     * Data representation of the deadline task into file.
+     * @return data representation of the deadline task.
+     */
     @Override
     public String writeTask() {
         return String.format("%s %d %s by %s",
