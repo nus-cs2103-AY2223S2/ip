@@ -110,9 +110,9 @@ public class Duke {
                     writeOn(current);
 
                 } else if(comm.startsWith("delete")) {
-                    String str = comm.substring(comm.length() -1);
+                    String str = comm.substring(comm.length() - 1);
                     int marking = Integer.parseInt(str);
-                    Task current = (Task) tasklist.get(marking-1);
+                    Task current = (Task) tasklist.get(marking - 1);
                     tasklist.remove(marking-1);
                     lining();
                     System.out.println("Noted. I've removed this task:");
