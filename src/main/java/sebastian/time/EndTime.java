@@ -29,6 +29,10 @@ public class EndTime {
         return "(by: " + endTime.format(dtf) + ")";
     }
 
+    /**
+     * Format the duration into a suitable String representation to be written to the hard disk
+     * @return the formatted String representation
+     */
     public String formatForSave() {
         return DateTimeFormatter.ofPattern(DatePattern.USER_INPUT_FORMAT.toString()).format(endTime);
     }

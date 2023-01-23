@@ -15,6 +15,11 @@ public class Event extends Task {
         this.duration = duration;
     }
 
+    /**
+     * Checked if the event starts on the same day as the provided date
+     * @param ld a date
+     * @return whether the event starts on the same day as the provided date
+     */
     public boolean isOnSameDay(LocalDate ld) {
         return duration.isSameDay(ld);
     }
@@ -24,6 +29,10 @@ public class Event extends Task {
         return "[" + taskType + "]" + super.toString() + " " + this.duration.toString();
     }
 
+    /**
+     * Format the event into a suitable String representation to be written to the hard disk
+     * @return the formatted String representation
+     */
     @Override
     public String formatForSave() {
         return taskType + "<>" +super.formatForSave() + "<>" + this.duration.formatForSave();

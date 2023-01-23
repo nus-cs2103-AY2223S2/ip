@@ -123,6 +123,12 @@ public class TaskList {
         }
     }
 
+    /**
+     * Retrieve tasks occurring on a specific date
+     * @param date retrieve tasks occurring on the date
+     * @return a Tasklist containing tasks occurring on the specific date
+     * @throws DateTimeParseException when date provided is invalid or is in the wrong format
+     */
     public TaskList getTasksOnDate(String date) throws DateTimeParseException{
         DateTimeFormatter dtf = DateTimeFormatter.ofPattern(DatePattern.TASK_ON_DATE_FORMAT.toString());
         LocalDate ld = LocalDate.parse(date, dtf);

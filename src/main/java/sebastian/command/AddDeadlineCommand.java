@@ -15,6 +15,15 @@ public class AddDeadlineCommand extends AddTaskCommand{
         this.instruction = instruction;
     }
 
+    /**
+     * Add a deadline to the task list
+     * @param taskList taskList instance created at the start of the session
+     * @param ui ui instance created at the start of the session
+     * @param storage storage instance created at the start of the session
+     * @throws LackOfArgumentException when user did not indicate a deadline to be added
+     * @throws DeadlineFormatMismatchException when user attempts to add a deadline with a wrong format
+     * @throws CannotWriteDataException when fail to write task list to the hard disk
+     */
     @Override
     public void execute(TaskList taskList, Ui ui, Storage storage)
             throws LackOfArgumentException,

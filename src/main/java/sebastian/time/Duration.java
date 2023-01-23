@@ -31,6 +31,10 @@ public class Duration {
         return "(from: " + from.format(dtf) + " to: " + to.format(dtf) + ")";
     }
 
+    /**
+     * Format the duration into a suitable String representation to be written to the hard disk
+     * @return the formatted String representation
+     */
     public String formatForSave() {
         DateTimeFormatter dtf = DateTimeFormatter.ofPattern(DatePattern.USER_INPUT_FORMAT.toString());
         return dtf.format(from) + "<>" + dtf.format(to);

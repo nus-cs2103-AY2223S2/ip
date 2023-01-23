@@ -3,8 +3,17 @@ package sebastian.main;
 import sebastian.command.*;
 import sebastian.sebastianExceptions.IllegalInputException;
 
+/**
+ * A class to interpret user input
+ */
 public class Parser {
 
+    /**
+     * To interpret user command and dispatch the job to different command handlers for execution
+     * @param fullCommand user command
+     * @return a command handler
+     * @throws IllegalInputException when user command cannot be interpreted
+     */
     public static Command parse(String fullCommand) throws IllegalInputException {
         String action = fullCommand.split(" ")[0];
         switch (action) {
