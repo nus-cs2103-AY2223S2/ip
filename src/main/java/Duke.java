@@ -1,3 +1,5 @@
+import java.io.*;
+
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -5,28 +7,60 @@ public class Duke {
 
     private static ArrayList<Task> list = new ArrayList<>();
 
+    // For PixlBot printing
     private static void PixlPrint(String text) {
         System.out.println(Values.PURPLE + "PixlBot: " + Values.RESET + text);
 //        System.out.println("Pixlbot: " + text);
         System.out.println(Values.HLINE);
     }
 
+    // Specify color overload
     private static void PixlPrint(String text, String textColor) {
         System.out.println(Values.PURPLE + "PixlBot: " + textColor + text + Values.RESET);
         System.out.println(Values.HLINE);
     }
 
+    // Create appropriate string format for a task
     private static String formatTask(Task task) {
         return String.format("[%s][%s] %s", task.getTaskType(), task.getStatusIcon(), task.getDescription());
     }
 
+    // Helper method to get index of an item in array.
     private static int indexOf(String[] arr, String item) {
         for (int i = 0; i < arr.length; i++) {
             if (arr[i].equals(item)) {
                 return i;
             }
         }
-        return 0;
+        return -1;
+    }
+
+    // Save current task list to hard disk.
+    private static void saveData() {
+        try {
+            File file = new File("src/data/duke");
+            file.getParentFile().mkdirs();
+            FileOutputStream fos = new FileOutputStream(file);
+            ObjectOutputStream oos = new ObjectOutputStream(fos);
+            oos.writeObject(list);
+            oos.close();
+            fos.close();
+        } catch (IOException fe) {
+            PixlPrint("Error while saving data:" + fe.getMessage());
+        }
+    }
+
+    // Loads data from "src/data/duke" if exists
+    private static void loadData() {
+        try {
+            FileInputStream fis = new FileInputStream("src/data/duke");
+            ObjectInputStream ois = new ObjectInputStream(fis);
+            list = (ArrayList<Task>) ois.readObject();
+            fis.close();
+            ois.close();
+        } catch (IOException | ClassNotFoundException e) {
+            // Ignore.
+        }
     }
 
     private static void listCommand() {
@@ -189,6 +223,11 @@ public class Duke {
         System.out.println("Welcome to\n" + Values.LOGO);
         System.out.println("Enter a command to start.\n");
 
+        loadData();
+        if (list.size() != 0) {
+            listCommand();
+        }
+
         Scanner scanner = new Scanner(System.in);
         System.out.print("You: ");
         String command = scanner.nextLine();
@@ -205,6 +244,7 @@ public class Duke {
         }
 
         // End program
+        saveData();
         PixlPrint("Goodbye! See you again :)");
         System.out.println(Values.HLINE);
     }

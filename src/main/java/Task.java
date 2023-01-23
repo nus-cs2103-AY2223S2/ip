@@ -1,15 +1,17 @@
+import java.io.Serializable;
+
 /**
  * A class to represent a task.
  * @author mmaimer33
  */
-public abstract class Task {
+public abstract class Task implements java.io.Serializable {
     protected String description;
-    private boolean completed;
+    private boolean isDone;
 
     // Constructor
     public Task(String description) {
         this.description = description;
-        this.completed = false;
+        this.isDone = false;
     }
 
     /**
@@ -17,21 +19,21 @@ public abstract class Task {
      * @return 'X' if done; ' ' otherwise.
      */
     public String getStatusIcon() {
-        return this.completed ? "X" : " ";
+        return this.isDone ? "X" : " ";
     }
 
     /**
      * Mark task as completed.
      */
     public void complete() {
-        this.completed = true;
+        this.isDone = true;
     }
 
     /**
      * Mark task as incomplete.
      */
     public void uncomplete() {
-        this.completed = false;
+        this.isDone = false;
     }
 
     public abstract String getTaskType();
