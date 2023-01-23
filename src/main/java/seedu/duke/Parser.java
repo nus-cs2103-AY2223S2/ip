@@ -1,10 +1,23 @@
 package seedu.duke;
 
+/**
+ * Class that parses the command given.
+ *
+ */
 public class Parser {
 
     public Parser() throws DukeException {
 
     }
+
+    /**
+     * Takes in the command and chooses what function should be used.
+     *
+     * @param echo the command given.
+     * @param echoSplit an array of String containing the words of the command given.
+     * @param COUNTER int indicating list size
+     * @param tasks TaskList object containing the tasks list and functions.
+     */
     public void parse(String echo, String[] echoSplit, int COUNTER, TaskList tasks) throws DukeException {
         if (echo.equals("list")) {
             tasks.showList();
