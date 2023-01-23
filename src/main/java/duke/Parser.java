@@ -5,6 +5,16 @@ import java.time.format.DateTimeParseException;
 
 enum Query { LIST, MARK, UNMARK, TODO, DEADLINE, EVENT, DELETE }
 class Parser {
+    /**
+     * Get input string, parses it and run corresponding functions.
+     * 
+     * some corresponding function modifies TaskList object
+     *  
+     * @param input
+     * @param tasks
+     * @throws IllegalArgumentException
+     * @throws IndexOutOfBoundsException
+     */
     public static void parseRawString(String input, TaskList tasks) throws IllegalArgumentException, IndexOutOfBoundsException {
         String[] tokens = input.split(" ",2);
         Query query = Query.valueOf(tokens[0].toUpperCase());
@@ -32,9 +42,22 @@ class Parser {
                 break;
         }
     }
+    /**
+     * Pass ArrayList of Task to UI.
+     * 
+     * @param tasks
+     */
     private static void list(TaskList tasks) {
         Ui.list(tasks.get());
     }
+
+    /**
+     * Mark or unmark a task based on input.
+     * 
+     * @param isMark
+     * @param tasks
+     * @param s
+     */
     private static void mark(boolean isMark ,TaskList tasks, String s) {
         try {
             int num = Integer.parseInt(s);
@@ -46,11 +69,22 @@ class Parser {
             Ui.numberOutOfBounds();
         }
     }
+    /**
+     * Adds a todo.
+     * @param tasks
+     * @param s
+     */
     private static void todo(TaskList tasks, String s) {
         Todo task = new Todo(s);
         tasks.add(task);
         Ui.addTask("todo", task);
     }
+
+    /**
+     * Adds a deadline.
+     * @param tasks
+     * @param s
+     */
     private static void deadline(TaskList tasks, String s) {
         try {
             String[] tokens = s.split(" /by ");
@@ -65,6 +99,12 @@ class Parser {
             Ui.wrongDateFormat();
         }
     }
+
+    /**
+     * Adds an event.
+     * @param tasks
+     * @param s
+     */
     private static void event(TaskList tasks, String s) {
         try {
             String[] tokens = s.split(" /from ");
@@ -82,6 +122,12 @@ class Parser {
             Ui.missingOptions("/by");
         }    
     }
+
+    /**
+     * Deletes a task.
+     * @param tasks
+     * @param s
+     */
     private static void delete(TaskList tasks, String s) {
         try {
             int num = Integer.parseInt(s);

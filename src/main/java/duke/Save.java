@@ -8,6 +8,13 @@ import java.io.ObjectOutputStream;
 import java.util.ArrayList;
 
 class Save {
+    /**
+     * Initliaze ArrayList of Task.
+     * 
+     * if file "save" does not exist, create it and return empty ArrayList of Task else load contentes of "save" into the ArrayList of Task
+     *  
+     * @return ArrayList<Task> object
+     */
     public static ArrayList<Task> loadSave() {
         File file = new File("./save");
         if (file.exists()) {
@@ -33,6 +40,11 @@ class Save {
             return new ArrayList<Task>();
         }         
     }
+
+    /**
+     * Save current state of ArrayList object into file "save".
+     * @param tasks
+     */
     public static void makeSave(ArrayList<Task> tasks) {
         try (FileOutputStream fos = new FileOutputStream("./save");
                 ObjectOutputStream oos = new ObjectOutputStream(fos);
