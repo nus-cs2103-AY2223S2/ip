@@ -1,6 +1,6 @@
-public class Task {
-    private String name;
-    private boolean done;
+public abstract class Task {
+    protected String name;
+    protected boolean done;
 
     public Task() {
 
@@ -22,4 +22,6 @@ public class Task {
     public String toString() {
         return "[" + getStatusIcon() + "] " + name;
     }
+
+    public abstract String toFormatString();
 }
