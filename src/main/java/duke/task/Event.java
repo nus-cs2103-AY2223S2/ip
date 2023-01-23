@@ -4,25 +4,24 @@ import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
 /**
- * Represents a event task.
+ * Represents an event task.
  *
  * @author wz2k
  */
 public class Event extends Task {
-    /**
-     * End of the event.
-     */
+    /** End of event */
     private LocalDate to;
 
-    /**
-     * Start of the event.
-     */
+    /** Start of event */
     private LocalDate from;
 
     /**
-     * Constructor for duke.task.Event class.
+     * Creates a deadline task.
      *
-     * @param desc description of the event task.
+     * @param desc Description of the event task.
+     * @param marked Task marking.
+     * @param from Start of event.
+     * @param to End of event.
      */
     public Event(String desc, boolean marked, String from, String to) {
         super(desc, marked);
@@ -31,9 +30,9 @@ public class Event extends Task {
     }
 
     /**
-     * This method returns the task type, checkbox, description and timeline.
+     * Returns the task type, checkbox, description and timeline.
      *
-     * @return event task details.
+     * @return Event task details.
      */
     @Override
     public String toString() {
@@ -42,6 +41,11 @@ public class Event extends Task {
                 + " to: " + this.to.format(pattern) + ")";
     }
 
+    /**
+     * Returns the string to store the event task in a file.
+     *
+     * @return File storage version of the event task.
+     */
     @Override
     public String toTaskStorageString() {
         return "E" + "|" + super.toTaskStorageString() + "|"

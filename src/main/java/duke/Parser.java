@@ -1,9 +1,32 @@
 package duke;
 
-import duke.command.*;
+import duke.command.Command;
+import duke.command.CreateDeadlineCommand;
+import duke.command.CreateEventCommand;
+import duke.command.CreateTodoCommand;
+import duke.command.DeleteTaskCommand;
+import duke.command.EndChatCommand;
+import duke.command.ListTasksCommand;
+import duke.command.MarkTaskCommand;
+import duke.command.UnmarkTaskCommand;
 import duke.task.TaskList;
 
+/**
+ * Helps to make sense of the user's commands.
+ *
+ * @author wz2k
+ */
 public class Parser {
+    /**
+     * Returns an instance of the correct command from the user's input.
+     *
+     * @param input User's input.
+     * @param ui Medium which the chatbot uses to communicate.
+     * @param taskList List of task maintained by the chatbot.
+     * @param storage Chatbot's storage of the tasks it maintains.
+     * @return Command instance.
+     * @throws DukeException If input is not recognized.
+     */
     public Command parseCommand(String input, Ui ui, TaskList taskList, Storage storage)
             throws DukeException {
         String type = input.split(" ", 2)[0];

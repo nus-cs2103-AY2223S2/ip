@@ -1,15 +1,15 @@
 package duke;
 
 /**
- * This class is for exceptions specific to the chatbot.
+ * An exception specific to the chatbot.
  *
  * @author wz2k
  */
 public class DukeException extends Exception{
     /**
-     * Constructor for duke.DukeException class.
+     * Creates a duke exception.
      *
-     * @param message the error message.
+     * @param message Error message.
      */
     public DukeException(String message) {
         super(message);

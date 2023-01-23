@@ -4,30 +4,57 @@ import duke.DukeException;
 
 import java.util.ArrayList;
 
+/**
+ * Represents a list of tasks.
+ *
+ * @author wz2k
+ */
 public class TaskList {
+    /** Task list */
     private ArrayList<Task> taskList;
 
+    /**
+     * Creates a list of tasks.
+     *
+     * @param taskList List of tasks.
+     */
     public TaskList(ArrayList<Task> taskList) {
         this.taskList = taskList;
     }
 
+    /**
+     * Returns the number of tasks in the list.
+     *
+     * @return Total task count.
+     */
     public int getSize() {
         return this.taskList.size();
     }
 
+    /**
+     * Adds a task to the list.
+     *
+     * @param task Task to add.
+     */
     public void addTask(Task task) {
         this.taskList.add(task);
     }
 
+    /**
+     * Returns the specified task.
+     *
+     * @param taskNumber Task order in the list.
+     * @return Task of the corresponding task number.
+     */
     public Task getTask(int taskNumber) {
         return this.taskList.get(taskNumber - 1);
     }
 
     /**
-     * This method marks the task at the specified task
-     * number as done.
+     * Marks the task at the specified task number as done.
      *
-     * @param taskNumber the task order in the storage.
+     * @param taskNumber Task order in the list.
+     * @return Task of the corresponding task number.
      */
     public Task markTask(int taskNumber) {
         Task task = this.taskList.get(taskNumber - 1);
@@ -35,6 +62,12 @@ public class TaskList {
         return task;
     }
 
+    /**
+     * Marks the task at the specified task number as not done.
+     *
+     * @param taskNumber Task order in the list.
+     * @return Task of the corresponding task number.
+     */
     public Task unmarkTask(int taskNumber) {
         Task task = this.taskList.get(taskNumber - 1);
         task.unmark();
@@ -42,10 +75,11 @@ public class TaskList {
     }
 
     /**
-     * This method deletes a specified task based on its order.
+     * Deletes a specified task based on its order.
      *
-     * @param taskNumber specifies the task to be deleted.
-     * @throws DukeException if task does not exist.
+     * @param taskNumber Task order in the list.
+     * @return Task of the corresponding task number.
+     * @throws DukeException If task does not exist.
      */
     public Task deleteTask(int taskNumber) throws DukeException {
         int size = this.taskList.size();
