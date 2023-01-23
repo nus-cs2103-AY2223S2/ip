@@ -14,7 +14,7 @@ import java.util.Arrays;
  */
 class Parser { 
     //Greetings 
-    static String INITIAL_GREETING = "Welcome to Manchester United. I am Alex Ferguson. How may I help you";
+    static String INITIAL_GREETING = "Welcome to Manchester United.";
     static String FINAL_GREETING = "SUIII, Bye";
     //Command to display for various user input
     static String ILLEGAL_COMMAND = "Alex Ferguson does not recognise this command. Perhaps you could try valid command init?";
