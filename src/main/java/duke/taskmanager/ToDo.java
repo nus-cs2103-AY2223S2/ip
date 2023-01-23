@@ -1,7 +1,7 @@
-package taskmanager;
+package duke.taskmanager;
 
-import exceptions.emptyDescException;
-import exceptions.unrecogException;
+import duke.exceptions.emptyDescException;
+import duke.exceptions.unrecogException;
 
 public class ToDo extends Tasks {
     String icon = "[T]";

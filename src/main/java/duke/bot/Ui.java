@@ -1,4 +1,4 @@
-package bot;
+package duke.bot;
 
 public class Ui {
     public Ui () {

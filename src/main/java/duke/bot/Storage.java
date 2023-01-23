@@ -1,6 +1,9 @@
-package bot;
+package duke.bot;
 
-import taskmanager.*;
+import duke.taskmanager.Deadline;
+import duke.taskmanager.Event;
+import duke.taskmanager.Tasks;
+import duke.taskmanager.ToDo;
 
 import java.io.File;
 import java.io.FileNotFoundException;

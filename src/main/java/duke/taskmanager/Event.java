@@ -1,3 +1,9 @@
+package duke.taskmanager;
+
+import duke.exceptions.emptyDescException;
+import duke.exceptions.unrecogException;
+import duke.exceptions.unspecTimeException;
+
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 public class Event extends Tasks{
@@ -50,11 +56,11 @@ public class Event extends Tasks{
         return this.desc.split(" ", 2)[1]+ "("+this.timeframe+")";
     }
     public String added() {
-        return super.added() + " " + icon + super.symbol() + " " + this.desc.split(" ", 2)[1]+
+        return super.added() + " " + icon + super.completed() + " " + this.desc.split(" ", 2)[1]+
                 "("+this.timeframe+")";
     }
     public String deleted(){
-        return super.deleted() +  " " + icon + super.symbol() + " " + this.desc.split(" ", 2)[1]+
+        return super.deleted() +  " " + icon + super.completed() + " " + this.desc.split(" ", 2)[1]+
                 "("+this.timeframe+")";
     }
 }

@@ -1,7 +1,13 @@
+package duke.taskmanager;
+
+import duke.exceptions.emptyDescException;
+import duke.exceptions.unrecogException;
+import duke.exceptions.unspecTimeException;
+
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
-public class Deadline extends Tasks{
+public class Deadline extends Tasks {
     String icon = "[D]";
 
     String desc;
@@ -46,9 +52,9 @@ public class Deadline extends Tasks{
     }
 
     public String added() {
-        return super.added() + " " + this.icon + super.symbol() + " " + this.getDesc();
+        return super.added() + " " + this.icon + super.completed() + " " + this.getDesc();
     }
     public String deleted() {
-        return super.deleted() + " " + icon + super.symbol() + " " + this.getDesc();
+        return super.deleted() + " " + icon + super.completed() + " " + this.getDesc();
     }
 }

@@ -1,9 +1,9 @@
-package bot;
+package duke.bot;
 
-import exceptions.emptyDescException;
-import exceptions.unrecogException;
-import exceptions.unspecTimeException;
-import taskmanager.*;
+import duke.exceptions.emptyDescException;
+import duke.exceptions.unrecogException;
+import duke.exceptions.unspecTimeException;
+import duke.taskmanager.*;
 
 import java.io.IOException;
 

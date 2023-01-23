@@ -1,4 +1,4 @@
-package taskmanager;
+package duke.taskmanager;
 
 public class Tasks {
     final protected String desc;

@@ -1,4 +1,4 @@
-package exceptions;
+package duke.exceptions;
 
 public class unrecogException extends Exception {
     public unrecogException(String message) {

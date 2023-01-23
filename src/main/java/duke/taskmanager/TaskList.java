@@ -1,4 +1,4 @@
-package taskmanager;
+package duke.taskmanager;
 
 import java.io.BufferedWriter;
 import java.io.FileWriter;

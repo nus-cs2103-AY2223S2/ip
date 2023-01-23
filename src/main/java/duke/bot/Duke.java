@@ -1,6 +1,6 @@
-package bot;
+package duke.bot;
 
-import taskmanager.TaskList;
+import duke.taskmanager.TaskList;
 
 import java.io.IOException;
 import java.util.Scanner;
