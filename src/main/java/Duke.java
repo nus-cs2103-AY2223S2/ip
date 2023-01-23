@@ -1,46 +1,57 @@
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
-import java.util.concurrent.ExecutionException;
 
 public class Duke {
-    final static String lines = "\t____________________________________________________________\n";
-    final static String greet = lines +
+    static final String LINES = "\t____________________________________________________________\n";
+    static final String GREET = LINES +
             "\tHello! I'm Duke\n" +
             "\tWhat can I do for you?\n" +
-            lines;
-    final static String bye = lines +
+            LINES;
+    static final String BYE = LINES +
             "\tBye. Hope to see you again soon!\n" +
-            lines;
+            LINES;
     static List<Task> taskList;
-    enum Actions {LIST, MARK, UNMARK, TODO, DEADLINE, EVENT, DELETE}
 
+    /**
+     * Prints out all the tasks that were inputted
+     */
     public static void printList() {
-        System.out.print(lines);
+        System.out.print(LINES);
         System.out.println("\tHere are the tasks in your list:");
         for (int i = 0; i < taskList.size(); i++) {
             System.out.println("\t" + (i + 1) + ". " + taskList.get(i).toString());
         }
-        System.out.print(lines);
+        System.out.print(LINES);
     }
 
+    /**
+     * Add a task into task list
+     *
+     * @param task Task to be added to the list
+     */
     public static void addTask(Task task) {
         taskList.add(task);
-        System.out.println(lines + "\tGot it. I've added this task:");
+        System.out.println(LINES + "\tGot it. I've added this task:");
         System.out.println("\t  " + task);
-        System.out.println("\tNow you have " + taskList.size() + " task(s) in the list.\n" + lines);
+        System.out.println("\tNow you have " + taskList.size() + " task(s) in the list.\n" + LINES);
     }
 
+    /**
+     * Delete a task from the task list
+     *
+     * @param taskId Id of the task to be deleted
+     */
     public static void deleteTask(int taskId) {
-        System.out.println(lines + "\tNoted. I've removed this task:");
+        System.out.println(LINES + "\tNoted. I've removed this task:");
         System.out.println("\t  " + taskList.get(taskId));
-        System.out.println("\tNow you have " + (taskList.size() - 1) + " task(s) in the list.\n" + lines);
+        System.out.println("\tNow you have " + (taskList.size() - 1) + " task(s) in the list.\n" + LINES);
         taskList.remove(taskId);
     }
 
     public static void main(String[] args) {
         taskList = new ArrayList<>();
-        System.out.println(greet);
+        System.out.println(GREET);
         Scanner sc = new Scanner(System.in);
         Actions selection = null;
         String commands = sc.nextLine();
@@ -101,16 +112,18 @@ public class Duke {
                     deleteTask(taskNumber - 1);
                     break;
                 default:
-                    System.out.println(lines + "\t☹ OOPS!!! I'm sorry, but I don't know what that means :-(\n" + lines);
+                    System.out.println(LINES + "\t☹ OOPS!!! I'm sorry, but I don't know what that means :-(\n" + LINES);
                     break;
                 }
             } catch (DukeException e) {
-                System.out.println(lines + "\t" + e + "\n" + lines);
+                System.out.println(LINES + "\t" + e + "\n" + LINES);
             } catch (IllegalArgumentException e) {
-                System.out.println(lines + "\tPlease enter a valid action!\n" + lines);
+                System.out.println(LINES + "\tPlease enter a valid action!\n" + LINES);
             }
             commands = sc.nextLine();
         }
-        System.out.println(bye);
+        System.out.println(BYE);
     }
+
+    enum Actions {LIST, MARK, UNMARK, TODO, DEADLINE, EVENT, DELETE}
 }
