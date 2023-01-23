@@ -1,3 +1,5 @@
+import ui.WelcomeUI;
+
 import java.util.*;
 public class Duke {
 

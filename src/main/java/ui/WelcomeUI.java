@@ -1,3 +1,5 @@
+package ui;
+
 public class WelcomeUI {
     /*
      * logo credit: https://patorjk.com/software/taag/#p=testall&h=2&v=3&f=3D-ASCII&t=RubiRyo

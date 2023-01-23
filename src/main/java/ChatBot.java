@@ -1,3 +1,9 @@
+import task.Deadlines;
+import task.Events;
+import task.TaskManager;
+import task.ToDos;
+import ui.WelcomeUI;
+
 import java.util.*;
 
 public class ChatBot {
