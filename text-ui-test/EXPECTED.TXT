@@ -10,30 +10,30 @@ ___________________________
 Sorry! Invalid command!
 ___________________________
 >___________________________
-added: [D][ ] eat some food (by: tomorrow)
+added: [D][ ] eat some food (by: Dec 23 2022 11:00)
 ___________________________
 >___________________________
 Good job. You have finished this task:
-[D][X] eat some food (by: tomorrow)
+[D][X] eat some food (by: Dec 23 2022 11:00)
 ___________________________
 >___________________________
 Your tasks are:
-1. [D][X] eat some food (by: tomorrow)
+1. [D][X] eat some food (by: Dec 23 2022 11:00)
 ___________________________
 >___________________________
 Ok. I have marked this task as not done:
-[D][ ] eat some food (by: tomorrow)
+[D][ ] eat some food (by: Dec 23 2022 11:00)
 ___________________________
 >___________________________
 Your tasks are:
-1. [D][ ] eat some food (by: tomorrow)
+1. [D][ ] eat some food (by: Dec 23 2022 11:00)
 ___________________________
 >___________________________
 Good job. You have finished this task:
-[D][X] eat some food (by: tomorrow)
+[D][X] eat some food (by: Dec 23 2022 11:00)
 ___________________________
 >___________________________
-added: [D][ ] hw (by: 11.00pm)
+added: [D][ ] hw (by: Dec 01 2022 19:00)
 ___________________________
 >___________________________
 added: [T][ ] cca
@@ -44,8 +44,8 @@ Good job. You have finished this task:
 ___________________________
 >___________________________
 Your tasks are:
-1. [D][X] eat some food (by: tomorrow)
-2. [D][ ] hw (by: 11.00pm)
+1. [D][X] eat some food (by: Dec 23 2022 11:00)
+2. [D][ ] hw (by: Dec 01 2022 19:00)
 3. [T][X] cca
 ___________________________
 >___________________________
@@ -54,16 +54,19 @@ Ok. I have marked this task as not done:
 ___________________________
 >___________________________
 Your tasks are:
-1. [D][X] eat some food (by: tomorrow)
-2. [D][ ] hw (by: 11.00pm)
+1. [D][X] eat some food (by: Dec 23 2022 11:00)
+2. [D][ ] hw (by: Dec 01 2022 19:00)
 3. [T][ ] cca
 ___________________________
 >___________________________
-added: [E][ ] go toilet (from: now to: 5 min after now)
+Sorry! Invalid argument!
+___________________________
+>___________________________
+added: [E][ ] go toilet (from: Dec 01 2022 19:00 to: Dec 01 2022 19:05)
 ___________________________
 >___________________________
 Good job. You have finished this task:
-[E][X] go toilet (from: now to: 5 min after now)
+[E][X] go toilet (from: Dec 01 2022 19:00 to: Dec 01 2022 19:05)
 ___________________________
 >___________________________
 Sorry! Invalid argument!
@@ -79,14 +82,14 @@ Sorry! Invalid argument!
 ___________________________
 >___________________________
 Your tasks are:
-1. [D][X] eat some food (by: tomorrow)
-2. [D][ ] hw (by: 11.00pm)
+1. [D][X] eat some food (by: Dec 23 2022 11:00)
+2. [D][ ] hw (by: Dec 01 2022 19:00)
 3. [T][ ] cca
-4. [E][X] go toilet (from: now to: 5 min after now)
+4. [E][X] go toilet (from: Dec 01 2022 19:00 to: Dec 01 2022 19:05)
 ___________________________
 >___________________________
 Ok. I have marked this task as not done:
-[E][ ] go toilet (from: now to: 5 min after now)
+[E][ ] go toilet (from: Dec 01 2022 19:00 to: Dec 01 2022 19:05)
 ___________________________
 >___________________________
 Sorry! Invalid argument!
@@ -105,10 +108,10 @@ Sorry! Invalid command!
 ___________________________
 >___________________________
 Your tasks are:
-1. [D][X] eat some food (by: tomorrow)
-2. [D][ ] hw (by: 11.00pm)
+1. [D][X] eat some food (by: Dec 23 2022 11:00)
+2. [D][ ] hw (by: Dec 01 2022 19:00)
 3. [T][ ] cca
-4. [E][ ] go toilet (from: now to: 5 min after now)
+4. [E][ ] go toilet (from: Dec 01 2022 19:00 to: Dec 01 2022 19:05)
 ___________________________
 >___________________________
 Sorry! One or more arguments are empty!
@@ -141,23 +144,23 @@ ___________________________
 Sorry! One or more arguments are empty!
 ___________________________
 >___________________________
-Sorry! One or more arguments are empty!
+Sorry! Invalid argument!
 ___________________________
 >___________________________
-Sorry! One or more arguments are empty!
+Sorry! Invalid argument!
 ___________________________
 >___________________________
-Sorry! One or more arguments are empty!
+Sorry! Invalid argument!
 ___________________________
 >___________________________
 Sorry! One or more arguments are empty!
 ___________________________
 >___________________________
 Your tasks are:
-1. [D][X] eat some food (by: tomorrow)
-2. [D][ ] hw (by: 11.00pm)
+1. [D][X] eat some food (by: Dec 23 2022 11:00)
+2. [D][ ] hw (by: Dec 01 2022 19:00)
 3. [T][ ] cca
-4. [E][ ] go toilet (from: now to: 5 min after now)
+4. [E][ ] go toilet (from: Dec 01 2022 19:00 to: Dec 01 2022 19:05)
 ___________________________
 >___________________________
 Sorry! Invalid argument!
@@ -170,13 +173,13 @@ Sorry! Invalid argument!
 ___________________________
 >___________________________
 Ok. I have deleted this task:
-[D][ ] hw (by: 11.00pm)
+[D][ ] hw (by: Dec 01 2022 19:00)
 ___________________________
 >___________________________
 Your tasks are:
-1. [D][X] eat some food (by: tomorrow)
+1. [D][X] eat some food (by: Dec 23 2022 11:00)
 2. [T][ ] cca
-3. [E][ ] go toilet (from: now to: 5 min after now)
+3. [E][ ] go toilet (from: Dec 01 2022 19:00 to: Dec 01 2022 19:05)
 ___________________________
 >___________________________
 Goodbye. I hope to see you again.
