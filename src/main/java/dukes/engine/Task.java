@@ -11,6 +11,12 @@ public class Task {
         this.tag = "";
     }
 
+    public Task(String taskName, boolean isDone) {
+        this.taskName = taskName;
+        this.isDone = isDone;
+        this.tag = "";
+    }
+
     void setDone() {
         this.isDone = true;
     }
@@ -18,6 +24,27 @@ public class Task {
     void setUnDone() {
         this.isDone = false;
     }
+
+    boolean hasDone() {
+        return this.isDone;
+    }
+
+    String getTaskName() {
+        return this.taskName;
+    }
+
+    String getDeadLine() {
+        return "";
+    }
+
+    String getFromTime() {
+        return "";
+    }
+
+    String getToTime() {
+        return "";
+    }
+
 
     public String getTag() { return this.tag; }
 

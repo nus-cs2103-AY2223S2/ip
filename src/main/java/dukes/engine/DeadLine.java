@@ -5,8 +5,19 @@ class DeadLine extends Task {
 
     DeadLine(String taskName, String deadline) {
         super(taskName);
-        this.tag = "deadline";
+        this.tag = "D";
         this.deadline = deadline;
+    }
+
+    DeadLine(String taskName, boolean isDone, String deadline) {
+        super(taskName, isDone);
+        this.tag = "D";
+        this.deadline = deadline;
+    }
+
+    @Override
+    String getDeadLine() {
+        return this.deadline;
     }
 
     @Override
