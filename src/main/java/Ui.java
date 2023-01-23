@@ -7,8 +7,8 @@ public class Ui {
     public static Scanner sc = new Scanner(System.in);
 
 
-    public static void displayNumTask(int numTask) {
-        displayMsg("Now you have " + numTask + " task" + (numTask == 1 ? "" : "s") + " in the list.");
+    public static String numTaskToString(int numTask) {
+        return "Now you have " + numTask + " task" + (numTask == 1 ? "" : "s") + " in the list.";
     }
 
     public static void greetUser() {

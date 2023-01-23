@@ -18,8 +18,7 @@ public class ToDoCmd extends Command {
 
     public void uiReply() {
         Ui.displayMsg("Got it. I've added this task:\n" + 
-        Ui.indentString(this.toDo.toString(), 1));
-
-        Ui.displayNumTask(this.taskList.countTasks());
+        Ui.indentString(this.toDo.toString(), 1) + "\n" +
+        Ui.numTaskToString(taskList.countTasks()));
     };
 }
