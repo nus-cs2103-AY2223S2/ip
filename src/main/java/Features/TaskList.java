@@ -1,7 +1,8 @@
 package Features;
 
-import Tasks.Task;
 import java.util.ArrayList;
+
+import Tasks.Task;
 
 public class TaskList {
 
@@ -32,7 +33,7 @@ public class TaskList {
         for (int i = 0; i < cloneFrom.size(); i++) {
             tempList.add(cloneFrom.get(i));
         }
-        while (this.list.size()>0) {
+        while (this.list.size() > 0) {
             this.list.remove(0);
         }
         for (int i = 0; i < tempList.size(); i++) {

@@ -1,9 +1,9 @@
 package UserCommands;
 
+import java.util.Scanner;
+
 import Features.TaskList;
 import Features.Ui;
-
-import java.util.Scanner;
 
 public class CommandBye extends Command {
 

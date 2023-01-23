@@ -1,20 +1,19 @@
 package Tasks;
 
 import java.time.LocalDateTime;
-import java.time.format.DateTimeParseException;
 import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
 
-public class Deadline extends Task{
+public class Deadline extends Task {
     protected String by;
     protected LocalDateTime byDateTime;
 
-    public Deadline(String TaskName, String by) {
-        super(TaskName);
+    public Deadline(String taskName, String by) {
+        super(taskName);
         this.by = by;
         try {
             this.byDateTime = LocalDateTime.parse(by, DateTimeFormatter.ofPattern("yyyy/MM/dd HH:mm"));
-        }
-        catch (DateTimeParseException err) {
+        } catch (DateTimeParseException err) {
             this.byDateTime = null;
         }
     }
@@ -22,8 +21,7 @@ public class Deadline extends Task{
     public String getByTime() {
         if (this.byDateTime != null) {
             return this.byDateTime.format(DateTimeFormatter.ofPattern("MMM dd yyyy, HHmm")) + " hrs";
-        }
-        else {
+        } else {
             return this.by;
         }
     }

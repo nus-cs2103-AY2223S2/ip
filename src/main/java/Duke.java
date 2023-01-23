@@ -29,9 +29,7 @@ public class Duke {
                 parser.parse();
                 taskList = parser.updateTaskList();
                 loopEnd = parser.updateLoopEnd();
-            }
-            // Catches DukeException if thrown and prevents program from terminating.
-            catch (DukeException ex) {
+            } catch (DukeException ex) {
                 // error message can be formatted in many possible ways beforehand, so println is used.
                 System.out.println(ex.printErrorMessage());
             }

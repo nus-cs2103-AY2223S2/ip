@@ -20,16 +20,16 @@ public class Ui {
         System.out.println(border + toFormat + "\n" + border);
     }
 
-    public String formatMessage(String toFormat){
+    public String formatMessage(String toFormat) {
         return border + toFormat + "\n" + border;
     }
 
-    public String formatLogicError(String message){
+    public String formatLogicError(String message) {
         return "\n" + border + "[ERROR]\nUh, " + message + "\n" + border;
     }
 
-    public String formatCommandError(String command, String format){
-        return "\n" + border + "[ERROR]\nUh, " + command + " command format is used wrongly." +
-               "\nCorrect format is as follows:\n" + "[ " + format + " ]\n" + border;
+    public String formatCommandError(String command, String format) {
+        return "\n" + border + "[ERROR]\nUh, " + command + " command format is used wrongly."
+                + "\nCorrect format is as follows:\n" + "[ " + format + " ]\n" + border;
     }
 }
