@@ -391,7 +391,7 @@ public class Duke extends Application {
 
         //The container for the content of the chat to scroll.
         scrollPane = new ScrollPane();
-        dialogContainer = new VBox();
+        dialogContainer = new VBox(10);
         scrollPane.setContent(dialogContainer);
 
         userInput = new TextField();
@@ -482,6 +482,7 @@ public class Duke extends Application {
     }
  
     private void handleUserInput() {
+        /*
         Label userText = new Label(userInput.getText());
         Label dukeText = new Label(getResponse(userInput.getText()));
         dialogContainer.getChildren().addAll(
@@ -489,7 +490,15 @@ public class Duke extends Application {
                 new DialogBox(dukeText, new ImageView(duke))
         );
         dialogContainer.getChildren().addAll(userText, dukeText);
-        userInput.clear();  
+        userInput.clear();
+        */
+        Label userText = new Label(userInput.getText());
+        Label dukeText = new Label(getResponse(userInput.getText()));
+        dialogContainer.getChildren().addAll(
+        DialogBox.getUserDialog(userText, new ImageView(user)),
+        DialogBox.getDukeDialog(dukeText, new ImageView(duke))
+        );
+        userInput.clear();
     }
 
     /**
@@ -524,7 +533,7 @@ public class Duke extends Application {
         ui.showWelcome();
         Label greeting = new Label(storeString.toString());
         */
-        System.out.flush();
+        //System.out.flush();
         System.setOut(oldPrintStream);
         //System.out.println(storeString.toString());
        
