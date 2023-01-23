@@ -4,6 +4,8 @@ import java.io.IOException;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.ArrayList;
+import java.util.LinkedHashMap;
+import java.util.stream.Stream;
 
 import aqua.aquatask.AquaTask;
 import aqua.storage.Reloadable;
@@ -30,6 +32,16 @@ public class TaskManager implements Reloadable {
 
     public AquaTask delete(int taskNum) throws IndexOutOfBoundsException {
         return taskList.remove(taskNum);
+    }
+
+
+    public LinkedHashMap<Integer, AquaTask> filter(String pattern) {
+        LinkedHashMap<Integer, AquaTask> taskMap = new LinkedHashMap<>();
+        Stream.iterate(0, i -> i + 1)
+                .limit(size())
+                .filter(i -> taskList.get(i).getName().contains(pattern))
+                .forEach(i -> taskMap.put(i + 1, taskList.get(i)));
+        return taskMap;
     }
 
 
