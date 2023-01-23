@@ -1,8 +1,10 @@
-public class Event extends Task {
-  protected String from;
-  protected String to;
+import java.time.LocalDate;
 
-  public Event(String title, String from, String to) {
+public class Event extends Task {
+  protected LocalDate from;
+  protected LocalDate to;
+
+  public Event(String title, LocalDate from, LocalDate to) {
     super(title);
     this.from = from;
     this.to = to;
@@ -12,7 +14,7 @@ public class Event extends Task {
   public String toString() {
     return String.format(
       "[E][%c] %s (from: %s to: %s)",
-      getStatusIcon(), title, from, to
+      getStatusIcon(), title, formatDate(from), formatDate(to)
     );
   }
 }

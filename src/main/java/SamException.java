@@ -39,3 +39,9 @@ class SamInvalidTaskException extends SamException {
     super("Oops, that task does not exist!");
   }
 }
+
+class SamInvalidDateException extends SamException {
+  public SamInvalidDateException() {
+    super("Please write dates as 'd/M/yyyy'!");
+  }
+}

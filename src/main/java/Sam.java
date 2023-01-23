@@ -1,3 +1,6 @@
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
 import java.util.HashMap;
 import java.util.Scanner;
 
@@ -44,7 +47,8 @@ public class Sam {
 
   private static void processInput(String[] input)
     throws SamUnknownCommandException, SamMissingTaskException, SamInvalidTaskException,
-      SamMissingTaskTitleException, SamMissingTaskValueException, SamMissingTaskArgException
+      SamMissingTaskTitleException, SamMissingTaskValueException, SamMissingTaskArgException,
+      SamInvalidDateException
   {
     Command command = null;
     for (Command c : Command.values())
@@ -112,7 +116,11 @@ public class Sam {
         if (!taskArgs.containsKey("from") || !taskArgs.containsKey("to")) {
           throw new SamMissingTaskArgException();
         }
-        Task task = new Event(title[0], taskArgs.get("from"), taskArgs.get("to"));
+
+        LocalDate from = parseDate(taskArgs.get("from"));
+        LocalDate to = parseDate(taskArgs.get("to"));
+        Task task = new Event(title[0], from, to);
+
         tasks.addTask(task);
         newTask(task);
         break;
@@ -126,7 +134,12 @@ public class Sam {
         if (!taskArgs.containsKey("by")) {
           throw new SamMissingTaskArgException();
         }
-        Task task = new Deadline(title[0], taskArgs.get("by"));
+
+
+        System.out.println(taskArgs.get("by"));
+        LocalDate by = parseDate(taskArgs.get("by"));
+        Task task = new Deadline(title[0], by);
+
         tasks.addTask(task);
         newTask(task);
         break;
@@ -168,5 +181,13 @@ public class Sam {
       System.out.println("  " + message);
     }
     System.out.println("└───────────────────────────────────────────┘");
+  }
+
+  private static LocalDate parseDate(String input) throws SamInvalidDateException {
+    try {
+      return LocalDate.parse(input, DateTimeFormatter.ofPattern("d/M/yyyy"));
+    } catch (DateTimeParseException e) {
+      throw new SamInvalidDateException();
+    }
   }
 }
