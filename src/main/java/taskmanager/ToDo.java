@@ -1,6 +1,13 @@
+package taskmanager;
+
+import exceptions.emptyDescException;
+import exceptions.unrecogException;
+
 public class ToDo extends Tasks {
     String icon = "[T]";
     String desc;
+
+
     public ToDo(String str) throws Exception {
         super(str);
         if(!str.contains("todo")) {
@@ -18,9 +25,9 @@ public class ToDo extends Tasks {
         return icon;
     }
     public String added() {
-        return super.added() + " " + icon + super.symbol() + " " + this.desc;
+        return super.added() + " " + icon + super.completed() + " " + this.desc;
     }
     public String deleted() {
-        return super.deleted() + " " + icon + super.symbol() + " " + this.desc;
+        return super.deleted() + " " + icon + super.completed() + " " + this.desc;
     }
 }
