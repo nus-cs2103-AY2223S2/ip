@@ -1,7 +1,21 @@
-Hello from
- ____        _        
-|  _ \ _   _| | _____ 
-| | | | | | | |/ / _ \
-| |_| | |_| |   <  __/
-|____/ \__,_|_|\_\___|
-
+Hello! I'm Chiwa, your personal chatbot (◔◡◔✿)
+What can I do for you today?
+Ok, I've added this task:
+[T][ ] Learn Norwegian
+You now have 1 task(s) in your list!
+Ok, I've added this task:
+[D][ ] assignment 1 (by: Sun 2359)
+You now have 2 task(s) in your list!
+Ok, I've added this task:
+[E][ ] CNY meetup with friends (from: 2pm to: 9pm)
+You now have 3 task(s) in your list!
+Congratulations for completing the task ^^ I've marked it as done:
+[E][X] CNY meetup with friends (from: 2pm to: 9pm)
+1. [T][ ] Learn Norwegian
+2. [D][ ] assignment 1 (by: Sun 2359)
+3. [E][X] CNY meetup with friends (from: 2pm to: 9pm)
+Ok, I've unmarked the task for you:
+[E][ ] CNY meetup with friends (from: 2pm to: 9pm)
+1. [T][ ] Learn Norwegian
+2. [D][ ] assignment 1 (by: Sun 2359)
+3. [E][ ] CNY meetup with friends (from: 2pm to: 9pm)

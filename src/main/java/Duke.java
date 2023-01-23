@@ -52,7 +52,7 @@ public class Duke {
                     for (int i = 0; i < tasks.size(); i++) {
                         reply.append(String.format("%d. " + tasks.get(i) + "\n", i + 1));
                     }
-                    System.out.println(reply);
+                    System.out.print(reply);
                     break;
                 case "mark":
                 case "unmark":
