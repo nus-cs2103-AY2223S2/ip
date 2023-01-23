@@ -12,4 +12,15 @@ public class Event extends Task {
     public String toString() {
         return "[E]" + super.toString() + " (from: " + this.from + " to: " + this.to + ")";
     }
+
+    @Override
+    public String toText() {
+        int done = -1;
+        if (this.isDone) {
+            done = 1;
+        } else {
+            done = 0;
+        }
+        return "E" + " | " + done +  " | " + this.description + " | " + this.from + " | " + this.to;
+    }
 }
