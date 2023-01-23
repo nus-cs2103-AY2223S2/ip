@@ -18,23 +18,23 @@ public class TaskList {
     }
 
     public void list() {
-        Duke.separator();
+        Ui.separator();
         for (int i=0; i < this.tasks.size(); i++) {
             int currentNumber = i+1;
             Task task = this.tasks.get(i);
 
             System.out.println("\t" + currentNumber + "." + task);
         }
-        Duke.separator();
+        Ui.separator();
     }
 
     public void delete(int index) {
-        Duke.separator();
+        Ui.separator();
         Task task = this.tasks.get(index - 1);
         this.tasks.remove(index - 1);
         System.out.println("Noted. I've removed this task:" + "\n\t" + task);
         System.out.println("Now you have " + this.tasks.size() +" tasks in the list.");
-        Duke.separator();
+        Ui.separator();
     }
 
     public void addToDo(String taskDetails) {
@@ -42,7 +42,7 @@ public class TaskList {
         this.tasks.add(task);
         System.out.println("\t" + task);
         System.out.println("Now you have " + this.tasks.size() + " tasks in the list.");
-        Duke.separator();
+        Ui.separator();
     }
 
     public void addDeadline(String description, String by ) {
@@ -52,7 +52,7 @@ public class TaskList {
         this.tasks.add(task);
         System.out.println("\t" + task);
         System.out.println("Now you have " + this.tasks.size() + " tasks in the list.");
-        Duke.separator();
+        Ui.separator();
     }
 
     public void addEvent(String description, String from, String to) {
@@ -60,16 +60,16 @@ public class TaskList {
         this.tasks.add(task);
         System.out.println("\t" + task);
         System.out.println("Now you have " + this.tasks.size() + " tasks in the list.");
-        Duke.separator();
+        Ui.separator();
     }
 
     public void setTaskStatus(int index, boolean isDone) {
         Task task = this.tasks.get(index - 1);
         task.setDone(isDone);
-        Duke.separator();
+        Ui.separator();
         System.out.println("\tOk, I have marked this task as " + (isDone ? "done" : "not done yet")  +  ":\n\t\t"
                 + task);
-        Duke.separator();
+        Ui.separator();
     }
 
     public int listSize() {
