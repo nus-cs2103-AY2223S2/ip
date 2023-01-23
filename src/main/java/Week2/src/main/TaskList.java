@@ -6,6 +6,11 @@ import java.util.Arrays;
 import java.util.Scanner;
 import java.io.File;
 import java.util.Scanner;
+
+/**
+ * List of tasks which is made of a custom type Task
+ * @param <Task>
+ */
 public class TaskList<Task> {
 
     private int size = 0;
@@ -16,6 +21,14 @@ public class TaskList<Task> {
         this.list = new ArrayList<Task>();
     }
 
+    /**
+     * TaskList constructor.
+     * It creates a new ArrayList to contain Task information in it.
+     * It first figures out what type of task it is (todo, deadline, or event),
+     * and divide the command and contents
+     * @param path
+     * @throws FileNotFoundException
+     */
     @SuppressWarnings("unchecked")
     public TaskList(String path) throws FileNotFoundException {
         Scanner sc = new Scanner(new File(path));
@@ -39,18 +52,35 @@ public class TaskList<Task> {
         sc.close();
     }
 
+    /**
+     * It returns the size of the list
+     * @return size of the list
+     */
     public int size() {
         return this.size;
     }
 
+    /**
+     * Gives the task of the given index
+     * @param index index of the tasklist
+     * @return task of the given index
+     */
     public Task get(int index) {
         return this.list.get(index);
     }
 
+    /**
+     * Removes the task at the given index
+     * @param index index of the task that user wants to remove
+     */
     public void remove(int index) {
         this.list.remove(index);
     }
 
+    /**
+     * It adds a new task
+     * @param t New task that user wants to add on the list
+     */
     public void add(Task t) {
         this.list.add(t);
         this.size++;

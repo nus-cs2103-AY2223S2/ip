@@ -7,15 +7,27 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.time.*;
 
+/**
+ * A simple todo bot that helps you to manage your tasks with deadline or occuring time.
+ * @author Park Hyunjin
+ */
 public class Duke {
     private static Storage storage;
     private Ui ui;
     private static TaskList tasklist;
 
+    /**
+     * Duke constructor.
+     * Takes filePath from main and creates Ui and storage from it.
+     * It can load previous data from the file path.
+     * @param filePath
+     * @throws IOException
+     */
     public Duke(String filePath) throws IOException {
         ui = new Ui();
         storage = new Storage(filePath);
         try {
+            ui.hello();
             tasklist = new TaskList(storage.load());
         } catch(Exception e) {
             ui.showLoadingError();
@@ -23,6 +35,9 @@ public class Duke {
         }
     }
 
+    /**
+     * @return a line to divide outcomes.
+     */
     public static void lining() {
         System.out.println("____________________________________________________________");
     }
@@ -37,23 +52,23 @@ public class Duke {
         }
     }
 
+    /**
+     * It uses a file writer to write the data on the file according to the user's input.
+     * @param currtask takes the current task to write (todo, deadline, or event)
+     * @throws IOException
+     */
     public static void writeOn(Task currtask) throws IOException {
         fw.write(currtask.toString() +System.lineSeparator());
     }
+
+    /**
+     * Main method of the todo bot. It generally manages inputs and outputs.
+     * @param args
+     * @throws IOException
+     */
     public static void main(String[] args) throws IOException {
         Scanner sc = new Scanner(System.in);
         new Duke("saves/data.txt");
-
-        String logo = " ____        _        \n"
-                + "|  _ \\ _   _| | _____ \n"
-                + "| | | | | | | |/ / _ \\\n"
-                + "| |_| | |_| |   <  __/\n"
-                + "|____/ \\__,_|_|\\_\\___|\n";
-        System.out.println("Hello from\n" + logo);
-
-        lining();
-        System.out.println("Hello! I'm Duke\nWhat can I do for you?");
-        lining();
 
         String comm = "";
 
