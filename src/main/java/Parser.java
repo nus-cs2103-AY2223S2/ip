@@ -16,6 +16,11 @@ public class Parser {
         return Integer.parseInt(lineInput.split(" ")[1]) - 1;
     }
 
+    public static String[] parseToDoCmd(String commandInput) {
+        String[] parseInfo = {commandInput.substring(5)};
+        return parseInfo;
+    }
+
     public static String[] parseDeadlineCmd(String commandInput) throws TaskNameNotSpecified, DeadlineByNotSpecified {
         String taskName;
         String dueDate;
