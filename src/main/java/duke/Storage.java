@@ -27,8 +27,7 @@ public class Storage {
     }
 
     /**
-     * Checks if the necessary files exist and creates them otherwise.
-     * Loads up previously saved TaskList.
+     * Returns previously saved TaskList if necessary files exist. Creates the necessary files otherwise.
      * @return A List of Tasks to recreate the previously saved TaskList.
      */
     public List<Task> load() {

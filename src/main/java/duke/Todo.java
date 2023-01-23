@@ -13,7 +13,7 @@ public class Todo extends Task {
     }
 
     /**
-     * Marks a Todo task as done.
+     * Returns a Todo task marked as done.
      * @return Todo task marked as done.
      */
     @Override
@@ -22,7 +22,7 @@ public class Todo extends Task {
     }
 
     /**
-     * Unmarks a Todo task from being done.
+     * Returns a Todo task unmarked from being done.
      * @return Todo task unmarked from being done.
      */
     @Override

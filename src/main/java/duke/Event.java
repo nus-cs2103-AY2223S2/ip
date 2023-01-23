@@ -19,6 +19,7 @@ public class Event extends Task {
 
     /**
      * Constructor for Event task, marked as undone.
+     *
      * @param description Event task description.
      * @param from Event start date/time.
      * @param to Event end date/time.
@@ -49,6 +50,7 @@ public class Event extends Task {
 
     /**
      * Constructor for Event task with boolean specified.
+     *
      * @param description Event task description.
      * @param bool Indicates whether task is marked as done.
      * @param from Event start date/time.
@@ -79,7 +81,7 @@ public class Event extends Task {
     }
 
     /**
-     * Marks an Event task as done.
+     * Returns an Event task marked as done.
      * @return Event task marked as done.
      */
     @Override
@@ -88,7 +90,7 @@ public class Event extends Task {
     }
 
     /**
-     * Unmarks an Event task from being done.
+     * Returns an Event task unmarked from being done.
      * @return Event task unmarked from being done.
      */
     @Override

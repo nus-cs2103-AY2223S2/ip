@@ -27,6 +27,7 @@ public class TaskList {
 
     /**
      * Adds a Task to the TaskList.
+     *
      * @param newTask The new task to be added.
      * @return TaskList with added task.
      */
@@ -38,6 +39,7 @@ public class TaskList {
 
     /**
      * Removes a Task from the TaskList.
+     *
      * @param index The index of the task to be removed.
      * @return TaskList with removed task.
      */
@@ -49,6 +51,7 @@ public class TaskList {
 
     /**
      * Replaces a Task in the TaskList with another Task.
+     *
      * @param index The index of the task to be replaced.
      * @param newTask The new task that replaces the existing task.
      * @return TaskList with replaced task.
@@ -61,6 +64,7 @@ public class TaskList {
 
     /**
      * Returns the Task at the index.
+     *
      * @param index The index of the task to be retrieved.
      * @return Task at the index.
      */

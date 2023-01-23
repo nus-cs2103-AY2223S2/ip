@@ -9,6 +9,7 @@ public class Task {
 
     /**
      * Constructor for Task, marked as undone.
+     *
      * @param description Task description.
      */
     public Task(String description) {
@@ -18,6 +19,7 @@ public class Task {
 
     /**
      * Constructor for Task with boolean specified.
+     *
      * @param description Task description.
      * @param bool Indicates whether task is marked as done.
      */
@@ -43,7 +45,7 @@ public class Task {
     }
 
     /**
-     * Marks a task as done.
+     * Returns a task marked as done.
      * @return Task marked as done.
      */
     public Task markAsDone() {
@@ -51,7 +53,7 @@ public class Task {
     }
 
     /**
-     * Unmarks a task from being done.
+     * Returns a task unmarked from being done.
      * @return Task unmarked from being done.
      */
     public Task unmarkAsDone() {

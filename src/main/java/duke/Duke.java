@@ -21,6 +21,7 @@ public class Duke {
 
     /**
      * Constructor for Duke.
+     *
      * @param filePath File path to store/retrieve previous task list.
      */
     public Duke(String filePath) {
@@ -30,7 +31,8 @@ public class Duke {
     }
 
     /**
-     * Saves the current TaskList into a specified file.
+     * Adds the current TaskList into a specified file for storage purposes.
+     *
      * @param taskList List of Tasks to be saved.
      * @throws IOException If specified file does not exist.
      */
@@ -43,7 +45,7 @@ public class Duke {
     }
 
     /**
-     * Duke takes in user input and addresses it accordingly.
+     * Takes in user input and addresses it accordingly.
      */
     public void run() {
         Scanner sc = new Scanner(System.in);
