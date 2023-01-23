@@ -17,6 +17,7 @@ public class Duke {
         */
 
         System.out.println("Hello! I am Duke Nice To Meet You\n");
+        TaskAssigner taskAssigner = new TaskAssigner();
         boolean ongoing = true;
 
         while(ongoing) {
@@ -43,7 +44,7 @@ public class Duke {
                 continue;
             }
 
-            Task task = new Task(command);
+            Task task = taskAssigner.assignTask(command);
             taskList.add(task);
         }
     }
