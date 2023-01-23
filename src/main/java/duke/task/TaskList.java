@@ -62,8 +62,8 @@ public class TaskList {
     public TaskList extractDeadlines() {
         List<DukeTask> result = this.list.stream()
                 .filter(task -> task.getType() == TaskType.DEADLINE && !task.getStatus())
-                .sorted(Comparator.comparing(task -> {
-                    DeadlineTask ddlTask = (DeadlineTask) task;
+                .sorted(Comparator.comparing(x -> {
+                    DeadlineTask ddlTask = (DeadlineTask) x;
                     return ddlTask.getDeadline();
                 }))
                 .collect(Collectors.toList());

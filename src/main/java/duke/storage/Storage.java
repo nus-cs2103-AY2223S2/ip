@@ -24,12 +24,12 @@ public class Storage {
     private final String filePath;
     private final Path folder;
     private final File storageFile;
-    private final String todoTag = "[T]";
-    private final String deadlineTag = "[D]";
-    private final String eventTag = "[E]";
-    private final String isDoneTag = "[X]";
-    private final String notDoneTag = "[ ]";
-    private final String storageError = "OOPS!!! There's something wrong "
+    private final String TODO_TAG = "[T]";
+    private final String DEADLINE_TAG = "[D]";
+    private final String EVENT_TAG = "[E]";
+    private final String IS_DONE_TAG = "[X]";
+    private final String NOT_DONE_TAG = "[ ]";
+    private final String STORAGE_ERROR = "OOPS!!! There's something wrong "
             + "when reading the Storage list";
 
     /**
@@ -75,9 +75,9 @@ public class Storage {
                 boolean isDone = information[1].equals("[X]");
                 String description = information[2];
 
-                if (taskTag.equals(todoTag)) {
+                if (taskTag.equals(TODO_TAG)) {
                     Decoder.todoDecoder(list, description, isDone);
-                } else if (taskTag.equals(deadlineTag)) {
+                } else if (taskTag.equals(DEADLINE_TAG)) {
                     String date = information[3];
                     Decoder.deadlineDecoder(list, description, isDone, date);
                 } else {
@@ -88,15 +88,15 @@ public class Storage {
             }
             return list;
         } catch (FileNotFoundException e) {
-            throw new StorageFileException(storageError);
+            throw new StorageFileException(STORAGE_ERROR);
         }
     }
 
     private void storageFormatChecker(String tag, String isDone) {
-        assert Objects.equals(tag, todoTag) || Objects.equals(tag, deadlineTag) || Objects.equals(tag, eventTag)
+        assert Objects.equals(tag, TODO_TAG) || Objects.equals(tag, DEADLINE_TAG) || Objects.equals(tag, EVENT_TAG)
                 : "Type tag of event should be [T], [D], or [E]";
 
-        assert Objects.equals(isDone, isDoneTag) || Objects.equals(isDone, notDoneTag)
+        assert Objects.equals(isDone, IS_DONE_TAG) || Objects.equals(isDone, NOT_DONE_TAG)
                 : "IsDone tag of event should be [ ], or [X]";
     }
 
@@ -130,7 +130,7 @@ public class Storage {
             }
             writeToFile(filePath, record.toString());
         } catch (IOException e) {
-            throw new StorageFileException(storageError);
+            throw new StorageFileException(STORAGE_ERROR);
         }
     }
 }

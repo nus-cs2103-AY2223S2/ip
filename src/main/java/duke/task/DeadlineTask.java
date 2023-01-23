@@ -3,12 +3,13 @@ package duke.task;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.Objects;
+import java.util.function.Function;
 
 /**
  * A DeadlineTask that encapsulates the information and deadline date of a Deadline Task.
  */
 public class DeadlineTask extends DukeTask {
-    private final LocalDate deadline;
+    public final LocalDate deadline;
 
     /**
      * Constructor for DeadlineTask that takes in the information of the task and its Deadline.
@@ -45,7 +46,7 @@ public class DeadlineTask extends DukeTask {
     }
 
     public LocalDate getDeadline() {
-        return getDeadline();
+        return this.deadline;
     }
 
     @Override

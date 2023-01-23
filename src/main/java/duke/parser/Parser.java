@@ -11,9 +11,9 @@ import duke.exception.InvalidInputException;
 * A parser that parse the input String into a Duke Instruction with respective information encapsulated.
 */
 public class Parser {
-    private static final String unrecognizedError = "OOPS!!! I'm sorry, but I don't know what that means :-(\n" +
+    private static final String UNRECOGNIZED_ERROR = "OOPS!!! I'm sorry, but I don't know what that means :-(\n" +
             "Please type in \"help\" to check all available commands.";
-    private static final String emptyError = "OOPS!!! The instruction cannot be empty";
+    private static final String EMPTY_ERROR = "OOPS!!! The instruction cannot be empty";
     /**
      * A parse method that takes in a String representation of a Command, using
      * regular expression to parse it can construct to a Command object.
@@ -31,7 +31,7 @@ public class Parser {
         //@@author
 
         if (!instructionExtractor.matches()) {
-            throw new InvalidInputException(emptyError);
+            throw new InvalidInputException(EMPTY_ERROR);
         }
         String instructionTag = instructionExtractor.group("instructionTag").strip();
         String information = instructionExtractor.group("information").strip();
@@ -44,6 +44,8 @@ public class Parser {
             return new ReminderCommand();
         } else if (instructionTag.equalsIgnoreCase("help")) {
             return new HelpCommand();
+        } else if (instructionTag.equalsIgnoreCase("massDelete")) {
+            return new MassDeleteCommand();
         } else if (instructionTag.equalsIgnoreCase("mark")) {
             return Decipherer.markDecoder(information);
         } else if (instructionTag.equalsIgnoreCase("unmark")) {
@@ -63,7 +65,7 @@ public class Parser {
         } else if (instructionTag.equalsIgnoreCase("update")) {
             return Decipherer.updateDecoder(information);
         }else {
-            throw new InvalidInputException(unrecognizedError);
+            throw new InvalidInputException(UNRECOGNIZED_ERROR);
         }
     }
 }

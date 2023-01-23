@@ -37,6 +37,7 @@ public class Decipherer {
                     + "Please input a valid task index");
         }
     }
+
     public static MarkAsDoneCommand markDecoder(String information) throws InvalidInputException {
         Matcher numberChecker = Pattern.compile("\\d+?").matcher(information);
         if (numberChecker.matches()) {

@@ -6,9 +6,9 @@ package duke.ui;
  */
 
 public class Ui {
-    private final int DefaultLength = 70;
-    private final int DefaultSpace = 4;
-    private final String underscore = "_";
+    private final int DEFUALT_LENGTH = 70;
+    private final int DEFUALT_SPACE = 4;
+    private final String UNDERSCORE = "_";
     private final String space = " ";
     private final String lineSeparator = "\n";
     private final int horizontalLineLength;
@@ -19,8 +19,8 @@ public class Ui {
      * Constructor that sets HorizontalLineLength to be 70 and IndentSpace to be 4 by default.
      */
     public Ui() {
-        this.horizontalLineLength = DefaultLength;
-        this.indentSpace = DefaultSpace;
+        this.horizontalLineLength = DEFUALT_LENGTH;
+        this.indentSpace = DEFUALT_SPACE;
     }
 
     /**
@@ -55,7 +55,7 @@ public class Ui {
      * @param message the message to be display
      */
     public void displayWithBar(String message) {
-        String bar = space.repeat(indentSpace) + underscore.repeat(this.horizontalLineLength);
+        String bar = space.repeat(indentSpace) + UNDERSCORE.repeat(this.horizontalLineLength);
         System.out.println(bar + lineSeparator + indent(message) + lineSeparator + bar + lineSeparator);
     }
 
