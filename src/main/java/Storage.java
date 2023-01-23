@@ -28,29 +28,21 @@ public class Storage {
             String[] strTasks = strData.split("\n");
             for (String strTask : strTasks) {
                 if (strTask.length() == 1) return;  // for handling empty file, it still contains "\n"
-                String[] info1 = strTask.split("\\[");
-                char taskType = info1[1].charAt(0);
-                boolean isDone = info1[2].charAt(0) == 'x';
-
-                String[] info2 = info1[2].split(" \\(");
-
+                ParsedLoadedTask parsedTaskInfo = Parser.parseLoadTask(strTask);
                 Task task;
-                String taskName = info2[0].substring(3);;
-                switch (taskType) {
+
+                switch (parsedTaskInfo.taskType) {
                 case ('T'):
-                    task = new ToDo(taskName, isDone);
+                    task = new ToDo(parsedTaskInfo.taskName, parsedTaskInfo.isDone);
                     tasks.add(task);
                     break;
                 case ('D'):
-                    String dueDate = info2[1].substring(4, info2[1].length() -1);
-                    task = new Deadline(taskName, dueDate, isDone);
+                    task = new Deadline(parsedTaskInfo.taskName, parsedTaskInfo.dueDate, parsedTaskInfo.isDone);
                     tasks.add(task);
                     break;
                 case ('E'):
-                    String[] info3 = info2[1].split(" to: ");
-                    String fromDate = info3[0].substring(6);
-                    String toDate = info3[1].substring(0, info3[1].length() - 1);
-                    task = new Event(taskName, fromDate, toDate, isDone);
+                    task = new Event(parsedTaskInfo.taskName, parsedTaskInfo.fromDate, 
+                    parsedTaskInfo.toDate, parsedTaskInfo.isDone);
                     tasks.add(task);
                     break;
                 }

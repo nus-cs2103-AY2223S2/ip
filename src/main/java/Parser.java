@@ -81,4 +81,53 @@ public class Parser {
         return parseInfo;
     }
 
+
+    public static ParsedLoadedTask parseLoadTask(String strTask) {
+
+        char taskType;
+        String taskName;
+        boolean isDone;
+        String dueDate = "";
+        String fromDate = "";
+        String toDate = "";
+
+        String[] info1 = strTask.split("\\[");
+        taskType = info1[1].charAt(0);
+        isDone = info1[2].charAt(0) == 'x';
+        String[] info2 = info1[2].split(" \\(");
+        taskName = info2[0].substring(3);
+
+        switch (taskType) {
+        case('T'):
+            break;
+        case('D'):
+            dueDate = info2[1].substring(4, info2[1].length() -1);
+            break;
+        case('E'):
+            String[] info3 = info2[1].split(" to: ");
+            fromDate = info3[0].substring(6);
+            toDate = info3[1].substring(0, info3[1].length() - 1);
+            break;
+        }
+        return new ParsedLoadedTask(taskType, taskName, isDone, dueDate, fromDate, toDate);
+    }
+
+}
+
+class ParsedLoadedTask {
+    char taskType;
+    String taskName;
+    boolean isDone;
+    String dueDate;
+    String fromDate;
+    String toDate;
+
+    public ParsedLoadedTask(char taskType, String taskName, boolean isDone, String dueDate, String fromDate, String toDate) {
+        this.taskType = taskType;
+        this.taskName = taskName;
+        this.isDone = isDone;
+        this.dueDate = dueDate;
+        this.fromDate = fromDate;
+        this.toDate = toDate;
+    }
 }
