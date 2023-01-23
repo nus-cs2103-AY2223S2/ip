@@ -29,26 +29,14 @@ public class Duke {
                     Task removedTask = taskList.removeTask(line);
                     Ui.displayMsg("Noted. I've removed this task:\n" + Ui.indentString(removedTask.toString(), 1) + "\n" + taskList.countTasks());
                     break;
-
                 case EVENT:
+                    new EventCmd(taskList, line).execute();
+                    break;
                 case DEADLINE:
+                    new DeadlineCmd(taskList, line).execute();
+                    break;
                 case TODO:
-                    Task newTask;
-                    try {
-                        if (line.startsWith("event")) {
-                            newTask = Event.create(line);
-                        } else if (line.startsWith("deadline")) {
-                            newTask = Deadline.create(line);
-                        } else {
-                            newTask = ToDo.create(line);
-                        } 
-                        taskList.add(newTask);
-                        StringBuilder output2 = new StringBuilder();
-                        output2.append("Got it. I've added this task:\n" + Ui.indentString(newTask.toString(), 1) + "\n" + taskList.countTasks());
-                        Ui.displayMsg(output2.toString());
-                    } catch (TaskInitError e) {
-                        Ui.displayMsg("OOPS!!! " + e.getMessage());
-                    }
+                    new ToDoCmd(taskList, line).execute();
                     break;
                 case UNRECOGNIZED_CMD:
                     Ui.displayMsg("OOPS!!! I'm sorry, but I don't know what that means :-(");

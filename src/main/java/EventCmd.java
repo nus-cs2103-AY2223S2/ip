@@ -14,6 +14,7 @@ public class EventCmd extends Command {
         } catch (TaskInitError e) {
             Ui.displayMsg("OOPS!!! " + e.getMessage());
         } 
+        uiReply();
     };
     
     public void uiReply() {
