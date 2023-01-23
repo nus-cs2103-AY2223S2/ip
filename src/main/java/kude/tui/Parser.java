@@ -7,12 +7,12 @@ import java.util.regex.Pattern;
 import java.util.stream.Collectors;
 
 public class Parser {
-    private String line;
-    private String cmd;
-    private String arg;
-    private HashMap<String, String> namedArgs;
+    private final String line;
+    private final String cmd;
+    private final String arg;
+    private final HashMap<String, String> namedArgs;
 
-    private final static String ARG_FMT = "/(\\w+)\\s([^/]*)";
+    private final static String ARG_FMT = "\\s/(\\w+)\\s(.*?)(?=\\s/\\w+\\s|$)";
 
     public Parser(String line) {
         this.line = line;
