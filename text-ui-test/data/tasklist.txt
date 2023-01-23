@@ -1,3 +1,0 @@
-unmark todo borrow book
-unmark deadline return book /by 02/12/2019 1800
-unmark event project meeting /from 02/12/2019 1400 /to 02/12/2019 1600
