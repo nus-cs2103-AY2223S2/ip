@@ -11,6 +11,9 @@ import java.util.ArrayList;
 import java.util.Scanner;
 import java.io.FileWriter;
 
+/**
+ * Class that encapsulates 2 methods to load file or write to file
+ */
 public class Storage {
 
     public static void saveToFile(ArrayList<Task> list) {
