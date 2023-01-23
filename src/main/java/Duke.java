@@ -11,68 +11,128 @@ public class Duke {
         System.out.println("Hello from\n" + logo);
         talk("Meow I'm Toto! What can I do for you?");
         ArrayList<Task> arrayList = new ArrayList<>(100);
-        echo(arrayList);
 
-    }
+
+            while (true) {
+                try {
+                Scanner scanner = new Scanner(System.in);
+                String answer = scanner.nextLine();
+                if (answer.equals("bye")) {
+                    System.out.println("Byebye CATch you later!");
+                    break;
+                }
+                if (answer.equals("list")) {
+                    list(arrayList);
+                    continue;
+                }
+
+                if (answer.startsWith("mark ")) {
+                    mark(answer, arrayList);
+                    continue;
+                }
+                if (answer.startsWith("unmark ")) {
+                    unmark(answer, arrayList);
+                    continue;
+                }
+                if (answer.startsWith("todo ")) {
+                    addTodo(answer, arrayList);
+                    continue;
+                }
+                if (answer.startsWith("deadline ")) {
+                    addDeadline(answer, arrayList);
+                    continue;
+                }
+                if (answer.startsWith("event ")) {
+                    addEvent(answer, arrayList);
+                    continue;
+                }
+                throw new DukeException("I don't know that one!");
+                }
+
+                catch (DukeException e) {
+                    System.out.println(e.toString());
+                }
+
+            }
+
+
+        }
+
 
     public static void talk(String s) {
         System.out.println(s);
     }
 
-    public static void echo(ArrayList<Task> arrayList) {
-        Scanner scanner = new Scanner(System.in);
-        String answer = scanner.nextLine();
-        if (answer.equals("bye")) {
-            System.out.println("Byebye CATch you later!");
-            return;
+    public static void mark(String answer, ArrayList<Task> arrayList) throws DukeInvalidIndexException {
+        int index = Integer.valueOf(answer.substring(5, answer.length()));
+        if (index <= 0 || index > arrayList.size()) {
+            throw new DukeInvalidIndexException("That index is out of bounds");
         }
-        if (answer.equals("list")) {
-            list(arrayList);
-            return;
-        }
-
-        if (answer.startsWith("mark ")) {
-            int index = Integer.valueOf(answer.substring(5, answer.length()));
-            arrayList.get(index - 1).markAsDone();
-            System.out.println("I've marked this task as done: " + arrayList.get(index - 1));
-            echo(arrayList);
-            return;
-        }
-        if (answer.startsWith("unmark ")) {
-            int index = Integer.valueOf(answer.substring(7, answer.length()));
-            arrayList.get(index - 1).markAsUndone();
-            System.out.println("I've marked this task as not done yet: " + arrayList.get(index - 1 ));
-            echo(arrayList);
-            return;
-        }
-        Task t = null;
-        if (answer.startsWith("todo ")) {
-            t = new Todo(answer.substring(5, answer.length()));
-        }
-        if (answer.startsWith("deadline ")) {
-            System.out.println("By when?");
-            String by = scanner.nextLine();
-            t = new Deadline(answer.substring(9, answer.length()), by);
-        }
-        if (answer.startsWith("event ")) {
-            System.out.println("From?");
-            String from = scanner.nextLine();
-            System.out.println("To?");
-            String to = scanner.nextLine();
-            t = new Event(answer.substring(6, answer.length()), from, to);
-        }
-        System.out.println("Meow! Just added: \n" + t);
-        arrayList.add(t);
-
-
-        echo(arrayList);
+        arrayList.get(index - 1).markAsDone();
+        System.out.println("I've marked this task as done: " + arrayList.get(index - 1));
     }
 
+    public static void unmark(String answer, ArrayList<Task> arrayList) throws DukeInvalidIndexException {
+        int index = Integer.valueOf(answer.substring(7, answer.length()));
+        if (index <= 0 || index > arrayList.size()) {
+            throw new DukeInvalidIndexException("That index is out of bounds");
+        }
+        arrayList.get(index - 1).markAsUndone();
+        System.out.println("I've marked this task as not done yet: " + arrayList.get(index - 1 ));
+    }
+
+    public static void addTodo(String answer, ArrayList<Task> arrayList) throws DukeInvalidArgumentException {
+        if (answer.substring(5, answer.length()).isEmpty()) {
+            throw new DukeInvalidArgumentException("Todo cannot be empty");
+        }
+
+        Task t = new Todo(answer.substring(5, answer.length()));
+        System.out.println("Meow! Just added: \n" + t);
+        arrayList.add(t);
+    }
+
+    public static void addDeadline(String answer, ArrayList<Task> arrayList) throws DukeInvalidArgumentException {
+        if (answer.substring(9, answer.length()).isEmpty()) {
+            throw new DukeInvalidArgumentException("Deadline cannot be empty");
+        }
+        Scanner scanner = new Scanner(System.in);
+        System.out.println("By when?");
+        String by = scanner.nextLine();
+        if (by.isEmpty()) {
+            throw new DukeInvalidArgumentException("By is empty, please input task again");
+        }
+        Task t = new Deadline(answer.substring(9, answer.length()), by);
+        System.out.println("Meow! Just added: \n" + t);
+        arrayList.add(t);
+    }
+
+    public static void addEvent(String answer, ArrayList<Task> arrayList) throws DukeInvalidArgumentException{
+        if (answer.substring(6, answer.length()).isEmpty()) {
+            throw new DukeInvalidArgumentException("Event cannot be empty");
+        }
+
+
+        Scanner scanner = new Scanner(System.in);
+        System.out.println("From?");
+        String from = scanner.nextLine();
+        if (from.isEmpty()) {
+            throw new DukeInvalidArgumentException("From is empty, please input task again");
+        }
+        System.out.println("To?");
+        String to = scanner.nextLine();
+        if (to.isEmpty()) {
+            throw new DukeInvalidArgumentException("To is empty, please input task again");
+        }
+        Task t = new Event(answer.substring(6, answer.length()), from, to);
+        System.out.println("Meow! Just added: \n" + t);
+        arrayList.add(t);
+    }
     public static void list(ArrayList<Task> arrayList) {
         for (int i = 1; i < arrayList.size() + 1; i++) {
             System.out.println(i + ". " + arrayList.get(i - 1));
         }
-        echo(arrayList);
     }
 
+
 }
+
