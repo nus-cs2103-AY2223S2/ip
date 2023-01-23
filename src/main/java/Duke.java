@@ -120,10 +120,6 @@ public class Duke {
         }
     }
 
-    private static boolean isStringSplit(String[] split, String original) {
-        return split[0].length() != original.length();
-    }
-
     private static void displayTasks() {
         ui.printMessage("Your tasks are:\n" + taskList.toString());
     }
