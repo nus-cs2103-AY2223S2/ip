@@ -39,9 +39,9 @@ public class TaskList {
     @Override
     public String toString() {
         StringBuilder result;
-        if (Task.count != 0) {
+        if (taskList.size() != 0) {
             result = new StringBuilder("\tHere are the tasks in your list: \n");
-            for (int i = 0; i < Task.count; i++) {
+            for (int i = 0; i < taskList.size(); i++) {
                 result.append("\t").append(i + 1).append(".").append(taskList.get(i).toString()).append("\n");
             }
         } else {

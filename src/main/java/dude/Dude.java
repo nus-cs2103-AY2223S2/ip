@@ -1,6 +1,7 @@
 package dude;
 
 import dude.command.Command;
+import dude.exception.DudeException;
 import dude.parser.Parser;
 import dude.storage.Storage;
 import dude.task.TaskList;
@@ -36,9 +37,9 @@ public class Dude {
                 c.execute(tasks, ui, storage);
                 isExit = c.isExit();
             }
-//            catch (DukeException e) {
-//                ui.showError(e.getMessage());
-//            }
+            catch (DudeException e) {
+                ui.showError(e.getMessage());
+            }
             finally {
                 ui.showLine();
             }

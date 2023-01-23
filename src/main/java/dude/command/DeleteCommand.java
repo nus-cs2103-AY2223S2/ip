@@ -1,5 +1,6 @@
 package dude.command;
 
+import dude.exception.DudeException;
 import dude.task.Task;
 import dude.task.TaskList;
 import dude.storage.Storage;
