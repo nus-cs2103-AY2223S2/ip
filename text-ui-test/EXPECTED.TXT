@@ -14,35 +14,17 @@ ____________________________________________________________
 ____________________________________________________________
 Here are the tasks in your list:
 1. [T][X] read book
-2. [D][ ] return book (by: June 6th)
-3. [E][ ] project meeting (from: Aug 6th 2pm to: 4pm)
+2. [D][ ] return book (by: Tue Jun 6 2023 06:06AM)
+3. [E][ ] project meeting (from: Sun Aug 6 2023 02:00PM to: Sun Aug 6 2023 04:00PM)
 4. [T][X] join sports club
 5. [T][ ] borrow book
-6. [D][ ] return book (by: Sunday)
+6. [D][ ] return book (by: Sun Jan 29 2023 03:00PM)
 ____________________________________________________________
 ____________________________________________________________
 :( OOPS!!! I'm sorry, but I don't know what that means.
 ____________________________________________________________
 ____________________________________________________________
 :( OOPS!!! I'm sorry, but I don't know what that means.
-____________________________________________________________
-____________________________________________________________
-:( OOPS!!! The description of a todo cannot be empty.
-____________________________________________________________
-____________________________________________________________
-:( OOPS!!! The description of a deadline cannot be empty.
-____________________________________________________________
-____________________________________________________________
-:( OOPS!!! The description of a event cannot be empty.
-____________________________________________________________
-____________________________________________________________
-:( OOPS!!! The task number cannot be empty.
-____________________________________________________________
-____________________________________________________________
-:( OOPS!!! The task number cannot be empty.
-____________________________________________________________
-____________________________________________________________
-:( OOPS!!! The task number cannot be empty.
 ____________________________________________________________
 ____________________________________________________________
 :( OOPS!!! The description of a todo cannot be empty.
@@ -96,18 +78,21 @@ ____________________________________________________________
 :( OOPS!!! The start time of a event cannot be empty.
 ____________________________________________________________
 ____________________________________________________________
+:( OOPS!!! The due date cannot be empty.
+____________________________________________________________
+____________________________________________________________
 Noted. I've removed this task:
  [T][X] read book
 Now you have 5 tasks in the list
 ____________________________________________________________
 ____________________________________________________________
 Noted. I've removed this task:
- [D][ ] return book (by: June 6th)
+ [D][ ] return book (by: Tue Jun 6 2023 06:06AM)
 Now you have 4 tasks in the list
 ____________________________________________________________
 ____________________________________________________________
 Noted. I've removed this task:
- [E][ ] project meeting (from: Aug 6th 2pm to: 4pm)
+ [E][ ] project meeting (from: Sun Aug 6 2023 02:00PM to: Sun Aug 6 2023 04:00PM)
 Now you have 3 tasks in the list
 ____________________________________________________________
 ____________________________________________________________
@@ -122,7 +107,7 @@ Now you have 1 tasks in the list
 ____________________________________________________________
 ____________________________________________________________
 Noted. I've removed this task:
- [D][ ] return book (by: Sunday)
+ [D][ ] return book (by: Sun Jan 29 2023 03:00PM)
 Now you have 0 tasks in the list
 ____________________________________________________________
 ____________________________________________________________
@@ -132,12 +117,12 @@ Now you have 1 tasks in the list
 ____________________________________________________________
 ____________________________________________________________
 Got it. I've added this task:
- [D][ ] return book (by: June 6th)
+ [D][ ] return book (by: Tue Jun 6 2023 06:06AM)
 Now you have 2 tasks in the list
 ____________________________________________________________
 ____________________________________________________________
 Got it. I've added this task:
- [E][ ] project meeting (from: Aug 6th 2pm to: 4pm)
+ [E][ ] project meeting (from: Sun Aug 6 2023 02:00PM to: Sun Aug 6 2023 04:00PM)
 Now you have 3 tasks in the list
 ____________________________________________________________
 ____________________________________________________________
@@ -153,8 +138,8 @@ ____________________________________________________________
 ____________________________________________________________
 Here are the tasks in your list:
 1. [T][ ] read book
-2. [D][ ] return book (by: June 6th)
-3. [E][ ] project meeting (from: Aug 6th 2pm to: 4pm)
+2. [D][ ] return book (by: Tue Jun 6 2023 06:06AM)
+3. [E][ ] project meeting (from: Sun Aug 6 2023 02:00PM to: Sun Aug 6 2023 04:00PM)
 4. [T][ ] join sports club
 5. [T][ ] borrow book
 ____________________________________________________________
@@ -169,21 +154,21 @@ ____________________________________________________________
 ____________________________________________________________
 Here are the tasks in your list:
 1. [T][X] read book
-2. [D][ ] return book (by: June 6th)
-3. [E][ ] project meeting (from: Aug 6th 2pm to: 4pm)
+2. [D][ ] return book (by: Tue Jun 6 2023 06:06AM)
+3. [E][ ] project meeting (from: Sun Aug 6 2023 02:00PM to: Sun Aug 6 2023 04:00PM)
 4. [T][X] join sports club
 5. [T][ ] borrow book
 ____________________________________________________________
 ____________________________________________________________
 Nice! Congrats for completing this task:
- [E][X] project meeting (from: Aug 6th 2pm to: 4pm)
+ [E][X] project meeting (from: Sun Aug 6 2023 02:00PM to: Sun Aug 6 2023 04:00PM)
 ____________________________________________________________
 ____________________________________________________________
 :( OOPS!!! This task has already been done.
 ____________________________________________________________
 ____________________________________________________________
 OK, I've marked this task as not done yet:
- [E][ ] project meeting (from: Aug 6th 2pm to: 4pm)
+ [E][ ] project meeting (from: Sun Aug 6 2023 02:00PM to: Sun Aug 6 2023 04:00PM)
 ____________________________________________________________
 ____________________________________________________________
 :( OOPS!!! This task has not been done yet.
@@ -191,19 +176,19 @@ ____________________________________________________________
 ____________________________________________________________
 Here are the tasks in your list:
 1. [T][X] read book
-2. [D][ ] return book (by: June 6th)
-3. [E][ ] project meeting (from: Aug 6th 2pm to: 4pm)
+2. [D][ ] return book (by: Tue Jun 6 2023 06:06AM)
+3. [E][ ] project meeting (from: Sun Aug 6 2023 02:00PM to: Sun Aug 6 2023 04:00PM)
 4. [T][X] join sports club
 5. [T][ ] borrow book
 ____________________________________________________________
 ____________________________________________________________
 Got it. I've added this task:
- [D][ ] return book (by: Sunday)
+ [D][ ] return book (by: Sun Jan 29 2023 03:00PM)
 Now you have 6 tasks in the list
 ____________________________________________________________
 ____________________________________________________________
 Got it. I've added this task:
- [E][ ] project meeting (from: Mon 2pm to: 4pm)
+ [E][ ] project meeting (from: Mon Aug 7 2023 02:00PM to: Mon Aug 7 2023 04:00PM)
 Now you have 7 tasks in the list
 ____________________________________________________________
 ____________________________________________________________
@@ -226,11 +211,19 @@ ____________________________________________________________
 ____________________________________________________________
 ____________________________________________________________
 Noted. I've removed this task:
- [E][ ] project meeting (from: Mon 2pm to: 4pm)
+ [E][ ] project meeting (from: Mon Aug 7 2023 02:00PM to: Mon Aug 7 2023 04:00PM)
 Now you have 6 tasks in the list
 ____________________________________________________________
 ____________________________________________________________
 :( OOPS!!! A task with the given number cannot be found.
+____________________________________________________________
+____________________________________________________________
+Here are the tasks in your list due on Tue Jun 6 2023:
+1. [D][ ] return book (by: Tue Jun 6 2023 06:06AM)
+____________________________________________________________
+____________________________________________________________
+Here are the tasks in your list due on Sun Aug 6 2023:
+1. [E][ ] project meeting (from: Sun Aug 6 2023 02:00PM to: Sun Aug 6 2023 04:00PM)
 ____________________________________________________________
 ____________________________________________________________
  Tasks saved successfully.
