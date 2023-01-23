@@ -1,6 +1,10 @@
+import Tasks.Deadline;
+import Tasks.Events;
+import Tasks.Task;
+import Tasks.Todo;
+
 import java.util.*;
 import java.util.function.BiPredicate;
-import java.util.function.Predicate;
 
 public class Chatbot {
 
@@ -16,6 +20,7 @@ public class Chatbot {
         });
 
         commands.put(Commands.MESSAGE_LIST, (chatbot, args) -> {
+            System.out.println("Here are the tasks in your list:");
             int i = 0;
             for(Task entry : chatbot.tasks){
                 i += 1;
@@ -36,7 +41,7 @@ public class Chatbot {
                 }
                 index -= 1;
                 if (chatbot.getTaskState(index)){
-                    System.out.println("Task is already marked as done.");
+                    System.out.println("Tasks.Task is already marked as done.");
                     return false;
                 }
                 else{
@@ -59,7 +64,7 @@ public class Chatbot {
             }
             index -= 1;
             if (!chatbot.getTaskState(index)){
-                System.out.println("Task is already unmarked.");
+                System.out.println("Tasks.Task is already unmarked.");
                 return false;
             }
             else{
@@ -71,7 +76,34 @@ public class Chatbot {
 
         });
 
-        
+        commands.put(Commands.MESSAGE_TODO, (chatbot, args) -> {
+            Todo toAdd = new Todo(args);
+            chatbot.addTask(toAdd);
+            return true;
+        });
+
+        commands.put(Commands.MESSAGE_DEADLINE, (chatbot, args) -> {
+            String[] inputs = args.split("/by", 2);
+
+            if(inputs.length != 2)
+                return false;
+
+            Deadline toAdd = new Deadline(inputs[0], inputs[1]);
+            chatbot.addTask(toAdd);
+            return true;
+        });
+
+        commands.put(Commands.MESSAGE_EVENT, (chatbot, args) -> {
+            String[] inputs = args.split("(/from | /to)", 3);
+
+            if(inputs.length != 3)
+                return false;
+
+            Events toAdd = new Events(inputs[0], inputs[1], inputs[2]);
+            chatbot.addTask(toAdd);
+            return true;
+        });
+
     }
 
 
@@ -95,16 +127,21 @@ public class Chatbot {
             }
         } else {
             //Command not found.
-            tasks.add(new Task(nextLine));
-            System.out.println("added: " + nextLine);
+            System.out.println(nextLine);
         }
 
     }
 
+    public void addTask(Task toAdd){
+        System.out.println("Got it. I've added this task:");
+        tasks.add(toAdd);
+        System.out.println("\t" + toAdd);
+        System.out.println("Now you have " + tasks.size() + " tasks in the list");
+    }
     public boolean getTaskState(int index){
         if(tasks.size() < index)
             return false;
-        return tasks.get(index).getState();
+        return tasks.get(index).getCompletionStatus();
     }
 
     public String getTask(int index){

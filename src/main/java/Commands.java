@@ -8,5 +8,10 @@ public class Commands {
 
     final static String MESSAGE_UNMARK = "unmark";
 
+    final static String MESSAGE_TODO = "todo";
+    final static String MESSAGE_DEADLINE = "deadline";
+
+    final static String MESSAGE_EVENT = "event";
+
 
 }
