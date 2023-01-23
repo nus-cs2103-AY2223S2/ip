@@ -3,9 +3,21 @@ public class Event extends Task {
   protected String to;
 
   public Event(String title, String from, String to) {
-    super(title);
+    this(title, from, to, false);
+  }
+
+  public Event(String title, String from, String to, boolean isDone) {
+    super(title, isDone);
     this.from = from;
     this.to = to;
+  }
+
+  @Override
+  public String toSaveFormat() {
+    return String.format(
+      "E | %d | %s | %s | %s",
+      getStatusNo() , title, from, to
+    );
   }
 
   @Override

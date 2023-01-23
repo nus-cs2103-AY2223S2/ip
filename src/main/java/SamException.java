@@ -1,4 +1,4 @@
-public class SamException extends Exception {
+class SamException extends Exception {
   public SamException(String message) {
     super(message);
   }
@@ -37,5 +37,17 @@ class SamMissingTaskValueException extends SamException {
 class SamInvalidTaskException extends SamException {
   public SamInvalidTaskException() {
     super("Oops, that task does not exist!");
+  }
+}
+
+class SamSaveFailedException extends SamException {
+  public SamSaveFailedException() {
+    super("Oh no, there was a problem saving your list!");
+  }
+}
+
+class SamLoadFailedException extends SamException {
+  public SamLoadFailedException() {
+    super("Oh no, there was a problem loading your list!");
   }
 }
