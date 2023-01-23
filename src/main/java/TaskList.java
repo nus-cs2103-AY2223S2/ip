@@ -15,8 +15,7 @@ public class TaskList {
         return "Now you have " + this.tasks.size() + " task" + (this.tasks.size() == 1 ? "" : "s") + " in the list.";
     }
 
-    public Task removeTask(String command) {
-        int index = Integer.parseInt(command.split(" ")[1]) - 1;
+    public Task removeTask(int index) {
         return this.tasks.remove(index);
     }
 

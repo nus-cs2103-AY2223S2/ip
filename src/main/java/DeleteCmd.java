@@ -1,14 +1,14 @@
 public class DeleteCmd extends Command {
-    String lineInput;
     Task task;
 
     public DeleteCmd(TaskList taskList, String lineInput) {
-        super(taskList);
+        super(taskList, lineInput);
         this.lineInput = lineInput;
     } 
 
     public void execute() {
-        this.task = this.taskList.removeTask(this.lineInput);
+        int index = Parser.parseMarkUnmarkDelete(lineInput);
+        this.task = this.taskList.removeTask(index);
         uiReply();
     }
 
