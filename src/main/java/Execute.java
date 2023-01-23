@@ -17,17 +17,17 @@ public class Execute {
         String userInput = sc.nextLine();
         while (true) {
             if (userInput.equals("list")) {
-                System.out.println(duke.seperate(duke.print_curr_tasks()));
+                System.out.println(duke.separate(duke.print_curr_tasks()));
                 userInput = sc.nextLine();
             } else if (userInput.equals("bye")) {
                 break;
             } else {
                 Task task_given = new Task(userInput);
                 duke.addTask(task_given);
-                System.out.println(duke.seperate(duke.msg_of_add(task_given)));
+                System.out.println(duke.separate(duke.msg_of_add(task_given)));
                 userInput = sc.nextLine();
             }
         }
-        System.out.println(duke.seperate(duke.ending()));
+        System.out.println(duke.separate(duke.ending()));
     }
 }

@@ -45,7 +45,7 @@ public class Duke {
         return "Hi~ I'm Duke>_< \nWhat can I do for you?";
     }
 
-    public String seperate(String str) {
+    public String separate(String str) {
         String sep_line = "---------------------------------------------------------------";
         return sep_line + "\n" + str + "\n" + sep_line;
     }
