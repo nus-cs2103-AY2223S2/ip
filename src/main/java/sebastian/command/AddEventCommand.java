@@ -17,10 +17,7 @@ public class AddEventCommand extends AddTaskCommand {
 
     @Override
     public void execute(TaskList taskList, Ui ui, Storage storage)
-            throws LackOfArgumentException,
-            EventFormatMismatchException,
-            CannotWriteDataException
-    {
+            throws LackOfArgumentException, EventFormatMismatchException, CannotWriteDataException {
         String[] insArr = instruction.split(" ");
         if (insArr.length == 1) {
             throw new LackOfArgumentException();

@@ -18,11 +18,8 @@ public class DeleteCommand extends Command{
 
     @Override
     public void execute(TaskList taskList, Ui ui, Storage storage)
-            throws LackOfArgumentException,
-            InstructionFormatMismatchException,
-            TaskNotExistException,
-            CannotWriteDataException
-    {
+            throws LackOfArgumentException, InstructionFormatMismatchException,
+            TaskNotExistException, CannotWriteDataException {
         String[] insArr = instruction.split(" ");
         if(insArr.length == 1) {
             throw new LackOfArgumentException();

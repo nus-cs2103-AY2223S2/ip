@@ -18,9 +18,7 @@ public class GetCommand extends Command{
 
     @Override
     public void execute(TaskList taskList, Ui ui, Storage storage)
-            throws LackOfArgumentException,
-            DateFormatMismatchException
-    {
+            throws LackOfArgumentException, DateFormatMismatchException {
         String[] insArr = instruction.split(" ");
         if(insArr.length == 1) {
             throw new LackOfArgumentException();

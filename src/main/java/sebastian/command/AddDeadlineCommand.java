@@ -17,10 +17,7 @@ public class AddDeadlineCommand extends AddTaskCommand{
 
     @Override
     public void execute(TaskList taskList, Ui ui, Storage storage)
-            throws LackOfArgumentException,
-            DeadlineFormatMismatchException,
-            CannotWriteDataException
-    {
+            throws LackOfArgumentException, DeadlineFormatMismatchException, CannotWriteDataException {
         String[] insArr = instruction.split(" ");
         if(insArr.length == 1) {
             throw new LackOfArgumentException();

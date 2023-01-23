@@ -15,9 +15,7 @@ public class AddTodoCommand extends AddTaskCommand{
 
     @Override
     public void execute(TaskList taskList, Ui ui, Storage storage)
-            throws LackOfArgumentException,
-            CannotWriteDataException
-    {
+            throws LackOfArgumentException, CannotWriteDataException {
         String[] insArr = instruction.split(" ");
         if(insArr.length == 1) {
             throw new LackOfArgumentException();
