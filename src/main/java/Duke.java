@@ -34,6 +34,10 @@ public class Duke {
                     unmark(answer, arrayList);
                     continue;
                 }
+                if (answer.startsWith("delete ")) {
+                    delete(answer, arrayList);
+                    continue;
+                }
                 if (answer.startsWith("todo ")) {
                     addTodo(answer, arrayList);
                     continue;
@@ -63,7 +67,10 @@ public class Duke {
         System.out.println(s);
     }
 
-    public static void mark(String answer, ArrayList<Task> arrayList) throws DukeInvalidIndexException {
+    public static void mark(String answer, ArrayList<Task> arrayList) throws DukeException {
+        if (answer.substring(5, answer.length()).isEmpty()) {
+            throw new DukeInvalidArgumentException("Mark cannot be empty");
+        }
         int index = Integer.valueOf(answer.substring(5, answer.length()));
         if (index <= 0 || index > arrayList.size()) {
             throw new DukeInvalidIndexException("That index is out of bounds");
@@ -72,8 +79,12 @@ public class Duke {
         System.out.println("I've marked this task as done: " + arrayList.get(index - 1));
     }
 
-    public static void unmark(String answer, ArrayList<Task> arrayList) throws DukeInvalidIndexException {
+    public static void unmark(String answer, ArrayList<Task> arrayList) throws DukeException {
+        if (answer.substring(7, answer.length()).isEmpty()) {
+            throw new DukeInvalidArgumentException("Unmark cannot be empty");
+        }
         int index = Integer.valueOf(answer.substring(7, answer.length()));
+
         if (index <= 0 || index > arrayList.size()) {
             throw new DukeInvalidIndexException("That index is out of bounds");
         }
@@ -81,6 +92,17 @@ public class Duke {
         System.out.println("I've marked this task as not done yet: " + arrayList.get(index - 1 ));
     }
 
+    public static void delete(String answer, ArrayList<Task> arrayList) throws DukeException {
+        if (answer.substring(7, answer.length()).isEmpty()) {
+            throw new DukeInvalidArgumentException("Delete cannot be empty");
+        }
+        int index = Integer.valueOf(answer.substring(7, answer.length()));
+        if (index <= 0 || index > arrayList.size()) {
+            throw new DukeInvalidIndexException("That index is out of bounds");
+        }
+        System.out.println("I've deleted this task: " + arrayList.get(index - 1 ));
+        arrayList.remove(index - 1);
+    }
     public static void addTodo(String answer, ArrayList<Task> arrayList) throws DukeInvalidArgumentException {
         if (answer.substring(5, answer.length()).isEmpty()) {
             throw new DukeInvalidArgumentException("Todo cannot be empty");
@@ -127,6 +149,7 @@ public class Duke {
         System.out.println("Meow! Just added: \n" + t);
         arrayList.add(t);
     }
+
     public static void list(ArrayList<Task> arrayList) {
         for (int i = 1; i < arrayList.size() + 1; i++) {
             System.out.println(i + ". " + arrayList.get(i - 1));
