@@ -61,7 +61,7 @@ public class Parser {
     private Date _to;
 
 
-    private final TaskManager _taskManager;
+    private TaskManager _taskManager;
 
     public ITask.TaskTypes getType() {
         return _type;
@@ -70,7 +70,9 @@ public class Parser {
     private ITask.TaskTypes _type;
     private int _index;
 
-
+    public  Parser(String input){
+        _input = input;
+    }
     public Parser(TaskManager taskManager) {
         _taskManager = taskManager;
     }

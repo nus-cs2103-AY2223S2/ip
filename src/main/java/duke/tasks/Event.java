@@ -23,7 +23,7 @@ public class Event extends ITask {
 
     @Override
     public String toSaveFormat() {
-        return "[E] " + "/from: " + from + " /to: " + to + " /content: " + super.toString();
+        return "[E] " + "/from: " + from.getTime() + " /to: " + to.getTime() + " /content: " + super.toString();
     }
 
     @Override
