@@ -29,7 +29,7 @@ public class Parser implements BiConsumer<String, Duke> {
     if (cmd != null) {
       cmd.accept(tokens, instance);
     } else {
-      Ui.print("Unknown command '%s' :(", tokens[0]);
+      Ui.print("Unknown command '%s' :(", input);
     }
   }
 
