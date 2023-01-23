@@ -12,4 +12,8 @@ public class Parser {
         }
     }
 
+    public static int parseMarkUnmarkDelete(String lineInput) {
+        return Integer.parseInt(lineInput.split(" ")[1]) - 1;
+    }
+
 }

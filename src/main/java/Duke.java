@@ -21,8 +21,7 @@ public class Duke {
                     new ListCmd(taskList).execute();
                     break;
                 case MARK:  
-                    int listIndexMark = Integer.parseInt(line.split(" ")[1]) - 1;
-                    new MarkCmd(taskList, listIndexMark).execute();
+                    new MarkCmd(taskList, line).execute();
                     break;
                 case UNMARK:
                     int listIndexUnmark = Integer.parseInt(line.split(" ")[1]) - 1;

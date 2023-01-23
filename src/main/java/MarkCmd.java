@@ -2,9 +2,9 @@ public class MarkCmd extends Command {
     int index;
     Task task;
 
-    public MarkCmd(TaskList taskList, int index) {
-        super(taskList);
-        this.index = index;
+    public MarkCmd(TaskList taskList, String lineInput) {
+        super(taskList, lineInput);
+        this.index = Parser.parseMarkUnmarkDelete(lineInput);
     }
 
     public void execute() {
