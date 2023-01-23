@@ -2,6 +2,8 @@ import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -224,10 +226,12 @@ class Deadlines extends Task {
 
     final String raw;
     String endDate;
+    DateTranslator dateTranslator;
 
     Deadlines(String name, boolean done) {
         super(name, done);
         raw = name;
+        dateTranslator = new DateTranslator(raw);
         extract();
     }
 
@@ -536,5 +540,53 @@ class FileManager {
         p1.close();
         p1.close();
     }
+
+}
+
+class DateTranslator {
+    String raw_input;
+    LocalDateTime time;
+
+    DateTranslator(String raw_input){
+        this.raw_input = raw_input;
+        convert();
+    }
+
+    void convert() {
+        //example input = return book /by 2/12/2019 1800
+        String[] tokens;
+        tokens = raw_input.split("/");
+
+        // 2/12/2019 1800 format
+        if(tokens.length > 2) {
+            //return book |by 2|12| 2019 1800
+            int day = Integer.parseInt(tokens[1].split(" ")[1]); //remove by
+            int month = Integer.parseInt(tokens[2]);
+            String[] year_time = tokens[3].split(" ");
+            int year = Integer.parseInt(year_time[0]);
+            int hour = Integer.parseInt(year_time[1]) / 100;
+            int min = Integer.parseInt(year_time[1]) % 100;
+            time = LocalDateTime.of(year, month, day, hour, min);
+            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss a");
+            String str = time.format(formatter);
+            System.out.println(str);
+        } else {
+          //2019-12-02 1800 format
+            String[] Date_time = tokens[1].split(" ");
+            String[] date = Date_time[1].split("-");
+            int year = Integer.parseInt(date[0]);
+            int month = Integer.parseInt(date[1]);
+            int day = Integer.parseInt(date[2]);
+            int time1 = Integer.parseInt(Date_time[2]);
+            int hour = time1/100;
+            int min = time1%100;
+            time = LocalDateTime.of(year,month,day,hour,min);
+            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("MMM dd yyyy");
+            String str = time.format(formatter);
+            System.out.println(str);
+        }
+    }
+
+
 
 }
