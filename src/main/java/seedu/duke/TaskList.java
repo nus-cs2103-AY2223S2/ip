@@ -1,6 +1,12 @@
 package seedu.duke;
 import java.util.ArrayList;
 
+/**
+ * Class that contains the tasks and the actions to do on them.
+ * it extends the Task class.
+ *
+ * @param list ArrayList of tasks containing the tasks.
+ */
 public class TaskList {
     protected ArrayList<Task> list;
 
@@ -10,6 +16,12 @@ public class TaskList {
     public TaskList(){
         this.list = new ArrayList<Task>();
     }
+
+    /**
+     * Marks a task as done.
+     *
+     * @param index the index of the task that is to be marked.
+     */
     public void mark(int index){
         try {
             list.get(index).isDone = true;
@@ -24,6 +36,11 @@ public class TaskList {
         }
     }
 
+    /**
+     * Marks a task as being not done.
+     *
+     * @param index the index of the task that is to be unmarked.
+     */
     public void unmark(int index){
         list.get(index).isDone = false;
         System.out.println("    -------------------------------------------");
@@ -32,6 +49,9 @@ public class TaskList {
         System.out.println("    -------------------------------------------");
     }
 
+    /**
+     * prints the tasks.
+     */
     public void showList(){
         System.out.println("    -------------------------------------------");
         for (int i = 0; i < list.size(); i++) {
@@ -40,6 +60,11 @@ public class TaskList {
         System.out.println("    -------------------------------------------");
     }
 
+    /**
+     * Adds a ToDo task to the list.
+     *
+     * @param echoSplit an array of String containing the words of the command given.
+     */
     public void addToDo(String[] echoSplit){
         String task = "";
         for (int i = 1; i < echoSplit.length; i++) {
@@ -48,6 +73,13 @@ public class TaskList {
         list.add(new ToDo(task));
         System.out.println("    -------------------------------------------\n    " + "added: " + task +"\n    -------------------------------------------");
     }
+
+    /**
+     * Adds an Event task to the list.
+     *
+     * @param echoSplit an array of String containing the words of the command given.
+     * @param print an int that specifies whether to print the action or not.
+     */
     public void addEvent(String[] echoSplit, int print){
         String task = "";
         int fromI = 0;
@@ -87,6 +119,13 @@ public class TaskList {
         if(print == 0)
             System.out.println("    -------------------------------------------\n    " + "added: " + task +"\n    -------------------------------------------");
     }
+
+    /**
+     * Adds a Deadline task to the list.
+     *
+     * @param echoSplit an array of String containing the words of the command given.
+     * @param print an int that specifies whether to print the action or not.
+     */
     public void addDeadline(String[] echoSplit, int print){
         String task = "";
         String date = "";
@@ -116,6 +155,11 @@ public class TaskList {
             }
         }
     }
+
+    /**
+     * Deletes a task from the list.
+     * Prints the task that was deleted.
+     */
     public void delete(int index){
         System.out.println("    -------------------------------------------\n    " + "removed: " + list.get(index) +"\n    -------------------------------------------");
         list.remove(index);

@@ -8,6 +8,12 @@ public class Duke {
     private TaskList tasks;
     private Ui ui;
     private static ArrayList<Task> list = new ArrayList<>();
+    /**
+     * Constructs a Duke object and initializes the needed parameters.
+     *
+     * @param filePath file path of the tasks file.
+     * @throws IOException.
+     */
     public Duke(String filePath) throws IOException {
         ui = new Ui();
         storage = new Storage(filePath);
