@@ -12,9 +12,9 @@ public class Deadline extends Task{
         return dt.equals(this.deadline);
     }
 
-    Deadline(String content, boolean done, String deadline) {
+    Deadline(String content, boolean done, String deadlineString) throws InvalidDateFormatException {
         super(content, done);
-        this.deadline = deadline;
+        this.deadline = DateTimeHelper.parseFormattedDateTime(deadlineString);
     }
 
     @Override

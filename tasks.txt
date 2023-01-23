@@ -1,5 +1,4 @@
-[T][ ] test
-[D][ ] return book (by: Sunday)
-[T][ ] wazzup man
-[E][ ] hello man (from: monday to: tuesday)
-[T][ ] ??
+[T][ ] Testing
+[D][ ] return book (by: Dec 2 2019 18:00)
+[E][ ] project meeting (from: Dec 2 2019 18:00 to: Dec 10 2019 18:00)
+[T][ ] wazzup

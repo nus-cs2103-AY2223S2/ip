@@ -14,10 +14,10 @@ public class Event extends Task{
         return dt.equals(this.start) || (dt.isAfter(this.start) && dt.isBefore(this.end)) || dt.equals(this.end);
     }
 
-    Event(String content, boolean done, String start, String end) {
+    Event(String content, boolean done, String startString, String endString) throws InvalidDateFormatException {
         super(content, done);
-        this.start = start;
-        this.end = end;
+        this.start = DateTimeHelper.parseFormattedDateTime(startString);
+        this.end = DateTimeHelper.parseFormattedDateTime(endString);
     }
 
     @Override

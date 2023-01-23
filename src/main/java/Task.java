@@ -69,7 +69,11 @@ public class Task {
                 String deadline = content.substring(deadlineStart, content.length() - 1);
                 String deadlineContent = content.substring(0, deadlineStart - 6);
 
-                return new Deadline(deadlineContent, isMarked, deadline);
+                try {
+                    return new Deadline(deadlineContent, isMarked, deadline);
+                } catch (InvalidDateFormatException e) {
+                    System.out.println(e.getMessage());
+                }
             case 'E':
                 // parse Event
                 if (!content.matches(".+ \\(from: .+ to: .+\\)")) {
@@ -93,7 +97,11 @@ public class Task {
                 String end = content.substring(endIndex, content.length() - 1);
                 String eventContent = content.substring(0, startIndex - 8);
 
-                return new Event(eventContent, isMarked, start, end);
+                try {
+                    return new Event(eventContent, isMarked, start, end);
+                } catch (InvalidDateFormatException e) {
+                    System.out.println(e.getMessage());
+                }
             default:
                 throw new InvalidTaskStringException("Unknown task type!");
         }
