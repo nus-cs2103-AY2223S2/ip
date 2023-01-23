@@ -123,7 +123,6 @@ public class Duke {
     private static void addDeadlineToList(String arguments) throws DukeException {
         try {
             String[] splitArgs = arguments.split(" /by ");
-            Task task = new DeadlineTask(splitArgs[0], splitArgs[1]);
             Task task = new DeadlineTask(splitArgs[0], parser.parseDateTime(splitArgs[1]));
             taskList.add(task);
             printMessage("added: " + task);
@@ -138,7 +137,6 @@ public class Duke {
         try {
             String[] splitArgs = arguments.split(" /from ");
             String[] times = splitArgs[1].split(" /to ");
-            Task task = new EventTask(splitArgs[0], times[0], times[1]);
             Task task = new EventTask(splitArgs[0], parser.parseDateTime(times[0]), parser.parseDateTime(times[1]));
             taskList.add(task);
             printMessage("added: " + task);
@@ -226,10 +224,10 @@ public class Duke {
                     task = new ToDoTask(description);
                     break;
                 case "D":
-                    task = new DeadlineTask(description, parsed[3]);
+                    task = new DeadlineTask(description, parser.parseDateTime(parsed[3]));
                     break;
                 case "E":
-                    task = new EventTask(description, parsed[3], parsed[4]);
+                    task = new EventTask(description, parser.parseDateTime(parsed[3]), parser.parseDateTime(parsed[4]));
                     break;
                 default:
                     throw new CannotReadFileDukeException();
