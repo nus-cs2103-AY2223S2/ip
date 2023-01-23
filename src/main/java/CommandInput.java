@@ -9,6 +9,7 @@ public enum CommandInput {
     MARK("mark"),
     UNMARK("unmark"),
     LIST("list"),
+    BYE("bye"),
     UNRECOGNIZED_CMD("");
 
     private String commandString;

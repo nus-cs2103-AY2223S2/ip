@@ -1,7 +1,20 @@
+import java.util.Scanner;
+
 public class Ui {
 
-    public static void listReply(TaskList taskList) {
-        displayMsg(taskList.outputList());
+    public static boolean isRunning = true;
+    public static String line;
+    public static Scanner sc = new Scanner(System.in);
+
+    public static void greetUser() {
+        System.out.println("Hello I'm Duke! \nWhat can I do for you?");
+        line = sc.nextLine();
+    }
+
+    public static String getNextCommand() {
+        System.out.println("");
+        line = sc.nextLine();
+        return line;
     }
 
     public static void displayMsg(String msg) {
@@ -21,5 +34,10 @@ public class Ui {
             result.append(indent + lines[i] + (i + 1 < lines.length ? "\n" : ""));
         }
         return result.toString();
+    }
+
+    public static void shutDown() {
+        isRunning = false;
+        displayMsg("Bye. Hope to see you again soon!");
     }
 }
