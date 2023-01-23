@@ -22,7 +22,7 @@ public class InputValidator {
         }
     }
 
-    public static String[] normaliseTodoInput(String input) throws IndexOutOfBoundsException, InvalidCommandException {
+    public static String[] normaliseTodoInput(String input) throws InvalidCommandException {
         String[] split = input.split(" ");
         List<String> RESERVED_AL = Arrays.asList(RESERVED);
         for (String s : split) {
@@ -32,8 +32,13 @@ public class InputValidator {
         }
 
         String[] res = new String[2];
-        res[0] = input.substring(0, 4);
-        res[1] = input.substring(5);
+        try {
+            res[0] = input.substring(0, 4);
+            res[1] = input.substring(5);
+        } catch (IndexOutOfBoundsException e) {
+            throw new InvalidCommandException("Unable to normalise input as a Todo input");
+        }
+
         return res;
     }
 
