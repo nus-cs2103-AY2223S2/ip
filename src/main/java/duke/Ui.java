@@ -6,7 +6,7 @@ public class Ui {
 
     private Scanner scanner;
     private StringBuilder msg;
-    private boolean isTerminating;
+    private boolean doPromptUserInput;
     private static final String DIVIDER = "____________________________________________________________";
     private static final String NEWL = "\n";
     private static final String LOGO = " ____        _        \n" + "|  _ \\ _   _| | _____ \n"
@@ -15,7 +15,7 @@ public class Ui {
     public Ui() {
         this.scanner = new Scanner(System.in);
         this.msg = new StringBuilder();
-        this.isTerminating = false;
+        this.doPromptUserInput = true;
     }
 
     public void showWelcome() {
@@ -28,10 +28,16 @@ public class Ui {
 
     public void displayMessage() {
         Ui.prettyPrint(this.msg.toString());
-        this.msg.setLength(0);
-        if (!this.isTerminating) {
+        this.clearMessage();
+        if (this.doPromptUserInput) {
             System.out.print("> ");
+        } else {
+            this.doPromptUserInput = true;
         }
+    }
+
+    public void clearMessage() {
+        this.msg.setLength(0);
     }
 
     public void addToMessage(String toAdd) {
@@ -39,8 +45,8 @@ public class Ui {
         this.msg.append(NEWL);
     }
 
-    public void addToMessage(String toAdd, boolean isTerminating) {
-        this.isTerminating = isTerminating;
+    public void addToMessage(String toAdd, boolean doPromptUserInput) {
+        this.doPromptUserInput = doPromptUserInput;
         this.addToMessage(toAdd);
     }
 
