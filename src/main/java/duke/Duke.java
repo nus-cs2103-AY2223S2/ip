@@ -1,8 +1,9 @@
 package duke;
-import duke.commands.*;
+
+import duke.commands.ICommand;
 import duke.exceptions.DukeException;
-import duke.utilities.UserInterface;
 import duke.utilities.TaskManager;
+import duke.utilities.UserInterface;
 
 public class Duke {
     private TaskManager _taskManger;
