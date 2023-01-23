@@ -3,7 +3,7 @@ import models.Deadline;
 import models.Event;
 import models.Task;
 import models.ToDo;
-import utilities.Extensions;
+import utilities.UI;
 
 public enum Command {
     TODO("todo") {
@@ -67,9 +67,9 @@ public enum Command {
                     int i = Integer.valueOf(number);
                     try {
                         Saturday.markTaskList(i);
-                        Extensions.output("Nice! I've marked this task as done:\n\t  " + Saturday.getTask(i));
+                        UI.output("Nice! I've marked this task as done:\n\t  " + Saturday.getTask(i));
                     } catch (IndexOutOfBoundsException e) {
-                        Extensions.output("OOPS!!! There's no such task in your list");
+                        UI.output("OOPS!!! There's no such task in your list");
                     }
                 }
             } else {
@@ -87,9 +87,9 @@ public enum Command {
                     int i = Integer.valueOf(number);
                     try {
                         Saturday.unMarkTaskList(i);
-                        Extensions.output("OK, I've marked this task as not done yet:\n\t  " + Saturday.getTask(i));
+                        UI.output("OK, I've marked this task as not done yet:\n\t  " + Saturday.getTask(i));
                     } catch (IndexOutOfBoundsException e) {
-                        Extensions.output("OOPS!!! There's no such task in your list");
+                        UI.output("OOPS!!! There's no such task in your list");
                     }
                 }
             } else {
@@ -107,9 +107,9 @@ public enum Command {
                     int i = Integer.valueOf(number);
                     try {
                         Task removedTask = Saturday.removeTask(i);
-                        Extensions.output("Noted. I've removed this task:\n\t  " + removedTask + "\n\tNow you have " + Saturday.getTaskListSize() + " tasks in the list.");
+                        UI.output("Noted. I've removed this task:\n\t  " + removedTask + "\n\tNow you have " + Saturday.getTaskListSize() + " tasks in the list.");
                     } catch (IndexOutOfBoundsException e) {
-                        Extensions.output("OOPS!!! There's no such task in your list");
+                        UI.output("OOPS!!! There's no such task in your list");
                     }
                 }
             } else {
