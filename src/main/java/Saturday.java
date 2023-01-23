@@ -29,7 +29,7 @@ public class Saturday {
             UI.divider();
             try {
                 Command command = Command.getCommand(input);
-                command.execute(input);
+                command.execute(taskList, input);
                 storage.saveTaskList(taskList);
             } catch (SaturdayException e) {
                 UI.output(e.getMessage());
@@ -56,35 +56,6 @@ public class Saturday {
             }
         }
         new Saturday(filePath.toString()).run();
-    }
-
-    public static void addToTaskList(Task task) {
-        taskList.add(task);
-        UI.output("Got it. I've added this task:\n\t " + task + "\n\tNow you have " + taskList.size() + " tasks in the list.");
-    }
-
-    public static void markTaskList(int i) {
-        taskList.mark(i);
-    }
-
-    public static void unMarkTaskList(int i) {
-        taskList.unMark(i);
-    }
-
-    public static Task getTask(int i) {
-        return taskList.get(i);
-    }
-
-    public static int getTaskListSize() {
-        return taskList.size();
-    }
-
-    public static Task removeTask(int i) {
-        return taskList.remove(i);
-    }
-
-    public static void displayList() {
-        UI.output("Here are the tasks in your list:\n\t" + taskList.toString());
     }
 
     public static void exit() {
