@@ -1,3 +1,5 @@
 **/*.class
 **/save
 .gradle
+bin
+**/workspace
