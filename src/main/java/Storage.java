@@ -59,6 +59,7 @@ public class Storage {
             String isDone = args.get(1);
             String desc = args.get(2);
             return new ToDo(desc, isDone);
+
         } catch (IndexOutOfBoundsException e) {
             throw new InvalidStorageException();
         }

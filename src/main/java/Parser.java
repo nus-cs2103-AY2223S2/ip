@@ -29,4 +29,26 @@ public class Parser {
         }
         return map;
     }
+
+    public static Command parse(String input) throws CommandNotFoundException {
+        Map<String,String> argValues = Parser.splitArgs(input);
+        String command = argValues.get("Command");
+
+        switch (command) {
+            case "list":
+                return new ListCommand();
+            case "mark":
+                return new MarkAsDoneCommand(argValues.get(command));
+            case "unmark":
+                return new MarkAsUndoneCommand(argValues.get(command));
+            case "delete":
+                return new DeleteCommand(argValues.get(command));
+            case "add":
+                return new AddCommand(argValues.get(command));
+            case "bye":
+                return new ExitCommand();
+            default:
+                throw new CommandNotFoundException("I'm sorry, I don't recognise this command ://");
+        }
+    }
 }

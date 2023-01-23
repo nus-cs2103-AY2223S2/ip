@@ -1,36 +1,50 @@
+import java.io.IOException;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.Scanner;
 
 public class Duke {
     private static final Path STORAGE_LOCATION = Paths.get(".", "data", "storage.txt");
-    public static void main(String[] args) throws Exception {
-        String LOGO = "       _             _    _    _                _                \n" +
-                "  ___ | |__    __ _ | |_ | |_ (_) _ __    __ _ | |_  ___   _ __  \n" +
-                " / __|| '_ \\  / _` || __|| __|| || '_ \\  / _` || __|/ _ \\ | '_ \\ \n" +
-                "| (__ | | | || (_| || |_ | |_ | || | | || (_| || |_| (_) || | | |\n" +
-                " \\___||_| |_| \\__,_| \\__| \\__||_||_| |_| \\__, | \\__|\\___/ |_| |_|\n" +
-                "                                         |___/                   ";
-        System.out.println("Hello from\n" + LOGO);
-        ChatBot chatBot = new ChatBot(STORAGE_LOCATION);
 
-        chatBot.reply("This is Chattington the Chatter, I'll chat with you.\n" +
-                "What can I do for you?\n");
+    public enum Tasks { TODO, DEADLINE, EVENT }
 
-        Scanner sc = new Scanner(System.in);
+    private Storage storage;
+    private TaskList taskList;
+    private Ui ui;
 
-        while(sc.hasNext()) {
-            String input = sc.nextLine();
-            if (input.equals("bye")) {
-                chatBot.close();
-                break;
-            } else {
-                try {
-                    chatBot.processInput(input);
-                } catch (Exception e) {
-                    throw e;
-                }
+
+    Duke(Path path) {
+        this.taskList = new TaskList();
+        this.ui = new Ui();
+        try {
+            this.storage = new Storage(path);
+        } catch (IOException e){
+            e.printStackTrace();
+        }
+
+    }
+
+    public void run() {
+        ui.showWelcome();
+        boolean isExit = false;
+        while (!isExit) {
+            try {
+                String fullCommand = ui.readCommand();
+                ui.showLine(); // show divider
+                Command c = Parser.parse(fullCommand);
+                c.execute(taskList, ui, storage);
+                isExit = c.isExit();
+            } catch (Exception e) {
+                ui.showError(e.getMessage());
+            } finally {
+                ui.showLine();
             }
         }
+
+    }
+
+    public static void main(String[] args) {
+        Duke duke = new Duke(STORAGE_LOCATION);
+        duke.run();
     }
 }
