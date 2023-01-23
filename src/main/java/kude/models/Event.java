@@ -1,20 +1,27 @@
 package kude.models;
 
-public class Event extends Item {
-    private final String from;
-    private final String to;
+import kude.DukeException;
 
-    public Event(String content, String from, String to) {
+import java.time.LocalDateTime;
+
+public class Event extends Item {
+    private final LocalDateTime from;
+    private final LocalDateTime to;
+
+    public Event(String content, LocalDateTime from, LocalDateTime to) {
         super(content);
+        if (to.isBefore(from)) {
+            throw new DukeException("Event's `from` cannot be before `to`");
+        }
         this.from = from;
         this.to = to;
     }
 
-    public String getFrom() {
+    public LocalDateTime getFrom() {
         return from;
     }
 
-    public String getTo() {
+    public LocalDateTime getTo() {
         return to;
     }
 

@@ -10,6 +10,8 @@ import kude.models.Todo;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.PrintStream;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.HashMap;
 import java.util.Optional;
 import java.util.Scanner;
@@ -49,6 +51,7 @@ public class Processor {
     }
 
     void registerCommands() {
+
         register("list", ctx -> {
             var idx = new Integer[] {0};
 
@@ -87,7 +90,7 @@ public class Processor {
 
         register("deadline", ctx -> {
             var content = ctx.getArg("content");
-            var deadline = ctx.getNamedArg("by", "deadline");
+            var deadline = ctx.getNamedDateTimeArg("by", "deadline");
             var item = new Deadline(content, deadline);
             ctx.getItems().add(item);
             ctx.notifyAdded(item);
@@ -95,8 +98,8 @@ public class Processor {
 
         register("event", ctx -> {
             var content = ctx.getArg("content");
-            var from = ctx.getNamedArg("from", "from");
-            var to = ctx.getNamedArg("to", "to");
+            var from = ctx.getNamedDateTimeArg("from", "from");
+            var to = ctx.getNamedDateTimeArg("to", "to");
             var item = new Event(content, from, to);
             ctx.getItems().add(item);
             ctx.notifyAdded(item);

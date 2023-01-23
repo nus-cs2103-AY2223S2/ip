@@ -1,14 +1,16 @@
 package kude.models;
 
-public class Deadline extends Item {
-    private final String deadline;
+import java.time.LocalDateTime;
 
-    public Deadline(String content, String deadline) {
+public class Deadline extends Item {
+    private final LocalDateTime deadline;
+
+    public Deadline(String content, LocalDateTime deadline) {
         super(content);
         this.deadline = deadline;
     }
 
-    public String getDeadline() {
+    public LocalDateTime getDeadline() {
         return deadline;
     }
 
