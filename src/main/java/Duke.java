@@ -1,11 +1,14 @@
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
-import java.util.Locale;
 import java.util.Scanner;
 
 public class Duke {
     public enum Command { // Fixed number of commands
         TODO("todo"), DEADLINE("deadline"), EVENT("event"), MARK("mark"),
-        UNMARK("unmark"), DELETE("delete"), LIST("list"), BYE("bye");
+        UNMARK("unmark"), DELETE("delete"), LIST("list"), BYE("bye"), FILTERDATE("filterdate");
 
         private final String command;
 
@@ -52,9 +55,58 @@ public class Duke {
                             System.out.println("\t" + index + "." + t);
                         }
                         continue;
+                    case FILTERDATE:
+                        if (parts.length != 2 || parts[1].trim().isEmpty()) { // 2nd arg not entered
+                            throw new DukeException.InvalidCommandException("Command has to be followed by date.");
+
+                        }
+                        LocalDate date = null;
+
+                        DateTimeFormatter[] formatters = {
+                                DateTimeFormatter.ofPattern("ddMMyyyy"),
+                                DateTimeFormatter.ofPattern("dd/MM/yyyy"),
+                                DateTimeFormatter.ofPattern("dd-MM-yyyy"),
+                                DateTimeFormatter.ofPattern("yyyy/MM/dd"),
+                                DateTimeFormatter.ofPattern("yyyy-MM-dd")
+                        };
+
+                        for (DateTimeFormatter formatter : formatters) {
+                            try {
+                                date = LocalDate.parse(parts[1].trim(), formatter);
+                                break;
+                            } catch (DateTimeParseException e) {
+                                // Invalid format, try the next one
+                            }
+                        }
+
+                        if (date == null) {
+                            throw new DukeException.InvalidDateException("Reenter date in this format: (ddMMyyyy)");
+                        }
+
+                        int count = 0;
+                        for (Task task : taskList) {
+                            if (task instanceof Deadline) {
+                                Deadline deadline = (Deadline) task;
+                                if (deadline.getDeadline().toLocalDate().isEqual(date)) {
+                                    System.out.println("\t  " + deadline);
+                                    count++;
+                                }
+                            } else if (task instanceof Event) {
+                                Event event = (Event) task;
+                                if (event.getStartDateTime().toLocalDate().isEqual(date) ||
+                                        event.getEndDateTime().toLocalDate().isEqual(date) ||
+                                        (event.getStartDateTime().toLocalDate().isBefore(date) &&
+                                                event.getEndDateTime().toLocalDate().isAfter(date))) {
+                                    System.out.println("\t  " + event);
+                                    count++;
+                                }
+                            }
+                        }
+                        System.out.println("\tNumber of tasks on " + date.format(DateTimeFormatter.ofPattern("MMM dd yyyy")) + ": " + count);
+                        continue;
                     case MARK: // Mark
                         if (parts.length != 2 || parts[1].trim().isEmpty()) { // 2nd arg not entered
-                            throw new DukeException("Command has to be followed by an integer.");
+                            throw new DukeException.InvalidCommandException("Command has to be followed by an integer.");
                         }
                         index = Integer.parseInt(parts[1].trim());
                         t = taskList.get(index - 1);
@@ -64,7 +116,7 @@ public class Duke {
                         continue;
                     case UNMARK: // Unmark
                         if (parts.length != 2 || parts[1].trim().isEmpty()) { // 2nd arg not entered
-                            throw new DukeException("Command has to be followed by an integer.");
+                            throw new DukeException.InvalidCommandException("Command has to be followed by an integer.");
                         }
                         index = Integer.parseInt(parts[1].trim());
                         t = taskList.get(index - 1);
@@ -74,7 +126,7 @@ public class Duke {
                         continue;
                     case DELETE: // Delete
                         if (parts.length != 2 || parts[1].trim().isEmpty()) { // 2nd arg not entered
-                            throw new DukeException("Command has to be followed by an integer.");
+                            throw new DukeException.InvalidCommandException("Command has to be followed by an integer.");
                         }
                         index = Integer.parseInt(parts[1].trim());
                         t = taskList.get(index - 1);
@@ -89,35 +141,37 @@ public class Duke {
                         continue;
                     case TODO: // Add todo to list
                         if (parts.length != 2 || parts[1].trim().isEmpty()) {
-                            throw new DukeException("The description of a todo cannot be empty.");
+                            throw new DukeException.InvalidCommandException("The description of a todo cannot be empty.");
                         }
                         t = new ToDo(parts[1]);
                         taskList.add(t);
                         break;
                     case DEADLINE: // Add deadline to list
+                        String deadlineError = "A deadline has to have 2 non-blank strings separated with a /by keyword.";
                         if (parts.length != 2 || parts[1].trim().isEmpty()) {
-                            throw new DukeException("The description of a deadline cannot be empty.");
+                            throw new DukeException.InvalidCommandException(deadlineError);
                         }
                         String[] d_parts = parts[1].split(" /by ", 2);
                         if (d_parts.length < 2 || d_parts[0].trim().isEmpty() || d_parts[1].trim().isEmpty()) {
-                            throw new DukeException("The description of a deadline has to have 2 non-blank strings separated with a /by keyword.");
+                            throw new DukeException.InvalidCommandException(deadlineError);
                         }
                         t = new Deadline(d_parts[0], d_parts[1]);
                         taskList.add(t);
                         break;
                     case EVENT: // Add event to list
+                        String eventError = "An event has to have 3 non-blank strings separated with /from and /to keywords.";
                         if (parts.length != 2 || parts[1].trim().isEmpty()) {
-                            throw new DukeException("The description of a event cannot be empty.");
+                            throw new DukeException.InvalidCommandException(eventError);
                         }
                         String[] e_parts = parts[1].split(" /from | /to ", 3);
                         if (e_parts.length < 3 || e_parts[0].trim().isEmpty() || e_parts[1].trim().isEmpty() || e_parts[2].trim().isEmpty()) {
-                            throw new DukeException("The description of an event has to have 3 non-blank strings separated with /from and /to keywords.");
+                            throw new DukeException.InvalidCommandException(eventError);
                         }
                         t = new Event(e_parts[0], e_parts[1], e_parts[2]);
                         taskList.add(t);
                         break;
-                    default: // Invalid command but should not reach here because valueOf should throw an exception
-                        throw new DukeException("I'm sorry, but I don't know what that means :-(");
+                    default: // Invalid command but should not reach here because valueOf should throw an IllegalArgumentException
+                        throw new DukeException.InvalidCommandException("I'm sorry, but I don't know what that means :-(");
                 }
                 if (command == Command.BYE) {
                     break;
@@ -129,14 +183,26 @@ public class Duke {
                     continue;
                 }
                 System.out.println("\tNow you have " + taskList.size() + " tasks in the list.");
-            } catch (DukeException e) { // Invalid arguments
-                System.out.println("\t" + e);
-            } catch (NumberFormatException e) { // 2nd arg not int
-                System.out.println("\t\u2639 OOPS!!! Command has to be followed by an integer.");
             } catch (IndexOutOfBoundsException e) { // Index not in array
-                System.out.println("\t\u2639 OOPS!!! Index entered does not exists in list.");
+                try {
+                    throw new DukeException.IndexOutOfBoundsException("Please enter a valid index.");
+                } catch (DukeException.IndexOutOfBoundsException e2) {
+                    System.out.println(e2.getMessage());
+                }
+            } catch (NumberFormatException e) { // 2nd arg not int
+                try {
+                    throw new DukeException.InvalidCommandException("Command has to be followed by an integer.");
+                } catch (DukeException.InvalidCommandException e2) {
+                    System.out.println(e2.getMessage());
+                }
             } catch (IllegalArgumentException e) { // Invalid command
-                System.out.println("\t\u2639 OOPS!!! I'm sorry, but I don't know what that means :-(");
+                try {
+                    throw new DukeException.InvalidCommandException("I'm sorry, but I don't know what that means :-(");
+                } catch (DukeException.InvalidCommandException e2) {
+                    System.out.println(e2.getMessage());
+                }
+            } catch (DukeException e) {
+                System.out.println(e.getMessage());
             }
         }
         scanner.close();
