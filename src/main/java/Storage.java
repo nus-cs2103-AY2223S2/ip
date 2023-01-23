@@ -59,7 +59,7 @@ public class Storage {
     /**
      * loads all the items from the duke file
      */
-    public ArrayList<Task> loadFromFile() {
+    public ArrayList<Task> loadFromFile() throws DukeException {
         ArrayList<Task> loadedTasks = new ArrayList<>();
         try {
             Files.createDirectories(Paths.get(this.dirPath));
@@ -73,7 +73,7 @@ public class Storage {
                 // throw exceptions here later if you want
 
                 String type = valueArr[0].toUpperCase().trim();
-                Command commandType = Command.valueOf(type);
+                Command commandType = Parser.parseCommand(type);
                 Task thisTask = null;
                 boolean doneOrNot = valueArr[1].equals("1");
                 if (commandType.equals(Command.TODO)) {

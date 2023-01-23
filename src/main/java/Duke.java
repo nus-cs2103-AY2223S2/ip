@@ -13,9 +13,15 @@ public class Duke {
     private final Ui ui;
 
     public Duke(String filePathName) {
+        TaskList tasks1;
         this.ui = new Ui();
         this.storage = new Storage(filePathName);
-        this.tasks = new TaskList(storage.loadFromFile());
+        try {
+            tasks1 = new TaskList(storage.loadFromFile());
+        } catch (DukeException e) {
+            tasks1 = new TaskList();
+        }
+        this.tasks = tasks1;
     }
 
      /**
@@ -46,28 +52,31 @@ public class Duke {
                 String line = input.nextLine();
                 String upperLine = line.toUpperCase();
                 String command = upperLine.split(" ")[0];
-                Command cm = Parser.parse(command);
+                Command cm = Parser.parseCommand(command);
+                String[] elemArr = Parser.parseStartingElements(upperLine);
+
+
+
                 if (cm.equals(Command.BYE)) {
-                    if (upperLine.trim().equals("BYE")) {
+                    if (elemArr.length == 1) {
                         break;
                     } else {
                         throw new DukeException("Did you mean to say bye? Type 'bye' to quit the program.");
                     }
                 } else if (cm.equals(Command.LIST)) {
-                    if (upperLine.trim().equals("LIST")) {
+                    if (elemArr.length == 1) {
                         this.ui.printList(this.tasks.getList());
                     } else {
                         throw new DukeException("No argument in list allowed.");
                     }
                 } else if (cm.equals(Command.MARK)) {
-                    String[] arr = upperLine.split(" ");
-                    if (arr.length != 2) {
+                    if (elemArr.length != 2) {
                         throw new DukeException("Wrong format. Format it as 'mark [index]'");
                     }
-                    if (!arr[1].chars().allMatch(Character::isDigit)) {
+                    if (!elemArr[1].chars().allMatch(Character::isDigit)) {
                         throw new DukeException("Index should be a number");
                     }
-                    int idx = Integer.parseInt(arr[1]) - 1;
+                    int idx = Integer.parseInt(elemArr[1]) - 1;
                     if (idx >= this.tasks.getList().size() || idx < 0) {
                         throw new DukeException("This index doesn't exist.");
                     }
@@ -75,14 +84,13 @@ public class Duke {
                     this.ui.markResponse(markedTask);
                     this.storage.deleteFileAndRedo(this.tasks.getList());
                 } else if (cm.equals(Command.UNMARK)) {
-                    String[] arr = upperLine.split(" ");
-                    if (arr.length != 2) {
+                    if (elemArr.length != 2) {
                         throw new DukeException("Wrong format. Format it as 'mark [index]'");
                     }
-                    if (!arr[1].chars().allMatch(Character::isDigit)) {
+                    if (!elemArr[1].chars().allMatch(Character::isDigit)) {
                         throw new DukeException("Index should be a number");
                     }
-                    int idx = Integer.parseInt(arr[1]) - 1;
+                    int idx = Integer.parseInt(elemArr[1]) - 1;
                     if (idx >= this.tasks.getList().size() || idx < 0) {
                         throw new DukeException("This index doesn't exist.");
                     }
@@ -90,11 +98,10 @@ public class Duke {
                     this.ui.unmarkResponse(unmarkedTask);
                     this.storage.deleteFileAndRedo(this.tasks.getList());
                 } else if (cm.equals(Command.DELETE)) {
-                    String[] arr = upperLine.split(" ");
-                    if (arr.length != 2) {
+                    if (elemArr.length != 2) {
                         throw new DukeException("Only one argument for delete allowed");
                     }
-                    String idxStr = arr[1];
+                    String idxStr = elemArr[1];
                     if (!idxStr.chars().allMatch(Character::isDigit)) {
                         throw new DukeException("Argument must be a digit");
                     }

@@ -9,6 +9,10 @@ public class TaskList {
         this.listOfThings = loadedTasks;
     }
 
+    public TaskList() {
+        this.listOfThings = new ArrayList<Task>();
+    }
+
     public ArrayList<Task> getList() {
         return this.listOfThings;
     }
@@ -46,15 +50,14 @@ public class TaskList {
     public Task addItem(String text, Command add) throws DukeException {
         Task addedItem = null;
         if (add.equals(Command.TODO)) {
-            String contents = text.substring(4);
+            String contents = Parser.parseTodo(text);
             if (contents.length() == 0) {
                 throw new DukeException("The description of a todo cannot be empty");
             }
             addedItem = new Todo(contents, false);
 
         } else if (add.equals(Command.DEADLINE)) {
-            String contents = text.substring(8);
-            String[] arr = contents.split("/by");
+            String[] arr = Parser.parseDeadline(text);
             if (arr.length != 2) {
                 throw new DukeException("I don't know what that means. Format it as 'deadline [do something] /by [date]");
             }
@@ -65,20 +68,14 @@ public class TaskList {
                 throw new DukeException("Format date as YYYY-MM-DD HH:mm");
             }
         } else {
-            String contents = text.substring(5);
-            String[] arr1 = contents.split("/from");
-            if (arr1.length != 2) {
+            String[] arr = Parser.parseEvent(text);
+            if (arr.length != 3) {
                 throw new DukeException("I don't know what that means. Format it as 'event [do something] /from [start date] /to [end date]'");
             }
-            String[] arr2 = arr1[1].split("/to");
-            if (arr2.length != 2) {
-                throw new DukeException("I don't know what that means. Format it as 'event [do something] /from [start date] /to [end date]'");
-
-            }
-            LocalDateTime start = Duke.createLocalDateTime(arr2[0]);
-            LocalDateTime end = Duke.createLocalDateTime(arr2[1]);
+            LocalDateTime start = Duke.createLocalDateTime(arr[1]);
+            LocalDateTime end = Duke.createLocalDateTime(arr[2]);
             if (start != null && end != null) {
-                addedItem = new Event(arr1[0], false, start, end);
+                addedItem = new Event(arr[0], false, start, end);
             } else {
                 throw new DukeException("Format date as YYYY-MM-DD HH:mm");
             }
