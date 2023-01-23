@@ -1,3 +1,5 @@
+import javax.swing.text.DateFormatter;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
@@ -6,6 +8,7 @@ import java.util.Scanner;
 
 public class TwoFive {
     private static DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
+    private static DateTimeFormatter dueDateFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
 
     //Returns string to be printed when new task is added
     public static String taskAdded(Task task) {
@@ -181,6 +184,30 @@ public class TwoFive {
                                 }
 
                             }
+                        }
+                    }
+                } else if (input.contains("due")){
+                    //List all tasks added by the user due on the date provided
+                    String[] dueSplit = input.split("due");
+                    if (dueSplit.length <= 1 || dueSplit[1].trim().equals("")) {
+                        //If task description is empty
+                        throw new EmptyDateException();
+                    } else {
+                        String dueDateString = dueSplit[1].trim();
+                        try {
+                            LocalDate dueDate = LocalDate.parse(dueDateString, dueDateFormatter);
+                            int taskIndex = 1;
+                            System.out.println("Here are the tasks in your list due on "
+                                    + dueDate.format(DateTimeFormatter.ofPattern("EEE MMM d yyyy")) + ":");
+                            for (Task task : tasks) {
+                                if (task.isToday(dueDate)) {
+                                    System.out.println(taskIndex + ". " + task);
+                                    taskIndex++;
+                                }
+                            }
+                        } catch (DateTimeParseException e) {
+                            System.out.println(e.getMessage());
+                            System.out.println("Due date must be in the format yyyy-MM-dd, e.g. 2023-01-23");
                         }
                     }
                 } else {

@@ -1,3 +1,4 @@
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
@@ -14,5 +15,10 @@ public class Deadline extends Task {
     public String toString() {
         String deadlineString = " (by: " + this.deadline.format(DateTimeFormatter.ofPattern("EEE MMM d yyyy hh:mma")) + ")";
         return "[D]" + super.toString() + deadlineString;
+    }
+
+    @Override
+    public boolean isToday(LocalDate date) {
+        return this.deadline.toLocalDate().isEqual(date);
     }
 }

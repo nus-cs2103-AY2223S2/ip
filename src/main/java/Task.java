@@ -1,3 +1,5 @@
+import java.time.LocalDate;
+
 public abstract class Task {
     private String taskDescription;
     private boolean isDone;
@@ -36,4 +38,6 @@ public abstract class Task {
     public String toString() {
         return this.getTaskStatus() + " " + this.taskDescription;
     }
+
+    public abstract boolean isToday(LocalDate date);
 }

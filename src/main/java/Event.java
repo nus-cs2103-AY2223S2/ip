@@ -1,3 +1,4 @@
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
@@ -16,5 +17,10 @@ public class Event extends Task {
         String eventString = " (from: " + this.startTime.format(DateTimeFormatter.ofPattern("EEE MMM d yyyy hh:mma"))
                 + " to: " + this.endTime.format(DateTimeFormatter.ofPattern("EEE MMM d yyyy hh:mma")) + ")";
         return "[E]" + super.toString() + eventString;
+    }
+
+    @Override
+    public boolean isToday(LocalDate date) {
+        return this.startTime.toLocalDate().isEqual(date) || this.endTime.toLocalDate().isEqual(date);
     }
 }
