@@ -43,4 +43,12 @@ public class TaskList {
         }
         return res;
     }
+
+    public String toSaveString() {
+        String res = "";
+        for (Task task : list) {
+            res += task.toSaveString() + '\n';
+        }
+        return res;
+    }
 }
