@@ -23,4 +23,15 @@ public class DeadlineCommand extends Command {
         taskList.addTask(task);
     }
 
+    @Override
+    public boolean equals(Object obj) {
+        if (obj == null) {
+            return false;
+        } else if (obj.getClass() != this.getClass()) {
+            return false;
+        }
+        DeadlineCommand cmd = (DeadlineCommand) obj;
+        return this.title.equals(cmd.title) && this.deadline.equals(cmd.deadline);
+    }
+
 }

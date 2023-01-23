@@ -17,4 +17,16 @@ public class UnmarkCommand extends Command {
     public void execute(TaskList taskList, Ui ui) throws DukeException {
         taskList.markTaskAsUndone(this.index);
     }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (obj == null) {
+            return false;
+        } else if (obj.getClass() != this.getClass()) {
+            return false;
+        }
+        UnmarkCommand cmd = (UnmarkCommand) obj;
+        return this.index == cmd.index;
+    }
+
 }

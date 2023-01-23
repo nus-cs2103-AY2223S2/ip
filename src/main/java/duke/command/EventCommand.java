@@ -24,4 +24,15 @@ public class EventCommand extends Command {
         Task task = new Event(this.title, this.from, this.to);
         taskList.addTask(task);
     }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (obj == null) {
+            return false;
+        } else if (obj.getClass() != this.getClass()) {
+            return false;
+        }
+        EventCommand cmd = (EventCommand) obj;
+        return this.title.equals(cmd.title) && this.from.equals(cmd.from) && this.to.equals(cmd.to);
+    }
 }
