@@ -21,4 +21,14 @@ public class Todo extends Task {
     public String toString() {
         return "[T]" + super.toString();
     }
+
+    /**
+     * Overrides the printData method of the Task class.
+     *
+     * @return String representation of the todo task in data form.
+     */
+    @Override
+    public String printData() {
+        return "T" + "/" + (isDone ? "1" : "0") + "/" + description;
+    }
 }

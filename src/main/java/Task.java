@@ -19,7 +19,7 @@ public class Task {
     }
 
     /**
-     * Return the status of task represented with a String.
+     * Returns the status of task represented with a String.
      * "X" if the task is done, "" if it is not done.
      *
      * @return String representation of task status.
@@ -52,5 +52,15 @@ public class Task {
      */
     public void markAsUndone() {
         isDone = false;
+    }
+
+    /**
+     * Returns the data representation for the task
+     * to be written to the hard disk.
+     *
+     * @return String representation of the task in data form.
+     */
+    public String printData() {
+        return "Task" + "/" + (isDone ? "1" : "0") + "/" + description;
     }
 }
