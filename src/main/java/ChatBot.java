@@ -1,21 +1,36 @@
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.io.PrintWriter;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.*;
 
 public class ChatBot {
     private enum Tasks { TODO, DEADLINE, EVENT }
     private static final Map<String, Tasks> inputToTask = new HashMap<String,Tasks>();
     private List<Task> list;
+    private Storage storage;
+
     static{
         inputToTask.put("todo", Tasks.TODO);
         inputToTask.put("deadline", Tasks.DEADLINE);
         inputToTask.put("event", Tasks.EVENT);
     }
 
-    ChatBot() {
+    ChatBot(Path path) {
         this.list = new ArrayList<Task>();
+        try {
+            this.storage = new Storage(path);
+        } catch (IOException e){
+            e.printStackTrace();
+        }
+        this.list.addAll(storage.load());
     }
 
     public void processInput(String input) throws Exception {
-        Map<String,String> argValues = InputProcessor.splitArgs(input);
+        Map<String,String> argValues = Parser.splitArgs(input);
         String command = argValues.get("Command");
         String output = "";
         switch (command) {
@@ -182,4 +197,6 @@ public class ChatBot {
     public void close() {
         this.reply("Alright, goodbye to you too!");
     }
+
+
 }

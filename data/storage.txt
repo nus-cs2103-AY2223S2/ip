@@ -1,0 +1,3 @@
+T | 0 | walk the dog
+T | 1 | buy groceries
+T | 0 | check the mail
