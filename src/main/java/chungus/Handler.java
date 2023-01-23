@@ -8,7 +8,15 @@ import java.time.LocalDateTime;
  */
 @FunctionalInterface
 interface Handler {
-    boolean handle(TaskList tasks, Ui ui, Storage storage);
+    /**
+     * Executes logic to handle some command.
+     * 
+     * @param tasks   The list of tasks to work with.
+     * @param ui      The Ui instance to use.
+     * @param storage The storage instance to use.
+     * @return Whether the program should exit.
+     */
+    public boolean handle(TaskList tasks, Ui ui, Storage storage);
 
     /**
      * Reports a new task. Just a convenience method.
@@ -17,7 +25,7 @@ interface Handler {
      * @param ui    A Ui instance to use.
      * @param tasks The current full list of tasks.
      */
-    static void reportNewTask(Task task, Ui ui, TaskList tasks) {
+    public static void reportNewTask(Task task, Ui ui, TaskList tasks) {
         ui.info("Okay, I've added this task:");
         ui.info("  %s", task);
         ui.info("Now you have %d %s.", tasks.count(), tasks.count() == 1 ? "task" : "tasks");
@@ -30,7 +38,7 @@ interface Handler {
      * @param ui    A Ui instance to use.
      * @param tasks The current full list of tasks.
      */
-    static void reportDeletedTask(Task task, Ui ui, TaskList tasks) {
+    public static void reportDeletedTask(Task task, Ui ui, TaskList tasks) {
         ui.info("Okay, I've deleted this task:");
         ui.info("  %s", task);
         ui.info("Now you have %d %s.", tasks.count(), tasks.count() == 1 ? "task" : "tasks");
@@ -43,7 +51,7 @@ interface Handler {
      * @param tasks The list of tasks.
      * @param ui    The Ui instance to use.
      */
-    static void printTasksIndented(TaskList tasks, Ui ui) {
+    public static void printTasksIndented(TaskList tasks, Ui ui) {
         tasks.forEach((task, idx) -> {
             ui.info("  %d.%s", idx + 1, task);
         });

@@ -74,6 +74,10 @@ class Parser {
             int idx = getTaskNumberArg(args[1]) - 1;
             return Handlers.unmark(idx);
         }
+        case "delete": {
+            int idx = getTaskNumberArg(args[1]) - 1;
+            return Handlers.delete(idx);
+        }
         case "find": {
             String[] pair = cmd.split("\\s+", 2);
             String searchTerm = "";

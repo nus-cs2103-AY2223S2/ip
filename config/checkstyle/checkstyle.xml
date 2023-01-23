@@ -4,8 +4,8 @@
     "https://checkstyle.org/dtds/configuration_1_3.dtd">
 
 <!--
-	Adapted from the Google Java Style Guide for CS2103T. The original
-	description is below:
+    Adapted from the Google Java Style Guide for CS2103T. The original
+    description is below:
 
     Checkstyle configuration that checks the Google coding conventions from
     Google Java Style that can be found at
@@ -237,7 +237,7 @@
           value="^$|^@return the *|^This method returns |^A [{]@code [a-zA-Z0-9]+[}]( is a )"/>
     </module>
     <module name="JavadocParagraph"/>
-	<module name="JavadocContentLocationCheck"/>
+    <module name="JavadocContentLocationCheck"/>
     <module name="AtclauseOrder">
       <property name="tagOrder" value="@param, @return, @throws, @deprecated"/>
       <property name="target"
@@ -255,12 +255,12 @@
       <property name="minLineCount" value="2"/>
       <property name="allowedAnnotations" value="Override, Test"/>
     </module>
-	<module name="JavadocMissingLeadingAsterisk"/>
-	<module name="JavadocMissingWhitespaceAfterAsterisk"/>
-	<module name="JavadocStyle">
-		<property name="checkEmptyJavadoc" value="true" />
-	</module>
-	<!-- <module name="RequireEmptyLineBeforeBlockTagGroup"/> -->
+    <module name="JavadocMissingLeadingAsterisk"/>
+    <module name="JavadocMissingWhitespaceAfterAsterisk"/>
+    <module name="JavadocStyle">
+        <property name="checkEmptyJavadoc" value="true" />
+    </module>
+    <!-- <module name="RequireEmptyLineBeforeBlockTagGroup"/> -->
     <module name="MethodName">
       <property name="format" value="^[a-z][a-z0-9][a-zA-Z0-9_]*$"/>
       <message key="name.invalidPattern"

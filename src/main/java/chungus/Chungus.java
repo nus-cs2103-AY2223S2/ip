@@ -71,6 +71,8 @@ class Chungus {
 
     /**
      * Wraps command parsing and handler execution with better error handling.
+     * 
+     * @param cmd The raw command to parse.
      */
     private void parseAndExec(String cmd) {
         try {
