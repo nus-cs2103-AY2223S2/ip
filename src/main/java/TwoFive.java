@@ -1,19 +1,23 @@
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Scanner;
 
 public class TwoFive {
     //Returns string to be printed when new task is added
-    public static String taskAdded(Task task) {
+    private static String taskAdded(Task task) {
         return "Got it. I've added this task:\n " + task + "\n";
     }
 
     //Returns string containing number of tasks added
-    public static String numTasksString(int numTasks) {
+    private static String numTasksString(int numTasks) {
         return "Now you have " + numTasks + " tasks in the list";
     }
 
     //Ensure valid task number is provided
-    public static int validateTaskNum(String input, int numTasks) throws EmptyTasknumException, InvalidTaskException, NumberFormatException {
+    private static int validateTaskNum(String input, int numTasks) throws EmptyTasknumException, InvalidTaskException, NumberFormatException {
         String[] taskNumSplit = input.split(" ");
         if (taskNumSplit.length <= 1 || taskNumSplit[1].trim().equals("")) {
             throw new EmptyTasknumException();
@@ -28,7 +32,7 @@ public class TwoFive {
     }
 
     //Ensure a valid description is provided when adding a new task
-    public static String validateDescription(String input, String command) throws EmptyDescriptionException {
+    private static String validateDescription(String input, String command) throws EmptyDescriptionException {
         String[] descriptionSplit = input.split(command);
         if (descriptionSplit.length <= 1 || descriptionSplit[1].trim().equals("")) {
             //If task description is empty
@@ -37,8 +41,96 @@ public class TwoFive {
         return descriptionSplit[1].trim();
     }
 
+    // reads saved task file
+    private static ArrayList<Task> readTaskFile(ArrayList<Task> tasks) throws IOException, TwoFiveException {
+        File taskFile = new File("data/twofive.txt");
+        taskFile.getParentFile().mkdirs(); // Create parent directories if absent
+        taskFile.createNewFile(); // Create task file if absent
+        Scanner s = new Scanner(taskFile);
+
+        // Read tasks from file
+        while (s.hasNext()) {
+            String nextLine = s.nextLine();
+            String[] taskSplit = nextLine.split("\\|");
+            String taskType = taskSplit[0].trim();
+            String taskTypeFull = "";
+            switch (taskType) {
+            case "T":
+                taskTypeFull = "todo";
+                break;
+            case "D":
+                taskTypeFull = "deadline";
+                break;
+            case "E":
+                taskTypeFull = "event";
+                break;
+            default:
+                throw new InvalidTaskTypeException();
+            }
+            if (taskSplit.length >= 3) {
+                boolean isTaskDone = taskSplit[1].trim().equals("1");
+                String taskDescription = taskSplit[2].trim();
+                Task currentTask = null;
+                switch (taskType) {
+                case "T":
+                    currentTask = new ToDo(taskDescription);
+                    break;
+                case "D":
+                    if (taskSplit.length == 4) {
+                        String deadline = taskSplit[3].trim();
+                        currentTask = new Deadline(taskDescription, deadline);
+                    } else {
+                        // Missing deadline for Deadline task
+                        throw new EmptyDeadlineException();
+                    }
+                    break;
+                case "E":
+                    if (taskSplit.length == 5) {
+                        String startTime = taskSplit[3].trim();
+                        String endTime = taskSplit[4].trim();
+                        currentTask = new Event(taskDescription, startTime, endTime);
+                    } else {
+                        if (taskSplit.length == 4) {
+                            // Missing end time for Event task
+                            throw new EmptyEndTimeException();
+                        } else if (taskSplit.length == 3) {
+                            // Missing start time for Event task
+                            throw new EmptyStartTimeException();
+                        }
+                    }
+                    break;
+                }
+                if (isTaskDone) {
+                    currentTask.markAsDone();
+                }
+                tasks.add(currentTask);
+            } else {
+                // Missing description for task
+                throw new EmptyDescriptionException(taskTypeFull);
+            }
+        }
+
+        return tasks;
+    }
+
+    private static void writeTaskFile(ArrayList<Task> tasks) throws IOException {
+        FileWriter fw = new FileWriter("data/twofive.txt");
+        for (Task task: tasks) {
+            fw.write(task.getFileWriteString() + "\n");
+        }
+        fw.close();
+    }
+
     public static void main(String[] args) {
         ArrayList<Task> tasks = new ArrayList<>();
+
+        try {
+            tasks = readTaskFile(tasks);
+        } catch (IOException e) {
+            System.out.println(e.getMessage());
+        } catch (TwoFiveException e) {
+            System.out.println("An error has occured in your task file: " + e.getMessage());
+        }
 
         String logo = "  _______            ______ _\n"
                 + " |__   __|          |  ____(_)\n"
@@ -178,6 +270,12 @@ public class TwoFive {
         }
 
         System.out.println(divider);
+        try {
+            writeTaskFile(tasks);
+            System.out.println(" Tasks saved successfully.");
+        } catch (IOException e) {
+            System.out.println(e.getMessage());
+        }
         System.out.println(" Bye. Hope to see you again soon!");
         System.out.println(divider);
     }

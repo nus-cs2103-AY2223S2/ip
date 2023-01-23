@@ -1,3 +1,4 @@
+list
 blah
 blah blah
 todo
@@ -23,6 +24,12 @@ event project meeting /to
 event project meeting /from /to
 event project meeting /from Aug 6th 2pm /to
 event project meeting /from /to 4pm
+delete 1
+delete 1
+delete 1
+delete 1
+delete 1
+delete 1
 todo read book
 deadline return book /by June 6th
 event project meeting /from Aug 6th 2pm /to 4pm
