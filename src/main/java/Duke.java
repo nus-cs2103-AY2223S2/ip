@@ -1,106 +1,74 @@
-import java.util.ArrayList;
-import java.util.List;
+import java.io.IOException;
 import java.util.Scanner;
 
 public class Duke {
+    private Storage storage;
+    private TaskList tasks;
+    private final Ui ui;
 
-    private enum Commands {
-        bye,
-        mark,
-        todo,
-        deadline,
-        event,
-        delete,
+    public Duke(String filePath) {
+        ui = new Ui();
+        try {
+            this.storage = new Storage(filePath);
+            tasks = new TaskList(storage.load());
+        } catch (Exception e) {
+            ui.showLoadingError();
+            tasks = new TaskList();
+        }
     }
+
     public static void main(String[] args) {
-        introDuke();
+        new Duke(".\\tasks.txt").run();
+    }
+
+    public void run() {
         Scanner scanner = new Scanner(System.in);
         String word = scanner.nextLine();
-        List<Task> listOfWords = new ArrayList<>();
         while (!word.equals(Commands.bye.name())) {
             System.out.println("-".repeat(20));
-            if (word.equals("list")) {
+            if (word.equals(Commands.list.name())) {
                 int count = 1;
-                for (Task words: listOfWords) {
-                    System.out.println(count++ + words.toString());
+                for (Task words: this.tasks) {
+                    System.out.println(count++ + ": "+ words.toString());
                 }
             } else if (word.startsWith(Commands.mark.name())) {
                 try {
                     int index = Integer.parseInt(word.substring(5));
-                    Task task = listOfWords.get(--index);
+                    Task task = this.tasks.get(--index);
                     task.markDone();
-                    System.out.println("Nice! I've marked this task as done:");
-                    System.out.println(task);
+                    this.ui.showMarked(task);
                 } catch (NumberFormatException | IndexOutOfBoundsException e) {
                     // incorrect syntax
-                    System.out.println("☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
-                    System.out.println(word);
+                    this.ui.showCommandError(word);
                 }
-            } else if (word.startsWith(Commands.deadline.name())) {
-                String[] words = word.split("/", 2);
-                if (words.length == 2 && words[1].startsWith("by ")){
-                    Task task = new Deadline(words[0].substring(9), words[1].substring(3));
-                    addingTask(task, listOfWords);
-                } else {
-                    System.out.println("☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
-                    System.out.println("Command: " + word);
-                }
-
-            } else if (word.startsWith(Commands.todo.name())) {
-                Task task = new ToDo(word.substring(5));
-                addingTask(task, listOfWords);
-
-            } else if (word.startsWith(Commands.event.name())) {
-                String[] words = word.split("/", 3);
-                if (words.length == 3 && words[1].startsWith("from ") && words[2].startsWith("to ")) {
-                    Task task = new Event(words[0].substring(6), words[1].substring(5), words[2].substring(3));
-                    addingTask(task, listOfWords);
-                } else {
-                    System.out.println("☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
-                    System.out.println("Command: " + word);
-                }
-
             } else if (word.startsWith(Commands.delete.name())) {
                 try {
                     int index = Integer.parseInt(word.substring(7));
-                    Task task = listOfWords.remove(--index);
-                    System.out.println("Noted. I've removed this task:");
-                    System.out.println(task);
-                    System.out.println("Now you have " + listOfWords.size() + " tasks in the list.");
+                    this.ui.showDeleted(this.tasks.remove(--index));
                 } catch (NumberFormatException | IndexOutOfBoundsException e) {
                     // incorrect syntax
-                    System.out.println("☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
-                    System.out.println(word);
+                    this.ui.showCommandError(word);
                 }
-
             } else {
-                System.out.println("☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
-                System.out.println("Command: " + word);
+                try {
+                    Task task = Task.commandToTask(word);
+                    this.tasks.addingTask(task);
+                    ui.showTaskAdded(task, this.tasks);
+                } catch (CommandException commandException) {
+                    ui.showCommandError(word);
+                } catch (DescriptionException | StringIndexOutOfBoundsException descriptionException) {
+                    ui.showDescriptionError(word);
+                }
             }
             System.out.println("-".repeat(20));
             word = scanner.nextLine();
         }
-        System.out.println("Bye. Hope to see you again soon!");
-    }
-
-    public static void addingTask(Task task, List<Task> list) {
-        if (task.isEmpty()) {
-            System.out.println("☹ OOPS!!! The description of a task cannot be empty.");
-        } else {
-            System.out.println("Got it. I've added this task:");
-            System.out.println(task);
-            list.add(task);
-            System.out.println("Now you have " + list.size() + " tasks in the list.");
+        try {
+            this.storage.store(this.tasks);
+            this.ui.showStored(this.tasks);
+        } catch (IOException ioException) {
+            System.out.println(ioException);
         }
-    }
-    public static void introDuke() {
-        String logo = " ____        _        \n"
-                + "|  _ \\ _   _| | _____ \n"
-                + "| | | | | | | |/ / _ \\\n"
-                + "| |_| | |_| |   <  __/\n"
-                + "|____/ \\__,_|_|\\_\\___|\n";
-        System.out.println("Hello from\n" + logo);
-        System.out.println("What can I do for you?");
-
+        System.out.println("Bye. Hope to see you again soon!");
     }
 }
