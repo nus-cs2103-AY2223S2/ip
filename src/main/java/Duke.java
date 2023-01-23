@@ -32,8 +32,17 @@ public class Duke {
                     System.out.println(tl.toString());
                     continue;
                 default:
-                    // Change task list
-                    if (input.matches("mark \\d+")) {
+                    if (input.matches("occurs .*")) {
+                        // Handle occurs
+                        String dateTime = input.substring(7);
+
+                        // Print tasks
+                        try {
+                            tl.printTasksOnDate(dateTime);
+                        } catch (InvalidDateFormatException e) {
+                            System.out.println(e.getMessage());
+                        }
+                    } else if (input.matches("mark \\d+")) {
                         // Marking a task as done
                         Integer idx = Integer.valueOf(input.split(" ")[1]) - 1;
 

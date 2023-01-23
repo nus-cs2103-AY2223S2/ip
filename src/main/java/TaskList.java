@@ -1,3 +1,4 @@
+import java.time.LocalDateTime;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -21,7 +22,11 @@ public class TaskList {
                 throw new EmptyCommandException("Empty argument", "deadline");
             }
 
-            this.tasks.add(new Deadline(content, arr[1]));
+            try {
+                this.tasks.add(new Deadline(content, arr[1]));
+            } catch (InvalidDateFormatException e) {
+                System.out.println(e.getMessage());
+            }
         } else if (input.matches("event .* /from .* /to .*")) {
             // Handle event
             String[] arr = input.split(" /from ");
@@ -32,7 +37,11 @@ public class TaskList {
                 throw new EmptyCommandException("Empty argument", "event");
             }
 
-            this.tasks.add(new Event(content, startEnd[0], startEnd[1]));
+            try {
+                this.tasks.add(new Event(content, startEnd[0], startEnd[1]));
+            } catch (InvalidDateFormatException e) {
+                System.out.println(e.getMessage());
+            }
         } else if (input.matches("todo .*")) {
             // Handle todo
             if (input.length() == 5) {
@@ -58,11 +67,19 @@ public class TaskList {
     }
 
     public void addDeadline(String task, String deadline) {
-        this.tasks.add(new Deadline(task, deadline));
+        try {
+            this.tasks.add(new Deadline(task, deadline));
+        } catch (InvalidDateFormatException e) {
+            System.out.println(e.getMessage());
+        }
     }
 
     public void addEvent(String task, String start, String end) {
-        this.tasks.add(new Event(task, start, end));
+        try {
+            this.tasks.add(new Event(task, start, end));
+        } catch (InvalidDateFormatException e) {
+            System.out.println(e.getMessage());
+        }
     }
 
     public void markTask(int i) {
@@ -79,6 +96,27 @@ public class TaskList {
 
     public int numberOfTasks() {
         return tasks.size();
+    }
+
+    public void printTasksOnDate(String deadline) throws InvalidDateFormatException {
+        LocalDateTime dt = DateTimeHelper.parse(deadline);
+        int counter = 1;
+
+        for (Task t: tasks) {
+            if (t instanceof Deadline) {
+                Deadline d = (Deadline) t;
+                if (d.occursOn(dt)) {
+                    System.out.println(Integer.valueOf(counter) + ". " + d);
+                    counter++;
+                }
+            } else if (t instanceof Event) {
+                Event e = (Event) t;
+                if (e.occursOn(dt)) {
+                    System.out.println(Integer.valueOf(counter) + ". " + e);
+                    counter++;
+                }
+            }
+        }
     }
 
     @Override
