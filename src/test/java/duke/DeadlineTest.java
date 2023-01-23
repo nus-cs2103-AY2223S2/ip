@@ -1,10 +1,11 @@
 package duke;
 
-import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
+import org.junit.jupiter.api.Test;
+
 public class DeadlineTest {
-    Deadline deadlineTask = new Deadline("homework", "2023-10-10 2359");
+    private Deadline deadlineTask = new Deadline("homework", "2023-10-10 2359");
 
     @Test
     public void saveDataFormatTest() {

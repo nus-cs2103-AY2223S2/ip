@@ -1,8 +1,7 @@
 package duke;
 
-import java.lang.StringBuilder;
-import java.util.List;
 import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Represents a List of Tasks. Uses basic methods from ArrayList.
@@ -10,7 +9,10 @@ import java.util.ArrayList;
 public class TaskList {
     private final List<Task> tasks;
 
-    public TaskList() { this.tasks = new ArrayList<>(); }
+    public TaskList() {
+        this.tasks = new ArrayList<>();
+    }
+
     public TaskList(List<Task> tasks) {
         this.tasks = tasks;
     }
