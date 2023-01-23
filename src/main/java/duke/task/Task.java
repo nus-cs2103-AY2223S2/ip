@@ -15,7 +15,7 @@ public class Task implements Serializable {
     }
 
     public String getStatusIcon() {
-        return (isDone ? "x" : " "); // mark done duke.task with X
+        return (isDone ? "x" : " ");
     }
 
     /**
@@ -29,6 +29,7 @@ public class Task implements Serializable {
      * Mark a task as not done
      */
     public void unmark() {
+
         this.isDone = false;
     }
 
