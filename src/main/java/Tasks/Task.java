@@ -1,9 +1,16 @@
 package Tasks;
 
+/**
+ * General purpose Task class.
+ */
 public class Task {
     protected String name;
     protected boolean isDone;
 
+    /**
+     * Constructs Task instance.
+     * @param taskName name of task.
+     */
     public Task(String taskName) {
         this.name = taskName;
         this.isDone = false;

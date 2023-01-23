@@ -8,6 +8,9 @@ import Tasks.Task;
 import java.util.InputMismatchException;
 import java.util.Scanner;
 
+/**
+ * Handles 'delete' command.
+ */
 public class CommandDelete extends Command{
     @Override
     public TaskList handle(Scanner userScan, TaskList taskList) throws DukeException {

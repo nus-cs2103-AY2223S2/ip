@@ -5,8 +5,14 @@ import Features.Ui;
 
 import java.util.Scanner;
 
+/**
+ * Handles 'bye' command.
+ */
 public class CommandBye extends Command {
 
+    /**
+     * Prints goodbye message.
+     */
     public void print() {
         Ui ui = new Ui();
         ui.print("Goodbye, then!");

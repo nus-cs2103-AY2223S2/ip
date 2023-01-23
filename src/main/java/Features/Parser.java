@@ -4,17 +4,29 @@ import UserCommands.*;
 import java.io.IOException;
 import java.util.Scanner;
 
+/**
+ * Handles user input commands.
+ */
 public class Parser {
 
     protected Scanner userScan;
     protected TaskList taskList;
     protected boolean loopEnd = false;
 
+    /**
+     * Constructs Parser instance.
+     * @param userScan Scanner object containing user input.
+     * @param taskList List of tasks.
+     */
     public Parser(Scanner userScan, TaskList taskList) {
         this.userScan = userScan;
         this.taskList = taskList;
     }
 
+    /**
+     * Calls the Command type suitable for the user input.
+     * @throws DukeException Thrown by the individual switch cases.
+     */
     public void parse() throws DukeException {
         // switch case for future commands
         switch (this.userScan.next()) {
@@ -66,6 +78,11 @@ public class Parser {
         autoSave(this.taskList);
     }
 
+    /**
+     * Automatically saves state of taskList after each change.
+     * @param taskList The taskList to save.
+     * @throws DukeException  If the taskList cannot be saved.
+     */
     public void autoSave(TaskList taskList) throws DukeException {
         try {
             new Storage().saveTaskList(taskList);

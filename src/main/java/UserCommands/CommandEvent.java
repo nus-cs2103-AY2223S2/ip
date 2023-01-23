@@ -8,6 +8,9 @@ import Tasks.Task;
 
 import java.util.Scanner;
 
+/**
+ * Handles 'event' command.
+ */
 public class CommandEvent extends Command{
     @Override
     public TaskList handle(Scanner userScan, TaskList taskList) throws DukeException {

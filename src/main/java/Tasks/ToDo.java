@@ -1,5 +1,8 @@
 package Tasks;
 
+/**
+ * Task class actually used in Duke.
+ */
 public class ToDo extends Task{
     public ToDo(String TaskName) {
         super(TaskName);

@@ -8,6 +8,9 @@ import Tasks.ToDo;
 
 import java.util.Scanner;
 
+/**
+ * Handles 'todo' command.
+ */
 public class CommandToDo extends Command{
     @Override
     public TaskList handle(Scanner userScan, TaskList taskList) throws DukeException {

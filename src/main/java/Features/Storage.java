@@ -10,8 +10,15 @@ import Tasks.Deadline;
 import Tasks.Event;
 import Tasks.ToDo;
 
+/**
+ * Saves and loads state of taskList to/from data/duke.txt.
+ */
 public class Storage {
 
+    /**
+     * Loads taskList from data/duke.txt, if any.
+     * @return the loaded taskList.
+     */
     public TaskList loadTaskList() {
 
         TaskList toLoad = new TaskList();
@@ -66,6 +73,11 @@ public class Storage {
         return toLoad;
     }
 
+    /**
+     * Saves taskList to data/duke.txt
+     * @param toSave The TaskList object to save.
+     * @throws IOException  If TaskList cannot be saved.
+     */
     public void saveTaskList(TaskList toSave) throws IOException {
         FileWriter dukeWrite = new FileWriter("data/duke.txt");
         for (int i = 0; i < toSave.size(); i++) {

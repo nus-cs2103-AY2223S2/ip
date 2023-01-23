@@ -7,6 +7,9 @@ import Features.Ui;
 import java.util.InputMismatchException;
 import java.util.Scanner;
 
+/**
+ * Handles 'unmark' command.
+ */
 public class CommandUnmark extends Command{
     @Override
     public TaskList handle(Scanner userScan, TaskList taskList) throws DukeException {

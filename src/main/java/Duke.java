@@ -6,8 +6,14 @@ import Features.Storage;
 import Features.TaskList;
 import Features.Ui;
 
+/**
+ * The project.
+ */
 public class Duke {
 
+    /**
+     * Runs the Duke process.
+     */
     public static void main(String[] args) {
 
         // initialise storage, taskList and loop objects

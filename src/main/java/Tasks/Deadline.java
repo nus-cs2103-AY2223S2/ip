@@ -4,10 +4,18 @@ import java.time.LocalDateTime;
 import java.time.format.DateTimeParseException;
 import java.time.format.DateTimeFormatter;
 
+/**
+ * Task that has to be done by a certain time.
+ */
 public class Deadline extends Task{
     protected String by;
     protected LocalDateTime byDateTime;
 
+    /**
+     * Constructs Deadline instance.
+     * @param TaskName Name of task.
+     * @param by Deadline of task.
+     */
     public Deadline(String TaskName, String by) {
         super(TaskName);
         this.by = by;
