@@ -1,3 +1,7 @@
+import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -10,11 +14,10 @@ public class Duke {
         String greeting = "Hello! I'm Alpha Beast What can I do for you?";
         greeting(greeting);
         //memory store = new memory();
-        TaskManager manager = new TaskManager();
-
+        TaskManager manager = new TaskManager("/Users/s.f/ip/src/Data/duke.txt");
 
         loop:
-        while (true){
+        while (true) {
             String input = sc.nextLine();
             String[] tokens = input.split(" ");
             String without_key = input.replace(tokens[0], "");
@@ -22,6 +25,7 @@ public class Duke {
             switch (tokens[0]) {
                 case "bye":
                     echo(input);
+                    manager.file_writeAll();
                     break loop;
 
                 case "list":
@@ -37,22 +41,24 @@ public class Duke {
                     break;
 
 
-                case "todo": ToDo todo = new ToDo(without_key, false);
-                        manager.add(todo);
+                case "todo":
+                    ToDo todo = new ToDo(without_key, false);
+                    manager.add(todo);
                     break;
 
                 case "deadline":
-                        Deadlines deadlines = new Deadlines(without_key, false);
-                        manager.add(deadlines);
+                    Deadlines deadlines = new Deadlines(without_key, false);
+                    manager.add(deadlines);
                     break;
 
                 case "event":
                     Events events = new Events(without_key, false);
-                        manager.add(events);
+                    manager.add(events);
                     break;
 
-                case "delete": manager.delete(Integer.parseInt(tokens[1]) - 1);
-                break;
+                case "delete":
+                    manager.delete(Integer.parseInt(tokens[1]) - 1);
+                    break;
 
                 default:
                     System.out.println("OOPS!!! I'm sorry, but I don't know what that means :-(\n");
@@ -66,6 +72,7 @@ public class Duke {
     static void greeting(String message) {
         System.out.println(message);
     }
+
     static void echo(String input) {
         if (input.equals("bye"))
             System.out.println("Bye. Hope to see you again soon!\n");
@@ -74,6 +81,7 @@ public class Duke {
     }
 }
 
+/*
 class memory {
 
     static int slots = 0;
@@ -130,6 +138,7 @@ class memory {
 
 
 }
+ */
 
 abstract class Task {
     static final String add = "Got it. I've added this task:\n";
@@ -167,8 +176,11 @@ abstract class Task {
 }
 
 class ToDo extends Task {
+    final String raw;
+
     ToDo(String name, boolean done) {
         super(name, done);
+        raw = name;
     }
 
     @Override
@@ -188,7 +200,7 @@ class ToDo extends Task {
 
     @Override
     void delete() {
-        if(done)
+        if (done)
             message_delete = Task.delete + "  [T][X] " + task_name;
         else
             message_delete = Task.delete + "  [T][ ] " + task_name;
@@ -210,10 +222,12 @@ class ToDo extends Task {
 
 class Deadlines extends Task {
 
+    final String raw;
     String endDate;
 
     Deadlines(String name, boolean done) {
         super(name, done);
+        raw = name;
         extract();
     }
 
@@ -257,7 +271,7 @@ class Deadlines extends Task {
 
     @Override
     void delete() {
-        if(done)
+        if (done)
             message_delete = Task.delete + "  [D][X] " + task_name + endDate;
         else
             message_delete = Task.delete + "  [D][ ] " + task_name + endDate;
@@ -278,11 +292,13 @@ class Deadlines extends Task {
 
 class Events extends Task {
 
+    final String raw;
     String start;
     String end;
 
     Events(String name, boolean done) {
         super(name, done);
+        raw = name;
         extract();
     }
 
@@ -316,7 +332,7 @@ class Events extends Task {
 
     @Override
     void delete() {
-        if(done)
+        if (done)
             message_delete = Task.delete + "  [E][X] " + task_name + start + end;
         else
             message_delete = Task.delete + "  [D][ ] " + task_name + start + end;
@@ -337,26 +353,37 @@ class Events extends Task {
 
 class TaskManager {
     ArrayList<Task> ListOfTasks;
+    FileManager fileManager;
 
-    TaskManager() {
+    TaskManager(String path) {
         //default size
         ListOfTasks = new ArrayList<>(100);
+        fileManager = new FileManager(path);
+        init();
     }
 
     void add(Task input) {
-        try{
-        if(input.task_name.equals("") || input.task_name.equals(" ")){
-            throw new DukeException("OOPS!!! The description of a todo cannot be empty.\n");
-        } else {
-        ListOfTasks.add(input);
-        input.add();
-        System.out.println(input.message_add + "\n Now you have " + ListOfTasks.size() + " tasks in the list");}
-
-        }
-        catch (DukeException e){
-            if(input instanceof ToDo )
-            System.out.println("OOPS!!! The description of a todo cannot be empty.\n");
-            else if(input instanceof Deadlines)
+        try {
+            if (input.task_name.equals("") || input.task_name.equals(" ")) {
+                throw new DukeException("OOPS!!! The description of a todo cannot be empty.\n");
+            } else {
+                ListOfTasks.add(input);
+                input.add();
+                System.out.println(input.message_add + "\n Now you have " + ListOfTasks.size() + " tasks in the list");
+                if (input instanceof ToDo) {
+                    fileManager.write("T|" + input.done + "|" + ((ToDo) input).raw);
+                } else if (input instanceof Deadlines) {
+                    fileManager.write("D|" + input.done + "|" + ((Deadlines) input).raw);
+                } else if (input instanceof Events) {
+                    fileManager.write("E|" + input.done + "|" + ((Events) input).raw);
+                } else {
+                    System.out.println("Unspecific type");
+                }
+            }
+        } catch (DukeException e) {
+            if (input instanceof ToDo)
+                System.out.println("OOPS!!! The description of a todo cannot be empty.\n");
+            else if (input instanceof Deadlines)
                 System.out.println("OOPS!!! The description of a deadline cannot be empty.\n");
             else
                 System.out.println("OOPS!!! The description of a event cannot be empty.\n");
@@ -372,11 +399,12 @@ class TaskManager {
     }
 
     void mark(int index) {
-        try{
-        Task temp = ListOfTasks.get(index);
-        temp.marked();
-        System.out.println(temp.message_marked);}
-        catch (IndexOutOfBoundsException e) {
+        try {
+            Task temp = ListOfTasks.get(index);
+            temp.marked();
+            System.out.println(temp.message_marked);
+            fileManager.markAt(index);
+        } catch (IndexOutOfBoundsException e) {
             System.out.println("Invalid Index");
         }
     }
@@ -386,20 +414,45 @@ class TaskManager {
             Task temp = ListOfTasks.get(index);
             temp.unmarked();
             System.out.println(temp.message_unmarked);
+            fileManager.unmarkAt(index);
         } catch (IndexOutOfBoundsException e) {
             System.out.println("Invalid Index");
         }
     }
-    void delete(int index){
+
+    void delete(int index) {
         try {
             Task temp = ListOfTasks.get(index);
             temp.delete();
             ListOfTasks.remove(index);
             System.out.println(temp.message_add + "\n Now you have " + ListOfTasks.size() + " tasks in the list");
+            fileManager.deteleAt(index);
         } catch (IndexOutOfBoundsException e) {
             System.out.println("Invalid Index");
         }
     }
+
+    void init() {
+        fileManager.read();
+        if (!fileManager.records.isEmpty()) {
+            for (int x = 0; x < fileManager.records.size(); x++) {
+                String[] tokens = fileManager.records.get(x).split("\\|");
+                boolean status = Boolean.parseBoolean(tokens[1]);
+                if (tokens[0].equals("T")) {
+                    ListOfTasks.add(new ToDo(tokens[2], status));
+                } else if (tokens[0].equals("D")) {
+                    ListOfTasks.add(new Deadlines(tokens[2], status));
+                } else {
+                    ListOfTasks.add(new Events(tokens[2], status));
+                }
+            }
+        }
+    }
+
+    void file_writeAll() {
+        fileManager.WriteAll();
+    }
+
 
 }
 
@@ -407,4 +460,81 @@ class DukeException extends Exception {
     DukeException(String errorMessage) {
         super(errorMessage);
     }
+}
+
+class FileManager {
+    FileWriter writer;
+    Scanner reader;
+    ArrayList<String> records;
+    String path;
+
+    FileManager(String DES) {
+        try {
+            writer = new FileWriter(DES, true);
+            File store = new File(DES);
+            reader = new Scanner(store);
+            path = DES;
+            records = new ArrayList<>();
+        } catch (IOException e) {
+            System.out.println("Invalid file Path\n");
+        }
+    }
+
+    //write line by line
+    void write(String input) {
+        //writer.write(input);
+        records.add(input);
+        //writer.close();
+    }
+
+    void markAt(int index) {
+        String str = records.get(index).replace("false", "true");
+        records.set(index, str);
+    }
+
+    void unmarkAt(int index) {
+        String str = records.get(index).replace("true", "false");
+        records.set(index, str);
+    }
+
+    void deteleAt(int index) {
+        records.remove(index);
+    }
+
+    //read all
+    void read() {
+        while (reader.hasNextLine()) {
+            String data = reader.nextLine();
+            records.add(data);
+            //System.out.println(data);
+        }
+        reader.close();
+
+    }
+
+    void WriteAll() {
+        try {
+            clearFile();
+            for (String record : records) {
+                System.out.println(record);
+                writer.write(record);
+                writer.write(System.lineSeparator());
+            }
+            writer.flush();
+            writer.close();
+
+        } catch (IOException e) {
+            System.out.println("Write Error");
+        }
+    }
+
+    //transfer from records to File
+    void clearFile() throws IOException {
+        FileWriter f1 = new FileWriter("/Users/s.f/ip/src/Data/duke.txt", false);
+        PrintWriter p1 = new PrintWriter(f1, false);
+        p1.flush();
+        p1.close();
+        p1.close();
+    }
+
 }
