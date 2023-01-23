@@ -1,5 +1,6 @@
 package sam.task;
 import java.util.ArrayList;
+import java.util.List;
 
 public class TaskList {
   private ArrayList<Task> tasks;
@@ -38,11 +39,11 @@ public class TaskList {
     return tasks.size();
   }
 
-  public String[] generateList() {
-    String[] list = new String[count()];
+  public List<String> getTasks() {
+    List<String> list = new ArrayList<>(count());
     for (int i = 0; i < count(); i++) {
-      Task t = tasks.get(i);
-      list[i] = String.format("%d: %s", i + 1, t);
+      Task task = tasks.get(i);
+      list.add(String.format("%d: %s", i + 1, task));
     }
     return list;
   }

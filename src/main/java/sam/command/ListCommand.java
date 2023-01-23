@@ -1,5 +1,7 @@
 package sam.command;
 
+import java.util.List;
+
 import sam.Ui;
 import sam.storage.Storage;
 import sam.task.TaskList;
@@ -14,9 +16,9 @@ public class ListCommand extends Command {
     if (tasks.count() == 0) {
       ui.talk("Your list is empty!");
     } else {
-      // "Here is your list:"
-      String[] list = tasks.generateList();
-      ui.talk(list);
-    }  
+      List<String> list = tasks.generateList();
+      list.add(0, "Here is your list:");
+      ui.talk(list.toArray(new String[0]));
+    }
   }  
 }
