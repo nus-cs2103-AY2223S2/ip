@@ -1,11 +1,13 @@
-public class Deadline extends Task {
-  protected String by;
+import java.time.LocalDate;
 
-  public Deadline(String title, String by) {
+public class Deadline extends Task {
+  protected LocalDate by;
+
+  public Deadline(String title, LocalDate by) {
     this(title, by, false);
   }
 
-  public Deadline(String title, String by, boolean isDone) {
+  public Deadline(String title, LocalDate by, boolean isDone) {
     super(title, isDone);
     this.by = by;
   }
@@ -14,7 +16,7 @@ public class Deadline extends Task {
   public String toSaveFormat() {
     return String.format(
       "D | %d | %s | %s",
-      getStatusNo() , title, by
+      getStatusNo() , title, formatDateSave(by)
     );
   }
 
@@ -22,7 +24,7 @@ public class Deadline extends Task {
   public String toString() {
     return String.format(
       "[D][%c] %s (by: %s)",
-      getStatusIcon(), title, by
+      getStatusIcon(), title, formatDateDisplay(by)
     );
   }
 }

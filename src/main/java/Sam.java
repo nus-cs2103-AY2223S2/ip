@@ -1,3 +1,6 @@
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Scanner;
@@ -56,7 +59,7 @@ public class Sam {
   private static void processInput(String[] input)
     throws SamUnknownCommandException, SamMissingTaskException, SamInvalidTaskException,
       SamMissingTaskTitleException, SamMissingTaskValueException, SamMissingTaskArgException,
-      SamSaveFailedException
+      SamSaveFailedException, SamInvalidDateException
   {
     Command command = null;
     for (Command c : Command.values())
@@ -127,7 +130,11 @@ public class Sam {
         if (!taskArgs.containsKey("from") || !taskArgs.containsKey("to")) {
           throw new SamMissingTaskArgException();
         }
-        Task task = new Event(title[0], taskArgs.get("from"), taskArgs.get("to"));
+
+        LocalDate from = parseDate(taskArgs.get("from"));
+        LocalDate to = parseDate(taskArgs.get("to"));
+        Task task = new Event(title[0], from, to);
+
         tasks.addTask(task);
         newTask(task);
         save();
@@ -142,7 +149,12 @@ public class Sam {
         if (!taskArgs.containsKey("by")) {
           throw new SamMissingTaskArgException();
         }
-        Task task = new Deadline(title[0], taskArgs.get("by"));
+
+
+        System.out.println(taskArgs.get("by"));
+        LocalDate by = parseDate(taskArgs.get("by"));
+        Task task = new Deadline(title[0], by);
+
         tasks.addTask(task);
         newTask(task);
         save();
@@ -225,19 +237,32 @@ public class Sam {
           case "T":
             t = new ToDo(arr[2], isDone);
             break; 
-          case "E":
-            t = new Event(arr[2], arr[3], arr[4], isDone);
+          case "E": {
+            LocalDate from = parseDate(arr[3]);
+            LocalDate to = parseDate(arr[4]);
+            t = new Event(arr[2], from, to, isDone);
             break; 
-          case "D":
-            t = new Deadline(arr[2], arr[3], isDone);
+          }
+          case "D": {
+            LocalDate by = parseDate(arr[3]);
+            t = new Deadline(arr[2], by, isDone);
             break;
+          }
         }
         if (t != null) {
           tasks.addTask(t);
         }
       }
-    } catch (IOException e) {
+    } catch (IOException | SamInvalidDateException e) {
       throw new SamLoadFailedException();
+    }
+  }
+  
+  private static LocalDate parseDate(String input) throws SamInvalidDateException {
+    try {
+      return LocalDate.parse(input, DateTimeFormatter.ofPattern("d/M/yyyy"));
+    } catch (DateTimeParseException e) {
+      throw new SamInvalidDateException();
     }
   }
 }

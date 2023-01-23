@@ -51,3 +51,9 @@ class SamLoadFailedException extends SamException {
     super("Oh no, there was a problem loading your list!");
   }
 }
+
+class SamInvalidDateException extends SamException {
+  public SamInvalidDateException() {
+    super("Please write dates as 'd/M/yyyy'!");
+  }
+}

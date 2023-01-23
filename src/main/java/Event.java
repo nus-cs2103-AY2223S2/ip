@@ -1,12 +1,14 @@
-public class Event extends Task {
-  protected String from;
-  protected String to;
+import java.time.LocalDate;
 
-  public Event(String title, String from, String to) {
+public class Event extends Task {
+  protected LocalDate from;
+  protected LocalDate to;
+
+  public Event(String title, LocalDate from, LocalDate to) {
     this(title, from, to, false);
   }
 
-  public Event(String title, String from, String to, boolean isDone) {
+  public Event(String title, LocalDate from, LocalDate to, boolean isDone) {
     super(title, isDone);
     this.from = from;
     this.to = to;
@@ -16,7 +18,7 @@ public class Event extends Task {
   public String toSaveFormat() {
     return String.format(
       "E | %d | %s | %s | %s",
-      getStatusNo() , title, from, to
+      getStatusNo() , title, formatDateSave(from), formatDateSave(to)
     );
   }
 
@@ -24,7 +26,7 @@ public class Event extends Task {
   public String toString() {
     return String.format(
       "[E][%c] %s (from: %s to: %s)",
-      getStatusIcon(), title, from, to
+      getStatusIcon(), title, formatDateDisplay(from), formatDateDisplay(to)
     );
   }
 }
