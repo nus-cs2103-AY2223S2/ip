@@ -1,6 +1,10 @@
 import java.util.Scanner;
 import java.util.ArrayList;
 
+/**
+ * A chatbot with functionality to add or remove different
+ * types of Tasks.
+ */
 public class Duke {
 
     // Enums for the different commands

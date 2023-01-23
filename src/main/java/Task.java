@@ -1,3 +1,7 @@
+/**
+ * Represents a task entry with a description
+ * and a boolean representing its status.
+ */
 public class Task {
     // Stores the description of the task.
     protected String description;

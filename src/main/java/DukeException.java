@@ -1,3 +1,6 @@
+/**
+ * A special exception used by the Duke class.
+ */
 public class DukeException extends Exception {
 
     /**

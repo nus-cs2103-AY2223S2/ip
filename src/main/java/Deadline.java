@@ -1,3 +1,6 @@
+/**
+ * A type of task with a single deadline.
+ */
 public class Deadline extends Task {
     // Deadline for the task.
     protected String by;

@@ -1,3 +1,6 @@
+/**
+ * A type of Task with no timeframe.
+ */
 public class Todo extends Task {
 
     /**

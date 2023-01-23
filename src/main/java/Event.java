@@ -1,3 +1,7 @@
+/**
+ * A type of Task with a specific window for
+ * completion.
+ */
 public class Event extends Task {
     // Start date for the task.
     protected String from;
