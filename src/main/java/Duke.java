@@ -1,9 +1,10 @@
+import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Locale;
 import java.util.Scanner;
 
 public class Duke {
-    public enum Command { // Fixed number of commands
+    public enum Command {
+        // Fixed number of commands
         TODO("todo"), DEADLINE("deadline"), EVENT("event"), MARK("mark"),
         UNMARK("unmark"), DELETE("delete"), LIST("list"), BYE("bye");
 
@@ -17,7 +18,8 @@ public class Duke {
             return command;
         }
     }
-    public static void main(String[] args) {
+
+    public static void main(String[] args) throws IOException, ClassNotFoundException {
         String logo = "  /\\_/\\\n"
                 + " /\u25DE   \u25DF\\\n"
                 + "( \u25d5   \u25d5 )\n"
@@ -28,8 +30,14 @@ public class Duke {
         System.out.println(logo + "BorzAI\n"); // Intro
         System.out.println("\tWhen all I do is for you, Kermie \u2665\n" // Greeting
                 + "\tWhat can I do for you?\n");
+        Storage storage = new Storage();
+        ArrayList<Task> tasks = new ArrayList<>(); // Create list
+        try {
+            tasks = storage.loadTasks();
+        } catch (IOException e) {
+            System.out.println("\t" + e);
+        }
         Scanner scanner = new Scanner(System.in); // Allow user input
-        ArrayList<Task> taskList = new ArrayList<>(); // Create list
         while (true) {
             String input = scanner.nextLine();
             String[] parts = input.trim().split(" ", 2);
@@ -42,10 +50,10 @@ public class Duke {
                         break;
                     case LIST: // Display list
                         System.out.println("\tHere are the tasks in your list:");
-                        for (int i = 0; i < taskList.size(); i++) {
-                            t = taskList.get(i);
+                        for (int i = 0; i < tasks.size(); i++) {
+                            t = tasks.get(i);
                             index = i + 1;
-                            if (i == taskList.size() - 1) { // Last item
+                            if (i == tasks.size() - 1) { // Last item
                                 System.out.println("\t" + index + "." + t);
                                 break;
                             }
@@ -57,42 +65,43 @@ public class Duke {
                             throw new DukeException("Command has to be followed by an integer.");
                         }
                         index = Integer.parseInt(parts[1].trim());
-                        t = taskList.get(index - 1);
-                        t.markAsDone();
-                        System.out.println("\tNice! I've marked this task as done:");
-                        System.out.println("\t  " + t);
+                        t = tasks.get(index - 1);
+                        t.setDone(true);
+                        storage.saveTasks(tasks);
+                        System.out.println("\tNice! I've marked this task as done:\n\t  " + t);
                         continue;
                     case UNMARK: // Unmark
                         if (parts.length != 2 || parts[1].trim().isEmpty()) { // 2nd arg not entered
                             throw new DukeException("Command has to be followed by an integer.");
                         }
                         index = Integer.parseInt(parts[1].trim());
-                        t = taskList.get(index - 1);
-                        t.unmarkAsDone();
-                        System.out.println("\tOK, I've marked this task as not done yet:");
-                        System.out.println("\t  " + t);
+                        t = tasks.get(index - 1);
+                        t.setDone(false);
+                        storage.saveTasks(tasks);
+                        System.out.println("\tOK, I've marked this task as not done yet:\n\t  " + t);
                         continue;
                     case DELETE: // Delete
                         if (parts.length != 2 || parts[1].trim().isEmpty()) { // 2nd arg not entered
                             throw new DukeException("Command has to be followed by an integer.");
                         }
                         index = Integer.parseInt(parts[1].trim());
-                        t = taskList.get(index - 1);
-                        taskList.remove(index - 1);
-                        System.out.println("\tNoted. I've removed this task:");
-                        System.out.println("\t  " + t);
-                        if (taskList.size() == 1) {
-                            System.out.println("\tNow you have " + taskList.size() + " task in the list.");
+                        t = tasks.get(index - 1);
+                        tasks.remove(index - 1);
+                        storage.saveTasks(tasks);
+                        System.out.println("\tNoted. I've removed this task:\n\t  " + t);
+                        if (tasks.size() == 1) {
+                            System.out.println("\tNow you have " + tasks.size() + " task in the list.");
                             continue;
                         }
-                        System.out.println("\tNow you have " + taskList.size() + " tasks in the list.");
+                        System.out.println("\tNow you have " + tasks.size() + " tasks in the list.");
                         continue;
                     case TODO: // Add todo to list
                         if (parts.length != 2 || parts[1].trim().isEmpty()) {
                             throw new DukeException("The description of a todo cannot be empty.");
                         }
                         t = new ToDo(parts[1]);
-                        taskList.add(t);
+                        tasks.add(t);
+                        storage.saveTasks(tasks);
                         break;
                     case DEADLINE: // Add deadline to list
                         if (parts.length != 2 || parts[1].trim().isEmpty()) {
@@ -103,7 +112,8 @@ public class Duke {
                             throw new DukeException("The description of a deadline has to have 2 non-blank strings separated with a /by keyword.");
                         }
                         t = new Deadline(d_parts[0], d_parts[1]);
-                        taskList.add(t);
+                        tasks.add(t);
+                        storage.saveTasks(tasks);
                         break;
                     case EVENT: // Add event to list
                         if (parts.length != 2 || parts[1].trim().isEmpty()) {
@@ -114,7 +124,8 @@ public class Duke {
                             throw new DukeException("The description of an event has to have 3 non-blank strings separated with /from and /to keywords.");
                         }
                         t = new Event(e_parts[0], e_parts[1], e_parts[2]);
-                        taskList.add(t);
+                        tasks.add(t);
+                        storage.saveTasks(tasks);
                         break;
                     default: // Invalid command but should not reach here because valueOf should throw an exception
                         throw new DukeException("I'm sorry, but I don't know what that means :-(");
@@ -122,13 +133,12 @@ public class Duke {
                 if (command == Command.BYE) {
                     break;
                 }
-                System.out.println("\tGot it. I've added this task:");
-                System.out.println("\t  " + t);
-                if (taskList.size() == 1) {
-                    System.out.println("\tNow you have " + taskList.size() + " task in the list.");
+                System.out.println("\tGot it. I've added this task:\n\t  " + t);
+                if (tasks.size() == 1) {
+                    System.out.println("\tNow you have " + tasks.size() + " task in the list.");
                     continue;
                 }
-                System.out.println("\tNow you have " + taskList.size() + " tasks in the list.");
+                System.out.println("\tNow you have " + tasks.size() + " tasks in the list.");
             } catch (DukeException e) { // Invalid arguments
                 System.out.println("\t" + e);
             } catch (NumberFormatException e) { // 2nd arg not int

@@ -1,6 +1,8 @@
-public class Task {
-    protected String description;
-    protected boolean isDone;
+import java.io.Serializable;
+
+public abstract class Task implements Serializable{
+    private String description;
+    private boolean isDone;
 
     public Task(String description) {
         this.description = description;
@@ -11,12 +13,20 @@ public class Task {
         return (isDone ? "X" : " "); // Mark done task with X
     }
 
-    public void markAsDone() {
-        this.isDone = true; // Mark done
+    public String getDescription() {
+        return description;
     }
 
-    public void unmarkAsDone() {
-        this.isDone = false; // Unmark done
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
+    public boolean isDone() {
+        return isDone;
+    }
+
+    public void setDone(boolean isDone) {
+        this.isDone = isDone; // Set done status
     }
 
     @Override
