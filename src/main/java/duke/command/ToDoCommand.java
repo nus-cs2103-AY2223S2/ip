@@ -6,11 +6,17 @@ import duke.exception.DukeException;
 import duke.task.Task;
 import duke.task.ToDo;
 
+/** A representation of the "todo" command in Duke. */
 public class ToDoCommand extends Command {
 
     private final String NAME = "todo";
     private String title;
 
+    /**
+     * Initializes a todo command with a given title.
+     * 
+     * @param title The title of the Event to be created
+     */
     public ToDoCommand(String title) {
         this.title = title;
     }
