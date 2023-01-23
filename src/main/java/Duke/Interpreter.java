@@ -193,20 +193,6 @@ public class Interpreter {
         }
     }
 
-    /**
-     * The method find finds the keyword in all the Tasks
-     * @param command the find command
-     * @param table the taskTable
-     * @return Find
-     * @throws MissingDescriptionException
-     */
-    public static Find find(String command, TaskTable table) throws MissingDescriptionException {
-        if (command.split(" ").length == 1) {
-            throw new MissingDescriptionException("find method");
-        } else {
-            return new Find(command.substring(5), table);
-        }
-    }
 
     /**
      * The method interpret interprets the command
