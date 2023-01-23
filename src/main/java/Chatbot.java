@@ -3,6 +3,7 @@ import Tasks.Events;
 import Tasks.Task;
 import Tasks.Todo;
 
+import java.rmi.UnexpectedException;
 import java.util.*;
 import java.util.function.BiPredicate;
 
@@ -13,13 +14,13 @@ public class Chatbot {
 
     private boolean isChatbotActive = true;
     static{
-        commands.put(Commands.MESSAGE_END, (chatbot, args) -> {
-            System.out.println(Commands.MESSAGE_END);
+        commands.put(Messages.MESSAGE_END, (chatbot, args) -> {
+            System.out.println(Messages.MESSAGE_END);
             chatbot.isChatbotActive = false;
             return true;
         });
 
-        commands.put(Commands.MESSAGE_LIST, (chatbot, args) -> {
+        commands.put(Messages.MESSAGE_LIST, (chatbot, args) -> {
             System.out.println("Here are the tasks in your list:");
             int i = 0;
             for(Task entry : chatbot.tasks){
@@ -29,7 +30,7 @@ public class Chatbot {
             return true;
         });
 
-        commands.put(Commands.MESSAGE_MARK, (chatbot, args) -> {
+        commands.put(Messages.MESSAGE_MARK, (chatbot, args) -> {
 
                 Integer index = -1;
                 try{
@@ -37,12 +38,14 @@ public class Chatbot {
                 }
                 catch (NumberFormatException ex){
                     ex.printStackTrace();
-                    return false;
+                    System.out.println("Error: Index not specified");
+
+                    return true;
                 }
                 index -= 1;
                 if (chatbot.getTaskState(index)){
-                    System.out.println("Tasks.Task is already marked as done.");
-                    return false;
+                    System.out.println("Task is already marked as done.");
+                    return true;
                 }
                 else{
                     chatbot.toggleTaskIndex(index);
@@ -52,7 +55,7 @@ public class Chatbot {
                 return true;
 
         });
-        commands.put(Commands.MESSAGE_UNMARK, (chatbot, args) -> {
+        commands.put(Messages.MESSAGE_UNMARK, (chatbot, args) -> {
 
             Integer index = -1;
             try{
@@ -60,12 +63,13 @@ public class Chatbot {
             }
             catch (NumberFormatException ex){
                 ex.printStackTrace();
-                return false;
+                System.out.println("Error: Index not specified");
+                return true;
             }
             index -= 1;
             if (!chatbot.getTaskState(index)){
-                System.out.println("Tasks.Task is already unmarked.");
-                return false;
+                System.out.println("Task is already unmarked.");
+                return true;
             }
             else{
                 chatbot.toggleTaskIndex(index);
@@ -76,33 +80,54 @@ public class Chatbot {
 
         });
 
-        commands.put(Commands.MESSAGE_TODO, (chatbot, args) -> {
-            Todo toAdd = new Todo(args);
+        commands.put(Messages.MESSAGE_TODO, (chatbot, args) -> {
+            if (args.trim() == ""){
+                System.out.println("☹ OOPS!!! The description of a todo cannot be empty.");
+                return true;
+            }
+            Todo toAdd = new Todo(args.trim());
             chatbot.addTask(toAdd);
             return true;
         });
 
-        commands.put(Commands.MESSAGE_DEADLINE, (chatbot, args) -> {
+        commands.put(Messages.MESSAGE_DEADLINE, (chatbot, args) -> {
             String[] inputs = args.split("/by", 2);
 
-            if(inputs.length != 2)
-                return false;
+            if(inputs.length != 2){
+                System.out.println("Error: Invalid number of args. Pls add a /by in your command, " +
+                        "or ensure task name is not not empty");
 
-            Deadline toAdd = new Deadline(inputs[0], inputs[1]);
+                return true;
+            } else if (inputs[0].trim() == "" || inputs[1].trim() == "") {
+                System.out.println("Description cannot be empty.");
+                return true;
+            }
+
+
+            Deadline toAdd = new Deadline(inputs[0].trim(), inputs[1].trim());
             chatbot.addTask(toAdd);
             return true;
         });
 
-        commands.put(Commands.MESSAGE_EVENT, (chatbot, args) -> {
+        commands.put(Messages.MESSAGE_EVENT, (chatbot, args) -> {
             String[] inputs = args.split("(/from | /to)", 3);
 
-            if(inputs.length != 3)
-                return false;
+            if(inputs.length != 3){
+                System.out.println("Error: Invalid number of args. Pls add a /from and /to in your command," +
+                        " or ensure task name is not not empty");
+                return true;
+            } else if (inputs[0].trim() == "" || inputs[1].trim() == "" || inputs[2].trim() == "") {
+                System.out.println("Description cannot be empty.");
+                return true;
+            }
 
-            Events toAdd = new Events(inputs[0], inputs[1], inputs[2]);
+
+            Events toAdd = new Events(inputs[0].trim(), inputs[1].trim(), inputs[2].trim());
             chatbot.addTask(toAdd);
             return true;
         });
+
+
 
     }
 
@@ -116,18 +141,19 @@ public class Chatbot {
 
         }
     }
-    public void processInput(String nextLine) {
+    public void processInput(String nextLine){
         //Assuming commands start with a space.
         String[] userCommand = nextLine.split(" ", 2);
         if (commands.containsKey(userCommand[0])) {
             boolean processedCommandState = commands.get(userCommand[0]).test(this, userCommand.length > 1 ? userCommand[1] : "");
             if (!processedCommandState) {
-                isChatbotActive = false;
-                //Error
+                //isChatbotActive = false;
+                throw new RuntimeException();
             }
         } else {
             //Command not found.
-            System.out.println(nextLine);
+
+            System.out.println("☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
         }
 
     }
@@ -135,24 +161,44 @@ public class Chatbot {
     public void addTask(Task toAdd){
         System.out.println("Got it. I've added this task:");
         tasks.add(toAdd);
-        System.out.println("\t" + toAdd);
+        onEditTask(toAdd);
+    }
+
+    public void onEditTask(Task change){
+        System.out.println("\t" + change);
         System.out.println("Now you have " + tasks.size() + " tasks in the list");
     }
+
+    public void removeTask(int toRemove){
+        if(tasks.size() < toRemove){
+            System.out.println("Error: Index specified must be smaller than current list size.");
+            return;
+        }
+        System.out.println("Got it. I've removed this task:");
+        Task removedTask = tasks.get(toRemove);
+        tasks.remove(toRemove);
+        onEditTask(removedTask);
+
+    }
     public boolean getTaskState(int index){
-        if(tasks.size() < index)
+        if(tasks.size() < index){
+            System.out.println("Error: Index specified must be smaller than current list size.");
             return false;
+        }
+
         return tasks.get(index).getCompletionStatus();
     }
 
     public String getTask(int index){
         return tasks.get(index).toString();
     }
-    public boolean toggleTaskIndex(int index){
-        if(tasks.size() < index)
-            return false;
-
+    public void toggleTaskIndex(int index){
+        if(tasks.size() < index){
+            System.out.println("Error: Index specified must be smaller than current list size.");
+            return;
+        }
         tasks.get(index).toggleState();
-        return true;
+
     }
 
 }

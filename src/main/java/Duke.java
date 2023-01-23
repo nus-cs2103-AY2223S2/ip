@@ -11,7 +11,7 @@ public class Duke {
                 + "| |_| | |_| |   <  __/\n"
                 + "|____/ \\__,_|_|\\_\\___|\n";
 
-        String MESSAGE_START = "Hello! I'm Duke\n What can I do for you?";
+        String MESSAGE_START = "Hello! I'm Duke\nWhat can I do for you?";
 
         System.out.println("Hello from\n" + logo);
         System.out.println(MESSAGE_START);

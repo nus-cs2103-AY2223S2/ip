@@ -1,0 +1,32 @@
+hello
+how are you
+ping
+pong
+list
+deadline greet the world /by today
+event a /from the end of time /to start of the universe
+todo munch on my mochi
+list
+deadline f f 
+deadline /by
+deadline dead /by
+deadline die /by never
+event die
+event die /from/to
+event die /from now /to 
+/event  /from now /to never
+event /from now /to never
+event not die /from now /to never
+list
+mark 1
+mark 2
+mark 1
+mark 3
+unmark 1
+unmark 2
+unmark 4
+remove 1
+delete 1
+list
+mark 4
+delete 4

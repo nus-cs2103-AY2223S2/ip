@@ -1,4 +1,4 @@
-public class Commands {
+public class Messages {
 
     final static String MESSAGE_END= "Goodbye";
     final static String MESSAGE_TERMINATE = "bye";
@@ -12,6 +12,8 @@ public class Commands {
     final static String MESSAGE_DEADLINE = "deadline";
 
     final static String MESSAGE_EVENT = "event";
+
+    final static String MESSAGE_DELETE = "delete";
 
 
 }

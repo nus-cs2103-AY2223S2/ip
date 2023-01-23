@@ -6,4 +6,68 @@ Hello from
 |____/ \__,_|_|\_\___|
 
 Hello! I'm Duke
- What can I do for you?
+What can I do for you?
+? OOPS!!! I'm sorry, but I don't know what that means :-(
+? OOPS!!! I'm sorry, but I don't know what that means :-(
+? OOPS!!! I'm sorry, but I don't know what that means :-(
+? OOPS!!! I'm sorry, but I don't know what that means :-(
+Here are the tasks in your list:
+Got it. I've added this task:
+	[D][ ] greet the world(by: today)
+Now you have 1 tasks in the list
+Got it. I've added this task:
+	[E][ ] a(from: the end of time to: start of the universe)
+Now you have 2 tasks in the list
+Got it. I've added this task:
+	[T][ ] munch on my mochi
+Now you have 3 tasks in the list
+Here are the tasks in your list:
+1.[D][ ] greet the world(by: today)
+2.[E][ ] a(from: the end of time to: start of the universe)
+3.[T][ ] munch on my mochi
+Error: Invalid number of args. Pls add a /by in your command, or ensure task name is not not empty
+Description cannot be empty.
+Description cannot be empty.
+Got it. I've added this task:
+	[D][ ] die(by: never)
+Now you have 4 tasks in the list
+Error: Invalid number of args. Pls add a /from and /to in your command, or ensure task name is not not empty
+Error: Invalid number of args. Pls add a /from and /to in your command, or ensure task name is not not empty
+Description cannot be empty.
+? OOPS!!! I'm sorry, but I don't know what that means :-(
+Description cannot be empty.
+Got it. I've added this task:
+	[E][ ] not die(from: now to: never)
+Now you have 5 tasks in the list
+Here are the tasks in your list:
+1.[D][ ] greet the world(by: today)
+2.[E][ ] a(from: the end of time to: start of the universe)
+3.[T][ ] munch on my mochi
+4.[D][ ] die(by: never)
+5.[E][ ] not die(from: now to: never)
+Nice! I've marked this task as done:
+	[D][X] greet the world(by: today)
+Nice! I've marked this task as done:
+	[E][X] a(from: the end of time to: start of the universe)
+Task is already marked as done.
+Nice! I've marked this task as done:
+	[T][X] munch on my mochi
+Nice! I've marked this task as undone:
+	[D][ ] greet the world(by: today)
+Nice! I've marked this task as undone:
+	[E][ ] a(from: the end of time to: start of the universe)
+Task is already unmarked.
+? OOPS!!! I'm sorry, but I don't know what that means :-(
+Got it. I've removed this task:
+	[D][ ] greet the world(by: today)
+Now you have 4 tasks in the list
+Here are the tasks in your list:
+1.[E][ ] a(from: the end of time to: start of the universe)
+2.[T][X] munch on my mochi
+3.[D][ ] die(by: never)
+4.[E][ ] not die(from: now to: never)
+Nice! I've marked this task as done:
+	[E][X] not die(from: now to: never)
+Got it. I've removed this task:
+	[E][X] not die(from: now to: never)
+Now you have 3 tasks in the list
