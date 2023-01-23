@@ -7,4 +7,8 @@ public class ToDo extends Task {
         abbreviation = 'T';
     }
 
+    public String getBreakdown() {
+        return "todo " + task;
+    }
+
 }

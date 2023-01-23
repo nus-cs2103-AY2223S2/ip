@@ -16,4 +16,8 @@ public class Event extends Task {
     public String toString() {
         return super.toString() + " (from: " + from + " to: " + to + ")";
     }
+
+    public String getBreakdown() {
+        return "event " + task + " /from " + from + " /to " + to;
+    }
 }
