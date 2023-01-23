@@ -3,4 +3,10 @@ todo read
 deadline proj /by today
 event CNY /from sun /to tues
 list
+mark 1
+mark 2
+list
+unmark 0
+1
+list
 bye

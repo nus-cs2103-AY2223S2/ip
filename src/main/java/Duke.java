@@ -43,7 +43,7 @@ public class Duke {
             Task curr = al.get(cint);
             curr.mark();
             System.out.println(divider + "Congrats this has been done:\n"
-                    + curr + "\nOne down, Leskooo!\n" + divider);
+                    + curr + "One down, Leskooo!\n" + divider);
         } catch (Exception m){
             System.out.println("Number entered out of range, type the number again");
             String s = br.readLine();
@@ -57,7 +57,7 @@ public class Duke {
             Task curr = al.get(cint);
             curr.unmark();
             System.out.println(divider + "Alright, new task:\n" + curr
-                    + "\nWe can do dis!\n" + divider);
+                    + "We can do dis!\n" + divider);
         } catch (Exception m) {
             System.out.println("Number entered out of range, type the number again");
             String s = br.readLine();
@@ -136,6 +136,7 @@ public class Duke {
             }
         }
         e = sb.toString();
+        sb.setLength(0);
         return new Deadline(n, e);
     }
 
