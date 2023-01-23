@@ -13,6 +13,7 @@ public enum Command {
     DEADLINE_BAD("deadline", false),
     EVENT       ("event ", true),
     EVENT_BAD   ("event", false),
+    //SORT      ("sort", false),
     //
     NOMATCH     ("", false);
     

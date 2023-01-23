@@ -1,3 +1,4 @@
+import java.lang.StringBuilder;
 import java.util.ArrayList;
 
 public class TaskList {
@@ -8,6 +9,10 @@ public class TaskList {
     
     TaskList() {
         this.tdl = new ArrayList<Task>();
+    }
+    
+    TaskList(ArrayList<Task> tdl) {
+        this.tdl = tdl;
     }
     
     int getCount() {
@@ -80,5 +85,20 @@ public class TaskList {
         
         return "Got it! Deleted:\n" + GAP
                 + tdl.remove(num - 1).toString();
+    }
+    
+    String makeFileFriendly() {
+        StringBuilder sb = new StringBuilder();
+        
+        for (Task t : this.tdl) {
+            sb.append(t.makeFileFriendly());
+            sb.append("\n");
+        }
+        
+        if (!tdl.isEmpty()) {
+            sb.deleteCharAt(sb.length() - 1);
+        }
+        
+        return sb.toString();
     }
 }
