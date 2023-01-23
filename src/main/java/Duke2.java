@@ -16,6 +16,7 @@ public class Duke2 {
       } else {
         System.out.print("[X] ");
       }
+      System.out.print(curTask.string);
       curTask.printTime();
     }
     System.out.println("---------------------------");
@@ -120,7 +121,28 @@ public class Duke2 {
     throw new DontKnow();
   }
 
-  public static void main(String[] args) throws IOException, EmptyDescription {
+  public static void throwNoSuchTask(int i) throws NoSuchTask{
+    throw new NoSuchTask(i);
+  }
+
+  public static void deleteTask(Task1 task, ArrayList<Task1> tasks) {
+    System.out.println("---------------------------");
+    System.out.println("Noted. I've removed this task:");
+    System.out.print(" ");
+    task.printType();
+    if(task.mark){
+      System.out.print("[X]");
+    } else {
+      System.out.print("[ ] ");
+    }
+    System.out.print(task.string);
+    task.printTime();
+    tasks.remove(task);
+    System.out.println("Now you have " + tasks.size() + " tasks in the list.");
+    System.out.println("---------------------------");
+  }
+
+  public static void main(String[] args) throws IOException, NoSuchTask {
     String logo = " ____        _        \n"
         + "|  _ \\ _   _| | _____ \n"
         + "| | | | | | | |/ / _ \\\n"
@@ -139,12 +161,30 @@ public class Duke2 {
         listTask(tasks);
       } else if (strArr[0].equals("mark")) {
         int curIndex = Integer.parseInt(strArr[1]) - 1;
-        Task1 curTask = tasks.get(curIndex);
-        markTask(curTask, true);
+        if(curIndex > tasks.size()) {
+          try{
+            throwNoSuchTask(curIndex);
+          } catch (NoSuchTask nt) {
+            System.out.println(nt.noSuchTask);
+            System.out.println("---------------------------");
+          }
+        } else {
+          Task1 curTask = tasks.get(curIndex);
+          markTask(curTask, true);
+        }
       } else if (strArr[0].equals("unmark")) {
         int curIndex = Integer.parseInt(strArr[1]) - 1;
-        Task1 curTask = tasks.get(curIndex);
-        markTask(curTask, false);
+        if(curIndex > tasks.size()) {
+          try{
+            throwNoSuchTask(curIndex);
+          } catch (NoSuchTask nt) {
+            System.out.println(nt.noSuchTask);
+            System.out.println("---------------------------");
+          }
+        } else {
+          Task1 curTask = tasks.get(curIndex);
+          markTask(curTask, false);
+        }
       } else if (strArr[0].equals("todo")) {
         try {
           addTodo(strArr, tasks);
@@ -171,6 +211,19 @@ public class Duke2 {
         } catch (EmptyTime e) {
           System.out.println(e.emptyTime);
           System.out.println("---------------------------");
+        }
+      } else if(strArr[0].equals("delete")) {
+        int curIndex = Integer.parseInt(strArr[1]) - 1;
+        if(curIndex > tasks.size()) {
+          try{
+            throwNoSuchTask(curIndex);
+          } catch (NoSuchTask nt) {
+            System.out.println(nt.noSuchTask);
+            System.out.println("---------------------------");
+          }
+        } else {
+          Task1 curTask = tasks.get(curIndex);
+          deleteTask(curTask, tasks);
         }
       } else {
         try {
