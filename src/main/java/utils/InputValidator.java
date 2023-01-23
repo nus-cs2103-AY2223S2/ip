@@ -71,7 +71,7 @@ public class InputValidator {
         }
 
         String[] res = new String[3];
-        res[0] = input.substring(0, 9);
+        res[0] = input.substring(0, 8);
         res[2] = extractDeadline(input);
         res[1] = input.substring(9, input.indexOf("/by ") - 1);
         return res;
