@@ -13,6 +13,7 @@ public class Duke {
     private static final String SAVE_PATH = "data/duke.txt";
     private static TaskList taskList = new TaskList();
     private static Parser parser = new Parser();
+    private static Storage storage = new Storage(SAVE_PATH);
     private static Ui ui = new Ui();
 
     private static boolean isExitCommand(String input) {
@@ -45,7 +46,7 @@ public class Duke {
             } else {
                 executeCommandWithNoArgument(commandType);
             }
-            save();
+            storage.save(taskList);
         } catch (DukeException e) {
             ui.printMessage(e.toString());
         }
@@ -164,60 +165,10 @@ public class Duke {
         }
     }
 
-    private static void save() throws DukeException {
-        File file = new File(SAVE_PATH);
-        try {
-            Files.createDirectories(Paths.get(SAVE_PATH).getParent());
-            file.createNewFile();
-            FileWriter writer = new FileWriter(file);
-            writer.write(taskList.toSaveString());
-            writer.close();
-        } catch (IOException e) {
-            throw new CannotWriteFileDukeException();
-        }
-    }
-
-    private static void load() throws DukeException {
-        File file = new File(SAVE_PATH);
-        if (!file.exists()) {
-            return;
-        }
-        try {
-            List<String> lst = Files.readAllLines(Paths.get(SAVE_PATH));
-            taskList = new TaskList();
-            Task task;
-            for (String line : lst) {
-                String[] parsed = line.split("\\|");
-                String taskSymbol = parsed[0];
-                boolean isTaskDone = Boolean.parseBoolean(parsed[1]);
-                String description = parsed[2];
-                switch (taskSymbol) {
-                case "T":
-                    task = new ToDoTask(description);
-                    break;
-                case "D":
-                    task = new DeadlineTask(description, parser.parseDateTime(parsed[3]));
-                    break;
-                case "E":
-                    task = new EventTask(description, parser.parseDateTime(parsed[3]), parser.parseDateTime(parsed[4]));
-                    break;
-                default:
-                    throw new CannotReadFileDukeException();
-                }
-                if (isTaskDone) {
-                    task.setDone(true);
-                }
-                taskList.add(task);
-            }
-        } catch (IOException | IndexOutOfBoundsException | CannotReadFileDukeException e) {
-            throw new CannotReadFileDukeException();
-        }
-    }
-
     // Main method
     public static void main(String[] args) {
         try {
-            load();
+            taskList = storage.load(parser);
         } catch (DukeException e) {
             ui.printMessage(e.toString());
         }
