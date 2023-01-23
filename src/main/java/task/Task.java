@@ -1,4 +1,4 @@
-/**
+package task; /**
  * The base class for all tasks
  */
 

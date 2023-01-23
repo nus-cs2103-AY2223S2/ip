@@ -1,3 +1,5 @@
+package ui;
+
 import java.util.Objects;
 import java.util.Scanner;
 
@@ -5,16 +7,16 @@ import java.util.Scanner;
  * The text UI interface that processes user input and prints outputs
  */
 public class TextUi {
-    protected final Duke duke;
+    protected final String name;
     protected final Scanner scanner;
 
-    public TextUi(Duke duke) {
-        this.duke = duke;
+    public TextUi(String name) {
+        this.name = name;
         this.scanner = new Scanner(System.in);
     }
 
     public void showWelcome() {
-        printStructuredString(String.format("Hello! I'm %s \nWhat can I do for you?", duke.getName()));
+        printStructuredString(String.format("Hello! I'm %s\nWhat can I do for you?", name));
     }
 
     public String getUserInput() {
@@ -34,7 +36,6 @@ public class TextUi {
     /**
      * Returns the end message and do final clean-up
      *
-     * @return the bye-bye message to be printed out
      */
     public void sayGoodbye() {
         printStructuredString("Bye. Hope to see you again soon!");

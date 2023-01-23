@@ -1,5 +1,7 @@
+package duke;
+
 /**
- * Exception class, thrown by Duke
+ * Exception class, thrown by duke.Duke
  */
 public class DukeException extends Exception {
     protected String errorMessage;

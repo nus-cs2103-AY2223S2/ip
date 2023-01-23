@@ -1,3 +1,5 @@
+package command;
+
 /**
  * An enum that specifies all types of commands
  */

@@ -1,8 +1,21 @@
+package duke;
+
+import command.Command;
+import storage.Storage;
+import task.Task;
+import task.TaskList;
+import task.ToDo;
+import task.Event;
+import task.Deadline;
+
+import ui.Parser;
+import ui.TextUi;
+
 import java.util.ArrayList;
 
 
 /**
- * Duke is the class that responds to user enquiry
+ * duke.Duke is the class that responds to user enquiry
  * It performs processing user-input commands, recording, as well as
  * carrying out actual operations.
  */
@@ -21,7 +34,7 @@ public class Duke {
      */
     public Duke() {
         this.myName = "Duke";
-        this.ui = new TextUi(this);
+        this.ui = new TextUi(myName);
         this.taskList = new TaskList();
         this.storage = new Storage(RECORD_DIR, RECORD_NAME);
         this.parser = new Parser();

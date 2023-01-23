@@ -1,3 +1,5 @@
+import duke.Duke;
+
 /**
  * The main class
  */

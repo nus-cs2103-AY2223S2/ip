@@ -1,3 +1,9 @@
+package ui;
+
+import command.Command;
+
+import duke.DukeException;
+
 /**
  * A string parser that processes user-input commands
  */

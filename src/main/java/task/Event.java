@@ -1,5 +1,5 @@
-/**
- * The event class that extends the Task class
+package task; /**
+ * The event class that extends the Task.Task class
  */
 
 import java.time.LocalDate;

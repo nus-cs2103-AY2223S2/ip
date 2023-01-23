@@ -1,9 +1,13 @@
+package task;
+
 /**
- * A deadline class extends from the Task.
+ * A deadline class extends from the Task.Task.
  * It has a deadline attribute on top of the task.
  */
 
 import java.time.LocalDate;
+
+import duke.DukeException;
 
 public class Deadline extends Task {
     protected String type;
