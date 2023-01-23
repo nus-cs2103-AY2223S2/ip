@@ -145,14 +145,19 @@ public class Duke {
                     lining();
                     writeOn(current);
 
+                } else if (comm.startsWith("find")) {
+                    String keyword = comm.substring(6, comm.length());
+                    Search sr = new Search(tasklist);
+                    Search.find(keyword);
+
                 } else if (!comm.equals("bye")){
                     lining();
-                    System.out.println("☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
+                    System.out.println("OOPS!!! I'm sorry, but I don't know what that means :-(");
                     lining();
                 }
             }
         } catch (IndexOutOfBoundsException e) {
-            System.out.println("☹ OOPS!!! The description of a todo cannot be empty.");
+            System.out.println("OOPS!!! The description of a todo cannot be empty.");
         }
             lining();
             System.out.println("Bye. Hope to see you again soon!");

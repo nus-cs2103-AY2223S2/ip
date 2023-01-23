@@ -19,6 +19,9 @@ public class Task {
         }
     }
 
+    public String getContent() {
+        return this.content;
+    }
     @Override
     public String toString() {
         return "";
