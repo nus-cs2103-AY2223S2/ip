@@ -30,7 +30,7 @@ public class Event extends Task {
             throw new TaskNameNotSpecified("The description of an event cannot be empty.");
         }
 
-        fromDate = commandInput.substring(indexOfFrom + 6, indexOfTo);
+        fromDate = commandInput.substring(indexOfFrom + 6, indexOfTo - 1);
         if (fromDate.equals("")) {
             throw new EventFromToNotSpecified("from/to fields cannot be empty.");
         }
