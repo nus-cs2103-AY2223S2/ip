@@ -1,4 +1,5 @@
 package seedu.duke;
+
 import java.util.ArrayList;
 
 public class TaskList {
@@ -28,7 +29,9 @@ public class TaskList {
         list.get(index).isDone = false;
         System.out.println("    -------------------------------------------");
         System.out.println("Nice! I've marked this task as not done yet:");
-        System.out.println("    " + "[" + list.get(index).getStatusIcon() + "] " + list.get(index).description);
+        System.out.println("    " +
+                "[" + list.get(index).getStatusIcon() + "] "
+                + list.get(index).description);
         System.out.println("    -------------------------------------------");
     }
 
@@ -46,7 +49,9 @@ public class TaskList {
             task += echoSplit[i] + " ";
         }
         list.add(new ToDo(task));
-        System.out.println("    -------------------------------------------\n    " + "added: " + task +"\n    -------------------------------------------");
+        System.out.println("    -------------------------------------------\n    "
+                + "added: " + task
+                +"\n    -------------------------------------------");
     }
     public void addEvent(String[] echoSplit, int print){
         String task = "";
@@ -85,7 +90,9 @@ public class TaskList {
         }
         list.add(new Event(task, from, to));
         if(print == 0)
-            System.out.println("    -------------------------------------------\n    " + "added: " + task +"\n    -------------------------------------------");
+            System.out.println("    -------------------------------------------\n    "
+                    + "added: " + task
+                    +"\n    -------------------------------------------");
     }
     public void addDeadline(String[] echoSplit, int print){
         String task = "";
@@ -110,14 +117,18 @@ public class TaskList {
                 list.add(new Deadline(task, date));
                 if(print == 0) {
                     System.out.println(echoSplit[i+1]);
-                    System.out.println("    -------------------------------------------\n    " + "added: " + task +"\n    -------------------------------------------");
+                    System.out.println("    -------------------------------------------\n    "
+                            + "added: " + task
+                            +"\n    -------------------------------------------");
                 }
 
             }
         }
     }
     public void delete(int index){
-        System.out.println("    -------------------------------------------\n    " + "removed: " + list.get(index) +"\n    -------------------------------------------");
+        System.out.println("    -------------------------------------------\n    "
+                + "removed: " + list.get(index)
+                + "\n    -------------------------------------------");
         list.remove(index);
     }
 

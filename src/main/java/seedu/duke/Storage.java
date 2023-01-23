@@ -1,8 +1,10 @@
 package seedu.duke;
+
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
+
 import java.util.ArrayList;
 
 public class Storage {
@@ -15,8 +17,7 @@ public class Storage {
 
     public ArrayList<Task> load() throws IOException {
         ArrayList<Task> list = new ArrayList<Task>();
-        try
-        {
+        try {
             fr = new FileReader(this.fileName);
             String task = "";
             int ch;
@@ -25,10 +26,10 @@ public class Storage {
             fr.close();
 
             String[] lines = task.split("\n");
-            String taskSplit[];
+            String[] taskSplit;
             for (int i = 0; i < lines.length; i++) {
                 taskSplit = lines[i].split(" ");
-                if(taskSplit[1].equals("T")){
+                if (taskSplit[1].equals("T")){
 
                     String description = "";
 
@@ -37,41 +38,36 @@ public class Storage {
                     }
                     list.add(new ToDo(description));
 
-                } else if(taskSplit[1].equals("D")){
+                } else if (taskSplit[1].equals("D")){
 
                     String deadline = "deadline";
                     for (int j = 5; j < taskSplit.length; j++) {
                         deadline += " " + taskSplit[j];
                     }
-                    String split[] = deadline.split(" ");
+                    String[] split = deadline.split(" ");
                     addDeadline(split, list, 1);
 
-                } else if(taskSplit[1].equals("E")){
+                } else if (taskSplit[1].equals("E")){
                     String event = "event";
                     for (int j = 5; j < taskSplit.length; j++) {
                         event += " " + taskSplit[j];
                     }
-                    String split[] = event.split(" ");
+                    String[] split = event.split(" ");
                     addEvent(split, list, 1);
                 }
-                if(taskSplit[3].equals("Y")) {
+                if (taskSplit[3].equals("Y")) {
                     list.get(list.size() - 1).isDone = true;
                 }
             }
 
 
-        }
-        catch (FileNotFoundException fe)
-        {
+        } catch (FileNotFoundException fe) {
             System.out.println("File not found...creating the file");
             fw = new FileWriter("duke.txt");
-        }
-        catch(ArrayIndexOutOfBoundsException a)
-        {
+        } catch(ArrayIndexOutOfBoundsException a) {
             System.out.println("array...creating the file");
             fw = new FileWriter("duke.txt");
-        }
-        finally {
+        } finally {
             System.out.println("err...creating the file");
             fw = new FileWriter("duke.txt");
         }
@@ -100,23 +96,25 @@ public class Storage {
 
         for (int i = 1; i < echoSplit.length; i++) {
 
-            if(echoSplit[i].equals("/from") || echoSplit[i].equals("from:")) {
+            if (echoSplit[i].equals("/from") || echoSplit[i].equals("from:")) {
                 fromI = i;
             }
-            if(echoSplit[i].equals("/to") || echoSplit[i].equals("to:")) {
+            if (echoSplit[i].equals("/to") || echoSplit[i].equals("to:")) {
                 toI = i;
 
                 for (int j = fromI + 1; j < toI; j++) {
-                    if(j == toI - 1)
+                    if (j == toI - 1) {
                         from += echoSplit[j];
-                    else
-                        from += echoSplit[j]+ " ";
+                    } else {
+                        from += echoSplit[j] + " ";
+                    }
                 }
                 for (int j = toI + 1; j < echoSplit.length; j++) {
-                    if(j == echoSplit.length - 1)
+                    if (j == echoSplit.length - 1) {
                         to += echoSplit[j];
-                    else
+                    } else {
                         to += echoSplit[j] + " ";
+                    }
                 }
                 for (int j = 1; j < fromI; j++) {
                     task += echoSplit[j] + " ";
@@ -127,33 +125,39 @@ public class Storage {
 
         }
         list.add(new Event(task, from, to));
-        if(print == 0)
-            System.out.println("    -------------------------------------------\n    " + "added: " + task +"\n    -------------------------------------------");
+        if (print == 0)
+            System.out.println("    -------------------------------------------\n    "
+                    + "added: " + task
+                    +"\n    -------------------------------------------");
     }
     public void addDeadline(String[] echoSplit, ArrayList<Task> list, int print){
         String task = "";
         String date = "";
 
         for (int i = 1; i < echoSplit.length; i++) {
-            if(echoSplit[i].equals("/by") || echoSplit[i].equals("by:")){
+            if (echoSplit[i].equals("/by") || echoSplit[i].equals("by:")){
 
                 for (int j = 1; j < i; j++) {
-                    if(j == i-1)
+                    if (j == i-1) {
                         task += echoSplit[j];
-                    else
+                    } else {
                         task += echoSplit[j] + " ";
+                    }
                 }
                 for (int j = i + 1; j < echoSplit.length; j++) {
-                    if(j == echoSplit.length - 1)
+                    if (j == echoSplit.length - 1) {
                         date += echoSplit[j];
-                    else
+                    } else {
                         date += echoSplit[j] + " ";
+                    }
                 }
 
                 list.add(new Deadline(task, date));
-                if(print == 0) {
+                if (print == 0) {
                     System.out.println(echoSplit[i+1]);
-                    System.out.println("    -------------------------------------------\n    " + "added: " + task +"\n    -------------------------------------------");
+                    System.out.println("    -------------------------------------------\n    "
+                            + "added: " + task
+                            +"\n    -------------------------------------------");
                 }
 
             }
