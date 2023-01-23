@@ -15,27 +15,59 @@ public class Duke {
 
         String userInput;
         boolean flag = true;
-        ArrayList<String> itemList = new ArrayList<String>();
+//        ArrayList<String> itemList = new ArrayList<String>();
+//        ArrayList<String> doneList = new ArrayList<String>();
+        ArrayList<Task> taskList = new ArrayList<Task>();
 
         while(flag) {
             userInput = keyboard.nextLine();
             if (userInput.equals("bye")) {
                 System.out.println("--------------------------------");
-                System.out.println("Bye. Hope to see you again soon!");
+                System.out.println("Bye. Have a nice Day~");
                 System.out.println("--------------------------------");
                 flag = false;
             } else if (userInput.equals("list")) {
                 System.out.println("--------------------------------");
-                for (int i = 0; i < itemList.size(); i ++) {
-                    System.out.println((i+1) + ": " + itemList.get(i));
+                System.out.println("Here are the current tasks:");
 
+                for (int i = 0; i < taskList.size(); i ++) {
+                    System.out.print((i+1) + ".");
+                    System.out.println(taskList.get(i).getStatusIcon());
                 }
                 System.out.println("--------------------------------");
 
-            } else {
+            } else if (userInput.length() >= 4 && userInput.substring(0,4).equals("mark")) {
                 System.out.println("--------------------------------");
-                itemList.add(userInput);
-                System.out.println("added: " + userInput);
+
+                int len = userInput.length();
+                int itemID = Integer.valueOf(userInput.substring(5, len)) - 1;
+                if ((itemID + 1) > taskList.size()) {
+                    System.out.println("I cannot find task " + (itemID + 1) + " as it exceeds the total tasks number");
+                } else {
+                    System.out.println("Nice! Great job for completing this task:");
+                    taskList.get(itemID).setDone();
+                    System.out.println((taskList.get(itemID).getStatusIcon()));
+                }
+                System.out.println("--------------------------------");
+
+            } else if (userInput.length() >= 6 && userInput.substring(0,6).equals("unmark")) {
+                System.out.println("--------------------------------");
+                int len = userInput.length();
+                int itemID = Integer.valueOf(userInput.substring(7, len)) - 1;
+                if ((itemID + 1) > taskList.size()) {
+                    System.out.println("I cannot find task " + (itemID + 1) + " as it exceeds the total tasks number");
+                } else {
+                    System.out.println("This item is marked as not done yet");
+                    taskList.get(itemID).setNotDone();
+                    System.out.println((taskList.get(itemID).getStatusIcon()));
+                }
+                System.out.println("--------------------------------");
+
+            }else {
+                System.out.println("--------------------------------");
+                Task t = new Task(userInput);
+                taskList.add(t);
+                System.out.println("added: " + t.description);
                 System.out.println("--------------------------------");
 
             }
