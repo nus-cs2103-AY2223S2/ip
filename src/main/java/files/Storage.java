@@ -1,9 +1,5 @@
 package files;
 
-import parsers.TaskInfoParser;
-import tasks.Task;
-import tasks.TaskList;
-
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
@@ -12,10 +8,26 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.Scanner;
 
+import parsers.TaskInfoParser;
+import tasks.Task;
+import tasks.TaskList;
+
+/**
+ * Represents an internal storage for Duke and also a medium for Duke to read, load and save tasks
+ * to and from files of a specific filepath.
+ */
 public class Storage {
 
-    final static String BANNER = "____________________________________________________________";
+    static final String BANNER = "____________________________________________________________";
 
+    /**
+     * Returns a task list after loading all the tasks from a file.
+     * Creates a path and a file if file does not exist and then return an empty task list.
+     * @param taskList the task list from it will store the tasks read from file
+     * @param filePath the path of the file from which Storage will load tasks from
+     * @return a task list containing tasks read from file
+     * @throws IOException if reading is not successful
+     */
     public static TaskList loadData(TaskList taskList, String filePath) throws IOException {
         try {
             taskList = readFromFile(filePath);
@@ -32,11 +44,17 @@ public class Storage {
         return new TaskList();
     }
 
+    /**
+     * Returns a task list from which the file's tasks will be read and stored into only if the file exists.
+     * @param path the path of the file from which Storage will retrieve data from
+     * @return a task list containing tasks which are read from file
+     * @throws FileNotFoundException if file does not exist at the specified path
+     */
     public static TaskList readFromFile(String path) throws FileNotFoundException {
         TaskList taskList = new TaskList();
         File file = new File(path);
         Scanner fileScanner = new Scanner(file);
-        while(fileScanner.hasNext()) {
+        while (fileScanner.hasNext()) {
             String line = fileScanner.nextLine();
             String[] commandArray = line.trim().split(" ");
             Task task = TaskInfoParser.parse(commandArray);
@@ -46,6 +64,11 @@ public class Storage {
         return taskList;
     }
 
+    /**
+     * Saves tasks into file located at the filepath specified.
+     * @param filepath path of the file to write tasks into
+     * @param taskList task list containing task to write to file
+     */
     public static void saveData(String filepath, TaskList taskList) {
         DukeFileWriter.writeToFile(filepath, taskList);
     }

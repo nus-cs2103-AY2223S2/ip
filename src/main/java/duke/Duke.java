@@ -3,29 +3,29 @@ package duke;
 import commands.Command;
 import exceptions.DukeException;
 import files.Storage;
+import java.io.IOException;
+import java.util.Scanner;
 import parsers.CommandParser;
 import tasks.TaskList;
 import ui.Ui;
 
-import java.io.IOException;
-import java.util.Scanner;
 
+/**
+ * The main application runner which runs the task list.
+ */
 public class Duke {
 
-    final static String LOGO = " ____        _        \n"
-                            + "|  _ \\ _   _| | _____ \n"
-                            + "| | | | | | | |/ / _ \\\n"
-                            + "| |_| | |_| |   <  __/\n"
-                            + "|____/ \\__,_|_|\\_\\___|\n";
+    private static final String BANNER = "____________________________________________________________";
 
-    final static String BANNER = "____________________________________________________________";
-
-    private final static String FILEPATH = "src/main/data/duke.txt";
+    private static final String FILEPATH = "src/main/data/duke.txt";
 
     public static void main(String[] args) {
         new Duke().run();
     }
 
+    /**
+     * Runs the entire program.
+     */
     public void run() {
         Ui ui = new Ui();
         Storage storage = new Storage();

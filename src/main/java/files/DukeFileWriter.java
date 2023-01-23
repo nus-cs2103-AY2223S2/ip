@@ -1,11 +1,11 @@
 package files;
 
-import tasks.Task;
-import tasks.TaskList;
-
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
+
+import tasks.Task;
+import tasks.TaskList;
 
 public class DukeFileWriter {
 
