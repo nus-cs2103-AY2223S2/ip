@@ -10,28 +10,28 @@ public abstract class Task {
     }
 
     public String getTaskStatus() {
-        //Done tasks are marked with X
+        // Done tasks are marked with X
         return (isDone ? "[X]" : "[ ]");
     }
 
-    //Mark current task as done
-    public boolean markAsDone() {
-        //Only mark as done if task is not done
+    // Mark current task as done
+    public void setDone() throws TaskDoneException {
+        // Only mark as done if task is not done
         if (!this.isDone) {
             this.isDone = true;
-            return true;
+        } else {
+            throw new TaskDoneException();
         }
-        return false;
     }
 
-    //Mark current task as undone
-    public boolean markAsUndone() {
+    // Mark current task as undone
+    public void setUndone() throws TaskUndoneException {
         //Only remark as not done if task is done
         if (this.isDone) {
             this.isDone = false;
-            return true;
+        } else {
+            throw new TaskUndoneException();
         }
-        return false;
     }
 
     @Override
