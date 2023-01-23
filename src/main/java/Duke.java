@@ -3,6 +3,7 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
+import java.time.format.DateTimeParseException;
 import java.util.Scanner;
 import java.util.List;
 
@@ -12,6 +13,7 @@ public class Duke {
     private static final String SAVE_PATH = "data/duke.txt";
     private static Scanner scanner = new Scanner(System.in);
     private static TaskList taskList = new TaskList();
+    private static Parser parser = new Parser();
 
     private static String formatMessage(String message) {
         String FORMAT_LINE = "___________________________";
@@ -122,10 +124,13 @@ public class Duke {
         try {
             String[] splitArgs = arguments.split(" /by ");
             Task task = new DeadlineTask(splitArgs[0], splitArgs[1]);
+            Task task = new DeadlineTask(splitArgs[0], parser.parseDateTime(splitArgs[1]));
             taskList.add(task);
             printMessage("added: " + task);
         } catch (ArrayIndexOutOfBoundsException e) {
             throw new EmptyArgumentDukeException();
+        } catch (DateTimeParseException e) {
+            throw new InvalidArgumentDukeException();
         }
     }
 
@@ -134,10 +139,13 @@ public class Duke {
             String[] splitArgs = arguments.split(" /from ");
             String[] times = splitArgs[1].split(" /to ");
             Task task = new EventTask(splitArgs[0], times[0], times[1]);
+            Task task = new EventTask(splitArgs[0], parser.parseDateTime(times[0]), parser.parseDateTime(times[1]));
             taskList.add(task);
             printMessage("added: " + task);
         } catch (ArrayIndexOutOfBoundsException e) {
             throw new EmptyArgumentDukeException();
+        } catch (DateTimeParseException e) {
+            throw new InvalidArgumentDukeException();
         }
     }
 

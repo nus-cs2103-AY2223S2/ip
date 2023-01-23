@@ -1,10 +1,13 @@
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+
 public class EventTask extends Task {
 
     private static final String EVENT_SYMBOL = "E";
-    private String startTime;
-    private String endTime;
+    private LocalDateTime startTime;
+    private LocalDateTime endTime;
 
-    public EventTask(String description, String startTime, String endTime) {
+    public EventTask(String description, LocalDateTime startTime, LocalDateTime endTime) {
         super(description, EVENT_SYMBOL);
         this.startTime = startTime;
         this.endTime = endTime;
@@ -12,7 +15,8 @@ public class EventTask extends Task {
 
     @Override
     public String toString() {
-        return super.toString() + " (from: " + startTime + " to: " + endTime + ")";
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("MMM dd yyyy HH:mm");
+        return super.toString() + " (from: " + startTime.format(formatter) + " to: " + endTime.format(formatter) + ")";
     }
 
     @Override

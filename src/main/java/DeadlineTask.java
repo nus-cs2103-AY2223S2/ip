@@ -1,16 +1,20 @@
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+
 public class DeadlineTask extends Task {
 
     private static final String EVENT_SYMBOL = "D";
-    private String endTime;
+    private LocalDateTime endTime;
 
-    public DeadlineTask(String description, String endTime) {
+    public DeadlineTask(String description, LocalDateTime endTime) {
         super(description, EVENT_SYMBOL);
         this.endTime = endTime;
     }
 
     @Override
     public String toString() {
-        return super.toString() + " (by: " + endTime + ")";
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("MMM dd yyyy HH:mm");
+        return super.toString() + " (by: " + endTime.format(formatter) + ")";
     }
 
     @Override

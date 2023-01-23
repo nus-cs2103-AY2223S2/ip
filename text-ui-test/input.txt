@@ -1,18 +1,19 @@
 list
 blah
-deadline eat some food /by tomorrow
+deadline eat some food /by 23-12-2022 11:00
 mark 1
 list
 unmark 1
 list
 mark 1
-deadline hw /by 11.00pm
+deadline hw /by 01-12-2022 19:00
 todo cca
 mark 3
 list
 unmark 3
 list
-event go toilet /from now /to 5 min after now
+event go toilet /from now /to then
+event go toilet /from 01-12-2022 19:00 /to 01-12-2022 19:05
 mark 4
 mark 0
 mark -1
@@ -37,9 +38,9 @@ event name name
 event x /from
 event x /to
 event x /from /to
-event x /from now /to
-event x /from /to later
-event x /to later /from now
+event x /from 01-12-2022 19:05 /to
+event x /from /to 01-12-2022 19:05
+event x /to 01-12-2022 19:05 /from 01-12-2022 19:05
 list
 delete -1
 delete 0
