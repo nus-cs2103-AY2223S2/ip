@@ -78,11 +78,11 @@ public class Duke {
                         }
                         String info = echo.substring(9);
                         if (!info.matches(".+ /by .+")) { // info.contains(" /by ")
-                            throw new MissingArgumentException("<deadline> is to be used as such: $ deadline <des> /by <time>", "deadline");
+                            throw new MissingArgumentException("<deadline> is to be used as such: $ deadline <des> /by <yyyy-mm-dd>", "deadline");
                         }
                         String[] sp = info.split(" /by ");
                         if (sp[1].trim().equals("")) {
-                            throw new MissingArgumentException("<deadline> is missing <time>", "deadline");
+                            throw new MissingArgumentException("<deadline> is missing <yyyy-mm-dd>", "deadline");
                         }
                         task = new Deadline(sp[0].trim(), sp[1].trim()); // remove any trailing white sp
                         break;
@@ -93,15 +93,15 @@ public class Duke {
                         }
                         String info = echo.substring(6);
                         if (!info.matches(".+ /from .+ /to .+")) { // (!info.contains(" /from ") || !info.contains(" /to "))
-                            throw new MissingArgumentException("<event> is to be used as such: $ event <des> /from <start> /to <end>", "event");
+                            throw new MissingArgumentException("<event> is to be used as such: $ event <des> /from <yyyy-mm-dd> /to <yyyy-mm-dd>", "event");
                         }
                         String[] sp = info.split(" /from ");
                         if (sp[1].trim().equals("")) {
-                            throw new MissingArgumentException("<event> is missing <start>", "event");
+                            throw new MissingArgumentException("<event> is missing start-time <yyyy-mm-dd>", "event");
                         }
                         String[] time = sp[1].split(" /to ");
                         if (time[1].trim().equals("")) {
-                            throw new MissingArgumentException("<event> is missing <end>", "event");
+                            throw new MissingArgumentException("<event> is missing end-time <yyyy-mm-dd>", "event");
                         }
                         task = new Event(sp[0].trim(), time[0].trim(), time[1].trim()); // remove any trailing white sp
                         break;
@@ -121,6 +121,8 @@ public class Duke {
             } catch (MissingArgumentException e) {
                 System.out.println(Span.format(e.toString()));
             } catch (InvalidIndexException e) {
+                System.out.println(Span.format(e.toString()));
+            } catch (InvalidDateException e) {
                 System.out.println(Span.format(e.toString()));
             }
         }

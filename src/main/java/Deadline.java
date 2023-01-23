@@ -1,13 +1,21 @@
-public class Deadline extends Task {
-    private String deadline;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
 
-    public Deadline(String des, String deadline) {
+public class Deadline extends Task {
+    private LocalDate deadline;
+
+    public Deadline(String des, String deadline) throws InvalidDateException {
         super(des);
-        this.deadline = deadline;
+        try {
+            this.deadline = LocalDate.parse(deadline);
+        } catch (DateTimeParseException e) {
+            throw new InvalidDateException();
+        }
     }
 
     @Override
     public String getStatusIcon() {
-        return String.format("[D]%s (by: %s)", super.getStatusIcon(), this.deadline);
+        return String.format("[D]%s | BY: %s", super.getStatusIcon(), this.deadline.format(DateTimeFormatter.ofPattern("MMM d yyyy")));
     }
 }
