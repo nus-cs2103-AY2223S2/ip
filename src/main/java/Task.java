@@ -18,7 +18,7 @@ public abstract class Task {
 
     public String markAsUndone() {
         this.isDone = false;
-        return "OK, I've marked this task as not done yet:" + "\n" + "[" + this.getTaskType() + "][X] "
+        return "OK, I've marked this task as not done yet:" + "\n" + "[" + this.getTaskType() + "][ ] "
                 + this.toString();
     }
 
