@@ -23,16 +23,7 @@ public class Duke {
                     break;
                 case UNMARK:
                     int listIndexUnmark = Integer.parseInt(line.split(" ")[1]) - 1;
-                    Task targetTask = taskList.get(listIndexUnmark);
-                    String output; 
-                    if (command == CommandInput.MARK){
-                        targetTask.markDone();
-                        output = "Nice! I've marked this task as done:";
-                    } else {
-                        targetTask.unmarkDone();
-                        output = "Ok, I've marked this task as not done yet:";
-                    }
-                    Ui.displayMsg(output + "\n" + Ui.indentString(targetTask.toString(), 1));
+                    new UnmarkCmd(taskList, listIndexUnmark).execute();;
                     break;
                 case DELETE:
                     Task removedTask = taskList.removeTask(line);
