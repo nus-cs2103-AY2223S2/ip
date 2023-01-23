@@ -1,4 +1,6 @@
-package task; /**
+package task;
+
+/**
  * The base class for all tasks
  */
 
@@ -9,6 +11,7 @@ import java.time.format.DateTimeFormatter;
 public class Task {
     protected String name;
     protected boolean isDone;
+    protected String type;
 
     /**
      * The default constructor
@@ -96,5 +99,13 @@ public class Task {
     @Override
     public String toString() {
         return String.format("[%s] %s", getStatusIcon(), name);
+    }
+
+    /**
+     * Return the type of the task.
+     * @return the type, which is a string
+     */
+    public String getType() {
+        return type;
     }
 }

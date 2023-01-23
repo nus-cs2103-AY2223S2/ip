@@ -10,7 +10,6 @@ import java.time.LocalDate;
 import duke.DukeException;
 
 public class Deadline extends Task {
-    protected String type;
     protected LocalDate time;
 
     /***

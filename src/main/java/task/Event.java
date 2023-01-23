@@ -5,7 +5,6 @@ package task; /**
 import java.time.LocalDate;
 
 public class Event extends Task {
-    protected String type;
     protected LocalDate startTime;
     protected LocalDate endTime;
 

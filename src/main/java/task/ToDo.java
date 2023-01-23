@@ -4,8 +4,6 @@ package task;
  * The to-do class extending from the Task.Task class
  */
 public class ToDo extends Task {
-    protected String type;
-
     /**
      * Default constructor
      *
