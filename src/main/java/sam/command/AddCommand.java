@@ -5,15 +5,11 @@ import java.util.Map;
 import sam.Ui;
 import sam.parser.Parser;
 import sam.parser.SamInvalidDateException;
-import sam.parser.SamInvalidIntException;
-import sam.parser.SamInvalidTaskException;
-import sam.parser.SamUnknownCommandException;
 import sam.storage.SamSaveFailedException;
 import sam.storage.Storage;
 import sam.task.Deadline;
 import sam.task.Event;
 import sam.task.SamMissingTaskArgException;
-import sam.task.SamMissingTaskException;
 import sam.task.SamMissingTaskTitleException;
 import sam.task.SamMissingTaskValueException;
 import sam.task.Task;
@@ -30,10 +26,9 @@ public class AddCommand extends Command {
   }
 
   @Override
-  public void execute(TaskList tasks, Ui ui, Storage storage) 
-      throws SamUnknownCommandException, SamMissingTaskException, SamInvalidTaskException, SamInvalidIntException,
-          SamMissingTaskTitleException, SamMissingTaskValueException, SamMissingTaskArgException,
-          SamSaveFailedException, SamInvalidDateException {    
+  public void execute(TaskList tasks, Ui ui, Storage storage)
+      throws SamMissingTaskTitleException, SamMissingTaskValueException,
+          SamMissingTaskArgException, SamInvalidDateException, SamSaveFailedException {    
     Map<String, String> taskArgs = Parser.parseTaskArgs(args);
     String title = taskArgs.get("title");
     Task task = null;
