@@ -108,7 +108,7 @@ public class InputValidator {
         }
 
         String[] res = new String[4];
-        res[0] = input.substring(0, 6);
+        res[0] = input.substring(0, 5);
 
         res[1] = input.substring(6, input.indexOf(firstKeyword + " ") - 1);
         res[2] = extractStartDateTime(input);
