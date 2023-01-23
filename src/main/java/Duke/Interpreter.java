@@ -185,6 +185,14 @@ public class Interpreter {
         return null; // to be modified
     }
 
+    public static Find find(String command, TaskTable table) throws MissingDescriptionException {
+        if (command.split(" ").length == 1) {
+            throw new MissingDescriptionException("find method");
+        } else {
+            return new Find(command.substring(5), table);
+        }
+    }
+
     /**
      * The method find finds the keyword in all the Tasks
      * @param command the find command
