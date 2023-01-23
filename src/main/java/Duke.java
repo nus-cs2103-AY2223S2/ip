@@ -1,4 +1,6 @@
 import java.util.Scanner;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 public class Duke {
 
     public static void main(String[] args) {
@@ -78,11 +80,11 @@ public class Duke {
                         }
                         String info = echo.substring(9);
                         if (!info.matches(".+ /by .+")) { // info.contains(" /by ")
-                            throw new MissingArgumentException("<deadline> is to be used as such: $ deadline <des> /by <yyyy-mm-dd>", "deadline");
+                            throw new MissingArgumentException("<deadline> is to be used as such: $ deadline <des> /by <YYYY-MM-DD>", "deadline");
                         }
                         String[] sp = info.split(" /by ");
                         if (sp[1].trim().equals("")) {
-                            throw new MissingArgumentException("<deadline> is missing <yyyy-mm-dd>", "deadline");
+                            throw new MissingArgumentException("<deadline> is missing <YYYY-MM-DD>", "deadline");
                         }
                         task = new Deadline(sp[0].trim(), sp[1].trim()); // remove any trailing white sp
                         break;
@@ -93,18 +95,29 @@ public class Duke {
                         }
                         String info = echo.substring(6);
                         if (!info.matches(".+ /from .+ /to .+")) { // (!info.contains(" /from ") || !info.contains(" /to "))
-                            throw new MissingArgumentException("<event> is to be used as such: $ event <des> /from <yyyy-mm-dd> /to <yyyy-mm-dd>", "event");
+                            throw new MissingArgumentException("<event> is to be used as such: $ event <des> /from <YYYY-MM-DD> /to <YYYY-MM-DD>", "event");
                         }
                         String[] sp = info.split(" /from ");
                         if (sp[1].trim().equals("")) {
-                            throw new MissingArgumentException("<event> is missing start-time <yyyy-mm-dd>", "event");
+                            throw new MissingArgumentException("<event> is missing start-time <YYYY-MM-DD>", "event");
                         }
                         String[] time = sp[1].split(" /to ");
                         if (time[1].trim().equals("")) {
-                            throw new MissingArgumentException("<event> is missing end-time <yyyy-mm-dd>", "event");
+                            throw new MissingArgumentException("<event> is missing end-time <YYYY-MM-DD>", "event");
                         }
                         task = new Event(sp[0].trim(), time[0].trim(), time[1].trim()); // remove any trailing white sp
                         break;
+                    }
+                    case GETEVENTSON: {
+                        if (echo.length() < 12) {
+                            throw new MissingArgumentException("Date input in the format of YYYY-MM-DD required!", "geteventson");
+                        }
+                        LocalDate date = LocalDate.parse(echo.substring(11).trim());
+                        System.out.println(
+                                Span.format("Here are the deadlines/events on "
+                                        + date.format(DateTimeFormatter.ofPattern("MMM d yyyy"))
+                                        + ":\n"
+                                        + tasks.listAllOnDate(date)));
                     }
                 }
                 if (task != null) {

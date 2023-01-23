@@ -18,4 +18,9 @@ public class Deadline extends Task {
     public String getStatusIcon() {
         return String.format("[D]%s | BY: %s", super.getStatusIcon(), this.deadline.format(DateTimeFormatter.ofPattern("MMM d yyyy")));
     }
+
+    @Override
+    public boolean fallsOnDate(LocalDate date) {
+        return this.deadline.equals(date);
+    }
 }

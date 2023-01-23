@@ -1,4 +1,5 @@
 import java.util.*;
+import java.time.LocalDate;
 
 public class TaskList {
     private List<Task> tasks;
@@ -38,6 +39,19 @@ public class TaskList {
             display.append((i+1) + ". " + curr.getStatusIcon());
             if (i < this.tasks.size()-1) {
                 display.append("\n");
+            }
+        }
+        return display.toString();
+    }
+
+    public String listAllOnDate(LocalDate date) {
+        StringBuilder display = new StringBuilder();
+        int count = 1;
+        for (int i = 0; i < this.tasks.size(); i++) {
+            Task curr = this.tasks.get(i);
+            if (curr.fallsOnDate(date)) {
+                display.append((count) + ". " + curr.getStatusIcon() + "\n");
+                count++;
             }
         }
         return display.toString();

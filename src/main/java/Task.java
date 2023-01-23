@@ -24,4 +24,8 @@ public class Task {
     public String getDescription() {
         return this.description;
     }
+
+    public boolean fallsOnDate(LocalDate date) {
+        return false;
+    }
 }
