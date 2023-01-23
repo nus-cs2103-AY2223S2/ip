@@ -3,12 +3,27 @@
 public class Task {
     protected String description;
     protected boolean isDone;
-    protected String typeofTask;
+    protected String typeofTask = "";
+    protected String donestr;
 
-    public Task(String description, String typeofTask) {
+    public Task(String description, String typeofTask, String donestr) {
+        this.description = description;
+        this.donestr = donestr;
+        checkisdonestr();
+        this.typeofTask = typeofTask;
+
+    }
+
+    public Task(String description) {
         this.description = description;
         this.isDone = false;
-        this.typeofTask = "";
+    }
+
+    public void checkisdonestr() {
+        if (this.donestr.equals("X")) {
+            this.isDone = true;
+        }
+        else this.isDone = false;
     }
 
     public String getStatusIcon() {
@@ -26,6 +41,8 @@ public class Task {
     }
 
     public String toString() {
-        return "[" + this.getStatusIcon() + "]" + " " + this.description;
+        if (typeofTask == "")
+            return "[" + this.getStatusIcon() + "]" + " " + this.description;
+        else { return "[" + typeofTask + "]" + "[" + this.getStatusIcon() + "]" + " " + this.description; }
     }
 }

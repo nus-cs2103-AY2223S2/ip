@@ -19,7 +19,6 @@ public class Duke {
             String type = checker[0].toLowerCase().trim();
 
             try {
-                System.out.println(type);
                 Commands command = Commands.valueOf(type);
                 switch (command) {
                     case bye:
