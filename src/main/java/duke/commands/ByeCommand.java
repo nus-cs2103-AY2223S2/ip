@@ -11,9 +11,10 @@ public class ByeCommand extends Command {
         this.input = input;
     }
 
-    public void execute(TaskList tasks, Ui ui, Storage storage) {
+    public boolean execute(TaskList tasks, Ui ui, Storage storage) {
         storage.saveTaskList(tasks);
         System.out.println("    " + "Bye. Hope to see you again soon!");
+        return true;
     }
 
     @Override

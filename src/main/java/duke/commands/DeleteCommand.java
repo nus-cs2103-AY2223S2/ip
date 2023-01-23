@@ -12,7 +12,7 @@ public class DeleteCommand extends Command {
     public DeleteCommand(String input) {
         this.input = input;
     }
-    public void execute(TaskList tasks, Ui ui, Storage storage) {
+    public boolean execute(TaskList tasks, Ui ui, Storage storage) {
         try {
             if (input.length() <= 7) {
                 throw new DukeException("    OOPS!!! Delete must be followed by an int.");
@@ -24,10 +24,13 @@ public class DeleteCommand extends Command {
             System.out.println("    Noted. I've removed this task:");
             System.out.println("      " + task);
             System.out.println("    Now you have " + tasks.size() + " tasks in the list.");
+            return true;
         } catch (DukeException de) {
             System.out.println(de.getMessage());
+            return false;
         } catch (IndexOutOfBoundsException e) {
             System.out.println("    OOPS!!! Insufficient items in the list to be deleted.");
+            return false;
         }
     }
 }

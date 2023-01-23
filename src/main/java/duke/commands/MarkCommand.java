@@ -13,7 +13,7 @@ public class MarkCommand extends Command {
         this.input = input;
     }
 
-    public void execute(TaskList tasks, Ui ui, Storage storage) {
+    public boolean execute(TaskList tasks, Ui ui, Storage storage) {
         try {
             if (input.length() <= 5) {
                 throw new DukeException("    OOPS!!! You are missing the number of the task to be marked.");
@@ -24,12 +24,16 @@ public class MarkCommand extends Command {
             storage.saveTaskList(tasks);
             System.out.println("    Nice! I've marked this task as done:");
             System.out.println("      " + task);
+            return true;
         } catch (DukeException de) {
             System.out.println(de.getMessage());
+            return false;
         } catch (NumberFormatException nfe) {
             System.out.println("    OOPS!!! Mark has to be followed by an int.");
+            return false;
         } catch (IndexOutOfBoundsException i) {
             System.out.println("    OOPS!!! There are insufficient tasks.");
+            return false;
         }
     }
 }
