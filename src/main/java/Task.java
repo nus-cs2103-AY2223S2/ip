@@ -1,20 +1,20 @@
 public class Task {
     private String name;
-    private boolean completed;
+    private boolean isCompleted;
 
     public Task(String name) {
         this.name = name;
-        this.completed = false;
+        this.isCompleted = false;
     }
 
     public void makeCompleted() {
-        this.completed = true;
+        this.isCompleted = true;
     }
 
     @Override
     public String toString() {
         String completedString = "";
-        if (this.completed) {
+        if (this.isCompleted) {
             completedString += "[X] ";
         } else {
             completedString += "[ ] ";
@@ -25,7 +25,7 @@ public class Task {
     }
     public String parse() {
         String completedString = "";
-        if (this.completed) {
+        if (this.isCompleted) {
             completedString += "[X] ";
         } else {
             completedString += "[ ] ";
