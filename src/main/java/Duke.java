@@ -1,11 +1,17 @@
 import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
 import java.util.Scanner;
 import java.util.ArrayList;
 public class Duke {
     public static void main(String[] args) throws DukeException {
         // store: storing text entered by user
-        TaskList store = new TaskList(new ArrayList<>());
+        TaskList store;
+        Storage hardDrive = new Storage("data/file.txt");
+        // create store and load initial data
+        try {
+            store = new TaskList(hardDrive.loadData());
+        } catch (DukeException e) {
+            store = new TaskList(new ArrayList<>());
+        }
 
         // greetings
         System.out.println("Hello I'm Duke\n" + "What can I do for you?");
@@ -68,6 +74,8 @@ public class Duke {
             userInput = myObj.nextLine();
         }
         // prints exit statement
+        // saves task list data
+        hardDrive.saveData(store);
         System.out.println("Bye. Hope to see you again soon!");
     }
 }

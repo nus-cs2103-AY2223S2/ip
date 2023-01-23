@@ -11,6 +11,16 @@ public class Deadline extends Task {
     }
 
     @Override
+    public String getStorageDetails() {
+        return this.description + " | " + this.by;
+    }
+
+    @Override
+    public String eventType() {
+        return "D";
+    }
+
+    @Override
     public String toString() {
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd MMMM yyyy");
         return "[D]" + super.toString() + " (by: " + this.date.format(formatter) + ")";

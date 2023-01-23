@@ -13,6 +13,16 @@ public class Event extends Task {
     }
 
     @Override
+    public String getStorageDetails() {
+        return this.description + " | " + this.from + " - " + this.to;
+    }
+
+    @Override
+    public String eventType() {
+        return "E";
+    }
+
+    @Override
     public String toString() {
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd MMMM yyyy");
         return "[E]" + super.toString() + " (from: " + this.startDate.format(formatter) + " to: " + this.endDate.format(formatter) + ")";
