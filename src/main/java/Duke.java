@@ -66,6 +66,7 @@ public class Duke {
             addTask(newTask);
         }
     }
+
     private static String reply(String command) {
         return DIVIDER_LINE + command + DIVIDER_LINE;
     }
