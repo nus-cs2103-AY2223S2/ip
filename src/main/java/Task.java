@@ -1,3 +1,5 @@
+import java.time.LocalDate;
+
 public abstract class Task {
     private String description;
     private boolean isDone;
@@ -25,5 +27,9 @@ public abstract class Task {
 
     public String encode() {
         return String.format("%s ### %s", this.isDone, this.description);
+    }
+
+    public boolean fallsOnDate(LocalDate date) {
+        return false;
     }
 }

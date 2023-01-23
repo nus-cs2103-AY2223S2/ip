@@ -50,6 +50,8 @@ public class FileManagement {
             }
         } catch (IOException e) {
             System.out.println(e);
+        } catch (InvalidDateException e) {
+            System.out.println(e);
         } finally {
             scanner.close();
         }
@@ -57,7 +59,7 @@ public class FileManagement {
     }
 
 
-    private Task decodeTask(String task) {
+    private Task decodeTask(String task) throws InvalidDateException {
         String[] components = task.split(" ### ");
         String command = components[0];
         String toMark = components[1];

@@ -6,7 +6,8 @@ public enum Command {
     TODO("todo"),
     DEADLINE("deadline"),
     EVENT("event"),
-    DELETE("delete"),;
+    DELETE("delete"),
+    GETEVENTSON("geteventson");
 
     private String name;
 

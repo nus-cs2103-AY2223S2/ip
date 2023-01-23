@@ -1,4 +1,5 @@
 todo ### false ### cs3230 hw
-deadline ### true ### dashboard ### tmr
-event ### false ### climbing camp ### friday 2pm ### sunday 3pm
-todo ### false ### kms
+deadline ### false ### dashboard ### 2023-01-25
+event ### false ### climbing camp ### 2023-01-26 ### 2023-01-28
+todo ### true ### cs2103 Level-10
+deadline ### false ### passport renewal ### 2023-01-27
