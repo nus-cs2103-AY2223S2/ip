@@ -1,5 +1,10 @@
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.util.Optional;
+
 public class Deadline extends Task {
     String dueDate;
+    Optional<LocalDate> chornoDueDate;
 
     // Factory method
     public static Deadline create(String commandInput) throws TaskNameNotSpecified, DeadlineByNotSpecified {
@@ -38,10 +43,14 @@ public class Deadline extends Task {
     public Deadline(String taskName, String dueDate) {
         super(taskName, "D");
         this.dueDate = dueDate;
+        this.chornoDueDate = Parser.parseDate(dueDate); 
     }
 
     @Override
     public String stringFields() {
-        return " (by: " + dueDate + ")"; 
+        String dateString = this.chornoDueDate.isEmpty() ? dueDate : 
+        chornoDueDate.get().format(DateTimeFormatter.ofPattern("MMM d yyyy"));
+        
+        return " (by: " + dateString + ")"; 
     }
 }
