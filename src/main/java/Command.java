@@ -4,7 +4,7 @@ public abstract class Command {
 
     Command() {
     }
-    public abstract void execute(TaskList tl, Ui ui, Storage storage);
+    public abstract void execute(TaskList tl, Ui ui, Storage storage) throws Exception;
 
     public boolean isExit() {
         return this.isExit;

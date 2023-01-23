@@ -26,73 +26,71 @@ public class TaskList {
         return this.tasks.get(i);
     }
 
-    private String addTask(Tasks t, Map<String,String> args) throws Exception {
-        Task item;
-        String desc;
-        try {
-            switch (t) {
-                case TODO:
-                    desc = args.get("todo");
-                    if (Objects.isNull(desc)|| desc.equals("") ) {
-                        throw new InvalidInputException("eh ur description is blank");
-                    }
-                    item = new ToDo(desc);
-                    break;
-                case DEADLINE:
-                    desc = args.get("deadline");
-                    if (Objects.isNull(desc) || desc.equals("")) {
-                        throw new InvalidInputException("eh ur description is blank");
-                    }
-                    String by = args.get("by");
-                    if ( Objects.isNull(by) || by.equals("")) {
-                        throw new InvalidInputException("eh need to specify ur deadline by when - deadline <desc> /by <when>");
-                    }
-
-                    item = new Deadline(desc, by);
-                    break;
-                case EVENT:
-                    desc = args.get("event");
-                    if ( Objects.isNull(desc) || desc.equals("")) {
-                        throw new InvalidInputException("eh ur description is blank");
-                    }
-
-                    String from = args.get("from");
-                    String to = args.get("to");
-                    if (Objects.isNull(from) ||  Objects.isNull(to) || from.equals("") || to.equals("")) {
-                        throw new InvalidInputException("eh need to specify ur event from when to when - event <desc> /from <when> /to <when>");
-                    }
-
-                    item = new Event(desc, from, to);
-                    break;
-                default:
-                    throw new Exception("Invalid task type");
-            }
-        } catch (InvalidInputException e) {
-            return e.getMessage();
-        }
-        this.tasks.add(item);
-        return ("Item added!\n" + item +"\nYou now have " + this.tasks.size() +" task(s).");
+    public int size() {
+        return this.tasks.size();
     }
 
-    public String deleteTask(String index) {
-        //removes a task at given index
-        int i;
-        try {
-            i = Integer.valueOf(index) - 1;
-        } catch (NumberFormatException e) {
-            return "Please specify the task by its index number.";
+    public Task addTask(String inputTaskType, Map<String,String> args) throws CommandNotFoundException, InvalidInputException {
+        Tasks taskType = this.inputToTask.get(inputTaskType);
+        if (taskType == null) {
+            throw new InvalidInputException("Please specify what type of task you want to add!");
         }
+        Task newTask;
+        String desc;
+        switch (taskType) {
+            case TODO:
+                desc = args.get("todo");
+                if (Objects.isNull(desc) || desc.equals("")) {
+                    throw new InvalidInputException("eh ur description is blank");
+                }
+                newTask = new ToDo(desc);
+                break;
+            case DEADLINE:
+                desc = args.get("deadline");
+                if (Objects.isNull(desc) || desc.equals("")) {
+                    throw new InvalidInputException("eh ur description is blank");
+                }
+                String by = args.get("by");
+                if (Objects.isNull(by) || by.equals("")) {
+                    throw new InvalidInputException("eh need to specify ur deadline by when - deadline <desc> /by <when>");
+                }
+
+                newTask = new Deadline(desc, by);
+                break;
+            case EVENT:
+                desc = args.get("event");
+                if (Objects.isNull(desc) || desc.equals("")) {
+                    throw new InvalidInputException("eh ur description is blank");
+                }
+                String from = args.get("from");
+                String to = args.get("to");
+                if (Objects.isNull(from) || Objects.isNull(to) || from.equals("") || to.equals("")) {
+                    throw new InvalidInputException("eh need to specify ur event from when to when - event <desc> /from <when> /to <when>");
+                }
+
+                newTask = new Event(desc, from, to);
+                break;
+            default:
+                throw new CommandNotFoundException("I don't recognise this type of task. Try add todo <desc>!");
+        }
+        this.tasks.add(newTask);
+        return newTask;
+    }
+
+    public Task deleteTask(int index) throws InvalidInputException {
+        //removes a task at given index
 
         if (this.tasks.isEmpty()) {
-            return "There's nothing to delete la";
+            throw new InvalidInputException("Hello hello there is no task to delete!!");
         }
 
         try {
-            Task removed = this.tasks.get(i);
-            this.tasks.remove(i);
-            return "Okie I removed this task:\n" + removed.toString() + "\nYou now have " + this.tasks.size() + " task(s) left.";
+            Task deletedTask = this.tasks.get(index);
+            this.tasks.remove(index);
+            return deletedTask;
+
         } catch (IndexOutOfBoundsException e) {
-            return "This task doesn't exist in your list.";
+            throw new InvalidInputException("This task doesn't exist in your list.");
         }
     }
 
@@ -116,7 +114,6 @@ public class TaskList {
     }
 
     public boolean unmarkDone(int index) throws IndexOutOfBoundsException {
-
         boolean alreadyMarked = false;
         try {
             Task task = this.tasks.get(index);

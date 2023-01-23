@@ -6,7 +6,7 @@ public class MarkAsDoneCommand extends Command {
     }
 
     @Override
-    public void execute(TaskList tl, Ui ui, Storage storage) throws NumberFormatException {
+    public void execute(TaskList tl, Ui ui, Storage storage) throws Exception {
         boolean alreadyMarked;
         try {
             int i = Integer.valueOf(this.markAtIndex) - 1;
@@ -17,9 +17,9 @@ public class MarkAsDoneCommand extends Command {
                 ui.reply("Marked " + tl.getTask(i).getDesc() + " as done!");
             }
         } catch (NumberFormatException e) {
-            ui.reply("Please specify the task by its index number.");
+            throw new Exception("Please specify the task by its index number.");
         } catch (IndexOutOfBoundsException e) {
-            ui.reply("Seems like this task doesn't exist.");
+            throw new Exception("Seems like this task doesn't exist.");
         }
     }
 }

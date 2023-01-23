@@ -7,7 +7,13 @@ public class DeleteCommand extends Command {
     }
 
     @Override
-    public void execute(TaskList tl, Ui ui, Storage storage) {
-        ui.reply("delete at " + this.deleteAtIndex);
+    public void execute(TaskList tl, Ui ui, Storage storage) throws Exception {
+        try {
+            int i = Integer.valueOf(deleteAtIndex) - 1;
+            Task deletedTask = tl.deleteTask(i);
+            ui.reply("Removed " + deletedTask.getDesc() + " from the list. You now have " + tl.size() + " tasks left.");
+        } catch (NumberFormatException e) {
+            throw e;
+        }
     }
 }
