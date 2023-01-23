@@ -1,0 +1,8 @@
+event aaa /from 2 /to 3
+deadline bbb /by hello!
+list
+mark 1
+mark 2
+unmark 1
+unmark 2
+bye

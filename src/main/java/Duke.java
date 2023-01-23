@@ -24,7 +24,7 @@ public class Duke {
                 int pos = Character.getNumericValue(query);
                 //error check for pos exceeding size
                 hist.unmark(pos-1);
-                System.out.println("Unmarked: ");
+                System.out.println("Unmarked:");
                 System.out.println(hist.getHist(pos-1).toString());
                 continue;
             }
@@ -34,7 +34,7 @@ public class Duke {
                 int pos = Character.getNumericValue(query);
                 //error check for pos exceeding size
                 hist.mark(pos-1);
-                System.out.println("Marked: ");
+                System.out.println("Marked:");
                 System.out.println(hist.getHist(pos-1).toString());
                 continue;
             }

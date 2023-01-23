@@ -5,3 +5,19 @@ Hello from
 | |_| | |_| |   <  __/
 |____/ \__,_|_|\_\___|
 
+Greetings
+added: aaa (from: 2 to: 3)
+Now you have 1 tasks in the list
+added: bbb (by: hello!)
+Now you have 2 tasks in the list
+1. [E][ ] aaa (from: 2 to: 3)
+2. [D][ ] bbb (by: hello!)
+Marked:
+[E][X] aaa (from: 2 to: 3)
+Marked:
+[D][X] bbb (by: hello!)
+Unmarked:
+[E][ ] aaa (from: 2 to: 3)
+Unmarked:
+[D][ ] bbb (by: hello!)
+Bye!
