@@ -10,7 +10,7 @@ public class Duke {
         Scanner sc = new Scanner(System.in);
         String line = "init";
 
-        taskList.loadFromFile();
+        Storage.loadFromFile(taskList);;
 
         System.out.println("Hello I'm Duke! \nWhat can I do for you?");
         while (!line.equals("bye")) {
@@ -50,7 +50,7 @@ public class Duke {
             line = sc.nextLine();
         }
         sc.close();
-        taskList.saveToFile();
+        Storage.saveToFile(taskList);;
 
         Ui.displayMsg("Bye. Hope to see you again soon!");
     }
