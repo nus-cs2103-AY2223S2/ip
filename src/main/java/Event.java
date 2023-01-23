@@ -11,6 +11,6 @@ public class Event extends Task {
 
     @Override
     public String toString() {
-        return "[E]" + super.toString() + " (by: " + by + " to: " + this.to + ")";
+        return "E | " + super.toString() + " | " + by + "-" + this.to;
     }
 }
