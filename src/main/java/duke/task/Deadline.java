@@ -38,4 +38,15 @@ public class Deadline extends Task {
         String s = String.format("%s (by: %s)", super.toString(), Task.formatDate(this.deadline));
         return s;
     }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (obj == null) {
+            return false;
+        } else if (obj.getClass() != this.getClass()) {
+            return false;
+        }
+        Deadline task = (Deadline) obj;
+        return super.equals(task) && this.deadline.equals(task.deadline);
+    }
 }

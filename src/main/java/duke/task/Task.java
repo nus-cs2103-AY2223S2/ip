@@ -18,6 +18,14 @@ public abstract class Task {
         this.name = name;
     }
 
+    public static LocalDate parseDate(String dateString) {
+        return LocalDate.parse(dateString, Task.DT_INPUT_FORMATTER);
+    }
+
+    public static String formatDate(LocalDate date) {
+        return date.format(DT_PRINT_FORMATTER);
+    }
+
     public void markAsDone() {
         this.isDone = true;
     }
@@ -43,11 +51,14 @@ public abstract class Task {
         return s;
     }
 
-    public static LocalDate parseDate(String dateString) {
-        return LocalDate.parse(dateString, Task.DT_INPUT_FORMATTER);
-    }
-
-    public static String formatDate(LocalDate date) {
-        return date.format(DT_PRINT_FORMATTER);
+    @Override
+    public boolean equals(Object obj) {
+        if (obj == null) {
+            return false;
+        } else if (obj.getClass() != this.getClass()) {
+            return false;
+        }
+        Task task = (Task) obj;
+        return this.name.equals(task.name) && (this.isDone == task.isDone);
     }
 }

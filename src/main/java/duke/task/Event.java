@@ -41,4 +41,15 @@ public class Event extends Task {
                 Task.formatDate(this.end));
         return s;
     }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (obj == null) {
+            return false;
+        } else if (obj.getClass() != this.getClass()) {
+            return false;
+        }
+        Event task = (Event) obj;
+        return super.equals(task) && this.start.equals(task.start) && this.end.equals(task.end);
+    }
 }
