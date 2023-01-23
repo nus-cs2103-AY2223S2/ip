@@ -7,6 +7,10 @@ public class DeadlineTask extends Task {
         this.by = by;
     }
 
+    public String toDukeFileString() {
+        return "D|" + super.toDukeFileString() + "|" + this.by;
+    }
+
     @Override
     public String toString() {
         return "[D]" + super.toString() + " (by: " + this.by + ")";

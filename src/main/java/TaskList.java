@@ -63,6 +63,8 @@ public class TaskList {
         } else {
             task.unmarkDone();
         }
+
+        System.out.println(task);
     }
 
     public void handleTodoCommand(String[] tokens) throws DukeInvalidTodoCommandException {
@@ -75,7 +77,10 @@ public class TaskList {
         String taskName = String.join(" ", taskNameArray);
 
         TodoTask newTodoTask = new TodoTask(taskName);
+
         this.addTask(newTodoTask);
+        System.out.println("Added:\n" + newTodoTask);
+        this.printNumberOfTasks();
     }
 
     public void handleDeadlineCommand(String[] tokens) throws DukeInvalidDeadlineCommandException {
@@ -105,7 +110,10 @@ public class TaskList {
         String by = String.join(" ", byArray);
 
         DeadlineTask newDeadlineTask = new DeadlineTask(taskName, by);
+
         this.addTask(newDeadlineTask);
+        System.out.println("Added:\n" + newDeadlineTask);
+        this.printNumberOfTasks();
     }
 
     public void handleEventCommand(String[] tokens) throws DukeInvalidEventCommandException {
@@ -139,13 +147,14 @@ public class TaskList {
         String to = String.join(" ", toArray);
 
         EventTask newEventTask = new EventTask(taskName, from, to);
+
         this.addTask(newEventTask);
+        System.out.println("Added:\n" + newEventTask);
+        this.printNumberOfTasks();
     }
 
-    private void addTask(Task task) {
+    public void addTask(Task task) {
         this.tasks.add(task);
-        System.out.println("Added:\n" + task.toString());
-        this.printNumberOfTasks();
     }
 
     public void handleDeleteCommand(String[] tokens) throws DukeInvalidDeleteCommandException {
@@ -165,14 +174,14 @@ public class TaskList {
             throw new DukeInvalidDeleteCommandException();
         }
 
-        this.deleteTask(taskNumber);
-    }
-
-    private void deleteTask(int taskNumber) {
         // need to convert back to 0-indexed
-        Task deletedTask = this.tasks.remove(taskNumber - 1);
+        Task deletedTask = this.deleteTask(taskNumber - 1);
         System.out.println("Deleted:\n" + deletedTask.toString());
         this.printNumberOfTasks();
+    }
+
+    private Task deleteTask(int index) {
+        return this.tasks.remove(index);
     }
 
     public void handleByeCommand() {
@@ -187,5 +196,16 @@ public class TaskList {
         } else {
             System.out.println("There are " + numTasks + " tasks in the list");
         }
+    }
+
+    public String toDukeFileString() {
+        ArrayList<String> output = new ArrayList<>();
+
+        for (int i = 0; i < this.tasks.size(); i++) {
+            Task task = this.tasks.get(i);
+            output.add(task.toDukeFileString() + "\n");
+        }
+
+        return String.join("", output);
     }
 }

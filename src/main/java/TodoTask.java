@@ -4,6 +4,10 @@ public class TodoTask extends Task {
         super(name);
     }
 
+    public String toDukeFileString() {
+        return "T|" + super.toDukeFileString();
+    }
+
     @Override
     public String toString() {
         return "[T]" + super.toString();
