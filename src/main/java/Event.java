@@ -1,4 +1,5 @@
 import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.Optional;
 
 public class Event extends Task {
@@ -55,6 +56,8 @@ public class Event extends Task {
 
     @Override
     public String stringFields() {
-        return " (from: " + this.fromDate + " to: " + toDate + ")";
+        String fromDateString = this.chronoFromDate.isEmpty() ? this.fromDate : this.chronoFromDate.get().format(DateTimeFormatter.ofPattern("MMM d yyyy"));
+        String toDateString = this.chronoToDate.isEmpty() ? this.fromDate : this.chronoToDate.get().format(DateTimeFormatter.ofPattern("MMM d yyyy"));
+        return " (from: " + fromDateString + " to: " + toDateString + ")";
     }
 }
