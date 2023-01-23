@@ -19,7 +19,7 @@ public class Find extends Task {
 
     /**
      * Override the run method and run the find function
-      * @param table the task table
+     * @param table the task table
      * @param monitor the monitor
      * @param disk the disk
      */
