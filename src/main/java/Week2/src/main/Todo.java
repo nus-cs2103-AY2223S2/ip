@@ -7,6 +7,6 @@ public class Todo extends Task {
 
     @Override
     public String toString() {
-        return "[T][" + this.getDone()+ "] " +this.content;
+        return "[T][" + this.getDone() + "] " +this.content;
     }
 }
