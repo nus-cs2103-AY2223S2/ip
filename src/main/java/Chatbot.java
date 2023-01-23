@@ -127,6 +127,22 @@ public class Chatbot {
             return true;
         });
 
+        commands.put(Messages.MESSAGE_DELETE, (chatbot, args) -> {
+            Integer index = -1;
+            try{
+                index = Integer.valueOf(args);
+            }
+            catch (NumberFormatException ex){
+                ex.printStackTrace();
+                System.out.println("Error: Index not specified");
+
+                return false;
+            }
+            index -= 1;
+            chatbot.removeTask(index);
+
+            return true;
+        });
 
 
     }
