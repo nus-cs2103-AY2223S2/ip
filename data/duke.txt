@@ -1,0 +1,3 @@
+T@0@play games
+D@0@do homework@Monday evening 11pm
+E@1@group project@Sept 2nd 10am@12pm

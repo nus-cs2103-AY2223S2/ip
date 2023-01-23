@@ -6,9 +6,26 @@ class Event extends Task {
 
     Event(String taskName, String start, String end) {
         super(taskName);
-        this.tag = "event";
+        this.tag = "E";
         this.start = start;
         this.end = end;
+    }
+
+    Event(String taskName, boolean isDone, String start, String end) {
+        super(taskName, isDone);
+        this.tag = "E";
+        this.start = start;
+        this.end = end;
+    }
+
+    @Override
+    String getFromTime() {
+        return this.start;
+    }
+
+    @Override
+    String getToTime() {
+        return this.end;
     }
 
     @Override

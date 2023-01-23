@@ -1,6 +1,9 @@
 package dukes.engine;
 
 import dukes.util.*;
+
+import java.io.File;
+import java.io.FileNotFoundException;
 import java.util.*;
 
 public class DukeEngine {
@@ -209,6 +212,10 @@ public class DukeEngine {
                 " tasks in the list.");
     }
 
+    public void setTaskList(List<Task> taskList) {
+        this.taskList = taskList;
+    }
+
     public void listTask() {
         StringBuilder sb = new StringBuilder();
         sb.append(listWord).append("\n");
@@ -266,6 +273,41 @@ public class DukeEngine {
         sb.append(markUnDoneWord).append("\n").append(" ");
         sb.append(theTask.toString());
         System.out.println(sb.toString());
+    }
+
+    public String generateTaskList() {
+        StringBuilder sb = new StringBuilder();
+        for (int i = 0; i < taskList.size(); i++) {
+            Task currTask = taskList.get(i);
+            sb.append(currTask.getTag()).append("@");
+            sb.append((currTask.hasDone()) ? "1" : "0").append("@");
+            sb.append(currTask.getTaskName());
+            if (currTask.getTag().equals("D")) {
+                sb.append("@").append(currTask.getDeadLine());
+            } else if (currTask.getTag().equals("E")) {
+                sb.append("@").append(currTask.getFromTime()).
+                        append("@").append(currTask.getToTime());
+            }
+            sb.append("\n");
+        }
+        return sb.toString();
+    }
+
+    public static Task fetchTask(String fileLine) {
+        // System.out.println(fileLine);
+        Task newTask;
+        // DO NOT USE | as separator!! You need \\| for escape. Better use @
+        String[] temp = fileLine.split("@");
+        // System.out.println(Arrays.toString(temp));
+        boolean isDone = (temp[1].equals("0")) ? false : true;
+        if (temp[0].equals("T")) {
+            newTask = new ToDo(temp[2], isDone);
+        } else if (temp[0].equals("D")) {
+            newTask = new DeadLine(temp[2], isDone, temp[3]);
+        } else {
+            newTask = new Event(temp[2], isDone, temp[3], temp[4]);
+        }
+        return newTask;
     }
 
     public void delete(String command) {
