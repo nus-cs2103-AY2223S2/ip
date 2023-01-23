@@ -53,6 +53,7 @@ public class TaskList {
 
         String[] strTasks = strData.split("\n");
         for (String strTask : strTasks) {
+            if (strTask.length() == 1) return;  // for handling empty file, it still contains "\n"
             String[] info1 = strTask.split("\\[");
             char taskType = info1[1].charAt(0);
             boolean isDone = info1[2].charAt(0) == 'x';
