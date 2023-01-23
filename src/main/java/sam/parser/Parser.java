@@ -34,7 +34,8 @@ public class Parser {
 
   public static Map<String, String> parseTaskArgs(String input)
       throws SamMissingTaskTitleException, SamMissingTaskValueException {
-    if (input.strip().charAt(0) == '/') {
+    input = input.strip();
+    if (input.isEmpty() || input.charAt(0) == '/') {
       throw new SamMissingTaskTitleException();
     }
     
