@@ -45,7 +45,7 @@ public class Parser {
         } else if (instructionTag.equalsIgnoreCase("help")) {
             return new HelpCommand();
         } else if (instructionTag.equalsIgnoreCase("mark")) {
-            return Decipherer.MarkDecoder(information);
+            return Decipherer.markDecoder(information);
         } else if (instructionTag.equalsIgnoreCase("unmark")) {
             return Decipherer.unmarkDecoder(information);
         } else if (instructionTag.equalsIgnoreCase("delete")) {
@@ -60,7 +60,9 @@ public class Parser {
             return Decipherer.findDecoder(information);
         } else if (instructionTag.equalsIgnoreCase("search")) {
             return Decipherer.searchDecoder(information);
-        } else {
+        } else if (instructionTag.equalsIgnoreCase("update")) {
+            return Decipherer.updateDecoder(information);
+        }else {
             throw new InvalidInputException(unrecognizedError);
         }
     }

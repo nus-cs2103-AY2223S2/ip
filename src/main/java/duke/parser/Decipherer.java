@@ -13,7 +13,31 @@ import java.util.regex.Pattern;
 
 public class Decipherer {
     private static final Pattern emptyStringChecker = Pattern.compile("\\S.*+");
-    public static MarkAsDoneCommand MarkDecoder(String information) throws InvalidInputException {
+
+    public static UpdateCommand updateDecoder(String information) throws InvalidInputException {
+        String[] info = information.split(" ");
+        String index = info[0];
+        StringBuilder description = new StringBuilder();
+        if (info.length > 1) {
+            for (int i = 1; i < info.length; i ++) {
+                description.append(" ").append(info[i]);
+            }
+        }
+        Matcher numberChecker = Pattern.compile("\\d+?").matcher(info[0]);
+        String newDescription = String.valueOf(description).strip();
+
+        if (numberChecker.matches()) {
+            if (!emptyStringChecker.matcher(newDescription).matches()) {
+                throw new InvalidInputException("OOPS!!! The description cannot be empty.");
+            } else {
+                return new UpdateCommand(Integer.parseInt(index) - 1, newDescription);
+            }
+        } else {
+            throw new InvalidInputException("OOPS!!! The input task index is not a number,\n"
+                    + "Please input a valid task index");
+        }
+    }
+    public static MarkAsDoneCommand markDecoder(String information) throws InvalidInputException {
         Matcher numberChecker = Pattern.compile("\\d+?").matcher(information);
         if (numberChecker.matches()) {
             return new MarkAsDoneCommand(Integer.parseInt(information) - 1);

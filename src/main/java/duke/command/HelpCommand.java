@@ -21,7 +21,10 @@ public class HelpCommand extends Command {
                 "- search [yyyy-mm-dd] : List all the Deadline tasks and Event tasks that takes place on the " +
                 "given day.\n\n" +
                 "- unmark [taskIndex] : Mark the task specified by the given index as undone.\n\n" +
-                "- todo [description] : Add a todo event"
+                "- update [taskIndex] [description] : Update the description of the task specified by the given " +
+                "index to be the new description.\n\n" +
+                "- todo [description] : Add a todo event\n\n" +
+                "All the command keywords are case insensitive!"
                 ;
         ui.appendResponse(helpMessage);
     }

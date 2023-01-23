@@ -7,7 +7,7 @@ import java.time.LocalDate;
  * by more specific tasks like Events, toDos, etc.
  */
 public abstract class DukeTask {
-    private final String information;
+    private String information;
     private final TaskType type;
     private boolean isDone;
     private final String doneFlag = "[X] ";
@@ -89,6 +89,10 @@ public abstract class DukeTask {
      */
      public boolean matches(String description) {
          return this.information.toUpperCase().contains(description.toUpperCase());
+     }
+
+     public void updateInformation(String information) {
+         this.information = information;
      }
 
     @Override

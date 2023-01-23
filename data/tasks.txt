@@ -1,6 +1,6 @@
 [D] | [ ] | party | 1919-08-10
-[D] | [X] | eat | 1919-08-10
+[D] | [X] | have fun | 1919-08-10
 [D] | [ ] | test | 1900-10-20
 [E] | [ ] | exercise | 2022-12-21 | 2023-05-05
 [T] | [X] | read book
-[T] | [ ] | impart
+[T] | [ ] | group meeting
