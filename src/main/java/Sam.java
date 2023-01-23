@@ -2,24 +2,20 @@ import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 import java.util.HashMap;
-import java.util.List;
-import java.io.IOException;
-import java.nio.file.Files;
-import java.nio.file.Path;
 
 public class Sam {
   private Ui ui;
+  private Storage storage;
   private TaskList tasks;
   private HashMap<String, String> taskArgs;
   private boolean live;
-  private Path savePath;
 
-  public Sam() {
+  public Sam(String first, String ...more) {
     ui = new Ui();
+    storage = new Storage(first, more);
     tasks = new TaskList();
     taskArgs = new HashMap<>();
     live = false;
-    savePath = Path.of("data", "sam.txt");
   }
 
   public void run() {
@@ -27,7 +23,7 @@ public class Sam {
     ui.showLogo();
     ui.talk("Hello, I am Sam!");
     try {
-      load();
+      storage.load(tasks);
     } catch (SamLoadFailedException e) {
       ui.talk(e.getMessage());
     }
@@ -45,7 +41,7 @@ public class Sam {
   }
 
 	public static void main(String[] args) {
-    new Sam().run();
+    new Sam("data", "sam.txt").run();
   }
 
   private void processInput(String[] input)
@@ -86,7 +82,7 @@ public class Sam {
         tasks.markTask(id, true);
         ui.talk("Great! I'll check the task:",
           tasks.printTask(id));
-        save();
+        storage.save(tasks);
         break;
       }
       case UNMARK: {
@@ -100,7 +96,7 @@ public class Sam {
         tasks.markTask(id, false);
         ui.talk("Okay, I'll uncheck the task:",
           tasks.printTask(id));
-          save();
+        storage.save(tasks);
         break;
       }
       case TODO: {
@@ -110,7 +106,7 @@ public class Sam {
         Task task = new ToDo(input[1]);
         tasks.addTask(task);
         newTask(task);
-        save();
+        storage.save(tasks);
         break;
       }
       case EVENT: {
@@ -129,7 +125,7 @@ public class Sam {
 
         tasks.addTask(task);
         newTask(task);
-        save();
+        storage.save(tasks);
         break;
       }
       case DEADLINE: {
@@ -149,7 +145,7 @@ public class Sam {
 
         tasks.addTask(task);
         newTask(task);
-        save();
+        storage.save(tasks);
         break;
       }
       case DELETE: {
@@ -163,7 +159,7 @@ public class Sam {
         Task task = tasks.removeTask(id);
         ui.talk("Ok, I'll remove the task from your list:",
           task.toString());
-        save();
+        storage.save(tasks);
         break;
       }
     }
@@ -182,66 +178,8 @@ public class Sam {
       task.toString(),
       String.format("Now you have %d tasks in the list", tasks.count()));
   }
-
-  private void save() throws SamSaveFailedException {
-    try {
-      if (!Files.exists(savePath.getParent())) {
-        Files.createDirectory(savePath.getParent());
-      }
-      if (!Files.exists(savePath)) {
-        Files.createFile(savePath);
-      }
-
-      String[] list = new String[tasks.count()];
-      for (int i = 0; i < tasks.count(); i++) {
-        Task t = tasks.getTask(i + 1);
-        list[i] = t.toSaveFormat();
-      }
-
-      if (list.length > 0) {
-        Files.writeString(savePath, String.join("\n", list));
-      }
-    } catch (IOException e) {
-      throw new SamSaveFailedException();
-    }
-  }
-
-  private void load() throws SamLoadFailedException {
-    try {
-      if (!Files.exists(savePath)) {
-        return;
-      }
-      List<String> lines = Files.readAllLines(savePath);
-      for (String line : lines) {
-        String[] arr = line.split(" [|] ");
-        Task t = null;
-        boolean isDone = arr[1].equals("1");
-        switch (arr[0]) {
-          case "T":
-            t = new ToDo(arr[2], isDone);
-            break; 
-          case "E": {
-            LocalDate from = parseDate(arr[3]);
-            LocalDate to = parseDate(arr[4]);
-            t = new Event(arr[2], from, to, isDone);
-            break; 
-          }
-          case "D": {
-            LocalDate by = parseDate(arr[3]);
-            t = new Deadline(arr[2], by, isDone);
-            break;
-          }
-        }
-        if (t != null) {
-          tasks.addTask(t);
-        }
-      }
-    } catch (IOException | SamInvalidDateException e) {
-      throw new SamLoadFailedException();
-    }
-  }
   
-  private LocalDate parseDate(String input) throws SamInvalidDateException {
+  public static LocalDate parseDate(String input) throws SamInvalidDateException {
     try {
       return LocalDate.parse(input, DateTimeFormatter.ofPattern("d/M/yyyy"));
     } catch (DateTimeParseException e) {
