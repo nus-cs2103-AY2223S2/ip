@@ -11,37 +11,9 @@ import java.util.List;
 public class Duke {
 
     private static final String SAVE_PATH = "data/duke.txt";
-    private static Scanner scanner = new Scanner(System.in);
     private static TaskList taskList = new TaskList();
     private static Parser parser = new Parser();
-
-    private static String formatMessage(String message) {
-        String FORMAT_LINE = "___________________________";
-        return FORMAT_LINE + "\n"
-                + message + "\n"
-                + FORMAT_LINE;
-    }
-
-    private static void printMessage(String message) {
-        System.out.println(formatMessage(message));
-    }
-
-    private static String getInputFromUser() {
-        return scanner.nextLine();
-    }
-
-    private static void printPromptForInput() {
-        System.out.print(">");
-    }
-
-    private static void greet() {
-        printMessage("Hello, I am Duke.\n"
-                + "What can I do for you?");
-    }
-
-    private static void sayGoodbye() {
-        printMessage("Goodbye. I hope to see you again.");
-    }
+    private static Ui ui = new Ui();
 
     private static boolean isExitCommand(String input) {
         return input.equals(CommandType.EXIT.getCommand());
@@ -51,8 +23,8 @@ public class Duke {
     private static void acceptCommands() {
         String input;
         while (true) {
-            printPromptForInput();
-            input = getInputFromUser();
+            ui.printPromptForInput();
+            input = ui.getInputFromUser();
             if (isExitCommand(input)) {
                 return;
             }
@@ -75,7 +47,7 @@ public class Duke {
             }
             save();
         } catch (DukeException e) {
-            printMessage(e.toString());
+            ui.printMessage(e.toString());
         }
 
     }
@@ -117,7 +89,7 @@ public class Duke {
     private static void addTodoToList(String description) {
         Task task = new ToDoTask(description);
         taskList.add(task);
-        printMessage("added: " + task);
+        ui.printMessage("added: " + task);
     }
 
     private static void addDeadlineToList(String arguments) throws DukeException {
@@ -125,7 +97,7 @@ public class Duke {
             String[] splitArgs = arguments.split(" /by ");
             Task task = new DeadlineTask(splitArgs[0], parser.parseDateTime(splitArgs[1]));
             taskList.add(task);
-            printMessage("added: " + task);
+            ui.printMessage("added: " + task);
         } catch (ArrayIndexOutOfBoundsException e) {
             throw new EmptyArgumentDukeException();
         } catch (DateTimeParseException e) {
@@ -139,7 +111,7 @@ public class Duke {
             String[] times = splitArgs[1].split(" /to ");
             Task task = new EventTask(splitArgs[0], parser.parseDateTime(times[0]), parser.parseDateTime(times[1]));
             taskList.add(task);
-            printMessage("added: " + task);
+            ui.printMessage("added: " + task);
         } catch (ArrayIndexOutOfBoundsException e) {
             throw new EmptyArgumentDukeException();
         } catch (DateTimeParseException e) {
@@ -152,14 +124,14 @@ public class Duke {
     }
 
     private static void displayTasks() {
-        printMessage("Your tasks are:\n" + taskList.toString());
+        ui.printMessage("Your tasks are:\n" + taskList.toString());
     }
 
     private static void markTaskAsDone(String arguments) throws InvalidArgumentDukeException {
         try {
             int number = Integer.parseInt(arguments);
             taskList.markTaskAsDone(number);
-            printMessage("Good job. You have finished this task:\n"
+            ui.printMessage("Good job. You have finished this task:\n"
                     + taskList.getTaskString(number)
             );
         } catch (NumberFormatException | IndexOutOfBoundsException e) {
@@ -171,7 +143,7 @@ public class Duke {
         try {
             int number = Integer.parseInt(arguments);
             taskList.markTaskAsNotDone(number);
-            printMessage("Ok. I have marked this task as not done:\n"
+            ui.printMessage("Ok. I have marked this task as not done:\n"
                     + taskList.getTaskString(number)
             );
         } catch (NumberFormatException | IndexOutOfBoundsException e) {
@@ -184,7 +156,7 @@ public class Duke {
             int number = Integer.parseInt(arguments);
             String taskString = taskList.getTaskString(number);
             taskList.remove(number);
-            printMessage("Ok. I have deleted this task:\n"
+            ui.printMessage("Ok. I have deleted this task:\n"
                     + taskString
             );
         } catch (NumberFormatException | IndexOutOfBoundsException e) {
@@ -247,10 +219,10 @@ public class Duke {
         try {
             load();
         } catch (DukeException e) {
-            printMessage(e.toString());
+            ui.printMessage(e.toString());
         }
-        greet();
+        ui.greet();
         acceptCommands();
-        sayGoodbye();
+        ui.sayGoodbye();
     }
 }
