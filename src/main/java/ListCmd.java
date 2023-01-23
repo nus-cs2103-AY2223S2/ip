@@ -9,7 +9,7 @@ public class ListCmd extends Command {
     }
 
     public void uiReply() {
-        Ui.displayMsg(taskList.outputList());
+        Ui.displayMsg("Here are the tasks in your list:\n" + taskList.outputList());
     }
 
 }

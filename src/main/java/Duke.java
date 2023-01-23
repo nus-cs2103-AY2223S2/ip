@@ -47,6 +47,11 @@ public class Duke {
             line = sc.nextLine();
         }
         sc.close();
+        try {
+            taskList.saveToFile();
+        } catch (Exception e) {
+            System.out.println(e.toString());
+        }
         Ui.displayMsg("Bye. Hope to see you again soon!");
     }
 }
