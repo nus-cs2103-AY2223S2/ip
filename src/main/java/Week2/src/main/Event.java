@@ -1,3 +1,4 @@
+package Week2.src.main;
 public class Event extends Task {
 
     String from;

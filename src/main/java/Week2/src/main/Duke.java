@@ -1,3 +1,4 @@
+package Week2.src.main;
 import java.io.FileNotFoundException;
 import java.time.format.DateTimeFormatter;
 import java.util.*;
@@ -6,19 +7,42 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.time.*;
 
-enum type {
-    todo,
-    deadline,
-    event
-}
 public class Duke {
+    private static Storage storage;
+    private Ui ui;
+    private static TaskList tasklist;
+
+    public Duke(String filePath) throws IOException {
+        ui = new Ui();
+        storage = new Storage(filePath);
+        try {
+            tasklist = new TaskList(storage.load());
+        } catch(Exception e) {
+            ui.showLoadingError();
+            tasklist = new TaskList();
+        }
+    }
 
     public static void lining() {
         System.out.println("____________________________________________________________");
     }
+
+    static FileWriter fw;
+
+    static {
+        try {
+            fw = new FileWriter("saves/data.txt");
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    public static void writeOn(Task currtask) throws IOException {
+        fw.write(currtask.toString() +System.lineSeparator());
+    }
     public static void main(String[] args) throws IOException {
         Scanner sc = new Scanner(System.in);
-        FileWriter fw = new FileWriter("saves/data.txt");
+        new Duke("saves/data.txt");
 
         String logo = " ____        _        \n"
                 + "|  _ \\ _   _| | _____ \n"
@@ -33,7 +57,8 @@ public class Duke {
 
         String comm = "";
 
-        List<Task> tasklist = new ArrayList<>();
+        //tasklist = new TaskList();
+
         try {
             while (!comm.equals("bye")) {
                 comm = sc.nextLine();
@@ -41,7 +66,7 @@ public class Duke {
                     lining();
                     System.out.println("Here are the tasks in your list:");
                     for (int i = 0; i < tasklist.size(); i++) {
-                        Task current = tasklist.get(i);
+                        Task current = (Task) tasklist.get(i);
                         int curnum = i+1;
                         System.out.println(curnum +"."+current.toString());
                     }
@@ -50,29 +75,29 @@ public class Duke {
                 } else if (comm.startsWith("mark")) {
                     String str = comm.substring(comm.length() - 1);
                     int marking = Integer.parseInt(str);
-                    Task current = tasklist.get(marking - 1);
+                    Task current = (Task) tasklist.get(marking - 1);
                     current.setDone();
                     lining();
                     System.out.println("Nice! I've marked this task as done:");
                     System.out.println("[X] " + current.content);
                     lining();
-                    fw.write(current.toString() +System.lineSeparator());
+                    writeOn(current);
 
                 } else if (comm.startsWith("unmark")) {
                     String str = comm.substring(comm.length() - 1);
                     int marking = Integer.parseInt(str);
-                    Task current = tasklist.get(marking - 1);
+                    Task current = (Task) tasklist.get(marking - 1);
                     current.setDone();
                     lining();
                     System.out.println("OK, I've marked this task as not done yet:");
                     System.out.println("[ ]" +current.content);
                     lining();
-                    fw.write(current.toString() +System.lineSeparator());
+                    writeOn(current);
 
                 } else if(comm.startsWith("delete")) {
                     String str = comm.substring(comm.length() -1);
                     int marking = Integer.parseInt(str);
-                    Task current = tasklist.get(marking-1);
+                    Task current = (Task) tasklist.get(marking-1);
                     tasklist.remove(marking-1);
                     lining();
                     System.out.println("Noted. I've removed this task:");
@@ -89,7 +114,7 @@ public class Duke {
                     System.out.println(current.toString());
                     System.out.println("Now you have " + tasklist.size() + " tasks in the list");
                     lining();
-                    fw.write(current.toString() +System.lineSeparator());
+                    writeOn(current);
 
                 } else if (comm.startsWith("deadline")) {
                     String doit = comm.substring(9, comm.length());
@@ -105,7 +130,7 @@ public class Duke {
                     System.out.println(current.toString());
                     System.out.println("Now you have " + tasklist.size() + " tasks in the list");
                     lining();
-                    fw.write(current.toString() +System.lineSeparator());
+                    writeOn(current);
 
                 } else if (comm.startsWith("event")) {
                     String doit = comm.substring(6, comm.length());
@@ -118,7 +143,7 @@ public class Duke {
                     System.out.println("Got it. I've added this task:");
                     System.out.println(current.toString());
                     lining();
-                    fw.write(current.toString() +System.lineSeparator());
+                    writeOn(current);
 
                 } else if (!comm.equals("bye")){
                     lining();
@@ -134,8 +159,5 @@ public class Duke {
             lining();
             System.out.println("Bye. Hope to see you again soon!");
             lining();
-            fw.close();
-
-
     }
 }
