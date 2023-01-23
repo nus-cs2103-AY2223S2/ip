@@ -208,6 +208,23 @@ public class Duke {
                     ui.showLine();
                 }
                 break;
+            case "find":
+                try {
+                    TaskList taskListKeyword = tasks.findKeyword(parser.getCommandDetails(userInput));
+                    ui.showLine();
+                    if (taskListKeyword.size() == 0) {
+                        System.out.println("there are no matching tasks in your list");
+                    } else {
+                        System.out.println("here are the matching items in your list:\n" + taskListKeyword);
+                    }
+                    ui.showLine();
+                } catch (IndexOutOfBoundsException ex) {
+                    ui.showLine();
+                    System.out.println(new DukeException("pls specify a keyword to find!\n"
+                            + "use the format: find [keyword]"));
+                    ui.showLine();
+                }
+                break;
             default:
                 ui.showLine();
                 System.out.println(new DukeException("invalid command"));

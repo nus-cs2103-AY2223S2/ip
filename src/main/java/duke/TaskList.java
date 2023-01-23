@@ -80,6 +80,22 @@ public class TaskList {
         return this.tasks.size();
     }
 
+    /**
+     * Returns a TaskList of tasks with descriptions containing the keyword.
+     *
+     * @param keyword Keyword to be found in the task descriptions.
+     * @return TaskList of tasks with descriptions containing the keyword.
+     */
+    public TaskList findKeyword(String keyword) {
+        List<Task> newList = new ArrayList<>();
+        for (Task a : tasks) {
+            if (a.getDesc().contains(keyword)) {
+                newList.add(a);
+            }
+        }
+        return new TaskList(newList);
+    }
+
     @Override
     public String toString() {
         StringBuilder str = new StringBuilder();
