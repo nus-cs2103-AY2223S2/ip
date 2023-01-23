@@ -1,3 +1,2 @@
-T=X=Ear
-T= =5
+T= =Ear
 E=X=Here=now=tomorrow
