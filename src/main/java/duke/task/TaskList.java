@@ -40,6 +40,25 @@ public class TaskList extends ArrayList<Task> {
     }
 
     /**
+     * Creates a tasklist containing the tasks that have the string in their names.
+     *
+     * @param s The string that the task names will contain.
+     * @return The tasklist containing the tasks that have the string in their names.
+     */
+    public TaskList containsStringInName(String s) {
+        TaskList containsStringTasks = new TaskList();
+
+        for (int i = 0; i < size(); i++) {
+            Task temp = get(i);
+            if (temp.hasStringInName(s)) {
+                containsStringTasks.add(temp);
+            }
+        }
+
+        return containsStringTasks;
+    }
+
+    /**
      * Marks the task as done using the task number.
      *
      * @param num The task number of the task to be marked.

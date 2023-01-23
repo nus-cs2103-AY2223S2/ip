@@ -17,6 +17,8 @@ list with some weird continue text
 deadline return book /by 2023-09-02
 event project meeting /from 2023-06-17 /to 2023-06-18
 todo a
+find book
+find project 
 priority
 list
 delete 1

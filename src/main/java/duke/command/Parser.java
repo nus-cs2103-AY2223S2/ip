@@ -21,6 +21,8 @@ public class Parser {
             return new ListCommand();
         case PRIORITY:
             return new PriorityCommand();
+        case FIND:
+            return new FindCommand();
         case ECHO:
             return new EchoCommand();
         case MARK:

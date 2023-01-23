@@ -48,6 +48,16 @@ public class Task implements Serializable, Comparable<Task> {
     }
 
     /**
+     * Informs the user if the task name contains the string s.
+     *
+     * @param s The string to check if the name contains.
+     * @return True if string s is found in the name, false otherwise.
+     */
+    public boolean hasStringInName(String s) {
+        return name.contains(s);
+    }
+
+    /**
      * Informs the user if the task has a set time.
      *
      * @return True if it has a set time, false otherwise.
