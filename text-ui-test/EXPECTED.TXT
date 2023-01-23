@@ -11,13 +11,13 @@ You currently have 1 Tasks
 
 ============= KiraBot ============= 
 Storing...
-[E][ ] gym(from: morning to: night)
+[E][ ] gym(from: 01 Jan 2023 0000 to: 31 Dec 2023 2359)
 You currently have 2 Tasks
 =================================== 
 
 ============= KiraBot ============= 
 Storing...
-[D][ ] sleep(by: 9pm)
+[D][ ] sleep(by: 10 Jan 2023 2359)
 You currently have 3 Tasks
 =================================== 
 
@@ -29,8 +29,13 @@ Sorry, I don't know this command :C
 ============= KiraBot ============= 
 Here is all the items stored~
 1.[T][ ] CS2103T
-2.[E][ ] gym(from: morning to: night)
-3.[D][ ] sleep(by: 9pm)
+2.[E][ ] gym(from: 01 Jan 2023 0000 to: 31 Dec 2023 2359)
+3.[D][ ] sleep(by: 10 Jan 2023 2359)
+=================================== 
+
+============= KiraBot ============= 
+Here is a list of tasks by today~
+[E][ ] gym(from: 01 Jan 2023 0000 to: 31 Dec 2023 2359)
 =================================== 
 
 ============= KiraBot ============= 
@@ -41,8 +46,8 @@ I have marked this as done~
 ============= KiraBot ============= 
 Here is all the items stored~
 1.[T][x] CS2103T
-2.[E][ ] gym(from: morning to: night)
-3.[D][ ] sleep(by: 9pm)
+2.[E][ ] gym(from: 01 Jan 2023 0000 to: 31 Dec 2023 2359)
+3.[D][ ] sleep(by: 10 Jan 2023 2359)
 =================================== 
 
 ============= KiraBot ============= 
@@ -53,13 +58,13 @@ There is no such task!
 ============= KiraBot ============= 
 Here is all the items stored~
 1.[T][x] CS2103T
-2.[E][ ] gym(from: morning to: night)
-3.[D][ ] sleep(by: 9pm)
+2.[E][ ] gym(from: 01 Jan 2023 0000 to: 31 Dec 2023 2359)
+3.[D][ ] sleep(by: 10 Jan 2023 2359)
 =================================== 
 
 ============= KiraBot ============= 
 I have marked this as done~
-[D][x] sleep(by: 9pm)
+[D][x] sleep(by: 10 Jan 2023 2359)
 =================================== 
 
 ============= KiraBot ============= 
@@ -70,19 +75,19 @@ This task has been undone~
 ============= KiraBot ============= 
 Here is all the items stored~
 1.[T][ ] CS2103T
-2.[E][ ] gym(from: morning to: night)
-3.[D][x] sleep(by: 9pm)
+2.[E][ ] gym(from: 01 Jan 2023 0000 to: 31 Dec 2023 2359)
+3.[D][x] sleep(by: 10 Jan 2023 2359)
 =================================== 
 
 ============= KiraBot ============= 
 This task has been removed~
-[E][ ] gym(from: morning to: night)
+[E][ ] gym(from: 01 Jan 2023 0000 to: 31 Dec 2023 2359)
 =================================== 
 
 ============= KiraBot ============= 
 Here is all the items stored~
 1.[T][ ] CS2103T
-2.[D][x] sleep(by: 9pm)
+2.[D][x] sleep(by: 10 Jan 2023 2359)
 =================================== 
 
 ============= KiraBot ============= 

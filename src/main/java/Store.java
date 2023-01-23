@@ -96,4 +96,32 @@ public class Store {
         ret.append("\n");
         return ret.toString();
     }
+
+    /**
+     * Find all deadlines or events that are ongoing today.
+     * 
+     * @return Message to be printed by the bot
+     */
+    public String findToday() {
+        ArrayList<Task> todays = new ArrayList<>();
+        for (Task t : database) {
+            if (t instanceof Deadline) {
+                Deadline temp = (Deadline) t;
+                if (temp.matchToday()) {
+                    todays.add(temp);
+                }
+            } else if (t instanceof Event) {
+                Event temp = (Event) t;
+                if (temp.withinTimeframe()) {
+                    todays.add(temp);
+                }
+            }
+        }
+        StringBuilder ret = new StringBuilder("Here is a list of tasks by today~\n");
+        for (Task t : todays) {
+            ret.append(t.toString());
+            ret.append("\n");
+        }
+        return ret.toString();
+    }
 }

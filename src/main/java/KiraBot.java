@@ -1,7 +1,7 @@
 import java.util.Scanner;
 
 enum Command {
-    BYE, LIST, MARK, UNMARK, TODO, DEADLINE, EVENT, DELETE
+    BYE, LIST, MARK, UNMARK, TODO, DEADLINE, EVENT, DELETE, TODAY
 }
 
 public class KiraBot {
@@ -72,6 +72,10 @@ public class KiraBot {
                     case DELETE:
                         index = Integer.valueOf(input[1]);
                         output = database.delete(index);
+                        printFormatString(output);
+                        break;
+                    case TODAY:
+                        output = database.findToday();
                         printFormatString(output);
                         break;
                     }

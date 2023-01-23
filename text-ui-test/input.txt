@@ -1,8 +1,9 @@
 todo CS2103T
-event gym /from morning /to night
-deadline sleep /by 9pm
+event gym /from 2023-01-01 0000 /to 2023-12-31 2359
+deadline sleep /by 2023-01-10 2359
 random test
 list
+today
 mark 1
 list
 mark 4
