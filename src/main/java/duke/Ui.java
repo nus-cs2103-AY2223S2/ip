@@ -22,6 +22,12 @@ class Ui {
     protected Ui() {
         scanner = new Scanner(System.in);    
     }
+
+    Ui(String description) {
+        this.description = description;
+        scanner = new Scanner(description);
+    }
+
     /**
      * Display the custom football Alex Furguson character message
      */
@@ -66,6 +72,34 @@ class Ui {
         }
         return this.tasks;
     } 
+
+    TaskList<Task> execute(TaskList<Task> tasks, String description) {        
+        if (description.equals(Parser.SHOW_TASKS)) {
+            this.tasks = tasks.listAllTasks();
+        } else if (description.equals(Parser.TERMINATE)) {
+            Parser.exit();
+        } else if (description.equals(Parser.MARK)) {
+            this.tasks = Parser.mark(scanner, tasks);
+        }  else if (description.equals(Parser.UNMARK)) {
+            this.tasks = Parser.unmark(scanner, tasks);
+        } else if (description.equals(Parser.TODO)) {
+            this.tasks = Parser.toDo(scanner, tasks);
+        } else if (description.equals(Parser.DEADLINE)) {
+            this.tasks = Parser.deadline(scanner, tasks);
+        } else if (description.equals(Parser.EVENT)) {
+            this.tasks = Parser.events(scanner, tasks);
+        } else if (description.equals(Parser.DELETE)) {
+            this.tasks = Parser.delete(scanner, tasks);
+        } else if (description.equals(Parser.FIND)) {
+            this.tasks = Parser.find(scanner,tasks);            
+        } else {
+            dukeExceptionWarning(description, tasks);
+        }
+        return this.tasks;
+    } 
+
+
+
     /** Checks the user input against a list of invalid commands
      * (blacklist). If the input is blacklisted, a new DukeUnknownException
      * is thrown. Otherwise, a new Task will be created and added to the lit

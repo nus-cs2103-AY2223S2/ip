@@ -102,6 +102,15 @@ class Parser {
         System.out.println(MARK_COMMAND + tasks.get(taskPosition));
         return tasks.set(taskPosition, tasks.get(taskPosition).markAsDone());
     }
+    
+    /*
+    static TaskList<Task> mark(String command, TaskList<Task> tasks, boolean isUi) {
+        int taskPosition = Integer.parseInt(command.substring(Math.max(command.length() - 1, 0))) - DECREMENT;
+        System.out.println(MARK_COMMAND + tasks.get(taskPosition));
+        return tasks.set(taskPosition, tasks.get(taskPosition).markAsDone());
+    }
+    */
+    
     /**
      * Process the saved tasks that were marked as undone. It will display
      * the command Alex Furguson (Duke) says and mark the corresponding task
@@ -140,6 +149,14 @@ class Parser {
         System.out.println(UNMARK_COMMAND + tasks.get(taskPosition));
         return tasks.set(taskPosition, tasks.get(taskPosition).markAsUndone());
     }
+    
+    /*
+    static TaskList<Task> unmark(String command, TaskList<Task> tasks, boolean isUi) {
+        int taskPosition = Integer.parseInt(command.substring(Math.max(command.length() - 1, 0))) - DECREMENT;
+        System.out.println(UNMARK_COMMAND + tasks.get(taskPosition));
+        return tasks.set(taskPosition, tasks.get(taskPosition).markAsUndone());
+    }
+    */
     /**
      * Process the saved deletion of a task. It will display the command that the
      * task has been deleted, and show the current list of tasks 
@@ -171,6 +188,14 @@ class Parser {
         System.out.println(DELETE_COMMAND + tasks.get(taskPosition));
         return tasks.removeTask(taskPosition);
     }
+    
+    /*
+    static TaskList<Task> delete(String command, TaskList<Task> tasks, boolean isUi) {
+        int taskPosition = Integer.parseInt(command.substring(Math.max(command.length() - 1, 0))) - DECREMENT;
+        System.out.println(DELETE_COMMAND + tasks.get(taskPosition));
+        return tasks.removeTask(taskPosition);
+    }
+    */
     /**
      * Add a new Todo task into the list of tasks from the saved data.
      *
@@ -210,6 +235,7 @@ class Parser {
        Task newTask = new Todos(description);
        return tasks.add(newTask);
     }
+    
     /**
      * Add a new Deadline task into the list of tasks from the saved data.
      *

@@ -14,6 +14,8 @@ import javafx.scene.layout.Region;
 import java.io.ByteArrayOutputStream;
 import java.io.PrintStream;
 import javafx.scene.control.Label;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 
 /**
  * Duke is the main class that directly handles the user input, and abstract
@@ -51,7 +53,10 @@ public class Duke extends Application {
     private TextField userInput;
     private Button sendButton;
     private Scene scene;
-     
+    
+    private Image user = new Image(this.getClass().getResourceAsStream("/images/Khabib.png"));
+    private Image duke = new Image(this.getClass().getResourceAsStream("/images/Ronaldo.png"));
+    
     /**
      * Default constructor that is made explicit. Tasks and TaskList have
      * essentially the same type of characteristics, but it is to satisfy
@@ -366,21 +371,15 @@ public class Duke extends Application {
         while (!isExit) {
             ui.readCommand();
             
-            /*
             storeString = new ByteArrayOutputStream();
             printStream = new PrintStream(storeString);
             System.setOut(printStream);
-            */
 
             taskList = ui.execute(taskList);
-            
-            System.out.println("store string " + storeString); 
-            
-            /*
+             
             System.out.flush();
-            System.setOut(System.out);
+            System.setOut(oldPrintStream);
             System.out.println(storeString.toString());
-            */
 
             storage.writeToFile(taskList.toString());
         }
@@ -435,17 +434,27 @@ public class Duke extends Application {
         AnchorPane.setLeftAnchor(userInput , 1.0);
         AnchorPane.setBottomAnchor(userInput, 1.0);
         
+        /*
         sendButton.setOnMouseClicked((event) -> {
         dialogContainer.getChildren().add(getDialogLabel(userInput.getText()));
         userInput.clear();
-    });
+        });
 
-    userInput.setOnAction((event) -> {
-        dialogContainer.getChildren().add(getDialogLabel(userInput.getText()));
-        userInput.clear();
-    });
+        userInput.setOnAction((event) -> {
+            dialogContainer.getChildren().add(getDialogLabel(userInput.getText()));
+            userInput.clear();
+        });
+        */
+
+        sendButton.setOnMouseClicked((event) -> {
+        handleUserInput();
+        });
+
+        userInput.setOnAction((event) -> {
+            handleUserInput();
+        });
     }
-
+  
     /**
      * Iteration 1:
      * Creates a label with the specified text and adds it to the dialog container.
@@ -459,12 +468,71 @@ public class Duke extends Application {
 
         return textToAdd;
     }
+ 
+    private void handleUserInput() {
+        Label userText = new Label(userInput.getText());
+        Label dukeText = new Label(getResponse(userInput.getText()));
+        dialogContainer.getChildren().addAll(
+                new DialogBox(userText, new ImageView(user)),
+                new DialogBox(dukeText, new ImageView(duke))
+        );
+        userInput.clear();  
+    }
+
+    /**
+     * You should have your own function to generate a response to user input.
+     * Replace this stub with your completed method.
+     */
    
+    private String getResponse(String input) {
+        //return storeString.toString();
+
+
+        storage = new Storage();
+        storage.readFromFile();
+        
+        ByteArrayOutputStream storeString = new ByteArrayOutputStream();
+        PrintStream printStream = new PrintStream(storeString);
+        PrintStream oldPrintStream = System.out;
+        System.setOut(printStream);
+
+        this.taskList = storage.getTasks();
+        storage.createDirectory();
+    
+        /*
+        ui = new Ui();
+        ui.showWelcome();
+        */
+
+        System.out.flush();
+        System.setOut(oldPrintStream);
+        System.out.println(storeString.toString());
+
+
+        storeString = new ByteArrayOutputStream();
+        printStream = new PrintStream(storeString);
+        System.setOut(printStream);
+        
+        ui = new Ui(input);
+
+        taskList = ui.execute(taskList);
+         
+        System.out.flush();
+        System.setOut(oldPrintStream);
+        //System.out.println(storeString.toString());
+
+        storage.writeToFile(taskList.toString());
+        
+        return storeString.toString();
+
+    }
+    
     /*
     public static void main(String[] args) {
         Duke duke = new Duke();
         duke.moreOop();
     }
     */
+    
     
 }
