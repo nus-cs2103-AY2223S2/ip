@@ -44,65 +44,65 @@ public class Duke {
         Scanner sc = new Scanner(System.in);
         Actions selection = null;
         String commands = sc.nextLine();
-        String[] s = new String[] {};
+        String[] s = new String[]{};
         while (!commands.equals("bye")) {
             try {
                 s = commands.split(" ");
                 selection = Actions.valueOf(s[0].toUpperCase());
                 switch (selection) {
-                    case LIST:
-                        printList();
-                        break;
-                    case MARK:
-                        Task t1 = taskList.get(Integer.parseInt(s[1]) - 1);
-                        t1.markDone();
-                        System.out.println("\tNice! I've marked this task as done:");
-                        System.out.println("\t  " + t1);
-                        break;
-                    case UNMARK:
-                        Task t2 = taskList.get(Integer.parseInt(s[1]) - 1);
-                        t2.markNotDone();
-                        System.out.println("\tOK, I've marked this task as not done yet:");
-                        System.out.println("\t  " + t2);
-                        break;
-                    case TODO:
-                        if (s.length < 2)
-                            throw new DukeException("☹ OOPS!!! The description of a todo cannot be empty.");
-                        Todo todo = new Todo(commands.substring(5));
-                        addTask(todo);
-                        break;
-                    case DEADLINE:
-                        if (s.length < 2)
-                            throw new DukeException("☹ OOPS!!! The description of a deadline cannot be empty.");
-                        String[] deadlineInfo = commands.substring(9).split(" /by ");
-                        if (deadlineInfo.length < 2)
-                            throw new DukeException("☹ OOPS!!! Deadline cannot be empty.");
-                        Deadline deadline = new Deadline(deadlineInfo[0], deadlineInfo[1]);
-                        addTask(deadline);
-                        break;
-                    case EVENT:
-                        if (s.length < 2)
-                            throw new DukeException("☹ OOPS!!! The description of a event cannot be empty.");
-                        String[] eventInfo = commands.substring(6).split(" /from ");
-                        if (eventInfo.length < 2)
-                            throw new DukeException("☹ OOPS!!! Event start time and end time are required.");
-                        String[] eventTime = eventInfo[1].split(" /to ");
-                        if (eventTime.length < 2)
-                            throw new DukeException("☹ OOPS!!! Event start time and end time are required.");
-                        Event event = new Event(eventInfo[0], eventTime[0], eventTime[1]);
-                        addTask(event);
-                        break;
-                    case DELETE:
-                        if (s.length < 2)
-                            throw new DukeException("☹ OOPS!!! You must choose a task to delete");
-                        int taskNumber = Integer.parseInt(s[1]);
-                        if (taskNumber > taskList.size() || taskNumber <= 0)
-                            throw new DukeException("☹ OOPS!!! No such task found");
-                        deleteTask(taskNumber - 1);
-                        break;
-                    default:
-                        System.out.println(lines + "\t☹ OOPS!!! I'm sorry, but I don't know what that means :-(\n" + lines);
-                        break;
+                case LIST:
+                    printList();
+                    break;
+                case MARK:
+                    Task t1 = taskList.get(Integer.parseInt(s[1]) - 1);
+                    t1.markDone();
+                    System.out.println("\tNice! I've marked this task as done:");
+                    System.out.println("\t  " + t1);
+                    break;
+                case UNMARK:
+                    Task t2 = taskList.get(Integer.parseInt(s[1]) - 1);
+                    t2.markNotDone();
+                    System.out.println("\tOK, I've marked this task as not done yet:");
+                    System.out.println("\t  " + t2);
+                    break;
+                case TODO:
+                    if (s.length < 2)
+                        throw new DukeException("☹ OOPS!!! The description of a todo cannot be empty.");
+                    Todo todo = new Todo(commands.substring(5));
+                    addTask(todo);
+                    break;
+                case DEADLINE:
+                    if (s.length < 2)
+                        throw new DukeException("☹ OOPS!!! The description of a deadline cannot be empty.");
+                    String[] deadlineInfo = commands.substring(9).split(" /by ");
+                    if (deadlineInfo.length < 2)
+                        throw new DukeException("☹ OOPS!!! Deadline cannot be empty.");
+                    Deadline deadline = new Deadline(deadlineInfo[0], deadlineInfo[1]);
+                    addTask(deadline);
+                    break;
+                case EVENT:
+                    if (s.length < 2)
+                        throw new DukeException("☹ OOPS!!! The description of a event cannot be empty.");
+                    String[] eventInfo = commands.substring(6).split(" /from ");
+                    if (eventInfo.length < 2)
+                        throw new DukeException("☹ OOPS!!! Event start time and end time are required.");
+                    String[] eventTime = eventInfo[1].split(" /to ");
+                    if (eventTime.length < 2)
+                        throw new DukeException("☹ OOPS!!! Event start time and end time are required.");
+                    Event event = new Event(eventInfo[0], eventTime[0], eventTime[1]);
+                    addTask(event);
+                    break;
+                case DELETE:
+                    if (s.length < 2)
+                        throw new DukeException("☹ OOPS!!! You must choose a task to delete");
+                    int taskNumber = Integer.parseInt(s[1]);
+                    if (taskNumber > taskList.size() || taskNumber <= 0)
+                        throw new DukeException("☹ OOPS!!! No such task found");
+                    deleteTask(taskNumber - 1);
+                    break;
+                default:
+                    System.out.println(lines + "\t☹ OOPS!!! I'm sorry, but I don't know what that means :-(\n" + lines);
+                    break;
                 }
             } catch (DukeException e) {
                 System.out.println(lines + "\t" + e + "\n" + lines);
