@@ -36,4 +36,9 @@ public abstract class Task {
     public String toString() {
         return this.getTaskStatus() + " " + this.taskDescription;
     }
+
+    public String getFileWriteString() {
+        String isDoneString = this.isDone ? "1" : "0";
+        return " | " + isDoneString + " | " + this.taskDescription;
+    }
 }
