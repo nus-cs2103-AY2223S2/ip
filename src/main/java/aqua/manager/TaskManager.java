@@ -73,6 +73,6 @@ public class TaskManager implements Reloadable {
                 taskList.get(i).toString()
             ));
         }
-        return builder.toString();
+        return builder.toString().strip();
     }
 }
