@@ -8,7 +8,7 @@ public class Deadline extends Task {
 
     @Override
     public String getStatusIcon() {
-        return String.format("[D]%s (by: %s)", super.getStatusIcon(), this.deadline);
+        return String.format("[D]%s | BY: %s", super.getStatusIcon(), this.deadline);
     }
 
     @Override

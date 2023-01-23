@@ -9,12 +9,12 @@
 	___________________________________________________________________________
 	___________________________________________________________________________
 	Got it. I've added this task:
-		[D][] return book (by: June 6th)
+		[D][] return book | BY: June 6th
 	Now you have 2 task(s) in the list.
 	___________________________________________________________________________
 	___________________________________________________________________________
 	Got it. I've added this task:
-		[E][] project meeting (from: Aug 6th 2pm to: 4pm)
+		[E][] project meeting | FROM: Aug 6th 2pm TO: 4pm
 	Now you have 3 task(s) in the list.
 	___________________________________________________________________________
 	___________________________________________________________________________
@@ -42,77 +42,77 @@
 	___________________________________________________________________________
 	___________________________________________________________________________
 	Here are the tasks in your list:
-	1. [D][] return book (by: June 6th)
-	2. [E][] project meeting (from: Aug 6th 2pm to: 4pm)
+	1. [D][] return book | BY: June 6th
+	2. [E][] project meeting | FROM: Aug 6th 2pm TO: 4pm
 	3. [T][X] join sports club
 	4. [T][] borrow book
 	___________________________________________________________________________
 	___________________________________________________________________________
 	Got it. I've added this task:
-		[D][] return book (by: Sunday)
+		[D][] return book | BY: Sunday
 	Now you have 5 task(s) in the list.
 	___________________________________________________________________________
 	___________________________________________________________________________
 	Got it. I've added this task:
-		[E][] project meeting (from: Mon 2pm to: 4pm)
+		[E][] project meeting | FROM: Mon 2pm TO: 4pm
 	Now you have 6 task(s) in the list.
 	___________________________________________________________________________
 	___________________________________________________________________________
 	Got it. I've added this task:
-		[D][] do homework (by: no idea :-p)
+		[D][] do homework | BY: no idea :-p
 	Now you have 7 task(s) in the list.
 	___________________________________________________________________________
 	___________________________________________________________________________
 	Here are the tasks in your list:
-	1. [D][] return book (by: June 6th)
-	2. [E][] project meeting (from: Aug 6th 2pm to: 4pm)
+	1. [D][] return book | BY: June 6th
+	2. [E][] project meeting | FROM: Aug 6th 2pm TO: 4pm
 	3. [T][X] join sports club
 	4. [T][] borrow book
-	5. [D][] return book (by: Sunday)
-	6. [E][] project meeting (from: Mon 2pm to: 4pm)
-	7. [D][] do homework (by: no idea :-p)
+	5. [D][] return book | BY: Sunday
+	6. [E][] project meeting | FROM: Mon 2pm TO: 4pm
+	7. [D][] do homework | BY: no idea :-p
 	___________________________________________________________________________
 	___________________________________________________________________________
 	☹ OOPS!!! I'm sorry, but I don't know what that means :-(
 	___________________________________________________________________________
 	___________________________________________________________________________
 	Nice! I've marked this task as done:
-		[D][X] do homework (by: no idea :-p)
+		[D][X] do homework | BY: no idea :-p
 	___________________________________________________________________________
 	___________________________________________________________________________
 	Nice! I've marked this task as done:
-		[D][X] return book (by: Sunday)
+		[D][X] return book | BY: Sunday
 	___________________________________________________________________________
 	___________________________________________________________________________
 	Here are the tasks in your list:
-	1. [D][] return book (by: June 6th)
-	2. [E][] project meeting (from: Aug 6th 2pm to: 4pm)
+	1. [D][] return book | BY: June 6th
+	2. [E][] project meeting | FROM: Aug 6th 2pm TO: 4pm
 	3. [T][X] join sports club
 	4. [T][] borrow book
-	5. [D][X] return book (by: Sunday)
-	6. [E][] project meeting (from: Mon 2pm to: 4pm)
-	7. [D][X] do homework (by: no idea :-p)
+	5. [D][X] return book | BY: Sunday
+	6. [E][] project meeting | FROM: Mon 2pm TO: 4pm
+	7. [D][X] do homework | BY: no idea :-p
 	___________________________________________________________________________
 	___________________________________________________________________________
 	☹ OOPS!!! I'm sorry, but I don't know what that means :-(
 	___________________________________________________________________________
 	___________________________________________________________________________
 	OK, I've marked this task as not done yet:
-		[D][] do homework (by: no idea :-p)
+		[D][] do homework | BY: no idea :-p
 	___________________________________________________________________________
 	___________________________________________________________________________
 	Noted. I've removed this task:
-		[E][] project meeting (from: Mon 2pm to: 4pm)
+		[E][] project meeting | FROM: Mon 2pm TO: 4pm
 	Now you have 6 task(s) in the list.
 	___________________________________________________________________________
 	___________________________________________________________________________
 	Here are the tasks in your list:
-	1. [D][] return book (by: June 6th)
-	2. [E][] project meeting (from: Aug 6th 2pm to: 4pm)
+	1. [D][] return book | BY: June 6th
+	2. [E][] project meeting | FROM: Aug 6th 2pm TO: 4pm
 	3. [T][X] join sports club
 	4. [T][] borrow book
-	5. [D][X] return book (by: Sunday)
-	6. [D][] do homework (by: no idea :-p)
+	5. [D][X] return book | BY: Sunday
+	6. [D][] do homework | BY: no idea :-p
 	___________________________________________________________________________
 	___________________________________________________________________________
 	Bye. Hope to see you again soon!
