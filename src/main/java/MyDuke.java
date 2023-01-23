@@ -1,9 +1,13 @@
 import java.util.List;
 import java.util.Arrays;
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.function.*;
 
 public class MyDuke {
     private static ArrayList<Task> allTasks = new ArrayList<Task>();
+    private static Map<String, Consumer<String[]>> MAP = new HashMap<>();
     private static int taskCount = 0;
 
     public void init() {
@@ -14,6 +18,9 @@ public class MyDuke {
                     + "|____/ \\__,_|_|\\_\\___|\n";
         System.out.println("Hello from\n" + logo
                             + "\nWhat's on your mind today?\n");
+
+        populateCommands();
+    
     }
 
     public void quit() {
@@ -24,38 +31,21 @@ public class MyDuke {
 
     public void exec(String[] tokens) throws InvalidCommandException {
         try {
-            switch (tokens[0]) {
-                case "list":
-                    showAll();
-                    break;
-                case "todo":
-                    addTodo(tokens);
-                    showCount();
-                    break;
-                case "deadline":
-                    addDeadline(tokens);
-                    showCount();
-                    break;
-                case "event":
-                    addEvent(tokens);
-                    showCount();
-                    break;
-                case "mark":
-                    toggle(tokens);
-                    break;
-                case "unmark":
-                    toggle(tokens);
-                    break;
-                case "delete":
-                    delete(tokens);
-                    break;
-                default:
-                    throw new InvalidCommandException("Invalid Command! Try: " +
-                                                    "[list, todo, deadline, event, mark/unmark]");
-            }
-        } catch (InvalidCommandException e) {
-            System.out.println(e.errorMessage);
+            MAP.get(tokens[0]).accept(tokens);
+        } catch (NullPointerException n) {
+            System.out.println("Invalid Command! Try: [list, todo, deadline, event, mark/unmark");
+            return;
         }
+    }
+
+    private void populateCommands() {
+        MAP.put("list", (tokens) -> showAll());
+        MAP.put("todo", (tokens) -> addTodo(tokens));
+        MAP.put("deadline", (tokens) -> addDeadline(tokens));
+        MAP.put("event", (tokens) -> addEvent(tokens));
+        MAP.put("mark", (tokens) -> toggle(tokens));
+        MAP.put("unmark", (tokens) -> toggle(tokens));
+        MAP.put("delete", (tokens) -> delete(tokens));
     }
 
     private void showCount() {
@@ -150,6 +140,7 @@ public class MyDuke {
         ToDo todo = new ToDo(t);
         addTask(todo);
         System.out.println("Successfully added:\n" + todo.toString());
+        showCount();
     }
 
     private void addDeadline(String[] tokens) {
@@ -178,7 +169,8 @@ public class MyDuke {
         String byString = String.join(" ", t.subList(byIndex+1, t.size()));
         Deadline d = new Deadline(desc, byString);
         addTask(d);
-        System.out.println("Successfully added:\n" + d.toString());           
+        System.out.println("Successfully added:\n" + d.toString());
+        showCount();          
     }
 
     private void addEvent(String[] tokens) {
@@ -207,6 +199,7 @@ public class MyDuke {
         Event e = new Event(desc, from, to);
         addTask(e);
         System.out.println("Successfully added:\n" + e.toString());
+        showCount();
     }
 
     private void delete(String[] tokens) {
