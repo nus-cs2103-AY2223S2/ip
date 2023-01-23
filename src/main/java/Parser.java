@@ -38,16 +38,17 @@ public class Parser {
             case "list":
                 return new ListCommand();
             case "mark":
-                return new MarkAsDoneCommand(argValues.get(command));
+                return new MarkAsDoneCommand(argValues.get(command)); // pass in index to command
             case "unmark":
-                return new MarkAsUndoneCommand(argValues.get(command));
+                return new MarkAsUndoneCommand(argValues.get(command)); // pass in index to command
             case "delete":
-                return new DeleteCommand(argValues.get(command));
-            case "add":
-                return new AddCommand(argValues.get(command));
+                return new DeleteCommand(argValues.get(command)); // pass in index to command
             case "bye":
                 return new ExitCommand();
             default:
+                if (TaskList.inputToTask.containsKey(command)) {
+                    return new AddCommand(argValues);
+                }
                 throw new CommandNotFoundException("I'm sorry, I don't recognise this command ://");
         }
     }

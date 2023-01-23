@@ -26,7 +26,7 @@ public class Ui {
 
 
     public void reply(String s) {
-        if (s.charAt(s.length() - 1) != '\n') {
+        if (!s.endsWith("\n")) {
             s += '\n';
         }
         for (String line : s.split("\n")) {

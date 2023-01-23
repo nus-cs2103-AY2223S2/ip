@@ -7,7 +7,7 @@ public class MarkAsUndoneCommand extends Command {
     }
 
     @Override
-    public void execute(TaskList tl, Ui ui, Storage storage) {
+    public void execute(TaskList tl, Ui ui, Storage storage) throws Exception {
         boolean alreadyMarked;
         try {
             int i = Integer.valueOf(this.unmarkAtIndex) - 1;
@@ -18,9 +18,9 @@ public class MarkAsUndoneCommand extends Command {
                 ui.reply("Unmarked " + tl.getTask(i).getDesc() + ".");
             }
         } catch (NumberFormatException e) {
-            ui.reply("Please specify the task by its index number.");
+            throw new Exception("Please specify the task by its index number.");
         } catch (IndexOutOfBoundsException e) {
-            ui.reply("Seems like this task doesn't exist.");
+            throw new Exception("Seems like this task doesn't exist.");
         }
     }
 }

@@ -3,7 +3,7 @@ import java.util.Objects;
 public abstract class Task {
     protected String description;
     protected boolean isDone;
-    protected static String symbol;
+    protected String symbol;
 
     public Task(String description)  {
         this.description = description;
