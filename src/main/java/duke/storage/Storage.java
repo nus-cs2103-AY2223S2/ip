@@ -1,3 +1,9 @@
+package duke.storage;
+
+import duke.exception.DukeException;
+import duke.task.Task;
+import duke.task.TaskList;
+
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;

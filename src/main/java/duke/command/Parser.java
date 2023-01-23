@@ -1,3 +1,10 @@
+package duke.command;
+
+import duke.task.Deadline;
+import duke.task.Event;
+import duke.task.ToDo;
+import duke.exception.DukeException;
+
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
@@ -40,37 +47,37 @@ public class Parser {
                 return new Command.ListCommand();
             case "mark":
                 if (parts.length != 2 || parts[1].trim().isEmpty()) { // 2nd arg not entered
-                    throw new DukeException("Command has to be followed by an integer.");
+                    throw new DukeException("duke.command.Command has to be followed by an integer.");
                 }
                 try {
                     indexInput = Integer.parseInt(parts[1].trim());
                 } catch (NumberFormatException e) {
-                    throw new DukeException("Command has to be followed by an integer.");
+                    throw new DukeException("duke.command.Command has to be followed by an integer.");
                 }
                 return new Command.MarkCommand(indexInput - 1);
             case "unmark":
                 if (parts.length != 2 || parts[1].trim().isEmpty()) { // 2nd arg not entered
-                    throw new DukeException("Command has to be followed by an integer.");
+                    throw new DukeException("duke.command.Command has to be followed by an integer.");
                 }
                 try {
                     indexInput = Integer.parseInt(parts[1].trim());
                 } catch (NumberFormatException e) {
-                    throw new DukeException("Command has to be followed by an integer.");
+                    throw new DukeException("duke.command.Command has to be followed by an integer.");
                 }
                 return new Command.UnmarkCommand(indexInput - 1);
             case "delete":
                 if (parts.length != 2 || parts[1].trim().isEmpty()) { // 2nd arg not entered
-                    throw new DukeException("Command has to be followed by an integer.");
+                    throw new DukeException("duke.command.Command has to be followed by an integer.");
                 }
                 try {
                     indexInput = Integer.parseInt(parts[1].trim());
                 } catch (NumberFormatException e) {
-                    throw new DukeException("Command has to be followed by an integer.");
+                    throw new DukeException("duke.command.Command has to be followed by an integer.");
                 }
                 return new Command.DeleteCommand(indexInput - 1);
             case "filterdate":
                 if (parts.length != 2 || parts[1].trim().isEmpty()) {
-                    throw new DukeException("Command has to be followed by date.");
+                    throw new DukeException("duke.command.Command has to be followed by date.");
                 }
                 LocalDate date = null;
                 DateTimeFormatter[] formatters = {
