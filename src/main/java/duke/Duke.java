@@ -129,8 +129,11 @@ public class Duke {
         } else if (parser.checkCommand(inMsg, Command.DELETE)) {
             String indexToDelete = parser.getCommandContent(inMsg, Command.DELETE);
             stringToPrint = deleteTask(Integer.parseInt(indexToDelete));
+        } else if (parser.checkCommand(inMsg, Command.FIND)) {
+            String keyword = parser.getCommandContent(inMsg, Command.FIND);
+            stringToPrint = find(keyword);
         } else {
-            throw new DukeException("  OOPS!!! I'm sorry, but I don't know what that means :-(");
+                throw new DukeException("  OOPS!!! I'm sorry, but I don't know what that means :-(");
         }
 
         if (!suppressPrint) {
@@ -223,5 +226,17 @@ public class Duke {
             string = string + s + "\n";
         }
         return string;
+    }
+
+    /**
+     * Return the string representation of the list of tasks
+     * whose names contain the given keyword.
+     * @param string: the keyword
+     * @return the string of the task list
+     */
+    public String find(String string) {
+        String taskListString = "Here are the matching tasks in your list:\n" +
+                taskList.getTaskNameContains(string).getTaskListString(true);
+        return taskListString;
     }
 }

@@ -101,4 +101,13 @@ public class Task {
     public String getType() {
         return type;
     }
+
+    /**
+     * Checks if the task name contains a given string
+     * @param string: a given string
+     * @return a boolean value
+     */
+    public boolean containString(String string) {
+        return toString().contains(string);
+    }
 }
