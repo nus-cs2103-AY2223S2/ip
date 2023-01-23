@@ -1,8 +1,9 @@
-public class MessageProcessor {
+public class MessageGenerator {
+
     TaskList taskList;
     Storage storage;
 
-    MessageProcessor(TaskList taskList, Storage storage) {
+    MessageGenerator(TaskList taskList, Storage storage) {
         this.taskList = taskList;
         this.storage = storage;
     }
@@ -18,32 +19,6 @@ public class MessageProcessor {
         this.storage.markTask(message);
 
         return this.taskList.getTask(taskNum);
-    }
-
-    private boolean isMark(String message) {
-        String[] messageSplit = message.split(" ");
-        if (messageSplit.length != 2) {
-            return false;
-        }
-        String action = messageSplit[0];
-
-        if ((action.equals("mark") || action.equals("unmark"))) {
-            return true;
-        }
-        return false;
-
-    }
-
-    private boolean isAdd(String message) {
-        String[] messageSplit = message.split(" ");
-        String action = messageSplit[0];
-        return (action.equals("todo") || action.equals("deadline") || action.equals("event"));
-    }
-
-    private boolean isDelete(String message) {
-        String[] messageSplit = message.split(" ");
-        String action = messageSplit[0];
-        return action.equals("delete");
     }
 
     private String generateTaskMessage(MessageStatus status, Task task) {
@@ -71,46 +46,42 @@ public class MessageProcessor {
         return String.format("%s\n%s%s", heading, task.toString(), end);
     }
 
-
     private String generateListMessage() {
         String heading = "Here are the tasks in your list:\n";
         return heading + this.taskList.toString();
     }
 
-    DukeMessage process(String message)
-            throws InvalidInputException, InvalidTodoException, InvalidDeadlineException, InvalidEventException {
+    DukeMessage generate(MessageStatus status, String message)
+            throws InvalidDeadlineException, InvalidTodoException, InvalidEventException {
+        Task task;
 
-        MessageStatus status;
-        if (message.equals("bye")) {
-            status = MessageStatus.END;
-        } else if (message.equals("list")){
-            status = MessageStatus.LIST;
+        switch (status) {
+        case LIST:
             message = generateListMessage();
-        } else if (isMark(message)) {
-            Task task = processMark(message);
-            status = MessageStatus.MARK;
+            break;
+        case MARK:
+            task = processMark(message);
             message = generateTaskMessage(status, task);
-        } else if (isAdd(message)) {
-            Task task = taskList.addTask(message);
+            break;
+        case ADD:
+            task = taskList.addTask(message);
 
             // Add task in storage
             this.storage.addTask(message);
 
-            status = MessageStatus.ADD;
             message = generateTaskMessage(status, task);
-        } else if (isDelete(message)) {
-            Task task = taskList.deleteTask(message);
+            break;
+        case DELETE:
+            task = taskList.deleteTask(message);
 
             // Delete task in storage
             this.storage.deleteTask(message);
 
-            status = MessageStatus.DELETE;
             message = generateTaskMessage(status, task);
-        } else {
-            throw new InvalidInputException();
+            break;
+        default:
+            break;
         }
-
         return new DukeMessage(status, message);
     }
-
 }

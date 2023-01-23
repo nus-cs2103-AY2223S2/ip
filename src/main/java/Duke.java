@@ -5,7 +5,8 @@ public class Duke {
         boolean end = false;
         Storage storage = new Storage();
         TaskList taskList = new TaskList(storage.load());
-        MessageProcessor messageProcessor = new MessageProcessor(taskList, storage);
+        Parser parser = new Parser();
+        MessageGenerator messageGenerator = new MessageGenerator(taskList, storage);
         DukeMessage initMessage = new DukeMessage(MessageStatus.START);
         System.out.println(initMessage);
 
@@ -18,7 +19,8 @@ public class Duke {
                 scanner.close();
             }
             try {
-                DukeMessage dukeResponse = messageProcessor.process(userMessage);
+                MessageStatus responseStatus = parser.process(userMessage);
+                DukeMessage dukeResponse =  messageGenerator.generate(responseStatus, userMessage);
                 System.out.println(dukeResponse);
             } catch (InvalidInputException | InvalidTodoException | InvalidDeadlineException | InvalidEventException e) {
                 System.out.println(e.getMessage());
