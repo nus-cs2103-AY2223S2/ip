@@ -1,6 +1,11 @@
+import java.time.LocalDate;
+import java.util.Optional;
+
 public class Event extends Task {
     String fromDate;
     String toDate;
+    Optional<LocalDate> chronoFromDate;
+    Optional<LocalDate> chronoToDate;
 
     public static Event create(String commandInput) throws TaskNameNotSpecified, EventFromToNotSpecified {
         String[] parseInfo = parseCmd(commandInput);
@@ -11,6 +16,8 @@ public class Event extends Task {
         super(taskName, "E");
         this.fromDate = fromDate;
         this.toDate = toDate;
+        this.chronoFromDate = Parser.parseDate(fromDate);
+        this.chronoToDate = Parser.parseDate(toDate);
     }
 
     public static String[] parseCmd(String commandInput) throws TaskNameNotSpecified, EventFromToNotSpecified {
