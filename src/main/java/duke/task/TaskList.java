@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 
 public class TaskList {
+    /* An ArrayList of tasks */
     private final ArrayList<Task> tasks;
 
     /**

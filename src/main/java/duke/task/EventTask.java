@@ -4,7 +4,10 @@ import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
 public class EventTask extends Task{
+    /* Start date of the task */
     protected LocalDate from;
+
+    /* End date of the task */
     protected LocalDate to;
 
     /**

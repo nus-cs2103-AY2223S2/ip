@@ -15,6 +15,7 @@ import java.util.Scanner;
  */
 public class Storage {
 
+    /* The file where data will be stored */
     private final File storageFile;
 
     /**

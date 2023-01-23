@@ -9,6 +9,7 @@ import java.util.Scanner;
  * The Ui class deals with interactions with the user.
  */
 public class Ui {
+    /* Responsible for reading user input */
     private final Scanner scanner;
 
     /**

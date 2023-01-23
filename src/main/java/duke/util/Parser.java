@@ -13,8 +13,13 @@ import java.time.format.DateTimeParseException;
  */
 public class Parser {
 
+    /* TaskList instance of tasks */
     private final TaskList taskList;
+
+    /* Storage instance of Duke */
     private final Storage storage;
+
+    /* Ui instance of Duke */
     private final Ui ui;
 
     private enum DukeCommand {

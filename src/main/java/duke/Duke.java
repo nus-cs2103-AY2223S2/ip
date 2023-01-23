@@ -24,8 +24,8 @@ public class Duke {
             "  \\/_/\\/_/   \\/_/ /_/   \\/_/   \\/_/ \n";
 
     private final TaskList taskList;
-    private Storage storage;
-    private Ui ui;
+    private final Storage storage;
+    private final Ui ui;
     private final Parser parser;
 
     /**
@@ -33,6 +33,7 @@ public class Duke {
      * @param filePath Path for data storage file.
      */
     public Duke(String filePath) {
+        ui = new Ui();
         storage = new Storage(filePath);
         TaskList tasks;
         try {
@@ -43,7 +44,6 @@ public class Duke {
         }
         taskList = tasks;
 
-        ui = new Ui();
         parser = new Parser(taskList, storage, ui);
     }
 

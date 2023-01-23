@@ -1,7 +1,10 @@
 package duke.task;
 
 public class Task {
+    /* True if task is completed */
     protected boolean isDone;
+
+    /* Description of the task */
     protected String description;
 
     /**
