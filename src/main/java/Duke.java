@@ -1,3 +1,4 @@
+import java.io.*;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
@@ -49,13 +50,95 @@ public class Duke {
         taskList.remove(taskId);
     }
 
+    public static void loadTasksList() throws FileNotFoundException, IOException {
+        String path = "./data/duke.txt";
+        String directoryPath = "./data";
+        File directory = new File(directoryPath);
+        final File file = new File(path);
+
+        if (!directory.exists()) {
+            directory.mkdir();
+            if (!file.exists()) {
+                file.getParentFile().mkdir();
+                file.createNewFile();
+            }
+        }
+//        String home = System.getProperty("user.home");
+//        java.nio.file.Path path = java.nio.file.Paths.get(home, "data", "duke.txt");
+//        final File f = new File(String.valueOf(path));
+//        if (!f.exists()) {
+//            throw new FileNotFoundException();
+//        }
+        Scanner sc = new Scanner(file);
+        taskList = new ArrayList<>();
+        String taskString;
+        String[] s;
+        while (sc.hasNext()) {
+            taskString = sc.nextLine();
+            s = taskString.split(" \\| ");
+
+            switch (s[0].strip()) {
+            case "T":
+                Todo todo = new Todo(s[2]);
+                if (s[1].equals("1")) {
+                    todo.markDone();
+                }
+                taskList.add(todo);
+                break;
+            case "D":
+                Deadline deadline = new Deadline(s[2], s[3]);
+                if (s[1].equals("1")) {
+                    deadline.markDone();
+                }
+                break;
+            case "E":
+                Event event = new Event(s[2], s[3], s[4]);
+                break;
+            default:
+                break;
+            }
+
+        }
+    }
+
+    public static void saveTasksList() throws IOException {
+//        String home = System.getProperty("user.home");
+//        java.nio.file.Path path = java.nio.file.Paths.get(home, "data", "duke.txt");
+//        java.nio.file.Path directoryPath = java.nio.file.Paths.get(home, "data");
+        String path = "./data/duke.txt";
+        String directoryPath = "./data";
+        File directory = new File(directoryPath);
+        final File file = new File(path);
+
+        if (!directory.exists()) {
+            directory.mkdir();
+            if (!file.exists()) {
+                file.getParentFile().mkdir();
+                file.createNewFile();
+            }
+        }
+
+        final FileWriter fw = new FileWriter(file.getAbsoluteFile());
+        BufferedWriter bw = new BufferedWriter(fw);
+
+        for (Task task : taskList) {
+            bw.append(task.getData());
+        }
+        bw.close();
+    }
+
     public static void main(String[] args) {
         taskList = new ArrayList<>();
+        try {
+            loadTasksList();
+        } catch (IOException e) {
+            System.out.println(e);
+        }
         System.out.println(GREET);
         Scanner sc = new Scanner(System.in);
-        Actions selection = null;
+        Actions selection;
         String commands = sc.nextLine();
-        String[] s = new String[]{};
+        String[] s;
         while (!commands.equals("bye")) {
             try {
                 s = commands.split(" ");
@@ -115,10 +198,13 @@ public class Duke {
                     System.out.println(LINES + "\t☹ OOPS!!! I'm sorry, but I don't know what that means :-(\n" + LINES);
                     break;
                 }
+                saveTasksList();
             } catch (DukeException e) {
                 System.out.println(LINES + "\t" + e + "\n" + LINES);
             } catch (IllegalArgumentException e) {
                 System.out.println(LINES + "\tPlease enter a valid action!\n" + LINES);
+            } catch (IOException e) {
+                System.out.println(e);
             }
             commands = sc.nextLine();
         }

@@ -8,6 +8,20 @@ public class Deadline extends Task {
     }
 
     @Override
+    public String getData() {
+        StringBuilder sb = new StringBuilder();
+        sb.append("D | ");
+        if (this.isDone) {
+            sb.append("1 | ");
+        } else {
+            sb.append("0 | ");
+        }
+        sb.append(this.description).append(" | ");
+        sb.append(this.by).append("\n");;
+        return sb.toString();
+    }
+
+    @Override
     public String toString() {
         return "[D]" + super.toString() + " (by: " + by + ")";
     }
