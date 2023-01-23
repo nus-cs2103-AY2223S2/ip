@@ -57,7 +57,7 @@ public class Duke {
                         break;
                 }
             } catch (ArrayIndexOutOfBoundsException e) {
-                throw new DukeException("☹ OOPS!!! The description of a todo cannot be empty.");
+                throw new DukeException("☹ OOPS!!! The description cannot be empty.");
             } catch (IllegalArgumentException e) {
                 throw new DukeException("☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
             } finally {

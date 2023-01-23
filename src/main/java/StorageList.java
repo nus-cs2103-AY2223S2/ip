@@ -73,10 +73,14 @@ public class StorageList {
 
     public void addDeadline(String sentence, String by) throws DukeException {
         Deadline t = new Deadline(sentence, by);
-        list.add(t);
-        updateStorage();
-        System.out.println("Got it, I've added this task:");
-        System.out.println(t);
+        if (!t.checkFormat()) {
+            list.add(t);
+            updateStorage();
+            System.out.println("Got it, I've added this task:");
+            System.out.println(t);
+        } else {
+            System.out.println("Wrong Format, Please fill in with the following format: YYYY-MM-DD h:mm");
+        }
     }
 
     public void addEvent(String sentence, String from, String to) {

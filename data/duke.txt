@@ -1,3 +1,0 @@
-[T][ ] eat
-[T][ ] swim
-[D][X] do hw (by: tuesday)
