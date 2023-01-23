@@ -63,6 +63,10 @@ public class Duke {
                     tasks.addEvent(fullCommand);
                     break;
 
+                case "find":
+                    tasks.find(fullCommand);
+                    break;
+
                 default:
                     System.out.println("☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
                     continue;

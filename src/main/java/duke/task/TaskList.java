@@ -85,4 +85,21 @@ public class TaskList {
         }
     }
 
+    public void find(String command) {
+        String keyword = Parser.parseQuery(command);
+        ArrayList<Task> temp = new ArrayList<Task>();
+        for (Task t: list) {
+            if(t.description.matches("(.*)"+keyword+"(.*)")) {
+                temp.add(t);
+            }
+        }
+        System.out.println("Here are the matching tasks in your list:");
+        if (temp.size()==0) {
+            System.out.println("No matching task!");
+            return;
+        }
+        for (int i = 0; i < temp.size(); i++) {
+            System.out.println(i+1 + ". " + temp.get(i));
+        }
+    }
 }
