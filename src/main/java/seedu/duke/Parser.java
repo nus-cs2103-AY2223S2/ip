@@ -30,8 +30,10 @@ public class Parser {
                 int index = Integer.valueOf(echoSplit[1]) - 1;
                 tasks.delete(index);
                 COUNTER--;
+            } else if (echoSplit[0].equals("find")) {
+                tasks.find(echoSplit);
             } else {
-
+                System.out.println("I don't know what you are talking about");
             }
         }
 

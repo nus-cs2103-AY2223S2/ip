@@ -120,4 +120,20 @@ public class TaskList {
         System.out.println("    -------------------------------------------\n    " + "removed: " + list.get(index) +"\n    -------------------------------------------");
         list.remove(index);
     }
+
+    public void find(String[] echoSplit) {
+        System.out.println("    -------------------------------------------");
+        String keyword = echoSplit[1];
+        for (int i = 0; i < list.size(); i++) {
+            String description = list.get(i).description;
+            String[] taskSplit = description.split(" ");
+            for (int j = 0; j < taskSplit.length; j++) {
+                if (keyword.equals(taskSplit[j])) {
+                    System.out.println("    " + String.valueOf(i + 1) + "."  + list.get(i).toString());
+                    break;
+                }
+            }
+        }
+        System.out.println("    -------------------------------------------");
+    }
 }
