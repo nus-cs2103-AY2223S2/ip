@@ -1,0 +1,9 @@
+todo eat
+deadline play /by 5pm
+event sleep /from 12am /to 6am
+mark 2
+unmark 2
+list
+delete 3
+list
+todo
