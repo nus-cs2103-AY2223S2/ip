@@ -1,6 +1,3 @@
-import java.time.LocalDate;
-import java.util.Map;
-
 public class Sam {
   private Ui ui;
   private Storage storage;
