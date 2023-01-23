@@ -36,14 +36,13 @@ public class Duke {
                     addSuppTask(type, inputs, splitStr);
                     System.out.println("Got it. I've added this task:");
                     System.out.println(inputs.get(inputs.size() - 1));
-                    System.out.println("Now you have " + Task.getCount() + " tasks in the list.");
+                    System.out.println("Now you have " + inputs.size() + " tasks in the list.");
                 } else if(type.equals("delete")) {
                     Task taskToDelete = inputs.get(Integer.parseInt(splitStr[1]) - 1);
                     System.out.println("Noted. I've removed this task:");
                     System.out.println(taskToDelete);
-                    Task.setCount(Task.getCount() - 1);
                     inputs.remove(Integer.parseInt(splitStr[1]) - 1);
-                    System.out.println("Now you have " + Task.getCount() + " tasks in the list.");
+                    System.out.println("Now you have " + inputs.size() + " tasks in the list.");
                 } else {
                     throw new InvalidTaskException();
                 }
@@ -52,7 +51,7 @@ public class Duke {
             } catch (NumberFormatException e) {
                 System.out.println("Mark commands need to be followed by an integer!");
             } catch (IndexOutOfBoundsException e) {
-                System.out.println(String.format("Sorry but there are only %d tasks stored!", Task.getCount()));
+                System.out.println(String.format("Sorry but there are only %d tasks stored!", inputs.size()));
             } finally {
                 System.out.println("____________________________________________________________\n");
                 currInput = scanner.nextLine();
