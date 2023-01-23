@@ -16,7 +16,7 @@ public class ListCommand extends Command {
     if (tasks.count() == 0) {
       ui.talk("Your list is empty!");
     } else {
-      List<String> list = tasks.generateList();
+      List<String> list = tasks.getTasks();
       list.add(0, "Here is your list:");
       ui.talk(list.toArray(new String[0]));
     }

@@ -9,6 +9,7 @@ import sam.command.AddCommand;
 import sam.command.Command;
 import sam.command.DeleteCommand;
 import sam.command.ExitCommand;
+import sam.command.FindCommand;
 import sam.command.ListCommand;
 import sam.command.MarkCommand;
 import sam.task.SamMissingTaskTitleException;
@@ -86,6 +87,9 @@ public class Parser {
       break;
     case "delete":
       c = new DeleteCommand(args);
+      break;
+    case "find":
+      c = new FindCommand(args);
       break;
     default:
       throw new SamUnknownCommandException();

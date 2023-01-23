@@ -48,6 +48,17 @@ public class TaskList {
     return list;
   }
 
+  public List<String> findTasks(String subString) {
+    List<String> list = new ArrayList<>();
+    for (int i = 0; i < count(); i++) {
+      Task t = tasks.get(i);
+      if (t.title.contains(subString)) {
+        list.add(String.format("%d: %s", i + 1, t));
+      }
+    }
+    return list;
+  }
+
   private boolean isValidId(int id) {
     return !(id <= 0 || id > count());
   }
