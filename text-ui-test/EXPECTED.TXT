@@ -1,10 +1,10 @@
            Hello! I am
-____    ____  __    __   __    __
+____    ____  __    __   __    __  
 \   \  /   / |  |  |  | |  |  |  |
- \   \/   /  |  |  |  | |  |  |  |
-  \_    _/   |  |  |  | |  |  |  |
-    |  |     |  `--'  | |  `--'  |
-    |__|      \______/   \______/
+ \   \/   /  |  |  |  | |  |  |  | 
+  \_    _/   |  |  |  | |  |  |  | 
+    |  |     |  `--'  | |  `--'  | 
+    |__|      \______/   \______/  
 
     What can I do for you?
     ----------------------------------------
@@ -40,7 +40,7 @@ ____    ____  __    __   __    __
       [E][ ] buy food (from: today to: tomorrow)
     Now you have 3 tasks in the list.
     ----------------------------------------
-    Here are the tasks in your list:
+    Here are the tasks in your list: 
     1.[T][ ] read books
     2.[D][ ] study (by: tonight)
     3.[E][ ] buy food (from: today to: tomorrow)
@@ -52,7 +52,7 @@ ____    ____  __    __   __    __
     Nice! I've marked this task as done:
       [T][X] read books
     ----------------------------------------
-    Here are the tasks in your list:
+    Here are the tasks in your list: 
     1.[T][X] read books
     2.[D][ ] study (by: tonight)
     3.[E][ ] buy food (from: today to: tomorrow)
@@ -64,7 +64,7 @@ ____    ____  __    __   __    __
     OK, I've marked this task as not done yet:
       [T][ ] read books
     ----------------------------------------
-    Here are the tasks in your list:
+    Here are the tasks in your list: 
     1.[T][ ] read books
     2.[D][ ] study (by: tonight)
     3.[E][ ] buy food (from: today to: tomorrow)
@@ -78,7 +78,7 @@ ____    ____  __    __   __    __
     Noted. I've removed this task:
       [D][ ] study (by: tonight)
     ----------------------------------------
-    Here are the tasks in your list:
+    Here are the tasks in your list: 
     1.[T][ ] read books
     2.[E][ ] buy food (from: today to: tomorrow)
     ----------------------------------------
