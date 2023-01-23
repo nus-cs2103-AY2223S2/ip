@@ -41,4 +41,8 @@ public class Parser {
         return command.split(" ", 2)[1].split("/from | /to ");
     }
 
+    public static String parseQuery (String command) {
+        return command.split(" ", 2)[1];
+    }
+
 }
