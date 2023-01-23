@@ -19,24 +19,51 @@ public class Duke {
                 continue;
             }
 
+            if (input.contains("unmark")) {
+                char query = input.charAt(input.length() - 1);
+                int pos = Character.getNumericValue(query);
+                //error check for pos exceeding size
+                hist.unmark(pos-1);
+                System.out.println("Unmarked: ");
+                System.out.println(hist.getHist(pos-1).toString());
+                continue;
+            }
+
             if (input.contains("mark")) {
                 char query = input.charAt(input.length() - 1);
                 int pos = Character.getNumericValue(query);
+                //error check for pos exceeding size
                 hist.mark(pos-1);
                 System.out.println("Marked: ");
                 System.out.println(hist.getHist(pos-1).toString());
                 continue;
             }
 
-            if (input.contains("unmark")) {
-                char query = input.charAt(input.length() - 1);
-                int pos = Character.getNumericValue(query);
-                hist.unmark(pos-1);
-                System.out.println("unmarked: ");
-                System.out.println(hist.getHist(pos-1).toString());
+            if (input.contains("todo")) {
+                Task todo = new ToDo();
+                todo.genDscp(input);
+                hist.addHist(todo);
+                System.out.println(String.format("Now you have %d tasks in the list", hist.getNum()));
                 continue;
             }
-            hist.addHist(input);
+
+            if (input.contains("event")) {
+                Task event = new Event();
+                event.genDscp(input);
+                hist.addHist(event);
+                System.out.println(String.format("Now you have %d tasks in the list", hist.getNum()));
+                continue;
+            }
+
+            if (input.contains("deadline")) {
+                Task deadline = new Deadline();
+                deadline.genDscp(input);
+                hist.addHist(deadline);
+                System.out.println(String.format("Now you have %d tasks in the list", hist.getNum()));
+                continue;
+            }
+//            Task newTask = new Task(input);
+//            hist.addHist(newTask);
         }
         return;
     }

@@ -1,9 +1,10 @@
 public class Task {
     String task;
+    String tag = "[ ]";
     Boolean done = false;
 
-    public Task(String task) {
-        this.task = task;
+    public void genDscp(String input) {
+        this.task = input;
     }
     public void mark() {
         this.done = true;
@@ -16,6 +17,6 @@ public class Task {
     @Override
     public String toString() {
         String mark = this.done ? "X" : " ";
-        return "[" + mark + "]" +  ' ' + this.task;
+        return this.tag + "[" + mark + "] " + this.task;
     }
 }
