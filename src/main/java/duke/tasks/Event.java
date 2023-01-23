@@ -4,7 +4,10 @@ package duke.tasks;
 import duke.utilities.Parser;
 
 import java.util.Date;
-
+/**
+ * Represents Event task. A <code>Event</code> class corresponds to
+ * the event task
+ */
 public class Event extends ITask {
 
     private final Date from;

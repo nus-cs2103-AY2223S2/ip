@@ -7,8 +7,11 @@ import duke.tasks.ITask;
 import duke.tasks.Todo;
 import duke.utilities.Parser;
 
+/**
+ * Represents add action command. A <code>Add</code> object corresponds to
+ * the action adding a task to task list
+ */
 public class Add extends ICommand {
-
     public Add(Parser parser) {
         super(parser);
     }

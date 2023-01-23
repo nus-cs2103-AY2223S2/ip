@@ -15,7 +15,7 @@ class ParserTest {
         Date actual = parser.getBy();
 
         Date expected;
-        expected = Parser.DATE_FORMAT.parse("2/12/2019 1800");
+        expected = Parser.DATE_IN_FORMAT.parse("2/12/2019 1800");
 
         assertEquals(actual, expected);
 
@@ -27,7 +27,7 @@ class ParserTest {
         parser.forEvent();
         Date actual = parser.getFrom();
 
-        Date expected = Parser.DATE_FORMAT.parse("2/12/2019 1800");
+        Date expected = Parser.DATE_IN_FORMAT.parse("2/12/2019 1800");
 
         assertEquals(actual, expected);
 
@@ -39,7 +39,7 @@ class ParserTest {
         parser.forEvent();
         Date actual = parser.getTo();
 
-        Date expected = Parser.DATE_FORMAT.parse("2/12/2019 2100");
+        Date expected = Parser.DATE_IN_FORMAT.parse("2/12/2019 2100");
 
 
         assertEquals(actual, expected);

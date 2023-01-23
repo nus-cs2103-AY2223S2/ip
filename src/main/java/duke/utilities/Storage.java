@@ -14,23 +14,27 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.Scanner;
-
+/**
+ * Represents local storage. A <code>Storage</code> object corresponds to local
+ * database
+ */
 public class Storage {
     private final String _path;
 
+    /**
+     * Constructor for Storage
+     *
+     * @param path the path to local database file
+     */
     public Storage(String path) {
         _path = path;
     }
 
-//    public String getName(int index) {
-//        return readValueFromDatabase(index);
-//    }
-//
-//    private String readValueFromDatabase(int index) {
-//        // retrieve name from the database
-//        return "";
-//    }
-
+    /**
+     * load the tasks from local database
+     *
+     * @throws DukeException IF error occur during loading of task.
+     */
     public ArrayList<ITask> load() throws DukeException {
         File f = new File(_path);
 
@@ -79,6 +83,12 @@ public class Storage {
 
     }
 
+    /**
+     * save the tasks from local database
+     *
+     * @param tasks task to save
+     * @throws DukeException IF error occur during save of task.
+     */
     public void saveAll(ArrayList<ITask> tasks) throws DukeException {
         try {
             File f = new File(_path);

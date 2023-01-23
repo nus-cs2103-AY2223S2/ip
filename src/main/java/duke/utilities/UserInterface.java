@@ -3,6 +3,7 @@ package duke.utilities;
 import duke.commands.Add;
 import duke.commands.Delete;
 import duke.commands.Exit;
+import duke.commands.Find;
 import duke.commands.ICommand;
 import duke.commands.ListTasks;
 import duke.commands.Mark;
@@ -13,18 +14,36 @@ import duke.tasks.ITask;
 
 import java.util.Scanner;
 
+/**
+ * UserInterface class to interact with user
+ * take in input from user and export output to user
+ */
 public class UserInterface {
 
+    /**
+     * Speak function to print the content onto the display
+     * in pre-define format
+     *
+     * @param sentence to print
+     */
     public void Speak(String sentence) {
-//        System.out.println(dialogSeparator);
         System.out.println(sentence);
         String _dialogSeparator = "____________________________________________________________";
         System.out.println(_dialogSeparator);
     }
+
+    /**
+     * The function to ask user to input command
+     *
+     * @param sentence type of command to ask the user to input
+     */
     public void getCommand(String sentence) {
         System.out.println(sentence);
     }
 
+    /**
+     * The function to show when first start up the Duke and welcome the user
+     */
     public void showWelcome() {
         String logo = " ____        _        \n"
                 + "|  _ \\ _   _| | _____ \n"
@@ -34,13 +53,30 @@ public class UserInterface {
         Speak(logo + "\nHello! I'm Duke\nWhat can I do for you?\n");
     }
 
+    /**
+     * The function to show to error loading msg
+     *
+     * @param msg to be print
+     */
     public void showLoadingError(String msg) {
         Speak(msg);
     }
+
+    /**
+     * The function to show to error msg
+     *
+     * @param msg to be print
+     */
     public void showError(String msg) {
         Speak(msg);
     }
 
+    /**
+     * The function to read the user command
+     *
+     * @param taskManager hand over the command to task manager
+     * @throws DukeException IF error occur
+     */
     public ICommand readCommand(TaskManager taskManager) throws DukeException {
         Scanner sc = new Scanner(System.in);
         String cmd = sc.next().trim();
@@ -61,9 +97,9 @@ public class UserInterface {
             case "todo":
             case "deadline":
             case "event":
-                return new Add(new Parser(taskManager, content, ITask.convertTaskTypeCmdToEnum(cmd)));
+                return new Add(new Parser(content, taskManager, ITask.convertTaskTypeCmdToEnum(cmd)));
             case "find":
-                return new Find(new Parser(taskManager, content, ITask.convertTaskTypeCmdToEnum(cmd)));
+                return new Find(new Parser(content, taskManager, ITask.convertTaskTypeCmdToEnum(cmd)));
             default:
                 throw new InvalidCommandException(cmd);
         }

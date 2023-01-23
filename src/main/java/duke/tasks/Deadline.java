@@ -3,7 +3,10 @@ package duke.tasks;
 import duke.utilities.Parser;
 
 import java.util.Date;
-
+/**
+ * Represents Deadline task. A <code>Deadline</code> class corresponds to
+ * the deadline task
+ */
 public class Deadline extends ITask {
     private final Date _by;
 

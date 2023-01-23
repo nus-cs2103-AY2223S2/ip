@@ -2,7 +2,10 @@ package duke.commands;
 
 import duke.utilities.Parser;
 
-
+/**
+ * Represents exit action command. A <code>Exit</code> object corresponds to
+ * the action exit from program
+ */
 public class Exit extends ICommand{
     public Exit(Parser parser) {
         super(parser);

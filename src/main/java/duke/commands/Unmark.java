@@ -3,7 +3,10 @@ package duke.commands;
 import duke.exceptions.DukeException;
 import duke.tasks.ITask;
 import duke.utilities.Parser;
-
+/**
+ * Represents unmark action command. A <code>Unmark</code> object corresponds to
+ * the action to unmark a task in the program
+ */
 public class Unmark extends ICommand{
     public Unmark(Parser parser) {
         super(parser);

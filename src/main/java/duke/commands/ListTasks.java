@@ -3,7 +3,10 @@ package duke.commands;
 import duke.exceptions.DukeException;
 import duke.tasks.ITask;
 import duke.utilities.Parser;
-
+/**
+ * Represents list tasks action command. A <code>ListTasks</code> object corresponds to
+ * the action to list all task in the program
+ */
 public class ListTasks extends ICommand {
 
     public ListTasks(Parser parser) {
