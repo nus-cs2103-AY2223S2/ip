@@ -97,18 +97,17 @@ public class ChatBot {
                             taskManager.addTaskToList(todo);
                             break;
                         case "event":
-                            System.out.println("Please enter a start time: ");
-                            String start = input.nextLine();
-                            System.out.println("Please enter a end time: ");
-                            String end = input.nextLine();
+                            String[] arr = snd.split(" /from ");
+                            String[] time = arr[1].split(" /to ");
+                            String start = time[0];
+                            String end = time[1];
 
-                            Events event = new Events(snd, start, end);
+                            Events event = new Events(arr[0], start, end);
                             taskManager.addTaskToList(event);
                             break;
                         case "deadline":
-                            System.out.println("Please enter a deadline to complete by: ");
-                            String by = input.nextLine();
-                            Deadlines deadline = new Deadlines(snd, by);
+                            String[] tmp = snd.split(" /by ");
+                            Deadlines deadline = new Deadlines(tmp[0], tmp[1]);
                             taskManager.addTaskToList(deadline);
                             break;
                         default:
