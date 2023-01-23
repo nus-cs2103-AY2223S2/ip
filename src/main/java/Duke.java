@@ -33,8 +33,8 @@ public class Duke {
                     + "6. event taskName /from startDate /to endDate -> Creates an event task with name taskName,\n"
                     + "   start date startDate, and end date endDate.\n"
                     + "7. delete X -> Deletes task number X from the list.\n"
-                    + "8. help -> Get the list of commands supported by this bot.";
-
+                    + "8. help -> Gets the list of commands supported by this bot.\n\n"
+                    + "Please enter dates in the format of either yyyy-MM-dd hh:mm or yyyy-MM-dd.";
 
     /**
      * Launches the chatbot.
@@ -67,13 +67,14 @@ public class Duke {
                 printUserTasks(taskStorage);
                 continue;
             }
-//            //User typed in "help"
-//            else if (input.equals("help")) {
-//                System.out.println(straightLine);
-//                System.out.println("Supported Commands:");
-//                System.out.println(commandList);
-//                System.out.println(straightLine);
-//            }
+            //User typed in "help"
+            else if (input.equals("help")) {
+                System.out.println(straightLine);
+                System.out.println("Supported Commands:");
+                System.out.println(commandList);
+                System.out.println(straightLine);
+                continue;
+            }
 
             String firstWord = inputArray[0];
             switch (firstWord) {
@@ -289,10 +290,6 @@ public class Duke {
         System.out.println("What can I help you with today?\n");
         System.out.println("Supported Commands:");
         System.out.println(commandList);
-        System.out.println("\nPlease enter dates in the format of either yyyy-MM-dd hh:mm or yyyy-MM-dd.");
-
-
-
         System.out.println(straightLine);
     }
 
