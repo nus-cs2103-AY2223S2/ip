@@ -1,4 +1,5 @@
 import java.io.FileNotFoundException;
+import java.time.format.DateTimeParseException;
 import java.util.Scanner;
 
 public class Duke {
@@ -186,6 +187,19 @@ public class Duke {
                         + "Please enter a valid task number!"
                         + "\n"
                         + separator);
+            } catch (IllegalArgumentException e) {
+                System.out.println(separator
+                        + "\n\t"
+                        + "Please enter a valid command!"
+                        + "\n"
+                        + separator);
+            } catch (DateTimeParseException e) {
+                System.out.println(separator
+                        + "\n\t"
+                        + "Please enter a date in e.g yyyy-mm-dd 23:59 format!"
+                        + "\n"
+                        + separator);
+            
             }
         }
     }
