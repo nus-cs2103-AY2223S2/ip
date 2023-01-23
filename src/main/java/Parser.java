@@ -101,12 +101,12 @@ public class Parser {
         case('T'):
             break;
         case('D'):
-            dueDate = info2[1].substring(4, info2[1].length() - 1);
+            dueDate = info2[1].substring(4, info2[1].indexOf(")"));
             break;
         case('E'):
             String[] info3 = info2[1].split(" to: ");
             fromDate = info3[0].substring(6);
-            toDate = info3[1].substring(0, info3[1].length() - 1);
+            toDate = info3[1].substring(0, info3[1].indexOf(")"));
             break;
         }
         return new ParsedLoadedTask(taskType, taskName, isDone, dueDate, fromDate, toDate);
