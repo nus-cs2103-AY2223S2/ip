@@ -39,13 +39,37 @@ public class Parser {
   }
 
   public static Command getCommand(String input) throws SamUnknownCommandException {
-    Command command = null;
-    for (Command c : Command.values())
-      if (c.matches(input)) command = c;
-
-    if (command == null) {
+    String[] commandArgs = splitFirst(input);
+    Command c = null;
+    String args = commandArgs.length > 1 ? commandArgs[1] : "";
+    switch (commandArgs[0]) {
+    case "bye":
+      c = new ExitCommand(args);
+      break;
+    case "list":
+      c = new ListCommand(args);
+      break;
+    case "mark":
+      c = new MarkCommand(args, true);
+      break;
+    case "unmark":
+      c = new MarkCommand(args, false);
+      break;
+    case "todo":
+      c = new AddCommand(args, TaskType.TODO);
+      break;
+    case "event":
+      c = new AddCommand(args, TaskType.EVENT);
+      break;
+    case "deadline":
+      c = new AddCommand(args, TaskType.DEADLINE);
+      break;
+    case "delete":
+      c = new DeleteCommand(args);
+      break;
+    default:
       throw new SamUnknownCommandException();
     }
-    return command;
+    return c;
   }
 }
