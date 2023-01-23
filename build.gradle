@@ -28,14 +28,20 @@ test {
 }
 
 application {
-    mainClassName = "seedu.duke.Duke"
+    mainClassName = "sam.Sam"
 }
 
 shadowJar {
-    archiveBaseName = "duke"
+    archiveBaseName = "sam"
     archiveClassifier = null
 }
 
 run{
     standardInput = System.in
+}
+
+compileJava.options.encoding = 'UTF-8'
+
+tasks.withType(JavaCompile) {
+    options.encoding = 'UTF-8'
 }
