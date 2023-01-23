@@ -5,11 +5,23 @@ import java.time.format.DateTimeParseException;
 
 import duke.exception.InvalidDateException;
 
+/** A representation of a task with a start date and an end date. */
 public class Event extends Task {
 
+    /** Start date of the task. */
     private LocalDate start;
+    /** End date of the task. */
     private LocalDate end;
 
+    /**
+     * Creates a Event object with a given name, completion status, start date, and
+     * end date.
+     * 
+     * @param name   The name of the object to be created
+     * @param isDone The completion status of the object to be created
+     * @param start  A string representation of the task's start date
+     * @param start  A string representation of the task's end date
+     */
     public Event(String name, boolean isDone, String start, String end) throws InvalidDateException {
         super(name, isDone);
         try {
@@ -20,6 +32,13 @@ public class Event extends Task {
         }
     }
 
+    /**
+     * Creates a Event object with a given name, start date, and end date.
+     * 
+     * @param name  The name of the object to be created
+     * @param start A string representation of the task's start date
+     * @param start A string representation of the task's end date
+     */
     public Event(String name, String start, String end) throws InvalidDateException {
         this(name, false, start, end);
     }
