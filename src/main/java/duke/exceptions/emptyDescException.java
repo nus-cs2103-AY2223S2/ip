@@ -1,4 +1,4 @@
-package duke.bot.exceptions;
+package duke.exceptions;
 
 public class emptyDescException extends Exception {
     public emptyDescException(String message) {
