@@ -2,11 +2,17 @@ todo read book
 mark 1
 deadline return book /by June 6th
 deadline return book /by 2023-06-06
-event project meeting /from Aug 6th 2pm /to 4pm
-event project meeting /from 2023-08-06 1400 /to 2023-08-06 1600
+event book club camp /from Aug 6th 2pm /to 4pm
+event book club camp /from 2023-08-08 /to 2023-08-09
+event camp meeting /from 2023-08-06 1400 /to 2023-08-06 1600
+mark 3
 list
+find book
+find camp
+find
 hi
 delete 3
+delete 1
 delete 1
 delete 1
 list

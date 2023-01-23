@@ -25,30 +25,60 @@ use the format: event [description] /from yyyy-MM-dd HHmm /to yyyy-MM-dd HHmm
 ---
 ---
 i've added this event:
-[E][ ] project meeting (from: Aug 06 2023 14:00 to: Aug 06 2023 16:00)
+[E][ ] book club camp (from: Aug 08 2023 to: Aug 09 2023)
 you have 3 tasks in the list
+---
+---
+i've added this event:
+[E][ ] camp meeting (from: Aug 06 2023 14:00 to: Aug 06 2023 16:00)
+you have 4 tasks in the list
+---
+---
+nice! i've marked this task as done:
+[E][X] book club camp (from: Aug 08 2023 to: Aug 09 2023)
 ---
 ---
 1. [T][X] read book
 2. [D][ ] return book (by: Jun 06 2023)
-3. [E][ ] project meeting (from: Aug 06 2023 14:00 to: Aug 06 2023 16:00)
+3. [E][X] book club camp (from: Aug 08 2023 to: Aug 09 2023)
+4. [E][ ] camp meeting (from: Aug 06 2023 14:00 to: Aug 06 2023 16:00)
+---
+---
+here are the matching items in your list:
+1. [T][X] read book
+2. [D][ ] return book (by: Jun 06 2023)
+3. [E][X] book club camp (from: Aug 08 2023 to: Aug 09 2023)
+---
+---
+here are the matching items in your list:
+1. [E][X] book club camp (from: Aug 08 2023 to: Aug 09 2023)
+2. [E][ ] camp meeting (from: Aug 06 2023 14:00 to: Aug 06 2023 16:00)
+---
+---
+pls specify a keyword to find!
+use the format: find [keyword]
 ---
 ---
 invalid command
 ---
 ---
 i've removed this task:
-[E][ ] project meeting (from: Aug 06 2023 14:00 to: Aug 06 2023 16:00)
-you have 2 tasks in the list
+[E][X] book club camp (from: Aug 08 2023 to: Aug 09 2023)
+you have 3 tasks in the list
 ---
 ---
 i've removed this task:
 [T][X] read book
-you have 1 task in the list
+you have 2 tasks in the list
 ---
 ---
 i've removed this task:
 [D][ ] return book (by: Jun 06 2023)
+you have 1 task in the list
+---
+---
+i've removed this task:
+[E][ ] camp meeting (from: Aug 06 2023 14:00 to: Aug 06 2023 16:00)
 you have 0 tasks in the list
 ---
 ---
