@@ -1,3 +1,5 @@
+import java.time.LocalDateTime;
+import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -125,12 +127,12 @@ public class Duke {
                                 break;
                             case "deadline":
                                 String[] s1 = split[1].split("/by ", 2);
-                                t = new Deadlines(s1[0], s1[1]);
+                                t = new Deadlines(s1[0], LocalDateTime.parse(s1[1]));
                                 break;
                             case "event":
                                 String[] s2 = split[1].split("/from ", 2);
                                 String[] s3 = s2[1].split("/to ", 2);
-                                t = new Events(s2[0], s3[0], s3[1]);
+                                t = new Events(s2[0], LocalDateTime.parse(s3[0]), LocalDateTime.parse(s3[1]));
                                 break;
                         }
                         add(t);
@@ -149,6 +151,10 @@ public class Duke {
             } catch (DukeInvalidArgumentException e) {
                 System.out.println("\t____________________________________________________________");
                 System.out.printf("\t☹ OOPS!!! The description of a %s is invalid.\n", e.getMessage());
+                System.out.println("\t____________________________________________________________");
+            } catch (DateTimeParseException e) {
+                System.out.println("\t____________________________________________________________");
+                System.out.println("\t☹ OOPS!!! The format of date-time is invalid.");
                 System.out.println("\t____________________________________________________________");
             } finally {
                 input = scanner.nextLine();
