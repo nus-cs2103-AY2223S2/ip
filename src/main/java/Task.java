@@ -3,8 +3,12 @@ abstract class Task {
   protected boolean isDone;
 
   public Task(String title) {
+    this(title, false);
+  }
+
+  public Task(String title, boolean isDone) {
     this.title = title;
-    this.isDone = false;
+    this.isDone = isDone;
   }
 
   public void mark(boolean done) {

@@ -45,3 +45,9 @@ class SamSaveFailedException extends SamException {
     super("Oh no, there was a problem saving your list!");
   }
 }
+
+class SamLoadFailedException extends SamException {
+  public SamLoadFailedException() {
+    super("Oh no, there was a problem loading your list!");
+  }
+}

@@ -1,4 +1,5 @@
 import java.util.HashMap;
+import java.util.List;
 import java.util.Scanner;
 import java.io.IOException;
 import java.nio.file.Files;
@@ -32,6 +33,11 @@ public class Sam {
   private static void startSam() {
     System.out.println(Assets.LOGO);
     talk("Hello, I am Sam!");
+    try {
+      load();
+    } catch (SamLoadFailedException e) {
+      talk(e.getMessage());
+    }
     while (live) {
       System.out.println();
       System.out.println(Assets.USER);
@@ -202,6 +208,36 @@ public class Sam {
       }
     } catch (IOException e) {
       throw new SamSaveFailedException();
+    }
+  }
+
+  private static void load() throws SamLoadFailedException {
+    try {
+      if (!Files.exists(savePath)) {
+        return;
+      }
+      List<String> lines = Files.readAllLines(savePath);
+      for (String line : lines) {
+        String[] arr = line.split(" [|] ");
+        Task t = null;
+        boolean isDone = arr[1].equals("1");
+        switch (arr[0]) {
+          case "T":
+            t = new ToDo(arr[2], isDone);
+            break; 
+          case "E":
+            t = new Event(arr[2], arr[3], arr[4], isDone);
+            break; 
+          case "D":
+            t = new Deadline(arr[2], arr[3], isDone);
+            break;
+        }
+        if (t != null) {
+          tasks.addTask(t);
+        }
+      }
+    } catch (IOException e) {
+      throw new SamLoadFailedException();
     }
   }
 }
