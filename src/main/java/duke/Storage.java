@@ -15,27 +15,40 @@ import duke.task.Event;
 import duke.task.Task;
 import duke.task.ToDo;
 
+/** Storage module for Duke. */
 public class Storage {
     private File dataFile;
     private boolean hasFile;
     private Ui ui;
 
+    /**
+     * Initializes a Storage object for the current session.
+     * 
+     * @param path Path to the saved data
+     * @param ui   Ui object for the current session
+     */
     public Storage(String path, Ui ui) {
         Path fullPath = Paths.get(System.getProperty("user.dir"), path);
-        System.out.println(fullPath.toString());
         this.dataFile = fullPath.toFile();
         this.hasFile = true;
         this.ui = ui;
 
         try {
+            // create the parent directories and file if needed
             this.dataFile.getParentFile().mkdir();
             this.dataFile.createNewFile();
         } catch (IOException e) {
-            // do nothing if we can't create the file.
-            // this will be handled in the read() and save() methods
+            // do nothing if we can't create the file!
+            // either the file already exists, or we do not have permission to create it
+            // the second case will be handled in the read and save methods
         }
     }
 
+    /**
+     * Reads tasks from the save file and store them in the given TaskList.
+     * 
+     * @param taskList TaskList to store saved tasks in
+     */
     public void readToTaskList(TaskList taskList) {
         try {
             Scanner reader = new Scanner(this.dataFile);
@@ -70,6 +83,11 @@ public class Storage {
         }
     }
 
+    /**
+     * Saves tasks from a given TaskList to the save file.
+     * 
+     * @param taskList TaskList containing the tasks to be saved
+     */
     public void saveToFile(TaskList taskList) {
         try {
             FileWriter writer = new FileWriter(this.dataFile);
@@ -81,6 +99,7 @@ public class Storage {
         }
     }
 
+    /** Notify the user that storage is not available for the current session. */
     public void notifyNoStorage() {
         if (this.hasFile) {
             this.ui.addToMessage("WARNING: Duke cannot read from/write to a storage file. ");
