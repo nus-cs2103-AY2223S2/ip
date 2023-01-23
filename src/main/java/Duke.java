@@ -1,5 +1,13 @@
-import java.io.*;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.temporal.Temporal;
+import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
+
+
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Scanner;
 
 /**
  * Represents a chatbot that one can interact with to keep track of tasks.
@@ -15,6 +23,18 @@ public class Duke {
     private static final String straightLine =
             "_______________________________________________________________________________________________";
 
+    /** Commands that supported by the chatbot. */
+    private static final String commandList =
+            "1. list -> Provides a list of existing tasks.\n"
+                    + "2. mark X -> Marks task number X as done.\n"
+                    + "3. unmark X -> Marks task number X as undone.\n"
+                    + "4. todo taskName -> Creates a todo task with name taskName.\n"
+                    + "5. deadline taskName /by date -> Creates a deadline task with name taskName and deadline date.\n"
+                    + "6. event taskName /from startDate /to endDate -> Creates an event task with name taskName,\n"
+                    + "   start date startDate, and end date endDate.\n"
+                    + "7. delete X -> Deletes task number X from the list.\n"
+                    + "8. help -> Get the list of commands supported by this bot.";
+
 
     /**
      * Launches the chatbot.
@@ -27,23 +47,12 @@ public class Duke {
 
         printIntroductoryMessage();
 
-        //Prepare input and output sources
-        BufferedReader br = new BufferedReader(new InputStreamReader((System.in)));
-        PrintWriter pw = new PrintWriter(new BufferedWriter(new OutputStreamWriter(System.out)));
+        //Prepare input source
+        Scanner sc = new Scanner(System.in);
 
         //Keep taking in user input line by line
         while (true) {
-            String input;
-            try {
-                input = br.readLine();
-            }
-            catch (IOException ie) {
-                pw.println("Error encountered in receiving input.");
-                pw.println("The error message is: ");
-                pw.flush();
-                ie.printStackTrace();
-                break;
-            }
+            String input = sc.nextLine();
 
             //Determine if user types in a single word or multiple words
             String[] inputArray = input.split(" ");
@@ -58,6 +67,13 @@ public class Duke {
                 printUserTasks(taskStorage);
                 continue;
             }
+//            //User typed in "help"
+//            else if (input.equals("help")) {
+//                System.out.println(straightLine);
+//                System.out.println("Supported Commands:");
+//                System.out.println(commandList);
+//                System.out.println(straightLine);
+//            }
 
             String firstWord = inputArray[0];
             switch (firstWord) {
@@ -174,12 +190,19 @@ public class Duke {
                     if (deadlineOfTask.isBlank()) {
                         throw new DukeException("The deadline cannot be left blank.");
                     }
-                    Deadline newDeadlineTask = new Deadline(taskName, deadlineOfTask);
+                    //Checks if the deadline is a valid date and time
+                    Deadline newDeadlineTask = new Deadline(taskName, getDateObject(deadlineOfTask));
                     addTask(newDeadlineTask, taskStorage);
                     break;
                 } catch (DukeException dukeException) {
                     System.out.println(straightLine);
                     System.out.println(dukeException.getMessage());
+                    System.out.println(straightLine);
+                    break;
+                } catch (DateTimeParseException dateTimeException) {
+                    System.out.println(straightLine);
+                    System.out.println("Please check that you entered a valid date, and that the date should be in "
+                            + "the format of yyyy-MM-dd hh:mm or yyyy-MM-dd");
                     System.out.println(straightLine);
                     break;
                 }
@@ -229,12 +252,19 @@ public class Duke {
                     if (endDate.isBlank()) {
                         throw new DukeException("The end date cannot be left blank.");
                     }
-                    Event newEventTask = new Event(taskName, startDate, endDate);
+                    //Create new event task
+                    Event newEventTask = new Event(taskName, getDateObject(startDate), getDateObject(endDate));
                     addTask(newEventTask, taskStorage);
                     break;
                 } catch (DukeException dukeException) {
                     System.out.println(straightLine);
                     System.out.println(dukeException.getMessage());
+                    System.out.println(straightLine);
+                    break;
+                } catch (DateTimeParseException dateTimeException) {
+                    System.out.println(straightLine);
+                    System.out.println("Please check that you entered a valid date, and that the date should be in "
+                            + "the format of yyyy-MM-dd hh:mm or yyyy-MM-dd");
                     System.out.println(straightLine);
                     break;
                 }
@@ -245,7 +275,6 @@ public class Duke {
 
         //Exits the bot with an exit message
         printExitMessage();
-        pw.close();
     }
 
 
@@ -259,16 +288,8 @@ public class Duke {
         System.out.println("I am here to scare all your problems away by keeping track of your tasks.");
         System.out.println("What can I help you with today?\n");
         System.out.println("Supported Commands:");
-        String commandList =
-                "1. list -> Provides a list of existing tasks.\n"
-                + "2. mark X -> Marks task number X as done.\n"
-                + "3. unmark X -> Marks task number X as undone.\n"
-                + "4. todo taskName -> Creates a todo task with name taskName.\n"
-                + "5. deadline taskName /by date -> Creates a deadline task with name taskName and deadline date.\n"
-                + "6. event taskName /from startDate /to endDate -> Creates an event task with name taskName,\n"
-                + "   start date startDate, and end date endDate.\n"
-                + "7. delete X -> Deletes task number X from the list.";
         System.out.println(commandList);
+        System.out.println("\nPlease enter dates in the format of either yyyy-MM-dd hh:mm or yyyy-MM-dd.");
 
 
 
@@ -393,6 +414,36 @@ public class Duke {
             return false;
         }
         return true;
+    }
+
+    /**
+     * Returns a Temporal that encapsulates date and or time information.
+     *
+     * @param rawDateString The raw String that contains date and or time information.
+     * @return the Temporal with the date and or time information.
+     * @throws DateTimeParseException if the raw String is not of the correct date format
+     *                                as requested in the command list of the bot.
+     */
+    public static Temporal getDateObject(String rawDateString)
+            throws DateTimeParseException {
+        //Possible formats, with and without time
+        String timePatternOne = "yyyy-MM-dd HH:mm";
+        String timePatternTwo = "yyyy-MM-dd";
+        DateTimeFormatter formatterWithTime = DateTimeFormatter.ofPattern(timePatternOne);
+        DateTimeFormatter formatterWithoutTime = DateTimeFormatter.ofPattern(timePatternTwo);
+
+        //Determine which format
+        boolean hasTime = (rawDateString.length() > timePatternTwo.length());
+        DateTimeFormatter formatterToUse = (hasTime)
+                ? formatterWithTime
+                : formatterWithoutTime;
+        if (hasTime) {
+            //A date with time
+            return LocalDateTime.parse(rawDateString, formatterToUse);
+        } else {
+            //A date without time
+            return LocalDate.parse(rawDateString, formatterToUse);
+        }
     }
 }
 
