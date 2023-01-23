@@ -1,2 +1,1 @@
-T= =Ear
-E=X=Here=now=tomorrow
+T=X=Heck

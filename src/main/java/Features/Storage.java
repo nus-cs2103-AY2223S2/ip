@@ -14,43 +14,54 @@ public class Storage {
 
     public TaskList loadTaskList() {
 
-        File dukeSave = new File("data/duke.txt");
         TaskList toLoad = new TaskList();
+        File dukePath = new File("data");
+        File dukeSave = new File("data/duke.txt");
 
-        if (dukeSave.exists()) {
-            try {
-                Scanner fileScan = new Scanner(dukeSave);
-                while (fileScan.hasNextLine()) {
-                    String toEval = fileScan.nextLine();
-                    String[] evalArray = toEval.split("=");
-                    switch (evalArray[0]) {
-                    case ("T"):
-                        ToDo addToDo = new ToDo(evalArray[2]);
-                        if (evalArray[1].equals("X")) {
-                            addToDo.MarkDone();
-                        }
-                        toLoad.add(addToDo);
-                        break;
-                    case ("D"):
-                        Deadline addDeadline = new Deadline(evalArray[2], evalArray[3]);
-                        if (evalArray[1].equals("X")) {
-                            addDeadline.MarkDone();
-                        }
-                        toLoad.add(addDeadline);
-                        break;
-                    case("E"):
-                        Event addEvent = new Event(evalArray[2], evalArray[3], evalArray[4]);
-                        if (evalArray[1].equals("X")) {
-                            addEvent.MarkDone();
-                        }
-                        toLoad.add(addEvent);
-                        break;
-                    }
+        try {
+            if (!dukePath.exists()) {
+                dukePath.mkdirs();
+                if (!dukeSave.exists()) {
+                    dukeSave.createNewFile();
                 }
             }
-            catch (FileNotFoundException err) {
-                return toLoad;
+        }
+        catch (IOException err) {
+            new Ui().print("Sorry, could not save that.");
+        }
+
+        try {
+            Scanner fileScan = new Scanner(dukeSave);
+            while (fileScan.hasNextLine()) {
+                String toEval = fileScan.nextLine();
+                String[] evalArray = toEval.split("=");
+                switch (evalArray[0]) {
+                case ("T"):
+                    ToDo addToDo = new ToDo(evalArray[2]);
+                    if (evalArray[1].equals("X")) {
+                        addToDo.MarkDone();
+                    }
+                    toLoad.add(addToDo);
+                    break;
+                case ("D"):
+                    Deadline addDeadline = new Deadline(evalArray[2], evalArray[3]);
+                    if (evalArray[1].equals("X")) {
+                        addDeadline.MarkDone();
+                    }
+                    toLoad.add(addDeadline);
+                    break;
+                case("E"):
+                    Event addEvent = new Event(evalArray[2], evalArray[3], evalArray[4]);
+                    if (evalArray[1].equals("X")) {
+                        addEvent.MarkDone();
+                    }
+                    toLoad.add(addEvent);
+                    break;
+                }
             }
+        }
+        catch (FileNotFoundException err) {
+            return toLoad;
         }
         return toLoad;
     }
