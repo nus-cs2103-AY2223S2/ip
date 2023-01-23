@@ -13,4 +13,9 @@ public class Event extends Task {
         return "[E]" + super.toString() + " (from: " + this.from
                 + " to: " + this.to + ")";
     }
+
+    @Override
+    public String toFormatString() {
+        return "E | " + (super.done ? "1" : "0") + " | " + super.name + " | " + this.from + "-" + this.to;
+    }
 }
