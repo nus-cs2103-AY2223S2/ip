@@ -1,7 +1,12 @@
+package parser;
+
+import exception.InvalidInputException;
+import message.MessageStatus;
+
 public class Parser {
 
 
-    Parser() {
+    public Parser() {
 
     }
 
@@ -31,7 +36,7 @@ public class Parser {
         return action.equals("delete");
     }
 
-    MessageStatus process(String message) throws InvalidInputException {
+    public MessageStatus process(String message) throws InvalidInputException {
 
         MessageStatus status;
         if (message.equals("bye")) {

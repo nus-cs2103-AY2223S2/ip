@@ -1,8 +1,9 @@
+package message;
 public class DukeMessage extends Message {
 
     MessageStatus status;
 
-    DukeMessage(MessageStatus status) {
+    public DukeMessage(MessageStatus status) {
         super("");
         this.status = status;
     }

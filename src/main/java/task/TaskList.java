@@ -1,12 +1,17 @@
+package task;
+
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Locale;
+import exception.InvalidTodoException;
+import exception.InvalidDeadlineException;
+import exception.InvalidEventException;
 
 public class TaskList {
     private ArrayList<Task> list = new ArrayList<>();
 
-    TaskList(ArrayList<String> stringList) {
+    public TaskList(ArrayList<String> stringList) {
         for (String task : stringList) {
             try {
                 String[] taskSplit = task.split(" ", 2);

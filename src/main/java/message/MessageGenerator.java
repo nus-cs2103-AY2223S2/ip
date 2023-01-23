@@ -1,9 +1,19 @@
+package message;
+
+import exception.InvalidDeadlineException;
+import exception.InvalidTodoException;
+import exception.InvalidEventException;
+import storage.Storage;
+import task.Task;
+import task.TaskList;
+
+
 public class MessageGenerator {
 
     TaskList taskList;
     Storage storage;
 
-    MessageGenerator(TaskList taskList, Storage storage) {
+    public MessageGenerator(TaskList taskList, Storage storage) {
         this.taskList = taskList;
         this.storage = storage;
     }
@@ -51,7 +61,7 @@ public class MessageGenerator {
         return heading + this.taskList.toString();
     }
 
-    DukeMessage generate(MessageStatus status, String message)
+    public DukeMessage generate(MessageStatus status, String message)
             throws InvalidDeadlineException, InvalidTodoException, InvalidEventException {
         Task task;
 

@@ -1,6 +1,7 @@
+package exception;
 public class InvalidDeadlineException extends Exception {
 
-    InvalidDeadlineException(String message) {
+    public InvalidDeadlineException(String message) {
         super(message);
     }
 }

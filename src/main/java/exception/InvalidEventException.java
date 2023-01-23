@@ -1,6 +1,7 @@
+package exception;
 public class InvalidEventException extends Exception {
 
-    InvalidEventException(String message) {
+    public InvalidEventException(String message) {
         super(message);
     }
 }
