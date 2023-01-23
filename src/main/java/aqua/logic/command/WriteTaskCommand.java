@@ -2,7 +2,6 @@ package aqua.logic.command;
 
 import java.io.IOException;
 
-import aqua.exception.ProcedureExecutionException;
 import aqua.logic.ArgumentMap;
 import aqua.logic.ExecutionDispatcher;
 import aqua.logic.ExecutionTask;
@@ -14,8 +13,7 @@ public class WriteTaskCommand implements Command {
     public ExecutionDispatcher getDispatcher(ArgumentMap args, AppManager manager) {
         return ExecutionDispatcher.of(new ExecutionTask<String>(args, manager) {
             @Override
-            public String process(ArgumentMap args, AppManager manager)
-                    throws ProcedureExecutionException {
+            public String process(ArgumentMap args, AppManager manager) {
                 try {
                     manager.getTaskManager().saveToFile();
                 } catch (IOException ioEx) {
