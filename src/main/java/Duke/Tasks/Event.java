@@ -69,7 +69,7 @@ public class Event extends Task {
 
     /**
      * Override the reformat method and convert to standard output
-     * @return
+     * @return String
      */
     @Override
     public String reformat() {

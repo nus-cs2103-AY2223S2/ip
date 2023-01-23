@@ -9,9 +9,6 @@ import java.io.FileWriter;
 import java.time.format.DateTimeFormatter;
 import java.time.LocalDateTime;
 
-/**
- * Represents the Disk class
- */
 public class Disk {
 
     private final String path;
@@ -60,8 +57,9 @@ public class Disk {
     }
 
     /**
-     * Write data into txt file
-     * @param taskTable
+     * Write data to txt file
+     * @return ArrayList
+     * @throws IOException
      */
     public void write(ArrayList<Task> taskTable) {
         try {
