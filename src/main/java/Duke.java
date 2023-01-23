@@ -12,7 +12,7 @@ public class Duke {
         System.out.println("Hello I'm Duke! \nWhat can I do for you?");
         while (!line.equals("bye")) {
             if (!line.equals("init")) {
-                Command command = Command.getCommand(line);
+                CommandInput command = CommandInput.getCommandInput(line);
                 switch (command) {
                 case LIST:
                     Ui.listReply(taskList);
@@ -22,7 +22,7 @@ public class Duke {
                     int listIndex = Integer.parseInt(line.split(" ")[1]) - 1;
                     Task targetTask = taskList.get(listIndex);
                     String output; 
-                    if (command == Command.MARK){
+                    if (command == CommandInput.MARK){
                         targetTask.markDone();
                         output = "Nice! I've marked this task as done:";
                     } else {
