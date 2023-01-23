@@ -46,6 +46,7 @@ public class Parser {
         case DEADLINE:
         case EVENT:
         case DELETE:
+        case FIND:
             isCommand = string.toUpperCase().startsWith(command.name());
             break;
         }
