@@ -1,5 +1,4 @@
 public class DeadlineCmd extends Command {
-    TaskList taskList;
     String lineInput;
     Task deadline;
 

@@ -1,5 +1,4 @@
 public class EventCmd extends Command {
-    TaskList taskList;
     String lineInput;
     Task event;
 

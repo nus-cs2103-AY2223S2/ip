@@ -1,5 +1,4 @@
 public class UnmarkCmd extends Command {
-
     int index;
     Task task;
 

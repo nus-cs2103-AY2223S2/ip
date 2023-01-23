@@ -1,5 +1,4 @@
 public class ToDoCmd extends Command {
-    TaskList taskList;
     String lineInput;
     Task toDo;
 
@@ -15,8 +14,9 @@ public class ToDoCmd extends Command {
         } catch (TaskInitError e) {
             Ui.displayMsg("OOPS!!! " + e.getMessage());
         } 
+        uiReply();
     };
-    
+
     public void uiReply() {
         Ui.displayMsg("Got it. I've added this task:\n" + 
         Ui.indentString(this.toDo.toString(), 1) + "\n" + taskList.countTasks());

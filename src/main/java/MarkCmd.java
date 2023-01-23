@@ -1,5 +1,4 @@
 public class MarkCmd extends Command {
-
     int index;
     Task task;
 
