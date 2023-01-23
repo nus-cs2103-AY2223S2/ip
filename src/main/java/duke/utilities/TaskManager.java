@@ -14,6 +14,7 @@ public class TaskManager {
         _tasks = new ArrayList<>();
         _storage = new Storage(filePath);
     }
+    @SuppressWarnings("SuspiciousMethodCalls")
     public int getObjectIndex(Object obj){
         return _tasks.indexOf(obj);
     }
