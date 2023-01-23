@@ -28,6 +28,7 @@ public class Parser {
         delete,
         save,
         check,
+        find
     }
 
     /**
@@ -157,6 +158,13 @@ public class Parser {
 
                 case save:
                     command = new SaveCommand(taskList, storage, ui);
+                    break;
+
+                case find:
+                    validateNotEmptyArgs(cmd);
+                    String keyword = cmd.substring(5);
+
+                    command = new FindCommand(taskList, keyword);
                     break;
 
                 default:
