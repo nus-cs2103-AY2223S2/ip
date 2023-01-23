@@ -18,7 +18,7 @@ public class Ui {
 
     public static String getNextCommand() {
         System.out.println("");
-        line = sc.nextLine();
+        if (isRunning) line = sc.nextLine();
         return line;
     }
 
