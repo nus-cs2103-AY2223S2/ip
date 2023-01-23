@@ -9,7 +9,7 @@ public class Parser {
     private final String arg;
     private final HashMap<String, String> namedArgs;
 
-    private final static String ARG_FMT = "\\s/(\\w+)\\s(.*?)(?=\\s/\\w+\\s|$)";
+    private final static String ARG_FMT = "\\s/(\\w+)\\s(.+?)(?=\\s/\\w+\\s.+|$)";
 
     public Parser(String line) {
         this.line = line;
