@@ -1,5 +1,7 @@
 package dukes.engine;
 
+import java.time.LocalDate;
+
 public class Task {
     protected String taskName;
     protected boolean isDone;
@@ -17,6 +19,18 @@ public class Task {
 
     void setUnDone() {
         this.isDone = false;
+    }
+
+    LocalDate getDeadLine() { // dummy deadline
+        return LocalDate.parse("1970-01-01");
+    }
+
+    LocalDate getStart() {
+        return LocalDate.parse("1970-01-01");
+    }
+
+    LocalDate getEnd() {
+        return LocalDate.parse("1970-01-01");
     }
 
     public String getTag() { return this.tag; }

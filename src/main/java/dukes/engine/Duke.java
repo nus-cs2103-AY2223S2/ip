@@ -1,7 +1,11 @@
 package dukes.engine;
 
 import dukes.util.*;
+
+import java.time.format.DateTimeParseException;
 import java.util.*;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 
 public class Duke {
     public static void main(String[] args) {
@@ -48,6 +52,8 @@ public class Duke {
                         mainEngine.validateDeadLine(command);
                     } catch (DukeException ex) {
                         System.out.println(ex);
+                    } catch (DateTimeParseException e) {
+                        System.out.println("Sorry, you have entered a invalid date.");
                     }
                     // mainEngine.handleDeadLine(command);
                 } else if (splited[0].equals("event")) {
@@ -55,8 +61,20 @@ public class Duke {
                         mainEngine.validateEvent(command);
                     } catch (DukeException ex) {
                         System.out.println(ex);
+                    } catch (DateTimeParseException e) {
+                        System.out.println("Sorry, you have entered a invalid date.");
                     }
                     // mainEngine.handleEvent(command);
+                } else if (splited[0].equals("search")) {
+                    // added command: Search events happening at a specific date
+                    // format: search 02/05/2023 (dd/mm/yyyy)
+                    try {
+                        mainEngine.validateSearch(command);
+                    } catch (DukeException ex) {
+                        System.out.println(ex);
+                    } catch (DateTimeParseException e) {
+                        System.out.println("Sorry, you have entered a invalid date.");
+                    }
                 } else {
                     // mainEngine.addTask(command);
                     System.out.println("Sorry, but I don't know what you means.");

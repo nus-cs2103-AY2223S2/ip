@@ -2,6 +2,9 @@ package dukes.engine;
 
 import dukes.util.*;
 import java.util.*;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
 
 public class DukeEngine {
 
@@ -19,6 +22,7 @@ public class DukeEngine {
     public static final String markUnDoneWord =
             "Well, you have not finished this task yet: ";
     public static final String listWord = "Here are all of your tasks: ";
+    public static final String searchWord = "Here are your tasks on the given date: ";
     public static final String addWord = "This task is added to your list: ";
     public static final String deleteWord = "Ok, I will remove this task for you: ";
 
@@ -53,6 +57,13 @@ public class DukeEngine {
         Task theTask = new Task(command);
         taskList.add(theTask);
         System.out.println("added: " + command);
+    }
+
+    LocalDate validateTime(String timeString) throws DateTimeParseException {
+        // Set the time input as dd/mm/yyyy
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("d/MM/yyyy");
+        LocalDate theDate = LocalDate.parse(timeString, formatter);
+        return theDate;
     }
 
     /**
@@ -102,7 +113,7 @@ public class DukeEngine {
      * command.length < 2 (i.e. have no task content); OR
      * the timestamp after "/by" is empty.
      */
-    void validateDeadLine(String command) throws DukeException {
+    void validateDeadLine(String command) throws DukeException, DateTimeParseException {
         String[] splited = command.split(" ");
         if (splited.length < 2) {
             throw new DukeException("OOPS!!! Description of deadline not found.");
@@ -111,7 +122,26 @@ public class DukeEngine {
         } else if (splited[splited.length - 1].equals("/by")) {
             throw new DukeException("No valid deadline specified.");
         } else {
-            handleDeadLine(command);
+            // Maybe move the part in handleDeadLine up
+            StringBuilder sb = new StringBuilder();
+            StringBuilder time = new StringBuilder();
+            boolean isTime = false;
+            for (int i = 1; i < splited.length; i++) {
+                if (splited[i].equals("/by")) {
+                    isTime = true;
+                } else if (!isTime) {
+                    sb.append(splited[i]).append(" ");
+                } else {
+                    time.append(splited[i]).append(" ");
+                }
+            }
+            sb.deleteCharAt(sb.length()-1);
+            time.deleteCharAt(time.length()-1);
+            String taskName = sb.toString();
+            String deadline = time.toString();
+
+            LocalDate theDate = validateTime(deadline);
+            handleDeadLine(taskName, theDate);
         }
     }
 
@@ -120,26 +150,8 @@ public class DukeEngine {
      * and display the number of items in list.
      * @command the command to be interpreted. Assumed to be valid.
      */
-    public void handleDeadLine(String command) {
-        String[] splited = command.split(" ");
-        StringBuilder sb = new StringBuilder();
-        StringBuilder time = new StringBuilder();
-        boolean isTime = false;
-        for (int i = 1; i < splited.length; i++) {
-            if (splited[i].equals("/by")) {
-                isTime = true;
-            } else if (!isTime) {
-                sb.append(splited[i]).append(" ");
-            } else {
-                time.append(splited[i]).append(" ");
-            }
-        }
-        sb.deleteCharAt(sb.length()-1);
-        time.deleteCharAt(time.length()-1);
-        String taskName = sb.toString();
-        String deadline = time.toString();
-
-        Task theTask = new DeadLine(taskName, deadline);
+    public void handleDeadLine(String taskName, LocalDate theDate) {
+        Task theTask = new DeadLine(taskName, theDate);
         taskList.add(theTask);
 
         System.out.println(addWord);
@@ -156,7 +168,7 @@ public class DukeEngine {
      * command.length < 2 (i.e. have no event content); OR
      * the timestamp after "/by" is empty.
      */
-    void validateEvent(String command) throws DukeException {
+    void validateEvent(String command) throws DukeException, DateTimeParseException {
         String[] splited = command.split(" ");
         if (splited.length < 2) {
             throw new DukeException("OOPS!!! Description of event not found.");
@@ -168,38 +180,39 @@ public class DukeEngine {
                         Arrays.asList(splited).indexOf("/to") - 1) {
             throw new DukeException("No valid event time specified.");
         } else {
-            handleEvent(command);
+            StringBuilder sb = new StringBuilder();
+            StringBuilder start = new StringBuilder();
+            StringBuilder end = new StringBuilder();
+            boolean isStart = false;
+            boolean isEnd = false;
+            for (int i = 1; i < splited.length; i++) {
+                if (splited[i].equals("/from")) {
+                    isStart = true;
+                } else if (splited[i].equals("/to")) {
+                    isStart = false;
+                    isEnd = true;
+                } else if (!isStart && !isEnd) {
+                    sb.append(splited[i]).append(" ");
+                } else if (isStart) {
+                    start.append(splited[i]).append(" ");
+                } else {
+                    end.append(splited[i]).append(" ");
+                }
+            }
+            sb.deleteCharAt(sb.length()-1);
+            start.deleteCharAt(start.length()-1);
+            end.deleteCharAt(end.length()-1);
+            String taskName = sb.toString();
+            String startTime = start.toString();
+            String endTime = end.toString();
+
+            LocalDate startDate = validateTime(startTime);
+            LocalDate endDate = validateTime(endTime);
+            handleEvent(taskName, startDate, endDate);
         }
     }
 
-    public void handleEvent(String command) {
-        String[] splited = command.split(" ");
-        StringBuilder sb = new StringBuilder();
-        StringBuilder start = new StringBuilder();
-        StringBuilder end = new StringBuilder();
-        boolean isStart = false;
-        boolean isEnd = false;
-        for (int i = 1; i < splited.length; i++) {
-            if (splited[i].equals("/from")) {
-                isStart = true;
-            } else if (splited[i].equals("/to")) {
-                isStart = false;
-                isEnd = true;
-            } else if (!isStart && !isEnd) {
-                sb.append(splited[i]).append(" ");
-            } else if (isStart) {
-                start.append(splited[i]).append(" ");
-            } else {
-                end.append(splited[i]).append(" ");
-            }
-        }
-        sb.deleteCharAt(sb.length()-1);
-        start.deleteCharAt(start.length()-1);
-        end.deleteCharAt(end.length()-1);
-        String taskName = sb.toString();
-        String startTime = start.toString();
-        String endTime = end.toString();
-
+    public void handleEvent(String taskName, LocalDate startTime, LocalDate endTime) {
         Task theTask = new Event(taskName, startTime, endTime);
         taskList.add(theTask);
 
@@ -209,12 +222,47 @@ public class DukeEngine {
                 " tasks in the list.");
     }
 
+    void validateSearch(String command) throws DukeException, DateTimeParseException {
+        String[] splited = command.split(" ");
+        if (splited.length < 2) {
+            throw new DukeException("OOPS! Target date not found.");
+        }
+        LocalDate theDate = validateTime(splited[1]);
+        listSearch(theDate);
+    }
+
     public void listTask() {
         StringBuilder sb = new StringBuilder();
         sb.append(listWord).append("\n");
         for (int i = 0; i < taskList.size(); i++) {
             sb.append(i+1).append(". ");
             sb.append(taskList.get(i).toString()).append("\n");
+        }
+        if (sb.length() != 0) {
+            sb.deleteCharAt(sb.length() - 1);
+        }
+        System.out.println(sb.toString());
+    }
+
+    public void listSearch(LocalDate theDate) {
+        StringBuilder sb = new StringBuilder();
+        sb.append(searchWord).append("\n");
+        int counter = 0;
+        for (int i = 0; i < taskList.size(); i++) {
+            Task theTask = taskList.get(i);
+            if (theTask.getTag().equals("D") &&
+                    theTask.getDeadLine().equals(theDate)) {
+                counter += 1;
+                sb.append(counter).append(". ");
+                sb.append(theTask.toString()).append("\n");
+            } else if (theTask.getTag().equals("E") &&
+                    theTask.getStart().isBefore(theDate) &&
+                    theTask.getEnd().isAfter(theDate)) {
+                // begin < theDate, end > theDate
+                counter += 1;
+                sb.append(counter).append(". ");
+                sb.append(theTask.toString()).append("\n");
+            }
         }
         if (sb.length() != 0) {
             sb.deleteCharAt(sb.length() - 1);
