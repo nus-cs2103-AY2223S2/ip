@@ -1,5 +1,10 @@
-import Features.*;
 import java.util.Scanner;
+
+import Features.DukeException;
+import Features.Parser;
+import Features.Storage;
+import Features.TaskList;
+import Features.Ui;
 
 public class Duke {
 
@@ -26,12 +31,12 @@ public class Duke {
                 loopEnd = parser.updateLoopEnd();
             }
             // Catches DukeException if thrown and prevents program from terminating.
-            catch(DukeException ex){
-                    // error message can be formatted in many possible ways beforehand, so println is used.
-                    System.out.println(ex.printErrorMessage());
-                }
+            catch (DukeException ex) {
+                // error message can be formatted in many possible ways beforehand, so println is used.
+                System.out.println(ex.printErrorMessage());
             }
 
+        }
     }
 }
 

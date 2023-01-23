@@ -4,9 +4,10 @@ import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 
-public class Event extends Task{
-    protected String from,to;
-    protected LocalDateTime fromDateTime,toDateTime;
+public class Event extends Task {
+    protected String from;
+    protected String to;
+    protected LocalDateTime fromDateTime, toDateTime;
 
     public Event(String TaskName, String from, String to) {
         super(TaskName);
