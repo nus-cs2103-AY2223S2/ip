@@ -5,22 +5,27 @@ import duke.exception.DukeException;
 
 public class Duke {
 
+    private static final String PATH = "duke.txt";
+
     private Ui ui;
     private TaskList taskList;
+    private Storage storage;
 
-    public Duke() {
+    public Duke(String path) {
         this.ui = new Ui();
         this.taskList = new TaskList(this.ui);
+        this.storage = new Storage(path, this.ui);
     }
 
     public static void main(String[] args) {
-        Duke duke = new Duke();
+        Duke duke = new Duke(PATH);
+        // print welcome message
+        duke.ui.showWelcome();
+        duke.storage.readToTaskList(duke.taskList);
         duke.run();
     }
 
     public void run() {
-        // print welcome message
-        this.ui.showWelcome();
 
         // parse user input
         String rawInput;
@@ -38,6 +43,7 @@ public class Duke {
                 this.ui.addToMessage(e.toString());
             } finally {
                 this.ui.displayMessage();
+                this.storage.saveToFile(this.taskList);
             }
         }
     }
