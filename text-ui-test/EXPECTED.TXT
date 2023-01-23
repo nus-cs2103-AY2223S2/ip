@@ -1,34 +1,37 @@
 <<<	Hello, I'm Kude!
-> <	Added [D][ ] do homework (by: no idea :-p)
+> <	Added [T][ ] be happy
 <	List now contains 1 items
-> <	Added [E][ ] project meeting (from: Mon 2pm, to: 4pm)
+> <	Added [D][ ] do homework (by: 2023-02-04T12:00)
 <	List now contains 2 items
-> <	Added [D][ ] return book (by: Sunday)
+> <	Added [E][ ] project meeting (from: 2023-03-04T12:00, to: 2023-03-04T13:00)
 <	List now contains 3 items
-> <	1. [D][ ] do homework (by: no idea :-p)
-<	2. [E][ ] project meeting (from: Mon 2pm, to: 4pm)
-<	3. [D][ ] return book (by: Sunday)
-> <	Marked [D][X] do homework (by: no idea :-p)
-> <	1. [D][X] do homework (by: no idea :-p)
-<	2. [E][ ] project meeting (from: Mon 2pm, to: 4pm)
-<	3. [D][ ] return book (by: Sunday)
-> <	Marked [E][X] project meeting (from: Mon 2pm, to: 4pm)
-> <	1. [D][X] do homework (by: no idea :-p)
-<	2. [E][X] project meeting (from: Mon 2pm, to: 4pm)
-<	3. [D][ ] return book (by: Sunday)
-> <	Unmarked [D][ ] do homework (by: no idea :-p)
-> <	1. [D][ ] do homework (by: no idea :-p)
-<	2. [E][X] project meeting (from: Mon 2pm, to: 4pm)
-<	3. [D][ ] return book (by: Sunday)
+> <	1. [T][ ] be happy
+<	2. [D][ ] do homework (by: 2023-02-04T12:00)
+<	3. [E][ ] project meeting (from: 2023-03-04T12:00, to: 2023-03-04T13:00)
+> <	Marked [T][X] be happy
+> <	1. [T][X] be happy
+<	2. [D][ ] do homework (by: 2023-02-04T12:00)
+<	3. [E][ ] project meeting (from: 2023-03-04T12:00, to: 2023-03-04T13:00)
+> <	Marked [E][X] project meeting (from: 2023-03-04T12:00, to: 2023-03-04T13:00)
+> <	1. [T][X] be happy
+<	2. [D][ ] do homework (by: 2023-02-04T12:00)
+<	3. [E][X] project meeting (from: 2023-03-04T12:00, to: 2023-03-04T13:00)
+> <	Unmarked [T][ ] be happy
+> <	1. [T][ ] be happy
+<	2. [D][ ] do homework (by: 2023-02-04T12:00)
+<	3. [E][X] project meeting (from: 2023-03-04T12:00, to: 2023-03-04T13:00)
 > !	Invalid index
 > !	Invalid index
 > !	Index must be integer
 > !	Provide index
 > !	Provide content
 > !	Provide deadline
-> !	Provide to
-> <	Deleted [D][ ] do homework (by: no idea :-p)
+> !	Invalid format for from. Use `2023-02-25 23:00`
+> <	Deleted [T][ ] be happy
 <	List now contains 2 items
 > !	Invalid index
 > !	Invalid index
+> !	Provide deadline
+> !	Invalid format for deadline. Use `2023-02-25 23:00`
+> !	Invalid format for deadline. Use `2023-02-25 23:00`
 > <<<	Bye
