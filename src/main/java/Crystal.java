@@ -1,4 +1,12 @@
 
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.LocalTime;
+import java.time.format.DateTimeFormatter;
+import java.time.temporal.ChronoUnit;
 import java.util.*;
 
 class Crystal {
@@ -58,17 +66,17 @@ class Crystal {
                 } else if (input.contains("deadline")) {
                     System.out.println(" ____________________________________________________________");
                     String s = input.replace("deadline", "");
-                    String[] arr = s.split("/");
-                    String subs = arr[0];
-                    String n = arr[1];
-                    String subsubs = n.replace("by", "");
-                    Deadline d = new Deadline(subs, subsubs);
+                    int index = s.lastIndexOf("/by");
+                    String description = s.replace(s.substring(index), ""); //description of task
+                    s = s.substring(index + 3); //date/time for by portion
+                    Deadline d = new Deadline(description, s);
                     d.isSet = true;
                     System.out.println("Alright, I've added this task: ");
                     System.out.println(d.toString());
                     list.add(d);
                     System.out.println("Current number of tasks : " + list.size());
                     System.out.println(" ____________________________________________________________");
+
                 } else if (input.contains("event")) {
                     System.out.println(" ____________________________________________________________");
                     String s = input.replace("event", "");
@@ -96,13 +104,12 @@ class Crystal {
                     int num = Integer.parseInt(getnum);
                     System.out.println(" ____________________________________________________________");
                     System.out.println("Alright, I've removed this task: ");
-                    Task item = list.get(num-1);
-                    list.remove(num-1);
+                    Task item = list.get(num - 1);
+                    list.remove(num - 1);
                     System.out.println(item.toString());
                     System.out.println("Current number of tasks: " + list.size());
                     System.out.println(" ____________________________________________________________");
-                }
-                else {
+                } else {
                     throw new CrystalException("☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
 
                 }
