@@ -1,4 +1,5 @@
 import java.util.*;
+import java.time.LocalDate;
 
 import Tasks.*;
 
@@ -113,7 +114,7 @@ public class Duke {
         if (tokens.length == 1) {
             throw new DukeException("Please provide a deadline for this task.");
         }
-        list.add(new Deadline(tokens[0], tokens[1]));
+        list.add(new Deadline(tokens[0], LocalDate.parse(tokens[1])));
     }
 
     public static void event(String[] split) throws DukeException {
@@ -128,7 +129,7 @@ public class Duke {
         if (tokens2.length == 1) {
             throw new DukeException("Please provide an end time for this event.");
         }
-        list.add(new Event(tokens[0], tokens2[0], tokens2[1] ));
+        list.add(new Event(tokens[0], LocalDate.parse(tokens2[0]), LocalDate.parse(tokens2[1])));
     }
 
     public static void delete(String[] split) throws DukeException {
