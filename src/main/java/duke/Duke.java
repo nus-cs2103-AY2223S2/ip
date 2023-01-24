@@ -8,10 +8,18 @@ import duke.task.TaskList;
 import duke.ui.Ui;
 
 public class Duke {
+    /** Storage of Duke */
     private Storage storage;
+    /** TaskList of Duke */
     private TaskList tasks;
+    /** Ui of Duke */
     private Ui ui;
 
+    /**
+     * Constructs Duke class.
+     *
+     * @param filePath Filepath of TaskList.
+     */
     public Duke(String filePath) {
         ui = new Ui();
         ui.showStartUp();
@@ -24,6 +32,9 @@ public class Duke {
         }
     }
 
+    /**
+     * Runs Duke application.
+     */
     public void run() {
         ui.showWelcome();
         boolean isExit = false;
@@ -42,6 +53,11 @@ public class Duke {
         }
     }
 
+    /**
+     * Starts Duke application.
+     *
+     * @param args Command-line arguments.
+     */
     public static void main(String[] args) {
         new Duke("./data/tasks.ser").run();
     }

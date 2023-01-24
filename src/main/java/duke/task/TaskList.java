@@ -7,48 +7,105 @@ import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 
 public class TaskList {
+    /** Arraylist of tasks */
     private ArrayList<Task> tasks;
 
+    /**
+     * Constructs TaskList class.
+     */
     public TaskList() {
         this.tasks = new ArrayList<Task>();
     }
 
+    /**
+     * Gets ArrayList of tasks.
+     *
+     * @return ArrayList of tasks.
+     */
     public ArrayList<Task> getTasks() {
         return tasks;
     }
 
+    /**
+     * Sets ArrayList of tasks.
+     *
+     * @param tasks ArrayList of tasks to be set to.
+     */
     public void setTasks(ArrayList<Task> tasks) {
         this.tasks = tasks;
     }
 
+    /**
+     * Gets size of ArrayList of tasks.
+     *
+     * @return Size of ArrayList of tasks.
+     */
     public int getSize() {
         return tasks.size();
     }
 
-    public Task getTask(int i) {
-        return tasks.get(i);
+    /**
+     * Gets task of specified index in ArrayList.
+     *
+     * @param index Index of the task in ArrayList.
+     * @return Task of specified index in ArrayList.
+     */
+    public Task getTask(int index) {
+        return tasks.get(index);
     }
 
+    /**
+     * Adds task to ArrayList.
+     *
+     * @param task Task to be added.
+     */
     public void addTask(Task task) {
         tasks.add(task);
     }
 
+    /**
+     * Marks task in ArrayList.
+     *
+     * @param task Task to be marked.
+     */
     public void markTask(Task task) {
         task.setDone(true);
     }
 
+    /**
+     * Unmarks task in ArrayList.
+     *
+     * @param task Task to be unmarked.
+     */
     public void unmarkTask(Task task) {
         task.setDone(false);
     }
 
+    /**
+     * Deletes task of specified index in ArrayList.
+     *
+     * @param index Index of the task in ArrayList.
+     */
     public void deleteTask(int index) {
         tasks.remove(index);
     }
 
+    /**
+     * Shows tasks in ArrayList using Ui.
+     *
+     * @param ui Ui to show tasks.
+     */
     public void showList(Ui ui) {
         ui.showList(this);
     }
 
+    /**
+     * Filter tasks by their date.
+     * Shows deadlines and ongoing events on that date.
+     *
+     * @param ui Ui to show filtered tasks.
+     * @param date Date to filter tasks by.
+     */
     public void filterTasksByDate(Ui ui, LocalDate date) {
         int count = 0;
         for (Task task : tasks) {

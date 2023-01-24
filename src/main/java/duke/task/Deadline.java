@@ -8,8 +8,16 @@ import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 
 public class Deadline extends Task {
+    /** Date of deadline */
     private LocalDateTime deadline;
 
+    /**
+     * Constructs Deadline class.
+     *
+     * @param description Description of task.
+     * @param deadline Deadline of task.
+     * @throws DukeException If date entered is invalid.
+     */
     public Deadline(String description, String deadline) throws DukeException {
         super(description);
         LocalDate date = null;
@@ -28,6 +36,7 @@ public class Deadline extends Task {
         };
 
         for (DateTimeFormatter formatter : formatters) {
+            // Goes through list of formatters to see which matches the deadline date input
             try {
                 dateTime = LocalDateTime.parse(deadline, formatter);
                 break;
@@ -45,6 +54,7 @@ public class Deadline extends Task {
             throw new DukeException("Reenter date in this format: (ddMMyyyy) or (ddMMyyyy HHmm).");
         }
 
+        // Converts deadline date to include time
         if (date != null) {
             this.deadline = date.atStartOfDay().plusDays(1).minusNanos(1);
         } else {
@@ -52,22 +62,47 @@ public class Deadline extends Task {
         }
     }
 
+    /**
+     * Gets deadline of task.
+     *
+     * @return Deadline of task.
+     */
     public LocalDateTime getDeadline() {
         return deadline;
     }
 
-//    public void setDeadline(LocalDateTime deadline) {
-//        this.deadline = deadline;
-//    }
+    /**
+     * Sets deadline of task.
+     *
+     * @param deadline Deadline of task to be set to.
+     */
+    public void setDeadline(LocalDateTime deadline) {
+        this.deadline = deadline;
+    }
 
-//    public boolean isOverdue() {
-//        return LocalDateTime.now().isAfter(deadline);
-//    }
-//
-//    public boolean isUpcoming() {
-//        return LocalDateTime.now().isBefore(deadline);
-//    }
+    /**
+     * Checks if deadline is overdue.
+     *
+     * @return Status of event whether it is overdue.
+     */
+    public boolean isOverdue() {
+        return LocalDateTime.now().isAfter(deadline);
+    }
 
+    /**
+     * Checks if deadline is upcoming.
+     *
+     * @return Status of event whether it is upcoming.
+     */
+    public boolean isUpcoming() {
+        return LocalDateTime.now().isBefore(deadline);
+    }
+
+    /**
+     * {@inheritDoc}
+     *
+     * Includes type of task and its deadline.
+     */
     @Override
     public String toString() {
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("MMM dd yyyy HH:mm");
