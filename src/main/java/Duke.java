@@ -59,6 +59,12 @@ public class Duke {
                         case "delete":
                             tm.delete(dio.extractIndexParams(userInput));
                             break;
+                        case "save":
+                            dio.writeSave(tm);
+                            break;
+                        case "load":
+                            dio.readSave(tm);
+                            break;
                         case "?":
                             throw new DukeException.Unimplemented();
                         default:

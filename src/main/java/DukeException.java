@@ -72,6 +72,7 @@ public class DukeException extends Exception {
                 super(String.format("%s Missing or incomplete options(s) for %s", OOPS, taskType));
             }
         }
+
     }
 
     /**
@@ -124,6 +125,19 @@ public class DukeException extends Exception {
              */
             public Command() {
                 super(String.format("%s I'm sorry, but I don't know what you just said means :-(", OOPS));
+            }
+        }
+
+        /**
+         * For Exceptions involving Invalid Files
+         */
+        public static class File extends Invalid {
+            /**
+             * User supplied file or file path does not exist.
+             * Informs user of invalid input.
+             */
+            public File(String filepath) {
+                super(String.format("%s I'm sorry, but I am unable to find %s", OOPS, filepath));
             }
         }
     }

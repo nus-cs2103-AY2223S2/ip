@@ -12,11 +12,16 @@ public class Event extends Task {
      * @param from A string representation of the start date/time of this Task
      * @param to A string representation of the end date/time of this Task
      */
-    public Event(String task_name, String from, String to) {
-        super(task_name);
+    public Event(String task_name, Boolean status, String from, String to) {
+        super(task_name, status);
         this.from = from;
         this.to = to;
     }
+
+    public Event(String task_name, String from, String to) {
+        this(task_name, false, from, to);
+    }
+
     /**
      * Returns String representation of an Event.
      * @return The name of this task and the from and to details.
@@ -25,4 +30,10 @@ public class Event extends Task {
     public String toString() {
         return String.format("[E]%s (from: %s , to: %s)", super.toString(), this.from, this.to);
     }
+
+    @Override
+    public String toCSV() {
+        return String.format("E,%s,%s,%s,%s", this.getName(), this.getComplete(), this.from, this.to);
+    }
+
 }
