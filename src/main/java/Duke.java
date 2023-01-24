@@ -1,9 +1,14 @@
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Scanner;
+import java.io.BufferedReader;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+import java.nio.file.Files;
 
 public class Duke {
-    public enum ParseFunctions {
+    private enum ParseFunctions {
         SPLIT_ALL, TODO, DEADLINE, EVENT
     }
     private static ArrayList<Task> taskStore = new ArrayList<>();
@@ -13,7 +18,6 @@ public class Duke {
         Task completedTask = Duke.taskStore.get(completedIndex); // actual task
         return completedTask;
     }
-
     private static String[] parser(String input, ParseFunctions parse_type) throws EmptyDescriptionException {
         switch (parse_type) {
             case SPLIT_ALL:
@@ -52,6 +56,42 @@ public class Duke {
         System.out.println("    " + t.toString());
         System.out.println("  Now you have " + String.valueOf(Duke.countTasks()) +
                 " tasks in the list!");
+    }
+    private static void loadFromFile() throws IOException {
+        String home = System.getProperty("user.home");
+        Path dukeFolderPath = Paths.get(home, "data");
+        Path dukeFilePath = Paths.get(home, "data", "duke.txt");
+        if (!Files.exists(dukeFolderPath)) {
+            Files.createDirectories(dukeFolderPath);
+            Files.createFile(dukeFilePath);
+        }
+        else if (!Files.exists(dukeFilePath)) {
+            Files.createFile(dukeFilePath);
+        }
+        BufferedReader dukeReader = Files.newBufferedReader(dukeFilePath);
+        String task;
+
+        while ((task = dukeReader.readLine()) != null) {
+            // process it
+            // format: E|0|project meeting|Aug 6th|2pm|4pm
+            String[] params = task.split("|");
+            String type = params[0];
+            boolean isCompleted = params[1].equals("1");
+            String description = params[2];
+
+            if (type == "E") {
+                taskStore.add(new ToDo(description, isCompleted));
+            }
+            else if (type == "D") {
+                String by = params[3];
+                taskStore.add(new Deadline(description, isCompleted, by));
+            }
+            else if (type == "T") {
+                String start = params[3];
+                String end = params[4];
+                taskStore.add(new Event(description, isCompleted, start, end));
+            }
+        } // do not close the file
     }
 
     public static void main(String[] args) throws EmptyDescriptionException {

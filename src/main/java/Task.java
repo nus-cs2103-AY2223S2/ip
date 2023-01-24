@@ -6,11 +6,13 @@ public abstract class Task {
         this.description = description;
         this.completed = false;
     }
-
+    public Task(String description, boolean completed) {
+        this.description = description;
+        this.completed = completed;
+    }
     public void changeCompletion() {
         this.completed = !this.completed;
     }
-
     @Override
     public String toString() {
         String icon = this.completed ? "[X] " : "[ ] ";
