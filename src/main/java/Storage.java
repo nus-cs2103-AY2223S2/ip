@@ -1,9 +1,14 @@
 import java.io.*;
 
-public class Save {
-    public static void save(TaskList lst) {
+public class Storage {
+    private String filePath;
+
+    public Storage(String filePath) {
+        this.filePath = filePath;
+    }
+    public void save(TaskList lst) {
         try {
-            FileOutputStream fos = new FileOutputStream("tasklist.txt");
+            FileOutputStream fos = new FileOutputStream(this.filePath);
             ObjectOutputStream oos = new ObjectOutputStream(fos);
             oos.writeObject(lst);
             oos.close();
@@ -15,12 +20,12 @@ public class Save {
         }
     }
 
-    public static TaskList load() {
-        File f = new File("tasklist.txt");
+    public TaskList load() {
+        File f = new File(filePath);
         if (f.exists()) {
             TaskList lst = new TaskList();
             try {
-                FileInputStream fis = new FileInputStream("tasklist.txt");
+                FileInputStream fis = new FileInputStream(filePath);
                 ObjectInputStream ois = new ObjectInputStream(fis);
                 lst = (TaskList) ois.readObject();
                 ois.close();
