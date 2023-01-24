@@ -11,7 +11,8 @@ public class Duke {
         this.ar = new Art();
         try {
             st = new Storage(fp);
-            this.fn = new Functions(new TaskList(), st);
+            TaskList tl = st.load();
+            this.fn = new Functions(tl, st);
         } catch (Exception e) {
             System.out.println(e);
         }

@@ -1,23 +1,22 @@
 package duke;
 public class Deadlines extends TimedTask{
-    String des;
+    public Deadlines(){super();}
     public Deadlines(boolean status, String des) {
-        super(status, des);
+        super();
+        setStatus(status);
         String[] s = des.split(" /by ");
-        this.des = s[0];
-        super.setEnd(s[1]);
-        super.setStart(null);
+        setDes(s);
     }
 
     @Override
     public void printStatus() {
         String s = (status)? "X":" ";
-        System.out.println("[D][" +s+ "] " + this.des + " (by: " + toStringEnd() + ")");
+        System.out.println("[D][" +s+ "] " + getDes() + " (by: " + toStringEnd() + ")");
     }
 
     @Override
     public String toString() {
         String s = (status)? "X":" ";
-        return "D | " + s + " | " + this.des + " | " + super.toStringEnd();
+        return "D | " + s + " | " + getDes() + " | " + super.toStringEnd();
     }
 }

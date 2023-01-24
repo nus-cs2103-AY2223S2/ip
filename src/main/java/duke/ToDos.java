@@ -1,5 +1,7 @@
 package duke;
 public class ToDos extends Task{
+
+    public ToDos(){super();}
     public ToDos(boolean status, String des) {
         super(status, des);
     }
@@ -13,6 +15,6 @@ public class ToDos extends Task{
     @Override
     public String toString() {
         String s = (status)? "X":" ";
-        return "T | " + s + " | " + this.des;
+        return "T | " + s + " | " + getDes();
     }
 }

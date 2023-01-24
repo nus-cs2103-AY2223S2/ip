@@ -5,8 +5,8 @@ public class Functions {
     TaskList tl;
     Storage st;
 
-    public Functions(TaskList ls, Storage st) {
-        this.tl = ls;
+    public Functions(TaskList tl, Storage st) {
+        this.tl = tl;
         this.st = st;
     }
 
@@ -50,7 +50,6 @@ public class Functions {
         for (int i = 0; i < tl.count(); i++) {
             System.out.print(i + 1 + ".");
             tl.getTask(i).printStatus();
-
         }
     }
 
@@ -117,6 +116,7 @@ public class Functions {
         }
         String[] temp = Arrays.copyOfRange(s, 1, s.length);
         String taskDes = String.join(" ", temp);
+        System.out.println(taskDes);
         Deadlines dl = new Deadlines(false, taskDes);
         tl.addTask(dl);
         this.st.save(tl);

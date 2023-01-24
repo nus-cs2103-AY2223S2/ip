@@ -15,6 +15,9 @@ public class TaskList {
         t.printStatus();
         printCount();
     }
+    public void loadTask(Task t) {
+        list.add(t);
+    }
     public void removeTask(int index) {
         this.list.remove(index);
     }
