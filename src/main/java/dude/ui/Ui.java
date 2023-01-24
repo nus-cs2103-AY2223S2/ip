@@ -7,11 +7,16 @@ import java.util.List;
 import java.util.Scanner;
 
 public class Ui {
-
+    /**
+     * Prints horizontal line format for program
+     */
     public void showLine() {
         System.out.println(" _______________________________________________________________________");
     }
 
+    /**
+     * Prints welcome message to user
+     */
     public void showWelcome() {
         String logo = "  _____           __     \n" +
                 " |  __ \\ __ __    | | ___  \n" +
@@ -26,6 +31,11 @@ public class Ui {
         showLine();
     }
 
+    /**
+     * Prints list of task in TaskList for user.
+     *
+     * @param tasks TaskList to be printed to user.
+     */
     public void showList(TaskList tasks) {
         System.out.print(tasks);
     }
@@ -36,22 +46,42 @@ public class Ui {
         System.out.println("\tNow got " + Task.count + " tasks in your list liao.");
     }
 
+    /**
+     * Prints delete message and deleted task to user.
+     *
+     * @param currentTask Task to be printed to user.
+     */
     public void showDelete(Task currentTask) {
         System.out.println("\tOkay can. I've removed this task already:");
         System.out.println("\t" + currentTask);
         System.out.println("\tNow only left with " + Task.count + " tasks in your list liao.");
     }
 
+    /**
+     * Prints mark message and marked task to user.
+     *
+     * @param currentTask Task to be printed to user.
+     */
     public void showMark(Task currentTask) {
         System.out.println("\tSwee! I've marked this task as done loh:");
         System.out.println("\t" + currentTask);
     }
 
+    /**
+     * Prints unmark message and unmarked task to user.
+     *
+     * @param currentTask Task to be printed to user.
+     */
     public void showUnmark(Task currentTask) {
         System.out.println("\tOkay liar, I've marked this task as undone liao:");
         System.out.println("\t" + currentTask);
     }
 
+    /**
+     * Searches the list of task containing a particular keyword
+     *
+     * @param tasks List of Task for searching
+     */
     public void showFind(List<Task> tasks) {
         if (tasks.size() != 0) {
             System.out.println("\tOkay come, here are the task I found containing your keyword: ");
@@ -64,14 +94,25 @@ public class Ui {
 
     }
 
+    /**
+     * Prints error message to user.
+     *
+     * @param error Error message to be printed.
+     */
     public void showError(String error) {
         System.out.println(error);
     }
 
+    /**
+     * Prints goodbye message to user.
+     */
     public void showGoodbye() {
         System.out.println("\tCiaos! See you next time.");
     }
 
+    /**
+     * Reads user command input and filters empty line.
+     */
     public String readCommand() {
         Scanner sc = new Scanner(System.in);
         String command = "";
