@@ -9,9 +9,9 @@ import java.time.format.DateTimeParseException;
  * completion.
  */
 public class Event extends Task {
-    // Start date for the task.
+    /** Start date for the task */
     protected LocalDateTime from;
-    // End date for the task.
+    /** End date for the task */
     protected LocalDateTime to;
 
     /**

@@ -15,11 +15,11 @@ import duke.ui.Ui;
  * types of Tasks.
  */
 public class Duke {
-    // Duke.Storage component handling loading and writing tasks.
+    /** Duke.Storage component handling loading and writing tasks */
     private Storage storage;
-    // Task list with operations.
+    /** Task list with operations */
     private TaskList tasks;
-    // Deals with interactions.
+    /** Deals with interactions */
     private Ui ui;
 
     /**

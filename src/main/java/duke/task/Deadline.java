@@ -8,7 +8,7 @@ import java.time.format.DateTimeParseException;
  * A type of task with a single deadline.
  */
 public class Deadline extends Task {
-    // Deadline for the task.
+    /** Deadline for the task */
     protected LocalDateTime by;
 
     /**

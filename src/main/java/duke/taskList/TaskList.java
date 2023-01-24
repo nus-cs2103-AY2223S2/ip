@@ -14,7 +14,7 @@ import duke.task.Todo;
  * in the task list.
  */
 public class TaskList {
-    // Arraylist to store the tasks.
+    /** Arraylist to store the tasks */
     private ArrayList<Task> list;
 
     /**
@@ -64,6 +64,7 @@ public class TaskList {
      * @throws DukeException If the index is out of bounds, an exception is thrown.
      */
     public void deleteTask(String[] contents) throws DukeException {
+        // Converts provided index to respective ArrayList index.
         int index = Integer.parseInt(contents[1].replaceAll("[^0-9]", "")) - 1;
         if ((index < 0) | (index > (list.size() - 1))) {
             // Checks if provided index is in range.
@@ -83,8 +84,7 @@ public class TaskList {
      * @throws DukeException If the index is out of bounds, an exception is thrown.
      */
     public void markTask(String[] contents) throws DukeException {
-        // User input: mark x
-        // Extracts the numbered item from the user input string
+        // Converts provided index to respective ArrayList index.
         int index = Integer.parseInt(contents[1].replaceAll("[^0-9]", "")) - 1;
         if ((index < 0) | (index > (list.size() - 1))) {
             // Checks if provided index is in range.
@@ -103,6 +103,7 @@ public class TaskList {
      * @throws DukeException If the index is out of bounds, an exception is thrown.
      */
     public void unmarkTask(String[] contents) throws DukeException {
+        // Converts provided index to respective ArrayList index.
         int index = Integer.parseInt(contents[1].replaceAll("[^0-9]", "")) - 1;
         if ((index < 0) | (index > (list.size() - 1))) {
             // Checks if provided index is in range.
