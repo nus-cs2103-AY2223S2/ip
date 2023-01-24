@@ -6,5 +6,6 @@ public enum Action {
     deadline,
     event,
     delete,
-    bye
+    bye,
+    dueon
 }

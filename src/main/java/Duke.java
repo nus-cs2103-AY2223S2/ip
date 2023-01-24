@@ -57,6 +57,10 @@ public class Duke {
                     taskList.handleByeCommand();
                     sc.close();
                     return;
+
+                case dueon:
+                    taskList.handleDueOnCommand(tokens);
+                    break;
                 }
 
                 // save taskList to disk after every command

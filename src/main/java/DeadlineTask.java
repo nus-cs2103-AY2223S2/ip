@@ -1,10 +1,17 @@
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+
 public class DeadlineTask extends Task {
 
-    private final String by;
+    private final LocalDate by;
 
-    DeadlineTask(String name, String by) {
+    DeadlineTask(String name, LocalDate by) {
         super(name);
         this.by = by;
+    }
+
+    public boolean isDueOn(LocalDate date) {
+        return this.by.equals(date);
     }
 
     public String toDukeFileString() {
@@ -13,6 +20,8 @@ public class DeadlineTask extends Task {
 
     @Override
     public String toString() {
-        return "[D]" + super.toString() + " (by: " + this.by + ")";
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd MMM yyyy");
+        String formattedByString = this.by.format(formatter);
+        return "[D]" + super.toString() + " (by: " + formattedByString + ")";
     }
 }

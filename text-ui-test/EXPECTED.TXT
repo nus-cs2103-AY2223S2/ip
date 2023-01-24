@@ -37,18 +37,42 @@ There are 2 tasks in the list
 2. [T][ ] return book
 
 >> Usage: deadline <task name> /by <deadline>
+Example: deadline buy groceries /by 2012-12-31
 
 >> Usage: deadline <task name> /by <deadline>
+Example: deadline buy groceries /by 2012-12-31
 
 >> Usage: deadline <task name> /by <deadline>
+Example: deadline buy groceries /by 2012-12-31
+
+>> Usage: deadline <task name> /by <deadline>
+Example: deadline buy groceries /by 2012-12-31
 
 >> Added:
-[D][ ] assignment (by: Sunday)
+[D][ ] assignment 1 (by: 04 Mar 2019)
 There are 3 tasks in the list
+
+>> Added:
+[D][ ] assignment 2 (by: 03 Apr 2019)
+There are 4 tasks in the list
+
+>> Added:
+[D][ ] assignment 3 (by: 03 Apr 2019)
+There are 5 tasks in the list
 
 >> 1. [T][ ] read book
 2. [T][ ] return book
-3. [D][ ] assignment (by: Sunday)
+3. [D][ ] assignment 1 (by: 04 Mar 2019)
+4. [D][ ] assignment 2 (by: 03 Apr 2019)
+5. [D][ ] assignment 3 (by: 03 Apr 2019)
+
+>> Usage: dueon <date>
+Example: dueon 2012-12-31
+
+>> There are no deadline tasks due on 1999-01-01
+
+>> [D][ ] assignment 2 (by: 03 Apr 2019)
+[D][ ] assignment 3 (by: 03 Apr 2019)
 
 >> Usage: event <task name> /from <start> /to <end>
 
@@ -66,20 +90,22 @@ There are 3 tasks in the list
 
 >> Added:
 [E][ ] meeting (from: 2pm to: 4pm)
-There are 4 tasks in the list
+There are 6 tasks in the list
 
 >> 1. [T][ ] read book
 2. [T][ ] return book
-3. [D][ ] assignment (by: Sunday)
-4. [E][ ] meeting (from: 2pm to: 4pm)
+3. [D][ ] assignment 1 (by: 04 Mar 2019)
+4. [D][ ] assignment 2 (by: 03 Apr 2019)
+5. [D][ ] assignment 3 (by: 03 Apr 2019)
+6. [E][ ] meeting (from: 2pm to: 4pm)
 
->> [D][x] assignment (by: Sunday)
+>> [D][x] assignment 1 (by: 04 Mar 2019)
 
->> [D][x] assignment (by: Sunday)
+>> [D][x] assignment 1 (by: 04 Mar 2019)
 
->> [E][ ] meeting (from: 2pm to: 4pm)
+>> [D][ ] assignment 2 (by: 03 Apr 2019)
 
->> [E][ ] meeting (from: 2pm to: 4pm)
+>> [D][ ] assignment 2 (by: 03 Apr 2019)
 
 >> Usage: delete <task no.>
 
@@ -89,10 +115,12 @@ There are 4 tasks in the list
 
 >> Deleted:
 [T][ ] read book
-There are 3 tasks in the list
+There are 5 tasks in the list
 
 >> 1. [T][ ] return book
-2. [D][x] assignment (by: Sunday)
-3. [E][ ] meeting (from: 2pm to: 4pm)
+2. [D][x] assignment 1 (by: 04 Mar 2019)
+3. [D][ ] assignment 2 (by: 03 Apr 2019)
+4. [D][ ] assignment 3 (by: 03 Apr 2019)
+5. [E][ ] meeting (from: 2pm to: 4pm)
 
 >> Exiting...

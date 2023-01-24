@@ -15,8 +15,14 @@ list
 deadline /by
 deadline abc /by
 deadline /by abc
-deadline assignment /by Sunday
+deadline assignment 1 /by 12345-99-99
+deadline assignment 1 /by 2019-03-04
+deadline assignment 2 /by 2019-04-03
+deadline assignment 3 /by 2019-04-03
 list
+dueon abc
+dueon 1999-01-01
+dueon 2019-04-03
 event /from /to
 event /from 2pm /to
 event /from /to 4pm
