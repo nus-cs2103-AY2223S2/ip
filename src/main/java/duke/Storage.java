@@ -3,8 +3,14 @@ package duke;
 import java.io.*;
 
 public class Storage {
-    static String savePath = "data/save.txt";
+    static String saveFolder = "data";
+    static String savePath = saveFolder + "/save.txt";
+
     static void store(TaskList list) {
+        File dir = new File(saveFolder);
+        if (!dir.exists()) {
+            boolean ignored = dir.mkdir();
+        }
         try (FileOutputStream fw = new FileOutputStream(savePath);
              ObjectOutputStream out = new ObjectOutputStream(fw)
         ) {
