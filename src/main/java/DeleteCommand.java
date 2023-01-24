@@ -3,6 +3,7 @@ public class DeleteCommand extends Command {
 
     DeleteCommand(String index) {
         this.isExit = false;
+        this.isSave = true;
         this.deleteAtIndex = index;
     }
 

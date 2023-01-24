@@ -2,21 +2,6 @@ import java.util.*;
 
 public class TaskList {
     private List<Task> tasks;
-    public enum Tasks { TODO, DEADLINE, EVENT }
-
-    public static final Map<String, Tasks> inputToTask = new HashMap<>();
-    public static final Map<String, Tasks> symbolToTask = new HashMap<>();
-
-    static{
-        inputToTask.put("todo", Tasks.TODO);
-        inputToTask.put("deadline", Tasks.DEADLINE);
-        inputToTask.put("event", Tasks.EVENT);
-
-        symbolToTask.put("T", Tasks.TODO);
-        symbolToTask.put("D", Tasks.DEADLINE);
-        symbolToTask.put("E", Tasks.EVENT);
-    }
-
 
     TaskList() {
         this.tasks = new ArrayList<>();
@@ -26,27 +11,27 @@ public class TaskList {
         return this.tasks.get(i);
     }
 
+    public List<Task> getAllTasks() {
+        return this.tasks;
+    }
+
     public int size() {
         return this.tasks.size();
     }
 
-    public Task addTask(String inputTaskType, Map<String,String> args) throws CommandNotFoundException, InvalidInputException {
-        Tasks taskType = this.inputToTask.get(inputTaskType);
-        if (taskType == null) {
-            throw new InvalidInputException("Please specify what type of task you want to add!");
-        }
+    public Task addTask(TaskType.Type type, Map<String,String> args) throws CommandNotFoundException, InvalidInputException {
         Task newTask;
         String desc;
-        switch (taskType) {
+        switch (type) {
             case TODO:
-                desc = args.get("todo");
+                desc = args.get("Description");
                 if (Objects.isNull(desc) || desc.equals("")) {
                     throw new InvalidInputException("eh ur description is blank");
                 }
                 newTask = new ToDo(desc);
                 break;
             case DEADLINE:
-                desc = args.get("deadline");
+                desc = args.get("Description");
                 if (Objects.isNull(desc) || desc.equals("")) {
                     throw new InvalidInputException("eh ur description is blank");
                 }
@@ -58,7 +43,7 @@ public class TaskList {
                 newTask = new Deadline(desc, by);
                 break;
             case EVENT:
-                desc = args.get("event");
+                desc = args.get("Description");
                 if (Objects.isNull(desc) || desc.equals("")) {
                     throw new InvalidInputException("eh ur description is blank");
                 }
@@ -73,10 +58,16 @@ public class TaskList {
             default:
                 throw new CommandNotFoundException("I don't recognise this type of task. Try add todo <desc>!");
         }
-        this.tasks.add(newTask);
+        this.tasks.add(this.tasks.size(), newTask); // always adds to the end
         return newTask;
     }
 
+    public Task addDoneTask(TaskType.Type type, Map<String,String> args) throws CommandNotFoundException, InvalidInputException {
+        Task newTask = addTask(type, args); // add to end of list
+        int index = this.tasks.size() - 1; // mark last(est) item as done
+        markAsDone(index);
+        return newTask;
+    }
     public Task deleteTask(int index) throws InvalidInputException {
         //removes a task at given index
 
@@ -92,10 +83,6 @@ public class TaskList {
         } catch (IndexOutOfBoundsException e) {
             throw new InvalidInputException("This task doesn't exist in your list.");
         }
-    }
-
-    public List<Task> getAllTasks() {
-        return this.tasks;
     }
 
     public boolean markAsDone(int index) throws IndexOutOfBoundsException {

@@ -39,7 +39,7 @@ public class Ui {
     }
 
     public void showLine() {
-        System.out.println("----------------------------------------");
+        System.out.println("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
     }
 
     private static String indent(String s) {

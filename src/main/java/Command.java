@@ -1,6 +1,7 @@
 public abstract class Command {
 
     protected boolean isExit;
+    protected boolean isSave;
 
     Command() {
     }
@@ -8,5 +9,9 @@ public abstract class Command {
 
     public boolean isExit() {
         return this.isExit;
+    }
+
+    public boolean isSave() {
+        return this.isSave;
     }
 }

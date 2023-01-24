@@ -1,8 +1,6 @@
-import java.util.Objects;
-
 public class Event extends Task {
-    private static String from;
-    private static String to;
+    private final String from;
+    private final String to;
 
     Event(String description, String from, String to)  {
         super(description);
@@ -11,11 +9,9 @@ public class Event extends Task {
         this.symbol = "E";
     }
 
-    Event(String description, String isDone, String from, String to) {
-        super(description, isDone);
-        this.from = from;
-        this.to = to;
-        this.symbol = "E";
+    @Override
+    public String asDataFormat() {
+        return super.asDataFormat("from:" + this.from, "to:" + this.to);
     }
 
     @Override
@@ -23,8 +19,4 @@ public class Event extends Task {
         return super.toString() + " (from: " + this.from + ", to: " + this.to + ")";
     }
 
-    @Override
-    public String getDataFormat() {
-        return this.combineData(super.getDataFormat(), this.from, this.to);
-    }
 }

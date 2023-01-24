@@ -46,10 +46,12 @@ public class Parser {
             case "bye":
                 return new ExitCommand();
             default:
-                if (TaskList.inputToTask.containsKey(command)) {
-                    return new AddCommand(argValues);
+                if (TaskType.inputToTask.containsKey(command)) { // check if command is to add a task
+                    String desc = argValues.get(command);
+                    argValues.put("Description", desc);
+                    return new AddCommand(TaskType.inputToTask.get(command), argValues);
                 }
-                throw new CommandNotFoundException("I'm sorry, I don't recognise this command ://");
+                throw new CommandNotFoundException("I'm sorry, I don't recognise this command :/");
         }
     }
 }
