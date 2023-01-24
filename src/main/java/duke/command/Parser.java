@@ -1,5 +1,10 @@
+package duke.command;
+
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
+import duke.exceptions.*;
+import duke.ui.Span;
+import duke.task.*;
 
 public class Parser {
     private TaskList tasks;

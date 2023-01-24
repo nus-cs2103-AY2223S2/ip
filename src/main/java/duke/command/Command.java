@@ -1,3 +1,7 @@
+package duke.command;
+
+import duke.exceptions.UnknownCommandException;
+
 public enum Command {
     BYE("bye"),
     LIST("list"),
