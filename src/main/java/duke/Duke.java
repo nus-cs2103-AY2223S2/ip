@@ -132,6 +132,10 @@ public class Duke {
         this.ui.goodBye();
     }
 
+    public static DateTimeFormatter getFormatter() {
+        return FORMATTER;
+    }
+
 
     public static void main(String[] args) {
         String filePathName = "." + File.separator + "src" + File.separator + "main" + File.separator + "data" + File.separator + "duke";

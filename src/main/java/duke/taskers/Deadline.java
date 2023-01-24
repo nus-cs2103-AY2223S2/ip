@@ -6,7 +6,7 @@ import java.time.format.DateTimeFormatter;
 public class Deadline extends Task {
 
     private final LocalDateTime end;
-    private static final DateTimeFormatter FORMATTER = DateTimeFormatter.ofPattern("dd MMM uuuu h.mm a");
+    private static final DateTimeFormatter FORMATTER = DateTimeFormatter.ofPattern("d MMM uuuu h.mma");
 
     public Deadline(String desc, boolean isDone, LocalDateTime end) {
         super(desc, isDone);
@@ -23,6 +23,6 @@ public class Deadline extends Task {
      */
     @Override
     public String toString() {
-        return "[D]" + super.toString() + "(by: " + this.end.format(FORMATTER) + ")";
+        return "[D]" + super.toString() + " (by: " + this.end.format(FORMATTER) + ")";
     }
 }
