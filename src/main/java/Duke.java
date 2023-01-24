@@ -1,10 +1,20 @@
-import java.io.*;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileWriter;
+import java.io.IOException;
+
+import java.nio.file.Paths;
+
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
+import java.time.temporal.Temporal;
 
 import java.util.ArrayList;
 import java.util.Scanner;
 
-import java.nio.file.Files;
-import java.nio.file.Paths;
+
 
 /**
  * Represents a chatbot that one can interact with to keep track of tasks.
@@ -20,9 +30,25 @@ public class Duke {
     private static final String STRAIGHT_LINE =
             "_______________________________________________________________________________________________";
 
+
     /** File path where the data file should be stored in. **/
-    private static final String dataFilePath = Paths.get(System.getProperty("user.dir"), "data", "tasks.txt")
+    private static final String DATA_FILE_PATH = Paths.get(System.getProperty("user.dir"), "data", "tasks.txt")
             .toString();
+    
+    /** Commands that supported by the chatbot. */
+    private static final String COMMAND_LIST =
+            "1. list -> Provides a list of existing tasks.\n"
+                    + "2. mark X -> Marks task number X as done.\n"
+                    + "3. unmark X -> Marks task number X as undone.\n"
+                    + "4. todo taskName -> Creates a todo task with name taskName.\n"
+                    + "5. deadline taskName /by date -> Creates a deadline task with name taskName and deadline date.\n"
+                    + "6. event taskName /from startDate /to endDate -> Creates an event task with name taskName,\n"
+                    + "   start date startDate, and end date endDate.\n"
+                    + "7. delete X -> Deletes task number X from the list.\n"
+                    + "8. on givenDate -> Displays all the tasks that occur on givenDate.\n"
+                    + "9. help -> Prints the list of commands supported by this bot.\n\n"
+                    + "Please enter dates in the format of either yyyy-MM-dd hh:mm or yyyy-MM-dd.";
+
 
     /**
      * Launches the chatbot.
@@ -50,7 +76,10 @@ public class Duke {
         //Restores task history if present
         ArrayList<Task> tasks = new ArrayList<Task>();
         try {
-            restoreTaskHistory(tasks);
+            boolean isSuccessful = restoreTaskHistory(tasks);
+            if (! isSuccessful) {
+                return;
+            }
         } catch (FileNotFoundException e) {
             System.out.println(STRAIGHT_LINE);
             System.out.println("Data file is missing. The following error occurred: ");
@@ -58,8 +87,7 @@ public class Duke {
             System.out.println(STRAIGHT_LINE);
         }
 
-
-
+        
         //Prepare input source
         Scanner sc = new Scanner(System.in);
 
@@ -79,6 +107,14 @@ public class Duke {
             //User typed in "list"
             else if (input.equals("list")) {
                 printUserTasks(tasks);
+                continue;
+            }
+            //User typed in "help"
+            else if (input.equals("help")) {
+                System.out.println(STRAIGHT_LINE);
+                System.out.println("Supported Commands:");
+                System.out.println(COMMAND_LIST);
+                System.out.println(STRAIGHT_LINE);
                 continue;
             }
 
@@ -201,13 +237,21 @@ public class Duke {
                     if (deadlineOfTask.isBlank()) {
                         throw new DukeException("The deadline cannot be left blank.");
                     }
-                    Deadline newDeadlineTask = new Deadline(taskName, deadlineOfTask);
+
+                    //Checks if the deadline is a valid date and time
+                    Deadline newDeadlineTask = new Deadline(taskName, deadlineOfTask, getDateObject(deadlineOfTask));
                     addTask(newDeadlineTask, tasks);
                     saveTasks(tasks);
                     break;
                 } catch (DukeException dukeException) {
                     System.out.println(STRAIGHT_LINE);
                     System.out.println(dukeException.getMessage());
+                    System.out.println(STRAIGHT_LINE);
+                    break;
+                } catch (DateTimeParseException dateTimeException) {
+                    System.out.println(STRAIGHT_LINE);
+                    System.out.println("Please check that you entered a valid date, and that the date should be in "
+                            + "the format of\nyyyy-MM-dd hh:mm or yyyy-MM-dd.");
                     System.out.println(STRAIGHT_LINE);
                     break;
                 }
@@ -257,13 +301,72 @@ public class Duke {
                     if (endDate.isBlank()) {
                         throw new DukeException("The end date cannot be left blank.");
                     }
-                    Event newEventTask = new Event(taskName, startDate, endDate);
+
+                    //Create new event task
+                    Temporal start = getDateObject(startDate);
+                    Temporal end = getDateObject(endDate);
+
+                    if (! isValidDuration(start, end)) {
+                        throw new DukeException("Start date must be before end date.");
+                    }
+
+                    Event newEventTask = new Event(taskName, startDate, endDate, start, end);
                     addTask(newEventTask, tasks);
                     saveTasks(tasks);
                     break;
                 } catch (DukeException dukeException) {
                     System.out.println(STRAIGHT_LINE);
                     System.out.println(dukeException.getMessage());
+                    System.out.println(STRAIGHT_LINE);
+                    break;
+                } catch (DateTimeParseException dateTimeException) {
+                    System.out.println(STRAIGHT_LINE);
+                    System.out.println("Please check that you entered a valid date, and that the date should be in "
+                            + "the format of\nyyyy-MM-dd hh:mm or yyyy-MM-dd.");
+                    System.out.println(STRAIGHT_LINE);
+                    break;
+                }
+            case "on":
+                try {
+                    String dateString = input.substring(3);
+                    if (dateString.equals("")) {
+                        throw new DukeException("The date cannot be left blank.");
+                    }
+                    Temporal dateObject = getDateObject(dateString);
+                    System.out.println(STRAIGHT_LINE);
+                    System.out.println("Tasks on: " + Task.formatDate(dateObject));
+                    int count = 1;
+                    for (int t = 0; t < tasks.size(); t = t + 1) {
+                        Task currTask = tasks.get(t);
+                        if (currTask instanceof Deadline) {
+                            if (isEqualDate(dateObject, ((Deadline) currTask).getDeadline())) {
+                                System.out.println(Integer.toString(count) + ". " +
+                                        currTask.getStatusOfTaskInString());
+                                count += 1;
+                            }
+                        }
+                        else if (currTask instanceof Event) {
+                            if (isValidDuration(((Event) currTask).getStartDate(), dateObject) &&
+                                    isValidDuration(dateObject, ((Event) currTask).getEndDate())) {
+                                System.out.println(Integer.toString(count) + ". " +
+                                        currTask.getStatusOfTaskInString());
+                                count += 1;
+                            }
+                        }
+                    }
+                    if (count == 1) {
+                        System.out.println("You have no tasks on this day.");
+                    }
+                    System.out.println(STRAIGHT_LINE);
+                    break;
+                } catch (DukeException dukeException) {
+                    System.out.println(STRAIGHT_LINE);
+                    System.out.println(dukeException.getMessage());
+                    System.out.println(STRAIGHT_LINE);
+                } catch (DateTimeParseException dateTimeException) {
+                    System.out.println(STRAIGHT_LINE);
+                    System.out.println("Please check that you entered a valid date, and that the date should be in "
+                            + "the format of\nyyyy-MM-dd hh:mm or yyyy-MM-dd.");
                     System.out.println(STRAIGHT_LINE);
                     break;
                 }
@@ -276,6 +379,7 @@ public class Duke {
         //Exits the bot after printing exit message
         printExitMessage();
         sc.close();
+
     }
 
 
@@ -289,19 +393,7 @@ public class Duke {
         System.out.println("I am here to scare all your problems away by keeping track of your tasks.");
         System.out.println("What can I help you with today?\n");
         System.out.println("Supported Commands:");
-        String commandList =
-                "1. list -> Provides a list of existing tasks.\n"
-                + "2. mark X -> Marks task number X as done.\n"
-                + "3. unmark X -> Marks task number X as undone.\n"
-                + "4. todo taskName -> Creates a todo task with name taskName.\n"
-                + "5. deadline taskName /by date -> Creates a deadline task with name taskName and deadline date.\n"
-                + "6. event taskName /from startDate /to endDate -> Creates an event task with name taskName,\n"
-                + "   start date startDate, and end date endDate.\n"
-                + "7. delete X -> Deletes task number X from the list.";
-        System.out.println(commandList);
-
-
-
+        System.out.println(COMMAND_LIST);
         System.out.println(STRAIGHT_LINE);
     }
 
@@ -407,6 +499,7 @@ public class Duke {
         System.out.println(taskToBeDeleted.getStatusOfTaskInString());
         System.out.println("Current number of tasks is: " + Integer.toString(tasks.size()) + ".");
         System.out.println(STRAIGHT_LINE);
+
     }
 
 
@@ -426,6 +519,7 @@ public class Duke {
     }
 
     /**
+<<<<<<< HEAD
      * Determines if it is the first time that the user uses the chatbot by checking for
      * the existence of a data file.
      *
@@ -452,51 +546,90 @@ public class Duke {
         }
 
         //Create the file
-        File dataFile = new File(dataFilePath);
+        File dataFile = new File(DATA_FILE_PATH);
         if (! dataFile.exists()) {
             dataFile.createNewFile();
         }
     }
 
 
+
+
     /**
      * Restores the task history stored in the data file.
      *
      * @param tasks The ArrayList that store all the tasks.
+     * @return true if successful, false otherwise.
      * @throws FileNotFoundException if the data file cannot be found.
      */
-    public static void restoreTaskHistory(ArrayList<Task> tasks) throws FileNotFoundException {
-        File dataFile = new File(dataFilePath);
+    public static boolean restoreTaskHistory(ArrayList<Task> tasks) throws FileNotFoundException {
+        File dataFile = new File(DATA_FILE_PATH);
         Scanner s = new Scanner(dataFile);
+        boolean isSuccessful = true;
         while (s.hasNext()) {
             String currentTask = s.nextLine();
             String[] currentTaskArray = currentTask.split(" \\| ");
             String commandType = currentTaskArray[0];
             //Adds each task stored in the data file into tasks
             switch (commandType) {
-            case "T":
-                Task toDoTask = new ToDo(currentTaskArray[2]);
-                if (currentTaskArray[1].equals("1")) {
-                    toDoTask.setDoneStatus();
-                }
-                tasks.add(toDoTask);
-                break;
-            case "D":
-                Task deadlineTask = new Deadline(currentTaskArray[2], currentTaskArray[3]);
-                if (currentTaskArray[1].equals("1")) {
-                    deadlineTask.setDoneStatus();
-                }
-                tasks.add(deadlineTask);
-                break;
-            case "E":
-                Task eventTask = new Event(currentTaskArray[2], currentTaskArray[3], currentTaskArray[4]);
-                if (currentTaskArray[1].equals("1")) {
-                    eventTask.setDoneStatus();
-                }
-                tasks.add(eventTask);
-                break;
+                case "T":
+                    Task toDoTask = new ToDo(currentTaskArray[2]);
+                    if (currentTaskArray[1].equals("1")) {
+                        toDoTask.setDoneStatus();
+                    }
+                    tasks.add(toDoTask);
+                    break;
+                case "D":
+                    try {
+                        //Checks if the deadline is a valid date and time
+                        Task deadlineTask = new Deadline(currentTaskArray[2], currentTaskArray[3],
+                                getDateObject(currentTaskArray[3]));
+                        if (currentTaskArray[1].equals("1")) {
+                            deadlineTask.setDoneStatus();
+                        }
+                        tasks.add(deadlineTask);
+                        break;
+                    } catch (DateTimeParseException e) {
+                        System.out.println(STRAIGHT_LINE);
+                        System.out.println("Please check that you did not modify the data file. Dates must be valid,"
+                                + " and in the format of\nyyyy-MM-dd hh:mm or yyyy-MM-dd.");
+                        System.out.println(STRAIGHT_LINE);
+                        isSuccessful = false;
+                        break;
+                    }
+                case "E":
+                    try {
+                        //Create new event task
+                        Temporal start = getDateObject(currentTaskArray[3]);
+                        Temporal end = getDateObject(currentTaskArray[4]);
+                        if (!isValidDuration(start, end)) {
+                            throw new DukeException("Start date must be before end date.");
+                        }
+                        Task eventTask = new Event(currentTaskArray[2], currentTaskArray[3], currentTaskArray[4],
+                                start, end);
+                        if (currentTaskArray[1].equals("1")) {
+                            eventTask.setDoneStatus();
+                        }
+                        tasks.add(eventTask);
+                        break;
+                    } catch (DukeException dukeException) {
+                        System.out.println(STRAIGHT_LINE);
+                        System.out.println(dukeException.getMessage());
+                        System.out.println(STRAIGHT_LINE);
+                        isSuccessful = true;
+                        break;
+                    } catch (DateTimeParseException e) {
+                        System.out.println(STRAIGHT_LINE);
+                        System.out.println("Please check that you did not modify the data file. Dates must be valid,"
+                                + " and in the format of\nyyyy-MM-dd hh:mm or yyyy-MM-dd.");
+                        System.out.println(STRAIGHT_LINE);
+                        isSuccessful = true;
+                        break;
+                    }
             }
         }
+        s.close();
+        return isSuccessful;
     }
 
 
@@ -507,11 +640,12 @@ public class Duke {
      */
     public static void saveTasks(ArrayList<Task> tasks) {
         try {
-            File dataFile = new File(dataFilePath);
-            FileWriter fw = new FileWriter(dataFilePath);
+            File dataFile = new File(DATA_FILE_PATH);
+            FileWriter fw = new FileWriter(DATA_FILE_PATH);
             //Reset content of file
             fw.write("");
-            fw = new FileWriter(dataFilePath, true);
+            fw.flush();
+            fw = new FileWriter(DATA_FILE_PATH, true);
             //Append new content into file
             for (int i = 0; i < tasks.size(); i = i + 1) {
                 Task currentTask = tasks.get(i);
@@ -522,15 +656,16 @@ public class Duke {
                                    ? "T | " + taskStatus + currentTask.getNameOfTask()
                                    : (currentTask instanceof Deadline)
                                    ? "D | " + taskStatus + currentTask.getNameOfTask() + " | "
-                                           + ((Deadline) currentTask).getDeadlineOfTask()
+                                           + ((Deadline) currentTask).getRawDeadline()
                                    : "E | " + taskStatus + currentTask.getNameOfTask() + " | "
-                                           + ((Event) currentTask).getStartDate() + " | "
-                                                   + ((Event) currentTask).getEndDate();
+                                           + ((Event) currentTask).getRawStartDate() + " | "
+                                                   + ((Event) currentTask).getRawEndDate();
                 if (i != tasks.size() - 1) {
                     lineToAdd += "\n";
                 }
                 fw.write(lineToAdd);
             }
+            fw.flush();
             fw.close();
         } catch (IOException e) {
             System.out.println("Could not save the tasks. The following error occurred: ");
@@ -540,6 +675,84 @@ public class Duke {
     }
 
 
+    /*
+     * Returns a Temporal that encapsulates date and or time information.
+     *
+     * @param rawDateString The raw String that contains date and or time information.
+     * @return the Temporal with the date and or time information.
+     * @throws DateTimeParseException if the raw String is not of the correct date format
+     *                                as requested in the command list of the bot.
+     */
+    public static Temporal getDateObject(String rawDateString)
+            throws DateTimeParseException {
+        //Possible formats, with and without time
+        String timePatternOne = "yyyy-MM-dd HH:mm";
+        String timePatternTwo = "yyyy-MM-dd";
+        DateTimeFormatter formatterWithTime = DateTimeFormatter.ofPattern(timePatternOne);
+        DateTimeFormatter formatterWithoutTime = DateTimeFormatter.ofPattern(timePatternTwo);
+
+        //Determine which format
+        boolean hasTime = (rawDateString.length() > timePatternTwo.length());
+        DateTimeFormatter formatterToUse = (hasTime)
+                ? formatterWithTime
+                : formatterWithoutTime;
+        if (hasTime) {
+            //A date with time
+            return LocalDateTime.parse(rawDateString, formatterToUse);
+        } else {
+            //A date without time
+            return LocalDate.parse(rawDateString, formatterToUse);
+        }
+    }
+
+    /**
+     * Determines if two dates specify a valid duration.
+     *
+     * @param start The Temporal encapsulating the start date and time.
+     * @param end The Temporal encapsulating the end date and time.
+     * @return true if start happens before or is equal to end, else false.
+     */
+    public static boolean isValidDuration(Temporal start, Temporal end) {
+        if (start instanceof LocalDateTime && end instanceof LocalDateTime) {
+            return ((LocalDateTime) end).isAfter((LocalDateTime) start) ||
+                    ((LocalDateTime) end).equals((LocalDateTime) start);
+        } else if (start instanceof LocalDate && end instanceof LocalDate) {
+            return ((LocalDate) end).isAfter((LocalDate) start) || ((LocalDate) end).equals((LocalDate) start);
+        } else if (start instanceof LocalDate && end instanceof LocalDateTime) {
+            LocalDate endDateOnly = LocalDate.of(((LocalDateTime) end).getYear(),
+                    ((LocalDateTime) end).getMonthValue(), ((LocalDateTime) end).getDayOfMonth());
+            return (endDateOnly.isAfter((LocalDate) start)) || (endDateOnly.equals((LocalDate) start));
+        } else if (start instanceof LocalDateTime && end instanceof LocalDate) {
+            LocalDate startDateOnly = LocalDate.of(((LocalDateTime) start).getYear(),
+                    ((LocalDateTime) start).getMonthValue(), ((LocalDateTime) start).getDayOfMonth());
+            return (((LocalDate) end).isAfter(startDateOnly)) || (((LocalDate) end).equals(startDateOnly));
+        }
+        return true;
+    }
+
+    /**
+     * Determines if one date is equal to another date, based on year, month and day.
+     *
+     * @param start The Temporal encapsulating the start date and time.
+     * @param end The Temporal encapsulating the end date and time.
+     * @return true if both refer to the same day, else false.
+     */
+    public static boolean isEqualDate(Temporal start, Temporal end) {
+        if (start instanceof LocalDateTime && end instanceof LocalDateTime) {
+            return ((LocalDateTime) end).equals((LocalDateTime) start);
+        } else if (start instanceof LocalDate && end instanceof LocalDate) {
+            return ((LocalDate) end).equals((LocalDate) start);
+        } else if (start instanceof LocalDate && end instanceof LocalDateTime) {
+            LocalDate endDateOnly = LocalDate.of(((LocalDateTime) end).getYear(),
+                    ((LocalDateTime) end).getMonthValue(), ((LocalDateTime) end).getDayOfMonth());
+            return (endDateOnly.equals((LocalDate) start));
+        } else if (start instanceof LocalDateTime && end instanceof LocalDate) {
+            LocalDate startDateOnly = LocalDate.of(((LocalDateTime) start).getYear(),
+                    ((LocalDateTime) start).getMonthValue(), ((LocalDateTime) start).getDayOfMonth());
+            return (((LocalDate) end).equals(startDateOnly));
+        }
+        return true;
+    }
 }
 
 
