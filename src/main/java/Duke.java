@@ -231,34 +231,41 @@ class Deadlines extends Task {
     Deadlines(String name, boolean done) {
         super(name, done);
         raw = name;
-        dateTranslator = new DateTranslator(raw);
+        //dateTranslator = new DateTranslator(raw);
         extract();
     }
 
     void extract() {
         try {
             String[] tokens = task_name.split("/");
-            String[] date = tokens[1].split(" ");
             task_name = tokens[0];
-            StringBuilder temp = new StringBuilder("(" + date[0] + ": ");
-            if (date.length > 3) {
-                for (int x = 1; x < date.length; x++) {
-                    temp.append(date[x]).append(" ");
+
+            if (!DateTranslator.is_date(raw)) {
+
+                String[] date = tokens[1].split(" ");
+                StringBuilder temp = new StringBuilder("(" + date[0] + ": ");
+                if (date.length > 3) {
+                    for (int x = 1; x < date.length; x++) {
+                        temp.append(date[x]).append(" ");
+                    }
+                    temp.append(")");
+                    endDate = temp.toString();
+                } else {
+                    endDate = date.length == 2 ? "(" + date[0] + ": " + date[1] + ")"
+                            : "(" + date[0] + ": " + date[1] + " " + date[2] + ")";
                 }
-                temp.append(")");
-            }
-            if (date.length > 3) {
-                endDate = temp.toString();
+
             } else {
-                endDate = date.length == 2 ? "(" + date[0] + ": " + date[1] + ")"
-                        : "(" + date[0] + ": " + date[1] + " " + date[2] + ")";
+
+                dateTranslator = new DateTranslator(raw);
+                endDate = dateTranslator.output;
+                System.out.println(endDate);
             }
         } catch (ArrayIndexOutOfBoundsException e) {
             //exception forwarded to Task manager;
         }
 
     }
-
 
     @Override
     void add() {
@@ -546,47 +553,68 @@ class FileManager {
 class DateTranslator {
     String raw_input;
     LocalDateTime time;
+    String output;
 
-    DateTranslator(String raw_input){
+    DateTranslator(String raw_input) {
         this.raw_input = raw_input;
         convert();
+    }
+
+    static boolean is_date(String raw_input) {
+        String[] token1 = raw_input.split("/");
+        String[] token2 = token1[1].split("-");
+        //first date  format
+        return token1.length > 2 || token2.length == 3;
     }
 
     void convert() {
         //example input = return book /by 2/12/2019 1800
         String[] tokens;
         tokens = raw_input.split("/");
-
         // 2/12/2019 1800 format
-        if(tokens.length > 2) {
+        if (tokens.length > 2) {
             //return book |by 2|12| 2019 1800
+            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
             int day = Integer.parseInt(tokens[1].split(" ")[1]); //remove by
             int month = Integer.parseInt(tokens[2]);
             String[] year_time = tokens[3].split(" ");
             int year = Integer.parseInt(year_time[0]);
-            int hour = Integer.parseInt(year_time[1]) / 100;
-            int min = Integer.parseInt(year_time[1]) % 100;
+            int time1;
+            int hour = 0;
+            int min = 0;
+            if (year_time.length > 1) {
+                time1 = Integer.parseInt(year_time[1]);
+                hour = time1 / 100;
+                min = time1 % 100;
+                formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss a");
+
+            }
             time = LocalDateTime.of(year, month, day, hour, min);
-            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss a");
-            String str = time.format(formatter);
-            System.out.println(str);
+            output = time.format(formatter);
+            System.out.println(output);
         } else {
-          //2019-12-02 1800 format
+            //2019-12-02 1800 format
             String[] Date_time = tokens[1].split(" ");
             String[] date = Date_time[1].split("-");
-            int year = Integer.parseInt(date[0]);
-            int month = Integer.parseInt(date[1]);
-            int day = Integer.parseInt(date[2]);
-            int time1 = Integer.parseInt(Date_time[2]);
-            int hour = time1/100;
-            int min = time1%100;
-            time = LocalDateTime.of(year,month,day,hour,min);
-            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("MMM dd yyyy");
-            String str = time.format(formatter);
-            System.out.println(str);
+            int year;
+            int month;
+            int day;
+            int timing;
+            int hour = 0;
+            int min = 0;
+            year = Integer.parseInt(date[0]);
+            month = Integer.parseInt(date[1]);
+            day = Integer.parseInt(date[2]);
+            if (Date_time.length > 2) {
+                timing = Integer.parseInt(Date_time[2]);
+                hour = timing / 100;
+                min = timing % 100;
+            }
+            time = LocalDateTime.of(year, month, day, hour, min);
+            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("MMM dd yyyy HH:mm a");
+            output = time.format(formatter);
         }
     }
-
 
 
 }
