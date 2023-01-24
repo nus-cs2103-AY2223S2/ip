@@ -5,3 +5,50 @@ Hello from
 | |_| | |_| |   <  __/
 |____/ \__,_|_|\_\___|
 
+What can I help you with?
+
+I've added this task to your list:
+[D][ ] visit library (by: Monday)
+You have 1 tasks in your list.
+
+I've added this task to your list:
+[T][ ] borrow book
+You have 2 tasks in your list.
+
+I've added this task to your list:
+[D][ ] start working on project (by: 25/01/23)
+You have 3 tasks in your list.
+
+Nice! I've marked this task as done:
+[D][X] visit library (by: Monday)
+You have 3 tasks in your list.
+
+Nice! I've marked this task as done:
+[T][X] borrow book
+You have 3 tasks in your list.
+
+I've added this task to your list:
+[E][ ] visit museum (from: Thu 2pm to: 4pm)
+You have 4 tasks in your list.
+
+Nice! I've marked this task as done:
+[D][X] start working on project (by: 25/01/23)
+You have 4 tasks in your list.
+
+1. [D][X] visit library (by: Monday)
+2. [T][X] borrow book
+3. [D][X] start working on project (by: 25/01/23)
+4. [E][ ] visit museum (from: Thu 2pm to: 4pm)
+You have 4 tasks in your list.
+
+OK, I've marked this task as not done yet:
+[D][ ] start working on project (by: 25/01/23)
+You have 4 tasks in your list.
+
+1. [D][X] visit library (by: Monday)
+2. [T][X] borrow book
+3. [D][ ] start working on project (by: 25/01/23)
+4. [E][ ] visit museum (from: Thu 2pm to: 4pm)
+You have 4 tasks in your list.
+
+Bye. Hope to see you again soon!
