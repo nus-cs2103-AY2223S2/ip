@@ -73,7 +73,7 @@ public class Duke {
     }
 
     public String greeting() {
-        return "Hi~ I'm Duke>_< \nWhat can I do for you?";
+        return "Hi~ I'm Duke>_<\nWhat can I do for you?";
     }
 
     public String separate(String str) {
