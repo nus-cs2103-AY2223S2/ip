@@ -1,15 +1,62 @@
+import java.io.File;
+import java.io.FileNotFoundException;
 import java.util.Scanner;
 import java.util.ArrayList;
+import java.io.FileWriter;
+import java.io.IOException;
 
 public class Duke {
-    public static void main(String[] args) throws DukeException {
+
+    private static void writeToFile(String filePath, String textToAdd) throws IOException {
+        FileWriter fw = new FileWriter(filePath);
+        fw.write(textToAdd);
+        fw.close();
+    }
+
+    private static ArrayList<Task> loadData(String filePath) throws FileNotFoundException {
+        File file = new File(filePath);
+        ArrayList<Task> tasks = new ArrayList<Task>();
+
+        try {
+            Scanner sc = new Scanner(file);
+
+            // very messy, need to fix way of creating tasks!!
+            // don't pass input string into constructor. settle outside first
+            while (sc.hasNext()) {
+                String line = sc.nextLine();
+                char taskType = line.charAt(line.indexOf(". [") + 3);
+                String fullDesc = line.substring(line.indexOf("] ") + 2);
+                if (taskType == 'T') {
+                    tasks.add(new ToDo(fullDesc));
+                } else if (taskType =='D') {
+                    String desc = fullDesc.substring(0, fullDesc.indexOf(" ("));
+                    String deadline = fullDesc.substring(fullDesc.indexOf("by: ") + 4, fullDesc.length() - 1);
+                    tasks.add(new Deadline(desc + " /by " + deadline));
+                } else { // taskType == 'E'
+                    String desc = fullDesc.substring(0, fullDesc.indexOf(" ("));
+                    String start = fullDesc.substring(fullDesc.indexOf("from: ") + 6, fullDesc.indexOf(" to:"));
+                    String end = fullDesc.substring(fullDesc.indexOf("to: ") + 4, fullDesc.length() - 1);
+                    tasks.add(new Event(desc + " /from " + start + " /to " + end));
+                }
+            }
+            System.out.println("I'm so happy we're meeting again!");
+        } catch (FileNotFoundException err) {
+            System.out.println("I don't seem to know anything about you! First time meeting? :D");
+        }
+        return tasks;
+    }
+
+    public static void main(String[] args) throws DukeException, FileNotFoundException {
+
+        String dirPath = "./data/";
+        String filePath = dirPath + "tasks.txt";
 
         System.out.println("<コ:彡");
         System.out.println("Hello! I'm Duke, your favourite pink octopus.");
         System.out.println("What can I do for you today?");
 
         Scanner sc = new Scanner(System.in);
-        ArrayList<Task> tasks = new ArrayList<Task>();
+        ArrayList<Task> tasks = loadData(filePath);
 
         while (true) {
             String input = sc.nextLine();
@@ -60,6 +107,27 @@ public class Duke {
         }
 
         sc.close();
+
+        File file = new File(filePath);
+        File dir = new File(dirPath);
+
+        try {
+            if (!dir.exists()) {
+                dir.mkdir();
+            }
+            if (!file.exists()) {
+                file.createNewFile();
+            }
+        } catch (IOException err) {
+            System.out.println(err.getMessage());
+        }
+
+        try {
+            writeToFile(filePath, generateList(tasks));
+        } catch (IOException err) {
+            System.out.println("Something went wrong when trying to save your list!");
+            System.out.println(err.getMessage());
+        }
 
     }
 
@@ -124,11 +192,20 @@ public class Duke {
             System.out.println("Your list is currently empty!");
         } else {
             System.out.println("Here are all the things on your list!");
-            for (int i = 0; i < tasks.size(); i++) {
-                Task t = tasks.get(i);
-                System.out.println(String.format("%s.%s", i + 1, t));
+            System.out.println(generateList(tasks));
+        }
+    }
+
+    static String generateList(ArrayList<Task> tasks) {
+        String str = "";
+        for (int i = 0; i < tasks.size(); i++) {
+            Task t = tasks.get(i);
+            str += String.format("%s. %s", i + 1, t);
+            if (i != tasks.size() - 1) {
+                str += '\n';
             }
         }
+        return str;
     }
 
     static void addToDo(ArrayList<Task> tasks, String input) throws DukeException {
