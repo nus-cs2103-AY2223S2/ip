@@ -45,6 +45,8 @@ public class Parser {
                 return validateList(command, 0);
             } else if (splited[0].equals("search")) {
                 return validateList(command, 1);
+            } else if (splited[0].equals("find")) {
+                return validateFind(command);
             } else {
                 throw new DukeException("Sorry, I cannot recognise your input.");
             }
@@ -204,6 +206,24 @@ public class Parser {
             } catch (DateTimeParseException ex) {
                 throw new DukeException("Please enter date in the format dd/mm/yyyy");
             }
+        }
+    }
+
+    public Command validateFind(String command) throws DukeException {
+        String[] splited = command.split(" ");
+        if (splited.length < 2) {
+            throw new DukeException("You have not specified the search keyword.");
+        } else {
+            // allows for searching a pattern
+            StringBuilder sb = new StringBuilder();
+            for (int i = 1; i < splited.length; i++) {
+                sb.append(splited[i]).append(" ");
+            }
+            if (sb.length() != 0) {
+                sb.deleteCharAt(sb.length()-1);
+            }
+            return new FindCommand(false, true,
+                    "find", sb.toString());
         }
     }
 

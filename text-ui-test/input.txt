@@ -6,6 +6,9 @@ todo being happy
 mark 2
 list
 search 02/05/2023
+find
+find project
+find nothing
 deadline do homework /by Monday evening 11pm
 list
 event group project /from Sept 2nd 10am /to 12pm
