@@ -1,4 +1,4 @@
-package duke;
+package tasks;
 
 import tasks.Task;
 

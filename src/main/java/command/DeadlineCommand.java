@@ -1,7 +1,7 @@
 package command;
 
 import duke.Storage;
-import duke.TaskList;
+import tasks.TaskList;
 import duke.Ui;
 import exceptions.DukeException;
 import tasks.Deadline;
@@ -26,7 +26,7 @@ public class DeadlineCommand extends Command {
     }
 
     /***
-     * splits the input and adds a deadline task into duke.TaskList
+     * splits the input and adds a deadline task into tasks.TaskList
      * if duplicate detected, no changes made to taskList or storage
      * @param taskList
      * @param ui

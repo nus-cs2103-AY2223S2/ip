@@ -48,6 +48,10 @@ public class Parser {
                 case ("list"):
                     com = new ListCommand();
                     break;
+                case ("find"):
+                    checkIfBlank(c);
+                    com = new FindCommand(c[1]);
+                    break;
                 case ("mark"):
                     checkIfBlank(c);
                     checkIfValidInteger(c);

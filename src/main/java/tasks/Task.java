@@ -49,7 +49,7 @@ public class Task {
     /**
      * Returns the string representation of the tasks.Task object.
      *
-     * @return the string listing the elements in duke.TaskList
+     * @return the string listing the elements in tasks.TaskList
      */
     @Override
     public String toString(){

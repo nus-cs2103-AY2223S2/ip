@@ -1,11 +1,11 @@
 package command;
 
 import duke.Storage;
-import duke.TaskList;
+import tasks.TaskList;
 import duke.Ui;
 
 /**
- * This class handles listing the entire duke.TaskList
+ * This class handles listing the entire tasks.TaskList
  */
 public class ListCommand extends Command {
 
