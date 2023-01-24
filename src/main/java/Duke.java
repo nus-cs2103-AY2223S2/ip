@@ -33,32 +33,37 @@ public class Duke {
                 } else if (input_arr[0].equals("delete")) {
                     int index = Integer.valueOf(input_arr[1]) - 1;
                     Task action = actions.remove(index);
-                    System.out.println(action.remove());
+                    System.out.println(action.removeTask());
                 } else if (input_arr[0].equals("todo") || input_arr[0].equals("deadline") || input_arr[0].equals("event")) {
                     Task newTask = null;
-                    if (input_arr[0].equals("todo")) {
-                        input = input.replaceFirst("todo", "");
-                        if (input.equals("")) {
-                            throw new Missing("");
-                        }
-                        newTask = new ToDo(input);
-                    } else if (input_arr[0].equals("deadline")) {
-                        input = input.replaceFirst("deadline", "");
-                        if (input.equals("")) {
-                            throw new Missing("");
-                        }
-                        input = input.replaceFirst( "/by", "(by:");
-                        input = input + ")";
-                        newTask = new Deadline(input);
-                    } else {
-                        input.replaceFirst("event", "");
-                        if (input.equals("")) {
-                            throw new Missing("");
-                        }
-                        input = input.replaceFirst( "/from", "(from:");
-                        input = input.replaceFirst( "/to ", "to: ");
-                        input = input + ")";
-                        newTask = new Event(input);
+                    String type = input_arr[0];
+                    switch (type) {
+                        case "todo" :
+                            input = input.replaceFirst("todo", "");
+                            if (input.equals("")) {
+                                throw new Missing("");
+                            }
+                            newTask = new ToDo(input);
+                            break;
+                        case "deadline" :
+                            input = input.replaceFirst("deadline", "");
+                            if (input.equals("")) {
+                                throw new Missing("");
+                            }
+                            input = input.replaceFirst( "/by", "(by:");
+                            input = input + ")";
+                            newTask = new Deadline(input);
+                            break;
+                        case "event" :
+                            input = input.replaceFirst("event", "");
+                            if (input.equals("")) {
+                                throw new Missing("");
+                            }
+                            input = input.replaceFirst( "/from", "(from:");
+                            input = input.replaceFirst( "/to ", "to: ");
+                            input = input + ")";
+                            newTask = new Event(input);
+                            break;
                     }
                     actions.add(newTask);
                     System.out.println(newTask.toString());

@@ -11,7 +11,7 @@ public class Deadline extends Task {
     }
 
     @Override
-    public String remove() {
+    public String removeTask() {
         total--;
         return "Noted I've removed this task:\n "
                 + this.status() + "\n" + "Now you have "

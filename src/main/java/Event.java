@@ -1,7 +1,5 @@
 public class Event extends Task {
     private String type = "[E]";
-    private String start;
-    private String end;
 
     public Event(String name) {
         super(name);
@@ -14,7 +12,7 @@ public class Event extends Task {
     }
 
     @Override
-    public String remove() {
+    public String removeTask() {
         total--;
         return "Noted I've removed this task:\n "
                 + this.status() + "\n" + "Now you have "

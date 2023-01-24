@@ -26,7 +26,7 @@ public class Task {
         }
     }
 
-    public String remove() {
+    public String removeTask() {
         return "Task has been removed";
     }
 }
