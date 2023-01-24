@@ -69,7 +69,7 @@ public class Storage {
      * @param filepath path of the file to write tasks into
      * @param taskList task list containing task to write to file
      */
-    public static void saveData(String filepath, TaskList taskList) {
+    public void saveData(String filepath, TaskList taskList) {
         DukeFileWriter.writeToFile(filepath, taskList);
     }
 }

@@ -3,8 +3,8 @@ package commands;
 import exceptions.DukeException;
 import files.Storage;
 import parsers.TaskInfoParser;
-import tasks.TaskList;
 import tasks.Task;
+import tasks.TaskList;
 import ui.Ui;
 
 public class AddTaskCommand extends Command {
