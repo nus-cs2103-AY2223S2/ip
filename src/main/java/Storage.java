@@ -2,6 +2,9 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
@@ -28,7 +31,7 @@ public class Storage {
                 str = str.replace(")", "");
             } else if (str.startsWith("E")) {
                 str = str.replace("(from:", "|");
-                str = str.replace(" to: ", "-");
+                str = str.replace(" to: ", " - ");
                 str = str.replace(")", "");
             }
             str = str + "\n";
@@ -37,12 +40,14 @@ public class Storage {
         fw.close();
     }
 
-    public List<Task> load() throws FileNotFoundException {
+    public List<Task> load() throws FileNotFoundException, DateTimeParseException {
         try {
             File f = new File(filePath);
             Scanner s = new Scanner(f);
             Task task;
             String description, str, taskInfo;
+            DateTimeFormatter format = DateTimeFormatter.ofPattern("MMM dd yyyy h:mm a");
+
             while (s.hasNext()) {
                 str = s.nextLine();
                 taskInfo = str.substring(8);
@@ -52,14 +57,14 @@ public class Storage {
                 } else if (str.startsWith("D")) {
                     int byIdx = taskInfo.indexOf("|");
                     description = taskInfo.substring(0, byIdx - 1);
-                    String by = taskInfo.substring(byIdx + 2);
+                    LocalDateTime by = LocalDateTime.parse(taskInfo.substring(byIdx + 2), format);
                     task = new Deadline(description, by);
                 } else {
                     int fromIdx = taskInfo.indexOf("|");
                     int toIdx = taskInfo.indexOf("-");
                     description = taskInfo.substring(0, fromIdx - 1);
-                    String from = taskInfo.substring(fromIdx + 2, toIdx);
-                    String to = taskInfo.substring(toIdx + 1);
+                    LocalDateTime from = LocalDateTime.parse(taskInfo.substring(fromIdx + 2, toIdx - 1), format);
+                    LocalDateTime to = LocalDateTime.parse(taskInfo.substring(toIdx + 2), format);
                     task = new Event(description, from, to);
                 }
                 if (str.charAt(4) == '1') {
@@ -69,6 +74,9 @@ public class Storage {
             }
         } catch (FileNotFoundException e) {
             System.out.println("File not found");
+        } catch (DateTimeParseException e) {
+            System.out.println("Could not load data from file due to incorrect date time format.");
+            System.out.println("Format should be of (MMM dd yyyy h:mm a) instead.");
         }
         return listOfTasks;
     }

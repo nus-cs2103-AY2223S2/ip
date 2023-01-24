@@ -2,6 +2,9 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
@@ -48,11 +51,12 @@ public class Duke {
         printLine();
     }
 
-    public static void saveTask(String command) throws DukeException {
+    public static void saveTask(String command) throws DukeException, DateTimeParseException {
         Task task;
         String description;
         String firstWord = command.split(" ")[0];
         TypeOfTask taskType = null;
+        DateTimeFormatter format = DateTimeFormatter.ofPattern("dd/MM/yyyy HHmm");
 
         if (firstWord.equalsIgnoreCase("todo")) {
             taskType = TypeOfTask.TODO;
@@ -65,48 +69,39 @@ public class Duke {
         try {
             switch (taskType) {
             case TODO:
-                try {
-                    description = command.substring(5);
-                    task = new Todo(description);
-                    break;
-                } catch(StringIndexOutOfBoundsException e) {
-                    throw new DukeException(firstWord);
-                }
+                description = command.substring(5);
+                task = new Todo(description);
+                break;
             case DEADLINE:
-                try {
-                    int byIdx = command.indexOf("/by");
-                    description = command.substring(9, byIdx - 1);
-                    String by = command.substring(byIdx + 4);
-                    task = new Deadline(description, by);
-                    break;
-                } catch(StringIndexOutOfBoundsException e) {
-                    throw new DukeException(firstWord);
-                }
+                int byIdx = command.indexOf("/by");
+                description = command.substring(9, byIdx - 1);
+                LocalDateTime by = LocalDateTime.parse(command.substring(byIdx + 4), format);
+                task = new Deadline(description, by);
+                break;
             case EVENT:
-                try {
-                    int fromIdx = command.indexOf("/from");
-                    int toIdx = command.indexOf("/to");
-                    description = command.substring(6, fromIdx - 1);
-                    String from = command.substring(fromIdx + 6, toIdx - 1);
-                    String to = command.substring(toIdx + 4);
-                    task = new Event(description, from, to);
-                    break;
-                } catch(StringIndexOutOfBoundsException e) {
-                    throw new DukeException(firstWord);
-                }
+                int fromIdx = command.indexOf("/from");
+                int toIdx = command.indexOf("/to");
+                description = command.substring(6, fromIdx - 1);
+                LocalDateTime from = LocalDateTime.parse(command.substring(fromIdx + 6, toIdx - 1), format);
+                LocalDateTime to = LocalDateTime.parse(command.substring(toIdx + 4), format);
+                task = new Event(description, from, to);
+                break;
             default:
                 throw new DukeException();
             }
+            listOfTasks.add(task);
+            printLine();
+            System.out.println("\tGot it. I've added this task:");
+            System.out.println("\t  " + task);
+            System.out.println("\tNow you have " + listOfTasks.size() + " tasks in the list.");
+            printLine();
         } catch (NullPointerException e) {
             throw new DukeException();
+        } catch (DateTimeParseException e) {
+            System.out.println("Incorrect date time format. Use dd/mm/yyyy HHmm instead.");
+        } catch(StringIndexOutOfBoundsException e) {
+            throw new DukeException(firstWord);
         }
-
-        listOfTasks.add(task);
-        printLine();
-        System.out.println("\tGot it. I've added this task:");
-        System.out.println("\t  " + task);
-        System.out.println("\tNow you have " + listOfTasks.size() + " tasks in the list.");
-        printLine();
     }
 
     public static void listTasks() {
