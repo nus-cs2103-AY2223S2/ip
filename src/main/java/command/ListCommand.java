@@ -14,4 +14,9 @@ public class ListCommand extends Command {
         }
         return res.trim();
     }
+
+    @Override
+    public boolean equals(Object obj) {
+        return obj instanceof ListCommand;
+    }
 }

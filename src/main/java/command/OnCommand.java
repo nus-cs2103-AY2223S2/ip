@@ -41,4 +41,18 @@ public class OnCommand extends Command {
 
         return res.trim();
     }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) {
+            return true;
+        }
+        if (!(o instanceof OnCommand)) {
+            return false;
+        }
+
+        OnCommand onCommand = (OnCommand) o;
+
+        return queryDate.equals(onCommand.queryDate);
+    }
 }

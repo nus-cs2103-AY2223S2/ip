@@ -24,4 +24,18 @@ public class MarkCommand extends Command {
             throw new InvalidArgumentException("Index " + (this.index + 1) + " is out of bound.");
         }
     }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) {
+            return true;
+        }
+        if (!(o instanceof MarkCommand)) {
+            return false;
+        }
+
+        MarkCommand that = (MarkCommand) o;
+
+        return index == that.index;
+    }
 }

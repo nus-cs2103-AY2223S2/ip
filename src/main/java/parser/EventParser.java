@@ -20,17 +20,20 @@ public class EventParser implements Parser {
                 + "Format: event [task] /from [YYYY-MM-DD] /to [YYYY-MM-DD]");
         }
         String[] splitWithTo = splitWithFrom[1].split(" /to ", 2);
+
         LocalDate startTime;
+        if (splitWithTo[0].trim().equals("")) {
+            throw new MissingArgumentException("The start date cannot be empty. "
+                + "Format: event [task] /from [YYYY-MM-DD] /to [YYYY-MM-DD]");
+        }
         try {
             startTime = LocalDate.parse(splitWithTo[0].trim());
         } catch (DateTimeParseException error) {
             throw new InvalidArgumentException("Start date format should be in the format "
                 + "YYYY-MM-DD (e.g. 2007-12-03)");
         }
-        if (startTime.equals("")) {
-            throw new MissingArgumentException("The start date cannot be empty. "
-                + "Format: event [task] /from [YYYY-MM-DD] /to [YYYY-MM-DD]");
-        } else if (
+
+        if (
             splitWithTo.length != 2
                 || "".equals(splitWithTo[1].trim())
         ) {

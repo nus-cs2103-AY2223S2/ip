@@ -26,4 +26,18 @@ public class DeleteCommand extends Command {
             throw new InvalidArgumentException("Index " + (this.index + 1) + " is out of bound.");
         }
     }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) {
+            return true;
+        }
+        if (!(o instanceof DeleteCommand)) {
+            return false;
+        }
+
+        DeleteCommand that = (DeleteCommand) o;
+
+        return index == that.index;
+    }
 }
