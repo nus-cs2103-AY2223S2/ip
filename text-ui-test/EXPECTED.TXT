@@ -48,7 +48,7 @@ Please try again.
 OPPS! I'm sorry, there is no such command.
 Please try again.
 
-OPPS! Please add the due date/time!
+OPPS! The description of a deadline cannot be empty!
 Please try again.
 
 OPPS! Please add the due date/time!
@@ -60,7 +60,7 @@ Please try again.
 OPPS! Please add the due date/time!
 Please try again.
 
-OPPS! Please make sure that the start and end date/time are not empty!
+OPPS! The description of an event cannot be empty!
 Please try again.
 
 OPPS! Please make sure that the start and end date/time are not empty!

@@ -8,66 +8,18 @@ public class List {
      */
     private ArrayList<Task> taskList = new ArrayList<>();
 
-    private enum AddEnum {
-            TODO, DEADLINE, EVENT
-    }
     /**
      * Add tasks into the list and display added task when done.
-     * @param desc The description of the task to be added.
+     * @param task The description of the task to be added.
      * @throws DukeException throw IncompleteDescException
      *                       if description of task is incomplete/missing,
      *                       or throw InvalidInputException
      *                       if the input command is invalid.
      */
-    public void add(String desc) throws DukeException {
-        Task t;
-        if (desc.startsWith("deadline")) {
-            int endIndex = desc.indexOf("/by");
-            if (endIndex < 0) {
-                throw new IncompleteDescException("Please add the due date/time!");
-            }
-            String name = desc.substring(8, endIndex).strip();
-            String end = desc.substring((endIndex + 3)).strip();
-            if (name.isBlank()) {
-                throw new IncompleteDescException("The description of a deadline cannot be empty!");
-            }
-            if (end.isBlank()) {
-                throw new IncompleteDescException("Please add the due date/time!");
-            }
-            t = new Deadline(name, end);
-        }
-        else if (desc.startsWith("event")) {
-            int startIndex = desc.indexOf("/from");
-            int endIndex = desc.indexOf("/to");
-            if (startIndex < 0 || endIndex < 0) {
-                throw new IncompleteDescException(
-                        "Please make sure that the start and end date/time are not empty!");
-            }
-            String name = desc.substring(5, startIndex).strip();
-            String start = desc.substring((startIndex + 5), endIndex).strip();
-            String end = desc.substring(endIndex + 3).strip();
-            if (name.isBlank()) {
-                throw new IncompleteDescException("The description of an event cannot be empty!");
-            }
-            if (start.isBlank() || end.isBlank()) {
-                throw new IncompleteDescException(
-                        "Please make sure that the start and end date/time are not empty!");
-            }
-            t = new Event(name, start, end);
-        }
-        else if (desc.startsWith("todo")) {
-            String name = desc.substring(4).strip();
-            if (name.isBlank()) {
-                throw new IncompleteDescException("The description of a todo cannot be empty!");
-            }
-            t = new ToDo(name);
-        }
-        else {
-            throw new InvalidInputException("I'm sorry, there is no such command.");
-        }
-        this.taskList.add(t);
+    public void add(Task task) throws DukeException {
+        this.taskList.add(task);
         System.out.println("Got it. I've added this task:");
-        System.out.println(" " + t);
+        System.out.println(" " + task);
         System.out.println("Now you have " + this.taskList.size() + " task(s) in your list.\n");
     }
 
