@@ -1,16 +1,20 @@
 import tasks.*;
 import java.util.*;
+import java.io.*;
 
 public class Duke {
     private static ArrayList<Task> todoList;
     public enum Command {BYE, LIST, TODO, DEADLINE, EVENT, MARK, UNMARK, DELETE}
+    // static boolean anyChanges;
     static String separator = "\u200E✽ ✾ \u200E✽ ✾ \u200E✽ ✾ \u200E✽ ✾";
-    static String invalidIndexMessage = "⚠ oh no...there's no task with this number\ntry asking for 'list' to check task numbers\n" + separator;
-    static String forgottenArgumentMessage = "⚠ oh no...seems like you forgot part of a command, please try again\n" + separator;
-    static String unknownCommandMessage = "⚠ oh no...we don't know what that means, please try again\n" + separator;
+    static String invalidIndexMessage = "⚠ oops...there's no task with this number\ntry asking for 'list' to check task numbers\n" + separator;
+    static String forgottenArgumentMessage = "⚠ oops...seems like you forgot part of a command, please try again\n" + separator;
+    static String unknownCommandMessage = "⚠ oops...we don't know what that means, please try again\n" + separator;
+    static String invalidFilePathMessage = "⚠ oops...we can't find where the file is\n" + separator;
 
     public static void main(String[] args) {
         Scanner s = new Scanner(System.in);
+        // anyChanges = false; // determines if file should be overwritten
         todoList = new ArrayList<>();
 
         System.out.println("｡ﾟﾟ･｡･ﾟﾟ｡\n" + "。 welcome to tigerlily to-do\n" + "　ﾟ･｡･ﾟ\n" + "✎ . . . . add your tasks here");
@@ -21,35 +25,13 @@ public class Duke {
                 Command command = Command.valueOf(input.split(" ")[0].toUpperCase());
 
                 if(command.equals(Command.BYE)) {
+                    updateFile();
                     bye();
                     break;
                 } else {
-                    switch (command) {
-                        case LIST:
-                            list();
-                            break;
-                        case TODO:
-                            todo(input);
-                            break;
-                        case DEADLINE:
-                            deadline(input);
-                            break;
-                        case EVENT:
-                            event(input);
-                            break;
-                        case MARK:
-                            mark(input);
-                            break;
-                        case UNMARK:
-                            unmark(input);
-                            break;
-                        case DELETE:
-                            delete(input);
-                            break;
-                        default:
-                            throw new DukeExceptions(unknownCommandMessage);
-                    }
+                    handleCommand(command, input);
                 }
+
             } catch(DukeExceptions e) {
                 System.out.println(e);
             }
@@ -57,9 +39,9 @@ public class Duke {
         s.close();
     }
 
-    /* private static void handleCommand() { // work on this method to handle switch cases
-
-    } */
+    private static void message(String message) {
+        System.out.println(message + separator);
+    }
 
     private static void addTask(Task task) {
         todoList.add(task);
@@ -67,8 +49,47 @@ public class Duke {
                 " task(s) in total\n");
     }
 
-    private static void message(String message) {
-        System.out.println(message + separator);
+    private static void updateFile() throws DukeExceptions {
+        try {
+            FileWriter fw = new FileWriter("data/data.txt");
+            StringBuilder sb = new StringBuilder();
+            for(Task thisTask : todoList) {
+                sb.append(thisTask.getDataString()).append(System.lineSeparator());
+            }
+            fw.write(sb.toString());
+            fw.close();
+
+        } catch(IOException e) {
+            throw new DukeExceptions(invalidFilePathMessage);
+        }
+    }
+
+    private static void handleCommand(Command command, String input) throws DukeExceptions { // work on this method to handle switch cases
+        switch (command) {
+            case LIST:
+                list();
+                break;
+            case TODO:
+                todo(input);
+                break;
+            case DEADLINE:
+                deadline(input);
+                break;
+            case EVENT:
+                event(input);
+                break;
+            case MARK:
+                mark(input);
+                break;
+            case UNMARK:
+                unmark(input);
+                break;
+            case DELETE:
+                delete(input);
+                break;
+            default:
+                throw new DukeExceptions(unknownCommandMessage);
+        }
     }
 
     private static void bye() {

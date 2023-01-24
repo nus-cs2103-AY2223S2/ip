@@ -1,0 +1,4 @@
+T | 0 | hello
+T | 0 | hey
+E | 0 | hi | 6pm-8pm
+D | 0 | ok | sun

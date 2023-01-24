@@ -8,6 +8,10 @@ public class Task {
         this.status = false;
     }
 
+    public String getDescription() {
+        return this.description;
+    }
+
     public void markDone() {
         this.status = true;
     }
@@ -20,12 +24,20 @@ public class Task {
         return this.status;
     }
 
+    public String getDataString() {
+        if(this.isDone()) {
+            return "1 | " + this.getDescription();
+        } else {
+            return "0 | " + this.getDescription();
+        }
+    }
+
     @Override
     public String toString() {
         if(this.isDone()) {
-            return "[X] " + this.description;
+            return "[X] " + this.getDescription();
         } else {
-            return "[ ] " + this.description;
+            return "[ ] " + this.getDescription();
         }
     }
 }
