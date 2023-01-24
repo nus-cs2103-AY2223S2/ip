@@ -1,70 +1,84 @@
-    ____________________________________________________________
      Hello! I'm Duke
      How can I help you?
-    ____________________________________________________________
-    ____________________________________________________________
-     New task added:
-      [T][ ] borrow book
-     Now list has 1 tasks.
-    ____________________________________________________________
-    ____________________________________________________________
-    Here are the tasks in your list:
-     1. [T][ ] borrow book
-    ____________________________________________________________
+Enter your desired action:
     ____________________________________________________________
      New task added:
-      [D][ ] return book (by: Jun 12 2022)
-     Now list has 2 tasks.
+     [T][ ] borrow book
+      Now list has 1 tasks.
     ____________________________________________________________
+Enter your desired action:
     ____________________________________________________________
-     New task added:
-      [E][ ] project meeting (from: Aug 13 2022 to: Aug 16 2022)
-     Now list has 3 tasks.
+     Here are the tasks in your list:
+      1. [T][ ] borrow book
     ____________________________________________________________
-    ____________________________________________________________
-    Nice! I've marked this task as done:
-       [T][X] borrow book
-    ____________________________________________________________
+Enter your desired action:
     ____________________________________________________________
      New task added:
-      [T][ ] join sports club
-     Now list has 4 tasks.
+     [D][ ] return book (by: Jun 12 2022)
+      Now list has 2 tasks.
     ____________________________________________________________
-    ____________________________________________________________
-     New task added:
-      [T][ ] borrow book
-     Now list has 5 tasks.
-    ____________________________________________________________
-    ____________________________________________________________
-    Nice! I've marked this task as done:
-       [T][X] join sports club
-    ____________________________________________________________
-    ____________________________________________________________
-    Here are the tasks in your list:
-     1. [T][X] borrow book
-     2. [D][ ] return book (by: Jun 12 2022)
-     3. [E][ ] project meeting (from: Aug 13 2022 to: Aug 16 2022)
-     4. [T][X] join sports club
-     5. [T][ ] borrow book
-    ____________________________________________________________
+Enter your desired action:
     ____________________________________________________________
      New task added:
-      [D][ ] return book (by: Aug 4 2022)
-     Now list has 6 tasks.
+     [E][ ] project meeting (from: Aug 13 2022 to: Aug 16 2022)
+      Now list has 3 tasks.
     ____________________________________________________________
+Enter your desired action:
+    ____________________________________________________________
+     Marked task as done:
+     [T][X] borrow book
+      Now list has 3 tasks.
+    ____________________________________________________________
+Enter your desired action:
     ____________________________________________________________
      New task added:
-      [E][ ] project meeting (from: Sep 12 2022 to: Sep 13 2022)
-     Now list has 7 tasks.
+     [T][ ] join sports club
+      Now list has 4 tasks.
     ____________________________________________________________
+Enter your desired action:
     ____________________________________________________________
-     Task removed:
-       [E][ ] project meeting (from: Aug 13 2022 to: Aug 16 2022)
-     Now list has 6 tasks.
+     New task added:
+     [T][ ] borrow book
+      Now list has 5 tasks.
     ____________________________________________________________
+Enter your desired action:
     ____________________________________________________________
-     The description of a todo cannot be empty.
+     Marked task as done:
+     [T][X] join sports club
+      Now list has 5 tasks.
     ____________________________________________________________
+Enter your desired action:
+    ____________________________________________________________
+     Here are the tasks in your list:
+      1. [T][X] borrow book
+      2. [D][ ] return book (by: Jun 12 2022)
+      3. [E][ ] project meeting (from: Aug 13 2022 to: Aug 16 2022)
+      4. [T][X] join sports club
+      5. [T][ ] borrow book
+    ____________________________________________________________
+Enter your desired action:
+    ____________________________________________________________
+     New task added:
+     [D][ ] return book (by: Aug 4 2022)
+      Now list has 6 tasks.
+    ____________________________________________________________
+Enter your desired action:
+    ____________________________________________________________
+     New task added:
+     [E][ ] project meeting (from: Sep 12 2022 to: Sep 13 2022)
+      Now list has 7 tasks.
+    ____________________________________________________________
+Enter your desired action:
+    ____________________________________________________________
+     Removed task:
+     [E][ ] project meeting (from: Aug 13 2022 to: Aug 16 2022)
+      Now list has 6 tasks.
+    ____________________________________________________________
+Enter your desired action:
+    ____________________________________________________________
+     You cant be doing nothing!! Please try again!
+    ____________________________________________________________
+Enter your desired action:
     ____________________________________________________________
      Farewell! See you soon!
     ____________________________________________________________
