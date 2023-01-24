@@ -5,7 +5,7 @@
  * directly inherited from the `Exception` class, it would be better for all
  * Duke-related exceptions to inherit from a single DukeException class. This
  * way, in the try-catch block, I would only need to catch a single
- * DukeException, rather than explicitly catching each and every Duke-related 
+ * DukeException, rather than explicitly catching each and every Duke-related
  * exception.
  */
 public class DukeException extends Exception {

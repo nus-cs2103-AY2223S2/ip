@@ -1,6 +1,7 @@
 ============================================================
 Welcome to Duchess
 ============================================================
+
 >> The list is empty.
 
 >> Added:
@@ -26,12 +27,14 @@ There are 2 tasks in the list
 
 >> Usage: unmark <task no.>
 
->> [T][x] read book
+>> Marked:
+[T][x] read book
 
 >> 1. [T][x] read book
 2. [T][ ] return book
 
->> [T][ ] read book
+>> Unmarked:
+[T][ ] read book
 
 >> 1. [T][ ] read book
 2. [T][ ] return book
@@ -99,13 +102,17 @@ There are 6 tasks in the list
 5. [D][ ] assignment 3 (by: 03 Apr 2019)
 6. [E][ ] meeting (from: 2pm to: 4pm)
 
->> [D][x] assignment 1 (by: 04 Mar 2019)
+>> Marked:
+[D][x] assignment 1 (by: 04 Mar 2019)
 
->> [D][x] assignment 1 (by: 04 Mar 2019)
+>> Marked:
+[D][x] assignment 1 (by: 04 Mar 2019)
 
->> [D][ ] assignment 2 (by: 03 Apr 2019)
+>> Unmarked:
+[D][ ] assignment 2 (by: 03 Apr 2019)
 
->> [D][ ] assignment 2 (by: 03 Apr 2019)
+>> Unmarked:
+[D][ ] assignment 2 (by: 03 Apr 2019)
 
 >> Usage: delete <task no.>
 

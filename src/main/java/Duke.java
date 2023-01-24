@@ -1,72 +1,43 @@
-import java.util.Scanner;
+import java.nio.file.Path;
 
 public class Duke {
 
+    private final Storage storage;
+    private final Ui ui;
+    private TaskList taskList;
+
+    Duke(String filePath) {
+        this.ui = new Ui();
+        this.storage = new Storage(filePath);
+
+        try {
+            this.taskList = new TaskList(this.storage.loadTaskList());
+        } catch (DukeInvalidFileFormatException e) {
+            e.printStackTrace();
+            this.ui.showMessage(e.getMessage());
+            this.taskList = new TaskList();
+        }
+    }
+
     public static void main(String[] args) {
-        String welcomeMessage = "============================================================\n"
-                + "Welcome to Duchess\n"
-                + "============================================================\n";
-        System.out.print(welcomeMessage);
+        String home = System.getProperty("user.home");
+        Path dukeFilePath = Path.of(home, "duke.txt");
+        new Duke(dukeFilePath.toString()).run();
+    }
 
-        TaskList taskList = DukeFileManager.loadTaskListFromDisk();
-        String userPrompt = "\n>> ";
-        Scanner sc = new Scanner(System.in);
+    public void run() {
+        this.ui.showWelcomeMessage();
+        boolean isByeCommand = false;
 
-        while (true) {
-            System.out.print(userPrompt);
-            String userInput = sc.nextLine();
-
-            String[] tokens = userInput.split(" ");
-            Action action;
-
+        while (!isByeCommand) {
             try {
-                action = Action.valueOf(tokens[0]);
-            } catch (IllegalArgumentException e) {
-                System.out.println(new DukeUnknownActionException().getMessage());
-                continue;
-            }
-
-            try {
-                switch (action) {
-                case list:
-                    taskList.handleListCommand();
-                    break;
-
-                case mark:
-                case unmark:
-                    taskList.handleMarkUnmarkCommand(tokens);
-                    break;
-
-                case todo:
-                    taskList.handleTodoCommand(tokens);
-                    break;
-
-                case deadline:
-                    taskList.handleDeadlineCommand(tokens);
-                    break;
-
-                case event:
-                    taskList.handleEventCommand(tokens);
-                    break;
-
-                case delete:
-                    taskList.handleDeleteCommand(tokens);
-                    break;
-
-                case bye:
-                    taskList.handleByeCommand();
-                    sc.close();
-                    return;
-
-                case dueon:
-                    taskList.handleDueOnCommand(tokens);
-                    break;
-                }
-
-                // save taskList to disk after every command
-                DukeFileManager.saveTaskListToDisk(taskList);
-            } catch (DukeException error) {
-                System.out.println(error.getMessage());
+                this.ui.showPrompt();
+                String line = this.ui.readLine();
+                Command command = Parser.parseUserCommand(line);
+                command.execute(this.taskList, this.ui, this.storage);
+                isByeCommand = command.isByeCommand();
+            } catch (DukeException e) {
+                this.ui.showMessage(e.getMessage());
             }
         }
     }
