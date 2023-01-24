@@ -42,7 +42,16 @@ public class Deadline extends Task{
     }
 
     public String getBreakdown() {
-        return "deadline " + task + " /by " + by;
+        String day = Integer.toString(by.getDayOfMonth());
+        String month = Integer.toString(by.getMonthValue());
+        String year = Integer.toString(by.getYear());
+        String hour = Integer.toString(by.getHour());
+        String minute = Integer.toString(by.getMinute());
+        if (minute.length() == 1) {
+            minute = "0" + minute;
+        }
+        String time = hour + minute;
+        return String.format("deadline %s /by %s/%s/%s %s", task, day, month, year, time);
     }
 }
 
