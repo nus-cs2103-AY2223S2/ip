@@ -1,16 +1,24 @@
+import java.time.LocalDate;
+import java.time.format.DateTimeParseException;
+
 public class Event extends Task {
-    String from;
-    String to;
+    LocalDate from;
+    LocalDate to;
 
     @Override
     protected String getType() {
         return "[E]";
     }
 
-    public Event(String desc, String from, String to) {
+    public Event(String desc, String from, String to) throws TaskCreationException {
         super(desc);
-        this.from = from;
-        this.to = to;
+        try {
+            this.from = LocalDate.parse(from);
+            this.to = LocalDate.parse(to);
+        } catch (DateTimeParseException e){
+            System.out.println(e.getMessage());
+            throw new TaskCreationException("Error parsing date");
+        }
     }
 
     @Override

@@ -1,8 +1,15 @@
+import java.time.LocalDate;
+import java.time.format.DateTimeParseException;
+
 public class Deadline extends Task{
-    String deadline;
-    Deadline(String desc, String deadline) {
+    LocalDate deadline;
+    Deadline(String desc, String deadline) throws TaskCreationException {
         super(desc);
-        this.deadline = deadline;
+        try {
+            this.deadline = LocalDate.parse(deadline);
+        } catch (DateTimeParseException e) {
+            throw new TaskCreationException("Error parsing date");
+        }
     }
 
     @Override
