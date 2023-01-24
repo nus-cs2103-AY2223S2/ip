@@ -1,5 +1,10 @@
 package duke;
 
+/**
+ * Represents exceptions that are specific to the application.
+ * <p>
+ * Other exceptions of the application must inherit from this class.
+ */
 public class DukeException extends RuntimeException {
 
     public DukeException() {}

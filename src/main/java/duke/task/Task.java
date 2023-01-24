@@ -3,6 +3,9 @@ package duke.task;
 import java.io.Serializable;
 import java.util.Objects;
 
+/**
+ * Abstract implementation of a {@code Task}.
+ */
 public abstract class Task implements Serializable {
 
     private static final long serialVersionUID = 4852600493024294334L;
@@ -10,11 +13,20 @@ public abstract class Task implements Serializable {
     protected String description;
     protected boolean isDone;
 
+    /**
+     * Creates a {@code Task} with the given description. The created task will be marked as not
+     * done.
+     * 
+     * @param description a string describes the created task
+     */
     public Task(String description) {
         this.description = description;
         this.isDone = false;
     }
-
+    
+    /**
+     * Marks this {@code Task} as done.
+     */
     public void markAsDone() {
         if (isDone) {
             throw new IllegalStateException("Task is already marked as done");
@@ -22,6 +34,9 @@ public abstract class Task implements Serializable {
         isDone = true;
     }
 
+    /**
+     * Marks this {@code Task} as not done.
+     */
     public void unmarkAsDone() {
         if (!isDone) {
             throw new IllegalStateException("Task is already marked as not done");
