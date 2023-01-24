@@ -180,6 +180,7 @@ public class Duke {
     }
 
     public static void saveTasks() {
+        // TODO: Handle case where file is destroyed while script is running
         try {
             BufferedWriter fw = Files.newBufferedWriter(memoryPath , StandardOpenOption.TRUNCATE_EXISTING);
             for (Task task: allTasks) {

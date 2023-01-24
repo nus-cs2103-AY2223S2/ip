@@ -30,3 +30,5 @@ text-ui-test/EXPECTED-UNIX.TXT
 *.zip
 *.tar.gz
 *.rar
+
+./memory.txt
