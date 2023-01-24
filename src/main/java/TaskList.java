@@ -19,7 +19,7 @@ public class TaskList {
         return this.tasks.size();
     }
 
-    public Task addTask(TaskType.Type type, Map<String,String> args) throws CommandNotFoundException, InvalidInputException {
+    public Task addTask(TaskType.Type type, Map<String,String> args) throws CommandNotFoundException, InvalidInputException, InvalidDateTimeException {
         Task newTask;
         String desc;
         switch (type) {
@@ -62,7 +62,7 @@ public class TaskList {
         return newTask;
     }
 
-    public Task addDoneTask(TaskType.Type type, Map<String,String> args) throws CommandNotFoundException, InvalidInputException {
+    public Task addDoneTask(TaskType.Type type, Map<String,String> args) throws CommandNotFoundException, InvalidInputException, InvalidDateTimeException {
         Task newTask = addTask(type, args); // add to end of list
         int index = this.tasks.size() - 1; // mark last(est) item as done
         markAsDone(index);
