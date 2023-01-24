@@ -1,5 +1,5 @@
 /**
- * The To-do class is a type of task.
+ * The Todo class is a type of task.
  *
  * @author Chia Jeremy
  */
