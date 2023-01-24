@@ -1,3 +1,4 @@
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -18,6 +19,10 @@ public class Duke {
 
         while(!currInput.equals("bye")) {
             try {
+                Database db = new Database("data", "dukeTasks.txt");
+                if(inputs.size() == 0) {
+                    db.updateInputs(inputs);
+                }
                 String type = splitStr[0];
 
                 switch (type) {
@@ -39,26 +44,19 @@ public class Duke {
                 case "todo":
                     checkTaskDesc(splitStr);
                     inputs.add(new Todo(splitStr[1]));
-                    printTaskOutput(inputs);
+                    handleTaskOutput(db, inputs);
                     break;
 
                 case "deadline":
                     checkTaskDesc(splitStr);
-                    String[] deadlineArr = splitStr[1].split("/", 2);
-                    String deadlineDesc = deadlineArr[0].trim();
-                    String by = deadlineArr[1].substring(3);
-                    inputs.add(new Deadline(deadlineDesc, by));
-                    printTaskOutput(inputs);
+                    inputs.add(Deadline.createDeadline(splitStr[1]));
+                    handleTaskOutput(db, inputs);
                     break;
 
                 case "event":
                     checkTaskDesc(splitStr);
-                    String[] eventArr = splitStr[1].split("/", 3);
-                    String eventDesc = eventArr[0].trim();
-                    String from = eventArr[1].substring(5).trim();
-                    String to = eventArr[2].substring(3);
-                    inputs.add(new Event(eventDesc, from, to));
-                    printTaskOutput(inputs);
+                    inputs.add(Event.createEvent(splitStr[1]));
+                    handleTaskOutput(db, inputs);
                     break;
 
                 case "delete":
@@ -66,6 +64,7 @@ public class Duke {
                     System.out.println("Noted. I've removed this task:");
                     System.out.println(taskToDelete);
                     inputs.remove(Integer.parseInt(splitStr[1]) - 1);
+                    db.updateDatabase(inputs);
                     System.out.println("Now you have " + inputs.size() + " tasks in the list.");
                     break;
 
@@ -78,6 +77,8 @@ public class Duke {
                 System.out.println("Mark commands need to be followed by an integer!");
             } catch (IndexOutOfBoundsException e) {
                 System.out.println(String.format("Sorry but there are only %d tasks stored!", inputs.size()));
+            } catch (IOException e) {
+                e.printStackTrace();
             } finally {
                 System.out.println("____________________________________________________________\n");
                 currInput = scanner.nextLine();
@@ -109,9 +110,10 @@ public class Duke {
         }
     }
 
-    public static void printTaskOutput(ArrayList<Task> inputs) {
+    public static void handleTaskOutput(Database db, ArrayList<Task> inputs) throws IOException {
         System.out.println("Got it. I've added this task:");
         System.out.println(inputs.get(inputs.size() - 1));
         System.out.println("Now you have " + inputs.size() + " tasks in the list.");
+        db.appendToFile(inputs.get(inputs.size() - 1).toString());
     }
 }
