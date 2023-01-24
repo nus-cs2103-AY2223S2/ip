@@ -1,13 +1,55 @@
 package tasktypes;
 
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.LocalTime;
+import java.time.format.DateTimeFormatter;
+import java.time.format.FormatStyle;
+
 public class Event extends Task {
-    public String start;
-    public String end;
+
+    LocalDate endDate;
+    LocalTime endTime;
+    LocalDateTime endDateTime;
+    String endBy;
+
+    LocalDate startDate;
+    LocalTime startTime;
+    LocalDateTime startDateTime;
+    String startBy;
+
+    String forSavingStart;
+    String forSavingEnd;
 
     public Event(String description, String start, String end) {
         super(description);
-        this.start = start;
-        this.end = end;
+        String[] startDateAndTime = start.split(" ");
+        String startDate = startDateAndTime[0];
+        String startTime = startDateAndTime[1];
+        startDate = startDate.replace('/','-');
+        this.forSavingStart = startDate + " " + startTime;
+        startTime = startTime.substring(0, 2) + ':' + startTime.substring(2);
+
+        this.startDate = LocalDate.parse(startDate);
+        this.startTime = LocalTime.parse(startTime);
+        this.startDateTime = LocalDateTime.of(this.startDate, this.startTime);
+        this.startBy = DateTimeFormatter.ofLocalizedDateTime(FormatStyle.MEDIUM, FormatStyle.SHORT).
+                format(this.startDateTime);
+
+
+        String[] endDateAndTime = end.split(" ");
+        String endDate = endDateAndTime[0];
+        String endTime = endDateAndTime[1];
+        endDate = endDate.replace('/','-');
+        this.forSavingEnd = endDate + " " + endTime;
+        endTime = endTime.substring(0, 2) + ':' + endTime.substring(2);
+
+        this.endDate = LocalDate.parse(endDate);
+        this.endTime = LocalTime.parse(endTime);
+        this.endDateTime = LocalDateTime.of(this.endDate, this.endTime);
+        this.endBy = DateTimeFormatter.ofLocalizedDateTime(FormatStyle.MEDIUM, FormatStyle.SHORT).
+                format(this.endDateTime);
+
         Task.numTask++;
     }
 
@@ -19,10 +61,10 @@ public class Event extends Task {
         } else {
             done = "0";
         }
-        return "E" + ",," + done + ",," + this.description + ",," + start + ",," + end;
+        return "E" + ",," + done + ",," + this.description + ",," + this.forSavingStart + ",," + this.forSavingEnd;
     }
     @Override
     public String toString() {
-        return "[E]" + super.toString() + " (from: " + this.start + ", " + "to: " + this.end + ")";
+        return "[E]" + super.toString() + " (from: " + this.startBy + ", " + "to: " + this.endBy + ")";
     }
 }
