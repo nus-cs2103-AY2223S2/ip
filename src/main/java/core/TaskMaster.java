@@ -1,9 +1,10 @@
-package Task;
+package core;
+import task.Task;
 import java.time.LocalDateTime;
 import java.util.LinkedList;
 
 /**
- * Task.TaskMaster is the managing class for all Tasks.
+ * core.TaskMaster is the managing class for all Tasks.
  */
 public class TaskMaster {
     private final LinkedList<Task> LIST;
@@ -115,7 +116,7 @@ public class TaskMaster {
      * @return A message indicating that this Todo task has been added
      */
     public String addToDo(String taskName, boolean status) {
-        return this.add(new ToDo(taskName, status));
+        return this.add(new task.ToDo(taskName, status));
     }
 
 
@@ -129,7 +130,7 @@ public class TaskMaster {
      *
      */
     public String addDeadLine(String taskName, boolean status, LocalDateTime by) {
-        return this.add(new Deadline(taskName, status, by));
+        return this.add(new task.Deadline(taskName, status, by));
     }
 
     /**
@@ -142,7 +143,7 @@ public class TaskMaster {
      * @return A message indicating that this Event has been added
      */
     public String addEvent(String taskName, boolean status, LocalDateTime from, LocalDateTime to) {
-        return this.add(new Event(taskName, status, from, to));
+        return this.add(new task.Event(taskName, status, from, to));
     }
 
     /**

@@ -16,5 +16,4 @@ public class DukeException extends Exception {
     public static String OOPS() {
         return OOPS;
     }
-
 }

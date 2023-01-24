@@ -1,5 +1,8 @@
+import core.DukeIO;
+import core.Parser;
 import exceptions.DukeException;
-import Task.TaskMaster;
+import core.TaskMaster;
+import core.DukeIO;
 
 /**
  * DUKE
@@ -32,47 +35,9 @@ public class Duke {
             userInput = dio.readln();
             if (!userInput.isEmpty()) {
                 dio.lb();
-                String[] userInputSplit = userInput.split(" ",2);
                 try {
-                    switch (userInput.split(" ",2)[0]) {
-                        case "list":
-                            tm.list();
-                            break;
-                        case "bye":
-                            QUIT = true;
-                            break;
-                        case "mark":
-                            tm.markComplete(dio.extractIndexParams(userInput), true);
-                            break;
-                        case "unmark":
-                            tm.markComplete(dio.extractIndexParams(userInput), false);
-                            break;
-                        case "todo":
-                            args = dio.extractTaskParams(userInput, SWITCHTYPERELATED.TODO);
-                            tm.addToDo(args[0]);
-                            break;
-                        case "event":
-                            args = dio.extractTaskParams(userInput, SWITCHTYPERELATED.EVENT);
-                            tm.addEvent(args[0], args[1], args[2]);
-                            break;
-                        case "deadline":
-                            args = dio.extractTaskParams(userInput, SWITCHTYPERELATED.DEADLINE);
-                            tm.addDeadLine(args[0], args[1]);
-                            break;
-                        case "delete":
-                            tm.delete(dio.extractIndexParams(userInput));
-                            break;
-                        case "save":
-                            dio.writeSave(tm);
-                            break;
-                        case "load":
-                            dio.readSave(tm);
-                            break;
-                        case "?":
-                            throw new DukeException.Unimplemented();
-                        default:
-                          throw new DukeException.Invalid.Command();
-                    }
+                    Parser a = new Parser(userInput);
+                    dio.println(a.parse(tm));
                 } catch (DukeException de) {
                     dio.println(de.getMessage());
                 }
@@ -85,7 +50,7 @@ public class Duke {
 
     public static void initialize() {
         dio = new DukeIO();
-        tm = new TaskMaster(dio);
+        tm = new TaskMaster();
     }
     /**
      * Prints standard welcome message.

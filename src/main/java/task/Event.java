@@ -1,4 +1,4 @@
-package Task;
+package task;
 import java.time.LocalDateTime;
 /**
  * Event is a type of Task.

@@ -1,4 +1,4 @@
-package Task;
+package task;
 import java.time.LocalDateTime;
 /**
  * Deadline is a type of Task.

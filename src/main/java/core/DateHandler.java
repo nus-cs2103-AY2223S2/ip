@@ -17,33 +17,33 @@ public class DateHandler {
     private static String printPattern = "dd/MM/yyyy HH:mm";
     private static DateTimeFormatter printFormat = DateTimeFormatter.ofPattern(printPattern);
 
-    /**
-     * Sets pattern for DateTimeFormatter.
-     * @see <a href="https://docs.oracle.com/javase/8/docs/api/java/time/format/DateTimeFormatter.html">
-     *     Java Dcoumentation on Patterns for Formatting and Parsing</a>
-     * @param pattern Pattern to set.
-     */
-    public static void setDTFPattern(String pattern) {
-        DateTimeFormatter input = null;
-        try {
-            input = DateTimeFormatter.ofPattern(pattern);
-        } catch (IllegalArgumentException e) {
-            throw new IllegalArgumentException(e);
-        }
-        DTFPattern = pattern;
-        dateTimeFormat = DateTimeFormatter.ofPattern(DTFPattern);
-    }
-
-    public static void setPrintPattern(String pattern) {
-        DateTimeFormatter input = null;
-        try {
-            input = DateTimeFormatter.ofPattern(pattern);
-        } catch (IllegalArgumentException e) {
-            throw new IllegalArgumentException(e);
-        }
-        printPattern = pattern;
-        printFormat = DateTimeFormatter.ofPattern(printPattern);
-    }
+//    /**
+//     * Sets pattern for DateTimeFormatter.
+//     * @see <a href="https://docs.oracle.com/javase/8/docs/api/java/time/format/DateTimeFormatter.html">
+//     *     Java Dcoumentation on Patterns for Formatting and Parsing</a>
+//     * @param pattern Pattern to set.
+//     */
+//    public static void setDTFPattern(String pattern) {
+//        DateTimeFormatter input = null;
+//        try {
+//            input = DateTimeFormatter.ofPattern(pattern);
+//        } catch (IllegalArgumentException e) {
+//            throw new IllegalArgumentException(e);
+//        }
+//        DTFPattern = pattern;
+//        dateTimeFormat = DateTimeFormatter.ofPattern(DTFPattern);
+//    }
+//
+//    public static void setPrintPattern(String pattern) {
+//        DateTimeFormatter input = null;
+//        try {
+//            input = DateTimeFormatter.ofPattern(pattern);
+//        } catch (IllegalArgumentException e) {
+//            throw new IllegalArgumentException(e);
+//        }
+//        printPattern = pattern;
+//        printFormat = DateTimeFormatter.ofPattern(printPattern);
+//    }
 
     /**
      * Converts string input into LocalDateTime.
@@ -59,7 +59,6 @@ public class DateHandler {
         try {
             LDT = LocalDateTime.parse(userin, dateTimeFormat);
         } catch (DateTimeParseException e) {
-            System.out.println(userin);
             throw new exceptions.invalid.Input(
                     String.format("Incorrect date time format! Should be '%s'", DTFPattern));
         }

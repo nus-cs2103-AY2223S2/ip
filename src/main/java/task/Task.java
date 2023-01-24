@@ -1,10 +1,10 @@
-package Task;
+package task;
 /**
  * Task is the superclass of the activities that can be stored within Duke.
  */
 public abstract class Task {
     private String taskName;
-    protected boolean status;
+    public boolean status;
 
     /**
      * Constructs a Task with the provided name and status.
@@ -56,4 +56,5 @@ public abstract class Task {
      * @return The string representation of this task in CSV format
      */
     public abstract String toCSV();
+
 }
