@@ -1,4 +1,4 @@
-import java.util.Arrays;
+import java.time.LocalDateTime;
 import java.util.Objects;
 
 public class Parser {
@@ -12,10 +12,13 @@ public class Parser {
             if (Objects.equals(arr[0], "T")) {
                 task = new Todo(arr[2]);
             } else if (Objects.equals(arr[0], "D")) {
-                task = new Deadline(arr[2], arr[3]);
+                LocalDateTime deadline = DateTime.parseDateTimeString(arr[3]);
+                task = new Deadline(arr[2], deadline);
             } else if (Objects.equals(arr[0], "E")) {
-                String from = arr[3].strip();
-                String to = arr[4].strip();
+                String fromString = arr[3].strip();
+                String toString = arr[4].strip();
+                LocalDateTime from = DateTime.parseDateTimeString(fromString);
+                LocalDateTime to = DateTime.parseDateTimeString(toString);
                 task = new Event(arr[2], from, to);
             } else {
                 System.out.println("Parser parseAndAddStorageTask() Error in text:" + str);
@@ -28,7 +31,6 @@ public class Parser {
         } catch (IndexOutOfBoundsException e) {
             System.out.println("Parser parseAndAddStorageTask() Index out of bound when parsing string:" + str);
         }
-
     }
 
     public Command parse(String str) throws DukeException {
@@ -129,9 +131,9 @@ public class Parser {
             } else {
                 s = s.substring(9, s.length());
                 String[] parts = s.split("/");
-                String dl = parts[1].substring(3, parts[1].length()).strip();
+                String deadlineString = parts[1].substring(3, parts[1].length()).strip();
                 String name = parts[0].strip();
-                return new AddDeadline(name, dl);
+                return new AddDeadline(name, deadlineString);
             }
         }
         return null;
@@ -150,9 +152,9 @@ public class Parser {
                 s = s.substring(6, s.length());
                 String[] parts = s.split("/");
                 String name = parts[0].strip();
-                String from = parts[1].substring(5, parts[1].length()).strip();
-                String to = parts[2].substring(3, parts[2].length()).strip();
-                return new AddEvent(name, from, to);
+                String fromString = parts[1].substring(5, parts[1].length()).strip();
+                String toString = parts[2].substring(3, parts[2].length()).strip();
+                return new AddEvent(name, fromString, toString);
             }
         }
         return null;

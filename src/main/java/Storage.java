@@ -72,13 +72,13 @@ public class Storage {
             res += "E,";
             res += completed + ",";
             res += task.getTaskName() + ",";
-            res += ((Event) task).getFrom() + ",";
-            res += ((Event) task).getTo();
+            res += DateTime.getDateTimeString(((Event) task).getFrom()) + ",";
+            res += DateTime.getDateTimeString(((Event) task).getTo());
         } else if (task instanceof Deadline) {
             res += "D,";
             res += completed + ",";
             res += task.getTaskName() + ",";
-            res += ((Deadline) task).getDeadline();
+            res += DateTime.getDateTimeString(((Deadline) task).getDeadline());
         } else {
             res += "T,";
             res += completed + ",";
