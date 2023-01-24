@@ -31,7 +31,7 @@ public abstract class Task {
         count++;
     }
 
-    public static void removeTaskCount() {
+    public static void decreaseTaskCount() {
         count--;
     }
 
