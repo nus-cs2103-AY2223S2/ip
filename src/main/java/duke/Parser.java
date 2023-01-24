@@ -87,6 +87,9 @@ public class Parser {
         return parseInfo;
     }
 
+    public static String parseFindKeyword(String commandInput) {
+        return commandInput.substring(5);
+    }
 
     public static ParsedLoadedTask parseLoadTask(String strTask) {
 

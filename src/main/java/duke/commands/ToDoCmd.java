@@ -11,7 +11,6 @@ public class ToDoCmd extends Command {
 
     public ToDoCmd(TaskList taskList, String lineInput) {
         super(taskList, lineInput);
-        this.lineInput = lineInput;
     }
 
     public void execute() {

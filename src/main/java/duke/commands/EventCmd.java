@@ -11,7 +11,6 @@ public class EventCmd extends Command {
 
     public EventCmd(TaskList taskList, String lineInput) {
         super(taskList, lineInput);
-        this.lineInput = lineInput;
     }
 
     public void execute() {

@@ -10,7 +10,6 @@ public class DeleteCmd extends Command {
 
     public DeleteCmd(TaskList taskList, String lineInput) {
         super(taskList, lineInput);
-        this.lineInput = lineInput;
     } 
 
     public void execute() {
