@@ -10,7 +10,7 @@ public class Parser {
      * Commands that can be used.
      */
     public enum Command {
-        TODO, DEADLINE, EVENT, LIST,
+        TODO, DEADLINE, EVENT, LIST, FIND,
         MARK, UNMARK, DELETE, BYE, UNKNOWN
     }
 
@@ -37,6 +37,8 @@ public class Parser {
             return Command.UNMARK;
         } else if (input.matches("delete(.*)")) {
             return Command.DELETE;
+        } else if (input.matches("find(.*)")) {
+            return Command.FIND;
         } else {
             return Command.UNKNOWN;
         }
@@ -82,6 +84,7 @@ public class Parser {
             }
         case MARK:
         case UNMARK:
+        case FIND:
         case DELETE:
             return input.split(" ", 2);
         default:
