@@ -1,4 +1,10 @@
 package duke.storage;
+import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.Scanner;
 
 import duke.exception.DukeException;
 import duke.task.Deadline;
@@ -7,12 +13,7 @@ import duke.task.Task;
 import duke.task.ToDo;
 import duke.tasklist.TaskList;
 
-import java.io.File;
-import java.io.FileWriter;
-import java.io.IOException;
-import java.time.LocalDate;
-import java.util.ArrayList;
-import java.util.Scanner;
+
 
 /**
  *  duke.storage.Storage to handle loading and saving of duke.tasklist.TaskList
@@ -35,7 +36,7 @@ public class Storage {
     public void saveData(TaskList taskList) throws DukeException {
         try {
             FileWriter fileWriter = new FileWriter(this.filePath);
-            for (int i = 0; i < taskList.getSize(); i ++) {
+            for (int i = 0; i < taskList.getSize(); i++) {
                 Task task = taskList.getTask(i);
                 StringBuilder taskString = new StringBuilder();
                 taskString.append(task.eventType());

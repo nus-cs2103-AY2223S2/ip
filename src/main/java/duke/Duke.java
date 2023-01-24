@@ -9,7 +9,11 @@ import duke.storage.Storage;
 import duke.tasklist.TaskList;
 import duke.ui.Ui;
 
-
+/**
+ * Duke is a class that reacts to user's input
+ * It uses other classes like Command, Parser, Storage, and TaskList to perform
+ * various operations depending on the user's input
+ */
 public class Duke {
     private Storage storage;
     private TaskList tasks;
@@ -17,6 +21,10 @@ public class Duke {
     private Parser parser;
     private Command command;
 
+    /**
+     * Constructor. Takes in a filePath to create Storage object
+     * @param filePath
+     */
     public Duke(String filePath) {
         ui = new Ui();
         parser = new Parser();
@@ -29,6 +37,11 @@ public class Duke {
         }
     }
 
+    /**
+     * Main logic to run the program.
+     * Ends when user inputs "bye"
+     * @throws DukeException
+     */
     public void run() throws DukeException {
         this.ui.sendGreetingsMessage();
         Scanner myObj = new Scanner(System.in);
@@ -45,5 +58,4 @@ public class Duke {
     public static void main(String[] args) throws DukeException {
         new Duke("data/file.txt").run();
     }
-
 }

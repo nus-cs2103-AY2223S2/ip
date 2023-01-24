@@ -1,14 +1,20 @@
 package duke.task;
 
-import duke.task.Task;
-
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
+/**
+ * Child class of task that represents a task with a specific date as deadline.
+ */
 public class Deadline extends Task {
 
     protected LocalDate date;
 
+    /**
+     * Creates an instance of deadline.
+     * @param description
+     * @param date
+     */
     public Deadline(String description, LocalDate date) {
         super(description);
         this.date = date;

@@ -1,18 +1,20 @@
 package duke.task;
 
+/**
+ * Contains various methods of a task
+ */
 public abstract class Task {
     protected String description;
     protected boolean isDone;
 
+    /**
+     * Creates an instance of tasl
+     * @param description
+     */
     public Task(String description) {
         this.description = description;
         this.isDone = false;
     }
-
-    /**
-     *
-     * @return type of event "E", "T" or "D"
-     */
     public abstract String eventType();
 
     public abstract String getStorageDetails();
