@@ -1,5 +1,8 @@
-import java.security.spec.ECField;
-import java.util.Scanner;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
+import java.time.LocalDate;
+
 import java.io.*;
 public class Duke {
     //private Scanner sc = new Scanner(System.in);
@@ -17,14 +20,11 @@ public class Duke {
     }
 
     private enum DukeCommand {
-        BYE,
-        LIST,
-        MARK,
-        UNMARK,
-        TODO,
-        DEADLINE,
-        EVENT,
-        DELETE
+        BYE, LIST,
+        MARK, UNMARK,
+        TODO, DEADLINE, EVENT,
+        DELETE,
+        LISTDATE
     }
 
 
@@ -63,6 +63,9 @@ public class Duke {
                         break;
                     case DELETE :
                         this.deleteTask(userInput);
+                        break;
+                    case LISTDATE:
+                        this.displayTasksWithDates(userInput);
                         break;
                     default :
                         throw new DukeInvalidCommandException();
@@ -142,16 +145,17 @@ public class Duke {
     private void addDeadline(String[] userInput) throws DukeMissingArgumentException {
         try {
             String deadlineInfo[] = userInput[1].split("/by");
+            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm");
             String deadlineText = deadlineInfo[0].trim();
-            String deadlineDate = deadlineInfo[1].trim();
-
-
+            LocalDateTime deadlineDate = LocalDateTime.parse(deadlineInfo[1].trim(), formatter);
             Deadlines deadline = new Deadlines(deadlineText, deadlineDate);
             this.list.addTask(deadline);
             this.ui.taskAddDisplay(deadline, this.list.listLength());
         } catch(IndexOutOfBoundsException e) {
             String task = "deadline";
             throw new DukeMissingArgumentException(task);
+        } catch(DateTimeParseException e) {
+            System.out.println("\tInvalid Date format (Required format: DD/MM/YYYY HH:MM)");
         }
     }
 
@@ -159,15 +163,18 @@ public class Duke {
         try {
             String eventInfo[] = userInput[1].split("/from|/to");
             String eventText = eventInfo[0].trim();
-            String eventFrom = eventInfo[1].trim();
-            String eventTo = eventInfo[2].trim();
+            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm");
+            LocalDateTime eventFrom = LocalDateTime.parse(eventInfo[1].trim(), formatter);
+            LocalDateTime eventTo = LocalDateTime.parse(eventInfo[2].trim(), formatter);
 
             Event event = new Event(eventText, eventFrom, eventTo);
             this.list.addTask(event);
             this.ui.taskAddDisplay(event, this.list.listLength());
-        }catch (IndexOutOfBoundsException e) {
+        } catch (IndexOutOfBoundsException e) {
             String task = "event";
             throw new DukeMissingArgumentException(task);
+        } catch(DateTimeParseException e) {
+            System.out.println("\tInvalid Date format (Required format: DD/MM/YYYY HH:MM)");
         }
     }
 
@@ -185,6 +192,23 @@ public class Duke {
             throw new DukeMissingArgumentException(task);
         } catch (NumberFormatException e) {
             throw new DukeInvalidArgumentsException();
+        }
+    }
+
+
+    private void displayTasksWithDates(String[] userInput) {
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+        LocalDate date = LocalDate.parse(userInput[1], formatter);
+        int counter = 1;
+        for(int i = 0; i < this.list.listLength(); i++) {
+            String taskType = this.list.getTask(i).getTaskType();
+            LocalDate taskDate = this.list.getTask(i).getDate().toLocalDate();
+            if(taskType.equals("D") || taskType.equals(("E"))){
+                if(date.equals(taskDate)) {
+                    System.out.println(String.format("\t%d. %s", counter, this.list.getTask(i).toString()));
+                }
+            }
+
         }
     }
 

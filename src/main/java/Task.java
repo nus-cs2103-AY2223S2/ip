@@ -1,3 +1,5 @@
+import java.time.LocalDateTime;
+
 public abstract class Task {
     private String taskText;
     private boolean status;
@@ -32,6 +34,10 @@ public abstract class Task {
     }
 
     public abstract String writeFile();
+
+    public abstract LocalDateTime getDate();
+
+    public abstract String getTaskType();
 
     @Override
     public String toString() {

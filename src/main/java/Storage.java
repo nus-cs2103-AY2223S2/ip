@@ -45,17 +45,18 @@ public class Storage {
         String taskType = taskData[0];
         String taskStatus = taskData[1];
         String taskInfo = taskData[2].trim();
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm");
 
         Task loadTask = null;
 
         if(taskType.equals("T")) {
             loadTask = new Todo(taskInfo);
         } else if (taskType.equals("D")) {
-            String taskTime = taskData[3].trim();
+            LocalDateTime taskTime = LocalDateTime.parse(taskData[3].trim(), formatter);
             loadTask = new Deadlines(taskInfo, taskTime);
         } else if (taskType.equals("E")){
-            String taskFrom = taskData[3].trim();
-            String taskTo = taskData[4].trim();
+            LocalDateTime taskFrom = LocalDateTime.parse(taskData[3].trim(), formatter);
+            LocalDateTime taskTo = LocalDateTime.parse(taskData[4].trim(), formatter);
             loadTask = new Event(taskInfo, taskFrom, taskTo);
         } else {
             throw new DukeDataException();
