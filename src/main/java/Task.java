@@ -19,9 +19,19 @@ public abstract class Task {
         return this.status;
     }
 
+    public String getCurrentStatus() {
+        return this.status ? "1" : "0";
+    }
+
     private String getStatusText() {
         return status ? "X" : " ";
     }
+
+    public String getTaskText() {
+        return this.taskText;
+    }
+
+    public abstract String writeFile();
 
     @Override
     public String toString() {
