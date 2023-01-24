@@ -1,7 +1,9 @@
 import java.io.IOException;
+import java.nio.file.StandardOpenOption;
 import java.util.ArrayList;
 import java.util.Scanner;
 import java.io.BufferedReader;
+import java.io.BufferedWriter;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.nio.file.Files;
@@ -101,27 +103,40 @@ public class Duke {
         if (currTask instanceof Event) {
             Event e = (Event) currTask;
             String taskType = "E";
-            newEntry += taskType + "|" + completedBit + "|" + currTask.getDescription() + "|"
-                    + e.getStartTime() + "|" + e.getEndTime();
+            newEntry = taskType + "|" + completedBit + "|" + currTask.getDescription() + "|"
+                    + e.getStartTime() + "|" + e.getEndTime() + newEntry;
         }
         else if (currTask instanceof ToDo) {
             String taskType = "T";
-            newEntry += taskType + "|" + completedBit + "|" + currTask.getDescription();
+            newEntry = taskType + "|" + completedBit + "|" + currTask.getDescription() + newEntry;
         }
         else if (currTask instanceof Deadline) {
             Deadline d = (Deadline) currTask;
             String taskType = "D";
-            newEntry += taskType + "|" + completedBit + "|" + currTask.getDescription() + "|"
-                    + d.getDeadline();
+            newEntry = taskType + "|" + completedBit + "|" + currTask.getDescription() + "|"
+                    + d.getDeadline() + newEntry;
         }
-        Files.write(dukeFilePath, newEntry.getBytes());
-
+        Files.write(dukeFilePath, newEntry.getBytes(), StandardOpenOption.APPEND); // don't need to close
     }
     private static void deleteTask(int taskNo) throws IOException {
         String home = System.getProperty("user.dir");
         Path dukeFilePath = Paths.get(home, "data", "duke.txt");
+        Path tempPath = Paths.get(home, "data", "temp.txt");
+        BufferedReader dukeReader = Files.newBufferedReader(dukeFilePath);
+        BufferedWriter dukeWriter = Files.newBufferedWriter(tempPath);
 
-        return; // TODO
+        String currentLine;
+        int currentLineIndex = 1;
+        while ((currentLine = dukeReader.readLine()) != null) {
+            if (currentLineIndex != taskNo) {
+                dukeWriter.write(currentLine + System.getProperty("line.separator"));
+            }
+            taskNo++; // don't copy over to temp file (which is equivalent to deleting)
+        }
+        dukeReader.close();
+        dukeWriter.close();
+        Files.delete(dukeFilePath);
+        Files.move(tempPath, dukeFilePath); // move from src to dest (replace)
     }
     public static void main(String[] args) throws EmptyDescriptionException, IOException {
         Duke.loadFromFile();
@@ -160,6 +175,9 @@ public class Duke {
                     Task toDelete = getTaskForMarking(toFindFirstWord);
                     taskStore.remove(toDelete);
 
+                    String[] parsed = parser(command, ParseFunctions.TODO);
+                    deleteTask(Integer.parseInt(parsed[1]));
+
                     System.out.println("  I've removed this task:");
                     System.out.println("    " + toDelete.toString());
                     System.out.println("  Now you have "+ String.valueOf(Duke.countTasks()) +
@@ -170,7 +188,7 @@ public class Duke {
                     String[] parsed = parser(command, ParseFunctions.DEADLINE);
                     Task newDeadline = new Deadline(parsed[1], parsed[2]);
                     Duke.taskStore.add(newDeadline);
-
+                    addTaskToFile(newDeadline);
                     printNewTask(newDeadline);
                     break;
                 }
@@ -178,7 +196,7 @@ public class Duke {
                     String[] parsed = parser(command, ParseFunctions.EVENT);
                     Task newEvent = new Event(parsed[1], parsed[2], parsed[3]);
                     Duke.taskStore.add(newEvent);
-
+                    addTaskToFile(newEvent);
                     printNewTask(newEvent);
                     break;
                 }
@@ -187,7 +205,7 @@ public class Duke {
                         String[] parsed = parser(command, ParseFunctions.TODO);
                         ToDo newToDo = new ToDo(parsed[1]);
                         Duke.taskStore.add(newToDo);
-
+                        addTaskToFile(newToDo);
                         printNewTask(newToDo);
                         break;
                     }
