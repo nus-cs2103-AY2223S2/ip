@@ -6,6 +6,8 @@ public class DukeException extends Exception{
             Arrays.asList("todo", "deadline", "event"));
     protected ArrayList<String> indexError = new ArrayList<>(
             Arrays.asList("mark", "unmark", "delete"));
+    protected ArrayList<String> formatError = new ArrayList<>(
+            Arrays.asList("date format"));
     protected String errorMsg;
 
     public DukeException(String command) {
@@ -17,6 +19,9 @@ public class DukeException extends Exception{
             this.errorMsg = "This index is out of bounds!";
         } else if (command.equals("timing")) {
             this.errorMsg = "The task timings cannot be empty!";
+        } else if (formatError.contains(command)) {
+            this.errorMsg = "The date is not the correct format!\n" +
+                    "Please enter a date with this format: yyyy-mm-dd";
         } else {
             this.errorMsg = "I'm sorry but I don't know what that means :(";
         }
