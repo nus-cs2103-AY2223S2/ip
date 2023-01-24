@@ -10,6 +10,7 @@ public class UnmarkQueryHandler extends TaskQueryHandler {
         StringTokenizer st = new StringTokenizer(query);
         st.nextToken();
         Task t = tt.MarkUnmarkTask(Integer.parseInt(st.nextToken()) - 1, false);
+        tt.SaveAllTasks();
         return "Task marked as incomplete: " + t;
     }
 }

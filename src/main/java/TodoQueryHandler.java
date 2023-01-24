@@ -12,6 +12,7 @@ public class TodoQueryHandler extends TaskQueryHandler {
             throw new InvalidCommandParamException("Please provide a description for your todo!");
         }
         Task newTask = tt.AddTodo(parsed[1]);
+        tt.SaveAllTasks();
         return "Added task " + newTask;
     }
 }

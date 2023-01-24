@@ -21,6 +21,7 @@ public class EventQueryHandler extends TaskQueryHandler {
             throw new InvalidCommandParamException("Please provide an end date for the event!");
         }
         Task newTask = tt.AddEvent(desc, startDate, endDate);
+        tt.SaveAllTasks();
         return "Added task " + newTask;
     }
 }

@@ -7,15 +7,16 @@ public class Duke {
             + "| |_| | |_| |   <  __/\n"
             + "|____/ \\__,_|_|\\_\\___|\n";
 
-    private static final String GREETING = "Hello there! I am 4RTHUR";
+    private static final String GREETING = "Hello there! I am 4RTHUR\n";
 
     public static void main(String[] args) {
         System.out.println(LOGO + "\n" + GREETING);
 
-        // Response Loop
         Scanner scanner = new Scanner(System.in);
         Bot bot =  new Bot();
+        bot.init();
 
+        // Response Loop
         boolean running =  true;
         while (running & scanner.hasNext()) {
             String input = scanner.nextLine();

@@ -10,6 +10,7 @@ public class MarkQueryHandler extends TaskQueryHandler {
         StringTokenizer st = new StringTokenizer(query);
         st.nextToken();
         Task t = tt.MarkUnmarkTask(Integer.parseInt(st.nextToken()) - 1, true);
+        tt.SaveAllTasks();
         return "Task marked as complete: " + t;
     }
 }
