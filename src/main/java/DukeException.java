@@ -1,3 +1,6 @@
+/**
+ * Provides Duke class an Exception.
+ */
 public class DukeException extends Exception {
     private static String horizontalLine = "________________________________________________________________\n";
 

@@ -1,5 +1,8 @@
 import java.util.*;
 
+/**
+ * Represents the main program for Fake Duke the chat bot.
+ */
 public class Duke {
     private static Scanner sc = new Scanner(System.in);
     private static String horizontalLine = "________________________________________________________________\n";
@@ -30,6 +33,9 @@ public class Duke {
         }
     }
 
+    /**
+     * Prints out the greeting for Fake Duke.
+     */
     private static void greeting() {
         String logo = "  _____     _       _  __  U _____ u      ____     _   _    _  __  U _____ u \n"
                 + " |\" ___|U  /\"\\  u  |\"|/ /  \\| ___\"|/     |  _\"\\ U |\"|u| |  |\"|/ /  \\| ___\"|/ \n"
@@ -46,19 +52,19 @@ public class Duke {
     }
 
     /**
-     * This method prints a menu that consists of these features:
-     * - "todo": Adds todo task
-     * - "deadline": Adds deadline task
-     * - "event": Adds event task
-     * - "list": Displays the list of text entered by user
-     * - "mark": Marks a task as done
-     * - "unmark": Unmarks a task as undone
-     * - "delete": Deletes indicated task
-     * - "bye": Exits program
-     * - Enters any other String of invalid syntax: Rejected
+     * Prints a menu that consists of these features:
+     * - "todo": Adds todo task,
+     * - "deadline": Adds deadline task,
+     * - "event": Adds event task,
+     * - "list": Displays the list of text entered by user,
+     * - "mark": Marks a task as done,
+     * - "unmark": Unmarks a task as undone,
+     * - "delete": Deletes indicated task,
+     * - "bye": Exits program,
+     * - Enters any other String of invalid syntax: Rejected.
      *
-     * @param   input   User input for the program menu
-     * @return  Status whether the program should exit or not
+     * @param   input   User input for the program menu.
+     * @return  Status whether the program should exit or not.
      */
     private static boolean printMenu(String input) throws DukeException, NoSuchElementException {
         boolean exitStatus = false;
@@ -121,10 +127,9 @@ public class Duke {
     }
 
     /**
-     * This method handles the adding of todo tasks.
+     * Handles the adding of todo tasks.
      *
      * @param   taskDesc    Description of task.
-     * @return  void
      */
     private static void todo(String taskDesc) {
         Todo todo = new Todo(taskDesc);
@@ -132,10 +137,9 @@ public class Duke {
     }
 
     /**
-     * This method handles the adding of deadline tasks.
+     * Handles the adding of deadline tasks.
      *
      * @param   taskDesc    Description of task.
-     * @return  void
      */
     private static void deadline(String taskDesc) {
         Deadline deadline = new Deadline(taskDesc);
@@ -143,10 +147,9 @@ public class Duke {
     }
 
     /**
-     * This method handles the adding of event tasks.
+     * Handles the adding of event tasks.
      *
      * @param   taskDesc    Description of task.
-     * @return  void
      */
     private static void event(String taskDesc) {
         Event event = new Event(taskDesc);
@@ -154,10 +157,9 @@ public class Duke {
     }
 
     /**
-     * This method handles the adding of any tasks.
+     * Handles the adding of any tasks.
      *
-     * @param   task    Task to be added
-     * @return  void
+     * @param   task    Task to be added.
      */
     private static void add(Task task) {
         taskList.add(task);
@@ -171,9 +173,7 @@ public class Duke {
     }
 
     /**
-     * This displays the list of tasks.
-     *
-     * @return  void
+     * Displays the list of tasks.
      */
     private static void list() {
         System.out.println(horizontalLine
@@ -186,10 +186,9 @@ public class Duke {
     }
 
     /**
-     * This method marks task as done.
+     * Marks task as done.
      *
-     * @param   strIdx  Index of task
-     * @return  void
+     * @param   strIdx  Index of task.
      */
     private static void mark(String strIdx) throws DukeException {
         int idx = Integer.parseInt(strIdx);
@@ -202,10 +201,9 @@ public class Duke {
     }
 
     /**
-     * This method unmarks task as undone.
+     * Unmarks task as undone.
      *
-     * @param   strIdx  Index of task
-     * @return  void
+     * @param   strIdx  Index of task.
      */
     private static void unmark(String strIdx) throws DukeException {
         int idx = Integer.parseInt(strIdx);
@@ -218,10 +216,9 @@ public class Duke {
     }
 
     /**
-     * This method deletes task given its index.
+     * Deletes task given its index.
      *
-     * @param   strIdx  Index of task
-     * @return  void
+     * @param   strIdx  Index of task.
      */
     private static void delete(String strIdx) throws DukeException {
         int idx = Integer.parseInt(strIdx);
@@ -235,10 +232,9 @@ public class Duke {
     }
 
     /**
-     * This method checks the task index given by the user.
+     * Checks the task index given by the user.
      *
-     * @param   idx     Index of task
-     * @return  void
+     * @param   idx     Index of task.
      */
     private static void checkIdx(int idx) throws DukeException {
         if (idx - 1 > taskList.size() || idx - 1 < 0) {
@@ -247,9 +243,7 @@ public class Duke {
     }
 
     /**
-     * This method prints out an exit message and exits the program.
-     *
-     * @return  void
+     * Prints out an exit message and exits the program.
      */
     private static void exit() {
         System.out.println(horizontalLine

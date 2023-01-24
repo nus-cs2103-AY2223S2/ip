@@ -1,3 +1,6 @@
+/**
+ * Represents a Task added by the user. It has a description attached to it and a isDone status.
+ */
 public class Task {
     protected String description;
     protected boolean isDone;
@@ -8,9 +11,7 @@ public class Task {
     }
 
     /**
-     * This method marks task as done.
-     *
-     * @return  void
+     * Marks task as done.
      */
     public void markTask() {
         this.isDone = true;
@@ -18,9 +19,7 @@ public class Task {
     }
 
     /**
-     * This method unmarks task as undone.
-     *
-     * @return  void
+     * Unmarks task as undone.
      */
     public void unmarkTask() {
         this.isDone = false;
@@ -28,18 +27,14 @@ public class Task {
     }
 
     /**
-     * This method marks done task with X.
-     *
-     * @return  void
+     * Marks done task with X.
      */
     public String getStatusIcon() {
         return (isDone ? "X" : " ");
     }
 
     /**
-     * This method gets the name of the task type.
-     *
-     * @return  void
+     * Gets the name of the task type.
      */
     public char getTaskType() {
         return (this instanceof Todo
@@ -50,9 +45,7 @@ public class Task {
     }
 
     /**
-     * This method gets extra information of the task like its corresponding datetimes.
-     *
-     * @return  void
+     * Gets extra information of the task like its corresponding datetimes.
      */
     public String getExtraInfo() {
         return (this instanceof Deadline
@@ -63,9 +56,7 @@ public class Task {
     }
 
     /**
-     * This method prints the task type, status, description, and if relevant, its datetimes.
-     *
-     * @return  void
+     * Prints the task type, status, description, and if relevant, its datetimes.
      */
     public void getTask() {
         System.out.println("[" + this.getTaskType() + "]"
