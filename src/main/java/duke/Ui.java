@@ -41,7 +41,17 @@ class Ui {
     public static void list(ArrayList<Task> tasks) {
         System.out.println("Here are the tasks in your list:");
         for (int i = 0; i < tasks.size(); i++) {
-            System.out.format("%d.%s%n",i+1,tasks.get(i));
+            System.out.format("%d.%s%n", i + 1, tasks.get(i));
+        }
+    }
+    /**
+     * Show found tasks
+     * @param tasks
+     */
+    public static void find(ArrayList<Task> tasks) {
+        System.out.println("Here are the matching tasks in your list:");
+        for (int i = 0; i < tasks.size(); i++) {
+            System.out.format("%d.%s%n", i + 1, tasks.get(i));
         }
     }
 

@@ -2,8 +2,11 @@ package duke;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.stream.Collectors;
 
-enum Query { LIST, MARK, UNMARK, TODO, DEADLINE, EVENT, DELETE }
+enum Query { LIST, FIND, MARK, UNMARK, TODO, DEADLINE, EVENT, DELETE }
 class Parser {
     /**
      * Get input string, parses it and run corresponding functions.
@@ -21,6 +24,9 @@ class Parser {
         switch (query) {
             case LIST: 
                 list(tasks);
+                break; 
+            case FIND: 
+                find(tasks, tokens[1]);
                 break; 
             case MARK:
                 mark(true, tasks, tokens[1]);
@@ -49,6 +55,18 @@ class Parser {
      */
     private static void list(TaskList tasks) {
         Ui.list(tasks.get());
+    }
+
+    /**
+     * Find task containing search string. 
+     * 
+     * @param tasks
+     * @param searchString
+     */
+    private static void find(TaskList tasks, String searchString) {
+        List<Task> listTask = tasks.get().stream().filter(task -> task.toString().contains(searchString)).collect(Collectors.toList());
+        Ui.find(new ArrayList<Task>(listTask));
+        
     }
 
     /**
