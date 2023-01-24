@@ -121,20 +121,30 @@ public class Duke {
     }
 
     // parse format is "YYYY-MM-DD"
+    // TODO: need to catch exceptions
     private static LocalDate parseDate(String dateStr) {
-        String[] date = dateStr.split("-");
+        //*
+        return LocalDate.parse(dateStr); //fixed to "-" seperator
+        /*/
+        String[] date = dateStr.split("/"); // can also use "-" or other seperator
         int[] dateInfo = Stream.of(date).mapToInt(Integer::parseInt).toArray();
         return LocalDate.of(dateInfo[0], dateInfo[1], dateInfo[2]);
+        /**/
     }
 
     // Can parse "HH:MM:SS" or "HH:MM"
+    // TODO: need to catch exceptions
     private static LocalTime parseTime(String timeStr) {
+        //*
+        return LocalTime.parse(timeStr);
+        /*/
         String[] time = timeStr.split(":");
         int[] timeInfo = Stream.of(time).mapToInt(Integer::parseInt).toArray();
         if (timeInfo.length == 2)
             return LocalTime.of(timeInfo[0], timeInfo[1]);
         else
             return LocalTime.of(timeInfo[0], timeInfo[1], timeInfo[2]);
+        /**/
     }
 
     // Can parse "YYYY-MM-DD HH:MM:SS" or "YYYY-MM-DD HH:MM"
