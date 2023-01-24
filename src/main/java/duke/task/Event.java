@@ -86,17 +86,17 @@ public class Event extends Task {
         return endDateTime;
     }
 
-    public boolean isUpcoming() {
-        return LocalDateTime.now().isBefore(startDateTime);
-    }
-
-    public boolean isOngoing() {
-        return LocalDateTime.now().isAfter(startDateTime) && LocalDateTime.now().isBefore(endDateTime);
-    }
-
-    public boolean isPassed() {
-        return LocalDateTime.now().isAfter(endDateTime);
-    }
+//    public boolean isUpcoming() {
+//        return LocalDateTime.now().isBefore(startDateTime);
+//    }
+//
+//    public boolean isOngoing() {
+//        return LocalDateTime.now().isAfter(startDateTime) && LocalDateTime.now().isBefore(endDateTime);
+//    }
+//
+//    public boolean isPassed() {
+//        return LocalDateTime.now().isAfter(endDateTime);
+//    }
 
     @Override
     public String toString() {

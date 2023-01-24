@@ -56,13 +56,17 @@ public class Deadline extends Task {
         return deadline;
     }
 
-    public boolean isOverdue() {
-        return LocalDateTime.now().isAfter(deadline);
-    }
+//    public void setDeadline(LocalDateTime deadline) {
+//        this.deadline = deadline;
+//    }
 
-    public boolean isUpcoming() {
-        return LocalDateTime.now().isBefore(deadline);
-    }
+//    public boolean isOverdue() {
+//        return LocalDateTime.now().isAfter(deadline);
+//    }
+//
+//    public boolean isUpcoming() {
+//        return LocalDateTime.now().isBefore(deadline);
+//    }
 
     @Override
     public String toString() {

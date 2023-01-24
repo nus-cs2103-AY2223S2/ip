@@ -21,6 +21,10 @@ public abstract class Command {
             Command.isExit =false;
         }
 
+        public Task getTask() {
+            return task;
+        }
+
         @Override
         public void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
             tasks.addTask(task);
@@ -50,6 +54,10 @@ public abstract class Command {
             Command.isExit =false;
         }
 
+        public int getIndex() {
+            return index;
+        }
+
         @Override
         public void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
             Task task;
@@ -70,6 +78,10 @@ public abstract class Command {
         public UnmarkCommand(int index) {
             this.index = index;
             Command.isExit =false;
+        }
+
+        public int getIndex() {
+            return index;
         }
 
         @Override
@@ -94,6 +106,10 @@ public abstract class Command {
             Command.isExit =false;
         }
 
+        public int getIndex() {
+            return index;
+        }
+
         @Override
         public void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
             Task task;
@@ -110,17 +126,21 @@ public abstract class Command {
     }
 
     public static class FilterCommand extends Command {
-        private Object obj;
+        private Object object;
 
         public FilterCommand(Object obj) {
-            this.obj = obj;
+            this.object = obj;
             Command.isExit =false;
+        }
+
+        public Object getObject() {
+            return object;
         }
 
         @Override
         public void execute(TaskList tasks, Ui ui, Storage storage) {
-            if (obj instanceof LocalDate) {
-                LocalDate date = (LocalDate) obj;
+            if (object instanceof LocalDate) {
+                LocalDate date = (LocalDate) object;
                 tasks.filterTasksByDate(ui, date);
             }
         }

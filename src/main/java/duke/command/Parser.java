@@ -2,7 +2,7 @@ package duke.command;
 
 import duke.task.Deadline;
 import duke.task.Event;
-import duke.task.ToDo;
+import duke.task.Todo;
 import duke.exception.DukeException;
 
 import java.time.LocalDate;
@@ -19,7 +19,7 @@ public class Parser {
                 if (parts.length != 2 || parts[1].trim().isEmpty()) {
                     throw new DukeException("The description of a todo cannot be empty.");
                 }
-                ToDo todo = new ToDo(parts[1].trim());
+                Todo todo = new Todo(parts[1].trim());
                 return new Command.AddCommand(todo);
             case "deadline":
                 String deadlineError = "A deadline has to have a string and date separated with a /by keyword.";
