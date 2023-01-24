@@ -25,7 +25,8 @@ public class Duke {
                 continue;
             }
 
-            if (textInput.substring(0, 4).equalsIgnoreCase("mark")) {
+            if (textInput.length() >= 6 && 
+                textInput.substring(0, 4).equalsIgnoreCase("mark")) {
                 int i = Integer.parseInt(textInput.substring(5));
                 Task currTask = taskList[i-1];
                 currTask.markDone();
@@ -33,7 +34,8 @@ public class Duke {
                 continue;
             }
 
-            if (textInput.substring(0, 6).equalsIgnoreCase("unmark")) {
+            if (textInput.length() >= 8 &&
+                textInput.substring(0, 6).equalsIgnoreCase("unmark")) {
                 int i = Integer.parseInt(textInput.substring(7));
                 Task currTask = taskList[i-1];
                 currTask.markUndone();
