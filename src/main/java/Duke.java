@@ -3,6 +3,30 @@ import java.io.*;
 public class Duke {
     public static void main(String[] args) throws IOException {
 
+        ArrayList <Task> list = new ArrayList <Task>();
+        File directory = new File("data");
+        directory.mkdir();
+        File file = new File("data/duke.txt");
+        if (!file.createNewFile()) {  //File exist
+            BufferedReader br = new BufferedReader(new FileReader(file));
+            String st;
+
+            while ((st = br.readLine()) != null) {
+                String[] tokens = st.split(",");
+                Task t;
+                if( tokens[0].equals("todo"))
+                    t = new Todo( tokens[2] , Boolean.parseBoolean(tokens[1]));
+                else if ( tokens[0].equals("deadline"))
+                    t = new Deadline( tokens[2],tokens[3],Boolean.parseBoolean(tokens[1]));
+                else
+                    t = new Event( tokens[2],tokens[3],tokens[4],Boolean.parseBoolean(tokens[1]));
+
+                list.add(t);
+
+            }
+            br.close();
+        }
+
         String logo = " ____        _        \n"
                 + "|  _ \\ _   _| | _____ \n"
                 + "| | | | | | | |/ / _ \\\n"
@@ -15,7 +39,7 @@ public class Duke {
 
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
         String text = "";
-        ArrayList <Task> list = new ArrayList <Task>();
+
 
         while( !(text = br.readLine()).equals("bye")) {
 
@@ -40,12 +64,12 @@ public class Duke {
                 list.remove(index - 1);
                 System.out.println("Now you have " + list.size() + " tasks in the list");
             }
-            else {
+            else { // Add tasks
+                Task t = null;
                 if ( action.equals("todo")) {
                     String[] arr = text.split(" ", 2);
                     try {
-                        Todo t = new Todo(arr[1]);
-                        list.add(t);
+                        t = new Todo(arr[1],false);
                         successToken = 1;
                     } catch(ArrayIndexOutOfBoundsException e) {
                         System.out.println("☹ OOPS!!! The description of a todo cannot be empty.");
@@ -61,8 +85,7 @@ public class Duke {
                         } else
                             value = value + nextString;
                     }
-                    Deadline t = new Deadline(value,date);
-                    list.add(t);
+                    t = new Deadline(value,date,false);
                     successToken = 1;
 
                 } else if( action.equals("event")) {
@@ -77,8 +100,7 @@ public class Duke {
                             value = value + nextString;
                     }
 
-                    Event t = new Event(value,from,to);
-                    list.add(t);
+                    t = new Event(value,from,to,false);
                     successToken = 1;
 
                 } else {
@@ -86,8 +108,14 @@ public class Duke {
                 }
 
                 if( successToken == 1) {
+                    list.add(t);
                     System.out.println("Added : " + text);
                     System.out.println("You have a total of " + list.size() + " tasks in the list");
+
+                    FileWriter fw = new FileWriter("data/duke.txt");
+                    fw.write(t.toFile());
+                    fw.close();
+
                 } else if( missingToken == 1) {
                     System.out.println("☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
                 }

@@ -2,9 +2,9 @@ public class Task {
     private boolean mark;
     private String value;
 
-    public Task(String value) {
+    public Task(String value, boolean mark) {
         this.value = value;
-        this.mark = false;
+        this.mark = mark;
     }
 
     public boolean isMark() {
@@ -23,6 +23,9 @@ public class Task {
         this.value = value;
     }
 
+    public String toFile() {
+        return null;
+    }
     public String toString() {
         return "[" + (isMark() ? "X" : " ") + "] " + getValue()  ;
     }

@@ -2,9 +2,13 @@ public class Deadline extends Task {
 
     protected String by;
 
-    public Deadline(String value, String by) {
-        super(value);
+    public Deadline(String value, String by, boolean mark) {
+        super(value,mark);
         this.by = by;
+    }
+
+    public String toFile() {
+        return "deadline," + super.isMark() + "," + super.getValue() + "," + this.by;
     }
 
     @Override
