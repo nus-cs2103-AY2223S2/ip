@@ -29,5 +29,9 @@ public class Task {
         }
         return status + " " + this.description;
     }
+
+    public String getSaveFormat() {
+        return this.toString();
+    }
 }
 
