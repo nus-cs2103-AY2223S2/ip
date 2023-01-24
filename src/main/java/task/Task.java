@@ -86,10 +86,6 @@ public class Task {
         }
     }
 
-    public static void saveTasks(TaskList tl) {
-
-    }
-
     Task(String content) {
         this.content = content;
         this.done = false;
