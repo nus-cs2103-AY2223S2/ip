@@ -25,9 +25,6 @@ public class TaskList {
         Task t = tasks.get(i);
         t.unmarkAsDone();
     }
-    public String numTasksMsg() {
-        return "Now you have " + this.tasks.size() + " tasks in the list.";
-    }
     public String formatList() {
         String formattedList = "";
         for (Object t : this.tasks) {
@@ -35,6 +32,9 @@ public class TaskList {
             formattedList += pos + ". " + t + LS;
         }
         return formattedList.trim();
+    }
+    public String numTasksMsg() {
+        return "Now you have " + this.tasks.size() + " tasks in the list.";
     }
     public String toText(int i) {
         Task t = tasks.get(i);
