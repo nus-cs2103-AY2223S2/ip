@@ -86,7 +86,7 @@ class TaskList<T> {
     TaskList<T> add(Task newTask) {
         TaskList<T> newTasks = new TaskList<T>(tasks);
         newTasks.tasks.add(newTask);
-        System.out.println("SUI I have added this task. Remember, rest is as important as working hard!: " + newTask); 
+        System.out.println("SUI I have added this task!: " + newTask);
         return newTasks;
     }
     /**
