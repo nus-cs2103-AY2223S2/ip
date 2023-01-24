@@ -14,9 +14,19 @@ import aqua.logic.command.ListCommand;
 import aqua.logic.command.MarkTaskCommand;
 
 
+/**
+ * A parser to parse an input String into a CommandLineInput.
+ */
 public class CommandLineInputParser implements Parser<CommandLineInput> {
+    /** The argument parser to parse argument input. */
     private final ArgumentParser argumentParser;
 
+    /**
+     * Constructs a CommandLineInputParser that uses the given ArgumentParser
+     * to parse arguments.
+     * 
+     * @param argumentParser - the ArgumentParser to use.
+     */
     public CommandLineInputParser(ArgumentParser argumentParser) {
         this.argumentParser = argumentParser;
     }

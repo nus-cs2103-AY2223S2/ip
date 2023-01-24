@@ -4,6 +4,10 @@ import aqua.logic.command.Command;
 import aqua.manager.AppManager;
 
 
+/** 
+ * Represents the user's command line input that produces ExecutionDispatchers
+ * when given an AppManager.
+ */
 public class CommandLineInput {
     private final Command command;
     private final ArgumentMap args;
@@ -15,6 +19,12 @@ public class CommandLineInput {
     }
 
 
+    /**
+     * Returns the ExecutionDispatcher to execute the command.
+     * 
+     * @param manager - the AppManager for the command to wrok on.
+     * @returnt he ExecutionDispatcher of the command.
+     */
     public ExecutionDispatcher getDispatcher(AppManager manager) {
         return command.getDispatcher(args, manager);
     }

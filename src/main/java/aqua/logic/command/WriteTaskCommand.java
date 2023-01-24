@@ -8,6 +8,10 @@ import aqua.logic.ExecutionTask;
 import aqua.manager.AppManager;
 
 
+/**
+ * An implementation of Command that will produce an ExecutionDispatcher that
+ * will save the state of the task manager to hard disk.
+ */
 public class WriteTaskCommand implements Command {
     @Override
     public ExecutionDispatcher getDispatcher(ArgumentMap args, AppManager manager) {

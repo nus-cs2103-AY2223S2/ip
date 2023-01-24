@@ -8,6 +8,9 @@ import aqua.exception.IllegalSyntaxException;
 import aqua.logic.ArgumentMap;
 
 
+/**
+ * A parser to parse String input into an ArgumentMap.
+ */
 public class ArgumentParser implements Parser<ArgumentMap> {
     @Override
     public ArgumentMap parse(String input) throws IllegalSyntaxException {

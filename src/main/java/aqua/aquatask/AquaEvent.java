@@ -5,19 +5,42 @@ import java.util.Optional;
 
 import aqua.util.DateUtils;
 
+
+/** Implementation of AquaTask to represent an Event */
 public class AquaEvent extends AquaTask {
+    /** Tag of {@code from} argument when parsing. */
     public static final String FROM_TAG = "from";
+    /** Tag of {@code to} argument when parsing. */
     public static final String TO_TAG = "to";
 
+    /** If the event is completed. */
     private final boolean isComplete;
+    /** Time the event starts. */
     private final LocalDateTime from;
+    /** Time the event ends. */
     private final LocalDateTime to;
 
 
+    /**
+     * Constructs an AquaEvent from the given parameters while setting the
+     * event completion status to {@code false}.
+     * 
+     * @param name - the name of the event.
+     * @param from - the time the event starts.
+     * @param to - the time the event ends.
+     */
     public AquaEvent(String name, LocalDateTime from, LocalDateTime to) {
         this(name, false, from, to);
     }
 
+    /**
+     * Constructs an AquaEvent from the given parameters.
+     * 
+     * @param name - the name of the event.
+     * @param isCompelte - if the event is completed.
+     * @param from - the time the event starts.
+     * @param to - the time the event ends.
+     */
     public AquaEvent(String name, boolean isComplete, LocalDateTime from, LocalDateTime to) {
         super(name);
         this.isComplete = isComplete;

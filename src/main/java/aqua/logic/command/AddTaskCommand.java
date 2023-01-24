@@ -8,7 +8,19 @@ import aqua.logic.ExecutionTask;
 import aqua.manager.AppManager;
 
 
+/**
+ * An abstract implementation of Command that will produce an
+ * ExecutionDispatcher that will create and add an AquaTask to the task manager
+ * and then save the state of the task manager to hard disk.
+ */
 public abstract class AddTaskCommand implements Command {
+    /**
+     * Creates an AquaTask from the given argument map.
+     * 
+     * @param args - the argument map.
+     * @return an AquaTask created from the given arguments.
+     * @throws IllegalSyntaxException if the arguments are of invalid syntax.
+     */
     public abstract AquaTask createTask(ArgumentMap args) throws IllegalSyntaxException;
 
 
