@@ -19,6 +19,10 @@ public class Deadline extends Task {
         this.by = by;
     }
 
+    /**
+     * gets the time the deadline has to finish by
+     * @return String
+     */
     public String getBy(){
         return by;
     }

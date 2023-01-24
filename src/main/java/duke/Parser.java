@@ -33,6 +33,12 @@ public class Parser {
         this.ui = ui;
     }
 
+    /***
+     * parse the instruction accordingly based on first word in the string
+     * @param command
+     * @return
+     * @throws DukeException
+     */
     public static Command parse(String command) throws DukeException{
         String[] c = command.split(" ", 2);
         String instruction = c[0];
@@ -90,6 +96,11 @@ public class Parser {
         return com;
     }
 
+    /**
+     * checks if input after command is blank
+     * @param arr
+     * @throws BlankException
+     */
     public static void checkIfBlank(String[] arr) throws BlankException{
         try {
             if (arr[1].trim().isBlank())
@@ -99,6 +110,11 @@ public class Parser {
         }
     }
 
+    /**
+     * checks if input for commands with integers is valid
+     * @param arr
+     * @throws NumberFormatException
+     */
     public static void checkIfValidInteger(String[] arr) throws NumberFormatException{
         try{
             Integer.parseInt(arr[1]);

@@ -6,14 +6,30 @@ import duke.Ui;
 import exceptions.DukeException;
 import exceptions.InvalidNumberException;
 
+/**
+ * This class handles unmarking a task as incomplete
+ */
+
 public class UnmarkCommand extends Command{
     private int index;
+
+    /***
+     * Constructor for command.UnmarkCommand
+     * @param index
+     */
 
     public UnmarkCommand(int index){
         super();
         this.index = index;
     }
 
+    /***
+     * marks task as done and update storage
+     * @param taskList
+     * @param ui
+     * @param storage
+     * @throws DukeException
+     */
     @Override
     public String execute(TaskList taskList, Ui ui, Storage storage) throws DukeException{
         int taskNumMinusOne = index - 1;

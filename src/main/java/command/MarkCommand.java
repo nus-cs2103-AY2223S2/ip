@@ -22,8 +22,6 @@ public class MarkCommand extends Command{
         this.index = index;
     }
 
-//    public void validate() throws Exception {
-//    }
 
     /***
      * marks task as done and update storage

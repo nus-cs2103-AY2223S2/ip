@@ -7,7 +7,9 @@ import exceptions.DukeException;
 import tasks.Event;
 import tasks.Task;
 
-
+/**
+ * A class that handles the creation of an Event command
+ */
 public class EventCommand extends Command {
 
     private String input;
@@ -18,7 +20,7 @@ public class EventCommand extends Command {
     }
 
     /***
-     * Adds an tasks.Event tasks.Task into the taskList and updates storage files
+     * Adds an Event task into the taskList and updates storage files
      * if duplicate detected, no changes made to taskList or storage
      * @param taskList
      * @param ui

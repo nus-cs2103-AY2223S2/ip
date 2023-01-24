@@ -29,15 +29,5 @@ public class ByeCommand extends Command {
     public String execute(TaskList taskList, Ui ui, Storage storage) throws DukeException {
             setExitTrue();
             return ui.exit();
-//        try
-//        finally
-//            new Timer().schedule(new TimerTask() {
-//                @Override
-//                public void run() {
-//                    Platform.exit();
-//                    System.exit(0);
-//                }
-//            }, 2000);
-//        }
     }
 }

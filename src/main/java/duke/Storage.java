@@ -12,16 +12,29 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Scanner;
 
+/**
+ * Storage class to handle saving and writing data
+ */
 public class Storage {
 
     protected String directory;
     protected String filePath;
 
+    /**
+     * constructor for storage class
+     * @param directory
+     * @param filePath
+     */
     public Storage(String directory, String filePath){
         this.directory = directory;
         this.filePath = filePath;
     }
 
+    /**
+     * loads the file. creates new file if not created
+     * @return
+     * @throws IOException
+     */
     public ArrayList<Task> load() throws IOException{
         ArrayList<Task> al = new ArrayList<>();
         File dir = new File(directory);
@@ -42,6 +55,11 @@ public class Storage {
         return al;
     }
 
+    /**
+     * reads the read and processes the data.
+     * @param file
+     * @return
+     */
     public static ArrayList<Task> readFile(File file) {
         ArrayList<Task> tasks = new ArrayList<>();
         try {
@@ -86,7 +104,10 @@ public class Storage {
         return tasks;
     }
 
-    //overwrites and rewrite to the text file
+    /**
+     * overwrites and rewrite to the text file
+     * @param taskList
+     */
     public void writeFile(TaskList taskList) {
         try{
             String FULL_FILE = directory  + File.separator + filePath;

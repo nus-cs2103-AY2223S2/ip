@@ -12,3 +12,13 @@ tasks.Event extra command
         String[] split = input.split("/");
         String description = split[0].trim();
         String time = split[1].substring(3);
+
+//not sure if i need this
+sourceSets {
+    main {
+        java {
+            srcDirs = ['src/main/java']
+        }
+    }
+}
+

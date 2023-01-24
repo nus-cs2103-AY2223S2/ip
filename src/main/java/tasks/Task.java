@@ -16,16 +16,24 @@ public class Task {
 //        return this.isDone;
 //    }
 
+    /**
+     * sets task as marked
+     */
     public void setAsMarked(){
         isDone = true;
     }
 
+    /**
+     * gets description of task
+     * @return
+     */
     public String getDescription(){
         return this.name;
     }
 
     /**
      * retrieves status of task
+     * @return String
      */
     public String getStatusIcon() {
         return (isDone ? "X" : " "); // mark done task with X

@@ -9,7 +9,7 @@ import exceptions.DukeException;
 
 
 /***
- * Main class
+ * Main class for Duke
  */
 
 class Duke {
@@ -20,7 +20,12 @@ class Duke {
     private TaskList tasks;
     private Ui ui;
 
-    // once duke gets initiated, create duke.duke.Ui object, create storage
+    /***
+     * constructor for duke. Once duke gets initiated, create duke.duke.Ui object, create storage
+     * @param directory
+     * @param filePath
+     */
+
     public Duke(String directory, String filePath) {
         ui = new Ui();
         storage = new Storage(directory, filePath);
@@ -33,6 +38,10 @@ class Duke {
         }
     }
 
+    /**
+     * runs the program until isExit turns true.
+     * Handles printing of messages
+     */
     public void run() {
         System.out.println(Ui.greet());
         boolean isExit = false;
@@ -50,7 +59,10 @@ class Duke {
         }
     }
 
-
+    /**
+     * main
+     * @param args
+     */
     public static void main(String[] args) {
         new Duke(DIRECTORY_NAME, FILE_NAME).run();
     }

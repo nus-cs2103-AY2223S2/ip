@@ -22,11 +22,19 @@ public class Event extends Task {
         this.to = to;
     }
 
+    /**
+     * gets the time from and to appended
+     * @return String
+     */
     public String getTime(){
         return from + " - " + to;
     }
 
-
+    /**
+     * Converts a string into formatted version
+     * @param str in the format of dd/MM/yyyy  HHmm eg. 02/12/2022 1800
+     * @return a string formatted eg. 2nd December 2022 6:00 PM
+     */
     public String dateCovert(String str){
         // String to LocalDate
         DateTimeFormatter format1 = DateTimeFormatter.ofPattern("dd/MM/yyyy HHmm");
@@ -36,6 +44,10 @@ public class Event extends Task {
         return formattedDate;
     }
 
+    /**
+     * Returns the string representation of the Event object.
+     * @return String
+     */
     @Override
     public String toString() {
         return "[E]" + super.toString() + " (from: " + dateCovert(from) + " to: " + dateCovert(to) + ")";

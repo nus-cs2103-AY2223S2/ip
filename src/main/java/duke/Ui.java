@@ -33,15 +33,17 @@ public class Ui {
         return s;
     }
 
-    /***
+    /**
      * prints greet message
+     * @return a string
      */
     public static String greet() {
         return "Hello! I'm duke.Duke.\n" + "What can I do for you?";
     }
 
-    /***
-     * prints farewell message
+    /**
+     * prints a farewell message
+     * @return a string
      */
     public String exit() {
         this.scanner.close();
@@ -51,13 +53,15 @@ public class Ui {
     /***
      * prints loading error message
      */
-    // later
+
     public void showLoadingError() {
         System.out.println("Loading Error Encountered");
     }
 
     /**
      * List the items in the list
+     * @param taskList
+     * @return
      */
     public String printList(TaskList taskList) {
         String s = "";
@@ -69,6 +73,9 @@ public class Ui {
 
     /**
      * prints message after task is marked
+     * @param index
+     * @param task
+     * @return
      */
     public String printMark(int index, Task task) {
         String response = "Nice! I've marked this task as done:\n";
@@ -78,6 +85,9 @@ public class Ui {
 
     /**
      * prints message after task is unmarked
+     * @param index
+     * @param task
+     * @return
      */
     public String printUnmark(int index, Task task) {
         String response = "OK, I've marked this task as not done yet:\n";
@@ -88,6 +98,9 @@ public class Ui {
 
     /**
      * prints message after task is added to taskList
+     * @param size
+     * @param task
+     * @return
      */
     public String printAddTask(int size, Task task) {
         String response = "Got it. I've added this task: \n" + task + "\n";
@@ -121,11 +134,17 @@ public class Ui {
 
     /**
      * prints a line
+     * @return a string
      */
     public String showLine() {
         return "____________________________________________________________________________";
     }
 
+    /**
+     * prints tasks that has matching keywords
+     * @param res
+     * @return
+     */
     public String printFind(ArrayList<Task> res) {
         String s = "Here are the matching tasks in your list: \n";
         for (int j = 0; j < res.size(); j++) {
@@ -134,6 +153,11 @@ public class Ui {
         return s;
     }
 
+    /**
+     * Prints a duplicate if found
+     * @param task
+     * @return
+     */
     public String printDuplicates(Task task) {
         return String.format("Duplicate task detected\n 1. %s", task.toString());
     }
