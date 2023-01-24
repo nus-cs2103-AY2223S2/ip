@@ -25,7 +25,7 @@ public abstract class ExecutionTask<T> {
      */
     public ExecutionTask(ArgumentMap args, AppManager manager) {
         this.args = args;
-        this.manager= manager;
+        this.manager = manager;
     }
 
 

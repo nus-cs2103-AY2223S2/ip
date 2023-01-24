@@ -17,6 +17,7 @@ public class AquaToDo extends AquaTask {
         this(name, false);
     }
 
+
     /**
      * Constructs an AquaToDo with the given parameters.
      * 
@@ -31,23 +32,21 @@ public class AquaToDo extends AquaTask {
 
     @Override
     public AquaToDo mark(boolean isComplete) {
-        return new AquaToDo(this.getName(), isComplete);
+        return new AquaToDo(getName(), isComplete);
     }
 
     
     @Override
     public boolean isComplete() {
-        return this.isComplete;
+        return isComplete;
     }
 
 
     @Override
     public String getReloadString() {
-        return String.format(
-            "todo %s /%s %s",
-            getName(),
-            IS_COMPLETED_TAG, isComplete
-        );
+        return String.format("todo %s /%s %s",
+                getName(),
+                TAG_IS_COMPLETE, isComplete);
     }
 
 

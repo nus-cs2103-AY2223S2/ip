@@ -30,6 +30,8 @@ public class ProcedureExecutionException extends Exception {
      * @param msg - the message of the exception.
      * @param cause - the cause of the exception.
      */
+
+    
     public ProcedureExecutionException(String msg, Throwable cause) {
         super(msg, cause);
     }

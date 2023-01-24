@@ -55,6 +55,16 @@ public abstract class ExecutionDispatcher {
         };
     }
 
+    /**
+     * Returns the follow up dispatcher, that should be dispatched if the task
+     * of this dispatcher is dispatched and executed successfully, wrapped in
+     * an {@code Optinoal}. If there is no follow dispatcher,
+     * {@code Optional.empty} is returned.
+     * 
+     * @return the follow up dispatcher wrapped around an {@code Optional}.
+     */
+    public abstract Optional<ExecutionDispatcher> followUpDispatcher();
+
 
     /**
      * Dispatches and executes the task.
@@ -83,15 +93,4 @@ public abstract class ExecutionDispatcher {
             }
         };
     }
-
-    
-    /**
-     * Returns the follow up dispatcher, that should be dispatched if the task
-     * of this dispatcher is dispatched and executed successfully, wrapped in
-     * an {@code Optinoal}. If there is no follow dispatcher,
-     * {@code Optional.empty} is returned.
-     * 
-     * @return the follow up dispatcher wrapped around an {@code Optional}.
-     */
-    public abstract Optional<ExecutionDispatcher> followUpDispatcher();
 }

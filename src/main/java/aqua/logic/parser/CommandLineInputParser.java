@@ -37,10 +37,13 @@ public class CommandLineInputParser implements Parser<CommandLineInput> {
         String argString = "";
         Command command;
 
+        // parse
         try (Scanner scanner = new Scanner(input)) {
             if (scanner.hasNext()) {
+                // parse command
                 command = getCommand(scanner.next());
 
+                // parse arguments
                 if (scanner.hasNext()) {
                     argString = scanner.nextLine().strip();
                 }
@@ -51,6 +54,7 @@ public class CommandLineInputParser implements Parser<CommandLineInput> {
             throw new IllegalSyntaxException("I do not know what command is suppose to do");
         }
 
+        // create and return command line input
         return new CommandLineInput(command, argumentParser.parse(argString));
     }
 

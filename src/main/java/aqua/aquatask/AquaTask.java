@@ -8,7 +8,7 @@ import aqua.storage.Reloadable;
 /** Represents a task that the user wishes to track. */
 public abstract class AquaTask implements Reloadable {
     /** Tag of {@code isCompleted} argument when parsing. */
-    public static final String IS_COMPLETED_TAG = "completed";
+    public static final String TAG_IS_COMPLETE = "completed";
 
     /** Name of the task. */
     private final String name;
@@ -23,13 +23,14 @@ public abstract class AquaTask implements Reloadable {
         this.name = name;
     }
 
+
     /**
      * Constructs a task with the same name as the given AquaTask.
      * 
      * @param task - the task to construct the new task from.
      */
     public AquaTask(AquaTask task) {
-        this.name = task.name;
+        this(task.name);
     }
 
 
@@ -79,8 +80,8 @@ public abstract class AquaTask implements Reloadable {
      */
     public boolean isStarted() {
         return getStart()
-            .map(time -> LocalDateTime.now().isAfter(time))
-            .orElse(true);
+                .map(time -> LocalDateTime.now().isAfter(time))
+                .orElse(true);
     }
 
 
@@ -102,8 +103,8 @@ public abstract class AquaTask implements Reloadable {
      */
     public boolean isEnded() {
         return getEnd()
-            .map(time -> LocalDateTime.now().isAfter(time))
-            .orElse(false);
+                .map(time -> LocalDateTime.now().isAfter(time))
+                .orElse(false);
     }
 
 
@@ -115,11 +116,11 @@ public abstract class AquaTask implements Reloadable {
     @Override
     public String toString() {
         return String.format("%s%s %s",
-            getStatusString(),
-            getMarkString(),
-            getName()
-        );
+                getStatusString(),
+                getMarkString(),
+                getName());
     }
+
 
     /**
      * Returns the String representation of the completion status of the task.
@@ -127,8 +128,9 @@ public abstract class AquaTask implements Reloadable {
      * @return the String representation of the completion status of the task.
      */
     private String getMarkString() {
-        return isComplete() ? "[X]" : "[ ]";
+        return (isComplete()) ? "[X]" : "[ ]";
     }
+
 
     /**
      * Returns the status of the task. If the task has ended, is ongoing or is

@@ -10,7 +10,7 @@ import java.util.Optional;
  */
 public class ArgumentMap {
     /** The tag of the main input. */
-    public static final String MAIN_INPUT_KEY = "MAIN_INPUT";
+    public static final String TAG_MAIN_INPUT = "MAIN_INPUT";
 
     /** Hash map to contain the tag-value pairs. */
     private final HashMap<String, String> inputMap;
@@ -35,7 +35,7 @@ public class ArgumentMap {
      * @return the main input value wrapped in an {@code Optional}.
      */
     public Optional<String> getMainInput() {
-        return get(MAIN_INPUT_KEY);
+        return get(TAG_MAIN_INPUT);
     }
 
 

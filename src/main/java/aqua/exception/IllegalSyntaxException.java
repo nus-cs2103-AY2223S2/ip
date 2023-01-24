@@ -5,6 +5,7 @@ public class IllegalSyntaxException extends Exception {
     /** Constructs an IllegalSyntaxException without any message or cause. */
     public IllegalSyntaxException() {}
 
+
     /**
      * Constructs an IllegalSyntaxException with the specified message.
      * 
@@ -13,6 +14,7 @@ public class IllegalSyntaxException extends Exception {
     public IllegalSyntaxException(String description) {
         super(description);
     }
+
 
     /**
      * Constructs an IllegalSyntaxException with the given message and cause.

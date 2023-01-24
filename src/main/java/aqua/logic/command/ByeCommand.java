@@ -21,8 +21,8 @@ public class ByeCommand implements Command {
             }
 
             @Override
-            public String getDataDisplay(String data, AppManager manager) {
-                return data;
+            public String getDataDisplay(String msg, AppManager manager) {
+                return msg;
             }
         });
     }

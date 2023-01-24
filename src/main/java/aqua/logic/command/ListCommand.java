@@ -20,13 +20,13 @@ public class ListCommand implements Command {
                 return manager.getTaskManager();
             }
 
+            
             @Override
             public String getDataDisplay(TaskManager taskManager, AppManager manager) {
-                return String.format(
-                    "Here is your task list\n" +
-                    "%s",
-                    getListMessage(taskManager)
-                );
+                return String.format(String.join("\n",
+                                "Here is your task list",
+                                "%s"),
+                        getListMessage(taskManager));
             }
         });
     }

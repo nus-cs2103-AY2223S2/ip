@@ -14,27 +14,27 @@ public class TaskManager implements Reloadable {
     private static final String SAVE_DIRECTORY = "SAVE_DATA";
     private static final String SAVE_FILE = "Goshujin-sama you promised to never touch this.txt";
 
-    private final ArrayList<AquaTask> taskList = new ArrayList<>();
+    private final ArrayList<AquaTask> tasks = new ArrayList<>();
 
 
     public void add(AquaTask task) {
-        taskList.add(task);
+        tasks.add(task);
     }
 
     
     public AquaTask mark(int taskNum, boolean isComplete) throws IndexOutOfBoundsException {
-        taskList.set(taskNum, taskList.get(taskNum).mark(isComplete));
-        return taskList.get(taskNum);
+        tasks.set(taskNum, tasks.get(taskNum).mark(isComplete));
+        return tasks.get(taskNum);
     }
 
 
     public AquaTask delete(int taskNum) throws IndexOutOfBoundsException {
-        return taskList.remove(taskNum);
+        return tasks.remove(taskNum);
     }
 
 
     public int size() {
-        return taskList.size();
+        return tasks.size();
     }
 
 
@@ -55,7 +55,7 @@ public class TaskManager implements Reloadable {
     @Override
     public String getReloadString() {
         StringBuilder builder = new StringBuilder();
-        for (AquaTask task : taskList) {
+        for (AquaTask task : tasks) {
             builder.append(task.getReloadString());
             builder.append("\n");
         }
@@ -66,12 +66,10 @@ public class TaskManager implements Reloadable {
     @Override
     public String toString() {
         StringBuilder builder = new StringBuilder();
-        for (int i = 0; i < taskList.size(); i++) {
-            builder.append(String.format(
-                "%d. %s\n",
-                i+1,
-                taskList.get(i).toString()
-            ));
+        for (int i = 0; i < tasks.size(); i++) {
+            builder.append(String.format("%d. %s\n",
+                    i+1,
+                    tasks.get(i).toString()));
         }
         return builder.toString().strip();
     }
