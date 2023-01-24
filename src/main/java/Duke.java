@@ -1,4 +1,13 @@
-import java.util.*;
+import java.lang.ArrayIndexOutOfBoundsException;
+import java.util.ArrayList;
+import java.lang.NullPointerException;
+import java.io.FileWriter;
+import java.io.File;
+import java.io.FileReader;
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.util.Scanner;
+import java.util.Arrays;
 
 public class Duke {
 
@@ -6,6 +15,10 @@ public class Duke {
     public enum Instructions {
         BYE, LIST, MARK, UNMARK, TODO, DEADLINE, EVENT, DELETE
     }
+
+    private static Scanner sc = new Scanner(System.in);
+    private static String DUKETXT = "./data/duke.txt";
+    private static ArrayList<Task> list = new ArrayList<Task>(100);
 
     public static void main(String[] args) {
         String logo = " ____        _        \n"
@@ -15,18 +28,19 @@ public class Duke {
                 + "|____/ \\__,_|_|\\_\\___|\n";
 
         System.out.println("Hello from\n" + logo);
-
+       
         userInputs();
 
     }
 
     // Allow users to add, mark and un-mark, delete, add tasks (to-do, deadline, event) or show items in a list
-    private static void userInputs() {
-        Scanner sc = new Scanner(System.in);
-        ArrayList<Task> list = new ArrayList<Task>(100);
+    public static void userInputs() {
 
         System.out.println("Hello! I'm Duke");
         System.out.println("What can I do for you?");
+
+        loadFileData();
+
         try {
             while (true) {
                 String input = sc.nextLine();
@@ -93,7 +107,7 @@ public class Duke {
                     case EVENT:
                         boolean from = input.contains("/from");
                         boolean to = input.contains("/to");
-                        if ((!from || !to) || (from && to)) {
+                        if ((!from || !to) || !(from && to)) {
                             throw new TaskException("Event item must include a start time and an end time");
                         }
                         String[] event_part = input.substring(6, input.length()).split("/from ");
@@ -114,6 +128,8 @@ public class Duke {
                         throw new TaskException("Sorry! Duke has no idea what it is as it is not an instruction");
                 }
 
+                writeToFile();
+
             }
         } catch (TaskException e) {
             System.out.println(e.getMessage());
@@ -123,8 +139,54 @@ public class Duke {
             System.out.println("Check if the index is within the size of the array");
         }
     }
+
+    /** Part of the code extracted from https:/
+/www.codejava.net/java-se/file-io/how-to-read-and-write-text-file-in-java
+ */
+
+ public static void loadFileData() {
+    try {
+        File file = new File ("./data");
+        if (file.exists()) {
+            File txtFile = new File (DUKETXT);
+            FileReader fileReader = new FileReader(txtFile);
+            readToFile(fileReader);
+        } else {
+            file.createNewFile();
+        }
+    } catch (IOException e) {
+        e.printStackTrace();
+    }
 }
 
+public static void writeToFile () {
+    try {
+        FileWriter writer = new FileWriter(DUKETXT);
+        for (Task t : list) {
+            writer.write(t.toString());
+            writer.write("\n");
+        }
+        writer.close();
+    } catch (IOException e) {
+        e.printStackTrace();
+    }
+}
+
+public static void readToFile (FileReader file) {
+    try {
+    BufferedReader reader = new BufferedReader(file);
+    String line;
+    
+    while ((line = reader.readLine()) != null) {
+        System.out.println(line);
+        }
+        reader.close();
+
+    } catch (IOException e) {
+        e.printStackTrace();
+    }
+}
+}
 
 // Task class: parent class of Deadline, Event, To do
 class Task {
