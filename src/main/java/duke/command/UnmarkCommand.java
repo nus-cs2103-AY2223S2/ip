@@ -4,19 +4,18 @@ import duke.storage.Storage;
 import duke.task.Task;
 import duke.tasklist.TaskList;
 import duke.ui.Ui;
-
 /**
  * Represents an unmark command that is entered by the user to mark a task as undone.
  */
 public class UnmarkCommand extends Command {
 
-    /** Task number associated with this mark command. */
+    /** Task number associated with this unmark command. */
     private int taskNumber;
 
     /** Task list containing all the tasks. */
     private TaskList tasks;
 
-    /** Storage that allows updating after the mark command is completed. */
+    /** Storage that allows updating after the unmark command is completed. */
     private Storage storage;
 
     /**
@@ -43,8 +42,8 @@ public class UnmarkCommand extends Command {
         Task currentTask = tasks.getTask(taskNumber);
         currentTask.setUndoneStatus();
         Ui.printStraightLine();
-        System.out.println("Alright! The following task is now marked as undone. I will help you keep an eye on it.");
-        System.out.println(currentTask.getStatusOfTaskInString());
+        ui.printStatement("Alright! The following task is now marked as undone. I will help you keep an eye on it.");
+        ui.printStatement(currentTask.getStatusOfTaskInString());
         Ui.printStraightLine();
 
         //Save changes

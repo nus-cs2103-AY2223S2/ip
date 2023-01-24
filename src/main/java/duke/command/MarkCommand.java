@@ -4,7 +4,6 @@ import duke.storage.Storage;
 import duke.task.Task;
 import duke.tasklist.TaskList;
 import duke.ui.Ui;
-
 /**
  * Represents a mark command that is entered by the user to mark a task as done.
  */
@@ -43,8 +42,8 @@ public class MarkCommand extends Command {
         Task currentTask = tasks.getTask(taskNumber);
         currentTask.setDoneStatus();
         Ui.printStraightLine();
-        System.out.println("Poof! One less worry. The following task is now marked as done:");
-        System.out.println(currentTask.getStatusOfTaskInString());
+        ui.printStatement("Poof! One less worry. The following task is now marked as done:");
+        ui.printStatement(currentTask.getStatusOfTaskInString());
         Ui.printStraightLine();
 
         //Save changes

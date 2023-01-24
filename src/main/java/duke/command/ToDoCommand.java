@@ -4,7 +4,6 @@ import duke.storage.Storage;
 import duke.task.ToDo;
 import duke.tasklist.TaskList;
 import duke.ui.Ui;
-
 /**
  * Represents a to-do command that is entered by the user to create a new to-do task.
  */
@@ -39,9 +38,22 @@ public class ToDoCommand extends Command {
      */
     @Override
     public void runCommand() {
+        //Creates task and saves it
         ToDo newToDoTask = new ToDo(taskName);
         tasks.addTask(newToDoTask);
         storage.saveTasks(tasks);
+
+        //Notifies the user
+        Ui.printStraightLine();
+        ui.printStatement("Added task to list:");
+        ui.printStatement(newToDoTask.getStatusOfTaskInString());
+        if (tasks.getSizeOfTaskList() == 1) {
+            ui.printStatement("Currently, there is 1 task in your list.");
+        } else {
+            ui.printStatement("Currently, there are " + Integer.toString(tasks.getSizeOfTaskList())
+                    + " tasks in your list.");
+        }
+        Ui.printStraightLine();
     }
 }
 

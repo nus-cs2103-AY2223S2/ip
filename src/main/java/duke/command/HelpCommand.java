@@ -5,10 +5,8 @@ import duke.ui.Ui;
  * Represents a "help" command that is entered by the user.
  */
 public class HelpCommand extends Command {
-
-
     /**
-     * Constructs a ByeCommand.
+     * Constructs a HelpCommand.
      */
     public HelpCommand(Ui ui) {
         super(ui);

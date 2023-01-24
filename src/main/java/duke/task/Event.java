@@ -1,4 +1,7 @@
 package duke.task;
+
+import duke.datetime.DateTime;
+
 import java.time.temporal.Temporal;
 /**
  * Represents an Event Task that can be kept track of, starting and ending at a specific date/time.
@@ -31,8 +34,10 @@ public class Event extends Task {
      * Constructs an Event task.
      *
      * @param taskName The name of the task.
-     * @param startDate The start date of the event task.
-     * @param endDate The end date of the event task.
+     * @param rawStartDate The raw start date from the user.
+     * @param rawEndDate The raw end date from the user.
+     * @param startDate The start date Temporal object for this event.
+     * @param endDate The end date Temporal object for this event.
      */
     public Event(String taskName, String rawStartDate, String rawEndDate, Temporal startDate, Temporal endDate) {
         super(taskName);
@@ -40,8 +45,8 @@ public class Event extends Task {
         this.rawEndDate = rawEndDate;
         this.startDate = startDate;
         this.endDate = endDate;
-        formattedStartDate = Task.formatDate(startDate);
-        formattedEndDate = Task.formatDate(endDate);
+        formattedStartDate = DateTime.formatDate(startDate);
+        formattedEndDate = DateTime.formatDate(endDate);
     }
 
     /**

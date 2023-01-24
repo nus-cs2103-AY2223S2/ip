@@ -7,7 +7,7 @@ import duke.tasklist.TaskList;
 import duke.ui.Ui;
 
 /**
- * Represents an event command that is entered by the user to create a task with a start and date date.
+ * Represents an event command that is entered by the user to create a task with a start and end date.
  */
 public class EventCommand extends Command {
 
@@ -50,10 +50,23 @@ public class EventCommand extends Command {
      */
     @Override
     public void runCommand() {
+        //Creates task and saves it
         Event newEventTask = new Event(taskName, startDate, endDate, DateTime.getDateTimeObject(startDate),
                 DateTime.getDateTimeObject(endDate));
         tasks.addTask(newEventTask);
         storage.saveTasks(tasks);
+
+        //Notifies the user
+        Ui.printStraightLine();
+        ui.printStatement("Added task to list:");
+        ui.printStatement(newEventTask.getStatusOfTaskInString());
+        if (tasks.getSizeOfTaskList() == 1) {
+            ui.printStatement("Currently, there is 1 task in your list.");
+        } else {
+            ui.printStatement("Currently, there are " + Integer.toString(tasks.getSizeOfTaskList())
+                    + " tasks in your list.");
+        }
+        Ui.printStraightLine();
     }
 }
 

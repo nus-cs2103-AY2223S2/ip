@@ -8,9 +8,8 @@ import duke.ui.Ui;
 public class ListCommand extends Command {
     private TaskList tasks;
 
-
     /**
-     * Constructs a ByeCommand.
+     * Constructs a ListCommand.
      */
     public ListCommand(Ui ui, TaskList tasks) {
         super(ui);

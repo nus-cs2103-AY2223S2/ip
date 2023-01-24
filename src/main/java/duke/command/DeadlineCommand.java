@@ -45,9 +45,22 @@ public class DeadlineCommand extends Command {
      */
     @Override
     public void runCommand() {
+        //Creates task and saves it
         Deadline newDeadlineTask = new Deadline(taskName, deadline, DateTime.getDateTimeObject(deadline));
         tasks.addTask(newDeadlineTask);
         storage.saveTasks(tasks);
+
+        //Notifies the user
+        Ui.printStraightLine();
+        ui.printStatement("Added task to list:");
+        ui.printStatement(newDeadlineTask.getStatusOfTaskInString());
+        if (tasks.getSizeOfTaskList() == 1) {
+            ui.printStatement("Currently, there is 1 task in your list.");
+        } else {
+            ui.printStatement("Currently, there are " + Integer.toString(tasks.getSizeOfTaskList())
+                    + " tasks in your list.");
+        }
+        Ui.printStraightLine();
     }
 }
 

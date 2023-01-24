@@ -1,8 +1,11 @@
 package duke.storage;
 
-import duke.exception.DukeException;
 import duke.datetime.DateTime;
-import duke.task.*;
+import duke.exception.DukeException;
+import duke.task.Deadline;
+import duke.task.Event;
+import duke.task.Task;
+import duke.task.ToDo;
 import duke.tasklist.TaskList;
 import duke.ui.Ui;
 
@@ -20,9 +23,7 @@ import java.util.Scanner;
  * and saving of task list.
  */
 public class Storage {
-    /**
-     * Absolute file path where the folder containing the data file is stored in.
-     */
+    /** Absolute file path where the folder containing the data file is stored in. */
     private String data_file_folder_path;
 
     /** Absolute file path where the data file should be stored in. **/
@@ -41,6 +42,8 @@ public class Storage {
 
     /**
      * Prepares the file for storage of task list data.
+     *
+     * @return true if file was created successfully, else return false.
      */
     public boolean prepareFile() {
         //Make the directory
@@ -74,6 +77,7 @@ public class Storage {
      * Reads and loads task history from the data file.
      *
      * @param tasks TaskList to store the tasks read from the data file.
+     * @return true if loading was successful, else return false.
      */
     public boolean loadTasksFromFile(TaskList tasks) {
         try {
@@ -151,7 +155,6 @@ public class Storage {
         }
     }
 
-
     /**
      * Saves the tasks stored in the list into the data file.
      *
@@ -196,9 +199,4 @@ public class Storage {
             return false;
         }
     }
-
-
-
-
-
 }

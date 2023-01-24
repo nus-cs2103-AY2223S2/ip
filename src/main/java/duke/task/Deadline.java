@@ -1,5 +1,7 @@
 package duke.task;
 
+import duke.datetime.DateTime;
+
 import java.time.temporal.Temporal;
 /**
  * Represents a deadline Task that can be kept track of, having a deadline associated with the task.
@@ -18,13 +20,14 @@ public class Deadline extends Task {
      * Constructs a Deadline task.
      *
      * @param taskName The name of the task.
-     * @param deadline The deadline for this given deadline task.
+     * @param rawDeadline The raw deadline string input by user.
+     * @param deadline The deadline Temporal object for this given deadline task.
      */
     public Deadline(String taskName, String rawDeadline, Temporal deadline) {
         super(taskName);
         this.rawDeadline = rawDeadline;
         this.deadline= deadline;
-        this.formattedDeadline = formatDate(deadline);
+        this.formattedDeadline = DateTime.formatDate(deadline);
     }
     
     /**
@@ -42,18 +45,18 @@ public class Deadline extends Task {
 
 
     /*
-     * Gets the date object of the task.
+     * Gets the deadline object of the task.
      *
-     * @return the Temporal encapsulating the date and time.
+     * @return the Temporal encapsulating the date and time of the deadline.
      */
     public Temporal getDeadline() {
         return deadline;
     }
 
     /**
-     * Gets the raw date of the task.
+     * Gets the raw deadline of the task.
      *
-     * @return the String containing the raw date and time.
+     * @return the String containing the raw date and time of the deadline.
      */
     public String getRawDeadline() { return rawDeadline;}
 }
