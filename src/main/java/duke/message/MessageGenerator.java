@@ -9,7 +9,10 @@ import duke.task.TaskList;
 
 import java.util.ArrayList;
 
-
+/**
+ * Represents a Duke message generator. A MessageGenerator object has
+ * associated methods to generate messages in response to tasks.
+ */
 public class MessageGenerator {
 
     TaskList taskList;
@@ -33,6 +36,14 @@ public class MessageGenerator {
         return this.taskList.getTask(taskNum);
     }
 
+    /**
+     * Returns response message from Duke, in response to user's task's status
+     * and task content.
+     *
+     * @param status Status of message.
+     * @param task   Task object representing user's task input.
+     * @return String consisting of the header, associated task and end.
+     */
     String generateTaskMessage(MessageStatus status, Task task) {
         String heading = "";
         String end = "";
@@ -85,6 +96,16 @@ public class MessageGenerator {
         return heading + filteredListToString(filteredTaskList);
     }
 
+    /**
+     * Returns response message from Duke, in response to user's input.
+     *
+     * @param status  Status of message.
+     * @param message Contents of message.
+     * @return Duke message representing the response.
+     * @throws InvalidDeadlineException If user input is invalid for deadline task.
+     * @throws InvalidTodoException     If user input is invalid for todo task.
+     * @throws InvalidEventException    If user input is invalid for event task.
+     */
     public DukeMessage generate(MessageStatus status, String message)
             throws InvalidDeadlineException, InvalidTodoException, InvalidEventException {
         Task task;

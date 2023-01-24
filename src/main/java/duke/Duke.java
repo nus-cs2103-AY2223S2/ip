@@ -1,6 +1,7 @@
 package duke;
 
 import java.util.Scanner;
+
 import duke.exception.*;
 import duke.message.DukeMessage;
 import duke.message.MessageGenerator;
@@ -9,7 +10,10 @@ import duke.parser.Parser;
 import duke.storage.Storage;
 import duke.task.TaskList;
 
-
+/**
+ * Represents the main class where response messages are printed to user,
+ * in response to user's input.
+ */
 public class Duke {
     public static void main(String[] args) {
         boolean end = false;
@@ -30,9 +34,10 @@ public class Duke {
             }
             try {
                 MessageStatus responseStatus = parser.process(userMessage);
-                DukeMessage dukeResponse =  messageGenerator.generate(responseStatus, userMessage);
+                DukeMessage dukeResponse = messageGenerator.generate(responseStatus, userMessage);
                 System.out.println(dukeResponse);
-            } catch (InvalidInputException | InvalidTodoException | InvalidDeadlineException | InvalidEventException e) {
+            } catch (InvalidInputException | InvalidTodoException | InvalidDeadlineException |
+                     InvalidEventException e) {
                 System.out.println(e.getMessage());
             }
 

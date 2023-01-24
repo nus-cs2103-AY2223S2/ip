@@ -3,8 +3,12 @@ package duke.task;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.Locale;
+
 import duke.exception.InvalidEventException;
 
+/**
+ * Represents a task with the category of event.
+ */
 public class Event extends Task {
     LocalDateTime fromDate;
     LocalDateTime toDate;

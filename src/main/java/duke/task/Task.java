@@ -1,5 +1,8 @@
 package duke.task;
 
+/**
+ * Represents a parent class for the different categories of tasks
+ */
 public class Task {
     private String content;
     boolean done = false;

@@ -1,5 +1,7 @@
 package duke.storage;
 
+import duke.exception.InvalidInputException;
+
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
@@ -11,6 +13,10 @@ import java.nio.file.StandardCopyOption;
 import java.util.ArrayList;
 import java.util.Scanner;
 
+/**
+ * Represents a storage for user's task in hard disk.
+ * A Storage object has associated methods to load and update tasks.
+ */
 public class Storage {
 
     private ArrayList<String> list = new ArrayList<>();
@@ -20,7 +26,7 @@ public class Storage {
     }
 
     private String getTask(int taskNum) {
-        return this.list.get(taskNum-1);
+        return this.list.get(taskNum - 1);
     }
 
     public void addTask(String message) {
@@ -29,7 +35,11 @@ public class Storage {
         updateStorage();
     }
 
-
+    /**
+     * Updates status of task from the task list.
+     *
+     * @param message Contents of message.
+     */
     public void markTask(String message) {
         String[] messageSplit = message.split(" ");
         int taskNum = Integer.parseInt(messageSplit[1]);
@@ -38,17 +48,22 @@ public class Storage {
         String task = this.getTask(taskNum);
         String[] taskSplit = task.split(" ", 2);
 
-        this.list.set(taskNum-1, String.format("%s %s", markStatus, taskSplit[1]));
+        this.list.set(taskNum - 1, String.format("%s %s", markStatus, taskSplit[1]));
 
         updateStorage();
     }
 
+    /**
+     * Removes task from the task list.
+     *
+     * @param message Contents of message.
+     */
     public void deleteTask(String message) {
         String[] messageSplit = message.split(" ");
         int taskNum = Integer.parseInt(messageSplit[1]);
 
         // remove task from arraylist
-        list.remove(taskNum-1);
+        list.remove(taskNum - 1);
 
         updateStorage();
     }
@@ -72,9 +87,14 @@ public class Storage {
 
     }
 
+    /**
+     * Returns array list of saved tasks from disk.
+     *
+     * @return ArrayList object consisting of the string representation for saved tasks.
+     */
     public ArrayList<String> load() {
         File taskFile = new File("data/tasklist.txt");
-        if (taskFile.exists()){
+        if (taskFile.exists()) {
             try {
                 Scanner s = new Scanner(taskFile);
                 while (s.hasNext()) {
@@ -89,7 +109,7 @@ public class Storage {
             new File("data").mkdirs();
             try {
                 taskFile.createNewFile();
-            } catch (IOException err){
+            } catch (IOException err) {
                 System.out.println(err);
             }
         }
@@ -98,7 +118,6 @@ public class Storage {
 
 
     }
-
 
 
 }

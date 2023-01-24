@@ -9,6 +9,11 @@ import duke.exception.InvalidTodoException;
 import duke.exception.InvalidDeadlineException;
 import duke.exception.InvalidEventException;
 
+/**
+ * Represents an arraylist consisting of Task objects.
+ * A TaskList object has associated methods to add, delete,
+ * modify tasks in the arraylist.
+ */
 public class TaskList {
     private ArrayList<Task> list = new ArrayList<>();
 
@@ -36,6 +41,15 @@ public class TaskList {
         return listString;
     }
 
+    /**
+     * Returns the task added to task list, represented as a Task object.
+     *
+     * @param content Content of task.
+     * @return Task object associated with the content.
+     * @throws InvalidTodoException     If user input for todo task is invalid.
+     * @throws InvalidDeadlineException If user input for deadline task is invalid.
+     * @throws InvalidEventException    If user input for event task is invalid.
+     */
     public Task addTask(String content) throws InvalidTodoException, InvalidDeadlineException, InvalidEventException {
         String[] contentSplit = content.split(" ", 2);
         String taskType = contentSplit[0];
@@ -89,6 +103,11 @@ public class TaskList {
         return taskToAdd;
     }
 
+    /**
+     * Removes task from the task list.
+     *
+     * @param message Contents of message.
+     */
     public Task deleteTask(String message) {
         String[] messageSplit = message.split(" ");
         int taskNum = Integer.parseInt(messageSplit[1]);
@@ -106,6 +125,12 @@ public class TaskList {
         return list.get(taskNum - 1);
     }
 
+    /**
+     * Updates status of task from the task list.
+     *
+     * @param action  Marking or unmarking task.
+     * @param taskNum Number assigned to task.
+     */
     public void markTask(String action, int taskNum) {
         Task task = this.getTask(taskNum);
         task.setDoneStatus(action.equals("mark") ? true : false);
