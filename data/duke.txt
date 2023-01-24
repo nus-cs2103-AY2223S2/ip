@@ -1,2 +1,1 @@
-1. [T][ ] abcd
-2. [E][ ]  pop  (from: FEBRUARY 20, 2020 to: SEPTEMBER 10, 2901)
+1. [T][ ] abc
