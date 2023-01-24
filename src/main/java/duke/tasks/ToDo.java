@@ -15,8 +15,7 @@ public class ToDo extends Task {
     }
 
     public ToDo(String taskName, boolean isDone) {
-        super(taskName, "T");
-        this.completed = isDone;
+        super(taskName, "T", isDone);
     }
 
     @Override

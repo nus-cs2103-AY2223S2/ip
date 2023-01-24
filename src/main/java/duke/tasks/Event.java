@@ -9,10 +9,10 @@ import duke.exceptions.EventFromToNotSpecified;
 import duke.exceptions.TaskNameNotSpecified;
 
 public class Event extends Task {
-    String fromDate;
-    String toDate;
-    Optional<LocalDate> chronoFromDate;
-    Optional<LocalDate> chronoToDate;
+    private String fromDate;
+    private String toDate;
+    private Optional<LocalDate> chronoFromDate;
+    private Optional<LocalDate> chronoToDate;
 
     public static Event create(String commandInput) throws TaskNameNotSpecified, EventFromToNotSpecified {
         String[] parseInfo = Parser.parseEventCmd(commandInput);
@@ -20,7 +20,7 @@ public class Event extends Task {
     }
 
     public Event(String taskName, String fromDate, String toDate, boolean isDone) {
-        super(taskName, "E");
+        super(taskName, "E", isDone);
   
         this.fromDate = fromDate;
         this.chronoFromDate = Parser.parseDate(fromDate);
@@ -28,7 +28,7 @@ public class Event extends Task {
         this.toDate = toDate;
         this.chronoToDate = Parser.parseDate(toDate);
 
-        this.completed = isDone;
+        this.isDone = isDone;
     }
 
     

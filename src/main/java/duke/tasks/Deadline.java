@@ -9,8 +9,8 @@ import duke.exceptions.DeadlineByNotSpecified;
 import duke.exceptions.TaskNameNotSpecified;
 
 public class Deadline extends Task {
-    String dueDate;
-    Optional<LocalDate> chornoDueDate;
+    private String dueDate;
+    private Optional<LocalDate> chornoDueDate;
 
     // Factory method
     public static Deadline create(String commandInput) throws TaskNameNotSpecified, DeadlineByNotSpecified {
@@ -19,9 +19,8 @@ public class Deadline extends Task {
     }
     
     public Deadline(String taskName, String dueDate, boolean isDone) {
-        super(taskName, "D");
+        super(taskName, "D", isDone);
         this.dueDate = dueDate;
-        this.completed = isDone;
         this.chornoDueDate = Parser.parseDate(dueDate); 
     }
 

@@ -1,21 +1,22 @@
 package duke.tasks;
 
 public abstract class Task {
-    String type;
-    String taskName;
-    boolean completed = false;
+    protected String type;
+    protected String taskName;
+    protected boolean isDone;
 
-    public Task(String taskName, String type) {
+    public Task(String taskName, String type, boolean isDone) {
         this.taskName = taskName;
         this.type = type;
+        this.isDone = isDone;
     }
 
     public Task markDone() {
-        this.completed = true;
+        this.isDone = true;
         return this;
     } 
     public Task unmarkDone() {
-        this.completed = false;
+        this.isDone = false;
         return this;
     }
 
@@ -23,6 +24,6 @@ public abstract class Task {
 
     @Override
     public String toString() {
-        return "[" + this.type + "]" + "[" + (this.completed ? "x" : " ") + "] " + this.taskName + this.stringFields();
+        return "[" + this.type + "]" + "[" + (this.isDone ? "x" : " ") + "] " + this.taskName + this.stringFields();
     }
 }
