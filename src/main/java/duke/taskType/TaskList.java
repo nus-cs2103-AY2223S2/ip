@@ -1,3 +1,4 @@
+package duke.taskType;
 import java.io.Serializable;
 import java.util.ArrayList;
 public class TaskList implements Serializable {

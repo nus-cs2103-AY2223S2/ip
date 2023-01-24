@@ -1,3 +1,4 @@
+package duke.taskType;
 public class Todo extends Task {
     public Todo(String cont) {
         super(cont);

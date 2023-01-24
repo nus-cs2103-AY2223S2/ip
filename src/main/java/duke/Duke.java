@@ -1,5 +1,8 @@
-import java.util.ArrayList;
+package duke;
 
+import duke.taskType.TaskList;
+import duke.commands.*;
+import duke.*;
 public class Duke {
     private TaskList lst;
     private Ui ui;
@@ -13,14 +16,15 @@ public class Duke {
 
     public void run() {
         ui.hello();
-        Commands commands = new Commands(lst, ui, storage);
 
         while (true) {
             String cmd = ui.readCMD();
             ui.printLine();
-            Parser.parse(commands, cmd);
+            Command command = Parser.parse(cmd);
+            command.operate(lst, ui, storage);
             ui.printLine();
-            if (commands.getIsBye()) break;
+            System.out.println();
+            if (command.isBye()) break;
         }
     }
 

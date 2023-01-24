@@ -1,3 +1,4 @@
+package duke.taskType;
 public class Event extends Task {
     protected String time1;
     protected String time2;
