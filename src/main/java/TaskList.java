@@ -31,7 +31,7 @@ public class TaskList {
     }
 
     public void setDone(int taskNumber, boolean done) throws TaskNotFoundException {
-        if (taskNumber - 1 >= getLength()) {
+        if (taskNumber - 1 >= getLength() || taskNumber < 0) {
             throw new TaskNotFoundException();
         }
         taskList.get(taskNumber - 1).setDone(done);

@@ -1,5 +1,6 @@
 import java.io.File;
 import java.io.FileWriter;
+import java.time.LocalDateTime;
 import java.util.Scanner;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -41,7 +42,7 @@ public class Duke {
                         case "D":
                             individualMatcher = deadlinePattern.matcher(wholeStrMatcher.group(3));
                             if (individualMatcher.find()) {
-                                toAdd = new Deadline(individualMatcher.group(1), individualMatcher.group(2));
+                                toAdd = new Deadline(individualMatcher.group(1), individualMatcher.group(2), true);
                             } else {
                                 throw new InvalidDataFileException();
                             }
@@ -49,7 +50,7 @@ public class Duke {
                         case "E":
                             individualMatcher = eventPattern.matcher(wholeStrMatcher.group(3));
                             if (individualMatcher.find()) {
-                                toAdd = new Event(individualMatcher.group(1), individualMatcher.group(2), individualMatcher.group(3));
+                                toAdd = new Event(individualMatcher.group(1), individualMatcher.group(2), individualMatcher.group(3), true);
                             } else {
                                 throw new InvalidDataFileException();
                             }
@@ -120,7 +121,7 @@ public class Duke {
                 } else if (reply.startsWith("deadline")) {
                     Matcher matcher = compileAndMatch("deadline (.*) /by (.*)", reply);
                     if (matcher.find() && matcher.group(1).length() > 0 && matcher.group(2).length() > 0) {
-                        Task task = new Deadline(matcher.group(1), matcher.group(2));
+                        Task task = new Deadline(matcher.group(1), matcher.group(2), false);
                         taskList.addTask(task);
                         printTextWithLines("Got it. I've added this task:\n  " + task + "\n" + taskList.describeLength());
                     } else {
@@ -129,7 +130,7 @@ public class Duke {
                 } else if (reply.startsWith("event")) {
                     Matcher matcher = compileAndMatch("event (.*) /from (.*) /to (.*)", reply);
                     if (matcher.find() && matcher.group(1).length() > 0 && matcher.group(2).length() > 0 && matcher.group(3).length() > 0) {
-                        Task task = new Event(matcher.group(1), matcher.group(2), matcher.group(3));
+                        Task task = new Event(matcher.group(1), matcher.group(2), matcher.group(3), false);
                         taskList.addTask(task);
                         printTextWithLines("Got it. I've added this task:\n  " + task + "\n" + taskList.describeLength());
                     } else {
