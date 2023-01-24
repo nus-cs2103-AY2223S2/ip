@@ -37,7 +37,7 @@ public class Duke {
      * Runs the main logic of the chatbot.
      * Supports 3 tasks: Todo, Event and Deadline.
      * Supports commands: adding, deletion, marking,
-     * unmarking, listing.
+     * unmarking, listing, finding.
      */
     public void run() {
         ui.showWelcome();
@@ -54,6 +54,9 @@ public class Duke {
                 switch (inputType) {
                 case LIST:
                     tasks.listTasks();
+                    break;
+                case FIND:
+                    tasks.findTasks(Parser.contents(input));
                     break;
                 case MARK:
                     tasks.markTask(Parser.contents(input));

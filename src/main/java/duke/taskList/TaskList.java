@@ -125,4 +125,26 @@ public class TaskList {
             System.out.println(i + 1 + ". " + list.get(i).toString());
         }
     }
+
+    /**
+     * Lists all tasks that matches the specified input.
+     * @param contents The input to match.
+     * @throws DukeException If the index is out of bounds, an exception is thrown.
+     */
+    public void findTasks(String[] contents) throws DukeException {
+        // Counter for the number of matching tasks.
+        int taskCount = 0;
+        for (int i = 0; i < list.size(); i++) {
+            if (list.get(i).toString().contains(contents[1])) {
+                taskCount++;
+                if (taskCount == 1) {
+                    System.out.println("Here are the matching tasks in your list:");
+                }
+                System.out.println(taskCount + ". " + list.get(i).toString());
+            }
+        }
+        if (taskCount == 0) {
+            System.out.println("No tasks matching the given input was found.");
+        }
+    }
 }
