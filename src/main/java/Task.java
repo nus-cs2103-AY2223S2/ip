@@ -11,12 +11,12 @@ public class Task {
         this.task = task;
     }
 
-    // Marks the task as completed.
+    /** Marks the task as completed. */
     public void mark() {
         this.isMarked = true;
     }
 
-    // Marks the task as uncompleted.
+    /** Marks the task as uncompleted. */
     public void unmark() {
         this.isMarked = false;
     }
