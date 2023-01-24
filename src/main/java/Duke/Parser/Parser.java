@@ -1,5 +1,5 @@
 package Duke.Parser;
-import Duke.Command.*;
+import Duke.Command.*;  //import everything since all commands are used in parsing
 import Duke.DateTime.DateTime;
 import Duke.DukeException.DukeException;
 import Duke.Task.Deadline;
