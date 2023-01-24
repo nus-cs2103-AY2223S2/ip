@@ -14,6 +14,13 @@ public class FindCommand extends Command {
         this.keyword = keyword;
     }
 
+    /**
+     * Prints out all tasks added with the keyword in their description given a task list.
+     *
+     * @param tasks List of all current tasks.
+     * @param ui UI interacting with user.
+     * @param storage Storage for saving or loading tasks.
+     */
     @Override
     public void execute(TaskList tasks, Ui ui, Storage storage) {
         ui.showMessage(tasks.getKeywordString(this.keyword));

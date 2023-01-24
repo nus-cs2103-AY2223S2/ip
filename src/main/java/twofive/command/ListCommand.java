@@ -1,7 +1,6 @@
 package twofive.command;
 
 import twofive.data.TaskList;
-import twofive.exception.InvalidTaskException;
 import twofive.storage.Storage;
 import twofive.ui.Ui;
 
