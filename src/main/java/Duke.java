@@ -103,27 +103,6 @@ public class Duke {
         System.out.println(line);
     }
 
-    public static void repeat(String s) {
-        printLine();
-        System.out.println(s);
-        printLine();
-    }
-
-    public static void add(String s) {
-        if (s.trim().isEmpty()) {
-            printLine();
-            printLine();
-        } else {
-            //Task t = new Task(s.trim());
-            printLine();
-            //lst.addTask(t);
-            System.out.println("Got it! I've added: ");
-            //System.out.println(" " + t);
-            lst.printSize();
-            printLine();
-        }
-    }
-
     public static void end() {
         printLine();
         System.out.println("Bye bye! Hope to see you again soon!! :>");
