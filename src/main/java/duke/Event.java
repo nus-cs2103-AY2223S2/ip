@@ -1,4 +1,8 @@
 package duke;
+
+/**
+ * Event Task which contains description, when the event begins and ends.
+ */
 public class Event extends Task {
 
     protected String from;

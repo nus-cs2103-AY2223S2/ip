@@ -5,6 +5,9 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.util.Scanner;
 
+/**
+ * Loads and stores the TaskList into a hard drive file.
+ */
 public class Storage {
 
     private File file;
@@ -12,6 +15,11 @@ public class Storage {
     public Storage(String filePath) {
         this.filePath = filePath;
     }
+
+    /**
+     * Creates a new File in the filePath given previously if the file does not already exist.
+     * @throws DukeException if file could not be created
+     */
     public void checkFileExists() throws DukeException {
         File f = new File(this.filePath);
         this.file = f;
@@ -23,6 +31,12 @@ public class Storage {
         }
     }
 
+    /**
+     * Loads the file with a lists of tasks, from the given filePath
+     * and creates a TaskList for each task within the file.
+     * @return TaskList which contains tasks from the loaded file.
+     * @throws DukeException if file could not be found.
+     */
     public TaskList loadFile() throws DukeException {
         try {
             TaskList tasklist = new TaskList();
@@ -51,6 +65,11 @@ public class Storage {
         }
     }
 
+    /**
+     * Writes back to the hard disk file path after operations are made on the TaskList.
+     * @param tasklist TaskList to update the hard disk tasks.
+     * @throws DukeException if file cannot be written to.
+     */
     public void writeFile(TaskList tasklist) throws DukeException{
         try {
             FileWriter fw = new FileWriter(this.filePath);
@@ -64,8 +83,4 @@ public class Storage {
             throw new DukeException("Could not write to file path");
         }
     }
-
-
-
-
 }

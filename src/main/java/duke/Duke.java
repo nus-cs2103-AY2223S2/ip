@@ -1,4 +1,9 @@
 package duke;
+
+/**
+ * Represents a command-line to-do list interface,
+ * capable of adding in todos, events and deadlines.
+ */
 public class Duke {
     private TaskList tasklist;
 
@@ -17,6 +22,9 @@ public class Duke {
         }
     }
 
+    /**
+     * Parses the user's inputs into the command line and runs operations based on input
+     */
     public void run() {
         Parser parser = new Parser(tasklist, ui, storage);
         while (ui.hasUserInput()) {
@@ -24,6 +32,11 @@ public class Duke {
         }
     }
 
+
+    /**
+     * This is the main method that starts the Duke ToDoList command line interface.
+     * @param args Unused.
+     */
     public static void main(String[] args) {
         Duke dukeList = new Duke();
         dukeList.run();

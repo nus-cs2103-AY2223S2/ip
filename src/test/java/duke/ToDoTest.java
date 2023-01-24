@@ -9,7 +9,7 @@ public class ToDoTest {
     @Test
     public void toDoToStringTest(){
         ToDo eve = new ToDo("Learning gravity");
-        assertEquals("[T][ ]  Learning gravity", eve.toString());
+        assertEquals("[T][ ] Learning gravity", eve.toString());
     }
 
 }

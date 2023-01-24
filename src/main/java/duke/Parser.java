@@ -1,4 +1,9 @@
 package duke;
+
+/**
+ * Parses user's inputs into command line and uses the TaskList, Ui and Storage classes
+ * to run operations.
+ */
 public class Parser {
 
     private final TaskList tasklist;
@@ -12,6 +17,12 @@ public class Parser {
         this.storage = storage;
     }
 
+    /**
+     * Takes in user's input and obtains the first word
+     * and uses it to run different operations,
+     * and then uses the rest of the words as arguments for the operation.
+     * @param input User's input
+     */
     public void parse(String input) {
         try {
             String[] arr = input.split(" ", 2);

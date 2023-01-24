@@ -3,6 +3,10 @@ import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 
+/**
+ * Stores list of tasks in an ArrayList,
+ * on which operations can be done to create, update, read and delete.
+ */
 public class TaskList {
 
     private final ArrayList<Task> tasks;
@@ -25,6 +29,7 @@ public class TaskList {
         }
         Ui.separator();
     }
+
 
     public void delete(int index) {
         Ui.separator();

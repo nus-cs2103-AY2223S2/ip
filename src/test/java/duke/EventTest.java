@@ -10,10 +10,13 @@ public class EventTest {
         assertEquals(2, 2);
     }
 
+    /**
+     * Tests if the event toString method prints correctly.
+     */
     @Test
     public void eventToStringTest(){
         Event eve = new Event("Party", "10/2", "11/2");
-        assertEquals("[E][ ]  Party (from: 10/2 to: 11/2)", eve.toString());
+        assertEquals("[E][ ] Party (from: 10/2 to: 11/2)", eve.toString());
     }
 
 

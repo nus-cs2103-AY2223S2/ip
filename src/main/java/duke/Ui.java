@@ -1,5 +1,9 @@
 package duke;
 import java.util.Scanner;
+
+/**
+ * Stores the scanner and handles what information to display to the user.
+ */
 public class Ui {
 
     private final Scanner sc;

@@ -1,4 +1,9 @@
 package duke;
+
+/**
+ * Task which has 3 variations: ToDo, Deadline and Event.
+ * Can be Marked to be completed or not completed.
+ */
 public class Task {
     private final String description;
     private Boolean done;
@@ -9,7 +14,7 @@ public class Task {
     }
 
     public String getStatusIcon() {
-        return (done ? "[X] " : "[ ] ");
+        return (done ? "[X]" : "[ ]");
     }
 
     public String getDescription() {
