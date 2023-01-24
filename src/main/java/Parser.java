@@ -1,3 +1,4 @@
+import java.time.LocalDate;
 import java.util.function.Supplier;
 
 public class Parser {
@@ -36,7 +37,7 @@ public class Parser {
             }
             case DEADLINE: {
                 String description = p.parseDescription(() -> p.parseUntil("/by"));
-                String by = p.parseUntilEol();
+                LocalDate by = p.parseDateArgument();
                 cmd = new AddTaskCommand(new DeadlineTask(description, by));
                 break;
             }
@@ -154,6 +155,13 @@ public class Parser {
         String intString = parseNonwhitespaces();
         return DukeUtils.convertStringToInt(intString)
                 .orElseThrow(() -> new ParserException("expect an integer as argument"));
-
     }
+
+    private LocalDate parseDateArgument() {
+        skipWhitespaces();
+        String dateString = parseNonwhitespaces();
+        return DukeUtils.convertStringToDate(dateString).orElseThrow(
+                () -> new ParserException("expect a date as argument - date format is yyyy-MM-dd"));
+    }
+
 }
