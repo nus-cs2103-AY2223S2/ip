@@ -5,9 +5,9 @@ public class Duke {
     private static ArrayList<Task> todoList;
     public enum Command {BYE, LIST, TODO, DEADLINE, EVENT, MARK, UNMARK, DELETE}
     static String separator = "\u200E✽ ✾ \u200E✽ ✾ \u200E✽ ✾ \u200E✽ ✾";
-    static String invalidIndexMessage = "⚠ oops...there's no task with this number\ntry asking for 'list' to check task numbers\n" + separator;
-    static String forgottenArgumentMessage = "⚠ oops...seems like you forgot part of a command, please try again\n" + separator;
-    static String unknownCommandMessage = "⚠ oops...we don't know what that means, please try again\n" + separator;
+    static String invalidIndexMessage = "⚠ oh no...there's no task with this number\ntry asking for 'list' to check task numbers\n" + separator;
+    static String forgottenArgumentMessage = "⚠ oh no...seems like you forgot part of a command, please try again\n" + separator;
+    static String unknownCommandMessage = "⚠ oh no...we don't know what that means, please try again\n" + separator;
 
     public static void main(String[] args) {
         Scanner s = new Scanner(System.in);
