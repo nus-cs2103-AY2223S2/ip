@@ -1,3 +1,5 @@
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Objects;
 import java.util.Scanner;
@@ -5,6 +7,7 @@ import java.util.Scanner;
 public class Duke {
 
     public static void main(String[] args) {
+
         String logo = " ____        _        \n"
                 + "|  _ \\ _   _| | _____ \n"
                 + "| | | | | | | |/ / _ \\\n"
@@ -121,7 +124,8 @@ public class Duke {
                 break;
             case "deadline": {
                 String[] split = after.split("/by ");
-                input = new Deadline(split[0], split[1]);
+                LocalDate d1 = LocalDate.parse(split[1]);
+                input = new Deadline(split[0], d1.format(DateTimeFormatter.ofPattern("MMM d yyyy")));
                 break;
             }
             case "event": {
@@ -140,7 +144,8 @@ public class Duke {
                     break;
                 case "deadline": {
                     String[] split = after.split("/by ");
-                    input = new Deadline(split[0], split[1]);
+                    LocalDate d1 = LocalDate.parse(split[1]);
+                    input = new Deadline(split[0], d1.format(DateTimeFormatter.ofPattern("MMM d yyyy")));
                     break;
                 }
                 case "event": {
