@@ -3,7 +3,6 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
-import java.time.LocalDateTime;
 import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
 import java.util.List;
@@ -207,7 +206,7 @@ public class Duke {
                 String[] s = taskDescription.split(" \\| ");
 
                 Task t = null;
-                boolean isDone = s[1] == "1" ?true:false;
+                boolean isDone = s[1].equals("1");
                 if (s[0].equals("T")) {
                     t = new ToDos(s[2]);
                 } else if (s[0].equals("D")) {
