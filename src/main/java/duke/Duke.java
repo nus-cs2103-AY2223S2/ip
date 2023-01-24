@@ -105,17 +105,6 @@ public class Duke {
         }
         System.out.println("Bye, Hope to see you again soon!");
     }
-    public Duke() {
-        ui = new Ui();
-        storage = new Storage("text-ui-test/saved-tasks.txt");
-        try {
-            taskList = new TaskList();
-            storage.handleLoad();
-        } catch (IOException e) {
-            ui.printError(e.getMessage());
-            taskList = new TaskList();
-        }
-    }
 
 
 
