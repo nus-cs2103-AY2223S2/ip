@@ -1,15 +1,15 @@
-package parser;
+package duke.parser;
 
-import command.*;
+import duke.command.*;
 
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
-import exceptions.DukeException;
-import tasklist.TaskList;
-import tasktypes.Deadline;
-import tasktypes.Event;
-import tasktypes.Task;
-import tasktypes.ToDo;
+import duke.exceptions.DukeException;
+import duke.tasklist.TaskList;
+import duke.tasktypes.Deadline;
+import duke.tasktypes.Event;
+import duke.tasktypes.Task;
+import duke.tasktypes.ToDo;
 
 public class Parser {
 

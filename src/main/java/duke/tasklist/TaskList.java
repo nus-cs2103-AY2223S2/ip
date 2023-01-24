@@ -1,8 +1,8 @@
-package tasklist;
+package duke.tasklist;
 
 import java.util.*;
-import ui.Ui;
-import tasktypes.Task;
+import duke.ui.Ui;
+import duke.tasktypes.Task;
 
 public class TaskList {
     private ArrayList<Task> taskStorage;

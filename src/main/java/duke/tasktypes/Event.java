@@ -1,4 +1,4 @@
-package tasktypes;
+package duke.tasktypes;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;

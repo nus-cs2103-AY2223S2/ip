@@ -1,10 +1,10 @@
-package storage;
+package duke.storage;
 
-import tasklist.TaskList;
-import tasktypes.Deadline;
-import tasktypes.Event;
-import tasktypes.Task;
-import tasktypes.ToDo;
+import duke.tasklist.TaskList;
+import duke.tasktypes.Deadline;
+import duke.tasktypes.Event;
+import duke.tasktypes.Task;
+import duke.tasktypes.ToDo;
 
 import java.io.File;
 import java.io.IOException;
@@ -13,7 +13,7 @@ import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.*;
 
-import ui.Ui;
+import duke.ui.Ui;
 
 public class Storage {
 
