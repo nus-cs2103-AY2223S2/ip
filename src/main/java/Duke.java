@@ -108,6 +108,25 @@ public class Duke {
                     System.out.println(freeSpace);
                 }
 
+            } else if(tokens[0].equalsIgnoreCase(("delete"))) {
+                try {
+                    if (!type.contains(" ")) {
+                        throw new DukeException("OPPS!! Please indicate the task index to delete!");
+                    }
+
+                    String[] index = type.split(" ");
+                    int deleteIndex = Integer.parseInt(index[1]);
+                    if (deleteIndex > t.size() || deleteIndex <= -1) {
+                        throw new DukeException("OPPS!! The index requested to be deleted does not exist!");
+                    } else {
+                        System.out.println("Noted: I've removed this task");
+                        Task whichTask = t.get(deleteIndex - 1);
+                        System.out.println(whichTask);
+                        t.remove(deleteIndex -1 );
+                    }
+                } catch (DukeException e) {
+                    System.out.println(e.message);
+                }
             } else {
                 System.out.println("OOPS!! I'm sorry, but I don't know what that means :-(");
                 System.out.println(freeSpace);
@@ -125,6 +144,13 @@ public class Duke {
 
     public static int noOfTask(ArrayList<Task> tasks) {
         return tasks.size();
+    }
+}
+
+class DukeException extends Exception {
+    String message;
+    public DukeException(String message) {
+        this.message = message;
     }
 }
 
