@@ -25,7 +25,7 @@ public class ListCommand extends Command {
         }
     };
 
-    public void displayList(Ui ui, TaskList taskList) {
+    private void displayList(Ui ui, TaskList taskList) {
         if (taskList.getList().size() == 0) {
             ui.emptyList();
         } else {
@@ -41,7 +41,7 @@ public class ListCommand extends Command {
         }
     }
 
-    public void listTime(Ui ui, TaskList taskList) {
+    private void listTime(Ui ui, TaskList taskList) {
         if (taskList.getList().size() == 0) {
             ui.emptyList();
         } else {

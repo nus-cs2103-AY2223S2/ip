@@ -72,19 +72,19 @@ public class Parser {
         }
     }
 
-    public void checkCleanCommand() throws ChattimeException {
+    private void checkCleanCommand() throws ChattimeException {
         if (userInput.contains("@")) {
             throw new ChattimeException("@^@ I'm sorry but your message should not contain any \"@\" .");
         }
     }
 
-    public void checkAddCommand() throws ChattimeException {
+    private void checkAddCommand() throws ChattimeException {
         if (description == null) {
             throw new ChattimeException(String.format(NO_DESCRIPTION, command));
         }
     }
 
-    public int checkIndexCommand() throws ChattimeException {
+    private int checkIndexCommand() throws ChattimeException {
         if (description == null) {
             throw new ChattimeException(String.format(NO_INDEX, command));
         } else if (Pattern.matches("^[0-9]*$", description)) {
@@ -98,26 +98,26 @@ public class Parser {
         }
     }
 
-    public ListCommand parseList() throws ChattimeException {
+    private ListCommand parseList() throws ChattimeException {
         if (description != null) {
             throw new ChattimeException("OOPS!!! list does not take any description.");
         }
         return new ListCommand(null);
     }
 
-    public ByeCommand parseBye() throws ChattimeException {
+    private ByeCommand parseBye() throws ChattimeException {
         if (description != null) {
             throw new ChattimeException("Type \"bye\" if you really want to say goodbye to me.");
         }
         return new ByeCommand();
     }
 
-    public AddCommand parseTodo() {
+    private AddCommand parseTodo() {
         Todo todo = new Todo(description);
         return new AddCommand(todo);
     }
 
-    public AddCommand parseDeadline() throws ChattimeException {
+    private AddCommand parseDeadline() throws ChattimeException {
         String[] splitBy = description.split(" /by ", 2);
         if (splitBy.length < 2 || splitBy[1].equals("")) {
             throw new ChattimeException(
@@ -140,7 +140,7 @@ public class Parser {
         }
     }
 
-    public AddCommand parseEvent() throws ChattimeException {
+    private AddCommand parseEvent() throws ChattimeException {
         String[] splitTask = description.split(" /from ", 2);
         String task = splitTask[0];
 
@@ -169,7 +169,7 @@ public class Parser {
         }
     }
 
-    public ListCommand parseListTime() throws ChattimeException {
+    private ListCommand parseListTime() throws ChattimeException {
         if (description == null) {
             throw new ChattimeException(
                     String.format(MISSED_PARAM, command, "listTime yyyy-mm-dd"));
