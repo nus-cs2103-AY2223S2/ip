@@ -22,8 +22,8 @@ public class DeleteCommand extends Command{
             throw new DukeInvalidArgumentException("There are only" + task.size()
                     + "tasks in list, but want to delete " + deletedLineNumber + "th task.");
         }
+        ui.responseToDeleteTaskCommand(task, deletedLineNumber);
         task.removeTaskAt(deletedLineNumber);
         storage.removeData(deletedLineNumber);
-        ui.responseToDeleteTaskCommand(task, deletedLineNumber);
     }
 }

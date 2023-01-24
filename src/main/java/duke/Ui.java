@@ -58,7 +58,7 @@ public class Ui {
     public void responseToDeleteTaskCommand (TaskList taskList, int index) {
         printHorizontalLine();
         System.out.println("\tNoted. I've removed this task:\n\t  " + taskList.getTaskAt(index)
-                + "\n\tNow you have " + taskList.size() + " tasks in the list.");
+                + "\n\tNow you have " + (taskList.size() - 1) + " tasks in the list.");
         printHorizontalLine();
     }
 

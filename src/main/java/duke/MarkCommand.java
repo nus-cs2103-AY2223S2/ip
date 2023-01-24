@@ -19,8 +19,8 @@ public class MarkCommand extends Command{
 
     public void execute(TaskList task, Ui ui, Storage storage) throws DukeIOException, DukeInvalidArgumentException {
         if (toggleLineNumber >= task.size()) {
-            throw new DukeInvalidArgumentException("There are only" + task.size()
-                    + "tasks in list, but want to mark " + toggleLineNumber + "th task.");
+            throw new DukeInvalidArgumentException("There are only " + task.size()
+                    + " tasks in list, but want to mark " + (toggleLineNumber + 1) + "th task.");
         }
         Task t = task.getTaskAt(toggleLineNumber);
         t.setDone(true);
