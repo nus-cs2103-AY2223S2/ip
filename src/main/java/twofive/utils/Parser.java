@@ -26,7 +26,7 @@ public class Parser {
     }
 
     public static Command parse(String command) throws EmptyTasknumException, EmptyDescriptionException,
-            MissingArgumentException, EmptyStartTimeException, EmptyEndTimeException, EmptyDeadlineException, EmptyDateException, InvalidCommandException {
+            MissingArgumentException, EmptyStartTimeException, EmptyEndTimeException, EmptyDeadlineException, EmptyDateException, InvalidCommandException, EmptyKeywordException {
         String commandWord = command.split(" ")[0].trim();
 
         switch (commandWord) {
@@ -88,11 +88,20 @@ public class Parser {
         case "due":
             String[] dueSplit = command.split(commandWord);
             if (dueSplit.length <= 1 || dueSplit[1].trim().equals("")) {
-                //If task description is empty
+                // If task description is empty
                 throw new EmptyDateException();
             } else {
                 String dueDateString = dueSplit[1].trim();
                 return new DueDateCommand(dueDateString);
+            }
+        case "find":
+            String[] keywordSplit = command.split(commandWord);
+            if (keywordSplit.length <= 1 || keywordSplit[1].trim().equals("")) {
+                // if no keyword provided
+                throw new EmptyKeywordException();
+            } else {
+                String keyword = keywordSplit[1].trim();
+                return new FindCommand(keyword);
             }
         case "bye":
             return new ByeCommand();

@@ -1,6 +1,11 @@
 package twofive.utils;
 
-import twofive.exception.*;
+import twofive.exception.EmptyDeadlineException;
+import twofive.exception.EmptyDescriptionException;
+import twofive.exception.EmptyEndTimeException;
+import twofive.exception.EmptyStartTimeException;
+import twofive.exception.InvalidTaskTypeException;
+import twofive.exception.TaskDoneException;
 import twofive.task.Deadline;
 import twofive.task.Event;
 import twofive.task.Task;
@@ -22,8 +27,10 @@ public class FileParser {
         this.taskFile = taskFile;
     }
 
-    public ArrayList<Task> parseFile() throws FileNotFoundException, EmptyDescriptionException, InvalidTaskTypeException,
-            EmptyDeadlineException, EmptyEndTimeException, EmptyStartTimeException, TaskDoneException, DateTimeParseException {
+    public ArrayList<Task> parseFile()
+            throws FileNotFoundException, EmptyDescriptionException, InvalidTaskTypeException,
+            EmptyDeadlineException, EmptyEndTimeException, EmptyStartTimeException, TaskDoneException,
+            DateTimeParseException {
         Scanner s = new Scanner(this.taskFile);
         ArrayList<Task> tasks = new ArrayList<>();
 
