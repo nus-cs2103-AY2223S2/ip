@@ -33,6 +33,12 @@ public class Duke {
                 int index = Integer.parseInt(tk.nextToken());
                 list.get(index - 1).setMark(true);
                 System.out.println("Nice! I've marked this task as done: [X]" + list.get(index - 1).getValue());
+            } else if ( action.equals("delete")) {
+                int index = Integer.parseInt(tk.nextToken());
+                System.out.println("Noted. I've removed this task: \n");
+                System.out.println(list.get(index - 1));
+                list.remove(index - 1);
+                System.out.println("Now you have " + list.size() + " tasks in the list");
             }
             else {
                 if ( action.equals("todo")) {
