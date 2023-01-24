@@ -67,6 +67,19 @@ public class TaskList {
         Ui.separator();
     }
 
+    public void find(String input) {
+        int counter = 1;
+        Ui.separator();
+        System.out.println("Here are the matching tasks in your list:");
+        for (Task task : tasks) {
+            if (task.getDescription().contains(input)) {
+                System.out.println("\t" + counter + "." + task);
+                counter++;
+            }
+        }
+        Ui.separator();
+    }
+
     public void setTaskStatus(int index, boolean isDone) {
         Task task = this.tasks.get(index - 1);
         task.setDone(isDone);

@@ -21,7 +21,6 @@ public class Parser {
      * Takes in user's input and obtains the first word
      * and uses it to run different operations,
      * and then uses the rest of the words as arguments for the operation.
-     *
      * @param input User's input
      */
     public void parse(String input) {
@@ -84,6 +83,12 @@ public class Parser {
                     throw new DukeException("Please insert the date the event takes place until, after /to ");
                 }
                 tasklist.addEvent(descriptionOthers[0], fromTo[0], fromTo[1]);
+                break;
+            case "find":
+                if (!details) {
+                    throw new DukeException("Please include the task you would like to find.");
+                }
+                tasklist.find(arr[1]);
                 break;
             default:
                 throw new DukeException("Sorry, I don't know what that means.");
