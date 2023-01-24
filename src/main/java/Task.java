@@ -1,9 +1,11 @@
-public class Task {
+import java.time.LocalDateTime;
+
+public class Task implements Comparable<Task> {
     protected String desc;
     protected boolean isDone;
     
     Task(String desc) {
-        this.desc = desc;
+        this.desc = desc.trim();
         this.isDone = false;
     }
     
@@ -13,6 +15,18 @@ public class Task {
         } else {
             return " ";
         }
+    }
+    
+    String getSymbol() {
+        return "T";
+    }
+    
+    LocalDateTime getTime() {
+        return LocalDateTime.MIN;
+    }
+    
+    boolean hasTime() {
+        return false;
     }
     
     @Override
@@ -37,5 +51,14 @@ public class Task {
         } else {
             return false;
         }
+    }
+    
+    @Override
+    public int compareTo(Task other) {
+        if (this.getTime().compareTo(other.getTime()) == 0) {
+            return this.desc.compareTo(other.desc);
+        }
+        
+        return getTime().compareTo(other.getTime());
     }
 }

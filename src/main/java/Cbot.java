@@ -1,14 +1,57 @@
+import java.util.ArrayList;
 import java.util.Scanner;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
 
 public class Cbot {
-    public static void main(String[] args) {
-        TaskList tl = new TaskList();
+    private static final String[] DFORMS = {"y-M-d", "d/M/y", "d MMM y", "MMM d y"};
+    private static final String[] TFORMS = {
+            "y-M-d Hmm", "y-M-d H:m", "y-M-d ha", "y-M-d h a",
+            "y-M-d h.ma", "y-M-d h.m a", "y-M-d h:ma", "y-M-d h:m a",
+            "d/M/y Hmm", "d/M/y H:m", "d/M/y ha", "d/M/y h a",
+            "d/M/y h.ma", "d/M/y h.m a", "d/M/y h:ma", "d/M/y h:m a",
+            "d MMM y Hmm", "d MMM y H:m", "d MMM y ha", "d MMM y h a",
+            "d MMM y h.ma", "d MMM y h.m a", "d MMM y h:ma", "d MMM y h:m a",
+            "MMM d y Hmm", "MMM d y H:m", "MMM d y ha", "MMM d y h a",
+            "MMM d y h.ma", "MMM d y h.m a", "MMM d y h:ma", "MMM d y h:m a"
+    };
+    
+    public static LocalDateTime parseDT(String dtStr) throws DateTimeParseException {
+        String str = dtStr.trim();
         
+        for (String df : DFORMS) {
+            try {
+                return LocalDate.parse(str, DateTimeFormatter.ofPattern(df)).atStartOfDay();
+            } catch (DateTimeParseException e) {}
+        }
+        
+        for (String tf : TFORMS) {
+            try {
+                return LocalDateTime.parse(str, DateTimeFormatter.ofPattern(tf));
+            } catch (DateTimeParseException e) {}
+        }
+        
+        return LocalDateTime.parse(str);
+    }        
+    
+    public static void printMany(ArrayList<String> arr) {
+        String BLANK = "        ";
+        
+        for (String s : arr) {
+            System.out.println(BLANK + s);
+        }
+        
+        System.out.println();
+    }
+    
+    public static void main(String[] args) {
         String dukeLogo = " ____        _\n"
-                + "|  _ \\ _   _| | _____\n"
-                + "| | | | | | | |/ / _ \\\n"
-                + "| |_| | |_| |   <  __/\n"
-                + "|____/ \\__,_|_|\\_\\___|\n";
+            + "|  _ \\ _   _| | _____\n"
+            + "| | | | | | | |/ / _ \\\n"
+            + "| |_| | |_| |   <  __/\n"
+            + "|____/ \\__,_|_|\\_\\___|\n";
         
         String cbotLogo = "  _____  _            _\n"
                 + " /  ___]| |   ^-^   _| |_\n"
@@ -21,6 +64,10 @@ public class Cbot {
         String WARNING  = "      ! ";
         String PROMPT   = " v v\n";
         String STALL    = "\n   o\n   o\n   o\n\n";
+        String DATETIME_ERROR = WARNING + "<Error> Sorry, I don't know how to interpret that datetime\n"
+                + "        Try something in the form: yyyy-MM-dd HH:mm";
+        
+        TaskList tl = new TaskList();
         
         System.out.println(STALL + INDENT + "Hey! D:< I'm not\n" + dukeLogo);
         System.out.println(INDENT + "I'm\n" + cbotLogo);
@@ -58,11 +105,11 @@ public class Cbot {
             case LIST:
                 if (tl.getCount() == 0) {
                     System.out.println(INDENT + "Freedom! You have no tasks :D");
-                } else {
-                    System.out.println(INDENT + "Here's what you have:");
-                    tl.printTasks();
-                    System.out.println();
+                    break;
                 }
+                
+                System.out.println(INDENT + "Here's what you have:");
+                printMany(tl.listTasks());
                 break;
             
             case MARK:
@@ -112,9 +159,14 @@ public class Cbot {
                     } else {
                         // all's good
                         String dlDesc = userText.substring(0, byIndex);
-                        String dlDue = userText.substring(byIndex + BY_LENGTH);
+                        String dlDueStr = userText.substring(byIndex + BY_LENGTH);
                         
-                        System.out.println(INDENT + tl.addTask(new Deadline(dlDesc, dlDue)));
+                        try {
+                            LocalDateTime dlDue = parseDT(dlDueStr);
+                            System.out.println(INDENT + tl.addTask(new Deadline(dlDesc, dlDue)));
+                        } catch (DateTimeParseException e) {
+                            System.out.println(DATETIME_ERROR);
+                        }
                     }
                 } else {
                     // no /by
@@ -149,10 +201,16 @@ public class Cbot {
                         } else {
                             // all's good
                             String eDesc = userText.substring(0, fromIndex);
-                            String eStart = userText.substring(fromIndex + FROM_LENGTH, toIndex);
-                            String eEnd = userText.substring(toIndex + TO_LENGTH);
-                        
-                            System.out.println(INDENT + tl.addTask(new Event(eDesc, eStart, eEnd)));
+                            String eStartStr = userText.substring(fromIndex + FROM_LENGTH, toIndex);
+                            String eEndStr = userText.substring(toIndex + TO_LENGTH);
+                            
+                            try {
+                                LocalDateTime eStart = parseDT(eStartStr);
+                                LocalDateTime eEnd = parseDT(eEndStr);
+                                System.out.println(INDENT + tl.addTask(new Event(eDesc, eStart, eEnd)));
+                            } catch (DateTimeParseException e) {
+                                System.out.println(DATETIME_ERROR);
+                            }
                         }
                     } else {
                         // no /to
@@ -161,6 +219,116 @@ public class Cbot {
                 } else {
                     // no /by
                     System.out.println(WARNING + "<Error> Missing \"/from\" keyword");
+                }
+                break;
+            
+            case SORT:
+                if (tl.getCount() == 0) {
+                    System.out.println(INDENT + "You have no tasks to sort :P");
+                    break;
+                }
+                
+                tl.sort();
+                System.out.println(INDENT + "Okay! I've sorted your tasks by date:");
+                printMany(tl.listTasks());
+                break;
+            
+            case BEFORE:
+                if (tl.getCount() == 0) {
+                    System.out.println(INDENT + "Eh? You have no tasks to filter");
+                    break;
+                }
+                
+                try {
+                    LocalDateTime bef = parseDT(userText);
+                } catch (DateTimeParseException e) {
+                    System.out.println(DATETIME_ERROR);
+                    break;
+                }
+                
+                LocalDateTime bef = parseDT(userText);
+                ArrayList<String> arrBef = tl.listFilter(t ->
+                        (t.hasTime() && t.compareTo(new Deadline("", bef)) < 0));
+                
+                if (arrBef.isEmpty()) {
+                    System.out.println(INDENT + "You don't have any tasks before " + userText);
+                } else {
+                    System.out.println(INDENT + "Here are your tasks before " + userText + ":");
+                    printMany(arrBef);
+                }
+                break;
+            
+            case AFTER:
+                if (tl.getCount() == 0) {
+                    System.out.println(INDENT + "Eh? You have no tasks to filter");
+                    break;
+                }
+                
+                try {
+                    LocalDateTime aft = parseDT(userText);
+                } catch (DateTimeParseException e) {
+                    System.out.println(DATETIME_ERROR);
+                    break;
+                }
+                
+                LocalDateTime aft = parseDT(userText);
+                ArrayList<String> arrAft = tl.listFilter(t ->
+                        (t.hasTime() && t.compareTo(new Deadline("", aft)) > 0));
+                
+                if (arrAft.isEmpty()) {
+                    System.out.println(INDENT + "You don't have any tasks after " + userText);
+                } else {
+                    System.out.println(INDENT + "Here are your tasks after " + userText + ":");
+                    printMany(arrAft);
+                }
+                break;
+            
+            case FILTER:
+                if (tl.getCount() == 0) {
+                    System.out.println(INDENT + "Eh? You have no tasks to filter");
+                    break;
+                }
+                
+                String msg = "Ok!";
+                ArrayList<String> arrFilter = new ArrayList<String>();
+                boolean stopFilter = false;
+                
+                switch (userText.toLowerCase()) {
+                case "todo":
+                case "td":
+                case "t":
+                    msg = "Ok! These are on your ToDo list:";
+                    arrFilter = tl.listFilter(t -> t.getSymbol().equals("T"));
+                    break;
+                
+                case "deadline":
+                case "dl":
+                case "d":
+                    msg = "Ok! Here are your Deadlines:";
+                    arrFilter = tl.listFilter(t -> t.getSymbol().equals("D"));
+                    break;
+                
+                case "event":
+                case "ev":
+                case "e":
+                    msg = "Ok! Here are your Events:";
+                    arrFilter = tl.listFilter(t -> t.getSymbol().equals("E"));
+                    break;
+                
+                default:
+                    System.out.println(WARNING + "<Error> I'm not sure what Task type that is :(");
+                    stopFilter = true;
+                }
+                
+                if (stopFilter) {
+                    break;
+                }
+                
+                if (arrFilter.isEmpty()) {
+                    System.out.println(INDENT + "You don't have any of those :/");
+                } else {
+                    System.out.println(INDENT + msg);
+                    printMany(arrFilter);
                 }
                 break;
             

@@ -1,4 +1,6 @@
 import java.util.ArrayList;
+import java.util.function.Predicate;
+import java.util.Collections;
 
 public class TaskList {
     private static final int MAX_SIZE = 100;
@@ -20,11 +22,21 @@ public class TaskList {
                 task.toString());
     }
     
-    void printTasks() {
+    ArrayList<String> listTasks() {
+        return listFilter(t -> true);
+    }
+    
+    ArrayList<String> listFilter(Predicate<Task> pred) {
+        ArrayList<String> arr = new ArrayList<String>();
+        
         for (int i = 0; i < getCount(); i++) {
-            System.out.println(String.format("%11d. %s",    // GAPS here too
-                    i + 1, this.tdl.get(i)));
+            if (pred.test(this.tdl.get(i))) {
+                arr.add(String.format("%3d. %s",
+                        i + 1, this.tdl.get(i)));
+            }
         }
+        
+        return arr;
     }
     
     boolean notInRange(int num) {
@@ -80,5 +92,9 @@ public class TaskList {
         
         return "Got it! Deleted:\n" + GAP
                 + tdl.remove(num - 1).toString();
+    }
+    
+    void sort() {
+        Collections.sort(tdl);
     }
 }
