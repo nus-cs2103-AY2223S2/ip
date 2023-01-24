@@ -19,13 +19,13 @@ class Parser {
                 mark(false, tasks, tokens[1]);
                 break;
             case TODO:
-                todo(tasks, tokens[1]);
+                addTodo(tasks, tokens[1]);
                 break;
             case DEADLINE:
-                deadline(tasks, tokens[1]);
+                addDeadline(tasks, tokens[1]);
                 break;
             case EVENT:
-                event(tasks, tokens[1]);
+                addEvent(tasks, tokens[1]);
                 break;
             case DELETE:
                 delete(tasks, tokens[1]);
@@ -35,66 +35,66 @@ class Parser {
     private static void list(TaskList tasks) {
         Ui.list(tasks.get());
     }
-    private static void mark(boolean isMark ,TaskList tasks, String s) {
+    private static void mark(boolean isMark ,TaskList tasks, String numString) {
         try {
-            int num = Integer.parseInt(s);
+            int num = Integer.parseInt(numString);
             Task task = tasks.mark(isMark, num - 1);
             Ui.mark(isMark, task);
-        } catch (NumberFormatException e) {
+        } catch (NumberFormatException exception) {
             Ui.notANumber();
-        } catch (IndexOutOfBoundsException e) {
+        } catch (IndexOutOfBoundsException exception) {
             Ui.numberOutOfBounds();
         }
     }
-    private static void todo(TaskList tasks, String s) {
-        Todo task = new Todo(s);
+    private static void addTodo(TaskList tasks, String nameString) {
+        Todo task = new Todo(nameString);
         tasks.add(task);
         Ui.addTask("todo", task);
     }
-    private static void deadline(TaskList tasks, String s) {
+    private static void addDeadline(TaskList tasks, String paramString) {
         try {
-            String[] tokens = s.split(" /by ");
+            String[] tokens = paramString.split(" /by ");
             String name = tokens[0];
             String by = tokens[1];
             Deadline task = new Deadline(name, parseDate(by));            
             tasks.add(task);
             Ui.addTask("deadline", task);
-        } catch (IndexOutOfBoundsException e) {
+        } catch (IndexOutOfBoundsException exception) {
             Ui.missingOptions("/by");
-        } catch (DateTimeParseException e) {
+        } catch (DateTimeParseException exception) {
             Ui.wrongDateFormat();
         }
     }
-    private static void event(TaskList tasks, String s) {
+    private static void addEvent(TaskList tasks, String paramString) {
         try {
-            String[] tokens = s.split(" /from ");
+            String[] tokens = paramString.split(" /from ");
             String name = tokens[0];
-            String tmptoken = tokens[1];
-            String[] options = tmptoken.split(" /to ");
+            String tmpToken = tokens[1];
+            String[] options = tmpToken.split(" /to ");
             String from = options[0];
             String to = options[1];
             Event task = new Event(name, parseDate(from), parseDate(to));            
             tasks.add(task);
             Ui.addTask("event", task);
-        } catch (IndexOutOfBoundsException e) { 
+        } catch (IndexOutOfBoundsException exception) { 
             Ui.missingOptions("/from /to");
-        } catch (DateTimeParseException e) {
+        } catch (DateTimeParseException exception) {
             Ui.missingOptions("/by");
         }    
     }
-    private static void delete(TaskList tasks, String s) {
+    private static void delete(TaskList tasks, String numString) {
         try {
-            int num = Integer.parseInt(s);
+            int num = Integer.parseInt(numString);
             Task task = tasks.delete(num - 1);
             Ui.delete(task);
-        } catch (NumberFormatException e) {
+        } catch (NumberFormatException exception) {
             Ui.notANumber();
-        } catch (IndexOutOfBoundsException e) {
+        } catch (IndexOutOfBoundsException exception) {
             Ui.numberOutOfBounds();
         }
     }
-    private static LocalDate parseDate(String date) throws DateTimeParseException {
+    private static LocalDate parseDate(String dateString) throws DateTimeParseException {
         DateTimeFormatter format = DateTimeFormatter.ofPattern("yyyy-MM-dd");
-        return LocalDate.parse(date, format);
+        return LocalDate.parse(dateString, format);
     }
 }
