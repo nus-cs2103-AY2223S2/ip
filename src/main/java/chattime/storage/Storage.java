@@ -1,3 +1,12 @@
+package chattime.storage;
+
+import chattime.exception.ChattimeException;
+import chattime.task.Deadline;
+import chattime.task.Event;
+import chattime.task.Task;
+import chattime.task.Todo;
+import chattime.ui.Ui;
+
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.FileWriter;
@@ -77,7 +86,7 @@ public class Storage {
                         }
                         break;
                     default:
-                        throw new ChattimeException("Task type error : " + taskSplit[0]);
+                        throw new ChattimeException("chattime.task.Task type error : " + taskSplit[0]);
                 }
                 if (inputTask != null && taskSplit[1].equals("1")) {
                     inputTask.markAsDone();
@@ -114,7 +123,7 @@ public class Storage {
                 content = lineSearch.readLine();
             }
             if (lineCount < index) {
-                throw new IndexOutOfBoundsException("Task not saved in storage!");
+                throw new IndexOutOfBoundsException("chattime.task.Task not saved in storage!");
             } else {
                 writeToFile(updateString.toString(), false);
             }
@@ -142,7 +151,7 @@ public class Storage {
                 content = lineSearch.readLine();
             }
             if (lineCount < index) {
-                throw new IndexOutOfBoundsException("Task not saved in storage!");
+                throw new IndexOutOfBoundsException("chattime.task.Task not saved in storage!");
             } else {
                 writeToFile(updateString.toString(), false);
             }

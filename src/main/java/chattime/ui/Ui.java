@@ -1,3 +1,7 @@
+package chattime.ui;
+
+import chattime.task.Task;
+
 public class Ui {
 
     private static final String GREET = "Hey! I'm your friend, Chattime!  (•◡•) /\n"

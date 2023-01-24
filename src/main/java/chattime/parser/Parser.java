@@ -1,3 +1,12 @@
+package chattime.parser;
+
+import chattime.command.*;
+import chattime.exception.ChattimeException;
+import chattime.task.Deadline;
+import chattime.task.Event;
+import chattime.task.Task;
+import chattime.task.Todo;
+
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.time.format.DateTimeParseException;

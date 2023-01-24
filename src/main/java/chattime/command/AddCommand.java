@@ -1,3 +1,10 @@
+package chattime.command;
+
+import chattime.storage.Storage;
+import chattime.task.Task;
+import chattime.task.TaskList;
+import chattime.ui.Ui;
+
 public class AddCommand extends Command {
     private Task task;
 

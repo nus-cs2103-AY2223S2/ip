@@ -1,3 +1,5 @@
+package chattime.task;
+
 import java.time.LocalDate;
 
 public class Task {

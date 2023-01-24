@@ -35,7 +35,7 @@ Hello from
      Now you have 3 tasks in the list.
     ---------------------------------------------------------------------******************CHATTIME
     ---------------------------------------------------------------------******************CHATTIME
-     Task(s) waiting to be completed:
+     chattime.task.Task(s) waiting to be completed:
      1. [T][X] read book
      2. [D][ ] return book (by: 6th June)
      3. [E][ ] project meeting (from: Aug 6th 2pm to: 4pm)
@@ -63,7 +63,7 @@ Hello from
        [T][X] read book
     ---------------------------------------------------------------------******************CHATTIME
     ---------------------------------------------------------------------******************CHATTIME
-     Task(s) waiting to be completed:
+     chattime.task.Task(s) waiting to be completed:
      1. [T][X] read book
      2. [D][ ] return book (by: 6th June)
      3. [E][ ] project meeting (from: Aug 6th 2pm to: 4pm)
@@ -84,7 +84,7 @@ Hello from
      Sorry... but I don't understand what you said >,<
     ---------------------------------------------------------------------******************CHATTIME
     ---------------------------------------------------------------------******************CHATTIME
-     Task(s) waiting to be completed:
+     chattime.task.Task(s) waiting to be completed:
      1. [T][X] read book
      2. [D][ ] return book (by: 6th June)
      3. [E][ ] project meeting (from: Aug 6th 2pm to: 4pm)
@@ -120,7 +120,7 @@ Hello from
      Now you have 10 tasks in the list.
     ---------------------------------------------------------------------******************CHATTIME
     ---------------------------------------------------------------------******************CHATTIME
-     Task(s) waiting to be completed:
+     chattime.task.Task(s) waiting to be completed:
      1. [T][ ] read book
      2. [D][ ] return book (by: 6th June)
      3. [E][X] project meeting (from: Aug 6th 2pm to: 4pm)

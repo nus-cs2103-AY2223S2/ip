@@ -1,3 +1,10 @@
+package chattime.command;
+
+import chattime.storage.Storage;
+import chattime.task.Task;
+import chattime.task.TaskList;
+import chattime.ui.Ui;
+
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
@@ -23,7 +30,7 @@ public class ListCommand extends Command {
             ui.emptyList();
         } else {
             int i = 1;
-            String message = "Task(s) waiting to be completed:";
+            String message = "chattime.task.Task(s) waiting to be completed:";
 
             for (Task task : taskList.getList()) {
                 message = message.concat(String.format("\n     %d. %s", i, task));

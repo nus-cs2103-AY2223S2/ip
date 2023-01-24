@@ -16,8 +16,8 @@ bin/
 /text-ui-test/ACTUAL.TXT
 text-ui-test/EXPECTED-UNIX.TXT
 src/main/java/Chattime.class
-src/main/java/Deadline.class
-src/main/java/Event.class
-src/main/java/Task.class
-src/main/java/Todo.class
-src/main/java/ChattimeException.class
+src/main/java/chattime/task/Deadline.class
+src/main/java/chattime/task/Event.class
+src/main/java/chattime/task/Task.class
+src/main/java/chattime/task/Todo.class
+src/main/java/chattime/exception/ChattimeException.class
