@@ -1,3 +1,4 @@
+import java.io.*;
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -13,6 +14,14 @@ public class Duke {
         Scanner sc = new Scanner(System.in);
         ArrayList<Task> list = new ArrayList<>();
         String userLine = "";
+        String savePath = "data/save.txt";
+        try (FileInputStream fileInputStream = new FileInputStream(savePath);
+             ObjectInputStream objectInputStream = new ObjectInputStream(fileInputStream)) {
+            list = (ArrayList<Task>) objectInputStream.readObject();
+        } catch (IOException | ClassNotFoundException e) {
+            System.out.println("No save file");
+        }
+
         while (!userLine.equals("bye")) {
             userLine = sc.nextLine();
             String[] split = userLine.split(" ");
@@ -26,15 +35,23 @@ public class Duke {
                 break;
             case "mark": {
                 int number = Integer.parseInt(split[1]) - 1;
-                list.get(number).setIsDone(true);
-                System.out.println("done");
+                try {
+                    list.get(number).setIsDone(true);
+                    System.out.println("done");
+                } catch (IndexOutOfBoundsException e) {
+                    System.out.println("Item does not exist");
+                }
                 printAllTasks(list);
                 break;
             }
             case "unmark": {
                 int number = Integer.parseInt(split[1]) - 1;
-                list.get(number).setIsDone(false);
-                System.out.println("done");
+                try {
+                    list.get(number).setIsDone(false);
+                    System.out.println("done");
+                } catch (IndexOutOfBoundsException e) {
+                    System.out.println("Item does not exist");
+                }
                 printAllTasks(list);
                 break;
             }
@@ -87,6 +104,15 @@ public class Duke {
             default:
                 System.out.println("Command not found");
             }
+            // save file
+            try (FileOutputStream fw = new FileOutputStream(savePath);
+                 ObjectOutputStream out = new ObjectOutputStream(fw)
+            ) {
+                out.writeObject(list);
+            } catch (IOException e) {
+                System.out.println("Saving error");
+            }
+
         }
     }
 }
