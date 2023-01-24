@@ -15,6 +15,7 @@ public class DeadlineQueryHandler extends TaskQueryHandler {
             throw new InvalidCommandParamException("Please provide an end date for your deadline!");
         }
         Task newTask = tt.AddDeadline(deadlineDesc, deadlineEndDate);
+        tt.SaveAllTasks();
         return "Added task " + newTask;
     }
 }

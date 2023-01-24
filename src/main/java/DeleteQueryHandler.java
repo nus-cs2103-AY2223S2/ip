@@ -10,6 +10,7 @@ public class DeleteQueryHandler extends TaskQueryHandler {
         StringTokenizer st = new StringTokenizer(query);
         st.nextToken();
         Task t = tt.DeleteTask(Integer.parseInt(st.nextToken()) - 1);
+        tt.SaveAllTasks();
         return "Task deleted: " + t;
     }
 }
