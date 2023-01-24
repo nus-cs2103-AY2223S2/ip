@@ -6,6 +6,10 @@ import aqua.logic.ExecutionTask;
 import aqua.manager.AppManager;
 
 
+/** 
+ * An implementation of Command to produce an ExecutionDispatcher that will
+ * exit the application.
+ */
 public class ByeCommand implements Command {
     @Override
     public ExecutionDispatcher getDispatcher(ArgumentMap args, AppManager manager) {

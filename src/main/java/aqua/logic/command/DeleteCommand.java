@@ -8,6 +8,12 @@ import aqua.logic.ExecutionDispatcher;
 import aqua.logic.ExecutionTask;
 import aqua.manager.AppManager;
 
+
+/**
+ * An implementation of Command that will produce an ExecutionDispatcher that
+ * will delete an AquaTask from the task manager and then save the state of the
+ * task manager to hard disk.
+ */
 public class DeleteCommand implements Command {
     @Override
     public ExecutionDispatcher getDispatcher(ArgumentMap args, AppManager manager) {

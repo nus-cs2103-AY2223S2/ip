@@ -8,10 +8,23 @@ import aqua.logic.ExecutionDispatcher;
 import aqua.logic.ExecutionTask;
 import aqua.manager.AppManager;
 
+/**
+ * An implementation of Command that will produce an ExecutionDispatcher that
+ * will mark an AquaTask in the task manager and then save the state of the
+ * task manager to hard disk.
+ */
 public class MarkTaskCommand implements Command {
+    /** Value to pass {@link AquaTask#mark(boolean)} when marking a task. */
     private boolean isCompletedMarker;
 
 
+    /**
+     * Constructs a MarkTaskCommand that will produce executor dispatchers that
+     * will mark tasks as specified.
+     * 
+     * @param isCompleteMarker - {@code true} to mark task as complete and
+     *      {@code false} as incomplete.
+     */
     public MarkTaskCommand(boolean isCompletedMarker) {
         this.isCompletedMarker = isCompletedMarker;
     }
