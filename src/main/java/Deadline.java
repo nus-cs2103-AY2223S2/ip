@@ -1,18 +1,44 @@
 import java.util.HashMap;
+import java.time.LocalDateTime;
 
 public class Deadline extends Task{
 
-    private String by;
+    private LocalDateTime by;
 
     public Deadline(HashMap<String, String> parsed) throws DukeException {
         super(parsed.get("deadline"));
-        by = parsed.get("/by");
+        this.by = parseDate(parsed.get("/by"));
         abbreviation = 'D';
+    }
+
+    private LocalDateTime parseDate(String by) {
+        String[] date = by.split(" ")[0].split("/");
+        int day = Integer.valueOf(date[0]);
+        int month = Integer.valueOf(date[1]);
+        int year = Integer.valueOf(date[2]);
+        String time = by.split(" ")[1];
+        int hour = Integer.valueOf(time.substring(0, 2));
+        int minute = Integer.valueOf(time.substring(2,4));
+        LocalDateTime dateTime = LocalDateTime.of(year, month, day, hour, minute);
+        return dateTime;
+    }
+
+    private String getBy() {
+        String month = by.getMonth().toString().substring(0, 3);
+        String day = Integer.toString(by.getDayOfMonth());
+        String year = Integer.toString(by.getYear());
+        String hour = Integer.toString(by.getHour());
+        String minute = Integer.toString(by.getMinute());
+        if (minute.length() == 1) {
+            minute = "0" + minute;
+        }
+        String time = hour + minute;
+        return String.format("%s %s %s %s", month, day, year, time);
     }
 
     @Override
     public String toString() {
-        return super.toString() + " (by: " + by + ")";
+        return super.toString() + " (by: " + getBy() + ")";
     }
 }
 
