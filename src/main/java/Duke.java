@@ -1,12 +1,20 @@
 import java.security.spec.ECField;
 import java.util.Scanner;
-import java.util.ArrayList;
 import java.io.*;
 public class Duke {
-    private Scanner sc = new Scanner(System.in);
-    private ArrayList<Task> list = new ArrayList<>();
-
+    //private Scanner sc = new Scanner(System.in);
     private static String FILEPATH = "./data/duke.txt";
+    private TaskList list;
+    private Ui ui;
+    private Storage storage;
+    private Parser parser;
+
+    public Duke() {
+        this.ui = new Ui();
+        this.storage = new Storage(FILEPATH);
+        this.list = new TaskList(this.storage.loadData());
+        this.parser = new Parser();
+    }
 
     private enum DukeCommand {
         BYE,
@@ -21,24 +29,22 @@ public class Duke {
 
 
     private void inputResponse() {
-
         while (true) {
             String input;
-            input = this.sc.nextLine();
-            String[] userInput = input.split(" ", 2);
+            input = this.ui.getUserInput();
+            String[] userInput = this.parser.parseUserInput(input);
             String dukeQuery = userInput[0];
             DukeCommand dukeCommand= DukeCommand.valueOf(dukeQuery.toUpperCase());
 
             try {
                 switch (dukeCommand) {
                     case BYE :
-                        this.storeData();
-                        System.out.println("\tBye. Hope to see you again soon!");
-                        printLine();
-                        this.sc.close();
+                        this.storage.storeData(this.list);
+                        this.ui.exitDisplay();
+                        this.ui.closeInput();
                         return;
                     case LIST :
-                        this.displayList();
+                        this.ui.displayList(this.list);
                         break;
                     case MARK :
                         this.markComplete(userInput);
@@ -67,32 +73,31 @@ public class Duke {
             } catch (IOException e) {
                 System.out.println("Error while storing data..");
             }
-            this.printLine();
+            this.ui.printLine();
         }
 
     }
 
     private void displayList() {
-        int listSize = this.list.size();
+        int listSize = this.list.listLength();
         for(int i = 1; i <= listSize; i++) {
-            System.out.println("\t" + i + ". " + this.list.get(i - 1).toString());
+            System.out.println("\t" + i + ". " + this.list.getTask(i).toString());
         }
     }
 
     private void markComplete(String[] userInput) throws DukeInvalidArgumentsException, DukeMissingArgumentException, DukeTaskArgumentException{
         try {
             int taskIndex = Integer.parseInt(userInput[1]);
-            if(taskIndex > this.list.size()) {
+            if(taskIndex > this.list.listLength()) {
                 throw new DukeTaskArgumentException();
             }
-            if (list.get(taskIndex - 1).getStatus()) {
+            if (list.getTask(taskIndex).getStatus()) {
                 throw new DukeTaskArgumentException();
             }
 
-            Task taskToBeMarked = this.list.get(taskIndex - 1);
+            Task taskToBeMarked = this.list.getTask(taskIndex);
             taskToBeMarked.changeStatus();
-            System.out.println("\tNice! I've marked this task as done:");
-            System.out.println("\t\t" + taskToBeMarked.toString());
+            this.ui.markTaskDisplay(taskToBeMarked);
         } catch (NumberFormatException e){
             throw new DukeInvalidArgumentsException();
         } catch (IndexOutOfBoundsException e) {
@@ -104,17 +109,16 @@ public class Duke {
     private void markInComplete(String[] userInput) throws DukeMissingArgumentException, DukeInvalidArgumentsException, DukeTaskArgumentException{
         try {
             int taskIndex = Integer.parseInt(userInput[1]);
-            if(taskIndex > this.list.size()) {
+            if(taskIndex > this.list.listLength()) {
                 throw new DukeTaskArgumentException();
             }
-            if (list.get(taskIndex - 1).getStatus() == false) {
+            if (list.getTask(taskIndex).getStatus() == false) {
                 throw new DukeTaskArgumentException();
             }
 
-            Task taskToBeUnmarked = this.list.get(taskIndex - 1);
+            Task taskToBeUnmarked = this.list.getTask(taskIndex);
             taskToBeUnmarked.changeStatus();
-            System.out.println("\tOK, I've marked this task as not done yet:");
-            System.out.println("\t\t" + taskToBeUnmarked.toString());
+            this.ui.unmarkTaskDisplay(taskToBeUnmarked);
         }  catch(IndexOutOfBoundsException e) {
             String task = "unmark";
             throw new DukeMissingArgumentException(task);
@@ -126,10 +130,8 @@ public class Duke {
     private void addTodo(String[] userInput) throws DukeMissingArgumentException{
         try {
             Todo todo = new Todo(userInput[1]);
-            this.list.add(todo);
-            System.out.println("\tGot it. I've added this task:");
-            System.out.println("\t" + todo.toString());
-            displayTasks();
+            this.list.addTask(todo);
+            this.ui.taskAddDisplay(todo, this.list.listLength());
         } catch (IndexOutOfBoundsException e) {
             String task = "todo";
             throw new DukeMissingArgumentException(task);
@@ -145,10 +147,8 @@ public class Duke {
 
 
             Deadlines deadline = new Deadlines(deadlineText, deadlineDate);
-            this.list.add(deadline);
-            System.out.println("\tGot it. I've added this task:");
-            System.out.println("\t" + deadline.toString());
-            displayTasks();
+            this.list.addTask(deadline);
+            this.ui.taskAddDisplay(deadline, this.list.listLength());
         } catch(IndexOutOfBoundsException e) {
             String task = "deadline";
             throw new DukeMissingArgumentException(task);
@@ -163,31 +163,23 @@ public class Duke {
             String eventTo = eventInfo[2].trim();
 
             Event event = new Event(eventText, eventFrom, eventTo);
-            this.list.add(event);
-            System.out.println("\tGot it. I've added this task:");
-            System.out.println("\t" + event.toString());
-            displayTasks();
+            this.list.addTask(event);
+            this.ui.taskAddDisplay(event, this.list.listLength());
         }catch (IndexOutOfBoundsException e) {
             String task = "event";
             throw new DukeMissingArgumentException(task);
         }
     }
 
-    private void displayTasks() {
-        int listSize = list.size();
-        System.out.println(String.format("\tNow you have %d tasks in the list.", listSize));
-    }
-
     private void deleteTask(String[] userInput) throws DukeTaskArgumentException, DukeMissingArgumentException, DukeInvalidArgumentsException{
         try{
             int taskIndex = Integer.parseInt(userInput[1]);
-            if(taskIndex > this.list.size()) {
+            if(taskIndex > this.list.listLength()) {
                 throw new DukeTaskArgumentException();
             }
-            System.out.println("\tNoted. I've removed this task:");
-            System.out.println("\t\t" + this.list.get(taskIndex - 1).toString());
-            this.list.remove(taskIndex - 1);
-            displayTasks();
+            this.ui.taskDeleteDisplay(this.list, taskIndex);
+            this.list.deleteTask(taskIndex);
+            this.ui.displayTasks(this.list.listLength());
         } catch(IndexOutOfBoundsException e) {
             String task = "delete";
             throw new DukeMissingArgumentException(task);
@@ -196,83 +188,9 @@ public class Duke {
         }
     }
 
-    private void loadData() {
-        File data = new File(this.FILEPATH);
-        try {
-            Scanner fileSc = new Scanner(data);
-            while(fileSc.hasNextLine()) {
-                String fileData = fileSc.nextLine();
-
-                String[] taskData = fileData.split("\\|");
-                readData(taskData);
-            }
-        } catch(FileNotFoundException e) {
-            this.createFile();
-        } catch (DukeException e) {
-            System.out.println(e);
-        }
-    }
-
-    private void createFile() {
-        File dir = new File("./data");
-        File newFile = new File(this.FILEPATH);
-        dir.mkdir();
-        try{
-            newFile.createNewFile();
-        } catch (IOException e) {
-            System.out.println(e);
-        }
-    }
-
-    private void readData(String[] taskData) throws DukeDataException {
-        String taskType = taskData[0];
-        String taskStatus = taskData[1];
-        String taskInfo = taskData[2].trim();
-
-        Task loadTask = null;
-
-        if(taskType.equals("T")) {
-            loadTask = new Todo(taskInfo);
-        } else if (taskType.equals("D")) {
-            String taskTime = taskData[3].trim();
-            loadTask = new Deadlines(taskInfo, taskTime);
-        } else if (taskType.equals("E")){
-            String taskFrom = taskData[3].trim();
-            String taskTo = taskData[4].trim();
-            loadTask = new Event(taskInfo, taskFrom, taskTo);
-        } else {
-            throw new DukeDataException();
-        }
-
-        if(taskStatus.equals("1")){
-            loadTask.changeStatus();
-        }
-        this.list.add(loadTask);
-    }
-
-    private void storeData() throws IOException{
-        FileWriter writer = new FileWriter(this.FILEPATH, false);
-        BufferedWriter buffer = new BufferedWriter(writer);
-        for(int i = 0; i < this.list.size(); i++) {
-            buffer.write(this.list.get(i).writeFile());
-            buffer.newLine();
-        }
-        buffer.close();
-        writer.close();
-    }
-
-
-    private void printLine() {
-        System.out.println("------------------------------------------------------------------");
-    }
-
     public static void main(String[] args)  {
         Duke dukeObj = new Duke();
-        dukeObj.loadData();
-
-        System.out.println("Welcome! I'm Duke.");
-        System.out.println("What can I do for you?");
-        dukeObj.printLine();
+        dukeObj.ui.initialDisplay();
         dukeObj.inputResponse();
     }
 }
