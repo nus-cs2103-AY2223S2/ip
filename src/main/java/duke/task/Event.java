@@ -74,8 +74,8 @@ public class Event extends Task {
 
     @Override
     public String toString() {
-        String startStr = start.format(LocalDateTimeUtils.outputDateTimeFormatter);
-        String endStr = end.format(LocalDateTimeUtils.outputDateTimeFormatter);
+        String startStr = start.format(LocalDateTimeUtils.OUTPUT_DATE_TIME_FORMATTER);
+        String endStr = end.format(LocalDateTimeUtils.OUTPUT_DATE_TIME_FORMATTER);
 
         return String.format("[E]%s (from: %s to: %s)", super.toString(), startStr, endStr);
     }

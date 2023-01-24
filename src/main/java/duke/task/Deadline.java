@@ -61,7 +61,7 @@ public class Deadline extends Task {
 
     @Override
     public String toString() {
-        String cutoffStr = cutoff.format(LocalDateTimeUtils.outputDateTimeFormatter);
+        String cutoffStr = cutoff.format(LocalDateTimeUtils.OUTPUT_DATE_TIME_FORMATTER);
 
         return String.format("[D]%s (by: %s)", super.toString(), cutoffStr);
     }
