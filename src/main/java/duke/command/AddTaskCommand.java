@@ -1,4 +1,10 @@
+package duke.command;
+
 import java.util.Objects;
+
+import duke.TaskList;
+import duke.UI;
+import duke.task.Task;
 
 public class AddTaskCommand extends Command {
 

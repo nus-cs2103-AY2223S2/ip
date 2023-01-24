@@ -1,5 +1,18 @@
+package duke;
+
 import java.time.LocalDate;
 import java.util.function.Supplier;
+
+import duke.command.AddTaskCommand;
+import duke.command.Command;
+import duke.command.ExitCommand;
+import duke.command.ListCommand;
+import duke.command.MarkCommand;
+import duke.command.RemoveTaskCommand;
+import duke.command.UnmarkCommand;
+import duke.task.DeadlineTask;
+import duke.task.EventTask;
+import duke.task.TodoTask;
 
 public class Parser {
 

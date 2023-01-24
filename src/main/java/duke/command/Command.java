@@ -1,3 +1,7 @@
+package duke.command;
+
+import duke.TaskList;
+
 public abstract class Command {
 
     public abstract void execute(TaskList list);

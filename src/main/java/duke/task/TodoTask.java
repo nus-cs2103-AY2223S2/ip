@@ -1,3 +1,5 @@
+package duke.task;
+
 public class TodoTask extends Task {
 
     private static final long serialVersionUID = -2700942093958172810L;
