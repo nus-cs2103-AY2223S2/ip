@@ -1,257 +1,104 @@
-import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
-import java.time.LocalDate;
 import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
-import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
 import java.util.Scanner;
-import java.io.FileWriter;
 
 public class Duke {
-    public static void main(String[] args) {
-        String logo = " ____        _        \n"
-                + "|  _ \\ _   _| | _____ \n"
-                + "| | | | | | | |/ / _ \\\n"
-                + "| |_| | |_| |   <  __/\n"
-                + "|____/ \\__,_|_|\\_\\___|\n";
-        System.out.println("Hello from\n" + logo);
-        talk("Meow I'm Toto! What can I do for you?");
 
-        File theDir = new File("src/main/data");
-        if (!theDir.exists()){
-            theDir.mkdirs();
-        }
-
+    private Storage storage;
+    private TaskList tasks;
+    private Ui ui;
+    public Duke(String filePath, String dirPath) {
+        ui = new Ui();
+        storage = new Storage("src/main/data/duke.txt", "src/main/data");
         try {
-            createFile("src/main/data/duke.txt");
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        }
-
-        ArrayList<Task> arrayList;
-        try {
-            arrayList = writeToList("src/main/data/duke.txt");
+            tasks = new TaskList(storage.load());
         } catch (FileNotFoundException e) {
             throw new RuntimeException(e);
-        }
+        } // change to DukeException bruh
+    }
+
+    public void run() {
+        ui.greet();
 
         while (true) {
-                try {
-                Scanner scanner = new Scanner(System.in);
-                String answer = scanner.nextLine();
+            try {
+                String answer = ui.readCommand();
+                Parser parser = new Parser(answer);
+                int length = tasks.getLength();
                 if (answer.equals("bye")) {
-                    System.out.println("Byebye CATch you later!");
+                    ui.goodbye();
                     try {
-                        writeToFile("src/main/data/duke.txt", arrayList);
+                        storage.store(tasks);
                     } catch (IOException e) {
                         throw new RuntimeException(e);
                     }
                     break;
                 }
                 if (answer.equals("list")) {
-                    list(arrayList);
+                    tasks.list();
                     continue;
                 }
 
                 if (answer.startsWith("mark ")) {
-                    mark(answer, arrayList);
+                    Integer index = parser.getMarkIndex(length);
+                    ui.marked(tasks.mark(index));
                     continue;
                 }
                 if (answer.startsWith("unmark ")) {
-                    unmark(answer, arrayList);
+                    Integer index = parser.getUnmarkIndex(length);
+                    ui.unmarked(tasks.unmark(index));
                     continue;
                 }
                 if (answer.startsWith("delete ")) {
-                    delete(answer, arrayList);
+                    Integer index = parser.getDeleteIndex(length);
+                    ui.deleted(tasks.delete(index));
                     continue;
                 }
                 if (answer.startsWith("todo ")) {
-                    addTodo(answer, arrayList);
+                    String description = parser.getTodoDescription();
+                    ui.addedTask(tasks.addTodo(answer));
                     continue;
                 }
                 if (answer.startsWith("deadline ")) {
-                    addDeadline(answer, arrayList);
+                    String description = parser.getDeadlineDescription();
+                    ui.askBy();
+                    String askBy = ui.readCommand();
+                    LocalDateTime by = parser.getDeadlineBy(askBy);
+                    ui.addedTask(tasks.addDeadline(description, by));
                     continue;
                 }
                 if (answer.startsWith("event ")) {
-                    addEvent(answer, arrayList);
+                    String description = parser.getEventDescription();
+                    ui.askFrom();
+                    String askFrom = ui.readCommand();
+                    LocalDateTime from = parser.getEventFrom(askFrom);
+                    ui.askTo();
+                    String askTo = ui.readCommand();
+                    LocalDateTime to = parser.getEventTo(askTo);
+                    ui.addedTask(tasks.addEvent(description, from, to));
                     continue;
                 }
                 throw new DukeException("I don't know that one!");
-                }
-
-                catch (DukeException e) {
-                    System.out.println(e.toString());
-                }
-
             }
 
-
-        }
-
-
-    public static void talk(String s) {
-        System.out.println(s);
-    }
-    private static void createFile(String filePath) throws IOException {
-        File file = new File(filePath);
-
-        file.createNewFile();
-    }
-    private static ArrayList<Task> writeToList(String filePath) throws FileNotFoundException {
-        File f = new File(filePath);
-        Scanner s = new Scanner(f);
-        ArrayList<Task> arrayList = new ArrayList<>();
-        while (s.hasNext()) {
-            String[] parts = s.nextLine().split("/");
-            if (parts[0].equals("T")) {
-                Task t = new Todo(parts[2]);
-                if (parts[1].equals("1")) t.markAsDone();
-                arrayList.add(t);
-
-            }
-            if (parts[0].equals("D")) {
-                Task t = new Deadline(parts[2], LocalDateTime.parse(parts[3]));
-                if (parts[1].equals("1")) t.markAsDone();
-                arrayList.add(t);
-            }
-            if (parts[0].equals("E")) {
-                Task t = new Event(parts[2], LocalDateTime.parse(parts[3]),
-                        LocalDateTime.parse(parts[4]));
-                if (parts[1].equals("1")) t.markAsDone();
-                arrayList.add(t);
-            }
-        }
-        return arrayList;
-    }
-
-    private static void writeToFile(String filePath, ArrayList<Task> arrayList) throws IOException {
-        FileWriter fw = new FileWriter(filePath);
-
-        for (int i = 0; i < arrayList.size(); i++) {
-
-            Task t = arrayList.get(i);
-            if (t instanceof Todo) {
-                fw.write("T/" + t.getStatusIconBinary() + "/" + t.getDescription());
-            }
-            if (t instanceof Deadline) {
-                fw.write("D/" + t.getStatusIconBinary() + "/" + t.getDescription() + "/" + ((Deadline) t).getBy());
-            }
-            if (t instanceof Event) {
-                fw.write("E/" + t.getStatusIconBinary() + "/" + t.getDescription() + "/" + ((Event) t).getFrom() + "/" + ((Event) t).getTo());
+            catch (DukeException e) {
+                ui.showError(e.toString());
             }
 
-            fw.write(System.lineSeparator());
-
-        }
-        fw.close();
-    }
-    public static void mark(String answer, ArrayList<Task> arrayList) throws DukeException {
-        if (answer.substring(5, answer.length()).isEmpty()) {
-            throw new DukeInvalidArgumentException("Mark cannot be empty");
-        }
-        int index = Integer.valueOf(answer.substring(5, answer.length()));
-        if (index <= 0 || index > arrayList.size()) {
-            throw new DukeInvalidIndexException("That index is out of bounds");
-        }
-        arrayList.get(index - 1).markAsDone();
-        System.out.println("I've marked this task as done: " + arrayList.get(index - 1));
-    }
-
-    public static void unmark(String answer, ArrayList<Task> arrayList) throws DukeException {
-        if (answer.substring(7, answer.length()).isEmpty()) {
-            throw new DukeInvalidArgumentException("Unmark cannot be empty");
-        }
-        int index = Integer.valueOf(answer.substring(7, answer.length()));
-
-        if (index <= 0 || index > arrayList.size()) {
-            throw new DukeInvalidIndexException("That index is out of bounds");
-        }
-        arrayList.get(index - 1).markAsUndone();
-        System.out.println("I've marked this task as not done yet: " + arrayList.get(index - 1 ));
-    }
-
-    public static void delete(String answer, ArrayList<Task> arrayList) throws DukeException {
-        if (answer.substring(7, answer.length()).isEmpty()) {
-            throw new DukeInvalidArgumentException("Delete cannot be empty");
-        }
-        int index = Integer.valueOf(answer.substring(7, answer.length()));
-        if (index <= 0 || index > arrayList.size()) {
-            throw new DukeInvalidIndexException("That index is out of bounds");
-        }
-        System.out.println("I've deleted this task: " + arrayList.get(index - 1 ));
-        arrayList.remove(index - 1);
-    }
-    public static void addTodo(String answer, ArrayList<Task> arrayList) throws DukeInvalidArgumentException {
-        if (answer.substring(5, answer.length()).isEmpty()) {
-            throw new DukeInvalidArgumentException("Todo cannot be empty");
         }
 
-        Task t = new Todo(answer.substring(5, answer.length()));
-        System.out.println("Meow! Just added: \n" + t);
-        arrayList.add(t);
-    }
-
-    public static void addDeadline(String answer, ArrayList<Task> arrayList) throws DukeInvalidArgumentException {
-        if (answer.substring(9, answer.length()).isEmpty()) {
-            throw new DukeInvalidArgumentException("Deadline cannot be empty");
-        }
-        Scanner scanner = new Scanner(System.in);
-        System.out.println("By when?");
-        String byString = scanner.nextLine();
-        if (byString.isEmpty()) {
-            throw new DukeInvalidArgumentException("By is empty, please input task again");
-        }
-        try {
-            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
-            LocalDateTime by = LocalDateTime.parse(byString, formatter);
-            Task t = new Deadline(answer.substring(9, answer.length()), by);
-            System.out.println("Meow! Just added: \n" + t);
-            arrayList.add(t);
-        } catch (DateTimeParseException e){
-            throw new DukeInvalidArgumentException("Wrong date/time format, please input task again");
-        }
 
     }
 
-    public static void addEvent(String answer, ArrayList<Task> arrayList) throws DukeInvalidArgumentException{
-        if (answer.substring(6, answer.length()).isEmpty()) {
-            throw new DukeInvalidArgumentException("Event cannot be empty");
-        }
 
-
-        Scanner scanner = new Scanner(System.in);
-        System.out.println("From?");
-        String fromString = scanner.nextLine();
-        if (fromString.isEmpty()) {
-            throw new DukeInvalidArgumentException("From is empty, please input task again");
-        }
-        try {
-            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
-            LocalDateTime from = LocalDateTime.parse(fromString, formatter);
-            System.out.println("To?");
-            String toString = scanner.nextLine();
-            if (toString.isEmpty()) {
-                throw new DukeInvalidArgumentException("To is empty, please input task again");
-            }
-
-            LocalDateTime to = LocalDateTime.parse(toString, formatter);
-            Task t = new Event(answer.substring(6, answer.length()), from, to);
-            System.out.println("Meow! Just added: \n" + t);
-            arrayList.add(t);
-        } catch (DateTimeParseException e){
-            throw new DukeInvalidArgumentException("Wrong date/time format, please input task again");
-        }
+    public static void main(String[] args) {
+        new Duke("src/main/data/duke.txt", "src/main/data").run();
 
     }
 
-    public static void list(ArrayList<Task> arrayList) {
-        for (int i = 1; i < arrayList.size() + 1; i++) {
-            System.out.println(i + ". " + arrayList.get(i - 1));
-        }
-    }
+
 
 
 }
