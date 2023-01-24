@@ -22,34 +22,34 @@ public class Duke {
                         ? Command.valueOf(splitCheck[0].toUpperCase())
                         : Command.INVALID;
                 switch(inputCommand) {
-                    case LIST:
-                        listTask();
-                        break;
-                    case MARK:
-                        mark(splitCheck);
-                        break;
-                    case UNMARK:
-                        unmark(splitCheck);
-                        break;
-                    case DELETE:
-                        delete(splitCheck);
-                        break;
-                    case TODO:
-                        todo(splitCheck);
-                        break;
-                    case DEADLINE:
-                        deadline(splitCheck);
-                        break;
-                    case EVENT:
-                        event(splitCheck);
-                        break;
-                    default:
-                        throw new DukeException(" ☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
+                case LIST:
+                    listTask();
+                    break;
+                case MARK:
+                    mark(splitCheck);
+                    break;
+                case UNMARK:
+                    unmark(splitCheck);
+                    break;
+                case DELETE:
+                    delete(splitCheck);
+                    break;
+                case TODO:
+                    todo(splitCheck);
+                    break;
+                case DEADLINE:
+                    deadline(splitCheck);
+                    break;
+                case EVENT:
+                    event(splitCheck);
+                    break;
+                default:
+                    throw new DukeException(" ☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
                 } //end of switch-case
 
             } catch (DukeException de) {
                 dukeSpeak(de.getMessage());
-            } 
+            }
         } // end of while-loop
 
         dukeSpeak("Bye. Hope to see you again soon!");
