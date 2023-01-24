@@ -33,9 +33,9 @@ public class DeleteCmd extends Command {
 
     // Acknowledge on UI that the task has been removed.
     public void uiReply() {
-        Ui.displayMsg("Noted. I've removed this task:\n" + 
-        Ui.indentString(this.task.toString(), 1) + "\n" +
-        Ui.numTaskToString(taskList.countTasks()));
+        Ui.displayMsg("Noted. I've removed this task:\n"
+                + Ui.indentString(this.task.toString(), 1) + "\n"
+                + Ui.numTaskToString(taskList.countTasks()));
     }
 
 }

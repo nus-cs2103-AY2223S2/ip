@@ -40,8 +40,8 @@ public class EventCmd extends Command {
     
     // Acknowlege on UI that the Deadline task has been added.
     public void uiReply() {
-        Ui.displayMsg("Got it. I've added this task:\n" + 
-        Ui.indentString(this.event.toString(), 1) + "\n" +
-        Ui.numTaskToString(taskList.countTasks()));
+        Ui.displayMsg("Got it. I've added this task:\n"
+                + Ui.indentString(this.event.toString(), 1) + "\n"
+                + Ui.numTaskToString(taskList.countTasks()));
     };
 }

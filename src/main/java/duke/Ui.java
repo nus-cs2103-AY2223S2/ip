@@ -26,7 +26,9 @@ public class Ui {
     public static void greetUser() {
         System.out.println("Hello I'm Duke! \nWhat can I do for you?");
         try {
-            if (isRunning) line = sc.nextLine();
+            if (isRunning) {
+                line = sc.nextLine();
+            }
         } catch (java.util.NoSuchElementException e) {
             isRunning = false;
         }
@@ -36,7 +38,9 @@ public class Ui {
     public static String getNextCommand() {
         System.out.println("");
         try {
-            if (isRunning) line = sc.nextLine();
+            if (isRunning) {
+                line = sc.nextLine();
+            } 
         } catch (java.util.NoSuchElementException e) {
             isRunning = false;
         }

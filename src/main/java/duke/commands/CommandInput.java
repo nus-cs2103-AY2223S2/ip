@@ -3,8 +3,6 @@ package duke.commands;
 import java.util.Arrays;
 import java.util.Optional;
 
-import duke.Parser;
-
 /**
  * Collection of acceptable commands that the user is allowed to enter.
  */
@@ -31,9 +29,9 @@ public enum CommandInput {
      * @return CommandInput type of corresponding command
      */
     public static CommandInput getCommandInput(String commandLine) {
-        String commandInput = Parser.parseCommandInput(commandLine);
+        String commandInput = commandLine.split(" ")[0];
         Optional<CommandInput> command = Arrays.stream(CommandInput.values()).filter(
-            cmd -> cmd.commandString.equals(commandInput)).findFirst();
+                cmd -> cmd.commandString.equals(commandInput)).findFirst();
         return command.isEmpty() ? UNRECOGNIZED_CMD : command.get();
     }
 
