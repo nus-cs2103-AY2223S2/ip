@@ -1,7 +1,9 @@
+package tasks;
+
 import java.time.LocalDateTime;
 
 public class Deadline extends Task {
-    private LocalDateTime endDate;
+    private final LocalDateTime endDate;
     public Deadline(String description, String endDate, boolean fromFile) {
         super(description);
         if (fromFile) {

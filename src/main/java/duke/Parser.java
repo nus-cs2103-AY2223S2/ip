@@ -1,3 +1,10 @@
+package duke;
+
+import exceptions.DukeException;
+import exceptions.InvalidCommandException;
+import exceptions.InvalidDataFileException;
+import exceptions.UnknownCommandException;
+
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 

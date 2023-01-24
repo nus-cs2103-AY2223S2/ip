@@ -5,10 +5,10 @@ import java.util.Scanner;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-public class Duke {
+public class duke.Duke {
     public static void main(String[] args) {
         Scanner input = new Scanner(System.in);
-        TaskList taskList = new TaskList();
+        duke.TaskList taskList = new duke.TaskList();
         String reply = "";
         String dataFolderPath = "data";
         String dataFilePath = dataFolderPath + "/duke.txt";
@@ -29,7 +29,7 @@ public class Duke {
                 Pattern deadlinePattern = Pattern.compile("(.*) /by (.*)");
                 Pattern eventPattern = Pattern.compile("(.*) /from (.*) /to (.*)");;
                 Matcher wholeStrMatcher, individualMatcher;
-                Task toAdd;
+                tasks.Task toAdd;
                 while (dataFile.hasNext()) {
                     dataLine = dataFile.nextLine();
                     wholeStrMatcher = wholeStrPattern.matcher(dataLine);
@@ -37,26 +37,26 @@ public class Duke {
                         // Group 0 is the whole matched string
                         switch (wholeStrMatcher.group(1)) {
                         case "T":
-                            toAdd = new ToDo(wholeStrMatcher.group(3));
+                            toAdd = new tasks.ToDo(wholeStrMatcher.group(3));
                             break;
                         case "D":
                             individualMatcher = deadlinePattern.matcher(wholeStrMatcher.group(3));
                             if (individualMatcher.find()) {
-                                toAdd = new Deadline(individualMatcher.group(1), individualMatcher.group(2), true);
+                                toAdd = new tasks.Deadline(individualMatcher.group(1), individualMatcher.group(2), true);
                             } else {
-                                throw new InvalidDataFileException();
+                                throw new exceptions.InvalidDataFileException();
                             }
                             break;
                         case "E":
                             individualMatcher = eventPattern.matcher(wholeStrMatcher.group(3));
                             if (individualMatcher.find()) {
-                                toAdd = new Event(individualMatcher.group(1), individualMatcher.group(2), individualMatcher.group(3), true);
+                                toAdd = new tasks.Event(individualMatcher.group(1), individualMatcher.group(2), individualMatcher.group(3), true);
                             } else {
-                                throw new InvalidDataFileException();
+                                throw new exceptions.InvalidDataFileException();
                             }
                             break;
                         default:
-                            throw new InvalidDataFileException();
+                            throw new exceptions.InvalidDataFileException();
                         }
 
                         if (wholeStrMatcher.group(2).equals("X")) {
@@ -71,7 +71,7 @@ public class Duke {
             System.out.println(e.getMessage());
         }
 
-        printTextWithLines("Hello! I'm Duke\nWhat can I do for you?");
+        printTextWithLines("Hello! I'm duke.Duke\nWhat can I do for you?");
 
         while (true) {
             reply = input.nextLine();
@@ -88,7 +88,7 @@ public class Duke {
                         taskList.setDone(taskNumber, true);
                         printTextWithLines("Nice! I've marked this task as done:\n  " + taskList.getTask(taskNumber));
                     } else {
-                        throw new InvalidCommandException("The task number of a mark command cannot be empty.");
+                        throw new exceptions.InvalidCommandException("The task number of a mark command cannot be empty.");
                     }
                 } else if (reply.startsWith("unmark")) {
                     Matcher matcher = compileAndMatch("unmark (.*)", reply);
@@ -97,7 +97,7 @@ public class Duke {
                         taskList.setDone(taskNumber, true);
                         printTextWithLines("OK, I've marked this task as not done yet:\n  " + taskList.getTask(taskNumber));
                     } else {
-                        throw new InvalidCommandException("The task number of an unmark command cannot be empty.");
+                        throw new exceptions.InvalidCommandException("The task number of an unmark command cannot be empty.");
                     }
                 } else if (reply.startsWith("delete")) {
                     Matcher matcher = compileAndMatch("delete (.*)", reply);
@@ -107,37 +107,37 @@ public class Duke {
                         taskList.deleteTask(taskNumber);
                         printTextWithLines("Noted. I've removed this task:\n  " + taskDescription + "\n" + taskList.describeLength());
                     } else {
-                        throw new InvalidCommandException("The task number to be deleted must be specified, and must be an integer.");
+                        throw new exceptions.InvalidCommandException("The task number to be deleted must be specified, and must be an integer.");
                     }
                 } else if (reply.startsWith("todo")) {
                     Matcher matcher = compileAndMatch("todo (.*)", reply);
                     if (matcher.find() && matcher.group(1).length() > 0) {
-                        Task task = new ToDo(matcher.group(1));
+                        tasks.Task task = new tasks.ToDo(matcher.group(1));
                         taskList.addTask(task);
                         printTextWithLines("Got it. I've added this task:\n  " + task + "\n" + taskList.describeLength());
                     } else {
-                        throw new InvalidCommandException("The description of a todo cannot be empty.");
+                        throw new exceptions.InvalidCommandException("The description of a todo cannot be empty.");
                     }
                 } else if (reply.startsWith("deadline")) {
                     Matcher matcher = compileAndMatch("deadline (.*) /by (.*)", reply);
                     if (matcher.find() && matcher.group(1).length() > 0 && matcher.group(2).length() > 0) {
-                        Task task = new Deadline(matcher.group(1), matcher.group(2), false);
+                        tasks.Task task = new tasks.Deadline(matcher.group(1), matcher.group(2), false);
                         taskList.addTask(task);
                         printTextWithLines("Got it. I've added this task:\n  " + task + "\n" + taskList.describeLength());
                     } else {
-                        throw new InvalidCommandException("The end date of a deadline cannot be empty.");
+                        throw new exceptions.InvalidCommandException("The end date of a deadline cannot be empty.");
                     }
                 } else if (reply.startsWith("event")) {
                     Matcher matcher = compileAndMatch("event (.*) /from (.*) /to (.*)", reply);
                     if (matcher.find() && matcher.group(1).length() > 0 && matcher.group(2).length() > 0 && matcher.group(3).length() > 0) {
-                        Task task = new Event(matcher.group(1), matcher.group(2), matcher.group(3), false);
+                        tasks.Task task = new tasks.Event(matcher.group(1), matcher.group(2), matcher.group(3), false);
                         taskList.addTask(task);
                         printTextWithLines("Got it. I've added this task:\n  " + task + "\n" + taskList.describeLength());
                     } else {
-                        throw new InvalidCommandException("An event must have a nonempty from date and a to date.");
+                        throw new exceptions.InvalidCommandException("An event must have a nonempty from date and a to date.");
                     }
                 } else {
-                    throw new UnknownCommandException();
+                    throw new exceptions.UnknownCommandException();
                 }
 
                 // After each command, save the current task list to the file

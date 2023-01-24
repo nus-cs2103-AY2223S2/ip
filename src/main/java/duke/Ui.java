@@ -1,3 +1,7 @@
+package duke;
+
+import tasks.Task;
+
 import java.util.Scanner;
 
 public class Ui {
@@ -8,7 +12,7 @@ public class Ui {
     }
 
     public void showGreeting() {
-        showTextWithLines("Hello! I'm Duke\nWhat can I do for you?");
+        showTextWithLines("Hello! I'm Duke.\nWhat can I do for you?");
     }
 
     public void showGoodbye() {

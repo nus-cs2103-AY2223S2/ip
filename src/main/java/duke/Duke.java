@@ -1,3 +1,10 @@
+package duke;
+import exceptions.DukeException;
+import tasks.Task;
+import tasks.ToDo;
+import tasks.Deadline;
+import tasks.Event;
+
 public class Duke {
     private final Ui ui;
     private final Storage storage;
