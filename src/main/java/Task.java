@@ -1,10 +1,14 @@
 public class Task {
     private static int numTasks = 0;
-    protected String description;
-    protected boolean isDone;
+    private String description;
+    private boolean isDone;
     public Task(String description){
         this.description = description;
         this.isDone = false;
+    }
+    public Task(String description, boolean isDone){
+        this.description = description;
+        this.isDone = isDone;
     }
     public static void addTask(){
         numTasks++;
@@ -20,6 +24,12 @@ public class Task {
     }
     public void setIsDone(boolean done){
         this.isDone = done;
+    }
+    public boolean getIsDone(){
+        return this.isDone;
+    }
+    public String getDescription(){
+        return this.description;
     }
     @Override
     public String toString() {
