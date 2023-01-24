@@ -7,7 +7,7 @@ import duke.commands.*;
  */
 public class Parser {
     private enum CMD {
-        BYE, LIST, MARK, UNMARK, TODO, DEADLINE, EVENT, DELETE;
+        BYE, LIST, MARK, UNMARK, TODO, DEADLINE, EVENT, DELETE, FIND;
     }
 
     /**
@@ -43,6 +43,9 @@ public class Parser {
                 // Fallthrough
             case DELETE:
                 return new Delete(cmdLine);
+                // Fallthrough
+            case FIND:
+                return new Find(cmdLine);
                 // Fallthrough
             }
         } catch (IllegalArgumentException e) {
