@@ -4,6 +4,7 @@ public class ListCommand extends Command {
 
     ListCommand() {
         this.isExit = false;
+        this.isSave = false;
     }
 
     @Override

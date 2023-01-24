@@ -1,15 +1,8 @@
-
 public class Deadline extends Task {
-    protected String deadline;
+    protected final String deadline;
 
     Deadline(String description, String deadline) {
         super(description);
-        this.deadline = deadline;
-        this.symbol = "D";
-    }
-
-    Deadline(String description, String isDone, String deadline) {
-        super(description, isDone);
         this.deadline = deadline;
         this.symbol = "D";
     }
@@ -20,7 +13,7 @@ public class Deadline extends Task {
     }
 
     @Override
-    public String getDataFormat() {
-        return this.combineData(super.getDataFormat(), this.deadline);
+    public String asDataFormat() {
+        return super.asDataFormat("by:" + this.deadline);
     }
 }

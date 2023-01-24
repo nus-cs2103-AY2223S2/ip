@@ -5,8 +5,8 @@ public class ToDo extends Task {
         this.symbol = "T";
     }
 
-    ToDo(String description, String isDone) {
-        super(description, isDone);
-        this.symbol = "T";
+    @Override
+    public String asDataFormat() {
+        return super.asDataFormat("");
     }
 }

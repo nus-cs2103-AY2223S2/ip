@@ -13,7 +13,7 @@ public abstract class Task {
     // constructor for preloaded tasks
     public Task(String description, String isDone) {
         this.description = description;
-        this.isDone = Integer.valueOf(isDone) == 1 ? true : false;
+        this.isDone = Integer.parseInt(isDone) == 1;
     }
 
     public String getStatusIcon() {
@@ -36,28 +36,20 @@ public abstract class Task {
         isDone = false;
     }
 
-    public String getDataFormat() {
-        String doneValue = isDone == true ? "1" : "0";
-        return combineData(this.symbol, doneValue, this.description);
-    }
+    public abstract String asDataFormat();
 
-    public String combineData(Object... objs) {
-        String SEPARATOR = " | ";
-        if (Objects.isNull(objs)) {
-            return "";
+    protected String asDataFormat(String... fields) {
+        String base = String.join(Storage.SEPARATOR, this.symbol, this.isDone() ? "1" : "0", this.description);
+        for (String s : fields) {
+            if (!s.isBlank()) {
+                base = String.join(Storage.SEPARATOR, base, s);
+            }
         }
-        StringBuilder result = new StringBuilder(objs[0].toString());
-        for (int i = 1; i < objs.length; i++) {
-            result.append(SEPARATOR);
-            result.append(objs[i]);
-        }
-        result.append("\n");
-        return result.toString();
+        return base;
     }
 
     @Override
     public String toString() {
         return "[" + this.symbol + "][" + this.getStatusIcon() +"] " + this.description;
     }
-
 }

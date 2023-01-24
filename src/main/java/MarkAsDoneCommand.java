@@ -2,6 +2,7 @@ public class MarkAsDoneCommand extends Command {
     public String markAtIndex;
     MarkAsDoneCommand(String index) {
         this.isExit = false;
+        this.isSave = true;
         this.markAtIndex = index;
     }
 

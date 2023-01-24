@@ -1,5 +1,5 @@
 public class InvalidStorageException extends Exception{
-    InvalidStorageException() {
-        super();
+    InvalidStorageException(String msg) {
+        super(msg);
     }
 }

@@ -3,6 +3,7 @@ public class MarkAsUndoneCommand extends Command {
 
     MarkAsUndoneCommand(String index) {
         this.isExit = false;
+        this.isSave = true;
         this.unmarkAtIndex = index;
     }
 

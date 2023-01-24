@@ -1,16 +1,14 @@
 import java.io.*;
 import java.nio.file.Files;
 import java.nio.file.Path;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.HashMap;
-import java.util.List;
+import java.util.*;
 
 public class Storage {
-    private static final String SEPARATOR = " \\| ";
+    public static final String SEPARATOR_REGEX = " \\| ";
+    public static final String SEPARATOR = " | ";
+    public static final String SUB_SEPARATOR = ":";
     private Path path;
-    private File file;
-    private List<String> loadErrors = null;
+    private final File file;
 
     Storage(Path path) throws IOException {
         this.path = path;
@@ -23,25 +21,7 @@ public class Storage {
         }
     }
 
-    public List<Task> load() {
-        List<Task> list = new ArrayList<>();
-        try {
-            BufferedReader br = new BufferedReader(new FileReader(this.file));
-            String line = br.readLine();
-            int taskCounter = 0;
-            while (line != null) {
-                list.add(getTaskFromStorage(line));
-                line = br.readLine();
-            }
-
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-        return list;
-    }
-
-
-    private Task getTaskFromStorage (String s) throws InvalidStorageException {
+    public int loadIntoTaskList(TaskList tl) throws Exception {
         /*
         Coverts a single line in the storage into a Task
         It is assumed that a line in storage follows the format specified in docs.
@@ -52,69 +32,59 @@ public class Storage {
         E | 1 | project meeting | from:1pm | to:3pm
          */
 
-        List<String> args = Arrays.asList(s.split(SEPARATOR));
-        // get compulsory arguments for task
         try {
-            String symbol = args.get(0);
-            String isDone = args.get(1);
-            String desc = args.get(2);
-            return new ToDo(desc, isDone);
+            BufferedReader br = new BufferedReader(new FileReader(this.file));
+            String line = br.readLine();
+            int totalTaskCounter = 0;
+            int totalSuccess = 0;
+            while (line != null) {
+                totalTaskCounter++;
+                List<String> args = Arrays.asList(line.split(SEPARATOR_REGEX));
 
-        } catch (IndexOutOfBoundsException e) {
-            throw new InvalidStorageException();
-        }
+                // get task type
+                String symbol = args.get(0);
+                TaskType.Type taskType = TaskType.symbolToTask.get(symbol);
 
-    }
+                // get arg map
+                Map<String,String> argValues = new HashMap<>();
+                boolean isDone = args.get(1).equals("1");
+                argValues.put("Description", args.get(2));
 
-    private String writeTaskToStorage (Task t) {
-        return null;
-    }
-/*
-    public void writeData() {
-        // create data String
-        StringBuilder data = new StringBuilder("");
-        for (Task t: this.list) {
-            data.append(t.getDataFormat() + "\n");
-        }
-        String output = data.toString();
-
-        // check if ../data folder exists - if not, create it
-        Path dirPath = Paths.get("..", "data");
-        File dir = new File(dirPath.toString());
-        if (!Files.exists(dirPath)) {
-            dir.mkdir();
-        }
-
-        // enumerate the number of txt files
-        File[] dirList = dir.listFiles();
-        int fileCounter = 0;
-        if (dirList != null) {
-            for (File f : dirList) {
-                if (f.getPath().endsWith(".txt")) {
-                    fileCounter++;
+                // remaining named arguments
+                if (args.size() > 3) {
+                    for (String pair : args.subList(3,args.size())) {
+                        String[] split = pair.split(SUB_SEPARATOR,2);
+                        argValues.put(split[0], split[1]);
+                    }
                 }
-            }
-        }
 
-        File dataFile = new File(dir.toString(), "log-" + fileCounter);
-        PrintWriter p = null;
-        try {
-            p = new PrintWriter(dataFile);
-        } catch(Exception e) {
-            e.getStackTrace();
-        }
-
-        try {
-            out = new PrintWriter("../data/result.txt");
-        } catch (FileNotFoundException e) {
-            // create file in data folder if it does not exist
-            File file = new File("../result")
-        } finally {
-            if (Objects.isNull(out)) {
-                out.close();
+                try {
+                    if (isDone) {
+                        tl.addDoneTask(taskType, argValues);
+                    } else {
+                        tl.addTask(taskType, argValues);
+                    }
+                    totalSuccess++;
+                } catch (Exception e) {
+                    throw new Exception("Task number " + totalTaskCounter + " failed to load.");
+                }
+                line = br.readLine();
             }
+            return totalSuccess;
+        } catch (Exception e) {
+            throw e;
         }
     }
 
- */
+    public int saveToStorage(TaskList tl) throws Exception {
+        BufferedWriter br = new BufferedWriter(new FileWriter(this.file));
+        for (Task task : tl.getAllTasks()) {
+            String data = task.asDataFormat();
+            br.write(data);
+            br.newLine();
+        }
+        br.close();
+        return 1;
+    }
+
 }
