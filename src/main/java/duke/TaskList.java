@@ -9,6 +9,11 @@ import java.util.List;
 public class TaskList implements Serializable {
     private final ArrayList<Task> list = new ArrayList<>();
 
+    /**
+     * Adds a to-do into the TaskList
+     *
+     * @param desc Description of to-do
+     */
     void addTodo(String desc) {
         try {
             list.add(new ToDo(desc));
@@ -18,6 +23,13 @@ public class TaskList implements Serializable {
         }
     }
 
+    /**
+     * Adds an event into the TaskList
+     *
+     * @param desc Description of event
+     * @param from start time of event
+     * @param to   end time of event
+     */
     void addEvent(String desc, String from, String to) {
         try {
             list.add(new Event(desc, from, to));
@@ -27,6 +39,12 @@ public class TaskList implements Serializable {
         }
     }
 
+    /**
+     * Adds a deadline task into the TaskList
+     *
+     * @param desc     Description of to-do
+     * @param deadline deadline of task
+     */
     void addDeadline(String desc, String deadline) {
         try {
             list.add(new Deadline(desc, deadline));
@@ -36,6 +54,11 @@ public class TaskList implements Serializable {
         }
     }
 
+    /**
+     * Marks a task as done
+     *
+     * @param index index of task
+     */
     void mark(int index) {
         try {
             list.get(index).setIsDone(true);
@@ -44,6 +67,11 @@ public class TaskList implements Serializable {
         }
     }
 
+    /**
+     * Marks a task as not done
+     *
+     * @param index index of task
+     */
     void unmark(int index) {
         try {
             list.get(index).setIsDone(false);
@@ -52,6 +80,11 @@ public class TaskList implements Serializable {
         }
     }
 
+    /**
+     * Deletes a task
+     *
+     * @param index index of task
+     */
     void delete(int index) {
         list.remove(index);
     }
