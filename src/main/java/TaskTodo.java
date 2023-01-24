@@ -13,4 +13,13 @@ public class TaskTodo extends DukeTask{
     public String toString() {
         return "[T]" + super.toString();
     }
+
+    @Override
+    public String toDBSchema() {
+        return String.format(
+                "%s|%s",
+                "T",
+                super.toDBSchema()
+        );
+    }
 }

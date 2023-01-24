@@ -18,4 +18,14 @@ public class TaskEvent extends DukeTask{
         return "[E]" + super.toString()
                 + String.format(" (from: %s to: %s)", this.from, this.to);
     }
+
+    @Override
+    public String toDBSchema() {
+        return String.format(
+                "%s|%s|%s|%s",
+                "E",
+                super.toDBSchema(),
+                this.from, this.to
+        );
+    }
 }

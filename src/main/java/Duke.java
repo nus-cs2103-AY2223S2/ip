@@ -9,31 +9,32 @@ import java.util.Scanner;
  * AY2223-S2 CS2103T
  */
 public class Duke {
-//    private static String mascot =
-//            "⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⣰⣷⣦⡀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀\n" +
-//            "⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢹⣧⠙⢿⣦⡀⠀⠀⠀⠀⠀⠀⠀⣠⣶⣦⠀⠀⠀⠀⠀⠀\n" +
-//            "⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢸⣿⠀⠀⠙⢿⣦⡀⠀⠀⠀⢀⣾⡿⠉⣿⡄⠀⠀⠀⠀⠀\n" +
-//            "⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢸⣿⠀⠀⠀⠀⠙⣿⣄⣠⣴⡿⠋⠀⠀⣿⡇⠀⠀⠀⠀⠀\n" +
-//            "⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢸⣿⠀⠀⠀⠀⠀⠈⠿⠟⠉⠀⠀⠀⢀⣿⠇⠀⠀⠀⠀⠀\n" +
-//            "⠀⠀⠀⣿⡿⠿⠿⠿⠷⣶⣾⡿⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢸⣿⣤⣤⣴⣶⣶⡀\n" +
-//            "⠀⠀⠀⠹⣿⡀⠀⠀⠀⠀⠀⠀⢀⡤⠖⠚⠉⠉⠉⠉⠛⠲⣄⠀⠈⠉⠉⠉⠁⣼⡟⠀\n" +
-//            "⠀⠀⠀⠀⠹⣷⡀⠀⠀⠀⢀⡔⠉⠀⠀⠀⠀⠀⠀⠀⠀⠀⠈⠳⡄⠀⠀⢀⣼⡟⠀⠀\n" +
-//            "⠀⠀⠀⠀⠀⢹⣷⠀⠀⢀⡎⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢹⡀⢠⣾⡏⠀⠀⠀\n" +
-//            "⠀⢀⣠⣴⡾⠟⠋⠀⠀⣸⠀⠀⠀⣴⣒⣒⣛⣛⣛⣋⣉⣉⣉⣙⣛⣷⠀⠙⠿⣶⣤⡀\n" +
-//            "⣾⣿⡋⠁⠀⠀⠀⠀⠀⡏⠀⠀⡄⠉⠉⠁⠀⠈⢹⢨⠃⠀⠀⠀⠀⠙⡄⠀⠀⣨⣿⠟\n" +
-//            "⠈⠛⠿⣷⣦⣀⠀⠀⠀⡇⠀⠸⡟⠛⠿⠛⠛⠛⢻⢿⠋⠹⠟⠉⠉⠙⡇⣠⣾⠟⠁⠀\n" +
-//            "⠀⠀⠀⢀⣽⣿⠇⠀⠀⡇⠀⠀⠳⣄⣀⠀⣀⣠⠞⠈⢷⣄⣀⣀⣠⣾⠁⢿⣧⡀⠀⠀\n" +
-//            "⠀⢠⣴⡿⠋⠁⠀⠀⢀⡧⠄⠀⠦⣀⣈⣉⠁⠀⠠⡀⠘⡆⠠⠤⠴⢿⣄⠀⠙⣿⣦⠀\n" +
-//            "⠀⠹⢿⣦⣤⣀⠀⢰⠃⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠳⣤⠇⠀⠀⠀⣼⢘⣷⡿⠟⠋⠀\n" +
-//            "⠀⠀⠀⠈⠉⣿⡇⠈⠣⣄⡀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢀⡿⠻⣿⡀⠀⠀⠀\n" +
-//            "⠀⠀⠀⠀⢸⣿⣤⣤⣤⣤⢧⠀⢀⡆⣠⠴⠒⠋⢹⠋⠉⢹⠗⠒⠄⣷⣾⡿⠇⠀⠀⠀\n" +
-//            "⠀⠀⠀⠀⠀⠉⠉⠉⣿⣇⣈⣆⠀⠳⠤⠀⠀⠀⠈⣇⡖⡍⠀⠠⣾⣿⡿⠇⠀⠀⠀⠀\n" +
-//            "⠀⠀⠀⠀⠀⠀⠀⠀⠛⠛⠛⢻⣷⣄⠀⠀⠀⠀⠁⠉⠀⠀⣠⣾⠟⠀⠀⠀⠀⠀⠀⠀\n" +
-//            "⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⣀⣉⣿⣷⠲⠤⠤⠤⣤⣶⣿⣟⠁⠀⠀⠀⠀⠀⠀⠀⠀\n" +
-//            "⠀⠀⠀⠀⠀⠀⢀⣴⣶⡿⠿⠛⠛⢋⢹⡦⣄⣀⡤⢿⢉⠛⠛⠿⣷⣦⠀⠀⠀⠀⠀⠀\n" +
-//            "⠀⠀⠀⠀⠀⠀⣿⠏⠀⠀⠀⠀⢀⠇⠈⡇⠀⠀⠀⠘⡎⣆⠀⠀⠀⢻⣧⠀⠀⠀⠀⠀\n" +
-//            "⠀⠀⠀⠀⠀⠈⠿⣶⣶⣶⣶⣶⣾⣶⣾⣷⣶⣶⣶⣶⣷⣾⣷⣶⣶⣾⡿";
+    /*
     private static String mascot =
+            "⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⣰⣷⣦⡀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀\n" +
+            "⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢹⣧⠙⢿⣦⡀⠀⠀⠀⠀⠀⠀⠀⣠⣶⣦⠀⠀⠀⠀⠀⠀\n" +
+            "⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢸⣿⠀⠀⠙⢿⣦⡀⠀⠀⠀⢀⣾⡿⠉⣿⡄⠀⠀⠀⠀⠀\n" +
+            "⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢸⣿⠀⠀⠀⠀⠙⣿⣄⣠⣴⡿⠋⠀⠀⣿⡇⠀⠀⠀⠀⠀\n" +
+            "⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢸⣿⠀⠀⠀⠀⠀⠈⠿⠟⠉⠀⠀⠀⢀⣿⠇⠀⠀⠀⠀⠀\n" +
+            "⠀⠀⠀⣿⡿⠿⠿⠿⠷⣶⣾⡿⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢸⣿⣤⣤⣴⣶⣶⡀\n" +
+            "⠀⠀⠀⠹⣿⡀⠀⠀⠀⠀⠀⠀⢀⡤⠖⠚⠉⠉⠉⠉⠛⠲⣄⠀⠈⠉⠉⠉⠁⣼⡟⠀\n" +
+            "⠀⠀⠀⠀⠹⣷⡀⠀⠀⠀⢀⡔⠉⠀⠀⠀⠀⠀⠀⠀⠀⠀⠈⠳⡄⠀⠀⢀⣼⡟⠀⠀\n" +
+            "⠀⠀⠀⠀⠀⢹⣷⠀⠀⢀⡎⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢹⡀⢠⣾⡏⠀⠀⠀\n" +
+            "⠀⢀⣠⣴⡾⠟⠋⠀⠀⣸⠀⠀⠀⣴⣒⣒⣛⣛⣛⣋⣉⣉⣉⣙⣛⣷⠀⠙⠿⣶⣤⡀\n" +
+            "⣾⣿⡋⠁⠀⠀⠀⠀⠀⡏⠀⠀⡄⠉⠉⠁⠀⠈⢹⢨⠃⠀⠀⠀⠀⠙⡄⠀⠀⣨⣿⠟\n" +
+            "⠈⠛⠿⣷⣦⣀⠀⠀⠀⡇⠀⠸⡟⠛⠿⠛⠛⠛⢻⢿⠋⠹⠟⠉⠉⠙⡇⣠⣾⠟⠁⠀\n" +
+            "⠀⠀⠀⢀⣽⣿⠇⠀⠀⡇⠀⠀⠳⣄⣀⠀⣀⣠⠞⠈⢷⣄⣀⣀⣠⣾⠁⢿⣧⡀⠀⠀\n" +
+            "⠀⢠⣴⡿⠋⠁⠀⠀⢀⡧⠄⠀⠦⣀⣈⣉⠁⠀⠠⡀⠘⡆⠠⠤⠴⢿⣄⠀⠙⣿⣦⠀\n" +
+            "⠀⠹⢿⣦⣤⣀⠀⢰⠃⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠳⣤⠇⠀⠀⠀⣼⢘⣷⡿⠟⠋⠀\n" +
+            "⠀⠀⠀⠈⠉⣿⡇⠈⠣⣄⡀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢀⡿⠻⣿⡀⠀⠀⠀\n" +
+            "⠀⠀⠀⠀⢸⣿⣤⣤⣤⣤⢧⠀⢀⡆⣠⠴⠒⠋⢹⠋⠉⢹⠗⠒⠄⣷⣾⡿⠇⠀⠀⠀\n" +
+            "⠀⠀⠀⠀⠀⠉⠉⠉⣿⣇⣈⣆⠀⠳⠤⠀⠀⠀⠈⣇⡖⡍⠀⠠⣾⣿⡿⠇⠀⠀⠀⠀\n" +
+            "⠀⠀⠀⠀⠀⠀⠀⠀⠛⠛⠛⢻⣷⣄⠀⠀⠀⠀⠁⠉⠀⠀⣠⣾⠟⠀⠀⠀⠀⠀⠀⠀\n" +
+            "⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⣀⣉⣿⣷⠲⠤⠤⠤⣤⣶⣿⣟⠁⠀⠀⠀⠀⠀⠀⠀⠀\n" +
+            "⠀⠀⠀⠀⠀⠀⢀⣴⣶⡿⠿⠛⠛⢋⢹⡦⣄⣀⡤⢿⢉⠛⠛⠿⣷⣦⠀⠀⠀⠀⠀⠀\n" +
+            "⠀⠀⠀⠀⠀⠀⣿⠏⠀⠀⠀⠀⢀⠇⠈⡇⠀⠀⠀⠘⡎⣆⠀⠀⠀⢻⣧⠀⠀⠀⠀⠀\n" +
+            "⠀⠀⠀⠀⠀⠈⠿⣶⣶⣶⣶⣶⣾⣶⣾⣷⣶⣶⣶⣶⣷⣾⣷⣶⣶⣾⡿"; */
+    private static final String mascot =
             "RICKRICKRICKRICKRICKKKKK\n"
         +   "RICK    RICK    RICKKKKK\n"
         +   "RICKRICKRICKRICKRICKKKKK\n"
@@ -45,11 +46,6 @@ public class Duke {
      *             arguments to the initial app run command.
      */
     public static void main(String[] args) {
-        String logo = " ____        _        \n"
-                + "|  _ \\ _   _| | _____ \n"
-                + "| | | | | | | |/ / _ \\\n"
-                + "| |_| | |_| |   <  __/\n"
-                + "|____/ \\__,_|_|\\_\\___|\n";
         System.out.println("Hello from\n" + mascot);
         greet();
         operate();
@@ -106,32 +102,32 @@ public class Duke {
      */
     private static void operateSimpleCommand(String cmd, DukeStore ds, Scanner sc) {
         switch (cmd) {
-            case "bye":
-                cleanup(sc);
-                String message = "It was okay serving you. Might/might not see you again." + "\n"
-                        + "Exiting...";
-                DukeFormatter.section(message);
-                System.exit(0);
+        case "bye":
+            cleanup(sc);
+            String message = "It was okay serving you. Might/might not see you again." + "\n"
+                    + "Exiting...";
+            DukeFormatter.section(message);
+            System.exit(0);
 
-            case "list":
-                DukeFormatter.section(ds.toString());
-                return;
+        case "list":
+            DukeFormatter.section(ds.toString());
+            return;
 
-            case "todo":
-                DukeFormatter.error(new DukeEmptyTaskException(DukeEmptyTaskException.TaskType.Todo));
-                return;
-            case "deadline":
-                DukeFormatter.error(new DukeEmptyTaskException(DukeEmptyTaskException.TaskType.Deadline));
-                return;
-            case "event":
-                DukeFormatter.error(new DukeEmptyTaskException(DukeEmptyTaskException.TaskType.Event));
-                return;
-            default:
-                if (cmd.matches("(mark|unmark|delete)")) {
-                    DukeFormatter.error(new DukeTaskIndexMissingException(cmd));
-                } else {
-                    DukeFormatter.error(new DukeInvalidCommandException());
-                }
+        case "todo":
+            DukeFormatter.error(new DukeEmptyTaskException(DukeEmptyTaskException.TaskType.Todo));
+            return;
+        case "deadline":
+            DukeFormatter.error(new DukeEmptyTaskException(DukeEmptyTaskException.TaskType.Deadline));
+            return;
+        case "event":
+            DukeFormatter.error(new DukeEmptyTaskException(DukeEmptyTaskException.TaskType.Event));
+            return;
+        default:
+            if (cmd.matches("(mark|unmark|delete)")) {
+                DukeFormatter.error(new DukeTaskIndexMissingException(cmd));
+            } else {
+                DukeFormatter.error(new DukeInvalidCommandException());
+            }
         }
     }
 
@@ -144,21 +140,21 @@ public class Duke {
      */
     private static void twoArgCommand(String cmd, String param, DukeStore ds) {
         switch (cmd) {
-            case "todo":
-                todo(param, ds);
+        case "todo":
+            todo(param, ds);
+            return;
+        case "deadline":
+            deadline(param, ds);
+            return;
+        case "event":
+            event(param, ds);
+            return;
+        default:
+            if (cmd.matches("(mark|unmark|delete)")) {
+                manipulateTask(cmd, param, ds);
                 return;
-            case "deadline":
-                deadline(param, ds);
-                return;
-            case "event":
-                event(param, ds);
-                return;
-            default:
-                if (cmd.matches("(mark|unmark|delete)")) {
-                    manipulateTask(cmd, param, ds);
-                    return;
-                }
-                DukeFormatter.error(new DukeInvalidCommandException());
+            }
+            DukeFormatter.error(new DukeInvalidCommandException());
         }
     }
 
@@ -173,14 +169,14 @@ public class Duke {
         try {
             int idx = Integer.parseInt(param);
             switch (cmd) {
-                case "mark":
-                    mark(idx, ds);
-                    return;
-                case "unmark":
-                    unMark(idx, ds);
-                    return;
-                case "delete":
-                    delete(idx, ds);
+            case "mark":
+                mark(idx, ds);
+                return;
+            case "unmark":
+                unMark(idx, ds);
+                return;
+            case "delete":
+                delete(idx, ds);
             }
         } catch (NumberFormatException e) {
             DukeFormatter.error(new DukeException(

@@ -2,9 +2,6 @@ import DukeExceptions.DukeException;
 import DukeExceptions.DukeStoreFullException;
 import DukeExceptions.DukeStoreInvalidAccessException;
 
-import java.util.ArrayList;
-import java.util.Objects;
-
 /**
  * The main store class to store user input into the Duke system.
  *
@@ -14,7 +11,9 @@ import java.util.Objects;
 public class DukeStore {
     private static final int recordSize = 100;
     private static int ID = 0;
-    private final ArrayList<DukeTask> records = new ArrayList<>(recordSize);
+
+    //The store instance that writes to storage
+    private DukeFileWriter dfw;
 
     //The unique ID of this store
     private int id;
@@ -22,6 +21,7 @@ public class DukeStore {
     private DukeStore() {
         this.id = DukeStore.ID + 1;
         DukeStore.ID += 1;
+        this.dfw = DukeFileWriter.create();
     }
 
     /**
@@ -41,21 +41,22 @@ public class DukeStore {
      * can no longer accept any more tasks.
      */
     public void add(DukeTask input) throws DukeStoreFullException {
-        if (this.records.size() > recordSize - 1) {
+        long count;
+        if (this.dfw.size() >= recordSize) {
             throw new DukeStoreFullException();
         }
         try {
-            this.records.add(Objects.requireNonNull(input));
+            count = this.dfw.write(input.toDBSchema());
         } catch (NullPointerException e) {
             DukeFormatter.error(new DukeException("An internal system error occurred"));
             return;
         }
 
         String message = "Got it. I've added this task:\n"
-                + "  " + this.records.get(this.records.size() - 1).toString()
+                + "  " + input.toString()
                 + String.format("\nNow you have %s task%s in the list.",
-                            this.records.size(),
-                            this.records.size() == 1 ? "" : "s"
+                            count,
+                            count == 1L ? "" : "s"
                     );
         DukeFormatter.section(message);
     }
@@ -68,11 +69,11 @@ public class DukeStore {
      * invalid index was provided.
      */
     public void mark(int i) throws DukeStoreInvalidAccessException {
-        if (i < 0 || i >= this.records.size()) { //Unassigned, invalid index
+        if (i < 0 || i >= this.dfw.size()) { //Unassigned, invalid index
             throw new DukeStoreInvalidAccessException();
         }
-        this.records.get(i).setDone();
-        String message = "Nice! I've marked this task as done:\n" + "  " + this.records.get(i);
+        DukeTask task = this.dfw.setDone(i, true);
+        String message = "Nice! I've marked this task as done:\n" + "  " + task;
         DukeFormatter.section(message);
     }
 
@@ -84,11 +85,11 @@ public class DukeStore {
      * invalid index was provided.
      */
     public void unMark(int i) throws DukeStoreInvalidAccessException {
-        if (i < 0 || i >= this.records.size()) { //Unassigned, invalid index
+        if (i < 0 || i >= this.dfw.size()) { //Unassigned, invalid index
             throw new DukeStoreInvalidAccessException();
         }
-        this.records.get(i).markUndone();
-        String message = "OK, I've marked this task as not done yet:\n" + "  " + this.records.get(i);
+        DukeTask task = this.dfw.setDone(i, false);
+        String message = "OK, I've marked this task as not done yet:\n" + "  " + task;
         DukeFormatter.section(message);
     }
 
@@ -100,25 +101,19 @@ public class DukeStore {
      * invalid index was provided.
      */
     public void delete(int i) throws DukeStoreInvalidAccessException {
-        if (i < 0 || i >= this.records.size()) {
+        long size = this.dfw.size();
+        if (i < 0 || i >= size) {
             throw new DukeStoreInvalidAccessException();
         }
-        DukeTask task = this.records.remove(i);
+        DukeTask task = this.dfw.delete(i);
         String message = "Noted. I've removed this task:\n" + "  " + task
-                + String.format("\nNow you have %s task%s in the list.", this.records.size(),
-                this.records.size() == 1? "": "s");
+                + String.format("\nNow you have %s task%s in the list.", size - 1,
+                size - 1 == 1L? "": "s");
         DukeFormatter.section(message);
     }
 
     @Override
     public String toString() {
-        StringBuilder out = new StringBuilder();
-        if (this.records.size() == 0) {
-            return "No records are added yet. Add some by typing them!";
-        }
-        for (int i = 0; i < this.records.size(); i++) {
-            out.append(String.format("%s. %s\n", i + 1, this.records.get(i)));
-        }
-        return out.toString();
+        return this.dfw.toList();
     }
 }

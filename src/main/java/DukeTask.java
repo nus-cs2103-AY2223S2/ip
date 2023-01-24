@@ -1,3 +1,5 @@
+import java.util.Arrays;
+
 /**
  * The abstraction behind the tasks stored by the Duke chat-bot.
  *
@@ -37,5 +39,52 @@ public abstract class DukeTask {
         return String.format(
                 "[%s] %s", (this.isDone ? "X": " "), this.value
         );
+    }
+
+    /**
+     * Formats this task as a "|" separated string to be stored
+     * in a file storage.
+     *
+     * @return The formatted string.
+     */
+    public String toDBSchema() {
+        return String.format(
+                "%s|%s",
+                this.isDone? 1 : 0,
+                this.value
+        );
+    }
+
+    /**
+     * Given an object read from the file storage, parses it
+     * and returns the appropriate task.
+     *
+     * @param o The object read from file storage.
+     * @return The corresponding task record.
+     */
+    public static DukeTask fromDBSchema(Object o) {
+        String[] s = o.toString().split("\\|");
+        boolean isDone = s[1].equals("1");
+        switch (s[0]) {
+        case "E":
+            DukeTask event = new TaskEvent(s[2], s[3], s[4]);
+            if (isDone) {
+                event.setDone();
+            }
+            return event;
+        case "D":
+            DukeTask deadline = new TaskDeadline(s[2], s[3]);
+            if (isDone) {
+                deadline.setDone();
+            }
+            return deadline;
+        case "T":
+            DukeTask todo = new TaskTodo(s[2]);
+            if (isDone) {
+                todo.setDone();
+            }
+            return todo;
+        }
+        return null;
     }
 }

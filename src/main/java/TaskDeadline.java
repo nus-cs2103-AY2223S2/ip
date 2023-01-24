@@ -23,4 +23,14 @@ public class TaskDeadline extends DukeTask{
         return "[D]" + super.toString()
                 + String.format(" (by: %s)", this.deadline);
     }
+
+    @Override
+    public String toDBSchema() {
+        return String.format(
+                "%s|%s|%s",
+                "D",
+                super.toDBSchema(),
+                this.deadline
+        );
+    }
 }
