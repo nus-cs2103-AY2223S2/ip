@@ -1,4 +1,4 @@
-package duke.dukeException;
+package duke.dukeexception;
 
 /**
  * A special exception used by the Duke class.

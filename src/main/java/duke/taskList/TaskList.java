@@ -1,14 +1,13 @@
-package duke.taskList;
+package duke.tasklist;
 
 import java.util.ArrayList;
 
-import duke.task.Task;
-import duke.task.Todo;
+import duke.dukeexception.DukeException;
+import duke.parser.Parser.Command;
 import duke.task.Deadline;
 import duke.task.Event;
-import duke.parser.Parser.Command;
-
-import duke.dukeException.DukeException;
+import duke.task.Task;
+import duke.task.Todo;
 
 /**
  * TaskList object that contains all the tasks currently
@@ -54,6 +53,8 @@ public class TaskList {
             System.out.println("    " + list.get(list.size() - 1).toString());
             System.out.println("Now you have " + list.size() + " tasks in the list.");
             break;
+        default:
+            break;
         }
     }
 
@@ -64,7 +65,7 @@ public class TaskList {
      */
     public void deleteTask(String[] contents) throws DukeException {
         int index = Integer.parseInt(contents[1].replaceAll("[^0-9]", "")) - 1;
-        if ((index < 0) | (index > (list.size() - 1)) ) {
+        if ((index < 0) | (index > (list.size() - 1))) {
             // Checks if provided index is in range.
             throw new DukeException("index");
         } else {
@@ -85,7 +86,7 @@ public class TaskList {
         // User input: mark x
         // Extracts the numbered item from the user input string
         int index = Integer.parseInt(contents[1].replaceAll("[^0-9]", "")) - 1;
-        if ((index < 0) | (index > (list.size() - 1)) ) {
+        if ((index < 0) | (index > (list.size() - 1))) {
             // Checks if provided index is in range.
             throw new DukeException("index");
         } else {
@@ -103,7 +104,7 @@ public class TaskList {
      */
     public void unmarkTask(String[] contents) throws DukeException {
         int index = Integer.parseInt(contents[1].replaceAll("[^0-9]", "")) - 1;
-        if ((index < 0) | (index > (list.size() - 1)) ) {
+        if ((index < 0) | (index > (list.size() - 1))) {
             // Checks if provided index is in range.
             throw new DukeException("index");
         } else {

@@ -1,13 +1,15 @@
 package duke.parser;
 
-import duke.dukeException.DukeException;
+import duke.dukeexception.DukeException;
 
 /**
  * A parser object that makes sense of user commands.
  */
 public class Parser {
-    // The various possible commands
-   public enum Command {
+    /**
+     * Commands that can be used.
+     */
+    public enum Command {
         TODO, DEADLINE, EVENT, LIST,
         MARK, UNMARK, DELETE, BYE, UNKNOWN
     }

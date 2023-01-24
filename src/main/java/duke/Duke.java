@@ -1,14 +1,14 @@
 package duke;
 
-import duke.dukeException.DukeException;
+import java.time.format.DateTimeParseException;
+import java.util.Scanner;
+
+import duke.dukeexception.DukeException;
 import duke.parser.Parser;
 import duke.parser.Parser.Command;
 import duke.storage.Storage;
-import duke.taskList.TaskList;
-import duke.dukeException.UI.Ui;
-
-import java.time.format.DateTimeParseException;
-import java.util.Scanner;
+import duke.tasklist.TaskList;
+import duke.ui.Ui;
 
 /**
  * A chatbot with functionality to add or remove different

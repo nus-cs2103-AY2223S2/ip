@@ -1,4 +1,4 @@
-package duke.dukeException.UI;
+package duke.ui;
 
 /**
  * UI that deals with interactions.
