@@ -18,13 +18,11 @@ public class Event extends Task{
             System.out.println(" " + "____________________________________________________________");
         }
     }
-
     @Override
     public String toString() {
         return "[E]" + "[" + getStatusIcon() + "] " + getDescription() +
                 " (" + "from: " + this.from + " " + "to: " + this.to + ")";
     }
-
     @Override
     public String file() {
         String status = isDone? "1" : "0";

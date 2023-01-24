@@ -2,4 +2,3 @@ T | 1 | read book
 D | 0 | return book | June 6th
 T | 0 | join sports club
 T | 1 | hfkds
-E | 1 | ji |  mon |  tues
