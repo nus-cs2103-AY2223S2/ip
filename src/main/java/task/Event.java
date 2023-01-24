@@ -1,12 +1,10 @@
 package task;
 
-import task.Task;
-
-public class Events extends Task {
+public class Event extends Task {
 
     String start;
     String end;
-    public Events(String description, String start, String end) {
+    public Event(String description, String start, String end) {
         super(description);
         this.start = start;
         this.end = end;

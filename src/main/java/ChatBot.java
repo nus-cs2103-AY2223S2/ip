@@ -1,8 +1,10 @@
-import task.Deadlines;
-import task.Events;
+import command.DeleteCommand;
+import task.Deadline;
+import task.Event;
 import task.TaskManager;
-import task.ToDos;
+import task.ToDo;
 import ui.WelcomeUI;
+import util.DukeException;
 
 import java.util.*;
 
@@ -48,10 +50,6 @@ public class ChatBot {
                     case "bye":
                         System.out.println("ByeBye! Come play with me again!");
                         break loop;
-                    case "menu":
-                        //NOT WORKING
-                        taskManager.getTaskMenu();
-                        break;
                     case "":
                         continue;
                     default:
@@ -79,7 +77,8 @@ public class ChatBot {
                                 taskManager.uncheckTask(index);
                                 break;
                             case "delete":
-                                taskManager.deleteTask(index);
+                                DeleteCommand dc = new DeleteCommand(ip, taskManager);
+                                dc.executeDeleteCommand();
                                 break;
                             default:
                                 System.out.println("I haven't learnt this command yet!\n" +
@@ -88,12 +87,14 @@ public class ChatBot {
                         }
                     } catch (IndexOutOfBoundsException e) {
                         System.out.println("Item does not exist in list! Please check your list again.");
+                    } catch (DukeException e) {
+                        System.out.println("Duke Exception has occured!");
                     }
 
                 } else { //snd is a string input
                     switch (fst) {
                         case "todo":
-                            ToDos todo = new ToDos(snd);
+                            ToDo todo = new ToDo(snd);
                             taskManager.addTaskToList(todo);
                             break;
                         case "event":
@@ -102,12 +103,12 @@ public class ChatBot {
                             String start = time[0];
                             String end = time[1];
 
-                            Events event = new Events(arr[0], start, end);
+                            Event event = new Event(arr[0], start, end);
                             taskManager.addTaskToList(event);
                             break;
                         case "deadline":
                             String[] tmp = snd.split(" /by ");
-                            Deadlines deadline = new Deadlines(tmp[0], tmp[1]);
+                            Deadline deadline = new Deadline(tmp[0], tmp[1]);
                             taskManager.addTaskToList(deadline);
                             break;
                         default:

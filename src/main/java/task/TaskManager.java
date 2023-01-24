@@ -4,8 +4,6 @@ import java.util.ArrayList;
 
 public class TaskManager {
     protected ArrayList<Task> taskArr;
-    protected String taskMenu;
-
     public TaskManager() {
         this.taskArr = new ArrayList<>();
     }
@@ -65,9 +63,8 @@ public class TaskManager {
         }
     }
 
-    public String getTaskMenu() {
-        this.taskMenu = "list, check, uncheck, todo, event, deadline, bye";
-        return this.taskMenu;
+    public int getTaskArraySize() {
+        return taskArr.size();
     }
 
 }
