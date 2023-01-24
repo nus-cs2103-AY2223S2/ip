@@ -6,7 +6,7 @@ public class Duke {
                 + "What can I do for you?");
         System.out.println(greeting);
         Scanner sc = new Scanner(System.in);
-        List<Task> tasks = new ArrayList<Task>();
+        TaskList tasks = new TaskList();
 
 
         String input = sc.nextLine();
@@ -14,35 +14,35 @@ public class Duke {
             String[] splitArr = input.split(" ");
             try {
                 if (input.equals("list")) {
-                    System.out.println(formatStr(listThings(tasks)));
+                    System.out.println(formatStr(tasks.listThings()));
                 } else if (splitArr[0].equals("mark") || splitArr[0].equals("unmark")) {
-                    if((Integer.parseInt(splitArr[1])) > tasks.size()) {
+                    if((Integer.parseInt(splitArr[1])) > tasks.getSize()) {
                         throw new OutOfIndexException("Help! \n" +
                                 "The number has to be within range of our task-list!\n" +
                                 "try again.");
                     }
-                    mark(splitArr[0], Integer.parseInt(splitArr[1]) - 1, tasks);
+                    tasks.mark(splitArr[0], Integer.parseInt(splitArr[1]) - 1);
                 } else if (splitArr[0].equals("delete")) {
-                    if((Integer.parseInt(splitArr[1])) > tasks.size()) {
+                    if((Integer.parseInt(splitArr[1])) > tasks.getSize()) {
                         throw new OutOfIndexException("Help! \n" +
                                 "The number has to be within range of our task-list!\n" +
                                 "Please try again!");
                     }
-                    Task newTask = tasks.get(Integer.parseInt(splitArr[1]) - 1);
-                    tasks.remove(Integer.parseInt(splitArr[1]));
-                    System.out.println(formatStr(deleteReport(newTask, tasks)));
+                    Task newTask = tasks.getTask(Integer.parseInt(splitArr[1]) - 1);
+                    tasks.removeTask(Integer.parseInt(splitArr[1]));
+                    System.out.println(formatStr(tasks.deleteReport(newTask)));
                 } else if (splitArr[0].equals("todo")) {
                     Todo newTodo = new Todo(input);
-                    tasks.add(newTodo);
-                    System.out.println(formatStr(addReport(newTodo, tasks)));
+                    tasks.addTask(newTodo);
+                    System.out.println(formatStr(tasks.addReport(newTodo)));
                 } else if (splitArr[0].equals("deadline")) {
                     Deadline newDead = new Deadline(input);
-                    tasks.add(newDead);
-                    System.out.println(formatStr(addReport(newDead, tasks)));
+                    tasks.addTask(newDead);
+                    System.out.println(formatStr(tasks.addReport(newDead)));
                 } else if (splitArr[0].equals("event")) {
                     Event newEvent = new Event(input);
-                    tasks.add(newEvent);
-                    System.out.println(formatStr(addReport(newEvent, tasks)));
+                    tasks.addTask(newEvent);
+                    System.out.println(formatStr(tasks.addReport(newEvent)));
                 } else {
                     throw new VagueInputException("Oh no! What do you mean? \n" +
                             "I'm confused. Please specify... @.@");
@@ -101,35 +101,37 @@ public class Duke {
         }
     }
 
-    public static void mark(String marked, int index, List<Task> arrTasks) {
-        arrTasks.get(index).setMark();
-    }
 
-    public static String addReport(Task task, List<Task> taskList) {
-        String returnStr = "gotcha.\nyou added: " + task.toString().substring(2) + "\n"
-                + numberOfTasks(taskList);
-        return returnStr;
-    }
 
-    public static String deleteReport(Task task, List<Task> taskList) {
-        String returnStr = "gotcha.\nyou you have deleted: " + task.toString().substring(2) + "\n"
-                + numberOfTasks(taskList);
-        return returnStr;
-    }
+//    public static void mark(String marked, int index, List<Task> arrTasks) {
+//        arrTasks.get(index).setMark();
+//    }
 
-    public static String numberOfTasks(List<Task> taskList) {
-        return "You have " + taskList.size() + " tasks in this list!";
-    }
+//    public static String addReport(Task task, List<Task> taskList) {
+//        String returnStr = "gotcha.\nyou added: " + task.toString().substring(2) + "\n"
+//                + numberOfTasks(taskList);
+//        return returnStr;
+//    }
 
-    public static String listThings(List<Task> arrList) {
-        String returnstr = "Alright, here are the things: \n";
-        for (int i = 0; i < arrList.size(); i++) {
-            if (i == arrList.size() - 1) {
-                returnstr += Integer.toString(i+1) + arrList.get(i).toString();
-            } else {
-                returnstr += Integer.toString(i+1) + arrList.get(i).toString() + "\n";
-            }
-        } return returnstr;
-    }
+//    public static String deleteReport(Task task, List<Task> taskList) {
+//        String returnStr = "gotcha.\nyou you have deleted: " + task.toString().substring(2) + "\n"
+//                + numberOfTasks(taskList);
+//        return returnStr;
+//    }
+
+//    public static String numberOfTasks(List<Task> taskList) {
+//        return "You have " + taskList.size() + " tasks in this list!";
+//    }
+
+//    public static String listThings(List<Task> arrList) {
+//        String returnstr = "Alright, here are the things: \n";
+//        for (int i = 0; i < arrList.size(); i++) {
+//            if (i == arrList.size() - 1) {
+//                returnstr += Integer.toString(i+1) + arrList.get(i).toString();
+//            } else {
+//                returnstr += Integer.toString(i+1) + arrList.get(i).toString() + "\n";
+//            }
+//        } return returnstr;
+//    }
 }
 
