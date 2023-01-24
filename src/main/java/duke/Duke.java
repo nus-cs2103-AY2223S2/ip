@@ -1,21 +1,8 @@
 package duke;
 
 import java.util.Scanner;
-
-import javafx.application.Application;
-import javafx.scene.Scene;
-import javafx.scene.control.Button;
-import javafx.scene.control.ScrollPane;
-import javafx.scene.control.TextField;
-import javafx.scene.layout.AnchorPane;
-import javafx.scene.layout.VBox;
-import javafx.stage.Stage;
-import javafx.scene.layout.Region;
 import java.io.ByteArrayOutputStream;
 import java.io.PrintStream;
-import javafx.scene.control.Label;
-import javafx.scene.image.Image;
-import javafx.scene.image.ImageView;
 import javafx.fxml.FXML;
 
 /**
@@ -41,7 +28,7 @@ import javafx.fxml.FXML;
  * @see Storage
  * @see Ui
  */
-public class Duke /*extends Application*/ {
+public class Duke {
         
     private Tasks<Task> tasks = new Tasks<Task>();
     private TaskList<Task> taskList = new TaskList<Task>();
@@ -49,26 +36,13 @@ public class Duke /*extends Application*/ {
     private Storage storage; 
     
     private Ui ui;
-    private ScrollPane scrollPane;
-    private VBox dialogContainer;
-    private TextField userInput;
-    private Button sendButton;
-    private Scene scene;
-    
-    private Image user = new Image(this.getClass().getResourceAsStream("/images/Khabib.png"));
-    private Image duke = new Image(this.getClass().getResourceAsStream("/images/Ronaldo.png"));
-    
+
    /**
      * Default constructor that is made explicit. Tasks and TaskList have
      * essentially the same type of characteristics, but it is to satisfy
      * different levels in the iterative approach
      */
-    /*
-    Duke() {
-        this.tasks = new Tasks<Task>();
-        this.taskList = new TaskList<Task>();
-    }
-    */
+
     /**
      * Satisfies Level 1. The user is welcomed with a custom message when the user
      * runs Duke. The custom message is encapsulated in a Printable class.
@@ -155,7 +129,8 @@ public class Duke /*extends Application*/ {
             }
         }
     }
-    /* Satisfies Level 4. On top of the features implemented in level 3,
+    /**
+     * Satisfies Level 4. On top of the features implemented in level 3,
      * which is mark as done or undone, the user will be able to create
      * different type of Tasks. This include Todo, Deadline and Events. Todo
      * will mark the type of Task with a [T]. As its name suggest, it is to
@@ -385,126 +360,6 @@ public class Duke /*extends Application*/ {
             storage.writeToFile(taskList.toString());
         }
     }
-    
-//    @Override
-//    public void start(Stage stage) {
-//        //Step 1. Setting up required components
-//
-//        //The container for the content of the chat to scroll.
-//        scrollPane = new ScrollPane();
-//        dialogContainer = new VBox(10);
-//        scrollPane.setContent(dialogContainer);
-//
-//        userInput = new TextField();
-//        sendButton = new Button("Send");
-//
-//        AnchorPane mainLayout = new AnchorPane();
-//        mainLayout.getChildren().addAll(scrollPane, userInput, sendButton);
-//
-//        scene = new Scene(mainLayout);
-//        scene.getStylesheets().add(this.getClass().getResource("/style.css").toExternalForm());
-//
-//
-//
-//        stage.setScene(scene);
-//        stage.show();
-//
-//        stage.setTitle("Duke");
-//        stage.setResizable(false);
-//        stage.setMinHeight(600.0);
-//        stage.setMinWidth(400.0);
-//
-//        mainLayout.setPrefSize(400.0, 600.0);
-//
-//        scrollPane.setPrefSize(385, 535);
-//        scrollPane.setHbarPolicy(ScrollPane.ScrollBarPolicy.NEVER);
-//        scrollPane.setVbarPolicy(ScrollPane.ScrollBarPolicy.ALWAYS);
-//
-//        scrollPane.setVvalue(1.0);
-//        scrollPane.setFitToWidth(true);
-//
-//        // You will need to import `javafx.scene.layout.Region` for this.
-//        dialogContainer.setPrefHeight(Region.USE_COMPUTED_SIZE);
-//
-//        userInput.setPrefWidth(325.0);
-//
-//        sendButton.setPrefWidth(55.0);
-//
-//        AnchorPane.setTopAnchor(scrollPane, 1.0);
-//
-//        AnchorPane.setBottomAnchor(sendButton, 1.0);
-//        AnchorPane.setRightAnchor(sendButton, 1.0);
-//
-//        AnchorPane.setLeftAnchor(userInput , 1.0);
-//        AnchorPane.setBottomAnchor(userInput, 1.0);
-//
-//        /*
-//        sendButton.setOnMouseClicked((event) -> {
-//        dialogContainer.getChildren().add(getDialogLabel(userInput.getText()));
-//        userInput.clear();
-//        });
-//
-//        userInput.setOnAction((event) -> {
-//            dialogContainer.getChildren().add(getDialogLabel(userInput.getText()));
-//            userInput.clear();
-//        });
-//        */
-//
-//        ByteArrayOutputStream storeString = new ByteArrayOutputStream();
-//        PrintStream printStream = new PrintStream(storeString);
-//        PrintStream oldPrintStream = System.out;
-//        System.setOut(printStream);
-//        ui = new Ui("Greetings");
-//        ui.showWelcome();
-//        System.out.flush();
-//        System.setOut(oldPrintStream);
-//        Label greeting = new Label(storeString.toString());
-//
-//        dialogContainer.getChildren().addAll(greeting);
-//
-//        sendButton.setOnMouseClicked((event) -> {
-//        handleUserInput();
-//        });
-//
-//        userInput.setOnAction((event) -> {
-//            handleUserInput();
-//        });
-//    }
-//
-//    /**
-//     * Iteration 1:
-//     * Creates a label with the specified text and adds it to the dialog container.
-//     * @param text String containing text to add
-//     * @return a label with the specified text that has word wrap enabled.
-//     */
-//    private Label getDialogLabel(String text) {
-//        // You will need to import `javafx.scene.control.Label`.
-//        Label textToAdd = new Label(text);
-//        textToAdd.setWrapText(true);
-//
-//        return textToAdd;
-//    }
-//
-//    private void handleUserInput() {
-//
-//        Label userText = new Label();
-//        userText.getStyleClass().add("right-label");
-//        userText.setText(userInput.getText());
-//
-//        Label dukeText = new Label(getResponse(userInput.getText()));
-//        dukeText.getStyleClass().add("left-label");
-//
-//        dialogContainer.getChildren().addAll(
-//        DialogBox.getUserDialog(userText, new ImageView(user)),
-//        DialogBox.getDukeDialog(dukeText, new ImageView(duke))
-//        );
-//        userInput.clear();
-//    }
-//
-//    /**
-//     * You should have your own function to generate a response to user input.
-//     * Replace this stub with your completed method.
-//     */
 
     @FXML
     protected String getResponse(String input) {
@@ -554,6 +409,7 @@ public class Duke /*extends Application*/ {
         return storeString.toString();
 
     }
+
 //
 //    /*
 //    public static void main(String[] args) {
