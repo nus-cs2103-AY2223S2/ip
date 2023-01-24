@@ -2,20 +2,35 @@ package chattime.command;
 
 import chattime.storage.Storage;
 import chattime.task.Task;
-import chattime.task.TaskList;
+import chattime.TaskList;
 import chattime.ui.Ui;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
-
+/**
+ * Represents ListCommand object that handles main logic of returning current task list items.
+ */
 public class ListCommand extends Command {
 
     private LocalDate requestDate;
 
+    /**
+     * Creates ListCommand object to execute display list logic, with date search or without.
+     *
+     * @param date Specific date when relevant tasks take place, null if not specified.
+     */
     public ListCommand(LocalDate date) {
         requestDate = date;
     }
 
+    /**
+     * Implements and executes main logic of ListCommand object.
+     * Assign cases into displayList and listTime.
+     *
+     * @param ui UI instance of bot.
+     * @param taskList Current task list storing tasks.
+     * @param storage Storage file to store current state items of task list.
+     */
     @Override
     public void execute(Ui ui, TaskList taskList, Storage storage) {
         if (requestDate == null) {
@@ -25,6 +40,12 @@ public class ListCommand extends Command {
         }
     };
 
+    /**
+     * Executes logic of displaying basic task list, without time search.
+     *
+     * @param ui UI instance of bot.
+     * @param taskList Current task list storing tasks.
+     */
     private void displayList(Ui ui, TaskList taskList) {
         if (taskList.getList().size() == 0) {
             ui.emptyList();
@@ -41,6 +62,12 @@ public class ListCommand extends Command {
         }
     }
 
+    /**
+     * Executes logic of displaying task list, filters task objects with time search.
+     *
+     * @param ui UI instance of bot.
+     * @param taskList Current task list storing tasks.
+     */
     private void listTime(Ui ui, TaskList taskList) {
         if (taskList.getList().size() == 0) {
             ui.emptyList();

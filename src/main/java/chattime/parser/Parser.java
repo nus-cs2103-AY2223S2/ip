@@ -12,6 +12,9 @@ import java.time.LocalTime;
 import java.time.format.DateTimeParseException;
 import java.util.regex.Pattern;
 
+/**
+ * Represents parser for bot, processes raw user input and creates appropriate Command object.
+ */
 public class Parser {
 
     private String userInput;
@@ -25,6 +28,11 @@ public class Parser {
     private static final String IDX_OUT_OF_BOUND = "OOPS!!! The index is too large! We currently have %d task(s).";
     private static final String UNRECOGNISED_COMMAND = "Sorry... but I don't understand what you said >,<";
 
+    /**
+     * Creates Parser object for user input.
+     *
+     * @param userInput Command entered by user.
+     */
     public Parser(String userInput) {
         this.userInput = userInput;
         splitCmd = userInput.split(" ", 2);
@@ -34,6 +42,12 @@ public class Parser {
         }
     }
 
+    /**
+     * Returns suitable Command object for further execution.
+     *
+     * @return Command object to execute user request.
+     * @throws ChattimeException Exception thrown when command is not recognisable.
+     */
     public Command parse() throws ChattimeException {
         checkCleanCommand();
         switch (command) {
@@ -72,18 +86,34 @@ public class Parser {
         }
     }
 
+    /**
+     * Checks user's command clashes with data storage format.
+     *
+     * @throws ChattimeException Returns error message to require new input with problem statement.
+     */
     private void checkCleanCommand() throws ChattimeException {
         if (userInput.contains("@")) {
             throw new ChattimeException("@^@ I'm sorry but your message should not contain any \"@\" .");
         }
     }
 
+    /**
+     * Checks required task description input by user.
+     *
+     * @throws ChattimeException Returns error message to require new input with description provided.
+     */
     private void checkAddCommand() throws ChattimeException {
         if (description == null) {
             throw new ChattimeException(String.format(NO_DESCRIPTION, command));
         }
     }
 
+    /**
+     * Parses string description into int and checks true int type of inputted description.
+     *
+     * @return Index parsed if the type check passed.
+     * @throws ChattimeException Returns error message to request an integer input for the description.
+     */
     private int checkIndexCommand() throws ChattimeException {
         if (description == null) {
             throw new ChattimeException(String.format(NO_INDEX, command));
@@ -98,6 +128,12 @@ public class Parser {
         }
     }
 
+    /**
+     * Processes list command and generate a ListCommand object.
+     *
+     * @return ListCommand object.
+     * @throws ChattimeException If no description detected, returns error message to user.
+     */
     private ListCommand parseList() throws ChattimeException {
         if (description != null) {
             throw new ChattimeException("OOPS!!! list does not take any description.");
@@ -105,6 +141,12 @@ public class Parser {
         return new ListCommand(null);
     }
 
+    /**
+     * Processes bye command and generate a ByeCommand object.
+     *
+     * @return ByeCommand object.
+     * @throws ChattimeException If ambiguous command detected, returns error message to user.
+     */
     private ByeCommand parseBye() throws ChattimeException {
         if (description != null) {
             throw new ChattimeException("Type \"bye\" if you really want to say goodbye to me.");
@@ -112,11 +154,23 @@ public class Parser {
         return new ByeCommand();
     }
 
+    /**
+     * Processes todo command and generate a TodoCommand object.
+     *
+     * @return TodoCommand object.
+     */
     private AddCommand parseTodo() {
         Todo todo = new Todo(description);
         return new AddCommand(todo);
     }
 
+    /**
+     * Processes deadline command and generate a DeadlineCommand object.
+     *
+     * @return DeadlineCommand object.
+     * @throws ChattimeException If wrong-formatted input detected, returns error message with instructions to user.
+     *
+     */
     private AddCommand parseDeadline() throws ChattimeException {
         String[] splitBy = description.split(" /by ", 2);
         if (splitBy.length < 2 || splitBy[1].equals("")) {
@@ -140,6 +194,13 @@ public class Parser {
         }
     }
 
+    /**
+     * Processes event command and generate an EventCommand object.
+     *
+     * @return EventCommand object.
+     * @throws ChattimeException If wrong-formatted input detected, returns error message with instructions to user.
+     *
+     */
     private AddCommand parseEvent() throws ChattimeException {
         String[] splitTask = description.split(" /from ", 2);
         String task = splitTask[0];
@@ -169,6 +230,13 @@ public class Parser {
         }
     }
 
+    /**
+     * Processes listTime command, parses description to LocalDate type and generate a ListCommand object.
+     *
+     * @return ListCommand object.
+     * @throws ChattimeException If wrong-formatted input detected, returns error message with instructions to user.
+     *
+     */
     private ListCommand parseListTime() throws ChattimeException {
         if (description == null) {
             throw new ChattimeException(

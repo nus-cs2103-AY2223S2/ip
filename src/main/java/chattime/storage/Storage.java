@@ -18,6 +18,9 @@ import java.time.LocalTime;
 import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
 
+/**
+ * Represents Storage object to execute the services of loading, storing and updating data.
+ */
 public class Storage {
 
     private static final String DEFAULT_FILE_PATH = "data/chattimeTask.txt";
@@ -26,6 +29,12 @@ public class Storage {
     private String filePath;
     private Ui ui;
 
+    /**
+     * Creates a Storage object with UI object to handle UI requirements and path of storage.
+     *
+     * @param ui UI object from bot to handle UI command.
+     * @param filePath Storage path specified.
+     */
     public Storage(Ui ui, String filePath) {
         this.ui = ui;
         this.filePath = (filePath.equals("") ? DEFAULT_FILE_PATH : filePath);
@@ -33,6 +42,11 @@ public class Storage {
         initList = new ArrayList<>();
     }
 
+    /**
+     * Opens file at storage path, creates one at the given path if the file is not found.
+     *
+     * @param filePath Specified storage path.
+     */
     public void openFile(String filePath) {
         try {
             storeFile = new File(filePath);
@@ -51,6 +65,11 @@ public class Storage {
         }
     }
 
+    /**
+     * Prepares loading data into current task list.
+     *
+     * @return An arraylist of stored data to be imported into current TaskList object.
+     */
     public ArrayList<Task> loadData() {
         BufferedReader loader;
         try {
@@ -101,11 +120,22 @@ public class Storage {
         return initList;
     }
 
+    /**
+     * Saves recently added task into storage file.
+     *
+     * @param task Task recently added.
+     */
     public void saveToFile(Task task) {
         String writeString = task.toDataString();
         writeToFile(writeString + System.lineSeparator(), true);
     }
 
+    /**
+     * Updates storage file once a variable attribute of a task changed.
+     *
+     * @param index The index number of changed task.
+     * @param task The modified task.
+     */
     public void updateFile(int index, Task task) {
         BufferedReader lineSearch;
         try {
@@ -132,6 +162,11 @@ public class Storage {
         }
     }
 
+    /**
+     * Removes deleted task from storage file.
+     *
+     * @param index Index of the removed task.
+     */
     public void deleteFromFile(int index) {
         BufferedReader lineSearch;
         try {
@@ -160,7 +195,13 @@ public class Storage {
         }
     }
 
-    public void writeToFile(String content, boolean append) {
+    /**
+     * Common method to write in the storage file.
+     *
+     * @param content Data to be written in.
+     * @param append Flag that determines whether the content should append or replace the entire storage file.
+     */
+    private void writeToFile(String content, boolean append) {
         try {
             BufferedWriter writer = new BufferedWriter(new FileWriter(storeFile, append));
             writer.write(content);
