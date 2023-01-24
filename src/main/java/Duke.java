@@ -30,136 +30,26 @@ public class Duke {
         ui.sayGoodbye();
     }
 
-    private boolean isExitCommand(String input) {
-        return input.equals(CommandType.EXIT.getCommand());
-    }
-
     // Loop for user input
     private void acceptCommands() {
         String input;
         while (true) {
             ui.printPromptForInput();
             input = ui.getInputFromUser();
-            if (isExitCommand(input)) {
-                return;
+
+            // Split into two parts at the first space
+            try {
+                Command command = parser.parseCommand(input);
+                 if(command.isExit()) {
+                     return;
+                 } else {
+                     command.execute(taskList, ui, storage);
+                 }
+                storage.save(taskList);
+            } catch (DukeException e) {
+                ui.printMessage(e.toString());
             }
-            executeOneCommand(input);
         }
-    }
-
-    // Executes a command, except exit command
-    private void executeOneCommand(String input) {
-        // Split into two parts at the first space
-        String[] parts = input.split(" ", 2);
-        String command = parts[0];
-        CommandType commandType;
-        try {
-            commandType = CommandType.getCommandType(command);
-            if (commandType.hasArguments()) {
-                executeCommandWithArgument(commandType, parts);
-            } else {
-                executeCommandWithNoArgument(commandType);
-            }
-            storage.save(taskList);
-        } catch (DukeException e) {
-            ui.printMessage(e.toString());
-        }
-
-    }
-
-    public void executeCommandWithArgument(CommandType command, String[] parts) throws DukeException {
-        if (parts.length < 2) {
-            throw new EmptyArgumentDukeException();
-        }
-        switch (command) {
-            case MARK_TASK_AS_DONE:
-                markTaskAsDone(parts[1]);
-                break;
-            case MARK_TASK_AS_UNDONE:
-                markTaskAsNotDone(parts[1]);
-                break;
-            case TODO:
-                addTodoToList(parts[1]);
-                break;
-            case DEADLINE:
-                addDeadlineToList(parts[1]);
-                break;
-            case EVENT:
-                addEventToList(parts[1]);
-                break;
-            case DELETE:
-                deleteTask(parts[1]);
-                break;
-        }
-    }
-
-    public void executeCommandWithNoArgument(CommandType command) {
-        switch (command) {
-            case DISPLAY_LIST:
-                displayTasks();
-                break;
-        }
-    }
-
-    private void addTodoToList(String description) {
-        new AddTodoCommand(description).execute(taskList, ui, storage);
-    }
-
-    private void addDeadlineToList(String arguments) throws DukeException {
-        try {
-            String[] splitArgs = arguments.split(" /by ");
-            new AddDeadlineCommand(splitArgs[0], parser.parseDateTime(splitArgs[1])).execute(taskList, ui, storage);
-        } catch (DateTimeParseException e) {
-            throw new InvalidArgumentDukeException();
-        } catch (ArrayIndexOutOfBoundsException e) {
-            throw new EmptyArgumentDukeException();
-        }
-    }
-
-    private void addEventToList(String arguments) throws DukeException {
-        try {
-            String[] splitArgs = arguments.split(" /from ");
-            String[] times = splitArgs[1].split(" /to ");
-            new AddEventCommand(splitArgs[0], parser.parseDateTime(times[0]), parser.parseDateTime(times[1]))
-                    .execute(taskList, ui, storage);
-        } catch (ArrayIndexOutOfBoundsException e) {
-            throw new EmptyArgumentDukeException();
-        } catch (DateTimeParseException e) {
-            throw new InvalidArgumentDukeException();
-        }
-    }
-
-    private void displayTasks() {
-        new DisplayListCommand().execute(taskList, ui, storage);
-    }
-
-    private void markTaskAsDone(String arguments) throws InvalidArgumentDukeException {
-        try {
-            int number = Integer.parseInt(arguments);
-            new MarkTaskAsDoneCommand(number).execute(taskList, ui, storage);
-        } catch (NumberFormatException e) {
-            throw new InvalidArgumentDukeException();
-        }
-
-    }
-
-    private void markTaskAsNotDone(String arguments) throws InvalidArgumentDukeException {
-        try {
-            int number = Integer.parseInt(arguments);
-            new MarkTaskAsUndoneCommand(number).execute(taskList, ui, storage);
-        } catch (NumberFormatException | IndexOutOfBoundsException e) {
-            throw new InvalidArgumentDukeException();
-        }
-    }
-
-    private void deleteTask(String arguments) throws InvalidArgumentDukeException {
-        try {
-            int number = Integer.parseInt(arguments);
-            new DeleteTaskCommand(number).execute(taskList, ui, storage);
-        } catch (NumberFormatException e) {
-            throw new InvalidArgumentDukeException();
-        }
-
     }
 
     // Main method
