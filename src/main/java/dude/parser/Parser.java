@@ -104,7 +104,7 @@ public class Parser {
                 }
                 break;
             case DEADLINE:
-                if (!cmd[1].contains("/by")) {
+                if (input.length < 2 || !cmd[1].contains("/by")) {
                     throw new DudeException("\tUhh...  You need to use /by to indicate the date");
                 } else if (input[1].equals("/by")) {
                     throw new DudeException("\tUhh...  You need to include the description also");
@@ -120,7 +120,7 @@ public class Parser {
                 }
                 break;
             case EVENT:
-                if (!cmd[1].contains("/from") || !cmd[1].contains("/to")) {
+                if (input.length < 2 || !cmd[1].contains("/from") || !cmd[1].contains("/to")) {
                     throw new DudeException("\tUhh...  You need to use /from and /to to indicate the dates for the event");
                 } else if (input[1].equals("/from") || input[1].equals("/to")) {
                     throw new DudeException("\tUhh...  You need to include the description also");
