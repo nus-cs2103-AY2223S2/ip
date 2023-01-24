@@ -21,6 +21,10 @@ public class Duke {
         System.out.println(welcomeMsg);
         System.out.println(dashes);
 
+        Saver saver = new Saver();
+        storage = saver.readTasksFromFile();
+//        System.out.println(storage);
+
         while (status) {
             try {
                 curInput = sc.nextLine();
@@ -125,11 +129,15 @@ public class Duke {
                         + dukeException.getMessage());
                 System.out.println(dashes);
             }
+            saver.writeTasksToFile(storage.toString());
         }
 
         System.out.println(dashes);
         System.out.println(exitMsg);
         System.out.println(dashes);
+
+
+//        saver.readTasksFromFile();
 
     }
 }
