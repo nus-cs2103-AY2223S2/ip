@@ -9,6 +9,12 @@ public class Event extends Task {
         this.to = to;
     }
 
+    public Event(boolean isDone, String description, String from, String to) {
+        super(isDone, description);
+        this.from = from;
+        this.to = to;
+    }
+
     String getFrom() {
         return from;
     }
@@ -23,6 +29,12 @@ public class Event extends Task {
 
     void setTo(String to) {
         this.to = to;
+    }
+
+    @Override
+    public String toCsv() {
+        return "E," + super.toCsv() + ","
+                + from + "," + to;
     }
 
     @Override
