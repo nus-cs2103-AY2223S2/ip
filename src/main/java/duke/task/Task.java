@@ -5,7 +5,7 @@ import duke.TaskCreationException;
 import java.io.Serializable;
 
 public abstract class Task implements Serializable {
-    protected final String desc;
+    public final String desc;
     protected boolean isDone;
 
     Task(String desc) throws TaskCreationException {

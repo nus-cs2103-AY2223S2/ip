@@ -1,6 +1,5 @@
 package duke;
 
-
 import duke.task.Deadline;
 import duke.task.Event;
 import duke.task.Task;
@@ -9,9 +8,18 @@ import duke.task.ToDo;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class TaskList implements Serializable {
-    private final ArrayList<Task> list = new ArrayList<>();
+    private final List<Task> list;
+
+    public TaskList() {
+        this.list = new ArrayList<>();
+    }
+
+    TaskList(List<Task> array) {
+        this.list = array;
+    }
 
     /**
      * Adds a to-do into the TaskList
@@ -25,6 +33,13 @@ public class TaskList implements Serializable {
         } catch (TaskCreationException e) {
             System.out.println(e.getMessage());
         }
+    }
+
+    TaskList find(String desc) {
+        return new TaskList(list
+                .stream()
+                .filter((task) -> task.desc.contains(desc))
+                .collect(Collectors.toList()));
     }
 
     /**

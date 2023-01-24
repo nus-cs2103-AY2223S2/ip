@@ -53,6 +53,10 @@ public class Parser {
             taskList.addEvent(split[1], split[3], split[5]);
             break;
         }
+        case "find": {
+            ui.listAllTasks(taskList.find(split[1]));
+            break;
+        }
         case "delete": {
             if (split.length != 2) {
                 ui.error("Invalid format");
