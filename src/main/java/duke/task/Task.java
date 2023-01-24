@@ -29,6 +29,10 @@ public abstract class Task implements Serializable {
         isDone = false;
     }
 
+    public boolean contains(String keyword) {
+        return description.contains(keyword);
+    }
+
     @Override
     public String toString() {
         return String.format("[%s] %s", isDone ? "X" : " ", description);
