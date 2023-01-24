@@ -6,7 +6,7 @@ import duke.tasks.Task;
 import duke.tasks.TaskList;
 
 public class DeleteCmd extends Command {
-    Task task;
+    private Task task;
 
     public DeleteCmd(TaskList taskList, String lineInput) {
         super(taskList, lineInput);

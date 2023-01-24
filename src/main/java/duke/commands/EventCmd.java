@@ -7,7 +7,7 @@ import duke.tasks.Task;
 import duke.tasks.TaskList;
 
 public class EventCmd extends Command {
-    Task event;
+    private Task event;
 
     public EventCmd(TaskList taskList, String lineInput) {
         super(taskList, lineInput);

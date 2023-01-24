@@ -4,8 +4,8 @@ import duke.tasks.TaskList;
 
 public abstract class Command {
 
-    TaskList taskList;
-    String lineInput;
+    protected TaskList taskList;
+    protected String lineInput;
 
     public Command(TaskList taskList, String lineInput) {
         this.taskList = taskList;

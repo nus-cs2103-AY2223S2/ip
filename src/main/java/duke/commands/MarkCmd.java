@@ -6,8 +6,8 @@ import duke.tasks.Task;
 import duke.tasks.TaskList;
 
 public class MarkCmd extends Command {
-    int index;
-    Task task;
+    private int index;
+    private Task task;
 
     public MarkCmd(TaskList taskList, String lineInput) {
         super(taskList, lineInput);

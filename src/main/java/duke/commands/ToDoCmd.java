@@ -7,7 +7,7 @@ import duke.tasks.TaskList;
 import duke.tasks.ToDo;
 
 public class ToDoCmd extends Command {
-    Task toDo;
+    private Task toDo;
 
     public ToDoCmd(TaskList taskList, String lineInput) {
         super(taskList, lineInput);

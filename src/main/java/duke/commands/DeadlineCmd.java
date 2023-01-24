@@ -11,7 +11,6 @@ public class DeadlineCmd extends Command {
 
     public DeadlineCmd(TaskList taskList, String lineInput) {
         super(taskList, lineInput);
-        this.lineInput = lineInput;
     }
 
     public void execute() {

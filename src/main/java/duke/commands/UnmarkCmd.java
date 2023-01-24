@@ -6,8 +6,8 @@ import duke.tasks.Task;
 import duke.tasks.TaskList;
 
 public class UnmarkCmd extends Command {
-    int index;
-    Task task;
+    private int index;
+    private Task task;
 
     public UnmarkCmd(TaskList taskList, String line) {
         super(taskList, line);
