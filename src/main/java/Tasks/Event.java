@@ -19,7 +19,7 @@ public class Event extends Task {
 
     @Override
     public String saveFormat() {
-        return "E-" +super.saveFormat() + "-" + from + "-" + to;
+        return "E~" +super.saveFormat() + "~" + from + "~" + to;
     }
 }
 

@@ -10,6 +10,9 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
+
+import java.time.LocalDate;
+
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -79,8 +82,7 @@ public class Duke {
                 }
                 else if (firstWord.equals("deadline")) {
                     String st[] = s[1].split(" /by ", 2);
-                    arrL.add(new Deadline(st[0], false, st[1]));
-
+                    arrL.add(new Deadline(st[0], false, LocalDate.parse(st[1])));
                 } else if (firstWord.equals("event")) {
                     String st[] = s[1].split(" /from ", 2);
                     String stt[] = st[1].split(" /to ", 2);
@@ -112,21 +114,19 @@ public class Duke {
 
         while (s.hasNext()) {
             String str = s.nextLine();
-            String parts[] = str.split("-", 5);
-            System.out.println(Arrays.toString(parts));
+            String parts[] = str.split("~", 5);
 
             switch (parts[0]) {
                 case "T":
                     l.add(new ToDo(parts[2], parts[1].equals("1")));
                     break;
                 case "D":
-                    l.add(new Deadline(parts[2], parts[1].equals("1"), parts[3]));
+                    l.add(new Deadline(parts[2], parts[1].equals("1"), LocalDate.parse(parts[3])));
                     break;
                 case "E":
                     l.add(new Event(parts[2], parts[1].equals("1"), parts[3], parts[4]));
                     break;
             }
-            System.out.println(l);
         }
     }
 

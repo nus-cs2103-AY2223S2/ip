@@ -13,6 +13,6 @@ public class ToDo extends Task{
 
     @Override
     public String saveFormat() {
-        return "T-" + super.saveFormat();
+        return "T~" + super.saveFormat();
     }
 }
