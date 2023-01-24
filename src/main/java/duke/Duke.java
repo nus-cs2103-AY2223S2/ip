@@ -1,3 +1,5 @@
+package duke;
+
 public class Duke {
     public static void main(String[] args) {
         Ui ui = new Ui();

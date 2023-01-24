@@ -1,3 +1,7 @@
+package duke.task;
+
+import duke.TaskCreationException;
+
 public class ToDo extends Task {
     public ToDo(String desc) throws TaskCreationException {
         super(desc);

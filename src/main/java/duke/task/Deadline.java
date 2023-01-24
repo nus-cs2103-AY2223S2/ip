@@ -1,9 +1,13 @@
+package duke.task;
+
+import duke.TaskCreationException;
+
 import java.time.LocalDate;
 import java.time.format.DateTimeParseException;
 
 public class Deadline extends Task{
     LocalDate deadline;
-    Deadline(String desc, String deadline) throws TaskCreationException {
+    public Deadline(String desc, String deadline) throws TaskCreationException {
         super(desc);
         try {
             this.deadline = LocalDate.parse(deadline);

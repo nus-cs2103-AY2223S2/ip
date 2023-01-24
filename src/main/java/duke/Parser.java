@@ -1,3 +1,5 @@
+package duke;
+
 public class Parser {
     boolean parse(Ui ui, TaskList taskList, String line) {
         String[] split = line.split(" ");

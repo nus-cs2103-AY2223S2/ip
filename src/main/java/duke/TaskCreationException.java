@@ -1,5 +1,6 @@
+package duke;
 public class TaskCreationException extends Exception {
-    TaskCreationException(String message) {
+    public TaskCreationException(String message) {
         super(message);
     }
 }
