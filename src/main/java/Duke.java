@@ -1,3 +1,7 @@
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -119,13 +123,20 @@ public class Duke {
         }
         Scanner scanner = new Scanner(System.in);
         System.out.println("By when?");
-        String by = scanner.nextLine();
-        if (by.isEmpty()) {
+        String byString = scanner.nextLine();
+        if (byString.isEmpty()) {
             throw new DukeInvalidArgumentException("By is empty, please input task again");
         }
-        Task t = new Deadline(answer.substring(9, answer.length()), by);
-        System.out.println("Meow! Just added: \n" + t);
-        arrayList.add(t);
+        try {
+            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
+            LocalDateTime by = LocalDateTime.parse(byString, formatter);
+            Task t = new Deadline(answer.substring(9, answer.length()), by);
+            System.out.println("Meow! Just added: \n" + t);
+            arrayList.add(t);
+        } catch (DateTimeParseException e){
+            throw new DukeInvalidArgumentException("Wrong date/time format, please input task again");
+        }
+
     }
 
     public static void addEvent(String answer, ArrayList<Task> arrayList) throws DukeInvalidArgumentException{
@@ -136,18 +147,27 @@ public class Duke {
 
         Scanner scanner = new Scanner(System.in);
         System.out.println("From?");
-        String from = scanner.nextLine();
-        if (from.isEmpty()) {
+        String fromString = scanner.nextLine();
+        if (fromString.isEmpty()) {
             throw new DukeInvalidArgumentException("From is empty, please input task again");
         }
-        System.out.println("To?");
-        String to = scanner.nextLine();
-        if (to.isEmpty()) {
-            throw new DukeInvalidArgumentException("To is empty, please input task again");
+        try {
+            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
+            LocalDateTime from = LocalDateTime.parse(fromString, formatter);
+            System.out.println("To?");
+            String toString = scanner.nextLine();
+            if (toString.isEmpty()) {
+                throw new DukeInvalidArgumentException("To is empty, please input task again");
+            }
+
+            LocalDateTime to = LocalDateTime.parse(toString, formatter);
+            Task t = new Event(answer.substring(6, answer.length()), from, to);
+            System.out.println("Meow! Just added: \n" + t);
+            arrayList.add(t);
+        } catch (DateTimeParseException e){
+            throw new DukeInvalidArgumentException("Wrong date/time format, please input task again");
         }
-        Task t = new Event(answer.substring(6, answer.length()), from, to);
-        System.out.println("Meow! Just added: \n" + t);
-        arrayList.add(t);
+
     }
 
     public static void list(ArrayList<Task> arrayList) {
