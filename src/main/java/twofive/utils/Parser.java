@@ -1,7 +1,24 @@
 package twofive.utils;
 
-import twofive.command.*;
-import twofive.exception.*;
+import twofive.command.Command;
+import twofive.command.ByeCommand;
+import twofive.command.DeadlineCommand;
+import twofive.command.DeleteCommand;
+import twofive.command.DueDateCommand;
+import twofive.command.EventCommand;
+import twofive.command.ListCommand;
+import twofive.command.MarkCommand;
+import twofive.command.ToDoCommand;
+import twofive.command.UnmarkCommand;
+
+import twofive.exception.EmptyDescriptionException;
+import twofive.exception.EmptyStartTimeException;
+import twofive.exception.EmptyTasknumException;
+import twofive.exception.MissingArgumentException;
+import twofive.exception.EmptyEndTimeException;
+import twofive.exception.EmptyDeadlineException;
+import twofive.exception.EmptyDateException;
+import twofive.exception.InvalidCommandException;
 
 public class Parser {
     // Ensure valid task number is provided
@@ -25,8 +42,10 @@ public class Parser {
         return descriptionSplit[1].trim();
     }
 
-    public static Command parse(String command) throws EmptyTasknumException, EmptyDescriptionException,
-            MissingArgumentException, EmptyStartTimeException, EmptyEndTimeException, EmptyDeadlineException, EmptyDateException, InvalidCommandException {
+    public static Command parse(String command)
+            throws EmptyTasknumException, EmptyDescriptionException,
+            MissingArgumentException, EmptyStartTimeException, EmptyEndTimeException, EmptyDeadlineException,
+            EmptyDateException, InvalidCommandException {
         String commandWord = command.split(" ")[0].trim();
 
         switch (commandWord) {

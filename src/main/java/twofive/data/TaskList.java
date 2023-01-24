@@ -4,7 +4,6 @@ import twofive.exception.TaskDoneException;
 import twofive.exception.TaskUndoneException;
 import twofive.task.Task;
 
-import java.lang.reflect.Array;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
@@ -23,7 +22,7 @@ public class TaskList {
     public String getTasksList() {
         StringBuilder stringBuilder = new StringBuilder("Here are the tasks in your list:\n");
         int taskIndex = 1;
-        for (Task task: tasks) {
+        for (Task task : tasks) {
             stringBuilder.append(taskIndex + ". " + task);
             if (taskIndex - 1 < tasks.size() - 1) {
                 stringBuilder.append("\n");
@@ -64,12 +63,12 @@ public class TaskList {
                 + date.format(DateTimeFormatter.ofPattern("EEE MMM d yyyy")) + ":\n");
         int taskIndex = 1;
         int numTasksDue = 0;
-        for (Task task: tasks) {
+        for (Task task : tasks) {
             if (task.isToday(date)) {
                 numTasksDue++;
             }
         }
-        for (Task task: tasks) {
+        for (Task task : tasks) {
             if (task.isToday(date)) {
                 stringBuilder.append(taskIndex + ". " + task);
                 if (taskIndex - 1 < numTasksDue - 1) {
@@ -83,7 +82,7 @@ public class TaskList {
 
     public String getSaveTasksString() {
         StringBuilder stringBuilder = new StringBuilder();
-        for (Task task: tasks) {
+        for (Task task : tasks) {
             stringBuilder.append(task.getFileWriteString() + "\n");
         }
         return stringBuilder.toString();

@@ -27,6 +27,10 @@ public class TwoFive {
         }
     }
 
+    public static void main(String[] args) {
+        new TwoFive("data/twofive.txt").run();
+    }
+
     public void run() {
         ui.showWelcome();
         boolean isExit = false;
@@ -45,9 +49,5 @@ public class TwoFive {
                 ui.showLine();
             }
         }
-    }
-
-    public static void main(String[] args) {
-        new TwoFive("data/twofive.txt").run();
     }
 }
