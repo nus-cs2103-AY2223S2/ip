@@ -44,40 +44,12 @@ public class Duke {
         System.out.println(reply(list_of_tasks));
     }
 
-    private static void handleTaskInput(String command) {
-        String description = command;
-        Task newTask = new Task(command);
-        if (command.startsWith("todo ")) {
-            description = description.substring(5);
-            newTask = new ToDo(description);
-        } else if (command.startsWith("deadline ")) {
-            String by = description.substring(description.indexOf(" /by ") + 5);
-            description = description.substring(9, description.indexOf(" /by "));
-            newTask = new Deadline(description, by);
-        } else if (command.startsWith("event ")) {
-            String start = description.substring(description.indexOf(" /from ") + 7,
-                    description.indexOf(" /to "));
-            String end = description.substring(description.indexOf(" /to ") + 5);
-            description = description.substring(6, description.indexOf(" /from "));
-            newTask = new Event(description, start, end);
-        }
-
-        if (!TASKS.contains(newTask)) {
-            addTask(newTask);
-        }
-    }
-
-    private static String reply(String command) {
-        return DIVIDER_LINE + command + DIVIDER_LINE;
-    }
-
-    public static void main(String[] args) {
-        displayIntro();
-
-        Scanner input = new Scanner(System.in);
+    private static void handleTaskInput(Scanner input) {
         String command = input.nextLine();
-        while (!command.equals("bye")) {
-            if (command.equals("list")) {
+        while (true) {
+            if (command.equals("bye")) {
+                break;
+            } else if (command.equals("list")) {
                 displayTasks();
                 command = input.nextLine();
                 continue;
@@ -93,10 +65,52 @@ public class Duke {
                 continue;
             }
 
-            handleTaskInput(command);
-            command = input.nextLine();
+            String description = command;
+            Task newTask = new Task(command);
+            try {
+                if (command.startsWith("todo")) {
+                    if (description.length() <= 5) {
+                        throw new DukeException(reply("The description of a todo cannot be empty.\n"));
+                    }
+                    newTask = new ToDo(description.substring(5));
+                } else if (command.startsWith("deadline")) {
+                    if (description.length() <= 9) {
+                        throw new DukeException(reply("The description of a deadline cannot be empty.\n"));
+                    }
+                    String by = description.substring(description.indexOf(" /by ") + 5);
+                    description = description.substring(9, description.indexOf(" /by "));
+                    newTask = new Deadline(description, by);
+                } else if (command.startsWith("event")) {
+                    if (description.length() <= 6) {
+                        throw new DukeException(reply("The description of a event cannot be empty.\n"));
+                    }
+                    String start = description.substring(description.indexOf(" /from ") + 7,
+                            description.indexOf(" /to "));
+                    String end = description.substring(description.indexOf(" /to ") + 5);
+                    description = description.substring(6, description.indexOf(" /from "));
+                    newTask = new Event(description, start, end);
+                } else {
+                    throw new DukeException(reply("I'm sorry, but I don't know what that means :-(\n"));
+                }
+                if (!TASKS.contains(newTask)) {
+                    addTask(newTask);
+                }
+            } catch (DukeException e) {
+                System.out.println(e);
+            } finally {
+                command = input.nextLine();
+            }
         }
+    }
 
+    private static String reply(String command) {
+        return DIVIDER_LINE + command + DIVIDER_LINE;
+    }
+
+    public static void main(String[] args) {
+        displayIntro();
+        Scanner input = new Scanner(System.in);
+        handleTaskInput(input);
         displayOutro();
     }
 }
