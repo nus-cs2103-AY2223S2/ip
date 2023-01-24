@@ -17,6 +17,10 @@ public class Ui {
         sc.close();
     }
 
+    public void showLine() {
+        System.out.println("--------------------------------");
+    }
+
     public void greet() {
         String greeting = "What's up! XyDuke here!\nHow can I be of assistance?";
         System.out.println(greeting);
@@ -29,10 +33,6 @@ public class Ui {
 
     public String nextInput() {
         return sc.nextLine();
-    }
-
-    public void invalidDelete() {
-        System.out.println("Task does not exist! Please enter valid input!");
     }
 
     public void showError(Exception e) {
