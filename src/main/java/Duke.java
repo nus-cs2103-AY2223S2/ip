@@ -6,13 +6,29 @@ import Tasks.Event;
 import Tasks.Task;
 import Tasks.ToDo;
 
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 import java.util.Scanner;
 public class Duke {
+
+    public static String filePath = "duke.txt";
+
     public static void main(String[] args) throws EmptyCommandException, InvalidCommandException, EmptyArgumentException {
-        System.out.println("Hello! I'm Duke\nWhat can I do for you?");
 
         ArrayList<Task> arrL = new ArrayList<>();
+
+        try {
+            populateArray(arrL, filePath);
+        } catch (FileNotFoundException e) {
+            System.out.println("File not found");
+        }
+
+        System.out.println("Hello! I'm Duke\nWhat can I do for you?");
 
         Scanner bucky = new Scanner(System. in);
 
@@ -25,9 +41,17 @@ public class Duke {
             String firstWord = s[0];
 
             if (str.equals("bye")) {
-                System.out.println ("Bye. Hope to see you again soon!");
+                System.out.println("Bye. Hope to see you again soon!");
+                try {
+                    save(arrL, filePath);
+                } catch (IOException e) {
+                    System.out.println("Something went wrong: " + e.getMessage());
+                }
                 break;
-            } else if (str.equals("list")) {
+            }
+
+
+            if (str.equals("list")) {
                 System.out.println("Here are the tasks in your list:");
                 for (int i = 0 ; i < arrL.size() ; i++) {
                     System.out.println((i+1) + ". " + arrL.get(i));
@@ -51,16 +75,16 @@ public class Duke {
             } else if (firstWord.equals("todo") || firstWord.equals("deadline") || firstWord.equals("event")){
                 if (s.length <= 1) { throw new EmptyArgumentException();}
                 if (firstWord.equals("todo")) {
-                    arrL.add(new ToDo(s[1]));
+                    arrL.add(new ToDo(s[1], false));
                 }
                 else if (firstWord.equals("deadline")) {
                     String st[] = s[1].split(" /by ", 2);
-                    arrL.add(new Deadline(st[0], st[1]));
+                    arrL.add(new Deadline(st[0], false, st[1]));
 
                 } else if (firstWord.equals("event")) {
                     String st[] = s[1].split(" /from ", 2);
                     String stt[] = st[1].split(" /to ", 2);
-                    arrL.add(new Event(st[0], stt[0], stt[1]));
+                    arrL.add(new Event(st[0], false, stt[0], stt[1]));
                 }
                 System.out.println("Got it. I've added this task:\n" + arrL.get(arrL.size()-1)
                     + "\nNow you have " + arrL.size() + " tasks in the list.");
@@ -69,5 +93,49 @@ public class Duke {
             }
         }
 
+    }
+
+
+
+    public static void populateArray(List<Task> l, String filePath) throws FileNotFoundException {
+        File f = new File(filePath); // create a File for the given file path
+        try {
+            if(!f.exists()) {
+                f.createNewFile();
+            }
+        } catch (IOException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        }
+
+        Scanner s = new Scanner(f); // create a Scanner using the File as the source
+
+        while (s.hasNext()) {
+            String str = s.nextLine();
+            String parts[] = str.split("-", 5);
+            System.out.println(Arrays.toString(parts));
+
+            switch (parts[0]) {
+                case "T":
+                    l.add(new ToDo(parts[2], parts[1].equals("1")));
+                    break;
+                case "D":
+                    l.add(new Deadline(parts[2], parts[1].equals("1"), parts[3]));
+                    break;
+                case "E":
+                    l.add(new Event(parts[2], parts[1].equals("1"), parts[3], parts[4]));
+                    break;
+            }
+            System.out.println(l);
+        }
+    }
+
+
+    public static void save(List<Task> l, String filePath) throws IOException {
+        FileWriter fw = new FileWriter(filePath);
+        for (Task i : l) {
+            fw.write(i.saveFormat() + "\n");
+        }
+        fw.close();
     }
 }
