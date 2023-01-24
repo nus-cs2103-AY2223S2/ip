@@ -97,4 +97,12 @@ public class ToDoList {
             throw new InvalidArgumentException("Make sure you enter an index of a task that exists in the list!");
         }
     }
+
+    public ArrayList<String> getDataList() {
+        ArrayList<String> res = new ArrayList<>();
+        this.toDoList.forEach(task -> {
+            res.add(task.toData());
+        });
+        return res;
+    }
 }

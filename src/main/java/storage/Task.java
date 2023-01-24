@@ -48,4 +48,9 @@ public class Task {
         String status = this.getStatusIcon();
         return String.format("[%s] %s", status, this.description);
     }
+
+    public String toData() {
+        int status = this.isDone ? 1 : 0;
+        return String.format("%d | %s", status, this.description);
+    }
 }
