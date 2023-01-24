@@ -1,6 +1,6 @@
 package duke.command;
 
-import duke.exceptions.DukeStoreInvalidAccessException;
+import duke.exceptions.TaskListInvalidAccessException;
 import duke.TaskList;
 import duke.Ui;
 
@@ -20,7 +20,7 @@ public class UnmarkCommand extends Command {
     public void execute(TaskList ts, Ui ui) {
         try {
             ts.unMark(idx - 1);
-        } catch (DukeStoreInvalidAccessException e) {
+        } catch (TaskListInvalidAccessException e) {
             ui.error(e);
         }
     }

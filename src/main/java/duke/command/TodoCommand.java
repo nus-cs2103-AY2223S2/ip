@@ -1,7 +1,7 @@
 package duke.command;
 
 import duke.exceptions.DukeEmptyTaskException;
-import duke.exceptions.DukeStoreFullException;
+import duke.exceptions.TaskListFullException;
 import duke.TaskList;
 import duke.task.TodoTask;
 import duke.Ui;
@@ -32,7 +32,7 @@ public class TodoCommand extends Command {
         TodoTask todo = new TodoTask(task);
         try {
             ts.add(todo);
-        } catch (DukeStoreFullException e) {
+        } catch (TaskListFullException e) {
             ui.error(e);
         }
     }

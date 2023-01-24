@@ -7,8 +7,8 @@ package duke.exceptions;
  * @author SeeuSim
  * AY2223-S2 CS2103T
  */
-public class DukeStoreInvalidAccessException extends DukeException {
-    public DukeStoreInvalidAccessException() {
+public class TaskListInvalidAccessException extends DukeException {
+    public TaskListInvalidAccessException() {
         super("An invalid index was entered. Please try again.");
     }
 }

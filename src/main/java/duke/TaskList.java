@@ -1,8 +1,8 @@
 package duke;
 
 import duke.exceptions.DukeException;
-import duke.exceptions.DukeStoreFullException;
-import duke.exceptions.DukeStoreInvalidAccessException;
+import duke.exceptions.TaskListFullException;
+import duke.exceptions.TaskListInvalidAccessException;
 import duke.task.DukeTask;
 
 import java.time.LocalDate;
@@ -35,10 +35,10 @@ public class TaskList {
     }
 
     /**
-     * Factory method to create DukeStore instances.
+     * Factory method to create TaskList instances.
      *
      * @param s The duke.Storage instance to pass to the Store.
-     * @return The created DukeStore instance with a unique serializable ID.
+     * @return The created TaskList instance with a unique serializable ID.
      */
     public static TaskList create(Storage s, Ui ui) {
         return new TaskList(s, ui);
@@ -48,13 +48,13 @@ public class TaskList {
      * Given a duke.task.DukeTask, attempts to add it to the store.
      *
      * @param input The task to be input.
-     * @throws DukeStoreFullException The exception indicating that the store
+     * @throws TaskListFullException The exception indicating that the store
      * can no longer accept any more tasks.
      */
-    public void add(DukeTask input) throws DukeStoreFullException {
+    public void add(DukeTask input) throws TaskListFullException {
         long count;
         if (this.dfw.size() >= recordSize) {
-            throw new DukeStoreFullException();
+            throw new TaskListFullException();
         }
         try {
             count = this.dfw.write(input.toDBSchema());
@@ -76,12 +76,12 @@ public class TaskList {
      * Given the index of a task in the Store, attempts to mark it as done.
      *
      * @param i The index of the task within the Store.
-     * @throws DukeStoreInvalidAccessException The exception indicating that an
+     * @throws TaskListInvalidAccessException The exception indicating that an
      * invalid index was provided.
      */
-    public void mark(int i) throws DukeStoreInvalidAccessException {
+    public void mark(int i) throws TaskListInvalidAccessException {
         if (i < 0 || i >= this.dfw.size()) { //Unassigned, invalid index
-            throw new DukeStoreInvalidAccessException();
+            throw new TaskListInvalidAccessException();
         }
         DukeTask task = this.dfw.setDone(i, true);
         String message = "Nice! I've marked this task as done:\n" + "  " + task;
@@ -92,12 +92,12 @@ public class TaskList {
      * Given the index of a task in the Store, attempts to mark it as not done.
      *
      * @param i The index of the task within the Store.
-     * @throws DukeStoreInvalidAccessException The exception indicating that an
+     * @throws TaskListInvalidAccessException The exception indicating that an
      * invalid index was provided.
      */
-    public void unMark(int i) throws DukeStoreInvalidAccessException {
+    public void unMark(int i) throws TaskListInvalidAccessException {
         if (i < 0 || i >= this.dfw.size()) { //Unassigned, invalid index
-            throw new DukeStoreInvalidAccessException();
+            throw new TaskListInvalidAccessException();
         }
         DukeTask task = this.dfw.setDone(i, false);
         String message = "OK, I've marked this task as not done yet:\n" + "  " + task;
@@ -108,13 +108,13 @@ public class TaskList {
      * Given the index of a task in the Store, attempts to delete it.
      *
      * @param i The index of the task in the Store
-     * @throws DukeStoreInvalidAccessException The exception indicating that an
+     * @throws TaskListInvalidAccessException The exception indicating that an
      * invalid index was provided.
      */
-    public void delete(int i) throws DukeStoreInvalidAccessException {
+    public void delete(int i) throws TaskListInvalidAccessException {
         long size = this.dfw.size();
         if (i < 0 || i >= size) {
-            throw new DukeStoreInvalidAccessException();
+            throw new TaskListInvalidAccessException();
         }
         DukeTask task = this.dfw.delete(i);
         String message = "Noted. I've removed this task:\n" + "  " + task

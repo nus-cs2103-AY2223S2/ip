@@ -2,7 +2,7 @@ package duke.command;
 
 import duke.exceptions.DukeEmptyTaskException;
 import duke.exceptions.DukeInvalidDateException;
-import duke.exceptions.DukeStoreFullException;
+import duke.exceptions.TaskListFullException;
 import duke.DukeUtils;
 import duke.task.DeadlineTask;
 import duke.TaskList;
@@ -50,7 +50,7 @@ public class DeadlineCommand extends Command {
             ui.error(
                     new DukeInvalidDateException()
             );
-        } catch (DukeStoreFullException e) {
+        } catch (TaskListFullException e) {
             ui.error(e);
         }
     }
