@@ -1,74 +1,43 @@
 <コ:彡
 Hello! I'm Duke, your favourite pink octopus.
 What can I do for you today?
-(\ (\
-(„• ֊ •„) ♡
-━O━O━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-Huh? Sorry, I don't know what this means :(
-(\ (\
-(„• ֊ •„) ♡
-━O━O━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-Huh? Your task number needs to be greater than zero!
-(\ (\
-(„• ֊ •„) ♡
-━O━O━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-Hey! You didn't give me a task description.
+I don't seem to know anything about you! First time meeting? :D
 (\ (\
 („• ֊ •„) ♡
 ━O━O━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 Alright! I've added this task:
-[T][ ] read book
+[D][ ] return book (by: 25 January 2023 18:00)
 Now you have 1 task on your list.
 (\ (\
 („• ֊ •„) ♡
 ━O━O━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-Hey! You didn't mention a deadline D:
-(\ (\
-(„• ֊ •„) ♡
-━O━O━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 Alright! I've added this task:
-[D][ ] return book (by: Sunday)
+[D][ ] project meeting (from: 25 January 2023 17:00 to: 25 January 2023 18:00)
 Now you have 2 tasks on your list.
 (\ (\
 („• ֊ •„) ♡
 ━O━O━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-Alright! I've added this task:
-[E][ ] project meeting (from: Mon 2pm to: 4pm)
-Now you have 3 tasks on your list.
-(\ (\
-(„• ֊ •„) ♡
-━O━O━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-Hey! You didn't mention a start time D:
-(\ (\
-(„• ֊ •„) ♡
-━O━O━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 Here are all the things on your list!
-1. [T][ ] read book
-2. [D][ ] return book (by: Sunday)
-3. [E][ ] project meeting (from: Mon 2pm to: 4pm)
+1. [D][ ] return book (by: 25 January 2023 18:00)
+2. [D][ ] project meeting (from: 25 January 2023 17:00 to: 25 January 2023 18:00)
+(\ (\
+(„• ֊ •„) ♡
+━O━O━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+Hmm! You're missing a to parameter D:
+(\ (\
+(„• ֊ •„) ♡
+━O━O━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+Hey, get your from date format right!
 (\ (\
 („• ֊ •„) ♡
 ━O━O━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 Okie! I've marked this task as done:
-[T][X] read book
-(\ (\
-(„• ֊ •„) ♡
-━O━O━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-Huh? You've already done this task!
-(\ (\
-(„• ֊ •„) ♡
-━O━O━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-Huh? You didn't give me a task to delete!
-(\ (\
-(„• ֊ •„) ♡
-━O━O━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-Okie! I've removed this task:
-[E][ ] project meeting (from: Mon 2pm to: 4pm)
-Now you have 2 tasks on your list.
+[D][X] return book (by: 25 January 2023 18:00)
 (\ (\
 („• ֊ •„) ♡
 ━O━O━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 Here are all the things on your list!
-1. [T][X] read book
-2. [D][ ] return book (by: Sunday)
+1. [D][X] return book (by: 25 January 2023 18:00)
+2. [D][ ] project meeting (from: 25 January 2023 17:00 to: 25 January 2023 18:00)
 Bye bye :( Hope to see you again soon!
+

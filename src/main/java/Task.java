@@ -1,6 +1,11 @@
+import java.time.format.DateTimeFormatter;
+
 public class Task {
     protected String desc;
     protected boolean isDone;
+    protected DateTimeFormatter dateFormatter = DateTimeFormatter.ofPattern("dd MMMM yyyy");
+    protected DateTimeFormatter timeFormatter = DateTimeFormatter.ofPattern("HH:mm");
+
     public Task(String desc) {
         this.desc = desc;
         this.isDone = false;
@@ -26,5 +31,9 @@ public class Task {
 
     public String toString() {
         return String.format("[%s] %s", getStatusIcon(), desc);
+    }
+
+    public String getDetailsToSave() { // dummy
+        return String.format("task %s", desc);
     }
 }

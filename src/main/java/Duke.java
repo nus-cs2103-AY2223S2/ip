@@ -20,23 +20,14 @@ public class Duke {
         try {
             Scanner sc = new Scanner(file);
 
-            // very messy, need to fix way of creating tasks!!
-            // don't pass input string into constructor. settle outside first
             while (sc.hasNext()) {
-                String line = sc.nextLine();
-                char taskType = line.charAt(line.indexOf(". [") + 3);
-                String fullDesc = line.substring(line.indexOf("] ") + 2);
-                if (taskType == 'T') {
-                    tasks.add(new ToDo(fullDesc));
-                } else if (taskType =='D') {
-                    String desc = fullDesc.substring(0, fullDesc.indexOf(" ("));
-                    String deadline = fullDesc.substring(fullDesc.indexOf("by: ") + 4, fullDesc.length() - 1);
-                    tasks.add(new Deadline(desc + " /by " + deadline));
-                } else { // taskType == 'E'
-                    String desc = fullDesc.substring(0, fullDesc.indexOf(" ("));
-                    String start = fullDesc.substring(fullDesc.indexOf("from: ") + 6, fullDesc.indexOf(" to:"));
-                    String end = fullDesc.substring(fullDesc.indexOf("to: ") + 4, fullDesc.length() - 1);
-                    tasks.add(new Event(desc + " /from " + start + " /to " + end));
+                String[] line = sc.nextLine().split(" ");
+                if (line[0].equals("todo")) {
+                    tasks.add(new ToDo(sc.nextLine()));
+                } else if (line[0].equals("deadline")) {
+                    tasks.add(new Deadline(sc.nextLine(), line[1], line[2]));
+                } else { // event
+                    tasks.add(new Event(sc.nextLine(), line[1], line[2], line[3], line[4]));
                 }
             }
             System.out.println("I'm so happy we're meeting again!");
@@ -44,6 +35,18 @@ public class Duke {
             System.out.println("I don't seem to know anything about you! First time meeting? :D");
         }
         return tasks;
+    }
+
+    static String saveTasks(ArrayList<Task> tasks) {
+        String str = "";
+        for (int i = 0; i < tasks.size(); i++) {
+            Task t = tasks.get(i);
+            str += t.getDetailsToSave();
+            if (i != tasks.size() - 1) {
+                str += '\n';
+            }
+        }
+        return str;
     }
 
     public static void main(String[] args) throws DukeException, FileNotFoundException {
@@ -123,7 +126,7 @@ public class Duke {
         }
 
         try {
-            writeToFile(filePath, generateList(tasks));
+            writeToFile(filePath, saveTasks(tasks));
         } catch (IOException err) {
             System.out.println("Something went wrong when trying to save your list!");
             System.out.println(err.getMessage());
@@ -192,58 +195,95 @@ public class Duke {
             System.out.println("Your list is currently empty!");
         } else {
             System.out.println("Here are all the things on your list!");
-            System.out.println(generateList(tasks));
-        }
-    }
-
-    static String generateList(ArrayList<Task> tasks) {
-        String str = "";
-        for (int i = 0; i < tasks.size(); i++) {
-            Task t = tasks.get(i);
-            str += String.format("%s. %s", i + 1, t);
-            if (i != tasks.size() - 1) {
-                str += '\n';
+            for (int i = 0; i < tasks.size(); i++) {
+                Task t = tasks.get(i);
+                System.out.println(String.format("%s. %s", i + 1, t));
             }
         }
-        return str;
     }
 
     static void addToDo(ArrayList<Task> tasks, String input) throws DukeException {
-        String rest = input.substring(4);
+        String rest = input.substring(4).trim();
         if (rest.isEmpty()) {
             throw new DukeInvalidArgumentException("Hey! You didn't give me a task description.");
         } else {
-            Duke.addTask(tasks, new ToDo(input.substring(5)));
+            Duke.addTask(tasks, new ToDo(rest));
         }
     }
 
     static void addDeadline(ArrayList<Task> tasks, String input) throws DukeException {
-        // todo: add datetime input validation, should be date format
-        String rest = input.substring(8);
+        String rest = input.substring(8).trim();
         if (rest.isEmpty()) {
             throw new DukeInvalidArgumentException("Hey! You didn't give me a task description.");
-        } else if (!rest.contains("/by") || rest.substring(rest.indexOf("/by") + 3).isEmpty()) {
-            throw new DukeInvalidArgumentException("Hey! You didn't mention a deadline D:");
-        } else {
-            Duke.addTask(tasks, new Deadline(input.substring(9)));
         }
+        String[] d = rest.split(" /by ");
+        if (d.length != 2) {
+            throw new DukeInvalidArgumentException("Hmm! You're missing a deadline D:");
+        }
+        String[] datetime = d[1].split(" ");
+        if (datetime.length != 2) {
+            throw new DukeInvalidArgumentException("Hmm! You're missing either a date or a time D:");
+        }
+        String date = datetime[0];
+        String[] ddmmyyyy = date.split("/");
+        if (ddmmyyyy.length != 3) {
+            throw new DukeInvalidArgumentException("Hey, get your date format right!");
+        }
+        String time = datetime[1];
+        if (time.length() != 4) {
+            throw new DukeInvalidArgumentException("Hey, get your time format right!");
+        }
+        Duke.addTask(tasks, new Deadline(d[0], date, time));
     }
 
     static void addEvent(ArrayList<Task> tasks, String input) throws DukeException {
-        // to clean up
-        // todo: add datetime input validation, should be date format
-        String rest = input.substring(8);
+
+        String rest = input.substring(5).trim();
+
         if (rest.isEmpty()) {
             throw new DukeInvalidArgumentException("Hey! You didn't give me a task description.");
-        } else if (!rest.contains("/from") || (rest.contains("/to") &&
-                rest.substring(rest.indexOf("/from") + 5, rest.indexOf("/to")).isEmpty()) ||
-                rest.substring(rest.indexOf("/from") + 5).isEmpty()) {
-            throw new DukeInvalidArgumentException("Hey! You didn't mention a start time D:");
-        } else if (!rest.contains("/to") || rest.substring(rest.indexOf("/to") + 3).isEmpty()) {
-            throw new DukeInvalidArgumentException("Hey! You didn't mention an end time D:");
-        } else {
-            Duke.addTask(tasks, new Event(input.substring(6)));
         }
+        String[] d = rest.split(" /from ");
+        if (d.length != 2) {
+            throw new DukeInvalidArgumentException("Hmm! You're missing a from parameter D:");
+        }
+        String[] fromTo = d[1].split(" /to ");
+        if (fromTo.length != 2) {
+            throw new DukeInvalidArgumentException("Hmm! You're missing a to parameter D:");
+        }
+
+        String from = fromTo[0];
+        String to = fromTo[1];
+
+        String[] datetimeFrom = from.split(" ");
+        if (datetimeFrom.length != 2) {
+            throw new DukeInvalidArgumentException("Hmm! You're missing either a from date or a from time D:");
+        }
+
+        String[] datetimeTo = to.split(" ");
+        if (datetimeTo.length != 2) {
+            throw new DukeInvalidArgumentException("Hmm! You're missing either a to date or a to time D:");
+        }
+
+        String[] dateFrom = datetimeFrom[0].split("/");
+        if (dateFrom.length != 3) {
+            throw new DukeInvalidArgumentException("Hey, get your from date format right!");
+        }
+        String timeFrom = datetimeFrom[1];
+        if (timeFrom.length() != 4) {
+            throw new DukeInvalidArgumentException("Hey, get your from time format right!");
+        }
+
+        String[] dateTo = datetimeTo[0].split("/");
+        if (dateTo.length != 3) {
+            throw new DukeInvalidArgumentException("Hey, get your to date format right!");
+        }
+        String timeTo = datetimeTo[1];
+        if (timeTo.length() != 4) {
+            throw new DukeInvalidArgumentException("Hey, get your to time format right!");
+        }
+
+        Duke.addTask(tasks, new Event(d[0], datetimeFrom[0], timeFrom, datetimeTo[0], timeTo));
     }
 
     static void addTask(ArrayList<Task> tasks, Task t) {

@@ -1,15 +1,8 @@
-bloop
-mark 0
-todo
-todo read book
-deadline return book /by
-deadline return book /by Sunday
-event project meeting /from Mon 2pm /to 4pm
-event art market /to 8pm
+deadline return book /by 25/01/2023 1800
+event project meeting /from 25/1/2023 1700 /to 25/1/2023 1800
 list
+event presentation /from 14/2/2023 1200
+event presentation /from 14022023 1200 /to 14022023 1400
 mark 1
-mark 1
-delete
-delete 3
 list
 bye
