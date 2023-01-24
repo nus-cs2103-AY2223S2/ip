@@ -1,37 +1,39 @@
-public class Task {
-  protected String name;
-  protected boolean completed;
+public abstract class Task {
+	protected String name;
+	protected boolean completed;
 
-  public Task(String name) throws DukeException {
-    if (name.isEmpty()) {
-      throw new DukeException("OOPS!!! The description of a task cannot be empty.");
-    }
-    this.name = name;
-    this.completed = false;
-  }
+	public Task(String name, boolean completed) throws DukeException {
+		if (name.isEmpty()) {
+			throw new DukeException("OOPS!!! The description of a task cannot be empty.");
+		}
+		this.name = name;
+		this.completed = completed;
+	}
 
-  public String getName() {
-    return this.name;
-  }
+	public abstract String serialize();
 
-  public boolean isCompleted() {
-    return this.completed;
-  }
+	public String getName() {
+		return this.name;
+	}
 
-  public void mark() {
-    this.completed = true;
-  }
+	public boolean isCompleted() {
+		return this.completed;
+	}
 
-  public void unmark() {
-    this.completed = false;
-  }
+	public void mark() {
+		this.completed = true;
+	}
 
-  public String getStatusIcon() {
-    return isCompleted() ? "X" : " ";
-  }
+	public void unmark() {
+		this.completed = false;
+	}
 
-  @Override
-  public String toString() {
-    return String.format("[%s] %s", getStatusIcon(), getName());
-  }
+	public String getStatusIcon() {
+		return isCompleted() ? "X" : " ";
+	}
+
+	@Override
+	public String toString() {
+		return String.format("[%s] %s", getStatusIcon(), getName());
+	}
 }

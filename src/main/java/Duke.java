@@ -19,11 +19,12 @@ public class Duke {
         System.out.println("Hello I am" + LOGO + "What Can I do for you?");
     }
 
-    public void close() {
-        sc.close();
-    }
-
     public void start() {
+        try {
+            tasks.loadTasks();
+        } catch(Exception e) {
+            System.out.printf("Failed to load tasks: %s\n", e.toString());
+        }
         while (true) {
             System.out.print(">>> ");
             String cmd = sc.nextLine();
@@ -39,7 +40,16 @@ public class Duke {
         }
     }
 
-    /*
+    public void close() {
+        try {
+            this.tasks.saveTasks();
+        } catch (Exception e) {
+            System.out.printf("Failed to Save task: %s\n", e.toString());
+        }
+        sc.close();
+    }
+
+    /**
      * @param   cmd the command to be processed by duke
      * @return      whether the command is the last command it runs
      */
@@ -58,19 +68,19 @@ public class Duke {
             tasks.unmarkTask(index);
         } else if (cmd.matches("^todo .*$")) {
             String taskName = cmd.substring(5);
-            tasks.addTask(new Todo(taskName));
+            tasks.addTask(new Todo(taskName, false));
         } else if (cmd.matches("^deadline .* /by .*$")) {
             int byStart = cmd.indexOf("/by");
             String taskName = cmd.substring(9, byStart - 1);
             String by = cmd.substring(byStart + 4);
-            tasks.addTask(new Deadline(taskName, by));
+            tasks.addTask(new Deadline(taskName, false, by));
         } else if (cmd.matches("^event .* /from .* /to .*$")) {
             int byStart = cmd.indexOf("/from");
             int toStart = cmd.indexOf("/to");
             String taskName = cmd.substring(6, byStart - 1);
             String by = cmd.substring(byStart + 6, toStart - 1);
             String to = cmd.substring(toStart + 4);
-            tasks.addTask(new Event(taskName, by, to));
+            tasks.addTask(new Event(taskName, false, by, to));
         } else if (cmd.matches("^delete [0-9]*$")) {
             int index = Integer.parseInt(cmd.substring(7)) - 1;
             tasks.deleteTask(index);
