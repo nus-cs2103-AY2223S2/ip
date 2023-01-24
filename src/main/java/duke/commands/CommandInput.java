@@ -27,7 +27,7 @@ public enum CommandInput {
 
     /**
      * Gets the type of command that the user entered.
-     * @param commandLine command line input from user
+     * @param commandLine Command line input from user
      * @return CommandInput type of corresponding command
      */
     public static CommandInput getCommandInput(String commandLine) {

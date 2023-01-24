@@ -13,8 +13,8 @@ public abstract class Command {
 
     /**
      * Constructor method.
-     * @param taskList The task list to execute the command on
-     * @param lineInput The command line that the user has enters
+     * @param taskList Task list to execute the command on
+     * @param lineInput Command line that the user has enters
      */
     public Command(TaskList taskList, String lineInput) {
         this.taskList = taskList;

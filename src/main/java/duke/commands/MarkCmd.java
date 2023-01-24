@@ -17,12 +17,12 @@ public class MarkCmd extends Command {
 
     /**
      * Constructor method.
-     * @param taskList The task list of the task to mark
-     * @param lineInput The command line input that the user entered
+     * @param taskList Task list of the task to mark
+     * @param lineInput Command line input that the user entered
      */
     public MarkCmd(TaskList taskList, String lineInput) {
         super(taskList, lineInput);
-        this.index = Parser.parseMarkUnmarkDelete(lineInput);
+        this.index = Parser.parseMarkUnmarkDeleteIndex(lineInput);
     }
 
     // Marks the specified task as completed.

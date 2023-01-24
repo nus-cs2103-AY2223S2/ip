@@ -17,12 +17,12 @@ public class UnmarkCmd extends Command {
 
     /**
      * Constructor method.
-     * @param taskList The task list of the task to unmark
-     * @param lineInput The command line input that the user entered
+     * @param taskList Task list of the task to unmark
+     * @param lineInput Command line input that the user entered
      */
     public UnmarkCmd(TaskList taskList, String line) {
         super(taskList, line);
-        this.index = Parser.parseMarkUnmarkDelete(line);
+        this.index = Parser.parseMarkUnmarkDeleteIndex(line);
     }
 
     // Changes the status of the specified task to incomplete.

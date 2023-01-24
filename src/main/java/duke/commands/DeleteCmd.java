@@ -16,8 +16,8 @@ public class DeleteCmd extends Command {
 
     /**
      * Constructor method.
-     * @param taskList The task list to remove the task from
-     * @param lineInput The command line input that the user entered
+     * @param taskList Task list to remove the task from
+     * @param lineInput Command line input that the user entered
      */
     public DeleteCmd(TaskList taskList, String lineInput) {
         super(taskList, lineInput);
@@ -26,7 +26,7 @@ public class DeleteCmd extends Command {
 
     // Deletes the specified task from the task list.
     public void execute() {
-        int index = Parser.parseMarkUnmarkDelete(lineInput);
+        int index = Parser.parseMarkUnmarkDeleteIndex(lineInput);
         this.task = this.taskList.removeTask(index);
         uiReply();
     }
