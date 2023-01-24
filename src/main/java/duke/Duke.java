@@ -1,11 +1,11 @@
-import java.io.File;
-import java.io.FileWriter;
-import java.io.IOException;
-import java.nio.file.Files;
-import java.nio.file.Paths;
-import java.time.format.DateTimeParseException;
-import java.util.Scanner;
-import java.util.List;
+package duke;
+
+import duke.commands.Command;
+import duke.exception.DukeException;
+import duke.parser.Parser;
+import duke.storage.Storage;
+import duke.task.TaskList;
+import duke.ui.Ui;
 
 // A chatbot
 public class Duke {

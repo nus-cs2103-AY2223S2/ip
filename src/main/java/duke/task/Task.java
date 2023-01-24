@@ -1,3 +1,7 @@
+package duke.task;
+
+import duke.storage.Storage;
+
 public abstract class Task {
     protected String description;
     protected boolean isDone = false;

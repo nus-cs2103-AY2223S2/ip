@@ -1,10 +1,27 @@
-import java.io.IOException;
-import java.nio.file.Files;
-import java.nio.file.Paths;
+package duke.parser;
+
+import duke.commands.AddDeadlineCommand;
+import duke.commands.AddEventCommand;
+import duke.commands.AddTodoCommand;
+import duke.commands.CommandType;
+import duke.commands.Command;
+import duke.commands.DeleteTaskCommand;
+import duke.commands.DisplayListCommand;
+import duke.commands.ExitCommand;
+import duke.commands.MarkTaskAsDoneCommand;
+import duke.commands.MarkTaskAsUndoneCommand;
+import duke.exception.CannotReadFileDukeException;
+import duke.exception.DukeException;
+import duke.exception.EmptyArgumentDukeException;
+import duke.exception.InvalidArgumentDukeException;
+import duke.task.DeadlineTask;
+import duke.task.EventTask;
+import duke.task.Task;
+import duke.task.ToDoTask;
+
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
-import java.util.List;
 
 public class Parser {
     public LocalDateTime parseDateTime(String str) throws DateTimeParseException {
@@ -41,7 +58,7 @@ public class Parser {
         String[] parts = input.split(" ", 2);
         String command = parts[0];
         CommandType commandType = CommandType.getCommandType(command);
-        // commands with no arguments
+        // duke.commands with no arguments
         switch (commandType) {
         case EXIT:
             return new ExitCommand();
@@ -49,7 +66,7 @@ public class Parser {
             return new DisplayListCommand();
         }
 
-        // commands with arguments
+        // duke.commands with arguments
         if (parts.length < 2) {
             throw new EmptyArgumentDukeException();
         }
