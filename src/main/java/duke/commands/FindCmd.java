@@ -2,6 +2,7 @@ package duke.commands;
 
 import duke.Parser;
 import duke.Ui;
+import duke.exceptions.CommandExecutionError;
 import duke.tasks.TaskList;
 
 public class FindCmd extends Command {
@@ -17,7 +18,7 @@ public class FindCmd extends Command {
     } 
 
     /** Searches for specified keyword in the task list */
-    public void execute() {
+    public void execute() throws CommandExecutionError {
         String findKeyword = Parser.parseFindKeyword(this.lineInput);
         this.findResult = this.taskList.find(findKeyword);
         uiReply();

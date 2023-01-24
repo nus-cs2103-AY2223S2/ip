@@ -2,6 +2,7 @@ package duke.commands;
 
 import duke.Parser;
 import duke.Ui;
+import duke.exceptions.ListIndexMissing;
 import duke.tasks.Task;
 import duke.tasks.TaskList;
 
@@ -20,13 +21,14 @@ public class UnmarkCmd extends Command {
      * @param taskList Task list of the task to unmark
      * @param lineInput Command line input that the user entered
      */
-    public UnmarkCmd(TaskList taskList, String line) {
-        super(taskList, line);
-        this.index = Parser.parseMarkUnmarkDeleteIndex(line);
+    public UnmarkCmd(TaskList taskList, String lineInput) {
+        super(taskList, lineInput);
+
     }
 
     // Changes the status of the specified task to incomplete.
-    public void execute() {
+    public void execute() throws ListIndexMissing {
+        this.index = Parser.parseMarkUnmarkDeleteIndex(this.lineInput);
         this.task = taskList.get(this.index).unmarkDone();
         uiReply();
     }

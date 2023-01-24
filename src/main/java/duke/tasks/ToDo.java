@@ -18,7 +18,7 @@ public class ToDo extends Task {
         try {
             return new ToDo(Parser.parseToDoCmd(commandInput)[0], false);
         } catch (StringIndexOutOfBoundsException e) {
-            throw new TaskNameNotSpecified("ToDo description cannot be empty.");
+            throw new TaskNameNotSpecified();
         }
     }
 

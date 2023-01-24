@@ -1,5 +1,6 @@
 package duke.commands;
 
+import duke.exceptions.CommandExecutionError;
 import duke.tasks.TaskList;
 
 /**
@@ -15,15 +16,16 @@ public abstract class Command {
      * Constructor method.
      * @param taskList Task list to execute the command on
      * @param lineInput Command line that the user has enters
+     * @throws CommandExecutionError Unable to execute command 
      */
     public Command(TaskList taskList, String lineInput) {
         this.taskList = taskList;
         this.lineInput = lineInput;
     }
 
-    // Performs the action according to the type of command.
-    public abstract void execute();
+    /** Performs the action according to the type of command. */
+    public abstract void execute() throws CommandExecutionError;
     
-    // Acknowledges to the user that the command has been executed.
+    /** Acknowledges to the user that the command has been executed. */
     public abstract void uiReply();
 }
