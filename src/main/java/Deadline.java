@@ -28,4 +28,13 @@ public class Deadline extends Task {
                ? "[" + typeOfTask + "][X] " + this.taskName + (" (by: ") + this.deadlineOfTask + ")"
                : "[" + typeOfTask + "][ ] " + this.taskName + (" (by: ") + this.deadlineOfTask + ")";
     }
+
+    /**
+     * Gets the deadline of the task.
+     *
+     * @return the deadline of the task.
+     */
+    public String getDeadlineOfTask() {
+        return deadlineOfTask;
+    }
 }

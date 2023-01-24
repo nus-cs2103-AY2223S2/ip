@@ -34,4 +34,22 @@ public class Event extends Task {
                 : "[" + typeOfTask + "][ ] " + this.taskName + (" (from: ") + this.startDate +
                         " to: " + this.endDate + ")";
     }
+
+    /**
+     * Gets the start date of the event task.
+     *
+     * @return the start date of the event task.
+     */
+    public String getStartDate() {
+        return this.startDate;
+    }
+
+    /**
+     * Gets the end date of the event task.
+     *
+     * @return the end date of the event task.
+     */
+    public String getEndDate() {
+        return this.endDate;
+    }
 }

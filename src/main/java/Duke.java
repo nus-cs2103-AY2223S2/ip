@@ -1,5 +1,10 @@
 import java.io.*;
+
 import java.util.ArrayList;
+import java.util.Scanner;
+
+import java.nio.file.Files;
+import java.nio.file.Paths;
 
 /**
  * Represents a chatbot that one can interact with to keep track of tasks.
@@ -12,9 +17,12 @@ public class Duke {
                                      + " | ____ |  |______|  |______|\n";
 
     /** Straight line that separates commands. **/
-    private static final String straightLine =
+    private static final String STRAIGHT_LINE =
             "_______________________________________________________________________________________________";
 
+    /** File path where the data file should be stored in. **/
+    private static final String dataFilePath = Paths.get(System.getProperty("user.dir"), "data", "tasks.txt")
+            .toString();
 
     /**
      * Launches the chatbot.
@@ -22,28 +30,43 @@ public class Duke {
      * @param args The command line arguments that one can type.
      */
     public static void main(String[] args) {
-        //Stores user input
-        ArrayList<Task> taskStorage = new ArrayList<Task>();
-
+        //Prints introduction
         printIntroductoryMessage();
 
-        //Prepare input and output sources
-        BufferedReader br = new BufferedReader(new InputStreamReader((System.in)));
-        PrintWriter pw = new PrintWriter(new BufferedWriter(new OutputStreamWriter(System.out)));
+        //Checks if user has a data file that stores task history
+        if (isFirstRun()) {
+            //User's first time running the bot. Create relevant folder and file.
+            try {
+                createFile();
+            } catch (IOException e) {
+                System.out.println(STRAIGHT_LINE);
+                System.out.println("Could not create data file to store task history. The following error occurred:");
+                System.out.println(e.getMessage());
+                System.out.println(STRAIGHT_LINE);
+                return;
+            }
+        }
+
+        //Restores task history if present
+        ArrayList<Task> tasks = new ArrayList<Task>();
+        try {
+            restoreTaskHistory(tasks);
+        } catch (FileNotFoundException e) {
+            System.out.println(STRAIGHT_LINE);
+            System.out.println("Data file is missing. The following error occurred: ");
+            System.out.println(e.getMessage());
+            System.out.println(STRAIGHT_LINE);
+        }
+
+
+
+        //Prepare input source
+        Scanner sc = new Scanner(System.in);
 
         //Keep taking in user input line by line
         while (true) {
-            String input;
-            try {
-                input = br.readLine();
-            }
-            catch (IOException ie) {
-                pw.println("Error encountered in receiving input.");
-                pw.println("The error message is: ");
-                pw.flush();
-                ie.printStackTrace();
-                break;
-            }
+            //Read in user command
+            String input = sc.nextLine();
 
             //Determine if user types in a single word or multiple words
             String[] inputArray = input.split(" ");
@@ -55,7 +78,7 @@ public class Duke {
             }
             //User typed in "list"
             else if (input.equals("list")) {
-                printUserTasks(taskStorage);
+                printUserTasks(tasks);
                 continue;
             }
 
@@ -70,16 +93,17 @@ public class Duke {
                         throw new DukeException("The mark command must be followed by a single integer.");
                     }
                     int indexOfTask = Integer.parseInt(inputArray[1]) - 1;
-                    if (! (indexOfTask <= taskStorage.size() - 1 && indexOfTask >= 0)) {
+                    if (! (indexOfTask <= tasks.size() - 1 && indexOfTask >= 0)) {
                         throw new DukeException("Please enter a valid task number. You currently have " +
-                                Integer.toString(taskStorage.size()) + " tasks.");
+                                Integer.toString(tasks.size()) + " tasks.");
                     }
-                    markAsDone(taskStorage.get(indexOfTask));
+                    markAsDone(tasks.get(indexOfTask));
+                    saveTasks(tasks);
                     break;
                 } catch (DukeException dukeException) {
-                    System.out.println(straightLine);
+                    System.out.println(STRAIGHT_LINE);
                     System.out.println(dukeException.getMessage());
-                    System.out.println(straightLine);
+                    System.out.println(STRAIGHT_LINE);
                     break;
                 }
             case "unmark":
@@ -91,16 +115,17 @@ public class Duke {
                         throw new DukeException("The unmark command must be followed by a single integer.");
                     }
                     int indexOfTask = Integer.parseInt(inputArray[1]) - 1;
-                    if (! (indexOfTask <= taskStorage.size() - 1 && indexOfTask >= 0)) {
+                    if (! (indexOfTask <= tasks.size() - 1 && indexOfTask >= 0)) {
                         throw new DukeException("Please enter a valid task number. You currently have " +
-                                Integer.toString(taskStorage.size()) + " tasks.");
+                                Integer.toString(tasks.size()) + " tasks.");
                     }
-                    markAsUndone(taskStorage.get(indexOfTask));
+                    markAsUndone(tasks.get(indexOfTask));
+                    saveTasks(tasks);
                     break;
                 } catch (DukeException dukeException) {
-                    System.out.println(straightLine);
+                    System.out.println(STRAIGHT_LINE);
                     System.out.println(dukeException.getMessage());
-                    System.out.println(straightLine);
+                    System.out.println(STRAIGHT_LINE);
                     break;
                 }
             case "delete":
@@ -112,16 +137,17 @@ public class Duke {
                         throw new DukeException("The delete command must be followed by a single integer.");
                     }
                     int indexOfTask = Integer.parseInt(inputArray[1]) - 1;
-                    if (! (indexOfTask <= taskStorage.size() - 1 && indexOfTask >= 0)) {
+                    if (! (indexOfTask <= tasks.size() - 1 && indexOfTask >= 0)) {
                         throw new DukeException("Please enter a valid task number. You currently have "
-                                + Integer.toString(taskStorage.size()) + " tasks.");
+                                + Integer.toString(tasks.size()) + " tasks.");
                     }
-                    deleteTask(indexOfTask, taskStorage);
+                    deleteTask(indexOfTask, tasks);
+                    saveTasks(tasks);
                     break;
                 } catch (DukeException dukeException) {
-                    System.out.println(straightLine);
+                    System.out.println(STRAIGHT_LINE);
                     System.out.println(dukeException.getMessage());
-                    System.out.println(straightLine);
+                    System.out.println(STRAIGHT_LINE);
                     break;
                 }
             case "todo":
@@ -132,12 +158,13 @@ public class Duke {
                     int indexOfType = input.indexOf("todo");
                     String taskName = input.substring(indexOfType + 5);
                     ToDo newToDoTask = new ToDo(taskName);
-                    addTask(newToDoTask, taskStorage);
+                    addTask(newToDoTask, tasks);
+                    saveTasks(tasks);
                     break;
                 } catch (DukeException dukeException) {
-                    System.out.println(straightLine);
+                    System.out.println(STRAIGHT_LINE);
                     System.out.println(dukeException.getMessage());
-                    System.out.println(straightLine);
+                    System.out.println(STRAIGHT_LINE);
                     break;
                 }
             case "deadline":
@@ -175,12 +202,13 @@ public class Duke {
                         throw new DukeException("The deadline cannot be left blank.");
                     }
                     Deadline newDeadlineTask = new Deadline(taskName, deadlineOfTask);
-                    addTask(newDeadlineTask, taskStorage);
+                    addTask(newDeadlineTask, tasks);
+                    saveTasks(tasks);
                     break;
                 } catch (DukeException dukeException) {
-                    System.out.println(straightLine);
+                    System.out.println(STRAIGHT_LINE);
                     System.out.println(dukeException.getMessage());
-                    System.out.println(straightLine);
+                    System.out.println(STRAIGHT_LINE);
                     break;
                 }
             case "event":
@@ -230,12 +258,13 @@ public class Duke {
                         throw new DukeException("The end date cannot be left blank.");
                     }
                     Event newEventTask = new Event(taskName, startDate, endDate);
-                    addTask(newEventTask, taskStorage);
+                    addTask(newEventTask, tasks);
+                    saveTasks(tasks);
                     break;
                 } catch (DukeException dukeException) {
-                    System.out.println(straightLine);
+                    System.out.println(STRAIGHT_LINE);
                     System.out.println(dukeException.getMessage());
-                    System.out.println(straightLine);
+                    System.out.println(STRAIGHT_LINE);
                     break;
                 }
             default:
@@ -243,9 +272,10 @@ public class Duke {
             }
         }
 
-        //Exits the bot with an exit message
+
+        //Exits the bot after printing exit message
         printExitMessage();
-        pw.close();
+        sc.close();
     }
 
 
@@ -254,7 +284,7 @@ public class Duke {
      */
     public static void printIntroductoryMessage() {
         System.out.println(logo);
-        System.out.println(straightLine);
+        System.out.println(STRAIGHT_LINE);
         System.out.println("Boo! Nice to meet you.");
         System.out.println("I am here to scare all your problems away by keeping track of your tasks.");
         System.out.println("What can I help you with today?\n");
@@ -272,60 +302,60 @@ public class Duke {
 
 
 
-        System.out.println(straightLine);
+        System.out.println(STRAIGHT_LINE);
     }
 
     /**
      * Prints the exit message.
      */
     public static void printExitMessage() {
-        System.out.println(straightLine);
+        System.out.println(STRAIGHT_LINE);
         System.out.println("Goodbye. Hope that I have managed to scare all your problems away.");
         System.out.println("Have a great day! :)");
-        System.out.println(straightLine);
+        System.out.println(STRAIGHT_LINE);
     }
 
     /**
      * Prints out all the user tasks that have been entered by the user thus far.
      *
-     * @param taskStorage The ArrayList that stores the user tasks to be printed out.
+     * @param tasks The ArrayList that stores the user tasks to be printed out.
      */
-    public static void printUserTasks(ArrayList<Task> taskStorage) {
-        System.out.println(straightLine);
-        if (taskStorage.size() == 0) {
+    public static void printUserTasks(ArrayList<Task> tasks) {
+        System.out.println(STRAIGHT_LINE);
+        if (tasks.size() == 0) {
             System.out.println("There are currently no tasks in your list.");
-            System.out.println(straightLine);
+            System.out.println(STRAIGHT_LINE);
             return;
         }
         System.out.println("Here are the tasks in your list:");
-        int numberOfTasks= taskStorage.size();
+        int numberOfTasks= tasks.size();
         //Process each task in the storage
         for (int i = 0; i < numberOfTasks; i = i + 1) {
             String numbering = Integer.toString(i + 1) + ". ";
-            String output = numbering + taskStorage.get(i).getStatusOfTaskInString();
+            String output = numbering + tasks.get(i).getStatusOfTaskInString();
             System.out.println(output);
         }
-        System.out.println(straightLine);
+        System.out.println(STRAIGHT_LINE);
     }
 
     /**
      * Adds user task into storage and informs the user.
      *
      * @param taskToAdd The task to be added to storage.
-     * @param taskStorage The ArrayList that stores the tasks.
+     * @param tasks The ArrayList that stores the tasks.
      */
-    public static void addTask(Task taskToAdd, ArrayList<Task> taskStorage) {
-        taskStorage.add(taskToAdd);
-        System.out.println(straightLine);
+    public static void addTask(Task taskToAdd, ArrayList<Task> tasks) {
+        tasks.add(taskToAdd);
+        System.out.println(STRAIGHT_LINE);
         System.out.println("Added task to list:");
         System.out.println(taskToAdd.getStatusOfTaskInString());
-        if (taskStorage.size() == 1) {
+        if (tasks.size() == 1) {
             System.out.println("Currently, there is 1 task in your list.");
         } else {
-            System.out.println("Currently, there are " + Integer.toString(taskStorage.size())
+            System.out.println("Currently, there are " + Integer.toString(tasks.size())
                     + " tasks in your list.");
         }
-        System.out.println(straightLine);
+        System.out.println(STRAIGHT_LINE);
     }
 
     /**
@@ -335,10 +365,10 @@ public class Duke {
      */
    public static void markAsDone(Task currentTask) {
        currentTask.setDoneStatus();
-       System.out.println(straightLine);
+       System.out.println(STRAIGHT_LINE);
        System.out.println("Poof! One less worry. The following task is now marked as done:");
        System.out.println(currentTask.getStatusOfTaskInString());
-       System.out.println(straightLine);
+       System.out.println(STRAIGHT_LINE);
    }
 
     /**
@@ -348,35 +378,35 @@ public class Duke {
      */
     public static void markAsUndone(Task currentTask) {
         currentTask.setUndoneStatus();
-        System.out.println(straightLine);
+        System.out.println(STRAIGHT_LINE);
         System.out.println("Alright! The following task is now marked as undone. I will help you keep an eye on it.");
         System.out.println(currentTask.getStatusOfTaskInString());
-        System.out.println(straightLine);
+        System.out.println(STRAIGHT_LINE);
     }
 
     /**
      * Prints a message indicating to the user that the command is invalid.
      */
     public static void printInvalidMessage() {
-        System.out.println(straightLine);
+        System.out.println(STRAIGHT_LINE);
         System.out.println("Sorry. I do not understand this command. Please try again.");
-        System.out.println(straightLine);
+        System.out.println(STRAIGHT_LINE);
     }
 
     /**
      * Deletes a task from the given list of task, and informs the user.
      *
      * @param indexOfTask Index of the task in the list that is to be deleted.
-     * @param taskStorage List containing all the tasks.
+     * @param tasks List containing all the tasks.
      */
-    public static void deleteTask(int indexOfTask, ArrayList<Task> taskStorage) {
-        Task taskToBeDeleted = taskStorage.get(indexOfTask);
-        taskStorage.remove(indexOfTask);
-        System.out.println(straightLine);
+    public static void deleteTask(int indexOfTask, ArrayList<Task> tasks) {
+        Task taskToBeDeleted = tasks.get(indexOfTask);
+        tasks.remove(indexOfTask);
+        System.out.println(STRAIGHT_LINE);
         System.out.println("Ta-da! The following task has been deleted.");
         System.out.println(taskToBeDeleted.getStatusOfTaskInString());
-        System.out.println("Current number of tasks is: " + Integer.toString(taskStorage.size()) + ".");
-        System.out.println(straightLine);
+        System.out.println("Current number of tasks is: " + Integer.toString(tasks.size()) + ".");
+        System.out.println(STRAIGHT_LINE);
     }
 
 
@@ -394,6 +424,122 @@ public class Duke {
         }
         return true;
     }
+
+    /**
+     * Determines if it is the first time that the user uses the chatbot by checking for
+     * the existence of a data file.
+     *
+     * @return true if it is the user's first time running the chatbot,
+     *         else return false.
+     */
+    public static boolean isFirstRun() {
+        //Check if the path to the data file is valid
+        java.nio.file.Path desiredPath =  Paths.get(System.getProperty("user.dir"), "data", "tasks.txt");
+        return ! java.nio.file.Files.exists(desiredPath);
+    }
+
+    /**
+     * Creates the data file for the user to store task history.
+     *
+     * @throws IOException if an I/O error occurred during file creation.
+     */
+    public static void createFile() throws IOException {
+        //Make the directory
+        java.nio.file.Path desiredPath =  Paths.get(System.getProperty("user.dir"), "data");
+        File directory = new File(desiredPath.toString());
+        if (! directory.exists()) {
+            directory.mkdir();
+        }
+
+        //Create the file
+        File dataFile = new File(dataFilePath);
+        if (! dataFile.exists()) {
+            dataFile.createNewFile();
+        }
+    }
+
+
+    /**
+     * Restores the task history stored in the data file.
+     *
+     * @param tasks The ArrayList that store all the tasks.
+     * @throws FileNotFoundException if the data file cannot be found.
+     */
+    public static void restoreTaskHistory(ArrayList<Task> tasks) throws FileNotFoundException {
+        File dataFile = new File(dataFilePath);
+        Scanner s = new Scanner(dataFile);
+        while (s.hasNext()) {
+            String currentTask = s.nextLine();
+            String[] currentTaskArray = currentTask.split(" \\| ");
+            String commandType = currentTaskArray[0];
+            //Adds each task stored in the data file into tasks
+            switch (commandType) {
+            case "T":
+                Task toDoTask = new ToDo(currentTaskArray[2]);
+                if (currentTaskArray[1].equals("1")) {
+                    toDoTask.setDoneStatus();
+                }
+                tasks.add(toDoTask);
+                break;
+            case "D":
+                Task deadlineTask = new Deadline(currentTaskArray[2], currentTaskArray[3]);
+                if (currentTaskArray[1].equals("1")) {
+                    deadlineTask.setDoneStatus();
+                }
+                tasks.add(deadlineTask);
+                break;
+            case "E":
+                Task eventTask = new Event(currentTaskArray[2], currentTaskArray[3], currentTaskArray[4]);
+                if (currentTaskArray[1].equals("1")) {
+                    eventTask.setDoneStatus();
+                }
+                tasks.add(eventTask);
+                break;
+            }
+        }
+    }
+
+
+    /**
+     * Saves the tasks that are currently stored in the list into a data file stored in hard disk.
+     *
+     * @param tasks The list that contains the tasks to be saved.
+     */
+    public static void saveTasks(ArrayList<Task> tasks) {
+        try {
+            File dataFile = new File(dataFilePath);
+            FileWriter fw = new FileWriter(dataFilePath);
+            //Reset content of file
+            fw.write("");
+            fw = new FileWriter(dataFilePath, true);
+            //Append new content into file
+            for (int i = 0; i < tasks.size(); i = i + 1) {
+                Task currentTask = tasks.get(i);
+                String taskStatus = (currentTask.getStatusOfTask())
+                                    ? "1 | "
+                                    : "0 | ";
+                String lineToAdd = (currentTask instanceof ToDo)
+                                   ? "T | " + taskStatus + currentTask.getNameOfTask()
+                                   : (currentTask instanceof Deadline)
+                                   ? "D | " + taskStatus + currentTask.getNameOfTask() + " | "
+                                           + ((Deadline) currentTask).getDeadlineOfTask()
+                                   : "E | " + taskStatus + currentTask.getNameOfTask() + " | "
+                                           + ((Event) currentTask).getStartDate() + " | "
+                                                   + ((Event) currentTask).getEndDate();
+                if (i != tasks.size() - 1) {
+                    lineToAdd += "\n";
+                }
+                fw.write(lineToAdd);
+            }
+            fw.close();
+        } catch (IOException e) {
+            System.out.println("Could not save the tasks. The following error occurred: ");
+            System.out.println(e.getMessage());
+        }
+
+    }
+
+
 }
 
 
