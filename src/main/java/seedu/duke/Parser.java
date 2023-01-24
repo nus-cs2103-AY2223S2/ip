@@ -47,7 +47,7 @@ public class Parser {
                     storage.save(taskList);
                     break;
                 }
-                // Create Duke.Todo task
+                // Create Duke.To do task
                 case TODO: {
                     try {
                         String input = description[1];

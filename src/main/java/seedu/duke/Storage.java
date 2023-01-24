@@ -50,7 +50,7 @@ public class Storage {
                 String[] s = task.split("\\|");
                 String taskType = s[0].substring(0, 1);
                 switch (taskType) {
-                    // for Duke.Todo
+                    // for Duke.To do
                     case "T":
                         String todoName = s[2].substring(1);
                         Todo todo = new Todo(todoName);
