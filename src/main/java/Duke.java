@@ -35,13 +35,19 @@ public class Duke {
         return res;
     }
 
-    public String mark_as_done(int index) {
+    public String mark_as_done(int index) throws DukeException {
+        if (tasks.size() <= index) {
+            throw new WrongIndexException();
+        }
         Task task = this.tasks.get(index);
         task.mark();
         return "Nice! I've marked this task as done:\n" + task.toString();
     }
 
-    public String mark_as_undone(int index) {
+    public String mark_as_undone(int index) throws DukeException {
+        if (tasks.size() <= index) {
+            throw new WrongIndexException();
+        }
         Task task = this.tasks.get(index);
         task.unmark();
         return "OK, I've marked this task as not done yet:\n" + task.toString();
