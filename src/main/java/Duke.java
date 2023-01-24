@@ -166,7 +166,6 @@ public class Duke {
     public static void loadTaskLine(String taskLine) {
         // TODO: Handle corruption in file, leading to incorrect syntax
         String[] attributes = taskLine.split(", ");
-        System.out.println(Arrays.toString(attributes));
         String type = attributes[0];
         String doneNumber = attributes[1];
         boolean done = Objects.equals(doneNumber, "1");
