@@ -94,4 +94,16 @@ public abstract class Task {
 
         return task.taskDescription.equals(this.taskDescription) && task.isDone == this.isDone;
     }
+
+    /**
+     * Returns whether the current task has the specified keyword in its description.
+     *
+     * @param keyword Keyword
+     * @return Boolean indicating whether the task description includes the keyword.
+     */
+    public boolean hasKeyword(String keyword) {
+        return this.taskDescription
+                .toLowerCase()
+                .contains(keyword.toLowerCase());
+    }
 }

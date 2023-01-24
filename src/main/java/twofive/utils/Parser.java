@@ -6,12 +6,14 @@ import twofive.command.DeadlineCommand;
 import twofive.command.DeleteCommand;
 import twofive.command.DueDateCommand;
 import twofive.command.EventCommand;
+import twofive.command.FindCommand;
 import twofive.command.ListCommand;
 import twofive.command.MarkCommand;
 import twofive.command.ToDoCommand;
 import twofive.command.UnmarkCommand;
 
 import twofive.exception.EmptyDescriptionException;
+import twofive.exception.EmptyKeywordException;
 import twofive.exception.EmptyStartTimeException;
 import twofive.exception.EmptyTasknumException;
 import twofive.exception.MissingArgumentException;
@@ -19,9 +21,6 @@ import twofive.exception.EmptyEndTimeException;
 import twofive.exception.EmptyDeadlineException;
 import twofive.exception.EmptyDateException;
 import twofive.exception.InvalidCommandException;
-
-import java.io.FileNotFoundException;
-import java.time.format.DateTimeParseException;
 
 /**
  * Parses the contents of a given command to obtain the action
@@ -66,7 +65,7 @@ public class Parser {
     public static Command parse(String command)
             throws EmptyTasknumException, EmptyDescriptionException,
             MissingArgumentException, EmptyStartTimeException, EmptyEndTimeException, EmptyDeadlineException,
-            EmptyDateException, InvalidCommandException {
+            EmptyDateException, InvalidCommandException, EmptyKeywordException {
         String commandWord = command.split(" ")[0].trim();
 
         switch (commandWord) {
@@ -128,11 +127,20 @@ public class Parser {
         case "due":
             String[] dueSplit = command.split(commandWord);
             if (dueSplit.length <= 1 || dueSplit[1].trim().equals("")) {
-                //If task description is empty
+                // If task description is empty
                 throw new EmptyDateException();
             } else {
                 String dueDateString = dueSplit[1].trim();
                 return new DueDateCommand(dueDateString);
+            }
+        case "find":
+            String[] keywordSplit = command.split(commandWord);
+            if (keywordSplit.length <= 1 || keywordSplit[1].trim().equals("")) {
+                // if no keyword provided
+                throw new EmptyKeywordException();
+            } else {
+                String keyword = keywordSplit[1].trim();
+                return new FindCommand(keyword);
             }
         case "bye":
             return new ByeCommand();

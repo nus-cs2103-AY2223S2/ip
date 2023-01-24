@@ -141,4 +141,36 @@ public class TaskList {
         }
         return stringBuilder.toString();
     }
+
+    /**
+     * Returns a String containing all tasks which have the specified keyword in their description,
+     * including their type, whether it is done and the description.
+     * Contains the deadline for Deadline tasks.
+     * Contains the start time and end time for Event tasks.
+     *
+     * @param keyword Keyword used to filter tasks
+     * @return String containing all added tasks with the keyword in their description
+     */
+    public String getKeywordString(String keyword) {
+        StringBuilder stringBuilder = new StringBuilder("Here are the tasks in your list with keyword [" + keyword +
+                "] in " +
+                "their description:\n");
+        int taskIndex = 1;
+        int numTasksWithKeyword = 0;
+        for (Task task : tasks) {
+            if (task.hasKeyword(keyword)) {
+                numTasksWithKeyword++;
+            }
+        }
+        for (Task task : tasks) {
+            if (task.hasKeyword(keyword)) {
+                stringBuilder.append(taskIndex + ". " + task);
+                if (taskIndex - 1 < numTasksWithKeyword - 1) {
+                    stringBuilder.append("\n");
+                }
+                taskIndex++;
+            }
+        }
+        return stringBuilder.toString();
+    }
 }

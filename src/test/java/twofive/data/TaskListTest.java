@@ -77,4 +77,23 @@ public class TaskListTest {
         String sampleSaveTasksString = "T | 0 | read book\nD | 0 | return book | 2023-06-06 06:06\n";
         assertEquals(sampleSaveTasksString, tasks.getSaveTasksString());
     }
+
+    @Test
+    public void getKeywordStringTest() {
+        TaskList tasks = new TaskList();
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
+
+        Task todoTask = new ToDo("read book");
+        tasks.addTask(todoTask);
+
+        LocalDateTime deadline = LocalDateTime.parse("2023-06-06 06:06", formatter);
+        Deadline deadlineTask = new Deadline("return book", deadline);
+        tasks.addTask(deadlineTask);
+
+        String sampleTasksString = "Here are the tasks in your list with keyword [book] in their description:\n1. " +
+                "[T][ ] read " +
+                "book\n2. [D][ ] " +
+                "return book (by: Tue Jun 6 2023 06:06AM)";
+        assertEquals(sampleTasksString, tasks.getKeywordString("book"));
+    }
 }
