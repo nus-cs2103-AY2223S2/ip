@@ -1,12 +1,14 @@
 package tasks;
+import java.time.*;
+import java.time.format.*;
 /**
  * Deadlines are tasks which need to be done by a certain date/time
  */
 public class Deadline extends Task {
-    private String when;
-    public Deadline(String description, String when) {
+    private LocalDateTime deadlineDue;
+    public Deadline(String description, LocalDateTime deadlineDue) {
         super(description);
-        this.when = when;
+        this.deadlineDue = deadlineDue;
     }
 
     @Override
@@ -16,6 +18,8 @@ public class Deadline extends Task {
 
     @Override
     public String toString() {
-        return "[D]" + super.toString() + " (by: " + when + ")";
+        return "[D]" + super.toString() + " (by: " + deadlineDue.format(DateTimeFormatter.ofLocalizedDate(FormatStyle.LONG)) + ")";
     }
+
+
 }

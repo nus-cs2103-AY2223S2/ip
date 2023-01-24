@@ -1,4 +1,5 @@
 import tasks.*;
+import java.time.*;
 import java.util.*;
 import java.io.*;
 
@@ -118,14 +119,16 @@ public class Duke {
 
     private static void deadline(String input) { // add in exception handling
         String[] s1 = input.substring(9).split("/by");
-        Deadline newDeadline = new Deadline(s1[0].trim(), s1[1].trim());
+        Deadline newDeadline = new Deadline(s1[0].trim(), LocalDateTime.parse(s1[1].trim()));
         addTask(newDeadline);
     }
 
     private static void event(String input) {// add in exception handling
         String[] s1 = input.substring(6).split("/from");
         String[] s2 = s1[1].split("/to");
-        Event newEvent = new Event(s1[0].stripTrailing(), s2[0].trim(), s2[1].trim());
+
+        Event newEvent = new Event(s1[0].stripTrailing(), LocalDateTime.parse(s2[0].trim()),
+                LocalDateTime.parse(s2[1].trim()));
         addTask(newEvent);
     }
 
