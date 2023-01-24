@@ -94,6 +94,9 @@ public class Duke {
             } catch (IndexOutOfBoundsException e) {
                 System.out.println("OOPS!! This index is out of bounds!");
                 in = input.nextLine();
+            } catch (NumberFormatException e) {
+                System.out.println("Oh no! You have entered too many whitespaces!");
+                in = input.nextLine();
             }
         }
         System.exit(0);
