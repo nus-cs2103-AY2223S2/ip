@@ -2,7 +2,6 @@ package connor;
 
 import connor.parser.Parser;
 import connor.storage.Storage;
-import connor.task.InvalidTaskException;
 import connor.task.TaskList;
 import connor.task.Task;
 import connor.ui.Ui;
@@ -12,6 +11,7 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.util.LinkedList;
 import java.util.Scanner;
 
 public class Connor {
@@ -25,32 +25,25 @@ public class Connor {
         TODO,
         DEADLINE,
         EVENT,
-        DELETE
+        DELETE,
+        DELETEALL
     }
 
     private Storage storage;
     private TaskList tasks;
     private Ui ui;
+    private Parser parser;
     public Connor() {
-        ui = new Ui();
+        this.ui = new Ui();
         this.ui.greet();
-        storage = new Storage(getFile(), ui);
-        this.tasks = new TaskList(this.storage, ui);
-    }
-
-    private String getCommand(String input) {
-        if (input.indexOf(' ') == -1) {
-            return input.toUpperCase();
-        } else {
-            return input.substring(0, input.indexOf(' ')).toUpperCase();
+        this.storage = new Storage(getFile());
+        this.parser = new Parser();
+        try {
+            LinkedList<Task> memory = storage.initialize();
+            this.tasks = new TaskList(memory);
+        } catch (IOException e) {
+            this.tasks = new TaskList();
         }
-    }
-
-    private String getTask(String input) throws InvalidTaskException {
-        if (input.indexOf(' ') == -1) {
-            throw new InvalidTaskException();
-        }
-        return input.substring(input.indexOf(' ') + 1).trim();
     }
 
     private File getFile() {
@@ -59,65 +52,26 @@ public class Connor {
         Path dataPath = Paths.get(homeDir, "data", "connor.Connor.txt");
         try {
             if (Files.exists(dataPath)) {
-                this.ui.printMessage("Existing data detected, loading data.");
+                Ui.printMessage("Existing data detected, loading data.");
                 return new File(String.valueOf(dataPath));
             } else {
-                this.ui.printMessage("No existing data detected, creating new save file.");
+                Ui.printMessage("No existing data detected, creating new save file.");
                 Files.createDirectories(directoryPath);
                 return new File("data/connor.Connor.txt");
             }
         } catch (IOException e) {
-            this.ui.printMessage("ALERT! FAILED TO CREATE DIRECTORY!");
+            Ui.printMessage("ALERT! FAILED TO CREATE DIRECTORY!");
         }
         return new File("data/connor.Connor.txt");
     }
 
-    private void run() {
+    public void run() {
         Scanner sc = new Scanner(System.in);
         boolean isOver = false;
         while (!isOver && sc.hasNextLine() ) {
-            String input = sc.nextLine();
-            String command = getCommand(input).trim();
-            try {
-                switch (Commands.valueOf(command)) {
-                case HI:
-                    this.ui.greetings("HI");
-                    break;
-                    
-                case BYE:
-                    this.ui.greetings("BYE");
-                    isOver = true;
-                    break;
-
-                case LIST:
-                    this.tasks.getList();
-                    break;
-
-                case MARK:
-                    this.tasks.markDone(Integer.parseInt(getTask(input)));
-                    break;
-
-                case UNMARK:
-                    this.tasks.markUndone(Integer.parseInt(getTask(input)));
-                    break;
-
-
-                case TODO:
-                case DEADLINE:
-                case EVENT:
-                    Task task = Parser.parseCommand(command, getTask(input));
-                    this.tasks.addTask(task);
-                    break;
-
-                case DELETE:
-                    this.tasks.deleteTask(getTask(input));
-                    break;
-                }
-            } catch (IllegalArgumentException e) {
-                this.ui.printMessage("INVALID COMMAND");
-            } catch (InvalidTaskException e) {
-                this.ui.printMessage(e.getMessage());
-            }
+            String input = sc.nextLine().trim();
+            isOver = this.parser.parse(input, this.tasks, this.ui);
+            this.storage.updateFile(tasks.getList());
         }
         sc.close();
     }

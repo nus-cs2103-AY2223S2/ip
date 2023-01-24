@@ -14,8 +14,8 @@ public class Deadline extends Task {
         super(taskName);
         this.taskName = taskName;
         try {
-            this.deadline = Parser.parseDateTime(task);
-            this.dataFormat = Parser.formatDateTime(task);
+            this.deadline = parseDateTime(task);
+            this.dataFormat = dateTimeFormat(task);
         } catch (DateTimeException e) {
             System.out.println("        " + e.getMessage());
         }

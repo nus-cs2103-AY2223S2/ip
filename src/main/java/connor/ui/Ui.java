@@ -3,9 +3,9 @@ package connor.ui;
 import connor.task.Task;
 
 public class Ui {
-    public String LINE = "        ________________________________________________________\n";
+    public static final String LINE = "        ________________________________________________________\n";
 
-    public void printMessage(String response) {
+    public static void printMessage(String response) {
         System.out.println(LINE + "        " + response);
     }
 
@@ -30,28 +30,28 @@ public class Ui {
         String message = "I have added " + task.getTaskName() + " to my memory\n";
         message = message + "          " + task.toString() + "\n";
         message = message + "        You have " + size + " tasks in the list";
-        this.printMessage(message);
+        printMessage(message);
     }
 
     public void deleteAllMessage() {
-        this.printMessage("All tasks on the list have been cleared");
+        printMessage("All tasks on the list have been cleared");
     }
 
     public void deleteTaskMessage(Task task, int size) {
         String message = "I have removed " + task.getTaskName() + " from my memory\n";
         message = message + "          " + task.toString() + "\n";
         message = message + "        You have " + size + " tasks in the list";
-        this.printMessage(message);
+        printMessage(message);
     }
 
     public void markDoneMessage(String message) {
-        this.printMessage("Understood, I have marked the task as done:\n"
+        printMessage("Understood, I have marked the task as done:\n"
                 + "        "
                 + message);
     }
 
     public void markUndoneMessage(String message) {
-        this.printMessage("Understood, I have marked the task as undone:\n"
+        printMessage("Understood, I have marked the task as undone:\n"
                 + "        "
                 + message);
     }

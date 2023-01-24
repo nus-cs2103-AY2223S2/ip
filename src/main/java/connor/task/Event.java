@@ -1,7 +1,5 @@
 package connor.task;
 
-import connor.parser.Parser;
-
 import java.time.DateTimeException;
 import java.time.LocalDateTime;
 
@@ -14,13 +12,13 @@ public class Event extends Task {
     public Event(String taskName,String taskStart, String taskEnd) {
         super(taskName);
         try {
-            this.startTime = Parser.parseDateTime(taskStart);
-            this.endTime = Parser.parseDateTime(taskEnd);
+            this.startTime = parseDateTime(taskStart);
+            this.endTime = parseDateTime(taskEnd);
         } catch (DateTimeException e) {
             System.out.println("        " + e.getMessage());
         }
-        this.dataFormat1 = Parser.formatDateTime(taskStart);
-        this.dataFormat2 = Parser.formatDateTime(taskEnd);
+        this.dataFormat1 = dateTimeFormat(taskStart);
+        this.dataFormat2 = dateTimeFormat(taskEnd);
     }
 
     public Event(String taskName, Boolean isDone, String startData, String endData) {

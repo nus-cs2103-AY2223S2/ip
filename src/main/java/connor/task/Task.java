@@ -1,5 +1,6 @@
 package connor.task;
 
+import java.time.DateTimeException;
 import java.time.LocalDateTime;
 
 public abstract class Task {
@@ -46,6 +47,20 @@ public abstract class Task {
         String hour = String.format("%02d", input.getHour());
         String minute = String.format("%02d", input.getMinute());
         return month + " " + day + " " + year + " " + hour + minute;
+    }
+
+    public String dateTimeFormat(String input) {
+        String[] dateTimePair = input.split(" ");
+        String date = dateTimePair[0];
+        String time = dateTimePair[1];
+        String hrStr = time.substring(0, 2);
+        String minStr = time.substring(2, 4);
+        return date + "T" + hrStr + ":" + minStr + ":00";
+    }
+
+    public LocalDateTime parseDateTime(String input) throws DateTimeException {
+        String formattedDateTime = dateTimeFormat(input);
+        return LocalDateTime.parse(formattedDateTime);
     }
 
     public String toString() {

@@ -1,8 +1,9 @@
 package connor.storage;
 
-import connor.parser.Parser;
+import connor.task.Deadline;
+import connor.task.Event;
 import connor.task.Task;
-import connor.ui.Ui;
+import connor.task.Todo;
 
 import java.io.File;
 import java.io.FileWriter;
@@ -13,15 +14,25 @@ import java.util.Scanner;
 public class Storage {
 
     private File dataFile;
-    private Ui ui;
-    public Storage(File dataFile, Ui ui) {
+
+    public Storage(File dataFile) {
         this.dataFile = dataFile;
-        this.ui = ui;
+    }
+
+    public Task parseLine(String[] directives) throws CorruptedDataException {
+        if (directives[0].equals("T")) {
+            return new Todo(directives[2], Boolean.parseBoolean(directives[1]));
+        } else if (directives[0].equals("D")) {
+            return new Deadline(directives[2], Boolean.parseBoolean(directives[1]), directives[3]);
+        } else if (directives[0].equals("E")) {
+            return new Event(directives[2], Boolean.parseBoolean(directives[1]), directives[3], directives[4]);
+        }
+        throw new CorruptedDataException();
     }
 
     public Task interpretLine(String str) throws CorruptedDataException {
         String[] directives = str.split("\\|");
-        return Parser.parseLine(directives);
+        return parseLine(directives);
     }
 
     public LinkedList<Task> readFile(Scanner sc) {
@@ -30,7 +41,7 @@ public class Storage {
             try {
                 tasks.add(interpretLine(sc.nextLine()));
             } catch (CorruptedDataException e) {
-                this.ui.printMessage(e.getMessage());
+                System.out.println("        " + e.getMessage());
             }
         }
         return tasks;
@@ -51,7 +62,7 @@ public class Storage {
             }
             writer.close();
         } catch (IOException e) {
-            this.ui.printMessage("ALERT! Unable to overwrite data, input is not saved!");
+            System.out.println("        ALERT! Unable to overwrite data, input is not saved!");
         }
     }
 }
