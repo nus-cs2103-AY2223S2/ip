@@ -1,9 +1,9 @@
 import java.util.Scanner;
-import java.util.Arrays;
+import java.util.ArrayList;
 public class Duke {
     public static void main(String[] args) throws DukeException {
         Scanner sc = new Scanner(System.in);
-        Task[] storeTasks = new Task[100];
+        ArrayList<Task> storeTasks = new ArrayList<Task>(100);
         int numElem = 0;
         String logo = " ____        _        \n"
                 + "|  _ \\ _   _| | _____ \n"
@@ -19,19 +19,25 @@ public class Duke {
                     System.out.println("You do not have any tasks for now!");
                 }
                 for (int i = 0; i < numElem; i++) {
-                    System.out.println(String.format("%d. %s",i+1,storeTasks[i]));
+                    System.out.println(String.format("%d. %s",i+1,storeTasks.get(i)));
                 }
             } else if (commandToEcho.length() >=4 && commandToEcho.substring(0, 4).equals("mark") ) {
                     int intTaskIndex = getTaskIndex(commandToEcho);
-                    storeTasks[intTaskIndex].markAsDone();
-                    System.out.println("Nice! I've marked this task as done:\n " + storeTasks[intTaskIndex].toString());
+                    storeTasks.get(intTaskIndex).markAsDone();
+                    System.out.println("Nice! I've marked this task as done:\n " + storeTasks.get(intTaskIndex).toString());
             } else if (commandToEcho.length() >=6 && commandToEcho.substring(0, 6).equals("unmark")) {
                 int intTaskIndex = getTaskIndex(commandToEcho);
-                storeTasks[intTaskIndex].markUndone();
-                System.out.println("OK, I've marked this task as not done yet:\n " + storeTasks[intTaskIndex].toString());
+                storeTasks.get(intTaskIndex).markUndone();
+                System.out.println("OK, I've marked this task as not done yet:\n " + storeTasks.get(intTaskIndex).toString());
+            } else if (commandToEcho.length()>=6 && commandToEcho.substring(0, 6).equals("delete")) {
+                int intTaskIndex = getTaskIndex(commandToEcho);
+                Task taskRemoved = storeTasks.get(intTaskIndex);
+                storeTasks.remove(intTaskIndex);
+                numElem--;
+                System.out.println("Noted. I've removed this task: \n" + taskRemoved.toString() + String.format("\n Now you have %d tasks in the list.",numElem));
             } else {
                 Task currentTask;
-                if(commandToEcho.length()>=4 && commandToEcho.substring(0, 4).equals("todo")) {
+                if (commandToEcho.length() >= 4 && commandToEcho.substring(0, 4).equals("todo")) {
                     if (commandToEcho.equals("todo")) {
                         System.out.println("OOPS!!! The description of a todo cannot be empty.");
 //                        throw new DukeException();
@@ -39,12 +45,12 @@ public class Duke {
                         System.out.println("Got it. I've added this task:");
                         String desc = getDescToDo(5, commandToEcho);
                         currentTask = new Todo(desc);
-                        storeTasks[numElem] = currentTask;
+                        storeTasks.add(currentTask);
                         System.out.println(currentTask);
                         numElem++;
-                        System.out.println(String.format("Now you have %d task(s) in the list.",numElem));
+                        System.out.println(String.format("Now you have %d task(s) in the list.", numElem));
                     }
-                } else if (commandToEcho.length()>=8 && commandToEcho.substring(0, 8).equals("deadline")) {
+                } else if (commandToEcho.length() >= 8 && commandToEcho.substring(0, 8).equals("deadline")) {
                     if (commandToEcho.equals("deadline")) {
                         System.out.println("OOPS!!! The description of a deadline cannot be empty.");
                     } else {
@@ -52,12 +58,12 @@ public class Duke {
                         String desc = getDesc(9, commandToEcho);
                         String byWhen = getByWhen(commandToEcho);
                         currentTask = new Deadline(desc, byWhen);
-                        storeTasks[numElem] = currentTask;
+                        storeTasks.add(currentTask);
                         System.out.println(currentTask);
                         numElem++;
                         System.out.println(String.format("Now you have %d task(s) in the list.", numElem));
                     }
-                } else if (commandToEcho.length()>=5 && commandToEcho.substring(0, 5).equals("event")) {
+                } else if (commandToEcho.length() >= 5 && commandToEcho.substring(0, 5).equals("event")) {
                     if (commandToEcho.equals("event")) {
                         System.out.println("OOPS!!! The description of an event cannot be empty.");
                     } else {
@@ -66,7 +72,7 @@ public class Duke {
                         String from = getFrom(commandToEcho);
                         String to = getTo(commandToEcho);
                         currentTask = new Event(desc, from, to);
-                        storeTasks[numElem] = currentTask;
+                        storeTasks.add(currentTask);
                         System.out.println(currentTask);
                         numElem++;
                         System.out.println(String.format("Now you have %d task(s) in the list.", numElem));
