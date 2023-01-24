@@ -11,6 +11,7 @@ import twofive.ui.Ui;
  */
 public class DeleteCommand extends Command {
     private int taskNum;
+
     public DeleteCommand(int taskNum) {
         this.taskNum = taskNum;
     }

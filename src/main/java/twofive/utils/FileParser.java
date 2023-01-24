@@ -1,6 +1,12 @@
 package twofive.utils;
 
-import twofive.exception.*;
+import twofive.exception.EmptyDescriptionException;
+import twofive.exception.EmptyStartTimeException;
+import twofive.exception.InvalidTaskTypeException;
+import twofive.exception.TaskDoneException;
+import twofive.exception.EmptyEndTimeException;
+import twofive.exception.EmptyDeadlineException;
+
 import twofive.task.Deadline;
 import twofive.task.Event;
 import twofive.task.Task;
@@ -40,8 +46,10 @@ public class FileParser {
      * @throws TaskDoneException If a parsed task that is already done is being marked as done.
      * @throws DateTimeParseException If the date and time format retrieved from the file is invalid.
      */
-    public ArrayList<Task> parseFile() throws FileNotFoundException, EmptyDescriptionException, InvalidTaskTypeException,
-            EmptyDeadlineException, EmptyEndTimeException, EmptyStartTimeException, TaskDoneException, DateTimeParseException {
+    public ArrayList<Task> parseFile()
+            throws FileNotFoundException, EmptyDescriptionException, InvalidTaskTypeException,
+            EmptyDeadlineException, EmptyEndTimeException, EmptyStartTimeException, TaskDoneException,
+            DateTimeParseException {
         Scanner s = new Scanner(this.taskFile);
         ArrayList<Task> tasks = new ArrayList<>();
 

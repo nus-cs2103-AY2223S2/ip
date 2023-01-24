@@ -1,19 +1,22 @@
 package twofive.storage;
 
 import twofive.data.TaskList;
-import twofive.exception.*;
 import twofive.task.Task;
 import twofive.utils.FileParser;
+
+import twofive.exception.EmptyDescriptionException;
+import twofive.exception.EmptyStartTimeException;
+import twofive.exception.InvalidTaskTypeException;
+import twofive.exception.TaskDoneException;
+import twofive.exception.EmptyEndTimeException;
+import twofive.exception.EmptyDeadlineException;
 
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
-import java.util.Scanner;
 
 /**
  * Represents a storage responsible for loading and saving tasks saved
@@ -43,7 +46,8 @@ public class Storage {
      * @throws DateTimeParseException If the date and time format retrieved from the file is invalid.
      */
     public ArrayList<Task> load() throws FileNotFoundException, EmptyDescriptionException, InvalidTaskTypeException,
-            EmptyDeadlineException, EmptyEndTimeException, EmptyStartTimeException, TaskDoneException, DateTimeParseException {
+            EmptyDeadlineException, EmptyEndTimeException, EmptyStartTimeException, TaskDoneException,
+            DateTimeParseException {
         FileParser fileParser = new FileParser(this.taskFile);
         return fileParser.parseFile();
     }

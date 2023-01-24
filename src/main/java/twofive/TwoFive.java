@@ -35,6 +35,10 @@ public class TwoFive {
      * Starts the chatbot by showing a welcome message, then accepting commands
      * from the user.
      */
+    public static void main(String[] args) {
+        new TwoFive("data/twofive.txt").run();
+    }
+
     public void run() {
         ui.showWelcome();
         boolean isExit = false;
@@ -53,9 +57,5 @@ public class TwoFive {
                 ui.showLine();
             }
         }
-    }
-
-    public static void main(String[] args) {
-        new TwoFive("data/twofive.txt").run();
     }
 }

@@ -8,7 +8,6 @@ import twofive.task.ToDo;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
-import java.util.ArrayList;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
@@ -25,7 +24,9 @@ public class TaskListTest {
         Deadline deadlineTask = new Deadline("return book", deadline);
         tasks.addTask(deadlineTask);
 
-        String sampleTasksString = "Here are the tasks in your list:\n1. [T][ ] read book\n2. [D][ ] return book (by: Tue Jun 6 2023 06:06AM)";
+        String sampleTasksString =
+                "Here are the tasks in your list:\n1. [T][ ] read book\n2. [D][ ] return book (by: Tue Jun 6 2023 " +
+                        "06:06AM)";
         assertEquals(sampleTasksString, tasks.getTasksList());
     }
 
@@ -55,7 +56,9 @@ public class TaskListTest {
         tasks.addTask(deadlineTask);
 
         LocalDate sampleDate = LocalDate.parse("2023-06-06", dateOnlyFormatter);
-        String sampleSaveTasksString = "Here are the tasks in your list due on Tue Jun 6 2023:\n1. [D][ ] return book (by: Tue Jun 6 2023 06:06AM)";
+        String sampleSaveTasksString =
+                "Here are the tasks in your list due on Tue Jun 6 2023:\n1. [D][ ] return book (by: Tue Jun 6 2023 " +
+                        "06:06AM)";
         assertEquals(sampleSaveTasksString, tasks.getTasksOnDateList(sampleDate));
     }
 
