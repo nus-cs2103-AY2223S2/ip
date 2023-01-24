@@ -163,16 +163,8 @@ public class Duke {
     }
 
     private void deleteTask(String arguments) throws InvalidArgumentDukeException {
-        try {
-            int number = Integer.parseInt(arguments);
-            String taskString = taskList.getTaskString(number);
-            taskList.remove(number);
-            ui.printMessage("Ok. I have deleted this task:\n"
-                    + taskString
-            );
-        } catch (NumberFormatException | IndexOutOfBoundsException e) {
-            throw new InvalidArgumentDukeException();
-        }
+        int number = Integer.parseInt(arguments);
+        new DeleteTaskCommand(number).execute(taskList, ui, storage);
     }
 
     // Main method
