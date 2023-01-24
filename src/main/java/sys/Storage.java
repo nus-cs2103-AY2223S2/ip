@@ -44,13 +44,15 @@ public class Storage {
             String[] lines = tl.toString().split("\n");
             StringBuilder newContent = new StringBuilder();
 
-            for (String line: lines) {
-                newContent.append(line.substring(3));
-                newContent.append('\n');
-            }
+            if (!lines[0].equals("")) {
+                for (String line: lines) {
+                    newContent.append(line.substring(3));
+                    newContent.append('\n');
+                }
 
-            // remove last new line
-            newContent.deleteCharAt(newContent.length() - 1);
+                // remove last new line
+                newContent.deleteCharAt(newContent.length() - 1);
+            }
 
             // write to file
             fw.write(newContent.toString());
