@@ -1,5 +1,6 @@
 package command;
 
+import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
 
 import exception.DukeException;
@@ -22,7 +23,7 @@ public class EventCommand extends Command {
      * event requires taskName, StartDate and EndDate
      */
     @Override
-    public void execute() throws DukeException {
+    public void execute() throws DukeException, DateTimeParseException {
         
         String taskName = getTaskName("event", command);
         String startDate = getStartDate(command);
