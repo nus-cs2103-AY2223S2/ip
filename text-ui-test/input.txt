@@ -4,3 +4,4 @@ event project meeting /from Mon 2pm /to 4pm
 list
 cheeks
 delete 1
+bye
