@@ -17,7 +17,7 @@ public class Duke {
 
     public static void main(String[] args) throws DukeExceptions {
         String logo =
-                "⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢀⡶⠶⢦⣄⠀⠀⠀⠀⠀⣴⠟⠛⢧⣠⣶⣿⠻⣆⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀ ⠀\n" +
+                        "⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢀⡶⠶⢦⣄⠀⠀⠀⠀⠀⣴⠟⠛⢧⣠⣶⣿⠻⣆⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀ ⠀\n" +
                         "⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢸⠁⡟⠦⠌⠛⠉⠉⠉⢹⠇⢠⣶⣼⣷⣞⢙⣧⣿⡀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀ ⠀\n" +
                         "⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢸⣤⠃⠀⠀⠀⠀⠀⠀⣿⠀⠈⢻⡃⠀⢸⡿⡄⠈⣿⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀ \n" +
                         "⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⣼⠁⠀⠀⠀⠀⠀⠀⠀⠘⠷⠖⠛⠛⠛⢿⡗⢋⣴⠏⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀\n" +
@@ -38,7 +38,9 @@ public class Duke {
         System.out.println("   Hello I'm tyy\n   What can I do for you today?");
         System.out.println(separator);
 
-        ArrayList<Task> toDoList = new ArrayList<Task>();
+//        ArrayList<Task> toDoList = new ArrayList<Task>();
+        TaskList toDoList = new TaskList();
+        Save.loadTaskList();
         Scanner scan = new Scanner(System.in);
 
         while (true) {
@@ -47,6 +49,7 @@ public class Duke {
                 String[] split = input.split(" ");
                 Command command = Command.valueOf(split[0].toUpperCase());
                 if (command == Command.BYE) {
+                    Save.saveTaskList(toDoList);
                     System.out.println(separator + "\n" + "   Ciao ~ see you again soon!" + "\n" + separator);
                     break;
                 }
@@ -79,7 +82,7 @@ public class Duke {
         }
     }
 
-    private static void list(ArrayList<Task> toDoList) {
+    private static void list(TaskList toDoList) {
         if (toDoList.size() > 0) {
             System.out.println(separator + "\n" + "   Here are the tasks in your list:");
             for (int i = 0; i < toDoList.size(); i++) {
@@ -92,7 +95,7 @@ public class Duke {
         System.out.println(separator);
     }
 
-    private static void mark(ArrayList<Task> toDoList, String input) throws DukeExceptions {
+    private static void mark(TaskList toDoList, String input) throws DukeExceptions {
         if (input.length() <= 5 || !Character.isDigit(input.charAt(5))) {
             throw new DukeExceptions(numberNotFound);
         }
@@ -102,10 +105,11 @@ public class Duke {
         }
         Task task = toDoList.get(index - 1);
         task.mark();
+        Save.saveTaskList(toDoList);
         System.out.println("   good job! I've marked this task as done: " + "\n" + task);
     }
 
-    private static void unmark(ArrayList<Task> toDoList, String input) throws DukeExceptions {
+    private static void unmark(TaskList toDoList, String input) throws DukeExceptions {
         if (input.length() <= 7 || !Character.isDigit(input.charAt(7))) {
             throw new DukeExceptions(numberNotFound);
         }
@@ -115,10 +119,11 @@ public class Duke {
         }
         Task task = toDoList.get(index - 1);
         task.unmark();
+        Save.saveTaskList(toDoList);
         System.out.println("   okie dokie, I've marked this task as not done yet: " + "\n" + task);
     }
 
-    private static void todo(ArrayList<Task> toDoList, String input) throws DukeExceptions {
+    private static void todo(TaskList toDoList, String input) throws DukeExceptions {
 
         if (input.length() <= 5) {
             throw new DukeExceptions(descriptionNotFound);
@@ -126,10 +131,11 @@ public class Duke {
         Todo tdTask = new Todo(input.substring(5, input.length()));
         System.out.println("   okie dokie. I've added this task:" + "\n" + tdTask);
         toDoList.add(tdTask);
+        Save.saveTaskList(toDoList);
         System.out.println("   Now you have " + toDoList.size() + " tasks in the list.");
     }
 
-    private static void deadline(ArrayList<Task> toDoList, String input) throws DukeExceptions {
+    private static void deadline(TaskList toDoList, String input) throws DukeExceptions {
         int index_ddl = input.indexOf("/");
         if (input.length() > 9 && !input.contains("/")) {
             throw new DukeExceptions(timeNotFound);
@@ -140,10 +146,11 @@ public class Duke {
         Ddl ddlTask = new Ddl(input.substring(9, index_ddl - 1), input.substring(index_ddl + 4, input.length()));
         System.out.println("   okie dokie. I've added this task:" + "\n" + ddlTask);
         toDoList.add(ddlTask);
+        Save.saveTaskList(toDoList);
         System.out.println("   Now you have " + toDoList.size() + " tasks in the list.");
     }
 
-    private static void event(ArrayList<Task> toDoList, String input) throws DukeExceptions {
+    private static void event(TaskList toDoList, String input) throws DukeExceptions {
 
         int index_e1 = input.indexOf("/");
         int index_e2 = input.lastIndexOf("/");
@@ -161,16 +168,18 @@ public class Duke {
                 input.substring(index_e2 + 4, input.length()));
         System.out.println("   okie dokie. I've added this task:" + "\n" + eventTask);
         toDoList.add(eventTask);
+        Save.saveTaskList(toDoList);
         System.out.println("   Now you have " + toDoList.size() + " tasks in the list.");
     }
 
-    private static void delete(ArrayList<Task> toDoList, String input) throws DukeExceptions {
+    private static void delete(TaskList toDoList, String input) throws DukeExceptions {
         if (input.length() < 7) {
             throw new DukeExceptions(deleteNumberNotFound);
         }
         int index_de = Integer.parseInt(input.substring(7));
         Task task = toDoList.get(index_de - 1);
         toDoList.remove(index_de - 1);
+        Save.saveTaskList(toDoList);
         System.out.println("   okie dokie. I've removed this task:\n" + task);
         System.out.println("   Now you have " + toDoList.size() + " tasks in the list.");
 
