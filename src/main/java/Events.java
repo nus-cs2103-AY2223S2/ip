@@ -1,5 +1,6 @@
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
 
 public class Events extends Task{
     protected LocalDateTime start;
@@ -8,12 +9,16 @@ public class Events extends Task{
     protected String endTime;
     private DateTimeFormatter format = DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm:ss");
 
-    public Events(String description, String  start, String  end) {
+    public Events(String description, String  start, String  end) throws DukeInvalidArgumentException {
         super(description);
-        this.start = LocalDateTime.parse(start);
-        this.end = LocalDateTime.parse(end);
-        this.startTime = start;
-        this.endTime = end;
+        try {
+            this.start = LocalDateTime.parse(start);
+            this.end = LocalDateTime.parse(end);
+            this.startTime = start;
+            this.endTime = end;
+        } catch (DateTimeParseException e) {
+            throw new DukeInvalidArgumentException("The format of date-time is invalid.");
+        }
     }
 
     public String getStart() {
