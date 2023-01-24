@@ -151,10 +151,7 @@ public class Duke {
     private void markTaskAsNotDone(String arguments) throws InvalidArgumentDukeException {
         try {
             int number = Integer.parseInt(arguments);
-            taskList.markTaskAsNotDone(number);
-            ui.printMessage("Ok. I have marked this task as not done:\n"
-                    + taskList.getTaskString(number)
-            );
+            new MarkTaskAsUndoneCommand(number).execute(taskList, ui, storage);
         } catch (NumberFormatException | IndexOutOfBoundsException e) {
             throw new InvalidArgumentDukeException();
         }
