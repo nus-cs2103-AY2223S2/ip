@@ -1,8 +1,17 @@
 package duke;
 
-import duke.task.*;
+import duke.task.Deadline;
+import duke.task.Event;
+import duke.task.Task;
+import duke.task.TaskList;
+import duke.task.Todo;
 
-import java.io.*;
+import java.io.BufferedReader;
+import java.io.BufferedWriter;
+import java.io.File;
+import java.io.FileReader;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.util.ArrayList;
 
 public class Storage {
@@ -11,14 +20,16 @@ public class Storage {
     private BufferedWriter writer;
 
     public Storage(String path) throws IOException {
-        this.file = new File(path);
-        this.file.getParentFile().mkdirs();
-        this.file.createNewFile();
-        this.writer = new BufferedWriter(new FileWriter(path, true));
-        this.reader = new BufferedReader(new FileReader(path));
+        file = new File(path);
+
+        file.getParentFile().mkdirs();
+        file.createNewFile();
+
+        writer = new BufferedWriter(new FileWriter(path, true));
+        reader = new BufferedReader(new FileReader(path));
     }
 
-    public ArrayList<Task> getTasks() throws IOException{
+    public ArrayList<Task> getTasks() throws IOException {
         ArrayList<Task> taskList = new ArrayList<>();
         String taskStorageString = reader.readLine();
 
@@ -43,17 +54,17 @@ public class Storage {
     }
 
     public void storeTask(Task task) throws IOException {
-        this.writer.write(task.toTaskStorageString());
-        this.writer.newLine();
-        this.writer.flush();
+        writer.write(task.toTaskStorageString());
+        writer.newLine();
+        writer.flush();
     }
 
     public void restructure(TaskList taskList) throws IOException {
-        new FileWriter(this.file.getPath(), false).close();
+        new FileWriter(file.getPath(), false).close();
         int size = taskList.getSize();
 
         for (int i = 1; i <= size; i++) {
-            this.storeTask(taskList.getTask(i));
+            storeTask(taskList.getTask(i));
         }
     }
 

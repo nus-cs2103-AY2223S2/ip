@@ -9,47 +9,47 @@ public class Ui {
     }
 
     public void replyTaskInfo(Task task) {
-        this.displayText("  " + task.toString());
+        displayText("  " + task.toString());
     }
 
     public void endChat() {
-        this.displayText("Chat with duke.Duke has ended");
+        displayText("Chat with duke.Duke has ended");
     }
 
     public void greetUser() {
-        this.displayText("Hello. This is duke.Duke");
+        displayText("Hello. This is duke.Duke");
     }
 
     public void replyTotalTasks(TaskList taskList) {
-        this.displayText("Total tasks: " + taskList.getSize());
+        displayText("Total tasks: " + taskList.getSize());
     }
 
     public void replyTaskAdded(Task task) {
-        this.displayText("The following task has been added:");
-        this.displayText("  " + task.toString());
+        displayText("The following task has been added:");
+        displayText("  " + task.toString());
     }
 
     public void replyTaskMarked(Task task) {
-        this.displayText("The following task is marked as done:");
-        this.displayText("  " + task.toString());
+        displayText("The following task is marked as done:");
+        displayText("  " + task.toString());
     }
 
     public void replyTaskUnmarked(Task task) {
-        this.displayText("The following task is marked as not done:");
-        this.displayText("  " + task.toString());
+        displayText("The following task is marked as not done:");
+        displayText("  " + task.toString());
     }
 
     public void replyTaskDeleted(Task task) {
-        this.displayText("The following task has been deleted:");
-        this.displayText("  " + task.toString());
+        displayText("The following task has been deleted:");
+        displayText("  " + task.toString());
     }
 
     public void replyEmptyTaskList() {
-        this.displayText("No task stored.");
+        displayText("No task stored.");
     }
 
     public void replyError(String errorMessage) {
-        this.displayText("An error has occurred!");
-        this.displayText(errorMessage);
+        displayText("An error has occurred!");
+        displayText(errorMessage);
     }
 }

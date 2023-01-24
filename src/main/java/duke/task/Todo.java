@@ -9,10 +9,10 @@ public class Todo extends Task {
     /**
      * Constructor for duke.task.Todo class.
      *
-     * @param desc description of the todo task.
+     * @param description description of the todo task.
      */
-    public Todo(String desc, boolean marked) {
-        super(desc, marked);
+    public Todo(String description, boolean isMarked) {
+        super(description, isMarked);
     }
 
     /**

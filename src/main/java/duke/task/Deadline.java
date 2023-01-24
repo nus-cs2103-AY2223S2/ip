@@ -17,10 +17,10 @@ public class Deadline extends Task {
     /**
      * Constructor for duke.task.Deadline class.
      *
-     * @param desc description of the deadline task.
+     * @param description description of the deadline task.
      */
-    public Deadline(String desc, boolean marked, String by) {
-        super(desc, marked);
+    public Deadline(String description, boolean isMarked, String by) {
+        super(description, isMarked);
         this.by = LocalDate.parse(by);
     }
 
@@ -32,11 +32,11 @@ public class Deadline extends Task {
     @Override
     public String toString() {
         DateTimeFormatter pattern = DateTimeFormatter.ofPattern("MMM dd yyyy");
-        return "[D]" + super.toString() + " (by: " + this.by.format(pattern) + ")";
+        return "[D]" + super.toString() + " (by: " + by.format(pattern) + ")";
     }
 
     @Override
     public String toTaskStorageString() {
-        return "D" + "|" + super.toTaskStorageString() + "|" + this.by;
+        return "D" + "|" + super.toTaskStorageString() + "|" + by;
     }
 }

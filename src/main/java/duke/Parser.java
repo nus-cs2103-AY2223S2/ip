@@ -1,10 +1,18 @@
 package duke;
 
-import duke.command.*;
+import duke.command.Command;
+import duke.command.CreateDeadlineCommand;
+import duke.command.CreateEventCommand;
+import duke.command.CreateTodoCommand;
+import duke.command.DeleteTaskCommand;
+import duke.command.EndChatCommand;
+import duke.command.ListTasksCommand;
+import duke.command.MarkTaskCommand;
+import duke.command.UnmarkTaskCommand;
 import duke.task.TaskList;
 
 public class Parser {
-    public Command parseCommand(String input, Ui ui, TaskList taskList, Storage storage)
+    public static Command parseCommand(String input, Ui ui, TaskList taskList, Storage storage)
             throws DukeException {
         String type = input.split(" ", 2)[0];
 

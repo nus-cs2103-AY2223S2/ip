@@ -12,7 +12,7 @@ public class EndChatCommand extends Command{
 
     @Override
     public boolean execute() {
-        this.ui.endChat();
+        ui.endChat();
         return true;
     }
 }

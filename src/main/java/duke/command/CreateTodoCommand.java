@@ -25,11 +25,12 @@ public class CreateTodoCommand extends Command {
     @Override
     public boolean execute() {
         try {
-            String[] commandMessageArr = this.commandMessage.split(" ", 2);
+            String[] commandMessageArr = commandMessage.split(" ", 2);
             Task task = new Todo(commandMessageArr[1], false);
-            this.taskList.addTask(task);
-            this.storage.storeTask(task);
-            this.ui.replyTaskAdded(task);
+
+            taskList.addTask(task);
+            storage.storeTask(task);
+            ui.replyTaskAdded(task);
         } catch (IOException exception) {
             ui.replyError(exception.getMessage());
         }

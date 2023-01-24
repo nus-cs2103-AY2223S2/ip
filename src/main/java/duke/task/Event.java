@@ -22,10 +22,10 @@ public class Event extends Task {
     /**
      * Constructor for duke.task.Event class.
      *
-     * @param desc description of the event task.
+     * @param description description of the event task.
      */
-    public Event(String desc, boolean marked, String from, String to) {
-        super(desc, marked);
+    public Event(String description, boolean isMarked, String from, String to) {
+        super(description, isMarked);
         this.from = LocalDate.parse(from);
         this.to = LocalDate.parse(to);
     }
@@ -38,13 +38,12 @@ public class Event extends Task {
     @Override
     public String toString() {
         DateTimeFormatter pattern = DateTimeFormatter.ofPattern("MMM dd yyyy");
-        return "[E]" + super.toString() + " (from: " + this.from.format(pattern)
-                + " to: " + this.to.format(pattern) + ")";
+        return "[E]" + super.toString() + " (from: " + from.format(pattern)
+                + " to: " + to.format(pattern) + ")";
     }
 
     @Override
     public String toTaskStorageString() {
-        return "E" + "|" + super.toTaskStorageString() + "|"
-                + this.from + "|" + this.to;
+        return "E" + "|" + super.toTaskStorageString() + "|" + from + "|" + to;
     }
 }
