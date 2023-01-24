@@ -221,18 +221,18 @@ public class Decipherer {
      * Decodes the information string for finding tasks on certain date.
      *
      * @param information the string to be decoded
-     * @return a SearchCommand object
+     * @return a ViewScheduleCommand object
      * @throws InvalidInputException if the input task description is empty,
      * or the input date format is invalid
      */
-    public static SearchCommand searchDecoder(String information) throws InvalidInputException {
+    public static ViewScheduleCommand viewDecoder(String information) throws InvalidInputException {
         // check if the input is not empty
         if (!emptyStringChecker.matcher(information).matches()) {
             throw new InvalidInputException("OOPS!!! The description of a todo cannot be empty.");
         } else {
             try {
-                // create a new SearchCommand with the date
-                return new SearchCommand(LocalDate.parse(information));
+                // create a new ViewScheduleCommand with the date
+                return new ViewScheduleCommand(LocalDate.parse(information));
             } catch (DateTimeParseException e) {
                 // if the input date format is invalid, throw an exception
                 throw new InvalidInputException("OOPS!!! The input date format is invalid\n"

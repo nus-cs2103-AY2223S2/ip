@@ -9,18 +9,18 @@ import duke.task.TaskList;
 import duke.ui.Ui;
 
 /**
- * A SearchCommand class that takes in a date and finds all tasks that take place on that date.
+ * A ViewScheduleCommand class that takes in a date and finds all tasks that take place on that date.
  */
-public class SearchCommand extends Command {
+public class ViewScheduleCommand extends Command {
     private static final String ERROR_MESSAGE = "OOPS!!! No tasks found on the specified date";
     private final LocalDate date;
 
     /**
-     * The constructor of SearchCommand that takes in the date of the tasks to be found.
+     * The constructor of ViewScheduleCommand that takes in the date of the tasks to be found.
      *
      * @param date The date of the tasks to be found.
      */
-    public SearchCommand(LocalDate date) {
+    public ViewScheduleCommand(LocalDate date) {
         this.date = date;
     }
 

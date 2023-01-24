@@ -28,7 +28,7 @@ public class Parser {
         DEADLINE,
         EVENT,
         FIND,
-        SEARCH,
+        VIEW,
         UPDATE,
         UNDO;
     }
@@ -82,8 +82,8 @@ public class Parser {
                     return Decipherer.eventDecoder(information);
                 case FIND:
                     return Decipherer.findDecoder(information);
-                case SEARCH:
-                    return Decipherer.searchDecoder(information);
+                case VIEW:
+                    return Decipherer.viewDecoder(information);
                 case UPDATE:
                     return Decipherer.updateDecoder(information);
                 case UNDO:
