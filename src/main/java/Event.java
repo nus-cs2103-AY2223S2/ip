@@ -16,6 +16,16 @@ public class Event extends Task {
     }
 
     /** 
+     * Returns the description of Event.
+     * 
+     * @return Event description.
+     */
+    @Override
+    public String getDescription() {
+        return "event " + super.getTaskName() + "/from" + this.startTime + "/to" + this.endTime;
+    }
+
+    /** 
      * Returns the string representation of the task.
      *
      * @return The string representation of the task.

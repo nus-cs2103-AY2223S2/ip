@@ -24,10 +24,28 @@ public class Task {
     /** 
      * Checks mark status and returns appropriate icon.
      * 
-     * @return icon.
+     * @return Icon.
      */
     public String getStatusIcon() {
         return (isMarked ? "[X]" : "[ ]");
+    }
+
+    /** 
+     * Returns the name of the task.
+     * 
+     * @return Task name.
+     */
+    public String getTaskName() {
+        return task;
+    }
+
+    /** 
+     * Returns the description of Task.
+     * 
+     * @return Task description.
+     */
+    public String getDescription() {
+        return getTaskName();
     }
 
     /** 

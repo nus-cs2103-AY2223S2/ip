@@ -13,6 +13,16 @@ public class Deadline extends Task {
     }
 
     /** 
+     * Returns the description of Deadline.
+     * 
+     * @return Deadline description.
+     */
+    @Override
+    public String getDescription() {
+        return "deadline " + super.getTaskName() + "/by" + this.deadline;
+    }
+
+    /** 
      * Returns the string representation of the task.
      *
      * @return The string representation of the task.
