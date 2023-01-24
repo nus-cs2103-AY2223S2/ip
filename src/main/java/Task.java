@@ -1,4 +1,4 @@
-public class Task {
+public abstract class Task {
 
     protected String task;
     protected Boolean isDone;
@@ -38,4 +38,6 @@ public class Task {
         String response =  "[" + abbreviation + "]" + "[" + status + "] " + task;
         return response.trim();
     }
+
+    public abstract String getBreakdown();
 }
