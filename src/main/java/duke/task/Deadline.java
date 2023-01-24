@@ -9,15 +9,15 @@ import java.time.format.DateTimeFormatter;
  * @author wz2k
  */
 public class Deadline extends Task {
-    /**
-     * duke.task.Deadline for the task.
-     */
+    /** Deadline of the task */
     private LocalDate by;
 
     /**
-     * Constructor for duke.task.Deadline class.
+     * Creates a deadline task.
      *
-     * @param desc description of the deadline task.
+     * @param desc Description of the deadline task.
+     * @param marked Task marking.
+     * @param by Task deadline.
      */
     public Deadline(String desc, boolean marked, String by) {
         super(desc, marked);
@@ -25,9 +25,9 @@ public class Deadline extends Task {
     }
 
     /**
-     * This method returns the task type, checkbox, description and deadline.
+     * Returns the task type, checkbox, description and deadline.
      *
-     * @return deadline task details.
+     * @return Deadline task details.
      */
     @Override
     public String toString() {
@@ -35,6 +35,11 @@ public class Deadline extends Task {
         return "[D]" + super.toString() + " (by: " + this.by.format(pattern) + ")";
     }
 
+    /**
+     * Returns the string to store the deadline task in a file.
+     *
+     * @return File storage version of the deadline task.
+     */
     @Override
     public String toTaskStorageString() {
         return "D" + "|" + super.toTaskStorageString() + "|" + this.by;

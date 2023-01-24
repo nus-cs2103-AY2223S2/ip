@@ -1,25 +1,22 @@
 package duke.task;
 
 /**
- * Represents a task.
+ * Represents a task of the user.
  *
  * @author wz2k
  */
 public abstract class Task {
-    /**
-     * The task description.
-     */
+    /** Task description */
     private String description;
 
-    /**
-     * Marking to show if task is done.
-     */
+    /** Marking to show if task is done */
     private boolean marked;
 
     /**
-     * Constructor for duke.task.Task class.
+     * Creates a task.
      *
-     * @param desc description of the task.
+     * @param desc Description of the task.
+     * @param marked Task marking.
      */
     public Task(String desc, boolean marked) {
         this.description = desc;
@@ -27,37 +24,42 @@ public abstract class Task {
     }
 
     /**
-     * This method returns the symbol to show if the task is done or not.
+     * Returns the symbol to show if the task is done or not.
      *
-     * @return task marked symbol.
+     * @return Task marked symbol.
      */
     private String isMarkedSymbol() {
         return this.marked ? "X" : " ";
     }
 
     /**
-     * This method returns the task checkbox and description.
+     * Returns the task checkbox and description.
      *
-     * @return task details.
+     * @return Task details.
      */
     public String toString() {
         return "[" + this.isMarkedSymbol() + "] " + this.description;
     }
 
     /**
-     * This method marks the task as done.
+     * Marks the task as done.
      */
     public void mark() {
         this.marked = true;
     }
 
     /**
-     * This method marks the task as not done.
+     * Marks the task as not done.
      */
     public void unmark() {
         this.marked = false;
     }
 
+    /**
+     * Returns the string to store the task in a file.
+     *
+     * @return File storage version of the task.
+     */
     public String toTaskStorageString() {
         String marked = String.valueOf(this.marked);
         return marked + "|" + this.description;

@@ -7,24 +7,30 @@ package duke.task;
  */
 public class Todo extends Task {
     /**
-     * Constructor for duke.task.Todo class.
+     * Creates a todo task.
      *
-     * @param desc description of the todo task.
+     * @param desc Description of the todo task.
+     * @param marked Task marking.
      */
     public Todo(String desc, boolean marked) {
         super(desc, marked);
     }
 
     /**
-     * This method returns the task type, checkbox and description.
+     * Returns the task type, checkbox and description.
      *
-     * @return todo task details.
+     * @return Todo task details.
      */
     @Override
     public String toString() {
         return "[T]" + super.toString();
     }
 
+    /**
+     * Returns the string to store the todo task in a file.
+     *
+     * @return File storage version of the todo task.
+     */
     @Override
     public String toTaskStorageString() {
         return "T" + "|" + super.toTaskStorageString();

@@ -12,14 +12,20 @@ import java.util.Scanner;
  * @author wz2k
  */
 public class Duke {
-    /**
-     * duke.Storage of user's tasks.
-     */
+    /** The list of task maintained by the chatbot */
     private TaskList taskList;
+
+    /** The chatbot's storage of the tasks it maintains */
     private Storage storage;
 
+    /** The medium which the chatbot uses to communicate */
     private Ui ui;
 
+    /**
+     * Creates a chatbot with the specified file path as storage.
+     *
+     * @param filePath File path to store data for tasks.
+     */
     public Duke(String filePath) {
         this.ui = new Ui();
 
@@ -32,7 +38,7 @@ public class Duke {
     }
 
     /**
-     * This is the main method which starts off the chatbot.
+     * Starts off the chatbot.
      *
      * @param args Unused.
      */
