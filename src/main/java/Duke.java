@@ -39,8 +39,10 @@ public class Duke {
             try {
                 createFile();
             } catch (IOException e) {
+                System.out.println(STRAIGHT_LINE);
                 System.out.println("Could not create data file to store task history. The following error occurred:");
                 System.out.println(e.getMessage());
+                System.out.println(STRAIGHT_LINE);
                 return;
             }
         }
@@ -50,8 +52,10 @@ public class Duke {
         try {
             restoreTaskHistory(tasks);
         } catch (FileNotFoundException e) {
+            System.out.println(STRAIGHT_LINE);
             System.out.println("Data file is missing. The following error occurred: ");
             System.out.println(e.getMessage());
+            System.out.println(STRAIGHT_LINE);
         }
 
 
