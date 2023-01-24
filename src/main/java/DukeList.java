@@ -1,6 +1,7 @@
+import java.io.Serializable;
 import java.util.ArrayList;
 
-public class DukeList {
+public class DukeList implements Serializable {
     private ArrayList<Task> list = new ArrayList<>();
 
     public DukeList() {}
@@ -51,7 +52,7 @@ public class DukeList {
     public void delete (int i) throws TaskOutOfRangeException{
         if (i > this.list.size() || i < 0) {
             throw new TaskOutOfRangeException("Yo, I can't find the task at " + i);
-        } else {
+        } else{
             Task removedTask = this.list.remove(i - 1);
             System.out.println("Got it, this task is gonez:");
             System.out.println(removedTask);
