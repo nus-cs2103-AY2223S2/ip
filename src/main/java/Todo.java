@@ -5,4 +5,14 @@ public class Todo extends Task {
     public Todo(String description) {
         super(description);
     }
+
+    /**
+     * Returns the String representation of a Todo.
+     *
+     * @return  String representation of a Todo in this format: [T][status] description date/time.
+     */
+    @Override
+    public String toString() {
+        return String.format("[T][%c] %s", this.getStatusIcon(), this.description);
+    }
 }

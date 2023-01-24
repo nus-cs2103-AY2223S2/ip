@@ -79,19 +79,19 @@ public class Duke {
                 if (splitInput.length < 2) {
                     throw new DukeException("The description of a todo cannot be empty.");
                 }
-                todo(input.split(" ", 2)[1]);
+                addTodo(input.split(" ", 2)[1]);
                 break;
             case deadline:
                 if (splitInput.length < 2) {
                     throw new DukeException("The description of a deadline cannot be empty.");
                 }
-                deadline(input.split(" ", 2)[1]);
+                addDeadline(input.split(" ", 2)[1]);
                 break;
             case event:
                 if (splitInput.length < 2) {
                     throw new DukeException("The description of a event cannot be empty.");
                 }
-                event(input.split(" ", 2)[1]);
+                addEvent(input.split(" ", 2)[1]);
                 break;
             case list:
                 list();
@@ -100,19 +100,19 @@ public class Duke {
                 if (splitInput.length < 2) {
                     throw new DukeException("The task index cannot be empty.");
                 }
-                mark(splitInput[1]);
+                markTask(splitInput[1]);
                 break;
             case unmark:
                 if (splitInput.length < 2) {
                     throw new DukeException("The task index cannot be empty.");
                 }
-                unmark(splitInput[1]);
+                unmarkTask(splitInput[1]);
                 break;
             case delete:
                 if (splitInput.length < 2) {
                     throw new DukeException("The task index cannot be empty.");
                 }
-                delete(splitInput[1]);
+                deleteTask(splitInput[1]);
                 break;
             case bye:
                 exit();
@@ -131,9 +131,9 @@ public class Duke {
      *
      * @param   taskDesc    Description of task.
      */
-    private static void todo(String taskDesc) {
+    private static void addTodo(String taskDesc) {
         Todo todo = new Todo(taskDesc);
-        add(todo);
+        addTask(todo);
     }
 
     /**
@@ -141,9 +141,9 @@ public class Duke {
      *
      * @param   taskDesc    Description of task.
      */
-    private static void deadline(String taskDesc) {
+    private static void addDeadline(String taskDesc) throws DukeException {
         Deadline deadline = new Deadline(taskDesc);
-        add(deadline);
+        addTask(deadline);
     }
 
     /**
@@ -151,9 +151,9 @@ public class Duke {
      *
      * @param   taskDesc    Description of task.
      */
-    private static void event(String taskDesc) {
+    private static void addEvent(String taskDesc) throws DukeException {
         Event event = new Event(taskDesc);
-        add(event);
+        addTask(event);
     }
 
     /**
@@ -161,12 +161,12 @@ public class Duke {
      *
      * @param   task    Task to be added.
      */
-    private static void add(Task task) {
+    private static void addTask(Task task) {
         taskList.add(task);
         System.out.println(horizontalLine
-                + "Got it. I've added this task:");
-        task.getTask();
-        System.out.println("Now you have "
+                + "Got it. I've added this task:\n"
+                + task.toString()
+                + "\nNow you have "
                 + taskList.size()
                 + " tasks in the list.\n"
                 + horizontalLine);
@@ -179,8 +179,7 @@ public class Duke {
         System.out.println(horizontalLine
                 + "Here are the tasks in your list:");
         for (int i = 1; i <= taskList.size(); i++) {
-            System.out.print(i + ".");
-            taskList.get(i - 1).getTask();
+            System.out.println(i + "." + taskList.get(i - 1).toString());
         }
         System.out.println(horizontalLine);
     }
@@ -190,14 +189,16 @@ public class Duke {
      *
      * @param   strIdx  Index of task.
      */
-    private static void mark(String strIdx) throws DukeException {
+    private static void markTask(String strIdx) throws DukeException {
         int idx = Integer.parseInt(strIdx);
         checkIdx(idx);
         Task task = taskList.get(idx - 1);
+        task.mark();
         System.out.println(horizontalLine
-                + "Nice! I've marked this task as done:");
-        task.markTask();
-        System.out.println(horizontalLine);
+                + "Nice! I've marked this task as done:\n"
+                + task.toString()
+                + "\n"
+                + horizontalLine);
     }
 
     /**
@@ -205,14 +206,16 @@ public class Duke {
      *
      * @param   strIdx  Index of task.
      */
-    private static void unmark(String strIdx) throws DukeException {
+    private static void unmarkTask(String strIdx) throws DukeException {
         int idx = Integer.parseInt(strIdx);
         checkIdx(idx);
         Task task = taskList.get(idx - 1);
+        task.unmark();
         System.out.println(horizontalLine
-                + "OK, I've marked this task as not done yet:");
-        task.unmarkTask();
-        System.out.println(horizontalLine);
+                + "OK, I've marked this task as not done yet:\n"
+                + task.toString()
+                + "\n"
+                + horizontalLine);
     }
 
     /**
@@ -220,14 +223,16 @@ public class Duke {
      *
      * @param   strIdx  Index of task.
      */
-    private static void delete(String strIdx) throws DukeException {
+    private static void deleteTask(String strIdx) throws DukeException {
         int idx = Integer.parseInt(strIdx);
         checkIdx(idx);
         System.out.println(horizontalLine
-                + "Noted. I've removed this task:");
-        taskList.get(idx - 1).getTask();
+                + "Noted. I've removed this task:"
+                + taskList.get(idx - 1).toString());
         taskList.remove(idx - 1);
-        System.out.println("Now you have " + taskList.size() + " tasks in the list.\n"
+        System.out.println("Now you have "
+                + taskList.size()
+                + " tasks in the list.\n"
                 + horizontalLine);
     }
 
