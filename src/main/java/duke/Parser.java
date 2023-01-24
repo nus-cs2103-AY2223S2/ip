@@ -16,7 +16,7 @@ import duke.task.EventTask;
 import duke.task.TodoTask;
 
 /**
- * A simple parser which provided utilities mostly by {@code static} methods.
+ * A simple parser which provides utilities mostly by {@code static} methods.
  */
 public class Parser {
 
