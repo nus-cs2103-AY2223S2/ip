@@ -180,6 +180,8 @@ public class DukeIO extends PrintWriter {
             }
         } catch (IOException e) {
             System.err.printf("SYSERR %s\n", e.getMessage());
+        } catch (DukeException.Invalid.Input e) {
+            throw new RuntimeException(e);
         }
     }
 

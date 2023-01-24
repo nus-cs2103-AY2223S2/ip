@@ -67,19 +67,19 @@ public class TaskMaster {
         this.add(new ToDo(taskName, status));
     }
 
-    protected void addDeadLine(String taskName, String by) {
+    protected void addDeadLine(String taskName, String by) throws DukeException.Invalid.Input {
         this.addDeadLine(taskName, false, by);
     }
-    protected void addDeadLine(String taskName, boolean status, String by) {
-        this.add(new Deadline(taskName,status, by));
+    protected void addDeadLine(String taskName, boolean status, String by) throws DukeException.Invalid.Input {
+        this.add(new Deadline(taskName,status, DateHandler.convert(by)));
     }
 
-    protected void addEvent(String taskName, String from, String to) {
+    protected void addEvent(String taskName, String from, String to) throws DukeException.Invalid.Input {
         this.addEvent(taskName, false, from, to);
     }
 
-    protected void addEvent(String taskName, boolean status, String from, String to) {
-        this.add(new Event(taskName, status, from, to));
+    protected void addEvent(String taskName, boolean status, String from, String to) throws DukeException.Invalid.Input {
+        this.add(new Event(taskName, status, DateHandler.convert(from), DateHandler.convert(to)));
     }
 
     protected StringBuilder toCSV(){
