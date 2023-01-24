@@ -8,6 +8,7 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.util.Scanner;
 import java.util.Arrays;
+import java.time.LocalDate;
 
 public class Duke {
 
@@ -28,12 +29,13 @@ public class Duke {
                 + "|____/ \\__,_|_|\\_\\___|\n";
 
         System.out.println("Hello from\n" + logo);
-       
+
         userInputs();
 
     }
 
-    // Allow users to add, mark and un-mark, delete, add tasks (to-do, deadline, event) or show items in a list
+    // Allow users to add, mark and un-mark, delete, add tasks (to-do, deadline,
+    // event) or show items in a list
     public static void userInputs() {
 
         System.out.println("Hello! I'm Duke");
@@ -55,7 +57,6 @@ public class Duke {
                 if (!Arrays.stream(Instructions.values()).anyMatch(x -> (x.toString()).equals(first_word))) {
                     throw new TaskException("Sorry! Duke has no idea what it is as it is not an instruction");
                 }
-
 
                 Instructions instruction = Instructions.valueOf(first_word);
 
@@ -123,7 +124,8 @@ public class Duke {
                         System.out.println("Now you have " + list.size() + " in the list.");
                         break;
 
-                    // default will throw an exception in case switch-case is unable to find instruction
+                    // default will throw an exception in case switch-case is unable to find
+                    // instruction
                     default:
                         throw new TaskException("Sorry! Duke has no idea what it is as it is not an instruction");
                 }
@@ -140,52 +142,53 @@ public class Duke {
         }
     }
 
-    /** Part of the code extracted from https:/
-/www.codejava.net/java-se/file-io/how-to-read-and-write-text-file-in-java
- */
+    /**
+     * Part of the code extracted from https:/
+     * /www.codejava.net/java-se/file-io/how-to-read-and-write-text-file-in-java
+     */
 
- public static void loadFileData() {
-    try {
-        File file = new File ("./data");
-        if (file.exists()) {
-            File txtFile = new File (DUKETXT);
-            FileReader fileReader = new FileReader(txtFile);
-            readToFile(fileReader);
-        } else {
-            file.createNewFile();
+    public static void loadFileData() {
+        try {
+            File file = new File("./data");
+            if (file.exists()) {
+                File txtFile = new File(DUKETXT);
+                FileReader fileReader = new FileReader(txtFile);
+                readToFile(fileReader);
+            } else {
+                file.createNewFile();
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
         }
-    } catch (IOException e) {
-        e.printStackTrace();
     }
-}
 
-public static void writeToFile () {
-    try {
-        FileWriter writer = new FileWriter(DUKETXT);
-        for (Task t : list) {
-            writer.write(t.toString());
-            writer.write("\n");
+    public static void writeToFile() {
+        try {
+            FileWriter writer = new FileWriter(DUKETXT);
+            for (Task t : list) {
+                writer.write(t.toString());
+                writer.write("\n");
+            }
+            writer.close();
+        } catch (IOException e) {
+            e.printStackTrace();
         }
-        writer.close();
-    } catch (IOException e) {
-        e.printStackTrace();
     }
-}
 
-public static void readToFile (FileReader file) {
-    try {
-    BufferedReader reader = new BufferedReader(file);
-    String line;
-    
-    while ((line = reader.readLine()) != null) {
-        System.out.println(line);
+    public static void readToFile(FileReader file) {
+        try {
+            BufferedReader reader = new BufferedReader(file);
+            String line;
+
+            while ((line = reader.readLine()) != null) {
+                System.out.println(line);
+            }
+            reader.close();
+
+        } catch (IOException e) {
+            e.printStackTrace();
         }
-        reader.close();
-
-    } catch (IOException e) {
-        e.printStackTrace();
     }
-}
 }
 
 // Task class: parent class of Deadline, Event, To do
@@ -226,38 +229,66 @@ class Todo extends Task {
 
 // Deadline class returns result that is type [D] and a deadline
 class Deadline extends Task {
-    private final String date;
+    private final LocalDate date;
+    private final String time;
+    private final String[] period;
 
-    public Deadline(String name, String date) {
+    public Deadline(String name, String frame) {
         super(name);
-        this.date = date;
+        this.period = frame.split(" ");
+        this.date = LocalDate.parse(period[0]);
+        this.time = period[1];
     }
 
     @Override
     public String toString() {
-        return "[D]" + super.toString() + "(by: " + date + ")";
+        return "[D]" + super.toString() + "(by: " + date.getDayOfMonth() + " "
+                + date.getMonth() + " " + date.getYear() + ", " + time + " )";
     }
 }
 
-// Event class returns result that is type [E] and a starting time and an ending time
+// Event class returns result that is type [E] and a starting time and an ending
+// time
 class Event extends Task {
 
-    private final String startingTime;
+    private final LocalDate startDate;
+    private final LocalDate endDate;
+    private final String startTime;
     private final String endTime;
+    private final String[] startingPeriod;
+    private final String[] endingPeriod;
 
     public Event(String name, String startingTime, String endTime) {
         super(name);
-        this.startingTime = startingTime;
-        this.endTime = endTime;
+        startingPeriod = startingTime.split(" ");
+        endingPeriod = endTime.split(" ");
+        if (startingPeriod[0].contains("/")) {
+            this.startDate = LocalDate.parse(startingPeriod[0].replaceAll("/", "-"));
+        } else {
+            this.startDate = LocalDate.parse(startingPeriod[0]);
+        }
+
+        if (endingPeriod[0].contains("/")) {
+            this.endDate = LocalDate.parse(endingPeriod[0].replaceAll("/", "-"));
+        } else {
+            this.endDate = LocalDate.parse(endingPeriod[0]);
+        }
+        
+        this.startTime = startingPeriod[1];
+        this.endTime = endingPeriod[1];
     }
 
     @Override
     public String toString() {
-        return "[E]" + super.toString() + "(from: " + startingTime + "to: " + endTime + ")";
+        return "[E]" + super.toString() + "(from: " + startDate.getDayOfMonth() + " " +
+                startDate.getMonth() + " " + startDate.getYear() + ", " + startTime + " to: " +
+                endDate.getDayOfMonth() + " " + endDate.getMonth() + " " + endDate.getYear() + ", "
+                + endTime + " )";
     }
 }
 
-// Exception that return a custom message that handles errors in task instructions
+// Exception that return a custom message that handles errors in task
+// instructions
 class TaskException extends Exception {
     public TaskException(String message) {
         super(message);
