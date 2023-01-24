@@ -10,6 +10,7 @@ import aqua.logic.command.AddToDoCommand;
 import aqua.logic.command.ByeCommand;
 import aqua.logic.command.Command;
 import aqua.logic.command.DeleteCommand;
+import aqua.logic.command.FilterCommand;
 import aqua.logic.command.ListCommand;
 import aqua.logic.command.MarkTaskCommand;
 
@@ -75,6 +76,8 @@ public class CommandLineInputParser implements Parser<CommandLineInput> {
                 return new AddDeadlineCommand();
             case "delete":
                 return new DeleteCommand();
+            case "find":
+                return new FilterCommand();
             case "bye":
                 return new ByeCommand();
             default:

@@ -53,4 +53,12 @@ delete -1
 delete 44.5
 delete qopwiehf
 list
+todo eat
+todo return book
+todo sleep
+todo buy book
+todo something to do about book
+find eat
+find book
+find no match
 bye
