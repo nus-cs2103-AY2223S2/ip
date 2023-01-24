@@ -1,6 +1,13 @@
-public class ToDo extends Task{
+public class ToDo extends Task {
     public ToDo(String title) {
         super(title);
+    }
+
+    public ToDo(String title, boolean isDone) { super(title, isDone); }
+
+    @Override
+    public String toDiskFormat() {
+        return String.format("T|%d|%s", super.getIsDone() ? 1 : 0, super.getTitle());
     }
 
     @Override

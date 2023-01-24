@@ -4,6 +4,15 @@ public class Deadline extends Task {
         super(title);
         this.deadline = deadline;
     }
+    public Deadline(String title, String deadline, boolean isDone) {
+        super(title, isDone);
+        this.deadline = deadline;
+    }
+
+    @Override
+    public String toDiskFormat() {
+        return String.format("D|%d|%s|%s", super.getIsDone() ? 1 : 0, super.getTitle(), this.deadline);
+    }
 
     @Override
     public String toString() {
