@@ -24,12 +24,11 @@ public class TaskList {
     }
 
     /**
-     * Constructs a new task list and populate it with tasks from a scanner.
+     * Loads task list with tasks from a scanner.
      *
      * @param scanner Scanner to read saved tasks from.
      */
-    public TaskList(Scanner scanner) {
-        tasks = new ArrayList<>();
+    public void load(Scanner scanner) {
         while (scanner.hasNextLine()) {
             parseTask(scanner.nextLine());
         }

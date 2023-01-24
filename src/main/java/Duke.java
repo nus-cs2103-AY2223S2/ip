@@ -1,14 +1,15 @@
 import command.Command;
+import command.Parser;
 
 import java.io.FileNotFoundException;
 import java.io.IOException;
-import java.util.Scanner;
 
-import command.Parser;
 import storage.Storage;
 
 import task.Task;
 import task.TaskList;
+
+import ui.Ui;
 
 /**
  * Duke command line tool that helps to track tasks.
@@ -21,20 +22,24 @@ public class Duke {
     private final Storage storage;
 
     /** Task list to store tasks in memory */
-    private TaskList tasks;
+    private final TaskList tasks;
+
+    /** Ui to handle user interface */
+    private final Ui ui;
 
     /**
      * Constructs a duke.
      */
     public Duke() {
         storage = new Storage("./data/tasks.txt");
+        tasks = new TaskList();
+        ui = new Ui();
         isRunning = false;
-        System.out.println("Hello!");
+        ui.printGreeting();
         try {
-            tasks = new TaskList(storage.getScanner());
+            tasks.load(storage.getScanner());
         } catch (FileNotFoundException e) {
-            System.out.println("Task list not found on disk, creating empty task list");
-            tasks = new TaskList();
+            ui.printStorageLoadFailure();
         }
     }
 
@@ -52,17 +57,15 @@ public class Duke {
      * Runs the duke.
      */
     public void run() {
-        Scanner scanner = new Scanner(System.in);
         isRunning = true;
-        System.out.println("Awaiting commands...");
+        ui.printPrompt();
         while (isRunning) {
             try {
-                execute(Parser.parse(scanner.nextLine()));
+                execute(Parser.parse(ui.readCommand()));
             } catch (IllegalArgumentException e) {
-                System.out.println(e.getMessage());
+                ui.printBadCommandMessage(e.getMessage());
             }
         }
-        scanner.close();
         exit();
     }
 
@@ -83,17 +86,17 @@ public class Duke {
         case DEADLINE:
             // FallThrough
         case EVENT:
-            System.out.println("Added task: " + tasks.execute(command));
+            ui.printAddTaskSuccessMessage(tasks.execute(command));
             break;
         case LIST:
             System.out.println(tasks);
             break;
         case MARK:
             Task task = tasks.execute(command);
-            System.out.println("Marked task: " + task + " as " + (task.getIsDone() ? "" : "not ") + "done");
+            ui.printMarkTaskSuccessMessage(task);
             break;
         case DELETE:
-            System.out.println("Deleted task: " + tasks.execute(command));
+            ui.printDeleteTaskSuccessMessage(tasks.execute(command));
             break;
         }
     }
@@ -106,9 +109,9 @@ public class Duke {
         try {
             tasks.save(storage.getFileWriter());
         } catch (IOException e) {
-            System.out.println("Error saving tasks to disk!");
+            ui.printStorageSaveFailure();
         }
-        System.out.println("Good bye!");
+        ui.printFareWell();
+        ui.close();
     }
-
 }
