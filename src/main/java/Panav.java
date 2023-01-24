@@ -1,6 +1,6 @@
 import java.util.*;
 import java.util.ArrayList;
-public class Duke {
+public class Panav {
     public static void main(String[] args) throws InvalidInputException, ToDoDescriptionException {
 
         Scanner sc = new Scanner(System.in);
@@ -19,33 +19,30 @@ public class Duke {
         String command = sc.nextLine();
         int counter = 0;
         while(true) {
-            String[] temp = command.split(" ");
-            String first = temp[0];
-            //Task t = new Task(command);
-            int len = command.length();
-            switch(first) {
+            try {
+                String[] temp = command.split(" ");
+                String first = temp[0];
+                //Task t = new Task(command);
+                int len = command.length();
+                switch (first) {
                 case "list":
                     System.out.println("____________________________________________________________");
                     System.out.println("Here are the tasks in your list:");
                     for (int i = 0; i < counter; i++) {
-                        System.out.println((i+1) + ". " + list.get(i));
+                        System.out.println((i + 1) + ". " + list.get(i));
                     }
                     System.out.println("____________________________________________________________");
                     break;
                 case "todo":
-                    try {
-                        String todomessage = command.replace("todo", "").trim();
-                        Task todo = new ToDo(todomessage);
-                        list.add(todo);
-                        counter++;
-                        System.out.println("____________________________________________________________");
-                        System.out.println("Got it. I've added this task:");
-                        System.out.println(todo);
-                        System.out.println("Now you have " + counter + " tasks in the list.");
-                        System.out.println("____________________________________________________________");
-                    } catch(ToDoDescriptionException e) {
-                        System.out.println(e);
-                    }
+                    String todomessage = command.replace("todo", "").trim();
+                    Task todo = new ToDo(todomessage);
+                    list.add(todo);
+                    counter++;
+                    System.out.println("____________________________________________________________");
+                    System.out.println("Got it. I've added this task:");
+                    System.out.println(todo);
+                    System.out.println("Now you have " + counter + " tasks in the list.");
+                    System.out.println("____________________________________________________________");
 
                     break;
                 case "deadline":
@@ -94,10 +91,10 @@ public class Duke {
                     System.out.println("____________________________________________________________");
                     break;
                 case "mark":
-
+                    //Fallthrough
                 case "unmark":
-                    int num = Integer.parseInt(String.valueOf(command.charAt(len-1)));
-                    Task cur = list.get(num-1);
+                    int num = readNumber(command, counter);
+                    Task cur = list.get(num - 1);
                     System.out.println("____________________________________________________________");
                     if (first.compareTo("mark") == 0) {
                         System.out.println("Nice! I've marked this task as done:");
@@ -116,8 +113,8 @@ public class Duke {
                     System.exit(0);
                     break;
                 case "delete":
-                    int index = Integer.parseInt(String.valueOf(command.charAt(len-1)));
-                    Task removed = list.remove(index-1);
+                    int deleteIndex = readNumber(command, counter);
+                    Task removed = list.remove(deleteIndex - 1);
                     counter--;
                     System.out.println("____________________________________________________________");
                     System.out.println("Noted. I've removed this task:");
@@ -126,18 +123,30 @@ public class Duke {
                     System.out.println("____________________________________________________________");
                     break;
                 default:
-                    try {
-                        throw new InvalidInputException("☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
-                    } catch(InvalidInputException e) {
-                        System.out.println(e);
+
+                    throw new InvalidInputException("☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
+
+
+
                 }
-
-
-
+            } catch (InvalidInputException e) {
+                System.out.println(e);
+            } catch (ToDoDescriptionException e) {
+                System.out.println(e);
+            } catch(InvalidNumberException e) {
+                System.out.println(e);
             }
 
             command = sc.nextLine();
         }
 
+    }
+    public static int readNumber(String command, int counter) throws InvalidNumberException{
+        int number = Integer.parseInt(String.valueOf(command.charAt(command.length() - 1)));
+        if (number > counter || number < 1) {
+            throw new InvalidNumberException("Oops!! There is no such index number in your list");
+        } else {
+            return number;
+        }
     }
 }
