@@ -20,9 +20,9 @@ public class DeleteCmd extends Command {
     }
 
     public void uiReply() {
-        Ui.displayMsg("Noted. I've removed this task:\n" + 
-        Ui.indentString(this.task.toString(), 1) + "\n" +
-        Ui.numTaskToString(taskList.countTasks()));
+        Ui.displayMsg("Noted. I've removed this task:\n"
+                + Ui.indentString(this.task.toString(), 1) + "\n"
+                + Ui.numTaskToString(taskList.countTasks()));
     }
 
 }

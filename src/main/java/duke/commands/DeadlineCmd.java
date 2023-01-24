@@ -24,8 +24,8 @@ public class DeadlineCmd extends Command {
     };
     
     public void uiReply() {
-        Ui.displayMsg("Got it. I've added this task:\n" + 
-        Ui.indentString(this.deadline.toString(), 1) + "\n" +
-        Ui.numTaskToString(taskList.countTasks()));
+        Ui.displayMsg("Got it. I've added this task:\n"
+                + Ui.indentString(this.deadline.toString(), 1)
+                + "\n" + Ui.numTaskToString(taskList.countTasks()));
     };
 }

@@ -22,7 +22,8 @@ public enum CommandInput {
 
     public static CommandInput getCommandInput(String commandLine) {
         String commandInput = commandLine.split(" ")[0];
-        Optional<CommandInput> command = Arrays.stream(CommandInput.values()).filter(cmd -> cmd.commandString.equals(commandInput)).findFirst();
+        Optional<CommandInput> command = Arrays.stream(CommandInput.values()).filter(
+                cmd -> cmd.commandString.equals(commandInput)).findFirst();
         return command.isEmpty() ? UNRECOGNIZED_CMD : command.get();
     }
 
