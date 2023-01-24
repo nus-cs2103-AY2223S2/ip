@@ -1,6 +1,5 @@
 package command;
 
-import java.util.ArrayList;
 import java.util.LinkedHashMap;
 
 /**
@@ -30,30 +29,18 @@ public class Command {
 
     /**
      * Constructs a new command.
+     * The first param is the name of the command.
      *
-     * @param input Input string of the command.
-     * @throws IllegalArgumentException If input string is not a valid command.
+     * @param arguments Arguments of the command.
      */
-    public Command(String input)
-        throws IllegalArgumentException {
-        arguments = new LinkedHashMap<>();
-        for (String term : input.strip().split(" /")) {
-            int firstSpace = term.indexOf(" ");
-            Argument argument = parseArgument((firstSpace == -1
-                    ? term
-                    : term.substring(0, firstSpace)));
-            String value = (firstSpace == -1
-                    ? ""
-                    : term.substring(firstSpace + 1));
-            arguments.put(argument, value);
-        }
-        checkArguments();
+    public Command(LinkedHashMap<Argument, String> arguments) {
+        this.arguments = arguments;
     }
 
     /**
-     * Returns the type of command.
+     * Returns the name of command.
      *
-     * @return Type of command.
+     * @return Name of command.
      */
     public Argument getName() {
         return arguments.entrySet().iterator().next().getKey();
@@ -69,7 +56,16 @@ public class Command {
         return arguments.get(arg);
     }
 
-    private Argument parseArgument(String arg)
+    /**
+     * Parses the argument string and returns the argument enumeration.
+     * Input string is case-insensitive and empty string represents
+     * the NO-OP command.
+     *
+     * @param arg Argument in string.
+     * @return Argument in enumeration.
+     * @throws IllegalArgumentException if input string is not a valid enum.
+     */
+    public static Argument parseArgument(String arg)
             throws IllegalArgumentException {
         if (arg.equals("")) {
             return Argument.NO_OP;
@@ -82,63 +78,24 @@ public class Command {
         }
     }
 
-    private void checkArguments()
-            throws IllegalArgumentException {
-        ArrayList<Argument> requiredArgs = new ArrayList<>();
-        ArrayList<Argument> requiredValues = new ArrayList<>();
-        switch (getName()) {
-        case BYE:
-            // Fallthrough
-        case LIST:
-            break;
-        case MARK:
-            requiredValues.add(Argument.MARK);
-            break;
-        case DELETE:
-            requiredValues.add(Argument.DELETE);
-            break;
-        case TODO:
-            requiredValues.add(Argument.TODO);
-            break;
-        case DEADLINE:
-            requiredArgs.add(Argument.BY);
-            requiredValues.add(Argument.DEADLINE);
-            requiredValues.add(Argument.BY);
-            break;
-        case EVENT:
-            requiredArgs.add(Argument.FROM);
-            requiredArgs.add(Argument.TO);
-            requiredValues.add(Argument.EVENT);
-            requiredValues.add(Argument.FROM);
-            requiredValues.add(Argument.TO);
-            break;
-        }
-        checkHasOnlyArgs(requiredArgs);
-        checkHasValues(requiredValues);
+    /**
+     * Checks if the command contains an argument key.
+     *
+     * @param arg Argument to check.
+     * @return true if the argument exists, false otherwise.
+     */
+    public boolean hasArg(Argument arg) {
+        return arguments.containsKey(arg);
     }
 
-    private void checkHasOnlyArgs(ArrayList<Argument> args)
-            throws IllegalArgumentException {
-        if (arguments.size() != args.size() + 1) {
-            throw new IllegalArgumentException("Command " + getName()
-                    + " takes in " + (args.size() + 1) + " argument(s) but "
-                    + arguments.size() + " were given");
-        }
-        for (Argument arg : args) {
-            if (!arguments.containsKey(arg)) {
-                throw new IllegalArgumentException("Command " + getName()
-                        + " requires argument " + arg + " but was not given");
-            }
-        }
-    }
-
-    private void checkHasValues(ArrayList<Argument> args)
-            throws IllegalArgumentException {
-        for (Argument arg : args) {
-            if (!arguments.containsKey(arg) || arguments.get(arg).equals("")) {
-                throw new IllegalArgumentException("Command " + getName()
-                        + " requires argument " + arg + " but was not given");
-            }
-        }
+    /**
+     * Checks if a specific argument in command has a value.
+     *
+     * @param arg Argument to check.
+     * @return true if argument exists and value is a non-empty string,
+     *         false otherwise.
+     */
+    public boolean hasValue(Argument arg) {
+        return arguments.containsKey(arg) && !arguments.get(arg).equals("");
     }
 }

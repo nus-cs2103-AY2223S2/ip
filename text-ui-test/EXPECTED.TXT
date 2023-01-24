@@ -36,11 +36,11 @@ Command invalidCmd not recognised
 Command TODO requires argument TODO but was not given
 Command TODO requires argument TODO but was not given
 Command invalidArg not recognised
-Command DEADLINE takes in 2 argument(s) but 1 were given
-Command DEADLINE takes in 2 argument(s) but 1 were given
+Command DEADLINE requires argument BY but was not given
+Command DEADLINE requires argument BY but was not given
 Command DEADLINE requires argument BY but was not given
 Invalid format for date, expected: "YYYY-MM-DD" actual: 6th
-Command EVENT takes in 3 argument(s) but 2 were given
+Command EVENT requires argument FROM but was not given
 Command EVENT requires argument TO but was not given
 Invalid format for date and time, expected: "YYYY-MM-DD TTTT" actual: 2022-06-20
 Deleted task: [T][ ] task5

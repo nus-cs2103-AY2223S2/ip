@@ -1,6 +1,7 @@
 package task;
 
 import command.Command;
+import command.Parser;
 
 import java.io.FileWriter;
 import java.io.IOException;
@@ -41,7 +42,7 @@ public class TaskList {
      */
     private void parseTask(String input) {
         try {
-            execute(new Command(input));
+            execute(Parser.parse(input));
         } catch (IllegalArgumentException e) {
             System.out.println("Task list on disk corrupted!" +
                     " Some tasks might be missing or incorrect.");

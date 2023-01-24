@@ -4,6 +4,7 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.Scanner;
 
+import command.Parser;
 import storage.Storage;
 
 import task.Task;
@@ -56,7 +57,7 @@ public class Duke {
         System.out.println("Awaiting commands...");
         while (isRunning) {
             try {
-                execute(new Command(scanner.nextLine()));
+                execute(Parser.parse(scanner.nextLine()));
             } catch (IllegalArgumentException e) {
                 System.out.println(e.getMessage());
             }
