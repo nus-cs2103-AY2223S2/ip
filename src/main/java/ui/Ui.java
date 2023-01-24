@@ -143,6 +143,12 @@ public class Ui {
 		}
 	}
 
+	/**
+	 * Print the tasks that matches the search keyword.
+	 * 
+	 * @param tasklist
+	 * @param keyword
+	 */
 	public void printMatchedTasks(TaskList tasklist, String keyword) {
 		boolean hasItem = false;
 		String header = "Here are the matching tasks in your list:";
