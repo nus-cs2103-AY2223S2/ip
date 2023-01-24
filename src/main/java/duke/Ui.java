@@ -26,7 +26,7 @@ public class Ui {
                 + "|____/ \\__,_|_|\\_\\___|\n";
         System.out.println(logo);
         System.out.println("Welcome! I'm Duke.");
-        System.out.println("What can I do for you?\n");
+        System.out.println("What can I do for you?");
         printLine();
     }
 
@@ -65,5 +65,14 @@ public class Ui {
     public void exitDisplay() {
         System.out.println("\tBye. Hope to see you again soon!");
         printLine();
+    }
+
+    public void noMatchFoundDisplay() {
+        System.out.println("\tNo matches found...");
+    }
+
+    public void matchFoundDisplay(TaskList list) {
+        System.out.println("\tHere are the matching tasks in your list:");
+        displayList(list);
     }
 }

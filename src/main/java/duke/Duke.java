@@ -9,6 +9,8 @@ import java.time.format.DateTimeParseException;
 import java.time.LocalDate;
 
 import java.io.*;
+import java.util.ArrayList;
+
 public class Duke {
     //private Scanner sc = new Scanner(System.in);
     private static String FILEPATH = "./data/duke.txt";
@@ -29,7 +31,7 @@ public class Duke {
         MARK, UNMARK,
         TODO, DEADLINE, EVENT,
         DELETE,
-        LISTDATE
+        LISTDATE, FIND
     }
 
 
@@ -72,6 +74,9 @@ public class Duke {
                     case LISTDATE:
                         this.displayTasksWithDates(userInput);
                         break;
+                    case FIND:
+                        this.findTasks(userInput);
+                        break;
                     default :
                         throw new DukeInvalidCommandException();
 
@@ -84,13 +89,6 @@ public class Duke {
             this.ui.printLine();
         }
 
-    }
-
-    private void displayList() {
-        int listSize = this.list.listLength();
-        for(int i = 1; i <= listSize; i++) {
-            System.out.println("\t" + i + ". " + this.list.getTask(i).toString());
-        }
     }
 
     private void markComplete(String[] userInput) throws DukeInvalidArgumentsException, DukeMissingArgumentException, DukeTaskArgumentException {
@@ -200,7 +198,6 @@ public class Duke {
         }
     }
 
-
     private void displayTasksWithDates(String[] userInput) {
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
         LocalDate date = LocalDate.parse(userInput[1], formatter);
@@ -214,6 +211,29 @@ public class Duke {
                 }
             }
 
+        }
+    }
+
+    private void findTasks(String[] userInput) {
+        String keyword = userInput[1];
+        if(this.list.isEmpty()) {
+            System.out.println("\tThere is not no task in the list.");
+            return;
+        }
+
+        ArrayList<Task> filter= new ArrayList<>();
+        TaskList findList = new TaskList(filter);
+        for(int i = 1; i <= this.list.listLength(); i++) {
+            Task task = this.list.getTask(i);
+            if(task.toString().contains(keyword)){
+                findList.addTask(task);
+            }
+        }
+
+        if(findList.isEmpty()) {
+            this.ui.noMatchFoundDisplay();
+        } else {
+            this.ui.matchFoundDisplay(findList);
         }
     }
 
