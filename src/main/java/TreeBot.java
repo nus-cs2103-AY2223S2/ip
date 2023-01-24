@@ -2,6 +2,8 @@ import exception.InvalidCommandException;
 import exception.TaskFactoryException;
 import exception.TreeBotException;
 
+import java.io.FileWriter;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -44,15 +46,19 @@ public class TreeBot {
         case "deadline":
         case "event":
             addTask(this.taskFactory.make(commandString));
+            saveTasks();
             break;
         case "mark":
             markTask(Integer.parseInt(splitStr[1]));
+            saveTasks();
             break;
         case "unmark":
             unmarkTask(Integer.parseInt(splitStr[1]));
+            saveTasks();
             break;
         case "delete":
             deleteTask(Integer.parseInt(splitStr[1]));
+            saveTasks();
             break;
         default:
             throw new InvalidCommandException("This command is invalid");
@@ -84,6 +90,24 @@ public class TreeBot {
 
     private void echo(String command) {
         System.out.println(command);
+    }
+
+    private void saveTasks() {
+        System.out.println("saving tasks");
+        try {
+            FileWriter fw = new FileWriter("data/treebot.txt");
+            for (Task task : this.tasks) {
+                System.out.println(task.toStorageFormatString());
+                fw.write(task.toStorageFormatString() + System.lineSeparator());
+            }
+            fw.close();
+
+
+        } catch (IOException e) {
+            System.out.println("file does not exist");
+        }
+
+
     }
 
     private void exit() {

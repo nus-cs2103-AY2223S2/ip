@@ -14,6 +14,8 @@ public abstract class Task {
         this.isDone = false;
     }
 
+    abstract public String toStorageFormatString();
+
     @Override
     public String toString() {
         if (this.isDone) {
@@ -21,6 +23,8 @@ public abstract class Task {
         }
         return "[] " + this.taskDescription;
     }
+
+
 
 
 }
