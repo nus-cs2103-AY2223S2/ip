@@ -44,10 +44,10 @@ public class TaskList {
         return res;
     }
 
-    public String toSaveString() {
+    public String toSaveString(Storage storage) {
         String res = "";
         for (Task task : list) {
-            res += task.toSaveString() + '\n';
+            res += task.toSaveString(storage) + '\n';
         }
         return res;
     }

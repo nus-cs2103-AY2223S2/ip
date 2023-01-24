@@ -20,8 +20,8 @@ public class EventTask extends Task {
     }
 
     @Override
-    public String toSaveString() {
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm");
-        return super.toSaveString() + "|" + startTime.format(formatter) + "|" + endTime.format(formatter);
+    public String toSaveString(Storage storage) {
+        return super.toSaveString(storage) + "|" + storage.formatDateTime(startTime)
+                + "|" + storage.formatDateTime(endTime);
     }
 }

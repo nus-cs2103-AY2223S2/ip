@@ -22,7 +22,8 @@ public abstract class Task {
         return "[" + eventSymbol + "]" + "[" + getStatusIcon() + "] " + description;
     }
 
-    public String toSaveString() {
+    public String toSaveString(Storage storage) {
         return eventSymbol + "|" + isDone + "|" + description;
     }
+
 }
