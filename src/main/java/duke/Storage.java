@@ -1,3 +1,9 @@
+package duke;
+
+import duke.exception.DukeDataException;
+import duke.exception.DukeException;
+import duke.tasks.*;
+
 import java.io.*;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;

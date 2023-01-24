@@ -1,3 +1,8 @@
+package duke;
+
+import duke.exception.*;
+import duke.tasks.*;
+
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
@@ -88,7 +93,7 @@ public class Duke {
         }
     }
 
-    private void markComplete(String[] userInput) throws DukeInvalidArgumentsException, DukeMissingArgumentException, DukeTaskArgumentException{
+    private void markComplete(String[] userInput) throws DukeInvalidArgumentsException, DukeMissingArgumentException, DukeTaskArgumentException {
         try {
             int taskIndex = Integer.parseInt(userInput[1]);
             if(taskIndex > this.list.listLength()) {

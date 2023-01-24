@@ -1,3 +1,7 @@
+package duke;
+
+import duke.tasks.*;
+
 import java.util.Scanner;
 public class Ui {
     private Scanner sc = new Scanner(System.in);
