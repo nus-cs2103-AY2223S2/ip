@@ -1,4 +1,5 @@
 import java.util.*;
+import java.time.LocalDate;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileWriter;
@@ -42,15 +43,15 @@ public class Duke {
                     case "D":
                         list.add(new Deadline(
                                 split[2],
-                                split[3],
+                                LocalDate.parse(split[3]),
                                 split[1].equals("1")
                         ));
                         break;
                     case "E":
                         list.add(new Event(
                                 split[2],
-                                split[3],
-                                split[4],
+                                LocalDate.parse(split[3]),
+                                LocalDate.parse(split[4]),
                                 split[1].equals("1")
                         ));
                         break;
@@ -170,7 +171,7 @@ public class Duke {
         if (tokens.length == 1) {
             throw new DukeException("Please provide a deadline for this task.");
         }
-        list.add(new Deadline(tokens[0], tokens[1], false));
+        list.add(new Deadline(tokens[0], LocalDate.parse(tokens[1]), false));
     }
 
     public static void event(String[] split) throws DukeException {
@@ -185,7 +186,7 @@ public class Duke {
         if (tokens2.length == 1) {
             throw new DukeException("Please provide an end time for this event.");
         }
-        list.add(new Event(tokens[0], tokens2[0], tokens2[1], false));
+        list.add(new Event(tokens[0], LocalDate.parse(tokens2[0]), LocalDate.parse(tokens2[1]), false));
     }
 
     public static void delete(String[] split) throws DukeException {
