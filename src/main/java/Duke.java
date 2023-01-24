@@ -12,29 +12,59 @@ public class Duke {
 
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
         String text = "";
-        ArrayList <tasks> list = new ArrayList <tasks>();
+        ArrayList <Task> list = new ArrayList <Task>();
 
         while( !(text = br.readLine()).equals("bye")) {
-            if ( text.equals("list")) {
+            StringTokenizer tk = new StringTokenizer(text);
+            String action = tk.nextToken();
+
+            if ( action.equals("list")) {
                 for (int i = 0; i < list.size(); i++) {
                     int j = i + 1;
-                    char c = ' ';
-                    if(list.get(i).isMark()) {
-                        c = 'X';
-                    }
-                    System.out.println(j + ".[" + c + "]" + list.get(i).getValue());
+                    System.out.println(j + "." + list.get(i));
                 }
-            } else if ( text.contains("mark")) {
-                StringTokenizer tk = new StringTokenizer(text);
-                tk.nextToken();
+            } else if ( action.equals("mark")) {
                 int index = Integer.parseInt(tk.nextToken());
                 list.get(index - 1).setMark(true);
                 System.out.println("Nice! I've marked this task as done: [X]" + list.get(index - 1).getValue());
             }
             else {
-                tasks t = new tasks(false,text);
-                list.add(t);
+                if ( action.equals("todo")) {
+                    String[] arr = text.split(" ", 2);
+                    Todo t = new Todo( arr[1] );
+                    list.add(t);
+                } else if( action.equals("deadline")) {
+                    String value = ""; String date = "";
+                    while (tk.hasMoreTokens()) {
+                        String nextString = tk.nextToken();
+                        if(nextString.equals("/by") ) {
+                            date = date + tk.nextToken();
+                            break;
+                        } else
+                            value = value + nextString;
+                    }
+                    Deadline t = new Deadline(value,date);
+                    list.add(t);
+
+                } else if( action.equals("event")) {
+                    String value = ""; String from = ""; String to = "";
+                    while (tk.hasMoreTokens()) {
+                        String nextString = tk.nextToken();
+                        if(nextString.equals("/from") ) {
+                            from = from + tk.nextToken();
+                        } else if (nextString.equals("/to")) {
+                            to = to + tk.nextToken();
+                        } else
+                            value = value + nextString;
+                    }
+
+                    Event t = new Event(value,from,to);
+                    list.add(t);
+
+                }
+
                 System.out.println("Added : " + text);
+                System.out.println("You have a total of " + list.size() + " tasks in the list");
             }
         }
 

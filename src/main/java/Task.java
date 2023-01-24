@@ -1,10 +1,10 @@
-public class tasks {
+public class Task {
     private boolean mark;
     private String value;
 
-    public tasks(boolean mark, String value) {
-        this.mark = mark;
+    public Task(String value) {
         this.value = value;
+        this.mark = false;
     }
 
     public boolean isMark() {
@@ -23,5 +23,7 @@ public class tasks {
         this.value = value;
     }
 
-
+    public String toString() {
+        return "[" + (isMark() ? "X" : " ") + "] " + getValue()  ;
+    }
 }
