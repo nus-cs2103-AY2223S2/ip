@@ -44,6 +44,10 @@ public class Task {
         System.out.println("Now we have " + myTask.size() + " tasks in the list.");
     }
 
+    public boolean getStatus() {
+        return this.isDone;
+    }
+
 
 }
 

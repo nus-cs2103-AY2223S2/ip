@@ -1,3 +1,4 @@
+import java.io.IOException;
 import java.util.Scanner;
 import java.util.ArrayList;
 
@@ -11,7 +12,7 @@ public class Duke {
             System.out.println((i+1) + ". " + task.toString());
         }
     }
-    public static void main(String[] args) {
+    public static void main(String[] args) throws IOException {
         String logo = " ____        _        \n"
                 + "|  _ \\ _   _| | _____ \n"
                 + "| | | | | | | |/ / _ \\\n"
@@ -81,7 +82,7 @@ public class Duke {
                 task.taskNotDone();
             } else if (input.startsWith("todo")) {
                 try {
-                    String pattern = "todo \\S*";
+                    String pattern = "todo (?<letter>[a-z ]+)";
                     boolean isMatch = input.matches(pattern);
                     if (!isMatch){
                         throw new DukeException("☹ OOPS!!! The description of a todo cannot be empty.");
@@ -95,7 +96,7 @@ public class Duke {
                 task.announceAdded(myTasks);
             } else if (input.startsWith("deadline")) {
                 try {
-                    String pattern = "deadline \\S* /by \\S*";
+                    String pattern = "deadline (?<letter>[a-z ]+) /by \\S+";
                     boolean isMatch = input.matches(pattern);
                     if (!isMatch){
                         throw new DukeException("☹ OOPS!!! The description of a deadline cannot be empty.");
@@ -111,7 +112,7 @@ public class Duke {
                 task.announceAdded(myTasks);
             } else if (input.startsWith("event")) {
                 try {
-                    String pattern = "event \\S* /from \\S* /to \\S*";
+                    String pattern = "event (?<letter>[a-z ]+) /from \\S+ /to \\S+";
                     boolean isMatch = input.matches(pattern);
                     if (!isMatch){
                         throw new DukeException("☹ OOPS!!! The description of a event cannot be empty.");
@@ -150,10 +151,12 @@ public class Duke {
                 }
                 Task task = myTasks.get(taskNumber);
                 myTasks.remove(task);
-                task.announceRemoved(myTaskstodo);
+                task.announceRemoved(myTasks);
             } else {
                 System.out.println("Invalid response. Please try: todo, deadline or event. :)");
             }
+            // Auto-save state in file
+            Save.autoSave(myTasks);
         }
     }
 }
