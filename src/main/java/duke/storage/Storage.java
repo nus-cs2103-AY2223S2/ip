@@ -18,9 +18,9 @@ import duke.task.Todo;
  * of tasks from/to the hard disk.
  */
 public class Storage {
-    // The file used to write/load data.
+    /** The file used to write/load data */
     private File list;
-    // The ArrayList used to store the loaded data.
+    /** The ArrayList used to store the loaded data*/
     private ArrayList<Task> outputList = new ArrayList<>();
 
     /**

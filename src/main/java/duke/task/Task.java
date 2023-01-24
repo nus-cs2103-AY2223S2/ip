@@ -5,9 +5,9 @@ package duke.task;
  * and a boolean representing its status.
  */
 public class Task {
-    // Stores the description of the task.
+    /** Stores the description of the task */
     protected String description;
-    // Stores the status of the task.
+    /** Stores the status of the task */
     protected boolean isDone;
 
     /**
