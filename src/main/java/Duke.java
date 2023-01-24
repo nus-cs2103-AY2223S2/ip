@@ -1,4 +1,8 @@
 import java.util.*;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileWriter;
+import java.io.IOException;
 
 import Tasks.*;
 
@@ -13,6 +17,49 @@ public class Duke {
                 + "|____/ \\__,_|_|\\_\\___|\n";
         System.out.println("Hello from\n" + logo);
         System.out.println("----------------------------------------");
+
+        File f = new File("data/duke.txt");
+        if (!f.exists()) {
+            try {
+                f.getParentFile().mkdirs();
+                f.createNewFile();
+            } catch (IOException e) {
+                System.out.println("Something went wrong: " + e.getMessage());
+            }
+        }
+
+        try {
+            Scanner s = new Scanner(f);
+            while (s.hasNext()) {
+                String[] split = s.nextLine().split(" \\| ", 4);
+                switch(split[0]) {
+                    case "T":
+                        list.add(new Todo(
+                                split[2],
+                                split[1].equals("1")
+                        ));
+                        break;
+                    case "D":
+                        list.add(new Deadline(
+                                split[2],
+                                split[3],
+                                split[1].equals("1")
+                        ));
+                        break;
+                    case "E":
+                        list.add(new Event(
+                                split[2],
+                                split[3],
+                                split[4],
+                                split[1].equals("1")
+                        ));
+                        break;
+                }
+            }
+            s.close();
+        } catch (FileNotFoundException e) {
+            System.out.println("Something went wrong: " + e.getMessage());
+        }
 
         while (true) {
             String in = sc.nextLine();
@@ -59,6 +106,16 @@ public class Duke {
             }
         }
         sc.close();
+
+        try {
+            FileWriter fw = new FileWriter("data/duke.txt");
+            for (Task t : list) {
+                fw.write(t.toFile() + System.lineSeparator());
+            }
+            fw.close();
+        } catch (IOException e) {
+            System.out.println("Something went wrong: " + e.getMessage());
+        }
     }
 
     public static void mark(String[] split) throws DukeException {
@@ -102,7 +159,7 @@ public class Duke {
         if (split.length == 1) {
             throw new DukeException("The description of a todo cannot be empty.");
         }
-        list.add(new Todo(split[1]));
+        list.add(new Todo(split[1], false));
     }
 
     public static void deadline(String[] split) throws DukeException {
@@ -113,7 +170,7 @@ public class Duke {
         if (tokens.length == 1) {
             throw new DukeException("Please provide a deadline for this task.");
         }
-        list.add(new Deadline(tokens[0], tokens[1]));
+        list.add(new Deadline(tokens[0], tokens[1], false));
     }
 
     public static void event(String[] split) throws DukeException {
@@ -128,7 +185,7 @@ public class Duke {
         if (tokens2.length == 1) {
             throw new DukeException("Please provide an end time for this event.");
         }
-        list.add(new Event(tokens[0], tokens2[0], tokens2[1] ));
+        list.add(new Event(tokens[0], tokens2[0], tokens2[1], false));
     }
 
     public static void delete(String[] split) throws DukeException {
