@@ -25,7 +25,6 @@ public class Storage {
         }
         return f;
     }
-
     //Solution below adapted from https://stackoverflow.com/questions/1377279/find-a-line-in-a-file-and-remove-it
     private void deleteLine(String line) {
         File tempFile = new File("temp.txt");
@@ -88,7 +87,6 @@ public class Storage {
         }
         tempFile.renameTo(this.storageFile);
     }
-
     private void appendToFile(String text){
         try {
             FileWriter fw = new FileWriter(this.storageFile, true); // create a FileWriter in append mode
@@ -98,7 +96,6 @@ public class Storage {
             e.printStackTrace();
         }
     }
-
     public ArrayList<Task> load() throws DukeException {
         ArrayList<Task> userTasks = new ArrayList<>();
         if (this.storageFile.exists()) {
@@ -149,10 +146,7 @@ public class Storage {
     public void modifyTask(String oldText, String newText) {
         modifyLine(oldText, newText);
     }
-
     public void deleteTask(String taskText) {
         deleteLine(taskText);
     }
-
-
 }

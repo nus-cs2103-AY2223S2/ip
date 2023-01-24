@@ -48,7 +48,6 @@ public class Parser {
             return new IncorrectCommand();
         }
     }
-
     private static DeadlineCommand prepareDeadline(String message) throws DukeException {
         Pattern p = Pattern.compile("/by");
         String temp[] = p.split(message);

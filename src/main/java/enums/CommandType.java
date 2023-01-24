@@ -4,6 +4,7 @@ import exceptions.DukeException;
 
 import static ui.Ui.DATE_TIME_FORMAT;
 import static ui.Ui.LS;
+
 public enum CommandType {
     BYE("bye", new DukeException("")),
     LIST("list", new DukeException("")),

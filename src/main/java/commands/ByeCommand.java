@@ -4,8 +4,6 @@ import storage.Storage;
 import tasks.TaskList;
 import ui.Ui;
 
-import static ui.Ui.LS;
-
 public class ByeCommand extends Command {
     @Override
     public void execute(TaskList tl, Ui ui, Storage s) {

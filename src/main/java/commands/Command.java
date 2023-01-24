@@ -1,6 +1,5 @@
 package commands;
 
-import enums.CommandType;
 import storage.Storage;
 import tasks.TaskList;
 import ui.Ui;

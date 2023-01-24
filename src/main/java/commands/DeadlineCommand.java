@@ -3,7 +3,6 @@ package commands;
 import storage.Storage;
 import tasks.Deadline;
 import tasks.TaskList;
-import tasks.ToDo;
 import ui.Ui;
 
 import static ui.Ui.LS;
