@@ -1,3 +1,10 @@
+package duke;
+
+import duke.exceptions.DukeException;
+import duke.parser.Parser;
+import duke.storage.Storage;
+import duke.tasklist.TaskList;
+import duke.ui.Ui;
 public class Duke {
 
     private final Storage storage;
