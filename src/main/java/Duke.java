@@ -37,6 +37,7 @@ public class Duke {
     }
 
     public static boolean checkDescription(String[] splitInput) {
+
         return splitInput.length < 2;
     }
 
@@ -63,11 +64,18 @@ public class Duke {
                 }
 
                 String taskNumMark = splitInput[1];
+                Task taskToMark;
+                try {
+                    taskToMark = toDoList.get(Integer.parseInt(taskNumMark) - 1);
+                    System.out.println("Nice! I've marked this task as done:");
+                    System.out.println(" " + taskToMark.mark());
 
-                Task taskToMark = toDoList.get(Integer.parseInt(taskNumMark) - 1);
+                } catch (NumberFormatException e) {
+                    throw new DukeException("Please input an integer");
 
-                System.out.println("Nice! I've marked this task as done:");
-                System.out.println(" " + taskToMark.mark());
+                } catch (IndexOutOfBoundsException e) {
+                    throw new DukeException("Please input a valid integer");
+                }
 
                 break;
             case "unmark":
@@ -77,10 +85,19 @@ public class Duke {
 
                 String taskNumUnmark = splitInput[1];
 
-                Task taskToUnmark = toDoList.get(Integer.parseInt(taskNumUnmark) - 1);
+                Task taskToUnmark;
 
-                System.out.println("OK, I've marked this task as not done yet:");
-                System.out.println(" " + taskToUnmark.unMark());
+                try {
+                    taskToUnmark = toDoList.get(Integer.parseInt(taskNumUnmark) - 1);
+                    System.out.println("Nice! I've marked this task as done:");
+                    System.out.println(" " + taskToUnmark.mark());
+
+                } catch (NumberFormatException e) {
+                    throw new DukeException("Please input an integer");
+
+                } catch (IndexOutOfBoundsException e) {
+                    throw new DukeException("Please input a valid integer");
+                }
 
                 break;
 
@@ -127,11 +144,21 @@ public class Duke {
                     throw new DukeException("OOPS!!! The description of a event cannot be empty.");
                 }
                 String taskDelete = splitInput[1];
-                Task taskToDelete = toDoList.get(Integer.parseInt(taskDelete) - 1);
-                toDoList.remove(Integer.parseInt(taskDelete) - 1);
-                System.out.println("Noted. I've removed this task:");
-                System.out.println("  " + taskToDelete.toString());
-                System.out.println("Now you have " + toDoList.size() + " tasks on the list.");
+
+                try {
+                    Task taskToDelete = toDoList.get(Integer.parseInt(taskDelete) - 1);
+                    toDoList.remove(Integer.parseInt(taskDelete) - 1);
+                    System.out.println("Noted. I've removed this task:");
+                    System.out.println("  " + taskToDelete.toString());
+                    System.out.println("Now you have " + toDoList.size() + " tasks on the list.");
+
+                } catch (NumberFormatException e) {
+                    throw new DukeException("Please input an integer");
+
+                } catch (IndexOutOfBoundsException e) {
+                    throw new DukeException("Please input a valid integer");
+                }
+
                 break;
 
             default:
