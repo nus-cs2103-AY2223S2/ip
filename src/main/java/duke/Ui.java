@@ -20,7 +20,11 @@ public class Ui {
 
     public static String getNextCommand() {
         System.out.println("");
-        if (isRunning) line = sc.nextLine();
+        try {
+            if (isRunning) line = sc.nextLine();
+        } catch (java.util.NoSuchElementException e) {
+            isRunning = false;
+        }
         return line;
     }
 

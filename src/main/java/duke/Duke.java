@@ -45,6 +45,7 @@ public class Duke {
                 break;
             case BYE:
                 Ui.shutDown();
+                Storage.saveToFile(taskList);;
                 break;
             case UNRECOGNIZED_CMD:
                 Ui.displayMsg("OOPS!!! I'm sorry, but I don't know what that means :-(");
@@ -52,6 +53,5 @@ public class Duke {
             }
             Ui.getNextCommand();
         }
-        Storage.saveToFile(taskList);;
     }
 }
