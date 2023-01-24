@@ -90,6 +90,9 @@ public class Ui {
         displayText(errorMessage);
     }
 
+    /**
+     * Prints the start of search message.
+     */
     public void replySearchStart() {
         this.displayText("The following tasks matches your query:");
     }

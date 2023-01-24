@@ -6,6 +6,7 @@ import duke.command.CreateEventCommand;
 import duke.command.CreateTodoCommand;
 import duke.command.DeleteTaskCommand;
 import duke.command.EndChatCommand;
+import duke.command.FindTaskWithTextCommand;
 import duke.command.ListTasksCommand;
 import duke.command.MarkTaskCommand;
 import duke.command.UnmarkTaskCommand;
