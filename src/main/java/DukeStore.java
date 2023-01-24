@@ -2,8 +2,12 @@ import DukeExceptions.DukeException;
 import DukeExceptions.DukeStoreFullException;
 import DukeExceptions.DukeStoreInvalidAccessException;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 import java.util.Objects;
+import java.util.stream.Collectors;
 
 /**
  * The main store class to store user input into the Duke system.
@@ -108,6 +112,19 @@ public class DukeStore {
                 + String.format("\nNow you have %s task%s in the list.", this.records.size(),
                 this.records.size() == 1? "": "s");
         DukeFormatter.section(message);
+    }
+
+    public String occurOnDate(LocalDate dt) {
+        List<DukeTask> filtered = this.records
+                .stream()
+                .filter(dukeTask -> dukeTask.isOnDate(dt))
+                .collect(Collectors.toList());
+        if (filtered.size() == 0) {
+            return "Hooray. No tasks occur on this date.";
+        }
+        StringBuilder out = new StringBuilder();
+        filtered.forEach(dukeTask -> out.append("- " + dukeTask + "\n"));
+        return out.toString();
     }
 
     @Override

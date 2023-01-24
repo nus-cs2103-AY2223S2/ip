@@ -1,3 +1,9 @@
+import javax.swing.text.DateFormatter;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
+
 /**
  * The abstraction behind the tasks stored by the Duke chat-bot.
  *
@@ -38,4 +44,6 @@ public abstract class DukeTask {
                 "[%s] %s", (this.isDone ? "X": " "), this.value
         );
     }
+
+    public abstract boolean isOnDate(LocalDate dt);
 }

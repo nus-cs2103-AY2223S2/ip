@@ -1,3 +1,7 @@
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+
 /**
  * The class representing a Deadline task.
  *
@@ -5,7 +9,7 @@
  * AY2223-S2 CS2103T
  */
 public class TaskDeadline extends DukeTask{
-    private String deadline;
+    private final LocalDateTime deadline;
 
     /**
      * Given a task and a deadline, constructs a Deadline task.
@@ -13,14 +17,20 @@ public class TaskDeadline extends DukeTask{
      * @param task The task to be completed.
      * @param deadline The task's deadline.
      */
-    public TaskDeadline(String task, String deadline) {
+    public TaskDeadline(String task, LocalDateTime deadline) {
         super(task);
         this.deadline = deadline;
     }
 
     @Override
     public String toString() {
+        DateTimeFormatter df = DateTimeFormatter.ofPattern("MMM dd yyyy h:mma");
         return "[D]" + super.toString()
-                + String.format(" (by: %s)", this.deadline);
+                + String.format(" (by: %s)", this.deadline.format(df));
+    }
+
+    @Override
+    public boolean isOnDate(LocalDate dtParsed) {
+        return dtParsed.equals(this.deadline.toLocalDate());
     }
 }
