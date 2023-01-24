@@ -1,9 +1,10 @@
-public class Todo extends Task{
-    public Todo(String cont){
+public class Todo extends Task {
+    public Todo(String cont) {
         super(cont);
     }
 
-    public String toString(){
-        return "[T]["+this.checkStatus()+"] "+this.cont;
+    @Override
+    public String toString() {
+        return "[T]" + super.toString();
     }
 }
