@@ -11,12 +11,10 @@ public class Todo extends Task {
             System.out.println(" " + "____________________________________________________________");
         }
     }
-
     @Override
     public String toString() {
         return "[T]" + "[" + getStatusIcon() + "] " + getDescription();
     }
-
     @Override
     public String file() {
         String status = isDone? "1" : "0";

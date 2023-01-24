@@ -29,5 +29,4 @@ public class Task {
         String status = isDone? "1" : "0";
         return " | " + status + " | " + getDescription();
     }
-
 }

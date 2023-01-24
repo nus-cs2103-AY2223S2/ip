@@ -15,12 +15,10 @@ public class Deadline extends Task {
             System.out.println(" " + "____________________________________________________________");
         }
     }
-
     @Override
     public String toString() {
         return "[D]" + "[" + getStatusIcon() + "] " + getDescription() + " (" + "by: " + this.by + ")";
     }
-
     @Override
     public String file() {
         String status = isDone? "1" : "0";

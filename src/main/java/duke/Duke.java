@@ -40,7 +40,6 @@ public class Duke {
                 String data = sc.nextLine();
                 String[] commandInFile = data.split(" \\| ");
                 boolean isDoneInFile = commandInFile[1].equals("1");
-
                 if (commandInFile[0].equals("T")) {
                     tasks = new Todo(commandInFile[2], true);
                     tasks.isDone = isDoneInFile;
