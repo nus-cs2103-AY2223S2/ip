@@ -10,7 +10,13 @@ public abstract class Task {
         this.description = description;
         this.completed = completed;
     }
-    public void changeCompletion() {
+    public String getDescription() {
+        return this.description;
+    }
+    public boolean getCompletion() {
+        return this.completed;
+    }
+    public void setCompletion() {
         this.completed = !this.completed;
     }
     @Override

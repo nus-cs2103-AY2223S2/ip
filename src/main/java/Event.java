@@ -12,7 +12,12 @@ public class Event extends Task {
         this.start = start;
         this.end = end;
     }
-
+    public String getStartTime() {
+        return this.start;
+    }
+    public String getEndTime() {
+        return this.end;
+    }
     @Override
     public String toString() {
         return "[E]" + super.toString() + " (from: " + start + " to: " + end + ")";

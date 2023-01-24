@@ -1,6 +1,5 @@
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Scanner;
 import java.io.BufferedReader;
 import java.nio.file.Path;
@@ -8,11 +7,10 @@ import java.nio.file.Paths;
 import java.nio.file.Files;
 
 public class Duke {
+    private static ArrayList<Task> taskStore = new ArrayList<>();
     private enum ParseFunctions {
         SPLIT_ALL, TODO, DEADLINE, EVENT
     }
-    private static ArrayList<Task> taskStore = new ArrayList<>();
-
     private static Task getTaskForMarking(String[] parsed) {
         int completedIndex = Integer.parseInt(parsed[1]) - 1; // index of the task completed
         Task completedTask = Duke.taskStore.get(completedIndex); // actual task
@@ -58,7 +56,7 @@ public class Duke {
                 " tasks in the list!");
     }
     private static void loadFromFile() throws IOException {
-        String home = System.getProperty("user.home");
+        String home = System.getProperty("user.dir");
         Path dukeFolderPath = Paths.get(home, "data");
         Path dukeFilePath = Paths.get(home, "data", "duke.txt");
         if (!Files.exists(dukeFolderPath)) {
@@ -74,27 +72,59 @@ public class Duke {
         while ((task = dukeReader.readLine()) != null) {
             // process it
             // format: E|0|project meeting|Aug 6th|2pm|4pm
-            String[] params = task.split("|");
+            String[] params = task.split("\\|");
             String type = params[0];
             boolean isCompleted = params[1].equals("1");
             String description = params[2];
 
-            if (type == "E") {
+            if (type.equals("T")) {
                 taskStore.add(new ToDo(description, isCompleted));
             }
-            else if (type == "D") {
+            else if (type.equals("D")) {
                 String by = params[3];
                 taskStore.add(new Deadline(description, isCompleted, by));
             }
-            else if (type == "T") {
+            else if (type.equals("E")) {
                 String start = params[3];
                 String end = params[4];
                 taskStore.add(new Event(description, isCompleted, start, end));
             }
-        } // do not close the file
+        }
+        dukeReader.close();
     }
+    private static void addTaskToFile(Task currTask) throws IOException {
+        String home = System.getProperty("user.dir");
+        Path dukeFilePath = Paths.get(home, "data", "duke.txt");
 
-    public static void main(String[] args) throws EmptyDescriptionException {
+        String newEntry = "\n";
+        String completedBit = currTask.getCompletion() ? "1" : "0";
+        if (currTask instanceof Event) {
+            Event e = (Event) currTask;
+            String taskType = "E";
+            newEntry += taskType + "|" + completedBit + "|" + currTask.getDescription() + "|"
+                    + e.getStartTime() + "|" + e.getEndTime();
+        }
+        else if (currTask instanceof ToDo) {
+            String taskType = "T";
+            newEntry += taskType + "|" + completedBit + "|" + currTask.getDescription();
+        }
+        else if (currTask instanceof Deadline) {
+            Deadline d = (Deadline) currTask;
+            String taskType = "D";
+            newEntry += taskType + "|" + completedBit + "|" + currTask.getDescription() + "|"
+                    + d.getDeadline();
+        }
+        Files.write(dukeFilePath, newEntry.getBytes());
+
+    }
+    private static void deleteTask(int taskNo) throws IOException {
+        String home = System.getProperty("user.dir");
+        Path dukeFilePath = Paths.get(home, "data", "duke.txt");
+
+        return; // TODO
+    }
+    public static void main(String[] args) throws EmptyDescriptionException, IOException {
+        Duke.loadFromFile();
         System.out.println("  insert ingenious greeting here");
 
         label:
@@ -112,7 +142,7 @@ public class Duke {
                     break label;
                 case "mark": {
                     Task completedTask = getTaskForMarking(toFindFirstWord);
-                    completedTask.changeCompletion();
+                    completedTask.setCompletion();
 
                     System.out.println("  You are done with: ");
                     System.out.println("    " + completedTask.toString());
@@ -120,7 +150,7 @@ public class Duke {
                 }
                 case "unmark": {
                     Task completedTask = getTaskForMarking(toFindFirstWord);
-                    completedTask.changeCompletion();
+                    completedTask.setCompletion();
 
                     System.out.println("  OK, continue working on: ");
                     System.out.println("    " + completedTask.toString());
