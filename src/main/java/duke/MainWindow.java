@@ -7,6 +7,10 @@ import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
+import java.io.ByteArrayOutputStream;
+import java.io.PrintStream;
+import javafx.scene.control.Label;
+
 /**
  * Controller for MainWindow. Provides the layout for the other controls.
  */
@@ -27,7 +31,19 @@ public class MainWindow extends AnchorPane {
 
     @FXML
     public void initialize() {
+
         scrollPane.vvalueProperty().bind(dialogContainer.heightProperty());
+
+        ByteArrayOutputStream storeString = new ByteArrayOutputStream();
+        PrintStream printStream = new PrintStream(storeString);
+        PrintStream oldPrintStream = System.out;
+        System.setOut(printStream);
+        Ui ui = new Ui("Greetings");
+        ui.showWelcome();
+        System.out.flush();
+        System.setOut(oldPrintStream);
+        Label greeting = new Label(storeString.toString());
+        dialogContainer.getChildren().addAll(greeting);
     }
 
     public void setDuke(Duke d) {
@@ -42,10 +58,26 @@ public class MainWindow extends AnchorPane {
     private void handleUserInput() {
         String input = userInput.getText();
         String response = duke.getResponse(input);
+
         dialogContainer.getChildren().addAll(
                 DialogBox.getUserDialog(input, userImage),
                 DialogBox.getDukeDialog(response, dukeImage)
         );
         userInput.clear();
+
+
+//        userText.getStyleClass().add("right-label");
+//        userText.setText(userInput.getText());
+//
+//        Label dukeText = new Label(getResponse(userInput.getText()));
+//        dukeText.getStyleClass().add("left-label");
+//
+//        dialogContainer.getChildren().addAll(
+//        DialogBox.getUserDialog(userText, new ImageView(user)),
+//        DialogBox.getDukeDialog(dukeText, new ImageView(duke))
+//        );
+//        userInput.clear();
+
+
     }
 }
