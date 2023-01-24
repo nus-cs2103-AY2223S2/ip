@@ -115,7 +115,8 @@ public class TaskList {
     }
 
     /**
-     * Lists all the tasks currently in the list.
+     * Lists all the tasks currently in the list,
+     * enumerated starting from 1.
      */
     public void listTasks() {
         System.out.println("Here are the tasks in your list:");
