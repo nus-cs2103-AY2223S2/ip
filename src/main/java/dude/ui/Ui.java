@@ -7,6 +7,8 @@ import java.util.List;
 import java.util.Scanner;
 
 public class Ui {
+    private static Scanner sc = new Scanner(System.in);
+
     /**
      * Prints horizontal line format for program
      */
@@ -114,12 +116,7 @@ public class Ui {
      * Reads user command input and filters empty line.
      */
     public String readCommand() {
-        Scanner sc = new Scanner(System.in);
-        String command = "";
-        while(command.equals("")) {
-            command = sc.nextLine();
-        }
-        return command;
+        return sc.nextLine();
     }
 
 }
