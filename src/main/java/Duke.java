@@ -15,7 +15,7 @@ public class Duke {
     public static void listTasks() throws DukeException {
 
         if (taskList.size() == 0) {
-            throw new DukeException("    > Aint no tasks available rn homie");
+            throw new DukeException("    > No tasks available right now. :>");
         }
 
         for (int i = 0; i < taskList.size(); i++) {
@@ -39,11 +39,11 @@ public class Duke {
 
     public static void checkCommandValidity(String[] command) throws DukeException {
         if (isNoTaskGiven(command)) {
-            throw new DukeException("    > chu gave me no task");
+            throw new DukeException("    > You gave me no task. :(");
         }
 
         if (!isValidTask(command)) {
-            throw new DukeException("    > aint no such task available");
+            throw new DukeException("    > Task given is invalid / unavailable. :(");
         }
     }
 
@@ -64,7 +64,7 @@ public class Duke {
     public static void addTask(String[] command, Operation op) throws DukeException {
 
         if (command.length < 2) {
-            throw new DukeException("    > No task description given");
+            throw new DukeException("    > No task description given. :( ");
         }
 
         String description = command[1];
@@ -73,14 +73,14 @@ public class Duke {
             case TODO:
                 Task todo = new ToDo(description);
                 taskList.add(todo);
-                Duke.print("    > Got chu homie, new todo task added: " + todo);
+                Duke.print("    > I got you, new todo task added: " + todo);
                 break;
 
             case DEADLINE:
                 String[] deadlineDescription = description.split("/by", 2);
                 Task deadline = new Deadline(deadlineDescription[0], deadlineDescription[1]);
                 taskList.add(deadline);
-                Duke.print("    > Got chu homie, new deadline added: " + deadline);
+                Duke.print("    > I got you, new deadline added: " + deadline);
                 break;
 
             case EVENT:
@@ -93,7 +93,7 @@ public class Duke {
 
                 Task event = new Event(eventDescription[0], from, to);
                 taskList.add(event);
-                Duke.print("    > Got chu homie, new event added: " + event);
+                Duke.print("    > I got you, new event added: " + event);
                 break;
         }
 
@@ -123,7 +123,7 @@ public class Duke {
     }
 
     public static void greet() {
-        Duke.print("    > What's up dawg");
+        Duke.print("    > What's up? How is your day?");
     }
 
     public static void interact() {
@@ -165,7 +165,7 @@ public class Duke {
             } catch (DukeException e) {
                 Duke.print(e.toString());
             } catch (IllegalArgumentException e) {
-                Duke.print("    > What r chu talkin about man");
+                Duke.print("    > What are you talkin about man?");
             }
         }
     }
