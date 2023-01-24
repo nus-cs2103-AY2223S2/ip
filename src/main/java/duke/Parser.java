@@ -46,6 +46,8 @@ public class Parser {
             return new DeleteTaskCommand(input, ui, taskList, storage);
         case "list":
             return new ListTasksCommand(input, ui, taskList);
+        case "find":
+            return new FindTaskWithTextCommand(input, ui, taskList);
         case "bye":
             return new EndChatCommand(input, ui);
         default:

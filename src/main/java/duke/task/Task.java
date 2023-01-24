@@ -64,4 +64,14 @@ public abstract class Task {
         String marked = String.valueOf(isMarked);
         return marked + "|" + description;
     }
+
+    /**
+     * Checks if the given text is a substring of the task description.
+     *
+     * @param text Search string.
+     * @return True if the text is part of the description and false otherwise.
+     */
+    public boolean hasSubstring(String text) {
+        return description.contains(text);
+    }
 }

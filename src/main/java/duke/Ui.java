@@ -89,4 +89,8 @@ public class Ui {
         displayText("An error has occurred!");
         displayText(errorMessage);
     }
+
+    public void replySearchStart() {
+        this.displayText("The following tasks matches your query:");
+    }
 }
