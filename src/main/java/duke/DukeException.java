@@ -4,11 +4,10 @@ package duke;
  * if the user inputs an illegal argument present in the blacklist. It
  * extends IllegalArgumentException since an invalid blacklisted input is
  * indeed an argument that is not allowed.
- *
  * @author Muhammad Reyaaz
  * @version %I% %G%
- * @since 11
  * @see IllegalArgumentException
+ * @since 11
  */
 class DukeException extends IllegalArgumentException {
     /**

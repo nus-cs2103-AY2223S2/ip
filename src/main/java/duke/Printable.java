@@ -7,7 +7,7 @@ import java.util.Arrays;
 class Printable {
 
     static String INITIAL_GREETING = "Welcome to Manchester United. I am Alex Ferguson. How may I help you";
-    static String ILLEGAL_COMMAND = "Alex Ferguson does not recognise this command. Perhaps you could try valid command init?";
+    static String ILLEGAL_COMMAND = "Perhaps you could try valid command init?";
     static String FINAL_GREETING = "SUIII, Bye";
     static String MARK_COMMAND = "SUI, I have marked this task from the training room: ";
     static String UNMARK_COMMAND = "SUI, I have unmarked this task from the training room: ";

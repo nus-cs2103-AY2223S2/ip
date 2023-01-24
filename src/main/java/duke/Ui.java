@@ -1,4 +1,4 @@
-package duke; 
+package duke;
 
 import java.util.Scanner;
 /**
@@ -6,12 +6,11 @@ import java.util.Scanner;
  * the deciphering of the user's input. Ui invokes the appropriate classes
  * when required
  *
- * @author Muhammad Reyaaz 
+ * @author Muhammad Reyaaz
  * @version %I% %G%
  * @since 11
  */
 class Ui {
-    
     private Scanner scanner;
     private String description;
     private TaskList<Task> tasks;
@@ -20,7 +19,7 @@ class Ui {
      * machine's keyboard
      */
     protected Ui() {
-        scanner = new Scanner(System.in);    
+        scanner = new Scanner(System.in);
     }
 
     Ui(String description) {
@@ -41,24 +40,23 @@ class Ui {
      * Handle the user input from the user's machine keyboard
      */
     void readCommand() {
-       description = scanner.next();
+        description = scanner.next();
     }
     /**
      * Match the user's input to the relevant type of input that can be
      * processed by Duke, and call the relevant classes in Parser. Due to
      * immutability, set the list of task to the new list of tasks returned
      * by Parser
-     *
-     * @return TaskList<Task>
+     * @return TaskList
      */
-    TaskList<Task> execute(TaskList<Task> tasks) {        
+    TaskList<Task> execute(TaskList<Task> tasks) {
         if (description.equals(Parser.SHOW_TASKS)) {
             this.tasks = tasks.listAllTasks();
         } else if (description.equals(Parser.TERMINATE)) {
             Parser.exit();
         } else if (description.equals(Parser.MARK)) {
             this.tasks = Parser.mark(scanner, tasks);
-        }  else if (description.equals(Parser.UNMARK)) {
+        } else if (description.equals(Parser.UNMARK)) {
             this.tasks = Parser.unmark(scanner, tasks);
         } else if (description.equals(Parser.TODO)) {
             this.tasks = Parser.toDo(scanner, tasks);
@@ -69,21 +67,21 @@ class Ui {
         } else if (description.equals(Parser.DELETE)) {
             this.tasks = Parser.delete(scanner, tasks);
         } else if (description.equals(Parser.FIND)) {
-            this.tasks = Parser.find(scanner,tasks);            
+            this.tasks = Parser.find(scanner, tasks);
         } else {
             dukeExceptionWarning(description, tasks);
         }
         return this.tasks;
-    } 
+    }
 
-    TaskList<Task> execute(TaskList<Task> tasks, String description) {        
+    TaskList<Task> execute(TaskList<Task> tasks, String description) {
         if (description.equals(Parser.SHOW_TASKS)) {
             this.tasks = tasks.listAllTasks();
         } else if (description.equals(Parser.TERMINATE)) {
             Parser.exit();
         } else if (description.equals(Parser.MARK)) {
             this.tasks = Parser.mark(scanner, tasks);
-        }  else if (description.equals(Parser.UNMARK)) {
+        } else if (description.equals(Parser.UNMARK)) {
             this.tasks = Parser.unmark(scanner, tasks);
         } else if (description.equals(Parser.TODO)) {
             this.tasks = Parser.toDo(scanner, tasks);
@@ -94,21 +92,20 @@ class Ui {
         } else if (description.equals(Parser.DELETE)) {
             this.tasks = Parser.delete(scanner, tasks);
         } else if (description.equals(Parser.FIND)) {
-            this.tasks = Parser.find(scanner,tasks);            
+            this.tasks = Parser.find(scanner, tasks);
         } else {
             dukeExceptionWarning(description, tasks);
         }
         return this.tasks;
-    } 
+    }
 
-
-
-    /** Checks the user input against a list of invalid commands
+    /**
+     * Checks the user input against a list of invalid commands
      * (blacklist). If the input is blacklisted, a new DukeUnknownException
      * is thrown. Otherwise, a new Task will be created and added to the lit
-     * of previously keyed in Task. 
+     * of previously keyed in Task.
      *
-     * @param description The user's task title in String 
+     * @param description The user's task title in String
      * @throws IllegalArgumentException
      * @throws DukeUnknownException
      *
@@ -129,4 +126,3 @@ class Ui {
         return tasks;
     }
 }
-

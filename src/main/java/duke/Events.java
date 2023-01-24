@@ -2,7 +2,6 @@ package duke;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
-import java.time.temporal.ChronoUnit;
 import java.time.format.DateTimeParseException;
 /**
  * Events is a sub class of Task, because it allows the user to key in
@@ -12,13 +11,11 @@ import java.time.format.DateTimeParseException;
  * represents time for them (e.g. Sunday.) Since immutability is employed,
  * when a user toggles the event task as done or undone, a new event task
  * will be returned, but with the exact same description, from and to
- * timeframe. 
- *  
- *  @author Muhammad Reyaaz 
+ * timeframe.
+ *  @author Muhammad Reyaaz
  *  @version %I% %G%
- *  @since 11
  *  @see Task
- *
+ *  @since 11
  */
 class Events extends Task {
 
@@ -33,11 +30,11 @@ class Events extends Task {
     }
     /**
      * Allows the user's input to be processed as the task's title, the
-     * start time of the event and the end time of the event 
+     * start time of the event and the end time of the event
      *
-     * @param description The title of the task in String 
-     * @param from The start time of the event task 
-     * @param to The end time of the event task 
+     * @param description The title of the task in String
+     * @param from The start time of the event task
+     * @param to The end time of the event task
      */
     Events(String description, String from, String to) {
         super(description);
@@ -48,13 +45,12 @@ class Events extends Task {
      * Allows the user's input to be processed as the task's title, the
      * start time of the event and the end time of the event, and make the
      * event marked as done, which will be displayed as [X] in the user's
-     * machine. 
+     * machine.
      *
-     * @param description The title of the task in String 
-     * @param from The start time of the event task 
+     * @param description The title of the task in String
+     * @param from The start time of the event task
      * @param to The end time of the event task
-     * @param isDone The boolean state of whether the event task is marked
-     * as completed or yet to be completed
+     * @param isDone The boolean state of whether the event task is marked as completed or yet to be completed
      */
     Events(String description,String from, String to, boolean isDone) {
         super(description, isDone);
@@ -67,11 +63,10 @@ class Events extends Task {
      * this case. It also process the from and to date if the user keys in
      * terms that represents time for him (e.g. Sunday.) However, if the
      * user keys in an invalid date format (e.g. dd MM YY), the
-     * DateTimeParseException will need to be caught 
-     *
+     * DateTimeParseException will need to be caught
      * @param date The date of from or to
-     * @exception DateTimeParseException
      * @return date String format of a valid time representation
+     * @exception DateTimeParseException
      */
     String localDateParser(String date) {
         try {
@@ -85,7 +80,6 @@ class Events extends Task {
      * Since the Event class is immutable, a new Event object will be
      * returned with the exact same description, from and to, except now,
      * the event task will be marked as done
-     *
      *  @return Events The new Event task object 
      */
     @Override
@@ -96,7 +90,6 @@ class Events extends Task {
      * Since the Event class is immutable, a new Event object will be
      * returned with the exact same description, from and to, except now,
      * the event task will be marked as undone
-     *
      *  @return Events The new Event task object 
      */
     @Override
