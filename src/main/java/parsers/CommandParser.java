@@ -1,13 +1,6 @@
 package parsers;
 
-import commands.Command;
-import commands.Commands;
-import commands.AddTaskCommand;
-import commands.DeleteTaskCommand;
-import commands.ExitCommand;
-import commands.ListCommand;
-import commands.MarkTaskCommand;
-import commands.UnmarkTaskCommand;
+import commands.*;
 import exceptions.DukeException;
 import exceptions.IncompleteCommandException;
 import exceptions.UnknownCommandException;
@@ -28,6 +21,8 @@ public class CommandParser extends Parser {
             switch (command) {
                 case LIST:
                     return new ListCommand();
+                case FIND:
+                    return new FindTaskCommand(commands[1]);
                 case MARK:
                     return new MarkTaskCommand(commands[1]);
                 case UNMARK:
@@ -53,6 +48,7 @@ public class CommandParser extends Parser {
     public static boolean isIndexRequiredCommand(String command) {
         return command.equals("mark")
                 || command.equals("unmark")
-                || command.equals("delete");
+                || command.equals("delete")
+                || command.equals("find");
     }
 }

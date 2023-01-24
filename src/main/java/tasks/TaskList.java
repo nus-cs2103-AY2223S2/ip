@@ -43,6 +43,28 @@ public class TaskList {
         return this.taskList.size();
     }
 
+
+    /**
+     * Returns a task list containing tasks filtered by a keyword based on their
+     * string representation.
+     * @param keyword the keyword to be used for search
+     * @return task list containing tasks filtered by a keyword based on their string representation
+     */
+    public TaskList findByKeyword(String keyword) {
+        TaskList filteredTasks = new TaskList();
+        this.taskList.stream()
+                .filter(x-> x.toString().contains(keyword))
+                .forEach(x -> {
+                    filteredTasks.addTaskSilent(x);
+                });
+        if (filteredTasks.getSize() == 0) {
+            System.out.println("Empty the Jedi Archives are, the task you seek");
+        } else {
+            System.out.println(String.format("%d tasks in the Jedi Archives, I find", filteredTasks.getSize()));
+        }
+        return filteredTasks;
+    }
+
     /**
      * Deletes a task in task list by their index counting from 1
      * @param indexString

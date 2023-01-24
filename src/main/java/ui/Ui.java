@@ -37,6 +37,10 @@ public class Ui {
         System.out.println(String.format("%s\n%s\n%s", BANNER, WELCOME_MSG, BANNER));
     }
 
+    public void showMessage(String message) {
+        System.out.println(message);
+    }
+
     public void showLoadingErrorMessage(Exception exception) {
         System.out.println(exception.getMessage());
     }
