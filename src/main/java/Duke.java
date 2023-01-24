@@ -1,6 +1,7 @@
 import java.lang.ArrayIndexOutOfBoundsException;
-import java.util.ArrayList;
+import java.lang.IndexOutOfBoundsException;
 import java.lang.NullPointerException;
+import java.util.ArrayList;
 import java.io.FileWriter;
 import java.io.File;
 import java.io.FileReader;
@@ -139,6 +140,8 @@ public class Duke {
             System.out.println("Object pointing to null, please check code");
         } catch (ArrayIndexOutOfBoundsException e) {
             System.out.println("Check if the index is within the size of the array");
+        } catch (IndexOutOfBoundsException e) {
+            System.out.println("Nothing to mark/unmark!");
         }
     }
 
@@ -236,7 +239,11 @@ class Deadline extends Task {
     public Deadline(String name, String frame) {
         super(name);
         this.period = frame.split(" ");
-        this.date = LocalDate.parse(period[0]);
+        if (period[0].contains("/")) {
+            this.date = LocalDate.parse(period[0].replaceAll("/", "-"));
+        } else {
+            this.date = LocalDate.parse(period[0]);
+        }
         this.time = period[1];
     }
 
@@ -273,7 +280,7 @@ class Event extends Task {
         } else {
             this.endDate = LocalDate.parse(endingPeriod[0]);
         }
-        
+
         this.startTime = startingPeriod[1];
         this.endTime = endingPeriod[1];
     }
