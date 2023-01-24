@@ -4,6 +4,11 @@ import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.*;
+import java.time.format.DateTimeParseException;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+import java.util.Scanner;
 
 public class Duke {
     private final List<Task> tasks;
@@ -106,7 +111,12 @@ public class Duke {
                 sb.append(tokens[i]).append(" ");
             }
             String dueDate = sb.deleteCharAt(sb.length()-1).toString();
-            addToList(new Deadline(taskName, dueDate));
+            try {
+                Task task = new Deadline(taskName, dueDate);
+                addToList(task);
+            } catch (DateTimeParseException e) {
+                displayMessage("Please enter a valid date in the format YYYY-MM-DD/HH:mm\n");
+            }
         }
     }
 
@@ -141,7 +151,13 @@ public class Duke {
                 sb.append(tokens[i]).append(" ");
             }
             String taskTo = sb.deleteCharAt(sb.length()-1).toString();
-            addToList(new Event(taskName, taskFrom, taskTo));
+            try {
+                Task task = new Event(taskName, taskFrom, taskTo);
+                addToList(task);
+            } catch (DateTimeParseException e) {
+                displayMessage("Please enter valid dates in the format YYYY-MM-DD/HH:mm\n");
+            }
+
         }
     }
 

@@ -1,11 +1,14 @@
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+
 public class Event extends Task {
-    private String from;
-    private String to;
+    private LocalDateTime from;
+    private LocalDateTime to;
 
     Event(String name, String from, String to) {
         super(name);
-        this.from = from;
-        this.to = to;
+        this.from = LocalDateTime.parse(from, DateTimeFormatter.ofPattern("yyyy-MM-dd/HH:mm"));
+        this.to = LocalDateTime.parse(to, DateTimeFormatter.ofPattern("yyyy-MM-dd/HH:mm"));
     }
 
     Event(String name, String from, String to, String status) {
@@ -16,9 +19,10 @@ public class Event extends Task {
 
     @Override
     public String toString() {
-        return "[E]" + super.toString() +
-                " (from: " + from +
-                " to: " + to + ")";
+        return String.format("[E]%s (from: %s %d %d %d:%02d, to: %s %d %d %d:%02d)",
+                super.toString(), from.getMonth(), from.getDayOfMonth(), from.getYear(),
+                from.getHour(), from.getMinute(), to.getMonth(), to.getDayOfMonth(),
+                to.getYear(), to.getHour(), to.getMinute());
     }
 
     @Override
