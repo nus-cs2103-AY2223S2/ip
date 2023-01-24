@@ -1,3 +1,4 @@
+import java.awt.print.PrinterAbortException;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
@@ -16,7 +17,7 @@ public class Duke {
         String greeting = "Hello! I'm Alpha Beast What can I do for you?";
         greeting(greeting);
         //memory store = new memory();
-        TaskManager manager = new TaskManager("/Users/s.f/ip/src/Data/duke.txt");
+        TaskList manager = new TaskList("/Users/s.f/ip/src/Data/duke.txt");
 
         loop:
         while (true) {
@@ -83,71 +84,7 @@ public class Duke {
     }
 }
 
-/*
-class memory {
-
-    static int slots = 0;
-    ArrayList<String> store;
-    ArrayList<Boolean> checkBox;
-    int size;
-
-    memory() {
-        store = new ArrayList<>(100);
-        checkBox = new ArrayList<>(100);
-        size = 100;
-        slots++;
-    }
-
-    memory(int size) {
-        store = new ArrayList<>(size);
-        checkBox = new ArrayList<>(size);
-        slots++;
-    }
-
-    void write(String input) {
-        store.add(input);
-        checkBox.add(false);
-        System.out.println("added: " + input);
-
-    }
-
-    void read() {
-        for (int x = 0; x < store.size(); x++)
-            System.out.println(x + 1 + ". " + store.get(x));
-
-    }
-
-    void readBoth() {
-        for (int x = 0; x < store.size(); x++) {
-            if (checkBox.get(x))
-                System.out.println(x + 1 + ". " + "[X] " + store.get(x));
-            else
-                System.out.println(x + 1 + ". " + "[] " + store.get(x));
-        }
-    }
-
-    void mark(int number) {
-        checkBox.set(number, true);
-        System.out.println("Nice! I've marked this task as done:\n" +
-                "[X] " + store.get(number));
-    }
-
-    void unmark(int number) {
-        checkBox.set(number, false);
-        System.out.println("OK, I've marked this task as not done yet:\n" +
-                "[] " + store.get(number));
-    }
-
-
-}
- */
-
 abstract class Task {
-    static final String add = "Got it. I've added this task:\n";
-    static final String mark = "Nice! I've marked this task as done:\n";
-    static final String unmark = "OK, I've marked this task as not done yet:\n";
-    static final String displaylist = "Here are the tasks in your list\n";
-    static final String delete = "Noted. I've removed this task:\n";
     String task_name;
     String message_add;
     String message_marked;
@@ -155,6 +92,7 @@ abstract class Task {
     String message_display;
     String message_delete;
     boolean done;
+    Parser parser;
 
     Task(String name, boolean done) {
         this.task_name = name;
@@ -163,7 +101,7 @@ abstract class Task {
         this.message_marked = "";
         this.message_unmarked = "";
         this.message_delete = "";
-        //this.message_display = done ? "[X] " : "[ ] ";
+        parser = new Parser();
     }
 
     abstract void add();
@@ -187,15 +125,15 @@ class ToDo extends Task {
 
     @Override
     void add() {
-        message_add = Task.add + "  [T][ ] " + task_name;
+        message_add = Parser.add + Parser.todoUnmarked_spaced + task_name;
     }
 
     @Override
     void display() {
         if (done) {
-            message_display = "[T][X]" + task_name;
+            message_display = Parser.todoMarked + task_name;
         } else {
-            message_display = "[T][ ]" + task_name;
+            message_display = Parser.todoUnmarked + task_name;
         }
 
     }
@@ -203,20 +141,20 @@ class ToDo extends Task {
     @Override
     void delete() {
         if (done)
-            message_delete = Task.delete + "  [T][X] " + task_name;
+            message_delete = Parser.delete + Parser.todoMarked_spaced + task_name;
         else
-            message_delete = Task.delete + "  [T][ ] " + task_name;
+            message_delete = Parser.delete + Parser.todoUnmarked_spaced + task_name;
     }
 
     @Override
     void marked() {
-        message_marked = Task.mark + "  [T][X] " + task_name;
+        message_marked = Parser.mark + Parser.todoMarked_spaced + task_name;
         done = true;
     }
 
     @Override
     void unmarked() {
-        message_unmarked = Task.unmark + " [T][ ] " + task_name;
+        message_unmarked = Parser.unmark + Parser.todoUnmarked_spaced + task_name;
         done = false;
     }
 
@@ -269,34 +207,34 @@ class Deadlines extends Task {
 
     @Override
     void add() {
-        message_add = Task.add + "  [D][ ] " + task_name + endDate;
+        message_add = Parser.add + Parser.deadlineUnmarked_spaced + task_name + endDate;
     }
 
     @Override
     void display() {
         if (done)
-            message_display = "[D][X] " + task_name + endDate;
+            message_display = Parser.deadlinedoMarked + task_name + endDate;
         else
-            message_display = "[D][ ] " + task_name + endDate;
+            message_display = Parser.deadlineUnmarked + task_name + endDate;
     }
 
     @Override
     void delete() {
         if (done)
-            message_delete = Task.delete + "  [D][X] " + task_name + endDate;
+            message_delete = Parser.delete + Parser.deadlineMarked_spaced + task_name + endDate;
         else
-            message_delete = Task.delete + "  [D][ ] " + task_name + endDate;
+            message_delete = Parser.delete + Parser.deadlineUnmarked_spaced + task_name + endDate;
     }
 
     @Override
     void marked() {
-        message_marked = Task.mark + "  [D][X] " + task_name + endDate;
+        message_marked = Parser.mark + Parser.deadlineMarked_spaced + task_name + endDate;
         done = true;
     }
 
     @Override
     void unmarked() {
-        message_unmarked = Task.unmark + "  [D][ ] " + task_name + endDate;
+        message_unmarked = Parser.unmark + Parser.deadlineUnmarked_spaced + task_name + endDate;
         done = false;
     }
 }
@@ -330,46 +268,46 @@ class Events extends Task {
 
     @Override
     void add() {
-        message_add = Task.add + "  [E][ ] " + task_name + start + end;
+        message_add = Parser.add + Parser.eventMarked_spaced + task_name + start + end;
     }
 
     @Override
     void display() {
         if (done)
-            message_display = "[E][X] " + task_name + start + end;
+            message_display = Parser.eventMarked + task_name + start + end;
         else
-            message_display = "[E][ ] " + task_name + start + end;
+            message_display = Parser.eventUnmarked + task_name + start + end;
     }
 
     @Override
     void delete() {
         if (done)
-            message_delete = Task.delete + "  [E][X] " + task_name + start + end;
+            message_delete = Parser.delete + Parser.eventMarked_spaced + task_name + start + end;
         else
-            message_delete = Task.delete + "  [D][ ] " + task_name + start + end;
+            message_delete = Parser.delete + Parser.eventUnmarked_spaced + task_name + start + end;
     }
 
     @Override
     void marked() {
-        message_marked = Task.mark + "  [E][X] " + task_name + start + end;
+        message_marked = Parser.mark + Parser.eventMarked_spaced + task_name + start + end;
         done = true;
     }
 
     @Override
     void unmarked() {
-        message_unmarked = Task.unmark + "  [E][ ] " + task_name + start + end;
+        message_unmarked = Parser.unmark + Parser.eventUnmarked_spaced + task_name + start + end;
         done = false;
     }
 }
 
-class TaskManager {
+class TaskList {
     ArrayList<Task> ListOfTasks;
-    FileManager fileManager;
+    Storage storage;
 
-    TaskManager(String path) {
+    TaskList(String path) {
         //default size
         ListOfTasks = new ArrayList<>(100);
-        fileManager = new FileManager(path);
+        storage = new Storage(path);
         init();
     }
 
@@ -382,11 +320,11 @@ class TaskManager {
                 input.add();
                 System.out.println(input.message_add + "\n Now you have " + ListOfTasks.size() + " tasks in the list");
                 if (input instanceof ToDo) {
-                    fileManager.write("T|" + input.done + "|" + ((ToDo) input).raw);
+                    storage.write("T|" + input.done + "|" + ((ToDo) input).raw);
                 } else if (input instanceof Deadlines) {
-                    fileManager.write("D|" + input.done + "|" + ((Deadlines) input).raw);
+                    storage.write("D|" + input.done + "|" + ((Deadlines) input).raw);
                 } else if (input instanceof Events) {
-                    fileManager.write("E|" + input.done + "|" + ((Events) input).raw);
+                    storage.write("E|" + input.done + "|" + ((Events) input).raw);
                 } else {
                     System.out.println("Unspecific type");
                 }
@@ -402,7 +340,7 @@ class TaskManager {
     }
 
     void displayAll() {
-        System.out.println(Task.displaylist);
+        System.out.println(Parser.displaylist);
         for (int x = 0; x < ListOfTasks.size(); x++) {
             ListOfTasks.get(x).display();
             System.out.println(x + 1 + ". " + ListOfTasks.get(x).message_display);
@@ -414,7 +352,7 @@ class TaskManager {
             Task temp = ListOfTasks.get(index);
             temp.marked();
             System.out.println(temp.message_marked);
-            fileManager.markAt(index);
+            storage.markAt(index);
         } catch (IndexOutOfBoundsException e) {
             System.out.println("Invalid Index");
         }
@@ -425,7 +363,7 @@ class TaskManager {
             Task temp = ListOfTasks.get(index);
             temp.unmarked();
             System.out.println(temp.message_unmarked);
-            fileManager.unmarkAt(index);
+            storage.unmarkAt(index);
         } catch (IndexOutOfBoundsException e) {
             System.out.println("Invalid Index");
         }
@@ -436,18 +374,18 @@ class TaskManager {
             Task temp = ListOfTasks.get(index);
             temp.delete();
             ListOfTasks.remove(index);
-            System.out.println(temp.message_add + "\n Now you have " + ListOfTasks.size() + " tasks in the list");
-            fileManager.deteleAt(index);
+            System.out.println(temp.message_delete + "\n Now you have " + ListOfTasks.size() + " tasks in the list");
+            storage.deteleAt(index);
         } catch (IndexOutOfBoundsException e) {
             System.out.println("Invalid Index");
         }
     }
 
     void init() {
-        fileManager.read();
-        if (!fileManager.records.isEmpty()) {
-            for (int x = 0; x < fileManager.records.size(); x++) {
-                String[] tokens = fileManager.records.get(x).split("\\|");
+        storage.read();
+        if (!storage.records.isEmpty()) {
+            for (int x = 0; x < storage.records.size(); x++) {
+                String[] tokens = storage.records.get(x).split("\\|");
                 boolean status = Boolean.parseBoolean(tokens[1]);
                 if (tokens[0].equals("T")) {
                     ListOfTasks.add(new ToDo(tokens[2], status));
@@ -461,7 +399,7 @@ class TaskManager {
     }
 
     void file_writeAll() {
-        fileManager.WriteAll();
+        storage.WriteAll();
     }
 
 
@@ -473,13 +411,13 @@ class DukeException extends Exception {
     }
 }
 
-class FileManager {
+class Storage {
     FileWriter writer;
     Scanner reader;
     ArrayList<String> records;
     String path;
 
-    FileManager(String DES) {
+    Storage(String DES) {
         try {
             writer = new FileWriter(DES, true);
             File store = new File(DES);
@@ -615,6 +553,30 @@ class DateTranslator {
             output = time.format(formatter);
         }
     }
+
+
+}
+
+class Parser {
+    static final String add = "Got it. I've added this task:\n";
+    static final String mark = "Nice! I've marked this task as done:\n";
+    static final String unmark = "OK, I've marked this task as not done yet:\n";
+    static final String displaylist = "Here are the tasks in your list\n";
+    static final String delete = "Noted. I've removed this task:\n";
+    static final String todoMarked = "[T][X]";
+    static final String todoUnmarked = "[T][ ]";
+    static final String todoMarked_spaced = "  [T][X] " ;
+    static final String todoUnmarked_spaced = " [T][ ] ";
+
+    static final String deadlinedoMarked = "[D][X] ";
+    static final String deadlineUnmarked = "[D][ ] ";
+    static final String deadlineMarked_spaced = "  [D][X] ";
+    static final String deadlineUnmarked_spaced = " [D][ ] ";
+
+    static final String eventMarked = "[E][X] ";
+    static final String eventUnmarked = "[E][ ] ";
+    static final String eventMarked_spaced = "  [E][X] ";
+    static final String eventUnmarked_spaced = " [E][ ] ";
 
 
 }
