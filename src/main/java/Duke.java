@@ -1,7 +1,8 @@
 public class Duke {
 
     public static void main(String[] args) {
-        TaskList list = new TaskList();
+        Storage storage = new Storage();
+        TaskList list = storage.readTaskList();
         UI.greet();
         do {
             try {
@@ -15,5 +16,6 @@ public class Duke {
                 UI.echoError(ex);
             }
         } while (true);
+        storage.writeTaskList(list);
     }
 }
