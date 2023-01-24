@@ -1,3 +1,0 @@
-class InvalidFormatException extends DukeException{
-
-}

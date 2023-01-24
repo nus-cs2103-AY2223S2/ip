@@ -1,5 +1,9 @@
+package duke;
+
+import duke.exception.InvalidFormatException;
+import duke.exception.UnrecognisedCommandException;
+
 import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 
 public class Parser {
     private final Ui ui;

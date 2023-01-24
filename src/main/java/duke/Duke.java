@@ -1,3 +1,10 @@
+package duke;
+
+import duke.Parser;
+import duke.Storage;
+import duke.TaskList;
+import duke.Ui;
+
 public class Duke {
     private Parser p;
     private Ui ui;
