@@ -5,25 +5,20 @@
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.HBox?>
-<?import javafx.scene.layout.StackPane?>
 <?import javafx.scene.shape.SVGPath?>
 <?import javafx.scene.text.Font?>
 
 <fx:root alignment="TOP_RIGHT" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="222.0" prefWidth="400.0" type="javafx.scene.layout.HBox" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1">
     <children>
-      <StackPane prefHeight="100.0" prefWidth="89.0">
-         <children>
-            <SVGPath content="M33.468,67.184C15.014,67.184,0,52.17,0,33.715S15.014,0.246,33.468,0.246c18.455,0,33.469,15.014,33.469,33.469 c0,5.621-1.421,11.161-4.116,16.076l4.608,17.2L50.58,62.475C45.408,65.559,39.511,67.184,33.468,67.184z M33.468,4.246 C17.219,4.246,4,17.466,4,33.715s13.219,29.469,29.468,29.469c5.582,0,11.021-1.574,15.729-4.554l0.74-0.468l11.835,3.171 l-3.243-12.1l0.419-0.72c2.609-4.484,3.988-9.602,3.988-14.799C62.936,17.466,49.717,4.246,33.468,4.246z" fill="#ee0000" stroke="RED" />
-              <Label fx:id="dialog" alignment="CENTER" contentDisplay="CENTER" nodeOrientation="LEFT_TO_RIGHT" prefHeight="35.0" prefWidth="44.0" text="Label" wrapText="true">
-               <opaqueInsets>
-                  <Insets bottom="10.0" left="5.0" right="50.0" top="10.0" />
-               </opaqueInsets>
-               <font>
-                  <Font name="System Bold Italic" size="14.0" />
-               </font>
-            </Label>
-         </children>
-      </StackPane>
+      <SVGPath content="M33.468,67.184C15.014,67.184,0,52.17,0,33.715S15.014,0.246,33.468,0.246c18.455,0,33.469,15.014,33.469,33.469 c0,5.621-1.421,11.161-4.116,16.076l4.608,17.2L50.58,62.475C45.408,65.559,39.511,67.184,33.468,67.184z M33.468,4.246 C17.219,4.246,4,17.466,4,33.715s13.219,29.469,29.468,29.469c5.582,0,11.021-1.574,15.729-4.554l0.74-0.468l11.835,3.171 l-3.243-12.1l0.419-0.72c2.609-4.484,3.988-9.602,3.988-14.799C62.936,17.466,49.717,4.246,33.468,4.246z" fill="#ee0000" stroke="RED" />
+        <Label fx:id="dialog" alignment="BOTTOM_RIGHT" contentDisplay="TOP" nodeOrientation="LEFT_TO_RIGHT" prefHeight="68.0" prefWidth="179.0" text="Label" wrapText="true">
+         <opaqueInsets>
+            <Insets bottom="10.0" left="5.0" right="50.0" top="10.0" />
+         </opaqueInsets>
+         <font>
+            <Font name="System Bold Italic" size="14.0" />
+         </font>
+      </Label>
         <ImageView fx:id="displayPicture" fitHeight="86.0" fitWidth="140.0" pickOnBounds="true" preserveRatio="true">
          <cursor>
             <Cursor fx:constant="S_RESIZE" />
