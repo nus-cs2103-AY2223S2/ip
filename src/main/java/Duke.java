@@ -86,6 +86,9 @@ public class Duke {
             } catch (IndexOutOfBoundsException e) {
                 System.out.println("OOPS!! This index is out of bounds!");
                 in = input.nextLine();
+            } catch (NumberFormatException e) {
+                System.out.println("Oh no! You have entered too many whitespaces!");
+                in = input.nextLine();
             }
         }
         System.exit(0);
@@ -93,27 +96,6 @@ public class Duke {
 
     public static void printLine(){
         System.out.println(line);
-    }
-
-    public static void repeat(String s) {
-        printLine();
-        System.out.println(s);
-        printLine();
-    }
-
-    public static void add(String s) {
-        if (s.trim().isEmpty()) {
-            printLine();
-            printLine();
-        } else {
-            Task t = new Task(s.trim());
-            printLine();
-            lst.addTask(t);
-            System.out.println("Got it! I've added: ");
-            System.out.println(" " + t);
-            lst.printSize();
-            printLine();
-        }
     }
 
     public static void end() {

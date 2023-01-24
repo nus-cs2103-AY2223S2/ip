@@ -1,8 +1,15 @@
-public class Event extends Task{
-    protected String start;
-    protected String end;
+import com.sun.jdi.LocalVariable;
 
-    public Event(String taskName, String start, String end) {
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
+import java.time.temporal.ChronoUnit;
+
+public class Event extends Task{
+    protected LocalDate start;
+    protected LocalDate end;
+
+    public Event(String taskName, LocalDate start, LocalDate end) {
         super(taskName);
         this.start = start;
         this.end = end;
@@ -17,26 +24,34 @@ public class Event extends Task{
         if (details.length < 3) {
             throw new DukeException("timing");
         }
-        String start = details[1].split(" ", 2)[1];
-        String end = details[2].split(" ", 2)[1];
-        Event e = new Event(details[0], start, end);
-        lst.addTask(e);
-        Duke.printLine();
-        System.out.println("Got it! I've added: ");
-        System.out.println(" " + e.toString());
-        lst.printSize();
-        Duke.printLine();
+        try {
+            String startString = details[1].split(" ", 2)[1];
+            String endString = details[2].split(" ", 2)[1];
+            LocalDate start = LocalDate.parse(startString);
+            LocalDate end = LocalDate.parse(endString);
+            Event e = new Event(details[0], start, end);
+            lst.addTask(e);
+            Duke.printLine();
+            System.out.println("Got it! I've added: ");
+            System.out.println(" " + e.toString());
+            lst.printSize();
+            Duke.printLine();
+        } catch (DateTimeParseException e) {
+            throw new DukeException("date format");
+        }
     }
 
     @Override
     public String toString() {
         String s;
+        String start = this.start.format(DateTimeFormatter.ofPattern("MMM d yyyy"));
+        String end = this.end.format(DateTimeFormatter.ofPattern("MMM d yyyy"));
         if (this.completed) {
             s = "[E]" + super.toString() +
-                    " (from: " + this.start + " to: " + this.end + ")";
+                    " (from: " + start + " to: " + end + ")";
         } else {
             s = "[E]"  + super.toString() +
-                    " (from: " + this.start + " to: " + this.end + ")";
+                    " (from: " + start + " to: " + end + ")";
         }
         return s;
     }
