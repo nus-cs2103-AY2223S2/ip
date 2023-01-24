@@ -1,5 +1,9 @@
 T/1/read book
-D/0/return book/June 6th
+D/0/return book/2019-10-10 1600
 T/1/buy bread
-D/0/eat bread/5pm
+D/0/eat bread/2020-10-10 1700
 T/1/make naan
+D/0/test/2023-01-24 1550
+D/1/test2/2021-10-10 1800
+E/0/test3/2021-10-10 1700/2021-10-11 1800
+E/0/camp!/2022-10-11 1800/2022-10-12 1900

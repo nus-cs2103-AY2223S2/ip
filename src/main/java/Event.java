@@ -50,6 +50,7 @@ public class Event extends Task {
     @Override
     public String printData() {
         return "E" + "/" + (isDone ? "1" : "0") + "/" + description
-                + "/" + from + "/" + to;
+                + "/" + from.format(DateTimeFormatter.ofPattern("yyyy-MM-dd HHmm"))
+                + "/" + to.format(DateTimeFormatter.ofPattern("yyyy-MM-dd HHmm"));
     }
 }

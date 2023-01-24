@@ -40,6 +40,7 @@ public class Deadline extends Task {
      */
     @Override
     public String printData() {
-        return "D" + "/" + (isDone ? "1" : "0") + "/" + description + "/" + by;
+        return "D" + "/" + (isDone ? "1" : "0") + "/"
+                + description + "/" + by.format(DateTimeFormatter.ofPattern("yyyy-MM-dd HHmm"));
     }
 }
