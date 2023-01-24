@@ -1,6 +1,16 @@
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
+
 public class Event extends Task {
-    private String from;
-    private String to;
+    private LocalDateTime from;
+    private LocalDateTime to;
+
+    private static final DateTimeFormatter IN_FORMAT = DateTimeFormatter.
+                                                        ofPattern("dd/MM/yyyy HHmm");
+    private static final DateTimeFormatter OUT_FORMAT = DateTimeFormatter.
+                                                        ofPattern("dd LLL, h:mma");
+
 
     public Event(String desc, String from, String to) {
         super(desc);
@@ -8,17 +18,28 @@ public class Event extends Task {
         setTo(to);
     }
 
-    public void setFrom(String from) {
-        this.from = from;
+
+    private void setFrom(String from) {
+        try {
+            LocalDateTime dateTime = LocalDateTime.parse(from, IN_FORMAT);
+            this.from = dateTime;
+        } catch (DateTimeParseException d) {
+            System.out.println("Invalid date/time format for Deadline.");
+        }
     }
 
-    public void setTo(String to) {
-        this.to = to;
+    private void setTo(String to) {
+        try {
+            LocalDateTime dateTime = LocalDateTime.parse(to, IN_FORMAT);
+            this.to = dateTime;
+        } catch (DateTimeParseException d) {
+            System.out.println("Invalid date/time format for Deadline.");
+        }
     }
 
     private String duration() {
-        return " (from: " + this.from + " to: "
-                + this.to + ")";
+        return " (from: " + this.from.format(OUT_FORMAT) + ", to: "
+                + this.to.format(OUT_FORMAT) + ")";
     }
 
     @Override
