@@ -13,6 +13,12 @@ public class Event extends Task {
         this.endTime = endTime;
     }
 
+    public Event(String task, LocalDate startTime, LocalDate endTime, boolean isCompleted) {
+        super(task, isCompleted);
+        this.startTime = startTime;
+        this.endTime = endTime;
+    }
+
     /**
      * Calculates the amount of days to the event.
      *
@@ -39,5 +45,25 @@ public class Event extends Task {
     public String toDataString() {
         return "E | " + (this.isCompleted ? "1" : "0") + " | " + super.task + " | " + this.startTime + " | "
                 + this.endTime;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) {
+            return true;
+        }
+        if (!(o instanceof Event)) {
+            return false;
+        }
+        if (!super.equals(o)) {
+            return false;
+        }
+
+        Event event = (Event) o;
+
+        if (!startTime.equals(event.startTime)) {
+            return false;
+        }
+        return endTime.equals(event.endTime);
     }
 }

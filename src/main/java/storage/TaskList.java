@@ -18,6 +18,15 @@ public class TaskList {
     }
 
     /**
+     * Constructor for the task list.
+     *
+     * @param tasks tasks to be populated
+     */
+    public TaskList(ArrayList<Task> tasks) {
+        this.tasks = tasks;
+    }
+
+    /**
      * Adds a new todo task.
      *
      * @param task task to be added

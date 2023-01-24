@@ -11,6 +11,11 @@ public class Deadline extends Task {
         this.deadline = deadline;
     }
 
+    public Deadline(String task, LocalDate deadline, boolean isCompleted) {
+        super(task, isCompleted);
+        this.deadline = deadline;
+    }
+
     /**
      * Calculates the amount of days to the deadline.
      *
@@ -30,5 +35,22 @@ public class Deadline extends Task {
     @Override
     public String toDataString() {
         return "D | " + (this.isCompleted ? "1" : "0") + " | " + super.task + " | " + this.deadline;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) {
+            return true;
+        }
+        if (!(o instanceof Deadline)) {
+            return false;
+        }
+        if (!super.equals(o)) {
+            return false;
+        }
+
+        Deadline deadline1 = (Deadline) o;
+
+        return deadline.equals(deadline1.deadline);
     }
 }

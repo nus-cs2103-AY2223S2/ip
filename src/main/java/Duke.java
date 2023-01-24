@@ -1,9 +1,11 @@
+import java.util.ArrayList;
 import java.util.Scanner;
 import command.Command;
 import dukeexeption.DukeException;
 import parser.Request;
 import storage.LocalStorage;
 import storage.TaskList;
+import task.Task;
 import ui.Ui;
 
 public class Duke {
@@ -13,13 +15,14 @@ public class Duke {
 
     public Duke(String filepath) {
         this.ui = new Ui();
-        this.tasks = new TaskList();
+        ArrayList<Task> taskList = new ArrayList<>();
         try {
             this.localTaskList = new LocalStorage(filepath);
-            this.localTaskList.loadIntoProgramTaskList(this.tasks);
+            taskList = this.localTaskList.createTaskList();
         } catch (DukeException error) {
             ui.printFormattedError(error);
         }
+        this.tasks = new TaskList(taskList);
     }
 
     public static void main(String[] args) {

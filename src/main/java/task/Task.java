@@ -40,4 +40,21 @@ public abstract class Task {
     public String formattedDate(LocalDate date) {
         return date.format(DateTimeFormatter.ofPattern("MMM d yyyy"));
     }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) {
+            return true;
+        }
+        if (!(o instanceof Task)) {
+            return false;
+        }
+
+        Task task1 = (Task) o;
+
+        if (isCompleted != task1.isCompleted) {
+            return false;
+        }
+        return task.equals(task1.task);
+    }
 }

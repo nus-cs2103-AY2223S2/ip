@@ -7,6 +7,7 @@ import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.time.LocalDate;
+import java.util.ArrayList;
 import command.DeadlineCommand;
 import command.EventCommand;
 import command.MarkCommand;
@@ -40,11 +41,12 @@ public class LocalStorage {
     }
 
     /**
-     * Writes tasks to the task list.
+     * Creates a task list.
      *
-     * @param taskList task list to load the data into
+     * @return An array of tasks.
      */
-    public void loadIntoProgramTaskList(TaskList taskList) {
+    public ArrayList<Task> createTaskList() {
+        TaskList taskList = new TaskList();
         try {
             FileReader fr = new FileReader(this.dataFile);
             BufferedReader reader = new BufferedReader(fr);
@@ -100,6 +102,7 @@ public class LocalStorage {
 
             reader.close();
             fr.close();
+            return taskList.indexTask();
         } catch (IOException error) {
             throw new InvalidArgumentException(error.toString());
         }

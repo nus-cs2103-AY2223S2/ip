@@ -1,13 +1,14 @@
 package command;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import java.time.LocalDate;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import storage.TaskList;
+import task.Deadline;
 import task.Task;
-import task.Todo;
 
-public class TodoCommandTest {
+public class DeadlineCommandTest {
     TaskList tasks;
 
     @BeforeEach
@@ -16,10 +17,10 @@ public class TodoCommandTest {
     }
 
     @Test
-    public void shouldAddTodo() {
-        new TodoCommand("Demo").run(this.tasks);
+    public void shouldAddDeadline() {
+        new DeadlineCommand("Demo", LocalDate.parse("2023-01-01")).run(this.tasks);
         Task actual = this.tasks.showTask(0);
-        Todo expected = new Todo("Demo");
+        Deadline expected = new Deadline("Demo", LocalDate.parse("2023-01-01"));
         assertEquals(expected, actual);
     }
 }
