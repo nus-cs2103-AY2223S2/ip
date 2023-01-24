@@ -3,8 +3,9 @@ package duke.task;
 import duke.TaskCreationException;
 import org.junit.jupiter.api.Test;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 public class DeadlineTest {
     @Test
@@ -19,8 +20,8 @@ public class DeadlineTest {
     }
 
     @Test
-    public void testToString()   {
-        Deadline dl  = assertDoesNotThrow(() -> new Deadline("test", "2022-01-01"));
+    public void testToString() {
+        Deadline dl = assertDoesNotThrow(() -> new Deadline("test", "2022-01-01"));
         assertEquals(dl.toString(), "[D][] test (by: 2022-01-01)");
     }
 }

@@ -1,6 +1,7 @@
 package duke;
 
 import java.util.Scanner;
+
 public class Ui {
     final private Scanner sc = new Scanner(System.in);
 
@@ -11,6 +12,7 @@ public class Ui {
     void showWelcome() {
         System.out.println("Hello, Duke here. How can I help you?");
     }
+
     void error(String err) {
         System.out.printf("Error: %s\n", err);
     }

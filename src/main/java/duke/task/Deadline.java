@@ -5,8 +5,9 @@ import duke.TaskCreationException;
 import java.time.LocalDate;
 import java.time.format.DateTimeParseException;
 
-public class Deadline extends Task{
+public class Deadline extends Task {
     LocalDate deadline;
+
     public Deadline(String desc, String deadline) throws TaskCreationException {
         super(desc);
         try {
