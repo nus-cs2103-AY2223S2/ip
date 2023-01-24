@@ -1,12 +1,11 @@
 import java.util.Scanner;
-import javafx.stage.Stage;
-import java.io.PrintWriter;
+import java.util.ArrayList;
 public class Duke {
     public static void main(String[] args) {
 
 
         Scanner scanner = new Scanner(System.in);
-
+        RequestList list = new RequestList(new ArrayList<Request>());
 
 
 
@@ -23,13 +22,20 @@ public class Duke {
         String userInput = scanner.nextLine();
 
         while (!userInput.equals("bye")) {
+            if (userInput.equals("list")) {
+                list.printItems();
+                userInput = scanner.nextLine();
+                continue;
+            }
+            list.addRequest(new Request(userInput));
             horizontalLine();
-            System.out.println("    " + userInput);
+            System.out.println("    added: " + userInput);
             horizontalLine();
             userInput = scanner.nextLine();
         }
 
-        System.out.println("Bye for now! Hope to see you again!");
+            System.out.println("Bye for now! Hope to see you again!");
+
     }
 
     public static void horizontalLine() {
