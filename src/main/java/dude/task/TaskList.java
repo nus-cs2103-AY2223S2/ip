@@ -4,22 +4,22 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class TaskList {
-    private final List<Task> taskList;
+    private final List<Task> tasks;
 
     /**
      * Initializes TaskList.
      */
     public TaskList() {
-        taskList = new ArrayList<>();
+        tasks = new ArrayList<>();
     }
 
     /**
      * Initializes TaskList.
      *
-     * @param taskList List of task to store into TaskList.
+     * @param tasks List of task to store into TaskList.
      */
-    public TaskList(List<Task> taskList) {
-        this.taskList = taskList;
+    public TaskList(List<Task> tasks) {
+        this.tasks = tasks;
     }
 
     /**
@@ -29,7 +29,7 @@ public class TaskList {
      * @return Task at given task index.
      */
     public Task getTask(int taskIndex) {
-        return taskList.get(taskIndex - 1);
+        return tasks.get(taskIndex - 1);
     }
 
     /**
@@ -38,7 +38,7 @@ public class TaskList {
      * @param task Task object to be added into TaskList.
      */
     public void addTask(Task task) {
-        taskList.add(task);
+        tasks.add(task);
         Task.addTaskCount();
     }
 
@@ -48,8 +48,8 @@ public class TaskList {
      * @param taskIndex Index of Task to be deleted from TaskList.
      */
     public void deleteTask(int taskIndex) {
-        taskList.remove(taskIndex - 1);
-        Task.removeTaskCount();
+        tasks.remove(taskIndex - 1);
+        Task.decreaseTaskCount();
     }
 
     /**
@@ -59,7 +59,7 @@ public class TaskList {
      */
     public String toRaw() {
         StringBuilder input = new StringBuilder();
-        for (Task task : taskList) {
+        for (Task task : tasks) {
             input.append(task.toRaw());
         }
         return input.toString();
@@ -73,10 +73,10 @@ public class TaskList {
     @Override
     public String toString() {
         StringBuilder result;
-        if (taskList.size() != 0) {
+        if (tasks.size() != 0) {
             result = new StringBuilder("\tHere are the tasks in your list: \n");
-            for (int i = 0; i < taskList.size(); i++) {
-                result.append("\t").append(i + 1).append(".").append(taskList.get(i).toString()).append("\n");
+            for (int i = 0; i < tasks.size(); i++) {
+                result.append("\t").append(i + 1).append(".").append(tasks.get(i).toString()).append("\n");
             }
         } else {
             result = new StringBuilder("\tEh... You currently got no task leh.\n");
