@@ -1,4 +1,5 @@
-import java.util.Arrays;
+
+import java.time.LocalDate;
 
 /**
  * The abstraction behind the tasks stored by the Duke chat-bot.
@@ -67,13 +68,17 @@ public abstract class DukeTask {
         boolean isDone = s[1].equals("1");
         switch (s[0]) {
         case "E":
-            DukeTask event = new TaskEvent(s[2], s[3], s[4]);
+            DukeTask event = new TaskEvent(
+                    s[2],
+                    DukeUtils.parseDateTime(s[3]),
+                    DukeUtils.parseDateTime(s[4]));
             if (isDone) {
                 event.setDone();
             }
             return event;
         case "D":
-            DukeTask deadline = new TaskDeadline(s[2], s[3]);
+            DukeTask deadline = new TaskDeadline(s[2],
+                    DukeUtils.parseDateTime(s[3]));
             if (isDone) {
                 deadline.setDone();
             }
@@ -87,4 +92,6 @@ public abstract class DukeTask {
         }
         return null;
     }
+
+    public abstract boolean isOnDate(LocalDate dt);
 }

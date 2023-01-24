@@ -1,5 +1,8 @@
 import DukeExceptions.*;
 
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
 import java.util.Scanner;
 
 /**
@@ -9,8 +12,8 @@ import java.util.Scanner;
  * AY2223-S2 CS2103T
  */
 public class Duke {
-    /*
-    private static String mascot =
+
+    private static final String graphicMascot =
             "⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⣰⣷⣦⡀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀\n" +
             "⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢹⣧⠙⢿⣦⡀⠀⠀⠀⠀⠀⠀⠀⣠⣶⣦⠀⠀⠀⠀⠀⠀\n" +
             "⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢸⣿⠀⠀⠙⢿⣦⡀⠀⠀⠀⢀⣾⡿⠉⣿⡄⠀⠀⠀⠀⠀\n" +
@@ -33,7 +36,8 @@ public class Duke {
             "⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⣀⣉⣿⣷⠲⠤⠤⠤⣤⣶⣿⣟⠁⠀⠀⠀⠀⠀⠀⠀⠀\n" +
             "⠀⠀⠀⠀⠀⠀⢀⣴⣶⡿⠿⠛⠛⢋⢹⡦⣄⣀⡤⢿⢉⠛⠛⠿⣷⣦⠀⠀⠀⠀⠀⠀\n" +
             "⠀⠀⠀⠀⠀⠀⣿⠏⠀⠀⠀⠀⢀⠇⠈⡇⠀⠀⠀⠘⡎⣆⠀⠀⠀⢻⣧⠀⠀⠀⠀⠀\n" +
-            "⠀⠀⠀⠀⠀⠈⠿⣶⣶⣶⣶⣶⣾⣶⣾⣷⣶⣶⣶⣶⣷⣾⣷⣶⣶⣾⡿"; */
+            "⠀⠀⠀⠀⠀⠈⠿⣶⣶⣶⣶⣶⣾⣶⣾⣷⣶⣶⣶⣶⣷⣾⣷⣶⣶⣾⡿";
+
     private static final String mascot =
             "RICKRICKRICKRICKRICKKKKK\n"
         +   "RICK    RICK    RICKKKKK\n"
@@ -149,6 +153,10 @@ public class Duke {
         case "event":
             event(param, ds);
             return;
+        case "tasks":
+            filterByDate(param, ds);
+            return;
+
         default:
             if (cmd.matches("(mark|unmark|delete)")) {
                 manipulateTask(cmd, param, ds);
@@ -259,9 +267,15 @@ public class Duke {
             return;
         }
 
-        TaskDeadline deadline = new TaskDeadline(tokens[0], tokens[1]);
         try {
+            TaskDeadline deadline = new TaskDeadline(
+                    tokens[0],
+                    DukeUtils.parseDateTime(tokens[1]));
             ds.add(deadline);
+        } catch (DateTimeParseException e) {
+            DukeFormatter.error(
+                    new DukeInvalidDateException()
+            );
         } catch (DukeStoreFullException e) {
             DukeFormatter.error(e);
         }
@@ -289,21 +303,62 @@ public class Duke {
             return;
         }
 
-        TaskEvent event = new TaskEvent(tokens[0], dates[0], dates[1]);
         try {
+            TaskEvent event = new TaskEvent(tokens[0],
+                    DukeUtils.parseDateTime(dates[0]),
+                    DukeUtils.parseDateTime(dates[1]));
             ds.add(event);
+        } catch (DateTimeParseException e) {
+            DukeFormatter.error(
+                 new DukeInvalidDateException()
+            );
         } catch (DukeStoreFullException e) {
             DukeFormatter.error(e);
         }
     }
 
+    /**
+     * Filters the DukeStore for tasks occurring on the provided date.
+     * @param date The provided date to filter for.
+     * @param ds The store instance to store tasks
+     */
+    private static void filterByDate(String date, DukeStore ds) {
+
+        if (!date.matches("/on (.*)$")) {
+            DukeFormatter.error(
+                    new DukeException("Usage: tasks /on {day}/{month}/{year}")
+            );
+            return;
+        }
+        String cleanedDate = date.replace("/on ", "");
+        try {
+            LocalDate dt = DukeUtils.parseDate(cleanedDate);
+            DateTimeFormatter df = DateTimeFormatter.ofPattern("d MMM yyyy");
+            DukeFormatter.section(
+                    "Searching for a list of tasks occurring on " + dt.format(df) + ":\n" +
+                    ds.occurOnDate(dt)
+            );
+        } catch (DateTimeParseException e) {
+            DukeFormatter.error(
+                new DukeInvalidDateException()
+            );
+        }
+    }
+
+    /**
+     * The main method by which this store operates
+     */
     private static void operate() {
         DukeStore store = DukeStore.create();
 
         Scanner sc = new Scanner(System.in);
         while (true) {
-            String command = sc.nextLine();
-            parseCommand(command, store, sc);
+            try {
+                String command = sc.nextLine();
+                parseCommand(command, store, sc);
+            } catch (IllegalStateException e) {
+                System.exit(1);
+            }
         }
     }
 }

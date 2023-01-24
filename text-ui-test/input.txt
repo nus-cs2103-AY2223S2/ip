@@ -1,3 +1,4 @@
+list
 todo
 deadline
 event
@@ -6,8 +7,14 @@ todo test
 todo test script
 deadline 1
 deadline 1 /by now
+deadline 1 /by 2/2/23 1234
+deadline 2 /by 02/2/23 1234
+deadline 3 /by 02/03/23 1234
+deadline 4 /by 12/04/2023 1234
+deadline 5 /by 2/3/23 12345
 event greet
 event greet and meet /from now /to later
+event greet /from 2/2/23 0001 /to 2/2/23 0005
 mark 1
 list
 unmark 1
@@ -16,4 +23,9 @@ mark 6
 mark test
 delete 4
 list
+tasks
+tasks /on
+tasks /on 2/2/23
+tasks /on 2/13/2023
+tasks /on 1/2/23
 bye

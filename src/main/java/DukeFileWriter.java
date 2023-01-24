@@ -13,6 +13,7 @@ import java.nio.file.Paths;
 import java.util.List;
 
 import java.util.Objects;
+import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 /**
@@ -22,7 +23,7 @@ import java.util.stream.Stream;
  */
 public class DukeFileWriter {
     private static final String folderPath = "data";
-    private static final String filePath = "data/duke.txt";
+    private static final String filePath = "data/DUKEDB.TXT";
     private final File store;
 
     /**
@@ -134,7 +135,8 @@ public class DukeFileWriter {
      * Prints the store's contents as a list, line by line.
      * @return The store's contents as a String list.
      */
-    public String toList() {
+    @Override
+    public String toString() {
         StringBuilder out = new StringBuilder();
         long lines = 0;
         try {
@@ -157,6 +159,18 @@ public class DukeFileWriter {
             return "No records are added yet. Add some by typing them!";
         }
         return out.toString();
+    }
+
+    public List<DukeTask> toList() {
+        try {
+            Path path = Paths.get(filePath);
+            Stream<String> fileStream = Files.lines(path);
+            return fileStream
+                    .map(task -> DukeTask.fromDBSchema(task))
+                    .collect(Collectors.toList());
+        } catch (IOException e) {
+            return List.of();
+        }
     }
 
     /**

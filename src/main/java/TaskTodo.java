@@ -1,3 +1,5 @@
+import java.time.LocalDate;
+
 /**
  * The class representing a {@code Todo} task.
  *
@@ -21,5 +23,10 @@ public class TaskTodo extends DukeTask{
                 "T",
                 super.toDBSchema()
         );
+    }
+
+    @Override
+    public boolean isOnDate(LocalDate dt) {
+        return false;
     }
 }

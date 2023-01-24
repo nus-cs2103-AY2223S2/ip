@@ -9,6 +9,10 @@ Rick: Hello, I'm R-r-r-rickkk!
       ____________________________________________________________
 
       ____________________________________________________________
+Rick: No records are added yet. Add some by typing them!
+      ____________________________________________________________
+
+      ____________________________________________________________
 Rick: The description of a Todo cannot be empty.
       ____________________________________________________________
 
@@ -43,9 +47,39 @@ Rick: Usage: deadline {task} /by {deadline}
       ____________________________________________________________
 
       ____________________________________________________________
+Rick: An invalid date was entered. Please use this format:
+      {day}/{month}/{year} {hour}{minute}
+      Example: 2/2/23 1200
+      ____________________________________________________________
+
+      ____________________________________________________________
 Rick: Got it. I've added this task:
-        [D][ ] 1 (by: now)
+        [D][ ] 1 (by: Feb 02 2023 12:34pm)
       Now you have 4 tasks in the list.
+      ____________________________________________________________
+
+      ____________________________________________________________
+Rick: Got it. I've added this task:
+        [D][ ] 2 (by: Feb 02 2023 12:34pm)
+      Now you have 5 tasks in the list.
+      ____________________________________________________________
+
+      ____________________________________________________________
+Rick: Got it. I've added this task:
+        [D][ ] 3 (by: Mar 02 2023 12:34pm)
+      Now you have 6 tasks in the list.
+      ____________________________________________________________
+
+      ____________________________________________________________
+Rick: An invalid date was entered. Please use this format:
+      {day}/{month}/{year} {hour}{minute}
+      Example: 2/2/23 1200
+      ____________________________________________________________
+
+      ____________________________________________________________
+Rick: An invalid date was entered. Please use this format:
+      {day}/{month}/{year} {hour}{minute}
+      Example: 2/2/23 1200
       ____________________________________________________________
 
       ____________________________________________________________
@@ -53,9 +87,15 @@ Rick: Usage: event {task} /from {start} /to {end}
       ____________________________________________________________
 
       ____________________________________________________________
+Rick: An invalid date was entered. Please use this format:
+      {day}/{month}/{year} {hour}{minute}
+      Example: 2/2/23 1200
+      ____________________________________________________________
+
+      ____________________________________________________________
 Rick: Got it. I've added this task:
-        [E][ ] greet and meet (from: now to: later)
-      Now you have 5 tasks in the list.
+        [E][ ] greet (from: Feb 2 2023 12:01am to: Feb 2 2023 12:05am)
+      Now you have 7 tasks in the list.
       ____________________________________________________________
 
       ____________________________________________________________
@@ -67,8 +107,10 @@ Rick: Nice! I've marked this task as done:
 Rick: 1. [T][X] 1
       2. [T][ ] test
       3. [T][ ] test script
-      4. [D][ ] 1 (by: now)
-      5. [E][ ] greet and meet (from: now to: later)
+      4. [D][ ] 1 (by: Feb 02 2023 12:34pm)
+      5. [D][ ] 2 (by: Feb 02 2023 12:34pm)
+      6. [D][ ] 3 (by: Mar 02 2023 12:34pm)
+      7. [E][ ] greet (from: Feb 2 2023 12:01am to: Feb 2 2023 12:05am)
       ____________________________________________________________
 
       ____________________________________________________________
@@ -80,12 +122,15 @@ Rick: OK, I've marked this task as not done yet:
 Rick: 1. [T][ ] 1
       2. [T][ ] test
       3. [T][ ] test script
-      4. [D][ ] 1 (by: now)
-      5. [E][ ] greet and meet (from: now to: later)
+      4. [D][ ] 1 (by: Feb 02 2023 12:34pm)
+      5. [D][ ] 2 (by: Feb 02 2023 12:34pm)
+      6. [D][ ] 3 (by: Mar 02 2023 12:34pm)
+      7. [E][ ] greet (from: Feb 2 2023 12:01am to: Feb 2 2023 12:05am)
       ____________________________________________________________
 
       ____________________________________________________________
-Rick: An invalid index was entered. Please try again.
+Rick: Nice! I've marked this task as done:
+        [D][X] 3 (by: Mar 02 2023 12:34pm)
       ____________________________________________________________
 
       ____________________________________________________________
@@ -94,15 +139,42 @@ Rick: An invalid index was provided for the mark command. Ensure it is a number!
 
       ____________________________________________________________
 Rick: Noted. I've removed this task:
-        [D][ ] 1 (by: now)
-      Now you have 4 tasks in the list.
+        [D][ ] 1 (by: Feb 02 2023 12:34pm)
+      Now you have 6 tasks in the list.
       ____________________________________________________________
 
       ____________________________________________________________
 Rick: 1. [T][ ] 1
       2. [T][ ] test
       3. [T][ ] test script
-      4. [E][ ] greet and meet (from: now to: later)
+      4. [D][ ] 2 (by: Feb 02 2023 12:34pm)
+      5. [D][X] 3 (by: Mar 02 2023 12:34pm)
+      6. [E][ ] greet (from: Feb 2 2023 12:01am to: Feb 2 2023 12:05am)
+      ____________________________________________________________
+
+      ____________________________________________________________
+Rick: I don't know that command yet. Give me another!
+      ____________________________________________________________
+
+      ____________________________________________________________
+Rick: Usage: tasks /on {day}/{month}/{year}
+      ____________________________________________________________
+
+      ____________________________________________________________
+Rick: Searching for a list of tasks occurring on 2 Feb 2023:
+      - [D][ ] 2 (by: Feb 02 2023 12:34pm)
+      - [E][ ] greet (from: Feb 2 2023 12:01am to: Feb 2 2023 12:05am)
+      ____________________________________________________________
+
+      ____________________________________________________________
+Rick: An invalid date was entered. Please use this format:
+      {day}/{month}/{year} {hour}{minute}
+      Example: 2/2/23 1200
+      ____________________________________________________________
+
+      ____________________________________________________________
+Rick: Searching for a list of tasks occurring on 1 Feb 2023:
+      Hooray. No tasks occur on this date.
       ____________________________________________________________
 
       ____________________________________________________________
