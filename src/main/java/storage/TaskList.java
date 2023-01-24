@@ -1,12 +1,11 @@
 package storage;
 
-import task.Task;
-import task.Todo;
-import task.Deadline;
-import task.Event;
-
 import java.time.LocalDate;
 import java.util.ArrayList;
+import task.Deadline;
+import task.Event;
+import task.Task;
+import task.Todo;
 
 public class TaskList {
     private final ArrayList<Task> tasks;

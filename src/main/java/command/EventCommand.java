@@ -1,18 +1,18 @@
 package command;
 
+import java.time.LocalDate;
 import dukeexeption.InvalidArgumentException;
 import storage.TaskList;
 import task.Event;
 
-import java.time.LocalDate;
-
 public class EventCommand extends Command {
-    private String task;
-    private LocalDate startTime;
-    private LocalDate endTime;
+    private final String task;
+    private final LocalDate startTime;
+    private final LocalDate endTime;
 
     /**
      * Constructor for a create event command.
+     *
      * @param task      task to be added
      * @param startTime start time for task
      * @param endTime   end time for task
@@ -29,7 +29,27 @@ public class EventCommand extends Command {
             throw new InvalidArgumentException("End date must not be earlier than start date.");
         }
         Event newEvent = taskList.createEvent(this.task, this.startTime, this.endTime);
-        return "Got it. I've added this task:\n" + newEvent +
-                "\nNow you have " + taskList.countTask() + " tasks in the list.";
+        return "Got it. I've added this task:\n" + newEvent + "\nNow you have " + taskList.countTask() +
+            " tasks in the list.";
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) {
+            return true;
+        }
+        if (!(o instanceof EventCommand)) {
+            return false;
+        }
+
+        EventCommand that = (EventCommand) o;
+
+        if (!task.equals(that.task)) {
+            return false;
+        }
+        if (!startTime.equals(that.startTime)) {
+            return false;
+        }
+        return endTime.equals(that.endTime);
     }
 }

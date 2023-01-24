@@ -8,9 +8,8 @@ import dukeexeption.MissingArgumentException;
 public class DeleteParser implements Parser {
     @Override
     public Command parse(String requestContent) throws MissingArgumentException, InvalidArgumentException {
-        if (requestContent.trim().equals("")) {
-            throw new MissingArgumentException("The index to be deleted cannot be empty. " +
-                    "Format: delete [index]");
+        if ("".equals(requestContent.trim())) {
+            throw new MissingArgumentException("The index to be deleted cannot be empty. " + "Format: delete [index]");
         }
         try {
             int index = Integer.parseInt(requestContent.trim()) - 1;

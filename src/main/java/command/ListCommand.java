@@ -10,7 +10,7 @@ public class ListCommand extends Command {
             return "There are currently no task, create one now!";
         }
         for (int i = 0; i < taskList.indexTask().size(); i++) {
-            res += (i+1) + ". " + taskList.indexTask().get(i) + "\n";
+            res += (i + 1) + ". " + taskList.indexTask().get(i) + "\n";
         }
         return res.trim();
     }

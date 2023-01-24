@@ -4,11 +4,12 @@ import dukeexeption.InvalidArgumentException;
 import storage.TaskList;
 
 public class DeleteCommand extends Command {
-    private int index;
+    private final int index;
 
     /**
      * Constructor for a delete task command.
-     * @param index  index of task to be deleted
+     *
+     * @param index index of task to be deleted
      */
     public DeleteCommand(int index) {
         this.index = index;
@@ -19,8 +20,8 @@ public class DeleteCommand extends Command {
         try {
             String taskDescription = taskList.showTask(this.index).toString();
             taskList.deleteTask(this.index);
-            return "Noted. I've removed this task:\n  " + taskDescription +
-                    "\nNow you have " + taskList.countTask() + " tasks in the list.";
+            return "Noted. I've removed this task:\n  " + taskDescription + "\nNow you have " + taskList.countTask() +
+                " tasks in the list.";
         } catch (IndexOutOfBoundsException error) {
             throw new InvalidArgumentException("Index " + (this.index + 1) + " is out of bound.");
         }

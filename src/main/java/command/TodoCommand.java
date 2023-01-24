@@ -4,11 +4,12 @@ import storage.TaskList;
 import task.Todo;
 
 public class TodoCommand extends Command {
-    private String task;
+    private final String task;
 
     /**
      * Constructor for a create todo command.
-     * @param task  task to be added
+     *
+     * @param task task to be added
      */
     public TodoCommand(String task) {
         this.task = task;
@@ -17,7 +18,21 @@ public class TodoCommand extends Command {
     @Override
     public String run(TaskList taskList) {
         Todo newTodo = taskList.createTodo(this.task);
-        return "Got it. I've added this task:\n" + newTodo +
-                "\nNow you have " + taskList.countTask() + " tasks in the list.";
+        return "Got it. I've added this task:\n" + newTodo + "\nNow you have " + taskList.countTask() +
+            " tasks in the list.";
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) {
+            return true;
+        }
+        if (!(o instanceof TodoCommand)) {
+            return false;
+        }
+
+        TodoCommand that = (TodoCommand) o;
+
+        return task.equals(that.task);
     }
 }

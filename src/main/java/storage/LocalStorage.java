@@ -1,18 +1,26 @@
 package storage;
 
-import command.*;
+import java.io.BufferedReader;
+import java.io.BufferedWriter;
+import java.io.File;
+import java.io.FileReader;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.time.LocalDate;
+import command.DeadlineCommand;
+import command.EventCommand;
+import command.MarkCommand;
+import command.TodoCommand;
+import command.UnmarkCommand;
 import dukeexeption.InvalidArgumentException;
 import dukeexeption.UnknownCommandException;
 import task.Task;
-
-import java.io.*;
-import java.time.LocalDate;
 
 public class LocalStorage {
     File dataFile;
 
     public LocalStorage(String filepath) {
-        if (filepath.trim().equals("")) {
+        if ("".equals(filepath.trim())) {
             throw new InvalidArgumentException("Filepath cannot be empty.");
         }
         File dataFile = new File(filepath);
@@ -33,7 +41,8 @@ public class LocalStorage {
 
     /**
      * Writes tasks to the task list.
-     * @param taskList  task list to load the data into
+     *
+     * @param taskList task list to load the data into
      */
     public void loadIntoProgramTaskList(TaskList taskList) {
         try {
@@ -49,42 +58,43 @@ public class LocalStorage {
                     String task = data[2];
 
                     switch (taskType) {
-                        case "T":
-                            new TodoCommand(task).run(taskList);
-                            break;
-                        case "D":
-                            String deadlineString = data[3];
-                            new DeadlineCommand(task, LocalDate.parse(deadlineString)).run(taskList);
-                            break;
-                        case "E":
-                            String eventStartTimeString = data[3];
-                            String eventEndTimeString = data[4];
-                            new EventCommand(task, LocalDate.parse(eventStartTimeString), LocalDate.parse(eventEndTimeString))
-                                    .run(taskList);
-                            break;
-                        default:
-                            System.out.println("Error occurs at: " + s);
-                            throw new UnknownCommandException("Datafile provided is corrupted," +
-                                    "create a new file or follow the format.");
+                    case "T":
+                        new TodoCommand(task).run(taskList);
+                        break;
+                    case "D":
+                        String deadlineString = data[3];
+                        new DeadlineCommand(task, LocalDate.parse(deadlineString)).run(taskList);
+                        break;
+                    case "E":
+                        String eventStartTimeString = data[3];
+                        String eventEndTimeString = data[4];
+                        new EventCommand(task, LocalDate.parse(eventStartTimeString),
+                            LocalDate.parse(eventEndTimeString))
+                            .run(taskList);
+                        break;
+                    default:
+                        System.out.println("Error occurs at: " + s);
+                        throw new UnknownCommandException("Datafile provided is corrupted,"
+                            + "create a new file or follow the format.");
                     }
 
                     switch (taskIsCompleted) {
-                        case "0":
-                            new UnmarkCommand(currIndex).run(taskList);
-                            break;
-                        case "1":
-                            new MarkCommand(currIndex).run(taskList);
-                            break;
-                        default:
-                            System.out.println("Error occurs at: " + s);
-                            throw new UnknownCommandException("Datafile provided is corrupted," +
-                                    "create a new file or follow the format.");
+                    case "0":
+                        new UnmarkCommand(currIndex).run(taskList);
+                        break;
+                    case "1":
+                        new MarkCommand(currIndex).run(taskList);
+                        break;
+                    default:
+                        System.out.println("Error occurs at: " + s);
+                        throw new UnknownCommandException("Datafile provided is corrupted,"
+                            + "create a new file or follow the format.");
                     }
 
                     currIndex++;
                 } catch (IndexOutOfBoundsException error) {
-                    throw new InvalidArgumentException("Datafile provided is corrupted," +
-                            "create a new file or follow the format.");
+                    throw new InvalidArgumentException("Datafile provided is corrupted,"
+                        + "create a new file or follow the format.");
                 }
             }
 
@@ -97,7 +107,8 @@ public class LocalStorage {
 
     /**
      * Writes tasks to the file stored.
-     * @param taskList  task list to load the data from
+     *
+     * @param taskList task list to load the data from
      */
     public void writeFromProgramTaskList(TaskList taskList) {
         try {

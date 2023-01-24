@@ -1,3 +1,4 @@
+import java.util.Scanner;
 import command.Command;
 import dukeexeption.DukeException;
 import parser.Request;
@@ -5,17 +6,10 @@ import storage.LocalStorage;
 import storage.TaskList;
 import ui.Ui;
 
-import java.util.Scanner;
-
 public class Duke {
+    private final TaskList tasks;
+    private final Ui ui;
     private LocalStorage localTaskList;
-    private TaskList tasks;
-    private Ui ui;
-
-    public Duke() {
-        this.ui = new Ui();
-        this.tasks = new TaskList();
-    }
 
     public Duke(String filepath) {
         this.ui = new Ui();
@@ -28,6 +22,10 @@ public class Duke {
         }
     }
 
+    public static void main(String[] args) {
+        new Duke("./data/tasks.txt").run();
+    }
+
     public void run() {
         this.ui.printStartUpMessage();
 
@@ -35,7 +33,7 @@ public class Duke {
 
         while (true) {
             String request = scanner.nextLine();
-            if (request.equalsIgnoreCase("BYE")) {
+            if ("BYE".equalsIgnoreCase(request)) {
                 if (this.localTaskList != null) {
                     this.localTaskList.writeFromProgramTaskList(this.tasks);
                 }
@@ -51,9 +49,5 @@ public class Duke {
         }
 
         this.ui.printExitingMessage();
-    }
-
-    public static void main(String[] args) {
-        new Duke("./data/tasks.txt").run();
     }
 }
