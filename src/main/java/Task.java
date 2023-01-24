@@ -2,7 +2,7 @@
  *
  * @author Wong Yong Xiang
  */
-public class Task {
+public abstract class Task {
     protected String description;
     protected boolean isDone;
 
@@ -32,4 +32,6 @@ public class Task {
         String icon = this.isDone == true ? "[X]" : "[ ]";
         return icon + " " + description;
     }
+
+    public abstract String toDataFormatString();
 }

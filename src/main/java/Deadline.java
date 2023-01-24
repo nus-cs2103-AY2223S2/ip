@@ -14,7 +14,7 @@ public class Deadline extends Task {
      */
     public Deadline(String description, String by) {
         super(description);
-        this.by = by.split(" ", 2)[1];
+        this.by = by;
     }
 
     /** returns the string representation of Deadline
@@ -24,5 +24,14 @@ public class Deadline extends Task {
     @Override
     public String toString() {
         return "[D]" + super.toString() + " (by: " + by + ")";
+    }
+
+    @Override
+    public String toDataFormatString() {
+        int marked = 0;
+        if(super.isDone == true) {
+            marked = 1;
+        }
+        return "D / " + marked + " / " + super.description + " - " + this.by;
     }
 }

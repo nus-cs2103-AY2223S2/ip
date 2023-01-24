@@ -14,8 +14,8 @@ public class Event extends Task {
      */
     public Event(String description, String from, String to) {
         super(description);
-        this.from = from.split(" ", 2)[1];
-        this.to= to.split(" ", 2)[1];
+        this.from = from;
+        this.to= to;
     }
 
     /** returns the string representation of Event
@@ -25,5 +25,14 @@ public class Event extends Task {
     @Override
     public String toString() {
         return "[E]" + super.toString() + "(from: " + this.from + " to: " + this.to + ")";
+    }
+
+    @Override
+    public String toDataFormatString() {
+        int marked = 0;
+        if(super.isDone == true) {
+            marked = 1;
+        }
+        return "E / " + marked + " / " + super.description + " - " + this.from + " - " + this.to;
     }
 }
