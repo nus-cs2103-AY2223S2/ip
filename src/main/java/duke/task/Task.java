@@ -15,9 +15,9 @@ public abstract class Task implements Serializable{
         return description;
     }
 
-//    public void setDescription(String description) {
-//        this.description = description;
-//    }
+    public void setDescription(String description) {
+        this.description = description;
+    }
 
     public boolean isDone() {
         return isDone;
