@@ -1,20 +1,24 @@
 package tasks;
+import java.time.*;
+import java.time.format.*;
+
 /**
  * Events are tasks which start at a given date/time and end at a given date/time
  */
 public class Event extends Task {
-    private String description;
-    private String start;
-    private String end;
+    private LocalDateTime eventStart;
+    private LocalDateTime eventEnd;
 
-    public Event(String description, String start, String end) {
+    public Event(String description, LocalDateTime eventStart, LocalDateTime eventEnd) {
         super(description);
-        this.start = start;
-        this.end = end;
+        this.eventStart = eventStart;
+        this.eventEnd = eventEnd;
     }
 
     @Override
     public String toString() {
-        return "[E]" + super.toString() + " (from: " + start + " to: " + end + ")";
+        return "[E]" + super.toString() + " (from: " +
+                eventStart.format(DateTimeFormatter.ofLocalizedDate(FormatStyle.LONG)) +
+                " to: " + eventEnd.format(DateTimeFormatter.ofLocalizedDate(FormatStyle.LONG)) + ")";
     }
 }
