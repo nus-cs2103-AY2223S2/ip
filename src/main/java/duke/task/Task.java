@@ -18,6 +18,12 @@ public abstract class Task {
         this.description = description;
     }
 
+    /**
+     * Returns a copy of this Task object with isDone set to the specified value.
+     *
+     * @param isDone The value to set isDone to.
+     * @return Copy of this Task object with isDone set to the specified value.
+     */
     public Task setDone(boolean isDone) {
         Task task = createCopy();
         task.isDone = isDone;
@@ -40,7 +46,7 @@ public abstract class Task {
     }
 
     /**
-     * Returns a specified string formatted to be suited for writing to storage.
+     * Formats a specified string so that it is suited for writing to storage. Returns the formatted string.
      *
      * @param string The string to be formatted.
      * @return The string formatted to be suited for writing to storage.
@@ -50,10 +56,10 @@ public abstract class Task {
     }
 
     /**
-     * Takes an array of strings that was loaded from storage, undo the formatting from
+     * Takes an array of strings that were loaded from storage, undo the formatting from
      * {@link duke.task.Task#formatStringForStorage}, and return the strings.
      *
-     * @param strings The strings that were loaded from storage and are to be formatted.
+     * @param strings The strings that are to be formatted.
      * @return The strings with formatting from {@link duke.task.Task#formatStringForStorage} undone.
      */
     protected static String[] formatStringsFromStorage(String[] strings) {

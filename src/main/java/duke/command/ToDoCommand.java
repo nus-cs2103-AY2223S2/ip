@@ -6,11 +6,11 @@ import duke.task.TaskList;
 import duke.task.ToDo;
 
 /**
- * Represents an add To-Do task command.
+ * Represents an add to-do command for adding a to-do to a task list.
  */
 public class ToDoCommand extends AddCommand {
     /**
-     * Add the new to-do specified in the input to tasks and returns an acknowledgement message.
+     * Create a to-do using the specified input, add it to tasks, and return an acknowledgement message.
      *
      * @param input {@inheritDoc}
      * @param tasks {@inheritDoc}

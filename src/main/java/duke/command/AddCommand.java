@@ -5,11 +5,11 @@ import duke.task.Task;
 import duke.task.TaskList;
 
 /**
- * Represents an add command.
+ * Represents an add command for adding task to a task list.
  */
 public abstract class AddCommand implements Command {
     /**
-     * Add the new task specified in the input to tasks and returns an acknowledgement message.
+     * Create a task using the specified input, add it to tasks, and return an acknowledgement message.
      *
      * @param input {@inheritDoc}
      * @param tasks {@inheritDoc}
@@ -30,7 +30,7 @@ public abstract class AddCommand implements Command {
      *
      * @param input User's input.
      * @return Task object created using the provided input.
-     * @throws DukeException Indicates an error in the input.
+     * @throws DukeException Indicates an error in the specified input.
      */
     protected abstract Task createTask(String input) throws DukeException;
 }

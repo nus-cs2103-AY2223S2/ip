@@ -12,7 +12,7 @@ public class Parser {
     private final Map<String, Command> strToCommand;
 
     /**
-     * Creates a Parser() object.
+     * Creates a Parser object.
      */
     public Parser() {
         strToCommand = new HashMap<String, Command>();
@@ -31,8 +31,8 @@ public class Parser {
      * Returns the Command object associated with the command specified in input.
      *
      * @param input The input which contains a command.
-     * @return The Command object associated with the command specified in input.
-     * @throws DukeException Indicates that no known command were found in input.
+     * @return The Command object associated with the command specified in the input.
+     * @throws DukeException Indicates that no known command was found in the input.
      */
     public Command getCommand(String input) throws DukeException {
         String op = input.split(" ")[0];
@@ -46,10 +46,10 @@ public class Parser {
     }
 
     /**
-     * Returns true if the input contains a bye command. Otherwise, return false.
+     * Returns true if the input contains a bye command, otherwise, return false.
      *
      * @param input The input which is to be checked for whether it contains a bye command.
-     * @return True if the input contains a bye command. Otherwise, return false.
+     * @return True if the input contains a bye command, otherwise, false.
      */
     public boolean isByeCommand(String input) {
         return input.split(" ")[0].equals("bye");

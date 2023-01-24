@@ -10,17 +10,17 @@ import java.time.LocalDateTime;
 import java.time.format.DateTimeParseException;
 
 /**
- * Represents an add deadline task command.
+ * Represents an add deadline command for adding a deadline to a task list.
  */
 public class DeadlineCommand extends AddCommand {
     /**
-     * Add the new deadline specified in the input to tasks and returns an acknowledgement message.
+     * Create a deadline using the specified input, add it to tasks, and return an acknowledgement message.
      *
      * @param input {@inheritDoc}
      * @param tasks {@inheritDoc}
      * @return {@inheritDoc}
-     * @throws DukeException Indicates an error in the input caused by one of the following: missing cutoff date and/or
-     * time, missing description, incorrect format, invalid cutoff date and/or time.
+     * @throws DukeException Indicates an error in the input caused by one of the following: missing cutoff date and
+     *                       time, missing description, incorrect format, invalid cutoff date and time.
      */
     @Override
     public String run(String input, TaskList tasks) throws DukeException {
@@ -32,8 +32,8 @@ public class DeadlineCommand extends AddCommand {
      *
      * @param input {@inheritDoc}
      * @return {@inheritDoc}
-     * @throws DukeException Indicates an error in the input caused by one of the following: missing cutoff date and/or
-     * time, missing description, incorrect format, invalid cutoff date and/or time.
+     * @throws DukeException Indicates an error in the input caused by one of the following: missing cutoff date and
+     *                       time, missing description, incorrect format, invalid cutoff date and time.
      */
     @Override
     protected Task createTask(String input) throws DukeException {

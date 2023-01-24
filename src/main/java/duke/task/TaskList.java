@@ -18,7 +18,7 @@ public class TaskList {
      * Creates a TaskList object and fill the task list using the data from the specified storage if it exist. If the
      * specified storage does not exist, create it.
      *
-     * @param storage The storage to write the task list to.
+     * @param storage The storage to read the task list from and write the task list to.
      * @throws DukeException Indicates an error in loading from storage or creating the storage.
      */
     public TaskList(Storage storage) throws DukeException {

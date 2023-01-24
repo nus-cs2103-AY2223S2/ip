@@ -4,14 +4,14 @@ import duke.exception.DukeException;
 import duke.utils.BooleanUtils;
 
 /**
- * Represents a To-Do task.
+ * Represents a to-do task.
  */
 public class ToDo extends Task {
     /**
-     * Creates a ToDoTask object.
+     * Creates a ToDo object.
      *
-     * @param isDone Is the task done.
-     * @param description Description of the task.
+     * @param isDone Is the to-do done.
+     * @param description Description of the to-do.
      */
     public ToDo(boolean isDone, String description) {
         super(isDone, description);
@@ -20,8 +20,8 @@ public class ToDo extends Task {
     /**
      * Returns a ToDo object created using the specified data that was loaded from storage.
      *
-     * @param args Data about the ToDo that was loaded from storage.
-     * @return The ToDo object created using data loaded from storage.
+     * @param args Data about the to-do that was loaded from storage.
+     * @return The ToDo object created using the data loaded from storage.
      * @throws DukeException Indicates missing data or incorrect data type in args.
      */
     public static ToDo createFromStorage(String[] args) throws DukeException {

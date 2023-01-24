@@ -33,7 +33,7 @@ public class Event extends Task {
      * Returns an Event object created using the specified data that was loaded from storage.
      *
      * @param args Data about the event that was loaded from storage.
-     * @return The Event object created using data loaded from storage.
+     * @return The Event object created using the data loaded from storage.
      * @throws DukeException Indicates missing data or incorrect data type or format in args.
      */
     public static Event createFromStorage(String[] args) throws DukeException {

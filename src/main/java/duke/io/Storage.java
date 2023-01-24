@@ -7,7 +7,7 @@ import duke.exception.DukeException;
  */
 public interface Storage {
     /**
-     * Returns true if the storage exist, otherwise, false.
+     * Returns true if the storage exist, otherwise, returns false.
      *
      * @return True if the storage exist, otherwise, false.
      * @throws DukeException Indicates failure to check for file.
@@ -22,7 +22,7 @@ public interface Storage {
     void create() throws DukeException;
 
     /**
-     * Return the contents stored in the storage.
+     * Returns the contents stored in the storage.
      *
      * @return The contents stored in the storage.
      * @throws DukeException Indicates failure to read from storage.
