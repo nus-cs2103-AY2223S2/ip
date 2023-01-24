@@ -2,6 +2,34 @@ import java.time.LocalDate;
 
 public class Parser {
 
+    public enum Action {
+        LIST,
+        TODO,
+        DEADLINE,
+        EVENT,
+        MARK,
+        UNMARK,
+        DELETE,
+        UNKNOWN
+    };
+    public Action getCommand(String userInput) {
+        if (userInput.equals("list")) {
+            return Action.LIST;
+        } else if (userInput.split(" ", 2)[0].equals("todo")) {
+            return Action.TODO;
+        } else if (userInput.split(" ", 2)[0].equals("deadline")) {
+            return Action.DEADLINE;
+        } else if (userInput.split(" ", 2)[0].equals("event")) {
+            return Action.EVENT;
+        } else if (userInput.split(" ", 2)[0].equals("mark")) {
+            return Action.MARK;
+        } else if (userInput.split(" ", 2)[0].equals("unmark")) {
+            return Action.UNMARK;
+        } else if (userInput.split(" ", 2)[0].equals("delete")) {
+            return Action.DELETE;
+        }
+        return Action.UNKNOWN;
+    }
     public String getTodoDescription(String userInput) throws DukeException {
         String todoDescription;
         try {
