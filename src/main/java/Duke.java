@@ -141,13 +141,11 @@ public class Duke {
     private void markTaskAsDone(String arguments) throws InvalidArgumentDukeException {
         try {
             int number = Integer.parseInt(arguments);
-            taskList.markTaskAsDone(number);
-            ui.printMessage("Good job. You have finished this task:\n"
-                    + taskList.getTaskString(number)
-            );
-        } catch (NumberFormatException | IndexOutOfBoundsException e) {
+            new MarkTaskAsDoneCommand(number).execute(taskList, ui, storage);
+        } catch (NumberFormatException e) {
             throw new InvalidArgumentDukeException();
         }
+
     }
 
     private void markTaskAsNotDone(String arguments) throws InvalidArgumentDukeException {
