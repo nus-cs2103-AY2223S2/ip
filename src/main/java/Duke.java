@@ -1,5 +1,9 @@
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Scanner;
+import java.io.FileWriter;
 
 public class Duke {
     public static void main(String[] args) {
@@ -10,15 +14,36 @@ public class Duke {
                 + "|____/ \\__,_|_|\\_\\___|\n";
         System.out.println("Hello from\n" + logo);
         talk("Meow I'm Toto! What can I do for you?");
-        ArrayList<Task> arrayList = new ArrayList<>(100);
 
+        File theDir = new File("src/main/data");
+        if (!theDir.exists()){
+            theDir.mkdirs();
+        }
 
-            while (true) {
+        try {
+            createFile("src/main/data/duke.txt");
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+
+        ArrayList<Task> arrayList;
+        try {
+            arrayList = writeToList("src/main/data/duke.txt");
+        } catch (FileNotFoundException e) {
+            throw new RuntimeException(e);
+        }
+
+        while (true) {
                 try {
                 Scanner scanner = new Scanner(System.in);
                 String answer = scanner.nextLine();
                 if (answer.equals("bye")) {
                     System.out.println("Byebye CATch you later!");
+                    try {
+                        writeToFile("src/main/data/duke.txt", arrayList);
+                    } catch (IOException e) {
+                        throw new RuntimeException(e);
+                    }
                     break;
                 }
                 if (answer.equals("list")) {
@@ -66,7 +91,58 @@ public class Duke {
     public static void talk(String s) {
         System.out.println(s);
     }
+    private static void createFile(String filePath) throws IOException {
+        File file = new File(filePath);
 
+        file.createNewFile();
+    }
+    private static ArrayList<Task> writeToList(String filePath) throws FileNotFoundException {
+        File f = new File(filePath);
+        Scanner s = new Scanner(f);
+        ArrayList<Task> arrayList = new ArrayList<>();
+        while (s.hasNext()) {
+            String[] parts = s.nextLine().split("-");
+            if (parts[0].equals("T")) {
+                Task t = new Todo(parts[2]);
+                if (parts[1].equals("1")) t.markAsDone();
+                arrayList.add(t);
+
+            }
+            if (parts[0].equals("D")) {
+                Task t = new Deadline(parts[2], parts[3]);
+                if (parts[1].equals("1")) t.markAsDone();
+                arrayList.add(t);
+            }
+            if (parts[0].equals("E")) {
+                Task t = new Event(parts[2], parts[3], parts[4]);
+                if (parts[1].equals("1")) t.markAsDone();
+                arrayList.add(t);
+            }
+        }
+        return arrayList;
+    }
+
+    private static void writeToFile(String filePath, ArrayList<Task> arrayList) throws IOException {
+        FileWriter fw = new FileWriter(filePath);
+
+        for (int i = 0; i < arrayList.size(); i++) {
+
+            Task t = arrayList.get(i);
+            if (t instanceof Todo) {
+                fw.write("T-" + t.getStatusIconBinary() + "-" + t.getDescription());
+            }
+            if (t instanceof Deadline) {
+                fw.write("D-" + t.getStatusIconBinary() + "-" + t.getDescription() + "-" + ((Deadline) t).getBy());
+            }
+            if (t instanceof Event) {
+                fw.write("E-" + t.getStatusIconBinary() + "-" + t.getDescription() + "-" + ((Event) t).getFrom() + "-" + ((Event) t).getTo());
+            }
+
+            fw.write(System.lineSeparator());
+
+        }
+        fw.close();
+    }
     public static void mark(String answer, ArrayList<Task> arrayList) throws DukeException {
         if (answer.substring(5, answer.length()).isEmpty()) {
             throw new DukeInvalidArgumentException("Mark cannot be empty");
