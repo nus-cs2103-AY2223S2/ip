@@ -66,7 +66,6 @@ public class TaskList {
         for (int i = 0; i < this.tasks.size(); i++) {
             Task curTask = this.tasks.get(i);
             if (curTask.taskName.contains(keyword)) {
-                System.out.println(curTask.taskName);
                 result.add(curTask);
             }
         }
