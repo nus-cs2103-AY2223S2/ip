@@ -1,4 +1,14 @@
+import java.io.File;
+
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Objects;
 import java.util.Scanner;
 
 public class Duke {
@@ -6,26 +16,30 @@ public class Duke {
     private static ArrayList<Task> allTasks = new ArrayList<>();
     private static Scanner sc = new Scanner(System.in);
 
+    private static Path memoryPath = Paths.get(".", "memory.txt");
+
     private static void printLine() {
         System.out.println("----------------------------------------------------");
     }
 
-    private static void addToList(String title, TaskType type, String start, String end) {
+    private static void addToList(String title, TaskType type, String start, String end, boolean done, boolean shouldPrintOutput) {
         Task task;
         if (type == TaskType.TODO) {
-            task = new ToDo(title);
+            task = new ToDo(title, done);
         } else if (type == TaskType.DEADLINE) {
-            task = new Deadline(title, end);
+            task = new Deadline(title, end, done);
         } else if (type == TaskType.EVENT) {
-            task = new Event(title, start, end);
+            task = new Event(title, start, end, done);
         } else {
             System.out.println("Something seems wrong...");
             return;
         }
         allTasks.add(task);
-        System.out.println("Added this to your task list:");
-        System.out.println("  " + task.toString());
-        System.out.println(String.format("Number of tasks left: %d", allTasks.size()));
+        if (shouldPrintOutput) {
+            System.out.println("Added this to your task list:");
+            System.out.println("  " + task.toString());
+            System.out.println(String.format("Number of tasks left: %d", allTasks.size()));
+        }
     }
 
     private static void deleteTask(int taskIndex) {
@@ -97,13 +111,13 @@ public class Duke {
             if (arguments.trim().equals("")) {
                 throw new IlegalCommandException(Commands.TODO);
             }
-            addToList(arguments, TaskType.TODO, null, null);
+            addToList(arguments, TaskType.TODO, null, null, false, true);
             break;
         case "deadline":
             try {
                 int slashIndex = arguments.indexOf('/');
                 String dateBy = arguments.substring(slashIndex + 4);
-                addToList(arguments.substring(0, slashIndex - 1), TaskType.DEADLINE, null, dateBy);
+                addToList(arguments.substring(0, slashIndex - 1), TaskType.DEADLINE, null, dateBy, false, true);
             } catch (Throwable e) {
                 throw new IlegalCommandException(Commands.DEADLINE);
             }
@@ -115,7 +129,7 @@ public class Duke {
                 int secondSlashIndex = startAndEnd.indexOf('/');
                 String start = startAndEnd.substring(0, secondSlashIndex - 1);
                 String end = startAndEnd.substring(secondSlashIndex + 4);
-                addToList(arguments.substring(0, firstSlashIndex - 1), TaskType.EVENT, start, end);
+                addToList(arguments.substring(0, firstSlashIndex - 1), TaskType.EVENT, start, end, false, true);
             } catch (Throwable e) {
                 throw new IlegalCommandException(Commands.EVENT);
             }
@@ -134,7 +148,47 @@ public class Duke {
         return true;
     }
 
+    public static void loadTasks() {
+        try {
+            File memory = new File(String.valueOf(memoryPath));
+            memory.createNewFile();
+
+            Scanner memoryScanner = new Scanner(memory);
+            while (memoryScanner.hasNext()) {
+                String taskLine = memoryScanner.nextLine();
+                loadTaskLine(taskLine);
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public static void loadTaskLine(String taskLine) {
+        // TODO: Handle corruption in file, leading to incorrect syntax
+        String[] attributes = taskLine.split(", ");
+        System.out.println(Arrays.toString(attributes));
+        String type = attributes[0];
+        String doneNumber = attributes[1];
+        boolean done = Objects.equals(doneNumber, "1");
+        String title = attributes[2];
+        if (Objects.equals(type, "T")) {
+            addToList(title, TaskType.TODO, null, null, done, false);
+        } else if (Objects.equals(type, "D")) {
+            addToList(title, TaskType.DEADLINE, null, attributes[3], done, false);
+        } else if (Objects.equals(type, "E")) {
+            addToList(title, TaskType.EVENT, attributes[3], attributes[4], done, false);
+        } else {
+            System.out.println("Some task in memory does not fall into the three task categories!");
+        }
+    }
+
+    public static void saveTasks() {
+
+    }
+
     public static void main(String[] args) {
+        loadTasks();
+
         String logo = " ____        _        \n"
                 + "|  _ \\ _   _| | _____ \n"
                 + "| | | | | | | |/ / _ \\\n"
@@ -158,5 +212,7 @@ public class Duke {
             }
             printLine();
         }
+
+        saveTasks();
     }
 }
