@@ -1,3 +1,4 @@
+import java.io.*;
 import java.util.Scanner;
 import java.util.ArrayList;
 
@@ -8,6 +9,57 @@ public class Duke {
         DEADLINE
     }
     private static final ArrayList<Task> list = new ArrayList<Task>();
+
+    private static void initalizeList() {
+        try {
+            File yourFile = new File("duke.txt");
+            yourFile.createNewFile();
+            try (BufferedReader br = new BufferedReader(new FileReader("duke.txt"))) {
+                String line;
+                while ((line = br.readLine()) != null) {
+                    char taskType = line.charAt(1);
+
+                    boolean marked = false;
+                    Character markedChar = line.charAt(4);
+
+                    String description = line.substring(7);
+                    if (markedChar.equals('X')) {
+                        marked = true;
+                    }
+                    switch (taskType) {
+                        case 'T':
+                            Todo todoTask = new Todo(description, marked);
+                            list.add(todoTask);
+                            break;
+                        case 'E':
+                            String modifiedDescription = description.split("\\(from: ")[1];
+                            Event eventTask = new Event(description.split("\\(from: ")[0], marked, modifiedDescription.split(" to: ")[0], modifiedDescription.split(" to: ")[1].split("\\)")[0]);
+                            list.add(eventTask);
+                            break;
+                        case 'D':
+                            Deadline deadlineTask = new Deadline(description.split("\\(by: ")[0], marked, description.split("\\(by: ")[1].split("\\)")[0]);
+                            list.add(deadlineTask);
+                            break;
+                    }
+
+                }
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    private static void saveToFile() {
+        try {
+            BufferedWriter writer = new BufferedWriter(new FileWriter("duke.txt"));
+            for (Task task : list) {
+                writer.write(task + "\n");
+            }
+            writer.close();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
 
     private static void displayList() {
         System.out.println("Here are the tasks in your list:");
@@ -36,15 +88,18 @@ public class Duke {
                 break;
         }
         System.out.println("Now you have " + list.size() + " tasks in the list.");
+        saveToFile();
     }
 
     private static void mark(int itemNo) throws DukeException {
         list.get(itemNo).setStatus(true);
+        saveToFile();
         System.out.println("Nice! I've marked this task as done:\n" + list.get(itemNo).toString());
     }
 
     private static void unmark(int itemNo) {
         list.get(itemNo).setStatus(false);
+        saveToFile();
         System.out.println("OK, I've marked this task as not done yet:\n" + list.get(itemNo).toString());
     }
 
@@ -76,6 +131,8 @@ public class Duke {
 
         Scanner sc = new Scanner(System.in);
         boolean quit = false;
+
+        initalizeList();
 
         while (!quit) {
             System.out.print("> ");
@@ -112,14 +169,11 @@ public class Duke {
                     default:
                         throw new DukeException("I'm sorry, but I don't know what that means");
                 }
-            }
-            catch(DukeException exception) {
+            } catch(DukeException exception) {
                 System.out.println(exception.getMessage());
-            }
-            catch (IndexOutOfBoundsException e) {
+            } catch (IndexOutOfBoundsException e) {
                 System.out.println("MEL: Invalid format of input, please try again!");
-            }
-            catch (NumberFormatException e) {
+            } catch (NumberFormatException e) {
                 System.out.println("MEL: Invalid integer, please try again!");
             }
         }
