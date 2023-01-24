@@ -109,6 +109,11 @@ public class Duke {
                 case "delete ": {
                     String[] inputArr = input.split(" ");
                     int toDelete = Integer.parseInt(inputArr[1]);
+                    if (toDelete > Task.numTask) {
+                        System.out.println("Task does not exist. Please enter a valid input.");
+                        input = sc.nextLine();
+                        continue;
+                    }
                     Task deleteTask = taskStorage.remove(toDelete - 1);
                     System.out.println("Noted. I've removed this task:");
                     System.out.println(deleteTask.toString());
