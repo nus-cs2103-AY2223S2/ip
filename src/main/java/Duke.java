@@ -1,8 +1,7 @@
 import java.util.Scanner;
 
 /**
- * The Duke class implements a personal assistant chatbot
- * that helps a person keep track of various things.
+ * The Duke class implements a personal assistant chatbot that helps the user to keep track of various tasks.
  *
  * @author Chia Jeremy
  */
@@ -85,7 +84,8 @@ public class Duke {
     public static void main(String[] args) {
         // Initialize components
         Scanner scn = new Scanner(System.in);
-        TaskList myTaskList = new TaskList(100);
+        Storage storage = new Storage("data/tasks.txt");
+        TaskList myTaskList = new TaskList(storage.load());
 
         Feedback.greet(LOGO);
         String input = scn.nextLine();
