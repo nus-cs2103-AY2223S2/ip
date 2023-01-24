@@ -15,6 +15,6 @@ public class ByeCommand implements Command {
      */
     @Override
     public String run(String input, TaskList tasks) {
-        return "Bye. Hope to see you again soon!";
+        return "Finally! I thought you'd never leave.";
     }
 }

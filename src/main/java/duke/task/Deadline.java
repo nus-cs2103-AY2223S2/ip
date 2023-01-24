@@ -35,11 +35,11 @@ public class Deadline extends Task {
      */
     public static Deadline createFromStorage(String[] args) throws DukeException {
         if (args.length != 4) {
-            throw new DukeException("Failed to load a deadline from storage due to missing data.");
+            throw new DukeException("A deadline in storage has missing data!");
         }
 
         if (!BooleanUtils.isBooleanString(args[1])) {
-            throw new DukeException("Failed to load a deadline from storage due to incorrect data type.");
+            throw new DukeException("A deadline in storage has an incorrect data type!");
         }
 
         args = Task.formatStringsFromStorage(args);
@@ -48,8 +48,7 @@ public class Deadline extends Task {
         try {
             deadline = LocalDateTime.parse(args[3]);
         } catch (DateTimeParseException e) {
-            throw new DukeException("Failed to load a deadline from storage due to failure to parse cutoff date and"
-                    + "time.");
+            throw new DukeException("A deadline in storage has an incorrectly formatted cutoff date and time!");
         }
 
         return new Deadline(Boolean.parseBoolean(args[1]), args[2], deadline);

@@ -9,8 +9,8 @@ import java.io.PrintStream;
 public class UiTest {
     @Test
     public void print_printSingleLineMessage_printsOutFormattedMessage() {
-        String expected = "    ____________________________________________________________\n     Hello World! "
-                + "Lorem ipsum\n    ____________________________________________________________\n\n";
+        String expected = "    ______________________________________________________________________\n     Hello "
+                + "World! Lorem ipsum\n    ______________________________________________________________________\n\n";
 
         // Setup
         ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
@@ -29,8 +29,9 @@ public class UiTest {
 
     @Test
     public void print_printMultiLineMessage_printsOutFormattedMessage() {
-        String expected = "    ____________________________________________________________\n     Hello World!\n     "
-                + "Lorem ipsum\n    ____________________________________________________________\n\n";
+        String expected = "    ______________________________________________________________________\n     Hello "
+                + "World!\n     Lorem ipsum\n    "
+                + "______________________________________________________________________\n\n";
 
         // Setup
         ByteArrayOutputStream outputStream = new ByteArrayOutputStream();

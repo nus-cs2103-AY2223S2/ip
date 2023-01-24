@@ -43,8 +43,8 @@ public class EventCommand extends AddCommand {
 
     private String[] extractValidArgs(String input) throws DukeException {
         if (!input.matches("event .+ /from .+ /to .+")) {
-            throw new DukeException("event command should be of the format:\n  event <description> /from <start of "
-                    + "event> /to <end of event>");
+            throw new DukeException("The event command format should be:\n  event <description> /from <start of event> "
+                    + "/to <end of event>");
         }
 
         String argStr = input.replaceFirst("event ", "");
@@ -55,15 +55,15 @@ public class EventCommand extends AddCommand {
         }
 
         if (args[0].isEmpty()) {
-            throw new DukeException("The description of an event cannot be empty.");
+            throw new DukeException("The description of an event cannot be empty!");
         }
 
         if (args[1].isEmpty()) {
-            throw new DukeException("The start of an event must be specified.");
+            throw new DukeException("The start of an event must be specified!");
         }
 
         if (args[2].isEmpty()) {
-            throw new DukeException("The end of an event must be specified.");
+            throw new DukeException("The end of an event must be specified!");
         }
 
         if (!args[1].matches(LocalDateTimeUtils.inputDateTimeRegex)
@@ -80,14 +80,14 @@ public class EventCommand extends AddCommand {
         try {
             start = LocalDateTime.parse(args[1], LocalDateTimeUtils.inputDateTimeFormatter);
         } catch (DateTimeParseException e) {
-            throw new DukeException("The start of the event contains an invalid date and/or time.");
+            throw new DukeException("The start of the event provided is an invalid date and time!");
         }
 
         LocalDateTime end;
         try {
             end = LocalDateTime.parse(args[2], LocalDateTimeUtils.inputDateTimeFormatter);
         } catch (DateTimeParseException e) {
-            throw new DukeException("The end of the event contains an invalid date and/or time.");
+            throw new DukeException("The end of the event provided is an invalid date and time!");
         }
 
         return new Event(false, args[0], start, end);

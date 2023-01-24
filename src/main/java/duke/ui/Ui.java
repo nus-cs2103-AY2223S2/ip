@@ -23,8 +23,8 @@ public class Ui {
      * @param message The message to be printed.
      */
     public void print(String message) {
-        printStream.println("    ____________________________________________________________");
+        printStream.println("    ______________________________________________________________________");
         printStream.printf("     %s\n", message.replace("\n", "\n     "));
-        printStream.print("    ____________________________________________________________\n\n");
+        printStream.println("    ______________________________________________________________________\n");
     }
 }

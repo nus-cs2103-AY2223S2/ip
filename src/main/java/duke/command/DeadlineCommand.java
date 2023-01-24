@@ -43,7 +43,7 @@ public class DeadlineCommand extends AddCommand {
 
     private String[] extractValidArgs(String input) throws DukeException {
         if (!input.matches("deadline .+ /by .+")) {
-            throw new DukeException("deadline command should be of the format:\n  deadline <description> /by <cutoff>");
+            throw new DukeException("The deadline command format should be:\n  deadline <description> /by <cutoff>");
         }
 
         String argStr = input.replaceFirst("deadline", "");
@@ -54,15 +54,15 @@ public class DeadlineCommand extends AddCommand {
         }
 
         if (args[0].isEmpty()) {
-            throw new DukeException("The description of a deadline cannot be empty.");
+            throw new DukeException("The description of a deadline cannot be empty!");
         }
 
         if (args[1].isEmpty()) {
-            throw new DukeException("The cutoff of a deadline must be specified.");
+            throw new DukeException("The cutoff of a deadline must be specified!");
         }
 
         if (!args[1].matches(LocalDateTimeUtils.inputDateTimeRegex)) {
-            throw new DukeException(String.format("The cutoff of a deadline should be of the format:\n  %s",
+            throw new DukeException(String.format("The cutoff format should be:\n  %s",
                     LocalDateTimeUtils.inputDateTimeFormat));
         }
 
@@ -74,7 +74,7 @@ public class DeadlineCommand extends AddCommand {
         try {
             cutoff = LocalDateTime.parse(args[1], LocalDateTimeUtils.inputDateTimeFormatter);
         } catch (DateTimeParseException e) {
-            throw new DukeException("The cutoff of the deadline contains an invalid date and/or time.");
+            throw new DukeException("The cutoff provided is an invalid date and time!");
         }
 
         return new Deadline(false, args[0], cutoff);

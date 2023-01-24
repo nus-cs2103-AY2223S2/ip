@@ -38,11 +38,11 @@ public class Event extends Task {
      */
     public static Event createFromStorage(String[] args) throws DukeException {
         if (args.length != 5) {
-            throw new DukeException("Failed to load an event from storage due to missing data.");
+            throw new DukeException("An event in storage has missing data!");
         }
 
         if (!BooleanUtils.isBooleanString(args[1])) {
-            throw new DukeException("Failed to load an event from storage due to incorrect data type.");
+            throw new DukeException("An event in storage has an incorrect data type!");
         }
 
         args = Task.formatStringsFromStorage(args);
@@ -51,14 +51,14 @@ public class Event extends Task {
         try {
             start = LocalDateTime.parse(args[3]);
         } catch (DateTimeParseException e) {
-            throw new DukeException("Failed to load an event from storage due to failure to parse start of event.");
+            throw new DukeException("An event in storage has an incorrectly formatted start of event!");
         }
 
         LocalDateTime end;
         try {
             end = LocalDateTime.parse(args[4]);
         } catch (DateTimeParseException e) {
-            throw new DukeException("Failed to load an event from storage due to failure to parse end of event.");
+            throw new DukeException("An event in storage has an incorrectly formatted end of event!");
         }
 
         return new Event(Boolean.parseBoolean(args[1]), args[2], start, end);

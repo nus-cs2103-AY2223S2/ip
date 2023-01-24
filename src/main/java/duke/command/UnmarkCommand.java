@@ -32,6 +32,6 @@ public class UnmarkCommand extends SetDoneCommand {
 
     @Override
     protected String getSuccessMessagePrefix() {
-        return "OK, I've marked this task as not done yet:";
+        return "YOU DARE LIE TO ME?!";
     }
 }

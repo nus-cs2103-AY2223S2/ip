@@ -32,6 +32,6 @@ public class MarkCommand extends SetDoneCommand {
 
     @Override
     protected String getSuccessMessagePrefix() {
-        return "Nice! I've marked this task as done:";
+        return "I see that you're at least competent enough to clear this task.";
     }
 }

@@ -39,7 +39,7 @@ public class ToDoCommand extends AddCommand {
         String description = input.replaceFirst("todo", "").trim();
 
         if (description.isEmpty()) {
-            throw new DukeException("The description of a todo cannot be empty.");
+            throw new DukeException("The description of a to-do cannot be empty!");
         }
 
         return description;

@@ -39,7 +39,7 @@ public class Parser {
         Command command = strToCommand.get(op);
 
         if (command == null) {
-            throw new DukeException("I'm sorry, but I don't know what that means :-(");
+            throw new DukeException("I've never heard of such a command!");
         } else {
             return command;
         }

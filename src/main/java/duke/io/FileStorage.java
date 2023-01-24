@@ -27,7 +27,7 @@ public class FileStorage implements Storage {
         try {
             return Files.exists(path);
         } catch (SecurityException e) {
-            throw new DukeException("Unable to check if save file exist due to missing permissions.");
+            throw new DukeException("I do not have enough permissions to check for the save file's existence!");
         }
     }
 
@@ -38,9 +38,9 @@ public class FileStorage implements Storage {
             Files.createFile(path);
         } catch (FileAlreadyExistsException ignored) {
         } catch (IOException e) {
-            throw new DukeException("Unable to create save file due to I/O error.");
+            throw new DukeException("I encountered an I/O error when creating the save file!");
         } catch (SecurityException e) {
-            throw new DukeException("Unable to create save file due to missing permissions.");
+            throw new DukeException("I do not have enough permissions to create the save file!");
         }
     }
 
@@ -49,11 +49,11 @@ public class FileStorage implements Storage {
         try {
             return Files.readString(path);
         } catch (IOException e) {
-            throw new DukeException("Unable to read save file due to I/O error.");
+            throw new DukeException("I encountered an I/O error when reading the save file!");
         } catch (OutOfMemoryError e) {
-            throw new DukeException("Unable to read save file due to insufficient memory.");
+            throw new DukeException("I need more memory to read the save file!");
         } catch (SecurityException e) {
-            throw new DukeException("Unable to read save file due to missing permissions.");
+            throw new DukeException("I do not have enough permissions to read the save file!");
         }
     }
 
@@ -62,9 +62,9 @@ public class FileStorage implements Storage {
         try {
             Files.writeString(path, data);
         } catch (IOException e) {
-            throw new DukeException("Unable to write to save file due to I/O error.");
+            throw new DukeException("I encountered an I/O error when writing to the save file!");
         } catch (SecurityException e) {
-            throw new DukeException("Unable to write to save file due to missing permissions.");
+            throw new DukeException("I do not have enough permissions to write to the save file!");
         }
     }
 

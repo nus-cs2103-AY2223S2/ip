@@ -50,7 +50,9 @@ public class Duke {
                 + "| | | | | | | |/ / _ \\\n"
                 + "| |_| | |_| |   <  __/\n"
                 + "|____/ \\__,_|_|\\_\\___|\n";
-        ui.print(String.format("Hello from\n%s\nWhat can I do for you?", logo));
+        String greeting = String.format("IT IS I!\n%s\nManager of tasks! Tracker of progress!\nHeedless user, what is "
+                + "it that you seek?", logo);
+        ui.print(greeting);
     }
 
     private static void runInputLoop() {

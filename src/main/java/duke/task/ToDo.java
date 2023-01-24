@@ -26,11 +26,11 @@ public class ToDo extends Task {
      */
     public static ToDo createFromStorage(String[] args) throws DukeException {
         if (args.length != 3) {
-            throw new DukeException("Failed to load a to-do from storage due to missing data.");
+            throw new DukeException("A to-do in storage has missing data!");
         }
 
         if (!BooleanUtils.isBooleanString(args[1])) {
-            throw new DukeException("Failed to load a to-do from storage due to incorrect data type.");
+            throw new DukeException("A to-do in storage has an incorrect data type!");
         }
 
         args = Task.formatStringsFromStorage(args);
