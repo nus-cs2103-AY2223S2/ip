@@ -1,3 +1,5 @@
+package duke.task;
+
 /**
  * A type of Task with no timeframe.
  */

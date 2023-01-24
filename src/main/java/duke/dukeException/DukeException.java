@@ -1,10 +1,12 @@
+package duke.dukeException;
+
 /**
  * A special exception used by the Duke class.
  */
 public class DukeException extends Exception {
 
     /**
-     * Constructor for the DukeException class.
+     * Constructor for the Duke.DukeException class.
      * @param error The string to be passed into
      *              the parent class' constructor.
      */

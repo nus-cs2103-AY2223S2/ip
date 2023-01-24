@@ -1,3 +1,5 @@
+package duke.task;
+
 /**
  * Represents a task entry with a description
  * and a boolean representing its status.
