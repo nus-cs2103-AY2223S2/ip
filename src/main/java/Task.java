@@ -9,11 +9,21 @@ public class Task {
     private boolean isDone = false;
 
     /**
-     * Constructor to instantiate a class.
+     * Constructor to instantiate a task.
      * @param name The name of the task.
      */
     public Task(String name) {
         this.name = name;
+    }
+
+    /**
+     * Constructor to instantiate a task.
+     * @param name The name of the task.
+     * @param isDone Status of the task.
+     */
+    public Task(String name, boolean isDone) {
+        this(name);
+        this.isDone = isDone;
     }
 
     /**
@@ -49,5 +59,14 @@ public class Task {
     public String toString() {
         String status = this.getStatus();
         return (String.format("[%s] %s", status, this.name));
+    }
+
+    /**
+     * Format task to be stored in data file.
+     * @return Returns a  formatted string representation of this task to be stored.
+     */
+    public String format() {
+        String status = isDone ? "1" : "0";
+        return (String.format("%s | %s", status, this.name));
     }
 }

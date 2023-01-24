@@ -2,21 +2,33 @@ import java.util.*;
 /**
  * Encapsulation of the list containing tasks.
  */
-public class List {
+public class TaskList {
     /**
      * An ArrayList to store the tasks.
      */
-    private ArrayList<Task> taskList = new ArrayList<>();
+    private ArrayList<Task> taskList;
+
+    /**
+     * Constructor for TaskList.
+     * @param taskList The list of our tasks.
+     */
+    public TaskList(ArrayList<Task> taskList) {
+        this.taskList = taskList;
+    }
+
+    /**
+     * Returns the list of tasks.
+     * @return taskList, the list of tasks.
+     */
+    public ArrayList<Task> getTaskList() {
+        return this.taskList;
+    }
 
     /**
      * Add tasks into the list and display added task when done.
      * @param task The description of the task to be added.
-     * @throws DukeException throw IncompleteDescException
-     *                       if description of task is incomplete/missing,
-     *                       or throw InvalidInputException
-     *                       if the input command is invalid.
      */
-    public void add(Task task) throws DukeException {
+    public void add(Task task) {
         this.taskList.add(task);
         System.out.println("Got it. I've added this task:");
         System.out.println(" " + task);
