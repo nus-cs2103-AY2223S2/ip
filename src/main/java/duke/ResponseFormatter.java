@@ -1,3 +1,5 @@
+package duke;
+
 public class ResponseFormatter implements IFormatter {
     @Override
     public String format(String msg) {

@@ -1,7 +1,13 @@
+package duke.query;
+
+import duke.DukeException;
+import duke.task.Task;
+import duke.task.TaskTracker;
+
 import java.util.StringTokenizer;
 
 public class MarkQueryHandler extends TaskQueryHandler {
-    MarkQueryHandler(TaskTracker tt) {
+    public MarkQueryHandler(TaskTracker tt) {
         super(tt);
     }
 
@@ -11,6 +17,6 @@ public class MarkQueryHandler extends TaskQueryHandler {
         st.nextToken();
         Task t = tt.markUnmarkTask(Integer.parseInt(st.nextToken()) - 1, true);
         tt.saveAllTasks();
-        return "Task marked as complete: " + t;
+        return "duke.task.Task marked as complete: " + t;
     }
 }

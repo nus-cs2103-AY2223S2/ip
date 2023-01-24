@@ -1,3 +1,9 @@
+package duke.query;
+
+import duke.DukeException;
+import duke.task.Task;
+import duke.task.TaskTracker;
+
 public class TodoQueryHandler extends TaskQueryHandler {
     public TodoQueryHandler(TaskTracker tt) {
         super(tt);

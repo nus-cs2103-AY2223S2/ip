@@ -1,3 +1,5 @@
+package duke;
+
 public class BotResult {
     public BotStatus resultStatus;
     public String response;

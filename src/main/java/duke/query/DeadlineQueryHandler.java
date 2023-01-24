@@ -1,3 +1,9 @@
+package duke.query;
+
+import duke.DukeException;
+import duke.task.Task;
+import duke.task.TaskTracker;
+
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;

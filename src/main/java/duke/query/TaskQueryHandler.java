@@ -1,3 +1,7 @@
+package duke.query;
+
+import duke.task.TaskTracker;
+
 public abstract class TaskQueryHandler implements IQueryHandler {
     protected TaskTracker tt;
 

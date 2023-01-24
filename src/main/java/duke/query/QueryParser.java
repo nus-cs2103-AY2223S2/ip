@@ -1,3 +1,5 @@
+package duke.query;
+
 import java.util.StringTokenizer;
 
 public class QueryParser {

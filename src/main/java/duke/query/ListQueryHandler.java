@@ -1,5 +1,10 @@
+package duke.query;
+
+import duke.DukeException;
+import duke.task.TaskTracker;
+
 public class ListQueryHandler extends TaskQueryHandler {
-    ListQueryHandler(TaskTracker tt) {
+    public ListQueryHandler(TaskTracker tt) {
         super(tt);
     }
 

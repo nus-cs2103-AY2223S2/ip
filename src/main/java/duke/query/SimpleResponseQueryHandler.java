@@ -1,3 +1,7 @@
+package duke.query;
+
+import duke.DukeException;
+
 public class SimpleResponseQueryHandler implements IQueryHandler {
     String response;
 

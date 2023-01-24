@@ -1,4 +1,9 @@
+package duke;
+
 import java.util.StringTokenizer;
+
+import duke.query.*;
+import duke.task.TaskTracker;
 
 public class Bot {
     private static final boolean SHOULD_LOAD_TASK_SAVE = true;

@@ -1,7 +1,13 @@
+package duke.query;
+
+import duke.DukeException;
+import duke.task.Task;
+import duke.task.TaskTracker;
+
 import java.util.StringTokenizer;
 
 public class DeleteQueryHandler extends TaskQueryHandler {
-    DeleteQueryHandler(TaskTracker tt) {
+    public DeleteQueryHandler(TaskTracker tt) {
         super(tt);
     }
 
@@ -11,6 +17,6 @@ public class DeleteQueryHandler extends TaskQueryHandler {
         st.nextToken();
         Task t = tt.deleteTask(Integer.parseInt(st.nextToken()) - 1);
         tt.saveAllTasks();
-        return "Task deleted: " + t;
+        return "duke.task.Task deleted: " + t;
     }
 }

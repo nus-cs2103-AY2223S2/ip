@@ -1,3 +1,5 @@
+package duke;
+
 public class Duke {
     private Bot bot;
     private Ui ui;
