@@ -1,0 +1,12 @@
+todo read book
+todo drink water
+deadline finish project /by March 20
+event Jason Birthday /from 5pm /to 10pm
+list
+mark 3
+mark 4
+list
+unmark 3
+list
+wronginput
+bye

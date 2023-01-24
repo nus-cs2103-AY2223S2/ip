@@ -19,7 +19,7 @@ public class Duke {
 
         switch(firstInput) {
             case "list":
-                System.out.println("Here are the tasks you asked for!\n");
+                System.out.println("Here are the tasks you asked for!");
                 for (int i = 0; i < taskList.size(); i += 1) {
                     int currItem = i + 1;
                     System.out.println(currItem + ": " + taskList.get(i));
@@ -35,7 +35,7 @@ public class Duke {
                 try {
                     int taskIndex = Integer.parseInt(input.split(" ")[1]) - 1;
                     Task selectedTask = taskList.get(taskIndex);
-                    System.out.println("Done! I've marked this task as done :D\n");
+                    System.out.println("Done! I've marked this task as done :D");
                     selectedTask.check();
                     System.out.println(selectedTask);
                     return true;
@@ -48,7 +48,7 @@ public class Duke {
                 try {
                     int untaskIndex = Integer.parseInt(input.split(" ")[1]) - 1;
                     Task unselectedTask = taskList.get(untaskIndex);
-                    System.out.println("This task is apparently not done huh D:\n");
+                    System.out.println("This task is apparently not done huh D:");
                     unselectedTask.unCheck();
                     System.out.println(unselectedTask);
                     return true;
@@ -98,7 +98,6 @@ public class Duke {
         boolean cont = true;
 
         while (cont) {
-            System.out.println("\nQuery:");
             String input = scanner.nextLine();
             cont = duke.readInput(input);
         }
