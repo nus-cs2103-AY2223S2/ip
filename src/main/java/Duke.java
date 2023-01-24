@@ -54,7 +54,7 @@ public class Duke {
                             throw new NoArgsException("deadline");
                         } else {
                             String[] queries = echo.split(" /");
-                            if (queries.length < 2) {
+                            if (queries.length < 2 || commands.length < 4 || queries[0].equals(commands[0])) {
                                 throw new IncompleteException();
                             } else {
                                 String description = queries[0].substring(9);
@@ -67,7 +67,8 @@ public class Duke {
                             throw new NoArgsException("event");
                         } else {
                             String[] queries = echo.split(" /");
-                            if (queries.length < 3){
+                            if (queries.length < 3 || commands.length < 5 ||
+                                    queries[0].equals(commands[0])) {
                                 throw new IncompleteException();
                             } else {
                                 String description = queries[0].substring(6);
@@ -121,5 +122,7 @@ public class Duke {
     static void say(String str, String logo) {
         System.out.println(logo + str + logo);
     }
+
+
 }
 
