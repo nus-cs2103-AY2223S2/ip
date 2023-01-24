@@ -53,7 +53,7 @@ public class Duke {
 
     private static boolean handle(String[] tokens) throws InvalidCommandException {
         String cmd = tokens[0];
-        if (cmd.equals("save")) { System.out.println("reached here"); return false;    }
+        if (cmd.equals("\n")) {  return false;    }
         else if (cmd.equals("bye")) {   showReply(); duke.quit(); return true; }
         else {  showReply(); duke.exec(tokens); } 
         return false;
