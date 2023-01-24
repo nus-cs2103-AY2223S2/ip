@@ -1,5 +1,4 @@
 import java.util.Scanner;
-import java.util.regex.Pattern;
 
 public class Fideline {
 
@@ -44,56 +43,61 @@ public class Fideline {
         boolean running = true;
         while(running) {
             String userInput = sc.nextLine();
-            // execute command based on user input
-            if (userInput.equals("bye")) {
-                // bye command stops the bot
-                running = false;
-                farewell();
-            } else if (userInput.equals("list")) {  // list command shows current list
-                String listMessage = this.taskManager.listTasks();
-                if (listMessage.equals("")) {
-                    botSays("eh are you stupid?\nyour list is currently empty!");
-                } else {
-                    botSays("here! your list:" + listMessage);
-                }
-            } else if (userInput.startsWith("todo ")) {
-                // adds todo task to list
-                this.taskManager.addTodo(userInput.substring(5));
-                // notifies user that list has been updated
-                addTaskMessage();
-            } else if (userInput.startsWith("deadline ")) {
-                // adds deadline task to list
-                String[] deadlineInput = userInput.substring(9).split(" /by ");
-                this.taskManager.addDeadline(deadlineInput[0], deadlineInput[1]);
-                // notifies user that list has been updated
-                addTaskMessage();
-            } else if (userInput.startsWith("event ")) {
-                // adds event task to list
-                String[] eventInput = userInput.substring(6).split(" /from ");
-                String[] eventTiming = eventInput[1].split(" /to ");
-                this.taskManager.addEvent(eventInput[0], eventTiming[0], eventTiming[1]);
-                // notifies user that list has been updated
-                addTaskMessage();
-            } else if (Pattern.matches("mark \\d+?", userInput)) {
-                int taskNum = Integer.valueOf(userInput.split(" ")[1]);
-                if (this.taskManager.markTask(taskNum)) { // marked successfully
-                    botSays("nice work! i've taken note!:\n" +
-                            this.taskManager.getTaskString(taskNum)); // success message (marked)
-                } else { // unable to mark, task at given index does not exist
-                    botSays("uh hello?? can you check properly?\n "
-                            + "task does not exist bro"); // failure to mark message
-                };
-            } else if (Pattern.matches("unmark \\d+?", userInput)) {
-                int taskNum = Integer.valueOf(userInput.split(" ")[1]);
-                if (this.taskManager.unmarkTask(taskNum)) { // unmarked successfully
-                    botSays("uhh okay... i've unmarked your task:\n"
-                            + this.taskManager.getTaskString(taskNum)); // success message (unmarked)
-                } else { // unable to unmark, task at given index does not exist
-                    botSays("uh hello?? can you check properly?\n " +
-                            "task does not exist bro"); // failure to mark message
-                };
-            } else {
-                botSays(userInput);
+            InputParser parsedInput;
+            try {
+                parsedInput = new InputParser(userInput); // parses input
+            } catch (InputError ie) {
+                parsedInput = new InputParser(ie);
+            }
+            switch (parsedInput.getCommandType()) {// execute command based on user input
+                case BYE: // bye command stops the bot
+                    running = false;
+                    farewell();
+                    break;
+                case LIST: // list command shows current list
+                    String listMessage = this.taskManager.listTasks();
+                    if (listMessage.equals("")) {
+                        botSays("eh are you stupid?\nyour list is currently empty!");
+                    } else {
+                        botSays("here! your list:" + listMessage);
+                    }
+                    break;
+                case TODO: // adds todo task to list
+                    this.taskManager.addTodo(parsedInput.getArguments()[0]);
+                    addTaskMessage(); // notifies user that list has been updated
+                    break;
+                case DEADLINE: // adds deadline task to list
+                    this.taskManager.addDeadline(parsedInput.getArguments()[0],
+                            parsedInput.getArguments()[1]);
+                    addTaskMessage(); // notifies user that list has been updated
+                    break;
+                case EVENT: // adds event task to list
+                    this.taskManager.addEvent(parsedInput.getArguments()[0],
+                            parsedInput.getArguments()[1], parsedInput.getArguments()[2]);
+                    addTaskMessage(); // notifies user that list has been updated
+                    break;
+                case MARK: // marks given task as done
+                    int taskNumMark = Integer.valueOf(parsedInput.getArguments()[0]);
+                    if (this.taskManager.markTask(taskNumMark)) { // marked successfully
+                        botSays("nice work! i've taken note!:\n" +
+                                this.taskManager.getTaskString(taskNumMark)); // success message (marked)
+                    } else { // unable to mark, task at given index does not exist
+                        botSays("uh hello?? can you check properly?\n "
+                                + "task does not exist bro"); // failure to mark message
+                    };
+                    break;
+                case UNMARK: // registers given task as not done
+                    int taskNumUnmark = Integer.valueOf(parsedInput.getArguments()[0]);
+                    if (this.taskManager.unmarkTask(taskNumUnmark)) { // unmarked successfully
+                        botSays("uhh okay... i've unmarked your task:\n"
+                                + this.taskManager.getTaskString(taskNumUnmark)); // success message (unmarked)
+                    } else { // unable to unmark, task at given index does not exist
+                        botSays("uh hello?? can you check properly?\n " +
+                                "task does not exist bro"); // failure to mark message
+                    };
+                    break;
+                case ERROR: // alerts user of error in their input
+                    botSays("hold up! " + parsedInput.getArguments()[0]);
             }
         }
     }

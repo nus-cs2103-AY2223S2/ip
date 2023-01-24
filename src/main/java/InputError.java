@@ -1,2 +1,5 @@
-package PACKAGE_NAME;public class InputError {
+public class InputError extends Exception {
+    public InputError (String errorMessage) {
+        super(errorMessage);
+    }
 }
