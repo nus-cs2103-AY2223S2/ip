@@ -1,3 +1,5 @@
+import java.time.LocalDate;
+import java.time.format.DateTimeParseException;
 import java.io.Serializable;
 import java.util.ArrayList;
 
@@ -17,19 +19,21 @@ public class DukeList implements Serializable {
     public void add(String type, String s) {
 
 
-        Task task;
+        Task task = new Task();
         if (type.equals("todo")) {
             task = new Todo(s);
 
         } else if (type.equals("deadline")) {
-            String[] arr = s.split(" /by", 2);
-            task = new Deadline(arr[0], arr[1]);
+            String[] arr = s.split(" /by ", 2);
+            LocalDate localDate = LocalDate.parse(arr[1]);
+            task = new Deadline(arr[0], localDate);
+
         } else {
             String[] arr = s.split(" /from | /to", 3);
             task = new Event(arr[0], arr[1], arr[2]);
         }
         System.out.println("Sure, Imma add that real quick");
-        System.out.println(task.toString());
+        System.out.println(task);
         list.add(task);
         System.out.println("Now you've got " + list.size() + pluralTask(list.size()));
         System.out.println(new TextBorder(""));
@@ -52,7 +56,7 @@ public class DukeList implements Serializable {
     public void delete (int i) throws TaskOutOfRangeException{
         if (i > this.list.size() || i < 0) {
             throw new TaskOutOfRangeException("Yo, I can't find the task at " + i);
-        } else{
+        } else {
             Task removedTask = this.list.remove(i - 1);
             System.out.println("Got it, this task is gonez:");
             System.out.println(removedTask);

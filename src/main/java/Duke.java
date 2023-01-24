@@ -1,6 +1,6 @@
 
 import java.io.*;
-
+import java.time.format.DateTimeParseException;
 import java.util.Scanner;
 
 public class Duke {
@@ -19,11 +19,10 @@ public class Duke {
                 try {
                     dukeList = (DukeList) ois.readObject();
 
-                } catch ( IOException e) {
+                } catch (IOException e) {
                     System.out.println("Creating new save");
                 }
             }
-
 
 
             String logo = " ____        _        \n"
@@ -77,8 +76,11 @@ public class Duke {
                             throw new UnknownInputException("Hmm, I'm not sure what you're saying man.");
                         }
                     }
-                    dukeList.add(array[0], array[1]);
-                }
+                    try {
+                        dukeList.add(array[0], array[1]);
+                    } catch (DateTimeParseException e) {
+                        System.out.println("Hey, I can't see what date that is man.");
+                    }                }
             }
 
 
@@ -93,6 +95,6 @@ public class Duke {
             System.out.println("Hey I can't find your object class.");
             System.out.println(e);
         }
-
     }
 }
+
