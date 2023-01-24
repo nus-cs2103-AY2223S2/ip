@@ -1,6 +1,15 @@
+
 import java.io.FileWriter;
 import java.io.IOException;
 import java.lang.StringBuilder;
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.LocalTime;
+import java.time.format.DateTimeFormatter;
+import java.time.temporal.ChronoUnit;
 import java.util.*;
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -41,6 +50,7 @@ class Crystal {
                     int index = description.lastIndexOf("|");
                     String time = description.substring(description.lastIndexOf("|") + 1);
                     description = description.replace(description.substring(index), "");
+                    System.out.println(time);
                     Task n = new Deadline(description.trim(), time.trim());
                     n.isDone = true;
                     temp.add(n);
@@ -154,11 +164,18 @@ class Crystal {
                 } else if (input.contains("deadline")) {
                     System.out.println(" ____________________________________________________________");
                     String s = input.replace("deadline", "");
-                    String[] arr = s.split("/");
-                    String subs = arr[0];
-                    String n = arr[1];
-                    String subsubs = n.replace("by", "");
-                    Deadline d = new Deadline(subs, subsubs);
+
+//                    String[] arr = s.split("/");
+//                    String subs = arr[0];
+//                    String n = arr[1];
+//                    String subsubs = n.replace("by", "");
+//                    Deadline d = new Deadline(subs, subsubs);
+
+                    int index = s.lastIndexOf("/by");
+                    String description = s.replace(s.substring(index), ""); //description of task
+                    s = s.substring(index + 3); //date/time for by portion
+                    Deadline d = new Deadline(description, s);
+
                     System.out.println("Alright, I've added this task: ");
                     System.out.println(d.toString());
                     list.add(d);
