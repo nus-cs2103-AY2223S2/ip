@@ -41,7 +41,7 @@ public class Parser {
         MessageStatus status;
         if (message.equals("bye")) {
             status = MessageStatus.END;
-        } else if (message.equals("list")){
+        } else if (message.equals("list")) {
             status = MessageStatus.LIST;
         } else if (isMark(message)) {
             status = MessageStatus.MARK;

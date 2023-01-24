@@ -11,7 +11,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 public class MessageGeneratorTest {
 
     @Test
-    public void generateListMessage_emptyListInput_emptyListString()  {
+    public void generateListMessage_emptyListInput_emptyListString() {
         MessageGenerator messageGenerator = new MessageGenerator(new TaskList(new ArrayList<>()), new Storage());
         assertEquals("Here are the tasks in your list:\n", messageGenerator.generateListMessage());
     }

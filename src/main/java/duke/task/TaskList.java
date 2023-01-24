@@ -4,6 +4,7 @@ import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Locale;
+
 import duke.exception.InvalidTodoException;
 import duke.exception.InvalidDeadlineException;
 import duke.exception.InvalidEventException;
@@ -30,13 +31,13 @@ public class TaskList {
         String listString = "";
         for (int i = 0; i < list.size(); i++) {
             Task task = list.get(i);
-            listString += String.format("%d.%s\n", i+1, task.toString());
+            listString += String.format("%d.%s\n", i + 1, task.toString());
         }
         return listString;
     }
 
     public Task addTask(String content) throws InvalidTodoException, InvalidDeadlineException, InvalidEventException {
-        String[] contentSplit = content.split(" ",2);
+        String[] contentSplit = content.split(" ", 2);
         String taskType = contentSplit[0];
 
         Task taskToAdd;
@@ -96,13 +97,13 @@ public class TaskList {
         Task deletedTask = this.getTask(taskNum);
 
         // remove task from arraylist
-        list.remove(taskNum-1);
+        list.remove(taskNum - 1);
 
         return deletedTask;
     }
 
     public Task getTask(int taskNum) {
-        return list.get(taskNum-1);
+        return list.get(taskNum - 1);
     }
 
     public void markTask(String action, int taskNum) {

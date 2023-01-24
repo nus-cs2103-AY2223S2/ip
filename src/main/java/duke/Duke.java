@@ -1,6 +1,7 @@
 package duke;
 
 import java.util.Scanner;
+
 import duke.exception.*;
 import duke.message.DukeMessage;
 import duke.message.MessageGenerator;
@@ -30,9 +31,10 @@ public class Duke {
             }
             try {
                 MessageStatus responseStatus = parser.process(userMessage);
-                DukeMessage dukeResponse =  messageGenerator.generate(responseStatus, userMessage);
+                DukeMessage dukeResponse = messageGenerator.generate(responseStatus, userMessage);
                 System.out.println(dukeResponse);
-            } catch (InvalidInputException | InvalidTodoException | InvalidDeadlineException | InvalidEventException e) {
+            } catch (InvalidInputException | InvalidTodoException | InvalidDeadlineException |
+                     InvalidEventException e) {
                 System.out.println(e.getMessage());
             }
 

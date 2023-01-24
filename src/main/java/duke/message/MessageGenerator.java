@@ -66,31 +66,31 @@ public class MessageGenerator {
         Task task;
 
         switch (status) {
-        case LIST:
-            message = generateListMessage();
-            break;
-        case MARK:
-            task = processMark(message);
-            message = generateTaskMessage(status, task);
-            break;
-        case ADD:
-            task = taskList.addTask(message);
+            case LIST:
+                message = generateListMessage();
+                break;
+            case MARK:
+                task = processMark(message);
+                message = generateTaskMessage(status, task);
+                break;
+            case ADD:
+                task = taskList.addTask(message);
 
-            // Add task in storage
-            this.storage.addTask(message);
+                // Add task in storage
+                this.storage.addTask(message);
 
-            message = generateTaskMessage(status, task);
-            break;
-        case DELETE:
-            task = taskList.deleteTask(message);
+                message = generateTaskMessage(status, task);
+                break;
+            case DELETE:
+                task = taskList.deleteTask(message);
 
-            // Delete task in storage
-            this.storage.deleteTask(message);
+                // Delete task in storage
+                this.storage.deleteTask(message);
 
-            message = generateTaskMessage(status, task);
-            break;
-        default:
-            break;
+                message = generateTaskMessage(status, task);
+                break;
+            default:
+                break;
         }
         return new DukeMessage(status, message);
     }

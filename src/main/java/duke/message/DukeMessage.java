@@ -1,4 +1,5 @@
 package duke.message;
+
 public class DukeMessage extends Message {
 
     MessageStatus status;
@@ -12,7 +13,6 @@ public class DukeMessage extends Message {
         super(content);
         this.status = status;
     }
-
 
 
     @Override

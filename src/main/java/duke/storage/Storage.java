@@ -20,7 +20,7 @@ public class Storage {
     }
 
     private String getTask(int taskNum) {
-        return this.list.get(taskNum-1);
+        return this.list.get(taskNum - 1);
     }
 
     public void addTask(String message) {
@@ -38,7 +38,7 @@ public class Storage {
         String task = this.getTask(taskNum);
         String[] taskSplit = task.split(" ", 2);
 
-        this.list.set(taskNum-1, String.format("%s %s", markStatus, taskSplit[1]));
+        this.list.set(taskNum - 1, String.format("%s %s", markStatus, taskSplit[1]));
 
         updateStorage();
     }
@@ -48,7 +48,7 @@ public class Storage {
         int taskNum = Integer.parseInt(messageSplit[1]);
 
         // remove task from arraylist
-        list.remove(taskNum-1);
+        list.remove(taskNum - 1);
 
         updateStorage();
     }
@@ -74,7 +74,7 @@ public class Storage {
 
     public ArrayList<String> load() {
         File taskFile = new File("data/tasklist.txt");
-        if (taskFile.exists()){
+        if (taskFile.exists()) {
             try {
                 Scanner s = new Scanner(taskFile);
                 while (s.hasNext()) {
@@ -89,7 +89,7 @@ public class Storage {
             new File("data").mkdirs();
             try {
                 taskFile.createNewFile();
-            } catch (IOException err){
+            } catch (IOException err) {
                 System.out.println(err);
             }
         }
@@ -98,7 +98,6 @@ public class Storage {
 
 
     }
-
 
 
 }
