@@ -3,7 +3,7 @@ import java.time.format.DateTimeFormatter;
 
 public class Deadline extends Task {
     private LocalDateTime due;
-    private static final DateTimeFormatter FORM = DateTimeFormatter.ofPattern("dd/MM/yy HHmm");
+    private static final DateTimeFormatter FORM = DateTimeFormatter.ofPattern("dd/MM/yy, HHmm");
     
     Deadline(String desc, boolean isDone, LocalDateTime due) {
         super(desc, isDone);
@@ -34,6 +34,7 @@ public class Deadline extends Task {
     public String toString() {
         return String.format("%s (< %s)",
                 super.toString(), this.due.format(FORM));
+    }
 
     @Override
     String makeFileFriendly() {

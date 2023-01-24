@@ -43,8 +43,6 @@ public class Cbot {
         for (String s : arr) {
             System.out.println(BLANK + s);
         }
-        
-        System.out.println();
     }
     
     public static void main(String[] args) throws IOException {
@@ -63,12 +61,10 @@ public class Cbot {
         // Frequently Used Strings
         String INDENT   = "      ~ ";
         String WARNING  = "      ! ";
-        String PROMPT   = " v v\n";
+        String PROMPT   = "\n v v\n";
         String STALL    = "\n   o\n   o\n   o\n\n";
         String DATETIME_ERROR = WARNING + "<Error> Sorry, I don't know how to interpret that datetime\n"
                 + "        Try something in the form: yyyy-MM-dd HH:mm";
-        
-        TaskList tl = new TaskList();
         
         System.out.println(STALL + INDENT + "Hey! D:< I'm not\n" + dukeLogo);
         System.out.println(INDENT + "I'm\n" + cbotLogo);
@@ -80,7 +76,7 @@ public class Cbot {
         }
         
         System.out.println(STALL + INDENT
-                + "How can I help you today?\n");
+                + "How can I help you today?");
         
         Scanner sc = new Scanner(System.in);
         boolean loop = true;
@@ -332,6 +328,22 @@ public class Cbot {
                 case "e":
                     msg = "Ok! Here are your Events:";
                     arrFilter = tl.listFilter(t -> t.getSymbol().equals("E"));
+                    break;
+                
+                case "complete":
+                case "done":
+                case "completed":
+                case "X":
+                    msg = "Ok! Here are the Tasks you've completed:";
+                    arrFilter = tl.listFilter(t -> t.getStatus().equals(Task.DONE_TRUE));
+                    break;
+                
+                case "incomplete":
+                case "not done":
+                case "!done":
+                case "undone":
+                    msg = "Ok! Here are the Tasks you haven't completed yet:";
+                    arrFilter = tl.listFilter(t -> !t.getStatus().equals(Task.DONE_TRUE));
                     break;
                 
                 default:

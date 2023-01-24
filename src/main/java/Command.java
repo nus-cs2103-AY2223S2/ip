@@ -45,7 +45,7 @@ public enum Command {
     
     String getText(String input) {
         if (this.hasText) {
-            return input.substring(getLen());
+            return input.substring(getLen()).trim();
         }
         
         return "";

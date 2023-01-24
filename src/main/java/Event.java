@@ -4,7 +4,7 @@ import java.time.format.DateTimeFormatter;
 public class Event extends Task {
     private LocalDateTime fromTime;
     private LocalDateTime toTime;
-    private static final DateTimeFormatter FORM = DateTimeFormatter.ofPattern("dd/MM/yy HHmm");
+    private static final DateTimeFormatter FORM = DateTimeFormatter.ofPattern("dd/MM/yy, HHmm");
     
     Event(String desc, boolean isDone, LocalDateTime fromTime, LocalDateTime toTime) {
         super(desc, isDone);
