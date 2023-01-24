@@ -2,24 +2,25 @@ public class Task {
     protected String cont;
     protected boolean finished;
 
-    public Task(String cont){
+    public Task(String cont) {
         this.cont=cont;
         this.finished=false;
     }
 
-    public String getCont(){
-        return this.cont;
+    public String checkStatus() {
+        return this.finished ? "X" : " ";
     }
 
-    public String checkStatus(){
-        return this.finished?"X":" ";
+    public void mark() {
+        this.finished = true;
     }
 
-    public void mark(){
-        this.finished=true;
+    public void unmark() {
+        this.finished = false;
     }
 
-    public void unmark(){
-        this.finished=false;
+    @Override
+    public String toString() {
+        return "[" + this.checkStatus() + "]" + this.cont;
     }
 }
