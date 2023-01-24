@@ -1,3 +1,4 @@
+package duke.task;
 import java.time.temporal.Temporal;
 /**
  * Represents an Event Task that can be kept track of, starting and ending at a specific date/time.

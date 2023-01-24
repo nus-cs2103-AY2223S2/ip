@@ -1,3 +1,5 @@
+package duke.exception;
+
 /**
  * Represents an exception related to the Duke chatbot.
  */

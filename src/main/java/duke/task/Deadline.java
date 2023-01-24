@@ -1,3 +1,5 @@
+package duke.task;
+
 import java.time.temporal.Temporal;
 /**
  * Represents a deadline Task that can be kept track of, having a deadline associated with the task.
@@ -22,7 +24,7 @@ public class Deadline extends Task {
         super(taskName);
         this.rawDeadline = rawDeadline;
         this.deadline= deadline;
-        this.formattedDeadline = Task.formatDate(deadline);
+        this.formattedDeadline = formatDate(deadline);
     }
     
     /**

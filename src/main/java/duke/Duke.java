@@ -1,3 +1,13 @@
+package duke;
+
+import duke.task.Task;
+import duke.tasklist.TaskList;
+import duke.parser.Parser;
+import duke.storage.Storage;
+import duke.ui.Ui;
+
+
+
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileWriter;
@@ -15,39 +25,50 @@ import java.util.ArrayList;
 import java.util.Scanner;
 
 
-
 /**
  * Represents a chatbot that one can interact with to keep track of tasks.
  */
 public class Duke {
-    /** Logo for the name of the chatbot. **/
-    private static final String logo = " |          ______    ______\n"
-                                     + " | ____    |      |  |      |\n"
-                                     + " |      |  |      |  |      |\n"
-                                     + " | ____ |  |______|  |______|\n";
 
-    /** Straight line that separates commands. **/
-    private static final String STRAIGHT_LINE =
-            "_______________________________________________________________________________________________";
+    public static void run() {
+        //Prepare components
+        Ui userInterface = new Ui();
+        Storage storage = new Storage("data", "tasks.txt");
+        TaskList taskList = new TaskList();
+        Parser parser = new Parser();
 
 
-    /** File path where the data file should be stored in. **/
-    private static final String DATA_FILE_PATH = Paths.get(System.getProperty("user.dir"), "data", "tasks.txt")
-            .toString();
-    
-    /** Commands that supported by the chatbot. */
-    private static final String COMMAND_LIST =
-            "1. list -> Provides a list of existing tasks.\n"
-                    + "2. mark X -> Marks task number X as done.\n"
-                    + "3. unmark X -> Marks task number X as undone.\n"
-                    + "4. todo taskName -> Creates a todo task with name taskName.\n"
-                    + "5. deadline taskName /by date -> Creates a deadline task with name taskName and deadline date.\n"
-                    + "6. event taskName /from startDate /to endDate -> Creates an event task with name taskName,\n"
-                    + "   start date startDate, and end date endDate.\n"
-                    + "7. delete X -> Deletes task number X from the list.\n"
-                    + "8. on givenDate -> Displays all the tasks that occur on givenDate.\n"
-                    + "9. help -> Prints the list of commands supported by this bot.\n\n"
-                    + "Please enter dates in the format of either yyyy-MM-dd hh:mm or yyyy-MM-dd.";
+        //Prepare data file
+        if (! storage.prepareFile()) {
+            //Shuts down the bot as data file cannot be created successfully
+            userInterface.printShutDownMessage();
+            return;
+        }
+
+        //Load data from data file
+        if (! storage.loadTasksFromFile(taskList)) {
+            //Cannot read from data file. Start with new empty task list.
+            taskList = new TaskList();
+        }
+
+        //Read in and process user commands
+
+
+
+
+
+
+
+
+
+
+
+
+    }
+
+
+
+
 
 
     /**
@@ -56,38 +77,7 @@ public class Duke {
      * @param args The command line arguments that one can type.
      */
     public static void main(String[] args) {
-        //Prints introduction
-        printIntroductoryMessage();
 
-        //Checks if user has a data file that stores task history
-        if (isFirstRun()) {
-            //User's first time running the bot. Create relevant folder and file.
-            try {
-                createFile();
-            } catch (IOException e) {
-                System.out.println(STRAIGHT_LINE);
-                System.out.println("Could not create data file to store task history. The following error occurred:");
-                System.out.println(e.getMessage());
-                System.out.println(STRAIGHT_LINE);
-                return;
-            }
-        }
-
-        //Restores task history if present
-        ArrayList<Task> tasks = new ArrayList<Task>();
-        try {
-            boolean isSuccessful = restoreTaskHistory(tasks);
-            if (! isSuccessful) {
-                return;
-            }
-        } catch (FileNotFoundException e) {
-            System.out.println(STRAIGHT_LINE);
-            System.out.println("Data file is missing. The following error occurred: ");
-            System.out.println(e.getMessage());
-            System.out.println(STRAIGHT_LINE);
-        }
-
-        
         //Prepare input source
         Scanner sc = new Scanner(System.in);
 
@@ -383,98 +373,10 @@ public class Duke {
     }
 
 
-    /**
-     * Prints the introductory message.
-     */
-    public static void printIntroductoryMessage() {
-        System.out.println(logo);
-        System.out.println(STRAIGHT_LINE);
-        System.out.println("Boo! Nice to meet you.");
-        System.out.println("I am here to scare all your problems away by keeping track of your tasks.");
-        System.out.println("What can I help you with today?\n");
-        System.out.println("Supported Commands:");
-        System.out.println(COMMAND_LIST);
-        System.out.println(STRAIGHT_LINE);
-    }
 
-    /**
-     * Prints the exit message.
-     */
-    public static void printExitMessage() {
-        System.out.println(STRAIGHT_LINE);
-        System.out.println("Goodbye. Hope that I have managed to scare all your problems away.");
-        System.out.println("Have a great day! :)");
-        System.out.println(STRAIGHT_LINE);
-    }
 
-    /**
-     * Prints out all the user tasks that have been entered by the user thus far.
-     *
-     * @param tasks The ArrayList that stores the user tasks to be printed out.
-     */
-    public static void printUserTasks(ArrayList<Task> tasks) {
-        System.out.println(STRAIGHT_LINE);
-        if (tasks.size() == 0) {
-            System.out.println("There are currently no tasks in your list.");
-            System.out.println(STRAIGHT_LINE);
-            return;
-        }
-        System.out.println("Here are the tasks in your list:");
-        int numberOfTasks= tasks.size();
-        //Process each task in the storage
-        for (int i = 0; i < numberOfTasks; i = i + 1) {
-            String numbering = Integer.toString(i + 1) + ". ";
-            String output = numbering + tasks.get(i).getStatusOfTaskInString();
-            System.out.println(output);
-        }
-        System.out.println(STRAIGHT_LINE);
-    }
 
-    /**
-     * Adds user task into storage and informs the user.
-     *
-     * @param taskToAdd The task to be added to storage.
-     * @param tasks The ArrayList that stores the tasks.
-     */
-    public static void addTask(Task taskToAdd, ArrayList<Task> tasks) {
-        tasks.add(taskToAdd);
-        System.out.println(STRAIGHT_LINE);
-        System.out.println("Added task to list:");
-        System.out.println(taskToAdd.getStatusOfTaskInString());
-        if (tasks.size() == 1) {
-            System.out.println("Currently, there is 1 task in your list.");
-        } else {
-            System.out.println("Currently, there are " + Integer.toString(tasks.size())
-                    + " tasks in your list.");
-        }
-        System.out.println(STRAIGHT_LINE);
-    }
 
-    /**
-     * Marks a task as done and informs the user.
-     *
-     * @param currentTask The task to be marked as done.
-     */
-   public static void markAsDone(Task currentTask) {
-       currentTask.setDoneStatus();
-       System.out.println(STRAIGHT_LINE);
-       System.out.println("Poof! One less worry. The following task is now marked as done:");
-       System.out.println(currentTask.getStatusOfTaskInString());
-       System.out.println(STRAIGHT_LINE);
-   }
-
-    /**
-     * Marks a task as undone and informs the user.
-     *
-     * @param currentTask The task to be marked as undone.
-     */
-    public static void markAsUndone(Task currentTask) {
-        currentTask.setUndoneStatus();
-        System.out.println(STRAIGHT_LINE);
-        System.out.println("Alright! The following task is now marked as undone. I will help you keep an eye on it.");
-        System.out.println(currentTask.getStatusOfTaskInString());
-        System.out.println(STRAIGHT_LINE);
-    }
 
     /**
      * Prints a message indicating to the user that the command is invalid.
@@ -675,35 +577,6 @@ public class Duke {
     }
 
 
-    /*
-     * Returns a Temporal that encapsulates date and or time information.
-     *
-     * @param rawDateString The raw String that contains date and or time information.
-     * @return the Temporal with the date and or time information.
-     * @throws DateTimeParseException if the raw String is not of the correct date format
-     *                                as requested in the command list of the bot.
-     */
-    public static Temporal getDateObject(String rawDateString)
-            throws DateTimeParseException {
-        //Possible formats, with and without time
-        String timePatternOne = "yyyy-MM-dd HH:mm";
-        String timePatternTwo = "yyyy-MM-dd";
-        DateTimeFormatter formatterWithTime = DateTimeFormatter.ofPattern(timePatternOne);
-        DateTimeFormatter formatterWithoutTime = DateTimeFormatter.ofPattern(timePatternTwo);
-
-        //Determine which format
-        boolean hasTime = (rawDateString.length() > timePatternTwo.length());
-        DateTimeFormatter formatterToUse = (hasTime)
-                ? formatterWithTime
-                : formatterWithoutTime;
-        if (hasTime) {
-            //A date with time
-            return LocalDateTime.parse(rawDateString, formatterToUse);
-        } else {
-            //A date without time
-            return LocalDate.parse(rawDateString, formatterToUse);
-        }
-    }
 
     /**
      * Determines if two dates specify a valid duration.

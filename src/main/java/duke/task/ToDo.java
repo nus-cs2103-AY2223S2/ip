@@ -1,3 +1,4 @@
+package duke.task;
 /**
  * Represents a to-do Task that can be kept track of, having no date or time attached to it.
  */
