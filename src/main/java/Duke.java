@@ -58,10 +58,10 @@ public class Duke {
             case "todo": {
                 try {
                     list.add(new ToDo(split[1]));
+                    System.out.println("Added: " + split[1]);
                 } catch (ArrayIndexOutOfBoundsException e) {
                     System.out.println("Description cannot be empty for todo");
                 }
-                System.out.println("Added: " + split[1]);
                 break;
             }
             case "deadline": {
