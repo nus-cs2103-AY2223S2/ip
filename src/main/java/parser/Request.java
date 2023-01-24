@@ -46,6 +46,8 @@ public class Request {
     private void preprocess() {
         this.requestType = this.request.split(" ", 2)[0].toUpperCase();
 
-        this.requestContent = this.request.split(" ", 2).length == 2 ? this.request.split(" ", 2)[1] : "";
+        this.requestContent = this.request.split(" ", 2).length == 2
+                              ? this.request.split(" ", 2)[1]
+                              : "";
     }
 }

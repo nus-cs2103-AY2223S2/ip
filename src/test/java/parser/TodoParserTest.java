@@ -12,7 +12,7 @@ public class TodoParserTest {
     public void shouldParseCorrectly() {
         Command actual = new TodoParser().parse("demo");
         Command expected = new TodoCommand("demo");
-        assertEquals(actual, expected);
+        assertEquals(expected, actual);
     }
 
     @Test

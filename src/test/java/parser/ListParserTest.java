@@ -10,6 +10,6 @@ public class ListParserTest {
     public void shouldParseCorrectly() {
         Command actual = new ListParser().parse("");
         Command expected = new ListCommand();
-        assertEquals(actual, expected);
+        assertEquals(expected, actual);
     }
 }

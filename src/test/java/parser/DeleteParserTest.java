@@ -13,7 +13,7 @@ public class DeleteParserTest {
     public void shouldParseCorrectly() {
         Command actual = new DeleteParser().parse("1");
         Command expected = new DeleteCommand(0);
-        assertEquals(actual, expected);
+        assertEquals(expected, actual);
     }
 
     @Test

@@ -13,14 +13,14 @@ public class OnParser implements Parser {
         String dateString = requestContent.trim();
         if ("".equals(dateString)) {
             throw new MissingArgumentException("The date to be queried cannot be empty. "
-                + "Format: on [YYYY-MM-DD]");
+                    + "Format: on [YYYY-MM-DD]");
         }
         try {
             LocalDate queryDate = LocalDate.parse(requestContent.trim());
             return new OnCommand(queryDate);
         } catch (DateTimeParseException error) {
             throw new InvalidArgumentException(
-                "Query date format should be in the format YYYY-MM-DD (e.g. 2007-12-03)");
+                    "Query date format should be in the format YYYY-MM-DD (e.g. 2007-12-03)");
         }
     }
 }

@@ -13,7 +13,7 @@ public class UnmarkParserTest {
     public void shouldParseCorrectly() {
         Command actual = new UnmarkParser().parse("1");
         Command expected = new UnmarkCommand(0);
-        assertEquals(actual, expected);
+        assertEquals(expected, actual);
     }
 
     @Test

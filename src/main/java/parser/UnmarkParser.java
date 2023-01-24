@@ -10,7 +10,7 @@ public class UnmarkParser implements Parser {
     public Command parse(String requestContent) throws MissingArgumentException, InvalidArgumentException {
         if ("".equals(requestContent.trim())) {
             throw new MissingArgumentException("The index to be marked uncompleted cannot be empty. "
-                + "Format: unmark [index]");
+                    + "Format: unmark [index]");
         }
         try {
             int index = Integer.parseInt(requestContent.trim()) - 1;

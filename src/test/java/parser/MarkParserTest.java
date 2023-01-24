@@ -13,7 +13,7 @@ public class MarkParserTest {
     public void shouldParseCorrectly() {
         Command actual = new MarkParser().parse("1");
         Command expected = new MarkCommand(0);
-        assertEquals(actual, expected);
+        assertEquals(expected, actual);
     }
 
     @Test

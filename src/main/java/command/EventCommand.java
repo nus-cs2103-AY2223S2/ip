@@ -29,8 +29,8 @@ public class EventCommand extends Command {
             throw new InvalidArgumentException("End date must not be earlier than start date.");
         }
         Event newEvent = taskList.createEvent(this.task, this.startTime, this.endTime);
-        return "Got it. I've added this task:\n" + newEvent + "\nNow you have " + taskList.countTask() +
-            " tasks in the list.";
+        return "Got it. I've added this task:\n" + newEvent + "\nNow you have " + taskList.countTask()
+                + " tasks in the list.";
     }
 
     @Override

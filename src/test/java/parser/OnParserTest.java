@@ -14,7 +14,7 @@ public class OnParserTest {
     public void shouldParseCorrectly() {
         Command actual = new OnParser().parse("2023-01-01");
         Command expected = new OnCommand(LocalDate.parse("2023-01-01"));
-        assertEquals(actual, expected);
+        assertEquals(expected, actual);
     }
 
     @Test

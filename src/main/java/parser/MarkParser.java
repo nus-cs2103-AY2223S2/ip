@@ -10,7 +10,7 @@ public class MarkParser implements Parser {
     public Command parse(String requestContent) throws MissingArgumentException, InvalidArgumentException {
         if ("".equals(requestContent.trim())) {
             throw new MissingArgumentException(
-                "The index to be marked completed cannot be empty. " + "Format: mark [index]");
+                    "The index to be marked completed cannot be empty. " + "Format: mark [index]");
         }
         try {
             int index = Integer.parseInt(requestContent.trim()) - 1;

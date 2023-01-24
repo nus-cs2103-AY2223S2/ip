@@ -14,7 +14,7 @@ public class EventParserTest {
     public void shouldParseCorrectly() {
         Command actual = new EventParser().parse("demo /from 2023-01-01 /to 2024-01-01");
         Command expected = new EventCommand("demo", LocalDate.parse("2023-01-01"), LocalDate.parse("2024-01-01"));
-        assertEquals(actual, expected);
+        assertEquals(expected, actual);
     }
 
     @Test

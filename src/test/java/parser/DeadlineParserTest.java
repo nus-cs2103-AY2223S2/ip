@@ -14,7 +14,7 @@ public class DeadlineParserTest {
     public void shouldParseCorrectly() {
         Command actual = new DeadlineParser().parse("demo /by 2023-01-01");
         Command expected = new DeadlineCommand("demo", LocalDate.parse("2023-01-01"));
-        assertEquals(actual, expected);
+        assertEquals(expected, actual);
     }
 
     @Test

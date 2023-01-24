@@ -23,7 +23,7 @@ public class Event extends Task {
         if (date.isBefore(this.startTime)) {
             return ChronoUnit.DAYS.between(date, this.startTime);
         } else if (date.isAfter(this.endTime)) {
-            return ChronoUnit.DAYS.between(date, this.startTime);
+            return ChronoUnit.DAYS.between(date, this.endTime);
         } else {
             return 0;
         }
@@ -32,12 +32,12 @@ public class Event extends Task {
     @Override
     public String toString() {
         return String.format("[E]%s %s (from: %s to: %s)", super.formattedStatus(), super.task,
-            super.formattedDate(this.startTime), super.formattedDate(this.endTime));
+                super.formattedDate(this.startTime), super.formattedDate(this.endTime));
     }
 
     @Override
     public String toDataString() {
-        return "E | " + (this.isCompleted ? "1" : "0") + " | " + this.task + " | " + this.startTime + " | "
-            + this.endTime;
+        return "E | " + (this.isCompleted ? "1" : "0") + " | " + super.task + " | " + this.startTime + " | "
+                + this.endTime;
     }
 }

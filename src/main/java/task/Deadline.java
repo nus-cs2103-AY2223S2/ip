@@ -24,11 +24,11 @@ public class Deadline extends Task {
     @Override
     public String toString() {
         return String.format("[D]%s %s (by: %s)", super.formattedStatus(), super.task,
-            super.formattedDate(this.deadline));
+                super.formattedDate(this.deadline));
     }
 
     @Override
     public String toDataString() {
-        return "D | " + (this.isCompleted ? "1" : "0") + " | " + this.task + " | " + this.deadline;
+        return "D | " + (this.isCompleted ? "1" : "0") + " | " + super.task + " | " + this.deadline;
     }
 }

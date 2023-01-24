@@ -12,6 +12,6 @@ public class Todo extends Task {
 
     @Override
     public String toDataString() {
-        return "T | " + (this.isCompleted ? "1" : "0") + " | " + this.task;
+        return "T | " + (this.isCompleted ? "1" : "0") + " | " + super.task;
     }
 }

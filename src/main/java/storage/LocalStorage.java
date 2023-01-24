@@ -69,13 +69,13 @@ public class LocalStorage {
                         String eventStartTimeString = data[3];
                         String eventEndTimeString = data[4];
                         new EventCommand(task, LocalDate.parse(eventStartTimeString),
-                            LocalDate.parse(eventEndTimeString))
-                            .run(taskList);
+                                LocalDate.parse(eventEndTimeString))
+                                .run(taskList);
                         break;
                     default:
                         System.out.println("Error occurs at: " + s);
                         throw new UnknownCommandException("Datafile provided is corrupted,"
-                            + "create a new file or follow the format.");
+                                + "create a new file or follow the format.");
                     }
 
                     switch (taskIsCompleted) {
@@ -88,13 +88,13 @@ public class LocalStorage {
                     default:
                         System.out.println("Error occurs at: " + s);
                         throw new UnknownCommandException("Datafile provided is corrupted,"
-                            + "create a new file or follow the format.");
+                                + "create a new file or follow the format.");
                     }
 
                     currIndex++;
                 } catch (IndexOutOfBoundsException error) {
                     throw new InvalidArgumentException("Datafile provided is corrupted,"
-                        + "create a new file or follow the format.");
+                            + "create a new file or follow the format.");
                 }
             }
 
