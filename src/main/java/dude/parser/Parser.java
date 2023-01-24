@@ -3,7 +3,6 @@ package dude.parser;
 import dude.exception.DudeException;
 import dude.task.Deadline;
 import dude.task.Event;
-import dude.task.Task;
 import dude.task.Todo;
 import dude.command.*;
 
@@ -17,8 +16,15 @@ public class Parser {
 
     public static Command parse(String command) throws DudeException{
         String[] cmd = command.split(" ", 2);
-        CommandType commandType = CommandType.valueOf(cmd[0].toUpperCase());
         String[] format;
+
+        CommandType commandType;
+
+        try {
+            commandType = CommandType.valueOf(cmd[0].toUpperCase());
+        } catch (IllegalArgumentException e){
+            throw new DudeException("\tUhh... You give me wrong command leh");
+        }
 
         validate(commandType, command);
 
@@ -42,8 +48,9 @@ public class Parser {
                 return new AddCommand(new Event(format[0], details[0], details[1]));
             case DELETE:
                 return new DeleteCommand(Integer.parseInt(cmd[1]));
+            default:
+                throw new DudeException("\tUhh... You give me wrong command leh");
         }
-        return new ExitCommand();
     }
 
     public static void validate(CommandType commandType, String command) throws DudeException {
@@ -108,7 +115,7 @@ public class Parser {
                 String[] details = format[1].split(" /to ");
 
                 try {
-                    if (LocalDate.parse(details[0]).compareTo(LocalDate.parse(details[1])) < 0) {
+                    if (LocalDate.parse(details[0]).isBefore(LocalDate.parse(details[1]))) {
                         throw new DudeException("\tUhh... Your start date must be earlier than your end date");
                     }
                 }  catch (DateTimeParseException e) {
