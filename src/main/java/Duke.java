@@ -1,5 +1,11 @@
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 import java.util.Scanner;
 
@@ -8,6 +14,26 @@ public class Duke {
         TODO, DEADLINE, EVENT
     }
     private static List<Task> listOfTasks = new ArrayList<>();
+    private static Storage storage;
+
+    public static void loadFile() throws IOException {
+        String fileSep = System.getProperty("file.separator");
+        String userDir = System.getProperty("user.dir");
+        Path foldPath = Paths.get( userDir + fileSep + "data");
+        Path filePath = Paths.get(foldPath + fileSep + "duke.txt");
+        try {
+            if (!Files.isDirectory(foldPath)) {
+                Files.createDirectory(foldPath);
+                Files.createFile(filePath);
+            } else if (!Files.exists(filePath)) {
+                Files.createFile(filePath);
+            }
+            storage = new Storage(filePath.toString());
+            listOfTasks = storage.load();
+        } catch (IOException e) {
+            System.out.println("Error");
+        }
+    }
 
     public static void printLine(){
         System.out.println("\t____________________________________________________________");
@@ -25,78 +51,58 @@ public class Duke {
         printLine();
     }
 
-    public static void saveTask(String command) throws DukeException {
-        int startIdx, endIdx;
-        Task task;
-        String description, by, from, to;
-        String[] input = command.split(" ");
-        TypeOfTask taskType = null;
 
-        if (input[0].equalsIgnoreCase("todo")) {
+    public static void saveTask(String command) throws DukeException, DateTimeParseException {
+        Task task;
+        String description;
+        String firstWord = command.split(" ")[0];
+        TypeOfTask taskType = null;
+        DateTimeFormatter format = DateTimeFormatter.ofPattern("dd/MM/yyyy HHmm");
+
+        if (firstWord.equalsIgnoreCase("todo")) {
             taskType = TypeOfTask.TODO;
-        } else if (input[0].equalsIgnoreCase("deadline")) {
+        } else if (firstWord.equalsIgnoreCase("deadline")) {
             taskType = TypeOfTask.DEADLINE;
-        } else if (input[0].equalsIgnoreCase("event")) {
+        } else if (firstWord.equalsIgnoreCase("event")) {
             taskType = TypeOfTask.EVENT;
         }
 
         try {
             switch (taskType) {
             case TODO:
-                startIdx = 1;
-                endIdx = input.length;
-                description = stringConverter(input, startIdx, endIdx);
-                if (description.isBlank()) {
-                    throw new DukeException(input[0]);
-                }
-
+                description = command.substring(5);
                 task = new Todo(description);
                 break;
             case DEADLINE:
-                startIdx = 1;
-                endIdx = Arrays.asList(input).indexOf("/by");
-                description = stringConverter(input, startIdx, endIdx);
-                if (description.isBlank()) {
-                    throw new DukeException(input[0]);
-                }
-
-                startIdx = endIdx + 1;
-                endIdx = input.length;
-                by = stringConverter(input, startIdx, endIdx);
-
+                int byIdx = command.indexOf("/by");
+                description = command.substring(9, byIdx - 1);
+                LocalDateTime by = LocalDateTime.parse(command.substring(byIdx + 4), format);
                 task = new Deadline(description, by);
                 break;
             case EVENT:
-                startIdx = 1;
-                endIdx = Arrays.asList(input).indexOf("/from");
-                description = stringConverter(input, startIdx, endIdx);
-                if (description.isBlank()) {
-                    throw new DukeException(input[0]);
-                }
-
-                startIdx = endIdx + 1;
-                endIdx = Arrays.asList(input).indexOf("/to");
-                from = stringConverter(input, startIdx, endIdx);
-
-                startIdx = endIdx + 1;
-                endIdx = input.length;
-                to = stringConverter(input, startIdx, endIdx);
-
+                int fromIdx = command.indexOf("/from");
+                int toIdx = command.indexOf("/to");
+                description = command.substring(6, fromIdx - 1);
+                LocalDateTime from = LocalDateTime.parse(command.substring(fromIdx + 6, toIdx - 1), format);
+                LocalDateTime to = LocalDateTime.parse(command.substring(toIdx + 4), format);
                 task = new Event(description, from, to);
                 break;
             default:
                 throw new DukeException();
             }
+            listOfTasks.add(task);
+            printLine();
+            System.out.println("\tGot it. I've added this task:");
+            System.out.println("\t  " + task);
+            System.out.println("\tNow you have " + listOfTasks.size() + " tasks in the list.");
+            printLine();
         } catch (NullPointerException e) {
             throw new DukeException();
+        } catch (DateTimeParseException e) {
+            System.out.println("Incorrect date time format. Use dd/mm/yyyy HHmm instead.");
+        } catch(StringIndexOutOfBoundsException e) {
+            throw new DukeException(firstWord);
         }
-
-        listOfTasks.add(task);
-        printLine();
-        System.out.println("\tGot it. I've added this task:");
-        System.out.println("\t  " + task);
-        System.out.println("\tNow you have " + listOfTasks.size() + " tasks in the list.");
-        printLine();
     }
 
     public static void listTasks() {
@@ -153,40 +159,35 @@ public class Duke {
         }
     }
 
-    public static String stringConverter(String[] arr, int startIdx, int endIdx) {
-        StringBuilder strBuild = new StringBuilder();
-        String str;
-        for (int i = startIdx; i < endIdx; i++) {
-            strBuild.append(arr[i]);
-            if (i == endIdx - 1) {
-                break;
-            }
-            strBuild.append(" ");
-        }
-        str = strBuild.toString();
-        return str;
-    }
-
-    public static void main(String[] args) throws DukeException {
+    public static void main(String[] args) throws DukeException, IOException {
+        loadFile();
         Scanner input = new Scanner(System.in);
         String command, firstWord;
         greet();
         while (true) {
-            command = input.nextLine().trim();
-            firstWord = command.split(" ")[0];
-            if (command.equalsIgnoreCase("bye")) {
-                exit();
-                break;
-            } else if (command.equalsIgnoreCase("list")) {
-                listTasks();
-            } else if (firstWord.equalsIgnoreCase("mark")) {
-                markTask(command);
-            } else if (firstWord.equalsIgnoreCase("unmark")) {
-                unmarkTask(command);
-            } else if (firstWord.equalsIgnoreCase("delete")) {
-                deleteTask(command);
-            } else {
-                saveTask(command);
+            try {
+                command = input.nextLine().trim();
+                firstWord = command.split(" ")[0];
+                if (command.equalsIgnoreCase("bye")) {
+                    exit();
+                    break;
+                } else if (command.equalsIgnoreCase("list")) {
+                    listTasks();
+                } else if (firstWord.equalsIgnoreCase("mark")) {
+                    markTask(command);
+                    storage.save();
+                } else if (firstWord.equalsIgnoreCase("unmark")) {
+                    unmarkTask(command);
+                    storage.save();
+                } else if (firstWord.equalsIgnoreCase("delete")) {
+                    deleteTask(command);
+                    storage.save();
+                } else {
+                    saveTask(command);
+                    storage.save();
+                }
+            } catch (IOException e) {
+                System.out.println("Error!!!");
             }
         }
         input.close();
