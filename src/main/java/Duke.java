@@ -1,13 +1,18 @@
-import javax.swing.event.SwingPropertyChangeSupport;
+import java.util.Scanner;
 
 public class Duke {
     public static void main(String[] args) {
-        String logo = " ____        _        \n"
-                + "|  _ \\ _   _| | _____ \n"
-                + "| | | | | | | |/ / _ \\\n"
-                + "| |_| | |_| |   <  __/\n"
-                + "|____/ \\__,_|_|\\_\\___|\n";
-        System.out.println("Hello from\n" + logo);
-        System.out.println("Hi");
+        System.out.println("Hello I'm Duke\nWhat can I do for you?");
+        Scanner scan = new Scanner(System.in);
+        
+        while (true) {
+            String textInput = scan.nextLine();
+            if (textInput.equalsIgnoreCase("bye")) {
+                System.out.println("Bye. Hope to see you again soon!");
+                scan.close();
+                return;
+            }
+            System.out.println(textInput);
+        }
     }
 }
