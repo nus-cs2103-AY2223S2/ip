@@ -23,6 +23,7 @@ public class Parser {
         strToCommand.put("delete", new DeleteCommand());
         strToCommand.put("mark", new MarkCommand());
         strToCommand.put("unmark", new UnmarkCommand());
+        strToCommand.put("find", new FindCommand());
         strToCommand.put("list", new ListCommand());
         strToCommand.put("bye", new ByeCommand());
     }
