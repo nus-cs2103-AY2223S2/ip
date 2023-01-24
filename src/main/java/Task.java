@@ -25,5 +25,5 @@ public abstract class Task {
         return String.format("[%s] %s", this.getStatusIcon(), this.description);
     }
 
-    public abstract void writeToString(String filePath) throws DukeWriteException;
+    public abstract String save();
 }

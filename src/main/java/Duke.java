@@ -1,52 +1,45 @@
+import java.util.Arrays;
 import java.util.Scanner;
 
 public class Duke {
-    public static void main(String[] args) {
+
+    private final Storage storage;
+    private TaskList tasks;
+    private final Ui ui;
+    private Parser parser;
+
+    public Duke(String path) {
+        ui = new Ui();
+        storage = new Storage(path);
         try {
-            TaskList list = new TaskList();
-            printText("\t Hello! I'm Duke\n\t What can I do for you?");
-            Scanner scanner = new Scanner(System.in);
-            String input = scanner.next();
-            while (!input.equals("bye")) {
-                try {
-                    printText(executeCommand(list, input, scanner.nextLine()));
-
-                } catch (DukeException dukeException) {
-                    printText(dukeException.getMessage());
-                }
-                input = scanner.next();
-            }
-            list.writeToFile();
-        } catch (DukeException dukeException){
-            printText(dukeException.getMessage());
+            tasks = new TaskList(storage.loadSaveFile());
+        } catch (DukeException e){
+            ui.showLoadingError();
+            tasks = new TaskList();
         }
-        printText("\t Bye. Hope to see you again soon!");
+        parser = new Parser(tasks);
     }
 
-    private static void printText(String s) {
-        System.out.println("\t____________________________________________________________");
-        System.out.println(s);
-        System.out.println("\t____________________________________________________________\n");
+    public static void main(String[] args) {
+        new Duke("data/tasks.txt").run();
     }
 
-    private static String executeCommand(TaskList list, String fn, String info) throws DukeException {
-        switch(fn) {
-            case "list":
-                return list.list();
-            case "mark":
-                return list.mark(info.strip());
-            case "unmark":
-                return list.unMark(info.strip());
-            case "delete":
-                return list.delete(info.strip());
-            case "todo":
-                return list.add(TaskType.ToDos, info.strip());
-            case "deadline":
-                return list.add(TaskType.Deadlines, info.strip());
-            case "event":
-                return list.add(TaskType.Events, info.strip());
-            default:
-                throw new DukeUnknownCommandException();
+    public void run() {
+        this.ui.greet();
+        String input = "";
+        do {
+            try {
+                input = this.ui.getUserInput();
+                this.ui.printResponse(parser.parseAndExecute(input));
+            } catch (DukeException e) {
+                this.ui.printException(e);
+            }
+        } while (!input.equals("bye"));
+
+        try {
+            this.storage.save(tasks.getTasks());
+        } catch (DukeException e){
+            this.ui.printException(e);
         }
     }
 }

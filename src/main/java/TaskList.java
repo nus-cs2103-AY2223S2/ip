@@ -8,12 +8,14 @@ import java.util.ArrayList;
 import java.util.Scanner;
 
 public class TaskList {
-    private final ArrayList<Task> list = new ArrayList<>();
-    private final String savePath = "data/Tasks.txt";
-    private final File saveFile = new File(savePath);
+    private final ArrayList<Task> list;
 
-    public TaskList() throws DukeException {
-        this.loadSaveFile();
+    public TaskList() {
+        this.list = new ArrayList<>();
+    }
+
+    public TaskList(ArrayList<Task> tasks) {
+        this.list = tasks;
     }
 
     public String add(TaskType type, String s) throws DukeException {
@@ -47,7 +49,6 @@ public class TaskList {
                 LocalDateTime localBy = LocalDateTime.parse(by, DateTimeFormatter.ofPattern("d/M/yyyy HHmm"));
                 deadline = new Deadlines(desc, false, localBy);
             } catch (DateTimeParseException dateTimeParseException) {
-                System.out.println(dateTimeParseException.getMessage());
                 deadline = new Deadlines(desc, false, by);
             } finally {
                 list.add(deadline);
@@ -136,16 +137,8 @@ public class TaskList {
         return output.substring(0, output.length() - 1);
     }
 
-    public void writeToFile() throws DukeWriteException, DukeFileCreationException {
-        saveFile.delete();
-        try {
-            saveFile.createNewFile();
-        } catch (IOException e) {
-            throw new DukeFileCreationException();
-        }
-        for (Task task : list) {
-            task.writeToString(savePath);
-        }
+    public ArrayList getTasks() {
+        return list;
     }
 
     private static int stringToInt(String s) throws DukeInvalidTaskNumberException {
@@ -153,54 +146,6 @@ public class TaskList {
             return Integer.parseInt(s);
         } catch (NumberFormatException e) {
             throw new DukeInvalidTaskNumberException();
-        }
-    }
-
-    private void loadSaveFile() throws DukeFileCreationException, DukeReadException {
-        Scanner scanner;
-
-        try {
-            if (!saveFile.getParentFile().exists()) {
-                saveFile.getParentFile().mkdirs();
-            }
-            if (!saveFile.exists()) {
-                saveFile.createNewFile();
-            }
-        } catch (IOException e) {
-            throw new DukeFileCreationException();
-        }
-
-        try {
-            scanner = new Scanner(saveFile);
-        } catch (FileNotFoundException ignored) {
-            throw new DukeReadException();
-        }
-
-        while (scanner.hasNext()) {
-            String fn = scanner.next();
-            String[] details = scanner.nextLine()
-                    .strip()
-                    .split("-");
-            switch (fn) {
-                case "todo":
-                    list.add(new ToDos(details[0],
-                        Boolean.parseBoolean(details[1])
-                    ));
-                    break;
-                case "deadline":
-                    list.add(new Deadlines(details[0],
-                        Boolean.parseBoolean(details[1]),
-                        details[2]
-                    ));
-                    break;
-                case "event":
-                    list.add(new Events(details[0],
-                        Boolean.parseBoolean(details[1]),
-                        details[2],
-                        details[3]
-                    ));
-                    break;
-            }
         }
     }
 

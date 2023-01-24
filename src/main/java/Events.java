@@ -31,13 +31,7 @@ public class Events extends Task{
     }
 
     @Override
-    public void writeToString(String filePath) throws DukeWriteException {
-        try {
-            FileWriter fw = new FileWriter(filePath, true);
-            fw.write(String.format("event %s-%s-%s-%s\n", this.description, this.isDone, this.from, this.to));
-            fw.close();
-        } catch (IOException ioException) {
-            throw new DukeWriteException(this.toString());
-        }
+    public String save() {
+        return String.format("event %s-%s-%s-%s\n", this.description, this.isDone, this.from, this.to);
     }
 }
