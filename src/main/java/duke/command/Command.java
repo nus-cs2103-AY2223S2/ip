@@ -1,3 +1,13 @@
+package duke.command;
+
+import duke.exception.DukeException;
+import duke.parser.Parser;
+import duke.task.Deadline;
+import duke.task.Event;
+import duke.task.ToDo;
+import duke.tasklist.TaskList;
+import duke.ui.Ui;
+
 import java.time.LocalDate;
 
 public class Command {

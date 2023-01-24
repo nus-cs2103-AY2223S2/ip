@@ -1,9 +1,13 @@
+package duke.ui;
+
+import duke.task.Task;
+
 /**
  * Deals with interactions with the user
  */
 public class Ui {
     public void sendGreetingsMessage() {
-        System.out.println("Hello I'm Duke\n" + "What can I do for you?");
+        System.out.println("Hello I'm duke.Duke\n" + "What can I do for you?");
     }
 
     public void sendGoodByeMessage() {

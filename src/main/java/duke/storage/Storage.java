@@ -1,3 +1,12 @@
+package duke.storage;
+
+import duke.exception.DukeException;
+import duke.task.Deadline;
+import duke.task.Event;
+import duke.task.Task;
+import duke.task.ToDo;
+import duke.tasklist.TaskList;
+
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
@@ -6,7 +15,7 @@ import java.util.ArrayList;
 import java.util.Scanner;
 
 /**
- *  Storage to handle loading and saving of TaskList
+ *  duke.storage.Storage to handle loading and saving of duke.tasklist.TaskList
  *  (before interacting with user and after interacting with user)
  */
 public class Storage {
@@ -19,11 +28,11 @@ public class Storage {
     }
 
     /**
-     * Saves data from TaskList and store into file specified by this.filePath
+     * Saves data from duke.tasklist.TaskList and store into file specified by this.filePath
      *
      * @params list to be saved
      */
-    public void saveData(TaskList taskList) throws DukeException{
+    public void saveData(TaskList taskList) throws DukeException {
         try {
             FileWriter fileWriter = new FileWriter(this.filePath);
             for (int i = 0; i < taskList.getSize(); i ++) {
@@ -41,7 +50,7 @@ public class Storage {
     }
 
     /**
-     *  Load data from file path and stores it in an ArrayList for Duke
+     *  Load data from file path and stores it in an ArrayList for duke.Duke
      *
      * @return ArrayList containing tasks from file based on file path
      */

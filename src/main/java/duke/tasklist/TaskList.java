@@ -1,5 +1,9 @@
+package duke.tasklist;
+
 import java.util.ArrayList;
 
+import duke.exception.DukeException;
+import duke.task.Task;
 public class TaskList {
     protected ArrayList<Task> taskList;
 
@@ -15,7 +19,7 @@ public class TaskList {
         // handle errors out of range
         if (index < 0 || index >= this.getSize()) {
             int display = index + 1;
-            throw new DukeException("Task " + display + " does not exist.");
+            throw new DukeException("duke.task.Task " + display + " does not exist.");
         }
         return taskList.get(index);
     }
@@ -25,7 +29,7 @@ public class TaskList {
         // handle errors out of range
         if (index < 0 || index >= this.getSize()) {
             int display = index + 1;
-            throw new DukeException("Task " + display + " does not exist.");
+            throw new DukeException("duke.task.Task " + display + " does not exist.");
         }
         this.getTask(index).markAsDone();
         System.out.println("Nice! I've marked this task as done:");
@@ -37,7 +41,7 @@ public class TaskList {
         // handle errors out of range
         if (index < 0 || index >= this.getSize()) {
             int display = index + 1;
-            throw new DukeException("Task " + display + " does not exist.");
+            throw new DukeException("duke.task.Task " + display + " does not exist.");
         }
         this.getTask(index).markAsUndone();
         System.out.println("OK, I've marked this task as not done yet:");
@@ -56,7 +60,7 @@ public class TaskList {
         // handle errors out of range
         if (index < 0 || index >= this.getSize()) {
             int display = index + 1;
-            throw new DukeException("Task " + display + " does not exist.");
+            throw new DukeException("duke.task.Task " + display + " does not exist.");
         }
         System.out.println("Noted. I've removed this task:");
         System.out.println(this.getTask(index));
