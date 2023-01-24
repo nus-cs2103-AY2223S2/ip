@@ -49,7 +49,7 @@ class Deadline extends Task {
     LocalDate by;
 
     /**
-     * Initialize Deadline.
+     * Initialize deadline.
      * @param nameString
      * @param byOption
      */
@@ -59,7 +59,7 @@ class Deadline extends Task {
     }
 
     /**
-     * String representation of Deadline.
+     * String representation of deadline.
      */
     public String toString(){
         return String.format("[D][%s] %s (by: %s)",this.done ? "X" : " ", this.name, this.by);
@@ -70,7 +70,7 @@ class Event extends Task {
     LocalDate to;
 
     /**
-     * Initialize Event.
+     * Initialize event.
      * 
      * @param nameString
      * @param fromOption
@@ -83,7 +83,7 @@ class Event extends Task {
     }
 
     /**
-     * String representation of Event 
+     * String representation of event 
      */
     public String toString(){
         return String.format("[E][%s] %s (from: %s to %s)",this.done ? "X" : " ", this.name, this.from, this.to);

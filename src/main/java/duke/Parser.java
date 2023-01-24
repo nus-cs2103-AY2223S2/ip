@@ -139,6 +139,13 @@ class Parser {
             Ui.numberOutOfBounds();
         }
     }
+
+    /**
+     * Parses dateString to a given format.
+     * @param date
+     * @return
+     * @throws DateTimeParseException
+     */
     private static LocalDate parseDate(String date) throws DateTimeParseException {
         DateTimeFormatter format = DateTimeFormatter.ofPattern("yyyy-MM-dd");
         return LocalDate.parse(date, format);

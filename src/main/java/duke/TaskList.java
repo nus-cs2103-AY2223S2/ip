@@ -42,7 +42,7 @@ class TaskList {
     }
 
     /**
-     * delete Task object
+     * Delete Task object.
      * @param index
      * @return deleted task object
      * @throws IndexOutOfBoundsException
