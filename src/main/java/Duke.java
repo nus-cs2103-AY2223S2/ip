@@ -1,14 +1,13 @@
-
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.util.*;
 import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Scanner;
+import java.util.Objects;
 
 public class Duke {
     private final List<Task> tasks;
@@ -42,6 +41,7 @@ public class Duke {
     }
 
     private void exit() {
+        updateData();
         displayMessage("Bye. Hope to see you again soon!\n");
     }
 
@@ -76,7 +76,6 @@ public class Duke {
                 "\nNow you have " +
                 tasks.size() +
                 " tasks in the list\n");
-        updateData();
     }
 
     private void addToDo(String[] tokens) throws DukeException {
@@ -167,7 +166,6 @@ public class Duke {
             tasks.get(listIndex).setStatus("X");
             displayMessage("Nice! I've marked this task as done:\n" +
                     tasks.get(listIndex).toString() + "\n");
-            updateData();
         } catch (NumberFormatException e) {
             displayMessage("Please specify a numerical task index to mark\n");
         } catch (IndexOutOfBoundsException e) {
@@ -181,7 +179,6 @@ public class Duke {
             tasks.get(listIndex).setStatus(" ");
             displayMessage("OK, I've marked this task as not done yet:\n" +
                     tasks.get(listIndex).toString() + "\n");
-            updateData();
         } catch (NumberFormatException e) {
             displayMessage("Please specify a numerical task index to unmark\n");
         } catch (IndexOutOfBoundsException e) {
@@ -201,7 +198,6 @@ public class Duke {
             displayMessage("Noted. I've removed this task:\n" +
                     removed.toString() +
                     "\nNow you have " + tasks.size() + " tasks in the list\n");
-            updateData();
         } catch (NumberFormatException e) {
             displayMessage("please specify a valid number to delete entry\n");
         } catch (IndexOutOfBoundsException e) {

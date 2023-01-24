@@ -10,9 +10,13 @@ public class Deadline extends Task {
         this.dl = LocalDateTime.parse(deadline, DateTimeFormatter.ofPattern("yyyy-MM-dd/HH:mm"));
     }
 
-    Deadline(String name, String deadline, String status) {
+    protected Deadline(String name, String deadline, String status) {
         super(name, status);
-        this.dl = deadline;
+        try {
+            this.dl = LocalDateTime.parse(deadline, DateTimeFormatter.ofPattern("yyyy-MM-dd/HH:mm"));
+        } catch (DateTimeParseException e) {
+            this.dl = LocalDateTime.parse(deadline, DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm"));
+        }
     }
 
     @Override
