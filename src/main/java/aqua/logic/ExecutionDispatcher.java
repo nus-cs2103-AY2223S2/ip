@@ -34,6 +34,9 @@ public abstract class ExecutionDispatcher {
         };
     }
 
+    
+    public abstract Optional<ExecutionDispatcher> followUpDispatcher();
+
 
     public String dispatch() throws IllegalSyntaxException, ProcedureExecutionException {
         return task.execute();
@@ -48,7 +51,4 @@ public abstract class ExecutionDispatcher {
             }
         };
     }
-
-    
-    public abstract Optional<ExecutionDispatcher> followUpDispatcher();
 }

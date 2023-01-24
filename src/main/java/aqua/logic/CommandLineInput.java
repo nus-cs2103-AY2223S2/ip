@@ -18,13 +18,4 @@ public class CommandLineInput {
     public ExecutionDispatcher getDispatcher(AppManager manager) {
         return command.getDispatcher(args, manager);
     }
-
-
-    @Override
-    public String toString() {
-        return String.format("CommandLineInput(cmd=%s args=%s)",
-            command.toString(),
-            args.toString()
-        );
-    }
 }

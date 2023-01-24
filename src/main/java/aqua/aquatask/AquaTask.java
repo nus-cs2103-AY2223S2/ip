@@ -6,7 +6,7 @@ import java.util.Optional;
 import aqua.storage.Reloadable;
 
 public abstract class AquaTask implements Reloadable {
-    public static final String IS_COMPLETED_TAG = "completed";
+    public static final String TAG_IS_COMPLETE = "completed";
 
     private final String name;
 
@@ -15,8 +15,9 @@ public abstract class AquaTask implements Reloadable {
         this.name = name;
     }
 
+
     public AquaTask(AquaTask task) {
-        this.name = task.name;
+        this(task.name);
     }
 
 
@@ -37,8 +38,8 @@ public abstract class AquaTask implements Reloadable {
 
     public boolean isStarted() {
         return getStart()
-            .map(time -> LocalDateTime.now().isAfter(time))
-            .orElse(true);
+                .map(time -> LocalDateTime.now().isAfter(time))
+                .orElse(true);
     }
 
 
@@ -49,23 +50,24 @@ public abstract class AquaTask implements Reloadable {
 
     public boolean isEnded() {
         return getEnd()
-            .map(time -> LocalDateTime.now().isAfter(time))
-            .orElse(false);
+                .map(time -> LocalDateTime.now().isAfter(time))
+                .orElse(false);
     }
 
 
     @Override
     public String toString() {
         return String.format("%s%s %s",
-            getStatusString(),
-            getMarkString(),
-            getName()
-        );
+                getStatusString(),
+                getMarkString(),
+                getName());
     }
 
+
     private String getMarkString() {
-        return isComplete() ? "[X]" : "[ ]";
+        return (isComplete()) ? "[X]" : "[ ]";
     }
+
 
     private String getStatusString() {
         if (isEnded()) {

@@ -10,15 +10,17 @@ import aqua.exception.IllegalSyntaxException;
 public class DateUtils {
     public static LocalDateTime parse(String dateString) throws IllegalSyntaxException {
         try {
+            // yyyy-MM-ddThh:mm default format
             return LocalDateTime.parse(dateString);
         } catch (DateTimeParseException parseEx) {
             try {
                 if (dateString.matches("\\d{4}-\\d{1,2}-\\d{1,2} \\d{4}")) {
+                    // yyyy-MM-dd hhmm format
                     return LocalDateTime.parse(
-                        dateString,
-                        DateTimeFormatter.ofPattern("yyyy-M-d HHmm")
-                    );
+                            dateString,
+                            DateTimeFormatter.ofPattern("yyyy-M-d HHmm"));
                 } else if (dateString.matches("\\d{4}-\\d{1,2}-\\d{1,2}")) {
+                    // yyyy-MM-dd format
                     return LocalDateTime.parse(
                         dateString + " 0000",
                         DateTimeFormatter.ofPattern("yyyy-M-d HHmm")

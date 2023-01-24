@@ -5,8 +5,9 @@ import java.util.Optional;
 
 import aqua.util.DateUtils;
 
+
 public class AquaDeadline extends AquaTask {
-    public static final String BY_TAG = "by";
+    public static final String TAG_BY = "by";
 
     private final boolean isComplete;
     private final LocalDateTime by;
@@ -25,13 +26,13 @@ public class AquaDeadline extends AquaTask {
 
     @Override
     public AquaDeadline mark(boolean isComplete) {
-        return new AquaDeadline(this.getName(), isComplete, this.by);
+        return new AquaDeadline(getName(), isComplete, by);
     }
 
 
     @Override
     public boolean isComplete() {
-        return this.isComplete;
+        return isComplete;
     }
 
 
@@ -43,17 +44,17 @@ public class AquaDeadline extends AquaTask {
     
     @Override
     public String getReloadString() {
-        return String.format(
-            "deadline %s /%s %s /%s %s",
-            getName(),
-            BY_TAG, by,
-            IS_COMPLETED_TAG, isComplete
-        );
+        return String.format("deadline %s /%s %s /%s %s",
+                getName(),
+                TAG_BY, by,
+                TAG_IS_COMPLETE, isComplete);
     }
 
 
     @Override
     public String toString() {
-        return String.format("[D]%s (by: %s)", super.toString(), DateUtils.formatNice(by));
+        return String.format("[D]%s (by: %s)",
+                super.toString(),
+                DateUtils.formatNice(by));
     }
 }

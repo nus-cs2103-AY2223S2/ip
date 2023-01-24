@@ -14,27 +14,41 @@ public abstract class AddTaskCommand implements Command {
 
     @Override
     public ExecutionDispatcher getDispatcher(ArgumentMap args, AppManager manager) {
-        return ExecutionDispatcher.of(new ExecutionTask<AquaTask>(args, manager) {
-            @Override
-            public AquaTask process(ArgumentMap args, AppManager manager)
-                    throws IllegalSyntaxException {
-                AquaTask task = createTask(args);
-                manager.getTaskManager().add(task);
-                return task;
-            }
+        return ExecutionDispatcher.of(new AddTask(args, manager))
+                .setFollowUp(new WriteTaskCommand().getDispatcher(args, manager));
+    }
 
-            @Override
-            public String getDataDisplay(AquaTask task, AppManager manager) {
-                return String.format(
-                    "Hai okay desu! I have added the task:\n" +
-                    "/\n" +
-                    "  %s\n" +
-                    "\\\n" +
-                    "You now have %d tasks.",
+
+
+
+
+    private class AddTask extends ExecutionTask<AquaTask> {
+        AddTask(ArgumentMap args, AppManager manager) {
+            super(args, manager);
+        }
+
+
+        @Override
+        public AquaTask process(ArgumentMap args, AppManager manager) throws IllegalSyntaxException {
+            // create task
+            AquaTask task = createTask(args);
+
+            // add task
+            manager.getTaskManager().add(task);
+            return task;
+        }
+
+
+        @Override
+        public String getDataDisplay(AquaTask task, AppManager manager) {
+            return String.format(String.join("\n",
+                            "Hai okay desu! I have added the task:",
+                            "/",
+                            "  %s",
+                            "\\",
+                            "You now have %d tasks."),
                     task.toString(),
-                    manager.getTaskManager().size()
-                );
-            }
-        }).setFollowUp(new WriteTaskCommand().getDispatcher(args, manager));
+                    manager.getTaskManager().size());
+        }
     }
 }

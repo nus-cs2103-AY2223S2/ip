@@ -12,6 +12,7 @@ import java.nio.file.Paths;
 
 
 public class FileUtils {
+    // magic number adapted from https://stackoverflow.com/a/35544601
     private static final int READ_LIMIT = 2097152;
 
 
@@ -20,9 +21,7 @@ public class FileUtils {
      * decoded in the default charset.
      * 
      * @param path - the path of the file to read
-     * 
      * @return the contents in the file in the specified path
-     * 
      * @throws IOException if an I/O error occurs
      */
     public static String readFile(Path path) throws IOException {
@@ -48,7 +47,6 @@ public class FileUtils {
      * 
      * @param path - the path of the file to write to
      * @param content - the contents to write
-     * 
      * @throws IOException if an I/O error occurs
      */
     public static void writeFile(Path path, String content) throws IOException {
@@ -63,9 +61,8 @@ public class FileUtils {
      * directories.
      * 
      * @param path - the path of the directory to create
-     * 
      * @return {@code true} if the directory exists after execution and
-     *  {@code false} otherwise
+     *      {@code false} otherwise
      */
     public static boolean mkdirs(Path path) {
         if (path.toFile().exists()) {
@@ -79,7 +76,6 @@ public class FileUtils {
      * Converts the given String path to a {@code Path}.
      * 
      * @param path - the String path to convert
-     * 
      * @return the {@code Path} object of the specified String path
      */
     public static Path getFilePath(String path) {

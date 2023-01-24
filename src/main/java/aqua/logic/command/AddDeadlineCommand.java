@@ -11,15 +11,22 @@ import aqua.util.DateUtils;
 public class AddDeadlineCommand extends AddTaskCommand {
     @Override
     public AquaDeadline createTask(ArgumentMap args) throws IllegalSyntaxException {
+        // get name
         String name = args.getMainInput()
                 .filter(n -> !n.isBlank())
                 .orElseThrow(() -> new IllegalSyntaxException("Name disappeared!"));
+
+        // get by date
         String byString = args.get("by")
                 .orElseThrow(() -> new IllegalSyntaxException("[by] disappeared!"));
         LocalDateTime by = DateUtils.parse(byString);
-        boolean isCompleted = args.get(AquaDeadline.IS_COMPLETED_TAG)
+
+        // get is complete
+        boolean isCompleted = args.get(AquaDeadline.TAG_IS_COMPLETE)
                 .map(isComp -> Boolean.parseBoolean(isComp))
                 .orElse(false);
+
+        // return formed deadline
         return new AquaDeadline(name, isCompleted, by);
     }
 }

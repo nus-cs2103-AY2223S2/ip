@@ -5,8 +5,9 @@ import java.util.Optional;
 
 import aqua.util.DateUtils;
 
+
 public class AquaEvent extends AquaTask {
-    public static final String FROM_TAG = "from";
+    public static final String TAG_FROM = "from";
     public static final String TO_TAG = "to";
 
     private final boolean isComplete;
@@ -18,6 +19,7 @@ public class AquaEvent extends AquaTask {
         this(name, false, from, to);
     }
 
+
     public AquaEvent(String name, boolean isComplete, LocalDateTime from, LocalDateTime to) {
         super(name);
         this.isComplete = isComplete;
@@ -28,7 +30,7 @@ public class AquaEvent extends AquaTask {
 
     @Override
     public AquaEvent mark(boolean isComplete) {
-        return new AquaEvent(this.getName(), isComplete, this.from, this.to);
+        return new AquaEvent(getName(), isComplete, from, to);
     }
 
 
@@ -52,23 +54,19 @@ public class AquaEvent extends AquaTask {
     
     @Override
     public String getReloadString() {
-        return String.format(
-            "event %s /%s %s /%s %s /%s %s",
-            getName(),
-            FROM_TAG, from,
-            TO_TAG, to,
-            IS_COMPLETED_TAG, isComplete
-        );
+        return String.format("event %s /%s %s /%s %s /%s %s",
+                getName(),
+                TAG_FROM, from,
+                TO_TAG, to,
+                TAG_IS_COMPLETE, isComplete);
     }
 
 
     @Override
     public String toString() {
-        return String.format(
-            "[E]%s (from: %s to: %s)",
-            super.toString(),
-            DateUtils.formatNice(from),
-            DateUtils.formatNice(to)
-        );
+        return String.format("[E]%s (from: %s to: %s)",
+                super.toString(),
+                DateUtils.formatNice(from),
+                DateUtils.formatNice(to));
     }
 }

@@ -20,7 +20,10 @@ public class Aqua {
 
 
     private void start() {
+        // greet
         manager.getUiManager().greet();
+
+        // load saved tasks
         try {
             Loader.load(manager.getTaskManager().getSavePath(), manager);
             manager.getUiManager().replyLoadSuccess();
@@ -28,6 +31,8 @@ public class Aqua {
         } catch (LoadException loadEx) {
             manager.getUiManager().replyException(loadEx);
         }
+
+        // application loop
         while (!manager.isClosed()) {
             try {
                 String input = manager.getUiManager().readLine();

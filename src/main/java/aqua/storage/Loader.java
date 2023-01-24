@@ -20,11 +20,10 @@ public class Loader {
             while (scanner.hasNextLine()) {
                 parser.parse(scanner.nextLine()).getDispatcher(manager).dispatch();
             }
-        } catch (IllegalSyntaxException syntaxEx) {
-            throw new LoadException(syntaxEx);
-        } catch (ProcedureExecutionException proEx) {
-            throw new LoadException(proEx);
+        } catch (IllegalSyntaxException | ProcedureExecutionException ex) {
+            throw new LoadException(ex);
         } catch (FileNotFoundException fnfEx) {
+            // no save data just return
             return;
         }
     }
