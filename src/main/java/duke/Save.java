@@ -22,19 +22,19 @@ class Save {
                     ObjectInputStream ois = new ObjectInputStream(fis);
             ) {
                 @SuppressWarnings("unchecked")
-                ArrayList<Task> obj = (ArrayList<Task>) ois.readObject();
-                return obj;
+                ArrayList<Task> tasks = (ArrayList<Task>) ois.readObject();
+                return tasks;
                             
-            } catch (IOException e) {
+            } catch (IOException exception) {
                 System.out.println("Wrong format object");  
-            } catch (ClassNotFoundException e) {
+            } catch (ClassNotFoundException exception) {
                 System.out.println("object can't be loaded");  
             }
             return new ArrayList<Task>();
         } else {
             try {
                 file.createNewFile();
-            } catch (IOException e) {
+            } catch (IOException exception) {
                 System.out.println("cant create new file");
             }
             return new ArrayList<Task>();
@@ -50,8 +50,8 @@ class Save {
                 ObjectOutputStream oos = new ObjectOutputStream(fos);
         ) {
             oos.writeObject(tasks); 
-        } catch (IOException e) {
-            e.printStackTrace();
+        } catch (IOException exception) {
+            exception.printStackTrace();
         }
     }
 }

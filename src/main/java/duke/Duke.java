@@ -1,7 +1,6 @@
 package duke;
 
 import java.util.Scanner;
-import java.util.ArrayList;
 public class Duke {
     public static void main(String[] args) {
         Ui.intro();
@@ -12,9 +11,9 @@ public class Duke {
         while(!input.equals("bye")) {
             try {
                 Parser.parseRawString(input, tasks);            
-            } catch(IllegalArgumentException e) {
+            } catch(IllegalArgumentException exception) {
                 Ui.invalidCommand();
-            } catch(IndexOutOfBoundsException e) {
+            } catch(IndexOutOfBoundsException exception) {
                 Ui.missingArgs();
             }
             input = scan.nextLine();
