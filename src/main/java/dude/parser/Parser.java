@@ -11,7 +11,7 @@ import java.time.format.DateTimeParseException;
 
 public class Parser {
     public enum CommandType {
-        LIST, MARK, UNMARK, TODO, DEADLINE, EVENT, DELETE, BYE
+        LIST, MARK, UNMARK, TODO, DEADLINE, EVENT, DELETE, FIND, BYE
     }
 
     public static Command parse(String command) throws DudeException{
@@ -48,6 +48,8 @@ public class Parser {
                 return new AddCommand(new Event(format[0], details[0], details[1]));
             case DELETE:
                 return new DeleteCommand(Integer.parseInt(cmd[1]));
+            case FIND:
+                return new FindCommand(cmd[1]);
             default:
                 throw new DudeException("\tUhh... You give me wrong command leh");
         }
@@ -120,6 +122,11 @@ public class Parser {
                     }
                 }  catch (DateTimeParseException e) {
                     throw new DudeException("\tUhh... You using wrong format of date leh (YYYY-MM-DD HHmm)");
+                }
+                break;
+            case FIND:
+                if (input.length < 2) {
+                    throw new DudeException("\tUhh... You also need to put the keyword after the command");
                 }
                 break;
         }

@@ -3,6 +3,7 @@ package dude.ui;
 import dude.task.Task;
 import dude.task.TaskList;
 
+import java.util.List;
 import java.util.Scanner;
 
 public class Ui {
@@ -49,6 +50,18 @@ public class Ui {
     public void showUnmark(Task currentTask) {
         System.out.println("\tOkay liar, I've marked this task as undone liao:");
         System.out.println("\t" + currentTask);
+    }
+
+    public void showFind(List<Task> tasks) {
+        if (tasks.size() != 0) {
+            System.out.println("\tOkay come, here are the task I found containing your keyword: ");
+            for (int i = 0; i < tasks.size(); i++) {
+                System.out.println("\t" + (i+1) + "." + tasks.get(i).toString());
+            }
+        } else {
+            System.out.println("\tI cannot find any task containing your keyword sia");
+        }
+
     }
 
     public void showError(String error) {

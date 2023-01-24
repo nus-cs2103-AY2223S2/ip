@@ -31,6 +31,10 @@ public abstract class Task {
         count++;
     }
 
+    public boolean contains(String keyword) {
+        return this.description.toLowerCase().contains(keyword.toLowerCase());
+    }
+
     public static void removeTaskCount() {
         count--;
     }
