@@ -18,7 +18,8 @@ public class Task {
 
     public void incomplete() {
         if (!this.status) {
-            System.out.println("This mission has not been completed.");
+            System.out.println("Mission is originally incomplete.");
+            return;
         }
         this.status = false;
         System.out.println("Mission Re-initialised\n" + this);
