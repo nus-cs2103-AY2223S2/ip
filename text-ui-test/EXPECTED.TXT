@@ -44,4 +44,12 @@ DukeException: Wait a minute, you're missing something! Could be the name or dat
 DukeException: Wait a minute, you're missing something! Could be the name or date...
 DukeException: Hold up, you might be missing something here buddy!
 DukeException: Hold up, you might be missing something here buddy!
+DukeException: Delete? Delete what?
+Done! [T][ ] drink water has been deleted for good.
+Here are the tasks you asked for!
+1: [T][ ] read book
+2: [D][ ] finish project (by: March 20)
+3: [E][X] Jason Birthday (from: 5pm to: 10pm)
+You now have 3 items in your list.
+DukeException: Oops, that task number does not exist
 It was a pleasure to help, goodbye!

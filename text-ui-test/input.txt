@@ -18,4 +18,8 @@ deadline swim /by
 deadline /by Monday
 event bake /from 1pm /to
 event /from 2pm /to 3pm
+delete
+delete 2
+list
+delete 6
 bye

@@ -95,6 +95,21 @@ public class Duke {
                 addTask(eventTask, eventName);
                 return true;
 
+            case "delete":
+                if (input.split(" ").length < 2) {
+                    throw new DukeException("Delete? Delete what?");
+                }
+                try {
+                    int deleteIndex = Integer.parseInt(input.split(" ")[1]) - 1;
+                    Task deleteTask = taskList.get(deleteIndex);
+                    System.out.println("Done! " + deleteTask + " has been deleted for good.");
+                    taskList.remove(deleteIndex);
+                    return true;
+                } catch (IndexOutOfBoundsException e) {
+                    throw new DukeException("Oops, that task number does not exist");
+                }
+
+
             default:
                 throw new DukeException("Oops I do not recognise this command...");
         }
