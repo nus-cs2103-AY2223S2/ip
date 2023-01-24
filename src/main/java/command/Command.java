@@ -8,7 +8,7 @@ import exceptions.*;
 /***
  * Serves as a blueprint for the other commands to follow
  */
-public abstract class Command{
+public abstract class Command {
 
     private boolean isExit;
 
@@ -21,6 +21,7 @@ public abstract class Command{
 
     /**
      * return isExit status
+     *
      * @return boolean
      */
     public boolean isExit() {
@@ -30,12 +31,13 @@ public abstract class Command{
     /***
      * Sets isExit as true
      */
-    public void setExitTrue(){
+    public void setExitTrue() {
         isExit = true;
     }
 
     /**
      * abstract method to execute a command
+     *
      * @param taskList
      * @param ui
      * @param storage

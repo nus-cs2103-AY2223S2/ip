@@ -11,15 +11,16 @@ import tasks.Task;
 /**
  * this class handles when a deadline command is called and executed
  */
-public class DeadlineCommand extends Command{
+public class DeadlineCommand extends Command {
 
     private String input;
 
     /**
      * constructor for tasks.Deadline command.Command
+     *
      * @param input
      */
-    public DeadlineCommand(String input){
+    public DeadlineCommand(String input) {
         super();
         this.input = input;
     }
@@ -39,8 +40,8 @@ public class DeadlineCommand extends Command{
         String description = split[0].trim();
         String time = split[1].trim();
         Task task = new Deadline(description, time);
-            taskList.add(task);
-            storage.writeFile(taskList);
-            return ui.printAddTask(taskList.size(),task);
+        taskList.add(task);
+        storage.writeFile(taskList);
+        return ui.printAddTask(taskList.size(), task);
     }
 }

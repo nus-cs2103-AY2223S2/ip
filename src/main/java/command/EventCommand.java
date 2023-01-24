@@ -36,8 +36,8 @@ public class EventCommand extends Command {
         String to = timing[1].trim();
         String description = s[0].trim();
         Task task = new Event(description, from, to);
-            taskList.add(task);
-            storage.writeFile(taskList);
-            return ui.printAddTask(taskList.size(), task);
-        }
+        taskList.add(task);
+        storage.writeFile(taskList);
+        return ui.printAddTask(taskList.size(), task);
+    }
 }

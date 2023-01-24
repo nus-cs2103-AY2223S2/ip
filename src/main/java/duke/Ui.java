@@ -35,6 +35,7 @@ public class Ui {
 
     /**
      * prints greet message
+     *
      * @return a string
      */
     public static String greet() {
@@ -43,6 +44,7 @@ public class Ui {
 
     /**
      * prints a farewell message
+     *
      * @return a string
      */
     public String exit() {
@@ -60,6 +62,7 @@ public class Ui {
 
     /**
      * List the items in the list
+     *
      * @param taskList
      * @return
      */
@@ -73,6 +76,7 @@ public class Ui {
 
     /**
      * prints message after task is marked
+     *
      * @param index
      * @param task
      * @return
@@ -85,6 +89,7 @@ public class Ui {
 
     /**
      * prints message after task is unmarked
+     *
      * @param index
      * @param task
      * @return
@@ -98,6 +103,7 @@ public class Ui {
 
     /**
      * prints message after task is added to taskList
+     *
      * @param size
      * @param task
      * @return
@@ -134,6 +140,7 @@ public class Ui {
 
     /**
      * prints a line
+     *
      * @return a string
      */
     public String showLine() {
@@ -142,6 +149,7 @@ public class Ui {
 
     /**
      * prints tasks that has matching keywords
+     *
      * @param res
      * @return
      */
@@ -155,6 +163,7 @@ public class Ui {
 
     /**
      * Prints a duplicate if found
+     *
      * @param task
      * @return
      */

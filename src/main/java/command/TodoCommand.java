@@ -10,7 +10,7 @@ import tasks.Todo;
 /**
  * This class handles when a tasks.Todo task is added
  */
-public class TodoCommand extends Command{
+public class TodoCommand extends Command {
 
     private String input;
 
@@ -18,7 +18,7 @@ public class TodoCommand extends Command{
      * Constructor for command.TodoCommand
      * @param input
      */
-    public TodoCommand(String input){
+    public TodoCommand(String input) {
         super();
         this.input = input;
     }
@@ -33,9 +33,9 @@ public class TodoCommand extends Command{
      */
     @Override
     public String execute(TaskList taskList, Ui ui, Storage storage) throws DukeException {
-        Task task= new Todo(input);
-            taskList.add(task);
-            storage.writeFile(taskList);
-            return ui.printAddTask(taskList.size(), task);
+        Task task = new Todo(input);
+        taskList.add(task);
+        storage.writeFile(taskList);
+        return ui.printAddTask(taskList.size(), task);
     }
 }

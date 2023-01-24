@@ -27,7 +27,7 @@ public class ByeCommand extends Command {
      * // reused from github: https://github.com/nus-cs2103-AY2223S1/forum/issues/287
      */
     public String execute(TaskList taskList, Ui ui, Storage storage) throws DukeException {
-            setExitTrue();
-            return ui.exit();
+        setExitTrue();
+        return ui.exit();
     }
 }

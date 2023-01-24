@@ -10,7 +10,7 @@ import exceptions.InvalidNumberException;
  * This class handles unmarking a task as incomplete
  */
 
-public class UnmarkCommand extends Command{
+public class UnmarkCommand extends Command {
     private int index;
 
     /***
@@ -18,7 +18,7 @@ public class UnmarkCommand extends Command{
      * @param index
      */
 
-    public UnmarkCommand(int index){
+    public UnmarkCommand(int index) {
         super();
         this.index = index;
     }
@@ -31,12 +31,12 @@ public class UnmarkCommand extends Command{
      * @throws DukeException
      */
     @Override
-    public String execute(TaskList taskList, Ui ui, Storage storage) throws DukeException{
+    public String execute(TaskList taskList, Ui ui, Storage storage) throws DukeException {
         int taskNumMinusOne = index - 1;
-        if(taskNumMinusOne < 0 || taskNumMinusOne > taskList.size() - 1)
+        if (taskNumMinusOne < 0 || taskNumMinusOne > taskList.size() - 1)
             throw new InvalidNumberException();
         taskList.unmarkTask(index);
         storage.writeFile(taskList);
-        return ui.printUnmark(index , taskList.get(taskNumMinusOne));
+        return ui.printUnmark(index, taskList.get(taskNumMinusOne));
     }
 }

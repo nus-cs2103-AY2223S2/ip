@@ -22,30 +22,32 @@ public class Storage {
 
     /**
      * constructor for storage class
+     *
      * @param directory
      * @param filePath
      */
-    public Storage(String directory, String filePath){
+    public Storage(String directory, String filePath) {
         this.directory = directory;
         this.filePath = filePath;
     }
 
     /**
      * loads the file. creates new file if not created
+     *
      * @return
      * @throws IOException
      */
-    public ArrayList<Task> load() throws IOException{
+    public ArrayList<Task> load() throws IOException {
         ArrayList<Task> al = new ArrayList<>();
         File dir = new File(directory);
         if (!dir.exists()) {
             dir.mkdir();
         }
         // make a file
-        String FULL_FILE = directory  + File.separator + filePath;
+        String FULL_FILE = directory + File.separator + filePath;
         File file = new File(FULL_FILE);
         try {
-            if(!file.exists()){
+            if (!file.exists()) {
                 file.createNewFile();
             }
             al = readFile(file);
@@ -57,6 +59,7 @@ public class Storage {
 
     /**
      * reads the read and processes the data.
+     *
      * @param file
      * @return
      */
@@ -106,14 +109,15 @@ public class Storage {
 
     /**
      * overwrites and rewrite to the text file
+     *
      * @param taskList
      */
     public void writeFile(TaskList taskList) {
-        try{
-            String FULL_FILE = directory  + File.separator + filePath;
+        try {
+            String FULL_FILE = directory + File.separator + filePath;
             File newFile = new File(FULL_FILE);
             FileWriter fw = new FileWriter(newFile);
-            for(int i = 0; i < taskList.size(); ++i) {
+            for (int i = 0; i < taskList.size(); ++i) {
                 Task task = taskList.get(i);
                 String done = task.getStatusIcon().equals("X") ? "1" : "0";
                 String write = "|" + done + "|" + task.getDescription();
@@ -128,7 +132,7 @@ public class Storage {
                 fw.write(System.lineSeparator());
             }
             fw.close();
-        } catch (IOException e ) {
+        } catch (IOException e) {
             System.out.println(e.getMessage());
         }
     }

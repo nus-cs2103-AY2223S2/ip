@@ -12,12 +12,13 @@ public class ListCommand extends Command {
     /**
      * Constructor for listCommand
      */
-    public ListCommand(){
+    public ListCommand() {
         super();
     }
 
     /**
      * Prints the entire taskList
+     *
      * @param taskList
      * @param ui
      * @param storage

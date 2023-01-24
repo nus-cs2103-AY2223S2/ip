@@ -7,8 +7,7 @@ import command.Command;
 import exceptions.DukeException;
 
 
-
-/***
+/**
  * Main class for Duke
  */
 
@@ -20,7 +19,7 @@ class Duke {
     private TaskList tasks;
     private Ui ui;
 
-    /***
+    /**
      * constructor for duke. Once duke gets initiated, create duke.duke.Ui object, create storage
      * @param directory
      * @param filePath

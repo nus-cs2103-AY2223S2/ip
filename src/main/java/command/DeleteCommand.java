@@ -9,15 +9,16 @@ import tasks.Task;
 /***
  * this class handles deleting a task as a command
  */
-public class DeleteCommand extends Command{
+public class DeleteCommand extends Command {
 
     private int index;
 
     /**
      * Constructor for command.DeleteCommand
+     *
      * @param index
      */
-    public DeleteCommand(int index){
+    public DeleteCommand(int index) {
         super();
         this.index = index;
     }
@@ -35,7 +36,7 @@ public class DeleteCommand extends Command{
         Task taskToDelete = taskList.get(taskNumMinusOne);
         taskList.remove(taskNumMinusOne);
         storage.writeFile(taskList);
-        return ui.printDelete(index, taskToDelete,taskList);
+        return ui.printDelete(index, taskToDelete, taskList);
     }
 }
 
