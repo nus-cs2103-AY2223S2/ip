@@ -18,6 +18,10 @@ public abstract class Task {
         this.description = description;
     }
 
+    public String getDescription() {
+        return description;
+    }
+
     /**
      * Returns a copy of this Task object with isDone set to the specified value.
      *
@@ -74,10 +78,6 @@ public abstract class Task {
 
     protected boolean isDone() {
         return isDone;
-    }
-
-    protected String getDescription() {
-        return description;
     }
 
     /**

@@ -41,9 +41,13 @@ event lorem ipsum /from 01/01/2024 1200 /to 02/00/2024 1300
 event lorem ipsum /from 01/00/2024 1200 /to 02/00/2024 1300
 list
 todo lorem ipsum
-deadline lorem ipsum /by 01/01/2024 1200
-event lorem ipsum /from 01/01/2024 1200 /to 02/01/2024 1300
+deadline hello this world /by 01/01/2024 1200
+event this world end /from 01/01/2024 1200 /to 02/01/2024 1300
 list
+find
+find  
+find this world
+find no keyword
 delete 1
 delete 1
 delete 1
