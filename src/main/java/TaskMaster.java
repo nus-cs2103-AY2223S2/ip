@@ -64,10 +64,10 @@ public class TaskMaster {
         this.add(new ToDo(taskName));
     }
 
-    protected void addDeadLine(String taskName, String by) {
-        this.add(new Deadline(taskName, by));
+    protected void addDeadLine(String taskName, String by) throws DukeException.Invalid.Input {
+        this.add(new Deadline(taskName, DateHandler.convert(by)));
     }
-    protected void addEvent(String taskName, String from, String to) {
-        this.add(new Event(taskName, from, to));
+    protected void addEvent(String taskName, String from, String to) throws DukeException.Invalid.Input {
+        this.add(new Event(taskName, DateHandler.convert(from), DateHandler.convert(to)));
     }
 }
