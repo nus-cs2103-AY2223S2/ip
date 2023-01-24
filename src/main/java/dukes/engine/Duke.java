@@ -15,13 +15,26 @@ import java.util.*;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
+/**
+ * The main driver class of Duke software.
+ */
 public class Duke {
 
+    /** Handles loading and saving information to hard disk. */
     private Storage storage;
+    /** Contains task list. */
     private TaskList tasks;
+    /** Interprets the user command. */
     private Parser parser;
+    /** Handles interactions with user. */
     private UI ui;
 
+    /**
+     * Constructor of Duke class.
+     * Handles the loading error when Duke starts.
+     *
+     * @param filePath the file path of the data file.
+     */
     public Duke(String filePath) {
         ui = new UI();
         parser = new Parser();
@@ -34,6 +47,10 @@ public class Duke {
         }
     }
 
+    /**
+     * Runner of Duke class. Call classes to interpret command and execute.
+     * Catch all the runtime DukeExceptions and provide feedback.
+     */
     public void run() {
         Scanner sc = new Scanner(System.in);
         ui.showWelcome();
@@ -55,6 +72,11 @@ public class Duke {
         sc.close();
     }
 
+    /**
+     * Main driver of the Duke engine.
+     *
+     * @param args keyboard arguments
+     */
     public static void main(String[] args) {
         new Duke("data/tasks.txt").run();
     }
