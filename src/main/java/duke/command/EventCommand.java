@@ -10,17 +10,17 @@ import java.time.LocalDateTime;
 import java.time.format.DateTimeParseException;
 
 /**
- * Represents an add event task command.
+ * Represents an add event command for adding an event to a task list.
  */
 public class EventCommand extends AddCommand {
     /**
-     * Add the new event specified in the input to tasks and returns an acknowledgement message.
+     * Create an event using the specified input, add it to tasks, and return an acknowledgement message.
      *
      * @param input {@inheritDoc}
      * @param tasks {@inheritDoc}
      * @return {@inheritDoc}
-     * @throws DukeException Indicates an error in the input caused by one of the following: missing start or end
-     * date and/or time, missing description, incorrect format, invalid start and/or end date and/or time.
+     * @throws DukeException Indicates an error in the input caused by one of the following: missing start or end of
+     *                       event, missing description, incorrect format, invalid start or end of event.
      */
     @Override
     public String run(String input, TaskList tasks) throws DukeException {
@@ -32,8 +32,8 @@ public class EventCommand extends AddCommand {
      *
      * @param input {@inheritDoc}
      * @return {@inheritDoc}
-     * @throws DukeException Indicates an error in the input caused by one of the following: missing start or end
-     * date and/or time, missing description, incorrect format, invalid start and/or end date and/or time.
+     * @throws DukeException Indicates an error in the input caused by one of the following: missing start or end of
+     *                       event, missing description, incorrect format, invalid start or end of event.
      */
     @Override
     protected Task createTask(String input) throws DukeException {

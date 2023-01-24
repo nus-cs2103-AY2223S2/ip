@@ -10,7 +10,7 @@ import java.nio.file.Path;
 import java.util.Scanner;
 
 /**
- * Main class for the chatbot
+ * Main class of the app.
  */
 public class Duke {
     private final static Path saveFilePath = Path.of("./save-data/task-list.csv");
@@ -21,9 +21,9 @@ public class Duke {
     private static TaskList tasks;
 
     /**
-     * Main method for the chatbot
+     * Main method for the app.
      *
-     * @param args Command-line arguments
+     * @param args Command-line arguments.
      */
     public static void main(String[] args) {
         if (!setup()) {

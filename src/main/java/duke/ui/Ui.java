@@ -3,7 +3,7 @@ package duke.ui;
 import java.io.PrintStream;
 
 /**
- * Handles displaying of information to the user.
+ * Handles displaying of messages to the user.
  */
 public class Ui {
     private final PrintStream printStream;
@@ -11,7 +11,7 @@ public class Ui {
     /**
      * Creates a Ui object.
      *
-     * @param printStream The PrintStream object to print output messages to.
+     * @param printStream The PrintStream object to print messages to.
      */
     public Ui(PrintStream printStream) {
         this.printStream = printStream;
