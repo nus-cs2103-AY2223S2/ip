@@ -10,7 +10,7 @@ public class Execute {
                     throw new EmptyDeadlineException();
                 case "event":
                     throw new EmptyEventException();
-                case "mark": case "unmark":
+                case "mark": case "unmark": case "delete":
                     throw new EmptyListException();
             }
         }
@@ -63,7 +63,13 @@ public class Execute {
                     Event event_task = new Event(userInput);
                     duke.addTask(event_task);
                     System.out.println(duke.separate(duke.msg_of_add(event_task)));
-                } else {
+                } else if (command.equals("delete")) {
+                    checkEmpty(userInput, command);
+                    String[] words = userInput.split(" ");
+                    int index = Integer.parseInt(words[1]) - 1;
+                    System.out.println(duke.separate(duke.delete_msg(index)));
+                }
+                else {
                     throw new WeirdInputException();
                 }
             } catch (WeirdInputException exc)  {

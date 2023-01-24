@@ -53,6 +53,17 @@ public class Duke {
         return "OK, I've marked this task as not done yet:\n" + task.toString();
     }
 
+    public String delete_msg(int index) throws WrongIndexException {
+        if (tasks.size() <= index) {
+            throw new WrongIndexException();
+        }
+        Task task = tasks.get(index);
+        tasks.remove(index);
+        return "Noted. I've removed this task:\n " + task.toString() +
+                "\nNow you have " + tasks.size() + " tasks in the list.";
+
+    }
+
     public String echo(String input) {
         return input;
     }
