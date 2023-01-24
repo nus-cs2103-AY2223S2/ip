@@ -21,12 +21,12 @@
     ____________________________________________________________
     ____________________________________________________________
      Got it. I've added this task:
-       [D][ ] submit pop quiz (by: tomorrow at 2pm)
+       [D][ ] submit pop quiz (by: 13 Oct 2023 12:30)
      Now you have 3 tasks in the list.
     ____________________________________________________________
     ____________________________________________________________
      Got it. I've added this task:
-       [D][ ] learn java (by: today)
+       [D][ ] learn java (by: 13 Oct 2023 12:30)
      Now you have 4 tasks in the list.
     ____________________________________________________________
     ____________________________________________________________
@@ -38,13 +38,19 @@
      It's 'deadline <description> /by <deadline>'.
     ____________________________________________________________
     ____________________________________________________________
+     ☹ OOPS!!! Please enter date and time in this format: dd/MM/yyyy HH:mm
+    ____________________________________________________________
+    ____________________________________________________________
+     ☹ OOPS!!! Please enter date and time in this format: dd/MM/yyyy HH:mm
+    ____________________________________________________________
+    ____________________________________________________________
      Got it. I've added this task:
-       [E][ ] software engineering tutorial (from: 2pm to: 1pm)
+       [E][ ] software engineering tutorial (from: 13 Oct 2023 12:30 to: 13 Oct 2023 12:30)
      Now you have 5 tasks in the list.
     ____________________________________________________________
     ____________________________________________________________
      Got it. I've added this task:
-       [E][ ] ai lecture (from: tomorrow 3pm to: tomorrow 4pm)
+       [E][ ] ai lecture (from: 13 Oct 2023 12:30 to: 13 Oct 2023 12:30)
      Now you have 6 tasks in the list.
     ____________________________________________________________
     ____________________________________________________________
@@ -72,13 +78,25 @@
      It's 'event <description> /from <from> /to <to>'.
     ____________________________________________________________
     ____________________________________________________________
+     ☹ OOPS!!! Please enter date and time in this format: dd/MM/yyyy HH:mm
+    ____________________________________________________________
+    ____________________________________________________________
+     ☹ OOPS!!! Please enter date and time in this format: dd/MM/yyyy HH:mm
+    ____________________________________________________________
+    ____________________________________________________________
+     ☹ OOPS!!! Please enter date and time in this format: dd/MM/yyyy HH:mm
+    ____________________________________________________________
+    ____________________________________________________________
+     ☹ OOPS!!! Please enter date and time in this format: dd/MM/yyyy HH:mm
+    ____________________________________________________________
+    ____________________________________________________________
      Here are the tasks in your list:
      1. [T][ ] read book
      2. [T][ ] clean room and sweep floor
-     3. [D][ ] submit pop quiz (by: tomorrow at 2pm)
-     4. [D][ ] learn java (by: today)
-     5. [E][ ] software engineering tutorial (from: 2pm to: 1pm)
-     6. [E][ ] ai lecture (from: tomorrow 3pm to: tomorrow 4pm)
+     3. [D][ ] submit pop quiz (by: 13 Oct 2023 12:30)
+     4. [D][ ] learn java (by: 13 Oct 2023 12:30)
+     5. [E][ ] software engineering tutorial (from: 13 Oct 2023 12:30 to: 13 Oct 2023 12:30)
+     6. [E][ ] ai lecture (from: 13 Oct 2023 12:30 to: 13 Oct 2023 12:30)
     ____________________________________________________________
     ____________________________________________________________
      Nice! I've marked this task as done:
@@ -88,23 +106,23 @@
      Here are the tasks in your list:
      1. [T][X] read book
      2. [T][ ] clean room and sweep floor
-     3. [D][ ] submit pop quiz (by: tomorrow at 2pm)
-     4. [D][ ] learn java (by: today)
-     5. [E][ ] software engineering tutorial (from: 2pm to: 1pm)
-     6. [E][ ] ai lecture (from: tomorrow 3pm to: tomorrow 4pm)
+     3. [D][ ] submit pop quiz (by: 13 Oct 2023 12:30)
+     4. [D][ ] learn java (by: 13 Oct 2023 12:30)
+     5. [E][ ] software engineering tutorial (from: 13 Oct 2023 12:30 to: 13 Oct 2023 12:30)
+     6. [E][ ] ai lecture (from: 13 Oct 2023 12:30 to: 13 Oct 2023 12:30)
     ____________________________________________________________
     ____________________________________________________________
      Nice! I've marked this task as done:
-     [E][X] ai lecture (from: tomorrow 3pm to: tomorrow 4pm)
+     [E][X] ai lecture (from: 13 Oct 2023 12:30 to: 13 Oct 2023 12:30)
     ____________________________________________________________
     ____________________________________________________________
      Here are the tasks in your list:
      1. [T][X] read book
      2. [T][ ] clean room and sweep floor
-     3. [D][ ] submit pop quiz (by: tomorrow at 2pm)
-     4. [D][ ] learn java (by: today)
-     5. [E][ ] software engineering tutorial (from: 2pm to: 1pm)
-     6. [E][X] ai lecture (from: tomorrow 3pm to: tomorrow 4pm)
+     3. [D][ ] submit pop quiz (by: 13 Oct 2023 12:30)
+     4. [D][ ] learn java (by: 13 Oct 2023 12:30)
+     5. [E][ ] software engineering tutorial (from: 13 Oct 2023 12:30 to: 13 Oct 2023 12:30)
+     6. [E][X] ai lecture (from: 13 Oct 2023 12:30 to: 13 Oct 2023 12:30)
     ____________________________________________________________
     ____________________________________________________________
      OK, I've marked this task as not done yet:
@@ -114,49 +132,49 @@
      Here are the tasks in your list:
      1. [T][ ] read book
      2. [T][ ] clean room and sweep floor
-     3. [D][ ] submit pop quiz (by: tomorrow at 2pm)
-     4. [D][ ] learn java (by: today)
-     5. [E][ ] software engineering tutorial (from: 2pm to: 1pm)
-     6. [E][X] ai lecture (from: tomorrow 3pm to: tomorrow 4pm)
+     3. [D][ ] submit pop quiz (by: 13 Oct 2023 12:30)
+     4. [D][ ] learn java (by: 13 Oct 2023 12:30)
+     5. [E][ ] software engineering tutorial (from: 13 Oct 2023 12:30 to: 13 Oct 2023 12:30)
+     6. [E][X] ai lecture (from: 13 Oct 2023 12:30 to: 13 Oct 2023 12:30)
     ____________________________________________________________
     ____________________________________________________________
      OK, I've marked this task as not done yet:
-     [E][ ] ai lecture (from: tomorrow 3pm to: tomorrow 4pm)
+     [E][ ] ai lecture (from: 13 Oct 2023 12:30 to: 13 Oct 2023 12:30)
     ____________________________________________________________
     ____________________________________________________________
      Here are the tasks in your list:
      1. [T][ ] read book
      2. [T][ ] clean room and sweep floor
-     3. [D][ ] submit pop quiz (by: tomorrow at 2pm)
-     4. [D][ ] learn java (by: today)
-     5. [E][ ] software engineering tutorial (from: 2pm to: 1pm)
-     6. [E][ ] ai lecture (from: tomorrow 3pm to: tomorrow 4pm)
+     3. [D][ ] submit pop quiz (by: 13 Oct 2023 12:30)
+     4. [D][ ] learn java (by: 13 Oct 2023 12:30)
+     5. [E][ ] software engineering tutorial (from: 13 Oct 2023 12:30 to: 13 Oct 2023 12:30)
+     6. [E][ ] ai lecture (from: 13 Oct 2023 12:30 to: 13 Oct 2023 12:30)
     ____________________________________________________________
     ____________________________________________________________
      Nice! I've marked this task as done:
-     [D][X] submit pop quiz (by: tomorrow at 2pm)
+     [D][X] submit pop quiz (by: 13 Oct 2023 12:30)
     ____________________________________________________________
     ____________________________________________________________
      Here are the tasks in your list:
      1. [T][ ] read book
      2. [T][ ] clean room and sweep floor
-     3. [D][X] submit pop quiz (by: tomorrow at 2pm)
-     4. [D][ ] learn java (by: today)
-     5. [E][ ] software engineering tutorial (from: 2pm to: 1pm)
-     6. [E][ ] ai lecture (from: tomorrow 3pm to: tomorrow 4pm)
+     3. [D][X] submit pop quiz (by: 13 Oct 2023 12:30)
+     4. [D][ ] learn java (by: 13 Oct 2023 12:30)
+     5. [E][ ] software engineering tutorial (from: 13 Oct 2023 12:30 to: 13 Oct 2023 12:30)
+     6. [E][ ] ai lecture (from: 13 Oct 2023 12:30 to: 13 Oct 2023 12:30)
     ____________________________________________________________
     ____________________________________________________________
      OK, I've marked this task as not done yet:
-     [D][ ] submit pop quiz (by: tomorrow at 2pm)
+     [D][ ] submit pop quiz (by: 13 Oct 2023 12:30)
     ____________________________________________________________
     ____________________________________________________________
      Here are the tasks in your list:
      1. [T][ ] read book
      2. [T][ ] clean room and sweep floor
-     3. [D][ ] submit pop quiz (by: tomorrow at 2pm)
-     4. [D][ ] learn java (by: today)
-     5. [E][ ] software engineering tutorial (from: 2pm to: 1pm)
-     6. [E][ ] ai lecture (from: tomorrow 3pm to: tomorrow 4pm)
+     3. [D][ ] submit pop quiz (by: 13 Oct 2023 12:30)
+     4. [D][ ] learn java (by: 13 Oct 2023 12:30)
+     5. [E][ ] software engineering tutorial (from: 13 Oct 2023 12:30 to: 13 Oct 2023 12:30)
+     6. [E][ ] ai lecture (from: 13 Oct 2023 12:30 to: 13 Oct 2023 12:30)
     ____________________________________________________________
     ____________________________________________________________
      Nice! I've marked this task as done:
@@ -170,10 +188,10 @@
      Here are the tasks in your list:
      1. [T][X] read book
      2. [T][ ] clean room and sweep floor
-     3. [D][ ] submit pop quiz (by: tomorrow at 2pm)
-     4. [D][ ] learn java (by: today)
-     5. [E][ ] software engineering tutorial (from: 2pm to: 1pm)
-     6. [E][ ] ai lecture (from: tomorrow 3pm to: tomorrow 4pm)
+     3. [D][ ] submit pop quiz (by: 13 Oct 2023 12:30)
+     4. [D][ ] learn java (by: 13 Oct 2023 12:30)
+     5. [E][ ] software engineering tutorial (from: 13 Oct 2023 12:30 to: 13 Oct 2023 12:30)
+     6. [E][ ] ai lecture (from: 13 Oct 2023 12:30 to: 13 Oct 2023 12:30)
     ____________________________________________________________
     ____________________________________________________________
      OK, I've marked this task as not done yet:
@@ -187,26 +205,26 @@
      Here are the tasks in your list:
      1. [T][ ] read book
      2. [T][ ] clean room and sweep floor
-     3. [D][ ] submit pop quiz (by: tomorrow at 2pm)
-     4. [D][ ] learn java (by: today)
-     5. [E][ ] software engineering tutorial (from: 2pm to: 1pm)
-     6. [E][ ] ai lecture (from: tomorrow 3pm to: tomorrow 4pm)
+     3. [D][ ] submit pop quiz (by: 13 Oct 2023 12:30)
+     4. [D][ ] learn java (by: 13 Oct 2023 12:30)
+     5. [E][ ] software engineering tutorial (from: 13 Oct 2023 12:30 to: 13 Oct 2023 12:30)
+     6. [E][ ] ai lecture (from: 13 Oct 2023 12:30 to: 13 Oct 2023 12:30)
     ____________________________________________________________
     ____________________________________________________________
      ☹ OOPS!!! Please enter a proper integer.
     ____________________________________________________________
     ____________________________________________________________
      Noted. I've removed this task:
-     [E][ ] ai lecture (from: tomorrow 3pm to: tomorrow 4pm)
+     [E][ ] ai lecture (from: 13 Oct 2023 12:30 to: 13 Oct 2023 12:30)
      Now you have 5 tasks in the list.
     ____________________________________________________________
     ____________________________________________________________
      Here are the tasks in your list:
      1. [T][ ] read book
      2. [T][ ] clean room and sweep floor
-     3. [D][ ] submit pop quiz (by: tomorrow at 2pm)
-     4. [D][ ] learn java (by: today)
-     5. [E][ ] software engineering tutorial (from: 2pm to: 1pm)
+     3. [D][ ] submit pop quiz (by: 13 Oct 2023 12:30)
+     4. [D][ ] learn java (by: 13 Oct 2023 12:30)
+     5. [E][ ] software engineering tutorial (from: 13 Oct 2023 12:30 to: 13 Oct 2023 12:30)
     ____________________________________________________________
     ____________________________________________________________
      Noted. I've removed this task:
@@ -216,9 +234,9 @@
     ____________________________________________________________
      Here are the tasks in your list:
      1. [T][ ] clean room and sweep floor
-     2. [D][ ] submit pop quiz (by: tomorrow at 2pm)
-     3. [D][ ] learn java (by: today)
-     4. [E][ ] software engineering tutorial (from: 2pm to: 1pm)
+     2. [D][ ] submit pop quiz (by: 13 Oct 2023 12:30)
+     3. [D][ ] learn java (by: 13 Oct 2023 12:30)
+     4. [E][ ] software engineering tutorial (from: 13 Oct 2023 12:30 to: 13 Oct 2023 12:30)
     ____________________________________________________________
     ____________________________________________________________
      ☹ OOPS!!! Please enter a proper integer.
