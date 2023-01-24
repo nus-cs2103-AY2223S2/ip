@@ -1,3 +1,7 @@
+package cbot.util;
+
+import cbot.task.Task;
+
 import java.lang.StringBuilder;
 import java.util.ArrayList;
 import java.util.Collections;
@@ -9,11 +13,11 @@ public class TaskList {
     private static final String GAP = "             ";
     private ArrayList<Task> tdl;
     
-    TaskList() {
+    public TaskList() {
         this.tdl = new ArrayList<Task>();
     }
     
-    TaskList(ArrayList<Task> tdl) {
+    public TaskList(ArrayList<Task> tdl) {
         this.tdl = tdl;
     }
     

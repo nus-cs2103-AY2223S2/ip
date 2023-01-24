@@ -1,7 +1,9 @@
+package cbot.util;
+
 public enum Command {
-    //NAME      (str,           hasText,    save,   hasArr),
+    //NAME      (str,           hasText,    save),
     BYE         ("bye",         false),
-    LIST        ("list",        false,      false,      true),
+    LIST        ("list",        false),
     MARK        ("mark ",       true,       true),
     MARK_BAD    ("mark",        false),
     UNMARK      ("unmark ",     true,       true),
@@ -14,41 +16,31 @@ public enum Command {
     DEADLINE_BAD("deadline",    false),
     EVENT       ("event ",      true,       true),
     EVENT_BAD   ("event",       false),
-    SORT        ("sort",        false,      true,       true),
-    BEFORE      ("before ",     true,       false,      true),
+    SORT        ("sort",        false,      true),
+    BEFORE      ("before ",     true),
     BEFORE_BAD  ("before",      false),
-    AFTER       ("after ",      true,       false,      true),
+    AFTER       ("after ",      true),
     AFTER_BAD   ("after",       false),
-    FILTER      ("filter ",     true,       false,      true),
+    FILTER      ("filter ",     true),
     FILTER_BAD  ("filter",      false),
     NONE        ("",            false);
     
     private final String str;
     private final boolean hasText;
     private final boolean save;
-    private final boolean hasArr;
     
-    Command(String str, boolean hasText, boolean save, boolean hasArr) {
+    Command(String str, boolean hasText, boolean save) {
         this.str = str;
         this.hasText = hasText;
         this.save = save;
-        this.hasArr = hasArr;
-    }
-    
-    Command(String str, boolean hasText, boolean save) {
-        this(str, hasText, save, false);
     }
     
     Command(String str, boolean hasText) {
-        this(str, hasText, false, false);
+        this(str, hasText, false);
     }
     
     boolean needSave() {
         return this.save;
-    }
-    
-    boolean hasArray() {
-        return this.hasArr;
     }
     
     int getLen() {

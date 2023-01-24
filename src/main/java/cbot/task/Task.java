@@ -1,36 +1,38 @@
+package cbot.task;
+
 import java.time.LocalDateTime;
 
 public class Task implements Comparable<Task> {
     protected String desc;
     protected boolean isDone;
 
-    static final String SEP = " ;; ";
-    static final String DONE_TRUE = "X";
-    static final String DONE_FALSE = " ";
+    public static final String SEP = " ;; ";
+    public static final String DONE_TRUE = "X";
+    public static final String DONE_FALSE = " ";
     
-    Task(String desc, boolean isDone) {
+    public Task(String desc, boolean isDone) {
         this.desc = desc;
         this.isDone = isDone;
     }
     
-    Task(String desc) {
+    public Task(String desc) {
         this.desc = desc.trim();
         this.isDone = false;
     }
     
-    String getSymbol() {
+    public String getSymbol() {
         return "T";
     }
     
-    String getStatus() {
+    public String getStatus() {
         return this.isDone ? DONE_TRUE : DONE_FALSE;
     }
     
-    LocalDateTime getTime() {
+    public LocalDateTime getTime() {
         return LocalDateTime.MIN;
     }
     
-    boolean hasTime() {
+    public boolean hasTime() {
         return false;
     }
     
@@ -40,12 +42,12 @@ public class Task implements Comparable<Task> {
                 getSymbol(), getStatus(), this.desc);
     }
     
-    String makeFileFriendly() {
+    public String makeFileFriendly() {
         return String.format("%s%s%s%s%s",
                 getSymbol(), SEP, getStatus(), SEP, this.desc);
     }
     
-    boolean yesDo() {
+    public boolean yesDo() {
         if (this.isDone) {
             return false;
         } else {
@@ -54,7 +56,7 @@ public class Task implements Comparable<Task> {
         }
     }
     
-    boolean noDo() {
+    public boolean noDo() {
         if (this.isDone) {
             this.isDone = false;
             return true;

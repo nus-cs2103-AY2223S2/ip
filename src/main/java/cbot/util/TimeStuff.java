@@ -1,3 +1,5 @@
+package cbot.util;
+
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 import java.time.LocalDate;
@@ -10,7 +12,7 @@ public class TimeStuff {
     
     private static final DateTimeFormatter UI_FORM = DateTimeFormatter.ofPattern("dd/MM/yy, HHmm");
     
-    static LocalDateTime parseDT(String dtStr) throws DateTimeParseException {
+    public static LocalDateTime parseDT(String dtStr) throws DateTimeParseException {
         String str = dtStr.trim();
         
         for (String df : DFORMS) {
@@ -28,7 +30,7 @@ public class TimeStuff {
         return LocalDateTime.parse(str);
     }
     
-    static String text(LocalDateTime dt) {
+    public static String text(LocalDateTime dt) {
         return dt.format(UI_FORM);
     }
 }

@@ -1,3 +1,7 @@
+package cbot.util;
+
+import cbot.task.Task;
+
 import java.io.IOException;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
@@ -17,11 +21,11 @@ public class UI {
     static String PROMPT    = "\n v v\n";
     static String STALL     = "\n   o\n   o\n   o\n\n";
     
-    UI() {
+    public UI() {
         this.sc = new Scanner(System.in);
     }
     
-    String askUser() throws BadInputException {
+    public String askUser() throws BadInputException {
         System.out.println(PROMPT);
         String userInput = this.sc.nextLine();
         System.out.println();
@@ -33,11 +37,11 @@ public class UI {
         return userInput;
     }
     
-    static void sayNewFile(FileStuff fs) {
+    public static void sayNewFile(FileStuff fs) {
         System.out.println(WARNING + "No save file found. Making a new save at " + fs.getPath());
     }
     
-    static void sayHi() {
+    public static void sayHi() {
         String dukeLogo = " ____        _\n"
             + "|  _ \\ _   _| | _____\n"
             + "| | | | | | | |/ / _ \\\n"
@@ -56,7 +60,7 @@ public class UI {
                 + "How can I help you today?");
     }
     
-    static void sayBye() {
+    public static void sayBye() {
         System.out.println(STALL + INDENT + "See you again!");
     }
     
@@ -64,15 +68,15 @@ public class UI {
         System.out.println(INDENT + str);
     }
     
-    static void warn(Exception e) {
+    public static void warn(Exception e) {
         System.out.println(WARNING + e.getMessage());
     }
     
-    static void warnBad(Exception e) {
+    public static void warnBad(Exception e) {
         System.out.println(ERROR + e.getMessage());
     }
     
-    static void warnTime() {
+    public static void warnTime() {
         System.out.println(ERROR + "Sorry, I don't know how to interpret that datetime");
         System.out.println(WARNING + "Try something in the form: yyyy-MM-dd HH:mm");
     }

@@ -1,33 +1,37 @@
+package cbot.task;
+
+import cbot.util.TimeStuff;
+
 import java.time.LocalDateTime;
 
 public class Event extends Task {
     private LocalDateTime fromTime;
     private LocalDateTime toTime;
     
-    Event(String desc, boolean isDone, LocalDateTime fromTime, LocalDateTime toTime) {
+    public Event(String desc, boolean isDone, LocalDateTime fromTime, LocalDateTime toTime) {
         super(desc, isDone);
         this.fromTime = fromTime;
         this.toTime = toTime;
     }
     
-    Event(String desc, LocalDateTime fromTime, LocalDateTime toTime) {
+    public Event(String desc, LocalDateTime fromTime, LocalDateTime toTime) {
         super(desc);
         this.fromTime = fromTime;
         this.toTime = toTime;
     }
     
     @Override
-    String getSymbol() {
+    public String getSymbol() {
         return "E";
     }
     
     @Override
-    boolean hasTime() {
+    public boolean hasTime() {
         return true;
     }
     
     @Override
-    LocalDateTime getTime() {
+    public LocalDateTime getTime() {
         return this.fromTime;
     }
     
@@ -38,7 +42,7 @@ public class Event extends Task {
     }
     
     @Override
-    String makeFileFriendly() {
+    public String makeFileFriendly() {
         return String.format("%s%s%s%s%s",
                 super.makeFileFriendly(), SEP, this.fromTime, SEP, this.toTime);
     }

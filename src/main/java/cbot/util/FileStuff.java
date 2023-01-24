@@ -1,3 +1,10 @@
+package cbot.util;
+
+import cbot.task.Deadline;
+import cbot.task.Event;
+import cbot.task.Task;
+
+
 import java.io.File;
 import java.io.FileWriter;
 import java.io.FileNotFoundException;
@@ -9,28 +16,28 @@ import java.util.Scanner;
 public class FileStuff {
     private final File file;
     
-    FileStuff(String path) {
+    public FileStuff(String path) {
         this.file = new File(path);
     }
     
-    String getPath() {
+    public String getPath() {
         return this.file.getAbsolutePath();
     }
     
-    boolean pathExists() {
+    public boolean pathExists() {
         return this.file.getParentFile().exists();
     }
     
-    boolean fileExists() {
+    public boolean fileExists() {
         return this.file.exists();
     }
     
-    void makeFile() throws IOException  {
+    public void makeFile() throws IOException  {
         this.file.getParentFile().mkdir();
         this.file.createNewFile();
     }
     
-    void saveFile(TaskList tl) throws IOException {
+    public void saveFile(TaskList tl) throws IOException {
         if (!fileExists()) {
             makeFile();
         }
@@ -40,7 +47,7 @@ public class FileStuff {
         fw.close();
     }
     
-    TaskList loadFile() throws FileNotFoundException {
+    public TaskList loadFile() throws FileNotFoundException {
         Scanner s = new Scanner(this.file);
         
         ArrayList<Task> tdl = new ArrayList<Task>();

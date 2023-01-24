@@ -1,30 +1,34 @@
+package cbot.task;
+
+import cbot.util.TimeStuff;
+
 import java.time.LocalDateTime;
 
 public class Deadline extends Task {
     private LocalDateTime due;
     
-    Deadline(String desc, boolean isDone, LocalDateTime due) {
+    public Deadline(String desc, boolean isDone, LocalDateTime due) {
         super(desc, isDone);
         this.due = due;
     }
     
-    Deadline(String desc, LocalDateTime due) {
+    public Deadline(String desc, LocalDateTime due) {
         super(desc);
         this.due = due;
     }
     
     @Override
-    String getSymbol() {
+    public String getSymbol() {
         return "D";
     }
     
     @Override
-    boolean hasTime() {
+    public boolean hasTime() {
         return true;
     }
     
     @Override
-    LocalDateTime getTime() {
+    public LocalDateTime getTime() {
         return this.due;
     }
     
@@ -35,7 +39,7 @@ public class Deadline extends Task {
     }
 
     @Override
-    String makeFileFriendly() {
+    public String makeFileFriendly() {
         return String.format("%s%s%s",
                 super.makeFileFriendly(), SEP, this.due);
     }

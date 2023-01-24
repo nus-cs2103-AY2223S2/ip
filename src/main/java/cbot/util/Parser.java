@@ -1,12 +1,19 @@
-import java.util.ArrayList;
+package cbot.util;
+
+import cbot.task.Deadline;
+import cbot.task.Event;
+import cbot.task.Task;
+
 import java.time.format.DateTimeParseException;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
+
 
 public class Parser {
     private Command c;
     private String text;
     
-    Parser(String input) throws BadInputException {
+    public Parser(String input) throws PoorInputException {
         this.c = null;
         this.text = "";
         boolean matchFound = false;
@@ -25,34 +32,15 @@ public class Parser {
         }
     }
     
-    boolean isBye() {
+    public boolean isBye() {
         return (this.c == Command.BYE);
     }
     
-    /*
-    Predicate<Task> getPred() {
-        Predicate<Task> pred = t -> true;   // for LIST, SORT
-        
-        switch (this.c) {
-        case BEFORE:
-            pred = t -> (t.hasTime() && t.compareTo(new Deadline("", bef)) < 0);
-            break;
-        
-        case AFTER:
-        case FILTER:
-            switch (this.text) {
-            
-            
-            break;
-        }
-    }
-    */
-    
-    boolean needSave() {
+    public boolean needSave() {
         return this.c.needSave();
     }
     
-    void respond(TaskList tl) throws PoorInputException, DateTimeParseException {
+    public void respond(TaskList tl) throws PoorInputException, DateTimeParseException {
         if (this.c.missingText(this.text)) {
             throw new PoorInputException("Command \"" + this.c.toString() + "\" needs an input");
         }
