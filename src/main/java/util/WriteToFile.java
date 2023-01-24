@@ -1,9 +1,11 @@
 package util;
 
+import task.Task;
+
 import java.io.*;
 import java.util.Scanner;
 
-public class WriteToFile {
+public class WriteToFile implements Serializable {
     private static final String FILEPATH = "src/main/java/data/UserTasks.txt";
     public static void appendToFile(String textToAppend) {
         try{
@@ -22,11 +24,11 @@ public class WriteToFile {
         }
     }
 
-    public static void main(String[] args) {
-        Scanner input = new Scanner(System.in);
-        String str = input.nextLine();
-
-        appendToFile(str);
-    }
+//    public static void main(String[] args) {
+//        Scanner input = new Scanner(System.in);
+//        String str = input.nextLine();
+//
+//        appendToFile(str);
+//    }
 
 }

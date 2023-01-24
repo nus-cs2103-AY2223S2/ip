@@ -15,6 +15,10 @@ public class Task {
         return (isDone ? "X" : " ");
     }
 
+    public Boolean getStatus() {
+        return isDone;
+    }
+
     public String getDescription() {
         return description;
     }

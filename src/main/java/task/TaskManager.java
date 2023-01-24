@@ -1,6 +1,7 @@
 package task;
 
 import java.util.ArrayList;
+import util.WriteToFile;
 
 public class TaskManager {
     protected ArrayList<Task> taskArr;
@@ -30,10 +31,11 @@ public class TaskManager {
 
     public void addTaskToList(Task task) {
         taskArr.add(task);
+        WriteToFile.appendToFile(task.getStatusIcon() + task.getDescription());
         System.out.println("I have added: " + task + "!");
         System.out.println("There are currently " + taskArr.size() + " task(s) in the list!");
     }
-
+    
     //credit: https://stackabuse.com/java-check-if-string-is-a-number/
     public boolean isNumeric(String string) {
         int intValue;
