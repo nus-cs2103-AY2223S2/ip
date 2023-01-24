@@ -1,33 +1,41 @@
+import java.time.LocalDateTime;
+
 public class Event extends Task {
 
-    protected String from;
-    protected String to;
+    protected LocalDateTime from;
+    protected LocalDateTime to;
 
-    public Event(String description, String from, String to) {
+    public Event(String description, LocalDateTime from, LocalDateTime to) {
         super(description);
         this.from = from;
         this.to = to;
     }
 
-    String getFrom() {
+    LocalDateTime getFrom() {
         return from;
     }
 
-    void setFrom(String from) {
+    void setFrom(LocalDateTime from) {
         this.from = from;
     }
 
-    String getTo() {
+    LocalDateTime getTo() {
         return to;
     }
 
-    void setTo(String to) {
+    void setTo(LocalDateTime to) {
         this.to = to;
     }
 
     @Override
     public String toString() {
         return "[E]" + super.toString()
-                + " (From: " + from + " To: " + to + ")";
+                + " (From: "
+                + from.getDayOfMonth() + " " + from.getMonth() + " " + from.getYear() + " "
+                + from.getHour() + from.getMinute() // bugalert: may not always be 4-digits
+                + " To: "
+                + to.getDayOfMonth() + " " + to.getMonth() + " " + to.getYear() + " "
+                + to.getHour() + to.getMinute() // bugalert: may not always be 4-digits
+                + ")";
     }
 }

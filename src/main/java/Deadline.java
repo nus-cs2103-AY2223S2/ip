@@ -1,23 +1,28 @@
+import java.time.LocalDateTime;
+
 public class Deadline extends Task {
 
-    protected String by;
+    protected LocalDateTime by;
 
-    public Deadline(String description, String by) {
+    public Deadline(String description, LocalDateTime by) {
         super(description);
         this.by = by;
     }
 
-    String getBy() {
+    LocalDateTime getBy() {
         return by;
     }
 
-    void setBy(String by) {
+    void setBy(LocalDateTime by) {
         this.by = by;
     }
 
     @Override
     public String toString() {
         return "[D]" + super.toString()
-                + " (By: " + by + ")";
+                + " (By: "
+                + by.getDayOfMonth() + " " + by.getMonth() + " " + by.getYear() + " "
+                + by.getHour() + by.getMinute() // bugalert: may not always be 4-digits
+                + ")";
     }
 }

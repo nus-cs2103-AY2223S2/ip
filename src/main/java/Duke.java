@@ -206,7 +206,7 @@ public class Duke {
                         Duke.assertThis(!taskDescription.isEmpty(), "Task description cannot be empty.");
                         Duke.assertThis(!duedate.isEmpty(), "Due date cannot be empty.");
 
-                        duke.addNewTask(new Deadline(taskDescription, duedate));
+                        duke.addNewTask(new Deadline(taskDescription, Duke.parseDateTime(duedate)));
                         break;
 
                     case EVENT:
@@ -227,7 +227,11 @@ public class Duke {
                         Duke.assertThis(!start.isEmpty(), "Start date/time cannot be empty.");
                         Duke.assertThis(!end.isEmpty(), "End date/time cannot be empty.");
 
-                        duke.addNewTask(new Event(taskDescription, start, end));
+                        duke.addNewTask(new Event(
+                                taskDescription,
+                                Duke.parseDateTime(start),
+                                Duke.parseDateTime(end))
+                        );
                         break;
 
                     case LIST:
