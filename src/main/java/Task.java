@@ -23,4 +23,5 @@ public abstract class Task {
         this.done = done;
     }
 
+    public abstract String writeToMemory();
 }

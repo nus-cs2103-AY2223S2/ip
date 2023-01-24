@@ -182,19 +182,11 @@ public class Duke {
     public static void saveTasks() {
         try {
             BufferedWriter fw = Files.newBufferedWriter(memoryPath , StandardOpenOption.TRUNCATE_EXISTING);
-
             for (Task task: allTasks) {
-                String toWrite = "";
-                if (task instanceof ToDo) {
-                    fw.write();
-                } else if (task instanceof Deadline) {
-
-                } else if (task instanceof Event) {
-
-                }
-                fw.write(toWrite);
+                fw.write(task.writeToMemory());
+                fw.newLine();
             }
-
+            fw.close();
         } catch (IOException e) {
             e.printStackTrace();
         }
