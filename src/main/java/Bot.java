@@ -1,4 +1,3 @@
-import javax.management.Query;
 import java.util.StringTokenizer;
 
 public class Bot {
@@ -8,12 +7,9 @@ public class Bot {
 
     private TaskTracker tt = new TaskTracker();
 
-    public void init() {
+    public void init() throws DukeException {
         if (SHOULD_LOAD_TASK_SAVE) {
-            try {
-                tt.LoadTasks();
-            } catch (TaskSaveException e) {
-            }
+            tt.loadTasks();
         }
     }
 
@@ -33,17 +29,16 @@ public class Bot {
         }
 
         try {
-            IQueryHandler queryHandler = GetQueryHandler(queryType);
+            IQueryHandler queryHandler = getQueryHandler(queryType);
             response = queryHandler.processQuery(input);
         } catch (DukeException e) {
             response = "I have failed you my liege! " + e.getMessage();
         }
 
-        String res = formatter.format(response);
-        return new BotResult(status, res);
+        return new BotResult(status, response);
     }
 
-    private IQueryHandler GetQueryHandler(QueryType queryType) throws UnknownCommandException {
+    private IQueryHandler getQueryHandler(QueryType queryType) throws UnknownCommandException {
         switch(queryType) {
             case TODO:
                 return new TodoQueryHandler(tt);

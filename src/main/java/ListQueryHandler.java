@@ -5,6 +5,6 @@ public class ListQueryHandler extends TaskQueryHandler {
 
     @Override
     public String processQuery(String query) throws DukeException {
-        return tt.GetNumTasks() < 1 ? "No items!" : tt.ListTasks();
+        return tt.getNumTasks() < 1 ? "No items!" : tt.listTasks();
     }
 }

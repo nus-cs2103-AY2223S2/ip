@@ -39,8 +39,8 @@ public class EventQueryHandler extends DeadlineQueryHandler {
             throw new InvalidCommandParamException(String.format("Please provide a valid end date for your event! (%s)", DATETIME_PATTERN));
         }
 
-        Task newTask = tt.AddEvent(desc, startDate, endDate);
-        tt.SaveAllTasks();
+        Task newTask = tt.addEvent(desc, startDate, endDate);
+        tt.saveAllTasks();
         return "Added task " + newTask;
     }
 }

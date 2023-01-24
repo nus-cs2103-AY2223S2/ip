@@ -1,7 +1,6 @@
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
-import java.time.format.FormatStyle;
 
 public class DeadlineQueryHandler extends TaskQueryHandler {
     protected final String DATETIME_PATTERN = "yyyy-MM-dd HH:mm";
@@ -33,9 +32,9 @@ public class DeadlineQueryHandler extends TaskQueryHandler {
             throw new InvalidCommandParamException(String.format("Please provide a valid end date for your deadline! (%s)", DATETIME_PATTERN));
         }
 
-        Task newTask = tt.AddDeadline(desc, endDateTime);
+        Task newTask = tt.addDeadline(desc, endDateTime);
 
-        tt.SaveAllTasks();
+        tt.saveAllTasks();
         return "Added task " + newTask;
     }
 }

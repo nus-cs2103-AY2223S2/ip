@@ -1,30 +1,30 @@
-import java.util.Scanner;
-
 public class Duke {
-    private static final String LOGO = " ____        _\n"
-            + "|  _ \\ _   _| | _____\n"
-            + "| | | | | | | |/ / _ \\\n"
-            + "| |_| | |_| |   <  __/\n"
-            + "|____/ \\__,_|_|\\_\\___|\n";
+    private Bot bot;
+    private Ui ui;
 
-    private static final String GREETING = "Hello there! I am 4RTHUR\n";
+    public Duke() {
+       this.bot = new Bot();
+       this.ui = new Ui();
 
-    public static void main(String[] args) {
-        System.out.println(LOGO + "\n" + GREETING);
+        try {
+            bot.init();
+            ui.displayGreeting();
+        } catch (DukeException e) {
+            ui.displayInitError();
+        }
+    }
 
-        Scanner scanner = new Scanner(System.in);
-        Bot bot =  new Bot();
-        bot.init();
-
-        // Response Loop
+    public void run() {
         boolean running =  true;
-        while (running & scanner.hasNext()) {
-            String input = scanner.nextLine();
+        while (running & ui.hasUserInput()) {
+            String input = ui.getUserInput();
             BotResult result = bot.process(input);
-
-            System.out.println(result.response);
-
+            ui.displayResponse(result.response);
             running = result.resultStatus != BotResult.BotStatus.Exit;
         }
+    }
+
+    public static void main(String[] args) {
+        new Duke().run();
     }
 }

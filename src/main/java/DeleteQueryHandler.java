@@ -9,8 +9,8 @@ public class DeleteQueryHandler extends TaskQueryHandler {
     public String processQuery(String query) throws DukeException {
         StringTokenizer st = new StringTokenizer(query);
         st.nextToken();
-        Task t = tt.DeleteTask(Integer.parseInt(st.nextToken()) - 1);
-        tt.SaveAllTasks();
+        Task t = tt.deleteTask(Integer.parseInt(st.nextToken()) - 1);
+        tt.saveAllTasks();
         return "Task deleted: " + t;
     }
 }
