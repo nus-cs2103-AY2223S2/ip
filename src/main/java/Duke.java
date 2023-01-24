@@ -1,3 +1,6 @@
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
 import java.util.Scanner;
 import java.util.regex.Matcher;
@@ -48,8 +51,12 @@ public class Duke {
         if (deadlineCommandMatcher.find()) {
             String description = deadlineCommandMatcher.group(1);
             String by = deadlineCommandMatcher.group(2);
-
-            addTask(new Deadline(description, by));
+            try {
+                LocalDateTime byDateTime = LocalDateTime.parse(by, DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm"));
+                addTask(new Deadline(description, byDateTime));
+            } catch (DateTimeParseException exception) {
+                throw new DukeException("Please enter date and time in this format: dd/MM/yyyy HH:mm");
+            }
         } else {
             throw new DukeException("You are missing either the description or deadline.\n     It's 'deadline <description> /by <deadline>'.");
         }
@@ -62,7 +69,15 @@ public class Duke {
             String from = eventCommandMatcher.group(2);
             String to = eventCommandMatcher.group(3);
 
-            addTask(new Event(description, from, to));
+            try {
+                DateTimeFormatter dateTimeFormat = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm");
+                LocalDateTime fromDateTime = LocalDateTime.parse(from, dateTimeFormat);
+                LocalDateTime toDateTime = LocalDateTime.parse(to, dateTimeFormat);
+
+                addTask(new Event(description, fromDateTime, toDateTime));
+            } catch (DateTimeParseException exception) {
+                throw new DukeException("Please enter date and time in this format: dd/MM/yyyy HH:mm");
+            }
         } else {
             throw new DukeException("You are missing either the description, from or to.\n     It's 'event <description> /from <from> /to <to>'.");
         }
