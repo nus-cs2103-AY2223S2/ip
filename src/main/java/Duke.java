@@ -1,5 +1,11 @@
+import org.jetbrains.annotations.NotNull;
+
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.io.FileWriter;
 import java.util.*;
 import java.util.regex.*;
+import java.io.File;
 
 public class Duke {
     public static int MAXCHAR = 60;
@@ -9,7 +15,6 @@ public class Duke {
     public static void chatboxFrame() {
         System.out.println("\t____________________________________________________________");
     }
-
     public static void chatbox(String text) {
         chatbox(text, true);
     }
@@ -32,8 +37,74 @@ public class Duke {
             chatboxFrame();
         }
     }
+    public static File fileInit(String parent, String child) {
+        File taskFile = new File("./data/duke.txt");
+        if (!taskFile.exists()) {
+            try {
+                File parentFolder = new File(parent);
+                parentFolder.mkdirs();
+                taskFile.createNewFile();
+            } catch (IOException e) {
+                System.out.println("Error: " + e.getMessage());
+            }
+        }
+
+        Scanner sc;
+
+        try {
+            sc = new Scanner(taskFile);
+            while (sc.hasNext()) {
+                String row = sc.nextLine();
+
+                Task curr;
+                Matcher m;
+                switch (row.charAt(1)) {
+                case 'T':
+                    m = Pattern.compile("\\[[TDE]\\]\\[[X ]\\] (.+)").matcher(row);
+                    m.find();
+                    curr = new Todo(m.group(1));
+                    break;
+                case 'D':
+                    m = Pattern.compile("\\[[TDE]\\]\\[[X ]\\] (.*) \\(by: (.+)\\)").matcher(row);
+                    m.find();
+                    curr = new Deadline(m.group(1), m.group(2));
+                    break;
+                case 'E':
+                    m = Pattern.compile("\\[[TDE]\\]\\[[X ]\\] (.*) \\(from: (.*) to: (.*)\\)").matcher(row);
+                    m.find();
+                    curr = new Event(m.group(1), m.group(2), m.group(3));
+                    break;
+                default:
+                    return taskFile;
+                }
+
+                if (row.charAt(4) == 'X') {
+                    curr.setDone(true);
+                }
+
+                tasklist.add(curr);
+            }
+        } catch (FileNotFoundException e) {
+            System.out.println("Error: " + e.getMessage());
+        }
+
+        return taskFile;
+    }
+
+    public static void fileUpdate(File taskFile) {
+        try {
+            FileWriter fw = new FileWriter(taskFile);
+            for (Task item : tasklist) {
+                fw.write(item.toString() + "\n");
+            }
+            fw.close();
+        } catch (IOException e) {
+            System.out.println("Error: " + e.getMessage());
+        }
+    }
 
     public static void main(String[] args) {
+        File taskFile = fileInit("./data", "duke.txt");
         Scanner sc = new Scanner(System.in);
         String input;
         Matcher m;
@@ -41,6 +112,8 @@ public class Duke {
 
         while (loop) {
             try {
+                fileUpdate(taskFile);
+
                 input = sc.nextLine();
 
                 m = Pattern.compile("^bye$").matcher(input);
@@ -141,6 +214,8 @@ public class Duke {
                         );
                     continue;
                 }
+
+
 
                 throw new UnrecognisedCommandException();
 
