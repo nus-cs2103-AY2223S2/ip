@@ -37,8 +37,7 @@ public class Duke {
                         System.out.println(i + 1 + ". " + taskList.get(i));
                     }
                 }
-            }
-            else if (command.startsWith("mark ") || command.startsWith("unmark ")) {
+            } else if (command.startsWith("mark ") || command.startsWith("unmark ")) {
                 // Mark task as done
                 if (command.substring(0, command.indexOf(" ")).equalsIgnoreCase("mark")) {
                     int index = Integer.parseInt(command.replaceAll("mark ", "")) - 1;
@@ -53,15 +52,33 @@ public class Duke {
                     System.out.println("OK, I've marked this task as not done yet:");
                     System.out.println(taskList.get(index));
                 }
-                //return;
+            }
+            // Create new ToDo task
+            else if (command.startsWith("todo ")) {
+                ToDo newToDo = new ToDo(command.substring(command.indexOf(" ") + 1));
+                taskList.add(newToDo);
+                System.out.println("I've added this task to your list:");
+                System.out.println(newToDo);
+            }
+            // Create new Deadline task
+            else if (command.startsWith("deadline ")) {
+                Deadline newDeadline = new Deadline(command.substring(command.indexOf(" ") + 1, command.indexOf("/")),
+                        command.substring(command.indexOf("/by") + 4));
+                taskList.add(newDeadline);
+                System.out.println("I've added this task to your list:");
+                System.out.println(newDeadline);
+            }
+            // Create new Event task
+            else if (command.startsWith("event ")) {
+                String from = command.substring(command.indexOf("/from") + 6, command.indexOf(" /to"));
+                String to = command.substring(command.indexOf("/to") + 4);
+                Event newEvent = new Event(command.substring(command.indexOf(" ") + 1, command.indexOf("/from")), from, to);
+                taskList.add(newEvent);
+                System.out.println("I've added this task to your list:");
+                System.out.println(newEvent);
             }
 
-            else{
-                // add user input to list and echo
-                Task newTask = new Task(command);
-                taskList.add(newTask);
-                System.out.println(adder(command));
-            }
+            System.out.println("You have " + taskList.size() + " tasks in your list.");
         }
     }
 
