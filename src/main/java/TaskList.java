@@ -30,7 +30,7 @@ public class TaskList {
         return this.tasks.size();
     }
 
-    public Task addTask(String inputTaskType, Map<String,String> args) throws CommandNotFoundException, InvalidInputException {
+    public Task addTask(String inputTaskType, Map<String,String> args) throws InvalidDateTimeException, CommandNotFoundException, InvalidInputException {
         Tasks taskType = this.inputToTask.get(inputTaskType);
         if (taskType == null) {
             throw new InvalidInputException("Please specify what type of task you want to add!");
