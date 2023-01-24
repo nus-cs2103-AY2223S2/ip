@@ -66,4 +66,9 @@ public class Deadline extends Task {
 
         return String.format("[D]%s (by: %s)", super.toString(), deadlineStr);
     }
+
+    @Override
+    protected Task createCopy() {
+        return new Deadline(isDone(), getDescription(), deadline);
+    }
 }

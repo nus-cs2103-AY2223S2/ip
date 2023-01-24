@@ -100,6 +100,25 @@ public class TaskList {
         return task;
     }
 
+    /**
+     * Update the task at index.
+     *
+     * @param index The index of the task to be updated.
+     * @param task The updated task.
+     * @throws DukeException Indicates failure to write to storage.
+     */
+    public void update(int index, Task task) throws DukeException {
+        Task oldTask = tasks.get(index);
+        tasks.set(index, task);
+
+        try {
+            writeToStorage();
+        } catch (DukeException e) {
+            tasks.set(index, oldTask);
+            throw e;
+        }
+    }
+
     private void loadFromStorage() throws DukeException {
         List<Task> tasks = new ArrayList<Task>();
         String[] taskStrs = storage.read().split("\n");

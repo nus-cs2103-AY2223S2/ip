@@ -18,8 +18,11 @@ public abstract class Task {
         this.description = description;
     }
 
-    public void setDone(boolean isDone) {
-        this.isDone = isDone;
+    public Task setDone(boolean isDone) {
+        Task task = createCopy();
+        task.isDone = isDone;
+
+        return task;
     }
 
     /**
@@ -62,4 +65,19 @@ public abstract class Task {
 
         return formatted;
     }
+
+    protected boolean isDone() {
+        return isDone;
+    }
+
+    protected String getDescription() {
+        return description;
+    }
+
+    /**
+     * Creates a copy of this task and returns it.
+     *
+     * @return A copy of this task.
+     */
+    protected abstract Task createCopy();
 }

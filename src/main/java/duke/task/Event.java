@@ -79,4 +79,9 @@ public class Event extends Task {
 
         return String.format("[E]%s (from: %s to: %s)", super.toString(), startStr, endStr);
     }
+
+    @Override
+    protected Task createCopy() {
+        return new Event(isDone(), getDescription(), start, end);
+    }
 }

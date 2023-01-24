@@ -19,9 +19,9 @@ public abstract class SetDoneCommand implements Command {
     @Override
     public String run(String input, TaskList tasks) throws DukeException {
         int index = extractValidIndex(input, tasks);
-        Task task = tasks.get(index);
+        Task task = tasks.get(index).setDone(shouldBeDone());
 
-        task.setDone(shouldBeDone());
+        tasks.update(index, task);
 
         return getMessage(task);
     }
