@@ -9,4 +9,13 @@ list
 unmark 3
 list
 wronginput
+mark
+mark 6
+unmark
+unmark 6
+todo
+deadline swim /by
+deadline /by Monday
+event bake /from 1pm /to
+event /from 2pm /to 3pm
 bye

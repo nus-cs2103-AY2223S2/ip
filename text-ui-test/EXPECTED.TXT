@@ -34,5 +34,14 @@ Here are the tasks you asked for!
 3: [D][ ] finish project (by: March 20)
 4: [E][X] Jason Birthday (from: 5pm to: 10pm)
 You now have 4 items in your list.
-Oops I do not recognise this command...
+DukeException: Oops I do not recognise this command...
+DukeException: Mark? Mark what?
+DukeException: Oops, that task number does not exist
+DukeException: Unmark? Unmark what?
+DukeException: Oops, that task number does not exist
+DukeException: Oops, you can't enter an empty task!
+DukeException: Wait a minute, you're missing something! Could be the name or date...
+DukeException: Wait a minute, you're missing something! Could be the name or date...
+DukeException: Hold up, you might be missing something here buddy!
+DukeException: Hold up, you might be missing something here buddy!
 It was a pleasure to help, goodbye!

@@ -14,7 +14,7 @@ public class Duke {
         System.out.println("Item added: " + name);
     }
 
-    public boolean readInput(String input) {
+    public boolean readInput(String input) throws DukeException{
         String firstInput = input.split(" ")[0];
 
         switch(firstInput) {
@@ -32,6 +32,9 @@ public class Duke {
                 return false;
 
             case "mark":
+                if (input.split(" ").length < 2) {
+                    throw new DukeException("Mark? Mark what?");
+                }
                 try {
                     int taskIndex = Integer.parseInt(input.split(" ")[1]) - 1;
                     Task selectedTask = taskList.get(taskIndex);
@@ -40,11 +43,13 @@ public class Duke {
                     System.out.println(selectedTask);
                     return true;
                 } catch (IndexOutOfBoundsException e) {
-                    System.out.println("Oops, that task number does not exist");
-                    break;
+                    throw new DukeException("Oops, that task number does not exist");
                 }
 
             case "unmark":
+                if (input.split(" ").length < 2) {
+                    throw new DukeException("Unmark? Unmark what?");
+                }
                 try {
                     int untaskIndex = Integer.parseInt(input.split(" ")[1]) - 1;
                     Task unselectedTask = taskList.get(untaskIndex);
@@ -53,19 +58,24 @@ public class Duke {
                     System.out.println(unselectedTask);
                     return true;
                 } catch (IndexOutOfBoundsException e) {
-                    System.out.println("Oops, that task number does not exist");
-                    break;
+                    throw new DukeException("Oops, that task number does not exist");
                 }
 
             case "todo":
-                String todoTaskName = input.substring(5);
-                TodoTask todoTask = new TodoTask(todoTaskName);
-                addTask(todoTask, todoTaskName);
-                return true;
-
+                try {
+                    String todoTaskName = input.substring(5);
+                    TodoTask todoTask = new TodoTask(todoTaskName);
+                    addTask(todoTask, todoTaskName);
+                    return true;
+                } catch (StringIndexOutOfBoundsException e) {
+                    throw new DukeException("Oops, you can't enter an empty task!");
+                }
 
             case "deadline":
                 String deadlineDetails = input.substring(9);
+                if (deadlineDetails.split(" /by ").length < 2) {
+                    throw new DukeException("Wait a minute, you're missing something! Could be the name or date...");
+                }
                 String deadlineName = deadlineDetails.split(" /by ")[0];
                 String deadlineDate = deadlineDetails.split(" /by ")[1];
                 DeadlineTask deadlineTask = new DeadlineTask(deadlineName, deadlineDate);
@@ -74,6 +84,9 @@ public class Duke {
 
             case "event":
                 String eventDetails = input.substring(6);
+                if (eventDetails.split(" /from ").length < 2 || eventDetails.split(" /to ").length < 2) {
+                    throw new DukeException("Hold up, you might be missing something here buddy!");
+                }
                 String eventName = eventDetails.split(" /from ")[0];
                 String eventDate = eventDetails.split(" /from ")[1];
                 String eventStart = eventDate.split(" /to ")[0];
@@ -83,13 +96,11 @@ public class Duke {
                 return true;
 
             default:
-                System.out.println("Oops I do not recognise this command...");
+                throw new DukeException("Oops I do not recognise this command...");
         }
-
-        return true;
     }
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws DukeException{
         System.out.println("Yo! The name is\n" + projName);
         System.out.println("How might I help you today?");
         Scanner scanner = new Scanner(System.in);
@@ -99,7 +110,11 @@ public class Duke {
 
         while (cont) {
             String input = scanner.nextLine();
-            cont = duke.readInput(input);
+            try {
+                cont = duke.readInput(input);
+            } catch (DukeException e) {
+                System.out.println(e);
+            }
         }
         scanner.close();
     }
