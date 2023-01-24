@@ -57,6 +57,10 @@ public class Duke {
                     taskList.handleByeCommand();
                     sc.close();
                     return;
+
+                case dueon:
+                    taskList.handleDueOnCommand(tokens);
+                    break;
                 }
             } catch (DukeException error) {
                 System.out.println(error.getMessage());

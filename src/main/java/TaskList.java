@@ -1,3 +1,6 @@
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
 import java.util.Arrays;
 
@@ -104,7 +107,15 @@ public class TaskList {
         String taskName = String.join(" ", taskNameArray);
         String by = String.join(" ", byArray);
 
-        DeadlineTask newDeadlineTask = new DeadlineTask(taskName, by);
+        LocalDate byDate;
+
+        try {
+            byDate = LocalDate.parse(by, DateTimeFormatter.ISO_LOCAL_DATE);
+        } catch (DateTimeParseException e) {
+            throw new DukeInvalidDeadlineCommandException();
+        }
+
+        DeadlineTask newDeadlineTask = new DeadlineTask(taskName, byDate);
         this.addTask(newDeadlineTask);
     }
 
@@ -177,6 +188,37 @@ public class TaskList {
 
     public void handleByeCommand() {
         System.out.println("Exiting...");
+    }
+
+    public void handleDueOnCommand(String[] tokens) throws DukeInvalidDueOnCommandException {
+        if (tokens.length != 2) {
+            throw new DukeInvalidDueOnCommandException();
+        }
+
+        LocalDate dueOnDate;
+
+        try {
+            dueOnDate = LocalDate.parse(tokens[1], DateTimeFormatter.ISO_LOCAL_DATE);
+        } catch (DateTimeParseException e) {
+            throw new DukeInvalidDueOnCommandException();
+        }
+
+        boolean isAnyDeadlineTaskDueOnGivenDate = false;
+
+        for (Task task : this.tasks) {
+            if (task instanceof DeadlineTask) {
+                DeadlineTask deadlineTask = (DeadlineTask) task;
+
+                if (deadlineTask.isDueOn(dueOnDate)) {
+                    isAnyDeadlineTaskDueOnGivenDate = true;
+                    System.out.println(deadlineTask);
+                }
+            }
+        }
+
+        if (!isAnyDeadlineTaskDueOnGivenDate) {
+            System.out.println("There are no deadline tasks due on " + dueOnDate);
+        }
     }
 
     public void printNumberOfTasks() {
