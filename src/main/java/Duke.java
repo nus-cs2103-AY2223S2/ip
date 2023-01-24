@@ -1,4 +1,5 @@
 
+import java.time.format.DateTimeParseException;
 import java.util.Scanner;
 
 public class Duke {
@@ -47,7 +48,12 @@ public class Duke {
                         throw new UnknownInputException("Hmm, I'm not sure what you're saying man.");
                     }
                 }
-                dukeList.add(array[0], array[1]);
+                try {
+                    dukeList.add(array[0], array[1]);
+                } catch (DateTimeParseException e) {
+                    System.out.println("Hey, I can't see what date that is man.");
+                }
+
             }
         }
     }
