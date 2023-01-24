@@ -13,5 +13,6 @@ public class MeggyTest {
         String expected = new String(new FileInputStream("text-ui-test/EXPECTED.txt").readAllBytes()).
                 replaceAll("\r", "");
         System.out.println(actual.equals(expected));
+        System.out.println(actual);
     }
 }

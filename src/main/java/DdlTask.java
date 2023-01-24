@@ -48,6 +48,11 @@ public class DdlTask extends UserTask {
     }
 
     @Override
+    public String encode() {
+        return Resource.cmdDdl + ' ' + desc + ' ' + dueFmt + due;
+    }
+
+    @Override
     public String toString() {
         return label + super.toString() + " (by: " + due + ')';
     }

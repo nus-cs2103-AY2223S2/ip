@@ -1,7 +1,7 @@
 /**
  * Entries to be recorded by Meggy
  */
-public class UserTask {
+public abstract class UserTask {
     /**
      * Task description.
      */
@@ -39,6 +39,15 @@ public class UserTask {
         return '/' + keyword + ' ';
     }
 
+    /**
+     * @return The string representation of this task in data file format. Currently: re-create the command that would
+     * add the task.
+     */
+    public abstract String encode();
+
+    /**
+     * @return The string representation of this task in text UI.
+     */
     @Override
     public String toString() {
         return Util.parenthesize(status ? Resource.doneMk : ' ') + ' ' + desc;
