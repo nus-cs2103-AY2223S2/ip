@@ -29,8 +29,8 @@ public class Event extends Task {
           TaskSerializer ts = new TaskSerializer(CATEGORY);
           ts.add(NAME_KEY, name);
           ts.add(COMPLETED_KEY, completed);
-          ts.add(FROM_KEY, from);
-          ts.add(TO_KEY, to);
+          ts.add(FROM_KEY, from.format(RECEIVE_FORMAT));
+          ts.add(TO_KEY, to.format(RECEIVE_FORMAT));
           return ts.toString();
      }
 

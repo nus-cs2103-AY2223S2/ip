@@ -25,7 +25,7 @@ public class Deadline extends Task {
         TaskSerializer ts = new TaskSerializer(CATEGORY);
         ts.add(NAME_KEY, name);
         ts.add(COMPLETED_KEY, completed);
-        ts.add(BY_KEY, by);
+        ts.add(BY_KEY, by.format(RECEIVE_FORMAT));
         return ts.toString();
     }
     @Override
