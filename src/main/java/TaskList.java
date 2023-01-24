@@ -53,8 +53,34 @@ public class TaskList {
         return this.lst.get(index);
     }
 
-    public void addTask(Task t) {
-        this.lst.add(t);
+    public void addTask(Task t) { this.lst.add(t); }
+
+    public void addTaskFromString(String data) throws DukeException{
+        Task task = null;
+        String[] details = data.split(" \\| ");
+        // T/D/E || completed || descr || deadline/start || end
+        String taskType = details[0];
+        String doneData = details[1];
+        String descr = details[2];
+        try {
+            switch (taskType) {
+                case "T":
+                    task = Todo.toTodoFromFileStr(descr, doneData);
+                    break;
+                case "D":
+                    String deadlineData = details[3];
+                    task = Deadline.toDeadlineFromFileStr(descr, doneData, deadlineData);
+                    break;
+                case "E":
+                    String startData = details[3];
+                    String endData = details[4];
+                    task = Event.toEventFromFileStr(descr, doneData, startData, endData);
+                    break;
+            }
+        } catch (ArrayIndexOutOfBoundsException e) {
+            throw new DukeException("missing details");
+        }
+        this.lst.add(task);
     }
 
     public int getSize() {
