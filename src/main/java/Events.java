@@ -3,8 +3,7 @@ import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 public class Events extends Task {
     protected LocalDateTime start;
-    private static final DateTimeFormatter formatter =
-            DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
+
     protected LocalDateTime end;
     public Events(String description, String start, String end) {
 
@@ -20,7 +19,7 @@ public class Events extends Task {
     @Override
     public String toString() {
         return "[E]" + super.toString() + String.format(" (from: %s to: %s)", this.start.format(formatter),
-                this.end.format(formatter));
+                this.end.format(printFormatter));
     }
 
     public String formatText() {

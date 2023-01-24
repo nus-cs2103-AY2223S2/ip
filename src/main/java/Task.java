@@ -1,6 +1,13 @@
+import java.time.format.DateTimeFormatter;
+
 abstract class Task {
     protected String description;
     protected boolean isDone;
+    protected static final DateTimeFormatter formatter =
+            DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
+
+    protected static final DateTimeFormatter printFormatter =
+            DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm");
 
     public Task(String description) {
         this.description = description;
