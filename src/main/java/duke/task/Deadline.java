@@ -61,7 +61,7 @@ public class Deadline extends Task {
 
     @Override
     public String toString() {
-        String deadlineStr = deadline.format(LocalDateTimeUtils.outputDateTimeFormatter);
+        String deadlineStr = deadline.format(LocalDateTimeUtils.OUTPUT_DATE_TIME_FORMATTER);
 
         return String.format("[D]%s (by: %s)", super.toString(), deadlineStr);
     }

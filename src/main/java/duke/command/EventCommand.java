@@ -66,10 +66,10 @@ public class EventCommand extends AddCommand {
             throw new DukeException("The end of an event must be specified!");
         }
 
-        if (!args[1].matches(LocalDateTimeUtils.inputDateTimeRegex)
-                || !args[2].matches(LocalDateTimeUtils.inputDateTimeRegex)) {
+        if (!args[1].matches(LocalDateTimeUtils.INPUT_DATE_TIME_REGEX)
+                || !args[2].matches(LocalDateTimeUtils.INPUT_DATE_TIME_REGEX)) {
             throw new DukeException(String.format("Start and end of event should be of the format:\n  %s",
-                    LocalDateTimeUtils.inputDateTimeFormat));
+                    LocalDateTimeUtils.INPUT_DATE_TIME_FORMAT));
         }
 
         return args;
@@ -78,14 +78,14 @@ public class EventCommand extends AddCommand {
     private Event createEvent(String[] args) throws DukeException {
         LocalDateTime start;
         try {
-            start = LocalDateTime.parse(args[1], LocalDateTimeUtils.inputDateTimeFormatter);
+            start = LocalDateTime.parse(args[1], LocalDateTimeUtils.INPUT_DATE_TIME_FORMATTER);
         } catch (DateTimeParseException e) {
             throw new DukeException("The start of the event provided is an invalid date and time!");
         }
 
         LocalDateTime end;
         try {
-            end = LocalDateTime.parse(args[2], LocalDateTimeUtils.inputDateTimeFormatter);
+            end = LocalDateTime.parse(args[2], LocalDateTimeUtils.INPUT_DATE_TIME_FORMATTER);
         } catch (DateTimeParseException e) {
             throw new DukeException("The end of the event provided is an invalid date and time!");
         }

@@ -61,9 +61,9 @@ public class DeadlineCommand extends AddCommand {
             throw new DukeException("The cutoff of a deadline must be specified!");
         }
 
-        if (!args[1].matches(LocalDateTimeUtils.inputDateTimeRegex)) {
+        if (!args[1].matches(LocalDateTimeUtils.INPUT_DATE_TIME_REGEX)) {
             throw new DukeException(String.format("The cutoff format should be:\n  %s",
-                    LocalDateTimeUtils.inputDateTimeFormat));
+                    LocalDateTimeUtils.INPUT_DATE_TIME_FORMAT));
         }
 
         return args;
@@ -72,7 +72,7 @@ public class DeadlineCommand extends AddCommand {
     private Deadline createDeadline(String[] args) throws DukeException {
         LocalDateTime cutoff;
         try {
-            cutoff = LocalDateTime.parse(args[1], LocalDateTimeUtils.inputDateTimeFormatter);
+            cutoff = LocalDateTime.parse(args[1], LocalDateTimeUtils.INPUT_DATE_TIME_FORMATTER);
         } catch (DateTimeParseException e) {
             throw new DukeException("The cutoff provided is an invalid date and time!");
         }
