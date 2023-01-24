@@ -14,14 +14,16 @@ public class TaskPresenter implements Presenter {
         this.listenerList = new ArrayList<>();
         CommandFactory commandFactory = new CommandFactory(taskModel, taskView);
         this.parser = new InputParser(listenerList, commandFactory);
-        Command greetCommand = commandFactory.createCommand("greet");
+        Command greetCommand = this.parser.parseInput("greet");
         greetCommand.execute();
     }
 
     @Override
     public void handleInput(String input) {
         Command userCommand = parser.parseInput(input);
-        userCommand.execute();
+        if (userCommand != null) {
+            userCommand.execute();
+        }
     }
 
     @Override

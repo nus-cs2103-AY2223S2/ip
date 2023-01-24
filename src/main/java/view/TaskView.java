@@ -1,12 +1,17 @@
 package view;
+import model.Task;
 import interfaces.View;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Scanner;
 
 public class TaskView implements View {
     private final Scanner sc;
+    private List<Task> tasks;
     public TaskView() {
         this.sc = new Scanner(System.in);
+        this.tasks = new ArrayList<>();
     }
 
     @Override
@@ -17,5 +22,13 @@ public class TaskView implements View {
     @Override
     public String getUserInput() {
         return this.sc.nextLine();
+    }
+
+    @Override
+    public void renderTasks(List<Task> tasks) {
+        int index = 1;
+        for (Task task: tasks) {
+            System.out.println(Integer.toString(index++) + ". " + task.getDescription());
+        }
     }
 }

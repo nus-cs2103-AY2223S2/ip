@@ -4,11 +4,12 @@ import command.CommandFactory;
 import interfaces.Command;
 import interfaces.CommandEventListener;
 
+import java.util.Arrays;
 import java.util.List;
 
 public class InputParser {
     private final List<CommandEventListener> listeners;
-    private final CommandFactory commandFactory;;
+    private final CommandFactory commandFactory;
     InputParser(List<CommandEventListener> listeners, CommandFactory commandFactory) {
         this.listeners = listeners;
         this.commandFactory = commandFactory;
@@ -20,6 +21,7 @@ public class InputParser {
                 listener.onCommandEvent(input);
             }
         }
-        return commandFactory.createCommand(input);
+        String[] tokens = input.split(" ");
+        return commandFactory.createCommand(tokens);
     }
 }
