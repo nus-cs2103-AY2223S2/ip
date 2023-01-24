@@ -54,10 +54,8 @@ public class Duke {
         try {
             FileWriter fw = new FileWriter("data/data.txt");
             StringBuilder sb = new StringBuilder();
-            for (int i = 0; i < todoList.size(); i++) {
-                Task thisTask = todoList.get(i);
-                String s = (i + 1) + "." + thisTask.toString() + System.lineSeparator();
-                sb.append(s);
+            for(Task thisTask : todoList) {
+                sb.append(thisTask.getDataString()).append(System.lineSeparator());
             }
             fw.write(sb.toString());
             fw.close();

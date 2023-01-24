@@ -1,3 +1,4 @@
-1.[T][ ] get groceries
-2.[D][ ] invite friends (by: thu)
-3.[E][ ] dinner party (from: sat 6pm to: 10pm)
+T | 0 | hello
+T | 0 | hey
+E | 0 | hi | 6pm-8pm
+D | 0 | ok | sun

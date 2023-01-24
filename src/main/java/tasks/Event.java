@@ -14,6 +14,11 @@ public class Event extends Task {
     }
 
     @Override
+    public String getDataString() {
+        return "E | " + super.getDataString() + " | " + start + "-" + end;
+    }
+
+    @Override
     public String toString() {
         return "[E]" + super.toString() + " (from: " + start + " to: " + end + ")";
     }
