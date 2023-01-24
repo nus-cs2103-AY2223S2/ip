@@ -1,9 +1,15 @@
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Scanner;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public class Duke {
+    private static final String SAVE_DATA_FILE_PATH = "./data/saveData.txt";
+    private static final String SAVE_DATA_DIR_PATH = "./data";
     private static final int MAX_TASKS_SIZE = 100;
     private static ArrayList<Task> tasks = new ArrayList<>(MAX_TASKS_SIZE);
     private static Pattern todoCommandPattern = Pattern.compile("^todo (.*)$");
@@ -68,7 +74,7 @@ public class Duke {
         }
     }
 
-    private static void addTask(Task task) {
+    private static void addTask(Task task) throws DukeException {
         printHorizontal();
         if (tasks.size() == MAX_TASKS_SIZE) {
             printText("Task list is full!");
@@ -79,6 +85,8 @@ public class Duke {
             printText(String.format("Now you have %d tasks in the list.", tasks.size()));
         }
         printHorizontal();
+
+        saveToSaveFile();
     }
 
     private static void commandListTasks() {
@@ -103,6 +111,8 @@ public class Duke {
                 printText("Nice! I've marked this task as done:");
                 printText(task.toString());
                 printHorizontal();
+
+                saveToSaveFile();
             } else {
                 printHorizontal();
                 printText("Invalid task number!");
@@ -126,6 +136,8 @@ public class Duke {
                 printText("OK, I've marked this task as not done yet:");
                 printText(task.toString());
                 printHorizontal();
+
+                saveToSaveFile();
             } else {
                 printHorizontal();
                 printText("Invalid task number!");
@@ -149,6 +161,8 @@ public class Duke {
                 printText(removedTask.toString());
                 printText(String.format("Now you have %d tasks in the list.", tasks.size()));
                 printHorizontal();
+
+                saveToSaveFile();
             } else {
                 printHorizontal();
                 printText("Invalid task number!");
@@ -165,8 +179,79 @@ public class Duke {
         printHorizontal();
     }
 
+    private static void loadFromSaveFile() {
+        File saveDataFile = new File(SAVE_DATA_FILE_PATH);
+        try {
+            Scanner fileScanner = new Scanner(saveDataFile);
+
+            while (fileScanner.hasNextLine()) {
+                String[] lineTokens = fileScanner.nextLine().split(";");
+                String taskType = lineTokens[0];
+                boolean isDone = Integer.parseInt(lineTokens[1]) == 1;
+                String description = lineTokens[2];
+
+                if (taskType.equals("T")) {
+                    ToDo todo = new ToDo(description);
+                    todo.setIsDone(isDone);
+
+                    tasks.add(todo);
+                } else if (taskType.equals("D")) {
+                    String by = lineTokens[3];
+
+                    Deadline deadline = new Deadline(description, by);
+                    deadline.setIsDone(isDone);
+
+                    tasks.add(deadline);
+                } else if (taskType.equals("E")) {
+                    String from = lineTokens[3];
+                    String to = lineTokens[4];
+
+                    Event event = new Event(description, from, to);
+                    event.setIsDone(isDone);
+
+                    tasks.add(event);
+                }
+            }
+
+            fileScanner.close();
+        } catch (FileNotFoundException e) {
+            File dir = new File(SAVE_DATA_DIR_PATH);
+            dir.mkdirs();
+        }
+    }
+
+    private static void saveToSaveFile() throws DukeException {
+        try {
+            FileWriter fileWriter = new FileWriter(SAVE_DATA_FILE_PATH);
+            for (Task task : tasks) {
+                switch (task.getTaskType()) {
+                case TODO:
+                    ToDo todo = (ToDo) task;
+                    fileWriter.write(String.format("T;%d;%s\n", todo.isDone ? 1 : 0, todo.description));
+
+                    break;
+                case DEADLINE:
+                    Deadline deadline = (Deadline) task;
+                    fileWriter.write(String.format("D;%d;%s;%s\n", deadline.isDone ? 1 : 0, deadline.description, deadline.by));
+
+                    break;
+                case EVENT:
+                    Event event = (Event) task;
+                    fileWriter.write(String.format("E;%d;%s;%s;%s\n", event.isDone ? 1 : 0, event.description, event.from, event.to));
+
+                    break;
+                }
+            }
+            fileWriter.close();
+        } catch (IOException e) {
+            throw new DukeException("Failed to save to save file!");
+        }
+    }
+
     public static void main(String[] args) {
         printStartup();
+
+        loadFromSaveFile();
 
         Scanner scanner = new Scanner(System.in);
         boolean isExit = false;
