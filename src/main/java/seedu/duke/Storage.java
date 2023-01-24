@@ -55,7 +55,7 @@ public class Storage {
     /**
      * Reads existing TaskList from saved file and returns the TaskList.
      *
-     * @return TaskList with the saved file data
+     * @return TaskList with the saved file data.
      */
     public TaskList read() {
         TaskList taskList = new TaskList();
@@ -109,9 +109,9 @@ public class Storage {
     }
 
     /**
-     * Writes TaskList to storage
+     * Writes TaskList to storage.
      *
-     * @param taskList TaskList to be saved to storage
+     * @param taskList TaskList to be saved to storage.
      */
     public void write(TaskList taskList) {
         try {

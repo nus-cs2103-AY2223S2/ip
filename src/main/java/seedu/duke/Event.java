@@ -8,13 +8,14 @@ import java.time.format.DateTimeFormatter;
  */
 public class Event extends Task {
 
+    /** Date of Event */
     protected LocalDate at;
 
     /**
      * Creates an Event object with the description and event date.
      *
-     * @param description details of the Event object
-     * @param at          date of the Event task
+     * @param description details of the Event object.
+     * @param at          date of the Event task.
      */
     public Event(String description, LocalDate at) {
         super(description);
@@ -25,8 +26,8 @@ public class Event extends Task {
      * Creates a new Event object based on the user input in the description.
      * The description is split into the task name (input) and the date to be parsed (date).
      *
-     * @param taskList the TaskList to add the Event object into
-     * @param desc     String input for the description of an Event object
+     * @param taskList the TaskList to add the Event object into.
+     * @param desc     String input for the description of an Event object.
      */
     public static void createEvent(TaskList taskList, String desc) {
         Ui.addedTask();
@@ -43,8 +44,8 @@ public class Event extends Task {
      * Runs the Event creation
      * Checks the number of tasks in the list and prints it out.
      *
-     * @param taskList    the TaskList to add the Event object into
-     * @param description String input for description of an Event object, with task name and event date
+     * @param taskList    the TaskList to add the Event object into.
+     * @param description String input for description of an Event object, with task name and event date.
      */
     public static void runEvent(TaskList taskList, String description) {
         createEvent(taskList, description);
@@ -54,7 +55,7 @@ public class Event extends Task {
     /**
      * Saved file representation of an Event object.
      *
-     * @return String format of an Event object in saved file form
+     * @return String format of an Event object in saved file form.
      */
     @Override public String toSave() {
         return "E | " + super.toSave() + "| " + at;
@@ -63,10 +64,11 @@ public class Event extends Task {
     /**
      * Represents an Event object in the user interface.
      *
-     * @return String format of an Event object to be displayed
+     * @return String format of an Event object to be displayed.
      */
     @Override
     public String toString() {
-        return "[E]" + super.toString() + "(at: " + at.format(DateTimeFormatter.ofPattern("MMM dd yyyy")) + ")";
+        return "[E]" + super.toString() + "(at: "
+                + at.format(DateTimeFormatter.ofPattern("MMM dd yyyy")) + ")";
     }
 }

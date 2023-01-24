@@ -4,13 +4,15 @@ package seedu.duke;
  * Represents Task object.
  */
 public class Task {
+    /** Description of the Task */
     protected String description;
+    /** Status of the Task */
     protected boolean isDone;
 
     /**
      * Creates a Task object.
      *
-     * @param description the details of the Task
+     * @param description the details of the Task.
      */
     public Task(String description) {
         this.description = description;
@@ -43,7 +45,7 @@ public class Task {
     /**
      * Sets completion status of the task.
      *
-     * @param isDone mark task as True if done, and False if not done
+     * @param isDone mark task as True if done, and False if not done.
      */
     public void toMark(boolean isDone) {
         this.isDone = isDone;

@@ -6,7 +6,9 @@ import java.util.ArrayList;
  * Represents the TaskList object.
  */
 public class TaskList {
+    /** The TaskList object */
     protected ArrayList<Task> taskList;
+    /** Size of the task list */
     protected int size;
 
     /**
@@ -20,8 +22,8 @@ public class TaskList {
     /**
      * Method to retrieve the Task at the given index.
      *
-     * @param index index of the task to retrieve
-     * @return      retrieved task
+     * @param index index of the task to retrieve.
+     * @return      retrieved task.
      */
     public Task get(int index) {
         return taskList.get(index);
@@ -30,7 +32,7 @@ public class TaskList {
     /**
      * Method to remove the Task at the given index.
      *
-     * @param index index of the task to remove
+     * @param index index of the task to remove.
      */
     public void remove(int index) {
         taskList.remove(index);
@@ -39,7 +41,7 @@ public class TaskList {
     /**
      * Method to retrieve the current size of the TaskList.
      *
-     * @return size of the TaskList
+     * @return size of the TaskList.
      */
     public int size() {
         return taskList.size();
@@ -48,7 +50,7 @@ public class TaskList {
     /**
      * Method to add a Task to the TaskList.
      *
-     * @param t details of the Task to add to the TaskList
+     * @param t details of the Task to add to the TaskList.
      */
     public void addTask(Task t) {
         this.taskList.add(t);
@@ -58,8 +60,8 @@ public class TaskList {
     /**
      * Method to mark at the given index (description) the task as done.
      *
-     * @param taskList    the TaskList to mark the object
-     * @param description takes the String to parse into an integer to use as the index
+     * @param taskList    the TaskList to mark the object.
+     * @param description takes the String to parse into an integer to use as the index.
      */
     public static void markTask(TaskList taskList, String description) {
         try {
@@ -80,8 +82,8 @@ public class TaskList {
     /**
      * Method to unmark at the given index (description) the task as done.
      *
-     * @param taskList    the TaskList to unmark the object
-     * @param description takes the String to parse into an integer to use as the index
+     * @param taskList    the TaskList to unmark the object.
+     * @param description takes the String to parse into an integer to use as the index.
      */
     public static void unmarkTask(TaskList taskList, String description) {
         try {
@@ -102,8 +104,8 @@ public class TaskList {
     /**
      * Method to remove the task at the given index (description.
      *
-     * @param taskList    the TaskList to remove the object from
-     * @param description takes the String to parse into an integer to use as the index
+     * @param taskList    the TaskList to remove the object from.
+     * @param description takes the String to parse into an integer to use as the index.
      */
     public static void removeTask(TaskList taskList, String description) {
         try {

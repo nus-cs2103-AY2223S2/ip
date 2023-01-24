@@ -25,7 +25,7 @@ public class Duke {
      */
     public void run() {
         ui.spawnBot();
-        while (!parser.isBye) {
+        while (!parser.isExit) {
             parser.parser(taskList, storage, ui, ui.userCommand());
         }
     }
@@ -33,7 +33,7 @@ public class Duke {
     /**
      * Runs the Duke bot.
      *
-     * @param args runs the Duke bot
+     * @param args runs the Duke bot.
      */
     public static void main(String[] args) {
         new Duke().run();

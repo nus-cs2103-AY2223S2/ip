@@ -8,13 +8,14 @@ import java.time.format.DateTimeFormatter;
  */
 public class Deadline extends Task {
 
+    /** Due date of Deadline */
     protected LocalDate by;
 
     /**
      * Creates a Deadline object with the description and deadline.
      *
-     * @param description details of the Deadline object
-     * @param by          deadline of the Deadline task
+     * @param description details of the Deadline object.
+     * @param by          deadline of the Deadline task.
      */
     public Deadline(String description, LocalDate by) {
         super(description);
@@ -25,8 +26,8 @@ public class Deadline extends Task {
      * Creates a new Deadline object based on the user input in the description.
      * The description is split into the task name (input) and the date to be parsed (date).
      *
-     * @param taskList the TaskList to add the Deadline object into
-     * @param desc     String input for description of a Deadline object
+     * @param taskList the TaskList to add the Deadline object into.
+     * @param desc     String input for description of a Deadline object.
      */
     public static void createDeadline(TaskList taskList, String desc) {
         Ui.addedTask();
@@ -43,8 +44,8 @@ public class Deadline extends Task {
      * Runs the Deadline creation.
      * Checks the number of tasks in the list and prints it out.
      *
-     * @param taskList    the TaskList to add the Deadline object into
-     * @param description String input for description of a Deadline object, with task name and deadline date
+     * @param taskList    the TaskList to add the Deadline object into.
+     * @param description String input for description of a Deadline object, with task name and deadline date.
      */
     public static void runDeadline(TaskList taskList, String description) {
         createDeadline(taskList, description);
@@ -54,7 +55,7 @@ public class Deadline extends Task {
     /**
      * Saved file representation of a Deadline object.
      *
-     * @return String format of a Deadline object in saved file form
+     * @return String format of a Deadline object in saved file form.
      */
     @Override
     public String toSave () {
@@ -64,10 +65,11 @@ public class Deadline extends Task {
     /**
      * Represents a Deadline object in the user interface.
      *
-     * @return String format of a Deadline object to be displayed
+     * @return String format of a Deadline object to be displayed.
      */
     @Override
     public String toString() {
-        return "[D]" + super.toString() + "(by: " + by.format(DateTimeFormatter.ofPattern("MMM dd yyyy")) + ")";
+        return "[D]" + super.toString() + "(by: "
+                + by.format(DateTimeFormatter.ofPattern("MMM dd yyyy")) + ")";
     }
 }

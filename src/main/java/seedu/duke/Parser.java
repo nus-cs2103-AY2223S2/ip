@@ -10,20 +10,25 @@ public class Parser {
     public enum Commands {
         BYE, LIST, MARK, UNMARK, DELETE, TODO, DEADLINE, EVENT }
 
-    public boolean isBye;
+    /** Status of the Bot */
+    public boolean isExit;
 
     /**
      * The Parser parses the commands based on the user input.
      *
-     * @param taskList the TaskList where the tasks are stored
-     * @param storage  manages saving and loading the files from taskList.txt
-     * @param ui       manages the user interface and the output text from Duke
-     * @param s        the user input
+     * @param taskList the TaskList where the tasks are stored.
+     * @param storage  manages saving and loading the files from taskList.txt.
+     * @param ui       manages the user interface and the output text from Duke.
+     * @param s        the user input.
+     * @throws ArrayIndexOutOfBoundsException If there is an empty input.
+     * @throws IllegalArgumentException       If there is an unknown command.
      */
 
     public void parser(TaskList taskList, Storage storage, Ui ui, String s) {
         try {
+            /** Split the user input into an array with the command and the description */
             String[] description = s.split(" ", 2);
+            /** Set command */
             String command = description[0];
             Commands currCommand = Commands.valueOf(command.toUpperCase());
 
@@ -31,7 +36,7 @@ public class Parser {
                 // Command for bye
                 case BYE:
                     ui.displayExit();
-                    this.isBye = true;
+                    this.isExit = true;
                     break;
                 // Command for list
                 case LIST: {

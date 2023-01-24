@@ -6,6 +6,7 @@ import java.util.Scanner;
  * Ui object class.
  */
 public class Ui {
+    /** Scanner to take user input */
     private Scanner sc;
 
     /**
@@ -41,7 +42,7 @@ public class Ui {
     /**
      * Returns the number of tasks in the TaskList.
      *
-     * @param taskList the TaskList to return the number of tasks from
+     * @param taskList the TaskList to return the number of tasks from.
      */
     public void displayTaskList(TaskList taskList) {
         if (taskList.size() == 0) {
@@ -65,8 +66,8 @@ public class Ui {
     /**
      * Returns text when a task is marked.
      *
-     * @param taskList the TaskList to mark the task
-     * @param index    the index of the task to be marked
+     * @param taskList the TaskList to mark the task.
+     * @param index    the index of the task to be marked.
      */
     public static void displayMarked(TaskList taskList, int index) {
         if (taskList.get(index).isDone) {
@@ -85,8 +86,8 @@ public class Ui {
     /**
      * Returns text when a task is unmarked.
      *
-     * @param taskList the TaskList to unmark the task
-     * @param index    the index of the task to be unmarked
+     * @param taskList the TaskList to unmark the task.
+     * @param index    the index of the task to be unmarked.
      */
     public static void displayUnmarked(TaskList taskList, int index) {
         if (!taskList.get(index).isDone) {
@@ -105,8 +106,8 @@ public class Ui {
     /**
      * Returns text when a task is deleted.
      *
-     * @param taskList the TaskList to delete the task from
-     * @param index    the index of the task to be removed
+     * @param taskList the TaskList to delete the task from.
+     * @param index    the index of the task to be removed.
      */
     public static void displayDelete(TaskList taskList, int index) {
         line();
@@ -116,25 +117,19 @@ public class Ui {
         line();
     }
 
-    /**
-     * The welcome text.
-     */
+    /** The welcome text. */
     // Greet format
     public static void greet() {
         System.out.println("HEY! I'm GRUMMY!\nHow can I help you?");
     }
 
-    /**
-     * The exit text.
-     */
+    /** The exit text. */
     // Bye format
     public static void bye() {
         System.out.println("Goodbye! Hope to see you again :>");
     }
 
-    /**
-     * Lines for readability.
-     */
+    /** Lines for readability. */
     // Create lines
     public static void line() {
         System.out.println("-------------------------");
@@ -143,7 +138,7 @@ public class Ui {
     /**
      * Indents the current line.
      *
-     * @param output String of the response to be indented
+     * @param output String of the response to be indented.
      */
     // Create indents
     public static void indent(String output) {
@@ -153,7 +148,7 @@ public class Ui {
     /**
      * Checks the grammar of the TaskList return.
      *
-     * @param taskList the TaskList to check
+     * @param taskList the TaskList to check.
      */
     public static void checkList(TaskList taskList) {
         if (taskList.size() == 1) {
@@ -166,9 +161,7 @@ public class Ui {
     }
 
 
-    /**
-     * The text when a task is added.
-     */
+    /** The text when a task is added. */
     public static void addedTask() {
         System.out.println("Got it. I've added this task:");
     }
