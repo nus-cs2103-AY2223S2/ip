@@ -69,7 +69,7 @@ ____    ____  __    __   __    __
     2.[D][ ] study (by: tonight)
     3.[E][ ] buy food (from: today to: tomorrow)
     ----------------------------------------
-        Correct command: delete <valid task index>
+    Incorrect command: delete <valid task index>
     ----------------------------------------
     ☹ OOPS!!! Invalid task number :(
     ----------------------------------------
