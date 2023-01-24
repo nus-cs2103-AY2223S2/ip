@@ -1,3 +1,10 @@
+package duke.command;
+
+import duke.*;
+import duke.exception.DukeException;
+import duke.task.Task;
+import duke.task.TaskList;
+
 public class MarkCommand implements Command {
     @Override
     public String getCommandName() {

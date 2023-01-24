@@ -1,3 +1,12 @@
+package duke;
+
+import duke.exception.DukeException;
+import duke.task.Deadline;
+import duke.task.Event;
+import duke.task.Task;
+import duke.task.ToDo;
+import duke.util.DateTimeUtils;
+
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileWriter;
@@ -74,20 +83,20 @@ public class Storage {
                 switch (task.getTaskType()) {
                     case TODO:
                         ToDo todo = (ToDo) task;
-                        fileWriter.write(String.format("T;%d;%s\n", todo.isDone ? 1 : 0, todo.description));
+                        fileWriter.write(String.format("T;%d;%s\n", todo.isDone() ? 1 : 0, todo.getDescription()));
 
                         break;
                     case DEADLINE:
                         Deadline deadline = (Deadline) task;
-                        fileWriter.write(String.format("D;%d;%s;%s\n", deadline.isDone ? 1 : 0, deadline.description,
-                                deadline.by.format(DateTimeUtils.DATE_TIME_FORMAT_INPUT)));
+                        fileWriter.write(String.format("D;%d;%s;%s\n", deadline.isDone() ? 1 : 0, deadline.getDescription(),
+                                deadline.getBy().format(DateTimeUtils.DATE_TIME_FORMAT_INPUT)));
 
                         break;
                     case EVENT:
                         Event event = (Event) task;
-                        fileWriter.write(String.format("E;%d;%s;%s;%s\n", event.isDone ? 1 : 0, event.description,
-                                event.from.format(DateTimeUtils.DATE_TIME_FORMAT_INPUT),
-                                event.to.format(DateTimeUtils.DATE_TIME_FORMAT_INPUT)));
+                        fileWriter.write(String.format("E;%d;%s;%s;%s\n", event.isDone() ? 1 : 0, event.getDescription(),
+                                event.getFrom().format(DateTimeUtils.DATE_TIME_FORMAT_INPUT),
+                                event.getTo().format(DateTimeUtils.DATE_TIME_FORMAT_INPUT)));
 
                         break;
                 }

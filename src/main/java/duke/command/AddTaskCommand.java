@@ -1,3 +1,10 @@
+package duke.command;
+
+import duke.*;
+import duke.exception.DukeException;
+import duke.task.Task;
+import duke.task.TaskList;
+
 public abstract class AddTaskCommand implements Command {
     protected void addTask(Task task, Ui ui, TaskList taskList, Storage storage) throws DukeException {
         ui.printHorizontal();

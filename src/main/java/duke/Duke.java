@@ -1,14 +1,10 @@
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.FileWriter;
-import java.io.IOException;
-import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
-import java.time.format.DateTimeParseException;
-import java.util.ArrayList;
+package duke;
+
+import duke.command.CommandParser;
+import duke.exception.DukeException;
+import duke.task.TaskList;
+
 import java.util.Scanner;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 
 public class Duke {
     private static final String SAVE_DATA_FILE_PATH = "saveData.txt";

@@ -1,3 +1,10 @@
+package duke.command;
+
+import duke.*;
+import duke.exception.DukeException;
+import duke.task.TaskList;
+import duke.task.ToDo;
+
 public class ToDoCommand extends AddTaskCommand {
     @Override
     public String getCommandName() {

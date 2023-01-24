@@ -1,7 +1,9 @@
+package duke.task;
+
 public abstract class Task {
-    protected String description;
-    protected TaskType taskType;
-    protected boolean isDone;
+    private String description;
+    private TaskType taskType;
+    private boolean isDone;
 
     public Task(String description, TaskType taskType) {
         this.description = description;
@@ -19,6 +21,14 @@ public abstract class Task {
 
     public TaskType getTaskType() {
         return taskType;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public boolean isDone() {
+        return isDone;
     }
 
     @Override
