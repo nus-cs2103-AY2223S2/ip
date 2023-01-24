@@ -32,7 +32,7 @@ public class Duke {
         try {
             Scanner s = new Scanner(f);
             while (s.hasNext()) {
-                String[] split = s.nextLine().split(" \\| ", 4);
+                String[] split = s.nextLine().split(" \\| ", 5);
                 switch(split[0]) {
                     case "T":
                         list.add(new Todo(
