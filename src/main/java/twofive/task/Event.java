@@ -4,6 +4,9 @@ import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
+/**
+ * Represents an Event task with a given description, start time and end time.
+ */
 public class Event extends Task {
     private LocalDateTime startTime;
     private LocalDateTime endTime;
@@ -21,6 +24,10 @@ public class Event extends Task {
         return "[E]" + super.toString() + eventString;
     }
 
+    /**
+     * {@inheritDoc}
+     * The type of task, its start time and its end time is also included.
+     */
     @Override
     public String getFileWriteString() {
         return "E" + super.getFileWriteString() + " | "

@@ -3,6 +3,13 @@ package twofive.utils;
 import twofive.command.*;
 import twofive.exception.*;
 
+import java.io.FileNotFoundException;
+import java.time.format.DateTimeParseException;
+
+/**
+ * Parses the contents of a given command to obtain the action
+ * intended to be performed by the user.
+ */
 public class Parser {
     // Ensure valid task number is provided
     private static int validateTaskNum(String input) throws EmptyTasknumException, NumberFormatException {
@@ -25,6 +32,20 @@ public class Parser {
         return descriptionSplit[1].trim();
     }
 
+    /**
+     * Parses input from user into different types of command depending
+     * on the first word of the input and other arguments present.
+     *
+     * @return Command according to user input.
+     * @throws EmptyTasknumException If a task number is not provided in relevant commands.
+     * @throws EmptyDescriptionException If the description is absent in the user's input.
+     * @throws MissingArgumentException If one or more arguments are missing in the user's input.
+     * @throws EmptyStartTimeException If the start time is absent in an event command.
+     * @throws EmptyEndTimeException If the end time is absent in an event command.
+     * @throws EmptyDeadlineException If the deadline is absent in a deadline command.
+     * @throws EmptyDateException If the date is missing in a due command.
+     * @throws InvalidCommandException If the command entered cannot be recognized properly.
+     */
     public static Command parse(String command) throws EmptyTasknumException, EmptyDescriptionException,
             MissingArgumentException, EmptyStartTimeException, EmptyEndTimeException, EmptyDeadlineException, EmptyDateException, InvalidCommandException {
         String commandWord = command.split(" ")[0].trim();

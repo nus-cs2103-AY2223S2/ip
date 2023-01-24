@@ -10,6 +10,9 @@ import twofive.utils.Parser;
 import java.io.IOException;
 import java.time.format.DateTimeParseException;
 
+/**
+ * Represents a chatbot that allows users to manage daily tasks.
+ */
 public class TwoFive {
     private Ui ui;
     private TaskList tasks;
@@ -23,10 +26,15 @@ public class TwoFive {
         } catch (IOException | TwoFiveException e) {
             ui.showError(e.getMessage());
         } catch (DateTimeParseException e) {
-            ui.showError("Deadline/start time/end time must be in the format yyyy-MM-dd HH:mm, e.g. 2023-01-23 16:31");
+            ui.showError("Deadline/start time/end time must be in the"
+                    + "format yyyy-MM-dd HH:mm, e.g. 2023-01-23 16:31");
         }
     }
 
+    /**
+     * Starts the chatbot by showing a welcome message, then accepting commands
+     * from the user.
+     */
     public void run() {
         ui.showWelcome();
         boolean isExit = false;
