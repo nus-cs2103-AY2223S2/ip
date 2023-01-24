@@ -22,4 +22,14 @@ public class ToDo extends Task {
         return (this.isDone ? this.MARKED : this.UNMARKED) + " " + this.description;
     }
 
+    /**
+     * Returns String representation of the ToDo object for data storage.
+     * Saves the content of the ToDo, including its isDone and description into a String with the delimiter
+     * "|" to be written into a data file.
+     *
+     * @return A String representing this ToDo object.
+     */
+    public String toSaveFormat() {
+        return "T|" + (this.isDone ? 1 : 0) + "|" + this.description;
+    };
 }

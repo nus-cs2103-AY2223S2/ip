@@ -1,3 +1,6 @@
+import java.io.*;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Scanner;
@@ -40,11 +43,40 @@ public class Babe {
     private int memoryCount = 0;
 
     /**
+     * Default file address where Babe's content will be stored.
+     */
+    private String fileAddress = "./src/main/java/babe.txt";
+
+    /**
+     * BufferedWriter Object for this Babe
+     */
+    private BufferedWriter bufferedWriter;
+
+    /**
      * Draws a horizontal line.
-     * Draws a line for cosmetic purposes.
      */
     private static void drawLine() {
         System.out.println("----------------------------------------------------------------");
+    }
+
+    /**
+     * Constructor for Babe.
+     */
+    public Babe() {
+        if (!Files.exists(Paths.get(fileAddress))) {
+            try {
+                File file = new File(fileAddress);
+                file.createNewFile();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+            Babe.drawLine();
+            System.out.println("We can't find a save file for Babe, so we just went ahead \n"
+                    + "and created one for you <3!");
+            Babe.drawLine();
+        }
+
+        this.load();
     }
 
     /**
@@ -107,14 +139,17 @@ public class Babe {
      * Calls the ToDo constructor and inserts created ToDo into this Babe's memory.
      * @param content The description of the ToDo item.
      */
-    private void addToDo(String content) {
+    private Task addToDo(String content, boolean toNotify) {
         ToDo item = new ToDo(content);
         this.memory.add(memoryCount++, item);
-        Babe.drawLine();
-        System.out.println("Got it, babe. Added this for you:");
-        System.out.println(item.toString());
-        System.out.printf("Now you have %d task in the list.\n", memoryCount);
-        Babe.drawLine();
+        if (toNotify) {
+            Babe.drawLine();
+            System.out.println("Got it, babe. Added this for you:");
+            System.out.println(item.toString());
+            System.out.printf("Now you have %d task in the list.\n", memoryCount);
+            Babe.drawLine();
+        }
+        return item;
     }
 
     /**
@@ -123,14 +158,17 @@ public class Babe {
      * @param content The content of the Deadline item.
      * @param date The date of the deadline. May include time too.
      */
-    private void addDeadline(String content, String date) {
+    private Task addDeadline(String content, String date, boolean toNotify) {
         Deadline item = new Deadline(content, date);
         this.memory.add(memoryCount++, item);
-        Babe.drawLine();
-        System.out.println("Got it, babe. Added this for you:");
-        System.out.println(item.toString());
-        System.out.printf("Now you have %d task in the list.\n", memoryCount);
-        Babe.drawLine();
+        if (toNotify) {
+            Babe.drawLine();
+            System.out.println("Got it, babe. Added this for you:");
+            System.out.println(item.toString());
+            System.out.printf("Now you have %d task in the list.\n", memoryCount);
+            Babe.drawLine();
+        }
+        return item;
     }
 
     /**
@@ -140,14 +178,17 @@ public class Babe {
      * @param startDate The start date of the Event. May include time too.
      * @param endDate The end date of the Event. May include time too.
      */
-    private void addEvent(String content, String startDate, String endDate) {
+    private Task addEvent(String content, String startDate, String endDate, boolean toNotify) {
         Event item = new Event(content, startDate, endDate);
         this.memory.add(memoryCount++, item);
-        Babe.drawLine();
-        System.out.println("Got it, babe. Added this for you:");
-        System.out.println(item.toString());
-        System.out.printf("Now you have %d task in the list.\n", memoryCount);
-        Babe.drawLine();
+        if (toNotify) {
+            Babe.drawLine();
+            System.out.println("Got it, babe. Added this for you:");
+            System.out.println(item.toString());
+            System.out.printf("Now you have %d task in the list.\n", memoryCount);
+            Babe.drawLine();
+        }
+        return item;
     }
 
     /**
@@ -198,7 +239,7 @@ public class Babe {
     }
 
     /**
-     * Delete Task in memory specified by given index.
+     * Deletes Task in memory specified by given index.
      *
      * @param index An integer that represents the index of the Task to be removed from memory.
      */
@@ -212,6 +253,66 @@ public class Babe {
         Babe.drawLine();
     }
 
+    /**
+     * Saves Tasks stored in Babe's memory to a file specified by fileAddress.
+     */
+    private void save() {
+        try {
+            bufferedWriter = new BufferedWriter(new FileWriter(fileAddress, false));
+            String data = "";
+
+            for (int i = 0; i < memoryCount; i++) {
+                data = memory.get(i).toSaveFormat();
+                bufferedWriter.write(data);
+                bufferedWriter.newLine();
+            }
+
+            bufferedWriter.close();
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    private void load() {
+        try {
+            Scanner scanner = new Scanner(new File(fileAddress));
+            while(scanner.hasNextLine()) {
+                String s = scanner.nextLine();
+                String[] arr = s.split("\\|");
+                String taskType = arr[0].strip();
+                Boolean isDone = arr[1].equals("1");
+                String desc = arr[2];
+                Task item = null;
+                switch (taskType) {
+                case "T":
+                    item = addToDo(desc, false);
+                    break;
+                case "D":
+                    String deadline = arr[3];
+                    item = addDeadline(desc, deadline, false);
+                    break;
+                case "E":
+                    String startDate = arr[3];
+                    String endDate = arr[4];
+                    item = addEvent(desc, startDate, endDate, false);
+                    break;
+                default:
+                    // Need to add a file corruption error here
+                    break;
+                }
+
+                if (isDone) {
+                    item.mark();
+                } else {
+                    item.unmark();
+                }
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
     public static void main(String[] args) {
 
         Babe chatBot = new Babe();
@@ -220,33 +321,44 @@ public class Babe {
 
         while (true) {
             try {
+                
                 chatBot.listen(scanner);
 
                 String instruction = chatBot.userInput.get(0);
                 int inputLength = chatBot.userInput.size();
 
-
                 if (instruction.equalsIgnoreCase("bye") && inputLength == 1) {
                     scanner.close();
                     chatBot.sayBye();
+                    
                 } else if (instruction.equalsIgnoreCase("list") && inputLength == 1) {
                     chatBot.printList();
+                    
                 } else if (instruction.equalsIgnoreCase("mark")) {
                     chatBot.changeStatus(true);
+                    chatBot.save();
+                    
                 } else if (instruction.equalsIgnoreCase("unmark")) {
                     chatBot.changeStatus(false);
+                    chatBot.save();
+                    
                 } else if (instruction.equalsIgnoreCase("todo")) {
                     if (inputLength == 1) {
                         throw new NoDescriptionException();
                     }
-                    chatBot.addToDo(chatBot.rebuildUserInput(1, inputLength));
+                    chatBot.addToDo(chatBot.rebuildUserInput(1, inputLength), true);
+                    chatBot.save();
+                    
                 } else if (instruction.equalsIgnoreCase("deadline")) {
                     if (inputLength == 1) {
                         throw new NoDescriptionException();
                     }
                     int deadline = chatBot.findArgument("/by");
                     chatBot.addDeadline(chatBot.rebuildUserInput(1, deadline - 1),
-                            chatBot.rebuildUserInput(deadline, inputLength));
+                            chatBot.rebuildUserInput(deadline, inputLength),
+                            true);
+                    chatBot.save();
+
                 } else if (instruction.equalsIgnoreCase("event")) {
                     if (inputLength == 1) {
                         throw new NoDescriptionException();
@@ -255,13 +367,17 @@ public class Babe {
                     int endDate = chatBot.findArgument("/to");
                     chatBot.addEvent(chatBot.rebuildUserInput(1, startDate - 1),
                             chatBot.rebuildUserInput(startDate, endDate - 1),
-                            chatBot.rebuildUserInput(endDate, inputLength));
+                            chatBot.rebuildUserInput(endDate, inputLength),
+                            true);
+                    chatBot.save();
+                    
                 } else if (instruction.equalsIgnoreCase("delete")) {
                     if (inputLength == 1) {
                         throw new NoDescriptionException();
                     }
                     int deleteIndex = chatBot.findArgument("delete");
                     chatBot.deleteTask(deleteIndex);
+                    chatBot.save();
 
                 } else {
                     throw new NonsenseInputException();
