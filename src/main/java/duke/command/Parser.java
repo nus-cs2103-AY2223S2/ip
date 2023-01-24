@@ -24,13 +24,12 @@ public class Parser {
         switch(parts[0].trim()) {
             case "todo":
                 if (parts.length != 2 || parts[1].trim().isEmpty()) {
-                    throw new DukeException("The description of a todo cannot be empty.");
+                    throw new DukeException("Command todo has to be followed by a description.");
                 }
                 Todo todo = new Todo(parts[1].trim());
                 return new Command.AddCommand(todo);
-
             case "deadline":
-                String deadlineError = "A deadline has to have a string and date separated with a /by keyword.";
+                String deadlineError = "Command deadline has to have a string and date separated with a /by keyword.";
                 if (parts.length != 2 || parts[1].trim().isEmpty()) {
                     throw new DukeException(deadlineError);
                 }
@@ -40,9 +39,8 @@ public class Parser {
                 }
                 Deadline deadline = new Deadline(d_parts[0].trim(), d_parts[1].trim());
                 return new Command.AddCommand(deadline);
-
             case "event":
-                String eventError = "An event has to have a string and 2 dates separated with /from and /to keywords.";
+                String eventError = "Command event has to have a string and 2 dates separated with /from and /to keywords.";
                 if (parts.length != 2 || parts[1].trim().isEmpty()) {
                     throw new DukeException(eventError);
                 }
@@ -52,46 +50,44 @@ public class Parser {
                 }
                 Event event = new Event(e_parts[0].trim(), e_parts[1].trim(), e_parts[2].trim());
                 return new Command.AddCommand(event);
-
             case "list":
                 return new Command.ListCommand();
-
             case "mark":
+                String markError = "Command mark has to be followed by an integer.";
                 if (parts.length != 2 || parts[1].trim().isEmpty()) { // 2nd arg not entered
-                    throw new DukeException("duke.command.Command has to be followed by an integer.");
+                    throw new DukeException(markError);
                 }
                 try {
                     indexInput = Integer.parseInt(parts[1].trim());
                 } catch (NumberFormatException e) {
-                    throw new DukeException("duke.command.Command has to be followed by an integer.");
+                    throw new DukeException(markError);
                 }
                 return new Command.MarkCommand(indexInput - 1);
-
             case "unmark":
+                String unmarkError = "Command unmark has to be followed by an integer.";
                 if (parts.length != 2 || parts[1].trim().isEmpty()) { // 2nd arg not entered
-                    throw new DukeException("duke.command.Command has to be followed by an integer.");
+                    throw new DukeException(unmarkError);
                 }
                 try {
                     indexInput = Integer.parseInt(parts[1].trim());
                 } catch (NumberFormatException e) {
-                    throw new DukeException("duke.command.Command has to be followed by an integer.");
+                    throw new DukeException(unmarkError);
                 }
                 return new Command.UnmarkCommand(indexInput - 1);
-
             case "delete":
+                String deleteError = "Command delete has to be followed by an integer.";
                 if (parts.length != 2 || parts[1].trim().isEmpty()) { // 2nd arg not entered
-                    throw new DukeException("duke.command.Command has to be followed by an integer.");
+                    throw new DukeException(deleteError);
                 }
                 try {
                     indexInput = Integer.parseInt(parts[1].trim());
                 } catch (NumberFormatException e) {
-                    throw new DukeException("duke.command.Command has to be followed by an integer.");
+                    throw new DukeException(deleteError);
                 }
                 return new Command.DeleteCommand(indexInput - 1);
-
             case "filterdate":
                 if (parts.length != 2 || parts[1].trim().isEmpty()) {
-                    throw new DukeException("duke.command.Command has to be followed by date.");
+                    throw new DukeException("Command filterdate has to be followed by date.");
                 }
                 LocalDate date = null;
                 DateTimeFormatter[] formatters = {
@@ -114,10 +110,14 @@ public class Parser {
                     throw new DukeException("Reenter date in this format: (ddMMyyyy)");
                 }
                 return new Command.FilterCommand(date);
-
+            case "filter":
+                if (parts.length != 2 || parts[1].trim().isEmpty()) {
+                    throw new DukeException("Command filter has to be followed by a keyword.");
+                }
+                String keyword = parts[1].trim();
+                return new Command.FilterCommand(keyword);
             case "bye":
                 return new Command.ExitCommand();
-
             default:
                 throw new DukeException("I'm sorry, but I don't know what that means :-(");
         }

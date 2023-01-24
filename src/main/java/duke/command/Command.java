@@ -226,7 +226,11 @@ public abstract class Command {
         public void execute(TaskList tasks, Ui ui, Storage storage) {
             if (object instanceof LocalDate) {
                 LocalDate date = (LocalDate) object;
-                tasks.filterTasksByDate(ui, date);
+                tasks.filterDate(ui, date);
+            }
+            if (object instanceof String) {
+                String keyword = (String) object;
+                tasks.filter(ui, keyword);
             }
         }
     }

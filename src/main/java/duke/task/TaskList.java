@@ -14,7 +14,7 @@ public class TaskList {
      * Constructs TaskList class.
      */
     public TaskList() {
-        this.tasks = new ArrayList<Task>();
+        this.tasks = new ArrayList<>();
     }
 
     /**
@@ -106,7 +106,7 @@ public class TaskList {
      * @param ui Ui to show filtered tasks.
      * @param date Date to filter tasks by.
      */
-    public void filterTasksByDate(Ui ui, LocalDate date) {
+    public void filterDate(Ui ui, LocalDate date) {
         int count = 0;
         for (Task task : tasks) {
             if (task instanceof Deadline) {
@@ -127,5 +127,17 @@ public class TaskList {
             }
         }
         ui.printUi("Number of tasks on " + date.format(DateTimeFormatter.ofPattern("MMM dd yyyy")) + ": " + count);
+    }
+
+    public void filter(Ui ui, String keyword) {
+        int count = 0;
+        for (Task task : tasks) {
+            String desc = task.getDescription();
+            if (desc.contains(keyword)) {
+                ui.printUi(task.toString());
+                count++;
+            }
+        }
+        ui.printUi("Number of tasks with " + "'" + keyword + "'" + ": " + count);
     }
 }
