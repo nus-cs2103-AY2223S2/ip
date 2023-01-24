@@ -1,3 +1,5 @@
+package duke;
+
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
@@ -5,7 +7,7 @@ import java.time.format.DateTimeParseException;
 
 public class DukeUtils {
     /**
-     * A Utility method to parse datetime strings passed to the DukeTask
+     * A Utility method to parse datetime strings passed to the duke.task.DukeTask
      * subclass constructors.
      *
      * @param s The datetime string to be parsed.

@@ -1,6 +1,12 @@
-import DukeExceptions.DukeEmptyTaskException;
-import DukeExceptions.DukeInvalidDateException;
-import DukeExceptions.DukeStoreFullException;
+package duke.command;
+
+import duke.exceptions.DukeEmptyTaskException;
+import duke.exceptions.DukeInvalidDateException;
+import duke.exceptions.DukeStoreFullException;
+import duke.DukeUtils;
+import duke.task.DeadlineTask;
+import duke.TaskList;
+import duke.Ui;
 
 import java.time.format.DateTimeParseException;
 
@@ -36,7 +42,7 @@ public class DeadlineCommand extends Command {
         }
 
         try {
-            TaskDeadline dl = new TaskDeadline(
+            DeadlineTask dl = new DeadlineTask(
                     tokens[0],
                     DukeUtils.parseDateTime(tokens[1]));
             ts.add(dl);

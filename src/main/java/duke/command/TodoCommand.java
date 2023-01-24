@@ -1,5 +1,10 @@
-import DukeExceptions.DukeEmptyTaskException;
-import DukeExceptions.DukeStoreFullException;
+package duke.command;
+
+import duke.exceptions.DukeEmptyTaskException;
+import duke.exceptions.DukeStoreFullException;
+import duke.TaskList;
+import duke.task.TodoTask;
+import duke.Ui;
 
 /**
  * The command that creates a Todo task.
@@ -24,7 +29,7 @@ public class TodoCommand extends Command {
             return;
         }
 
-        TaskTodo todo = new TaskTodo(task);
+        TodoTask todo = new TodoTask(task);
         try {
             ts.add(todo);
         } catch (DukeStoreFullException e) {

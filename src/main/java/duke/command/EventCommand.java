@@ -1,6 +1,12 @@
-import DukeExceptions.DukeEmptyTaskException;
-import DukeExceptions.DukeInvalidDateException;
-import DukeExceptions.DukeStoreFullException;
+package duke.command;
+
+import duke.exceptions.DukeEmptyTaskException;
+import duke.exceptions.DukeInvalidDateException;
+import duke.exceptions.DukeStoreFullException;
+import duke.DukeUtils;
+import duke.task.EventTask;
+import duke.TaskList;
+import duke.Ui;
 
 import java.time.format.DateTimeParseException;
 
@@ -43,7 +49,7 @@ public class EventCommand extends Command {
         }
 
         try {
-            TaskEvent event = new TaskEvent(tokens[0],
+            EventTask event = new EventTask(tokens[0],
                     DukeUtils.parseDateTime(dates[0]),
                     DukeUtils.parseDateTime(dates[1]));
             ts.add(event);

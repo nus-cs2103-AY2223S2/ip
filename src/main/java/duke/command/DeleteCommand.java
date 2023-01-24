@@ -1,4 +1,8 @@
-import DukeExceptions.DukeStoreInvalidAccessException;
+package duke.command;
+
+import duke.exceptions.DukeStoreInvalidAccessException;
+import duke.TaskList;
+import duke.Ui;
 
 /**
  * The command to delete a task in the list.

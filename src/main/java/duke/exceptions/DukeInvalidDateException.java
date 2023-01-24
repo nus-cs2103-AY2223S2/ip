@@ -1,4 +1,4 @@
-package DukeExceptions;
+package duke.exceptions;
 
 /**
  * The error class indicating that an invalid date format was entered.

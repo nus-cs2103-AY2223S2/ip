@@ -1,4 +1,4 @@
-package DukeExceptions;
+package duke.exceptions;
 
 /**
  * The exception class that indicates that an invalid index request was made to

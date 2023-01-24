@@ -1,3 +1,8 @@
+package duke.command;
+
+import duke.TaskList;
+import duke.Ui;
+
 /**
  * The main abstraction that represents user commands issued to the Duke app.
  *

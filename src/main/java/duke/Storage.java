@@ -1,3 +1,7 @@
+package duke;
+
+import duke.task.DukeTask;
+
 import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileWriter;

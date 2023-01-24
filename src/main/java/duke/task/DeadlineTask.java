@@ -1,3 +1,5 @@
+package duke.task;
+
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
@@ -8,7 +10,7 @@ import java.time.format.DateTimeFormatter;
  * @author SeeuSim
  * AY2223-S2 CS2103T
  */
-public class TaskDeadline extends DukeTask{
+public class DeadlineTask extends DukeTask{
     private final LocalDateTime deadline;
 
     /**
@@ -17,7 +19,7 @@ public class TaskDeadline extends DukeTask{
      * @param task The task to be completed.
      * @param deadline The task's deadline.
      */
-    public TaskDeadline(String task, LocalDateTime deadline) {
+    public DeadlineTask(String task, LocalDateTime deadline) {
         super(task);
         this.deadline = deadline;
     }

@@ -1,3 +1,5 @@
+package duke.task;
+
 import java.time.LocalDate;
 
 /**
@@ -6,8 +8,8 @@ import java.time.LocalDate;
  * @author SeeuSim
  * AY2223-S2 CS2103T
  */
-public class TaskTodo extends DukeTask{
-    public TaskTodo(String s) {
+public class TodoTask extends DukeTask{
+    public TodoTask(String s) {
         super(s);
     }
 

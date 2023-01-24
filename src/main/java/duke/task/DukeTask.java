@@ -1,3 +1,6 @@
+package duke.task;
+
+import duke.DukeUtils;
 
 import java.time.LocalDate;
 
@@ -68,7 +71,7 @@ public abstract class DukeTask {
         boolean isDone = s[1].equals("1");
         switch (s[0]) {
         case "E":
-            DukeTask event = new TaskEvent(
+            DukeTask event = new EventTask(
                     s[2],
                     DukeUtils.parseDateTime(s[3]),
                     DukeUtils.parseDateTime(s[4]));
@@ -77,14 +80,14 @@ public abstract class DukeTask {
             }
             return event;
         case "D":
-            DukeTask deadline = new TaskDeadline(s[2],
+            DukeTask deadline = new DeadlineTask(s[2],
                     DukeUtils.parseDateTime(s[3]));
             if (isDone) {
                 deadline.setDone();
             }
             return deadline;
         case "T":
-            DukeTask todo = new TaskTodo(s[2]);
+            DukeTask todo = new TodoTask(s[2]);
             if (isDone) {
                 todo.setDone();
             }

@@ -1,4 +1,4 @@
-package DukeExceptions;
+package duke.exceptions;
 
 import java.lang.Exception;
 

@@ -1,6 +1,9 @@
-import DukeExceptions.DukeException;
-import DukeExceptions.DukeStoreFullException;
-import DukeExceptions.DukeStoreInvalidAccessException;
+package duke;
+
+import duke.exceptions.DukeException;
+import duke.exceptions.DukeStoreFullException;
+import duke.exceptions.DukeStoreInvalidAccessException;
+import duke.task.DukeTask;
 
 import java.time.LocalDate;
 
@@ -34,7 +37,7 @@ public class TaskList {
     /**
      * Factory method to create DukeStore instances.
      *
-     * @param s The Storage instance to pass to the Store.
+     * @param s The duke.Storage instance to pass to the Store.
      * @return The created DukeStore instance with a unique serializable ID.
      */
     public static TaskList create(Storage s, Ui ui) {
@@ -42,7 +45,7 @@ public class TaskList {
     }
 
     /**
-     * Given a DukeTask, attempts to add it to the store.
+     * Given a duke.task.DukeTask, attempts to add it to the store.
      *
      * @param input The task to be input.
      * @throws DukeStoreFullException The exception indicating that the store

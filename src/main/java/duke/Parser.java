@@ -1,6 +1,9 @@
-import DukeExceptions.DukeException;
-import DukeExceptions.DukeInvalidCommandException;
-import DukeExceptions.DukeTaskIndexMissingException;
+package duke;
+
+import duke.exceptions.DukeException;
+import duke.exceptions.DukeInvalidCommandException;
+import duke.exceptions.DukeTaskIndexMissingException;
+import duke.command.*;
 
 /**
  * The main class for parsing commands given to the Duke app via the

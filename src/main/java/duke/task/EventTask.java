@@ -1,3 +1,5 @@
+package duke.task;
+
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
@@ -8,10 +10,10 @@ import java.time.format.DateTimeFormatter;
  * @author SeeuSim
  * AY2223-S2 CS2103T
  */
-public class TaskEvent extends DukeTask{
+public class EventTask extends DukeTask{
     private final LocalDateTime from;
     private final LocalDateTime to;
-    public TaskEvent(String task, LocalDateTime from, LocalDateTime to) {
+    public EventTask(String task, LocalDateTime from, LocalDateTime to) {
         super(task);
         this.from = from;
         this.to = to;

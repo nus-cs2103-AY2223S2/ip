@@ -1,4 +1,8 @@
-import DukeExceptions.DukeException;
+package duke.command;
+
+import duke.exceptions.DukeException;
+import duke.TaskList;
+import duke.Ui;
 
 /**
  * The command that represents an error parsing the user given command.

@@ -1,4 +1,4 @@
-package DukeExceptions;
+package duke.exceptions;
 
 public class DukeEmptyTaskException extends DukeException {
     public static enum TaskType {

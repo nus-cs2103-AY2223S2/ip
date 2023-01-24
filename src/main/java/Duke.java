@@ -1,3 +1,9 @@
+import duke.command.Command;
+import duke.Parser;
+import duke.Storage;
+import duke.TaskList;
+import duke.Ui;
+
 /**
  * The main class to run the Duke App.
  *

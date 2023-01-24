@@ -1,4 +1,8 @@
-import DukeExceptions.DukeStoreInvalidAccessException;
+package duke.command;
+
+import duke.exceptions.DukeStoreInvalidAccessException;
+import duke.TaskList;
+import duke.Ui;
 
 /**
  * The command that marks a task in the list as not completed.
