@@ -1,5 +1,7 @@
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Scanner;
+import java.util.Arrays;
 
 public class Duke {
     public static void main(String[] args) {
@@ -41,13 +43,30 @@ public class Duke {
         return splitInput.length < 2;
     }
 
+    public static LocalDate getDate(String[] splitInput) {
+        if (splitInput.length >= 4) {
+            if (splitInput[splitInput.length - 2].equals("/by")) {
+                
+                try {
+                    // in form yyyy-mm-dd
+                    LocalDate taskDateTime = LocalDate
+                            .parse(splitInput[splitInput.length - 1]);
+                    return taskDateTime;
+                } catch (Exception e) {
+                    System.out.println("failed to read date");
+                }
+            }
+        }
+        return null;
+    }
+
     public static void run(String input, ArrayList<Task> toDoList) throws DukeException {
 
         String[] splitInput = input.split(" ");
         String command = splitInput[0];
 
         System.out.println("________________________________");
-
+        LocalDate taskDate;
         switch (command) {
 
             case "list":
@@ -83,7 +102,6 @@ public class Duke {
                     throw new DukeException("OOPS!!! The value cannot be empty.");
                 }
 
-                
                 try {
                     String taskNumUnmark = splitInput[1];
 
@@ -105,8 +123,18 @@ public class Duke {
                     throw new DukeException("OOPS!!! The description of a event cannot be empty.");
                 }
 
-                String eventDescription = input.substring(("event").length() + 1);
-                Task newEvent = new Event(eventDescription);
+                taskDate = getDate(splitInput);
+                String eventDescription;
+                System.out.println(splitInput[1]);
+
+                if (taskDate == null) {
+                    eventDescription = input.substring(("event").length() + 1);
+                } else {
+                    
+                    eventDescription = String.join(" ", Arrays.copyOfRange(splitInput, 1, splitInput.length - 2));
+                }
+
+                Task newEvent = new Event(eventDescription, taskDate);
                 toDoList.add(newEvent);
                 System.out.println(" Got it. I've added this task:");
                 System.out.println("  " + newEvent.toString());
@@ -117,9 +145,17 @@ public class Duke {
                 if (checkDescription(splitInput)) {
                     throw new DukeException("OOPS!!! The description of a deadline cannot be empty.");
                 }
-                String deadlineDescription = input.substring(("deadline").length() + 1);
-                Task newDeadline = new Deadline(deadlineDescription);
+                taskDate = getDate(splitInput);
+                String deadlineDescription;
+                if (taskDate == null) {
+                    deadlineDescription = input.substring(("deadline").length() + 1);
+                } else {
+                    deadlineDescription = String.join(" ", Arrays.copyOfRange(splitInput, 1, splitInput.length - 2));
+                }
+
+                Task newDeadline = new Deadline(deadlineDescription, taskDate);
                 toDoList.add(newDeadline);
+
                 System.out.println(" Got it. I've added this task:");
                 System.out.println("  " + newDeadline.toString());
                 System.out.println("Now you have " + toDoList.size() + " tasks on the list.");
@@ -129,9 +165,15 @@ public class Duke {
                 if (checkDescription(splitInput)) {
                     throw new DukeException("OOPS!!! The description of a todo cannot be empty.");
                 }
+                taskDate = getDate(splitInput);
 
-                String todoDescription = input.substring(("todo").length() + 1);
-                Task newTodo = new Todo(todoDescription);
+                String todoDescription;
+                if (taskDate == null) {
+                    todoDescription = input.substring(("todo").length() + 1);
+                } else {
+                    todoDescription = String.join(" ", Arrays.copyOfRange(splitInput, 1, splitInput.length - 2));
+                }
+                Task newTodo = new Todo(todoDescription, taskDate);
                 toDoList.add(newTodo);
                 System.out.println(" Got it. I've added this task:");
                 System.out.println("  " + newTodo.toString());
