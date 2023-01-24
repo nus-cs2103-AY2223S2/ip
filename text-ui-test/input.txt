@@ -19,12 +19,14 @@ mark 0
 mark -1
 mark 5
 mark 9999999
+mark bla
 list
 unmark 4
 unmark 0
 unmark -1
 unmark 5
 unmark 9999999
+unmark bla
 asdaslhdlh
 list
 todo
@@ -46,5 +48,6 @@ delete -1
 delete 0
 delete 5
 delete 2
+delete bla
 list
 bye
