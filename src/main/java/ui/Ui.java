@@ -68,6 +68,7 @@ public class Ui {
 		boolean hasItem = false;
 		LocalDateTime dateTime = parser.parseDateTimeStr(dateTimeStr, this);
 		String dtStrOutput = dateTime.format(DateTimeFormatter.ofPattern("MMM d yyyy hh:mm a"));
+		String header = String.format("These are the deadline/events that occur on %s", dtStrOutput);
 
 		int itemNum = 1;
 		for (int i = 0; i < tasklist.size(); i++) {
@@ -76,8 +77,7 @@ public class Ui {
 				Deadline deadline = (Deadline) curTask;
 				if (deadline.getBy().equals(dateTime)) {
 					if (!hasItem) {
-						println(String.format(
-								"These are the deadline/events that occur on %s", dtStrOutput));
+						println(header);
 					}
 					hasItem = true;
 					println(String.format("%d.%s", itemNum, deadline));
@@ -88,8 +88,7 @@ public class Ui {
 				Event event = (Event) curTask;
 				if (event.getFrom().equals(dateTime) || event.getTo().equals(dateTime)) {
 					if (!hasItem) {
-						println(String.format(
-								"These are the deadline/events that occur on %s", dtStrOutput));
+						println(header);
 					}
 					hasItem = true;
 					println(String.format("%d.%s", itemNum, event));
