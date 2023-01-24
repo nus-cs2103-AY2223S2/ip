@@ -1,8 +1,5 @@
 import java.util.*;
 public class Duke {
-    //private enum COMMANDS{
-    //    DELETE`````````````````````````````````````````````````````````````````````````````````````````````````````````````
-    //}
     public static void main(String[] args) throws DukeException{
         String logo = " ____        _        \n"
                 + "|  _ \\ _   _| | _____ \n"
@@ -10,7 +7,6 @@ public class Duke {
                 + "| |_| | |_| |   <  __/\n"
                 + "|____/ \\__,_|_|\\_\\___|\n";
         System.out.println("Hello I am Duke\nWhat can I do for you?");
-        Duke duke = new Duke();
         boolean isBye = false;
         TaskList taskList = new TaskList();
         Scanner sc = new Scanner(System.in);
@@ -20,8 +16,7 @@ public class Duke {
                 String answer = sc.nextLine();
                 String[] wordArr = answer.split(" ", 2);
                 String command = wordArr[0].toUpperCase();
-                //System.out.println(command);
-                //System.out.println(COMMANDS.DELETE);
+
                 System.out.println("___________________");
                 if (wordArr[0].equals("mark")) {
                     String index = wordArr[1];
