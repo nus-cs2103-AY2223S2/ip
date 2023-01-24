@@ -12,6 +12,10 @@ public class Deadline extends Task {
         this.deadline = DateTimeParser.parseDate(deadline);
     }
 
+    public TemporalAccessor getDeadline() {
+        return this.deadline;
+    }
+
     @Override
     public String toString() {
         return "[D]" + super.toString() + " (by: " + DateTimeParser.printDateTime(deadline) + ")";

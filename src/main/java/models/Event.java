@@ -14,6 +14,14 @@ public class Event extends Task {
         this.to = DateTimeParser.parseDate(to);
     }
 
+    public TemporalAccessor getFrom() {
+        return this.from;
+    }
+
+    public TemporalAccessor getTo() {
+        return this.to;
+    }
+
     @Override
     public String toString() {
         return "[E]" + super.toString() + " (from: " + DateTimeParser.printDateTime(from) + " to: " + DateTimeParser.printDateTime(to) + ")";

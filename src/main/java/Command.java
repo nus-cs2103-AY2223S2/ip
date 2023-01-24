@@ -4,6 +4,7 @@ import models.Deadline;
 import models.Event;
 import models.Task;
 import models.ToDo;
+import utilities.DateTimeParser;
 import utilities.UI;
 
 public enum Command {
@@ -58,7 +59,16 @@ public enum Command {
     LIST("list") {
         @Override
         public void execute(TaskList taskList, String args) {
-            UI.output("Here are the tasks in your list:\n\t" + taskList.toString());
+            int on = args.indexOf("/on");
+            if (args.equals("list")) {
+                UI.output("Here are the tasks in your list:\n\t" + taskList.toString());
+            } else if (on != -1) {
+                String date = args.substring(on + 4);
+                TaskList taskListOnDate = taskList.getTaskListOnDate(date);
+                UI.output("Here are the tasks on: " + DateTimeParser.printDateTime(DateTimeParser.parseDate(date)) + "\n\t" + taskListOnDate.toString());
+            } else {
+                throw new SaturdayException("OOPS!!! Input a valid date to check your list against");
+            }
         }
     },
     MARK("mark") {
