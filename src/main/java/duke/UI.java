@@ -11,6 +11,11 @@ public class UI {
     private static final String INDENTATION = " ".repeat(5);
     private static final Scanner sc = new Scanner(System.in);
 
+    /**
+     * Prints a message to the output.
+     * 
+     * @param msg the message to be printed to the output
+     */
     public static void echo(String msg) {
         String displayedMsg = Arrays.stream(msg.split("\n")).map(line -> INDENTATION + line)
                 .collect(Collectors.joining("\n"));
@@ -19,14 +24,27 @@ public class UI {
         System.out.println(LINE);
     }
 
+    /**
+     * Prints the greeting message when the application starts.
+     */
     public static void greet() {
         echo("Hello! I'm Duke\nWhat can I do for you?");
     }
 
+    /**
+     * Reads the next command from the user.
+     * 
+     * @return a string representing the command
+     */
     public static String readCommand() {
         return sc.nextLine();
     }
 
+    /**
+     * Prints the message of an error to the ouput.
+     * 
+     * @param ex a error of the application
+     */
     public static void echoError(DukeException ex) {
         echo(ex.getMessage());
     }

@@ -6,6 +6,11 @@ import java.time.format.DateTimeParseException;
 import java.util.Optional;
 import java.util.OptionalInt;
 
+/**
+ * Utilities for the application.
+ * <p>
+ * The utilities is provided using {@code static} methods.
+ */
 public class DukeUtils {
 
     private static final String INPUT_FORMAT_STRING = "yyyy-MM-dd";
@@ -16,10 +21,23 @@ public class DukeUtils {
     private static final DateTimeFormatter OUTPUT_FORTMAT =
             DateTimeFormatter.ofPattern(OUTPUT_FORMAT_STRING);
 
+    /**
+     * Converts a {@code LocalDate} instance to a {@code String}, using MMM dd yyyy format.
+     * 
+     * @param date the {@code LocalDate} instance to be converted
+     * @return a string, representing the {@code LocalDate} instance
+     */
     public static String convertDateToString(LocalDate date) {
         return date.format(OUTPUT_FORTMAT);
     }
 
+    /**
+     * Converts an input string to a {@code LocalDate} instance. If the conversion fails, an empty
+     * {@code Optional} is returned.
+     * 
+     * @param input the input string
+     * @return an {@code Optional} instance holding the conversion result
+     */
     public static Optional<LocalDate> convertStringToDate(String input) {
         try {
             return Optional.of(LocalDate.parse(input, INPUT_FORMAT));
@@ -28,6 +46,13 @@ public class DukeUtils {
         }
     }
 
+    /**
+     * Converts an input string to an integer. If the conversion fails, an empty {@code OptionalInt}
+     * is returned.
+     * 
+     * @param input the input string
+     * @return an {@code OptionalInt} holding the result of the conversion
+     */
     public static OptionalInt convertStringToInt(String input) {
         try {
             return OptionalInt.of(Integer.parseInt(input));

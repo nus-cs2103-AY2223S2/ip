@@ -14,6 +14,9 @@ import duke.task.DeadlineTask;
 import duke.task.EventTask;
 import duke.task.TodoTask;
 
+/**
+ * A simple parser which provided utilities mostly by {@code static} methods.
+ */
 public class Parser {
 
     private enum CommandKeyword {
@@ -31,6 +34,12 @@ public class Parser {
         }
     }
 
+    /**
+     * Parses an input string as a command.
+     * 
+     * @param input the input string
+     * @return a command corresponded to the input string
+     */
     public static Command parseCommand(String input) {
         Parser p = new Parser(input);
         CommandKeyword kw = p.parseKeyword();
@@ -92,13 +101,14 @@ public class Parser {
         }
     }
 
+    /////////////////////////////
+    // INTERNAL IMPLEMENTATION //
+    /////////////////////////////
+
     private String input;
     private int offset;
     private int length;
 
-    /**
-     * Internal implementation {@code null} will be returned if the parser fail.
-     */
     private Parser(String input) {
         this.input = input;
         this.offset = 0;
