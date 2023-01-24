@@ -2,7 +2,6 @@ package connor.task;
 
 import connor.ui.Ui;
 
-import java.io.IOException;
 import java.util.LinkedList;
 
 public class TaskList {

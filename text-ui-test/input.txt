@@ -30,5 +30,5 @@ delete -1
 delete
 delete
 delete garbage
-delete all
+deleteall
 bye

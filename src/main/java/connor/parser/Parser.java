@@ -60,6 +60,7 @@ public class Parser {
 
     private String getCommand(String input) {
         if (input.indexOf(' ') == -1) {
+
             return input.toUpperCase();
         } else {
             return input.substring(0, input.indexOf(' ')).toUpperCase();

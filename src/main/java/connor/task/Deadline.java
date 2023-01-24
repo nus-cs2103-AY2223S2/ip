@@ -1,7 +1,5 @@
 package connor.task;
 
-import connor.parser.Parser;
-
 import java.time.DateTimeException;
 import java.time.LocalDateTime;
 
@@ -10,12 +8,12 @@ public class Deadline extends Task {
     private LocalDateTime deadline;
     private String dataFormat;
 
-    public Deadline(String taskName, String task) {
+    public Deadline(String taskName, String DateTime) {
         super(taskName);
         this.taskName = taskName;
         try {
-            this.deadline = parseDateTime(task);
-            this.dataFormat = dateTimeFormat(task);
+            this.deadline = parseDateTime(DateTime);
+            this.dataFormat = dateTimeFormat(DateTime);
         } catch (DateTimeException e) {
             System.out.println("        " + e.getMessage());
         }
