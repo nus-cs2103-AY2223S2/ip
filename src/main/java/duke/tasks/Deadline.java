@@ -26,8 +26,8 @@ public class Deadline extends Task {
 
     @Override
     public String stringFields() {
-        String dateString = this.chornoDueDate.isEmpty() ? dueDate : 
-        chornoDueDate.get().format(DateTimeFormatter.ofPattern("MMM d yyyy"));
+        String dateString = this.chornoDueDate.isEmpty() ? dueDate
+                : chornoDueDate.get().format(DateTimeFormatter.ofPattern("MMM d yyyy"));
         
         return " (by: " + dateString + ")"; 
     }
