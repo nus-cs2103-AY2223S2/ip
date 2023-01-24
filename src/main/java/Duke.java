@@ -1,5 +1,6 @@
 import java.util.ArrayList;
 import java.util.Scanner;
+import java.io.File;
 
 public class Duke {
     private static ArrayList<Task> tasks = new ArrayList<Task>();
@@ -15,7 +16,7 @@ public class Duke {
                             "____________________________________________________________\n");
     }
 
-    // Outputs welcome message.
+    /** Outputs welcome message. */
     private static void welcomeMsg() {
         output("Hello! I'm Duke\n  What can I do for you?\n");
     }
@@ -58,7 +59,7 @@ public class Duke {
                 + "Now you have " + tasks.size() + (tasks.size() == 1 ? " task " : " tasks ") + "in the list.\n");
     }
 
-    // Outputs all the tasks stored in task list.
+    /** Outputs all the tasks stored in task list. */
     private static void listTasks() {
         String listOfTasks = "Here are the tasks in your list:\n";
         for(int idx = 0; idx < tasks.size(); idx++) {
@@ -88,7 +89,7 @@ public class Duke {
         output("OK, I've marked this task as not done yet:\n    " + task + "\n");
     }
 
-    // Handles unknown input.
+    /** Handles unknown input. */
     private static void handleUnknownInput() {
         try {
             throw new DukeException("OOPS!!! I'm sorry, but I don't know what that means :-(\n");
@@ -97,63 +98,75 @@ public class Duke {
         }
     }
 
+    /** 
+     * Creates task and stores it in Task arraylist.
+     * 
+     * @param taskType Type of task.
+     * @param description The descriptions of the task.
+     */
+    private static void createTask(String taskType, String[] descriptions) {
+        switch (taskType) {
+        case "list":
+            listTasks();
+            break;
+        case "mark":
+            markTask(tasks.get(Integer.parseInt(descriptions[1]) - 1));
+            break;
+        case "unmark":
+            unmarkTask(tasks.get(Integer.parseInt(descriptions[1]) - 1));
+            break;
+        case "todo":
+            try {
+                if (descriptions.length != 2) {
+                    throw new DukeException("OOPS!!! The description of a todo cannot be empty.\n");
+                }
+                addTask(new Todo(descriptions[1]));
+            } catch (DukeException error) {
+                output(error.getMessage());
+            }
+            break;
+        case "deadline":
+            try {
+                String[] deadlineDescription = descriptions[1].split("/by");
+                if (deadlineDescription.length != 2) {
+                    throw new DukeException("OOPS!!! The description of a deadline cannot be empty.\n");
+                }
+                addTask(new Deadline(deadlineDescription[0], deadlineDescription[1]));
+            } catch (DukeException error) {
+                output(error.getMessage());
+            }
+            break;
+        case "event":
+            try {
+                String[] eventDescription = descriptions[1].split("/from|/to");
+                if (eventDescription.length != 3) {
+                    throw new DukeException("OOPS!!! The description of an event cannot be empty.\n");
+                }
+                addTask(new Event(eventDescription[0], eventDescription[1], eventDescription[2]));
+            } catch (DukeException e) {
+                output(e.getMessage());
+            }
+            break;
+        case "delete":
+            removeTask(Integer.parseInt(descriptions[1]) - 1);
+            break;
+        case "bye":
+            exitMsg();
+            return;
+        default:
+            handleUnknownInput();
+            break;
+        }
+    }
+
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
         welcomeMsg();
-
-        while(true) {
+        while (true) {
             String input = sc.nextLine();
-            String[] words = input.split(" ", 2);
-            input = words[0];
-            
-            switch(input) {
-                case "list":
-                    listTasks();
-                    break;
-                case "mark":
-                    markTask(tasks.get(Integer.parseInt(words[1]) - 1));
-                    break;
-                case "unmark":
-                    unmarkTask(tasks.get(Integer.parseInt(words[1]) - 1));
-                    break;
-                case "todo":
-                    try {
-                        if (words.length != 2) 
-                            throw new DukeException("OOPS!!! The description of a todo cannot be empty.\n");
-                        addTask(new Todo(words[1]));
-                    } catch (DukeException e) {
-                        output(e.getMessage());
-                    }
-                    break;
-                case "deadline":
-                    try {
-                        String[] deadlineDescription = words[1].split("/by");
-                        if (deadlineDescription.length != 2) 
-                            throw new DukeException("OOPS!!! The description of a deadline cannot be empty.\n");
-                        addTask(new Deadline(deadlineDescription[0], deadlineDescription[1]));
-                    } catch (DukeException e) {
-                        output(e.getMessage());
-                    }
-                    break;
-                case "event":
-                    try {
-                        String[] eventDescription = words[1].split("/from|/to");
-                        if (eventDescription.length != 3) 
-                            throw new DukeException("OOPS!!! The description of an event cannot be empty.\n");
-                        addTask(new Event(eventDescription[0], eventDescription[1], eventDescription[2]));
-                    } catch (DukeException e) {
-                        output(e.getMessage());
-                    }
-                    break;
-                case "delete":
-                    removeTask(Integer.parseInt(words[1]) - 1);
-                    break;
-                case "bye":
-                    exitMsg();
-                    return;
-                default:
-                    handleUnknownInput();
-            }
+            String[] descriptions = input.split(" ", 2);
+            String taskType = descriptions[0];
+            createTask(taskType, descriptions);
         }
     }
 }
