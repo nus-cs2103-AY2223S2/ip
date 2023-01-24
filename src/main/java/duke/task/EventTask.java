@@ -31,6 +31,12 @@ public class EventTask extends DukeTask {
         }
     }
 
+    /**
+     * Returns a string representation of the task in a specific format, indicating whether the task is done or not,
+     * the information of the task, start date and end date of event.
+     *
+     * @return A string representation of the task
+     */
     @Override
     public String storageString() {
         String status;
@@ -42,16 +48,29 @@ public class EventTask extends DukeTask {
         return "[E] | " + status + this.getInformation() + " | " + this.from + " | " + this.to;
     }
 
+    /**
+     * Returns true if the given date is equal to the start date or end date of the task or between start and end date.
+     *
+     * @param date The date to check
+     * @return true if the date is equal to the start date or end date of the task or between start and end date.
+     */
     @Override
     public boolean matchesDate(LocalDate date) {
         return date.isEqual(this.from) || date.isEqual(this.to)
                 || (date.isAfter(this.from) && date.isBefore(this.to));
     }
 
+    /**
+     * Returns a string representation of the task in a specific format, indicating the task type, whether the task is
+     * done or not, the information of the task, start date and end date of event.
+     *
+     * @return A string representation of the task
+     */
     @Override
     public String toString() {
         return "[E]" + super.toString()
                 + " (from: " + this.from.format(DateTimeFormatter.ofPattern("MMM d yyyy"))
-                + " to: " + this.to.format(DateTimeFormatter.ofPattern("MMM d yyyy")) + ")";
+                + " to: "
+                + this.to.format(DateTimeFormatter.ofPattern("MMM d yyyy")) + ")";
     }
 }

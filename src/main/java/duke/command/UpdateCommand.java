@@ -43,13 +43,13 @@ public class UpdateCommand extends Command{
     }
 
     /**
-     * Marks the list with the given index as done.
+     * Executes the update task command, updates the task's information and save the tasklist to storage
      *
-     * @param tasks The user TaskList that contains all the task to be manipulated
-     * @param ui The ui Object used to display information
-     * @param storage The Storage Object used to save and load the TaskList
-     * @throws DukeException Throws exception if the list is empty
-     *     or the given index is our of range
+     * @param tasks the tasklist to update the task from
+     * @param ui the user interface to display response messages
+     * @param storage the storage for the tasklist
+     * @throws DukeException if the task list is empty or if the input index is not within the range of [1,
+     * tasks.getNoOfTasks()]
      */
     @Override
     public void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
@@ -61,12 +61,11 @@ public class UpdateCommand extends Command{
             String errorMessage = "OOPS!!! The input index is not within the range of [1, "
                     + tasks.getNoOfTasks() + "]";
             throw new InvalidInputException(errorMessage + "\nPlease input a valid index");
-        } else {
-            DukeTask currentTask = tasks.getTask(this.taskIndex);
-            currentTask.updateInformation(this.information);
-            String message = "Nice! I've updated the description of this task:\n " + currentTask;
-            ui.appendResponse(message);
         }
-        storage.save(tasks);
+        DukeTask currentTask = tasks.getTask(this.taskIndex);
+        currentTask.updateInformation(this.information);
+        String message = "Nice! I've updated the description of this task:\n " + currentTask;
+        ui.appendResponse(message);
+        storage.saveTaskList(tasks);
     }
 }

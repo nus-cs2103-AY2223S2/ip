@@ -39,7 +39,7 @@ public class DeleteCommand extends Command {
      * @return Whether the given index is valid.
      */
     public boolean isValidIndex(TaskList list) {
-        return taskIndex >= 0 && taskIndex < list.getNoOfTasks();
+        return this.taskIndex >= 0 && this.taskIndex < list.getNoOfTasks();
     }
 
     /**
@@ -63,11 +63,11 @@ public class DeleteCommand extends Command {
             throw new InvalidInputException(errorMessage + "\nPlease input a valid index");
         } else {
             String message = "Noted. I've removed this task:\n "
-                    + tasks.getTask(taskIndex) + "\nNow you have "
+                    + tasks.getTask(this.taskIndex) + "\nNow you have "
                     + (tasks.getNoOfTasks() - 1) + " tasks in the list.";
             ui.appendResponse(message);
             tasks.deleteTask(this.taskIndex);
         }
-        storage.save(tasks);
+        storage.saveTaskList(tasks);
     }
 }

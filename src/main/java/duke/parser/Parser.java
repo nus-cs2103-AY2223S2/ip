@@ -14,6 +14,24 @@ public class Parser {
     private static final String UNRECOGNIZED_ERROR = "OOPS!!! I'm sorry, but I don't know what that means :-(\n" +
             "Please type in \"help\" to check all available commands.";
     private static final String EMPTY_ERROR = "OOPS!!! The instruction cannot be empty";
+
+    public enum Instruction {
+        BYE,
+        LIST,
+        REMINDER,
+        HELP,
+        MASSDELETE,
+        MARK,
+        UNMARK,
+        DELETE,
+        TODO,
+        DEADLINE,
+        EVENT,
+        FIND,
+        SEARCH,
+        UPDATE;
+    }
+
     /**
      * A parse method that takes in a String representation of a Command, using
      * regular expression to parse it can construct to a Command object.
@@ -36,36 +54,41 @@ public class Parser {
         String instructionTag = instructionExtractor.group("instructionTag").strip();
         String information = instructionExtractor.group("information").strip();
 
-        if (instructionTag.equalsIgnoreCase("bye")) {
-            return new ExitCommand();
-        } else if (instructionTag.equalsIgnoreCase("list")) {
-            return new ListCommand();
-        } else if (instructionTag.equalsIgnoreCase("reminder")) {
-            return new ReminderCommand();
-        } else if (instructionTag.equalsIgnoreCase("help")) {
-            return new HelpCommand();
-        } else if (instructionTag.equalsIgnoreCase("massDelete")) {
-            return new MassDeleteCommand();
-        } else if (instructionTag.equalsIgnoreCase("mark")) {
-            return Decipherer.markDecoder(information);
-        } else if (instructionTag.equalsIgnoreCase("unmark")) {
-            return Decipherer.unmarkDecoder(information);
-        } else if (instructionTag.equalsIgnoreCase("delete")) {
-            return Decipherer.deleteDecoder(information);
-        } else if (instructionTag.equalsIgnoreCase("todo")) {
-            return Decipherer.todoDecoder(information);
-        } else if (instructionTag.equalsIgnoreCase("deadline")) {
-            return Decipherer.deadlineDecoder(information);
-        } else if (instructionTag.equalsIgnoreCase("event")) {
-            return Decipherer.eventDecoder(information);
-        } else if (instructionTag.equalsIgnoreCase("find")) {
-            return Decipherer.findDecoder(information);
-        } else if (instructionTag.equalsIgnoreCase("search")) {
-            return Decipherer.searchDecoder(information);
-        } else if (instructionTag.equalsIgnoreCase("update")) {
-            return Decipherer.updateDecoder(information);
-        }else {
+        try {
+            Instruction instruction = Instruction.valueOf(instructionTag.toUpperCase());
+            switch (instruction) {
+                case BYE:
+                    return new ExitCommand();
+                case LIST:
+                    return new ListCommand();
+                case REMINDER:
+                    return new ReminderCommand();
+                case HELP:
+                    return new HelpCommand();
+                case MASSDELETE:
+                    return new MassDeleteCommand();
+                case MARK:
+                    return Decipherer.markDecoder(information);
+                case UNMARK:
+                    return Decipherer.unmarkDecoder(information);
+                case DELETE:
+                    return Decipherer.deleteDecoder(information);
+                case TODO:
+                    return Decipherer.todoDecoder(information);
+                case DEADLINE:
+                    return Decipherer.deadlineDecoder(information);
+                case EVENT:
+                    return Decipherer.eventDecoder(information);
+                case FIND:
+                    return Decipherer.findDecoder(information);
+                case SEARCH:
+                    return Decipherer.searchDecoder(information);
+                case UPDATE:
+                    return Decipherer.updateDecoder(information);
+            }
+        } catch (IllegalArgumentException e) {
             throw new InvalidInputException(UNRECOGNIZED_ERROR);
         }
+        return null;
     }
 }

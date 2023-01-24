@@ -69,6 +69,6 @@ public class MarkAsDoneCommand extends Command {
             String message = "Nice! I've marked this task as done:\n " + currentTask;
             ui.appendResponse(message);
         }
-        storage.save(tasks);
+        storage.saveTaskList(tasks);
     }
 }

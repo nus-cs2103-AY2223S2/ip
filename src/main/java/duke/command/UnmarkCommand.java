@@ -69,6 +69,6 @@ public class UnmarkCommand extends Command {
             String message = "OK, I've marked this task as not done yet:\n " + currentTask;
             ui.appendResponse(message);
         }
-        storage.save(tasks);
+        storage.saveTaskList(tasks);
     }
 }

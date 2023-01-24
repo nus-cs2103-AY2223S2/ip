@@ -54,10 +54,8 @@ public class Storage {
      * a new empty TaskList.
      *
      * @return Return the TaskList parsed from the given file
-     * @throws InvalidInputException Throws InvalidInputException when the Storage file
-     * has unrecognized record
-     * @throws StorageFileException Throws StoreFileIoException when encountering
-     * IOException when reading the file
+     * @throws InvalidInputException Thrown when the Storage file has unrecognized record
+     * @throws StorageFileException Thrown when encountering IOException when reading the file
      */
     public TaskList load() throws InvalidInputException, StorageFileException {
         TaskList list = new TaskList();
@@ -66,24 +64,33 @@ public class Storage {
         }
 
         try {
+            // Create a scanner to read the file
             Scanner sc = new Scanner(storageFile);
+            // Iterate through each line in the file
             while (sc.hasNextLine()) {
                 String instruction = sc.nextLine().strip();
                 String[] information = instruction.split("\\s\\|\\s");
 
                 String taskTag = information[0];
-                boolean isDone = information[1].equals("[X]");
-                String description = information[2];
+                boolean isDone = information[1].equals(IS_DONE_TAG);
+                storageFormatChecker(information[0], information[1]);
 
-                if (taskTag.equals(TODO_TAG)) {
-                    Decoder.todoDecoder(list, description, isDone);
-                } else if (taskTag.equals(DEADLINE_TAG)) {
-                    String date = information[3];
-                    Decoder.deadlineDecoder(list, description, isDone, date);
-                } else {
-                    String from = information[3];
-                    String to = information[4];
-                    Decoder.eventDecoder(list, description, isDone, from, to);
+                // Decode the task information based on the task tag
+                switch (taskTag) {
+                    case TODO_TAG:
+                        Decoder.todoDecoder(list, information[2], isDone);
+                        break;
+                    case DEADLINE_TAG:
+                        String date = information[3];
+                        Decoder.deadlineDecoder(list, information[2], isDone, date);
+                        break;
+                    case EVENT_TAG:
+                        String from = information[3];
+                        String to = information[4];
+                        Decoder.eventDecoder(list, information[2], isDone, from, to);
+                        break;
+                    default:
+                        throw new InvalidInputException("Unrecognized task tag: " + taskTag);
                 }
             }
             return list;
@@ -92,6 +99,12 @@ public class Storage {
         }
     }
 
+    /**
+     * Check if the input for the task tag and isDone match the expected format.
+     *
+     * @param tag The task tag of the task
+     * @param isDone The status of the task
+     */
     private void storageFormatChecker(String tag, String isDone) {
         assert Objects.equals(tag, TODO_TAG) || Objects.equals(tag, DEADLINE_TAG) || Objects.equals(tag, EVENT_TAG)
                 : "Type tag of event should be [T], [D], or [E]";
@@ -111,26 +124,37 @@ public class Storage {
     //@@author
 
     /**
-     * Saves the current TaskList to the given file by overwriting it.
+     * Saves the given task list to the file associated with this StorageFile object.
+     * If the parent folder of the file does not exist, it will be created.
      *
-     * @param list The given file to be saved.
-     * @throws StorageFileException Throws StoreFileIoException when encountering
-     * IOException when writing to the file
+     * @param taskList The task list to be saved.
+     * @throws StorageFileException Throws StorageFileException when encountering an IOException when writing to the file
      */
-    public void save(TaskList list) throws StorageFileException {
-        if (!this.folder.toFile().exists()) {
-            folder.toFile().mkdirs();
-        }
+    public void saveTaskList(TaskList taskList) throws StorageFileException {
+        createParentFolderIfNotExists();
 
         StringBuilder record = new StringBuilder();
+        for (int i = 0; i < taskList.getNoOfTasks(); i++) {
+            DukeTask task = taskList.getTask(i);
+            record.append(task.storageString()).append(System.lineSeparator());
+        }
+
         try {
-            for (int i = 0; i < list.getNoOfTasks(); i++) {
-                DukeTask task = list.getTask(i);
-                record.append(task.storageString()).append(System.lineSeparator());
-            }
-            writeToFile(filePath, record.toString());
+            writeToFile(this.filePath, record.toString());
         } catch (IOException e) {
-            throw new StorageFileException(STORAGE_ERROR);
+            throw new StorageFileException(this.STORAGE_ERROR);
         }
     }
+
+    /**
+     * Creates the parent folder of the file associated with this StorageFile object if it does not exist.
+     */
+    private void createParentFolderIfNotExists() {
+        if (!this.folder.toFile().exists()) {
+            this.folder.toFile().mkdirs();
+        }
+    }
+
 }
+
+

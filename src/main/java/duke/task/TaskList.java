@@ -59,6 +59,12 @@ public class TaskList {
         return this.list.get(index);
     }
 
+    /**
+     * Extracts all incomplete deadline tasks from the task list and returns them as a new TaskList.
+     * The tasks are sorted by their deadlines in ascending order.
+     *
+     * @return A new TaskList containing all incomplete deadline tasks from the original list
+     */
     public TaskList extractDeadlines() {
         List<DukeTask> result = this.list.stream()
                 .filter(task -> task.getType() == TaskType.DEADLINE && !task.getStatus())
@@ -71,6 +77,11 @@ public class TaskList {
         return new TaskList(new ArrayList<>(result));
     }
 
+    /**
+     * Returns a string representation of the task list in the format "index. task\n".
+     *
+     * @return A string representation of the task list
+     */
     @Override
     public String toString() {
         StringBuilder listContent = new StringBuilder();

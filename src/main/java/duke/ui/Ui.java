@@ -9,8 +9,8 @@ public class Ui {
     private final int DEFUALT_LENGTH = 70;
     private final int DEFUALT_SPACE = 4;
     private final String UNDERSCORE = "_";
-    private final String space = " ";
-    private final String lineSeparator = "\n";
+    private final String SPACE = " ";
+    private final String LINE_SEPERATOR = "\n";
     private final int horizontalLineLength;
     private final int indentSpace;
     private StringBuilder response = new StringBuilder();
@@ -43,10 +43,10 @@ public class Ui {
      * @return the indented text
      */
     public String indent(String input) {
-        String delimiter = lineSeparator + space.repeat(this.indentSpace);
-        String[] splitString = input.split(lineSeparator);
+        String delimiter = this.LINE_SEPERATOR + this.SPACE.repeat(this.indentSpace);
+        String[] splitString = input.split(this.LINE_SEPERATOR);
 
-        return space.repeat(this.indentSpace) + String.join(delimiter, splitString);
+        return this.SPACE.repeat(this.indentSpace) + String.join(delimiter, splitString);
     }
 
     /**
@@ -55,8 +55,9 @@ public class Ui {
      * @param message the message to be display
      */
     public void displayWithBar(String message) {
-        String bar = space.repeat(indentSpace) + UNDERSCORE.repeat(this.horizontalLineLength);
-        System.out.println(bar + lineSeparator + indent(message) + lineSeparator + bar + lineSeparator);
+        String bar = this.SPACE.repeat(indentSpace) + this.UNDERSCORE.repeat(this.horizontalLineLength);
+        System.out.println(bar + this.LINE_SEPERATOR + indent(message) 
+                + this.LINE_SEPERATOR + bar + this.LINE_SEPERATOR);
     }
 
     public void reset() {

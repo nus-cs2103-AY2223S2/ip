@@ -31,7 +31,7 @@ public class AddTaskCommand extends Command {
     @Override
     public void execute(TaskList tasks, Ui ui, Storage storage) throws StorageFileException {
         tasks.addTask(task);
-        storage.save(tasks);
+        storage.saveTaskList(tasks);
         String message = "Got it. I've added this task:\n " + task
                 + "\nNow you have " + tasks.getNoOfTasks() + " tasks in the list.";
         ui.appendResponse(message);

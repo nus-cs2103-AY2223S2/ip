@@ -91,16 +91,28 @@ public abstract class DukeTask {
          return this.information.toUpperCase().contains(description.toUpperCase());
      }
 
-     public void updateInformation(String information) {
-         this.information = information;
-     }
+    /**
+     * Update the information of the task with the given string.
+     *
+     * @param information the new information of the task
+     */
+    public void updateInformation(String information) {
+        this.information = information;
+    }
 
+    /**
+     * Returns a string representation of the task in the format "DONE_FLAG/UNDONE_FLAG information".
+     * DONE_FLAG is used if the task is done, UNDONE_FLAG otherwise.
+     *
+     * @return A string representation of the task
+     */
     @Override
     public String toString() {
         if (getStatus()) {
-            return DONE_FLAG + this.information;
+            return this.DONE_FLAG + this.information;
         } else {
-            return UNDONE_FLAG + this.information;
+            return this.UNDONE_FLAG + this.information;
         }
     }
+
 }
