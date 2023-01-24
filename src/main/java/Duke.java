@@ -83,14 +83,13 @@ public class Duke {
                     throw new DukeException("OOPS!!! The value cannot be empty.");
                 }
 
-                String taskNumUnmark = splitInput[1];
-
-                Task taskToUnmark;
-
+                
                 try {
-                    taskToUnmark = toDoList.get(Integer.parseInt(taskNumUnmark) - 1);
-                    System.out.println("Nice! I've marked this task as done:");
-                    System.out.println(" " + taskToUnmark.mark());
+                    String taskNumUnmark = splitInput[1];
+
+                    Task taskToUnmark = toDoList.get(Integer.parseInt(taskNumUnmark) - 1);
+                    System.out.println("OK, I've marked this task as not done yet:");
+                    System.out.println(" " + taskToUnmark.unMark());
 
                 } catch (NumberFormatException e) {
                     throw new DukeException("Please input an integer");
