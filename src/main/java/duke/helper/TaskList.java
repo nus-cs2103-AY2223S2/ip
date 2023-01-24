@@ -1,3 +1,12 @@
+package duke.helper;
+
+import duke.exception.InvalidDateTimeException;
+import duke.storage.*;
+import duke.task.Deadline;
+import duke.task.Event;
+import duke.task.Task;
+import duke.task.Todo;
+
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Scanner;
@@ -64,7 +73,7 @@ public class TaskList {
             }
 
             if(isMark) {
-                inputs.get(inputs.size() - 1).setIsDone(true);
+                inputs.get(this.size - 1).setIsDone(true);
             }
         }
     }

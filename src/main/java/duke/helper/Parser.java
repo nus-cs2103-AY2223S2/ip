@@ -1,3 +1,12 @@
+package duke.helper;
+
+import duke.exception.DukeException;
+import duke.exception.EmptyTaskException;
+import duke.exception.InvalidTaskException;
+import duke.task.Deadline;
+import duke.task.Event;
+import duke.task.Todo;
+
 import java.io.IOException;
 
 public class Parser {

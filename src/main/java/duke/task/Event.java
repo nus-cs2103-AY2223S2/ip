@@ -1,3 +1,7 @@
+package duke.task;
+
+import duke.exception.InvalidDateTimeException;
+
 import java.time.LocalDateTime;
 
 public class Event extends Task {

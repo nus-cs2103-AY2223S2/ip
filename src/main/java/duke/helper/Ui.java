@@ -1,3 +1,7 @@
+package duke.helper;
+
+import duke.task.Task;
+
 import java.util.Scanner;
 
 public class Ui {
@@ -13,7 +17,7 @@ public class Ui {
             case "IO":
                 e.printStackTrace();
                 break;
-            case "Duke":
+            case "duke.Duke":
                 System.out.println(e);
                 break;
             case "NAN":
@@ -35,7 +39,7 @@ public class Ui {
 
     public void showWelcome() {
         this.showLine();
-        System.out.println("Hello! I'm Duke");
+        System.out.println("Hello! I'm duke.Duke");
         System.out.println("What can I do for you?");
         this.showLine();
     }

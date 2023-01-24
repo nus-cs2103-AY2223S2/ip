@@ -1,3 +1,11 @@
+package duke;
+
+import duke.exception.DukeException;
+import duke.helper.Parser;
+import duke.helper.TaskList;
+import duke.helper.Ui;
+import duke.storage.Database;
+
 import java.io.IOException;
 
 public class Duke {
@@ -16,7 +24,7 @@ public class Duke {
         } catch (IOException e) {
             ui.showErrorMsg("IO", e, this.tasks.getSize());
         } catch (DukeException e) {
-            ui.showErrorMsg("Duke", e, this.tasks.getSize());
+            ui.showErrorMsg("duke.Duke", e, this.tasks.getSize());
         }
     }
 
@@ -31,7 +39,7 @@ public class Duke {
             try {
                 this.parser.parseInputs(splitStr, tasks);
             } catch (DukeException e) {
-                ui.showErrorMsg("Duke", e, this.tasks.getSize());
+                ui.showErrorMsg("duke.Duke", e, this.tasks.getSize());
             } catch (NumberFormatException e) {
                 ui.showErrorMsg("NAN", e, this.tasks.getSize());
             } catch (IndexOutOfBoundsException e) {
