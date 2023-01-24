@@ -15,6 +15,17 @@ public class Execute {
             }
         }
     }
+
+    public static String convertEnum(Command c) {
+        String res = "";
+        switch (c) {
+            case LIST:case MARK:case TODO:case EVENT:
+                case DELETE:case UNMARK:case DEADLINE: case BYE:
+                res = c.name().toLowerCase();
+        }
+        return res;
+    }
+
     public static void main(String[] args) {
         String logo = " ____        _        \n"
                 + "|  _ \\ _   _| | _____ \n"
@@ -35,36 +46,36 @@ public class Execute {
             String command = expressions[0];
 
             try {
-                if (userInput.equals("list")) {
+                if (userInput.equals(convertEnum(Command.LIST))) {
                     System.out.println(duke.separate(duke.print_curr_tasks()));
-                } else if (command.equals("mark")) {
+                } else if (command.equals(convertEnum(Command.MARK))) {
                     checkEmpty(userInput, command);
                     String[] words = userInput.split(" ");
                     int index = Integer.parseInt(words[1]) - 1;
                     System.out.println(duke.separate(duke.mark_as_done(index)));
-                } else if (command.equals("unmark")) {
+                } else if (command.equals(convertEnum(Command.UNMARK))) {
                     checkEmpty(userInput, command);
                     String[] words = userInput.split(" ");
                     int index = Integer.parseInt(words[1]) - 1;
                     System.out.println(duke.separate(duke.mark_as_undone(index)));
-                } else if (userInput.equals("bye")) {
+                } else if (userInput.equals(convertEnum(Command.BYE))) {
                     break;
-                } else if (command.equals("todo")) {
+                } else if (command.equals(convertEnum(Command.TODO))) {
                     checkEmpty(userInput, command);
                     Todo todo_task = new Todo(userInput);
                     duke.addTask(todo_task);
                     System.out.println(duke.separate(duke.msg_of_add(todo_task)));
-                } else if (command.equals("deadline")) {
+                } else if (command.equals(convertEnum(Command.DEADLINE))) {
                     checkEmpty(userInput, command);
                     Deadline ddl_task = new Deadline(userInput);
                     duke.addTask(ddl_task);
                     System.out.println(duke.separate(duke.msg_of_add(ddl_task)));
-                } else if (command.equals("event")) {
+                } else if (command.equals(convertEnum(Command.EVENT))) {
                     checkEmpty(userInput, command);
                     Event event_task = new Event(userInput);
                     duke.addTask(event_task);
                     System.out.println(duke.separate(duke.msg_of_add(event_task)));
-                } else if (command.equals("delete")) {
+                } else if (command.equals(convertEnum(Command.DELETE))) {
                     checkEmpty(userInput, command);
                     String[] words = userInput.split(" ");
                     int index = Integer.parseInt(words[1]) - 1;
