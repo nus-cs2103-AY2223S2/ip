@@ -52,6 +52,7 @@ public class Execute {
                 } else if (command.equals("todo")) {
                     checkEmpty(userInput, command);
                     Todo todo_task = new Todo(userInput);
+                    duke.addTask(todo_task);
                     System.out.println(duke.separate(duke.msg_of_add(todo_task)));
                 } else if (command.equals("deadline")) {
                     checkEmpty(userInput, command);
