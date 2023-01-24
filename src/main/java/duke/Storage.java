@@ -14,15 +14,18 @@ import duke.tasks.TaskList;
 import duke.tasks.ToDo;
 
 public class Storage {
+
+    private static String strDir = "../../../data";
+    private static String fileName = "../../../data/duke.txt";
+
     public static void saveToFile(TaskList tasks) throws IOException {
 
-        String strPath = "../../../data";
         // create directory
-        Path path = Paths.get(strPath);
+        Path path = Paths.get(strDir);
         Files.createDirectories(path);
     
         // output string to file
-        PrintWriter out = new PrintWriter(strPath + "/duke.txt");
+        PrintWriter out = new PrintWriter(fileName);
         out.println(tasks.outputList());
         out.close();
 
@@ -30,8 +33,8 @@ public class Storage {
 
     public static void loadFromFile(TaskList tasks) throws IOException {
         try { 
-            Path fileName = Path.of("../../../data/duke.txt");
-            String strData = Files.readString(fileName);
+            Path fileNamePath = Path.of(fileName);
+            String strData = Files.readString(fileNamePath);
 
             String[] strTasks = strData.split("\n");
             for (String strTask : strTasks) {
