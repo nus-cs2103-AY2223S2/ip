@@ -21,8 +21,8 @@ public class Duke {
         System.out.println(logo + "Hello! I'm Duke. How may I be of assistance?");
         String str = sc.nextLine();
         while (true){
-            String[] cmd_details = str.split(" ", 2);
-            String cmd = cmd_details[0];
+            String[] cmdDetails = str.split(" ", 2);
+            String cmd = cmdDetails[0];
             String details = "";
             if (str.equals("bye")) {
                 // exit
@@ -43,9 +43,9 @@ public class Duke {
                 str = sc.nextLine();
                 continue;
             }
-            int len = cmd_details.length;
+            int len = cmdDetails.length;
             if (len > 1) {
-                details = cmd_details[1];
+                details = cmdDetails[1];
             }
             try {
                 if (cmd.equals("mark")) {
