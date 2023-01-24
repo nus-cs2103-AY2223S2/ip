@@ -21,7 +21,6 @@ public class DeleteCmd extends Command {
      */
     public DeleteCmd(TaskList taskList, String lineInput) {
         super(taskList, lineInput);
-        this.lineInput = lineInput;
     } 
 
     // Deletes the specified task from the task list.

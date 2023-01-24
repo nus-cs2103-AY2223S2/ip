@@ -6,6 +6,7 @@ import duke.commands.CommandInput;
 import duke.commands.DeadlineCmd;
 import duke.commands.DeleteCmd;
 import duke.commands.EventCmd;
+import duke.commands.FindCmd;
 import duke.commands.ListCmd;
 import duke.commands.MarkCmd;
 import duke.commands.ToDoCmd;
@@ -50,6 +51,9 @@ public class Duke {
             case BYE:
                 Ui.shutDown();
                 Storage.saveToFile(taskList);;
+                break;
+            case FIND:
+                new FindCmd(taskList, Ui.line).execute();
                 break;
             case UNRECOGNIZED_CMD:
                 Ui.displayMsg("OOPS!!! I'm sorry, but I don't know what that means :-(");

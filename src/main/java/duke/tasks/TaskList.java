@@ -56,4 +56,21 @@ public class TaskList {
         return this.tasks.get(index);
     }
 
+    /**
+     * Searches for tasks that contains the search keyword
+     * @param keyword
+     * @return A task list containing tasks which contain the search keyword
+     */
+    public TaskList find(String keyword) {
+        TaskList result = new TaskList();
+        for (int i = 0; i < this.tasks.size(); i++) {
+            Task curTask = this.tasks.get(i);
+            if (curTask.taskName.contains(keyword)) {
+                System.out.println(curTask.taskName);
+                result.add(curTask);
+            }
+        }
+        return result;
+    }
+
 }

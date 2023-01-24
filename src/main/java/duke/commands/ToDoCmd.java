@@ -22,7 +22,6 @@ public class ToDoCmd extends Command {
      */
     public ToDoCmd(TaskList taskList, String lineInput) {
         super(taskList, lineInput);
-        this.lineInput = lineInput;
     }
 
     // Adds the ToDo task to the task list.

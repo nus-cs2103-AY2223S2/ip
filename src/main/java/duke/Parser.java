@@ -128,6 +128,9 @@ public class Parser {
         return parseInfo;
     }
 
+    public static String parseFindKeyword(String commandInput) {
+        return commandInput.substring(5);
+    }
 
     /**
      * Used by 'Storage' class to parse string task loaded from data file.

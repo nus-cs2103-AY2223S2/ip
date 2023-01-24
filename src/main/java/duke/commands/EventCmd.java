@@ -24,7 +24,6 @@ public class EventCmd extends Command {
      */
     public EventCmd(TaskList taskList, String lineInput) {
         super(taskList, lineInput);
-        this.lineInput = lineInput;
     }
 
     // Adds the Event task to the list
