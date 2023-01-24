@@ -1,13 +1,13 @@
-package dukes.engine;
+package dukes.task;
 
-class ToDo extends Task {
+public class ToDo extends Task {
 
-    ToDo(String taskName) {
+    public ToDo(String taskName) {
         super(taskName);
         this.tag = "T";
     }
 
-    ToDo(String taskName, boolean isDone) {
+    public ToDo(String taskName, boolean isDone) {
         super(taskName, isDone);
         this.tag = "T";
     }

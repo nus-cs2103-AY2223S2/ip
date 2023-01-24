@@ -1,15 +1,17 @@
-package dukes.engine;
+package dukes.util;
 
+import dukes.command.*;
+import dukes.task.*;
 import java.util.*;
 
 public class TaskList {
     private List<Task> taskList;
 
-    TaskList() {
+    public TaskList() {
         this.taskList = new ArrayList<Task>();
     }
 
-    TaskList(List<Task> taskList) {
+    public TaskList(List<Task> taskList) {
         this.taskList = taskList;
     }
 

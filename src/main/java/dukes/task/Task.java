@@ -1,4 +1,4 @@
-package dukes.engine;
+package dukes.task;
 
 import java.time.LocalDate;
 
@@ -19,19 +19,19 @@ public class Task {
         this.tag = "";
     }
 
-    void setDone() {
+    public void setDone() {
         this.isDone = true;
     }
 
-    void setUnDone() {
+    public void setUnDone() {
         this.isDone = false;
     }
 
-    boolean hasDone() {
+    public boolean hasDone() {
         return this.isDone;
     }
 
-    String getTaskName() {
+    public String getTaskName() {
         return this.taskName;
     }
 
@@ -43,15 +43,15 @@ public class Task {
         return "";
     }
 
-    LocalDate getDeadLine() { // dummy deadline
+    public LocalDate getDeadLine() { // dummy deadline
         return LocalDate.parse("1970-01-01");
     }
 
-    LocalDate getStart() {
+    public LocalDate getStart() {
         return LocalDate.parse("1970-01-01");
     }
 
-    LocalDate getEnd() {
+    public LocalDate getEnd() {
         return LocalDate.parse("1970-01-01");
     }
 

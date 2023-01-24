@@ -1,19 +1,19 @@
-package dukes.engine;
+package dukes.task;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.Locale;
 
-class DeadLine extends Task {
+public class DeadLine extends Task {
     LocalDate deadline;
 
-    DeadLine(String taskName, LocalDate deadline) {
+    public DeadLine(String taskName, LocalDate deadline) {
         super(taskName);
         this.tag = "D";
         this.deadline = deadline;
     }
 
-    DeadLine(String taskName, boolean isDone, LocalDate deadline) {
+    public DeadLine(String taskName, boolean isDone, LocalDate deadline) {
         super(taskName, isDone);
         this.tag = "D";
         this.deadline = deadline;

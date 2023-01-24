@@ -1,21 +1,21 @@
-package dukes.engine;
+package dukes.task;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.Locale;
 
-class Event extends Task {
+public class Event extends Task {
     LocalDate start;
     LocalDate end;
 
-    Event(String taskName, LocalDate start, LocalDate end) {
+    public Event(String taskName, LocalDate start, LocalDate end) {
         super(taskName);
         this.tag = "E";
         this.start = start;
         this.end = end;
     }
 
-    Event(String taskName, boolean isDone, LocalDate start, LocalDate end) {
+    public Event(String taskName, boolean isDone, LocalDate start, LocalDate end) {
         super(taskName, isDone);
         this.tag = "E";
         this.start = start;

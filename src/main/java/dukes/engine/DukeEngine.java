@@ -1,6 +1,8 @@
 package dukes.engine;
 
 import dukes.util.*;
+import dukes.command.*;
+import dukes.task.*;
 
 import java.io.File;
 import java.io.FileNotFoundException;

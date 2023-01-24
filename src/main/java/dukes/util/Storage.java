@@ -1,4 +1,4 @@
-package dukes.engine;
+package dukes.util;
 
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -7,6 +7,8 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import dukes.util.*;
+import dukes.task.*;
+import dukes.command.*;
 
 import java.time.format.DateTimeParseException;
 import java.util.*;
@@ -16,7 +18,7 @@ import java.time.format.DateTimeFormatter;
 public class Storage {
     private String filePath;
 
-    Storage(String filePath) {
+    public Storage(String filePath) {
         this.filePath = filePath;
     }
 
