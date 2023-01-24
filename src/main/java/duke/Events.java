@@ -4,7 +4,8 @@ import java.time.LocalDateTime;
 
 public class Events extends TimedTask{
     LocalDateTime start;
-    String startString;
+    String consoleStartString;
+    String fileStartString;
     public Events() {super();}
     public Events(boolean status, String des) {
         super();
@@ -22,28 +23,32 @@ public class Events extends TimedTask{
         String[] d = new String[2];
         d[0] = des[0];
         String[] temp = des[1].split(" to ");
-        d[1] = temp[1];
+        d[1] = dateTimeFileInParse(temp[1]).format(isoFormat);
         setDes(d);
-        setStart(temp[0]);
+        setStart(dateTimeFileInParse(temp[0]).format(isoFormat));
     }
     public void setStart(String s) {
-        this.start = dateTimeParse(s);
-        this.startString = start.format(super.formatter);
+        this.start = dateTimeConsoleInParse(s);
+        this.consoleStartString = start.format(super.consoleFormat);
+        this.fileStartString = start.format(super.fileFormat);
     }
 
-    public String toStringStart() {
-        return this.startString;
+    public String toStringConsoleStart() {
+        return this.consoleStartString;
+    }
+    public String toStringFileStart() {
+        return this.fileStartString;
     }
 
     @Override
     public void printStatus() {
         String s = (status)? "X":" ";
-        System.out.println("[E][" +s+ "] " + getDes() + " (from: " + toStringStart() + " to: "+ toStringEnd() +")");
+        System.out.println("[E][" +s+ "] " + getDes() + " (from: " + toStringConsoleStart() + " to: "+ toStringConsoleEnd() +")");
     }
 
     @Override
     public String toString() {
         String s = (status)? "X":" ";
-        return "E | " + s + " | " + getDes() + " | " + toStringStart() + " to " + toStringEnd();
+        return "E | " + s + " | " + getDes() + " | " + toStringFileStart() + " to " + toStringFileEnd();
     }
 }

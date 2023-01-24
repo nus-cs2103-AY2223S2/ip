@@ -39,6 +39,7 @@ public class Storage {
             System.out.println("File not found.");
         } catch (DateTimeParseException e){
             System.out.println("Task file corrupted");
+            e.printStackTrace();
         }
 
         return tl;

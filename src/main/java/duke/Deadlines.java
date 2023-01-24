@@ -11,12 +11,12 @@ public class Deadlines extends TimedTask{
     @Override
     public void printStatus() {
         String s = (status)? "X":" ";
-        System.out.println("[D][" +s+ "] " + getDes() + " (by: " + toStringEnd() + ")");
+        System.out.println("[D][" +s+ "] " + getDes() + " (by: " + toStringConsoleEnd() + ")");
     }
 
     @Override
     public String toString() {
         String s = (status)? "X":" ";
-        return "D | " + s + " | " + getDes() + " | " + super.toStringEnd();
+        return "D | " + s + " | " + getDes() + " | " + super.toStringFileEnd();
     }
 }
