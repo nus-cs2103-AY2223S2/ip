@@ -11,13 +11,14 @@ import java.util.Scanner;
 public class Database {
     private File file;
 
-    public Database(String dirName, String fileName) throws IOException {
-            String home = System.getProperty("user.home");
-            Path dirPath = Paths.get(home, "cs2103t/ip", dirName);
-            Files.createDirectories(dirPath);
-            Path filePath = Paths.get(dirPath.toString(), fileName);
-            this.file = new File(filePath.toString());
-            file.createNewFile();
+    public Database(String relFilePath) throws IOException {
+        String home = System.getProperty("user.home");
+        Path dirPath = Paths.get(home, "cs2103t/ip", relFilePath.split("/")[0]);
+        Files.createDirectories(dirPath);
+
+        Path absFilePath = Paths.get(dirPath.toString(), relFilePath.split("/")[1]);
+        this.file = new File(absFilePath.toString());
+        file.createNewFile();
     }
 
     public void updateInputs(ArrayList<Task> inputs) throws IOException, InvalidDateTimeException {
