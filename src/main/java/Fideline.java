@@ -78,23 +78,40 @@ public class Fideline {
                     break;
                 case MARK: // marks given task as done
                     int taskNumMark = Integer.valueOf(parsedInput.getArguments()[0]);
-                    if (this.taskManager.markTask(taskNumMark)) { // marked successfully
-                        botSays("nice work! i've taken note!:\n" +
-                                this.taskManager.getTaskString(taskNumMark)); // success message (marked)
+                    if (taskManager.checkTask(taskNumMark)) { // check if index given is valid
+                        this.taskManager.markTask(taskNumMark); // marks the valid task
+                        botSays("nice work! i've taken note!:\n"
+                                + this.taskManager.getTaskString(taskNumMark)); // success message (marked)
                     } else { // unable to mark, task at given index does not exist
                         botSays("uh hello?? can you check properly?\n "
                                 + "task does not exist bro"); // failure to mark message
-                    };
+                    }
                     break;
                 case UNMARK: // registers given task as not done
                     int taskNumUnmark = Integer.valueOf(parsedInput.getArguments()[0]);
-                    if (this.taskManager.unmarkTask(taskNumUnmark)) { // unmarked successfully
+                    if (taskManager.checkTask(taskNumUnmark)) { // check if index given is valid
+                        this.taskManager.unmarkTask(taskNumUnmark); // unmarks the valid task
                         botSays("uhh okay... i've unmarked your task:\n"
                                 + this.taskManager.getTaskString(taskNumUnmark)); // success message (unmarked)
                     } else { // unable to unmark, task at given index does not exist
-                        botSays("uh hello?? can you check properly?\n " +
-                                "task does not exist bro"); // failure to mark message
-                    };
+                        botSays("uh hello?? can you check properly?\n "
+                                + "task does not exist bro"); // failure to unmark message
+                    }
+                    break;
+                case DELETE: // removes a given task from the list
+                    int taskNumDelete = Integer.valueOf(parsedInput.getArguments()[0]);
+                    if (this.taskManager.checkTask(taskNumDelete)) { // checks if index given is valid
+                        String deletedTaskString = this.taskManager.getTaskString(taskNumDelete);
+                        this.taskManager.deleteTask(taskNumDelete); // deletes the valid task
+                        int taskCount = this.taskManager.getTaskCount();
+                        botSays("okay i've deleted this task:\n  "
+                                + deletedTaskString
+                                + "\nnow there " + (taskCount == 1 ? "is " : "are ") + taskCount
+                                + (taskCount == 1 ? " task " : " tasks ") + "in the list now!");
+                    } else { // unable to delete, task at given index does not exist
+                        botSays("uh hello?? can you check properly?\n "
+                                + "task does not exist bro"); // failure to delete message
+                    }
                     break;
                 case ERROR: // alerts user of error in their input
                     botSays("hold up! " + parsedInput.getArguments()[0]);

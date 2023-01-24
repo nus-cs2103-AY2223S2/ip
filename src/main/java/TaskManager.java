@@ -22,29 +22,29 @@ public class TaskManager {
         this.taskList.add(newEvent);
     }
 
+    // checks if task exists at given index
+    public boolean checkTask(int taskNumber) {
+        return taskNumber <= taskList.size();
+    }
+
     // get the name of the task at a given index
     public String getTaskString(int taskNumber) {
         return this.taskList.get(taskNumber - 1).toString();
     }
 
-    // changes Task at given index to marked. returns a boolean stating if process is successful
-    public boolean markTask(int taskNumber) {
-        if (taskNumber > taskList.size()) {
-            return false; // taskNumber is outside existing range of tasks
-        } else {
-            taskList.get(taskNumber - 1).mark();
-            return true; // successful marking
-        }
+    // changes Task at given index to marked.
+    public void markTask(int taskNumber) {
+        taskList.get(taskNumber - 1).mark();
     }
 
-    // changes Task at given index to unmarked. returns a boolean stating if process is successful
-    public boolean unmarkTask(int taskNumber) {
-        if (taskNumber > taskList.size()) {
-            return false; // taskNumber is outside existing range of tasks
-        } else {
-            taskList.get(taskNumber - 1).unmark();
-            return true; // successful unmarking
-        }
+    // changes Task at given index to unmarked.
+    public void unmarkTask(int taskNumber) {
+        taskList.get(taskNumber - 1).unmark();
+    }
+
+    // delete Task at given index.
+    public void deleteTask(int taskNumber) {
+        taskList.remove(taskNumber - 1);
     }
 
     // formats and returns the list of tasks

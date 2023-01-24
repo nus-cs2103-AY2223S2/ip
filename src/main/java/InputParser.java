@@ -9,7 +9,7 @@ public class InputParser {
 
 
     public enum CommandType {
-        BYE, LIST, TODO, DEADLINE, EVENT, MARK, UNMARK, ERROR;
+        BYE, LIST, TODO, DEADLINE, EVENT, MARK, UNMARK, DELETE, ERROR;
     }
 
     private CommandType command;
@@ -26,7 +26,7 @@ public class InputParser {
 
         ArrayList<String> possibleCommandsList = new ArrayList<>();
         possibleCommandsList.addAll(Arrays.asList(this.possibleCommandsArr));
-        if (!userInput.contains(" ")) { // handling simple command (one word)
+        if (!userInput.contains(" ")) { // handling simple commands (one word)
             if (userInput.equals("bye")) {
                 this.command = CommandType.BYE;
             } else if (userInput.equals("list")) {
@@ -35,7 +35,8 @@ public class InputParser {
                 throw new InputError("this command cannot have an empty description!");
             } else { // unknown command
                 throw new InputError("i don't understand this command!");
-            } // handle commands with arguments
+            }
+            // below handles commands with arguments
         } else if (userInput.startsWith("todo ")) {
             this.command = CommandType.TODO;
             this.inputArguments = new String[1];
@@ -81,6 +82,15 @@ public class InputParser {
                 this.inputArguments[0] = userInput.substring(7, userInput.length());
             } catch (NumberFormatException nfe) {
                 throw new InputError("your argument has to be an integer! (e.g: unmark 2)");
+            }
+        } else if (userInput.startsWith("delete ")) {
+            this.command = CommandType.DELETE;
+            try {
+                Integer.valueOf(userInput.substring(7, userInput.length()));
+                this.inputArguments = new String[1];
+                this.inputArguments[0] = userInput.substring(7, userInput.length());
+            } catch (NumberFormatException nfe) {
+                throw new InputError("your argument has to be an integer! (e.g: delete 2");
             }
         }
     }
