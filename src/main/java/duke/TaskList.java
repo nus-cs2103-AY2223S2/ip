@@ -13,7 +13,7 @@ import java.util.stream.Collectors;
 public class TaskList implements Serializable {
     private final List<Task> list;
 
-    TaskList() {
+    public TaskList() {
         this.list = new ArrayList<>();
     }
 
