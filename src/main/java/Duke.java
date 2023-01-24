@@ -5,7 +5,7 @@ public class Duke {
 
 
         Scanner scanner = new Scanner(System.in);
-        RequestList list = new RequestList(new ArrayList<Request>());
+        TaskList list = new TaskList(new ArrayList<Task>());
 
 
 
@@ -21,13 +21,34 @@ public class Duke {
 
         String userInput = scanner.nextLine();
 
+
+
         while (!userInput.equals("bye")) {
+            String[] userInputComponents = userInput.split(" ");
+
             if (userInput.equals("list")) {
+                horizontalLine();
                 list.printItems();
+                horizontalLine();
+                userInput = scanner.nextLine();
+                continue;
+            } else if (userInputComponents[0].equals("mark") ||
+                       userInputComponents[0].equals("unmark")) {
+                String taskStatus = userInputComponents[0];
+                int taskNumber = Integer.parseInt(userInputComponents[1]);
+                if (taskStatus.equals("mark")) {
+                    horizontalLine();
+                    list.markDone(taskNumber);
+                    horizontalLine();
+                } else if (taskStatus.equals("unmark")) {
+                    horizontalLine();
+                    list.markUndone(taskNumber);
+                    horizontalLine();
+                }
                 userInput = scanner.nextLine();
                 continue;
             }
-            list.addRequest(new Request(userInput));
+            list.addTask(new Task(userInput));
             horizontalLine();
             System.out.println("    added: " + userInput);
             horizontalLine();
