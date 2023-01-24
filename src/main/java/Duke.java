@@ -1,4 +1,4 @@
-import java.io.FileNotFoundException;
+import tasklist.TaskList;
 import java.io.IOException;
 import java.util.*;
 import java.util.regex.*;
@@ -31,7 +31,7 @@ public class Duke {
         String[] valueCommands = {"unmark ", "mark ", "delete "};
         String[] taskCommands = {"deadline ", "todo ", "event "};
 
-        ArrayList<Task> taskStorage = new ArrayList<>();
+        TaskList tasks = new TaskList();
 
         try {
             List<String> allLines = Files.readAllLines(Paths.get("./data/duke.txt"));
@@ -62,11 +62,11 @@ public class Duke {
                     task.markDone();
                 }
 
-                taskStorage.add(task);
+                tasks.loadTask(task);
             }
 
             if (!emptyFile) {
-                printTasks(taskStorage);
+                tasks.printTasks();
             }
 
         } catch (IOException e) {
@@ -79,7 +79,7 @@ public class Duke {
         while (!input.equals("bye")) {
 
             if (input.equals("list")) {
-                printTasks(taskStorage);
+                tasks.printTasks();
                 input = sc.nextLine();
                 continue;
             }
@@ -89,9 +89,7 @@ public class Duke {
                 case "unmark ": {
                     String[] inputArr = input.split(" ");
                     int toUnmark = Integer.parseInt(inputArr[1]);
-                    Task unmarkTask = taskStorage.get(toUnmark - 1);
-                    unmarkTask.markUndone();
-                    System.out.println("OK, I've marked this task as undone:\n" + unmarkTask);
+                    tasks.unmarkTask(toUnmark);
                     input = sc.nextLine();
                     continue;
                 }
@@ -99,9 +97,7 @@ public class Duke {
                 case "mark ": {
                     String[] inputArr = input.split(" ");
                     int toMark = Integer.parseInt(inputArr[1]);
-                    Task markTask = taskStorage.get(toMark - 1);
-                    markTask.markDone();
-                    System.out.println("Nice! I've marked this task as done:\n" + markTask);
+                    tasks.markTask(toMark);
                     input = sc.nextLine();
                     continue;
                 }
@@ -109,15 +105,12 @@ public class Duke {
                 case "delete ": {
                     String[] inputArr = input.split(" ");
                     int toDelete = Integer.parseInt(inputArr[1]);
-                    if (toDelete > Task.numTask) {
+                    if (toDelete > tasks.getNumTasks()) {
                         System.out.println("Task does not exist. Please enter a valid input.");
                         input = sc.nextLine();
                         continue;
                     }
-                    Task deleteTask = taskStorage.remove(toDelete - 1);
-                    System.out.println("Noted. I've removed this task:");
-                    System.out.println(deleteTask.toString());
-                    System.out.println("Now you have " + --Task.numTask + " tasks in the list.");
+                    tasks.deleteTask(toDelete);
                     input = sc.nextLine();
                     continue;
                 }
@@ -138,31 +131,19 @@ public class Duke {
             switch (taskType) {
                 case "todo":
                     ToDo todoTask = new ToDo(inputArr[1]);
-                    taskStorage.add(todoTask);
-                    System.out.println("Got it. I've added this ToDo task:");
-                    System.out.println(todoTask);
-                    System.out.println("Now you have " + Task.numTask + " tasks in the list.");
-
+                    tasks.addTask(todoTask);
                     break;
                 case "deadline": {
                     String[] newInputArr = inputArr[1].split(" /by ", 2);
                     Deadline deadlineTask = new Deadline(newInputArr[0], newInputArr[1]);
-                    taskStorage.add(deadlineTask);
-                    System.out.println("Got it. I've added this Deadline task:");
-                    System.out.println(deadlineTask);
-                    System.out.println("Now you have " + Task.numTask + " tasks in the list.");
-
+                    tasks.addTask(deadlineTask);
                     break;
                 }
                 case "event": {
                     String[] newInputArr = inputArr[1].split(" /from ", 2);
                     String[] newerInputArr = newInputArr[1].split(" /to ", 2);
                     Event eventTask = new Event(newInputArr[0], newerInputArr[0], newerInputArr[1]);
-                    taskStorage.add(eventTask);
-                    System.out.println("Got it. I've added this Event task:");
-                    System.out.println(eventTask);
-                    System.out.println("Now you have " + Task.numTask + " tasks in the list.");
-
+                    tasks.addTask(eventTask);
                     break;
                 }
             }
@@ -172,7 +153,7 @@ public class Duke {
 
         try {
             PrintWriter writer = new PrintWriter(dukeFile);
-            printGoodbye(taskStorage, writer);
+            printGoodbye(tasks, writer);
         } catch (IOException e) {
             System.out.println(e.getMessage());
         }
@@ -215,12 +196,12 @@ public class Duke {
         }
     }
 
-    public static void printGoodbye(ArrayList<Task> taskStorage, PrintWriter writer) {
+    public static void printGoodbye(TaskList tasks, PrintWriter writer) {
         System.out.println("Updating your data. Please wait..");
 
         int count = 0;
 
-        for (Task task : taskStorage) {
+        for (Task task : tasks.getTasks()) {
             count++;
             String toWrite = task.getSaveFormat();
             if (count == 1) {
@@ -235,15 +216,6 @@ public class Duke {
 
         String goodbye = "Bye. Hope to see you again soon!";
         System.out.println(goodbye);
-    }
-
-    public static void printTasks(ArrayList<Task> taskStorage) {
-        int count = 1;
-        System.out.println("Here are the tasks in your list:");
-        for (Task task : taskStorage) {
-            String output = String.format("%d.%s", count++, task.toString());
-            System.out.println(output);
-        }
     }
 
 }
