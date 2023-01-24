@@ -20,22 +20,30 @@ public class Parser {
         try {
             CMD order = CMD.valueOf(cmdLine.split(" ")[0].toUpperCase());
             switch (order) {
-                case BYE:
-                    return new Bye();
-                case LIST:
-                    return new List();
-                case MARK:
-                    return new Mark(cmdLine);
-                case UNMARK:
-                    return new Unmark(cmdLine);
-                case TODO:
-                    return new CreateTodo(cmdLine);
-                case DEADLINE:
-                    return new CreateDeadline(cmdLine);
-                case EVENT:
-                    return new CreateEvent(cmdLine);
-                case DELETE:
-                    return new Delete(cmdLine);
+            case BYE:
+                return new Bye();
+                // Fallthrough
+            case LIST:
+                return new List();
+                // Fallthrough
+            case MARK:
+                return new Mark(cmdLine);
+                // Fallthrough
+            case UNMARK:
+                return new Unmark(cmdLine);
+                // Fallthrough
+            case TODO:
+                return new CreateTodo(cmdLine);
+                // Fallthrough
+            case DEADLINE:
+                return new CreateDeadline(cmdLine);
+                // Fallthrough
+            case EVENT:
+                return new CreateEvent(cmdLine);
+                // Fallthrough
+            case DELETE:
+                return new Delete(cmdLine);
+                // Fallthrough
             }
         } catch (IllegalArgumentException e) {
             return new notACommand();

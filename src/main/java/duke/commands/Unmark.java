@@ -14,11 +14,11 @@ public class Unmark extends Command {
 
     public void operate(TaskList lst, Ui ui, Storage storage) {
         try {
-            if(cmdLine.length()<=7) throw new DukeException("Roarrrrrrrrrrrrrrrrr! Do you want to unmark any task or not?");
-            int i=Integer.parseInt(cmdLine.substring(7));
-            lst.get(i-1).unmark();
+            if (cmdLine.length() <= 7) throw new DukeException("Roarrrrrrrrrrrrrrrrr! Do you want to unmark any task or not?");
+            int i = Integer.parseInt(cmdLine.substring(7));
+            lst.get(i - 1).unmark();
             System.out.println("Roarrrrrrrrrrrrrr! You said you did not finish that? Fine! Unmarked!");
-            System.out.println("  "+lst.get(i-1).toString());
+            System.out.println("  " + lst.get(i - 1).toString());
             storage.save(lst);
         } catch (DukeException e) {
             System.out.println(e.getMessage());
