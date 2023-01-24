@@ -1,12 +1,23 @@
+import entities.TaskList;
 import enums.Commands;
+import exceptions.DukeFileNotFoundException;
+import exceptions.EmptyDescException;
+import exceptions.InvalidInputException;
+import storage.Storage;
 
+import java.io.File;
+import java.io.FileNotFoundException;
 import java.util.Scanner;
 
 public class Duke {
 
-    public static void main(String[] args) throws EmptyDescException, InvalidInputException {
+    public static void main(String[] args) throws DukeFileNotFoundException {
+        TaskList list = new TaskList(100);
         greet();
-        processInputs();
+        Storage storage = new Storage("user.home", list);
+        storage.connect();
+        storage.load();
+        processInputs(list, storage);
     }
 
     private static void greet() {
@@ -20,6 +31,7 @@ public class Duke {
         System.out.println("---------------------------------------");
     }
 
+
     //exits the application when "exit" is inputted
     private static void exit() {
         System.out.println("Bye. Hope to see you again soon!");
@@ -29,8 +41,7 @@ public class Duke {
     //adds items into the list and prints it when "list" is the input
     //our list takes in Tasks that are marked with a boolean.
     //processes the list with inputs from the user with list and Tasks operations.
-    private static void processInputs() throws InvalidInputException, EmptyDescException {
-        TaskList list = new TaskList(100);
+    private static void processInputs(TaskList list, Storage storage) {
         ProcessCommands processes = new ProcessCommands(list);
         Scanner sc = new Scanner(System.in).useDelimiter(" ");
         String input = sc.nextLine();
@@ -100,8 +111,8 @@ public class Duke {
             }
             input = sc.nextLine();
         }
+        storage.save();
         exit();
-
     }
 }
 
