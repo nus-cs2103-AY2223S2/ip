@@ -164,6 +164,34 @@ public class Duke {
 
     }
 
+    private static void deleteTask(String userCommand) throws DukeException {
+        try {
+            String[] userCommandParts = userCommand.split(" ");
+            if (userCommandParts.length != 2) {
+                throw new DukeInvalidArgumentException("Use format: delete {task no.}");
+            }
+
+            String taskNumber = userCommandParts[1];
+            int taskIndex = Integer.parseInt(taskNumber) - 1;
+
+            if (nTasks == 0) {
+                System.out.println("There are no tasks in your Task List!");
+            } else if (0 <= taskIndex && taskIndex < nTasks) {
+                Task task = TASK_LIST.get(taskIndex);
+                TASK_LIST.remove(taskIndex);
+                nTasks--;
+                System.out.println("Noted. I've deleted this task:\n\t" + task
+                        + "\nNow you have " + nTasks + " task(s) in the list.");
+            } else {
+                throw new DukeInvalidArgumentException("Please provide a valid Task number\n" +
+                        "You have " + nTasks + " task(s) in your Task List");
+            }
+
+        } catch (NumberFormatException exception) {
+            throw new DukeInvalidArgumentException("Please provide a valid Task number");
+        }
+    }
+
     private static void processCommand(String userCommand) throws DukeException {
 
         if (userCommand.isEmpty()) {
@@ -194,6 +222,9 @@ public class Duke {
                 break;
             case "unmark":
                 unmarkTask(userCommand);
+                break;
+            case "delete":
+                deleteTask(userCommand);
                 break;
             default:
                 throw new DukeInvalidCommandException("beep...boop... unrecognized command!");
