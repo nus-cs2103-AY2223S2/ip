@@ -2,15 +2,19 @@ package util;
 
 public class Parser {
 
-    String stringToParse;
-
-    public Parser(){
-
+    public String parseScannerInput(String input) {
+        //remove leading and trailing whitespaces
+        String ip = input.trim();
+        if(!ip.isBlank()) {
+            String[] inputArr = ip.split(" ", 2);
+            return inputArr[0];
+        }
+        System.out.println("No command given, please give me one!");
+        return "error";
     }
 
-
     //credit: https://stackabuse.com/java-check-if-string-is-a-number/
-    public boolean isNumeric(String string) {
+    public static boolean isNumeric(String string) {
         int intValue;
 
         if(string == null || string.equals("")) {
@@ -22,7 +26,7 @@ public class Parser {
             intValue = Integer.parseInt(string);
             return true;
         } catch (NumberFormatException e) {
-            System.out.println("The value is a String!");
+            System.out.println("Illegal string input!");
         }
         return false;
     }
