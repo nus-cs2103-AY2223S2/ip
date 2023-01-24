@@ -26,6 +26,32 @@ public class Deadline extends Task{
     }
 
     @Override
+    public String toFile() {
+        int completed = this.completed ? 1 : 0;
+        return String.format("D | %d | %s | %s\n", completed, this.taskName, this.deadline);
+    }
+
+    public static Deadline toDeadlineFromFileStr(String taskNameData, String doneData, String deadlineData)
+            throws DukeException {
+        doneData = doneData.trim();
+        deadlineData = deadlineData.trim();
+        taskNameData = taskNameData.trim();
+        if (taskNameData.isEmpty()) {
+            throw new DukeException("todo");
+        }
+        if (doneData.isEmpty()) {
+            throw new DukeException("missing details");
+        }
+        if (deadlineData.isEmpty()) {
+            throw new DukeException("timing");
+        }
+        Deadline d = new Deadline(taskNameData, deadlineData);
+        boolean completed = Integer.parseInt(doneData) == 1;
+        d.setCompleted(completed);
+        return d;
+    }
+
+    @Override
     public String toString() {
         String s;
         if (this.completed) {

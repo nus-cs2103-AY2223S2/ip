@@ -1,4 +1,4 @@
-public class Task {
+public abstract class Task {
     protected boolean completed;
     protected String taskName;
 
@@ -23,6 +23,10 @@ public class Task {
         return this.completed;
     }
 
+    public void setCompleted(boolean status) { this.completed = status; }
+
+    public abstract String toFile();
+
     @Override
     public String toString() {
         String s;
@@ -34,7 +38,4 @@ public class Task {
         return s;
     }
 
-    public void printTask() {
-
-    }
 }

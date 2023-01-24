@@ -29,6 +29,33 @@ public class Event extends Task{
     }
 
     @Override
+    public String toFile() {
+        int completed = this.completed ? 1 : 0;
+        return String.format("E | %d | %s | %s | %s\n", completed, this.taskName, this.start, this.end);
+    }
+
+    public static Event toEventFromFileStr(String taskNameData, String doneData,
+                                                String startData, String endData) throws DukeException {
+        doneData = doneData.trim();
+        startData = startData.trim();
+        endData = endData.trim();
+        taskNameData = taskNameData.trim();
+        if (taskNameData.isEmpty()) {
+            throw new DukeException("todo");
+        }
+        if (doneData.isEmpty()) {
+            throw new DukeException("missing details");
+        }
+        if (startData.isEmpty() || endData.isEmpty()) {
+            throw new DukeException("timing");
+        }
+        Event e = new Event(taskNameData, startData, endData);
+        boolean completed = Integer.parseInt(doneData) == 1;
+        e.setCompleted(completed);
+        return e;
+    }
+
+    @Override
     public String toString() {
         String s;
         if (this.completed) {
