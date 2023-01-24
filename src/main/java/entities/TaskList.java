@@ -1,7 +1,5 @@
 package entities;
 
-import entities.Task;
-
 import java.util.ArrayList;
 
 public class TaskList {

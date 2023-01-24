@@ -5,8 +5,6 @@ import exceptions.EmptyDescException;
 import exceptions.InvalidInputException;
 import storage.Storage;
 
-import java.io.File;
-import java.io.FileNotFoundException;
 import java.util.Scanner;
 
 public class Duke {

@@ -1,7 +1,5 @@
 package entities;
 
-import entities.Task;
-
 public class Todo extends Task {
     public Todo(String description) {
         super(description);
