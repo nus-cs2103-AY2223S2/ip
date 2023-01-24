@@ -34,7 +34,7 @@ public class Storage {
     
         // output string to file
         PrintWriter out = new PrintWriter(fileName);
-        out.println(tasks.outputList());
+        out.println(tasks.toString());
         out.close();
 
     }

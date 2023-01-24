@@ -27,7 +27,7 @@ public class ListCmd extends Command {
 
     // Output to UI the tasks in the task list
     public void uiReply() {
-        Ui.displayMsg("Here are the tasks in your list:\n" + taskList.outputList());
+        Ui.displayMsg("Here are the tasks in your list:\n" + taskList.toString());
     }
 
 }
