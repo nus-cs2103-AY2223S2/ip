@@ -18,7 +18,7 @@ public class Event extends Task {
      * @param to The end timeline of the Event.
      */
     public Event(String description, String from, String to) {
-        super(description);
+        super(description.trim());
         this.from = from.trim();
         this.to = to.trim();
     }

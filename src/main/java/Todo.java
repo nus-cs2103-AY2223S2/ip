@@ -13,7 +13,7 @@ public class Todo extends Task {
      * @param description The description of the Todos task.
      */
     public Todo(String description) {
-        super(description);
+        super(description.trim());
     }
 
     /**
