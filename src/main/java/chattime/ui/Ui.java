@@ -4,7 +4,7 @@ import chattime.task.Task;
 
 public class Ui {
 
-    private static final String GREET = "Hey! I'm your friend, Chattime!  (•◡•) /\n"
+    private static final String GREET = "Hey! I'm your friend, chattime.Chattime!  (•◡•) /\n"
             + "     How can I help you *^*";
     private static final String LINE = "---------------------------------------------------------------------" +
             "******************CHATTIME";

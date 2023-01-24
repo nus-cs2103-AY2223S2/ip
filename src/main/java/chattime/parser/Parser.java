@@ -45,16 +45,21 @@ public class Parser {
         case "deadline":
         case "event":
         case "listTime":
-            checkAddCommand();
+        case "find":
             switch (command) {
             case "todo":
+                checkAddCommand();
                 return parseTodo();
             case "deadline":
+                checkAddCommand();
                 return parseDeadline();
             case "event":
+                checkAddCommand();
                 return parseEvent();
             case "listTime":
                 return parseListTime();
+            case "find":
+                return parseFind();
             }
         case "mark":
         case "unmark":
@@ -180,6 +185,14 @@ public class Parser {
         } catch (DateTimeParseException e) {
             throw new ChattimeException("OOPS!!! Please enter date and time in format yyyy-mm-dd");
         }
+    }
+
+    public FindCommand parseFind() throws ChattimeException {
+        if (description == null) {
+            throw new ChattimeException(
+                    String.format(MISSED_PARAM, command, "find keyword"));
+        }
+        return new FindCommand(description);
     }
 
 }

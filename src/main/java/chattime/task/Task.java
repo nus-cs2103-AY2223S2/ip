@@ -24,6 +24,10 @@ public class Task {
         return isDone;
     }
 
+    public boolean matchDescription(String keyword) {
+        return this.description.contains(keyword);
+    }
+
     public void markAsDone() {
         this.isDone = true;
     }
