@@ -1,5 +1,9 @@
 package twofive.exception;
 
+/**
+ * Represents an error encountered when one or more arguments are missing
+ * in the command typed by the user.
+ */
 public class MissingArgumentException extends TwoFiveException {
     private String argumentType;
 

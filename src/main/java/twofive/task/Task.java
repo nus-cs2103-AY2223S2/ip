@@ -5,6 +5,9 @@ import twofive.exception.TaskUndoneException;
 
 import java.time.LocalDate;
 
+/**
+ * Represents a tasks which can either be a ToDo, a Deadline or an Event.
+ */
 public abstract class Task {
     private String taskDescription;
     private boolean isDone;
@@ -14,12 +17,21 @@ public abstract class Task {
         this.isDone = false;
     }
 
+    /**
+     * Returns a String with an "X" in a bracket if the task is done,
+     * or an empty bracket otherwise.
+     *
+     * @return String indicating whether the task is done.
+     */
     public String getTaskStatus() {
-        // Done tasks are marked with X
         return (isDone ? "[X]" : "[ ]");
     }
 
-    // Mark current task as done
+    /**
+     * Marks the current task as done if it is not yet done previously.
+     *
+     * @throws TaskDoneException If task is already done.
+     */
     public void setDone() throws TaskDoneException {
         // Only mark as done if task is not done
         if (!this.isDone) {
@@ -29,7 +41,11 @@ public abstract class Task {
         }
     }
 
-    // Mark current task as undone
+    /**
+     * Marks the current task as not done if it is already done previously.
+     *
+     * @throws TaskUndoneException If task is not yet done.
+     */
     public void setUndone() throws TaskUndoneException {
         //Only remark as not done if task is done
         if (this.isDone) {
@@ -44,11 +60,24 @@ public abstract class Task {
         return this.getTaskStatus() + " " + this.taskDescription;
     }
 
+    /**
+     * Returns a String which includes whether the task is done and its
+     * description to be saved into a local file.
+     *
+     * @return String containing details of task to be saved to file.
+     */
     public String getFileWriteString() {
         String isDoneString = this.isDone ? "1" : "0";
         return " | " + isDoneString + " | " + this.taskDescription;
     }
 
+    /**
+     * Returns whether the current task has the same deadline, start time
+     * or end time as the given date.
+     *
+     * @param date Due date
+     * @return Boolean indicating whether the task is due on the given date.
+     */
     public abstract boolean isToday(LocalDate date);
 
     @Override

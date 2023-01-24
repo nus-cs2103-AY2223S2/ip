@@ -5,6 +5,9 @@ import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 
+/**
+ * Represents a Deadline task with a given description and deadline.
+ */
 public class Deadline extends Task {
     private LocalDateTime deadline;
 
@@ -19,6 +22,10 @@ public class Deadline extends Task {
         return "[D]" + super.toString() + deadlineString;
     }
 
+    /**
+     * {@inheritDoc}
+     * The type of task and its deadline is also included.
+     */
     @Override
     public String getFileWriteString() {
         return "D" + super.getFileWriteString() + " | " + this.deadline.format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm"));

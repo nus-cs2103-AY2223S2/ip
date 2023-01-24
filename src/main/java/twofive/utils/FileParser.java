@@ -14,6 +14,9 @@ import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
 import java.util.Scanner;
 
+/**
+ * Parses the contents of a given file into a list of tasks.
+ */
 public class FileParser {
     private static final DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
     private File taskFile;
@@ -22,6 +25,21 @@ public class FileParser {
         this.taskFile = taskFile;
     }
 
+    /**
+     * Parses the contents of the task file provided when initializing
+     * the file parser into a list of objects of the type ToDo, Deadline
+     * or Event.
+     *
+     * @return ArrayList containing Task objects.
+     * @throws FileNotFoundException If task file cannot be found.
+     * @throws EmptyDescriptionException If the description is absent in one or more tasks parsed.
+     * @throws InvalidTaskTypeException If the task type is invalid for one or more tasks parsed.
+     * @throws EmptyDeadlineException If the deadline is absent in one or more Deadline tasks parsed.
+     * @throws EmptyEndTimeException If the end time is absent in one or more Event tasks parsed.
+     * @throws EmptyStartTimeException If the start time is absent in one or more Event tasks parsed.
+     * @throws TaskDoneException If a parsed task that is already done is being marked as done.
+     * @throws DateTimeParseException If the date and time format retrieved from the file is invalid.
+     */
     public ArrayList<Task> parseFile() throws FileNotFoundException, EmptyDescriptionException, InvalidTaskTypeException,
             EmptyDeadlineException, EmptyEndTimeException, EmptyStartTimeException, TaskDoneException, DateTimeParseException {
         Scanner s = new Scanner(this.taskFile);
