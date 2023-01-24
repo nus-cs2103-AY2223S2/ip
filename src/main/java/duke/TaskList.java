@@ -108,6 +108,10 @@ public class TaskList implements Serializable {
         return listTasksFrom(tasks.stream());
     }
 
+    public String listTasksContainKeyword(String keyword) {
+        return listTasksFrom(tasks.stream().filter(task -> task.contains(keyword)));
+    }
+
     @Override
     public String toString() {
         return String.format("TaskList: %s", tasks);

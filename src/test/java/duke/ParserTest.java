@@ -8,6 +8,7 @@ import org.junit.jupiter.api.Test;
 
 import duke.command.AddTaskCommand;
 import duke.command.ExitCommand;
+import duke.command.FindTaskCommand;
 import duke.command.ListCommand;
 import duke.command.MarkCommand;
 import duke.command.RemoveTaskCommand;
@@ -32,6 +33,7 @@ public class ParserTest {
         assertEquals(Parser.parseCommand("mark 10"), new MarkCommand(10));
         assertEquals(Parser.parseCommand("unmark 10"), new UnmarkCommand(10));
         assertEquals(Parser.parseCommand("delete 10"), new RemoveTaskCommand(10));
+        assertEquals(Parser.parseCommand("find money"), new FindTaskCommand("money"));
     }
 
     @Test

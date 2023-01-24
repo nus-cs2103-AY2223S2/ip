@@ -6,6 +6,7 @@ import java.util.function.Supplier;
 import duke.command.AddTaskCommand;
 import duke.command.Command;
 import duke.command.ExitCommand;
+import duke.command.FindTaskCommand;
 import duke.command.ListCommand;
 import duke.command.MarkCommand;
 import duke.command.RemoveTaskCommand;
@@ -24,7 +25,7 @@ public class Parser {
         // @formatter:off
         BYE("bye"), LIST("list"), TODO("todo"), DEADLINE("deadline"),
         EVENT("event"), MARK("mark"), UNMARK("unmark"), DELETE("delete"),
-        UNKNOWN(null);
+        FIND("find"), UNKNOWN(null);
         // @formatter:on
 
         private final String keyword;
@@ -83,6 +84,11 @@ public class Parser {
             case DELETE: {
                 int index = p.parseIntArgument();
                 cmd = new RemoveTaskCommand(index);
+                break;
+            }
+            case FIND: {
+                String keyword = p.parseWordArgument();
+                cmd = new FindTaskCommand(keyword);
                 break;
             }
             default:
@@ -185,6 +191,15 @@ public class Parser {
         String dateString = parseNonwhitespaces();
         return DukeUtils.convertStringToDate(dateString).orElseThrow(
                 () -> new ParserException("expect a date as argument - date format is yyyy-MM-dd"));
+    }
+
+    private String parseWordArgument() {
+        skipWhitespaces();
+        String word = parseNonwhitespaces();
+        if (word.isEmpty()) {
+            throw new ParserException("expect as word as argument - word cannot be empty");
+        }
+        return word;
     }
 
 }
