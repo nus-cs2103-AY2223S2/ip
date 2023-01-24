@@ -65,23 +65,31 @@ public class Duke {
                 break;
             }
             case "deadline": {
-                split = userLine.split(" (/by)|(deadline)");
-                if (split.length < 3) {
-                    System.out.println("Invalid format");
-                    break;
-                }
-                list.add(new Deadline(split[1].trim(), split[2]));
-                System.out.println("Added: " + split[1]);
-                break;
-            }
-            case "event": {
-                split = userLine.split(" (/from)|(/to)|(event)");
+                split = userLine.split(" ");
                 if (split.length < 4) {
                     System.out.println("Invalid format");
                     break;
                 }
-                list.add(new Event(split[1].trim(), split[2], split[3]));
-                System.out.println("Added: " + split[1].trim());
+                try {
+                    list.add(new Deadline(split[1], split[3]));
+                    System.out.println("Added: " + split[1]);
+                } catch (TaskCreationException e) {
+                    System.out.println(e.getMessage());
+                }
+                break;
+            }
+            case "event": {
+                split = userLine.split(" ");
+                if (split.length < 5) {
+                    System.out.println("Invalid format");
+                    break;
+                }
+                try {
+                    list.add(new Event(split[1], split[3], split[5]));
+                    System.out.println("Added: " + split[1]);
+                } catch (TaskCreationException e) {
+                    System.out.println(e.getMessage());
+                }
                 break;
             }
             case "delete": {
