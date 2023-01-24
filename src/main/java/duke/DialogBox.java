@@ -80,7 +80,7 @@ public class DialogBox extends HBox {
     @FXML
     private ImageView displayPicture;
 
-    Circle clipImage = new Circle(40, 40, 40);
+    Circle clipImage = new Circle(70, 43, 40);
 
     private DialogBox(String text, Image img) {
         try {
@@ -97,7 +97,7 @@ public class DialogBox extends HBox {
         displayPicture.setClip(clipImage);
         displayPicture.setImage(img);
         this.setAlignment(Pos.TOP_RIGHT);
-        //this.setSpacing(15.0);
+        this.setSpacing(15.0);
     }
 
     /**
