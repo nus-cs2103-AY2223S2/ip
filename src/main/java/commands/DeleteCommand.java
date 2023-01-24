@@ -21,7 +21,7 @@ public class DeleteCommand extends Command {
 			return;
 		}
 		try {
-			tasklist.deleteItem(inputArr[1], storage, ui);
+			tasklist.deleteTask(inputArr[1], storage, ui);
 		} catch (NumberFormatException ex) {
 			ui.printError("Oops! An item number must be provided.");
 		}

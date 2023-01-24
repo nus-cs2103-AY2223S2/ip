@@ -13,10 +13,20 @@ public class Command {
 		return this.messageArray;
 	}
 
+	/**
+	 * Exit the program if true.
+	 * 
+	 * @return boolean
+	 */
 	public boolean isExit() {
 		return false;
 	};
 
+	/**
+	 * Execute the command and print a response.
+	 * 
+	 * @param args
+	 */
 	public void execute(Object... args) {
 		Ui ui = (Ui) args[0];
 		ui.printError("Oops! I'm sorry but I don't know what that means.");

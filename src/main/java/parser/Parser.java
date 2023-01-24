@@ -26,6 +26,12 @@ public class Parser {
 		TODO, DEADLINE, EVENT
 	}
 
+	/**
+	 * Get command from input.
+	 * 
+	 * @param input
+	 * @return Command
+	 */
 	public Command parseInput(String input) {
 		String[] inputArr = input.split(" ");
 		String opType = inputArr[0].toLowerCase();
@@ -50,6 +56,13 @@ public class Parser {
 		}
 	}
 
+	/**
+	 * Create task from record in saved file and add it to tasklist.
+	 * 
+	 * @param input
+	 * @param tasklist
+	 * @param ui
+	 */
 	public void parseAndSetData(String input, TaskList tasklist, Ui ui) {
 		String inputLower = input.toLowerCase();
 		if (inputLower.isBlank()) {
@@ -87,6 +100,13 @@ public class Parser {
 		tasklist.add(newTask);
 	}
 
+	/**
+	 * Convert String datetime to LocalDateTime object.
+	 * 
+	 * @param dateTimeStr
+	 * @param ui
+	 * @return LocalDateTime
+	 */
 	public LocalDateTime parseDateTimeStr(String dateTimeStr, Ui ui) {
 		if (dateTimeStr.isBlank()) {
 			return null;
@@ -121,6 +141,13 @@ public class Parser {
 
 	}
 
+	/**
+	 * Get a datetime object from deadline tasks.
+	 * 
+	 * @param inputArr
+	 * @param ui
+	 * @return LocalDateTime
+	 */
 	public LocalDateTime getBy(String[] inputArr, Ui ui) {
 		int l = inputArr.length;
 		for (int i = 0; i < l; i++) {
@@ -131,6 +158,13 @@ public class Parser {
 		return null;
 	}
 
+	/**
+	 * Get a datetime array object from event tasks.
+	 * 
+	 * @param inputArr
+	 * @param ui
+	 * @return LocalDateTime[]
+	 */
 	public LocalDateTime[] getFromTo(String[] inputArr, Ui ui) {
 		int l = inputArr.length;
 		int fromStartIdx = -1, fromEndIdx = l, toStartIdx = -1;
@@ -156,6 +190,12 @@ public class Parser {
 		return new LocalDateTime[] { from, to };
 	}
 
+	/**
+	 * Remove the datetime string from an input string.
+	 * 
+	 * @param input
+	 * @return String
+	 */
 	public String trimDate(String input) {
 		String[] inputArr = input.split(" ");
 		StringBuilder sb = new StringBuilder();
@@ -168,7 +208,16 @@ public class Parser {
 		return sb.toString().trim();
 	}
 
+	/**
+	 * Form a string from a string array with a specific start and end index.
+	 * 
+	 * @param arr
+	 * @param startIdx
+	 * @param endIdx
+	 * @return String
+	 */
 	public String sliceArrAndConcate(String[] arr, int startIdx, int endIdx) {
 		return String.join(" ", Arrays.copyOfRange(arr, startIdx, endIdx));
 	}
+
 }

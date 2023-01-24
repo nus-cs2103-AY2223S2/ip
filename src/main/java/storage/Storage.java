@@ -27,6 +27,13 @@ public class Storage {
 
 	private File myFile = new File(dataFilePath);
 
+	/**
+	 * Read and parse saved file contents.
+	 * 
+	 * @param tasklist
+	 * @param parser
+	 * @param ui
+	 */
 	public void getFile(TaskList tasklist, Parser parser, Ui ui) {
 		try {
 			Scanner myReader = new Scanner(myFile);
@@ -39,6 +46,11 @@ public class Storage {
 		}
 	}
 
+	/**
+	 * Create new file if it does not exists.
+	 * 
+	 * @param ui
+	 */
 	private void createFile(Ui ui) {
 		try {
 			myDir.mkdirs();
@@ -48,6 +60,12 @@ public class Storage {
 		}
 	}
 
+	/**
+	 * Add new task into file.
+	 * 
+	 * @param task
+	 * @param ui
+	 */
 	public <T extends Task> void saveNewData(T task, Ui ui) {
 		try (BufferedWriter bw = new BufferedWriter(new FileWriter(dataFilePath, true))) {
 			bw.write(task.getSavedFormat());
@@ -57,6 +75,13 @@ public class Storage {
 		}
 	}
 
+	/**
+	 * Mark or unmark task in file.
+	 * 
+	 * @param idx
+	 * @param isMark
+	 * @param ui
+	 */
 	public void markSavedTask(int idx, boolean isMark, Ui ui) {
 		try (Stream<String> lines = Files.lines(Paths.get(dataFilePath))) {
 			String line = lines.skip(idx).findFirst().get();
@@ -67,6 +92,13 @@ public class Storage {
 		}
 	}
 
+	/**
+	 * Update content in file by line number.
+	 * 
+	 * @param lineNum
+	 * @param newLine
+	 * @param ui
+	 */
 	private void modifyLineFile(int lineNum, String newLine, Ui ui) {
 		String content = "";
 		int curLineNum = 1;
@@ -91,6 +123,12 @@ public class Storage {
 		}
 	}
 
+	/**
+	 * Delete content in file by line number.
+	 * 
+	 * @param lineNum
+	 * @param ui
+	 */
 	public void deleteLineFile(int lineNum, Ui ui) {
 		String content = "";
 		int curLineNum = 1;
