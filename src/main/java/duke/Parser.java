@@ -84,6 +84,12 @@ public class Parser {
                     }
                     tasklist.addEvent(descriptionOthers[0], fromTo[0], fromTo[1]);
                     break;
+                case "find":
+                    if (!details) {
+                        throw new DukeException("Please include the task you would like to find.");
+                    }
+                    tasklist.find(arr[1]);
+                    break;
                 default:
                     throw new DukeException("Sorry, I don't know what that means.");
             }
