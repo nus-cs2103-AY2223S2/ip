@@ -53,8 +53,8 @@ public class Duke {
     private static void save() throws IOException {
         ArrayList<Task> allTasks = MyDuke.getAllTasks();
 
-        Files.createDirectories(Paths.get("./data/"));
-        FileOutputStream out = new FileOutputStream("./data/duke.txt");
+        Files.createDirectories(Paths.get("../../../data/"));
+        FileOutputStream out = new FileOutputStream("../../../data/duke.txt");
         ObjectOutputStream o = new ObjectOutputStream(out);
 
         for (Task task : allTasks) {
