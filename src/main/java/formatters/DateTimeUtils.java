@@ -5,7 +5,17 @@ import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 
+
+/**
+ * Utilities class to process Dates and Time.
+ */
 public class DateTimeUtils {
+
+    /**
+     * Return true if date is of the correct format.
+     * @param date string date
+     * @return true if date is of correct format
+     */
     public static boolean isCorrectDateFormat(String date) {
         try {
             LocalDate localDate = LocalDate.parse(date);
@@ -15,6 +25,11 @@ public class DateTimeUtils {
         return true;
     }
 
+    /**
+     * Return true if time is of the correct format.
+     * @param time string time
+     * @return true if time is of correct format
+     */
     public static boolean isCorrectTimeFormat(String time) {
         try {
             LocalTime localTime = LocalTime.parse(time, DateTimeFormatter.ofPattern("Hmm"));

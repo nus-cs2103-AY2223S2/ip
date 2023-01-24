@@ -20,6 +20,14 @@ public class Event extends Task {
     private LocalTime startTime;
     private LocalTime endTime;
 
+    /**
+     * Constructor for the Event class.
+     * @param description what the event is about
+     * @param startDate start date
+     * @param endDate end date
+     * @param startTime start time
+     * @param endTime end time
+     */
     public Event(String description, String startDate, String endDate, String startTime, String endTime) {
         super(description);
         this.startDateString = startDate;
@@ -45,8 +53,8 @@ public class Event extends Task {
         if (fromIndex == -1 || toIndex == -1 || fromIndex + 1 == toIndex || fromIndex == 1) {
             throw new IncompleteCommandException("Incomplete arguments for command event, I have found", null);
         } else if (fromIndex > toIndex) {
-            throw new UnknownCommandException("This command I do not know, only :\n " +
-                    "event <description> /from <start> /to <end>", null);
+            throw new UnknownCommandException("This command I do not know, only :\n "
+                    + "event <description> /from <start> /to <end>", null);
         }
         String eventDescription = StringUtils.joinString(splitInput, 1, fromIndex - 1);
         String startDateExtract = splitInput[fromIndex + 1];
@@ -64,6 +72,16 @@ public class Event extends Task {
                 startTimeExtract, endTimeExtract);
     }
 
+    /**
+     * Factory method which create an Event from data in file.
+     * @param description what the event is about
+     * @param startDate start date
+     * @param endDate end date
+     * @param startTime start time
+     * @param endTime end time
+     * @param marked status of the task
+     * @return Event object based on data from file.
+     */
     public static Event create(String description, String startDate, String endDate,
                                String startTime, String endTime, String marked) {
         if (!DateTimeUtils.isCorrectDateFormat(startDate)
@@ -137,6 +155,11 @@ public class Event extends Task {
                 this.endTime.format(DateTimeFormatter.ofPattern("h:mm a")));
     }
 
+
+    /**
+     * Data representation of the Event to be written to file.
+     * @return data representation of the event to be written in file
+     */
     @Override
     public String writeTask() {
         return String.format("%s %d %s from %s %s to %s %s",

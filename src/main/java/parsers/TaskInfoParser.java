@@ -7,10 +7,13 @@ import tasks.Task;
 import tasks.ToDo;
 import formatters.StringUtils;
 
+/**
+ * Parser which takes in commands or string responses and returns a task.
+ */
 public class TaskInfoParser extends Parser {
 
     /**
-     * This is a parser to extract information from the task to decide which object it is referring
+     * Extracts information from the task to decide which object it is referring
      * to in the command input and returns it accordingly.
      * @param input command input from stdin
      * @return Task object specific to the command input string
@@ -31,6 +34,12 @@ public class TaskInfoParser extends Parser {
                 " for not know what %s means!!", commands[0]), null);
     }
 
+    /**
+     * Extracts information rom the task to decide which object it is referring to
+     * based on data from the file and returns it accordingly.
+     * @param stringArray the data split into individual words into an array
+     * @return Task object specific to the data representation from file
+     */
     public static Task parse(String[] stringArray) {
         int length = stringArray.length;
         stringArray = StringUtils.removeWhiteSpace(stringArray);

@@ -1,8 +1,16 @@
 package tasks;
+
+/**
+ * Represents a task with a description and its status.
+ */
 abstract public class Task {
     protected String description;
     protected boolean isDone;
 
+    /**
+     * Constructor for Task class.
+     * @param description what the task entails
+     */
     public Task(String description) {
         this.description = description;
         this.isDone = false;
@@ -50,5 +58,9 @@ abstract public class Task {
      */
     abstract public String getTaskType();
 
+    /**
+     * Data representation of the task to write to file.
+     * @return data representation of the task to write to file
+     */
     abstract public String writeTask();
 }

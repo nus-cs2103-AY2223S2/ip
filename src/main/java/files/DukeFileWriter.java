@@ -7,8 +7,16 @@ import java.util.ArrayList;
 import tasks.Task;
 import tasks.TaskList;
 
+/**
+ * A file writer for Duke to write tasks into files.
+ */
 public class DukeFileWriter {
 
+    /**
+     * Writes tasks into file.
+     * @param path path of file for Duke to write on
+     * @param taskList task list from which Duke retrieves and writes tasks into file
+     */
     public static void writeToFile(String path, TaskList taskList) {
         try {
             FileWriter fileWriter = new FileWriter(path);
