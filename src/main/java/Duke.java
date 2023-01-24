@@ -1,11 +1,31 @@
+import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.util.*;
 import java.util.regex.*;
 import tasktypes.*;
+import java.io.File;
+import java.nio.file.Files;
+import java.nio.file.Paths;
+import java.io.PrintWriter;
 public class Duke {
     public static void main(String[] args) {
 
         String greeting = "What's up! XyDuke here!\nHow can I be of assistance?";
         System.out.println(greeting);
+
+        File directory = new File("./data/");
+        if (!directory.exists()) {
+            directory.mkdir();
+        }
+
+        File dukeFile = new File("./data/duke.txt");
+        try {
+            if (!dukeFile.exists()) {
+                dukeFile.createNewFile();
+            }
+        } catch (IOException e) {
+            System.out.println(e.getMessage());
+        }
 
         String[] singleCommands = {"bye", "list"};
         String[] valueCommands = {"unmark ", "mark ", "delete "};
@@ -13,8 +33,47 @@ public class Duke {
 
         ArrayList<Task> taskStorage = new ArrayList<>();
 
-        Scanner sc = new Scanner(System.in);
+        try {
+            List<String> allLines = Files.readAllLines(Paths.get("./data/duke.txt"));
+            boolean emptyFile = true;
 
+            for (String line : allLines) {
+                emptyFile = false;
+                String[] taskSplit = line.split(",,");
+                String type = taskSplit[0];
+                Task task = null;
+                switch (type) {
+                    case "T": {
+                        task = new ToDo(taskSplit[2]);
+                        break;
+                    }
+                    case "D": {
+                        task = new Deadline(taskSplit[2], taskSplit[3]);
+                        break;
+                    }
+                    case "E": {
+                        task = new Event(taskSplit[2], taskSplit[3], taskSplit[4]);
+                        break;
+                    }
+                }
+
+                String done = taskSplit[1];
+                if (done.equals("1")) {
+                    task.markDone();
+                }
+
+                taskStorage.add(task);
+            }
+
+            if (!emptyFile) {
+                printTasks(taskStorage);
+            }
+
+        } catch (IOException e) {
+            System.out.println(e.getMessage());
+        }
+
+        Scanner sc = new Scanner(System.in);
         String input = sc.nextLine();
 
         while (!input.equals("bye")) {
@@ -106,7 +165,13 @@ public class Duke {
             input = sc.nextLine();
         }
 
-        printGoodbye();
+        try {
+            PrintWriter writer = new PrintWriter(dukeFile);
+            printGoodbye(taskStorage, writer);
+        } catch (IOException e) {
+            System.out.println(e.getMessage());
+        }
+
         sc.close();
     }
 
@@ -145,7 +210,24 @@ public class Duke {
         }
     }
 
-    public static void printGoodbye() {
+    public static void printGoodbye(ArrayList<Task> taskStorage, PrintWriter writer) {
+        System.out.println("Updating your data. Please wait..");
+
+        int count = 0;
+
+        for (Task task : taskStorage) {
+            count++;
+            String toWrite = task.getSaveFormat();
+            if (count == 1) {
+                writer.println(toWrite);
+            } else {
+                writer.append(toWrite + "\n");
+            }
+        }
+        writer.close();
+
+        System.out.println("All changes saved successfully!");
+
         String goodbye = "Bye. Hope to see you again soon!";
         System.out.println(goodbye);
     }
