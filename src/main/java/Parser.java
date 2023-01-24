@@ -9,7 +9,7 @@ public class Parser {
         // raw format according to task is /<name> <value>
 
         Map<String,String> map = new HashMap<String,String>();
-        String[] args = input.split("/");
+        String[] args = input.split(" /");
 
         // process main command
         String[] mainCommand = args[0].split(" ",2);
@@ -33,7 +33,6 @@ public class Parser {
     public static Command parse(String input) throws CommandNotFoundException {
         Map<String,String> argValues = Parser.splitArgs(input);
         String command = argValues.get("Command");
-
         switch (command) {
             case "list":
                 return new ListCommand();

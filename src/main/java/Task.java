@@ -1,9 +1,19 @@
+import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Objects;
 
 public abstract class Task {
     protected String description;
     protected boolean isDone;
     protected String symbol;
+    protected static final List<DateTimeFormatter> SUPPORTED_DATE_TIME_INPUT = new ArrayList<>();
+    protected static final DateTimeFormatter OUTPUT_FORMAT = DateTimeFormatter.ofPattern("EEE, dd MMM yy hh:mma");
+    static {
+        SUPPORTED_DATE_TIME_INPUT.add(DateTimeFormatter.ofPattern("yyyy-MM-dd HHmm"));
+        SUPPORTED_DATE_TIME_INPUT.add(DateTimeFormatter.ofPattern("yyyy/MM/dd HHmm"));
+        SUPPORTED_DATE_TIME_INPUT.add(DateTimeFormatter.ISO_LOCAL_DATE_TIME);
+    }
 
     public Task(String description)  {
         this.description = description;
