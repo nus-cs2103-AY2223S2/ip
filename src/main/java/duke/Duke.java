@@ -485,19 +485,9 @@ public class Duke extends Application {
     }
  
     private void handleUserInput() {
-        /*
-        Label userText = new Label(userInput.getText());
-        Label dukeText = new Label(getResponse(userInput.getText()));
-        dialogContainer.getChildren().addAll(
-                new DialogBox(userText, new ImageView(user)),
-                new DialogBox(dukeText, new ImageView(duke))
-        );
-        dialogContainer.getChildren().addAll(userText, dukeText);
-        userInput.clear();
-        */
+        
         Label userText = new Label();
         userText.getStyleClass().add("right-label");
-        //scene.getStylesheets().add(this.getClass().getResource("/style.css").toExternalForm());
         userText.setText(userInput.getText());
 
         Label dukeText = new Label(getResponse(userInput.getText()));
