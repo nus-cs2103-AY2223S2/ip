@@ -1,5 +1,4 @@
 import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
 
 public class Event extends Task {
     protected LocalDateTime from;
@@ -13,8 +12,7 @@ public class Event extends Task {
 
     @Override
     public String toString() {
-        DateTimeFormatter dateTimeFormat = DateTimeFormatter.ofPattern("dd MMM yyy HH:mm");
-
-        return String.format("[E]%s (from: %s to: %s)", super.toString(), from.format(dateTimeFormat), to.format(dateTimeFormat));
+        return String.format("[E]%s (from: %s to: %s)", super.toString(),
+                from.format(DateTimeUtils.DATE_TIME_FORMAT_OUTPUT), to.format(DateTimeUtils.DATE_TIME_FORMAT_OUTPUT));
     }
 }

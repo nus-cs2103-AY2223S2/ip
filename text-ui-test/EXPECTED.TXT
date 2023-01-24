@@ -16,8 +16,8 @@
      Now you have 2 tasks in the list.
     ____________________________________________________________
     ____________________________________________________________
-     ☹ OOPS!!! You are missing the description.
-     It's 'todo <description>'.
+     ☹ OOPS!!! I'm sorry, but can you retype again in this format:
+     todo <description>
     ____________________________________________________________
     ____________________________________________________________
      Got it. I've added this task:
@@ -30,12 +30,12 @@
      Now you have 4 tasks in the list.
     ____________________________________________________________
     ____________________________________________________________
-     ☹ OOPS!!! You are missing either the description or deadline.
-     It's 'deadline <description> /by <deadline>'.
+     ☹ OOPS!!! I'm sorry, but can you retype again in this format:
+     deadline <description> /by <deadline>
     ____________________________________________________________
     ____________________________________________________________
-     ☹ OOPS!!! You are missing either the description or deadline.
-     It's 'deadline <description> /by <deadline>'.
+     ☹ OOPS!!! I'm sorry, but can you retype again in this format:
+     deadline <description> /by <deadline>
     ____________________________________________________________
     ____________________________________________________________
      ☹ OOPS!!! Please enter date and time in this format: dd/MM/yyyy HH:mm
@@ -54,28 +54,28 @@
      Now you have 6 tasks in the list.
     ____________________________________________________________
     ____________________________________________________________
-     ☹ OOPS!!! You are missing either the description, from or to.
-     It's 'event <description> /from <from> /to <to>'.
+     ☹ OOPS!!! I'm sorry, but can you retype again in this format:
+     event <description> /from <from> /to <to>
     ____________________________________________________________
     ____________________________________________________________
-     ☹ OOPS!!! You are missing either the description, from or to.
-     It's 'event <description> /from <from> /to <to>'.
+     ☹ OOPS!!! I'm sorry, but can you retype again in this format:
+     event <description> /from <from> /to <to>
     ____________________________________________________________
     ____________________________________________________________
-     ☹ OOPS!!! You are missing either the description, from or to.
-     It's 'event <description> /from <from> /to <to>'.
+     ☹ OOPS!!! I'm sorry, but can you retype again in this format:
+     event <description> /from <from> /to <to>
     ____________________________________________________________
     ____________________________________________________________
-     ☹ OOPS!!! You are missing either the description, from or to.
-     It's 'event <description> /from <from> /to <to>'.
+     ☹ OOPS!!! I'm sorry, but can you retype again in this format:
+     event <description> /from <from> /to <to>
     ____________________________________________________________
     ____________________________________________________________
-     ☹ OOPS!!! You are missing either the description, from or to.
-     It's 'event <description> /from <from> /to <to>'.
+     ☹ OOPS!!! I'm sorry, but can you retype again in this format:
+     event <description> /from <from> /to <to>
     ____________________________________________________________
     ____________________________________________________________
-     ☹ OOPS!!! You are missing either the description, from or to.
-     It's 'event <description> /from <from> /to <to>'.
+     ☹ OOPS!!! I'm sorry, but can you retype again in this format:
+     event <description> /from <from> /to <to>
     ____________________________________________________________
     ____________________________________________________________
      ☹ OOPS!!! Please enter date and time in this format: dd/MM/yyyy HH:mm
@@ -211,7 +211,8 @@
      6. [E][ ] ai lecture (from: 13 Oct 2023 12:30 to: 13 Oct 2023 12:30)
     ____________________________________________________________
     ____________________________________________________________
-     ☹ OOPS!!! Please enter a proper integer.
+     ☹ OOPS!!! I'm sorry, but can you retype again in this format:
+     mark <taskNo>
     ____________________________________________________________
     ____________________________________________________________
      Noted. I've removed this task:
@@ -239,7 +240,8 @@
      4. [E][ ] software engineering tutorial (from: 13 Oct 2023 12:30 to: 13 Oct 2023 12:30)
     ____________________________________________________________
     ____________________________________________________________
-     ☹ OOPS!!! Please enter a proper integer.
+     ☹ OOPS!!! I'm sorry, but can you retype again in this format:
+     delete <taskNo>
     ____________________________________________________________
     ____________________________________________________________
      Invalid task number!
