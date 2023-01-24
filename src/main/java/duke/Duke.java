@@ -1,14 +1,14 @@
 package duke;
 
+import java.io.IOException;
+import java.util.Scanner;
+
 import commands.Command;
 import exceptions.DukeException;
 import files.Storage;
-import java.io.IOException;
-import java.util.Scanner;
 import parsers.CommandParser;
 import tasks.TaskList;
 import ui.Ui;
-
 
 /**
  * The main application runner which allows users to track their tasks.

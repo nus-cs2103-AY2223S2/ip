@@ -12,13 +12,12 @@ public abstract class Command {
      * Indicates to Duke whether to exit the program.
      * @return true if it is a terminal command, false otherwise
      */
-    abstract public boolean isExit();
-
+    public abstract boolean isExit();
     /**
      * Executes the command.
      * @param taskList task list for command to operate on
      * @param ui ui for any response and interaction needed with user
      * @param storage storage for command to do IO operations on
      */
-    abstract public void execute(TaskList taskList, Ui ui, Storage storage);
+    public abstract void execute(TaskList taskList, Ui ui, Storage storage);
 }

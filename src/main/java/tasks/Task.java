@@ -3,10 +3,9 @@ package tasks;
 /**
  * Represents a task with a description and its status.
  */
-abstract public class Task {
-    protected String description;
+public abstract class Task {
     protected boolean isDone;
-
+    protected String description;
     /**
      * Constructor for Task class.
      * @param description what the task entails
@@ -56,11 +55,10 @@ abstract public class Task {
      * Abstract method for child classes to return their type.
      * @return string type of task
      */
-    abstract public String getTaskType();
-
+    public abstract String getTaskType();
     /**
      * Data representation of the task to write to file.
      * @return data representation of the task to write to file
      */
-    abstract public String writeTask();
+    public abstract String writeTask();
 }
