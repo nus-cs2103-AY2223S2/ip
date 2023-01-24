@@ -39,8 +39,8 @@ public class TaskManager implements Reloadable {
         LinkedHashMap<Integer, AquaTask> taskMap = new LinkedHashMap<>();
         Stream.iterate(0, i -> i + 1)
                 .limit(size())
-                .filter(i -> taskList.get(i).getName().contains(pattern))
-                .forEach(i -> taskMap.put(i + 1, taskList.get(i)));
+                .filter(i -> tasks.get(i).getName().contains(pattern))
+                .forEach(i -> taskMap.put(i + 1, tasks.get(i)));
         return taskMap;
     }
 
