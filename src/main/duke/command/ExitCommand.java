@@ -1,6 +1,13 @@
+package command;
+
+import sys.Ui;
+import sys.Storage;
+
+import task.TaskList;
+
 public class ExitCommand extends Command {
 
-    ExitCommand() {
+    public ExitCommand() {
         super("bye");
     }
 

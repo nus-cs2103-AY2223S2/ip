@@ -1,7 +1,17 @@
+package command;
+
+import task.TaskList;
+
+import sys.Ui;
+import sys.Storage;
+
+import exception.DukeException;
+import exception.InvalidCommandInputException;
+
 public class UnmarkCommand extends Command {
     private String input;
 
-    UnmarkCommand(String input) {
+    public UnmarkCommand(String input) {
         super("unmark \\d+");
         this.input = input;
     }
@@ -13,7 +23,7 @@ public class UnmarkCommand extends Command {
 
         // Verify if task number is invalid:
         if (idx < 0 || idx >= tl.numberOfTasks()) {
-            throw new InvalidCommandInputException("Task number is invalid!", "unmark");
+            throw new InvalidCommandInputException("task.Task number is invalid!", "unmark");
         }
 
         tl.unmarkTask(idx);

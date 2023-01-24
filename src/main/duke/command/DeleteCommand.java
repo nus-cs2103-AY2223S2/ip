@@ -1,7 +1,18 @@
+package command;
+
+import sys.Ui;
+import sys.Storage;
+
+import task.TaskList;
+import task.Task;
+
+import exception.DukeException;
+import exception.InvalidCommandInputException;
+
 public class DeleteCommand extends Command {
     private String input;
 
-    DeleteCommand(String input) {
+    public DeleteCommand(String input) {
         super("delete \\d+");
         this.input = input;
     }
@@ -13,7 +24,7 @@ public class DeleteCommand extends Command {
 
         // Verify if task number is invalid:
         if (idx < 0 || idx >= tl.numberOfTasks()) {
-            throw new InvalidCommandInputException("Task number is invalid!", "delete");
+            throw new InvalidCommandInputException("task.Task number is invalid!", "delete");
         }
 
         Task t = tl.deleteTask(idx);

@@ -1,8 +1,7 @@
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.FileWriter;
-import java.io.IOException;
-import java.util.Scanner;
+package task;
+
+import exception.InvalidDateFormatException;
+import exception.InvalidTaskStringException;
 
 public class Task {
     private String content;
@@ -55,7 +54,7 @@ public class Task {
                     System.out.println(e.getMessage());
                 }
             case 'E':
-                // parse Event
+                // parse task.Event
                 if (!content.matches(".+ \\(from: .+ to: .+\\)")) {
                     throw new InvalidTaskStringException("Incorrect event format");
                 }

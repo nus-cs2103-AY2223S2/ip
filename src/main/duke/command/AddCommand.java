@@ -1,7 +1,17 @@
+package command;
+
+import sys.Ui;
+import sys.Storage;
+
+import task.TaskList;
+import task.Task;
+
+import exception.DukeException;
+
 public class AddCommand extends Command {
     private String input;
 
-    AddCommand(String input) {
+    public AddCommand(String input) {
         super("");
         this.input = input;
     }

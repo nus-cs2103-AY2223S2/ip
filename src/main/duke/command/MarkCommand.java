@@ -1,7 +1,17 @@
+package command;
+
+import sys.Ui;
+import sys.Storage;
+
+import task.TaskList;
+
+import exception.DukeException;
+import exception.InvalidCommandInputException;
+
 public class MarkCommand extends Command {
     private String input;
 
-    MarkCommand(String input) {
+    public MarkCommand(String input) {
         super("mark \\d+");
         this.input = input;
     }
@@ -13,7 +23,7 @@ public class MarkCommand extends Command {
 
         // Verify if task number is invalid:
         if (idx < 0 || idx >= tl.numberOfTasks()) {
-            throw new InvalidCommandInputException("Task number is invalid!", "mark");
+            throw new InvalidCommandInputException("task.Task number is invalid!", "mark");
         }
 
         tl.markTask(idx);

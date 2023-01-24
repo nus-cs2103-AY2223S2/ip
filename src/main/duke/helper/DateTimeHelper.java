@@ -1,10 +1,14 @@
+package helper;
+
+import exception.InvalidDateFormatException;
+
 import java.time.DateTimeException;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.HashMap;
 
 public class DateTimeHelper {
-    public static LocalDateTime parse(String dateTimeString) throws InvalidDateFormatException{
+    public static LocalDateTime parse(String dateTimeString) throws InvalidDateFormatException {
         if (!dateTimeString.matches("\\d{1,3}/\\d{1,3}/\\d+ \\d{4}")) {
             throw new InvalidDateFormatException("Incorrect date format!");
         }

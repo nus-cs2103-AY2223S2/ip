@@ -1,6 +1,8 @@
+package exception;
+
 public class InvalidTaskStringException extends DukeException {
 
-    InvalidTaskStringException(String errorMessage) {
+    public InvalidTaskStringException(String errorMessage) {
         super(errorMessage);
     }
 }

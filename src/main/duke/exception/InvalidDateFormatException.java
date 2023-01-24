@@ -1,6 +1,8 @@
+package exception;
+
 public class InvalidDateFormatException extends DukeException{
 
-    InvalidDateFormatException(String errorMessage) {
+    public InvalidDateFormatException(String errorMessage) {
         super(errorMessage);
     }
 }

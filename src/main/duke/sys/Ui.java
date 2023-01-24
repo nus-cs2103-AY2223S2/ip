@@ -1,3 +1,9 @@
+package sys;
+
+import command.Command;
+import exception.DukeException;
+import task.TaskList;
+
 import java.util.Scanner;
 
 public class Ui {
@@ -5,7 +11,7 @@ public class Ui {
     private Storage storage;
     private TaskList tl;
 
-    Ui () {};
+    public Ui() {};
 
     public void setContext(Storage storage, TaskList tl) {
         this.storage = storage;
@@ -17,7 +23,7 @@ public class Ui {
         // Print welcome message
         System.out.println("Hello! I'm Duke\n What can I do for you?");
 
-        // Create Scanner and Parser object
+        // Create Scanner and sys.Parser object
         Scanner sc = new Scanner(System.in);
         Parser p = new Parser(tl, storage, this);
 

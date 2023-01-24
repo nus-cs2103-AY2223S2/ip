@@ -1,3 +1,9 @@
+package sys;
+
+import exception.InvalidTaskStringException;
+import task.Task;
+import task.TaskList;
+
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileWriter;
@@ -7,7 +13,7 @@ import java.util.Scanner;
 public class Storage {
     String path;
 
-    Storage(String path) {
+    public Storage(String path) {
         this.path = path;
     }
 
