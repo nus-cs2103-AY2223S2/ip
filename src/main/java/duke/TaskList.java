@@ -19,6 +19,10 @@ public class TaskList implements Serializable {
         tasks = new ArrayList<>();
     }
 
+    public TaskList(List<Task> tasks) {
+        this.tasks = new ArrayList<>(tasks);
+    }
+
     public boolean add(Task task) {
         return tasks.add(task);
     }
