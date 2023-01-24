@@ -15,6 +15,6 @@ public class ListCommand implements Command {
      */
     @Override
     public String run(String input, TaskList tasks) {
-        return tasks.toString();
+        return tasks.size() == 0 ? "Nothing to see here. Now go on, scram!" : tasks.toString();
     }
 }
