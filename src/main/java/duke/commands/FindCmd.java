@@ -25,7 +25,7 @@ public class FindCmd extends Command {
 
     /** Output to UI the search results */
     public void uiReply() {
-        Ui.displayMsg("Here are matching tasks in your list:\n" + this.findResult.outputList());
+        Ui.displayMsg("Here are matching tasks in your list:\n" + this.findResult.toString());
     }
     
 }
