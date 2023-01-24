@@ -22,7 +22,7 @@ public class Parser {
     private enum CommandKeyword {
 
         // @formatter:off
-        BYE("bye"), LIST("list"), TODO("todo"), DEADLINE("deadline"), 
+        BYE("bye"), LIST("list"), TODO("todo"), DEADLINE("deadline"),
         EVENT("event"), MARK("mark"), UNMARK("unmark"), DELETE("delete"),
         UNKNOWN(null);
         // @formatter:on
