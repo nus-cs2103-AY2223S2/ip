@@ -1,4 +1,4 @@
-package task;
+package duke.task;
 
 /**
  * Task containing their relevant information and completion status.

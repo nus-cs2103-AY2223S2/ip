@@ -1,7 +1,7 @@
-package task;
+package duke.task;
 
-import command.Command;
-import command.Parser;
+import duke.command.Command;
+import duke.command.Parser;
 
 import java.io.FileWriter;
 import java.io.IOException;

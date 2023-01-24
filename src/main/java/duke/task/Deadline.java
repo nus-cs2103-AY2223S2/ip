@@ -1,6 +1,6 @@
-package task;
+package duke.task;
 
-import datetime.DateTime;
+import duke.datetime.DateTime;
 
 /**
  * A task with a deadline.

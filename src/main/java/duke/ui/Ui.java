@@ -1,9 +1,8 @@
-package ui;
+package duke.ui;
+
+import duke.task.Task;
 
 import java.util.Scanner;
-
-import task.Task;
-
 /**
  * User interface to scan inputs and print to console.
  */
