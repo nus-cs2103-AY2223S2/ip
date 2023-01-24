@@ -53,7 +53,7 @@ public class Duke {
                     Task deleteTask = taskStorage.remove(toDelete - 1);
                     System.out.println("Noted. I've removed this task:");
                     System.out.println(deleteTask.toString());
-                    System.out.println("Now you have " + taskStorage.size() + " tasks in the list.");
+                    System.out.println("Now you have " + --Task.numTask + " tasks in the list.");
                     input = sc.nextLine();
                     continue;
                 }
@@ -77,7 +77,7 @@ public class Duke {
                     taskStorage.add(todoTask);
                     System.out.println("Got it. I've added this ToDo task:");
                     System.out.println(todoTask);
-                    System.out.println("Now you have " + taskStorage.size() + " tasks in the list.");
+                    System.out.println("Now you have " + Task.numTask + " tasks in the list.");
 
                     break;
                 case "deadline": {
@@ -86,7 +86,7 @@ public class Duke {
                     taskStorage.add(deadlineTask);
                     System.out.println("Got it. I've added this Deadline task:");
                     System.out.println(deadlineTask);
-                    System.out.println("Now you have " + taskStorage.size() + " tasks in the list.");
+                    System.out.println("Now you have " + Task.numTask + " tasks in the list.");
 
                     break;
                 }
@@ -97,7 +97,7 @@ public class Duke {
                     taskStorage.add(eventTask);
                     System.out.println("Got it. I've added this Event task:");
                     System.out.println(eventTask);
-                    System.out.println("Now you have " + taskStorage.size() + " tasks in the list.");
+                    System.out.println("Now you have " + Task.numTask + " tasks in the list.");
 
                     break;
                 }
