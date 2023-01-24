@@ -11,7 +11,23 @@ import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Duke {
+
+    private Storage storage;
+    private TaskList tasks;
+    private Ui ui;
+
+    public Duke(String filePath) {
+        ui = new Ui();
+        storage = new Storage(filePath);
+        tasks = new TaskList(storage.load());
+        System.out.print("HEY ");
+        tasks.printContents();
+    }
+
     public static void main(String[] args) {
+        new Duke("src/data/duke.txt").run();
+    }
+    public void run() {
         String logo = " ____        _        \n"
                 + "|  _ \\ _   _| | _____ \n"
                 + "| | | | | | | |/ / _ \\\n"
@@ -26,8 +42,7 @@ public class Duke {
         ArrayList<Task> lstOfItems = new ArrayList<>();
         String path = "src/data/duke.txt";
 
-        // Idea for the following code snippet to create a file is referenced from:
-        // https://stackoverflow.com/questions/6142901/how-to-create-a-file-in-a-directory-in-java
+
         boolean isExistFile = new java.io.File("src/data/duke.txt").exists();
         if (!isExistFile) {
             Path desiredPath = Paths.get("src/data/duke.txt");
