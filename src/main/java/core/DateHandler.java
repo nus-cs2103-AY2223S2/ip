@@ -1,10 +1,13 @@
-/**
- * DateHandler handles all things related to date.
- * @author EL
- */
+package core;
+import exceptions.DukeException;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
+
+/**
+ * Core.DateHandler handles all things related to date.
+ * @author EL
+ */
 
 public class DateHandler {
 
@@ -48,16 +51,16 @@ public class DateHandler {
      *
      * @param userin User input
      * @return LocalDateTime object representing time.
-     * @throws DukeException.Invalid.Input Thrown when the user enters an incorrect date time.
+     * @throws exceptions.invalid.Input Thrown when the user enters an incorrect date time.
      */
-    public static LocalDateTime convert(String userin) throws DukeException.Invalid.Input {
+    public static LocalDateTime convert(String userin) throws exceptions.invalid.Input {
 
         LocalDateTime LDT = null;
         try {
             LDT = LocalDateTime.parse(userin, dateTimeFormat);
         } catch (DateTimeParseException e) {
             System.out.println(userin);
-            throw new DukeException.Invalid.Input(
+            throw new exceptions.invalid.Input(
                     String.format("Incorrect date time format! Should be '%s'", DTFPattern));
         }
         return LDT;

@@ -1,3 +1,5 @@
+import exceptions.DukeException;
+import Task.TaskMaster;
 import java.io.BufferedOutputStream;
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
@@ -189,8 +191,8 @@ public class DukeIO extends PrintWriter {
         System.out.println(LOCAL_SAVE);
         BufferedWriter FILE = writeFileBW(LOCAL_SAVE);
         try {
-            System.out.println(tm.toCSV().toString());
-            FILE.write(tm.toCSV().toString());
+            System.out.println(tm.export());
+            FILE.write(tm.export());
             FILE.close();
         } catch (IOException e) {
             System.err.printf("SYSERR %s\n", e.getMessage());
