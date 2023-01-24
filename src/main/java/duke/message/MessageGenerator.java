@@ -49,21 +49,21 @@ public class MessageGenerator {
         String end = "";
 
         switch (status) {
-            case MARK:
-                heading = task.getDoneStatus()
-                        ? "Nice! I've marked this task as done:"
-                        : "OK, I've marked this task as not done yet:";
-                break;
-            case ADD:
-                heading = "Got it. I've added this task:";
-                end = String.format("\nNow you have %d tasks in the list.", this.taskList.getTaskCount());
-                break;
-            case DELETE:
-                heading = "Noted. I've removed this task:";
-                end = String.format("\nNow you have %d tasks in the list.", this.taskList.getTaskCount());
-                break;
-            default:
-                break;
+        case MARK:
+            heading = task.getDoneStatus()
+                    ? "Nice! I've marked this task as done:"
+                    : "OK, I've marked this task as not done yet:";
+            break;
+        case ADD:
+            heading = "Got it. I've added this task:";
+            end = String.format("\nNow you have %d tasks in the list.", this.taskList.getTaskCount());
+            break;
+        case DELETE:
+            heading = "Noted. I've removed this task:";
+            end = String.format("\nNow you have %d tasks in the list.", this.taskList.getTaskCount());
+            break;
+        default:
+            break;
         }
 
         return String.format("%s\n%s%s", heading, task.toString(), end);
@@ -111,34 +111,34 @@ public class MessageGenerator {
         Task task;
 
         switch (status) {
-            case LIST:
-                message = generateListMessage();
-                break;
-            case MARK:
-                task = processMark(message);
-                message = generateTaskMessage(status, task);
-                break;
-            case ADD:
-                task = taskList.addTask(message);
+        case LIST:
+            message = generateListMessage();
+            break;
+        case MARK:
+            task = processMark(message);
+            message = generateTaskMessage(status, task);
+            break;
+        case ADD:
+            task = taskList.addTask(message);
 
-                // Add task in storage
-                this.storage.addTask(message);
+            // Add task in storage
+            this.storage.addTask(message);
 
-                message = generateTaskMessage(status, task);
-                break;
-            case DELETE:
-                task = taskList.deleteTask(message);
+            message = generateTaskMessage(status, task);
+            break;
+        case DELETE:
+            task = taskList.deleteTask(message);
 
-                // Delete task in storage
-                this.storage.deleteTask(message);
+            // Delete task in storage
+            this.storage.deleteTask(message);
 
-                message = generateTaskMessage(status, task);
-                break;
-            case FIND:
-                message = generateFindMessage(message);
-                break;
-            default:
-                break;
+            message = generateTaskMessage(status, task);
+            break;
+        case FIND:
+            message = generateFindMessage(message);
+            break;
+        default:
+            break;
         }
         return new DukeMessage(status, message);
     }
