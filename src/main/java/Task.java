@@ -8,26 +8,6 @@ public class Task {
     private String content;
     private boolean done;
 
-    public static TaskList readTasks() {
-
-        TaskList tl = new TaskList();
-
-        try {
-            File f = new File("./tasks.txt");
-            Scanner s = new Scanner(f);
-            while (s.hasNextLine()) {
-                String content = s.nextLine();
-                tl.addTask(parseTask(content));
-            }
-        } catch (FileNotFoundException e) {
-            System.out.println("tasks.txt not found, generating new task list...");
-        } catch (InvalidTaskStringException e) {
-            System.out.println(e.getMessage());
-        }
-
-        return tl;
-    }
-
     public static Task parseTask(String s) throws InvalidTaskStringException {
 
         // check if task format is correct
@@ -108,27 +88,7 @@ public class Task {
     }
 
     public static void saveTasks(TaskList tl) {
-        try {
-            FileWriter fw = new FileWriter("./tasks.txt");
 
-            // remove enumeration
-            String[] lines = tl.toString().split("\n");
-            StringBuilder newContent = new StringBuilder();
-
-            for (String line: lines) {
-                newContent.append(line.substring(3));
-                newContent.append('\n');
-            }
-
-            // remove last new line
-            newContent.deleteCharAt(newContent.length() - 1);
-
-            // write to file
-            fw.write(newContent.toString());
-            fw.close();
-        } catch (IOException e) {
-            System.out.println("Something went wrong: " + e.getMessage());
-        }
     }
 
     Task(String content) {
