@@ -1,5 +1,6 @@
+import java.io.*;
+import java.nio.charset.Charset;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Scanner;
 
 public class Duke {
@@ -14,13 +15,13 @@ public class Duke {
         event,
     }
     public static void main(String[] args) {
-        ArrayList<Task> userTasks = new ArrayList<Task>();
-        String logo = " ____        _        \n"
+        File saveFile = initSaveFile();
+        ArrayList<Task> userTasks = processSaveFile(saveFile);
+        final String logo = " ____        _        \n"
                 + "|  _ \\ _   _| | _____ \n"
                 + "| | | | | | | |/ / _ \\\n"
                 + "| |_| | |_| |   <  __/\n"
                 + "|____/ \\__,_|_|\\_\\___|\n";
-
         System.out.println("Hello from\n" + logo);
         boolean continueRunning = true;
         String greeting = "______________________________________\n"
@@ -42,7 +43,7 @@ public class Duke {
                     continueRunning = false;
                 } else if(userInput.replaceAll("\\s", "").equals(CmdType.list.name())){
                     StringBuilder listOfInputs = new StringBuilder();
-                    for(int i = 0; i < Task.getNumTasks(); i++){
+                    for(int i = 0; i < userTasks.size(); i++){
                         listOfInputs.append(i + 1)
                                 .append(".")
                                 .append(userTasks.get(i)).append("\n");
@@ -61,7 +62,7 @@ public class Duke {
                     }
                     try{
                         int numToMark = Integer.parseInt(userInput.split(" ")[1]);
-                        if (numToMark == 0 || (numToMark > Task.getNumTasks())){
+                        if (numToMark == 0 || (numToMark > userTasks.size())){
                             errMsg = "______________________________________\n"
                                     + " ☹ OOPS!!! Invalid mark selection.\n"
                                     + "______________________________________\n";
@@ -78,6 +79,7 @@ public class Duke {
                                 + "______________________________________\n";
                         throw new DukeException(errMsg);
                     }
+                    saveTasksToFile(userTasks);
                 } else if((userInput.split(" ")[0]).equals(CmdType.unmark.name())){
                     int indexOfFirstSpace = userInput.indexOf(" ");
                     if (indexOfFirstSpace == -1 || userInput.substring(indexOfFirstSpace+1).isBlank()){
@@ -88,7 +90,7 @@ public class Duke {
                     }
                     try{
                         int numToUnmark = Integer.parseInt(userInput.split(" ")[1]);
-                        if (numToUnmark == 0 || (numToUnmark > Task.getNumTasks())){
+                        if (numToUnmark == 0 || (numToUnmark > userTasks.size())){
                             errMsg = "______________________________________\n"
                                     + " ☹ OOPS!!! Invalid unmark selection.\n"
                                     + "______________________________________\n";
@@ -105,6 +107,7 @@ public class Duke {
                                 + "______________________________________\n";
                         throw new DukeException(errMsg);
                     }
+                    saveTasksToFile(userTasks);
                 } else if (userInput.split(" ")[0].equals(CmdType.delete.name())){
                     int indexOfFirstSpace = userInput.indexOf(" ");
                     if (indexOfFirstSpace == -1|| userInput.substring(indexOfFirstSpace+1).isBlank()){
@@ -116,7 +119,7 @@ public class Duke {
 
                     try{
                         int numToDelete = Integer.parseInt(userInput.split(" ")[1]);
-                        if (numToDelete == 0 || (numToDelete > Task.getNumTasks())){
+                        if (numToDelete == 0 || (numToDelete > userTasks.size())){
                             errMsg = "______________________________________\n"
                                     + " ☹ OOPS!!! Invalid delete selection.\n"
                                     + "______________________________________\n";
@@ -126,7 +129,7 @@ public class Duke {
                         resultString = "______________________________________\n"
                                 + "Noted, I've removed this task: \n"
                                 + userTasks.get(numToDelete- 1) + "\n"
-                                + "Now you have " + Task.getNumTasks() + " tasks in the list.\n"
+                                + "Now you have " + userTasks.size() + " tasks in the list.\n"
                                 + "______________________________________\n";
                         userTasks.remove(numToDelete-1);
                     } catch (NumberFormatException nfe){
@@ -135,8 +138,8 @@ public class Duke {
                                 + "______________________________________\n";
                         throw new DukeException(errMsg);
                     }
-
-                }else if(userInput.split(" ")[0].equals(CmdType.todo.name())){
+                    saveTasksToFile(userTasks);
+                } else if(userInput.split(" ")[0].equals(CmdType.todo.name())){
                     int indexOfFirstSpace = userInput.indexOf(" ");
                     String taskDescription = userInput.substring(indexOfFirstSpace+1);
                     if(indexOfFirstSpace == -1 || taskDescription.isBlank()){
@@ -147,12 +150,12 @@ public class Duke {
                     }
                     Todo newTodo = new Todo(taskDescription);
                     userTasks.add(newTodo);
-                    Task.addTask();
                     resultString = "______________________________________\n"
                             + "Got it. I've added this task:\n"
                             + newTodo + "\n"
-                            + "Now you have " + Task.getNumTasks() + " tasks in the list.\n"
+                            + "Now you have " + userTasks.size() + " tasks in the list.\n"
                             + "______________________________________\n";
+                    saveTasksToFile(userTasks);
                 }
                 else if(userInput.split(" ")[0].equals(CmdType.deadline.name())){
                     int indexOfBy = userInput.indexOf("/by");
@@ -185,12 +188,12 @@ public class Duke {
                     }
                     Deadline newDeadline = new Deadline(taskDescription , deadline);
                     userTasks.add(newDeadline);
-                    Task.addTask();
                     resultString = "______________________________________\n"
                             + "Got it. I've added this task:\n"
                             +  newDeadline + "\n"
-                            + "Now you have " + Task.getNumTasks() + " tasks in the list.\n"
+                            + "Now you have " + userTasks.size() + " tasks in the list.\n"
                             + "______________________________________\n";
+                    saveTasksToFile(userTasks);
                 }
                 else if(userInput.split(" ")[0].equals(CmdType.event.name())){
                     int indexOfFrom = userInput.indexOf("/from");
@@ -226,12 +229,12 @@ public class Duke {
                     }
                     Event newEvent = new Event(taskDescription, eventStart, eventEnd);
                     userTasks.add(newEvent);
-                    Task.addTask();
                     resultString = "______________________________________\n"
                             + "Got it. I've added this task:\n"
                             + newEvent + "\n"
-                            + "Now you have " + Task.getNumTasks() + " tasks in the list.\n"
+                            + "Now you have " + userTasks.size() + " tasks in the list.\n"
                             + "______________________________________\n";
+                    saveTasksToFile(userTasks);
                 } else {
                     errMsg = "______________________________________\n"
                             + " ☹ OOPS!!! I'm sorry, but I don't know what that means :-(\n"
@@ -243,5 +246,95 @@ public class Duke {
                 System.out.println(e);
             }
         }
+    }
+
+    public static File initSaveFile(){
+        final String saveFileDirPath = System.getProperty("user.dir") + "/data/";
+        final String saveFilePath = saveFileDirPath + "dukeSave.txt";
+        File savedFileDir = new File(saveFileDirPath);
+        File savedTaskFile = new File(saveFilePath);
+        try{
+            if (!savedFileDir.exists()){
+                savedFileDir.mkdir();
+            }
+            if(!savedTaskFile.exists()){
+                savedTaskFile.createNewFile();
+            }
+        } catch (IOException e){
+            e.printStackTrace();
+        }
+        return savedTaskFile;
+    }
+
+    public static ArrayList<Task> processSaveFile(File file){
+        ArrayList<Task> userTasks = new ArrayList<>();
+        BufferedReader reader;
+        try {
+            reader = new BufferedReader(new FileReader(file, Charset.defaultCharset()));
+            String taskStr = reader.readLine();
+            while (taskStr != null) {
+                String[] parts = taskStr.split("\\|");
+                boolean completed = parts[1].equals("1");
+                String taskDescription = parts[2];
+                if (parts.length == 3){
+                    Todo newTodo = new Todo(taskDescription, completed);
+                    userTasks.add(newTodo);
+                }
+                if (parts.length == 4){
+                    String by = parts[3];
+                    Deadline newDeadline = new Deadline(taskDescription, by, completed);
+                    userTasks.add(newDeadline);
+                }
+                if(parts.length == 5){
+                    String from = parts[3];
+                    String to = parts[4];
+                    Event newEvent = new Event(taskDescription, from, to, completed);
+                    userTasks.add(newEvent);
+                }
+                taskStr = reader.readLine();
+            }
+            reader.close();
+        } catch (IOException e){
+            e.printStackTrace();
+        }
+        return userTasks;
+    }
+
+
+    public static void saveTasksToFile(ArrayList<Task> taskList){
+        try {
+            String toWrite = "";
+            final String saveFileDirPath = System.getProperty("user.dir") + "/data/";
+            final String saveFilePath = saveFileDirPath + "dukeSave.txt";
+            FileWriter fileWriter = new FileWriter(saveFilePath);
+            for(int i = 0; i< taskList.size(); i++){
+                String taskType = taskList.get(i).getClass().getTypeName();
+                switch (taskType){
+                    case "Todo":
+                        Todo todo = (Todo)taskList.get(i);
+                        toWrite = taskType + "|" + (todo.getIsDone() ? 1 : 0) + "|" + todo.getDescription() + "\n";
+                        fileWriter.write(toWrite);
+                        break;
+                    case "Deadline":
+                        Deadline deadline = (Deadline) taskList.get(i);
+                        toWrite = taskType + "|" +(deadline.getIsDone() ? 1 : 0) + "|" +
+                            deadline.getDescription() + "|" + deadline.getBy() + "\n";
+                        fileWriter.write(toWrite);
+                        break;
+                    case "Event":
+                        Event event = (Event)taskList.get(i);
+                        toWrite = taskType + "|" + (event.getIsDone() ? 1 : 0) + "|" +event.getDescription() + "|" +
+                            event.getFrom() + "|" + event.getTo() + "\n";
+                        fileWriter.write(toWrite);
+                        break;
+                    default:
+                        break;
+                }
+            }
+            fileWriter.close();
+        } catch (IOException e){
+            e.printStackTrace();
+        }
+
     }
 }
