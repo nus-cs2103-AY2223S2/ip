@@ -29,7 +29,8 @@ public class Parser {
         EVENT,
         FIND,
         SEARCH,
-        UPDATE;
+        UPDATE,
+        UNDO;
     }
 
     /**
@@ -85,6 +86,8 @@ public class Parser {
                     return Decipherer.searchDecoder(information);
                 case UPDATE:
                     return Decipherer.updateDecoder(information);
+                case UNDO:
+                    return new UndoCommand();
             }
         } catch (IllegalArgumentException e) {
             throw new InvalidInputException(UNRECOGNIZED_ERROR);

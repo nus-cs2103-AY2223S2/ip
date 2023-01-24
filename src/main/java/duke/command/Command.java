@@ -1,6 +1,7 @@
 package duke.command;
 
 import duke.exception.DukeException;
+import duke.storage.CommandHistory;
 import duke.storage.Storage;
 import duke.task.TaskList;
 import duke.ui.Ui;
@@ -29,5 +30,5 @@ public abstract class Command {
      * @throws DukeException Throws Exception when the user inputs invalid instruction or
      * when encountering issues reading or writing to the storage file.
      */
-    public abstract void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException;
+    public abstract void execute(TaskList tasks, Ui ui, Storage storage, CommandHistory commandHistory) throws DukeException;
 }

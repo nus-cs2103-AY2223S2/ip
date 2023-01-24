@@ -8,18 +8,32 @@ import java.util.stream.Collectors;
 /**
  * A TaskList class that encapsulates the information and actions of a task list.
  */
-public class TaskList {
-    private final List<DukeTask> list;
+public class TaskList implements Cloneable {
+    private ArrayList<DukeTask> tasks;
 
     /**
      * Constructor of the TaskList class that create new Arraylist.
      */
     public TaskList() {
-        this.list = new ArrayList<>();
+        this.tasks = new ArrayList<>();
     }
 
+
+     /**
+     * Constructs a TaskList object with the given ArrayList of DukeTask.
+     *
+     * @param list ArrayList of DukeTask
+     */
     public TaskList(ArrayList<DukeTask> list) {
-        this.list = list;
+        this.tasks = list;
+    }
+
+    /**
+     * Constructs a TaskList object by copying the values from an existing TaskList object
+     * @param other the existing TaskList object
+     */
+    public TaskList(TaskList other) {
+        this.tasks = new ArrayList<>(other.tasks);
     }
 
     /**
@@ -28,17 +42,22 @@ public class TaskList {
      * @param task The TaskList to be added
      */
     public void addTask(DukeTask task) {
-        this.list.add(task);
+        this.tasks.add(task);
     }
 
     /**
-     * Delete the task of the given index.
+     * Removes the task at the specified index in the task list and returns the task that was removed.
      *
-     * @param taskIndex The index of the task to be deleted
+     * @param taskIndex The index of the task to be removed
+     * @return The task that was removed
      */
-    public void deleteTask(int taskIndex) {
-        this.list.remove(taskIndex);
+
+    public DukeTask deleteTask(int taskIndex) {
+        DukeTask taskToDelete = tasks.get(taskIndex);
+        this.tasks.remove(taskIndex);
+        return taskToDelete;
     }
+
 
     /**
      * Indicates the number of the task on the list.
@@ -46,7 +65,7 @@ public class TaskList {
      * @return The number of the task on the list
      */
     public int getNoOfTasks() {
-        return this.list.size();
+        return this.tasks.size();
     }
 
     /**
@@ -56,7 +75,25 @@ public class TaskList {
      * @return The task of the given index
      */
     public DukeTask getTask(int index) {
-        return this.list.get(index);
+        return this.tasks.get(index);
+    }
+
+    /**
+     * Returns the ArrayList of DukeTask.
+     *
+     * @return The ArrayList of DukeTask
+     */
+    public ArrayList<DukeTask> getTasks() {
+        return this.tasks;
+    }
+
+    /**
+     * Sets the ArrayList of DukeTask.
+     *
+     * @param tasks The ArrayList of DukeTask
+     */
+    public void setTasks(ArrayList<DukeTask> tasks) {
+        this.tasks = tasks;
     }
 
     /**
@@ -66,7 +103,7 @@ public class TaskList {
      * @return A new TaskList containing all incomplete deadline tasks from the original list
      */
     public TaskList extractDeadlines() {
-        List<DukeTask> result = this.list.stream()
+        List<DukeTask> result = this.tasks.stream()
                 .filter(task -> task.getType() == TaskType.DEADLINE && !task.getStatus())
                 .sorted(Comparator.comparing(x -> {
                     DeadlineTask ddlTask = (DeadlineTask) x;
@@ -89,5 +126,16 @@ public class TaskList {
             listContent.append(i + 1).append(".").append(this.getTask(i)).append("\n");
         }
         return String.valueOf(listContent);
+    }
+
+    @Override
+    public TaskList clone() {
+        try {
+            TaskList clone = (TaskList) super.clone();
+            // TODO: copy mutable state here, so the clone can't change the internals of the original
+            return clone;
+        } catch (CloneNotSupportedException e) {
+            throw new AssertionError();
+        }
     }
 }

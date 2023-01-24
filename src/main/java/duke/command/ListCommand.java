@@ -1,6 +1,8 @@
 package duke.command;
 
+import duke.storage.CommandHistory;
 import duke.storage.Storage;
+import duke.task.DukeTask;
 import duke.task.TaskList;
 import duke.ui.Ui;
 
@@ -12,18 +14,21 @@ public class ListCommand extends Command {
     /**
      * Displays all the tasks with their respective types and status.
      *
-     * @param tasks The user TaskList that contains all the task to be manipulated
-     * @param ui The ui Object used to display information
+     * @param tasks   The user TaskList that contains all the task to be manipulated
+     * @param ui      The ui Object used to display information
      * @param storage The Storage Object used to save and load the TaskList
      */
     @Override
-    public void execute(TaskList tasks, Ui ui, Storage storage) {
+    public void execute(TaskList tasks, Ui ui, Storage storage, CommandHistory commandHistory) {
         StringBuilder listContent = new StringBuilder("Here are the tasks in your list:\n");
-        for (int i = 0; i < tasks.getNoOfTasks(); i++) {
-            listContent.append(i + 1).append(".").append(tasks.getTask(i)).append("\n");
+        if (tasks.getNoOfTasks() == 0) {
+            ui.appendResponse("There are no tasks in your list.");
+            return;
         }
-
-        String message = String.valueOf(listContent);
-        ui.appendResponse(message);
+        int index = 1;
+        for (DukeTask task : tasks.getTasks()) {
+            listContent.append(index++).append(".").append(task).append("\n");
+        }
+        ui.appendResponse(listContent.toString());
     }
 }

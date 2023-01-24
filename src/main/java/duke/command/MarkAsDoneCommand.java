@@ -2,6 +2,7 @@ package duke.command;
 
 import duke.exception.DukeException;
 import duke.exception.InvalidInputException;
+import duke.storage.CommandHistory;
 import duke.storage.Storage;
 import duke.task.DukeTask;
 import duke.task.TaskList;
@@ -54,21 +55,25 @@ public class MarkAsDoneCommand extends Command {
      *     or the given index is our of range
      */
     @Override
-    public void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
+    public void execute(TaskList tasks, Ui ui, Storage storage, CommandHistory commandHistory) throws DukeException {
+        final String TASK_LIST_EMPTY_MESSAGE = "OOPS!!! Your task list is currently empty";
+        final String INVALID_INDEX_MESSAGE = "OOPS!!! The input index is not within the range of [1, "
+                + tasks.getNoOfTasks() + "]";
+        final String MARKED_AS_DONE_MESSAGE = "Nice! I've marked this task as done:\n ";
+
+        commandHistory.saveState(tasks);
         if (isEmpty(tasks)) {
-            String errorMessage = "OOPS!!! Your task list is currently empty";
-            throw new InvalidInputException(errorMessage + "\nPlease add in more tasks");
+            throw new InvalidInputException(TASK_LIST_EMPTY_MESSAGE + "\nPlease add in more tasks");
         }
         if (!isValidIndex(tasks)) {
-            String errorMessage = "OOPS!!! The input index is not within the range of [1, "
-                    + tasks.getNoOfTasks() + "]";
-            throw new InvalidInputException(errorMessage + "\nPlease input a valid index");
+            throw new InvalidInputException(INVALID_INDEX_MESSAGE + "\nPlease input a valid index");
         } else {
             DukeTask currentTask = tasks.getTask(this.taskIndex);
             currentTask.markAsDone();
-            String message = "Nice! I've marked this task as done:\n " + currentTask;
+            String message = MARKED_AS_DONE_MESSAGE + currentTask;
             ui.appendResponse(message);
         }
         storage.saveTaskList(tasks);
     }
+
 }

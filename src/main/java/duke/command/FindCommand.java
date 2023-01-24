@@ -1,5 +1,6 @@
 package duke.command;
 
+import duke.storage.CommandHistory;
 import duke.storage.Storage;
 import duke.task.DukeTask;
 import duke.task.TaskList;
@@ -11,6 +12,8 @@ import duke.ui.Ui;
  */
 public class FindCommand extends Command {
     private final String[] descriptions;
+    private static final String MATCHING_TASKS_MESSAGE = "Here are the tasks matching \"%s\" :\n";
+    private static final String NO_MATCHING_TASKS_MESSAGE = "No tasks matching \"%s\" were found.\n";
 
     /**
      * The constructor of FinaCommand that takes in the description of the tasks to be found.
@@ -27,17 +30,23 @@ public class FindCommand extends Command {
      * @param tasks The user TaskList that contains all the task to be manipulated
      */
     @Override
-    public void execute(TaskList tasks, Ui ui, Storage storage) {
+    public void execute(TaskList tasks, Ui ui, Storage storage, CommandHistory commandHistory) {
+        StringBuilder message = new StringBuilder();
         for (String description : this.descriptions) {
             TaskList matchedTaskList = new TaskList();
-            for (int j = 0; j < tasks.getNoOfTasks(); j++) {
-                DukeTask currentTask = tasks.getTask(j);
-                if (tasks.getTask(j).matches(description)) {
-                    matchedTaskList.addTask(currentTask);
+            for (DukeTask task : tasks.getTasks()) {
+                if (task.matches(description)) {
+                    matchedTaskList.addTask(task);
                 }
             }
-            String message = String.format("Here are the tasks matching \"%s\" :\n", description) + matchedTaskList;
-            ui.appendResponse(message + "\n");
+            if (!matchedTaskList.getTasks().isEmpty()) {
+                message.append(String.format(MATCHING_TASKS_MESSAGE, description));
+                message.append(matchedTaskList).append("\n");
+            } else {
+                message.append(String.format(NO_MATCHING_TASKS_MESSAGE, description));
+            }
         }
+        ui.appendResponse(message.toString());
     }
+
 }

@@ -5,6 +5,7 @@ import duke.exception.DukeException;
 import duke.exception.InvalidInputException;
 import duke.exception.StorageFileException;
 import duke.parser.Parser;
+import duke.storage.CommandHistory;
 import duke.storage.Storage;
 import duke.task.TaskList;
 import duke.ui.Ui;
@@ -16,6 +17,7 @@ public class Duke {
     private final Storage storage;
     private TaskList list;
     private final Ui ui;
+    private final CommandHistory commandHistory;
 
     /**
      * The constructor that takes in a String filePath that specifies the path for the storage file.
@@ -23,16 +25,18 @@ public class Duke {
      * @param filePath Specifies the path for the storage file
      */
     public Duke(String filePath) {
-        list = new TaskList();
-        ui = new Ui();
-        storage = new Storage(filePath);
+        this.list = new TaskList();
+        this.ui = new Ui();
+        this.storage = new Storage(filePath);
+        this.commandHistory = new CommandHistory();
+
         try {
-            list = storage.load();
+            this.list = this.storage.load();
         } catch (InvalidInputException e) {
-            ui.displayWithBar(e.getMessage());
-            list = new TaskList();
+            this.ui.displayWithBar(e.getMessage());
+            this.list = new TaskList();
         } catch (StorageFileException e) {
-            ui.displayWithBar(e.getMessage());
+            this.ui.displayWithBar(e.getMessage());
             throw new RuntimeException(e);
         }
     }
@@ -45,13 +49,13 @@ public class Duke {
      */
     public String getResponse(String input) {
         try {
-            ui.reset();
+            this.ui.reset();
             Command command = Parser.parse(input);
-            command.execute(list, ui, storage);
-            return ui.getResponse();
+            command.execute(this.list, this.ui, this.storage, this.commandHistory);
+            return this.ui.getResponse();
         } catch (DukeException e) {
-            ui.appendResponse(e.getMessage());
-            return ui.getResponse();
+            this.ui.appendResponse(e.getMessage());
+            return this.ui.getResponse();
         }
     }
 }

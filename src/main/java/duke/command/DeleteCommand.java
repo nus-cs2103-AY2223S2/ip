@@ -2,7 +2,9 @@ package duke.command;
 
 import duke.exception.DukeException;
 import duke.exception.InvalidInputException;
+import duke.storage.CommandHistory;
 import duke.storage.Storage;
+import duke.task.DukeTask;
 import duke.task.TaskList;
 import duke.ui.Ui;
 
@@ -52,22 +54,22 @@ public class DeleteCommand extends Command {
      * @throws DukeException Throws Exception when the user inputs invalid instruction
      */
     @Override
-    public void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
+    public void execute(TaskList tasks, Ui ui, Storage storage, CommandHistory commandHistory) throws DukeException {
+        final String TASK_LIST_IS_EMPTY_ERROR = "OOPS!!! Your task list is currently empty\nPlease add in more tasks";
+        final String INVALID_INDEX_ERROR = "OOPS!!! The input index is not within the range of [1, %d]\nPlease input a valid index";
+
+        commandHistory.saveState(tasks);
         if (isEmpty(tasks)) {
-            String errorMessage = "OOPS!!! Your task list is currently empty";
-            throw new InvalidInputException(errorMessage + "\nPlease add in more tasks");
+            throw new InvalidInputException(TASK_LIST_IS_EMPTY_ERROR);
         }
         if (!isValidIndex(tasks)) {
-            String errorMessage = "OOPS!!! The input index is not within the range of [1, "
-                    + tasks.getNoOfTasks() + "]";
-            throw new InvalidInputException(errorMessage + "\nPlease input a valid index");
+            throw new InvalidInputException(String.format(INVALID_INDEX_ERROR, tasks.getNoOfTasks()));
         } else {
-            String message = "Noted. I've removed this task:\n "
-                    + tasks.getTask(this.taskIndex) + "\nNow you have "
-                    + (tasks.getNoOfTasks() - 1) + " tasks in the list.";
+            DukeTask deletedTask = tasks.deleteTask(this.taskIndex);
+            String message = String.format("Noted. I've removed this task:\n %s \nNow you have %d tasks in the list.", deletedTask.toString(), tasks.getNoOfTasks());
             ui.appendResponse(message);
-            tasks.deleteTask(this.taskIndex);
         }
         storage.saveTaskList(tasks);
     }
+
 }

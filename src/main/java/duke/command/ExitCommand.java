@@ -1,5 +1,6 @@
 package duke.command;
 
+import duke.storage.CommandHistory;
 import duke.storage.Storage;
 import duke.task.TaskList;
 import duke.ui.Ui;
@@ -9,6 +10,7 @@ import duke.ui.Ui;
  */
 
 public class ExitCommand extends Command {
+    private static final String GOODBYE_MESSAGE = "Bye. Hope to see you again soon!";
     /**
      * Displays the goodbye message and terminate the program.
      *
@@ -17,9 +19,8 @@ public class ExitCommand extends Command {
      * @param storage The Storage Object used to save and load the TaskList
      */
     @Override
-    public void execute(TaskList tasks, Ui ui, Storage storage) {
-        String message = "Bye. Hope to see you again soon!";
-        ui.appendResponse(message);
+    public void execute(TaskList tasks, Ui ui, Storage storage, CommandHistory commandHistory) {
+        ui.appendResponse(GOODBYE_MESSAGE);
     }
 
     /**
