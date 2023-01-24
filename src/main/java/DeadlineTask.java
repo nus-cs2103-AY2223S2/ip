@@ -1,13 +1,19 @@
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Arrays;
 
 public class DeadlineTask extends Task {
-    protected String deadline;
+    protected LocalDateTime deadline;
 
-    public DeadlineTask(String taskName, String deadline) {
+    public DeadlineTask(String taskName, LocalDateTime deadline) {
         super(taskName);
         this.deadline = deadline;
         this.taskType = "D";
+    }
+
+    public String dateTimeFormatter() {
+        return deadline.format(DateTimeFormatter.ofPattern("MMM d yyyy HHmm"));
     }
 
     public static void createDeadlineTask(String command, TaskTracker t) throws DukeInputError {
@@ -29,13 +35,14 @@ public class DeadlineTask extends Task {
                 }
             }
         }
-        DeadlineTask d = new DeadlineTask(taskName, deadline);
+
+        DeadlineTask d = new DeadlineTask(taskName, DateTimeParser.dateTimeParser(deadline));
         t.addTask(d);
         DeadlineTask.saveTaskData(d, 1);
     }
 
     @Override
     public String toString() {
-        return String.format("%s (by: %s)", super.toString(),  this.deadline);
+        return String.format("%s (by: %s)", super.toString(), dateTimeFormatter());
     }
 }

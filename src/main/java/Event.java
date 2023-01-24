@@ -1,11 +1,12 @@
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Arrays;
 
 public class Event extends Task{
-    protected String start;
-    protected String end;
+    protected LocalDateTime start;
+    protected LocalDateTime end;
 
-    public Event(String taskName, String start, String end) {
+    public Event(String taskName, LocalDateTime start, LocalDateTime end) {
         super(taskName);
         this.start = start;
         this.end = end;
@@ -39,13 +40,14 @@ public class Event extends Task{
             }
         }
         System.out.println(taskName);
-        Event e = new Event(taskName, start, end);
+        Event e = new Event(taskName, DateTimeParser.dateTimeParser(start.stripTrailing()), DateTimeParser.dateTimeParser(end));
         t.addTask(e);
         Event.saveTaskData(e, 1);
     }
 
     @Override
     public String toString() {
-        return String.format("%s (from: %s to: %s)", super.toString(), this.start, this.end);
+        return String.format("%s (from: %s to: %s)", super.toString(),
+                DateTimeParser.datetimeFormatter(this.start), DateTimeParser.datetimeFormatter(this.end));
     }
 }
