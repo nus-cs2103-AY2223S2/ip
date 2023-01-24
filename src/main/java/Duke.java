@@ -1,27 +1,27 @@
 import java.io.IOException;
-import java.util.Scanner;
 
 public class Duke {
-    private Ui ui;
-    private Parser parser;
+    private final Ui ui;
+    private final Parser parser;
     private Database db;
     private TaskList tasks;
 
     public Duke(String filePath) {
         this.ui = new Ui();
-        this.parser = new Parser(ui, tasks);
+        this.parser = new Parser();
 
         try {
             this.db = new Database(filePath);
             this.tasks = new TaskList(this.db, this.ui);
         } catch (IOException e) {
-            e.printStackTrace();
+            ui.showErrorMsg("IO", e, this.tasks.getSize());
+        } catch (DukeException e) {
+            ui.showErrorMsg("Duke", e, this.tasks.getSize());
         }
     }
 
     public void run() {
-        Scanner scanner = ui.getScanner();
-        String currInput = scanner.nextLine();
+        String currInput = ui.getNextLine();
         String[] splitStr = currInput.split(" ", 2);
 
         ui.showWelcome();
@@ -29,28 +29,24 @@ public class Duke {
 
         while(!currInput.equals("bye")) {
             try {
-                if(tasks.getSize() == 0) {
-                    tasks.updateInputs();
-                }
-
                 this.parser.parseInputs(splitStr, tasks);
             } catch (DukeException e) {
-                System.out.println(e);
+                ui.showErrorMsg("Duke", e, this.tasks.getSize());
             } catch (NumberFormatException e) {
-                System.out.println("Mark commands need to be followed by an integer!");
+                ui.showErrorMsg("NAN", e, this.tasks.getSize());
             } catch (IndexOutOfBoundsException e) {
-                System.out.println(String.format("Sorry but there are only %d tasks stored!", tasks.getSize()));
+                ui.showErrorMsg("OutOfBounds", e, this.tasks.getSize());
             } catch (IOException e) {
-                e.printStackTrace();
+                ui.showErrorMsg("IO", e, this.tasks.getSize());
             } finally {
                 ui.showLine();
-                currInput = scanner.nextLine();
+                currInput = ui.getNextLine();
                 splitStr = currInput.split(" ", 2);
                 ui.showLine();
             }
         }
         ui.showExit();
-        scanner.close();
+        ui.closeScanner();
     }
 
     public static void main(String[] arg) {

@@ -8,10 +8,29 @@ public class Ui {
         this.scanner = new Scanner(System.in);
     }
 
-    public void showLoadingError() {}
+    public void showErrorMsg(String errorType, Exception e, int size) {
+        switch(errorType) {
+            case "IO":
+                e.printStackTrace();
+                break;
+            case "Duke":
+                System.out.println(e);
+                break;
+            case "NAN":
+                System.out.println("Mark commands need to be followed by an integer!");
+                break;
+            case "OutOfBounds":
+                System.out.println(String.format("Sorry but there are only %d tasks stored!", size));
+                break;
+        }
+    }
 
-    public Scanner getScanner() {
-        return this.scanner;
+    public String getNextLine() {
+        return this.scanner.nextLine();
+    }
+
+    public void closeScanner() {
+        this.scanner.close();
     }
 
     public void showWelcome() {

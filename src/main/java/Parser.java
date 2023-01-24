@@ -1,24 +1,12 @@
 import java.io.IOException;
-import java.util.ArrayList;
 
 public class Parser {
-    private Ui ui;
-    private TaskList tasks;
-
-    public Parser(Ui ui, TaskList tasks) {
-        this.ui = ui;
-        this.tasks = tasks;
-    }
-
     public void parseInputs(String[] inputs, TaskList tasks) throws DukeException, IOException {
         String type = inputs[0];
 
         switch (type) {
             case "list":
-                System.out.println("Here are the tasks in your list:");
-                for (int i = 0; i < tasks.getSize(); i++) {
-                    System.out.println((i + 1) + "." + tasks.getTask(i));
-                }
+                tasks.outputList();
                 break;
 
             case "mark":

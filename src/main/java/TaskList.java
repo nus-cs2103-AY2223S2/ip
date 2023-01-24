@@ -8,15 +8,23 @@ public class TaskList {
     private Ui ui;
     private int size;
 
-    public TaskList(Database db, Ui ui) {
+    public TaskList(Database db, Ui ui) throws IOException, InvalidDateTimeException {
         this.db = db;
         this.ui = ui;
         this.size = 0;
+        this.updateInputs();
     }
 
     public void addToTasks(Task task) {
         this.inputs.add(task);
         this.size++;
+    }
+
+    public void outputList() {
+        System.out.println("Here are the tasks in your list:");
+        for (int i = 0; i < this.size; i++) {
+            System.out.println((i + 1) + "." + this.getTask(i));
+        }
     }
 
     public void deleteTask(int taskNo) throws IOException {
