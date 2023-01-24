@@ -13,32 +13,36 @@ import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.*;
 
+import ui.Ui;
+
 public class Storage {
 
     public static final String DEFAULT_DIRECTORY = "./data/";
     public static final String DEFAULT_FILEPATH = "./data/duke.txt";
     public File dukeFile;
     public TaskList tasks;
+    public Ui ui;
 
-    public Storage() {
+    public Storage(Ui ui) {
+        this.ui = ui;
         File directory = new File(DEFAULT_DIRECTORY);
         boolean directoryCreated = directory.mkdir();
         if (directoryCreated) {
-            System.out.println("Data folder created!");
+            ui.directoryCreate();
         }
 
         dukeFile = new File(DEFAULT_FILEPATH);
         try {
             boolean fileCreated = dukeFile.createNewFile();
             if (fileCreated) {
-                System.out.println("Data file: duke.txt created!");
+                ui.fileCreate();
             }
 
         } catch (IOException e) {
-            System.out.println(e.getMessage());
+            ui.showError(e);
         }
 
-        tasks = new TaskList();
+        tasks = new TaskList(this.ui);
     }
 
     public TaskList load() {
@@ -76,11 +80,11 @@ public class Storage {
             }
 
             if (!emptyFile) {
-                tasks.printTasks();
+                ui.printTasks(tasks);
             }
 
         } catch (IOException e) {
-            System.out.println(e.getMessage());
+            ui.showError(e);
         }
 
         return tasks;
@@ -92,7 +96,7 @@ public class Storage {
         try {
             PrintWriter writer = new PrintWriter(dukeFile);
 
-            System.out.println("Updating your data. Please wait..");
+            ui.uploading();
 
             int count = 0;
             for (Task task : tasks.getTasks()) {
@@ -106,10 +110,10 @@ public class Storage {
             }
             writer.close();
 
-            System.out.println("All changes saved successfully!");
+            ui.saved();
 
         } catch (IOException e) {
-            System.out.println(e.getMessage());
+            ui.showError(e);
         }
 
     }

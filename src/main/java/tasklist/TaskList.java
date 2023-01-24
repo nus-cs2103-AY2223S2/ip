@@ -1,16 +1,18 @@
 package tasklist;
 
 import java.util.*;
-import storage.Storage;
+import ui.Ui;
 import tasktypes.Task;
 
 public class TaskList {
     private ArrayList<Task> taskStorage;
     private int numTasks;
+    public Ui ui;
 
-    public TaskList() {
+    public TaskList(Ui ui) {
         taskStorage = new ArrayList<>();
         this.numTasks = 0;
+        this.ui = ui;
     }
 
     public void loadTask(Task task) {
@@ -21,29 +23,25 @@ public class TaskList {
     public void addTask(Task task) {
         this.taskStorage.add(task);
         numTasks++;
-        System.out.println("Got it. I've added this task:");
-        System.out.println(task);
-        System.out.println("Now you have " + numTasks + " tasks in the list.");
+        ui.taskAdd(task, numTasks);
     }
 
     public void deleteTask(int toDelete) {
-        numTasks--;
         Task deleted = taskStorage.remove(toDelete - 1);
-        System.out.println("Noted. I've removed this task:");
-        System.out.println(deleted.toString());
-        System.out.println("Now you have " + numTasks + " tasks in the list.");
+        numTasks--;
+        ui.taskDelete(deleted, numTasks);
     }
 
     public void markTask(int mark) {
         Task marked = taskStorage.get(mark - 1);
         marked.markDone();
-        System.out.println("Nice! I've marked this task as done:\n" + marked);
+        ui.markTaskDone(marked);
     }
 
     public void unmarkTask(int unmark) {
         Task unmarked = taskStorage.get(unmark - 1);
         unmarked.markUndone();
-        System.out.println("OK, I've marked this task as undone:\n" + unmarked);
+        ui.markTaskUndone(unmarked);
     }
 
     public void printTasks() {

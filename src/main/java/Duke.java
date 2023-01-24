@@ -1,31 +1,27 @@
 import tasklist.TaskList;
 import storage.Storage;
-import java.util.*;
 import java.util.regex.*;
 import tasktypes.*;
+import ui.Ui;
 
 public class Duke {
     public static void main(String[] args) {
-
-        String greeting = "What's up! XyDuke here!\nHow can I be of assistance?";
-        System.out.println(greeting);
-
-        Storage storage = new Storage();
+        Ui ui = new Ui();
+        ui.greet();
+        Storage storage = new Storage(ui);
+        TaskList tasks = storage.load();
 
         String[] singleCommands = {"bye", "list"};
         String[] valueCommands = {"unmark ", "mark ", "delete "};
         String[] taskCommands = {"deadline ", "todo ", "event "};
 
-        TaskList tasks = storage.load();
-
-        Scanner sc = new Scanner(System.in);
-        String input = sc.nextLine();
+        String input = ui.nextInput();
 
         while (!input.equals("bye")) {
 
             if (input.equals("list")) {
-                tasks.printTasks();
-                input = sc.nextLine();
+                ui.printTasks(tasks);
+                input = ui.nextInput();
                 continue;
             }
 
@@ -35,7 +31,7 @@ public class Duke {
                     String[] inputArr = input.split(" ");
                     int toUnmark = Integer.parseInt(inputArr[1]);
                     tasks.unmarkTask(toUnmark);
-                    input = sc.nextLine();
+                    input = ui.nextInput();
                     continue;
                 }
 
@@ -43,7 +39,7 @@ public class Duke {
                     String[] inputArr = input.split(" ");
                     int toMark = Integer.parseInt(inputArr[1]);
                     tasks.markTask(toMark);
-                    input = sc.nextLine();
+                    input = ui.nextInput();
                     continue;
                 }
 
@@ -51,12 +47,12 @@ public class Duke {
                     String[] inputArr = input.split(" ");
                     int toDelete = Integer.parseInt(inputArr[1]);
                     if (toDelete > tasks.getNumTasks()) {
-                        System.out.println("Task does not exist. Please enter a valid input.");
-                        input = sc.nextLine();
+                        ui.invalidDelete();
+                        input = ui.nextInput();
                         continue;
                     }
                     tasks.deleteTask(toDelete);
-                    input = sc.nextLine();
+                    input = ui.nextInput();
                     continue;
                 }
             }
@@ -65,8 +61,8 @@ public class Duke {
             try {
                 validateTaskCommand(input, taskCommands);
             } catch (DukeException de) {
-                System.out.println(de.getMessage());
-                input = sc.nextLine();
+                ui.showError(de);
+                input = ui.nextInput();
                 continue;
             }
 
@@ -93,13 +89,12 @@ public class Duke {
                 }
             }
 
-            input = sc.nextLine();
+            input = ui.nextInput();
         }
 
         storage.save(tasks);
-        printGoodbye();
-
-        sc.close();
+        ui.goodbye();
+        ui.close();
     }
 
     public static String returnCommand(String input, String[] commands) {
@@ -135,11 +130,6 @@ public class Duke {
         if (!correct) {
             throw new DukeException("OOPS!!! I'm sorry, but I don't know what that means! :(");
         }
-    }
-
-    public static void printGoodbye() {
-        String goodbye = "Bye. Hope to see you again soon!";
-        System.out.println(goodbye);
     }
 
 }
