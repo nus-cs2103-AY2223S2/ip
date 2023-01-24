@@ -1,17 +1,15 @@
 package command;
 
-import java.util.ArrayList;
-
 import exception.DukeException;
 import task.Event;
-import task.Task;
+import task.TaskList;
 
 public class EventCommand extends Command {
     
-    private ArrayList<Task> taskList;
+    private TaskList taskList;
     private String command;
 
-    public EventCommand(String command, ArrayList<Task> taskList) {
+    public EventCommand(String command, TaskList taskList) {
         this.command = command;
         this.taskList = taskList;
         

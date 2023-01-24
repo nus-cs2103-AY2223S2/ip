@@ -6,6 +6,7 @@ ____    ____  __    __   __    __
     |  |     |  `--'  | |  `--'  | 
     |__|      \______/   \______/  
 
+    No existing files found.
     What can I do for you?
     ----------------------------------------
     ☹ OOPS!!! I'm sorry, but I don't know what that means :-(
@@ -82,4 +83,5 @@ ____    ____  __    __   __    __
     1.[T][ ] read books
     2.[E][ ] buy food (from: today to: tomorrow)
     ----------------------------------------
+    Tasks saved successfully. 
     Bye. Hope to see you again soon!

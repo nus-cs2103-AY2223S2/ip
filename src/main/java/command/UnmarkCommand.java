@@ -1,16 +1,14 @@
 package command;
 
-import java.util.ArrayList;
-
 import exception.DukeException;
-import task.Task;
+import task.TaskList;
 
 public class UnmarkCommand extends Command {
     
-    private ArrayList<Task> taskList;
+    private TaskList taskList;
     private String command;
 
-    public UnmarkCommand(String command, ArrayList<Task> taskList) {
+    public UnmarkCommand(String command, TaskList taskList) {
         this.command = command;
         this.taskList = taskList;
         

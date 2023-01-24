@@ -1,17 +1,15 @@
 package command;
 
-import java.util.ArrayList;
-
 import exception.DukeException;
 import task.Deadline;
-import task.Task;
+import task.TaskList;
 
 public class DeadlineCommand extends Command {
     
-    private ArrayList<Task> taskList;
+    private TaskList taskList;
     private String command;
 
-    public DeadlineCommand(String command, ArrayList<Task> taskList) {
+    public DeadlineCommand(String command, TaskList taskList) {
         this.command = command;
         this.taskList = taskList;
         

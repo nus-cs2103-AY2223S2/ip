@@ -1,17 +1,15 @@
 package command;
 
-import java.util.ArrayList;
-
 import exception.DukeException;
-import task.Task;
+import task.TaskList;
 import task.ToDo;
 
 public class TodoCommand extends Command {
     
-    private ArrayList<Task> taskList;
+    private TaskList taskList;
     private String command;
 
-    public TodoCommand(String command, ArrayList<Task> taskList) {
+    public TodoCommand(String command, TaskList taskList) {
         this.command = command;
         this.taskList = taskList;
         
