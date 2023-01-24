@@ -7,6 +7,7 @@ import duke.Tasks.Todo;
 
 import java.util.ArrayList;
 import java.util.Scanner;
+import java.io.*;
 
 public class Duke {
     private static final String Indentation = " ";
@@ -14,7 +15,9 @@ public class Duke {
     private static int count = 0;
     private static ArrayList<Task> listname;
     //private static Task[] listname;
-    public static void main(String[] args) {
+    private static final String filePath = "data/duke.txt";
+
+    public static void main(String[] args) throws IOException {
         //show logo
         //logo();
         //greeting
@@ -27,7 +30,37 @@ public class Duke {
         String command;
         String[] words;
         String info;
-        Task task;
+        Task task = null;
+
+        try {
+            File file = new File(filePath);
+            Scanner sc = new Scanner(file);
+            while (sc.hasNext()) {
+                Task tasks;
+                String data = sc.nextLine();
+                String[] commandInFile = data.split(" \\| ");
+                boolean isDoneInFile = commandInFile[1].equals("1");
+
+                if (commandInFile[0].equals("T")) {
+                    tasks = new Todo(commandInFile[2], true);
+                    tasks.isDone = isDoneInFile;
+                    listname.add(tasks);
+                    count++;
+                } else if (commandInFile[0].equals("D")) {
+                    tasks = new Deadline(commandInFile[2], commandInFile[3], true);
+                    tasks.isDone = isDoneInFile;
+                    listname.add(tasks);
+                    count++;
+                } else if (commandInFile[0].equals("E")) {
+                    tasks = new Event(commandInFile[2], commandInFile[3], commandInFile[4], true);
+                    tasks.isDone = isDoneInFile;
+                    listname.add(tasks);
+                    count++;
+                }
+            }
+        } catch (FileNotFoundException e) {
+            new File(filePath).createNewFile();
+        }
 
         do {
             command = str.nextLine().trim();
@@ -41,6 +74,7 @@ public class Duke {
                 } else if (words[0].equals("mark")) {
                     try {
                         done(words[1]);
+                        updateFile();
                     } catch (Exception e) {
                         System.out.println(Indentation + Horizontal);
                         System.out.println("  ☹ OOPS!!! The index number cannot be empty.");
@@ -49,6 +83,7 @@ public class Duke {
                 } else if (words[0].equals("unmark")) {
                     try {
                         undone(words[1]);
+                        updateFile();
                     } catch (Exception e) {
                         System.out.println(Indentation + Horizontal);
                         System.out.println("  ☹ OOPS!!! The The index number cannot be empty.");
@@ -58,17 +93,12 @@ public class Duke {
                 } else if (words[0].equals("delete")) {
                     try{
                         delete(words[1]);
+                        updateFile();
                     } catch (Exception e) {
                         System.out.println(Indentation + Horizontal);
                         System.out.println("  ☹ OOPS!!! The index number cannot be empty.");
                         System.out.println(Indentation + Horizontal);
                     }
-//                    int index = Integer.parseInt(words[1]) - 1;
-//                    System.out.println(index);
-//                    Task.taskNum--;
-//                    System.out.println(Task.taskNum);
-//                    listname[count] = new Delete(words[0], index - 1);
-//                    count--;
 
                 } else if (words[0].equals("todo")) {
                     try {
@@ -79,7 +109,7 @@ public class Duke {
                         }
                         info = command.substring(command.indexOf(" ") + 1);
                         //listname[count] = new Todo(info);
-                        task = new Todo(info);
+                        task = new Todo(info, false);
                         listname.add(task);
                         count++;
                     } catch (Exception e) {
@@ -93,10 +123,9 @@ public class Duke {
                         info = command.substring(command.indexOf(" ") + 1, command.indexOf(" /by "));
                         String deadline = command.substring(command.indexOf("/by") + 4);
                         //listname[count] = new Deadline(info, deadline);
-                        task = new Deadline(info, deadline);
+                        task = new Deadline(info, deadline, false);
                         listname.add(task);
                         count++;
-
                     } catch (Exception e) {
                         System.out.println(Indentation + Horizontal);
                         System.out.println("  ☹ OOPS!!! The description of a deadline cannot be empty.");
@@ -110,7 +139,7 @@ public class Duke {
                         String fromtime = command.substring(command.indexOf(" /from ") + 6, command.indexOf(" /to "));
                         String totime = command.substring(command.indexOf(" /to ")  + 4);
                         //listname[count] = new Event(info, fromtime, totime);
-                        task = new Event(info, fromtime, totime);
+                        task = new Event(info, fromtime, totime, false);
                         listname.add(task);
                         count++;
                     } catch (Exception e) {
@@ -124,8 +153,11 @@ public class Duke {
                     System.out.println(" ☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
                     System.out.println(Indentation + Horizontal);
                 }
+                if(task != null){
+                    appendToFile(task.file());
+                    task = null;
+                }
             }
-
         } while (!command.equals("bye"));
 
         exit();
@@ -173,10 +205,7 @@ public class Duke {
         System.out.println(Indentation + Horizontal);
         System.out.println("Nice! I've marked this task as done:");
 
-//        System.out.println(Indentation +
-//                    "[" + listname.get(number).getStatusIcon() + "] " + listname.get(number).getDescription());
         System.out.println(Indentation + listname.get(number).toString());
-
         System.out.println(Indentation + Horizontal);
     }
 
@@ -187,10 +216,7 @@ public class Duke {
         System.out.println(Indentation + Horizontal);
         System.out.println("OK, I've marked this task as not done yet:");
 
-//        System.out.println(Indentation +
-//                "[" + listname.get(number).getStatusIcon() + "] " + listname.get(number).getDescription());
         System.out.println(Indentation + listname.get(number).toString());
-
         System.out.println(Indentation + Horizontal);
     }
 
@@ -198,8 +224,6 @@ public class Duke {
         int index = Integer.parseInt(num) - 1;
         try{
             if (!(listname.get(index)).equals(null)) {
-                //System.out.println(index);
-                //System.out.println(Task.taskNum);
                 System.out.println(Indentation + Horizontal);
                 System.out.println(Indentation + "Noted. I've removed this task:");
 
@@ -215,8 +239,25 @@ public class Duke {
             System.out.println(" ☹ OOPS!!! I'm sorry, but the list is empty :-(");
             System.out.println(Indentation + Horizontal);
         }
-
-
     }
 
+    private static void updateFile() throws IOException {
+        FileWriter fw = new FileWriter(Duke.filePath);
+        fw.write("");
+        fw.close();
+        if(count > 0) {
+            for (int i = 0; i < count; i++) {
+                appendToFile(listname.get(i).file());
+            }
+        }
+
+    }
+    //Java append to file using FileWriter
+    private static void appendToFile(String info) throws IOException {
+        //Constructs a FileWriter object given a file name
+        // with a boolean indicating whether to append the data written
+        FileWriter fw = new FileWriter(Duke.filePath, true);
+        fw.write(info + "\n");
+        fw.close();
+    }
 }
