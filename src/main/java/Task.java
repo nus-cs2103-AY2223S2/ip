@@ -1,10 +1,15 @@
-public class Task {
+abstract class Task {
     protected String description;
     protected boolean isDone;
 
     public Task(String description) {
         this.description = description;
         this.isDone = false;
+    }
+
+    public Task(boolean isDone, String description) {
+        this.isDone = isDone;
+        this.description = description;
     }
 
     public String getStatusIcon() {
@@ -19,5 +24,9 @@ public class Task {
     public void mark() {
         this.isDone = true;
     }
+
+    abstract String formatText();
+
+
 }
 

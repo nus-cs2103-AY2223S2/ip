@@ -1,5 +1,7 @@
+import java.io.FileNotFoundException;
 import java.util.ArrayList;
 import java.util.Scanner;
+import java.io.File;
 public class Duke {
     public static void main(String[] args) {
         String echo = "";
@@ -9,7 +11,19 @@ public class Duke {
 
         say("Hello! I'm GPT0.01!\nWhat can I do for you?", logo);
 
-        ArrayList<Task> storer = new ArrayList<>();
+        String txtDir = System.getProperty("user.dir") + "/data.txt";
+        File file = new File("data.txt");
+        ArrayList<Task> storer;
+
+
+        try {
+            storer = FileReadWriter.loadFile(txtDir);
+        } catch (FileNotFoundException err) {
+            storer = new ArrayList<>();
+        }
+
+
+
         while (!echo.equals("bye")) {
             try {
                 echo = sc.nextLine();
@@ -58,7 +72,7 @@ public class Duke {
                                 throw new IncompleteException();
                             } else {
                                 String description = queries[0].substring(9);
-                                String deadline = queries[1];
+                                String deadline = queries[1].substring(3);
                                 addTask(new Deadlines(description, deadline), storer, logo);
                             }
                         }
@@ -72,8 +86,8 @@ public class Duke {
                                 throw new IncompleteException();
                             } else {
                                 String description = queries[0].substring(6);
-                                String from = queries[1];
-                                String to = queries[2];
+                                String from = queries[1].substring(5);
+                                String to = queries[2].substring(3);
                                 addTask(new Events(description, from, to), storer, logo);
                             }
                         }
@@ -101,6 +115,8 @@ public class Duke {
                         throw new EmptyException();
 
                     }
+
+                    FileReadWriter.dumpFile(txtDir, storer);
                 }
             } catch (Exception err) {
                 say(err.getMessage(), logo);
