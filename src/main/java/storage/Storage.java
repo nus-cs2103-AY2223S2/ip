@@ -29,8 +29,8 @@ public class Storage implements Loader<TaskList> {
      * @param filename Filename to store the data.
      */
     public Storage(String filename) {
-        String FILE_DIRECTORY = "data";
-        this.file = new File(String.format("%s/%s", FILE_DIRECTORY, filename));
+        String fileDirectory = "data";
+        this.file = new File(String.format("%s/%s", fileDirectory, filename));
     }
 
     /**
@@ -102,7 +102,7 @@ public class Storage implements Loader<TaskList> {
             FileWriter fileWriter = new FileWriter(file);
             for (Task task : taskList.getTaskList()) {
                 SerializableTask tsk = task.serialize();
-                fileWriter.write( tsk.marshal() + "\n");
+                fileWriter.write(tsk.marshal() + "\n");
             }
             fileWriter.close();
         } catch (IOException e) {

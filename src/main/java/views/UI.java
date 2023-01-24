@@ -4,7 +4,7 @@ package views;
  * Represents the views of the program. Contains methods for printing to console.
  */
 public class UI {
-    private final String DATE_FORMAT = "YYYY-MM-DD";
+    private static final String DATE_FORMAT = "YYYY-MM-DD";
 
     private String indentMessage(String message) {
         return "\n\t " + message;

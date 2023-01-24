@@ -75,6 +75,12 @@ public class TaskList {
         }
     }
 
+    /**
+     * Adds a task into the taskList.
+     *
+     * @param task The task to be added.
+     * @throws DukeException A duke specific exception thrown due to adding error.
+     */
     public void addTask(Task task) throws DukeException {
         taskList.add(task);
         storage.write(task);

@@ -10,11 +10,12 @@ import exceptions.DukeException;
 
 
 /**
- * Represents the find command. Parses through each task and check if it contains the specified string.
+ * Represents the find command.
+ * Parses through each task and check if it contains the specified string.
  */
 public class FindCommand extends Command {
+    private static final Pattern VALID_FILTER = Pattern.compile("^(?<cmd>find) (?<filter>.+)$");
     private final String args;
-    private final Pattern VALID_FILTER = Pattern.compile("^(?<cmd>find) (?<filter>.+)$");
 
     /**
      * Instantiate the find command.

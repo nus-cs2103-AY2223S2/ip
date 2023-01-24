@@ -1,8 +1,9 @@
 package utils;
 
+import java.util.function.Supplier;
+
 import exceptions.DukeException;
 
-import java.util.function.Supplier;
 
 /**
  * An interface for objects that are executables.

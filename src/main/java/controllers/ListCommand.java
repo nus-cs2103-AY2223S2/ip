@@ -15,8 +15,8 @@ import exceptions.DukeException;
  * The list command can be used to list all tasks.
  */
 public class ListCommand extends Command {
+    private static final Pattern VALID_LIST_CMD = Pattern.compile("^(list\\s*)((?<filter>todo|deadline|event)\\s*$)?");
     private final String arguments;
-    private final Pattern VALID_LIST_CMD = Pattern.compile("^(list\\s*)((?<filter>todo|deadline|event)\\s*$)?");
 
     /**
      * Initializes a list command.

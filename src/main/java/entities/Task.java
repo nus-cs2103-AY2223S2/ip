@@ -17,9 +17,9 @@ public abstract class Task {
     public static final Pattern EVENT =
             Pattern.compile("^(event) (?<description>.+) /from (?<from>.+) /to (?<to>.+)$", Pattern.CASE_INSENSITIVE);
     public static final Pattern TODO = Pattern.compile("^(todo) (?<description>.+)$", Pattern.CASE_INSENSITIVE);
+    private static final String INVALID_DATE_MESSAGE = "Date is not valid! Please try again.";
     private static final Pattern FORMAT_DATE =
             Pattern.compile("^(?<year>\\d{4})-(?<month>0[0-9]|1[0-2])-(?<day>0[0-9]|1[0-9]|2[0-9]|3[0-1])$");
-    private static final String INVALID_DATE_MESSAGE = "Date is not valid! Please try again.";
 
 
     protected TaskType taskType;
