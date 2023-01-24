@@ -1,3 +1,5 @@
+package duke;
+
 public abstract class Command {
     String cmd;
     String description;

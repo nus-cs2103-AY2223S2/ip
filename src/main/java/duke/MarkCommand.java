@@ -1,11 +1,13 @@
-public class UnmarkCommand extends Command{
+package duke;
+
+public class MarkCommand extends Command{
     int toggleLineNumber;
 
-    public UnmarkCommand(String[] fullCommand) throws DukeEmptyArgumentException, DukeInvalidArgumentException {
+    public MarkCommand(String[] fullCommand) throws DukeEmptyArgumentException, DukeInvalidArgumentException {
         try {
             toggleLineNumber = Integer.parseInt(fullCommand[1]) - 1;
         } catch (IndexOutOfBoundsException e) {
-            throw new DukeEmptyArgumentException("The description of unmark command cannot be empty.");
+            throw new DukeEmptyArgumentException("The description of mark command cannot be empty.");
         } catch (NumberFormatException e) {
             throw new DukeInvalidArgumentException("Delete command require integer to execute!");
         }
@@ -18,11 +20,11 @@ public class UnmarkCommand extends Command{
     public void execute(TaskList task, Ui ui, Storage storage) throws DukeIOException, DukeInvalidArgumentException {
         if (toggleLineNumber >= task.size()) {
             throw new DukeInvalidArgumentException("There are only" + task.size()
-                    + "tasks in list, but want to unmark " + toggleLineNumber + "th task.");
+                    + "tasks in list, but want to mark " + toggleLineNumber + "th task.");
         }
         Task t = task.getTaskAt(toggleLineNumber);
-        t.setDone(false);
-        storage.updateData(toggleLineNumber, 0);
-        ui.responseToUnmarkTaskCommand(t);
+        t.setDone(true);
+        storage.updateData(toggleLineNumber, 1);
+        ui.responseToMarkTaskCommand(t);
     }
 }
