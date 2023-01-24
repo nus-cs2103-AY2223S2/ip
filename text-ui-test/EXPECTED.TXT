@@ -17,6 +17,10 @@ Supported Commands:
 6. event taskName /from startDate /to endDate -> Creates an event task with name taskName,
    start date startDate, and end date endDate.
 7. delete X -> Deletes task number X from the list.
+8. on givenDate -> Displays all the tasks that occur on givenDate.
+9. help -> Prints the list of commands supported by this bot.
+
+Please enter dates in the format of either yyyy-MM-dd hh:mm or yyyy-MM-dd.
 _______________________________________________________________________________________________
 _______________________________________________________________________________________________
 Added task to list:
@@ -24,119 +28,80 @@ Added task to list:
 Currently, there is 1 task in your list.
 _______________________________________________________________________________________________
 _______________________________________________________________________________________________
+Please check that you entered a valid date, and that the date should be in the format of
+yyyy-MM-dd hh:mm or yyyy-MM-dd.
+_______________________________________________________________________________________________
+_______________________________________________________________________________________________
 Added task to list:
-[D][ ] return book (by: June 6th)
+[D][ ] return book (by: June 06 2023)
 Currently, there are 2 tasks in your list.
 _______________________________________________________________________________________________
 _______________________________________________________________________________________________
+Please check that you entered a valid date, and that the date should be in the format of
+yyyy-MM-dd hh:mm or yyyy-MM-dd.
+_______________________________________________________________________________________________
+_______________________________________________________________________________________________
 Added task to list:
-[E][ ] project meeting (from: Aug 6th 2pm to: 4pm)
+[E][ ] project meeting (from: June 07 2023 14:00 to: June 07 2023 18:00)
 Currently, there are 3 tasks in your list.
 _______________________________________________________________________________________________
 _______________________________________________________________________________________________
 Added task to list:
-[T][ ] join sports club
+[E][ ] carnival (from: June 05 2023 to: June 08 2023)
 Currently, there are 4 tasks in your list.
-_______________________________________________________________________________________________
-_______________________________________________________________________________________________
-Added task to list:
-[T][ ] borrow book
-Currently, there are 5 tasks in your list.
-_______________________________________________________________________________________________
-_______________________________________________________________________________________________
-Added task to list:
-[E][ ] project meeting (from: Mon 2pm to: 4pm)
-Currently, there are 6 tasks in your list.
-_______________________________________________________________________________________________
-_______________________________________________________________________________________________
-Added task to list:
-[D][ ] do homework (by: no idea :-p)
-Currently, there are 7 tasks in your list.
-_______________________________________________________________________________________________
-_______________________________________________________________________________________________
-Added task to list:
-[E][ ] conference (from: no idea :-p to: no idea :-p)
-Currently, there are 8 tasks in your list.
 _______________________________________________________________________________________________
 _______________________________________________________________________________________________
 Here are the tasks in your list:
 1. [T][ ] read book
-2. [D][ ] return book (by: June 6th)
-3. [E][ ] project meeting (from: Aug 6th 2pm to: 4pm)
-4. [T][ ] join sports club
-5. [T][ ] borrow book
-6. [E][ ] project meeting (from: Mon 2pm to: 4pm)
-7. [D][ ] do homework (by: no idea :-p)
-8. [E][ ] conference (from: no idea :-p to: no idea :-p)
+2. [D][ ] return book (by: June 06 2023)
+3. [E][ ] project meeting (from: June 07 2023 14:00 to: June 07 2023 18:00)
+4. [E][ ] carnival (from: June 05 2023 to: June 08 2023)
+_______________________________________________________________________________________________
+_______________________________________________________________________________________________
+Please enter a valid task number. You currently have 4 tasks.
+_______________________________________________________________________________________________
+_______________________________________________________________________________________________
+Please enter a valid task number. You currently have 4 tasks.
 _______________________________________________________________________________________________
 _______________________________________________________________________________________________
 Poof! One less worry. The following task is now marked as done:
 [T][X] read book
 _______________________________________________________________________________________________
 _______________________________________________________________________________________________
-Here are the tasks in your list:
-1. [T][X] read book
-2. [D][ ] return book (by: June 6th)
-3. [E][ ] project meeting (from: Aug 6th 2pm to: 4pm)
-4. [T][ ] join sports club
-5. [T][ ] borrow book
-6. [E][ ] project meeting (from: Mon 2pm to: 4pm)
-7. [D][ ] do homework (by: no idea :-p)
-8. [E][ ] conference (from: no idea :-p to: no idea :-p)
+Added task to list:
+[T][ ] buy groceries
+Currently, there are 5 tasks in your list.
 _______________________________________________________________________________________________
 _______________________________________________________________________________________________
-Alright! The following task is now marked as undone. I will help you keep an eye on it.
-[T][ ] read book
-_______________________________________________________________________________________________
-_______________________________________________________________________________________________
-Here are the tasks in your list:
-1. [T][ ] read book
-2. [D][ ] return book (by: June 6th)
-3. [E][ ] project meeting (from: Aug 6th 2pm to: 4pm)
-4. [T][ ] join sports club
-5. [T][ ] borrow book
-6. [E][ ] project meeting (from: Mon 2pm to: 4pm)
-7. [D][ ] do homework (by: no idea :-p)
-8. [E][ ] conference (from: no idea :-p to: no idea :-p)
-_______________________________________________________________________________________________
-_______________________________________________________________________________________________
-The todo command cannot be left blank.
-_______________________________________________________________________________________________
-_______________________________________________________________________________________________
-The deadline command cannot be left blank.
-_______________________________________________________________________________________________
-_______________________________________________________________________________________________
-The event command cannot be left blank.
-_______________________________________________________________________________________________
-_______________________________________________________________________________________________
-Sorry. I do not understand this command. Please try again.
-_______________________________________________________________________________________________
-_______________________________________________________________________________________________
-Please enter a valid task number. You currently have 8 tasks.
-_______________________________________________________________________________________________
-_______________________________________________________________________________________________
-Please enter a valid task number. You currently have 8 tasks.
+Please enter a valid task number. You currently have 5 tasks.
 _______________________________________________________________________________________________
 _______________________________________________________________________________________________
 Ta-da! The following task has been deleted.
-[E][ ] project meeting (from: Aug 6th 2pm to: 4pm)
-Current number of tasks is: 7.
+[T][ ] buy groceries
+Current number of tasks is: 4.
 _______________________________________________________________________________________________
 _______________________________________________________________________________________________
-Here are the tasks in your list:
-1. [T][ ] read book
-2. [D][ ] return book (by: June 6th)
-3. [T][ ] join sports club
-4. [T][ ] borrow book
-5. [E][ ] project meeting (from: Mon 2pm to: 4pm)
-6. [D][ ] do homework (by: no idea :-p)
-7. [E][ ] conference (from: no idea :-p to: no idea :-p)
+Tasks on: June 06 2023
+1. [D][ ] return book (by: June 06 2023)
+2. [E][ ] carnival (from: June 05 2023 to: June 08 2023)
 _______________________________________________________________________________________________
 _______________________________________________________________________________________________
-Please enter a valid task number. You currently have 7 tasks.
+Start date must be before end date.
 _______________________________________________________________________________________________
 _______________________________________________________________________________________________
-Sorry. I do not understand this command. Please try again.
+Supported Commands:
+1. list -> Provides a list of existing tasks.
+2. mark X -> Marks task number X as done.
+3. unmark X -> Marks task number X as undone.
+4. todo taskName -> Creates a todo task with name taskName.
+5. deadline taskName /by date -> Creates a deadline task with name taskName and deadline date.
+6. event taskName /from startDate /to endDate -> Creates an event task with name taskName,
+   start date startDate, and end date endDate.
+7. delete X -> Deletes task number X from the list.
+8. on givenDate -> Displays all the tasks that occur on givenDate.
+9. help -> Prints the list of commands supported by this bot.
+
+Please enter dates in the format of either yyyy-MM-dd hh:mm or yyyy-MM-dd.
 _______________________________________________________________________________________________
 _______________________________________________________________________________________________
 Sorry. I do not understand this command. Please try again.

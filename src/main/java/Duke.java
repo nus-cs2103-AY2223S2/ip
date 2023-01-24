@@ -204,7 +204,7 @@ public class Duke {
                 } catch (DateTimeParseException dateTimeException) {
                     System.out.println(straightLine);
                     System.out.println("Please check that you entered a valid date, and that the date should be in "
-                            + "the format of yyyy-MM-dd hh:mm or yyyy-MM-dd");
+                            + "the format of\nyyyy-MM-dd hh:mm or yyyy-MM-dd.");
                     System.out.println(straightLine);
                     break;
                 }
@@ -273,7 +273,7 @@ public class Duke {
                 } catch (DateTimeParseException dateTimeException) {
                     System.out.println(straightLine);
                     System.out.println("Please check that you entered a valid date, and that the date should be in "
-                            + "the format of yyyy-MM-dd hh:mm or yyyy-MM-dd");
+                            + "the format of\nyyyy-MM-dd hh:mm or yyyy-MM-dd.");
                     System.out.println(straightLine);
                     break;
                 }
@@ -317,7 +317,7 @@ public class Duke {
                 } catch (DateTimeParseException dateTimeException) {
                     System.out.println(straightLine);
                     System.out.println("Please check that you entered a valid date, and that the date should be in "
-                            + "the format of yyyy-MM-dd hh:mm or yyyy-MM-dd");
+                            + "the format of\nyyyy-MM-dd hh:mm or yyyy-MM-dd.");
                     System.out.println(straightLine);
                     break;
                 }
