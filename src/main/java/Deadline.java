@@ -6,12 +6,16 @@ public class Deadline extends Task {
         this.deadline = deadline;
     }
 
+    public String getDeadline() {
+        return this.deadline;
+    }
+
     @Override
     public String toString() {
         if (super.getStatus()) {
-            return String.format("[D][X] %s (%s)\n", super.getTaskName(), this.deadline);
+            return String.format("[D][X] %s (by: %s)\n", super.getTaskName(), this.deadline);
         } else {
-            return String.format("[D][ ] %s (%s)\n",super.getTaskName(), this.deadline);
+            return String.format("[D][ ] %s (by: %s)\n",super.getTaskName(), this.deadline);
         }
     }
 }
