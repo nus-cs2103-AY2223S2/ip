@@ -40,6 +40,10 @@ public class Task {
         return "Now you have " + count + " tasks in the list.";
     }
 
+    public String toDataString() {
+        return String.format(" @ %d @ %s", this.isDone ? 1 : 0, this.description);
+    }
+
     @Override
     public String toString() {
         return String.format("[%s] %s", this.getStatusIcon(), this.description);

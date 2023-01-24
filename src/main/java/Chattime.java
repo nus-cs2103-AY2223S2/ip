@@ -1,3 +1,4 @@
+import java.io.*;
 import java.util.ArrayList;
 import java.util.Scanner;
 import java.util.regex.Pattern;
@@ -18,6 +19,7 @@ public class Chattime {
     private static final String IDX_OUT_OF_BOUND = "OOPS!!! The index is too large! We currently have %d task(s).";
     private static final String MISSED_PARAM = "OOPS!!! %s should be in form of %s.";
     private static final ArrayList<Task> storeList = new ArrayList<>();
+    private static File storeFile = null;
 
     public static void main(String[] args) {
         String logo = "      ___\n"
@@ -33,6 +35,9 @@ public class Chattime {
                     + "     \\/__/   \\/__/\n";
 
         System.out.println("Hello from\n" + logo);
+
+        openFile();
+        loadData();
 
         replyUser(greet);
 
@@ -132,6 +137,7 @@ public class Chattime {
 
     public static void addTask(Task newTask) {
         storeList.add(newTask);
+        saveToFile(newTask);
         newTask.printAddTask();
     }
 
@@ -153,6 +159,7 @@ public class Chattime {
         try {
             index = checkInt(context, "mark");
             storeList.get(index - 1).markAsDone();
+            updateFile(index, storeList.get(index - 1));
         } catch (ChattimeException e) {
             replyUser(e.getMessage());
         }
@@ -163,6 +170,7 @@ public class Chattime {
         try {
             index = checkInt(context, "unmark");
             storeList.get(index - 1).unmarkDone();
+            updateFile(index, storeList.get(index - 1));
         } catch (ChattimeException e) {
             replyUser(e.getMessage());
         }
@@ -174,6 +182,7 @@ public class Chattime {
             index = checkInt(context, "delete");
             storeList.get(index - 1).removeTask();
             storeList.remove(index - 1);
+            deleteFromFile(index);
         } catch (ChattimeException e) {
             replyUser(e.getMessage());
         }
@@ -219,6 +228,126 @@ public class Chattime {
 
     public static void exit() {
         replyUser(goodBye);
+    }
+    
+    public static void openFile() {
+        try {
+            storeFile = new File("testData/chattimeTask.txt");
+            if (!storeFile.exists()) {
+                if (!storeFile.getParentFile().exists()) {
+                    if(!storeFile.getParentFile().mkdirs()) {
+                        throw new IOException("New directory cannot be created!");
+                    }
+                }
+                if(!storeFile.createNewFile()) {
+                    throw new IOException("New file cannot be created!");
+                }
+            }
+        } catch (IOException e) {
+            System.err.println(e.getMessage());
+        }
+    }
+
+    public static void loadData() {
+        BufferedReader loader;
+        try {
+            loader = new BufferedReader(new FileReader(storeFile));
+            String task = loader.readLine();
+
+            while (task != null) {
+                String[] taskSplit = task.split(" @ ", 5);
+                Task inputTask;
+                switch (taskSplit[0]) {
+                case "T":
+                    inputTask = new Todo(taskSplit[2]);
+                    break;
+                case "D":
+                    inputTask = new Deadline(taskSplit[2], taskSplit[3]);
+                    break;
+                case "E":
+                    inputTask = new Event(taskSplit[2], taskSplit[3], taskSplit[4]);
+                    break;
+                default:
+                    throw new ChattimeException("Task type error : " + taskSplit[0]);
+                }
+                if (taskSplit[1].equals("1")) {
+                    inputTask.isDone = true;
+                }
+                storeList.add(inputTask);
+                task = loader.readLine();
+            }
+        } catch (IOException | ChattimeException e) {
+            System.err.println(e.getMessage());
+        }
+    }
+
+    public static void saveToFile(Task task) {
+        String writeString = task.toDataString();
+        try {
+            BufferedWriter writer = new BufferedWriter(new FileWriter(storeFile, true));
+            writer.write(writeString + System.lineSeparator());
+            writer.close();
+        } catch (IOException e) {
+            System.err.println(e.getMessage());
+        }
+    }
+
+    public static void updateFile(int index, Task task) {
+        BufferedReader lineSearch;
+        try {
+            lineSearch = new BufferedReader(new FileReader(storeFile));
+            String content = lineSearch.readLine();
+            int lineCount = 1;
+            StringBuilder updateString = new StringBuilder();
+
+            while (content != null) {
+                if (lineCount == index) {
+                    content = task.toDataString();
+                }
+                updateString.append(content).append(System.lineSeparator());
+                lineCount++;
+                content = lineSearch.readLine();
+            }
+            if (lineCount < index) {
+                throw new IndexOutOfBoundsException("Task not saved in storage!");
+            } else {
+                BufferedWriter writer = new BufferedWriter(new FileWriter(storeFile));
+                writer.write(updateString.toString());
+                writer.close();
+            }
+        } catch (IOException | IndexOutOfBoundsException e) {
+            System.err.println(e.getMessage());
+        }
+    }
+
+    public static void deleteFromFile(int index) {
+        BufferedReader lineSearch;
+        try {
+            lineSearch = new BufferedReader(new FileReader(storeFile));
+            String content = lineSearch.readLine();
+            int lineCount = 1;
+            StringBuilder updateString = new StringBuilder();
+
+            while (content != null) {
+                if (lineCount == index) {
+                    lineCount++;
+                    content = lineSearch.readLine();
+                    continue;
+                }
+                updateString.append(content).append(System.lineSeparator());
+                lineCount++;
+                content = lineSearch.readLine();
+            }
+            if (lineCount < index) {
+                throw new IndexOutOfBoundsException("Task not saved in storage!");
+            } else {
+                BufferedWriter writer = new BufferedWriter(new FileWriter(storeFile));
+                writer.write(updateString.toString());
+                writer.close();
+            }
+        } catch (IOException e) {
+            System.err.println(e.getMessage());
+        }
     }
 
     /* Unused code

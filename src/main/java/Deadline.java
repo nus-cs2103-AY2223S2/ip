@@ -8,6 +8,11 @@ public class Deadline extends Task {
     }
 
     @Override
+    public String toDataString() {
+        return "D" + super.toDataString() + " @ " + this.by;
+    }
+
+    @Override
     public String toString() {
         return "[D]" + super.toString() + " (by: " + this.by + ")";
     }
