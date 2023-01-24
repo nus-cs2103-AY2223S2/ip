@@ -4,9 +4,13 @@ public abstract class Task implements Serializable {
     protected final String desc;
     protected boolean isDone;
 
-    Task(String desc) {
+    Task(String desc) throws TaskCreationException {
+        if (desc.equals("")) {
+            throw new TaskCreationException("Description of todo cannot be empty");
+        }
         this.desc = desc;
         this.isDone = false;
+
     }
 
     protected String getStatusIcon() {

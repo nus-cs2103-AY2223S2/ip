@@ -1,17 +1,10 @@
-import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Duke {
-    private static void printAllTasks(ArrayList<Task> list) {
-        for (int i = 0; i < list.size(); i++) {
-            System.out.printf("%d: %s\n", i + 1, list.get(i));
-        }
-    }
-
     public static void main(String[] args) {
         System.out.println("Hello, Duke here. How can I help you?");
         Scanner sc = new Scanner(System.in);
-        ArrayList<Task> list = Storage.load();
+        TaskList taskList = Storage.load();
         String userLine = "";
 
         while (!userLine.equals("bye")) {
@@ -23,37 +16,22 @@ public class Duke {
                 System.out.println("Bye, hope to see you again.");
                 break;
             case "list":
-                printAllTasks(list);
+                System.out.println(taskList);
                 break;
             case "mark": {
                 int number = Integer.parseInt(split[1]) - 1;
-                try {
-                    list.get(number).setIsDone(true);
-                    System.out.println("done");
-                } catch (IndexOutOfBoundsException e) {
-                    System.out.println("Item does not exist");
-                }
-                printAllTasks(list);
+                taskList.mark(number);
+                System.out.println(taskList);
                 break;
             }
             case "unmark": {
                 int number = Integer.parseInt(split[1]) - 1;
-                try {
-                    list.get(number).setIsDone(false);
-                    System.out.println("done");
-                } catch (IndexOutOfBoundsException e) {
-                    System.out.println("Item does not exist");
-                }
-                printAllTasks(list);
+                taskList.unmark(number);
+                System.out.println(taskList);
                 break;
             }
             case "todo": {
-                try {
-                    list.add(new ToDo(split[1]));
-                    System.out.println("Added: " + split[1]);
-                } catch (ArrayIndexOutOfBoundsException e) {
-                    System.out.println("Description cannot be empty for todo");
-                }
+                taskList.addTodo(split[1]);
                 break;
             }
             case "deadline": {
@@ -62,26 +40,16 @@ public class Duke {
                     System.out.println("Invalid format");
                     break;
                 }
-                try {
-                    list.add(new Deadline(split[1], split[3]));
-                    System.out.println("Added: " + split[1]);
-                } catch (TaskCreationException e) {
-                    System.out.println(e.getMessage());
-                }
+                taskList.addDeadline(split[1], split[3]);
                 break;
             }
             case "event": {
                 split = userLine.split(" ");
-                if (split.length < 5) {
+                if (split.length < 6) {
                     System.out.println("Invalid format");
                     break;
                 }
-                try {
-                    list.add(new Event(split[1], split[3], split[5]));
-                    System.out.println("Added: " + split[1]);
-                } catch (TaskCreationException e) {
-                    System.out.println(e.getMessage());
-                }
+                taskList.addEvent(split[1], split[3], split[5]);
                 break;
             }
             case "delete": {
@@ -90,10 +58,9 @@ public class Duke {
                 }
                 try {
                     int itemIndex = Integer.parseInt(split[1]) - 1;
-                    System.out.printf("Removing item %d: %s\n", itemIndex + 1, list.get(itemIndex));
-                    list.remove(itemIndex);
-                    System.out.println("Removal successful. New list:");
-                    printAllTasks(list);
+                    System.out.printf("Removing item %d\n", itemIndex + 1);
+                    taskList.delete(itemIndex);
+                    System.out.printf("Removal successful. New list: \n%s", taskList);
                 } catch (ArrayIndexOutOfBoundsException e) {
                     System.out.printf("Error: Item %d does not exist", Integer.parseInt(split[1]));
                 } catch (NumberFormatException e) {
@@ -104,7 +71,7 @@ public class Duke {
             default:
                 System.out.println("Command not found");
             }
-            Storage.store(list);
+            Storage.store(taskList);
         }
     }
 }
