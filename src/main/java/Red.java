@@ -1,6 +1,10 @@
 import java.io.IOException;
 import java.util.Scanner;
 import java.io.File;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.time.temporal.ChronoUnit;
+
 
 public class Red{
     private static TaskList tasks = new TaskList(100);
@@ -62,6 +66,7 @@ public class Red{
                 tasks.indexof(index).unmark();
                 reader();
             } else if(arrOfStr[0].equals("deadline")) {
+                DeadlineTask NewDeadlineTask = null;
                 if(arrOfStr.length <= 1) {
                     throw new RuntimeException("Specification of the DeadlineTask is missing\n");
                 }
@@ -69,7 +74,21 @@ public class Red{
                 if(deadstr.length != 2) {
                     throw new RuntimeException("Specification of the DeadlineTask is missing\n");
                 }
-                DeadlineTask NewDeadlineTask = new DeadlineTask(deadstr[0],deadstr[1]);
+                String[] timestr = deadstr[1].split(" ", 2);
+                if(timestr.length < 1) {
+                    throw new RuntimeException("Specification of the DeadlineTask is missing\n");
+                }
+
+                if(timestr.length == 2 && timestr[1].isEmpty()) {
+                    NewDeadlineTask = new DeadlineTask(deadstr[0],timestr[0]);
+                } else if(timestr.length == 2) {
+                    System.out.println("hello");
+                    System.out.println(timestr[1].isEmpty());
+                    NewDeadlineTask = new DeadlineTask(deadstr[0],timestr[0],timestr[1]);
+                } else if(timestr.length == 1) {
+                    NewDeadlineTask = new DeadlineTask(deadstr[0],timestr[0]);
+                }
+
                 tasks.enq(NewDeadlineTask);
                 reader();
             } else if(arrOfStr[0].equals("todo")) {
