@@ -16,6 +16,7 @@ import java.io.PrintStream;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.fxml.FXML;
 
 /**
  * Duke is the main class that directly handles the user input, and abstract
@@ -40,7 +41,7 @@ import javafx.scene.image.ImageView;
  * @see Storage
  * @see Ui
  */
-public class Duke extends Application {
+public class Duke /*extends Application*/ {
         
     private Tasks<Task> tasks = new Tasks<Task>();
     private TaskList<Task> taskList = new TaskList<Task>();
@@ -385,129 +386,130 @@ public class Duke extends Application {
         }
     }
     
-    @Override
-    public void start(Stage stage) {
-        //Step 1. Setting up required components
+//    @Override
+//    public void start(Stage stage) {
+//        //Step 1. Setting up required components
+//
+//        //The container for the content of the chat to scroll.
+//        scrollPane = new ScrollPane();
+//        dialogContainer = new VBox(10);
+//        scrollPane.setContent(dialogContainer);
+//
+//        userInput = new TextField();
+//        sendButton = new Button("Send");
+//
+//        AnchorPane mainLayout = new AnchorPane();
+//        mainLayout.getChildren().addAll(scrollPane, userInput, sendButton);
+//
+//        scene = new Scene(mainLayout);
+//        scene.getStylesheets().add(this.getClass().getResource("/style.css").toExternalForm());
+//
+//
+//
+//        stage.setScene(scene);
+//        stage.show();
+//
+//        stage.setTitle("Duke");
+//        stage.setResizable(false);
+//        stage.setMinHeight(600.0);
+//        stage.setMinWidth(400.0);
+//
+//        mainLayout.setPrefSize(400.0, 600.0);
+//
+//        scrollPane.setPrefSize(385, 535);
+//        scrollPane.setHbarPolicy(ScrollPane.ScrollBarPolicy.NEVER);
+//        scrollPane.setVbarPolicy(ScrollPane.ScrollBarPolicy.ALWAYS);
+//
+//        scrollPane.setVvalue(1.0);
+//        scrollPane.setFitToWidth(true);
+//
+//        // You will need to import `javafx.scene.layout.Region` for this.
+//        dialogContainer.setPrefHeight(Region.USE_COMPUTED_SIZE);
+//
+//        userInput.setPrefWidth(325.0);
+//
+//        sendButton.setPrefWidth(55.0);
+//
+//        AnchorPane.setTopAnchor(scrollPane, 1.0);
+//
+//        AnchorPane.setBottomAnchor(sendButton, 1.0);
+//        AnchorPane.setRightAnchor(sendButton, 1.0);
+//
+//        AnchorPane.setLeftAnchor(userInput , 1.0);
+//        AnchorPane.setBottomAnchor(userInput, 1.0);
+//
+//        /*
+//        sendButton.setOnMouseClicked((event) -> {
+//        dialogContainer.getChildren().add(getDialogLabel(userInput.getText()));
+//        userInput.clear();
+//        });
+//
+//        userInput.setOnAction((event) -> {
+//            dialogContainer.getChildren().add(getDialogLabel(userInput.getText()));
+//            userInput.clear();
+//        });
+//        */
+//
+//        ByteArrayOutputStream storeString = new ByteArrayOutputStream();
+//        PrintStream printStream = new PrintStream(storeString);
+//        PrintStream oldPrintStream = System.out;
+//        System.setOut(printStream);
+//        ui = new Ui("Greetings");
+//        ui.showWelcome();
+//        System.out.flush();
+//        System.setOut(oldPrintStream);
+//        Label greeting = new Label(storeString.toString());
+//
+//        dialogContainer.getChildren().addAll(greeting);
+//
+//        sendButton.setOnMouseClicked((event) -> {
+//        handleUserInput();
+//        });
+//
+//        userInput.setOnAction((event) -> {
+//            handleUserInput();
+//        });
+//    }
+//
+//    /**
+//     * Iteration 1:
+//     * Creates a label with the specified text and adds it to the dialog container.
+//     * @param text String containing text to add
+//     * @return a label with the specified text that has word wrap enabled.
+//     */
+//    private Label getDialogLabel(String text) {
+//        // You will need to import `javafx.scene.control.Label`.
+//        Label textToAdd = new Label(text);
+//        textToAdd.setWrapText(true);
+//
+//        return textToAdd;
+//    }
+//
+//    private void handleUserInput() {
+//
+//        Label userText = new Label();
+//        userText.getStyleClass().add("right-label");
+//        userText.setText(userInput.getText());
+//
+//        Label dukeText = new Label(getResponse(userInput.getText()));
+//        dukeText.getStyleClass().add("left-label");
+//
+//        dialogContainer.getChildren().addAll(
+//        DialogBox.getUserDialog(userText, new ImageView(user)),
+//        DialogBox.getDukeDialog(dukeText, new ImageView(duke))
+//        );
+//        userInput.clear();
+//    }
+//
+//    /**
+//     * You should have your own function to generate a response to user input.
+//     * Replace this stub with your completed method.
+//     */
 
-        //The container for the content of the chat to scroll.
-        scrollPane = new ScrollPane();
-        dialogContainer = new VBox(10);
-        scrollPane.setContent(dialogContainer);
-
-        userInput = new TextField();
-        sendButton = new Button("Send");
-
-        AnchorPane mainLayout = new AnchorPane();
-        mainLayout.getChildren().addAll(scrollPane, userInput, sendButton);
-
-        scene = new Scene(mainLayout);
-        scene.getStylesheets().add(this.getClass().getResource("/style.css").toExternalForm());
-
-
-
-        stage.setScene(scene);
-        stage.show();
-
-        stage.setTitle("Duke");
-        stage.setResizable(false);
-        stage.setMinHeight(600.0);
-        stage.setMinWidth(400.0);
-
-        mainLayout.setPrefSize(400.0, 600.0);
-
-        scrollPane.setPrefSize(385, 535);
-        scrollPane.setHbarPolicy(ScrollPane.ScrollBarPolicy.NEVER);
-        scrollPane.setVbarPolicy(ScrollPane.ScrollBarPolicy.ALWAYS);
-
-        scrollPane.setVvalue(1.0);
-        scrollPane.setFitToWidth(true);
-
-        // You will need to import `javafx.scene.layout.Region` for this.
-        dialogContainer.setPrefHeight(Region.USE_COMPUTED_SIZE);
-
-        userInput.setPrefWidth(325.0);
-
-        sendButton.setPrefWidth(55.0);
-
-        AnchorPane.setTopAnchor(scrollPane, 1.0);
-
-        AnchorPane.setBottomAnchor(sendButton, 1.0);
-        AnchorPane.setRightAnchor(sendButton, 1.0);
-
-        AnchorPane.setLeftAnchor(userInput , 1.0);
-        AnchorPane.setBottomAnchor(userInput, 1.0);
-        
-        /*
-        sendButton.setOnMouseClicked((event) -> {
-        dialogContainer.getChildren().add(getDialogLabel(userInput.getText()));
-        userInput.clear();
-        });
-
-        userInput.setOnAction((event) -> {
-            dialogContainer.getChildren().add(getDialogLabel(userInput.getText()));
-            userInput.clear();
-        });
-        */
-
-        ByteArrayOutputStream storeString = new ByteArrayOutputStream();
-        PrintStream printStream = new PrintStream(storeString);
-        PrintStream oldPrintStream = System.out;
-        System.setOut(printStream);
-        ui = new Ui("Greetings");
-        ui.showWelcome();
-        System.out.flush();
-        System.setOut(oldPrintStream);
-        Label greeting = new Label(storeString.toString());
-
-        dialogContainer.getChildren().addAll(greeting);
-
-        sendButton.setOnMouseClicked((event) -> {
-        handleUserInput();
-        });
-
-        userInput.setOnAction((event) -> {
-            handleUserInput();
-        });
-    }
-  
-    /**
-     * Iteration 1:
-     * Creates a label with the specified text and adds it to the dialog container.
-     * @param text String containing text to add
-     * @return a label with the specified text that has word wrap enabled.
-     */
-    private Label getDialogLabel(String text) {
-        // You will need to import `javafx.scene.control.Label`.
-        Label textToAdd = new Label(text);
-        textToAdd.setWrapText(true);
-
-        return textToAdd;
-    }
- 
-    private void handleUserInput() {
-        
-        Label userText = new Label();
-        userText.getStyleClass().add("right-label");
-        userText.setText(userInput.getText());
-
-        Label dukeText = new Label(getResponse(userInput.getText()));
-        dukeText.getStyleClass().add("left-label");
-
-        dialogContainer.getChildren().addAll(
-        DialogBox.getUserDialog(userText, new ImageView(user)),
-        DialogBox.getDukeDialog(dukeText, new ImageView(duke))
-        );
-        userInput.clear();
-    }
-
-    /**
-     * You should have your own function to generate a response to user input.
-     * Replace this stub with your completed method.
-     */
-   
-    private String getResponse(String input) {
+    @FXML
+    protected String getResponse(String input) {
         //return storeString.toString();
-        
+
         /*
         storage = new Storage();
         storage.readFromFile();
@@ -517,7 +519,7 @@ public class Duke extends Application {
         PrintStream printStream = new PrintStream(storeString);
         PrintStream oldPrintStream = System.out;
         System.setOut(printStream);
-        
+
         /*
         this.taskList = storage.getTasks();
         storage.createDirectory();
@@ -526,39 +528,39 @@ public class Duke extends Application {
         /*
         ui = new Ui();
         */
-        
+
         ui = new Ui(input);
-        /*        
+        /*
         ui.showWelcome();
         Label greeting = new Label(storeString.toString());
         */
         //System.out.flush();
         System.setOut(oldPrintStream);
         //System.out.println(storeString.toString());
-       
+
         storeString = new ByteArrayOutputStream();
         printStream = new PrintStream(storeString);
         System.setOut(printStream);
-        
+
 
         taskList = ui.execute(taskList);
-         
+
         System.out.flush();
         System.setOut(oldPrintStream);
         //System.out.println(storeString.toString());
 
         //storage.writeToFile(taskList.toString());
-        
+
         return storeString.toString();
 
     }
-    
-    /*
-    public static void main(String[] args) {
-        Duke duke = new Duke();
-        duke.moreOop();
-    }
-    */
+//
+//    /*
+//    public static void main(String[] args) {
+//        Duke duke = new Duke();
+//        duke.moreOop();
+//    }
+//    */
     
     
 }
