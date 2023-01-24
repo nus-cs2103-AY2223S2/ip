@@ -4,6 +4,10 @@ import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
+
 import Exceptions.*;
 
 public class Duke {
@@ -42,8 +46,10 @@ public class Duke {
                 } catch (IOException e) {
                     System.out.println("Unable to save data, please restart Duke to try again");
                     System.exit(1);
+                } catch (DateTimeParseException e) {
+                    System.out.println("Date must be entered in the format dd/MM/yyyy");
                 }
-            } else if (message.startsWith("delete")) {
+            } else if(message.startsWith("delete")) {
                 try {
                     deleteTask(message);
                 } catch(TaskNotFoundException e) {
@@ -59,7 +65,7 @@ public class Duke {
     }
 
     private static void addNewTask(String message)
-            throws TaskNoDescriptionException, NotEnoughArgumentsException, IOException {
+            throws TaskNoDescriptionException, NotEnoughArgumentsException, IOException, DateNotInSequenceException {
         Task task;
         if (message.startsWith("todo")) {
             String info = message.substring(4).trim();
@@ -76,7 +82,8 @@ public class Duke {
             try {
                 String[] infoParts = info.split("/", 2);
                 String description = infoParts[0], by = infoParts[1].substring(2).trim();
-                task = new Deadline(description, by);
+                LocalDate byDate = LocalDate.parse(by, DateTimeFormatter.ofPattern("d/MM/yyyy"));
+                task = new Deadline(description, byDate);
             } catch (ArrayIndexOutOfBoundsException e) {
                 throw(new NotEnoughArgumentsException("☹ OOPS!!! Deadline requires a date after the description."));
             }
@@ -87,14 +94,18 @@ public class Duke {
             }
 
             try {
-                String[] infoParts = info.split("/", 3);
+                String[] infoParts = info.split(" /", 3);
                 String description = infoParts[0],
-                       from = infoParts[1].substring(4).trim(),
-                       to = infoParts[2].substring(2).trim();
-
-                task = new Event(description, from , to);
-            } catch (ArrayIndexOutOfBoundsException e) {
-                throw(new NotEnoughArgumentsException("☹ OOPS!!! Event requires a start time and an end time."));
+                        from = infoParts[1].substring(5).trim(),
+                        to = infoParts[2].substring(3).trim();
+                LocalDate fromDate = LocalDate.parse(from, DateTimeFormatter.ofPattern("d/MM/yyyy")),
+                          toDate = LocalDate.parse(to, DateTimeFormatter.ofPattern("d/MM/yyyy"));
+                if (toDate.isBefore(fromDate)) {
+                    throw new DateNotInSequenceException("Event end date must be earlier than start date");
+                }
+                task = new Event(description, fromDate , toDate);
+            } catch(ArrayIndexOutOfBoundsException e) {
+                throw (new NotEnoughArgumentsException("☹ OOPS!!! Event requires a start time and an end time."));
             }
         } else {
             // this should only happen when addNewTask is being called in the wrong place
@@ -163,6 +174,10 @@ public class Duke {
             System.out.println("Data loaded successfully");
         } catch (IOException e) {
             System.out.println("An error occurred in loading existing data");
+        } catch (DateTimeParseException e) {
+            System.out.println("Saved data file is corrupted");
+            System.out.println("Delete file data/task.txt and restart Duke");
+            System.exit(1);
         } finally {
             System.out.println("________________________________");
         }
@@ -177,10 +192,14 @@ public class Duke {
             list.add(new Todo(taskDescription));
         } else if (taskType.equals("D")) {
             String[] taskInfo = taskDescription.split(" - ");
-            list.add(new Deadline(taskInfo[0], taskInfo[1]));
+            LocalDate byDate = LocalDate.parse(taskInfo[1].trim(), DateTimeFormatter.ofPattern("d/MM/yyyy"));
+            list.add(new Deadline(taskInfo[0], byDate));
         } else if (taskType.equals("E")) {
             String[] taskInfo = taskDescription.split("-");
-            list.add(new Event(taskInfo[0], taskInfo[1], taskInfo[2]));
+            System.out.println(taskInfo[1]);
+            LocalDate fromDate = LocalDate.parse(taskInfo[1].trim(), DateTimeFormatter.ofPattern("d/MM/yyyy"));
+            LocalDate toDate = LocalDate.parse(taskInfo[2].trim(), DateTimeFormatter.ofPattern("d/MM/yyyy"));
+            list.add(new Event(taskInfo[0], fromDate, toDate));
         }
 
         if (marked.equals("1")) {

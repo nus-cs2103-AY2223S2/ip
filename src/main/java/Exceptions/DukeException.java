@@ -1,6 +1,6 @@
 package Exceptions;
 
-public class DukeException extends RuntimeException {
+public abstract class DukeException extends RuntimeException {
     public DukeException(String errorMessage) {
         super(errorMessage);
     }
