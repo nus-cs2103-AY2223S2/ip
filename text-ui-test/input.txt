@@ -19,5 +19,5 @@ event play a chess /to Tues 1pm
 list
 delete 3
 datetime 2022-05-06
-find borrow
+find book
 bye
