@@ -5,10 +5,10 @@ public class Duke {
     public static void main(String[] args) {
         String welcomeMessage = "============================================================\n"
                 + "Welcome to Duchess\n"
-                + "============================================================";
+                + "============================================================\n";
         System.out.print(welcomeMessage);
 
-        TaskList taskList = new TaskList();
+        TaskList taskList = DukeFileManager.loadTaskListFromDisk();
         String userPrompt = "\n>> ";
         Scanner sc = new Scanner(System.in);
 
@@ -58,6 +58,9 @@ public class Duke {
                     sc.close();
                     return;
                 }
+
+                // save taskList to disk after every command
+                DukeFileManager.saveTaskListToDisk(taskList);
             } catch (DukeException error) {
                 System.out.println(error.getMessage());
             }

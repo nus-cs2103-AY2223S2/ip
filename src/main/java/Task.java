@@ -10,12 +10,15 @@ public class Task {
 
     public void markDone() {
         this.isDone = true;
-        System.out.println(this);
     }
 
     public void unmarkDone() {
         this.isDone = false;
-        System.out.println(this);
+    }
+
+    public String toDukeFileString() {
+        String isDoneString = this.isDone ? "1" : "0";
+        return isDoneString + "|" + this.name;
     }
 
     @Override
