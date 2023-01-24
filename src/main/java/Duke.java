@@ -27,7 +27,7 @@ public class Duke {
                     }
                     case MARK: {
                         if (echo.length() < 6 || !echo.matches("mark\\s+\\d+")) {
-                            throw new MissingArgumentException("<mark> command should receive a task number!", "mark");
+                            throw new DukeException("<mark> command should receive a task number!");
                         }
                         int taskNum = Integer.parseInt(echo.substring(5).trim());
                         if (1 <= taskNum && taskNum <= tasks.size()) { // otherwise, invalid mark and ignore for now
@@ -40,7 +40,7 @@ public class Duke {
                     }
                     case UNMARK: {
                         if (echo.length() < 8 || !echo.matches("unmark\\s+\\d+")) {
-                            throw new MissingArgumentException("<unmark> command should receive a task number!", "unmark");
+                            throw new DukeException("<unmark> command should receive a task number!");
                         }
                         int taskNum = Integer.parseInt(echo.substring(7).trim());
                         if (1 <= taskNum && taskNum <= tasks.size()) { // otherwise, invalid unmark and ignore for now
@@ -53,7 +53,7 @@ public class Duke {
                     }
                     case DELETE: {
                         if (echo.length() < 8 || !echo.matches("delete\\s+\\d+")) {
-                            throw new MissingArgumentException("<delete> command should receive a task number!", "delete");
+                            throw new DukeException("<delete> command should receive a task number!");
                         }
                         int taskNum = Integer.parseInt(echo.substring(7).trim());
                         if (1 <= taskNum && taskNum <= tasks.size()) {
@@ -69,7 +69,7 @@ public class Duke {
                     }
                     case TODO: {
                         if (echo.length() < 6 || !echo.matches("todo\\s.*")) {
-                            throw new MissingArgumentException("The description of a <todo> cannot be empty!", "todo");
+                            throw new DukeException("The description of a <todo> cannot be empty!");
                         }
                         String info = echo.substring(5).trim(); // remove any trailing spaces at the front
                         task = new ToDo(info); // pass description of todo
@@ -77,41 +77,41 @@ public class Duke {
                     }
                     case DEADLINE: {
                         if (echo.length() < 10) {
-                            throw new MissingArgumentException("The description of a <deadline> cannot be empty!", "deadline");
+                            throw new DukeException("The description of a <deadline> cannot be empty!");
                         }
                         String info = echo.substring(9);
                         if (!info.matches(".+ /by .+")) { // info.contains(" /by ")
-                            throw new MissingArgumentException("<deadline> is to be used as such: $ deadline <des> /by <YYYY-MM-DD>", "deadline");
+                            throw new DukeException("<deadline> is to be used as such: $ deadline <des> /by <YYYY-MM-DD>");
                         }
                         String[] sp = info.split(" /by ");
                         if (sp[1].trim().equals("")) {
-                            throw new MissingArgumentException("<deadline> is missing <YYYY-MM-DD>", "deadline");
+                            throw new DukeException("<deadline> is missing <YYYY-MM-DD>");
                         }
                         task = new Deadline(sp[0].trim(), sp[1].trim()); // remove any trailing white sp
                         break;
                     }
                     case EVENT: {
                         if (echo.length() < 7) {
-                            throw new MissingArgumentException("The description of a <event> cannot be empty!", "event");
+                            throw new DukeException("The description of a <event> cannot be empty!");
                         }
                         String info = echo.substring(6);
                         if (!info.matches(".+ /from .+ /to .+")) { // (!info.contains(" /from ") || !info.contains(" /to "))
-                            throw new MissingArgumentException("<event> is to be used as such: $ event <des> /from <YYYY-MM-DD> /to <YYYY-MM-DD>", "event");
+                            throw new DukeException("<event> is to be used as such: $ event <des> /from <YYYY-MM-DD> /to <YYYY-MM-DD>");
                         }
                         String[] sp = info.split(" /from ");
                         if (sp[1].trim().equals("")) {
-                            throw new MissingArgumentException("<event> is missing start-time <YYYY-MM-DD>", "event");
+                            throw new DukeException("<event> is missing start-time <YYYY-MM-DD>");
                         }
                         String[] time = sp[1].split(" /to ");
                         if (time[1].trim().equals("")) {
-                            throw new MissingArgumentException("<event> is missing end-time <YYYY-MM-DD>", "event");
+                            throw new DukeException("<event> is missing end-time <YYYY-MM-DD>");
                         }
                         task = new Event(sp[0].trim(), time[0].trim(), time[1].trim()); // remove any trailing white sp
                         break;
                     }
                     case GETEVENTSON: {
                         if (echo.length() < 12) {
-                            throw new MissingArgumentException("Date input in the format of YYYY-MM-DD required!", "geteventson");
+                            throw new DukeException("Date input in the format of YYYY-MM-DD required!");
                         }
                         LocalDate date = LocalDate.parse(echo.substring(11).trim());
                         System.out.println(
@@ -131,13 +131,7 @@ public class Duke {
                             " task(s) in the list."));
                 }
                 fileManager.save(tasks); // save regardless
-            } catch (UnknownCommandException e) {
-                System.out.println(Span.format(e.toString()));
-            } catch (MissingArgumentException e) {
-                System.out.println(Span.format(e.toString()));
-            } catch (InvalidIndexException e) {
-                System.out.println(Span.format(e.toString()));
-            } catch (InvalidDateException e) {
+            } catch (DukeException e) {
                 System.out.println(Span.format(e.toString()));
             }
         }
