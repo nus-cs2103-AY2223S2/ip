@@ -73,6 +73,8 @@ public abstract class Task {
      * @return Boolean indicating whether the task description includes the keyword.
      */
     public boolean hasKeyword(String keyword) {
-        return this.taskDescription.contains(keyword);
+        return this.taskDescription
+                .toLowerCase()
+                .contains(keyword.toLowerCase());
     }
 }

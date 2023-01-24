@@ -98,7 +98,9 @@ public class TaskList {
      * @return String containing all added tasks with the keyword in their description
      */
     public String getKeywordString(String keyword) {
-        StringBuilder stringBuilder = new StringBuilder();
+        StringBuilder stringBuilder = new StringBuilder("Here are the tasks in your list with keyword [" + keyword +
+                "] in " +
+                "their description:\n");
         int taskIndex = 1;
         int numTasksWithKeyword = 0;
         for (Task task : tasks) {
