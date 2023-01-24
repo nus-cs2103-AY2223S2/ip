@@ -19,3 +19,4 @@ Features:
 - [x] Manage task
 - [X] Reminders
 - [X] User Interface
+- [] Undo Feature (Partially functional and comming soon...)
