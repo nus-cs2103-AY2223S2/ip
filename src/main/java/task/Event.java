@@ -2,8 +2,6 @@ package task;
 
 import datetime.DateTime;
 
-import java.util.Date;
-
 /**
  * A task with a starting and ending date and time.
  */

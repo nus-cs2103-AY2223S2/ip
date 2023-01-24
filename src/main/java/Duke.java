@@ -1,7 +1,10 @@
 import command.Command;
 
+import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.Scanner;
+
+import storage.Storage;
 
 import task.Task;
 import task.TaskList;
@@ -10,22 +13,28 @@ import task.TaskList;
  * Duke command line tool that helps to track tasks.
  */
 public class Duke {
-    /** Scanner used by each duke */
-    private final Scanner scanner;
-    /** Whether the duke is still running or has been commanded to end */
+    /** Whether the duke is running or has been commanded to stop running */
     private boolean isRunning;
 
-    /** Task list */
-    private final TaskList tasks;
+    /** Storage to load and save tasks on disk */
+    private final Storage storage;
+
+    /** Task list to store tasks in memory */
+    private TaskList tasks;
 
     /**
      * Constructs a duke.
      */
     public Duke() {
-        scanner = new Scanner(System.in);
+        storage = new Storage("./data/tasks.txt");
         isRunning = false;
         System.out.println("Hello!");
-        tasks = new TaskList("./data/tasks.txt");
+        try {
+            tasks = new TaskList(storage.getScanner());
+        } catch (FileNotFoundException e) {
+            System.out.println("Task list not found on disk, creating empty task list");
+            tasks = new TaskList();
+        }
     }
 
     /**
@@ -42,6 +51,7 @@ public class Duke {
      * Runs the duke.
      */
     public void run() {
+        Scanner scanner = new Scanner(System.in);
         isRunning = true;
         System.out.println("Awaiting commands...");
         while (isRunning) {
@@ -51,9 +61,15 @@ public class Duke {
                 System.out.println(e.getMessage());
             }
         }
+        scanner.close();
         exit();
     }
 
+    /**
+     * Executes a command.
+     *
+     * @param command Command to execute.
+     */
     private void execute(Command command) {
         switch (command.getName()) {
         case NO_OP:
@@ -81,10 +97,13 @@ public class Duke {
         }
     }
 
+    /**
+     * Cleans up the duke to exit.
+     * Save tasks to the disk.
+     */
     private void exit() {
-        scanner.close();
         try {
-            tasks.save();
+            tasks.save(storage.getFileWriter());
         } catch (IOException e) {
             System.out.println("Error saving tasks to disk!");
         }

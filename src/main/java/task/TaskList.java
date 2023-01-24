@@ -2,8 +2,6 @@ package task;
 
 import command.Command;
 
-import java.io.File;
-import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -17,28 +15,30 @@ public class TaskList {
     /** ArrayList of tasks */
     private final ArrayList<Task> tasks;
 
-    /** File path to retrieve and save tasks */
-    private final String filePath;
+    /**
+     * Constructs a new task list.
+     */
+    public TaskList() {
+        tasks = new ArrayList<>();
+    }
 
     /**
-     * Constructs a new task list and populate it with tasks saved on disk.
+     * Constructs a new task list and populate it with tasks from a scanner.
      *
-     * @param filePath File path to read saved tasks from.
+     * @param scanner Scanner to read saved tasks from.
      */
-    public TaskList(String filePath) {
+    public TaskList(Scanner scanner) {
         tasks = new ArrayList<>();
-        this.filePath = filePath;
-        File file = new File(filePath);
-        try {
-            Scanner scanner = new Scanner(file);
-            while (scanner.hasNextLine()) {
-                parseTask(scanner.nextLine());
-            }
-        } catch (FileNotFoundException e) {
-            System.out.println("Task list not found on disk, creating empty list");
+        while (scanner.hasNextLine()) {
+            parseTask(scanner.nextLine());
         }
     }
 
+    /**
+     * Parses a string read from disk to reconstruct tasks.
+     *
+     * @param input Input string.
+     */
     private void parseTask(String input) {
         try {
             execute(new Command(input));
@@ -94,10 +94,7 @@ public class TaskList {
      *
      * @throws IOException when there is an exception when writing to file or directory.
      */
-    public void save() throws IOException {
-        File file = new File(filePath);
-        file.getParentFile().mkdirs();
-        FileWriter fileWriter = new FileWriter(file);
+    public void save(FileWriter fileWriter) throws IOException {
         for (int i = 0; i < tasks.size(); i++) {
             fileWriter.write(tasks.get(i).getRecreateCommand(i));
             fileWriter.write("\n");

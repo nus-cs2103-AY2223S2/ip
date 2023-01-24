@@ -1,5 +1,5 @@
 Hello!
-Task list not found on disk, creating empty list
+Task list not found on disk, creating empty task list
 Awaiting commands...
 Added task: [T][ ] task1
 0. [T][ ] task1
