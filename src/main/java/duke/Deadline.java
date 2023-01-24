@@ -1,4 +1,5 @@
 package duke;
+
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
@@ -12,8 +13,9 @@ public class Deadline extends Task {
 
     /**
      * Creates a Deadline Task
+     *
      * @param description in String format.
-     * @param by Which is a LocalDate.
+     * @param by          Which is a LocalDate.
      */
     public Deadline(String description, LocalDate by) {
         super(description);
@@ -22,6 +24,7 @@ public class Deadline extends Task {
 
     /**
      * Formats the LocalDate deadline into 23/05/2019 format.
+     *
      * @return String output for listing the tasks
      */
     @Override
@@ -32,12 +35,13 @@ public class Deadline extends Task {
 
     /**
      * Formats the LocalDate deadline into 23-05-2019 format.
+     *
      * @return String output for storing in the  hard disk text file.
      */
     @Override
     public String toFileString() {
         String formattedDate = this.by.format(DateTimeFormatter.ofPattern("dd-MM-yyyy"));
-        return "D | " + super.toFileString() + " | " + formattedDate+ "\n";
+        return "D | " + super.toFileString() + " | " + formattedDate + "\n";
     }
 }
 
