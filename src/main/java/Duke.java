@@ -69,49 +69,49 @@ public class Duke {
             Action action = Action.valueOf(splitInput[0]);
 
             switch (action) {
-                case todo:
-                    if (splitInput.length < 2) {
-                        throw new DukeException("The description of a todo cannot be empty.");
-                    }
-                    todo(input.split(" ", 2)[1]);
-                    break;
-                case deadline:
-                    if (splitInput.length < 2) {
-                        throw new DukeException("The description of a deadline cannot be empty.");
-                    }
-                    deadline(input.split(" ", 2)[1]);
-                    break;
-                case event:
-                    if (splitInput.length < 2) {
-                        throw new DukeException("The description of a event cannot be empty.");
-                    }
-                    event(input.split(" ", 2)[1]);
-                    break;
-                case list:
-                    list();
-                    break;
-                case mark:
-                    if (splitInput.length < 2) {
-                        throw new DukeException("The task index cannot be empty.");
-                    }
-                    mark(splitInput[1]);
-                    break;
-                case unmark:
-                    if (splitInput.length < 2) {
-                        throw new DukeException("The task index cannot be empty.");
-                    }
-                    unmark(splitInput[1]);
-                    break;
-                case delete:
-                    if (splitInput.length < 2) {
-                        throw new DukeException("The task index cannot be empty.");
-                    }
-                    delete(splitInput[1]);
-                    break;
-                case bye:
-                    exit();
-                    exitStatus = true;
-                    break;
+            case todo:
+                if (splitInput.length < 2) {
+                    throw new DukeException("The description of a todo cannot be empty.");
+                }
+                todo(input.split(" ", 2)[1]);
+                break;
+            case deadline:
+                if (splitInput.length < 2) {
+                    throw new DukeException("The description of a deadline cannot be empty.");
+                }
+                deadline(input.split(" ", 2)[1]);
+                break;
+            case event:
+                if (splitInput.length < 2) {
+                    throw new DukeException("The description of a event cannot be empty.");
+                }
+                event(input.split(" ", 2)[1]);
+                break;
+            case list:
+                list();
+                break;
+            case mark:
+                if (splitInput.length < 2) {
+                    throw new DukeException("The task index cannot be empty.");
+                }
+                mark(splitInput[1]);
+                break;
+            case unmark:
+                if (splitInput.length < 2) {
+                    throw new DukeException("The task index cannot be empty.");
+                }
+                unmark(splitInput[1]);
+                break;
+            case delete:
+                if (splitInput.length < 2) {
+                    throw new DukeException("The task index cannot be empty.");
+                }
+                delete(splitInput[1]);
+                break;
+            case bye:
+                exit();
+                exitStatus = true;
+                break;
             }
         } catch (IllegalArgumentException e) {
             throw new DukeException("☹ I'm sorry, but Fake Duke doesn't know what that means :-(");
