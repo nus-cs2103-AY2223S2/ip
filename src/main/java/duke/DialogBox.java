@@ -26,8 +26,6 @@ public class DialogBox extends HBox {
     @FXML
     private ImageView displayPicture;
 
-    Circle clipImage = new Circle(70, 43, 40);
-
     private DialogBox(String text, Image img) {
         try {
             FXMLLoader fxmlLoader = new FXMLLoader(MainWindow.class.getResource("/view/DialogBox.fxml"));
@@ -39,7 +37,7 @@ public class DialogBox extends HBox {
         }
 
         dialog.setText(text);
-        displayPicture.setClip(clipImage);
+        displayPicture.setClip(new Circle(70, 43, 40));
         displayPicture.setImage(img);
         this.setAlignment(Pos.TOP_RIGHT);
         this.setSpacing(15.0);
