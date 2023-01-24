@@ -1,7 +1,7 @@
 import duke.Duke;
 
 /**
- * The main class
+ * The main class 
  */
 public class Main {
     /**
