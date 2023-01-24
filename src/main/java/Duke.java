@@ -141,6 +141,7 @@ public class Duke {
     }
 
     static void addDeadline(ArrayList<Task> tasks, String input) throws DukeException {
+        // todo: add datetime input validation, should be date format
         String rest = input.substring(8);
         if (rest.isEmpty()) {
             throw new DukeInvalidArgumentException("Hey! You didn't give me a task description.");
@@ -153,6 +154,7 @@ public class Duke {
 
     static void addEvent(ArrayList<Task> tasks, String input) throws DukeException {
         // to clean up
+        // todo: add datetime input validation, should be date format
         String rest = input.substring(8);
         if (rest.isEmpty()) {
             throw new DukeInvalidArgumentException("Hey! You didn't give me a task description.");
