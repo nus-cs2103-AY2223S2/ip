@@ -45,11 +45,13 @@ public class Duke {
                 System.out.println("Pleasure doing business with you.");
                 end = true;
                 break;
+                //Check if there is anything other than bye
             case "list":
                 for (int i = 1; i <= list.size(); i++){
                     System.out.println(i + ". " + list.get(i-1));
                 }
                 break;
+                //Check if the list input contains anything else other than list
             case "mark":
                 int index = parseInt(inputAnalyzed[1]);
                 if (list.size() >= index) {
@@ -57,6 +59,7 @@ public class Duke {
                     System.out.println("It's all good man, just marked this task as done:\n"
                             + list.get(index - 1).toString());
                 }
+                //array out of bounds, numberformatexception
                 break;
             case "unmark":
                 int index1 = parseInt(inputAnalyzed[1]);
@@ -77,10 +80,14 @@ public class Duke {
                 break;
             case "todo":
                 String[] todoAnalyze = input.split("todo ");
-                Todo newTodo = new Todo(todoAnalyze[1].trim());
-                list.add(newTodo);
-                System.out.println("Got it sir, just added this task to the list.\n"
-                        + newTodo + "\nYou now have " + list.size() + " tasks. Anything else?");
+                try {
+                    Todo newTodo = new Todo(todoAnalyze[1].trim());
+                    list.add(newTodo);
+                    System.out.println("Got it sir, just added this task to the list.\n"
+                            + newTodo);
+                } catch (ArrayIndexOutOfBoundsException e) {
+                    System.out.println("Whoops, you need to put in what you're about to do!");
+                }
                 break;
             case "event":
                 String[] eventAnalyze = input.split("/from");
