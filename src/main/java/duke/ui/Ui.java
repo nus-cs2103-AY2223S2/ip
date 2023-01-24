@@ -1,3 +1,5 @@
+package duke.ui;
+
 public class Ui {
 
     private static final String LINE =

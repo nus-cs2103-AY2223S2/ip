@@ -1,4 +1,8 @@
-import exceptions.DukeException;
+package duke.parser;
+
+import duke.enums.Commands;
+import duke.enums.TaskTypes;
+import duke.exceptions.DukeException;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeParseException;
