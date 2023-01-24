@@ -1,7 +1,8 @@
-import java.time.LocalDate;
+package connor.task;
+
 import java.time.LocalDateTime;
 
-abstract class Task {
+public abstract class Task {
     private String taskName;
     private boolean isDone;
 

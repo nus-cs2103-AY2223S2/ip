@@ -1,8 +1,10 @@
-import java.io.File;
-import java.io.FileWriter;
+package connor.task;
+
+import connor.storage.Storage;
+import connor.ui.Ui;
+
 import java.io.IOException;
 import java.util.LinkedList;
-import java.util.Scanner;
 
 public class TaskList {
     private LinkedList<Task> tasks;

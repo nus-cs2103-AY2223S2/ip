@@ -1,3 +1,5 @@
+package connor.storage;
+
 public class CorruptedDataException extends Exception {
 
     public CorruptedDataException() {

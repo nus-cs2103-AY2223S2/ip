@@ -1,3 +1,5 @@
+package connor.ui;
+
 public class Ui {
     public String LINE = "        ________________________________________________________\n";
 
