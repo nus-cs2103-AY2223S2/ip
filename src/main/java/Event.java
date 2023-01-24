@@ -8,6 +8,11 @@ public class Event extends Task {
     }
 
     @Override
+    public String toEncodedString() {
+        return "[" + TaskType.E + "]" + super.toString() + " /from: " + this.startDate + " /to: " + this.endDate;
+    }
+
+    @Override
     public String toString() {
         return "[" + TaskType.E + "]" + super.toString() + " (from: " + this.startDate + " to: " + this.endDate + ")";
     }

@@ -1,4 +1,3 @@
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 
 public class TaskList {
@@ -40,6 +39,23 @@ public class TaskList {
 
     public String describeLength() {
         return "Now you have " + this.getLength() + " tasks in the list.";
+    }
+
+    // For storing task list in memory
+    public String toEncodedString() {
+        if (getLength() == 0) {
+            return "";
+        }
+        StringBuilder result = new StringBuilder();
+        String encodedTask;
+        for (int i = 0; i < getLength(); i++) {
+            encodedTask = taskList.get(i).toEncodedString();
+            result.append(i + 1).append(".").append(encodedTask).append("\n");
+        }
+        if (result.length() > 0) {
+            result.deleteCharAt(result.length() - 1);
+        }
+        return result.toString();
     }
 
     @Override

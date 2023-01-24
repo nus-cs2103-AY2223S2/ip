@@ -4,6 +4,11 @@ public class ToDo extends Task {
     }
 
     @Override
+    public String toEncodedString() {
+        return "[" + TaskType.T + "]" + super.toString();
+    }
+
+    @Override
     public String toString() {
         return "[" + TaskType.T + "]" + super.toString();
     }

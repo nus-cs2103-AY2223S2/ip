@@ -6,6 +6,11 @@ public class Deadline extends Task {
     }
 
     @Override
+    public String toEncodedString() {
+        return "[" + TaskType.D + "]" + super.toString() + " /by: " + this.endDate;
+    }
+
+    @Override
     public String toString() {
         return "[" + TaskType.D + "]" + super.toString() + " (by: " + this.endDate + ")";
     }
