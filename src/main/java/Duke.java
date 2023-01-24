@@ -6,6 +6,7 @@ import Tasks.Event;
 import Tasks.Task;
 import Tasks.ToDo;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Scanner;
 public class Duke {
@@ -55,7 +56,7 @@ public class Duke {
                 }
                 else if (firstWord.equals("deadline")) {
                     String st[] = s[1].split(" /by ", 2);
-                    arrL.add(new Deadline(st[0], st[1]));
+                    arrL.add(new Deadline(st[0], LocalDate.parse(st[1])));
 
                 } else if (firstWord.equals("event")) {
                     String st[] = s[1].split(" /from ", 2);
