@@ -12,9 +12,9 @@ public class Deadline extends Task {
         super(cont);
 
         DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
-        DateTimeFormatter dateTimeFormatter1 = DateTimeFormatter.ofPattern("LLL dd yyyy HH:mm");
+        DateTimeFormatter dateTimeFormatter1 = DateTimeFormatter.ofPattern("MM dd yyyy HH:mm");
         DateTimeFormatter dateOnlyFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
-        DateTimeFormatter dateOnlyFormatter1 = DateTimeFormatter.ofPattern("LLL dd yyyy");
+        DateTimeFormatter dateOnlyFormatter1 = DateTimeFormatter.ofPattern("MM dd yyyy");
         try {
             LocalDateTime dateTime = LocalDateTime.parse(time, dateTimeFormatter);
             this.time = dateTime.format(dateTimeFormatter1);
