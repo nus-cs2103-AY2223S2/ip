@@ -1,4 +1,8 @@
 import java.io.*;
+import java.time.LocalDate;
+import java.time.LocalTime;
+import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
 import java.util.Scanner;
 import java.util.regex.Pattern;
@@ -76,6 +80,7 @@ public class Chattime {
                     case "todo":
                     case "deadline":
                     case "event":
+                    case "listTime":
                         if (splitCmd.length < 2) {
                             throw new ChattimeException(String.format(NO_DESCRIPTION, command));
                         } else {
@@ -88,6 +93,9 @@ public class Chattime {
                                     break;
                                 case "event":
                                     event(splitCmd[1]);
+                                    break;
+                                case "listTime":
+                                    listTime(splitCmd[1]);
                                     break;
                             }
                         }
@@ -128,7 +136,7 @@ public class Chattime {
         String message = WAITING_TASK;
 
         for (Task task : storeList) {
-            message = message.concat(String.format("\n     %d. %s", i, task.toString()));
+            message = message.concat(String.format("\n     %d. %s", i, task));
             i++;
         }
 
@@ -144,8 +152,8 @@ public class Chattime {
     public static int checkInt(String content, String command) throws ChattimeException {
         if (Pattern.matches("^[0-9]*$", content)) {
             int index = Integer.parseInt(content);
-            if (index > Task.count) {
-                throw new ChattimeException(String.format(IDX_OUT_OF_BOUND, Task.count));
+            if (index > Task.getCount()) {
+                throw new ChattimeException(String.format(IDX_OUT_OF_BOUND, Task.getCount()));
             } else {
                 return index;
             }
@@ -158,7 +166,9 @@ public class Chattime {
         int index;
         try {
             index = checkInt(context, "mark");
-            storeList.get(index - 1).markAsDone();
+            Task target = storeList.get(index - 1);
+            target.markAsDone();
+            target.doneMessage();
             updateFile(index, storeList.get(index - 1));
         } catch (ChattimeException e) {
             replyUser(e.getMessage());
@@ -169,7 +179,9 @@ public class Chattime {
         int index;
         try {
             index = checkInt(context, "unmark");
-            storeList.get(index - 1).unmarkDone();
+            Task target = storeList.get(index - 1);
+            target.unmarkDone();
+            target.notDoneMessage();
             updateFile(index, storeList.get(index - 1));
         } catch (ChattimeException e) {
             replyUser(e.getMessage());
@@ -199,10 +211,21 @@ public class Chattime {
             throw new ChattimeException(String.format(MISSED_PARAM, "deadline", "deadline (task) /by (describe)"));
         }
         String task = splitBy[0];
-        String by = splitBy[1];
+        Deadline deadlineTask;
+        try {
+            String[] time = splitBy[1].split(" ", 2);
+            LocalDate byDate = LocalDate.parse(time[0]);
+            if (time.length == 1) {
+                deadlineTask = new Deadline(task, byDate, null);
+            } else {
+                LocalTime byTime = LocalTime.parse(time[1]);
+                deadlineTask = new Deadline(task, byDate, byTime);
+            }
 
-        Deadline deadlineTask = new Deadline(task, by);
-        addTask(deadlineTask);
+            addTask(deadlineTask);
+        } catch (DateTimeParseException e) {
+            System.err.println("OOPS!!! Please enter date and time in format yyyy-mm-dd or yyyy-mm-dd hh:mm");
+        }
     }
 
     public static void event(String content) throws ChattimeException {
@@ -214,16 +237,50 @@ public class Chattime {
                     String.format(MISSED_PARAM, "event", "event (task) /from (describe 1) /to (describe 2)"));
         }
         String[] splitFrom = splitTask[1].split(" /to ", 2);
-        String from = splitFrom[0];
 
         if (splitFrom.length < 2 || splitFrom[1].equals("")) {
             throw new ChattimeException(
                     String.format(MISSED_PARAM, "event", "event (task) /from (describe 1) /to (describe 2)"));
         }
-        String to = splitFrom[1];
+        try {
+            String[] from = splitFrom[0].split(" ", 2);
+            String[] to = splitFrom[1].split(" ", 2);
+            LocalDate fromDate = LocalDate.parse(from[0]);
+            LocalTime fromTime = LocalTime.parse(from[1]);
+            LocalDate toDate = LocalDate.parse(to[0]);
+            LocalTime toTime = LocalTime.parse(to[1]);
 
-        Event eventTask = new Event(task, from, to);
-        addTask(eventTask);
+            Event eventTask = new Event(task, fromDate, fromTime, toDate, toTime);
+            addTask(eventTask);
+        } catch (DateTimeParseException e) {
+            System.err.println("OOPS!!! Please enter both date and time in format yyyy-mm-dd hh:mm");
+        }
+    }
+
+    public static void listTime(String content) {
+        try {
+            LocalDate date = LocalDate.parse(content);
+            int i = 1, total = 0, pending = 0;
+            String message = "I've sorted the task(s) that have deadlines / take place on " +
+                    date.format(DateTimeFormatter.ofPattern("MMM dd yyyy ")) + "for you:";
+
+            for (Task task : storeList) {
+                if (task.onDate(date)) {
+                    message = message.concat(String.format("\n     %d. %s", i, task));
+                    i++;
+                    total++;
+                    if (!task.getTaskStatus()) {
+                        pending++;
+                    }
+                }
+            }
+
+            message += "\n     You have " + total + " task(s) on this day. With " + pending + " task(s) to go.";
+
+            replyUser(message);
+        } catch (DateTimeParseException e) {
+            System.err.println("OOPS!!! Please enter date and time in format yyyy-mm-dd hhmm");
+        }
     }
 
     public static void exit() {
@@ -232,7 +289,7 @@ public class Chattime {
     
     public static void openFile() {
         try {
-            storeFile = new File("testData/chattimeTask.txt");
+            storeFile = new File("data/chattimeTask.txt");
             if (!storeFile.exists()) {
                 if (!storeFile.getParentFile().exists()) {
                     if(!storeFile.getParentFile().mkdirs()) {
@@ -255,23 +312,38 @@ public class Chattime {
             String task = loader.readLine();
 
             while (task != null) {
-                String[] taskSplit = task.split(" @ ", 5);
-                Task inputTask;
+                String[] taskSplit = task.split(" @ ", 7);
+                Task inputTask = null;
                 switch (taskSplit[0]) {
                 case "T":
                     inputTask = new Todo(taskSplit[2]);
                     break;
                 case "D":
-                    inputTask = new Deadline(taskSplit[2], taskSplit[3]);
+                    try {
+                        LocalDate byDate = LocalDate.parse(taskSplit[3]);
+                        LocalTime byTime = (taskSplit[4].equals("0") ? null : LocalTime.parse(taskSplit[4]));
+                        inputTask = new Deadline(taskSplit[2], byDate, byTime);
+                    } catch (DateTimeParseException e) {
+                        System.err.println("OOPS!!! Datetime error in storage!");
+                    }
                     break;
                 case "E":
-                    inputTask = new Event(taskSplit[2], taskSplit[3], taskSplit[4]);
+                    try {
+                        LocalDate fromDate = LocalDate.parse(taskSplit[3]);
+                        LocalTime fromTime = LocalTime.parse(taskSplit[4]);
+                        LocalDate toDate = LocalDate.parse(taskSplit[5]);
+                        LocalTime toTime = LocalTime.parse(taskSplit[6]);
+
+                        inputTask = new Event(taskSplit[2], fromDate, fromTime, toDate, toTime);
+                    } catch (DateTimeParseException e) {
+                        System.err.println("OOPS!!! Datetime error in storage!");
+                    }
                     break;
                 default:
                     throw new ChattimeException("Task type error : " + taskSplit[0]);
                 }
-                if (taskSplit[1].equals("1")) {
-                    inputTask.isDone = true;
+                if (inputTask != null && taskSplit[1].equals("1")) {
+                    inputTask.markAsDone();
                 }
                 storeList.add(inputTask);
                 task = loader.readLine();
