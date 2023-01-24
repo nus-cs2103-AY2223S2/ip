@@ -2,18 +2,30 @@ package duke;
 
 import duke.taskType.TaskList;
 import duke.commands.*;
-import duke.*;
+
+/**
+ * The main class of this task list management bot.
+ */
 public class Duke {
     private TaskList lst;
     private Ui ui;
     private Storage storage;
 
+    /**
+     * The default and only constructor of Duke class.
+     * Initialize UI, Storage, and the list to store tasks.
+     *
+     * @param filePath
+     */
     public Duke(String filePath) {
         this.ui = new Ui();
         this.storage = new Storage(filePath);
         this.lst = storage.load();
     }
 
+    /**
+     * The main method to run the bot.
+     */
     public void run() {
         ui.hello();
 
@@ -28,6 +40,11 @@ public class Duke {
         }
     }
 
+    /**
+     * The main() method.
+     *
+     * @param args
+     */
     public static void main(String[] args) {
         new Duke("tasklist.txt").run();
     }

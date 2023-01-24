@@ -5,9 +5,18 @@ import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 
+/**
+ * The class for Deadline tasks.
+ */
 public class Deadline extends Task {
     protected String time;
 
+    /**
+     * The constructor for Deadline class.
+     *
+     * @param cont the content of the task
+     * @param time the deadline of the task
+     */
     public Deadline(String cont, String time) {
         super(cont);
 
@@ -28,6 +37,11 @@ public class Deadline extends Task {
         }
     }
 
+    /**
+     * Override the toString() method to show the information of the Deadline task.
+     *
+     * @return a String that shows the information of the Deadline task
+     */
     @Override
     public String toString() {
         return "[D]" + super.toString() + " (by: " + this.time + ")";

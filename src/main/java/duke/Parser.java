@@ -2,11 +2,20 @@ package duke;
 
 import duke.commands.*;
 
+/**
+ * The class used to identify user commands.
+ */
 public class Parser {
     private enum CMD {
         BYE, LIST, MARK, UNMARK, TODO, DEADLINE, EVENT, DELETE;
     }
 
+    /**
+     * To identify which command the user typed.
+     *
+     * @param cmdLine the whole line of command the user typed
+     * @return a Command object that is the command the user meant to type
+     */
     public static Command parse(String cmdLine) {
         try {
             CMD order = CMD.valueOf(cmdLine.split(" ")[0].toUpperCase());
