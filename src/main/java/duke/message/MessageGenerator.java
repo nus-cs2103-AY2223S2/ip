@@ -7,6 +7,8 @@ import duke.storage.Storage;
 import duke.task.Task;
 import duke.task.TaskList;
 
+import java.util.ArrayList;
+
 
 public class MessageGenerator {
 
@@ -61,36 +63,61 @@ public class MessageGenerator {
         return heading + this.taskList.toString();
     }
 
+    ArrayList<Task> filterTaskList(String message) {
+        String[] messageSplit = message.split(" ");
+        String messageToFilterBy = messageSplit[1];
+        ArrayList<Task> filteredList = this.taskList.filter(messageToFilterBy);
+        return filteredList;
+    }
+
+    public String filteredListToString(ArrayList<Task> filteredTaskList) {
+        String listString = "";
+        for (int i = 0; i < filteredTaskList.size(); i++) {
+            Task task = filteredTaskList.get(i);
+            listString += String.format("%d.%s\n", i + 1, task.toString());
+        }
+        return listString;
+    }
+
+    String generateFindMessage(String message) {
+        String heading = "Here are the matching tasks in your list:\n";
+        ArrayList<Task> filteredTaskList = filterTaskList(message);
+        return heading + filteredListToString(filteredTaskList);
+    }
+
     public DukeMessage generate(MessageStatus status, String message)
             throws InvalidDeadlineException, InvalidTodoException, InvalidEventException {
         Task task;
 
         switch (status) {
-        case LIST:
-            message = generateListMessage();
-            break;
-        case MARK:
-            task = processMark(message);
-            message = generateTaskMessage(status, task);
-            break;
-        case ADD:
-            task = taskList.addTask(message);
+            case LIST:
+                message = generateListMessage();
+                break;
+            case MARK:
+                task = processMark(message);
+                message = generateTaskMessage(status, task);
+                break;
+            case ADD:
+                task = taskList.addTask(message);
 
-            // Add task in storage
-            this.storage.addTask(message);
+                // Add task in storage
+                this.storage.addTask(message);
 
-            message = generateTaskMessage(status, task);
-            break;
-        case DELETE:
-            task = taskList.deleteTask(message);
+                message = generateTaskMessage(status, task);
+                break;
+            case DELETE:
+                task = taskList.deleteTask(message);
 
-            // Delete task in storage
-            this.storage.deleteTask(message);
+                // Delete task in storage
+                this.storage.deleteTask(message);
 
-            message = generateTaskMessage(status, task);
-            break;
-        default:
-            break;
+                message = generateTaskMessage(status, task);
+                break;
+            case FIND:
+                message = generateFindMessage(message);
+                break;
+            default:
+                break;
         }
         return new DukeMessage(status, message);
     }

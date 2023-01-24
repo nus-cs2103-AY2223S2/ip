@@ -36,12 +36,18 @@ public class Parser {
         return action.equals("delete");
     }
 
+    private boolean isFind(String message) {
+        String[] messageSplit = message.split(" ");
+        String action = messageSplit[0];
+        return action.equals("find");
+    }
+
     public MessageStatus process(String message) throws InvalidInputException {
 
         MessageStatus status;
         if (message.equals("bye")) {
             status = MessageStatus.END;
-        } else if (message.equals("list")){
+        } else if (message.equals("list")) {
             status = MessageStatus.LIST;
         } else if (isMark(message)) {
             status = MessageStatus.MARK;
@@ -49,6 +55,8 @@ public class Parser {
             status = MessageStatus.ADD;
         } else if (isDelete(message)) {
             status = MessageStatus.DELETE;
+        } else if (isFind(message)) {
+            status = MessageStatus.FIND;
         } else {
             throw new InvalidInputException();
         }

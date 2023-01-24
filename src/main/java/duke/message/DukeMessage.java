@@ -1,4 +1,5 @@
 package duke.message;
+
 public class DukeMessage extends Message {
 
     MessageStatus status;
@@ -14,7 +15,6 @@ public class DukeMessage extends Message {
     }
 
 
-
     @Override
     public String toString() {
         String reply;
@@ -24,6 +24,7 @@ public class DukeMessage extends Message {
             case MARK:
             case LIST:
             case DELETE:
+            case FIND:
                 reply = this.getContent();
                 break;
             case START:
