@@ -1,3 +1,4 @@
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 
 public class TaskTracker {
@@ -21,13 +22,13 @@ public class TaskTracker {
         return t;
     }
 
-    public Task AddDeadline(String taskDescription, String endDate) {
+    public Task AddDeadline(String taskDescription, LocalDateTime endDate) {
         Task t = new Deadline(taskDescription, endDate);
         tasks.add(t);
         return t;
     }
 
-    public Task AddEvent(String taskDescription, String startDate, String endDate) {
+    public Task AddEvent(String taskDescription, LocalDateTime startDate, LocalDateTime endDate) {
         Task t = new Event(taskDescription, startDate, endDate);
         tasks.add(t);
         return t;
