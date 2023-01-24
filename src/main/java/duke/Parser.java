@@ -9,6 +9,11 @@ import duke.exceptions.EventFromToNotSpecified;
 import duke.exceptions.TaskNameNotSpecified;
 
 public class Parser {
+
+    public static String parseCommandInput(String lineInput) {
+        return lineInput.split(" ")[0];
+    } 
+
     public static Optional<LocalDate> parseDate(String timeInput) {
         try {
             timeInput = timeInput.replaceAll("/","-");
