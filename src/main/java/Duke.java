@@ -45,6 +45,17 @@ public class Duke {
                         arrofStr = inData.split(" ", 2);
                     }
                     switch (arrofStr[0]) {
+                        case "delete": {
+                            int indx = Integer.parseInt(arrofStr[1]) - 1;
+                            Task toRemove = toStore.get(indx);
+                            System.out.println("Noted. I've removed this task:" + toRemove);
+                            toStore.remove(indx);
+                            taskCounter--;
+                            System.out.println("Now you have " + taskCounter + " tasks in the list.");
+                            inData = scan.nextLine();
+                            arrofStr = inData.split(" ", 2);
+                            break;
+                        }
                         case "unmark": {
                             int indx = Integer.parseInt(arrofStr[1]) - 1;
                             Task toMark = toStore.get(indx);
