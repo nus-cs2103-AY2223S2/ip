@@ -37,16 +37,16 @@ public class ListTasksCommand extends Command {
      */
     @Override
     public boolean execute() {
-        int size = this.taskList.getSize();
+        int size = taskList.getSize();
 
         if (size == 0) {
-            this.ui.replyEmptyTaskList();
+            ui.replyEmptyTaskList();
         } else {
-            this.ui.replyTotalTasks(taskList);
+            ui.replyTotalTasks(taskList);
 
             for (int i = 1; i <= size; i++) {
-                Task task = this.taskList.getTask(i);
-                this.ui.replyTaskInfo(task);
+                Task task = taskList.getTask(i);
+                ui.replyTaskInfo(task);
             }
         }
 

@@ -33,6 +33,7 @@ public class DeadlineTest {
     public void taskMarking() {
         Task task = new Deadline("read book", false, "2022-05-12");
         task.mark();
+
         assertEquals("[D][X] read book (by: May 12 2022)", task.toString());
         assertEquals("D|true|read book|2022-05-12", task.toTaskStorageString());
     }
@@ -41,6 +42,7 @@ public class DeadlineTest {
     public void taskUnmarking() {
         Task task = new Deadline("read book", true, "2022-05-12");
         task.unmark();
+
         assertEquals("[D][ ] read book (by: May 12 2022)", task.toString());
         assertEquals("D|false|read book|2022-05-12", task.toTaskStorageString());
     }

@@ -33,6 +33,7 @@ public class TodoTest {
     public void taskMarking() {
         Task task = new Todo("read book", false);
         task.mark();
+
         assertEquals("[T][X] read book", task.toString());
         assertEquals("T|true|read book", task.toTaskStorageString());
     }
@@ -41,6 +42,7 @@ public class TodoTest {
     public void taskUnmarking() {
         Task task = new Todo("read book", true);
         task.unmark();
+
         assertEquals("[T][ ] read book", task.toString());
         assertEquals("T|false|read book", task.toTaskStorageString());
     }

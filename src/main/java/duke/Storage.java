@@ -35,11 +35,13 @@ public class Storage {
      * @throws IOException If an I/O error occurs.
      */
     public Storage(String path) throws IOException {
-        this.file = new File(path);
-        this.file.getParentFile().mkdirs();
-        this.file.createNewFile();
-        this.writer = new BufferedWriter(new FileWriter(path, true));
-        this.reader = new BufferedReader(new FileReader(path));
+        file = new File(path);
+
+        file.getParentFile().mkdirs();
+        file.createNewFile();
+
+        writer = new BufferedWriter(new FileWriter(path, true));
+        reader = new BufferedReader(new FileReader(path));
     }
 
     /**
@@ -48,7 +50,7 @@ public class Storage {
      * @return List of tasks from storage.
      * @throws IOException If an I/O error occurs.
      */
-    public ArrayList<Task> getTasks() throws IOException{
+    public ArrayList<Task> getTasks() throws IOException {
         ArrayList<Task> taskList = new ArrayList<>();
         String taskStorageString = reader.readLine();
 
@@ -85,9 +87,9 @@ public class Storage {
      * @throws IOException If an I/O error occurs.
      */
     public void storeTask(Task task) throws IOException {
-        this.writer.write(task.toTaskStorageString());
-        this.writer.newLine();
-        this.writer.flush();
+        writer.write(task.toTaskStorageString());
+        writer.newLine();
+        writer.flush();
     }
 
     /**
@@ -97,11 +99,11 @@ public class Storage {
      * @throws IOException If an I/O error occurs.
      */
     public void restructure(TaskList taskList) throws IOException {
-        new FileWriter(this.file.getPath(), false).close();
+        new FileWriter(file.getPath(), false).close();
         int size = taskList.getSize();
 
         for (int i = 1; i <= size; i++) {
-            this.storeTask(taskList.getTask(i));
+            storeTask(taskList.getTask(i));
         }
     }
 }

@@ -28,7 +28,7 @@ public class TaskList {
      * @return Total task count.
      */
     public int getSize() {
-        return this.taskList.size();
+        return taskList.size();
     }
 
     /**
@@ -37,7 +37,7 @@ public class TaskList {
      * @param task Task to add.
      */
     public void addTask(Task task) {
-        this.taskList.add(task);
+        taskList.add(task);
     }
 
     /**
@@ -47,7 +47,7 @@ public class TaskList {
      * @return Task of the corresponding task number.
      */
     public Task getTask(int taskNumber) {
-        return this.taskList.get(taskNumber - 1);
+        return taskList.get(taskNumber - 1);
     }
 
     /**
@@ -57,7 +57,7 @@ public class TaskList {
      * @return Task of the corresponding task number.
      */
     public Task markTask(int taskNumber) {
-        Task task = this.taskList.get(taskNumber - 1);
+        Task task = taskList.get(taskNumber - 1);
         task.mark();
         return task;
     }
@@ -69,7 +69,7 @@ public class TaskList {
      * @return Task of the corresponding task number.
      */
     public Task unmarkTask(int taskNumber) {
-        Task task = this.taskList.get(taskNumber - 1);
+        Task task = taskList.get(taskNumber - 1);
         task.unmark();
         return task;
     }
@@ -82,13 +82,14 @@ public class TaskList {
      * @throws DukeException If task does not exist.
      */
     public Task deleteTask(int taskNumber) throws DukeException {
-        int size = this.taskList.size();
+        int size = taskList.size();
+
         if (size == 0 || taskNumber > size) {
             throw  new DukeException("duke.task.Task number does not exist.");
         }
 
         Task task = taskList.get(taskNumber - 1);
-        this.taskList.remove(taskNumber - 1);
+        taskList.remove(taskNumber - 1);
         return task;
     }
 }

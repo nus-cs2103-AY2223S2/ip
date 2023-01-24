@@ -10,17 +10,17 @@ public abstract class Task {
     private String description;
 
     /** Marking to show if task is done */
-    private boolean marked;
+    private boolean isMarked;
 
     /**
      * Creates a task.
      *
-     * @param desc Description of the task.
-     * @param marked Task marking.
+     * @param description Description of the task.
+     * @param isMarked Task marking.
      */
-    public Task(String desc, boolean marked) {
-        this.description = desc;
-        this.marked = marked;
+    public Task(String description, boolean isMarked) {
+        this.description = description;
+        this.isMarked = isMarked;
     }
 
     /**
@@ -29,7 +29,7 @@ public abstract class Task {
      * @return Task marked symbol.
      */
     private String isMarkedSymbol() {
-        return this.marked ? "X" : " ";
+        return isMarked ? "X" : " ";
     }
 
     /**
@@ -38,21 +38,21 @@ public abstract class Task {
      * @return Task details.
      */
     public String toString() {
-        return "[" + this.isMarkedSymbol() + "] " + this.description;
+        return "[" + isMarkedSymbol() + "] " + description;
     }
 
     /**
      * Marks the task as done.
      */
     public void mark() {
-        this.marked = true;
+        isMarked = true;
     }
 
     /**
      * Marks the task as not done.
      */
     public void unmark() {
-        this.marked = false;
+        isMarked = false;
     }
 
     /**
@@ -61,7 +61,7 @@ public abstract class Task {
      * @return File storage version of the task.
      */
     public String toTaskStorageString() {
-        String marked = String.valueOf(this.marked);
-        return marked + "|" + this.description;
+        String marked = String.valueOf(isMarked);
+        return marked + "|" + description;
     }
 }

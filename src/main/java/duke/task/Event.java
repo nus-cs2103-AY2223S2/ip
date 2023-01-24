@@ -18,13 +18,13 @@ public class Event extends Task {
     /**
      * Creates a deadline task.
      *
-     * @param desc Description of the event task.
-     * @param marked Task marking.
+     * @param description Description of the event task.
+     * @param isMarked Task marking.
      * @param from Start of event.
      * @param to End of event.
      */
-    public Event(String desc, boolean marked, String from, String to) {
-        super(desc, marked);
+    public Event(String description, boolean isMarked, String from, String to) {
+        super(description, isMarked);
         this.from = LocalDate.parse(from);
         this.to = LocalDate.parse(to);
     }
@@ -37,8 +37,8 @@ public class Event extends Task {
     @Override
     public String toString() {
         DateTimeFormatter pattern = DateTimeFormatter.ofPattern("MMM dd yyyy");
-        return "[E]" + super.toString() + " (from: " + this.from.format(pattern)
-                + " to: " + this.to.format(pattern) + ")";
+        return "[E]" + super.toString() + " (from: " + from.format(pattern)
+                + " to: " + to.format(pattern) + ")";
     }
 
     /**
@@ -48,7 +48,6 @@ public class Event extends Task {
      */
     @Override
     public String toTaskStorageString() {
-        return "E" + "|" + super.toTaskStorageString() + "|"
-                + this.from + "|" + this.to;
+        return "E" + "|" + super.toTaskStorageString() + "|" + from + "|" + to;
     }
 }

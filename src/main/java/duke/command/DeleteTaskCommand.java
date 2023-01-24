@@ -47,11 +47,12 @@ public class DeleteTaskCommand extends Command {
     @Override
     public boolean execute() {
         try {
-            String[] commandMessageArr = this.commandMessage.split(" ", 2);
+            String[] commandMessageArr = commandMessage.split(" ", 2);
             int taskNumber = Integer.parseInt(commandMessageArr[1]);
-            Task task = this.taskList.deleteTask(taskNumber);
-            this.storage.restructure(this.taskList);
-            this.ui.replyTaskDeleted(task);
+            Task task = taskList.deleteTask(taskNumber);
+
+            storage.restructure(taskList);
+            ui.replyTaskDeleted(task);
         } catch (IOException | DukeException exception) {
             ui.replyError(exception.getMessage());
         }

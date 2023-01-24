@@ -15,12 +15,12 @@ public class Deadline extends Task {
     /**
      * Creates a deadline task.
      *
-     * @param desc Description of the deadline task.
-     * @param marked Task marking.
+     * @param description Description of the deadline task.
+     * @param isMarked Task marking.
      * @param by Task deadline.
      */
-    public Deadline(String desc, boolean marked, String by) {
-        super(desc, marked);
+    public Deadline(String description, boolean isMarked, String by) {
+        super(description, isMarked);
         this.by = LocalDate.parse(by);
     }
 
@@ -32,7 +32,7 @@ public class Deadline extends Task {
     @Override
     public String toString() {
         DateTimeFormatter pattern = DateTimeFormatter.ofPattern("MMM dd yyyy");
-        return "[D]" + super.toString() + " (by: " + this.by.format(pattern) + ")";
+        return "[D]" + super.toString() + " (by: " + by.format(pattern) + ")";
     }
 
     /**
@@ -42,6 +42,6 @@ public class Deadline extends Task {
      */
     @Override
     public String toTaskStorageString() {
-        return "D" + "|" + super.toTaskStorageString() + "|" + this.by;
+        return "D" + "|" + super.toTaskStorageString() + "|" + by;
     }
 }

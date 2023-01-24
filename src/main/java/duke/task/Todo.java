@@ -9,11 +9,11 @@ public class Todo extends Task {
     /**
      * Creates a todo task.
      *
-     * @param desc Description of the todo task.
-     * @param marked Task marking.
+     * @param description Description of the todo task.
+     * @param isMarked Task marking.
      */
-    public Todo(String desc, boolean marked) {
-        super(desc, marked);
+    public Todo(String description, boolean isMarked) {
+        super(description, isMarked);
     }
 
     /**

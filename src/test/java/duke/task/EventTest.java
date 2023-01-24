@@ -33,6 +33,7 @@ public class EventTest {
     public void taskMarking() {
         Task task = new Event("read book", false, "2022-05-12", "2023-10-27");
         task.mark();
+
         assertEquals("[E][X] read book (from: May 12 2022 to: Oct 27 2023)", task.toString());
         assertEquals("E|true|read book|2022-05-12|2023-10-27", task.toTaskStorageString());
     }
@@ -41,6 +42,7 @@ public class EventTest {
     public void taskUnmarking() {
         Task task = new Event("read book", true, "2022-05-12", "2023-10-27");
         task.unmark();
+
         assertEquals("[E][ ] read book (from: May 12 2022 to: Oct 27 2023)", task.toString());
         assertEquals("E|false|read book|2022-05-12|2023-10-27", task.toTaskStorageString());
     }

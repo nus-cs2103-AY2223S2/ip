@@ -5,7 +5,7 @@ package duke;
  *
  * @author wz2k
  */
-public class DukeException extends Exception{
+public class DukeException extends Exception {
     /**
      * Creates a duke exception.
      *

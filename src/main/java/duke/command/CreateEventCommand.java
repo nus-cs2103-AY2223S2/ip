@@ -47,13 +47,14 @@ public class CreateEventCommand extends Command {
     @Override
     public boolean execute() {
         try {
-            String[] commandMessageArr = this.commandMessage.split("/", 3);
+            String[] commandMessageArr = commandMessage.split("/", 3);
             Task task = new Event(commandMessageArr[0].substring(6), false,
                     commandMessageArr[1].substring(5).trim(),
                     commandMessageArr[2].substring(3));
-            this.taskList.addTask(task);
-            this.storage.storeTask(task);
-            this.ui.replyTaskAdded(task);
+
+            taskList.addTask(task);
+            storage.storeTask(task);
+            ui.replyTaskAdded(task);
         } catch (IOException exception) {
             ui.replyError(exception.getMessage());
         }

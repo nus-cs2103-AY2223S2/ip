@@ -27,13 +27,13 @@ public class Duke {
      * @param filePath File path to store data for tasks.
      */
     public Duke(String filePath) {
-        this.ui = new Ui();
+        ui = new Ui();
 
         try {
-            this.storage = new Storage(filePath);
-            this.taskList = new TaskList(storage.getTasks());
+            storage = new Storage(filePath);
+            taskList = new TaskList(storage.getTasks());
         } catch (IOException exception) {
-            this.ui.replyError(exception.getMessage());
+            ui.replyError(exception.getMessage());
         }
     }
 
@@ -44,17 +44,16 @@ public class Duke {
      */
     public static void main(String[] args) {
         Duke duke = new Duke("data/duke.txt");
-        Parser parser = new Parser();
         Scanner scanner = new Scanner(System.in);
+        boolean isEnd = false;
 
         duke.ui.greetUser();
-        boolean end = false;
 
-        while (!end) {
+        while (!isEnd) {
             try {
                 String input = scanner.nextLine();
-                Command command = parser.parseCommand(input, duke.ui, duke.taskList, duke.storage);
-                end = command.execute();
+                Command command = Parser.parseCommand(input, duke.ui, duke.taskList, duke.storage);
+                isEnd = command.execute();
             } catch (DukeException exception) {
                 duke.ui.replyError(exception.getMessage());
             }

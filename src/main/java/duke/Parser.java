@@ -27,7 +27,7 @@ public class Parser {
      * @return Command instance.
      * @throws DukeException If input is not recognized.
      */
-    public Command parseCommand(String input, Ui ui, TaskList taskList, Storage storage)
+    public static Command parseCommand(String input, Ui ui, TaskList taskList, Storage storage)
             throws DukeException {
         String type = input.split(" ", 2)[0];
 

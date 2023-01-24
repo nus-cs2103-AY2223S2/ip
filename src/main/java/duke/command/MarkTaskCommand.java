@@ -46,11 +46,12 @@ public class MarkTaskCommand extends Command {
     @Override
     public boolean execute() {
         try {
-            String[] commandMessageArr = this.commandMessage.split(" ", 2);
+            String[] commandMessageArr = commandMessage.split(" ", 2);
             int taskNumber = Integer.parseInt(commandMessageArr[1]);
-            Task task = this.taskList.markTask(taskNumber);
-            this.storage.restructure(this.taskList);
-            this.ui.replyTaskMarked(task);
+            Task task = taskList.markTask(taskNumber);
+
+            storage.restructure(taskList);
+            ui.replyTaskMarked(task);
         } catch (IOException exception) {
             ui.replyError(exception.getMessage());
         }
