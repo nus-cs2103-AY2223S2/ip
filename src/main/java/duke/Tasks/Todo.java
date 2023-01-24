@@ -3,7 +3,7 @@ package duke.Tasks;
 public class Todo extends Task {
     public Todo(String description, boolean isInFile) {
         super(description);
-        if (isInFile == false) {
+        if (!isInFile) {
             System.out.println(" " + "____________________________________________________________");
             System.out.println(" Got it. I've added this task:");
             System.out.println("  " + toString());
