@@ -1,4 +1,6 @@
+import java.io.IOException;
 import java.util.Scanner;
+import java.io.File;
 
 public class Red{
     private static TaskList tasks = new TaskList(100);
@@ -21,6 +23,13 @@ public class Red{
                  +    "██╔══██╗██╔══╝░░██║░░██║\n"
                  +    "██║░░██║███████╗██████╔╝\n"
                  +    "╚═╝░░╚═╝╚══════╝╚═════╝░\n";
+
+        TaskFile fi = new TaskFile();
+        fi.createFile(tasks);
+
+
+
+
 
 
 
@@ -56,7 +65,7 @@ public class Red{
                 if(arrOfStr.length <= 1) {
                     throw new RuntimeException("Specification of the DeadlineTask is missing\n");
                 }
-                String[] deadstr = arrOfStr[1].split("/", 2);
+                String[] deadstr = arrOfStr[1].split("/by ", 2);
                 if(deadstr.length != 2) {
                     throw new RuntimeException("Specification of the DeadlineTask is missing\n");
                 }
@@ -74,11 +83,15 @@ public class Red{
                 if(arrOfStr.length <= 1) {
                     throw new RuntimeException("Specification of the EventTask is missing\n");
                 }
-                String[] eventstr = arrOfStr[1].split("/", 3);
-                if(eventstr.length != 3) {
+                String[] eventStr = arrOfStr[1].split("/from ", 2);
+                if(eventStr.length != 2) {
                     throw new RuntimeException("Specification of the EventTask is missing\n");
                 }
-                EventTask NewEventTask = new EventTask(eventstr[0], eventstr[1], eventstr[2]);
+                String[] dateTimeStr = eventStr[1].split(" /to ", 2);
+                if(dateTimeStr.length != 2) {
+                    throw new RuntimeException("Specification of the EventTask is missing\n");
+                }
+                EventTask NewEventTask = new EventTask(eventStr[0], dateTimeStr[0], dateTimeStr[1]);
                 tasks.enq(NewEventTask);
                 reader();
             }else if(arrOfStr[0].equals("delete")) {
@@ -93,6 +106,14 @@ public class Red{
 
 
         }
+
+        String TaskListCopy = tasks.toString();
+        try {
+            fi.appendToFile(TaskListCopy);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
 
         System.out.println("Goodbye.");
 
