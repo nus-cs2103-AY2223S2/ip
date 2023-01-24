@@ -1,12 +1,7 @@
+package crystal;
 
-import java.io.FileWriter;
-import java.io.IOException;
-import java.lang.StringBuilder;
-import java.util.*;
+import crystal.command.Command;
 import java.io.File;
-import java.io.FileNotFoundException;
-import java.util.Scanner;
-
 
 class Crystal {
 

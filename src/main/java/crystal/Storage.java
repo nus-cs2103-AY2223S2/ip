@@ -1,9 +1,15 @@
+package crystal;
+
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.Scanner;
+import java.util.ArrayList;
+import crystal.task.Task;
+import crystal.task.Todo;
+import crystal.task.Deadline;
+import crystal.task.Event;
 
 public class Storage {
     String filepath;

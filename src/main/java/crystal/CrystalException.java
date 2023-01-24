@@ -1,3 +1,4 @@
+package crystal;
 public class CrystalException extends Exception {
 
     public CrystalException(String msg) {

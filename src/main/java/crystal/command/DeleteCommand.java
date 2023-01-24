@@ -1,3 +1,8 @@
+package crystal.command;
+
+import crystal.TaskList;
+import crystal.Ui;
+import crystal.Storage;
 public class DeleteCommand extends Command{
 
     public int num;

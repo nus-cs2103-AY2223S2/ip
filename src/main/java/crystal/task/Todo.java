@@ -1,3 +1,5 @@
+package crystal.task;
+
 public class Todo extends Task{
 
     protected boolean isSet;

@@ -1,3 +1,11 @@
+package crystal.command;
+
+import crystal.TaskList;
+import crystal.Ui;
+import crystal.Storage;
+import crystal.task.Deadline;
+
+
 public class DeadlineCommand extends Command{
     public String s;
     public String description;
