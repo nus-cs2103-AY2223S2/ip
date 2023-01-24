@@ -1,21 +1,25 @@
 public abstract class Task {
-    private boolean isDone = false;
+    private boolean isDone;
     private String task;
 
     public Task(String title) {
         this.task = title;
     }
 
-    public void markDone() {
+    public void markDone(boolean needPrint) {
         this.isDone = true;
-        System.out.println("    Nice! I've marked this task as done:");
-        System.out.println("    " + this.toString());
+        if (needPrint) {
+            System.out.println("    Nice! I've marked this task as done:");
+            System.out.println("    " + this.toString());
+        }
     }
 
-    public void unmark() {
+    public void unmark(boolean needPrint) {
         this.isDone = false;
-        System.out.println("    OK, I've marked this task as not done yet:");
-        System.out.println("    " + this.toString());
+        if (needPrint) {
+            System.out.println("    OK, I've marked this task as not done yet:");
+            System.out.println("    " + this.toString());
+        }
     }
 
     public boolean checkDone() {
@@ -26,9 +30,13 @@ public abstract class Task {
         return this.task;
     }
 
-    @Override
     public String toString() {
         String mark = this.isDone ? "X" : " ";
         return "[" + mark + "] " + this.task;
+    }
+
+    public String toTxtString() {
+        String mark2 = this.isDone ? "1" : "0";
+        return "|" + mark2 + "|" + this.task;
     }
 }
