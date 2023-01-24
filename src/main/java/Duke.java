@@ -58,29 +58,47 @@ public class Duke {
                     printTasks();
                     break;
                 case "mark":
-                    int idx = getMarkArgument(args);
-                    if (idx == -1) {
-                        handleInvalidArguments();
-                    } else {
+                    try {
+                        int idx = getMarkArgument(args);
                         changeTaskStatus(idx, true);
+                    } catch (InvalidIndexException e) {
+                        printInBanner("Can't do that yo~\nInvalid index supplied~");
                     }
                     break;
                 case "unmark":
-                    idx = getMarkArgument(args);
-                    if (idx == -1) {
-                        handleInvalidArguments();
-                    } else {
+                    try {
+                        int idx = getMarkArgument(args);
                         changeTaskStatus(idx, false);
+                    } catch (InvalidIndexException e) {
+                        printInBanner("Can't do that yo~\nInvalid index supplied~");
                     }
                     break;
                 case "todo":
-                    addTodo(args.subList(1, args.size()));
+                    try {
+                        addTodo(args.subList(1, args.size()));
+                    } catch (EmptyBodyException e) {
+                        printInBanner("What do you wanna do yo~");
+                    }
+
                     break;
                 case "deadline":
-                    addDeadline(args.subList(1, args.size()));
+                    try {
+                        addDeadline(args.subList(1, args.size()));
+                    } catch (EmptyBodyException e) {
+                        printInBanner("What do you wanna do yo~");
+                    } catch (IllegalArgumentException e) {
+                        handleInvalidArguments();
+                    }
+
                     break;
                 case "event":
-                    addEvent(args.subList(1, args.size()));
+                    try {
+                        addEvent(args.subList(1, args.size()));
+                    } catch (EmptyBodyException e) {
+                        printInBanner("What do you wanna do yo~");
+                    } catch (IllegalArgumentException e) {
+                        handleInvalidArguments();
+                    }
                     break;
                 default:
                     handleInvalidArguments();
@@ -107,18 +125,25 @@ public class Duke {
         printInBanner(toPrint.toString());
     }
 
-    private void addTodo(List<? extends String> args) {
+    private void addTodo(List<? extends String> args) throws EmptyBodyException {
+        if (args.size() == 0) {
+            throw new EmptyBodyException();
+        }
+
         String cmd = String.join(" ", args);
         Todo newTask = new Todo(cmd);
         taskList.add(newTask);
         printInBanner("Don't forget to do this task yo~\n  " + newTask + "\nNow you have " + taskList.size() + " items on your list.");
     }
 
-    private void addDeadline(List<? extends String> args) {
+    private void addDeadline(List<? extends String> args) throws IllegalArgumentException {
         int byIndex = args.indexOf("/by");
         if (byIndex == -1 || byIndex == args.size() - 1) {
-            handleInvalidArguments();
-            return;
+            throw new IllegalArgumentException();
+        }
+
+        if (byIndex == 0) {
+            throw new EmptyBodyException();
         }
 
         @SuppressWarnings("unchecked")  // args already takes in objects that are subclasses of String so it is a safe typecast
@@ -130,19 +155,21 @@ public class Duke {
         printInBanner("Don't forget to do this task yo~\n  " + newTask + "\nNow you have " + taskList.size() + " items on your list.");
     }
 
-    private void addEvent(List<? extends String> args) {
+    private void addEvent(List<? extends String> args) throws IllegalArgumentException {
         int fromIndex = args.indexOf("/from");
         int toIndex = args.indexOf("/to");
         if (fromIndex == -1 || fromIndex == args.size() - 1 || toIndex == -1 || toIndex == args.size() - 1) {
-            handleInvalidArguments();
-            return;
+            throw new IllegalArgumentException();
+        }
+
+        if (fromIndex == 0 || toIndex == 0) {
+            throw new EmptyBodyException();
         }
 
         Event newTask;
         if (fromIndex < toIndex) {
             if (fromIndex + 1 == toIndex) {
-                handleInvalidArguments();
-                return;
+                throw new EmptyBodyException();
             }
             @SuppressWarnings("unchecked")  // args already takes in objects that are subclasses of String so it is a safe typecast
             List<String> description = (List<String>) args.subList(0, fromIndex);
@@ -154,8 +181,7 @@ public class Duke {
             newTask = new Event(String.join(" ", description), String.join(" ", fromDate), String.join(" ", toDate));
         } else {
             if (toIndex + 1 == fromIndex) {
-                handleInvalidArguments();
-                return;
+                throw new EmptyBodyException();
             }
             @SuppressWarnings("unchecked")
             List<String> description = (List<String>) args.subList(0, toIndex);
@@ -183,10 +209,11 @@ public class Duke {
         }
     }
 
-    private void changeTaskStatus(int idx, boolean done) {
+    private void changeTaskStatus(int idx, boolean done) throws InvalidIndexException {
         if (idx < 0 || idx >= taskList.size()) {
-            printInBanner("Can't do that yo~\nInvalid index supplied~");
-            return;
+            throw new InvalidIndexException();
+            // printInBanner("Can't do that yo~\nInvalid index supplied~");
+            // return;
         }
 
         if (done) {
