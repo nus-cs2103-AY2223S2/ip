@@ -105,7 +105,18 @@ public class Acerizm {
                     System.out.println(String.format("Now you have %d tasks in the list",taskList.size()));
                     System.out.println("*-".repeat(100));
 
-                } else {
+                } else if(actionTaken == TypeOfTask.delete) {
+                    int taskIndexDelete = Integer.parseInt(convertToUserInput(input,TypeOfTask.delete,"")) - 1;
+                    Task taskToBeDeleted = taskList.get(taskIndexDelete);
+                    String description = taskToBeDeleted.getDescription();
+                    String isMarked = taskToBeDeleted.getStatusIcon();
+                    String currentStatus = taskToBeDeleted.getTypeOfTask();
+                    System.out.println("Noted! I've removed this task:");
+                    System.out.println(String.format("%d. %s",taskIndexDelete+1,taskToBeDeleted.toString()));
+                    taskList.remove(taskIndexDelete);
+                    System.out.println(String.format("Now you have %d tasks in the list",taskList.size()));
+                    System.out.println("*-".repeat(100));
+                }else {
                     // if it doesn't match any action, do nothing
                     // print error
                     // this else clause will never be reached as we have handled the exceptions in DukeExceptions
@@ -205,6 +216,14 @@ public class Acerizm {
                 else
                     return userInput;
             }
+            case delete: {
+                if(input.length == 1)
+                    throw new DukeException(TypeOfTask.delete,0);
+                else if(input.length >= 2)
+                    throw new DukeException(TypeOfTask.delete,1);
+                else
+                    return input[1];
+            }
             default:
                 throw new DukeException();
         }
@@ -230,6 +249,8 @@ public class Acerizm {
                 return TypeOfTask.deadline;
             case "event":
                 return TypeOfTask.event;
+            case "delete":
+                return TypeOfTask.delete;
             default: throw new DukeException();
         }
     }

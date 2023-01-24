@@ -7,7 +7,7 @@ public class DukeException extends Exception {
         Error Codes ranges from 0 to n, where n will be specified further in the future
 
         0: description after task given is empty
-
+        1: Wrong userInput
      */
     String message;
 
@@ -65,6 +65,18 @@ public class DukeException extends Exception {
                     case 0:
                         this.message = String.format("Oops! The description of %s cannot be empty",task.toString());
                         break;
+                    default:
+                        this.message = "Something went wrong here";
+                }
+                break;
+            }
+            case delete: {
+                switch(errorCode){
+                    case 0:
+                        this.message = String.format("Oops! The description of %s cannot be empty",task.toString());
+                        break;
+                    case 1:
+                        this.message = "You entered wrongly. Please try again!";
                     default:
                         this.message = "Something went wrong here";
                 }

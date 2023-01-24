@@ -5,5 +5,6 @@ public enum TypeOfTask {
     bye,
     todo,
     deadline,
-    event
+    event,
+    delete
 }
