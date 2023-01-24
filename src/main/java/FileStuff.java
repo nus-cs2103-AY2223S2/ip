@@ -7,52 +7,63 @@ import java.util.ArrayList;
 import java.util.Scanner;
 
 public class FileStuff {
-    private static final String PATH = "../data/cbot_save.txt";
+    private final File file;
     
-    static boolean pathExists() {
-        File f = new File(PATH);
-        return f.getParentFile().exists();
+    FileStuff(String path) {
+        this.file = new File(path);
     }
     
-    static boolean fileExists() {
-        File f = new File(PATH);
-        return f.exists();
+    String getPath() {
+        return this.file.getAbsolutePath();
     }
     
-    static void saveFile(TaskList tl) throws IOException {
-        File f = new File(PATH);
-        f.getParentFile().mkdir();
-        f.createNewFile();
+    boolean pathExists() {
+        return this.file.getParentFile().exists();
+    }
+    
+    boolean fileExists() {
+        return this.file.exists();
+    }
+    
+    void makeFile() throws IOException  {
+        this.file.getParentFile().mkdir();
+        this.file.createNewFile();
+    }
+    
+    void saveFile(TaskList tl) throws IOException {
+        if (!fileExists()) {
+            makeFile();
+        }
         
-        FileWriter fw = new FileWriter(f);
+        FileWriter fw = new FileWriter(this.file);
         fw.write(tl.makeFileFriendly());
         fw.close();
     }
     
-    static TaskList loadFile() throws FileNotFoundException {
-        Scanner s = new Scanner(new File(PATH));
+    TaskList loadFile() throws FileNotFoundException {
+        Scanner s = new Scanner(this.file);
         
         ArrayList<Task> tdl = new ArrayList<Task>();
         
         while (s.hasNext()) {
-            String[] a = s.nextLine().split(Task.SEP);
+            String[] taskStr = s.nextLine().split(Task.SEP);
             
             // type SEP done SEP desc SEP due/from SEP to
             
-            boolean isDone = a[1].equals(Task.DONE_TRUE);
-            String desc = a[2];
+            boolean isDone = taskStr[1].equals(Task.DONE_TRUE);
+            String desc = taskStr[2];
             
-            switch (a[0]) {
+            switch (taskStr[0]) {
             case "T":
                 tdl.add(new Task(desc, isDone));
                 break;
                 
             case "D":
-                tdl.add(new Deadline(desc, isDone, LocalDateTime.parse(a[3])));
+                tdl.add(new Deadline(desc, isDone, LocalDateTime.parse(taskStr[3])));
                 break;
                 
             case "E":
-                tdl.add(new Event(desc, isDone, LocalDateTime.parse(a[3]), LocalDateTime.parse(a[4])));
+                tdl.add(new Event(desc, isDone, LocalDateTime.parse(taskStr[3]), LocalDateTime.parse(taskStr[4])));
                 break;
             }
         }

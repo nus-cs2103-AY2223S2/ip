@@ -1,7 +1,7 @@
 import java.lang.StringBuilder;
 import java.util.ArrayList;
-import java.util.function.Predicate;
 import java.util.Collections;
+import java.util.function.Predicate;
 
 public class TaskList {
     private static final int MAX_SIZE = 100;
@@ -58,9 +58,9 @@ public class TaskList {
         }
     }
     
-    String mark(int num) {
+    String mark(int num) throws PoorInputException {
         if (notInRange(num)) {
-            return rangeError(num);
+            throw new PoorInputException(rangeError(num));
         }
         
         int index = num - 1;
@@ -74,9 +74,9 @@ public class TaskList {
         }
     }
     
-    String unmark(int num) {
+    String unmark(int num) throws PoorInputException {
         if (notInRange(num)) {
-            return rangeError(num);
+            throw new PoorInputException(rangeError(num));
         }
         
         int index = num - 1;
@@ -90,9 +90,9 @@ public class TaskList {
         }
     }
     
-    String delTask(int num) {
+    String delTask(int num) throws PoorInputException {
         if (notInRange(num)) {
-            return rangeError(num);
+            throw new PoorInputException(rangeError(num));
         }
         
         return "Got it! Deleted:\n" + GAP

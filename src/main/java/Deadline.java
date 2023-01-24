@@ -1,9 +1,7 @@
 import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
 
 public class Deadline extends Task {
     private LocalDateTime due;
-    private static final DateTimeFormatter FORM = DateTimeFormatter.ofPattern("dd/MM/yy, HHmm");
     
     Deadline(String desc, boolean isDone, LocalDateTime due) {
         super(desc, isDone);
@@ -33,7 +31,7 @@ public class Deadline extends Task {
     @Override
     public String toString() {
         return String.format("%s (< %s)",
-                super.toString(), this.due.format(FORM));
+                super.toString(), TimeStuff.text(this.due));
     }
 
     @Override

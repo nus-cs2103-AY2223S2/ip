@@ -1,10 +1,8 @@
 import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
 
 public class Event extends Task {
     private LocalDateTime fromTime;
     private LocalDateTime toTime;
-    private static final DateTimeFormatter FORM = DateTimeFormatter.ofPattern("dd/MM/yy, HHmm");
     
     Event(String desc, boolean isDone, LocalDateTime fromTime, LocalDateTime toTime) {
         super(desc, isDone);
@@ -36,7 +34,7 @@ public class Event extends Task {
     @Override
     public String toString() {
         return String.format("%s (%s - %s)",
-                super.toString(), this.fromTime.format(FORM), this.toTime.format(FORM));
+                super.toString(), TimeStuff.text(this.fromTime), TimeStuff.text(this.toTime));
     }
     
     @Override
