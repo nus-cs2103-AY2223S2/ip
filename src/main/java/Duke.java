@@ -3,6 +3,8 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
@@ -107,48 +109,49 @@ public class Duke {
                 String cmd = split[0];
 
                 switch (cmd) {
-                case "list":
-                    list();
-                    break;
-                case "mark":
-                case "unmark":
-                case "delete":
-                    if (split.length == 1 || split[1].isEmpty()) {
-                        throw new DukeEmptyArgumentException(cmd);
-                    }
-                    if (cmd.equals("mark")) {
-                        mark(split[1]);
-                    } else if (cmd.equals("unmark")){
-                        unmark(split[1]);
-                    } else {
-                        delete(split[1]);
-                    }
-                    break;
-                case "todo":
-                case "deadline":
-                case "event":
-                    if (split.length == 1 || split[1].isEmpty()) {
-                        throw new DukeEmptyArgumentException(cmd);
-                    }
-                    Task t = null;
-                    switch (cmd) {
-                        case "todo":
-                            t = new ToDos(split[1]);
-                            break;
-                        case "deadline":
-                            String[] s1 = split[1].split("/by ", 2);
-                            t = new Deadlines(s1[0], s1[1]);
-                            break;
-                        case "event":
-                            String[] s2 = split[1].split("/from ", 2);
-                            String[] s3 = s2[1].split("/to ", 2);
-                            t = new Events(s2[0], s3[0], s3[1]);
-                            break;
-                    }
-                    add(t);
-                    break;
-                default:
-                    throw new DukeUnknownCommandException(input);
+                    case "list":
+                        list();
+                        break;
+                    case "mark":
+                    case "unmark":
+                    case "delete":
+                        if (split.length == 1 || split[1].isEmpty()) {
+                            throw new DukeEmptyArgumentException(cmd);
+                        }
+                        if (cmd.equals("mark")) {
+                            mark(split[1]);
+                        } else if (cmd.equals("unmark")){
+                            unmark(split[1]);
+                        } else {
+                            delete(split[1]);
+                        }
+                        break;
+                    case "todo":
+                    case "deadline":
+                    case "event":
+                        if (split.length == 1 || split[1].isEmpty()) {
+                            throw new DukeEmptyArgumentException(cmd);
+                        }
+                        Task t = null;
+                        switch (cmd) {
+                            case "todo":
+                                t = new ToDos(split[1]);
+                                break;
+                            case "deadline":
+                                String[] s1 = split[1].split("/by ", 2);
+                                t = new Deadlines(s1[0], s1[1]);
+                                break;
+                            case "event":
+                                String[] s2 = split[1].split("/from ", 2);
+                                String[] s3 = s2[1].split(" /to ", 2);
+                                System.out.println("data"+s3[0]+"/n"+s3[1]);
+                                t = new Events(s2[0], s3[0], s3[1]);
+                                break;
+                        }
+                        add(t);
+                        break;
+                    default:
+                        throw new DukeUnknownCommandException(input);
                 }
             } catch (DukeUnknownCommandException e) {
                 System.out.println("\t____________________________________________________________");
@@ -161,6 +164,10 @@ public class Duke {
             } catch (DukeInvalidArgumentException e) {
                 System.out.println("\t____________________________________________________________");
                 System.out.printf("\t☹ OOPS!!! The description of a %s is invalid.\n", e.getMessage());
+                System.out.println("\t____________________________________________________________");
+            } catch (DateTimeParseException e) {
+                System.out.println("\t____________________________________________________________");
+                System.out.println("\t☹ OOPS!!! The format of date-time is invalid.");
                 System.out.println("\t____________________________________________________________");
             } finally {
                 input = scanner.nextLine();
