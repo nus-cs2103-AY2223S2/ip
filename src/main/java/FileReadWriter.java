@@ -1,11 +1,10 @@
 import java.io.FileNotFoundException;
 import java.io.File;
-import java.io.FileNotFoundException;
 import java.util.Scanner;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Arrays;
+
 
 public class FileReadWriter {
 
@@ -15,7 +14,7 @@ public class FileReadWriter {
         ArrayList<Task> loadData = new ArrayList<>();
         while (s.hasNext()) {
             String[] inputs = s.nextLine().split(" \\| ");
-            System.out.println(Arrays.toString(inputs));
+
             boolean isDone = inputs[1].equals("1") ? true : false;
             switch(inputs[0]) {
                 case "T":
