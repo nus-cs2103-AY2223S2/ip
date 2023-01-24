@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -31,13 +32,13 @@ public class TaskTracker {
         return t;
     }
 
-    public Task AddDeadline(String taskDescription, String endDate) throws DukeException {
+    public Task AddDeadline(String taskDescription, LocalDateTime endDate) throws DukeException {
         Task t = new Deadline(taskDescription, endDate);
         tasks.add(t);
         return t;
     }
 
-    public Task AddEvent(String taskDescription, String startDate, String endDate) throws DukeException {
+    public Task AddEvent(String taskDescription, LocalDateTime startDate, LocalDateTime endDate) throws DukeException {
         Task t = new Event(taskDescription, startDate, endDate);
         tasks.add(t);
         return t;

@@ -13,7 +13,8 @@ public class QueryParser {
                if (!command.equals(commands[i])) {
                    result[i + 2] = "";
                } else {
-                   result[i + 2] = st.nextToken(i == commands.length - 1 ? "\n" : "/");
+                   result[i + 2] = st.nextToken(i == commands.length - 1 ? "\n" : "/")
+                           .stripLeading().stripTrailing();
                }
             }
         } catch (Exception e) {
