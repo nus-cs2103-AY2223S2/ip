@@ -1,4 +1,5 @@
 package duke;
+
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
@@ -21,8 +22,8 @@ public class TaskList {
 
     public void list() {
         Ui.separator();
-        for (int i=0; i < this.tasks.size(); i++) {
-            int currentNumber = i+1;
+        for (int i = 0; i < this.tasks.size(); i++) {
+            int currentNumber = i + 1;
             Task task = this.tasks.get(i);
 
             System.out.println("\t" + currentNumber + "." + task);
@@ -36,7 +37,7 @@ public class TaskList {
         Task task = this.tasks.get(index - 1);
         this.tasks.remove(index - 1);
         System.out.println("Noted. I've removed this task:" + "\n\t" + task);
-        System.out.println("Now you have " + this.tasks.size() +" tasks in the list.");
+        System.out.println("Now you have " + this.tasks.size() + " tasks in the list.");
         Ui.separator();
     }
 
@@ -48,7 +49,7 @@ public class TaskList {
         Ui.separator();
     }
 
-    public void addDeadline(String description, String by ) {
+    public void addDeadline(String description, String by) {
         DateTimeFormatter format = DateTimeFormatter.ofPattern("dd-MM-yyyy");
         LocalDate date = LocalDate.parse(by, format);
         Deadline task = new Deadline(description, date);
@@ -70,7 +71,7 @@ public class TaskList {
         Task task = this.tasks.get(index - 1);
         task.setDone(isDone);
         Ui.separator();
-        System.out.println("\tOk, I have marked this task as " + (isDone ? "done" : "not done yet")  +  ":\n\t\t"
+        System.out.println("\tOk, I have marked this task as " + (isDone ? "done" : "not done yet") + ":\n\t\t"
                 + task);
         Ui.separator();
     }

@@ -2,7 +2,6 @@ package duke;
 
 /**
  * A Task which contains description of the todo.
- *
  */
 public class ToDo extends Task {
 

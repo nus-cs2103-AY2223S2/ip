@@ -35,6 +35,7 @@ public class Duke {
 
     /**
      * This is the main method that starts the Duke ToDoList command line interface.
+     *
      * @param args Unused.
      */
     public static void main(String[] args) {
