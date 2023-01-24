@@ -43,10 +43,10 @@ public class TaskMaster {
     protected void markComplete(int index, boolean status) throws DukeException.Invalid.Index {
         Task task = this.getTaskAtIndex(index);
         if (status) {
-            task.setComplete(Task.STATUS.COMPLETE);
+            task.setComplete(true);
             dio.println("Nice! I've marked this task as done:");
         } else {
-            task.setComplete(Task.STATUS.INCOMPLETE);
+            task.setComplete(false);
             dio.println("OK, I've marked this task as not done yet:");
         }
         dio.println(task);
@@ -61,13 +61,38 @@ public class TaskMaster {
     }
 
     protected void addToDo(String taskName) {
-        this.add(new ToDo(taskName));
+        this.addToDo(taskName, false);
+    }
+    protected void addToDo(String taskName, boolean status) {
+        this.add(new ToDo(taskName, status));
     }
 
     protected void addDeadLine(String taskName, String by) {
-        this.add(new Deadline(taskName, by));
+        this.addDeadLine(taskName, false, by);
     }
+    protected void addDeadLine(String taskName, boolean status, String by) {
+        this.add(new Deadline(taskName,status, by));
+    }
+
     protected void addEvent(String taskName, String from, String to) {
-        this.add(new Event(taskName, from, to));
+        this.addEvent(taskName, false, from, to);
+    }
+
+    protected void addEvent(String taskName, boolean status, String from, String to) {
+        this.add(new Event(taskName, status, from, to));
+    }
+
+    protected StringBuilder toCSV(){
+        StringBuilder ret = new StringBuilder();
+
+        int tmSize = ll.size();
+        for (Task task : ll ){
+            ret.append(task.toCSV());
+            tmSize--;
+            if (tmSize > 0) {
+                ret.append(System.getProperty("line.separator"));
+            }
+        }
+        return ret;
     }
 }

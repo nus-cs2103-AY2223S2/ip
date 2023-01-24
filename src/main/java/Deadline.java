@@ -14,9 +14,14 @@ public class Deadline extends Task {
      * @param by A string representation of the end date/time of this Task
      */
     public Deadline(String task_name, String by) {
-        super(task_name);
+        this(task_name, false, by);
+    }
+
+    public Deadline(String task_name, boolean status, String by) {
+        super(task_name, status);
         this.by = by;
     }
+
 
     /**
      * Returns String representation of Deadline.
@@ -25,5 +30,10 @@ public class Deadline extends Task {
     @Override
     public String toString() {
         return String.format("[D]%s (by: %s)", super.toString(), this.by);
+    }
+
+    @Override
+    public String toCSV() {
+        return String.format("D,%s,%s,%s", this.getName(), this.getComplete(), this.by);
     }
 }

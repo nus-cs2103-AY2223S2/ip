@@ -10,7 +10,11 @@ public class ToDo extends Task {
      * @param task_name Name of Task
      */
     public ToDo(String task_name) {
-        super(task_name);
+        super(task_name, false);
+    }
+
+    public ToDo(String task_name, boolean status) {
+        super(task_name, status);
     }
 
     /**
@@ -20,5 +24,10 @@ public class ToDo extends Task {
     @Override
     public String toString() {
         return String.format("[T]%s", super.toString());
+    }
+
+    @Override
+    public String toCSV() {
+        return String.format("T,%s,%s", this.getName(), this.getComplete());
     }
 }
