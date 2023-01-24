@@ -2,37 +2,63 @@ package duke;
 
 import java.util.Scanner;
 
+/**
+ * Functions related to interacting with the user.
+ */
 public class Ui {
+    private static Scanner sc = new Scanner(System.in);
 
+    // For checking whether to continue running Duke, i.e. exit command has not been called.
     public static boolean isRunning = true;
+    // Command line input from user stored here.
     public static String line;
-    public static Scanner sc = new Scanner(System.in);
-
-
+     
+    /**
+     * Craft string output for showing number of tasks in a list.
+     * @param numTask Number of tasks in the list
+     * @return Crafted message
+     */
     public static String numTaskToString(int numTask) {
         return "Now you have " + numTask + " task" + (numTask == 1 ? "" : "s") + " in the list.";
     }
 
+    // Greets user with welcome message, and gets the first command.
     public static void greetUser() {
         System.out.println("Hello I'm Duke! \nWhat can I do for you?");
         line = sc.nextLine();
     }
 
+    // Scan for next command from user.
     public static String getNextCommand() {
         System.out.println("");
         if (isRunning) line = sc.nextLine();
         return line;
     }
 
+    /**
+     * Outputs to console a message.
+     * @param msg Message to display
+     */
     public static void displayMsg(String msg) {
         System.out.println(indentString(wrapMessageBorder(msg), 1));
     }
 
+    /**
+     * Wraps a message with top & bottom line borders.
+     * @param msg Message to enclose in borders
+     * @return Bordered message
+     */
     public static String wrapMessageBorder(String msg) {
         String border = "____________________________________________________________";
         return border + "\n" + msg + "\n" + border;
     }
 
+    /**
+     * Indents a message by a specified indentation level.
+     * @param msg Message to indent
+     * @param indendationLevel Number of indents
+     * @return Indented message.
+     */
     public static String indentString(String msg, int indendationLevel) {
         String indent = "  " .repeat(indendationLevel);
         String[] lines = msg.split("\n");
@@ -43,6 +69,9 @@ public class Ui {
         return result.toString();
     }
 
+    /**
+     * Greets goodbye and shuts down Duke.
+     */
     public static void shutDown() {
         isRunning = false;
         displayMsg("Bye. Hope to see you again soon!");

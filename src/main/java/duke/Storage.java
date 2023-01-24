@@ -13,11 +13,19 @@ import duke.tasks.Task;
 import duke.tasks.TaskList;
 import duke.tasks.ToDo;
 
+/**
+ * Functions related to saving/loading data to/from files.
+ */
 public class Storage {
 
     private static String strDir = "../../../data";
     private static String fileName = "../../../data/duke.txt";
 
+    /**
+     * Saves a task list to a file.
+     * @param tasks Task list to save.
+     * @throws IOException Specified file not found.
+     */
     public static void saveToFile(TaskList tasks) throws IOException {
 
         // create directory
@@ -31,6 +39,11 @@ public class Storage {
 
     }
 
+    /**
+     * Loads a task list from a file.
+     * @param tasks Task list to load into.
+     * @throws IOException Specified file not found.
+     */
     public static void loadFromFile(TaskList tasks) throws IOException {
         try { 
             Path fileNamePath = Path.of(fileName);
