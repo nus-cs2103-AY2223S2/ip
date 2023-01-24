@@ -14,7 +14,8 @@ public class Duke {
     }
 
     public String msg_of_add(Task task) {
-        return "add: " + task.toString();
+        return "Got it. I've added this task:\n " + task.toString() + "\nNow you have " +
+                tasks.size() + " tasks in the list:D";
     }
 
     public String print_curr_tasks() {
