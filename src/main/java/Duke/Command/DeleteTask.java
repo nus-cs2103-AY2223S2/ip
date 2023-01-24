@@ -1,3 +1,10 @@
+package Duke.Command;
+
+import Duke.Storage.Storage;
+import Duke.Task.Task;
+import Duke.TaskList.TaskList;
+import Duke.Ui.Ui;
+
 public class DeleteTask implements Command {
     private int index;
     public DeleteTask(int index) {

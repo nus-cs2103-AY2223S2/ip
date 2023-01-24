@@ -1,3 +1,11 @@
+package Duke.Storage;
+import Duke.DateTime.DateTime;
+import Duke.Parser.Parser;
+import Duke.Task.Deadline;
+import Duke.Task.Event;
+import Duke.Task.Task;
+import Duke.TaskList.TaskList;
+
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.nio.file.Files;
@@ -8,7 +16,7 @@ import java.util.List;
 import java.util.Scanner;
 
 public class Storage {
-    private static final String dataPath = "src/main/java/data.txt";
+    private static final String dataPath = "src/main/java/Duke/Storage/data.txt";
 
     public Storage() {
         try {

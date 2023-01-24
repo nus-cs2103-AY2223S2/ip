@@ -1,3 +1,7 @@
+package Duke.Ui;
+
+import Duke.TaskList.TaskList;
+
 public class Ui {
     private final String starting = "    ____________________________________________________________\n";
     private final String ending = "    ____________________________________________________________\n";

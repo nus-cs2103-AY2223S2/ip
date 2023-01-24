@@ -1,3 +1,4 @@
+package Duke.DukeException;
 import java.lang.StringBuilder;
 public class DukeException extends Exception{
     private static final String starting = "    ____________________________________________________________\n";
