@@ -5,7 +5,9 @@ import dude.storage.Storage;
 import dude.ui.Ui;
 
 public class ExitCommand extends Command {
-
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public void execute(TaskList tasks, Ui ui, Storage storage) {
         storage.saveData(tasks);
