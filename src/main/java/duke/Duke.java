@@ -12,8 +12,12 @@ import duke.commands.ToDoCmd;
 import duke.commands.UnmarkCmd;
 import duke.tasks.TaskList;
 
-public class Duke {
 
+/**
+ * Main class where duke is initialized and runs.
+ */
+public class Duke {
+    // Initialize and run duke
     public static void main(String[] args) throws IOException {
         TaskList taskList = new TaskList();
         Storage.loadFromFile(taskList);
