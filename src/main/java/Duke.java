@@ -1,12 +1,9 @@
-import java.util.Arrays;
-import java.util.Scanner;
-
 public class Duke {
 
     private final Storage storage;
     private TaskList tasks;
     private final Ui ui;
-    private Parser parser;
+    private final Parser parser;
 
     public Duke(String path) {
         ui = new Ui();

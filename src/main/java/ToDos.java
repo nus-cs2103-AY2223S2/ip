@@ -1,6 +1,3 @@
-import java.io.FileWriter;
-import java.io.IOException;
-
 public class ToDos extends Task {
     public ToDos(String description, boolean isDone) {
         super(description, isDone);

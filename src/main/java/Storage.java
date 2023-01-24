@@ -41,7 +41,7 @@ public class Storage {
     public ArrayList<Task> loadSaveFile() throws DukeFileCreationException, DukeReadException {
         Scanner scanner;
 
-        ArrayList list = new ArrayList<Task>();
+        ArrayList<Task> list = new ArrayList<>();
 
         try {
             if (!saveFile.getParentFile().exists()) {

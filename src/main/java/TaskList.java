@@ -1,11 +1,7 @@
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.IOException;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
-import java.util.Scanner;
 
 public class TaskList {
     private final ArrayList<Task> list;
@@ -137,7 +133,7 @@ public class TaskList {
         return output.substring(0, output.length() - 1);
     }
 
-    public ArrayList getTasks() {
+    public ArrayList<Task> getTasks() {
         return list;
     }
 
