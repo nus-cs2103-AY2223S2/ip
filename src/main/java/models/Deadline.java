@@ -1,15 +1,19 @@
 package models;
 
+import utilities.DateTimeParser;
+
+import java.time.temporal.TemporalAccessor;
+
 public class Deadline extends Task {
-    private String deadline;
+    private TemporalAccessor deadline;
 
     public Deadline(String description, String deadline) {
         super(description);
-        this.deadline = deadline;
+        this.deadline = DateTimeParser.parseDate(deadline);
     }
 
     @Override
     public String toString() {
-        return "[D]" + super.toString() + " (by: " + deadline + ")";
+        return "[D]" + super.toString() + " (by: " + DateTimeParser.printDateTime(deadline) + ")";
     }
 }
