@@ -26,7 +26,6 @@ public class Duke {
                 showPrompt();
             }
         }
-        save();
     }
 
     private static void showPrompt() {
@@ -50,19 +49,6 @@ public class Duke {
         return false;
     }
     
-    private static void save() throws IOException {
-        ArrayList<Task> allTasks = MyDuke.getAllTasks();
 
-        Files.createDirectories(Paths.get("../../../data/"));
-        FileOutputStream out = new FileOutputStream("../../../data/duke.txt");
-        ObjectOutputStream o = new ObjectOutputStream(out);
-
-        for (Task task : allTasks) {
-            o.writeObject(task);
-        }
-
-        o.close();
-        out.close();
-    }
 
 }
