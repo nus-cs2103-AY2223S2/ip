@@ -1,15 +1,20 @@
-public class Event extends Task {
-    protected String from;
-    protected String to;
+import java.time.LocalDateTime;
 
-    public Event(String description, String from, String to) {
+public class Event extends Task {
+    private LocalDateTime startDateTime;
+    private LocalDateTime dueDateTime;
+
+    public Event(String description, String from, String to) throws InvalidDateTimeException {
         super(description);
-        this.from = from;
-        this.to = to;
+
+        this.startDateTime = handleDateTime(from);
+        this.dueDateTime = handleDateTime(to);
     }
 
     @Override
     public String toString() {
-        return "[E]" + super.toString() + " (from: " + from + " to: " + to + ")";
+        return String.format("[E]%s (from: %s %s to: %s %s)", super.toString(),
+                this.startDateTime.toLocalDate(), this.startDateTime.toLocalTime(),
+                this.dueDateTime.toLocalDate(), this.startDateTime.toLocalTime());
     }
 }

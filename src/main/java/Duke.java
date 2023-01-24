@@ -1,3 +1,4 @@
+import java.time.DateTimeException;
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -44,19 +45,20 @@ public class Duke {
 
                 case "deadline":
                     checkTaskDesc(splitStr);
-                    String[] deadlineArr = splitStr[1].split("/", 2);
+                    String[] deadlineArr = splitStr[1].split(" /by ");
                     String deadlineDesc = deadlineArr[0].trim();
-                    String by = deadlineArr[1].substring(3);
+                    String by = deadlineArr[1];
                     inputs.add(new Deadline(deadlineDesc, by));
                     printTaskOutput(inputs);
                     break;
 
                 case "event":
                     checkTaskDesc(splitStr);
-                    String[] eventArr = splitStr[1].split("/", 3);
+                    String[] eventArr = splitStr[1].split(" /from ");
+                    String[] dataTimes = eventArr[1].split(" /to ");
                     String eventDesc = eventArr[0].trim();
-                    String from = eventArr[1].substring(5).trim();
-                    String to = eventArr[2].substring(3);
+                    String from = dataTimes[0].trim();
+                    String to = dataTimes[1].trim();
                     inputs.add(new Event(eventDesc, from, to));
                     printTaskOutput(inputs);
                     break;
