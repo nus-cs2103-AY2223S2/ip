@@ -2,11 +2,14 @@ import java.util.*;
 import java.io.*;
 public class Duke {
     public static void main(String[] args) throws IOException {
-        /* String logo = " ____        _        \n"
+
+        String logo = " ____        _        \n"
                 + "|  _ \\ _   _| | _____ \n"
                 + "| | | | | | | |/ / _ \\\n"
                 + "| |_| | |_| |   <  __/\n"
-                + "|____/ \\__,_|_|\\_\\___|\n"; */
+                + "|____/ \\__,_|_|\\_\\___|\n";
+
+        System.out.println(logo);
         System.out.println("Hello! I'm Duke");
         System.out.println("What can I do for you?");
 
@@ -15,6 +18,9 @@ public class Duke {
         ArrayList <Task> list = new ArrayList <Task>();
 
         while( !(text = br.readLine()).equals("bye")) {
+
+            int successToken = 0; int missingToken = 0;
+
             StringTokenizer tk = new StringTokenizer(text);
             String action = tk.nextToken();
 
@@ -31,8 +37,14 @@ public class Duke {
             else {
                 if ( action.equals("todo")) {
                     String[] arr = text.split(" ", 2);
-                    Todo t = new Todo( arr[1] );
-                    list.add(t);
+                    try {
+                        Todo t = new Todo(arr[1]);
+                        list.add(t);
+                        successToken = 1;
+                    } catch(ArrayIndexOutOfBoundsException e) {
+                        System.out.println("☹ OOPS!!! The description of a todo cannot be empty.");
+                    }
+
                 } else if( action.equals("deadline")) {
                     String value = ""; String date = "";
                     while (tk.hasMoreTokens()) {
@@ -45,6 +57,7 @@ public class Duke {
                     }
                     Deadline t = new Deadline(value,date);
                     list.add(t);
+                    successToken = 1;
 
                 } else if( action.equals("event")) {
                     String value = ""; String from = ""; String to = "";
@@ -60,16 +73,31 @@ public class Duke {
 
                     Event t = new Event(value,from,to);
                     list.add(t);
+                    successToken = 1;
 
+                } else {
+                    missingToken = 1;
                 }
 
-                System.out.println("Added : " + text);
-                System.out.println("You have a total of " + list.size() + " tasks in the list");
+                if( successToken == 1) {
+                    System.out.println("Added : " + text);
+                    System.out.println("You have a total of " + list.size() + " tasks in the list");
+                } else if( missingToken == 1) {
+                    System.out.println("☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
+                }
             }
         }
 
         System.out.println("Bye. Hope to see you again soon!");
 
 
+    }
+
+    //Error Checking Methods
+    public static boolean empty(String value) {
+        if(value == null) {
+            return true;
+        }
+        return false;
     }
 }
