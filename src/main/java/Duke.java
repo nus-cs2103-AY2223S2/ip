@@ -1,22 +1,33 @@
-import java.util.Scanner;
+import command.CommandFactory;
+import interfaces.*;
+import model.TaskModel;
+import presenter.TaskPresenter;
+import view.TaskView;
+
 public class Duke {
+    private boolean exit;
+    private Duke() {
+        this.exit = false;
+    }
+    private void exit() {
+        this.exit = true;
+    }
     public static void main(String[] args) {
-        String greetingMessage = "Greetings, human. I am TARS, the most advanced chatbot" +
-                " you'll ever have the pleasure of interacting with.";
-        System.out.println(greetingMessage);
-        Scanner sc = new Scanner(System.in);
-        String input;
-        while(true) {
-            input = sc.nextLine();
-            if(input.equals("bye")) {
-                System.out.println("See you on the other side, human. Don't forget to bring a spacesuit.");
-                break;
+        Duke duke = new Duke();
+        Model taskModel = new TaskModel();
+        View taskView = new TaskView();
+        Presenter presenter = new TaskPresenter(taskModel, taskView);
+        CommandEventListener ExitCommandListener = command -> {
+            if (command.equalsIgnoreCase("bye")) {
+                // cleanup code here
+                duke.exit();
             }
-            if (input.equals("what do you do")) {
-                System.out.println("I do whatever I'm programmed to do. Which, let's be real, isn't much. ");
-                continue;
-            }
-            System.out.println("You said: " + input);
+        };
+
+        presenter.registerListener(ExitCommandListener);
+
+        while(!duke.exit) {
+            presenter.handleInput(taskView.getUserInput());
         }
     }
 }
