@@ -13,8 +13,8 @@ public class Duke {
     }
     public static void main(String[] args) {
         Duke duke = new Duke();
-        Model taskModel = new TaskModel();
-        View taskView = new TaskView();
+        TaskModel taskModel = new TaskModel();
+        TaskView taskView = new TaskView();
         Presenter presenter = new TaskPresenter(taskModel, taskView);
         CommandEventListener ExitCommandListener = command -> {
             if (command.equalsIgnoreCase("bye")) {

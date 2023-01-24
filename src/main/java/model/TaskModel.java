@@ -19,4 +19,16 @@ public class TaskModel implements Model {
     public List<Task> getTasks() {
         return this.tasks;
     }
+
+    public Task getTask(int index) {
+        return this.tasks.get(index); // out of bounds exception
+    }
+
+    public void markTaskDone(int taskIndex) {
+        tasks.get(taskIndex).markTaskDone(); // handle out of bounds exception
+    }
+
+    public void markTaskUndone(int taskIndex) {
+        tasks.get(taskIndex).markTaskUndone(); // handle out of bounds exception
+    }
 }

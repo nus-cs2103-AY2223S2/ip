@@ -2,7 +2,11 @@ package presenter;
 
 
 import command.CommandFactory;
-import interfaces.*;
+import interfaces.Presenter;
+import interfaces.CommandEventListener;
+import interfaces.Command;
+import model.TaskModel;
+import view.TaskView;
 
 import java.util.ArrayList;
 
@@ -10,7 +14,7 @@ public class TaskPresenter implements Presenter {
     private final InputParser parser;
 
     private final ArrayList<CommandEventListener> listenerList;
-    public TaskPresenter(Model taskModel, View taskView) {
+    public TaskPresenter(TaskModel taskModel, TaskView taskView) {
         this.listenerList = new ArrayList<>();
         CommandFactory commandFactory = new CommandFactory(taskModel, taskView);
         this.parser = new InputParser(listenerList, commandFactory);

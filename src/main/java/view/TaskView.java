@@ -16,7 +16,9 @@ public class TaskView implements View {
 
     @Override
     public void showMessage(String string) {
+        System.out.println("____________________________________________________________");
         System.out.println(string);
+        System.out.println("____________________________________________________________");
     }
 
     @Override
@@ -26,9 +28,11 @@ public class TaskView implements View {
 
     @Override
     public void renderTasks(List<Task> tasks) {
+        System.out.println("____________________________________________________________");
         int index = 1;
         for (Task task: tasks) {
-            System.out.println(Integer.toString(index++) + ". " + task.getDescription());
+            System.out.println(index++ + ". " + task.toString());
         }
+        System.out.println("____________________________________________________________");
     }
 }

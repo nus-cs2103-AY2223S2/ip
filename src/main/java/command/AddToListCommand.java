@@ -21,6 +21,6 @@ public class AddToListCommand implements Command {
     @Override
     public void execute() {
         this.taskModel.addTask(task);
-        taskView.showMessage(addedTaskMessage + task.getDescription());
+        taskView.showMessage(addedTaskMessage + task.getTaskDescription());
     }
 }

@@ -4,22 +4,20 @@ import interfaces.Command;
 import interfaces.Model;
 import interfaces.View;
 import model.Task;
+import model.TaskModel;
 import model.ToDo;
+import view.TaskView;
 
 import java.util.ArrayList;
 import java.util.HashSet;
 
 public class CommandFactory {
-    private final Model taskModel;
-    private final View taskView;
-    private final HashSet<String> commands;
-    public CommandFactory(Model taskModel, View taskView) {
+    private final TaskModel taskModel;
+    private final TaskView taskView;
+
+    public CommandFactory(TaskModel taskModel, TaskView taskView) {
         this.taskModel = taskModel;
         this.taskView = taskView;
-        this.commands = new HashSet<>();
-        commands.add("greet");
-        commands.add("bye");
-        commands.add("list");
     }
 
     public Command createCommand(String[] tokens) {
@@ -30,6 +28,12 @@ public class CommandFactory {
                 return new ByeCommand(taskView);
             case "list":
                 return new ListTasksCommand(taskModel, taskView);
+            case "mark":
+                int markIndex = Integer.parseInt(tokens[1]); // handle parseInt error
+                return new MarkDoneCommand(taskView, taskModel, markIndex);
+            case "unmark":
+                int unmarkIndex = Integer.parseInt(tokens[1]); // handle parseInt error
+                return new MarkUndoneCommand(taskView, taskModel, unmarkIndex);
             default:
                 Task newTask = new ToDo(String.join(" ", tokens));
                 return new AddToListCommand(taskView, taskModel, newTask);
