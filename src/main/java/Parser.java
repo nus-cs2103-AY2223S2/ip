@@ -1,0 +1,100 @@
+import DukeExceptions.DukeException;
+import DukeExceptions.DukeInvalidCommandException;
+import DukeExceptions.DukeTaskIndexMissingException;
+
+/**
+ * The main class for parsing commands given to the Duke app via the
+ * command line.
+ * @author SeeuSim
+ * AY2223-S2 CS2103T
+ */
+public class Parser {
+    public static Command parse(String line) {
+        String[] tokens = line.split(" ", 2);
+        if (tokens.length == 1) {
+            return simpleCommand(tokens[0]);
+        }
+
+        return twoArgCommand(tokens[0], tokens[1]);
+    }
+
+    /**
+     * The main function for parsing commands with one word.
+     *
+     * @param cmd The command given.
+     * @return The analysed command.
+     */
+    private static Command simpleCommand(String cmd) {
+        switch (cmd) {
+        case "bye":
+            return new ExitCommand();
+        case "list":
+            return new ListCommand();
+        case "todo":
+            return new TodoCommand();
+        case "deadline":
+            return new DeadlineCommand();
+        case "event":
+            return new EventCommand();
+        default:
+            if (cmd.matches("(mark|unmark|delete)")) {
+                return new ErrorCommand(new DukeTaskIndexMissingException(cmd));
+            } else {
+                return new ErrorCommand(new DukeInvalidCommandException());
+            }
+        }
+    }
+
+    /**
+     * The main function for parsing commands of the following format: `"{command} {param}"`
+     *
+     * @param cmd The command given.
+     * @param param The parameter provided to the command.
+     * @return The analysed command.
+     */
+    public static Command twoArgCommand(String cmd, String param) {
+        switch (cmd) {
+        case "todo":
+            return new TodoCommand(param);
+        case "deadline":
+            return new DeadlineCommand(param);
+        case "event":
+            return new EventCommand(param);
+        case "tasks":
+            return new DateFilterCommand(param);
+        default:
+            if (cmd.matches("(mark|unmark|delete)")) {
+                return manipulateCommand(cmd, param);
+            }
+            return new ErrorCommand(new DukeInvalidCommandException());
+        }
+    }
+
+    /**
+     * The main access point for commands that manipulate
+     * tasks in the store.
+     *
+     * @param cmd The manipulation command.
+     * @param param The access index.
+     * @return The analysed command.
+     */
+    public static Command manipulateCommand(String cmd, String param) {
+        try {
+            int idx = Integer.parseInt(param);
+            switch (cmd) {
+            case "mark":
+                return new MarkCommand(idx);
+            case "unmark":
+                return new UnmarkCommand(idx);
+            case "delete":
+                return new DeleteCommand(idx);
+            }
+        } catch (NumberFormatException e) {
+            return new ErrorCommand(new DukeException(
+                String.format("An invalid index was provided for the %s command."
+                        + " Ensure it is a number!", cmd)
+            ));
+        }
+        return new ErrorCommand("An internal server error occurred");
+    }
+}

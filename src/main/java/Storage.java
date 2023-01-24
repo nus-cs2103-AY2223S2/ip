@@ -21,7 +21,7 @@ import java.util.stream.Stream;
  * or creates a new .txt file in storage to store the
  * task data.
  */
-public class DukeFileWriter {
+public class Storage {
     private static final String folderPath = "data";
     private static final String filePath = "data/DUKEDB.TXT";
     private final File store;
@@ -29,7 +29,7 @@ public class DukeFileWriter {
     /**
      * Private constructor that initialises the file and folder structure.
      */
-    private DukeFileWriter() {
+    private Storage() {
         //Create directory if it does not yet exist
         Path parentDir = Paths.get(folderPath);
         try {
@@ -57,8 +57,8 @@ public class DukeFileWriter {
      * Factory method that creates a DukeFileWriter instance.
      * @return The created DukeFileWriter.
      */
-    public static DukeFileWriter create() {
-        return new DukeFileWriter();
+    public static Storage create() {
+        return new Storage();
     }
 
     /**

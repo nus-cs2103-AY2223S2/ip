@@ -13,29 +13,32 @@ import java.util.stream.Collectors;
  * @author SeeuSim
  * AY2223-S2 CS2103T
  */
-public class DukeStore {
+public class TaskList {
     private static final int recordSize = 100;
     private static int ID = 0;
 
     //The store instance that writes to storage
-    private DukeFileWriter dfw;
+    private Storage dfw;
+    private Ui ui;
 
     //The unique ID of this store
     private int id;
 
-    private DukeStore() {
-        this.id = DukeStore.ID + 1;
-        DukeStore.ID += 1;
-        this.dfw = DukeFileWriter.create();
+    private TaskList(Storage s, Ui ui) {
+        this.id = TaskList.ID + 1;
+        TaskList.ID += 1;
+        this.dfw = s;
+        this.ui = ui;
     }
 
     /**
      * Factory method to create DukeStore instances.
      *
+     * @param s The Storage instance to pass to the Store.
      * @return The created DukeStore instance with a unique serializable ID.
      */
-    public static DukeStore create() {
-        return new DukeStore();
+    public static TaskList create(Storage s, Ui ui) {
+        return new TaskList(s, ui);
     }
 
     /**
@@ -53,7 +56,7 @@ public class DukeStore {
         try {
             count = this.dfw.write(input.toDBSchema());
         } catch (NullPointerException e) {
-            DukeFormatter.error(new DukeException("An internal system error occurred"));
+            ui.error(new DukeException("An internal system error occurred"));
             return;
         }
 
@@ -63,7 +66,7 @@ public class DukeStore {
                             count,
                             count == 1L ? "" : "s"
                     );
-        DukeFormatter.section(message);
+        ui.section(message);
     }
 
     /**
@@ -79,7 +82,7 @@ public class DukeStore {
         }
         DukeTask task = this.dfw.setDone(i, true);
         String message = "Nice! I've marked this task as done:\n" + "  " + task;
-        DukeFormatter.section(message);
+        ui.section(message);
     }
 
     /**
@@ -95,7 +98,7 @@ public class DukeStore {
         }
         DukeTask task = this.dfw.setDone(i, false);
         String message = "OK, I've marked this task as not done yet:\n" + "  " + task;
-        DukeFormatter.section(message);
+        ui.section(message);
     }
 
     /**
@@ -114,7 +117,7 @@ public class DukeStore {
         String message = "Noted. I've removed this task:\n" + "  " + task
                 + String.format("\nNow you have %s task%s in the list.", size - 1,
                 size - 1 == 1L? "": "s");
-        DukeFormatter.section(message);
+        ui.section(message);
     }
 
     public String occurOnDate(LocalDate dt) {
