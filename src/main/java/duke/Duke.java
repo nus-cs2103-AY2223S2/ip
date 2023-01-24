@@ -1,3 +1,7 @@
+package duke;
+
+import duke.exceptions.DukeException;
+
 public class Duke {
     private final Ui ui;
     private final TaskList taskList;

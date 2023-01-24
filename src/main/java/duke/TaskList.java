@@ -1,3 +1,11 @@
+package duke;
+
+import duke.exceptions.DukeException;
+import duke.task.Deadline;
+import duke.task.Event;
+import duke.task.Task;
+import duke.task.ToDo;
+
 import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
 import java.util.Arrays;

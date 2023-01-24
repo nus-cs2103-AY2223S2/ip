@@ -1,3 +1,5 @@
+package duke;
+
 public class Ui {
     void displayMessage(String message) {
         System.out.println(
