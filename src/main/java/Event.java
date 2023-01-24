@@ -1,10 +1,13 @@
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+
 /** a type of Task that contains information of a start time and an end time
  *
  * @author Wong Yong Xiang
  */
 public class Event extends Task {
-    protected String from;
-    protected  String to;
+    protected LocalDate from;
+    protected LocalDate to;
 
     /** constructor for the Event class
      *
@@ -12,10 +15,10 @@ public class Event extends Task {
      * @param from start time of Event
      * @param to end time of Event
      */
-    public Event(String description, String from, String to) {
+    public Event(String description, LocalDate from, LocalDate to) {
         super(description);
-        this.from = from.split(" ", 2)[1];
-        this.to= to.split(" ", 2)[1];
+        this.from = from;
+        this.to= to;
     }
 
     /** returns the string representation of Event
@@ -24,6 +27,12 @@ public class Event extends Task {
      */
     @Override
     public String toString() {
-        return "[E]" + super.toString() + "(from: " + this.from + " to: " + this.to + ")";
+        return "[E]"
+                + super.toString()
+                + " (from: "
+                + this.from.format(DateTimeFormatter.ofPattern("d MMM yyyy"))
+                + " to: "
+                + this.to.format(DateTimeFormatter.ofPattern("d MMM yyyy"))
+                + ")";
     }
 }

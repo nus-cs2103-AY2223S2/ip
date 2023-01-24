@@ -1,6 +1,10 @@
 import java.util.Scanner;
 import java.util.ArrayList;
 
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
+
 import Exceptions.*;
 
 public class Duke {
@@ -52,6 +56,8 @@ public class Duke {
                     System.out.println("Now you have " + counter + " task in the list");
                 } catch(DukeException e) {
                     System.out.println(e.getMessage());
+                } catch (DateTimeParseException e) {
+                    System.out.println("Date must be entered in the format dd/MM/yyyy");
                 }
             } else if(message.startsWith("delete")) {
                 try {
@@ -88,8 +94,10 @@ public class Duke {
             }
 
             try {
-                String[] info_parts = info.split("/", 2);
-                return new Deadline(info_parts[0], info_parts[1]);
+                String[] infoParts = info.split(" /", 2);
+                String description = infoParts[0], by = infoParts[1].substring(3).trim();
+                LocalDate byDate = LocalDate.parse(by, DateTimeFormatter.ofPattern("d/MM/yyyy"));
+                return new Deadline(description, byDate);
             } catch(ArrayIndexOutOfBoundsException e) {
                 throw(new NotEnoughArgumentsException("☹ OOPS!!! Deadline requires a date after the description."));
             }
@@ -100,8 +108,14 @@ public class Duke {
             }
 
             try {
-                String[] info_parts = info.split("/", 3);
-                return new Event(info_parts[0],info_parts[1],info_parts[2]);
+                String[] infoParts = info.split(" /", 3);
+                String description = infoParts[0],
+                        from = infoParts[1].substring(5).trim(),
+                        to = infoParts[2].substring(3).trim();
+                System.out.println(from);
+                LocalDate fromDate = LocalDate.parse(from, DateTimeFormatter.ofPattern("dd/MM/yyyy")),
+                          toDate = LocalDate.parse(to, DateTimeFormatter.ofPattern("d/MM/yyyy"));
+                return new Event(description, fromDate, toDate);
             } catch(ArrayIndexOutOfBoundsException e) {
                 throw(new NotEnoughArgumentsException("☹ OOPS!!! Event requires a start time and an end time."));
             }
