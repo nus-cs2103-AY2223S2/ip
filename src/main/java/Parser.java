@@ -1,0 +1,62 @@
+import java.time.LocalDate;
+
+public class Parser {
+
+    public String getTodoDescription(String userInput) throws DukeException {
+        String todoDescription;
+        try {
+            todoDescription = userInput.split(" ", 2)[1];
+        } catch(Exception e) {
+            throw new DukeException("The description of a todo cannot be empty.");
+        }
+        return todoDescription;
+    }
+
+    public String getDeadlineDescription(String userInput) throws DukeException {
+        String deadlineDescription;
+        try {
+            deadlineDescription = userInput.split(" ", 2)[1].split(" /by ", 2)[0];
+        } catch(Exception e) {
+            throw new DukeException("The description of a deadline cannot be empty.");
+        }
+        return deadlineDescription;
+    }
+
+    public LocalDate getDeadlineDate(String userInput) throws DukeException {
+        LocalDate deadlineDate;
+        try {
+            deadlineDate = LocalDate.parse(userInput.split(" ", 2)[1].split(" /by ", 2)[1]);
+        } catch(Exception e) {
+            throw new DukeException("The date of a deadline cannot be empty. Make sure dates are in this format yyyy-mm-dd");
+        }
+        return deadlineDate;
+    }
+
+    public String getEventDescription(String userInput) throws DukeException {
+        String eventDescription;
+        try {
+            eventDescription = userInput.split(" ", 2)[1].split(" /", 3)[0];
+        } catch(Exception e) {
+            throw new DukeException("The description of an event cannot be empty.");
+        }
+        return eventDescription;
+    }
+
+    public LocalDate[] getEventDateDetails(String userInput) throws DukeException {
+        LocalDate eventStartDate;
+        LocalDate eventEndDate;
+        String[] input = userInput.split(" ", 2)[1].split(" /", 3);
+        try {
+            eventStartDate = LocalDate.parse(input[1].split("from ", 2)[1]);
+            eventEndDate = LocalDate.parse(input[2].split("to ", 2)[1]);
+        } catch(Exception e) {
+            throw new DukeException("The start date and end date of a event cannot be empty. \" +\n" +
+                    "                            \"Make sure dates are in this format yyyy-mm-dd.");
+        }
+        return new LocalDate[]{eventStartDate, eventEndDate};
+    }
+
+    public Integer getTaskIndex(String userInput) {
+        return Integer.parseInt(userInput.split(" ", 2)[1]) - 1;
+    }
+}
