@@ -16,60 +16,94 @@ public class Duke {
         System.out.println("Hello from Bench Monster");
         System.out.println("What can I do for you?");
 
-
-        while (true) {
-            String type = s.nextLine();
-            String[] tokens = type.split("\\s+");
-            if (tokens[0].equalsIgnoreCase("bye")) {
-                System.out.println("Bye. Hope to see you again soon!");
-                break;
-            } else if (tokens[0].equalsIgnoreCase("list")) {
+            while (true) {
+                String type = s.nextLine();
+                String[] tokens = type.split("\\s+");
+                if (tokens[0].equalsIgnoreCase("bye")) {
+                    System.out.println("Bye. Hope to see you again soon!");
+                    break;
+                } else if (tokens[0].equalsIgnoreCase("list")) {
                     showList(t);
-            } else if(tokens[0].equalsIgnoreCase("mark")) {
-                 int i = Integer.parseInt(tokens[1]) - 1 ;
-                 t.get(i).mark();
-                 System.out.println(markAsDone);
-                 System.out.println(t.get(i).toString());
+                } else if (tokens[0].equalsIgnoreCase("mark")) {
+                    try {
 
-            } else if(tokens[0].equalsIgnoreCase("unmark")) {
-                int i = Integer.parseInt(tokens[1]) - 1 ;
-                t.get(i).unmarked();
-                System.out.println(unMarkTask);
-                System.out.println(t.get(i).toString());
+                        int i = Integer.parseInt(tokens[1]) - 1;
+                        if(i >= t.size()) {
+                            throw new Exception();
+                        }
+                        t.get(i).mark();
+                        System.out.println(markAsDone);
+                        System.out.println(t.get(i).toString());
+                    } catch(Exception e) {
+                        System.out.println("Invalid value, there isn't this much tasks in the list :-( ");
+                    }
 
-            } else if(tokens[0].equalsIgnoreCase("todo")) {
-                String des = type.substring(type.indexOf(" ")).replace(" ", "");
-                Task newTask = new ToDo(des);
-                t.add(newTask);
-                System.out.println(addedTask);
-                System.out.println(newTask);
-                System.out.println("Now you have " + noOfTask(t) + " tasks in the list.");
+                } else if (tokens[0].equalsIgnoreCase("unmark")) {
+                    int i = Integer.parseInt(tokens[1]) - 1;
+                    try {
+                        if(i >= t.size()) {
+                            throw new Exception();
+                        }
+                        t.get(i).unmarked();
+                        System.out.println(unMarkTask);
+                        System.out.println(t.get(i).toString());
+                    } catch(Exception e) {
+                        System.out.println("Invalid value, there isn't this much tasks in the list :-( ");
+                    }
 
-            } else if(tokens[0].equalsIgnoreCase("deadline")) {
-                String des = type.substring(type.indexOf(" ")).replace(" ", "");
-                String[] deadline = des.split("/");
-                Deadline dead = new Deadline(deadline[0] , deadline[1]);
-                t.add(dead);
-                System.out.println(addedTask);
-                System.out.println(dead);
-                System.out.println("Now you have " + noOfTask(t) + " tasks in the list.");
+                } else if (tokens[0].equalsIgnoreCase("todo")) {
+                    try {
+                        if(!type.contains(" ")) {
+                            throw new Exception();
+                        }
+                        String des = type.substring(type.indexOf(" ")).replace(" ", "");
+                        Task newTask = new ToDo(des);
+                        t.add(newTask);
+                        System.out.println(addedTask);
+                        System.out.println(newTask);
+                        System.out.println("Now you have " + noOfTask(t) + " tasks in the list.");
+                    } catch(Exception e) {
+                        System.out.println("OOPS!!! The descripition of a todo cannot be empty");
+                    }
 
-            } else if(tokens[0].equalsIgnoreCase("event")) {
-                String des = type.substring(type.indexOf(" "));
-                String[] events = des.split("/");
-                Event e = new Event(events[0].trim(), events[1].trim(), events[2].trim());
-                t.add(e);
-                System.out.println(addedTask);
-                System.out.println(e);
-                System.out.println("Now you have " + noOfTask(t) + " tasks in the list.");
+                } else if (tokens[0].equalsIgnoreCase("deadline")) {
+                    try {
+                        if(!type.contains(" ")) {
+                            throw new Exception();
+                        }
+                        String des = type.substring(type.indexOf(" ")).replace(" ", "");
+                        String[] deadline = des.split("/");
+                        Deadline dead = new Deadline(deadline[0], deadline[1]);
+                        t.add(dead);
+                        System.out.println(addedTask);
+                        System.out.println(dead);
+                        System.out.println("Now you have " + noOfTask(t) + " tasks in the list.");
+                    } catch(Exception e) {
+                        System.out.println("OOPS!!! The description of a deadline cannot be empty");
+                    }
 
-            }else {
-                Task newTask = new Task(type);
-                t.add(newTask);
-                System.out.println("added: " + type);
-            }
+                } else if (tokens[0].equalsIgnoreCase("event")) {
+                    try {
+                        if(!type.contains(" ")) {
+                            throw new Exception();
+                        }
+                        String des = type.substring(type.indexOf(" "));
+                        String[] events = des.split("/");
+                        Event e = new Event(events[0].trim(), events[1].trim(), events[2].trim());
+                        t.add(e);
+                        System.out.println(addedTask);
+                        System.out.println(e);
+                        System.out.println("Now you have " + noOfTask(t) + " tasks in the list.");
+                    } catch(Exception e) {
+                        System.out.println("OOPS!!! The description of an event cannot be empty");
+                    }
+
+                } else {
+                    System.out.println("OOPS!! I'm sorry, but I don't know what that means :-(");
+                }
             }
         }
+
 
         public static void showList(ArrayList<Task> tasks) {
                 for(int i=0; i < tasks.size(); i++) {
@@ -81,7 +115,7 @@ public class Duke {
         public static int noOfTask(ArrayList<Task> tasks) {
             return tasks.size();
         }
-}//class
+}
 
 class Task {
     private String details;
