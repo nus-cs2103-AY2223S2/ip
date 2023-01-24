@@ -28,15 +28,12 @@ public class TaskList {
     public void addTask(Task task) {
         this.tasks.add(task);
         this.updateFile();
-        String message = "I have added " + task.getTaskName() + " to my memory\n";
-        message = message + "          " + task.toString() + "\n";
-        message = message + "        You have " + tasks.size() + " tasks in the list";
-        this.ui.printMessage(message);
+        this.ui.addTaskMessage(task, this.tasks.size());
     }
 
     public void deleteTask(String number) throws InvalidTaskException {
         if (number.equals("all")) {
-            this.ui.printMessage("All tasks on the list have been cleared");
+            this.ui.deleteAllMessage();
             this.tasks.clear();
         } else {
             try {
@@ -45,10 +42,7 @@ public class TaskList {
                     throw new InvalidTaskException();
                 } else {
                     Task task = this.tasks.remove(value - 1);
-                    String message = "I have removed " + task.getTaskName() + " from my memory\n";
-                    message = message + "          " + task.toString() + "\n";
-                    message = message + "        You have " + tasks.size() + " tasks in the list";
-                    this.ui.printMessage(message);
+                    this.ui.deleteTaskMessage(task, this.tasks.size());
                 }
             } catch (NumberFormatException e){
                 throw new InvalidTaskException();
@@ -60,16 +54,12 @@ public class TaskList {
     public void markDone(int number) {
         this.tasks.get(number - 1).mark();
         this.updateFile();
-        this.ui.printMessage("Understood, I have marked the task as done:\n"
-                + "        "
-                + this.tasks.get(number - 1).toString());
+        this.ui.markDoneMessage(this.tasks.get(number - 1).toString());
     }
     public void markUndone(int number) {
         this.tasks.get(number - 1).unmark();
         this.updateFile();
-        this.ui.printMessage("Understood, I have marked the task as undone:\n"
-                + "        "
-                + this.tasks.get(number - 1).toString());
+        this.ui.markUndoneMessage(this.tasks.get(number - 1).toString());
     }
 
     public void getList() {
