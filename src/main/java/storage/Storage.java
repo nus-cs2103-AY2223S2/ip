@@ -103,7 +103,7 @@ public class Storage {
 		String content = "";
 		int curLineNum = 1;
 
-		try (BufferedReader reader = new BufferedReader(new FileReader(myFile));) {
+		try (BufferedReader reader = new BufferedReader(new FileReader(myFile))) {
 			String line = reader.readLine();
 
 			while (line != null) {
@@ -133,7 +133,7 @@ public class Storage {
 		String content = "";
 		int curLineNum = 1;
 
-		try (BufferedReader reader = new BufferedReader(new FileReader(myFile));) {
+		try (BufferedReader reader = new BufferedReader(new FileReader(myFile))) {
 			String line = reader.readLine();
 
 			while (line != null) {
