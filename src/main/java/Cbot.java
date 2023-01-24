@@ -1,5 +1,6 @@
 import java.util.ArrayList;
 import java.util.Scanner;
+import java.io.IOException;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
@@ -46,7 +47,7 @@ public class Cbot {
         System.out.println();
     }
     
-    public static void main(String[] args) {
+    public static void main(String[] args) throws IOException {
         String dukeLogo = " ____        _\n"
             + "|  _ \\ _   _| | _____\n"
             + "| | | | | | | |/ / _ \\\n"
@@ -71,15 +72,30 @@ public class Cbot {
         
         System.out.println(STALL + INDENT + "Hey! D:< I'm not\n" + dukeLogo);
         System.out.println(INDENT + "I'm\n" + cbotLogo);
+        
+        TaskList tl = new TaskList();
+        
+        if (FileStuff.fileExists()) {
+            tl = FileStuff.loadFile();
+        }
+        
         System.out.println(STALL + INDENT
                 + "How can I help you today?\n");
         
         Scanner sc = new Scanner(System.in);
         boolean loop = true;
+        boolean doSave = true;
         
         while (loop) {
             System.out.println(PROMPT);
             String userInput = sc.nextLine();
+            System.out.println();
+            
+            if (userInput.contains(Task.SEP)) {
+                System.out.println(WARNING + "<Error> Please avoid using: \""
+                        + Task.SEP + "\"");
+                continue;
+            }
             
             Command com = Command.NOMATCH;
             String userText = userInput;
@@ -100,9 +116,12 @@ public class Cbot {
             switch (com) {
             case BYE:
                 loop = false;
+                doSave = false;
                 break;
             
             case LIST:
+                doSave = false;
+                
                 if (tl.getCount() == 0) {
                     System.out.println(INDENT + "Freedom! You have no tasks :D");
                     break;
@@ -333,12 +352,20 @@ public class Cbot {
                 break;
             
             case NOMATCH:
+                doSave = false;
                 System.out.println(INDENT + "Sorry, I don't recognize that command :<");
                 break;
             
             default:
                 // catches all the BADs
+                doSave = false;
                 System.out.println(WARNING + "<Error> That command needs an input");
+            }
+            
+            if (doSave) {
+                FileStuff.saveFile(tl);
+            } else {
+                doSave = true;
             }
         }
         

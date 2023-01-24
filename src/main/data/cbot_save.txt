@@ -1,0 +1,4 @@
+T ;;   ;; sleep
+T ;;   ;; sleep more
+D ;;   ;; sleep once  ;; noon
+E ;;   ;; sleep again  ;; tues  ;; wed
