@@ -2,6 +2,9 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
 import java.util.Scanner;
 import java.util.regex.Matcher;
@@ -10,6 +13,7 @@ import java.util.regex.Pattern;
 public class Duke {
     private static final String SAVE_DATA_FILE_PATH = "./data/saveData.txt";
     private static final String SAVE_DATA_DIR_PATH = "./data";
+    private static final DateTimeFormatter DATE_TIME_FORMATTER = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm");
     private static final int MAX_TASKS_SIZE = 100;
     private static ArrayList<Task> tasks = new ArrayList<>(MAX_TASKS_SIZE);
     private static Pattern todoCommandPattern = Pattern.compile("^todo (.*)$");
@@ -54,8 +58,12 @@ public class Duke {
         if (deadlineCommandMatcher.find()) {
             String description = deadlineCommandMatcher.group(1);
             String by = deadlineCommandMatcher.group(2);
-
-            addTask(new Deadline(description, by));
+            try {
+                LocalDateTime byDateTime = LocalDateTime.parse(by, DATE_TIME_FORMATTER);
+                addTask(new Deadline(description, byDateTime));
+            } catch (DateTimeParseException exception) {
+                throw new DukeException("Please enter date and time in this format: dd/MM/yyyy HH:mm");
+            }
         } else {
             throw new DukeException("You are missing either the description or deadline.\n     It's 'deadline <description> /by <deadline>'.");
         }
@@ -68,7 +76,14 @@ public class Duke {
             String from = eventCommandMatcher.group(2);
             String to = eventCommandMatcher.group(3);
 
-            addTask(new Event(description, from, to));
+            try {
+                LocalDateTime fromDateTime = LocalDateTime.parse(from, DATE_TIME_FORMATTER);
+                LocalDateTime toDateTime = LocalDateTime.parse(to, DATE_TIME_FORMATTER);
+
+                addTask(new Event(description, fromDateTime, toDateTime));
+            } catch (DateTimeParseException exception) {
+                throw new DukeException("Please enter date and time in this format: dd/MM/yyyy HH:mm");
+            }
         } else {
             throw new DukeException("You are missing either the description, from or to.\n     It's 'event <description> /from <from> /to <to>'.");
         }
@@ -198,7 +213,9 @@ public class Duke {
                 } else if (taskType.equals("D")) {
                     String by = lineTokens[3];
 
-                    Deadline deadline = new Deadline(description, by);
+                    LocalDateTime byDateTime = LocalDateTime.parse(by, DATE_TIME_FORMATTER);
+
+                    Deadline deadline = new Deadline(description, byDateTime);
                     deadline.setIsDone(isDone);
 
                     tasks.add(deadline);
@@ -206,7 +223,10 @@ public class Duke {
                     String from = lineTokens[3];
                     String to = lineTokens[4];
 
-                    Event event = new Event(description, from, to);
+                    LocalDateTime fromDateTime = LocalDateTime.parse(from, DATE_TIME_FORMATTER);
+                    LocalDateTime toDateTime = LocalDateTime.parse(to, DATE_TIME_FORMATTER);
+
+                    Event event = new Event(description, fromDateTime, toDateTime);
                     event.setIsDone(isDone);
 
                     tasks.add(event);
@@ -232,12 +252,14 @@ public class Duke {
                     break;
                 case DEADLINE:
                     Deadline deadline = (Deadline) task;
-                    fileWriter.write(String.format("D;%d;%s;%s\n", deadline.isDone ? 1 : 0, deadline.description, deadline.by));
+                    fileWriter.write(String.format("D;%d;%s;%s\n", deadline.isDone ? 1 : 0, deadline.description,
+                            deadline.by.format(DATE_TIME_FORMATTER)));
 
                     break;
                 case EVENT:
                     Event event = (Event) task;
-                    fileWriter.write(String.format("E;%d;%s;%s;%s\n", event.isDone ? 1 : 0, event.description, event.from, event.to));
+                    fileWriter.write(String.format("E;%d;%s;%s;%s\n", event.isDone ? 1 : 0, event.description,
+                            event.from.format(DATE_TIME_FORMATTER), event.to.format(DATE_TIME_FORMATTER)));
 
                     break;
                 }
