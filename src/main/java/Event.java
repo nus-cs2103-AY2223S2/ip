@@ -14,4 +14,9 @@ public class Event extends Task {
         return String.format("[E][%s] %s (from: %s, to: %s)", doneString, this.getTitle(), this.start, this.end);
     }
 
+    public String writeToMemory() {
+        String doneString = this.getDone() ? "1" : "0";
+        return "E, " + doneString + ", " + this.getTitle() + ", " + this.start + ", " + this.end;
+    }
+
 }

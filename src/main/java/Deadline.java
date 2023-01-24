@@ -13,4 +13,9 @@ public class Deadline extends Task {
         return String.format("[D][%s] %s (by: %s)", doneString, this.getTitle(), this.dateBy);
     }
 
+    public String writeToMemory() {
+        String doneString = this.getDone() ? "1" : "0";
+        return "D, " + doneString + ", " + this.getTitle() + ", " + this.dateBy;
+    }
+
 }

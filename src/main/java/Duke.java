@@ -1,11 +1,10 @@
-import java.io.File;
+import java.io.*;
 
-import java.io.FileNotFoundException;
-import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 
+import java.nio.file.StandardOpenOption;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Objects;
@@ -17,6 +16,7 @@ public class Duke {
     private static Scanner sc = new Scanner(System.in);
 
     private static Path memoryPath = Paths.get(".", "memory.txt");
+    private static File memory = new File(String.valueOf(memoryPath));
 
     private static void printLine() {
         System.out.println("----------------------------------------------------");
@@ -150,9 +150,7 @@ public class Duke {
 
     public static void loadTasks() {
         try {
-            File memory = new File(String.valueOf(memoryPath));
             memory.createNewFile();
-
             Scanner memoryScanner = new Scanner(memory);
             while (memoryScanner.hasNext()) {
                 String taskLine = memoryScanner.nextLine();
@@ -182,7 +180,24 @@ public class Duke {
     }
 
     public static void saveTasks() {
+        try {
+            BufferedWriter fw = Files.newBufferedWriter(memoryPath , StandardOpenOption.TRUNCATE_EXISTING);
 
+            for (Task task: allTasks) {
+                String toWrite = "";
+                if (task instanceof ToDo) {
+                    fw.write();
+                } else if (task instanceof Deadline) {
+
+                } else if (task instanceof Event) {
+
+                }
+                fw.write(toWrite);
+            }
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
     public static void main(String[] args) {

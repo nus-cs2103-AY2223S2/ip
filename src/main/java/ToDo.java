@@ -10,4 +10,9 @@ public class ToDo extends Task {
         return String.format("[T][%s] %s", doneString, this.getTitle());
     }
 
+    public String writeToMemory() {
+        String doneString = this.getDone() ? "1" : "0";
+        return "T, " + doneString + ", " + this.getTitle();
+    }
+
 }
