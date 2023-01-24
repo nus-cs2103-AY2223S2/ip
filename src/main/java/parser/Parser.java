@@ -11,6 +11,7 @@ import commands.Command;
 import commands.DateTimeCommand;
 import commands.DeleteCommand;
 import commands.ExitCommand;
+import commands.FindCommand;
 import commands.ListCommand;
 import commands.MarkCommand;
 import task.Deadline;
@@ -45,6 +46,8 @@ public class Parser {
 			case "deadline":
 			case "event":
 				return new AddCommand(inputArr);
+			case "find":
+				return new FindCommand(inputArr);
 			default:
 				return new Command(inputArr);
 		}
