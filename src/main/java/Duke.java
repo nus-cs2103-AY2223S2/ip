@@ -1,6 +1,10 @@
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Scanner;
+import java.util.stream.Stream;
 
 public class Duke {
 
@@ -114,6 +118,29 @@ public class Duke {
 
         // no matches found
         return State.UNKNOWN;
+    }
+
+    // parse format is "YYYY-MM-DD"
+    private static LocalDate parseDate(String dateStr) {
+        String[] date = dateStr.split("-");
+        int[] dateInfo = Stream.of(date).mapToInt(Integer::parseInt).toArray();
+        return LocalDate.of(dateInfo[0], dateInfo[1], dateInfo[2]);
+    }
+
+    // Can parse "HH:MM:SS" or "HH:MM"
+    private static LocalTime parseTime(String timeStr) {
+        String[] time = timeStr.split(":");
+        int[] timeInfo = Stream.of(time).mapToInt(Integer::parseInt).toArray();
+        if (timeInfo.length == 2)
+            return LocalTime.of(timeInfo[0], timeInfo[1]);
+        else
+            return LocalTime.of(timeInfo[0], timeInfo[1], timeInfo[2]);
+    }
+
+    // Can parse "YYYY-MM-DD HH:MM:SS" or "YYYY-MM-DD HH:MM"
+    private static LocalDateTime parseDateTime(String str) {
+        String[] s = str.split(" ");
+        return LocalDateTime.of(parseDate(s[0]), parseTime(s[1]));
     }
 
     public static void main(String[] args) {
