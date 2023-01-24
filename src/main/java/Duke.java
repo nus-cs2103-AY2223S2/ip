@@ -1,20 +1,19 @@
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Duke {
     private Ui ui;
     private Parser parser;
     private Database db;
-    private ArrayList<Task> inputs = new ArrayList<>();
+    private TaskList tasks;
 
     public Duke(String filePath) {
         this.ui = new Ui();
-        this.parser = new Parser();
+        this.parser = new Parser(ui, tasks);
 
         try {
             this.db = new Database(filePath);
-
+            this.tasks = new TaskList(this.db, this.ui);
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -30,16 +29,17 @@ public class Duke {
 
         while(!currInput.equals("bye")) {
             try {
-                if(inputs.size() == 0) {
-                    db.updateInputs(inputs);
+                if(tasks.getSize() == 0) {
+                    tasks.updateInputs();
                 }
-                this.parser.parseInputs(splitStr, inputs, db);
+
+                this.parser.parseInputs(splitStr, tasks);
             } catch (DukeException e) {
                 System.out.println(e);
             } catch (NumberFormatException e) {
                 System.out.println("Mark commands need to be followed by an integer!");
             } catch (IndexOutOfBoundsException e) {
-                System.out.println(String.format("Sorry but there are only %d tasks stored!", inputs.size()));
+                System.out.println(String.format("Sorry but there are only %d tasks stored!", tasks.getSize()));
             } catch (IOException e) {
                 e.printStackTrace();
             } finally {
