@@ -40,6 +40,11 @@ public class MyDuke {
 
     public static ArrayList<Task> getAllTasks() {  return allTasks;   }
 
+    public static void loadTask(ArrayList<Task> tasks) {
+        allTasks = tasks;
+        taskCount = tasks.size();
+    }
+
     private void populateCommands() {
         MAP.put("list", (tokens) -> showAll());
         MAP.put("todo", (tokens) -> addTodo(tokens));
@@ -228,8 +233,8 @@ public class MyDuke {
             return;
         }
 
-        System.out.println(allTasks.get(taskIndex).toString() + " deleted.");
-        allTasks.remove(taskIndex);
+        System.out.println(allTasks.get(taskIndex-1).toString() + " deleted.");
+        allTasks.remove(taskIndex-1);
         taskCount--;
         showCount();
     }
