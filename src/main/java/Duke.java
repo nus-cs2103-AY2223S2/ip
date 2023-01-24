@@ -6,7 +6,6 @@ import java.io.*;
 public class Duke {
     private static ArrayList<Task> todoList;
     public enum Command {BYE, LIST, TODO, DEADLINE, EVENT, MARK, UNMARK, DELETE}
-    // static boolean anyChanges;
     static String separator = "\u200E✽ ✾ \u200E✽ ✾ \u200E✽ ✾ \u200E✽ ✾";
     static String invalidIndexMessage = "⚠ oops...there's no task with this number\ntry asking for 'list' to check task numbers\n" + separator;
     static String forgottenArgumentMessage = "⚠ oops...seems like you forgot part of a command, please try again\n" + separator;
