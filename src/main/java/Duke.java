@@ -1,9 +1,12 @@
 import java.security.spec.ECField;
 import java.util.Scanner;
 import java.util.ArrayList;
+import java.io.*;
 public class Duke {
     private Scanner sc = new Scanner(System.in);
     private ArrayList<Task> list = new ArrayList<>();
+
+    private static String FILEPATH = "./data/duke.txt";
 
     private enum DukeCommand {
         BYE,
@@ -29,6 +32,7 @@ public class Duke {
             try {
                 switch (dukeCommand) {
                     case BYE :
+                        this.storeData();
                         System.out.println("\tBye. Hope to see you again soon!");
                         printLine();
                         this.sc.close();
@@ -60,6 +64,8 @@ public class Duke {
                 }
             } catch (DukeException e) {
                 System.out.printf("\t%s\n", e);
+            } catch (IOException e) {
+                System.out.println("Error while storing data..");
             }
             this.printLine();
         }
@@ -130,14 +136,15 @@ public class Duke {
         }
 
     }
+
     private void addDeadline(String[] userInput) throws DukeMissingArgumentException {
         try {
-            int indexDeadline = userInput[1].indexOf("/by");
-            String deadlineText = userInput[1].substring(0, indexDeadline - 1);
-            String deadlineDate = userInput[1].substring(indexDeadline + 4);
-            String userInp = String.format("%s (by: %s)", deadlineText, deadlineDate);
+            String deadlineInfo[] = userInput[1].split("/by");
+            String deadlineText = deadlineInfo[0].trim();
+            String deadlineDate = deadlineInfo[1].trim();
 
-            Deadlines deadline = new Deadlines(userInp);
+
+            Deadlines deadline = new Deadlines(deadlineText, deadlineDate);
             this.list.add(deadline);
             System.out.println("\tGot it. I've added this task:");
             System.out.println("\t" + deadline.toString());
@@ -150,14 +157,12 @@ public class Duke {
 
     private void addEvent(String[] userInput) throws DukeMissingArgumentException{
         try {
-            int indexFrom = userInput[1].indexOf("/from");
-            int indexTo = userInput[1].indexOf("/to");
-            String eventText = userInput[1].substring(0, indexFrom - 1);
-            String eventTo = userInput[1].substring(indexTo + 4);
-            String eventFrom = userInput[1].substring(indexFrom + 6, indexTo - 1);
+            String eventInfo[] = userInput[1].split("/from|/to");
+            String eventText = eventInfo[0].trim();
+            String eventFrom = eventInfo[1].trim();
+            String eventTo = eventInfo[2].trim();
 
-            String userInp = String.format("%s (from: %s to: %s)", eventText, eventFrom, eventTo);
-            Event event = new Event(userInp);
+            Event event = new Event(eventText, eventFrom, eventTo);
             this.list.add(event);
             System.out.println("\tGot it. I've added this task:");
             System.out.println("\t" + event.toString());
@@ -191,12 +196,79 @@ public class Duke {
         }
     }
 
+    private void loadData() {
+        File data = new File(this.FILEPATH);
+        try {
+            Scanner fileSc = new Scanner(data);
+            while(fileSc.hasNextLine()) {
+                String fileData = fileSc.nextLine();
+
+                String[] taskData = fileData.split("\\|");
+                readData(taskData);
+            }
+        } catch(FileNotFoundException e) {
+            this.createFile();
+        } catch (DukeException e) {
+            System.out.println(e);
+        }
+    }
+
+    private void createFile() {
+        File dir = new File("./data");
+        File newFile = new File(this.FILEPATH);
+        dir.mkdir();
+        try{
+            newFile.createNewFile();
+        } catch (IOException e) {
+            System.out.println(e);
+        }
+    }
+
+    private void readData(String[] taskData) throws DukeDataException {
+        String taskType = taskData[0];
+        String taskStatus = taskData[1];
+        String taskInfo = taskData[2].trim();
+
+        Task loadTask = null;
+
+        if(taskType.equals("T")) {
+            loadTask = new Todo(taskInfo);
+        } else if (taskType.equals("D")) {
+            String taskTime = taskData[3].trim();
+            loadTask = new Deadlines(taskInfo, taskTime);
+        } else if (taskType.equals("E")){
+            String taskFrom = taskData[3].trim();
+            String taskTo = taskData[4].trim();
+            loadTask = new Event(taskInfo, taskFrom, taskTo);
+        } else {
+            throw new DukeDataException();
+        }
+
+        if(taskStatus.equals("1")){
+            loadTask.changeStatus();
+        }
+        this.list.add(loadTask);
+    }
+
+    private void storeData() throws IOException{
+        FileWriter writer = new FileWriter(this.FILEPATH, false);
+        BufferedWriter buffer = new BufferedWriter(writer);
+        for(int i = 0; i < this.list.size(); i++) {
+            buffer.write(this.list.get(i).writeFile());
+            buffer.newLine();
+        }
+        buffer.close();
+        writer.close();
+    }
+
+
     private void printLine() {
         System.out.println("------------------------------------------------------------------");
     }
 
     public static void main(String[] args)  {
         Duke dukeObj = new Duke();
+        dukeObj.loadData();
 
         System.out.println("Welcome! I'm Duke.");
         System.out.println("What can I do for you?");
