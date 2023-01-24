@@ -1,3 +1,5 @@
+import java.time.format.DateTimeParseException;
+
 import java.util.Scanner;
 import java.util.ArrayList;
 
@@ -182,8 +184,8 @@ public class Duke {
                         throw new DukeException("deadline");
                     } else {
                         String[] inputs = input.split(" /by ", 2);
-                        System.out.println("Got it. I've added this task:");
                         list.add(new Deadline(inputs[0], inputs[1]));
+                        System.out.println("Got it. I've added this task:");
                         System.out.println("    " + list.get(list.size() - 1).toString());
                         System.out.println("Now you have " + list.size() + " tasks in the list.");
                         writeData();
@@ -198,8 +200,8 @@ public class Duke {
                         String[] inputs = input.split(" /", 3);
                         inputs[1] = inputs[1].replace("from ", "");
                         inputs[2] = inputs[2].replace("to ", "");
-                        System.out.println("Got it. I've added this task:");
                         list.add(new Event(inputs[0], inputs[1], inputs[2]));
+                        System.out.println("Got it. I've added this task:");
                         System.out.println("    " + list.get(list.size() - 1).toString());
                         System.out.println("Now you have " + list.size() + " tasks in the list.");
                         writeData();
@@ -261,6 +263,10 @@ public class Duke {
                 } else {
                     System.out.println("☹ OOPS!!! The description of a " + e.getMessage() + " cannot be empty.");
                 }
+            } catch (DateTimeParseException e) {
+                System.out.println("Incorrect format detected.");
+                System.out.println("Please enter date/time in the following format:");
+                System.out.println("    yyyy-MM-dd HHmm");
             }
             System.out.println("____________________________________________________________");
 
