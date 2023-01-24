@@ -1,33 +1,31 @@
-import java.util.Scanner;
-
 public class Duke {
     public static void main(String[] args) {
-        System.out.println("Hello, Duke here. How can I help you?");
-        Scanner sc = new Scanner(System.in);
+        Ui ui = new Ui();
+        ui.showWelcome();
         TaskList taskList = Storage.load();
-        String userLine = "";
-
-        while (!userLine.equals("bye")) {
-            userLine = sc.nextLine();
+        boolean isExit = false;
+        while (!isExit) {
+            String userLine = ui.readCommand();
             String[] split = userLine.split(" ");
             String command = split[0];
             switch (command) {
             case "bye":
-                System.out.println("Bye, hope to see you again.");
+                ui.message("Bye, hope to see you again.");
+                isExit = true;
                 break;
             case "list":
-                System.out.println(taskList);
+                ui.listAllTasks(taskList);
                 break;
             case "mark": {
                 int number = Integer.parseInt(split[1]) - 1;
                 taskList.mark(number);
-                System.out.println(taskList);
+                ui.listAllTasks(taskList);
                 break;
             }
             case "unmark": {
                 int number = Integer.parseInt(split[1]) - 1;
                 taskList.unmark(number);
-                System.out.println(taskList);
+                ui.listAllTasks(taskList);
                 break;
             }
             case "todo": {
@@ -37,7 +35,7 @@ public class Duke {
             case "deadline": {
                 split = userLine.split(" ");
                 if (split.length < 4) {
-                    System.out.println("Invalid format");
+                    ui.error("Invalid format");
                     break;
                 }
                 taskList.addDeadline(split[1], split[3]);
@@ -46,7 +44,7 @@ public class Duke {
             case "event": {
                 split = userLine.split(" ");
                 if (split.length < 6) {
-                    System.out.println("Invalid format");
+                    ui.error("Invalid format");
                     break;
                 }
                 taskList.addEvent(split[1], split[3], split[5]);
@@ -54,22 +52,24 @@ public class Duke {
             }
             case "delete": {
                 if (split.length != 2) {
-                    System.out.println("Invalid format");
+                    ui.error("Invalid format");
                 }
+                int itemIndex;
                 try {
-                    int itemIndex = Integer.parseInt(split[1]) - 1;
-                    System.out.printf("Removing item %d\n", itemIndex + 1);
-                    taskList.delete(itemIndex);
-                    System.out.printf("Removal successful. New list: \n%s", taskList);
-                } catch (ArrayIndexOutOfBoundsException e) {
-                    System.out.printf("Error: Item %d does not exist", Integer.parseInt(split[1]));
+                    itemIndex = Integer.parseInt(split[1]);
+                    ui.removeItemMessage(itemIndex);
+                    taskList.delete(itemIndex - 1);
+                    ui.message("Removal successful. New list:");
+                    ui.listAllTasks(taskList);
+                } catch (IndexOutOfBoundsException e) {
+                    ui.error("Item does not exist");
                 } catch (NumberFormatException e) {
-                    System.out.printf("Error: %s is not a number", split[1]);
+                    ui.error(split[1] + " is not a number");
                 }
                 break;
             }
             default:
-                System.out.println("Command not found");
+                ui.error("Command not found");
             }
             Storage.store(taskList);
         }

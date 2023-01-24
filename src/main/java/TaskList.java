@@ -1,8 +1,9 @@
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.List;
 
 public class TaskList implements Serializable {
-    ArrayList<Task> list = new ArrayList<>();
+    private final ArrayList<Task> list = new ArrayList<>();
 
     void addTodo(String desc) {
         try {
@@ -51,12 +52,9 @@ public class TaskList implements Serializable {
         list.remove(index);
     }
 
-    @Override
-    public String toString() {
-        StringBuilder str = new StringBuilder();
-        for (int i = 0; i < list.size(); i++) {
-            str.append(String.format("%d: %s\n", i + 1, list.get(i)));
-        }
-        return str.toString();
+    List<Task> getList() {
+        return list;
     }
+
+
 }
