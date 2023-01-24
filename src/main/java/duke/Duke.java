@@ -15,7 +15,7 @@ import java.util.Scanner;
 public class Duke {
     private final static Path saveFilePath = Path.of("./save-data/task-list.csv");
 
-    private final static Ui ui = new Ui();
+    private final static Ui ui = new Ui(System.out);
     private final static Parser parser = new Parser();
 
     private static TaskList tasks;
