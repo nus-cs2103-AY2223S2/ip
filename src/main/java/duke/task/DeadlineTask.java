@@ -38,7 +38,7 @@ public class DeadlineTask extends DukeTask {
      *
      * @return The deadline date of the task
      */
-    public LocalDate getDeadline() {
+    public LocalDate getEndDate() {
         return this.deadline;
     }
 

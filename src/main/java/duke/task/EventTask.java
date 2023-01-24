@@ -32,6 +32,24 @@ public class EventTask extends DukeTask {
     }
 
     /**
+     * Returns the starting date of the task
+     *
+     * @return the starting date of the task
+     */
+    public LocalDate getStartDate() {
+        return this.from;
+    }
+
+    /**
+     * Returns the ending date of the task
+     *
+     * @return the ending date of the task
+     */
+    public LocalDate getEndDate() {
+        return this.to;
+    }
+
+    /**
      * Returns a string representation of the task in a specific format, indicating whether the task is done or not,
      * the information of the task, start date and end date of event.
      *

@@ -30,7 +30,8 @@ public class Parser {
         FIND,
         VIEW,
         UPDATE,
-        UNDO;
+        UNDO,
+        FREE;
     }
 
     /**
@@ -68,6 +69,8 @@ public class Parser {
                     return new HelpCommand();
                 case MASSDELETE:
                     return new MassDeleteCommand();
+                case FREE:
+                    return new FindFreeTimeCommand();
                 case MARK:
                     return Decipherer.markDecoder(information);
                 case UNMARK:

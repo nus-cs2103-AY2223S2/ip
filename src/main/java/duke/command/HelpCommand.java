@@ -16,11 +16,12 @@ public class HelpCommand extends Command {
                 "with its starting and ending date specified"),
         FIND("find [keyword]", "List all the events that matches the input keyword. " +
                 "(case insensitive)"),
+        Free("free","Find the next free date in the next month"),
         HELP("help", "Show help menu"),
         LIST("list", "Display all tasks in the current Task List"),
         MARK("mark [taskIndex]", "Mark the task specified by the given index as done"),
         MASS_DELETE("massDelete", "Delete all the tasks that have been marked as done"),
-        SEARCH("view [yyyy-mm-dd]", "List all the Deadline tasks and Event tasks that takes " +
+        VIEW("view [yyyy-mm-dd]", "List all the Deadline tasks and Event tasks that takes " +
                 "place on the given day"),
         UNMARK("unmark [taskIndex]", "Mark the task specified by the given index as undone"),
         UPDATE("update [taskIndex] [description]", "Update the description of the task specified " +

@@ -107,7 +107,7 @@ public class TaskList implements Cloneable {
                 .filter(task -> task.getType() == TaskType.DEADLINE && !task.getStatus())
                 .sorted(Comparator.comparing(x -> {
                     DeadlineTask ddlTask = (DeadlineTask) x;
-                    return ddlTask.getDeadline();
+                    return ddlTask.getEndDate();
                 }))
                 .collect(Collectors.toList());
 
