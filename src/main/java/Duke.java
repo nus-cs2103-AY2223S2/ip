@@ -7,6 +7,7 @@ import java.io.FileWriter;
 public class Duke {
     public static void readStorage(String filePath, ArrayList<Task> toDoList) {
         try {
+            (new File("./data")).mkdir();
             File savedFile = new File("./data/duke.txt");
             savedFile.createNewFile();
             Scanner scanner = new Scanner(savedFile);
@@ -40,6 +41,7 @@ public class Duke {
                 }
             }
             scanner.close();
+
         } catch (IOException e) {
             System.out.println("cannot create new file");
         } catch (IndexOutOfBoundsException e) {
