@@ -17,5 +17,5 @@ All you need to do is,
 Features:
 
 - [x] Manage task
-- [ ] Reminders (coming soon)
-- [ ] User Interface (coming soon)
+- [X] Reminders
+- [X] User Interface
