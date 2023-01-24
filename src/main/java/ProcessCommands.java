@@ -1,3 +1,5 @@
+import entities.*;
+
 public class ProcessCommands {
     protected TaskList list;
 

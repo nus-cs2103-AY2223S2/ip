@@ -1,3 +1,7 @@
+package entities;
+
+import entities.Task;
+
 public class Deadline extends Task {
     protected String by;
 
