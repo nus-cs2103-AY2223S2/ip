@@ -1,4 +1,10 @@
 package duke.message;
+
+/**
+ * Represents a response message by Duke to the user. A DukeMessage object
+ * corresponds to a message consisting of either a message status only or
+ * message status and string content.
+ */
 public class DukeMessage extends Message {
 
     MessageStatus status;
@@ -12,7 +18,6 @@ public class DukeMessage extends Message {
         super(content);
         this.status = status;
     }
-
 
 
     @Override

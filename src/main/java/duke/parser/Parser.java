@@ -1,8 +1,14 @@
 package duke.parser;
 
+import duke.exception.InvalidDeadlineException;
+import duke.exception.InvalidEventException;
 import duke.exception.InvalidInputException;
+import duke.exception.InvalidTodoException;
 import duke.message.MessageStatus;
 
+/**
+ * Used for parsing standard input from the user
+ */
 public class Parser {
 
 
@@ -36,12 +42,19 @@ public class Parser {
         return action.equals("delete");
     }
 
+    /**
+     * Returns the status of task from user's input
+     *
+     * @param message Contents of message.
+     * @return status of task.
+     * @throws InvalidInputException If user input is invalid.
+     */
     public MessageStatus process(String message) throws InvalidInputException {
 
         MessageStatus status;
         if (message.equals("bye")) {
             status = MessageStatus.END;
-        } else if (message.equals("list")){
+        } else if (message.equals("list")) {
             status = MessageStatus.LIST;
         } else if (isMark(message)) {
             status = MessageStatus.MARK;

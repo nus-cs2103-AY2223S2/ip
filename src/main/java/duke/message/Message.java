@@ -1,5 +1,8 @@
 package duke.message;
 
+/**
+ * Represents a parent class for message
+ */
 public class Message {
     private String content;
 

@@ -7,7 +7,10 @@ import duke.storage.Storage;
 import duke.task.Task;
 import duke.task.TaskList;
 
-
+/**
+ * Represents a Duke message generator. A MessageGenerator object has
+ * associated methods to generate messages in response to tasks.
+ */
 public class MessageGenerator {
 
     TaskList taskList;
@@ -31,6 +34,14 @@ public class MessageGenerator {
         return this.taskList.getTask(taskNum);
     }
 
+    /**
+     * Returns response message from Duke, in response to user's task's status
+     * and task content.
+     *
+     * @param status Status of message.
+     * @param task   Task object representing user's task input.
+     * @return String consisting of the header, associated task and end.
+     */
     String generateTaskMessage(MessageStatus status, Task task) {
         String heading = "";
         String end = "";
@@ -61,36 +72,46 @@ public class MessageGenerator {
         return heading + this.taskList.toString();
     }
 
+    /**
+     * Returns response message from Duke, in response to user's input.
+     *
+     * @param status  Status of message.
+     * @param message Contents of message.
+     * @return Duke message representing the response.
+     * @throws InvalidDeadlineException If user input is invalid for deadline task.
+     * @throws InvalidTodoException     If user input is invalid for todo task.
+     * @throws InvalidEventException    If user input is invalid for event task.
+     */
     public DukeMessage generate(MessageStatus status, String message)
             throws InvalidDeadlineException, InvalidTodoException, InvalidEventException {
         Task task;
 
         switch (status) {
-        case LIST:
-            message = generateListMessage();
-            break;
-        case MARK:
-            task = processMark(message);
-            message = generateTaskMessage(status, task);
-            break;
-        case ADD:
-            task = taskList.addTask(message);
+            case LIST:
+                message = generateListMessage();
+                break;
+            case MARK:
+                task = processMark(message);
+                message = generateTaskMessage(status, task);
+                break;
+            case ADD:
+                task = taskList.addTask(message);
 
-            // Add task in storage
-            this.storage.addTask(message);
+                // Add task in storage
+                this.storage.addTask(message);
 
-            message = generateTaskMessage(status, task);
-            break;
-        case DELETE:
-            task = taskList.deleteTask(message);
+                message = generateTaskMessage(status, task);
+                break;
+            case DELETE:
+                task = taskList.deleteTask(message);
 
-            // Delete task in storage
-            this.storage.deleteTask(message);
+                // Delete task in storage
+                this.storage.deleteTask(message);
 
-            message = generateTaskMessage(status, task);
-            break;
-        default:
-            break;
+                message = generateTaskMessage(status, task);
+                break;
+            default:
+                break;
         }
         return new DukeMessage(status, message);
     }

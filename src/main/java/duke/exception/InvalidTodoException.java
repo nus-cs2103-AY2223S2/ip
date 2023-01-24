@@ -1,4 +1,8 @@
 package duke.exception;
+
+/**
+ * Constructs a new exception representing an invalid todo task input.
+ */
 public class InvalidTodoException extends Exception {
 
     public InvalidTodoException() {
