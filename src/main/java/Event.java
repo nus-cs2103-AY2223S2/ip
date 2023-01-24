@@ -1,12 +1,16 @@
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
+
 /**
  * A type of Task with a specific window for
  * completion.
  */
 public class Event extends Task {
     // Start date for the task.
-    protected String from;
+    protected LocalDateTime from;
     // End date for the task.
-    protected String to;
+    protected LocalDateTime to;
 
     /**
      * Constructor for the event class.
@@ -15,10 +19,15 @@ public class Event extends Task {
      * @param from Start date for the task.
      * @param to End date for the task.
      */
-    public Event(String description, String from, String to) {
+    public Event(String description, String from, String to) throws DateTimeParseException {
         super(description);
-        this.from = from;
-        this.to = to;
+        boolean saved = false;
+
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HHmm");
+        this.from = LocalDateTime.parse(from, formatter);
+        formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HHmm");
+        this.to = LocalDateTime.parse(to, formatter);
+
     }
 
     /**
@@ -29,6 +38,7 @@ public class Event extends Task {
     @Override
     public String toString() {
         return "[E]" + super.toString()
-                + " (from: " + from + " to: " + to + ")";
+                + " (from: " + from.format(DateTimeFormatter.ofPattern("MMM dd yyyy h:mm a"))
+                + " to: " + to.format(DateTimeFormatter.ofPattern("MMM dd yyyy h:mm a")) + ")";
     }
 }
