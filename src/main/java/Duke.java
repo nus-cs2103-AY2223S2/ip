@@ -102,21 +102,17 @@ public class Duke {
     }
 
     private void addTodoToList(String description) {
-        Task task = new ToDoTask(description);
-        taskList.add(task);
-        ui.printMessage("added: " + task);
+        new AddTodoCommand(description).execute(taskList, ui, storage);
     }
 
     private void addDeadlineToList(String arguments) throws DukeException {
         try {
             String[] splitArgs = arguments.split(" /by ");
-            Task task = new DeadlineTask(splitArgs[0], parser.parseDateTime(splitArgs[1]));
-            taskList.add(task);
-            ui.printMessage("added: " + task);
-        } catch (ArrayIndexOutOfBoundsException e) {
-            throw new EmptyArgumentDukeException();
+            new AddDeadlineCommand(splitArgs[0], parser.parseDateTime(splitArgs[1])).execute(taskList, ui, storage);
         } catch (DateTimeParseException e) {
             throw new InvalidArgumentDukeException();
+        } catch (ArrayIndexOutOfBoundsException e) {
+            throw new EmptyArgumentDukeException();
         }
     }
 
@@ -124,9 +120,8 @@ public class Duke {
         try {
             String[] splitArgs = arguments.split(" /from ");
             String[] times = splitArgs[1].split(" /to ");
-            Task task = new EventTask(splitArgs[0], parser.parseDateTime(times[0]), parser.parseDateTime(times[1]));
-            taskList.add(task);
-            ui.printMessage("added: " + task);
+            new AddEventCommand(splitArgs[0], parser.parseDateTime(times[0]), parser.parseDateTime(times[1]))
+                    .execute(taskList, ui, storage);
         } catch (ArrayIndexOutOfBoundsException e) {
             throw new EmptyArgumentDukeException();
         } catch (DateTimeParseException e) {
