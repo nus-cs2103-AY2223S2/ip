@@ -15,7 +15,11 @@ public class Ui {
 
     public static void greetUser() {
         System.out.println("Hello I'm Duke! \nWhat can I do for you?");
-        line = sc.nextLine();
+        try {
+            if (isRunning) line = sc.nextLine();
+        } catch (java.util.NoSuchElementException e) {
+            isRunning = false;
+        }
     }
 
     public static String getNextCommand() {
