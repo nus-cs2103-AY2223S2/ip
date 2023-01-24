@@ -1,170 +1,88 @@
-import java.io.File;
-import java.io.FileWriter;
-import java.time.LocalDateTime;
-import java.util.Scanner;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
-
 public class Duke {
-    public static void main(String[] args) {
-        Scanner input = new Scanner(System.in);
-        TaskList taskList = new TaskList();
-        String reply = "";
-        String dataFolderPath = "data";
-        String dataFilePath = dataFolderPath + "/duke.txt";
-        FileWriter writer;
+    private final Ui ui;
+    private final Storage storage;
+    private TaskList tasks;
 
-        // Create the file if it does not exist
+    public Duke(String dataFilePath) {
+        ui = new Ui();
+        storage = new Storage(dataFilePath);
         try {
-            File targetFile = new File(dataFilePath);
-            File parent = targetFile.getParentFile();
-            if (parent != null && !parent.exists() && !parent.mkdirs()) {
-                throw new IllegalStateException("Couldn't create dir: " + parent);
-            }
-            if (!targetFile.createNewFile()) {
-                // Load data
-                Scanner dataFile = new Scanner(targetFile);
-                String dataLine;
-                Pattern wholeStrPattern = Pattern.compile("\\d+\\.\\[(T|D|E)]\\[( |X)\\] (.*)");
-                Pattern deadlinePattern = Pattern.compile("(.*) /by (.*)");
-                Pattern eventPattern = Pattern.compile("(.*) /from (.*) /to (.*)");;
-                Matcher wholeStrMatcher, individualMatcher;
-                Task toAdd;
-                while (dataFile.hasNext()) {
-                    dataLine = dataFile.nextLine();
-                    wholeStrMatcher = wholeStrPattern.matcher(dataLine);
-                    if (wholeStrMatcher.find()) {
-                        // Group 0 is the whole matched string
-                        switch (wholeStrMatcher.group(1)) {
-                        case "T":
-                            toAdd = new ToDo(wholeStrMatcher.group(3));
-                            break;
-                        case "D":
-                            individualMatcher = deadlinePattern.matcher(wholeStrMatcher.group(3));
-                            if (individualMatcher.find()) {
-                                toAdd = new Deadline(individualMatcher.group(1), individualMatcher.group(2), true);
-                            } else {
-                                throw new InvalidDataFileException();
-                            }
-                            break;
-                        case "E":
-                            individualMatcher = eventPattern.matcher(wholeStrMatcher.group(3));
-                            if (individualMatcher.find()) {
-                                toAdd = new Event(individualMatcher.group(1), individualMatcher.group(2), individualMatcher.group(3), true);
-                            } else {
-                                throw new InvalidDataFileException();
-                            }
-                            break;
-                        default:
-                            throw new InvalidDataFileException();
-                        }
-
-                        if (wholeStrMatcher.group(2).equals("X")) {
-                            toAdd.setDone(true);
-                        }
-
-                        taskList.addTask(toAdd);
-                    }
-                }
-            }
-        } catch (Exception e) {
-            System.out.println(e.getMessage());
+            tasks = new TaskList(storage.load());
+        } catch (DukeException e) {
+            ui.showLoadingError();
+            tasks = new TaskList();
         }
+    }
 
-        printTextWithLines("Hello! I'm Duke\nWhat can I do for you?");
+    public static void main(String[] args) {
+        new Duke("data/tasks.txt").run();
+    }
 
+    public void run() {
+        ui.showGreeting();
+
+        String[] parsedCommand;
+        String command;
+        Task task;
+
+        label:
         while (true) {
-            reply = input.nextLine();
             try {
-                if (reply.equals("bye")) {
-                    printTextWithLines("Bye. Hope to see you again soon!");
+                parsedCommand = Parser.parseCommand(ui.readCommand());
+                command = parsedCommand[0];
+                switch (command) {
+                case "bye":
+                    ui.showGoodbye();
+                    break label;
+                case "list":
+                    ui.showTextWithLines(tasks.toString());
                     break;
-                } else if (reply.equals("list")) {
-                    printTextWithLines(taskList.toString());
-                } else if (reply.startsWith("mark")) {
-                    Matcher matcher = compileAndMatch("mark (.*)", reply);
-                    if (matcher.find() && matcher.group(1).length() > 0) {
-                        int taskNumber = Integer.parseInt(matcher.group(1));
-                        taskList.setDone(taskNumber, true);
-                        printTextWithLines("Nice! I've marked this task as done:\n  " + taskList.getTask(taskNumber));
-                    } else {
-                        throw new InvalidCommandException("The task number of a mark command cannot be empty.");
-                    }
-                } else if (reply.startsWith("unmark")) {
-                    Matcher matcher = compileAndMatch("unmark (.*)", reply);
-                    if (matcher.find() && matcher.group(1).length() > 0) {
-                        int taskNumber = Integer.parseInt(matcher.group(1));
-                        taskList.setDone(taskNumber, true);
-                        printTextWithLines("OK, I've marked this task as not done yet:\n  " + taskList.getTask(taskNumber));
-                    } else {
-                        throw new InvalidCommandException("The task number of an unmark command cannot be empty.");
-                    }
-                } else if (reply.startsWith("delete")) {
-                    Matcher matcher = compileAndMatch("delete (.*)", reply);
-                    if (matcher.find() && matcher.group(1).length() > 0) {
-                        int taskNumber = Integer.parseInt(matcher.group(1));
-                        String taskDescription = taskList.getTask(taskNumber).toString();
-                        taskList.deleteTask(taskNumber);
-                        printTextWithLines("Noted. I've removed this task:\n  " + taskDescription + "\n" + taskList.describeLength());
-                    } else {
-                        throw new InvalidCommandException("The task number to be deleted must be specified, and must be an integer.");
-                    }
-                } else if (reply.startsWith("todo")) {
-                    Matcher matcher = compileAndMatch("todo (.*)", reply);
-                    if (matcher.find() && matcher.group(1).length() > 0) {
-                        Task task = new ToDo(matcher.group(1));
-                        taskList.addTask(task);
-                        printTextWithLines("Got it. I've added this task:\n  " + task + "\n" + taskList.describeLength());
-                    } else {
-                        throw new InvalidCommandException("The description of a todo cannot be empty.");
-                    }
-                } else if (reply.startsWith("deadline")) {
-                    Matcher matcher = compileAndMatch("deadline (.*) /by (.*)", reply);
-                    if (matcher.find() && matcher.group(1).length() > 0 && matcher.group(2).length() > 0) {
-                        Task task = new Deadline(matcher.group(1), matcher.group(2), false);
-                        taskList.addTask(task);
-                        printTextWithLines("Got it. I've added this task:\n  " + task + "\n" + taskList.describeLength());
-                    } else {
-                        throw new InvalidCommandException("The end date of a deadline cannot be empty.");
-                    }
-                } else if (reply.startsWith("event")) {
-                    Matcher matcher = compileAndMatch("event (.*) /from (.*) /to (.*)", reply);
-                    if (matcher.find() && matcher.group(1).length() > 0 && matcher.group(2).length() > 0 && matcher.group(3).length() > 0) {
-                        Task task = new Event(matcher.group(1), matcher.group(2), matcher.group(3), false);
-                        taskList.addTask(task);
-                        printTextWithLines("Got it. I've added this task:\n  " + task + "\n" + taskList.describeLength());
-                    } else {
-                        throw new InvalidCommandException("An event must have a nonempty from date and a to date.");
-                    }
-                } else {
-                    throw new UnknownCommandException();
+                case "mark": {
+                    int taskNumber = Integer.parseInt(parsedCommand[1]);
+                    tasks.setDone(taskNumber, true);
+                    task = tasks.getTask(taskNumber);
+                    ui.showMarkTaskMessage(task);
+                    break;
+                }
+                case "unmark": {
+                    int taskNumber = Integer.parseInt(parsedCommand[1]);
+                    tasks.setDone(taskNumber, false);
+                    task = tasks.getTask(taskNumber);
+                    ui.showUnmarkTaskMessage(task);
+                    break;
+                }
+                case "delete": {
+                    int taskNumber = Integer.parseInt(parsedCommand[1]);
+                    task = tasks.getTask(taskNumber);
+                    tasks.deleteTask(taskNumber);
+                    ui.showDeleteTaskMessage(task, tasks);
+                    break;
+                }
+                case "todo":
+                    task = new ToDo(parsedCommand[1]);
+                    tasks.addTask(task);
+                    ui.showAddTaskMessage(task, tasks);
+                    break;
+                case "deadline":
+                    task = new Deadline(parsedCommand[1], parsedCommand[2], false);
+                    tasks.addTask(task);
+                    ui.showAddTaskMessage(task, tasks);
+                    break;
+                case "event":
+                    task = new Event(parsedCommand[1], parsedCommand[2], parsedCommand[3], false);
+                    tasks.addTask(task);
+                    ui.showAddTaskMessage(task, tasks);
+                    break;
                 }
 
                 // After each command, save the current task list to the file
-                if (taskList.getLength() != 0) {
-                    writer = new FileWriter(dataFilePath);
-                    writer.write(taskList.toEncodedString());
-                    writer.close();
-                }
+                storage.saveTasks(tasks);
+            } catch (DukeException e) {
+                ui.showError(e.getMessage());
             } catch (Exception e) {
-                printTextWithLines(e.getMessage());
+                // For unexpected exceptions, show the full message
+                ui.showError(e.toString());
             }
         }
-    }
-
-    static Matcher compileAndMatch(String regex, String toMatch) {
-        Pattern pattern = Pattern.compile(regex);
-        return pattern.matcher(toMatch);
-    }
-
-    static void printTextWithLines(String text) {
-        printLineBreak();
-        System.out.println(text);
-        printLineBreak();
-        System.out.println();
-    }
-
-    static void printLineBreak() {
-        System.out.println("_________________________________________________________________");
     }
 }

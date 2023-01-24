@@ -2,10 +2,35 @@ import java.util.ArrayList;
 
 public class TaskList {
     // taskList is 1 indexed
-    private ArrayList<Task> taskList;
+    private final ArrayList<Task> taskList;
 
     public TaskList() {
         this.taskList = new ArrayList<>();
+    }
+
+    public TaskList(ArrayList<String[]> dataFileTasks) throws DukeException {
+        this.taskList = new ArrayList<>();
+        Task toAdd;
+        for (String[] fileCommand : dataFileTasks) {
+            switch (fileCommand[0]) {
+            case "T":
+                toAdd = new ToDo(fileCommand[2]);
+                break;
+            case "D":
+                toAdd = new Deadline(fileCommand[2], fileCommand[3], true);
+                break;
+            case "E":
+                toAdd = new Event(fileCommand[2], fileCommand[3], fileCommand[4], true);
+                break;
+            default:
+                throw new InvalidDataFileException();
+            }
+            if (fileCommand[1].equals("X")) {
+                toAdd.setDone(true);
+            }
+
+            this.addTask(toAdd);
+        }
     }
 
     public Task getTask(int taskNumber) throws TaskNotFoundException {
@@ -56,6 +81,10 @@ public class TaskList {
             result.deleteCharAt(result.length() - 1);
         }
         return result.toString();
+    }
+
+    public boolean isEmpty() {
+        return taskList.size() == 0;
     }
 
     @Override
