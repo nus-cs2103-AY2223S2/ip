@@ -51,6 +51,7 @@ public class Duke {
                     checkTaskDesc(splitStr);
                     inputs.add(Deadline.createDeadline(splitStr[1]));
                     handleTaskOutput(db, inputs);
+
                     break;
 
                 case "event":

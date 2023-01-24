@@ -1,20 +1,23 @@
-public class Deadline extends Task {
-    private String by;
+import java.time.LocalDateTime;
 
-    private Deadline(String description, String by) {
+public class Deadline extends Task {
+    private LocalDateTime dueDateTime;
+
+    public Deadline(String description, String by) throws InvalidDateTimeException {
         super(description);
-        this.by = by;
+        this.dueDateTime = handleDateTime(by);
+    }
+
+    public static Deadline createDeadline(String desc) throws InvalidDateTimeException {
+        String[] deadlineArr = desc.split(" /by ");
+        String deadlineDesc = deadlineArr[0].trim();
+        String by = deadlineArr[1];
+        return new Deadline(deadlineDesc, by);
     }
 
     @Override
     public String toString() {
-        return "[D]" + super.toString() + " (by: " + by + ")";
-    }
-
-    public static Deadline createDeadline(String desc) {
-        String[] deadlineArr = desc.split("/", 2);
-        String deadlineDesc = deadlineArr[0].trim();
-        String by = deadlineArr[1].substring(3);
-        return new Deadline(deadlineDesc, by);
+        return String.format("[D]%s (by: %s %s)", super.toString(),
+                dueDateTime.toLocalDate(), dueDateTime.toLocalTime());
     }
 }

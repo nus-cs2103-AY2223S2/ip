@@ -20,7 +20,7 @@ public class Database {
             file.createNewFile();
     }
 
-    public void updateInputs(ArrayList<Task> inputs) throws IOException {
+    public void updateInputs(ArrayList<Task> inputs) throws IOException, InvalidDateTimeException {
         Scanner scanner = new Scanner(file);
         while(scanner.hasNextLine()) {
             String task = scanner.nextLine();

@@ -1,23 +1,29 @@
-public class Event extends Task {
-    private String from;
-    private String to;
+import java.time.LocalDateTime;
 
-    private Event(String description, String from, String to) {
+public class Event extends Task {
+    private LocalDateTime startDateTime;
+    private LocalDateTime dueDateTime;
+
+    public Event(String description, String from, String to) throws InvalidDateTimeException {
         super(description);
-        this.from = from;
-        this.to = to;
+
+        this.startDateTime = handleDateTime(from);
+        this.dueDateTime = handleDateTime(to);
+    }
+
+    public static Event createEvent(String desc) throws InvalidDateTimeException {
+        String[] eventArr = desc.split(" /from ");
+        String[] dataTimes = eventArr[1].split(" /to ");
+        String eventDesc = eventArr[0].trim();
+        String from = dataTimes[0].trim();
+        String to = dataTimes[1].trim();
+        return new Event(eventDesc, from, to);
     }
 
     @Override
     public String toString() {
-        return "[E]" + super.toString() + " (from: " + from + " to: " + to + ")";
-    }
-
-    public static Event createEvent(String desc) {
-        String[] eventArr = desc.split("/", 3);
-        String eventDesc = eventArr[0].trim();
-        String from = eventArr[1].substring(5).trim();
-        String to = eventArr[2].substring(3);
-        return new Event(eventDesc, from, to);
+        return String.format("[E]%s (from: %s %s to: %s %s)", super.toString(),
+                this.startDateTime.toLocalDate(), this.startDateTime.toLocalTime(),
+                this.dueDateTime.toLocalDate(), this.startDateTime.toLocalTime());
     }
 }
