@@ -105,7 +105,7 @@ public class Duke {
         Scanner s = new Scanner(f);
         ArrayList<Task> arrayList = new ArrayList<>();
         while (s.hasNext()) {
-            String[] parts = s.nextLine().split("-");
+            String[] parts = s.nextLine().split("/");
             if (parts[0].equals("T")) {
                 Task t = new Todo(parts[2]);
                 if (parts[1].equals("1")) t.markAsDone();
@@ -113,12 +113,13 @@ public class Duke {
 
             }
             if (parts[0].equals("D")) {
-                Task t = new Deadline(parts[2], parts[3]);
+                Task t = new Deadline(parts[2], LocalDateTime.parse(parts[3]));
                 if (parts[1].equals("1")) t.markAsDone();
                 arrayList.add(t);
             }
             if (parts[0].equals("E")) {
-                Task t = new Event(parts[2], parts[3], parts[4]);
+                Task t = new Event(parts[2], LocalDateTime.parse(parts[3]),
+                        LocalDateTime.parse(parts[4]));
                 if (parts[1].equals("1")) t.markAsDone();
                 arrayList.add(t);
             }
@@ -133,13 +134,13 @@ public class Duke {
 
             Task t = arrayList.get(i);
             if (t instanceof Todo) {
-                fw.write("T-" + t.getStatusIconBinary() + "-" + t.getDescription());
+                fw.write("T/" + t.getStatusIconBinary() + "/" + t.getDescription());
             }
             if (t instanceof Deadline) {
-                fw.write("D-" + t.getStatusIconBinary() + "-" + t.getDescription() + "-" + ((Deadline) t).getBy());
+                fw.write("D/" + t.getStatusIconBinary() + "/" + t.getDescription() + "/" + ((Deadline) t).getBy());
             }
             if (t instanceof Event) {
-                fw.write("E-" + t.getStatusIconBinary() + "-" + t.getDescription() + "-" + ((Event) t).getFrom() + "-" + ((Event) t).getTo());
+                fw.write("E/" + t.getStatusIconBinary() + "/" + t.getDescription() + "/" + ((Event) t).getFrom() + "/" + ((Event) t).getTo());
             }
 
             fw.write(System.lineSeparator());

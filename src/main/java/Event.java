@@ -14,11 +14,11 @@ public class Event extends Task {
     }
 
     public String getFrom() {
-        return this.from;
+        return this.from.toString();
     }
 
     public String getTo() {
-        return this.to;
+        return this.to.toString();
     }
     @Override
     public String toString() {
