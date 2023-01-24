@@ -9,8 +9,14 @@ public class Duke {
     protected static String line = "____________________________________________________________";
     protected static TaskList lst = new TaskList();
     protected static boolean cont = true;
-
+    protected static String path = "src/data/duke.txt";
+    protected static Storage storage = new Storage(path);
     public static void main(String[] args) {
+        try {
+            storage.loadFileInto(lst);
+        } catch (DukeException e) {
+            System.out.println("error loading file");
+        }
         Scanner input = new Scanner(System.in);
         printLine();
         System.out.println("Hello! I'm Kirby!\n" + "What can I do for you? :)");
@@ -78,8 +84,10 @@ public class Duke {
                         break;
                     default:
                         throw new DukeException("none");
+                        // update saved file
                         //in = input.nextLine();
                 }
+                storage.saveToFile(lst);
             } catch (DukeException e) {
                 System.out.println(e);
                 in = input.nextLine();
@@ -106,11 +114,11 @@ public class Duke {
             printLine();
             printLine();
         } else {
-            Task t = new Task(s.trim());
+            //Task t = new Task(s.trim());
             printLine();
-            lst.addTask(t);
+            //lst.addTask(t);
             System.out.println("Got it! I've added: ");
-            System.out.println(" " + t);
+            //System.out.println(" " + t);
             lst.printSize();
             printLine();
         }
