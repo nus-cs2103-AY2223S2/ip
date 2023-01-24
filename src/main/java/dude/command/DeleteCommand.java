@@ -9,10 +9,18 @@ import dude.ui.Ui;
 public class DeleteCommand extends Command {
     private final int taskIndex;
 
+    /**
+     * Initializes DeleteCommand.
+     *
+     * @param taskIndex Task index that has to be deleted from TaskList.
+     */
     public DeleteCommand(int taskIndex) {
         this.taskIndex = taskIndex;
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public void execute(TaskList tasks, Ui ui, Storage storage) {
         if (Task.count >= taskIndex && Task.count != 0) {

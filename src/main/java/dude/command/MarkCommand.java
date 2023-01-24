@@ -8,9 +8,18 @@ import dude.ui.Ui;
 public class MarkCommand extends Command {
     private final int taskIndex;
 
+    /**
+     * Initializes MarkCommand.
+     *
+     * @param taskIndex Task index that has to be marked in TaskList.
+     */
     public MarkCommand(int taskIndex) {
         this.taskIndex = taskIndex;
     }
+
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public void execute(TaskList tasks, Ui ui, Storage storage) {
         if (Task.count >= taskIndex && Task.count != 0) {

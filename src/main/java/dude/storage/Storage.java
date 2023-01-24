@@ -13,11 +13,22 @@ public class Storage {
 
     private final String filePath;
 
+    /**
+     * Initializes Storage.
+     *
+     * @param filePath Path to the data file stored.
+     */
     public Storage(String filePath) {
         this.filePath = filePath;
         checkFile(filePath);
     }
 
+    /**
+     * Checks if file path provided is valid
+     * If not valid, creates the directory and file
+     *
+     * @param filePath Path to the data file stored.
+     */
     private void checkFile(String filePath) {
         File f = new File(filePath);
         if (!f.exists()) {
@@ -33,6 +44,11 @@ public class Storage {
         }
     }
 
+    /**
+     * Converts TaskList provided into raw data and save it by writing into file.
+     *
+     * @param tasks TaskList to be converted into raw data.
+     */
     public void saveData(TaskList tasks) {
         try {
             FileWriter fw = new FileWriter(filePath);
@@ -44,6 +60,11 @@ public class Storage {
         }
     }
 
+    /**
+     * Loads raw data stored in the file as TaskList
+     *
+     * @return TaskList which stores the data loaded from file
+     */
     public ArrayList<Task> loadData() throws FileNotFoundException {
         ArrayList<Task> taskList = new ArrayList<>();
         File f = new File(filePath);

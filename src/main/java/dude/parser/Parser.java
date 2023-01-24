@@ -14,6 +14,14 @@ public class Parser {
         LIST, MARK, UNMARK, TODO, DEADLINE, EVENT, DELETE, BYE
     }
 
+    /**
+     * Parses command input given by the user into an actual command.
+     * If command is not valid, DudeException is thrown.
+     *
+     * @param command Command input provided by user.
+     * @return Command object.
+     * @throws DudeException  If command is not valid.
+     */
     public static Command parse(String command) throws DudeException{
         String[] cmd = command.split(" ", 2);
         String[] format;
@@ -53,6 +61,14 @@ public class Parser {
         }
     }
 
+    /**
+     * Validates command input given by user.
+     * If command is not valid, DudeException is thrown.
+     *
+     * @param commandType Type of command.
+     * @param command Command input provided by user.
+     * @throws DudeException  If command is not valid.
+     */
     public static void validate(CommandType commandType, String command) throws DudeException {
         String[] cmd = command.split(" ", 2);
         String[] input = command.split(" ");

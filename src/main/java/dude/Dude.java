@@ -14,6 +14,11 @@ public class Dude {
     private TaskList tasks;
     private final Ui ui;
 
+    /**
+     * Initializes Dude.
+     *
+     * @param filePath Path to data file stored.
+     */
     public Dude(String filePath) {
         ui = new Ui();
         storage = new Storage(filePath);
@@ -26,6 +31,9 @@ public class Dude {
         }
     }
 
+    /**
+     * Runs Dude program.
+     */
     public void run() {
         ui.showWelcome();
         boolean isExit = false;
