@@ -143,6 +143,27 @@ public class Ui {
 		}
 	}
 
+	public void printMatchedTasks(TaskList tasklist, String keyword) {
+		boolean hasItem = false;
+		String header = "Here are the matching tasks in your list:";
+
+		int itemNum = 1;
+		for (int i = 0; i < tasklist.size(); i++) {
+			Task curTask = tasklist.get(i);
+			if (curTask.getDescription().contains(keyword)) {
+				if (!hasItem) {
+					println(header);
+				}
+				hasItem = true;
+				println(String.format("%d.%s", itemNum, curTask));
+				itemNum += 1;
+			}
+		}
+		if (!hasItem) {
+			println("There are no matching tasks.");
+		}
+	}
+
 	/** Welcome message */
 	public void greetUser() {
 		println("\tHi There! I'm Shao");

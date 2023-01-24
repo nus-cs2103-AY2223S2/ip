@@ -12,6 +12,10 @@ abstract public class Task {
 		this.isDone = false;
 	}
 
+	public String getDescription() {
+		return this.description;
+	}
+
 	/**
 	 * Get String representation of icon by task completed status.
 	 * 
