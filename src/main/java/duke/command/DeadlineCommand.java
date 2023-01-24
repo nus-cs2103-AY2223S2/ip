@@ -55,9 +55,9 @@ public class DeadlineCommand extends Command {
         ui.printStatement("Added task to list:");
         ui.printStatement(newDeadlineTask.getStatusOfTaskInString());
         if (tasks.getSizeOfTaskList() == 1) {
-            ui.printStatement("Currently, there is 1 task in your list.");
+            ui.printStatement("\nCurrently, there is 1 task in your list.");
         } else {
-            ui.printStatement("Currently, there are " + Integer.toString(tasks.getSizeOfTaskList())
+            ui.printStatement("\nCurrently, there are " + Integer.toString(tasks.getSizeOfTaskList())
                     + " tasks in your list.");
         }
         Ui.printStraightLine();
