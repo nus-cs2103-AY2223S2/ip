@@ -1,7 +1,6 @@
-package Duke;
+package seedu.duke;
 
-import Duke.Event;
-import Exceptions.DukeException;
+import seedu.duke.Exceptions.DukeException;
 
 public class Parser {
 

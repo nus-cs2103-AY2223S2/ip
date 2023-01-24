@@ -1,6 +1,4 @@
-package Duke;
-
-import Duke.TaskList;
+package seedu.duke;
 
 import java.util.Scanner;
 

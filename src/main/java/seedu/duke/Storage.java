@@ -1,6 +1,4 @@
-package Duke;
-
-import Duke.Event;
+package seedu.duke;
 
 import java.io.IOException;
 import java.io.FileNotFoundException;

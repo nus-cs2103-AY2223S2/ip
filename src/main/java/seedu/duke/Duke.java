@@ -1,4 +1,4 @@
-package Duke;
+package seedu.duke;
 
 public class Duke {
     TaskList taskList;
