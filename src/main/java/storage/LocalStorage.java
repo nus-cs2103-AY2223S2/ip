@@ -21,6 +21,15 @@ public class LocalStorage {
     public void saveToDoList(ToDoList todoList) {
         // Convert ToDoList into ArrayList<String>
         ArrayList<String> todoStringList = todoList.getDataList();
+        if (Files.notExists(this.path)) {
+            // Create file in filepath
+            try {
+                Files.createFile(this.path);
+            } catch (IOException e) {
+                throw new DukeException("Oh no! Something went wrong when creating a save file");
+            }
+
+        }
 
         try {
             Files.write(this.path, todoStringList);
@@ -32,14 +41,16 @@ public class LocalStorage {
     public ToDoList loadToDoList() {
         List<String> lines = Collections.emptyList();
 
-        try {
-            lines = Files.readAllLines(this.path, StandardCharsets.UTF_8);
-        } catch (IOException e) {
-            throw new DukeException("Oh no! Something happened while loading the to do list");
+        if (Files.exists(this.path)) {
+            try {
+                lines = Files.readAllLines(this.path, StandardCharsets.UTF_8);
+            } catch (IOException e) {
+                throw new DukeException("Oh no! Something happened while loading the to do list");
+            }
         }
 
         ToDoList res = new ToDoList();
-        if (lines != null) {
+        if (!lines.isEmpty()) {
             lines.forEach(line -> {
                 // Split up the line
                 String[] lineArr = line.split("\\|");

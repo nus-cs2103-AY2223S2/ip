@@ -1,9 +1,11 @@
+import java.util.ArrayList;
 import java.util.Scanner;
 
 import exception.DukeException;
 import parser.InputParser;
 
 import response.Response;
+import storage.LocalStorage;
 import storage.ToDoList;
 
 public class Duke {
@@ -26,7 +28,9 @@ public class Duke {
         Duke.print(intro);
 
         Scanner scanner = new Scanner(System.in);  // Create a Scanner object
-        ToDoList toDoList = new ToDoList();
+        LocalStorage localStorage = new LocalStorage(); // Create a LocalStorage object
+        ToDoList toDoList = localStorage.loadToDoList();  // Create a ToDoList object based on saved list
+
 
         while (true) {
             String req = scanner.nextLine();  // Read user req
@@ -45,6 +49,11 @@ public class Duke {
 
                 // Execute the Response to do what needs to be done and get an output message
                 String out = res.exec(toDoList);
+
+                // If the response is anything other than list, save the to do list
+                if (!input.getInputType().equals("LIST")) {
+                    localStorage.saveToDoList(toDoList);
+                }
 
                 // Print the output message
                 Duke.print(out);
