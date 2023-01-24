@@ -64,6 +64,30 @@ public class Ui {
     }
 
     /**
+     * Returns the number of found tasks in the TaskList.
+     *
+     * @param taskList the TaskList to return the number of found tasks from.
+     */
+    public void displayFindList(TaskList taskList, String keyword) {
+        if (taskList.size() == 0) {
+            line();
+            System.out.println("There are no such tasks.");
+            line();
+        } else {
+            int index = 1;
+            String list = "";
+            while (index < (taskList.size() + 1)) {
+                list = list + "\n   " + index + ". " + taskList.get(index - 1).toString();
+                index++;
+            }
+            line();
+            System.out.println("Here are the tasks with the keyword: " + keyword + list);
+            checkList(taskList);
+            line();
+        }
+    }
+
+    /**
      * Returns text when a task is marked.
      *
      * @param taskList the TaskList to mark the task.
@@ -159,7 +183,6 @@ public class Ui {
             System.out.println("You have " + taskList.size() + " tasks in the list.");
         }
     }
-
 
     /** The text when a task is added. */
     public static void addedTask() {

@@ -102,7 +102,7 @@ public class TaskList {
     }
 
     /**
-     * Method to remove the task at the given index (description.
+     * Method to remove the task at the given index (description).
      *
      * @param taskList    the TaskList to remove the object from.
      * @param description takes the String to parse into an integer to use as the index.
@@ -121,5 +121,20 @@ public class TaskList {
         } catch (NumberFormatException e) {
             System.out.println("enter valid number");
         }
+    }
+
+    /**
+     * Method to find the task from a given keyword.
+     *
+     * @param keyword the keyword of the tasks to be found.
+     */
+    public TaskList findTasks(String keyword) {
+        TaskList temp = new TaskList();
+        for(Task t: taskList) {
+            if(t.description.contains(keyword)) {
+                temp.addTask(t);
+            }
+        }
+        return temp;
     }
 }

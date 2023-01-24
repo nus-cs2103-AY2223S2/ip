@@ -8,7 +8,7 @@ import seedu.duke.Exceptions.DukeException;
 public class Parser {
 
     public enum Commands {
-        BYE, LIST, MARK, UNMARK, DELETE, TODO, DEADLINE, EVENT }
+        BYE, LIST, FIND, MARK, UNMARK, DELETE, TODO, DEADLINE, EVENT }
 
     /** Status of the Bot */
     public boolean isExit;
@@ -41,6 +41,12 @@ public class Parser {
                 // Command for list
                 case LIST: {
                     ui.displayTaskList(taskList);
+                    break;
+                }
+                // Command for find
+                case FIND: {
+                    String keyword = description[1];
+                    ui.displayFindList(taskList.findTasks(keyword), keyword);
                     break;
                 }
                 // Command to mark as done
