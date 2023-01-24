@@ -1,7 +1,7 @@
 import java.util.Scanner;
 import java.util.Arrays;
 public class Duke {
-    public static void main(String[] args) {
+    public static void main(String[] args) throws DukeException {
         Scanner sc = new Scanner(System.in);
         Task[] storeTasks = new Task[100];
         int numElem = 0;
@@ -15,6 +15,9 @@ public class Duke {
         while (!commandToEcho.equals("bye")) {
             if(commandToEcho.equals("list")) {
                 System.out.println("Here are the tasks in your list:");
+                if(numElem==0) {
+                    System.out.println("You do not have any tasks for now!");
+                }
                 for (int i = 0; i < numElem; i++) {
                     System.out.println(String.format("%d. %s",i+1,storeTasks[i]));
                 }
@@ -27,29 +30,50 @@ public class Duke {
                 storeTasks[intTaskIndex].markUndone();
                 System.out.println("OK, I've marked this task as not done yet:\n " + storeTasks[intTaskIndex].toString());
             } else {
-                System.out.println("Got it. I've added this task:");
                 Task currentTask;
                 if(commandToEcho.length()>=4 && commandToEcho.substring(0, 4).equals("todo")) {
-                    String desc = getDescToDo(5,commandToEcho);
-                    currentTask = new Todo(desc);
-                    storeTasks[numElem] = currentTask;
-                    System.out.println(currentTask);
+                    if (commandToEcho.equals("todo")) {
+                        System.out.println("OOPS!!! The description of a todo cannot be empty.");
+//                        throw new DukeException();
+                    } else {
+                        System.out.println("Got it. I've added this task:");
+                        String desc = getDescToDo(5, commandToEcho);
+                        currentTask = new Todo(desc);
+                        storeTasks[numElem] = currentTask;
+                        System.out.println(currentTask);
+                        numElem++;
+                        System.out.println(String.format("Now you have %d task(s) in the list.",numElem));
+                    }
                 } else if (commandToEcho.length()>=8 && commandToEcho.substring(0, 8).equals("deadline")) {
-                    String desc = getDesc(9,commandToEcho);
-                    String byWhen = getByWhen(commandToEcho);
-                    currentTask = new Deadline(desc,byWhen);
-                    storeTasks[numElem] = currentTask;
-                    System.out.println(currentTask);
+                    if (commandToEcho.equals("deadline")) {
+                        System.out.println("OOPS!!! The description of a deadline cannot be empty.");
+                    } else {
+                        System.out.println("Got it. I've added this task:");
+                        String desc = getDesc(9, commandToEcho);
+                        String byWhen = getByWhen(commandToEcho);
+                        currentTask = new Deadline(desc, byWhen);
+                        storeTasks[numElem] = currentTask;
+                        System.out.println(currentTask);
+                        numElem++;
+                        System.out.println(String.format("Now you have %d task(s) in the list.", numElem));
+                    }
                 } else if (commandToEcho.length()>=5 && commandToEcho.substring(0, 5).equals("event")) {
-                    String desc = getDesc(6,commandToEcho);
-                    String from = getFrom(commandToEcho);
-                    String to = getTo(commandToEcho);
-                    currentTask = new Event(desc,from,to);
-                    storeTasks[numElem] = currentTask;
-                    System.out.println(currentTask);
+                    if (commandToEcho.equals("event")) {
+                        System.out.println("OOPS!!! The description of an event cannot be empty.");
+                    } else {
+                        System.out.println("Got it. I've added this task:");
+                        String desc = getDesc(6, commandToEcho);
+                        String from = getFrom(commandToEcho);
+                        String to = getTo(commandToEcho);
+                        currentTask = new Event(desc, from, to);
+                        storeTasks[numElem] = currentTask;
+                        System.out.println(currentTask);
+                        numElem++;
+                        System.out.println(String.format("Now you have %d task(s) in the list.", numElem));
+                    }
+                } else {
+                    System.out.println("OOPS!!! I'm sorry, but I don't know what that means :-(");
                 }
-                numElem++;
-                System.out.println(String.format("Now you have %d task(s) in the list.",numElem));
             }
             commandToEcho = sc.nextLine();
         }
