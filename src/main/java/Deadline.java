@@ -25,4 +25,14 @@ public class Deadline extends Task {
     public String toString() {
         return "[D]" + super.toString() + " (by: " + by + ")";
     }
+
+    /**
+     * Overrides the printData method of the Task class.
+     *
+     * @return String representation of the deadline task in data form.
+     */
+    @Override
+    public String printData() {
+        return "D" + "/" + (isDone ? "1" : "0") + "/" + description + "/" + by;
+    }
 }

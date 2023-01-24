@@ -31,4 +31,15 @@ public class Event extends Task {
         return "[E]" + super.toString()
                 + " (from: " + from + " to: " + to + ")";
     }
+
+    /**
+     * Overrides the printData method of the Task class.
+     *
+     * @return String representation of the Event task in data form.
+     */
+    @Override
+    public String printData() {
+        return "E" + "/" + (isDone ? "1" : "0") + "/" + description
+                + "/" + from + "/" + to;
+    }
 }
