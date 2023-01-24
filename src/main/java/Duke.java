@@ -41,7 +41,15 @@ public class Duke {
             currentTask = TASKS.get(i);
             list_of_tasks += i + 1 + "." + currentTask.toString() + "\n";
         }
-        System.out.println(reply(list_of_tasks));
+        System.out.println(reply("Here are the tasks in your list:\n" + list_of_tasks));
+    }
+
+    private static void delete(String command) {
+        int index = Integer.valueOf(command.substring(7)) - 1;
+        Task target = TASKS.get(index);
+        System.out.println(reply("Noted. I've removed this task:\n"
+                + target + "\nNow you have " + TASKS.size() + "in the list\n"));
+        TASKS.remove(index);
     }
 
     private static void handleTaskInput(Scanner input) {
@@ -61,6 +69,10 @@ public class Duke {
                 continue;
             } else if (command.startsWith("unmark ")) {
                 unmark(command);
+                command = input.nextLine();
+                continue;
+            } else if (command.startsWith("delete ")) {
+                delete(command);
                 command = input.nextLine();
                 continue;
             }
