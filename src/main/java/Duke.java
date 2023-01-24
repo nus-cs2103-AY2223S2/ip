@@ -1,6 +1,11 @@
+import javax.swing.*;
 import java.security.spec.ECField;
 import java.util.Scanner;
 import java.util.ArrayList;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
+import java.time.LocalDate;
 import java.io.*;
 public class Duke {
     private Scanner sc = new Scanner(System.in);
@@ -9,14 +14,12 @@ public class Duke {
     private static String FILEPATH = "./data/duke.txt";
 
     private enum DukeCommand {
-        BYE,
-        LIST,
-        MARK,
-        UNMARK,
-        TODO,
-        DEADLINE,
-        EVENT,
-        DELETE
+        BYE, LIST,
+        MARK, UNMARK,
+        TODO, DEADLINE, EVENT,
+        DELETE,
+        LISTDATE
+
     }
 
 
@@ -57,6 +60,9 @@ public class Duke {
                         break;
                     case DELETE :
                         this.deleteTask(userInput);
+                        break;
+                    case LISTDATE:
+                        this.displayTasksWithDates(userInput);
                         break;
                     default :
                         throw new DukeInvalidCommandException();
@@ -140,8 +146,9 @@ public class Duke {
     private void addDeadline(String[] userInput) throws DukeMissingArgumentException {
         try {
             String deadlineInfo[] = userInput[1].split("/by");
+            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm");
             String deadlineText = deadlineInfo[0].trim();
-            String deadlineDate = deadlineInfo[1].trim();
+            LocalDateTime deadlineDate = LocalDateTime.parse(deadlineInfo[1].trim(), formatter);
 
 
             Deadlines deadline = new Deadlines(deadlineText, deadlineDate);
@@ -152,6 +159,8 @@ public class Duke {
         } catch(IndexOutOfBoundsException e) {
             String task = "deadline";
             throw new DukeMissingArgumentException(task);
+        } catch(DateTimeParseException e) {
+            System.out.println("\tInvalid Date format (Required format: DD/MM/YYYY HH:MM)");
         }
     }
 
@@ -159,17 +168,20 @@ public class Duke {
         try {
             String eventInfo[] = userInput[1].split("/from|/to");
             String eventText = eventInfo[0].trim();
-            String eventFrom = eventInfo[1].trim();
-            String eventTo = eventInfo[2].trim();
+            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm");
+            LocalDateTime eventFrom = LocalDateTime.parse(eventInfo[1].trim(), formatter);
+            LocalDateTime eventTo = LocalDateTime.parse(eventInfo[2].trim(), formatter);
 
             Event event = new Event(eventText, eventFrom, eventTo);
             this.list.add(event);
             System.out.println("\tGot it. I've added this task:");
             System.out.println("\t" + event.toString());
             displayTasks();
-        }catch (IndexOutOfBoundsException e) {
+        } catch (IndexOutOfBoundsException e) {
             String task = "event";
             throw new DukeMissingArgumentException(task);
+        } catch(DateTimeParseException e) {
+            System.out.println("\tInvalid Date format (Required format: DD/MM/YYYY HH:MM)");
         }
     }
 
@@ -202,7 +214,6 @@ public class Duke {
             Scanner fileSc = new Scanner(data);
             while(fileSc.hasNextLine()) {
                 String fileData = fileSc.nextLine();
-
                 String[] taskData = fileData.split("\\|");
                 readData(taskData);
             }
@@ -228,17 +239,19 @@ public class Duke {
         String taskType = taskData[0];
         String taskStatus = taskData[1];
         String taskInfo = taskData[2].trim();
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm");
 
         Task loadTask = null;
 
         if(taskType.equals("T")) {
             loadTask = new Todo(taskInfo);
         } else if (taskType.equals("D")) {
-            String taskTime = taskData[3].trim();
+            LocalDateTime taskTime = LocalDateTime.parse(taskData[3].trim(), formatter);
+
             loadTask = new Deadlines(taskInfo, taskTime);
         } else if (taskType.equals("E")){
-            String taskFrom = taskData[3].trim();
-            String taskTo = taskData[4].trim();
+            LocalDateTime taskFrom = LocalDateTime.parse(taskData[3].trim(), formatter);
+            LocalDateTime taskTo = LocalDateTime.parse(taskData[4].trim(), formatter);
             loadTask = new Event(taskInfo, taskFrom, taskTo);
         } else {
             throw new DukeDataException();
@@ -261,6 +274,21 @@ public class Duke {
         writer.close();
     }
 
+    private void displayTasksWithDates(String[] userInput) {
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+        LocalDate date = LocalDate.parse(userInput[1], formatter);
+        int counter = 1;
+        for(int i = 0; i < this.list.size(); i++) {
+            String taskType = this.list.get(i).getTaskType();
+            LocalDate taskDate = this.list.get(i).getDate().toLocalDate();
+            if(taskType.equals("D") || taskType.equals(("E"))){
+                if(date.equals(taskDate)) {
+                    System.out.println(String.format("\t%d. %s", counter, this.list.get(i).toString()));
+                }
+            }
+
+        }
+    }
 
     private void printLine() {
         System.out.println("------------------------------------------------------------------");

@@ -1,3 +1,5 @@
+import java.time.LocalDateTime;
+
 public class Todo extends Task{
     public Todo(String taskText) {
         super(taskText);
@@ -10,5 +12,13 @@ public class Todo extends Task{
 
     public String writeFile() {
         return String.format("T|%s|%s", this.getCurrentStatus(), this.getTaskText());
+    }
+
+    public LocalDateTime getDate() {
+        return null;
+    }
+
+    public String getTaskType() {
+        return "T";
     }
 }
