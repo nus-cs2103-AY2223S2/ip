@@ -10,16 +10,16 @@ public class TaskList {
         this.tasks = new LinkedList<>();
     }
 
-    public Task addTask(String input) throws CommandNotFoundException, EmptyCommandException {
+    public Task addTask(String input) throws CommandNotFoundException, InvalidCommandInputException {
         if (input != null && (input.equals("todo") || input.equals("deadline") || input.equals("event"))) {
-            throw new EmptyCommandException("Empty argument", input);
+            throw new InvalidCommandInputException("Empty argument", input);
         } else if (input.matches("deadline .* /by .*")) {
             // Handle deadline
             String[] arr = input.split(" /by ");
             String content = arr[0].substring(9, arr[0].length());
 
             if (content.length() == 0 || arr[1].length() == 0) {
-                throw new EmptyCommandException("Empty argument", "deadline");
+                throw new InvalidCommandInputException("Empty argument", "deadline");
             }
 
             try {
@@ -34,7 +34,7 @@ public class TaskList {
             String[] startEnd = arr[1].split(" /to ");
 
             if (content.length() == 0 || startEnd[0].length() == 0 || startEnd[1].length() == 0) {
-                throw new EmptyCommandException("Empty argument", "event");
+                throw new InvalidCommandInputException("Empty argument", "event");
             }
 
             try {
@@ -45,7 +45,7 @@ public class TaskList {
         } else if (input.matches("todo .*")) {
             // Handle todo
             if (input.length() == 5) {
-                throw new EmptyCommandException("Empty argument", "todo");
+                throw new InvalidCommandInputException("Empty argument", "todo");
             }
 
             this.tasks.add(new ToDo(input.substring(5, input.length())));

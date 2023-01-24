@@ -19,12 +19,30 @@ public class Ui {
 
         // Create Scanner and Parser object
         Scanner sc = new Scanner(System.in);
-        Parser p = new Parser(tl, storage);
+        Parser p = new Parser(tl, storage, this);
 
         // Always ready to receive input
         while (sc.hasNextLine()) {
-            String input = sc.nextLine();
-            p.send(input);
+            try {
+                String input = sc.nextLine();
+                this.showLine();
+
+                Command c = p.parse(input);
+
+                c.execute(this.tl, this, storage);
+            } catch (DukeException e) {
+                showError(e.getMessage());
+            } finally {
+                this.showLine();
+            }
         }
+    }
+
+    public void showError(String e) {
+        System.out.println("ERROR: " + e);
+    }
+
+    public void showLine() {
+        System.out.println("__________________________________");
     }
 }

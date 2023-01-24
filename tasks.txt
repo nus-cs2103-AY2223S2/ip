@@ -1,5 +1,5 @@
 [T][ ] Testing
-[D][ ] return book (by: Dec 2 2019 18:00)
+[D][X] return book (by: Dec 2 2019 18:00)
 [E][ ] project meeting (from: Dec 2 2019 18:00 to: Dec 10 2019 18:00)
-[T][ ] wazzup
 [D][X] return book (by: Dec 2 2019 21:00)
+[T][ ] hello!
