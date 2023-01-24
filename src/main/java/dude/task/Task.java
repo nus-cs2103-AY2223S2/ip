@@ -58,7 +58,7 @@ public abstract class Task {
     /**
      * Decreases current task count.
      */
-    public static void removeTaskCount() {
+    public static void decreaseTaskCount() {
         count--;
     }
 
