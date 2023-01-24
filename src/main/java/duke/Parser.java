@@ -1,9 +1,18 @@
 package duke;
 
-import command.*;
+import command.ByeCommand;
+import command.FindCommand;
+import command.EventCommand;
+import command.DeleteCommand;
+import command.DeadlineCommand;
+import command.MarkCommand;
+import command.TodoCommand;
+import command.UnmarkCommand;
+import command.ListCommand;
+import command.Command;
 import exceptions.BlankException;
 import exceptions.InvalidInstructionException;
-import exceptions.*;
+import exceptions.DukeException;
 
 /**
  * Handles user input.

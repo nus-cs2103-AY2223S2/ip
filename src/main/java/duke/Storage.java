@@ -1,6 +1,10 @@
 package duke;
 
-import tasks.*;
+import tasks.Deadline;
+import tasks.TaskList;
+import tasks.Task;
+import tasks.Todo;
+import tasks.Event;
 
 import java.io.File;
 import java.io.FileNotFoundException;
