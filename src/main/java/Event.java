@@ -13,7 +13,7 @@ public class Event extends Task{
         this.taskType = "E";
     }
 
-    public static void createEvent(String command, TaskTracker t) throws DukeInputError {
+    public static void createEvent(String command, TaskList t) throws DukeInputError {
         ArrayList<String> input = new ArrayList(Arrays.asList(command.split(" ")));
         if (input.size() <= 1) throw new DukeInputError("event");
         int fromIndex = input.indexOf("/from");

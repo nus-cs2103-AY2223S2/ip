@@ -1,7 +1,7 @@
 import java.util.Scanner;
 
 public class Duke {
-    protected static TaskTracker tasks = new TaskTracker();
+    protected static TaskList tasks = new TaskList();
     protected static String divider = "    ____________________________________________________________";
 
     public static void main(String[] args) {
@@ -20,7 +20,7 @@ public class Duke {
             String command = sc.nextLine();
             System.out.println(divider);
             try {
-                repeat = handleGeneralCommand(command);
+                repeat = Parser.handleGeneralCommand(command, tasks);
             } catch (DukeInputError e) {
                 System.out.println(e);
             }

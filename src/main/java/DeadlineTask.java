@@ -16,7 +16,7 @@ public class DeadlineTask extends Task {
         return deadline.format(DateTimeFormatter.ofPattern("MMM d yyyy HHmm"));
     }
 
-    public static void createDeadlineTask(String command, TaskTracker t) throws DukeInputError {
+    public static void createDeadlineTask(String command, TaskList t) throws DukeInputError {
         ArrayList<String> input = new ArrayList(Arrays.asList(command.split(" ")));
         if (input.size() <= 1) throw new DukeInputError("deadline");
         int byIndex = input.indexOf("/by");

@@ -1,9 +1,9 @@
 import java.util.ArrayList;
 
-public class TaskTracker {
+public class TaskList {
     protected ArrayList<Task> taskList = new ArrayList<>();
 
-    public TaskTracker() {}
+    public TaskList() {}
 
     // Add new taskList to the list
     // Outputs a String with the details of the task and the number of taskList in the list

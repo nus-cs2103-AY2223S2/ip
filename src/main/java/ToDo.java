@@ -4,7 +4,7 @@ public class ToDo extends Task {
         super(taskName);
     }
 
-    public static void createToDo(String command, TaskTracker t) throws DukeInputError{
+    public static void createToDo(String command, TaskList t) throws DukeInputError{
         String[] input = command.split(" ");
         if (input.length <= 1) throw new DukeInputError("todo");
         StringBuilder taskName = new StringBuilder();
