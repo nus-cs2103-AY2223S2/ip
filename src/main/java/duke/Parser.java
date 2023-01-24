@@ -1,6 +1,14 @@
 package duke;
 
 public class Parser {
+    /**
+     * Parses and runs the entered command.
+     *
+     * @param taskList TaskList to be used for commands
+     * @param ui       Ui object for interacting with the user
+     * @param line     line to be parsed
+     * @return boolean indicating end of program
+     */
     boolean parse(Ui ui, TaskList taskList, String line) {
         String[] split = line.split(" ");
         String command = split[0];
