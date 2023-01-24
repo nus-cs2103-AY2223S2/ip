@@ -1,7 +1,7 @@
 package tasklist;
 
 import java.util.*;
-
+import storage.Storage;
 import tasktypes.Task;
 
 public class TaskList {
@@ -13,12 +13,6 @@ public class TaskList {
         this.numTasks = 0;
     }
 
-    /*
-    public TaskList(Storage storage) {
-        taskStorage = storage.load();
-        numTasks = taskStorage.size();
-    }
-    */
     public void loadTask(Task task) {
         this.taskStorage.add(task);
         numTasks++;
