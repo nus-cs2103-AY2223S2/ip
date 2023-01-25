@@ -28,7 +28,7 @@ public class Deadline extends Task {
 
     @Override
     public String getDescription() {
-        return name + "|" + by;
+        return name + "," + by;
     }
 
     @Override

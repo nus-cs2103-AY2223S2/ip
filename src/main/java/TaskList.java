@@ -1,7 +1,9 @@
+import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.io.File;
+import java.util.Scanner;
 
 public class TaskList {
     private final ArrayList<Task> list;
@@ -15,13 +17,25 @@ public class TaskList {
         try {
             FileWriter fileWriter = new FileWriter(this.getFile());
             for (Task task : this.list) {
-                fileWriter.write(task.parse() + '\n');
+                fileWriter.write(task.encode() + '\n');
             }
             fileWriter.flush();
         } catch (IOException ex) {
             throw new TaskIOException("Cannot save task");
         }
     }
+
+    public void loadTask() {
+        try {
+            Scanner scanner = new Scanner(this.getFile());
+            while (scanner.hasNextLine()) {
+                list.add(Task.decode(scanner.nextLine()));
+            }
+        } catch (TaskIOException | FileNotFoundException ex) {
+            System.out.println(ex);
+        }
+    }
+
     public File getFile() throws TaskIOException {
         File file = new File(filePath);
         File parentFile = file.getParentFile();

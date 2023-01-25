@@ -1,3 +1,7 @@
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.time.temporal.ChronoUnit;
+
 public class Event extends Task{
     private String from;
     private String to;
@@ -32,7 +36,7 @@ public class Event extends Task{
 
     @Override
     public String getDescription() {
-        return name + "|" + from + "|" + to;
+        return name + "," + from + "," + to;
     }
     @Override
     public String toString() {
