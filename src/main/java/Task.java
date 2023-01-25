@@ -20,7 +20,7 @@ public class Task {
     }
 
     public String toString() {
-        return this.description;
+        return String.format("[%s] %s", this.getStatusIcon(), this.description);
     }
 }
 

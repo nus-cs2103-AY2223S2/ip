@@ -41,36 +41,71 @@ public class Duke {
         while (sc.hasNext()) {
             String msg = sc.nextLine();
             String cmd[] = msg.split(" ", 2);
+
             if (cmd[0].equals("bye")) {
                 printMsg("Bye. Hope to see you again soon!");
                 break;
-            } else if (cmd[0].equals("list")) {
-                String[] list = new String[data.size()];
-                for (int i = 0; i < data.size(); i++) {
-                    Task tsk = data.get(i);
-                    list[i] = String.format("[%s] %s", tsk.getStatusIcon(), tsk);
-                }
-                printList(list);
-            } else if (cmd[0].equals("mark")) {
-                int idx = Integer.parseInt(cmd[1]) - 1;
-                Task tsk = data.get(idx);
-                tsk.mark();
-                String cfmMsg = "Nice! I've marked this task as done:";
-                String markedTask = String.format(" [%s] %s", tsk.getStatusIcon(), tsk);
-                String[] markedMsg = {cfmMsg, markedTask};
-                printMsg(markedMsg);
-            } else if (cmd[0].equals("unmark")) {
-                int idx = Integer.parseInt(cmd[1]) - 1;
-                Task tsk = data.get(idx);
-                tsk.unmark();
-                String cfmMsg = "OK, I've marked this task as not done yet:";
-                String unmarkedTask = String.format(" [%s] %s", tsk.getStatusIcon(), tsk);
-                String[] unmarkedMsg = {cfmMsg, unmarkedTask};
-                printMsg(unmarkedMsg);
-            } else {
-                Task tsk = new Task(msg);
-                data.add(tsk);
-                printMsg("added: " + tsk);
+            }
+            int idx;
+            Task tsk;
+            String markMsg;
+            String cfmMsg = "Got it. I've added this task:";
+            String tskNum;
+            String[] desc;
+
+
+            switch(cmd[0]) {
+                case "list":
+                    String[] list = new String[data.size()];
+                    for (int i = 0; i < data.size(); i++) {
+                        tsk = data.get(i);
+                        list[i] = String.format(" %s", tsk);
+                    }
+                    printList(list);
+                    break;
+                case "mark":
+                    idx = Integer.parseInt(cmd[1]) - 1;
+                    tsk = data.get(idx);
+                    tsk.mark();
+                    markMsg = "Nice! I've marked this task as done:";
+                    String markedTask = String.format(" %s", tsk);
+                    String[] markedMsg = {markMsg, markedTask};
+                    printMsg(markedMsg);
+                    break;
+                case "unmark":
+                    idx = Integer.parseInt(cmd[1]) - 1;
+                    tsk = data.get(idx);
+                    tsk.unmark();
+                    markMsg = "OK, I've marked this task as not done yet:";
+                    String unmarkedTask = String.format(" %s", tsk);
+                    String[] unmarkedMsg = {markMsg, unmarkedTask};
+                    printMsg(unmarkedMsg);
+                    break;
+                case "todo":
+                    tsk = new Todo(cmd[1]);
+                    data.add(tsk);
+                    tskNum = String.format("Now you have %d tasks in the list.", data.size());
+                    String[] todoMsg = {cfmMsg, " " + tsk.toString(), tskNum};
+                    printMsg(todoMsg);
+                    break;
+                case "deadline":
+                    desc = cmd[1].split(" /by ");
+                    tsk = new Deadline(desc[0], desc[1]);
+                    data.add(tsk);
+                    tskNum = String.format("Now you have %d tasks in the list.", data.size());
+                    String[] deadlineMsg = {cfmMsg, " " + tsk.toString(), tskNum};
+                    printMsg(deadlineMsg);
+                    break;
+                case "event":
+                    desc = cmd[1].split(" /from | /to ");
+                    tsk = new Event(desc[0], desc[1], desc [2]);
+                    data.add(tsk);
+                    tskNum = String.format("Now you have %d tasks in the list.", data.size());
+                    String[] eventMsg = {cfmMsg, " " + tsk.toString(), tskNum};
+                    printMsg(eventMsg);
+                    break;
+                default:
+                    break;
             }
         }
     }
