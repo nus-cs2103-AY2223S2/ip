@@ -1,8 +1,13 @@
-import Tasks.Task;
+package Duke.Command;
+
+import Duke.Command.Command;
+import Duke.Storage;
+import Duke.TaskList;
+import Duke.Ui;
 
 import java.io.IOException;
 
-public class ExitCommand extends Command{
+public class ExitCommand extends Command {
 
     public void execute(TaskList l, Ui ui, Storage s) {
         ui.showExit();

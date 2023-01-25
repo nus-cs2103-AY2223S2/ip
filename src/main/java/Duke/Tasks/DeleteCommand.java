@@ -1,6 +1,11 @@
-import Tasks.Task;
+package Duke.Tasks;
 
-public class DeleteCommand extends Command{
+import Duke.Command.Command;
+import Duke.Storage;
+import Duke.TaskList;
+import Duke.Ui;
+
+public class DeleteCommand extends Command {
 
     int index;
 

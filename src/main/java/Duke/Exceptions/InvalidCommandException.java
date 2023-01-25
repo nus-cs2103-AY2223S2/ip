@@ -1,9 +1,9 @@
-package Exceptions;
+package Duke.Exceptions;
 
 public class InvalidCommandException extends Exception{
 
     @Override
     public String toString() {
-        return "Invalid Command";
+        return "Invalid Duke Command";
     }
 }

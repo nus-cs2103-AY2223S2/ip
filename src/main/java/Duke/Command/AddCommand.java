@@ -1,7 +1,12 @@
-import Tasks.Deadline;
-import Tasks.Event;
-import Tasks.Task;
-import Tasks.ToDo;
+package Duke.Command;
+
+import Duke.Storage;
+import Duke.TaskList;
+import Duke.TaskType;
+import Duke.Tasks.Deadline;
+import Duke.Tasks.Event;
+import Duke.Tasks.ToDo;
+import Duke.Ui;
 
 import java.time.LocalDate;
 
