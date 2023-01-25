@@ -6,8 +6,9 @@ import java.nio.file.Paths;
 
 import java.util.Scanner;
 import java.util.ArrayList;
+
 public class Duke {
-    public static ArrayList<Task> taskList = new ArrayList<Task>();
+    public static ArrayList<Task> taskList = new ArrayList<>();
     public static Integer taskCount = 0;
 
     public static void main(String[] args) throws IOException {
@@ -81,7 +82,7 @@ public class Duke {
                     case "deadline": {
                         String[] dateArray = user_input.split("/by");
                         String[] descriptionArray = dateArray[0].split(" ", 2);
-                        Task currTask = new Deadline(descriptionArray[1].stripLeading(), dateArray[1]);
+                        Task currTask = new Deadline(descriptionArray[1].stripLeading(), dateArray[1].strip());
                         taskList.add(currTask);
                         taskCount++;
                         System.out.println(lineBreak + '\n' +
@@ -94,9 +95,9 @@ public class Duke {
                     case "event": {
                         String[] dateArray = user_input.split("/");
                         String[] descriptionArray = dateArray[0].split(" ", 2);
-                        String date = dateArray[1].substring(5);
+                        String date = dateArray[1].substring(5).strip();
                         String[] timeArray = user_input.split("/to");
-                        String time = timeArray[1];
+                        String time = timeArray[1].strip();
                         Task currTask = new Event(descriptionArray[1].stripTrailing(), date, time);
                         taskList.add(currTask);
                         taskCount++;
