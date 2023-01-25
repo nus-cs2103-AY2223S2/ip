@@ -3,6 +3,7 @@ import java.io.IOException;
 import java.util.Scanner;
 
 
+
 /**
  * The Duke program implements an application that takes in an input and places it in a list.
  * If the words are not of any keywords, an error message will be printed.
@@ -13,6 +14,7 @@ public class Duke {
     private Ui ui;
     private Storage storage;
     private TaskList taskList;
+    private TaskList searchList;
 
     /**
      * This is a constructor for Duke such that we will create a file.
@@ -115,6 +117,14 @@ public class Duke {
                 taskList.remove(deleted);
                 System.out.println("Noted. I've removed this task: \n" + deleted);
                 System.out.println("Now you have " + Task.actions + " tasks in the list");
+            } else if (reply.startsWith("find")){
+                int counter = 0;
+                String desc  = reply.replaceAll("find ", "");
+                System.out.println(desc);
+                TaskList.find(desc);
+                TaskList.printFind();
+
+
             } else {
                 handleInvalidArgs checked = new handleInvalidArgs(reply);
                 checked.checkForRandomWords(checked.reply);
