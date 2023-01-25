@@ -45,15 +45,4 @@ public final class Util {
     public static String usageIdxCmd(String cmd) {
         return Resource.notifUsage + cmd + " <idx: integer between 1 and list size (inclusive)>\n";
     }
-
-    /**
-     * @param args Non-null. Trimmed arguments string.
-     * @return The substring before the 1st whitespace character, or original string if no whitespace exists.
-     */
-    public static String get1stArg(String args) {
-        final int whiteSpaceIdx = args.indexOf(' ');
-        return whiteSpaceIdx < 0 ? args : args.substring(0, whiteSpaceIdx);
-    }
-
-
 }

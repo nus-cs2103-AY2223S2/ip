@@ -8,40 +8,9 @@ import java.util.Arrays;
  */
 public class MeggyTime {
     /**
-     * Time that comply to {@link LocalDateTime} format or null if time is user-customized.
+     * Cached dummy NA value.
      */
-    final LocalDateTime formatted;
-    /**
-     * Unparsable user-customized time or null if can be parsed.
-     */
-    final String customized;
-
-    /**
-     * Constructr of the dummy {@code NA} value
-     */
-    private MeggyTime() {
-        formatted = null;
-        customized = Util.noFound;
-    }
-
-    /**
-     * @param time Non-null. The trimmed time value to be interpreted.
-     */
-    private MeggyTime(String time) {
-        this.formatted = parseTime(time);
-        this.customized = this.formatted == null ? time : null;
-    }
-
-    /**
-     * Factory method that trims none-null strings. It also accepts {@code null} value, in which case it returns the
-     * cached {@code NA} value.
-     *
-     * @param time Untrimmed time value to be interpreted or {@code null} if {@code NA} value is intended.
-     */
-    public static MeggyTime of(String time) {
-        return time == null ? NA : new MeggyTime(time.trim());
-    }
-
+    public static final MeggyTime NA = new MeggyTime();
     /**
      * All acceptable date-time formats. Singapore's convention (date-month) is prioritized.
      */
@@ -54,10 +23,6 @@ public class MeggyTime {
      * Encode format.
      */
     private static final DateTimeFormatter encodeFmt = DateTimeFormatter.ofPattern("ddMMyyyy HHmm");
-    /**
-     * Cached dummy NA value.
-     */
-    public static final MeggyTime NA = new MeggyTime();
 
     static { //initialize date-time formats
         final String[] timeSeps = {":", ""};
@@ -81,6 +46,39 @@ public class MeggyTime {
                 }
             }
         }
+    }
+
+    /**
+     * Time that comply to {@link LocalDateTime} format or null if time is user-customized.
+     */
+    final LocalDateTime formatted;
+    /**
+     * Unparsable user-customized time or null if can be parsed.
+     */
+    final String customized;
+    /**
+     * Constructr of the dummy {@code NA} value
+     */
+    private MeggyTime() {
+        formatted = null;
+        customized = Util.noFound;
+    }
+    /**
+     * @param time Non-null. The trimmed time value to be interpreted.
+     */
+    private MeggyTime(String time) {
+        this.formatted = parseTime(time);
+        this.customized = this.formatted == null ? time : null;
+    }
+
+    /**
+     * Factory method that trims none-null strings. It also accepts {@code null} value, in which case it returns the
+     * cached {@code NA} value.
+     *
+     * @param time Untrimmed time value to be interpreted or {@code null} if {@code NA} value is intended.
+     */
+    public static MeggyTime of(String time) {
+        return time == null ? NA : new MeggyTime(time.trim());
     }
 
     /**

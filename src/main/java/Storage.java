@@ -3,12 +3,21 @@ import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Map;
 import java.util.Scanner;
 
 /**
  * Save cross-session data in file.
  */
 public class Storage {
+    /**
+     * From "command" in a data line to the type of {@link UserTask} to be created.
+     */
+    public final static Map<String, MeggyException.Function<String, UserTask>> dataEntryToTask = Map.of(
+            Resource.cmdTodo, Util.todoNew,
+            Resource.cmdDdl, Util.ddlNew,
+            Resource.cmdEvent, Util.eventNew
+    );
     final public File dataFile;
 
     /**
@@ -66,7 +75,7 @@ public class Storage {
             return;
         }
         while (fileIn.hasNextLine()) {
-            final Meggy.JobAndArg<UserTask> jobAndArg = Meggy.JobAndArg.parse(Meggy.dataEntryToTask, fileIn.nextLine());
+            final Parser.JobAndArg<UserTask> jobAndArg = Parser.parseJobAndArg(dataEntryToTask, fileIn.nextLine());
             final MeggyException.Function<String, UserTask> taskNew = jobAndArg.job;
             if (taskNew != null) { // Command recognized
                 try {

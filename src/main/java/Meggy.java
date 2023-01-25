@@ -1,4 +1,6 @@
-import java.io.*;
+import java.io.File;
+import java.io.InputStream;
+import java.io.OutputStream;
 import java.util.ArrayList;
 import java.util.Map;
 import java.util.Scanner;
@@ -12,16 +14,12 @@ public class Meggy implements Runnable {
      * unparsed string arguments and return chatbot response strings.
      */
     public final Map<String, MeggyException.Function<String, String>> usrCmdToJob;
-    public final static Map<String, MeggyException.Function<String, UserTask>> dataEntryToTask = Map.of(
-            Resource.cmdTodo, Util.todoNew,
-            Resource.cmdDdl, Util.ddlNew,
-            Resource.cmdEvent, Util.eventNew
-    );
+
     /**
      * What to do when the user-typed the command is unknown. Currently: notify user command is unknown.
      */
     public final MeggyException.Function<String, String> unknownCmdBehavior = s -> {
-        throw new MeggyException(Resource.errUnknownCmd(Util.get1stArg(s)));
+        throw new MeggyException(Resource.errUnknownCmd(Parser.get1stArg(s)));
     };
     /**
      * Customizable input.
@@ -80,31 +78,6 @@ public class Meggy implements Runnable {
     }
 
     /**
-     * Parses the index integer from the first word in args string.
-     *
-     * @param args Non-null. Trimmed arguments string.
-     * @return Parsed idx (starts with 0)
-     * @throws MeggyNoArgException If args string is empty.
-     * @throws MeggyNFException    If args string's first word is not a signed 32-bit {@link Integer}.
-     * @throws MeggyIOBException   If the parsed index is out of bounds with respect to the tasks list.
-     */
-    private int parseIdx(String args) throws MeggyException {
-        final String arg = Util.get1stArg(args);
-        if ("".equals(arg))
-            throw new MeggyNoArgException();
-        final int idx;
-        try {
-            idx = Integer.parseInt(arg) - 1;
-        } catch (NumberFormatException e) {
-            throw new MeggyNFException(arg);
-        }
-        final int nTask = tasks.size();
-        if (idx < 0 || idx >= nTask)
-            throw new MeggyIOBException(idx, nTask);
-        return idx;
-    }
-
-    /**
      * Updates the status of the user task specified by index.
      *
      * @param args      Non-null. Index (start with 1) string of task to be updated.
@@ -114,7 +87,7 @@ public class Meggy implements Runnable {
     private String markTaskStatus(String args, boolean newStatus) {
         final int idx;
         try {
-            idx = parseIdx(args);
+            idx = Parser.parseIdx(args, tasks.size());
         } catch (MeggyException e) {
             return e.getMessage() + Util.usageIdxCmd(newStatus ? Resource.cmdMk : Resource.cmdUnmk);
         }
@@ -146,7 +119,7 @@ public class Meggy implements Runnable {
     private String deleteTask(String arg) {
         final int idx;
         try {
-            idx = parseIdx(arg);
+            idx = Parser.parseIdx(arg, tasks.size());
         } catch (MeggyException e) {
             return e.getMessage() + Util.usageIdxCmd(Resource.cmdDel);
         }
@@ -169,34 +142,6 @@ public class Meggy implements Runnable {
     }
 
     /**
-     * Reads content of file into the {@code tasks} list. If the file does not exist, process is skipped. Otherwise, all
-     * lines with syntax error are skipped.
-     * <p>
-     * All file {@link IOException}s are ignored.
-     *
-     * @param f Non-null. The data file to read from.
-     */
-    private void loadFromFile(File f) {
-        final Scanner fileIn;
-        try {
-            fileIn = new Scanner(f);
-        } catch (FileNotFoundException e) {
-            return;
-        }
-        while (fileIn.hasNextLine()) {
-            final JobAndArg<UserTask> jobAndArg = JobAndArg.parse(dataEntryToTask, fileIn.nextLine());
-            final MeggyException.Function<String, UserTask> taskNew = jobAndArg.job;
-            if (taskNew != null) { // Command recognized
-                try {
-                    tasks.add(taskNew.apply(jobAndArg.args));
-                } catch (MeggyException ignored) {
-                }
-            }
-        }
-        fileIn.close();
-    }
-
-    /**
      * Interacts with user using designated IO.
      */
     @Override
@@ -209,7 +154,7 @@ public class Meggy implements Runnable {
         storage.load(tasks);
         while (in.hasNextLine()) { // reads input and responds in each iteration
             //Parse command and args
-            final JobAndArg<String> jobAndArg = JobAndArg.parse(usrCmdToJob, in.nextLine());
+            final Parser.JobAndArg<String> jobAndArg = Parser.parseJobAndArg(usrCmdToJob, in.nextLine());
             final MeggyException.Function<String, String> job = jobAndArg.job == null ? unknownCmdBehavior : jobAndArg.job;
             //Execute commands and display results
             ui.disp(Resource.msgHd);
@@ -228,44 +173,6 @@ public class Meggy implements Runnable {
             }
         }
         ui.dispLn("WARNING: REACHED END OF INPUT WITHOUT 'BYE' COMMAND");
-    }
-
-    /**
-     * Entry class that stores parsed value of command string, the corresponding job function, and args string.
-     *
-     * @param <E> The return type of the job function.
-     */
-    public static class JobAndArg<E> {
-        public final String cmd;
-        /**
-         * The command-specific function corresponding that will take {@code args} as arguments. Null if the command is
-         * unknown.
-         */
-        public final MeggyException.Function<String, E> job;
-        public final String args;
-
-        private JobAndArg(String cmd, MeggyException.Function<String, E> job, String args) {
-            this.cmd = cmd;
-            this.job = job;
-            this.args = args;
-        }
-
-        /**
-         * Parses text line into command, arguments, and finds job according to job table. All continuous whitespaces
-         * are replaced with a single whitespace.
-         *
-         * @return Parsed command, job, and argument encapsulated in an {@code JobAndArg} object.
-         */
-        public static <E> JobAndArg<E> parse(Map<String, MeggyException.Function<String, E>> jobTable, String line) {
-            //Multiple whitespace characters are treated as 1 whitespace.
-            line = line.replaceAll("[ \t\r\n\f]+", " ").trim();
-            //Parse command and args
-            final int spaceIdx = line.indexOf(' ');
-            final String cmd = (spaceIdx < 0 ? line : line.substring(0, spaceIdx)).toLowerCase();
-            MeggyException.Function<String, E> job = jobTable.get(cmd);
-            final String args = job == null ? line : line.substring(spaceIdx + 1).trim();
-            return new JobAndArg<>(cmd, job, args);
-        }
     }
 
     public static void main(String[] args) {
