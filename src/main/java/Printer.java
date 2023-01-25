@@ -7,7 +7,7 @@ public class Printer {
     public void printText(String text) {
         System.out.println(this.indent + text);
     }
-    public void printException(Exception e) {
+    public void printException(SundayException e) {
         printBar();
         printText(e.getMessage());
         printBar();

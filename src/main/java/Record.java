@@ -14,6 +14,9 @@ public class Record {
     public void unmark(int index) {
         this.list.get(index).unmark();
     }
+    public Task delete(int index) {
+        return this.list.remove(index);
+    }
     public String taskToString(int index) {
         return this.list.get(index).toString();
     }

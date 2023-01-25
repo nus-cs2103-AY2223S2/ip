@@ -135,6 +135,24 @@ public enum State {
             }
         }
     },
+    DELETE ("delete") {
+        @Override
+        public void execute(String input) throws SundayException{
+            try {
+                int index = Integer.parseInt(String.valueOf(input.substring(1))) - 1;
+                Task deleted = list.delete(index);
+                printer.printBar();
+                printer.printText("Noted. I've removed this task:");
+                printer.printText("  " + deleted.toString());
+                printer.printText("Now you have " + list.getUncompletedSize() + " task(s) in the list.");
+                printer.printBar();
+            } catch (NumberFormatException e) {
+                throw new SundayException("☹ OOPS!!! You did not specify which task you wanted me to delete");
+            } catch (IndexOutOfBoundsException e) {
+                throw new SundayException("☹ OOPS!!! Seems like that task does not exist");
+            }
+        }
+    },
     BYE ("bye") {
         @Override
         public void execute(String input) {
