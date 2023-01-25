@@ -17,7 +17,7 @@ public abstract class Task {
         this.isDone = isDone;
     }
 
-    private String getMark() {
+    public String getMark() {
         if (this.isDone) {
             return "[X]";
         }
