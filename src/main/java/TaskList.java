@@ -46,6 +46,13 @@ public class TaskList {
         }
     }
 
+    public void deleteTask(int taskNumber) {
+        System.out.println("Noted! I have deleted this task: \n" + this.list.get(taskNumber - 1));
+        this.list.remove(taskNumber - 1);
+
+
+    }
+
     public void getTaskDetails() {
         System.out.println("You now have " + numberOfTasks + " tasks in the list");
         System.out.println("Number of tasks completed: " + numberDone);

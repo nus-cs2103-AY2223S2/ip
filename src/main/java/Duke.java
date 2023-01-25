@@ -85,6 +85,12 @@ public class Duke {
                 horizontalLine();
                 userInput = scanner.nextLine();
                 continue;
+            } else if (userInputComponents[0].equals("delete")) {
+                horizontalLine();
+                list.deleteTask(Integer.parseInt(userInputComponents[1]));
+                horizontalLine();
+                userInput = scanner.nextLine();
+                continue;
             } else {
                 System.out.println("You may have accidentally entered in an invalid command. Please re-enter!");
                 userInput = scanner.nextLine();
