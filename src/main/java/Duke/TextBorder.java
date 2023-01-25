@@ -1,3 +1,5 @@
+package Duke;
+
 public class TextBorder {
     String text = "null";
     String border = "//  /  /  //  /  /  //  /  /  //  /  /  //  /  /  //  /  /  //  /";

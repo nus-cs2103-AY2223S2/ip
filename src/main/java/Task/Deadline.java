@@ -1,7 +1,11 @@
+package Task;
+
+import Task.Task;
+
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
-public class Deadline extends Task{
+public class Deadline extends Task {
     private LocalDate date;
     public Deadline(String text, LocalDate date) {
         super(text);
