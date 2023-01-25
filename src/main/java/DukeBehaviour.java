@@ -1,4 +1,5 @@
 import java.util.ArrayList;
+import java.util.Arrays;
 
 /**
  * Class to encapsulate behavior of personal assistant Duke!
@@ -11,8 +12,6 @@ public class DukeBehaviour {
 
     /**
      * Public constructor for the DukeBehaviour Object.
-     * @param None
-     * @return None
      */
     public DukeBehaviour() {
         //System.out.println("DukeBehaviour constructor called...");
@@ -21,25 +20,40 @@ public class DukeBehaviour {
     /**
      * Public method for DukeBehaviour to receive user input in the form of Strings.
      * @param userIn user input of type String
-     * @return None
-     * @exception DukeException on input error
      */
     public void receiveInput(String userIn){
+        ArrayList<String> tokens = tokenize(userIn);
+        String key = tokens.get(0);
         try {
-            if (userIn.equals("bye")) {
-                //System.out.println("exit command received, exiting...");
-                isActive = false;
-            } else if (userIn.equals("list")) {
-                displayList();
-            } else if (userIn.split(" ")[0].equals("mark")) {
-                mark(userIn);
-            } else if (userIn.split(" ")[0].equals("unmark")) {
-                unmark(userIn);
-            } else if (userIn.split(" ")[0].equals("delete")) {
-                delete(userIn);
-            } else {
-                addTask(userIn);
+            switch (key){
+                case "bye":
+                    isActive = false;
+                    break;
+                case "list":
+                    displayList();
+                    break;
+                case "mark":
+                    mark(tokens);
+                    break;
+                case "unmark":
+                    unmark(tokens);
+                    break;
+                case "delete":
+                    delete(tokens);
+                    break;
+                case "todo":
+                    addToDo(tokens);
+                    break;
+                case "deadline":
+                    addDeadline(tokens);
+                    break;
+                case "event":
+                    addEvent(tokens);
+                    break;
+                default:
+                    throw new DukeException("I'm sorry, I could not understand that command.");
             }
+
         } catch (DukeException e) {
             System.out.println(e.getMessage());
         }
@@ -48,11 +62,13 @@ public class DukeBehaviour {
     /**
      * Private method for handling delete command.
      * @param userIn user input of type String
-     * @return None
      * @throws DukeException on index out-of-range
      */
-    private void delete(String userIn) throws DukeException{
-        int index = Integer.parseInt(userIn.split(" ")[1]);
+    private void delete(ArrayList<String> userIn) throws DukeException{
+        if (userIn.size()>2 || userIn.size()==1) {
+            throw new DukeException("Invalid input received! \nDelete commands are in the form of: delete i \n(only 1 whitespace allowed)");
+        }
+        int index = Integer.parseInt(userIn.get(1));
         if (index < 1 || index > taskList.size()){
             throw new DukeException("index " + index +" not in range!");
         }
@@ -69,11 +85,14 @@ public class DukeBehaviour {
     /**
      * Private method for handling mark command.
      * @param userIn user input of type String
-     * @return None
      * @throws DukeException on index out-of-range
      */
-    private void mark(String userIn) throws DukeException{
-        int index = Integer.parseInt(userIn.split(" ")[1]);
+    private void mark(ArrayList<String> userIn) throws DukeException{
+        if (userIn.size()>2 || userIn.size()==1) {
+            throw new DukeException("Invalid input received! /n Mark commands are in the form of: mark i /n (only 1 whitespace allowed)");
+        }
+        int index = Integer.parseInt(userIn.get(1));
+
         if (index < 1 || index > taskList.size()){
             throw new DukeException("index " + index +" not in range!");
         }
@@ -85,11 +104,13 @@ public class DukeBehaviour {
     /**
      * Private method for handling unmark command.
      * @param userIn user input of type String
-     * @return None
      * @throws DukeException on index out-of-range
      */
-    private void unmark(String userIn) throws DukeException{
-        int index = Integer.parseInt(userIn.split(" ")[1]);
+    private void unmark(ArrayList<String> userIn) throws DukeException{
+        if (userIn.size()>2 || userIn.size() == 1) {
+            throw new DukeException("Invalid input received! /n Unmark commands are in the form of: unmark i /n (only 1 whitespace allowed)");
+        }
+        int index = Integer.parseInt(userIn.get(1));
         if (index < 1 || index > taskList.size()){
             throw new DukeException("index " + index +" not in range!");
         }
@@ -98,42 +119,44 @@ public class DukeBehaviour {
         System.out.println("OK, I've marked this task as not done yet:");
         System.out.println(currTask);
     }
-    /**
-     * Private method for handling all task-related commands.
-     * @param userIn user input of type String
-     * @return None
+
+    /***
+     * Remove whitespace from typed input and returns an arraylist of tokens
+     * @param input String userinput to be tokenized
+     * @return tokens
      */
-    private void addTask(String userIn){
-        String taskType = userIn.split(" ")[0];
-        try{
-            switch (taskType) {
-                case "todo":
-                    addToDo(userIn);
-                    break;
-                case "deadline":
-                    addDeadline(userIn);
-                    break;
-                case "event":
-                    addEvent(userIn);
-                    break;
-                default:
-                    throw new DukeException("I'm sorry, I could not understand that command.");
-            }
-        } catch (DukeException e) {
-            System.out.println(e.getMessage());
-        }
+    private ArrayList<String> tokenize(String input) {
+        ArrayList<String> tokens = new ArrayList<>(Arrays.asList(input.split(" ")));
+        tokens.removeIf(s -> s.equals(" ") || s.equals(""));
+        tokens.forEach(s -> s.trim());
+        //System.out.println(tokens);
+        return tokens;
     }
+
     /**
      * Private method for handling commands regarding Events.
      * @param userIn user input of type String
-     * @return None
      */
-    private void addEvent(String userIn) {
-        String descAndTimes = userIn.replace("event", "");
+    private void addEvent(ArrayList<String> userIn) throws DukeException{
+        //String descAndTimes = userIn.replace("event", "");
+        //index 0 should be event
+        //index 1-? should be name
+        //index containing "/from" should be immediately preceding from param
+        //index containing "to" should be immediately preceding to param
+        int fromId = userIn.indexOf("/from");
+        int toId = userIn.indexOf("/to");
+        if (fromId < 0 || toId < 0){
+            throw new DukeException("Invalid input received! /n Event commands are in the form of: event name /from fromtime /to totime /n (remember to include '/from' and '/to')");
+        }
+
+        String name = String.join(" ", userIn.subList(1, fromId));
+        String from = String.join(" ", userIn.subList(fromId+1, toId));
+        String to = String.join(" ", userIn.subList(toId+1, userIn.size()));
+
         Event newEvent = new Event(
-                descAndTimes.split("/")[0].trim(),
-                descAndTimes.split("/")[1].replace("from", "").trim(),
-                descAndTimes.split("/")[2].replace("to", "").trim()
+                name,
+                from,
+                to
         );
         taskList.add(newEvent);
         System.out.println("Got it. I've added this task:");
@@ -143,11 +166,22 @@ public class DukeBehaviour {
     /**
      * Private method for handling commands regarding Deadlines.
      * @param userIn user input of type String
-     * @return None
      */
-    private void addDeadline(String userIn) {
-        String descAndBy = userIn.replace("Deadline", "");
-        Deadline newDeadline = new Deadline(descAndBy.split("/")[0].trim(), descAndBy.split("/")[1].replace("by", "").trim());
+    private void addDeadline(ArrayList<String> userIn) throws DukeException {
+
+        //String descAndTimes = userIn.replace("event", "");
+        //index 0 should be event
+        //index 1-? should be name
+        //index containing "/by" should be immediately preceding from param
+        int byId = userIn.indexOf("/by");
+        if (byId < 0){
+            throw new DukeException("Invalid input received! /n Deadline commands are in the form of: deadline name /by bytime /n (remember to include '/by')");
+        }
+
+        String name = String.join(" ", userIn.subList(1, byId));
+        String by = String.join(" ", userIn.subList(byId+1, userIn.size()));
+
+        Deadline newDeadline = new Deadline(name, by);
         taskList.add(newDeadline);
         System.out.println("Got it. I've added this task:");
         System.out.println(newDeadline);
@@ -156,13 +190,13 @@ public class DukeBehaviour {
     /**
      * Private method for handling commands regarding ToDos.
      * @param userIn user input of type String
-     * @return None
      */
-    private void addToDo(String userIn) throws DukeException{
-        if (userIn.split(" ").length == 1) {
+    private void addToDo(ArrayList<String> userIn) throws DukeException{
+        if (userIn.size() == 1) {
             throw new DukeException("todo cannot have no description!");
         }
-        ToDo newToDo = new ToDo(userIn.replace("ToDo", ""));
+        String name = String.join(" ", userIn.subList(1, userIn.size()));
+        ToDo newToDo = new ToDo(name);
         taskList.add(newToDo);
         System.out.println("Got it. I've added this task:");
         System.out.println(newToDo);
@@ -170,7 +204,6 @@ public class DukeBehaviour {
     }
     /**
      * Private method for printing list of tasks stored.
-     * @return None
      */
     private void displayList() {
         System.out.println("Here are the tasks in your list: ");
