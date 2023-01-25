@@ -1,3 +1,4 @@
+package duke;
 public class Parser {
     public enum CmdType{
         bye,
