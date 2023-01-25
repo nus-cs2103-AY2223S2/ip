@@ -30,5 +30,9 @@ public abstract class Task {
     }
 
     public abstract String getSaveFormat();
+
+    public boolean matchKeyword(String keyword) {
+        return this.description.contains(keyword);
+    }
 }
 

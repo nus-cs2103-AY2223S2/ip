@@ -13,7 +13,7 @@ import duke.tasktypes.ToDo;
 
 public class Parser {
 
-    private static final String[] VALUE_COMMANDS = {"unmark ", "mark ", "delete "};
+    private static final String[] VALUE_COMMANDS = {"unmark ", "mark ", "delete ", "find "};
     private static final String[] TASK_COMMANDS = {"deadline ", "todo ", "event "};
 
     public Parser() {
@@ -48,6 +48,14 @@ public class Parser {
                 }
                 return new DeleteCommand(toDelete);
             }
+
+        case "find ": {
+            String[] inputArr = fullCommand.split(" ", 2);
+            String toFind = inputArr[1];
+            return new FindCommand(toFind);
+        }
+
+
         }
 
         validateTaskCommand(fullCommand, TASK_COMMANDS);

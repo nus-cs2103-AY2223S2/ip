@@ -53,6 +53,16 @@ public class TaskList {
         }
     }
 
+    public TaskList getMatchingTasks(String keyword) {
+        TaskList matchTasks = new TaskList(this.ui);
+        for (Task task : this.taskStorage) {
+            if (task.matchKeyword(keyword)) {
+                matchTasks.loadTask(task);
+            }
+        }
+        return matchTasks;
+    }
+
     public ArrayList<Task> getTasks() {
         return taskStorage;
     }

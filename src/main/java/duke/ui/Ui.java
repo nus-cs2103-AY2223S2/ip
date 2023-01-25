@@ -75,6 +75,10 @@ public class Ui {
         System.out.println("OK, I've marked this task as undone:\n" + task);
     }
 
+    public void noMatchingTask() {
+        System.out.println("Sorry! There are no matching tasks in your current list!");
+    }
+
     public void printTasks(TaskList tasks) {
         tasks.printTasks();
     }
