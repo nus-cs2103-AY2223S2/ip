@@ -15,40 +15,33 @@ public class Duke {
     private Storage storage;
     private TaskList tasks;
     private Ui ui;
+    private Parser parser;
 
     public Duke(String filePath) {
         ui = new Ui();
         storage = new Storage(filePath);
         tasks = new TaskList(storage.load());
+        parser = new Parser();
     }
 
     public static void main(String[] args) {
         new Duke("src/data/duke.txt").run();
     }
-    public void run() {
-        String logo = " ____        _        \n"
-                + "|  _ \\ _   _| | _____ \n"
-                + "| | | | | | | |/ / _ \\\n"
-                + "| |_| | |_| |   <  __/\n"
-                + "|____/ \\__,_|_|\\_\\___|\n";
-        System.out.println("Hello from\n" + logo);
-        introMessage();
 
-        Checker checker = new Checker();
+    public void run() {
+
+        ui.introMessage();
         Scanner scan = new Scanner(System.in);
         String userInput = scan.nextLine();
-        ArrayList<Task> lstOfItems = new ArrayList<>();
-        String path = "src/data/duke.txt";
 
-
-        while (!checker.checkEnd(userInput)) {
-            if (checker.checkListRequest(userInput)) {
+        while (!parser.checkEnd(userInput)) {
+            if (parser.checkListRequest(userInput)) {
                 tasks.printContents();
-            } else if (checker.checkMarkRequest(userInput)) {
+            } else if (parser.checkMarkRequest(userInput)) {
                 String[] terms = userInput.split(" ");
                 int itemNo = Integer.parseInt(terms[1]);
                 tasks.markTask(itemNo);
-            } else if (checker.checkDeleteRequest(userInput)) {
+            } else if (parser.checkDeleteRequest(userInput)) {
                 String[] terms = userInput.split(" ");
                 int itemNo = Integer.parseInt(terms[1]);
                 tasks.deleteTask(itemNo);
@@ -106,46 +99,6 @@ public class Duke {
             userInput = scan.nextLine();
         }
         storage.addToFile(tasks);
-        endMessage();
-
-    }
-
-    public static void introMessage() {
-        System.out.println("Hello! I'm Duke");
-        System.out.println("What can I do for you?");
-    }
-
-    public static void endMessage() {
-        System.out.println("Bye. Hope to see you again!");
-    }
-
-    public static void addTask(ArrayList<Task> lstOfItems, Task newTask) {
-        System.out.println("Got it. I have added: ");
-        System.out.println(newTask);
-        lstOfItems.add(newTask);
-        System.out.print("Now you have " + String.valueOf(lstOfItems.size()));
-        if (lstOfItems.size() == 1) {
-            System.out.print(" task");
-        } else {
-            System.out.print(" tasks");
-        }
-        System.out.println(" in the list");
-    }
-
-    public static void addToFile(ArrayList<Task> lstOfItems) {
-        String path = "src/data/duke.txt";
-        // Idea for the following code snippet is taken from:
-        // https://stackoverflow.com/questions/1053467/how-do-i-save-a-string-to-a-text-file-using-java
-        try {
-            ArrayList<String> lst = new ArrayList<>();
-            lst.add(String.valueOf(lstOfItems.size()));
-            for (int i = 0; i < lstOfItems.size(); i++) {
-                Task current = lstOfItems.get(i);
-                lst.add(current.parse());
-            }
-            Files.write(Paths.get(path), lst);
-        } catch (IOException err) {
-            System.out.println(err);
-        }
+        ui.endMessage();
     }
 }
