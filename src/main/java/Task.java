@@ -1,5 +1,4 @@
 public class Task {
-    private static int numTasks = 0;
     private String description;
     private boolean isDone;
     public Task(String description){
@@ -9,15 +8,6 @@ public class Task {
     public Task(String description, boolean isDone){
         this.description = description;
         this.isDone = isDone;
-    }
-    public static void addTask(){
-        numTasks++;
-    }
-    public static void deleteTask(){
-        numTasks--;
-    }
-    public static int getNumTasks(){
-        return numTasks;
     }
     public String getStatusIcon(){
         return (isDone ? "X" : " "); //mark done task with X
