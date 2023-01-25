@@ -17,7 +17,9 @@ public class Task {
         return isDone ? "[X] " + description : "[ ] " + description;
     }
 
-    public String toSave() { return isDone ? " 1 / " + description : " 0 / " + description; }
+    public String toSave() {
+        return isDone ? " 1 / " + description : " 0 / " + description;
+    }
 
     public void markDone() {
         this.isDone = true;

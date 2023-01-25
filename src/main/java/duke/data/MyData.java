@@ -1,14 +1,18 @@
 package duke.data;
 
-import java.io.FileWriter;
-import java.io.FileNotFoundException;
 import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileWriter;
 import java.io.IOException;
 import java.nio.file.Files;
-import java.util.ArrayList;
-import java.util.Scanner;
 
-import duke.tasks.*;
+import java.util.Scanner;
+import java.util.ArrayList;
+
+import duke.tasks.Task;
+import duke.tasks.ToDo;
+import duke.tasks.Deadline;
+import duke.tasks.Event;
 
 public class MyData {
     private final ArrayList<Task> data = new ArrayList<Task>();
