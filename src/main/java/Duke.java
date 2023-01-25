@@ -62,6 +62,9 @@ public class Duke {
             case "event":
                 eventOperation(inputAnalyzed,input,list);
                 break;
+            case "delete":
+                deleteOperation(inputAnalyzed,list);
+                break;
             default:
                 System.out.println("Sorry sir, didn't quite get that." +
                         "\nYou have " + list.size() + " tasks. Anything else?");
@@ -99,12 +102,10 @@ public class Duke {
                 return;
             }
             int index = parseInt(inputAnalyzed[1]);
-            if (list.size() >= index) {
-                list.get(index - 1).setChecked(true);
-                System.out.println("It's all good man, just marked this task as done:\n"
-                        + list.get(index - 1).toString());
-            }
-        } catch (ArrayIndexOutOfBoundsException e) {
+            list.get(index - 1).setChecked(true);
+            System.out.println("It's all good man, just marked this task as done:\n"
+                    + list.get(index - 1).toString());
+        } catch (IndexOutOfBoundsException e) {
             //Inputted a number beyond the list's length
             System.out.println("Woah there. That entry doesn't exist yo.");
         } catch (NumberFormatException e) {
@@ -121,16 +122,35 @@ public class Duke {
                 return;
             }
             int index = parseInt(inputAnalyzed[1]);
-            if (list.size() >= index) {
-                list.get(index - 1).setChecked(false);
-                System.out.println("Alright, I marked this task as not done:\n"
-                        + list.get(index - 1).toString());
-            }
-        } catch (ArrayIndexOutOfBoundsException e) {
+            list.get(index - 1).setChecked(false);
+            System.out.println("Alright, I marked this task as not done:\n"
+                    + list.get(index - 1).toString());
+
+        } catch (IndexOutOfBoundsException e) {
             //Inputted a number beyond the list's length
             System.out.println("Woah there. That entry doesn't exist yo.");
         } catch (NumberFormatException e) {
             System.out.println("Label the place you want to unmark with a NUMBER, not a word.");
+        }
+    }
+
+    private static void deleteOperation(String[] inputAnalyzed, ArrayList<Task> list) {
+        try {
+            if (inputAnalyzed.length > 2) {
+                System.out.println("If you want to delete a task, just type \"delete\" and a number. That's it.");
+                return;
+            }
+            int index = parseInt(inputAnalyzed[1]);
+            Task temp = list.get(index - 1);
+            list.remove(index - 1);
+            System.out.println("Righto, just removed this task from your list:\n"
+                    + temp + "\nYou now have " + list.size() + " tasks left.");
+
+        } catch (IndexOutOfBoundsException e) {
+            //Inputted a number beyond the list's length
+            System.out.println("Woah there. That entry doesn't exist yo.");
+        } catch (NumberFormatException e) {
+            System.out.println("Label the place you want to delete with a NUMBER, and not just any number; an INTEGER.");
         }
     }
 
@@ -151,7 +171,7 @@ public class Duke {
             list.add(newDead);
             System.out.println("Got it sir, just added this task to the list.\n"
                     + newDead + "\nYou now have " + list.size() + " tasks. Anything else?");
-        } catch (ArrayIndexOutOfBoundsException e) {
+        } catch (IndexOutOfBoundsException e) {
             System.out.println("You forgot to add the deadline to your deadline. Reformat your deadline info and try again.");
         }
     }
@@ -165,7 +185,7 @@ public class Duke {
             list.add(newTodo);
             System.out.println("Got it sir, just added this task to the list.\n"
                     + newTodo);
-        } catch (ArrayIndexOutOfBoundsException e) {
+        } catch (IndexOutOfBoundsException e) {
             System.out.println("Whoops, you need to put in what you're about to do!");
         }
     }
@@ -190,7 +210,7 @@ public class Duke {
             list.add(newEvent);
             System.out.println("Got it sir, just added this task to the list.\n"
                     + newEvent + "\nYou now have " + list.size() + " tasks. Anything else?");
-        } catch (ArrayIndexOutOfBoundsException e) {
+        } catch (IndexOutOfBoundsException e) {
             System.out.println("You forgot to add the time frame. Reformat your event info and try again.");
         }
 
