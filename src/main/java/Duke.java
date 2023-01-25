@@ -20,6 +20,7 @@ public class Duke {
         //testing for branch 8 merging
         //commit 1
         //commit 2
+        //commit 3
         loop:
         while (true) {
             String input = sc.nextLine();
