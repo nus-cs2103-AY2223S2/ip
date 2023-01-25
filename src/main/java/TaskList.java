@@ -4,7 +4,7 @@ public class TaskList {
         BYE, LIST, MARK, UNMARK, TODO, DEADLINE, EVENT, DELETE
     }
 
-    public void instructionList() {
+    public TaskList() {
         
     }
 

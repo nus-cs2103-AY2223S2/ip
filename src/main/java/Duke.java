@@ -13,33 +13,25 @@ public class Duke {
 
     private Scanner sc = new Scanner(System.in);
     private Storage storage;
-    private TaskList taskList;
+    private TaskList tasks;
+    private Ui ui;
 
-    public Duke() {
-        this.storage = new Storage();
-        this.taskList = new TaskList();
+    public Duke(String filePath) {
+        this.ui = new Ui();
+        this.storage = new Storage(filePath, this.ui);
+        this.tasks = new TaskList();
     }
 
     public static void main(String[] args) {
-        String logo = " ____        _        \n"
-                + "|  _ \\ _   _| | _____ \n"
-                + "| | | | | | | |/ / _ \\\n"
-                + "| |_| | |_| |   <  __/\n"
-                + "|____/ \\__,_|_|\\_\\___|\n";
-
-        System.out.println("Hello from\n" + logo);
-
-        new Duke().userInputs();
-
+        new Duke("./data/duke.txt").userInputs();
     }
 
     // Allow users to add, mark and un-mark, delete, add tasks (to-do, deadline,
     // event) or show items in a list
     public void userInputs() {
 
-        System.out.println("Hello! I'm Duke");
-        System.out.println("What can I do for you?");
-
+        this.ui.welcomeMessage();
+        
         this.storage.loadFileData();
 
         try {
@@ -54,7 +46,7 @@ public class Duke {
                 }
 
                 if (!Arrays.stream(Instructions.values()).anyMatch(x -> (x.toString()).equals(first_word))) {
-                    throw new TaskException("Sorry! Duke has no idea what it is as it is not an instruction");
+                    this.ui.error("default");
                 }
 
                 Instructions instruction = Instructions.valueOf(first_word);
@@ -62,12 +54,12 @@ public class Duke {
                 switch (instruction) {
                     // Exit the system upon entering
                     case BYE:
-                        System.out.println("Oh no! Don't give up pls.. you still haven't found a gf yet :(");
+                        this.ui.byeMessage();
                         break;
 
                     // Display a list of tasks that shows its completion and types
                     case LIST:
-                        System.out.println("Take a look at ye DREAM goals for 2023");
+                        this.ui.listMessage();
                         this.storage.displayList();
                         break;
 
@@ -86,7 +78,7 @@ public class Duke {
 
                     case TODO:
                         if (input.length() < 5) {
-                            throw new TaskException("Please enter an to-do item");
+                            this.ui.error("todo");
                         }
                         this.storage.addTodoItem(input);
                         break;
@@ -94,11 +86,10 @@ public class Duke {
                     // Add task of type (Deadline)
                     case DEADLINE:
                         if (!input.contains("/by")) {
-                            throw new TaskException("Enter an valid item followed by a deadline");
+                            this.ui.error("deadline");
                         }
                         String[] deadline_part = input.substring(9, input.length()).split("/by ");
                         this.storage.addDeadlineItem(deadline_part[0], deadline_part[1]);
-                        // list.add(new Deadline(deadline_part[0], deadline_part[1]));
                         break;
 
                     // Add task of type (Event)
@@ -107,12 +98,11 @@ public class Duke {
                         boolean to = input.contains("/to");
             
                         if ((!from || !to) || !(from && to)) {
-                            throw new TaskException("Event item must include a start time and an end time");
+                            this.ui.error("event");
                         }
                         String[] event_part = input.substring(6, input.length()).split("/from ");
                         String[] range = event_part[1].split("/to ");
                         this.storage.addEventItem(event_part[0], range[0], range[1]);
-                        // list.add(new Event(event_part[0], range[0], range[1]));
                         break;
 
                     // Delete task from the list according to its numbering on the list
@@ -120,12 +110,9 @@ public class Duke {
                         this.storage.deleteListItem(index);
                         break;
 
-                    // default will throw an exception in case switch-case is unable to find
-                    // instruction
-                    // default will throw an exception in case switch-case is unable to find
-                    // instruction
+                    // default will throw an exception in case switch-case is unable to find instruction
                     default:
-                        throw new TaskException("Sorry! Duke has no idea what it is as it is not an instruction");
+                    this.ui.error("default");
                 }
 
                 this.storage.writeToFile();
@@ -143,11 +130,4 @@ public class Duke {
         
     }
 
-}
-// Exception that return a custom message that handles errors in task
-// instructions
-class TaskException extends Exception {
-    public TaskException(String message) {
-        super(message);
-    }
 }

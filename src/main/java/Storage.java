@@ -6,8 +6,15 @@ import java.io.BufferedReader;
 import java.io.IOException;
 
 public class Storage {
-    private static String DUKETXT = "./data/duke.txt";
+    
+    private final String filePath;
+    private Ui ui;
     private static ArrayList<Task> list = new ArrayList<Task>(100);
+
+    public Storage(String filePath, Ui ui) {
+        this.filePath = filePath;
+        this.ui = ui;
+    }
 
     public void displayList() {
         for (int i = 0; i < list.size(); i++) {
@@ -25,7 +32,7 @@ public class Storage {
 
     public void addTodoItem(String input) {
         list.add(new Todo(input.substring(5, input.length())));
-        System.out.println("Now you have " + list.size() + " tasks in the list.");
+        this.ui.listInfo(list.size());
     }
 
     public void addDeadlineItem(String first_word, String second_word) {
@@ -40,20 +47,20 @@ public class Storage {
         Task temp = list.get(index);
         list.remove(index);
         System.out.println("The Duke has removed this task: " + temp);
-        System.out.println("Now you have " + list.size() + " in the list.");
+        this.ui.listInfo(list.size());
     }
 
 
-     /**
-     * Part of the code extracted from https:/
-     * /www.codejava.net/java-se/file-io/how-to-read-and-write-text-file-in-java
+     /** 
+      Part of the code extracted from https:/
+     /www.codejava.net/java-se/file-io/how-to-read-and-write-text-file-in-java
      */
-
+     
      public void loadFileData() {
         try {
             File file = new File("./data");
             if (file.exists()) {
-                File txtFile = new File(DUKETXT);
+                File txtFile = new File(filePath);
                 FileReader fileReader = new FileReader(txtFile);
                 readToFile(fileReader);
             } else {
@@ -82,7 +89,7 @@ public class Storage {
 
     public void writeToFile() {
         try {
-            FileWriter writer = new FileWriter(DUKETXT);
+            FileWriter writer = new FileWriter(this.filePath);
             for (Task t : list) {
                 writer.write(t.toString());
                 writer.write("\n");
