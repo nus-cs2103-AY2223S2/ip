@@ -6,6 +6,7 @@ import duke.command.CreateEvent;
 import duke.command.CreateTodo;
 import duke.command.Delete;
 import duke.command.Exit;
+import duke.command.Find;
 import duke.command.List;
 import duke.command.Mark;
 import duke.command.Unmark;
@@ -61,6 +62,11 @@ public class Parser {
             } catch (NumberFormatException e) {
                 throw new DukeException("Please specify a valid task number.");
             }
+        } else if (split[0].equals("find")) {
+            if (split.length == 1) {
+                throw new DukeException("Please specify the keyword you want to find.");
+            }
+            return new Find(split[1]);
         } else if (split[0].equals("todo")) {
             if (split.length == 1) {
                 throw new DukeException("The description of a todo cannot be empty.");

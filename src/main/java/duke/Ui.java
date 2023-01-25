@@ -102,9 +102,13 @@ public class Ui {
         System.out.println("Now you have " + size + " tasks in the list.");
     }
 
-    /**
-     * Display the error message for loading the file.
-     */
+    public void showFind(TaskList list) {
+        System.out.println("Here are the matching tasks in your list:");
+        for (int i = 0; i < list.size(); i++) {
+            System.out.println((i+1) + ". " + list.get(i));
+        }
+    }
+
     public void showLoadingError() {
         System.out.println("Error loading file!");
     }
