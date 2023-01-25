@@ -73,9 +73,9 @@ public class Parser {
                 System.out.println("Now you have " + this.tasks.size() + " tasks in the list.");
                 break;
             }
-            }
-        return false;
         }
+        return false;
+    }
 
     public static void validateCmd(String cmd) throws MissingDescriptionException {
         if (cmd.length() == 0) {
