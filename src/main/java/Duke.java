@@ -1,7 +1,86 @@
+import java.io.BufferedReader;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.FileReader;
+import java.io.PrintWriter;
+import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Duke {
-    public static void main(String[] args) {
+    public static void updateFile(ArrayList<Task> entireList) throws FileNotFoundException {
+        try {
+            PrintWriter pw = new PrintWriter(new FileOutputStream("/Users/kristen/Documents/NUS/CS2109S/ip/data/duke.txt"));
+
+
+            for (int i = 0; i < entireList.size(); i++) {
+                Task task = entireList.get(i);
+
+                boolean isMark = task.status;
+                String type = task.types;
+                String name = task.item;
+
+
+                if (type.equals("D")){
+                    String time = task.getTime();
+
+                    pw.println(type + "-" + isMark + "-" + name + "-" + time);
+                } else if (type.equals("E")) {
+                    String time = task.getTime();
+                    String startEnd [] = time.split("//", 2);
+
+                    pw.println(type + "-" + isMark + "-" + name + "-" + startEnd[0] + "-" + startEnd[1]);
+                } else {
+                    pw.println(type + "-" + isMark + "-" + name);
+                }
+
+            }
+            pw.close();
+
+        }catch(IOException i) {
+            i.printStackTrace();
+        }
+    }
+
+    public static void loadFile(ArrayList<Task> entireList) throws FileNotFoundException {
+        try {
+            BufferedReader br = new BufferedReader(new FileReader("/Users/kristen/Documents/NUS/CS2109S/ip/data/duke.txt"));
+            String oneline;
+
+            while ( (oneline = br.readLine() )!= null) {
+                String lines [] = oneline.split("-", 3);
+
+                Task task;
+
+                if(lines[0].equals("T")) {
+                    task = new Task(lines[2], lines[0]);
+
+                } else if (lines[0].equals("D")) {
+                    String nameTime[] = lines[2].split("-", 2);
+                    task = new Deadline(nameTime[0], lines[0], "by " + nameTime[1]);
+
+                } else {
+                    String nameStartEnd[] = lines[2].split("-", 3);
+                    task = new Event(nameStartEnd[0], lines[0], "from " + nameStartEnd[1], "to " + nameStartEnd[2]);
+
+                }
+
+                if(lines[1].equals("true")) {
+                    task.mark();
+                }
+
+                entireList.add(task);
+            }
+
+
+        } catch (IOException i) {
+            i.printStackTrace();
+        }
+
+    }
+
+
+    public static void main(String[] args) throws IOException {
         String logo = " ____        _        \n"
                 + "|  _ \\ _   _| | _____ \n"
                 + "| | | | | | | |/ / _ \\\n"
@@ -11,6 +90,8 @@ public class Duke {
 
         Scanner sc = new Scanner(System.in);
         toDoList toDo = new toDoList();
+
+        loadFile(toDo.getTasks());
 
         System.out.println("Hello I'm Duke\nWhat can I do for you?");
         String input = sc.nextLine();
@@ -144,6 +225,8 @@ public class Duke {
 
                 }
 
+               updateFile(toDo.getTasks());
+
             } catch (DukeException ex) {
             System.out.println(ex.getMessage());
             } catch (ArgumentException ex2) {
@@ -153,6 +236,10 @@ public class Duke {
             input = sc.nextLine();
         }
 
+
+
         sc.close();
     }
+
+
 }

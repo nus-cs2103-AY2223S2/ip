@@ -9,7 +9,12 @@ public class Deadline extends Task{
 
     @Override
     public String toString() {
-        return "[D]" + super.toString() + " (by: " + deadLineTime + ")";
+        return "[D]" + super.toString() + "(by: " + deadLineTime + ")";
+    }
+
+    @Override
+    public String getTime() {
+        return deadLineTime;
     }
 
 }

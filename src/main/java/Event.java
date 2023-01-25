@@ -11,6 +11,11 @@ public class Event extends Task{
     }
     @Override
     public String toString() {
-        return "[E]" + super.toString() + " (From: " + eventStart + " to: " + eventEnd + ")";
+        return "[E]" + super.toString() + "(From: " + eventStart + " to: " + eventEnd + ")";
+    }
+
+    @Override
+    public String getTime() {
+        return eventStart + "//" + eventEnd;
     }
 }

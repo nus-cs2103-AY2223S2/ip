@@ -9,6 +9,9 @@ public class Task {
         status = false;
     }
 
+    public String getTime() {
+        return "";
+    }
 
     @Override
     public String toString(){

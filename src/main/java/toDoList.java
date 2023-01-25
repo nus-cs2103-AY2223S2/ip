@@ -1,4 +1,7 @@
 import java.util.ArrayList;
+import java.io.IOException;
+
+
 
 public class toDoList {
 
@@ -27,17 +30,13 @@ public class toDoList {
     }
 
     public void addItemDeadline(String type, String item, String time) {
-
         Task newTask = new Deadline(item, type, time);
         allTasks.add(newTask);
-
         System.out.println(" " + newTask.toString());
     }
 
     public void addItemEvent(String type, String item, String time1, String time2) {
         Task newTask = new Event(item, type, time1, time2);
-
-        //newTask.setEventTime(time1, time2);
         allTasks.add(newTask);
         System.out.println(" " + newTask.toString());
     }
@@ -61,5 +60,10 @@ public class toDoList {
         System.out.println(" " + allTasks.get(index-1).toString());
         allTasks.remove(index-1);
     }
+
+    public ArrayList<Task> getTasks() {
+        return allTasks;
+    }
+
 
 }
