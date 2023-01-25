@@ -1,10 +1,13 @@
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+
 /**
  * A task subclass to represent a Deadline (due date).
  */
 public class Deadline extends Task{
-    private String dueDate;
+    private LocalDate dueDate;
 
-    public Deadline(String description, String dueDate) {
+    public Deadline(String description, LocalDate dueDate) {
         super(description);
         this.dueDate = dueDate;
     }
@@ -16,6 +19,6 @@ public class Deadline extends Task{
 
     @Override
     public String getDescription() {
-        return this.description + " (by: " + this.dueDate + ")";
+        return this.description + " (by: " + this.dueDate.format(DateTimeFormatter.ofPattern("dd MMM yyyy")) + ")";
     }
 }
