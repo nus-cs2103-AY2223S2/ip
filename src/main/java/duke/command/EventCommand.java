@@ -18,14 +18,29 @@ import java.time.format.DateTimeParseException;
  */
 public class EventCommand extends Command {
     private final String slug;
+
+    /**
+     * Given a valid slug, creates an Event task when executed.
+     * Slugs are of this format:
+     * "{task} /from d/M/yy HHmm /to d/M/yy HHmm"
+     * @param slug The provided slug.
+     */
     public EventCommand(String slug) {
         this.slug = slug;
     }
 
+    /**
+     * Formats an empty command that raises an Empty Task Exception
+     */
     public EventCommand() {
         this.slug = "";
     }
 
+    /**
+     * Executes this command.
+     * @param ts The TaskList instance.
+     * @param ui The UI output.
+     */
     @Override
     public void execute(TaskList ts, Ui ui) {
         if (this.slug.length() == 0) {

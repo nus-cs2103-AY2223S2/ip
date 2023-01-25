@@ -5,6 +5,10 @@ import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 
+/**
+ * The main utility class for providing Dates, DateTimes, and other common formatting.
+ * @author SeeuSim
+ */
 public class DukeUtils {
     /**
      * A Utility method to parse datetime strings passed to the duke.task.DukeTask

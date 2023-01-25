@@ -12,10 +12,21 @@ import duke.Ui;
  */
 public class UnmarkCommand extends Command {
     private final int idx;
+
+    /**
+     * Formats this with the index of the storage to access and modify the
+     * task.
+     * @param idx The storage index.
+     */
     public UnmarkCommand(int idx) {
         this.idx = idx;
     }
 
+    /**
+     * Executes this task.
+     * @param ts The TaskList instance.
+     * @param ui The UI output.
+     */
     @Override
     public void execute(TaskList ts, Ui ui) {
         try {

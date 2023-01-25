@@ -38,6 +38,11 @@ public abstract class DukeTask {
         this.isDone = false;
     }
 
+    /**
+     * Human friendly interpretation of this task.
+     *
+     * @return The task interpretation.
+     */
     @Override
     public String toString() {
         return String.format(
@@ -96,5 +101,11 @@ public abstract class DukeTask {
         return null;
     }
 
+    /**
+     * Indicate if this task falls on the given date.
+     *
+     * @param dt The given date.
+     * @return The indicative boolean.
+     */
     public abstract boolean isOnDate(LocalDate dt);
 }

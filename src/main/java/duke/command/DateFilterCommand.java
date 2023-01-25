@@ -18,10 +18,22 @@ import java.time.format.DateTimeParseException;
  */
 public class DateFilterCommand extends Command {
     private final String date;
+
+    /**
+     * Formats the command with the given date, in this format:
+     * "/on d/m/yy"
+     *
+     * @param date The provided date
+     */
     public DateFilterCommand(String date) {
         this.date = date;
     }
 
+    /**
+     * Executes this command.
+     * @param ts The TaskList instance.
+     * @param ui The UI output.
+     */
     @Override
     public void execute(TaskList ts, Ui ui) {
         if (!date.matches("/on (.*)$")) {

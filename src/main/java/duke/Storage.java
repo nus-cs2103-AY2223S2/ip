@@ -165,6 +165,11 @@ public class Storage {
         return out.toString();
     }
 
+    /**
+     * Creates a list of all tasks currently in the storage.
+     *
+     * @return The list of tasks.
+     */
     public List<DukeTask> toList() {
         try {
             Path path = Paths.get(filePath);

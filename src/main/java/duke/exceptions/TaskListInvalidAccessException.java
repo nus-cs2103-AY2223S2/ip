@@ -8,6 +8,9 @@ package duke.exceptions;
  * AY2223-S2 CS2103T
  */
 public class TaskListInvalidAccessException extends DukeException {
+    /**
+     * The default constructor for this exception.
+     */
     public TaskListInvalidAccessException() {
         super("An invalid index was entered. Please try again.");
     }

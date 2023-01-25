@@ -15,6 +15,9 @@ public class Duke {
     private TaskList tasks;
     private Ui ui;
 
+    /**
+     * Default constructor to set up the app.
+     */
     public Duke() {
         this.storage = Storage.create();
         this.ui = new Ui();
@@ -32,7 +35,7 @@ public class Duke {
     }
 
     /**
-     * The main method by which this store operates
+     * The main method by which this store operates.
      */
     private void run() {
         ui.welcomeMessage();

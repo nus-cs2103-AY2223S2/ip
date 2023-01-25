@@ -24,6 +24,11 @@ public class DeadlineTask extends DukeTask{
         this.deadline = deadline;
     }
 
+    /**
+     * Human friendly interpretation of this task.
+     *
+     * @return The task interpretation.
+     */
     @Override
     public String toString() {
         DateTimeFormatter df = DateTimeFormatter.ofPattern("MMM dd yyyy h:mma");
@@ -31,11 +36,22 @@ public class DeadlineTask extends DukeTask{
                 + String.format(" (by: %s)", this.deadline.format(df));
     }
 
+    /**
+     * Indicate if this task falls on the given date.
+     *
+     * @param dtParsed The given date.
+     * @return The indicative boolean.
+     */
     @Override
     public boolean isOnDate(LocalDate dtParsed) {
         return dtParsed.equals(this.deadline.toLocalDate());
     }
 
+    /**
+     * Formats this task into a format for storage in the Storage class.
+     *
+     * @return The formatted task.
+     */
     @Override
     public String toDBSchema() {
         return String.format(
