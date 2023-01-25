@@ -1,7 +1,8 @@
+package tasks;
 import java.time.LocalDate;
 
 // Deadline class returns result that is type [D] and a deadline
-class Deadline extends Task {
+public class Deadline extends Task {
     private final LocalDate date;
     private final String time;
     private final String[] period;

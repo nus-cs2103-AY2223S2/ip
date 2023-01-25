@@ -1,6 +1,3 @@
-import java.lang.ArrayIndexOutOfBoundsException;
-import java.lang.IndexOutOfBoundsException;
-import java.lang.NullPointerException;
 import java.util.Scanner;
 import java.util.Arrays;
 
@@ -19,7 +16,7 @@ public class Duke {
     public Duke(String filePath) {
         this.ui = new Ui();
         this.storage = new Storage(filePath, this.ui);
-        this.tasks = new TaskList();
+        this.tasks = new TaskList(this.storage, this.ui);
     }
 
     public static void main(String[] args) {
@@ -59,55 +56,31 @@ public class Duke {
 
                     // Display a list of tasks that shows its completion and types
                     case LIST:
-                        this.ui.listMessage();
-                        this.storage.displayList();
+                        tasks.printList();
                         break;
 
                     // Mark to complete the task, the second bracket will show a cross
                     case MARK:
-                        this.storage.markListItem(index);
+                        tasks.markItem(index);
                         break;
 
                     // Un-mark to redo the completion of the task, the cross will be
                     // removed from the second bracket
                     case UNMARK:
-                        this.storage.unmarkListItem(index);
+                        tasks.unmarkItem(index);
                         break;
 
-                    // Add task of type (To do)
-
+                    // Add task of type (To do/ deadline/ event)
                     case TODO:
-                        if (input.length() < 5) {
-                            this.ui.error("todo");
-                        }
-                        this.storage.addTodoItem(input);
-                        break;
-
-                    // Add task of type (Deadline)
                     case DEADLINE:
-                        if (!input.contains("/by")) {
-                            this.ui.error("deadline");
-                        }
-                        String[] deadline_part = input.substring(9, input.length()).split("/by ");
-                        this.storage.addDeadlineItem(deadline_part[0], deadline_part[1]);
+                    case EVENT: {
+                        tasks.addItem(instruction.toString() ,input);
                         break;
-
-                    // Add task of type (Event)
-                    case EVENT:
-                        boolean from = input.contains("/from");
-                        boolean to = input.contains("/to");
-            
-                        if ((!from || !to) || !(from && to)) {
-                            this.ui.error("event");
-                        }
-                        String[] event_part = input.substring(6, input.length()).split("/from ");
-                        String[] range = event_part[1].split("/to ");
-                        this.storage.addEventItem(event_part[0], range[0], range[1]);
-                        break;
+                    }
 
                     // Delete task from the list according to its numbering on the list
                     case DELETE:
-                        this.storage.deleteListItem(index);
+                        tasks.deleteTask(index);
                         break;
 
                     // default will throw an exception in case switch-case is unable to find instruction

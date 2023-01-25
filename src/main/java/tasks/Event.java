@@ -1,8 +1,9 @@
+package tasks;
 import java.time.LocalDate;
 
 // Event class returns result that is type [E] and a starting time and an ending
 // time
-class Event extends Task {
+public class Event extends Task {
 
     private final LocalDate startDate;
     private final LocalDate endDate;

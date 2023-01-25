@@ -1,5 +1,7 @@
+package tasks;
+
 // To-do class returns result that is type [T]
-class Todo extends Task {
+public class Todo extends Task {
     public Todo(String name) {
         super(name);
     }

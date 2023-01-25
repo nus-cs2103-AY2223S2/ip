@@ -1,5 +1,6 @@
+package tasks;
 // Task class: parent class of Deadline, Event, To do
-class Task {
+public class Task {
     private final String name;
     private boolean checkMark;
 
