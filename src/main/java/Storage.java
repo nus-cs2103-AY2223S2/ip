@@ -3,6 +3,8 @@ import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
 
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -44,10 +46,13 @@ public class Storage {
                     ToDo t = new ToDo(dataArr[2], isDone);
                     myList.add(t);
                 } else if (type.equals("D")) {
-                    Deadline d = new Deadline(dataArr[2], dataArr[3], isDone);
+                    LocalDate end = Duke.parseDate(dataArr[3]);
+                    Deadline d = new Deadline(dataArr[2], end, isDone);
                     myList.add(d);
                 } else {
-                    Event e = new Event(dataArr[2], dataArr[3], dataArr[4], isDone);
+                    LocalDate start = Duke.parseDate(dataArr[3]);
+                    LocalDate end = Duke.parseDate(dataArr[4]);
+                    Event e = new Event(dataArr[2], start, end, isDone);
                     myList.add(e);
                 }
             }
@@ -65,7 +70,7 @@ public class Storage {
             int size = myList.size();
             for (int i = 0; i < size; i++) {
                 Task t = myList.get(i);
-                fw.write(t.format());
+                fw.write(t.formatStore());
                 fw.write("\n");
             }
             fw.close();

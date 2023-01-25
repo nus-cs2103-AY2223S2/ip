@@ -1,5 +1,6 @@
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
+import java.util.Date;
 import java.util.Scanner;
 import java.time.LocalDate;
 public class Duke {
@@ -25,21 +26,31 @@ public class Duke {
      * @param date The given string representation of the date to be parsed.
      * @return Returns the parsed LocalDate.
      */
-    private static LocalDate parseDate(String date) {
+    public static LocalDate parseDate(String date) {
         DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy/MM/dd");
         return LocalDate.parse(date, dtf);
     }
 
     /**
-     * Formats LocalDate to dd MMM yyyy format and returns the string representation of it.
+     * Formats LocalDate to day month year format and returns the string representation of it.
      * @param ld The given LocalDate to be formatted.
      * @return Returns the string representation of the formatted date.
      */
-    public static String formatDate(LocalDate ld) {
+    public static String formatDatePrint(LocalDate ld) {
         int day = ld.getDayOfMonth();
         String month = ld.getMonth().toString();
         int year = ld.getYear();
         return String.format("%d %s %d",day, month, year);
+    }
+
+    /**
+     * Formats LocalDate to yyyy/mm/dd format and returns the string representation of it.
+     * @param ld The given LocalDate to be formatted.
+     * @return Returns the string representation of the formatted date.
+     */
+    public static String formatDateStore(LocalDate ld) {
+        DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy/MM/dd");
+        return ld.format(dtf);
     }
 
     /**
@@ -67,7 +78,7 @@ public class Duke {
         }
         try {
             LocalDate ldEnd = Duke.parseDate(end);
-            end = Duke.formatDate(ldEnd);
+            end = Duke.formatDatePrint(ldEnd);
             if (ldEnd.isBefore(LocalDate.now())) {
                 throw new InvalidInputException("The given deadline (yyyy/mm/dd) " + end + " has passed.");
             }
@@ -112,7 +123,7 @@ public class Duke {
                         "The start date (yyyy/mm/dd) should be before the end date (yyyy/mm/dd).");
             }
             if (ldEnd.isBefore(LocalDate.now())) {
-                end = Duke.formatDate(ldEnd);
+                end = Duke.formatDatePrint(ldEnd);
                 throw new InvalidInputException("The given event (end date: " + end + ") has ended.");
             }
             return new Event(name, ldStart, ldEnd);

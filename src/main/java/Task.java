@@ -65,7 +65,7 @@ public class Task {
      * Format task to be stored in data file.
      * @return Returns a  formatted string representation of this task to be stored.
      */
-    public String format() {
+    public String formatStore() {
         String status = isDone ? "1" : "0";
         return (String.format("%s | %s", status, this.name));
     }

@@ -30,7 +30,7 @@ public class Event extends Task {
      * @param end The end date/time of event.
      * @param isDone Status of the task.
      */
-    public Event(String name, String start, String end, boolean isDone) {
+    public Event(String name, LocalDate start, LocalDate end, boolean isDone) {
         super(name, isDone);
         this.start = start;
         this.end = end;
@@ -42,8 +42,8 @@ public class Event extends Task {
      */
     @Override
     public String toString() {
-        String s = Duke.formatDate(this.start);
-        String e = Duke.formatDate(this.end);
+        String s = Duke.formatDatePrint(this.start);
+        String e = Duke.formatDatePrint(this.end);
         String toPrint = String.format("[E]%s (from: %s to: %s)",
                 super.toString(), s, e);
         return toPrint;
@@ -54,7 +54,9 @@ public class Event extends Task {
      * @return Returns a  formatted string representation of this task to be stored.
      */
     @Override
-    public String format() {
-        return ("E | " + super.format() + String.format(" | %s | %s", this.start, this.end));
+    public String formatStore() {
+        String s = Duke.formatDateStore(this.start);
+        String e = Duke.formatDateStore(this.end);
+        return ("E | " + super.formatStore() + String.format(" | %s | %s", s, e));
     }
 }

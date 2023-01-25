@@ -23,7 +23,7 @@ public class Deadline extends Task {
      * @param end The end date/time of deadline.
      * @param isDone Status of the task.
      */
-    public Deadline(String name, String end, boolean isDone) {
+    public Deadline(String name, LocalDate end, boolean isDone) {
         super(name, isDone);
         this.end = end;
     }
@@ -34,7 +34,7 @@ public class Deadline extends Task {
      */
     @Override
     public String toString() {
-        String toPrint = String.format("[D]%s (by: %s)", super.toString(), Duke.formatDate(this.end));
+        String toPrint = String.format("[D]%s (by: %s)", super.toString(), Duke.formatDatePrint(this.end));
         return toPrint;
     }
 
@@ -43,7 +43,7 @@ public class Deadline extends Task {
      * @return Returns a  formatted string representation of this task to be stored.
      */
     @Override
-    public String format() {
-        return ("D | " + super.format() + String.format(" | %s", this.end));
+    public String formatStore() {
+        return ("D | " + super.formatStore() + String.format(" | %s", Duke.formatDateStore(this.end)));
     }
 }
