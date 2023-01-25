@@ -1,7 +1,9 @@
 import java.io.*;
+import java.time.format.DateTimeFormatter;
 import java.util.Scanner;
 import java.util.ArrayList;
 import java.lang.RuntimeException;
+import java.time.LocalDate;
 
 public class Duke {
 
@@ -25,10 +27,6 @@ public class Duke {
 
         public void unmark() {
             this.isDone = false;
-        }
-
-        public Boolean getIsDone() {
-            return this.isDone;
         }
 
         @Override
@@ -58,38 +56,42 @@ public class Duke {
     }
 
     private static class Deadline extends Task {
-        private String by;
+        private final LocalDate by;
         public Deadline(String title, String by) {
             super(title);
-            this.by = by;
+            this.by = LocalDate.parse(by, DateTimeFormatter.ofPattern("dd/MM/yyyy"));
         }
+
         @Override
         public String toString() {
-            return "[D]" + super.toString() + " (by: " + this.by + ")";
+            return "[D]" + super.toString() + " (by: " + by.format(DateTimeFormatter.ofPattern("MMM d yyyy")) + ")";
         }
 
         @Override
         public String toSavedString() {
-            return "D|" + super.toSavedString() + "|" + this.by;
+            return "D|" + super.toSavedString() + "|" + by.format(DateTimeFormatter.ofPattern("dd/MM/yyyy"));
         }
     }
 
     private static class Event extends Task {
-        private String from;
-        private String to;
+        private LocalDate from;
+        private LocalDate to;
         public Event(String title, String from, String to) {
             super(title);
-            this.from = from;
-            this.to = to;
+            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+            this.from = LocalDate.parse(from, formatter);
+            this.to = LocalDate.parse(to, formatter);
         }
         @Override
         public String toString() {
-            return "[E]" + super.toString() + " (from: " + this.from + " to: " + this.to + ")";
+            return "[E]" + super.toString() + " (from: " + from.format(DateTimeFormatter.ofPattern("MMM d yyyy"))
+                                               + " to: " + to.format(DateTimeFormatter.ofPattern("MMM d yyyy"))+ ")";
         }
 
         @Override
         public String toSavedString() {
-            return "E|" + super.toSavedString() + "|" + this.from + "|" + this.to;
+            return "E|" + super.toSavedString() + "|" + from.format(DateTimeFormatter.ofPattern("dd/MM/yyyy"))
+                                                + "|" + to.format(DateTimeFormatter.ofPattern("dd/MM/yyyy"));
         }
     }
 
