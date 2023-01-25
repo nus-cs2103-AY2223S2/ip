@@ -1,0 +1,8 @@
+T | go toilet
+D | go bainian (by: June 6th)
+T | go to school
+D | go out by 5pm
+D | return book (by: Sunday)
+D | return book (by: Sunday)
+T | borrow book
+E | project meeting (from: Mon 2pm to: 4pm)

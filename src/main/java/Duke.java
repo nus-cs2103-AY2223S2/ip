@@ -1,10 +1,38 @@
+import java.io.FileWriter;
 import java.util.Scanner;
 import java.util.ArrayList;
+import java.io.File;
 
 public class Duke {
     private static ArrayList<Task> actions = new ArrayList<Task>();
 
     public static void main(String[] args) {
+        try {
+            File f = new File("./src/main/data/duke.txt");
+            Scanner s = new Scanner(f);
+            while (s.hasNext()) {
+                String taskDetails = s.nextLine();
+                String[] details = taskDetails.split(" |", 2);
+                String taskType = details[0];
+                String taskName = details[1];
+                System.out.println(taskName);
+                taskName = taskName.replace("|", "");
+                switch (taskType) {
+                    case "T" :
+                        actions.add(new ToDo(taskName));
+                        break;
+                    case "E" :
+                        actions.add(new Event(taskName));
+                        break;
+                    case "D" :
+                        actions.add(new Deadline(taskName));
+                        break;
+                }
+            }
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+        }
+
         System.out.println("Hello from! I'm a Cookie Monster\n" + "What can I do for you?\n");
         Scanner reader = new Scanner(System.in);
 
@@ -44,6 +72,7 @@ public class Duke {
                                 throw new Missing("");
                             }
                             newTask = new ToDo(input);
+                            type = "T";
                             break;
                         case "deadline" :
                             input = input.replaceFirst("deadline", "");
@@ -53,6 +82,7 @@ public class Duke {
                             input = input.replaceFirst( "/by", "(by:");
                             input = input + ")";
                             newTask = new Deadline(input);
+                            type = "D";
                             break;
                         case "event" :
                             input = input.replaceFirst("event", "");
@@ -63,10 +93,20 @@ public class Duke {
                             input = input.replaceFirst( "/to ", "to: ");
                             input = input + ")";
                             newTask = new Event(input);
+                            type = "E";
                             break;
                     }
                     actions.add(newTask);
                     System.out.println(newTask.toString());
+                    try {
+                        FileWriter f = new FileWriter("./src/main/data/duke.txt", true);
+                        String text = type + " |" + input;
+                        f.write(System.lineSeparator());
+                        f.write(text);
+                        f.close();
+                    } catch (Exception e) {
+                        System.out.println(e.getMessage());
+                    }
                 } else {
                     throw new WrongKeyWord("");
                 }
