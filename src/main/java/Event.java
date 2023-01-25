@@ -5,10 +5,14 @@ public class Event extends Task{
     protected String from;
     protected String to;
 
-    public Event(String value, String from, String to ) {
-        super(value);
+    public Event(String value, String from, String to, boolean mark ) {
+        super(value,mark);
         this.from = from;
         this.to = to;
+    }
+
+    public String toFile() {
+        return "event," + super.isMark() + "," + super.getValue() + "," + this.from + "," + this.to;
     }
     @Override
     public String toString() {
