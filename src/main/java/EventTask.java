@@ -20,18 +20,18 @@ public class EventTask extends UserTask {
     /**
      * Start time.
      */
-    public final String start;
+    public final MeggyTime start;
     /**
      * end time.
      */
-    public final String end;
+    public final MeggyTime end;
 
     /**
      * @param desc  Non-null. Parsed description string.
-     * @param start Non-null. Parsed start time string.
-     * @param end   Non-null. Parsed end time string.
+     * @param start Non-null. Parsed start time.
+     * @param end   Non-null. Parsed end time.
      */
-    private EventTask(String desc, String start, String end) throws MeggyException {
+    private EventTask(String desc, MeggyTime start, MeggyTime end) throws MeggyException {
         super(desc);
         this.start = start;
         this.end = end;
@@ -66,10 +66,10 @@ public class EventTask extends UserTask {
         final int descLim = kwIdxs.get(0).idx;
         final String desc = descLim >= argLen ? args : args.substring(0, descLim);
         // If "start" keyword is in args, write to start time variable. Otherwise use default.
-        final String start = kwValue.getOrDefault(sttFmt, Util.noFound);
+        final String start = kwValue.get(sttFmt);
         // If "end" keyword is in args, write to end time variable. Otherwise use default.
-        final String end = kwValue.getOrDefault(endFmt, Util.noFound);
-        return new EventTask(desc.trim(), start.trim(), end.trim());
+        final String end = kwValue.get(endFmt);
+        return new EventTask(desc.trim(), MeggyTime.of(start), MeggyTime.of(end));
     }
 
     @Override
