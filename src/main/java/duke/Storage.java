@@ -18,26 +18,26 @@ public class Storage {
     }
 
     public void save(ArrayList<Task> dataArray) {
-            try {
-                FileWriter fw = new FileWriter(FILEPATH);
-                for (Task data : dataArray) {
-                    String text = data.saveFormat();
-                    fw.write(text + "\n");
-                }
-                fw.close();
-            } catch (IOException e) {
-                throw new RuntimeException(e);
+        try {
+            FileWriter fw = new FileWriter(FILEPATH);
+            for (Task data : dataArray) {
+                String text = data.saveFormat();
+                fw.write(text + "\n");
             }
-    }
-        public ArrayList<String> load() throws FileNotFoundException {
-            ArrayList<String> data = new ArrayList<>();
-            File file = new File(FILEPATH);
-            Scanner loader = new Scanner(file);
-            while(loader.hasNextLine()) {
-                data.add(loader.nextLine());
-            }
-            return data;
+            fw.close();
+        } catch (IOException e) {
+            throw new RuntimeException(e);
         }
     }
+    public ArrayList<String> load() throws FileNotFoundException {
+        ArrayList<String> data = new ArrayList<>();
+        File file = new File(FILEPATH);
+        Scanner loader = new Scanner(file);
+        while(loader.hasNextLine()) {
+            data.add(loader.nextLine());
+        }
+        return data;
+    }
+}
 
 

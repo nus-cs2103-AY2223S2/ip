@@ -7,9 +7,9 @@ import java.io.IOException;
 public class Duke {
     private Storage storage;
     private Ui ui;
-    public static boolean isExit;
+    private static boolean isExit;
 
-    public TaskList tasks;
+    private TaskList tasks;
     public Duke(String filepath) {
         this.ui = new Ui();
         this.storage = new Storage(filepath);

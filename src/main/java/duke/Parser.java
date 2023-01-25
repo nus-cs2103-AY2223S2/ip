@@ -1,7 +1,6 @@
 package duke;
 import duke.command.*;
 
-
 public class Parser {
     public enum Commands {
         bye,

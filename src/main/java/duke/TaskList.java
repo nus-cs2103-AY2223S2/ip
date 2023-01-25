@@ -68,12 +68,4 @@ public class TaskList{
     public ArrayList<Task> getListOfTasks(){
         return listOfTasks;
     }
-
-    public String printTaskCount() {
-        return "\tNow you have "
-                + listOfTasks.size()
-                + " tasks in the list.";
-    }
-
-
 }

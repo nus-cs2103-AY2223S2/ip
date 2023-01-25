@@ -17,9 +17,6 @@ public class Ui {
     public Ui(){
         this.sc = new Scanner(System.in);
     }
-    public void printSeparator() {
-        System.out.println(SEPARATOR);
-    }
     public String readCommand() {
         return sc.nextLine();
     }
