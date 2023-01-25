@@ -1,5 +1,9 @@
+import java.nio.file.Paths;
+import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.time.LocalDate;
+
 
 /**
  * Class to encapsulate behavior of personal assistant Duke!
@@ -56,7 +60,10 @@ public class DukeBehaviour {
 
         } catch (DukeException e) {
             System.out.println(e.getMessage());
-        }
+        } catch (DateTimeParseException e) {
+        System.out.println("Invalid input received! \n datetime could not be parsed, make sure " +
+                "that your date follows the format YYYY-MM-DD");
+    }
     }
 
     /**
@@ -89,7 +96,7 @@ public class DukeBehaviour {
      */
     private void mark(ArrayList<String> userIn) throws DukeException{
         if (userIn.size()>2 || userIn.size()==1) {
-            throw new DukeException("Invalid input received! /n Mark commands are in the form of: mark i /n (only 1 whitespace allowed)");
+            throw new DukeException("Invalid input received! \nMark commands are in the form of: mark i \n(only 1 whitespace allowed)");
         }
         int index = Integer.parseInt(userIn.get(1));
 
@@ -108,7 +115,7 @@ public class DukeBehaviour {
      */
     private void unmark(ArrayList<String> userIn) throws DukeException{
         if (userIn.size()>2 || userIn.size() == 1) {
-            throw new DukeException("Invalid input received! /n Unmark commands are in the form of: unmark i /n (only 1 whitespace allowed)");
+            throw new DukeException("Invalid input received! \nUnmark commands are in the form of: unmark i \n(only 1 whitespace allowed)");
         }
         int index = Integer.parseInt(userIn.get(1));
         if (index < 1 || index > taskList.size()){
@@ -137,7 +144,7 @@ public class DukeBehaviour {
      * Private method for handling commands regarding Events.
      * @param userIn user input of type String
      */
-    private void addEvent(ArrayList<String> userIn) throws DukeException{
+    private void addEvent(ArrayList<String> userIn) throws DukeException, DateTimeParseException{
         //String descAndTimes = userIn.replace("event", "");
         //index 0 should be event
         //index 1-? should be name
@@ -146,18 +153,13 @@ public class DukeBehaviour {
         int fromId = userIn.indexOf("/from");
         int toId = userIn.indexOf("/to");
         if (fromId < 0 || toId < 0){
-            throw new DukeException("Invalid input received! /n Event commands are in the form of: event name /from fromtime /to totime /n (remember to include '/from' and '/to')");
+            throw new DukeException("Invalid input received! \nEvent commands are in the form of: event name /from fromtime /to totime \n(remember to include '/from' and '/to')");
         }
 
         String name = String.join(" ", userIn.subList(1, fromId));
-        String from = String.join(" ", userIn.subList(fromId+1, toId));
-        String to = String.join(" ", userIn.subList(toId+1, userIn.size()));
-
-        Event newEvent = new Event(
-                name,
-                from,
-                to
-        );
+        LocalDate from = LocalDate.parse(String.join(" ", userIn.subList(fromId+1, toId)));
+        LocalDate to = LocalDate.parse(String.join(" ", userIn.subList(toId+1, userIn.size())));
+        Event newEvent = new Event(name, from, to);
         taskList.add(newEvent);
         System.out.println("Got it. I've added this task:");
         System.out.println(newEvent);
@@ -167,20 +169,19 @@ public class DukeBehaviour {
      * Private method for handling commands regarding Deadlines.
      * @param userIn user input of type String
      */
-    private void addDeadline(ArrayList<String> userIn) throws DukeException {
-
+    private void addDeadline(ArrayList<String> userIn) throws DukeException, DateTimeParseException {
+        LocalDate by;
         //String descAndTimes = userIn.replace("event", "");
         //index 0 should be event
         //index 1-? should be name
         //index containing "/by" should be immediately preceding from param
         int byId = userIn.indexOf("/by");
         if (byId < 0){
-            throw new DukeException("Invalid input received! /n Deadline commands are in the form of: deadline name /by bytime /n (remember to include '/by')");
+            throw new DukeException("Invalid input received! \nDeadline commands are in the form of: deadline name /by bytime \n(remember to include '/by')");
         }
 
         String name = String.join(" ", userIn.subList(1, byId));
-        String by = String.join(" ", userIn.subList(byId+1, userIn.size()));
-
+        by = LocalDate.parse(String.join(" ", userIn.subList(byId+1, userIn.size())));
         Deadline newDeadline = new Deadline(name, by);
         taskList.add(newDeadline);
         System.out.println("Got it. I've added this task:");
