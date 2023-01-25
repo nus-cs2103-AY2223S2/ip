@@ -28,6 +28,10 @@ public class Event extends Task {
         this.from = from;
         this.to = to;
         this.isDone = isDone;
+        fromDate = LocalDateTime.parse(from, FORMAT);
+        toDate = LocalDateTime.parse(to, FORMAT);
+        displayFrom = this.fromDate.toString().replace("T", " ");
+        displayTo = this.toDate.toString().replace("T", " ");
     }
 
     @Override

@@ -1,7 +1,4 @@
-<<<<<<< HEAD
-=======
 import java.io.File;
->>>>>>> branch-Level-7
 import java.util.ArrayList;
 import java.util.Scanner;
 import java.io.FileWriter;
