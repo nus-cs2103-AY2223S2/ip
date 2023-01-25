@@ -8,14 +8,25 @@ import duke.task.Task;
 import duke.task.ToDo;
 
 public class Parser {
+  /**
+   * Validates the task input, checks for empty tasks. If task is empty, throws EmptyTaskException.
+   * @param input the user input.
+   * @throws EmptyTaskException
+   */
   public void validateTaskInput(String input) throws EmptyTaskException {
     String s = input.strip();
     if (s.equals("todo") || s.equals("deadline") || s.equals("event")) {
-      throw new EmptyTaskException("duke.task.Task " + s + " cannot be empty nya!\n");
+      throw new EmptyTaskException("Task " + s + " cannot be empty nya!\n");
     }
   }
 
+  /**
+   * Creates an appropriate task from the user input. Tasks created can be ToDo, Deadline or Event.
+   * @param input the user input.
+   * @return Task the resultant task formed.
+   */
   public Task makeTaskFromInput(String input) {
+    validateTaskInput(input);
     String rest = input.substring(input.indexOf(" ") + 1);
     switch (input.split(" ")[0]) {
       case "todo":
@@ -31,6 +42,13 @@ public class Parser {
     }
   }
 
+  /**
+   * dispatches the commands based off the user input.
+   * @param command
+   * @param ui
+   * @param taskList
+   * @throws InvalidCommandException
+   */
   public void dispatch(String command, Ui ui, TaskList taskList) throws InvalidCommandException {
     switch (command.split(" ")[0]) {
       case "list":

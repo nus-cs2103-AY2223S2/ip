@@ -27,6 +27,12 @@ public class Storage {
     loadTasks(tl, f);
   }
 
+  /**
+   * Loads the tasks from an existing file.
+   * @param tl, the Tasklist.
+   * @param f, the File.
+   * @throws FileNotFoundException
+   */
   public void loadTasks(TaskList tl, File f) throws FileNotFoundException {
     Scanner sc = new Scanner(f);
     while (sc.hasNext()) {
@@ -35,6 +41,11 @@ public class Storage {
     sc.close();
   }
 
+  /**
+   * Helper method of loadTasks, to create tasks from file input.
+   * @param input, the string user input.
+   * @return the created task.
+   */
   public Task makeTask(String input) {
     String[] words = input.split("|");
     switch (words[0]) {

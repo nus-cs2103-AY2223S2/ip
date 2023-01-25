@@ -9,6 +9,10 @@ public class Ui {
     return sc.nextLine();
   }
 
+  /**
+   * helper method to print proper indentation.
+   * @param toPrint the message to be printed.
+   */
   public void print(String toPrint) {
     String line = "____________________________________________________________\n";
     System.out.println(line + " " + toPrint + line);

@@ -1,6 +1,6 @@
 package duke.task;
 
-public class Task {
+public abstract class Task {
   protected String description;
   protected boolean isDone = false;
 
@@ -22,7 +22,9 @@ public class Task {
     return String.format("[%c] %s", marker, this.description);
   }
 
-  public String fileOutput() {
-    return "";
-  }
+  /**
+   * A method to return the string output for the txt file.
+   * @return The string output for the txt file.
+   */
+  public abstract String fileOutput();
 }
