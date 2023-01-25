@@ -1,6 +1,17 @@
+package Exception;
+/** 
+ * An Exception class used to handle invalid commands where Duke is unable to respond to.
+ * 
+ * 
+ * @author Brian Quek
+ */
 public class DukeException extends Exception{
     private String message;
 
+
+    /** 
+     * Constructor for the DukeException object.
+     */
     public DukeException(int index) {
         switch(index) {
             /**
@@ -38,6 +49,10 @@ public class DukeException extends Exception{
         }
     }
 
+    
+    /** 
+     * @return a string explaining what kind of invalid input has been written.
+     */
     @Override
     public String toString() {
         return "System Error: " + this.message;

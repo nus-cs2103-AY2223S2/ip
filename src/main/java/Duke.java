@@ -4,12 +4,34 @@ import java.util.HashSet;
 import java.util.Scanner;
 import java.util.Set;
 
+import Exception.DukeException;
+import Task.Deadline;
+import Task.Event;
+import Task.Task;
+import Task.ToDo;
+
+
+/** 
+ * <h1>Duke Chatbot</h1>
+ * The Duke chatbot is a bot that is capable to keep
+ * track of tasks from the users. 
+ * 
+ * @author Brian Quek
+ */
+
 public class Duke {
+
+    /**
+     * Commands that do not require any parameter.
+     */
     private static Set<String> commandMapWithoutParam = new HashSet<>(){{
         add("list");
         add("bye");
     }};
 
+    /**
+     * The entire command list that Duke is capable of responding to.
+     */
     private static Set<String> commandMap = new HashSet<>(){{
         add("list");
         add("mark");
@@ -21,6 +43,17 @@ public class Duke {
         add("bye");
     }};
 
+    
+    /** 
+     * Returns a boolean value after checking if the string contains only numerical value.
+     * 
+     * <p>
+     * This method always return a boolean value, if it contains only numerical characters it will return
+     * true else false.
+     * 
+     * @param str a string to be checked if its numerical
+     * @return a boolean whether the string contains only numerical characters
+     */
     private static boolean isNumeric(String str) {
         try {  
             Double.parseDouble(str);  
@@ -30,6 +63,12 @@ public class Duke {
         }  
     }
 
+    
+    /** 
+     * @param input an array of string elements that the user input via the Scanner object.
+     * @return an array of string elements that the user input via the Scanner object.
+     * @throws DukeException if it contains any illegal commands.
+     */
     public static String[] checkInput(String[] input) throws DukeException {
         //Empty commands
         if(input == null) {
@@ -69,6 +108,7 @@ public class Duke {
         return input;
     }
 
+    
     public static void main(String[] args) {
         Scanner inputScanner = new Scanner(System.in);
         ArrayList<Task> lists = new ArrayList<>();
