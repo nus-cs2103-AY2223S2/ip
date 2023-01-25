@@ -16,7 +16,7 @@ public class Task {
         this.deadline = null;
     }
 
-    public Task(String description,LocalDate deadline) {
+    public Task(String description, LocalDate deadline) {
         this.description = description;
         this.done = false;
         this.deadline = deadline;

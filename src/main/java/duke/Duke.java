@@ -5,11 +5,11 @@ import java.util.ArrayList;
 
 
 public class Duke {
-
     private UI ui;
     private Parser parser;
     private Storage storage;
     private TaskList taskList;
+
 
     public Duke(){
         this.ui = new UI();
