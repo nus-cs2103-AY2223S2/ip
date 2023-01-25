@@ -42,8 +42,8 @@ public class Event extends Task {
      */
     @Override
     public String toString() {
-        String s = Duke.formatDatePrint(this.start);
-        String e = Duke.formatDatePrint(this.end);
+        String s = Formatter.formatDatePrint(this.start);
+        String e = Formatter.formatDatePrint(this.end);
         String toPrint = String.format("[E]%s (from: %s to: %s)",
                 super.toString(), s, e);
         return toPrint;
@@ -55,8 +55,8 @@ public class Event extends Task {
      */
     @Override
     public String formatStore() {
-        String s = Duke.formatDateStore(this.start);
-        String e = Duke.formatDateStore(this.end);
+        String s = Formatter.formatDateStore(this.start);
+        String e = Formatter.formatDateStore(this.end);
         return ("E | " + super.formatStore() + String.format(" | %s | %s", s, e));
     }
 }

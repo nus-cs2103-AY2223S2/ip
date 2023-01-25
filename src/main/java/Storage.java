@@ -9,18 +9,34 @@ import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Storage {
-    private static final String PATH = "./data";
-    private static final String FILENAME = "/DukeList.txt";
-    private static File myFile;
+    private String dirPath;
+    private String fileName;
+    private String filePath;
+    private File myFile;
 
+    /**
+     * Constructor for Storage.
+     * @param dirPath The path to the directory the file is stored in.
+     * @param fileName The path to storage file.
+     */
+    public Storage(String dirPath, String fileName) {
+        this.dirPath = dirPath;
+        this.fileName = fileName;
+        this.filePath = dirPath + "/" + this.fileName;
+    }
+
+    /**
+     * Creates file at the specified file path if it
+     * does not already exist.
+     */
     public void createFile() {
-        File dir = new File(PATH);
+        File dir = new File(this.dirPath);
         if (!dir.exists()) {
             dir.mkdir();
         }
         //create file if it does not already exist
         try {
-            myFile = new File(PATH + FILENAME);
+            myFile = new File(this.filePath);
             if (!myFile.exists()) {
                 myFile.createNewFile();
             }
@@ -31,8 +47,13 @@ public class Storage {
         }
     }
 
-    public ArrayList<Task> read() {
-        ArrayList<Task> myList = new ArrayList<>();
+    /**
+     * Reads data stored in hard disk.
+     * @return An ArrayList containing tasks stored in the storage.
+     * @throws DukeException if file to be read cannot be found.
+     */
+    public ArrayList<Task> read() throws DukeException {
+        ArrayList<Task> tasks = new ArrayList<>();
         try {
             this.createFile();
             Scanner sc = new Scanner(myFile);
@@ -44,32 +65,36 @@ public class Storage {
 
                 if (type.equals("T")) {
                     ToDo t = new ToDo(dataArr[2], isDone);
-                    myList.add(t);
+                    tasks.add(t);
                 } else if (type.equals("D")) {
-                    LocalDate end = Duke.parseDate(dataArr[3]);
+                    LocalDate end = Parser.parseDate(dataArr[3]);
                     Deadline d = new Deadline(dataArr[2], end, isDone);
-                    myList.add(d);
+                    tasks.add(d);
                 } else {
-                    LocalDate start = Duke.parseDate(dataArr[3]);
-                    LocalDate end = Duke.parseDate(dataArr[4]);
+                    LocalDate start = Parser.parseDate(dataArr[3]);
+                    LocalDate end = Parser.parseDate(dataArr[4]);
                     Event e = new Event(dataArr[2], start, end, isDone);
-                    myList.add(e);
+                    tasks.add(e);
                 }
             }
             sc.close();
+            return tasks;
         }
         catch (FileNotFoundException e) {
-            System.out.println(e + "\nData file not found.");
+            throw new DukeException(e + "\nData file not found.");
         }
-        return myList;
     }
 
-    public void write(ArrayList<Task> myList) {
+    /**
+     * Updates the storage file in hard disk with the given list of tasks.
+     * @param tasks The list of tasks.
+     */
+    public void write(ArrayList<Task> tasks) {
         try {
-            FileWriter fw = new FileWriter(PATH + FILENAME);
-            int size = myList.size();
+            FileWriter fw = new FileWriter(this.filePath);
+            int size = tasks.size();
             for (int i = 0; i < size; i++) {
-                Task t = myList.get(i);
+                Task t = tasks.get(i);
                 fw.write(t.formatStore());
                 fw.write("\n");
             }

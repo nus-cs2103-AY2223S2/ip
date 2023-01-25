@@ -12,6 +12,6 @@ public class DukeException extends Exception{
 
     @Override
     public String toString() {
-        return ("OPPS! " + super.getMessage() + "\nPlease try again.\n");
+        return ("OPPS! " + super.getMessage() + "\nPlease try again.");
     }
 }
