@@ -1,11 +1,16 @@
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+
 public class Event extends Task{
-    protected String start;
-    protected String end;
+    protected LocalDateTime start;
+    protected LocalDateTime end;
 
     public Event(String name, String start, String end) {
         super(name);
-        this.start = start;
-        this.end = end;
+        DateTimeFormatter format = DateTimeFormatter.ofPattern("dd/MM/yy-HHmm");
+        start = start.substring(0, start.length() - 1);
+        this.start = LocalDateTime.parse(start, format);
+        this.end = LocalDateTime.parse(end, format);
     }
     public Event(String name, String isDone, String start, String end) {
         super(name, isDone);
@@ -15,11 +20,13 @@ public class Event extends Task{
     
 
     public String getEnd() {
-        return end;
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yy-HHmm");
+        return end.format(formatter);
     }
 
     public String getStart() {
-        return start;
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yy-HHmm");
+        return start.format(formatter);
     }
 
     @Override
@@ -35,6 +42,6 @@ public class Event extends Task{
         } else {
             box = "[ ] ";
         }
-        return"[E]" + box + this.getName() + "(from: " + this.getStart() + "to " + this.getEnd() + ")";
+        return"[E]" + box + this.getName() + "(from: " + this.getStart() + " to " + this.getEnd() + ")";
     }
 }

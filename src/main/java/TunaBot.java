@@ -1,9 +1,13 @@
+<<<<<<< HEAD
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+=======
+import java.time.format.DateTimeParseException;
+>>>>>>> branch-Level-8
 import java.util.ArrayList;
 import java.util.Objects;
 import java.util.Scanner;
@@ -44,6 +48,8 @@ public class TunaBot {
                 parse(input);
             } catch (InputException e) {
                 System.out.println(e.getMessage());
+            } catch (DateTimeParseException e) {
+                System.out.println("BLUB! Please use the format dd/mm/yy-hhmm! eg. 29/12/23-1854");
             }
             System.out.println(LINE);
         }

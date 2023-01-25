@@ -1,9 +1,13 @@
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+
 public class Deadline extends Task{
-    protected String deadline;
+    protected LocalDateTime deadline;
 
     public Deadline(String name, String deadline) {
         super(name);
-        this.deadline = deadline;
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yy-HHmm");
+        this.deadline = LocalDateTime.parse(deadline, formatter);
     }
     public Deadline(String name, String isDone, String deadline) {
         super(name, isDone);
@@ -11,7 +15,8 @@ public class Deadline extends Task{
     }
 
     public String getDeadline() {
-        return deadline;
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yy-HHmm");
+        return deadline.format(formatter);
     }
     @Override
     public String saveFormat() {
