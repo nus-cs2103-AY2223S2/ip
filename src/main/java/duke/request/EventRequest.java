@@ -17,7 +17,6 @@ public class EventRequest extends Request {
 
         int fromIndex = Arrays.asList(values).indexOf("/from");
         int toIndex = Arrays.asList(values).indexOf("/to");
-
         String description = String.join(" ", Arrays.copyOfRange(values, 1, fromIndex));
         String from = String.join(" ", Arrays.copyOfRange(values, fromIndex + 1, toIndex));
         String to = String.join(" ", Arrays.copyOfRange(values, toIndex + 1, values.length));
