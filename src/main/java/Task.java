@@ -1,6 +1,6 @@
 public class Task {
-    private final String description;
-    private boolean isDone = false;
+    protected final String description;
+    protected boolean isDone = false;
 
     public Task (String description) {
         this.description = description;
@@ -22,6 +22,8 @@ public class Task {
     public String toString() {
         return (isDone? "[X] " : "[ ] ") + description;
     }
+
+
 
 
 }

@@ -5,7 +5,7 @@ public class Duke {
 
 
         Scanner scanner = new Scanner(System.in);
-        TaskList list = new TaskList(new ArrayList<Task>());
+        TaskList list = new TaskList();
 
 
 
@@ -29,6 +29,7 @@ public class Duke {
             if (userInput.equals("list")) {
                 horizontalLine();
                 list.printItems();
+                list.getTaskDetails();
                 horizontalLine();
                 userInput = scanner.nextLine();
                 continue;
@@ -39,18 +40,50 @@ public class Duke {
                 if (taskStatus.equals("mark")) {
                     horizontalLine();
                     list.markDone(taskNumber);
+                    list.getTaskDetails();
                     horizontalLine();
                 } else if (taskStatus.equals("unmark")) {
                     horizontalLine();
                     list.markUndone(taskNumber);
+                    list.getTaskDetails();
                     horizontalLine();
                 }
                 userInput = scanner.nextLine();
                 continue;
+            } else if (userInputComponents[0].equals("todo")) {
+                horizontalLine();
+                list.addTask(new ToDo(userInput.substring(5)));
+                list.getTaskDetails();
+                horizontalLine();
+                userInput = scanner.nextLine();
+                continue;
+            } else if (userInputComponents[0].equals("deadline")) {
+                String[] splitDeadline = userInput.split("/");
+                String description = splitDeadline[0].substring(9);
+                String deadline = splitDeadline[1];
+                horizontalLine();
+                list.addTask(new Deadline(description, deadline));
+                list.getTaskDetails();
+                horizontalLine();
+                userInput = scanner.nextLine();
+                continue;
+
+            } else if (userInputComponents[0].equals("event")) {
+                String[] splitTimes = userInput.split("/");
+                String description = splitTimes[0].substring(6);
+                String startDayTime = splitTimes[1];
+                String endDayTime = splitTimes[2];
+                horizontalLine();
+                list.addTask(new Event(startDayTime, endDayTime, description));
+                list.getTaskDetails();
+                horizontalLine();
+                userInput = scanner.nextLine();
+                continue;
             }
-            list.addTask(new Task(userInput));
+
             horizontalLine();
-            System.out.println("    added: " + userInput);
+            list.addTask(new Task(userInput));
+            list.getTaskDetails();
             horizontalLine();
             userInput = scanner.nextLine();
         }
