@@ -9,6 +9,7 @@ public class DeadlineRequest extends Request {
         super(Commands.TODO, request);
     }
 
+    @Override
     public String[] unwrap() throws RequestException {
         String[] values = super.value.split(" ");
 
@@ -22,6 +23,7 @@ public class DeadlineRequest extends Request {
         return new String[] { description, by };
     }
 
+    @Override
     public void checkRequestRequirement() throws RequestException {
         String[] values = super.value.split(" ");
         String message = "";

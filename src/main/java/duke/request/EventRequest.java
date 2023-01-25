@@ -9,6 +9,7 @@ public class EventRequest extends Request {
         super(Commands.TODO, request);
     }
 
+    @Override
     public String[] unwrap() throws RequestException {
         String[] values = super.value.split(" ");
 
@@ -24,6 +25,7 @@ public class EventRequest extends Request {
         return new String[] { description, from, to };
     }
 
+    @Override
     public void checkRequestRequirement() throws RequestException {
         String[] values = super.value.split(" ");
         String message = "";
@@ -40,7 +42,7 @@ public class EventRequest extends Request {
             message = "Your request must include /to";
         }
 
-        if (super.value.indexOf("/from") < super.value.indexOf("/to")) {
+        if (super.value.indexOf("/from") > super.value.indexOf("/to")) {
             message = "Your request must be in the following order: <Description> /from <Datetime> /to <Datetime>";
         }
 

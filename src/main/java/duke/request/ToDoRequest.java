@@ -9,6 +9,7 @@ public class ToDoRequest extends Request {
         super(Commands.TODO, request);
     }
 
+    @Override
     public String[] unwrap() throws RequestException {
         String[] values = super.value.split(" ");
 
@@ -18,6 +19,7 @@ public class ToDoRequest extends Request {
         return Arrays.copyOfRange(values, 1, values.length);
     }
 
+    @Override
     public void checkRequestRequirement() throws RequestException {
         String message = "";
 

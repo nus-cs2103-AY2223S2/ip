@@ -1,6 +1,6 @@
 package dukeexception;
 
-public class DatabaseException extends Exception {
+public class DatabaseException extends DukeException {
 
     public DatabaseException(String message) {
         super(message);

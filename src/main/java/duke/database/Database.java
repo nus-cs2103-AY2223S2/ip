@@ -11,8 +11,7 @@ public class Database<T> {
 
         System.out.println("Here are the tasks in your list:");
         for (int i = 0; i < size; i++)
-            System.out.println(
-                    (i + 1) + ". " + this.getItem(i));
+            System.out.println((i + 1) + ". " + this.getItem(i));
 
         System.out.println();
     }
@@ -29,7 +28,7 @@ public class Database<T> {
         return this.items.get(id);
     }
 
-    public void deleteItem(int id) throws DatabaseException {
+    public T deleteItem(int id) throws DatabaseException {
         if (id >= this.size()) {
             throw new DatabaseException("☹ OOPS!!! delete index does not exist");
         }
@@ -38,6 +37,8 @@ public class Database<T> {
         System.out.println("Noted. I've removed this task:");
         System.out.println(task);
         System.out.println("Now you have " + this.size() + " tasks in the list.\n");
+
+        return task;
     }
 
     public int size() {
