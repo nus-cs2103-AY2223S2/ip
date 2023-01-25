@@ -1,7 +1,5 @@
 package chattime.task;
 
-import chattime.task.Task;
-
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;

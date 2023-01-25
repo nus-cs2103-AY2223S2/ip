@@ -1,4 +1,4 @@
-package chattime.task;
+package chattime;
 
 import chattime.task.Task;
 
