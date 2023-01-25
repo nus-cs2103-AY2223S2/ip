@@ -10,12 +10,10 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Scanner;
 
-<<<<<<< .merge_file_rhvMFh
 /**
  * This class loads the path of the stored commands and updates it when the bot is closed.
  */
-=======
->>>>>>> .merge_file_Bp4M35
+
 public class StorageList {
     private ArrayList<Task> list;
     private String path;
@@ -26,30 +24,21 @@ public class StorageList {
     }
 
 
-<<<<<<< .merge_file_rhvMFh
     /**
      * This method loads the data of the previous commands from a textfile.
      *
      * @return ArrayList<Task> - Returns the arraylist that is loaded from the stored textfile.
      * @throws DukeException - File not found error will cause this exception to be thrown.
      */
-=======
->>>>>>> .merge_file_Bp4M35
     public ArrayList<Task> load() throws DukeException {
         try {
             File file = new File(this.path);
             Scanner scanner = new Scanner(file);
             while (scanner.hasNextLine()) {
                 String line = scanner.nextLine();
-<<<<<<< .merge_file_rhvMFh
-                String[] linearr = line.split("\\] ");
-                String[] linetype = linearr[0].split("\\]");
-                this.list.add(new Task(linearr[1], linetype[0].substring(1), linetype[1].substring(1)));
-=======
                 String[] lineArr = line.split("\\] ");
                 String[] lineType = lineArr[0].split("\\]");
                 this.list.add(new Task(lineArr[1], lineType[0].substring(1), lineType[1].substring(1)));
->>>>>>> .merge_file_Bp4M35
             }
             scanner.close();
             return this.list;
@@ -59,13 +48,11 @@ public class StorageList {
 
     }
 
-<<<<<<< .merge_file_rhvMFh
+
     /**
      * This method will allow the textfile to be updated according to the current arraylist and ensure that textfile
      * will contain the most updated data.
      */
-=======
->>>>>>> .merge_file_Bp4M35
     public void updateStorage() {
         try {
             File dir = new File("data");
