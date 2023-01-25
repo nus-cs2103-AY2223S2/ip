@@ -88,7 +88,7 @@ public class Duke {
                             arrofStr = inData.split(" ", 2);
                             break;
                         case "deadline":
-                            String[] dl = arrofStr[1].split("/by");
+                            String[] dl = arrofStr[1].split("/by ");
                             try{
                                 validateDate(dl);
                             } catch(InvalidCmdException e) {
