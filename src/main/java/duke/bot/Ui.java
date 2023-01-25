@@ -18,6 +18,6 @@ public class Ui {
                 "\n('todo/deadline/event' for keeping note of different tasks)");
     }
     public void showLoadingError(){
-        System.out.println("There is no file of that name, a new file has been created");
+        System.out.println("A new text file has been created under data.");
     }
 }

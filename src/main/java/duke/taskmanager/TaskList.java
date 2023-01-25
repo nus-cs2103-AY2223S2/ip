@@ -38,7 +38,7 @@ public class TaskList {
         //write to file data/tasks
         lst.add(t);
         try {
-            BufferedWriter io = new BufferedWriter(new FileWriter("bot/data/tasks.txt", true));
+            BufferedWriter io = new BufferedWriter(new FileWriter("duke/bot/data/tasks.txt", true));
             io.newLine();
             io.append(t.icon()).append(" ∵ ").append(" ").append(" ∵ ").append(t.desc.split(" ", 2)[1]);
             io.close();
@@ -53,10 +53,10 @@ public class TaskList {
 
     public static void rewrite(TaskList lst) throws IOException {
         //rewrite file when un/mark or un/mark specific line if possible
-        PrintWriter writer = new PrintWriter("bot/data/tasks.txt");
+        PrintWriter writer = new PrintWriter("duke/bot/data/tasks.txt");
         writer.close();
         List<Tasks> todos = lst.getList();
-        BufferedWriter bw = new BufferedWriter(new FileWriter("bot/data/tasks.txt", true));
+        BufferedWriter bw = new BufferedWriter(new FileWriter("duke/bot/data/tasks.txt", true));
         for(Tasks i : todos) {
             try {
                 bw.newLine();

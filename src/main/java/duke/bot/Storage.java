@@ -19,7 +19,7 @@ public class Storage {
     public List<Tasks> load() throws DukeException {
         List<Tasks> tasksList = new ArrayList<>();
         try {
-            File f = new File("bot/data/tasks.txt");
+            File f = new File(path);
             Scanner sc = new Scanner(f);
             if(sc.hasNextLine()){sc.nextLine();}
             while(sc.hasNextLine()) {
@@ -47,12 +47,12 @@ public class Storage {
                         }
                         break;
                     default:
-                        throw new DukeException();
+
                 }
             }
             sc.close();
         } catch (FileNotFoundException e) {
-            new File(path, "tasks.txt");
+            throw new DukeException();
         } catch (Exception e) {
             throw new RuntimeException(e);
         }
