@@ -1,5 +1,9 @@
+import java.time.LocalDateTime;
 import java.util.Scanner;
 import java.util.ArrayList;
+import java.time.format.DateTimeFormatter;
+import java.time.LocalDate;
+import java.time.LocalTime;
 
 public class Duke {
     private static ArrayList<Task> actions = new ArrayList<Task>();
@@ -50,8 +54,11 @@ public class Duke {
                             if (input.equals("")) {
                                 throw new Missing("");
                             }
-                            input = input.replaceFirst( "/by", "(by:");
-                            input = input + ")";
+                            String[] taskDate = input.split("/by ");
+                            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("d/MM/yyyy HHmm");
+                            LocalDateTime dateTime = LocalDateTime.parse(taskDate[1], formatter);
+                            String dateTimeString = dateTime.format(DateTimeFormatter.ofPattern("MMM d yyyy hhmma"));
+                            input = taskDate[0] + "(by:" + dateTimeString  + ")";
                             newTask = new Deadline(input);
                             break;
                         case "event" :
@@ -59,9 +66,17 @@ public class Duke {
                             if (input.equals("")) {
                                 throw new Missing("");
                             }
-                            input = input.replaceFirst( "/from", "(from:");
-                            input = input.replaceFirst( "/to ", "to: ");
-                            input = input + ")";
+                            String[] taskDate2 = input.split("/from ");
+                            String[] fromTo = taskDate2[1].split(" /to ");
+                            DateTimeFormatter formatter2 = DateTimeFormatter.ofPattern("d/MM/yyyy HHmm");
+                            LocalDateTime fromDateTime = LocalDateTime.parse(fromTo[0], formatter2);
+                            LocalDateTime toDateTime = LocalDateTime.parse(fromTo[1], formatter2);
+
+                            String fromString = fromDateTime.format(DateTimeFormatter.ofPattern("MMM d yyyy hhmma"));
+                            String toString = toDateTime.format(DateTimeFormatter.ofPattern("MMM d yyyy hhmma"));
+                            input = taskDate2[0] + "(from: " + fromString + " ";
+                            input = input + "to: " + fromString  + ")";
+
                             newTask = new Event(input);
                             break;
                     }
