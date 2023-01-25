@@ -131,5 +131,52 @@ ____________________________________________________________
 You: 
 ____________________________________________________________
 Duke: 
+Please enter the task you would like to do in the format 
+>> todo [task]
+____________________________________________________________
+You: 
+____________________________________________________________
+Duke: 
+Sorry, that command is invalid. Specify a deadline task with 
+ >> deadline [description] /by [time]
+____________________________________________________________
+You: 
+____________________________________________________________
+Duke: 
+Sorry, that command is invalid. Specify an event task with 
+ >> event [description] /from [start time] /to [end time]
+____________________________________________________________
+You: 
+____________________________________________________________
+Duke: 
+Sorry, that command is invalid. Specify a deadline task with 
+ >> deadline [description] /by [time]
+____________________________________________________________
+You: 
+____________________________________________________________
+Duke: 
+Sorry, that command is invalid. Specify an event task with 
+ >> event [description] /from [start time] /to [end time]
+____________________________________________________________
+You: 
+____________________________________________________________
+Duke: 
+Sorry, that command is invalid. Specify an event task with 
+ >> event [description] /from [start time] /to [end time]
+____________________________________________________________
+You: 
+____________________________________________________________
+Duke: 
+Sorry, that command is invalid. Specify an event task with 
+ >> event [description] /from [start time] /to [end time]
+____________________________________________________________
+You: 
+____________________________________________________________
+Duke: 
+You don't have that many tasks!
+____________________________________________________________
+You: 
+____________________________________________________________
+Duke: 
 Bye! Hope to see you again soon!
 ____________________________________________________________
