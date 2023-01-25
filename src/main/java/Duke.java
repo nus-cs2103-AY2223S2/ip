@@ -3,7 +3,10 @@ import java.util.Scanner;
 
 public class Duke {
     static ArrayList<Task> tasks = new ArrayList<Task>();
-    public static void main(String[] args) {
+    public enum Command {
+        bye, list, mark, unmark, todo, deadline, event, delete, err
+    }
+    public static void main(String[] args) throws DukeException {
         /*String logo = " ____        _        \n"
                 + "|  _ \\ _   _| | _____ \n"
                 + "| | | | | | | |/ / _ \\\n"
@@ -15,40 +18,59 @@ public class Duke {
         //greet user
         System.out.println(makeOutput(" Hello! I'm Duke\n" + " What can I do for you?"));
 
-        while(true){
+        while(true) {
             String newInput = userInput.nextLine();
             String[] parsedInput = newInput.split(" ");
-            String command = parsedInput[0];
+            Command command;
 
             try {
-                if (command.equalsIgnoreCase("bye")) {
-                    break;
-                } else if (command.equalsIgnoreCase("list")) {
-                    showList();
-                } else if (command.equalsIgnoreCase("mark")) {
-                    markTask(processMarkUnmarkDel(newInput));
-                } else if (command.equalsIgnoreCase("unmark")) {
-                    unmarkTask(processMarkUnmarkDel(newInput));
-                } else if (command.equalsIgnoreCase("todo")) {
-                    addTodo(newInput.split("todo", 2)[1]);
-                } else if (command.equalsIgnoreCase("deadline")) {
-                    processDeadline(newInput);
-                } else if (command.equalsIgnoreCase("event")) {
-                    processEvent(newInput);
-                } else if (command.equalsIgnoreCase("delete")) {
-                    delete(processMarkUnmarkDel(newInput));
-                } else {
-                    throw new DukeException("I'm sorry, but I don't know what that means :-(");
+                command = Command.valueOf(parsedInput[0]);
+            } catch (IllegalArgumentException e) {
+                command = Command.err;
+            }
+
+            try {
+                switch (command) {
+                    case bye:
+                        exit(userInput);
+                        break;
+                    case list:
+                        showList();
+                        break;
+                    case mark:
+                        markTask(processMarkUnmarkDel(newInput));
+                        break;
+                    case unmark:
+                        unmarkTask(processMarkUnmarkDel(newInput));
+                        break;
+                    case todo:
+                        addTodo(newInput.split("todo", 2)[1]);
+                        break;
+                    case deadline:
+                        processDeadline(newInput);
+                        break;
+                    case event:
+                        processEvent(newInput);
+                        break;
+                    case delete:
+                        delete(processMarkUnmarkDel(newInput));
+                        break;
+                    case err:
+                        throw new DukeException("I'm sorry, but I don't know what that means :-(");
                 }
             } catch (DukeException d) {
                 System.out.println(makeOutput("☹ OOPS!!! " +d.getMessage()));
             }
         }
+    }
 
+    public static void exit(Scanner input){
         //exit protocol
         System.out.println(makeOutput("Bye. Hope to see you again soon!"));
-        userInput.close();
+        input.close();
+        System.exit(0);
     }
+
     public static String makeOutput(String in){
         return "____________________________________________________________\n" + in +"\n" + "____________________________________________________________";
     }
