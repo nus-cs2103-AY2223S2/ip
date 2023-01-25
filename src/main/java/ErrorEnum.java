@@ -1,0 +1,3 @@
+public enum ErrorEnum {
+    INVALID_INDEX, ILLEGAL_ARGUMENT, EMPTY_BODY, UNKNOWN_INPUT
+}

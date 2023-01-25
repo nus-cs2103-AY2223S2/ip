@@ -59,25 +59,27 @@ public class Duke {
                     break;
                 case "mark":
                     try {
-                        int idx = getMarkArgument(args);
-                        changeTaskStatus(idx, true);
+                        changeTaskStatus(args, true);
                     } catch (InvalidIndexException e) {
-                        printInBanner("Can't do that yo~\nInvalid index supplied~");
+                        printErrorMessage(ErrorEnum.INVALID_INDEX);
+                    } catch (IllegalArgumentException e) {
+                        printErrorMessage(ErrorEnum.ILLEGAL_ARGUMENT);
                     }
                     break;
                 case "unmark":
                     try {
-                        int idx = getMarkArgument(args);
-                        changeTaskStatus(idx, false);
+                        changeTaskStatus(args, false);
                     } catch (InvalidIndexException e) {
-                        printInBanner("Can't do that yo~\nInvalid index supplied~");
+                        printErrorMessage(ErrorEnum.INVALID_INDEX);
+                    } catch (IllegalArgumentException e) {
+                        printErrorMessage(ErrorEnum.ILLEGAL_ARGUMENT);
                     }
                     break;
                 case "todo":
                     try {
                         addTodo(args.subList(1, args.size()));
                     } catch (EmptyBodyException e) {
-                        printInBanner("What do you wanna do yo~");
+                        printErrorMessage(ErrorEnum.EMPTY_BODY);
                     }
 
                     break;
@@ -85,9 +87,9 @@ public class Duke {
                     try {
                         addDeadline(args.subList(1, args.size()));
                     } catch (EmptyBodyException e) {
-                        printInBanner("What do you wanna do yo~");
+                        printErrorMessage(ErrorEnum.EMPTY_BODY);
                     } catch (IllegalArgumentException e) {
-                        handleInvalidArguments();
+                        printErrorMessage(ErrorEnum.ILLEGAL_ARGUMENT);
                     }
 
                     break;
@@ -95,13 +97,22 @@ public class Duke {
                     try {
                         addEvent(args.subList(1, args.size()));
                     } catch (EmptyBodyException e) {
-                        printInBanner("What do you wanna do yo~");
+                        printErrorMessage(ErrorEnum.EMPTY_BODY);
                     } catch (IllegalArgumentException e) {
-                        handleInvalidArguments();
+                        printErrorMessage(ErrorEnum.ILLEGAL_ARGUMENT);
+                    }
+                    break;
+                case "delete":
+                    try {
+                        deleteTask(args);
+                    } catch (InvalidIndexException e) {
+                        printErrorMessage(ErrorEnum.INVALID_INDEX);
+                    } catch (IllegalArgumentException e) {
+                        printErrorMessage(ErrorEnum.ILLEGAL_ARGUMENT);
                     }
                     break;
                 default:
-                    handleInvalidArguments();
+                    printErrorMessage(ErrorEnum.UNKNOWN_INPUT);
                     break;
             }
         }
@@ -133,7 +144,7 @@ public class Duke {
         String cmd = String.join(" ", args);
         Todo newTask = new Todo(cmd);
         taskList.add(newTask);
-        printInBanner("Don't forget to do this task yo~\n  " + newTask + "\nNow you have " + taskList.size() + " items on your list.");
+        printInBanner("Don't forget to do this task yo~\n  " + newTask + getTasklistSize());
     }
 
     private void addDeadline(List<? extends String> args) throws IllegalArgumentException {
@@ -146,13 +157,13 @@ public class Duke {
             throw new EmptyBodyException();
         }
 
-        @SuppressWarnings("unchecked")  // args already takes in objects that are subclasses of String so it is a safe typecast
+        @SuppressWarnings("unchecked")  // args already takes in objects that are subclasses of String, so it is a safe typecast
         List<String> description = (List<String>) args.subList(0, byIndex);
         @SuppressWarnings("unchecked")
         List<String> byDate = (List<String>) args.subList(byIndex + 1, args.size());
         Deadline newTask = new Deadline(String.join(" ", description), String.join(" ", byDate));
         taskList.add(newTask);
-        printInBanner("Don't forget to do this task yo~\n  " + newTask + "\nNow you have " + taskList.size() + " items on your list.");
+        printInBanner("Don't forget to do this task yo~\n  " + newTask + getTasklistSize());
     }
 
     private void addEvent(List<? extends String> args) throws IllegalArgumentException {
@@ -194,26 +205,23 @@ public class Duke {
         }
 
         taskList.add(newTask);
-        printInBanner("Don't forget to do this task yo~\n  " + newTask + "\nNow you have " + taskList.size() + " items on your list.");
+        printInBanner("Don't forget to do this task yo~\n  " + newTask + getTasklistSize());
     }
 
-    private int getMarkArgument(List<? extends String> args) {
+    private void changeTaskStatus(List<? extends String> args, boolean done) throws InvalidIndexException {
         if (args.size() != 2) {
-            return -1;
+            throw new IllegalArgumentException();
         }
 
+        int idx;
         try {
-            return Integer.parseInt(args.get(1)) - 1;
+            idx = Integer.parseInt(args.get(1)) - 1;
         } catch (NumberFormatException e) {
-            return -1;
+            throw new InvalidIndexException();
         }
-    }
 
-    private void changeTaskStatus(int idx, boolean done) throws InvalidIndexException {
         if (idx < 0 || idx >= taskList.size()) {
             throw new InvalidIndexException();
-            // printInBanner("Can't do that yo~\nInvalid index supplied~");
-            // return;
         }
 
         if (done) {
@@ -225,7 +233,42 @@ public class Duke {
         }
     }
 
-    private void handleInvalidArguments() {
-        printInBanner("Wakandeyo!!! >:(");
+    private void deleteTask(List<? extends String> args) {
+        if (args.size() != 2) {
+            throw new IllegalArgumentException();
+        }
+
+        int idx;
+        try {
+            idx = Integer.parseInt(args.get(1)) - 1;
+        } catch (NumberFormatException e) {
+            throw new InvalidIndexException();
+        }
+
+        if (idx < 0 || idx >= taskList.size()) {
+            throw new InvalidIndexException();
+        }
+
+        Task task = taskList.remove(idx);
+        printInBanner("Don't need this trash anymore yo~\n" + task + getTasklistSize());
+    }
+
+    private void printErrorMessage(ErrorEnum e) {
+        switch (e) {
+            case INVALID_INDEX:
+                printInBanner("Can't do that yo~\nInvalid index supplied~");
+                break;
+            case EMPTY_BODY:
+                printInBanner("What do you wanna do yo~");
+                break;
+            case ILLEGAL_ARGUMENT:
+            default:
+                printInBanner("Wakandeyo!!! >:(");
+                break;
+        }
+    }
+
+    private String getTasklistSize() {
+        return "\nNow you have " + taskList.size() + " items on your list.";
     }
 }
