@@ -26,5 +26,4 @@ public class Task{
         System.out.println("Ugh fine, this task is now marked undone. >:/");
         System.out.println(printTask());
     }
-
 }

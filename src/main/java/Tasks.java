@@ -55,6 +55,31 @@ public class Tasks {
     public boolean withinRange(int num) {
         return this.l.size() > num && num >= 0;
     }
+
+    public void filterByDate(String dateOnly) {
+        if (l.size() == 0) {
+            System.out.println("Nothing~");
+        } else {
+            MyDate date = new MyDate(dateOnly);
+            System.out.println("Deadlines due or events ongoing on " + date.printDateTime());
+            int count = 1;
+            for (Task task : l) {
+                if (task instanceof Deadline) {
+                    Deadline d = (Deadline) task;
+                    if (d.isDeadLine(date)) {
+                        System.out.println(count + ". " + task.printTask());
+                        count++;
+                    }
+                } else if (task instanceof Event) {
+                    Event e = (Event) task;
+                    if (e.liesBetween(date)) {
+                        System.out.println(count + ". " + task.printTask());
+                        count++;
+                    }
+                }
+            }
+        }
+    }
 }
 
 
