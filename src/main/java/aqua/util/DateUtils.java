@@ -7,7 +7,19 @@ import java.time.format.DateTimeParseException;
 import aqua.exception.IllegalSyntaxException;
 
 
+/** Utility class for dates and time. */
 public class DateUtils {
+    /**
+     * Parses String of the following format to a LocalDateTime.
+     * <ul>
+     * <li> {@code yyyy-MM-ddThh:mm}
+     * <li> {@code yyyy-MM-dd hhmm}
+     * <li> {@code yyyy-MM-dd} (assume time to be 0000)
+     * 
+     * @param dateString - the date String to parse.
+     * @return the parsed LocalDateTime.
+     * @throws IllegalSyntaxException if the given String cannot be parsed.
+     */
     public static LocalDateTime parse(String dateString) throws IllegalSyntaxException {
         try {
             // yyyy-MM-ddThh:mm default format
@@ -39,6 +51,12 @@ public class DateUtils {
     }
 
 
+    /**
+     * Formats the date to a the format {@code d LLL yyyy HHmm}.
+     * 
+     * @param time - the time to format.
+     * @return the formatted date.
+     */
     public static String formatNice(LocalDateTime time) {
         return time.format(DateTimeFormatter.ofPattern("d LLL yyyy HHmm"));
     }
