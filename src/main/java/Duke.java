@@ -20,8 +20,6 @@ public class Duke {
         ui = new Ui();
         storage = new Storage(filePath);
         tasks = new TaskList(storage.load());
-        System.out.println("HEY ");
-        tasks.printContents();
     }
 
     public static void main(String[] args) {
@@ -45,29 +43,15 @@ public class Duke {
 
         while (!checker.checkEnd(userInput)) {
             if (checker.checkListRequest(userInput)) {
-                if (lstOfItems.size() == 0 ) {
-                    System.out.println("Nothing here yet. Add your 1st item!");
-                } else {
-                    for (int i = 0; i < lstOfItems.size(); i++) {
-                        System.out.print(String.valueOf(i + 1) + ".");
-                        System.out.println(lstOfItems.get(i));
-                    }
-                }
+                tasks.printContents();
             } else if (checker.checkMarkRequest(userInput)) {
                 String[] terms = userInput.split(" ");
-                int itemNo = Integer.parseInt(terms[1]) - 1;
-                lstOfItems.get(itemNo).makeCompleted();
-                System.out.println("Ok, I've marked this Task as completed:");
-                System.out.println(lstOfItems.get(itemNo));
+                int itemNo = Integer.parseInt(terms[1]);
+                tasks.markTask(itemNo);
             } else if (checker.checkDeleteRequest(userInput)) {
                 String[] terms = userInput.split(" ");
-                int itemNo = Integer.parseInt(terms[1]) - 1;
-                System.out.println("Noted. I'll remove this task:");
-                System.out.println(lstOfItems.get(itemNo));
-                lstOfItems.remove(itemNo);
-                String remaining = (lstOfItems.size() == 1) ? " task" : " tasks";
-                System.out.print("Now you have ");
-                System.out.println(String.valueOf(lstOfItems.size()) + remaining + " left!");
+                int itemNo = Integer.parseInt(terms[1]);
+                tasks.deleteTask(itemNo);
             } else {
                 String[] terms = userInput.split(" ");
                 Task newTask;
@@ -78,7 +62,7 @@ public class Duke {
                             throw new DukeException(error);
                         }
                         newTask = new Todo(userInput.substring(5));
-                        addTask(lstOfItems, newTask);
+                        tasks.addTask(newTask);
                     } catch (DukeException err) {
                         System.out.println(err);
                     }
@@ -91,7 +75,7 @@ public class Duke {
                         String description = splitBySlash[0].substring(9);
                         String by = splitBySlash[1].substring(3);
                         newTask = new Deadline(description, by);
-                        addTask(lstOfItems, newTask);
+                        tasks.addTask(newTask);
                     } catch (DukeException err) {
                         System.out.println(err);
                     }
@@ -106,7 +90,7 @@ public class Duke {
                         String from = splitBySlash[1].substring(5);
                         String to = splitBySlash[2].substring(3);
                         newTask = new Event(description, from, to);
-                        addTask(lstOfItems, newTask);
+                        tasks.addTask(newTask);
                     } catch (DukeException err) {
                         System.out.println(err);
                     }
@@ -121,7 +105,7 @@ public class Duke {
             }
             userInput = scan.nextLine();
         }
-        addToFile(lstOfItems);
+        storage.addToFile(tasks);
         endMessage();
 
     }

@@ -5,6 +5,7 @@ import java.nio.file.FileAlreadyExistsException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Storage {
@@ -49,6 +50,23 @@ public class Storage {
         } else {
             File savedFile = new File(filePath);
             return savedFile;
+        }
+    }
+
+    public void addToFile(TaskList tasks) {
+        // Idea for the following code snippet is taken from:
+        // https://stackoverflow.com/questions/1053467/how-do-i-save-a-string-to-a-text-file-using-java
+        ArrayList<Task> lstOfItems = tasks.getTasks();
+        try {
+            ArrayList<String> lst = new ArrayList<>();
+            lst.add(String.valueOf(lstOfItems.size()));
+            for (int i = 0; i < lstOfItems.size(); i++) {
+                Task current = lstOfItems.get(i);
+                lst.add(current.parse());
+            }
+            Files.write(Paths.get(filePath), lst);
+        } catch (IOException err) {
+            System.out.println(err);
         }
     }
 }

@@ -45,9 +45,60 @@ public class TaskList {
     }
 
     public void printContents() {
-        for (int i = 0; i < lstOfItems.size(); i++) {
-            System.out.print(String.valueOf(i + 1) + ": ");
-            System.out.println(lstOfItems.get(i));
+        if (lstOfItems.size() == 0 ) {
+            System.out.println("Nothing here yet. Add your 1st item!");
+        } else {
+            for (int i = 0; i < lstOfItems.size(); i++) {
+                System.out.print(String.valueOf(i + 1) + ".");
+                System.out.println(lstOfItems.get(i));
+            }
         }
+    }
+
+    public void addTask(Task newTask) {
+        System.out.println("Got it. I have added: ");
+        System.out.println(newTask);
+        lstOfItems.add(newTask);
+        System.out.print("Now you have " + String.valueOf(lstOfItems.size()));
+        if (lstOfItems.size() == 1) {
+            System.out.print(" task");
+        } else {
+            System.out.print(" tasks");
+        }
+        System.out.println(" in the list");
+    }
+
+    public void markTask(int number) {
+        try {
+            if (number > lstOfItems.size()) {
+                throw new DukeException("No such item!");
+            } else {
+                lstOfItems.get(number - 1).makeCompleted();
+                System.out.println("Ok, I've marked this Task as completed:");
+                System.out.println(lstOfItems.get(number - 1));
+            }
+        } catch (DukeException err) {
+            System.out.println(err);
+        }
+    }
+
+    public void deleteTask(int number) {
+        try {
+            if (number > lstOfItems.size()) {
+                throw new DukeException("No such item!");
+            } else {
+                System.out.println("Ok, I've removed this Task:");
+                System.out.println(lstOfItems.get(number - 1));
+                lstOfItems.remove(number - 1);
+                String remaining = (lstOfItems.size() == 1) ? " task" : " tasks";
+                System.out.print("Now you have ");
+                System.out.println(String.valueOf(lstOfItems.size()) + remaining + " left!");
+            }
+        } catch (DukeException err) {
+            System.out.println(err);
+        }
+    }
+    public ArrayList<Task> getTasks() {
+        return lstOfItems;
     }
 }
