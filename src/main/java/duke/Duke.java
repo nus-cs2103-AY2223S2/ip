@@ -1,9 +1,7 @@
 package duke;
 
 import java.io.ByteArrayOutputStream;
-import java.io.IOException;
 import java.io.InputStream;
-import java.io.OutputStream;
 import java.io.PrintStream;
 
 import javafx.application.Application;
@@ -168,8 +166,8 @@ public class Duke extends Application{
         Label userText = new Label(userInput.getText());
         Label dukeText = new Label(getResponse(userInput.getText()));
         dialogContainer.getChildren().addAll(
-                new DialogBox(userText, new ImageView(user)),
-                new DialogBox(dukeText, new ImageView(duke))
+                DialogBox.getUserDialog(userText, new ImageView(user)),
+                DialogBox.getDukeDialog(dukeText, new ImageView(duke))
         );
         userInput.clear();
     }
