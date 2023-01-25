@@ -13,6 +13,14 @@ public class Event extends Task {
     }
 
     @Override
+    public String toSave() {
+        if (super.isDone == true) {
+            return String.format("E | 1 | %s | %s | %s\n", super.getDescription(), this.from, this.to);
+        }
+        return String.format("E | 0 | %s | %s | %s\n", super.getDescription(), this.from, this.to);
+    }
+
+    @Override
     public String toString() {
         return String.format("[E]%s (from:%s to:%s)", super.toString(), this.from, this.to);
     }
