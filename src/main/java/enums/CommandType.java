@@ -1,9 +1,9 @@
 package enums;
 
-import exceptions.DukeException;
-
 import static ui.Ui.DATE_TIME_FORMAT;
 import static ui.Ui.LS;
+
+import exceptions.DukeException;
 
 public enum CommandType {
     BYE("bye", new DukeException("")),
@@ -12,8 +12,10 @@ public enum CommandType {
     UNMARK("unmark", new DukeException("Invalid format for unmark." + LS + "Usage: unmark <number>")),
     DELETE("delete", new DukeException("Invalid format for delete." + LS + "Usage: delete <number>")),
     TODO("todo", new DukeException("Invalid format for todo." + LS + "Usage: todo <task>")),
-    DEADLINE("deadline", new DukeException("Invalid format for Deadline." + LS + "Usage: deadline <task> /by <" + DATE_TIME_FORMAT + ">")),
-    EVENT("event", new DukeException("Invalid format for Event." + LS + "Usage: <task> /from <" + DATE_TIME_FORMAT +"> /to <" + DATE_TIME_FORMAT + ">")),
+    DEADLINE("deadline", new DukeException("Invalid format for Deadline." + LS
+            + "Usage: deadline <task> /by <" + DATE_TIME_FORMAT + ">")),
+    EVENT("event", new DukeException("Invalid format for Event." + LS
+            + "Usage: <task> /from <" + DATE_TIME_FORMAT + "> /to <" + DATE_TIME_FORMAT + ">")),
     INCORRECT("incorrect", new DukeException("OOPS!!! I'm sorry, but I don't know what that means :-("));
     private String word;
     private DukeException e;

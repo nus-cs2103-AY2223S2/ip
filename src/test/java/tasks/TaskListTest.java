@@ -1,15 +1,13 @@
 package tasks;
 
-import exceptions.DukeException;
-import org.junit.jupiter.api.Test;
-import parser.Parser;
-
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import static ui.Ui.LS;
+
+import org.junit.jupiter.api.Test;
 
 public class TaskListTest {
     @Test
-    public void numTasksMsg_threeTasksInList_correctString(){
+    public void numTasksMsg_threeTasksInList_correctString() {
         Task a = new ToDo("a");
         Task b = new ToDo("b");
         Task c = new ToDo("c");
@@ -25,7 +23,7 @@ public class TaskListTest {
     }
 
     @Test
-    public void formatList_threeTasksInList_correctString(){
+    public void formatList_threeTasksInList_correctString() {
         Task a = new ToDo("a");
         Task b = new ToDo("b");
         Task c = new ToDo("c");
@@ -34,7 +32,7 @@ public class TaskListTest {
         tl.addTask(b);
         tl.addTask(c);
 
-        String expectedMessage = "1. [T][ ] a" + LS  + "2. [T][ ] b" + LS + "3. [T][ ] c";
+        String expectedMessage = "1. [T][ ] a" + LS + "2. [T][ ] b" + LS + "3. [T][ ] c";
         String actualMessage = tl.formatList();
 
         assertEquals(expectedMessage, actualMessage);

@@ -1,7 +1,9 @@
 package tasks;
 
-import java.util.*;
 import static ui.Ui.LS;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class TaskList {
     private List<Task> tasks;

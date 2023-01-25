@@ -2,7 +2,7 @@ import commands.Command;
 import exceptions.DukeException;
 import parser.Parser;
 import storage.Storage;
-import tasks.*;
+import tasks.TaskList;
 import ui.Ui;
 public class Duke {
     private Storage storage;
@@ -26,7 +26,7 @@ public class Duke {
                 String fullCommand = ui.readCommand();
                 ui.showLine(); // show the divider line ("_______")
                 Command c = Parser.parse(fullCommand);
-                ((Command) c).execute(tasks, ui, storage);
+                c.execute(tasks, ui, storage);
                 isExit = c.isExit();
             } catch (DukeException e) {
                 ui.showError(e.getMessage());
