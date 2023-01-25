@@ -13,6 +13,7 @@ public class InputFormatException extends DukeException {
      * @param err Throwable to pass to parent constructor.
      */
     public InputFormatException(String source, String reason, Throwable err) {
-        super("Haiya input format wrong. \nHere is where you mess up: " + source + "\nHere is why you wrong: " + reason, err);
+        super(String.format("Haiya input format wrong. \nHere is where you mess up: %s\n", source)
+                + String.format("Here is why you wrong: %s", reason), err);
     }
 }

@@ -1,14 +1,13 @@
 package parser;
 
-import command.Command;
-import dukeexception.commandexception.EmptyCommandException;
-import dukeexception.commandexception.InputFormatException;
-
-import org.junit.jupiter.api.Test;
-
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
+
+import org.junit.jupiter.api.Test;
+
+import dukeexception.commandexception.EmptyCommandException;
+import dukeexception.commandexception.InputFormatException;
 
 public class ParserTest {
     @Test
