@@ -1,8 +1,8 @@
-package main.java.duke.command;
+package duke.command;
 
-import main.java.duke.ui.Ui;
-import main.java.duke.storage.Storage;
-import main.java.duke.task.TaskList;
+import duke.ui.Ui;
+import duke.storage.Storage;
+import duke.task.TaskList;
 
 public class ByeCommand extends Command {
     

@@ -1,10 +1,10 @@
-package main.java.duke.storage;
+package duke.storage;
 
 import java.io.File;
 import java.io.IOException;
 import java.io.FileWriter;
 
-import main.java.duke.task.TaskList;
+import duke.task.TaskList;
 
 public class Storage {
     File taskStorage;

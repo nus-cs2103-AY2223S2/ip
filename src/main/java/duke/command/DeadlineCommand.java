@@ -1,10 +1,10 @@
-package main.java.duke.command;
+package duke.command;
 
-import main.java.duke.ui.Ui;
-import main.java.duke.storage.Storage;
-import main.java.duke.exception.DukeException;
-import main.java.duke.task.Deadline;
-import main.java.duke.task.TaskList;
+import duke.ui.Ui;
+import duke.storage.Storage;
+import duke.exception.DukeException;
+import duke.task.Deadline;
+import duke.task.TaskList;
 
 public class DeadlineCommand extends Command {
     

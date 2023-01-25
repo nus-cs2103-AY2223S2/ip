@@ -1,11 +1,11 @@
-package main.java.duke;
+package duke;
 
-import main.java.duke.command.Command;
-import main.java.duke.command.Parser;
-import main.java.duke.task.Task;
-import main.java.duke.task.TaskList;
-import main.java.duke.ui.Ui;
-import main.java.duke.storage.Storage;
+import duke.command.Command;
+import duke.command.Parser;
+import duke.task.Task;
+import duke.task.TaskList;
+import duke.ui.Ui;
+import duke.storage.Storage;
 
 import java.util.LinkedList;
 

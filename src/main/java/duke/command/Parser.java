@@ -1,4 +1,4 @@
-package main.java.duke.command;
+package duke.command;
 
 public class Parser {
 

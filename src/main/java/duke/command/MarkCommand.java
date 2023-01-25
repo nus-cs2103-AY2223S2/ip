@@ -1,10 +1,11 @@
-package main.java.duke.command;
+package duke.command;
 
 import java.util.Scanner;
 
-import main.java.duke.ui.Ui;
-import main.java.duke.storage.Storage;
-import main.java.duke.exception.DukeException;
+import duke.ui.Ui;
+import duke.storage.Storage;
+import duke.task.TaskList;
+import duke.exception.DukeException;
 
 public class MarkCommand extends Command {
     

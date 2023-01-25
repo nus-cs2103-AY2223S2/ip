@@ -1,8 +1,8 @@
-package main.java.duke.ui;
+package duke.ui;
 
 import java.util.Scanner;
 
-import main.java.duke.task.TaskList;
+import duke.task.TaskList;
 
 public class Ui {
     private String LOGO_AND_GREETINGS = "Hello from\n" 
