@@ -12,11 +12,11 @@ public class DeleteCommand extends Command {
     }
 
     @Override
-    public void executeCommand() {
+    public void executeCommand() throws DukeException {
         try {
             taskManager.deleteTask(this.index);
         } catch (IndexOutOfBoundsException e) {
-            System.out.println("Item does not exist in list! Please check your list again.");
+            throw new DukeException("Item does not exist in list! Please check your list again.");
         }
     }
 }

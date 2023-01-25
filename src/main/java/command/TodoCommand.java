@@ -2,6 +2,7 @@ package command;
 
 import task.TaskManager;
 import task.ToDo;
+import util.DukeException;
 
 public class TodoCommand extends Command {
     private final TaskManager taskManager;
@@ -13,7 +14,7 @@ public class TodoCommand extends Command {
     }
 
     @Override
-    public void executeCommand() {
+    public void executeCommand() throws DukeException {
         ToDo todo = new ToDo(this.description);
         taskManager.addTaskToList(todo);
     }

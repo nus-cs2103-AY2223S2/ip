@@ -2,6 +2,7 @@ package command;
 
 import task.Deadline;
 import task.TaskManager;
+import util.DukeException;
 
 public class DeadlineCommand extends Command {
     private final TaskManager taskManager;
@@ -11,9 +12,13 @@ public class DeadlineCommand extends Command {
         this.description = description;
     }
     @Override
-    public void executeCommand() {
-        String[] tmp = this.description.split(" /by ");
-        Deadline deadline = new Deadline(tmp[0], tmp[1]);
-        taskManager.addTaskToList(deadline);
+    public void executeCommand() throws DukeException {
+        try {
+            String[] tmp = this.description.split(" /by ");
+            Deadline deadline = new Deadline(tmp[0], tmp[1]);
+            taskManager.addTaskToList(deadline);
+        } catch (ArrayIndexOutOfBoundsException e) {
+            throw new DukeException("Please add a description, date and time e.g. homework /by 12/12/12 2359");
+        }
     }
 }

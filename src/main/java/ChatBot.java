@@ -7,6 +7,7 @@ import ui.WelcomeUI;
 import util.DukeException;
 import util.Parser;
 
+import java.time.DateTimeException;
 import java.util.*;
 
 public class ChatBot {
@@ -39,7 +40,7 @@ public class ChatBot {
             }
 
             String command = inputArr[0];
-            //String key = inputArr[1];
+
             try {
                 switch (command) {
                     case "":
@@ -53,7 +54,6 @@ public class ChatBot {
                         bc.executeCommand();
                         break loop;
                     case "check":
-                        //catch ArrayOutOfbounds exception if user enters check(arr len = 1)
                         CheckCommand cc = new CheckCommand(taskManager, inputArr[1]);
                         cc.executeCommand();
                         break;

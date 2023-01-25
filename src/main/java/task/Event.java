@@ -1,11 +1,13 @@
 package task;
 
+import util.DukeException;
+
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 public class Event extends Task {
     private String startFormatted;
     private String endFormatted;
-    public Event(String description, String start, String end) {
+    public Event(String description, String start, String end) throws DukeException {
         super(description);
         this.startFormatted = super.dateFormatter(start);
         this.endFormatted = super.dateFormatter(end);

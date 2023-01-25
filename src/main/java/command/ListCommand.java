@@ -1,6 +1,7 @@
 package command;
 
 import task.TaskManager;
+import util.DukeException;
 
 public class ListCommand extends Command {
     private final TaskManager taskManager;
@@ -10,7 +11,7 @@ public class ListCommand extends Command {
     }
 
     @Override
-    public void executeCommand() {
+    public void executeCommand() throws DukeException {
         taskManager.displayList();
     }
 }

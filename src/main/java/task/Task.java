@@ -1,4 +1,7 @@
 package task;
+import util.DukeException;
+
+import java.time.DateTimeException;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 public class Task {
@@ -27,11 +30,15 @@ public class Task {
         isDone = false;
     }
 
-    public String dateFormatter(String str) {
-        //"d/M/yy H:mm" for auto detection of AM/PM
-        LocalDateTime localDateTime = LocalDateTime.parse(str, DateTimeFormatter.ofPattern("d/M/yy h:mma"));
-        String dt = localDateTime.format(DateTimeFormatter.ofPattern("d MMM yyyy hh:mm a"));
-        return dt;
+    public String dateFormatter(String str) throws DukeException {
+        //"d/M/y H:mm" for auto detection of AM/PM d/M/yy h:mma for manual but in 12hr time
+        try {
+            LocalDateTime localDateTime = LocalDateTime.parse(str, DateTimeFormatter.ofPattern("d/M/yy Hmm"));
+            String dt = localDateTime.format(DateTimeFormatter.ofPattern("d MMM yyyy hh:mm a"));
+            return dt;
+        } catch (DateTimeException e) {
+            throw new DukeException("Please enter date in dd/mm/yy and time in hhmm 24hr format!");
+        }
     }
 
     @Override

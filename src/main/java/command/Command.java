@@ -1,5 +1,6 @@
 package command;
 
+import util.DukeException;
 import util.Parser;
 
 public abstract class Command {
@@ -10,6 +11,6 @@ public abstract class Command {
         return Integer.parseInt(string);
     }
 
-    public abstract void executeCommand();
+    public abstract void executeCommand() throws DukeException;
 
 }

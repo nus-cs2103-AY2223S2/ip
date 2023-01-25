@@ -14,12 +14,11 @@ public class CheckCommand extends Command {
     }
 
     @Override
-    public void executeCommand() {
-        //System.out.println(this.index);
+    public void executeCommand() throws DukeException {
         try {
             taskManager.checkTask(this.index);
         } catch (IndexOutOfBoundsException e) {
-            System.out.println("Item does not exist in list! Please check your list again.");
+            throw new DukeException("Item does not exist in list! Please check your list again.");
         }
     }
 }

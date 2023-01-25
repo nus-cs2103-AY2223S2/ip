@@ -2,6 +2,7 @@ package command;
 
 import task.TaskManager;
 
+import util.DukeException;
 import util.Parser;
 public class UncheckCommand extends Command {
     private final TaskManager taskManager;
@@ -12,11 +13,11 @@ public class UncheckCommand extends Command {
         this.index = super.extractIndex(input) - 1;
     }
     @Override
-    public void executeCommand() {
+    public void executeCommand() throws DukeException {
         try {
             taskManager.uncheckTask(this.index);
         } catch (IndexOutOfBoundsException e) {
-            System.out.println("Item does not exist in list! Please check your list again.");
+            throw new DukeException("Item does not exist in list! Please check your list again.");
         }
     }
 }
