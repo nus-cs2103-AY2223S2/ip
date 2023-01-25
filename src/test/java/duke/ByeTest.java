@@ -1,4 +1,4 @@
-package todo;
+package duke;
 
 import duke.data.MyData;
 import duke.ui.Ui;

@@ -1,4 +1,4 @@
-package todo;
+package duke;
 
 import duke.commands.Command;
 import duke.parser.Parser;
