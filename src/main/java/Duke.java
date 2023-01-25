@@ -1,7 +1,54 @@
 import java.util.ArrayList;
 import java.util.Scanner;
+import java.io.File;
+import java.io.IOException;
+import java.io.FileWriter;
 
 public class Duke {
+    public static void readStorage(String filePath, ArrayList<Task> toDoList) {
+        try {
+            (new File("./data")).mkdir();
+            File savedFile = new File("./data/duke.txt");
+            savedFile.createNewFile();
+            Scanner scanner = new Scanner(savedFile);
+            while (scanner.hasNextLine()) {
+                String currentTask = scanner.nextLine();
+                String typeOfTask = currentTask.substring(0, 3);
+                boolean isMarked = currentTask.substring(3, 6).equals("[X]");
+                switch (typeOfTask) {
+                    case "[E]":
+                        Task newEvent = new Event(currentTask.substring(7));
+                        toDoList.add(newEvent);
+                        if (isMarked) {
+                            newEvent.mark();
+                        }
+                        break;
+                    case "[T]":
+                        Task newTodo = new Todo(currentTask.substring(7));
+                        toDoList.add(newTodo);
+                        if (isMarked) {
+                            newTodo.mark();
+                        }
+                        break;
+                    case "[D]":
+                        Task newDeadline = new Deadline(currentTask.substring(7));
+                        toDoList.add(newDeadline);
+                        if (isMarked) {
+                            newDeadline.mark();
+                        }
+
+                        break;
+                }
+            }
+            scanner.close();
+
+        } catch (IOException e) {
+            System.out.println("cannot create new file");
+        } catch (IndexOutOfBoundsException e) {
+            System.out.println("file missing unmarked/marked");
+        }
+    }
+
     public static void main(String[] args) {
         String logo = " ____        _        \n"
                 + "|  _ \\ _   _| | _____ \n"
@@ -17,6 +64,10 @@ public class Duke {
         Scanner reader = new Scanner(System.in);
         ArrayList<Task> toDoList = new ArrayList<Task>();
 
+        // store file content in programme first
+
+        readStorage("./data/duke.txt", toDoList);
+
         while (true) {
             try {
                 String input = reader.nextLine();
@@ -25,10 +76,24 @@ public class Duke {
                     System.out.println("________________________________");
                     break;
                 }
-                run(input, toDoList);
+                boolean writeToFile = run(input, toDoList);
+
+                if (writeToFile) {
+                    FileWriter saveFileWriter = new FileWriter("./data/duke.txt", false);
+
+                    for (int i = 0; i < toDoList.size(); i++) {
+                        saveFileWriter.write(toDoList.get(i).toString() + "\n");
+
+                    }
+
+                    saveFileWriter.close();
+                }
+
             } catch (DukeException e) {
                 System.out.println(e.getMessage());
                 System.out.println("________________________________");
+            } catch (IOException e) {
+                System.out.println("failed to store to file");
             }
         }
 
@@ -41,10 +106,12 @@ public class Duke {
         return splitInput.length < 2;
     }
 
-    public static void run(String input, ArrayList<Task> toDoList) throws DukeException {
+    public static boolean run(String input, ArrayList<Task> toDoList) throws DukeException, IOException {
 
         String[] splitInput = input.split(" ");
         String command = splitInput[0];
+
+        boolean writeToFile = false;
 
         System.out.println("________________________________");
 
@@ -77,13 +144,13 @@ public class Duke {
                     throw new DukeException("Please input a valid integer");
                 }
 
+                writeToFile = true;
                 break;
             case "unmark":
                 if (checkDescription(splitInput)) {
                     throw new DukeException("OOPS!!! The value cannot be empty.");
                 }
 
-                
                 try {
                     String taskNumUnmark = splitInput[1];
 
@@ -97,7 +164,7 @@ public class Duke {
                 } catch (IndexOutOfBoundsException e) {
                     throw new DukeException("Please input a valid integer");
                 }
-
+                writeToFile = true;
                 break;
 
             case "event":
@@ -111,6 +178,7 @@ public class Duke {
                 System.out.println(" Got it. I've added this task:");
                 System.out.println("  " + newEvent.toString());
                 System.out.println("Now you have " + toDoList.size() + " tasks on the list.");
+                writeToFile = true;
                 break;
 
             case "deadline":
@@ -123,6 +191,7 @@ public class Duke {
                 System.out.println(" Got it. I've added this task:");
                 System.out.println("  " + newDeadline.toString());
                 System.out.println("Now you have " + toDoList.size() + " tasks on the list.");
+                writeToFile = true;
                 break;
 
             case "todo":
@@ -136,6 +205,7 @@ public class Duke {
                 System.out.println(" Got it. I've added this task:");
                 System.out.println("  " + newTodo.toString());
                 System.out.println("Now you have " + toDoList.size() + " tasks on the list.");
+                writeToFile = true;
                 break;
 
             case "delete":
@@ -157,7 +227,7 @@ public class Duke {
                 } catch (IndexOutOfBoundsException e) {
                     throw new DukeException("Please input a valid integer");
                 }
-
+                writeToFile = true;
                 break;
 
             default:
@@ -166,7 +236,7 @@ public class Duke {
         }
 
         System.out.println("________________________________");
-
+        return writeToFile;
     }
 
 }
