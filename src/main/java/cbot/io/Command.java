@@ -1,4 +1,4 @@
-package cbot.util;
+package cbot.io;
 
 public enum Command {
     //NAME      (str,           hasText,    save),

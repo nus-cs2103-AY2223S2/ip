@@ -1,6 +1,6 @@
 package cbot.task;
 
-import cbot.util.TimeStuff;
+import cbot.time.TimeStuff;
 
 import java.time.LocalDateTime;
 

@@ -1,4 +1,4 @@
-package cbot.util;
+package cbot.io;
 
 import cbot.task.Deadline;
 import cbot.task.Event;
@@ -18,14 +18,6 @@ public class FileStuff {
     
     public FileStuff(String path) {
         this.file = new File(path);
-    }
-    
-    String getPath() {
-        return this.file.getAbsolutePath();
-    }
-    
-    boolean pathExists() {
-        return this.file.getParentFile().exists();
     }
     
     boolean fileExists() {
@@ -50,7 +42,7 @@ public class FileStuff {
     public TaskList loadFile() throws FileNotFoundException {
         Scanner s = new Scanner(this.file);
         
-        ArrayList<Task> tdl = new ArrayList<Task>();
+        ArrayList<Task> tdl = new ArrayList<>();
         
         while (s.hasNext()) {
             String[] taskStr = s.nextLine().split(Task.SEP);
@@ -61,15 +53,15 @@ public class FileStuff {
             String desc = taskStr[2];
             
             switch (taskStr[0]) {
-            case "T":
+            case Task.TODO_SYMBOL:
                 tdl.add(new Task(desc, isDone));
                 break;
                 
-            case "D":
+            case Deadline.DEADLINE_SYMBOL:
                 tdl.add(new Deadline(desc, isDone, LocalDateTime.parse(taskStr[3])));
                 break;
-                
-            case "E":
+
+            case Event.EVENT_SYMBOL:
                 tdl.add(new Event(desc, isDone, LocalDateTime.parse(taskStr[3]), LocalDateTime.parse(taskStr[4])));
                 break;
             }

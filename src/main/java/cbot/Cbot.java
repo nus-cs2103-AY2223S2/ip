@@ -1,12 +1,11 @@
 package cbot;
 
+import cbot.io.BadInputException;
+import cbot.io.FileStuff;
+import cbot.io.Parser;
+import cbot.io.PoorInputException;
+import cbot.io.UI;
 import cbot.task.TaskList;
-
-import cbot.util.BadInputException;
-import cbot.util.FileStuff;
-import cbot.util.Parser;
-import cbot.util.PoorInputException;
-import cbot.util.UI;
 
 import java.io.FileNotFoundException;
 import java.io.IOException;
@@ -27,7 +26,7 @@ public class Cbot {
             this.tl = fs.loadFile();
         } catch (FileNotFoundException e) {
             fs.makeFile();
-            UI.sayNewFile(fs);
+            UI.sayNewFile(filePath);
             this.tl = new TaskList();
         }
     }

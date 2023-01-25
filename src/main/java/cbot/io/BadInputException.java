@@ -1,4 +1,4 @@
-package cbot.util;
+package cbot.io;
 
 public class BadInputException extends PoorInputException {
     public BadInputException(String message) {

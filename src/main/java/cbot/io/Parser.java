@@ -1,9 +1,10 @@
-package cbot.util;
+package cbot.io;
 
 import cbot.task.Deadline;
 import cbot.task.Event;
 import cbot.task.Task;
 import cbot.task.TaskList;
+import cbot.time.TimeStuff;
 
 import java.time.format.DateTimeParseException;
 import java.time.LocalDateTime;
@@ -43,7 +44,7 @@ public class Parser {
     
     public void respond(TaskList tl) throws PoorInputException, DateTimeParseException {
         if (this.c.missingText(this.text)) {
-            throw new PoorInputException("Command \"" + this.c.toString() + "\" needs an input");
+            throw new PoorInputException("That command needs an input");
         }
         
         switch (this.c) {
@@ -58,10 +59,13 @@ public class Parser {
         
         case MARK:
             try {
-                int num = Integer.valueOf(this.text);
+                int num = Integer.parseInt(this.text);
+                
+                if (tl.notInRange(num)) {
+                    throw new PoorInputException(tl.rangeError(num));
+                }
+                
                 UI.say(tl.mark(num));
-            } catch (PoorInputException e) {
-                throw e;
             } catch (NumberFormatException e) {
                 throw new BadInputException("Invalid index!");
             }
@@ -69,10 +73,13 @@ public class Parser {
         
         case UNMARK:
             try {
-                int num = Integer.valueOf(this.text);
+                int num = Integer.parseInt(this.text);
+                
+                if (tl.notInRange(num)) {
+                    throw new PoorInputException(tl.rangeError(num));
+                }
+                
                 UI.say(tl.unmark(num));
-            } catch (PoorInputException e) {
-                throw e;
             } catch (NumberFormatException e) {
                 throw new BadInputException("Invalid index!");
             }
@@ -80,10 +87,13 @@ public class Parser {
             
         case DELETE:
             try {
-                int num = Integer.valueOf(this.text);
+                int num = Integer.parseInt(this.text);
+                
+                if (tl.notInRange(num)) {
+                    throw new PoorInputException(tl.rangeError(num));
+                }
+                
                 UI.say(tl.delTask(num));
-            } catch (PoorInputException e) {
-                throw e;
             } catch (NumberFormatException e) {
                 throw new BadInputException("Invalid index!");
             }
@@ -136,9 +146,9 @@ public class Parser {
             int fromIndex = this.text.indexOf(FROM_KEYWORD);
             int toIndex = this.text.indexOf(TO_KEYWORD);
             
-            if (toIndex < toIndex) {
+            if (toIndex < fromIndex) {
                 // /to before /from
-                throw new PoorInputException("\"/to\" before \"/from\"");
+                throw new PoorInputException("\"/from\" before \"/to\", please!");
             } else if (fromIndex == 0) {
                 // no desc
                 throw new BadInputException("Missing event description");
@@ -215,8 +225,8 @@ public class Parser {
                 throw new PoorInputException("Eh? You have no tasks to filter");
             }
             
-            String msg = "Ok!";
-            ArrayList<String> arrFilter = new ArrayList<String>();
+            String msg;
+            ArrayList<String> arrFilter;
             
             switch (this.text.toLowerCase()) {
             case "todo":
@@ -243,7 +253,7 @@ public class Parser {
             case "complete":
             case "done":
             case "completed":
-            case "X":
+            case "x":
                 msg = "Ok! Here are the Tasks you've completed:";
                 arrFilter = tl.listFilter(t -> t.getStatus().equals(Task.DONE_TRUE));
                 break;
@@ -270,7 +280,7 @@ public class Parser {
             
         default:
             // catches all the BADs
-            throw new BadInputException("That command needs an input");
+            throw new PoorInputException("That command needs an input");
         }
     }
 }

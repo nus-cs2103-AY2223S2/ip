@@ -1,7 +1,5 @@
 package cbot.task;
 
-import cbot.util.PoorInputException;
-
 import java.lang.StringBuilder;
 import java.util.ArrayList;
 import java.util.Collections;
@@ -48,11 +46,11 @@ public class TaskList {
         return arr;
     }
     
-    boolean notInRange(int num) {
+    public boolean notInRange(int num) {
         return (num <= 0 || num > getCount());
     }
     
-    String rangeError(int num) {
+    public String rangeError(int num) {
         if (num <= 0) {
             return "wadahek pls";
         } else if (num > getCount()) {
@@ -62,11 +60,7 @@ public class TaskList {
         }
     }
     
-    public String mark(int num) throws PoorInputException {
-        if (notInRange(num)) {
-            throw new PoorInputException(rangeError(num));
-        }
-        
+    public String mark(int num) {
         int index = num - 1;
         
         if (tdl.get(index).yesDo()) {
@@ -78,11 +72,7 @@ public class TaskList {
         }
     }
     
-    public String unmark(int num) throws PoorInputException {
-        if (notInRange(num)) {
-            throw new PoorInputException(rangeError(num));
-        }
-        
+    public String unmark(int num) {
         int index = num - 1;
         
         if (tdl.get(index).noDo()) {
@@ -94,11 +84,7 @@ public class TaskList {
         }
     }
     
-    public String delTask(int num) throws PoorInputException {
-        if (notInRange(num)) {
-            throw new PoorInputException(rangeError(num));
-        }
-        
+    public String delTask(int num) {
         return "Got it! Deleted:\n" + GAP
                 + tdl.remove(num - 1).toString();
     }

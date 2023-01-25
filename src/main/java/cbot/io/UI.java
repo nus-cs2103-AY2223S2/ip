@@ -1,4 +1,4 @@
-package cbot.util;
+package cbot.io;
 
 import cbot.task.Task;
 
@@ -32,8 +32,8 @@ public class UI {
         return userInput;
     }
     
-    public static void sayNewFile(FileStuff fs) {
-        System.out.println(WARNING + "No save file found. Making a new save at " + fs.getPath());
+    public static void sayNewFile(String path) {
+        System.out.println(WARNING + "No save file found. Making a new save at " + path);
     }
     
     public static void sayHi() {
