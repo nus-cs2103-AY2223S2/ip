@@ -1,4 +1,4 @@
-public class Task {
+public abstract class Task {
     protected boolean isDone = false;
     private String name;
 
@@ -26,4 +26,6 @@ public class Task {
             return "[ ] " + name;
         }
     }
+
+    public abstract String asCSV();
 }
