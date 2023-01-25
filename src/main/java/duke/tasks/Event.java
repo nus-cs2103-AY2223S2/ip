@@ -22,9 +22,9 @@ public class Event extends Task {
 
     @Override
     public String toString() {
-        return "\t[E]" + super.toString() + " (from: " + from + "to: " + to + ")";
+        return "\t[E]" + super.toString() + " (from: " + from + " to: " + to + ")";
     }
     public String saveFormat(){
-        return String.format("E | %s |  %s to %s", super.saveFormat(), this.from, this.to);
+        return String.format("E | %s | %s to %s", super.saveFormat(), this.from, this.to);
     }
 }

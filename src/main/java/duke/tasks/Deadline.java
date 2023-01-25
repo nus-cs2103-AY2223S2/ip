@@ -12,7 +12,7 @@ public class Deadline extends Task {
         super(description, isDone);
         this.by = by;
         try {
-            this.dateTime = LocalDateTime.parse(by.trim(), formatter);
+            this.dateTime = LocalDateTime.parse(by.trim(),formatter);
         } catch (DateTimeParseException e) {
             System.out.println("\tPlease enter a date in e.g yyyy-mm-dd 23:59 format!");
         }
