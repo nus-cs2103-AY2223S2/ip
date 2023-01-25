@@ -8,6 +8,7 @@ import duke.commands.CommandType;
 import duke.commands.DeleteTaskCommand;
 import duke.commands.DisplayListCommand;
 import duke.commands.ExitCommand;
+import duke.commands.FindCommand;
 import duke.commands.MarkTaskAsDoneCommand;
 import duke.commands.MarkTaskAsUndoneCommand;
 import duke.exception.CannotReadFileDukeException;
@@ -134,6 +135,13 @@ public class Parser {
                 throw new EmptyArgumentDukeException();
             } catch (DateTimeParseException e) {
                 throw new InvalidArgumentDukeException();
+            }
+        case FIND:
+            try {
+                String keyword = parts[1];
+                return new FindCommand(keyword);
+            } catch (ArrayIndexOutOfBoundsException e) {
+                throw new EmptyArgumentDukeException();
             }
         }
 

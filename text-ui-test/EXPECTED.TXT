@@ -191,5 +191,21 @@ Your tasks are:
 3. [E][ ] go toilet (from: Dec 01 2022 19:00 to: Dec 01 2022 19:05)
 ___________________________
 >___________________________
+Sorry! One or more arguments are empty!
+___________________________
+>___________________________
+These are the matching tasks in your list:
+
+___________________________
+>___________________________
+These are the matching tasks in your list:
+1. [D][X] eat some food (by: Dec 23 2022 11:00)
+2. [E][ ] go toilet (from: Dec 01 2022 19:00 to: Dec 01 2022 19:05)
+___________________________
+>___________________________
+These are the matching tasks in your list:
+1. [D][X] eat some food (by: Dec 23 2022 11:00)
+___________________________
+>___________________________
 Goodbye. I hope to see you again.
 ___________________________

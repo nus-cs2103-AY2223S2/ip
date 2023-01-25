@@ -36,7 +36,11 @@ public abstract class Task {
     public void setDone(boolean value) {
         isDone = value;
     }
-
+    
+    public boolean matchesKeyword(String keyword) {
+        return description.contains(keyword);
+    }
+    
     /**
      * Returns the string representation of the task.
      * @return The string representation of the task.
