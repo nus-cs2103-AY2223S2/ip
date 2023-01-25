@@ -3,7 +3,7 @@ package task;
 import java.util.ArrayList;
 
 public class TaskList {
-    private final ArrayList<Task> records = new ArrayList<>();
+    private ArrayList<Task> records = new ArrayList<>();
 
     // default constructor
 
@@ -31,11 +31,11 @@ public class TaskList {
     }
 
     public void mark(int x) {
-        records.get(x-1).complete();
+        records.get(x-1).setComplete();
     }
 
     public void unmark(int x) {
-        records.get(x-1).incomplete();
+        records.get(x-1).setIncomplete();
     }
 
     public int size() {

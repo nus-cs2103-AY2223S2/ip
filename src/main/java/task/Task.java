@@ -9,7 +9,7 @@ public class Task {
         this.status = false;
     }
 
-    public void complete() {
+    public void setComplete() {
         if (this.status) {
             System.out.println("Mission is already completed.");
             return;
@@ -18,7 +18,7 @@ public class Task {
         System.out.println("Mission Completed!\n" + this);
     }
 
-    public void incomplete() {
+    public void setIncomplete() {
         if (!this.status) {
             System.out.println("Mission is originally incomplete.");
             return;

@@ -18,7 +18,7 @@ public class Ui {
 
         while (check) {
             System.out.println("Awaiting command");
-            check = this.parser.command(sc.nextLine(), l);
+            check = this.parser.continueCommand(sc.nextLine(), l);
         }
     }
 }
