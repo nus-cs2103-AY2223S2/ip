@@ -1,4 +1,4 @@
-package command;
+package duke.command;
 
 import java.time.LocalDate;
 
@@ -6,7 +6,7 @@ import duke.DukeException;
 import duke.Storage;
 import duke.TaskList;
 import duke.Ui;
-import task.Event;
+import duke.task.Event;
 
 public class CreateEvent extends Command {
     private String description;

@@ -1,15 +1,15 @@
-package command;
+package duke.command;
 
 import duke.DukeException;
 import duke.Storage;
 import duke.TaskList;
 import duke.Ui;
-import task.Task;
+import duke.task.Task;
 
-public class Mark extends Command {
+public class Unmark extends Command {
     private Integer index;
 
-    public Mark(Integer i) {
+    public Unmark(Integer i) {
         this.index = i;
     }
 
@@ -19,7 +19,8 @@ public class Mark extends Command {
             throw new DukeException("Please specify a valid task number.");
         }
         Task t = tasks.get(index-1);
-        t.markAsDone();
-        ui.showMark(t);
+        t.markAsNotDone();
+        ui.showUnmark(t);
     }
+    
 }

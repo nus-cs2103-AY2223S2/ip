@@ -1,8 +1,6 @@
 package duke;
 
-import java.time.LocalDate;
-
-import command.Command;
+import duke.command.Command;
 
 public class Duke {
 

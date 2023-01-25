@@ -7,10 +7,10 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Scanner;
 
-import task.Deadline;
-import task.Event;
-import task.Task;
-import task.Todo;
+import duke.task.Deadline;
+import duke.task.Event;
+import duke.task.Task;
+import duke.task.Todo;
 
 public class Storage {
     private File file;

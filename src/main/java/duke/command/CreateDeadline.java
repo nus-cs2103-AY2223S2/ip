@@ -1,4 +1,4 @@
-package command;
+package duke.command;
 
 import java.time.LocalDate;
 
@@ -6,7 +6,7 @@ import duke.DukeException;
 import duke.Storage;
 import duke.TaskList;
 import duke.Ui;
-import task.Deadline;
+import duke.task.Deadline;
 
 public class CreateDeadline extends Command {
     private String desc;

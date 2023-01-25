@@ -1,10 +1,10 @@
-package command;
+package duke.command;
 
 import duke.DukeException;
 import duke.Storage;
 import duke.TaskList;
 import duke.Ui;
-import task.Todo;
+import duke.task.Todo;
 
 public class CreateTodo extends Command {
    private String desc;

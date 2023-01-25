@@ -1,19 +1,20 @@
 package duke;
 
 import java.util.Arrays;
+
+import duke.command.Command;
+import duke.command.CreateDeadline;
+import duke.command.CreateEvent;
+import duke.command.CreateTodo;
+import duke.command.Delete;
+import duke.command.Exit;
+import duke.command.List;
+import duke.command.Mark;
+import duke.command.Unmark;
+import duke.task.Task;
+
 import java.time.LocalDate;
 import java.time.format.DateTimeParseException;
-
-import command.Command;
-import command.CreateDeadline;
-import command.CreateEvent;
-import command.CreateTodo;
-import command.Delete;
-import command.Exit;
-import command.List;
-import command.Mark;
-import command.Unmark;
-import task.Task;
 
 public class Parser {
     public static Command parse(String fullCommand) throws DukeException {
