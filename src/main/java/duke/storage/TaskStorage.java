@@ -17,6 +17,10 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Scanner;
 
+/**
+ * This class manages persistent storage of the list
+ * of tasks the user has.
+ */
 public class TaskStorage implements Storage{
 
     private String filepath;
@@ -43,6 +47,17 @@ public class TaskStorage implements Storage{
         this.filepath = filepath;
     }
 
+    /**
+     * Parses through the text file containing the user's list
+     * of tasks. The tasks are then created and added to an arraylist
+     * accordingly before returning the arrayList. When called by the
+     * constructor of the Tasklist class, allows the Tasklist to be
+     * loaded with the user's existing tasks.
+     *
+     * @return An arraylist containing the existing tasks in the user's
+     * list of tasks.
+     * @see duke.tasklist.Tasklist
+     */
     public ArrayList<Task> load() {
         ArrayList<Task> tasks = new ArrayList<>();
         while (scanner.hasNextLine()) {
@@ -71,6 +86,12 @@ public class TaskStorage implements Storage{
         return tasks;
     }
 
+    /**
+     * Adds a task into the text document for persistent storage.
+     *
+     * @param t The task to be added.
+     * @param type The type of the task added.
+     */
     public void addTask(Task t, TaskTypes type) {
         String line;
         switch (type) {
@@ -96,6 +117,12 @@ public class TaskStorage implements Storage{
         }
     }
 
+    /**
+     * Deletes a task from the text document that is used for
+     * persistent storage.
+     *
+     * @param index The index of the task to be deleted.
+     */
     public void deleteTask(int index) {
         String newContent = "";
         int count = 0;
@@ -113,6 +140,11 @@ public class TaskStorage implements Storage{
         }
     }
 
+    /**
+     * Marks a task in the storage document as done.
+     *
+     * @param index The index of the task to be marked.
+     */
     public void mark(int index) {
         try {
             replaceText(index, "0", "1");
@@ -121,6 +153,11 @@ public class TaskStorage implements Storage{
         }
     }
 
+    /**
+     * Marks a task in the storage document as not done.
+     *
+     * @param index The index of the task to be unmarked.
+     */
     public void unmark(int index) {
         try {
             replaceText(index, "1", "0");

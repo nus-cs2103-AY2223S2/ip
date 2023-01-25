@@ -3,6 +3,10 @@ package duke.task;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
+/**
+ * Represents a task that has both a starting date
+ * and an ending date.
+ */
 public class Event extends Task{
 
     private LocalDate startDate;

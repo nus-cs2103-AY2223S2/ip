@@ -16,6 +16,9 @@ import java.time.LocalDate;
 
 import java.util.Scanner;
 
+/**
+ * Main class for running Duke.
+ */
 public class Duke {
     private static final String FILE_PATH = "data/data.txt";
     private Ui ui;
@@ -35,10 +38,15 @@ public class Duke {
         duke.run();
     }
 
+    /**
+     * Runs Duke and begins parsing input from the user.
+     * Duke will deactivate and exit upon receiving "bye"
+     * from user input.
+     */
     public void run() {
         this.isActive = true;
         Scanner s = new Scanner(System.in);
-        while (this.isActive()) {
+        while (this.isActive) {
             String input = s.nextLine();
             try {
                 Commands command = this.parser.parseInput(input);
@@ -90,10 +98,6 @@ public class Duke {
         ui.printLine();
         this.tasklist.viewList();
         ui.printLine();
-    }
-
-    public boolean isActive() {
-        return this.isActive;
     }
 
     private void mark(int index) throws DukeException {

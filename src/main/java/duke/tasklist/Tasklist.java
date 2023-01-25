@@ -7,6 +7,9 @@ import duke.task.Task;
 
 import java.util.ArrayList;
 
+/**
+ * Represents the list of tasks that the user has.
+ */
 public class Tasklist {
 
     private ArrayList<Task> tasks;
@@ -17,15 +20,36 @@ public class Tasklist {
         this.tasks = storage.load();
     }
 
+    /**
+     * Returns the number of tasks in the list.
+     *
+     * @return The number of tasks in the list.
+     */
     public int size() {
         return this.tasks.size();
     }
 
+    /**
+     * Adds a task into the list of tasks.
+     *
+     * @param t The task to be added.
+     * @param type The type of the task added.
+     */
     public void addTask(Task t, TaskTypes type) {
         tasks.add(t);
         this.storage.addTask(t, type);
     }
 
+    /**
+     * Deletes a task from the list of tasks based on the
+     * passed index.
+     *
+     * @param index The index of the task in the list to be
+     *              deleted.
+     * @return The task that was deleted.
+     * @throws DukeException If the passed index is larger than
+     * the size of the list.
+     */
     public Task deleteTask(int index) throws DukeException {
         if (index >= this.tasks.size()) {
             throw new DukeException("Invalid task number provided. "
@@ -37,10 +61,25 @@ public class Tasklist {
         return this.tasks.remove(index);
     }
 
+    /**
+     * Returns the task in the list with the passed index.
+     *
+     * @param index The index of the desired task in the list.
+     * @return The task with the given index.
+     */
     public Task get(int index) {
         return this.tasks.get(index);
     }
 
+    /**
+     * Marks the task with given index as completed.
+     *
+     * @param index Index of the task to be marked.
+     * @return True if the task was successfully marked, false
+     * otherwise.
+     * @throws DukeException If given index is larger than the
+     * size of the list.
+     */
     public boolean mark(int index) throws DukeException {
         if (index >= this.tasks.size()) {
             throw new DukeException("Invalid task number provided. "
@@ -55,6 +94,16 @@ public class Tasklist {
         return false;
     }
 
+    /**
+     * Unmarks the task with the given index such that it is
+     * uncompleted.
+     *
+     * @param index The index of the task to be unmarked.
+     * @return True if the task was successfully unmarked, false
+     * otherwise.
+     * @throws DukeException If given index is larger than the
+     * size of the list.
+     */
     public boolean unmark(int index) throws DukeException {
         if (index >= this.tasks.size()) {
             throw new DukeException("Invalid task number provided. "
@@ -69,6 +118,9 @@ public class Tasklist {
         return false;
     }
 
+    /**
+     * Prints the list of tasks for user to view.
+     */
     public void viewList() {
         if (this.tasks.isEmpty()) {
             System.out.println("\t You currently have no tasks.");

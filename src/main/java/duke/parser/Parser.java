@@ -7,6 +7,9 @@ import duke.exceptions.DukeException;
 import java.time.LocalDate;
 import java.time.format.DateTimeParseException;
 
+/**
+ * This class manages the parsing of user inputs.
+ */
 public class Parser {
 
     private final int NUM_OF_DATES = 2;
@@ -18,6 +21,16 @@ public class Parser {
         this.dates = new LocalDate[NUM_OF_DATES];
     }
 
+    /**
+     * Parses through the user input to receive the command from
+     * the user. Based on the command received, required
+     * information would be retrieved from the user input. If an
+     * invalid input was received, an exception is thrown.
+     *
+     * @param input The string containing user input.
+     * @return An enum with the respective command from the user.
+     * @throws DukeException If an invalid input was given.
+     */
     public Commands parseInput(String input) throws DukeException {
         String[] delimited = input.split(" ");
         switch (delimited[0].toLowerCase()) {
