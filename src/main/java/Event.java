@@ -15,6 +15,14 @@ public class Event extends Task{
         return "[E]" + super.toString() + " (from: " + this.from + " to: " + this.to + ")";
     }
 
+    public String getFrom() {
+        return this.from;
+    }
+
+    public String getTo() {
+        return this.to;
+    }
+
     public static Event parseEventCommand(Scanner stringStream) throws DukeException {
         String taskDesc = "";
         String from = "";
