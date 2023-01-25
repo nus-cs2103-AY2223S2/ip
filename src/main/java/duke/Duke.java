@@ -47,11 +47,10 @@ public class Duke {
         Scanner myObj = new Scanner(System.in);
         String userInput = myObj.nextLine();
         while (!userInput.equals("bye")) {
-            this.command.executeCommand(this.parser.getCommand(userInput), userInput, tasks);
+            this.command.executeCommand(this.parser.getCommand(userInput), userInput, tasks, storage);
             myObj = new Scanner(System.in);
             userInput = myObj.nextLine();
         }
-        storage.saveData(tasks);
         ui.sendGoodByeMessage();
     }
 
