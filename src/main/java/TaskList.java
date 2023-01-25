@@ -1,3 +1,4 @@
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 
 /**
@@ -19,9 +20,12 @@ public class TaskList {
             if (tasks.get(i)[0].equals("T")) {
                 task = new Todo(tasks.get(i)[2]);
             } else if (tasks.get(i)[0].equals("D")) {
-                task = new Deadline(tasks.get(i)[2], tasks.get(i)[3]);
+                LocalDateTime localDateTime = LocalDateTime.parse(tasks.get(i)[3].trim());
+                task = new Deadline(tasks.get(i)[2], localDateTime);
             } else {
-                task = new Event(tasks.get(i)[2], tasks.get(i)[3], tasks.get(i)[4]);
+                LocalDateTime startDT = LocalDateTime.parse(tasks.get(i)[3].trim());
+                LocalDateTime endDT = LocalDateTime.parse(tasks.get(i)[4].trim());
+                task = new Event(tasks.get(i)[2], startDT, endDT);
             }
             if (tasks.get(i)[1].equals("X")) {
                 task.markDone();

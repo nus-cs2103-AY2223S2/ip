@@ -35,8 +35,8 @@ public class Feedback {
     private static String commands() {
         return "MY COMMANDS ARE:\n"
                 + "ADD TODO TASK:     todo [description]\n"
-                + "ADD DEADLINE TASK: deadline [description] /by [date time]\n"
-                + "ADD EVENT TASK:    event [description] /from [date time] /to [date time]\n"
+                + "ADD DEADLINE TASK: deadline [description] /by [YYYY-MM-DD HH:MM]\n"
+                + "ADD EVENT TASK:    event [description] /from [YYYY-MM-DD HH:MM] /to [YYYY-MM-DD HH:MM]\n"
                 + "MARK A TASK:       mark [index]\n"
                 + "UNMARK A TASK:     unmark [index]\n"
                 + "DELETE A TASK:     delete [index]\n"

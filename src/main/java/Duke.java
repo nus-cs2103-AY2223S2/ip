@@ -1,3 +1,7 @@
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.LocalTime;
+import java.time.format.DateTimeFormatter;
 import java.util.Scanner;
 
 /**
@@ -111,8 +115,8 @@ public class Duke {
                         String dateTime = msg.substring(byIndex + by.length()).trim();
                         checkExist(!descr.isBlank(), "The description of a DEADLINE command cannot be empty.");
                         checkExist(!dateTime.isBlank(), "The datetime of a DEADLINE command cannot be empty.");
-
-                        myTaskList.addTask(new Deadline(descr, dateTime));
+                        LocalDateTime localDateTime = LocalDateTime.parse(dateTime, DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm"));
+                        myTaskList.addTask(new Deadline(descr, localDateTime));
                         break;
 
                     case EVENT:
@@ -130,8 +134,9 @@ public class Duke {
                         checkExist(!descr.isBlank(), "The description of a EVENT command cannot be empty.");
                         checkExist(!startDT.isBlank(), "The starting datetime of a EVENT command cannot be empty.");
                         checkExist(!endDT.isBlank(), "The ending datetime of a EVENT command cannot be empty.");
-
-                        myTaskList.addTask(new Event(descr, startDT, endDT));
+                        LocalDateTime startDateTime = LocalDateTime.parse(startDT, DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm"));
+                        LocalDateTime endDateTime = LocalDateTime.parse(endDT, DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm"));
+                        myTaskList.addTask(new Event(descr, startDateTime, endDateTime));
                         break;
 
                     case DELETE:
