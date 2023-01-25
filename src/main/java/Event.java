@@ -23,11 +23,11 @@ public class Event extends Task {
     @Override
     public String printTask() {
         return this.isDone()
-                ? "[E][x] " + this.getTask() + "(Start: "
+                ? "[E][x] " + this.getTask() + " (Start: "
                         + this.startTimeParsed.format(DateTimeFormatter.ofPattern("MMM d yyyy"))
                         + " | End: "
                         + endTimeParsed.format(DateTimeFormatter.ofPattern("MMM d yyyy")) + ")"
-                : "[E][ ] " + this.getTask() + "(Start: "
+                : "[E][ ] " + this.getTask() + " (Start: "
                         + this.startTimeParsed.format(DateTimeFormatter.ofPattern("MMM d yyyy"))
                         + " | End: "
                         + this.endTimeParsed.format(DateTimeFormatter.ofPattern("MMM d yyyy")) + ")";

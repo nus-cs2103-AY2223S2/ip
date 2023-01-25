@@ -1,4 +1,4 @@
 [T][ ] run
-[T][ ] eat
-[D][ ] read  (Due: sunday)
-[E][ ] meeting (Start: 12pm | End: 2pm)
+[T][ ] buy bread
+[D][ ] eat bread  (Due: Jan 26 2023)
+[E][ ] meeting (Start: Jan 27 2023 | End: Jan 28 2023)
