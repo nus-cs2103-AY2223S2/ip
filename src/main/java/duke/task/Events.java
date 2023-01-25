@@ -7,7 +7,7 @@ import duke.utilities.Parser;
  */
 public class Events extends Task {
 
-    public final String raw;
+    public final String rawInput;
     String start;
     String end;
 
@@ -19,16 +19,16 @@ public class Events extends Task {
      */
     public Events(String name, boolean done) {
         super(name, done);
-        raw = name;
+        rawInput = name;
         extract();
     }
 
     private void extract() {
         try {
-            String[] tokens = task_name.split("/");
+            String[] tokens = taskName.split("/");
             String[] startdate = tokens[1].split(" ");
             String[] enddate = tokens[2].split(" ");
-            task_name = tokens[0];
+            taskName = tokens[0];
             start = startdate.length == 3 ? "(" + startdate[0] + ": " + startdate[1] + " " + startdate[2] + " "
                     : "(" + startdate[0] + ": " + startdate[1] + " " + startdate[2] + " " + startdate[3] + " ";
             end = enddate[0] + ": " + enddate[1] + ")";
@@ -40,34 +40,34 @@ public class Events extends Task {
 
     @Override
     public void add() {
-        message_add = Parser.add + Parser.eventMarked_spaced + task_name + start + end;
+        messageAdd = Parser.ADDED_THIS_TASK + Parser.EVENT_MARKED_SPACED + taskName + start + end;
     }
 
     @Override
     public void display() {
         if (done)
-            message_display = Parser.eventMarked + task_name + start + end;
+            messageDisplay = Parser.EVENT_MARKED + taskName + start + end;
         else
-            message_display = Parser.eventUnmarked + task_name + start + end;
+            messageDisplay = Parser.EVENT_UNMARKED + taskName + start + end;
     }
 
     @Override
     public void delete() {
         if (done)
-            message_delete = Parser.delete + Parser.eventMarked_spaced + task_name + start + end;
+            messageDelete = Parser.REMOVED_THIS_TASK + Parser.EVENT_MARKED_SPACED + taskName + start + end;
         else
-            message_delete = Parser.delete + Parser.eventUnmarked_spaced + task_name + start + end;
+            messageDelete = Parser.REMOVED_THIS_TASK + Parser.EVENT_UNMARKED_SPACED + taskName + start + end;
     }
 
     @Override
     public void marked() {
-        message_marked = Parser.mark + Parser.eventMarked_spaced + task_name + start + end;
+        messageMarked = Parser.MARKED_THIS_TASK_AS_DONE + Parser.EVENT_MARKED_SPACED + taskName + start + end;
         done = true;
     }
 
     @Override
     public void unmarked() {
-        message_unmarked = Parser.unmark + Parser.eventUnmarked_spaced + task_name + start + end;
+        messageUnmarked = Parser.MARKED_THIS_TASK_AS_NOT_DONE_YET + Parser.EVENT_UNMARKED_SPACED + taskName + start + end;
         done = false;
     }
 }

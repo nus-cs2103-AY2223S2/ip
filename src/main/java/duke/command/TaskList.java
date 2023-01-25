@@ -37,22 +37,23 @@ public class TaskList {
     /**
      * Add.
      * add Task
+     *
      * @param input the input
      */
     public void add(Task input) {
         try {
-            if (input.task_name.equals("") || input.task_name.equals(" ")) {
+            if (input.taskName.equals("") || input.taskName.equals(" ")) {
                 throw new DukeException("OOPS!!! The description of a todo cannot be empty.\n");
             } else {
                 ListOfTasks.add(input);
                 input.add();
-                System.out.println(input.message_add + "\n Now you have " + ListOfTasks.size() + " tasks in the list");
+                System.out.println(input.messageAdd + "\n Now you have " + ListOfTasks.size() + " tasks in the list");
                 if (input instanceof ToDo) {
-                    storage.write("T|" + input.done + "|" + ((ToDo) input).raw);
+                    storage.write("T|" + input.done + "|" + ((ToDo) input).rawInput);
                 } else if (input instanceof Deadlines) {
-                    storage.write("D|" + input.done + "|" + ((Deadlines) input).raw);
+                    storage.write("D|" + input.done + "|" + ((Deadlines) input).rawInput);
                 } else if (input instanceof Events) {
-                    storage.write("E|" + input.done + "|" + ((Events) input).raw);
+                    storage.write("E|" + input.done + "|" + ((Events) input).rawInput);
                 } else {
                     System.out.println("Unspecific type");
                 }
@@ -72,23 +73,24 @@ public class TaskList {
      * Print out all Tasks in memory
      */
     public void displayAll() {
-        System.out.println(Parser.displaylist);
+        System.out.println(Parser.THE_TASKS_IN_YOUR_LIST);
         for (int x = 0; x < ListOfTasks.size(); x++) {
             ListOfTasks.get(x).display();
-            System.out.println(x + 1 + ". " + ListOfTasks.get(x).message_display);
+            System.out.println(x + 1 + ". " + ListOfTasks.get(x).messageDisplay);
         }
     }
 
     /**
      * Mark.
      * Marks task at given index
+     *
      * @param index the index
      */
     public void mark(int index) {
         try {
             Task temp = ListOfTasks.get(index);
             temp.marked();
-            System.out.println(temp.message_marked);
+            System.out.println(temp.messageMarked);
             storage.markAt(index);
         } catch (IndexOutOfBoundsException e) {
             System.out.println("Invalid Index");
@@ -98,13 +100,14 @@ public class TaskList {
     /**
      * Unmark.
      * unmarked task at given index
+     *
      * @param index the index
      */
     public void unmark(int index) {
         try {
             Task temp = ListOfTasks.get(index);
             temp.unmarked();
-            System.out.println(temp.message_unmarked);
+            System.out.println(temp.messageUnmarked);
             storage.unmarkAt(index);
         } catch (IndexOutOfBoundsException e) {
             System.out.println("Invalid Index");
@@ -114,6 +117,7 @@ public class TaskList {
     /**
      * Delete.
      * delete task at given index
+     *
      * @param index the index
      */
     public void delete(int index) {
@@ -121,7 +125,7 @@ public class TaskList {
             Task temp = ListOfTasks.get(index);
             temp.delete();
             ListOfTasks.remove(index);
-            System.out.println(temp.message_delete + "\n Now you have " + ListOfTasks.size() + " tasks in the list");
+            System.out.println(temp.messageDelete + "\n Now you have " + ListOfTasks.size() + " tasks in the list");
             storage.deteleAt(index);
         } catch (IndexOutOfBoundsException e) {
             System.out.println("Invalid Index");
@@ -153,7 +157,7 @@ public class TaskList {
      * File write all.
      */
     public void file_writeAll() {
-        storage.WriteAll();
+        storage.writeAll();
     }
 
 

@@ -7,7 +7,7 @@ import duke.utilities.Parser;
  */
 public class ToDo extends Task {
 
-    public final String raw;
+    public final String rawInput;
 
     /**
      * Instantiates a new To do.
@@ -17,20 +17,20 @@ public class ToDo extends Task {
      */
     public ToDo(String name, boolean done) {
         super(name, done);
-        raw = name;
+        rawInput = name;
     }
 
     @Override
     public void add() {
-        message_add = Parser.add + Parser.todoUnmarked_spaced + task_name;
+        messageAdd = Parser.ADDED_THIS_TASK + Parser.TODO_UNMARKED_SPACED + taskName;
     }
 
     @Override
     public void display() {
         if (done) {
-            message_display = Parser.todoMarked + task_name;
+            messageDisplay = Parser.TODO_MARKED + taskName;
         } else {
-            message_display = Parser.todoUnmarked + task_name;
+            messageDisplay = Parser.TODO_UNMARKED + taskName;
         }
 
     }
@@ -38,20 +38,20 @@ public class ToDo extends Task {
     @Override
     public void delete() {
         if (done)
-            message_delete = Parser.delete + Parser.todoMarked_spaced + task_name;
+            messageDelete = Parser.REMOVED_THIS_TASK + Parser.TODO_MARKED_SPACED + taskName;
         else
-            message_delete = Parser.delete + Parser.todoUnmarked_spaced + task_name;
+            messageDelete = Parser.REMOVED_THIS_TASK + Parser.TODO_UNMARKED_SPACED + taskName;
     }
 
     @Override
     public void marked() {
-        message_marked = Parser.mark + Parser.todoMarked_spaced + task_name;
+        messageMarked = Parser.MARKED_THIS_TASK_AS_DONE + Parser.TODO_MARKED_SPACED + taskName;
         done = true;
     }
 
     @Override
     public void unmarked() {
-        message_unmarked = Parser.unmark + Parser.todoUnmarked_spaced + task_name;
+        messageUnmarked = Parser.MARKED_THIS_TASK_AS_NOT_DONE_YET + Parser.TODO_UNMARKED_SPACED + taskName;
         done = false;
     }
 

@@ -45,6 +45,7 @@ class Storage {
     /**
      * Mark at.
      * mark index in memory
+     *
      * @param index the index
      */
     void markAt(int index) {
@@ -55,6 +56,7 @@ class Storage {
     /**
      * Unmark at.
      * unmark index in memory
+     *
      * @param index the index
      */
     void unmarkAt(int index) {
@@ -65,6 +67,7 @@ class Storage {
     /**
      * Detele at.
      * delete record at index
+     *
      * @param index the index
      */
     void deteleAt(int index) {
@@ -89,7 +92,7 @@ class Storage {
      * Write all.
      * write into Txt file
      */
-    void WriteAll() {
+    void writeAll() {
         try {
             clearFile();
             for (String record : records) {

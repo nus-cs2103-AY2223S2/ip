@@ -1,17 +1,15 @@
 package duke.task;
 
-import duke.utilities.Parser;
-
 /**
  * The type Task.
  */
 public abstract class Task {
-    public String task_name;
-    public String message_add;
-    public String message_marked;
-    public String message_unmarked;
-    public String message_display;
-    public String message_delete;
+    public String taskName;
+    public String messageAdd;
+    public String messageMarked;
+    public String messageUnmarked;
+    public String messageDisplay;
+    public String messageDelete;
     public boolean done;
 
     /**
@@ -21,12 +19,12 @@ public abstract class Task {
      * @param done the done
      */
     Task(String name, boolean done) {
-        this.task_name = name;
+        this.taskName = name;
         this.done = done;
-        this.message_add = "";
-        this.message_marked = "";
-        this.message_unmarked = "";
-        this.message_delete = "";
+        this.messageAdd = "";
+        this.messageMarked = "";
+        this.messageUnmarked = "";
+        this.messageDelete = "";
     }
 
     /**

@@ -14,7 +14,7 @@ public class DateTranslator {
     /**
      * The Raw input.
      */
-    String raw_input;
+    String rawInput;
     /**
      * The Time.
      */
@@ -23,10 +23,10 @@ public class DateTranslator {
     /**
      * Instantiates a new Date translator.
      *
-     * @param raw_input the raw input
+     * @param rawInput the raw input
      */
-    public DateTranslator(String raw_input) {
-        this.raw_input = raw_input;
+    public DateTranslator(String rawInput) {
+        this.rawInput = rawInput;
         convert();
     }
 
@@ -48,7 +48,7 @@ public class DateTranslator {
     private void convert() {
         //example input = return book /by 2/12/2019 1800
         String[] tokens;
-        tokens = raw_input.split("/");
+        tokens = rawInput.split("/");
         // 2/12/2019 1800 format
         if (tokens.length > 2) {
             //return book |by 2|12| 2019 1800

@@ -8,7 +8,7 @@ import duke.utilities.Parser;
  */
 public class Deadlines extends Task {
 
-    public final String raw;
+    public final String rawInput;
     String endDate;
     DateTranslator dateTranslator;
 
@@ -20,17 +20,17 @@ public class Deadlines extends Task {
      */
     public Deadlines(String name, boolean done) {
         super(name, done);
-        raw = name;
+        rawInput = name;
         //dateTranslator = new duke.utilities.DateTranslator(raw);
         extract();
     }
 
     private void extract() {
         try {
-            String[] tokens = task_name.split("/");
-            task_name = tokens[0];
+            String[] tokens = taskName.split("/");
+            taskName = tokens[0];
 
-            if (!DateTranslator.is_date(raw)) {
+            if (!DateTranslator.is_date(rawInput)) {
 
                 String[] date = tokens[1].split(" ");
                 StringBuilder temp = new StringBuilder("(" + date[0] + ": ");
@@ -47,7 +47,7 @@ public class Deadlines extends Task {
 
             } else {
 
-                dateTranslator = new DateTranslator(raw);
+                dateTranslator = new DateTranslator(rawInput);
                 endDate = dateTranslator.output;
                 System.out.println(endDate);
             }
@@ -59,34 +59,34 @@ public class Deadlines extends Task {
 
     @Override
     public void add() {
-        message_add = Parser.add + Parser.deadlineUnmarked_spaced + task_name + endDate;
+        messageAdd = Parser.ADDED_THIS_TASK + Parser.DEADLINE_UNMARKED_SPACED + taskName + endDate;
     }
 
     @Override
     public void display() {
         if (done)
-            message_display = Parser.deadlinedoMarked + task_name + endDate;
+            messageDisplay = Parser.DEADLINE_MARKED + taskName + endDate;
         else
-            message_display = Parser.deadlineUnmarked + task_name + endDate;
+            messageDisplay = Parser.DEADLINE_UNMARKED + taskName + endDate;
     }
 
     @Override
     public void delete() {
         if (done)
-            message_delete = Parser.delete + Parser.deadlineMarked_spaced + task_name + endDate;
+            messageDelete = Parser.REMOVED_THIS_TASK + Parser.DEADLINE_MARKED_SPACED + taskName + endDate;
         else
-            message_delete = Parser.delete + Parser.deadlineUnmarked_spaced + task_name + endDate;
+            messageDelete = Parser.REMOVED_THIS_TASK + Parser.DEADLINE_UNMARKED_SPACED + taskName + endDate;
     }
 
     @Override
     public void marked() {
-        message_marked = Parser.mark + Parser.deadlineMarked_spaced + task_name + endDate;
+        messageMarked = Parser.MARKED_THIS_TASK_AS_DONE + Parser.DEADLINE_MARKED_SPACED + taskName + endDate;
         done = true;
     }
 
     @Override
     public void unmarked() {
-        message_unmarked = Parser.unmark + Parser.deadlineUnmarked_spaced + task_name + endDate;
+        messageUnmarked = Parser.MARKED_THIS_TASK_AS_NOT_DONE_YET + Parser.DEADLINE_UNMARKED_SPACED + taskName + endDate;
         done = false;
     }
 }

@@ -17,7 +17,7 @@ class DateTranslatorTest {
      * Identify date format 1.
      */
     @Test
-    void identify_dateFormat1() {
+    void identifyDateFormat1() {
         assertTrue(DateTranslator.is_date("return book /by 2/12/2019 1800"));
         assertTrue(DateTranslator.is_date("return book /by 2/12/2019"));
         assertTrue(DateTranslator.is_date("return book /by 2019/2/12"));
@@ -29,7 +29,7 @@ class DateTranslatorTest {
      * Identify date format 2.
      */
     @Test
-    void identify_dateFormat2() {
+    void identifyDateFormat2() {
         assertTrue(DateTranslator.is_date("return book /by 2019-11-12"));
         assertTrue(DateTranslator.is_date("return book /by 2019-11-12 1800"));
         assertFalse(DateTranslator.is_date("return book /by 2019-11"));
@@ -40,7 +40,7 @@ class DateTranslatorTest {
      * Identify wrong format.
      */
     @Test
-    void identify_wrongFormat() {
+    void identifyWrongFormat() {
         assertFalse(DateTranslator.is_date("return book /by dance"));
         assertFalse(DateTranslator.is_date("return book /by 2019"));
         assertFalse(DateTranslator.is_date("return book /by "));
