@@ -30,6 +30,12 @@ public class TaskTest {
     }
 
     @Test
+    public void testContains() {
+        Task task = new Task("Finish homework");
+        assertTrue(task.contains("homework"));
+    }
+
+    @Test
     public void testTaskToString() {
         Task task = new Task("Finish homework");
         assertEquals("[ ] Finish homework", task.toString());

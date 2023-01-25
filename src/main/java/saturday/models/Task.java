@@ -25,6 +25,10 @@ public class Task implements Serializable {
 
     public void unMark() { this.done = false; }
 
+    public boolean contains(String query) {
+        return this.description.contains(query);
+    }
+
     @Override
     public String toString() {
         String checkbox = "[ ] ";

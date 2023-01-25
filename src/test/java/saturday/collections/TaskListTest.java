@@ -77,6 +77,21 @@ public class TaskListTest {
     }
 
     @Test
+    public void testFind() {
+        setUp();
+        taskList.add(new ToDo("Test Task 1"));
+        taskList.add(new ToDo("Test Task 2"));
+        Task queryTask = new ToDo("Test Task 3");
+        taskList.add(queryTask);
+
+        TaskList expectedTaskList = new TaskList();
+        expectedTaskList.add(queryTask);
+
+        TaskList actualTaskList = taskList.find("3");
+        assertEquals(expectedTaskList, actualTaskList);
+    }
+
+    @Test
     public void testToString() {
         setUp();
         taskList.add(new ToDo("Test Task 1"));

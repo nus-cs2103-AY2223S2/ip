@@ -56,12 +56,24 @@ public class TaskList extends ArrayList<Task> {
         return taskListOnDate;
     }
 
+    public TaskList find(String query) {
+        TaskList queriedTaskList = new TaskList();
+        Iterator<Task> iterator = this.iterator();
+        while (iterator.hasNext()) {
+            Task task = iterator.next();
+            if (task.contains(query)) {
+                queriedTaskList.add(task);
+            }
+        }
+        return queriedTaskList;
+    }
+
     @Override
-    public Task get(int i) { return super.get(i-1); }
+    public Task get(int i) { return super.get(i - 1); }
 
     @Override
     public Task remove(int i) {
-        Task removedTask = super.remove(i-1);
+        Task removedTask = super.remove(i - 1);
         return removedTask;
     }
 
@@ -71,7 +83,7 @@ public class TaskList extends ArrayList<Task> {
         int i = 1;
         for (Task task : this) {
             if (i == size()) {
-                sb.append(i+".").append(task).append("\t");
+                sb.append(i + ".").append(task).append("\t");
             } else {
                 sb.append(i + ".").append(task).append("\n\t");
                 i++;
