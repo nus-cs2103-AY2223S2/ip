@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.Iterator;
 
 public class TaskList implements Iterable<Task> {
-    public ArrayList<Task> taskList;
+    private ArrayList<Task> taskList;
 
     public TaskList() {
         this.taskList = new ArrayList<Task>();

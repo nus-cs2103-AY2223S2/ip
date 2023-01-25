@@ -105,7 +105,8 @@ public class Parser {
         try {
             Deadline newTask = Deadline.parseDeadlineCommand(stringStream);
             taskList.add(newTask);
-            String output = "I've added this task:\n" + newTask.toString() + "\n" + "You now have " + taskList.size() + " tasks in the list";
+            String output = "I've added this task:\n" + newTask.toString()
+                    + "\n" + "You now have " + taskList.size() + " tasks in the list";
             ui.showMessage(output);
         } catch (DukeException e) {
             ui.showMessage(e.getMessage());
@@ -134,7 +135,8 @@ public class Parser {
         try {
             ToDo newTask = ToDo.parseToDoCommand(stringStream);
             taskList.add(newTask);
-            String output = "I've added this task:\n" + newTask.toString() + "\n" + "You now have " + taskList.size() + " tasks in the list";
+            String output = "I've added this task:\n" + newTask.toString()
+                    + "\n" + "You now have " + taskList.size() + " tasks in the list";
             ui.showMessage(output);
         } catch (DukeException e) {
             ui.showMessage(e.getMessage());
