@@ -2,8 +2,8 @@
  * Represents an event task.
  */
 public class Events extends Task {
-    private String begin;
-    private String end;
+    private MaybeDate begin;
+    private MaybeDate end;
 
     protected Events(boolean status, String[] content) throws DukeException{
         super(status, content[0]);
@@ -18,8 +18,8 @@ public class Events extends Task {
                     "The description, [M] cannot be empty.");
         }
 
-        this.begin = begins[1];
-        this.end = ends[1];
+        this.begin = Parser.parseDate(begins[1]);
+        this.end = Parser.parseDate(ends[1]);
     }
 
     @Override

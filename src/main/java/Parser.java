@@ -61,14 +61,15 @@ public class Parser {
 
     private static DateTimeFormatter inputFormatter = DateTimeFormatter.ofPattern("dd-MM-yyyy HHmm");
 
-    protected static LocalDateTime parseDate(String s) throws DukeException {
+    protected static MaybeDate parseDate(String s) throws DukeException {
+        String temp = s;
         if (s.length() == 10) {
-            s = s + " 2359";
+            temp = temp + " 2359";
         }
         try {
-            return LocalDateTime.parse(s, inputFormatter);
+            return new MaybeDate(LocalDateTime.parse(temp, inputFormatter));
         } catch (DateTimeParseException e) {
-            throw new DukeException("Invalid date input.");
+            return new MaybeDate(s);
         }
     }
 

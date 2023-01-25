@@ -2,7 +2,7 @@
  * Represent a task with a deadline.
  */
 class Deadlines extends Task {
-    private String end;
+    private MaybeDate end;
 
     protected Deadlines(boolean status, String[] content) throws DukeException{
         super(status, content[0]);
@@ -17,7 +17,7 @@ class Deadlines extends Task {
             throw new DukeException("OOPS!!! Command should be in the format 'deadline [M] /by [M]'\n" +
                     "The description, [M] cannot be empty.");
         }
-        this.end = ends[1];
+        this.end = Parser.parseDate(ends[1]);
     }
 
     /**
