@@ -15,7 +15,8 @@ public class Duke {
         String greeting = "Hello! I'm Alpha Beast What can I do for you?";
         greeting(greeting);
         TaskList manager = new TaskList("/Users/s.f/ip/src/Data/duke.txt");
-
+        //testing branches
+        ///committing at new branch
         loop:
         while (true) {
             String input = sc.nextLine();
