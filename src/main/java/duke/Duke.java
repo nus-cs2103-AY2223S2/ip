@@ -33,7 +33,6 @@ public class Duke {
         String command = input.split(" ")[0].toLowerCase();
 
         if (command.equals("bye")) {
-          bye();
           break;
         }
 
