@@ -1,6 +1,6 @@
 package duke.storage;
 
-import exception.DukeException;
+import duke.exception.DukeException;
 import duke.task.Task;
 
 import java.io.File;

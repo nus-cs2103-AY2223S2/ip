@@ -5,7 +5,7 @@ import duke.parser.Parser;
 import duke.storage.StorageList;
 import duke.task.TaskList;
 import duke.ui.Ui;
-import exception.DukeException;
+import duke.exception.DukeException;
 
 public class Duke {
 
@@ -38,7 +38,7 @@ public class Duke {
                 ui.showLoadingError("Sorry i did not understand that command!");
             } catch (ArrayIndexOutOfBoundsException e) {
                 ui.showLoadingError("Pls fill in the command");
-            }finally {
+            } finally {
                 storage.updateStorage();
                 ui.showLine();
             }
