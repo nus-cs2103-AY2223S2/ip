@@ -6,6 +6,9 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.util.Scanner;
 
+/**
+ * Represents a file for storing tasks and handles all file I/O-related logic.
+ */
 public class Storage {
     private String filepath;
     private File f;
@@ -24,6 +27,12 @@ public class Storage {
         }
     }
 
+    /**
+     * Loads existing task data from local file.
+     *
+     * @param taskList List of tasks.
+     * @param screen User interface.
+     */
     public void loadData(TaskList taskList, Ui screen) {
         Ui.displayMessage("Initialising data (if any)...... ");
         try {
@@ -40,6 +49,11 @@ public class Storage {
         }
     }
 
+    /**
+     * Updates the file when tasks are added, deleted or modified.
+     *
+     * @param tasks List of tasks.
+     */
     public void saveChanges(TaskList tasks) {
         try {
             FileWriter fw = new FileWriter(f);

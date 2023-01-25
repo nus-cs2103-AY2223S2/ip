@@ -3,6 +3,9 @@ package peppa;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
+/**
+ * Represents a deadline task. Deadlines are given by the user in the format deadline {desc} /by {dateDue} {timeDue}.
+ */
 public class Deadline extends Task {
     private LocalDateTime dueDate;
 

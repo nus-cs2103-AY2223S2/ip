@@ -2,6 +2,9 @@ package peppa.commands;
 
 import peppa.*;
 
+/**
+ * Represents a mark task as done command.
+ */
 public class MarkCommand implements Command {
     public static final String COMMAND_WORD = "mark";
     private int taskIndex;

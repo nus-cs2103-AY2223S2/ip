@@ -1,5 +1,8 @@
 package peppa;
 
+/**
+ * Represents a todo task. Todos are given by the user in the format todo {desc}.
+ */
 public class Todo extends Task {
     public Todo(String name) {
         super(name);

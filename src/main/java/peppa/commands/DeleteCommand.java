@@ -2,6 +2,9 @@ package peppa.commands;
 
 import peppa.*;
 
+/**
+ * Represents a delete task command that removes the task from the tasklist.
+ */
 public class DeleteCommand implements Command {
     public static final String COMMAND_WORD = "delete";
     private int taskIndex;

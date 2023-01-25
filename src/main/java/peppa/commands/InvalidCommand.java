@@ -4,6 +4,9 @@ import peppa.Storage;
 import peppa.TaskList;
 import peppa.Ui;
 
+/**
+ * Represents an invalid command that the chatbot fails to recognise.
+ */
 public class InvalidCommand implements Command {
     public InvalidCommand() {
 

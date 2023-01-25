@@ -16,6 +16,11 @@ public abstract class Task {
         this.done = value;
     }
 
+    /**
+     * Returns an icon that represents if the task is done.
+     *
+     * @return "X" if task is completed and " " otherwise.
+     */
     public String getStatusIcon() {
         return (done ? "X" : " ");
     }

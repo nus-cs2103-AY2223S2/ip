@@ -2,6 +2,9 @@ package peppa.commands;
 
 import peppa.*;
 
+/**
+ * Represents a todo command that adds the todo to the tasklist.
+ */
 public class TodoCommand implements Command {
     public static final String COMMAND_WORD = "todo";
     public static final String ABBREVIATION = "T";
@@ -26,5 +29,14 @@ public class TodoCommand implements Command {
     @Override
     public boolean isExit() {
         return false;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (obj instanceof TodoCommand) {
+            return this.taskDescription.equals(((TodoCommand) obj).taskDescription);
+        } else {
+            return false;
+        }
     }
 }

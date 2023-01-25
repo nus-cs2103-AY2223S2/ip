@@ -8,6 +8,9 @@ public class Peppa {
     private TaskList tasks;
     private Storage storage;
 
+    /**
+     * Starts the chatbot interface.
+     */
     public void run() {
         storage.loadData(tasks, screen);
         screen.greetUser();
