@@ -3,16 +3,39 @@ package duke.utilities;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
+/**
+ * The type Date translator.
+ */
 public class DateTranslator {
+    /**
+     * The Output.
+     */
     public String output;
+    /**
+     * The Raw input.
+     */
     String raw_input;
+    /**
+     * The Time.
+     */
     LocalDateTime time;
 
+    /**
+     * Instantiates a new Date translator.
+     *
+     * @param raw_input the raw input
+     */
     public DateTranslator(String raw_input) {
         this.raw_input = raw_input;
         convert();
     }
 
+    /**
+     * Is date boolean.
+     *
+     * @param raw_input the raw input
+     * @return the boolean
+     */
     public static boolean is_date(String raw_input) {
         //todo recognise as actual date.
         String[] token1 = raw_input.split("/");
@@ -21,7 +44,8 @@ public class DateTranslator {
         return token1.length > 2 || token2.length == 3;
     }
 
-    void convert() {
+
+    private void convert() {
         //example input = return book /by 2/12/2019 1800
         String[] tokens;
         tokens = raw_input.split("/");

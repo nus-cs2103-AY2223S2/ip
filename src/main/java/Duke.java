@@ -5,10 +5,21 @@ import duke.task.ToDo;
 
 import java.util.Scanner;
 
+/**
+ * The type Duke.
+ */
 public class Duke {
 
+    /**
+     * The Scanner Class.
+     */
     static Scanner sc = new Scanner(System.in);
 
+    /**
+     * The entry point of application.
+     *
+     * @param args the input arguments
+     */
     public static void main(String[] args) {
 
         String greeting = "Hello! I'm Alpha Beast What can I do for you?";
@@ -67,10 +78,20 @@ public class Duke {
         }
     }
 
+    /**
+     * Greeting.
+     *
+     * @param message the message
+     */
     static void greeting(String message) {
         System.out.println(message);
     }
 
+    /**
+     * Echo.
+     *
+     * @param input the input
+     */
     static void echo(String input) {
         if (input.equals("bye"))
             System.out.println("Bye. Hope to see you again soon!\n");

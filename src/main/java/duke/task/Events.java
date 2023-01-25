@@ -2,19 +2,28 @@ package duke.task;
 
 import duke.utilities.Parser;
 
+/**
+ * The type Events.
+ */
 public class Events extends Task {
 
     public final String raw;
     String start;
     String end;
 
+    /**
+     * Instantiates a new Events.
+     *
+     * @param name the name
+     * @param done the done
+     */
     public Events(String name, boolean done) {
         super(name, done);
         raw = name;
         extract();
     }
 
-    void extract() {
+    private void extract() {
         try {
             String[] tokens = task_name.split("/");
             String[] startdate = tokens[1].split(" ");

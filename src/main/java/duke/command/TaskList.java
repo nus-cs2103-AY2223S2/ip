@@ -9,10 +9,24 @@ import duke.utilities.Parser;
 
 import java.util.ArrayList;
 
+/**
+ * The type Task list.
+ */
 public class TaskList {
+    /**
+     * The List of tasks.
+     */
     ArrayList<Task> ListOfTasks;
+    /**
+     * The Storage.
+     */
     Storage storage;
 
+    /**
+     * Instantiates a new Task list.
+     *
+     * @param path the path
+     */
     public TaskList(String path) {
         //default size
         ListOfTasks = new ArrayList<>(100);
@@ -20,6 +34,11 @@ public class TaskList {
         init();
     }
 
+    /**
+     * Add.
+     * add Task
+     * @param input the input
+     */
     public void add(Task input) {
         try {
             if (input.task_name.equals("") || input.task_name.equals(" ")) {
@@ -48,6 +67,10 @@ public class TaskList {
         }
     }
 
+    /**
+     * Display all.
+     * Print out all Tasks in memory
+     */
     public void displayAll() {
         System.out.println(Parser.displaylist);
         for (int x = 0; x < ListOfTasks.size(); x++) {
@@ -56,6 +79,11 @@ public class TaskList {
         }
     }
 
+    /**
+     * Mark.
+     * Marks task at given index
+     * @param index the index
+     */
     public void mark(int index) {
         try {
             Task temp = ListOfTasks.get(index);
@@ -67,6 +95,11 @@ public class TaskList {
         }
     }
 
+    /**
+     * Unmark.
+     * unmarked task at given index
+     * @param index the index
+     */
     public void unmark(int index) {
         try {
             Task temp = ListOfTasks.get(index);
@@ -78,6 +111,11 @@ public class TaskList {
         }
     }
 
+    /**
+     * Delete.
+     * delete task at given index
+     * @param index the index
+     */
     public void delete(int index) {
         try {
             Task temp = ListOfTasks.get(index);
@@ -90,6 +128,10 @@ public class TaskList {
         }
     }
 
+    /**
+     * Init.
+     * Init and Load in Tasks from Txt file
+     */
     void init() {
         storage.read();
         if (!storage.records.isEmpty()) {
@@ -107,6 +149,9 @@ public class TaskList {
         }
     }
 
+    /**
+     * File write all.
+     */
     public void file_writeAll() {
         storage.WriteAll();
     }

@@ -1,11 +1,18 @@
-package duke.task;
+package duke.test;
 
+import duke.task.ToDo;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
+/**
+ * The type To do test.
+ */
 class ToDoTest {
 
+    /**
+     * Test 1:Add function.
+     */
     @Test
     void add() {
         ToDo tdo = new ToDo("borrow book", false);
@@ -15,6 +22,9 @@ class ToDoTest {
 
     }
 
+    /**
+     * Test2: Display function.
+     */
     @Test
     void display() {
         ToDo tdo = new ToDo("borrow book", false);
@@ -22,6 +32,9 @@ class ToDoTest {
         assertEquals("[T][ ]borrow book", tdo.message_display);
     }
 
+    /**
+     * Test3: Delete function.
+     */
     @Test
     void delete() {
         ToDo tdo = new ToDo("borrow book", false);
@@ -30,6 +43,9 @@ class ToDoTest {
                 " [T][ ] borrow book", tdo.message_delete);
     }
 
+    /**
+     * Test 4: Marked function.
+     */
     @Test
     void marked() {
         ToDo tdo = new ToDo("borrow book", false);
@@ -38,6 +54,9 @@ class ToDoTest {
                 "  [T][X] borrow book", tdo.message_marked);
     }
 
+    /**
+     * Test 5: Unmarked function.
+     */
     @Test
     void unmarked() {
         ToDo tdo = new ToDo("borrow book", false);

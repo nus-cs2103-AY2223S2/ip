@@ -2,9 +2,19 @@ package duke.task;
 
 import duke.utilities.Parser;
 
+/**
+ * The type To do.
+ */
 public class ToDo extends Task {
+
     public final String raw;
 
+    /**
+     * Instantiates a new To do.
+     *
+     * @param name the name
+     * @param done the done
+     */
     public ToDo(String name, boolean done) {
         super(name, done);
         raw = name;

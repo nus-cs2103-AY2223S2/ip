@@ -1,5 +1,8 @@
 package duke.utilities;
 
+/**
+ * The type Parser.
+ */
 public class Parser {
     public static final String add = "Got it. I've added this task:\n";
     public static final String mark = "Nice! I've marked this task as done:\n";
@@ -20,6 +23,5 @@ public class Parser {
     public static final String eventUnmarked = "[E][ ] ";
     public static final String eventMarked_spaced = "  [E][X] ";
     public static final String eventUnmarked_spaced = " [E][ ] ";
-
 
 }

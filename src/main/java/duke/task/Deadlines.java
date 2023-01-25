@@ -3,12 +3,21 @@ package duke.task;
 import duke.utilities.DateTranslator;
 import duke.utilities.Parser;
 
+/**
+ * The type Deadlines.
+ */
 public class Deadlines extends Task {
 
     public final String raw;
     String endDate;
     DateTranslator dateTranslator;
 
+    /**
+     * Instantiates a new Deadlines.
+     *
+     * @param name the name
+     * @param done the done
+     */
     public Deadlines(String name, boolean done) {
         super(name, done);
         raw = name;
@@ -16,7 +25,7 @@ public class Deadlines extends Task {
         extract();
     }
 
-    void extract() {
+    private void extract() {
         try {
             String[] tokens = task_name.split("/");
             task_name = tokens[0];

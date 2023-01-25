@@ -7,12 +7,20 @@ import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.Scanner;
 
+/**
+ * The type Storage.
+ */
 class Storage {
     FileWriter writer;
     Scanner reader;
     ArrayList<String> records;
     String path;
 
+    /**
+     * Instantiates a new Storage.
+     *
+     * @param DES the des
+     */
     Storage(String DES) {
         try {
             writer = new FileWriter(DES, true);
@@ -25,28 +33,49 @@ class Storage {
         }
     }
 
-    //write line by line
+    /**
+     * Write inputs into memory.
+     *
+     * @param input the input
+     */
     void write(String input) {
-        //writer.write(input);
         records.add(input);
-        //writer.close();
     }
 
+    /**
+     * Mark at.
+     * mark index in memory
+     * @param index the index
+     */
     void markAt(int index) {
         String str = records.get(index).replace("false", "true");
         records.set(index, str);
     }
 
+    /**
+     * Unmark at.
+     * unmark index in memory
+     * @param index the index
+     */
     void unmarkAt(int index) {
         String str = records.get(index).replace("true", "false");
         records.set(index, str);
     }
 
+    /**
+     * Detele at.
+     * delete record at index
+     * @param index the index
+     */
     void deteleAt(int index) {
         records.remove(index);
     }
 
-    //read all
+
+    /**
+     * Read.
+     * Read Txt file
+     */
     void read() {
         while (reader.hasNextLine()) {
             String data = reader.nextLine();
@@ -56,6 +85,10 @@ class Storage {
 
     }
 
+    /**
+     * Write all.
+     * write into Txt file
+     */
     void WriteAll() {
         try {
             clearFile();
@@ -71,7 +104,11 @@ class Storage {
         }
     }
 
-    //transfer from records to File
+    /**
+     * Clear file.
+     *
+     * @throws IOException the io exception
+     */
     void clearFile() throws IOException {
         FileWriter f1 = new FileWriter("/Users/s.f/ip/src/Data/duke.txt", false);
         PrintWriter p1 = new PrintWriter(f1, false);
