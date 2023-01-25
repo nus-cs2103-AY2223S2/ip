@@ -1,6 +1,6 @@
 package utilities;
 
-public class UI {
+public class Ui {
     public static void divider() {
         System.out.println("\t_______________________________________________________");
     }
@@ -11,9 +11,9 @@ public class UI {
         System.out.println("\t" + text);
     }
     public static void greet() {
-        UI.divider();
-        UI.output("Hello! I'm Saturday\n\tWhat can I do for you?");
-        UI.divider();
-        UI.newline();
+        Ui.divider();
+        Ui.output("Hello! I'm Saturday\n\tWhat can I do for you?");
+        Ui.divider();
+        Ui.newline();
     }
 }

@@ -1,5 +1,6 @@
+package utilities;
+
 import collections.TaskList;
-import utilities.UI;
 
 import java.io.*;
 import java.nio.file.Files;
@@ -19,7 +20,7 @@ public class Storage {
             try {
                 Files.createDirectory(dataDirPath);
             } catch (IOException e) {
-                UI.output(e.getMessage());
+                Ui.output(e.getMessage());
             }
         }
         Path filePath = Paths.get(System.getProperty("user.dir"), "data", "task_list.txt");
@@ -27,7 +28,7 @@ public class Storage {
             try {
                 Files.createFile(filePath);
             } catch (IOException e) {
-                UI.output(e.getMessage());
+                Ui.output(e.getMessage());
             }
         }
         return filePath.toString();
@@ -41,7 +42,7 @@ public class Storage {
             out.close();
             fileOut.close();
         } catch (IOException e) {
-            UI.output(e.getMessage());
+            Ui.output(e.getMessage());
         }
     }
 

@@ -1,7 +1,7 @@
 import collections.TaskList;
 import exceptions.SaturdayException;
-import models.Task;
-import utilities.UI;
+import utilities.Storage;
+import utilities.Ui;
 
 import java.io.IOException;
 import java.nio.file.Files;
@@ -21,21 +21,21 @@ public class Saturday {
     }
 
     public void run() {
-        UI.greet();
+        Ui.greet();
 
         Scanner scanner = new Scanner(System.in);
         while (isActive) {
             String input = scanner.nextLine();
-            UI.divider();
+            Ui.divider();
             try {
                 Command command = Command.getCommand(input);
                 command.execute(taskList, input);
                 storage.saveTaskList(taskList);
             } catch (SaturdayException e) {
-                UI.output(e.getMessage());
+                Ui.output(e.getMessage());
             }
-            UI.divider();
-            UI.newline();
+            Ui.divider();
+            Ui.newline();
         }
     }
     public static void main(String[] args) {
@@ -44,7 +44,7 @@ public class Saturday {
             try {
                 Files.createDirectory(dataDirPath);
             } catch (IOException e) {
-                UI.output(e.getMessage());
+                Ui.output(e.getMessage());
             }
         }
         Path filePath = Paths.get(System.getProperty("user.dir"), "data", "task_list.txt");
@@ -52,7 +52,7 @@ public class Saturday {
             try {
                 Files.createFile(filePath);
             } catch (IOException e) {
-                UI.output(e.getMessage());
+                Ui.output(e.getMessage());
             }
         }
         new Saturday(filePath.toString()).run();
@@ -60,7 +60,7 @@ public class Saturday {
 
     public static void exit() {
         isActive = false;
-        UI.output("Bye. Hope to see you again soon!");
+        Ui.output("Bye. Hope to see you again soon!");
     }
 
 }

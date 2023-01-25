@@ -31,7 +31,6 @@ public class DateTimeParser {
             "hh:mm a dd.MM.yyyy",
             "hh:mm a dd MM yyyy"
     };
-    private static final DateTimeFormatter PRINT_FORMATTER = DateTimeFormatter.ofPattern("MMM dd yyyy hh:mm a");
 
     public static TemporalAccessor parseDate(String date) {
         for (String format : DATE_TIME_FORMATS) {

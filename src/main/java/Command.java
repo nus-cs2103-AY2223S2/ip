@@ -5,7 +5,7 @@ import models.Event;
 import models.Task;
 import models.ToDo;
 import utilities.DateTimeParser;
-import utilities.UI;
+import utilities.Ui;
 
 public enum Command {
     TODO("todo") {
@@ -16,7 +16,7 @@ public enum Command {
                 String description = args.substring(args.indexOf(" ") + 1);
                 ToDo task = new ToDo(description);
                 taskList.add(task);
-                UI.output("Got it. I've added this task:\n\t " + task + "\n\tNow you have " + taskList.size() + " tasks in the list.");
+                Ui.output("Got it. I've added this task:\n\t " + task + "\n\tNow you have " + taskList.size() + " tasks in the list.");
             } else {
                 throw new SaturdayException("OOPS!!! The description of a todo cannot be empty");
             }
@@ -32,7 +32,7 @@ public enum Command {
                 String deadline = args.substring(by + 4);
                 Deadline task = new Deadline(description, deadline);
                 taskList.add(task);
-                UI.output("Got it. I've added this task:\n\t " + task + "\n\tNow you have " + taskList.size() + " tasks in the list.");
+                Ui.output("Got it. I've added this task:\n\t " + task + "\n\tNow you have " + taskList.size() + " tasks in the list.");
             } else {
                 throw new SaturdayException("OOPS!!! The deadline cannot be empty (use /by)");
             }
@@ -50,7 +50,7 @@ public enum Command {
                 String end = args.substring(to + 4);
                 Event task = new Event(description, start, end);
                 taskList.add(task);
-                UI.output("Got it. I've added this task:\n\t " + task + "\n\tNow you have " + taskList.size() + " tasks in the list.");
+                Ui.output("Got it. I've added this task:\n\t " + task + "\n\tNow you have " + taskList.size() + " tasks in the list.");
             } else {
                 throw new SaturdayException("OOPS!!! The timeframe cannot be empty (use /from and /to)");
             }
@@ -61,11 +61,11 @@ public enum Command {
         public void execute(TaskList taskList, String args) {
             int on = args.indexOf("/on");
             if (args.equals("list")) {
-                UI.output("Here are the tasks in your list:\n\t" + taskList.toString());
+                Ui.output("Here are the tasks in your list:\n\t" + taskList.toString());
             } else if (on != -1) {
                 String date = args.substring(on + 4);
                 TaskList taskListOnDate = taskList.getTaskListOnDate(date);
-                UI.output("Here are the tasks on: " + DateTimeParser.printDateTime(DateTimeParser.parseDate(date)) + "\n\t" + taskListOnDate.toString());
+                Ui.output("Here are the tasks on: " + DateTimeParser.printDateTime(DateTimeParser.parseDate(date)) + "\n\t" + taskListOnDate.toString());
             } else {
                 throw new SaturdayException("OOPS!!! Input a valid date to check your list against");
             }
@@ -81,9 +81,9 @@ public enum Command {
                     int i = Integer.valueOf(number);
                     try {
                         taskList.mark(i);
-                        UI.output("Nice! I've marked this task as done:\n\t  " + taskList.get(i));
+                        Ui.output("Nice! I've marked this task as done:\n\t  " + taskList.get(i));
                     } catch (IndexOutOfBoundsException e) {
-                        UI.output("OOPS!!! There's no such task in your list");
+                        Ui.output("OOPS!!! There's no such task in your list");
                     }
                 }
             } else {
@@ -101,9 +101,9 @@ public enum Command {
                     int i = Integer.valueOf(number);
                     try {
                         taskList.unMark(i);
-                        UI.output("OK, I've marked this task as not done yet:\n\t  " + taskList.get(i));
+                        Ui.output("OK, I've marked this task as not done yet:\n\t  " + taskList.get(i));
                     } catch (IndexOutOfBoundsException e) {
-                        UI.output("OOPS!!! There's no such task in your list");
+                        Ui.output("OOPS!!! There's no such task in your list");
                     }
                 }
             } else {
@@ -121,9 +121,9 @@ public enum Command {
                     int i = Integer.valueOf(number);
                     try {
                         Task removedTask = taskList.remove(i);
-                        UI.output("Noted. I've removed this task:\n\t  " + removedTask + "\n\tNow you have " + taskList.size() + " tasks in the list.");
+                        Ui.output("Noted. I've removed this task:\n\t  " + removedTask + "\n\tNow you have " + taskList.size() + " tasks in the list.");
                     } catch (IndexOutOfBoundsException e) {
-                        UI.output("OOPS!!! There's no such task in your list");
+                        Ui.output("OOPS!!! There's no such task in your list");
                     }
                 }
             } else {
