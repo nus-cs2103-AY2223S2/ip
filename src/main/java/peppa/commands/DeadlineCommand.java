@@ -1,8 +1,13 @@
 package peppa.commands;
 
-import peppa.*;
-
 import java.time.LocalDateTime;
+
+import peppa.Deadline;
+import peppa.PeppaException;
+import peppa.Storage;
+import peppa.Task;
+import peppa.TaskList;
+import peppa.Ui;
 
 /**
  * Represents a deadline command that adds the deadline to the tasklist.
@@ -31,8 +36,8 @@ public class DeadlineCommand implements Command {
 
     public static String getParameterValue(String command, int start, int end) throws PeppaException {
         if (end < start) {
-            throw new PeppaException("Boink! Peppa could not process the request. " +
-                    "Please ensure that the input is formatted correctly and try again.");
+            throw new PeppaException("Boink! Peppa could not process the request. "
+                    + "Please ensure that the input is formatted correctly and try again.");
         } else {
             return command.substring(start, end);
         }
@@ -48,8 +53,8 @@ public class DeadlineCommand implements Command {
     public static int getParameterIndex(String command) throws PeppaException {
         int idx = command.indexOf("/by");
         if (idx == -1) {
-            throw new PeppaException("Boink! Peppa could not process the request. " +
-                    "Please ensure that the input is formatted correctly and try again.");
+            throw new PeppaException("Boink! Peppa could not process the request. "
+                    + "Please ensure that the input is formatted correctly and try again.");
         } else {
             return idx;
         }

@@ -1,6 +1,10 @@
 package peppa.commands;
 
-import peppa.*;
+import peppa.Storage;
+import peppa.Task;
+import peppa.TaskList;
+import peppa.Todo;
+import peppa.Ui;
 
 /**
  * Represents a todo command that adds the todo to the tasklist.

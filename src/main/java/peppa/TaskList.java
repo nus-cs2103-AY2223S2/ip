@@ -44,7 +44,7 @@ public class TaskList {
      * @param i Index of the task (zero-based).
      * @return Task at position i.
      */
-    public Task retrieveTask(int i)  {
+    public Task retrieveTask(int i) {
         return taskList.get(i);
     }
 }

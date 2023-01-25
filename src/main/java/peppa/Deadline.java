@@ -16,13 +16,13 @@ public class Deadline extends Task {
 
     @Override
     public String toString() {
-        return "[D]" + super.toString() + " (by: " +
-                this.dueDate.format(DateTimeFormatter.ofPattern("MMM dd yyyy',' hh'.'mma")) + ")";
+        return "[D]" + super.toString() + " (by: "
+                + this.dueDate.format(DateTimeFormatter.ofPattern("MMM dd yyyy',' hh'.'mma")) + ")";
     }
 
     @Override
     public String toFormatString() {
-        return "D | " + (super.done ? "1" : "0") + " | " + super.name + " | " +
-                this.dueDate.format(DateTimeFormatter.ofPattern("MMM dd yyyy',' hh'.'mma"));
+        return "D | " + (super.done ? "1" : "0") + " | " + super.name + " | "
+                + this.dueDate.format(DateTimeFormatter.ofPattern("MMM dd yyyy',' hh'.'mma"));
     }
 }
