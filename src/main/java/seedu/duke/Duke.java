@@ -9,13 +9,11 @@ package seedu.duke;
 
 import java.util.Scanner;
 
-
 public class Duke {
 
     private Ui ui;
     private TaskList tasks;
     private Storage storage;
-
 
     public enum Commands {
         bye,
@@ -51,44 +49,44 @@ public class Duke {
 
         ui.welcome();
 
-        while(true) {
+        while (true) {
             description = "";
             input = sc.nextLine();
             Parser userParse = new Parser(input);
             System.out.println("____________________________________________________________");
             try {
                 Commands userCommand = userParse.checkCommand(userParse.command);
-                switch(userCommand) {
-                    case bye:
-                        ui.bye();
-                        break;
-                    case mark:
-                        ui.markDisplay(tasks.mark(userParse), userParse);
-                        break;
-                    case unmark:
-                        ui.unmarkDisplay(tasks.unmark(userParse), userParse);
-                        break;
-                    case list:
-                        ui.list(tasks);
-                        break;
-                    case todo:
-                        tasks.addTodo(description, userParse);
-                        ui.addTodoMessage(tasks);
-                        break;
-                    case deadline:
-                        tasks.addDeadline(description, userParse);
-                        ui.addDeadlineMessage(tasks);
-                        break;
-                    case event:
-                        tasks.addEvent(description, userParse);
-                        ui.addEventMessage(tasks);
-                        break;
-                    case delete:
-                        ui.deleteMessage(tasks, tasks.delete(userParse));
-                        break;
+                switch (userCommand) {
+                case bye:
+                    ui.bye();
+                    break;
+                case mark:
+                    ui.markDisplay(tasks.mark(userParse), userParse);
+                    break;
+                case unmark:
+                    ui.unmarkDisplay(tasks.unmark(userParse), userParse);
+                    break;
+                case list:
+                    ui.list(tasks);
+                    break;
+                case todo:
+                    tasks.addTodo(description, userParse);
+                    ui.addTodoMessage(tasks);
+                    break;
+                case deadline:
+                    tasks.addDeadline(description, userParse);
+                    ui.addDeadlineMessage(tasks);
+                    break;
+                case event:
+                    tasks.addEvent(description, userParse);
+                    ui.addEventMessage(tasks);
+                    break;
+                case delete:
+                    ui.deleteMessage(tasks, tasks.delete(userParse));
+                    break;
                 }
                 storage.write(tasks);
-                if(userCommand.name().equals("bye")) {
+                if (userCommand.name().equals("bye")) {
                     break;
                 }
             } catch (DukeException e) {

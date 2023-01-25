@@ -30,10 +30,10 @@ public class Parser {
 
     public Duke.Commands checkCommand(String command) throws DukeException {
         boolean flag = true;
-        for(Duke.Commands c : Duke.Commands.values()) {
+        for (Duke.Commands c : Duke.Commands.values()) {
             if(command.equals(c.name())) flag = false;
         }
-        if(flag) {
+        if (flag) {
             String message = "____________________________________________________________\n"
                     + "☹ OOPS!!! I'm sorry, but I don't know what that means :-(";
             throw new DukeException(message);
