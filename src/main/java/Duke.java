@@ -1,15 +1,17 @@
 import java.io.FileNotFoundException;
 import java.io.IOException;
-import java.sql.SQLOutput;
+import java.time.format.DateTimeParseException;
 import java.util.Scanner;
 import java.util.ArrayList;
 import java.io.File;
 import java.io.FileWriter;
 import java.util.regex.Pattern;
+import java.time.format.DateTimeFormatter;
 
 public class Duke {
     static String STR = "------------------------------------------------------------";
     static ArrayList<Task> arr = new ArrayList<Task>();
+    static DateTimeFormatter FORMAT = DateTimeFormatter.ofPattern("dd MMM uuuu kk:mm");
 
     public static void main(String[] args) {
         // Introduction
@@ -93,6 +95,8 @@ public class Duke {
                         addTask(arrStr[1], 'D');
                     } catch (ArrayIndexOutOfBoundsException e1) {
                         printResponse("OOPS!!! The description of this deadline is incomplete.");
+                    } catch (DateTimeParseException e2) {
+                        printResponse("OOPS!!! The description of this deadline is incomplete.");
                     } finally {
                         break;
                     }
@@ -102,7 +106,9 @@ public class Duke {
                     try {
                         addTask(arrStr[1], 'E');
                     } catch (ArrayIndexOutOfBoundsException e1) {
-                        printResponse("OOPS!!! The description of this deadline is incomplete.");
+                        printResponse("OOPS!!! The description of this event is incomplete.");
+                    } catch (DateTimeParseException e2) {
+                        printResponse("OOPS!!! The description of this event is incomplete.");
                     } finally {
                         break;
                     }
@@ -140,10 +146,11 @@ public class Duke {
                     arr.add(new Todo(parts[2], Boolean.parseBoolean(parts[1])));
                     break;
                 case "D":
-                    arr.add(new Deadline(parts[2], Boolean.parseBoolean(parts[1]), parts[3]));
+                    arr.add(new Deadline(parts[2], Boolean.parseBoolean(parts[1]), parts[3].substring(4), FORMAT));
                     break;
                 case "E":
-                    arr.add(new Event(parts[2], Boolean.parseBoolean(parts[1]), parts[3], parts[4]));
+                    arr.add(new Event(parts[2], Boolean.parseBoolean(parts[1]), parts[3].substring(6),
+                            parts[4].substring(4), FORMAT));
                     break;
             }
         }
@@ -182,14 +189,14 @@ public class Duke {
                    + " tasks in the list.");
        } else if(type == 'D') {
            String[] strArr = response.split(" /by ", 2);
-           Deadline newTask = new Deadline(strArr[0], strArr[1]);
+           Deadline newTask = new Deadline(strArr[0], strArr[1], FORMAT);
            arr.add(newTask);
            printResponse("Got it. I've added this task: \n" + newTask + "\nNow you have " + arr.size()
                    + " tasks in the list.");
        } else if(type =='E') {
            String[] strArr = response.split(" /from ", 2);
            String[] timings = strArr[1].split(" /to ", 2);
-           Event newTask = new Event(strArr[0], timings[0], timings[1]);
+           Event newTask = new Event(strArr[0], timings[0], timings[1], FORMAT);
            arr.add(newTask);
            printResponse("Got it. I've added this task: \n" + newTask + "\nNow you have " + arr.size()
                    + " tasks in the list.");

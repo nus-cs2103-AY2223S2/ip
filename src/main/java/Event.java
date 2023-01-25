@@ -1,22 +1,28 @@
-public class Event extends Task {
-    protected String to;
-    protected String from;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 
-    public Event(String description, String from, String to) {
+public class Event extends Task {
+    protected LocalDateTime to;
+    protected LocalDateTime from;
+    protected DateTimeFormatter format;
+
+    public Event(String description, String from, String to, DateTimeFormatter format) {
         super(description);
-        this.from = from;
-        this.to = to;
+        this.from = LocalDateTime.parse(from, format);
+        this.to = LocalDateTime.parse(to, format);
+        this.format = format;
     }
 
-    public Event(String description, boolean done, String from, String to) {
+    public Event(String description, boolean done, String from, String to, DateTimeFormatter format) {
         super(description, done);
-        this.from = from;
-        this.to = to;
+        this.from = LocalDateTime.parse(from, format);
+        this.to = LocalDateTime.parse(to, format);
+        this.format = format;
     }
 
     @Override
     public String toString() {
-        return "E | " + super.toString() + " | from: " + from + " | " + "to: " + to;
+        return "E | " + super.toString() + " | from: " + from.format(format) + " | " + "to: " + to.format(format);
     }
 
     @Override
