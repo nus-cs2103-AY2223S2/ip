@@ -37,21 +37,24 @@ public class TaskList {
         Task task;
         if (Dudu.Command.DEADLINE.equals(type)) {
             if (input.trim().length() == 8) {
-                throw new EmptyDescriptionException(type, "Missing task description");
+                throw new EmptyDescriptionException(type,"description", "Missing task description");
             }
             if (!input.contains(" /by ")) {
-                input = input.concat(" /by null");
+                throw new EmptyDescriptionException(type, "date", "Missing end date");
             }
             String[] inputStr = input.substring(9).split(" /by ");
             task = new Deadline(inputStr[0], inputStr[1]);
         } else if (Dudu.Command.TODO.equals(type)) {
             if (input.trim().length() == 4) {
-                throw new EmptyDescriptionException(type, "Missing task description");
+                throw new EmptyDescriptionException(type, "description", "Missing task description");
             }
             task = new Todo(input.substring(5));
         } else {
             if (input.trim().length() == 5) {
-                throw new EmptyDescriptionException(type, "Missing task description");
+                throw new EmptyDescriptionException(type, "description", "Missing task description");
+            }
+            if (!input.contains(" /from ")) {
+                throw new EmptyDescriptionException(type, "date" , "Missing date");
             }
             String[] inputStr = input.substring(6).split(" /from ");
             String[] dateStr = inputStr[1].split(" /to ");
