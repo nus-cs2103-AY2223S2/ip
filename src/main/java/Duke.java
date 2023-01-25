@@ -2,6 +2,7 @@
 import java.sql.Array;
 import java.util.Scanner;
 import java.util.ArrayList;
+import java.io.*;
 public class Duke {
     /*public static void main(String[] args) {
         String logo = " ____        _        \n"
@@ -18,13 +19,13 @@ public class Duke {
         System.out.println(greetings);
 
         //Initial inputs
+        Scanner userInput = new Scanner(System.in);;
         String userMessage;
 
         //To-do-list
         ArrayList<Task> toDoList = new ArrayList<Task>();
 
         while (true) {
-            Scanner userInput = new Scanner(System.in);
             userMessage = userInput.nextLine();
             String [] parts = userMessage.split(" ", 2);
 
