@@ -4,6 +4,7 @@ import java.util.Scanner;
 import java.io.FileWriter;
 import java.io.IOException;
 
+
 public class Duke {
     private static ArrayList<Task> tasklst = new ArrayList<>();
 
@@ -15,6 +16,7 @@ public class Duke {
         todo,
         deadline,
         event,
+        date,
         bye
     }
 
@@ -71,6 +73,7 @@ public class Duke {
                         int indexOfDate = indexOfBy + 4; // "/by "
                         String activity2 = cmd.substring(c.length() + 1, indexOfBy - 1);
                         String date = cmd.substring(indexOfDate);
+
                         Task t4 = new Deadline(activity2, date);
                         tasklst.add(t4);
                         System.out.println("Got it. I've added this task:\n" + t4
