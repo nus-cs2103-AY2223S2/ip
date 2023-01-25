@@ -1,12 +1,39 @@
+import java.io.FileWriter;
+import java.io.IOException;
 import java.util.ArrayList;
+import java.io.File;
 
 public class TaskList {
     private final ArrayList<Task> list;
+    private final String filePath;
     public TaskList() {
         this.list = new ArrayList<>();
+        this.filePath = "./data/tasks.txt";
     }
 
-    public void addTask(String type, String input) throws EmptyDescriptionException{
+    public void saveTask() throws TaskIOException {
+        try {
+            FileWriter fileWriter = new FileWriter(this.getFile());
+            for (Task task : this.list) {
+                fileWriter.write(task.parse() + '\n');
+            }
+            fileWriter.flush();
+        } catch (IOException ex) {
+            throw new TaskIOException("Cannot save task");
+        }
+    }
+    public File getFile() throws TaskIOException {
+        File file = new File(filePath);
+        File parentFile = file.getParentFile();
+        try {
+            parentFile.mkdir();
+            file.createNewFile();
+        } catch (IOException ex) {
+            throw new TaskIOException("cannot create file");
+        }
+        return file;
+    }
+    public void addTask(String type, String input) throws EmptyDescriptionException, TaskIOException{
         Task task;
         if (Dudu.Command.DEADLINE.equals(type)) {
             if (input.trim().length() == 8) {
@@ -31,6 +58,7 @@ public class TaskList {
             task = new Event(inputStr[0],dateStr[0],dateStr[1]);
         }
         list.add(task);
+        saveTask();
         System.out.println("Got it. I've added this task:");
         System.out.println("  " + task);
         System.out.println(getTotalTask());

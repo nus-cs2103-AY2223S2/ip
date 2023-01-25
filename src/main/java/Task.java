@@ -1,26 +1,32 @@
 import java.util.ArrayList;
 
-public class Task {
-    protected String name;
-    protected boolean isDone;
-    public Task (String name) {
+public abstract class Task {
+    private String name;
+    private boolean isDone;
+    public Task (String name, boolean isDone) {
         this.name = name.strip();
-        this.isDone = false;
+        this.isDone = isDone;
     }
+
+    public abstract String getType();
+    public abstract String getStatus();
+    public abstract String getDescription();
+
     public void markAsDone() {
         this.isDone = true;
     }
     public void markAsUndone() {
         this.isDone = false;
     }
-    public String getName() {
-        return this.name;
-    }
     public String getStatusIcon() {
         return "[" + (isDone ? "X" : " ") + "]";
     }
+
+    public String parse() {
+        return getType() + "|" + getStatus()+ "|" + getDescription();
+    }
     @Override
     public String toString() {
-        return this.getStatusIcon() + " " + this.getName();
+        return this.getStatusIcon() + " " + this.name;
     }
 }
