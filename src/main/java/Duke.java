@@ -73,10 +73,12 @@ public class Duke {
                     case "mark":
                         selectedNum = Integer.parseInt(inputArr[1]);
                         tasksL.markTask(selectedNum);
+                        s.save(tasksL);
                         break;
                     case "unmark":
                         selectedNum = Integer.parseInt(inputArr[1]);
                         tasksL.unMarkTask(selectedNum);
+                        s.save(tasksL);
                         break;
                     case "delete":
                         int numToDelete;
@@ -86,6 +88,7 @@ public class Duke {
                             throw new DukeException("Please enter a valid number to delete!");
                         }
                         tasksL.deleteTask(numToDelete);
+                        s.save(tasksL);
                         break;
                     case "Storage":
                         //System.out.println("I RAN HERE!");
