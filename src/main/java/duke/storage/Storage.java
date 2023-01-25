@@ -12,8 +12,11 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
+
 
 
 public class Storage {
@@ -44,19 +47,28 @@ public class Storage {
                     task = new Todo(desc);
 
                 } else if (type == 'D') {
-                    String substring = i.substring(7);
-                    String segments[] = substring.split("/", 2);
-                    String date = segments[1].split(" ", 2)[1];
-                    String desc = segments[0];
-                    task = new Deadline(date, desc);
+                    String sub = i.substring(7);
+                    int openBraceIndex = sub.indexOf('(');
+                    int closeBraceIndex = sub.indexOf(')');
+                    String date = sub.substring(openBraceIndex+5, closeBraceIndex);
+                    LocalDate ld = LocalDate.parse(date, DateTimeFormatter.ofPattern("dd MMM yyyy"));
+                    String desc = sub.substring(0, openBraceIndex-1);
+                    System.out.println(desc);
+                    task = new Deadline(ld, desc);
 
                 } else if (type == 'E') {
-                    String segments[] = i.split("/", 3);
-                    String start = segments[segments.length - 2].split(" ", 2)[1];
-                    String end = segments[segments.length - 1].split(" ", 2)[1];
-                    String subSegments[] = segments[0].split(" ", 2);
-                    String desc = subSegments[1];
-                    task = new Event(start, end, desc);
+                    String sub = i.substring(7);
+                    String segments[] = sub.split("from: ", 2);
+                    String desc = segments[0].substring(0, segments[0].length()-2);
+                    String dateTime[] = segments[1].split(" to: ", 2);
+                    String start = dateTime[0];
+                    String end = dateTime[1].substring(0, dateTime[1].length()-1);
+                    LocalDate sld = LocalDate.parse(start, DateTimeFormatter.ofPattern("dd MMM yyyy"));
+                    LocalDate eld = LocalDate.parse(end, DateTimeFormatter.ofPattern("dd MMM yyyy"));
+                    task = new Event(sld, eld, desc);
+                }
+                if (i.charAt(4) == 'X') {
+                    task.mark();
                 }
                 list.add(task);
             }

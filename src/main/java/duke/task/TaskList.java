@@ -3,6 +3,7 @@ import exception.DukeException;
 import storage.Storage;
 
 import java.io.IOException;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -84,7 +85,8 @@ public class TaskList {
      * @param date The time/date of the deadline
      * @param desc The title of the deadline
      */
-    public void addDeadline(String date, String desc) throws DukeException {
+
+    public void addDeadline(LocalDate date, String desc) {
         Deadline d = new Deadline(date, desc);
         tasks.add(d);
         storage.save(this);
@@ -99,7 +101,8 @@ public class TaskList {
      * @param end The end date/time of the event
      * @param desc The title of the event
      */
-    public void addEvent(String start, String end, String desc) throws DukeException {
+
+    public void addEvent(LocalDate start, LocalDate end, String desc) {
         Event e = new Event(start, end, desc);
         tasks.add(e);
         storage.save(this);

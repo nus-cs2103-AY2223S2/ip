@@ -1,3 +1,3 @@
-[T][X] h
-[T][ ] hello
-[D][ ] project (by: Monday 2359)
+[D][ ] return toy (by: 15 Oct 2019)
+[E][X] event project (from: 10 Mar 2018 to: 11 Mar 2018)
+[T][ ] hw
