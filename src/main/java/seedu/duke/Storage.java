@@ -1,3 +1,9 @@
+/**
+ * Project name: Duke
+ * @author Tan Jun Da
+ * Student Number: A0234893U
+ */
+
 package seedu.duke;
 
 import seedu.duke.task.Deadline;
@@ -12,14 +18,31 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
+/**
+ * Represents the storage for the Duke program.
+ * A <code>Storage</code> object corresponds to
+ * the filepath of the text file.
+ */
 public class Storage {
 
     protected String filePath;
 
+    /**
+     * Constructor for the Storage class.
+     *
+     * @param filePath The filepath to the storage text file.
+     */
     public Storage(String filePath) {
         this.filePath = filePath;
     }
 
+    /**
+     * Returns a List of tasks.
+     * If file not found, throw DukeException.
+     *
+     * @return The List of tasks.
+     * @throws DukeException If file not found.
+     */
     public List<Task> load() throws DukeException{
         try {
             return readAddFileContents(filePath);
@@ -28,6 +51,12 @@ public class Storage {
         }
     }
 
+    /**
+     * Write to the storage text file.
+     *
+     * @param tasks The tasks that need to be written.
+     * @throws DukeException If no such text file is found.
+     */
     public void write(TaskList tasks) throws DukeException {
         try {
             writeToFile(tasks.tasksList, "data/duke.txt");
@@ -36,6 +65,14 @@ public class Storage {
         }
     }
 
+    /**
+     * Writes to text file.
+     * If file not found, throw IOException.
+     *
+     * @param storage
+     * @param filePath
+     * @throws IOException If no such text file is found.
+     */
     public void writeToFile(List<Task> storage, String filePath) throws IOException {
         FileWriter fw = new FileWriter(filePath);
         for(Task element : storage) {
@@ -55,6 +92,14 @@ public class Storage {
         fw.close();
     }
 
+    /**
+     * Returns the List of tasks added from the text file.
+     * If file not found, throw FileNotFoundException.
+     *
+     * @param filePath The filepath for the text file.
+     * @return The List of tasks.
+     * @throws FileNotFoundException If file not found.
+     */
     public List<Task> readAddFileContents(String filePath) throws FileNotFoundException {
         File f = new File(filePath);
         List<Task> storage = new ArrayList<>();

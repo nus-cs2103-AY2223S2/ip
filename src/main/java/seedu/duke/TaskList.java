@@ -1,3 +1,9 @@
+/**
+ * Project name: Duke
+ * @author Tan Jun Da
+ * Student Number: A0234893U
+ */
+
 package seedu.duke;
 
 import seedu.duke.task.Deadline;
@@ -7,30 +13,62 @@ import seedu.duke.task.Todo;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Represents a taskList in an ArrayList format.
+ * A <code>TaskList</code> object corresponds to
+ * an ArrayList.
+ */
 public class TaskList {
 
     List<Task> tasksList;
     int counter = 0;
 
-    public TaskList(List<Task> tasksList) throws DukeException{
+    /**
+     * Constructor for the TaskList class.
+     *
+     * @param tasksList The List of tasks.
+     */
+    public TaskList(List<Task> tasksList) {
         this.tasksList = tasksList;
         counter = tasksList.size();
     }
 
+    /**
+     * Constructor for the TaskList class.
+     */
     public TaskList() {
         tasksList = new ArrayList<>();
     }
 
+    /**
+     * Returns a TaskList after marking a specified task as done.
+     *
+     * @param userParse The input from the user.
+     * @return The TaskList with the specified marked task.
+     */
     public TaskList mark(Parser userParse) {
         tasksList.get(Integer.parseInt(userParse.inputArr[1]) - 1).mark();
         return this;
     }
 
+    /**
+     * Returns a TaskList after marking a specified task as not done.
+     *
+     * @param userParse The input from the user.
+     * @return The TaskList with the specified unmarked task.
+     */
     public TaskList unmark(Parser userParse) {
         tasksList.get(Integer.parseInt(userParse.inputArr[1]) - 1).unmark();
         return this;
     }
 
+    /**
+     * Add a Todo task to the TaskList.
+     *
+     * @param description The description of the Todo task.
+     * @param userParse The input from the user.
+     * @throws DukeException If there is an empty description.
+     */
     public void addTodo(String description, Parser userParse) throws DukeException{
         int inputArrLength = userParse.inputArr.length;
         String[] inputArr = userParse.inputArr;
@@ -46,6 +84,13 @@ public class TaskList {
         }
     }
 
+    /**
+     * Add a Deadline task to the TaskList.
+     *
+     * @param description The description of the Deadline task.
+     * @param userParse The input from the user.
+     * @throws DukeException If there is an empty description or time.
+     */
     public void addDeadline(String description, Parser userParse) throws DukeException {
         String deadline = "";
         int inputArrLength = userParse.inputArr.length;
@@ -71,6 +116,13 @@ public class TaskList {
         }
     }
 
+    /**
+     * Add an Event task to the TaskList.
+     *
+     * @param description The description of the Event task.
+     * @param userParse The input from the user.
+     * @throws DukeException If there is an empty description or time.
+     */
     public void addEvent(String description, Parser userParse) throws DukeException {
         String from = "";
         String to = "";
@@ -106,6 +158,12 @@ public class TaskList {
         }
     }
 
+    /**
+     * Returns the Task that has been deleted from the TaskList.
+     *
+     * @param userParse The input from the user.
+     * @return The Task deleted.
+     */
     public Task delete(Parser userParse) {
         String[] inputArr = userParse.inputArr;
         Task deleted = tasksList.remove(Integer.parseInt(inputArr[1]) - 1);

@@ -1,22 +1,25 @@
 /**
  * Project name: Duke
- * Author: Tan Jun Da
+ * @author Tan Jun Da
  * Student Number: A0234893U
- *
- * This class is the main class for the duke ip.
  */
+
 package seedu.duke;
 
 import java.util.Scanner;
 
-
+/**
+ * Represents the main program of Duke.
+ */
 public class Duke {
 
     private Ui ui;
     private TaskList tasks;
     private Storage storage;
 
-
+    /**
+     * Represents the set of commands by the user.
+     */
     public enum Commands {
         bye,
         mark,
@@ -28,6 +31,11 @@ public class Duke {
         delete
     }
 
+    /**
+     * Constructor for the Duke class.
+     *
+     * @param filepath The file path for the data stored in the txt file.
+     */
     public Duke(String filepath) {
         ui = new Ui();
         storage = new Storage(filepath);
@@ -39,6 +47,9 @@ public class Duke {
         }
     }
 
+    /**
+     * The start of the program.
+     */
     public void run() {
         //Scanner to scan user input.
         Scanner sc = new Scanner(System.in);
