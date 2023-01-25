@@ -22,7 +22,7 @@ import java.util.List;
 public class TaskList {
 
     List<Task> tasksList;
-    int counter = 0;
+    int counter;
 
     /**
      * Constructor for the TaskList class.
@@ -31,14 +31,15 @@ public class TaskList {
      */
     public TaskList(List<Task> tasksList) {
         this.tasksList = tasksList;
-        counter = tasksList.size();
+        this.counter = tasksList.size();
     }
 
     /**
      * Constructor for the TaskList class.
      */
     public TaskList() {
-        tasksList = new ArrayList<>();
+        this.tasksList = new ArrayList<>();
+        this.counter = 0;
     }
 
     /**
@@ -176,5 +177,23 @@ public class TaskList {
         Task deleted = tasksList.remove(Integer.parseInt(inputArr[1]) - 1);
         counter--;
         return deleted;
+    }
+
+    /**
+     * Returns the TaskList for all possible match.
+     *
+     * @param userParse The input from the user.
+     * @return The TaskList for all possible match.
+     */
+    public TaskList find(Parser userParse) {
+        TaskList tempFind = new TaskList();
+        String toMatch = userParse.findMatchDescription();
+        for (Task curr : this.tasksList) {
+            if (curr.getDescription().contains(toMatch)) {
+                tempFind.tasksList.add(curr);
+                tempFind.counter++;
+            }
+        }
+        return tempFind;
     }
 }

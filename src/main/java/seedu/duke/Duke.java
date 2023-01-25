@@ -28,7 +28,8 @@ public class Duke {
         todo,
         deadline,
         event,
-        delete
+        delete,
+        find
     }
 
     /**
@@ -69,34 +70,37 @@ public class Duke {
             System.out.println("____________________________________________________________");
             try {
                 Commands userCommand = userParse.checkCommand(userParse.command);
-                switch (userCommand) {
-                case bye:
-                    ui.bye();
-                    break;
-                case mark:
-                    ui.markDisplay(tasks.mark(userParse), userParse);
-                    break;
-                case unmark:
-                    ui.unmarkDisplay(tasks.unmark(userParse), userParse);
-                    break;
-                case list:
-                    ui.list(tasks);
-                    break;
-                case todo:
-                    tasks.addTodo(description, userParse);
-                    ui.addTodoMessage(tasks);
-                    break;
-                case deadline:
-                    tasks.addDeadline(description, userParse);
-                    ui.addDeadlineMessage(tasks);
-                    break;
-                case event:
-                    tasks.addEvent(description, userParse);
-                    ui.addEventMessage(tasks);
-                    break;
-                case delete:
-                    ui.deleteMessage(tasks, tasks.delete(userParse));
-                    break;
+                switch(userCommand) {
+                    case bye:
+                        ui.bye();
+                        break;
+                    case mark:
+                        ui.markDisplay(tasks.mark(userParse), userParse);
+                        break;
+                    case unmark:
+                        ui.unmarkDisplay(tasks.unmark(userParse), userParse);
+                        break;
+                    case list:
+                        ui.list(tasks);
+                        break;
+                    case todo:
+                        tasks.addTodo(description, userParse);
+                        ui.addTodoMessage(tasks);
+                        break;
+                    case deadline:
+                        tasks.addDeadline(description, userParse);
+                        ui.addDeadlineMessage(tasks);
+                        break;
+                    case event:
+                        tasks.addEvent(description, userParse);
+                        ui.addEventMessage(tasks);
+                        break;
+                    case delete:
+                        ui.deleteMessage(tasks, tasks.delete(userParse));
+                        break;
+                    case find:
+                        ui.findMessage(tasks.find(userParse));
+                        break;
                 }
                 storage.write(tasks);
                 if (userCommand.name().equals("bye")) {
