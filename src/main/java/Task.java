@@ -1,11 +1,12 @@
 /**
  * Represents a task with modifiable status.
  */
-public class Task {
+public abstract class Task {
 
-    private String content;
-    private boolean isDone = false;
-    protected Task(String content) {
+    protected String content;
+    protected boolean isDone;
+    protected Task(boolean status, String content) {
+        this.isDone = status;
         this.content = content;
     }
 
@@ -37,5 +38,6 @@ public class Task {
         return String.format("[%s][%s] %s", getTypeIcon(), getStatusIcon(), this);
     }
 
+    protected abstract String fileMessage();
 
 }
