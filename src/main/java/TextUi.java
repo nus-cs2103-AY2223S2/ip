@@ -3,7 +3,7 @@ import java.io.PrintStream;
 import java.util.Scanner;
 
 class TextUi {
-    private final Scanner in;
+    public final Scanner in;
     private final PrintStream out;
 
     public TextUi() {
