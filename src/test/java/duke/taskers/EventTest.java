@@ -35,7 +35,7 @@ public class EventTest {
         LocalDateTime start = LocalDateTime.parse(s1, Duke.getFormatter());
         LocalDateTime end = LocalDateTime.parse(s2, Duke.getFormatter());
         Event e = new Event("hug loved ones", true, start, end);
-        assertEquals("EVENT / 1 / hug loved ones / 1 Jan 2000 1.01am / 2 Feb 2001 2.30am", e.statusStringForFile());
+        assertEquals("EVENT / 1 / hug loved ones / 1 Jan 2000 1.01am / 2 Feb 2001 2.30am", e.formatStringForFile());
     }
 
     @Test
@@ -45,6 +45,6 @@ public class EventTest {
         LocalDateTime start = LocalDateTime.parse(s1, Duke.getFormatter());
         LocalDateTime end = LocalDateTime.parse(s2, Duke.getFormatter());
         Event e = new Event("exam", false, start, end);
-        assertEquals("EVENT / 0 / exam / 11 Jan 2000 10.01pm / 8 Nov 2001 4.30pm", e.statusStringForFile());
+        assertEquals("EVENT / 0 / exam / 11 Jan 2000 10.01pm / 8 Nov 2001 4.30pm", e.formatStringForFile());
     }
 }

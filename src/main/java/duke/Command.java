@@ -10,7 +10,13 @@ public enum Command {
     UNMARK,
     DELETE;
 
-    public static boolean contains(String str) {
+    /**
+     * Checks if the type is a valid Command.
+     *
+     * @param str String representation of the type.
+     * @return Whether str is valid Command.
+     */
+    public static boolean isCommand(String str) {
         for (Command ac:values()) {
             if (ac.name().equals(str.toUpperCase())) {
                 return true;

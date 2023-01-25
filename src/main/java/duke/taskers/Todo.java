@@ -15,8 +15,8 @@ public class Todo extends Task {
      * formats the string before being added to the duke storage file
      * @return the formatted string to be added to the duke storage file
      */
-    public String statusStringForFile() {
-        return String.format("TODO / %s", super.stringFormatForFile());
+    public String formatStringForFile() {
+        return String.format("TODO / %s", super.helpFormatString());
     }
 
     /**

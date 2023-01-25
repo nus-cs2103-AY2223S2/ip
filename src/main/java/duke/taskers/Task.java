@@ -1,35 +1,51 @@
 package duke.taskers;
 
-public class Task {
+public abstract class Task {
+
     private final String description;
     private boolean isDone;
 
+    /**
+     * Task constructor.
+     *
+     * @param description Description of the task.
+     * @param isDone Whether the task is done.
+     */
     public Task(String description, boolean isDone) {
         this.description = description;
         this.isDone = isDone;
     }
 
     /**
-     * marks the task as done
+     * Marks the task as done.
      */
-    public void markDone() {
+    public void setDone() {
         this.isDone = true;
     }
 
     /**
-     * unmarks the tast
+     * Unmarks the tast.
      */
-    public void markUndone() {
+    public void setUndone() {
         this.isDone = false;
     }
 
-    public String stringFormatForFile() {
+    /**
+     * Helps to format the string for file input.
+     *
+     * @return A partially formatted string.
+     */
+    public String helpFormatString() {
         return ((this.isDone ? "1" : "0") + " / " + this.description.trim()).trim();
     }
 
+
+    public abstract String formatStringForFile();
+
     /**
-     * format for the task string
-     * @return the string representing the task
+     * Format for the task string.
+     *
+     * @return The string representing the task.
      */
     @Override
     public String toString() {

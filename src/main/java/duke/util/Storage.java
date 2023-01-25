@@ -11,10 +11,13 @@ import duke.taskers.Todo;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
+
 import java.nio.file.Files;
 import java.nio.file.Paths;
+
 import java.time.LocalDateTime;
 import java.util.Scanner;
+
 import java.util.ArrayList;
 
 public class Storage {
@@ -23,6 +26,11 @@ public class Storage {
     private final String dirPath;
     private final File dukeFile;
 
+    /**
+     * Storage constructor.
+     *
+     * @param filePath String representation of the path to the file.
+     */
     public Storage(String filePath) {
         this.filePath = filePath;
         int lastIndexOfSlash = this.filePath.lastIndexOf(File.separator);
@@ -31,29 +39,20 @@ public class Storage {
     }
 
     /**
-     * the function that formats the task to store into the duke file
-     * @param t the task to be appended to the file
-     * @return the string representation to be appended to the file
+     * The function that formats the task to store into the duke file.
+     *
+     * @param t The task to be appended to the file.
+     * @return The string representation to be appended to the file.
      */
     public static String taskStringFormatter(Task t) {
-        String s = "";
-        if (t instanceof Todo) {
-            Todo todo = (Todo) t;
-            s = todo.statusStringForFile();
-        } else if (t instanceof Deadline) {
-            Deadline deadline = (Deadline) t;
-            s = deadline.statusStringForFile();
-        } else {
-            Event event = (Event) t;
-            s = event.statusStringForFile();
-        }
-        return s;
+        return t.formatStringForFile();
     }
 
 
     /**
-     * writes the tasks to the duke file
-     * @param item the task that is inserted into the duke file
+     * Writes the tasks to the duke file.
+     *
+     * @param item The task that is inserted into the duke file.
      */
     public void writeToFile(Task item) {
         try {
@@ -67,7 +66,7 @@ public class Storage {
     }
 
     /**
-     * loads all the items from the duke file
+     * Loads all the items from the duke file.
      */
     public ArrayList<Task> loadFromFile() throws DukeException {
         ArrayList<Task> loadedTasks = new ArrayList<>();
@@ -108,8 +107,8 @@ public class Storage {
 
 
     /**
-     * the function that deletes the entire duke file and re-inserts it with the current one.
-     * used for delete, mark and unmark when values are changed
+     * The function that deletes the entire duke file and re-inserts it with the current one.
+     * Used for delete, mark and unmark when values are changed.
      */
     public void deleteFileAndRedo(ArrayList<Task> listOfThings) {
         if (this.dukeFile.delete()) {

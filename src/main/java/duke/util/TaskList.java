@@ -1,5 +1,4 @@
 package duke.util;
-
 import duke.Command;
 import duke.Duke;
 import duke.DukeException;
@@ -9,6 +8,7 @@ import duke.taskers.Task;
 import duke.taskers.Todo;
 
 import java.time.LocalDateTime;
+
 import java.util.ArrayList;
 
 public class TaskList {
@@ -29,33 +29,36 @@ public class TaskList {
 
 
     /**
-     * marks the task inside the list as done
-     * @param index the index in the array of the task we want marked
-     * @return the task that is marked
+     * Marks the task inside the list as done.
+     *
+     * @param index The index in the array of the task we want marked.
+     * @return The task that is marked.
      */
     public Task markTaskInListDone(int index) {
-        this.listOfThings.get(index).markDone();
+        this.listOfThings.get(index).setDone();
         return this.listOfThings.get(index);
     }
 
 
     /**
-     * marks the task inside the list as undone
-     * @param index the index in the array of the task we want unmarked
-     * @return the task we just unmarked
+     * Marks the task inside the list as undone.
+     *
+     * @param index The index in the array of the task we want unmarked.
+     * @return The task we just unmarked.
      */
     public Task markTaskInListUndone(int index) {
-        this.listOfThings.get(index).markUndone();
+        this.listOfThings.get(index).setUndone();
         return this.listOfThings.get(index);
     }
 
 
-
     /**
+     * Adds the item to the taskList.
      *
-     * @param text the text containing the information of the command
-     * @param add type of add command use
-     * @throws DukeException when the format is wrong
+     * @param text The command string.
+     * @param add The Command type.
+     * @return The task that is being added.
+     * @throws DukeException When the wrong format is parsed.
      */
     public Task addItem(String text, Command add) throws DukeException {
         Task addedItem = null;
@@ -95,10 +98,10 @@ public class TaskList {
     }
 
 
-
     /**
-     * removes the item in the list
-     * @param index the index of the item to be removed
+     * Removes the item in the list.
+     *
+     * @param index The index of the item to be removed.
      */
     public Task removeItem(int index) {
         return this.listOfThings.remove(index);

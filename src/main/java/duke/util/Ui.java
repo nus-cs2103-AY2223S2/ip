@@ -7,7 +7,7 @@ import java.util.ArrayList;
 public class Ui {
 
     /**
-     * iterates through the arraylist and prints out the elements inside
+     * Iterates through the arraylist and prints out the elements inside.
      */
     public void printList(ArrayList<Task> arrList) {
         String totalString = "";
@@ -19,8 +19,9 @@ public class Ui {
     }
 
     /**
-     * prints out the text with lines on top and below
-     * @param text the content that is to be printed out
+     * Prints out the text with lines on top and below.
+     *
+     * @param text The content that is to be printed out
      */
     public void printWithLines(String text) {
         System.out.println("    ____________________________________________________________");
@@ -28,43 +29,71 @@ public class Ui {
         System.out.println("    ____________________________________________________________");
     }
 
-    public void greetings() {
+    /**
+     * Prints out the greetings when Duke is started.
+     */
+    public void greet() {
         this.printWithLines(" Hello! I'm duke.Duke!\n     What can I do for you today?");
-
     }
 
+    /**
+     * Prints response when a task is marked as done.
+     *
+     * @param t The task to be marked done.
+     */
     public void markResponse(Task t) {
         String str = " Nice! I've marked this task as done!:\n" + "       " + t.toString();
         this.printWithLines(str);
     }
 
+    /**
+     * Prints response when a task is marked as undone.
+     *
+     * @param t The task to be marked undone
+     */
     public void unmarkResponse(Task t) {
         String str = " OK, I've marked this task as not done yet:\n" + "       " + t.toString();
         this.printWithLines(str);
     }
 
-    public void addItemResponse(Task t, ArrayList<Task> arr) {
+    /**
+     * Prints response when the item is added to taskList.
+     *
+     * @param t The task to be added to the taskList.
+     * @param arr The taskList array.
+     */
+    public void showAddItem(Task t, ArrayList<Task> arr) {
         String str = "  " + t.toString();
         str = " Got it. I've added this task:\n     " + str;
-        this.printWithLines(str + listUpdate(arr));
-
-    }
-
-    public void goodBye() {
-        this.printWithLines(" Bye! Hope to see you again soon!");
-    }
-
-    public void deleteItemResponse(Task t, ArrayList<Task> arr) {
-        String str = " Noted. I'm removing this task:\n       " + t.toString();
-        this.printWithLines(str + listUpdate(arr));
+        this.printWithLines(str + showListUpdate(arr));
 
     }
 
     /**
-     *
-     * @return the string that updates the number of elements left in the string
+     * Prints response when user exits Duke.
      */
-    public String listUpdate(ArrayList<Task> arr) {
+    public void sayGoodBye() {
+        this.printWithLines(" Bye! Hope to see you again soon!");
+    }
+
+    /**
+     * Prints response when user deletes an item.
+     *
+     * @param t The task to be deleted.
+     * @param arr The taskList array.
+     */
+    public void showDeleteItem(Task t, ArrayList<Task> arr) {
+        String str = " Noted. I'm removing this task:\n       " + t.toString();
+        this.printWithLines(str + showListUpdate(arr));
+
+    }
+
+    /**
+     * Prints response when the list is updated.
+     *
+     * @return The string that updates the number of elements left in the string
+     */
+    public String showListUpdate(ArrayList<Task> arr) {
         String plural = "";
         if (arr.size() > 1) {
             plural = "s";

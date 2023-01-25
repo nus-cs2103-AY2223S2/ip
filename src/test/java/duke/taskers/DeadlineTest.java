@@ -30,7 +30,7 @@ public class DeadlineTest {
         String s = "2022-03-04 03:30";
         LocalDateTime end = LocalDateTime.parse(s, Duke.getFormatter());
         Deadline d = new Deadline("anything", false, end);
-        assertEquals("DEADLINE / 0 / anything / 4 Mar 2022 3.30am", d.statusStringForFile());
+        assertEquals("DEADLINE / 0 / anything / 4 Mar 2022 3.30am", d.formatStringForFile());
     }
 
     @Test
@@ -38,7 +38,7 @@ public class DeadlineTest {
         String s = "2021-04-04 02:55";
         LocalDateTime end = LocalDateTime.parse(s, Duke.getFormatter());
         Deadline d = new Deadline("reunion dinner prep", true, end);
-        assertEquals("DEADLINE / 1 / reunion dinner prep / 4 Apr 2021 2.55am", d.statusStringForFile());
+        assertEquals("DEADLINE / 1 / reunion dinner prep / 4 Apr 2021 2.55am", d.formatStringForFile());
 
     }
 }

@@ -7,7 +7,9 @@ import duke.util.TaskList;
 import duke.util.Ui;
 
 import java.util.Scanner;
+
 import java.io.File;
+
 import java.time.DateTimeException;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
@@ -21,8 +23,9 @@ public class Duke {
     private final Ui ui;
 
     /**
-     * Duke constructor
-     * @param filePathName the string representing the path to the file duke
+     * Duke constructor.
+     *
+     * @param filePathName The string representing the path to the file duke.
      */
     public Duke(String filePathName) {
         TaskList tasks1;
@@ -37,9 +40,10 @@ public class Duke {
     }
 
      /**
-     * creates the localdatetime by parsing the text string
-     * @param dateTime the string representation of the local date time
-     * @return the LocalDateTime object being created
+     * Creates the localdatetime by parsing the text string.
+      *
+     * @param dateTime The string representation of the local date time.
+     * @return The LocalDateTime object being created.
      */
     public static LocalDateTime createLocalDateTime(String dateTime) {
         LocalDateTime date;
@@ -54,10 +58,10 @@ public class Duke {
 
 
     /**
-     * driver function
+     * Driver function.
      */
     public void run() {
-        this.ui.greetings();
+        this.ui.greet();
         Scanner input = new Scanner(System.in);
         while (true) {
             try {
@@ -119,23 +123,24 @@ public class Duke {
                         throw new DukeException("This index doesn't exist.");
                     }
                     Task removedTask = this.tasks.removeItem(idx);
-                    this.ui.deleteItemResponse(removedTask, this.tasks.getList());
+                    this.ui.showDeleteItem(removedTask, this.tasks.getList());
                     this.storage.deleteFileAndRedo(this.tasks.getList());
                 } else {
                     Task addedTask = this.tasks.addItem(line, Command.valueOf(command));
                     this.storage.writeToFile(addedTask);
-                    this.ui.addItemResponse(addedTask, this.tasks.getList());
+                    this.ui.showAddItem(addedTask, this.tasks.getList());
                 }
             } catch (DukeException e) {
                 this.ui.printWithLines(" " + e.toString());
             }
         }
-        this.ui.goodBye();
+        this.ui.sayGoodBye();
     }
 
     /**
-     * function that returns the formatter for date time
-     * @return the date time formatter used in duke
+     * Function that returns the formatter for date time.
+     *
+     * @return The date time formatter used in duke.
      */
     public static DateTimeFormatter getFormatter() {
         return FORMATTER;
