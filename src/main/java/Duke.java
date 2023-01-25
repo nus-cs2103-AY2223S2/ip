@@ -4,15 +4,19 @@ import java.io.File;
 import java.io.IOException;
 import java.io.FileNotFoundException;
 import java.io.FileWriter;
+
 public class Duke {
     private static String fileDestination = "data/duke.txt";
     private static List<Task> taskList = new ArrayList<>();
     public static void main(String[] args) throws DukeException {
+        TextUi TextUi = new TextUi();
+
+        Parser Parser = new Parser();
+
         Scanner userInput = new Scanner(System.in);
         File file = new File(fileDestination);
         readSavedFile(file); // loads saved strings in duke.txt to tasklist
-        System.out.println("Hello! I'm Duke.");
-        System.out.println("What can I do for you?");
+        TextUi.getWelcomeMessage();
         String input;
 
         while (!(input = userInput.nextLine()).equals("bye")) {
@@ -33,7 +37,7 @@ public class Duke {
                 } else if (input.length() >= 6 && input.substring(0, 6).equals("delete")) {
                     int indexToDelete = Integer.parseInt(input.substring(7)) - 1;
                     if (indexToDelete < taskList.size()) {
-                        taskRemovedMessage(taskList.get(indexToDelete),taskList.size() - 1);
+                        TextUi.getTaskRemovedMessage(taskList.get(indexToDelete),taskList.size() - 1);
                         taskList.remove(indexToDelete);
                         saveTaskListToStorage(file);
                     } else {
@@ -45,7 +49,7 @@ public class Duke {
                         Task toMark = taskList.get(indexToMark);
                         toMark.markAsDone();
                         saveTaskListToStorage(file);
-                        customMessage("Nice! I've marked this task as done:\n" + toMark);
+                        TextUi.getCustomMessage("Nice! I've marked this task as done:\n" + toMark);
                     } else {
                         throw new DukeException("Invalid, there is no such task");
                     }
@@ -55,73 +59,50 @@ public class Duke {
                         Task toUnmark = taskList.get(indexToUnmark);
                         toUnmark.markAsUndone();
                         saveTaskListToStorage(file);
-                        customMessage("OK, I've marked this task as not done yet:\n" + toUnmark);
+                        TextUi.getCustomMessage("OK, I've marked this task as not done yet:\n" + toUnmark);
                     } else {
                         throw new DukeException("Invalid, there is no such task");
                     }
                 } else {
-                    typeOfTask(input, taskList);
+                    if (input.length() >= 4 && input.substring(0,4).equals("todo")) {
+                        String check = Parser.removeWhiteSpaces(input);
+                        if (check.equals("todo")) {
+                            throw new DukeException("The description of a todo cannot be empty.");
+                        }
+                        Task newTask = new ToDo(input.substring(5, input.length()));
+                        taskList.add(newTask);
+                        TextUi.getTaskAddedMessage(newTask, taskList.size());
+                    } else if (input.length() >= 5 && input.substring(0,5).equals("event")) {
+                        String check = Parser.removeWhiteSpaces(input);
+                        if (check.equals("event")) {
+                            throw new DukeException("The description of a event cannot be empty.");
+                        }
+                        String[] str = input.substring(6).split("/");
+                        Task newTask = new Event(str[0].substring(0, str[0].length() - 1)
+                                , LocalDate.parse(str[1].substring(5, str[1].length() - 1))
+                                , LocalDate.parse(str[2].substring(3)));
+                        taskList.add(newTask);
+                        TextUi.getTaskAddedMessage(newTask, taskList.size());
+                    } else if (input.length() >= 8 && input.substring(0,8).equals("deadline")) {
+                        String check = Parser.removeWhiteSpaces(input);
+                        if (check.equals("deadline")) {
+                            throw new DukeException("The description of a deadline cannot be empty.");
+                        }
+                        String[] str = input.substring(9).split("/");
+                        Task newTask = new Deadline(str[0].substring(0, str[0].length() - 1)
+                                , LocalDate.parse(str[1].substring(3)));
+                        taskList.add(newTask);
+                        TextUi.getTaskAddedMessage(newTask, taskList.size());
+                    } else {
+                        throw new DukeException("I'm sorry, I don't know what that means!");
+                    }
                     saveTaskListToStorage(file);
                 }
             } catch (DukeException dukeException) {
-                customMessage(dukeException.getMessage());
+                TextUi.getCustomMessage(dukeException.getMessage());
             }
         }
-        customMessage("Bye. Hope to see you again soon!");
-    }
-    private static void customMessage(String message) {
-        System.out.println("____________________");
-        System.out.println(message);
-        System.out.println("____________________");
-    }
-
-    private static void taskAddedMessage(Task task, int sizeOfList) {
-        System.out.println("____________________");
-        System.out.println("Got it. I've added this task:");
-        System.out.println(task);
-        System.out.println("Now you have " + sizeOfList + " task" + (sizeOfList > 1 ? "s" : "") +" in the list.");
-        System.out.println("____________________");
-    }
-    private static void taskRemovedMessage(Task task, int sizeOfList) {
-        System.out.println("____________________");
-        System.out.println("Noted. I've removed this task:");
-        System.out.println(task);
-        System.out.println("Now you have " + sizeOfList + " task" + (sizeOfList > 1 ? "s" : "") +" in the list.");
-        System.out.println("____________________");
-    }
-    private static void typeOfTask(String input, List<Task> lst) throws DukeException {
-        if (input.length() >= 4 && input.substring(0,4).equals("todo")) {
-            String check = input.replaceAll("\\s", "");
-            if (check.equals("todo")) {
-                throw new DukeException("The description of a todo cannot be empty.");
-            }
-            Task newTask = new ToDo(input.substring(5, input.length()));
-            lst.add(newTask);
-            taskAddedMessage(newTask, lst.size());
-        } else if (input.length() >= 5 && input.substring(0,5).equals("event")) {
-            String check = input.replaceAll("\\s", "");
-            if (check.equals("event")) {
-                throw new DukeException("The description of a event cannot be empty.");
-            }
-            String[] str = input.substring(6).split("/");
-            Task newTask = new Event(str[0].substring(0, str[0].length() - 1)
-                    , LocalDate.parse(str[1].substring(5, str[1].length() - 1))
-                    , LocalDate.parse(str[2].substring(3)));
-            lst.add(newTask);
-            taskAddedMessage(newTask, lst.size());
-        } else if (input.length() >= 8 && input.substring(0,8).equals("deadline")) {
-            String check = input.replaceAll("\\s", "");
-            if (check.equals("deadline")) {
-                throw new DukeException("The description of a deadline cannot be empty.");
-            }
-            String[] str = input.substring(9).split("/");
-            Task newTask = new Deadline(str[0].substring(0, str[0].length() - 1)
-                    , LocalDate.parse(str[1].substring(3)));
-            lst.add(newTask);
-            taskAddedMessage(newTask, lst.size());
-        } else {
-            throw new DukeException("I'm sorry, I don't know what that means!");
-        }
+        TextUi.getGoodbyeMessage();
     }
 
     private static void readSavedFile(File file) {
