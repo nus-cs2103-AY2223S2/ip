@@ -141,6 +141,15 @@ public class Panav {
         }
 
     }
+
+    /**
+     * Returns the index number for commands which manipulate the list.
+     *
+     * @param command The command which is manipulating list.
+     * @param counter The number of elements in the list.
+     * @return Index number in command.
+     * @throws InvalidNumberException If the index doesn't exist.
+     */
     public static int readNumber(String command, int counter) throws InvalidNumberException{
         int number = Integer.parseInt(String.valueOf(command.charAt(command.length() - 1)));
         if (number > counter || number < 1) {
