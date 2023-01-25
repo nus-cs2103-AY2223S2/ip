@@ -24,7 +24,7 @@ public class DeadlineCommand extends Command {
     private Storage storage;
 
     /**
-     * Constructs a DeadlineCommand.
+     * Constructs a <code>DeadlineCommand</code>.
      *
      * @param ui The Ui to allow the command to print messages to the user.
      * @param taskName The name of the deadline task to be created.

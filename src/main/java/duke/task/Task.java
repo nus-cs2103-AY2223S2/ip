@@ -1,7 +1,7 @@
 package duke.task;
 
 /**
- * Represents a Task that can be kept track of.
+ * Represents a task that can be kept track of.
  */
 public abstract class Task {
     /** The name of the task. */
@@ -35,7 +35,7 @@ public abstract class Task {
     /**
      * Gets the status of the task with the task name.
      *
-     * @return a String indicating the type and status of the task.
+     * @return a <code>String</code> indicating the type and status of the task.
      */
     public abstract String getStatusOfTaskInString();
 

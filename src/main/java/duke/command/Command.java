@@ -13,7 +13,7 @@ public abstract class Command {
     protected boolean isExit = false;
 
     /**
-     * Constructs a Command instance.
+     * Constructs a <code>Command</code> instance.
      *
      * @param ui The Ui for the command to print output.
      */

@@ -6,7 +6,7 @@ import duke.ui.Ui;
  */
 public class InvalidCommand extends Command {
     /**
-     * Constructs an InvalidCommand
+     * Constructs an <code>InvalidCommand</code>.
      */
     public InvalidCommand(Ui ui) {
         super(ui);

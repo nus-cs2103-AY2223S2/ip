@@ -5,14 +5,14 @@ import duke.ui.Ui;
 
 import java.util.ArrayList;
 /**
- * Represents the list of tasks that the user has entered into the chatbot.
+ * Represents the list of <code>Tasks</code> that the user has entered into the chatbot.
  */
 public class TaskList {
     /** List that stores all the Task objects. */
     private ArrayList<Task> tasks;
 
     /**
-     * Constructs a TaskList instance.
+     * Constructs a <code>TaskList</code> instance.
      */
     public TaskList() {
         this.tasks = new ArrayList<Task>();
@@ -37,14 +37,14 @@ public class TaskList {
     }
 
     /**
-     * Adds a Task into the TaskList.
+     * Adds a <code>Task</code>into the task list.
      */
     public void addTask(Task taskToAdd) {
         this.tasks.add(taskToAdd);
     }
 
     /**
-     * Deletes a Task from the TaskList, at a specified index.
+     * Deletes a <code>Task</code> from the task List, at a specified index.
      *
      * @param index Index of the task which is to be deleted.
      */
@@ -71,9 +71,4 @@ public class TaskList {
         }
         Ui.printStraightLine();
     }
-
-
-
-
-
 }

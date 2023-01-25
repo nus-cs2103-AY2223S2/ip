@@ -6,7 +6,7 @@ import duke.ui.Ui;
  */
 public class HelpCommand extends Command {
     /**
-     * Constructs a HelpCommand.
+     * Constructs a <code>HelpCommand</code>.
      */
     public HelpCommand(Ui ui) {
         super(ui);
