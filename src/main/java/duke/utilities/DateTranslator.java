@@ -7,16 +7,16 @@ public class DateTranslator {
     String raw_input;
     LocalDateTime time;
     public String output;
-
     public DateTranslator(String raw_input) {
         this.raw_input = raw_input;
         convert();
     }
 
     public static boolean is_date(String raw_input) {
+        //todo recognise as actual date.
         String[] token1 = raw_input.split("/");
         String[] token2 = token1[1].split("-");
-        //first date  format
+        //first date format
         return token1.length > 2 || token2.length == 3;
     }
     void convert() {
