@@ -15,12 +15,5 @@ public class MeggyTest {
                 replaceAll("\r", "");
         System.out.println(actual.equals(expected));
         System.out.println(actual);
-
-        /*
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyyMMdd HH:mm");
-        LocalDateTime date = LocalDateTime.parse("20230608 16:00",formatter);
-        String text = date.format(DateTimeFormatter.ISO_DATE_TIME);
-        System.out.println(text);
-        */
     }
 }

@@ -10,6 +10,26 @@ public final class Resource {
      * Error message if no argument is provided to a command that needs argument(s).
      */
     public final static String errNoArgs = "Description of this command cannot be empty.\n";
+
+    /**
+     * Error message if an error prevents writing to a file.
+     */
+    public final static String errFileWrite = "Can't save data to file. ";
+
+    /**
+     * Error message if an error prevents reading from a file.
+     */
+    public final static String errFileRead = "Can't read data from file. ";
+
+    /**
+     * Error message if an {@link java.io.IOException} prevents file interaction.
+     */
+    public final static String errIO = "An IO error occurred.\n";
+    /**
+     * Error message if an {@link SecurityException} prevents file interaction.
+     */
+    public final static String errNoAccess = "File access denied by system.\n";
+
     /**
      * Indentation before task that are highlighted.
      */

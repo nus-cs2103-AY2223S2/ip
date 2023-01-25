@@ -15,6 +15,11 @@ public class TodoTask extends UserTask {
     }
 
     @Override
+    public String encode() {
+        return Resource.cmdTodo + ' ' + desc;
+    }
+
+    @Override
     public String toString() {
         return label + super.toString();
     }

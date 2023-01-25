@@ -73,6 +73,11 @@ public class EventTask extends UserTask {
     }
 
     @Override
+    public String encode() {
+        return Resource.cmdEvent + ' ' + desc + ' ' + sttFmt + start.encode() + ' ' + endFmt + end.encode();
+    }
+
+    @Override
     public String toString() {
         return label + super.toString() + " (from: " + start + " to: " + end + ')';
     }

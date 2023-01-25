@@ -51,6 +51,10 @@ public class MeggyTime {
      * */
     private static final DateTimeFormatter outFmt=DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
     /**
+     * Encode format.
+     * */
+    private static final DateTimeFormatter encodeFmt =DateTimeFormatter.ofPattern("ddMMyyyy HHmm");
+    /**
      * Cached dummy NA value.
      */
     public static final MeggyTime NA = new MeggyTime();
@@ -97,5 +101,12 @@ public class MeggyTime {
      */
     public String toString() {
         return formatted == null ? '[' + customized + ']' : formatted.format(outFmt);
+    }
+
+    /**
+     * @return String representation used in data file. User-customized time is unchanged.
+     * */
+    public String encode(){
+        return formatted == null ? customized: formatted.format(encodeFmt);
     }
 }

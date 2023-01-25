@@ -18,6 +18,10 @@ public final class Util {
      * Default time information if corresponding time keyword is absent in user input.
      */
     public static final String noFound = "N/A";
+    /**
+     * Task list data file.
+     */
+    public static final String dataFilePath = "MeggyData.txt";
 
     /**
      * @deprecated Class stores all resource values statically and should not be initialized.
@@ -50,4 +54,6 @@ public final class Util {
         final int whiteSpaceIdx = args.indexOf(' ');
         return whiteSpaceIdx < 0 ? args : args.substring(0, whiteSpaceIdx);
     }
+
+
 }
