@@ -16,6 +16,16 @@ public class TaskList {
         taskList.remove(task);
     }
 
+    public ArrayList<Task> findTasks(String keyword) {
+        ArrayList<Task> matchedTasks = new ArrayList<>();
+        for (Task task : taskList) {
+            if (task.name.contains(keyword)) {
+                matchedTasks.add(task);
+            }
+        }
+        return matchedTasks;
+    }
+
     public int getLength() {
         return taskList.size();
     }

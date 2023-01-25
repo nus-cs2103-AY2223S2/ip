@@ -2,6 +2,7 @@ package peppa;
 
 import peppa.commands.*;
 
+import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Ui {
@@ -42,10 +43,17 @@ public class Ui {
         System.out.println("> " + task.toString());
     }
 
+    public static void displayMatchingTasks(ArrayList<Task> tasks) {
+        System.out.println("Oink! Here are the matching tasks in your list:");
+        for (int i = 0; i < tasks.size(); i++) {
+            System.out.println((i + 1) + ". " + tasks.get(i));
+        }
+    }
+
     public static void displayTaskList(TaskList tasks) {
-        System.out.println("Here are the tasks in your list currently:");
+        System.out.println("Oink! Here are the tasks in your list currently:");
         for (int i = 0; i < tasks.getLength(); i++) {
-            System.out.println(Integer.toString(i + 1) + ". " + tasks.retrieveTask(i));
+            System.out.println((i + 1) + ". " + tasks.retrieveTask(i));
         }
     }
 
