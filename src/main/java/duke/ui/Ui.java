@@ -43,11 +43,11 @@ public class Ui {
             + "\nHave a great day! :)";
 
 
-    /** Scanner to take in user input. */
+    /** <code>Scanner</code>to take in user input. */
     private Scanner sc;
 
     /**
-     * Constructs an Ui instance to read in user input and display output.
+     * Constructs an <code>Ui</code> instance to read in user input and display output.
      */
     public Ui() {
         printIntroductoryMessage();
@@ -101,9 +101,9 @@ public class Ui {
     }
 
     /**
-     * Prints the given String.
+     * Prints the given string.
      *
-     * @param statement The String to be printed.
+     * @param statement The string to be printed.
      */
     public void printStatement(String statement) {
         System.out.println(statement);

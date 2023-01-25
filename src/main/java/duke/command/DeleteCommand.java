@@ -19,11 +19,11 @@ public class DeleteCommand extends Command {
     private Storage storage;
 
     /**
-     * Constructs a DeleteCommand.
-     * @param ui The Ui to allow the command to print messages to the user.
+     * Constructs a <code>DeleteCommand</code>.
+     * @param ui The <code>Ui</code> to allow the command to print messages to the user.
      * @param taskIndex The index of the task which is to be deleted.
-     * @param tasks The lists of all available tasks.
-     * @param storage The Storage object to allow local saving of the deletion.
+     * @param tasks The <code>TaskList</code> of all available tasks.
+     * @param storage The <code>Storage</code> object to allow local saving of the deletion.
      */
     public DeleteCommand(Ui ui, int taskIndex, TaskList tasks, Storage storage) {
         super(ui);

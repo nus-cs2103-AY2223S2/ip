@@ -20,9 +20,9 @@ public class Parser {
     private TaskList tasks;
 
     /**
-     * Constructs a Parser instance.
+     * Constructs a <code>Parser</code> instance.
      *
-     * @param ui The Ui object that will handle the command messages.
+     * @param ui The <code>Ui</code> object that will handle the command messages.
      */
     public Parser(Ui ui, TaskList tasks) {
         this.ui = ui;
@@ -320,9 +320,9 @@ public class Parser {
     }
 
     /**
-     * Checks if a string can be converted into an Integer.
+     * Checks if a string can be converted into an <code>Integer</code>.
      *
-     * @param stringToCheck String to check whether the conversion is possible.
+     * @param stringToCheck <code>String</code> to check whether the conversion is possible.
      * @return true if it can be converted, else return false.
      */
     public boolean isInteger(String stringToCheck) {

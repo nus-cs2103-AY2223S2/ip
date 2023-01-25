@@ -9,7 +9,7 @@ import duke.ui.Ui;
 
 import java.time.temporal.Temporal;
 /**
- * Represents an on  command that is entered by the user to check what tasks are there on a specific day.
+ * Represents an on command that is entered by the user to check what tasks are there on a specific day.
  */
 public class OnCommand extends Command {
     /** Task list containing all the tasks. */
@@ -21,8 +21,8 @@ public class OnCommand extends Command {
     /**
      * Constructs an OnCommand
      *
-     * @param ui The Ui to allow the command to print messages to the user.
-     * @param tasks The lists of all available tasks.
+     * @param ui The <code>Ui</code> to allow the command to print messages to the user.
+     * @param tasks The <code>TaskList</code>> of all available tasks.
      * @param date The date to be checked.
      */
     public OnCommand(Ui ui, String date, TaskList tasks) {

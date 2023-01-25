@@ -29,12 +29,12 @@ public class EventCommand extends Command {
     /**
      * Constructs an EventCommand.
      *
-     * @param ui The Ui to allow the command to print messages to the user.
+     * @param ui The <code>Ui</code> to allow the command to print messages to the user.
      * @param taskName The name of the event task to be created.
      * @param startDate The start date of the task.
      * @param endDate The end date of the task.
-     * @param tasks The lists of all available tasks.
-     * @param storage The Storage object to allow local saving after adding a new deadline task.
+     * @param tasks The <code>TaskList</code>> of all available tasks.
+     * @param storage The <code>Storage</code> object to allow local saving after adding a new event task.
      */
     public EventCommand(Ui ui, String taskName, String startDate, String endDate, TaskList tasks, Storage storage) {
         super(ui);
@@ -46,7 +46,7 @@ public class EventCommand extends Command {
     }
 
     /**
-     * Creates an Event task and updates the local data file.
+     * Creates an <code>Event</code> task and updates the local data file.
      */
     @Override
     public void runCommand() {

@@ -11,7 +11,7 @@ import duke.ui.Ui;
 public class Duke {
 
     /**
-     * Gets the chatbot running.
+     * Gets the chatbot instance running.
      */
     public void run() {
         //Prepare components

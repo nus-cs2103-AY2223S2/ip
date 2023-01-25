@@ -9,7 +9,7 @@ public class ListCommand extends Command {
     private TaskList tasks;
 
     /**
-     * Constructs a ListCommand.
+     * Constructs a <code>ListCommand</code>.
      */
     public ListCommand(Ui ui, TaskList tasks) {
         super(ui);

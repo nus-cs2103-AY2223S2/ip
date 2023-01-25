@@ -6,7 +6,7 @@ import duke.ui.Ui;
  */
 public class ByeCommand extends Command {
     /**
-     * Constructs a ByeCommand.
+     * Constructs a <code>ByeCommand</code>.
      */
     public ByeCommand(Ui ui) {
         super(ui);

@@ -4,7 +4,7 @@ import duke.datetime.DateTime;
 
 import java.time.temporal.Temporal;
 /**
- * Represents a deadline Task that can be kept track of, having a deadline associated with the task.
+ * Represents a deadline <code>Task</code> that can be kept track of, having a deadline associated with the task.
  */
 public class Deadline extends Task {
     /** The deadline of the task. */
@@ -17,11 +17,11 @@ public class Deadline extends Task {
     private String formattedDeadline;
 
     /**
-     * Constructs a Deadline task.
+     * Constructs a <code>Deadline</code> task.
      *
      * @param taskName The name of the task.
      * @param rawDeadline The raw deadline string input by user.
-     * @param deadline The deadline Temporal object for this given deadline task.
+     * @param deadline The deadline <code>Temporal</code> object for this given deadline task.
      */
     public Deadline(String taskName, String rawDeadline, Temporal deadline) {
         super(taskName);
@@ -33,7 +33,7 @@ public class Deadline extends Task {
     /**
      * Gets the status of the deadline task.
      *
-     * @return a String indicating the type, status and deadline for the task.
+     * @return a <code>String</code> indicating the type, status and deadline for the task.
      */
     @Override
     public String getStatusOfTaskInString() {
@@ -44,10 +44,10 @@ public class Deadline extends Task {
     }
 
 
-    /*
+   /**
      * Gets the deadline object of the task.
      *
-     * @return the Temporal encapsulating the date and time of the deadline.
+     * @return the <code>Temporal</code> encapsulating the date and time of the deadline.
      */
     public Temporal getDeadline() {
         return deadline;
@@ -56,7 +56,7 @@ public class Deadline extends Task {
     /**
      * Gets the raw deadline of the task.
      *
-     * @return the String containing the raw date and time of the deadline.
+     * @return the <code>String</code> containing the raw date and time of the deadline.
      */
     public String getRawDeadline() { return rawDeadline;}
 }

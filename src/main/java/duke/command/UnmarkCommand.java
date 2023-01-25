@@ -21,10 +21,10 @@ public class UnmarkCommand extends Command {
     /**
      * Constructs an UnmarkCommand.
      *
-     * @param ui The Ui to allow the command to print messages to the user.
+     * @param ui The <code>Ui</code> to allow the command to print messages to the user.
      * @param taskNumber The number of the task which is to be marked as undone.
-     * @param tasks The lists of all available tasks.
-     * @param storage The Storage object to allow local saving of the unmark operation.
+     * @param tasks The <code>TaskList</code> of all available tasks.
+     * @param storage The <code>Storage</code> object to allow local saving of the unmark operation.
      */
     public UnmarkCommand(Ui ui, int taskNumber, TaskList tasks, Storage storage) {
         super(ui);
