@@ -28,7 +28,7 @@ test {
 }
 
 application {
-    mainClassName = "seedu.duke.Duke"
+    mainClassName = "duke.Duke"
 }
 
 shadowJar {
@@ -37,5 +37,5 @@ shadowJar {
 }
 
 run{
-    standardInput = System.in
+    standardInput = System.in;
 }
