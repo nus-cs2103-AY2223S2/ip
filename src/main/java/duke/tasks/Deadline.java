@@ -1,3 +1,5 @@
+package duke.tasks;
+
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
@@ -20,6 +22,11 @@ public class Deadline extends Task {
         this.by = by;
     }
 
+    public Deadline(String description, LocalDate by, boolean isDone) {
+        super(description, isDone);
+        this.by = by;
+    }
+
     /** returns the string representation of Deadline
      *
      * @return string representation of Deadline class
@@ -36,7 +43,7 @@ public class Deadline extends Task {
     @Override
     public String toDataFormatString() {
         int marked = 0;
-        if(super.isDone == true) {
+        if(super.isDone) {
             marked = 1;
         }
         return "D / "

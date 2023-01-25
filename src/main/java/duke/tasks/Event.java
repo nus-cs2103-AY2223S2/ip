@@ -1,3 +1,5 @@
+package duke.tasks;
+
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
@@ -21,6 +23,12 @@ public class Event extends Task {
         this.to= to;
     }
 
+    public Event(String description, LocalDate from, LocalDate to, boolean isDone) {
+        super(description, isDone);
+        this.from = from;
+        this.to= to;
+    }
+
     /** returns the string representation of Event
      *
      * @return string representation of Event class
@@ -39,7 +47,7 @@ public class Event extends Task {
     @Override
     public String toDataFormatString() {
         int marked = 0;
-        if(super.isDone == true) {
+        if(super.isDone) {
             marked = 1;
         }
         return "E / "

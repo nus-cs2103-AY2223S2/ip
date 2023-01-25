@@ -1,3 +1,4 @@
+package duke.tasks;
 /** a class that represents a task
  *
  * @author Wong Yong Xiang
@@ -15,6 +16,11 @@ public abstract class Task {
         this.isDone = false;
     }
 
+    public Task(String description, boolean isDone) {
+        this.description = description;
+        this.isDone = isDone;
+    }
+
     /** sets the isDone status of the Task
      *
      * @param status the new status of isDone
@@ -29,7 +35,7 @@ public abstract class Task {
      */
     @Override
     public String toString() {
-        String icon = this.isDone == true ? "[X]" : "[ ]";
+        String icon = this.isDone ? "[X]" : "[ ]";
         return icon + " " + description;
     }
 
