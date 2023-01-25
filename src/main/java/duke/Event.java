@@ -17,7 +17,6 @@ public class Event extends Task {
     protected String getTypeIcon() {
         return "E";
     }
-
     /**
      * @return String representation of the event task
      */
