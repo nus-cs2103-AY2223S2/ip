@@ -1,3 +1,4 @@
+import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
 import java.util.Objects;
 import java.util.Scanner;
@@ -20,6 +21,8 @@ public class TunaBot {
                 parse(input);
             } catch (InputException e) {
                 System.out.println(e.getMessage());
+            } catch (DateTimeParseException e) {
+                System.out.println("BLUB! Please use the format dd/mm/yy-hhmm! eg. 29/12/23-1854");
             }
             System.out.println(LINE);
         }
