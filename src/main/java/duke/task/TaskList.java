@@ -6,7 +6,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class TaskList {
-    List<Task> list = new ArrayList<>();
+    private List<Task> list = new ArrayList<>();
 
     public void add(Task task) {
         list.add(task);
@@ -30,10 +30,6 @@ public class TaskList {
 
     private int getIndexFromNumber(int number) {
         return number - 1;
-    }
-
-    private int getNumberFromIndex(int index) {
-        return index + 1;
     }
 
     @Override
