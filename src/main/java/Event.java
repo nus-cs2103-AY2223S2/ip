@@ -17,4 +17,9 @@ public class Event extends Task {
         + this.from.format(DateTimeFormatter.ofPattern("dd MMM yyyy hh:mm a")) + " to: " 
         + this.to.format(DateTimeFormatter.ofPattern("dd MMM yyyy hh:mm a")) + ")";
     }
+
+    @Override
+    public String toTxtString() {
+        return "E" + super.toTxtString() + "|" + this.from + "-" + this.to;
+    }
 }
