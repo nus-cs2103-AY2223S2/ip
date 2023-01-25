@@ -25,7 +25,7 @@ public class Parser {
             try {
                 validateCmd(arrOfStr[1]);
             } catch (MissingDescriptionException e) {
-                System.out.println(e.toString());
+                System.out.println(e.getMessage());
             }
             switch (arrOfStr[0]) {
             case "delete":
