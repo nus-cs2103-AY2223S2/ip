@@ -11,6 +11,7 @@ import dukes.command.DeleteCommand;
 import dukes.command.ListCommand;
 import dukes.command.ExitCommand;
 import dukes.command.MarkCommand;
+import dukes.command.FindCommand;
 
 import java.util.Locale;
 import java.util.Arrays;
@@ -19,10 +20,18 @@ import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 
+/**
+ * The util class for interpretation of the user command.
+ */
 public class Parser {
-    // also mainly use static method
-    // but need to deal with a lot of exceptions
 
+    /**
+     * The main util method to interpret the user command.
+     *
+     * @param command the command to be interpreted.
+     * @return the type of command containing the interpreted information.
+     * @throws DukeException if undesirable runtime issue happens.
+     */
     public Command parse(String command) throws DukeException {
         // make parse not static to avoid "throw exception from static method" issues
         if (command.equals("bye")) {
@@ -57,6 +66,13 @@ public class Parser {
         }
     }
 
+    /**
+     * Validate if the time string can be parsed into a valid date.
+     *
+     * @param timeString the time string to be interpreted.
+     * @return the date being parsed.
+     * @throws DateTimeParseException if the string is not a valid date, or is not of dd/mm/yyyy format.
+     */
     LocalDate validateTime(String timeString) throws DateTimeParseException {
         // Set the time input as dd/mm/yyyy
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("d/MM/yyyy");
@@ -64,6 +80,13 @@ public class Parser {
         return theDate;
     }
 
+    /**
+     * Validate if the command labelled as "todo" indeed contains a valid command.
+     *
+     * @param command the command string to be interpreted.
+     * @return a ToDo command containing the interpreted information.
+     * @throws DukeException if no content detected after "todo".
+     */
     public Command validateToDo(String command) throws DukeException {
         String[] splited = command.split(" ");
         if (splited.length < 2) {
@@ -81,6 +104,15 @@ public class Parser {
         }
     }
 
+    /**
+     * Validate if the command labelled as "deadline" indeed contains a valid command.
+     *
+     * @param command the command string to be interpreted.
+     * @return a DeadLine command containing the interpreted information.
+     * @throws DukeException if no content detected after "deadline",
+     * if no date for deadline is specified,
+     * or id the date detected is invalid.
+     */
     public Command validateDeadLine(String command) throws DukeException {
         String[] splited = command.split(" ");
         if (splited.length < 2) {
@@ -120,6 +152,15 @@ public class Parser {
         }
     }
 
+    /**
+     * Validate if the command labelled as "event" indeed contains a valid command.
+     *
+     * @param command the command string to be interpreted.
+     * @return an Event command containing the interpreted information.
+     * @throws DukeException if no content detected after "event",
+     * if no date for start date or end date is specified,
+     * or id the date detected is invalid.
+     */
     public Command validateEvent(String command) throws DukeException {
         String[] splited = command.split(" ");
         if (splited.length < 2) {
@@ -171,6 +212,14 @@ public class Parser {
         }
     }
 
+    /**
+     * Validate if the command labelled as "mark" or "unmark" indeed contains a valid command.
+     *
+     * @param command the command string to be interpreted.
+     * @param action 0 for mark, 1 for unmark.
+     * @return an Mark command containing the interpreted information.
+     * @throws DukeException if no content detected after "mark"/"unmark".
+     */
     public Command validateMark(String command, int action) throws DukeException {
         String[] splited = command.split(" ");
         if (splited.length < 2) {
@@ -182,6 +231,13 @@ public class Parser {
         }
     }
 
+    /**
+     * Validate if the command labelled as "delete" indeed contains a valid command.
+     *
+     * @param command the command string to be interpreted.
+     * @return a Delete command containing the interpreted information.
+     * @throws DukeException if no content detected after "mark"/"unmark".
+     */
     public Command validateDelete(String command) throws DukeException {
         String[] splited = command.split(" ");
         if (splited.length < 2) {
@@ -193,6 +249,14 @@ public class Parser {
         }
     }
 
+    /**
+     * Validate if the command labelled as "list" or "search" indeed contains a valid command.
+     *
+     * @param command the command string to be interpreted.
+     * @param action 0 for list, 1 for search.
+     * @return a List command containing the interpreted information.
+     * @throws DukeException if no content detected after "list"/"search".
+     */
     public Command validateList(String command, int action) throws DukeException {
         if (action == 0) {
             // just list, do nothing
@@ -213,6 +277,13 @@ public class Parser {
         }
     }
 
+    /**
+     * Validate if the command labelled as "find" indeed contains a valid command.
+     *
+     * @param command the command string to be interpreted.
+     * @return a Find command containing the interpreted information.
+     * @throws DukeException if no content detected after "find".
+     */
     public Command validateFind(String command) throws DukeException {
         String[] splited = command.split(" ");
         if (splited.length < 2) {
@@ -231,6 +302,12 @@ public class Parser {
         }
     }
 
+    /**
+     * Static method that interpret hard disk line into task object.
+     *
+     * @param fileLine the line read from the hard disk file.
+     * @return a task interpreted from the file line.
+     */
     public static Task fetchTask(String fileLine) {
         // System.out.println(fileLine);
         // Still get issues -- must be able to parse the date time!!

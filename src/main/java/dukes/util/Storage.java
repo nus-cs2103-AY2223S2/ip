@@ -15,6 +15,9 @@ import java.time.format.DateTimeParseException;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
+/**
+ * The util class for loading hard disk information and saving information to hard disk.
+ */
 public class Storage {
     private String filePath;
 
@@ -22,6 +25,12 @@ public class Storage {
         this.filePath = filePath;
     }
 
+    /**
+     * Load the hard disk information into task list when Duke starts.
+     *
+     * @return the list of tasks containing all the current tasks.
+     * @throws DukeException if the file is not found at the directory.
+     */
     public List<Task> load() throws DukeException {
         try {
             File f = new File(filePath);
@@ -38,6 +47,13 @@ public class Storage {
         }
     }
 
+    /**
+     * Generate the string to be written into hard disk,
+     * containing the information of tasks currently in the list.
+     *
+     * @param tasks the current task list.
+     * @return a string containing the information of tasks currently in the list.
+     */
     public String generateTaskList(TaskList tasks) {
         List<Task> taskList = tasks.getTaskList();
         StringBuilder sb = new StringBuilder();
@@ -58,6 +74,12 @@ public class Storage {
         return sb.toString();
     }
 
+    /**
+     * Write the task list information into hard disk.
+     *
+     * @param tasks the current task list.
+     * @throws DukeException if IOException happens during the write-in process.
+     */
     public void save(TaskList tasks) throws DukeException {
         String currWriteIn = generateTaskList(tasks);
         File directory = new File("data/");
