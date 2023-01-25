@@ -116,6 +116,45 @@ public class Storage {
         }
     }
 
+
+    protected TaskList findDataFromFile(String keyword) throws DukeIOException, DukeInvalidArgumentException {
+        TaskList result = new TaskList();
+        try {
+            List<String> allLine = Files.readAllLines(path);
+
+            if (allLine.isEmpty()) {
+                return result;
+            }
+
+            for (String taskDescription: allLine) {
+                if (taskDescription.contains(keyword)) {
+
+                    String[] s = taskDescription.split(" \\| ");
+
+                    Task task = null;
+                    boolean isDone = s[1].equals("1");
+                    switch (s[0]) {
+                    case "T":
+                        task = new ToDos(s[2]);
+                        break;
+                    case "D":
+                        task = new Deadlines(s[2], s[3]);
+                        break;
+                    case "E":
+                        task = new Events(s[2], s[3], s[4]);
+                        break;
+                    }
+                    task.setDone(isDone);
+                    result.add(task);
+                }
+            }
+
+            return result;
+        } catch (IOException e) {
+            throw new DukeIOException("Cannot read from " + filePath + " data file");
+        }
+    }
+
     protected void emptyStorage() throws DukeIOException {
         try {
             List<String> emptyLine = new ArrayList<>();

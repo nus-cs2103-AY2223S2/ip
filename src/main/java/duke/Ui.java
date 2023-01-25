@@ -1,5 +1,6 @@
 package duke;
 
+import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Ui {
@@ -59,6 +60,15 @@ public class Ui {
         printHorizontalLine();
         System.out.println("\tNoted. I've removed this task:\n\t  " + taskList.getTaskAt(index)
                 + "\n\tNow you have " + (taskList.size() - 1) + " tasks in the list.");
+        printHorizontalLine();
+    }
+
+    public void responseToFindTaskCommand(TaskList taskList) {
+        printHorizontalLine();
+        for (int i = 0; i < taskList.size(); i++) {
+            int index = i + 1;
+            System.out.println("\t" + index + "." + taskList.getTaskAt(i).toString());
+        }
         printHorizontalLine();
     }
 

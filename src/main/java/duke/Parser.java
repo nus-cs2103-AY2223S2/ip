@@ -28,6 +28,9 @@ public class Parser {
             case "event":
                 c = new AddCommand(split);
                 break;
+            case "find":
+                c = new FindCommand(split);
+                break;
             default:
                 throw new DukeUnknownCommandException(
                         "I'm sorry, but I don't know what that means :-(");
