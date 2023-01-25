@@ -59,7 +59,7 @@ public class Storage {
     }
 
     /**
-     * reads the read and processes the data.
+     * reads and processes the data in the file
      *
      * @param file
      * @return
