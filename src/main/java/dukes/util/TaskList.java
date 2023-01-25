@@ -1,10 +1,12 @@
 package dukes.util;
 
-import dukes.command.*;
-import dukes.task.*;
-import java.util.*;
+import dukes.task.Task;
+
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
+
+import java.util.List;
+import java.util.ArrayList;
 
 public class TaskList {
     private List<Task> taskList;

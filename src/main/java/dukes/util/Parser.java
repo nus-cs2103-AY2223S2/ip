@@ -1,19 +1,23 @@
 package dukes.util;
 
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.FileWriter;
-import java.io.IOException;
-import java.nio.file.Files;
-import java.nio.file.Paths;
-import dukes.util.*;
-import dukes.task.*;
-import dukes.command.*;
+import dukes.task.Task;
+import dukes.task.ToDo;
+import dukes.task.DeadLine;
+import dukes.task.Event;
 
-import java.time.format.DateTimeParseException;
-import java.util.*;
+import dukes.command.Command;
+import dukes.command.AddCommand;
+import dukes.command.DeleteCommand;
+import dukes.command.ListCommand;
+import dukes.command.ExitCommand;
+import dukes.command.MarkCommand;
+
+import java.util.Locale;
+import java.util.Arrays;
+
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
 
 public class Parser {
     // also mainly use static method
@@ -24,28 +28,28 @@ public class Parser {
         if (command.equals("bye")) {
             return new ExitCommand(true, true, "bye", "");
         } else {
-            String[] splited = command.split(" ");
-            if (splited.length == 0) {
+            String[] splits = command.split(" ");
+            if (splits.length == 0) {
                 throw new DukeException("Sorry, I cannot recognise your input.");
-            } else if (splited[0].equals("mark")) {
+            } else if (splits[0].equals("mark")) {
                 // maybe make MarkCommand.execute handle exception?
                 return validateMark(command, 0);
-            } else if (splited[0].equals("unmark")) {
+            } else if (splits[0].equals("unmark")) {
                 return validateMark(command, 1);
-            } else if (splited[0].equals("delete")) {
+            } else if (splits[0].equals("delete")) {
                 return validateDelete(command);
-            } else if (splited[0].equals("todo")) {
+            } else if (splits[0].equals("todo")) {
                 // these 3 needs a AddCommand
                 return validateToDo(command);
-            } else if (splited[0].equals("deadline")) {
+            } else if (splits[0].equals("deadline")) {
                 return validateDeadLine(command);
-            } else if (splited[0].equals("event")) {
+            } else if (splits[0].equals("event")) {
                 return validateEvent(command);
-            } else if (splited[0].equals("list")) {
+            } else if (splits[0].equals("list")) {
                 return validateList(command, 0);
-            } else if (splited[0].equals("search")) {
+            } else if (splits[0].equals("search")) {
                 return validateList(command, 1);
-            } else if (splited[0].equals("find")) {
+            } else if (splits[0].equals("find")) {
                 return validateFind(command);
             } else {
                 throw new DukeException("Sorry, I cannot recognise your input.");

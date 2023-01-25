@@ -1,14 +1,8 @@
 package dukes.command;
 
-import dukes.util.*;
-import dukes.task.*;
-
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.util.*;
-import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
-import java.time.format.DateTimeParseException;
+import dukes.util.TaskList;
+import dukes.util.UI;
+import dukes.util.Storage;
 
 public class ExitCommand extends Command {
 

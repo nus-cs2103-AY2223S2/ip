@@ -1,11 +1,19 @@
 package dukes.command;
 
-import dukes.util.*;
-import dukes.task.*;
+import dukes.util.DukeException;
+import dukes.util.TaskList;
+import dukes.util.UI;
+import dukes.util.Storage;
+
+import dukes.task.Task;
+import dukes.task.ToDo;
+import dukes.task.DeadLine;
+import dukes.task.Event;
 
 import java.io.File;
 import java.io.FileNotFoundException;
-import java.util.*;
+import java.util.List;
+
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
@@ -46,8 +54,6 @@ public class AddCommand extends Command {
     }
 
     public void execute(TaskList tasks, UI ui, Storage storage) throws DukeException {
-        // I dunno what is the point for ui to be here...
-        // to print?
         List<Task> taskList = tasks.getTaskList();
         Task theTask;
         if (this.taskTag.equals("T")) {
