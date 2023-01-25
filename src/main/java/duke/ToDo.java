@@ -2,7 +2,7 @@ package duke;
 
 import java.util.Scanner;
 
-public class ToDo extends Task{
+public class ToDo extends Task {
 
     public ToDo(String description) {
         super(description);
@@ -29,7 +29,7 @@ public class ToDo extends Task{
         return newTask;
     }
 
-    public static ToDo parseToDoStringArray(String parts[]) {
+    public static ToDo parseToDoStringArray(String[] parts) {
         ToDo task = new ToDo(parts[2]);
         if (Integer.parseInt(parts[1]) == 1) {
             task.mark();

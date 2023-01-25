@@ -11,7 +11,7 @@ public class Parser {
 
         if (command.equalsIgnoreCase("bye")) {
             return true;
-        }else if (command.equalsIgnoreCase("list")) {
+        } else if (command.equalsIgnoreCase("list")) {
             handleList(taskList, ui);
         } else if (command.equalsIgnoreCase("mark")) {
             handleMark(stringStream, taskList, ui);
@@ -33,7 +33,7 @@ public class Parser {
 
     private static void handleList(TaskList taskList, Ui ui) {
         String output = "";
-        for (int i = 0; i != taskList.size();++i) {
+        for (int i = 0; i != taskList.size(); ++i) {
             Task t = taskList.get(i);
             output += (i + 1) + ". " + t.toString() + "\n";
         }
@@ -110,8 +110,8 @@ public class Parser {
         } catch (DukeException e) {
             ui.showMessage(e.getMessage());
         } catch (DateTimeParseException e) {
-            ui.showMessage("☹ OOPS!!! We couldn't figure out the entered date and time.\n" +
-                    "Please use the format: dd/mm/yyyy hh:ss");
+            ui.showMessage("☹ OOPS!!! We couldn't figure out the entered date and time.\n"
+                    + "Please use the format: dd/mm/yyyy hh:ss");
         }
     }
 
@@ -119,13 +119,14 @@ public class Parser {
         try {
             Event newTask = Event.parseEventCommand(stringStream);
             taskList.add(newTask);
-            String output = "I've added this task:\n" + newTask.toString() + "\n" + "You now have " + taskList.size() + " tasks in the list";
+            String output = "I've added this task:\n" + newTask.toString() + "\n" + "You now have "
+                    + taskList.size() + " tasks in the list";
             ui.showMessage(output);
         } catch (DukeException e) {
             ui.showMessage(e.getMessage());
         } catch (DateTimeParseException e) {
-            ui.showMessage("☹ OOPS!!! We couldn't figure out the entered date and time.\n" +
-                    "Please use the format: dd/mm/yyyy hh:ss");
+            ui.showMessage("☹ OOPS!!! We couldn't figure out the entered date and time.\n"
+                    + "Please use the format: dd/mm/yyyy hh:ss");
         }
     }
 

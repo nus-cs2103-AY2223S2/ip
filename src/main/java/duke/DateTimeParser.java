@@ -4,10 +4,10 @@ import java.time.DateTimeException;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeFormatterBuilder;
 import java.time.format.DateTimeParseException;
 import java.time.temporal.ChronoField;
-import java.time.format.DateTimeFormatterBuilder;
-import java.util.Locale;
+
 
 public class DateTimeParser {
 
@@ -22,9 +22,6 @@ public class DateTimeParser {
             .appendOptional(DateTimeFormatter.ofPattern("d MMM yyyy H:mm"))
             .appendOptional(DateTimeFormatter.ofPattern("d MMM yyyy h:mma"))
             .appendOptional(DateTimeFormatter.ofPattern("d MMM yyyy"))
-            .appendOptional(DateTimeFormatter.ofPattern("d MMMM yyyy", Locale.ENGLISH))
-            .appendOptional(DateTimeFormatter.ofPattern("d MMMM yyyy H:mm", Locale.ENGLISH))
-            .appendOptional(DateTimeFormatter.ofPattern("d MMMM yyyy h:mma", Locale.ENGLISH))
             .parseDefaulting(ChronoField.HOUR_OF_DAY, 0)
             .parseDefaulting(ChronoField.MINUTE_OF_HOUR, 0).toFormatter();
 
@@ -67,7 +64,7 @@ public class DateTimeParser {
         int hourWithAmPm = dateTime.get(ChronoField.CLOCK_HOUR_OF_AMPM);
         String amPm = getAmPm(dateTime.getHour());
 
-        return dayOfTheMonth + ordinal + " " + formattedDate + ", " +  hourWithAmPm + minutes + amPm;
+        return dayOfTheMonth + ordinal + " " + formattedDate + ", " + hourWithAmPm + minutes + amPm;
     }
 
     private static String getOrdinal(final int day) {
@@ -75,10 +72,10 @@ public class DateTimeParser {
             return "th";
         }
         switch (day % 10) {
-            case 1: return "st";
-            case 2: return "nd";
-            case 3: return "rd";
-            default: return "th";
+        case 1: return "st";
+        case 2: return "nd";
+        case 3: return "rd";
+        default: return "th";
         }
     }
 

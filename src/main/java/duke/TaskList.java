@@ -38,7 +38,7 @@ public class TaskList implements Iterable<Task> {
             Integer isDone = (t.isDone()) ? 1 : 0;
 
             if (t instanceof Deadline) {
-                Deadline task = (Deadline)t;
+                Deadline task = (Deadline) t;
                 output += "D";
                 output += "/" + isDone;
                 output += "/" + taskDesc;

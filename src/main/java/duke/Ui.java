@@ -3,9 +3,9 @@ package duke;
 import java.util.Scanner;
 
 public class Ui {
-    Scanner inputReader = new Scanner(System.in);
-    String wrapTop = "________________________________\n";
-    String wrapBottom = "\n________________________________";
+    private Scanner inputReader = new Scanner(System.in);
+    private String wrapTop = "________________________________\n";
+    private String wrapBottom = "\n________________________________";
 
     public String readInput() {
         return inputReader.nextLine();
