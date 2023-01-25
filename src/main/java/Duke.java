@@ -1,10 +1,10 @@
+import duke.packages.*;
+
 import java.io.IOException;
 import java.time.LocalDate;
 
 public class Duke {
-    public enum ParseFunctions {
-        SPLIT_ALL, TODO, DEADLINE, EVENT
-    }
+
     private static Task getTaskForMarking(String[] parsed, TaskList tempTaskList) {
         int completedIndex = Integer.parseInt(parsed[1]) - 1; // index of the task completed
         Task completedTask = tempTaskList.getTaskAtIndex(completedIndex); // actual task
@@ -22,7 +22,7 @@ public class Duke {
         while (true) {
             String command = mainUi.getNextTask();
 
-            String[] toFindFirstWord = Parser.parse(command, ParseFunctions.SPLIT_ALL); // take a comment
+            String[] toFindFirstWord = Parser.parse(command, Parser.ParseFunctions.SPLIT_ALL); // take a comment
 
             String first = toFindFirstWord[0];
 
@@ -36,7 +36,7 @@ public class Duke {
                     completedTask.setCompletion();
                     mainUi.printReply("mark", completedTask);
 
-                    String[] parsed = Parser.parse(command, ParseFunctions.TODO);
+                    String[] parsed = Parser.parse(command, Parser.ParseFunctions.TODO);
                     mainStorage.changeTaskCompletion(Integer.parseInt(parsed[1]));
                     break;
                 }
@@ -45,28 +45,28 @@ public class Duke {
                     completedTask.setCompletion();
                     mainUi.printReply("unmark", completedTask);
 
-                    String[] parsed = Parser.parse(command, ParseFunctions.TODO);
+                    String[] parsed = Parser.parse(command, Parser.ParseFunctions.TODO);
                     mainStorage.changeTaskCompletion(Integer.parseInt(parsed[1]));
                     break;
                 }
                 case "delete": {
                     Task toDelete = getTaskForMarking(toFindFirstWord, mainTaskList);
 
-                    String[] parsed = Parser.parse(command, ParseFunctions.TODO);
+                    String[] parsed = Parser.parse(command, Parser.ParseFunctions.TODO);
                     mainStorage.deleteTask(Integer.parseInt(parsed[1]));
 
                     mainUi.printReply("delete", toDelete);
                     break;
                 }
                 case "deadline": {
-                    String[] parsed = Parser.parse(command, ParseFunctions.DEADLINE);
+                    String[] parsed = Parser.parse(command, Parser.ParseFunctions.DEADLINE);
                     Task newDeadline = new Deadline(parsed[1], LocalDate.parse(parsed[2]));
                     mainStorage.addTask(newDeadline);
                     mainUi.printReply("deadline", newDeadline);
                     break;
                 }
                 case "event": {
-                    String[] parsed = Parser.parse(command, ParseFunctions.EVENT);
+                    String[] parsed = Parser.parse(command, Parser.ParseFunctions.EVENT);
                     Task newEvent = new Event(parsed[1], LocalDate.parse(parsed[2]), LocalDate.parse(parsed[3]));
                     mainStorage.addTask(newEvent);
                     mainUi.printReply("event", newEvent);
@@ -74,7 +74,7 @@ public class Duke {
                 }
                 case "todo": {
                     try {
-                        String[] parsed = Parser.parse(command, ParseFunctions.TODO);
+                        String[] parsed = Parser.parse(command, Parser.ParseFunctions.TODO);
                         ToDo newToDo = new ToDo(parsed[1]);
                         mainStorage.addTask(newToDo);
                         mainUi.printReply("todo", newToDo);

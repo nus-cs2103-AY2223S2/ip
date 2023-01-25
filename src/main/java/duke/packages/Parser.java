@@ -1,5 +1,10 @@
+package duke.packages;
+
 public class Parser {
-    protected static String[] parse(String input, Duke.ParseFunctions parse_type) throws EmptyDescriptionException {
+    public enum ParseFunctions {
+        SPLIT_ALL, TODO, DEADLINE, EVENT
+    }
+    public static String[] parse(String input, ParseFunctions parse_type) throws EmptyDescriptionException {
         switch (parse_type) {
             case SPLIT_ALL:
                 return input.split(" ");
