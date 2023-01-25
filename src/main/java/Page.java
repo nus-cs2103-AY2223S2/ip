@@ -63,6 +63,19 @@ public class Page {
                             System.out.println("Sorry, that's not a number!");
                         }
                         break;
+                    case "delete":
+                        try {
+                            int questNum = Integer.parseInt(restOfInput);
+                            if (questNum > quests.size()) {
+                                System.out.println("Sorry, you only have " + quests.size() + " quests!");
+                            } else {
+                                quests.remove(questNum - 1);
+                                System.out.println("Quest deleted! " + quests.size() + " quests remain.");
+                            }
+                        } catch (NumberFormatException nfe) {
+                            System.out.println("Sorry, that's not a number!");
+                        }
+                        break;
                     case "todo":
                         if (!restOfInput.equals("")) {
                             addTodo(restOfInput);

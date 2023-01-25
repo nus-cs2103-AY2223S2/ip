@@ -17,4 +17,6 @@ incomplete 2
 complete 10
 complete notANumber
 log
+delete 1
+log
 bye

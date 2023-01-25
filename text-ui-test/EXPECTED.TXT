@@ -39,4 +39,8 @@ Quest Log:
 1: [T] [X] eat
 2: [D] [ ] drink by: 1pm
 3: [E] [ ] sleep from: 10pm to: 8am
+Quest deleted! 2 quests remain.
+Quest Log:
+1: [D] [ ] drink by: 1pm
+2: [E] [ ] sleep from: 10pm to: 8am
 Farewell, my liege.
