@@ -1,3 +1,4 @@
+package duke.exception;
 public class DukeInvalidIndexException extends DukeException{
 
     public DukeInvalidIndexException(String message) {
