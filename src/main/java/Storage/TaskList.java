@@ -4,6 +4,8 @@ import Task.Task;
 import Task.Todo;
 import Task.Event;
 import Task.Deadline;
+
+import java.time.LocalDate;
 import java.util.ArrayList;
 
 public class TaskList {
@@ -42,8 +44,8 @@ public class TaskList {
      * @param deadline the deadline of the task
      * @return the added Deadline
      */
-    public Deadline addDeadline(String task, String deadline) {
-        Deadline taskDeadline = new Deadline(task, deadline);
+    public Deadline addDeadline(String task, LocalDate dueDate) {
+        Deadline taskDeadline = new Deadline(task, dueDate);
         this.tasks.add(taskDeadline);
         return taskDeadline;
     }
@@ -55,7 +57,7 @@ public class TaskList {
      * @param to end time of the event
      * @return the added Event
      */
-    public Event addEvent(String task, String from, String to) {
+    public Event addEvent(String task, LocalDate from, LocalDate to) {
         Event event = new Event(task, from, to);
         this.tasks.add(event);
         return event;
