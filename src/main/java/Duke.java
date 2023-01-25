@@ -1,4 +1,6 @@
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Scanner;
 
 public class Duke {
     private final static String[] COMMANDS_LIST =
@@ -8,37 +10,41 @@ public class Duke {
         start, list, bye, todo, mark, unmark, event, deadline, delete
     }
 
-    public static void markTask(ArrayList<Task> taskList, int index) throws DukeException {
+    public static void markTask(ArrayList<Task> taskList, Storage dataStorage, int index) throws DukeException {
         try {
             Task unmarkedTask = taskList.get(index);
             Task markedTask = unmarkedTask.markTask();
             taskList.set(index, markedTask);
+            dataStorage.writeFile(taskList);
         } catch (NumberFormatException err) {
             throw new DukeException("The task number given is not numeric!");
         }
     }
 
-    public static void unmarkTask(ArrayList<Task> taskList, int index)  throws DukeException {
+    public static void unmarkTask(ArrayList<Task> taskList, Storage dataStorage, int index) throws DukeException {
         try {
             Task markedTask = taskList.get(index);
             Task unmarkedTask = markedTask.unmarkTask();
             taskList.set(index, unmarkedTask);
+            dataStorage.writeFile(taskList);
         } catch (DukeException err) {
             throw new DukeException("The task number given is not numeric!");
         }
     }
 
-    public static void addTask(ArrayList<Task> taskList, Task newTask) {
+    public static void addTask(ArrayList<Task> taskList, Storage dataStorage, Task newTask) {
         taskList.add(newTask);
+        dataStorage.writeFile(taskList);
         System.out.println("Got it, I've added this task:");
         System.out.println(newTask);
         System.out.printf("Now you have %d tasks in the list.%n", taskList.size());
     }
 
-    public static void deleteTask(ArrayList<Task> taskList, int index) throws DukeException {
+    public static void deleteTask(ArrayList<Task> taskList, Storage dataStorage, int index) throws DukeException {
         try {
             Task deletedTask = taskList.get(index);
             taskList.remove(index);
+            dataStorage.writeFile(taskList);
             System.out.println("Noted. I've removed this task:");
             System.out.println(deletedTask);
             System.out.printf("Now you have %d tasks in the list.%n", taskList.size());
@@ -120,10 +126,11 @@ public class Duke {
     public static void main(String[] args) {
         System.out.println("Hello! I'm Duke");
         System.out.println("What can I do for you?");
-        Scanner sc = new Scanner (System.in);
+        Scanner sc = new Scanner(System.in);
+        Storage dataStorage = new Storage();
+        ArrayList<Task> taskList = dataStorage.readFile();
         String input;
         Commands command = Commands.start;
-        ArrayList<Task> taskList = new ArrayList<>();
         while (!command.equals(Commands.bye)) {
             // split command into each word
             input = sc.nextLine();
@@ -136,92 +143,92 @@ public class Duke {
                 String description;
                 Task newTask;
                 switch (command) {
-                    case delete:
-                        try {
-                            // taskNumber in 1-indexing
-                            taskNumber = getTaskNumber(splitInput);
-                            // index in 0-indexing
-                            index = checkTaskNumber(taskList, taskNumber);
-                            deleteTask(taskList, index);
-                        } catch (DukeException err) {
-                            System.out.println(err.getErrorMessage());
-                        }
-                        break;
-                    case list:
-                        System.out.println("Here are the tasks in your list:");
-                        for (int i = 0; i < taskList.size(); i++) {
-                            Task task = taskList.get(i);
-                            System.out.printf("%d.%s%n", i + 1, task);
-                        }
-                        break;
-                    case bye:
-                        System.out.println("Bye. Hope to see you again soon!");
-                        break;
-                    case mark:
-                        try {
-                            // taskNumber in 1-indexing
-                            taskNumber = getTaskNumber(splitInput);
-                            // index in 0-indexing
-                            index = checkTaskNumber(taskList, taskNumber);
-                            markTask(taskList, index);
-                        } catch (DukeException err) {
-                            System.out.println(err.getErrorMessage());
-                        }
-                        break;
-                    case unmark:
-                        try {
-                            taskNumber = getTaskNumber(splitInput);
-                            index = checkTaskNumber(taskList, taskNumber);
-                            unmarkTask(taskList, index);
-                        } catch (DukeException err) {
-                            System.out.println(err.getErrorMessage());
-                        }
-                        break;
-                    case todo:
-                        try {
-                            description = String.join(" ",
-                                    Arrays.copyOfRange(splitInput, 1, splitInput.length));
-                            checkDescription(description);
-                            newTask = new Todo(description);
-                            addTask(taskList, newTask);
-                        } catch (DukeException err) {
-                            System.out.println(err.getErrorMessage());
-                        }
-                        break;
-                    case deadline:
-                        try {
-                            int byIndex = checkDeadline(splitInput);
-                            description = String.join(" ", Arrays.copyOfRange(splitInput, 1, byIndex));
-                            checkDescription(description);
-                            String deadline = String.join(" ", Arrays.copyOfRange(splitInput,
-                                    byIndex + 1, splitInput.length));
-                            checkTimestamp(deadline);
-                            newTask = new Deadline(description, deadline);
-                            addTask(taskList, newTask);
-                        } catch (DukeException err) {
-                            System.out.println(err.getErrorMessage());
-                        }
-                        break;
-                    case event:
-                        try {
-                            int fromIndex = checkStarting(splitInput);
-                            int toIndex = checkEnding(splitInput);
-                            description = String.join(" ", Arrays.copyOfRange(splitInput, 1, fromIndex));
-                            checkDescription(description);
-                            String from = String.join(" ",
-                                    Arrays.copyOfRange(splitInput, fromIndex + 1, toIndex));
-                            checkTimestamp(from);
-                            String to = String.join(" ",
-                                    Arrays.copyOfRange(splitInput, toIndex + 1, splitInput.length));
-                            checkTimestamp(to);
-                            newTask = new Event(description, from, to);
-                            addTask(taskList, newTask);
-                        } catch (DukeException err) {
-                            System.out.println(err.getErrorMessage());
-                        }
-                        break;
+                case delete:
+                    try {
+                        // taskNumber in 1-indexing
+                        taskNumber = getTaskNumber(splitInput);
+                        // index in 0-indexing
+                        index = checkTaskNumber(taskList, taskNumber);
+                        deleteTask(taskList, dataStorage, index);
+                    } catch (DukeException err) {
+                        System.out.println(err.getErrorMessage());
+                    }
+                    break;
+                case list:
+                    System.out.println("Here are the tasks in your list:");
+                    for (int i = 0; i < taskList.size(); i++) {
+                        Task task = taskList.get(i);
+                        System.out.printf("%d.%s%n", i + 1, task);
+                    }
+                    break;
+                case bye:
+                    System.out.println("Bye. Hope to see you again soon!");
+                    break;
+                case mark:
+                    try {
+                        // taskNumber in 1-indexing
+                        taskNumber = getTaskNumber(splitInput);
+                        // index in 0-indexing
+                        index = checkTaskNumber(taskList, taskNumber);
+                        markTask(taskList, dataStorage, index);
+                    } catch (DukeException err) {
+                        System.out.println(err.getErrorMessage());
+                    }
+                    break;
+                case unmark:
+                    try {
+                        taskNumber = getTaskNumber(splitInput);
+                        index = checkTaskNumber(taskList, taskNumber);
+                        unmarkTask(taskList, dataStorage, index);
+                    } catch (DukeException err) {
+                        System.out.println(err.getErrorMessage());
+                    }
+                    break;
+                case todo:
+                    try {
+                        description = String.join(" ",
+                                Arrays.copyOfRange(splitInput, 1, splitInput.length));
+                        checkDescription(description);
+                        newTask = new Todo(description);
+                        addTask(taskList, dataStorage, newTask);
+                    } catch (DukeException err) {
+                        System.out.println(err.getErrorMessage());
+                    }
+                    break;
+                case deadline:
+                    try {
+                        int byIndex = checkDeadline(splitInput);
+                        description = String.join(" ", Arrays.copyOfRange(splitInput, 1, byIndex));
+                        checkDescription(description);
+                        String deadline = String.join(" ", Arrays.copyOfRange(splitInput,
+                                byIndex + 1, splitInput.length));
+                        checkTimestamp(deadline);
+                        newTask = new Deadline(description, deadline);
+                        addTask(taskList, dataStorage, newTask);
+                    } catch (DukeException err) {
+                        System.out.println(err.getErrorMessage());
+                    }
+                    break;
+                case event:
+                    try {
+                        int fromIndex = checkStarting(splitInput);
+                        int toIndex = checkEnding(splitInput);
+                        description = String.join(" ", Arrays.copyOfRange(splitInput, 1, fromIndex));
+                        checkDescription(description);
+                        String from = String.join(" ",
+                                Arrays.copyOfRange(splitInput, fromIndex + 1, toIndex));
+                        checkTimestamp(from);
+                        String to = String.join(" ",
+                                Arrays.copyOfRange(splitInput, toIndex + 1, splitInput.length));
+                        checkTimestamp(to);
+                        newTask = new Event(description, from, to);
+                        addTask(taskList, dataStorage, newTask);
+                    } catch (DukeException err) {
+                        System.out.println(err.getErrorMessage());
+                    }
+                    break;
                 }
-            } catch(DukeException err){
+            } catch (DukeException err) {
                 System.out.println(err.getErrorMessage());
             }
         }

@@ -1,7 +1,7 @@
-public class Deadline extends Task{
+public class Deadline extends Task {
     private final String deadline;
 
-    private Deadline(String description, boolean isDone, String taskType, String deadline) {
+    public Deadline(String description, boolean isDone, String taskType, String deadline) {
         super(description, isDone, taskType);
         this.deadline = deadline;
     }
@@ -28,6 +28,10 @@ public class Deadline extends Task{
         Task unmarkedTask = new Deadline(super.description, false, super.taskType, this.deadline);
         System.out.println(unmarkedTask);
         return unmarkedTask;
+    }
+
+    public String formatTask() {
+        return String.format("D|%b|%s|%s", this.isDone, this.description, this.deadline);
     }
 
     @Override

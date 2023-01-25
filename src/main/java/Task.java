@@ -27,6 +27,8 @@ abstract class Task {
     // returns new Task that is marked as undone
     abstract public Task unmarkTask() throws DukeException;
 
+    abstract public String formatTask();
+
     @Override
     public String toString() {
         return this.description;

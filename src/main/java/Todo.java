@@ -1,6 +1,6 @@
 public class Todo extends Task {
 
-    private Todo(String description, boolean isDone, String taskType) {
+    public Todo(String description, boolean isDone, String taskType) {
         super(description, isDone, taskType);
     }
 
@@ -26,6 +26,10 @@ public class Todo extends Task {
         Task unmarkedTask = new Todo(this.description, false, super.taskType);
         System.out.println(unmarkedTask);
         return unmarkedTask;
+    }
+
+    public String formatTask() {
+        return String.format("T|%b|%s", this.isDone, this.description);
     }
 
     @Override

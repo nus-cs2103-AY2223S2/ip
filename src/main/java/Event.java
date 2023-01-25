@@ -1,8 +1,8 @@
-public class Event extends Task{
+public class Event extends Task {
     private final String from;
     private final String to;
 
-    private Event(String description, boolean isDone, String taskType, String from, String to) {
+    public Event(String description, boolean isDone, String taskType, String from, String to) {
         super(description, isDone, taskType);
         this.from = from;
         this.to = to;
@@ -30,6 +30,10 @@ public class Event extends Task{
         Task unmarkedTask = new Event(super.description, false, super.taskType, this.from, this.to);
         System.out.println(unmarkedTask);
         return unmarkedTask;
+    }
+
+    public String formatTask() {
+        return String.format("D|%b|%s|%s|%s", this.isDone, this.description, this.from, this.to);
     }
 
     @Override
