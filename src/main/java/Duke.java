@@ -173,13 +173,17 @@ public class Duke {
                     tasks.add(new Todo(taskData[1]));
                     break;
                 case "D":
-                    tasks.add(new Deadline(taskData[1], taskData[2]));
+                    tasks.add(new Deadline(taskData[1], taskData[3]));
                     break;
                 case "E":
-                    tasks.add(new Event(taskData[1], taskData[2], taskData[3]));
+                    tasks.add(new Event(taskData[1], taskData[3], taskData[4]));
                     break;
                 default:
                     throw new DukeException("Error loading tasks from file!");
+            }
+
+            if (taskData[2].equals("T")) {
+                tasks.get(tasks.size() - 1).mark();
             }
         }
 
