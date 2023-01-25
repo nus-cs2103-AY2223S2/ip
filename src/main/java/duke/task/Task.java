@@ -8,13 +8,13 @@ public class Task {
     protected String description;
     protected boolean isDone;
     protected String typeofTask = "";
-    protected String donestr;
+    protected String doneStr;
 
-    public Task(String description, String typeofTask, String donestr) {
+    public Task(String description, String typeOfTask, String doneStr) {
         this.description = description;
-        this.donestr = donestr;
+        this.doneStr = doneStr;
         checkisdonestr();
-        this.typeofTask = typeofTask;
+        this.typeofTask = typeOfTask;
 
     }
 
@@ -29,7 +29,7 @@ public class Task {
      * @return boolean - Returns true if contains "X" else will return false.
      */
     public boolean checkisdonestr() {
-        if (this.donestr.equals("X")) {
+        if (this.doneStr.equals("X")) {
             this.isDone = true;
         } else this.isDone = false;
         return this.isDone;

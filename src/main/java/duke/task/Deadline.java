@@ -35,8 +35,10 @@ public class Deadline extends Task {
 
     /**
      * Checks if the input has an incorrect date and time format.
+     *
      * @return boolean - true or false if there is a formatting error.
      */
+
     public boolean checkFormat() {
         return this.haveFormatErr;
     }

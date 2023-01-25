@@ -1,6 +1,14 @@
 package duke.parser;
 
-import duke.command.*;
+import duke.command.ByeCommand;
+import duke.command.EventCommand;
+import duke.command.DeadlineCommand;
+import duke.command.ListCommand;
+import duke.command.MarkCommand;
+import duke.command.UnmarkCommand;
+import duke.command.TodoCommand;
+import duke.command.DeleteCommand;
+import duke.command.Command;
 
 /**
  * This class allows commands to be stored and checked, whether they are in the system
@@ -26,20 +34,26 @@ public class Parser {
      * @throws IllegalArgumentException - Error that the command does not exists.
      */
     public static Command parse(String input) throws IllegalArgumentException {
+<<<<<<< .merge_file_dOkbVn
         String[] input2 = input.split(" ");
         Type t = Type.valueOf(input2[0].toLowerCase());
         switch (t) {
+=======
+        String[] inputStrings = input.split(" ");
+        Type t = Type.valueOf(inputStrings[0].toLowerCase());
+        switch(t) {
+>>>>>>> .merge_file_tqb3b1
             case todo:
-                return new TodoCommand(input2[1]);
+                return new TodoCommand(inputStrings[1]);
 
             case deadline:
                 return new DeadlineCommand(input);
 
             case mark:
-                return new MarkCommand(input2[1]);
+                return new MarkCommand(inputStrings[1]);
 
             case unmark:
-                return new UnmarkCommand(input2[1]);
+                return new UnmarkCommand(inputStrings[1]);
 
             case list:
                 return new ListCommand();
@@ -48,7 +62,7 @@ public class Parser {
                 return new ByeCommand();
 
             case delete:
-                return new DeleteCommand(input2[1]);
+                return new DeleteCommand(inputStrings[1]);
 
             case event:
                 return new EventCommand(input);

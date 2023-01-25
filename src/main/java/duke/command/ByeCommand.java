@@ -4,9 +4,12 @@ import duke.storage.StorageList;
 import duke.task.TaskList;
 import duke.ui.Ui;
 
+<<<<<<< .merge_file_XEP54C
 /**
  * Implementation of Bye Command
  **/
+=======
+>>>>>>> .merge_file_nbqJ2J
 public class ByeCommand extends Command {
 
     public boolean execute(TaskList tasks, Ui ui, StorageList storage) {
