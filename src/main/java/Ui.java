@@ -21,6 +21,11 @@ public class Ui {
         System.out.println("Hello! I'm " + name + " !");
     }
 
-
+    public String readCommand() {
+        System.out.println("What can I do for you today?\n");
+        String input = sc.nextLine();
+        System.out.println("Received command: " + input);
+        return input;
+    }
 
 }
