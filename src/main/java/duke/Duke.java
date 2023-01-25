@@ -1,3 +1,5 @@
+package duke;
+
 import duke.exception.DukeException;
 import duke.helper.Parser;
 import duke.helper.Storage;
