@@ -1,6 +1,6 @@
 package duke;
 
-import tasks.Task;
+import duke.tasks.Task;
 
 import java.util.ArrayList;
 
@@ -63,10 +63,10 @@ public class TaskList {
     }
 
     /**
-     * Prints out all the tasks in the list
+     * Prints out all the duke.tasks in the list
      */
     public void printList() {
-        String tasksList = "Here are the tasks in your list:\n";
+        String tasksList = "Here are the duke.tasks in your list:\n";
         for (int i = 0; i < tasks.size(); i++) {
             tasksList += "\t" + (i + 1) + ". " + tasks.get(i).toString();
             if (i < tasks.size() - 1) {

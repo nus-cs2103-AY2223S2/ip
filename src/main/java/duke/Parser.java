@@ -1,18 +1,18 @@
 package duke;
 
 import exception.DukeException;
-import tasks.Deadline;
-import tasks.Event;
-import tasks.Task;
-import tasks.Todo;
+import duke.tasks.Deadline;
+import duke.tasks.Event;
+import duke.tasks.Task;
+import duke.tasks.Todo;
 
 import java.io.IOException;
 
 public class Parser {
     enum Actions {LIST, MARK, UNMARK, TODO, DEADLINE, EVENT, DELETE}
 
-    private TaskList tasks;
-    private Storage storage;
+    private final TaskList tasks;
+    private final Storage storage;
 
     public Parser(TaskList tasks, Storage storage) {
         this.tasks = tasks;
@@ -48,7 +48,7 @@ public class Parser {
                     throw new DukeException("The description of a deadline cannot be empty.");
                 String[] deadlineInfo = command.substring(9).split(" /by ");
                 if (deadlineInfo.length < 2)
-                    throw new DukeException("tasks.Deadline cannot be empty.");
+                    throw new DukeException("Deadline cannot be empty.");
                 Deadline deadline = new Deadline(deadlineInfo[0], deadlineInfo[1]);
                 tasks.addTask(deadline, false);
                 break;
@@ -57,10 +57,10 @@ public class Parser {
                     throw new DukeException("The description of a event cannot be empty.");
                 String[] eventInfo = command.substring(6).split(" /from ");
                 if (eventInfo.length < 2)
-                    throw new DukeException("tasks.Event start time and end time are required.");
+                    throw new DukeException("Event start time and end time are required.");
                 String[] eventTime = eventInfo[1].split(" /to ");
                 if (eventTime.length < 2)
-                    throw new DukeException("tasks.Event start time and end time are required.");
+                    throw new DukeException("Event start time and end time are required.");
                 Event event = new Event(eventInfo[0], eventTime[0], eventTime[1]);
                 tasks.addTask(event, false);
                 break;

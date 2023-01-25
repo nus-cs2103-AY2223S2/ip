@@ -1,9 +1,9 @@
 package duke;
 
 import exception.DukeException;
-import tasks.Deadline;
-import tasks.Event;
-import tasks.Todo;
+import duke.tasks.Deadline;
+import duke.tasks.Event;
+import duke.tasks.Todo;
 
 import java.io.*;
 import java.util.Scanner;
