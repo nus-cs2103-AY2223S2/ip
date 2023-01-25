@@ -19,7 +19,7 @@ public class Storage {
         fw.close();
     }
 
-    public void read(TaskList taskList) throws FileNotFoundException {
+    public void read(TaskList taskList, Ui ui) throws FileNotFoundException {
         File f = new File(storagePath);
         Scanner s = new Scanner(f);
 
@@ -36,7 +36,7 @@ public class Storage {
                     taskList.add(ToDo.parseToDoStringArray(parts));
                 }
             } catch (DateTimeParseException e) {
-                Duke.displayMessage("☹ OOPS!!! Failed to load a task from storage!");
+                ui.showMessage("☹ OOPS!!! Failed to load a task from storage!");
             }
 
         }

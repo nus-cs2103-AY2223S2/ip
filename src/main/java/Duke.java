@@ -1,25 +1,17 @@
 import java.io.FileNotFoundException;
 import java.io.IOException;
-import java.time.format.DateTimeParseException;
-import java.util.Scanner;
-
 
 public class Duke {
     private static TaskList taskList = new TaskList();
-    private static Scanner sc = new Scanner(System.in);
     private static boolean exitApp = false;
     private static Storage storage = new Storage("data.txt");
     private static Parser parser = new Parser();
+    private static Ui ui = new Ui();
 
     public static void main(String[] args) {
-        String logo = " ____        _        \n"
-                + "|  _ \\ _   _| | _____ \n"
-                + "| | | | | | | |/ / _ \\\n"
-                + "| |_| | |_| |   <  __/\n"
-                + "|____/ \\__,_|_|\\_\\___|\n";
-        System.out.println("Hello from\n" + logo);
-
         init();
+
+        ui.showWelcome();
 
         // App loop
         while (!exitApp) {
@@ -30,35 +22,26 @@ public class Duke {
         try {
             storage.save(taskList.toStorageString());
         } catch (IOException e) {
-            displayMessage("☹ OOPS!!! Something went wrong when saving your tasks!");
+            ui.showMessage("☹ OOPS!!! Something went wrong when saving your tasks!");
         }
-        displayMessage("Bye! Hope to see you again soon!");
+        ui.showMessage("Bye! Hope to see you again soon!");
     }
 
     private static void init() {
         try {
-            storage.read(taskList);
+            storage.read(taskList, ui);
         } catch (FileNotFoundException e) {
-            displayMessage("☹ OOPS!!! Could not find the storage file.");
+            ui.showMessage("☹ OOPS!!! Could not find the storage file.");
         }
-        displayMessage("Hello! I'm Duke\nWhat can i do for you?");
     }
 
     private static void update() {
-        String input = sc.nextLine();
+        String input = ui.readInput();
         if (input.isEmpty()) {
             return;
         }
 
-        exitApp = parser.parseAndExecute(input, taskList);
-
+        exitApp = parser.parseAndExecute(input, taskList, ui);
     }
 
-
-    public static void displayMessage(String msg) {
-
-        String wrapTop = "__________________________\n";
-        String wrapBottom = "\n__________________________";
-        System.out.println(wrapTop + msg.toString() + wrapBottom);
-    }
 }
