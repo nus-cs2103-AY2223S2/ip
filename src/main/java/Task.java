@@ -10,13 +10,8 @@ public class Task {
         return this.desc;
     }
 
-    public void setStatus(String isDone){
-        if (isDone.equalsIgnoreCase("mark")){
-            this.isDone = true;
-        }
-        else if (isDone.equalsIgnoreCase("unmark")){
-            this.isDone = false;
-        }
+    public void setStatus(Boolean isDone){
+        this.isDone = isDone;
     }
 
     public String getStatusIcon() {
@@ -26,5 +21,9 @@ public class Task {
     @Override
     public String toString() {
         return String.format("[%s] %s", this.getStatusIcon(), this.desc);
+    }
+
+    public String toBackup() {
+        return String.format("%s | %s", (isDone ? "1" : "0"), this.desc);
     }
 }

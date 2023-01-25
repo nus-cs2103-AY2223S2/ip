@@ -12,7 +12,9 @@ public class Duke {
 
         Scanner sc = new Scanner(System.in);
         // List<String> arr = new ArrayList<String>();
-        List<Task> arr = new ArrayList<>();
+
+        Backup backup = new Backup();
+        List<Task> arr = backup.readArray();
 
         while (sc.hasNextLine()) {
             String ip = sc.nextLine();
@@ -27,7 +29,7 @@ public class Duke {
             // level 1
             // System.out.println(ip + "\n");
 
-            else if (ip.startsWith("mark") || ip.startsWith("unmark") ) {
+            else if (ip.startsWith("mark") || ip.startsWith("unmark")) {
                 String[] parts = ip.split(" ");
                 if (parts.length != 2) {
                     System.out.println("invalid\n");
@@ -36,10 +38,10 @@ public class Duke {
                 int index = Integer.parseInt(parts[1]) - 1;
                 if (parts[0].equalsIgnoreCase("mark")) {
                     System.out.println("Nice! I've marked this task as done:");
-                    arr.get(index).setStatus(parts[0]);
+                    arr.get(index).setStatus(true);
                 } else if (parts[0].equalsIgnoreCase("unmark")) {
                     System.out.println("OK, I've marked this task as not done yet:");
-                    arr.get(index).setStatus(parts[0]);
+                    arr.get(index).setStatus(false);
                 }
                 System.out.printf(arr.get(index).toString() + "\n");
             } else if ((ip.startsWith("delete"))) {
@@ -58,7 +60,7 @@ public class Duke {
                 }
             } else {
                 String[] parts = ip.split(" ");
-                Task t = new Task(ip);
+                Task t = null;
 
                 try {
                     if (parts[0].equalsIgnoreCase("todo")) {
@@ -92,7 +94,7 @@ public class Duke {
                     System.out.println(ex);
                 }
             }
-
+            backup.writeArray(arr);
         }
 
         System.out.println("Bye. Hope to see you again soon!");
