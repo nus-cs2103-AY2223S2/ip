@@ -5,6 +5,8 @@ import java.time.format.DateTimeParseException;
 
 import duke.commands.Command;
 
+
+
 /**
  * Main class of the program.
  * Contains the Storage, TaskList, Ui that will be used
@@ -19,53 +21,32 @@ public class Duke {
 
     /**
      * Constructor for Duke.
-     *
-     * @param path The relative file path where data will be stored into
      */
-    public Duke(String path) {
+    public Duke() {
+        String path = System.getProperty("user.home") + "/data/duke.txt";
         this.store = new Storage(path);
-        this.taskList = new TaskList();
         this.inter = new Ui();
+        this.taskList = new TaskList();
         try {
             this.store.loadTasks(this.taskList);
         } catch (FileNotFoundException e) {
-            this.inter.loadError();
+            System.out.println(e.getMessage());
         }
     }
 
     /**
      * Function to run Duke
-     *
-     * @author Cheam Jia Wei
      */
-    public void start() {
-        this.inter.greet();
-        boolean isExit = false;
-
-        while (!isExit) {
-            try {
-                String fullCommand = this.inter.uiRead();
-                Command c = Parser.parse(fullCommand);
-                c.execute(this.taskList, this.inter, this.store);
-                isExit = c.isExit();
-            } catch (IllegalArgumentException e) {
-                this.inter.printError("Unrecognised command. Try again.");
-            } catch (DateTimeParseException e) {
-                this.inter.printError("Key in date and time in this format. yyyy-mm-ddThh:mm");
-            } catch (Exception e) {
-                this.inter.printError(e.getMessage());
-            }
+    public String getResponse(String input) {
+        try {
+            Command c = Parser.parse(input);
+            return c.execute(this.taskList, this.inter, this.store);
+        } catch (IllegalArgumentException e) {
+            return "Unrecognised command. Try again.";
+        } catch (DateTimeParseException e) {
+            return "Key in date and time in this format. yyyy-mm-ddThh:mm";
+        } catch (Exception e) {
+            return e.getMessage();
         }
-    }
-
-    /**
-     * Main method to initialise and run the Duke program.
-     *
-     * @param args Placeholder
-     */
-    public static void main(String[] args) {
-        String path = System.getProperty("user.home") + "/data/duke.txt";
-        Duke duke = new Duke(path);
-        duke.start();
     }
 }

@@ -18,7 +18,7 @@ public abstract class Command {
      * @param inter The Ui that will interact with the user.
      * @param store The storage that will help store the task into the data file if TaskList is modified.
      */
-    public abstract void execute(TaskList taskList, Ui inter, Storage store);
+    public abstract String execute(TaskList taskList, Ui inter, Storage store);
 
     /**
      * Returns a boolean if the Command class is an exit command.

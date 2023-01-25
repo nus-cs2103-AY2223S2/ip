@@ -1,5 +1,7 @@
 package duke;
 
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 
 import duke.tasks.Deadlines;
@@ -119,6 +121,64 @@ public class TaskList {
         int position = Integer.parseInt(input) - 1;
         Task toRemove = this.taskList.remove(position);
         return toRemove;
+    }
+
+    /**
+     * Lists out the task in the TaskList.
+     *
+     * @return A string of all the task in the TaskList.
+     */
+    public String list() {
+        String output = "";
+        if (this.size() == 0) {
+            return "No task currently";
+        } else if (this.size() == 1) {
+            output += "There is only 1 task currently:\n";
+        } else {
+            output += "There is a total of " + this.size() + " tasks currently:";
+        }
+        for (int x = 0; x < this.size(); x++) {
+            output += "\n" + (x + 1) + ": " + this.get(x);
+        }
+        return output;
+    }
+
+    /**
+     * Goes through the TaskList and returns the tasks happening through
+     * the specified date and time.
+     *
+     * @param date The data and time the user is checking.
+     * @return A string listing the tasks occurring through the date and time.
+     */
+    public String through(LocalDateTime date) {
+        int i = 1;
+        String output = "Here are the tasks occurring through "
+                + date.format(DateTimeFormatter.ofPattern("MMM d yyyy HHmm")) + ":";
+        for (Task t : taskList) {
+            if (t.isWithinDate(date)) {
+                output += "\n" + i + "." + t;
+                i++;
+            }
+        }
+        return output;
+    }
+
+    /**
+     * Goes through the TaskList and returns the tasks with the specified keyword.
+     *
+     * @param input The keyword to be checked.
+     * @return A string listing the tasks containing the keyword.
+     */
+    public String find(String input) {
+        int i = 1;
+        String output = "Here are the matching tasks in your list:";
+        for (Task t : taskList) {
+            if (t.doesContain(input)) {
+                output += "\n" + i + "." + t;
+                i++;
+            }
+        }
+        return output;
     }
 
     /**

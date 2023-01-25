@@ -10,8 +10,8 @@ import duke.Ui;
  * @author Cheam Jia Wei
  */
 public class ByeCommand extends Command {
-    public void execute(TaskList taskList, Ui inter, Storage store) {
-        inter.exit();
+    public String execute(TaskList taskList, Ui inter, Storage store) {
+        return inter.exit();
     }
 
     public boolean isExit() {

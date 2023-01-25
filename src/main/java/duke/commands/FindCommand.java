@@ -16,8 +16,8 @@ public class FindCommand extends Command {
         this.input = input;
     }
 
-    public void execute(TaskList taskList, Ui inter, Storage store) {
-        inter.find(input, taskList);
+    public String execute(TaskList taskList, Ui inter, Storage store) {
+        return inter.find(input, taskList);
     }
 
     public boolean isExit() {
