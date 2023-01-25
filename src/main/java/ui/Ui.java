@@ -4,7 +4,12 @@ import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.Scanner;
 
+import javafx.geometry.Insets;
+import javafx.scene.control.Label;
+import javafx.scene.layout.HBox;
+import javafx.scene.layout.VBox;
 import parser.Parser;
+import storage.Storage;
 import task.Deadline;
 import task.Event;
 import task.Task;
@@ -171,9 +176,20 @@ public class Ui {
 	}
 
 	/** Welcome message */
-	public void greetUser() {
-		println("\tHi There! I'm Shao");
-		println("\tWhat can I do for you?");
+	public void greetUser(VBox dialogContainer, Storage storage) {
+		String s1 = "Hi There! I'm Shao";
+		String s2 = "What can I do for you?";
+		VBox messages = new VBox();
+		messages.getChildren().addAll(new Label(s1), new Label(s2));
+		HBox rowContainer = new HBox();
+		rowContainer.setPadding(new Insets(20, 0, 0, 20));
+		rowContainer.setSpacing(10);
+
+		rowContainer.getChildren().addAll(storage.getBotImageView(), messages);
+		dialogContainer.getChildren().add(rowContainer);
+
+		// println("\tHi There! I'm Shao");
+		// println("\tWhat can I do for you?");
 	}
 
 	/**

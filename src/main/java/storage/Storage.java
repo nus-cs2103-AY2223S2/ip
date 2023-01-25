@@ -3,6 +3,7 @@ package storage;
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.File;
+import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.FileWriter;
@@ -12,6 +13,8 @@ import java.nio.file.Paths;
 import java.util.Scanner;
 import java.util.stream.Stream;
 
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import parser.Parser;
 import task.Task;
 import tasklist.TaskList;
@@ -23,9 +26,22 @@ public class Storage {
 
 	private String dataFilePath = dataDirectory + File.separator + "shao.txt";
 
+	private String imageFilePath = "assets" + File.separator + "images" + File.separator;
+
 	private File myDir = new File(dataDirectory);
 
 	private File myFile = new File(dataFilePath);
+
+	private ImageView botImageView;
+	private ImageView userImageView;
+
+	public ImageView getBotImageView() {
+		return this.botImageView;
+	}
+
+	public ImageView getUserImageView() {
+		return this.userImageView;
+	}
 
 	/**
 	 * Read and parse saved file contents.
@@ -151,4 +167,28 @@ public class Storage {
 		}
 	}
 
+	public void loadAvatars() throws FileNotFoundException {
+		botImageView = loadImageFile("bot.png");
+		userImageView = loadImageFile("user.png");
+	}
+
+	private ImageView loadImageFile(String imageFileName) throws FileNotFoundException {
+		Image image = new Image(new FileInputStream(imageFilePath + imageFileName));
+
+		// Setting the image view
+		ImageView imageView = new ImageView(image);
+
+		// Setting the position of the image
+		imageView.setX(0);
+		imageView.setY(0);
+
+		// setting the fit height and width of the image view
+		imageView.setFitHeight(30);
+		imageView.setFitWidth(30);
+
+		// Setting the preserve ratio of the image view
+		imageView.setPreserveRatio(true);
+
+		return imageView;
+	}
 }
