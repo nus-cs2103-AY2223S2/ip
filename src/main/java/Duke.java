@@ -1,20 +1,21 @@
-
 import java.util.Scanner;
 import java.util.ArrayList;
+
 public class Duke {
-    public static void main(String[] args) {
+    public static void main(String[] args){
         //Initialisation of variables
-        Scanner scanner = new Scanner(System.in);
+
+        Scanner scanner = new Scanner(System.in); // scanner for scanning input
         ArrayList<Task> taskList = new ArrayList<>();
+        Save.readFromTextFile(taskList);
         System.out.println("Hello! I'm Duke\nWhat can I do for you?");
-
-
         while (scanner.hasNextLine()) {
             String input = scanner.nextLine();
             String[] tokens = input.split(" ", 2);
 
             switch(tokens[0]) {
                 case "bye": {
+                    Save.saveToFile(taskList);
                     System.out.print("Bye. Hope to see you again soon!");
                     System.exit(0);
                 }
