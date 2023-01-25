@@ -2,11 +2,6 @@ package cbot.util;
 
 import cbot.task.Task;
 
-import java.io.IOException;
-import java.time.LocalDate;
-import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
-import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -14,12 +9,12 @@ public class UI {
     private final Scanner sc;
     
     // Frequently Used Strings
-    private static String BLANK     = "        ";
-    private static String INDENT    = "      ~ ";
-    private static String WARNING   = "     !! ";
-    private static String ERROR     = WARNING + "<Error> ";
-    private static String PROMPT    = "\n v v\n";
-    private static String STALL     = "\n   o\n   o\n   o\n\n";
+    private static final String BLANK     = "        ";
+    private static final String INDENT    = "      ~ ";
+    private static final String WARNING   = "     !! ";
+    private static final String ERROR     = WARNING + "<Error> ";
+    private static final String PROMPT    = "\n v v\n";
+    private static final String STALL     = "\n   o\n   o\n   o\n\n";
     
     public UI() {
         this.sc = new Scanner(System.in);

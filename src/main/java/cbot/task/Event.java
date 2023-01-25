@@ -5,8 +5,8 @@ import cbot.util.TimeStuff;
 import java.time.LocalDateTime;
 
 public class Event extends Task {
-    private LocalDateTime fromTime;
-    private LocalDateTime toTime;
+    private final LocalDateTime fromTime;
+    private final LocalDateTime toTime;
     
     public static final String EVENT_SYMBOL = "E";
     

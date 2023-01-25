@@ -8,14 +8,13 @@ import java.util.Collections;
 import java.util.function.Predicate;
 
 public class TaskList {
-    private ArrayList<Task> tdl;
-    
-    private static final int MAX_SIZE = 100;
+    private final ArrayList<Task> tdl;
+
     //private static final int GAPS = 11;
     private static final String GAP = "             ";
     
     public TaskList() {
-        this.tdl = new ArrayList<Task>();
+        this.tdl = new ArrayList<>();
     }
     
     public TaskList(ArrayList<Task> tdl) {
@@ -37,7 +36,7 @@ public class TaskList {
     }
     
     public ArrayList<String> listFilter(Predicate<Task> pred) {
-        ArrayList<String> arr = new ArrayList<String>();
+        ArrayList<String> arr = new ArrayList<>();
         
         for (int i = 0; i < getCount(); i++) {
             if (pred.test(this.tdl.get(i))) {

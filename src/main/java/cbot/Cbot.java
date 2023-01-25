@@ -24,7 +24,6 @@ public class Cbot {
         this.ui = new UI();
 
         try {
-            // i prefer an if-else :(
             this.tl = fs.loadFile();
         } catch (FileNotFoundException e) {
             fs.makeFile();
@@ -44,8 +43,8 @@ public class Cbot {
         boolean doSave = false;
         
         while (doLoop) {
-            String userInput = "";
-            Parser p = null;
+            String userInput;
+            Parser p;
             
             try {
                 userInput = this.ui.askUser();

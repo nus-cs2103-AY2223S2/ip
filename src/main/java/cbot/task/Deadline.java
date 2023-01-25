@@ -5,7 +5,7 @@ import cbot.util.TimeStuff;
 import java.time.LocalDateTime;
 
 public class Deadline extends Task {
-    private LocalDateTime due;
+    private final LocalDateTime due;
     
     public static final String DEADLINE_SYMBOL = "D";
     
