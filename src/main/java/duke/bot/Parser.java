@@ -32,6 +32,19 @@ public class Parser {
                         todoList.size() +
                         " tasks in the list");
             }
+        } else if (str.contains("find")) {
+            System.out.println("Here are the tasks matching the description:");
+            String keyword = str.split(" ", 2)[1];
+            int n = 1;
+            for (Tasks t : todoList.getList()) {
+                if (t.getDesc().contains(keyword)) {
+                    System.out.println(n + ". "
+                            + t.icon()
+                            + t.completed() + " "
+                            + t.getDesc());
+                    n++;
+                }
+            }
         } else {
             if (str.equals("list")) {
                 System.out.println("Here are the tasks in your list:");
