@@ -4,7 +4,7 @@ package task;
  * Represents an entry in the to-do list
  */
 public class Task {
-    private final String instruction;
+    private String instruction;
     private boolean status;
 
     public Task(String instruction) {
@@ -38,6 +38,14 @@ public class Task {
         System.out.println("Mission Re-initialised\n" + this);
     }
 
+    /**
+     * Checks if the current task matches the user's request
+     * @param s keyword searching for
+     * @return boolean value indicating if this task should be printed
+     */
+    public boolean contains(String s) {
+        return instruction.contains(s);
+    }
     @Override
     public String toString() {
         if (status) {

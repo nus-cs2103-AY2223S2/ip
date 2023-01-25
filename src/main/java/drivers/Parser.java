@@ -73,9 +73,14 @@ public class Parser {
                 l.delete(Integer.parseInt(parts[1]));
                 return true;
 
-            default:
-                System.out.println("Something has gone wrong!");
-                return false;
+                case find:
+                    l.find(parts[1]);
+                    return true;
+
+                default:
+                    System.out.println("Something has gone wrong!");
+                    return false;
+
             }
         } catch (DukeException e) {
             System.out.println(e.getMessage());
