@@ -7,4 +7,8 @@ public class Todo extends Tasks{
     public String toString() {
         return "[T]" + super.toString();
     }
+    @Override
+    public String log() {
+        return "T" + super.log() + "\n";
+    }
 }
