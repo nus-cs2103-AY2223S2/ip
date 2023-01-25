@@ -34,7 +34,7 @@ public class TaskList extends ArrayList<Task> {
                         if (((LocalDate) inputDate).isEqual((LocalDate) deadline)) {
                             taskListOnDate.add(task);
                         }
-                    } else if (deadline instanceof LocalDateTime){
+                    } else if (deadline instanceof LocalDateTime) {
                         if (((LocalDate) inputDate).isEqual(((LocalDateTime) deadline).toLocalDate())) {
                             taskListOnDate.add(task);
                         }
