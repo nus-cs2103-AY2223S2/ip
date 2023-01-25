@@ -5,7 +5,7 @@ import java.util.ArrayList;
 import util.WriteToFile;
 
 public class TaskManager {
-    protected ArrayList<Task> taskArr;
+    private ArrayList<Task> taskArr;
     public TaskManager() {
         this.taskArr = new ArrayList<>();
     }
@@ -32,7 +32,7 @@ public class TaskManager {
 
     public void addTaskToList(Task task) {
         taskArr.add(task);
-        WriteToFile.appendToFile(task.getStatusIcon() + task.getDescription());
+        //WriteToFile.appendToFile(task.getStatusIcon() + task.getDescription());
         System.out.println("I have added: " + task + "!");
         System.out.println("There are currently " + taskArr.size() + " task(s) in the list!");
     }
@@ -50,6 +50,10 @@ public class TaskManager {
 
     public int getTaskArraySize() {
         return taskArr.size();
+    }
+
+    public ArrayList<Task> getTaskArr() {
+        return taskArr;
     }
 
 }

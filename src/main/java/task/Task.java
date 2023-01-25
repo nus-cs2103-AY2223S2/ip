@@ -38,6 +38,17 @@ public class Task {
         return dt;
     }
 
+    public String serialise() {
+        return String.format("Task,%s", description);
+    }
+
+    public static Task deserialise(String data) {
+        String[] arr = data.split(",");
+        String desc = arr[1];
+
+        return new Task(desc);
+    }
+
     @Override
     public String toString() {
         String str = "[" + this.getStatusIcon() + "] " + this.description;

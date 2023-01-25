@@ -5,6 +5,7 @@ import task.TaskManager;
 import task.ToDo;
 import ui.WelcomeUI;
 import util.DukeException;
+import util.Parser;
 
 import java.util.*;
 
@@ -12,7 +13,7 @@ public class ChatBot {
     protected Scanner input;
     protected TaskManager taskManager;
     protected String[] inputArr;
-
+    private Parser parser;
 
     public ChatBot(Scanner input, WelcomeUI welcomeUI) {
         System.out.println(welcomeUI);
@@ -25,6 +26,7 @@ public class ChatBot {
     }
 
     public void run() {
+
         //main logic loop
         loop: while(input.hasNextLine()) {
 
@@ -63,7 +65,7 @@ public class ChatBot {
 
                 String fst = inputArr[0];
                 String snd = inputArr[1];
-                Boolean isNum = taskManager.isNumeric(snd);
+                Boolean isNum = parser.isNumeric(snd);
 
                 //if snd is numeric : cases are check/uncheck etc
                 if (isNum) {
