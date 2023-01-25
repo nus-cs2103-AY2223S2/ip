@@ -1,15 +1,16 @@
 package twofive.data;
 
-import org.junit.jupiter.api.Test;
-import twofive.task.Deadline;
-import twofive.task.Task;
-import twofive.task.ToDo;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
+import org.junit.jupiter.api.Test;
+
+import twofive.task.Deadline;
+import twofive.task.Task;
+import twofive.task.ToDo;
 
 public class TaskListTest {
     @Test
@@ -25,8 +26,8 @@ public class TaskListTest {
         tasks.addTask(deadlineTask);
 
         String sampleTasksString =
-                "Here are the tasks in your list:\n1. [T][ ] read book\n2. [D][ ] return book (by: Tue Jun 6 2023 " +
-                        "06:06AM)";
+                "Here are the tasks in your list:\n1. [T][ ] read book\n2. [D][ ] return book (by: Tue Jun 6 2023 "
+                        + "06:06AM)";
         assertEquals(sampleTasksString, tasks.getTasksList());
     }
 
@@ -57,8 +58,8 @@ public class TaskListTest {
 
         LocalDate sampleDate = LocalDate.parse("2023-06-06", dateOnlyFormatter);
         String sampleSaveTasksString =
-                "Here are the tasks in your list due on Tue Jun 6 2023:\n1. [D][ ] return book (by: Tue Jun 6 2023 " +
-                        "06:06AM)";
+                "Here are the tasks in your list due on Tue Jun 6 2023:\n1. [D][ ] return book (by: Tue Jun 6 2023 "
+                        + "06:06AM)";
         assertEquals(sampleSaveTasksString, tasks.getTasksOnDateList(sampleDate));
     }
 
@@ -90,10 +91,10 @@ public class TaskListTest {
         Deadline deadlineTask = new Deadline("return book", deadline);
         tasks.addTask(deadlineTask);
 
-        String sampleTasksString = "Here are the tasks in your list with keyword [book] in their description:\n1. " +
-                "[T][ ] read " +
-                "book\n2. [D][ ] " +
-                "return book (by: Tue Jun 6 2023 06:06AM)";
+        String sampleTasksString = "Here are the tasks in your list with keyword [book] in their description:\n1. "
+                + "[T][ ] read "
+                + "book\n2. [D][ ] "
+                + "return book (by: Tue Jun 6 2023 06:06AM)";
         assertEquals(sampleTasksString, tasks.getKeywordString("book"));
     }
 }

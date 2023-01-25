@@ -1,6 +1,15 @@
 package twofive.utils;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
+
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
+
 import org.junit.jupiter.api.Test;
+
 import twofive.exception.EmptyDeadlineException;
 import twofive.exception.EmptyDescriptionException;
 import twofive.exception.EmptyEndTimeException;
@@ -11,14 +20,6 @@ import twofive.task.Deadline;
 import twofive.task.Event;
 import twofive.task.Task;
 import twofive.task.ToDo;
-
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
-import java.util.ArrayList;
-
-import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class FileParserTest {
     @Test
