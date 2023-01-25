@@ -24,5 +24,6 @@ public class Parser {
     public static final String EVENT_UNMARKED = "[E][ ] ";
     public static final String EVENT_MARKED_SPACED = "  [E][X] ";
     public static final String EVENT_UNMARKED_SPACED = " [E][ ] ";
+    //
 
 }
