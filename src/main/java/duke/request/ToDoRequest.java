@@ -16,7 +16,8 @@ public class ToDoRequest extends Request {
         // Throws RequestExecution if there are any issues with the request
         checkRequestRequirement();
 
-        return Arrays.copyOfRange(values, 1, values.length);
+        String description = String.join(" ", Arrays.copyOfRange(values, 1, values.length));
+        return new String[] { description };
     }
 
     @Override
