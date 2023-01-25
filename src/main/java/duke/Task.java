@@ -36,5 +36,4 @@ public class Task {
         completedString += this.name;
         return completedString;
     }
-
 }

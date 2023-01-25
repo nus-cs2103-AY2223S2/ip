@@ -23,6 +23,10 @@ public class TaskList {
         }
     }
 
+    public TaskList() {
+        this.lstOfItems = new ArrayList<>();
+    }
+
     public void parseTask(String currentTask) {
         Task task = null;
         if (currentTask.charAt(1) == 'T') {
@@ -57,6 +61,20 @@ public class TaskList {
         }
     }
 
+    @Override
+    public String toString() {
+        if (lstOfItems.size() == 0) {
+            return "Empty List";
+        } else {
+            String answer = "";
+            for (int i = 0; i < lstOfItems.size(); i++) {
+                answer += (lstOfItems.get(i).toString());
+                answer += "\n";
+            }
+            return answer;
+        }
+    }
+
     public void addTask(Task newTask) {
         System.out.println("Got it. I have added: ");
         System.out.println(newTask);
@@ -68,6 +86,10 @@ public class TaskList {
             System.out.print(" tasks");
         }
         System.out.println(" in the list");
+    }
+
+    public void addTask() {
+        lstOfItems.add(new Task("Test"));
     }
 
     public void markTask(int number) {
@@ -102,5 +124,9 @@ public class TaskList {
     }
     public ArrayList<Task> getTasks() {
         return lstOfItems;
+    }
+
+    public int getSize() {
+        return lstOfItems.size();
     }
 }
