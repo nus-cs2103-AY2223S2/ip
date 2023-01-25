@@ -1,5 +1,4 @@
 import java.util.Scanner;
-
 import database.Database;
 import dukeexception.DukeException;
 import dukeexception.EmptyTaskArgumentException;
@@ -30,7 +29,7 @@ public class Duke {
 
     loop: while (in.hasNextLine()) {
       try {
-        String input = getUserInput(in);
+        String input = in.nextLine();
         Request request = new Request(input);
         Commands cmd = request.getCommand();
 
@@ -79,12 +78,6 @@ public class Duke {
 
   public static void bye() {
     System.out.println("toodeloo!\n");
-  }
-
-  public static String getUserInput(Scanner in) {
-    String userInput = in.nextLine();
-
-    return userInput;
   }
 
   public static void listTasks() {
