@@ -14,8 +14,9 @@ public class Event extends Task{
     }
     public Event(String name, String isDone, String start, String end) {
         super(name, isDone);
-        this.start = start;
-        this.end = end;
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yy-HHmm");
+        this.start = LocalDateTime.parse(start, formatter);
+        this.end = LocalDateTime.parse(end, formatter);;
     }
     
 
@@ -31,7 +32,7 @@ public class Event extends Task{
 
     @Override
     public String saveFormat() {
-        return "E;" + this.name + ";" +this.isDone + ";" + this.start + ";" + this.end;
+        return "E;" + this.name + ";" +this.isDone + ";" + this.getStart() + ";" + this.getEnd();
     }
 
     @Override

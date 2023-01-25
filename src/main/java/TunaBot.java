@@ -1,15 +1,11 @@
-<<<<<<< HEAD
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.nio.file.Path;
 import java.nio.file.Paths;
-=======
 import java.time.format.DateTimeParseException;
->>>>>>> branch-Level-8
 import java.util.ArrayList;
-import java.util.Objects;
 import java.util.Scanner;
 
 public class TunaBot {

@@ -11,7 +11,8 @@ public class Deadline extends Task{
     }
     public Deadline(String name, String isDone, String deadline) {
         super(name, isDone);
-        this.deadline = deadline;
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yy-HHmm");
+        this.deadline = LocalDateTime.parse(deadline, formatter);
     }
 
     public String getDeadline() {
@@ -20,7 +21,7 @@ public class Deadline extends Task{
     }
     @Override
     public String saveFormat() {
-        return "T;" + this.name + ";" +this.isDone + ";" + this.deadline;
+        return "T;" + this.name + ";" +this.isDone + ";" + this.getDeadline();
     }
     @Override
     public String toString() {

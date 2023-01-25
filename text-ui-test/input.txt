@@ -5,14 +5,14 @@ todo read book
 list
 event
 event bookfest
-event bookfest /from today
+event bookfest /from 25/01/23-1800
 list
-event bookfest /from today /to tomorrow
+event bookfest /from 25/01/23-1800 /to 26/01/23-1800
 list
 deadline
 deadline return book
 list
-deadline return book /by thursday
+deadline return book /by 28/01/23-1800
 list
 mark 1
 list
