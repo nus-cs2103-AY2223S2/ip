@@ -33,7 +33,7 @@ public class Duke {
         try {
             storage.read(taskList, ui);
         } catch (FileNotFoundException e) {
-            ui.showMessage("☹ OOPS!!! Could not find the storage file.");
+            ui.showMessage("Could not find a storage file, we're starting from scratch :3.");
         }
     }
 
