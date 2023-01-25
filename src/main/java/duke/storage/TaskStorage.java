@@ -129,7 +129,8 @@ public class TaskStorage implements Storage{
         }
     }
 
-    private void replaceText(int index, String target, String replacement) throws IOException {
+    private void replaceText(int index, String target, String replacement)
+            throws IOException {
         String newContent = "";
         int count = 0;
         while (scanner.hasNextLine()) {

@@ -98,9 +98,11 @@ public class Duke {
 
     private void mark(int index) throws DukeException {
         if (this.tasklist.mark(index)) {
-            this.ui.printOutput("I've marked this as done:\n\t " + this.tasklist.get(index));
+            this.ui.printOutput("I've marked this as done:\n\t "
+                    + this.tasklist.get(index));
         } else {
-            this.ui.printOutput("The selected task has already been marked as done.");
+            this.ui.printOutput(
+                    "The selected task has already been marked as done.");
         }
     }
 
@@ -117,29 +119,39 @@ public class Duke {
         Task t = new Todo(name);
         this.tasklist.addTask(t, TaskTypes.TODO);
         this.ui.printOutput(
-                "I've added the following to your list of tasks:\n\t\t" +
-                        t + "\n\t You now have " + this.tasklist.size() + " task(s) in the list.");
+                "I've added the following to your list of tasks:\n\t\t"
+                        + t
+                        + "\n\t You now have "
+                        + this.tasklist.size()
+                        + " task(s) in the list.");
     }
 
     private void addTask(String name, LocalDate byDate) {
         Task t = new Deadline(name, byDate);
         this.tasklist.addTask(t, TaskTypes.DEADLINE);
         this.ui.printOutput(
-                "I've added the following to your list of tasks:\n\t\t" +
-                        t + "\n\t You now have " + this.tasklist.size() + " task(s) in the list.");
+                "I've added the following to your list of tasks:\n\t\t"
+                        + t
+                        + "\n\t You now have "
+                        + this.tasklist.size()
+                        + " task(s) in the list.");
     }
 
     private void addTask(String name, LocalDate startDate, LocalDate endDate) {
         Task t = new Event(name, startDate, endDate);
         this.tasklist.addTask(t, TaskTypes.EVENT);
         this.ui.printOutput(
-                "I've added the following to your list of tasks:\n\t\t" +
-                        t + "\n\t You now have " + this.tasklist.size() + " task(s) in the list.");
+                "I've added the following to your list of tasks:\n\t\t"
+                        + t
+                        + "\n\t You now have "
+                        + this.tasklist.size()
+                        + " task(s) in the list.");
     }
 
     private void deleteTask(int index) throws DukeException {
         Task task = this.tasklist.deleteTask(index);
-        this.ui.printOutput("I've removed the following from your list of tasks:\n\t\t"
+        this.ui.printOutput(
+                "I've removed the following from your list of tasks:\n\t\t"
                 + task + "\n\t You now have " + this.tasklist.size() + " task(s) in the list.");
     }
 }
