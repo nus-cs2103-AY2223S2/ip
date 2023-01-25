@@ -3,10 +3,6 @@ import exceptions.SaturdayException;
 import utilities.Storage;
 import utilities.Ui;
 
-import java.io.IOException;
-import java.nio.file.Files;
-import java.nio.file.Path;
-import java.nio.file.Paths;
 import java.util.Scanner;
 
 public class Saturday {
@@ -39,23 +35,7 @@ public class Saturday {
         }
     }
     public static void main(String[] args) {
-        Path dataDirPath = Paths.get(System.getProperty("user.dir"), "data");
-        if (!Files.exists(dataDirPath)) {
-            try {
-                Files.createDirectory(dataDirPath);
-            } catch (IOException e) {
-                Ui.output(e.getMessage());
-            }
-        }
-        Path filePath = Paths.get(System.getProperty("user.dir"), "data", "task_list.txt");
-        if (!Files.exists(filePath)) {
-            try {
-                Files.createFile(filePath);
-            } catch (IOException e) {
-                Ui.output(e.getMessage());
-            }
-        }
-        new Saturday(filePath.toString()).run();
+        new Saturday("data/task_list.txt").run();
     }
 
     public static void exit() {
