@@ -1,6 +1,13 @@
 import java.util.Scanner;
 import java.util.ArrayList;
+import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.io.FileNotFoundException;
+
 public class Duke {
+    protected static final String FILE_DIRECTORY = "../../../data";
+    protected static final String FILE_PATH = "../../../data/duke.txt";
     protected static String indent = "     ";
     protected static String divider = indent + "____________________________________________________________";
     protected static ArrayList<Task> tasks =  new ArrayList<>(100);
@@ -9,10 +16,19 @@ public class Duke {
         Scanner sc = new Scanner(System.in);
         printWelcomeMessage();
 
+        try {
+            loadTasks();
+        } catch (FileNotFoundException e) {
+            System.out.println("No save data found!");
+        } catch (IOException | DukeException e) {
+            System.out.println("Error loading save data");
+        }
+
         while (true) {
-            String[] command = sc.nextLine().split(" ", 2);
             try {
+                String[] command = sc.nextLine().split(" ", 2);
                 if (command[0].equals("bye")) {
+                    saveTasks();
                     System.out.println(formatMessage("Bye. Hope to see you again soon!"));
                     break;
                 } else if (command[0].equals("list")) {
@@ -39,7 +55,7 @@ public class Duke {
                     tasks.get(taskNum).unmark();
                     System.out.println(formatMessage("OK, I've marked this task as not done yet:\n" +
                             indent + tasks.get(taskNum).toString()));
-                } else if (command[0].equals("delete")){
+                } else if (command[0].equals("delete")) {
                     if (command.length < 2) {
                         throw new DukeException("Task number required");
                     }
@@ -52,8 +68,7 @@ public class Duke {
                     System.out.println(formatMessage("Noted. I've removed this task:\n" +
                             indent + indent + removedTask + "\n" +
                             indent + "Now you have " + tasks.size() + " task(s) in the list."));
-                }
-                else {
+                } else {
                     if (command.length < 2) {
                         throw new DukeException("Invalid input");
                     }
@@ -93,6 +108,8 @@ public class Duke {
                 System.out.println(formatMessage(e.getMessage()));
             } catch (NumberFormatException e) {
                 System.out.println("Valid task required");
+            } catch (IOException e) {
+                System.out.println(e.getMessage());
             }
         }
     }
@@ -123,5 +140,49 @@ public class Duke {
             }
         }
         return output;
+    }
+
+    public static void saveTasks() throws IOException {
+        File dir = new File(FILE_DIRECTORY);
+        if (!dir.exists()) {
+            dir.mkdirs();
+        }
+        File dataFile = new File(FILE_PATH);
+        dataFile.createNewFile();
+
+        FileWriter myWriter = new FileWriter(FILE_PATH);
+        boolean isFirst = true;
+        for (Task t : tasks) {
+            if (!isFirst) {
+                myWriter.write("\n");
+            }
+            myWriter.write(t.toSaveString());
+            isFirst = false;
+        }
+        myWriter.close();
+    }
+
+    public static void loadTasks() throws IOException, DukeException {
+        Scanner fileReader = new Scanner(new File(FILE_PATH));
+        while (fileReader.hasNextLine()) {
+            String data = fileReader.nextLine();
+            String[] taskData = data.split("\\$\\$\\$");
+
+            switch (taskData[0]) {
+                case "T":
+                    tasks.add(new Todo(taskData[1]));
+                    break;
+                case "D":
+                    tasks.add(new Deadline(taskData[1], taskData[2]));
+                    break;
+                case "E":
+                    tasks.add(new Event(taskData[1], taskData[2], taskData[3]));
+                    break;
+                default:
+                    throw new DukeException("Error loading tasks from file!");
+            }
+        }
+
+        fileReader.close();
     }
 }

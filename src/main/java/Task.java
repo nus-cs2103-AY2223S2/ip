@@ -19,6 +19,10 @@ public class Task {
         return this.name;
     }
 
+    public String toSaveString() {
+        return name + "$$$" + (isDone ? "T" : "F");
+    }
+
     public String toString() {
         return (isDone ? "[X]" : "[ ]") + " " + this.name;
     }
