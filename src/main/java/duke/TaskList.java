@@ -67,4 +67,14 @@ public class TaskList {
         task.setDone(false);
         Ui.showTaskMarked(task, false);
     }
+
+    public void findTask(String keyword) {
+        ArrayList<Task> filteredTasks = new ArrayList<>();
+        for (Task task: tasks) {
+            if (task.toString().contains(keyword)) {
+                filteredTasks.add(task);
+            }
+        }
+        Ui.showTaskList(filteredTasks);
+    }
 }

@@ -31,6 +31,8 @@ public class Parser {
                 return parseUnmarkCommand(fullCommand);
             case "delete":
                 return parseDeleteCommand(fullCommand);
+            case "find":
+                return parseFindCommand(fullCommand);
             default:
                 return new InvalidCommand();
         }
@@ -111,5 +113,13 @@ public class Parser {
         }
         int taskNumber = Integer.parseInt(info);
         return new DeleteCommand(taskNumber);
+    }
+
+    private static FindCommand parseFindCommand(String fullCommand) throws NotEnoughArgumentsException {
+        String info = fullCommand.substring(4).trim();
+        if (info.isEmpty()) {
+            throw (new TaskNoDescriptionException("Please enter a keyword that you are looking for."));
+        }
+        return new FindCommand(info);
     }
 }
