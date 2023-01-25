@@ -1,3 +1,4 @@
+
 public class Task {
     protected String description;
     protected boolean isDone;
@@ -29,5 +30,11 @@ public class Task {
     @Override
     public String toString(){
         return this.getSymbol() +" "  + this.getDescription();
+    }
+
+    public String changeFormat() {
+        String indicator = isDone ? "1" : "0";
+        return "/ " + indicator + " / " + this.description;
+
     }
 }
