@@ -14,7 +14,6 @@ public class Duke {
 
         String greeting = "Hello! I'm Alpha Beast What can I do for you?";
         greeting(greeting);
-        //memory store = new memory();
         TaskList manager = new TaskList("/Users/s.f/ip/src/Data/duke.txt");
 
         loop:
