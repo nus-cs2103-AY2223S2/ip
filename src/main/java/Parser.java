@@ -38,26 +38,25 @@ public class Parser {
                     return new Command(4, message);
                 case "deadline":
                     message = sc.nextLine().trim().split("/");
-                    return new Command(4, message);
+                    return new Command(5, message);
                 case "event":
                     message = sc.nextLine().trim().split("/");
-                    return new Command(4, message);
+                    return new Command(6, message);
                 case "delete":
                     try {
                         rank = Integer.parseInt(sc.nextLine().trim());
-                        return new Command(5, rank - 1);
+                        return new Command(7, rank - 1);
                     } catch (NumberFormatException e) {
                         throw new DukeException("OOPS! delete must have an integer rank");
                     }
 
                 default:
-                    System.out.println("OOPS!!! I'm sorry, but I don't know what that means");
-                    sc.nextLine();
+                    throw new DukeException("Invalid input.");
             }
         } catch (DukeException e) {
             System.out.println(e.getMessage());
+            return new Command(-1);
         }
-        return null;
     }
 
     private static DateTimeFormatter inputFormatter = DateTimeFormatter.ofPattern("dd-MM-yyyy HHmm");

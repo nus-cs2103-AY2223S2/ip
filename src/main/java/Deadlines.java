@@ -4,9 +4,8 @@
 class Deadlines extends Task {
     private String end;
 
-    protected Deadlines(boolean status, String[] content) {
+    protected Deadlines(boolean status, String[] content) throws DukeException{
         super(status, content[0]);
-        /*
         if (content.length == 1 || content[0].isEmpty()) {
             throw new DukeException("OOPS!!! Command should be in the format 'deadline [M] /by [M]'\n" +
                     "The description, [M] cannot be empty.");
@@ -18,8 +17,7 @@ class Deadlines extends Task {
             throw new DukeException("OOPS!!! Command should be in the format 'deadline [M] /by [M]'\n" +
                     "The description, [M] cannot be empty.");
         }
-         */
-        this.end = content[1];
+        this.end = ends[1];
     }
 
     /**

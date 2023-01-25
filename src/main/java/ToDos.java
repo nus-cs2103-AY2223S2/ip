@@ -3,14 +3,12 @@
  */
 public class ToDos extends Task {
 
-    protected ToDos(boolean status, String[] content) {
+    protected ToDos(boolean status, String[] content) throws DukeException {
         super(status, content[0]);
-        /*
-        if (content.isEmpty()) {
+        if (content[0].isEmpty()) {
             throw new DukeException("OOPS!!! The description of a todo cannot be empty.");
         }
 
-         */
     }
 
     protected String getTypeIcon() {

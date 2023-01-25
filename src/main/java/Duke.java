@@ -5,7 +5,6 @@ import java.io.IOException;
  */
 public class Duke {
     // Attribute
-    static final String BORDER = "----------------------------------------";
     private Storage storage;
     private TaskList taskList;
     private Ui ui;
@@ -16,13 +15,17 @@ public class Duke {
         taskList = new TaskList(storage.load());
     }
 
-    public void run() throws DukeException, IOException {
+    public void run() throws IOException {
         Scanner sc = new Scanner(System.in);
         while (sc.hasNext()) {
-            Command c = Parser.read(sc);
-            c.execute(ui, taskList, storage);
-            if (c.isExit()) {
-                return;
+            try {
+                Command c = Parser.read(sc);
+                c.execute(ui, taskList, storage);
+                if (c.isExit()) {
+                    return;
+                }
+            } catch (DukeException e) {
+                System.out.println(e.getMessage());
             }
         }
     }

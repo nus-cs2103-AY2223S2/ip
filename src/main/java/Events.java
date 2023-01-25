@@ -5,9 +5,8 @@ public class Events extends Task {
     private String begin;
     private String end;
 
-    protected Events(boolean status, String[] content) {
+    protected Events(boolean status, String[] content) throws DukeException{
         super(status, content[0]);
-        /*
         if (content[0].isEmpty() || content.length != 3) {
             throw new DukeException("OOPS!!! Command should be in the format 'event [M] /from [M] /to [M]'\n" +
                     "The description, [M] cannot be empty.");
@@ -19,9 +18,8 @@ public class Events extends Task {
                     "The description, [M] cannot be empty.");
         }
 
-         */
-        this.begin = content[1];
-        this.end = content[2];
+        this.begin = begins[1];
+        this.end = ends[1];
     }
 
     @Override

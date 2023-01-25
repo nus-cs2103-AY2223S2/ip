@@ -3,12 +3,15 @@ import java.io.IOException;
 public class Command {
     /*
     Command codes:
+    -1 - Invalid input.
     0 - Bye
     1 - list
     2 - mark
     3 - unmark
-    4 - add
-    5 - delete
+    4 - to_do
+    5 - deadline
+    6 - event
+    7 - delete
      */
 
     private int code;
@@ -30,6 +33,7 @@ public class Command {
     }
 
     protected void execute(Ui ui, TaskList taskList, Storage storage) throws DukeException, IOException {
+        if (code == -1) return;
         if (code == 0) return;
         if (code == 1) {
             taskList.list();
@@ -40,9 +44,15 @@ public class Command {
             taskList.markUndone(index);
             storage.write();
         } else if (code == 4) {
-            taskList.addTask(content);
+            taskList.addTask(0, content);
             storage.write();
         } else if (code == 5) {
+            taskList.addTask(1, content);
+            storage.write();
+        } else if (code == 6) {
+            taskList.addTask(2, content);
+            storage.write();
+        } else if (code == 7) {
             taskList.delete(index);
             storage.write();
         }
