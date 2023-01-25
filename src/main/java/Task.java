@@ -45,4 +45,5 @@ public class Task {
             return "[" + this.getStatusIcon() + "]" + " " + this.description;
         else { return "[" + typeofTask + "]" + "[" + this.getStatusIcon() + "]" + " " + this.description; }
     }
+
 }

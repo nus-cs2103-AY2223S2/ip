@@ -27,7 +27,6 @@ public class Deadline extends Task {
             this.haveFormatErr = false;
         }
     }
-
     public boolean checkFormat() {
         return this.haveFormatErr;
     }
