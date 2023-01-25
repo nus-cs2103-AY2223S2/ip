@@ -19,7 +19,7 @@ public class Storage {
         fw.close();
     }
 
-    public void read(ArrayList<Task> taskList) throws FileNotFoundException {
+    public void read(TaskList taskList) throws FileNotFoundException {
         File f = new File(storagePath);
         Scanner s = new Scanner(f);
 

@@ -1,17 +1,14 @@
-import java.io.File;
 import java.io.FileNotFoundException;
-import java.io.FileWriter;
 import java.io.IOException;
 import java.time.format.DateTimeParseException;
-import java.util.ArrayList;
 import java.util.Scanner;
 
 
 public class Duke {
-    private static ArrayList<Task> taskList = new ArrayList<Task>();
+    private static TaskList taskList = new TaskList();
     private static Scanner sc = new Scanner(System.in);
     private static boolean exitApp = false;
-    private static Storage storage = new Storage("dataz.txt");
+    private static Storage storage = new Storage("data.txt");
 
     public static void main(String[] args) {
         String logo = " ____        _        \n"
@@ -30,7 +27,7 @@ public class Duke {
 
         // Exit message
         try {
-            storage.save(taskListToStorageString());
+            storage.save(taskList.toStorageString());
         } catch (IOException e) {
             displayMessage("☹ OOPS!!! Something went wrong when saving your tasks!");
         }
