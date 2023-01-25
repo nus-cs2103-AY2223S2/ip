@@ -7,4 +7,9 @@ public class Todo extends Task{
     public String printTask() {
         return String.format("[T]%s", super.printTask());
     }
+
+    @Override
+    public String formatForFile() {
+        return String.format("%s|%s", "T", super.formatForFile());
+    }
 }

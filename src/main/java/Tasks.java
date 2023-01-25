@@ -20,15 +20,17 @@ public class Tasks {
         }
     }
 
-    public void addToList(Task s) {
+    public void addToList(Task s, boolean silent) {
         l.add(s);
-        System.out.printf("Added to list: %s\n", s.printTask());
-        System.out.printf("Now you've got %d task(s) in your bag, CHOP CHOP GET THEM DONE.\n", l.size());
+        if (!silent) {
+            System.out.printf("Added to list: %s\n", s.printTask());
+            System.out.printf("Now you've got %d task(s) in your bag, CHOP CHOP GET THEM DONE.\n", l.size());
+        }
     }
 
-    public void markTaskDone(int num) {
+    public void markTaskDone(int num, boolean silent) {
         if (withinRange(num)) {
-            this.l.get(num).markTaskDone();
+            this.l.get(num).markTaskDone(silent);
         } else {
             System.out.println("Hey HEY HEY, that's not within range >:[");
         }
@@ -55,6 +57,16 @@ public class Tasks {
     public boolean withinRange(int num) {
         return this.l.size() > num && num >= 0;
     }
+
+    public String formatForFile() {
+        if (l.size() == 0) {
+            return "";
+        } else {
+            StringBuilder output = new StringBuilder();
+            for (Task task : l) {
+                output.append(task.formatForFile()).append("\n");
+            }
+            return output.toString();
+        }
+    }
 }
-
-
