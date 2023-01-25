@@ -1,6 +1,12 @@
 import java.io.FileNotFoundException;
 import java.util.Scanner;
 import java.io.IOException;
+import java.time.DateTimeException;
+import java.time.format.DateTimeParseException;
+import java.util.Scanner;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.time.temporal.ChronoUnit;
 
 public class Jarvis {
     public static void main(String[] args) {
@@ -115,7 +121,14 @@ public class Jarvis {
                     int firstSlash = line.indexOf("/");
                     String task = line.substring(9, firstSlash);
                     String time = line.substring(firstSlash + 1);
-                    todolist.add(task, time);
+
+                    try {
+                        LocalDate startTimeParsed = LocalDate.parse(time);
+                        todolist.add(task, startTimeParsed);
+                    } catch (DateTimeParseException e) {
+                        System.out.println("Wrong date format\n");
+                        System.out.println("Input date format 'event <task> /<YYYY-MM-DD>'");
+                    }
                 }
 
             } else if (line.matches("event(.*)")) {
@@ -134,8 +147,14 @@ public class Jarvis {
                 String endTime = line.substring(secondSlash + 1);
                 String task = line.substring(6, firstSlash);
 
-                todolist.add(task, startTime, endTime);
-
+                try {
+                    LocalDate startTimeParsed = LocalDate.parse(startTime);
+                    LocalDate endTimeParsed = LocalDate.parse(endTime);
+                    todolist.add(task, startTimeParsed, endTimeParsed);
+                } catch (DateTimeParseException e) {
+                    System.out.println("Wrong date format\n");
+                    System.out.println("Input date format 'event <task> /<YYYY-MM-DD>/<YYYY-MM-DD>'");
+                }
             } else if (line.matches("delete(.*)")) {
                 // mark task as done
 
