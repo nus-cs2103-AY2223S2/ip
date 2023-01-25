@@ -6,7 +6,7 @@ import java.util.Scanner;
  * User interface of the application.
  */
 public class Ui {
-    private static Scanner scanner = new Scanner(System.in);
+    private static final Scanner scanner = new Scanner(System.in);
     private static final String DIVIDER = "____________________________________________________________";
 
     /**
@@ -98,6 +98,20 @@ public class Ui {
         printHorizontalLine();
         System.out.println("\tNoted. I've removed this task:\n\t  " + taskList.getTaskAt(index)
                 + "\n\tNow you have " + (taskList.size() - 1) + " tasks in the list.");
+        printHorizontalLine();
+    }
+
+    /**
+     * Print response to delete command.
+     *
+     * @param taskList list that contained the task
+     */
+    public void responseToFindTaskCommand(TaskList taskList) {
+        printHorizontalLine();
+        for (int i = 0; i < taskList.size(); i++) {
+            int index = i + 1;
+            System.out.println("\t" + index + "." + taskList.getTaskAt(i).toString());
+        }
         printHorizontalLine();
     }
 

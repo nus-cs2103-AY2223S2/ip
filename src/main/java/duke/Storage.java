@@ -19,7 +19,7 @@ public class Storage {
      * Constructor to create a storage.
      *
      * @param filepath string representation of the path.
-     * @throws DukeFileNotFoundException
+     * @throws DukeFileNotFoundException indicate attempt to open the file denoted by a specified pathname has failed.
      */
     public Storage(String filepath) throws DukeFileNotFoundException {
         try {
@@ -53,7 +53,7 @@ public class Storage {
      * Insert new task into the file.
      *
      * @param t task to be inserted.
-     * @throws DukeIOException
+     * @throws DukeIOException indicate failed or interrupted I/O operations occurred.
      */
     protected void updateData(Task t) throws DukeIOException {
         try {
@@ -78,7 +78,7 @@ public class Storage {
      *
      * @param lineNumber line number in the file to be toggled.
      * @param status status of file that indicate whether the task is done or not.
-     * @throws DukeIOException
+     * @throws DukeIOException indicate failed or interrupted I/O operations occurred.
      */
     protected void updateData(int lineNumber, int status) throws DukeIOException {
         try {
@@ -99,7 +99,7 @@ public class Storage {
      * Remove specific task from the file.
      *
      * @param lineNumber line number in the file to be deleted.
-     * @throws DukeIOException
+     * @throws DukeIOException indicate failed or interrupted I/O operations occurred.
      */
     protected void removeData(int lineNumber) throws DukeIOException {
         try {
@@ -118,8 +118,8 @@ public class Storage {
      * Load the task from the file at the beginning of the program execution.
      *
      * @return list of task that stored in the file before.
-     * @throws DukeIOException
-     * @throws DukeInvalidArgumentException
+     * @throws DukeIOException indicate failed or interrupted I/O operations occurred.
+     * @throws DukeInvalidArgumentException indicate that a command has been passed an illegal argument.
      */
     protected ArrayList<Task> load() throws DukeIOException, DukeInvalidArgumentException {
         ArrayList<Task> taskList= new ArrayList<>();
@@ -154,10 +154,48 @@ public class Storage {
         }
     }
 
+    protected TaskList findDataFromFile(String keyword) throws DukeIOException, DukeInvalidArgumentException {
+        TaskList result = new TaskList();
+        try {
+            List<String> allLine = Files.readAllLines(path);
+
+            if (allLine.isEmpty()) {
+                return result;
+            }
+
+            for (String taskDescription: allLine) {
+                if (taskDescription.contains(keyword)) {
+
+                    String[] s = taskDescription.split(" \\| ");
+
+                    Task task = null;
+                    boolean isDone = s[1].equals("1");
+                    switch (s[0]) {
+                    case "T":
+                        task = new ToDos(s[2]);
+                        break;
+                    case "D":
+                        task = new Deadlines(s[2], s[3]);
+                        break;
+                    case "E":
+                        task = new Events(s[2], s[3], s[4]);
+                        break;
+                    }
+                    task.setDone(isDone);
+                    result.add(task);
+                }
+            }
+
+            return result;
+        } catch (IOException e) {
+            throw new DukeIOException("Cannot read from " + filePath + " data file");
+        }
+    }
+
     /**
      * Empty all the task that stored in the file.
      *
-     * @throws DukeIOException
+     * @throws DukeIOException indicate failed or interrupted I/O operations occurred.
      */
     protected void emptyStorage() throws DukeIOException {
         try {

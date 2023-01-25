@@ -7,11 +7,11 @@ public class AddCommand extends Command{
     Task task;
 
     /**
-     * Constructor to create a add command.
+     * Constructor to create an add command.
      *
      * @param fullCommand User input command.
-     * @throws DukeEmptyArgumentException
-     * @throws DukeInvalidArgumentException
+     * @throws DukeEmptyArgumentException indicate that a command has been passed an empty argument.
+     * @throws DukeInvalidArgumentException indicate that a command has been passed an illegal argument.
      */
     public AddCommand (String[] fullCommand) throws DukeEmptyArgumentException, DukeInvalidArgumentException {
         try {
