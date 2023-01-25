@@ -23,12 +23,28 @@ import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 
+/**
+ * A class that deals with making sense of the user command and saved content.
+ */
 public class Parser {
+
+    /**
+     * Converts a string to a LocalDateTime.
+     * @param str The given string.
+     * @return The time converted from the given string.
+     * @throws DateTimeParseException If the string is not in the correct format.
+     */
     public LocalDateTime parseDateTime(String str) throws DateTimeParseException {
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm");
         return LocalDateTime.parse(str, formatter);
     }
 
+    /**
+     * Converts a line of string to a task.
+     * @param line A line of string in a save format.
+     * @return A task converted from the given string.
+     * @throws CannotReadFileDukeException If the string is not formatted correctly.
+     */
     public Task parseSave(String line) throws CannotReadFileDukeException {
         String[] parsed = line.split("\\|");
         String taskSymbol = parsed[0];
@@ -54,6 +70,12 @@ public class Parser {
         return task;
     }
 
+    /**
+     * Converts a string to a command.
+     * @param input A string.
+     * @return A command converted from the given string.
+     * @throws DukeException If the string is not formatted correctly.
+     */
     public Command parseCommand(String input) throws DukeException {
         String[] parts = input.split(" ", 2);
         String command = parts[0];
