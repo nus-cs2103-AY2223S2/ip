@@ -1,8 +1,17 @@
+package duke.helper;
+
+import duke.exception.EmptyTaskException;
+import duke.exception.InvalidCommandException;
+import duke.task.Deadline;
+import duke.task.Event;
+import duke.task.Task;
+import duke.task.ToDo;
+
 public class Parser {
   public void validateTaskInput(String input) throws EmptyTaskException {
     String s = input.strip();
     if (s.equals("todo") || s.equals("deadline") || s.equals("event")) {
-      throw new EmptyTaskException("Task " + s + " cannot be empty nya!\n");
+      throw new EmptyTaskException("duke.task.Task " + s + " cannot be empty nya!\n");
     }
   }
 
