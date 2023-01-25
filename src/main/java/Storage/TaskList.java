@@ -4,17 +4,82 @@ import Task.Task;
 import Task.Todo;
 import Task.Event;
 import Task.Deadline;
+
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileReader;
+import java.io.IOException;
 import java.util.ArrayList;
+
+import DukeException.DukeException;
 
 public class TaskList {
 
     private ArrayList<Task> tasks;
+    private File file;
 
     /**
      * Constructor to create new Task.Task List
      */
     public TaskList() {
         this.tasks = new ArrayList<Task>();
+    }
+
+    public TaskList(File file) {
+        this.tasks = new ArrayList<Task>();
+        this.file = file;
+        loadTasks();
+    }
+
+    public void loadTasks() {
+        try {
+            BufferedReader reader = new BufferedReader(new FileReader(this.file));
+            String line = reader.readLine();
+
+            while (line != null) {
+                try {
+                    String[] args = line.split("\\|");
+                    String task_type = args[0].trim();
+                    String task_status = args[1].trim();
+                    String task_desc = args[2];
+                    switch (task_type) {
+                        case "T":
+                            Todo todo = new Todo(task_desc);
+                            if (task_status.equals("1")) {
+                                todo.markComplete();
+                            }
+                            tasks.add(todo);
+                            break;
+                        case "D":
+                            String due_date = args[3];
+                            Deadline deadline = new Deadline(task_desc, due_date);
+                            if (task_status.equals("1")) {
+                                deadline.markComplete();
+                            }
+                            tasks.add(deadline);
+                            break;
+                        case "E":
+                            String[] duration = args[3].split("-");
+                            String startTime = duration[0];
+                            String endTime = duration[1];
+                            Event event = new Event(task_desc, startTime, endTime);
+                            if (task_status.equals("1")) {
+                                event.markComplete();
+                            }
+                            tasks.add(event);
+                            break;
+                        default:
+                            break;
+                    }
+                    line = reader.readLine();
+                } catch (DukeException duke_error) {
+                    duke_error.printStackTrace();
+                }
+            }
+            reader.close();
+        } catch (IOException error) {
+            error.printStackTrace();
+        }
     }
 
     /**

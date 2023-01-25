@@ -1,12 +1,15 @@
 import Storage.TaskList;
-
+import java.io.File;
+import java.io.IOException;
 import java.util.Scanner;
 
 public class Duke {
     public static void main(String[] args) {
+        File file = readFile("./data/duke.txt");
         greet();
         // echo();
-        handleRequest();
+        // handleRequest();
+        handleFileRequest(file);
         exit();
     }
 
@@ -66,6 +69,34 @@ public class Duke {
         }
 
         sc.close();
+    }
+
+    public static void handleFileRequest(File file) {
+        TaskList tasks = new TaskList(file);
+        Scanner sc = new Scanner(System.in);
+        String input = sc.nextLine();
+        while(!input.equalsIgnoreCase("bye")) {
+            Request request = new Request(input, tasks);
+            printRes(request.toString());
+            input = sc.nextLine();
+        }
+    }
+
+    public static File readFile(String path) {
+        File file = new File(path);
+        file.getParentFile().mkdirs();
+
+        if (file.exists()) {
+            return file;
+        }
+
+        try {
+            file.createNewFile();
+        } catch (IOException io_error) {
+            io_error.printStackTrace();
+        }
+
+        return file;
     }
 
     /**
