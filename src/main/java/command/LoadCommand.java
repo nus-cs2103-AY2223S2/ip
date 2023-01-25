@@ -1,6 +1,12 @@
+package command;
+
+import chatbot.Storage;
+import chatbot.Ui;
+import task.TaskList;
+
 public class LoadCommand extends Command {
 
-    LoadCommand() {
+    public LoadCommand() {
         this.isExit = false;
         this.isSave = false;
     }

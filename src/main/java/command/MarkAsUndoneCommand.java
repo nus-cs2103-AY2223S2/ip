@@ -1,21 +1,28 @@
-public class MarkAsDoneCommand extends Command {
-    public String markAtIndex;
-    MarkAsDoneCommand(String index) {
+package command;
+
+import chatbot.Storage;
+import chatbot.Ui;
+import task.TaskList;
+
+public class MarkAsUndoneCommand extends Command {
+    private String unmarkAtIndex;
+
+    public MarkAsUndoneCommand(String index) {
         this.isExit = false;
         this.isSave = true;
-        this.markAtIndex = index;
+        this.unmarkAtIndex = index;
     }
 
     @Override
     public void execute(TaskList tl, Ui ui, Storage storage) throws Exception {
         boolean alreadyMarked;
         try {
-            int i = Integer.valueOf(this.markAtIndex) - 1;
-            alreadyMarked = tl.markAsDone(i);
+            int i = Integer.valueOf(this.unmarkAtIndex) - 1;
+            alreadyMarked = tl.unmarkDone(i);
             if (alreadyMarked) {
-                ui.reply(tl.getTask(i).getDesc() + " already marked as done!");
+                ui.reply(tl.getTask(i).getDesc() + " is already undone!");
             } else {
-                ui.reply("Marked " + tl.getTask(i).getDesc() + " as done!");
+                ui.reply("Unmarked " + tl.getTask(i).getDesc() + ".");
             }
         } catch (NumberFormatException e) {
             throw new Exception("Please specify the task by its index number.");
