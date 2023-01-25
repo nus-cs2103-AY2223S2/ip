@@ -6,8 +6,16 @@ import java.time.format.DateTimeParseException;
 import java.util.Arrays;
 import java.util.Scanner;
 
+/**
+ * Parser class to parse user inputs.
+ */
 public class Parser {
-
+    /**
+     * Parses user input into command.
+     *
+     * @param sc Scanner for system input.
+     * @return Command parsed.
+     */
     protected static Command read(Scanner sc) {
         int rank;
         String s = sc.nextLine().trim();
@@ -84,6 +92,12 @@ public class Parser {
 
     private static final DateTimeFormatter INPUT_FORMAT = DateTimeFormatter.ofPattern("dd-MM-yyyy HHmm");
 
+    /**
+     * Parses string to produce a MaybeDate.
+     *
+     * @param s Time period.
+     * @return MaybeDate of the period.
+     */
     protected static MaybeDate parseDate(String s) {
         String temp = s;
         if (s.length() == 10) {
