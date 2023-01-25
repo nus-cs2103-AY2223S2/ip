@@ -45,6 +45,17 @@ public class Duke {
         }
     }
 
+    public void deleteInputChecker(String input) throws DukeException {
+        String[] inputArray = input.split(" ", 2);
+        if (inputArray.length != 2) {
+            throw new DukeException("OOPS!!! You have to choose a task to delete.");
+        } else {
+            if (inputArray[1].trim().length() == 0) {
+                throw new DukeException("OOPS!!! You have to choose a task to delete.");
+            }
+        }
+    }
+
     public boolean addDeadlineCheck(String s) {
         return s.startsWith("deadline ");
     }
@@ -147,6 +158,11 @@ public class Duke {
                 } else if (input.startsWith("unmark ")) {
                     markTaskAsNotDone(Integer.parseInt(input.split(" ")[1]));
                 } else if (input.startsWith("delete ")) {
+                    deleteInputChecker(input);
+                    int taskNumber = Integer.parseInt(input.split(" ")[1]);
+                    if ( taskNumber > list.size() || taskNumber <= 0) {
+                        throw new DukeException("OOPS!!! Invalid task number! Try again.");
+                    }
                     deleteTaskFromList(Integer.parseInt(input.split(" ")[1]));
                 } else if (addEventCheck(input)) { // check if input type is event
                     String[] eventConstructor = input.replace("event ", "").split("/");
