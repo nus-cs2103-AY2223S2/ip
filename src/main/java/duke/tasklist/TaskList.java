@@ -26,6 +26,12 @@ public class TaskList {
         return this.taskList.size();
     }
 
+    /**
+     * Obtain task based on given index
+     * @param index
+     * @return Task
+     * @throws DukeException
+     */
     public Task getTask(int index) throws DukeException {
         // handle errors out of range
         if (index < 0 || index >= this.getSize()) {

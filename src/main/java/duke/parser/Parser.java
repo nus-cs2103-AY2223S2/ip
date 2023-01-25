@@ -22,6 +22,12 @@ public class Parser {
         FIND,
         UNKNOWN
     };
+
+    /**
+     * Process userInput and returns relevant action
+     * @param userInput
+     * @return
+     */
     public Action getCommand(String userInput) {
         if (userInput.equals("list")) {
             return Action.LIST;
@@ -42,6 +48,13 @@ public class Parser {
         }
         return Action.UNKNOWN;
     }
+
+    /**
+     * Obtain to do description from user input
+     * @param userInput
+     * @return String or throws exception
+     * @throws DukeException
+     */
     public String getTodoDescription(String userInput) throws DukeException {
         String todoDescription;
         try {
@@ -52,6 +65,12 @@ public class Parser {
         return todoDescription;
     }
 
+    /**
+     * Obtain deadline description from user input
+     * @param userInput
+     * @return String or throws exception
+     * @throws DukeException
+     */
     public String getDeadlineDescription(String userInput) throws DukeException {
         String deadlineDescription;
         try {
@@ -62,6 +81,12 @@ public class Parser {
         return deadlineDescription;
     }
 
+    /**
+     * Obtain deadline date from user input
+     * @param userInput
+     * @return LocalDate or throws exception
+     * @throws DukeException
+     */
     public LocalDate getDeadlineDate(String userInput) throws DukeException {
         LocalDate deadlineDate;
         try {
@@ -73,6 +98,12 @@ public class Parser {
         return deadlineDate;
     }
 
+    /**
+     * Obtain event description from user input
+     * @param userInput
+     * @return String or exception
+     * @throws DukeException
+     */
     public String getEventDescription(String userInput) throws DukeException {
         String eventDescription;
         try {
@@ -83,6 +114,12 @@ public class Parser {
         return eventDescription;
     }
 
+    /**
+     * Obtain event date details (start, end) from user input
+     * @param userInput
+     * @return Start and end date in type Local Date or exception
+     * @throws DukeException
+     */
     public LocalDate[] getEventDateDetails(String userInput) throws DukeException {
         LocalDate eventStartDate;
         LocalDate eventEndDate;
@@ -97,6 +134,11 @@ public class Parser {
         return new LocalDate[]{eventStartDate, eventEndDate};
     }
 
+    /**
+     * Obtain task index from user input
+     * @param userInput
+     * @return
+     */
     public Integer getTaskIndex(String userInput) {
         return Integer.parseInt(userInput.split(" ", 2)[1]) - 1;
     }
