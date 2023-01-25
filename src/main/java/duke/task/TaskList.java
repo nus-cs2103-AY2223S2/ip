@@ -1,4 +1,8 @@
-import java.util.*;
+package duke.task;
+
+import duke.exception.OutOfBoundsException;
+
+import java.util.ArrayList;
 /**
  * Encapsulation of the list containing tasks.
  */

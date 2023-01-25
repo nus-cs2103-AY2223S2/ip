@@ -1,3 +1,10 @@
+package duke.command;
+
+import duke.storage.Storage;
+import duke.task.TaskList;
+import duke.ui.Ui;
+import duke.exception.DukeException;
+
 /**
  * Encapsulation of the command to mark a task as not done.
  */

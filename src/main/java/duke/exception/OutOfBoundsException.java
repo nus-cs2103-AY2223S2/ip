@@ -1,3 +1,5 @@
+package duke.exception;
+
 /**
  * For indexes that are out of bounds.
  */

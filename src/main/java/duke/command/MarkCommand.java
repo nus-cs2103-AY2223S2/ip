@@ -1,3 +1,10 @@
+package duke.command;
+
+import duke.storage.Storage;
+import duke.task.TaskList;
+import duke.ui.Ui;
+import duke.exception.DukeException;
+
 /**
  * Encapsulation of the command to mark a task as done.
  */
@@ -14,12 +21,8 @@ public class MarkCommand extends Command {
      * Marks the task at the given index as done.
      */
     @Override
-    public void execute(TaskList tasks, Storage storage, Ui ui) {
-        try {
-            tasks.mark(this.index);
-        } catch (DukeException e) {
-            System.out.println(e);
-        }
+    public void execute(TaskList tasks, Storage storage, Ui ui) throws DukeException {
+        tasks.mark(this.index);
     }
 
     /**

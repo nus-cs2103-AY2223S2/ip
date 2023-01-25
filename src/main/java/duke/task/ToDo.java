@@ -1,3 +1,5 @@
+package duke.task;
+
 /**
  * Encapsulation of a ToDo task,
  * a task without any date/time attached.

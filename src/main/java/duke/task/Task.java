@@ -1,3 +1,5 @@
+package duke.task;
+
 /**
  * Encapsulation of a task.
  */

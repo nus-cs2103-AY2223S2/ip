@@ -1,3 +1,5 @@
+package duke.exception;
+
 /**
  * Encapsulation of an incomplete description exception.
  */
