@@ -1,3 +1,4 @@
+import java.io.*;
 import java.util.Scanner;
 import java.util.ArrayList;
 import java.lang.RuntimeException;
@@ -11,29 +12,33 @@ public class Duke {
     }
     private static class Task {
         public String title;
-        private Boolean done;
+        private Boolean isDone;
 
         public Task(String title) {
             this.title = title;
-            this.done = false;
+            this.isDone = false;
         }
 
         public void mark() {
-            this.done = true;
+            this.isDone = true;
         }
 
         public void unmark() {
-            this.done = false;
+            this.isDone = false;
         }
 
-        public Boolean isDone() {
-            return this.done;
+        public Boolean getIsDone() {
+            return this.isDone;
         }
 
         @Override
         public String toString() {
-            String checkBox = this.done ? "[X]" : "[ ]";
+            String checkBox = this.isDone ? "[X]" : "[ ]";
             return checkBox + " " + this.title;
+        }
+
+        public String toSavedString() {
+            return (this.isDone ? "1" : "0") + "|" + this.title;
         }
     }
 
@@ -44,6 +49,11 @@ public class Duke {
         @Override
         public String toString() {
             return "[T]" + super.toString();
+        }
+
+        @Override
+        public String toSavedString() {
+            return "T|" + super.toSavedString();
         }
     }
 
@@ -56,6 +66,11 @@ public class Duke {
         @Override
         public String toString() {
             return "[D]" + super.toString() + " (by: " + this.by + ")";
+        }
+
+        @Override
+        public String toSavedString() {
+            return "D|" + super.toSavedString() + "|" + this.by;
         }
     }
 
@@ -71,11 +86,17 @@ public class Duke {
         public String toString() {
             return "[E]" + super.toString() + " (from: " + this.from + " to: " + this.to + ")";
         }
+
+        @Override
+        public String toSavedString() {
+            return "E|" + super.toSavedString() + "|" + this.from + "|" + this.to;
+        }
     }
 
     private static ArrayList<Task> tasks = new ArrayList<>(100);
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
+        getTasks();
         String logo = " ____        _        \n"
                 + "|  _ \\ _   _| | _____ \n"
                 + "| | | | | | | |/ / _ \\\n"
@@ -140,8 +161,10 @@ public class Duke {
         input = sc.nextLine();
         }
 
-        printMsg("Bye. Hope to see you again soon!");
-
+        saveTasks();
+        System.out.println("    ____________________________________________________________");
+        System.out.println("     Bye. Hope to see you again soon!");
+        System.out.println("    ____________________________________________________________");
     }
 
     private static void addTodo(String title) {
@@ -215,9 +238,60 @@ public class Duke {
         System.out.println("    ____________________________________________________________");
     }
 
-    private static void printMsg(String msg) {
-        System.out.println("    ____________________________________________________________");
-        System.out.println("     " + msg);
-        System.out.println("    ____________________________________________________________");
+    private static void importTasks (File dataFile) {
+        try {
+            BufferedReader br = new BufferedReader(new FileReader(dataFile));
+            String line = br.readLine();
+            while (line != null) {
+                String[] taskArr = line.split("\\|");
+                for (String s:taskArr) {
+                    System.out.println(s);
+                }
+                Task newTask;
+                if (taskArr[0].equals("T")) {
+                    newTask = new Todo(taskArr[2]);
+                } else if (taskArr[0].equals("D")) {
+                    newTask = new Deadline(taskArr[2], taskArr[3]);
+                } else if (taskArr[0].equals("E")) {
+                    newTask = new Event(taskArr[2], taskArr[3], taskArr[4]);
+                } else {
+                    throw new DukeException("Invalid Task from File", new RuntimeException());
+                }
+
+                if (taskArr[1].equals("1")) {
+                    newTask.mark();
+                }
+                tasks.add(newTask);
+                line = br.readLine();
+            }
+        } catch (FileNotFoundException e) {
+            throw new DukeException("File not found", e);
+        } catch (IOException e) {
+            throw new DukeException("IO Exception", e);
+        }
+    }
+
+    private static void getTasks() {
+        try {
+            File dataFile = new File("./data.txt");
+            if (!dataFile.createNewFile()) {
+                importTasks(dataFile);
+            }
+        } catch (IOException e) {
+            throw new DukeException("IO Exception", e);
+        }
+    }
+
+    private static void saveTasks() {
+        try {
+            File dataFile = new File("./data.txt");
+            PrintWriter writer = new PrintWriter(dataFile);
+            for (Task task: tasks) {
+                writer.println(task.toSavedString());
+            }
+            writer.close();
+        } catch (IOException e) {
+            throw new DukeException("IO Exception", e);
+        }
     }
 }
