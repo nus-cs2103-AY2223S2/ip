@@ -1,5 +1,5 @@
 public class EventCommand extends Command {
-    private static final String EVENT_COMMAND = "event";
+    public static final String EVENT_COMMAND = "event";
     private final Event event;
 
     public EventCommand(Event event) {

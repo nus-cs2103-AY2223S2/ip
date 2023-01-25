@@ -22,7 +22,7 @@ public class Ui {
         showLine();
     }
 
-    public void showError(String errorMsg) {
+    public static void showError(String errorMsg) {
         System.out.println(errorMsg);
     }
 

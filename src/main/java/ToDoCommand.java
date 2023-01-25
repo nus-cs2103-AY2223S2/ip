@@ -1,5 +1,5 @@
 public class ToDoCommand extends Command {
-    private static final String TODO_COMMAND = "todo";
+    public static final String TODO_COMMAND = "todo";
     private final Todo todo;
 
     public ToDoCommand(Todo todo) {

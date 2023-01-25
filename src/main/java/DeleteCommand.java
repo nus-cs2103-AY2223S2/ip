@@ -1,5 +1,5 @@
 public class DeleteCommand extends Command {
-    private static final String DELETE_COMMAND = "delete";
+    public static final String DELETE_COMMAND = "delete";
     private final int index;
 
     public DeleteCommand(int index) {

@@ -23,12 +23,12 @@ public class Deadline extends Task{
             String deadlineString = details[1].split(" ", 2)[1];
             LocalDate deadline = LocalDate.parse(deadlineString);
             Deadline d = new Deadline(details[0], deadline);
-//            lst.addTask(d);
-//            Ui.showLine();
-//            System.out.println("Got it! I've added: ");
-//            System.out.println(" " + d.toString());
-//            lst.printSize();
-//            Ui.showLine();
+            lst.addTask(d);
+            Ui.showLine();
+            System.out.println("Got it! I've added: ");
+            System.out.println(" " + d.toString());
+            lst.printSize();
+            Ui.showLine();
         } catch (DateTimeParseException e) {
             throw new DukeException("date format");
         }

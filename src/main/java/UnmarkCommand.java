@@ -1,5 +1,5 @@
 public class UnmarkCommand extends Command {
-    private static final String UNMARK_COMMAND = "unmark";
+    public static final String UNMARK_COMMAND = "unmark";
     private final int index;
 
     public UnmarkCommand(int index) {

@@ -29,6 +29,10 @@ public class DukeException extends Exception{
         } else if (formatError.contains(command)) {
             this.errorMsg = "The date is not the correct format!\n" +
                     "Please enter a date with this format: yyyy-mm-dd";
+        } else if (command.equals("too many details")) {
+            this.errorMsg = "The command shouldn't be followed by other details!";
+        } else if (command.equals("input type")) {
+            this.errorMsg = "The input following the command is the wrong type!";
         } else {
             this.errorMsg = "I'm sorry but I don't know what that means :(";
         }
