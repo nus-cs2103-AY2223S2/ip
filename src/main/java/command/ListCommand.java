@@ -1,15 +1,14 @@
 package command;
 
-import java.util.ArrayList;
-
 import exception.DukeException;
 import task.Task;
+import task.TaskList;
 
 public class ListCommand extends Command {
     
-    private ArrayList<Task> taskList;
+    private TaskList taskList;
 
-    public ListCommand(ArrayList<Task> taskList) {
+    public ListCommand(TaskList taskList) {
         this.taskList = taskList;
     }
 
