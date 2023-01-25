@@ -108,6 +108,14 @@ public class Duke {
                             String[] eventMsg = {cfmMsg, " " + tsk.toString(), tskNum};
                             printMsg(eventMsg);
                             break;
+                        case "delete":
+                            idx = Integer.parseInt(cmd[1]) - 1;
+                            tsk = data.get(idx);
+                            data.remove(idx);
+                            tskNum = String.format("Now you have %d tasks in the list.", data.size());
+                            String[] delMsg = {"Noted. I've removed this task:", tsk.toString(), tskNum};
+                            printMsg(delMsg);
+                            break;
                         default:
                             throw new DukeException("☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
                     }
