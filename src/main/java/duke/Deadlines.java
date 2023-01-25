@@ -1,6 +1,10 @@
 package duke;
-public class Deadlines extends TimedTask{
-    public Deadlines(){super();}
+
+public class Deadlines extends TimedTask {
+    public Deadlines() {
+        super();
+    }
+
     public Deadlines(boolean status, String des) {
         super();
         setStatus(status);
@@ -10,13 +14,13 @@ public class Deadlines extends TimedTask{
 
     @Override
     public void printStatus() {
-        String s = (status)? "X":" ";
-        System.out.println("[D][" +s+ "] " + getDes() + " (by: " + toStringConsoleEnd() + ")");
+        String s = (status) ? "X" : " ";
+        System.out.println("[D][" + s + "] " + getDes() + " (by: " + toStringConsoleEnd() + ")");
     }
 
     @Override
     public String toString() {
-        String s = (status)? "X":" ";
+        String s = (status) ? "X" : " ";
         return "D | " + s + " | " + getDes() + " | " + super.toStringFileEnd();
     }
 }

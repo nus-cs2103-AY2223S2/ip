@@ -1,4 +1,5 @@
 package duke;
+
 import java.util.Arrays;
 
 public class Functions {
@@ -10,7 +11,7 @@ public class Functions {
         this.st = st;
     }
 
-    public void list(String inp) throws DukeException{
+    public void list(String inp) throws DukeException {
         String[] s = inp.split(" ");
 
         /*
@@ -58,9 +59,9 @@ public class Functions {
         return false;
     }
 
-    public void mark(String inp) throws DukeException{
+    public void mark(String inp) throws DukeException {
         String[] s = inp.split(" ");
-        if (s.length<2) {
+        if (s.length < 2) {
             throw new markException();
         }
         int index = Integer.parseInt(s[1]) - 1;
@@ -71,9 +72,9 @@ public class Functions {
         this.st.save(tl);
     }
 
-    public void unmark(String inp) throws DukeException{
+    public void unmark(String inp) throws DukeException {
         String[] s = inp.split(" ");
-        if (s.length<2) {
+        if (s.length < 2) {
             throw new markException();
         }
         int index = Integer.parseInt(s[1]) - 1;
@@ -84,9 +85,9 @@ public class Functions {
         this.st.save(tl);
     }
 
-    public void delete(String inp) throws DukeException{
+    public void delete(String inp) throws DukeException {
         String[] s = inp.split(" ");
-        if (s.length<2) {
+        if (s.length < 2) {
             throw new deleteException();
         }
         int index = Integer.parseInt(s[1]) - 1;
@@ -97,9 +98,9 @@ public class Functions {
         this.st.save(tl);
     }
 
-    public void todo(String inp) throws DukeException{
+    public void todo(String inp) throws DukeException {
         String[] s = inp.split(" ");
-        if (s.length<2) {
+        if (s.length < 2) {
             throw new todoException();
         }
         String[] temp = Arrays.copyOfRange(s, 1, s.length);
@@ -111,7 +112,7 @@ public class Functions {
 
     public void deadline(String inp) throws DukeException {
         String[] s = inp.split(" ");
-        if (s.length<2) {
+        if (s.length < 2) {
             throw new deadlineException();
         }
         String[] temp = Arrays.copyOfRange(s, 1, s.length);
@@ -124,7 +125,7 @@ public class Functions {
 
     public void events(String inp) throws DukeException {
         String[] s = inp.split(" ");
-        if (s.length<2) {
+        if (s.length < 2) {
             throw new eventException();
         }
         String[] temp = Arrays.copyOfRange(s, 1, s.length);
