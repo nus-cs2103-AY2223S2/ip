@@ -4,42 +4,14 @@ import java.util.Scanner;
 
 public class Duke {
 
-    private static DukeList ls = new DukeList();
+    private static TaskList ls = new TaskList();
 
     public static void main(String[] args) throws DukeException, FileNotFoundException {
-        File save = new File("./data/duke.txt");
-        if (!save.exists()) {
-            try {
-                save.createNewFile();
-            } catch (IOException e) {
-                System.out.println("Unable to create new save file: " + e);
-            }
-        }
-        BufferedReader r = new BufferedReader(new FileReader(save));
-        String keyword;
-        String task;
-        try {
-            task = r.readLine();
-            while (task != null) {
-                keyword = task.split(" ")[0];
-                switch (keyword) {
-                    case ("todo"): {
-                        ls.addToDo(task);
-                        break;
-                    }
-                    case ("deadline"): {
-                        ls.addDeadline(task);
-                        break;
-                    }
-                    case ("event"): {
-                        ls.addEvent(task);
-                        break;
-                    }
-                }
-                task = r.readLine();
-            }
-        } catch (IOException e) {
-            System.out.println(e);
+
+        if (Storage.saveExists()) {
+            Storage.loadSave(ls);
+        } else {
+            Storage.createSave();
         }
 
         String logo = " ____        _        \n"
@@ -55,7 +27,7 @@ public class Duke {
             String chat = in.nextLine();
             if (chat.equals("bye")) {
                 try {
-                    saveList();
+                    Storage.saveList(ls);
                 } catch (Exception e) {
                     System.out.println(e);
                 }
@@ -66,15 +38,6 @@ public class Duke {
         System.out.println("----------------------------------");
         System.out.println("Bye. Hope to see you again soon!");
         System.out.println("----------------------------------");
-    }
-
-    public static void saveList() throws IOException {
-        ArrayList<Task> tasks = ls.getList();
-        BufferedWriter writer = new BufferedWriter(new FileWriter("./data/duke.txt"));
-        for (Task task : tasks) {
-            writer.write(task.getBreakdown() + "\n");
-        }
-        writer.close();
     }
 
     /**
