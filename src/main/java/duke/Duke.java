@@ -38,7 +38,7 @@ public class Duke {
     }
 
     /**
-     * Main logic to run the program.
+     * Main logic to run the program
      * Ends when user inputs "bye"
      * @throws DukeException
      */
