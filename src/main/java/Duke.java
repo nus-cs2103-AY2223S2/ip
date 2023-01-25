@@ -38,9 +38,35 @@ public class Duke {
                 System.out.print("OK, I've marked this task as not done yet:\n" + store.get(index).toString() + "\n");
                 echo = sc.nextLine();
             } else {
-                store.add(new Task(echo));
-                System.out.print("added:" + echo + "\n");
-                echo = sc.nextLine();
+                if (echo.contains("todo")) {
+                    String description = echo.replace("todo", "");
+                    ToDo toDo = new ToDo(description);
+                    store.add(toDo);
+                    System.out.print("Got it. I've added this task:\n" + toDo.toString() +
+                            "\nNow you have " + store.size() + " tasks in the list.\n");
+                    echo = sc.nextLine();
+
+                } else if (echo.contains("deadline")) {
+                    echo = echo.replace("deadline", "");
+                    String description = echo.split("/by")[0];
+                    String date = echo.split("/by")[1];
+                    Deadline deadline = new Deadline(description, date);
+                    store.add(deadline);
+                    System.out.print("Got it. I've added this task:\n" + deadline.toString() +
+                            "\nNow you have " + store.size() + " tasks in the list.\n");
+                    echo = sc.nextLine();
+
+                } else if (echo.contains("event")) {
+                    echo = echo.replace("event", "");
+                    String description = echo.split("/from")[0];
+                    String temp = echo.split("/from")[1];
+                    String from = temp.split("/to")[0];
+                    String to = temp.split("/to")[1];
+                    Event event = new Event(description, from, to);
+                    System.out.print("Got it. I've added this task:\n" + event.toString() +
+                            "\nNow you have " + store.size() + " tasks in the list.\n");
+                    echo = sc.nextLine();
+                }
             }
         }
         System.out.print("Bye, have a good day!");
