@@ -15,6 +15,10 @@ import java.util.*;
 
 import duke.ui.Ui;
 
+/**
+ * Represents a Storage instance of Duke.
+ * A storage instance handles all communication between Duke and local data file.
+ */
 public class Storage {
 
     private static final String DEFAULT_DIRECTORY = "./data/";
@@ -23,6 +27,13 @@ public class Storage {
     private TaskList tasks;
     private Ui ui;
 
+    /**
+     * Constructs a Storage instance.
+     * Storage object is constructed with an Ui instance.
+     * Ui object assists Storage in communicating with User.
+     *
+     * @param ui Ui instance.
+     */
     public Storage(Ui ui) {
         this.ui = ui;
         File directory = new File(DEFAULT_DIRECTORY);
@@ -45,6 +56,11 @@ public class Storage {
         tasks = new TaskList(this.ui);
     }
 
+    /**
+     * Returns TaskList instance after loading tasks from data file.
+     *
+     * @return TaskList object with loaded tasks.
+     */
     public TaskList load() {
         try {
             List<String> allLines = Files.readAllLines(Paths.get(DEFAULT_FILEPATH));
@@ -90,6 +106,11 @@ public class Storage {
         return tasks;
     }
 
+    /**
+     * Saves existing tasks in TaskList into data file.
+     *
+     * @param tasks Updated TaskList with changes to be saved.
+     */
     public void save(TaskList tasks) {
         this.tasks = tasks;
 

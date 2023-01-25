@@ -6,6 +6,10 @@ import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.FormatStyle;
 
+/**
+ * Represents an Event Task.
+ * Event Task are unique in having a starting datetime and ending datetime.
+ */
 public class Event extends Task {
 
     private LocalDate endDate;
@@ -21,6 +25,14 @@ public class Event extends Task {
     private String forSavingStart;
     private String forSavingEnd;
 
+    /**
+     * Constructs an Event Task instance.
+     * Event tasks are constructed with a starting and ending time.
+     *
+     * @param description Description of task.
+     * @param start Starting time of Event.
+     * @param end Ending time of Event
+     */
     public Event(String description, String start, String end) {
         super(description);
         String[] startDateAndTime = start.split(" ");
