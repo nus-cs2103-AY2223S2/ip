@@ -50,10 +50,10 @@ public abstract class Task {
         this.isDone = true;
     }
 
-        /**
+    /**
      * Sets the task as not done.
      */
-    public void markAsNotDone() {
+    public void setNotDone() {
         this.isDone = false;
     }
 
