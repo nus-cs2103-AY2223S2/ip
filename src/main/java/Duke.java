@@ -11,7 +11,7 @@ public class Duke {
     private static ArrayList<Task> taskList = new ArrayList<Task>();
     private static Scanner sc = new Scanner(System.in);
     private static boolean exitApp = false;
-    private static String storagePath = "data.txt";
+    private static Storage storage = new Storage("dataz.txt");
 
     public static void main(String[] args) {
         String logo = " ____        _        \n"
@@ -21,8 +21,6 @@ public class Duke {
                 + "|____/ \\__,_|_|\\_\\___|\n";
         System.out.println("Hello from\n" + logo);
 
-
-
         init();
 
         // App loop
@@ -31,12 +29,20 @@ public class Duke {
         }
 
         // Exit message
-        writeToFile(storagePath);
+        try {
+            storage.save(taskListToStorageString());
+        } catch (IOException e) {
+            displayMessage("☹ OOPS!!! Something went wrong when saving your tasks!");
+        }
         displayMessage("Bye! Hope to see you again soon!");
     }
 
     private static void init() {
-        readFromFile(storagePath);
+        try {
+            storage.read(taskList);
+        } catch (FileNotFoundException e) {
+            displayMessage("☹ OOPS!!! Could not find the storage file.");
+        }
         displayMessage("Hello! I'm Duke\nWhat can i do for you?");
     }
 
@@ -188,43 +194,8 @@ public class Duke {
         }
     }
 
-    private static void writeToFile(String filePath) {
-        try {
-            FileWriter fw = new FileWriter(filePath);
-            fw.write(taskListToString());
-            fw.close();
-        } catch (IOException e) {
-            displayMessage(e.getMessage());
-        }
 
-    }
-    public static void readFromFile(String filePath) {
-        try {
-            File f = new File(filePath);
-            Scanner s = new Scanner(f);
-
-            while (s.hasNext()) {
-                String taskString = s.nextLine();
-                String[] parts = taskString.split("/");
-
-                try {
-                    if (parts[0].equals("D")) {
-                        taskList.add(Deadline.parseDeadlineStringArray(parts));
-                    } else if (parts[0].equals("E")) {
-                        taskList.add(Event.parseEventStringArray(parts));
-                    } else if (parts[0].equals("T")) {
-                        taskList.add(ToDo.parseToDoStringArray(parts));
-                    }
-                } catch (DateTimeParseException e) {
-                    displayMessage(e.getMessage());
-                }
-            }
-        } catch (FileNotFoundException e) {
-            return;
-        }
-    }
-
-    public static String taskListToString() {
+    public static String taskListToStorageString() {
         String output = "";
         for (Task t : taskList) {
             String taskDesc = t.getDescription();
