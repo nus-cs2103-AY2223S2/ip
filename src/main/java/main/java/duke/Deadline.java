@@ -1,3 +1,5 @@
+package main.java.duke;
+
 import java.time.LocalDateTime;
 import java.time.format.DateTimeParseException;
 import java.util.Scanner;

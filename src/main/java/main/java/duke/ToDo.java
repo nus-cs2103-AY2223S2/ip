@@ -1,3 +1,5 @@
+package main.java.duke;
+
 import java.util.Scanner;
 
 public class ToDo extends Task{

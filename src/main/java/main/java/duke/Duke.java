@@ -1,3 +1,5 @@
+package main.java.duke;
+
 import java.io.FileNotFoundException;
 import java.io.IOException;
 
