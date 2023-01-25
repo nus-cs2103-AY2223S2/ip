@@ -9,21 +9,21 @@ public class TaskList {
     /**
      * Arraylist to keep track of the task.
      */
-    private ArrayList<Task> taskList = new ArrayList<>();
+    private final ArrayList<Task> taskList;
 
     /**
      * Initialize the task list.
      *
      * @param taskList list of task to be keep track.
      */
-    public TaskList (ArrayList<Task> taskList) {
+    public TaskList(ArrayList<Task> taskList) {
         this.taskList = taskList;
     }
 
     /**
      * Initialize an empty task list.
      */
-    public TaskList () {
+    public TaskList() {
         this.taskList = new ArrayList<>();
     }
 
@@ -33,7 +33,7 @@ public class TaskList {
      * @param index index of the task in task list.
      * @return task at that given index.
      */
-    protected Task getTaskAt (int index) {
+    protected Task getTaskAt(int index) {
         return taskList.get(index);
     }
 
@@ -43,7 +43,7 @@ public class TaskList {
      * @param index index of task in task list.
      * @param task task to replace.
      */
-    protected void setTaskAt (int index, Task task) {
+    protected void setTaskAt(int index, Task task) {
         taskList.set(index, task);
     }
 
@@ -61,7 +61,7 @@ public class TaskList {
      *
      * @param index index of task to be removed.
      */
-    protected void removeTaskAt (int index) {
+    protected void removeTaskAt(int index) {
         taskList.remove(index);
     }
 

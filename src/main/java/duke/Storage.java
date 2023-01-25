@@ -5,6 +5,7 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.InvalidPathException;
 import java.nio.file.Path;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -107,7 +108,6 @@ public class Storage {
 
             // remove the line from duke.txt
             allLine.remove(lineNumber);
-
             Files.write(path, allLine);
         } catch (IOException e) {
             throw new DukeIOException("Cannot read from " + filePath + " data file");
@@ -130,25 +130,27 @@ public class Storage {
                 return taskList;
             }
 
-            for (int i = 0; i < allLine.size(); i++) {
-                String taskDescription = allLine.get(i);
+            for (String taskDescription : allLine) {
                 String[] s = taskDescription.split(" \\| ");
 
                 Task t = null;
                 boolean isDone = s[1].equals("1");
-                if (s[0].equals("T")) {
+                switch (s[0]) {
+                case "T":
                     t = new ToDos(s[2]);
-                } else if (s[0].equals("D")) {
+                    break;
+                case "D":
                     t = new Deadlines(s[2], s[3]);
-                } else if (s[0].equals("E")) {
+                    break;
+                case "E":
                     t = new Events(s[2], s[3], s[4]);
+                    break;
                 }
                 t.setDone(isDone);
                 taskList.add(t);
             }
 
             return taskList;
-
         } catch (IOException e) {
             throw new DukeIOException("Cannot read from " + filePath + " data file");
         }
@@ -200,7 +202,6 @@ public class Storage {
     protected void emptyStorage() throws DukeIOException {
         try {
             List<String> emptyLine = new ArrayList<>();
-
             Files.write(path, emptyLine);
         } catch (IOException e) {
             throw new DukeIOException("Cannot read from " + filePath + " data file");

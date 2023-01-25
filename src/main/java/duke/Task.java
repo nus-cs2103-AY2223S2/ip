@@ -43,7 +43,8 @@ public class Task {
 
     /**
      * String representation of the task instance.
-     * @return
+     *
+     * @return string representation of the task instance
      */
     @Override
     public String toString() {

@@ -4,7 +4,7 @@ package duke;
  * Class for creating a add command, more specific for todo, deadline, and event command.
  */
 public class AddCommand extends Command{
-    Task task;
+    private final Task task;
 
     /**
      * Constructor to create an add command.
@@ -13,7 +13,7 @@ public class AddCommand extends Command{
      * @throws DukeEmptyArgumentException indicate that a command has been passed an empty argument.
      * @throws DukeInvalidArgumentException indicate that a command has been passed an illegal argument.
      */
-    public AddCommand (String[] fullCommand) throws DukeEmptyArgumentException, DukeInvalidArgumentException {
+    public AddCommand(String[] fullCommand) throws DukeEmptyArgumentException, DukeInvalidArgumentException {
         try {
             this.task = createTask(fullCommand[0], fullCommand[1]);
         } catch (IndexOutOfBoundsException e) {
@@ -23,21 +23,21 @@ public class AddCommand extends Command{
 
     private Task createTask(String cmd, String description) throws DukeInvalidArgumentException {
         try {
-            Task t = null;
+            Task task = null;
             switch (cmd) {
-                case "todo":
-                    t = new ToDos(description);
-                    break;
-                case "deadline":
-                    String[] s1 = description.split("/by ", 2);
-                    t = new Deadlines(s1[0], s1[1]);
-                    break;
-                case "event":
-                    String[] s2 = description.split("/from ", 2);
-                    String[] s3 = s2[1].split(" /to ", 2);
-                    t = new Events(s2[0], s3[0], s3[1]);
+            case "todo":
+                task = new ToDos(description);
+                break;
+            case "deadline":
+                String[] s1 = description.split("/by ", 2);
+                task = new Deadlines(s1[0], s1[1]);
+                break;
+            case "event":
+                String[] s2 = description.split("/from ", 2);
+                String[] s3 = s2[1].split(" /to ", 2);
+                task = new Events(s2[0], s3[0], s3[1]);
             }
-            return t;
+            return task;
         } catch (IndexOutOfBoundsException e) {
             throw new DukeInvalidArgumentException("The description of " + cmd + " is invalid.");
         }

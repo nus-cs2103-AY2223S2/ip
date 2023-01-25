@@ -3,15 +3,15 @@ package duke;
 /**
  * Command to mark a task as done.
  */
-public class MarkCommand extends Command{
+public class MarkCommand extends Command {
     int toggleLineNumber;
 
     /**
      * Constructor to create a mark command.
      *
      * @param fullCommand User input command.
-     * @throws DukeEmptyArgumentException
-     * @throws DukeInvalidArgumentException
+     * @throws DukeEmptyArgumentException indicate that a command has been passed an empty argument.
+     * @throws DukeInvalidArgumentException indicate that a command has been passed an illegal argument.
      */
     public MarkCommand(String[] fullCommand) throws DukeEmptyArgumentException, DukeInvalidArgumentException {
         try {
@@ -32,6 +32,7 @@ public class MarkCommand extends Command{
             throw new DukeInvalidArgumentException("There are only " + task.size()
                     + " tasks in list, but want to mark " + (toggleLineNumber + 1) + "th task.");
         }
+
         Task t = task.getTaskAt(toggleLineNumber);
         t.setDone(true);
         storage.updateData(toggleLineNumber, 1);

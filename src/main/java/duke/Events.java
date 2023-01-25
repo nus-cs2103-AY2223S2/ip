@@ -7,7 +7,7 @@ import java.time.format.DateTimeParseException;
 /**
  * Event type of task.
  */
-public class Events extends Task{
+public class Events extends Task {
     /**
      * Starting time of events in "YYYY-MM-DDTHH:MM:SS" format
      */
@@ -18,7 +18,7 @@ public class Events extends Task{
     protected LocalDateTime end;
     protected String startTime;
     protected String endTime;
-    private DateTimeFormatter format = DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm:ss");
+    private final DateTimeFormatter format = DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm:ss");
 
     /**
      * Constructor to create a event instance.
@@ -26,7 +26,7 @@ public class Events extends Task{
      * @param description description of the task.
      * @param start starting time of events.
      * @param end end time of events.
-     * @throws DukeInvalidArgumentException
+     * @throws DukeInvalidArgumentException indicate that a command has been passed an illegal argument.
      */
     public Events(String description, String  start, String  end) throws DukeInvalidArgumentException {
         super(description);
@@ -52,8 +52,7 @@ public class Events extends Task{
      * Print the deadline of the event.
      */
     public void getDeadline() {
-        System.out.println("The event is from" + start.format(format) + " to "
-                + end.format(format));
+        System.out.println("The event is from" + start.format(format) + " to " + end.format(format));
     }
 
     /**
@@ -62,7 +61,6 @@ public class Events extends Task{
      * @return string representation of event task.
      */
     public String toString() {
-        return "[E]" + super.toString() + "(from: " + start.format(format) + " to: "
-                + end.format(format) + ")";
+        return "[E]" + super.toString() + "(from: " + start.format(format) + " to: " + end.format(format) + ")";
     }
 }

@@ -3,15 +3,15 @@ package duke;
 /**
  * Delete a task from task lisk given a specific line in the database.
  */
-public class DeleteCommand extends Command{
-    private int deletedLineNumber;
+public class DeleteCommand extends Command {
+    private final int deletedLineNumber;
 
     /**
      * Constructor to create a delete command.
      *
      * @param fullCommand user input command.
-     * @throws DukeEmptyArgumentException
-     * @throws DukeInvalidArgumentException
+     * @throws DukeEmptyArgumentException indicate that a command has been passed an e empty argument.
+     * @throws DukeInvalidArgumentException indicate that a command has been passed an illegal argument.
      */
     public DeleteCommand(String[] fullCommand) throws DukeEmptyArgumentException, DukeInvalidArgumentException {
         try {

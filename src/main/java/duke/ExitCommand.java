@@ -3,7 +3,7 @@ package duke;
 /**
  * Command to exit the currently running program.
  */
-public class ExitCommand extends Command{
+public class ExitCommand extends Command {
     public boolean isExit() {
         return true;
     }

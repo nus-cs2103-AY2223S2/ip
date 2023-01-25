@@ -3,7 +3,7 @@ package duke;
 /**
  * Command to list all available task given a task list.
  */
-public class ListCommand extends Command{
+public class ListCommand extends Command {
     public boolean isExit() {
         return false;
     }

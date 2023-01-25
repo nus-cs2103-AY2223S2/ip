@@ -7,13 +7,13 @@ import java.time.format.DateTimeParseException;
 /**
  * Deadline type of task
  */
-public class Deadlines extends Task{
+public class Deadlines extends Task {
     protected String ddl;
     /**
      * End time of deadline in "YYYY-MM-DDTHH:MM:SS" format
      */
     protected LocalDateTime by;
-    private DateTimeFormatter format = DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm:ss");
+    private final DateTimeFormatter format = DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm:ss");
 
     /**
      * Constructor to create a deadline task.
