@@ -1,17 +1,25 @@
 package tasks;
 
 import java.time.format.DateTimeFormatter;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 /**
  * Represents a task to be completed.
  */
 public abstract class Task {
-    // Description of the task.
+    /**
+     * Description of the task.
+     */
     protected String description;
-    // Whether the task is done or not.
+    /**
+     * Whether the task is done or not.
+     */
     protected boolean isDone;
 
-    // Formatters to parse date time strings.
+    /**
+     * Formatters to parse date time strings.
+     */
     public static DateTimeFormatter inputDateTimeFormatter = DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm");
     public static DateTimeFormatter outputDateTimeFormatter = DateTimeFormatter.ofPattern("MMM dd yyyy, HH:mm");
 
@@ -44,11 +52,23 @@ public abstract class Task {
     }
 
     /**
+     * Check if a task contains a given string.
+     *
+     * @param toMatch String to check for.
+     * @return Whether the task contains the given string or not.
+     */
+    public boolean match(String toMatch) {
+        Pattern pattern = Pattern.compile(toMatch);
+        Matcher matcher = pattern.matcher(this.description);
+        return matcher.find();
+    }
+
+    /**
      * Represents the task in a string suitable for storing in memory.
      *
      * @return A string representing the task suitable for storing in memory.
      */
-    abstract public String toEncodedString();
+    public abstract String toEncodedString();
 
     @Override
     public String toString() {

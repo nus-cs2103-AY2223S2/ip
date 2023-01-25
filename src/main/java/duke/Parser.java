@@ -48,6 +48,14 @@ public class Parser {
                 throw new InvalidCommandException(
                         "The task number to be deleted must be specified, and must be an integer.");
             }
+        } else if (toParse.startsWith("find")) {
+            Matcher matcher = compileAndMatch("find (.*)", toParse);
+            if (matcher.find() && matcher.group(1).length() > 0) {
+                return new String[]{"find", matcher.group(1)};
+            } else {
+                throw new InvalidCommandException(
+                        "Must supply a search string to the find command.");
+            }
         } else if (toParse.startsWith("todo")) {
             Matcher matcher = compileAndMatch("todo (.*)", toParse);
             if (matcher.find() && matcher.group(1).length() > 0) {

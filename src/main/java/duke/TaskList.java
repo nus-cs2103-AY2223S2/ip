@@ -128,6 +128,22 @@ public class TaskList {
     }
 
     /**
+     * Finds tasks from the task list matching the given search string.
+     *
+     * @param searchString String to search for in the tasks.
+     * @return List of tasks matching the search string.
+     */
+    public ArrayList<Task> findTasks(String searchString) {
+        ArrayList<Task> matchingTasks = new ArrayList<>();
+        for (Task task : taskList) {
+            if (task.match(searchString)) {
+                matchingTasks.add(task);
+            }
+        }
+        return matchingTasks;
+    }
+
+    /**
      * Describes the length of the task list in a human readable format.
      *
      * @return Description of the task list in a human readable format.
