@@ -2,3 +2,4 @@
 [T][ ] eat
 [T][X] swim
 [E][ ] project meeting (from: Mon 2pm to:4pm)
+[T][ ] bye

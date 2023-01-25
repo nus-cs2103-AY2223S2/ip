@@ -19,11 +19,12 @@ public class Task {
         this.isDone = false;
     }
 
-    public void checkisdonestr() {
+    public boolean checkisdonestr() {
         if (this.donestr.equals("X")) {
             this.isDone = true;
         }
         else this.isDone = false;
+        return this.isDone;
     }
 
     public String getStatusIcon() {
@@ -41,7 +42,7 @@ public class Task {
     }
 
     public String toString() {
-        if (typeofTask == "")
+        if (typeofTask.equals(""))
             return "[" + this.getStatusIcon() + "]" + " " + this.description;
         else { return "[" + typeofTask + "]" + "[" + this.getStatusIcon() + "]" + " " + this.description; }
     }
