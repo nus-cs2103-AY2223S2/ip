@@ -14,7 +14,7 @@ public class Deadline extends Task {
     }
 
     public String getBy() {
-        return this.by;
+        return this.by.getYear() + "-" + this.by.getMonthValue() + "-" + this.by.getDayOfMonth() + " " + this.by.getHour() + (this.by.getMinute() < 10 ? "0" + this.by.getMinute() : this.by.getMinute());
     }
 
     @Override

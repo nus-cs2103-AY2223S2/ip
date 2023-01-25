@@ -20,15 +20,20 @@ public class Event extends Task {
     }
 
     public String getFrom() {
-        return this.from;
+        return this.from.getYear() + "-" + this.from.getMonthValue() + "-" + this.from.getDayOfMonth() + " " + this.from.getHour() + (this.from.getMinute() < 10 ? "0" + this.from.getMinute() : this.from.getMinute());
     }
 
     public String getTo() {
-        return this.to;
+        return this.to.getYear() + "-" + this.to.getMonthValue() + "-" + this.to.getDayOfMonth() + " " + this.to.getHour() + (this.to.getMinute() < 10 ? "0" + this.to.getMinute() : this.to.getMinute());
     }
 
     @Override
     public String toString() {
         return "[E]" + super.toString() + " (from: " + this.from.getMonth().toString().substring(0,3) + " " + this.from.getDayOfMonth() + " " + this.from.getYear() + ", " + this.from.toLocalTime() + " | to: " + this.to.getMonth().toString().substring(0,3) + " " + this.to.getDayOfMonth() + " " + this.to.getYear() + ", " + this.to.toLocalTime() + ")";
+    }
+
+    public static void main(String[] args) {
+        Event temp = new Event("test", "2019-11-1 1600", "2019-11-1 1111");
+        System.out.println(temp.getFrom());
     }
 }
