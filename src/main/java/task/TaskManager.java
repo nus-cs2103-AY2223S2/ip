@@ -3,8 +3,10 @@ package task;
 import java.util.ArrayList;
 import java.util.Arrays;
 
+import util.WriteToFile;
+
 public class TaskManager {
-    protected ArrayList<Task> taskArr;
+    private ArrayList<Task> taskArr;
     public TaskManager() {
         this.taskArr = new ArrayList<>();
     }
@@ -44,7 +46,6 @@ public class TaskManager {
         return str;
     }
 
-    //display items in list method
     public void displayList() {
         if(taskArr.isEmpty()) {
             System.out.println("Your list is empty, please add a task!");
@@ -57,6 +58,10 @@ public class TaskManager {
 
     public int getTaskArraySize() {
         return taskArr.size();
+    }
+
+    public ArrayList<Task> getTaskArr() {
+        return taskArr;
     }
 
 }

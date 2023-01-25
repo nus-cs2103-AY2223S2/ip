@@ -15,7 +15,6 @@ public class ChatBot {
     private TaskManager taskManager;
     private String[] inputArr;
 
-
     public ChatBot(Scanner input, WelcomeUI welcomeUI) {
         System.out.println(welcomeUI);
         this.input = input;
@@ -24,7 +23,6 @@ public class ChatBot {
     }
 
     public void run() {
-
         loop: while(input.hasNextLine()) {
 
             //remove leading and trailing whitespaces

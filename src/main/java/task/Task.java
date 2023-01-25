@@ -18,6 +18,10 @@ public class Task {
         return (isDone ? "X" : " ");
     }
 
+    public Boolean getStatus() {
+        return isDone;
+    }
+
     public String getDescription() {
         return description;
     }
@@ -39,6 +43,17 @@ public class Task {
         } catch (DateTimeException e) {
             throw new DukeException("Please enter date in dd/mm/yy and time in hhmm 24hr format!");
         }
+    }
+
+    public String serialise() {
+        return String.format("Task,%s", description);
+    }
+
+    public static Task deserialise(String data) throws DukeException {
+        String[] arr = data.split(",");
+        String desc = arr[1];
+
+        return new Task(desc);
     }
 
     @Override
