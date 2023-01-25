@@ -119,4 +119,8 @@ public class InputParser {
             throw new MissingArgumentException("Please enter something for me to parse!");
         }
     }
+
+    public String getInputType() {
+        return this.inputType;
+    }
 }
