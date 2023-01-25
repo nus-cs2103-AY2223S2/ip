@@ -2,6 +2,7 @@ package duke;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
+import duke.Task;
 public class Event extends Task {
     protected String from;
     protected String to;

@@ -65,6 +65,9 @@ public class Duke {
             } else if (reply.startsWith("event")) {
                 reply = reply.replaceAll("event", "");
                 String[] replies = Parser.splitForEvent(reply);
+                for (int i = 0; i< replies.length; i++){
+                    System.out.println(replies[i]);
+                }
                 String[] datecheck =  replies[1].split("/");
                 datecheck[0] = datecheck[0].replaceAll("from ", "");
                 datecheck[1] = datecheck[1].replaceAll("to ","");
@@ -78,7 +81,6 @@ public class Duke {
                 System.out.println(event);
                 System.out.println("Now you have " + Task.actions + " tasks in the list");
                 Task.tasks.add(event);
-
             }
             else if (reply.startsWith("unmark")) {
                 int value = Integer.parseInt(reply.replaceAll("[^0-9]", "")) - 1;
@@ -105,8 +107,6 @@ public class Duke {
         }
         System.out.println("Bye, Hope to see you again soon!");
     }
-
-
 
 }
 
