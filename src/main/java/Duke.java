@@ -1,21 +1,29 @@
 import java.util.*;
+import java.io.File;
+import java.io.IOException;
+import java.io.FileNotFoundException;
+import java.io.FileWriter;
 public class Duke {
+    private static String fileDestination = "data/duke.txt";
+    private static List<Task> taskList = new ArrayList<>();
     public static void main(String[] args) throws DukeException {
         Scanner userInput = new Scanner(System.in);
-        List<Task> lst = new ArrayList<>();
-        System.out.println("Hello! I'm Zhizhou's Chatbot.");
+        File file = new File(fileDestination);
+        readSavedFile(file); // loads saved strings in duke.txt to tasklist
+        System.out.println("Hello! I'm Duke.");
         System.out.println("What can I do for you?");
         String input;
+
         while (!(input = userInput.nextLine()).equals("bye")) {
             try {
                 if (input.equals("list")) {
                     System.out.println("____________________");
-                    if (lst.size() < 1) {
+                    if (taskList.size() < 1) {
                         System.out.println("You currently have no task.");
                     } else {
                         System.out.println("Here are the tasks in your list:");
-                        for (int i = 0; i < lst.size(); i++) {
-                            Task currTask = lst.get(i);
+                        for (int i = 0; i < taskList.size(); i++) {
+                            Task currTask = taskList.get(i);
                             int taskIndex = i + 1;
                             System.out.println(taskIndex + ". " + currTask);
                         }
@@ -23,32 +31,36 @@ public class Duke {
                     System.out.println("____________________");
                 } else if (input.length() >= 6 && input.substring(0, 6).equals("delete")) {
                     int indexToDelete = Integer.parseInt(input.substring(7)) - 1;
-                    if (indexToDelete < lst.size()) {
-                        taskRemovedMessage(lst.get(indexToDelete),lst.size() - 1);
-                        lst.remove(indexToDelete);
+                    if (indexToDelete < taskList.size()) {
+                        taskRemovedMessage(taskList.get(indexToDelete),taskList.size() - 1);
+                        taskList.remove(indexToDelete);
+                        saveTaskListToStorage(file);
                     } else {
                         throw new DukeException("Invalid, there is no such task");
                     }
-                }else if (input.length() >= 4 && input.substring(0, 4).equals("mark")) {
+                } else if (input.length() >= 4 && input.substring(0, 4).equals("mark")) {
                     int indexToMark = Integer.parseInt(input.substring(5)) - 1;
-                    if (indexToMark < lst.size()) {
-                        Task toMark = lst.get(indexToMark);
+                    if (indexToMark < taskList.size()) {
+                        Task toMark = taskList.get(indexToMark);
                         toMark.markAsDone();
+                        saveTaskListToStorage(file);
                         customMessage("Nice! I've marked this task as done:\n" + toMark);
                     } else {
                         throw new DukeException("Invalid, there is no such task");
                     }
                 } else if (input.length() >= 6 && input.substring(0, 6).equals("unmark")) {
                     int indexToUnmark = Integer.parseInt(input.substring(7)) - 1;
-                    if (indexToUnmark < lst.size()) {
-                        Task toUnmark = lst.get(indexToUnmark);
+                    if (indexToUnmark < taskList.size()) {
+                        Task toUnmark = taskList.get(indexToUnmark);
                         toUnmark.markAsUndone();
+                        saveTaskListToStorage(file);
                         customMessage("OK, I've marked this task as not done yet:\n" + toUnmark);
                     } else {
                         throw new DukeException("Invalid, there is no such task");
                     }
                 } else {
-                    typeOfTask(input, lst);
+                    typeOfTask(input, taskList);
+                    saveTaskListToStorage(file);
                 }
             } catch (DukeException dukeException) {
                 customMessage(dukeException.getMessage());
@@ -105,6 +117,48 @@ public class Duke {
             taskAddedMessage(newTask, lst.size());
         } else {
             throw new DukeException("I'm sorry, I don't know what that means!");
+        }
+    }
+
+    private static void readSavedFile(File file) {
+        try {
+            Scanner myReader = new Scanner(file);
+            String data;
+            while (myReader.hasNextLine()) {
+                taskList.add(parseStringToTask(myReader.nextLine()));
+            }
+            myReader.close();
+        } catch (FileNotFoundException e) {
+            System.out.println("An error occurred.");
+            e.printStackTrace();
+        }
+    }
+
+    private static Task parseStringToTask(String string) {
+        String[] arr = string.split(",");
+
+        if (arr[0].equals("T")) {
+            Task t = new ToDo(arr[2], arr[1].equals("1"));
+            return t;
+        } else if (arr[0].equals("D")) {
+            Task t = new Deadline(arr[2], arr[1].equals("1"), arr[3]);
+            return t;
+        } else {
+            Task t = new Event(arr[2], arr[1].equals("1"), arr[3], arr[4]);
+            return t;
+        }
+    }
+    private static void saveTaskListToStorage(File file) {
+        try {
+            FileWriter myWriter = new FileWriter(file);
+            // this truncates the duke.txt to size 0
+            for (int i = 0; i < taskList.size(); i++) {
+                myWriter.write(taskList.get(i).toStorableString() + "\n");
+            }
+            myWriter.close();
+        } catch (IOException e) {
+            System.out.println("An error occurred.");
+            e.printStackTrace();
         }
     }
 }

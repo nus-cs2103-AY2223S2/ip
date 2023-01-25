@@ -4,9 +4,17 @@ public class Deadline extends Task {
         super(description);
         this.by = by;
     }
-    
+    public Deadline(String description, boolean isDone, String by) {
+        super(description, isDone);
+        this.by = by;
+    }
     @Override
     public String toString() {
-        return "[D]" + super.toString() + " (by: " + by + ")";
+        return "[D]" + super.toString() + " (by: " + this.by + ")";
+    }
+
+    public String toStorableString() {
+        // D|0|return book|June 6th
+        return "D" + "," +  (this.isDone() ? "1" : "0")+ "," + this.getDescription() + "," + this.by;
     }
 }
