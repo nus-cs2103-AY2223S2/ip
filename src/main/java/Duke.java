@@ -1,6 +1,17 @@
 import java.io.*;
 import java.util.*;
 
+import Exceptions.DukeException;
+import Exceptions.InvalidInputException;
+import Exceptions.NoDateException;
+import Exceptions.NoDescriptionException;
+import Exceptions.NoTaskException;
+import Exceptions.SelectOutOfIndexException;
+import Tasks.Deadline;
+import Tasks.Event;
+import Tasks.Task;
+import Tasks.ToDo;
+
 public class Duke {
     private static BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
     private static ArrayList<Task> db = new ArrayList<Task>(100);
@@ -10,8 +21,10 @@ public class Duke {
     protected static String introductionString = "Hello! I'm Duke\nWhat can I do for you?";
     protected static String farewellString = "Bye. Hope to see you again soon!";
     protected static String readListString = "Here are the tasks in your list:";
+    protected static String addTaskString = "Got it. I've added this task:";
+    protected static String deleteTaskString = "Noted. I've removed this task:";
 
-    protected static enum Command { 
+    protected static enum Command {
         list, bye, mark, unmark, todo, deadline, event, delete;
         public static Command findCommand(String name) {
             for (Command command : Command.values()) {
@@ -70,14 +83,14 @@ public class Duke {
 
     private static void update(Task task) {
         db.add(task);
-        System.out.println(Task.addTaskString + "\n" + task + "\n" + "Now you have " + db.size() + " tasks in the list");
+        System.out.println(addTaskString + "\n" + task + "\n" + "Now you have " + db.size() + " tasks in the list");
     }
 
     private static void delete(String message) {
         int num = Integer.parseInt(message.split("delete ")[1]);
         if (num >= db.size()) { throw new SelectOutOfIndexException(null); }
         Task task = db.remove(num - 1);
-        System.out.println(Task.deleteTaskString + "\n" + task + "\n" +  "Now you have " + db.size() + " tasks in the list");
+        System.out.println(deleteTaskString + "\n" + task + "\n" +  "Now you have " + db.size() + " tasks in the list");
     }
 
     private static boolean endConvo() {
