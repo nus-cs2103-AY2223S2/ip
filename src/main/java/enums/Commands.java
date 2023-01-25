@@ -8,7 +8,6 @@ public enum Commands {
     EVENT("event"),
     MARK("mark"),
     UNMARK("unmark"),
-    DATE("date"),
     DELETE("delete");
 
     private final String command;
