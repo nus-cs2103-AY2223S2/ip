@@ -116,36 +116,36 @@ public class Duke {
                     String desc = details[2];
 
                     switch (type) {
-                        case "T":
-                            Todo t = new Todo(desc);
-                            //task is done
-                            if (status.equalsIgnoreCase("X")) {
-                                t.markTaskDone(true);
-                            }
-                            tasks.addToList(t, true);
-                            break;
+                    case "T":
+                        Todo t = new Todo(desc);
+                        //task is done
+                        if (status.equalsIgnoreCase("X")) {
+                            t.markTaskDone(true);
+                        }
+                        tasks.addToList(t, true);
+                        break;
 
-                        case "D":
-                            String by = details[3];
-                            Deadline d = new Deadline(desc, by);
-                            if (status.equalsIgnoreCase("X")) {
-                                d.markTaskDone(true);
-                            }
-                            tasks.addToList(d, true);
-                            break;
+                    case "D":
+                        String by = details[3];
+                        Deadline d = new Deadline(desc, by);
+                        if (status.equalsIgnoreCase("X")) {
+                            d.markTaskDone(true);
+                        }
+                        tasks.addToList(d, true);
+                        break;
 
-                        case "E":
-                            String from = details[3];
-                            String to = details[4];
-                            Event e = new Event(desc, from, to);
-                            if (status.equalsIgnoreCase("X")) {
-                                e.markTaskDone(true);
-                            }
-                            tasks.addToList(e, true);
-                            break;
+                    case "E":
+                        String from = details[3];
+                        String to = details[4];
+                        Event e = new Event(desc, from, to);
+                        if (status.equalsIgnoreCase("X")) {
+                            e.markTaskDone(true);
+                        }
+                        tasks.addToList(e, true);
+                        break;
 
-                        default:
-                            throw new IllegalStateException("Unexpected value: " + type);
+                    default:
+                        throw new IllegalStateException("Unexpected value: " + type);
                     }
                 }
                 s.close();
