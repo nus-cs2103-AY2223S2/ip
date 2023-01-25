@@ -1,7 +1,6 @@
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
-import java.time.temporal.ChronoUnit;
 
 public class Deadline extends Task{
     protected LocalDate deadline;
@@ -38,11 +37,13 @@ public class Deadline extends Task{
     @Override
     public String toFile() {
         int completed = this.completed ? 1 : 0;
-        return String.format("D | %d | %s | %s\n", completed, this.taskName, this.deadline);
+        String deadline = this.deadline.format(DateTimeFormatter.ofPattern("MMM d yyyy"));
+        return String.format("D | %d | %s | %s\n", completed, this.taskName, deadline);
     }
 
     public static Deadline toDeadlineFromFileStr(String taskNameData, String doneData, String deadlineData)
             throws DukeException {
+        Deadline d = null;
         doneData = doneData.trim();
         deadlineData = deadlineData.trim();
         taskNameData = taskNameData.trim();
@@ -55,9 +56,14 @@ public class Deadline extends Task{
         if (deadlineData.isEmpty()) {
             throw new DukeException("timing");
         }
-        Deadline d = new Deadline(taskNameData, deadlineData);
-        boolean completed = Integer.parseInt(doneData) == 1;
-        d.setCompleted(completed);
+        try {
+            LocalDate deadline = LocalDate.parse(deadlineData);
+            d = new Deadline(taskNameData, deadline);
+            boolean completed = Integer.parseInt(doneData) == 1;
+            d.setCompleted(completed);
+        } catch (DateTimeParseException e) {
+            throw new DukeException("date format");
+        }
         return d;
     }
 

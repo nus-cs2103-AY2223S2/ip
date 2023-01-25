@@ -1,9 +1,6 @@
-import com.sun.jdi.LocalVariable;
-
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
-import java.time.temporal.ChronoUnit;
 
 public class Event extends Task{
     protected LocalDate start;
@@ -49,6 +46,7 @@ public class Event extends Task{
 
     public static Event toEventFromFileStr(String taskNameData, String doneData,
                                                 String startData, String endData) throws DukeException {
+        Event event = null;
         doneData = doneData.trim();
         startData = startData.trim();
         endData = endData.trim();
@@ -62,10 +60,16 @@ public class Event extends Task{
         if (startData.isEmpty() || endData.isEmpty()) {
             throw new DukeException("timing");
         }
-        Event e = new Event(taskNameData, startData, endData);
-        boolean completed = Integer.parseInt(doneData) == 1;
-        e.setCompleted(completed);
-        return e;
+        try {
+            LocalDate startDate = LocalDate.parse(startData);
+            LocalDate endDate = LocalDate.parse(endData);
+            event = new Event(taskNameData, startDate, endDate);
+            boolean completed = Integer.parseInt(doneData) == 1;
+            event.setCompleted(completed);
+        } catch (DateTimeParseException e) {
+            throw new DukeException("date format");
+        }
+        return event;
     }
 
     @Override
