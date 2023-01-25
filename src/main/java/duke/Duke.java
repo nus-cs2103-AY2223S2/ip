@@ -1,9 +1,10 @@
 package duke;
+
 import exceptions.DukeException;
-import tasks.Task;
-import tasks.ToDo;
 import tasks.Deadline;
 import tasks.Event;
+import tasks.Task;
+import tasks.ToDo;
 
 public class Duke {
     private final Ui ui;

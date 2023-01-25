@@ -5,7 +5,7 @@ import tasks.Task;
 import java.util.Scanner;
 
 public class Ui {
-    private Scanner scanner = new Scanner(System.in);
+    private final Scanner scanner = new Scanner(System.in);
 
     public String readCommand() {
         return this.scanner.nextLine();
