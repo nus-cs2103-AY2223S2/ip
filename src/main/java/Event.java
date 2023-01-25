@@ -8,6 +8,13 @@ public class Event extends Task {
     }
 
     @Override
+    public String toStorageFormatString() {
+        return "E|" + (isDone? "1" : "0") + "|" +
+                this.taskDescription + "|" +
+                this.start + "|" + this.end;
+    }
+
+    @Override
     public String toString() {
         return "[E]" + super.toString() + " (from: " + start + " to: " + end +")";
     }
