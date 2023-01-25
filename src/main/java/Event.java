@@ -3,8 +3,8 @@ public class Event extends Task {
     private String from;
     private String to;
 
-    public Event(String description, String from, String to) {
-        super(description);
+    public Event(String description, boolean status, String from, String to) {
+        super(description, status);
         this.from = from;
         this.to = to;
     }
@@ -12,6 +12,11 @@ public class Event extends Task {
     @Override
     public String getTaskTypeIcon() {
         return "E";
+    }
+
+    @Override
+    public String fileFormat() {
+        return "E | " + getStatusIcon() + " | " + description + " | " + from + " | " + to + "\n";
     }
 
     private String getEventInterval() {

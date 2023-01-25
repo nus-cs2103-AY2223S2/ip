@@ -1,6 +1,10 @@
 import java.util.Scanner;
 import java.util.List;
 import java.util.ArrayList;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.io.FileWriter;
 
 public class WindyCall {
 
@@ -10,9 +14,77 @@ public class WindyCall {
 
 
     public WindyCall() {
-//        this.tasks = new Task[100];
-//        this.cnt = 0;
+        // handle loading here
         this.tasks = new ArrayList<>();
+        handleLoad();
+    }
+
+    public void handleLoad() {
+        //check if "./data" directory exist
+        File file = new File("./data");
+        File task_file = new File("./data/WindyCall.txt");;
+        // if data file exists
+        if (!file.isDirectory()) {
+            file.mkdir();
+        }
+        try {
+            if (task_file.createNewFile()) {
+                space();
+                System.out.println("File created: " + task_file.getName());
+            }
+        } catch (IOException e) {
+            System.out.println("An error occurred. Can not load your tasks");
+            e.printStackTrace();
+        }
+
+        // load data in task_file into this.tasks
+        try {
+            Scanner myReader = new Scanner(task_file);
+            while (myReader.hasNextLine()) {
+                String data = myReader.nextLine();
+                if (data.charAt(0) == 'T') {
+                    String description = data.substring(8);
+                    Task task = new Todo(description, data.charAt(4) == 'X');
+                    tasks.add(task);
+                } else if (data.charAt(0) == 'D') {
+                    int idx = data.indexOf("|", 8);
+                    String description = data.substring(8, idx - 1);
+                    String deadline = data.substring(idx + 2);
+                    Task task = new Deadline(description, data.charAt(4) == 'X', deadline);
+                    tasks.add(task);
+                } else {
+                    int idx1 = data.indexOf("|", 8);
+                    int idx2 = data.indexOf("|", idx1 + 1);
+                    String description = data.substring(8, idx1 - 1);
+                    String from = data.substring(idx1 + 2, idx2 - 1);
+                    String to = data.substring(idx2 + 2);
+                    Task task = new Event(description, data.charAt(4) == 'X', from, to);
+                    tasks.add(task);
+                }
+            }
+            myReader.close();
+        } catch (FileNotFoundException e) {
+            System.out.println("An error occurred.");
+            e.printStackTrace();
+        }
+
+    }
+
+    public void handleTaskChange() {
+        // overwrite tasks back to data file to record the change
+        try {
+            FileWriter myWriter = new FileWriter("./data/WindyCall.txt");
+            for (Task task : tasks) {
+                myWriter.write(task.fileFormat());
+            }
+//            myWriter.write("Files in Java might be tricky, but it is fun enough!");
+            myWriter.close();
+            space();
+            System.out.println("Successfully wrote to the file.");
+        } catch (IOException e) {
+            System.out.println("An error occurred.");
+            e.printStackTrace();
+        }
     }
 
     private static void space() {
@@ -56,7 +128,7 @@ public class WindyCall {
             }
             String description = message.substring(5);
             System.out.println("Got it. I've added this Todo task:");
-            newTask = new Todo(description);
+            newTask = new Todo(description, false);
         }
         else if (parts[0].equals("deadline")) {
             int idx = message.indexOf("/by");
@@ -73,7 +145,7 @@ public class WindyCall {
             String description = message.substring(9, idx - 1);
             System.out.println("Got it. I've added this Deadline task:");
             String deadline = message.substring(idx + 4);
-            newTask = new Deadline(description,deadline);
+            newTask = new Deadline(description, false, deadline);
         }
         else if (parts[0].equals("event")) {
             int idxFrom = message.indexOf("/from");
@@ -99,7 +171,7 @@ public class WindyCall {
             String from = message.substring(idxFrom + 6, idxTo - 1);
             String to = message.substring(idxTo + 4);
             System.out.println("Got it. I've added this Event task:");
-            newTask = new Event(description, from, to);
+            newTask = new Event(description, false, from, to);
         } else {
             throw new WindyCallException("☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
         }
@@ -108,6 +180,7 @@ public class WindyCall {
 //        this.tasks[cnt] = newTask;
 //        this.cnt++;
         this.tasks.add(newTask);
+        this.handleTaskChange();
         space();
         System.out.println("Now you have " + this.tasks.size() + " tasks in the list.");
     }
@@ -152,6 +225,7 @@ public class WindyCall {
                         chatBox.tasks.get(num - 1).markAsDone();
                         space();
                         System.out.println(chatBox.tasks.get(num - 1));
+                        chatBox.handleTaskChange();
                     } else if (num != -1) {
                         System.out.println("     Sorry, your index is out of range");
                     }
@@ -173,6 +247,7 @@ public class WindyCall {
                         chatBox.tasks.get(num - 1).unmark();
                         space();
                         System.out.println(chatBox.tasks.get(num - 1));
+                        chatBox.handleTaskChange();
                     } else if (num != -1){
                         System.out.println("     Sorry, your index is out of range");
                     }
@@ -194,6 +269,7 @@ public class WindyCall {
                         space();
                         System.out.println(chatBox.tasks.get(num - 1));
                         chatBox.tasks.remove(num - 1);
+                        chatBox.handleTaskChange();
                         space();
                         System.out.println("Now you have " + chatBox.tasks.size() + " tasks in the list.");
                     } else if (num != -1) {
