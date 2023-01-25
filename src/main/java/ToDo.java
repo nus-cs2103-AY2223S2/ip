@@ -1,9 +1,9 @@
 /**
  * Represents a to-do task.
  */
-public class ToDos extends Task {
+public class ToDo extends Task {
 
-    protected ToDos(boolean status, String[] content) {
+    protected ToDo(boolean status, String[] content) {
         super(status, content[0]);
     }
 

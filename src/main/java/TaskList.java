@@ -55,11 +55,11 @@ public class TaskList {
     protected Task addTask(int code, String[] message) {
         Task t;
         if (code == 0) {
-            t = new ToDos(false, message);
+            t = new ToDo(false, message);
         } else if (code == 1) {
-            t = new Deadlines(false, message);
+            t = new Deadline(false, message);
         } else if (code == 2) {
-            t = new Events(false, message);
+            t = new Event(false, message);
         }  else {
             // Not reachable
             return null;
@@ -74,11 +74,11 @@ public class TaskList {
 
     protected static Task getInstance(String code, boolean status, String[] content) throws DukeException {
         if (code.equals("T")) {
-            return new ToDos(status, content);
+            return new ToDo(status, content);
         } else if (code.equals("D")) {
-            return new Deadlines(status, content);
+            return new Deadline(status, content);
         } else if (code.equals("E")) {
-            return new Events(status, content);
+            return new Event(status, content);
         } else {
             throw new DukeException("Unsupported code");
         }

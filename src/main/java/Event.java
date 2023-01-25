@@ -1,11 +1,11 @@
 /**
  * Represents an event task.
  */
-public class Events extends Task {
+public class Event extends Task {
     private MaybeDate begin;
     private MaybeDate end;
 
-    protected Events(boolean status, String[] content) {
+    protected Event(boolean status, String[] content) {
         super(status, content[0]);
         this.begin = Parser.parseDate(content[1]);
         this.end = Parser.parseDate(content[2]);

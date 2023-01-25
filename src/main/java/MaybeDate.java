@@ -3,7 +3,7 @@ import java.time.format.DateTimeFormatter;
 
 public class MaybeDate {
 
-    private final DateTimeFormatter OUTPUTFORMAT =  DateTimeFormatter.ofPattern("LLL dd yyyy");
+    private final DateTimeFormatter OUTPUTFORMAT =  DateTimeFormatter.ofPattern("LLL dd yyyy HH:mm");
     String timeString;
     LocalDateTime dateTime;
     final boolean isTime;

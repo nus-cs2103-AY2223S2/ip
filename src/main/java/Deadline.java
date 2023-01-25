@@ -1,10 +1,10 @@
 /**
  * Represent a task with a deadline.
  */
-class Deadlines extends Task {
+class Deadline extends Task {
     private MaybeDate end;
 
-    protected Deadlines(boolean status, String[] content) {
+    protected Deadline(boolean status, String[] content) {
         super(status, content[0]);
         this.end = Parser.parseDate(content[1]);
     }
