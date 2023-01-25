@@ -86,8 +86,8 @@ public class Parser {
         Pattern fileCommandPattern = Pattern.compile("\\d+\\.\\[([TDE])]\\[([ X])\\] (.*)");
         Pattern deadlinePattern = Pattern.compile("(.*) /by (.*)");
         Pattern eventPattern = Pattern.compile("(.*) /from (.*) /to (.*)");
-        Matcher fileCommandMatcher, individualMatcher;
-        fileCommandMatcher = fileCommandPattern.matcher(toParse);
+        Matcher fileCommandMatcher = fileCommandPattern.matcher(toParse);
+        Matcher individualMatcher;
         if (fileCommandMatcher.find()) {
             switch (fileCommandMatcher.group(1)) {
             case "T":

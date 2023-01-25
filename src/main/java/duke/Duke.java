@@ -40,15 +40,14 @@ public class Duke {
     public void run() {
         ui.showGreeting();
 
-        String[] parsedCommand;
-        String command;
         Task task;
+        int taskNumber;
 
         label:
         while (true) {
             try {
-                parsedCommand = Parser.parseCommand(ui.readCommand());
-                command = parsedCommand[0];
+                String[] parsedCommand = Parser.parseCommand(ui.readCommand());
+                String command = parsedCommand[0];
                 switch (command) {
                 case "bye":
                     ui.showGoodbye();
@@ -56,27 +55,24 @@ public class Duke {
                 case "list":
                     ui.showTextWithLines(tasks.toString());
                     break;
-                case "mark": {
-                    int taskNumber = Integer.parseInt(parsedCommand[1]);
+                case "mark":
+                    taskNumber = Integer.parseInt(parsedCommand[1]);
                     tasks.setDone(taskNumber, true);
                     task = tasks.getTask(taskNumber);
                     ui.showMarkTaskMessage(task);
                     break;
-                }
-                case "unmark": {
-                    int taskNumber = Integer.parseInt(parsedCommand[1]);
+                case "unmark":
+                    taskNumber = Integer.parseInt(parsedCommand[1]);
                     tasks.setDone(taskNumber, false);
                     task = tasks.getTask(taskNumber);
                     ui.showUnmarkTaskMessage(task);
                     break;
-                }
-                case "delete": {
-                    int taskNumber = Integer.parseInt(parsedCommand[1]);
+                case "delete":
+                    taskNumber = Integer.parseInt(parsedCommand[1]);
                     task = tasks.getTask(taskNumber);
                     tasks.deleteTask(taskNumber);
                     ui.showDeleteTaskMessage(task, tasks);
                     break;
-                }
                 case "todo":
                     task = new ToDo(parsedCommand[1]);
                     tasks.addTask(task);
