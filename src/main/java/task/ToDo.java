@@ -21,6 +21,11 @@ public class ToDo extends Task{
         super(details);
     }
 
+    public ToDo(String details, boolean isCompleted) {
+        super(details);
+        super.changeStatus(isCompleted);
+    }
+
     @Override
     public String toString() {
         return ("TO-DO: " + super.getDetails() + Format.getCompletionDisplay(super.isCompleted()));

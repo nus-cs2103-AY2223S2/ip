@@ -11,12 +11,9 @@ import java.util.ArrayList;
 
 public class TaskManager {
 
-    private final ArrayList<Task> taskList;
+    private final ArrayList<Task> taskList = new ArrayList<>();
 
-    public TaskManager(ArrayList<Task> taskList) {
-        this.taskList = taskList;
-    }
-
+    public TaskManager() {}
 
     /**
      * Gets the list of the users tasks

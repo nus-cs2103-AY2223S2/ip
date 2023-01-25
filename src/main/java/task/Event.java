@@ -25,6 +25,21 @@ public class Event extends Task{
         this.end = end;
     }
 
+    public Event(String details, String start, String end, boolean isCompleted) {
+        super(details);
+        this.start = start;
+        this.end = end;
+        super.changeStatus(isCompleted);
+    }
+
+    public String getStart() {
+        return this.start;
+    }
+
+    public String getEnd() {
+        return this.end;
+    }
+
     /**
      * Prints out a formatted string containing the specific event details
      */

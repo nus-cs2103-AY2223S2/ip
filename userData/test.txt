@@ -1,0 +1,3 @@
+Event|true|lunch with sam|1am|2pm
+To-Do|false|eat cakes
+To-Do|true|do the dishes
