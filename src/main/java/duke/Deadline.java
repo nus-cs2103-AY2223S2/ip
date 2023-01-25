@@ -9,8 +9,16 @@ public class Deadline extends Task {
     protected LocalDateTime byDateTime;
     protected static DateTimeFormatter inputFormatter = DateTimeFormatter.ofPattern("d/M/yyyy HHmm");
     protected static DateTimeFormatter outputFormatter = DateTimeFormatter.ofPattern("MMM d yyyy, hh:mma");
+
+    /**
+     * Returns a Deadline object.
+     *
+     * @param description Description of the task.
+     * @param byStr The 'by' date.
+     * @throws DukeException If description or byStr are empty.
+     */
     public Deadline(String description, String byStr) throws DukeException {
-        super(description.trim(), Icon.DEADLINE);
+        super(description.trim(), TaskIcon.DEADLINE);
         this.byStr = byStr.trim();
         if (this.description.equals("")) {
             throw new DukeException("The description of a deadline cannot be empty.");

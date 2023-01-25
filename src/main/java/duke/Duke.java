@@ -14,6 +14,11 @@ public class Duke {
     static protected final String DATA_DIR = "data/";
     static protected final String DATA_FILENAME = "duke.txt";
     static protected final String WELCOME_MESSAGE = "Hello! I'm Duke\n\tWhat can I do for you?";
+
+    /**
+     * Returns a Duke object.
+     * @param filePath The file path where the data file is located.
+     */
     public Duke(String filePath) {
         ui = new Ui();
         storage = new Storage(filePath);
@@ -25,6 +30,10 @@ public class Duke {
             tasks = new TaskList();
         }
     }
+
+    /**
+     * Runs the task bot.
+     */
     public void run() {
         ui.showNormalMessage(WELCOME_MESSAGE);
         Scanner inputScanner = new Scanner(System.in);

@@ -19,6 +19,16 @@ public class Parser {
             return typeStr;
         }
     }
+
+    /**
+     * Parses a given input string.
+     *
+     * @param inputStr The input string given by the user.
+     * @param tasks The TaskList to be managed.
+     * @param ui The Ui to be used to print messages.
+     * @throws BadCommandException If the parameters of the input string are insufficient, or if
+     * the command given is not recognised.
+     */
     public void parseString(String inputStr, TaskList tasks, Ui ui) throws BadCommandException {
         inputStr = inputStr.trim();
         try {

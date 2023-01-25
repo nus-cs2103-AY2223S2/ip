@@ -11,8 +11,17 @@ public class Event extends Task {
     protected LocalDateTime endDateTime;
     protected static DateTimeFormatter inputFormatter = DateTimeFormatter.ofPattern("d/M/yyyy HHmm");
     protected static DateTimeFormatter outputFormatter = DateTimeFormatter.ofPattern("MMM d yyyy, hh:mma");
+
+    /**
+     * Returns an Event object.
+     *
+     * @param description Description of the event.
+     * @param startStr A String representing the start date.
+     * @param endStr A String representing the end date.
+     * @throws DukeException If any of the given arguments are empty.
+     */
     public Event(String description, String startStr, String endStr) throws DukeException {
-        super(description.trim(), Icon.EVENT);
+        super(description.trim(), TaskIcon.EVENT);
         this.startStr = startStr.trim();
         this.endStr = endStr.trim();
         if (this.description.equals("")) {

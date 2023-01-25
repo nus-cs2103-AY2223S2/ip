@@ -11,9 +11,21 @@ public class Storage {
     protected String filePath;
     final protected String LOAD_ERROR_PREFIX_STRING = "Error retrieving local data: ";
     final protected String SAVE_ERROR_PREFIX_STRING = "Error saving data: ";
+
+    /**
+     * Returns a Storage object.
+     *
+     * @param filePath The file path of the data file to retrieve and store data.
+     */
     public Storage(String filePath) {
         this.filePath = filePath;
     }
+
+    /**
+     * Reads the file and generates a TaskList.
+     * @return A TaskList based on the given data.
+     * @throws DukeException If an unexpected entry is given.
+     */
     public ArrayList<Task> load() throws DukeException {
         File dataFile = new File(filePath);
         ArrayList<Task> tasks = new ArrayList<>();
@@ -31,16 +43,16 @@ public class Storage {
                 }
                 try {
                     Task newTask = null;
-                    if (inputStr[0].equals(Task.Icon.TODO.getSymbol())) {
+                    if (inputStr[0].equals(Task.TaskIcon.TODO.getSymbol())) {
                         newTask = new Todo(inputStr[2]);
                         tasks.add(newTask);
-                    } else if (inputStr[0].equals(Task.Icon.DEADLINE.getSymbol())) {
+                    } else if (inputStr[0].equals(Task.TaskIcon.DEADLINE.getSymbol())) {
                         if (inputStr.length < 4) {
                             continue;
                         }
                         newTask = new Deadline(inputStr[2], inputStr[3]);
                         tasks.add(newTask);
-                    } else if (inputStr[0].equals(Task.Icon.EVENT.getSymbol())) {
+                    } else if (inputStr[0].equals(Task.TaskIcon.EVENT.getSymbol())) {
                         if (inputStr.length < 5) {
                             continue;
                         }
@@ -68,6 +80,12 @@ public class Storage {
         }
         return tasks;
     }
+
+    /**
+     * Saves the data from a given TaskList onto the data file.
+     * @param tasks The TaskList to be saved.
+     * @throws DukeException If an error occurs when writing to the file.
+     */
     public void save(TaskList tasks) throws DukeException {
         File dataFile = new File(filePath);
         File parentDir = dataFile.getParentFile();
@@ -84,7 +102,7 @@ public class Storage {
                     throw new DukeException(SAVE_ERROR_PREFIX_STRING + "Unable to access task");
                 }
                 ArrayList<String> params = new ArrayList<>();
-                params.add(task.getTaskType().getSymbol());
+                params.add(task.getTaskIcon().getSymbol());
                 params.add(task.isDone() ? "1" : "0");
                 params.add(task.getDescription());
                 if (task instanceof Event) {
