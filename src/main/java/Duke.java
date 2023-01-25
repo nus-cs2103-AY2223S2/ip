@@ -105,6 +105,7 @@ public class Duke {
                     case EVENT:
                         boolean from = input.contains("/from");
                         boolean to = input.contains("/to");
+            
                         if ((!from || !to) || !(from && to)) {
                             throw new TaskException("Event item must include a start time and an end time");
                         }
@@ -119,6 +120,8 @@ public class Duke {
                         this.storage.deleteListItem(index);
                         break;
 
+                    // default will throw an exception in case switch-case is unable to find
+                    // instruction
                     // default will throw an exception in case switch-case is unable to find
                     // instruction
                     default:
@@ -137,6 +140,7 @@ public class Duke {
         } catch (IndexOutOfBoundsException e) {
             System.out.println("Nothing to mark/unmark!");
         }
+        
     }
 
 }
