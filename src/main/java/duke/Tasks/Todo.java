@@ -1,4 +1,6 @@
-package duke;
+package duke.Tasks;
+
+import duke.DukeException;
 
 public class Todo extends Task {
 

@@ -1,5 +1,7 @@
 package duke;
 
+import duke.Tasks.*;
+
 public class Ui {
 
     public void sayGreetings() {
@@ -42,7 +44,6 @@ public class Ui {
     }
 
     public void sayGoodbye() {
-        System.out.println("TOP OF THE MORNING TO YOU LADDIES!");
-        System.out.println("What can I do you for? :)");
+        System.out.println("Goodbye!!!! Hope I don't see you again!");
     }
 }

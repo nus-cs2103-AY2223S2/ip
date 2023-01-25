@@ -4,6 +4,8 @@ import java.time.*;
 import java.time.format.DateTimeParseException;
 import java.util.Arrays;
 
+import duke.Tasks.*;
+
 public class Parser {
 
     public String checkCommand(String command, String[] commandsList) throws DukeException {

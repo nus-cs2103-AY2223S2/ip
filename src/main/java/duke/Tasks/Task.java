@@ -1,6 +1,8 @@
-package duke;
+package duke.Tasks;
 
-abstract class Task {
+import duke.DukeException;
+
+public abstract class Task {
     protected final String description;
     protected final boolean isDone;
     protected final String taskType;
