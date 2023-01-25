@@ -4,14 +4,24 @@ import java.io.*;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
+/**
+ * This is the class deals with loading tasks from the file and saving tasks in the file
+ */
 public class Storage {
     private String path;
 
-
+    /**
+     * This is the constructor for Storage
+     * @param path path for the file
+     */
     public Storage(String path) {
         this.path = path;
     }
 
+    /**
+     * Handles all the input and makes sure they are formatted so that each object can be initialised
+     * @throws IOException
+     */
     public void handleLoad() throws IOException {
         BufferedReader taskLoader = new BufferedReader(new FileReader(".//text-ui-test/saved-tasks.txt"));
         String words = taskLoader.readLine();
@@ -47,6 +57,10 @@ public class Storage {
         taskLoader.close();
     }
 
+    /**
+     * Save every action into the list
+     * @throws IOException
+     */
     public void saveTasks() throws IOException {
         BufferedWriter taskWriter = new BufferedWriter(new FileWriter(path));
         String taskInString = "";

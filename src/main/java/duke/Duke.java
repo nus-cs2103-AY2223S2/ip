@@ -5,12 +5,21 @@ import java.util.ArrayList;
 import java.util.Scanner;
 import java.io.*;
 
-
+/**
+ * The Duke program implements an application that takes in an input and places it in a list.
+ * If the words are not of any keywords, an error message will be printed.
+ * @author yanlinglim
+ *
+ */
 public class Duke {
     private Ui ui;
     private Storage storage;
     private TaskList taskList;
 
+    /**
+     * This is a constructor for Duke such that we will create a file.
+     * @param filePath
+     */
     public Duke(String filePath) {
         ui = new Ui();
         storage = new Storage(filePath);
@@ -23,10 +32,20 @@ public class Duke {
         }
     }
 
+    /**
+     * This is the main method to run our file
+     * @param args
+     * @throws DukeException
+     * @throws IOException
+     */
     public static void main(String[] args) throws DukeException, IOException {
         new Duke("text-ui-test/saved-tasks.txt").run();
     }
 
+    /**
+     * Checks for any input, and will either add the action into a list or print out an error.
+     * @throws IOException
+     */
     public void run() throws IOException {
         System.out.println("Hello I'm Duke");
         System.out.println("What can I do for you?");

@@ -1,7 +1,9 @@
 package duke;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
-
+/**
+ * This is a class for Event action
+ */
 import duke.Task;
 public class Event extends Task {
     protected String from;
@@ -10,7 +12,11 @@ public class Event extends Task {
     protected LocalDateTime start;
     protected LocalDateTime end;
 
-
+    /**
+     * This is a constructor for event class
+     * @param description description of event
+     * @param date date during which the event happens
+     */
     public Event(String description, String date)  {
         super(description);
         String[] fromandto = date.split("/");
@@ -26,10 +32,19 @@ public class Event extends Task {
         Task.actions += 1;
     }
 
+    /**
+     * Returns a string representation of the Event object
+     * @return String string representation of the Event object
+     */
     @Override
     public String toString() {
         return "[E]" + super.toString() + " (from:" + from + "to:" + to + ")";
     }
+
+    /**
+     * Returns a string representation of the Event object in the list
+     * @return a string representation of the Event object in the list
+     */
     @Override
     public String toSaveString() {
         String timeStr = this.start.format(DateTimeFormatter.ofPattern("HH:mm, MMM dd yyyy"));
