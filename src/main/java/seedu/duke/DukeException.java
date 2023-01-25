@@ -5,7 +5,7 @@
  *
  * This class is for all the Dukes Exception.
  */
-package duke;
+package seedu.duke;
 
 public class DukeException extends Exception {
 

@@ -5,7 +5,7 @@
  *
  * This class is for the Task added by the User.
  */
-package duke.task;
+package seedu.duke.task;
 
 public class Task {
     protected String description;

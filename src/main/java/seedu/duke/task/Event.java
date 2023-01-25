@@ -5,7 +5,7 @@
  *
  * This class is for the Events Task added by the User.
  */
-package duke.task;
+package seedu.duke.task;
 
 public class Event extends Task {
 

@@ -5,7 +5,7 @@
  *
  * This class is for the Todos Task added by the User.
  */
-package duke.task;
+package seedu.duke.task;
 
 public class Todo extends Task {
 
