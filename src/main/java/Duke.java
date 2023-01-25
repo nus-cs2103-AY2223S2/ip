@@ -1,6 +1,8 @@
 import exception.EmptyDescException;
 import exception.EmptyStorageException;
 import exception.UnknownCommandException;
+import task.Task;
+import task.TaskList;
 
 import java.io.IOException;
 import java.util.Scanner;
@@ -22,51 +24,55 @@ public class Duke {
     }
 
     public void run() {
-        //...
         this.ui.welcome();
+//        boolean isExit = false;
+//        while (!isExit) {
+//            try {
+//                String fullCommand = ui.readCommand();
+//                ui.showLine(); // show the divider line ("_______")
+//                Command c = Parser.parse(fullCommand);
+//                c.execute(tasks, ui, storage);
+//                isExit = c.isExit();
+//            } catch (DukeException e) {
+//                ui.showError(e.getMessage());
+//            } finally {
+//                ui.showLine();
+//            }
+//        }
         Scanner sc = new Scanner(System.in);
         while(sc.hasNext()) {
             String input = sc.nextLine();
             String[] inputArr;
             inputArr = input.split(" ");
             if (inputArr[0].equals("bye")) {
-                System.out.println("____________________________________________________________");
-                System.out.println("See yer again RUFF!");
-                System.out.println("____________________________________________________________");
+                ui.printBye();
                 break;
             } else if (inputArr[0].equals("list")) {
-                System.out.println("____________________________________________________________");
-                System.out.println("Here are the tasks in your list dawg:");
-                taskList.printList();
-                System.out.println("____________________________________________________________");
+                ui.printTaskList(taskList);
             } else if (inputArr[0].equals("mark")) {
                 try {
-                    taskList.markStatus(inputArr[1]);
+                    ui.printMarkStatus(taskList, inputArr[1]);
                 } catch (IOException e) {
                     e.printStackTrace();
                 }
-                System.out.println("____________________________________________________________");
-                System.out.println("The task is marked, dawg");
-                System.out.println("____________________________________________________________");
             } else if (inputArr[0].equals("unmark")){
                 try {
-                    taskList.unMarkStatus(inputArr[1]);
+                    ui.printUnMarkStatus(taskList, inputArr[1]);
                 } catch (IOException e) {
                     e.printStackTrace();
                 }
-                System.out.println("____________________________________________________________");
-                System.out.println("Gotcha dawg, unmarked.");
-                System.out.println("____________________________________________________________");
             } else if (inputArr[0].equals("todo") || inputArr[0].equals("deadline") || inputArr[0].equals("event")) {
                 try {
-                    taskList.addTasks(inputArr, inputArr[0]);
+                    Task t = taskList.addTasks(inputArr, inputArr[0]);
+                    ui.printAddTask(this.taskList, t);
                 } catch (EmptyDescException | IOException e) {
                     e.printStackTrace();
                 }
             } else if (inputArr[0].equals("delete")) {
                 int inputIndex = Integer.parseInt(inputArr[1]);
                 try {
-                    taskList.deleteTasks(inputIndex);
+                    Task t = taskList.deleteTasks(inputIndex);
+                    ui.printDelete(this.taskList, t);
                 } catch (IOException e) {
                     e.printStackTrace();
                 }

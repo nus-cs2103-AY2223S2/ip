@@ -1,4 +1,9 @@
+package task;
+
 import exception.EmptyDescException;
+import task.Deadline;
+import task.Event;
+import task.Task;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -6,32 +11,41 @@ import java.lang.StringBuilder;
 import java.io.FileWriter;
 
 public class TaskList {
-    protected ArrayList<Task> taskList;
+    protected ArrayList<Task> list;
     public TaskList(ArrayList<Task> taskList) {
-        this.taskList = taskList;
+        this.list = taskList;
     }
 
     public TaskList() {
-        this.taskList = new ArrayList<>();
+        this.list = new ArrayList<>();
     }
 
     public void printList() {
-        for (int i = 0; i < this.taskList.size(); i++) System.out.println((i+1) + "." + this.taskList.get(i));
+        for (int i = 0; i < this.list.size(); i++) System.out.println((i+1) + "." + this.list.get(i));
+    }
+
+    public int listSize() {
+        return this.list.size();
+    }
+
+    public Task getTask(int index) {
+        return this.list.get(index);
     }
 
     public void markStatus(String index) throws IOException {
-        taskList.get(Integer.parseInt(index) - 1).markStatus(true);
+        list.get(Integer.parseInt(index) - 1).markStatus(true);
         this.updateDrive();
     }
 
     public void unMarkStatus(String index) throws IOException {
-        taskList.get(Integer.parseInt(index) - 1).markStatus(false);
+        list.get(Integer.parseInt(index) - 1).markStatus(false);
         this.updateDrive();
     }
 
 
-    public void addTasks(String[] inputArr, String taskType) throws EmptyDescException, IOException {
+    public Task addTasks(String[] inputArr, String taskType) throws EmptyDescException, IOException {
         String desc = "variable not initialised";
+        Task task = null; // Variable might not be initialised
         StringBuilder sb = new StringBuilder();
         if (inputArr.length == 1) throw new EmptyDescException(taskType, "EmptyDescException");
         switch (taskType) {
@@ -44,13 +58,9 @@ public class TaskList {
                     }
                 }
                 Todo todo = new Todo(sb.toString().trim());
-                this.taskList.add(todo);
+                this.list.add(todo);
                 this.updateDrive();
-                System.out.println("____________________________________________________________");
-                System.out.println("Gotcha, I've added:");
-                System.out.println("  " + todo);
-                System.out.println("Now you have " + this.taskList.size() + " in the list!");
-                System.out.println("____________________________________________________________");
+                task = todo;
                 break;
             case "deadline":
                 for (int i = 1; i < inputArr.length; i++) {
@@ -66,12 +76,9 @@ public class TaskList {
                 }
                 String[] dateTime = sb.toString().split(" ");
                 Deadline deadline = new Deadline(desc, dateTime[0], dateTime[1]);
-                this.taskList.add(deadline);
+                this.list.add(deadline);
                 this.updateDrive();
-                System.out.println("____________________________________________________________");
-                System.out.println("Gotcha, I've added:");
-                System.out.println("  " + deadline);
-                System.out.println("Now you have " + this.taskList.size() + " in the list!");
+                task = deadline;
                 break;
             case "event":
                 String from = "local variable not initialised";
@@ -91,26 +98,19 @@ public class TaskList {
                     }
                 }
                 Event event = new Event(desc, from, sb.toString().trim());
-                this.taskList.add(event);
+                this.list.add(event);
                 this.updateDrive();
-                System.out.println("____________________________________________________________");
-                System.out.println("Gotcha, I've added:");
-                System.out.println("  " + event);
-                System.out.println("Now you have " + this.taskList.size() + " in the list!");
-                System.out.println("____________________________________________________________");
+                task = event;
                 break;
         }
+        return task;
     }
 
-    public void deleteTasks(int inputIndex) throws IOException {
-        Task task = this.taskList.get(inputIndex - 1);
-        this.taskList.remove(inputIndex - 1);
+    public Task deleteTasks(int inputIndex) throws IOException {
+        Task task = this.list.get(inputIndex - 1);
+        this.list.remove(inputIndex - 1);
         this.updateDrive();
-        System.out.println("____________________________________________________________");
-        System.out.println("Removing your task? It's gone now RUFF:");
-        System.out.println("  " + task);
-        System.out.println("Now you have " + this.taskList.size() + " in the list!");
-        System.out.println("____________________________________________________________");
+        return task;
     }
 
 //    @SuppressWarnings("uncheckedExceptions");
@@ -119,8 +119,8 @@ public class TaskList {
         Task task;
         StringBuilder sb = new StringBuilder();
         FileWriter fw = new FileWriter("./data/duke.txt");
-        for (int i = 0; i < this.taskList.size(); i++) {
-            task = this.taskList.get(i);
+        for (int i = 0; i < this.list.size(); i++) {
+            task = this.list.get(i);
             String taskName = task.getName();
 //            System.out.println(taskName);
             sb.append(taskName); sb.append("|");
