@@ -1,6 +1,8 @@
+package task;
+
 public class Event extends Task {
-    public String from;
-    public String to;
+    private String from;
+    private String to;
 
     public Event(String description, String from, String to) {
         super(description);

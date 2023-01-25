@@ -1,6 +1,8 @@
+package task;
+
 abstract public class Task {
-    public String description;
-    public boolean isDone;
+    private String description;
+    private boolean isDone;
 
     public Task(String description) {
         this.description = description;
