@@ -145,6 +145,7 @@ public class MainApplication {
             if (command.equals("bye")) {
                 System.out.println("\tBye. Hope to see you again soon!");
                 System.out.println(DELIMITER);
+                this.taskApplication.close();
                 break;
             }
 
