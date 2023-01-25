@@ -32,10 +32,25 @@ public class TaskList {
     }
 
     public void deleteTask(int index) {
+        Task t = tasks.get(index - 1);
         tasks.remove(index - 1);
+        System.out.println(t + " is now gone!");
+    }
+
+    public void markTask(int index) {
+        tasks.get(index - 1).markDone();
+        System.out.println("I marked this task as done:\n" + tasks.get(index - 1));
+    }
+
+    public void unMarkTask(int index) {
+        tasks.get(index - 1).markUndone();
+        System.out.println("I marked this task as undone:\n" + tasks.get(index - 1));
     }
 
     public void printNewestTask() {
-        System.out.println(tasks.get(tasks.size() - 1));
+        System.out.println("Task added:\n"
+                + tasks.get(tasks.size() - 1)
+                + "\nTotal task now: "
+                + tasks.size());
     }
 }
