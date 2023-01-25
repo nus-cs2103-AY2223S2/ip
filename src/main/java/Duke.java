@@ -9,10 +9,10 @@ import java.util.Scanner;
 
 public class Duke {
 
-    public static void main(String[] args) throws DukeFileNotFoundException {
+    public static void main(String[] args) throws EmptyDescException, InvalidInputException, DukeFileNotFoundException {
         TaskList list = new TaskList(100);
-        greet();
         Storage storage = new Storage("user.home", list);
+        greet();
         storage.connect();
         storage.load();
         processInputs(list, storage);
@@ -29,7 +29,6 @@ public class Duke {
         System.out.println("---------------------------------------");
     }
 
-
     //exits the application when "exit" is inputted
     private static void exit() {
         System.out.println("Bye. Hope to see you again soon!");
@@ -39,7 +38,7 @@ public class Duke {
     //adds items into the list and prints it when "list" is the input
     //our list takes in Tasks that are marked with a boolean.
     //processes the list with inputs from the user with list and Tasks operations.
-    private static void processInputs(TaskList list, Storage storage) {
+    private static void processInputs(TaskList list, Storage storage) throws InvalidInputException, EmptyDescException {
         ProcessCommands processes = new ProcessCommands(list);
         Scanner sc = new Scanner(System.in).useDelimiter(" ");
         String input = sc.nextLine();
@@ -94,6 +93,12 @@ public class Duke {
                     }
                     processes.processDelete(Integer.parseInt(split[1]) - 1);
                     break;
+                case DATE:
+                    if (split.length < 2) {
+                        throw new EmptyDescException("Sorry! you can't have empty descriptions!");
+                    }
+                    processes.processPrintDate(split[1].trim());
+                    break;
                 default:
                     throw new InvalidInputException("Sorry! I have no idea what that means ??? >:c");
                 }
@@ -111,6 +116,7 @@ public class Duke {
         }
         storage.save();
         exit();
+
     }
 }
 
