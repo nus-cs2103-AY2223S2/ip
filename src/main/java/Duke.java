@@ -28,29 +28,7 @@ public class Duke {
                         System.out.println("Here are the tasks in your list:");
                         for (int i = 0; i < todo.size(); i++) {
                             System.out.print(i + 1 + ".");
-
-                            if (todo.get(i) instanceof Todos) {
-                                System.out.print("[T]");
-                            } else if (todo.get(i) instanceof Deadlines) {
-                                System.out.print("[D]");
-                            } else if (todo.get(i) instanceof Events) {
-                                System.out.print("[E]");
-                            }
-
-                            if (todo.get(i).getStatus()) {
-                                System.out.print("[X] ");
-                            } else {
-                                System.out.print("[ ] ");
-                            }
-                            System.out.print(todo.get(i).getName());
-
-                            if (todo.get(i) instanceof Deadlines) {
-                                System.out.printf(" (by: %s)\n", ((Deadlines) todo.get(i)).getTime());
-                            } else if (todo.get(i) instanceof Events) {
-                                System.out.printf(" (from: %s to: %s)\n", ((Events) todo.get(i)).getStrtime(), ((Events) todo.get(i)).getEndtime());
-                            } else {
-                                System.out.println("");
-                            }
+                            System.out.println(todo.get(i).toString());
                         }
                         break;
 
@@ -61,21 +39,7 @@ public class Duke {
                         }
                         todo.get(index - 1).setStatus(true);
                         System.out.println("Nice! I've marked this task as done:");
-                        if (todo.get(index - 1) instanceof Todos) {
-                            System.out.print("[T]");
-                        } else if (todo.get(index - 1) instanceof Deadlines) {
-                            System.out.print("[D]");
-                        } else if (todo.get(index - 1) instanceof Events) {
-                            System.out.print("[E]");
-                        }
-                        System.out.print("[X] " + todo.get(index - 1).getName());
-                        if (todo.get(index - 1) instanceof Deadlines) {
-                            System.out.printf(" (by: %s)\n", ((Deadlines) todo.get(index - 1)).getTime());
-                        } else if (todo.get(index - 1) instanceof Events) {
-                            System.out.printf(" (from: %s to: %s)\n", ((Events) todo.get(index - 1)).getStrtime(), ((Events) todo.get(index - 1)).getEndtime());
-                        } else {
-                            System.out.println("");
-                        }
+                        System.out.println(todo.get(index - 1).toString());
                         break;
 
                     case "unmark":
@@ -85,21 +49,7 @@ public class Duke {
                         }
                         todo.get(No - 1).setStatus(false);
                         System.out.println("OK, I've marked this task as not done yet:");
-                        if (todo.get(No - 1) instanceof Todos) {
-                            System.out.print("[T]");
-                        } else if (todo.get(No - 1) instanceof Deadlines) {
-                            System.out.print("[D]");
-                        } else if (todo.get(No - 1) instanceof Events) {
-                            System.out.print("[E]");
-                        }
-                        System.out.print("[ ] " + todo.get(No - 1).getName());
-                        if (todo.get(No - 1) instanceof Deadlines) {
-                            System.out.printf(" (by: %s)\n", ((Deadlines) todo.get(No - 1)).getTime());
-                        } else if (todo.get(No - 1) instanceof Events) {
-                            System.out.printf(" (from: %s to: %s)\n", ((Events) todo.get(No - 1)).getStrtime(), ((Events) todo.get(No - 1)).getEndtime());
-                        } else {
-                            System.out.println("");
-                        }
+                        System.out.println(todo.get(No - 1).toString());
                         break;
 
                     case "delete":
@@ -110,26 +60,7 @@ public class Duke {
                         Task removed = todo.get(dindex - 1);
                         todo.remove(dindex - 1);
                         System.out.println("Noted. I've removed this task:");
-                        if (removed instanceof Todos) {
-                            System.out.print("[T]");
-                        } else if (removed instanceof Deadlines) {
-                            System.out.print("[D]");
-                        } else if (removed instanceof Events) {
-                            System.out.print("[E]");
-                        }
-                        if (removed.getStatus()) {
-                            System.out.print("[X] ");
-                        } else {
-                            System.out.print("[ ] ");
-                        }
-                        System.out.print(removed.getName());
-                        if (removed instanceof Deadlines) {
-                            System.out.printf(" (by: %s)\n", ((Deadlines) removed).getTime());
-                        } else if (removed instanceof Events) {
-                            System.out.printf(" (from: %s to: %s)\n", ((Events) removed).getStrtime(), ((Events) removed).getEndtime());
-                        } else {
-                            System.out.println("");
-                        }
+                        System.out.println(removed.toString());
                         System.out.printf("Now you have %d tasks in the list.\n", todo.size());
                         break;
 
@@ -140,7 +71,7 @@ public class Duke {
                         String name = arr1[0].substring(arr1[0].indexOf(" ") + 1);
                         todo.add(new Todos(name));
                         System.out.println("Got it. I've added this task:");
-                        System.out.println("[T][ ] " + name);
+                        System.out.println(todo.get(todo.size() - 1).toString());
                         System.out.printf("Now you have %d tasks in the list.\n", todo.size());
                         break;
 
@@ -152,7 +83,7 @@ public class Duke {
                         String dtime = arr1[1].substring(arr1[1].indexOf(" ") + 1);
                         todo.add(new Deadlines(dname, dtime));
                         System.out.println("Got it. I've added this task:");
-                        System.out.printf("[D][ ] " + dname + " (by: %s)\n", dtime);
+                        System.out.println(todo.get(todo.size() - 1).toString());
                         System.out.printf("Now you have %d tasks in the list.\n", todo.size());
                         break;
 
@@ -165,7 +96,7 @@ public class Duke {
                         String endtime = arr1[2].substring(arr1[2].indexOf(" ") + 1);
                         todo.add(new Events(ename, strtime, endtime));
                         System.out.println("Got it. I've added this task:");
-                        System.out.printf("[E][ ] " + ename + " (from: %s to: %s)\n", strtime, endtime);
+                        System.out.println(todo.get(todo.size() - 1).toString());
                         System.out.printf("Now you have %d tasks in the list.\n", todo.size());
                         break;
 

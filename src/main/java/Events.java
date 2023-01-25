@@ -15,4 +15,12 @@ public class Events extends Task {
     public String getEndtime() {
         return this.endtime;
     }
+
+    public String toString() {
+        if (this.getStatus()) {
+            return "[E][X] " + this.getName() + " (from: " + this.strtime + "to: " + this.endtime + ")";
+        } else {
+            return "[E][ ] " + this.getName() + " (from: " + this.strtime + "to: " + this.endtime + ")";
+        }
+    }
 }

@@ -4,4 +4,12 @@ public class Todos extends Task {
         super(name);
     }
 
+    public String toString() {
+        if (this.getStatus()) {
+            return "[T][X] " + this.getName();
+        } else {
+            return "[T][ ] " + this.getName();
+        }
+    }
+
 }

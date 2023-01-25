@@ -20,4 +20,8 @@ public class Task {
     public String getName() {
         return this.name;
     }
+
+    public String toString() {
+        return name;
+    }
 }

@@ -9,4 +9,12 @@ public class Deadlines extends Task {
     public String getTime() {
         return this.time;
     }
+
+    public String toString() {
+        if (this.getStatus()) {
+            return "[D][X] " + this.getName() + " (by: " + this.getTime() + ")";
+        } else {
+            return "[D][ ] " + this.getName() + " (by: " + this.getTime() + ")";
+        }
+    }
 }
