@@ -3,47 +3,24 @@ import java.util.Scanner;
 import java.util.ArrayList;
 import java.time.format.DateTimeFormatter;
 import java.io.FileWriter;
-import java.util.Scanner;
-import java.util.ArrayList;
-import java.io.File;
+
 
 
 public class Duke {
     private static ArrayList<Task> actions = new ArrayList<Task>();
 
     public static void main(String[] args) {
-        try {
-            File f = new File("./src/main/data/duke.txt");
-            Scanner s = new Scanner(f);
-            while (s.hasNext()) {
-                String taskDetails = s.nextLine();
-                String[] details = taskDetails.split(" |", 2);
-                String taskType = details[0];
-                String taskName = details[1];
-                System.out.println(taskName);
-                taskName = taskName.replace("|", "");
-                switch (taskType) {
-                    case "T" :
-                        actions.add(new ToDo(taskName));
-                        break;
-                    case "E" :
-                        actions.add(new Event(taskName));
-                        break;
-                    case "D" :
-                        actions.add(new Deadline(taskName));
-                        break;
-                }
-            }
-        } catch (Exception e) {
-            System.out.println(e.getMessage());
-        }
 
-        System.out.println("Hello from! I'm a Cookie Monster\n" + "What can I do for you?\n");
-        Scanner reader = new Scanner(System.in);
+        /*Loading task from the hard disk*/
+        Storage storage =  new Storage("./src/main/data/duke.txt");
+        actions = storage.load();
+
+        Ui appInterface = new Ui();
+        System.out.println(appInterface.greetUser());
+        String input = appInterface.readUserInput();
 
         while (true) {
             try {
-                String input = reader.nextLine();
                 String[] input_arr = input.split(" ");
                 if (input.equals("bye")) {
                     System.out.print("Bye I'm gonna go eat cookies. Hope to see you again soon!");
@@ -106,7 +83,7 @@ public class Duke {
                             String fromString = fromDateTime.format(DateTimeFormatter.ofPattern("MMM d yyyy hhmma"));
                             String toString = toDateTime.format(DateTimeFormatter.ofPattern("MMM d yyyy hhmma"));
                             input = taskDate2[0] + "(from: " + fromString + " ";
-                            input = input + "to: " + fromString  + ")";
+                            input = input + "to: " + toString  + ")";
 
                             newTask = new Event(input);
                             type = "E";
