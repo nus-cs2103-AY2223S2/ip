@@ -14,4 +14,9 @@ public class Event extends Task{
     public String toString() {
         return "[E]" + super.toString() + " (From " + fromStr + " to " + toStr + ")";
     }
+
+    @Override
+    public String toCommand() {
+        return "event " + super.taskStr + " /from " + fromStr + " /to " + toStr + (super.done ? "\nmark last": "");
+    }
 }

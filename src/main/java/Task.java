@@ -1,8 +1,8 @@
 import java.util.Locale;
 
-public abstract class Task {
-    private final String taskStr;
-    private boolean done;
+public abstract class Task{
+    protected final String taskStr;
+    protected boolean done;
     enum Type {
         TODO,
         EVENT,
@@ -72,4 +72,5 @@ public abstract class Task {
     public String toString() {
         return "[" + getStatusIcon() + "] " + taskStr;
     }
+    public abstract String toCommand();
 }
