@@ -10,15 +10,10 @@ public class Unmark extends Command {
         this.id = id;
     }
 
-    public void execute(MyData data) {
+    public void execute(MyData data, Ui ui) {
         data.markUndone(this.id);
         data.saveToFile();
-
-        System.out.print(Ui.line() +
-                "    OK, I've marked this task as not done yet:\n" +
-                "    " + data.getData(this.id) + "\n" +
-                Ui.line());
-
+        ui.unmark(data.getData(this.id));
     }
 }
 

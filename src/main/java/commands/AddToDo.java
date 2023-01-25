@@ -11,15 +11,10 @@ public class AddToDo extends Command {
         this.todo = new ToDo(description);
     }
 
-    public void execute(MyData data) {
+    public void execute(MyData data, Ui ui) {
         data.setData(todo);
         data.saveToFile();
-
-        System.out.print(Ui.line() +
-                "     Got it. I've added this task:\n" +
-                "       " + todo + "\n" +
-                "     Now you have " + data.len() + " tasks in the list.\n" +
-                Ui.line());
+        ui.add(todo.toString(), data.len());
     }
 }
 

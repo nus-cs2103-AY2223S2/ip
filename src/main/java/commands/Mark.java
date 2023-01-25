@@ -10,14 +10,10 @@ public class Mark extends Command {
         this.id = id;
     }
 
-    public void execute(MyData data) {
+    public void execute(MyData data, Ui ui) {
         data.markDone(this.id);
         data.saveToFile();
-
-        System.out.print(Ui.line() +
-                "    Nice! I've marked this task as done:\n" +
-                "    " + data.getData(this.id) + "\n" +
-                Ui.line());
+        ui.mark(data.getData(this.id));
     }
 }
 

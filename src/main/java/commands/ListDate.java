@@ -15,22 +15,7 @@ public class ListDate extends Command {
         this.date = date;
     }
 
-    public void execute(MyData data) {
-        System.out.print(Ui.line());
-        for (int i = 0; i < data.len(); i++) {
-            Task task = data.getData(i);
-            if (task instanceof Deadline) {
-                if (((Deadline) task).getDate().equals(this.date)) {
-                    System.out.printf("    %d. %s%n", i + 1, data.getData(i));
-                }
-            }
-            if (task instanceof Event) {
-                Event taskEvent = (Event) task;
-                if (this.date.isAfter(taskEvent.getFromDate()) && this.date.isBefore(taskEvent.getToDate())) {
-                    System.out.printf("    %d. %s%n", i + 1, data.getData(i));
-                }
-            }
-        }
-        System.out.print(Ui.line());
+    public void execute(MyData data, Ui ui) {
+        ui.listDate(data, this.date);
     }
 }

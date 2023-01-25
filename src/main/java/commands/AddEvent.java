@@ -11,15 +11,10 @@ public class AddEvent extends Command {
         this.event = new Event(description, from, to);
     }
 
-    public void execute(MyData data) {
+    public void execute(MyData data, Ui ui) {
         data.setData(event);
         data.saveToFile();
-
-        System.out.print(Ui.line() +
-                "     Got it. I've added this task:\n" +
-                "       " + event + "\n" +
-                "     Now you have " + data.len() + " tasks in the list.\n" +
-                Ui.line());
+        ui.add(event.toString(), data.len());
     }
 }
 

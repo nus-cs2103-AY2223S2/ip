@@ -10,13 +10,9 @@ public class Delete extends Command {
         this.id = id;
     }
 
-    public void execute(MyData data) {
+    public void execute(MyData data, Ui ui) {
         int itemCount = data.len() - 1;
-        System.out.print(Ui.line() +
-                "     Noted. I've removed this task:\n" +
-                "       " + data.getData(this.id) + "\n" +
-                "     Now you have " + itemCount + " tasks in the list.\n" +
-                Ui.line());
+        ui.delete(data.getData(this.id), itemCount);
         data.deleteData(id);
         data.saveToFile();
     }

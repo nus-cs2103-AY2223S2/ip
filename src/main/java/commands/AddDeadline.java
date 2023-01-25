@@ -11,15 +11,10 @@ public class AddDeadline extends Command {
         this.deadline = new Deadline(description, by);
     }
 
-    public void execute(MyData data) {
+    public void execute(MyData data, Ui ui) {
         data.setData(deadline);
         data.saveToFile();
-
-        System.out.print(Ui.line() +
-                "     Got it. I've added this task:\n" +
-                "       " + deadline + "\n" +
-                "     Now you have " + data.len() + " tasks in the list.\n" +
-                Ui.line());
+        ui.add(deadline.toString(), data.len());
     }
 }
 
