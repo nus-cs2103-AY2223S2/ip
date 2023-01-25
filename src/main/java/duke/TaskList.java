@@ -72,6 +72,22 @@ public class TaskList {
         taskList.get(taskNumber - 1).setDone(done);
     }
 
+    /**
+     * Finds tasks from the task list matching the given search string.
+     *
+     * @param searchString String to search for in the tasks.
+     * @return List of tasks matching the search string.
+     */
+    public ArrayList<Task> findTasks(String searchString) {
+        ArrayList<Task> matchingTasks = new ArrayList<>();
+        for (Task task : taskList) {
+            if (task.match(searchString)) {
+                matchingTasks.add(task);
+            }
+        }
+        return matchingTasks;
+    }
+
     public String describeLength() {
         return "Now you have " + this.getLength() + " tasks in the list.";
     }
@@ -85,7 +101,7 @@ public class TaskList {
         String encodedTask;
         for (int i = 0; i < getLength(); i++) {
             encodedTask = taskList.get(i).toEncodedString();
-            result.append(i + 1).append(".").append(encodedTask).append("\n");
+            result.append(i + 1).append('.').append(encodedTask).append('\n');
         }
         if (result.length() > 0) {
             result.deleteCharAt(result.length() - 1);
@@ -104,7 +120,7 @@ public class TaskList {
         }
         StringBuilder result = new StringBuilder();
         for (int i = 0; i < getLength(); i++) {
-            result.append(i + 1).append(".").append(taskList.get(i)).append("\n");
+            result.append(i + 1).append('.').append(taskList.get(i)).append('\n');
         }
         if (result.length() > 0) {
             result.deleteCharAt(result.length() - 1);

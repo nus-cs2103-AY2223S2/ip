@@ -66,6 +66,9 @@ public class Duke {
                     ui.showDeleteTaskMessage(task, tasks);
                     break;
                 }
+                case "find":
+                    ui.showFindTaskMessage(tasks.findTasks(parsedCommand[1]));
+                    break;
                 case "todo":
                     task = new ToDo(parsedCommand[1]);
                     tasks.addTask(task);

@@ -1,6 +1,9 @@
 package tasks;
 
 import java.time.format.DateTimeFormatter;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+
 public abstract class Task {
 
     protected String description;
@@ -21,7 +24,19 @@ public abstract class Task {
         this.isDone = done;
     }
 
-    abstract public String toEncodedString();
+    /**
+     * Check if a task contains a given string.
+     *
+     * @param toMatch String to check for.
+     * @return Whether the task contains the given string or not.
+     */
+    public boolean match(String toMatch) {
+        Pattern pattern = Pattern.compile(toMatch);
+        Matcher matcher = pattern.matcher(this.description);
+        return matcher.find();
+    }
+
+    public abstract String toEncodedString();
 
     @Override
     public String toString() {

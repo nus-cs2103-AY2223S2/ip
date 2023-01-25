@@ -2,6 +2,7 @@ package duke;
 
 import tasks.Task;
 
+import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Ui {
@@ -33,6 +34,23 @@ public class Ui {
 
     public void showUnmarkTaskMessage(Task task) {
         showTextWithLines("OK, I've marked this task as not done yet:\n  " + task);
+    }
+
+    /**
+     * Prints information about the tasks found with the search string.
+     *
+     * @param tasks List of tasks that were found by the search string.
+     */
+    public void showFindTaskMessage(ArrayList<Task> tasks) {
+        StringBuilder tasksStr = new StringBuilder();
+        tasksStr.append("Here are the matching tasks in your list:\n");
+        for (int i = 0; i < tasks.size(); i++) {
+            tasksStr.append(i + 1).append('.').append(tasks.get(i).toString()).append('\n');
+        }
+        if (tasksStr.length() > 0) {
+            tasksStr.deleteCharAt(tasksStr.length() - 1);
+        }
+        showTextWithLines(tasksStr.toString());
     }
 
     public void showError(String errorMessage) {
