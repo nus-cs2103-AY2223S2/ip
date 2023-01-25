@@ -1,9 +1,14 @@
-public class Task {
-    private boolean isDone = false;
+public abstract class Task {
+    protected boolean isDone = false;
     private String name;
 
     public Task(String name) {
         this.name = name;
+    }
+
+    public Task(String name, boolean b) {
+        this.name = name;
+        this.isDone = b;
     }
 
     public void markDone() {
@@ -21,4 +26,6 @@ public class Task {
             return "[ ] " + name;
         }
     }
+
+    public abstract String asCSV();
 }
