@@ -13,6 +13,6 @@ src/main/resources/docs/
 *.iml
 bin/
 
-text-ui-test/
+/.text-ui-test/
 
 data/
