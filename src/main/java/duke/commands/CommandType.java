@@ -4,29 +4,19 @@ import duke.exception.DukeException;
 import duke.exception.InvalidCommandDukeException;
 
 public enum CommandType {
-    EXIT("bye", false),
-    DISPLAY_LIST("list", false),
-    MARK_TASK_AS_DONE("mark", true),
-    MARK_TASK_AS_UNDONE("unmark", true),
-    TODO("todo", true),
-    DEADLINE("deadline", true),
-    EVENT("event", true),
-    DELETE("delete", true);
+    EXIT("bye"),
+    DISPLAY_LIST("list"),
+    MARK_TASK_AS_DONE("mark"),
+    MARK_TASK_AS_UNDONE("unmark"),
+    TODO("todo"),
+    DEADLINE("deadline"),
+    EVENT("event"),
+    DELETE("delete");
 
     private final String command;
-    private final boolean hasArguments;
 
-    private CommandType(String command, boolean hasArguments) {
+    CommandType(String command) {
         this.command = command;
-        this.hasArguments = hasArguments;
-    }
-
-    public String getCommand() {
-        return command;
-    }
-
-    public boolean hasArguments() {
-        return hasArguments;
     }
 
     public static CommandType getCommandType(String command) throws DukeException {
