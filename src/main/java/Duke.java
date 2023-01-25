@@ -8,6 +8,7 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.stream.Collectors;
+import java.util.regex.Matcher;
 
 public class Duke {
     private static final int cap = 100;
@@ -298,6 +299,32 @@ public class Duke {
         } catch (IOException e){
             throw new DukeException("Unable to access contents of file");
         }
+        //try{
+            //System.out.println(logo);
+            //"todo \D+"
+            //deadline .+/by \d{2}/\d{2}/\d{4}
+            //event .+/from \d{2}/\d{2}/\d{4} /to \d{2}/\d{2}/\d{4}
+            Scanner sc = new Scanner(System.in);
+            String command = sc.nextLine();
+            while (true){
+                Pattern todoPattern = Pattern.compile("todo \\D+");
+                Pattern deadlinePattern = Pattern.compile("deadline .+/by \\d{2}/\\d{2}/\\d{4}");
+                Pattern eventPattern = Pattern.compile("event .+/from \\d{2}/\\d{2}/\\d{4} /to \\d{2}/\\d{2}/\\d{4}");
+                if (todoPattern.matcher(command).find()){
+                    System.out.println("Todo Task added succesfully!");
+                } else if (deadlinePattern.matcher(command).find()){
+                    System.out.println("Deadline Task added succcesfully!");
+                } else if (eventPattern.matcher(command).find()){
+                    System.out.println("Event task added successfully!");
+                } else {
+                    System.out.println("Incorrect command given!");
+                }
+            }
+        //} catch(Exception e){
+
+        //}
     }
+
+
 }
 
