@@ -11,9 +11,10 @@ public class Duke {
     public static void main(String[] args) throws DukeException {
         TextUi TextUi = new TextUi();
         Parser Parser = new Parser();
+        Storage Storage = new Storage();
         taskList = new TaskList();
         File file = new File(FILE_DESTINATION);
-        readSavedFile(file); // loads saved strings in duke.txt to tasklist
+        Storage.readSavedFile(file, taskList); // loads saved strings in duke.txt to tasklist
         TextUi.getWelcomeMessage();
         String input;
 
@@ -37,7 +38,7 @@ public class Duke {
                     if (indexToDelete < taskList.getArraySize()) {
                         TextUi.getTaskRemovedMessage(taskList.getTask(indexToDelete),taskList.getArraySize() - 1);
                         taskList.removeTask(indexToDelete);
-                        saveTaskListToStorage(file);
+                        Storage.saveTaskListToStorage(file, taskList);
                     } else {
                         throw new DukeException("Invalid, there is no such task");
                     }
@@ -46,7 +47,7 @@ public class Duke {
                     if (indexToMark < taskList.getArraySize()) {
                         Task toMark = taskList.getTask(indexToMark);
                         toMark.markAsDone();
-                        saveTaskListToStorage(file);
+                        Storage.saveTaskListToStorage(file, taskList);
                         TextUi.getCustomMessage("Nice! I've marked this task as done:\n" + toMark);
                     } else {
                         throw new DukeException("Invalid, there is no such task");
@@ -56,7 +57,7 @@ public class Duke {
                     if (indexToUnmark < taskList.getArraySize()) {
                         Task toUnmark = taskList.getTask(indexToUnmark);
                         toUnmark.markAsUndone();
-                        saveTaskListToStorage(file);
+                        Storage.saveTaskListToStorage(file, taskList);
                         TextUi.getCustomMessage("OK, I've marked this task as not done yet:\n" + toUnmark);
                     } else {
                         throw new DukeException("Invalid, there is no such task");
@@ -91,57 +92,16 @@ public class Duke {
                                 , LocalDate.parse(str[1].substring(3)));
                         taskList.addTask(newTask);
                         TextUi.getTaskAddedMessage(newTask, taskList.getArraySize());
-                        saveTaskListToStorage(file);
+                        Storage.saveTaskListToStorage(file, taskList);
                     } else {
                         throw new DukeException("I'm sorry, I don't know what that means!");
                     }
-                    saveTaskListToStorage(file);
+                    Storage.saveTaskListToStorage(file, taskList);
                 }
             } catch (DukeException dukeException) {
                 TextUi.getCustomMessage(dukeException.getMessage());
             }
         }
         TextUi.getGoodbyeMessage();
-    }
-
-    private static void readSavedFile(File file) {
-        try {
-            Scanner myReader = new Scanner(file);
-            String data;
-            while (myReader.hasNextLine()) {
-                taskList.addTask(parseStringToTask(myReader.nextLine()));
-            }
-            myReader.close();
-        } catch (FileNotFoundException e) {
-            System.out.println("An error occurred.");
-            e.printStackTrace();
-        }
-    }
-
-    private static Task parseStringToTask(String string) {
-        String[] arr = string.split(",");
-        if (arr[0].equals("T")) {
-            Task t = new ToDo(arr[2], arr[1].equals("1"));
-            return t;
-        } else if (arr[0].equals("D")) {
-            Task t = new Deadline(arr[2], arr[1].equals("1"), LocalDate.parse(arr[3]));
-            return t;
-        } else {
-            Task t = new Event(arr[2], arr[1].equals("1"), LocalDate.parse(arr[3]), LocalDate.parse(arr[4]));
-            return t;
-        }
-    }
-    private static void saveTaskListToStorage(File file) {
-        try {
-            FileWriter myWriter = new FileWriter(file);
-            // this truncates the duke.txt to size 0
-            for (int i = 0; i < taskList.getArraySize(); i++) {
-                myWriter.write(taskList.getTask(i).toStorableString() + "\n");
-            }
-            myWriter.close();
-        } catch (IOException e) {
-            System.out.println("An error occurred.");
-            e.printStackTrace();
-        }
     }
 }
