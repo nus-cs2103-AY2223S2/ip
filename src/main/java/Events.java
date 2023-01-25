@@ -12,14 +12,14 @@ public class Events extends Task {
 
     public Events(boolean isDone, String description, String start, String end) {
         super(isDone, description);
-        this.start = LocalDateTime.parse(start.substring(5), formatter);
-        this.end = LocalDateTime.parse(end.substring(3), formatter);
+        this.start = LocalDateTime.parse(start.substring(5), FORMATTER);
+        this.end = LocalDateTime.parse(end.substring(3), FORMATTER);
 
     }
     @Override
     public String toString() {
-        return "[E]" + super.toString() + String.format(" (from: %s to: %s)", this.start.format(formatter),
-                this.end.format(printFormatter));
+        return "[E]" + super.toString() + String.format(" (from: %s to: %s)", this.start.format(FORMATTER),
+                this.end.format(PRINTFORMATTER));
     }
 
     public String formatText() {

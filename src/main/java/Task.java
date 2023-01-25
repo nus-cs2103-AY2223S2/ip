@@ -3,10 +3,10 @@ import java.time.format.DateTimeFormatter;
 abstract class Task {
     protected String description;
     protected boolean isDone;
-    protected static final DateTimeFormatter formatter =
+    protected static final DateTimeFormatter FORMATTER =
             DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
 
-    protected static final DateTimeFormatter printFormatter =
+    protected static final DateTimeFormatter PRINTFORMATTER =
             DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm");
 
     public Task(String description) {

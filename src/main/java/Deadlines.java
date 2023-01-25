@@ -10,18 +10,19 @@ public class Deadlines extends Task {
 
     public Deadlines(boolean isDone, String description, String deadline) {
         super(isDone, description);
-        this.deadline = LocalDateTime.parse(deadline, formatter);
+        this.deadline = LocalDateTime.parse(deadline, FORMATTER);
     }
     @Override
     public String toString() {
         return "[D]" + super.toString() + String.format(" (by: %s)",
-                this.deadline.format(printFormatter));
+                this.deadline.format(PRINTFORMATTER));
 
     }
     public String formatText() {
         String divider = " | ";
         String isMarked = this.isDone ? "1" : "0";
-        return "D" + divider + isMarked + divider + this.description + divider + this.deadline;
+        return "D" + divider + isMarked + divider + this.description + divider +
+                this.deadline.format(PRINTFORMATTER);
     }
 
 }
