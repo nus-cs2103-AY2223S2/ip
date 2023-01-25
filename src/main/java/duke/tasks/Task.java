@@ -27,6 +27,9 @@ public class Task {
         return (isDone ? "X" : " "); // mark done task with X
     }
 
+    public String getDescription() {
+        return this.description;
+    }
     /**
      * Sets the isDone parameter to true.
      */

@@ -1,6 +1,14 @@
 package duke;
-import duke.command.*;
-
+import duke.command.ByeCommand;
+import duke.command.FindCommand;
+import duke.command.MarkCommand;
+import duke.command.EventCommand;
+import duke.command.UnmarkCommand;
+import duke.command.DeadlineCommand;
+import duke.command.ListCommand;
+import duke.command.ToDoCommand;
+import duke.command.DeleteCommand;
+import duke.command.Command;
 
 public class Parser {
     public enum Commands {
@@ -11,7 +19,8 @@ public class Parser {
         deadline,
         event,
         todo,
-        delete
+        delete,
+        find
     }
 
     public static Command parse(String inputCommand) throws DukeException {
@@ -68,11 +77,19 @@ public class Parser {
                 } else {
                     return new DeleteCommand(Integer.parseInt(splitString[1].trim()) - 1);
                 }
+            case find:
+                if (splitString[1].trim().equals("") ) {
+                    throw new DukeException("\t☹ OOPS!!! The name of task u want to find cannot be empty!.");
+                } else {
+                    return new FindCommand(splitString[1]);
+                }
             default:
                 throw new DukeException("\t☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
             }
         } catch (IllegalArgumentException e) {
             throw new DukeException("\t☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
+        } catch (ArrayIndexOutOfBoundsException e) {
+            throw new DukeException("\t☹ OOPS!!! The name of task u want to find cannot be empty!");
         }
     }
 

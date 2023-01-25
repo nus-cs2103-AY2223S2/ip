@@ -1,4 +1,6 @@
 package duke.tasks;
+import duke.DukeException;
+
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
@@ -10,7 +12,7 @@ public class Event extends Task {
     protected String by;
     private LocalDate from;
     private LocalDate to;
-    DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+    DateTimeFormatter formatter = DateTimeFormatter.ofPattern("MMM dd yyyy");
     protected boolean isDone;
 
     /**
@@ -20,13 +22,14 @@ public class Event extends Task {
      * @param to Event end date.
      * @param isDone Completion status of Event.
      */
-    public Event(String description, String from, String to, boolean isDone) {
+    public Event(String description, String from, String to, boolean isDone) throws DukeException {
+
         super(description, isDone);
         try {
-            this.from = LocalDate.parse(from.trim(), formatter);
-            this.to = LocalDate.parse(to.trim(), formatter);
+            this.from = LocalDate.parse(from.trim());
+            this.to = LocalDate.parse(to.trim());
         } catch (DateTimeParseException e) {
-            System.out.println("/tPlease enter a valid date in e.g /from yyyy-mm-dd /to yyyy-mm-dd format!");
+            throw new DukeException("\tPlease enter a valid date in e.g /from yyyy-mm-dd /to yyyy-mm-dd format!");
         }
     }
 
@@ -36,7 +39,9 @@ public class Event extends Task {
      */
     @Override
     public String toString() {
-        return "\t[E]" + super.toString() + " (from: " + from + " to: " + to + ")";
+        return "\t[E]" + super.toString()
+                + " (from: " + from.format(formatter) + " to: "
+                + to.format(formatter) + ")";
     }
 
     /**

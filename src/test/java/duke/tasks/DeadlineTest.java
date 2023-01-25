@@ -1,5 +1,6 @@
 package duke.tasks;
 
+import duke.DukeException;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -7,8 +8,8 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 class DeadlineTest {
 
     @Test
-    void deadlineTestUi(){
-        Deadline deadline = new Deadline("read book", "2022-01-23 18:00", false);
-        assertEquals("\t[D][ ] read book (by: 2022-01-23 18:00)", deadline.toString());
+    void deadlineTestUi() throws DukeException {
+        Deadline deadline = new Deadline("meeting", "2022-02-23", false);
+        assertEquals("\t[D][ ] meeting (by: Feb 23 2022)", deadline.toString());
     }
 }

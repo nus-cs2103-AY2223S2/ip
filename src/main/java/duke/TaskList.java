@@ -30,12 +30,13 @@ public class TaskList{
         }
     }
 
+
     /**
      * Creates a new Deadline object.
      * @param description Description of the Deadline object.
      * @param by The due date of the deadline.
      */
-    public void addDeadline(String description, String by)  {
+    public void addDeadline(String description, String by) throws DukeException {
         Deadline deadline = new Deadline(description, by, false);
         listOfTasks.add(deadline);
     }
@@ -49,13 +50,15 @@ public class TaskList{
         listOfTasks.add(todo);
     }
 
+
     /**
      * Creates a new Event object.
      * @param description Description of the Event object.
      * @param from The start of the event.
      * @param to The end of the event.
      */
-    public void addEvent(String description, String from, String to) {
+
+    public void addEvent(String description, String from, String to) throws DukeException {
         Event event = new Event(description, from, to, false);
         listOfTasks.add(event);
     }
@@ -98,6 +101,16 @@ public class TaskList{
                     + task.toString());
             i++;
         }
+    }
+
+    public ArrayList<String> findTask(String taskname){
+        ArrayList<String> matchingTasks = new ArrayList<>();
+        for(Task task : listOfTasks) {
+            if(task.getDescription().contains(taskname)) {
+                matchingTasks.add(task.toString());
+            }
+        }
+        return matchingTasks;
     }
 
     /**
