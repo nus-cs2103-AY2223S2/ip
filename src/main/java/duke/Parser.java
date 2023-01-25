@@ -81,14 +81,14 @@ public class Parser {
                     break;
                 case ("deadline"):
                     checkIfBlank(c);
-                    String[] stuff = c[1].split(" /by ");
-                    checkIfBlank(stuff);
+                    String[] limit = c[1].split(" /by ");
+                    checkIfBlank(limit);
                     com = new DeadlineCommand(command);
                     break;
                 case ("event"):
                     checkIfBlank(c);
-                    String[] stuff2 = c[1].split(" /from ");
-                    checkIfBlank(stuff2);
+                    String[] interval = c[1].split(" /from ");
+                    checkIfBlank(interval);
                     com = new EventCommand(command);
                     break;
                 case ("delete"):
