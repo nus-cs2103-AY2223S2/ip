@@ -29,4 +29,21 @@ public class Todo extends Task{
         }
         return "T / " + marked + " / " + super.description;
     }
+
+    @Override
+    public boolean equals(Object o) {
+        if (o == this) {
+            return true;
+        }
+        if (!(o instanceof Todo)) {
+            return false;
+        }
+
+        Todo t = (Todo) o;
+        if (this.description.equals(t.description)) {
+            return true;
+        } else {
+            return false;
+        }
+    }
 }

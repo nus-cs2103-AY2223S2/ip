@@ -54,7 +54,7 @@ public class Parser {
 
         try {
             String[] infoParts = info.split("/", 2);
-            String description = infoParts[0], by = infoParts[1].substring(2).trim();
+            String description = infoParts[0].trim(), by = infoParts[1].substring(2).trim();
             LocalDate byDate = LocalDate.parse(by, DateTimeFormatter.ofPattern("d/MM/yyyy"));
             return new AddDeadlineCommand(description, byDate);
         } catch (ArrayIndexOutOfBoundsException e) {
@@ -72,7 +72,7 @@ public class Parser {
 
         try {
             String[] infoParts = info.split(" /", 3);
-            String description = infoParts[0],
+            String description = infoParts[0].trim(),
                     from = infoParts[1].substring(4).trim(),
                     to = infoParts[2].substring(2).trim();
             LocalDate fromDate = LocalDate.parse(from, DateTimeFormatter.ofPattern("d/MM/yyyy")),

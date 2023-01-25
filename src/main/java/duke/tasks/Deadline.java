@@ -53,4 +53,21 @@ public class Deadline extends Task {
                 + " - "
                 + this.by.format(DateTimeFormatter.ofPattern("d/MM/yyyy"));
     }
+
+    @Override
+    public boolean equals(Object o) {
+        if (o == this) {
+            return true;
+        }
+        if (!(o instanceof Deadline)) {
+            return false;
+        }
+
+        Deadline d = (Deadline) o;
+        if (this.description.equals(d.description) && this.by.equals(d.by)) {
+            return true;
+        } else {
+            return false;
+        }
+    }
 }

@@ -27,4 +27,21 @@ public class MarkCommand extends Command {
             taskList.unmarkTask(this.taskNumber);
         }
     }
+
+    @Override
+    public boolean equals(Object o) {
+        if (o == this) {
+            return true;
+        }
+        if (!(o instanceof MarkCommand)) {
+            return false;
+        }
+
+        MarkCommand c = (MarkCommand) o;
+        if (this.taskNumber == c.taskNumber && this.isMarkingTask == c.isMarkingTask) {
+            return true;
+        } else {
+            return false;
+        }
+    }
 }

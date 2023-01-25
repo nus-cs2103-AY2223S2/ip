@@ -22,4 +22,21 @@ public class AddTodoCommand extends AddCommand {
             Ui.showFatalError("Error in saving data.\nReboot Duke and try again");
         }
     }
+
+    @Override
+    public boolean equals(Object o) {
+        if (o == this) {
+            return true;
+        }
+        if (!(o instanceof AddTodoCommand)) {
+            return false;
+        }
+
+        AddTodoCommand c = (AddTodoCommand) o;
+        if (this.description.equals(c.description)) {
+            return true;
+        } else {
+            return false;
+        }
+    }
 }
