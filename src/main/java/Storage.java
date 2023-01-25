@@ -7,10 +7,14 @@ import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.Scanner;
 
-public class DataStorage {
+public class Storage {
     private final String FILEPATH;
-    public DataStorage(String filepath){
+    public Storage(String filepath){
         this.FILEPATH = filepath;
+    }
+
+    public String getFilepath(){
+        return FILEPATH;
     }
 
     public void save(ArrayList<Task> dataArray) {
@@ -25,24 +29,6 @@ public class DataStorage {
                 throw new RuntimeException(e);
             }
     }
-        public void printCurrentTask () {
-            if (!Files.exists(Path.of(FILEPATH))) {
-                new File(FILEPATH).getParentFile().mkdirs();
-            } else {
-                File file = new File(FILEPATH);
-                try {
-                    Scanner sc = new Scanner(file);
-                    System.out.println("\tThese is your current TaskList");
-                    while (sc.hasNextLine()) {
-                        String text = sc.nextLine();
-                        System.out.println("\t" + text.trim());
-                    }
-                } catch (FileNotFoundException e){
-                        throw new RuntimeException(e);
-                    }
-            }
-        }
-
         public ArrayList<String> load() throws FileNotFoundException {
             ArrayList<String> data = new ArrayList<>();
             File file = new File(FILEPATH);

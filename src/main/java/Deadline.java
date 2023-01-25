@@ -1,14 +1,20 @@
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
+
 public class Deadline extends Task {
     protected String by;
     LocalDateTime dateTime;
 
     DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
-    public Deadline(String description, String by, boolean isDone) {
+    public Deadline(String description, String by, boolean isDone) throws DukeException{
         super(description, isDone);
         this.by = by;
-        this.dateTime = LocalDateTime.parse(by.trim(), formatter);
+        try {
+            this.dateTime = LocalDateTime.parse(by.trim(), formatter);
+        } catch (DateTimeParseException e) {
+            throw new DukeException("\tPlease enter a date in e.g yyyy-mm-dd 23:59 format!");
+        }
     }
 
     @Override

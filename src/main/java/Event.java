@@ -15,7 +15,7 @@ public class Event extends Task {
             this.from = LocalDate.parse(from.trim(), formatter);
             this.to = LocalDate.parse(to.trim(), formatter);
         } catch (DateTimeParseException e) {
-            throw new DukeException("Please enter a valid date in e.g yyyy-mm-dd format!");
+            throw new DukeException("/tPlease enter a valid date in e.g /from yyyy-mm-dd /to yyyy-mm-dd format!");
         }
     }
 
