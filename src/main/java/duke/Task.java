@@ -32,6 +32,10 @@ public class Task {
         return this.toString();
     }
 
+    public Boolean contains(String searchString) {
+        return this.description.contains(searchString);
+    }
+
     @Override
     public String toString() {
         String doneString;
