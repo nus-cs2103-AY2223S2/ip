@@ -16,7 +16,17 @@ import enums.CommandType;
 import exceptions.DukeException;
 
 
+/**
+ * Parser class to parse input command.
+ */
 public class Parser {
+
+    /**
+     * Parses an input command.
+     * @param fullCommand Input command to be parsed.
+     * @return One of the specified Command objects.
+     * @throws DukeException If command is invalid.
+     */
     public static Command parse(String fullCommand) throws DukeException {
         String[] arr = fullCommand.split(" ", 2);
         String commandType = arr[0].toLowerCase();
@@ -58,6 +68,10 @@ public class Parser {
             return new IncorrectCommand();
         }
     }
+
+    /**
+     * Parses arguments in the context of the DeadlineCommand.
+     */
     private static DeadlineCommand prepareDeadline(String message) throws DukeException {
         Pattern p = Pattern.compile("/by");
         String[] temp = p.split(message);
@@ -68,6 +82,10 @@ public class Parser {
         String by = temp[1].trim();
         return new DeadlineCommand(desc, by);
     }
+
+    /**
+     * Parses arguments in the context of the EventCommand.
+     */
     private static EventCommand prepareEvent(String message) throws DukeException {
         Pattern p1 = Pattern.compile("/from");
         String[] temp1 = p1.split(message);
