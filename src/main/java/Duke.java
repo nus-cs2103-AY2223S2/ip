@@ -1,4 +1,5 @@
 import enums.CommandType;
+
 import java.util.Scanner;
 
 public class Duke{
@@ -19,6 +20,12 @@ public class Duke{
                 + "|____/ \\__,_|_|\\_\\___|\n";
         System.out.println("Hello from\n" + logo + ", your personal assistant.\n"
                 + "What can I do for you today?");
+//        try {
+//            File taskDataFile = new File(System.getProperty("user.dir") + "/data/");
+//            Scanner sc = new Scanner(taskDataFile);
+//        } catch (FileNotFoundException e) {
+//            System.out.println("Its your first time ");
+//        }
     }
 
     private static void acceptCommands() throws DukeException {
@@ -50,14 +57,20 @@ public class Duke{
                         String[] parseCommand = command.split("/by");
                         String name = parseCommand[0].replaceFirst("deadline ", "");
                         String by = parseCommand[1].strip();
-                        tasks.addTask(new Deadline(name, by));
+                        Deadline newDeadline = new Deadline(name, by);
+                        tasks.addTask(newDeadline);
+                        System.out.println("Added deadline: " + newDeadline);
+                        System.out.println("You now have " + tasks.size() + " task(s) in your list.");
                         break;
                     }
                     case TODO: {
                         if (tooFewArgs) {
                             throw new DukeException("Please give a name for your ToDo task!");
                         }
-                        tasks.addTask(new ToDo(command.replaceFirst("todo ", "").strip()));
+                        ToDo newToDo = new ToDo(command.replaceFirst("todo ", "").strip());
+                        tasks.addTask(newToDo);
+                        System.out.println("Added to-do: " + newToDo);
+                        System.out.println("You now have " + tasks.size() + " task(s) in your list.");
                         break;
                     }
                     case EVENT: {
@@ -73,7 +86,11 @@ public class Duke{
                         parseCommand = parseCommand[1].split("/to");
                         String from = parseCommand[0].strip();
                         String by = parseCommand[1].strip();
-                        tasks.addTask(new Event(name, from, by));
+
+                        Event newEvent = new Event(name, from, by);
+                        tasks.addTask(newEvent);
+                        System.out.println("Added event: " + newEvent);
+                        System.out.println("You now have " + tasks.size() + " task(s) in your list.");
                         break;
                     }
                     case MARK: {
@@ -82,6 +99,7 @@ public class Duke{
                         }
                         int index = Integer.parseInt(commandList[1]);
                         tasks.markDone(index);
+                        System.out.println("Good job! I have marked this task as done! \n" + "\t" + tasks.get(index));
                         break;
                     }
                     case UNMARK: {
@@ -90,13 +108,16 @@ public class Duke{
                         }
                         int index = Integer.parseInt(commandList[1]);
                         tasks.markUndone(index);
+                        System.out.println("Oof! I have marked this task as undone for you! \n" + tasks.get(index));
                     }
                     case DELETE: {
                         if (tooFewArgs) {
                             throw new DukeException("Please provide the index of the task!");
                         }
                         int index = Integer.parseInt(commandList[1]);
-                        tasks.delete(index);
+                        Task deletedTask = tasks.delete(index);
+                        System.out.println("Removed task: " + deletedTask);
+                        System.out.println("You now have " + tasks.size() + " task(s) in your list.");
                         break;
                     }
                     case BYE: {
