@@ -49,12 +49,23 @@ public class TaskList {
         return tasks.get(idx);
     }
 
+    public TaskList getTasksByKeyword(String keyword) {
+        keyword = keyword.trim().toLowerCase();
+        TaskList matchingTasks = new TaskList();
+        for (Task task: tasks) {
+            if (task.toString().toLowerCase().contains(keyword)) {
+                matchingTasks.addTask(task);
+            }
+        }
+        return matchingTasks;
+    }
+
     public int getSize() {
         return tasks.size();
     }
     @Override
     public String toString() {
-        StringBuilder listOutput = new StringBuilder("Here are the tasks in your list:\n");
+        StringBuilder listOutput = new StringBuilder();
         for (int i = 0; i < tasks.size(); i++) {
             listOutput.append(String.format(
                     "\t%d. %s",

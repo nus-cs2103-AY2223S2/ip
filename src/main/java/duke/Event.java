@@ -9,7 +9,7 @@ public class Event extends Task {
     protected LocalDateTime startDateTime;
     protected String endStr;
     protected LocalDateTime endDateTime;
-    protected static DateTimeFormatter inputFormatter = DateTimeFormatter.ofPattern("d/MM/yyyy HHmm");
+    protected static DateTimeFormatter inputFormatter = DateTimeFormatter.ofPattern("d/M/yyyy HHmm");
     protected static DateTimeFormatter outputFormatter = DateTimeFormatter.ofPattern("MMM d yyyy, hh:mma");
     public Event(String description, String startStr, String endStr) throws DukeException {
         super(description.trim(), Icon.EVENT);

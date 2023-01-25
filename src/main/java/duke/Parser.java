@@ -8,7 +8,8 @@ public class Parser {
         DELETE("delete"),
         TODO("todo"),
         DEADLINE("deadline"),
-        EVENT("event");
+        EVENT("event"),
+        FIND("find");
         private final String typeStr;
         Command(String typeStr) {
             this.typeStr = typeStr;
@@ -22,7 +23,10 @@ public class Parser {
         inputStr = inputStr.trim();
         try {
             if (inputStr.equals(Command.LIST.toString())) {
-                ui.showNormalMessage(tasks.toString());
+                ui.showNormalMessage(String.format(
+                        "Here are the tasks in your list:\n%s",
+                        tasks
+                ));
                 return;
             }
             String[] inputSplit = inputStr.split(" ", 2);
@@ -32,7 +36,13 @@ public class Parser {
             String commandStr = inputSplit[0].trim();
             String params = inputSplit[1].trim();
             Task newTask = null;
-            if (commandStr.equals(Command.MARK.toString())) {
+            if (commandStr.equals(Command.FIND.toString())) {
+                TaskList matchingTasks = tasks.getTasksByKeyword(params);
+                ui.showNormalMessage(String.format(
+                        "Here are the matching tasks in your list:\n%s",
+                        matchingTasks
+                ));
+            } else if (commandStr.equals(Command.MARK.toString())) {
                 int idx = Integer.parseInt(params) - 1;
                 tasks.markTaskAsDone(idx);
                 ui.showNormalMessage(String.format(

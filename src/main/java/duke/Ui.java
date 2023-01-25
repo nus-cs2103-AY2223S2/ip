@@ -4,7 +4,7 @@ public class Ui {
     final static String DIVIDER =
             "____________________________________________________________";
     private void printWithDivider(String str) {
-        System.out.println(String.format("%s\n%s\n%s", DIVIDER, str, DIVIDER));
+        System.out.println(String.format("\t%s\n\t%s\n\t%s", DIVIDER, str, DIVIDER));
     }
     public void showNormalMessage(String outputMsg) {
         printWithDivider(outputMsg.trim());

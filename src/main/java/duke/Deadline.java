@@ -7,7 +7,7 @@ import java.time.format.DateTimeParseException;
 public class Deadline extends Task {
     protected String byStr;
     protected LocalDateTime byDateTime;
-    protected static DateTimeFormatter inputFormatter = DateTimeFormatter.ofPattern("d/MM/yyyy HHmm");
+    protected static DateTimeFormatter inputFormatter = DateTimeFormatter.ofPattern("d/M/yyyy HHmm");
     protected static DateTimeFormatter outputFormatter = DateTimeFormatter.ofPattern("MMM d yyyy, hh:mma");
     public Deadline(String description, String byStr) throws DukeException {
         super(description.trim(), Icon.DEADLINE);
