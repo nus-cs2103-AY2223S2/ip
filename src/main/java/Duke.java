@@ -167,7 +167,7 @@ public class Duke {
 
     /**
     * Remove the first word of every chunk and whitespaces 
-    * at the two ends of the Stirng
+    * at the two ends of the String
     *
     * @param s An array of Strings
     */
@@ -213,11 +213,11 @@ public class Duke {
 
 
     private static String printList() {
-        String s = "";
+        StringBuilder s = new StringBuilder();
         for (int i = 1; i <= storedInputs.size(); i++) {
-            s += i + ". " + storedInputs.get(i-1) + "\n";
+            s.append(i).append(". ").append(storedInputs.get(i - 1)).append("\n");
         }
-        return s;
+        return s.toString();
     }
 
     private static void printConfirmation() {

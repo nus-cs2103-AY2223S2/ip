@@ -11,7 +11,7 @@ public class Event extends Task {
 
     @Override
     public String toString() {
-        if (taskDone == false) {
+        if (!taskDone) {
             return "[E][ ] " + this.taskName
                 + " (from: " + this.startTime + " to: " + this.endTime + ")";
         }

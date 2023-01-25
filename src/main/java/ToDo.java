@@ -6,7 +6,7 @@ public class ToDo extends Task {
 
     @Override
     public String toString() {
-        if (taskDone == false) {
+        if (!taskDone) {
             return "[T][ ] " + this.taskName;
         }
         return "[T][X] " + this.taskName;

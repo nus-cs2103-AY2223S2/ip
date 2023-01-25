@@ -9,7 +9,7 @@ public class Deadline extends Task {
 
     @Override
     public String toString() {
-        if (taskDone == false) {
+        if (!taskDone) {
             return "[D][ ] " + this.taskName + " (by: " + this.endTime + ")";
         }
         return "[D][X] " + this.taskName + " (by: " + this.endTime + ")";

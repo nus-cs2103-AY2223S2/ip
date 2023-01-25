@@ -21,7 +21,7 @@ public class Task {
 
     @Override
     public String toString() {
-        if (taskDone == false) {
+        if (!taskDone) {
             return "[ ] " + this.taskName;
         }
         return "[X] " + this.taskName;
