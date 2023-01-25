@@ -2,6 +2,9 @@ package task;
 
 import java.util.ArrayList;
 
+/**
+ * Abstraction for data structure and operations used to maintain to do list.
+ */
 public class TaskList {
     private final ArrayList<Task> records = new ArrayList<>();
 
