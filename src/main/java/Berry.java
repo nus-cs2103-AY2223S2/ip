@@ -1,12 +1,10 @@
 import java.io.FileNotFoundException;
-import java.io.IOException;
 
-public class Duke {
+public class Berry {
     private Storage storage;
     private TaskList tasks;
     private Ui ui;
-
-    public Duke(String filePath) {
+    public Berry(String filePath) {
         ui = new Ui();
         storage = new Storage(filePath);
         try {
@@ -27,7 +25,7 @@ public class Duke {
                 Command c = Parser.parse(fullCommand);
                 c.execute(tasks, ui, storage);
                 isExit = c.isExit();
-            } catch (DukeException e) {
+            } catch (BerryException e) {
                 ui.showError(e.getMessage());
             } finally {
                 ui.showLine();
@@ -36,6 +34,6 @@ public class Duke {
     }
 
     public static void main(String[] args) {
-        new Duke("data/tasks.txt").run();
+        new Berry("data/tasks.txt").run();
     }
 }

@@ -9,5 +9,5 @@ public abstract class Command {
         this.isExit = true;
     }
 
-    public abstract void execute (TaskList tasks, Ui ui, Storage storage) throws DukeException;
+    public abstract void execute (TaskList tasks, Ui ui, Storage storage) throws BerryException;
 }

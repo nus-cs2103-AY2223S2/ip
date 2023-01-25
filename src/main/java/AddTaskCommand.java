@@ -6,7 +6,7 @@ public class AddTaskCommand extends Command {
     }
 
     @Override
-    public void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
+    public void execute(TaskList tasks, Ui ui, Storage storage) throws BerryException {
         ui.showAdd();
         tasks.addTask(task);
         storage.saveTasks(tasks);

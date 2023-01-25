@@ -7,7 +7,7 @@ public class Parser {
         LIST, MARK, UNMARK, TODO, DEADLINE, EVENT, DELETE, BYE
     }
 
-    public static Command parse(String input) throws DukeException {
+    public static Command parse(String input) throws BerryException {
         String[] splitInput = input.split(" ");
         String[] listStr;
         CommandType commandType;
@@ -22,7 +22,7 @@ public class Parser {
 
         switch (commandType) {
         case BYE:
-            return new ByeCommand();
+            return new ExitCommand();
         case LIST:
             return new ListCommand();
         case MARK:
@@ -45,7 +45,7 @@ public class Parser {
         }
     }
 
-    private static void validate(CommandType commandType, String input) throws DukeException {
+    private static void validate(CommandType commandType, String input) throws BerryException {
         String com = input.split(" ")[0];
 
         switch(commandType) {

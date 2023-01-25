@@ -6,7 +6,7 @@ public class DeleteCommand extends Command {
     }
 
     @Override
-    public void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
+    public void execute(TaskList tasks, Ui ui, Storage storage) throws BerryException {
         if (tasks.indexWithinRange(taskIndex)) {
             ui.showDelete();
             tasks.deleteTask(taskIndex);
