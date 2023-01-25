@@ -1,4 +1,7 @@
+import java.util.ArrayList;
+
 public class Task {
+    public static ArrayList<Task> tasks =  new ArrayList<>(100);
     private String name;
     private boolean isDone;
 
