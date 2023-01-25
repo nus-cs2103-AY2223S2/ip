@@ -1,5 +1,8 @@
 package duke.task;
 
+/**
+ * This class creates an event with a from and to date.
+ */
 public class Event extends Task {
 
     protected String from;

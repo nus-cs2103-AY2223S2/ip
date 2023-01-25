@@ -7,6 +7,9 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 
+/**
+ * This class is a task object, when it breaks down the deadline into the respective alphanumeric form.
+ */
 public class Deadline extends Task {
 
     protected String bydate;
@@ -29,6 +32,11 @@ public class Deadline extends Task {
             this.haveFormatErr = false;
         }
     }
+
+    /**
+     * Checks if the input has an incorrect date and time format.
+     * @return boolean - true or false if there is a formatting error.
+     */
     public boolean checkFormat() {
         return this.haveFormatErr;
     }

@@ -5,6 +5,9 @@ import duke.storage.StorageList;
 import duke.task.TaskList;
 import duke.ui.Ui;
 
+/**
+ * Event command with event and from and to timing.
+ */
 public class EventCommand extends Command {
     private String message;
     private String from;

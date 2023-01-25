@@ -7,6 +7,9 @@ import duke.task.TaskList;
 import duke.ui.Ui;
 import duke.exception.DukeException;
 
+/**
+ * Main Class which runs the whole chatbot.
+ */
 public class Duke {
 
     private StorageList storage;
@@ -24,6 +27,9 @@ public class Duke {
         }
     }
 
+    /**
+     * Method which starts the program to output the various messages and checks the commands.
+     */
     public void run() {
         ui.showWelcome();
         boolean isExit = false;

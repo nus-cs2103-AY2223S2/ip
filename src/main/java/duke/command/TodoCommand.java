@@ -5,6 +5,9 @@ import duke.task.TaskList;
 import duke.task.Todo;
 import duke.ui.Ui;
 
+/**
+ * Todoclass to indicate a task needed to be completed.
+ */
 public class TodoCommand extends Command {
     private String message;
 

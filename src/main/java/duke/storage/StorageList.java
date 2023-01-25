@@ -10,6 +10,9 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Scanner;
 
+/**
+ * This class loads the path of the stored commands and updates it when the bot is closed.
+ */
 public class StorageList {
     private ArrayList<Task> list;
     private String path;
@@ -20,6 +23,12 @@ public class StorageList {
     }
 
 
+    /**
+     * This method loads the data of the previous commands from a textfile.
+     *
+     * @return ArrayList<Task> - Returns the arraylist that is loaded from the stored textfile.
+     * @throws DukeException - File not found error will cause this exception to be thrown.
+     */
     public ArrayList<Task> load() throws DukeException {
         try {
             File file = new File(this.path);
@@ -38,6 +47,10 @@ public class StorageList {
 
     }
 
+    /**
+     * This method will allow the textfile to be updated according to the current arraylist and ensure that textfile
+     * will contain the most updated data.
+     */
     public void updateStorage() {
         try {
             File dir = new File("data");

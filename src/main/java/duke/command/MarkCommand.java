@@ -4,6 +4,9 @@ import duke.storage.StorageList;
 import duke.task.TaskList;
 import duke.ui.Ui;
 
+/**
+ * Mark Command to make any task on the list to be done.
+ */
 public class MarkCommand extends Command {
     private int listNum;
 

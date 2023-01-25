@@ -4,6 +4,9 @@ import duke.storage.StorageList;
 import duke.task.TaskList;
 import duke.ui.Ui;
 
+/**
+ * Unmark command to indicate task as incomplete.
+ */
 public class UnmarkCommand extends Command {
     private int listNum;
 

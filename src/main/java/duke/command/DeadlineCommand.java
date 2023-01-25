@@ -5,6 +5,9 @@ import duke.storage.StorageList;
 import duke.task.TaskList;
 import duke.ui.Ui;
 
+/**
+ * Deadline command for the tasks with deadline.
+ */
 public class DeadlineCommand extends Command {
     private String message;
     private String timing;

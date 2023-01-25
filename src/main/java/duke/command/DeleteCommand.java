@@ -4,6 +4,9 @@ import duke.storage.StorageList;
 import duke.task.TaskList;
 import duke.ui.Ui;
 
+/**
+ * Delete Command to remove the tasks users do not want, according to its number on the list.
+ */
 public class DeleteCommand extends Command {
     private int listNum;
 

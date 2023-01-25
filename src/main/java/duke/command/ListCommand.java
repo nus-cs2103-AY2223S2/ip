@@ -7,6 +7,9 @@ import duke.ui.Ui;
 
 import java.util.ArrayList;
 
+/**
+ * List command to show the current task list.
+ */
 public class ListCommand extends Command {
     private ArrayList<Task> list;
 
