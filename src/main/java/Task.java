@@ -1,3 +1,10 @@
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
+
+/**
+ * Represents a Task object.
+ */
 public abstract class Task {
     private boolean isDone;
     private String title;
@@ -22,6 +29,12 @@ public abstract class Task {
     }
 
     public abstract String toDiskFormat();
+    LocalDateTime parseDateString(String dateString) throws DateTimeParseException {
+        return LocalDateTime.parse(dateString);
+    }
+    String dateTimeToString(LocalDateTime localDateTime) {
+        return localDateTime.format(DateTimeFormatter.ofPattern("dd MMM uuuu, HH.mm a"));
+    }
     @Override
     public String toString() {
         return String.format("[%s] %s", isDone ? "x" : " ", this.title);
