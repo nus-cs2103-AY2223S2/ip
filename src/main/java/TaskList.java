@@ -1,10 +1,11 @@
 import java.util.ArrayList;
 
 public class TaskList {
-    protected ArrayList<Task> tasks = new ArrayList<>();
+    protected ArrayList<Task> tasks;
 
     public TaskList() {
         //Default constructor for empty TaskList
+        tasks = new ArrayList<Task>();
     }
 
     //AddTask method to add ToDo
@@ -28,5 +29,9 @@ public class TaskList {
             System.out.println("     " + (i + 1) + ". " + tasks.get(i).toString());
         }
         System.out.println("    ____________________________________________________________");
+    }
+
+    public void deleteTask(int index) {
+        tasks.remove(index - 1);
     }
 }
