@@ -1,4 +1,5 @@
 import java.io.BufferedReader;
+import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.ArrayList;
@@ -60,7 +61,13 @@ public class Duke {
 
     public static void main (String[]args) throws IOException {
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
-        TaskBook tb = new TaskBook();
+        Storage sr = new Storage();
+        TaskBook tb;
+        try {
+            tb = new TaskBook(sr.retrieveTasks());
+        } catch (FileNotFoundException e) {
+            tb = new TaskBook();
+        }
         String input = "lorem ipsum";
 
         greetingDialogue();
@@ -118,6 +125,7 @@ public class Duke {
                 System.err.println(e.getMessage());
             }
         }
+        sr.saveTasks(tb);
         byeDialogue();
         br.close();
     }
