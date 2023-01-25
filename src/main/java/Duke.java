@@ -5,6 +5,10 @@ import java.util.ArrayList;
 
 public class Duke {
 
+    /**
+     * Prints the stored Tasks.
+     * @param stored
+     */
     public static void printList(ArrayList<Task> stored) {
         System.out.println("Here are the tasks in your list: ");
         for (int i = 0; i < stored.size(); i++) {
@@ -12,6 +16,7 @@ public class Duke {
             System.out.println((i+1) + ". " + task.toString());
         }
     }
+
     public static void main(String[] args) throws IOException {
         String logo = " ____        _        \n"
                 + "|  _ \\ _   _| | _____ \n"
@@ -82,7 +87,7 @@ public class Duke {
                 task.taskNotDone();
             } else if (input.startsWith("todo")) {
                 try {
-                    String pattern = "todo (?<letter>[a-z ]+)";
+                    String pattern = "todo\\s+(.*)\\s+";
                     boolean isMatch = input.matches(pattern);
                     if (!isMatch){
                         throw new DukeException("☹ OOPS!!! The description of a todo cannot be empty.");
@@ -96,7 +101,7 @@ public class Duke {
                 task.announceAdded(myTasks);
             } else if (input.startsWith("deadline")) {
                 try {
-                    String pattern = "deadline (?<letter>[a-z ]+) /by \\S+";
+                    String pattern = "deadline\\s+(.*)\\s+/by\\s+(.*)";
                     boolean isMatch = input.matches(pattern);
                     if (!isMatch){
                         throw new DukeException("☹ OOPS!!! The description of a deadline cannot be empty.");
@@ -112,7 +117,7 @@ public class Duke {
                 task.announceAdded(myTasks);
             } else if (input.startsWith("event")) {
                 try {
-                    String pattern = "event (?<letter>[a-z ]+) /from \\S+ /to \\S+";
+                    String pattern = "event\\s+(.*)\\s+/from\\s+(.*)\\s+/to\\s+(.*)";
                     boolean isMatch = input.matches(pattern);
                     if (!isMatch){
                         throw new DukeException("☹ OOPS!!! The description of a event cannot be empty.");
@@ -130,7 +135,7 @@ public class Duke {
                 task.announceAdded(myTasks);
             } else if (input.startsWith("delete")) {
                 try {
-                    String pattern = "delete \\d*";
+                    String pattern = "delete\\s+\\d*";
                     boolean isMatch = input.matches(pattern);
                     if (!isMatch){
                         throw new DukeException("☹ OOPS!!! The description of a delete cannot be empty.");
