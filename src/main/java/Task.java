@@ -1,10 +1,14 @@
 public class Task {
-    private final String name;
-    private boolean isDone;
+    final String name;
+    boolean isDone;
 
     public Task(String name) {
         this.name = name;
         this.isDone = false;
+    }
+    public  Task(String name, String isDone) {
+        this.name = name;
+        this.isDone = isDone.equals("true");
     }
 
     public String getName() {
@@ -21,7 +25,10 @@ public class Task {
         this.isDone = false;
         return false;
     }
-
+    public String saveFormat() {
+        return "T;" + this.name + ";" +this.isDone;
+    }
+    
     @Override
     public String toString() {
         String box;

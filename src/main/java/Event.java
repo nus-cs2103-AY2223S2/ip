@@ -7,6 +7,12 @@ public class Event extends Task{
         this.start = start;
         this.end = end;
     }
+    public Event(String name, String isDone, String start, String end) {
+        super(name, isDone);
+        this.start = start;
+        this.end = end;
+    }
+    
 
     public String getEnd() {
         return end;
@@ -14,6 +20,11 @@ public class Event extends Task{
 
     public String getStart() {
         return start;
+    }
+
+    @Override
+    public String saveFormat() {
+        return "E;" + this.name + ";" +this.isDone + ";" + this.start + ";" + this.end;
     }
 
     @Override
