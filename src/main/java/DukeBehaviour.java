@@ -1,4 +1,12 @@
+import com.sun.source.tree.TryTree;
+
+import java.io.*;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.ArrayList;
+import java.nio.file.Files;
+import java.util.Arrays;
+
 
 /**
  * Class to encapsulate behavior of personal assistant Duke!
@@ -7,7 +15,8 @@ import java.util.ArrayList;
 
 public class DukeBehaviour {
     Boolean isActive = true;
-    ArrayList<Task> taskList = new ArrayList<>();
+    ArrayList<Task> taskList;
+    Path dataPath;
 
     /**
      * Public constructor for the DukeBehaviour Object.
@@ -15,7 +24,56 @@ public class DukeBehaviour {
      * @return None
      */
     public DukeBehaviour() {
-        //System.out.println("DukeBehaviour constructor called...");
+        System.out.println("DukeBehaviour constructor called...");
+        System.out.println("Attempting to load data...");
+        initMemData();
+        //https://samderlust.com/dev-blog/java/write-read-arraylist-object-file-java
+
+    }
+
+    private void initMemData() {
+        Path dirPath = Paths.get(".", "data");
+        System.out.println("data path: " + dirPath.toAbsolutePath());
+        boolean directoryExists = java.nio.file.Files.exists(dirPath);
+        System.out.println("Does the data folder exist?: " + directoryExists);
+        try {
+            //This method creates a directory if it does not exist yet, but will not
+            //throw an error even if it exists, and so is safe to call.
+            Files.createDirectories(dirPath);
+        } catch (IOException e){
+            System.out.println(e.getMessage());
+        }
+
+        dataPath = Paths.get(dirPath.toString(), "DukeMem.ser");
+        boolean dataExists = java.nio.file.Files.exists(dataPath);
+        System.out.println("Does the data exist?: " + dataExists);
+        if (!dataExists) {
+            updateMem(new ArrayList<>());
+        }
+
+        try {
+            FileInputStream readData = new FileInputStream(dataPath.toString());
+            ObjectInputStream readStream = new ObjectInputStream(readData);
+            taskList = (ArrayList<Task>) readStream.readObject();
+        } catch (IOException e){
+            System.out.println("Error in loading data, previous session could not be restored.");
+            System.out.println(e.getMessage());
+            System.out.println("Creating new tasklist...");
+            taskList = new ArrayList<>();
+
+        } catch (ClassNotFoundException e) {
+            e.printStackTrace();
+        }
+    }
+
+    private void updateMem(ArrayList<Task> taskList) {
+        try {
+            FileOutputStream writeData = new FileOutputStream(dataPath.toString());
+            ObjectOutputStream writeStream = new ObjectOutputStream(writeData);
+            writeStream.writeObject(taskList);
+        }catch (IOException e){
+            System.out.println(e.getMessage());
+        }
     }
 
     /**
@@ -28,6 +86,7 @@ public class DukeBehaviour {
         try {
             if (userIn.equals("bye")) {
                 //System.out.println("exit command received, exiting...");
+                updateMem(taskList);
                 isActive = false;
             } else if (userIn.equals("list")) {
                 displayList();
