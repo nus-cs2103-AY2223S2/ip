@@ -1,8 +1,11 @@
 import java.util.*;
 import java.io.*;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 public class Duke {
     public static void main(String[] args) throws IOException {
 
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyyHHmm");
         ArrayList <Task> list = new ArrayList <Task>();
         File directory = new File("data");
         directory.mkdir();
@@ -17,9 +20,9 @@ public class Duke {
                 if( tokens[0].equals("todo"))
                     t = new Todo( tokens[2] , Boolean.parseBoolean(tokens[1]));
                 else if ( tokens[0].equals("deadline"))
-                    t = new Deadline( tokens[2],tokens[3],Boolean.parseBoolean(tokens[1]));
+                    t = new Deadline( tokens[2],LocalDateTime.parse(tokens[3]),Boolean.parseBoolean(tokens[1]));
                 else
-                    t = new Event( tokens[2],tokens[3],tokens[4],Boolean.parseBoolean(tokens[1]));
+                    t = new Event( tokens[2],LocalDateTime.parse(tokens[3]),LocalDateTime.parse(tokens[4], formatter),Boolean.parseBoolean(tokens[1]));
 
                 list.add(t);
 
@@ -80,12 +83,13 @@ public class Duke {
                     while (tk.hasMoreTokens()) {
                         String nextString = tk.nextToken();
                         if(nextString.equals("/by") ) {
-                            date = date + tk.nextToken();
-                            break;
+                            date = date + tk.nextToken() + tk.nextToken();
                         } else
                             value = value + nextString;
                     }
-                    t = new Deadline(value,date,false);
+
+                    LocalDateTime dateTime = LocalDateTime.parse(date, formatter);
+                    t = new Deadline(value,dateTime,false);
                     successToken = 1;
 
                 } else if( action.equals("event")) {
@@ -93,14 +97,17 @@ public class Duke {
                     while (tk.hasMoreTokens()) {
                         String nextString = tk.nextToken();
                         if(nextString.equals("/from") ) {
-                            from = from + tk.nextToken();
+                            from = from + tk.nextToken() + tk.nextToken();
                         } else if (nextString.equals("/to")) {
-                            to = to + tk.nextToken();
+                            to = to + tk.nextToken() + tk.nextToken();
                         } else
                             value = value + nextString;
                     }
 
-                    t = new Event(value,from,to,false);
+
+                    LocalDateTime dateTime = LocalDateTime.parse(from, formatter);
+                    LocalDateTime dateTime2 = LocalDateTime.parse(to, formatter);
+                    t = new Event(value,dateTime,dateTime2,false);
                     successToken = 1;
 
                 } else {
@@ -112,8 +119,8 @@ public class Duke {
                     System.out.println("Added : " + text);
                     System.out.println("You have a total of " + list.size() + " tasks in the list");
 
-                    FileWriter fw = new FileWriter("data/duke.txt");
-                    fw.write(t.toFile());
+                    FileWriter fw = new FileWriter("data/duke.txt",true);
+                    fw.write(t.toFile() + "\n");
                     fw.close();
 
                 } else if( missingToken == 1) {

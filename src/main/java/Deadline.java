@@ -1,8 +1,10 @@
+import java.time.LocalDateTime;
 public class Deadline extends Task {
 
-    protected String by;
+    protected LocalDateTime by;
 
-    public Deadline(String value, String by, boolean mark) {
+
+    public Deadline(String value, LocalDateTime by, boolean mark) {
         super(value,mark);
         this.by = by;
     }
