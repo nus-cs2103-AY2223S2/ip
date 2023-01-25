@@ -19,6 +19,6 @@ public class ToDos extends Task {
 
     @Override
     protected String fileMessage() {
-        return String.format("%s||%d||%s\n", getTypeIcon(), isDone ? 0 : 1, content);
+        return String.format("%s||%d||%s\n", getTypeIcon(), isDone ? 1 : 0, content);
     }
 }

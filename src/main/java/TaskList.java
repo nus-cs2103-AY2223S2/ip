@@ -57,14 +57,15 @@ public class TaskList {
     }
 
     // Create and add task given message and code. 0 - toDos, 1 - Deadlines, 2 - Event
-    protected void addTask(String message, int code) throws DukeException {
+    protected void addTask(String[] message) throws DukeException {
         Task t;
-        if (code == 0) {
-            t = new ToDos(false, new String[] {message});
-        } else if (code == 1) {
-            t = new Deadlines(false, message.split("/"));
-        } else if (code == 2) {
-            t = new Events(false, message.split("/"));
+        int length = message.length;
+        if (length == 1) {
+            t = new ToDos(false, message);
+        } else if (length == 2) {
+            t = new Deadlines(false, message);
+        } else if (length == 3) {
+            t = new Events(false, message);
         } else {
             // Unreachable as of now.
             return;

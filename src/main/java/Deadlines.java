@@ -42,7 +42,7 @@ class Deadlines extends Task {
 
     @Override
     protected String fileMessage() {
-        return String.format("%s||%d||%s||%s\n", getTypeIcon(), isDone ? 0 : 1, content, end);
+        return String.format("%s||%d||%s||%s\n", getTypeIcon(), isDone ? 1 : 0, content, end);
     }
 
 
