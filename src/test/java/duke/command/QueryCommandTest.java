@@ -1,10 +1,10 @@
 package duke.command;
 
 import duke.DukeUtils;
+import duke.Parser;
 import duke.exceptions.TaskListFullException;
 import duke.task.DeadlineTask;
 import duke.task.DukeTask;
-import duke.task.DukeTaskTest;
 import duke.task.TodoTask;
 import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.BeforeAll;
@@ -139,6 +139,49 @@ public class QueryCommandTest extends CommandTest {
         String ac3 = outContent.toString();
         outContent.reset();
         assertEquals(ui3, ac3);
+    }
 
+    @Test
+    public void testFind() {
+        s.write(new TodoTask("book 1").toDBSchema());
+        s.write(new TodoTask("paper 2").toDBSchema());
+        s.write(new TodoTask("read book now").toDBSchema());
+
+        Command search = new FindCommand("book");
+        search.execute(ts, ui);
+        for (int i = 3; i > 0; i--) {
+            s.delete(i - 1);
+        }
+
+        String expectedValidUI =
+                "      ____________________________________________________________\n" +
+                "Rick: Here are the matching tasks in your list:\n" +
+                "      1. [T][ ] book 1\n" +
+                "      2. [T][ ] read book now\n" +
+                "      ____________________________________________________________\n\n";
+        String actualValidUI = outContent.toString();
+        outContent.reset();
+        assertEquals(expectedValidUI, actualValidUI);
+
+        Command searchNoResult = new FindCommand("write");
+        searchNoResult.execute(ts, ui);
+        String expectedNoResUI =
+                "      ____________________________________________________________\n" +
+                "Rick: Here are the matching tasks in your list:\n" +
+                "      Try again. No tasks have this term.\n" +
+                "      ____________________________________________________________\n\n";
+        String actualNoResUI = outContent.toString();
+        outContent.reset();
+        assertEquals(expectedNoResUI, actualNoResUI);
+
+        Command emptySearch = Parser.parse("find");
+        emptySearch.execute(ts, ui);
+        String expectedEmptyUI =
+                "      ____________________________________________________________\n" +
+                "Rick: An empty search was attempted. Valid Usage: find {search term}\n" +
+                "      ____________________________________________________________\n\n";
+        String actualEmptyUI = outContent.toString();
+        outContent.reset();
+        assertEquals(expectedEmptyUI, actualEmptyUI);
     }
 }

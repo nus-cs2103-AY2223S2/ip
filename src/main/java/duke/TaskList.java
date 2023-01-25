@@ -136,6 +136,27 @@ public class TaskList {
         return out.toString();
     }
 
+    /**
+     * Given a search term, retrieves all tasks in the list that contain it.
+     *
+     * @param searchTerm The search term.
+     * @return The list of tasks.
+     */
+    public String searchDescription(String searchTerm) {
+        List<DukeTask> filtered = this.dfw.toList()
+                .stream()
+                .filter(dukeTask -> dukeTask.containsTerm(searchTerm))
+                .collect(Collectors.toList());
+        if (filtered.size() == 0) {
+            return "Try again. No tasks have this term.";
+        }
+        StringBuilder out = new StringBuilder();
+        for (int i = 1; i <= filtered.size(); i++) {
+            out.append(i + ". " + filtered.get(i - 1) + "\n");
+        }
+        return out.toString();
+    }
+
     @Override
     public String toString() {
         return this.dfw.toString();

@@ -39,6 +39,10 @@ public class Parser {
             return new DeadlineCommand();
         case "event":
             return new EventCommand();
+        case "find":
+            return new ErrorCommand(
+                    "An empty search was attempted. Valid Usage: find {search term}"
+            );
         default:
             if (cmd.matches("(mark|unmark|delete)")) {
                 return new ErrorCommand(new DukeTaskIndexMissingException(cmd));
@@ -65,6 +69,8 @@ public class Parser {
             return new EventCommand(param);
         case "tasks":
             return new DateFilterCommand(param);
+        case "find":
+            return new FindCommand(param);
         default:
             if (cmd.matches("(mark|unmark|delete)")) {
                 return manipulateCommand(cmd, param);

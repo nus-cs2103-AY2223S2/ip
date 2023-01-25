@@ -96,5 +96,14 @@ public abstract class DukeTask {
         return null;
     }
 
+    /**
+     * Indicate if this task's description contains the given term.
+     * @param term The provided term.
+     * @return The indicative boolean.
+     */
+    public boolean containsTerm(String term) {
+        return this.value.contains(term);
+    }
+
     public abstract boolean isOnDate(LocalDate dt);
 }
