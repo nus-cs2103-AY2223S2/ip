@@ -2,9 +2,13 @@ public abstract class Task {
     protected String description;
     protected boolean isDone;
 
-    public Task(String description) {
+    public Task(String description, boolean status) {
         this.description = description;
-        this.isDone = false;
+        this.isDone = status;
+    }
+
+    public boolean getStatus() {
+        return isDone;
     }
 
     public String getStatusIcon() {
@@ -12,6 +16,8 @@ public abstract class Task {
     }
 
     public abstract String getTaskTypeIcon();
+
+    public abstract String fileFormat();
 
     public void markAsDone() {
         this.isDone = true;
