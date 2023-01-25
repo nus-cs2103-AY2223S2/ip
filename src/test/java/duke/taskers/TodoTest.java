@@ -21,12 +21,12 @@ public class TodoTest {
     @Test
     public void testStatusTrueString() {
         Todo t = new Todo("eat mooncakes", true);
-        assertEquals("TODO / 1 / eat mooncakes", t.formatStringForFile());
+        assertEquals("TODO / 1 / eat mooncakes", t.statusStringForFile());
     }
 
     @Test
     public void testStatusFalseString() {
         Todo t = new Todo("run a marathon", false);
-        assertEquals("TODO / 0 / run a marathon", t.formatStringForFile());
+        assertEquals("TODO / 0 / run a marathon", t.statusStringForFile());
     }
 }
