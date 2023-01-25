@@ -1,6 +1,9 @@
 package duke;
 
+import java.io.ByteArrayOutputStream;
+import java.io.IOException;
 import java.io.InputStream;
+import java.io.OutputStream;
 import java.io.PrintStream;
 
 import javafx.application.Application;
@@ -9,6 +12,8 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextField;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Region;
 import javafx.scene.layout.VBox;
@@ -19,6 +24,7 @@ import duke.database.DukeRepo;
 import duke.database.DukeRepoImpl;
 import duke.exception.DukeException;
 import duke.parser.Parser;
+import duke.ui.DialogBox;
 import duke.ui.Ui;
 
 /**
@@ -29,12 +35,23 @@ public class Duke extends Application{
     private DukeRepo db;
     private Ui ui;
 
+    private VBox dialogContainer;
+    private TextField userInput;
+    private ScrollPane scrollPane;
+    private Button sendButton;
+    private Scene scene;
+
+    private Image user = new Image(this.getClass().getResourceAsStream("/images/DaUser.png"));
+    private Image duke = new Image(this.getClass().getResourceAsStream("/images/DaDuke.png"));
+
+    private ByteArrayOutputStream out = new ByteArrayOutputStream();
+
     /**
      * Default constructor.
      */
     public Duke() {
         db = new DukeRepoImpl();
-        ui = new Ui();
+        ui = new Ui(System.in, new PrintStream(out));
     }
 
     /**
@@ -67,17 +84,19 @@ public class Duke extends Application{
     }
 
     /**
+     * Main entry
+     *
+     * @param args
+     */
+    public static void main(String[] args) {
+        new Duke().run();
+    }
+
+    /**
      * Entry point for JavaFx
      */
     @Override
     public void start(Stage stage) {
-        //Step 1. Setting up required components
-        ScrollPane scrollPane;
-        VBox dialogContainer;
-        TextField userInput;
-        Button sendButton;
-        Scene scene;
-
         //The container for the content of the chat to scroll.
         scrollPane = new ScrollPane();
         dialogContainer = new VBox();
@@ -123,19 +142,13 @@ public class Duke extends Application{
         AnchorPane.setLeftAnchor(userInput , 1.0);
         AnchorPane.setBottomAnchor(userInput, 1.0);
 
-        //Step 3. Add functionality to handle user input.
+        //Part 3. Add functionality to handle user input.
         sendButton.setOnMouseClicked((event) -> {
-            if (!userInput.getText().isBlank()) {
-                dialogContainer.getChildren().add(getDialogLabel(userInput.getText()));
-                userInput.clear();
-            }
+            handleUserInput();
         });
 
         userInput.setOnAction((event) -> {
-            if (!userInput.getText().isBlank()) {
-                dialogContainer.getChildren().add(getDialogLabel(userInput.getText()));
-                userInput.clear();
-            }
+            handleUserInput();
         });
 
         //Scroll down to the end every time dialogContainer's height changes.
@@ -143,26 +156,37 @@ public class Duke extends Application{
     }
 
     /**
-     * Iteration 1:
-     * Creates a label with the specified text and adds it to the dialog container.
-     *
-     * @param text String containing text to add
-     * @return a label with the specified text that has word wrap enabled.
+     * Iteration 2:
+     * Creates two dialog boxes, one echoing user input and the other containing Duke's reply and then appends them to
+     * the dialog container. Clears the user input after processing.
      */
-    private Label getDialogLabel(String text) {
-        Label textToAdd = new Label(text);
-        textToAdd.setWrapText(true);
+    private void handleUserInput() {
+        if (userInput.getText().isBlank()) {
+            return;
+        }
 
-        return textToAdd;
+        Label userText = new Label(userInput.getText());
+        Label dukeText = new Label(getResponse(userInput.getText()));
+        dialogContainer.getChildren().addAll(
+                new DialogBox(userText, new ImageView(user)),
+                new DialogBox(dukeText, new ImageView(duke))
+        );
+        userInput.clear();
     }
 
     /**
-     * Main entry
-     *
-     * @param args
+     * Generate a response to user input.
      */
-    public static void main(String[] args) {
-        new Duke().run();
+    private String getResponse(String input) {
+        try {
+            //TODO: redirect output stream to ui
+            Command c = Parser.parse(input);
+            c.execute(db, ui);
+            return out.toString();
+        } catch (DukeException e) {
+            return e.getMessage();
+        }
     }
+
 
 }
