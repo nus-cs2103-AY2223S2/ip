@@ -1,3 +1,5 @@
+package Duke;
+
 import java.util.HashMap;
 
 public class ToDo extends Task {

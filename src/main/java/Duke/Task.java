@@ -1,3 +1,5 @@
+package Duke;
+
 public abstract class Task {
 
     protected String task;
