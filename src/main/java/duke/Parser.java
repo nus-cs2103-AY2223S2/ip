@@ -3,15 +3,32 @@ package duke;
 import java.time.LocalDate;
 import java.util.Arrays;
 
+/**
+ * Represents a parser that can read the input and execute the corresponding command
+ */
+
 public class Parser {
+
+    /**
+     * check if input string has less than 2 words *
+     * 
+     * @param splitInput Array of words in input string
+     * @return true if splitInput < 2 else false
+     */
+    
     public static boolean checkDescription(String[] splitInput) {
         return splitInput.length < 2;
     }
 
+    /**
+     * Convert input string to LocalDate type
+     * @param splitInput Array of words in input string
+     * @return LocalDate object of parsed input string else null
+     */
+    
     public static LocalDate getDate(String[] splitInput) {
         if (splitInput.length >= 4) {
             if (splitInput[splitInput.length - 2].equals("/by")) {
-
                 try {
                     // in form yyyy-mm-dd
                     LocalDate taskDateTime = LocalDate
@@ -24,6 +41,14 @@ public class Parser {
         }
         return null;
     }
+
+    /**
+     * parses Input and execute corresponding command
+     * @param input User string input
+     * @param TaskList list of tasks
+     * @return true if the command requires saving to storage else false
+     * @throws DukeException If command cannot be understood
+     */
 
     public boolean parse(String input, TaskList toDoList) throws DukeException {
         String[] splitInput = input.split(" ");

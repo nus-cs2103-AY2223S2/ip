@@ -3,18 +3,35 @@ package duke;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
+/**
+ * Represents a task. A Task object corresponds to a task that represented by its completion status(done),description and deadline
+ */
+
 public class Task {
     private boolean done;
-    // private String type;
-
     private String description;
     private LocalDate deadline;
+
+    /**
+     * initialises an task object with the given description
+     * 
+     * @param description description of task
+     */
 
     public Task(String description) {
         this.description = description;
         this.done = false;
         this.deadline = null;
     }
+
+    /**
+     * initialises an task object with the given description and deadline
+     * 
+     * @param description description of task
+     * @param deadline deadline of task
+     */
+
+
 
     public Task(String description, LocalDate deadline) {
         this.description = description;
