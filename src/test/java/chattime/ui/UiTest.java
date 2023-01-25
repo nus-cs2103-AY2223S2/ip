@@ -6,8 +6,8 @@ import org.junit.jupiter.api.Test;
 
 public class UiTest {
     @Test
-    public void getExitStatus() {
+    public void getExecuteStatus() {
         Ui test = new Ui();
-        assertTrue(test.getExitStatus());
+        assertTrue(test.getExecuteStatus());
     }
 }

@@ -1,5 +1,6 @@
 package chattime.command;
 
+
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
@@ -8,14 +9,30 @@ import chattime.storage.Storage;
 import chattime.task.Task;
 import chattime.ui.Ui;
 
+/**
+ * Represents ListCommand object that handles main logic of returning current task list items.
+ */
 public class ListCommand extends Command {
 
     private LocalDate requestedDate;
 
+    /**
+     * Creates ListCommand object to execute display list logic, with date search or without.
+     *
+     * @param date Specific date when relevant tasks take place, null if not specified.
+     */
     public ListCommand(LocalDate date) {
         requestedDate = date;
     }
 
+    /**
+     * Implements and executes main logic of ListCommand object.
+     * Assign cases into displayList and listTime.
+     *
+     * @param ui UI instance of bot.
+     * @param taskList Current task list storing tasks.
+     * @param storage Storage file to store current state items of task list.
+     */
     @Override
     public void execute(Ui ui, TaskList taskList, Storage storage) {
         if (requestedDate == null) {
@@ -25,7 +42,13 @@ public class ListCommand extends Command {
         }
     };
 
-    public void displayList(Ui ui, TaskList taskList) {
+    /**
+     * Executes logic of displaying basic task list, without time search.
+     *
+     * @param ui UI instance of bot.
+     * @param taskList Current task list storing tasks.
+     */
+    private void displayList(Ui ui, TaskList taskList) {
         if (taskList.getList().size() == 0) {
             ui.warnEmptyList();
 
@@ -42,7 +65,13 @@ public class ListCommand extends Command {
         }
     }
 
-    public void listTime(Ui ui, TaskList taskList) {
+    /**
+     * Executes logic of displaying task list, filters task objects with time search.
+     *
+     * @param ui UI instance of bot.
+     * @param taskList Current task list storing tasks.
+     */
+    private void listTime(Ui ui, TaskList taskList) {
         if (taskList.getList().size() == 0) {
             ui.warnEmptyList();
 
