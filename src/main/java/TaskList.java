@@ -1,14 +1,14 @@
 import java.util.ArrayList;
 
-public class TaskBook {
+public class TaskList {
     private static String HOR_BAR = "✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦";
 
     private static ArrayList<Task> listOfTasks;
 
-    public TaskBook() {
+    public TaskList() {
         this.listOfTasks = new ArrayList<Task>();
     }
-    public TaskBook(ArrayList<Task> listOfTasks) {
+    public TaskList(ArrayList<Task> listOfTasks) {
         this.listOfTasks = listOfTasks;
     }
 
