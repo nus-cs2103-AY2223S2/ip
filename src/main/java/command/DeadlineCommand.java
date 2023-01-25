@@ -1,5 +1,6 @@
 package command;
 
+import java.time.format.DateTimeParseException;
 import exception.DukeException;
 import task.Deadline;
 import task.TaskList;
@@ -20,7 +21,7 @@ public class DeadlineCommand extends Command {
      * deadline requires taskName and EndDate
      */
     @Override
-    public void execute() throws DukeException {
+    public void execute() throws DukeException, DateTimeParseException {
         String taskName = getTaskName("deadline", command);
         String endDate = getEndDate("deadline", command);
 

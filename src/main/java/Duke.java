@@ -1,5 +1,13 @@
+<<<<<<< HEAD
 import java.io.*;
 import java.util.Scanner;
+=======
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.time.format.DateTimeParseException;
+import java.util.ArrayList;
+>>>>>>> branch-Level-8
 
 import command.*;
 import exception.DukeException;
@@ -108,6 +116,8 @@ public class Duke {
                 System.out.println("    " + e.getMessage());
             } catch (IllegalArgumentException e) {
                 System.out.println("    ☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
+            } catch (DateTimeParseException e) {
+                System.out.println("    ☹ OOPS!!! Invalid datetime. Syntax: YYYY-MM-DD");
             }
         }
     }

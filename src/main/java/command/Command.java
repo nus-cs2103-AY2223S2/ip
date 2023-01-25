@@ -27,9 +27,9 @@ public abstract class Command {
             String endWord = type.equals("deadline") ? " /by" : " /from";
 
             int startIndex = command.indexOf(startWord) + startWord.length();
-            if (startIndex < startWord.length()) throw new DukeException("☹ OOPS!!! Missing Task Name.");
             int endIndex = command.indexOf(endWord);
-            if (endIndex == -1) throw new DukeException("☹ OOPS!!! Missing" + endWord + " keyword.");
+            if (startIndex < startWord.length() || endIndex < startIndex) throw new DukeException("☹ OOPS!!! Missing Task Name.");
+            if (endIndex == -1 ) throw new DukeException("☹ OOPS!!! Missing" + endWord + " keyword.");
             return command.substring(startIndex, endIndex);
         }
     }
@@ -42,8 +42,8 @@ public abstract class Command {
         String startWord = "/from";
         String endWord = " /to";
         int startIndex = command.indexOf(startWord) + startWord.length() + 1;
-        if (startIndex > command.length()) throw new DukeException("☹ OOPS!!! Missing Start Date.");
         int endIndex = command.indexOf(endWord);
+        if (startIndex > command.length() || endIndex < startIndex) throw new DukeException("☹ OOPS!!! Missing Start Date.");
         if (endIndex == -1) throw new DukeException("☹ OOPS!!! Missing" + endWord + " keyword.");
         return command.substring(startIndex, endIndex);
     }

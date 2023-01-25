@@ -1,16 +1,19 @@
 package task;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
+
 public class Deadline extends Task {
 
-    private String endDate;
-
-    public Deadline(String task, String endDate) {
+    private LocalDate endDate;
+    public Deadline(String task, String endDate) throws DateTimeParseException {
         super(task, false);
-        this.endDate = endDate;
+        this.endDate = LocalDate.parse(endDate);
     }
 
     public Deadline(String task, boolean isCompleted, String endDate) {
         super(task, isCompleted);
-        this.endDate = endDate;
+        this.endDate = LocalDate.parse(endDate);
     }
 
     @Override
@@ -30,6 +33,7 @@ public class Deadline extends Task {
 
     @Override
     public String toString() {
-        return "[D]" + super.toString() + " (by: " + endDate + ")";
+        return "[D]" + super.toString()
+                + " (by: " + endDate.format(DateTimeFormatter.ofPattern("MMM d yyyy")) + ")";
     }
 }
