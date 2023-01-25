@@ -1,0 +1,4 @@
+T0mmm
+T0return book
+D0read book  /by  tomorrow
+E0book admire  /from  tomorrow  /to  Wednesday
