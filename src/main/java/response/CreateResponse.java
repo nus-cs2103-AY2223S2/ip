@@ -27,7 +27,7 @@ public class CreateResponse extends Response {
      * @return String to indicate that a new task was created successfully
      */
     @Override
-    public String exec(ToDoList toDoList) {
+    public String exec(ToDoList toDoList) throws MissingArgumentException{
         if (this.todo.equals("")) {
             throw new MissingArgumentException("The description of a todo cannot be empty.");
         }

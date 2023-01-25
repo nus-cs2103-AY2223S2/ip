@@ -99,7 +99,7 @@ public class InputParser {
     /**
      * Some preprocessing to categorise what type of request the user is inputting
      */
-    public void categorisation() {
+    public void categorisation() throws MissingArgumentException, InvalidArgumentException {
         String normalisedInput = normaliseAllWhitespaces(input);
         String[] arrStr = normalisedInput.split(" ", 2);
 

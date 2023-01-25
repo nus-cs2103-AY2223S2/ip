@@ -29,7 +29,7 @@ public class EventResponse extends Response {
      * @return String to indicate that a new event was created successfully
      */
     @Override
-    public String exec(ToDoList toDoList) {
+    public String exec(ToDoList toDoList) throws MissingArgumentException, InvalidArgumentException {
         String[] splitFrom = event.split(" /from ", 2);
         String des = splitFrom[0].trim();
         if (des.equals("")) {

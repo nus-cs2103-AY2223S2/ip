@@ -29,7 +29,7 @@ public class DeadlineResponse extends Response {
      * @return String to indicate that a new deadline was created successfully
      */
     @Override
-    public String exec(ToDoList toDoList) {
+    public String exec(ToDoList toDoList) throws MissingArgumentException, InvalidArgumentException{
         // Parsing the String to get the task description and deadline
         String[] splitBy = deadline.split(" /by ", 2);
         String des = splitBy[0].trim();

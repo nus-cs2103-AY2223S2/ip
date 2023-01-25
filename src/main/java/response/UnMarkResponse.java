@@ -13,7 +13,7 @@ public class UnMarkResponse extends Response {
      */
     private Integer idxToMark;
 
-    public UnMarkResponse(String inputContent) {
+    public UnMarkResponse(String inputContent) throws InvalidArgumentException {
         try {
             this.idxToMark = Integer.parseInt(inputContent);
         } catch (NumberFormatException e) {

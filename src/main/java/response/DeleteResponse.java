@@ -13,7 +13,7 @@ public class DeleteResponse extends Response {
      */
     private Integer idxToMark;
 
-    public DeleteResponse(String inputContent) {
+    public DeleteResponse(String inputContent) throws InvalidArgumentException {
         try {
             this.idxToMark = Integer.parseInt(inputContent);
         } catch (NumberFormatException e) {
