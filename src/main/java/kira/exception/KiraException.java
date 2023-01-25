@@ -9,4 +9,8 @@ public class KiraException extends Exception {
     public KiraException(String msg) {
         super(msg);
     }
+
+    public KiraException() {
+        super();
+    }
 }

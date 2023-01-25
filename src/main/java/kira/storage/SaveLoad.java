@@ -54,6 +54,9 @@ public class SaveLoad {
                 String[] parsed = task.split("\",\"");
                 switch (TaskType.valueOf(parsed[0])) {
                 case TODO:
+                    if (parsed.length != 3) {
+                        throw new KiraException();
+                    }
                     ToDo tdo = new ToDo(parsed[1]);
                     if (parsed[2].equals("y")) {
                         tdo.mark();
@@ -61,6 +64,9 @@ public class SaveLoad {
                     taskList.add(tdo);
                     break;
                 case DEADLINE:
+                    if (parsed.length != 4) {
+                        throw new KiraException();
+                    }
                     Deadline deadline = new Deadline(parsed[1], parsed[3]);
                     if (parsed[2].equals("y")) {
                         deadline.mark();
@@ -68,6 +74,9 @@ public class SaveLoad {
                     taskList.add(deadline);
                     break;
                 case EVENT:
+                    if (parsed.length != 5) {
+                        throw new KiraException();
+                    }
                     Event evt = new Event(parsed[1], parsed[3], parsed[4]);
                     if (parsed[2].equals("y")) {
                         evt.mark();
@@ -81,6 +90,8 @@ public class SaveLoad {
             StringBuilder msg = new StringBuilder("Error encountered when loading file.");
             msg.append("\nIgnore this if it is your first time using!");
             throw new KiraException(msg.toString());
+        } catch (KiraException e) {
+            throw new KiraException("It seems that the save file is corrupted...");
         }
         return taskList;
     }
