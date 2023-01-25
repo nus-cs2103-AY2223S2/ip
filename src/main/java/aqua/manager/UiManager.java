@@ -92,7 +92,7 @@ public class UiManager {
     }
 
 
-    public String getExceptionReply(Throwable ex) {
+    private String getExceptionReply(Throwable ex) {
         try {
             throw ex;
         } catch (IllegalSyntaxException syntaxEx) {
@@ -110,12 +110,7 @@ public class UiManager {
 
     /** Prints the greeting message. */
     public void greet() {
-        reply(getMessageGreeting());
-    }
-
-
-    public String getMessageGreeting() {
-        return MESSAGE_GREETING;
+        reply(MESSAGE_GREETING);
     }
 
 
@@ -123,12 +118,7 @@ public class UiManager {
      * Prints the message to signal that tasks have successfully been loaded.
      */
     public void replyLoadSuccess() {
-        reply(getMessageLoadSuccess());
-    }
-
-
-    public String getMessageLoadSuccess() {
-        return MESSAGE_LOAD_SUCCESS;
+        reply(MESSAGE_LOAD_SUCCESS);
     }
 
 
@@ -142,7 +132,7 @@ public class UiManager {
     }
 
 
-    public String formatMessage(String msg) {
+    private String formatMessage(String msg) {
         StringBuilder builder = new StringBuilder();
         try (Scanner scanner = new Scanner(msg)) {
             while (scanner.hasNextLine()) {
