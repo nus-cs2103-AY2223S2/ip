@@ -1,7 +1,8 @@
-import exception.InvalidCommandException;
-import exception.MissingTaskDescriptionException;
-import exception.TaskFactoryException;
-import exception.TreeBotException;
+import exception.*;
+
+import java.time.DateTimeException;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 
 public class TaskFactory {
     public Task make(String instruction) throws TaskFactoryException {
@@ -19,7 +20,7 @@ public class TaskFactory {
             default:
 
             }
-        } catch (MissingTaskDescriptionException e) {
+        } catch (MissingTaskDescriptionException | InvalidDateTimeFormatException e) {
             throw e;
         }
         return null;
@@ -36,26 +37,45 @@ public class TaskFactory {
         return new Todo(taskDescription);
     }
 
-    private Task makeDeadline(String instruction){
+    private Task makeDeadline(String instruction) throws InvalidDateTimeFormatException {
         String[] splitStr = instruction.split("\\s+", 2);
         String taskDescription = splitStr[1].split(" /by ")[0];
         String taskDeadline =splitStr[1].split(" /by ")[1];
+        try {
+            LocalDateTime taskDeadlineDateTime = parseDate(taskDeadline);
+            return new Deadline(taskDescription, taskDeadlineDateTime);
+        } catch (DateTimeException e) {
+            throw new InvalidDateTimeFormatException("Invalid date time format for deadline");
+        }
 
-        return new Deadline(taskDescription, taskDeadline);
     }
 
-    private Task makeEvent(String instruction) {
+    private Task makeEvent(String instruction) throws InvalidDateTimeFormatException {
         String[] splitStr = instruction.split("\\s+", 2);
         String taskDescription = splitStr[1].split(" /from ")[0];
         String taskStart =splitStr[1].split(" /from ")[1].split(" /to ")[0];
         String taskEnd =splitStr[1].split(" /from ")[1].split(" /to ")[1];
 
-        return new Event(taskDescription, taskStart, taskEnd);
-
+        try {
+            LocalDateTime taskStartDateTime = parseDate(taskStart);
+            LocalDateTime taskEndDateTime = parseDate(taskEnd);
+            return new Event(taskDescription, taskStartDateTime, taskEndDateTime);
+        } catch (DateTimeException e) {
+            throw new InvalidDateTimeFormatException("invalid date time format");
+        }
 
     }
 
+    private LocalDateTime parseDate(String dateString) {
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("d/M/yyyy HHmm");
+        try {
+            LocalDateTime dateTime = LocalDateTime.parse(dateString, formatter);
+            return dateTime;
+        } catch (DateTimeException e) {
+           throw e;
+        }
 
 
+    }
 
 }
