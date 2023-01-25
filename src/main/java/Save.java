@@ -22,12 +22,14 @@ public class Save {
 
     public static void autoSave(ArrayList<Task> listOfTasks) throws IOException{
         // Get the directory of from our root.
-        String root = Paths.get(".").toAbsolutePath().normalize().toString();
+        String root = Paths.get(".").toRealPath().normalize().toString();
+        // System.out.println(root);
         // Make sure that it is independent of the OS.
         String PATH = java.nio.file.Paths.get(root,"src", "data", "duke.txt").toString();
-
+        // System.out.println(PATH);
         // Ensures that even if the file does not exist, a new one is created each time.
         File f = new File(PATH);
+        // System.out.println(f.exists());
         FileWriter fw = new FileWriter(f.getAbsolutePath());
         try {
             if (listOfTasks.size() == 0) {
