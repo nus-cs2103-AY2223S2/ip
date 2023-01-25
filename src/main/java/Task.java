@@ -19,9 +19,17 @@ public class Task {
         return this.taskName;
     }
 
+    public String toLog() {
+        if (this.isMarked) {
+            return (" | 1 | " + this.taskName);
+        } else {
+            return(" | 0 | " + this.taskName);
+        }
+    }
+
     @Override
     public String toString() {
-        if (this.isMarked == true) {
+        if (this.isMarked) {
             return ("[X] " + this.taskName);
         } else {
             return ("[ ] " + this.taskName);

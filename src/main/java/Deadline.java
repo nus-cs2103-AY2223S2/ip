@@ -7,6 +7,11 @@ public class Deadline extends Task{
     }
 
     @Override
+    public String toLog() {
+        return "D" + super.toLog() + "| " + this.deadline + "\n";
+    }
+
+    @Override
     public String toString() {
         return "[D]" + super.toString() + "(by: " + this.deadline + ")";
     }

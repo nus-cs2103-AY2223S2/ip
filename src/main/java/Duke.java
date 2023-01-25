@@ -1,8 +1,44 @@
 import java.util.ArrayList;
 import java.util.Scanner;
+import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
 
 public class Duke {
+
+    static ArrayList<Task> taskArray = new ArrayList<>();
+
+    private static void updateLog() {
+        try {
+            FileWriter taskLog = new FileWriter("data/Duke.txt");
+            for (Task i : taskArray) {
+                taskLog.write(i.toLog());
+            }
+            taskLog.close();
+        } catch (IOException e) {
+            System.out.println("An error occured.");
+            e.printStackTrace();
+        }
+    }
+
     public static void main(String[] args) throws DukeException {
+
+        try {
+            File dataFolder = new File("data");
+            if (!dataFolder.exists()) {
+                dataFolder.mkdir();
+                System.out.println("Folder created: " + dataFolder.getName());
+            }
+            File taskLog = new File("data/Duke.txt");
+            if (!taskLog.exists()) {
+                taskLog.createNewFile();
+                System.out.println("File created: " + taskLog.getName());
+            }
+        } catch (IOException e) {
+            System.out.println("An error occurred.");
+            e.printStackTrace();
+        }
+
         String logo = " ____        _        \n"
                 + "|  _ \\ _   _| | _____ \n"
                 + "| | | | | | | |/ / _ \\\n"
@@ -20,14 +56,14 @@ public class Duke {
         System.out.println("Hello I'm Duke\n"
                 + "What can I do for you?\n");
 
-        ArrayList<Task> taskArray = new ArrayList<>();
         Scanner sc = new Scanner(System.in);
 
-        while(sc.hasNextLine()) {
-            String input = sc.nextLine();
-            String instruction =  input.split(" ")[0];
 
-            switch(instruction) {
+        while (sc.hasNextLine()) {
+            String input = sc.nextLine();
+            String instruction = input.split(" ")[0];
+
+            switch (instruction) {
                 case "bye":
                     System.out.println("Bye. Hope to see you again soon!");
                     return;
@@ -44,7 +80,8 @@ public class Duke {
                     toMarkTask.markTask();
 
                     System.out.println("Nice! I've marked this task as done:\n   "
-                                        + toMarkTask + "\n");
+                            + toMarkTask + "\n");
+                    updateLog();
                     break;
                 case "unmark":
                     int toUnMark = input.charAt(7) - 48;
@@ -53,6 +90,7 @@ public class Duke {
 
                     System.out.println("OK, I've marked this task as not done yet:\n   "
                             + toUnMarkTask + "\n");
+                    updateLog();
                     break;
                 case "todo":
                     try {
@@ -62,6 +100,7 @@ public class Duke {
                         System.out.println("Got it. I've added this task:\n   "
                                 + toDoTask
                                 + "\nNow you have " + taskArray.size() + " tasks in your list\n");
+                        updateLog();
                     } catch (StringIndexOutOfBoundsException e) {
                         throw new DukeException("☹ OOPS!!! The description of a todo cannot be empty.");
                     }
@@ -77,6 +116,7 @@ public class Duke {
                     System.out.println("Got it. I've added this task:\n   "
                             + deadlineTask
                             + "\nNow you have " + taskArray.size() + " tasks in your list\n");
+                    updateLog();
                     break;
                 case "event":
                     String[] eSegments = input.split("/");
@@ -90,6 +130,7 @@ public class Duke {
                     System.out.println("Got it. I've added this task:\n   "
                             + eventTask
                             + "\nNow you have " + taskArray.size() + " tasks in your list\n");
+                    updateLog();
                     break;
                 case "delete":
                     int taskNumber = Integer.parseInt(input.split(" ")[1]);
@@ -99,6 +140,7 @@ public class Duke {
                     System.out.println("Got it. I've removed this task:\n   "
                             + toDelete
                             + "\nNow you have " + taskArray.size() + " tasks in your list\n");
+                    updateLog();
                     break;
                 default:
                     throw new DukeException("☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
