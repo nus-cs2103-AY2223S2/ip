@@ -6,6 +6,7 @@ public abstract class Task {
         this.taskDescription = taskDescription;
     }
 
+
     public void markAsDone() {
         this.isDone = true;
     }
@@ -15,6 +16,7 @@ public abstract class Task {
     }
 
     abstract public String toStorageFormatString();
+
 
     @Override
     public String toString() {

@@ -2,6 +2,8 @@ import exception.InvalidCommandException;
 import exception.TaskFactoryException;
 import exception.TreeBotException;
 
+import java.io.File;
+import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -13,6 +15,7 @@ public class TreeBot {
     private TaskFactory taskFactory = new TaskFactory();
     public void start() {
         greet();
+        loadTasks();
         listen();
     }
     private void listen() {
@@ -97,17 +100,51 @@ public class TreeBot {
         try {
             FileWriter fw = new FileWriter("data/treebot.txt");
             for (Task task : this.tasks) {
-                System.out.println(task.toStorageFormatString());
                 fw.write(task.toStorageFormatString() + System.lineSeparator());
             }
             fw.close();
-
-
-        } catch (IOException e) {
+        } catch (FileNotFoundException e) {
             System.out.println("file does not exist");
+        } catch (IOException e) {
+            System.out.println(e.getMessage());
+        }
+    }
+    private void loadTasks() {
+        try {
+            File f = new File("data/treebot.txt");
+            Scanner s = new Scanner(f);
+            while (s.hasNext()) {
+                String formatString = s.nextLine();
+                this.tasks.add(formatStringToTask(formatString));
+            }
+        } catch (FileNotFoundException e) {
+            System.out.println("file is not found");
+        }
+    }
+    private Task formatStringToTask(String formatString) {
+        String[] splitStr = formatString.split("\\|");
+        Task task;
+        switch (splitStr[0]) {
+        case "T":
+            task = new Todo(splitStr[2]);
+            break;
+        case "D":
+            task =  new Deadline(splitStr[2],splitStr[3]);
+            break;
+        case "E":
+            task = new Event(splitStr[2], splitStr[3], splitStr[4]);
+            break;
+        default:
+            task =  null;
+
         }
 
+        if (splitStr[1].equals("1")) {
+           task.markAsDone();
+           return task;
+        }
 
+        return task;
     }
 
     private void exit() {
