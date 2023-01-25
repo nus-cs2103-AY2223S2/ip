@@ -1,11 +1,12 @@
 public class Parser {
-    public static boolean handleGeneralCommand(String command, TaskList tasks) throws DukeInputError {
+    public static boolean handleGeneralCommand(String command, TaskList tasks) throws DukeException {
         if (command.startsWith("list")) {
             tasks.listTasks();
         } else if ((command.startsWith("mark")) || (command.startsWith("unmark")) ||
                 command.startsWith("delete")) {
             tasks.manageTask(command);
         } else if (command.equals("bye")) {
+            tasks.saveTaskList();
             System.out.println("    Bye. Hope to see you again soon!");
             return false;
         } else if (command.startsWith("event")){
@@ -16,7 +17,7 @@ public class Parser {
             ToDo.createToDo(command, tasks);
         }
         else {
-            throw new DukeInputError("invalid");
+            throw new DukeException("invalid");
         }
         return true;
     }

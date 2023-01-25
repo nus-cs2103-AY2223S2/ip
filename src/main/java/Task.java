@@ -7,6 +7,7 @@ public class Task {
     protected boolean completed = false;
     protected String taskType = "T";
     protected static int numTasks = 0;
+    protected boolean deleted = false;
 
     public Task(String taskName) {
         this.taskName = taskName;
@@ -47,6 +48,10 @@ public class Task {
         } catch (IOException e) {
             System.out.println("Unable to save information into the file");
         }
+    }
+
+    public String saveTaskString() {
+        return String.format("%s|%b|%s", this.taskType, this.deleted, this.taskName);
     }
 
     @Override

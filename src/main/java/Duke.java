@@ -1,53 +1,61 @@
-import java.util.Scanner;
+import java.io.IOException;
 
 public class Duke {
-    protected static TaskList tasks = new TaskList();
-    protected static String divider = "    ____________________________________________________________";
+    private static TaskList tasks = new TaskList();
+    private static String divider = "    ____________________________________________________________";
+    private Ui ui;
+    private Storage storage;
 
-    public static void main(String[] args) {
-        String logo = "     ____        _        \n"
-                + "    |  _ \\ _   _| | _____ \n"
-                + "    | | | | | | | |/ / _ \\\n"
-                + "    | |_| | |_| |   <  __/\n"
-                + "    |____/ \\__,_|_|\\_\\___|\n";
-        System.out.println(divider);
-        System.out.println("    Hello! I'm Duke");
-        System.out.println("    What can I do for you?");
-        System.out.println(divider);
-        Scanner sc = new Scanner(System.in);
+    public void run(){
         boolean repeat = true;
         while (repeat) {
-            String command = sc.nextLine();
+            String command = ui.nextInput();
             System.out.println(divider);
             try {
                 repeat = Parser.handleGeneralCommand(command, tasks);
-            } catch (DukeInputError e) {
+            } catch (DukeException e) {
                 System.out.println(e);
             }
             System.out.println(divider);
         }
-        sc.close();
+        try {
+            storage.saveTasks(tasks);
+        } catch (IOException e) {
+            System.out.println("Unable to save");
+        }
+        ui.closeCommand();
     }
 
-    public static boolean handleGeneralCommand(String command) throws DukeInputError {
-        if (command.startsWith("list")) {
-            tasks.listTasks();
-        } else if ((command.startsWith("mark")) || (command.startsWith("unmark")) ||
-                command.startsWith("delete")) {
-            tasks.manageTask(command);
-        } else if (command.equals("bye")) {
-            System.out.println("    Bye. Hope to see you again soon!");
-            return false;
-        } else if (command.startsWith("event")){
-            Event.createEvent(command, tasks);
-        } else if (command.startsWith("deadline")) {
-            DeadlineTask.createDeadlineTask(command, tasks);
-        } else if (command.startsWith("todo")) {
-            ToDo.createToDo(command, tasks);
+//    public static void main(String[] args) {
+////        Duke d = new Duke("data/", "tasks.txt");
+//        boolean repeat = true;
+//        Scanner sc = new Scanner(System.in);
+//        while (repeat) {
+//            String command = sc.nextLine();
+//            System.out.println(divider);
+//            try {
+//                repeat = Parser.handleGeneralCommand(command, tasks);
+//            } catch (DukeException e) {
+//                System.out.println(e);
+//            }
+//            System.out.println(divider);
+//        }
+//        sc.close();
+//    }
+
+    public static void main(String[] args) {
+        new Duke("src/main/data/", "src/main/data/duke.txt").run();
+
+    }
+
+    public Duke(String fileDir, String filePath) {
+        ui = new Ui();
+        storage = new Storage(fileDir, filePath);
+        try {
+            tasks = new TaskList(storage.load());
+        } catch (DukeException e) {
+            ui.showLoadingError();
+            tasks = new TaskList();
         }
-        else {
-            throw new DukeInputError("invalid");
-        }
-        return true;
     }
 }

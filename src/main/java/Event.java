@@ -13,9 +13,9 @@ public class Event extends Task{
         this.taskType = "E";
     }
 
-    public static void createEvent(String command, TaskList t) throws DukeInputError {
+    public static void createEvent(String command, TaskList t) throws DukeException {
         ArrayList<String> input = new ArrayList(Arrays.asList(command.split(" ")));
-        if (input.size() <= 1) throw new DukeInputError("event");
+        if (input.size() <= 1) throw new DukeException("event");
         int fromIndex = input.indexOf("/from");
         int toIndex = input.indexOf("/to");
         String taskName = "";
@@ -42,7 +42,10 @@ public class Event extends Task{
         System.out.println(taskName);
         Event e = new Event(taskName, DateTimeParser.dateTimeParser(start.stripTrailing()), DateTimeParser.dateTimeParser(end));
         t.addTask(e);
-        Event.saveTaskData(e, 1);
+    }
+
+    public String saveTaskString(int isAppend) {
+        return String.format("%s|%d|%s|%s|%s", this.taskType, isAppend, this.taskName, this.start, this.end);
     }
 
     @Override

@@ -16,9 +16,9 @@ public class DeadlineTask extends Task {
         return deadline.format(DateTimeFormatter.ofPattern("MMM d yyyy HHmm"));
     }
 
-    public static void createDeadlineTask(String command, TaskList t) throws DukeInputError {
+    public static void createDeadlineTask(String command, TaskList t) throws DukeException {
         ArrayList<String> input = new ArrayList(Arrays.asList(command.split(" ")));
-        if (input.size() <= 1) throw new DukeInputError("deadline");
+        if (input.size() <= 1) throw new DukeException("deadline");
         int byIndex = input.indexOf("/by");
         String taskName = "";
         String deadline = "";
@@ -38,7 +38,11 @@ public class DeadlineTask extends Task {
 
         DeadlineTask d = new DeadlineTask(taskName, DateTimeParser.dateTimeParser(deadline));
         t.addTask(d);
-        DeadlineTask.saveTaskData(d, 1);
+    }
+
+    @Override
+    public String saveTaskString() {
+        return String.format("%s|%b|%s|%s", this.taskType, this.deleted, this.taskName, this.deadline);
     }
 
     @Override

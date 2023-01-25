@@ -4,9 +4,9 @@ public class ToDo extends Task {
         super(taskName);
     }
 
-    public static void createToDo(String command, TaskList t) throws DukeInputError{
+    public static void createToDo(String command, TaskList t) throws DukeException {
         String[] input = command.split(" ");
-        if (input.length <= 1) throw new DukeInputError("todo");
+        if (input.length <= 1) throw new DukeException("todo");
         StringBuilder taskName = new StringBuilder();
         for (int i = 1; i < input.length; i++) {
             taskName.append(input[i]);
@@ -16,7 +16,6 @@ public class ToDo extends Task {
         }
         ToDo todo = new ToDo(taskName.toString());
         t.addTask(todo);
-        ToDo.saveTaskData(todo, 1);
     }
 
     @Override
