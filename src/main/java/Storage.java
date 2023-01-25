@@ -40,15 +40,21 @@ public class Storage {
                 List<String> allLines = Files.readAllLines(filePath);
                 for (String line : allLines) {
                     String[] lineArray = line.split(",");
+                    boolean b;
+                    if (lineArray[1].equals("1")) {
+                        b = true;
+                    } else {
+                        b = false;
+                    }
                     switch (lineArray[0]) {
                         case "T":
-                            loadTaskList.addTask(lineArray[1]);
+                            loadTaskList.addTask(lineArray[2], b);
                             break;
                         case "D":
-                            loadTaskList.addTask(lineArray[1], lineArray[2]);
+                            loadTaskList.addTask(lineArray[2], lineArray[3], b);
                             break;
                         case "E":
-                            loadTaskList.addTask(lineArray[1], lineArray[2], lineArray[3]);
+                            loadTaskList.addTask(lineArray[2], lineArray[3], lineArray[4], b);
                             break;
                         case "":
                             break;
