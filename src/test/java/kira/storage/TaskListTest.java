@@ -5,9 +5,7 @@ import org.junit.jupiter.api.Test;
 import kira.task.Task;
 import kira.task.TaskStub;
 import kira.exception.KiraException;
-import kira.storage.TaskList;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import java.util.ArrayList;
@@ -33,7 +31,6 @@ public class TaskListTest {
     @Test
     public void unmark_correctIndex_success() throws KiraException {
         TaskList taskList = new TaskList(testList());
-        TaskStub task = (TaskStub) taskList.unmark(1);
         assertEquals(1, ((TaskStub) taskList.unmark(1)).task_index);
         assertEquals(2, ((TaskStub) taskList.unmark(2)).task_index);
         assertEquals(3, ((TaskStub) taskList.unmark(3)).task_index);
@@ -48,7 +45,6 @@ public class TaskListTest {
     @Test
     public void delete_removeTask_success() throws KiraException {
         TaskList taskList = new TaskList(testList());
-        TaskStub task = (TaskStub) taskList.delete(3);
         assertEquals(2, taskList.getList().size());
     }
 
