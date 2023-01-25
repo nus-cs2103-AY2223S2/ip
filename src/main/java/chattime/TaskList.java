@@ -1,30 +1,30 @@
 package chattime;
 
-import chattime.task.Task;
-
 import java.util.ArrayList;
 
-public class TaskList {
-    private ArrayList<Task> storeList;
+import chattime.task.Task;
 
-    public TaskList(ArrayList<Task> initList) {
-        storeList = initList;
+public class TaskList {
+    private ArrayList<Task> tasks;
+
+    public TaskList(ArrayList<Task> initialTasks) {
+        tasks = initialTasks;
     }
 
 
     public void addTask(Task task) {
-        storeList.add(task);
+        tasks.add(task);
     }
 
     public void removeListMember(int index) {
-        storeList.remove(index - 1);
+        tasks.remove(index - 1);
     }
 
     public Task getTask(int index) {
-        return storeList.get(index - 1);
+        return tasks.get(index - 1);
     }
 
     public ArrayList<Task> getList() {
-        return storeList;
+        return tasks;
     }
 }

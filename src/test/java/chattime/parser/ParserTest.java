@@ -1,10 +1,12 @@
 package chattime.parser;
 
-import chattime.exception.ChattimeException;
-import chattime.task.Task;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.fail;
+
 import org.junit.jupiter.api.Test;
 
-import static org.junit.jupiter.api.Assertions.*;
+import chattime.exception.ChattimeException;
+import chattime.task.Task;
 
 public class ParserTest {
     @Test

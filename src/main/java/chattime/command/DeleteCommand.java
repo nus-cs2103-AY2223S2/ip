@@ -1,25 +1,26 @@
 package chattime.command;
 
+import chattime.TaskList;
 import chattime.storage.Storage;
 import chattime.task.Task;
-import chattime.TaskList;
 import chattime.ui.Ui;
 
 public class DeleteCommand extends Command {
 
-    private int index;
+    private int taskIndex;
 
     public DeleteCommand(int index) {
-        this.index = index;
+        taskIndex = index;
     }
 
     @Override
     public void execute(Ui ui, TaskList taskList, Storage storage) {
-        Task task = taskList.getTask(index);
+        Task task = taskList.getTask(taskIndex);
+
         task.removeTask();
-        taskList.removeListMember(index);
-        storage.deleteFromFile(index);
-        ui.removeTaskMsg(task, Task.totalTask());
+        taskList.removeListMember(taskIndex);
+        storage.deleteFromFile(taskIndex);
+        ui.replyRemoveTaskMsg(task, Task.printTotalTask());
     }
 
 }

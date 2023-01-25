@@ -1,29 +1,31 @@
 package chattime.command;
 
+import chattime.TaskList;
 import chattime.storage.Storage;
 import chattime.task.Task;
-import chattime.TaskList;
 import chattime.ui.Ui;
 
 public class MarkCommand extends Command {
-    private int index;
-    private boolean done;
+    private int taskIndex;
+    private boolean isDone;
 
-    public MarkCommand(int index, boolean done) {
-        this.index = index;
-        this.done = done;
+    public MarkCommand(int index, boolean taskIsDone) {
+        taskIndex = taskIndex;
+        isDone = taskIsDone;
     }
 
     public void execute(Ui ui, TaskList taskList, Storage storage) {
-        Task target = taskList.getTask(index);
-        if (done) {
+        Task target = taskList.getTask(taskIndex);
+
+        if (isDone) {
             target.markAsDone();
-            ui.doneMessage(target);
+            ui.replyDoneMessage(target);
         } else {
             target.unmarkDone();
-            ui.notDoneMessage(target);
+            ui.replyNotDoneMessage(target);
         }
-        storage.updateFile(index, taskList.getTask(index));
+
+        storage.updateFile(taskIndex, taskList.getTask(taskIndex));
     }
 
 }

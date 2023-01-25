@@ -14,9 +14,9 @@ public class DeadlineTest {
     }
 
     @Test
-    public void onDateTest() {
+    public void isOnDateTest() {
         Deadline testTask = new Deadline("Test", LocalDate.now(), null);
-        assertEquals(true, testTask.onDate(LocalDate.now()));
+        assertEquals(true, testTask.isOnDate(LocalDate.now()));
     }
 
     @Test

@@ -6,10 +6,10 @@ public class Ui {
 
     private static final String GREET = "Hey! I'm your friend, chattime.Chattime!  (# v #) /\n"
             + "     How can I help you *^*";
-    private static final String LINE = "---------------------------------------------------------------------" +
-            "******************CHATTIME";
-    private static final String ERR_LINE = "^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^" +
-            "******************CHATTIME";
+    private static final String LINE = "---------------------------------------------------------------------"
+            + "******************CHATTIME";
+    private static final String ERR_LINE = "^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^"
+            + "******************CHATTIME";
     private static final String BYE = "Bye bye >^<! Visit me again when you need me ~";
     private static final String LOGO = "      ___\n"
                         + "     /*  \\    \\(*.*)/\n"
@@ -22,14 +22,15 @@ public class Ui {
                         + "   \\:\\ \\*H*A*T/:/  \\/__/*I*M*E\n"
                         + "    \\:\\_\\    /:/  /\n"
                         + "     \\/__/   \\/__/\n";
+
     private boolean isRunning;
 
     public Ui() {
-        this.isRunning = true;
-        this.uiInit();
+        isRunning = true;
+        initUi();
     }
 
-    public void uiInit() {
+    public void initUi() {
         System.out.println("Welcome to\n" + LOGO);
         replyUser(GREET);
     }
@@ -44,15 +45,15 @@ public class Ui {
         replyUser(String.format("Got it! I've added this task:\n       %s\n     %s", task, totalTask));
     }
 
-    public void notDoneMessage(Task task) {
+    public void replyNotDoneMessage(Task task) {
         replyUser(String.format("Arghh! This job is not done yet:\n       %s", task));
     }
 
-    public void doneMessage(Task task) {
+    public void replyDoneMessage(Task task) {
         replyUser(String.format("Congrats! You've done this job:\n       %s", task));
     }
 
-    public void removeTaskMsg(Task task, String totalTask) {
+    public void replyRemoveTaskMsg(Task task, String totalTask) {
         replyUser(
                 String.format("Okay!!! I've removed this task for you:\n       %s\n     %s", task, totalTask));
     }
@@ -63,7 +64,7 @@ public class Ui {
         System.out.println("    " + ERR_LINE);
     }
 
-    public void emptyList() {
+    public void warnEmptyList() {
         printError("Can't find anything in the list @~@");
     }
 

@@ -9,26 +9,26 @@ public class Deadline extends Task {
     private final LocalDate byDate;
     private final LocalTime byTime;
 
-    public Deadline(String description, LocalDate byDate, LocalTime byTime) {
+    public Deadline(String description, LocalDate bDate, LocalTime bTime) {
         super(description);
-        this.byDate = byDate;
-        this.byTime = byTime;
+        byDate = bDate;
+        byTime = bTime;
     }
 
     @Override
     public String toDataString() {
-        return "D" + super.toDataString() + " @ " + this.byDate + " @ " + (this.byTime == null ? "0" : this.byTime);
+        return "D" + super.toDataString() + " @ " + byDate + " @ " + (byTime == null ? "0" : byTime);
     }
 
     @Override
-    public boolean onDate(LocalDate time) {
-        return this.byDate.isEqual(time);
+    public boolean isOnDate(LocalDate time) {
+        return byDate.isEqual(time);
     }
 
     @Override
     public String toString() {
-        return "[D]" + super.toString() + " (by: " +
-                this.byDate.format(DateTimeFormatter.ofPattern("MMM dd yyyy ")) +
-                (this.byTime == null ? "" : this.byTime.format(DateTimeFormatter.ofPattern("hh:mm a"))) + ")";
+        return "[D]" + super.toString() + " (by: "
+                + byDate.format(DateTimeFormatter.ofPattern("MMM dd yyyy "))
+                + (byTime == null ? "" : byTime.format(DateTimeFormatter.ofPattern("hh:mm a"))) + ")";
     }
 }

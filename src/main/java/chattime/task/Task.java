@@ -4,20 +4,19 @@ import java.time.LocalDate;
 
 public class Task {
 
+    private static int tasksCount = 0;
+
     private String description;
     private boolean isDone;
-    private static int count = 0;
 
-    public Task() {}
-
-    public Task(String description) {
-        this.description = description;
-        this.isDone = false;
-        count++;
+    public Task(String content) {
+        description = content;
+        isDone = false;
+        tasksCount++;
     }
 
     public String getStatusIcon() {
-        return isDone? "X" : " ";
+        return isDone ? "X" : " ";
     }
 
     public boolean getTaskStatus() {
@@ -25,36 +24,36 @@ public class Task {
     }
 
     public void markAsDone() {
-        this.isDone = true;
+        isDone = true;
     }
 
     public void unmarkDone() {
-        this.isDone = false;
+        isDone = false;
     }
 
     public static int getCount() {
-        return count;
+        return tasksCount;
     }
 
     public void removeTask() {
-        count--;
+        tasksCount--;
     }
 
-    public static String totalTask() {
-        return "Now you have " + count + " tasks in the list.";
+    public static String printTotalTask() {
+        return "Now you have " + tasksCount + " tasks in the list.";
     }
 
     public String toDataString() {
-        return String.format(" @ %d @ %s", this.isDone ? 1 : 0, this.description);
+        return String.format(" @ %d @ %s", isDone ? 1 : 0, description);
     }
 
-    public boolean onDate(LocalDate time) {
+    public boolean isOnDate(LocalDate time) {
         return false;
     }
 
     @Override
     public String toString() {
-        return String.format("[%s] %s", this.getStatusIcon(), this.description);
+        return String.format("[%s] %s", getStatusIcon(), description);
     }
 
 }

@@ -1,24 +1,24 @@
 package chattime.command;
 
-import chattime.storage.Storage;
-import chattime.task.Task;
-import chattime.TaskList;
-import chattime.ui.Ui;
-
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
+import chattime.TaskList;
+import chattime.storage.Storage;
+import chattime.task.Task;
+import chattime.ui.Ui;
+
 public class ListCommand extends Command {
 
-    private LocalDate requestDate;
+    private LocalDate requestedDate;
 
     public ListCommand(LocalDate date) {
-        requestDate = date;
+        requestedDate = date;
     }
 
     @Override
     public void execute(Ui ui, TaskList taskList, Storage storage) {
-        if (requestDate == null) {
+        if (requestedDate == null) {
             displayList(ui, taskList);
         } else {
             listTime(ui, taskList);
@@ -27,7 +27,8 @@ public class ListCommand extends Command {
 
     public void displayList(Ui ui, TaskList taskList) {
         if (taskList.getList().size() == 0) {
-            ui.emptyList();
+            ui.warnEmptyList();
+
         } else {
             int i = 1;
             String message = "chattime.task.Task(s) waiting to be completed:";
@@ -43,14 +44,17 @@ public class ListCommand extends Command {
 
     public void listTime(Ui ui, TaskList taskList) {
         if (taskList.getList().size() == 0) {
-            ui.emptyList();
+            ui.warnEmptyList();
+
         } else {
-            int i = 1, total = 0, pending = 0;
-            String message = "I've sorted the task(s) that have deadlines / take place on " +
-                    requestDate.format(DateTimeFormatter.ofPattern("MMM dd yyyy ")) + "for you:";
+            int i = 1;
+            int total = 0;
+            int pending = 0;
+            String message = "I've sorted the task(s) that have deadlines / take place on "
+                    + requestedDate.format(DateTimeFormatter.ofPattern("MMM dd yyyy ")) + "for you:";
 
             for (Task task : taskList.getList()) {
-                if (task.onDate(requestDate)) {
+                if (task.isOnDate(requestedDate)) {
                     message = message.concat(String.format("\n     %d. %s", i, task));
                     i++;
                     total++;

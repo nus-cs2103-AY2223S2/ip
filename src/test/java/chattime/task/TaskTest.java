@@ -1,12 +1,12 @@
 package chattime.task;
 
-import org.junit.jupiter.api.Test;
-
-import java.time.LocalDate;
-
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
+
+import org.junit.jupiter.api.Test;
+
+import java.time.LocalDate;
 
 public class TaskTest {
     @Test
@@ -31,7 +31,7 @@ public class TaskTest {
     @Test
     public void onDateTest() {
         Task testTask = new Task("Test");
-        assertFalse(testTask.onDate(LocalDate.of(2023, 1, 1)));
+        assertFalse(testTask.isOnDate(LocalDate.of(2023, 1, 1)));
     }
 
     @Test

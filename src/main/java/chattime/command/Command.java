@@ -1,7 +1,7 @@
 package chattime.command;
 
-import chattime.storage.Storage;
 import chattime.TaskList;
+import chattime.storage.Storage;
 import chattime.ui.Ui;
 
 public abstract class Command {

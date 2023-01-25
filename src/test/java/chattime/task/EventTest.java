@@ -19,12 +19,12 @@ public class EventTest {
     }
 
     @Test
-    public void onDateTest() {
+    public void isOnDateTest() {
         LocalDate from = LocalDate.of(2023, 1, 1);
         LocalDate to = LocalDate.of(2023, 2, 2);
         LocalTime time = LocalTime.of(10, 0);
         Event testTask = new Event("Test", from, time, to, time);
-        assertFalse(testTask.onDate(LocalDate.of(2023, 3, 3)));
+        assertFalse(testTask.isOnDate(LocalDate.of(2023, 3, 3)));
     }
 
     @Test
