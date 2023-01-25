@@ -7,7 +7,7 @@ public class Event extends Task {
     protected LocalDate from;
     protected LocalDate to;
 
-    Event(String description, String from, String to) {
+    public Event(String description, String from, String to) {
         super(description);
         this.to = LocalDate.parse(to.trim());
         this.from = LocalDate.parse(from.trim());
@@ -19,14 +19,6 @@ public class Event extends Task {
 
     public LocalDate getTo() {
         return this.to;
-    }
-
-    @Override
-    public String toSave() {
-        if (super.isDone == true) {
-            return String.format("E | 1 | %s | %s | %s\n", super.getDescription(), this.from, this.to);
-        }
-        return String.format("E | 0 | %s | %s | %s\n", super.getDescription(), this.from, this.to);
     }
 
     @Override

@@ -4,7 +4,7 @@ public class Task {
     protected String description;
     protected boolean isDone;
 
-    public Task(String description) {
+    Task(String description) {
         this.description = description;
         this.isDone = false;
     }
@@ -23,13 +23,6 @@ public class Task {
 
     public void setUndone() {
         this.isDone = false;
-    }
-
-    public String toSave() {
-        if (this.isDone == true) {
-            return String.format("1 | %s", this.description);
-        }
-        return String.format("0 | %s", this.description);
     }
 
     @Override
