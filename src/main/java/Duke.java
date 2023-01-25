@@ -12,6 +12,18 @@ public class Duke {
 
 
         while(!input.equals("bye")) {
+            try {
+                if ((input.length() == 4 && input.substring(0, 4).equals("todo")) || (input.length() == 8 && input.substring(0, 8).equals("deadline")) ||
+                        (input.length() == 6 && input.substring(0, 6).equals("event"))) {
+                    throw new EmptyDescriptionException();
+                } else {
+                    throw new WrongCommandException();
+                }
+            } catch (EmptyDescriptionException e){
+                System.out.println(e.getMessage());
+            } catch (WrongCommandException e) {
+                System.out.println(e.getMessage());
+            }
 
             if (input.equals("list")) {
                 System.out.println("Here are some tasks in your list:");
@@ -19,27 +31,27 @@ public class Duke {
                     System.out.println(i + "." + (taskList.get(i - 1)).toString());
                 }
 
-            } else if((input.substring(0, 4)).equals("mark")) {
+            } else if(input.length() > 4 && (input.substring(0, 4)).equals("mark")) {
                 String taskStr = input.substring(5);
                 int taskNum = Integer.parseInt(taskStr) - 1;
                 Task originalTask =  taskList.get(taskNum);
                 originalTask.markTask();
                 System.out.println("Nice! I've marked this task as done: \n  " + originalTask.toString());
 
-            } else if((input.substring(0, 6)).equals("unmark")) {
+            } else if(input.length() > 6 && (input.substring(0, 6)).equals("unmark")) {
                 String taskStr = input.substring(7);
                 int taskNum = Integer.parseInt(taskStr) - 1;
                 Task originalTask =  taskList.get(taskNum);
                 originalTask.unmarkTask();
                 System.out.println("Ok, I've marked this task as not done yet: \n  " + originalTask.toString());
 
-            }  else if((input.substring(0, 4)).equals("todo")) {
+            }  else if(input.length() > 4 && (input.substring(0, 4)).equals("todo")) {
                 ToDo task = new ToDo(input);
                 taskList.add(task);
                 System.out.println("Got it. I've added this task: \n  " + task.toString() + "\nNow you have " + taskList.size()
                         + " tasks in the list.");
 
-            } else if((input.substring(0, 8)).equals("deadline")) {
+            } else if(input.length() > 8 &&(input.substring(0, 8)).equals("deadline")) {
                 int dateIndex = input.indexOf("/");
                 String taskStr = input.substring(9, dateIndex - 1) + " (by: " + input.substring(dateIndex + 4) + ")";
                 Deadline task = new Deadline(taskStr);
@@ -47,7 +59,7 @@ public class Duke {
                 System.out.println("Got it. I've added this task: \n  " + task.toString() + "\nNow you have " + taskList.size()
                         + " tasks in the list.");
 
-            } else if((input.substring(0, 5)).equals("event")) {
+            } else if(input.length() > 5 && (input.substring(0, 5)).equals("event")) {
                 int fromIndex = input.indexOf("/");
                 int toIndex = input.lastIndexOf("/");
                 String taskStr = input.substring(6, fromIndex - 1) +
@@ -56,6 +68,8 @@ public class Duke {
                 taskList.add(task);
                 System.out.println("Got it. I've added this task: \n  " + task.toString() + "\nNow you have " + taskList.size()
                         + " tasks in the list.");
+            } else {
+
             }
             /*
             else {
