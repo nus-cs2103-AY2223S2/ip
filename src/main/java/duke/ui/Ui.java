@@ -11,23 +11,40 @@ public class Ui {
                 + FORMAT_LINE;
     }
 
+    /**
+     * Displays a formatted message.
+     * @param message The message to display.
+     */
     public void printMessage(String message) {
         System.out.println(formatMessage(message));
     }
 
+    /**
+     * Gets a line of user input.
+     * @return The user input.
+     */
     public String getInputFromUser() {
         return scanner.nextLine();
     }
 
+    /**
+     * Prints the prompt for user input.
+     */
     public void printPromptForInput() {
         System.out.print(">");
     }
 
+    /**
+     * Prints a greeting.
+     */
     public void greet() {
         printMessage("Hello, I am Duke.\n"
                 + "What can I do for you?");
     }
 
+    /**
+     * Prints a goodbye.
+     */
     public void sayGoodbye() {
         printMessage("Goodbye. I hope to see you again.");
     }
