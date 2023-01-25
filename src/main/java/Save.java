@@ -3,6 +3,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Scanner;
 import java.io.FileWriter;
+import java.time.LocalDate;
 
 public class Save {
     final static String path = System.getProperty("user.home") + "/ip/data";
@@ -38,7 +39,8 @@ public class Save {
                 task = todo;
                 break;
             case 4: // this is a deadline
-                Deadline deadline = new Deadline(parsed[2], parsed[3]);
+                LocalDate date = LocalDate.parse(parsed[3]);
+                Deadline deadline = new Deadline(parsed[2], date);
                 if (parsed[1].equals("1")) {
                     deadline.mark(); // need to change?
                 }
