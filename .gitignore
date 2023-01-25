@@ -3,6 +3,10 @@
 /out/
 /*.iml
 
+#Duke tasklist
+duke.txt
+
+# Class files
 *.class
 
 # Gradle build files
