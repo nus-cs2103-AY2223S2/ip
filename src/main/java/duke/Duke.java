@@ -12,12 +12,23 @@ public class Duke {
     private TaskList taskList;
     private Ui ui;
 
+    /**
+     * Constructor for Duke.
+     *
+     * @param filePath Path of initial data file.
+     * @throws DukeException if filePath is invalid.
+     */
     public Duke(String filePath) throws DukeException {
         ui = new Ui();
         storage = new Storage(filePath);
         taskList = new TaskList(storage.load());
     }
 
+    /**
+     * Runs Duke chatbot.
+     *
+     * @throws IOException Unexpected IOException
+     */
     public void run() throws IOException {
         ui.showWelcome();
         Scanner sc = new Scanner(System.in);
@@ -34,7 +45,13 @@ public class Duke {
         }
     }
 
-    // Driver function
+    /**
+     * Driver function.
+     *
+     * @param args Command line arguments
+     * @throws DukeException If filePath is invalid
+     * @throws IOException Unexpected IOException
+     */
     public static void main(String[] args) throws DukeException, IOException {
         Duke duke1 = new Duke("./data/list.txt");
         duke1.run();

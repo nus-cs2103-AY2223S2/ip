@@ -2,14 +2,24 @@ package duke;
 
 import java.util.List;
 
+/**
+ * TaskList manages operations regarding Task.
+ */
 public class TaskList {
 
     private final List<Task> tasks;
+
+    /**
+     * Constructor for TaskList.
+     * @param tasks Initial tasks.
+     */
     protected TaskList(List<Task> tasks) {
         this.tasks = tasks;
     }
 
-    // List out all tasks and their rank.
+    /**
+     * Lists out all tasks and their status.
+     */
     protected void list() {
         if (tasks.size() == 0) {
             System.out.println("No tasks left :)");
@@ -22,7 +32,13 @@ public class TaskList {
         }
     }
 
-    // Mark task at index to be done
+    /**
+     * Marks task at index as completed.
+     *
+     * @param index Index of the task.
+     * @return The task at the index.
+     * @throws DukeException Invalid index.
+     */
     protected Task markDone(int index) throws DukeException {
         if (index < 0 || index >= tasks.size()) {
             throw new DukeException("OOPS!!! Invalid index");
@@ -34,7 +50,13 @@ public class TaskList {
 
     }
 
-    // Mark task at index to be undone
+    /**
+     * Marks task at index as not completed.
+     *
+     * @param index Index of the task.
+     * @return The task at the index.
+     * @throws DukeException Invalid index.
+     */
     protected Task markUndone(int index) throws DukeException {
         if (index < 0 || index >= tasks.size()) {
             throw new DukeException("OOPS!!! Invalid index.");
@@ -45,7 +67,13 @@ public class TaskList {
         return curr;
     }
 
-    // Delete task at index.
+    /**
+     * Deletes task at index.
+     *
+     * @param index Index of the task.
+     * @return The task at the index.
+     * @throws DukeException Invalid index.
+     */
     protected Task delete(int index) throws DukeException {
         if (index < 0 || index >= tasks.size()) {
             throw new DukeException("OOPS!!! Invalid index.");
@@ -53,7 +81,12 @@ public class TaskList {
         return tasks.remove(index);
     }
 
-    // Create and add task given message and code. 0 - toDos, 1 - Deadlines, 2 - duke.Event
+    /**
+     * Creates task specified by the code
+     *
+     * @param code Code of the task
+     * @return The task created.
+     */
     protected Task addTask(int code, String[] message) {
         Task t;
         if (code == 0) {
@@ -70,10 +103,24 @@ public class TaskList {
         return t;
     }
 
+    /**
+     * Returns number of tasks.
+     *
+     * @return Number of tasks.
+     */
     protected int getSize() {
         return tasks.size();
     }
 
+    /**
+     * Creates tasks specified by parameters.
+     *
+     * @param code Code of the task.
+     * @param status Completed or not.
+     * @param content Content of the task.
+     * @return Task created.
+     * @throws DukeException Unsupported code.
+     */
     protected static Task getInstance(String code, boolean status, String[] content) throws DukeException {
         if (code.equals("T")) {
             return new ToDo(status, content);
