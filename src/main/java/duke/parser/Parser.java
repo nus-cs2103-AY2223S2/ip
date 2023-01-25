@@ -28,34 +28,28 @@ public class Parser {
 
         String command = Parser.returnCommand(fullCommand, VALUE_COMMANDS);
         switch (command) {
-            case "unmark ": {
-                String[] inputArr = fullCommand.split(" ");
-                int toUnmark = Integer.parseInt(inputArr[1]);
-                return new UnmarkCommand(toUnmark);
-            }
+        case "unmark ":
+            String[] inputArr = fullCommand.split(" ");
+            int toUnmark = Integer.parseInt(inputArr[1]);
+            return new UnmarkCommand(toUnmark);
 
-            case "mark ": {
-                String[] inputArr = fullCommand.split(" ");
-                int toMark = Integer.parseInt(inputArr[1]);
-                return new MarkCommand(toMark);
-            }
+        case "mark ":
+            inputArr = fullCommand.split(" ");
+            int toMark = Integer.parseInt(inputArr[1]);
+            return new MarkCommand(toMark);
 
-            case "delete ": {
-                String[] inputArr = fullCommand.split(" ");
-                int toDelete = Integer.parseInt(inputArr[1]);
-                if (toDelete > tasks.getNumTasks()) {
-                    throw new DukeException("Task does not exist! Please enter valid input!");
-                }
-                return new DeleteCommand(toDelete);
+        case "delete ":
+            inputArr = fullCommand.split(" ");
+            int toDelete = Integer.parseInt(inputArr[1]);
+            if (toDelete > tasks.getNumTasks()) {
+                throw new DukeException("Task does not exist! Please enter valid input!");
             }
+            return new DeleteCommand(toDelete);
 
-        case "find ": {
-            String[] inputArr = fullCommand.split(" ", 2);
+        case "find ":
+            inputArr = fullCommand.split(" ", 2);
             String toFind = inputArr[1];
             return new FindCommand(toFind);
-        }
-
-
         }
 
         validateTaskCommand(fullCommand, TASK_COMMANDS);
@@ -65,22 +59,22 @@ public class Parser {
 
         Task task = null;
         switch (taskType) {
-            case "todo": {
-                task = new ToDo(inputArr[1]);
-                break;
-            }
-            case "deadline": {
-                String[] newInputArr = inputArr[1].split(" /by ", 2);
-                task = new Deadline(newInputArr[0], newInputArr[1]);
-                break;
-            }
-            case "event": {
-                String[] newInputArr = inputArr[1].split(" /from ", 2);
-                String[] newerInputArr = newInputArr[1].split(" /to ", 2);
-                task = new Event(newInputArr[0], newerInputArr[0], newerInputArr[1]);
-                break;
-            }
+        case "todo":
+            task = new ToDo(inputArr[1]);
+            break;
+
+        case "deadline":
+            String[] newInputArr = inputArr[1].split(" /by ", 2);
+            task = new Deadline(newInputArr[0], newInputArr[1]);
+            break;
+
+        case "event":
+            newInputArr = inputArr[1].split(" /from ", 2);
+            String[] newerInputArr = newInputArr[1].split(" /to ", 2);
+            task = new Event(newInputArr[0], newerInputArr[0], newerInputArr[1]);
+            break;
         }
+
         return new AddCommand(task);
     }
 

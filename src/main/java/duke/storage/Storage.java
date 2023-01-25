@@ -56,18 +56,17 @@ public class Storage {
                 String type = taskSplit[0];
                 Task task = null;
                 switch (type) {
-                    case "T": {
-                        task = new ToDo(taskSplit[2]);
-                        break;
-                    }
-                    case "D": {
-                        task = new Deadline(taskSplit[2], taskSplit[3]);
-                        break;
-                    }
-                    case "E": {
-                        task = new Event(taskSplit[2], taskSplit[3], taskSplit[4]);
-                        break;
-                    }
+                case "T":
+                    task = new ToDo(taskSplit[2]);
+                    break;
+
+                case "D":
+                    task = new Deadline(taskSplit[2], taskSplit[3]);
+                    break;
+
+                case "E":
+                    task = new Event(taskSplit[2], taskSplit[3], taskSplit[4]);
+                    break;
                 }
 
                 String done = taskSplit[1];
